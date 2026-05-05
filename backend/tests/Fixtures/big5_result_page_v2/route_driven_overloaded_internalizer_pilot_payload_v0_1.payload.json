@@ -1,0 +1,3424 @@
+{
+    "big5_result_page_v2": {
+        "schema_version": "fap.big5.result_page.v2",
+        "payload_key": "big5_result_page_v2",
+        "scale_code": "BIG5_OCEAN",
+        "fixture_key": "pilot_o59_staging_payload_v0_1",
+        "content_version": "big5_result_page_v2.pilot_payload.v0_1",
+        "package_version": "B5-CONTENT-staging-pilot.v0_1",
+        "canonical_profile_key": "overloaded_internalizer",
+        "profile_label_zh": "高负荷内耗型",
+        "projection_v2": {
+            "schema_version": "fap.big5.projection.v2",
+            "attempt_id": "attempt_big5_o59_pilot_fixture",
+            "result_version": "big5_result_page_v2.pilot_payload.v0_1",
+            "scale_code": "BIG5_OCEAN",
+            "form_code": "big5_120",
+            "domains": {
+                "O": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "C": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "E": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "A": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "N": {
+                    "score": 5,
+                    "band": "very_high"
+                }
+            },
+            "domain_bands": {
+                "O": "very_low",
+                "C": "very_low",
+                "E": "very_low",
+                "A": "very_low",
+                "N": "very_high"
+            },
+            "facets": [],
+            "facet_highlights": [],
+            "norm_status": "CALIBRATED",
+            "norm_group_id": "pilot_fixture_norm_group",
+            "norm_version": "pilot_fixture_norm_v0_1",
+            "quality_status": "valid",
+            "quality_flags": [],
+            "profile_signature": {
+                "signature_key": "overloaded_internalizer",
+                "label_key": "signature.overloaded_internalizer",
+                "is_fixed_type": false,
+                "system": "trait_signature",
+                "label_zh": "高负荷内耗型",
+                "axis_zh": "实际五维路由｜高情绪 / 低开放 / 低尽责"
+            },
+            "dominant_couplings": [
+                {
+                    "coupling_key": "n_high_x_e_low",
+                    "strength": "route_matrix_candidate"
+                },
+                {
+                    "coupling_key": "e_low_x_c_low",
+                    "strength": "route_matrix_candidate"
+                },
+                {
+                    "coupling_key": "c_low_x_n_high",
+                    "strength": "route_matrix_candidate"
+                },
+                {
+                    "coupling_key": "a_low_x_n_high",
+                    "strength": "route_matrix_candidate"
+                }
+            ],
+            "interpretation_scope": "high_tension_profile",
+            "confidence_flags": [
+                "pilot_staging_fixture",
+                "selector_refs_only"
+            ],
+            "safety_flags": [
+                "non_diagnostic",
+                "not_type_system",
+                "staging_only"
+            ],
+            "public_fields": [
+                "domains",
+                "domain_bands",
+                "facet_highlights",
+                "profile_signature",
+                "dominant_couplings",
+                "interpretation_scope"
+            ],
+            "internal_only_fields": []
+        },
+        "modules": [
+            {
+                "module_key": "module_00_trust_bar",
+                "blocks": [
+                    {
+                        "block_key": "module_00_trust_bar.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "trust_bar",
+                        "module_key": "module_00_trust_bar",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "method_registry:pilot_boundary"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "backend_required"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_01_hero",
+                "blocks": [
+                    {
+                        "block_key": "module_01_hero.domain_registry.o_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "O",
+                                "label_zh": "开放性",
+                                "public_name_zh": "经验开放度",
+                                "domain_theme_zh": "新经验、复杂概念、审美变化和非标准答案"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "开放性明显偏低：稳定框架中的现实判断",
+                            "summary_zh": "你更容易信任熟悉路径、已验证经验和可落地方案。",
+                            "body_zh": "开放性处在明显偏低区间时，新的概念、审美变化和非标准答案通常不会自动吸引你。你更愿意先确认一件事是否可靠、是否必要、是否真的能改善现实，再决定要不要投入注意力。这样的结构能减少被新鲜感带跑的风险，也能让你在需要稳定执行的环境里保持清醒。代价是，当环境需要试错、跨界理解或重新定义问题时，你可能会先看到不确定和成本，而不是可能性。常见误读是把这种位置理解成“没有想象力”；更准确地说，你的开放性需要明确的现实入口。使用它时，可以把探索压缩成一个小实验，而不是要求自己立刻接受整套新框架。",
+                            "short_body_zh": "更信任熟悉路径和可验证方案；适合稳定落地，也需要给新经验留一个小入口。",
+                            "benefit_zh": "不容易被空洞概念和短期新鲜感裹挟，适合守住现实边界。",
+                            "cost_zh": "在需要试错、跨界理解或快速转换视角时，可能进入较慢。",
+                            "common_misread_zh": "这不等于没有想象力，而是新想法需要先通过现实价值检验。",
+                            "action_zh": "每周只选一个低风险新尝试，先问它能解决什么真实问题。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.o.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.c_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "C",
+                                "label_zh": "尽责性",
+                                "public_name_zh": "秩序与推进力",
+                                "domain_theme_zh": "计划、秩序、自我约束、责任执行和持续完成"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "尽责性明显偏低：高流动系统与外部结构需求",
+                            "summary_zh": "你更依赖兴趣、状态、环境和即时反馈来启动与推进。",
+                            "body_zh": "尽责性明显偏低时，计划、排序、收尾和持续自我约束通常不是你的天然优势。你可能很清楚一件事重要，却仍难以稳定进入；也可能在灵感、压力或外部催化出现时突然推进很快。优势是弹性高，不容易被僵硬流程完全锁死，也更能适应变化中的机会。代价是，长期目标、重复任务和低反馈事务很容易被拖延。常见误读是把它写成懒或不负责；更准确地说，你的推进系统需要意义、反馈和外置结构。更好使用方式，是不要等待自律爆发，而是把开始做得足够短、足够具体、足够可见。",
+                            "short_body_zh": "不适合长期靠纯意志推进；需要外部结构、短启动和明确反馈。",
+                            "benefit_zh": "灵活度高，能在变化中保留转向空间。",
+                            "cost_zh": "长期任务、重复收尾和低反馈事务容易掉速。",
+                            "common_misread_zh": "这不等于懒或不负责，而是推进系统需要更强外部支架。",
+                            "action_zh": "把重要任务改成 5 分钟启动，并让进度对别人或工具可见。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.c.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.e_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "E",
+                                "label_zh": "外向性",
+                                "public_name_zh": "社交能量与进入方式",
+                                "domain_theme_zh": "表达、互动、外部反馈、现场感和能量补给"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "外向性明显偏低：深度内收与低刺激进入",
+                            "summary_zh": "你更适合先观察、先内化，再选择性表达。",
+                            "body_zh": "外向性明显偏低时，你通常不会依赖高频互动、持续曝光和外部热闹来获得能量。你更可能在安静、低噪音和自主节奏里恢复判断，也更习惯先把信息放进内部处理。优势是你不容易被场面带跑，能保留深度观察和独立判断。代价是，如果洞察长期不外化，别人可能看不见你的价值，也误以为你冷淡或没有想法。常见误读是把它等同于社交差；更准确地说，你需要更低成本、更可控的进入方式。使用它时，不必强迫自己变得外放，可以先训练一句话表达、一段文字反馈或会后补充。",
+                            "short_body_zh": "低刺激、深处理、慢进入；重点不是变外放，而是让价值被看见。",
+                            "benefit_zh": "能保留独立观察和深度判断，不容易被场面牵着走。",
+                            "cost_zh": "表达太晚时，能力和判断可能不被看见。",
+                            "common_misread_zh": "不是社交差，而是更需要可控、低成本的进入方式。",
+                            "action_zh": "每次会议或讨论前准备一句观点，先让自己被看见一次。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.e.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.a_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "A",
+                                "label_zh": "宜人性",
+                                "public_name_zh": "合作与边界方式",
+                                "domain_theme_zh": "共情、合作、冲突处理、关系承接和边界表达"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "宜人性明显偏低：强边界与事实优先",
+                            "summary_zh": "你更容易先看事实、责任和边界，而不是先维护表面和气。",
+                            "body_zh": "宜人性明显偏低时，你通常不会把维持气氛放在第一优先。你更愿意问：这件事是否合理，责任是否清楚，边界是否被尊重。优势是判断直接、不容易被模糊期待绑架，也更能在复杂局面中切开问题。代价是，你的表达可能被体验为锋利或压迫，尤其在别人更需要情绪承接时。常见误读是把你写成不在乎别人；更准确地说，你不太愿意用牺牲判断来换取表面和平。更好使用方式，是保留清楚，但先交代你的意图，让边界表达不被误读成攻击。",
+                            "short_body_zh": "事实、责任、边界优先；需要让直接表达带上意图说明。",
+                            "benefit_zh": "不容易被模糊期待和无效和气拖住，能迅速切开问题。",
+                            "cost_zh": "表达太快太硬时，容易让关系系统感到压力。",
+                            "common_misread_zh": "不是不在乎别人，而是不愿用牺牲判断换表面和平。",
+                            "action_zh": "在表达不同意见前先补一句：我想把问题说清楚，不是要否定你。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.a.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.n_very_high_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "N",
+                                "label_zh": "情绪性",
+                                "public_name_zh": "压力反应敏感度",
+                                "domain_theme_zh": "压力、评价、不确定性、关系张力和恢复负荷"
+                            },
+                            "band": {
+                                "internal_band": "very_high",
+                                "display_band_label": "明显偏高",
+                                "score_range_0_100": [
+                                    80,
+                                    100
+                                ],
+                                "internal_band_threshold": "B5_80_100"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "情绪性明显偏高：持续高警觉与保护层需求",
+                            "summary_zh": "你的系统很容易长时间保持高负荷和高预警。",
+                            "body_zh": "情绪性明显偏高时，压力、误解、评价、不确定性和关系张力更容易长期留在系统里。你可能不是马上外显崩溃，而是内部持续扫描、推演、紧绷和消耗。优势是你很难忽视风险，也能捕捉许多人后知后觉的问题。代价是，长期高警觉会侵蚀注意力、睡眠、耐心和行动出口。常见误读是把你写成脆弱；更准确地说，你的系统需要更厚的保护层和恢复协议。更好使用方式，是把恢复当作基础设施，而不是事情结束后的附属动作。",
+                            "short_body_zh": "持续高警觉需要保护层；恢复不是奖励，而是稳定输出的前提。",
+                            "benefit_zh": "能捕捉细微风险和高压环境中的早期信号。",
+                            "cost_zh": "长期高负荷会消耗注意力、耐心、睡眠和行动能力。",
+                            "common_misread_zh": "不是脆弱，而是系统预警强、恢复成本高。",
+                            "action_zh": "为高压日设定固定恢复协议：降刺激、停止争辩、独处、写下边界。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.n.very_high.v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_02_quick_understanding",
+                "blocks": [
+                    {
+                        "block_key": "module_02_quick_understanding.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "quick_cards",
+                        "module_key": "module_02_quick_understanding",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "state_scope_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_03_trait_deep_dive",
+                "blocks": [
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.o_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "O",
+                                "label_zh": "开放性",
+                                "public_name_zh": "经验开放度",
+                                "domain_theme_zh": "新经验、复杂概念、审美变化和非标准答案"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "开放性明显偏低：稳定框架中的现实判断",
+                            "summary_zh": "你更容易信任熟悉路径、已验证经验和可落地方案。",
+                            "body_zh": "开放性处在明显偏低区间时，新的概念、审美变化和非标准答案通常不会自动吸引你。你更愿意先确认一件事是否可靠、是否必要、是否真的能改善现实，再决定要不要投入注意力。这样的结构能减少被新鲜感带跑的风险，也能让你在需要稳定执行的环境里保持清醒。代价是，当环境需要试错、跨界理解或重新定义问题时，你可能会先看到不确定和成本，而不是可能性。常见误读是把这种位置理解成“没有想象力”；更准确地说，你的开放性需要明确的现实入口。使用它时，可以把探索压缩成一个小实验，而不是要求自己立刻接受整套新框架。",
+                            "short_body_zh": "更信任熟悉路径和可验证方案；适合稳定落地，也需要给新经验留一个小入口。",
+                            "benefit_zh": "不容易被空洞概念和短期新鲜感裹挟，适合守住现实边界。",
+                            "cost_zh": "在需要试错、跨界理解或快速转换视角时，可能进入较慢。",
+                            "common_misread_zh": "这不等于没有想象力，而是新想法需要先通过现实价值检验。",
+                            "action_zh": "每周只选一个低风险新尝试，先问它能解决什么真实问题。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.o.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.c_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "C",
+                                "label_zh": "尽责性",
+                                "public_name_zh": "秩序与推进力",
+                                "domain_theme_zh": "计划、秩序、自我约束、责任执行和持续完成"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "尽责性明显偏低：高流动系统与外部结构需求",
+                            "summary_zh": "你更依赖兴趣、状态、环境和即时反馈来启动与推进。",
+                            "body_zh": "尽责性明显偏低时，计划、排序、收尾和持续自我约束通常不是你的天然优势。你可能很清楚一件事重要，却仍难以稳定进入；也可能在灵感、压力或外部催化出现时突然推进很快。优势是弹性高，不容易被僵硬流程完全锁死，也更能适应变化中的机会。代价是，长期目标、重复任务和低反馈事务很容易被拖延。常见误读是把它写成懒或不负责；更准确地说，你的推进系统需要意义、反馈和外置结构。更好使用方式，是不要等待自律爆发，而是把开始做得足够短、足够具体、足够可见。",
+                            "short_body_zh": "不适合长期靠纯意志推进；需要外部结构、短启动和明确反馈。",
+                            "benefit_zh": "灵活度高，能在变化中保留转向空间。",
+                            "cost_zh": "长期任务、重复收尾和低反馈事务容易掉速。",
+                            "common_misread_zh": "这不等于懒或不负责，而是推进系统需要更强外部支架。",
+                            "action_zh": "把重要任务改成 5 分钟启动，并让进度对别人或工具可见。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.c.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.e_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "E",
+                                "label_zh": "外向性",
+                                "public_name_zh": "社交能量与进入方式",
+                                "domain_theme_zh": "表达、互动、外部反馈、现场感和能量补给"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "外向性明显偏低：深度内收与低刺激进入",
+                            "summary_zh": "你更适合先观察、先内化，再选择性表达。",
+                            "body_zh": "外向性明显偏低时，你通常不会依赖高频互动、持续曝光和外部热闹来获得能量。你更可能在安静、低噪音和自主节奏里恢复判断，也更习惯先把信息放进内部处理。优势是你不容易被场面带跑，能保留深度观察和独立判断。代价是，如果洞察长期不外化，别人可能看不见你的价值，也误以为你冷淡或没有想法。常见误读是把它等同于社交差；更准确地说，你需要更低成本、更可控的进入方式。使用它时，不必强迫自己变得外放，可以先训练一句话表达、一段文字反馈或会后补充。",
+                            "short_body_zh": "低刺激、深处理、慢进入；重点不是变外放，而是让价值被看见。",
+                            "benefit_zh": "能保留独立观察和深度判断，不容易被场面牵着走。",
+                            "cost_zh": "表达太晚时，能力和判断可能不被看见。",
+                            "common_misread_zh": "不是社交差，而是更需要可控、低成本的进入方式。",
+                            "action_zh": "每次会议或讨论前准备一句观点，先让自己被看见一次。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.e.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.a_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "A",
+                                "label_zh": "宜人性",
+                                "public_name_zh": "合作与边界方式",
+                                "domain_theme_zh": "共情、合作、冲突处理、关系承接和边界表达"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "宜人性明显偏低：强边界与事实优先",
+                            "summary_zh": "你更容易先看事实、责任和边界，而不是先维护表面和气。",
+                            "body_zh": "宜人性明显偏低时，你通常不会把维持气氛放在第一优先。你更愿意问：这件事是否合理，责任是否清楚，边界是否被尊重。优势是判断直接、不容易被模糊期待绑架，也更能在复杂局面中切开问题。代价是，你的表达可能被体验为锋利或压迫，尤其在别人更需要情绪承接时。常见误读是把你写成不在乎别人；更准确地说，你不太愿意用牺牲判断来换取表面和平。更好使用方式，是保留清楚，但先交代你的意图，让边界表达不被误读成攻击。",
+                            "short_body_zh": "事实、责任、边界优先；需要让直接表达带上意图说明。",
+                            "benefit_zh": "不容易被模糊期待和无效和气拖住，能迅速切开问题。",
+                            "cost_zh": "表达太快太硬时，容易让关系系统感到压力。",
+                            "common_misread_zh": "不是不在乎别人，而是不愿用牺牲判断换表面和平。",
+                            "action_zh": "在表达不同意见前先补一句：我想把问题说清楚，不是要否定你。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.a.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.n_very_high_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "N",
+                                "label_zh": "情绪性",
+                                "public_name_zh": "压力反应敏感度",
+                                "domain_theme_zh": "压力、评价、不确定性、关系张力和恢复负荷"
+                            },
+                            "band": {
+                                "internal_band": "very_high",
+                                "display_band_label": "明显偏高",
+                                "score_range_0_100": [
+                                    80,
+                                    100
+                                ],
+                                "internal_band_threshold": "B5_80_100"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "情绪性明显偏高：持续高警觉与保护层需求",
+                            "summary_zh": "你的系统很容易长时间保持高负荷和高预警。",
+                            "body_zh": "情绪性明显偏高时，压力、误解、评价、不确定性和关系张力更容易长期留在系统里。你可能不是马上外显崩溃，而是内部持续扫描、推演、紧绷和消耗。优势是你很难忽视风险，也能捕捉许多人后知后觉的问题。代价是，长期高警觉会侵蚀注意力、睡眠、耐心和行动出口。常见误读是把你写成脆弱；更准确地说，你的系统需要更厚的保护层和恢复协议。更好使用方式，是把恢复当作基础设施，而不是事情结束后的附属动作。",
+                            "short_body_zh": "持续高警觉需要保护层；恢复不是奖励，而是稳定输出的前提。",
+                            "benefit_zh": "能捕捉细微风险和高压环境中的早期信号。",
+                            "cost_zh": "长期高负荷会消耗注意力、耐心、睡眠和行动能力。",
+                            "common_misread_zh": "不是脆弱，而是系统预警强、恢复成本高。",
+                            "action_zh": "为高压日设定固定恢复协议：降刺激、停止争辩、独处、写下边界。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.n.very_high.v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_04_coupling",
+                "blocks": [
+                    {
+                        "block_key": "module_04_coupling.coupling_registry.c_e_low_low.v0_3",
+                        "block_kind": "coupling_cards",
+                        "module_key": "module_04_coupling",
+                        "content": {
+                            "coupling_key": "e_low_x_c_low",
+                            "coupling_group": "低外向 × 低尽责",
+                            "involved_traits": [
+                                {
+                                    "trait": "E",
+                                    "trait_label_zh": "外向性"
+                                },
+                                {
+                                    "trait": "C",
+                                    "trait_label_zh": "尽责性"
+                                }
+                            ],
+                            "involved_bands": {
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "module_key": "module_04_coupling",
+                            "title_zh": "低外向 × 低尽责｜核心动力",
+                            "summary_zh": "说明低外向 × 低尽责如何形成核心动力。",
+                            "body_zh": "低外向 × 低尽责的关键，不是把两个分数并排读，而是看它们怎样一起推动你的进入方式。低外向降低从外部互动中取能的比例，低尽责又让长期纯靠意志推进变得困难。因此，这组组合更像一套内部动力：一边提供判断和能量，一边也要求更清楚的边界与节奏。它适合放在核心画像里解释主轴，因为它能说明你为什么在某些场景里很快有反应、很快看见问题，又为什么不一定会用最直接或最稳定的方式把反应带出去。这条内容只描述连续维度的互动方式，用于帮助理解当下倾向，不把组合写成固定身份。",
+                            "short_body_zh": "低外向 × 低尽责说明两个维度如何一起影响进入、判断和消耗。",
+                            "benefit_zh": "它让你不容易被热闹和表面进度带着跑，也能保留自主筛选。",
+                            "cost_zh": "代价是进入慢、反馈弱时更容易掉速，任务容易卡在知道该做但迟迟没有启动。",
+                            "common_misread_zh": "常被误读为懒或不在乎，其实问题更像启动机制与反馈机制没有被搭起来。",
+                            "action_zh": "把任务改成短启动、可见反馈和低噪声推进，而不是要求自己突然长期高能。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim"
+                            ]
+                        },
+                        "projection_refs": [
+                            "dominant_couplings",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "coupling_registry:big5_content_2_e_low_x_c_low_coupling_core_explanation_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_04_coupling.coupling_registry.c_n_low_high.v0_3",
+                        "block_kind": "coupling_cards",
+                        "module_key": "module_04_coupling",
+                        "content": {
+                            "coupling_key": "c_low_x_n_high",
+                            "coupling_group": "低尽责 × 高情绪",
+                            "involved_traits": [
+                                {
+                                    "trait": "C",
+                                    "trait_label_zh": "尽责性"
+                                },
+                                {
+                                    "trait": "N",
+                                    "trait_label_zh": "情绪性"
+                                }
+                            ],
+                            "involved_bands": {
+                                "C": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "N": {
+                                    "internal_band": "high",
+                                    "display_band_label": "中高"
+                                }
+                            },
+                            "module_key": "module_04_coupling",
+                            "title_zh": "低尽责 × 高情绪｜核心动力",
+                            "summary_zh": "说明低尽责 × 高情绪如何形成核心动力。",
+                            "body_zh": "低尽责 × 高情绪的关键，不是把两个分数并排读，而是看它们怎样一起推动你的进入方式。低尽责让持续推进依赖意义、路径和反馈，高情绪让模糊、拖延和未完成更容易带来心理负荷。因此，这组组合更像一套内部动力：一边提供判断和能量，一边也要求更清楚的边界与节奏。它适合放在核心画像里解释主轴，因为它能说明你为什么在某些场景里很快有反应、很快看见问题，又为什么不一定会用最直接或最稳定的方式把反应带出去。这条内容只描述连续维度的互动方式，用于帮助理解当下倾向，不把组合写成固定身份。",
+                            "short_body_zh": "低尽责 × 高情绪说明两个维度如何一起影响进入、判断和消耗。",
+                            "benefit_zh": "它让你能很快觉察任务系统哪里不清楚，也不容易盲目硬推。",
+                            "cost_zh": "代价是越不清楚越焦虑，越焦虑越难启动，最后把动力问题误读成意志问题。",
+                            "common_misread_zh": "常被误读为不够自律或抗压弱，其实更像低反馈任务和高体感预警互相放大。",
+                            "action_zh": "先定义下一步和反馈点，降低任务入口，而不是在完整计划出现前持续自责。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim"
+                            ]
+                        },
+                        "projection_refs": [
+                            "dominant_couplings",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "coupling_registry:big5_content_2_c_low_x_n_high_coupling_core_explanation_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_04_coupling.coupling_registry.e_n_low_high.v0_3",
+                        "block_kind": "coupling_cards",
+                        "module_key": "module_04_coupling",
+                        "content": {
+                            "coupling_key": "n_high_x_e_low",
+                            "coupling_group": "高情绪 × 低外向",
+                            "involved_traits": [
+                                {
+                                    "trait": "N",
+                                    "trait_label_zh": "情绪性"
+                                },
+                                {
+                                    "trait": "E",
+                                    "trait_label_zh": "外向性"
+                                }
+                            ],
+                            "involved_bands": {
+                                "N": {
+                                    "internal_band": "high",
+                                    "display_band_label": "中高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "module_key": "module_04_coupling",
+                            "title_zh": "高情绪 × 低外向｜核心动力",
+                            "summary_zh": "说明高情绪 × 低外向如何形成核心动力。",
+                            "body_zh": "高情绪 × 低外向的关键，不是把两个分数并排读，而是看它们怎样一起推动你的进入方式。高情绪性让你更早感觉到张力，低外向性让这份张力不一定立刻通过表达、社交或现场互动释放。因此，这组组合更像一套内部动力：一边提供判断和能量，一边也要求更清楚的边界与节奏。它适合放在核心画像里解释主轴，因为它能说明你为什么在某些场景里很快有反应、很快看见问题，又为什么不一定会用最直接或最稳定的方式把反应带出去。这条内容只描述连续维度的互动方式，用于帮助理解当下倾向，不把组合写成固定身份。",
+                            "short_body_zh": "高情绪 × 低外向说明两个维度如何一起影响进入、判断和消耗。",
+                            "benefit_zh": "它带来谨慎、观察力和对环境质量的快速识别。",
+                            "cost_zh": "代价是外表仍然克制，内部却已经开始高负荷运转，别人可能看不见你的消耗。",
+                            "common_misread_zh": "常被误读为冷淡、慢热或不主动，其实很多时候是在确认是否值得进入。",
+                            "action_zh": "用低成本表达提前外化感受，例如先说一句边界或会后补充判断。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim"
+                            ]
+                        },
+                        "projection_refs": [
+                            "dominant_couplings",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "coupling_registry:big5_content_2_n_high_x_e_low_coupling_core_explanation_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_04_coupling.coupling_registry.a_n_low_high.v0_3",
+                        "block_kind": "coupling_cards",
+                        "module_key": "module_04_coupling",
+                        "content": {
+                            "coupling_key": "a_low_x_n_high",
+                            "coupling_group": "低宜人 × 高情绪",
+                            "involved_traits": [
+                                {
+                                    "trait": "A",
+                                    "trait_label_zh": "宜人性"
+                                },
+                                {
+                                    "trait": "N",
+                                    "trait_label_zh": "情绪性"
+                                }
+                            ],
+                            "involved_bands": {
+                                "A": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "N": {
+                                    "internal_band": "high",
+                                    "display_band_label": "偏高"
+                                }
+                            },
+                            "module_key": "module_04_coupling",
+                            "title_zh": "低宜人 × 高情绪｜核心动力",
+                            "summary_zh": "说明低宜人 × 高情绪如何形成核心动力。",
+                            "body_zh": "低宜人 × 高情绪的关键，不是把两个分数并排读，而是看它们怎样一起推动你的进入方式。低宜人让你更重视事实、边界和责任，高情绪让不确定、误解和摩擦更快被感知。因此，这组组合更像一套内部动力：一边提供判断和能量，一边也要求更清楚的边界与节奏。它适合放在核心画像里解释主轴，因为它能说明你为什么在某些场景里很快有反应、很快看见问题，又为什么不一定会用最直接或最稳定的方式把反应带出去。这条内容只描述连续维度的互动方式，用于帮助理解当下倾向，不把组合写成固定身份。",
+                            "short_body_zh": "低宜人 × 高情绪说明两个维度如何一起影响进入、判断和消耗。",
+                            "benefit_zh": "它让你在复杂关系中更敢看见问题，也不容易被表面和气绑住。",
+                            "cost_zh": "代价是压力高时表达可能更锋利，边界感容易变成压强，让他人先感到防御。",
+                            "common_misread_zh": "常被误读为不好相处或攻击性强，其实核心是边界系统和警觉系统同时上升。",
+                            "action_zh": "先把事实、感受和请求分开表达，避免所有张力都通过强硬语气释放。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim"
+                            ]
+                        },
+                        "projection_refs": [
+                            "dominant_couplings",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "coupling_registry:big5_content_2_a_low_x_n_high_coupling_core_explanation_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_05_facet_reframe",
+                "blocks": [
+                    {
+                        "block_key": "module_05_facet_reframe.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "facet_reframe",
+                        "module_key": "module_05_facet_reframe",
+                        "content": {
+                            "availability": "pending_asset_resolution",
+                            "facets": []
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "facet_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_06_application_matrix",
+                "blocks": [
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "高负荷内耗型｜个人成长：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成个人成长里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_07_collaboration_manual",
+                "blocks": [
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_document_first.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "高负荷内耗型｜协作说明书：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_clear_owner_deadline.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "高负荷内耗型｜协作说明书：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_meaning_and_feedback.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "高负荷内耗型｜协作说明书：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_quiet_processing_time.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "高负荷内耗型｜协作说明书：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_share_safe_manual.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "高负荷内耗型｜协作说明书：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_fast_sync_fit.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "高负荷内耗型｜协作说明书：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_conflict_protocol.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "高负荷内耗型｜协作说明书：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_handoff_clarity.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "overloaded_internalizer",
+                            "profile_label_zh": "高负荷内耗型",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高情绪 × 低尽责 × 低外向",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "E": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "n_high_x_e_low",
+                                "c_low_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "高负荷内耗型｜协作说明书：核心表现方式",
+                            "summary_zh": "将高情绪 × 低尽责 × 低外向转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，高负荷内耗型这个辅助标签主要提示一种进入方式：体感强、进入慢、启动前就容易被负荷消耗。你通常不是先被单一分数驱动，而是被高情绪 × 低尽责 × 低外向这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，对问题和耗损很早有体感，能识别不合适环境更容易被调动。如果场景开始接近高压、低反馈、责任模糊且要求你立刻稳定输出的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高情绪 × 低尽责 × 低外向做低风险使用。",
+                            "benefit_zh": "帮助你把对问题和耗损很早有体感，能识别不合适环境转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是还没开始就内耗、拖延、回避表达和恢复不足可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把高负荷内耗型当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_overloaded_internalizer__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_08_share_save",
+                "blocks": [
+                    {
+                        "block_key": "module_08_share_save.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "share_save",
+                        "module_key": "module_08_share_save",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "share_safety_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_09_feedback_data_flywheel",
+                "blocks": [
+                    {
+                        "block_key": "module_09_feedback_data_flywheel.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "feedback_block",
+                        "module_key": "module_09_feedback_data_flywheel",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "state_scope_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_10_method_privacy",
+                "blocks": [
+                    {
+                        "block_key": "module_10_method_privacy.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "method_boundary",
+                        "module_key": "module_10_method_privacy",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "method_registry:pilot_boundary"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "backend_required"
+                    }
+                ]
+            }
+        ]
+    }
+}

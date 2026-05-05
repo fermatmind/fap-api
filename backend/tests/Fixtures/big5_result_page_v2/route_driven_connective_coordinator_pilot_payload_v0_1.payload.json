@@ -1,0 +1,3167 @@
+{
+    "big5_result_page_v2": {
+        "schema_version": "fap.big5.result_page.v2",
+        "payload_key": "big5_result_page_v2",
+        "scale_code": "BIG5_OCEAN",
+        "fixture_key": "pilot_o59_staging_payload_v0_1",
+        "content_version": "big5_result_page_v2.pilot_payload.v0_1",
+        "package_version": "B5-CONTENT-staging-pilot.v0_1",
+        "canonical_profile_key": "connective_coordinator",
+        "profile_label_zh": "连接驱动协调者",
+        "projection_v2": {
+            "schema_version": "fap.big5.projection.v2",
+            "attempt_id": "attempt_big5_o59_pilot_fixture",
+            "result_version": "big5_result_page_v2.pilot_payload.v0_1",
+            "scale_code": "BIG5_OCEAN",
+            "form_code": "big5_120",
+            "domains": {
+                "O": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "C": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "E": {
+                    "score": 4,
+                    "band": "high"
+                },
+                "A": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "N": {
+                    "score": 1,
+                    "band": "very_low"
+                }
+            },
+            "domain_bands": {
+                "O": "very_low",
+                "C": "very_low",
+                "E": "high",
+                "A": "very_low",
+                "N": "very_low"
+            },
+            "facets": [],
+            "facet_highlights": [],
+            "norm_status": "CALIBRATED",
+            "norm_group_id": "pilot_fixture_norm_group",
+            "norm_version": "pilot_fixture_norm_v0_1",
+            "quality_status": "valid",
+            "quality_flags": [],
+            "profile_signature": {
+                "signature_key": "connective_coordinator",
+                "label_key": "signature.connective_coordinator",
+                "is_fixed_type": false,
+                "system": "trait_signature",
+                "label_zh": "连接驱动协调者",
+                "axis_zh": "实际五维路由｜低情绪 / 低开放 / 低尽责"
+            },
+            "dominant_couplings": [],
+            "interpretation_scope": "high_tension_profile",
+            "confidence_flags": [
+                "pilot_staging_fixture",
+                "selector_refs_only"
+            ],
+            "safety_flags": [
+                "non_diagnostic",
+                "not_type_system",
+                "staging_only"
+            ],
+            "public_fields": [
+                "domains",
+                "domain_bands",
+                "facet_highlights",
+                "profile_signature",
+                "dominant_couplings",
+                "interpretation_scope"
+            ],
+            "internal_only_fields": []
+        },
+        "modules": [
+            {
+                "module_key": "module_00_trust_bar",
+                "blocks": [
+                    {
+                        "block_key": "module_00_trust_bar.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "trust_bar",
+                        "module_key": "module_00_trust_bar",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "method_registry:pilot_boundary"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "backend_required"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_01_hero",
+                "blocks": [
+                    {
+                        "block_key": "module_01_hero.domain_registry.o_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "O",
+                                "label_zh": "开放性",
+                                "public_name_zh": "经验开放度",
+                                "domain_theme_zh": "新经验、复杂概念、审美变化和非标准答案"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "开放性明显偏低：稳定框架中的现实判断",
+                            "summary_zh": "你更容易信任熟悉路径、已验证经验和可落地方案。",
+                            "body_zh": "开放性处在明显偏低区间时，新的概念、审美变化和非标准答案通常不会自动吸引你。你更愿意先确认一件事是否可靠、是否必要、是否真的能改善现实，再决定要不要投入注意力。这样的结构能减少被新鲜感带跑的风险，也能让你在需要稳定执行的环境里保持清醒。代价是，当环境需要试错、跨界理解或重新定义问题时，你可能会先看到不确定和成本，而不是可能性。常见误读是把这种位置理解成“没有想象力”；更准确地说，你的开放性需要明确的现实入口。使用它时，可以把探索压缩成一个小实验，而不是要求自己立刻接受整套新框架。",
+                            "short_body_zh": "更信任熟悉路径和可验证方案；适合稳定落地，也需要给新经验留一个小入口。",
+                            "benefit_zh": "不容易被空洞概念和短期新鲜感裹挟，适合守住现实边界。",
+                            "cost_zh": "在需要试错、跨界理解或快速转换视角时，可能进入较慢。",
+                            "common_misread_zh": "这不等于没有想象力，而是新想法需要先通过现实价值检验。",
+                            "action_zh": "每周只选一个低风险新尝试，先问它能解决什么真实问题。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.o.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.c_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "C",
+                                "label_zh": "尽责性",
+                                "public_name_zh": "秩序与推进力",
+                                "domain_theme_zh": "计划、秩序、自我约束、责任执行和持续完成"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "尽责性明显偏低：高流动系统与外部结构需求",
+                            "summary_zh": "你更依赖兴趣、状态、环境和即时反馈来启动与推进。",
+                            "body_zh": "尽责性明显偏低时，计划、排序、收尾和持续自我约束通常不是你的天然优势。你可能很清楚一件事重要，却仍难以稳定进入；也可能在灵感、压力或外部催化出现时突然推进很快。优势是弹性高，不容易被僵硬流程完全锁死，也更能适应变化中的机会。代价是，长期目标、重复任务和低反馈事务很容易被拖延。常见误读是把它写成懒或不负责；更准确地说，你的推进系统需要意义、反馈和外置结构。更好使用方式，是不要等待自律爆发，而是把开始做得足够短、足够具体、足够可见。",
+                            "short_body_zh": "不适合长期靠纯意志推进；需要外部结构、短启动和明确反馈。",
+                            "benefit_zh": "灵活度高，能在变化中保留转向空间。",
+                            "cost_zh": "长期任务、重复收尾和低反馈事务容易掉速。",
+                            "common_misread_zh": "这不等于懒或不负责，而是推进系统需要更强外部支架。",
+                            "action_zh": "把重要任务改成 5 分钟启动，并让进度对别人或工具可见。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.c.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.e_high_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "E",
+                                "label_zh": "外向性",
+                                "public_name_zh": "社交能量与进入方式",
+                                "domain_theme_zh": "表达、互动、外部反馈、现场感和能量补给"
+                            },
+                            "band": {
+                                "internal_band": "high",
+                                "display_band_label": "中高",
+                                "score_range_0_100": [
+                                    60,
+                                    79
+                                ],
+                                "internal_band_threshold": "B4_60_79"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "外向性中高：互动中的行动势能",
+                            "summary_zh": "你更容易通过表达、连接、现场反馈和行动获得能量。",
+                            "body_zh": "外向性偏高时，你通常更容易在讨论、互动和真实反馈中被点亮。你可能不喜欢长期只在内部反复推演，而是倾向于通过说出来、做起来、碰到反馈来形成判断。优势是存在感、推进力和现场反应更强，适合需要连接人与资源的场景。代价是，如果节奏过快，别人可能还没跟上，你已经开始推进；如果外部反馈过少，你也可能迅速失活。常见误读是把你看成只爱热闹；更准确地说，你需要的是有回应的行动场。更好使用方式，是在表达之前先对齐目标，让你的能量成为推进而不是压迫。",
+                            "short_body_zh": "通过表达和现场反馈获得势能；需要先对齐目标再加速推进。",
+                            "benefit_zh": "存在感、现场反应和连接资源的能力更强。",
+                            "cost_zh": "容易节奏过快，或在低反馈环境中失去动力。",
+                            "common_misread_zh": "不是只爱热闹，而是更依赖有回应、有动作的场域。",
+                            "action_zh": "在推进前先问一句：我们现在要解决的核心问题是什么？",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.e.high.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.a_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "A",
+                                "label_zh": "宜人性",
+                                "public_name_zh": "合作与边界方式",
+                                "domain_theme_zh": "共情、合作、冲突处理、关系承接和边界表达"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "宜人性明显偏低：强边界与事实优先",
+                            "summary_zh": "你更容易先看事实、责任和边界，而不是先维护表面和气。",
+                            "body_zh": "宜人性明显偏低时，你通常不会把维持气氛放在第一优先。你更愿意问：这件事是否合理，责任是否清楚，边界是否被尊重。优势是判断直接、不容易被模糊期待绑架，也更能在复杂局面中切开问题。代价是，你的表达可能被体验为锋利或压迫，尤其在别人更需要情绪承接时。常见误读是把你写成不在乎别人；更准确地说，你不太愿意用牺牲判断来换取表面和平。更好使用方式，是保留清楚，但先交代你的意图，让边界表达不被误读成攻击。",
+                            "short_body_zh": "事实、责任、边界优先；需要让直接表达带上意图说明。",
+                            "benefit_zh": "不容易被模糊期待和无效和气拖住，能迅速切开问题。",
+                            "cost_zh": "表达太快太硬时，容易让关系系统感到压力。",
+                            "common_misread_zh": "不是不在乎别人，而是不愿用牺牲判断换表面和平。",
+                            "action_zh": "在表达不同意见前先补一句：我想把问题说清楚，不是要否定你。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.a.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.n_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "N",
+                                "label_zh": "情绪性",
+                                "public_name_zh": "压力反应敏感度",
+                                "domain_theme_zh": "压力、评价、不确定性、关系张力和恢复负荷"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "情绪性明显偏低：低波动稳态与风险补偿",
+                            "summary_zh": "你通常不容易被短时压力、误解或不确定性推离基线。",
+                            "body_zh": "情绪性明显偏低时，你的压力反应系统整体更稳。很多突发变化、评价或关系张力不会立刻把你拉高，你也更容易在复杂环境中保持冷静。优势是恢复快、抗干扰强，不容易被小波动反复带走。代价是，你可能较晚注意到关系里的细小裂缝、环境里的早期风险，或别人已经承受的情绪成本。常见误读是把稳定看成完全没问题；更准确地说，低波动也需要保留风险敏感度。更好使用方式，是在保持稳定的同时主动检查早期信号，而不是只等问题变大。",
+                            "short_body_zh": "情绪系统偏稳，恢复快；需要主动补充早期风险觉察。",
+                            "benefit_zh": "能在压力和不确定中保持基线，不容易被小波动打乱。",
+                            "cost_zh": "可能较晚注意到关系张力、环境风险和他人情绪成本。",
+                            "common_misread_zh": "不是没有问题，而是你的系统不容易立刻被问题拉高。",
+                            "action_zh": "每周主动问一次：这里有没有被我低估的早期风险？",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.n.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_02_quick_understanding",
+                "blocks": [
+                    {
+                        "block_key": "module_02_quick_understanding.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "quick_cards",
+                        "module_key": "module_02_quick_understanding",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "state_scope_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_03_trait_deep_dive",
+                "blocks": [
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.o_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "O",
+                                "label_zh": "开放性",
+                                "public_name_zh": "经验开放度",
+                                "domain_theme_zh": "新经验、复杂概念、审美变化和非标准答案"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "开放性明显偏低：稳定框架中的现实判断",
+                            "summary_zh": "你更容易信任熟悉路径、已验证经验和可落地方案。",
+                            "body_zh": "开放性处在明显偏低区间时，新的概念、审美变化和非标准答案通常不会自动吸引你。你更愿意先确认一件事是否可靠、是否必要、是否真的能改善现实，再决定要不要投入注意力。这样的结构能减少被新鲜感带跑的风险，也能让你在需要稳定执行的环境里保持清醒。代价是，当环境需要试错、跨界理解或重新定义问题时，你可能会先看到不确定和成本，而不是可能性。常见误读是把这种位置理解成“没有想象力”；更准确地说，你的开放性需要明确的现实入口。使用它时，可以把探索压缩成一个小实验，而不是要求自己立刻接受整套新框架。",
+                            "short_body_zh": "更信任熟悉路径和可验证方案；适合稳定落地，也需要给新经验留一个小入口。",
+                            "benefit_zh": "不容易被空洞概念和短期新鲜感裹挟，适合守住现实边界。",
+                            "cost_zh": "在需要试错、跨界理解或快速转换视角时，可能进入较慢。",
+                            "common_misread_zh": "这不等于没有想象力，而是新想法需要先通过现实价值检验。",
+                            "action_zh": "每周只选一个低风险新尝试，先问它能解决什么真实问题。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.o.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.c_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "C",
+                                "label_zh": "尽责性",
+                                "public_name_zh": "秩序与推进力",
+                                "domain_theme_zh": "计划、秩序、自我约束、责任执行和持续完成"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "尽责性明显偏低：高流动系统与外部结构需求",
+                            "summary_zh": "你更依赖兴趣、状态、环境和即时反馈来启动与推进。",
+                            "body_zh": "尽责性明显偏低时，计划、排序、收尾和持续自我约束通常不是你的天然优势。你可能很清楚一件事重要，却仍难以稳定进入；也可能在灵感、压力或外部催化出现时突然推进很快。优势是弹性高，不容易被僵硬流程完全锁死，也更能适应变化中的机会。代价是，长期目标、重复任务和低反馈事务很容易被拖延。常见误读是把它写成懒或不负责；更准确地说，你的推进系统需要意义、反馈和外置结构。更好使用方式，是不要等待自律爆发，而是把开始做得足够短、足够具体、足够可见。",
+                            "short_body_zh": "不适合长期靠纯意志推进；需要外部结构、短启动和明确反馈。",
+                            "benefit_zh": "灵活度高，能在变化中保留转向空间。",
+                            "cost_zh": "长期任务、重复收尾和低反馈事务容易掉速。",
+                            "common_misread_zh": "这不等于懒或不负责，而是推进系统需要更强外部支架。",
+                            "action_zh": "把重要任务改成 5 分钟启动，并让进度对别人或工具可见。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.c.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.e_high_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "E",
+                                "label_zh": "外向性",
+                                "public_name_zh": "社交能量与进入方式",
+                                "domain_theme_zh": "表达、互动、外部反馈、现场感和能量补给"
+                            },
+                            "band": {
+                                "internal_band": "high",
+                                "display_band_label": "中高",
+                                "score_range_0_100": [
+                                    60,
+                                    79
+                                ],
+                                "internal_band_threshold": "B4_60_79"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "外向性中高：互动中的行动势能",
+                            "summary_zh": "你更容易通过表达、连接、现场反馈和行动获得能量。",
+                            "body_zh": "外向性偏高时，你通常更容易在讨论、互动和真实反馈中被点亮。你可能不喜欢长期只在内部反复推演，而是倾向于通过说出来、做起来、碰到反馈来形成判断。优势是存在感、推进力和现场反应更强，适合需要连接人与资源的场景。代价是，如果节奏过快，别人可能还没跟上，你已经开始推进；如果外部反馈过少，你也可能迅速失活。常见误读是把你看成只爱热闹；更准确地说，你需要的是有回应的行动场。更好使用方式，是在表达之前先对齐目标，让你的能量成为推进而不是压迫。",
+                            "short_body_zh": "通过表达和现场反馈获得势能；需要先对齐目标再加速推进。",
+                            "benefit_zh": "存在感、现场反应和连接资源的能力更强。",
+                            "cost_zh": "容易节奏过快，或在低反馈环境中失去动力。",
+                            "common_misread_zh": "不是只爱热闹，而是更依赖有回应、有动作的场域。",
+                            "action_zh": "在推进前先问一句：我们现在要解决的核心问题是什么？",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.e.high.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.a_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "A",
+                                "label_zh": "宜人性",
+                                "public_name_zh": "合作与边界方式",
+                                "domain_theme_zh": "共情、合作、冲突处理、关系承接和边界表达"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "宜人性明显偏低：强边界与事实优先",
+                            "summary_zh": "你更容易先看事实、责任和边界，而不是先维护表面和气。",
+                            "body_zh": "宜人性明显偏低时，你通常不会把维持气氛放在第一优先。你更愿意问：这件事是否合理，责任是否清楚，边界是否被尊重。优势是判断直接、不容易被模糊期待绑架，也更能在复杂局面中切开问题。代价是，你的表达可能被体验为锋利或压迫，尤其在别人更需要情绪承接时。常见误读是把你写成不在乎别人；更准确地说，你不太愿意用牺牲判断来换取表面和平。更好使用方式，是保留清楚，但先交代你的意图，让边界表达不被误读成攻击。",
+                            "short_body_zh": "事实、责任、边界优先；需要让直接表达带上意图说明。",
+                            "benefit_zh": "不容易被模糊期待和无效和气拖住，能迅速切开问题。",
+                            "cost_zh": "表达太快太硬时，容易让关系系统感到压力。",
+                            "common_misread_zh": "不是不在乎别人，而是不愿用牺牲判断换表面和平。",
+                            "action_zh": "在表达不同意见前先补一句：我想把问题说清楚，不是要否定你。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.a.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.n_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "N",
+                                "label_zh": "情绪性",
+                                "public_name_zh": "压力反应敏感度",
+                                "domain_theme_zh": "压力、评价、不确定性、关系张力和恢复负荷"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "情绪性明显偏低：低波动稳态与风险补偿",
+                            "summary_zh": "你通常不容易被短时压力、误解或不确定性推离基线。",
+                            "body_zh": "情绪性明显偏低时，你的压力反应系统整体更稳。很多突发变化、评价或关系张力不会立刻把你拉高，你也更容易在复杂环境中保持冷静。优势是恢复快、抗干扰强，不容易被小波动反复带走。代价是，你可能较晚注意到关系里的细小裂缝、环境里的早期风险，或别人已经承受的情绪成本。常见误读是把稳定看成完全没问题；更准确地说，低波动也需要保留风险敏感度。更好使用方式，是在保持稳定的同时主动检查早期信号，而不是只等问题变大。",
+                            "short_body_zh": "情绪系统偏稳，恢复快；需要主动补充早期风险觉察。",
+                            "benefit_zh": "能在压力和不确定中保持基线，不容易被小波动打乱。",
+                            "cost_zh": "可能较晚注意到关系张力、环境风险和他人情绪成本。",
+                            "common_misread_zh": "不是没有问题，而是你的系统不容易立刻被问题拉高。",
+                            "action_zh": "每周主动问一次：这里有没有被我低估的早期风险？",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.n.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_04_coupling",
+                "blocks": [
+                    {
+                        "block_key": "module_04_coupling.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "coupling_cards",
+                        "module_key": "module_04_coupling",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "coupling_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_05_facet_reframe",
+                "blocks": [
+                    {
+                        "block_key": "module_05_facet_reframe.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "facet_reframe",
+                        "module_key": "module_05_facet_reframe",
+                        "content": {
+                            "availability": "pending_asset_resolution",
+                            "facets": []
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "facet_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_06_application_matrix",
+                "blocks": [
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "连接驱动协调者｜个人成长：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_07_collaboration_manual",
+                "blocks": [
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_document_first.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "连接驱动协调者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_clear_owner_deadline.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "连接驱动协调者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_meaning_and_feedback.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "连接驱动协调者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_quiet_processing_time.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "连接驱动协调者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_share_safe_manual.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "连接驱动协调者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_fast_sync_fit.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "连接驱动协调者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_conflict_protocol.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "连接驱动协调者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_handoff_clarity.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "connective_coordinator",
+                            "profile_label_zh": "连接驱动协调者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高外向 × 高宜人 × 低情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "E": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "e_high_x_a_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "连接驱动协调者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高外向 × 高宜人 × 低情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，连接驱动协调者这个辅助标签主要提示一种进入方式：通过表达、协作和稳定情绪带动连接。你通常不是先被单一分数驱动，而是被高外向 × 高宜人 × 低情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，快速同步、关系承接和团队气氛修复更容易被调动。如果场景开始接近长期把关系维护外包给你一个人的团队，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高外向 × 高宜人 × 低情绪做低风险使用。",
+                            "benefit_zh": "帮助你把快速同步、关系承接和团队气氛修复转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度承接、替别人消化摩擦、边界延迟可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把连接驱动协调者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_connective_coordinator__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_08_share_save",
+                "blocks": [
+                    {
+                        "block_key": "module_08_share_save.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "share_save",
+                        "module_key": "module_08_share_save",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "share_safety_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_09_feedback_data_flywheel",
+                "blocks": [
+                    {
+                        "block_key": "module_09_feedback_data_flywheel.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "feedback_block",
+                        "module_key": "module_09_feedback_data_flywheel",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "state_scope_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_10_method_privacy",
+                "blocks": [
+                    {
+                        "block_key": "module_10_method_privacy.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "method_boundary",
+                        "module_key": "module_10_method_privacy",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "method_registry:pilot_boundary"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "backend_required"
+                    }
+                ]
+            }
+        ]
+    }
+}

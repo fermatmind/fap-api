@@ -1,0 +1,3330 @@
+{
+    "big5_result_page_v2": {
+        "schema_version": "fap.big5.result_page.v2",
+        "payload_key": "big5_result_page_v2",
+        "scale_code": "BIG5_OCEAN",
+        "fixture_key": "pilot_o59_staging_payload_v0_1",
+        "content_version": "big5_result_page_v2.pilot_payload.v0_1",
+        "package_version": "B5-CONTENT-staging-pilot.v0_1",
+        "canonical_profile_key": "vigilant_perfectionist",
+        "profile_label_zh": "戒备型完美主义者",
+        "projection_v2": {
+            "schema_version": "fap.big5.projection.v2",
+            "attempt_id": "attempt_big5_o59_pilot_fixture",
+            "result_version": "big5_result_page_v2.pilot_payload.v0_1",
+            "scale_code": "BIG5_OCEAN",
+            "form_code": "big5_120",
+            "domains": {
+                "O": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "C": {
+                    "score": 4,
+                    "band": "high"
+                },
+                "E": {
+                    "score": 3,
+                    "band": "mid"
+                },
+                "A": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "N": {
+                    "score": 4,
+                    "band": "high"
+                }
+            },
+            "domain_bands": {
+                "O": "very_low",
+                "C": "high",
+                "E": "mid",
+                "A": "very_low",
+                "N": "high"
+            },
+            "facets": [],
+            "facet_highlights": [],
+            "norm_status": "CALIBRATED",
+            "norm_group_id": "pilot_fixture_norm_group",
+            "norm_version": "pilot_fixture_norm_v0_1",
+            "quality_status": "valid",
+            "quality_flags": [],
+            "profile_signature": {
+                "signature_key": "vigilant_perfectionist",
+                "label_key": "signature.vigilant_perfectionist",
+                "is_fixed_type": false,
+                "system": "trait_signature",
+                "label_zh": "戒备型完美主义者",
+                "axis_zh": "实际五维路由｜低开放 / 低宜人 / 高情绪"
+            },
+            "dominant_couplings": [
+                {
+                    "coupling_key": "c_high_x_n_high",
+                    "strength": "route_matrix_candidate"
+                },
+                {
+                    "coupling_key": "o_low_x_c_high",
+                    "strength": "route_matrix_candidate"
+                },
+                {
+                    "coupling_key": "a_low_x_n_high",
+                    "strength": "route_matrix_candidate"
+                }
+            ],
+            "interpretation_scope": "high_tension_profile",
+            "confidence_flags": [
+                "pilot_staging_fixture",
+                "selector_refs_only"
+            ],
+            "safety_flags": [
+                "non_diagnostic",
+                "not_type_system",
+                "staging_only"
+            ],
+            "public_fields": [
+                "domains",
+                "domain_bands",
+                "facet_highlights",
+                "profile_signature",
+                "dominant_couplings",
+                "interpretation_scope"
+            ],
+            "internal_only_fields": []
+        },
+        "modules": [
+            {
+                "module_key": "module_00_trust_bar",
+                "blocks": [
+                    {
+                        "block_key": "module_00_trust_bar.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "trust_bar",
+                        "module_key": "module_00_trust_bar",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "method_registry:pilot_boundary"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "backend_required"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_01_hero",
+                "blocks": [
+                    {
+                        "block_key": "module_01_hero.domain_registry.o_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "O",
+                                "label_zh": "开放性",
+                                "public_name_zh": "经验开放度",
+                                "domain_theme_zh": "新经验、复杂概念、审美变化和非标准答案"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "开放性明显偏低：稳定框架中的现实判断",
+                            "summary_zh": "你更容易信任熟悉路径、已验证经验和可落地方案。",
+                            "body_zh": "开放性处在明显偏低区间时，新的概念、审美变化和非标准答案通常不会自动吸引你。你更愿意先确认一件事是否可靠、是否必要、是否真的能改善现实，再决定要不要投入注意力。这样的结构能减少被新鲜感带跑的风险，也能让你在需要稳定执行的环境里保持清醒。代价是，当环境需要试错、跨界理解或重新定义问题时，你可能会先看到不确定和成本，而不是可能性。常见误读是把这种位置理解成“没有想象力”；更准确地说，你的开放性需要明确的现实入口。使用它时，可以把探索压缩成一个小实验，而不是要求自己立刻接受整套新框架。",
+                            "short_body_zh": "更信任熟悉路径和可验证方案；适合稳定落地，也需要给新经验留一个小入口。",
+                            "benefit_zh": "不容易被空洞概念和短期新鲜感裹挟，适合守住现实边界。",
+                            "cost_zh": "在需要试错、跨界理解或快速转换视角时，可能进入较慢。",
+                            "common_misread_zh": "这不等于没有想象力，而是新想法需要先通过现实价值检验。",
+                            "action_zh": "每周只选一个低风险新尝试，先问它能解决什么真实问题。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.o.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.c_high_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "C",
+                                "label_zh": "尽责性",
+                                "public_name_zh": "秩序与推进力",
+                                "domain_theme_zh": "计划、秩序、自我约束、责任执行和持续完成"
+                            },
+                            "band": {
+                                "internal_band": "high",
+                                "display_band_label": "中高",
+                                "score_range_0_100": [
+                                    60,
+                                    79
+                                ],
+                                "internal_band_threshold": "B4_60_79"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "尽责性中高：稳定推进与质量承诺",
+                            "summary_zh": "你更容易把目标、责任和流程变成可持续行动。",
+                            "body_zh": "尽责性偏高时，你通常更重视计划、承诺、标准和收尾。你不太喜欢事情长期悬而未决，也更容易把目标拆成步骤并持续推进。优势是可靠、稳定、能承担复杂任务中的长期成本。代价是，当环境反复变动、他人节奏松散或标准不清时，你更容易感到被拖累。常见误读是把你看成只会按计划执行；更准确地说，你在用结构保护质量和结果。更好使用方式，是把计划留出弹性区间，避免把所有不确定都理解成失控。",
+                            "short_body_zh": "更能稳定推进和守住质量，也需要给计划预留弹性。",
+                            "benefit_zh": "适合长期目标、复杂交付和需要稳定责任感的场景。",
+                            "cost_zh": "对低标准、反复变动和松散协作更容易不耐烦。",
+                            "common_misread_zh": "不是僵硬，而是用结构保护质量、责任和可交付结果。",
+                            "action_zh": "每个计划都预留一个变动缓冲，而不是把调整视为失败。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.c.high.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.e_mid_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "E",
+                                "label_zh": "外向性",
+                                "public_name_zh": "社交能量与进入方式",
+                                "domain_theme_zh": "表达、互动、外部反馈、现场感和能量补给"
+                            },
+                            "band": {
+                                "internal_band": "mid",
+                                "display_band_label": "中位",
+                                "score_range_0_100": [
+                                    40,
+                                    59
+                                ],
+                                "internal_band_threshold": "B3_40_59"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "外向性中位：情境驱动的社交能量",
+                            "summary_zh": "你能互动，也能独处，关键取决于场景质量和自主感。",
+                            "body_zh": "外向性中位时，你既不是长期需要热闹的人，也不是只能独处的人。你可以在合适的人、清楚的目标和有反馈的场景中表达，也会在低质量社交或过度曝光后需要回收能量。优势是你能在内外之间切换，不容易被单一社交模式锁住。代价是，当场景边界模糊、期待不清或噪音过高时，你的进入状态会波动。常见误读是别人觉得你忽然外向、忽然安静；更准确地说，你的表达受场景质量影响。更好使用方式，是主动识别哪些互动给你能量，哪些互动只是消耗。",
+                            "short_body_zh": "能互动也能独处；社交状态取决于场景质量、目标和反馈。",
+                            "benefit_zh": "能在内外节奏之间切换，适应不同协作方式。",
+                            "cost_zh": "不清晰或低质量互动会让表达状态明显波动。",
+                            "common_misread_zh": "不是性格反复，而是社交能量受场景条件影响。",
+                            "action_zh": "记录一周内哪些互动补能、哪些互动耗能，再调整参与方式。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.e.mid.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.a_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "A",
+                                "label_zh": "宜人性",
+                                "public_name_zh": "合作与边界方式",
+                                "domain_theme_zh": "共情、合作、冲突处理、关系承接和边界表达"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "宜人性明显偏低：强边界与事实优先",
+                            "summary_zh": "你更容易先看事实、责任和边界，而不是先维护表面和气。",
+                            "body_zh": "宜人性明显偏低时，你通常不会把维持气氛放在第一优先。你更愿意问：这件事是否合理，责任是否清楚，边界是否被尊重。优势是判断直接、不容易被模糊期待绑架，也更能在复杂局面中切开问题。代价是，你的表达可能被体验为锋利或压迫，尤其在别人更需要情绪承接时。常见误读是把你写成不在乎别人；更准确地说，你不太愿意用牺牲判断来换取表面和平。更好使用方式，是保留清楚，但先交代你的意图，让边界表达不被误读成攻击。",
+                            "short_body_zh": "事实、责任、边界优先；需要让直接表达带上意图说明。",
+                            "benefit_zh": "不容易被模糊期待和无效和气拖住，能迅速切开问题。",
+                            "cost_zh": "表达太快太硬时，容易让关系系统感到压力。",
+                            "common_misread_zh": "不是不在乎别人，而是不愿用牺牲判断换表面和平。",
+                            "action_zh": "在表达不同意见前先补一句：我想把问题说清楚，不是要否定你。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.a.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.n_high_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "N",
+                                "label_zh": "情绪性",
+                                "public_name_zh": "压力反应敏感度",
+                                "domain_theme_zh": "压力、评价、不确定性、关系张力和恢复负荷"
+                            },
+                            "band": {
+                                "internal_band": "high",
+                                "display_band_label": "中高",
+                                "score_range_0_100": [
+                                    60,
+                                    79
+                                ],
+                                "internal_band_threshold": "B4_60_79"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "情绪性中高：高体感预警与恢复需求",
+                            "summary_zh": "你更早感觉到风险、误差、误解和关系张力。",
+                            "body_zh": "情绪性偏高时，你的系统会比很多人更早感到哪里不对。压力、评价、不确定性、边界模糊和关系张力都更容易进入你的体感。优势是风险觉察快，能提前发现环境和关系里的裂缝。代价是，在问题还没真正爆发前，你可能已经承担了很多心理成本。常见误读是把这种反应叫作玻璃心；更准确地说，你是更早有体感，也更需要恢复机制。更好使用方式，是把敏感从内部负荷转成外部信息：更早命名、更早表达、更早安排恢复。",
+                            "short_body_zh": "高体感、高预警；重点不是压低敏感，而是更早外化和恢复。",
+                            "benefit_zh": "能更快察觉风险、误差和关系变化。",
+                            "cost_zh": "容易在问题尚未爆发前就先承担心理负荷。",
+                            "common_misread_zh": "不是玻璃心，而是预警系统更早启动、恢复成本也更真实。",
+                            "action_zh": "当不适出现时先命名：我是在焦虑、受伤、失控感，还是疲惫？",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.n.high.v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_02_quick_understanding",
+                "blocks": [
+                    {
+                        "block_key": "module_02_quick_understanding.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "quick_cards",
+                        "module_key": "module_02_quick_understanding",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "state_scope_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_03_trait_deep_dive",
+                "blocks": [
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.o_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "O",
+                                "label_zh": "开放性",
+                                "public_name_zh": "经验开放度",
+                                "domain_theme_zh": "新经验、复杂概念、审美变化和非标准答案"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "开放性明显偏低：稳定框架中的现实判断",
+                            "summary_zh": "你更容易信任熟悉路径、已验证经验和可落地方案。",
+                            "body_zh": "开放性处在明显偏低区间时，新的概念、审美变化和非标准答案通常不会自动吸引你。你更愿意先确认一件事是否可靠、是否必要、是否真的能改善现实，再决定要不要投入注意力。这样的结构能减少被新鲜感带跑的风险，也能让你在需要稳定执行的环境里保持清醒。代价是，当环境需要试错、跨界理解或重新定义问题时，你可能会先看到不确定和成本，而不是可能性。常见误读是把这种位置理解成“没有想象力”；更准确地说，你的开放性需要明确的现实入口。使用它时，可以把探索压缩成一个小实验，而不是要求自己立刻接受整套新框架。",
+                            "short_body_zh": "更信任熟悉路径和可验证方案；适合稳定落地，也需要给新经验留一个小入口。",
+                            "benefit_zh": "不容易被空洞概念和短期新鲜感裹挟，适合守住现实边界。",
+                            "cost_zh": "在需要试错、跨界理解或快速转换视角时，可能进入较慢。",
+                            "common_misread_zh": "这不等于没有想象力，而是新想法需要先通过现实价值检验。",
+                            "action_zh": "每周只选一个低风险新尝试，先问它能解决什么真实问题。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.o.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.c_high_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "C",
+                                "label_zh": "尽责性",
+                                "public_name_zh": "秩序与推进力",
+                                "domain_theme_zh": "计划、秩序、自我约束、责任执行和持续完成"
+                            },
+                            "band": {
+                                "internal_band": "high",
+                                "display_band_label": "中高",
+                                "score_range_0_100": [
+                                    60,
+                                    79
+                                ],
+                                "internal_band_threshold": "B4_60_79"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "尽责性中高：稳定推进与质量承诺",
+                            "summary_zh": "你更容易把目标、责任和流程变成可持续行动。",
+                            "body_zh": "尽责性偏高时，你通常更重视计划、承诺、标准和收尾。你不太喜欢事情长期悬而未决，也更容易把目标拆成步骤并持续推进。优势是可靠、稳定、能承担复杂任务中的长期成本。代价是，当环境反复变动、他人节奏松散或标准不清时，你更容易感到被拖累。常见误读是把你看成只会按计划执行；更准确地说，你在用结构保护质量和结果。更好使用方式，是把计划留出弹性区间，避免把所有不确定都理解成失控。",
+                            "short_body_zh": "更能稳定推进和守住质量，也需要给计划预留弹性。",
+                            "benefit_zh": "适合长期目标、复杂交付和需要稳定责任感的场景。",
+                            "cost_zh": "对低标准、反复变动和松散协作更容易不耐烦。",
+                            "common_misread_zh": "不是僵硬，而是用结构保护质量、责任和可交付结果。",
+                            "action_zh": "每个计划都预留一个变动缓冲，而不是把调整视为失败。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.c.high.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.e_mid_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "E",
+                                "label_zh": "外向性",
+                                "public_name_zh": "社交能量与进入方式",
+                                "domain_theme_zh": "表达、互动、外部反馈、现场感和能量补给"
+                            },
+                            "band": {
+                                "internal_band": "mid",
+                                "display_band_label": "中位",
+                                "score_range_0_100": [
+                                    40,
+                                    59
+                                ],
+                                "internal_band_threshold": "B3_40_59"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "外向性中位：情境驱动的社交能量",
+                            "summary_zh": "你能互动，也能独处，关键取决于场景质量和自主感。",
+                            "body_zh": "外向性中位时，你既不是长期需要热闹的人，也不是只能独处的人。你可以在合适的人、清楚的目标和有反馈的场景中表达，也会在低质量社交或过度曝光后需要回收能量。优势是你能在内外之间切换，不容易被单一社交模式锁住。代价是，当场景边界模糊、期待不清或噪音过高时，你的进入状态会波动。常见误读是别人觉得你忽然外向、忽然安静；更准确地说，你的表达受场景质量影响。更好使用方式，是主动识别哪些互动给你能量，哪些互动只是消耗。",
+                            "short_body_zh": "能互动也能独处；社交状态取决于场景质量、目标和反馈。",
+                            "benefit_zh": "能在内外节奏之间切换，适应不同协作方式。",
+                            "cost_zh": "不清晰或低质量互动会让表达状态明显波动。",
+                            "common_misread_zh": "不是性格反复，而是社交能量受场景条件影响。",
+                            "action_zh": "记录一周内哪些互动补能、哪些互动耗能，再调整参与方式。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.e.mid.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.a_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "A",
+                                "label_zh": "宜人性",
+                                "public_name_zh": "合作与边界方式",
+                                "domain_theme_zh": "共情、合作、冲突处理、关系承接和边界表达"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "宜人性明显偏低：强边界与事实优先",
+                            "summary_zh": "你更容易先看事实、责任和边界，而不是先维护表面和气。",
+                            "body_zh": "宜人性明显偏低时，你通常不会把维持气氛放在第一优先。你更愿意问：这件事是否合理，责任是否清楚，边界是否被尊重。优势是判断直接、不容易被模糊期待绑架，也更能在复杂局面中切开问题。代价是，你的表达可能被体验为锋利或压迫，尤其在别人更需要情绪承接时。常见误读是把你写成不在乎别人；更准确地说，你不太愿意用牺牲判断来换取表面和平。更好使用方式，是保留清楚，但先交代你的意图，让边界表达不被误读成攻击。",
+                            "short_body_zh": "事实、责任、边界优先；需要让直接表达带上意图说明。",
+                            "benefit_zh": "不容易被模糊期待和无效和气拖住，能迅速切开问题。",
+                            "cost_zh": "表达太快太硬时，容易让关系系统感到压力。",
+                            "common_misread_zh": "不是不在乎别人，而是不愿用牺牲判断换表面和平。",
+                            "action_zh": "在表达不同意见前先补一句：我想把问题说清楚，不是要否定你。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.a.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.n_high_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "N",
+                                "label_zh": "情绪性",
+                                "public_name_zh": "压力反应敏感度",
+                                "domain_theme_zh": "压力、评价、不确定性、关系张力和恢复负荷"
+                            },
+                            "band": {
+                                "internal_band": "high",
+                                "display_band_label": "中高",
+                                "score_range_0_100": [
+                                    60,
+                                    79
+                                ],
+                                "internal_band_threshold": "B4_60_79"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "情绪性中高：高体感预警与恢复需求",
+                            "summary_zh": "你更早感觉到风险、误差、误解和关系张力。",
+                            "body_zh": "情绪性偏高时，你的系统会比很多人更早感到哪里不对。压力、评价、不确定性、边界模糊和关系张力都更容易进入你的体感。优势是风险觉察快，能提前发现环境和关系里的裂缝。代价是，在问题还没真正爆发前，你可能已经承担了很多心理成本。常见误读是把这种反应叫作玻璃心；更准确地说，你是更早有体感，也更需要恢复机制。更好使用方式，是把敏感从内部负荷转成外部信息：更早命名、更早表达、更早安排恢复。",
+                            "short_body_zh": "高体感、高预警；重点不是压低敏感，而是更早外化和恢复。",
+                            "benefit_zh": "能更快察觉风险、误差和关系变化。",
+                            "cost_zh": "容易在问题尚未爆发前就先承担心理负荷。",
+                            "common_misread_zh": "不是玻璃心，而是预警系统更早启动、恢复成本也更真实。",
+                            "action_zh": "当不适出现时先命名：我是在焦虑、受伤、失控感，还是疲惫？",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.n.high.v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_04_coupling",
+                "blocks": [
+                    {
+                        "block_key": "module_04_coupling.coupling_registry.o_c_low_high.v0_3",
+                        "block_kind": "coupling_cards",
+                        "module_key": "module_04_coupling",
+                        "content": {
+                            "coupling_key": "o_low_x_c_high",
+                            "coupling_group": "低开放 × 高尽责",
+                            "involved_traits": [
+                                {
+                                    "trait": "O",
+                                    "trait_label_zh": "开放性"
+                                },
+                                {
+                                    "trait": "C",
+                                    "trait_label_zh": "尽责性"
+                                }
+                            ],
+                            "involved_bands": {
+                                "O": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "C": {
+                                    "internal_band": "high",
+                                    "display_band_label": "偏高"
+                                }
+                            },
+                            "module_key": "module_04_coupling",
+                            "title_zh": "低开放 × 高尽责｜核心动力",
+                            "summary_zh": "说明低开放 × 高尽责如何形成核心动力。",
+                            "body_zh": "低开放 × 高尽责的关键，不是把两个分数并排读，而是看它们怎样一起推动你的进入方式。低开放让你更信任熟悉路径和可验证做法，高尽责让你更愿意把规则、流程和责任执行到底。因此，这组组合更像一套内部动力：一边提供判断和能量，一边也要求更清楚的边界与节奏。它适合放在核心画像里解释主轴，因为它能说明你为什么在某些场景里很快有反应、很快看见问题，又为什么不一定会用最直接或最稳定的方式把反应带出去。这条内容只描述连续维度的互动方式，用于帮助理解当下倾向，不把组合写成固定身份。",
+                            "short_body_zh": "低开放 × 高尽责说明两个维度如何一起影响进入、判断和消耗。",
+                            "benefit_zh": "它带来稳定、可靠、可交付和对既定标准的强维护能力。",
+                            "cost_zh": "代价是面对高不确定变化时，可能先寻找既有答案，较难快速拥抱未成形的新路径。",
+                            "common_misread_zh": "常被误读为保守或不够灵活，其实核心是你更重视稳定、秩序和可承担的结果。",
+                            "action_zh": "在保留核心规则的同时，为新方法预留一个小范围试验区。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim"
+                            ]
+                        },
+                        "projection_refs": [
+                            "dominant_couplings",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "coupling_registry:big5_content_2_o_low_x_c_high_coupling_core_explanation_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_04_coupling.coupling_registry.c_n_high_high.v0_3",
+                        "block_kind": "coupling_cards",
+                        "module_key": "module_04_coupling",
+                        "content": {
+                            "coupling_key": "c_high_x_n_high",
+                            "coupling_group": "高尽责 × 高情绪",
+                            "involved_traits": [
+                                {
+                                    "trait": "C",
+                                    "trait_label_zh": "尽责性"
+                                },
+                                {
+                                    "trait": "N",
+                                    "trait_label_zh": "情绪性"
+                                }
+                            ],
+                            "involved_bands": {
+                                "C": {
+                                    "internal_band": "high",
+                                    "display_band_label": "偏高"
+                                },
+                                "N": {
+                                    "internal_band": "high",
+                                    "display_band_label": "偏高"
+                                }
+                            },
+                            "module_key": "module_04_coupling",
+                            "title_zh": "高尽责 × 高情绪｜核心动力",
+                            "summary_zh": "说明高尽责 × 高情绪如何形成核心动力。",
+                            "body_zh": "高尽责 × 高情绪的关键，不是把两个分数并排读，而是看它们怎样一起推动你的进入方式。高尽责让你重视标准、计划和责任，高情绪让错误、失控和评价更容易被放大感知。因此，这组组合更像一套内部动力：一边提供判断和能量，一边也要求更清楚的边界与节奏。它适合放在核心画像里解释主轴，因为它能说明你为什么在某些场景里很快有反应、很快看见问题，又为什么不一定会用最直接或最稳定的方式把反应带出去。这条内容只描述连续维度的互动方式，用于帮助理解当下倾向，不把组合写成固定身份。",
+                            "short_body_zh": "高尽责 × 高情绪说明两个维度如何一起影响进入、判断和消耗。",
+                            "benefit_zh": "它能形成很强的质量意识、风险预警和自我要求。",
+                            "cost_zh": "代价是系统容易长期绷紧，把普通偏差当成必须马上修正的警报。",
+                            "common_misread_zh": "常被误读为完美主义或控制欲，其实更多是责任系统和预警系统同时过度工作。",
+                            "action_zh": "把高标准拆成必须守住和可以试错两类，避免所有事情都进入警戒级别。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim"
+                            ]
+                        },
+                        "projection_refs": [
+                            "dominant_couplings",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "coupling_registry:big5_content_2_c_high_x_n_high_coupling_core_explanation_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_04_coupling.coupling_registry.a_n_low_high.v0_3",
+                        "block_kind": "coupling_cards",
+                        "module_key": "module_04_coupling",
+                        "content": {
+                            "coupling_key": "a_low_x_n_high",
+                            "coupling_group": "低宜人 × 高情绪",
+                            "involved_traits": [
+                                {
+                                    "trait": "A",
+                                    "trait_label_zh": "宜人性"
+                                },
+                                {
+                                    "trait": "N",
+                                    "trait_label_zh": "情绪性"
+                                }
+                            ],
+                            "involved_bands": {
+                                "A": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "N": {
+                                    "internal_band": "high",
+                                    "display_band_label": "偏高"
+                                }
+                            },
+                            "module_key": "module_04_coupling",
+                            "title_zh": "低宜人 × 高情绪｜核心动力",
+                            "summary_zh": "说明低宜人 × 高情绪如何形成核心动力。",
+                            "body_zh": "低宜人 × 高情绪的关键，不是把两个分数并排读，而是看它们怎样一起推动你的进入方式。低宜人让你更重视事实、边界和责任，高情绪让不确定、误解和摩擦更快被感知。因此，这组组合更像一套内部动力：一边提供判断和能量，一边也要求更清楚的边界与节奏。它适合放在核心画像里解释主轴，因为它能说明你为什么在某些场景里很快有反应、很快看见问题，又为什么不一定会用最直接或最稳定的方式把反应带出去。这条内容只描述连续维度的互动方式，用于帮助理解当下倾向，不把组合写成固定身份。",
+                            "short_body_zh": "低宜人 × 高情绪说明两个维度如何一起影响进入、判断和消耗。",
+                            "benefit_zh": "它让你在复杂关系中更敢看见问题，也不容易被表面和气绑住。",
+                            "cost_zh": "代价是压力高时表达可能更锋利，边界感容易变成压强，让他人先感到防御。",
+                            "common_misread_zh": "常被误读为不好相处或攻击性强，其实核心是边界系统和警觉系统同时上升。",
+                            "action_zh": "先把事实、感受和请求分开表达，避免所有张力都通过强硬语气释放。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim"
+                            ]
+                        },
+                        "projection_refs": [
+                            "dominant_couplings",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "coupling_registry:big5_content_2_a_low_x_n_high_coupling_core_explanation_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_05_facet_reframe",
+                "blocks": [
+                    {
+                        "block_key": "module_05_facet_reframe.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "facet_reframe",
+                        "module_key": "module_05_facet_reframe",
+                        "content": {
+                            "availability": "pending_asset_resolution",
+                            "facets": []
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "facet_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_06_application_matrix",
+                "blocks": [
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "戒备型完美主义者｜个人成长：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成个人成长里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_07_collaboration_manual",
+                "blocks": [
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_document_first.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "戒备型完美主义者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_clear_owner_deadline.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "戒备型完美主义者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_meaning_and_feedback.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "戒备型完美主义者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_quiet_processing_time.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "戒备型完美主义者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_share_safe_manual.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "戒备型完美主义者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_fast_sync_fit.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "戒备型完美主义者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_conflict_protocol.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "戒备型完美主义者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_handoff_clarity.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "vigilant_perfectionist",
+                            "profile_label_zh": "戒备型完美主义者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "高尽责 × 高情绪",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "A": {
+                                    "internal_band": "mid",
+                                    "display_band_label": "中位"
+                                },
+                                "N": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                }
+                            },
+                            "primary_couplings": [
+                                "c_high_x_n_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "戒备型完美主义者｜协作说明书：核心表现方式",
+                            "summary_zh": "将高尽责 × 高情绪转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，戒备型完美主义者这个辅助标签主要提示一种进入方式：强责任和强预警同时运行。你通常不是先被单一分数驱动，而是被高尽责 × 高情绪这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，质量把关、风险前置和责任闭环更容易被调动。如果场景开始接近责任无限上收、目标不清却要求零失误的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕高尽责 × 高情绪做低风险使用。",
+                            "benefit_zh": "帮助你把质量把关、风险前置和责任闭环转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是过度监控、过度承担与难以真正放下可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把戒备型完美主义者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_vigilant_perfectionist__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_08_share_save",
+                "blocks": [
+                    {
+                        "block_key": "module_08_share_save.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "share_save",
+                        "module_key": "module_08_share_save",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "share_safety_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_09_feedback_data_flywheel",
+                "blocks": [
+                    {
+                        "block_key": "module_09_feedback_data_flywheel.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "feedback_block",
+                        "module_key": "module_09_feedback_data_flywheel",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "state_scope_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_10_method_privacy",
+                "blocks": [
+                    {
+                        "block_key": "module_10_method_privacy.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "method_boundary",
+                        "module_key": "module_10_method_privacy",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "method_registry:pilot_boundary"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "backend_required"
+                    }
+                ]
+            }
+        ]
+    }
+}
