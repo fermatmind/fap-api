@@ -47,17 +47,23 @@ final class BigFiveResultPageV2SelectorReferenceConsistencyTest extends TestCase
         ], data_get($report, 'summary.unresolved_by_type'));
     }
 
-    public function test_public_pilot_phase_1_resolution_policy_is_frozen_without_resolving_refs(): void
+    public function test_public_pilot_phase_1_resolution_policy_resolves_only_safe_coupling_aliases(): void
     {
         $report = $this->report();
         $policy = data_get($report, 'public_pilot_resolution_policy');
 
-        $this->assertSame('frozen_for_public_pilot_phase_1', data_get($policy, 'policy_status'));
+        $this->assertSame('safe_coupling_alias_resolution_v0_1_applied', data_get($policy, 'policy_status'));
         $this->assertSame('not_runtime', data_get($policy, 'runtime_use'));
         $this->assertFalse((bool) data_get($policy, 'production_use_allowed', true));
         $this->assertSame(92, data_get($policy, 'current_unresolved_reference_count'));
         $this->assertSame(data_get($report, 'summary.unresolved_by_type'), data_get($policy, 'current_unresolved_by_type'));
+        $this->assertSame(3, data_get($policy, 'public_pilot_resolution_summary.safe_alias_or_normalization_count'));
+        $this->assertSame(38, data_get($policy, 'public_pilot_resolution_summary.new_coupling_required_count'));
+        $this->assertSame(92, data_get($policy, 'public_pilot_resolution_summary.selector_suppression_reference_count'));
+        $this->assertFalse((bool) data_get($policy, 'public_pilot_resolution_summary.selector_suppression_behavior_changed', true));
+        $this->assertTrue((bool) data_get($policy, 'public_pilot_resolution_summary.alias_aware_selector_or_composer_required_before_unsuppression'));
         $this->assertFalse((bool) data_get($policy, 'phase_1_freeze.public_sel_1_may_resolve_refs', true));
+        $this->assertTrue((bool) data_get($policy, 'phase_1_freeze.public_sel_2a_resolves_safe_aliases_only'));
         $this->assertTrue((bool) data_get($policy, 'phase_1_freeze.subsequent_resolution_prs_must_preserve_body_copy'));
         $this->assertTrue((bool) data_get($policy, 'phase_1_freeze.subsequent_resolution_prs_must_preserve_staging_only_flags'));
         $this->assertTrue((bool) data_get($policy, 'phase_1_freeze.selected_unresolved_refs_must_remain_suppressed_until_resolved'));
@@ -67,6 +73,29 @@ final class BigFiveResultPageV2SelectorReferenceConsistencyTest extends TestCase
         $this->assertContains('explicit_suppression_policy', data_get($policy, 'allowed_resolution_modes'));
         $this->assertContains('new_body_copy_generation', data_get($policy, 'disallowed_resolution_modes'));
         $this->assertContains('runtime_selector_rewrite', data_get($policy, 'disallowed_resolution_modes'));
+        $this->assertSame([
+            [
+                'source_coupling_key' => 'c_low_x_e_low',
+                'resolved_to' => 'e_low_x_c_low',
+                'decision_type' => 'EXACT_ALIAS',
+                'semantic_basis' => 'same_traits_same_bands_trait_order_only',
+                'requires_new_asset' => false,
+            ],
+            [
+                'source_coupling_key' => 'e_low_x_n_high',
+                'resolved_to' => 'n_high_x_e_low',
+                'decision_type' => 'EXACT_ALIAS',
+                'semantic_basis' => 'same_traits_same_bands_trait_order_only',
+                'requires_new_asset' => false,
+            ],
+            [
+                'source_coupling_key' => 'o_mid_x_n_high',
+                'resolved_to' => 'n_high_x_o_mid_high',
+                'decision_type' => 'NORMALIZATION_REQUIRED',
+                'semantic_basis' => 'same_traits_same_intended_bands_trait_order_and_mid_high_token_normalization',
+                'requires_new_asset' => false,
+            ],
+        ], data_get($policy, 'approved_coupling_aliases'));
     }
 
     public function test_pass_and_gap_statuses_are_current(): void
@@ -81,6 +110,8 @@ final class BigFiveResultPageV2SelectorReferenceConsistencyTest extends TestCase
         $this->assertSame(0, data_get($checks, 'route_matrix_to_imported_content_assets.unresolved_reference_count'));
 
         $this->assertSame('advisory_gap', data_get($checks, 'selector_coupling_registry_to_coupling_assets.status'));
+        $this->assertSame(3, data_get($checks, 'selector_coupling_registry_to_coupling_assets.resolved_alias_reference_count'));
+        $this->assertSame(38, data_get($checks, 'selector_coupling_registry_to_coupling_assets.new_coupling_required_count'));
         $this->assertSame(41, data_get($checks, 'selector_coupling_registry_to_coupling_assets.unresolved_reference_count'));
         $this->assertSame('advisory_gap', data_get($checks, 'selector_profile_signature_registry_to_canonical_profiles.status'));
         $this->assertSame(19, data_get($checks, 'selector_profile_signature_registry_to_canonical_profiles.unresolved_reference_count'));
@@ -97,6 +128,30 @@ final class BigFiveResultPageV2SelectorReferenceConsistencyTest extends TestCase
             'reference_type' => 'coupling_key',
             'reference' => 'o_high_x_c_high',
         ], data_get($checks, 'selector_coupling_registry_to_coupling_assets.unresolved_references'));
+
+        $this->assertSame([
+            [
+                'asset_key' => 'asset.module_04_coupling.coupling_registry.c_e_low_low.v0_3',
+                'reference_type' => 'coupling_key',
+                'reference' => 'c_low_x_e_low',
+                'resolved_to' => 'e_low_x_c_low',
+                'decision_type' => 'EXACT_ALIAS',
+            ],
+            [
+                'asset_key' => 'asset.module_04_coupling.coupling_registry.e_n_low_high.v0_3',
+                'reference_type' => 'coupling_key',
+                'reference' => 'e_low_x_n_high',
+                'resolved_to' => 'n_high_x_e_low',
+                'decision_type' => 'EXACT_ALIAS',
+            ],
+            [
+                'asset_key' => 'asset.module_04_coupling.coupling_registry.o_n_mid_high.v0_3',
+                'reference_type' => 'coupling_key',
+                'reference' => 'o_mid_x_n_high',
+                'resolved_to' => 'n_high_x_o_mid_high',
+                'decision_type' => 'NORMALIZATION_REQUIRED',
+            ],
+        ], data_get($checks, 'selector_coupling_registry_to_coupling_assets.resolved_references'));
 
         $this->assertContains([
             'asset_key' => 'asset.module_01_hero.profile_signature_registry.structured_stabilizer.v0_3',

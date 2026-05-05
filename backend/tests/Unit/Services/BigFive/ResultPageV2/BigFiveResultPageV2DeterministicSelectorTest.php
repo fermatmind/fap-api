@@ -28,7 +28,7 @@ final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
         $expectedAvailableSlots = array_values(array_diff($this->o59ExpectedSlots(), $this->o59ExpectedUnresolvedSlots()));
 
         $this->assertSame($expectedAvailableSlots, $selectedSlots);
-        $this->assertCount(6, $result->selectedAssetRefs);
+        $this->assertCount(count($expectedAvailableSlots), $result->selectedAssetRefs);
         $this->assertSame('staging_only', $result->safetyDecisions['runtime_use']);
         $this->assertFalse($result->safetyDecisions['production_use_allowed']);
         $this->assertFalse($result->safetyDecisions['ready_for_pilot']);
@@ -49,8 +49,8 @@ final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
             $this->assertArrayNotHasKey($ref->assetKey, $unresolvedAssetKeys, $ref->assetKey);
         }
 
-        $this->assertSame(92, count($result->unresolvedRefSuppressions));
-        $this->assertSame(92, count($result->suppressedAssetRefs));
+        $this->assertSame(count($unresolvedAssetKeys), count($result->unresolvedRefSuppressions));
+        $this->assertSame(count($unresolvedAssetKeys), count($result->suppressedAssetRefs));
         $this->assertSame(
             array_keys($unresolvedAssetKeys),
             array_map(static fn (array $suppression): string => (string) $suppression['asset_key'], $result->unresolvedRefSuppressions),
