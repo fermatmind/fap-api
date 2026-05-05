@@ -1,0 +1,215 @@
+{
+  "schema": "fap.big5.content_6.route_matrix.profile_family_rules.v0_1_1",
+  "version": "v0.1.1",
+  "purpose": "Define nearest-canonical-profile routing rules for all 3125 Big Five 5-band combinations.",
+  "combination_key_format": "O{1-5}_C{1-5}_E{1-5}_A{1-5}_N{1-5}",
+  "band_rules": {
+    "1": "very_low",
+    "2": "low",
+    "3": "mid",
+    "4": "high",
+    "5": "very_high"
+  },
+  "nearest_profile_method": {
+    "method": "weighted_manhattan_distance_to_8_canonical_profiles",
+    "weights": {
+      "O": 1.0,
+      "C": 1.15,
+      "E": 1.15,
+      "A": 1.0,
+      "N": 1.25
+    },
+    "tie_break_order": [
+      "sensitive_independent_thinker",
+      "overloaded_internalizer",
+      "vigilant_perfectionist",
+      "complex_explorer_low_structure",
+      "quiet_deep_worker",
+      "connective_coordinator",
+      "sharp_exploratory_driver",
+      "orderly_supporter"
+    ],
+    "special_exact_rules": {
+      "O3_C2_E2_A3_N4": "sensitive_independent_thinker",
+      "O3_C2_E2_A3_N5": "overloaded_internalizer"
+    },
+    "note": "Profile labels are assistive labels for routing only. They are not user identity categories or fixed Big Five types."
+  },
+  "canonical_profiles": [
+    {
+      "profile_key": "sensitive_independent_thinker",
+      "profile_label_zh": "敏锐的独立思考者",
+      "label_role_zh": "辅助理解标签",
+      "not_fixed_type": true,
+      "canonical_combination_key": "O3_C2_E2_A3_N4",
+      "band_pattern": {
+        "O": "mid",
+        "C": "low",
+        "E": "low",
+        "A": "mid",
+        "N": "high"
+      },
+      "axis_zh": "高敏感 × 中高开放 × 克制进入",
+      "primary_couplings_supported_by_B5_CONTENT_2": [
+        "n_high_x_o_mid_high",
+        "n_high_x_e_low"
+      ]
+    },
+    {
+      "profile_key": "overloaded_internalizer",
+      "profile_label_zh": "高负荷内耗型",
+      "label_role_zh": "辅助理解标签",
+      "not_fixed_type": true,
+      "canonical_combination_key": "O3_C2_E2_A3_N5",
+      "band_pattern": {
+        "O": "mid",
+        "C": "low",
+        "E": "low",
+        "A": "mid",
+        "N": "very_high"
+      },
+      "axis_zh": "高情绪 × 低尽责 × 低外向",
+      "primary_couplings_supported_by_B5_CONTENT_2": [
+        "n_high_x_e_low",
+        "c_low_x_n_high"
+      ]
+    },
+    {
+      "profile_key": "vigilant_perfectionist",
+      "profile_label_zh": "戒备型完美主义者",
+      "label_role_zh": "辅助理解标签",
+      "not_fixed_type": true,
+      "canonical_combination_key": "O3_C5_E3_A3_N5",
+      "band_pattern": {
+        "O": "mid",
+        "C": "very_high",
+        "E": "mid",
+        "A": "mid",
+        "N": "very_high"
+      },
+      "axis_zh": "高尽责 × 高情绪",
+      "primary_couplings_supported_by_B5_CONTENT_2": [
+        "c_high_x_n_high"
+      ]
+    },
+    {
+      "profile_key": "complex_explorer_low_structure",
+      "profile_label_zh": "复杂理解型探索者",
+      "label_role_zh": "辅助理解标签",
+      "not_fixed_type": true,
+      "canonical_combination_key": "O5_C2_E3_A3_N3",
+      "band_pattern": {
+        "O": "very_high",
+        "C": "low",
+        "E": "mid",
+        "A": "mid",
+        "N": "mid"
+      },
+      "axis_zh": "高开放 × 低尽责",
+      "primary_couplings_supported_by_B5_CONTENT_2": [
+        "o_high_x_c_low"
+      ]
+    },
+    {
+      "profile_key": "quiet_deep_worker",
+      "profile_label_zh": "稳态深工者",
+      "label_role_zh": "辅助理解标签",
+      "not_fixed_type": true,
+      "canonical_combination_key": "O3_C5_E2_A3_N1",
+      "band_pattern": {
+        "O": "mid",
+        "C": "very_high",
+        "E": "low",
+        "A": "mid",
+        "N": "very_low"
+      },
+      "axis_zh": "低外向 × 高尽责 × 低情绪",
+      "primary_couplings_supported_by_B5_CONTENT_2": []
+    },
+    {
+      "profile_key": "connective_coordinator",
+      "profile_label_zh": "连接驱动协调者",
+      "label_role_zh": "辅助理解标签",
+      "not_fixed_type": true,
+      "canonical_combination_key": "O3_C3_E5_A5_N1",
+      "band_pattern": {
+        "O": "mid",
+        "C": "mid",
+        "E": "very_high",
+        "A": "very_high",
+        "N": "very_low"
+      },
+      "axis_zh": "高外向 × 高宜人 × 低情绪",
+      "primary_couplings_supported_by_B5_CONTENT_2": [
+        "e_high_x_a_high"
+      ]
+    },
+    {
+      "profile_key": "sharp_exploratory_driver",
+      "profile_label_zh": "锋利探索推进者",
+      "label_role_zh": "辅助理解标签",
+      "not_fixed_type": true,
+      "canonical_combination_key": "O5_C3_E5_A1_N3",
+      "band_pattern": {
+        "O": "very_high",
+        "C": "mid",
+        "E": "very_high",
+        "A": "very_low",
+        "N": "mid"
+      },
+      "axis_zh": "高开放 × 低宜人 × 高外向",
+      "primary_couplings_supported_by_B5_CONTENT_2": [
+        "o_high_x_a_low"
+      ]
+    },
+    {
+      "profile_key": "orderly_supporter",
+      "profile_label_zh": "秩序维护型支持者",
+      "label_role_zh": "辅助理解标签",
+      "not_fixed_type": true,
+      "canonical_combination_key": "O1_C5_E3_A5_N2",
+      "band_pattern": {
+        "O": "very_low",
+        "C": "very_high",
+        "E": "mid",
+        "A": "very_high",
+        "N": "low"
+      },
+      "axis_zh": "低开放 × 高尽责 × 高宜人",
+      "primary_couplings_supported_by_B5_CONTENT_2": [
+        "o_low_x_c_high"
+      ]
+    }
+  ],
+  "safety_notes": [
+    "Do not expose combination_key as a user-visible type label.",
+    "Do not use user_confirmed_type to override measured results.",
+    "Do not import as production content before rendered preview QA and merge policy pass."
+  ],
+  "semantic_route_consistency_revision": {
+    "purpose": "Prevent low-confidence nearest canonical profile references from leaking into user-visible axis, route, share or resonance text.",
+    "canonical_profile_usage": {
+      "direct_profile_route": "profile_match_confidence=high; public label allowed; visible axis still checked against domain bands unless explicitly canonical O59.",
+      "nearest_route_only": "profile_match_confidence=medium; public label conditional; visible axis generated from actual domain_bands.",
+      "generic_band_route": "profile_match_confidence=low; profile label not public; visible route text generated from actual domain_bands only."
+    },
+    "profile_label_public_allowed_rules": {
+      "high": true,
+      "medium": "conditional",
+      "low": false
+    },
+    "o59_exact_exception": {
+      "combination_key": "O3_C2_E2_A3_N4",
+      "primary_axis_zh": "高敏感 × 中高开放 × 克制进入",
+      "canonical_profile_usage": "direct_profile_route",
+      "profile_label_public_allowed": true
+    },
+    "user_visible_fields_checked": [
+      "primary_axis_zh",
+      "one_sentence_route_zh",
+      "share_safe_summary_zh",
+      "low_resonance_response_zh",
+      "partial_resonance_response_zh"
+    ]
+  }
+}

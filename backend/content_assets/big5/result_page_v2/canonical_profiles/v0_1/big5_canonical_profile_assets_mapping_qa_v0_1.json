@@ -1,0 +1,969 @@
+{
+  "schema": "fap.big5.content_assets.canonical_profile_assets.mapping_qa.v0_1",
+  "batch_key": "B5-CONTENT-4",
+  "version": "v0.1",
+  "created_at_utc": "2026-05-04T14:32:45.490581Z",
+  "summary": {
+    "asset_count": 64,
+    "pass_count": 64,
+    "fail_count": 0,
+    "section_coverage": {
+      "hero_summary": 8,
+      "domains_overview": 8,
+      "domain_deep_dive": 8,
+      "facet_details": 8,
+      "core_portrait": 8,
+      "norms_comparison": 8,
+      "action_plan": 8,
+      "methodology_and_access": 8
+    },
+    "profile_coverage": {
+      "sensitive_independent_thinker": 8,
+      "vigilant_perfectionist": 8,
+      "complex_explorer_low_structure": 8,
+      "quiet_deep_worker": 8,
+      "connective_coordinator": 8,
+      "sharp_exploratory_driver": 8,
+      "orderly_supporter": 8,
+      "overloaded_internalizer": 8
+    }
+  },
+  "items": [
+    {
+      "asset_key": "big5_canonical_profile_sensitive_independent_thinker_hero_summary_v0_1",
+      "profile_key": "sensitive_independent_thinker",
+      "section_key": "hero_summary",
+      "module_keys": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_entry.sensitive_independent_thinker",
+      "section_route_key": "sensitive_independent_thinker.hero_summary",
+      "must_include_asset_count": 13,
+      "must_suppress_asset_count": 9,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sensitive_independent_thinker_domains_overview_v0_1",
+      "profile_key": "sensitive_independent_thinker",
+      "section_key": "domains_overview",
+      "module_keys": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_domain_route.sensitive_independent_thinker",
+      "section_route_key": "sensitive_independent_thinker.domains_overview",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 9,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sensitive_independent_thinker_domain_deep_dive_v0_1",
+      "profile_key": "sensitive_independent_thinker",
+      "section_key": "domain_deep_dive",
+      "module_keys": [
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_trait_route.sensitive_independent_thinker",
+      "section_route_key": "sensitive_independent_thinker.domain_deep_dive",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 9,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sensitive_independent_thinker_facet_details_v0_1",
+      "profile_key": "sensitive_independent_thinker",
+      "section_key": "facet_details",
+      "module_keys": [
+        "module_05_facet_reframe"
+      ],
+      "slot_key": "canonical_profile_facet_route.sensitive_independent_thinker",
+      "section_route_key": "sensitive_independent_thinker.facet_details",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 11,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sensitive_independent_thinker_core_portrait_v0_1",
+      "profile_key": "sensitive_independent_thinker",
+      "section_key": "core_portrait",
+      "module_keys": [
+        "module_04_coupling",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_coupling_route.sensitive_independent_thinker",
+      "section_route_key": "sensitive_independent_thinker.core_portrait",
+      "must_include_asset_count": 13,
+      "must_suppress_asset_count": 9,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sensitive_independent_thinker_norms_comparison_v0_1",
+      "profile_key": "sensitive_independent_thinker",
+      "section_key": "norms_comparison",
+      "module_keys": [
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_norms_route.sensitive_independent_thinker",
+      "section_route_key": "sensitive_independent_thinker.norms_comparison",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 11,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sensitive_independent_thinker_action_plan_v0_1",
+      "profile_key": "sensitive_independent_thinker",
+      "section_key": "action_plan",
+      "module_keys": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "slot_key": "canonical_profile_action_route.sensitive_independent_thinker",
+      "section_route_key": "sensitive_independent_thinker.action_plan",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sensitive_independent_thinker_methodology_and_access_v0_1",
+      "profile_key": "sensitive_independent_thinker",
+      "section_key": "methodology_and_access",
+      "module_keys": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_method_route.sensitive_independent_thinker",
+      "section_route_key": "sensitive_independent_thinker.methodology_and_access",
+      "must_include_asset_count": 6,
+      "must_suppress_asset_count": 9,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_vigilant_perfectionist_hero_summary_v0_1",
+      "profile_key": "vigilant_perfectionist",
+      "section_key": "hero_summary",
+      "module_keys": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_entry.vigilant_perfectionist",
+      "section_route_key": "vigilant_perfectionist.hero_summary",
+      "must_include_asset_count": 10,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_vigilant_perfectionist_domains_overview_v0_1",
+      "profile_key": "vigilant_perfectionist",
+      "section_key": "domains_overview",
+      "module_keys": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_domain_route.vigilant_perfectionist",
+      "section_route_key": "vigilant_perfectionist.domains_overview",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_vigilant_perfectionist_domain_deep_dive_v0_1",
+      "profile_key": "vigilant_perfectionist",
+      "section_key": "domain_deep_dive",
+      "module_keys": [
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_trait_route.vigilant_perfectionist",
+      "section_route_key": "vigilant_perfectionist.domain_deep_dive",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_vigilant_perfectionist_facet_details_v0_1",
+      "profile_key": "vigilant_perfectionist",
+      "section_key": "facet_details",
+      "module_keys": [
+        "module_05_facet_reframe"
+      ],
+      "slot_key": "canonical_profile_facet_route.vigilant_perfectionist",
+      "section_route_key": "vigilant_perfectionist.facet_details",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_vigilant_perfectionist_core_portrait_v0_1",
+      "profile_key": "vigilant_perfectionist",
+      "section_key": "core_portrait",
+      "module_keys": [
+        "module_04_coupling",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_coupling_route.vigilant_perfectionist",
+      "section_route_key": "vigilant_perfectionist.core_portrait",
+      "must_include_asset_count": 9,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_vigilant_perfectionist_norms_comparison_v0_1",
+      "profile_key": "vigilant_perfectionist",
+      "section_key": "norms_comparison",
+      "module_keys": [
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_norms_route.vigilant_perfectionist",
+      "section_route_key": "vigilant_perfectionist.norms_comparison",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_vigilant_perfectionist_action_plan_v0_1",
+      "profile_key": "vigilant_perfectionist",
+      "section_key": "action_plan",
+      "module_keys": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "slot_key": "canonical_profile_action_route.vigilant_perfectionist",
+      "section_route_key": "vigilant_perfectionist.action_plan",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 11,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_vigilant_perfectionist_methodology_and_access_v0_1",
+      "profile_key": "vigilant_perfectionist",
+      "section_key": "methodology_and_access",
+      "module_keys": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_method_route.vigilant_perfectionist",
+      "section_route_key": "vigilant_perfectionist.methodology_and_access",
+      "must_include_asset_count": 6,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_complex_explorer_low_structure_hero_summary_v0_1",
+      "profile_key": "complex_explorer_low_structure",
+      "section_key": "hero_summary",
+      "module_keys": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_entry.complex_explorer_low_structure",
+      "section_route_key": "complex_explorer_low_structure.hero_summary",
+      "must_include_asset_count": 10,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_complex_explorer_low_structure_domains_overview_v0_1",
+      "profile_key": "complex_explorer_low_structure",
+      "section_key": "domains_overview",
+      "module_keys": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_domain_route.complex_explorer_low_structure",
+      "section_route_key": "complex_explorer_low_structure.domains_overview",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_complex_explorer_low_structure_domain_deep_dive_v0_1",
+      "profile_key": "complex_explorer_low_structure",
+      "section_key": "domain_deep_dive",
+      "module_keys": [
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_trait_route.complex_explorer_low_structure",
+      "section_route_key": "complex_explorer_low_structure.domain_deep_dive",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_complex_explorer_low_structure_facet_details_v0_1",
+      "profile_key": "complex_explorer_low_structure",
+      "section_key": "facet_details",
+      "module_keys": [
+        "module_05_facet_reframe"
+      ],
+      "slot_key": "canonical_profile_facet_route.complex_explorer_low_structure",
+      "section_route_key": "complex_explorer_low_structure.facet_details",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_complex_explorer_low_structure_core_portrait_v0_1",
+      "profile_key": "complex_explorer_low_structure",
+      "section_key": "core_portrait",
+      "module_keys": [
+        "module_04_coupling",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_coupling_route.complex_explorer_low_structure",
+      "section_route_key": "complex_explorer_low_structure.core_portrait",
+      "must_include_asset_count": 9,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_complex_explorer_low_structure_norms_comparison_v0_1",
+      "profile_key": "complex_explorer_low_structure",
+      "section_key": "norms_comparison",
+      "module_keys": [
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_norms_route.complex_explorer_low_structure",
+      "section_route_key": "complex_explorer_low_structure.norms_comparison",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_complex_explorer_low_structure_action_plan_v0_1",
+      "profile_key": "complex_explorer_low_structure",
+      "section_key": "action_plan",
+      "module_keys": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "slot_key": "canonical_profile_action_route.complex_explorer_low_structure",
+      "section_route_key": "complex_explorer_low_structure.action_plan",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 11,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_complex_explorer_low_structure_methodology_and_access_v0_1",
+      "profile_key": "complex_explorer_low_structure",
+      "section_key": "methodology_and_access",
+      "module_keys": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_method_route.complex_explorer_low_structure",
+      "section_route_key": "complex_explorer_low_structure.methodology_and_access",
+      "must_include_asset_count": 6,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_quiet_deep_worker_hero_summary_v0_1",
+      "profile_key": "quiet_deep_worker",
+      "section_key": "hero_summary",
+      "module_keys": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_entry.quiet_deep_worker",
+      "section_route_key": "quiet_deep_worker.hero_summary",
+      "must_include_asset_count": 10,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_quiet_deep_worker_domains_overview_v0_1",
+      "profile_key": "quiet_deep_worker",
+      "section_key": "domains_overview",
+      "module_keys": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_domain_route.quiet_deep_worker",
+      "section_route_key": "quiet_deep_worker.domains_overview",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_quiet_deep_worker_domain_deep_dive_v0_1",
+      "profile_key": "quiet_deep_worker",
+      "section_key": "domain_deep_dive",
+      "module_keys": [
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_trait_route.quiet_deep_worker",
+      "section_route_key": "quiet_deep_worker.domain_deep_dive",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_quiet_deep_worker_facet_details_v0_1",
+      "profile_key": "quiet_deep_worker",
+      "section_key": "facet_details",
+      "module_keys": [
+        "module_05_facet_reframe"
+      ],
+      "slot_key": "canonical_profile_facet_route.quiet_deep_worker",
+      "section_route_key": "quiet_deep_worker.facet_details",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_quiet_deep_worker_core_portrait_v0_1",
+      "profile_key": "quiet_deep_worker",
+      "section_key": "core_portrait",
+      "module_keys": [
+        "module_04_coupling",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_coupling_route.quiet_deep_worker",
+      "section_route_key": "quiet_deep_worker.core_portrait",
+      "must_include_asset_count": 9,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_quiet_deep_worker_norms_comparison_v0_1",
+      "profile_key": "quiet_deep_worker",
+      "section_key": "norms_comparison",
+      "module_keys": [
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_norms_route.quiet_deep_worker",
+      "section_route_key": "quiet_deep_worker.norms_comparison",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_quiet_deep_worker_action_plan_v0_1",
+      "profile_key": "quiet_deep_worker",
+      "section_key": "action_plan",
+      "module_keys": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "slot_key": "canonical_profile_action_route.quiet_deep_worker",
+      "section_route_key": "quiet_deep_worker.action_plan",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 11,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_quiet_deep_worker_methodology_and_access_v0_1",
+      "profile_key": "quiet_deep_worker",
+      "section_key": "methodology_and_access",
+      "module_keys": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_method_route.quiet_deep_worker",
+      "section_route_key": "quiet_deep_worker.methodology_and_access",
+      "must_include_asset_count": 6,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_connective_coordinator_hero_summary_v0_1",
+      "profile_key": "connective_coordinator",
+      "section_key": "hero_summary",
+      "module_keys": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_entry.connective_coordinator",
+      "section_route_key": "connective_coordinator.hero_summary",
+      "must_include_asset_count": 10,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_connective_coordinator_domains_overview_v0_1",
+      "profile_key": "connective_coordinator",
+      "section_key": "domains_overview",
+      "module_keys": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_domain_route.connective_coordinator",
+      "section_route_key": "connective_coordinator.domains_overview",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_connective_coordinator_domain_deep_dive_v0_1",
+      "profile_key": "connective_coordinator",
+      "section_key": "domain_deep_dive",
+      "module_keys": [
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_trait_route.connective_coordinator",
+      "section_route_key": "connective_coordinator.domain_deep_dive",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_connective_coordinator_facet_details_v0_1",
+      "profile_key": "connective_coordinator",
+      "section_key": "facet_details",
+      "module_keys": [
+        "module_05_facet_reframe"
+      ],
+      "slot_key": "canonical_profile_facet_route.connective_coordinator",
+      "section_route_key": "connective_coordinator.facet_details",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_connective_coordinator_core_portrait_v0_1",
+      "profile_key": "connective_coordinator",
+      "section_key": "core_portrait",
+      "module_keys": [
+        "module_04_coupling",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_coupling_route.connective_coordinator",
+      "section_route_key": "connective_coordinator.core_portrait",
+      "must_include_asset_count": 9,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_connective_coordinator_norms_comparison_v0_1",
+      "profile_key": "connective_coordinator",
+      "section_key": "norms_comparison",
+      "module_keys": [
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_norms_route.connective_coordinator",
+      "section_route_key": "connective_coordinator.norms_comparison",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_connective_coordinator_action_plan_v0_1",
+      "profile_key": "connective_coordinator",
+      "section_key": "action_plan",
+      "module_keys": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "slot_key": "canonical_profile_action_route.connective_coordinator",
+      "section_route_key": "connective_coordinator.action_plan",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 11,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_connective_coordinator_methodology_and_access_v0_1",
+      "profile_key": "connective_coordinator",
+      "section_key": "methodology_and_access",
+      "module_keys": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_method_route.connective_coordinator",
+      "section_route_key": "connective_coordinator.methodology_and_access",
+      "must_include_asset_count": 6,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sharp_exploratory_driver_hero_summary_v0_1",
+      "profile_key": "sharp_exploratory_driver",
+      "section_key": "hero_summary",
+      "module_keys": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_entry.sharp_exploratory_driver",
+      "section_route_key": "sharp_exploratory_driver.hero_summary",
+      "must_include_asset_count": 11,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sharp_exploratory_driver_domains_overview_v0_1",
+      "profile_key": "sharp_exploratory_driver",
+      "section_key": "domains_overview",
+      "module_keys": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_domain_route.sharp_exploratory_driver",
+      "section_route_key": "sharp_exploratory_driver.domains_overview",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sharp_exploratory_driver_domain_deep_dive_v0_1",
+      "profile_key": "sharp_exploratory_driver",
+      "section_key": "domain_deep_dive",
+      "module_keys": [
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_trait_route.sharp_exploratory_driver",
+      "section_route_key": "sharp_exploratory_driver.domain_deep_dive",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sharp_exploratory_driver_facet_details_v0_1",
+      "profile_key": "sharp_exploratory_driver",
+      "section_key": "facet_details",
+      "module_keys": [
+        "module_05_facet_reframe"
+      ],
+      "slot_key": "canonical_profile_facet_route.sharp_exploratory_driver",
+      "section_route_key": "sharp_exploratory_driver.facet_details",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sharp_exploratory_driver_core_portrait_v0_1",
+      "profile_key": "sharp_exploratory_driver",
+      "section_key": "core_portrait",
+      "module_keys": [
+        "module_04_coupling",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_coupling_route.sharp_exploratory_driver",
+      "section_route_key": "sharp_exploratory_driver.core_portrait",
+      "must_include_asset_count": 10,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sharp_exploratory_driver_norms_comparison_v0_1",
+      "profile_key": "sharp_exploratory_driver",
+      "section_key": "norms_comparison",
+      "module_keys": [
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_norms_route.sharp_exploratory_driver",
+      "section_route_key": "sharp_exploratory_driver.norms_comparison",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sharp_exploratory_driver_action_plan_v0_1",
+      "profile_key": "sharp_exploratory_driver",
+      "section_key": "action_plan",
+      "module_keys": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "slot_key": "canonical_profile_action_route.sharp_exploratory_driver",
+      "section_route_key": "sharp_exploratory_driver.action_plan",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 11,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_sharp_exploratory_driver_methodology_and_access_v0_1",
+      "profile_key": "sharp_exploratory_driver",
+      "section_key": "methodology_and_access",
+      "module_keys": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_method_route.sharp_exploratory_driver",
+      "section_route_key": "sharp_exploratory_driver.methodology_and_access",
+      "must_include_asset_count": 6,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_orderly_supporter_hero_summary_v0_1",
+      "profile_key": "orderly_supporter",
+      "section_key": "hero_summary",
+      "module_keys": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_entry.orderly_supporter",
+      "section_route_key": "orderly_supporter.hero_summary",
+      "must_include_asset_count": 10,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_orderly_supporter_domains_overview_v0_1",
+      "profile_key": "orderly_supporter",
+      "section_key": "domains_overview",
+      "module_keys": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_domain_route.orderly_supporter",
+      "section_route_key": "orderly_supporter.domains_overview",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_orderly_supporter_domain_deep_dive_v0_1",
+      "profile_key": "orderly_supporter",
+      "section_key": "domain_deep_dive",
+      "module_keys": [
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_trait_route.orderly_supporter",
+      "section_route_key": "orderly_supporter.domain_deep_dive",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_orderly_supporter_facet_details_v0_1",
+      "profile_key": "orderly_supporter",
+      "section_key": "facet_details",
+      "module_keys": [
+        "module_05_facet_reframe"
+      ],
+      "slot_key": "canonical_profile_facet_route.orderly_supporter",
+      "section_route_key": "orderly_supporter.facet_details",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_orderly_supporter_core_portrait_v0_1",
+      "profile_key": "orderly_supporter",
+      "section_key": "core_portrait",
+      "module_keys": [
+        "module_04_coupling",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_coupling_route.orderly_supporter",
+      "section_route_key": "orderly_supporter.core_portrait",
+      "must_include_asset_count": 9,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_orderly_supporter_norms_comparison_v0_1",
+      "profile_key": "orderly_supporter",
+      "section_key": "norms_comparison",
+      "module_keys": [
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_norms_route.orderly_supporter",
+      "section_route_key": "orderly_supporter.norms_comparison",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_orderly_supporter_action_plan_v0_1",
+      "profile_key": "orderly_supporter",
+      "section_key": "action_plan",
+      "module_keys": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "slot_key": "canonical_profile_action_route.orderly_supporter",
+      "section_route_key": "orderly_supporter.action_plan",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 11,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_orderly_supporter_methodology_and_access_v0_1",
+      "profile_key": "orderly_supporter",
+      "section_key": "methodology_and_access",
+      "module_keys": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_method_route.orderly_supporter",
+      "section_route_key": "orderly_supporter.methodology_and_access",
+      "must_include_asset_count": 6,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_overloaded_internalizer_hero_summary_v0_1",
+      "profile_key": "overloaded_internalizer",
+      "section_key": "hero_summary",
+      "module_keys": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_entry.overloaded_internalizer",
+      "section_route_key": "overloaded_internalizer.hero_summary",
+      "must_include_asset_count": 11,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_overloaded_internalizer_domains_overview_v0_1",
+      "profile_key": "overloaded_internalizer",
+      "section_key": "domains_overview",
+      "module_keys": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_domain_route.overloaded_internalizer",
+      "section_route_key": "overloaded_internalizer.domains_overview",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_overloaded_internalizer_domain_deep_dive_v0_1",
+      "profile_key": "overloaded_internalizer",
+      "section_key": "domain_deep_dive",
+      "module_keys": [
+        "module_03_trait_deep_dive"
+      ],
+      "slot_key": "canonical_profile_trait_route.overloaded_internalizer",
+      "section_route_key": "overloaded_internalizer.domain_deep_dive",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_overloaded_internalizer_facet_details_v0_1",
+      "profile_key": "overloaded_internalizer",
+      "section_key": "facet_details",
+      "module_keys": [
+        "module_05_facet_reframe"
+      ],
+      "slot_key": "canonical_profile_facet_route.overloaded_internalizer",
+      "section_route_key": "overloaded_internalizer.facet_details",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_overloaded_internalizer_core_portrait_v0_1",
+      "profile_key": "overloaded_internalizer",
+      "section_key": "core_portrait",
+      "module_keys": [
+        "module_04_coupling",
+        "module_02_quick_understanding"
+      ],
+      "slot_key": "canonical_profile_coupling_route.overloaded_internalizer",
+      "section_route_key": "overloaded_internalizer.core_portrait",
+      "must_include_asset_count": 11,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_overloaded_internalizer_norms_comparison_v0_1",
+      "profile_key": "overloaded_internalizer",
+      "section_key": "norms_comparison",
+      "module_keys": [
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_norms_route.overloaded_internalizer",
+      "section_route_key": "overloaded_internalizer.norms_comparison",
+      "must_include_asset_count": 8,
+      "must_suppress_asset_count": 12,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_overloaded_internalizer_action_plan_v0_1",
+      "profile_key": "overloaded_internalizer",
+      "section_key": "action_plan",
+      "module_keys": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "slot_key": "canonical_profile_action_route.overloaded_internalizer",
+      "section_route_key": "overloaded_internalizer.action_plan",
+      "must_include_asset_count": 7,
+      "must_suppress_asset_count": 11,
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "asset_key": "big5_canonical_profile_overloaded_internalizer_methodology_and_access_v0_1",
+      "profile_key": "overloaded_internalizer",
+      "section_key": "methodology_and_access",
+      "module_keys": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "slot_key": "canonical_profile_method_route.overloaded_internalizer",
+      "section_route_key": "overloaded_internalizer.methodology_and_access",
+      "must_include_asset_count": 6,
+      "must_suppress_asset_count": 10,
+      "status": "PASS",
+      "issues": []
+    }
+  ]
+}

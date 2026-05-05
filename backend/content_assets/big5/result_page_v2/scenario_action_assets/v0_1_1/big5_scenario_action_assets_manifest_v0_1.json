@@ -1,0 +1,118 @@
+{
+  "schema": "fap.big5.content_assets.scenario_action.manifest.v0_1",
+  "package": "B5-CONTENT-5",
+  "version": "v0.1.1",
+  "created_at_utc": "2026-05-04T14:53:08Z",
+  "asset_count": 160,
+  "expected_asset_count": 160,
+  "profile_count": 8,
+  "scenario_count": 5,
+  "asset_roles_per_profile_scenario": 4,
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "source_context": {
+    "module_master": "FermatMind Big Five 新版结果页正式上线 V2.0",
+    "narrative_master": "FermatMind Big Five 完整结果页全文",
+    "prior_assets": [
+      "B5-CONTENT-0 v0.1.1",
+      "B5-A-lite v0.1",
+      "B5-CONTENT-1",
+      "B5-CONTENT-2",
+      "B5-CONTENT-3",
+      "B5-CONTENT-4"
+    ],
+    "qa_policy_pack": "staging_only__not_body_source"
+  },
+  "files": {
+    "README.md": {
+      "sha256": "a7ea7471f9f1c2af4861bbc98e93b30919e1dad1dd75906824c82639ed4275d7",
+      "bytes": 1641
+    },
+    "SHA256SUMS.txt": {
+      "self_hash_not_applicable": true,
+      "reason": "SHA256SUMS.txt does not embed its own sha256 to avoid self-referential checksum drift."
+    },
+    "big5_scenario_action_assets_coverage_v0_1.csv": {
+      "sha256": "b15412ef5e92e11940acb1d58afdd5abbe976f5708e39711426997261669da4a",
+      "bytes": 778
+    },
+    "big5_scenario_action_assets_main_v0_1.csv": {
+      "sha256": "b8d65c42f2b997b532276cf08547e0aefa9fff8fa3ceb6d85d1aa4ffbc551e7d",
+      "bytes": 331320
+    },
+    "big5_scenario_action_assets_manifest_v0_1.json": {
+      "self_hash_not_applicable": true,
+      "hash_recorded_in": "SHA256SUMS.txt",
+      "reason": "Manifest self-hash is not embedded to avoid self-referential checksum drift."
+    },
+    "big5_scenario_action_assets_mapping_qa_v0_1.csv": {
+      "sha256": "51c30fd6d1efdc10f8a969cbd7547361cb12d1b09c0c85357b4cac21de3d5f36",
+      "bytes": 37681
+    },
+    "big5_scenario_action_assets_mapping_qa_v0_1.json": {
+      "sha256": "17c09dc71595d6ce55b8985b16a8ebecb10789093d321305dae5fc41a9277efe",
+      "bytes": 71663
+    },
+    "big5_scenario_action_assets_profile_scenario_matrix_v0_1.csv": {
+      "sha256": "7ea73507188894f35c2d0d8fad1de03b1a18dcfc81b8e2ef81da99f529deb41a",
+      "bytes": 11478
+    },
+    "big5_scenario_action_assets_qa_summary_v0_1.json": {
+      "sha256": "02e52a9fa0c187be44c139abd36afd42af178758691e69b65654fb6bd4e7d9a6",
+      "bytes": 1636
+    },
+    "big5_scenario_action_assets_ready_for_pilot_v0_1.json": {
+      "sha256": "a1b396d4408a6b62899e62960826207dfc9bfd87caf7ea66134ccf90087e1449",
+      "bytes": 741
+    },
+    "big5_scenario_action_assets_repair_log_v0_1.md": {
+      "sha256": "e5523c5d5f1af71c6359b1e7d792131826cc1bfaef47ae6b50c2086fca07d927",
+      "bytes": 316
+    },
+    "big5_scenario_action_assets_safety_qa_v0_1.json": {
+      "sha256": "507fc8f06fc624ca2403d49e6611f3d6336f24a66579755e9e792a1fcc0640a2",
+      "bytes": 485
+    },
+    "big5_scenario_action_assets_v0_1.json": {
+      "sha256": "3a9f0b509084a4cc7f7ca910938886c9986f25dbe059af36079492677194c683",
+      "bytes": 1300488
+    },
+    "big5_scenario_action_assets_v0_1.jsonl": {
+      "sha256": "e2aac6ffa0d8e98f4fd68ed4224812f0d575966070a1d44baa3d9c9d816cc9b5",
+      "bytes": 956911
+    }
+  },
+  "content_asset_version": "v0.1",
+  "revision_scope": "manifest_checksum_rule_only",
+  "revision_note_zh": "仅修订 manifest / checksum 规则；不改 160 条正文资产、不改 asset_count、不改 profiles/scenarios/roles、不接 runtime。",
+  "checksum_policy": {
+    "manifest_self_hash_embedded": false,
+    "manifest_self_hash_policy": "self_hash_not_applicable",
+    "manifest_hash_recorded_in": "SHA256SUMS.txt",
+    "sha256sums_self_hash_embedded": false,
+    "sha256sums_self_hash_policy": "self_hash_not_applicable",
+    "sha256sums_records_manifest_hash": true,
+    "reason": "Avoid self-referential checksum drift while keeping SHA256SUMS.txt as the canonical file checksum ledger."
+  },
+  "file_count": 14,
+  "package_files": [
+    "README.md",
+    "SHA256SUMS.txt",
+    "big5_scenario_action_assets_coverage_v0_1.csv",
+    "big5_scenario_action_assets_main_v0_1.csv",
+    "big5_scenario_action_assets_manifest_v0_1.json",
+    "big5_scenario_action_assets_mapping_qa_v0_1.csv",
+    "big5_scenario_action_assets_mapping_qa_v0_1.json",
+    "big5_scenario_action_assets_profile_scenario_matrix_v0_1.csv",
+    "big5_scenario_action_assets_qa_summary_v0_1.json",
+    "big5_scenario_action_assets_ready_for_pilot_v0_1.json",
+    "big5_scenario_action_assets_repair_log_v0_1.md",
+    "big5_scenario_action_assets_safety_qa_v0_1.json",
+    "big5_scenario_action_assets_v0_1.json",
+    "big5_scenario_action_assets_v0_1.jsonl"
+  ]
+}

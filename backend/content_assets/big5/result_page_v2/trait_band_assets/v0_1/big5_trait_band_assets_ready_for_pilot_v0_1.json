@@ -1,0 +1,43 @@
+{
+  "schema": "fap.big5.content_assets.trait_band.ready_for_pilot.v0_1",
+  "package_key": "B5-CONTENT-1",
+  "version": "v0.1",
+  "created_at_utc": "2026-05-04T13:07:53Z",
+  "asset_count": 25,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_use_allowed": false,
+  "runtime_use": "staging_only",
+  "hard_gate": {
+    "coverage_QA_passed": true,
+    "safety_QA_passed": true,
+    "editorial_QA_passed": false,
+    "mapping_QA_passed": true,
+    "rendered_preview_QA_passed": false,
+    "repair_log_all_closed": false,
+    "no_P0_blockers": true
+  },
+  "blocking_reasons": [
+    "editorial_QA_not_yet_passed",
+    "rendered_preview_QA_not_yet_passed",
+    "repair_log_not_yet_closed",
+    "human_review_required_before_pilot"
+  ],
+  "next_recommended_batch": "B5-CONTENT-1-review",
+  "allowed_next_actions": [
+    "human editorial review",
+    "independent safety QA",
+    "mapping QA review",
+    "rendered preview planning",
+    "repair log review"
+  ],
+  "disallowed_next_actions": [
+    "runtime wiring",
+    "frontend fallback",
+    "production import",
+    "selector runtime",
+    "B5-B2 expansion before review"
+  ]
+}

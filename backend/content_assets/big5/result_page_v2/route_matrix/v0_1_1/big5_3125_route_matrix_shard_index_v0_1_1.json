@@ -1,0 +1,47 @@
+{
+  "schema": "fap.big5.content_6.route_matrix.shard_index.v0_1_1",
+  "version": "v0.1.1",
+  "created_at_utc": "2026-05-04T16:52:51Z",
+  "shards": [
+    {
+      "shard_key": "O1",
+      "file": "big5_3125_route_matrix_O1_v0_1_1.jsonl",
+      "row_count": 625,
+      "first_combination_key": "O1_C1_E1_A1_N1",
+      "last_combination_key": "O1_C5_E5_A5_N5"
+    },
+    {
+      "shard_key": "O2",
+      "file": "big5_3125_route_matrix_O2_v0_1_1.jsonl",
+      "row_count": 625,
+      "first_combination_key": "O2_C1_E1_A1_N1",
+      "last_combination_key": "O2_C5_E5_A5_N5"
+    },
+    {
+      "shard_key": "O3",
+      "file": "big5_3125_route_matrix_O3_v0_1_1.jsonl",
+      "row_count": 625,
+      "first_combination_key": "O3_C1_E1_A1_N1",
+      "last_combination_key": "O3_C5_E5_A5_N5"
+    },
+    {
+      "shard_key": "O4",
+      "file": "big5_3125_route_matrix_O4_v0_1_1.jsonl",
+      "row_count": 625,
+      "first_combination_key": "O4_C1_E1_A1_N1",
+      "last_combination_key": "O4_C5_E5_A5_N5"
+    },
+    {
+      "shard_key": "O5",
+      "file": "big5_3125_route_matrix_O5_v0_1_1.jsonl",
+      "row_count": 625,
+      "first_combination_key": "O5_C1_E1_A1_N1",
+      "last_combination_key": "O5_C5_E5_A5_N5"
+    }
+  ],
+  "total_rows": 3125,
+  "expected_total_rows": 3125,
+  "rows_per_shard": 625,
+  "combination_space_complete": true,
+  "semantic_route_consistency_revision": "v0.1.1"
+}

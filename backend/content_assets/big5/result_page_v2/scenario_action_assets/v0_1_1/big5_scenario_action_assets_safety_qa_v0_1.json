@@ -1,0 +1,17 @@
+{
+  "schema": "fap.big5.content_assets.scenario_action.safety_qa.v0_1",
+  "asset_count": 160,
+  "checks": {
+    "no_fixed_type_language": true,
+    "no_clinical_language": true,
+    "no_hiring_language": true,
+    "no_accuracy_claim": true,
+    "no_frontend_or_metadata_leak": true,
+    "collaboration_share_safe": true,
+    "required_safety_tags_present": true
+  },
+  "banned_hits": [],
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "production_use_allowed": false
+}

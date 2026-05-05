@@ -1,0 +1,127 @@
+{
+  "schema": "fap.big5.content_assets.trait_band.safety_qa.v0_1",
+  "package_key": "B5-CONTENT-1",
+  "version": "v0.1",
+  "created_at_utc": "2026-05-04T13:07:53Z",
+  "asset_count": 25,
+  "policy": {
+    "big_five_not_fixed_type": true,
+    "no_diagnostic_language": true,
+    "no_hiring_screening_language": true,
+    "no_accuracy_claim": true,
+    "no_cross_scale_comparison": true,
+    "no_frontend_fallback": true,
+    "profile_label_auxiliary_only": true,
+    "no_percentile_or_normal_curve_claim_when_norms_unavailable": true
+  },
+  "scanned_user_visible_fields": [
+    "title_zh",
+    "summary_zh",
+    "body_zh",
+    "short_body_zh",
+    "benefit_zh",
+    "cost_zh",
+    "common_misread_zh",
+    "action_zh"
+  ],
+  "scanned_terms": [
+    {
+      "term": "你就是某某型",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "你就是",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "固定人格类型",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "临床诊断",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "医学判断",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "心理疾病",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "招聘筛选",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "适合录用",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "不适合录用",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "准确率",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "外部效度",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "科学证明",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "超过多少人",
+      "scope": "user_visible_body",
+      "severity": "P1"
+    },
+    {
+      "term": "normal_curve",
+      "scope": "user_visible_body",
+      "severity": "P1"
+    },
+    {
+      "term": "frontend_fallback",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "internal_metadata",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "[object Object]",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    },
+    {
+      "term": "deferred_to_future",
+      "scope": "user_visible_body",
+      "severity": "P0"
+    }
+  ],
+  "hits": [],
+  "hit_count": 0,
+  "p0_hit_count": 0,
+  "result": "PASS",
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "production_use_allowed": false,
+  "note": "This is an author-side package scan. Pilot still requires independent editorial QA, safety QA, mapping QA, rendered preview QA, and closed repair log."
+}
