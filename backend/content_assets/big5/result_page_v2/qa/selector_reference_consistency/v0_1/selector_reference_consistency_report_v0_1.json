@@ -13,13 +13,14 @@
     "facet_assets": "facet_assets/v0_1",
     "canonical_profiles": "canonical_profiles/v0_1",
     "scenario_action_assets": "scenario_action_assets/v0_1_1",
-    "route_matrix": "route_matrix/v0_1_1"
+    "route_matrix": "route_matrix/v0_1_1",
+    "supplemental_coupling_assets": "coupling_assets/supplemental/v0_1"
   },
   "summary": {
     "selector_asset_count": 325,
     "route_matrix_row_count": 3125,
     "trait_band_reference_count": 25,
-    "coupling_key_count": 12,
+    "coupling_key_count": 50,
     "facet_key_count": 30,
     "canonical_profile_key_count": 8,
     "scenario_key_count": 5,
@@ -36,10 +37,17 @@
       "coupling_key": 41,
       "profile_key": 19,
       "scenario_key": 32
-    }
+    },
+    "canonical_coupling_key_count": 12,
+    "supplemental_coupling_key_count": 38,
+    "approved_coupling_alias_count": 3,
+    "coupling_inventory_resolved_reference_count": 41,
+    "coupling_deferred_suppression_reference_count": 41,
+    "post_import_unresolved_coupling_key_count": 0,
+    "selector_suppression_behavior_changed": false
   },
   "public_pilot_resolution_policy": {
-    "policy_status": "safe_coupling_alias_resolution_v0_1_applied",
+    "policy_status": "supplemental_coupling_inventory_v0_1_recognized_deferred_selector_consumption",
     "runtime_use": "not_runtime",
     "production_use_allowed": false,
     "allowed_resolution_modes": [
@@ -65,7 +73,10 @@
       "new_coupling_required_count": 38,
       "selector_suppression_reference_count": 92,
       "selector_suppression_behavior_changed": false,
-      "alias_aware_selector_or_composer_required_before_unsuppression": true
+      "alias_aware_selector_or_composer_required_before_unsuppression": true,
+      "supplemental_repo_owned_count": 38,
+      "coupling_refs_resolved_by_inventory_count": 41,
+      "post_import_unresolved_coupling_key_count": 0
     },
     "approved_coupling_aliases": [
       {
@@ -95,7 +106,64 @@
       "public_sel_2a_resolves_safe_aliases_only": true,
       "subsequent_resolution_prs_must_preserve_body_copy": true,
       "subsequent_resolution_prs_must_preserve_staging_only_flags": true,
-      "selected_unresolved_refs_must_remain_suppressed_until_resolved": true
+      "selected_unresolved_refs_must_remain_suppressed_until_resolved": true,
+      "routing_2_may_enable_selector_consumption": false,
+      "routing_4_required_before_unsuppression": true
+    },
+    "supplemental_coupling_inventory": {
+      "package_key": "B5-CONTENT-2B",
+      "repo_path": "coupling_assets/supplemental/v0_1",
+      "asset_count": 190,
+      "coupling_key_count": 38,
+      "asset_roles_per_key": 5,
+      "recognized_for_reference_inventory": true,
+      "selector_consumption_enabled": false,
+      "selector_consumption_blocked_until": "ROUTING-4",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "coupling_keys": [
+        "a_high_x_n_high",
+        "a_high_x_n_low",
+        "a_low_x_n_low",
+        "c_high_x_a_high",
+        "c_high_x_a_low",
+        "c_high_x_e_high",
+        "c_high_x_e_low",
+        "c_high_x_n_low",
+        "c_low_x_a_high",
+        "c_low_x_a_low",
+        "c_low_x_e_high",
+        "c_low_x_n_low",
+        "c_mid_x_a_high",
+        "c_mid_x_e_high",
+        "c_mid_x_n_high",
+        "e_high_x_a_low",
+        "e_high_x_n_low",
+        "e_low_x_a_high",
+        "e_low_x_a_low",
+        "e_low_x_n_low",
+        "e_mid_x_a_high",
+        "e_mid_x_n_high",
+        "o_high_x_a_high",
+        "o_high_x_c_high",
+        "o_high_x_e_high",
+        "o_high_x_e_low",
+        "o_high_x_n_high",
+        "o_high_x_n_low",
+        "o_low_x_a_high",
+        "o_low_x_a_low",
+        "o_low_x_c_low",
+        "o_low_x_e_high",
+        "o_low_x_e_low",
+        "o_low_x_n_high",
+        "o_low_x_n_low",
+        "o_mid_x_a_high",
+        "o_mid_x_c_high",
+        "o_mid_x_e_high"
+      ]
     }
   },
   "checks": [
@@ -108,7 +176,7 @@
     },
     {
       "check_key": "selector_coupling_registry_to_coupling_assets",
-      "status": "advisory_gap",
+      "status": "advisory_deferred_resolution",
       "checked_reference_count": 50,
       "resolved_alias_reference_count": 3,
       "new_coupling_required_count": 38,
@@ -341,6 +409,646 @@
           "asset_key": "asset.module_04_coupling.coupling_registry.o_n_mid_high.v0_3",
           "reference_type": "coupling_key",
           "reference": "o_mid_x_n_high"
+        }
+      ],
+      "canonical_coupling_key_count": 12,
+      "supplemental_coupling_key_count": 38,
+      "supplemental_resolved_reference_count": 38,
+      "post_import_coupling_key_inventory_count": 50,
+      "post_import_unresolved_coupling_key_count": 0,
+      "selector_behavior_changed": false,
+      "deferred_suppression_reference_count": 41,
+      "supplemental_resolved_references": [
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.a_n_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "a_high_x_n_high",
+          "resolved_to": "a_high_x_n_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.a_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "a_high_x_n_low",
+          "resolved_to": "a_high_x_n_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.a_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "a_low_x_n_low",
+          "resolved_to": "a_low_x_n_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_a_high",
+          "resolved_to": "c_high_x_a_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_a_low",
+          "resolved_to": "c_high_x_a_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_a_high",
+          "resolved_to": "c_low_x_a_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_a_low",
+          "resolved_to": "c_low_x_a_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_mid_x_a_high",
+          "resolved_to": "c_mid_x_a_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_e_high",
+          "resolved_to": "c_high_x_e_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_e_low",
+          "resolved_to": "c_high_x_e_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_e_high",
+          "resolved_to": "c_low_x_e_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_mid_x_e_high",
+          "resolved_to": "c_mid_x_e_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_n_low",
+          "resolved_to": "c_high_x_n_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_n_low",
+          "resolved_to": "c_low_x_n_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_n_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_mid_x_n_high",
+          "resolved_to": "c_mid_x_n_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_high_x_a_low",
+          "resolved_to": "e_high_x_a_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_a_high",
+          "resolved_to": "e_low_x_a_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_a_low",
+          "resolved_to": "e_low_x_a_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_mid_x_a_high",
+          "resolved_to": "e_mid_x_a_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_high_x_n_low",
+          "resolved_to": "e_high_x_n_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_n_low",
+          "resolved_to": "e_low_x_n_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_mid_x_n_high",
+          "resolved_to": "e_mid_x_n_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_a_high",
+          "resolved_to": "o_high_x_a_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_a_high",
+          "resolved_to": "o_low_x_a_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_a_low",
+          "resolved_to": "o_low_x_a_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_a_high",
+          "resolved_to": "o_mid_x_a_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_c_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_c_high",
+          "resolved_to": "o_high_x_c_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_c_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_c_low",
+          "resolved_to": "o_low_x_c_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_c_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_c_high",
+          "resolved_to": "o_mid_x_c_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_e_high",
+          "resolved_to": "o_high_x_e_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_e_low",
+          "resolved_to": "o_high_x_e_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_e_high",
+          "resolved_to": "o_low_x_e_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_e_low",
+          "resolved_to": "o_low_x_e_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_e_high",
+          "resolved_to": "o_mid_x_e_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_n_high",
+          "resolved_to": "o_high_x_n_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_n_low",
+          "resolved_to": "o_high_x_n_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_n_high",
+          "resolved_to": "o_low_x_n_high",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_n_low",
+          "resolved_to": "o_low_x_n_low",
+          "decision_type": "SUPPLEMENTAL_REPO_OWNED",
+          "source_package": "B5-CONTENT-2B",
+          "selector_consumption": "deferred_until_ROUTING-4"
+        }
+      ],
+      "deferred_suppression_references": [
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.a_n_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "a_high_x_n_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.a_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "a_high_x_n_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.a_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "a_low_x_n_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_a_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_a_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_a_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_a_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_mid_x_a_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_e_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_e_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_e_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_e_low",
+          "deferred_resolution": "approved_alias_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_mid_x_e_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_n_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_n_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_n_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_mid_x_n_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_high_x_a_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_a_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_a_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_mid_x_a_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_high_x_n_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_n_high",
+          "deferred_resolution": "approved_alias_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_n_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_mid_x_n_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_a_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_a_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_a_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_a_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_c_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_c_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_c_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_c_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_c_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_c_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_e_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_e_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_e_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_e_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_e_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_n_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_n_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_n_high",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_n_low",
+          "deferred_resolution": "supplemental_repo_owned_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_n_high",
+          "deferred_resolution": "approved_alias_but_selector_runtime_not_alias_aware",
+          "suppression_required_until": "ROUTING-4"
         }
       ]
     },
