@@ -1,12 +1,12 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-05T23:00:00+08:00",
+  "updated_at": "2026-05-05T23:39:49+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
       "branch": "codex/backend-email-binding-foundation",
-      "status": "open_pending_github_checks",
-      "commit_sha": "e9a491120687eac4acbd41ccda605a30de8c3565",
+      "status": "merged",
+      "commit_sha": "92b73b2b0c67a756431c19b1e3a01a8e0119e7e9",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1184",
       "checks": {
         "scope_validation": {
@@ -64,20 +64,82 @@
         }
       ],
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-05T15:18:57Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "backend-email-result-lookup": {
       "repo": "fap-api",
-      "status": "pending_dependency",
+      "branch": "codex/backend-email-result-lookup",
+      "status": "local_validation_passed_pending_pr",
       "depends_on": [
         "backend-email-binding-foundation"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
-      "sidecar_issues": [],
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "backend-email-binding-foundation merged as 92b73b2b0c67a756431c19b1e3a01a8e0119e7e9 and origin/main contains it."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to PR2 result email lookup endpoint, result access token service, route/rate-limit config, OpenAPI snapshot, focused tests, Big Five freeze allowlist, and PR train metadata."
+        },
+        "php_lint_new_files": {
+          "status": "pass",
+          "command": "php -l backend/app/Http/Requests/V0_3/ResultEmailLookupRequest.php && php -l backend/app/Http/Controllers/API/V0_3/ResultEmailLookupController.php && php -l backend/app/Services/Results/ResultAccessTokenService.php && php -l backend/app/Services/Results/ResultEmailLookupService.php && php -l backend/tests/Feature/ResultEmailLookupTest.php"
+        },
+        "pint": {
+          "status": "pass",
+          "command": "./vendor/bin/pint app/Http/Requests/V0_3/ResultEmailLookupRequest.php app/Http/Controllers/API/V0_3/ResultEmailLookupController.php app/Services/Results/ResultAccessTokenService.php app/Services/Results/ResultEmailLookupService.php tests/Feature/ResultEmailLookupTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list",
+          "evidence": "POST api/v0.3/results/lookup-by-email is registered as api.v0_3.results.lookup_by_email."
+        },
+        "default_migrate": {
+          "status": "external_blocker",
+          "command": "php artisan migrate",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) against local fap_api MySQL."
+        },
+        "sqlite_migrate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force"
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter ResultEmailLookupTest",
+          "evidence": "4 tests passed, 24 assertions."
+        },
+        "bigfive_freeze_gate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "evidence": "25 tests passed, 367 assertions."
+        },
+        "openapi_snapshot": {
+          "status": "pass",
+          "command": "bash scripts/export_openapi.sh --check",
+          "evidence": "snapshot up-to-date after adding /api/v0.3/results/lookup-by-email."
+        },
+        "mbti_ci": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full script exited 0."
+        }
+      },
+      "sidecar_issues": [
+        {
+          "title": "Local default MySQL credentials block php artisan migrate",
+          "repo": "fap-api",
+          "affected_command_or_check": "php artisan migrate",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO), database fap_api.",
+          "why_external_to_current_pr": "PR2 does not add migrations; the sqlite full migration path passes and the failure occurs before schema execution while connecting to local MySQL.",
+          "owner": "unknown",
+          "follow_up_recommendation": "Fix local .env MySQL credentials or document the required local DB setup for default migrate validation."
+        }
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,

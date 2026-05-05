@@ -254,6 +254,46 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_result_email_lookup_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/ResultEmailLookupController.php',
+            'backend/app/Http/Requests/V0_3/ResultEmailLookupRequest.php',
+            'backend/app/Providers/AppServiceProvider.php',
+            'backend/app/Services/Results/ResultAccessTokenService.php',
+            'backend/app/Services/Results/ResultEmailLookupService.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_3\\ResultEmailLookupController;',
+            '+        Route::post(\'/results/lookup-by-email\', [ResultEmailLookupController::class, \'store\'])',
+            '+            ->middleware(\'throttle:api_result_lookup\')',
+            '+            ->defaults(\'public_realm\', true)',
+            '+            ->name(\'api.v0_3.results.lookup_by_email\');',
+        ];
+        $appServiceProviderChangedLines = [
+            '+        RateLimiter::for(\'api_result_lookup\', function (Request $request) use ($response, $shouldBypassRateLimits, $scopedRateKey) {',
+            '+            if ($shouldBypassRateLimits()) {',
+            '+                return Limit::none();',
+            '+            }',
+            '+            $limit = (int) config(\'fap.rate_limits.api_result_lookup_per_minute\', 20);',
+            '+            $limit = max(1, $limit);',
+            '+            return Limit::perMinute($limit)',
+            '+                ->by($scopedRateKey($request, \'api_result_lookup\'))',
+            '+                ->response($response(\'RATE_LIMIT_RESULT_LOOKUP\', \'Too many result lookup requests. Please retry later.\'));',
+            '+        });',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            null,
+            $routeChangedLines,
+            $appServiceProviderChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -469,6 +509,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         string $baseRef,
         ?array $kernelChangedLines = null,
         ?array $routeChangedLines = null,
+        ?array $appServiceProviderChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -501,9 +542,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isResultEmailLookupFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/routes/api.php'
-                && $this->routeDiffIsAttemptEmailBindingOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+                && $this->routeDiffIsEmailAccessTrainOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Providers/AppServiceProvider.php'
+                && $this->appServiceProviderDiffIsResultLookupRateLimiterOnly(
+                    $appServiceProviderChangedLines ?? $this->appServiceProviderChangedLines($repoRoot, $baseRef)
+                )
             ) {
                 continue;
             }
@@ -572,10 +626,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isResultEmailLookupFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/ResultEmailLookupController.php',
+            'backend/app/Http/Requests/V0_3/ResultEmailLookupRequest.php',
+            'backend/app/Services/Results/ResultAccessTokenService.php',
+            'backend/app/Services/Results/ResultEmailLookupService.php',
+        ], true);
+    }
+
     /**
      * @param  list<string>  $changedLines
      */
-    private function routeDiffIsAttemptEmailBindingOnly(array $changedLines): bool
+    private function routeDiffIsEmailAccessTrainOnly(array $changedLines): bool
     {
         if ($changedLines === []) {
             return false;
@@ -586,7 +650,33 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/AttemptEmailBindingController|email-bind|api\.v0_3\.attempts\.email_bind|FmTokenAuth|uuid:id|public_realm/u', $line) !== 1) {
+            if (preg_match('/AttemptEmailBindingController|email-bind|api\.v0_3\.attempts\.email_bind|FmTokenAuth|uuid:id|public_realm|ResultEmailLookupController|lookup-by-email|api_result_lookup|api\.v0_3\.results\.lookup_by_email/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function appServiceProviderDiffIsResultLookupRateLimiterOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_starts_with($line, '-')) {
+                return false;
+            }
+
+            if (preg_match('/^\+\s*[{});]*\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/api_result_lookup|api_result_lookup_per_minute|RATE_LIMIT_RESULT_LOOKUP|Too many result lookup requests|RateLimiter::for|Limit::none|Limit::perMinute|max\\(1, \\$limit\\)|scopedRateKey|shouldBypassRateLimits|response/u', $line) !== 1) {
                 return false;
             }
         }
@@ -672,6 +762,44 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             "{$baseRef}...HEAD",
             '--',
             'backend/routes/api.php',
+        ];
+        exec(implode(' ', array_map('escapeshellarg', $command)), $output, $exitCode);
+        $this->assertSame(0, $exitCode);
+
+        return array_values(array_filter(array_map(
+            static function (string $line): ?string {
+                if (str_starts_with($line, '+++') || str_starts_with($line, '---')) {
+                    return null;
+                }
+
+                if (preg_match('/^[+-]/', $line) !== 1) {
+                    return null;
+                }
+
+                return $line;
+            },
+            $output,
+        )));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function appServiceProviderChangedLines(string $repoRoot, string $baseRef): array
+    {
+        if ($repoRoot === '' || $baseRef === '') {
+            return [];
+        }
+
+        $command = [
+            'git',
+            '-C',
+            $repoRoot,
+            'diff',
+            '--unified=0',
+            "{$baseRef}...HEAD",
+            '--',
+            'backend/app/Providers/AppServiceProvider.php',
         ];
         exec(implode(' ', array_map('escapeshellarg', $command)), $output, $exitCode);
         $this->assertSame(0, $exitCode);
