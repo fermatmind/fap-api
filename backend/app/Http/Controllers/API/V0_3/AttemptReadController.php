@@ -41,6 +41,7 @@ use App\Services\Report\MbtiPreviewContractBuilder;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
+use App\Services\Results\ResultEmailReadAccessService;
 use App\Services\Riasec\RiasecPublicFormSummaryBuilder;
 use App\Services\Riasec\RiasecPublicProjectionService;
 use App\Services\Scale\ScaleCodeResponseProjector;
@@ -148,7 +149,11 @@ class AttemptReadController extends Controller
         $responseCodes = $this->resolveResponseScaleCodes($result);
         $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
         $attempt = $this->resolveAttemptForResultRead($request, $orgId, $id, $scaleCode);
+        $this->enforceEmailBindingForRead($request, $orgId, $attempt, $scaleCode);
         $attemptId = $this->resolveAttemptId($result, $attempt, $id);
+        $emailTokenActor = $this->resultEmailReadAccess()->tokenActorForRequest($request, $orgId, $attemptId);
+        $readUserId = $emailTokenActor['user_id'] ?? $this->resolveUserId($request);
+        $readAnonId = $emailTokenActor['anon_id'] ?? $this->resolveAnonId($request);
         $packId = $this->preferredStringField($result, $attempt, 'pack_id');
         $dirVersion = $this->preferredStringField($result, $attempt, 'dir_version');
         $contentPackageVersion = $this->preferredStringField($result, $attempt, 'content_package_version');
@@ -272,7 +277,7 @@ class AttemptReadController extends Controller
 
         $hasBigFiveProjectionFullAccess = $scaleCode === 'BIG5_OCEAN'
             && $attempt instanceof Attempt
-            && $this->hasBigFiveFullAccess($request, $orgId, (string) $attempt->id);
+            && $this->hasBigFiveFullAccess($request, $orgId, (string) $attempt->id, $readUserId, $readAnonId);
         $big5Projection = $scaleCode === 'BIG5_OCEAN'
             ? ($hasBigFiveProjectionFullAccess
                 ? $this->bigFivePublicProjectionService->buildFromResult(
@@ -436,6 +441,10 @@ class AttemptReadController extends Controller
         $responseCodes = $this->resolveResponseScaleCodes($result);
         $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
         $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
+        $this->enforceEmailBindingForRead($request, $orgId, $attempt, $scaleCode);
+        $emailTokenActor = $this->resultEmailReadAccess()->tokenActorForRequest($request, $orgId, $id);
+        $readUserId = $emailTokenActor['user_id'] ?? ($userId !== null ? (string) $userId : null);
+        $readAnonId = $emailTokenActor['anon_id'] ?? $anonId;
         $mbtiFormSummary = $scaleCode === 'MBTI'
             ? $this->resolveMbtiFormSummary($request, $attempt, $result)
             : null;
@@ -452,8 +461,8 @@ class AttemptReadController extends Controller
         $gate = $this->resolveReportGate(
             $orgId,
             $id,
-            $userId !== null ? (string) $userId : null,
-            $anonId,
+            $readUserId,
+            $readAnonId,
             $this->currentOrgContext()->role(),
             $this->shouldUsePublicArtifactFallback($request, $attempt),
             $forceRefresh,
@@ -513,8 +522,8 @@ class AttemptReadController extends Controller
             $responsePayload[ReportAccess::ACCESS_HUB_KEY] = $this->mbtiAccessHubBuilder->buildForReportContext(
                 $attempt,
                 $gate,
-                $userId !== null ? (string) $userId : null,
-                $anonId
+                $readUserId,
+                $readAnonId
             );
             $responsePayload[MbtiPreviewContractBuilder::KEY] = $this->mbtiPreviewContractBuilder->buildFromReportEnvelope(
                 $responsePayload
@@ -683,6 +692,11 @@ class AttemptReadController extends Controller
         $startedAt = hrtime(true);
         $orgId = $this->currentOrgContext()->orgId();
         $attempt = $this->resolveAttemptForAccessRead($request, $orgId, $id);
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        $this->enforceEmailBindingForRead($request, $orgId, $attempt, $scaleCode);
+        $emailTokenActor = $this->resultEmailReadAccess()->tokenActorForRequest($request, $orgId, (string) $attempt->id);
+        $readUserId = $emailTokenActor['user_id'] ?? $this->resolveUserId($request);
+        $readAnonId = $emailTokenActor['anon_id'] ?? $this->resolveAnonId($request);
         $submissionPayload = $this->latestReadableSubmission($request, (string) $attempt->id);
         $resultExists = Result::query()
             ->where('org_id', $orgId)
@@ -695,8 +709,8 @@ class AttemptReadController extends Controller
                 $this->projectionRepair->repairResultReadyProjectionIfNeeded(
                     $orgId,
                     (string) $attempt->id,
-                    $this->resolveUserId($request),
-                    $this->resolveAnonId($request)
+                    $readUserId,
+                    $readAnonId
                 );
             } catch (\Throwable $e) {
                 $repairFailed = true;
@@ -743,7 +757,7 @@ class AttemptReadController extends Controller
         $isBigFive = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_BIG5_OCEAN;
         $isEnneagram = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_ENNEAGRAM;
         $isRiasec = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_RIASEC;
-        $hasBigFiveFullAccess = $isBigFive && $resultExists && $this->hasBigFiveFullAccess($request, $orgId, (string) $attempt->id);
+        $hasBigFiveFullAccess = $isBigFive && $resultExists && $this->hasBigFiveFullAccess($request, $orgId, (string) $attempt->id, $readUserId, $readAnonId);
         if (($hasBigFiveFullAccess || $isEnneagram || $isRiasec) && $resultExists) {
             $accessState = 'ready';
             $reportState = 'ready';
@@ -1126,6 +1140,11 @@ class AttemptReadController extends Controller
         string $scaleCode
     ): Attempt {
         if ($this->isPublicReportScale($scaleCode)) {
+            $tokenAttempt = $this->resolveAttemptForResultAccessToken($request, $this->currentOrgContext()->orgId(), $attemptId);
+            if ($tokenAttempt instanceof Attempt) {
+                return $tokenAttempt;
+            }
+
             $actor = $this->reportActor($request);
             $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $actor);
 
@@ -1146,6 +1165,11 @@ class AttemptReadController extends Controller
 
     private function resolveAttemptForAccessRead(Request $request, int $orgId, string $attemptId): Attempt
     {
+        $tokenAttempt = $this->resolveAttemptForResultAccessToken($request, $orgId, $attemptId);
+        if ($tokenAttempt instanceof Attempt) {
+            return $tokenAttempt;
+        }
+
         $result = Result::query()->where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
         if ($result instanceof Result) {
             $responseCodes = $this->resolveResponseScaleCodes($result);
@@ -1235,13 +1259,18 @@ class AttemptReadController extends Controller
         ];
     }
 
-    private function hasBigFiveFullAccess(Request $request, int $orgId, string $attemptId): bool
-    {
+    private function hasBigFiveFullAccess(
+        Request $request,
+        int $orgId,
+        string $attemptId,
+        ?string $userId = null,
+        ?string $anonId = null
+    ): bool {
         $gate = $this->reportGatekeeper->ensureAccess(
             $orgId,
             $attemptId,
-            $this->resolveUserId($request),
-            $this->resolveAnonId($request),
+            $userId ?? $this->resolveUserId($request),
+            $anonId ?? $this->resolveAnonId($request),
             $this->currentOrgContext()->role()
         );
 
@@ -1444,6 +1473,11 @@ class AttemptReadController extends Controller
     private function resolveAttemptForResultRead(Request $request, int $orgId, string $attemptId, string $scaleCode): ?Attempt
     {
         if ($this->isPublicResultScale($scaleCode)) {
+            $tokenAttempt = $this->resolveAttemptForResultAccessToken($request, $orgId, $attemptId);
+            if ($tokenAttempt instanceof Attempt) {
+                return $tokenAttempt;
+            }
+
             $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
             if ($attempt instanceof Attempt) {
                 return $attempt;
@@ -2055,6 +2089,72 @@ class AttemptReadController extends Controller
             $this->resolveAnonId($request),
             $this->currentOrgContext()->role(),
         );
+    }
+
+    private function resultEmailReadAccess(): ResultEmailReadAccessService
+    {
+        return app(ResultEmailReadAccessService::class);
+    }
+
+    private function resolveAttemptForResultAccessToken(Request $request, int $orgId, string $attemptId): ?Attempt
+    {
+        if (! $this->resultEmailReadAccess()->activeTokenBindingForRequest($request, $orgId, $attemptId)) {
+            return null;
+        }
+
+        $attempt = $this->reportSubjects->findAttemptForSystem($orgId, $attemptId);
+        if (! $attempt instanceof Attempt) {
+            return null;
+        }
+
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        if (! $this->isPublicResultScale($scaleCode) || in_array($scaleCode, self::SENSITIVE_RESULT_READ_SCALES, true)) {
+            return null;
+        }
+
+        return $attempt;
+    }
+
+    private function enforceEmailBindingForRead(Request $request, int $orgId, Attempt $attempt, string $scaleCode): void
+    {
+        $attemptId = trim((string) ($attempt->id ?? ''));
+        if ($attemptId === '' || ! $this->shouldApplyEmailBindingGate($scaleCode)) {
+            return;
+        }
+
+        $emailAccess = $this->resultEmailReadAccess();
+        if ($emailAccess->activeTokenBindingForRequest($request, $orgId, $attemptId) instanceof \App\Models\AttemptEmailBinding) {
+            return;
+        }
+
+        if ($emailAccess->activeBindingExists($orgId, $attemptId)) {
+            return;
+        }
+
+        throw new ApiProblemException(428, 'EMAIL_BIND_REQUIRED', 'email binding required to view this result.', [
+            'attempt_id' => $attemptId,
+            'scale_code' => strtoupper(trim($scaleCode)),
+            'bind_endpoint' => "/api/v0.3/attempts/{$attemptId}/email-bind",
+        ]);
+    }
+
+    private function shouldApplyEmailBindingGate(string $scaleCode): bool
+    {
+        if (! (bool) config('fap.features.email_first_result_access', false)) {
+            return false;
+        }
+
+        $normalized = strtoupper(trim($scaleCode));
+        if ($normalized === '' || in_array($normalized, self::SENSITIVE_RESULT_READ_SCALES, true)) {
+            return false;
+        }
+
+        $enabledScales = array_map(
+            static fn (mixed $code): string => strtoupper(trim((string) $code)),
+            (array) config('fap.result_email_gate.enabled_scale_codes', self::PUBLIC_RESULT_READ_SCALES)
+        );
+
+        return in_array($normalized, $enabledScales, true);
     }
 
     private function currentOrgContext(): OrgContext
