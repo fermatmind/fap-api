@@ -16,8 +16,6 @@ final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
 
     private const SELECTOR_ASSETS_PATH = 'content_assets/big5/result_page_v2/selector_ready_assets/v0_3_p0_full/assets.json';
 
-    private const REFERENCE_REPORT_PATH = 'content_assets/big5/result_page_v2/qa/selector_reference_consistency/v0_1/selector_reference_consistency_report_v0_1.json';
-
     public function test_o59_golden_case_selects_expected_available_asset_refs(): void
     {
         $result = $this->selector()->select($this->o59Input());
@@ -25,7 +23,7 @@ final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
             static fn (BigFiveV2SelectedAssetRef $ref): string => $ref->slotKey,
             $result->selectedAssetRefs,
         );
-        $expectedAvailableSlots = array_values(array_diff($this->o59ExpectedSlots(), $this->o59ExpectedUnresolvedSlots()));
+        $expectedAvailableSlots = array_values(array_diff($this->o59ExpectedSlots(), $this->o59ExpectedSuppressedSlots($result)));
 
         $this->assertSame($expectedAvailableSlots, $selectedSlots);
         $this->assertCount(count($expectedAvailableSlots), $result->selectedAssetRefs);
@@ -42,19 +40,26 @@ final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
     {
         $result = $this->selector()->select($this->o59Input());
         $assetKeys = $this->selectorAssetKeys();
-        $unresolvedAssetKeys = $this->unresolvedAssetKeys();
+        $suppressedAssetKeys = $this->suppressedAssetKeys($result);
 
         foreach ($result->selectedAssetRefs as $ref) {
             $this->assertArrayHasKey($ref->assetKey, $assetKeys, $ref->assetKey);
-            $this->assertArrayNotHasKey($ref->assetKey, $unresolvedAssetKeys, $ref->assetKey);
+            $this->assertArrayNotHasKey($ref->assetKey, $suppressedAssetKeys, $ref->assetKey);
         }
 
-        $this->assertSame(count($unresolvedAssetKeys), count($result->unresolvedRefSuppressions));
-        $this->assertSame(count($unresolvedAssetKeys), count($result->suppressedAssetRefs));
+        $this->assertSame(92, count($result->unresolvedRefSuppressions));
+        $this->assertSame(count($suppressedAssetKeys), count($result->unresolvedRefSuppressions));
+        $this->assertSame(count($suppressedAssetKeys), count($result->suppressedAssetRefs));
         $this->assertSame(
-            array_keys($unresolvedAssetKeys),
+            array_keys($suppressedAssetKeys),
             array_map(static fn (array $suppression): string => (string) $suppression['asset_key'], $result->unresolvedRefSuppressions),
         );
+
+        foreach ($result->unresolvedRefSuppressions as $suppression) {
+            foreach ((array) ($suppression['references'] ?? []) as $reference) {
+                $this->assertContains($reference['reference_type'] ?? null, ['coupling_key', 'profile_key', 'scenario_key']);
+            }
+        }
     }
 
     public function test_selector_output_contains_refs_and_suppression_only_not_body_payload(): void
@@ -106,6 +111,48 @@ final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
         $this->assertFalse($result->safetyDecisions['body_composition_allowed']);
     }
 
+    public function test_selector_can_select_resolved_canonical_alias_and_supplemental_coupling_refs(): void
+    {
+        $input = new BigFiveV2SelectorInput(
+            scaleCode: 'BIG5_OCEAN',
+            formCode: 'big5_120',
+            domainBands: ['O' => 'mid', 'C' => 'low', 'E' => 'low', 'A' => 'mid', 'N' => 'high'],
+            domainScores: ['O' => 59, 'C' => 32, 'E' => 20, 'A' => 55, 'N' => 68],
+            facetSignals: [],
+            qualityStatus: 'valid',
+            normStatus: 'available',
+            readingMode: 'standard',
+            scenario: null,
+            routeRow: $this->o59RouteRow(),
+            includeSlots: [
+                'module_04_coupling.coupling_card.o_c.high_low',
+                'module_04_coupling.coupling_card.c_e.low_low',
+                'module_04_coupling.coupling_card.o_c.high_high',
+            ],
+            includeRegistryKeys: ['coupling_registry'],
+            enableResolvedCouplingRefs: true,
+        );
+
+        $result = $this->selector()->select($input);
+
+        $this->assertSame([
+            'asset.module_04_coupling.coupling_registry.o_c_high_low.v0_3',
+            'asset.module_04_coupling.coupling_registry.c_e_low_low.v0_3',
+            'asset.module_04_coupling.coupling_registry.o_c_high_high.v0_3',
+        ], array_map(static fn (BigFiveV2SelectedAssetRef $ref): string => $ref->assetKey, $result->selectedAssetRefs));
+
+        foreach ($result->unresolvedRefSuppressions as $suppression) {
+            foreach ((array) ($suppression['references'] ?? []) as $reference) {
+                $this->assertNotSame('coupling_key', $reference['reference_type'] ?? null);
+            }
+        }
+
+        $this->assertSame(51, count($result->unresolvedRefSuppressions));
+
+        $this->assertFalse($result->safetyDecisions['unresolved_refs_selectable']);
+        $this->assertFalse($result->safetyDecisions['body_composition_allowed']);
+    }
+
     private function selector(): BigFiveV2DeterministicSelector
     {
         return new BigFiveV2DeterministicSelector();
@@ -152,13 +199,13 @@ final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
     /**
      * @return list<string>
      */
-    private function o59ExpectedUnresolvedSlots(): array
+    private function o59ExpectedSuppressedSlots(\App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectionResult $result): array
     {
-        $unresolvedAssetKeys = $this->unresolvedAssetKeys();
+        $suppressedAssetKeys = $this->suppressedAssetKeys($result);
         $unresolvedSlots = [];
 
         foreach ($this->decodeJson(self::SELECTOR_ASSETS_PATH) as $asset) {
-            if (isset($unresolvedAssetKeys[(string) ($asset['asset_key'] ?? '')])) {
+            if (isset($suppressedAssetKeys[(string) ($asset['asset_key'] ?? '')])) {
                 $unresolvedSlots[] = (string) ($asset['slot_key'] ?? '');
             }
         }
@@ -183,13 +230,11 @@ final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
     /**
      * @return array<string,true>
      */
-    private function unresolvedAssetKeys(): array
+    private function suppressedAssetKeys(\App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectionResult $result): array
     {
         $keys = [];
-        foreach ((array) ($this->decodeJson(self::REFERENCE_REPORT_PATH)['checks'] ?? []) as $check) {
-            foreach ((array) ($check['unresolved_references'] ?? []) as $reference) {
-                $keys[(string) ($reference['asset_key'] ?? '')] = true;
-            }
+        foreach ($result->unresolvedRefSuppressions as $suppression) {
+            $keys[(string) ($suppression['asset_key'] ?? '')] = true;
         }
         unset($keys['']);
         ksort($keys);
