@@ -1,0 +1,132 @@
+{
+  "train_id": "email-first-result-access",
+  "updated_at": "2026-05-05T23:00:00+08:00",
+  "items": {
+    "backend-email-binding-foundation": {
+      "repo": "fap-api",
+      "branch": "codex/backend-email-binding-foundation",
+      "status": "open_pending_github_checks",
+      "commit_sha": "e9a491120687eac4acbd41ccda605a30de8c3565",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1184",
+      "checks": {
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to PR1 backend email binding foundation, OpenAPI contract snapshot, and PR train metadata."
+        },
+        "php_lint_new_files": {
+          "status": "pass",
+          "command": "php -l <new PHP files>"
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --path=attempts",
+          "evidence": "POST api/v0.3/attempts/{id}/email-bind is registered as api.v0_3.attempts.email_bind."
+        },
+        "default_migrate": {
+          "status": "external_blocker",
+          "command": "php artisan migrate",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) against local fap_api MySQL."
+        },
+        "sqlite_migrate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force",
+          "evidence": "2026_05_05_000100_create_attempt_email_bindings_table completed."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter AttemptEmailBindingTest",
+          "evidence": "4 tests passed, 15 assertions."
+        },
+        "openapi_snapshot": {
+          "status": "pass",
+          "command": "bash scripts/export_openapi.sh --check",
+          "evidence": "snapshot up-to-date."
+        },
+        "mbti_ci": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full script exited 0 after OpenAPI snapshot update."
+        },
+        "github_required_checks": {
+          "status": "pass_no_required_checks_reported",
+          "evidence": "PR marked ready; GitHub reports mergeStateStatus=CLEAN and statusCheckRollup=[] for https://github.com/fermatmind/fap-api/pull/1184."
+        }
+      },
+      "sidecar_issues": [
+        {
+          "title": "Local default MySQL credentials block php artisan migrate",
+          "repo": "fap-api",
+          "affected_command_or_check": "php artisan migrate",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO), database fap_api.",
+          "why_external_to_current_pr": "The same migration set passes against the repo's sqlite testing path, including the new attempt_email_bindings migration; the failure occurs before schema execution while connecting to local MySQL.",
+          "owner": "unknown",
+          "follow_up_recommendation": "Fix local .env MySQL credentials or document the required local DB setup for default migrate validation."
+        }
+      ],
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "backend-email-result-lookup": {
+      "repo": "fap-api",
+      "status": "pending_dependency",
+      "depends_on": [
+        "backend-email-binding-foundation"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "sidecar_issues": [],
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "backend-email-gated-report-read": {
+      "repo": "fap-api",
+      "status": "pending_dependency",
+      "depends_on": [
+        "backend-email-result-lookup"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "sidecar_issues": [],
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "frontend-result-email-gate": {
+      "repo": "fap-web",
+      "status": "pending_dependency",
+      "depends_on": [
+        "backend-email-gated-report-read"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "sidecar_issues": [],
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "frontend-email-result-lookup": {
+      "repo": "fap-web",
+      "status": "pending_dependency",
+      "depends_on": [
+        "frontend-result-email-gate"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "sidecar_issues": [],
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    }
+  }
+}

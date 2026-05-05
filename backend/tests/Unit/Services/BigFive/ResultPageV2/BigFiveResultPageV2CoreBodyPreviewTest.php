@@ -227,6 +227,33 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_attempt_email_binding_foundation_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/AttemptEmailBindingController.php',
+            'backend/app/Http/Requests/V0_3/AttemptEmailBindingRequest.php',
+            'backend/app/Models/AttemptEmailBinding.php',
+            'backend/app/Services/Attempts/AttemptEmailBindingService.php',
+            'backend/database/migrations/2026_05_05_000100_create_attempt_email_bindings_table.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_3\\AttemptEmailBindingController;',
+            '+            Route::post(\'/attempts/{id}/email-bind\', [AttemptEmailBindingController::class, \'store\'])',
+            '+                ->middleware([\\App\\Http\\Middleware\\FmTokenAuth::class, \'uuid:id\'])',
+            '+                ->defaults(\'public_realm\', true)',
+            '+                ->name(\'api.v0_3.attempts.email_bind\');',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            null,
+            $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -441,6 +468,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         string $repoRoot,
         string $baseRef,
         ?array $kernelChangedLines = null,
+        ?array $routeChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -466,6 +494,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isBigFiveV2PilotSupportFile($file)) {
+                continue;
+            }
+
+            if ($this->isAttemptEmailBindingFoundationFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsAttemptEmailBindingOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
                 continue;
             }
 
@@ -520,6 +559,39 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php'
             || $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveV2PilotRuntimeObservability.php'
             || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer|Access|Routing)/[A-Za-z0-9_]+\.php$#', $file) === 1;
+    }
+
+    private function isAttemptEmailBindingFoundationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/AttemptEmailBindingController.php',
+            'backend/app/Http/Requests/V0_3/AttemptEmailBindingRequest.php',
+            'backend/app/Models/AttemptEmailBinding.php',
+            'backend/app/Services/Attempts/AttemptEmailBindingService.php',
+            'backend/database/migrations/2026_05_05_000100_create_attempt_email_bindings_table.php',
+        ], true);
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsAttemptEmailBindingOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_starts_with($line, '-')) {
+                return false;
+            }
+
+            if (preg_match('/AttemptEmailBindingController|email-bind|api\.v0_3\.attempts\.email_bind|FmTokenAuth|uuid:id|public_realm/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -577,6 +649,44 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 }
 
                 return substr($line, 1);
+            },
+            $output,
+        )));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function routeChangedLines(string $repoRoot, string $baseRef): array
+    {
+        if ($repoRoot === '' || $baseRef === '') {
+            return [];
+        }
+
+        $command = [
+            'git',
+            '-C',
+            $repoRoot,
+            'diff',
+            '--unified=0',
+            "{$baseRef}...HEAD",
+            '--',
+            'backend/routes/api.php',
+        ];
+        exec(implode(' ', array_map('escapeshellarg', $command)), $output, $exitCode);
+        $this->assertSame(0, $exitCode);
+
+        return array_values(array_filter(array_map(
+            static function (string $line): ?string {
+                if (str_starts_with($line, '+++') || str_starts_with($line, '---')) {
+                    return null;
+                }
+
+                if (preg_match('/^[+-]/', $line) !== 1) {
+                    return null;
+                }
+
+                return $line;
             },
             $output,
         )));

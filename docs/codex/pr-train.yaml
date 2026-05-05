@@ -1,0 +1,119 @@
+train_id: email-first-result-access
+created_at: "2026-05-05"
+continuation_protocol:
+  continue_when:
+    - scope_validation_green
+    - local_required_validation_green
+    - github_required_checks_green
+    - remaining_blockers_not_introduced_by_current_pr
+  external_blocker_policy:
+    record_as_sidecar_issue: true
+    do_not_stop_train_when_external_and_required_checks_green: true
+prs:
+  - id: backend-email-binding-foundation
+    repo: fap-api
+    branch: codex/backend-email-binding-foundation
+    title: "backend-email-binding-foundation: email binding foundation"
+    scope:
+      - Add attempt_email_bindings table.
+      - Add AttemptEmailBinding model/service/request.
+      - Add POST /api/v0.3/attempts/{id}/email-bind.
+      - Binding requires current actor ownership by anon_id/user_id.
+      - Store email_hash/email_enc with existing PiiCipher.
+      - Status is active for this MVP.
+      - Update OpenAPI snapshot for the new route.
+    do_not:
+      - Change result/report read gate yet.
+      - Add frontend UI.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter AttemptEmailBindingTest
+      - bash backend/scripts/ci_verify_mbti.sh
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: backend-email-result-lookup
+    repo: fap-api
+    depends_on:
+      - backend-email-binding-foundation
+    scope:
+      - Add POST /api/v0.3/results/lookup-by-email.
+      - Return lightweight result list for active bindings.
+      - Add short-lived result_access_token for each result.
+      - Add rate limiting.
+      - Return ok:true items:[] for no matches.
+    do_not:
+      - Enforce result page gate yet.
+      - Return full result/report payload from lookup.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - focused phpunit for lookup
+      - bash backend/scripts/ci_verify_mbti.sh
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: backend-email-gated-report-read
+    repo: fap-api
+    depends_on:
+      - backend-email-result-lookup
+    scope:
+      - Result/report/report-access read endpoints accept result_access_token.
+      - For enabled public scales, unbound attempts return EMAIL_BIND_REQUIRED.
+      - Token grants read-only access to matching attempt.
+      - Keep SDS_20 and CLINICAL_COMBO_68 excluded.
+      - Prefer feature flag default-off if frontend is not merged yet.
+    do_not:
+      - Change payment/order claim behavior.
+      - Loosen tenant/org isolation.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - focused phpunit for gated reads and token reads
+      - bash backend/scripts/ci_verify_mbti.sh
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: frontend-result-email-gate
+    repo: fap-web
+    depends_on:
+      - backend-email-gated-report-read
+    scope:
+      - Add bindAttemptEmail API client.
+      - ResultClient handles EMAIL_BIND_REQUIRED.
+      - Show email gate before result/report rendering.
+      - Copy says "输入邮箱即可查看并找回该邮箱下保存的结果，请使用你自己的邮箱。"
+      - After successful bind, reload result/report.
+    do_not:
+      - Add full account registration.
+      - Add email verification UI.
+      - Add editorial/static content outside product UI copy.
+    validation:
+      - npm run lint
+      - npm test -- --run
+      - targeted result page test if available
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: frontend-email-result-lookup
+    repo: fap-web
+    depends_on:
+      - frontend-result-email-gate
+    scope:
+      - Add /results/lookup page.
+      - Add lookupResultsByEmail API client.
+      - Show lightweight list of bound results.
+      - Open result_url with access_token.
+      - Ensure noindex applies.
+    do_not:
+      - Reuse /orders/lookup for this flow.
+      - Mix order recovery semantics into result lookup.
+    validation:
+      - npm run lint
+      - npm test -- --run
+      - targeted lookup page test if available
+    merge_policy:
+      github_checks_required: true
+      squash: true
