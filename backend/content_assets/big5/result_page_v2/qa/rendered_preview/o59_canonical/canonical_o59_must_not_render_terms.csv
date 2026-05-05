@@ -1,0 +1,24 @@
+term,severity,surface,allowed_context,forbidden_context,repair_action
+A compact overview,P0,all,none,result page / pdf / share / history / compare rendered text,Replace compact scaffold with B5-B1 governed section copy.
+Five-domain distribution with percentile-oriented context,P0,all,none,result page / pdf rendered text,Replace legacy subtitle with 中文维度总览 copy.
+Focused read on domain-level strengths,P0,all,none,domain_deep_dive heading/subtitle/body,Use governed 五维深解 section copy.
+Facet-level signals arranged for quick interpretation,P0,all,none,facet_details heading/subtitle/body,Use governed facet reframe body.
+Norms Comparison,P0,all,none,section title / subtitle,Use 中文 相对参照.
+Methodology and Access,P0,all,none,section title / subtitle,Use 中文 方法与边界说明.
+N1 百分位,P1,result_page / pdf,full facet directory / metric row only,facet_details primary explanation,Move percentile-only text to directory row; keep reframe as primary body.
+all,P1,all,ordinary word inside unrelated English text only if not placeholder/debug,placeholder / debug leakage / facet row filler,Suppress placeholder output; do not treat callout/kind as violation.
+优先关注成长面向,P0,all,none,action_plan body or summary,Use scenario-bound action plan.
+"O6, C5, E6",P0,all,none,action_plan body or summary,Do not render legacy facet list as action plan.
+[object Object],P0,all,none,any user-visible text,Fix renderer serialization before preview pass.
+deferred_to_future,P0,all,none,any user-visible text,Remove placeholder/debug metadata.
+policy_not_shipped,P0,all,none,any user-visible text,Remove policy placeholder/debug metadata.
+frontend_fallback,P0,all,none,any user-visible text,Do not expose fallback source label.
+internal_metadata,P0,all,none,any user-visible text,Remove metadata leak.
+selector_basis,P0,all,none,any user-visible text,Remove selector trace from public rendering.
+selection_guidance,P0,all,none,any user-visible text,Remove internal selection guidance.
+editor_notes,P0,all,none,any user-visible text,Remove editorial notes from rendered output.
+qa_notes,P0,all,none,any user-visible text,Remove QA notes from rendered output.
+source_reference,P0,all,none,any user-visible text,Remove source trace from public rendering.
+import_policy,P0,all,none,any user-visible text,Remove import governance metadata from public rendering.
+runtime_use,P0,all,none,any user-visible text,Remove runtime metadata from public rendering.
+production_use_allowed,P0,all,none,any user-visible text,Remove production metadata from public rendering.

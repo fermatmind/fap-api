@@ -1,0 +1,82 @@
+{
+  "schema": "fap.big5.b5_b1.share_render_contract.v0_1",
+  "profile": {
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入",
+    "source_role": "canonical_body_seed"
+  },
+  "surface": "share_card",
+  "expected_sections": [
+    "share_summary_card",
+    "non_type_boundary",
+    "safe_cta"
+  ],
+  "expected_visible_terms": [
+    "敏锐的独立思考者",
+    "高敏感 × 中高开放 × 克制进入",
+    "Big Five 描述的是连续人格特质，不是固定人格类型",
+    "不用于医学诊断",
+    "不用于招聘筛选",
+    "画像名只是辅助理解标签"
+  ],
+  "forbidden_visible_terms": [
+    "A compact overview",
+    "Five-domain distribution with percentile-oriented context",
+    "Focused read on domain-level strengths",
+    "Facet-level signals arranged for quick interpretation",
+    "Norms Comparison",
+    "Methodology and Access",
+    "N1 百分位",
+    "all",
+    "优先关注成长面向",
+    "O6, C5, E6",
+    "[object Object]",
+    "deferred_to_future",
+    "policy_not_shipped",
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "selection_guidance",
+    "editor_notes",
+    "qa_notes",
+    "source_reference",
+    "import_policy",
+    "runtime_use",
+    "production_use_allowed"
+  ],
+  "metadata_leak_terms": [
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "selection_guidance",
+    "editor_notes",
+    "qa_notes",
+    "source_reference",
+    "import_policy",
+    "runtime_use",
+    "production_use_allowed",
+    "[object Object]",
+    "deferred_to_future",
+    "policy_not_shipped"
+  ],
+  "layout_risk_notes": [
+    "Share card is safe summary only; do not expose raw scores beyond allowed profile signature if product chooses to show signature.",
+    "Do not expose facet details, internal selectors, source refs, or QA metadata.",
+    "Boundary must say auxiliary label / non-type when profile label is visible."
+  ],
+  "pass_fail_criteria": [
+    "safe profile summary only",
+    "non-type boundary visible if label visible",
+    "no raw facet details",
+    "no metadata leak",
+    "no P0 banned terms"
+  ]
+}

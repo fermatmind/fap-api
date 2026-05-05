@@ -1,0 +1,56 @@
+{
+  "schema": "fap.big5.b5_b1.rendered_preview_qa_package.manifest.v0_1",
+  "package_key": "B5-B1-Preview",
+  "package_name": "O59 Canonical Rendered Preview QA Pack",
+  "version": "v0.1",
+  "created_at_utc": "2026-05-04T10:46:59.134843Z",
+  "locale": "zh-CN",
+  "profile": {
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入",
+    "source_role": "canonical_body_seed"
+  },
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_rendered_preview_execution": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "files": {
+    "json": [
+      "canonical_o59_rendered_preview_expectations_v0_1.json",
+      "canonical_o59_visible_text_must_render_v0_1.json",
+      "canonical_o59_visible_text_must_not_render_v0_1.json",
+      "canonical_o59_section_render_contract_v0_1.json",
+      "canonical_o59_pdf_render_contract_v0_1.json",
+      "canonical_o59_share_render_contract_v0_1.json",
+      "canonical_o59_rendered_preview_ready_gate_v0_1.json",
+      "canonical_o59_rendered_preview_qa_summary_v0_1.json",
+      "manifest.json"
+    ],
+    "csv": [
+      "canonical_o59_must_render_terms.csv",
+      "canonical_o59_must_not_render_terms.csv",
+      "canonical_o59_section_render_contract.csv",
+      "canonical_o59_surface_coverage.csv"
+    ],
+    "markdown": [
+      "README.md",
+      "canonical_o59_rendered_preview_repair_log_template.md",
+      "SHA256SUMS.txt"
+    ]
+  },
+  "source_constraints": [
+    "No new body copy",
+    "No frontend/runtime/code changes",
+    "No B5-B2",
+    "No 3125 reports"
+  ]
+}

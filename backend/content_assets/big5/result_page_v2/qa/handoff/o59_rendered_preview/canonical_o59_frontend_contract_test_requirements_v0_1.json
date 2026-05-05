@@ -1,0 +1,103 @@
+{
+  "schema": "fap.big5.b5_b1_o59.frontend_contract_test_requirements.v0_1_1",
+  "repo": "fap-web",
+  "suggested_test_file": "tests/contracts/big5-o59-rendered-preview.contract.test.tsx",
+  "required_existing_paths_to_check_before_adding_test": [
+    "lib/big5/resultAssembler.ts",
+    "components/result/big5/Big5ResultShell.tsx",
+    "components/big5/report/SectionRenderer.tsx",
+    "components/big5/report/BlockRenderer.tsx",
+    "tests/contracts/big5-v2-runtime-consumer.contract.test.ts",
+    "tests/contracts/big5-section-renderer.contract.test.tsx",
+    "tests/fixtures/big5/"
+  ],
+  "test_cases": [
+    {
+      "case_id": "valid_o59_payload_renders_primary_result_surfaces",
+      "intent": "valid payload enters Big5 V2 rendered preview path and renders canonical sections",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile"
+      ],
+      "must_assert": [
+        "all 8 section contracts",
+        "must_render_terms primary",
+        "must_not_render_terms P0/P1",
+        "no metadata leak"
+      ]
+    },
+    {
+      "case_id": "invalid_payload_safe_fallback",
+      "intent": "invalid/malformed payload must not crash and must not invent new body copy",
+      "must_assert": [
+        "legacy path remains safe",
+        "no new frontend-authored longform body",
+        "no metadata leak"
+      ]
+    },
+    {
+      "case_id": "missing_payload_safe_fallback",
+      "intent": "missing O59 preview payload must use existing legacy path without claiming rendered preview passed",
+      "must_assert": [
+        "no crash",
+        "no invented B5-B1 body",
+        "no false pass for rendered preview"
+      ]
+    },
+    {
+      "case_id": "conditional_surface_harness_detection",
+      "intent": "PDF/share/history/compare are tested only if existing harness supports them",
+      "must_assert": [
+        "unsupported surfaces marked pending_surface",
+        "pending surfaces do not count as passed"
+      ]
+    }
+  ],
+  "do_not": [
+    "do not edit fap-api",
+    "do not create backend runtime wiring",
+    "do not write new body copy",
+    "do not modify production registry",
+    "do not claim PDF/share/history/compare passed without harness"
+  ],
+  "recommended_commands_after_implementation": [
+    "pnpm exec vitest run tests/contracts/big5-o59-rendered-preview.contract.test.tsx",
+    "pnpm exec vitest run tests/contracts/big5-v2-runtime-consumer.contract.test.ts tests/contracts/big5-section-renderer.contract.test.tsx tests/contracts/rich-result-report.contract.test.tsx",
+    "git diff --check"
+  ],
+  "revision": "v0.1.1",
+  "revision_notes": [
+    "v0.1.1 fixes manifest file list/count consistency.",
+    "v0.1.1 deduplicates surfaces arrays, including duplicated pdf entries.",
+    "v0.1.1 strengthens contextual all matching: no raw substring scan.",
+    "v0.1.1 requires tested_surfaces/pending_surfaces/passed_surfaces/failed_surfaces in Codex output."
+  ],
+  "version": "v0.1.1",
+  "required_codex_final_report": {
+    "tested_surfaces": "array of surfaces for which tests actually ran",
+    "pending_surfaces": "array of conditional surfaces without existing harness or intentionally skipped with reason",
+    "passed_surfaces": "array of tested surfaces that passed all blocking assertions",
+    "failed_surfaces": "array of tested surfaces that failed blocking assertions",
+    "rule": "pdf/share_card/history/compare cannot be counted as passed unless existing harness actually exercised them."
+  },
+  "all_assertion_policy": {
+    "term": "all",
+    "scope": "user_visible_rendered_text_only",
+    "match_mode": "standalone_visible_token_exact",
+    "raw_substring_scan_allowed": false,
+    "case_sensitive": false,
+    "normalization": "trim visible text node; collapse whitespace; compare exact visible token",
+    "allowed_context": [
+      "words containing all, including 'callout' and 'allowlisted'",
+      "schema kind values",
+      "internal code strings",
+      "non-rendered JSON, TypeScript, fixture, or QA metadata"
+    ],
+    "forbidden_context": [
+      "standalone visible line exactly equal to 'all'",
+      "placeholder/debug leakage rendered in facet rows or table cells",
+      "raw internal placeholder exposed to user-visible UI"
+    ],
+    "implementation_warning": "Do not use raw substring matching for 'all'. Do not fail 'callout', 'allowlisted', or internal code strings."
+  }
+}

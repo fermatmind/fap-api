@@ -1,0 +1,65 @@
+{
+  "schema": "fap.big5.b5_b1.safety_qa_summary.v0_1",
+  "package_key": "B5-B1_O59_canonical_core_body_v0_1",
+  "status": "PASS",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "visible_text_banned_term_hits": [],
+  "banned_terms_checked": [
+    "A compact overview",
+    "Five-domain distribution with percentile-oriented context",
+    "Focused read on domain-level strengths",
+    "Facet-level signals arranged for quick interpretation",
+    "Norms Comparison",
+    "Methodology and Access",
+    "N1 百分位",
+    "优先关注成长面向",
+    "O6, C5, E6",
+    "[object Object]",
+    "deferred_to_future",
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "selection_guidance",
+    "editor_notes",
+    "qa_notes",
+    "source_reference",
+    "import_policy",
+    "policy_not_shipped",
+    "all (contextual exact visible word)"
+  ],
+  "boundary_checks": [
+    {
+      "check": "no_fixed_type_claim",
+      "status": "PASS"
+    },
+    {
+      "check": "no_diagnostic_or_medical_claim",
+      "status": "PASS"
+    },
+    {
+      "check": "no_hiring_or_employment_screening_claim",
+      "status": "PASS"
+    },
+    {
+      "check": "no_accuracy_or_validity_claim",
+      "status": "PASS"
+    },
+    {
+      "check": "no_frontend_fallback_dependency",
+      "status": "PASS"
+    },
+    {
+      "check": "no_selector_or_internal_metadata_in_visible_copy",
+      "status": "PASS"
+    },
+    {
+      "check": "facet_percentile_not_primary_explanation",
+      "status": "PASS"
+    }
+  ],
+  "notes": [
+    "Facet directory contains facet codes and numeric values as metric rows only; primary facet explanation is reframing and action-oriented.",
+    "Production use is blocked until rendered preview QA, editorial QA, safety QA and repair log closeout pass in repository workflow."
+  ]
+}

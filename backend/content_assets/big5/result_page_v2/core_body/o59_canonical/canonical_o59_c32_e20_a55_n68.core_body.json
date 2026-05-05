@@ -1,0 +1,3713 @@
+{
+  "schema": "fap.big5.b5_b1.canonical_core_body.v0_1",
+  "package_key": "B5-B1_O59_canonical_core_body_v0_1",
+  "created_at_utc": "2026-05-04T09:56:36.584272Z",
+  "locale": "zh-CN",
+  "profile": {
+    "profile_id": "canonical_o59_c32_e20_a55_n68",
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入",
+    "source_role": "canonical_body_seed",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  "source_authority": {
+    "module_master": "FermatMind_BigFive_新版结果页_正式上线V2.0.docx",
+    "narrative_master": "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx",
+    "mapping_authority": "B5-A-lite_v0_1 module-to-section mapping"
+  },
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_rendered_preview": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "generalization_policy": "canonical_o59_only__must_not_generalize_to_all_users",
+  "sections": [
+    {
+      "section_key": "hero_summary",
+      "title_zh": "结果摘要",
+      "subtitle_zh": "用主轴、五维信号和第一步行动快速进入这份结果。",
+      "source_modules": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 1 首屏快读卡",
+        "V2.0 Module 2 三分钟理解版",
+        "两万字稿 第 1 节 结果摘要"
+      ],
+      "required_longform_sections": [
+        "第 1 节｜结果摘要"
+      ],
+      "blocks": [
+        {
+          "asset_id": "b5_b1_o59_hero_summary_001",
+          "asset_key": "canonical_o59.hero_summary.profile_summary.001",
+          "section_key": "hero_summary",
+          "slot_key": "profile_summary",
+          "kind": "paragraph",
+          "title_zh": "BIG5 · 敏锐的独立思考者",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_01_hero",
+            "module_02_quick_understanding"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 首屏快读卡",
+            "V2.0 Module 2 三分钟理解版",
+            "两万字稿 第 1 节 结果摘要"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "这次结果最值得注意的，不是某一个孤立高分，而是一组彼此咬合的结构：情绪性中高、开放性中高、外向性明显偏低、宜人性中位略高、尽责性偏低。把它翻译成现实里的样子，你更像一个先感知、再理解、再决定是否进入的人。你并不是慢，也不是弱，而是需要先感到值得、合理、清楚，才能自然把自己交给场景。",
+          "body_quality": {
+            "body_chars": 141,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": true,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_hero_summary_002",
+          "asset_key": "canonical_o59.hero_summary.axis_callout.002",
+          "section_key": "hero_summary",
+          "slot_key": "axis_callout",
+          "kind": "callout",
+          "title_zh": "主轴",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_01_hero",
+            "module_02_quick_understanding"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 首屏快读卡",
+            "V2.0 Module 2 三分钟理解版",
+            "两万字稿 第 1 节 结果摘要"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你的主轴是“高敏感 × 中高开放 × 克制进入”。高敏感让你更早捕捉风险、误解和关系张力；中高开放让你继续理解复杂性，而不是粗暴否定；克制进入则让你在表达和行动前先完成内部判断。真正的发展重点，不是把自己改造成高外放、高压推进的人，而是让这套敏锐系统在现实中更稳定地发力。",
+          "body_quality": {
+            "body_chars": 136,
+            "sentence_count_estimate": 5,
+            "has_trait_layer": false,
+            "has_coupling_layer": true,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_hero_summary_003",
+          "asset_key": "canonical_o59.hero_summary.strengths.003",
+          "section_key": "hero_summary",
+          "slot_key": "strengths",
+          "kind": "bullets",
+          "title_zh": "三个优势",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_01_hero",
+            "module_02_quick_understanding"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 首屏快读卡",
+            "V2.0 Module 2 三分钟理解版",
+            "两万字稿 第 1 节 结果摘要"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "items": [
+            "能更早感知风险、误差和关系张力，不容易盲目进入消耗性场景。",
+            "能理解复杂性，不轻易把问题压扁成粗糙结论。",
+            "有边界感，愿意合作，但不会无限迎合或被表面共识带走。"
+          ],
+          "body_quality": {
+            "body_chars": 76,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": true,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_hero_summary_004",
+          "asset_key": "canonical_o59.hero_summary.risks.004",
+          "section_key": "hero_summary",
+          "slot_key": "risks",
+          "kind": "bullets",
+          "title_zh": "三个风险",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_01_hero",
+            "module_02_quick_understanding"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 首屏快读卡",
+            "V2.0 Module 2 三分钟理解版",
+            "两万字稿 第 1 节 结果摘要"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "items": [
+            "感受容易长期留在内部，形成慢性内耗。",
+            "低反馈、低意义任务会让启动和续航明显变难。",
+            "进入慢、表达晚时，别人可能看不见你的判断与价值。"
+          ],
+          "body_quality": {
+            "body_chars": 63,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_hero_summary_005",
+          "asset_key": "canonical_o59.hero_summary.first_action.005",
+          "section_key": "hero_summary",
+          "slot_key": "first_action",
+          "kind": "paragraph",
+          "title_zh": "接下来 48 小时",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_01_hero",
+            "module_06_application_matrix"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 首屏快读卡",
+            "V2.0 Module 2 三分钟理解版",
+            "两万字稿 第 1 节 结果摘要"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "选一件重要但不紧急的事，只做 20 分钟。不要要求完成，只要求开始。完成后只记录两件事：我为什么愿意做它，以及下一步最小动作是什么。这个动作不是为了证明自律，而是为了把你的判断从内部处理带回现实节奏。",
+          "body_quality": {
+            "body_chars": 100,
+            "sentence_count_estimate": 4,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_hero_summary_006",
+          "asset_key": "canonical_o59.hero_summary.reading_boundary.006",
+          "section_key": "hero_summary",
+          "slot_key": "reading_boundary",
+          "kind": "callout",
+          "title_zh": "阅读方式",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_00_trust_bar",
+            "module_01_hero"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 首屏快读卡",
+            "V2.0 Module 2 三分钟理解版",
+            "两万字稿 第 1 节 结果摘要"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "这份结果不是固定人格类型，也不是对你的最终判定。请把它当成一张行为地图：它帮助你看见自己如何进入、如何判断、如何耗损、如何恢复。越能按这套系统的真实工作方式安排生活，你越少把自己误判成不够主动、不够硬或意志力不够。",
+          "body_quality": {
+            "body_chars": 107,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        }
+      ],
+      "body_quality": {
+        "block_count": 6,
+        "minimum_block_count": 5,
+        "meets_minimum_block_count": true,
+        "total_body_chars": 623,
+        "render_density": "thick_staging_body",
+        "contains_required_modules": true,
+        "requires_render_preview": true
+      },
+      "safety_tags": [
+        "non_diagnostic",
+        "non_hiring",
+        "no_accuracy_claim",
+        "no_hard_typing",
+        "continuous_trait_language",
+        "canonical_o59_only"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "rendered_preview_required": true,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "section_key": "domains_overview",
+      "title_zh": "维度总览",
+      "subtitle_zh": "先理解五个连续维度，再看它们如何一起工作。",
+      "source_modules": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 1 五维快照",
+        "V2.0 Module 3 五维分数深解",
+        "两万字稿 第 2 节 维度总览与阅读说明"
+      ],
+      "required_longform_sections": [
+        "第 2 节｜维度总览与阅读说明"
+      ],
+      "blocks": [
+        {
+          "asset_id": "b5_b1_o59_domains_overview_007",
+          "asset_key": "canonical_o59.domains_overview.how_to_read.007",
+          "section_key": "domains_overview",
+          "slot_key": "how_to_read",
+          "kind": "paragraph",
+          "title_zh": "如何理解五维",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_02_quick_understanding",
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 五维快照",
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 第 2 节 维度总览与阅读说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "Big Five 不是在给你贴固定标签，而是在描述你在五个连续维度上的位置。真正影响日常表现的，不是某一个单项分数，而是这些维度如何一起工作、互相补偿、互相拉扯。高低也不是优劣，只表示这种倾向在你当前参考语境里更明显或更不明显。",
+          "body_quality": {
+            "body_chars": 114,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_domains_overview_008",
+          "asset_key": "canonical_o59.domains_overview.domain_snapshot_O.008",
+          "section_key": "domains_overview",
+          "slot_key": "domain_snapshot_O",
+          "kind": "table_row",
+          "title_zh": "开放性 59｜中高",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_02_quick_understanding",
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 五维快照",
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 第 2 节 维度总览与阅读说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你愿意理解复杂性，也愿意接触新想法，但不会为了显得前卫而强迫自己喜欢某些东西。你的开放带着现实锚点：会问意义、落地性和真实连接。",
+          "body_quality": {
+            "body_chars": 64,
+            "sentence_count_estimate": 2,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_domains_overview_009",
+          "asset_key": "canonical_o59.domains_overview.domain_snapshot_C.009",
+          "section_key": "domains_overview",
+          "slot_key": "domain_snapshot_C",
+          "kind": "table_row",
+          "title_zh": "尽责性 32｜偏低",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_02_quick_understanding",
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 五维快照",
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 第 2 节 维度总览与阅读说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你并不缺责任感，但持续推进更依赖意义、路径和反馈。你不是不会做事，而是难以长期靠纯意志力维持稳定输出。",
+          "body_quality": {
+            "body_chars": 51,
+            "sentence_count_estimate": 2,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_domains_overview_010",
+          "asset_key": "canonical_o59.domains_overview.domain_snapshot_E.010",
+          "section_key": "domains_overview",
+          "slot_key": "domain_snapshot_E",
+          "kind": "table_row",
+          "title_zh": "外向性 20｜明显偏低",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_02_quick_understanding",
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 五维快照",
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 第 2 节 维度总览与阅读说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你不太依赖持续互动来获得能量，也不会天然把自己推到场景中心。你更偏向先观察、先理解、先判断，再决定如何进入。",
+          "body_quality": {
+            "body_chars": 54,
+            "sentence_count_estimate": 2,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_domains_overview_011",
+          "asset_key": "canonical_o59.domains_overview.domain_snapshot_A.011",
+          "section_key": "domains_overview",
+          "slot_key": "domain_snapshot_A",
+          "kind": "table_row",
+          "title_zh": "宜人性 55｜中位略高",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_02_quick_understanding",
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 五维快照",
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 第 2 节 维度总览与阅读说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你愿意合作，也能顾及他人处境，但不是没有边界的人。规则清楚、沟通合理时，你可以合作得很好；边界漂移时，你会明显后退。",
+          "body_quality": {
+            "body_chars": 58,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_domains_overview_012",
+          "asset_key": "canonical_o59.domains_overview.domain_snapshot_N.012",
+          "section_key": "domains_overview",
+          "slot_key": "domain_snapshot_N",
+          "kind": "table_row",
+          "title_zh": "情绪性 68｜中高",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_02_quick_understanding",
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 五维快照",
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 第 2 节 维度总览与阅读说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你比很多人更早感觉到风险、误差、张力和消耗。你不是脆弱，而是一个更早有体感、也更容易为此付出心理成本的系统。",
+          "body_quality": {
+            "body_chars": 54,
+            "sentence_count_estimate": 2,
+            "has_trait_layer": false,
+            "has_coupling_layer": true,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_domains_overview_013",
+          "asset_key": "canonical_o59.domains_overview.overview_conclusion.013",
+          "section_key": "domains_overview",
+          "slot_key": "overview_conclusion",
+          "kind": "callout",
+          "title_zh": "总览结论",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_02_quick_understanding",
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 1 五维快照",
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 第 2 节 维度总览与阅读说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "这次结果的关键不是哪一项特别高，而是“高敏感 + 高理解 + 克制进入 + 低续航推进”。你很容易在复杂环境里看得更深，也更容易在长期拉扯中耗得更快。你的能力不是粗线条爆发型能力，而是一种需要边界、节奏、恢复和反馈承托的深处理能力。",
+          "body_quality": {
+            "body_chars": 116,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        }
+      ],
+      "body_quality": {
+        "block_count": 7,
+        "minimum_block_count": 6,
+        "meets_minimum_block_count": true,
+        "total_body_chars": 511,
+        "render_density": "thick_staging_body",
+        "contains_required_modules": true,
+        "requires_render_preview": true
+      },
+      "safety_tags": [
+        "non_diagnostic",
+        "non_hiring",
+        "no_accuracy_claim",
+        "no_hard_typing",
+        "continuous_trait_language",
+        "canonical_o59_only"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "rendered_preview_required": true,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "section_key": "domain_deep_dive",
+      "title_zh": "五维深解",
+      "subtitle_zh": "逐个维度看分数位置、帮助、代价和现实使用方式。",
+      "source_modules": [
+        "module_03_trait_deep_dive"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 3 五维分数深解",
+        "两万字稿 五维深解相关段落"
+      ],
+      "required_longform_sections": [
+        "五维深解：开放性、尽责性、外向性、宜人性、情绪性"
+      ],
+      "blocks": [
+        {
+          "asset_id": "b5_b1_o59_domain_deep_dive_014",
+          "asset_key": "canonical_o59.domain_deep_dive.domain_deep_O.014",
+          "section_key": "domain_deep_dive",
+          "slot_key": "domain_deep_O",
+          "kind": "metric_card",
+          "title_zh": "开放性 59｜理解复杂性，但有现实锚点",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 五维深解相关段落"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "开放性决定你如何面对新经验、复杂概念、审美变化和非标准答案。你愿意理解新东西，也会被有解释力的观点吸引，但你通常仍希望知道它和真实问题有什么关系。它的帮助是让你不容易被空洞口号收编，也能在复杂问题里保留细腻；代价是当别人只想要快答案时，你可能觉得环境粗糙，并在内部多看一层。使用方式是：先写出“我现在最确定的一点是什么”，让开放性服务判断，而不是让复杂性拖住行动。",
+          "body_quality": {
+            "body_chars": 182,
+            "sentence_count_estimate": 5,
+            "has_trait_layer": true,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_domain_deep_dive_015",
+          "asset_key": "canonical_o59.domain_deep_dive.domain_deep_C.015",
+          "section_key": "domain_deep_dive",
+          "slot_key": "domain_deep_C",
+          "kind": "metric_card",
+          "title_zh": "尽责性 32｜不是无序，而是持续推进依赖意义",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 五维深解相关段落"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "尽责性反映计划、秩序、自我约束、责任执行和持续完成的倾向。你常常不是不知道该做什么，而是需要更轻的启动门槛、更明确的外部节奏和更及时的阶段反馈。它的帮助是让你不容易被僵硬流程完全锁住，对变化有弹性；代价是当任务缺少意义和反馈时，推进系统容易掉速。使用方式是把任务拆短、把启动外置、把反馈做密，而不是只靠“我应该做”。",
+          "body_quality": {
+            "body_chars": 158,
+            "sentence_count_estimate": 5,
+            "has_trait_layer": true,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_domain_deep_dive_016",
+          "asset_key": "canonical_o59.domain_deep_dive.domain_deep_E.016",
+          "section_key": "domain_deep_dive",
+          "slot_key": "domain_deep_E",
+          "kind": "metric_card",
+          "title_zh": "外向性 20｜进入克制，不是疏离",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 五维深解相关段落"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "外向性决定你如何从互动、表达、社交刺激和现场反馈中获得能量。你明显偏低，说明你更适合先观察、先内化，再选择性表达。它的帮助是你不容易被场面带着跑，也不需要通过过度曝光证明自己；代价是如果洞察和判断不主动表达，别人未必能看见你的能力。使用方式是训练低成本进入：提前准备一句观点、会后补充反馈、用文字表达判断。",
+          "body_quality": {
+            "body_chars": 153,
+            "sentence_count_estimate": 5,
+            "has_trait_layer": true,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_domain_deep_dive_017",
+          "asset_key": "canonical_o59.domain_deep_dive.domain_deep_A.017",
+          "section_key": "domain_deep_dive",
+          "slot_key": "domain_deep_A",
+          "kind": "metric_card",
+          "title_zh": "宜人性 55｜能合作，也会后退",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 五维深解相关段落"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "宜人性反映合作、体谅、信任、冲突承接和关系维护的倾向。你处在中位略高，说明你愿意合作，也能顾及他人处境，但不是会无限让步的人。它的帮助是在目标一致和规则清楚时，你可以稳定承接关系；代价是当边界模糊、责任漂移或情绪期待过多时，你会明显后退。使用方式是不要等到耗尽才表达，而是在不舒服刚出现时先说一半。",
+          "body_quality": {
+            "body_chars": 149,
+            "sentence_count_estimate": 5,
+            "has_trait_layer": true,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_domain_deep_dive_018",
+          "asset_key": "canonical_o59.domain_deep_dive.domain_deep_N.018",
+          "section_key": "domain_deep_dive",
+          "slot_key": "domain_deep_N",
+          "kind": "metric_card",
+          "title_zh": "情绪性 68｜高体感，是优势，也是成本",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_03_trait_deep_dive"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 五维深解相关段落"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "情绪性决定你对压力、评价、不确定性、关系张力和失控感的体感强度。你中高，说明你比很多人更早意识到不对劲，也更容易在问题尚未爆发前承担心理成本。它的帮助是风险觉察快、环境质量感强；代价是外部张力容易被带回内部，形成慢性消耗。使用方式不是要求自己别敏感，而是更早命名来源、更早表达边界、更主动安排恢复。",
+          "body_quality": {
+            "body_chars": 149,
+            "sentence_count_estimate": 5,
+            "has_trait_layer": true,
+            "has_coupling_layer": true,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_domain_deep_dive_019",
+          "asset_key": "canonical_o59.domain_deep_dive.domain_integrated_note.019",
+          "section_key": "domain_deep_dive",
+          "slot_key": "domain_integrated_note",
+          "kind": "callout",
+          "title_zh": "五维一起看时的重点",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_03_trait_deep_dive",
+            "module_04_coupling"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 3 五维分数深解",
+            "两万字稿 五维深解相关段落"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "单看每个维度，你可能只看到“敏感、克制、低续航”。放在一起看，真正的结构是：你有很强的感知和理解能力，但行动系统不适合长期靠高压外推。适合你的不是粗暴加码，而是让任务更短、反馈更近、边界更清楚、恢复更早发生。",
+          "body_quality": {
+            "body_chars": 104,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        }
+      ],
+      "body_quality": {
+        "block_count": 6,
+        "minimum_block_count": 5,
+        "meets_minimum_block_count": true,
+        "total_body_chars": 895,
+        "render_density": "thick_staging_body",
+        "contains_required_modules": true,
+        "requires_render_preview": true
+      },
+      "safety_tags": [
+        "non_diagnostic",
+        "non_hiring",
+        "no_accuracy_claim",
+        "no_hard_typing",
+        "continuous_trait_language",
+        "canonical_o59_only"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "rendered_preview_required": true,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "section_key": "facet_details",
+      "title_zh": "细分维度焦点",
+      "subtitle_zh": "用 facet 解释反直觉结构，而不是只展示数字。",
+      "source_modules": [
+        "module_05_facet_reframe"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 5 Facet 反直觉发现",
+        "两万字稿 facet 焦点与数据核心层"
+      ],
+      "required_longform_sections": [
+        "Facet 反直觉发现",
+        "数据核心层",
+        "细分维度焦点"
+      ],
+      "blocks": [
+        {
+          "asset_id": "b5_b1_o59_facet_details_020",
+          "asset_key": "canonical_o59.facet_details.facet_intro.020",
+          "section_key": "facet_details",
+          "slot_key": "facet_intro",
+          "kind": "paragraph",
+          "title_zh": "facet 的正确读法",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "细分维度不是 30 个分数的列表，而是用来解释宽维度为什么会以这种方式表现。对你来说，真正有价值的不是看见某个刻面高低，而是看见内部结构：你有高预警、高耗竭、高脱离冲动，也有低公开羞怯和低快速崩溃。这说明你的敏感更多在内部高负荷运行，而不是简单外显失控。",
+          "body_quality": {
+            "body_chars": 127,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": true,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_021",
+          "asset_key": "canonical_o59.facet_details.facet_reframe_not_low_c.021",
+          "section_key": "facet_details",
+          "slot_key": "facet_reframe_not_low_c",
+          "kind": "callout",
+          "title_zh": "反直觉发现一：你不是没尽责，而是秩序识别高、持续推进低",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe",
+            "module_06_application_matrix"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "C1 和 C2 很高，说明你并不是看不见结构、标准和收口方式；C5、C6、C3、C4 偏低，说明困难主要出在启动、自律、长期推进和持续收尾。把它翻译成现实语言：你不是没有责任感，而是需要把任务从“长期硬扛”改造成“短启动、明确反馈、阶段收口”。",
+          "body_quality": {
+            "body_chars": 122,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": true,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_022",
+          "asset_key": "canonical_o59.facet_details.facet_reframe_not_social_bad.022",
+          "section_key": "facet_details",
+          "slot_key": "facet_reframe_not_social_bad",
+          "kind": "callout",
+          "title_zh": "反直觉发现二：你不是社交差，而是低成本进入不足",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe",
+            "module_06_application_matrix"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "E1 和 E2 并不低，说明你不是没有热情或不能合群；真正低的是主动表达、活跃度、刺激寻求和正向外显。也就是说，你不是没有连接能力，而是不适合用高频热闹证明自己。更有效的策略是准备低成本表达：提前一句观点、会后一段文字、关键时刻一个边界句。",
+          "body_quality": {
+            "body_chars": 120,
+            "sentence_count_estimate": 4,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_023",
+          "asset_key": "canonical_o59.facet_details.facet_reframe_not_fragile.023",
+          "section_key": "facet_details",
+          "slot_key": "facet_reframe_not_fragile",
+          "kind": "callout",
+          "title_zh": "反直觉发现三：你不是玻璃心，而是内部负荷高、外部仍在扛",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe",
+            "module_06_application_matrix"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "N1、N3、N5 很高，说明你对风险、耗竭和过载退出有强烈体感；但 N4、N6 很低，说明你不一定很快公开显得撑不住。你的常见模式不是当场崩溃，而是外面看起来还在扛，内部已经长时间高负荷。真正要防的不是敏感本身，而是太晚把负荷外化。",
+          "body_quality": {
+            "body_chars": 116,
+            "sentence_count_estimate": 4,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": true,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_024",
+          "asset_key": "canonical_o59.facet_details.facet_actions.024",
+          "section_key": "facet_details",
+          "slot_key": "facet_actions",
+          "kind": "bullets",
+          "title_zh": "行动建议",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe",
+            "module_06_application_matrix"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "items": [
+            "把“我感觉不对”改写成一句可讨论事实：我现在担心的是边界、节奏、责任还是反馈。",
+            "把启动门槛降到 20 分钟，不用完成，只确认下一步是否值得。",
+            "在过载前先安排恢复，不等到已经想切断一切再处理。"
+          ],
+          "body_quality": {
+            "body_chars": 93,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_025",
+          "asset_key": "canonical_o59.facet_details.facet_directory_o1.025",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_o1",
+          "kind": "table_row",
+          "title_zh": "O1｜想象力｜94",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "能从具体问题里看到更丰富的可能性。",
+          "body_quality": {
+            "body_chars": 17,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_026",
+          "asset_key": "canonical_o59.facet_details.facet_directory_o2.026",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_o2",
+          "kind": "table_row",
+          "title_zh": "O2｜审美感｜66",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "对表达质感和环境氛围有一定敏感度。",
+          "body_quality": {
+            "body_chars": 17,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_027",
+          "asset_key": "canonical_o59.facet_details.facet_directory_o3.027",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_o3",
+          "kind": "table_row",
+          "title_zh": "O3｜情绪体验开放｜21",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "不一定愿意把所有感受都摊开处理。",
+          "body_quality": {
+            "body_chars": 16,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_028",
+          "asset_key": "canonical_o59.facet_details.facet_directory_o4.028",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_o4",
+          "kind": "table_row",
+          "title_zh": "O4｜行动开放｜79",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "在确认价值后，愿意尝试新的做法。",
+          "body_quality": {
+            "body_chars": 16,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_029",
+          "asset_key": "canonical_o59.facet_details.facet_directory_o5.029",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_o5",
+          "kind": "table_row",
+          "title_zh": "O5｜思想开放｜75",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "能理解复杂观点，不急着压平问题。",
+          "body_quality": {
+            "body_chars": 16,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_030",
+          "asset_key": "canonical_o59.facet_details.facet_directory_o6.030",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_o6",
+          "kind": "table_row",
+          "title_zh": "O6｜价值开放｜1",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "核心价值判断较稳定，不轻易被新口号带走。",
+          "body_quality": {
+            "body_chars": 20,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_031",
+          "asset_key": "canonical_o59.facet_details.facet_directory_c1.031",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_c1",
+          "kind": "table_row",
+          "title_zh": "C1｜胜任感｜97",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你并非觉得自己不能做，而是需要正确入口。",
+          "body_quality": {
+            "body_chars": 20,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_032",
+          "asset_key": "canonical_o59.facet_details.facet_directory_c2.032",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_c2",
+          "kind": "table_row",
+          "title_zh": "C2｜秩序感｜89",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你能看见结构，也能识别哪里该收口。",
+          "body_quality": {
+            "body_chars": 17,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_033",
+          "asset_key": "canonical_o59.facet_details.facet_directory_c3.033",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_c3",
+          "kind": "table_row",
+          "title_zh": "C3｜责任执行｜15",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "长期承担型任务容易掉速。",
+          "body_quality": {
+            "body_chars": 12,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_034",
+          "asset_key": "canonical_o59.facet_details.facet_directory_c4.034",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_c4",
+          "kind": "table_row",
+          "title_zh": "C4｜成就努力｜15",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "持续高压冲刺不是你的天然模式。",
+          "body_quality": {
+            "body_chars": 15,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_035",
+          "asset_key": "canonical_o59.facet_details.facet_directory_c5.035",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_c5",
+          "kind": "table_row",
+          "title_zh": "C5｜自律｜2",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "启动与收尾需要外部结构帮助。",
+          "body_quality": {
+            "body_chars": 14,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_036",
+          "asset_key": "canonical_o59.facet_details.facet_directory_c6.036",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_c6",
+          "kind": "table_row",
+          "title_zh": "C6｜审慎｜10",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "一旦过载，可能更想先退出而不是细算。",
+          "body_quality": {
+            "body_chars": 18,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_037",
+          "asset_key": "canonical_o59.facet_details.facet_directory_e1.037",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_e1",
+          "kind": "table_row",
+          "title_zh": "E1｜热情｜57",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "并非冷淡，只是热情不一定高频外露。",
+          "body_quality": {
+            "body_chars": 17,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_038",
+          "asset_key": "canonical_o59.facet_details.facet_directory_e2.038",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_e2",
+          "kind": "table_row",
+          "title_zh": "E2｜合群｜53",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你能连接，但更看场景质量。",
+          "body_quality": {
+            "body_chars": 13,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_039",
+          "asset_key": "canonical_o59.facet_details.facet_directory_e3.039",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_e3",
+          "kind": "table_row",
+          "title_zh": "E3｜主动表达｜12",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "观点常在内部形成，外部表达偏晚。",
+          "body_quality": {
+            "body_chars": 16,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_040",
+          "asset_key": "canonical_o59.facet_details.facet_directory_e4.040",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_e4",
+          "kind": "table_row",
+          "title_zh": "E4｜活跃度｜4",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "高频热闹场域会快速耗能。",
+          "body_quality": {
+            "body_chars": 12,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_041",
+          "asset_key": "canonical_o59.facet_details.facet_directory_e5.041",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_e5",
+          "kind": "table_row",
+          "title_zh": "E5｜刺激寻求｜4",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你不靠刺激保持能量。",
+          "body_quality": {
+            "body_chars": 10,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_042",
+          "asset_key": "canonical_o59.facet_details.facet_directory_e6.042",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_e6",
+          "kind": "table_row",
+          "title_zh": "E6｜正向外显｜2",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "价值和判断不总会被外界及时看见。",
+          "body_quality": {
+            "body_chars": 16,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_043",
+          "asset_key": "canonical_o59.facet_details.facet_directory_a1.043",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_a1",
+          "kind": "table_row",
+          "title_zh": "A1｜信任｜20",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你不会轻易把信任交给环境。",
+          "body_quality": {
+            "body_chars": 13,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_044",
+          "asset_key": "canonical_o59.facet_details.facet_directory_a2.044",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_a2",
+          "kind": "table_row",
+          "title_zh": "A2｜直率｜56",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "表达可以真实，但通常需要安全感。",
+          "body_quality": {
+            "body_chars": 16,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_045",
+          "asset_key": "canonical_o59.facet_details.facet_directory_a3.045",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_a3",
+          "kind": "table_row",
+          "title_zh": "A3｜利他｜31",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "不是不愿帮助，而是不想无限补位。",
+          "body_quality": {
+            "body_chars": 16,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_046",
+          "asset_key": "canonical_o59.facet_details.facet_directory_a4.046",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_a4",
+          "kind": "table_row",
+          "title_zh": "A4｜顺从｜86",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你能承接秩序，但也需警惕过度压抑。",
+          "body_quality": {
+            "body_chars": 17,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_047",
+          "asset_key": "canonical_o59.facet_details.facet_directory_a5.047",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_a5",
+          "kind": "table_row",
+          "title_zh": "A5｜谦逊｜67",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "不倾向靠强存在感证明自己。",
+          "body_quality": {
+            "body_chars": 13,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_048",
+          "asset_key": "canonical_o59.facet_details.facet_directory_a6.048",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_a6",
+          "kind": "table_row",
+          "title_zh": "A6｜同理心｜42",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "能理解别人，但不会完全丢掉自己的边界。",
+          "body_quality": {
+            "body_chars": 19,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_049",
+          "asset_key": "canonical_o59.facet_details.facet_directory_n1.049",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_n1",
+          "kind": "table_row",
+          "title_zh": "N1｜焦虑感｜98",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "风险预警非常提前。",
+          "body_quality": {
+            "body_chars": 9,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_050",
+          "asset_key": "canonical_o59.facet_details.facet_directory_n2.050",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_n2",
+          "kind": "table_row",
+          "title_zh": "N2｜愤怒反应｜65",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "边界被反复拉扯时容易有压力体感。",
+          "body_quality": {
+            "body_chars": 16,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_051",
+          "asset_key": "canonical_o59.facet_details.facet_directory_n3.051",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_n3",
+          "kind": "table_row",
+          "title_zh": "N3｜低落耗竭｜98",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "长期拉扯更像慢性下沉。",
+          "body_quality": {
+            "body_chars": 11,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_052",
+          "asset_key": "canonical_o59.facet_details.facet_directory_n4.052",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_n4",
+          "kind": "table_row",
+          "title_zh": "N4｜羞怯｜8",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "不是典型公开退缩型敏感。",
+          "body_quality": {
+            "body_chars": 12,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_053",
+          "asset_key": "canonical_o59.facet_details.facet_directory_n5.053",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_n5",
+          "kind": "table_row",
+          "title_zh": "N5｜冲动脱离｜95",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "过载时更容易想立即切断或退出。",
+          "body_quality": {
+            "body_chars": 15,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_facet_details_054",
+          "asset_key": "canonical_o59.facet_details.facet_directory_n6.054",
+          "section_key": "facet_details",
+          "slot_key": "facet_directory_n6",
+          "kind": "table_row",
+          "title_zh": "N6｜脆弱性｜13",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_05_facet_reframe"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 5 Facet 反直觉发现",
+            "两万字稿 facet 焦点与数据核心层"
+          ],
+          "asset_layer": "L5_facet_precision",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你能扛，但扛久后可能突然掉线。",
+          "body_quality": {
+            "body_chars": 15,
+            "sentence_count_estimate": 1,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        }
+      ],
+      "body_quality": {
+        "block_count": 35,
+        "minimum_block_count": 8,
+        "meets_minimum_block_count": true,
+        "total_body_chars": 1032,
+        "render_density": "thick_staging_body",
+        "contains_required_modules": true,
+        "requires_render_preview": true
+      },
+      "safety_tags": [
+        "non_diagnostic",
+        "non_hiring",
+        "no_accuracy_claim",
+        "no_hard_typing",
+        "continuous_trait_language",
+        "canonical_o59_only"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "rendered_preview_required": true,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "section_key": "core_portrait",
+      "title_zh": "人格总览",
+      "subtitle_zh": "把五维与 facet 重新收束成你的主导动力结构。",
+      "source_modules": [
+        "module_02_quick_understanding",
+        "module_04_coupling"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 2 三分钟理解版",
+        "V2.0 Module 4 核心动力耦合",
+        "两万字稿 性格指纹图谱与主导冲突"
+      ],
+      "required_longform_sections": [
+        "性格指纹图谱",
+        "画像主线",
+        "核心动力耦合"
+      ],
+      "blocks": [
+        {
+          "asset_id": "b5_b1_o59_core_portrait_055",
+          "asset_key": "canonical_o59.core_portrait.primary_coupling_n_o.055",
+          "section_key": "core_portrait",
+          "slot_key": "primary_coupling_n_o",
+          "kind": "paragraph",
+          "title_zh": "你的核心动力",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_02_quick_understanding",
+            "module_04_coupling"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 2 三分钟理解版",
+            "V2.0 Module 4 核心动力耦合",
+            "两万字稿 性格指纹图谱与主导冲突"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你的核心动力不是单纯敏感，而是“感到风险之后继续理解”。情绪性让你更早感到不对劲，开放性让你不满足于直接否定或逃开，而会继续分析、寻找原因和确认是否还有更好的解释。正向时，这让你在复杂局面里保留细腻判断；负向时，你会既不舒服、又停不下来，进入高精度但高成本的内部处理状态。",
+          "body_quality": {
+            "body_chars": 136,
+            "sentence_count_estimate": 4,
+            "has_trait_layer": true,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_core_portrait_056",
+          "asset_key": "canonical_o59.core_portrait.secondary_coupling_e_c.056",
+          "section_key": "core_portrait",
+          "slot_key": "secondary_coupling_e_c",
+          "kind": "paragraph",
+          "title_zh": "你的主要行动瓶颈",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_02_quick_understanding",
+            "module_04_coupling"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 2 三分钟理解版",
+            "V2.0 Module 4 核心动力耦合",
+            "两万字稿 性格指纹图谱与主导冲突"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "低外向和低续航尽责性共同决定了你的执行瓶颈。你不是完全没有执行力，也不是不懂秩序；问题在于你不太习惯靠持续外放和长期刚性自律来推进。外向性偏低让你不从高频互动里拿能量，尽责性偏低又让你很难靠意志力长期顶着做。最容易出现的不是乱做，而是知道该做什么，却因为进入慢、反馈弱、续航差而形成停滞。",
+          "body_quality": {
+            "body_chars": 144,
+            "sentence_count_estimate": 5,
+            "has_trait_layer": true,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_core_portrait_057",
+          "asset_key": "canonical_o59.core_portrait.dominant_tension.057",
+          "section_key": "core_portrait",
+          "slot_key": "dominant_tension",
+          "kind": "callout",
+          "title_zh": "主导冲突",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_02_quick_understanding",
+            "module_04_coupling"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 2 三分钟理解版",
+            "V2.0 Module 4 核心动力耦合",
+            "两万字稿 性格指纹图谱与主导冲突"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你有感受和判断，所以不愿粗糙地做；你又缺少高续航推进，所以容易在真正开始前消耗；你对环境质量敏感，因此“值不值得进入”会成为很多事情的前置门槛。你的主导冲突不是想不想做，而是感知、理解、边界和启动节奏之间还没有形成稳定接口。",
+          "body_quality": {
+            "body_chars": 112,
+            "sentence_count_estimate": 4,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_core_portrait_058",
+          "asset_key": "canonical_o59.core_portrait.common_misread.058",
+          "section_key": "core_portrait",
+          "slot_key": "common_misread",
+          "kind": "bullets",
+          "title_zh": "常见误读",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_02_quick_understanding",
+            "module_04_coupling"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 2 三分钟理解版",
+            "V2.0 Module 4 核心动力耦合",
+            "两万字稿 性格指纹图谱与主导冲突"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "items": [
+            "别人可能以为你冷，其实你是在确认场景是否值得进入。",
+            "别人可能以为你慢，其实你在内部已经完成大量扫描。",
+            "你可能以为自己懒，其实很多时候是动力结构和反馈结构不匹配。",
+            "你可能以为自己太敏感，其实你需要的是更早外化感受和边界。"
+          ],
+          "body_quality": {
+            "body_chars": 106,
+            "sentence_count_estimate": 4,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_core_portrait_059",
+          "asset_key": "canonical_o59.core_portrait.development_logic.059",
+          "section_key": "core_portrait",
+          "slot_key": "development_logic",
+          "kind": "paragraph",
+          "title_zh": "发展方向",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_04_coupling",
+            "module_06_application_matrix"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 2 三分钟理解版",
+            "V2.0 Module 4 核心动力耦合",
+            "两万字稿 性格指纹图谱与主导冲突"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你的发展方向不是变成另一个人，而是给原本的能力换一种使用方式。把敏感变成预警，而不是长期内耗；把开放变成判断，而不是无限推演；把克制变成选择性进入，而不是价值隐身；把低续航改造成短周期推进，而不是道德化自责。",
+          "body_quality": {
+            "body_chars": 104,
+            "sentence_count_estimate": 5,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        }
+      ],
+      "body_quality": {
+        "block_count": 5,
+        "minimum_block_count": 5,
+        "meets_minimum_block_count": true,
+        "total_body_chars": 602,
+        "render_density": "thick_staging_body",
+        "contains_required_modules": true,
+        "requires_render_preview": true
+      },
+      "safety_tags": [
+        "non_diagnostic",
+        "non_hiring",
+        "no_accuracy_claim",
+        "no_hard_typing",
+        "continuous_trait_language",
+        "canonical_o59_only"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "rendered_preview_required": true,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "section_key": "norms_comparison",
+      "title_zh": "相对参照",
+      "subtitle_zh": "解释分数、常模和高低不等于优劣的边界。",
+      "source_modules": [
+        "module_10_method_privacy"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 10 方法、边界与隐私说明",
+        "两万字稿 第 2 节 如何阅读这份报告",
+        "两万字稿 相对参照与分数解释内容"
+      ],
+      "required_longform_sections": [
+        "如何阅读这份报告",
+        "相对参照",
+        "方法边界"
+      ],
+      "blocks": [
+        {
+          "asset_id": "b5_b1_o59_norms_comparison_060",
+          "asset_key": "canonical_o59.norms_comparison.percentile_meaning.060",
+          "section_key": "norms_comparison",
+          "slot_key": "percentile_meaning",
+          "kind": "paragraph",
+          "title_zh": "相对参照怎么读",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_10_method_privacy"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 10 方法、边界与隐私说明",
+            "两万字稿 第 2 节 如何阅读这份报告",
+            "两万字稿 相对参照与分数解释内容"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "分数不是能力排名，也不是价值判断。它只说明在当前参考语境下，某种倾向在你身上更明显或更不明显。比如情绪性 68 表示压力、误解和不确定性更容易被你提前感知；外向性 20 表示你更少依赖高频互动获得能量。高低都不是好坏，而是使用方式不同。",
+          "body_quality": {
+            "body_chars": 118,
+            "sentence_count_estimate": 5,
+            "has_trait_layer": true,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_norms_comparison_061",
+          "asset_key": "canonical_o59.norms_comparison.relative_pattern.061",
+          "section_key": "norms_comparison",
+          "slot_key": "relative_pattern",
+          "kind": "callout",
+          "title_zh": "这组结果最有解释力的地方",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_10_method_privacy"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 10 方法、边界与隐私说明",
+            "两万字稿 第 2 节 如何阅读这份报告",
+            "两万字稿 相对参照与分数解释内容"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "你的相对位置真正有意义的地方，是维度之间的落差：情绪性和开放性带来高感知与高理解，外向性和尽责性的偏低让表达与推进更依赖低成本入口。相对参照不应该把你压成一个结论，而应该帮助你看见什么情境更容易让系统顺，什么情境更容易让系统耗。",
+          "body_quality": {
+            "body_chars": 114,
+            "sentence_count_estimate": 2,
+            "has_trait_layer": true,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_norms_comparison_062",
+          "asset_key": "canonical_o59.norms_comparison.norm_boundary.062",
+          "section_key": "norms_comparison",
+          "slot_key": "norm_boundary",
+          "kind": "paragraph",
+          "title_zh": "常模边界",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_10_method_privacy"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 10 方法、边界与隐私说明",
+            "两万字稿 第 2 节 如何阅读这份报告",
+            "两万字稿 相对参照与分数解释内容"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "只有在常模可用且校准完成时，分数才适合做相对参照。若未来某次结果没有可用常模，就只能展示原始分段和方法说明，不应画正态分布，也不应声称你高于多少人。常模是解释辅助，不是对你的最终定义。",
+          "body_quality": {
+            "body_chars": 92,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_norms_comparison_063",
+          "asset_key": "canonical_o59.norms_comparison.comparison_boundaries.063",
+          "section_key": "norms_comparison",
+          "slot_key": "comparison_boundaries",
+          "kind": "bullets",
+          "title_zh": "比较时的三个提醒",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_10_method_privacy"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 10 方法、边界与隐私说明",
+            "两万字稿 第 2 节 如何阅读这份报告",
+            "两万字稿 相对参照与分数解释内容"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "items": [
+            "不要把高分当成优点，也不要把低分当成缺陷。",
+            "不要拿 Big Five 分数和 MBTI、九型或其他量表分数直接比较。",
+            "如果复测发生变化，先看现实阶段、压力、睡眠、关系和任务环境，而不是立刻判断自己变成了另一种人。"
+          ],
+          "body_quality": {
+            "body_chars": 104,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_norms_comparison_064",
+          "asset_key": "canonical_o59.norms_comparison.canonical_norms_conclusion.064",
+          "section_key": "norms_comparison",
+          "slot_key": "canonical_norms_conclusion",
+          "kind": "paragraph",
+          "title_zh": "对 O59 样本的参照结论",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_10_method_privacy"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 10 方法、边界与隐私说明",
+            "两万字稿 第 2 节 如何阅读这份报告",
+            "两万字稿 相对参照与分数解释内容"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "这组结果更适合被理解为一张路线图：你在复杂环境里容易看得更深，也更容易被长期拉扯消耗；你不是没有能力，而是能力更依赖边界、节奏、反馈和恢复。相对参照的价值，是帮助你把“我怎么总是不如别人能扛”改写成“我需要怎样的环境接口才能稳定发挥”。",
+          "body_quality": {
+            "body_chars": 118,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        }
+      ],
+      "body_quality": {
+        "block_count": 5,
+        "minimum_block_count": 4,
+        "meets_minimum_block_count": true,
+        "total_body_chars": 546,
+        "render_density": "thick_staging_body",
+        "contains_required_modules": true,
+        "requires_render_preview": true
+      },
+      "safety_tags": [
+        "non_diagnostic",
+        "non_hiring",
+        "no_accuracy_claim",
+        "no_hard_typing",
+        "continuous_trait_language",
+        "canonical_o59_only"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "rendered_preview_required": true,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "section_key": "action_plan",
+      "title_zh": "成长与下一步动作",
+      "subtitle_zh": "把理解转成工作、关系、恢复和成长里的可执行路径。",
+      "source_modules": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 6 现实应用矩阵",
+        "V2.0 Module 7 协作说明书",
+        "两万字稿 行动建议与 30/60/90 天路径"
+      ],
+      "required_longform_sections": [
+        "现实应用矩阵",
+        "行动建议",
+        "30/60/90 天路径"
+      ],
+      "blocks": [
+        {
+          "asset_id": "b5_b1_o59_action_plan_065",
+          "asset_key": "canonical_o59.action_plan.action_intro.065",
+          "section_key": "action_plan",
+          "slot_key": "action_intro",
+          "kind": "paragraph",
+          "title_zh": "行动计划的原则",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_06_application_matrix",
+            "module_07_collaboration_manual"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 6 现实应用矩阵",
+            "V2.0 Module 7 协作说明书",
+            "两万字稿 行动建议与 30/60/90 天路径"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "对你来说，行动建议不应该是泛泛地更努力、更外向、更自律，而应该围绕四个现实接口：工作里的启动与反馈，关系里的边界表达，压力里的恢复机制，成长里的低成本试错。每个建议都要足够短，短到可以真实发生。",
+          "body_quality": {
+            "body_chars": 97,
+            "sentence_count_estimate": 2,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_action_plan_066",
+          "asset_key": "canonical_o59.action_plan.workplace.066",
+          "section_key": "action_plan",
+          "slot_key": "workplace",
+          "kind": "callout",
+          "title_zh": "工作场景",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_06_application_matrix"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 6 现实应用矩阵",
+            "V2.0 Module 7 协作说明书",
+            "两万字稿 行动建议与 30/60/90 天路径"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "把长期任务改成“20 分钟启动 + 一个可见反馈”。开始前写三句话：这件事为什么值得做、这 20 分钟只做哪一步、做完后用什么判断继续或暂停。你不是要靠意志力把整件事顶完，而是先让任务从内部推演进入现实轨道。",
+          "body_quality": {
+            "body_chars": 104,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_action_plan_067",
+          "asset_key": "canonical_o59.action_plan.relationships.067",
+          "section_key": "action_plan",
+          "slot_key": "relationships",
+          "kind": "callout",
+          "title_zh": "关系场景",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_06_application_matrix",
+            "module_07_collaboration_manual"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 6 现实应用矩阵",
+            "V2.0 Module 7 协作说明书",
+            "两万字稿 行动建议与 30/60/90 天路径"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "准备一句低成本边界表达：我现在需要一点时间整理，稍后给你完整反馈。它的作用不是制造距离，而是避免你在内部已经高负荷时仍然硬撑。对你来说，越早半表达，越少在后面突然撤离。",
+          "body_quality": {
+            "body_chars": 84,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_action_plan_068",
+          "asset_key": "canonical_o59.action_plan.stress_recovery.068",
+          "section_key": "action_plan",
+          "slot_key": "stress_recovery",
+          "kind": "callout",
+          "title_zh": "压力恢复",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_06_application_matrix"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 6 现实应用矩阵",
+            "V2.0 Module 7 协作说明书",
+            "两万字稿 行动建议与 30/60/90 天路径"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "当你开始连续推演坏结果、注意力变窄或想切断一切时，先做 10 分钟物理脱离：离开屏幕、走动、喝水、写下来源。恢复不是奖励，而是维持稳定输出的前提。",
+          "body_quality": {
+            "body_chars": 73,
+            "sentence_count_estimate": 2,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_action_plan_069",
+          "asset_key": "canonical_o59.action_plan.personal_growth.069",
+          "section_key": "action_plan",
+          "slot_key": "personal_growth",
+          "kind": "callout",
+          "title_zh": "个人成长",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_06_application_matrix"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 6 现实应用矩阵",
+            "V2.0 Module 7 协作说明书",
+            "两万字稿 行动建议与 30/60/90 天路径"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "把“我太敏感”“我太慢”“我不够自律”改成可处理的问题：我现在缺的是边界、反馈、意义、恢复，还是启动入口？当问题被正确命名，下一步才会变小。",
+          "body_quality": {
+            "body_chars": 70,
+            "sentence_count_estimate": 2,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_action_plan_070",
+          "asset_key": "canonical_o59.action_plan.path_30_days.070",
+          "section_key": "action_plan",
+          "slot_key": "path_30_days",
+          "kind": "bullets",
+          "title_zh": "30 天路径",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_06_application_matrix",
+            "module_07_collaboration_manual"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 6 现实应用矩阵",
+            "V2.0 Module 7 协作说明书",
+            "两万字稿 行动建议与 30/60/90 天路径"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "items": [
+            "每周选择一个重要但不紧急任务，固定做一次 20 分钟启动。",
+            "每次明显不舒服时，记录来源是边界、责任、节奏还是关系张力。",
+            "练习三次低成本表达：先说一半，不等到完全耗尽。"
+          ],
+          "body_quality": {
+            "body_chars": 81,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": true,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_action_plan_071",
+          "asset_key": "canonical_o59.action_plan.path_60_days.071",
+          "section_key": "action_plan",
+          "slot_key": "path_60_days",
+          "kind": "bullets",
+          "title_zh": "60 天路径",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_06_application_matrix",
+            "module_07_collaboration_manual"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 6 现实应用矩阵",
+            "V2.0 Module 7 协作说明书",
+            "两万字稿 行动建议与 30/60/90 天路径"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "items": [
+            "建立一个固定反馈节奏：每个长期任务至少有一个中途检查点。",
+            "把最耗你的会议、关系或任务类型整理成清单，找出共同触发条件。",
+            "为高负荷日安排恢复协议，不把恢复留到崩溃之后。"
+          ],
+          "body_quality": {
+            "body_chars": 81,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": true,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_action_plan_072",
+          "asset_key": "canonical_o59.action_plan.path_90_days.072",
+          "section_key": "action_plan",
+          "slot_key": "path_90_days",
+          "kind": "bullets",
+          "title_zh": "90 天路径",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_06_application_matrix",
+            "module_07_collaboration_manual"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 6 现实应用矩阵",
+            "V2.0 Module 7 协作说明书",
+            "两万字稿 行动建议与 30/60/90 天路径"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "items": [
+            "形成自己的协作说明：我适合什么节奏、需要什么反馈、什么边界会让我更稳定。",
+            "把一个长期目标拆成多个短周期交付，观察哪种反馈最能维持续航。",
+            "复测或复盘这份结果，比较真实生活中的模式是否仍然稳定。"
+          ],
+          "body_quality": {
+            "body_chars": 93,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_action_plan_073",
+          "asset_key": "canonical_o59.action_plan.minimum_next_step.073",
+          "section_key": "action_plan",
+          "slot_key": "minimum_next_step",
+          "kind": "paragraph",
+          "title_zh": "最小下一步",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_06_application_matrix",
+            "module_07_collaboration_manual"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 6 现实应用矩阵",
+            "V2.0 Module 7 协作说明书",
+            "两万字稿 行动建议与 30/60/90 天路径"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "今天只做一个动作：选择一个正在拖延但确实重要的任务，开 20 分钟计时器，做最小可见步骤。结束后不要评价自己，只写下下一步。",
+          "body_quality": {
+            "body_chars": 62,
+            "sentence_count_estimate": 2,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        }
+      ],
+      "body_quality": {
+        "block_count": 9,
+        "minimum_block_count": 7,
+        "meets_minimum_block_count": true,
+        "total_body_chars": 745,
+        "render_density": "thick_staging_body",
+        "contains_required_modules": true,
+        "requires_render_preview": true
+      },
+      "safety_tags": [
+        "non_diagnostic",
+        "non_hiring",
+        "no_accuracy_claim",
+        "no_hard_typing",
+        "continuous_trait_language",
+        "canonical_o59_only"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "rendered_preview_required": true,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "section_key": "methodology_and_access",
+      "title_zh": "方法与边界说明",
+      "subtitle_zh": "说明 Big Five 的使用边界、数据解释和隐私原则。",
+      "source_modules": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 0 顶部信任条",
+        "V2.0 Module 10 方法、边界与隐私说明",
+        "两万字稿 第 8 节 方法与边界说明"
+      ],
+      "required_longform_sections": [
+        "第 8 节｜方法与边界说明"
+      ],
+      "blocks": [
+        {
+          "asset_id": "b5_b1_o59_methodology_and_access_074",
+          "asset_key": "canonical_o59.methodology_and_access.what_it_is.074",
+          "section_key": "methodology_and_access",
+          "slot_key": "what_it_is",
+          "kind": "paragraph",
+          "title_zh": "这份报告是什么",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_00_trust_bar",
+            "module_10_method_privacy"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 0 顶部信任条",
+            "V2.0 Module 10 方法、边界与隐私说明",
+            "两万字稿 第 8 节 方法与边界说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "这份 Big Five 报告用于帮助你理解自己的稳定人格倾向。它可以支持你做更结构化的自我观察、职业反思、人际反思和成长规划，但不应用来替代医学诊断、心理治疗、招聘筛选或对自己做单一定义。",
+          "body_quality": {
+            "body_chars": 94,
+            "sentence_count_estimate": 2,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_methodology_and_access_075",
+          "asset_key": "canonical_o59.methodology_and_access.not_type.075",
+          "section_key": "methodology_and_access",
+          "slot_key": "not_type",
+          "kind": "callout",
+          "title_zh": "连续特质，不是固定类型",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_00_trust_bar",
+            "module_10_method_privacy"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 0 顶部信任条",
+            "V2.0 Module 10 方法、边界与隐私说明",
+            "两万字稿 第 8 节 方法与边界说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "Big Five 描述的是五个连续维度。画像名只是辅助理解标签，不是固定人格类型。你不是属于某一类人，而是在开放性、尽责性、外向性、宜人性和情绪性上呈现出当前这组相对位置。",
+          "body_quality": {
+            "body_chars": 86,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": true,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": true,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_methodology_and_access_076",
+          "asset_key": "canonical_o59.methodology_and_access.score_boundary.076",
+          "section_key": "methodology_and_access",
+          "slot_key": "score_boundary",
+          "kind": "paragraph",
+          "title_zh": "分数与解释的边界",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_10_method_privacy"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 0 顶部信任条",
+            "V2.0 Module 10 方法、边界与隐私说明",
+            "两万字稿 第 8 节 方法与边界说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "报告中既包含分数事实，也包含基于人格模型的解释性推断。分数可以帮助定位倾向，但不能单独说明你在每个情境中都会如何表现。真正有效的使用方式，是把报告带回工作、关系和压力场景里验证。",
+          "body_quality": {
+            "body_chars": 89,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_methodology_and_access_077",
+          "asset_key": "canonical_o59.methodology_and_access.facet_boundary.077",
+          "section_key": "methodology_and_access",
+          "slot_key": "facet_boundary",
+          "kind": "paragraph",
+          "title_zh": "facet 推断边界",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_10_method_privacy"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 0 顶部信任条",
+            "V2.0 Module 10 方法、边界与隐私说明",
+            "两万字稿 第 8 节 方法与边界说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "facet 可以帮助解释 broad trait 为什么以不同方式表现，但每个 facet 都应被理解为线索，而不是单独结论。若缺少足够支持，不应把某个 facet 写成独立人格判断。",
+          "body_quality": {
+            "body_chars": 92,
+            "sentence_count_estimate": 2,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": true,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_methodology_and_access_078",
+          "asset_key": "canonical_o59.methodology_and_access.privacy.078",
+          "section_key": "methodology_and_access",
+          "slot_key": "privacy",
+          "kind": "paragraph",
+          "title_zh": "隐私与使用",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_10_method_privacy"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 0 顶部信任条",
+            "V2.0 Module 10 方法、边界与隐私说明",
+            "两万字稿 第 8 节 方法与边界说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "body_zh": "测试结果和反馈只应用于生成报告、改善解释准确度和优化产品体验。分享卡只应在用户主动生成时创建，敏感心理内容不应默认分享。用户应始终能把这份结果当作自我理解工具，而不是外部评价工具。",
+          "body_quality": {
+            "body_chars": 90,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        },
+        {
+          "asset_id": "b5_b1_o59_methodology_and_access_079",
+          "asset_key": "canonical_o59.methodology_and_access.retest_guidance.079",
+          "section_key": "methodology_and_access",
+          "slot_key": "retest_guidance",
+          "kind": "bullets",
+          "title_zh": "复看建议",
+          "copy_role": "user_visible_body",
+          "source_modules": [
+            "module_10_method_privacy"
+          ],
+          "source_doc_refs": [
+            "V2.0 Module 0 顶部信任条",
+            "V2.0 Module 10 方法、边界与隐私说明",
+            "两万字稿 第 8 节 方法与边界说明"
+          ],
+          "asset_layer": "L1_core_body",
+          "runtime_use": "staging_only",
+          "production_use_allowed": false,
+          "rendered_preview_required": true,
+          "ready_for_runtime": false,
+          "ready_for_production": false,
+          "safety_tags": [
+            "non_diagnostic",
+            "non_hiring",
+            "no_accuracy_claim",
+            "no_hard_typing",
+            "continuous_trait_language",
+            "canonical_o59_only"
+          ],
+          "items": [
+            "4–8 周后，结合真实生活变化复看或复测。",
+            "不要只看分数变化，也要看环境、压力、睡眠、关系和任务结构是否改变。",
+            "如果某一部分不贴近，先把它降级为观察线索，而不是强行认同。"
+          ],
+          "body_quality": {
+            "body_chars": 83,
+            "sentence_count_estimate": 3,
+            "has_trait_layer": false,
+            "has_coupling_layer": false,
+            "has_facet_layer": false,
+            "has_action_layer": false,
+            "has_boundary_layer": false,
+            "template_risk": "medium_requires_rendered_preview"
+          }
+        }
+      ],
+      "body_quality": {
+        "block_count": 6,
+        "minimum_block_count": 5,
+        "meets_minimum_block_count": true,
+        "total_body_chars": 534,
+        "render_density": "thick_staging_body",
+        "contains_required_modules": true,
+        "requires_render_preview": true
+      },
+      "safety_tags": [
+        "non_diagnostic",
+        "non_hiring",
+        "no_accuracy_claim",
+        "no_hard_typing",
+        "continuous_trait_language",
+        "canonical_o59_only"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "rendered_preview_required": true,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    }
+  ]
+}

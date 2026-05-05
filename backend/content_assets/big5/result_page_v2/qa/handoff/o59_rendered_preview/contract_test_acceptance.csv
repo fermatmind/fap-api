@@ -1,0 +1,11 @@
+id,requirement,blocking,expected_result,notes
+ACC-001,fap-web contract test can read O59 fixture copied or referenced from fap-api PR #1129 fixture,true,pass_or_explicit_pending_surface,Do not claim runtime/production readiness.
+ACC-002,valid payload enters Big5 V2 rendered preview path,true,pass_or_explicit_pending_surface,Do not claim runtime/production readiness.
+ACC-003,result_page_desktop renders required visible terms and no P0 forbidden terms,true,pass_or_explicit_pending_surface,Do not claim runtime/production readiness.
+ACC-004,result_page_mobile renders required visible terms and no P0 forbidden terms,true,pass_or_explicit_pending_surface,Do not claim runtime/production readiness.
+ACC-005,invalid payload safely falls back to old path without invented body copy,true,pass_or_explicit_pending_surface,Do not claim runtime/production readiness.
+ACC-006,missing payload safely falls back to old path without claiming preview pass,true,pass_or_explicit_pending_surface,Do not claim runtime/production readiness.
+ACC-007,PDF/share/history/compare either pass existing harness or are marked pending_surface,true,pass_or_explicit_pending_surface,Do not claim runtime/production readiness.
+ACC-008,"no backend, runtime, registry, or new prose changes are included in fap-web PR",true,pass_or_explicit_pending_surface,Do not claim runtime/production readiness.
+ACC-009,"Codex final report includes tested_surfaces, pending_surfaces, passed_surfaces, and failed_surfaces arrays",true,pass_or_explicit_pending_surface,Required final report structure.
+ACC-010,"the term 'all' is checked only as a standalone visible placeholder/debug token, never by raw substring scan",true,pass_or_explicit_pending_surface,Do not raw substring scan all.

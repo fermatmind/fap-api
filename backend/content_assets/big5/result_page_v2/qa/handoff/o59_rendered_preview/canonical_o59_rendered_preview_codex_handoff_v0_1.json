@@ -1,0 +1,109 @@
+{
+  "schema": "fap.big5.b5_b1_o59.rendered_preview_codex_handoff.v0_1_1",
+  "package": "B5-B1-Preview-Codex-Handoff v0.1.1",
+  "version": "v0.1.1",
+  "created_at": "2026-05-04T00:00:00Z",
+  "repo": "fap-web",
+  "goal": "Convert the O59 rendered preview QA pack into fap-web contract-test requirements without writing code in this package.",
+  "source_fixture": {
+    "source_repo": "fap-api",
+    "source_pr": "#1129",
+    "source_path": "backend/tests/Fixtures/big5_result_page_v2/canonical_o59_core_body_preview.payload.json",
+    "fixture_status": "merged_fixture_required_by_future_codex_task",
+    "do_not_synthesize_if_missing": true
+  },
+  "canonical_profile": {
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入"
+  },
+  "hard_boundaries": [
+    "Do not write new Big Five body copy.",
+    "Do not modify B5-B1 core body assets.",
+    "Do not modify backend.",
+    "Do not add runtime wiring.",
+    "Do not invent frontend fallback prose.",
+    "If a surface harness does not exist, mark it pending_surface and do not claim pass."
+  ],
+  "required_surfaces": [
+    "result_page_desktop",
+    "result_page_mobile",
+    "pdf",
+    "share_card",
+    "history",
+    "compare"
+  ],
+  "primary_required_surfaces": [
+    "result_page_desktop",
+    "result_page_mobile"
+  ],
+  "conditional_surfaces": [
+    "pdf",
+    "share_card",
+    "history",
+    "compare"
+  ],
+  "ready_state": {
+    "ready_for_codex_execution": true,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "production_use_allowed": false
+  },
+  "revision": "v0.1.1",
+  "revision_notes": [
+    "v0.1.1 fixes manifest file list/count consistency.",
+    "v0.1.1 deduplicates surfaces arrays, including duplicated pdf entries.",
+    "v0.1.1 strengthens contextual all matching: no raw substring scan.",
+    "v0.1.1 requires tested_surfaces/pending_surfaces/passed_surfaces/failed_surfaces in Codex output."
+  ],
+  "required_codex_output_structure": {
+    "tested_surfaces": [],
+    "pending_surfaces": [],
+    "passed_surfaces": [],
+    "failed_surfaces": [],
+    "rule": "Every declared surface must appear in exactly one of pending_surfaces, passed_surfaces, or failed_surfaces. pending_surfaces do not count as passed."
+  },
+  "pending_surface_policy": {
+    "conditional_surfaces": [
+      "compare",
+      "history",
+      "pdf",
+      "share_card"
+    ],
+    "if_existing_test_harness_missing": "mark pending_surface",
+    "must_not_claim_passed_without_harness": true,
+    "required_output_arrays": [
+      "tested_surfaces",
+      "pending_surfaces",
+      "passed_surfaces",
+      "failed_surfaces"
+    ]
+  },
+  "all_contextual_rule": {
+    "term": "all",
+    "scope": "user_visible_rendered_text_only",
+    "match_mode": "standalone_visible_token_exact",
+    "raw_substring_scan_allowed": false,
+    "case_sensitive": false,
+    "normalization": "trim visible text node; collapse whitespace; compare exact visible token",
+    "allowed_context": [
+      "words containing all, including 'callout' and 'allowlisted'",
+      "schema kind values",
+      "internal code strings",
+      "non-rendered JSON, TypeScript, fixture, or QA metadata"
+    ],
+    "forbidden_context": [
+      "standalone visible line exactly equal to 'all'",
+      "placeholder/debug leakage rendered in facet rows or table cells",
+      "raw internal placeholder exposed to user-visible UI"
+    ],
+    "implementation_warning": "Do not use raw substring matching for 'all'. Do not fail 'callout', 'allowlisted', or internal code strings."
+  }
+}

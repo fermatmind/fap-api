@@ -1,0 +1,25 @@
+{
+  "schema": "fap.big5.b5_b1.ready_for_preview.v0_1",
+  "package_key": "B5-B1_O59_canonical_core_body_v0_1",
+  "ready_for_rendered_preview": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_use_allowed": false,
+  "runtime_use": "staging_only",
+  "pilot_scope": "rendered_preview_only",
+  "hard_gates": {
+    "coverage_QA_passed": true,
+    "safety_QA_passed": true,
+    "editorial_QA_passed": false,
+    "mapping_QA_passed": true,
+    "rendered_preview_QA_passed": false,
+    "repair_log_all_closed": true,
+    "no_P0_blockers": true
+  },
+  "blocking_for_runtime": [
+    "editorial_QA_not_independently_completed",
+    "rendered_preview_QA_not_completed",
+    "runtime_mapping_not_requested"
+  ],
+  "next_recommended_batch": "B5-B1 rendered preview harness"
+}

@@ -1,0 +1,253 @@
+{
+  "schema": "fap.big5.b5_b1.section_render_contract.v0_1",
+  "profile": {
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入",
+    "source_role": "canonical_body_seed"
+  },
+  "sections": {
+    "hero_summary": {
+      "title_zh": "结果摘要",
+      "expected_blocks": [
+        "画像名",
+        "主轴",
+        "五维快照",
+        "三个优势",
+        "三个风险",
+        "48h 行动"
+      ],
+      "must_render_terms": [
+        "敏锐的独立思考者",
+        "高敏感 × 中高开放 × 克制进入",
+        "O59 / C32 / E20 / A55 / N68",
+        "48 小时"
+      ],
+      "must_not_render_terms": [
+        "A compact overview",
+        "总体画像可信度等级 D（常模状态：CALIBRATED）"
+      ],
+      "pass_fail_criteria": [
+        "section title is Chinese",
+        "profile label appears",
+        "axis appears",
+        "score signature appears",
+        "48h action appears",
+        "no compact English subtitle"
+      ]
+    },
+    "domains_overview": {
+      "title_zh": "维度总览",
+      "expected_blocks": [
+        "五维阅读说明",
+        "高低不是好坏",
+        "五维快照",
+        "组合总览结论"
+      ],
+      "must_render_terms": [
+        "Big Five 不是一种人格类型",
+        "五个连续维度",
+        "高低不等于好坏",
+        "开放性",
+        "尽责性",
+        "外向性",
+        "宜人性",
+        "情绪性"
+      ],
+      "must_not_render_terms": [
+        "Five-domain distribution with percentile-oriented context"
+      ],
+      "pass_fail_criteria": [
+        "explains continuous traits",
+        "does not type the user",
+        "all five traits represented",
+        "no legacy English subtitle"
+      ]
+    },
+    "domain_deep_dive": {
+      "title_zh": "五维深解",
+      "expected_blocks": [
+        "开放性逐项解释",
+        "尽责性逐项解释",
+        "外向性逐项解释",
+        "宜人性逐项解释",
+        "情绪性逐项解释"
+      ],
+      "must_render_terms": [
+        "开放性 59",
+        "尽责性 32",
+        "外向性 20",
+        "宜人性 55",
+        "情绪性 68",
+        "如何帮助",
+        "如何消耗"
+      ],
+      "must_not_render_terms": [
+        "Focused read on domain-level strengths",
+        "Percentile"
+      ],
+      "pass_fail_criteria": [
+        "all five domains have meaningful explanation",
+        "each domain has benefit and cost layer",
+        "no English legacy subtitle"
+      ]
+    },
+    "facet_details": {
+      "title_zh": "细分维度焦点",
+      "expected_blocks": [
+        "facet 正确读法",
+        "不是没尽责",
+        "不是社交差",
+        "不是玻璃心",
+        "full facet directory / metric rows"
+      ],
+      "must_render_terms": [
+        "不是没尽责",
+        "不是社交差",
+        "不是玻璃心",
+        "细分维度不是 30 个分数的列表"
+      ],
+      "must_not_render_terms": [
+        "Facet-level signals arranged for quick interpretation",
+        "N1 百分位：98。 all"
+      ],
+      "pass_fail_criteria": [
+        "facet section primary content is reframe narrative",
+        "percentiles appear only in directory/metric rows",
+        "no placeholder all"
+      ]
+    },
+    "core_portrait": {
+      "title_zh": "人格总览",
+      "expected_blocks": [
+        "核心耦合",
+        "主要行动瓶颈",
+        "主导冲突",
+        "常见误读",
+        "发展方向"
+      ],
+      "must_render_terms": [
+        "感到风险之后继续理解",
+        "低外向",
+        "低续航尽责性",
+        "主导冲突"
+      ],
+      "must_not_render_terms": [
+        "固定人格类型",
+        "你属于"
+      ],
+      "pass_fail_criteria": [
+        "coupling and dominant tension appear",
+        "does not become fixed type",
+        "misread clarification appears"
+      ]
+    },
+    "norms_comparison": {
+      "title_zh": "相对参照",
+      "expected_blocks": [
+        "百分位含义",
+        "相对位置解释",
+        "常模边界",
+        "中文 compare explanation"
+      ],
+      "must_render_terms": [
+        "相对参照",
+        "分数不是能力排名",
+        "常模边界",
+        "高低不等于优劣"
+      ],
+      "must_not_render_terms": [
+        "Norms Comparison",
+        "normal_curve_without_norm",
+        "约高于"
+      ],
+      "pass_fail_criteria": [
+        "Chinese heading only",
+        "does not show English legacy title",
+        "if norm unavailable then no normal curve / no percentile-rank claim"
+      ]
+    },
+    "action_plan": {
+      "title_zh": "成长与下一步动作",
+      "expected_blocks": [
+        "工作",
+        "关系",
+        "压力恢复",
+        "个人成长",
+        "30 天",
+        "60 天",
+        "90 天"
+      ],
+      "must_render_terms": [
+        "工作",
+        "关系",
+        "压力",
+        "个人成长",
+        "30 / 60 / 90 天路径"
+      ],
+      "must_not_render_terms": [
+        "优先关注成长面向",
+        "O6, C5, E6"
+      ],
+      "pass_fail_criteria": [
+        "all four scenarios appear",
+        "30/60/90 path appears",
+        "no legacy short action template"
+      ]
+    },
+    "methodology_and_access": {
+      "title_zh": "方法与边界说明",
+      "expected_blocks": [
+        "连续特质",
+        "非固定类型",
+        "非医学诊断",
+        "非心理治疗",
+        "非招聘筛选",
+        "facet 边界",
+        "隐私边界",
+        "复测边界"
+      ],
+      "must_render_terms": [
+        "方法与边界说明",
+        "Big Five 描述的是连续人格特质，不是固定人格类型",
+        "不用于医学诊断",
+        "不用于心理治疗",
+        "不用于招聘筛选",
+        "画像名只是辅助理解标签"
+      ],
+      "must_not_render_terms": [
+        "Methodology and Access",
+        "准确率",
+        "科学证明"
+      ],
+      "pass_fail_criteria": [
+        "all boundaries appear",
+        "no English legacy title",
+        "no diagnostic/hiring/accuracy claim"
+      ]
+    }
+  },
+  "section_order": [
+    "hero_summary",
+    "domains_overview",
+    "domain_deep_dive",
+    "facet_details",
+    "core_portrait",
+    "norms_comparison",
+    "action_plan",
+    "methodology_and_access"
+  ],
+  "global_requirements": [
+    "Chinese section titles",
+    "no English legacy heading",
+    "no internal metadata",
+    "no frontend fallback prose"
+  ]
+}

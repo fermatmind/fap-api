@@ -1,0 +1,206 @@
+{
+  "schema": "fap.big5.b5_b1.visible_text.must_not_render.v0_1",
+  "profile": {
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入",
+    "source_role": "canonical_body_seed"
+  },
+  "terms": [
+    {
+      "term": "A compact overview",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "result page / pdf / share / history / compare rendered text",
+      "repair_action": "Replace compact scaffold with B5-B1 governed section copy."
+    },
+    {
+      "term": "Five-domain distribution with percentile-oriented context",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "result page / pdf rendered text",
+      "repair_action": "Replace legacy subtitle with 中文维度总览 copy."
+    },
+    {
+      "term": "Focused read on domain-level strengths",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "domain_deep_dive heading/subtitle/body",
+      "repair_action": "Use governed 五维深解 section copy."
+    },
+    {
+      "term": "Facet-level signals arranged for quick interpretation",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "facet_details heading/subtitle/body",
+      "repair_action": "Use governed facet reframe body."
+    },
+    {
+      "term": "Norms Comparison",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "section title / subtitle",
+      "repair_action": "Use 中文 相对参照."
+    },
+    {
+      "term": "Methodology and Access",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "section title / subtitle",
+      "repair_action": "Use 中文 方法与边界说明."
+    },
+    {
+      "term": "N1 百分位",
+      "severity": "P1",
+      "surface": "result_page / pdf",
+      "allowed_context": "full facet directory / metric row only",
+      "forbidden_context": "facet_details primary explanation",
+      "repair_action": "Move percentile-only text to directory row; keep reframe as primary body."
+    },
+    {
+      "term": "all",
+      "severity": "P1",
+      "surface": "all",
+      "allowed_context": "ordinary word inside unrelated English text only if not placeholder/debug",
+      "forbidden_context": "placeholder / debug leakage / facet row filler",
+      "repair_action": "Suppress placeholder output; do not treat callout/kind as violation."
+    },
+    {
+      "term": "优先关注成长面向",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "action_plan body or summary",
+      "repair_action": "Use scenario-bound action plan."
+    },
+    {
+      "term": "O6, C5, E6",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "action_plan body or summary",
+      "repair_action": "Do not render legacy facet list as action plan."
+    },
+    {
+      "term": "[object Object]",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Fix renderer serialization before preview pass."
+    },
+    {
+      "term": "deferred_to_future",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Remove placeholder/debug metadata."
+    },
+    {
+      "term": "policy_not_shipped",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Remove policy placeholder/debug metadata."
+    },
+    {
+      "term": "frontend_fallback",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Do not expose fallback source label."
+    },
+    {
+      "term": "internal_metadata",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Remove metadata leak."
+    },
+    {
+      "term": "selector_basis",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Remove selector trace from public rendering."
+    },
+    {
+      "term": "selection_guidance",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Remove internal selection guidance."
+    },
+    {
+      "term": "editor_notes",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Remove editorial notes from rendered output."
+    },
+    {
+      "term": "qa_notes",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Remove QA notes from rendered output."
+    },
+    {
+      "term": "source_reference",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Remove source trace from public rendering."
+    },
+    {
+      "term": "import_policy",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Remove import governance metadata from public rendering."
+    },
+    {
+      "term": "runtime_use",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Remove runtime metadata from public rendering."
+    },
+    {
+      "term": "production_use_allowed",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible text",
+      "repair_action": "Remove production metadata from public rendering."
+    }
+  ],
+  "contextual_rules": [
+    "The term all is banned only as placeholder/debug leakage; do not flag schema/kind values such as callout.",
+    "N1 百分位 is allowed in full facet directory / metric row only; it must not be primary explanation in facet_details."
+  ]
+}

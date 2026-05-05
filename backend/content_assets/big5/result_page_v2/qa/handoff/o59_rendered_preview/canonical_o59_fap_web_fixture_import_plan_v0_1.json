@@ -1,0 +1,38 @@
+{
+  "schema": "fap.big5.b5_b1_o59.fap_web_fixture_import_plan.v0_1_1",
+  "repo": "fap-web",
+  "source_fixture": {
+    "source_repo": "fap-api",
+    "source_pr": "#1129",
+    "source_path": "backend/tests/Fixtures/big5_result_page_v2/canonical_o59_core_body_preview.payload.json",
+    "fixture_status": "merged_fixture_required_by_future_codex_task",
+    "do_not_synthesize_if_missing": true
+  },
+  "recommended_target_fixture": "tests/fixtures/big5/result_page_v2/canonical_o59_core_body_preview.payload.json",
+  "import_policy": {
+    "copy_fixture_only_if_needed_for_fap_web_tests": true,
+    "preserve_source_payload_shape": true,
+    "do_not_rewrite_body_copy": true,
+    "do_not_generate_fixture_from_scratch": true,
+    "do_not_modify_backend": true,
+    "if_source_fixture_missing": "stop_and_report_missing_fixture",
+    "if_fixture_schema_mismatch": "stop_and_report_contract_gap"
+  },
+  "fixture_validation_requirements": [
+    "payload contains BIG5_OCEAN scale or equivalent report metadata",
+    "payload contains canonical profile label 敏锐的独立思考者",
+    "payload contains O59/C32/E20/A55/N68 score vector or visible score facts",
+    "payload contains eight section keys",
+    "payload contains staging metadata but renderer must not expose metadata terms",
+    "payload is treated as test fixture only, not runtime source"
+  ],
+  "notes": "fap-web may need a copied fixture because fap-api and fap-web are separate repos. Copying a test fixture is allowed only for contract testing and must not change runtime behavior.",
+  "revision": "v0.1.1",
+  "revision_notes": [
+    "v0.1.1 fixes manifest file list/count consistency.",
+    "v0.1.1 deduplicates surfaces arrays, including duplicated pdf entries.",
+    "v0.1.1 strengthens contextual all matching: no raw substring scan.",
+    "v0.1.1 requires tested_surfaces/pending_surfaces/passed_surfaces/failed_surfaces in Codex output."
+  ],
+  "version": "v0.1.1"
+}
