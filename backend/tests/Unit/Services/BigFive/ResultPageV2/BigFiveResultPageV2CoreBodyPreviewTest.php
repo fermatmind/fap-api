@@ -229,6 +229,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Services/BigFive/ResultPageV2/ContentAssets/BigFiveV2AssetPackageLoader.php',
+            'backend/app/Services/BigFive/ResultPageV2/RouteMatrix/BigFiveV2RouteMatrixParser.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -400,7 +401,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if ($this->isBigFiveV2ContentAssetLoaderFile($file)) {
+            if ($this->isBigFiveV2PilotSupportFile($file)) {
                 continue;
             }
 
@@ -431,9 +432,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
-    private function isBigFiveV2ContentAssetLoaderFile(string $file): bool
+    private function isBigFiveV2PilotSupportFile(string $file): bool
     {
-        return preg_match('#^backend/app/Services/BigFive/ResultPageV2/ContentAssets/[A-Za-z0-9_]+\.php$#', $file) === 1;
+        return preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix)/[A-Za-z0-9_]+\.php$#', $file) === 1;
     }
 
     /**
