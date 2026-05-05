@@ -114,6 +114,11 @@ class SitemapGenerator
         return $urls;
     }
 
+    public function generateApprovedCareerJobDetailUrls(): array
+    {
+        return $this->getDisplayAssetCareerJobDetailUrls();
+    }
+
     private function getScaleUrls(string $locale): array
     {
         $rows = $this->scaleRegistry->listActivePublic(0);
