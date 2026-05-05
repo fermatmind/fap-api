@@ -225,6 +225,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_bigfive_v2_content_asset_loader_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/BigFive/ResultPageV2/ContentAssets/BigFiveV2AssetPackageLoader.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_keeps_mbti_and_bigfive_runtime_changes_blocked(): void
     {
         $changed = [
@@ -391,6 +400,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveV2ContentAssetLoaderFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/app/Console/Kernel.php'
                 && $this->kernelDiffIsCareerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -416,6 +429,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php',
         ], true);
+    }
+
+    private function isBigFiveV2ContentAssetLoaderFile(string $file): bool
+    {
+        return preg_match('#^backend/app/Services/BigFive/ResultPageV2/ContentAssets/[A-Za-z0-9_]+\.php$#', $file) === 1;
     }
 
     /**
