@@ -446,7 +446,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isBigFiveV2PilotSupportFile(string $file): bool
     {
         return $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php'
-            || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer)/[A-Za-z0-9_]+\.php$#', $file) === 1;
+            || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer|Access)/[A-Za-z0-9_]+\.php$#', $file) === 1;
     }
 
     /**

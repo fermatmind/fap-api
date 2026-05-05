@@ -68,6 +68,7 @@ final class BigFiveV2PilotRuntimeFlagTest extends TestCase
         config()->set('big5_result_page_v2.pilot_production_allowlist_enabled', false);
         config()->set('big5_report_engine.v2_bridge_enabled', false);
         $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_v2_pilot_allowed');
+        config()->set('big5_result_page_v2.pilot_access_allowed_anon_ids', [$fixture['anon_id']]);
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$fixture['token'],
