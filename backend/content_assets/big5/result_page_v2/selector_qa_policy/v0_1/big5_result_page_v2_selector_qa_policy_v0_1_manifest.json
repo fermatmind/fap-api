@@ -1,0 +1,97 @@
+{
+  "version": "big5_result_page_v2.selector_qa_policy.v0.1",
+  "schema_version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+  "package_key": "big5_result_page_v2.selector_qa_policy.v0_1",
+  "package_role": "selector_qa_policy_advisory_pack",
+  "created_at_utc": "2026-05-04T03:01:19Z",
+  "imported_to_repo_at_utc": "2026-05-05T05:36:25Z",
+  "source_manifest": {
+    "version": "big5_result_page_v2.selector_qa_policy.v0.1",
+    "schema_version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "created_at_utc": "2026-05-04T03:01:19Z",
+    "runtime_ready": false,
+    "runtime_use": "staging_only",
+    "files": {
+      "golden_cases": "big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json",
+      "selection_policy": "big5_result_page_v2_selector_qa_policy_v0_1_selection_policy.json",
+      "conflict_resolution": "big5_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json"
+    },
+    "golden_case_count": 30,
+    "golden_case_groups": {
+      "clear_signature": 6,
+      "high_tension_or_mixed": 7,
+      "balanced_or_diffuse": 3,
+      "facet_reframe": 5,
+      "safety_downgrade": 5,
+      "scenario_application": 4
+    },
+    "source_context": {
+      "asset_batch": "big5_result_page_v2.selector_ready_assets.v0.3_p0_full",
+      "asset_count": 325,
+      "known_warnings": [
+        "module_00_trust_bar only 1 asset",
+        "module_07_collaboration_manual only 8 assets",
+        "shareable assets only 3",
+        "balanced_profile only 4",
+        "norm_unavailable only 2"
+      ]
+    },
+    "safety": {
+      "no_runtime_wiring": true,
+      "no_frontend_fallback": true,
+      "no_fixed_type": true,
+      "no_diagnosis": true,
+      "no_hiring_screening": true,
+      "share_requires_safety_transform": true
+    },
+    "sha256": {
+      "big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json": "cb9337a4a737a86cceeb3152300c33b8864252443baa92155c92c903698700e2",
+      "big5_result_page_v2_selector_qa_policy_v0_1_selection_policy.json": "b5d84adf98e3aec94d9321136cc91bcade682ca57e10d14dabf97a4db8e83d2f",
+      "big5_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json": "98be219de932b281a1892c2b9dfa82ba93c36cd679f471ee382dfe2a714b3147",
+      "big5_result_page_v2_selector_qa_policy_v0_1_manifest.json": "fa87c682e9271766bc7426ec5f57369aa0aecd0fdd2fbeeb2396a35fe3c67246"
+    }
+  },
+  "runtime_use": "staging_only",
+  "runtime_ready": false,
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "policy_use": "advisory_only",
+  "no_runtime_wiring": true,
+  "no_frontend_fallback": true,
+  "files": {
+    "readme": "README.md",
+    "golden_cases": "big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json",
+    "selection_policy": "big5_result_page_v2_selector_qa_policy_v0_1_selection_policy.json",
+    "conflict_resolution": "big5_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json",
+    "slot_resolution_report": "big5_result_page_v2_selector_qa_policy_v0_1_slot_resolution_report.json",
+    "sha256sums": "SHA256SUMS"
+  },
+  "golden_case_count": 31,
+  "source_golden_case_count": 30,
+  "golden_case_groups": {
+    "clear_signature": 6,
+    "high_tension_or_mixed": 7,
+    "balanced_or_diffuse": 3,
+    "facet_reframe": 5,
+    "safety_downgrade": 5,
+    "scenario_application": 4,
+    "canonical_o59_preview": 1
+  },
+  "normalization_summary": {
+    "added_o59_canonical_case": true,
+    "added_golden_group_to_cases": true,
+    "normalized_facet_include_slot_case": true,
+    "expanded_rendered_banned_terms": true,
+    "slot_resolution_report_unresolved_reference_count": 0
+  },
+  "sha256": {
+    "README.md": "e0ed1346e7acc48cbf28e00862035cbbbc6fa5c26a56a77070a3e325c7865baf",
+    "big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json": "6b3c509c88dfa320e61c661a136ec6c6d674f2a94577f079397696a4c86d860e",
+    "big5_result_page_v2_selector_qa_policy_v0_1_selection_policy.json": "297cc8a4c597c0d08de9d52c68e37af20d72cd4d150b0dff7b8155b80d70088e",
+    "big5_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json": "a56c1a7658b105d566fd28b03629aaf33008bdd07e6736e8012bf19816201b22",
+    "big5_result_page_v2_selector_qa_policy_v0_1_slot_resolution_report.json": "b1720fece76106d803ae02fcef620813c55380094ccfc7b3609cff519b32fb3d"
+  }
+}

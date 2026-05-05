@@ -1,0 +1,307 @@
+{
+  "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+  "policy_key": "big5_result_page_v2.selection_policy.v0_1",
+  "runtime_use": "staging_only",
+  "description_zh": "Big Five V2 selector-ready assets 的模块选块、去重、阅读模式和安全降级策略。",
+  "global_rules": {
+    "source_asset_batch": "big5_result_page_v2.selector_ready_assets.v0.3_p0_full",
+    "asset_runtime_use_required": "staging_only",
+    "selection_algorithm_order": [
+      "filter_by_runtime_and_review_status",
+      "filter_by_safety_scope",
+      "filter_by_reading_mode",
+      "filter_by_trigger_match",
+      "apply_scope_overrides",
+      "rank_by_specificity_and_priority",
+      "apply_mutual_exclusion",
+      "apply_module_slot_limits",
+      "apply_public_sanitizer",
+      "emit_selector_trace_for_QA"
+    ],
+    "allowed_reading_modes": [
+      "quick",
+      "standard",
+      "deep"
+    ],
+    "forbid_consumer_side_fallback": true,
+    "no_runtime_wiring_before_policy_QA": true,
+    "metadata_never_public": [
+      "internal_metadata",
+      "selector_basis",
+      "review_required",
+      "source_reference",
+      "frontend_fallback",
+      "production_use_allowed",
+      "ready_for_runtime",
+      "ready_for_pilot",
+      "ready_for_production"
+    ]
+  },
+  "scope_overrides": {
+    "low_quality": {
+      "allowed_registries": [
+        "state_scope_registry",
+        "boundary_registry",
+        "method_registry",
+        "observation_feedback_registry"
+      ],
+      "blocked_registries": [
+        "profile_signature_registry",
+        "facet_pattern_registry",
+        "coupling_registry",
+        "triple_pattern_registry",
+        "scenario_registry"
+      ],
+      "max_blocks_total": 5,
+      "required_slots": [
+        "module_10_method_privacy.quality_boundary.low_quality"
+      ],
+      "fallback_policy": "boundary_only"
+    },
+    "norm_unavailable": {
+      "must_include_slots": [
+        "module_10_method_privacy.norm_boundary.norm_unavailable"
+      ],
+      "suppress_fields": [
+        "percentile",
+        "normal_curve",
+        "population_rank"
+      ],
+      "allowed_score_display": [
+        "raw_0_100",
+        "score_band"
+      ],
+      "fallback_policy": "boundary_only"
+    },
+    "balanced_profile": {
+      "max_profile_signatures": 0,
+      "prefer_registries": [
+        "state_scope_registry",
+        "scenario_registry",
+        "method_registry",
+        "triple_pattern_registry"
+      ],
+      "suppress_strong_persona_language": true,
+      "fallback_policy": "neutral_unavailable"
+    },
+    "high_tension_profile": {
+      "prefer_registries": [
+        "coupling_registry",
+        "triple_pattern_registry",
+        "scenario_registry",
+        "action_plan_registry"
+      ],
+      "require_recovery_or_boundary": true,
+      "max_coupling_blocks": 3
+    },
+    "facet_inconsistent": {
+      "must_include_slots": [
+        "module_05_facet_reframe.scope_boundary.facet_inconsistent"
+      ],
+      "requires_facet_support": [
+        "item_count",
+        "confidence",
+        "inference_only"
+      ],
+      "fallback_policy": "boundary_only"
+    },
+    "share_safe_summary_only": {
+      "allowed_registries": [
+        "share_safety_registry",
+        "scenario_registry",
+        "boundary_registry",
+        "state_scope_registry"
+      ],
+      "suppress_fields": [
+        "raw_score",
+        "percentile",
+        "sensitive_stress_detail",
+        "internal_metadata"
+      ],
+      "requires_share_policy": true
+    }
+  },
+  "module_policies": {
+    "module_00_trust_bar": {
+      "max_blocks": 1,
+      "required": true,
+      "registry_priority": [
+        "boundary_registry",
+        "state_scope_registry",
+        "method_registry"
+      ],
+      "required_slots": [
+        "module_00_trust_bar.boundary.non_type_boundary"
+      ],
+      "fallback": "boundary_only"
+    },
+    "module_01_hero": {
+      "max_blocks": 5,
+      "slot_limits": {
+        "primary_signature": 1,
+        "domain_signal": 5,
+        "quick_action": 1
+      },
+      "registry_priority": [
+        "profile_signature_registry",
+        "domain_registry",
+        "state_scope_registry"
+      ],
+      "mutual_exclusion_groups": [
+        "profile_signature.primary",
+        "domain_signal.hero.O",
+        "domain_signal.hero.C",
+        "domain_signal.hero.E",
+        "domain_signal.hero.A",
+        "domain_signal.hero.N"
+      ],
+      "fallback": "omit_profile_show_domain_signals"
+    },
+    "module_02_quick_understanding": {
+      "max_blocks": 4,
+      "slot_limits": {
+        "scope_strategy": 1,
+        "primary_tension": 2,
+        "triple_pattern": 1
+      },
+      "registry_priority": [
+        "state_scope_registry",
+        "triple_pattern_registry",
+        "coupling_registry"
+      ],
+      "fallback": "neutral_unavailable"
+    },
+    "module_03_trait_deep_dive": {
+      "max_blocks": 5,
+      "slot_limits": {
+        "domain_card": 5,
+        "scope_depth": 1
+      },
+      "registry_priority": [
+        "domain_registry",
+        "state_scope_registry"
+      ],
+      "per_trait_limit": 1,
+      "fallback": "omit"
+    },
+    "module_04_coupling": {
+      "max_blocks": 3,
+      "slot_limits": {
+        "primary_coupling": 1,
+        "secondary_coupling": 2,
+        "scope_depth": 1
+      },
+      "registry_priority": [
+        "coupling_registry",
+        "triple_pattern_registry",
+        "state_scope_registry"
+      ],
+      "prefer_when_scope": [
+        "mixed_signature",
+        "high_tension_profile"
+      ],
+      "fallback": "omit"
+    },
+    "module_05_facet_reframe": {
+      "max_blocks": 3,
+      "requires": [
+        "facet_support.item_count",
+        "facet_support.confidence",
+        "facet_support.inference_only"
+      ],
+      "registry_priority": [
+        "facet_pattern_registry",
+        "state_scope_registry",
+        "method_registry"
+      ],
+      "fallback": "show_method_boundary"
+    },
+    "module_06_application_matrix": {
+      "max_blocks": 6,
+      "slot_limits": {
+        "work": 2,
+        "relationship": 2,
+        "stress": 2,
+        "action": 2,
+        "action_plan": 2
+      },
+      "registry_priority": [
+        "scenario_registry",
+        "action_plan_registry",
+        "coupling_registry"
+      ],
+      "fallback": "neutral_unavailable"
+    },
+    "module_07_collaboration_manual": {
+      "max_blocks": 4,
+      "share_safe_only": true,
+      "registry_priority": [
+        "scenario_registry",
+        "share_safety_registry"
+      ],
+      "fallback": "omit"
+    },
+    "module_08_share_save": {
+      "max_blocks": 4,
+      "share_policy_required": true,
+      "registry_priority": [
+        "share_safety_registry",
+        "boundary_registry",
+        "state_scope_registry"
+      ],
+      "fallback": "disable_share_option"
+    },
+    "module_09_feedback_data_flywheel": {
+      "max_blocks": 6,
+      "registry_priority": [
+        "observation_feedback_registry",
+        "state_scope_registry",
+        "action_plan_registry"
+      ],
+      "feedback_changes_measurement": false,
+      "fallback": "omit"
+    },
+    "module_10_method_privacy": {
+      "max_blocks": 5,
+      "registry_priority": [
+        "method_registry",
+        "boundary_registry",
+        "state_scope_registry"
+      ],
+      "always_available": true,
+      "fallback": "boundary_only"
+    }
+  },
+  "ranking_policy": {
+    "score_components": {
+      "trigger_match": 40,
+      "scope_match": 25,
+      "scenario_match": 15,
+      "specificity": 10,
+      "priority": 10
+    },
+    "specificity_order": [
+      "facet_patterns",
+      "triple_pattern_keys",
+      "coupling_keys",
+      "domain_bands",
+      "interpretation_scope",
+      "scenario",
+      "reading_mode"
+    ],
+    "tie_breakers": [
+      "higher_priority",
+      "more_specific_trigger",
+      "scope_exact_match",
+      "scenario_exact_match",
+      "lower_safety_risk",
+      "asset_key_lexicographic"
+    ]
+  },
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "policy_use": "advisory_only"
+}
