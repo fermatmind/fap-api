@@ -52,14 +52,18 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
 
     /** @var array<string, int> */
     private const LINEAGE_SAFE_ROWS = [
+        'accountants-and-auditors' => 2,
+        'actors' => 3,
         'actuaries' => 4,
         'architectural-and-engineering-managers' => 62,
         'biomedical-engineers' => 115,
         'civil-engineers' => 171,
+        'data-scientists' => 1930,
         'dentists' => 1940,
         'financial-analysts' => 2054,
         'high-school-teachers' => 2195,
         'market-research-analysts' => 2310,
+        'registered-nurses' => 2578,
     ];
 
     /** @var list<string> */
@@ -84,6 +88,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
 
     protected $signature = 'career:normalize-legacy-display-assets
         {--slugs= : Comma-separated explicit slug allowlist}
+        {--lineage-workbook= : Optional workbook path used to backfill verified lineage metadata}
         {--dry-run : Validate and report without writing}
         {--force : Required to update legacy display asset JSON fields}
         {--json : Emit machine-readable report}
@@ -185,6 +190,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
 
                     $asset->page_payload_json = $item['after']['page_payload_json'];
                     $asset->metadata_json = $item['after']['metadata_json'];
+                    $asset->structured_data_json = $item['after']['structured_data_json'];
                     $asset->save();
 
                     $updated[] = [
@@ -268,6 +274,8 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
         $afterPage = $beforePage;
         $beforeMetadata = $this->arrayValue($asset->metadata_json);
         $afterMetadata = $beforeMetadata;
+        $beforeStructuredData = $this->arrayValue($asset->structured_data_json);
+        $afterStructuredData = $beforeStructuredData;
         $patches = [];
         $errors = [];
         $actorShapeNormalized = false;
@@ -297,17 +305,22 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             $patches = array_merge($patches, $releaseGatePatches);
         }
 
-        if (array_key_exists($slug, self::LINEAGE_SAFE_ROWS) && ! is_string(data_get($afterMetadata, 'row_fingerprint'))) {
-            $afterMetadata['row_number'] = self::LINEAGE_SAFE_ROWS[$slug];
-            $afterMetadata['row_fingerprint'] = $this->rowFingerprint($slug, self::LINEAGE_SAFE_ROWS[$slug], $asset, $afterPage);
-            $lineageBackfilled = true;
-            $patches[] = [
-                'path' => '$.metadata_json.row_fingerprint',
-                'operation' => 'add_verified_row_fingerprint',
-                'source_row_number' => self::LINEAGE_SAFE_ROWS[$slug],
-                'after_hash' => $this->hash($afterMetadata['row_fingerprint']),
-            ];
+        if (array_key_exists($slug, self::LINEAGE_SAFE_ROWS)) {
+            [$afterMetadata, $lineageBackfilled, $lineageErrors, $lineagePatches] = $this->backfillLineage(
+                $slug,
+                $asset,
+                $afterPage,
+                $afterMetadata,
+            );
+            $errors = array_merge($errors, $lineageErrors);
+            $patches = array_merge($patches, $lineagePatches);
         }
+
+        [$afterStructuredData, $productSchemasRemoved, $productSchemaPatches] = $this->removeProductSchemas(
+            $afterStructuredData,
+            '$.structured_data_json',
+        );
+        $patches = array_merge($patches, $productSchemaPatches);
 
         $metadataReleaseGates = data_get($afterMetadata, 'release_gates');
         if (is_array($metadataReleaseGates)) {
@@ -317,7 +330,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             }
         }
 
-        $publicPayload = $this->publicPayload($asset, $afterPage);
+        $publicPayload = $this->publicPayload($asset, $afterPage, $afterStructuredData);
         $forbidden = $this->forbiddenPublicKeys($publicPayload);
         if ($forbidden !== []) {
             $errors[] = 'Forbidden public payload keys remain after normalization: '.implode(', ', $forbidden).'.';
@@ -330,6 +343,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
         $wouldUpdate = $errors === [] && (
             $this->hash($beforePage) !== $this->hash($afterPage)
             || $this->hash($beforeMetadata) !== $this->hash($afterMetadata)
+            || $this->hash($beforeStructuredData) !== $this->hash($afterStructuredData)
         );
 
         return [
@@ -340,17 +354,20 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             'release_gates_removed_count' => $releaseGatesRemoved,
             'lineage_backfilled' => $lineageBackfilled,
             'lineage_hold' => $lineageHold && ! $lineageBackfilled,
+            'Product_schema_removed_count' => $productSchemasRemoved,
             'public_payload_forbidden_keys_found' => $forbidden,
             'Product_absent' => ! $this->containsProduct($publicPayload),
             'patches' => $patches,
             'before' => [
                 'page_payload_json' => $beforePage,
                 'metadata_json' => $beforeMetadata,
+                'structured_data_json' => $beforeStructuredData,
                 'guard_hashes' => $this->guardHashes($asset),
             ],
             'after' => [
                 'page_payload_json' => $afterPage,
                 'metadata_json' => $afterMetadata,
+                'structured_data_json' => $afterStructuredData,
                 'guard_hashes' => $this->guardHashes($asset),
             ],
             'errors' => $errors,
@@ -382,6 +399,57 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
                 'zh' => $page['zh'],
             ],
         ], true, []];
+    }
+
+    /**
+     * @param  array<string, mixed>  $page
+     * @param  array<string, mixed>  $metadata
+     * @return array{array<string, mixed>, bool, list<string>, list<array<string, mixed>>}
+     */
+    private function backfillLineage(string $slug, CareerJobDisplayAsset $asset, array $page, array $metadata): array
+    {
+        $rowNumber = self::LINEAGE_SAFE_ROWS[$slug];
+        $requiredMissing = array_values(array_filter([
+            data_get($metadata, 'workbook_sha256') ? null : 'workbook_sha256',
+            (data_get($metadata, 'workbook_basename') || data_get($metadata, 'workbook_path')) ? null : 'workbook_path_or_basename',
+            data_get($metadata, 'row_number') ? null : 'workbook_row_number',
+            data_get($metadata, 'mapper_version') ? null : 'mapper_version',
+        ]));
+        $needsFingerprint = ! is_string(data_get($metadata, 'row_fingerprint'));
+
+        if ($requiredMissing === [] && ! $needsFingerprint) {
+            return [$metadata, false, [], []];
+        }
+
+        $workbook = $this->lineageWorkbook();
+        if ($workbook === null) {
+            return [$metadata, false, [
+                '--lineage-workbook is required to backfill verified lineage metadata for '.$slug.'.',
+            ], []];
+        }
+
+        $beforeHash = $this->hash($metadata);
+        $metadata['slug'] = $metadata['slug'] ?? $slug;
+        $metadata['row_number'] = $rowNumber;
+        $metadata['row_fingerprint'] = is_string(data_get($metadata, 'row_fingerprint'))
+            ? data_get($metadata, 'row_fingerprint')
+            : $this->rowFingerprint($slug, $rowNumber, $asset, $page);
+        $metadata['workbook_sha256'] = $metadata['workbook_sha256'] ?? $workbook['sha256'];
+        $metadata['workbook_basename'] = $metadata['workbook_basename'] ?? $workbook['basename'];
+        $metadata['mapper_version'] = $metadata['mapper_version'] ?? self::VALIDATOR_VERSION;
+        $metadata['validator_version'] = $metadata['validator_version'] ?? self::VALIDATOR_VERSION;
+        $metadata['display_import_stage'] = $metadata['display_import_stage'] ?? 'legacy_health_cleanup';
+        $metadata['command'] = $metadata['command'] ?? self::COMMAND_NAME;
+
+        return [$metadata, true, [], [[
+            'path' => '$.metadata_json',
+            'operation' => 'backfill_verified_lineage_metadata',
+            'source_row_number' => $rowNumber,
+            'workbook_basename' => $workbook['basename'],
+            'workbook_sha256' => $workbook['sha256'],
+            'before_hash' => $beforeHash,
+            'after_hash' => $this->hash($metadata),
+        ]]];
     }
 
     /**
@@ -428,6 +496,52 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
     }
 
     /**
+     * @param  array<string, mixed>  $payload
+     * @return array{array<string, mixed>, int, list<array<string, mixed>>}
+     */
+    private function removeProductSchemas(array $payload, string $path): array
+    {
+        $removed = 0;
+        $patches = [];
+        $cleaned = $this->removeProductSchemasRecursive($payload, $path, $removed, $patches);
+
+        return [is_array($cleaned) ? $cleaned : [], $removed, $patches];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $patches
+     */
+    private function removeProductSchemasRecursive(mixed $value, string $path, int &$removed, array &$patches): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        if (($value['@type'] ?? null) === 'Product') {
+            $removed++;
+            $patches[] = [
+                'path' => $path,
+                'operation' => 'remove_Product_schema_node',
+            ];
+
+            return null;
+        }
+
+        $isList = array_is_list($value);
+        $cleaned = [];
+        foreach ($value as $key => $child) {
+            $childPath = $isList ? "{$path}[{$key}]" : "{$path}.{$key}";
+            $next = $this->removeProductSchemasRecursive($child, $childPath, $removed, $patches);
+            if ($next === null) {
+                continue;
+            }
+            $cleaned[$key] = $next;
+        }
+
+        return $isList ? array_values($cleaned) : $cleaned;
+    }
+
+    /**
      * @return array<string, int>
      */
     private function summarize(array $items): array
@@ -439,6 +553,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             'lineage_backfilled_count' => count(array_filter($items, static fn (array $item): bool => ($item['lineage_backfilled'] ?? false) === true)),
             'lineage_hold_count' => count(array_filter($items, static fn (array $item): bool => ($item['lineage_hold'] ?? false) === true)),
             'release_gates_removed_count' => array_sum(array_map(static fn (array $item): int => (int) ($item['release_gates_removed_count'] ?? 0), $items)),
+            'Product_schema_removed_count' => array_sum(array_map(static fn (array $item): int => (int) ($item['Product_schema_removed_count'] ?? 0), $items)),
             'actor_shape_normalized_count' => count(array_filter($items, static fn (array $item): bool => ($item['actor_shape_normalized'] ?? false) === true)),
             'failed_count' => count(array_filter($items, static fn (array $item): bool => ($item['errors'] ?? []) !== [])),
         ];
@@ -464,6 +579,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             'lineage_backfilled_count' => 0,
             'lineage_hold_count' => 0,
             'release_gates_removed_count' => 0,
+            'Product_schema_removed_count' => 0,
             'actor_shape_normalized_count' => 0,
             'did_write' => false,
             'release_gates_changed' => false,
@@ -570,14 +686,14 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
     /**
      * @return array<string, mixed>
      */
-    private function publicPayload(CareerJobDisplayAsset $asset, array $pagePayload): array
+    private function publicPayload(CareerJobDisplayAsset $asset, array $pagePayload, ?array $structuredData = null): array
     {
         return [
             'component_order_json' => $asset->component_order_json,
             'page_payload_json' => $pagePayload,
             'seo_payload_json' => $asset->seo_payload_json,
             'sources_json' => $asset->sources_json,
-            'structured_data_json' => $asset->structured_data_json,
+            'structured_data_json' => $structuredData ?? $asset->structured_data_json,
             'implementation_contract_json' => $asset->implementation_contract_json,
         ];
     }
@@ -670,5 +786,31 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
         $encoded = json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         return hash('sha256', is_string($encoded) ? $encoded : serialize($value));
+    }
+
+    /**
+     * @return array{path: string, basename: string, sha256: string}|null
+     */
+    private function lineageWorkbook(): ?array
+    {
+        $path = trim((string) ($this->option('lineage-workbook') ?? ''));
+        if ($path === '') {
+            return null;
+        }
+
+        if (! is_file($path)) {
+            throw new RuntimeException('--lineage-workbook path does not exist: '.$path);
+        }
+
+        $sha = hash_file('sha256', $path);
+        if (! is_string($sha) || $sha === '') {
+            throw new RuntimeException('Unable to hash --lineage-workbook: '.$path);
+        }
+
+        return [
+            'path' => $path,
+            'basename' => basename($path),
+            'sha256' => $sha,
+        ];
     }
 }
