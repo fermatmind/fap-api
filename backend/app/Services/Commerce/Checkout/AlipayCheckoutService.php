@@ -14,7 +14,7 @@ class AlipayCheckoutService
     public function createCheckoutAction(string $orderNo, string $userAgent): array
     {
         $scene = $this->isMobileUserAgent($userAgent) ? 'mobile' : 'desktop';
-        $launchUrl = url('/api/v0.3/orders/'.rawurlencode($orderNo).'/pay/alipay?scene='.$scene);
+        $launchUrl = '/api/v0.3/orders/'.rawurlencode($orderNo).'/pay/alipay?scene='.$scene;
 
         return [
             'ok' => true,
