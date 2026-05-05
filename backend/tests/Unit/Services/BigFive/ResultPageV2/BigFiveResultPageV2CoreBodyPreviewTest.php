@@ -270,6 +270,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '+            ->middleware(\'throttle:api_result_lookup\')',
             '+            ->defaults(\'public_realm\', true)',
             '+            ->name(\'api.v0_3.results.lookup_by_email\');',
+            '+',
         ];
         $appServiceProviderChangedLines = [
             '+        RateLimiter::for(\'api_result_lookup\', function (Request $request) use ($response, $shouldBypassRateLimits, $scopedRateKey) {',
@@ -648,6 +649,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         foreach ($changedLines as $line) {
             if (str_starts_with($line, '-')) {
                 return false;
+            }
+
+            if (preg_match('/^\+\s*$/u', $line) === 1) {
+                continue;
             }
 
             if (preg_match('/AttemptEmailBindingController|email-bind|api\.v0_3\.attempts\.email_bind|FmTokenAuth|uuid:id|public_realm|ResultEmailLookupController|lookup-by-email|api_result_lookup|api\.v0_3\.results\.lookup_by_email/u', $line) !== 1) {
