@@ -116,6 +116,41 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         }
     }
 
+    public function test_it_maps_d25_cohort_rows_to_display_asset_payloads(): void
+    {
+        $this->assertCount(100, CareerSelectedDisplayAssetMapper::COHORT_003_SLUGS);
+
+        foreach ($this->d25Rows() as $row) {
+            $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow($row);
+
+            $this->assertSame([], $result['errors'], $row['Slug'].' should map cleanly.');
+            $this->assertSame($row['Slug'], $result['slug']);
+            $this->assertSame($row['SOC_Code'], $result['expected_soc']);
+            $this->assertSame($row['O_NET_Code'], $result['expected_onet']);
+            $this->assertSame(24, $result['summary']['component_order_count']);
+            $this->assertTrue($result['summary']['has_zh_page']);
+            $this->assertTrue($result['summary']['has_en_page']);
+            $this->assertSame([], $result['summary']['public_payload_forbidden_keys_found']);
+            $this->assertSame(false, $result['summary']['release_gates']['sitemap']);
+        }
+    }
+
+    public function test_duplicate_identity_broad_group_and_cn_proxy_rows_are_not_import_supported(): void
+    {
+        foreach ([
+            $this->row('aerospace-engineers', title: 'Aerospace Engineers', cnTitle: '航空航天工程师', soc: '17-2011', onet: '17-2011.00'),
+            $this->row('agricultural-workers-all-other', title: 'Agricultural Workers, All Other', cnTitle: '其他农业工人', soc: '45-2099', onet: '45-2099.00'),
+            $this->row('cn-2-01-01-00', title: 'CN Proxy Row', cnTitle: '中国代理行', soc: 'CN-2-01-01-00', onet: 'CN-2-01-01-00'),
+        ] as $row) {
+            $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow($row);
+
+            $this->assertStringContainsString(
+                'Slug is not in the selected display asset import allowlist.',
+                implode(' ', $result['errors']),
+            );
+        }
+    }
+
     public function test_biomedical_engineers_rejects_product_substring_if_reintroduced(): void
     {
         $row = $this->row(
@@ -163,6 +198,32 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         $this->assertStringContainsString('cn_faq must not contain hidden FAQ schema.', $errors);
         $this->assertStringContainsString('Forbidden public payload keys found', $errors);
         $this->assertContains('page_payload_json.page.en.adjacent_career_comparison_table.release_gates', $result['summary']['public_payload_forbidden_keys_found']);
+    }
+
+    /**
+     * @return list<array<string, string>>
+     */
+    private function d25Rows(): array
+    {
+        $rows = [];
+        foreach (CareerSelectedDisplayAssetMapper::COHORT_003_SLUGS as $slug => $expected) {
+            $title = $slug === 'demonstrators-and-product-promoters'
+                ? 'Demonstrators and Promotion Specialists'
+                : ucwords(str_replace('-', ' ', $slug));
+            $cnTitle = $slug === 'demonstrators-and-product-promoters'
+                ? '演示与推广专员'
+                : str_replace('-', ' ', $slug);
+
+            $rows[] = $this->row(
+                $slug,
+                title: $title,
+                cnTitle: $cnTitle,
+                soc: $expected['soc'],
+                onet: $expected['onet'],
+            );
+        }
+
+        return $rows;
     }
 
     /**

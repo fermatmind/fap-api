@@ -219,6 +219,39 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
+    public function d25_cohort_dry_run_generates_payloads_without_writing_database_rows(): void
+    {
+        foreach ($this->d25Rows() as $row) {
+            $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        }
+        $workbook = $this->writeWorkbook($this->d25Rows());
+        $before = $this->tableCounts();
+
+        [$exitCode, $report] = $this->runImport($workbook, implode(',', array_column($this->d25Rows(), 'Slug')), [
+            '--dry-run' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame($before, $this->tableCounts());
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame('dry_run', $report['mode']);
+        $this->assertSame(100, $report['validated_count']);
+        $this->assertSame(100, $report['would_write_count']);
+        $this->assertSame(0, $report['already_exists_count']);
+        $this->assertFalse($report['did_write']);
+        $this->assertFalse($report['release_gates_changed']);
+
+        foreach ($report['items'] as $item) {
+            $this->assertTrue($item['would_write']);
+            $this->assertSame(24, $item['payload_summary']['component_order_count']);
+            $this->assertTrue($item['payload_summary']['has_zh_page']);
+            $this->assertTrue($item['payload_summary']['has_en_page']);
+            $this->assertSame([], $item['payload_summary']['public_payload_forbidden_keys_found']);
+            $this->assertSame(false, data_get($item, 'payload_summary.release_gates.sitemap'));
+        }
+    }
+
+    #[Test]
     public function force_writes_exactly_three_display_asset_rows(): void
     {
         foreach ($this->selectedRows() as $row) {
@@ -454,6 +487,67 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
         $this->assertSame(50, $report['already_exists_count']);
         $this->assertFalse($report['did_write']);
         $this->assertSame(50, CareerJobDisplayAsset::query()->count());
+    }
+
+    #[Test]
+    public function force_writes_d25_cohort_display_assets_only_and_idempotency_dry_run_reports_existing(): void
+    {
+        foreach ($this->d25Rows() as $row) {
+            $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        }
+        $workbook = $this->writeWorkbook($this->d25Rows());
+        $slugs = implode(',', array_column($this->d25Rows(), 'Slug'));
+
+        [$exitCode, $report] = $this->runImport($workbook, $slugs, ['--force' => true]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('force', $report['mode']);
+        $this->assertTrue($report['did_write']);
+        $this->assertSame(100, $report['created_count']);
+        $this->assertSame(0, $report['updated_count']);
+        $this->assertFalse($report['release_gates_changed']);
+        $this->assertSame(100, Occupation::query()->count());
+        $this->assertSame(200, OccupationCrosswalk::query()->count());
+        $this->assertSame(100, CareerJobDisplayAsset::query()->count());
+        $this->assertDatabaseMissing('career_job_display_assets', ['canonical_slug' => 'software-developers']);
+
+        foreach ($this->d25Rows() as $row) {
+            $asset = CareerJobDisplayAsset::query()
+                ->where('canonical_slug', $row['Slug'])
+                ->where('asset_version', 'v4.2')
+                ->firstOrFail();
+
+            $this->assertSame('display.surface.v1', $asset->surface_version);
+            $this->assertSame('v4.2', $asset->template_version);
+            $this->assertSame('career_job_public_display', $asset->asset_type);
+            $this->assertSame('ready_for_pilot', $asset->status);
+            $this->assertCount(24, $asset->component_order_json);
+            $this->assertIsArray(data_get($asset->page_payload_json, 'page.zh'));
+            $this->assertIsArray(data_get($asset->page_payload_json, 'page.en'));
+            $this->assertSame('career:import-selected-display-assets', data_get($asset->metadata_json, 'command'));
+            $this->assertSame(hash_file('sha256', $workbook), data_get($asset->metadata_json, 'workbook_sha256'));
+            $this->assertIsInt(data_get($asset->metadata_json, 'row_number'));
+            $this->assertIsString(data_get($asset->metadata_json, 'row_fingerprint'));
+            $this->assertSame(false, data_get($asset->metadata_json, 'release_gates.sitemap'));
+            $encoded = json_encode([
+                $asset->page_payload_json,
+                $asset->structured_data_json,
+                $asset->implementation_contract_json,
+            ], JSON_THROW_ON_ERROR);
+            $this->assertStringNotContainsString('"@type":"Product"', $encoded);
+            $this->assertStringNotContainsString('release_gates', $encoded);
+        }
+
+        [$exitCode, $report] = $this->runImport($workbook, $slugs, ['--dry-run' => true]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame(0, $report['would_write_count']);
+        $this->assertSame(100, $report['already_exists_count']);
+        $this->assertFalse($report['did_write']);
+        $this->assertSame(100, CareerJobDisplayAsset::query()->count());
+        $this->assertSame(100, Occupation::query()->count());
+        $this->assertSame(200, OccupationCrosswalk::query()->count());
     }
 
     #[Test]
@@ -801,6 +895,32 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
             $this->row('cardiovascular-technologists-and-technicians', title: 'Cardiovascular technologists and technicians', cnTitle: '心血管技术员', soc: '29-2031', onet: '29-2031.00'),
             $this->row('career-technical-education-teachers-middle-school', title: 'Career/Technical Education Teachers, Middle School', cnTitle: '初中职业/技术教育教师', soc: '25-2023', onet: '25-2023.00'),
         ];
+    }
+
+    /**
+     * @return list<array<string, string>>
+     */
+    private function d25Rows(): array
+    {
+        $rows = [];
+        foreach (CareerSelectedDisplayAssetMapper::COHORT_003_SLUGS as $slug => $expected) {
+            $title = $slug === 'demonstrators-and-product-promoters'
+                ? 'Demonstrators and Promotion Specialists'
+                : ucwords(str_replace('-', ' ', $slug));
+            $cnTitle = $slug === 'demonstrators-and-product-promoters'
+                ? '演示与推广专员'
+                : str_replace('-', ' ', $slug);
+
+            $rows[] = $this->row(
+                $slug,
+                title: $title,
+                cnTitle: $cnTitle,
+                soc: $expected['soc'],
+                onet: $expected['onet'],
+            );
+        }
+
+        return $rows;
     }
 
     /**
