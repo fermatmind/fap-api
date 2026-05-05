@@ -71,6 +71,7 @@ use App\Http\Controllers\API\V0_5\Cms\TopicController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkOverrideController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkPatchController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkReviewQueueController;
+use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Http\Controllers\HealthzController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\EncryptCookies;
@@ -479,6 +480,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/search', [CareerSearchController::class, 'index']);
     Route::get('/career/datasets/occupations', [CareerDatasetHubController::class, 'show']);
     Route::get('/career/datasets/occupations/method', [CareerDatasetMethodController::class, 'show']);
+    Route::get('/seo/sitemap-source', [SitemapSourceController::class, 'index']);
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::get('/articles/{slug}', [ArticleController::class, 'show']);
     Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);

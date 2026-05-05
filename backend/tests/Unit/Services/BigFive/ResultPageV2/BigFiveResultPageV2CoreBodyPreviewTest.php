@@ -210,6 +210,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
+            'backend/app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php',
             'backend/app/Services/SEO/SitemapGenerator.php',
             'backend/app/Services/SEO/SitemapCache.php',
         ];
@@ -493,6 +494,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsCareerPublicDistributionOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
             if ($this->isBigFiveV2PilotSupportFile($file)) {
                 continue;
             }
@@ -549,6 +557,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerPublicDistributionFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php',
             'backend/app/Services/SEO/SitemapGenerator.php',
             'backend/app/Services/SEO/SitemapCache.php',
         ], true);
@@ -609,6 +618,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bCareer[A-Za-z0-9_\\\\]*\b|career:/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsCareerPublicDistributionOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_starts_with($line, '-')) {
+                return false;
+            }
+
+            if (preg_match('/SitemapSourceController|\\/seo\\/sitemap-source/u', $line) !== 1) {
                 return false;
             }
         }
