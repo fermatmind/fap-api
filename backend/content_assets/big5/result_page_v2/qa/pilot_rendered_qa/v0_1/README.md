@@ -6,8 +6,9 @@ This package records the API-side pilot rendered QA surface matrix for the repo-
 
 - Pilot QA only.
 - Not a CMS, production gate, content source package, selector policy, or runtime composer.
-- `result_page_desktop` is marked `pass` only because PILOT-5 added the fap-web pilot payload-only renderer contract.
-- `result_page_mobile`, PDF, share card, history, and compare remain `pending_surface` until a real rendered harness verifies each public surface.
+- `result_page_desktop` is marked `pass` because PILOT-5 added the fap-web pilot payload-only renderer contract and PILOT-7B added the rendered QA contract.
+- `result_page_mobile` is marked `pass` because PILOT-7B added the fap-web mobile rendered QA contract.
+- PDF, share card, history, and compare remain `pending_surface` until a real rendered harness verifies each public surface.
 
 ## Safety
 

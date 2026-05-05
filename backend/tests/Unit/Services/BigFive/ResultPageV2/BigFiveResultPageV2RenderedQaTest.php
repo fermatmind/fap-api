@@ -44,16 +44,18 @@ final class BigFiveResultPageV2RenderedQaTest extends TestCase
 
         $this->assertSame('pass', data_get($surfaces, 'result_page_desktop.status'));
         $this->assertNotSame([], data_get($surfaces, 'result_page_desktop.evidence'));
+        $this->assertSame('pass', data_get($surfaces, 'result_page_mobile.status'));
+        $this->assertNotSame([], data_get($surfaces, 'result_page_mobile.evidence'));
 
-        foreach (['result_page_mobile', 'pdf', 'share_card', 'history', 'compare'] as $pendingSurface) {
+        foreach (['pdf', 'share_card', 'history', 'compare'] as $pendingSurface) {
             $this->assertSame('pending_surface', data_get($surfaces, "{$pendingSurface}.status"), $pendingSurface);
             $this->assertSame([], data_get($surfaces, "{$pendingSurface}.evidence"), $pendingSurface);
             $this->assertNotSame('', (string) data_get($surfaces, "{$pendingSurface}.pending_reason"), $pendingSurface);
         }
 
         $this->assertSame([
-            'pass' => 1,
-            'pending_surface' => 5,
+            'pass' => 2,
+            'pending_surface' => 4,
             'fail' => 0,
         ], $matrix['status_counts'] ?? null);
     }
@@ -62,11 +64,12 @@ final class BigFiveResultPageV2RenderedQaTest extends TestCase
     {
         $report = $this->jsonFile('big5_o59_pilot_rendered_qa_report_v0_1.json');
 
-        $this->assertSame(['result_page_desktop'], $report['passed_surfaces'] ?? null);
+        $this->assertSame(['result_page_desktop', 'result_page_mobile'], $report['passed_surfaces'] ?? null);
         $this->assertSame([], $report['failed_surfaces'] ?? null);
-        $this->assertSame(['result_page_mobile', 'pdf', 'share_card', 'history', 'compare'], $report['pending_surfaces'] ?? null);
+        $this->assertSame(['pdf', 'share_card', 'history', 'compare'], $report['pending_surfaces'] ?? null);
         $this->assertTrue((bool) data_get($report, 'pilot_readiness.pilot_runtime_flag_default_off'));
         $this->assertTrue((bool) data_get($report, 'pilot_readiness.pilot_runtime_available_in_allowed_non_production_environment'));
+        $this->assertTrue((bool) data_get($report, 'pilot_readiness.result_page_mobile_contract_available'));
         $this->assertFalse((bool) data_get($report, 'pilot_readiness.all_required_surfaces_passed'));
         $this->assertFalse((bool) data_get($report, 'pilot_readiness.pilot_rendered_qa_complete'));
         $this->assertTrue((bool) data_get($report, 'pilot_readiness.pilot_user_surface_release_blocked'));
