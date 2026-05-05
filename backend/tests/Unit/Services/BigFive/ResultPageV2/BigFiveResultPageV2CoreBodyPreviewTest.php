@@ -237,6 +237,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_bigfive_v2_pilot_runtime_flag_wrapper_change(): void
+    {
+        $changed = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_keeps_mbti_and_bigfive_runtime_changes_blocked(): void
     {
         $changed = [
@@ -436,7 +445,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isBigFiveV2PilotSupportFile(string $file): bool
     {
-        return preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer)/[A-Za-z0-9_]+\.php$#', $file) === 1;
+        return $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php'
+            || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer)/[A-Za-z0-9_]+\.php$#', $file) === 1;
     }
 
     /**

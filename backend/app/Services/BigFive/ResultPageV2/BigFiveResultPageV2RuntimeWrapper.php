@@ -7,7 +7,12 @@ namespace App\Services\BigFive\ResultPageV2;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
+use App\Services\BigFive\ResultPageV2\Composer\BigFiveV2PilotPayloadComposer;
+use App\Services\BigFive\ResultPageV2\RouteMatrix\BigFiveV2RouteMatrixParser;
+use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2DeterministicSelector;
+use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectorInput;
 use Illuminate\Support\Facades\Log;
+use RuntimeException;
 
 final class BigFiveResultPageV2RuntimeWrapper
 {
@@ -22,12 +27,19 @@ final class BigFiveResultPageV2RuntimeWrapper
      */
     public function appendIfEnabled(Attempt $attempt, Result $result, array $responsePayload): array
     {
-        if (! (bool) config('big5_result_page_v2.enabled', false)) {
+        $legacyRuntimeEnabled = (bool) config('big5_result_page_v2.enabled', false);
+        $pilotRuntimeEnabled = $this->pilotRuntimeEnabled();
+
+        if (! $legacyRuntimeEnabled && ! $pilotRuntimeEnabled) {
             return $responsePayload;
         }
 
         if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== BigFiveResultPageV2Contract::SCALE_CODE) {
             return $responsePayload;
+        }
+
+        if ($pilotRuntimeEnabled) {
+            return $this->appendPilotPayload($attempt, $result, $responsePayload);
         }
 
         try {
@@ -58,6 +70,127 @@ final class BigFiveResultPageV2RuntimeWrapper
         }
 
         return $responsePayload;
+    }
+
+    /**
+     * @param  array<string,mixed>  $responsePayload
+     * @return array<string,mixed>
+     */
+    private function appendPilotPayload(Attempt $attempt, Result $result, array $responsePayload): array
+    {
+        try {
+            $envelope = $this->buildPilotEnvelope();
+            $errors = $this->validator->validateEnvelope($envelope);
+            if ($errors !== []) {
+                Log::warning('BIG5_RESULT_PAGE_V2_PILOT_PAYLOAD_INVALID', [
+                    'attempt_id' => (string) ($attempt->id ?? ''),
+                    'result_id' => (string) ($result->id ?? ''),
+                    'error_count' => count($errors),
+                    'errors' => array_slice($errors, 0, 10),
+                ]);
+
+                return $responsePayload;
+            }
+
+            $payload = $envelope[BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
+            if (is_array($payload)) {
+                $responsePayload[BigFiveResultPageV2Contract::PAYLOAD_KEY] = $payload;
+            }
+        } catch (\Throwable $exception) {
+            Log::warning('BIG5_RESULT_PAGE_V2_PILOT_RUNTIME_WRAPPER_FAILED', [
+                'attempt_id' => (string) ($attempt->id ?? ''),
+                'result_id' => (string) ($result->id ?? ''),
+                'exception_class' => $exception::class,
+                'message' => $exception->getMessage(),
+            ]);
+        }
+
+        return $responsePayload;
+    }
+
+    private function pilotRuntimeEnabled(): bool
+    {
+        if (! (bool) config('big5_result_page_v2.pilot_runtime_enabled', false)) {
+            return false;
+        }
+
+        $environment = (string) app()->environment();
+        $allowedEnvironments = $this->pilotAllowedEnvironments();
+        if (! in_array($environment, $allowedEnvironments, true)) {
+            return false;
+        }
+
+        if ($environment === 'production' && ! (bool) config('big5_result_page_v2.pilot_production_allowlist_enabled', false)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function pilotAllowedEnvironments(): array
+    {
+        $configured = config('big5_result_page_v2.pilot_allowed_environments', []);
+        if (is_string($configured)) {
+            $configured = explode(',', $configured);
+        }
+
+        if (! is_array($configured)) {
+            return [];
+        }
+
+        return array_values(array_filter(array_map(
+            static fn (mixed $environment): string => trim((string) $environment),
+            $configured,
+        )));
+    }
+
+    /**
+     * @return array{big5_result_page_v2: array<string,mixed>}
+     */
+    private function buildPilotEnvelope(): array
+    {
+        $routeMatrix = (new BigFiveV2RouteMatrixParser())->parse();
+        if ($routeMatrix->errors !== []) {
+            throw new RuntimeException('Big Five V2 pilot route matrix is not validator-clean.');
+        }
+
+        $routeRow = $routeMatrix->row(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);
+        if ($routeRow === null) {
+            throw new RuntimeException('Big Five V2 pilot O59 route row is missing.');
+        }
+
+        $input = BigFiveV2SelectorInput::fromGoldenCase($this->o59GoldenCase(), $routeRow);
+        $selection = (new BigFiveV2DeterministicSelector())->select($input);
+
+        return (new BigFiveV2PilotPayloadComposer())->compose($input, $selection);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function o59GoldenCase(): array
+    {
+        $path = base_path('content_assets/big5/result_page_v2/selector_qa_policy/v0_1/big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json');
+        $json = file_get_contents($path);
+        if (! is_string($json)) {
+            throw new RuntimeException('Big Five V2 O59 golden cases are unreadable.');
+        }
+
+        $cases = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
+        if (! is_array($cases)) {
+            throw new RuntimeException('Big Five V2 O59 golden cases must be a JSON list.');
+        }
+
+        foreach ($cases as $case) {
+            if (is_array($case) && ($case['case_key'] ?? null) === 'golden_case_31_o59_canonical_preview') {
+                return $case;
+            }
+        }
+
+        throw new RuntimeException('Big Five V2 O59 canonical golden case is missing.');
     }
 
     /**
