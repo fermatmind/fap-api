@@ -10,7 +10,7 @@ final class BigFiveV2RouteMatrixParser
 {
     public const RELATIVE_PATH = 'content_assets/big5/result_page_v2/route_matrix/v0_1_1';
 
-    public const O59_COMBINATION_KEY = 'O3_C2_E1_A3_N4';
+    public const O59_COMBINATION_KEY = 'O3_C2_E2_A3_N4';
 
     private const EXPECTED_SHARDS = ['O1', 'O2', 'O3', 'O4', 'O5'];
 
@@ -207,8 +207,8 @@ final class BigFiveV2RouteMatrixParser
             $errors[] = 'O59 route row label must be 敏锐的独立思考者';
         }
 
-        if (($row->data['profile_label_public_allowed'] ?? null) !== 'conditional') {
-            $errors[] = 'O59 route row profile_label_public_allowed must be conditional';
+        if (($row->data['profile_label_public_allowed'] ?? null) !== true) {
+            $errors[] = 'O59 route row profile_label_public_allowed must be true';
         }
 
         return $errors;

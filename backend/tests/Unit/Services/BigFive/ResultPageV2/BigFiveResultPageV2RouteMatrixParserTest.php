@@ -30,12 +30,12 @@ final class BigFiveResultPageV2RouteMatrixParserTest extends TestCase
         $row = $result->row(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);
 
         $this->assertNotNull($row);
-        $this->assertSame('O3_C2_E1_A3_N4', $row->combinationKey);
+        $this->assertSame('O3_C2_E2_A3_N4', $row->combinationKey);
         $this->assertSame('sensitive_independent_thinker', $row->profileKey);
         $this->assertSame('sensitive_independent_thinker', $row->profileFamily);
         $this->assertSame('high_tension_or_mixed', $row->interpretationScope);
         $this->assertSame('敏锐的独立思考者', $row->data['nearest_canonical_profile_label_zh'] ?? null);
-        $this->assertSame('conditional', $row->data['profile_label_public_allowed'] ?? null);
+        $this->assertTrue($row->data['profile_label_public_allowed'] ?? null);
     }
 
     public function test_parser_validates_section_routes_staging_flags_and_no_body_copy(): void
