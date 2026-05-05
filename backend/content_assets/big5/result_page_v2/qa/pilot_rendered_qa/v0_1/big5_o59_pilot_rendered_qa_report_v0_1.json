@@ -1,0 +1,73 @@
+{
+  "schema": "fap.big5.result_page_v2.pilot_rendered_qa_report.v0_1",
+  "package_key": "big5_result_page_v2.o59_pilot_rendered_qa.v0_1",
+  "created_at_utc": "2026-05-05T07:50:34Z",
+  "mode": "pilot_rendered_qa_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "surface_count": 6,
+  "surface_status_counts": {
+    "pass": 1,
+    "pending_surface": 5,
+    "fail": 0
+  },
+  "passed_surfaces": [
+    "result_page_desktop"
+  ],
+  "failed_surfaces": [],
+  "pending_surfaces": [
+    "result_page_mobile",
+    "pdf",
+    "share_card",
+    "history",
+    "compare"
+  ],
+  "public_payload_banned_scan": {
+    "status": "pass",
+    "scan_scope": "repo_owned_o59_pilot_payload_visible_fields_only",
+    "terms_scanned_from": "big5_o59_pilot_rendered_qa_surface_matrix_v0_1.json.banned_rendered_terms_union"
+  },
+  "pilot_readiness": {
+    "pilot_runtime_flag_default_off": true,
+    "pilot_runtime_available_in_allowed_non_production_environment": true,
+    "result_page_desktop_contract_available": true,
+    "result_page_mobile_contract_available": false,
+    "all_required_surfaces_passed": false,
+    "pilot_rendered_qa_complete": false,
+    "pilot_can_proceed_for_default_off_backend_payload_preview": true,
+    "pilot_user_surface_release_blocked": true,
+    "production_blocked": true
+  },
+  "remaining_blockers": [
+    {
+      "surface_key": "result_page_mobile",
+      "blocker": "PILOT-7B must add explicit mobile rendered QA or keep pending_surface."
+    },
+    {
+      "surface_key": "pdf",
+      "blocker": "No pilot PDF render harness yet."
+    },
+    {
+      "surface_key": "share_card",
+      "blocker": "No pilot share-card render harness yet."
+    },
+    {
+      "surface_key": "history",
+      "blocker": "No pilot history surface contract yet."
+    },
+    {
+      "surface_key": "compare",
+      "blocker": "No pilot compare surface contract yet."
+    }
+  ],
+  "not_allowed": [
+    "Do not treat this advisory QA report as production approval.",
+    "Do not enable production runtime.",
+    "Do not add frontend-authored Big Five explanation fallback.",
+    "Do not mark pending surfaces as pass without rendered evidence."
+  ]
+}
