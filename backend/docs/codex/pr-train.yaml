@@ -2682,6 +2682,42 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D18
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d18-career-display-import-cohort-002
+    base: main
+    depends_on: ["PR-D12", "PR-D14b"]
+    mode: execute
+    scope: >
+      Career upload governance display asset import for cohort 002. Extend
+      the guarded career:import-selected-display-assets command and mapper to
+      support exactly the D16 cohort 002 explicit slugs, while preserving
+      dry-run-by-default behavior, requiring --force for writes, rejecting
+      software-developers manual hold and unsafe rows, validating authority,
+      workbook contract, zh/en payloads, claim_permissions, Product absence,
+      forbidden public field absence, v4.2 component order, and lineage
+      metadata. Writes are limited to career_job_display_assets; do not create
+      occupations or crosswalks, change release gates, mutate sitemap/llms, or
+      process a 2786 bulk import.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerImportSelectedDisplayAssets.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Kernel.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php"
+      - "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d16_50_repaired.xlsx --slugs=adhesive-bonding-machine-operators-and-tenders,agricultural-engineers,air-crew-members,air-crew-officers,animal-scientists,anthropology-and-archeology-teachers-postsecondary,architecture-teachers-postsecondary,area-ethnic-and-cultural-studies-teachers-postsecondary,armored-assault-vehicle-crew-members,armored-assault-vehicle-officers,art-directors,art-drama-and-music-teachers-postsecondary,art-therapists,artillery-and-missile-crew-members,artillery-and-missile-officers,atmospheric-earth-marine-and-space-sciences-teachers-postsecondary,audiovisual-equipment-installers-and-repairers,automotive-and-watercraft-service-attendants,automotive-body-and-glass-repairers,automotive-engineering-technicians,automotive-glass-installers-and-repairers,aviation-inspectors,avionics-technicians,baggage-porters-and-bellhops,bailiffs,barbers,bill-and-account-collectors,billing-and-posting-clerks,biochemists-and-biophysicists,biofuels-biodiesel-technology-and-product-development-managers,biofuels-processing-technicians,biofuels-production-managers,bioinformatics-scientists,bioinformatics-technicians,biological-science-teachers-postsecondary,biologists,biomass-plant-technicians,biomass-power-plant-managers,biostatisticians,blockchain-engineers,bookkeeping-accounting-and-auditing-clerks,brokerage-clerks,brownfield-redevelopment-specialists-and-site-managers,bus-and-truck-mechanics-and-diesel-engine-specialists,bus-drivers-school,business-continuity-planners,business-teachers-postsecondary,buyers-and-purchasing-agents-farm-products,cardiovascular-technologists-and-technicians,career-technical-education-teachers-middle-school --dry-run --json"
+      - "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d16_50_repaired.xlsx --slugs=software-developers --dry-run --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
