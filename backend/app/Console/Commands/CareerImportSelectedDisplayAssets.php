@@ -30,6 +30,7 @@ final class CareerImportSelectedDisplayAssets extends Command
     protected $signature = 'career:import-selected-display-assets
         {--file= : Absolute path to repaired second-pilot workbook}
         {--slugs= : Comma-separated explicit slug allowlist}
+        {--manifest= : Optional validated full-upload plan manifest JSON}
         {--dry-run : Validate and report without writing}
         {--force : Required to write selected display asset rows}
         {--json : Emit machine-readable report}
@@ -59,7 +60,8 @@ final class CareerImportSelectedDisplayAssets extends Command
             }
 
             $file = $this->requiredFile();
-            $slugs = $this->requiredSlugs();
+            $manifest = $this->optionalManifest($file);
+            $slugs = $manifest === null ? $this->requiredSlugs() : $this->manifestSlugs($manifest);
             $workbook = $this->mapper->readWorkbook($file, $slugs);
             $missingHeaders = array_values(array_diff(CareerSelectedDisplayAssetMapper::REQUIRED_HEADERS, $workbook['headers']));
             if ($missingHeaders !== []) {
@@ -67,6 +69,7 @@ final class CareerImportSelectedDisplayAssets extends Command
                     'mode' => $force ? 'force' : 'dry_run',
                     'source_file_basename' => basename($file),
                     'source_file_sha256' => hash_file('sha256', $file) ?: null,
+                    'manifest_sha256' => $manifest['manifest_sha256'] ?? null,
                     'requested_slugs' => $slugs,
                     'decision' => 'fail',
                     'errors' => ['Workbook is missing required headers: '.implode(', ', $missingHeaders).'.'],
@@ -83,6 +86,7 @@ final class CareerImportSelectedDisplayAssets extends Command
 
             $items = [];
             $errors = [];
+            $manifestRows = $manifest === null ? [] : $this->manifestRowsBySlug($manifest);
             foreach ($slugs as $slug) {
                 $rows = $rowsBySlug[$slug] ?? [];
                 if (count($rows) !== 1) {
@@ -93,9 +97,26 @@ final class CareerImportSelectedDisplayAssets extends Command
                     continue;
                 }
 
-                $mapped = $this->mapper->mapRow($rows[0]);
+                $expected = $manifest === null ? null : [
+                    'soc' => (string) ($rows[0]['SOC_Code'] ?? ''),
+                    'onet' => (string) ($rows[0]['O_NET_Code'] ?? ''),
+                ];
+                $manifestRow = $manifestRows[$slug] ?? null;
+                $mapped = $this->mapper->mapRow($rows[0], $expected);
                 $authority = $this->validateAuthority($slug, $mapped['expected_soc'], $mapped['expected_onet'], $force);
-                $itemErrors = array_merge($mapped['errors'], $authority['errors']);
+                $itemErrors = array_merge(
+                    $mapped['errors'],
+                    $authority['errors'],
+                    $manifest === null ? [] : $this->manifestWorkbookRowErrors($slug, $rows[0], $manifestRow),
+                );
+                if ($manifest !== null
+                    && ($authority['existing_display_asset'] ?? false) === true
+                    && ! $this->manifestAllowsExistingDisplayAssets($manifest)) {
+                    $itemErrors[] = 'Manifest slug already has a selected display asset.';
+                }
+                if ($manifest !== null && $manifestRow === null) {
+                    $itemErrors[] = 'Manifest slug is missing from validated manifest rows.';
+                }
                 foreach ($itemErrors as $error) {
                     $errors[] = "{$slug}: {$error}";
                 }
@@ -108,6 +129,8 @@ final class CareerImportSelectedDisplayAssets extends Command
                 'mode' => $force ? 'force' : 'dry_run',
                 'source_file_basename' => basename($file),
                 'source_file_sha256' => hash_file('sha256', $file) ?: null,
+                'manifest_sha256' => $manifest['manifest_sha256'] ?? null,
+                'manifest_expected_delta' => $manifest['expected_delta'] ?? null,
                 'requested_slugs' => $slugs,
                 'total_rows' => $workbook['total_rows'],
                 'validated_count' => count($items),
@@ -213,7 +236,7 @@ final class CareerImportSelectedDisplayAssets extends Command
     {
         $raw = trim((string) $this->option('slugs'));
         if ($raw === '') {
-            throw new RuntimeException('--slugs is required and must be an explicit comma-separated allowlist.');
+            throw new RuntimeException('--slugs is required and must be an explicit comma-separated allowlist unless --manifest is provided.');
         }
 
         $slugs = array_values(array_unique(array_filter(array_map(
@@ -234,6 +257,178 @@ final class CareerImportSelectedDisplayAssets extends Command
         }
 
         return $slugs;
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private function optionalManifest(string $workbookPath): ?array
+    {
+        $path = trim((string) ($this->option('manifest') ?? ''));
+        if ($path === '') {
+            return null;
+        }
+        if (! is_file($path)) {
+            throw new RuntimeException('--manifest does not exist: '.$path);
+        }
+
+        $decoded = json_decode((string) file_get_contents($path), true);
+        if (! is_array($decoded)) {
+            throw new RuntimeException('--manifest must be valid JSON.');
+        }
+
+        $workbook = (array) ($decoded['workbook'] ?? []);
+        $planner = (array) ($decoded['planner'] ?? []);
+        $rows = (array) ($decoded['rows'] ?? []);
+        $expectedDelta = (array) ($decoded['expected_delta'] ?? []);
+        $workbookSha = hash_file('sha256', $workbookPath) ?: null;
+
+        $errors = [];
+        if ((string) ($planner['version'] ?? '') !== 'career_full_upload_planner_v0.1') {
+            $errors[] = 'Manifest planner.version must be career_full_upload_planner_v0.1.';
+        }
+        if (($workbook['sha256'] ?? null) !== $workbookSha) {
+            $errors[] = 'Manifest workbook sha256 must match --file.';
+        }
+        if (! isset($planner['db_baseline']) || ! is_array($planner['db_baseline'])) {
+            $errors[] = 'Manifest planner.db_baseline is required.';
+        }
+        if (isset($workbook['rows']) && (int) $workbook['rows'] !== count($rows)) {
+            $errors[] = 'Manifest workbook row count must match manifest row count.';
+        }
+        if (! isset($expectedDelta['career_job_display_assets'])) {
+            $errors[] = 'Manifest expected_delta.career_job_display_assets is required.';
+        }
+
+        $candidateSlugs = [];
+        foreach ($rows as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+            $slug = strtolower(trim((string) ($row['slug'] ?? '')));
+            $status = (string) ($row['status'] ?? '');
+            $importEligible = (bool) ($row['import_eligible'] ?? false);
+            if (! $importEligible) {
+                continue;
+            }
+
+            if ($slug === '' || $slug === 'software-developers') {
+                $errors[] = 'Manifest import candidates must not include empty slugs or software-developers.';
+            }
+            if ($status !== 'upload_candidate') {
+                $errors[] = "Manifest import candidate {$slug} must have status upload_candidate.";
+            }
+            if (in_array($status, ['manual_hold', 'duplicate_identity_hold', 'broad_group_hold', 'CN_proxy_hold'], true)) {
+                $errors[] = "Manifest import candidate {$slug} is a held row.";
+            }
+
+            $candidateSlugs[] = $slug;
+        }
+
+        $candidateSlugs = array_values(array_unique(array_filter($candidateSlugs)));
+        if ($candidateSlugs === []) {
+            $errors[] = 'Manifest must include at least one import_eligible upload_candidate row.';
+        }
+        if (isset($expectedDelta['career_job_display_assets'])
+            && (int) $expectedDelta['career_job_display_assets'] !== count($candidateSlugs)) {
+            $errors[] = 'Manifest expected display asset delta must equal import candidate count.';
+        }
+
+        $manifestPayload = [
+            'planner_version' => (string) ($planner['version'] ?? ''),
+            'workbook_sha256' => $workbookSha,
+            'row_count' => count($rows),
+            'upload_candidate_slugs' => $candidateSlugs,
+        ];
+        $computedManifestSha = hash('sha256', json_encode($manifestPayload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '');
+        if (($planner['upload_manifest_sha256'] ?? null) !== $computedManifestSha) {
+            $errors[] = 'Manifest upload_manifest_sha256 does not match workbook/candidate payload.';
+        }
+
+        if ($errors !== []) {
+            throw new RuntimeException('Invalid selected display asset manifest: '.implode(' ', array_unique($errors)));
+        }
+
+        $decoded['manifest_sha256'] = hash_file('sha256', $path) ?: null;
+        $decoded['manifest_candidate_slugs'] = $candidateSlugs;
+        $decoded['manifest_expected_display_delta'] = (int) ($expectedDelta['career_job_display_assets'] ?? 0);
+        $decoded['manifest_baseline_display_assets'] = (int) data_get($planner, 'db_baseline.career_job_display_assets', 0);
+
+        return $decoded;
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     * @return list<string>
+     */
+    private function manifestSlugs(array $manifest): array
+    {
+        return array_values((array) ($manifest['manifest_candidate_slugs'] ?? []));
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     * @return array<string, array<string, mixed>>
+     */
+    private function manifestRowsBySlug(array $manifest): array
+    {
+        $rows = [];
+        foreach ((array) ($manifest['rows'] ?? []) as $row) {
+            if (! is_array($row) || ! (bool) ($row['import_eligible'] ?? false)) {
+                continue;
+            }
+            $slug = strtolower(trim((string) ($row['slug'] ?? '')));
+            if ($slug !== '') {
+                $rows[$slug] = $row;
+            }
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     */
+    private function manifestAllowsExistingDisplayAssets(array $manifest): bool
+    {
+        try {
+            $current = CareerJobDisplayAsset::query()->count();
+        } catch (QueryException) {
+            return false;
+        }
+
+        $baseline = (int) ($manifest['manifest_baseline_display_assets'] ?? 0);
+        $expectedDelta = (int) ($manifest['manifest_expected_display_delta'] ?? 0);
+
+        return $current >= ($baseline + $expectedDelta);
+    }
+
+    /**
+     * @param  array<string, string|int>  $workbookRow
+     * @param  array<string, mixed>|null  $manifestRow
+     * @return list<string>
+     */
+    private function manifestWorkbookRowErrors(string $slug, array $workbookRow, ?array $manifestRow): array
+    {
+        $errors = [];
+        $socCode = (string) ($workbookRow['SOC_Code'] ?? '');
+        $onetCode = (string) ($workbookRow['O_NET_Code'] ?? '');
+        $status = (string) ($manifestRow['status'] ?? '');
+
+        if ($slug === 'software-developers') {
+            $errors[] = 'Manifest must not include software-developers.';
+        }
+        if (str_starts_with($slug, 'cn-') || str_starts_with($socCode, 'CN-') || $onetCode === 'not_applicable_cn_occupation') {
+            $errors[] = 'Manifest must not include CN proxy hold rows.';
+        }
+        if ($socCode === 'BLS_BROAD_GROUP' || $onetCode === 'multiple_onet_occupations' || str_ends_with($slug, '-all-other')) {
+            $errors[] = 'Manifest must not include broad group hold rows.';
+        }
+        if (in_array($status, ['manual_hold', 'duplicate_identity_hold', 'broad_group_hold', 'CN_proxy_hold'], true)) {
+            $errors[] = 'Manifest must not include held rows.';
+        }
+
+        return $errors;
     }
 
     /**

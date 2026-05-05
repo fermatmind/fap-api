@@ -43,6 +43,20 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         $this->assertSame('Plain language explanation from the workbook.', $result['payload']['page_payload_json']['page']['en']['ai_impact_table']['explanation']);
     }
 
+    public function test_it_maps_manifest_scoped_rows_with_explicit_expected_authority(): void
+    {
+        $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow(
+            $this->row('manifest-only-career', title: 'Manifest Only Career', soc: '15-2011', onet: '15-2011.00'),
+            ['soc' => '15-2011', 'onet' => '15-2011.00'],
+        );
+
+        $this->assertSame([], $result['errors']);
+        $this->assertSame('manifest-only-career', $result['slug']);
+        $this->assertSame('15-2011', $result['expected_soc']);
+        $this->assertSame('15-2011.00', $result['expected_onet']);
+        $this->assertSame(24, $result['summary']['component_order_count']);
+    }
+
     public function test_it_maps_d5_selected_rows_to_display_asset_payloads(): void
     {
         foreach ($this->d5Rows() as $row) {

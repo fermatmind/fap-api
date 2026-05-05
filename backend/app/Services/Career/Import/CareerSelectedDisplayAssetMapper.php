@@ -491,6 +491,7 @@ final class CareerSelectedDisplayAssetMapper
 
     /**
      * @param  array<string, string|int>  $row
+     * @param  array{soc: string, onet: string}|null  $expectedOverride
      * @return array{
      *     slug: string,
      *     row_number: int|null,
@@ -501,16 +502,16 @@ final class CareerSelectedDisplayAssetMapper
      *     errors: list<string>
      * }
      */
-    public function mapRow(array $row): array
+    public function mapRow(array $row, ?array $expectedOverride = null): array
     {
         $slug = strtolower($this->stringValue($row, 'Slug'));
         $errors = [];
 
-        if (! isset(self::ALLOWED_SLUGS[$slug])) {
+        if ($expectedOverride === null && ! isset(self::ALLOWED_SLUGS[$slug])) {
             $errors[] = 'Slug is not in the selected display asset import allowlist.';
         }
 
-        $expected = self::ALLOWED_SLUGS[$slug] ?? ['soc' => '', 'onet' => ''];
+        $expected = $expectedOverride ?? self::ALLOWED_SLUGS[$slug] ?? ['soc' => '', 'onet' => ''];
         $this->expect($this->stringValue($row, 'Asset_Version') === self::TEMPLATE_VERSION, 'Asset_Version must be v4.2.', $errors);
         $this->expect($this->stringValue($row, 'SOC_Code') === $expected['soc'], "SOC_Code must be {$expected['soc']}.", $errors);
         $this->expect($this->stringValue($row, 'O_NET_Code') === $expected['onet'], "O_NET_Code must be {$expected['onet']}.", $errors);
