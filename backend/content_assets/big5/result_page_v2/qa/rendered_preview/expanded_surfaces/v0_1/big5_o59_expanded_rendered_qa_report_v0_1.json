@@ -1,0 +1,75 @@
+{
+  "schema": "fap.big5.result_page_v2.expanded_rendered_qa_report.v0_1",
+  "package_key": "big5_result_page_v2.o59_expanded_rendered_qa.v0_1",
+  "created_at_utc": "2026-05-05T05:48:15Z",
+  "mode": "staging_preview_qa_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "surface_count": 6,
+  "surface_status_counts": {
+    "pass": 2,
+    "pending_surface": 4,
+    "fail": 0
+  },
+  "passed_surfaces": [
+    "result_page_desktop",
+    "result_page_mobile"
+  ],
+  "failed_surfaces": [],
+  "pending_surfaces": [
+    "pdf",
+    "share_card",
+    "history",
+    "compare"
+  ],
+  "public_payload_banned_scan": {
+    "status": "pass",
+    "scan_scope": "repo_owned_o59_payload_visible_fields_only",
+    "terms_scanned": [
+      "A compact overview",
+      "Five-domain distribution with percentile-oriented context",
+      "Focused read on domain-level strengths",
+      "Facet-level signals arranged for quick interpretation",
+      "Norms Comparison",
+      "Methodology and Access",
+      "N1 百分位 作为主体解释",
+      "all",
+      "优先关注成长面向",
+      "O6, C5, E6",
+      "[object Object]",
+      "deferred_to_future",
+      "policy_not_shipped",
+      "frontend_fallback",
+      "internal_metadata",
+      "selector_basis",
+      "selection_guidance",
+      "editor_notes",
+      "qa_notes",
+      "source_reference",
+      "import_policy",
+      "runtime_use",
+      "production_use_allowed"
+    ],
+    "contextual_rules": {
+      "all": "exact visible token only; raw substring scan forbidden",
+      "N1 百分位": "forbidden only as primary facet narrative, allowed in full directory/appendix-like contexts"
+    }
+  },
+  "staging_preview_readiness": {
+    "desktop_mobile_contract_available": true,
+    "all_required_surfaces_passed": false,
+    "expanded_rendered_qa_complete": false,
+    "staging_preview_can_remain_non_runtime": true,
+    "pilot_runtime_blocked": true,
+    "production_blocked": true
+  },
+  "not_allowed": [
+    "Do not wire this QA report to runtime selector/composer.",
+    "Do not mark pending surfaces as pass without a real rendered harness.",
+    "Do not expose internal_metadata, selector_basis, source_reference, review_required, runtime_use, or production_use_allowed."
+  ]
+}
