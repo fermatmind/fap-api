@@ -1,0 +1,24 @@
+{
+  "schema": "fap.big5.result_page_v2.coupling_asset_gap_summary.v0_1",
+  "package_key": "B5-CONTENT-2B",
+  "package_name": "Big Five V2 coupling asset gap planning package",
+  "version": "v0_1",
+  "mode": "planning_only",
+  "source_authority": "B5-CONTENT-2B planning only",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "unresolved_after_alias": 38,
+  "expected_new_coupling_assets": 190,
+  "expected_asset_roles_per_coupling": 5,
+  "no_body_generated": true,
+  "ready_for_content_generation": true,
+  "requires_content_owner_review": true,
+  "notes": [
+    "This package is a planning artifact only.",
+    "It does not contain body_zh, report prose, runtime selector wiring, production approval, or CMS state.",
+    "The 38 coupling keys remain non-runtime until content owner review and separate asset generation/import PRs."
+  ]
+}
