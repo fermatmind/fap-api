@@ -5,6 +5,7 @@ namespace App\Services\SEO;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Models\CareerJobDisplayAsset;
 use App\Models\PersonalityProfileVariant;
 use App\Models\TopicProfile;
 use App\Services\Career\Dataset\CareerDatasetPublicationMetadataService;
@@ -19,6 +20,20 @@ use Illuminate\Support\Carbon;
 
 class SitemapGenerator
 {
+    private const CAREER_DISPLAY_SURFACE_VERSION = 'display.surface.v1';
+
+    private const CAREER_DISPLAY_ASSET_VERSION = 'v4.2';
+
+    private const CAREER_DISPLAY_ASSET_TYPE = 'career_job_public_display';
+
+    private const CAREER_DISPLAY_READY_STATUS = 'ready_for_pilot';
+
+    private const CAREER_DISPLAY_COMPONENT_ORDER_COUNT = 24;
+
+    private const CAREER_DISPLAY_MANUAL_HOLD_SLUGS = [
+        'software-developers',
+    ];
+
     private string $urlPrefix;
 
     public function __construct(
@@ -364,6 +379,23 @@ class SitemapGenerator
             }
         }
 
+        $displayAssetLastmod = CareerJobDisplayAsset::query()
+            ->where('surface_version', self::CAREER_DISPLAY_SURFACE_VERSION)
+            ->where('asset_version', self::CAREER_DISPLAY_ASSET_VERSION)
+            ->where('template_version', self::CAREER_DISPLAY_ASSET_VERSION)
+            ->where('status', self::CAREER_DISPLAY_READY_STATUS)
+            ->where('asset_type', self::CAREER_DISPLAY_ASSET_TYPE)
+            ->max('updated_at');
+        $displayAssetUpdatedAt = $this->parseUpdatedAt($displayAssetLastmod);
+        if ($displayAssetUpdatedAt) {
+            foreach (CareerJob::SUPPORTED_LOCALES as $locale) {
+                $segment = $this->careerJobSeoService->mapBackendLocaleToFrontendSegment((string) $locale);
+                if (! isset($listLastModified[$segment]) || $displayAssetUpdatedAt->gt($listLastModified[$segment])) {
+                    $listLastModified[$segment] = $displayAssetUpdatedAt;
+                }
+            }
+        }
+
         $urls = [];
         foreach ($listLastModified as $segment => $lastmod) {
             $urls[] = [
@@ -378,6 +410,14 @@ class SitemapGenerator
     }
 
     private function getCareerJobDetailUrls(): array
+    {
+        return array_merge(
+            $this->getCmsCareerJobDetailUrls(),
+            $this->getDisplayAssetCareerJobDetailUrls()
+        );
+    }
+
+    private function getCmsCareerJobDetailUrls(): array
     {
         $rows = CareerJob::query()
             ->withoutGlobalScopes()
@@ -420,6 +460,71 @@ class SitemapGenerator
         }
 
         return array_values(array_filter($urls, static fn (array $row): bool => ! empty($row['loc'])));
+    }
+
+    private function getDisplayAssetCareerJobDetailUrls(): array
+    {
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        if ($baseUrl === '') {
+            return [];
+        }
+
+        $assets = CareerJobDisplayAsset::query()
+            ->with('occupation')
+            ->where('surface_version', self::CAREER_DISPLAY_SURFACE_VERSION)
+            ->where('asset_version', self::CAREER_DISPLAY_ASSET_VERSION)
+            ->where('template_version', self::CAREER_DISPLAY_ASSET_VERSION)
+            ->where('status', self::CAREER_DISPLAY_READY_STATUS)
+            ->where('asset_type', self::CAREER_DISPLAY_ASSET_TYPE)
+            ->orderBy('canonical_slug')
+            ->get();
+
+        $urls = [];
+
+        foreach ($assets as $asset) {
+            if (! $this->isSitemapEligibleCareerDisplayAsset($asset)) {
+                continue;
+            }
+
+            $slug = strtolower(trim((string) $asset->canonical_slug));
+            $lastmod = $asset->updated_at ?? $asset->created_at ?? now();
+
+            foreach (CareerJob::SUPPORTED_LOCALES as $locale) {
+                $segment = $this->careerJobSeoService->mapBackendLocaleToFrontendSegment((string) $locale);
+
+                $urls[] = [
+                    'loc' => $baseUrl.'/'.$segment.'/career/jobs/'.rawurlencode($slug),
+                    'lastmod' => $lastmod->toAtomString(),
+                    'slug' => 'career-jobs:'.$segment.':'.$slug,
+                    'updated_at' => $lastmod->toDateTimeString(),
+                ];
+            }
+        }
+
+        return $urls;
+    }
+
+    private function isSitemapEligibleCareerDisplayAsset(CareerJobDisplayAsset $asset): bool
+    {
+        $slug = strtolower(trim((string) $asset->canonical_slug));
+        if ($slug === '' || in_array($slug, self::CAREER_DISPLAY_MANUAL_HOLD_SLUGS, true)) {
+            return false;
+        }
+
+        $occupation = $asset->occupation;
+        if (! $occupation || strtolower(trim((string) $occupation->canonical_slug)) !== $slug) {
+            return false;
+        }
+
+        $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
+        if (count($componentOrder) !== self::CAREER_DISPLAY_COMPONENT_ORDER_COUNT) {
+            return false;
+        }
+
+        $pages = is_array($asset->page_payload_json) ? $asset->page_payload_json : [];
+        $localizedPages = is_array($pages['page'] ?? null) ? $pages['page'] : $pages;
+
+        return is_array($localizedPages['zh'] ?? null) && is_array($localizedPages['en'] ?? null);
     }
 
     private function getCareerGuideUrls(): array
