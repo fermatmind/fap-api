@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-05T00:01:08+08:00",
+  "updated_at": "2026-05-05T10:16:18+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5084,6 +5084,75 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-D25": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/pr-d25-career-display-import-cohort-003",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php",
+            "status": "passed",
+            "summary": "43 passed, 6183 assertions"
+          },
+          {
+            "command": "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d23b_schema_repaired.xlsx --slugs=$D22_FINAL_COHORT_SLUGS --dry-run --json",
+            "status": "passed",
+            "summary": "decision=pass validated_count=100 would_write_count=100 failed_count=0 did_write=false release_gates_changed=false",
+            "artifact": "/tmp/d25_local_dry_run_after_d23b.json"
+          },
+          {
+            "command": "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d23b_schema_repaired.xlsx --slugs=software-developers --dry-run --json",
+            "status": "passed",
+            "summary": "decision=fail did_write=false unsupported slug rejection preserved",
+            "artifact": "/tmp/d25_software_developers_rejection_after_d23b.json"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-05T10:16:18+08:00",
+          "status": "in_progress",
+          "summary": "Initialized PR-D25 ledger entry for guarded display asset import support for canonical cohort 003 after target dry-run found selected import allowlist gap."
+        },
+        {
+          "at": "2026-05-05T10:16:18+08:00",
+          "status": "d23b_artifact_ready",
+          "summary": "D23b repaired cohort 003 Occupation schema blockers in workbook artifact only; D25 local dry-run now passes with the D23b artifact."
+        },
+        {
+          "at": "2026-05-05T10:16:18+08:00",
+          "status": "local_checks_passed",
+          "summary": "D25 scoped local acceptance passed using D23b schema-repaired workbook artifact."
+        }
+      ],
+      "artifact": {
+        "d23b_workbook": "/tmp/fermat_career_assets_v4_2_v9_d23b_schema_repaired.xlsx",
+        "d23b_workbook_sha256": "c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef",
+        "d23b_validation": "/tmp/d23b_schema_repair_validation.json"
+      }
     }
   },
   "career_display_surface": {
