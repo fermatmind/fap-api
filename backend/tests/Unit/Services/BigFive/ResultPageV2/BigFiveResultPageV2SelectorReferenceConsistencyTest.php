@@ -47,6 +47,28 @@ final class BigFiveResultPageV2SelectorReferenceConsistencyTest extends TestCase
         ], data_get($report, 'summary.unresolved_by_type'));
     }
 
+    public function test_public_pilot_phase_1_resolution_policy_is_frozen_without_resolving_refs(): void
+    {
+        $report = $this->report();
+        $policy = data_get($report, 'public_pilot_resolution_policy');
+
+        $this->assertSame('frozen_for_public_pilot_phase_1', data_get($policy, 'policy_status'));
+        $this->assertSame('not_runtime', data_get($policy, 'runtime_use'));
+        $this->assertFalse((bool) data_get($policy, 'production_use_allowed', true));
+        $this->assertSame(92, data_get($policy, 'current_unresolved_reference_count'));
+        $this->assertSame(data_get($report, 'summary.unresolved_by_type'), data_get($policy, 'current_unresolved_by_type'));
+        $this->assertFalse((bool) data_get($policy, 'phase_1_freeze.public_sel_1_may_resolve_refs', true));
+        $this->assertTrue((bool) data_get($policy, 'phase_1_freeze.subsequent_resolution_prs_must_preserve_body_copy'));
+        $this->assertTrue((bool) data_get($policy, 'phase_1_freeze.subsequent_resolution_prs_must_preserve_staging_only_flags'));
+        $this->assertTrue((bool) data_get($policy, 'phase_1_freeze.selected_unresolved_refs_must_remain_suppressed_until_resolved'));
+
+        $this->assertContains('approved_alias_mapping', data_get($policy, 'allowed_resolution_modes'));
+        $this->assertContains('approved_key_normalization', data_get($policy, 'allowed_resolution_modes'));
+        $this->assertContains('explicit_suppression_policy', data_get($policy, 'allowed_resolution_modes'));
+        $this->assertContains('new_body_copy_generation', data_get($policy, 'disallowed_resolution_modes'));
+        $this->assertContains('runtime_selector_rewrite', data_get($policy, 'disallowed_resolution_modes'));
+    }
+
     public function test_pass_and_gap_statuses_are_current(): void
     {
         $checks = $this->checksByKey($this->report());
