@@ -1,0 +1,33 @@
+{
+  "schema": "big5_result_page_v2.production_rollout_validation.v0_1",
+  "package": "production_rollout_go_no_go",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "validation_status": "pass",
+  "production_decision": "NO_GO",
+  "checks": {
+    "rollout_gate_status": "pass",
+    "allowlist_status": "pass_not_active",
+    "percentage_rollout_readiness": "pass_default_zero",
+    "telemetry_readiness": "pass",
+    "alerts_readiness": "pass",
+    "rollback_readiness": "pass",
+    "incident_readiness": "pass_operator_assignment_required",
+    "production_safety": "pass_disabled",
+    "release_governance_linkage": "pass",
+    "explicit_human_rollout_approval": "missing_by_design",
+    "production_rollout_enablement": "blocked",
+    "cms_out_of_scope": "pass",
+    "dynamic_norms_out_of_scope": "pass"
+  },
+  "hard_blockers_before_real_rollout": [
+    "explicit_human_production_rollout_approval_missing",
+    "production_rollout_config_disabled",
+    "real_user_allowlist_not_configured",
+    "operator_assignment_required"
+  ]
+}
