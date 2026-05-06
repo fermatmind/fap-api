@@ -32,6 +32,7 @@ final class CareerExportFullReleaseLedger extends Command
     protected $signature = 'career:export-full-release-ledger
         {--timestamp= : Optional output directory timestamp segment}
         {--public-resolution-plan= : Optional Career full-upload planner JSON for 2786-row public resolution ledger}
+        {--duplicate-identity-scan= : Optional Career Phase 2A duplicate identity resolution scan JSON}
         {--json : Emit JSON output}';
 
     protected $description = 'Materialize internal full release ledger authority to storage/app/private/career_release_ledger.';
@@ -62,7 +63,10 @@ final class CareerExportFullReleaseLedger extends Command
 
             $publicResolutionPlanPath = $this->resolvePublicResolutionPlanPath();
             if ($publicResolutionPlanPath !== null) {
-                $ledger['public_resolution'] = $this->buildPublicResolutionLedger($publicResolutionPlanPath);
+                $ledger['public_resolution'] = $this->buildPublicResolutionLedger(
+                    $publicResolutionPlanPath,
+                    $this->resolveDuplicateIdentityScanPath(),
+                );
             }
 
             File::ensureDirectoryExists($tmpDir);
@@ -138,10 +142,30 @@ final class CareerExportFullReleaseLedger extends Command
         return null;
     }
 
+    private function resolveDuplicateIdentityScanPath(): ?string
+    {
+        $optionValue = $this->option('duplicate-identity-scan');
+        if ($optionValue !== null && trim((string) $optionValue) !== '') {
+            return trim((string) $optionValue);
+        }
+
+        $envValue = env('CAREER_DUPLICATE_IDENTITY_SCAN_PATH');
+        if (is_string($envValue) && trim($envValue) !== '') {
+            return trim($envValue);
+        }
+
+        $localScan = '/tmp/career_phase2a_duplicate_identity_resolution_scan.json';
+        if (app()->environment(['local', 'testing']) && is_file($localScan)) {
+            return $localScan;
+        }
+
+        return null;
+    }
+
     /**
      * @return array<string, mixed>
      */
-    private function buildPublicResolutionLedger(string $planPath): array
+    private function buildPublicResolutionLedger(string $planPath, ?string $duplicateIdentityScanPath = null): array
     {
         $normalizedPath = trim($planPath);
         if ($normalizedPath === '' || ! is_file($normalizedPath)) {
@@ -158,6 +182,8 @@ final class CareerExportFullReleaseLedger extends Command
             throw new \RuntimeException('career public resolution source plan has no rows: '.$planPath);
         }
 
+        $duplicateIdentityDecisions = $this->loadDuplicateIdentityDecisions($duplicateIdentityScanPath);
+        $publicCanonicalSlugs = $this->publicCanonicalSlugs($rows);
         $ledgerRows = [];
         $counts = [
             'total_rows' => 0,
@@ -177,6 +203,9 @@ final class CareerExportFullReleaseLedger extends Command
             'broad_group_hold' => 0,
             'manual_hold' => 0,
             'software_developers_public' => 0,
+            'duplicate_alias_decisions' => 0,
+            'duplicate_blocked_non_public' => 0,
+            'duplicate_canonical_promotions' => 0,
         ];
 
         foreach ($rows as $row) {
@@ -184,7 +213,13 @@ final class CareerExportFullReleaseLedger extends Command
                 continue;
             }
 
-            $ledgerRow = $this->buildPublicResolutionRow($row, $payload, $normalizedPath);
+            $ledgerRow = $this->buildPublicResolutionRow(
+                row: $row,
+                payload: $payload,
+                planPath: $normalizedPath,
+                duplicateIdentityDecisions: $duplicateIdentityDecisions,
+                publicCanonicalSlugs: $publicCanonicalSlugs,
+            );
             $ledgerRows[] = $ledgerRow;
 
             $counts['total_rows']++;
@@ -211,6 +246,15 @@ final class CareerExportFullReleaseLedger extends Command
             if (($ledgerRow['source_slug'] ?? null) === 'software-developers' && (bool) $ledgerRow['public_eligible']) {
                 $counts['software_developers_public']++;
             }
+            if ($currentStatus === 'duplicate_identity_hold' && $resolutionType === 'public_alias_redirect') {
+                $counts['duplicate_alias_decisions']++;
+            }
+            if ($currentStatus === 'duplicate_identity_hold' && $resolutionType === 'public_canonical_job') {
+                $counts['duplicate_canonical_promotions']++;
+            }
+            if ($currentStatus === 'duplicate_identity_hold' && ! (bool) $ledgerRow['public_eligible']) {
+                $counts['duplicate_blocked_non_public']++;
+            }
         }
 
         usort($ledgerRows, static function (array $left, array $right): int {
@@ -227,6 +271,7 @@ final class CareerExportFullReleaseLedger extends Command
                 'workbook_path' => $this->normalizeNullableString(data_get($payload, 'workbook.path')),
                 'source_workbook_sha' => $this->normalizeNullableString(data_get($payload, 'workbook.sha256')),
                 'source_sheet' => $this->normalizeNullableString(data_get($payload, 'workbook.sheet')),
+                'duplicate_identity_scan_path' => $duplicateIdentityScanPath,
             ],
             'allowed_public_resolution_types' => self::PUBLIC_RESOLUTION_TYPES,
             'counts' => $counts,
@@ -252,8 +297,13 @@ final class CareerExportFullReleaseLedger extends Command
      * @param  array<string, mixed>  $payload
      * @return array<string, mixed>
      */
-    private function buildPublicResolutionRow(array $row, array $payload, string $planPath): array
-    {
+    private function buildPublicResolutionRow(
+        array $row,
+        array $payload,
+        string $planPath,
+        array $duplicateIdentityDecisions = [],
+        array $publicCanonicalSlugs = [],
+    ): array {
         $sourceSlug = $this->normalizeNullableString($row['slug'] ?? null)
             ?? $this->normalizeNullableString($row['canonical_slug'] ?? null)
             ?? '';
@@ -261,12 +311,20 @@ final class CareerExportFullReleaseLedger extends Command
         $currentStatus = $this->normalizeNullableString($row['status'] ?? null) ?? 'blocked_until_governance_approval';
 
         $decision = $this->defaultGovernanceDecision($sourceSlug, $currentStatus);
+        $duplicateDecision = $currentStatus === 'duplicate_identity_hold'
+            ? ($duplicateIdentityDecisions[$sourceSlug] ?? null)
+            : null;
+        if (is_array($duplicateDecision)) {
+            $decision = $this->duplicateIdentityGovernanceDecision($sourceSlug, $duplicateDecision, $publicCanonicalSlugs);
+        }
         $resolutionType = $decision['public_resolution_type'];
         if (! in_array($resolutionType, self::PUBLIC_RESOLUTION_TYPES, true)) {
             throw new \RuntimeException('unsupported public resolution type for '.$sourceSlug.': '.$resolutionType);
         }
 
         $publicEligible = (bool) $decision['public_eligible'];
+        $targetCanonicalSlug = $this->normalizeNullableString($decision['target_canonical_slug'] ?? null);
+        $redirectTarget = $this->normalizeNullableString($decision['redirect_target'] ?? null);
 
         return [
             'row_number' => (int) ($row['row_number'] ?? 0),
@@ -276,19 +334,20 @@ final class CareerExportFullReleaseLedger extends Command
             'current_status' => $currentStatus,
             'governance_decision' => $decision['governance_decision'],
             'public_resolution_type' => $resolutionType,
-            'target_canonical_slug' => $publicEligible ? $canonicalSlug : null,
-            'redirect_target' => null,
+            'target_canonical_slug' => $targetCanonicalSlug ?? ($publicEligible && $resolutionType === 'public_canonical_job' ? $canonicalSlug : null),
+            'redirect_target' => $redirectTarget,
             'family_hub_slug' => null,
             'cn_proxy_policy' => $currentStatus === 'CN_proxy_hold' ? 'blocked_until_CN_authority_policy' : null,
             'indexability' => $decision['indexability'],
-            'sitemap_eligible' => $publicEligible,
-            'llms_eligible' => $publicEligible,
-            'llms_full_eligible' => $publicEligible,
+            'sitemap_eligible' => (bool) ($decision['sitemap_eligible'] ?? $publicEligible),
+            'llms_eligible' => (bool) ($decision['llms_eligible'] ?? $publicEligible),
+            'llms_full_eligible' => (bool) ($decision['llms_full_eligible'] ?? $publicEligible),
             'public_eligible' => $publicEligible,
-            'source_authority_model' => $publicEligible ? 'existing_approved_canonical_career_asset' : 'governance_required_before_publication',
+            'source_authority_model' => $decision['source_authority_model']
+                ?? ($publicEligible ? 'existing_approved_canonical_career_asset' : 'governance_required_before_publication'),
             'identity_resolution_reason' => $this->defaultIdentityResolutionReason($currentStatus),
-            'reviewer' => $publicEligible ? 'career_canonical_baseline' : null,
-            'approved_at' => null,
+            'reviewer' => $decision['reviewer'] ?? ($publicEligible ? 'career_canonical_baseline' : null),
+            'approved_at' => $decision['approved_at'] ?? null,
             'evidence_refs' => [
                 'planner' => [
                     'kind' => 'career_full_upload_planner',
@@ -301,10 +360,129 @@ final class CareerExportFullReleaseLedger extends Command
                     'sheet' => $this->normalizeNullableString(data_get($payload, 'workbook.sheet')),
                     'row_number' => (int) ($row['row_number'] ?? 0),
                 ],
+                'duplicate_identity' => $duplicateDecision,
             ],
-            'schema_policy' => $publicEligible ? 'career_job_schema_existing_release_gate' : 'requires_public_type_policy_before_public_schema',
+            'schema_policy' => $decision['schema_policy']
+                ?? ($publicEligible ? 'career_job_schema_existing_release_gate' : 'requires_public_type_policy_before_public_schema'),
             'boundary_disclaimer_required' => $currentStatus === 'CN_proxy_hold',
             'rollback_condition' => $publicEligible ? 'revert_public_resolution_ledger_decision' : 'remove_or_revert_governance_decision_before_publication',
+        ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     * @return array<string, true>
+     */
+    private function publicCanonicalSlugs(array $rows): array
+    {
+        $slugs = [];
+        foreach ($rows as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $status = $this->normalizeNullableString($row['status'] ?? null);
+            $slug = $this->normalizeNullableString($row['slug'] ?? null)
+                ?? $this->normalizeNullableString($row['canonical_slug'] ?? null);
+            if ($slug !== null && $slug !== 'software-developers' && in_array($status, ['already_imported_validated', 'upload_candidate'], true)) {
+                $slugs[$slug] = true;
+            }
+        }
+
+        return $slugs;
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    private function loadDuplicateIdentityDecisions(?string $scanPath): array
+    {
+        if ($scanPath === null) {
+            return [];
+        }
+
+        $normalizedPath = trim($scanPath);
+        if ($normalizedPath === '' || ! is_file($normalizedPath)) {
+            throw new \RuntimeException('career duplicate identity scan not found: '.$scanPath);
+        }
+
+        $payload = json_decode((string) file_get_contents($normalizedPath), true);
+        if (! is_array($payload)) {
+            throw new \RuntimeException('career duplicate identity scan is not valid JSON: '.$scanPath);
+        }
+
+        $rows = (array) data_get($payload, 'duplicate_scope.rows', []);
+        if ($rows === []) {
+            throw new \RuntimeException('career duplicate identity scan has no rows: '.$scanPath);
+        }
+
+        $decisions = [];
+        foreach ($rows as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $slug = $this->normalizeNullableString($row['source_slug'] ?? null);
+            if ($slug === null) {
+                continue;
+            }
+
+            $class = $this->normalizeNullableString($row['resolution_class'] ?? null);
+            $target = null;
+            $targets = (array) ($row['possible_canonical_targets'] ?? []);
+            if ($class === 'high_confidence_alias_redirect' && isset($targets[0]) && is_array($targets[0])) {
+                $target = $this->normalizeNullableString($targets[0]['canonical_slug'] ?? null);
+            }
+
+            $decisions[$slug] = [
+                'source_slug' => $slug,
+                'resolution_class' => $class,
+                'target_canonical_slug' => $target,
+                'confidence' => $this->normalizeNullableString($row['confidence'] ?? null),
+                'evidence' => $targets[0]['evidence'] ?? [],
+                'blockers' => is_array($row['blockers'] ?? null) ? $row['blockers'] : [],
+            ];
+        }
+
+        return $decisions;
+    }
+
+    /**
+     * @param  array<string, mixed>  $duplicateDecision
+     * @param  array<string, true>  $publicCanonicalSlugs
+     * @return array<string, mixed>
+     */
+    private function duplicateIdentityGovernanceDecision(string $sourceSlug, array $duplicateDecision, array $publicCanonicalSlugs): array
+    {
+        $resolutionClass = $this->normalizeNullableString($duplicateDecision['resolution_class'] ?? null);
+        if ($resolutionClass !== 'high_confidence_alias_redirect') {
+            return [
+                'governance_decision' => 'duplicate_identity_blocked_until_review',
+                'public_resolution_type' => 'blocked_until_governance_approval',
+                'indexability' => 'not_public',
+                'public_eligible' => false,
+            ];
+        }
+
+        $targetCanonicalSlug = $this->normalizeNullableString($duplicateDecision['target_canonical_slug'] ?? null);
+        if ($targetCanonicalSlug === null || ! isset($publicCanonicalSlugs[$targetCanonicalSlug])) {
+            throw new \RuntimeException('duplicate identity alias target is not approved canonical for '.$sourceSlug);
+        }
+
+        return [
+            'governance_decision' => 'duplicate_identity_high_confidence_alias_redirect',
+            'public_resolution_type' => 'public_alias_redirect',
+            'target_canonical_slug' => $targetCanonicalSlug,
+            'redirect_target' => '/career/jobs/'.$targetCanonicalSlug,
+            'indexability' => 'no_independent_index',
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'llms_full_eligible' => false,
+            'public_eligible' => true,
+            'source_authority_model' => 'duplicate_identity_scan_high_confidence_existing_canonical_target',
+            'reviewer' => 'phase2a_duplicate_identity_scan',
+            'approved_at' => null,
+            'schema_policy' => 'alias_redirect_no_independent_job_schema',
         ];
     }
 
