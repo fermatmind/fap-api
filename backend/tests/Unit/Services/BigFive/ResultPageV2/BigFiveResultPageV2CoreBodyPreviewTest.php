@@ -503,16 +503,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_allows_bigfive_v2_cms_editorial_index_scope_only(): void
+    public function test_runtime_freeze_classifier_allows_bigfive_v2_cms_editorial_governance_scope_only(): void
     {
         $allowed = [
             'backend/app/Filament/Ops/Support/BigFiveV2EditorialAssetIndexPresenter.php',
             'backend/app/Models/BigFiveV2EditorialAssetIndexEntry.php',
+            'backend/app/Models/BigFiveV2EditorialRevision.php',
             'backend/app/Services/BigFive/Cms/BigFiveV2EditorialAssetIndex.php',
+            'backend/app/Services/BigFive/Cms/BigFiveV2EditorialWorkflow.php',
+            'backend/app/Policies/BigFiveV2EditorialRevisionPolicy.php',
+            'backend/database/migrations/2026_05_07_010000_create_big_five_v2_editorial_revisions_table.php',
         ];
 
         $blocked = [
             'backend/app/Services/BigFive/Cms/BigFiveV2EditorialRuntimePublisher.php',
+            'backend/app/Services/BigFive/Cms/BigFiveV2EditorialRuntimePublishLinkage.php',
             'backend/app/Services/BigFive/Cms/BigFiveV2CmsRuntimeComposer.php',
             'backend/app/Services/BigFive/Cms/BigFiveV2CmsRuntimeSelector.php',
             'backend/app/Services/BigFive/BigFivePublicProjectionService.php',
@@ -740,7 +745,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if ($this->isBigFiveV2CmsEditorialIndexFile($file)) {
+            if ($this->isBigFiveV2CmsEditorialGovernanceFile($file)) {
                 continue;
             }
 
@@ -910,13 +915,33 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
-    private function isBigFiveV2CmsEditorialIndexFile(string $file): bool
+    private function isBigFiveV2CmsEditorialGovernanceFile(string $file): bool
     {
-        return in_array($file, [
-            'backend/app/Filament/Ops/Support/BigFiveV2EditorialAssetIndexPresenter.php',
-            'backend/app/Models/BigFiveV2EditorialAssetIndexEntry.php',
-            'backend/app/Services/BigFive/Cms/BigFiveV2EditorialAssetIndex.php',
-        ], true);
+        $filename = basename($file);
+        if (preg_match('#(Runtime|Selector|Projection|ProductionRollout|DirectRuntime)#', $filename) === 1) {
+            return false;
+        }
+
+        if ($file === 'backend/app/Filament/Ops/Support/BigFiveV2EditorialAssetIndexPresenter.php') {
+            return true;
+        }
+
+        if (preg_match('#^backend/app/Models/BigFiveV2Editorial[A-Za-z0-9_]+\.php$#', $file) === 1) {
+            return true;
+        }
+
+        if (preg_match('#^backend/app/Services/BigFive/Cms/BigFiveV2Editorial[A-Za-z0-9_]+\.php$#', $file) === 1) {
+            return true;
+        }
+
+        if (preg_match('#^backend/app/Policies/BigFiveV2Editorial[A-Za-z0-9_]+\.php$#', $file) === 1) {
+            return true;
+        }
+
+        return preg_match(
+            '#^backend/database/migrations/\d{4}_\d{2}_\d{2}_\d{6}_create_big_five_v2_editorial_[a-z0-9_]+_table\.php$#',
+            $file
+        ) === 1;
     }
 
     private function isAttemptEmailBindingFoundationFile(string $file): bool
