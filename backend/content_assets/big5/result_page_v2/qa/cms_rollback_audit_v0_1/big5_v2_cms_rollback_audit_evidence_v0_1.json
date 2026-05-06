@@ -1,0 +1,13 @@
+{
+  "schema_version": "big5_v2_cms_rollback_audit_evidence.v0_1",
+  "evidence_status": "ready_for_editorial_governance",
+  "approval_audit": "required",
+  "release_audit": "required",
+  "rollback_audit": "required",
+  "rollback_authority": "admin.approval.review + admin.content.release",
+  "release_evidence_linkage": "required",
+  "runtime_mutation_allowed": false,
+  "direct_runtime_publish_allowed": false,
+  "cms_runtime_owner": false,
+  "rollback_path": "git_backed_release_snapshot_revert"
+}
