@@ -1,0 +1,47 @@
+{
+  "schema_version": "big5_v2_norm_privacy_policy_v0_1",
+  "mode": "norm_privacy_policy",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "dynamic_norm_engine_attached": false,
+  "public_percentile_display_enabled": false,
+  "capture_default": "internal_only",
+  "requires_explicit_consent": true,
+  "requires_consent_revoke_handling": true,
+  "requires_dsar_handling": true,
+  "pseudonymous_linkage": {
+    "strategy": "one_way_hmac_subject_key",
+    "raw_identifier_storage": "forbidden",
+    "public_identifier_exposure": "forbidden",
+    "secret_rotation_required": true
+  },
+  "retention_policy": {
+    "observation_retention": "limited_governance_window",
+    "expired_record_behavior": "exclude_from_future_aggregation",
+    "append_only_delete_strategy": "retain_observation_with_suppressed_subject_linkage"
+  },
+  "consent_revoke_policy": {
+    "revoked_capture_behavior": "fail_closed_exclude",
+    "future_aggregation_behavior": "exclude_from_future_snapshots",
+    "historical_public_display_behavior": "not_applicable_public_display_disabled"
+  },
+  "small_cell_suppression": {
+    "minimum_cell_count": 50,
+    "below_threshold_behavior": "suppress_group_output",
+    "public_norm_value_publish": "forbidden"
+  },
+  "cross_subject_leakage_controls": {
+    "observation_identifier_public_exposure": "forbidden",
+    "raw_score_vector_public_exposure": "forbidden",
+    "subject_key_public_exposure": "forbidden"
+  },
+  "not_enabled_by_package": [
+    "dynamic_norm_engine",
+    "runtime_norm_attachment",
+    "public_percentile_display",
+    "production_rollout",
+    "cms"
+  ]
+}
