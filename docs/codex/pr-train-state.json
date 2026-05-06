@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-06T01:11:00+08:00",
+  "updated_at": "2026-05-06T01:39:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -234,7 +234,7 @@
       "repo": "fap-api",
       "branch": "codex/low-api-order-tenant-ownership",
       "status": "pr_open",
-      "commit_sha": "a8bc13c42105e3ae396b0dddfacbe103c3182bf9",
+      "commit_sha": "801af38d828802fee1f3e963092b8e4cd2bf3e96",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1207",
       "checks": {
         "scope_validation": {
@@ -283,8 +283,8 @@
           "evidence": "16 tests passed, 18 assertions; PR-2 order/tenant ownership files are explicitly classified as non-MBTI-impacting runtime changes."
         },
         "github_required_checks": {
-          "status": "failed_current_pr_fix_pushed_pending_rerun",
-          "evidence": "Initial PR #1207 run failed required verify-mbti-legacy and verify-mbti-v2 because the Big Five runtime freeze classifier did not allow PR-2 OrderManager, tenant OrderResource, and PaymentWebhookHandlerCore files. The classifier allowlist and regression test were updated in this PR; GitHub rerun is pending after push."
+          "status": "pass",
+          "evidence": "PR #1207 pull_request CI passed on head 801af38d828802fee1f3e963092b8e4cd2bf3e96: hygiene, verify-mbti-v2, and verify-mbti-legacy. Initial required-check failure was fixed by the PR-2 runtime freeze classifier allowlist update."
         },
         "diff_check": {
           "status": "pass",
