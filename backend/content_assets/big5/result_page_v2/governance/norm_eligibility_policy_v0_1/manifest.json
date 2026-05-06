@@ -1,0 +1,28 @@
+{
+  "package": "big5_v2_norm_eligibility_policy",
+  "version": "v0_1",
+  "mode": "norm_eligibility_policy_schema",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "dynamic_norm_engine_attached": false,
+  "public_percentile_display_enabled": false,
+  "norm_eligible": false,
+  "norm_excluded": true,
+  "files": [
+    "README.md",
+    "big5_v2_norm_eligibility_policy_v0_1.json",
+    "manifest.json"
+  ],
+  "governance_scope": [
+    "norm_eligibility",
+    "norm_exclusion",
+    "quality_based_exclusion",
+    "replay_exclusion",
+    "fixture_staging_exclusion",
+    "deleted_purged_exclusion",
+    "unsupported_schema_exclusion",
+    "future_consent_requirement"
+  ]
+}

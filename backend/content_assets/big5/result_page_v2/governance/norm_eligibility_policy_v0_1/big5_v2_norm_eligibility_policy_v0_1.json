@@ -1,0 +1,158 @@
+{
+  "schema_version": "big5_v2_norm_eligibility_policy_v0_1",
+  "mode": "norm_eligibility_policy_schema",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "dynamic_norm_engine_attached": false,
+  "public_percentile_display_enabled": false,
+  "norm_eligible": false,
+  "norm_excluded": true,
+  "eligibility_policy_fields": {
+    "norm_eligible": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "meaning": "Future observation may enter norm aggregation only after every eligibility requirement passes."
+    },
+    "norm_excluded": {
+      "type": "boolean",
+      "required": true,
+      "default": true,
+      "meaning": "Future observation is excluded by default unless eligibility is explicitly established."
+    },
+    "exclusion_reason": {
+      "type": "list",
+      "required": true,
+      "default": [
+        "policy_default_excluded"
+      ],
+      "meaning": "Machine-readable reasons explaining why an observation is not eligible."
+    },
+    "quality_based_exclusion": {
+      "type": "object",
+      "required": true,
+      "meaning": "Rules that exclude low-quality or invalid response patterns from norm observations."
+    },
+    "replay_exclusion": {
+      "type": "object",
+      "required": true,
+      "meaning": "Rules that exclude duplicate, replayed, or non-idempotent observation attempts."
+    },
+    "fixture_staging_exclusion": {
+      "type": "object",
+      "required": true,
+      "meaning": "Rules that exclude fixtures, QA samples, staging-only assets, and internal synthetic attempts."
+    },
+    "deleted_purged_exclusion": {
+      "type": "object",
+      "required": true,
+      "meaning": "Rules that exclude deleted, purged, revoked, or lifecycle-ineligible subjects."
+    },
+    "unsupported_schema_exclusion": {
+      "type": "object",
+      "required": true,
+      "meaning": "Rules that exclude missing or unsupported score, content, observation, or policy schema versions."
+    },
+    "future_consent_requirement": {
+      "type": "object",
+      "required": true,
+      "meaning": "Consent and privacy boundary required before future real-user norm accumulation."
+    }
+  },
+  "default_decision": {
+    "norm_eligible": false,
+    "norm_excluded": true,
+    "exclusion_reason": [
+      "policy_default_excluded",
+      "append_only_observation_layer_missing",
+      "future_consent_boundary_missing"
+    ],
+    "quality_based_exclusion": {
+      "include_quality_levels": [
+        "A",
+        "B"
+      ],
+      "exclude_quality_levels": [
+        "C",
+        "D"
+      ],
+      "exclude_flags": [
+        "ATTENTION_CHECK_FAILED",
+        "SPEEDING",
+        "STRAIGHTLINING",
+        "INCONSISTENT",
+        "EXTREME_RESPONDING",
+        "NEUTRAL_OVERUSE"
+      ],
+      "missing_quality_behavior": "fail_closed_exclude"
+    },
+    "replay_exclusion": {
+      "requires_observation_idempotency_key": true,
+      "duplicate_behavior": "exclude_duplicate",
+      "replay_behavior": "fail_closed_exclude",
+      "mutable_observation_behavior": "hard_blocker"
+    },
+    "fixture_staging_exclusion": {
+      "exclude_fixtures": true,
+      "exclude_staging_only": true,
+      "exclude_internal_qa": true,
+      "exclude_synthetic_samples": true,
+      "allowed_source_default": "none_until_capture_policy_exists"
+    },
+    "deleted_purged_exclusion": {
+      "exclude_deleted": true,
+      "exclude_purged": true,
+      "exclude_lifecycle_revoked": true,
+      "exclude_retention_expired": true,
+      "lifecycle_unknown_behavior": "fail_closed_exclude"
+    },
+    "unsupported_schema_exclusion": {
+      "requires_observation_schema_version": true,
+      "requires_score_version": true,
+      "requires_content_version": true,
+      "requires_score_trace_hash": true,
+      "unsupported_version_behavior": "fail_closed_exclude"
+    },
+    "future_consent_requirement": {
+      "required_before_real_user_capture": true,
+      "requires_norm_capture_scope": true,
+      "requires_revoke_handling": true,
+      "requires_retention_policy": true,
+      "requires_small_cell_suppression": true,
+      "missing_consent_behavior": "fail_closed_exclude"
+    }
+  },
+  "hard_blockers": [
+    "public_percentile_display_enabled",
+    "fake_percentile_claim_introduced",
+    "dynamic_norm_engine_attached_to_runtime",
+    "direct_identifier_leakage",
+    "cross_subject_linkage_exposure",
+    "consent_bypass",
+    "production_rollout_enabled",
+    "scoring_change_detected",
+    "mutable_norm_observation_detected",
+    "cms_mixed_into_norm_train"
+  ],
+  "must_not_touch": [
+    "scoring",
+    "runtime_behavior",
+    "public_percentile_display",
+    "dynamic_norm_engine",
+    "content_bodies",
+    "content_packs",
+    "cms",
+    "production_rollout"
+  ],
+  "out_of_scope": [
+    "dynamic norms engine",
+    "public percentile display",
+    "runtime-attached norms",
+    "norm aggregation execution",
+    "observation persistence",
+    "CMS connection",
+    "production rollout enablement"
+  ]
+}
