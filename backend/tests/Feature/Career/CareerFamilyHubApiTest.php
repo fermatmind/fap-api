@@ -138,6 +138,20 @@ final class CareerFamilyHubApiTest extends TestCase
             ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
+    public function test_it_does_not_serve_broad_group_hold_family_without_ledger_approval(): void
+    {
+        OccupationFamily::query()->create([
+            'canonical_slug' => 'agricultural-workers-all-other',
+            'title_en' => 'Agricultural Workers, All Other',
+            'title_zh' => '其他农业工作者',
+        ]);
+
+        $this->getJson('/api/v0.5/career/family/agricultural-workers-all-other')
+            ->assertStatus(404)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
     public function test_it_returns_an_empty_visible_children_list_for_existing_families_without_public_safe_children(): void
     {
         $family = OccupationFamily::query()->create([

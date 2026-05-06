@@ -61,6 +61,19 @@ final class CareerFamilyHubBundleBuilderTest extends TestCase
         $this->assertSame(0, data_get($payload, 'counts.blocked_total'));
     }
 
+    public function test_it_returns_null_for_broad_group_hold_family_without_ledger_approval(): void
+    {
+        OccupationFamily::query()->create([
+            'canonical_slug' => 'artists-and-related-workers-all-other',
+            'title_en' => 'Artists and Related Workers, All Other',
+            'title_zh' => '其他艺术及相关工作者',
+        ]);
+
+        $bundle = app(CareerFamilyHubBundleBuilder::class)->buildBySlug('artists-and-related-workers-all-other');
+
+        $this->assertNull($bundle);
+    }
+
     private function materializeCurrentFirstWaveFixture(): void
     {
         $exitCode = Artisan::call('career:validate-first-wave-publish-ready', [

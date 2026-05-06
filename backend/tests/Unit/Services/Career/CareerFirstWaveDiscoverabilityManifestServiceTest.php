@@ -99,6 +99,29 @@ final class CareerFirstWaveDiscoverabilityManifestServiceTest extends TestCase
         $this->assertSame(['excluded_zero_visible_children'], $excludedFamily['reason_codes']);
     }
 
+    public function test_it_excludes_broad_group_hold_families_without_ledger_approval(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+
+        $broadFamily = OccupationFamily::query()->create([
+            'canonical_slug' => 'education-administrators-all-other',
+            'title_en' => 'Education Administrators, All Other',
+            'title_zh' => '其他教育管理者',
+        ]);
+
+        $candidate = Occupation::query()->where('canonical_slug', 'data-scientists')->firstOrFail();
+        $candidate->update([
+            'family_id' => $broadFamily->id,
+            'crosswalk_mode' => 'direct_match',
+        ]);
+
+        $manifest = app(CareerFirstWaveDiscoverabilityManifestService::class)->build()->toArray();
+        $routes = collect($manifest['routes']);
+
+        $this->assertFalse($routes->contains(static fn (array $row): bool => ($row['route_kind'] ?? null) === 'career_family_hub'
+            && ($row['canonical_slug'] ?? null) === 'education-administrators-all-other'));
+    }
+
     private function materializeCurrentFirstWaveFixture(): void
     {
         $exitCode = Artisan::call('career:validate-first-wave-publish-ready', [
