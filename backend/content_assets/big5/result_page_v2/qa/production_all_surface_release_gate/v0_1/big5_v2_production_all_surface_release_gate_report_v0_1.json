@@ -1,0 +1,232 @@
+{
+  "schema": "fap.big5.result_page_v2.production_all_surface_release_gate_report.v0_1",
+  "package_key": "big5_result_page_v2.production_all_surface_release_gate.v0_1",
+  "version": "0.1",
+  "mode": "production_all_surface_release_gate_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "release_gate_status": "pass",
+  "production_status": "no_go",
+  "production_disabled": true,
+  "surfaces": {
+    "desktop": {
+      "status": "pass",
+      "checks": {
+        "rendered_qa": {
+          "status": "pass",
+          "evidence": [
+            "fap-web/tests/contracts/big5-public-pilot-result-page.contract.test.tsx",
+            "fap-web/tests/contracts/big5-expanded-route-driven-rendered-cases.contract.test.tsx"
+          ]
+        },
+        "metadata_leak": {
+          "status": "pass",
+          "evidence": [
+            "backend/content_assets/big5/result_page_v2/qa/rendered_preview/expanded_surfaces/v0_1/big5_o59_expanded_rendered_qa_surface_matrix_v0_1.json"
+          ]
+        },
+        "fail_closed": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Feature/V0_3/BigFiveV2PublicPilotFailClosedTest.php"
+          ]
+        },
+        "must_render": {
+          "status": "pass",
+          "evidence": [
+            "backend/content_assets/big5/result_page_v2/qa/rendered_preview/o59_canonical/canonical_o59_visible_text_must_render_v0_1.json"
+          ]
+        },
+        "must_not_render": {
+          "status": "pass",
+          "evidence": [
+            "backend/content_assets/big5/result_page_v2/qa/rendered_preview/o59_canonical/canonical_o59_visible_text_must_not_render_v0_1.json"
+          ]
+        }
+      }
+    },
+    "mobile": {
+      "status": "pass",
+      "checks": {
+        "rendered_qa": {
+          "status": "pass",
+          "evidence": [
+            "fap-web/tests/contracts/big5-public-pilot-result-page.contract.test.tsx",
+            "fap-web/tests/contracts/big5-expanded-route-driven-rendered-cases.contract.test.tsx"
+          ]
+        },
+        "metadata_leak": {
+          "status": "pass",
+          "evidence": [
+            "backend/content_assets/big5/result_page_v2/qa/rendered_preview/expanded_surfaces/v0_1/big5_o59_expanded_rendered_qa_surface_matrix_v0_1.json"
+          ]
+        },
+        "fail_closed": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Feature/V0_3/BigFiveV2PublicPilotFailClosedTest.php"
+          ]
+        },
+        "must_render": {
+          "status": "pass",
+          "evidence": [
+            "backend/content_assets/big5/result_page_v2/qa/rendered_preview/o59_canonical/canonical_o59_visible_text_must_render_v0_1.json"
+          ]
+        },
+        "must_not_render": {
+          "status": "pass",
+          "evidence": [
+            "backend/content_assets/big5/result_page_v2/qa/rendered_preview/o59_canonical/canonical_o59_visible_text_must_not_render_v0_1.json"
+          ]
+        }
+      }
+    },
+    "pdf": {
+      "status": "pass",
+      "checks": {
+        "rendered_qa": {
+          "status": "pass",
+          "evidence": [
+            "fap-web/tests/contracts/big5-pdf-rendered-qa.contract.test.tsx"
+          ]
+        },
+        "metadata_leak": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2PdfPayloadAdapterTest.php"
+          ]
+        },
+        "fail_closed": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2PdfPayloadAdapterTest.php"
+          ]
+        },
+        "must_render": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Fixtures/big5_result_page_v2/pdf_o59_route_driven_payload_v0_1.json"
+          ]
+        },
+        "must_not_render": {
+          "status": "pass",
+          "evidence": [
+            "fap-web/tests/contracts/big5-pdf-rendered-qa.contract.test.tsx"
+          ]
+        }
+      }
+    },
+    "share_card": {
+      "status": "pass",
+      "checks": {
+        "rendered_qa": {
+          "status": "pass",
+          "evidence": [
+            "fap-web/tests/contracts/big5-share-card-rendered-qa.contract.test.tsx"
+          ]
+        },
+        "metadata_leak": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ShareSafeSummaryAdapterTest.php"
+          ]
+        },
+        "fail_closed": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ShareSafeSummaryAdapterTest.php"
+          ]
+        },
+        "must_render": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Fixtures/big5_result_page_v2/share_o59_route_driven_payload_v0_1.json"
+          ]
+        },
+        "must_not_render": {
+          "status": "pass",
+          "evidence": [
+            "fap-web/tests/contracts/big5-share-card-rendered-qa.contract.test.tsx"
+          ]
+        }
+      }
+    },
+    "history": {
+      "status": "pass",
+      "checks": {
+        "rendered_qa": {
+          "status": "pass",
+          "evidence": [
+            "fap-web/tests/contracts/big5-history-rendered-qa.contract.test.tsx"
+          ]
+        },
+        "metadata_leak": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2HistorySnapshotAdapterTest.php"
+          ]
+        },
+        "fail_closed": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2HistorySnapshotAdapterTest.php"
+          ]
+        },
+        "must_render": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Fixtures/big5_result_page_v2/history_o59_route_driven_payload_v0_1.json"
+          ]
+        },
+        "must_not_render": {
+          "status": "pass",
+          "evidence": [
+            "fap-web/tests/contracts/big5-history-rendered-qa.contract.test.tsx"
+          ]
+        }
+      }
+    },
+    "compare": {
+      "status": "pass",
+      "checks": {
+        "rendered_qa": {
+          "status": "pass",
+          "evidence": [
+            "fap-web/tests/contracts/big5-compare-rendered-qa.contract.test.tsx"
+          ]
+        },
+        "metadata_leak": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CompareSnapshotAdapterTest.php"
+          ]
+        },
+        "fail_closed": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CompareSnapshotAdapterTest.php"
+          ]
+        },
+        "must_render": {
+          "status": "pass",
+          "evidence": [
+            "backend/tests/Fixtures/big5_result_page_v2/compare_o59_route_driven_payload_v0_1.json"
+          ]
+        },
+        "must_not_render": {
+          "status": "pass",
+          "evidence": [
+            "fap-web/tests/contracts/big5-compare-rendered-qa.contract.test.tsx"
+          ]
+        }
+      }
+    }
+  },
+  "fake_pass_policy": {
+    "pending_masquerading_as_pass": "reject",
+    "missing_evidence_pass": "reject",
+    "unknown_surface_pass": "reject"
+  }
+}

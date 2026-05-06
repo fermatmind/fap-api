@@ -1,0 +1,36 @@
+{
+  "schema": "fap.big5.result_page_v2.production_all_surface_regression_scan.v0_1",
+  "package_key": "big5_result_page_v2.production_all_surface_release_gate.v0_1",
+  "mode": "production_all_surface_regression_scan_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "scan_status": "pass",
+  "surfaces_scanned": [
+    "desktop",
+    "mobile",
+    "pdf",
+    "share_card",
+    "history",
+    "compare"
+  ],
+  "forbidden_public_terms": [
+    "internal_metadata",
+    "selector_basis",
+    "source_reference",
+    "runtime_use",
+    "production_use_allowed",
+    "review_status",
+    "qa_notes",
+    "[object Object]"
+  ],
+  "checks": {
+    "metadata_leak": "pass",
+    "frontend_fallback": "pass",
+    "fake_pass": "pass",
+    "pending_surface": "pass",
+    "must_render": "pass",
+    "must_not_render": "pass"
+  }
+}
