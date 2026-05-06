@@ -1,0 +1,17 @@
+{
+  "package": "big5_v2_production_rollout_alerts",
+  "version": "v0_1",
+  "mode": "rollout_alerts_dashboard_governance",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "files": [
+    "README.md",
+    "big5_v2_production_rollout_alerts_policy_v0_1.json",
+    "big5_v2_production_rollout_dashboard_definitions_v0_1.json",
+    "big5_v2_production_rollout_alert_validation_v0_1.json",
+    "manifest.json"
+  ]
+}

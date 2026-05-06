@@ -1,0 +1,66 @@
+{
+  "schema": "fap.big5.result_page_v2.production_rollout_dashboard_definitions.v0_1",
+  "package_key": "big5_result_page_v2.production_rollout_alerts.dashboards.v0_1",
+  "mode": "rollout_alerts_dashboard_governance",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "dashboards": {
+    "rollout_health": {
+      "owner": "backend_owner",
+      "panels": [
+        "rollout_attach_count",
+        "rollout_deny_count",
+        "rollout_percentage",
+        "fail_closed_count"
+      ]
+    },
+    "payload_integrity": {
+      "owner": "qa_owner",
+      "panels": [
+        "payload_validation_error_count",
+        "route_lookup_failure_count",
+        "composer_failure_count",
+        "fallback_generation_count",
+        "metadata_leak_count"
+      ]
+    },
+    "selector_suppression": {
+      "owner": "backend_owner",
+      "panels": [
+        "selector_suppression_count",
+        "selector_unresolved_ref_count"
+      ]
+    },
+    "rollout_freeze": {
+      "owner": "release_approver",
+      "panels": [
+        "rollout_freeze_violation_count",
+        "rollout_halt_count",
+        "manual_approval_state"
+      ]
+    }
+  },
+  "dashboard_refresh": {
+    "minimum_refresh_seconds": 60,
+    "requires_structured_events": true,
+    "requires_no_pii": true
+  },
+  "report_definitions": {
+    "rollout_shift_summary": [
+      "rollout_attach_count",
+      "rollout_deny_count",
+      "payload_validation_error_count",
+      "fail_closed_count"
+    ],
+    "incident_snapshot": [
+      "metadata_leak_count",
+      "fallback_generation_count",
+      "rollout_freeze_violation_count",
+      "route_lookup_failure_count",
+      "composer_failure_count"
+    ]
+  }
+}

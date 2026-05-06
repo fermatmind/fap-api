@@ -1,0 +1,33 @@
+{
+  "schema": "fap.big5.result_page_v2.production_rollout_alert_validation.v0_1",
+  "package_key": "big5_result_page_v2.production_rollout_alerts.validation.v0_1",
+  "mode": "rollout_alerts_dashboard_governance",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "validated_alerts": [
+    "rollout_failure_alert",
+    "payload_validation_alert",
+    "metadata_leak_alert",
+    "fallback_generation_alert",
+    "rollout_freeze_alert"
+  ],
+  "checks": {
+    "alert_thresholds_defined": "pass",
+    "rollout_failure_alert_defined": "pass",
+    "payload_validation_alert_defined": "pass",
+    "metadata_leak_alert_defined": "pass",
+    "fallback_generation_alert_defined": "pass",
+    "rollout_freeze_alert_defined": "pass",
+    "incident_escalation_path_defined": "pass",
+    "dashboards_defined": "pass",
+    "runtime_behavior_unchanged": "pass",
+    "production_disabled_state_preserved": "pass"
+  },
+  "production_decision": {
+    "status": "NO-GO",
+    "reason": "Alerts and dashboards are advisory governance only; production rollout remains disabled until explicit human production approval."
+  }
+}
