@@ -51,6 +51,11 @@ return [
         'forbid_missing_overrides' => (bool) env('FAP_FORBID_MISSING_OVERRIDES', false),
     ],
 
+    'career' => [
+        'public_resolution_plan_path' => env('CAREER_PUBLIC_RESOLUTION_PLAN_PATH', null),
+        'duplicate_identity_scan_path' => env('CAREER_DUPLICATE_IDENTITY_SCAN_PATH', null),
+    ],
+
     'media' => [
         'asset_origin' => env('FAP_MEDIA_ASSET_ORIGIN', 'https://assets.fermatmind.com'),
         'public_storage_prefix' => env('FAP_MEDIA_PUBLIC_STORAGE_PREFIX', '/storage'),

@@ -15,7 +15,7 @@ final class BigFiveV2HistorySnapshotAdapter
     public const SCHEMA_VERSION = 'fap.big5.result_page_v2.history_snapshot.v0_1';
 
     public function __construct(
-        private readonly BigFiveResultPageV2Validator $validator = new BigFiveResultPageV2Validator(),
+        private readonly BigFiveResultPageV2Validator $validator = new BigFiveResultPageV2Validator,
     ) {}
 
     /**
@@ -48,7 +48,6 @@ final class BigFiveV2HistorySnapshotAdapter
                 'scale_code' => BigFiveResultPageV2Contract::SCALE_CODE,
                 'content_version' => (string) ($payload['content_version'] ?? ''),
                 'package_version' => (string) ($payload['package_version'] ?? ''),
-                'route_key' => $combinationKey,
                 'summary_zh' => $summary,
                 'snapshot_policy' => [
                     'source' => 'route_matrix.share_safe_summary_zh',

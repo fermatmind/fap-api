@@ -29,6 +29,12 @@ final class CareerExportFullReleaseLedger extends Command
         'blocked_until_governance_approval',
     ];
 
+    private const EXPECTED_PUBLIC_RESOLUTION_ROWS = 2786;
+
+    private const MAX_PUBLIC_RESOLUTION_PLAN_BYTES = 5_000_000;
+
+    private const MAX_DUPLICATE_IDENTITY_SCAN_BYTES = 5_000_000;
+
     protected $signature = 'career:export-full-release-ledger
         {--timestamp= : Optional output directory timestamp segment}
         {--public-resolution-plan= : Optional Career full-upload planner JSON for 2786-row public resolution ledger}
@@ -129,14 +135,9 @@ final class CareerExportFullReleaseLedger extends Command
             return trim((string) $optionValue);
         }
 
-        $envValue = env('CAREER_PUBLIC_RESOLUTION_PLAN_PATH');
-        if (is_string($envValue) && trim($envValue) !== '') {
-            return trim($envValue);
-        }
-
-        $localPlan = '/tmp/career_full_upload_plan_after_directory_draft.json';
-        if (app()->environment(['local', 'testing']) && is_file($localPlan)) {
-            return $localPlan;
+        $configuredPath = config('fap.career.public_resolution_plan_path');
+        if (is_string($configuredPath) && trim($configuredPath) !== '') {
+            return trim($configuredPath);
         }
 
         return null;
@@ -149,14 +150,9 @@ final class CareerExportFullReleaseLedger extends Command
             return trim((string) $optionValue);
         }
 
-        $envValue = env('CAREER_DUPLICATE_IDENTITY_SCAN_PATH');
-        if (is_string($envValue) && trim($envValue) !== '') {
-            return trim($envValue);
-        }
-
-        $localScan = '/tmp/career_phase2a_duplicate_identity_resolution_scan.json';
-        if (app()->environment(['local', 'testing']) && is_file($localScan)) {
-            return $localScan;
+        $configuredPath = config('fap.career.duplicate_identity_scan_path');
+        if (is_string($configuredPath) && trim($configuredPath) !== '') {
+            return trim($configuredPath);
         }
 
         return null;
@@ -167,20 +163,17 @@ final class CareerExportFullReleaseLedger extends Command
      */
     private function buildPublicResolutionLedger(string $planPath, ?string $duplicateIdentityScanPath = null): array
     {
-        $normalizedPath = trim($planPath);
-        if ($normalizedPath === '' || ! is_file($normalizedPath)) {
-            throw new \RuntimeException('career public resolution source plan not found: '.$planPath);
-        }
-
-        $payload = json_decode((string) file_get_contents($normalizedPath), true);
+        $normalizedPath = $this->trustedJsonFilePath(
+            path: $planPath,
+            missingMessage: 'career public resolution source plan not found',
+            maxBytes: self::MAX_PUBLIC_RESOLUTION_PLAN_BYTES,
+        );
+        $payload = json_decode($this->readTrustedJsonFile($normalizedPath), true);
         if (! is_array($payload)) {
             throw new \RuntimeException('career public resolution source plan is not valid JSON: '.$planPath);
         }
 
-        $rows = (array) ($payload['rows'] ?? []);
-        if ($rows === []) {
-            throw new \RuntimeException('career public resolution source plan has no rows: '.$planPath);
-        }
+        $rows = $this->validatedPublicResolutionRows($payload, $planPath);
 
         $duplicateIdentityDecisions = $this->loadDuplicateIdentityDecisions($duplicateIdentityScanPath);
         $publicCanonicalSlugs = $this->publicCanonicalSlugs($rows);
@@ -401,12 +394,12 @@ final class CareerExportFullReleaseLedger extends Command
             return [];
         }
 
-        $normalizedPath = trim($scanPath);
-        if ($normalizedPath === '' || ! is_file($normalizedPath)) {
-            throw new \RuntimeException('career duplicate identity scan not found: '.$scanPath);
-        }
-
-        $payload = json_decode((string) file_get_contents($normalizedPath), true);
+        $normalizedPath = $this->trustedJsonFilePath(
+            path: $scanPath,
+            missingMessage: 'career duplicate identity scan not found',
+            maxBytes: self::MAX_DUPLICATE_IDENTITY_SCAN_BYTES,
+        );
+        $payload = json_decode($this->readTrustedJsonFile($normalizedPath), true);
         if (! is_array($payload)) {
             throw new \RuntimeException('career duplicate identity scan is not valid JSON: '.$scanPath);
         }
@@ -540,5 +533,79 @@ final class CareerExportFullReleaseLedger extends Command
         $normalized = trim((string) $value);
 
         return $normalized === '' ? null : $normalized;
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function validatedPublicResolutionRows(array $payload, string $planPath): array
+    {
+        $workbookRows = data_get($payload, 'workbook.rows');
+        if ((int) $workbookRows !== self::EXPECTED_PUBLIC_RESOLUTION_ROWS) {
+            throw new \RuntimeException('career public resolution source plan must declare 2786 workbook rows: '.$planPath);
+        }
+
+        $rows = $payload['rows'] ?? null;
+        if (! is_array($rows) || count($rows) !== self::EXPECTED_PUBLIC_RESOLUTION_ROWS) {
+            throw new \RuntimeException('career public resolution source plan must contain exactly 2786 rows: '.$planPath);
+        }
+
+        foreach ($rows as $index => $row) {
+            if (! is_array($row)) {
+                throw new \RuntimeException('career public resolution source plan row is not an object at index '.$index.': '.$planPath);
+            }
+
+            if (! is_int($row['row_number'] ?? null) && ! ctype_digit((string) ($row['row_number'] ?? ''))) {
+                throw new \RuntimeException('career public resolution source plan row is missing row_number at index '.$index.': '.$planPath);
+            }
+
+            if ($this->normalizeNullableString($row['slug'] ?? null) === null && $this->normalizeNullableString($row['canonical_slug'] ?? null) === null) {
+                throw new \RuntimeException('career public resolution source plan row is missing slug at index '.$index.': '.$planPath);
+            }
+
+            if ($this->normalizeNullableString($row['status'] ?? null) === null) {
+                throw new \RuntimeException('career public resolution source plan row is missing status at index '.$index.': '.$planPath);
+            }
+        }
+
+        return array_values($rows);
+    }
+
+    private function trustedJsonFilePath(string $path, string $missingMessage, int $maxBytes): string
+    {
+        $normalizedPath = trim($path);
+        if ($normalizedPath === '' || ! is_file($normalizedPath)) {
+            throw new \RuntimeException($missingMessage.': '.$path);
+        }
+
+        if (is_link($normalizedPath)) {
+            throw new \RuntimeException('refusing symlinked JSON input: '.$path);
+        }
+
+        $realPath = realpath($normalizedPath);
+        if (! is_string($realPath) || $realPath === '' || ! is_file($realPath)) {
+            throw new \RuntimeException($missingMessage.': '.$path);
+        }
+
+        if (is_link($realPath)) {
+            throw new \RuntimeException('refusing symlinked JSON input: '.$path);
+        }
+
+        $size = filesize($realPath);
+        if (! is_int($size) || $size < 0 || $size > $maxBytes) {
+            throw new \RuntimeException('JSON input exceeds allowed size: '.$path);
+        }
+
+        return $realPath;
+    }
+
+    private function readTrustedJsonFile(string $path): string
+    {
+        $contents = file_get_contents($path);
+        if (! is_string($contents)) {
+            throw new \RuntimeException('failed to read JSON input: '.$path);
+        }
+
+        return $contents;
     }
 }
