@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Domain\Career\Publish\CareerFullReleaseLedgerProjectionService;
+use App\Models\CareerJob;
 use App\Models\Occupation;
 use App\Models\OccupationAlias;
 use Illuminate\Console\Command;
@@ -66,8 +67,10 @@ final class CareerMaterializeDuplicateAliasMap extends Command
                 ], success: false);
             }
 
-            $writePlan = $this->buildWritePlan($plan['aliases']);
-            $wouldWrite = $writePlan['aliases_to_create'] > 0 || $writePlan['aliases_to_update'] > 0;
+            $writePlan = $this->buildWritePlan($plan['aliases'], $plan['aliases_blocked_due_target_release_source_slugs']);
+            $wouldWrite = $writePlan['aliases_to_create'] > 0
+                || $writePlan['aliases_to_update'] > 0
+                || $writePlan['aliases_to_disable'] > 0;
             $didWrite = false;
             if ($force) {
                 DB::transaction(function () use ($writePlan): void {
@@ -88,7 +91,11 @@ final class CareerMaterializeDuplicateAliasMap extends Command
                 'ledger_path' => $ledgerPath,
                 'aliases_to_create' => $writePlan['aliases_to_create'],
                 'aliases_to_update' => $writePlan['aliases_to_update'],
+                'aliases_to_disable' => $writePlan['aliases_to_disable'],
                 'activated_aliases' => $activeAliases,
+                'projected_active_aliases' => $force
+                    ? $activeAliases
+                    : $activeAliases + $writePlan['aliases_to_create'] - $writePlan['aliases_to_disable'],
                 'foundation_counts_before' => $beforeCounts,
                 'foundation_counts_after' => $afterCounts,
                 'career_job_display_assets_delta' => $afterCounts['career_job_display_assets'] - $beforeCounts['career_job_display_assets'],
@@ -106,7 +113,7 @@ final class CareerMaterializeDuplicateAliasMap extends Command
                 $summary['sitemap_alias_urls'] === 0 ? null : 'sitemap_alias_urls_nonzero',
                 $summary['llms_alias_urls'] === 0 ? null : 'llms_alias_urls_nonzero',
                 $summary['llms_full_alias_urls'] === 0 ? null : 'llms_full_alias_urls_nonzero',
-                $force && $activeAliases !== self::EXPECTED_ALIAS_COUNT ? 'activated_aliases_count_mismatch' : null,
+                $force && $activeAliases !== $summary['alias_count'] ? 'activated_aliases_count_mismatch' : null,
             ]));
 
             return $this->finish($summary, success: $summary['blockers'] === []);
@@ -183,6 +190,8 @@ final class CareerMaterializeDuplicateAliasMap extends Command
         $canonicalSlugs = [];
         $duplicateRows = [];
         $aliases = [];
+        $ledgerApprovedAliases = [];
+        $aliasesBlockedDueTargetRelease = [];
         $blockedDuplicates = 0;
         $canonicalPromotions = 0;
         $heldRowsAffected = 0;
@@ -218,7 +227,7 @@ final class CareerMaterializeDuplicateAliasMap extends Command
             }
 
             $targetCanonicalSlug = $this->stringValue($row['target_canonical_slug'] ?? null);
-            $aliases[] = [
+            $ledgerApprovedAliases[] = [
                 'source_slug' => $sourceSlug,
                 'target_canonical_slug' => $targetCanonicalSlug,
                 'current_status' => $status,
@@ -236,8 +245,8 @@ final class CareerMaterializeDuplicateAliasMap extends Command
         if (count($duplicateRows) !== 254) {
             $blockers[] = 'duplicate_identity_row_count_mismatch';
         }
-        if (count($aliases) !== self::EXPECTED_ALIAS_COUNT) {
-            $blockers[] = 'alias_count_mismatch';
+        if (count($ledgerApprovedAliases) !== self::EXPECTED_ALIAS_COUNT) {
+            $blockers[] = 'ledger_approved_alias_count_mismatch';
         }
         if ($blockedDuplicates !== self::EXPECTED_BLOCKED_DUPLICATE_COUNT) {
             $blockers[] = 'blocked_duplicate_count_mismatch';
@@ -248,7 +257,7 @@ final class CareerMaterializeDuplicateAliasMap extends Command
 
         $seenAliases = [];
         $canonicalTargetsValid = 0;
-        foreach ($aliases as $index => $alias) {
+        foreach ($ledgerApprovedAliases as $alias) {
             $sourceSlug = $this->stringValue($alias['source_slug'] ?? null);
             $targetCanonicalSlug = $this->stringValue($alias['target_canonical_slug'] ?? null);
             if ($sourceSlug === null || $targetCanonicalSlug === null) {
@@ -289,8 +298,22 @@ final class CareerMaterializeDuplicateAliasMap extends Command
 
                 continue;
             }
-            $aliases[$index]['occupation_id'] = $occupation->id;
-            $aliases[$index]['family_id'] = $occupation->family_id;
+            $alias['occupation_id'] = $occupation->id;
+            $alias['family_id'] = $occupation->family_id;
+
+            $targetRelease = $this->targetReleaseEligibility($targetCanonicalSlug);
+            if (! (bool) $targetRelease['eligible']) {
+                $aliasesBlockedDueTargetRelease[] = [
+                    'source_slug' => $sourceSlug,
+                    'target_canonical_slug' => $targetCanonicalSlug,
+                    'reasons' => $targetRelease['reasons'],
+                    'release_records' => $targetRelease['records'],
+                ];
+
+                continue;
+            }
+
+            $aliases[] = $alias;
         }
 
         $existingExtraAliases = $this->existingLedgerAliases()
@@ -305,8 +328,16 @@ final class CareerMaterializeDuplicateAliasMap extends Command
             'command' => 'career:materialize-duplicate-alias-map',
             'ledger_path' => $ledgerPath,
             'alias_count' => count($aliases),
+            'ledger_approved_aliases' => count($ledgerApprovedAliases),
             'duplicate_identity_rows' => count($duplicateRows),
             'blocked_duplicate_rows' => $blockedDuplicates,
+            'blocked_duplicate_rows_after_target_gate' => $blockedDuplicates + count($aliasesBlockedDueTargetRelease),
+            'aliases_blocked_due_target_release' => count($aliasesBlockedDueTargetRelease),
+            'aliases_blocked_due_target_release_details' => $aliasesBlockedDueTargetRelease,
+            'aliases_blocked_due_target_release_source_slugs' => array_values(array_map(
+                static fn (array $alias): string => (string) $alias['source_slug'],
+                $aliasesBlockedDueTargetRelease,
+            )),
             'canonical_public_assets' => count($canonicalSlugs),
             'canonical_targets_valid' => $canonicalTargetsValid,
             'canonical_promotions' => $canonicalPromotions,
@@ -322,13 +353,16 @@ final class CareerMaterializeDuplicateAliasMap extends Command
 
     /**
      * @param  list<array<string, mixed>>  $aliases
-     * @return array{aliases_to_create:int,aliases_to_update:int,writes:list<array<string,mixed>>}
+     * @param  list<string>  $disabledSourceSlugs
+     * @return array{aliases_to_create:int,aliases_to_update:int,aliases_to_disable:int,writes:list<array<string,mixed>>}
      */
-    private function buildWritePlan(array $aliases): array
+    private function buildWritePlan(array $aliases, array $disabledSourceSlugs): array
     {
         $creates = 0;
         $updates = 0;
+        $disables = 0;
         $writes = [];
+        $disabledLookup = array_fill_keys($disabledSourceSlugs, true);
 
         foreach ($aliases as $alias) {
             $sourceSlug = (string) $alias['source_slug'];
@@ -348,9 +382,20 @@ final class CareerMaterializeDuplicateAliasMap extends Command
             }
         }
 
+        foreach ($this->existingLedgerAliases() as $existing) {
+            $sourceSlug = (string) $existing->normalized;
+            if (! isset($disabledLookup[$sourceSlug])) {
+                continue;
+            }
+
+            $disables++;
+            $writes[] = ['mode' => 'delete', 'source_slug' => $sourceSlug, 'id' => $existing->id];
+        }
+
         return [
             'aliases_to_create' => $creates,
             'aliases_to_update' => $updates,
+            'aliases_to_disable' => $disables,
             'writes' => $writes,
         ];
     }
@@ -382,6 +427,12 @@ final class CareerMaterializeDuplicateAliasMap extends Command
      */
     private function materializeAlias(array $write): void
     {
+        if (($write['mode'] ?? null) === 'delete') {
+            OccupationAlias::query()->whereKey((string) $write['id'])->delete();
+
+            return;
+        }
+
         if (($write['mode'] ?? null) === 'update') {
             $existing = OccupationAlias::query()->findOrFail((string) $write['id']);
             $existing->forceFill((array) $write['payload'])->save();
@@ -442,6 +493,52 @@ final class CareerMaterializeDuplicateAliasMap extends Command
     private function activeLedgerAliasCount(): int
     {
         return $this->existingLedgerAliases()->count();
+    }
+
+    /**
+     * @return array{eligible:bool,records:int,reasons:list<string>}
+     */
+    private function targetReleaseEligibility(string $targetCanonicalSlug): array
+    {
+        $records = CareerJob::query()
+            ->withoutGlobalScopes()
+            ->with('seoMeta')
+            ->where('org_id', 0)
+            ->where('slug', strtolower(trim($targetCanonicalSlug)))
+            ->where('status', CareerJob::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->whereIn('locale', CareerJob::SUPPORTED_LOCALES)
+            ->get();
+
+        $seen = [];
+        $reasons = [];
+        foreach ($records as $record) {
+            if (! $record instanceof CareerJob) {
+                continue;
+            }
+
+            $locale = (string) $record->locale;
+            $seen[$locale] = true;
+            $robots = strtolower(trim((string) data_get($record->seoMeta, 'robots', '')));
+            if (! (bool) $record->is_indexable) {
+                $reasons[] = 'target_not_indexable:'.$locale;
+            }
+            if ($robots === '' || str_contains($robots, 'noindex')) {
+                $reasons[] = 'target_noindex_or_missing_robots:'.$locale;
+            }
+        }
+
+        foreach (CareerJob::SUPPORTED_LOCALES as $locale) {
+            if (($seen[$locale] ?? false) !== true) {
+                $reasons[] = 'target_missing_published_public_locale:'.$locale;
+            }
+        }
+
+        return [
+            'eligible' => $reasons === [],
+            'records' => $records->count(),
+            'reasons' => array_values(array_unique($reasons)),
+        ];
     }
 
     /**

@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Models\CareerJob;
+use App\Models\CareerJobSeoMeta;
 use App\Models\Occupation;
 use App\Models\OccupationAlias;
 use App\Models\OccupationFamily;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
@@ -50,8 +53,11 @@ final class CareerMaterializeDuplicateAliasMapCommandTest extends TestCase
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertIsArray($payload);
         $this->assertSame(87, (int) ($payload['alias_count'] ?? 0));
+        $this->assertSame(87, (int) ($payload['ledger_approved_aliases'] ?? 0));
         $this->assertSame(254, (int) ($payload['duplicate_identity_rows'] ?? 0));
         $this->assertSame(167, (int) ($payload['blocked_duplicate_rows'] ?? 0));
+        $this->assertSame(167, (int) ($payload['blocked_duplicate_rows_after_target_gate'] ?? 0));
+        $this->assertSame(0, (int) ($payload['aliases_blocked_due_target_release'] ?? -1));
         $this->assertSame(793, (int) ($payload['canonical_public_assets'] ?? 0));
         $this->assertSame(87, (int) ($payload['canonical_targets_valid'] ?? 0));
         $this->assertSame(0, (int) ($payload['canonical_promotions'] ?? -1));
@@ -59,6 +65,7 @@ final class CareerMaterializeDuplicateAliasMapCommandTest extends TestCase
         $this->assertTrue((bool) ($payload['would_write'] ?? false));
         $this->assertSame(87, (int) ($payload['aliases_to_create'] ?? 0));
         $this->assertSame(0, (int) ($payload['aliases_to_update'] ?? -1));
+        $this->assertSame(0, (int) ($payload['aliases_to_disable'] ?? -1));
         $this->assertSame(0, (int) ($payload['career_job_display_assets_delta'] ?? -1));
         $this->assertSame(0, (int) ($payload['occupations_delta'] ?? -1));
         $this->assertSame(0, (int) ($payload['occupation_crosswalks_delta'] ?? -1));
@@ -82,8 +89,10 @@ final class CareerMaterializeDuplicateAliasMapCommandTest extends TestCase
 
         $this->assertSame(0, $forceExitCode, Artisan::output());
         $this->assertSame(87, (int) ($forcePayload['alias_count'] ?? 0));
+        $this->assertSame(87, (int) ($forcePayload['ledger_approved_aliases'] ?? 0));
         $this->assertSame(87, (int) ($forcePayload['aliases_to_create'] ?? 0));
         $this->assertSame(0, (int) ($forcePayload['aliases_to_update'] ?? -1));
+        $this->assertSame(0, (int) ($forcePayload['aliases_to_disable'] ?? -1));
         $this->assertTrue((bool) ($forcePayload['did_write'] ?? false));
         $this->assertSame(87, (int) ($forcePayload['activated_aliases'] ?? 0));
         $this->assertSame(0, (int) ($forcePayload['career_job_display_assets_delta'] ?? -1));
@@ -110,8 +119,64 @@ final class CareerMaterializeDuplicateAliasMapCommandTest extends TestCase
         $this->assertFalse((bool) ($idempotencyPayload['would_write'] ?? true));
         $this->assertSame(0, (int) ($idempotencyPayload['aliases_to_create'] ?? -1));
         $this->assertSame(0, (int) ($idempotencyPayload['aliases_to_update'] ?? -1));
+        $this->assertSame(0, (int) ($idempotencyPayload['aliases_to_disable'] ?? -1));
         $this->assertSame(87, (int) ($idempotencyPayload['activated_aliases'] ?? 0));
         $this->assertSame(167, (int) ($idempotencyPayload['blocked_duplicate_rows'] ?? 0));
+    }
+
+    public function test_command_blocks_and_disables_aliases_whose_targets_are_not_release_eligible(): void
+    {
+        $this->markTargetNoindex('canonical-0001');
+        $occupation = Occupation::query()->where('canonical_slug', 'canonical-0001')->firstOrFail();
+        OccupationAlias::query()->create([
+            'occupation_id' => $occupation->id,
+            'family_id' => $occupation->family_id,
+            'alias' => 'duplicate-0001',
+            'normalized' => 'duplicate-0001',
+            'lang' => 'en-US',
+            'register' => 'public_resolution_duplicate_alias',
+            'intent_scope' => 'duplicate_identity',
+            'target_kind' => 'ledger_public_alias_redirect',
+            'precision_score' => 1.0,
+            'confidence_score' => 1.0,
+        ]);
+
+        $dryRunExitCode = Artisan::call('career:materialize-duplicate-alias-map', [
+            '--dry-run' => true,
+            '--json' => true,
+            '--ledger' => $this->ledgerPath,
+            '--timestamp' => 'duplicate-alias-target-release-dry-run-test',
+        ]);
+        $dryRunPayload = json_decode(trim((string) Artisan::output()), true);
+
+        $this->assertSame(0, $dryRunExitCode, Artisan::output());
+        $this->assertSame(87, (int) ($dryRunPayload['ledger_approved_aliases'] ?? 0));
+        $this->assertSame(86, (int) ($dryRunPayload['alias_count'] ?? 0));
+        $this->assertSame(1, (int) ($dryRunPayload['aliases_blocked_due_target_release'] ?? 0));
+        $this->assertSame(168, (int) ($dryRunPayload['blocked_duplicate_rows_after_target_gate'] ?? 0));
+        $this->assertSame(1, (int) ($dryRunPayload['aliases_to_disable'] ?? 0));
+        $this->assertSame(86, (int) ($dryRunPayload['aliases_to_create'] ?? 0));
+        $this->assertFalse((bool) ($dryRunPayload['did_write'] ?? true));
+        $this->assertSame(1, OccupationAlias::query()->count());
+
+        $forceExitCode = Artisan::call('career:materialize-duplicate-alias-map', [
+            '--force' => true,
+            '--json' => true,
+            '--ledger' => $this->ledgerPath,
+            '--timestamp' => 'duplicate-alias-target-release-force-test',
+        ]);
+        $forcePayload = json_decode(trim((string) Artisan::output()), true);
+
+        $this->assertSame(0, $forceExitCode, Artisan::output());
+        $this->assertSame(86, (int) ($forcePayload['alias_count'] ?? 0));
+        $this->assertSame(1, (int) ($forcePayload['aliases_to_disable'] ?? 0));
+        $this->assertSame(86, (int) ($forcePayload['activated_aliases'] ?? 0));
+        $this->assertFalse(OccupationAlias::query()
+            ->where('register', 'public_resolution_duplicate_alias')
+            ->where('intent_scope', 'duplicate_identity')
+            ->where('target_kind', 'ledger_public_alias_redirect')
+            ->where('normalized', 'duplicate-0001')
+            ->exists());
     }
 
     public function test_command_rejects_alias_targets_outside_the_approved_canonical_set(): void
@@ -165,6 +230,50 @@ final class CareerMaterializeDuplicateAliasMapCommandTest extends TestCase
                 'canonical_title_zh' => '标准职业'.str_pad((string) $index, 4, '0', STR_PAD_LEFT),
                 'search_h1_zh' => '标准职业'.str_pad((string) $index, 4, '0', STR_PAD_LEFT),
             ]);
+            $this->createReleaseEligibleCareerJobs($slug);
+        }
+    }
+
+    private function createReleaseEligibleCareerJobs(string $slug): void
+    {
+        foreach (CareerJob::SUPPORTED_LOCALES as $locale) {
+            $job = CareerJob::query()->create([
+                'org_id' => 0,
+                'job_code' => $slug,
+                'slug' => $slug,
+                'locale' => $locale,
+                'title' => 'Canonical '.$slug,
+                'excerpt' => 'Canonical target excerpt',
+                'status' => CareerJob::STATUS_PUBLISHED,
+                'is_public' => true,
+                'is_indexable' => true,
+                'schema_version' => 'v1',
+                'sort_order' => 0,
+                'published_at' => Carbon::now()->subDay(),
+            ]);
+
+            CareerJobSeoMeta::query()->create([
+                'job_id' => (int) $job->id,
+                'seo_title' => 'Canonical '.$slug,
+                'seo_description' => 'Canonical target description',
+                'canonical_url' => 'https://example.test/'.($locale === 'zh-CN' ? 'zh' : $locale).'/career/jobs/'.$slug,
+                'og_title' => 'Canonical '.$slug,
+                'og_description' => 'Canonical target description',
+                'og_image_url' => 'https://example.test/images/career.png',
+                'twitter_title' => 'Canonical '.$slug,
+                'twitter_description' => 'Canonical target description',
+                'twitter_image_url' => 'https://example.test/images/career.png',
+                'robots' => 'index,follow',
+            ]);
+        }
+    }
+
+    private function markTargetNoindex(string $slug): void
+    {
+        $jobs = CareerJob::query()->where('slug', $slug)->get();
+        foreach ($jobs as $job) {
+            $job->forceFill(['is_indexable' => false])->save();
+            $job->seoMeta()->update(['robots' => 'noindex,follow']);
         }
     }
 

@@ -6,7 +6,9 @@ namespace Tests\Unit\Services\Career;
 
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
+use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
+use App\Models\CareerJobSeoMeta;
 use App\Models\Occupation;
 use App\Models\OccupationAlias;
 use App\Models\OccupationFamily;
@@ -15,6 +17,7 @@ use App\Services\Career\Bundles\CareerAliasResolutionBundleBuilder;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Career\CareerFoundationFixture;
@@ -94,6 +97,7 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
             'Food Scientists and Technologists',
         );
         $this->createDisplayAsset($occupation);
+        $this->createReleaseEligibleCareerJobs((string) $occupation->canonical_slug);
 
         $this->assertSame(0, RecommendationSnapshot::query()->where('occupation_id', $occupation->id)->count());
 
@@ -120,6 +124,38 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
         $this->assertSame(true, data_get($payload, 'resolution.occupation.seo_contract.index_eligible'));
         $this->assertSame('approved_display_asset', data_get($payload, 'resolution.occupation.trust_summary.reviewer_status'));
         $this->assertArrayNotHasKey('alias_url', data_get($payload, 'resolution.occupation'));
+    }
+
+    public function test_it_rejects_display_asset_duplicate_alias_when_target_is_noindex(): void
+    {
+        $occupation = $this->createDisplayAssetBackedOccupation(
+            'food-scientists-and-technologists',
+            'Food Scientists and Technologists',
+        );
+        $this->createDisplayAsset($occupation);
+        $this->createReleaseEligibleCareerJobs((string) $occupation->canonical_slug, indexable: false);
+
+        OccupationAlias::query()->create([
+            'occupation_id' => $occupation->id,
+            'family_id' => $occupation->family_id,
+            'alias' => 'Agricultural and Food Scientists',
+            'normalized' => 'agricultural-and-food-scientists',
+            'lang' => 'en-US',
+            'register' => 'public_resolution_duplicate_alias',
+            'intent_scope' => 'duplicate_identity',
+            'target_kind' => 'ledger_public_alias_redirect',
+            'precision_score' => 1.0,
+            'confidence_score' => 1.0,
+        ]);
+
+        $payload = app(CareerAliasResolutionBundleBuilder::class)
+            ->build('agricultural-and-food-scientists', 'en-US')
+            ->toArray();
+
+        $this->assertSame('none', data_get($payload, 'resolution.resolved_kind'));
+        $this->assertNull(data_get($payload, 'resolution.occupation'));
+        $this->assertNull(data_get($payload, 'resolution.family'));
+        $this->assertNull(data_get($payload, 'resolution.candidates'));
     }
 
     public function test_it_does_not_resolve_display_asset_alias_when_duplicate_ledger_metadata_is_missing(): void
@@ -526,5 +562,39 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
             'implementation_contract_json' => [],
             'metadata_json' => [],
         ]);
+    }
+
+    private function createReleaseEligibleCareerJobs(string $slug, bool $indexable = true): void
+    {
+        foreach (CareerJob::SUPPORTED_LOCALES as $locale) {
+            $job = CareerJob::query()->create([
+                'org_id' => 0,
+                'job_code' => $slug,
+                'slug' => $slug,
+                'locale' => $locale,
+                'title' => 'Display Asset Target',
+                'excerpt' => 'Display asset target excerpt',
+                'status' => CareerJob::STATUS_PUBLISHED,
+                'is_public' => true,
+                'is_indexable' => $indexable,
+                'schema_version' => 'v1',
+                'sort_order' => 0,
+                'published_at' => Carbon::now()->subDay(),
+            ]);
+
+            CareerJobSeoMeta::query()->create([
+                'job_id' => (int) $job->id,
+                'seo_title' => 'Display Asset Target',
+                'seo_description' => 'Display asset target description',
+                'canonical_url' => 'https://example.test/'.($locale === 'zh-CN' ? 'zh' : $locale).'/career/jobs/'.$slug,
+                'og_title' => 'Display Asset Target',
+                'og_description' => 'Display asset target description',
+                'og_image_url' => 'https://example.test/images/career.png',
+                'twitter_title' => 'Display Asset Target',
+                'twitter_description' => 'Display asset target description',
+                'twitter_image_url' => 'https://example.test/images/career.png',
+                'robots' => $indexable ? 'index,follow' : 'noindex,follow',
+            ]);
+        }
     }
 }
