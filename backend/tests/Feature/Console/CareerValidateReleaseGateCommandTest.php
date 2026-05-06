@@ -49,7 +49,7 @@ final class CareerValidateReleaseGateCommandTest extends TestCase
             ),
         ]);
 
-        Artisan::call('career:validate-release-gate', [
+        $exitCode = Artisan::call('career:validate-release-gate', [
             '--slugs' => 'actuaries',
             '--locales' => 'en',
             '--base-url' => 'https://example.test',
@@ -57,6 +57,7 @@ final class CareerValidateReleaseGateCommandTest extends TestCase
         ]);
         $report = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
 
+        $this->assertSame(1, $exitCode);
         $this->assertSame('no_go', $report['decision']);
         $this->assertSame('blocked', $report['items'][0]['Release_Gate_Result']);
         $this->assertFalse($report['items'][0]['Product_Absent']);

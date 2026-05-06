@@ -11,11 +11,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class Article extends Model
 {
-    use HasFactory, HasOrgScope;
+    use HasFactory, HasOrgScope, SoftDeletes;
+
+    public const LIFECYCLE_ACTIVE = 'active';
+
+    public const LIFECYCLE_ARCHIVED = 'archived';
+
+    public const LIFECYCLE_SOFT_DELETED = 'soft_deleted';
 
     public const TRANSLATION_STATUS_SOURCE = 'source';
 
@@ -93,6 +100,7 @@ class Article extends Model
         'lifecycle_changed_at' => 'datetime',
         'published_at' => 'datetime',
         'scheduled_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -148,7 +156,15 @@ class Article extends Model
     {
         return $query
             ->where('status', 'published')
-            ->where('is_public', true);
+            ->where('is_public', true)
+            ->where(static function ($lifecycleQuery): void {
+                $lifecycleQuery
+                    ->whereNull('lifecycle_state')
+                    ->orWhereNotIn('lifecycle_state', [
+                        self::LIFECYCLE_ARCHIVED,
+                        self::LIFECYCLE_SOFT_DELETED,
+                    ]);
+            });
     }
 
     public function scopePubliclyReadable($query)

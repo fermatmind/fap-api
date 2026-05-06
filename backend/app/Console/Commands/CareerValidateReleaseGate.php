@@ -267,6 +267,6 @@ final class CareerValidateReleaseGate extends Command
             $this->line('validated_count='.$report['validated_count']);
         }
 
-        return ($report['decision'] ?? 'fail') === 'fail' ? self::FAILURE : self::SUCCESS;
+        return ($report['decision'] ?? 'fail') === 'pass' ? self::SUCCESS : self::FAILURE;
     }
 }
