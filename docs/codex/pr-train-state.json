@@ -643,6 +643,11 @@
           "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/BillingWebhookMisconfiguredSecretTest.php tests/Unit/Security/SecurityGuardrailsTest.php --filter='missing_billing_secret|ci_deploy_supply_chain|compose_defaults|ci_and_staging|release_pack'",
           "evidence": "7 tests passed with 37 assertions for billing secret fail-closed behavior and supply-chain guardrails."
         },
+        "runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|ci_auth_bypass_hardening'",
+          "evidence": "2 tests passed with 6 assertions; PR-6 auth bypass hardening paths are classified as non-MBTI-runtime-impacting while the freeze gate remains active."
+        },
         "release_pack": {
           "status": "pass",
           "command": "bash backend/scripts/release_pack.sh",

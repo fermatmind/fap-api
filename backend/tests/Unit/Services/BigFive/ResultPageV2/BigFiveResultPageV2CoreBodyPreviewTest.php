@@ -370,6 +370,27 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_ci_auth_bypass_hardening_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/AuthWxPhoneController.php',
+            'backend/app/Services/Auth/PhoneOtpService.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            "-        if (app()->environment(['local', 'testing', 'ci'])) {",
+            "+        if (app()->environment(['local', 'testing'])) {",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            null,
+            $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_surface_builder_changes(): void
     {
         $changed = [
@@ -618,6 +639,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCiAuthBypassHardeningFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerDisplaySurfaceFile($file)) {
                 continue;
             }
@@ -650,6 +675,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isResultEmailGatedReadFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsCiAuthBypassHardeningOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
                 continue;
             }
 
@@ -738,6 +770,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Ingestion/ReplayService.php',
             'backend/app/Services/Storage/QuarantinedRootRestoreService.php',
             'backend/app/Support/Xlsx/XlsxCellReference.php',
+        ], true);
+    }
+
+    private function isCiAuthBypassHardeningFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/AuthWxPhoneController.php',
+            'backend/app/Services/Auth/PhoneOtpService.php',
         ], true);
     }
 
@@ -890,6 +930,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/SitemapSourceController|\\/seo\\/sitemap-source/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsCiAuthBypassHardeningOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/^[+-]\s*if \(app\(\)->environment\(\[\'local\', \'testing\'(?:, \'ci\')?\]\)\) \{/u', $line) !== 1) {
                 return false;
             }
         }
