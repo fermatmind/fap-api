@@ -475,17 +475,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_allows_bigfive_norm_foundation_schema_only(): void
+    public function test_runtime_freeze_classifier_allows_bigfive_norm_foundation_data_scope_only(): void
     {
         $allowed = [
             'backend/app/Models/BigFiveNormObservation.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormObservationCaptureWriter.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormCaptureDecision.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormCaptureResult.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormAnonymizer.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormPrivacyPolicy.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormAggregationDryRun.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormAggregationResult.php',
             'backend/database/migrations/2026_05_06_132700_create_big_five_norm_observations_table.php',
         ];
 
         $blocked = [
-            'backend/app/Services/BigFive/Norms/BigFiveNormObservationCaptureWriter.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormRuntimeSelector.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormRuntimeComposer.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormRuntimeEngine.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormPublicPercentilePresenter.php',
             'backend/app/Services/BigFive/BigFivePublicProjectionService.php',
             'backend/routes/api.php',
             'frontend/src/big5/norms.ts',
@@ -706,6 +714,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveNormFoundationServiceFile($file)) {
+                continue;
+            }
+
             if ($this->isAttemptEmailBindingFoundationFile($file)) {
                 continue;
             }
@@ -857,6 +869,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return $file === 'backend/app/Models/BigFiveNormObservation.php'
             || preg_match('#^backend/database/migrations/\d{4}_\d{2}_\d{2}_\d{6}_create_big_five_norm_observations_table\.php$#', $file) === 1;
+    }
+
+    private function isBigFiveNormFoundationServiceFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/BigFive/Norms/BigFiveNormObservationCaptureWriter.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormCaptureDecision.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormCaptureResult.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormAnonymizer.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormPrivacyPolicy.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormAggregationDryRun.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormAggregationResult.php',
+        ], true);
     }
 
     private function isAttemptEmailBindingFoundationFile(string $file): bool
