@@ -7,6 +7,7 @@ namespace Tests\Feature;
 use App\Models\Attempt;
 use App\Models\AttemptEmailBinding;
 use App\Models\Result;
+use App\Services\Results\ResultAccessTokenService;
 use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
@@ -18,7 +19,7 @@ final class ResultEmailLookupTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_lookup_by_email_requires_email_verification_before_results_are_listed(): void
+    public function test_lookup_by_email_returns_active_bound_results_without_email_verification(): void
     {
         $email = 'Owner@Example.Test';
         $firstAttemptId = $this->seedAttemptWithResult('anon_lookup_a', 'MBTI', 'INTJ-A', now()->subMinutes(5));
@@ -33,11 +34,22 @@ final class ResultEmailLookupTest extends TestCase
 
         $response->assertOk();
         $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('email_verification_required', true);
-        $response->assertJsonCount(0, 'items');
-        $this->assertStringNotContainsString('result_access_token', $response->getContent());
-        $this->assertStringNotContainsString($firstAttemptId, $response->getContent());
-        $this->assertStringNotContainsString($secondAttemptId, $response->getContent());
+        $response->assertJsonPath('email_verification_required', false);
+        $response->assertJsonCount(2, 'items');
+        $response->assertJsonPath('items.0.attempt_id', $secondAttemptId);
+        $response->assertJsonPath('items.0.scale_code_legacy', 'BIG5_OCEAN');
+        $response->assertJsonPath('items.0.type_code', 'OCEAN-HIGH');
+        $response->assertJsonPath('items.1.attempt_id', $firstAttemptId);
+        $response->assertJsonPath('items.1.scale_code_legacy', 'MBTI');
+        $response->assertJsonPath('items.1.type_code', 'INTJ-A');
+
+        $firstToken = (string) $response->json('items.0.result_access_token');
+        $this->assertNotSame('', $firstToken);
+        $this->assertStringStartsWith("/zh/result/{$secondAttemptId}?access_token=", (string) $response->json('items.0.result_url'));
+
+        $grant = app(ResultAccessTokenService::class)->verify($firstToken);
+        $this->assertIsArray($grant);
+        $this->assertSame($secondAttemptId, $grant['attempt_id']);
     }
 
     public function test_lookup_by_email_returns_empty_items_for_no_matches(): void
@@ -49,7 +61,7 @@ final class ResultEmailLookupTest extends TestCase
 
         $response->assertOk();
         $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('email_verification_required', true);
+        $response->assertJsonPath('email_verification_required', false);
         $response->assertJsonCount(0, 'items');
     }
 
@@ -69,9 +81,13 @@ final class ResultEmailLookupTest extends TestCase
         ]);
 
         $response->assertOk();
-        $response->assertJsonPath('email_verification_required', true);
-        $response->assertJsonCount(0, 'items');
-        $this->assertStringNotContainsString($activeAttemptId, $response->getContent());
+        $response->assertJsonPath('email_verification_required', false);
+        $response->assertJsonCount(1, 'items');
+        $response->assertJsonPath('items.0.attempt_id', $activeAttemptId);
+        $response->assertJsonPath('items.0.scale_code_legacy', 'MBTI');
+        $this->assertStringStartsWith("/en/result/{$activeAttemptId}?access_token=", (string) $response->json('items.0.result_url'));
+        $this->assertStringNotContainsString($inactiveAttemptId, $response->getContent());
+        $this->assertStringNotContainsString($sensitiveAttemptId, $response->getContent());
     }
 
     public function test_lookup_by_email_is_rate_limited(): void
@@ -82,12 +98,14 @@ final class ResultEmailLookupTest extends TestCase
             'fap.rate_limits.api_result_lookup_per_minute' => 1,
         ]);
 
+        $email = 'ratelimit_'.Str::lower(Str::random(12)).'@example.test';
+
         $this->postJson('/api/v0.3/results/lookup-by-email', [
-            'email' => 'ratelimit@example.test',
+            'email' => $email,
         ])->assertOk();
 
         $this->postJson('/api/v0.3/results/lookup-by-email', [
-            'email' => 'ratelimit@example.test',
+            'email' => $email,
         ])
             ->assertStatus(429)
             ->assertJsonPath('error_code', 'RATE_LIMIT_RESULT_LOOKUP');
