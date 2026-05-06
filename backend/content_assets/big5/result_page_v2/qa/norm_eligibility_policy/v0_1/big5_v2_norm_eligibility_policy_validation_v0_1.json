@@ -1,0 +1,52 @@
+{
+  "schema_version": "big5_v2_norm_eligibility_policy_validation_v0_1",
+  "mode": "norm_eligibility_policy_validation",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "dynamic_norm_engine_attached": false,
+  "public_percentile_display_enabled": false,
+  "norm_eligible": false,
+  "norm_excluded": true,
+  "validated_fields": [
+    "norm_eligible",
+    "norm_excluded",
+    "exclusion_reason",
+    "quality_based_exclusion",
+    "replay_exclusion",
+    "fixture_staging_exclusion",
+    "deleted_purged_exclusion",
+    "unsupported_schema_exclusion",
+    "future_consent_requirement"
+  ],
+  "checks": {
+    "policy_package_exists": "pass",
+    "default_norm_eligible_false": "pass",
+    "default_norm_excluded_true": "pass",
+    "quality_based_exclusion_defined": "pass",
+    "replay_exclusion_defined": "pass",
+    "fixture_staging_exclusion_defined": "pass",
+    "deleted_purged_exclusion_defined": "pass",
+    "unsupported_schema_exclusion_defined": "pass",
+    "future_consent_requirement_defined": "pass",
+    "append_only_capture_not_enabled": "pass",
+    "public_percentile_display_not_enabled": "pass",
+    "dynamic_norm_engine_not_attached": "pass",
+    "runtime_behavior_not_changed": "pass",
+    "scoring_not_changed": "pass",
+    "production_rollout_not_enabled": "pass",
+    "cms_not_connected": "pass"
+  },
+  "norm_decision": {
+    "status": "NO-GO",
+    "reason": "Eligibility policy exists, but capture, privacy, append-only schema, aggregation, and feasibility gates remain incomplete."
+  },
+  "blocked_until": [
+    "append_only_norm_observation_schema",
+    "norm_capture_writer",
+    "norm_privacy_boundary",
+    "aggregation_dry_run",
+    "future_feasibility_go_no_go"
+  ]
+}
