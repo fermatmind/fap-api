@@ -227,7 +227,9 @@ final class BigFiveResultPageV2RuntimeWrapper
         $routeInput = $this->buildRouteInput($result, $responsePayload);
         $routeRow = (new BigFiveV2RouteMatrixLookup)->lookup($routeInput);
         if ($routeRow === null) {
-            throw new RuntimeException("Big Five V2 pilot route row is missing: {$routeInput->combinationKey}");
+            throw new RuntimeException(
+                'Big Five V2 pilot route row is missing for route hash: '.$this->combinationKeyHash($routeInput->combinationKey)
+            );
         }
 
         $formSummary = is_array($responsePayload['big5_form_v1'] ?? null) ? $responsePayload['big5_form_v1'] : [];
@@ -249,7 +251,7 @@ final class BigFiveResultPageV2RuntimeWrapper
                 'route_input_created' => true,
                 'route_lookup_failed' => false,
                 'composer_failed' => false,
-                'combination_key' => $routeInput->combinationKey,
+                'combination_key_hash' => $this->combinationKeyHash($routeInput->combinationKey),
                 'quality_status' => $routeInput->qualityStatus,
                 'norm_status' => $routeInput->normStatus,
                 'selector_suppressed_refs' => count($selection->suppressedAssetRefs),
@@ -298,6 +300,11 @@ final class BigFiveResultPageV2RuntimeWrapper
         }
 
         throw new RuntimeException('Big Five V2 pilot score result is missing.');
+    }
+
+    private function combinationKeyHash(string $combinationKey): string
+    {
+        return hash('sha256', 'big5_v2_combination|'.trim($combinationKey));
     }
 
     /**

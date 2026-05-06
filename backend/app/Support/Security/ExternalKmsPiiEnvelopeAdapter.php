@@ -13,14 +13,20 @@ final class ExternalKmsPiiEnvelopeAdapter implements PiiEnvelopeAdapter
         private readonly LocalPiiEnvelopeAdapter $localAdapter,
     ) {}
 
-    public function encrypt(string $plaintext): string
+    public function encrypt(string $plaintext, ?int $keyVersion = null, ?string $keyId = null): string
     {
-        return $this->runWithContract('encrypt', fn (): string => $this->localAdapter->encrypt($plaintext));
+        return $this->runWithContract(
+            'encrypt',
+            fn (): string => $this->localAdapter->encrypt($plaintext, $keyVersion, $keyId)
+        );
     }
 
-    public function decrypt(string $ciphertext): ?string
+    public function decrypt(string $ciphertext, ?int $keyVersion = null, ?string $keyId = null): ?string
     {
-        return $this->runWithContract('decrypt', fn (): ?string => $this->localAdapter->decrypt($ciphertext));
+        return $this->runWithContract(
+            'decrypt',
+            fn (): ?string => $this->localAdapter->decrypt($ciphertext, $keyVersion, $keyId)
+        );
     }
 
     private function runWithContract(string $operation, callable $localOp): mixed

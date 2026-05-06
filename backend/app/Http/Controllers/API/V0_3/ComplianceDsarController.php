@@ -38,6 +38,9 @@ final class ComplianceDsarController extends Controller
 
         $payload = $request->validate([
             'subject_user_id' => ['required', 'integer', 'min:1'],
+            'anon_id' => ['prohibited'],
+            'subject_anon_id' => ['prohibited'],
+            'subject_anon_ids' => ['prohibited'],
             'mode' => ['nullable', 'string', Rule::in(self::ALLOWED_MODES)],
             'reason' => ['nullable', 'string', 'max:255'],
         ]);

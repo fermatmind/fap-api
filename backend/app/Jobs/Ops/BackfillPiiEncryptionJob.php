@@ -199,7 +199,11 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                             $cipher
                         );
                         if ($emailPlaintext !== null) {
-                            $updates['email_enc'] = $cipher->encryptWithKeyVersion($emailPlaintext, $targetKeyVersion);
+                            $updates['email_enc'] = $this->encryptAndVerifyRotation(
+                                $cipher,
+                                $emailPlaintext,
+                                $targetKeyVersion
+                            );
                             $rotatedThisRow = true;
                         }
                     }
@@ -211,7 +215,11 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                             $cipher
                         );
                         if ($phonePlaintext !== null) {
-                            $updates['phone_e164_enc'] = $cipher->encryptWithKeyVersion($phonePlaintext, $targetKeyVersion);
+                            $updates['phone_e164_enc'] = $this->encryptAndVerifyRotation(
+                                $cipher,
+                                $phonePlaintext,
+                                $targetKeyVersion
+                            );
                             $rotatedThisRow = true;
                         }
                     }
@@ -412,7 +420,11 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                             $cipher
                         );
                         if ($emailPlaintext !== null) {
-                            $updates['email_enc'] = $cipher->encryptWithKeyVersion($emailPlaintext, $targetKeyVersion);
+                            $updates['email_enc'] = $this->encryptAndVerifyRotation(
+                                $cipher,
+                                $emailPlaintext,
+                                $targetKeyVersion
+                            );
                             $rotatedThisRow = true;
                         }
                     }
@@ -424,7 +436,11 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                             $cipher
                         );
                         if ($toEmailPlaintext !== null) {
-                            $updates['to_email_enc'] = $cipher->encryptWithKeyVersion($toEmailPlaintext, $targetKeyVersion);
+                            $updates['to_email_enc'] = $this->encryptAndVerifyRotation(
+                                $cipher,
+                                $toEmailPlaintext,
+                                $targetKeyVersion
+                            );
                             $rotatedThisRow = true;
                         }
                     }
@@ -436,7 +452,11 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                             $cipher
                         );
                         if ($payloadPlaintext !== null) {
-                            $updates['payload_enc'] = $cipher->encryptWithKeyVersion($payloadPlaintext, $targetKeyVersion);
+                            $updates['payload_enc'] = $this->encryptAndVerifyRotation(
+                                $cipher,
+                                $payloadPlaintext,
+                                $targetKeyVersion
+                            );
                             if ($hasPayloadVersion) {
                                 $updates['payload_schema_version'] = 'v1-json-enc';
                             }
@@ -676,6 +696,25 @@ class BackfillPiiEncryptionJob implements ShouldQueue
         }
 
         return $cipher->decrypt($encryptedCandidate);
+    }
+
+    private function encryptAndVerifyRotation(PiiCipher $cipher, string $plaintext, int $targetKeyVersion): string
+    {
+        $encrypted = $cipher->encryptWithKeyVersion($plaintext, $targetKeyVersion);
+        if (! is_string($encrypted) || trim($encrypted) === '') {
+            throw new \RuntimeException('PII rotation produced an empty ciphertext envelope.');
+        }
+
+        $envelope = $cipher->envelopeMetadata($encrypted);
+        if ($envelope === null || (int) $envelope['key_version'] !== $targetKeyVersion) {
+            throw new \RuntimeException('PII rotation did not write the target key version envelope.');
+        }
+
+        if ($cipher->decrypt($encrypted) !== trim($plaintext)) {
+            throw new \RuntimeException('PII rotation target envelope failed decrypt verification.');
+        }
+
+        return $encrypted;
     }
 
     private function resolvePayloadPlaintextForRotation(mixed $payloadJson, mixed $encryptedCandidate, PiiCipher $cipher): ?string

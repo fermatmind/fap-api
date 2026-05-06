@@ -321,11 +321,11 @@
     "PR-3": {
       "repo": "fap-api",
       "branch": "codex/low-api-cms-career-lifecycle-tenant",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "PR-2"
       ],
-      "commit_sha": "2be933562c3a513bbc3441676b04c449ab11050c",
+      "commit_sha": "71650fccf24bc13a15018e7ebe3252f7c2f78632",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1211",
       "checks": {
         "dependency": {
@@ -374,8 +374,8 @@
           "evidence": "Full script exited 0; personality full-32 authority gate, migration safety gates, OpenAPI diff gate, order security gate, and webhook/attempt regression gates passed."
         },
         "github_required_checks": {
-          "status": "failed_then_fix_pushed",
-          "evidence": "PR #1211 verify-mbti-v2 and verify-mbti-legacy failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier did not allowlist PR-3 CMS lifecycle/personality tenant-scope runtime files. Added a precise classifier allowlist and local focused runtime_freeze_classifier tests pass."
+          "status": "pass",
+          "evidence": "PR #1211 required checks passed after the runtime freeze classifier fix: hygiene, verify-mbti-v2, and verify-mbti-legacy completed successfully before squash merge."
         },
         "github_ci_fix_runtime_freeze_classifier": {
           "status": "pass",
@@ -399,6 +399,86 @@
           "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO), database fap_api.",
           "why_external_to_current_pr": "PR-3 sqlite migrations and full CI sqlite baseline both pass, including the new personality child org scope migration. The failure occurs before schema execution while connecting to local MySQL.",
           "impact_on_current_pr": "No impact on PR-3 scope validation or required GitHub checks; record as sidecar per /goal protocol.",
+          "owner": "unknown",
+          "follow_up_recommendation": "Fix local .env MySQL credentials or document the required local DB setup for default migrate validation."
+        }
+      ],
+      "failure_reason": null,
+      "merged_at": "2026-05-06T04:43:09Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-4": {
+      "repo": "fap-api",
+      "branch": "codex/low-api-privacy-logs-dsar-key-rotation",
+      "status": "local_checks_passed",
+      "depends_on": [
+        "PR-3"
+      ],
+      "commit_sha": "edb0e2a1660d61a28aa1badfe8cda8e6e22d6692",
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR-3 merged at 71650fccf24bc13a15018e7ebe3252f7c2f78632 and local branch was created from origin/main at that commit."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Big Five pilot observability redaction, PII envelope/key-rotation behavior, DSAR request validation, privacy-focused tests, and PR train metadata."
+        },
+        "php_lint": {
+          "status": "pass",
+          "command": "php -l backend/app/Contracts/Security/PiiEnvelopeAdapter.php && php -l backend/app/Support/Security/LocalPiiEnvelopeAdapter.php && php -l backend/app/Support/Security/ExternalKmsPiiEnvelopeAdapter.php && php -l backend/app/Support/PiiCipher.php && php -l backend/app/Jobs/Ops/BackfillPiiEncryptionJob.php && php -l backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php && php -l backend/app/Http/Controllers/API/V0_3/ComplianceDsarController.php && php -l backend/tests/Feature/V0_3/PiiCipherRotationAutomationTest.php && php -l backend/tests/Feature/V0_3/PiiCipherEnvelopeTest.php && php -l backend/tests/Feature/V0_3/BigFiveV2PilotObservabilityTest.php && php -l backend/tests/Feature/Compliance/DsarRequestApiTest.php"
+        },
+        "pint": {
+          "status": "pass",
+          "command": "./vendor/bin/pint app/Contracts/Security/PiiEnvelopeAdapter.php app/Support/Security/LocalPiiEnvelopeAdapter.php app/Support/Security/ExternalKmsPiiEnvelopeAdapter.php app/Support/PiiCipher.php app/Jobs/Ops/BackfillPiiEncryptionJob.php app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php app/Http/Controllers/API/V0_3/ComplianceDsarController.php tests/Feature/V0_3/PiiCipherRotationAutomationTest.php tests/Feature/V0_3/PiiCipherEnvelopeTest.php tests/Feature/V0_3/BigFiveV2PilotObservabilityTest.php tests/Feature/Compliance/DsarRequestApiTest.php"
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list"
+        },
+        "default_migrate": {
+          "status": "external_blocker",
+          "command": "php artisan migrate",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) against local fap_api MySQL."
+        },
+        "sqlite_migrate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force"
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/BigFiveV2PilotObservabilityTest.php tests/Feature/V0_3/PiiCipherEnvelopeTest.php tests/Feature/V0_3/PiiCipherRotationAutomationTest.php tests/Feature/Compliance/DsarRequestApiTest.php",
+          "evidence": "20 tests passed, 208 assertions."
+        },
+        "pii_rotation_regression": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/PiiCipherEnvelopeTest.php tests/Feature/V0_3/PiiCipherRotationAutomationTest.php",
+          "evidence": "12 tests passed, 75 assertions after removing unused PiiCipher helpers."
+        },
+        "mbti_ci": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full script exited 0; Big Five pilot observability, OpenAPI diff gate, order security gate, dependency security gate, and webhook/attempt regression gates passed."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "ledger_json": {
+          "status": "pass",
+          "command": "jq empty docs/codex/pr-train-state.json"
+        }
+      },
+      "sidecar_issues": [
+        {
+          "title": "Local default MySQL credentials block php artisan migrate",
+          "repo": "fap-api",
+          "affected_command_or_check": "php artisan migrate",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO), database fap_api.",
+          "why_external_to_current_pr": "PR-4 adds no migrations and the sqlite full migration path passes. The failure occurs before schema execution while connecting to local MySQL.",
+          "impact_on_current_pr": "No impact on PR-4 scope validation, focused regression tests, full MBTI CI, or future required GitHub checks; record as sidecar per /goal protocol.",
           "owner": "unknown",
           "follow_up_recommendation": "Fix local .env MySQL credentials or document the required local DB setup for default migrate validation."
         }
