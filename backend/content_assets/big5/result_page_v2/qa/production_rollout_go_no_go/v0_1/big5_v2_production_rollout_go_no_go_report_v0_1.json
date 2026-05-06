@@ -1,0 +1,151 @@
+{
+  "schema": "big5_result_page_v2.production_rollout_go_no_go_report.v0_1",
+  "package": "production_rollout_go_no_go",
+  "version": "v0_1",
+  "generated_at": "2026-05-06T00:00:00Z",
+  "mode": "production_rollout_readiness_report",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "explicit_human_production_rollout_approval": false,
+  "human_approval_required_before_go": true,
+  "production_decision": "NO_GO",
+  "rollout_go_recommended": false,
+  "rollout_gate_status": {
+    "status": "ready_disabled_by_default",
+    "evidence": "backend/app/Services/BigFive/ResultPageV2/Rollout/BigFiveV2ProductionRolloutGate.php",
+    "default_off": true,
+    "fail_closed": true,
+    "requires_explicit_enable": true,
+    "requires_import_gate_pass": true,
+    "requires_approved_release_snapshot": true,
+    "requires_manual_approval": true
+  },
+  "allowlist_status": {
+    "status": "ready_not_configured_for_real_users",
+    "supports_attempt_user_anon_org_scopes": true,
+    "tenant_scope_required": true,
+    "locale_scale_form_scope_required": true,
+    "real_user_allowlist_active": false
+  },
+  "percentage_rollout_readiness": {
+    "status": "ready_disabled_by_default",
+    "percentage_default": 0,
+    "max_percentage_default": 0,
+    "blast_radius_limit_required": true,
+    "invalid_percentage_rejected": true
+  },
+  "telemetry_readiness": {
+    "status": "ready_for_structured_events",
+    "evidence": "backend/app/Services/BigFive/ResultPageV2/Observability/BigFiveV2RolloutTelemetry.php",
+    "events": [
+      "rollout_attach",
+      "rollout_deny",
+      "route_lookup_failure",
+      "selector_suppression",
+      "composer_failure",
+      "payload_validation",
+      "fail_closed",
+      "rollout_percentage"
+    ],
+    "pii_allowed": false
+  },
+  "alerts_readiness": {
+    "status": "policy_ready_not_runtime_alerting",
+    "evidence": "backend/content_assets/big5/result_page_v2/qa/production_rollout_alerts/v0_1/big5_v2_production_rollout_alert_validation_v0_1.json",
+    "thresholds_defined": true,
+    "dashboard_definitions_present": true,
+    "incident_escalation_path_defined": true
+  },
+  "rollback_readiness": {
+    "status": "drill_ready_no_real_execution",
+    "evidence": "backend/content_assets/big5/result_page_v2/qa/production_rollout_rollback_kill_switch/v0_1/big5_v2_production_rollout_rollback_kill_switch_validation_v0_1.json",
+    "config_off_supported": true,
+    "allowlist_revoke_supported": true,
+    "percentage_rollback_supported": true,
+    "release_snapshot_rollback_supported": true,
+    "fail_closed_recovery_tested": true
+  },
+  "incident_readiness": {
+    "status": "governance_ready_operator_assignment_required",
+    "freeze_controls_present": true,
+    "release_halt_protocol_present": true,
+    "metadata_leak_incident_class_present": true,
+    "bad_content_rollout_incident_class_present": true,
+    "invalid_payload_incident_class_present": true,
+    "operator_assignment_required_before_real_rollout": true
+  },
+  "production_safety": {
+    "status": "safe_disabled",
+    "production_runtime_enabled_default": false,
+    "production_rollout_enabled_default": false,
+    "production_use_allowed": false,
+    "ready_for_production": false,
+    "cms_connected": false,
+    "dynamic_norms_connected": false,
+    "scoring_changed": false,
+    "content_bodies_changed": false,
+    "frontend_fallback_prose_generation": false
+  },
+  "release_governance_linkage": {
+    "production_governance_dry_run": "backend/content_assets/big5/result_page_v2/governance/production_dry_run_go_no_go_v0_1/big5_v2_production_dry_run_go_no_go_report_v0_1.json",
+    "release_snapshot": "backend/content_assets/big5/result_page_v2/releases/v0_1/big5_v2_release_snapshot_rc_0_1.json",
+    "import_gate": "backend/content_assets/big5/result_page_v2/governance/production_import_gate_v0_1/big5_v2_production_import_gate_policy_v0_1.json",
+    "all_surface_gate": "backend/content_assets/big5/result_page_v2/qa/production_all_surface_release_gate/v0_1/big5_v2_production_all_surface_release_gate_report_v0_1.json",
+    "approval_evidence": "backend/content_assets/big5/result_page_v2/governance/release_approval_v0_1/big5_v2_release_approval_evidence_v0_1.json",
+    "real_user_dry_run": "backend/content_assets/big5/result_page_v2/qa/production_rollout_real_user_dry_run/v0_1/big5_v2_production_rollout_real_user_dry_run_validation_v0_1.json"
+  },
+  "hard_blockers_before_real_rollout": [
+    {
+      "code": "explicit_human_production_rollout_approval_missing",
+      "status": "blocking_rollout_go",
+      "required_action": "Record explicit human production rollout approval with scope, timestamp, approver, rollback owner, and incident owner."
+    },
+    {
+      "code": "production_rollout_config_disabled",
+      "status": "blocking_rollout_go",
+      "required_action": "Keep production rollout disabled until an approved rollout window is opened."
+    },
+    {
+      "code": "real_user_allowlist_not_configured",
+      "status": "blocking_real_user_exposure",
+      "required_action": "Configure real allowlist scope only after approval and monitoring readiness review."
+    },
+    {
+      "code": "operator_assignment_required",
+      "status": "blocking_real_user_exposure",
+      "required_action": "Assign release halt, rollback, alert triage, and incident escalation owners before real rollout."
+    }
+  ],
+  "recommended_rollout_phases": [
+    "phase_0_keep_disabled_and_review_evidence",
+    "phase_1_internal_allowlist_with_zero_percentage",
+    "phase_2_invite_only_tenant_scoped_rollout",
+    "phase_3_low_percentage_ramp_with_blast_radius_limit",
+    "phase_4_hold_and_review_before_full_rollout_candidate"
+  ],
+  "must_not_touch": [
+    "production rollout enablement",
+    "production_use_allowed true",
+    "ready_for_production true",
+    "scoring",
+    "BigFivePublicProjectionService",
+    "content bodies",
+    "content_packs",
+    "CMS",
+    "dynamic norms",
+    "frontend fallback prose",
+    "PDF/share/history/compare contract truth"
+  ],
+  "validation_commands": [
+    "php artisan route:list --no-ansi",
+    "DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi",
+    "php artisan test --filter=BigFiveResultPageV2 --no-ansi",
+    "php artisan test --filter=ProductionGovernance --no-ansi",
+    "php artisan test --filter=RolloutGoNoGoTest --no-ansi",
+    "git diff --check"
+  ],
+  "decision_rationale": "The production rollout readiness layer is present and disabled by default. Automatic production rollout remains NO-GO because explicit human production rollout approval, real rollout window release, real allowlist ownership, and operator assignments are absent by design."
+}

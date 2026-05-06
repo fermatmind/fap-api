@@ -1,0 +1,45 @@
+{
+  "schema": "big5_result_page_v2.production_rollout_dependency_graph.v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "nodes": [
+    "production_governance_policy",
+    "immutable_release_snapshot",
+    "production_import_gate",
+    "production_runtime_gate",
+    "all_surface_release_gate",
+    "audit_approval_release_evidence",
+    "production_governance_dry_run",
+    "production_rollout_policy",
+    "production_rollout_gate",
+    "production_rollout_telemetry",
+    "production_rollout_alerts",
+    "rollback_kill_switch_drills",
+    "real_user_rollout_dry_run",
+    "production_rollout_go_no_go_report",
+    "explicit_human_production_rollout_approval"
+  ],
+  "edges": [
+    ["production_governance_policy", "immutable_release_snapshot"],
+    ["immutable_release_snapshot", "production_import_gate"],
+    ["production_import_gate", "production_runtime_gate"],
+    ["production_runtime_gate", "all_surface_release_gate"],
+    ["all_surface_release_gate", "audit_approval_release_evidence"],
+    ["audit_approval_release_evidence", "production_governance_dry_run"],
+    ["production_governance_dry_run", "production_rollout_policy"],
+    ["production_rollout_policy", "production_rollout_gate"],
+    ["production_rollout_gate", "production_rollout_telemetry"],
+    ["production_rollout_telemetry", "production_rollout_alerts"],
+    ["production_rollout_alerts", "rollback_kill_switch_drills"],
+    ["rollback_kill_switch_drills", "real_user_rollout_dry_run"],
+    ["real_user_rollout_dry_run", "production_rollout_go_no_go_report"],
+    ["production_rollout_go_no_go_report", "explicit_human_production_rollout_approval"]
+  ],
+  "terminal_decision": {
+    "automatic_rollout": "NO_GO",
+    "reason": "Explicit human production rollout approval is intentionally absent."
+  }
+}

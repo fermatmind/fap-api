@@ -1,0 +1,65 @@
+{
+  "schema": "big5_result_page_v2.production_rollout_go_no_go_matrix.v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "production_decision": "NO_GO",
+  "matrix": [
+    {
+      "area": "rollout_gate",
+      "status": "ready_disabled_by_default",
+      "evidence": "BigFiveV2ProductionRolloutGate",
+      "blocks_go": false
+    },
+    {
+      "area": "allowlist",
+      "status": "mechanism_ready_real_allowlist_not_active",
+      "evidence": "RolloutGate feature tests",
+      "blocks_go": true
+    },
+    {
+      "area": "percentage_rollout",
+      "status": "mechanism_ready_default_zero",
+      "evidence": "RolloutGate feature tests",
+      "blocks_go": false
+    },
+    {
+      "area": "telemetry",
+      "status": "structured_events_ready",
+      "evidence": "TelemetryTest",
+      "blocks_go": false
+    },
+    {
+      "area": "alerts",
+      "status": "policy_ready_dashboard_defined",
+      "evidence": "AlertTest",
+      "blocks_go": false
+    },
+    {
+      "area": "rollback",
+      "status": "drill_ready_no_real_execution",
+      "evidence": "RollbackTest and KillSwitchTest",
+      "blocks_go": false
+    },
+    {
+      "area": "incident_response",
+      "status": "governance_ready_operator_assignment_required",
+      "evidence": "rollout policy and alert escalation package",
+      "blocks_go": true
+    },
+    {
+      "area": "production_safety",
+      "status": "safe_disabled",
+      "evidence": "config defaults and go/no-go report",
+      "blocks_go": false
+    },
+    {
+      "area": "human_production_rollout_approval",
+      "status": "missing_by_design",
+      "evidence": "go/no-go report",
+      "blocks_go": true
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "big5_result_page_v2.production_rollout_go_no_go_manifest.v0_1",
+  "package": "production_rollout_go_no_go",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "production_decision": "NO_GO",
+  "human_approval_required_before_go": true,
+  "cms_status": "out_of_scope_not_connected",
+  "dynamic_norms_status": "out_of_scope_not_connected",
+  "files": [
+    "big5_v2_production_rollout_go_no_go_report_v0_1.json",
+    "big5_v2_production_rollout_go_no_go_matrix_v0_1.json",
+    "big5_v2_production_rollout_dependency_graph_v0_1.json",
+    "big5_v2_production_rollout_validation_v0_1.json",
+    "README.md",
+    "SHA256SUMS"
+  ]
+}
