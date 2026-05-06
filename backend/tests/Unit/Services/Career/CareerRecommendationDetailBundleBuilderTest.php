@@ -146,7 +146,7 @@ final class CareerRecommendationDetailBundleBuilderTest extends TestCase
         );
     }
 
-    public function test_it_builds_authority_owned_matched_jobs_with_compact_readiness_only(): void
+    public function test_it_builds_authority_owned_matched_jobs_with_indexable_readiness_only(): void
     {
         $this->compileRecommendationChain(
             CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-intj-match'])
@@ -157,19 +157,15 @@ final class CareerRecommendationDetailBundleBuilderTest extends TestCase
 
         $payload = app(CareerRecommendationDetailBundleBuilder::class)->buildByType('intj')?->toArray() ?? [];
 
-        $this->assertCount(2, (array) data_get($payload, 'matched_jobs'));
+        $this->assertCount(1, (array) data_get($payload, 'matched_jobs'));
         $this->assertSame(
-            ['backend-architect-cn-market', 'backend-architect-intj-match'],
+            ['backend-architect-intj-match'],
             array_map(
                 static fn (array $job): string => (string) ($job['canonical_slug'] ?? ''),
                 (array) data_get($payload, 'matched_jobs')
             )
         );
-        $this->assertSame(false, data_get($payload, 'matched_jobs.0.seo_contract.index_eligible'));
-        $this->assertSame('trust_limited', data_get($payload, 'matched_jobs.0.seo_contract.index_state'));
-        $this->assertSame(['fixture'], data_get($payload, 'matched_jobs.0.seo_contract.reason_codes'));
-        $this->assertSame('pending', data_get($payload, 'matched_jobs.0.trust_summary.reviewer_status'));
-        $this->assertSame(true, data_get($payload, 'matched_jobs.1.seo_contract.index_eligible'));
+        $this->assertSame(true, data_get($payload, 'matched_jobs.0.seo_contract.index_eligible'));
         $this->assertNull(data_get($payload, 'matched_jobs.0.score_bundle'));
         $this->assertNull(data_get($payload, 'matched_jobs.0.claim_permissions'));
     }

@@ -26,6 +26,10 @@ final class ResultEmailReadAccessService
 
     public function activeTokenBindingForRequest(Request $request, int $orgId, string $attemptId): ?AttemptEmailBinding
     {
+        if (! (bool) config('fap.features.email_first_result_access', false)) {
+            return null;
+        }
+
         $orgId = max(0, $orgId);
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
@@ -64,6 +68,9 @@ final class ResultEmailReadAccessService
         if (! $binding instanceof AttemptEmailBinding) {
             return null;
         }
+        if (! $this->bindingMatchesRequestActor($binding, $request)) {
+            return null;
+        }
 
         $request->attributes->set($cacheKey, $binding);
 
@@ -93,8 +100,6 @@ final class ResultEmailReadAccessService
     private function extractToken(Request $request): string
     {
         $candidates = [
-            $request->query('access_token'),
-            $request->query('result_access_token'),
             $request->header('X-Result-Access-Token'),
         ];
 
@@ -106,6 +111,24 @@ final class ResultEmailReadAccessService
         }
 
         return '';
+    }
+
+    private function bindingMatchesRequestActor(AttemptEmailBinding $binding, Request $request): bool
+    {
+        $boundUserId = $this->normalizeNumericString($binding->bound_user_id ?? null);
+        $requestUserId = $this->normalizeNumericString(
+            $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id')
+        );
+        if ($boundUserId !== null && $requestUserId !== null && hash_equals($boundUserId, $requestUserId)) {
+            return true;
+        }
+
+        $boundAnonId = $this->normalizeString($binding->bound_anon_id ?? null);
+        $requestAnonId = $this->normalizeString(
+            $request->attributes->get('fm_anon_id') ?? $request->attributes->get('anon_id')
+        );
+
+        return $boundAnonId !== null && $requestAnonId !== null && hash_equals($boundAnonId, $requestAnonId);
     }
 
     private function normalizeNumericString(mixed $candidate): ?string

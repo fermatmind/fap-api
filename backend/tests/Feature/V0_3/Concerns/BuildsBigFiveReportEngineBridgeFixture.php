@@ -6,6 +6,7 @@ namespace Tests\Feature\V0_3\Concerns;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -205,6 +206,10 @@ trait BuildsBigFiveReportEngineBridgeFixture
                     'locked' => false,
                     'access_level' => 'full',
                     'variant' => 'full',
+                    'modules_allowed' => [
+                        ReportAccess::MODULE_BIG5_CORE,
+                        ReportAccess::MODULE_BIG5_FULL,
+                    ],
                     'offers' => [],
                     'report' => [
                         'schema_version' => strtolower($scaleCode).'.report.v1',

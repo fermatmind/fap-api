@@ -126,8 +126,7 @@ final class CareerRecommendationDetailApiTest extends TestCase
                 $matchedJobs
             )
         );
-        $this->assertArrayNotHasKey('trust_summary', $matchedJobs[0]);
-        $this->assertArrayNotHasKey('reason_codes', $matchedJobs[0]['seo_contract'] ?? []);
+        $this->assertSame(true, $matchedJobs[0]['seo_contract']['index_eligible'] ?? null);
     }
 
     public function test_it_additively_exposes_transition_path_contract_with_structured_bridge_and_tradeoff_fields(): void

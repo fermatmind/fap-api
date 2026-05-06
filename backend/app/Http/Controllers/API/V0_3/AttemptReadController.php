@@ -2102,7 +2102,7 @@ class AttemptReadController extends Controller
             return null;
         }
 
-        $attempt = $this->reportSubjects->findAttemptForSystem($orgId, $attemptId);
+        $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
         if (! $attempt instanceof Attempt) {
             return null;
         }

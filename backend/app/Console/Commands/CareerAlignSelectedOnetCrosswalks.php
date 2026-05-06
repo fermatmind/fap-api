@@ -511,7 +511,11 @@ final class CareerAlignSelectedOnetCrosswalks extends Command
 
         $outputPath = trim((string) ($this->option('output') ?? ''));
         if ($outputPath !== '') {
-            file_put_contents($outputPath, json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+            file_put_contents(
+                $this->safeReportOutputPath($outputPath),
+                json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+                LOCK_EX
+            );
         }
 
         if ((bool) $this->option('json')) {
@@ -530,6 +534,48 @@ final class CareerAlignSelectedOnetCrosswalks extends Command
         }
 
         return $success ? self::SUCCESS : self::FAILURE;
+    }
+
+    private function safeReportOutputPath(string $path): string
+    {
+        if (strtolower(pathinfo($path, PATHINFO_EXTENSION)) !== 'json') {
+            throw new RuntimeException('--output must be a .json report path.');
+        }
+
+        $baseDir = storage_path('app/private/career-align-reports');
+        if (! is_dir($baseDir) && ! mkdir($baseDir, 0750, true) && ! is_dir($baseDir)) {
+            throw new RuntimeException('Unable to create report output directory.');
+        }
+
+        $baseReal = realpath($baseDir);
+        if ($baseReal === false) {
+            throw new RuntimeException('Unable to resolve report output directory.');
+        }
+
+        $target = str_starts_with($path, DIRECTORY_SEPARATOR)
+            ? $path
+            : $baseReal.DIRECTORY_SEPARATOR.$path;
+        $targetDir = dirname($target);
+        if (! is_dir($targetDir) && ! mkdir($targetDir, 0750, true) && ! is_dir($targetDir)) {
+            throw new RuntimeException('Unable to create report output subdirectory.');
+        }
+
+        $targetDirReal = realpath($targetDir);
+        if ($targetDirReal === false || ! str_starts_with($targetDirReal.DIRECTORY_SEPARATOR, $baseReal.DIRECTORY_SEPARATOR)) {
+            throw new RuntimeException('--output must stay under storage/app/private/career-align-reports.');
+        }
+
+        $basename = basename($target);
+        if ($basename === '' || $basename === '.' || $basename === '..' || preg_match('/^[A-Za-z0-9._-]+\.json$/', $basename) !== 1) {
+            throw new RuntimeException('--output filename is invalid.');
+        }
+
+        $resolved = $targetDirReal.DIRECTORY_SEPARATOR.$basename;
+        if (is_link($resolved)) {
+            throw new RuntimeException('--output must not target a symlink.');
+        }
+
+        return $resolved;
     }
 
     /**

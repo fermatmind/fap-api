@@ -5,11 +5,16 @@ declare(strict_types=1);
 namespace App\Services\Results;
 
 use App\Models\AttemptEmailBinding;
+use App\Support\PiiCipher;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 final class ResultAccessTokenService
 {
+    public function __construct(
+        private readonly PiiCipher $piiCipher,
+    ) {}
+
     /**
      * @return array{token:string,expires_at:string}
      */
@@ -43,24 +48,52 @@ final class ResultAccessTokenService
     /**
      * @return array{token:string,expires_at:string}|null
      */
-    public function issueForActiveAttemptBinding(int $orgId, string $attemptId): ?array
-    {
+    public function issueForActiveAttemptBindingOwner(
+        int $orgId,
+        string $attemptId,
+        ?string $userId,
+        ?string $anonId,
+        ?string $contactEmailHash
+    ): ?array {
         $normalizedAttemptId = trim($attemptId);
         if ($normalizedAttemptId === '') {
             return null;
         }
 
-        $binding = AttemptEmailBinding::query()
+        $normalizedUserId = $this->normalizeOwnerString($userId);
+        $normalizedAnonId = $this->normalizeOwnerString($anonId);
+        $normalizedContactEmailHash = $this->normalizeContactEmailHash($contactEmailHash);
+        if ($normalizedUserId === null && $normalizedAnonId === null && $normalizedContactEmailHash === null) {
+            return null;
+        }
+
+        $bindings = AttemptEmailBinding::query()
             ->where('org_id', max(0, $orgId))
             ->where('attempt_id', $normalizedAttemptId)
             ->where('status', AttemptEmailBinding::STATUS_ACTIVE)
             ->orderByDesc('updated_at')
             ->orderByDesc('created_at')
-            ->first();
+            ->limit(25)
+            ->get();
 
-        return $binding instanceof AttemptEmailBinding
-            ? $this->issueForBinding($binding)
-            : null;
+        foreach ($bindings as $binding) {
+            if (! $binding instanceof AttemptEmailBinding) {
+                continue;
+            }
+
+            if (! $this->bindingMatchesOwner(
+                $binding,
+                $normalizedUserId,
+                $normalizedAnonId,
+                $normalizedContactEmailHash
+            )) {
+                continue;
+            }
+
+            return $this->issueForBinding($binding);
+        }
+
+        return null;
     }
 
     /**
@@ -128,6 +161,72 @@ final class ResultAccessTokenService
     private function ttlMinutes(): int
     {
         return max(1, (int) config('fap.result_access_tokens.ttl_minutes', 30));
+    }
+
+    private function bindingMatchesOwner(
+        AttemptEmailBinding $binding,
+        ?string $userId,
+        ?string $anonId,
+        ?string $contactEmailHash
+    ): bool {
+        $boundUserId = $this->normalizeOwnerString($binding->bound_user_id ?? null);
+        if ($userId !== null && $boundUserId !== null && hash_equals($userId, $boundUserId)) {
+            return true;
+        }
+
+        $boundAnonId = $this->normalizeOwnerString($binding->bound_anon_id ?? null);
+        if ($anonId !== null && $boundAnonId !== null && hash_equals($anonId, $boundAnonId)) {
+            return true;
+        }
+
+        return $contactEmailHash !== null && $this->bindingMatchesContactEmailHash($binding, $contactEmailHash);
+    }
+
+    private function bindingMatchesContactEmailHash(AttemptEmailBinding $binding, string $contactEmailHash): bool
+    {
+        $bindingEmailHash = $this->normalizeContactEmailHash($binding->email_hash ?? null);
+        if ($bindingEmailHash !== null && hash_equals($contactEmailHash, $bindingEmailHash)) {
+            return true;
+        }
+
+        try {
+            $email = $this->piiCipher->decrypt($binding->email_enc ?? null);
+        } catch (\Throwable) {
+            return false;
+        }
+
+        if ($email === null) {
+            return false;
+        }
+
+        $normalizedEmail = $this->piiCipher->normalizeEmail($email);
+        if ($normalizedEmail === '') {
+            return false;
+        }
+
+        return hash_equals($contactEmailHash, hash('sha256', $normalizedEmail));
+    }
+
+    private function normalizeOwnerString(mixed $value): ?string
+    {
+        if (! is_string($value) && ! is_numeric($value)) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+
+        return $normalized !== '' ? $normalized : null;
+    }
+
+    private function normalizeContactEmailHash(mixed $value): ?string
+    {
+        if (! is_string($value) && ! is_numeric($value)) {
+            return null;
+        }
+
+        $normalized = strtolower(trim((string) $value));
+
+        return preg_match('/^[a-f0-9]{64}$/', $normalized) === 1 ? $normalized : null;
     }
 
     private function sign(string $encodedPayload): string

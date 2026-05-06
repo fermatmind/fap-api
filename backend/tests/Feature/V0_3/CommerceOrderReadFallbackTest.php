@@ -384,11 +384,85 @@ final class CommerceOrderReadFallbackTest extends TestCase
         $this->assertIsArray($grant);
         $this->assertSame($attemptId, $grant['attempt_id']);
 
-        $this->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access?access_token='.urlencode($resultAccessToken))
+        $ownerToken = $this->issueAnonToken(self::ANON_OWNER);
+        $this->withHeaders([
+            'Authorization' => 'Bearer '.$ownerToken,
+            'X-Result-Access-Token' => $resultAccessToken,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access')
             ->assertOk()
             ->assertJsonPath('attempt_id', $attemptId)
             ->assertJsonPath('access_state', 'ready')
             ->assertJsonPath('report_state', 'ready');
+    }
+
+    public function test_payment_recovery_pending_mbti_order_does_not_mint_result_access_token(): void
+    {
+        config(['app.frontend_url' => 'https://web.example.test']);
+
+        $orderNo = 'ord_recovery_pending_mbti_'.Str::lower(Str::random(10));
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, 'MBTI', 'zh-CN');
+        $this->insertOrderForOwner($orderNo, $attemptId, 'created');
+        $this->insertResult($attemptId);
+        $this->insertEmailBinding($attemptId, 'owner@example.test');
+
+        $paymentRecoveryToken = app(PaymentRecoveryToken::class)->issue($orderNo);
+        $response = $this->withHeaders([
+            'X-Payment-Recovery-Token' => $paymentRecoveryToken,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('ownership_verified', false)
+            ->assertJsonPath('status', 'pending')
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonMissingPath('exact_result_entry.result_access_token');
+
+        $this->assertStringNotContainsString('access_token=', (string) $response->json('result_url'));
+    }
+
+    public function test_payment_recovery_paid_mbti_order_does_not_mint_result_access_token_for_unmatched_binding_owner(): void
+    {
+        config(['app.frontend_url' => 'https://web.example.test']);
+
+        $orderNo = 'ord_recovery_mismatch_'.Str::lower(Str::random(10));
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, 'MBTI', 'zh-CN');
+        $this->insertOrderForOwner($orderNo, $attemptId, 'fulfilled');
+        DB::table('orders')->where('order_no', $orderNo)->update([
+            'anon_id' => self::ANON_ATTACKER,
+            'updated_at' => now(),
+        ]);
+        $this->insertResult($attemptId);
+        $this->insertActiveGrant($attemptId, $orderNo, self::ANON_ATTACKER, self::ANON_ATTACKER);
+        $this->insertEmailBinding($attemptId, 'owner@example.test', self::ANON_OWNER);
+        $this->insertProjection($attemptId, [
+            'access_state' => 'ready',
+            'report_state' => 'ready',
+            'pdf_state' => 'ready',
+            'reason_code' => 'entitlement_granted',
+            'payload_json' => [
+                'access_level' => 'full',
+                'variant' => 'full',
+                'modules_allowed' => ['core_full', 'career', 'relationships'],
+                'modules_preview' => [],
+            ],
+        ]);
+
+        $paymentRecoveryToken = app(PaymentRecoveryToken::class)->issue($orderNo);
+        $response = $this->withHeaders([
+            'X-Payment-Recovery-Token' => $paymentRecoveryToken,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('ownership_verified', false)
+            ->assertJsonPath('status', 'paid')
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.ready_to_enter', true)
+            ->assertJsonMissingPath('exact_result_entry.result_access_token');
+
+        $this->assertStringNotContainsString('access_token=', (string) $response->json('result_url'));
     }
 
     public function test_expired_payment_recovery_token_is_rejected(): void
@@ -566,7 +640,7 @@ final class CommerceOrderReadFallbackTest extends TestCase
         ]);
     }
 
-    private function insertEmailBinding(string $attemptId, string $email): void
+    private function insertEmailBinding(string $attemptId, string $email, string $boundAnonId = self::ANON_OWNER): void
     {
         $cipher = app(PiiCipher::class);
         $normalizedEmail = $cipher->normalizeEmail($email);
@@ -578,7 +652,7 @@ final class CommerceOrderReadFallbackTest extends TestCase
             'pii_email_key_version' => (string) $cipher->currentKeyVersion(),
             'email_hash' => $cipher->emailHash($normalizedEmail),
             'email_enc' => $cipher->encrypt($normalizedEmail),
-            'bound_anon_id' => self::ANON_OWNER,
+            'bound_anon_id' => $boundAnonId,
             'bound_user_id' => null,
             'status' => 'active',
             'source' => 'result_gate',
