@@ -1,0 +1,63 @@
+{
+  "schema_version": "big5_v2_cms_git_sync_policy.v0_1",
+  "policy": "big5_v2_cms_git_backed_synchronization",
+  "mode": "editorial_governance",
+  "git_backed_source_of_truth": true,
+  "cms_principles": {
+    "draft_only": true,
+    "review_and_approval_only": true,
+    "export_only": true,
+    "runtime_owner": false,
+    "direct_runtime_publish_allowed": false
+  },
+  "required_linkage": {
+    "release_snapshot": "required_before_import",
+    "import_gate": "required_before_runtime_gate",
+    "runtime_gate": "required_before_exposure",
+    "preview": "version_pinned_and_isolated",
+    "rollback": "release_snapshot_revert"
+  },
+  "governance_boundaries": {
+    "cms_may_manage": [
+      "editorial_drafts",
+      "review_decisions",
+      "approval_audits",
+      "preview_requests",
+      "release_candidate_exports",
+      "rollback_audits"
+    ],
+    "cms_must_not_manage": [
+      "runtime_payload_ownership",
+      "release_snapshot_mutation",
+      "import_gate_override",
+      "runtime_gate_override",
+      "scoring_logic",
+      "production_rollout_enablement"
+    ]
+  },
+  "linked_packages": {
+    "asset_index": "backend/app/Services/BigFive/Cms/BigFiveV2EditorialAssetIndex.php",
+    "draft_review_workflow": "backend/app/Services/BigFive/Cms/BigFiveV2EditorialWorkflow.php",
+    "approval_flow": "backend/app/Services/BigFive/Cms/BigFiveV2EditorialApprovalFlow.php",
+    "preview_service": "backend/app/Services/BigFive/Cms/BigFiveV2EditorialPreviewService.php",
+    "release_linkage": "backend/content_assets/big5/result_page_v2/governance/cms_release_linkage_v0_1/big5_v2_cms_release_linkage_policy_v0_1.json",
+    "rollback_audit": "backend/content_assets/big5/result_page_v2/qa/cms_rollback_audit_v0_1/big5_v2_cms_rollback_audit_policy_v0_1.json"
+  },
+  "no_go_conditions": [
+    "cms_direct_runtime_publish",
+    "cms_runtime_payload_mutation",
+    "release_snapshot_bypass",
+    "import_gate_bypass",
+    "runtime_gate_bypass",
+    "preview_runtime_mismatch",
+    "runtime_payload_drift",
+    "production_rollout_enablement",
+    "dynamic_norm_engine_attachment",
+    "content_pack_modification"
+  ],
+  "final_verdict": {
+    "editorial_governance_layer": "go",
+    "cms_runtime_ownership": "no_go",
+    "production_rollout": "no_go"
+  }
+}

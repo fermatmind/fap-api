@@ -1,0 +1,22 @@
+{
+  "schema_version": "big5_v2_cms_git_sync_go_no_go.v0_1",
+  "editorial_lifecycle_readiness": "go",
+  "rbac_readiness": "go",
+  "preview_readiness": "go",
+  "release_linkage_readiness": "go",
+  "rollback_audit_readiness": "go",
+  "git_backed_coexistence_verdict": "go",
+  "runtime_isolation_verdict": "go",
+  "cms_rollout_verdict": "go_for_editorial_governance_only",
+  "production_rollout_verdict": "no_go",
+  "cms_runtime_ownership": false,
+  "direct_runtime_publish_allowed": false,
+  "dynamic_norm_engine_attachment": false,
+  "required_human_controls": [
+    "release_candidate_review",
+    "manual_release_approval",
+    "import_gate_validation",
+    "runtime_gate_validation",
+    "release_based_rollback_approval"
+  ]
+}
