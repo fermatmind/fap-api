@@ -199,6 +199,9 @@ final class CareerExportFullReleaseLedger extends Command
             'duplicate_alias_decisions' => 0,
             'duplicate_blocked_non_public' => 0,
             'duplicate_canonical_promotions' => 0,
+            'broad_group_blocked_non_public' => 0,
+            'broad_group_family_hub_decisions' => 0,
+            'broad_group_canonical_promotions' => 0,
         ];
 
         foreach ($rows as $row) {
@@ -247,6 +250,15 @@ final class CareerExportFullReleaseLedger extends Command
             }
             if ($currentStatus === 'duplicate_identity_hold' && ! (bool) $ledgerRow['public_eligible']) {
                 $counts['duplicate_blocked_non_public']++;
+            }
+            if ($currentStatus === 'broad_group_hold' && $resolutionType === 'public_family_hub') {
+                $counts['broad_group_family_hub_decisions']++;
+            }
+            if ($currentStatus === 'broad_group_hold' && $resolutionType === 'public_canonical_job') {
+                $counts['broad_group_canonical_promotions']++;
+            }
+            if ($currentStatus === 'broad_group_hold' && $resolutionType === 'blocked_until_governance_approval') {
+                $counts['broad_group_blocked_non_public']++;
             }
         }
 
@@ -357,6 +369,7 @@ final class CareerExportFullReleaseLedger extends Command
             ],
             'schema_policy' => $decision['schema_policy']
                 ?? ($publicEligible ? 'career_job_schema_existing_release_gate' : 'requires_public_type_policy_before_public_schema'),
+            'trust_manifest_required' => (bool) ($decision['trust_manifest_required'] ?? false),
             'boundary_disclaimer_required' => $currentStatus === 'CN_proxy_hold',
             'rollback_condition' => $publicEligible ? 'revert_public_resolution_ledger_decision' : 'remove_or_revert_governance_decision_before_publication',
         ];
@@ -502,6 +515,21 @@ final class CareerExportFullReleaseLedger extends Command
                 'public_resolution_type' => 'keep_non_public_with_policy',
                 'indexability' => 'not_public',
                 'public_eligible' => false,
+            ];
+        }
+
+        if ($currentStatus === 'broad_group_hold') {
+            return [
+                'governance_decision' => 'blocked_until_broad_group_policy',
+                'public_resolution_type' => 'blocked_until_governance_approval',
+                'indexability' => 'not_public',
+                'public_eligible' => false,
+                'sitemap_eligible' => false,
+                'llms_eligible' => false,
+                'llms_full_eligible' => false,
+                'source_authority_model' => 'broad_group_policy_required_before_publication',
+                'schema_policy' => 'broad_group_family_or_split_policy_required_before_public_schema',
+                'trust_manifest_required' => true,
             ];
         }
 
