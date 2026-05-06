@@ -1,0 +1,18 @@
+{
+  "schema_version": "big5_v2_norm_aggregation_dry_run_report_v0_1",
+  "mode": "norm_aggregation_dry_run_report",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "dynamic_norm_engine_attached": false,
+  "public_percentile_display_enabled": false,
+  "dry_run_only": true,
+  "append_only_source_required": true,
+  "quality_exclusion_required": true,
+  "small_cell_suppression_required": true,
+  "mean_sd_internal_computation": "dry_run_only",
+  "public_norm_values_published": false,
+  "runtime_attachment": "disabled",
+  "final_decision": "NO-GO_PUBLIC_DISPLAY"
+}
