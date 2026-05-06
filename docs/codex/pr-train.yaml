@@ -141,3 +141,26 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: PR-3
+    repo: fap-api
+    branch: codex/low-api-cms-career-lifecycle-tenant
+    title: "PR-3 fap-api CMS / Career lifecycle and tenant-scoped services"
+    scope:
+      - Career release gate returns success for blocked pages.
+      - Archived CMS content can be republished publicly.
+      - Personality profile child tables lack tenant scoping.
+      - CMS article services bypass tenant scope for writes.
+    do_not:
+      - Change order, payment, or benefit ownership behavior.
+      - Change privacy logs, DSAR, or key rotation behavior.
+      - Change file import, restore, replay, CI, or deploy behavior.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - focused phpunit for career release gate, article lifecycle, article tenant writes, and personality tenant scoping
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

@@ -240,6 +240,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_cms_lifecycle_tenant_scope_changes(): void
+    {
+        $changed = [
+            'backend/app/Models/Article.php',
+            'backend/app/Models/PersonalityProfileSection.php',
+            'backend/app/Models/PersonalityProfileSeoMeta.php',
+            'backend/app/Models/PersonalityProfileVariant.php',
+            'backend/app/Models/PersonalityProfileVariantSection.php',
+            'backend/app/Models/PersonalityProfileVariantSeoMeta.php',
+            'backend/app/Services/Cms/ArticlePublishService.php',
+            'backend/app/Services/Cms/ArticleService.php',
+            'backend/database/migrations/2026_05_06_010000_add_org_scope_to_personality_profile_children.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_attempt_email_binding_foundation_changes(): void
     {
         $changed = [
@@ -560,6 +577,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCmsLifecycleTenantScopeFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerDisplaySurfaceFile($file)) {
                 continue;
             }
@@ -642,6 +663,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Internal/Commerce/PaymentWebhookHandlerCore.php',
             'backend/app/Services/Commerce/Checkout/AlipayCheckoutService.php',
             'backend/app/Services/Commerce/OrderManager.php',
+        ], true);
+    }
+
+    private function isCmsLifecycleTenantScopeFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Models/Article.php',
+            'backend/app/Models/PersonalityProfileSection.php',
+            'backend/app/Models/PersonalityProfileSeoMeta.php',
+            'backend/app/Models/PersonalityProfileVariant.php',
+            'backend/app/Models/PersonalityProfileVariantSection.php',
+            'backend/app/Models/PersonalityProfileVariantSeoMeta.php',
+            'backend/app/Services/Cms/ArticlePublishService.php',
+            'backend/app/Services/Cms/ArticleService.php',
+            'backend/database/migrations/2026_05_06_010000_add_org_scope_to_personality_profile_children.php',
         ], true);
     }
 

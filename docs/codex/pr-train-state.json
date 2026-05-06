@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-06T01:39:00+08:00",
+  "updated_at": "2026-05-06T12:10:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -233,8 +233,8 @@
     "PR-2": {
       "repo": "fap-api",
       "branch": "codex/low-api-order-tenant-ownership",
-      "status": "pr_open",
-      "commit_sha": "801af38d828802fee1f3e963092b8e4cd2bf3e96",
+      "status": "merged",
+      "commit_sha": "af122b809623642c8a1afaa3357ef59113bc1cb0",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1207",
       "checks": {
         "scope_validation": {
@@ -309,6 +309,96 @@
           "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO), database fap_api.",
           "why_external_to_current_pr": "PR-2 adds no migrations; the sqlite migration path and full MBTI CI sqlite baseline both pass. The failure occurs before schema execution while connecting to local MySQL.",
           "impact_on_current_pr": "No impact on PR-2 scope validation or required GitHub checks; record as sidecar per /goal protocol.",
+          "owner": "unknown",
+          "follow_up_recommendation": "Fix local .env MySQL credentials or document the required local DB setup for default migrate validation."
+        }
+      ],
+      "failure_reason": null,
+      "merged_at": "2026-05-06T03:46:53Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-3": {
+      "repo": "fap-api",
+      "branch": "codex/low-api-cms-career-lifecycle-tenant",
+      "status": "pr_open",
+      "depends_on": [
+        "PR-2"
+      ],
+      "commit_sha": "2be933562c3a513bbc3441676b04c449ab11050c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1211",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR-2 merged at af122b809623642c8a1afaa3357ef59113bc1cb0 and local main was aligned with origin/main before creating PR-3 branch."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Career release gate, Article lifecycle/tenant writes, Personality child tenant scope migration/models, focused tests, and PR train metadata."
+        },
+        "php_lint": {
+          "status": "pass",
+          "command": "php -l backend/app/Console/Commands/CareerValidateReleaseGate.php && php -l backend/app/Models/Article.php && php -l backend/app/Models/PersonalityProfileSection.php && php -l backend/app/Models/PersonalityProfileSeoMeta.php && php -l backend/app/Models/PersonalityProfileVariant.php && php -l backend/app/Models/PersonalityProfileVariantSection.php && php -l backend/app/Models/PersonalityProfileVariantSeoMeta.php && php -l backend/app/Services/Cms/ArticlePublishService.php && php -l backend/app/Services/Cms/ArticleService.php && php -l backend/database/migrations/2026_05_06_010000_add_org_scope_to_personality_profile_children.php && php -l backend/tests/Feature/Console/CareerValidateReleaseGateCommandTest.php && php -l backend/tests/Feature/CareerCms/ArticleLifecycleTenantSecurityTest.php && php -l backend/tests/Feature/PersonalityCms/PersonalityTenantScopeTest.php"
+        },
+        "pint": {
+          "status": "pass",
+          "command": "./vendor/bin/pint app/Console/Commands/CareerValidateReleaseGate.php app/Models/Article.php app/Services/Cms/ArticlePublishService.php app/Services/Cms/ArticleService.php app/Models/PersonalityProfileSection.php app/Models/PersonalityProfileSeoMeta.php app/Models/PersonalityProfileVariant.php app/Models/PersonalityProfileVariantSection.php app/Models/PersonalityProfileVariantSeoMeta.php database/migrations/2026_05_06_010000_add_org_scope_to_personality_profile_children.php tests/Feature/Console/CareerValidateReleaseGateCommandTest.php tests/Feature/CareerCms/ArticleLifecycleTenantSecurityTest.php tests/Feature/PersonalityCms/PersonalityTenantScopeTest.php"
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list"
+        },
+        "default_migrate": {
+          "status": "external_blocker",
+          "command": "php artisan migrate",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) against local fap_api MySQL."
+        },
+        "sqlite_migrate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force",
+          "evidence": "2026_05_06_010000_add_org_scope_to_personality_profile_children completed."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerValidateReleaseGateCommandTest.php tests/Feature/CareerCms/ArticleLifecycleTenantSecurityTest.php tests/Feature/PersonalityCms/PersonalityTenantScopeTest.php",
+          "evidence": "7 tests passed, 29 assertions."
+        },
+        "public_personality_regression": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/CareerRecommendationPublicApiTest.php tests/Feature/PersonalityCms/PersonalityVariantAuthorityTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Feature/V0_3/ShareSummaryContractTest.php",
+          "evidence": "15 tests passed, 451 assertions."
+        },
+        "mbti_ci": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full script exited 0; personality full-32 authority gate, migration safety gates, OpenAPI diff gate, order security gate, and webhook/attempt regression gates passed."
+        },
+        "github_required_checks": {
+          "status": "failed_then_fix_pushed",
+          "evidence": "PR #1211 verify-mbti-v2 and verify-mbti-legacy failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier did not allowlist PR-3 CMS lifecycle/personality tenant-scope runtime files. Added a precise classifier allowlist and local focused runtime_freeze_classifier tests pass."
+        },
+        "github_ci_fix_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_freeze_classifier",
+          "evidence": "16 tests passed, 16 assertions."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "ledger_json": {
+          "status": "pass",
+          "command": "jq empty docs/codex/pr-train-state.json"
+        }
+      },
+      "sidecar_issues": [
+        {
+          "title": "Local default MySQL credentials block php artisan migrate",
+          "repo": "fap-api",
+          "affected_command_or_check": "php artisan migrate",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO), database fap_api.",
+          "why_external_to_current_pr": "PR-3 sqlite migrations and full CI sqlite baseline both pass, including the new personality child org scope migration. The failure occurs before schema execution while connecting to local MySQL.",
+          "impact_on_current_pr": "No impact on PR-3 scope validation or required GitHub checks; record as sidecar per /goal protocol.",
           "owner": "unknown",
           "follow_up_recommendation": "Fix local .env MySQL credentials or document the required local DB setup for default migrate validation."
         }

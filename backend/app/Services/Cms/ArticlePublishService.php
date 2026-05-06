@@ -74,6 +74,17 @@ final class ArticlePublishService
 
     private function assertPublishable(Article $article): void
     {
+        if (in_array((string) $article->lifecycle_state, [
+            Article::LIFECYCLE_ARCHIVED,
+            Article::LIFECYCLE_SOFT_DELETED,
+        ], true)) {
+            throw new InvalidArgumentException('archived or soft-deleted articles cannot be published.');
+        }
+
+        if (method_exists($article, 'trashed') && $article->trashed()) {
+            throw new InvalidArgumentException('soft-deleted articles cannot be published.');
+        }
+
         if (trim((string) $article->slug) === '') {
             throw new InvalidArgumentException('slug must exist before publish.');
         }

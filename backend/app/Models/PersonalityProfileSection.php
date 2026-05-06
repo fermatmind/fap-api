@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PersonalityProfileSection extends Model
 {
-    use HasFactory;
+    use HasFactory, HasOrgScope;
 
     public const SECTION_KEYS = [
         'hero',
@@ -42,6 +43,7 @@ class PersonalityProfileSection extends Model
     protected $table = 'personality_profile_sections';
 
     protected $fillable = [
+        'org_id',
         'profile_id',
         'section_key',
         'title',
@@ -54,6 +56,7 @@ class PersonalityProfileSection extends Model
     ];
 
     protected $casts = [
+        'org_id' => 'integer',
         'profile_id' => 'integer',
         'payload_json' => 'array',
         'sort_order' => 'integer',
@@ -61,6 +64,28 @@ class PersonalityProfileSection extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    protected static function booted(): void
+    {
+        static::saving(function (self $section): void {
+            if ((int) ($section->org_id ?? 0) > 0) {
+                return;
+            }
+
+            $profile = PersonalityProfile::query()
+                ->withoutGlobalScopes()
+                ->find((int) $section->profile_id);
+
+            if ($profile instanceof PersonalityProfile) {
+                $section->org_id = (int) $profile->org_id;
+            }
+        });
+    }
+
+    public static function publicContextOrgId(): ?int
+    {
+        return 0;
+    }
 
     public function profile(): BelongsTo
     {

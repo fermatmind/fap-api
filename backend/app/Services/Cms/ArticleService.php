@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\ArticleRevision;
 use App\Models\ArticleTag;
+use App\Support\OrgContext;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -99,6 +100,7 @@ final class ArticleService
             }
 
             $orgId = (int) $article->org_id;
+            $this->assertWritableInCurrentOrgContext($orgId);
             $nextLocale = array_key_exists('locale', $fields)
                 ? $this->normalizeLocale((string) $fields['locale'])
                 : (string) $article->locale;
@@ -182,6 +184,19 @@ final class ArticleService
 
             return $article->fresh() ?? $article;
         });
+    }
+
+    private function assertWritableInCurrentOrgContext(int $articleOrgId): void
+    {
+        /** @var OrgContext $orgContext */
+        $orgContext = app(OrgContext::class);
+        if (! $orgContext->isTenantContext()) {
+            return;
+        }
+
+        if ($orgContext->requirePositiveOrgId() !== $articleOrgId) {
+            throw new InvalidArgumentException('article does not belong to the current org.');
+        }
     }
 
     private function normalizeLocale(string $locale): string

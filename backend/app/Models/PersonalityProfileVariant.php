@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,11 +14,12 @@ use InvalidArgumentException;
 
 class PersonalityProfileVariant extends Model
 {
-    use HasFactory;
+    use HasFactory, HasOrgScope;
 
     protected $table = 'personality_profile_variants';
 
     protected $fillable = [
+        'org_id',
         'personality_profile_id',
         'canonical_type_code',
         'variant_code',
@@ -34,6 +36,7 @@ class PersonalityProfileVariant extends Model
     ];
 
     protected $casts = [
+        'org_id' => 'integer',
         'personality_profile_id' => 'integer',
         'keywords_json' => 'array',
         'is_published' => 'boolean',
@@ -45,6 +48,16 @@ class PersonalityProfileVariant extends Model
     protected static function booted(): void
     {
         static::saving(function (self $variant): void {
+            if ((int) ($variant->org_id ?? 0) <= 0) {
+                $profile = PersonalityProfile::query()
+                    ->withoutGlobalScopes()
+                    ->find((int) $variant->personality_profile_id);
+
+                if ($profile instanceof PersonalityProfile) {
+                    $variant->org_id = (int) $profile->org_id;
+                }
+            }
+
             $variant->canonical_type_code = strtoupper(trim((string) $variant->canonical_type_code));
             $variant->variant_code = strtoupper(trim((string) $variant->variant_code));
             $variant->runtime_type_code = strtoupper(trim((string) $variant->runtime_type_code));
@@ -76,6 +89,11 @@ class PersonalityProfileVariant extends Model
                 throw new InvalidArgumentException('Personality profile variant_code must match the runtime_type_code suffix.');
             }
         });
+    }
+
+    public static function publicContextOrgId(): ?int
+    {
+        return 0;
     }
 
     public function profile(): BelongsTo
