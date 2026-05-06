@@ -261,6 +261,69 @@ final class SecurityGuardrailsTest extends TestCase
         $this->assertMatchesRegularExpression('/allow_unsigned_without_secret/', $source);
     }
 
+    public function test_ci_deploy_supply_chain_uses_pinned_trust_material(): void
+    {
+        $repoRoot = dirname(base_path());
+        $deploy = file_get_contents($repoRoot.'/.github/workflows/deploy.yml');
+        $this->assertIsString($deploy);
+
+        $this->assertDoesNotMatchRegularExpression('/ssh-keyscan/', $deploy);
+        $this->assertMatchesRegularExpression('/SSH_KNOWN_HOSTS/', $deploy);
+        $this->assertMatchesRegularExpression('/DEPLOYER_SHA256/', $deploy);
+        $this->assertMatchesRegularExpression('/sha256sum -c -/', $deploy);
+        $this->assertLessThan(
+            strpos($deploy, 'webfactory/ssh-agent'),
+            strpos($deploy, 'Install Deployer (pinned)')
+        );
+    }
+
+    public function test_compose_defaults_do_not_publish_open_unauthenticated_datastores(): void
+    {
+        $repoRoot = dirname(base_path());
+        $compose = file_get_contents($repoRoot.'/backend/docker-compose.yml');
+        $this->assertIsString($compose);
+
+        $this->assertDoesNotMatchRegularExpression('/MYSQL_ROOT_PASSWORD:\s*root/', $compose);
+        $this->assertDoesNotMatchRegularExpression('/MYSQL_PASSWORD:\s*fap/', $compose);
+        $this->assertDoesNotMatchRegularExpression('/"\d+:\d+"/', $compose);
+        $this->assertMatchesRegularExpression('/127\.0\.0\.1:\$\{FAP_DOCKER_MYSQL_PORT:-3306\}:3306/', $compose);
+        $this->assertMatchesRegularExpression('/127\.0\.0\.1:\$\{FAP_DOCKER_REDIS_PORT:-6379\}:6379/', $compose);
+        $this->assertMatchesRegularExpression('/--requirepass/', $compose);
+    }
+
+    public function test_ci_and_staging_do_not_expose_auth_bypass_surfaces(): void
+    {
+        $routes = file_get_contents(base_path('routes/api.php'));
+        $otp = file_get_contents(base_path('app/Services/Auth/PhoneOtpService.php'));
+        $wx = file_get_contents(base_path('app/Http/Controllers/API/V0_3/AuthWxPhoneController.php'));
+        $services = file_get_contents(base_path('config/services.php'));
+
+        $this->assertIsString($routes);
+        $this->assertIsString($otp);
+        $this->assertIsString($wx);
+        $this->assertIsString($services);
+
+        $this->assertDoesNotMatchRegularExpression('/environment\s*\(\s*\[[^\]]*[\'"]ci[\'"][^\]]*\]\s*\)/', $routes);
+        $this->assertDoesNotMatchRegularExpression('/environment\s*\(\s*\[[^\]]*[\'"]ci[\'"][^\]]*\]\s*\)/', $otp);
+        $this->assertDoesNotMatchRegularExpression('/environment\s*\(\s*\[[^\]]*[\'"]ci[\'"][^\]]*\]\s*\)/', $wx);
+        $this->assertStringContainsString("env('BILLING_WEBHOOK_SECRET_OPTIONAL_ENVS', 'local,testing')", $services);
+    }
+
+    public function test_release_pack_keeps_hygiene_and_artifact_clean_gates(): void
+    {
+        $repoRoot = dirname(base_path());
+        $releasePack = file_get_contents($repoRoot.'/backend/scripts/release_pack.sh');
+        $releaseHygiene = file_get_contents($repoRoot.'/scripts/release_hygiene_gate.sh');
+        $this->assertIsString($releasePack);
+        $this->assertIsString($releaseHygiene);
+
+        $this->assertStringContainsString('scripts/security/assert_artifact_clean.sh', $releasePack);
+        $this->assertStringContainsString('scripts/release_hygiene_gate.sh', $releasePack);
+        $this->assertStringContainsString('storage/framework/cache', $releaseHygiene);
+        $this->assertStringContainsString('storage/app/private/artifacts', $releaseHygiene);
+        $this->assertStringContainsString('storage/app/private/packs_v2_materialized', $releaseHygiene);
+    }
+
     public function test_fm_token_middlewares_check_revoked_and_expired_tokens(): void
     {
         $missing = [];

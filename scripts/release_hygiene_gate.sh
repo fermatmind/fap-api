@@ -86,12 +86,22 @@ done
 # 必须不存在：runtime/产物目录
 for p in \
   "${TARGET}/backend/storage/logs" \
+  "${TARGET}/backend/storage/framework/cache" \
+  "${TARGET}/backend/storage/framework/sessions" \
+  "${TARGET}/backend/storage/framework/views" \
   "${TARGET}/backend/artifacts" \
   "${TARGET}/backend/storage/app/private/reports" \
+  "${TARGET}/backend/storage/app/private/artifacts" \
+  "${TARGET}/backend/storage/app/private/packs_v2" \
+  "${TARGET}/backend/storage/app/private/packs_v2_materialized" \
+  "${TARGET}/backend/storage/app/content_packs_v2" \
+  "${TARGET}/backend/storage/app/private/prune_plans" \
   "${TARGET}/backend/storage/app/archives"
 do
   [[ -e "$p" ]] && fail "forbidden_runtime_dir" "$(to_rel "$p")"
 done
+
+bash "${SCRIPT_DIR}/security/assert_artifact_clean.sh" --mode artifact --target "${TARGET}" || fail "artifact_clean_gate_failed" "./backend/storage"
 
 # 必须不存在：sqlite
 while IFS= read -r -d '' hit; do

@@ -4,23 +4,25 @@ namespace Tests\Feature\V0_3;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class BillingWebhookMisconfiguredSecretTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_missing_billing_secret_in_non_optional_env_returns_400_invalid_signature(): void
+    #[DataProvider('nonOptionalEnvironmentProvider')]
+    public function test_missing_billing_secret_in_non_optional_env_returns_400_invalid_signature(string $environment): void
     {
         /** @var Application $app */
         $app = $this->app;
-        $app->detectEnvironment(static fn (): string => 'production');
-        $app->instance('env', 'production');
+        $app->detectEnvironment(static fn (): string => $environment);
+        $app->instance('env', $environment);
 
         config([
-            'app.env' => 'production',
+            'app.env' => $environment,
             'services.billing.webhook_secret' => '',
-            'services.billing.webhook_secret_optional_envs' => ['local', 'testing', 'ci'],
+            'services.billing.webhook_secret_optional_envs' => ['local', 'testing'],
             'services.billing.allow_legacy_signature' => false,
             'services.billing.webhook_tolerance_seconds' => 300,
         ]);
@@ -44,5 +46,17 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
         $response->assertStatus(400);
         $response->assertJsonPath('ok', false);
         $response->assertJsonPath('error_code', 'INVALID_SIGNATURE');
+    }
+
+    /**
+     * @return array<string, array{0:string}>
+     */
+    public static function nonOptionalEnvironmentProvider(): array
+    {
+        return [
+            'ci' => ['ci'],
+            'staging' => ['staging'],
+            'production' => ['production'],
+        ];
     }
 }

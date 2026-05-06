@@ -147,7 +147,7 @@ Route::prefix('v0.3')->middleware([
         Route::post('/auth/guest', AuthGuestV03Controller::class)
             ->middleware(\App\Http\Middleware\ResolveAnonId::class);
 
-        if (app()->environment(['local', 'testing', 'ci'])) {
+        if (app()->environment(['local', 'testing'])) {
             Route::post('/auth/wx_phone', AuthWxPhoneV03Controller::class);
         } else {
             Route::post('/auth/wx_phone', static function () {

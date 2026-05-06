@@ -57,6 +57,7 @@ jobs:
     env:
       TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
       DEPLOYER_VERSION: "7.5.12"
+      DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
 
       # ====== production ======
       DEPLOY_USER_PROD: "ubuntu"
@@ -195,6 +196,14 @@ jobs:
           set -euo pipefail
           bash ./backend/scripts/ci_verify_mbti.sh
 
+      - name: Install Deployer (pinned)
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/dep.phar "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
+          printf '%s  /tmp/dep.phar\n' "$DEPLOYER_SHA256" | sha256sum -c -
+          php /tmp/dep.phar --version
+
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
@@ -206,12 +215,15 @@ jobs:
           set -euo pipefail
           ssh-add -l
 
-      - name: Add target host to known_hosts
+      - name: Install pinned SSH known_hosts
         shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
           set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
           mkdir -p ~/.ssh
-          ssh-keyscan -p "$DEPLOY_PORT" -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
       - name: SSH preflight (whoami)
@@ -227,13 +239,6 @@ jobs:
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
-
-      - name: Install Deployer (pinned)
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl -fsSL -o /tmp/dep.phar "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
-          php /tmp/dep.phar --version
 
       - name: Deploy (Deployer)
         shell: bash

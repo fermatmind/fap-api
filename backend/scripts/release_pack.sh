@@ -101,6 +101,9 @@ if [[ -s "$HITS_FILE" ]]; then
   exit 1
 fi
 
+bash "${ROOT}/scripts/security/assert_artifact_clean.sh" --mode artifact --target "${STAGING_DIR}"
+bash "${ROOT}/scripts/release_hygiene_gate.sh" "${STAGING_DIR}"
+
 PACKAGE_REQUIRED_FILES=(
   backend/artisan
   backend/bootstrap/app.php
