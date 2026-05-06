@@ -98,6 +98,72 @@ final class CareerExportFullReleaseLedgerCommandTest extends TestCase
         $this->assertFalse((bool) ($softwareDevelopers['llms_eligible'] ?? true));
     }
 
+    public function test_command_can_record_duplicate_identity_alias_decisions_without_canonical_promotions(): void
+    {
+        $timestamp = 'career-duplicate-identity-ledger-test-export';
+        $planPath = $this->writePublicResolutionPlanFixture();
+        $scanPath = $this->writeDuplicateIdentityScanFixture();
+
+        $exitCode = Artisan::call('career:export-full-release-ledger', [
+            '--timestamp' => $timestamp,
+            '--public-resolution-plan' => $planPath,
+            '--duplicate-identity-scan' => $scanPath,
+            '--json' => true,
+        ]);
+
+        $payload = json_decode(trim((string) Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertIsArray($payload);
+
+        $artifactPath = $payload['artifacts'][CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
+        $this->assertIsString($artifactPath);
+        $this->assertFileExists($artifactPath);
+
+        $ledger = json_decode((string) file_get_contents($artifactPath), true);
+        $this->assertIsArray($ledger);
+
+        $publicResolution = (array) data_get($ledger, 'public_resolution');
+        $this->assertSame(2786, (int) data_get($publicResolution, 'counts.total_rows'));
+        $this->assertSame(793, (int) data_get($publicResolution, 'counts.public_canonical_job'));
+        $this->assertSame(87, (int) data_get($publicResolution, 'counts.public_alias_redirect'));
+        $this->assertSame(87, (int) data_get($publicResolution, 'counts.duplicate_alias_decisions'));
+        $this->assertSame(167, (int) data_get($publicResolution, 'counts.duplicate_blocked_non_public'));
+        $this->assertSame(0, (int) data_get($publicResolution, 'counts.duplicate_canonical_promotions'));
+
+        $rows = collect((array) data_get($publicResolution, 'rows'));
+        $aliasRows = $rows->where('current_status', 'duplicate_identity_hold')
+            ->where('public_resolution_type', 'public_alias_redirect')
+            ->values();
+        $blockedRows = $rows->where('current_status', 'duplicate_identity_hold')
+            ->where('public_resolution_type', 'blocked_until_governance_approval')
+            ->values();
+
+        $this->assertCount(87, $aliasRows);
+        $this->assertCount(167, $blockedRows);
+        $this->assertSame([], $rows->where('current_status', 'duplicate_identity_hold')
+            ->where('public_resolution_type', 'public_canonical_job')
+            ->values()
+            ->all());
+
+        foreach ($aliasRows as $row) {
+            $target = (string) ($row['target_canonical_slug'] ?? '');
+            $this->assertNotSame('', $target);
+            $this->assertStringStartsWith('canonical-', $target);
+            $this->assertSame('/career/jobs/'.$target, $row['redirect_target'] ?? null);
+            $this->assertTrue((bool) ($row['public_eligible'] ?? false));
+            $this->assertFalse((bool) ($row['sitemap_eligible'] ?? true));
+            $this->assertFalse((bool) ($row['llms_eligible'] ?? true));
+            $this->assertFalse((bool) ($row['llms_full_eligible'] ?? true));
+        }
+
+        foreach ($blockedRows as $row) {
+            $this->assertFalse((bool) ($row['public_eligible'] ?? true));
+            $this->assertNull($row['target_canonical_slug'] ?? null);
+            $this->assertNull($row['redirect_target'] ?? null);
+        }
+    }
+
     private function writePublicResolutionPlanFixture(): string
     {
         $path = storage_path('framework/testing/career-public-resolution-command-plan.json');
@@ -110,6 +176,45 @@ final class CareerExportFullReleaseLedgerCommandTest extends TestCase
                 'rows' => 2786,
             ],
             'rows' => $this->publicResolutionFixtureRows(),
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        return $path;
+    }
+
+    private function writeDuplicateIdentityScanFixture(): string
+    {
+        $path = storage_path('framework/testing/career-duplicate-identity-scan.json');
+        File::ensureDirectoryExists(dirname($path));
+
+        $rows = [];
+        for ($index = 1; $index <= 254; $index++) {
+            $sourceSlug = sprintf('duplicate-%04d', $index);
+            $targetSlug = sprintf('canonical-%04d', $index);
+            $highConfidence = $index <= 87;
+            $rows[] = [
+                'source_slug' => $sourceSlug,
+                'current_status' => 'duplicate_identity_hold',
+                'resolution_class' => $highConfidence ? 'high_confidence_alias_redirect' : 'blocked_until_identity_resolution',
+                'confidence' => $highConfidence ? 'high' : 'none',
+                'possible_canonical_targets' => $highConfidence ? [[
+                    'canonical_slug' => $targetSlug,
+                    'planner_status' => 'already_imported_validated',
+                    'evidence' => ['same_o_net_code', 'same_soc_code'],
+                ]] : [],
+                'blockers' => $highConfidence ? [] : ['no_existing_793_canonical_target_found_by_O_NET_SOC_title_or_strong_slug_evidence'],
+            ];
+        }
+
+        File::put($path, (string) json_encode([
+            'scan' => 'complete',
+            'duplicate_scope' => [
+                'count' => 254,
+                'rows' => $rows,
+            ],
+            'resolution_summary' => [
+                'high_confidence_alias_redirect' => 87,
+                'blocked_until_identity_resolution' => 167,
+            ],
         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
         return $path;
