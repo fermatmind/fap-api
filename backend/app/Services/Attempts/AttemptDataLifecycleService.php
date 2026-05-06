@@ -278,6 +278,13 @@ final class AttemptDataLifecycleService
                 ->delete();
         }
 
+        if (SchemaBaseline::hasTable('attempt_email_bindings')) {
+            $counts['attempt_email_bindings_deleted'] = DB::table('attempt_email_bindings')
+                ->where('org_id', $orgId)
+                ->where('attempt_id', $attemptId)
+                ->delete();
+        }
+
         $counts['results_deleted'] = DB::table('results')
             ->where('org_id', $orgId)
             ->where('attempt_id', $attemptId)
@@ -404,6 +411,7 @@ final class AttemptDataLifecycleService
             'report_jobs_deleted' => 0,
             'attempt_answer_sets_deleted' => 0,
             'attempt_answer_rows_deleted' => 0,
+            'attempt_email_bindings_deleted' => 0,
             'benefit_grants_revoked' => 0,
             'attempts_redacted' => 0,
         ];

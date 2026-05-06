@@ -268,14 +268,11 @@ final class CareerRecommendationDetailBundleBuilder
             (string) ($snapshot->indexState->index_state ?? ''),
             $indexEligible,
         );
-        if (! in_array($publicIndexState, [IndexStateValue::INDEXABLE, IndexStateValue::TRUST_LIMITED], true)) {
+        if ($publicIndexState !== IndexStateValue::INDEXABLE || ! $indexEligible) {
             return false;
         }
 
         $reviewerStatus = strtolower(trim((string) ($snapshot->trustManifest->reviewer_status ?? '')));
-        if ($publicIndexState === IndexStateValue::TRUST_LIMITED) {
-            return isset(self::COMPACT_REVIEW_STATUSES[$reviewerStatus]);
-        }
 
         return isset(self::PUBLIC_REVIEW_STATUSES[$reviewerStatus]);
     }

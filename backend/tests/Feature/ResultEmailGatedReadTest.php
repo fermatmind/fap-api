@@ -88,15 +88,19 @@ final class ResultEmailGatedReadTest extends TestCase
         $response->assertJsonPath('attempt_id', $attemptId);
     }
 
-    public function test_result_access_token_grants_read_only_result_access_without_actor(): void
+    public function test_result_access_token_grants_read_only_result_access_for_matching_actor(): void
     {
         config()->set('fap.features.email_first_result_access', true);
 
         $attemptId = $this->seedAttemptWithResult('anon_email_gate_token', 'MBTI');
         $bindingId = $this->seedBinding($attemptId, 'owner@example.test', 'anon_email_gate_token');
         $token = $this->issueResultAccessToken($bindingId, $attemptId);
+        $actorToken = $this->seedFmToken('anon_email_gate_token');
 
-        $response = $this->getJson("/api/v0.3/attempts/{$attemptId}/result?access_token=".rawurlencode($token));
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$actorToken}",
+            'X-Result-Access-Token' => $token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
 
         $response->assertOk();
         $response->assertJsonPath('ok', true);
@@ -104,15 +108,19 @@ final class ResultEmailGatedReadTest extends TestCase
         $response->assertJsonPath('type_code', 'INTJ-A');
     }
 
-    public function test_result_access_token_grants_report_access_read_without_actor(): void
+    public function test_result_access_token_grants_report_access_read_for_matching_actor(): void
     {
         config()->set('fap.features.email_first_result_access', true);
 
         $attemptId = $this->seedAttemptWithResult('anon_email_gate_report_access', 'MBTI');
         $bindingId = $this->seedBinding($attemptId, 'owner@example.test', 'anon_email_gate_report_access');
         $token = $this->issueResultAccessToken($bindingId, $attemptId);
+        $actorToken = $this->seedFmToken('anon_email_gate_report_access');
 
-        $response = $this->getJson("/api/v0.3/attempts/{$attemptId}/report-access?access_token=".rawurlencode($token));
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$actorToken}",
+            'X-Result-Access-Token' => $token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
 
         $response->assertOk();
         $response->assertJsonPath('ok', true);

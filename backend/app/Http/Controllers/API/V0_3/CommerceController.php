@@ -239,6 +239,7 @@ class CommerceController extends Controller
 
         $payload = $this->attachResultAccessTokenForPaymentRecovery(
             $payload,
+            $order,
             $orgId,
             $paymentRecoveryVerified
         );
@@ -1973,8 +1974,12 @@ class CommerceController extends Controller
      * @param  array<string, mixed>  $payload
      * @return array<string, mixed>
      */
-    private function attachResultAccessTokenForPaymentRecovery(array $payload, int $orgId, bool $paymentRecoveryVerified): array
-    {
+    private function attachResultAccessTokenForPaymentRecovery(
+        array $payload,
+        object $order,
+        int $orgId,
+        bool $paymentRecoveryVerified
+    ): array {
         if (! $paymentRecoveryVerified) {
             return $payload;
         }
@@ -1987,7 +1992,17 @@ class CommerceController extends Controller
             return $payload;
         }
 
-        $token = $this->resultAccessTokens->issueForActiveAttemptBinding($orgId, $attemptId);
+        if (! $this->orderCanMintPaymentRecoveryResultAccessToken($order, $attemptId)) {
+            return $payload;
+        }
+
+        $token = $this->resultAccessTokens->issueForActiveAttemptBindingOwner(
+            $orgId,
+            $attemptId,
+            $this->trimNullableString($order->user_id ?? null),
+            $this->trimNullableString($order->anon_id ?? null),
+            $this->normalizeContactEmailHash($order->contact_email_hash ?? null)
+        );
         if (! is_array($token) || $this->trimNullableString($token['token'] ?? null) === null) {
             return $payload;
         }
@@ -2010,6 +2025,44 @@ class CommerceController extends Controller
         }
 
         return $payload;
+    }
+
+    private function orderCanMintPaymentRecoveryResultAccessToken(object $order, string $attemptId): bool
+    {
+        if ($this->orders->resolvedPaymentState($order) !== Order::PAYMENT_STATE_PAID) {
+            return false;
+        }
+
+        if ($this->orders->resolvedGrantState($order) !== Order::GRANT_STATE_GRANTED) {
+            return false;
+        }
+
+        $orderNo = $this->trimNullableString($order->order_no ?? null);
+        if ($orderNo === null) {
+            return false;
+        }
+
+        return DB::table('benefit_grants')
+            ->where('org_id', (int) ($order->org_id ?? $this->orgContext->orgId()))
+            ->where('order_no', $orderNo)
+            ->where('attempt_id', $attemptId)
+            ->whereRaw("lower(coalesce(status, '')) = ?", ['active'])
+            ->where(function ($query): void {
+                $query->whereNull('expires_at')
+                    ->orWhere('expires_at', '>', now());
+            })
+            ->exists();
+    }
+
+    private function normalizeContactEmailHash(mixed $value): ?string
+    {
+        if (! is_string($value) && ! is_numeric($value)) {
+            return null;
+        }
+
+        $normalized = strtolower(trim((string) $value));
+
+        return preg_match('/^[a-f0-9]{64}$/', $normalized) === 1 ? $normalized : null;
     }
 
     /**

@@ -764,7 +764,7 @@ final class CareerJobDetailBundleBuilder
     private function buildDisplayAssetBackedSeoContract(Occupation $occupation): array
     {
         $canonicalPath = '/career/jobs/'.$occupation->canonical_slug;
-        $robotsPolicy = 'index,follow';
+        $robotsPolicy = 'noindex,follow';
         $surface = $this->seoSurfaceContractService->build([
             'metadata_scope' => 'career_protocol_bundle',
             'surface_type' => 'career_job_detail_display_asset_backed_bundle',
@@ -772,16 +772,16 @@ final class CareerJobDetailBundleBuilder
             'robots_policy' => $robotsPolicy,
             'title' => $occupation->canonical_title_en,
             'description' => $occupation->canonical_title_en,
-            'indexability_state' => IndexStateValue::INDEXABLE,
-            'sitemap_state' => 'included',
+            'indexability_state' => IndexStateValue::TRUST_LIMITED,
+            'sitemap_state' => 'excluded',
         ]);
 
         return [
             'canonical_path' => $canonicalPath,
             'canonical_target' => $canonicalPath,
-            'index_state' => IndexStateValue::INDEXABLE,
-            'index_eligible' => true,
-            'reason_codes' => ['validated_display_asset_backed_release'],
+            'index_state' => IndexStateValue::TRUST_LIMITED,
+            'index_eligible' => false,
+            'reason_codes' => ['display_asset_backed_pilot_noindex'],
             'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
             'surface_type' => $surface['surface_type'] ?? null,
             'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,

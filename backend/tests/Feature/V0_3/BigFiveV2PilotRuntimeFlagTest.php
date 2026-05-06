@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_3;
 
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
-use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2TransformerContract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
-use App\Services\BigFive\ResultPageV2\Composer\BigFiveV2PilotPayloadComposer;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2TransformerContract;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\V0_3\Concerns\BuildsBigFiveReportEngineBridgeFixture;
 use Tests\TestCase;
@@ -60,7 +59,7 @@ final class BigFiveV2PilotRuntimeFlagTest extends TestCase
         $this->assertSame($fixture['legacy_sections'], data_get($payload, 'report.sections'));
     }
 
-    public function test_pilot_runtime_flag_attaches_o59_payload_in_allowed_non_production_environment(): void
+    public function test_pilot_runtime_flag_does_not_attach_o59_payload_to_locked_report_response(): void
     {
         config()->set('big5_result_page_v2.enabled', false);
         config()->set('big5_result_page_v2.pilot_runtime_enabled', true);
@@ -77,21 +76,8 @@ final class BigFiveV2PilotRuntimeFlagTest extends TestCase
 
         $response->assertOk();
         $payload = $response->json(BigFiveResultPageV2Contract::PAYLOAD_KEY);
-        $this->assertIsArray($payload);
-        $this->assertSame(BigFiveV2PilotPayloadComposer::CONTENT_VERSION, $payload['content_version'] ?? null);
-        $this->assertSame(BigFiveV2PilotPayloadComposer::PACKAGE_VERSION, $payload['package_version'] ?? null);
-        $this->assertSame('pilot_o59_staging_payload_v0_1', $payload['fixture_key'] ?? null);
-        $this->assertSame('sensitive_independent_thinker', $payload['canonical_profile_key'] ?? null);
-        $this->assertSame(3, data_get($payload, 'projection_v2.domains.O.score'));
-        $this->assertSame(2, data_get($payload, 'projection_v2.domains.E.score'));
-        $this->assertNotSame('pending_asset_resolution', data_get($payload, 'modules.4.blocks.0.content.availability'));
+        $this->assertNull($payload);
         $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
-        $this->assertFalse($this->containsKeyRecursive($payload, 'production_use_allowed'));
-        $this->assertFalse($this->containsKeyRecursive($payload, 'runtime_use'));
-        $this->assertFalse($this->containsKeyRecursive($payload, 'ready_for_runtime'));
-        $this->assertFalse($this->containsKeyRecursive($payload, 'ready_for_production'));
-        $this->assertFalse($this->containsKeyRecursive($payload, 'selector_basis'));
-        $this->assertFalse($this->containsKeyRecursive($payload, 'source_reference'));
     }
 
     public function test_pilot_runtime_flag_rolls_back_by_setting_config_false(): void
@@ -145,23 +131,5 @@ final class BigFiveV2PilotRuntimeFlagTest extends TestCase
 
         $this->assertArrayNotHasKey(BigFiveResultPageV2Contract::PAYLOAD_KEY, $payload);
         $this->assertSame($fixture['legacy_sections'], data_get($payload, 'report.sections'));
-    }
-
-    /**
-     * @param  array<mixed>  $payload
-     */
-    private function containsKeyRecursive(array $payload, string $key): bool
-    {
-        foreach ($payload as $currentKey => $value) {
-            if ($currentKey === $key) {
-                return true;
-            }
-
-            if (is_array($value) && $this->containsKeyRecursive($value, $key)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

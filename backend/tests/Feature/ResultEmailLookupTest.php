@@ -7,7 +7,6 @@ namespace Tests\Feature;
 use App\Models\Attempt;
 use App\Models\AttemptEmailBinding;
 use App\Models\Result;
-use App\Services\Results\ResultAccessTokenService;
 use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
@@ -19,7 +18,7 @@ final class ResultEmailLookupTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_lookup_by_email_returns_lightweight_results_with_access_tokens(): void
+    public function test_lookup_by_email_requires_email_verification_before_results_are_listed(): void
     {
         $email = 'Owner@Example.Test';
         $firstAttemptId = $this->seedAttemptWithResult('anon_lookup_a', 'MBTI', 'INTJ-A', now()->subMinutes(5));
@@ -34,24 +33,11 @@ final class ResultEmailLookupTest extends TestCase
 
         $response->assertOk();
         $response->assertJsonPath('ok', true);
-        $response->assertJsonCount(2, 'items');
-        $response->assertJsonPath('items.0.attempt_id', $secondAttemptId);
-        $response->assertJsonPath('items.0.scale_code_legacy', 'BIG5_OCEAN');
-        $response->assertJsonPath('items.1.attempt_id', $firstAttemptId);
-        $response->assertJsonPath('items.1.scale_code_legacy', 'MBTI');
-
-        $firstItem = $response->json('items.0');
-        $this->assertIsArray($firstItem);
-        $this->assertArrayHasKey('result_access_token', $firstItem);
-        $this->assertArrayHasKey('result_access_token_expires_at', $firstItem);
-        $this->assertArrayNotHasKey('result_json', $firstItem);
-        $this->assertArrayNotHasKey('scores_json', $firstItem);
-        $this->assertStringStartsWith("/zh/result/{$secondAttemptId}?access_token=", (string) ($firstItem['result_url'] ?? ''));
-
-        $grant = app(ResultAccessTokenService::class)->verify((string) $firstItem['result_access_token']);
-        $this->assertIsArray($grant);
-        $this->assertSame($secondAttemptId, $grant['attempt_id']);
-        $this->assertSame(0, $grant['org_id']);
+        $response->assertJsonPath('email_verification_required', true);
+        $response->assertJsonCount(0, 'items');
+        $this->assertStringNotContainsString('result_access_token', $response->getContent());
+        $this->assertStringNotContainsString($firstAttemptId, $response->getContent());
+        $this->assertStringNotContainsString($secondAttemptId, $response->getContent());
     }
 
     public function test_lookup_by_email_returns_empty_items_for_no_matches(): void
@@ -62,10 +48,9 @@ final class ResultEmailLookupTest extends TestCase
         ]);
 
         $response->assertOk();
-        $response->assertExactJson([
-            'ok' => true,
-            'items' => [],
-        ]);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('email_verification_required', true);
+        $response->assertJsonCount(0, 'items');
     }
 
     public function test_lookup_ignores_inactive_and_sensitive_bindings(): void
@@ -84,8 +69,9 @@ final class ResultEmailLookupTest extends TestCase
         ]);
 
         $response->assertOk();
-        $response->assertJsonCount(1, 'items');
-        $response->assertJsonPath('items.0.attempt_id', $activeAttemptId);
+        $response->assertJsonPath('email_verification_required', true);
+        $response->assertJsonCount(0, 'items');
+        $this->assertStringNotContainsString($activeAttemptId, $response->getContent());
     }
 
     public function test_lookup_by_email_is_rate_limited(): void

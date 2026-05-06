@@ -14,6 +14,7 @@ use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteDrivenSelectorInputB
 use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteInput;
 use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteMatrixLookup;
 use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2DeterministicSelector;
+use App\Services\Report\ReportAccess;
 use Illuminate\Support\Facades\Log;
 use RuntimeException;
 
@@ -88,6 +89,10 @@ final class BigFiveResultPageV2RuntimeWrapper
      */
     private function appendPilotPayload(Attempt $attempt, Result $result, array $responsePayload): array
     {
+        if (! $this->responseAllowsPilotPayload($responsePayload)) {
+            return $responsePayload;
+        }
+
         $accessDecision = $this->pilotAccessGate->decide($attempt);
         $this->pilotObservability->recordAccessDecision($attempt, $result, $accessDecision);
         if (! $accessDecision->allowed) {
@@ -126,6 +131,27 @@ final class BigFiveResultPageV2RuntimeWrapper
         }
 
         return $responsePayload;
+    }
+
+    /**
+     * @param  array<string,mixed>  $responsePayload
+     */
+    private function responseAllowsPilotPayload(array $responsePayload): bool
+    {
+        if ((bool) ($responsePayload['locked'] ?? true)) {
+            return false;
+        }
+
+        $accessLevel = strtolower(trim((string) ($responsePayload['access_level'] ?? ReportAccess::REPORT_ACCESS_FREE)));
+        if ($accessLevel === ReportAccess::REPORT_ACCESS_FREE) {
+            return false;
+        }
+
+        $modulesAllowed = ReportAccess::normalizeModules(
+            is_array($responsePayload['modules_allowed'] ?? null) ? $responsePayload['modules_allowed'] : []
+        );
+
+        return in_array(ReportAccess::MODULE_BIG5_FULL, $modulesAllowed, true);
     }
 
     private function pilotRuntimeEnabled(): bool
@@ -173,21 +199,21 @@ final class BigFiveResultPageV2RuntimeWrapper
     private function buildPilotEnvelope(Attempt $attempt, Result $result, array $responsePayload): array
     {
         $routeInput = $this->buildRouteInput($result, $responsePayload);
-        $routeRow = (new BigFiveV2RouteMatrixLookup())->lookup($routeInput);
+        $routeRow = (new BigFiveV2RouteMatrixLookup)->lookup($routeInput);
         if ($routeRow === null) {
             throw new RuntimeException("Big Five V2 pilot route row is missing: {$routeInput->combinationKey}");
         }
 
         $formSummary = is_array($responsePayload['big5_form_v1'] ?? null) ? $responsePayload['big5_form_v1'] : [];
-        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder())->build(
+        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build(
             routeInput: $routeInput,
             routeRow: $routeRow,
             formCode: $this->resolveFormCode($attempt, $formSummary),
         );
-        $selection = (new BigFiveV2DeterministicSelector())->select($input);
+        $selection = (new BigFiveV2DeterministicSelector)->select($input);
 
         return [
-            'envelope' => (new BigFiveV2PilotPayloadComposer())->compose($input, $selection),
+            'envelope' => (new BigFiveV2PilotPayloadComposer)->compose($input, $selection),
             'metrics' => [
                 'combination_key' => $routeInput->combinationKey,
                 'quality_status' => $routeInput->qualityStatus,
@@ -217,7 +243,7 @@ final class BigFiveResultPageV2RuntimeWrapper
 
         $scoreResult = $this->scoreResult($result);
         if ($scoreResult !== []) {
-            $adapter = new BigFiveV2ProjectionRouteInputAdapter();
+            $adapter = new BigFiveV2ProjectionRouteInputAdapter;
             $routeInput = $adapter->fromScoreResult($scoreResult);
             if ($routeInput instanceof BigFiveV2RouteInput) {
                 return $routeInput;
@@ -227,7 +253,7 @@ final class BigFiveResultPageV2RuntimeWrapper
         }
 
         if (is_array($projection) && $projection !== []) {
-            $adapter = new BigFiveV2ProjectionRouteInputAdapter();
+            $adapter = new BigFiveV2ProjectionRouteInputAdapter;
             $routeInput = $adapter->fromProjection($projection);
             if ($routeInput instanceof BigFiveV2RouteInput) {
                 return $routeInput;
