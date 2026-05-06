@@ -1,0 +1,60 @@
+{
+  "schema_version": "big5_v2_norm_feasibility_go_no_go_report_v0_1",
+  "mode": "norm_feasibility_go_no_go_report",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "dynamic_norm_engine_attached": false,
+  "public_percentile_display_enabled": false,
+  "cms_connected": false,
+  "scoring_changed": false,
+  "runtime_behavior_changed": false,
+  "content_bodies_changed": false,
+  "content_packs_changed": false,
+  "foundation_readiness": {
+    "eligibility_policy": "GO",
+    "append_only_observation_schema": "GO",
+    "capture_writer": "GO_INTERNAL_DEFAULT_OFF",
+    "privacy_layer": "GO_POLICY_AND_SERVICE",
+    "aggregation_dry_run": "GO_INTERNAL_DRY_RUN",
+    "dynamic_norm_engine": "NO_GO",
+    "public_percentile_display": "NO_GO"
+  },
+  "sample_threshold_recommendations": {
+    "minimum_global_sample_before_engine": 1000,
+    "minimum_locale_region_cell": 200,
+    "minimum_public_cell": 50,
+    "minimum_occupation_cell": 100,
+    "small_cell_behavior": "suppress_group_output"
+  },
+  "public_percentile_recommendation": {
+    "status": "NO-GO",
+    "reason": "Foundation supports future collection and internal dry-run only. Public percentile claims require future norm engine approval, representative sample review, and explicit public display gate."
+  },
+  "runtime_attachment_recommendation": {
+    "status": "NO-GO",
+    "reason": "No dynamic norm engine is attached to result runtime in this train."
+  },
+  "production_rollout_relationship": {
+    "status": "not_blocking_rollout_readiness",
+    "production_rollout_enabled_by_this_package": false,
+    "public_norms_required_for_rollout": false
+  },
+  "cms_relationship": {
+    "status": "out_of_scope",
+    "cms_connected_by_this_package": false
+  },
+  "hard_blockers_for_future_public_display": [
+    "representative_sample_not_verified",
+    "public_norm_engine_not_approved",
+    "public_percentile_copy_not_approved",
+    "monitoring_for_norm_display_not_defined",
+    "human_approval_required"
+  ],
+  "final_decision": {
+    "norm_foundation": "GO",
+    "dynamic_norm_engine": "NO-GO",
+    "public_percentile_display": "NO-GO"
+  }
+}
