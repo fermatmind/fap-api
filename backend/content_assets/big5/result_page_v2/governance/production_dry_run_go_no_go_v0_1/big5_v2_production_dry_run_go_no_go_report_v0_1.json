@@ -1,0 +1,88 @@
+{
+  "schema": "fap.big5.result_page_v2.production_dry_run_go_no_go.v0_1",
+  "package_key": "big5_result_page_v2.production_dry_run_go_no_go.v0_1",
+  "version": "0.1",
+  "mode": "production_dry_run_report",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "dry_run_timestamp": "2026-05-06T00:00:00Z",
+  "production_enablement_status": "disabled",
+  "explicit_human_production_approval": false,
+  "final_go_no_go": "NO-GO",
+  "go_recommended": false,
+  "human_approval_required_before_go": true,
+  "release_snapshot_status": {
+    "status": "pass",
+    "evidence": "backend/content_assets/big5/result_page_v2/releases/v0_1/big5_v2_release_snapshot_rc_0_1.json",
+    "immutable": true,
+    "rollback_by_snapshot_revert": true
+  },
+  "import_gate_status": {
+    "status": "pass",
+    "evidence": "backend/content_assets/big5/result_page_v2/governance/production_import_gate_v0_1/big5_v2_production_import_gate_policy_v0_1.json",
+    "fail_closed": true
+  },
+  "runtime_gate_status": {
+    "status": "pass_disabled_by_default",
+    "evidence": "backend/tests/Feature/V0_3/ProductionRuntimeTest.php",
+    "default_on": false,
+    "emergency_disable_supported": true
+  },
+  "all_surface_qa_status": {
+    "status": "pass",
+    "evidence": "backend/content_assets/big5/result_page_v2/qa/production_all_surface_release_gate/v0_1/big5_v2_production_all_surface_release_gate_report_v0_1.json",
+    "surfaces": [
+      "desktop",
+      "mobile",
+      "pdf",
+      "share_card",
+      "history",
+      "compare"
+    ],
+    "fake_pass_rejected": true,
+    "pending_masquerading_as_pass_rejected": true
+  },
+  "rollback_readiness": {
+    "status": "pass",
+    "release_disable_supported": true,
+    "emergency_disable_supported": true,
+    "snapshot_revert_supported": true,
+    "evidence": "backend/content_assets/big5/result_page_v2/governance/release_approval_v0_1/big5_v2_release_approval_evidence_v0_1.json"
+  },
+  "approval_audit_evidence": {
+    "status": "present_no_production_approval",
+    "approval_evidence": "backend/content_assets/big5/result_page_v2/governance/release_approval_v0_1/big5_v2_release_approval_evidence_v0_1.json",
+    "decision_log": "backend/content_assets/big5/result_page_v2/governance/release_approval_v0_1/big5_v2_governance_decision_log_v0_1.json",
+    "release_evidence_archive": "backend/content_assets/big5/result_page_v2/qa/release_evidence_archive/v0_1/big5_v2_release_evidence_archive_v0_1.json"
+  },
+  "fail_closed_evidence": {
+    "status": "pass",
+    "missing_snapshot_blocks_production": true,
+    "missing_import_gate_blocks_production": true,
+    "missing_runtime_gate_blocks_production": true,
+    "missing_all_surface_qa_blocks_production": true,
+    "missing_human_production_approval_blocks_production": true
+  },
+  "blockers": [
+    {
+      "code": "human_production_approval_missing",
+      "status": "blocking_production_go",
+      "required_action": "Separate explicit human production approval is required before production rollout can be considered."
+    },
+    {
+      "code": "production_rollout_config_disabled",
+      "status": "blocking_production_go",
+      "required_action": "Production rollout config must remain disabled until human approval is granted."
+    }
+  ],
+  "out_of_scope": {
+    "cms": "out_of_scope_not_connected",
+    "dynamic_norms": "out_of_scope_not_connected",
+    "scoring_changes": false,
+    "content_body_generation": false,
+    "frontend_fallback_prose": false
+  },
+  "decision_rationale": "Governance layers are present for dry-run review, but production remains NO-GO because explicit human production approval and rollout config are absent."
+}
