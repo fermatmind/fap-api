@@ -455,6 +455,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_bigfive_v2_rollout_governance_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/BigFive/ResultPageV2/Rollout/BigFiveV2ProductionRolloutDecision.php',
+            'backend/app/Services/BigFive/ResultPageV2/Rollout/BigFiveV2ProductionRolloutGate.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_keeps_mbti_and_bigfive_runtime_changes_blocked(): void
     {
         $changed = [
@@ -805,7 +815,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php'
             || $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveV2PilotRuntimeObservability.php'
-            || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer|Access|Routing|Pdf|Share|History|Compare)/[A-Za-z0-9_]+\.php$#', $file) === 1;
+            || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer|Access|Routing|Pdf|Share|History|Compare|Rollout)/[A-Za-z0-9_]+\.php$#', $file) === 1;
     }
 
     private function isAttemptEmailBindingFoundationFile(string $file): bool
