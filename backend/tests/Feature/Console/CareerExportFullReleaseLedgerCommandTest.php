@@ -164,6 +164,89 @@ final class CareerExportFullReleaseLedgerCommandTest extends TestCase
         }
     }
 
+    public function test_command_does_not_implicitly_read_predictable_tmp_public_resolution_plan(): void
+    {
+        $timestamp = 'career-no-tmp-plan-fallback-test-export';
+        $tmpPlan = '/tmp/career_full_upload_plan_after_directory_draft.json';
+        File::put($tmpPlan, (string) json_encode([
+            'workbook' => ['rows' => 1],
+            'rows' => [
+                $this->planRow(2, 'attacker-controlled', 'upload_candidate'),
+            ],
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        try {
+            $exitCode = Artisan::call('career:export-full-release-ledger', [
+                '--timestamp' => $timestamp,
+                '--json' => true,
+            ]);
+
+            $payload = json_decode(trim((string) Artisan::output()), true);
+
+            $this->assertSame(0, $exitCode, Artisan::output());
+            $this->assertIsArray($payload);
+
+            $artifactPath = $payload['artifacts'][CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
+            $this->assertIsString($artifactPath);
+
+            $ledger = json_decode((string) file_get_contents($artifactPath), true);
+            $this->assertIsArray($ledger);
+            $this->assertArrayNotHasKey('public_resolution', $ledger);
+        } finally {
+            File::delete($tmpPlan);
+        }
+    }
+
+    public function test_explicit_public_resolution_plan_requires_full_2786_row_schema(): void
+    {
+        $timestamp = 'career-reject-short-public-resolution-plan';
+        $planPath = storage_path('framework/testing/career-short-public-resolution-command-plan.json');
+        File::ensureDirectoryExists(dirname($planPath));
+        File::put($planPath, (string) json_encode([
+            'workbook' => [
+                'path' => '/tmp/career_full_upload_repaired.xlsx',
+                'sha256' => 'fixture-workbook-sha',
+                'sheet' => 'Career_Assets_v4_1',
+                'rows' => 1,
+            ],
+            'rows' => [
+                $this->planRow(2, 'attacker-controlled', 'upload_candidate'),
+            ],
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        $exitCode = Artisan::call('career:export-full-release-ledger', [
+            '--timestamp' => $timestamp,
+            '--public-resolution-plan' => $planPath,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('must declare 2786 workbook rows', Artisan::output());
+    }
+
+    public function test_explicit_public_resolution_plan_rejects_symlinks(): void
+    {
+        $timestamp = 'career-reject-symlink-public-resolution-plan';
+        $targetPath = $this->writePublicResolutionPlanFixture();
+        $linkPath = storage_path('framework/testing/career-public-resolution-command-plan-link.json');
+        File::delete($linkPath);
+
+        $this->assertTrue(symlink($targetPath, $linkPath));
+
+        try {
+            $exitCode = Artisan::call('career:export-full-release-ledger', [
+                '--timestamp' => $timestamp,
+                '--public-resolution-plan' => $linkPath,
+                '--json' => true,
+            ]);
+
+            $this->assertSame(1, $exitCode);
+            $this->assertStringContainsString('refusing symlinked JSON input', Artisan::output());
+        } finally {
+            File::delete($linkPath);
+        }
+    }
+
     private function writePublicResolutionPlanFixture(): string
     {
         $path = storage_path('framework/testing/career-public-resolution-command-plan.json');

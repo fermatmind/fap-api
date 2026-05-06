@@ -16,7 +16,7 @@ final class BigFiveResultPageV2HistorySnapshotAdapterTest extends TestCase
 
     public function test_o59_route_driven_payload_adapts_to_history_snapshot_fixture(): void
     {
-        $adapter = new BigFiveV2HistorySnapshotAdapter();
+        $adapter = new BigFiveV2HistorySnapshotAdapter;
         $historyEnvelope = $adapter->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH));
         $historyPayload = $historyEnvelope[BigFiveV2HistorySnapshotAdapter::PAYLOAD_KEY] ?? null;
 
@@ -25,7 +25,7 @@ final class BigFiveResultPageV2HistorySnapshotAdapterTest extends TestCase
         $this->assertSame('history', $historyPayload['surface_key'] ?? null);
         $this->assertSame('big5_result_page_v2.pilot_payload.v0_1', $historyPayload['content_version'] ?? null);
         $this->assertSame('B5-CONTENT-staging-pilot.v0_1', $historyPayload['package_version'] ?? null);
-        $this->assertSame('O3_C2_E2_A3_N4', $historyPayload['route_key'] ?? null);
+        $this->assertArrayNotHasKey('route_key', $historyPayload);
         $this->assertSame('我更适合用敏感、理解和低成本表达来观察自己的工作与恢复节奏。', $historyPayload['summary_zh'] ?? null);
         $this->assertSame('route_matrix.share_safe_summary_zh', data_get($historyPayload, 'snapshot_policy.source'));
 
@@ -37,7 +37,7 @@ final class BigFiveResultPageV2HistorySnapshotAdapterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('requires a valid route-driven payload');
 
-        (new BigFiveV2HistorySnapshotAdapter())->adapt([
+        (new BigFiveV2HistorySnapshotAdapter)->adapt([
             'big5_result_page_v2' => [
                 'schema_version' => 'invalid',
                 'modules' => [],
@@ -53,13 +53,13 @@ final class BigFiveResultPageV2HistorySnapshotAdapterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('missing route score for N');
 
-        (new BigFiveV2HistorySnapshotAdapter())->adapt($envelope);
+        (new BigFiveV2HistorySnapshotAdapter)->adapt($envelope);
     }
 
     public function test_history_snapshot_does_not_expose_full_body_or_internal_metadata(): void
     {
         $encoded = json_encode(
-            (new BigFiveV2HistorySnapshotAdapter())->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH)),
+            (new BigFiveV2HistorySnapshotAdapter)->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH)),
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
         );
 
@@ -78,6 +78,8 @@ final class BigFiveResultPageV2HistorySnapshotAdapterTest extends TestCase
             'frontend_fallback',
             'source_trace',
             'repair_log_refs',
+            'route_key',
+            'O3_C2_E2_A3_N4',
             'raw_score',
             'raw_scores',
             'raw_mean',
