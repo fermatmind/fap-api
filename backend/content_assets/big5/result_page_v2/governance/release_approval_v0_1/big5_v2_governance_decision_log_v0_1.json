@@ -1,0 +1,30 @@
+{
+  "schema": "fap.big5.result_page_v2.governance_decision_log.v0_1",
+  "package_key": "big5_result_page_v2.release_approval.v0_1.decision_log",
+  "version": "0.1",
+  "mode": "production_governance_decision_log",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "decisions": [
+    {
+      "decision_id": "prod-gov-6-audit-approval-evidence",
+      "timestamp": "2026-05-06T00:00:00Z",
+      "approver": "pending_human_production_approver",
+      "scope": "release_audit_and_approval_evidence",
+      "decision": "NO-GO",
+      "reason": "Evidence is recorded for dry-run governance review; production approval remains pending.",
+      "release_note_ref": "big5_v2_release_approval_evidence_v0_1.json",
+      "rollback_note_ref": "big5_v2_release_approval_evidence_v0_1.json",
+      "evidence_archive_ref": "backend/content_assets/big5/result_page_v2/qa/release_evidence_archive/v0_1/big5_v2_release_evidence_archive_v0_1.json"
+    }
+  ],
+  "invariants": {
+    "production_remains_disabled": true,
+    "human_production_approval_required": true,
+    "scoring_changed": false,
+    "content_bodies_changed": false,
+    "runtime_behavior_changed": false
+  }
+}
