@@ -1,0 +1,37 @@
+{
+  "schema": "fap.big5.result_page_v2.production_rollout_policy_validation.v0_1",
+  "package_key": "big5_result_page_v2.production_rollout_policy.validation.v0_1",
+  "mode": "rollout_policy_validation",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "validated_fields": [
+    "rollout_allowed",
+    "rollout_freeze_window",
+    "release_freeze_authority",
+    "rollout_stage",
+    "rollout_scope",
+    "rollback_required",
+    "incident_halt_required",
+    "manual_approval_required"
+  ],
+  "checks": {
+    "policy_package_exists": "pass",
+    "rollout_allowed_defaults_false": "pass",
+    "freeze_window_defined": "pass",
+    "release_freeze_authority_defined": "pass",
+    "rollout_stage_policy_only": "pass",
+    "rollout_scope_zero_blast_radius": "pass",
+    "rollback_required_defined": "pass",
+    "incident_halt_required_defined": "pass",
+    "manual_approval_required_defined": "pass",
+    "production_disabled_state_preserved": "pass",
+    "runtime_behavior_unchanged": "pass"
+  },
+  "production_decision": {
+    "status": "NO-GO",
+    "reason": "Rollout policy and freeze controls are present, but rollout remains disabled until separate human production approval."
+  }
+}

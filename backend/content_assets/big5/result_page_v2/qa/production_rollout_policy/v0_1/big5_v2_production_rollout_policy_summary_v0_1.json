@@ -1,0 +1,31 @@
+{
+  "schema": "fap.big5.result_page_v2.production_rollout_policy_summary.v0_1",
+  "package_key": "big5_result_page_v2.production_rollout_policy.summary.v0_1",
+  "mode": "rollout_policy_summary",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "policy_package": "backend/content_assets/big5/result_page_v2/governance/production_rollout_policy_v0_1/big5_v2_production_rollout_policy_v0_1.json",
+  "freeze_policy_exists": true,
+  "rollout_stage": "policy_only",
+  "rollout_scope": {
+    "audience": "none",
+    "percentage": 0,
+    "blast_radius": "none"
+  },
+  "required_before_rollout": [
+    "explicit_human_production_rollout_approval",
+    "production_allowlist_gate",
+    "production_percentage_gate",
+    "rollback_drill_evidence",
+    "incident_halt_protocol",
+    "alerts_and_dashboard_evidence"
+  ],
+  "final_decision": "NO-GO",
+  "scoring_changed": false,
+  "content_bodies_changed": false,
+  "cms_connected": false,
+  "dynamic_norms_connected": false
+}

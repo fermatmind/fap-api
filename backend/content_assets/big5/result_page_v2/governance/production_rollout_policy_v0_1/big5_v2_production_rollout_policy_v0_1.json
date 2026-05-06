@@ -1,0 +1,182 @@
+{
+  "schema_version": "big5_v2_production_rollout_policy_v0_1",
+  "mode": "production_rollout_policy_schema",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "rollout_policy_fields": {
+    "rollout_allowed": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "meaning": "Production rollout remains blocked unless explicit human production approval grants rollout permission."
+    },
+    "rollout_freeze_window": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "status",
+        "window_type",
+        "requires_release_freeze_authority",
+        "active_until"
+      ],
+      "meaning": "Defines when rollout changes are frozen and who can halt or reopen rollout changes."
+    },
+    "release_freeze_authority": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "primary_authority",
+        "backup_authority",
+        "halt_authority_required",
+        "reopen_authority_required"
+      ],
+      "meaning": "Identifies required human authority for rollout halt, rollback, and freeze release."
+    },
+    "rollout_stage": {
+      "type": "string",
+      "required": true,
+      "allowed_values": [
+        "not_started",
+        "policy_only",
+        "internal_allowlist",
+        "invite_only",
+        "percentage_ramp",
+        "full_rollout_candidate"
+      ],
+      "default": "not_started",
+      "meaning": "Records the intended rollout stage without enabling runtime behavior."
+    },
+    "rollout_scope": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "audience",
+        "tenant_scope",
+        "locale_scope",
+        "scale_scope",
+        "form_scope",
+        "percentage"
+      ],
+      "meaning": "Defines blast-radius limits that future runtime rollout gates must enforce."
+    },
+    "rollback_required": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "config_off",
+        "release_snapshot_disable",
+        "percentage_rollback",
+        "allowlist_revoke",
+        "operator_note"
+      ],
+      "meaning": "Rollback evidence required before any real-user rollout."
+    },
+    "incident_halt_required": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "halt_protocol",
+        "severity_classification",
+        "alert_route",
+        "evidence_retention"
+      ],
+      "meaning": "Incident halt controls required before production exposure."
+    },
+    "manual_approval_required": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "human_production_approval",
+        "approval_scope",
+        "approval_timestamp",
+        "approval_record"
+      ],
+      "meaning": "Explicit human approval required before rollout can move beyond policy-only governance."
+    }
+  },
+  "default_decision": {
+    "rollout_allowed": false,
+    "rollout_freeze_window": {
+      "status": "frozen",
+      "window_type": "indefinite_until_explicit_human_rollout_approval",
+      "requires_release_freeze_authority": true,
+      "active_until": "approval_required"
+    },
+    "release_freeze_authority": {
+      "primary_authority": "pending_human_production_approver",
+      "backup_authority": "pending_backup_production_approver",
+      "halt_authority_required": true,
+      "reopen_authority_required": true
+    },
+    "rollout_stage": "policy_only",
+    "rollout_scope": {
+      "audience": "none",
+      "tenant_scope": [],
+      "locale_scope": [],
+      "scale_scope": [],
+      "form_scope": [],
+      "percentage": 0
+    },
+    "rollback_required": {
+      "config_off": "required_not_executed",
+      "release_snapshot_disable": "required_not_executed",
+      "percentage_rollback": "required_not_executed",
+      "allowlist_revoke": "required_not_executed",
+      "operator_note": "required_not_provided"
+    },
+    "incident_halt_required": {
+      "halt_protocol": "required_not_provided",
+      "severity_classification": "required_not_provided",
+      "alert_route": "required_not_provided",
+      "evidence_retention": "required_not_provided"
+    },
+    "manual_approval_required": {
+      "human_production_approval": false,
+      "approval_scope": "not_granted",
+      "approval_timestamp": null,
+      "approval_record": "required_not_provided"
+    }
+  },
+  "release_freeze_controls": {
+    "rollout_default": "off",
+    "freeze_default": "active",
+    "freeze_reason": "Production rollout readiness layer is not production approval.",
+    "halt_required_when": [
+      "metadata_leak_detected",
+      "frontend_fallback_prose_generated",
+      "rollout_default_on_detected",
+      "missing_rollback_path",
+      "pending_surface_fake_pass",
+      "scoring_change_detected",
+      "cms_or_dynamic_norms_mixed_into_rollout"
+    ],
+    "reopen_requires": [
+      "explicit_human_production_rollout_approval",
+      "rollback_drill_evidence",
+      "alert_route_evidence",
+      "incident_halt_protocol",
+      "all_surface_release_gate_pass"
+    ]
+  },
+  "fail_closed_rules": [
+    "Missing manual approval blocks rollout.",
+    "Missing freeze authority blocks rollout.",
+    "Missing rollout scope blocks rollout.",
+    "Missing rollback evidence blocks rollout.",
+    "Missing incident halt protocol blocks rollout.",
+    "Rollout percentage defaults to 0.",
+    "Policy package cannot enable production runtime."
+  ],
+  "out_of_scope": [
+    "production rollout enablement",
+    "runtime behavior changes",
+    "scoring changes",
+    "content body changes",
+    "CMS connection",
+    "dynamic norms connection",
+    "frontend fallback prose"
+  ]
+}
