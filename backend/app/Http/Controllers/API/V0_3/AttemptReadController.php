@@ -2102,7 +2102,10 @@ class AttemptReadController extends Controller
             return null;
         }
 
-        $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
+        $attempt = Attempt::query()
+            ->where('org_id', $orgId)
+            ->where('id', $attemptId)
+            ->first();
         if (! $attempt instanceof Attempt) {
             return null;
         }
