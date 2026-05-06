@@ -1,0 +1,66 @@
+{
+  "schema": "big5_result_page_v2.production_rollout_real_user_dry_run_simulation_matrix.v0_1",
+  "package": "production_rollout_real_user_dry_run",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "simulations": [
+    {
+      "id": "allowlisted_rollout_simulation",
+      "scenario": "allowlisted tester receives simulated exposure while non-allowlisted request is denied",
+      "expected_allowed_reason": "production_rollout_allowed",
+      "expected_denied_reason": "production_rollout_allowlist_denied",
+      "real_user_exposure": "none",
+      "status": "pass"
+    },
+    {
+      "id": "percentage_rollout_simulation",
+      "scenario": "deterministic percentage bucket allows and denies simulated attempts",
+      "expected_allowed_match": "rollout_percentage",
+      "expected_denied_reason": "production_rollout_percentage_denied",
+      "real_user_exposure": "none",
+      "status": "pass"
+    },
+    {
+      "id": "rollback_simulation",
+      "scenario": "percentage rollback to zero denies previously eligible simulated attempt",
+      "expected_denied_reason": "production_rollout_percentage_denied",
+      "real_user_exposure": "none",
+      "status": "pass"
+    },
+    {
+      "id": "blast_radius_simulation",
+      "scenario": "percentage above maximum blast radius fails closed",
+      "expected_denied_reason": "production_rollout_invalid_config",
+      "required_error": "production_rollout_blast_radius_exceeded",
+      "real_user_exposure": "none",
+      "status": "pass"
+    },
+    {
+      "id": "fail_closed_simulation",
+      "scenario": "missing release approval and missing snapshot deny simulated exposure",
+      "expected_denied_reasons": [
+        "production_rollout_manual_approval_missing",
+        "production_rollout_snapshot_missing"
+      ],
+      "real_user_exposure": "none",
+      "status": "pass"
+    },
+    {
+      "id": "incident_halt_simulation",
+      "scenario": "emergency disable halts simulated exposure before allowlist evaluation",
+      "expected_denied_reason": "production_rollout_emergency_disabled",
+      "real_user_exposure": "none",
+      "status": "pass"
+    }
+  ],
+  "must_not_enable": [
+    "production_rollout_enabled",
+    "production_runtime_enabled",
+    "production_use_allowed",
+    "ready_for_production"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "big5_result_page_v2.production_rollout_real_user_dry_run_report.v0_1",
+  "package": "production_rollout_real_user_dry_run",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "real_user_exposure": "none",
+  "production_decision": "NO_GO",
+  "dry_run_status": "pass",
+  "scope": {
+    "audience": "simulated_only",
+    "allowlisted_rollout": "simulated",
+    "percentage_rollout": "simulated",
+    "tenant_scope": "simulated",
+    "locale_scope": "simulated",
+    "scale_scope": "simulated",
+    "form_scope": "simulated"
+  },
+  "governance_links": {
+    "rollout_policy": "production_rollout_policy/v0_1",
+    "allowlist_percentage_gate": "backend_config_and_rollout_gate",
+    "telemetry": "BigFiveV2ProductionRolloutTelemetry",
+    "alerts": "production_rollout_alerts/v0_1",
+    "rollback_kill_switch": "production_rollout_rollback_kill_switch/v0_1"
+  },
+  "required_before_real_exposure": [
+    "explicit_human_production_rollout_approval",
+    "production_monitoring_dashboard_review",
+    "incident_commander_assigned",
+    "rollback_owner_assigned",
+    "release_freeze_window_confirmed"
+  ],
+  "out_of_scope": [
+    "CMS",
+    "dynamic_norms",
+    "scoring_changes",
+    "content_body_changes"
+  ]
+}

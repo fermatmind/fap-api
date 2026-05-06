@@ -1,0 +1,25 @@
+{
+  "schema": "big5_result_page_v2.production_rollout_real_user_dry_run_validation.v0_1",
+  "package": "production_rollout_real_user_dry_run",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "real_user_exposure": "none",
+  "production_decision": "NO_GO",
+  "validation_status": "pass",
+  "checks": {
+    "allowlisted_rollout_simulation": "pass",
+    "percentage_rollout_simulation": "pass",
+    "rollback_simulation": "pass",
+    "blast_radius_simulation": "pass",
+    "fail_closed_simulation": "pass",
+    "incident_halt_simulation": "pass",
+    "actual_rollout_enabled": "blocked",
+    "real_user_exposure": "blocked",
+    "cms_out_of_scope": "pass",
+    "dynamic_norms_out_of_scope": "pass"
+  }
+}
