@@ -1,0 +1,22 @@
+{
+    "big5_result_page_v2_compare_snapshot": {
+        "schema_version": "fap.big5.result_page_v2.compare_snapshot.v0_1",
+        "surface_key": "compare",
+        "source_payload_key": "big5_result_page_v2",
+        "scale_code": "BIG5_OCEAN",
+        "content_version": "big5_result_page_v2.pilot_payload.v0_1",
+        "package_version": "B5-CONTENT-staging-pilot.v0_1",
+        "route_key": "O3_C2_E2_A3_N4",
+        "summary_zh": "我更适合用敏感、理解和低成本表达来观察自己的工作与恢复节奏。",
+        "compare_policy": {
+            "source": "route_matrix.share_safe_summary_zh",
+            "full_body_regeneration_allowed": false,
+            "score_fields_allowed": false,
+            "sensitive_emotional_detail_allowed": false,
+            "frontend_authored_body_allowed": false,
+            "invalid_payload_behavior": "fail_closed",
+            "metadata_filter_required": true,
+            "production_enablement_allowed": false
+        }
+    }
+}
