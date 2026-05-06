@@ -1200,6 +1200,9 @@ class PaymentWebhookHandlerCore
             if ($attemptUserId !== '' && $attemptUserId === $orderUserId) {
                 return ['ok' => true];
             }
+            if ($orderAnonId !== '' && $attemptAnonId !== '' && $attemptAnonId === $orderAnonId) {
+                return ['ok' => true];
+            }
 
             return [
                 'ok' => false,

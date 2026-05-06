@@ -76,6 +76,26 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ->assertJsonPath('delivery.can_request_claim_email', true);
     }
 
+    public function test_lookup_does_not_project_form_metadata_for_cross_owner_target_attempt(): void
+    {
+        $orderNo = 'ord_lookup_cross_owner_'.Str::lower(Str::random(8));
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, 'victim_lookup_anon', null, 'MBTI');
+        $this->insertOrderForLookup($orderNo, 'owner@example.com', $attemptId, 'paid');
+
+        $response = $this->postJson('/api/v0.3/orders/lookup', [
+            'order_no' => $orderNo,
+            'email' => 'owner@example.com',
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('attempt_id', null)
+            ->assertJsonPath('mbti_form_v1', null)
+            ->assertJsonPath('big5_form_v1', null)
+            ->assertJsonPath('delivery.can_view_report', false)
+            ->assertJsonPath('delivery.report_url', null);
+    }
+
     public function test_lookup_with_matching_email_hash_returns_mbti_access_hub_for_mbti_attempt(): void
     {
         $orderNo = 'ord_lookup_mbti_'.Str::lower(Str::random(8));

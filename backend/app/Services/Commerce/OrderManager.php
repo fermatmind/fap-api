@@ -95,6 +95,7 @@ class OrderManager
         $idempotencyKey = $this->normalizeIdempotencyKey($idempotencyKey);
         $useIdempotency = $idempotencyKey !== '';
         $resolvedLedgerContext = $this->resolveLedgerContext(
+            $orgId,
             $provider,
             $targetAttemptId,
             $normalizedUserId,
@@ -378,8 +379,8 @@ class OrderManager
         }
 
         $orderNo = $this->trimOrNull((string) ($order->order_no ?? ''));
+        $attemptId = $this->resolveKnownOrderAttemptId($order);
         $orgId = (int) ($order->org_id ?? 0);
-        $attemptId = $this->resolveKnownAttemptId($orgId, $order->target_attempt_id ?? null);
         $localeSegment = $this->frontendLocaleSegment(
             $this->resolveOrderLocale($orgId, $attemptId, $fallbackLocale)
         );
@@ -1382,7 +1383,7 @@ class OrderManager
     private function compileOrderDeliveryState(object $order): array
     {
         $orgId = (int) ($order->org_id ?? 0);
-        $attemptId = $this->resolveKnownAttemptId($orgId, $order->target_attempt_id ?? null);
+        $attemptId = $this->resolveKnownOrderAttemptId($order);
         $reportUrl = $attemptId !== null ? $this->reportUrl($attemptId) : null;
         $reportPdfUrl = $attemptId !== null ? $this->reportPdfUrl($attemptId) : null;
         $deliveryEligible = $attemptId !== null && $this->isDeliveryEligibleOrder($order);
@@ -1459,19 +1460,53 @@ class OrderManager
         ];
     }
 
-    private function resolveKnownAttemptId(int $orgId, mixed $candidate): ?string
+    private function resolveKnownOrderAttemptId(object $order): ?string
     {
-        $attemptId = trim((string) $candidate);
-        if ($attemptId === '') {
+        $attemptId = $this->trimOrNull((string) ($order->target_attempt_id ?? ''));
+        if ($attemptId === null) {
+            return null;
+        }
+
+        $orgId = (int) ($order->org_id ?? 0);
+        $userId = $this->trimOrNull((string) ($order->user_id ?? ''));
+        $anonId = $this->trimOrNull((string) ($order->anon_id ?? ''));
+        if ($this->orderHasActiveGrantForAttempt($order, $attemptId, $orgId)) {
+            return $attemptId;
+        }
+        if ($userId === null && $anonId === null) {
             return null;
         }
 
         $exists = DB::table('attempts')
             ->where('id', $attemptId)
             ->where('org_id', $orgId)
+            ->where(function ($query) use ($userId, $anonId): void {
+                if ($userId !== null) {
+                    $query->orWhere('user_id', $userId);
+                }
+
+                if ($anonId !== null) {
+                    $query->orWhere('anon_id', $anonId);
+                }
+            })
             ->exists();
 
         return $exists ? $attemptId : null;
+    }
+
+    private function orderHasActiveGrantForAttempt(object $order, string $attemptId, int $orgId): bool
+    {
+        $orderNo = $this->trimOrNull((string) ($order->order_no ?? ''));
+        if ($orderNo === null || ! Schema::hasTable('benefit_grants')) {
+            return false;
+        }
+
+        return DB::table('benefit_grants')
+            ->where('org_id', $orgId)
+            ->where('order_no', $orderNo)
+            ->where('attempt_id', $attemptId)
+            ->where('status', 'active')
+            ->exists();
     }
 
     private function frontendBaseUrl(): ?string
@@ -1781,6 +1816,7 @@ class OrderManager
      * }
      */
     private function resolveLedgerContext(
+        int $orgId,
         string $provider,
         ?string $targetAttemptId,
         ?string $userId,
@@ -1791,7 +1827,7 @@ class OrderManager
         $explicitChannel = Order::normalizeChannel(
             is_scalar($ledgerContext['channel'] ?? null) ? (string) $ledgerContext['channel'] : null
         );
-        $attemptChannel = $this->resolveAttemptChannel($targetAttemptId);
+        $attemptChannel = $this->resolveAttemptChannel($targetAttemptId, $orgId, $userId, $anonId);
         $channel = $explicitChannel ?? $attemptChannel ?? 'web';
 
         $providerApp = $this->trimOrNull(
@@ -1817,15 +1853,34 @@ class OrderManager
         ];
     }
 
-    private function resolveAttemptChannel(?string $targetAttemptId): ?string
-    {
+    private function resolveAttemptChannel(
+        ?string $targetAttemptId,
+        int $orgId,
+        ?string $userId,
+        ?string $anonId
+    ): ?string {
         $attemptId = $this->trimOrNull($targetAttemptId);
         if ($attemptId === null || ! Schema::hasTable('attempts')) {
+            return null;
+        }
+        $uid = $this->trimOrNull($userId);
+        $aid = $this->trimOrNull($anonId);
+        if ($uid === null && $aid === null) {
             return null;
         }
 
         $attemptChannel = DB::table('attempts')
             ->where('id', $attemptId)
+            ->where('org_id', $orgId)
+            ->where(function ($query) use ($uid, $aid): void {
+                if ($uid !== null) {
+                    $query->orWhere('user_id', $uid);
+                }
+
+                if ($aid !== null) {
+                    $query->orWhere('anon_id', $aid);
+                }
+            })
             ->value('channel');
 
         return Order::normalizeChannel(is_scalar($attemptChannel) ? (string) $attemptChannel : null);

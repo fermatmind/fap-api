@@ -101,6 +101,12 @@ class CommerceController extends Controller
         }
 
         $idempotencyKey = $this->resolveIdempotencyKey($request, $payload);
+        $targetAttemptId = $this->resolveOwnedTargetAttemptId(
+            $payload['target_attempt_id'] ?? null,
+            $orgId,
+            $userId !== null ? (string) $userId : null,
+            $anonId !== null ? (string) $anonId : null
+        );
 
         $result = $this->orders->createOrder(
             $orgId,
@@ -108,7 +114,7 @@ class CommerceController extends Controller
             $anonId !== null ? (string) $anonId : null,
             (string) $payload['sku'],
             (int) ($payload['quantity'] ?? 1),
-            $payload['target_attempt_id'] ?? null,
+            $targetAttemptId,
             $provider,
             $idempotencyKey,
             $contactEmail,
@@ -118,7 +124,10 @@ class CommerceController extends Controller
             $this->resolveOrderLedgerContext(
                 $request,
                 $payload,
-                $payload['target_attempt_id'] ?? null,
+                $targetAttemptId,
+                $orgId,
+                $userId !== null ? (string) $userId : null,
+                $anonId !== null ? (string) $anonId : null,
                 $provider
             )
         );
@@ -461,11 +470,19 @@ class CommerceController extends Controller
         $this->guardStubProvider($request, $provider);
 
         $idempotencyKey = $this->resolveIdempotencyKey($request, $payload);
-        $attemptId = trim((string) ($payload['attempt_id'] ?? ''));
+        $attemptId = $this->resolveOwnedTargetAttemptId(
+            $payload['attempt_id'] ?? null,
+            $orgId,
+            $userId !== null ? (string) $userId : null,
+            $anonId !== null ? (string) $anonId : null
+        );
         $ledgerContext = $this->resolveOrderLedgerContext(
             $request,
             $payload,
-            $attemptId !== '' ? $attemptId : null,
+            $attemptId,
+            $orgId,
+            $userId !== null ? (string) $userId : null,
+            $anonId !== null ? (string) $anonId : null,
             $provider
         );
 
@@ -475,7 +492,7 @@ class CommerceController extends Controller
             $anonId !== null ? (string) $anonId : null,
             $sku,
             1,
-            $attemptId !== '' ? $attemptId : null,
+            $attemptId,
             $provider,
             $idempotencyKey,
             $contactEmail,
@@ -498,7 +515,7 @@ class CommerceController extends Controller
 
         $order = $created['order'] ?? null;
         $orderNo = trim((string) data_get($order, 'order_no', $created['order_no'] ?? ''));
-        $attemptIdFromOrder = trim((string) data_get($order, 'target_attempt_id', $attemptId));
+        $attemptIdFromOrder = trim((string) data_get($order, 'target_attempt_id', $attemptId ?? ''));
         $amountCents = (int) data_get($order, 'amount_cents', 0);
         $currency = strtoupper(trim((string) data_get($order, 'currency', 'USD')));
         $description = strtoupper(trim((string) data_get($order, 'sku', $sku)));
@@ -925,6 +942,7 @@ class CommerceController extends Controller
         if ($description === '') {
             $description = 'FermatMind Order';
         }
+        $paymentAttempt = null;
         $payAction = $this->resolveCheckoutPayAction(
             $normalizedProvider,
             $orderNo,
@@ -1493,6 +1511,9 @@ class CommerceController extends Controller
         if ($attemptId === null) {
             return null;
         }
+        if (! $this->orderTargetAttemptOwnedByOrder($order, $attemptId)) {
+            return null;
+        }
 
         return $this->mbtiPublicFormSummaryBuilder->summarizeForAttemptId(
             $attemptId,
@@ -1508,6 +1529,9 @@ class CommerceController extends Controller
     {
         $attemptId = $this->trimNullableString($order->target_attempt_id ?? null);
         if ($attemptId === null) {
+            return null;
+        }
+        if (! $this->orderTargetAttemptOwnedByOrder($order, $attemptId)) {
             return null;
         }
 
@@ -1634,12 +1658,15 @@ class CommerceController extends Controller
         Request $request,
         array $payload,
         ?string $attemptId,
+        int $orgId,
+        ?string $userId,
+        ?string $anonId,
         string $provider
     ): array {
         $explicitChannel = Order::normalizeChannel(
             $this->trimNullableString($payload['channel'] ?? $request->header('X-Channel', ''))
         );
-        $attemptChannel = $this->resolveAttemptOrderChannel($attemptId);
+        $attemptChannel = $this->resolveAttemptOrderChannel($attemptId, $orgId, $userId, $anonId);
         $channel = $explicitChannel ?? $attemptChannel ?? 'web';
 
         $providerApp = $this->trimNullableString($payload['provider_app'] ?? $request->header('X-Provider-App', ''));
@@ -1661,18 +1688,101 @@ class CommerceController extends Controller
         ];
     }
 
-    private function resolveAttemptOrderChannel(?string $attemptId): ?string
+    private function resolveAttemptOrderChannel(?string $attemptId, int $orgId, ?string $userId, ?string $anonId): ?string
     {
         $normalizedAttemptId = $this->trimNullableString($attemptId);
         if ($normalizedAttemptId === null) {
             return null;
         }
+        if ($this->trimNullableString($userId) === null && $this->trimNullableString($anonId) === null) {
+            return null;
+        }
 
         $attemptChannel = DB::table('attempts')
             ->where('id', $normalizedAttemptId)
+            ->where('org_id', $orgId)
+            ->where(function ($query) use ($userId, $anonId): void {
+                if ($userId !== null && trim($userId) !== '') {
+                    $query->orWhere('user_id', $userId);
+                }
+
+                if ($anonId !== null && trim($anonId) !== '') {
+                    $query->orWhere('anon_id', $anonId);
+                }
+            })
             ->value('channel');
 
         return Order::normalizeChannel(is_scalar($attemptChannel) ? (string) $attemptChannel : null);
+    }
+
+    private function resolveOwnedTargetAttemptId(
+        mixed $attemptId,
+        int $orgId,
+        ?string $userId,
+        ?string $anonId
+    ): ?string {
+        $normalizedAttemptId = $this->trimNullableString($attemptId);
+        if ($normalizedAttemptId === null) {
+            return null;
+        }
+
+        if (! $this->attemptBelongsToActor($normalizedAttemptId, $orgId, $userId, $anonId)) {
+            abort(404, 'target attempt not found.');
+        }
+
+        return $normalizedAttemptId;
+    }
+
+    private function orderTargetAttemptOwnedByOrder(object $order, string $attemptId): bool
+    {
+        if ($this->orderHasActiveGrantForAttempt($order, $attemptId)) {
+            return true;
+        }
+
+        return $this->attemptBelongsToActor(
+            $attemptId,
+            (int) ($order->org_id ?? $this->orgContext->orgId()),
+            $this->trimNullableString($order->user_id ?? null),
+            $this->trimNullableString($order->anon_id ?? null)
+        );
+    }
+
+    private function attemptBelongsToActor(string $attemptId, int $orgId, ?string $userId, ?string $anonId): bool
+    {
+        $uid = $this->trimNullableString($userId);
+        $aid = $this->trimNullableString($anonId);
+        if ($uid === null && $aid === null) {
+            return false;
+        }
+
+        return DB::table('attempts')
+            ->where('id', $attemptId)
+            ->where('org_id', $orgId)
+            ->where(function ($query) use ($uid, $aid): void {
+                if ($uid !== null) {
+                    $query->orWhere('user_id', $uid);
+                }
+
+                if ($aid !== null) {
+                    $query->orWhere('anon_id', $aid);
+                }
+            })
+            ->exists();
+    }
+
+    private function orderHasActiveGrantForAttempt(object $order, string $attemptId): bool
+    {
+        $orderNo = $this->trimNullableString($order->order_no ?? null);
+        if ($orderNo === null) {
+            return false;
+        }
+
+        return DB::table('benefit_grants')
+            ->where('org_id', (int) ($order->org_id ?? $this->orgContext->orgId()))
+            ->where('order_no', $orderNo)
+            ->where('attempt_id', $attemptId)
+            ->where('status', 'active')
+            ->exists();
     }
 
     private function resolveContactEmail(array $payload, ?string $userId): ?string

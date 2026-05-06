@@ -91,11 +91,14 @@ final class CommerceCheckoutPayActionTest extends TestCase
             ], 201),
         ]);
 
+        $this->insertAttempt('attempt_lemonsqueezy_001', 'anon_lemonsqueezy_001');
         $response = $this->checkout([
             'sku' => 'MBTI_CREDIT',
             'provider' => 'lemonsqueezy',
             'email' => 'checkout@example.com',
             'attempt_id' => 'attempt_lemonsqueezy_001',
+        ], [
+            'X-Anon-Id' => 'anon_lemonsqueezy_001',
         ]);
 
         $response->assertStatus(200);
@@ -131,6 +134,8 @@ final class CommerceCheckoutPayActionTest extends TestCase
             'provider' => 'billing',
             'email' => 'checkout-contract@example.com',
             'attempt_id' => $attemptId,
+        ], [
+            'X-Anon-Id' => 'anon_checkout_recovery_contract_1',
         ]);
 
         $response->assertStatus(200);
@@ -155,6 +160,29 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $this->assertSame('web', (string) DB::table('orders')->where('order_no', $orderNo)->value('channel'));
         $this->assertSame(1, (int) ($response->json('payment_attempts_count') ?? 0));
         $this->assertSame('initiated', (string) ($response->json('latest_payment_attempt.state') ?? ''));
+    }
+
+    public function test_checkout_rejects_cross_owner_attempt_id_before_channel_derivation(): void
+    {
+        $this->seedCommerce();
+
+        $attemptId = 'attempt_cross_owner_channel_1';
+        $this->insertAttempt($attemptId, 'victim_anon_channel_1');
+
+        $response = $this->checkout([
+            'sku' => 'MBTI_CREDIT',
+            'provider' => 'billing',
+            'email' => 'attacker@example.com',
+            'attempt_id' => $attemptId,
+        ], [
+            'X-Anon-Id' => 'attacker_anon_channel_1',
+        ]);
+
+        $response->assertStatus(404);
+        $this->assertDatabaseMissing('orders', [
+            'target_attempt_id' => $attemptId,
+            'anon_id' => 'attacker_anon_channel_1',
+        ]);
     }
 
     public function test_cached_order_payment_action_does_not_create_duplicate_payment_attempts(): void
@@ -260,11 +288,13 @@ final class CommerceCheckoutPayActionTest extends TestCase
                 ]);
             $this->app->instance(WechatPayCheckoutService::class, $mock);
 
+            $this->insertAttempt('attempt_wechat_auto_enabled_001', 'anon_wechat_auto_enabled_001');
             $response = $this->checkout([
                 'sku' => 'MBTI_CREDIT',
                 'email' => 'wechat-auto-enabled@example.com',
                 'attempt_id' => 'attempt_wechat_auto_enabled_001',
             ], [
+                'X-Anon-Id' => 'anon_wechat_auto_enabled_001',
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
                 'X-Region' => 'CN_MAINLAND',
             ]);
@@ -356,11 +386,13 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $wechatMock->shouldReceive('createCheckoutAction')->never();
         $this->app->instance(WechatPayCheckoutService::class, $wechatMock);
 
+        $this->insertAttempt('attempt_alipay_override_001', 'anon_alipay_override_001');
         $response = $this->checkout([
             'sku' => 'MBTI_CREDIT',
             'email' => 'alipay-override@example.com',
             'attempt_id' => 'attempt_alipay_override_001',
         ], [
+            'X-Anon-Id' => 'anon_alipay_override_001',
             'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
             'X-Region' => 'CN_MAINLAND',
         ]);
@@ -466,6 +498,39 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('provider', 'wechatpay');
         $response->assertJsonPath('pay.type', 'qr');
         $response->assertJsonPath('pay.value', 'weixin://wxpay/bizpayurl?pr=include_payment_action');
+        $response->assertJsonPath('checkout_url', null);
+    }
+
+    public function test_get_order_handles_provider_action_failure_without_undefined_payment_attempt(): void
+    {
+        $this->seedCommerce();
+
+        config([
+            'payments.providers.wechatpay.enabled' => true,
+        ]);
+
+        $orderNo = 'ord_include_payment_action_provider_failure';
+        $anonId = 'anon_include_payment_action_provider_failure';
+        $this->insertPendingOrder($orderNo, 'wechatpay', $anonId);
+
+        $mock = Mockery::mock(WechatPayCheckoutService::class);
+        $mock->shouldReceive('createCheckoutAction')
+            ->once()
+            ->andReturn([
+                'ok' => false,
+                'error_code' => 'PROVIDER_DOWN',
+                'message' => 'provider unavailable',
+            ]);
+        $this->app->instance(WechatPayCheckoutService::class, $mock);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        ])->getJson('/api/v0.3/orders/'.$orderNo.'?include_payment_action=1');
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('provider', 'wechatpay');
+        $response->assertJsonPath('pay', null);
         $response->assertJsonPath('checkout_url', null);
     }
 
