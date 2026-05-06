@@ -1,0 +1,61 @@
+{
+  "schema_version": "big5_v2_release_snapshot_v0_1",
+  "snapshot_id": "big5_result_page_v2_rc_0_1",
+  "snapshot_version": "v0_1",
+  "snapshot_sha256": "f25591dee2ab620d9a449c563677f780a7c6c085d62ff77e337b69ebc1556ac7",
+  "created_at": "2026-05-06T00:00:00Z",
+  "mode": "immutable_release_snapshot",
+  "runtime_use": "not_runtime",
+  "immutable": true,
+  "release_candidate": false,
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "content_version_refs": [
+    {
+      "kind": "production_governance_policy",
+      "path": "content_assets/big5/result_page_v2/governance/production_policy_v0_1/manifest.json",
+      "version": "v0_1",
+      "sha256": "c0f8cb39cdb3b0b074e024dcfe8d78335a8d4e0de5274e6b56bd6204ab07cf6a"
+    },
+    {
+      "kind": "rendered_qa_expanded_surfaces",
+      "path": "content_assets/big5/result_page_v2/qa/rendered_preview/expanded_surfaces/v0_1/big5_o59_expanded_rendered_qa_report_v0_1.json",
+      "version": "v0_1"
+    },
+    {
+      "kind": "all_surface_public_pilot_readiness",
+      "path": "content_assets/big5/result_page_v2/qa/all_surface_public_pilot_readiness/v0_1/big5_all_surface_public_pilot_readiness_report_v0_1.json",
+      "version": "v0_1"
+    },
+    {
+      "kind": "selector_ready_assets",
+      "path": "content_assets/big5/result_page_v2/selector_ready_assets/v0_3_p0_full/manifest.json",
+      "version": "v0_3_p0_full"
+    },
+    {
+      "kind": "route_driven_payload_fixture",
+      "path": "tests/Fixtures/big5_result_page_v2/route_driven_o59_pilot_payload_v0_1.payload.json",
+      "version": "v0_1"
+    }
+  ],
+  "traceability": {
+    "policy_package": "content_assets/big5/result_page_v2/governance/production_policy_v0_1",
+    "qa_package": "content_assets/big5/result_page_v2/qa/production_governance_policy/v0_1",
+    "previous_snapshot_id": null,
+    "snapshot_manifest": "content_assets/big5/result_page_v2/releases/v0_1/manifest.json"
+  },
+  "rollback": {
+    "strategy": "revert_to_previous_immutable_snapshot",
+    "previous_snapshot_id": null,
+    "release_disable_supported": true,
+    "emergency_disable_supported": true,
+    "operator_note": "Rollback is represented by disabling this snapshot and restoring the prior immutable snapshot reference."
+  },
+  "immutability_contract": {
+    "overwrite_allowed": false,
+    "append_only_versions": true,
+    "hash_required": true,
+    "manifest_hash_required": true
+  }
+}
