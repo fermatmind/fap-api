@@ -67,6 +67,36 @@ final class BigFiveV2PilotObservabilityTest extends TestCase
         )->once();
     }
 
+    public function test_public_pilot_gate_denied_emits_safe_observability_log(): void
+    {
+        Log::spy();
+        config()->set('big5_result_page_v2.enabled', false);
+        config()->set('big5_result_page_v2.pilot_runtime_enabled', false);
+        config()->set('big5_result_page_v2.public_pilot_enabled', true);
+        config()->set('big5_result_page_v2.public_pilot_allowed_environments', ['testing']);
+        config()->set('big5_result_page_v2.public_pilot_allowed_scale_codes', ['BIG5_OCEAN']);
+        config()->set('big5_result_page_v2.public_pilot_allowed_form_codes', ['big5_90']);
+        config()->set('big5_result_page_v2.public_pilot_allowed_locales', ['zh-CN']);
+        config()->set('big5_result_page_v2.public_pilot_rollout_percentage', 0);
+        config()->set('big5_report_engine.v2_bridge_enabled', false);
+        $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_v2_observability_public_denied');
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$fixture['token'],
+            'X-Anon-Id' => $fixture['anon_id'],
+        ])->getJson('/api/v0.3/attempts/'.$fixture['attempt_id'].'/report');
+
+        $response->assertOk();
+        $this->assertArrayNotHasKey(BigFiveResultPageV2Contract::PAYLOAD_KEY, $response->json());
+        Log::shouldHaveReceived('info')->with(
+            BigFiveV2PilotRuntimeObservability::EVENT,
+            Mockery::on(fn (array $context): bool => $this->matchesSafeContext($context)
+                && ($context['public_pilot_gate_denied'] ?? null) === true
+                && ($context['public_pilot_gate_allowed'] ?? null) === false
+                && ($context['fallback_reason'] ?? null) === 'public_pilot_gate_denied'),
+        )->once();
+    }
+
     public function test_payload_attached_emits_counts_without_payload_body_or_pii(): void
     {
         Log::spy();
@@ -88,6 +118,10 @@ final class BigFiveV2PilotObservabilityTest extends TestCase
             BigFiveV2PilotRuntimeObservability::EVENT,
             Mockery::on(fn (array $context): bool => $this->matchesSafeContext($context)
                 && ($context['payload_attached'] ?? null) === true
+                && ($context['route_input_created'] ?? null) === true
+                && ($context['route_lookup_failed'] ?? null) === false
+                && ($context['composer_failed'] ?? null) === false
+                && array_key_exists('selector_suppressed_refs', $context)
                 && array_key_exists('selector_suppressed_ref_count', $context)
                 && array_key_exists('unresolved_ref_count', $context)
                 && is_array($context['surface_status_summary'] ?? null)),
