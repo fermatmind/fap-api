@@ -6,13 +6,16 @@ namespace Tests\Feature\Career;
 
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
+use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
+use App\Models\CareerJobSeoMeta;
 use App\Models\Occupation;
 use App\Models\OccupationAlias;
 use App\Models\OccupationFamily;
 use App\Models\RecommendationSnapshot;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\TestCase;
@@ -87,6 +90,7 @@ final class CareerAliasResolutionApiTest extends TestCase
             'Food Scientists and Technologists',
         );
         $this->createDisplayAsset($occupation);
+        $this->createReleaseEligibleCareerJobs((string) $occupation->canonical_slug);
 
         $this->assertSame(0, RecommendationSnapshot::query()->where('occupation_id', $occupation->id)->count());
 
@@ -372,5 +376,39 @@ final class CareerAliasResolutionApiTest extends TestCase
             'implementation_contract_json' => [],
             'metadata_json' => [],
         ]);
+    }
+
+    private function createReleaseEligibleCareerJobs(string $slug): void
+    {
+        foreach (CareerJob::SUPPORTED_LOCALES as $locale) {
+            $job = CareerJob::query()->create([
+                'org_id' => 0,
+                'job_code' => $slug,
+                'slug' => $slug,
+                'locale' => $locale,
+                'title' => 'Display Asset Target',
+                'excerpt' => 'Display asset target excerpt',
+                'status' => CareerJob::STATUS_PUBLISHED,
+                'is_public' => true,
+                'is_indexable' => true,
+                'schema_version' => 'v1',
+                'sort_order' => 0,
+                'published_at' => Carbon::now()->subDay(),
+            ]);
+
+            CareerJobSeoMeta::query()->create([
+                'job_id' => (int) $job->id,
+                'seo_title' => 'Display Asset Target',
+                'seo_description' => 'Display asset target description',
+                'canonical_url' => 'https://example.test/'.($locale === 'zh-CN' ? 'zh' : $locale).'/career/jobs/'.$slug,
+                'og_title' => 'Display Asset Target',
+                'og_description' => 'Display asset target description',
+                'og_image_url' => 'https://example.test/images/career.png',
+                'twitter_title' => 'Display Asset Target',
+                'twitter_description' => 'Display asset target description',
+                'twitter_image_url' => 'https://example.test/images/career.png',
+                'robots' => 'index,follow',
+            ]);
+        }
     }
 }

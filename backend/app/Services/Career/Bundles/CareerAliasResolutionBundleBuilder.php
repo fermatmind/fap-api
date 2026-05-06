@@ -7,6 +7,7 @@ namespace App\Services\Career\Bundles;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\FirstWavePublishGate;
 use App\DTO\Career\CareerAliasResolutionBundle;
+use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationAlias;
@@ -325,6 +326,9 @@ final class CareerAliasResolutionBundleBuilder
 
             $asset = $this->validDisplayAssetBackedAsset($occupation);
             if (! $asset instanceof CareerJobDisplayAsset) {
+                continue;
+            }
+            if (! $this->displayAssetBackedTargetReleaseEligible($occupation)) {
                 continue;
             }
 
@@ -835,6 +839,45 @@ final class CareerAliasResolutionBundleBuilder
         }
 
         return $asset;
+    }
+
+    private function displayAssetBackedTargetReleaseEligible(Occupation $occupation): bool
+    {
+        $subjectSlug = strtolower(trim((string) $occupation->canonical_slug));
+        if ($subjectSlug === '' || in_array($subjectSlug, self::DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS, true)) {
+            return false;
+        }
+
+        $records = CareerJob::query()
+            ->withoutGlobalScopes()
+            ->with('seoMeta')
+            ->where('org_id', 0)
+            ->where('slug', $subjectSlug)
+            ->where('status', CareerJob::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->whereIn('locale', CareerJob::SUPPORTED_LOCALES)
+            ->get();
+
+        $seen = [];
+        foreach ($records as $record) {
+            if (! $record instanceof CareerJob) {
+                continue;
+            }
+
+            $seen[(string) $record->locale] = true;
+            $robots = strtolower(trim((string) data_get($record->seoMeta, 'robots', '')));
+            if (! (bool) $record->is_indexable || $robots === '' || str_contains($robots, 'noindex')) {
+                return false;
+            }
+        }
+
+        foreach (CareerJob::SUPPORTED_LOCALES as $locale) {
+            if (($seen[$locale] ?? false) !== true) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function normalizeText(mixed $value): ?string
