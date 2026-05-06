@@ -1,0 +1,73 @@
+{
+  "schema": "big5_result_page_v2.production_rollout_rollback_drills.v0_1",
+  "package": "production_rollout_rollback_kill_switch",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "rollout_rollback_drills": [
+    {
+      "id": "rollout_percentage_rollback",
+      "scenario": "reduce percentage exposure to zero",
+      "expected_decision": "production_rollout_percentage_denied",
+      "rollback_type": "config_only",
+      "reversible": "pass",
+      "destructive_change": "none"
+    },
+    {
+      "id": "allowlist_revoke",
+      "scenario": "remove attempt from allowlist",
+      "expected_decision": "production_rollout_allowlist_denied",
+      "rollback_type": "scoped_allowlist",
+      "reversible": "pass",
+      "destructive_change": "none"
+    },
+    {
+      "id": "release_snapshot_rollback",
+      "scenario": "disable active release snapshot and revert to approved snapshot",
+      "expected_decision": "production_rollout_snapshot_disabled",
+      "rollback_type": "release_snapshot_revert",
+      "reversible": "pass",
+      "destructive_change": "none"
+    },
+    {
+      "id": "fail_closed_recovery",
+      "scenario": "recover from invalid rollout config without attaching payload",
+      "expected_decision": "production_rollout_invalid_config",
+      "rollback_type": "config_correction",
+      "reversible": "pass",
+      "destructive_change": "none"
+    }
+  ],
+  "kill_switch_drills": [
+    {
+      "id": "global_emergency_disable",
+      "scenario": "global emergency disable overrides allowlist and percentage rollout",
+      "expected_decision": "production_rollout_emergency_disabled",
+      "kill_switch_scope": "global",
+      "fail_closed": "pass"
+    },
+    {
+      "id": "release_disable",
+      "scenario": "disable a single release snapshot while keeping rollback target available",
+      "expected_decision": "production_rollout_snapshot_disabled",
+      "kill_switch_scope": "release_snapshot",
+      "fail_closed": "pass"
+    },
+    {
+      "id": "rollout_disabled_default",
+      "scenario": "default rollout config denies production exposure",
+      "expected_decision": "production_rollout_disabled",
+      "kill_switch_scope": "global_default",
+      "fail_closed": "pass"
+    }
+  ],
+  "observability_required": [
+    "rollout_deny",
+    "fail_closed",
+    "rollout_percentage",
+    "payload_attached_false"
+  ]
+}
