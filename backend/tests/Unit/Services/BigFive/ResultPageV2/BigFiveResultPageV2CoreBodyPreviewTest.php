@@ -405,6 +405,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerFamilyHubBundleBuilder.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -808,6 +809,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerFamilyHubBundleBuilder.php',
         ], true);
     }
 
