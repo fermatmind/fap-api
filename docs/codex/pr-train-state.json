@@ -504,7 +504,7 @@
       "depends_on": [
         "PR-4"
       ],
-      "commit_sha": "ef9a52c91eb9183aa6c9f01cd662b7a0c1d48624",
+      "commit_sha": "abba7d34e19c5440f2f91bd8ada02e8ab7e081f8",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1217",
       "checks": {
         "dependency": {
@@ -521,7 +521,7 @@
         },
         "pint": {
           "status": "pass",
-          "command": "./vendor/bin/pint app/Support/Xlsx/XlsxCellReference.php app/Services/Ingestion/ReplayService.php app/Services/Storage/QuarantinedRootRestoreService.php app/Services/Career/Import/CareerAuthorityDatasetReader.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Commands/CareerValidateAssetImport.php app/Console/Commands/CareerValidateDisplayBatch.php app/Console/Commands/CareerAlignD8AuthorityCrosswalks.php app/Console/Commands/CareerAlignSelectedOnetCrosswalks.php app/Console/Commands/CareerAlignSelectedAuthorityCrosswalks.php tests/Unit/XlsxCellReferenceTest.php tests/Feature/Integrations/IngestionReplayServiceTest.php tests/Feature/Storage/QuarantinedRootRestoreServiceTest.php"
+          "command": "./vendor/bin/pint app/Support/Xlsx/XlsxCellReference.php app/Services/Ingestion/ReplayService.php app/Services/Storage/QuarantinedRootRestoreService.php app/Services/Career/Import/CareerAuthorityDatasetReader.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Commands/CareerValidateAssetImport.php app/Console/Commands/CareerValidateDisplayBatch.php app/Console/Commands/CareerAlignD8AuthorityCrosswalks.php app/Console/Commands/CareerAlignSelectedOnetCrosswalks.php app/Console/Commands/CareerAlignSelectedAuthorityCrosswalks.php tests/Unit/XlsxCellReferenceTest.php tests/Feature/Integrations/IngestionReplayServiceTest.php tests/Feature/Storage/QuarantinedRootRestoreServiceTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
         },
         "route_list": {
           "status": "pass",
@@ -540,6 +540,15 @@
           "status": "pass",
           "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/XlsxCellReferenceTest.php tests/Feature/Integrations/IngestionReplayServiceTest.php tests/Feature/Storage/QuarantinedRootRestoreServiceTest.php",
           "evidence": "16 tests passed, 122 assertions."
+        },
+        "mbti_freeze_classifier": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|file_import_idempotency_hardening'",
+          "evidence": "2 tests passed, including the required-check failure guard for PR-5 file/import/idempotency hardening paths."
+        },
+        "github_required_checks": {
+          "status": "retry_pending",
+          "evidence": "GitHub verify-mbti-v2 failed on the MBTI runtime freeze classifier because PR-5 changed file/import/idempotency hardening service paths. Added a narrow classifier allowlist and local regression test; checks will rerun after push."
         },
         "mbti_ci": {
           "status": "external_blocker",
