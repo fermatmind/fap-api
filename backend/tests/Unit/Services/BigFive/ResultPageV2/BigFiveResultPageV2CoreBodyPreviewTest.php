@@ -511,6 +511,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Models/BigFiveV2EditorialRevision.php',
             'backend/app/Services/BigFive/Cms/BigFiveV2EditorialAssetIndex.php',
             'backend/app/Services/BigFive/Cms/BigFiveV2EditorialApprovalFlow.php',
+            'backend/app/Services/BigFive/Cms/BigFiveV2EditorialPreviewService.php',
             'backend/app/Services/BigFive/Cms/BigFiveV2EditorialWorkflow.php',
             'backend/app/Policies/BigFiveV2EditorialRevisionPolicy.php',
             'backend/database/migrations/2026_05_07_010000_create_big_five_v2_editorial_revisions_table.php',
