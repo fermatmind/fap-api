@@ -1,0 +1,33 @@
+{
+  "schema_version": "big5_v2_cms_rollback_audit_policy.v0_1",
+  "policy": "big5_v2_cms_editorial_rollback_audit",
+  "mode": "editorial_release_based_rollback",
+  "runtime_mutation_allowed": false,
+  "direct_runtime_publish_allowed": false,
+  "release_based_rollback_required": true,
+  "required_audits": {
+    "approval_audit": true,
+    "release_audit": true,
+    "rollback_audit": true,
+    "release_evidence_linkage": true
+  },
+  "rollback_authority": {
+    "required_permissions": [
+      "admin.approval.review",
+      "admin.content.release"
+    ],
+    "role_separation_required": true
+  },
+  "release_evidence": {
+    "release_linkage_policy_path": "backend/content_assets/big5/result_page_v2/governance/cms_release_linkage_v0_1/big5_v2_cms_release_linkage_policy_v0_1.json",
+    "release_evidence_archive_path": "backend/content_assets/big5/result_page_v2/qa/release_evidence_archive/v0_1/big5_v2_release_evidence_archive_v0_1.json",
+    "immutable_release_snapshot_required": true
+  },
+  "forbidden_paths": [
+    "cms_direct_runtime_publish",
+    "cms_runtime_payload_mutation",
+    "cms_release_snapshot_overwrite",
+    "cms_import_gate_bypass",
+    "cms_runtime_gate_bypass"
+  ]
+}
