@@ -156,17 +156,23 @@ final class BigFiveResultPageV2RuntimeWrapper
 
     private function pilotRuntimeEnabled(): bool
     {
-        if (! (bool) config('big5_result_page_v2.pilot_runtime_enabled', false)) {
+        if (! (bool) config('big5_result_page_v2.pilot_runtime_enabled', false)
+            && ! (bool) config('big5_result_page_v2.public_pilot_enabled', false)) {
             return false;
         }
 
         $environment = (string) app()->environment();
-        $allowedEnvironments = $this->pilotAllowedEnvironments();
+        $allowedEnvironments = array_values(array_unique(array_merge(
+            $this->pilotAllowedEnvironments(),
+            $this->publicPilotAllowedEnvironments(),
+        )));
         if (! in_array($environment, $allowedEnvironments, true)) {
             return false;
         }
 
-        if ($environment === 'production' && ! (bool) config('big5_result_page_v2.pilot_production_allowlist_enabled', false)) {
+        if ($environment === 'production'
+            && ! (bool) config('big5_result_page_v2.pilot_production_allowlist_enabled', false)
+            && ! (bool) config('big5_result_page_v2.public_pilot_production_allowlist_enabled', false)) {
             return false;
         }
 
@@ -181,6 +187,26 @@ final class BigFiveResultPageV2RuntimeWrapper
         $configured = config('big5_result_page_v2.pilot_allowed_environments', []);
         if (is_string($configured)) {
             $configured = explode(',', $configured);
+        }
+
+        if (! is_array($configured)) {
+            return [];
+        }
+
+        return array_values(array_filter(array_map(
+            static fn (mixed $environment): string => trim((string) $environment),
+            $configured,
+        )));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function publicPilotAllowedEnvironments(): array
+    {
+        $configured = config('big5_result_page_v2.public_pilot_allowed_environments', []);
+        if (is_string($configured)) {
+            $configured = explode(',');
         }
 
         if (! is_array($configured)) {
