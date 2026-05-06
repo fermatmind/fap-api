@@ -1,0 +1,19 @@
+{
+  "package": "big5_v2_release_snapshots",
+  "version": "v0_1",
+  "mode": "immutable_snapshot_manifest",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "snapshots": [
+    {
+      "snapshot_id": "big5_result_page_v2_rc_0_1",
+      "snapshot_version": "v0_1",
+      "file": "big5_v2_release_snapshot_rc_0_1.json",
+      "sha256": "04fbb19526f4e4e95fb64dc7d374a7832005a663b29f2c9d05b89fc8854a36e6",
+      "immutable": true
+    }
+  ],
+  "rollback_supported_by_snapshot_revert": true
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "big5_v2_release_snapshot_v0_1",
+  "snapshot_id": "fixture_big5_result_page_v2_rc_0_1",
+  "snapshot_version": "v0_1",
+  "snapshot_sha256": "dc8d20c47d0309da776a9e82647f746b2d6add2536aa015b6e701daad75ce342",
+  "created_at": "2026-05-06T00:00:00Z",
+  "mode": "immutable_release_snapshot_fixture",
+  "runtime_use": "not_runtime",
+  "immutable": true,
+  "release_candidate": false,
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "content_version_refs": [
+    {
+      "kind": "production_governance_policy",
+      "path": "content_assets/big5/result_page_v2/governance/production_policy_v0_1/manifest.json",
+      "version": "v0_1"
+    },
+    {
+      "kind": "release_snapshot_package",
+      "path": "content_assets/big5/result_page_v2/releases/v0_1/manifest.json",
+      "version": "v0_1"
+    }
+  ],
+  "traceability": {
+    "policy_package": "content_assets/big5/result_page_v2/governance/production_policy_v0_1",
+    "previous_snapshot_id": null,
+    "snapshot_manifest": "content_assets/big5/result_page_v2/releases/v0_1/manifest.json"
+  },
+  "rollback": {
+    "strategy": "revert_to_previous_immutable_snapshot",
+    "previous_snapshot_id": null,
+    "release_disable_supported": true,
+    "emergency_disable_supported": true,
+    "operator_note": "Fixture rollback uses the same snapshot revert contract as the content asset package."
+  },
+  "immutability_contract": {
+    "overwrite_allowed": false,
+    "append_only_versions": true,
+    "hash_required": true,
+    "manifest_hash_required": true
+  }
+}
