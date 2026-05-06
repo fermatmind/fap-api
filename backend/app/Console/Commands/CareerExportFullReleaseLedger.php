@@ -199,6 +199,8 @@ final class CareerExportFullReleaseLedger extends Command
             'duplicate_alias_decisions' => 0,
             'duplicate_blocked_non_public' => 0,
             'duplicate_canonical_promotions' => 0,
+            'CN_proxy_blocked_until_policy' => 0,
+            'CN_proxy_canonical_promotions' => 0,
             'broad_group_blocked_non_public' => 0,
             'broad_group_family_hub_decisions' => 0,
             'broad_group_canonical_promotions' => 0,
@@ -250,6 +252,12 @@ final class CareerExportFullReleaseLedger extends Command
             }
             if ($currentStatus === 'duplicate_identity_hold' && ! (bool) $ledgerRow['public_eligible']) {
                 $counts['duplicate_blocked_non_public']++;
+            }
+            if ($currentStatus === 'CN_proxy_hold' && $resolutionType === 'blocked_until_governance_approval') {
+                $counts['CN_proxy_blocked_until_policy']++;
+            }
+            if ($currentStatus === 'CN_proxy_hold' && $resolutionType === 'public_canonical_job') {
+                $counts['CN_proxy_canonical_promotions']++;
             }
             if ($currentStatus === 'broad_group_hold' && $resolutionType === 'public_family_hub') {
                 $counts['broad_group_family_hub_decisions']++;
@@ -493,7 +501,7 @@ final class CareerExportFullReleaseLedger extends Command
     }
 
     /**
-     * @return array{governance_decision:string,public_resolution_type:string,indexability:string,public_eligible:bool}
+     * @return array<string, mixed>
      */
     private function defaultGovernanceDecision(string $sourceSlug, string $currentStatus): array
     {
@@ -511,10 +519,30 @@ final class CareerExportFullReleaseLedger extends Command
 
         if ($currentStatus === 'manual_hold') {
             return [
-                'governance_decision' => 'manual_hold_default_non_public',
+                'governance_decision' => 'continue_manual_hold',
                 'public_resolution_type' => 'keep_non_public_with_policy',
                 'indexability' => 'not_public',
                 'public_eligible' => false,
+                'sitemap_eligible' => false,
+                'llms_eligible' => false,
+                'llms_full_eligible' => false,
+                'source_authority_model' => 'manual_approval_required_before_publication',
+                'schema_policy' => 'manual_release_policy_required_before_public_schema',
+            ];
+        }
+
+        if ($currentStatus === 'CN_proxy_hold') {
+            return [
+                'governance_decision' => 'blocked_until_CN_authority_policy',
+                'public_resolution_type' => 'blocked_until_governance_approval',
+                'indexability' => 'not_public',
+                'public_eligible' => false,
+                'sitemap_eligible' => false,
+                'llms_eligible' => false,
+                'llms_full_eligible' => false,
+                'source_authority_model' => 'CN_first_authority_policy_required_before_publication',
+                'schema_policy' => 'CN_proxy_schema_policy_required_before_public_schema',
+                'trust_manifest_required' => true,
             ];
         }
 

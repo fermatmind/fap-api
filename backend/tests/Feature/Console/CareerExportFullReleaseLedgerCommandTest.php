@@ -87,15 +87,23 @@ final class CareerExportFullReleaseLedgerCommandTest extends TestCase
         $this->assertSame(793, (int) data_get($publicResolution, 'counts.public_canonical_job'));
         $this->assertSame(1992, (int) data_get($publicResolution, 'counts.blocked_until_governance_approval'));
         $this->assertSame(1, (int) data_get($publicResolution, 'counts.keep_non_public_with_policy'));
+        $this->assertSame(1663, (int) data_get($publicResolution, 'counts.CN_proxy_hold'));
+        $this->assertSame(1663, (int) data_get($publicResolution, 'counts.CN_proxy_blocked_until_policy'));
+        $this->assertSame(0, (int) data_get($publicResolution, 'counts.CN_proxy_canonical_promotions'));
         $this->assertSame(0, (int) data_get($publicResolution, 'counts.software_developers_public'));
 
         $softwareDevelopers = collect((array) data_get($publicResolution, 'rows'))->firstWhere('source_slug', 'software-developers');
         $this->assertIsArray($softwareDevelopers);
         $this->assertSame('manual_hold', $softwareDevelopers['current_status'] ?? null);
+        $this->assertSame('continue_manual_hold', $softwareDevelopers['governance_decision'] ?? null);
         $this->assertSame('keep_non_public_with_policy', $softwareDevelopers['public_resolution_type'] ?? null);
+        $this->assertSame('not_public', $softwareDevelopers['indexability'] ?? null);
         $this->assertFalse((bool) ($softwareDevelopers['public_eligible'] ?? true));
         $this->assertFalse((bool) ($softwareDevelopers['sitemap_eligible'] ?? true));
         $this->assertFalse((bool) ($softwareDevelopers['llms_eligible'] ?? true));
+        $this->assertFalse((bool) ($softwareDevelopers['llms_full_eligible'] ?? true));
+        $this->assertSame('manual_approval_required_before_publication', $softwareDevelopers['source_authority_model'] ?? null);
+        $this->assertSame('manual_release_policy_required_before_public_schema', $softwareDevelopers['schema_policy'] ?? null);
     }
 
     public function test_command_can_record_duplicate_identity_alias_decisions_without_canonical_promotions(): void
@@ -212,6 +220,61 @@ final class CareerExportFullReleaseLedgerCommandTest extends TestCase
             $this->assertNull($row['family_hub_slug'] ?? null);
             $this->assertNull($row['target_canonical_slug'] ?? null);
             $this->assertSame('broad_group_family_or_split_policy_required_before_public_schema', $row['schema_policy'] ?? null);
+        }
+    }
+
+    public function test_command_records_cn_proxy_rows_as_blocked_until_authority_policy_without_public_urls(): void
+    {
+        $timestamp = 'career-cn-proxy-ledger-test-export';
+        $planPath = $this->writePublicResolutionPlanFixture();
+
+        $exitCode = Artisan::call('career:export-full-release-ledger', [
+            '--timestamp' => $timestamp,
+            '--public-resolution-plan' => $planPath,
+            '--json' => true,
+        ]);
+
+        $payload = json_decode(trim((string) Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertIsArray($payload);
+
+        $artifactPath = $payload['artifacts'][CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
+        $this->assertIsString($artifactPath);
+        $this->assertFileExists($artifactPath);
+
+        $ledger = json_decode((string) file_get_contents($artifactPath), true);
+        $this->assertIsArray($ledger);
+
+        $publicResolution = (array) data_get($ledger, 'public_resolution');
+        $this->assertSame(1663, (int) data_get($publicResolution, 'counts.CN_proxy_hold'));
+        $this->assertSame(1663, (int) data_get($publicResolution, 'counts.CN_proxy_blocked_until_policy'));
+        $this->assertSame(0, (int) data_get($publicResolution, 'counts.CN_proxy_canonical_promotions'));
+        $this->assertSame(0, (int) data_get($publicResolution, 'counts.public_cn_proxy_page'));
+
+        $rows = collect((array) data_get($publicResolution, 'rows'));
+        $cnRows = $rows->where('current_status', 'CN_proxy_hold')->values();
+
+        $this->assertCount(1663, $cnRows);
+        $this->assertSame([], $cnRows->where('public_resolution_type', 'public_canonical_job')->values()->all());
+        $this->assertSame([], $cnRows->where('public_resolution_type', 'public_cn_proxy_page')->values()->all());
+
+        foreach ($cnRows as $row) {
+            $this->assertSame('blocked_until_CN_authority_policy', $row['governance_decision'] ?? null);
+            $this->assertSame('blocked_until_governance_approval', $row['public_resolution_type'] ?? null);
+            $this->assertSame('not_public', $row['indexability'] ?? null);
+            $this->assertFalse((bool) ($row['public_eligible'] ?? true));
+            $this->assertFalse((bool) ($row['sitemap_eligible'] ?? true));
+            $this->assertFalse((bool) ($row['llms_eligible'] ?? true));
+            $this->assertFalse((bool) ($row['llms_full_eligible'] ?? true));
+            $this->assertSame('blocked_until_CN_authority_policy', $row['cn_proxy_policy'] ?? null);
+            $this->assertSame('CN_first_authority_policy_required_before_publication', $row['source_authority_model'] ?? null);
+            $this->assertSame('CN_proxy_schema_policy_required_before_public_schema', $row['schema_policy'] ?? null);
+            $this->assertTrue((bool) ($row['trust_manifest_required'] ?? false));
+            $this->assertTrue((bool) ($row['boundary_disclaimer_required'] ?? false));
+            $this->assertNull($row['target_canonical_slug'] ?? null);
+            $this->assertNull($row['redirect_target'] ?? null);
+            $this->assertNull($row['family_hub_slug'] ?? null);
         }
     }
 
