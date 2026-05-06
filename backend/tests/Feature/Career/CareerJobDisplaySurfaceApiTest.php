@@ -323,9 +323,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         $this->createDisplayAsset($occupation);
 
         $this->getJson('/api/v0.5/career/jobs/software-developers?locale=zh-CN')
-            ->assertOk()
-            ->assertJsonPath('identity.canonical_slug', 'software-developers')
-            ->assertJsonMissingPath('display_surface_v1');
+            ->assertNotFound();
     }
 
     public function test_manual_hold_software_developers_directory_draft_remains_blocked_even_with_display_asset(): void

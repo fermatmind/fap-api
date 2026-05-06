@@ -7,8 +7,12 @@ namespace Tests\Feature\Career;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\CareerJob;
+use App\Models\CareerJobDisplayAsset;
 use App\Models\CareerJobSection;
 use App\Models\CareerJobSeoMeta;
+use App\Models\Occupation;
+use App\Models\OccupationCrosswalk;
+use App\Models\OccupationFamily;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerFoundationFixture;
@@ -134,6 +138,10 @@ final class CareerJobDetailApiTest extends TestCase
 
     public function test_it_builds_docx_baseline_cms_jobs_as_authority_detail_bundles(): void
     {
+        $this->configurePublicResolutionPlan([
+            ['slug' => 'accountants-and-auditors', 'status' => 'already_imported_validated'],
+        ]);
+
         $job = CareerJob::query()->create([
             'org_id' => 0,
             'job_code' => 'accountants-and-auditors',
@@ -207,5 +215,205 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('seo_contract.canonical_path', '/career/jobs/accountants-and-auditors')
             ->assertJsonPath('claim_permissions.allow_strong_claim', true)
             ->assertJsonPath('provenance_meta.compile_refs.source_docx', '01_会计师和审计师_accountants-and-auditors.docx');
+    }
+
+    public function test_public_resolution_guard_blocks_governed_docx_fallback_rows(): void
+    {
+        $this->configurePublicResolutionPlan([
+            ['slug' => 'duplicate-hold-job', 'status' => 'duplicate_identity_hold'],
+            ['slug' => 'cn-proxy-0001', 'status' => 'CN_proxy_hold'],
+            ['slug' => 'broad-workers-all-other', 'status' => 'broad_group_hold'],
+            ['slug' => 'software-developers', 'status' => 'manual_hold'],
+            ['slug' => 'blocked-governance-job', 'status' => 'requires_governance_review'],
+        ]);
+
+        foreach ([
+            'duplicate-hold-job',
+            'cn-proxy-0001',
+            'broad-workers-all-other',
+            'software-developers',
+            'blocked-governance-job',
+        ] as $slug) {
+            $this->createPublishedDocxCareerJob($slug);
+
+            $this->getJson('/api/v0.5/career/jobs/'.$slug)
+                ->assertStatus(404)
+                ->assertJsonPath('ok', false)
+                ->assertJsonPath('error_code', 'NOT_FOUND');
+        }
+    }
+
+    public function test_display_asset_existence_alone_does_not_bypass_public_resolution_guard(): void
+    {
+        $this->configurePublicResolutionPlan([
+            ['slug' => 'display-backed-duplicate-hold', 'status' => 'duplicate_identity_hold'],
+        ]);
+
+        $occupation = $this->createDisplayAssetBackedOccupation('display-backed-duplicate-hold');
+        $this->createDisplayAsset($occupation);
+
+        $this->getJson('/api/v0.5/career/jobs/display-backed-duplicate-hold')
+            ->assertStatus(404)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
+    public function test_display_asset_backed_public_canonical_job_remains_available(): void
+    {
+        $this->configurePublicResolutionPlan([
+            ['slug' => 'display-backed-public-canonical', 'status' => 'already_imported_validated'],
+        ]);
+
+        $occupation = $this->createDisplayAssetBackedOccupation('display-backed-public-canonical');
+        $this->createDisplayAsset($occupation);
+
+        $this->getJson('/api/v0.5/career/jobs/display-backed-public-canonical')
+            ->assertOk()
+            ->assertJsonPath('bundle_kind', 'career_job_detail')
+            ->assertJsonPath('identity.canonical_slug', 'display-backed-public-canonical')
+            ->assertJsonPath('seo_contract.canonical_path', '/career/jobs/display-backed-public-canonical');
+    }
+
+    /**
+     * @param  list<array{slug: string, status: string}>  $rows
+     */
+    private function configurePublicResolutionPlan(array $rows): void
+    {
+        $path = storage_path('framework/testing/career-public-resolution-plan-'.str_replace('.', '', uniqid('', true)).'.json');
+        if (! is_dir(dirname($path))) {
+            mkdir(dirname($path), 0775, true);
+        }
+
+        file_put_contents($path, json_encode(['rows' => $rows], JSON_THROW_ON_ERROR));
+
+        config(['fap.career.public_resolution_plan_path' => $path]);
+    }
+
+    private function createPublishedDocxCareerJob(string $slug): CareerJob
+    {
+        $job = CareerJob::query()->create([
+            'org_id' => 0,
+            'job_code' => $slug,
+            'slug' => $slug,
+            'locale' => 'zh-CN',
+            'title' => str($slug)->replace('-', ' ')->title()->toString(),
+            'subtitle' => str($slug)->replace('-', ' ')->title()->toString(),
+            'excerpt' => 'Published DOCX fallback fixture.',
+            'body_md' => '# Published DOCX fallback fixture',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'salary_json' => ['annual_median_usd' => 81350],
+            'outlook_json' => ['jobs_2024' => 1000],
+            'growth_path_json' => ['raw' => ['Fixture growth path.']],
+            'market_demand_json' => [
+                'ai_exposure_score_10' => 6,
+                'source_refs' => [
+                    [
+                        'label' => 'BLS Occupational Outlook Handbook',
+                        'url' => 'https://www.bls.gov/ooh/fixture.htm',
+                    ],
+                ],
+            ],
+        ]);
+
+        CareerJobSeoMeta::query()->create([
+            'job_id' => (int) $job->id,
+            'jsonld_overrides_json' => [
+                'source_docx' => $slug.'.docx',
+            ],
+        ]);
+
+        return $job;
+    }
+
+    private function createDisplayAssetBackedOccupation(string $slug): Occupation
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => $slug.'-family',
+            'title_en' => 'Display Backed Family',
+            'title_zh' => '展示资产职业族',
+        ]);
+
+        $occupation = Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => $slug,
+            'entity_level' => 'market_child',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+            'crosswalk_mode' => 'exact',
+            'canonical_title_en' => str($slug)->replace('-', ' ')->title()->toString(),
+            'canonical_title_zh' => '展示资产职业',
+            'search_h1_zh' => '展示资产职业',
+            'structural_stability' => null,
+            'task_prototype_signature' => [],
+            'market_semantics_gap' => null,
+            'regulatory_divergence' => null,
+            'toolchain_divergence' => null,
+            'skill_gap_threshold' => null,
+            'trust_inheritance_scope' => [],
+        ]);
+
+        foreach ([
+            ['source_system' => 'us_soc', 'source_code' => '15-1252'],
+            ['source_system' => 'onet_soc_2019', 'source_code' => '15-1252.00'],
+        ] as $crosswalk) {
+            OccupationCrosswalk::query()->create([
+                'occupation_id' => $occupation->id,
+                'source_system' => $crosswalk['source_system'],
+                'source_code' => $crosswalk['source_code'],
+                'source_title' => 'Display Backed Occupation',
+                'mapping_type' => 'direct_match',
+                'confidence_score' => 1.0,
+            ]);
+        }
+
+        return $occupation;
+    }
+
+    private function createDisplayAsset(Occupation $occupation): CareerJobDisplayAsset
+    {
+        $page = [
+            'hero' => ['title' => 'Display backed career'],
+            'market_signal_card' => [
+                'salary_data_type' => 'BLS official wage evidence',
+                'body' => 'Official market signal from BLS.',
+            ],
+            'ai_impact_table' => [
+                'score_normalized' => '82',
+                'source' => 'FermatMind central score',
+            ],
+        ];
+
+        return CareerJobDisplayAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'canonical_slug' => (string) $occupation->canonical_slug,
+            'surface_version' => 'display.surface.v1',
+            'asset_version' => 'v4.2',
+            'template_version' => 'v4.2',
+            'asset_type' => 'career_job_public_display',
+            'asset_role' => 'formal_pilot_master',
+            'status' => 'ready_for_pilot',
+            'component_order_json' => array_map(static fn (int $index): string => 'component_'.$index, range(1, 24)),
+            'page_payload_json' => [
+                'page' => [
+                    'zh' => $page,
+                    'en' => $page,
+                ],
+            ],
+            'seo_payload_json' => [],
+            'sources_json' => [
+                'primary' => [
+                    ['label' => 'BLS Occupational Outlook Handbook', 'url' => 'https://www.bls.gov/ooh/fixture.htm'],
+                ],
+            ],
+            'structured_data_json' => [
+                '@type' => 'Occupation',
+                'name' => (string) $occupation->canonical_title_en,
+            ],
+            'implementation_contract_json' => [],
+            'metadata_json' => [],
+        ]);
     }
 }
