@@ -1,0 +1,31 @@
+{
+  "schema_version": "big5_v2_production_governance_policy_validation_v0_1",
+  "mode": "production_governance_schema_validation",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "policy_package": "content_assets/big5/result_page_v2/governance/production_policy_v0_1",
+  "validated_fields": [
+    "approved_for_production",
+    "rejected_for_production",
+    "release_candidate",
+    "required_rendered_qa",
+    "required_release_evidence",
+    "required_snapshot",
+    "required_all_surface_pass",
+    "rollback_required",
+    "release_go_no_go_required"
+  ],
+  "checks": {
+    "governance_policy_package_exists": "pass",
+    "required_fields_defined": "pass",
+    "default_decision_fail_closed": "pass",
+    "production_use_allowed_remains_false": "pass",
+    "ready_for_production_remains_false": "pass",
+    "runtime_behavior_unchanged": "pass"
+  },
+  "production_decision": {
+    "status": "NO-GO",
+    "reason": "Policy schema exists, but release snapshot, import gate, runtime gate, all-surface release gate, approval evidence, and dry-run report are not complete in this PR."
+  }
+}

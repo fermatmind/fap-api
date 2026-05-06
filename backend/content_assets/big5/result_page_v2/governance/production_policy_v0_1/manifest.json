@@ -1,0 +1,19 @@
+{
+  "package": "big5_v2_production_governance_policy",
+  "version": "v0_1",
+  "mode": "schema_only",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "files": [
+    "README.md",
+    "big5_v2_production_governance_policy_v0_1.json",
+    "manifest.json"
+  ],
+  "governance_scope": [
+    "policy_schema",
+    "required_evidence_fields",
+    "default_fail_closed_decision"
+  ]
+}

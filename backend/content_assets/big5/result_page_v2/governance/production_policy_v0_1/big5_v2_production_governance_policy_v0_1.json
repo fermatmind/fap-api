@@ -1,0 +1,161 @@
+{
+  "schema_version": "big5_v2_production_governance_policy_v0_1",
+  "mode": "production_governance_policy_schema",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "governance_fields": {
+    "approved_for_production": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "meaning": "A human governance decision has approved this exact release for production use."
+    },
+    "rejected_for_production": {
+      "type": "boolean",
+      "required": true,
+      "default": true,
+      "meaning": "The release is blocked from production until every required gate has passed."
+    },
+    "release_candidate": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "meaning": "The release has entered production governance review but is not production live."
+    },
+    "required_rendered_qa": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "desktop",
+        "mobile",
+        "pdf",
+        "share_card",
+        "history",
+        "compare"
+      ],
+      "meaning": "Rendered QA evidence required for every public surface before production approval."
+    },
+    "required_release_evidence": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "approval_record",
+        "audit_record",
+        "release_note",
+        "accepted_risk",
+        "rollback_note"
+      ],
+      "meaning": "Governance evidence required to support an approval decision."
+    },
+    "required_snapshot": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "snapshot_id",
+        "snapshot_version",
+        "sha256",
+        "content_version_refs",
+        "immutable"
+      ],
+      "meaning": "Immutable release snapshot required before any production import."
+    },
+    "required_all_surface_pass": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "rendered_qa_pass",
+        "metadata_leak_pass",
+        "fail_closed_pass",
+        "must_render_pass",
+        "must_not_render_pass"
+      ],
+      "meaning": "All public surfaces must pass with real evidence; pending or fake pass is rejected."
+    },
+    "rollback_required": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "rollback_target",
+        "release_disable_supported",
+        "emergency_disable_supported",
+        "operator_note"
+      ],
+      "meaning": "Rollback readiness required before production approval."
+    },
+    "release_go_no_go_required": {
+      "type": "object",
+      "required": true,
+      "required_keys": [
+        "dry_run_report",
+        "explicit_decision",
+        "human_approval_required",
+        "production_enablement_status"
+      ],
+      "meaning": "Final go/no-go report required before any production rollout can be considered."
+    }
+  },
+  "default_decision": {
+    "approved_for_production": false,
+    "rejected_for_production": true,
+    "release_candidate": false,
+    "required_rendered_qa": {
+      "desktop": "required_not_provided",
+      "mobile": "required_not_provided",
+      "pdf": "required_not_provided",
+      "share_card": "required_not_provided",
+      "history": "required_not_provided",
+      "compare": "required_not_provided"
+    },
+    "required_release_evidence": {
+      "approval_record": "required_not_provided",
+      "audit_record": "required_not_provided",
+      "release_note": "required_not_provided",
+      "accepted_risk": "required_not_provided",
+      "rollback_note": "required_not_provided"
+    },
+    "required_snapshot": {
+      "snapshot_id": null,
+      "snapshot_version": null,
+      "sha256": null,
+      "content_version_refs": [],
+      "immutable": "required_not_provided"
+    },
+    "required_all_surface_pass": {
+      "rendered_qa_pass": "required_not_provided",
+      "metadata_leak_pass": "required_not_provided",
+      "fail_closed_pass": "required_not_provided",
+      "must_render_pass": "required_not_provided",
+      "must_not_render_pass": "required_not_provided"
+    },
+    "rollback_required": {
+      "rollback_target": "required_not_provided",
+      "release_disable_supported": "required_not_provided",
+      "emergency_disable_supported": "required_not_provided",
+      "operator_note": "required_not_provided"
+    },
+    "release_go_no_go_required": {
+      "dry_run_report": "required_not_provided",
+      "explicit_decision": "NO-GO",
+      "human_approval_required": true,
+      "production_enablement_status": "disabled"
+    }
+  },
+  "fail_closed_rules": [
+    "Missing rendered QA evidence blocks production.",
+    "Missing immutable release snapshot blocks production.",
+    "Missing all-surface pass evidence blocks production.",
+    "Missing approval or audit evidence blocks production.",
+    "Pending surface status cannot be treated as pass.",
+    "Production rollout requires a separate explicit human approval."
+  ],
+  "out_of_scope": [
+    "production rollout",
+    "CMS connection",
+    "dynamic norms connection",
+    "scoring changes",
+    "content body generation",
+    "frontend fallback prose"
+  ]
+}
