@@ -1,0 +1,191 @@
+{
+  "schema": "fap.big5.result_page_v2.all_surface_public_pilot_readiness_report.v0_1",
+  "package_key": "big5_result_page_v2.all_surface_public_pilot_readiness.v0_1",
+  "version": "0.1",
+  "mode": "all_surface_public_pilot_readiness_report_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "decisions": {
+    "controlled_pilot": {
+      "status": "ready_constrained",
+      "can_enter": true
+    },
+    "result_page_only_public_pilot": {
+      "status": "go_result_page_only",
+      "can_enter": true,
+      "scope": [
+        "result_page_desktop",
+        "result_page_mobile"
+      ]
+    },
+    "all_surface_public_pilot": {
+      "status": "go_all_surfaces_public_pilot",
+      "can_enter": true,
+      "scope": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "share_card",
+        "history",
+        "compare"
+      ],
+      "conditions": [
+        "pilot_runtime_flag_remains_default_off",
+        "public_pilot_rollout_gate_controls_exposure",
+        "production_disabled",
+        "metadata_leak_contracts_pass",
+        "fail_closed_contracts_pass",
+        "surface_rendered_qa_contracts_pass"
+      ]
+    },
+    "production": {
+      "status": "no_go",
+      "can_enter": false,
+      "blockers": [
+        "production_use_allowed_false",
+        "ready_for_production_false",
+        "production_governance_not_complete",
+        "cms_not_connected",
+        "dynamic_norms_not_connected"
+      ]
+    }
+  },
+  "surface_status": {
+    "result_page_desktop": {
+      "status": "pass",
+      "adapter_evidence": [
+        "backend/app/Services/BigFive/ResultPageV2/Composer/BigFiveV2StagingComposer.php",
+        "backend/content_assets/big5/result_page_v2/qa/result_page_public_pilot_readiness/v0_1/big5_result_page_public_pilot_go_no_go_report_v0_1.json"
+      ],
+      "rendered_qa_evidence": [
+        "fap-web/tests/contracts/big5-public-pilot-result-page.contract.test.tsx",
+        "fap-web/tests/contracts/big5-expanded-route-driven-rendered-cases.contract.test.tsx"
+      ],
+      "fail_closed_evidence": [
+        "backend/tests/Feature/V0_3/BigFiveV2PublicPilotFailClosedTest.php"
+      ],
+      "metadata_leak_evidence": [
+        "fap-web/tests/contracts/big5-public-pilot-result-page.contract.test.tsx"
+      ]
+    },
+    "result_page_mobile": {
+      "status": "pass",
+      "adapter_evidence": [
+        "backend/app/Services/BigFive/ResultPageV2/Composer/BigFiveV2StagingComposer.php",
+        "backend/content_assets/big5/result_page_v2/qa/result_page_public_pilot_readiness/v0_1/big5_result_page_public_pilot_go_no_go_report_v0_1.json"
+      ],
+      "rendered_qa_evidence": [
+        "fap-web/tests/contracts/big5-public-pilot-result-page.contract.test.tsx",
+        "fap-web/tests/contracts/big5-expanded-route-driven-rendered-cases.contract.test.tsx"
+      ],
+      "fail_closed_evidence": [
+        "backend/tests/Feature/V0_3/BigFiveV2PublicPilotFailClosedTest.php"
+      ],
+      "metadata_leak_evidence": [
+        "fap-web/tests/contracts/big5-public-pilot-result-page.contract.test.tsx"
+      ]
+    },
+    "pdf": {
+      "status": "pass",
+      "adapter_evidence": [
+        "backend/app/Services/BigFive/ResultPageV2/Pdf/BigFiveV2PdfPayloadAdapter.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2PdfPayloadAdapterTest.php",
+        "backend/tests/Fixtures/big5_result_page_v2/pdf_o59_route_driven_payload_v0_1.json"
+      ],
+      "rendered_qa_evidence": [
+        "fap-web/tests/contracts/big5-pdf-rendered-qa.contract.test.tsx"
+      ],
+      "fail_closed_evidence": [
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2PdfPayloadAdapterTest.php"
+      ],
+      "metadata_leak_evidence": [
+        "fap-web/tests/contracts/big5-pdf-rendered-qa.contract.test.tsx"
+      ]
+    },
+    "share_card": {
+      "status": "pass",
+      "adapter_evidence": [
+        "backend/app/Services/BigFive/ResultPageV2/Share/BigFiveV2ShareSafeSummaryAdapter.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ShareSafeSummaryAdapterTest.php",
+        "backend/tests/Fixtures/big5_result_page_v2/share_o59_route_driven_payload_v0_1.json"
+      ],
+      "rendered_qa_evidence": [
+        "fap-web/tests/contracts/big5-share-card-rendered-qa.contract.test.tsx"
+      ],
+      "fail_closed_evidence": [
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ShareSafeSummaryAdapterTest.php"
+      ],
+      "metadata_leak_evidence": [
+        "fap-web/tests/contracts/big5-share-card-rendered-qa.contract.test.tsx"
+      ]
+    },
+    "history": {
+      "status": "pass",
+      "adapter_evidence": [
+        "backend/app/Services/BigFive/ResultPageV2/History/BigFiveV2HistorySnapshotAdapter.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2HistorySnapshotAdapterTest.php",
+        "backend/tests/Fixtures/big5_result_page_v2/history_o59_route_driven_payload_v0_1.json"
+      ],
+      "rendered_qa_evidence": [
+        "fap-web/tests/contracts/big5-history-rendered-qa.contract.test.tsx"
+      ],
+      "fail_closed_evidence": [
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2HistorySnapshotAdapterTest.php"
+      ],
+      "metadata_leak_evidence": [
+        "fap-web/tests/contracts/big5-history-rendered-qa.contract.test.tsx"
+      ]
+    },
+    "compare": {
+      "status": "pass",
+      "adapter_evidence": [
+        "backend/app/Services/BigFive/ResultPageV2/Compare/BigFiveV2CompareSnapshotAdapter.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CompareSnapshotAdapterTest.php",
+        "backend/tests/Fixtures/big5_result_page_v2/compare_o59_route_driven_payload_v0_1.json"
+      ],
+      "rendered_qa_evidence": [
+        "fap-web/tests/contracts/big5-compare-rendered-qa.contract.test.tsx"
+      ],
+      "fail_closed_evidence": [
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CompareSnapshotAdapterTest.php"
+      ],
+      "metadata_leak_evidence": [
+        "fap-web/tests/contracts/big5-compare-rendered-qa.contract.test.tsx"
+      ]
+    }
+  },
+  "forbidden_public_terms": [
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "source_reference",
+    "production_use_allowed",
+    "runtime_use",
+    "review_status",
+    "qa_notes",
+    "[object Object]"
+  ],
+  "sidecar_blockers": [
+    {
+      "key": "fap_web_typecheck_sbti_png_module_declarations",
+      "classification": "out_of_scope_existing_sidecar_blocker",
+      "current_train_impact": "does_not_block_surface_adapter_train_when_required_checks_are_green"
+    },
+    {
+      "key": "api_local_migrate_pretend_mysql_root_access_denied",
+      "classification": "out_of_scope_existing_sidecar_blocker",
+      "current_train_impact": "no_schema_changes_in_surface_adapter_train"
+    }
+  ],
+  "out_of_scope": [
+    "production",
+    "cms",
+    "dynamic_norms",
+    "content_generation",
+    "content_asset_body_rewrite"
+  ]
+}
