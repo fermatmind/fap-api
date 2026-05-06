@@ -33,7 +33,7 @@ final class BigFiveResultPageV2RuntimeWrapper
      */
     public function appendIfEnabled(Attempt $attempt, Result $result, array $responsePayload): array
     {
-        $legacyRuntimeEnabled = (bool) config('big5_result_page_v2.enabled', false);
+        $legacyRuntimeEnabled = $this->legacyRuntimeEnabled();
         $pilotRuntimeEnabled = $this->pilotRuntimeEnabled();
 
         if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== BigFiveResultPageV2Contract::SCALE_CODE) {
@@ -81,6 +81,69 @@ final class BigFiveResultPageV2RuntimeWrapper
         }
 
         return $responsePayload;
+    }
+
+    private function legacyRuntimeEnabled(): bool
+    {
+        if ((string) app()->environment() !== 'production') {
+            return (bool) config('big5_result_page_v2.enabled', false);
+        }
+
+        return $this->productionRuntimeEnabled();
+    }
+
+    private function productionRuntimeEnabled(): bool
+    {
+        if ((string) app()->environment() !== 'production') {
+            return false;
+        }
+
+        if ((bool) config('big5_result_page_v2.production_emergency_disabled', false)) {
+            return false;
+        }
+
+        if (! (bool) config('big5_result_page_v2.production_runtime_enabled', false)) {
+            return false;
+        }
+
+        if (! (bool) config('big5_result_page_v2.production_rollout_configured', false)) {
+            return false;
+        }
+
+        if (! (bool) config('big5_result_page_v2.production_import_gate_passed', false)) {
+            return false;
+        }
+
+        $snapshotId = trim((string) config('big5_result_page_v2.production_release_snapshot_id', ''));
+        if ($snapshotId === '') {
+            return false;
+        }
+
+        if (! in_array($snapshotId, $this->configuredStringList('production_approved_release_snapshot_ids'), true)) {
+            return false;
+        }
+
+        return ! in_array($snapshotId, $this->configuredStringList('production_disabled_release_snapshot_ids'), true);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function configuredStringList(string $key): array
+    {
+        $configured = config('big5_result_page_v2.'.$key, []);
+        if (is_string($configured)) {
+            $configured = explode(',', $configured);
+        }
+
+        if (! is_array($configured)) {
+            return [];
+        }
+
+        return array_values(array_filter(array_map(
+            static fn (mixed $value): string => trim((string) $value),
+            $configured,
+        )));
     }
 
     /**
