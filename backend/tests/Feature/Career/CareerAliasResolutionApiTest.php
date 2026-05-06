@@ -6,9 +6,11 @@ namespace Tests\Feature\Career;
 
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
+use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationAlias;
 use App\Models\OccupationFamily;
+use App\Models\RecommendationSnapshot;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -76,6 +78,54 @@ final class CareerAliasResolutionApiTest extends TestCase
             ->assertJsonPath('resolution.occupation.canonical_slug', 'data-scientists')
             ->assertJsonPath('resolution.occupation.seo_contract.canonical_path', '/career/jobs/data-scientists')
             ->assertJsonMissingPath('resolution.occupation.alias_url');
+    }
+
+    public function test_it_returns_display_asset_backed_duplicate_alias_without_recommendation_snapshot(): void
+    {
+        $occupation = $this->createDisplayAssetBackedOccupation(
+            'food-scientists-and-technologists',
+            'Food Scientists and Technologists',
+        );
+        $this->createDisplayAsset($occupation);
+
+        $this->assertSame(0, RecommendationSnapshot::query()->where('occupation_id', $occupation->id)->count());
+
+        OccupationAlias::query()->create([
+            'occupation_id' => $occupation->id,
+            'family_id' => $occupation->family_id,
+            'alias' => 'Agricultural and Food Scientists',
+            'normalized' => 'agricultural-and-food-scientists',
+            'lang' => 'en-US',
+            'register' => 'public_resolution_duplicate_alias',
+            'intent_scope' => 'duplicate_identity',
+            'target_kind' => 'ledger_public_alias_redirect',
+            'precision_score' => 1.0,
+            'confidence_score' => 1.0,
+        ]);
+
+        $this->getJson('/api/v0.5/career/resolve?q=agricultural-and-food-scientists&locale=en-US')
+            ->assertOk()
+            ->assertJsonPath('resolution.resolved_kind', 'occupation')
+            ->assertJsonPath('resolution.occupation.canonical_slug', 'food-scientists-and-technologists')
+            ->assertJsonPath('resolution.occupation.seo_contract.canonical_path', '/career/jobs/food-scientists-and-technologists')
+            ->assertJsonPath('resolution.occupation.seo_contract.index_eligible', true)
+            ->assertJsonPath('resolution.occupation.trust_summary.reviewer_status', 'approved_display_asset')
+            ->assertJsonMissingPath('resolution.occupation.alias_url');
+    }
+
+    public function test_it_rejects_blocked_duplicate_rows_without_materialized_alias(): void
+    {
+        $this->createDisplayAsset($this->createDisplayAssetBackedOccupation(
+            'farmworkers-and-laborers-crop-nursery-and-greenhouse',
+            'Farmworkers and Laborers Crop Nursery and Greenhouse',
+        ));
+
+        $this->getJson('/api/v0.5/career/resolve?q=agricultural-workers&locale=en-US')
+            ->assertOk()
+            ->assertJsonPath('resolution.resolved_kind', 'none')
+            ->assertJsonMissingPath('resolution.occupation')
+            ->assertJsonMissingPath('resolution.family')
+            ->assertJsonMissingPath('resolution.candidates');
     }
 
     public function test_it_returns_family_for_an_authority_backed_family_query(): void
@@ -268,5 +318,59 @@ final class CareerAliasResolutionApiTest extends TestCase
         ]);
 
         $this->assertSame(0, $exitCode, Artisan::output());
+    }
+
+    private function createDisplayAssetBackedOccupation(string $slug, string $title): Occupation
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'display-backed-api-alias-resolution',
+            'title_en' => 'Display Backed Api Alias Resolution',
+            'title_zh' => '展示资产接口别名解析',
+        ]);
+
+        return Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => $slug,
+            'entity_level' => 'dataset_candidate',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+            'crosswalk_mode' => 'directory_draft',
+            'canonical_title_en' => $title,
+            'canonical_title_zh' => $title,
+            'search_h1_zh' => $title,
+            'structural_stability' => null,
+            'task_prototype_signature' => [],
+            'market_semantics_gap' => null,
+            'regulatory_divergence' => null,
+            'toolchain_divergence' => null,
+            'skill_gap_threshold' => null,
+            'trust_inheritance_scope' => [],
+        ]);
+    }
+
+    private function createDisplayAsset(Occupation $occupation): CareerJobDisplayAsset
+    {
+        return CareerJobDisplayAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'canonical_slug' => (string) $occupation->canonical_slug,
+            'surface_version' => 'display.surface.v1',
+            'asset_version' => 'v4.2',
+            'template_version' => 'v4.2',
+            'asset_type' => 'career_job_public_display',
+            'asset_role' => 'formal_pilot_master',
+            'status' => 'ready_for_pilot',
+            'component_order_json' => array_map(static fn (int $index): string => 'component_'.$index, range(1, 24)),
+            'page_payload_json' => [
+                'page' => [
+                    'zh' => ['hero' => ['title' => $occupation->canonical_title_zh]],
+                    'en' => ['hero' => ['title' => $occupation->canonical_title_en]],
+                ],
+            ],
+            'seo_payload_json' => [],
+            'sources_json' => [],
+            'structured_data_json' => [],
+            'implementation_contract_json' => [],
+            'metadata_json' => [],
+        ]);
     }
 }
