@@ -1,0 +1,55 @@
+{
+  "schema": "fap.big5.result_page_v2.release_approval_evidence.v0_1",
+  "package_key": "big5_result_page_v2.release_approval.v0_1",
+  "version": "0.1",
+  "mode": "production_governance_evidence",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "approved_for_production": false,
+  "rejected_for_production": true,
+  "release_candidate": true,
+  "approval_status": "governance_evidence_recorded_no_production_approval",
+  "approver": {
+    "name": "pending_human_production_approver",
+    "role": "production_governance_owner",
+    "approval_scope": "dry_run_evidence_review_only"
+  },
+  "timestamp": "2026-05-06T00:00:00Z",
+  "release_note": "Big Five V2 production governance evidence package for dry-run review. Production rollout remains disabled.",
+  "accepted_risk": {
+    "status": "recorded_for_dry_run",
+    "items": [
+      "Production approval is not granted by this package.",
+      "Production rollout requires a separate explicit human decision.",
+      "CMS and dynamic norms remain out of scope."
+    ]
+  },
+  "rollback_note": {
+    "status": "ready_by_release_disable_and_snapshot_revert",
+    "release_disable_supported": true,
+    "emergency_disable_supported": true,
+    "operator_note": "Disable the explicit production rollout config and revert to the previous immutable snapshot if a release must be withdrawn."
+  },
+  "rendered_qa_evidence": {
+    "all_surface_release_gate": "backend/content_assets/big5/result_page_v2/qa/production_all_surface_release_gate/v0_1/big5_v2_production_all_surface_release_gate_report_v0_1.json",
+    "rendered_qa_status": "pass",
+    "metadata_leak_status": "pass",
+    "fail_closed_status": "pass"
+  },
+  "release_evidence_archive": "backend/content_assets/big5/result_page_v2/qa/release_evidence_archive/v0_1/big5_v2_release_evidence_archive_v0_1.json",
+  "governance_decision_log": "backend/content_assets/big5/result_page_v2/governance/release_approval_v0_1/big5_v2_governance_decision_log_v0_1.json",
+  "production_decision": {
+    "status": "NO-GO",
+    "reason": "Human production approval and explicit production rollout config are not present.",
+    "human_approval_required": true
+  },
+  "out_of_scope": [
+    "production rollout",
+    "CMS connection",
+    "dynamic norms connection",
+    "scoring changes",
+    "content body generation"
+  ]
+}

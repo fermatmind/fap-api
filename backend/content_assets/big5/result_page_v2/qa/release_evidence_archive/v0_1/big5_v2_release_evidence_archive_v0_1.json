@@ -1,0 +1,58 @@
+{
+  "schema": "fap.big5.result_page_v2.release_evidence_archive.v0_1",
+  "package_key": "big5_result_page_v2.release_evidence_archive.v0_1",
+  "version": "0.1",
+  "mode": "production_governance_evidence_archive",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "archive_status": "recorded",
+  "release_candidate": true,
+  "production_decision": "NO-GO",
+  "evidence": {
+    "production_policy": {
+      "status": "present",
+      "path": "backend/content_assets/big5/result_page_v2/governance/production_policy_v0_1/big5_v2_production_governance_policy_v0_1.json"
+    },
+    "release_snapshot": {
+      "status": "present",
+      "path": "backend/content_assets/big5/result_page_v2/releases/v0_1/big5_v2_release_snapshot_rc_0_1.json"
+    },
+    "import_gate": {
+      "status": "present",
+      "path": "backend/content_assets/big5/result_page_v2/governance/production_import_gate_v0_1/big5_v2_production_import_gate_policy_v0_1.json"
+    },
+    "runtime_gate": {
+      "status": "present",
+      "path": "backend/tests/Feature/V0_3/ProductionRuntimeTest.php"
+    },
+    "all_surface_qa": {
+      "status": "pass",
+      "path": "backend/content_assets/big5/result_page_v2/qa/production_all_surface_release_gate/v0_1/big5_v2_production_all_surface_release_gate_report_v0_1.json"
+    },
+    "approval_record": {
+      "status": "present_no_production_approval",
+      "path": "backend/content_assets/big5/result_page_v2/governance/release_approval_v0_1/big5_v2_release_approval_evidence_v0_1.json"
+    },
+    "governance_decision_log": {
+      "status": "present",
+      "path": "backend/content_assets/big5/result_page_v2/governance/release_approval_v0_1/big5_v2_governance_decision_log_v0_1.json"
+    }
+  },
+  "required_release_evidence": {
+    "approver": "present",
+    "timestamp": "present",
+    "release_note": "present",
+    "accepted_risk": "present",
+    "rollback_note": "present",
+    "rendered_qa_evidence": "present",
+    "release_evidence_archive": "present",
+    "governance_decision_log": "present"
+  },
+  "reproducibility": {
+    "sha256sums_required": true,
+    "archive_manifest_required": true,
+    "mutable_overwrite_allowed": false
+  }
+}
