@@ -1,0 +1,55 @@
+{
+  "schema": "fap.big5.result_page_v2.pdf_surface_policy.v0_1",
+  "package_key": "big5_result_page_v2.pdf_surface_policy.v0_1",
+  "version": "0.1",
+  "mode": "pdf_surface_policy_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "surface_key": "pdf",
+  "policy_status": "disabled_or_pending",
+  "rendered_status": "pending_surface",
+  "public_pilot_default": "disabled",
+  "can_count_as_pass": false,
+  "controlled_pilot_status": "ready_constrained",
+  "result_page_only_public_pilot_status": "go_result_page_only",
+  "pdf_surface_public_pilot_status": "no_go",
+  "production_status": "no_go",
+  "required_before_pdf_pass": [
+    "route_driven_pdf_payload_adapter",
+    "pdf_payload_schema_validation",
+    "rendered_pdf_contract",
+    "metadata_leak_scan",
+    "anti_target_scan",
+    "fail_closed_invalid_payload_test"
+  ],
+  "adapter_policy": {
+    "input": "validated_route_driven_big5_result_page_v2_payload",
+    "allowed_content_source": "backend_payload_only",
+    "frontend_authored_body_allowed": false,
+    "invalid_payload_behavior": "fail_closed",
+    "metadata_filter_required": true,
+    "production_enablement_allowed": false
+  },
+  "forbidden_public_terms": [
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "source_reference",
+    "production_use_allowed",
+    "runtime_use",
+    "review_status",
+    "qa_notes",
+    "[object Object]"
+  ],
+  "must_not_change": [
+    "Do not enable production.",
+    "Do not mark PDF as pass before adapter and rendered QA exist.",
+    "Do not touch controllers, routes, database, migrations, scoring, content_packs, CMS, or dynamic norms.",
+    "Do not generate new content body.",
+    "Do not let frontend synthesize Big Five V2 PDF prose."
+  ]
+}
