@@ -503,6 +503,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_allows_bigfive_v2_cms_editorial_index_scope_only(): void
+    {
+        $allowed = [
+            'backend/app/Filament/Ops/Support/BigFiveV2EditorialAssetIndexPresenter.php',
+            'backend/app/Models/BigFiveV2EditorialAssetIndexEntry.php',
+            'backend/app/Services/BigFive/Cms/BigFiveV2EditorialAssetIndex.php',
+        ];
+
+        $blocked = [
+            'backend/app/Services/BigFive/Cms/BigFiveV2EditorialRuntimePublisher.php',
+            'backend/app/Services/BigFive/Cms/BigFiveV2CmsRuntimeComposer.php',
+            'backend/app/Services/BigFive/Cms/BigFiveV2CmsRuntimeSelector.php',
+            'backend/app/Services/BigFive/BigFivePublicProjectionService.php',
+            'backend/routes/api.php',
+            'frontend/src/big5/cms-preview.ts',
+            'backend/content_packs/big5/default/manifest.json',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_keeps_mbti_and_bigfive_runtime_changes_blocked(): void
     {
         $changed = [
@@ -718,6 +740,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveV2CmsEditorialIndexFile($file)) {
+                continue;
+            }
+
             if ($this->isAttemptEmailBindingFoundationFile($file)) {
                 continue;
             }
@@ -881,6 +907,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/BigFive/Norms/BigFiveNormPrivacyPolicy.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormAggregationDryRun.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormAggregationResult.php',
+        ], true);
+    }
+
+    private function isBigFiveV2CmsEditorialIndexFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Support/BigFiveV2EditorialAssetIndexPresenter.php',
+            'backend/app/Models/BigFiveV2EditorialAssetIndexEntry.php',
+            'backend/app/Services/BigFive/Cms/BigFiveV2EditorialAssetIndex.php',
         ], true);
     }
 
