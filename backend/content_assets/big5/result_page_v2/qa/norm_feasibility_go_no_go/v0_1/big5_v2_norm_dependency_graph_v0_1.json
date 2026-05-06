@@ -1,0 +1,31 @@
+{
+  "schema_version": "big5_v2_norm_dependency_graph_v0_1",
+  "mode": "norm_dependency_graph",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "dynamic_norm_engine_attached": false,
+  "public_percentile_display_enabled": false,
+  "nodes": [
+    "eligibility_policy",
+    "append_only_observation_schema",
+    "capture_writer",
+    "privacy_layer",
+    "aggregation_dry_run",
+    "future_dynamic_norm_engine",
+    "future_public_percentile_display"
+  ],
+  "edges": [
+    ["eligibility_policy", "append_only_observation_schema"],
+    ["append_only_observation_schema", "capture_writer"],
+    ["capture_writer", "privacy_layer"],
+    ["privacy_layer", "aggregation_dry_run"],
+    ["aggregation_dry_run", "future_dynamic_norm_engine"],
+    ["future_dynamic_norm_engine", "future_public_percentile_display"]
+  ],
+  "blocked_nodes": [
+    "future_dynamic_norm_engine",
+    "future_public_percentile_display"
+  ]
+}
