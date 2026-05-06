@@ -47,6 +47,40 @@ final class PiiCipherEnvelopeTest extends TestCase
         $this->assertSame($plaintext, $pii->decrypt($legacyCiphertext));
     }
 
+    public function test_encrypt_with_key_version_uses_target_key_context(): void
+    {
+        config()->set('services.pii.adapter', 'local');
+        config()->set('services.pii.key_version', 1);
+        config()->set('services.pii.key_ids', [
+            '1' => 'local-pii-v1',
+            '2' => 'local-pii-v2',
+        ]);
+        config()->set('services.pii.local_keys', [
+            '1' => 'base64:'.base64_encode(str_repeat('c', 32)),
+            '2' => 'base64:'.base64_encode(str_repeat('d', 32)),
+        ]);
+        $this->app->forgetInstance(PiiEnvelopeAdapter::class);
+        $this->app->forgetInstance(PiiCipher::class);
+
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+        $plaintext = 'versioned.key@example.com';
+        $v1 = (string) $pii->encryptWithKeyVersion($plaintext, 1);
+        $v2 = (string) $pii->encryptWithKeyVersion($plaintext, 2);
+
+        $v1Envelope = $pii->envelopeMetadata($v1);
+        $v2Envelope = $pii->envelopeMetadata($v2);
+        $this->assertIsArray($v1Envelope);
+        $this->assertIsArray($v2Envelope);
+        $this->assertSame(1, (int) ($v1Envelope['key_version'] ?? 0));
+        $this->assertSame(2, (int) ($v2Envelope['key_version'] ?? 0));
+        $this->assertSame('local-pii-v1', (string) ($v1Envelope['key_id'] ?? ''));
+        $this->assertSame('local-pii-v2', (string) ($v2Envelope['key_id'] ?? ''));
+        $this->assertNotSame((string) ($v1Envelope['ciphertext'] ?? ''), (string) ($v2Envelope['ciphertext'] ?? ''));
+        $this->assertSame($plaintext, $pii->decrypt($v1));
+        $this->assertSame($plaintext, $pii->decrypt($v2));
+    }
+
     public function test_adapter_selection_supports_local_and_external_kms(): void
     {
         config()->set('services.pii.adapter', 'local');

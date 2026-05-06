@@ -124,6 +124,9 @@ final class BigFiveV2PilotObservabilityTest extends TestCase
                 && array_key_exists('selector_suppressed_refs', $context)
                 && array_key_exists('selector_suppressed_ref_count', $context)
                 && array_key_exists('unresolved_ref_count', $context)
+                && ! array_key_exists('combination_key', $context)
+                && is_string($context['combination_key_hash'] ?? null)
+                && strlen((string) ($context['combination_key_hash'] ?? '')) === 64
                 && is_array($context['surface_status_summary'] ?? null)),
         )->once();
     }

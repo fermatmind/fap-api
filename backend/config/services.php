@@ -188,7 +188,10 @@ return [
         'adapter' => env('PII_ENVELOPE_ADAPTER', 'local'),
         'key_version' => (int) env('PII_KEY_VERSION', 1),
         'key_id' => env('PII_KEY_ID', 'local-app-key'),
+        'key_ids' => json_decode((string) env('PII_KEY_IDS_JSON', '[]'), true) ?: [],
         'algo' => env('PII_ENVELOPE_ALGO', 'laravel-crypt-v1'),
+        'algos' => json_decode((string) env('PII_ENVELOPE_ALGOS_JSON', '[]'), true) ?: [],
+        'local_keys' => json_decode((string) env('PII_LOCAL_KEYS_JSON', '[]'), true) ?: [],
         'external_kms' => [
             'timeout_ms' => (int) env('PII_EXTERNAL_KMS_TIMEOUT_MS', 800),
             'dry_run' => (bool) env('PII_EXTERNAL_KMS_DRY_RUN', false),

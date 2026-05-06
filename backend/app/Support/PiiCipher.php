@@ -60,11 +60,12 @@ final class PiiCipher
         }
 
         $resolvedVersion = $version > 0 ? $version : $this->currentKeyVersion();
+        $keyId = $this->keyIdForVersion($resolvedVersion);
         $envelope = [
-            'ciphertext' => $this->envelopeAdapter->encrypt($normalized),
-            'key_id' => $this->currentKeyId(),
+            'ciphertext' => $this->envelopeAdapter->encrypt($normalized, $resolvedVersion, $keyId),
+            'key_id' => $keyId,
             'key_version' => $resolvedVersion,
-            'algo' => $this->currentAlgo(),
+            'algo' => $this->algoForVersion($resolvedVersion),
         ];
 
         $encoded = json_encode($envelope, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -99,7 +100,11 @@ final class PiiCipher
 
         $envelope = $this->decodeEnvelope($ciphertext);
         if ($envelope !== null) {
-            $plaintext = $this->envelopeAdapter->decrypt((string) $envelope['ciphertext']);
+            $plaintext = $this->envelopeAdapter->decrypt(
+                (string) $envelope['ciphertext'],
+                (int) $envelope['key_version'],
+                (string) $envelope['key_id']
+            );
             if ($plaintext === null) {
                 $plaintext = $this->decryptLegacyCiphertext((string) $envelope['ciphertext']);
             }
@@ -119,6 +124,14 @@ final class PiiCipher
         return $plaintext === '' ? null : $plaintext;
     }
 
+    /**
+     * @return array{ciphertext:string,key_id:string,key_version:int,algo:string}|null
+     */
+    public function envelopeMetadata(?string $ciphertext): ?array
+    {
+        return $this->decodeEnvelope(trim((string) $ciphertext));
+    }
+
     public function legacyEmailPlaceholder(string $emailHash): string
     {
         $prefix = substr(strtolower(trim($emailHash)), 0, 20);
@@ -136,18 +149,38 @@ final class PiiCipher
         return hash_hmac('sha256', $namespace.'|'.$value, $salt);
     }
 
-    private function currentKeyId(): string
+    private function keyIdForVersion(int $version): string
     {
-        $keyId = trim((string) config('services.pii.key_id', self::DEFAULT_KEY_ID));
+        $keyId = trim((string) $this->configuredVersionValue('key_ids', $version));
+        if ($keyId === '') {
+            $keyId = trim((string) config('services.pii.key_id', self::DEFAULT_KEY_ID));
+        }
 
         return $keyId !== '' ? $keyId : self::DEFAULT_KEY_ID;
     }
 
-    private function currentAlgo(): string
+    private function algoForVersion(int $version): string
     {
-        $algo = trim((string) config('services.pii.algo', self::DEFAULT_ALGO));
+        $algo = trim((string) $this->configuredVersionValue('algos', $version));
+        if ($algo === '') {
+            $algo = trim((string) config('services.pii.algo', self::DEFAULT_ALGO));
+        }
 
         return $algo !== '' ? $algo : self::DEFAULT_ALGO;
+    }
+
+    private function configuredVersionValue(string $mapKey, int $version): mixed
+    {
+        $map = config('services.pii.'.$mapKey, []);
+        if (is_string($map)) {
+            $decoded = json_decode($map, true);
+            $map = is_array($decoded) ? $decoded : [];
+        }
+        if (! is_array($map)) {
+            return null;
+        }
+
+        return $map[(string) $version] ?? $map[$version] ?? null;
     }
 
     private function activeKeyVersionCacheKey(): string

@@ -393,6 +393,46 @@ final class DsarRequestApiTest extends TestCase
         $this->assertSame(0, DB::table('dsar_requests')->count());
     }
 
+    public function test_dsar_create_rejects_client_supplied_anon_subjects(): void
+    {
+        Queue::fake();
+
+        $orgId = 704;
+        $ownerUserId = 70401;
+        $subjectUserId = 70402;
+
+        $this->seedUser($ownerUserId, "owner_{$ownerUserId}@example.test", '+8613900007041');
+        $this->seedUser($subjectUserId, "subject_{$subjectUserId}@example.test", '+8613900007042');
+        $this->seedOrgWithOwnerMembership($orgId, $ownerUserId);
+        DB::table('organization_members')->insert([
+            'org_id' => $orgId,
+            'user_id' => $subjectUserId,
+            'role' => 'member',
+            'is_active' => 1,
+            'joined_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $ownerToken = $this->issueToken($ownerUserId, $orgId, 'owner', 'anon_owner_dsar_704');
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$ownerToken,
+            'X-Org-Id' => (string) $orgId,
+        ])->postJson('/api/v0.3/compliance/dsar/requests', [
+            'subject_user_id' => $subjectUserId,
+            'anon_id' => 'victim_controlled_anon',
+            'subject_anon_id' => 'victim_subject_anon',
+            'subject_anon_ids' => ['victim_subject_anon'],
+            'mode' => 'hybrid_anonymize',
+            'reason' => 'attacker supplied anon probe',
+        ]);
+
+        $response->assertStatus(422);
+        Queue::assertNotPushed(ExecuteDsarRequestJob::class);
+        $this->assertSame(0, DB::table('dsar_requests')->count());
+    }
+
     private function seedUser(int $userId, string $email, string $phoneE164): void
     {
         DB::table('users')->insert([

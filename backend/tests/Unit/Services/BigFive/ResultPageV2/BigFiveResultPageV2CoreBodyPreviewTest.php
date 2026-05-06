@@ -257,6 +257,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_privacy_logs_dsar_key_rotation_changes(): void
+    {
+        $changed = [
+            'backend/app/Contracts/Security/PiiEnvelopeAdapter.php',
+            'backend/app/Http/Controllers/API/V0_3/ComplianceDsarController.php',
+            'backend/app/Jobs/Ops/BackfillPiiEncryptionJob.php',
+            'backend/app/Support/PiiCipher.php',
+            'backend/app/Support/Security/ExternalKmsPiiEnvelopeAdapter.php',
+            'backend/app/Support/Security/LocalPiiEnvelopeAdapter.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_attempt_email_binding_foundation_changes(): void
     {
         $changed = [
@@ -583,6 +597,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isPrivacyLogsDsarKeyRotationFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerDisplaySurfaceFile($file)) {
                 continue;
             }
@@ -680,6 +698,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/ArticlePublishService.php',
             'backend/app/Services/Cms/ArticleService.php',
             'backend/database/migrations/2026_05_06_010000_add_org_scope_to_personality_profile_children.php',
+        ], true);
+    }
+
+    private function isPrivacyLogsDsarKeyRotationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Contracts/Security/PiiEnvelopeAdapter.php',
+            'backend/app/Http/Controllers/API/V0_3/ComplianceDsarController.php',
+            'backend/app/Jobs/Ops/BackfillPiiEncryptionJob.php',
+            'backend/app/Support/PiiCipher.php',
+            'backend/app/Support/Security/ExternalKmsPiiEnvelopeAdapter.php',
+            'backend/app/Support/Security/LocalPiiEnvelopeAdapter.php',
         ], true);
     }
 

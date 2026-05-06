@@ -164,3 +164,28 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: PR-4
+    repo: fap-api
+    depends_on:
+      - PR-3
+    branch: codex/low-api-privacy-logs-dsar-key-rotation
+    title: "PR-4 fap-api privacy / logs / DSAR / key rotation"
+    scope:
+      - Big Five trait bands are written to pilot logs.
+      - Internal production DB target disclosed in PR ledger.
+      - Key rotation updates metadata without re-encrypting with new key.
+      - DSAR anonymization trusts attacker-controlled anon_id.
+    do_not:
+      - Change order, payment, or benefit ownership behavior.
+      - Change CMS lifecycle, career release, or tenant-scoped article/personality behavior.
+      - Change file import, restore, replay, CI, or deploy behavior.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - focused phpunit for Big Five pilot log redaction, PII key rotation, and DSAR anon rejection
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

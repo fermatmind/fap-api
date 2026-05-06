@@ -18,6 +18,7 @@ final class PiiCipherRotationAutomationTest extends TestCase
     {
         config()->set('services.pii.adapter', 'local');
         config()->set('services.pii.key_version', 1);
+        $this->configureLocalPiiKeyVersions();
 
         /** @var PiiCipher $pii */
         $pii = app(PiiCipher::class);
@@ -75,6 +76,10 @@ final class PiiCipherRotationAutomationTest extends TestCase
         $this->assertSame(2, (int) ($user->key_version ?? 0));
         $this->assertSame($email, $pii->decrypt((string) ($user->email_enc ?? '')));
         $this->assertSame($phone, $pii->decrypt((string) ($user->phone_e164_enc ?? '')));
+        $userEmailEnvelope = $pii->envelopeMetadata((string) ($user->email_enc ?? ''));
+        $this->assertIsArray($userEmailEnvelope);
+        $this->assertSame(2, (int) ($userEmailEnvelope['key_version'] ?? 0));
+        $this->assertSame('local-pii-v2', (string) ($userEmailEnvelope['key_id'] ?? ''));
 
         $outbox = DB::table('email_outbox')->where('id', $outboxId)->first();
         $this->assertNotNull($outbox);
@@ -82,6 +87,10 @@ final class PiiCipherRotationAutomationTest extends TestCase
         $this->assertSame($email, $pii->decrypt((string) ($outbox->email_enc ?? '')));
         $this->assertSame('receiver@example.com', $pii->decrypt((string) ($outbox->to_email_enc ?? '')));
         $this->assertSame($payload, $pii->decrypt((string) ($outbox->payload_enc ?? '')));
+        $payloadEnvelope = $pii->envelopeMetadata((string) ($outbox->payload_enc ?? ''));
+        $this->assertIsArray($payloadEnvelope);
+        $this->assertSame(2, (int) ($payloadEnvelope['key_version'] ?? 0));
+        $this->assertSame('local-pii-v2', (string) ($payloadEnvelope['key_id'] ?? ''));
 
         if (Schema::hasTable('rotation_audits')) {
             $audit = DB::table('rotation_audits')
@@ -128,6 +137,7 @@ final class PiiCipherRotationAutomationTest extends TestCase
     {
         config()->set('services.pii.adapter', 'local');
         config()->set('services.pii.key_version', 1);
+        $this->configureLocalPiiKeyVersions();
 
         /** @var PiiCipher $pii */
         $pii = app(PiiCipher::class);
@@ -196,10 +206,24 @@ final class PiiCipherRotationAutomationTest extends TestCase
         $this->assertSame(2, (int) ($user->key_version ?? 0));
         $this->assertSame($email, $cipher->decrypt((string) ($user->email_enc ?? '')));
         $this->assertSame($phone, $cipher->decrypt((string) ($user->phone_e164_enc ?? '')));
+        $this->assertSame('local-pii-v2', (string) ($cipher->envelopeMetadata((string) ($user->email_enc ?? ''))['key_id'] ?? ''));
 
         $outbox = DB::table('email_outbox')->where('id', $outboxId)->first();
         $this->assertNotNull($outbox);
         $this->assertSame(2, (int) ($outbox->key_version ?? 0));
         $this->assertSame($payload, $cipher->decrypt((string) ($outbox->payload_enc ?? '')));
+    }
+
+    private function configureLocalPiiKeyVersions(): void
+    {
+        config()->set('services.pii.key_ids', [
+            '1' => 'local-pii-v1',
+            '2' => 'local-pii-v2',
+        ]);
+        config()->set('services.pii.local_keys', [
+            '1' => 'base64:'.base64_encode(str_repeat('a', 32)),
+            '2' => 'base64:'.base64_encode(str_repeat('b', 32)),
+        ]);
+        $this->app->forgetInstance(PiiCipher::class);
     }
 }
