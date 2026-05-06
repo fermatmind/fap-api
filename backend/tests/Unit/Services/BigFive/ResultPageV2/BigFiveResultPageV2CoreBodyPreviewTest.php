@@ -474,6 +474,26 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_allows_bigfive_norm_foundation_schema_only(): void
+    {
+        $allowed = [
+            'backend/app/Models/BigFiveNormObservation.php',
+            'backend/database/migrations/2026_05_06_132700_create_big_five_norm_observations_table.php',
+        ];
+
+        $blocked = [
+            'backend/app/Services/BigFive/Norms/BigFiveNormObservationCaptureWriter.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormRuntimeSelector.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormRuntimeComposer.php',
+            'backend/app/Services/BigFive/BigFivePublicProjectionService.php',
+            'backend/routes/api.php',
+            'frontend/src/big5/norms.ts',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_keeps_mbti_and_bigfive_runtime_changes_blocked(): void
     {
         $changed = [
@@ -681,6 +701,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveNormFoundationSchemaFile($file)) {
+                continue;
+            }
+
             if ($this->isAttemptEmailBindingFoundationFile($file)) {
                 continue;
             }
@@ -825,6 +849,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php'
             || $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveV2PilotRuntimeObservability.php'
             || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer|Access|Routing|Pdf|Share|History|Compare|Rollout|Observability)/[A-Za-z0-9_]+\.php$#', $file) === 1;
+    }
+
+    private function isBigFiveNormFoundationSchemaFile(string $file): bool
+    {
+        return $file === 'backend/app/Models/BigFiveNormObservation.php'
+            || preg_match('#^backend/database/migrations/\d{4}_\d{2}_\d{2}_\d{6}_create_big_five_norm_observations_table\.php$#', $file) === 1;
     }
 
     private function isAttemptEmailBindingFoundationFile(string $file): bool
