@@ -1,0 +1,30 @@
+{
+  "schema": "fap.big5.result_page_v2.public_surface_policy_summary.v0_1",
+  "package_key": "big5_result_page_v2.public_surface_policy.v0_1",
+  "version": "0.1",
+  "mode": "public_surface_disabled_or_pending_policy_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "controlled_pilot_status": "ready_constrained",
+  "public_pilot_status": "no_go",
+  "production_status": "no_go",
+  "secondary_surface_count": 4,
+  "disabled_or_pending_surface_count": 4,
+  "pending_surface_count": 4,
+  "pass_surface_count": 0,
+  "surfaces": [
+    "pdf",
+    "share_card",
+    "history",
+    "compare"
+  ],
+  "public_pilot_requires_explicit_result_page_only_scope": true,
+  "production_blocked": true,
+  "no_runtime_change": true,
+  "no_frontend_fallback": true,
+  "no_body_generated": true
+}

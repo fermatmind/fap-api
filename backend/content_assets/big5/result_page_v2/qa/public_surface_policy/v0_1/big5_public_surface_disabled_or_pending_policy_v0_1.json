@@ -1,0 +1,102 @@
+{
+  "schema": "fap.big5.result_page_v2.public_surface_policy.v0_1",
+  "package_key": "big5_result_page_v2.public_surface_policy.v0_1",
+  "version": "0.1",
+  "mode": "public_surface_disabled_or_pending_policy_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "controlled_pilot_status": "ready_constrained",
+  "public_pilot_status": "no_go",
+  "production_status": "no_go",
+  "public_pilot_requires_explicit_result_page_only_scope": true,
+  "surfaces": [
+    {
+      "surface_key": "pdf",
+      "policy_status": "disabled_or_pending",
+      "rendered_status": "pending_surface",
+      "public_pilot_default": "disabled",
+      "can_count_as_pass": false,
+      "evidence": [],
+      "blocker": "No route-driven Big Five V2 PDF render adapter or contract evidence exists.",
+      "required_before_pass": [
+        "route_driven_pdf_adapter",
+        "rendered_pdf_contract",
+        "metadata_leak_scan",
+        "anti_target_scan"
+      ]
+    },
+    {
+      "surface_key": "share_card",
+      "policy_status": "disabled_or_pending",
+      "rendered_status": "pending_surface",
+      "public_pilot_default": "disabled",
+      "can_count_as_pass": false,
+      "evidence": [],
+      "blocker": "No route-driven Big Five V2 share-safe summary adapter or share-card contract evidence exists.",
+      "required_before_pass": [
+        "share_safe_summary_contract",
+        "share_card_render_contract",
+        "metadata_leak_scan",
+        "sensitive_detail_suppression"
+      ]
+    },
+    {
+      "surface_key": "history",
+      "policy_status": "disabled_or_pending",
+      "rendered_status": "pending_surface",
+      "public_pilot_default": "disabled",
+      "can_count_as_pass": false,
+      "evidence": [],
+      "blocker": "No history surface contract consumes route-driven Big Five V2 payload snapshots.",
+      "required_before_pass": [
+        "result_page_v2_history_snapshot_contract",
+        "content_version_display_policy",
+        "metadata_leak_scan",
+        "no_frontend_body_fallback"
+      ]
+    },
+    {
+      "surface_key": "compare",
+      "policy_status": "disabled_or_pending",
+      "rendered_status": "pending_surface",
+      "public_pilot_default": "disabled",
+      "can_count_as_pass": false,
+      "evidence": [],
+      "blocker": "No compare surface contract consumes route-driven Big Five V2 payload snapshots.",
+      "required_before_pass": [
+        "result_page_v2_compare_contract",
+        "safe_delta_summary_policy",
+        "metadata_leak_scan",
+        "no_body_text_percentile_inference"
+      ]
+    }
+  ],
+  "status_counts": {
+    "pass": 0,
+    "disabled_or_pending": 4,
+    "pending_surface": 4,
+    "fail": 0
+  },
+  "forbidden_public_fields": [
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "source_reference",
+    "production_use_allowed",
+    "runtime_use",
+    "review_status",
+    "qa_notes",
+    "[object Object]"
+  ],
+  "must_not_change": [
+    "Do not enable production.",
+    "Do not mark public pilot or production as go from this policy.",
+    "Do not mark pending surfaces as pass without real surface harnesses.",
+    "Do not connect CMS or dynamic norms.",
+    "Do not generate new content body."
+  ]
+}
