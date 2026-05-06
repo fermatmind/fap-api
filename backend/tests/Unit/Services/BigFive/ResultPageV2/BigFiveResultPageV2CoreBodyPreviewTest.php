@@ -785,6 +785,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php',
+            'backend/app/Services/Career/Bundles/CareerAliasResolutionBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php',

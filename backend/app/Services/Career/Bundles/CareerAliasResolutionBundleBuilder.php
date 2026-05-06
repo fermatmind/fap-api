@@ -7,6 +7,7 @@ namespace App\Services\Career\Bundles;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\FirstWavePublishGate;
 use App\DTO\Career\CareerAliasResolutionBundle;
+use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationAlias;
 use App\Models\OccupationFamily;
@@ -24,6 +25,26 @@ final class CareerAliasResolutionBundleBuilder
     private const MAX_RESOLUTION_SNAPSHOT_ROWS = 100;
 
     private const MAX_FAMILY_LOOKUP_ROWS = 50;
+
+    private const DUPLICATE_ALIAS_REGISTER = 'public_resolution_duplicate_alias';
+
+    private const DUPLICATE_ALIAS_INTENT_SCOPE = 'duplicate_identity';
+
+    private const DUPLICATE_ALIAS_TARGET_KIND = 'ledger_public_alias_redirect';
+
+    private const DISPLAY_SURFACE_VERSION = 'display.surface.v1';
+
+    private const DISPLAY_ASSET_VERSION = 'v4.2';
+
+    private const DISPLAY_ASSET_TYPE = 'career_job_public_display';
+
+    private const DISPLAY_READY_STATUS = 'ready_for_pilot';
+
+    private const DISPLAY_COMPONENT_ORDER_COUNT = 24;
+
+    private const DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS = [
+        'software-developers',
+    ];
 
     public function __construct(
         private readonly FirstWavePublishGate $publishGate,
@@ -252,6 +273,72 @@ final class CareerAliasResolutionBundleBuilder
                 'seo_contract' => $this->buildOccupationSeoContract($occupation, $snapshot),
                 'trust_summary' => [
                     'reviewer_status' => $snapshot->trustManifest?->reviewer_status,
+                ],
+            ];
+        }
+
+        array_push(
+            $candidates,
+            ...$this->matchDisplayAssetBackedDuplicateAliasCandidates($normalizedQuery, $normalizedLocale, $exactOnly),
+        );
+
+        return $this->filterBestTier($candidates);
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function matchDisplayAssetBackedDuplicateAliasCandidates(
+        string $normalizedQuery,
+        ?string $normalizedLocale,
+        bool $exactOnly,
+    ): array {
+        if ($normalizedQuery === '' || ! $exactOnly) {
+            return [];
+        }
+
+        $aliases = OccupationAlias::query()
+            ->with('occupation')
+            ->whereNotNull('occupation_id')
+            ->whereRaw('LOWER(register) = ?', [self::DUPLICATE_ALIAS_REGISTER])
+            ->whereRaw('LOWER(intent_scope) = ?', [self::DUPLICATE_ALIAS_INTENT_SCOPE])
+            ->whereRaw('LOWER(target_kind) = ?', [self::DUPLICATE_ALIAS_TARGET_KIND])
+            ->where('normalized', $normalizedQuery)
+            ->when($normalizedLocale !== null, function (Builder $query) use ($normalizedLocale): void {
+                $query->where('lang', 'like', $normalizedLocale.'%');
+            })
+            ->orderBy('normalized')
+            ->orderBy('id')
+            ->limit(self::MAX_ALIAS_LOOKUP_ROWS)
+            ->get();
+
+        $candidates = [];
+        foreach ($aliases as $alias) {
+            if (! $alias instanceof OccupationAlias) {
+                continue;
+            }
+
+            $occupation = $alias->occupation;
+            if (! $occupation instanceof Occupation) {
+                continue;
+            }
+
+            $asset = $this->validDisplayAssetBackedAsset($occupation);
+            if (! $asset instanceof CareerJobDisplayAsset) {
+                continue;
+            }
+
+            $candidates[] = [
+                'candidate_key' => 'occupation:'.$occupation->id,
+                'candidate_kind' => 'occupation',
+                'match_tier' => 'exact',
+                'occupation_uuid' => $occupation->id,
+                'canonical_slug' => $occupation->canonical_slug,
+                'canonical_title_en' => $occupation->canonical_title_en,
+                'canonical_title_zh' => $occupation->canonical_title_zh,
+                'seo_contract' => $this->buildDisplayAssetBackedOccupationSeoContract($occupation),
+                'trust_summary' => [
+                    'reviewer_status' => 'approved_display_asset',
                 ],
             ];
         }
@@ -662,6 +749,36 @@ final class CareerAliasResolutionBundleBuilder
         ];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildDisplayAssetBackedOccupationSeoContract(Occupation $occupation): array
+    {
+        $canonicalPath = '/career/jobs/'.$occupation->canonical_slug;
+        $surface = $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'career_protocol_bundle',
+            'surface_type' => 'career_alias_resolution_occupation',
+            'canonical_url' => $canonicalPath,
+            'robots_policy' => 'index,follow',
+            'title' => $occupation->canonical_title_en,
+            'description' => $occupation->canonical_title_en,
+            'indexability_state' => 'indexable',
+            'sitemap_state' => 'included',
+        ]);
+
+        return [
+            'canonical_path' => $canonicalPath,
+            'canonical_target' => null,
+            'index_state' => 'indexable',
+            'index_eligible' => true,
+            'reason_codes' => [],
+            'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
+            'surface_type' => $surface['surface_type'] ?? null,
+            'robots_policy' => $surface['robots_policy'] ?? 'index,follow',
+            'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
+        ];
+    }
+
     private function isOccupationPublishReady(Occupation $occupation, RecommendationSnapshot $snapshot): bool
     {
         $gate = $this->publishGate->evaluate([
@@ -678,6 +795,46 @@ final class CareerAliasResolutionBundleBuilder
         ]);
 
         return (bool) ($gate['publishable'] ?? false);
+    }
+
+    private function validDisplayAssetBackedAsset(Occupation $occupation): ?CareerJobDisplayAsset
+    {
+        $subjectSlug = strtolower(trim((string) $occupation->canonical_slug));
+        if ($subjectSlug === '' || in_array($subjectSlug, self::DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS, true)) {
+            return null;
+        }
+
+        $assets = CareerJobDisplayAsset::query()
+            ->where('occupation_id', $occupation->id)
+            ->where('canonical_slug', $subjectSlug)
+            ->where('surface_version', self::DISPLAY_SURFACE_VERSION)
+            ->where('asset_version', self::DISPLAY_ASSET_VERSION)
+            ->where('template_version', self::DISPLAY_ASSET_VERSION)
+            ->where('status', self::DISPLAY_READY_STATUS)
+            ->where('asset_type', self::DISPLAY_ASSET_TYPE)
+            ->get();
+
+        if ($assets->count() !== 1) {
+            return null;
+        }
+
+        $asset = $assets->first();
+        if (! $asset instanceof CareerJobDisplayAsset) {
+            return null;
+        }
+
+        $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
+        if (count($componentOrder) !== self::DISPLAY_COMPONENT_ORDER_COUNT) {
+            return null;
+        }
+
+        $pages = is_array($asset->page_payload_json) ? $asset->page_payload_json : [];
+        $localizedPages = is_array($pages['page'] ?? null) ? $pages['page'] : $pages;
+        if (! is_array($localizedPages['zh'] ?? null) || ! is_array($localizedPages['en'] ?? null)) {
+            return null;
+        }
+
+        return $asset;
     }
 
     private function normalizeText(mixed $value): ?string
