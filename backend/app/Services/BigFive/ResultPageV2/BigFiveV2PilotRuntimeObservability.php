@@ -34,6 +34,8 @@ final class BigFiveV2PilotRuntimeObservability
             'access_gate_decision' => $decision->allowed ? 'allow' : 'deny',
             'access_gate_reason' => $decision->reason,
             'access_gate_matched_rule' => $decision->matchedRule,
+            'public_pilot_gate_allowed' => $decision->reason === 'public_pilot_gate_allowed',
+            'public_pilot_gate_denied' => str_starts_with($decision->reason, 'public_pilot_') && ! $decision->allowed,
             'payload_attached' => false,
             'payload_validation_failed' => false,
             'fallback_reason' => $decision->allowed ? null : $decision->reason,
@@ -51,6 +53,9 @@ final class BigFiveV2PilotRuntimeObservability
             'payload_attached' => false,
             'payload_validation_failed' => true,
             'payload_validation_error_count' => count($errors),
+            'route_input_created' => true,
+            'route_lookup_failed' => false,
+            'composer_failed' => false,
             'fallback_reason' => 'payload_validation_failed',
         ]));
     }
@@ -71,6 +76,7 @@ final class BigFiveV2PilotRuntimeObservability
 
     public function recordPayloadGenerationFailed(Attempt $attempt, Result $result, \Throwable $exception): void
     {
+        $failureState = $this->generationFailureState($exception);
         Log::warning(self::EVENT, $this->context($attempt, $result, [
             'pilot_flag_state' => 'enabled',
             'access_gate_decision' => 'allow',
@@ -78,7 +84,7 @@ final class BigFiveV2PilotRuntimeObservability
             'payload_validation_failed' => false,
             'fallback_reason' => 'payload_generation_failed',
             'exception_class' => $exception::class,
-        ]));
+        ] + $failureState));
     }
 
     /**
@@ -103,5 +109,22 @@ final class BigFiveV2PilotRuntimeObservability
         }
 
         return hash('sha256', $identifier);
+    }
+
+    /**
+     * @return array{route_input_created: bool, route_lookup_failed: bool, composer_failed: bool}
+     */
+    private function generationFailureState(\Throwable $exception): array
+    {
+        $message = $exception->getMessage();
+
+        return [
+            'route_input_created' => ! str_contains($message, 'route input is invalid')
+                && ! str_contains($message, 'route projection is invalid')
+                && ! str_contains($message, 'projection is locked or redacted')
+                && ! str_contains($message, 'score result is missing'),
+            'route_lookup_failed' => str_contains($message, 'route row is missing'),
+            'composer_failed' => str_contains($message, 'composer failed'),
+        ];
     }
 }

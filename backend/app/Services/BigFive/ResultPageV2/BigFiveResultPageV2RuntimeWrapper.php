@@ -237,13 +237,22 @@ final class BigFiveResultPageV2RuntimeWrapper
             formCode: $this->resolveFormCode($attempt, $formSummary),
         );
         $selection = (new BigFiveV2DeterministicSelector)->select($input);
+        try {
+            $envelope = (new BigFiveV2PilotPayloadComposer)->compose($input, $selection);
+        } catch (\Throwable $exception) {
+            throw new RuntimeException('Big Five V2 pilot composer failed.', previous: $exception);
+        }
 
         return [
-            'envelope' => (new BigFiveV2PilotPayloadComposer)->compose($input, $selection),
+            'envelope' => $envelope,
             'metrics' => [
+                'route_input_created' => true,
+                'route_lookup_failed' => false,
+                'composer_failed' => false,
                 'combination_key' => $routeInput->combinationKey,
                 'quality_status' => $routeInput->qualityStatus,
                 'norm_status' => $routeInput->normStatus,
+                'selector_suppressed_refs' => count($selection->suppressedAssetRefs),
                 'selector_suppressed_ref_count' => count($selection->suppressedAssetRefs),
                 'unresolved_ref_count' => count($selection->unresolvedRefSuppressions),
                 'surface_status_summary' => [
