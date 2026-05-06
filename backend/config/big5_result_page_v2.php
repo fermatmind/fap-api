@@ -73,4 +73,42 @@ return [
         explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_DISABLED_RELEASE_SNAPSHOT_IDS', '')),
     ))),
     'production_emergency_disabled' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_EMERGENCY_DISABLED', false),
+    'production_rollout_enabled' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ENABLED', false),
+    'production_rollout_mode' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_MODE', 'disabled'),
+    'production_rollout_manual_approval_granted' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_MANUAL_APPROVAL_GRANTED', false),
+    'production_rollout_percentage' => (int) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_PERCENTAGE', 0),
+    'production_rollout_max_percentage' => (int) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_MAX_PERCENTAGE', 0),
+    'production_rollout_require_tenant_scope' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_REQUIRE_TENANT_SCOPE', true),
+    'production_rollout_allowed_attempt_ids' => array_values(array_filter(array_map(
+        static fn (string $attemptId): string => trim($attemptId),
+        explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_ATTEMPT_IDS', '')),
+    ))),
+    'production_rollout_allowed_user_ids' => array_values(array_filter(array_map(
+        static fn (string $userId): string => trim($userId),
+        explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_USER_IDS', '')),
+    ))),
+    'production_rollout_allowed_anon_ids' => array_values(array_filter(array_map(
+        static fn (string $anonId): string => trim($anonId),
+        explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_ANON_IDS', '')),
+    ))),
+    'production_rollout_allowed_org_ids' => array_values(array_filter(array_map(
+        static fn (string $orgId): string => trim($orgId),
+        explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_ORG_IDS', '')),
+    ))),
+    'production_rollout_allowed_tenant_ids' => array_values(array_filter(array_map(
+        static fn (string $tenantId): string => trim($tenantId),
+        explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_TENANT_IDS', '')),
+    ))),
+    'production_rollout_allowed_scale_codes' => array_values(array_filter(array_map(
+        static fn (string $scaleCode): string => strtoupper(trim($scaleCode)),
+        explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_SCALE_CODES', '')),
+    ))),
+    'production_rollout_allowed_form_codes' => array_values(array_filter(array_map(
+        static fn (string $formCode): string => trim($formCode),
+        explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_FORM_CODES', '')),
+    ))),
+    'production_rollout_allowed_locales' => array_values(array_filter(array_map(
+        static fn (string $locale): string => trim($locale),
+        explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_LOCALES', '')),
+    ))),
 ];
