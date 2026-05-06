@@ -1,0 +1,99 @@
+{
+  "schema": "fap.big5.result_page_v2.result_page_public_pilot_readiness_policy.v0_1",
+  "package_key": "big5_result_page_v2.result_page_public_pilot_readiness.v0_1",
+  "version": "0.1",
+  "mode": "result_page_public_pilot_readiness_policy_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "controlled_pilot_status": "ready_constrained",
+  "result_page_only_public_pilot_status": "no_go",
+  "production_status": "no_go",
+  "scope": {
+    "allowed_surfaces": [
+      "result_page_desktop",
+      "result_page_mobile"
+    ],
+    "excluded_surfaces": [
+      "pdf",
+      "share_card",
+      "history",
+      "compare"
+    ],
+    "exclusion_policy": "excluded_surfaces_must_remain_disabled_or_pending_and_cannot_count_as_pass"
+  },
+  "result_page_surface_evidence": [
+    {
+      "surface_key": "result_page_desktop",
+      "status": "pass",
+      "evidence": [
+        "fap-web/tests/contracts/big5-route-driven-rendered-qa.contract.test.tsx",
+        "fap-web/tests/contracts/big5-expanded-route-driven-rendered-cases.contract.test.tsx",
+        "backend/content_assets/big5/result_page_v2/qa/route_driven_pilot_readiness/v0_1/big5_route_driven_pilot_readiness_report_v0_1.json"
+      ]
+    },
+    {
+      "surface_key": "result_page_mobile",
+      "status": "pass",
+      "evidence": [
+        "fap-web/tests/contracts/big5-route-driven-rendered-qa.contract.test.tsx",
+        "fap-web/tests/contracts/big5-expanded-route-driven-rendered-cases.contract.test.tsx",
+        "backend/content_assets/big5/result_page_v2/qa/route_driven_pilot_readiness/v0_1/big5_route_driven_pilot_readiness_report_v0_1.json"
+      ]
+    }
+  ],
+  "excluded_surface_policy": [
+    {
+      "surface_key": "pdf",
+      "policy_status": "disabled_or_pending",
+      "rendered_status": "pending_surface",
+      "can_count_as_pass": false
+    },
+    {
+      "surface_key": "share_card",
+      "policy_status": "disabled_or_pending",
+      "rendered_status": "pending_surface",
+      "can_count_as_pass": false
+    },
+    {
+      "surface_key": "history",
+      "policy_status": "disabled_or_pending",
+      "rendered_status": "pending_surface",
+      "can_count_as_pass": false
+    },
+    {
+      "surface_key": "compare",
+      "policy_status": "disabled_or_pending",
+      "rendered_status": "pending_surface",
+      "can_count_as_pass": false
+    }
+  ],
+  "required_before_result_page_public_pilot_go": [
+    "PUBLIC-RP-2 public pilot access and rollout gate",
+    "PUBLIC-RP-3 public pilot observability hardening",
+    "PUBLIC-RP-4 desktop/mobile smoke and fail-closed tests",
+    "PUBLIC-RP-5 fap-web result-page-only public pilot rendered contract",
+    "PUBLIC-RP-6 final result-page-only public pilot go/no-go report"
+  ],
+  "forbidden_public_terms": [
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "source_reference",
+    "production_use_allowed",
+    "runtime_use",
+    "review_status",
+    "qa_notes",
+    "[object Object]"
+  ],
+  "must_not_change": [
+    "Do not enable production.",
+    "Do not mark PDF/share/history/compare as pass.",
+    "Do not connect CMS or dynamic norms.",
+    "Do not generate new content body.",
+    "Do not change scoring, controllers, routes, database, migrations, or content_packs."
+  ]
+}
