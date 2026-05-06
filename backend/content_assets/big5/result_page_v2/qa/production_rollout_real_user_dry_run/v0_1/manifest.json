@@ -1,0 +1,18 @@
+{
+  "schema": "big5_result_page_v2.production_rollout_real_user_dry_run_manifest.v0_1",
+  "package": "production_rollout_real_user_dry_run",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "real_user_exposure": "none",
+  "production_decision": "NO_GO",
+  "files": [
+    "README.md",
+    "big5_v2_production_rollout_real_user_dry_run_report_v0_1.json",
+    "big5_v2_production_rollout_real_user_dry_run_simulation_matrix_v0_1.json",
+    "big5_v2_production_rollout_real_user_dry_run_validation_v0_1.json"
+  ]
+}
