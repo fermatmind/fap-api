@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Career\Import\CareerAssetImportValidator;
+use App\Support\Xlsx\XlsxCellReference;
 use DOMDocument;
 use DOMElement;
 use DOMNode;
@@ -271,16 +272,7 @@ final class CareerValidateAssetImport extends Command
 
     private function columnIndex(string $cellRef): int
     {
-        if (! preg_match('/^([A-Z]+)/', $cellRef, $matches)) {
-            return 0;
-        }
-
-        $index = 0;
-        foreach (str_split($matches[1]) as $char) {
-            $index = ($index * 26) + (ord($char) - ord('A') + 1);
-        }
-
-        return $index - 1;
+        return XlsxCellReference::columnIndex($cellRef);
     }
 
     /**

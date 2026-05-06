@@ -189,3 +189,27 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: PR-5
+    repo: fap-api
+    depends_on:
+      - PR-4
+    branch: codex/low-api-file-import-idempotency
+    title: "PR-5 fap-api file / import / idempotency hardening"
+    scope:
+      - XLSX cell references can exhaust validator memory.
+      - Path traversal allows restore to arbitrary filesystem paths.
+      - Replay now re-inserts duplicate samples via new idempotency path.
+    do_not:
+      - Change order, payment, or benefit ownership behavior.
+      - Change CMS lifecycle, career release, tenant-scoped article/personality, privacy logs, DSAR, or key rotation behavior.
+      - Change CI/deploy supply-chain behavior.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - focused phpunit for XLSX cell bounds, quarantine restore path canonicalization, and ingestion replay idempotency
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

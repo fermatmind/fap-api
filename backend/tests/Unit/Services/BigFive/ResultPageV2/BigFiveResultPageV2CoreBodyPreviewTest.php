@@ -357,6 +357,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_file_import_idempotency_hardening_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Career/Import/CareerAuthorityDatasetReader.php',
+            'backend/app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php',
+            'backend/app/Services/Ingestion/ReplayService.php',
+            'backend/app/Services/Storage/QuarantinedRootRestoreService.php',
+            'backend/app/Support/Xlsx/XlsxCellReference.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_surface_builder_changes(): void
     {
         $changed = [
@@ -601,6 +614,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isFileImportIdempotencyHardeningFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerDisplaySurfaceFile($file)) {
                 continue;
             }
@@ -710,6 +727,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Support/PiiCipher.php',
             'backend/app/Support/Security/ExternalKmsPiiEnvelopeAdapter.php',
             'backend/app/Support/Security/LocalPiiEnvelopeAdapter.php',
+        ], true);
+    }
+
+    private function isFileImportIdempotencyHardeningFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Career/Import/CareerAuthorityDatasetReader.php',
+            'backend/app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php',
+            'backend/app/Services/Ingestion/ReplayService.php',
+            'backend/app/Services/Storage/QuarantinedRootRestoreService.php',
+            'backend/app/Support/Xlsx/XlsxCellReference.php',
         ], true);
     }
 

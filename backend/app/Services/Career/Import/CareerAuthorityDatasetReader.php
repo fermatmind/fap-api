@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Import;
 
+use App\Support\Xlsx\XlsxCellReference;
 use RuntimeException;
 use SimpleXMLElement;
 use ZipArchive;
@@ -217,8 +218,7 @@ final class CareerAuthorityDatasetReader
             }
 
             $reference = (string) ($cell['r'] ?? '');
-            $column = $this->columnFromReference($reference);
-            $index = $this->columnIndex($column);
+            $index = $this->columnIndex($reference);
             $cells[$index] = $this->cellValue($cell, $sharedStrings);
         }
 
@@ -258,19 +258,9 @@ final class CareerAuthorityDatasetReader
         return $value;
     }
 
-    private function columnFromReference(string $reference): string
+    private function columnIndex(string $cellRef): int
     {
-        return preg_replace('/\d+/', '', strtoupper($reference)) ?: 'A';
-    }
-
-    private function columnIndex(string $column): int
-    {
-        $index = 0;
-        foreach (str_split($column) as $char) {
-            $index = ($index * 26) + (ord($char) - 64);
-        }
-
-        return max($index - 1, 0);
+        return XlsxCellReference::columnIndex($cellRef);
     }
 
     /**

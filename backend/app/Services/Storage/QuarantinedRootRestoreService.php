@@ -38,7 +38,7 @@ final class QuarantinedRootRestoreService
             return [
                 'schema' => (string) config('storage_rollout.restore_plan_schema_version', self::PLAN_SCHEMA),
                 'generated_at' => now()->toAtomString(),
-                'item_root' => $normalizedItemRoot,
+                'item_root' => (string) $context['item_root'],
                 'exact_manifest_id' => (int) $context['exact_manifest_id'],
                 'exact_identity_hash' => (string) $context['exact_identity_hash'],
                 'source_kind' => (string) $context['source_kind'],
@@ -183,6 +183,11 @@ final class QuarantinedRootRestoreService
             throw new \RuntimeException('restore item root is required.');
         }
 
+        if ($planItemRoot !== '') {
+            $planItemRoot = $this->canonicalExistingDirectory($planItemRoot, 'restore plan item root');
+        }
+        $requestedItemRoot = $this->canonicalExistingDirectory($requestedItemRoot, 'restore requested item root');
+
         if ($planItemRoot !== '' && $requestedItemRoot !== '' && $planItemRoot !== $requestedItemRoot) {
             throw new \RuntimeException('restore plan item_root does not match requested item root.');
         }
@@ -220,12 +225,17 @@ final class QuarantinedRootRestoreService
             throw new \RuntimeException('restore item root is required.');
         }
 
-        if (! $this->isUnderPrefix($itemRoot, $this->quarantineRootBase())) {
-            throw new \RuntimeException('restore item root must be under the quarantine root base.');
+        if ($this->hasTraversalSegments($itemRoot)) {
+            throw new \RuntimeException('restore item root contains forbidden traversal segments.');
         }
 
         if (! is_dir($itemRoot)) {
             throw new \RuntimeException('quarantine item root does not exist.');
+        }
+
+        $itemRoot = $this->canonicalExistingDirectory($itemRoot, 'restore item root');
+        if (! $this->isUnderPrefix($itemRoot, $this->quarantineRootBase())) {
+            throw new \RuntimeException('restore item root must be under the quarantine root base.');
         }
 
         $sentinelPath = $itemRoot.DIRECTORY_SEPARATOR.'.quarantine.json';
@@ -310,6 +320,7 @@ final class QuarantinedRootRestoreService
         );
         $validation['target_path_allowlisted'] = true;
         $validation['target_path_not_in_danger_set'] = true;
+        $validation['target_path_canonical_safe'] = true;
 
         if ($releaseId !== '') {
             $release = DB::table('content_pack_releases')->where('id', $releaseId)->first();
@@ -522,6 +533,7 @@ final class QuarantinedRootRestoreService
             if (preg_match($contentReleasesPattern, $targetRoot) !== 1) {
                 throw new \RuntimeException('restore target must match legacy content_releases/{release_id}/source_pack shape.');
             }
+            $allowedBases = [$contentReleasesRoot];
         } elseif ($sourceKind === self::V2_PRIMARY_SOURCE_KIND) {
             if (! $this->isUnderPrefix($targetRoot, $privatePacksV2Root)) {
                 throw new \RuntimeException('restore target is outside the V2 primary allowlist.');
@@ -538,6 +550,7 @@ final class QuarantinedRootRestoreService
             if (preg_match($primaryPattern, $targetRoot) !== 1) {
                 throw new \RuntimeException('restore target must match V2 primary private/packs_v2/{pack_id}/{pack_version}/{release_id} shape.');
             }
+            $allowedBases = [$privatePacksV2Root];
         } elseif ($sourceKind === self::V2_MIRROR_SOURCE_KIND) {
             if (! $this->isUnderPrefix($targetRoot, $contentPacksV2Root)) {
                 throw new \RuntimeException('restore target is outside the V2 mirror allowlist.');
@@ -554,6 +567,9 @@ final class QuarantinedRootRestoreService
             if (preg_match($mirrorPattern, $targetRoot) !== 1) {
                 throw new \RuntimeException('restore target must match V2 mirror content_packs_v2/{pack_id}/{pack_version}/{release_id} shape.');
             }
+            $allowedBases = [$contentPacksV2Root];
+        } else {
+            throw new \RuntimeException('restore source_kind is not allowed.');
         }
 
         $dangerRoots = array_filter(array_merge([$backupsRoot, $defaultRoot], $artifactRoots, $materializedRoots, $quarantineRoots));
@@ -562,6 +578,8 @@ final class QuarantinedRootRestoreService
                 throw new \RuntimeException('restore target falls under a runtime no-touch prefix.');
             }
         }
+
+        $this->assertCanonicalTargetPath($targetRoot, $allowedBases);
     }
 
     /**
@@ -611,6 +629,20 @@ final class QuarantinedRootRestoreService
             return false;
         }
 
+        $realPrefix = realpath($prefix);
+        if (is_string($realPrefix)) {
+            $realPrefix = $this->normalizeRoot($realPrefix);
+            if ($path === $prefix || str_starts_with($path.'/', $prefix.'/')) {
+                $path = $realPrefix.substr($path, strlen($prefix));
+            } else {
+                $realPath = realpath($path);
+                if (is_string($realPath)) {
+                    $path = $this->normalizeRoot($realPath);
+                }
+            }
+            $prefix = $realPrefix;
+        }
+
         return $path === $prefix || str_starts_with($path.'/', $prefix.'/');
     }
 
@@ -633,6 +665,77 @@ final class QuarantinedRootRestoreService
     private function normalizeRoot(string $root): string
     {
         return str_replace('\\', '/', rtrim(trim($root), '/\\'));
+    }
+
+    private function canonicalExistingDirectory(string $path, string $label): string
+    {
+        $normalized = $this->normalizeRoot($path);
+        if ($this->hasTraversalSegments($normalized)) {
+            throw new \RuntimeException($label.' contains forbidden traversal segments.');
+        }
+
+        $real = realpath($normalized);
+        if (! is_string($real) || ! is_dir($real)) {
+            throw new \RuntimeException($label.' does not exist.');
+        }
+
+        return $this->normalizeRoot($real);
+    }
+
+    /**
+     * @param  list<string>  $allowedBases
+     */
+    private function assertCanonicalTargetPath(string $targetRoot, array $allowedBases): void
+    {
+        $targetRoot = $this->normalizeRoot($targetRoot);
+        if ($targetRoot === '' || ! str_starts_with($targetRoot, '/')) {
+            throw new \RuntimeException('restore target must be an absolute path.');
+        }
+
+        if ($this->hasTraversalSegments($targetRoot)) {
+            throw new \RuntimeException('restore target contains forbidden traversal segments.');
+        }
+
+        if (is_link($targetRoot)) {
+            throw new \RuntimeException('restore target must not be a symlink.');
+        }
+
+        $nearestExisting = dirname($targetRoot);
+        while ($nearestExisting !== '' && $nearestExisting !== '/' && ! file_exists($nearestExisting)) {
+            $nearestExisting = dirname($nearestExisting);
+        }
+
+        $realParent = realpath($nearestExisting);
+        if (! is_string($realParent) || ! is_dir($realParent)) {
+            throw new \RuntimeException('restore target parent cannot be canonicalized.');
+        }
+
+        $realParent = $this->normalizeRoot($realParent);
+        foreach ($allowedBases as $allowedBase) {
+            $realBase = realpath($allowedBase);
+            if (! is_string($realBase) || ! is_dir($realBase)) {
+                continue;
+            }
+
+            if ($this->isUnderPrefix($realParent, $this->normalizeRoot($realBase))) {
+                return;
+            }
+        }
+
+        throw new \RuntimeException('restore target parent escapes the canonical allowlist.');
+    }
+
+    private function hasTraversalSegments(string $path): bool
+    {
+        $segments = array_filter(explode('/', str_replace('\\', '/', $path)), static fn (string $segment): bool => $segment !== '');
+
+        foreach ($segments as $segment) {
+            if ($segment === '.' || $segment === '..') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function normalizeRelativePath(string $path): string
