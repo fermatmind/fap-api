@@ -25,7 +25,7 @@ final class BigFiveV2EditorialWorkflow
             'asset_type' => $asset->assetType,
             'asset_path' => $asset->relativePath,
             'asset_sha256' => $asset->sha256,
-            'version_no' => 1,
+            'version_no' => $this->nextVersionNo($asset->assetKey),
             'workflow_state' => BigFiveV2EditorialRevision::STATE_DRAFT,
             'release_snapshot_id' => $asset->linkedReleaseSnapshotIds[0] ?? null,
             'release_snapshot_hash' => $this->releaseSnapshotHash($asset->linkedReleaseSnapshotIds),
@@ -53,7 +53,10 @@ final class BigFiveV2EditorialWorkflow
             'asset_type' => (string) $previousRevision->asset_type,
             'asset_path' => (string) $previousRevision->asset_path,
             'asset_sha256' => (string) $previousRevision->asset_sha256,
-            'version_no' => ((int) $previousRevision->version_no) + 1,
+            'version_no' => max(
+                ((int) $previousRevision->version_no) + 1,
+                $this->nextVersionNo((string) $previousRevision->asset_key)
+            ),
             'supersedes_revision_id' => (string) $previousRevision->id,
             'workflow_state' => BigFiveV2EditorialRevision::STATE_DRAFT,
             'release_snapshot_id' => $previousRevision->release_snapshot_id,
@@ -178,6 +181,15 @@ final class BigFiveV2EditorialWorkflow
         );
 
         return $metadata;
+    }
+
+    private function nextVersionNo(string $assetKey): int
+    {
+        $latestVersion = BigFiveV2EditorialRevision::query()
+            ->where('asset_key', $assetKey)
+            ->max('version_no');
+
+        return ((int) $latestVersion) + 1;
     }
 
     /**
