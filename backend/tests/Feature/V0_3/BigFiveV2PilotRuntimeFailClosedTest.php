@@ -7,6 +7,7 @@ namespace Tests\Feature\V0_3;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
 use App\Services\BigFive\ResultPageV2\BigFiveV2PilotRuntimeObservability;
+use App\Services\Report\ReportAccess;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Log;
 use Mockery;
@@ -117,7 +118,15 @@ final class BigFiveV2PilotRuntimeFailClosedTest extends TestCase
         return app(BigFiveResultPageV2RuntimeWrapper::class)->appendIfEnabled(
             $fixture['attempt'],
             $fixture['result'],
-            ['report' => ['sections' => $fixture['legacy_sections']]],
+            [
+                'locked' => false,
+                'access_level' => ReportAccess::REPORT_ACCESS_FULL,
+                'modules_allowed' => [
+                    ReportAccess::MODULE_BIG5_CORE,
+                    ReportAccess::MODULE_BIG5_FULL,
+                ],
+                'report' => ['sections' => $fixture['legacy_sections']],
+            ],
         );
     }
 

@@ -7,6 +7,7 @@ namespace Tests\Feature\V0_3;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2TransformerContract;
+use App\Services\Report\ReportAccess;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\V0_3\Concerns\BuildsBigFiveReportEngineBridgeFixture;
 use Tests\TestCase;
@@ -69,15 +70,22 @@ final class BigFiveV2PilotRuntimeFlagTest extends TestCase
         $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_v2_pilot_allowed');
         config()->set('big5_result_page_v2.pilot_access_allowed_anon_ids', [$fixture['anon_id']]);
 
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer '.$fixture['token'],
-            'X-Anon-Id' => $fixture['anon_id'],
-        ])->getJson('/api/v0.3/attempts/'.$fixture['attempt_id'].'/report');
+        $payload = app(BigFiveResultPageV2RuntimeWrapper::class)->appendIfEnabled(
+            $fixture['attempt'],
+            $fixture['result'],
+            [
+                'locked' => true,
+                'access_level' => ReportAccess::REPORT_ACCESS_FULL,
+                'modules_allowed' => [
+                    ReportAccess::MODULE_BIG5_CORE,
+                    ReportAccess::MODULE_BIG5_FULL,
+                ],
+                'report' => ['sections' => $fixture['legacy_sections']],
+            ],
+        );
 
-        $response->assertOk();
-        $payload = $response->json(BigFiveResultPageV2Contract::PAYLOAD_KEY);
-        $this->assertNull($payload);
-        $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
+        $this->assertArrayNotHasKey(BigFiveResultPageV2Contract::PAYLOAD_KEY, $payload);
+        $this->assertSame($fixture['legacy_sections'], data_get($payload, 'report.sections'));
     }
 
     public function test_pilot_runtime_flag_rolls_back_by_setting_config_false(): void

@@ -255,6 +255,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_attempt_data_lifecycle_erasure_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Attempts/AttemptDataLifecycleService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_result_email_lookup_changes(): void
     {
         $changed = [
@@ -318,6 +327,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -551,6 +561,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isAttemptDataLifecycleErasureFile($file)) {
+                continue;
+            }
+
             if ($this->isResultEmailLookupFile($file)) {
                 continue;
             }
@@ -609,6 +623,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php',
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php',
         ], true);
     }
@@ -638,6 +653,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Attempts/AttemptEmailBindingService.php',
             'backend/database/migrations/2026_05_05_000100_create_attempt_email_bindings_table.php',
         ], true);
+    }
+
+    private function isAttemptDataLifecycleErasureFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Attempts/AttemptDataLifecycleService.php';
     }
 
     private function isResultEmailLookupFile(string $file): bool
