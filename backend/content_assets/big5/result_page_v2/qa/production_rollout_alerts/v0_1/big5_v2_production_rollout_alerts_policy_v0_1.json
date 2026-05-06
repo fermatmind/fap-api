@@ -1,0 +1,102 @@
+{
+  "schema": "fap.big5.result_page_v2.production_rollout_alerts_policy.v0_1",
+  "package_key": "big5_result_page_v2.production_rollout_alerts.policy.v0_1",
+  "mode": "rollout_alerts_dashboard_governance",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "alert_thresholds": {
+    "rollout_failure_alert": {
+      "metric": "rollout_deny_count",
+      "severity": "sev2",
+      "window_minutes": 5,
+      "threshold": {
+        "operator": ">=",
+        "value": 1
+      },
+      "requires_human_triage": true,
+      "halt_rollout_on_trigger": true
+    },
+    "payload_validation_alert": {
+      "metric": "payload_validation_error_count",
+      "severity": "sev1",
+      "window_minutes": 5,
+      "threshold": {
+        "operator": ">=",
+        "value": 1
+      },
+      "requires_human_triage": true,
+      "halt_rollout_on_trigger": true
+    },
+    "metadata_leak_alert": {
+      "metric": "metadata_leak_count",
+      "severity": "sev0",
+      "window_minutes": 1,
+      "threshold": {
+        "operator": ">",
+        "value": 0
+      },
+      "requires_human_triage": true,
+      "halt_rollout_on_trigger": true
+    },
+    "fallback_generation_alert": {
+      "metric": "fallback_generation_count",
+      "severity": "sev0",
+      "window_minutes": 1,
+      "threshold": {
+        "operator": ">",
+        "value": 0
+      },
+      "requires_human_triage": true,
+      "halt_rollout_on_trigger": true
+    },
+    "rollout_freeze_alert": {
+      "metric": "rollout_freeze_violation_count",
+      "severity": "sev1",
+      "window_minutes": 1,
+      "threshold": {
+        "operator": ">",
+        "value": 0
+      },
+      "requires_human_triage": true,
+      "halt_rollout_on_trigger": true
+    }
+  },
+  "incident_escalation_path": {
+    "primary_channel": "production-rollout-oncall",
+    "secondary_channel": "engineering-incident-command",
+    "required_roles": [
+      "rollout_commander",
+      "backend_owner",
+      "qa_owner",
+      "release_approver"
+    ],
+    "escalate_when": [
+      "metadata_leak_alert",
+      "fallback_generation_alert",
+      "payload_validation_alert",
+      "rollout_freeze_alert"
+    ],
+    "release_halt_authority": "rollout_commander",
+    "rollback_authority": "backend_owner"
+  },
+  "forbidden_public_terms": [
+    "internal_metadata",
+    "selector_basis",
+    "source_reference",
+    "runtime_use",
+    "production_use_allowed",
+    "review_status",
+    "qa_notes",
+    "[object Object]"
+  ],
+  "safety": {
+    "runtime_behavior_changed": false,
+    "scoring_changed": false,
+    "content_bodies_changed": false,
+    "cms_connected": false,
+    "dynamic_norms_connected": false
+  }
+}
