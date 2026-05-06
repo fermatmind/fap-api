@@ -1,0 +1,36 @@
+{
+  "schema_version": "big5_v2_cms_release_linkage_policy.v0_1",
+  "mode": "editorial_release_linkage_governance",
+  "cms_export_only": true,
+  "cms_runtime_owner": false,
+  "direct_runtime_publish_allowed": false,
+  "git_backed_source_of_truth": true,
+  "release_candidate_export": {
+    "allowed_from_states": [
+      "approved"
+    ],
+    "requires_approval_audit": true,
+    "requires_release_snapshot_linkage": true,
+    "requires_git_commit_review": true,
+    "requires_import_gate": true,
+    "requires_runtime_gate": true
+  },
+  "forbidden_paths": [
+    "cms_direct_runtime_publish",
+    "cms_runtime_payload_mutation",
+    "cms_release_snapshot_overwrite",
+    "cms_import_gate_bypass",
+    "cms_runtime_gate_bypass"
+  ],
+  "source_of_truth": {
+    "editorial_draft_owner": "cms",
+    "runtime_owner": "git_backed_release_snapshot",
+    "release_snapshot_owner": "git",
+    "runtime_exposure_owner": "runtime_gate"
+  },
+  "rollback_linkage": {
+    "rollback_must_use_release_snapshot": true,
+    "cms_may_archive_editorial_revision": true,
+    "cms_must_not_mutate_runtime_payload": true
+  }
+}
