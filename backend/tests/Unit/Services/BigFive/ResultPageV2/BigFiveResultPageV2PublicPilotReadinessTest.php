@@ -24,7 +24,7 @@ final class BigFiveResultPageV2PublicPilotReadinessTest extends TestCase
             $this->assertFalse((bool) ($document['ready_for_runtime'] ?? true));
             $this->assertFalse((bool) ($document['ready_for_production'] ?? true));
             $this->assertSame('ready_constrained', $document['controlled_pilot_status'] ?? null);
-            $this->assertSame('no_go', $document['result_page_only_public_pilot_status'] ?? null);
+            $this->assertSame('go_result_page_only', $document['result_page_only_public_pilot_status'] ?? null);
             $this->assertSame('no_go', $document['production_status'] ?? null);
         }
     }
@@ -52,7 +52,7 @@ final class BigFiveResultPageV2PublicPilotReadinessTest extends TestCase
         }
     }
 
-    public function test_result_page_evidence_is_present_but_public_pilot_stays_no_go(): void
+    public function test_result_page_evidence_supports_result_page_only_public_pilot_go(): void
     {
         $policy = $this->jsonFile('big5_result_page_public_pilot_readiness_policy_v0_1.json');
         $summary = $this->jsonFile('big5_result_page_public_pilot_readiness_summary_v0_1.json');
@@ -73,9 +73,38 @@ final class BigFiveResultPageV2PublicPilotReadinessTest extends TestCase
         $this->assertSame(4, $summary['disabled_or_pending_surface_count'] ?? null);
         $this->assertSame(4, $summary['pending_surface_count'] ?? null);
         $this->assertSame(0, $summary['excluded_surface_pass_count'] ?? null);
-        $this->assertFalse((bool) ($summary['public_pilot_rollout_gate_complete'] ?? true));
-        $this->assertFalse((bool) ($summary['public_pilot_smoke_fail_closed_complete'] ?? true));
+        $this->assertTrue((bool) ($summary['public_pilot_rollout_gate_complete'] ?? false));
+        $this->assertTrue((bool) ($summary['public_pilot_observability_complete'] ?? false));
+        $this->assertTrue((bool) ($summary['public_pilot_smoke_fail_closed_complete'] ?? false));
+        $this->assertTrue((bool) ($summary['fap_web_public_pilot_contract_complete'] ?? false));
+        $this->assertTrue((bool) ($summary['final_go_no_go_report_complete'] ?? false));
+        $this->assertTrue((bool) ($summary['result_page_only_public_pilot_can_enter'] ?? false));
+        $this->assertFalse((bool) ($summary['public_pilot_full_surface_can_enter'] ?? true));
         $this->assertTrue((bool) ($summary['production_blocked'] ?? false));
+    }
+
+    public function test_final_go_no_go_report_allows_only_result_page_public_pilot(): void
+    {
+        $report = $this->jsonFile('big5_result_page_public_pilot_go_no_go_report_v0_1.json');
+
+        $this->assertTrue((bool) data_get($report, 'decisions.controlled_pilot.can_enter'));
+        $this->assertSame('go_result_page_only', data_get($report, 'decisions.result_page_only_public_pilot.status'));
+        $this->assertTrue((bool) data_get($report, 'decisions.result_page_only_public_pilot.can_enter'));
+        $this->assertSame([
+            'result_page_desktop',
+            'result_page_mobile',
+        ], data_get($report, 'decisions.result_page_only_public_pilot.scope'));
+
+        $this->assertSame('no_go', data_get($report, 'decisions.full_public_pilot.status'));
+        $this->assertFalse((bool) data_get($report, 'decisions.full_public_pilot.can_enter'));
+        $this->assertSame('no_go', data_get($report, 'decisions.production.status'));
+        $this->assertFalse((bool) data_get($report, 'decisions.production.can_enter'));
+
+        foreach (['pdf', 'share_card', 'history', 'compare'] as $surfaceKey) {
+            $this->assertSame('disabled_or_pending', data_get($report, "surface_status.{$surfaceKey}.status"), $surfaceKey);
+            $this->assertSame('pending_surface', data_get($report, "surface_status.{$surfaceKey}.rendered_status"), $surfaceKey);
+            $this->assertFalse((bool) data_get($report, "surface_status.{$surfaceKey}.can_count_as_pass"), $surfaceKey);
+        }
     }
 
     public function test_forbidden_public_terms_are_listed_without_becoming_evidence(): void
@@ -106,7 +135,7 @@ final class BigFiveResultPageV2PublicPilotReadinessTest extends TestCase
         $entries = file(base_path(self::BASE_PATH.'/SHA256SUMS'), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         $this->assertIsArray($entries);
-        $this->assertCount(3, $entries);
+        $this->assertCount(4, $entries);
 
         foreach ($entries as $entry) {
             $this->assertMatchesRegularExpression('/^[a-f0-9]{64}  [A-Za-z0-9_.-]+$/', $entry);

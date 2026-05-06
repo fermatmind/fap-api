@@ -11,9 +11,10 @@ Scope:
 
 Current decision:
 - Controlled pilot remains `ready_constrained`.
-- Result-page-only public pilot remains `no_go` until rollout gate,
-  public-pilot observability, smoke/fail-closed tests, fap-web public-pilot
-  rendered contract, and final go/no-go evidence are complete.
+- Result-page-only public pilot is `go_result_page_only` for desktop and
+  mobile result page surfaces only.
+- Full public pilot remains blocked until PDF, share card, history, and compare
+  have real adapter/harness evidence.
 - Production remains `no_go`.
 
 Surface policy:

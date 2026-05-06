@@ -10,7 +10,7 @@
   "ready_for_runtime": false,
   "ready_for_production": false,
   "controlled_pilot_status": "ready_constrained",
-  "result_page_only_public_pilot_status": "no_go",
+  "result_page_only_public_pilot_status": "go_result_page_only",
   "production_status": "no_go",
   "scope": {
     "allowed_surfaces": [
@@ -32,6 +32,7 @@
       "evidence": [
         "fap-web/tests/contracts/big5-route-driven-rendered-qa.contract.test.tsx",
         "fap-web/tests/contracts/big5-expanded-route-driven-rendered-cases.contract.test.tsx",
+        "fap-web/tests/contracts/big5-public-pilot-result-page.contract.test.tsx",
         "backend/content_assets/big5/result_page_v2/qa/route_driven_pilot_readiness/v0_1/big5_route_driven_pilot_readiness_report_v0_1.json"
       ]
     },
@@ -41,6 +42,7 @@
       "evidence": [
         "fap-web/tests/contracts/big5-route-driven-rendered-qa.contract.test.tsx",
         "fap-web/tests/contracts/big5-expanded-route-driven-rendered-cases.contract.test.tsx",
+        "fap-web/tests/contracts/big5-public-pilot-result-page.contract.test.tsx",
         "backend/content_assets/big5/result_page_v2/qa/route_driven_pilot_readiness/v0_1/big5_route_driven_pilot_readiness_report_v0_1.json"
       ]
     }
@@ -71,12 +73,25 @@
       "can_count_as_pass": false
     }
   ],
-  "required_before_result_page_public_pilot_go": [
+  "completed_before_result_page_public_pilot_go": [
     "PUBLIC-RP-2 public pilot access and rollout gate",
     "PUBLIC-RP-3 public pilot observability hardening",
     "PUBLIC-RP-4 desktop/mobile smoke and fail-closed tests",
     "PUBLIC-RP-5 fap-web result-page-only public pilot rendered contract",
     "PUBLIC-RP-6 final result-page-only public pilot go/no-go report"
+  ],
+  "result_page_only_public_pilot_scope": [
+    "desktop_result_page",
+    "mobile_result_page"
+  ],
+  "not_in_public_pilot_scope": [
+    "pdf",
+    "share_card",
+    "history",
+    "compare",
+    "production",
+    "cms",
+    "dynamic_norms"
   ],
   "forbidden_public_terms": [
     "frontend_fallback",
