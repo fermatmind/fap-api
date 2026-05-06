@@ -1,0 +1,29 @@
+{
+  "schema": "big5_result_page_v2.production_rollout_rollback_validation.v0_1",
+  "package": "production_rollout_rollback_kill_switch",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "validation_status": "pass",
+  "production_decision": "NO_GO",
+  "checks": {
+    "rollout_rollback": "pass",
+    "emergency_disable": "pass",
+    "allowlist_revoke": "pass",
+    "percentage_rollback": "pass",
+    "release_snapshot_rollback": "pass",
+    "fail_closed_recovery": "pass",
+    "rollback_observability": "pass",
+    "runtime_enablement_absent": "pass",
+    "cms_out_of_scope": "pass",
+    "dynamic_norms_out_of_scope": "pass"
+  },
+  "required_runtime_defaults": {
+    "production_runtime_enabled": false,
+    "production_rollout_enabled": false,
+    "production_rollout_percentage": 0
+  }
+}
