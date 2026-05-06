@@ -47,6 +47,29 @@ final class TenantOrderReadContractTest extends TestCase
         $this->assertSame('paid_no_grant', $unlockStatus->invoke(null, $records[$paidNoGrant->order_no])['label']);
     }
 
+    public function test_tenant_orders_ignore_cross_org_benefit_grants_with_same_order_no(): void
+    {
+        $tenant = $this->createTenantUserWithOrg();
+        $otherTenant = $this->createTenantUserWithOrg();
+        $order = $this->insertOrder($tenant['org_id'], 'ord_tenant_cross_org_grant', 'fulfilled', 'paid');
+        $this->insertActiveGrant($otherTenant['org_id'], (string) $order->order_no);
+        $this->bootstrapTenantContext($tenant['org_id'], (int) $tenant['user']->id);
+
+        $record = OrderResource::getEloquentQuery()
+            ->whereKey($order->getKey())
+            ->first();
+
+        $this->assertNotNull($record);
+        $this->assertNull($record->latest_benefit_status);
+        $this->assertFalse((bool) $record->has_active_benefit_grant);
+
+        $grantStatus = $this->resourceMethod('grantStatus');
+        $unlockStatus = $this->resourceMethod('unlockStatus');
+
+        $this->assertSame('missing', $grantStatus->invoke(null, $record)['label']);
+        $this->assertSame('paid_no_grant', $unlockStatus->invoke(null, $record)['label']);
+    }
+
     public function test_tenant_order_detail_shows_payment_grant_and_lifecycle_truths(): void
     {
         $tenant = $this->createTenantUserWithOrg();

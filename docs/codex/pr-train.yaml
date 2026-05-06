@@ -117,3 +117,27 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: PR-2
+    repo: fap-api
+    branch: codex/low-api-order-tenant-ownership
+    title: "PR-2 fap-api order / tenant / ownership boundary"
+    scope:
+      - Order target ID can leak MBTI form metadata.
+      - Public checkout leaks cross-tenant attempt channel.
+      - Tenant order grant status ignores org boundary.
+      - Webhook owner check rejects anon attempts after login.
+      - Pending order payment retry can crash on provider errors.
+    do_not:
+      - Change CMS lifecycle behavior.
+      - Change privacy logs, DSAR, or key rotation behavior.
+      - Change CI/deploy supply-chain behavior.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - focused phpunit for order, tenant, webhook, and provider failure boundaries
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

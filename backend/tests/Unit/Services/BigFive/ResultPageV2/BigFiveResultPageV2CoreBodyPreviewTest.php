@@ -228,6 +228,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_order_tenant_ownership_boundary_changes(): void
+    {
+        $changed = [
+            'backend/app/Filament/Tenant/Resources/OrderResource.php',
+            'backend/app/Http/Controllers/API/V0_3/CommerceController.php',
+            'backend/app/Internal/Commerce/PaymentWebhookHandlerCore.php',
+            'backend/app/Services/Commerce/OrderManager.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_attempt_email_binding_foundation_changes(): void
     {
         $changed = [
@@ -614,8 +626,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isCommercePaymentActionFile(string $file): bool
     {
-        return $file === 'backend/app/Http/Controllers/API/V0_3/CommerceController.php'
-            || $file === 'backend/app/Services/Commerce/Checkout/AlipayCheckoutService.php';
+        return in_array($file, [
+            'backend/app/Filament/Tenant/Resources/OrderResource.php',
+            'backend/app/Http/Controllers/API/V0_3/CommerceController.php',
+            'backend/app/Internal/Commerce/PaymentWebhookHandlerCore.php',
+            'backend/app/Services/Commerce/Checkout/AlipayCheckoutService.php',
+            'backend/app/Services/Commerce/OrderManager.php',
+        ], true);
     }
 
     private function isCareerDisplaySurfaceFile(string $file): bool

@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-06T00:43:22+08:00",
+  "updated_at": "2026-05-06T01:39:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -221,6 +221,94 @@
           "affected_command_or_check": "php artisan migrate",
           "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO), database fap_api.",
           "why_external_to_current_pr": "PR3 adds no migrations; sqlite full migration path passes and the failure occurs before schema execution while connecting to local MySQL.",
+          "owner": "unknown",
+          "follow_up_recommendation": "Fix local .env MySQL credentials or document the required local DB setup for default migrate validation."
+        }
+      ],
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-2": {
+      "repo": "fap-api",
+      "branch": "codex/low-api-order-tenant-ownership",
+      "status": "pr_open",
+      "commit_sha": "801af38d828802fee1f3e963092b8e4cd2bf3e96",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1207",
+      "checks": {
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to API order/attempt ownership, tenant order grant correlation, webhook owner matching, focused tests, and PR train metadata."
+        },
+        "php_lint": {
+          "status": "pass",
+          "command": "php -l backend/app/Http/Controllers/API/V0_3/CommerceController.php && php -l backend/app/Services/Commerce/OrderManager.php && php -l backend/app/Filament/Tenant/Resources/OrderResource.php && php -l backend/app/Internal/Commerce/PaymentWebhookHandlerCore.php && php -l backend/tests/Feature/V0_3/CommerceCheckoutPayActionTest.php && php -l backend/tests/Feature/V0_3/CommerceOrderLookupSecurityTest.php && php -l backend/tests/Feature/Tenant/TenantOrderReadContractTest.php && php -l backend/tests/Unit/Commerce/PaymentWebhookAttemptOwnershipTest.php"
+        },
+        "pint": {
+          "status": "pass",
+          "command": "./vendor/bin/pint app/Http/Controllers/API/V0_3/CommerceController.php app/Services/Commerce/OrderManager.php app/Filament/Tenant/Resources/OrderResource.php app/Internal/Commerce/PaymentWebhookHandlerCore.php tests/Feature/V0_3/CommerceCheckoutPayActionTest.php tests/Feature/V0_3/CommerceOrderLookupSecurityTest.php tests/Feature/Tenant/TenantOrderReadContractTest.php tests/Unit/Commerce/PaymentWebhookAttemptOwnershipTest.php"
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list"
+        },
+        "default_migrate": {
+          "status": "external_blocker",
+          "command": "php artisan migrate",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) against local fap_api MySQL."
+        },
+        "sqlite_migrate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force"
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/CommerceCheckoutPayActionTest.php tests/Feature/V0_3/CommerceOrderLookupSecurityTest.php tests/Feature/Tenant/TenantOrderReadContractTest.php tests/Unit/Commerce/PaymentWebhookAttemptOwnershipTest.php",
+          "evidence": "33 tests passed, 259 assertions."
+        },
+        "order_security_gate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/CommerceOrderLookupSecurityTest.php tests/Feature/V0_3/CommerceOrderReadFallbackTest.php",
+          "evidence": "22 tests passed, 246 assertions."
+        },
+        "mbti_ci": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full script exited 0; order security gate, OpenAPI diff gate, dependency security gate, and webhook/attempt regression gates passed."
+        },
+        "bigfive_runtime_freeze_gate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime",
+          "evidence": "16 tests passed, 18 assertions; PR-2 order/tenant ownership files are explicitly classified as non-MBTI-impacting runtime changes."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1207 pull_request CI passed on head 801af38d828802fee1f3e963092b8e4cd2bf3e96: hygiene, verify-mbti-v2, and verify-mbti-legacy. Initial required-check failure was fixed by the PR-2 runtime freeze classifier allowlist update."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [
+        {
+          "title": "Existing email train ledger still marks merged PR #1191 as unmerged",
+          "repo": "fap-api",
+          "affected_command_or_check": "train ledger reconciliation",
+          "evidence": "GitHub reports https://github.com/fermatmind/fap-api/pull/1191 as MERGED with merge commit 0875fd3725c4ae9cfce07b698df4f0faeeaf9f89, while docs/codex/pr-train-state.json still records backend-email-gated-report-read as github_checks_passed.",
+          "why_external_to_current_pr": "The stale status predates PR-2 and concerns the prior email-result-access train item, not the order/tenant ownership scope.",
+          "impact_on_current_pr": "No impact on PR-2 scope validation or required checks; record only as sidecar per /goal protocol.",
+          "owner": "unknown",
+          "follow_up_recommendation": "Reconcile backend-email-gated-report-read metadata in a dedicated train-ledger cleanup if that train is resumed."
+        },
+        {
+          "title": "Local default MySQL credentials block php artisan migrate",
+          "repo": "fap-api",
+          "affected_command_or_check": "php artisan migrate",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO), database fap_api.",
+          "why_external_to_current_pr": "PR-2 adds no migrations; the sqlite migration path and full MBTI CI sqlite baseline both pass. The failure occurs before schema execution while connecting to local MySQL.",
+          "impact_on_current_pr": "No impact on PR-2 scope validation or required GitHub checks; record as sidecar per /goal protocol.",
           "owner": "unknown",
           "follow_up_recommendation": "Fix local .env MySQL credentials or document the required local DB setup for default migrate validation."
         }

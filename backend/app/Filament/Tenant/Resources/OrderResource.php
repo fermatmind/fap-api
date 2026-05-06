@@ -127,6 +127,7 @@ class OrderResource extends BaseTenantResource
         $query = DB::table('benefit_grants')
             ->select('status')
             ->whereColumn('benefit_grants.order_no', 'orders.order_no')
+            ->whereColumn('benefit_grants.org_id', 'orders.org_id')
             ->orderByRaw("case when lower(coalesce(status, '')) = 'active' then 0 else 1 end")
             ->orderByRaw('coalesce(updated_at, created_at) desc')
             ->limit(1);
@@ -141,6 +142,7 @@ class OrderResource extends BaseTenantResource
         $query = DB::table('benefit_grants')
             ->selectRaw('1')
             ->whereColumn('benefit_grants.order_no', 'orders.order_no')
+            ->whereColumn('benefit_grants.org_id', 'orders.org_id')
             ->where('benefit_grants.status', 'active')
             ->limit(1);
 
