@@ -38,6 +38,7 @@ use App\Console\Commands\CareerSyncOccupationDirectoryDisplay;
 use App\Console\Commands\CareerValidateAssetImport;
 use App\Console\Commands\CareerValidateBroadGroupFamilyMap;
 use App\Console\Commands\CareerValidateCnAuthorityPolicy;
+use App\Console\Commands\CareerValidateCnTrustManifest;
 use App\Console\Commands\CareerValidateDisplayAssetLineage;
 use App\Console\Commands\CareerValidateDisplayBatch;
 use App\Console\Commands\CareerValidateOccupationDirectoryReviewQueues;
@@ -185,6 +186,7 @@ class Kernel extends ConsoleKernel
         CareerValidateAssetImport::class,
         CareerValidateBroadGroupFamilyMap::class,
         CareerValidateCnAuthorityPolicy::class,
+        CareerValidateCnTrustManifest::class,
         CareerValidateDisplayBatch::class,
         CareerValidateDisplayAssetLineage::class,
         CareerValidateReleaseGate::class,
