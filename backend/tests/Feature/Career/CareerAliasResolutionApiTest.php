@@ -52,6 +52,32 @@ final class CareerAliasResolutionApiTest extends TestCase
             ->assertJsonMissingPath('resolution.candidates');
     }
 
+    public function test_it_returns_ledger_backed_duplicate_alias_with_non_index_policy(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+        $occupation = Occupation::query()->where('canonical_slug', 'data-scientists')->firstOrFail();
+
+        OccupationAlias::query()->create([
+            'occupation_id' => $occupation->id,
+            'family_id' => $occupation->family_id,
+            'alias' => 'Duplicate Api Approved Alias',
+            'normalized' => 'duplicate-api-approved-alias',
+            'lang' => 'en-US',
+            'register' => 'public_resolution_duplicate_alias',
+            'intent_scope' => 'duplicate_identity',
+            'target_kind' => 'ledger_public_alias_redirect',
+            'precision_score' => 1.0,
+            'confidence_score' => 1.0,
+        ]);
+
+        $this->getJson('/api/v0.5/career/resolve?q=duplicate-api-approved-alias&locale=en-US')
+            ->assertOk()
+            ->assertJsonPath('resolution.resolved_kind', 'occupation')
+            ->assertJsonPath('resolution.occupation.canonical_slug', 'data-scientists')
+            ->assertJsonPath('resolution.occupation.seo_contract.canonical_path', '/career/jobs/data-scientists')
+            ->assertJsonMissingPath('resolution.occupation.alias_url');
+    }
+
     public function test_it_returns_family_for_an_authority_backed_family_query(): void
     {
         $this->materializeCurrentFirstWaveFixture();

@@ -54,6 +54,37 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
         $this->assertSame('approved', data_get($payload, 'resolution.occupation.trust_summary.reviewer_status'));
     }
 
+    public function test_it_resolves_ledger_backed_duplicate_alias_to_approved_canonical_target(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+        $occupation = Occupation::query()
+            ->where('canonical_slug', 'data-scientists')
+            ->firstOrFail();
+
+        OccupationAlias::query()->create([
+            'occupation_id' => $occupation->id,
+            'family_id' => $occupation->family_id,
+            'alias' => 'Duplicate Identity Approved Alias',
+            'normalized' => 'duplicate-identity-approved-alias',
+            'lang' => 'en-US',
+            'register' => 'public_resolution_duplicate_alias',
+            'intent_scope' => 'duplicate_identity',
+            'target_kind' => 'ledger_public_alias_redirect',
+            'precision_score' => 1.0,
+            'confidence_score' => 1.0,
+        ]);
+
+        $payload = app(CareerAliasResolutionBundleBuilder::class)
+            ->build('duplicate-identity-approved-alias', 'en-US')
+            ->toArray();
+
+        $this->assertSame('occupation', data_get($payload, 'resolution.resolved_kind'));
+        $this->assertSame('data-scientists', data_get($payload, 'resolution.occupation.canonical_slug'));
+        $this->assertSame('/career/jobs/data-scientists', data_get($payload, 'resolution.occupation.seo_contract.canonical_path'));
+        $this->assertSame(true, data_get($payload, 'resolution.occupation.seo_contract.index_eligible'));
+        $this->assertArrayNotHasKey('alias_url', data_get($payload, 'resolution.occupation'));
+    }
+
     public function test_it_bounds_alias_lookup_queries_by_normalized_input(): void
     {
         $this->materializeCurrentFirstWaveFixture();
@@ -214,6 +245,38 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
 
         $payload = app(CareerAliasResolutionBundleBuilder::class)
             ->build('blocked resolve target', 'en-US')
+            ->toArray();
+
+        $this->assertSame('none', data_get($payload, 'resolution.resolved_kind'));
+        $this->assertNull(data_get($payload, 'resolution.occupation'));
+        $this->assertNull(data_get($payload, 'resolution.family'));
+        $this->assertNull(data_get($payload, 'resolution.candidates'));
+    }
+
+    public function test_it_rejects_ledger_duplicate_alias_when_target_is_not_publish_ready(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+        $blocked = $this->compileJobChain(CareerFoundationFixture::seedTrustLimitedCrossMarketChain());
+        $blocked['occupation']->update([
+            'canonical_slug' => 'blocked-duplicate-target',
+            'canonical_title_en' => 'Blocked Duplicate Target',
+        ]);
+
+        OccupationAlias::query()->create([
+            'occupation_id' => $blocked['occupation']->id,
+            'family_id' => $blocked['occupation']->family_id,
+            'alias' => 'Blocked Duplicate Approved Alias',
+            'normalized' => 'blocked-duplicate-approved-alias',
+            'lang' => 'en-US',
+            'register' => 'public_resolution_duplicate_alias',
+            'intent_scope' => 'duplicate_identity',
+            'target_kind' => 'ledger_public_alias_redirect',
+            'precision_score' => 1.0,
+            'confidence_score' => 1.0,
+        ]);
+
+        $payload = app(CareerAliasResolutionBundleBuilder::class)
+            ->build('blocked-duplicate-approved-alias', 'en-US')
             ->toArray();
 
         $this->assertSame('none', data_get($payload, 'resolution.resolved_kind'));
