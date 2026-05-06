@@ -60,4 +60,17 @@ return [
         static fn (string $orgId): string => trim($orgId),
         explode(',', (string) env('BIG5_RESULT_PAGE_V2_PUBLIC_PILOT_ALLOWED_ORG_IDS', '')),
     ))),
+    'production_runtime_enabled' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_RUNTIME_ENABLED', false),
+    'production_rollout_configured' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_CONFIGURED', false),
+    'production_import_gate_passed' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_IMPORT_GATE_PASSED', false),
+    'production_release_snapshot_id' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_RELEASE_SNAPSHOT_ID', ''),
+    'production_approved_release_snapshot_ids' => array_values(array_filter(array_map(
+        static fn (string $snapshotId): string => trim($snapshotId),
+        explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_APPROVED_RELEASE_SNAPSHOT_IDS', '')),
+    ))),
+    'production_disabled_release_snapshot_ids' => array_values(array_filter(array_map(
+        static fn (string $snapshotId): string => trim($snapshotId),
+        explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_DISABLED_RELEASE_SNAPSHOT_IDS', '')),
+    ))),
+    'production_emergency_disabled' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_EMERGENCY_DISABLED', false),
 ];
