@@ -213,3 +213,33 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: PR-6
+    repo: fap-api
+    depends_on:
+      - PR-5
+    branch: codex/low-api-ci-deploy-supply-chain
+    title: "PR-6 fap-api CI / deploy supply chain"
+    scope:
+      - Default DB credentials exposed in new compose services.
+      - Release packaging drops secret/runtime artifact checks.
+      - OTP dev-code bypass now enabled in testing/ci envs.
+      - CI env now exposes wx_phone auth bypass endpoint.
+      - Billing webhook accepts unsigned payloads when secret is unset.
+      - Rollback workflow drops SSH host key pinning.
+      - Deploy workflow now trusts ssh-keyscan for host keys.
+      - CI deploy runs unverified Deployer PHAR.
+      - Unverified Deployer PHAR download in production workflows.
+    do_not:
+      - Change order, tenant, attempt, grant, or payment ownership behavior.
+      - Change CMS lifecycle, career release, tenant-scoped article/personality behavior.
+      - Change privacy logs, DSAR, key rotation, file import, restore, or replay behavior.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - focused phpunit for supply-chain guardrails and billing webhook fail-closed behavior
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
