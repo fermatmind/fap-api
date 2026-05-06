@@ -36,6 +36,7 @@ use App\Console\Commands\CareerReleaseGateNoindexCleanup;
 use App\Console\Commands\CareerRunAssetBatch;
 use App\Console\Commands\CareerSyncOccupationDirectoryDisplay;
 use App\Console\Commands\CareerValidateAssetImport;
+use App\Console\Commands\CareerValidateBroadGroupFamilyMap;
 use App\Console\Commands\CareerValidateDisplayAssetLineage;
 use App\Console\Commands\CareerValidateDisplayBatch;
 use App\Console\Commands\CareerValidateOccupationDirectoryReviewQueues;
@@ -181,6 +182,7 @@ class Kernel extends ConsoleKernel
         CareerNormalizeLegacyDisplayAssets::class,
         CareerReleaseGateNoindexCleanup::class,
         CareerValidateAssetImport::class,
+        CareerValidateBroadGroupFamilyMap::class,
         CareerValidateDisplayBatch::class,
         CareerValidateDisplayAssetLineage::class,
         CareerValidateReleaseGate::class,

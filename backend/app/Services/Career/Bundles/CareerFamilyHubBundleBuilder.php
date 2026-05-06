@@ -35,6 +35,10 @@ final class CareerFamilyHubBundleBuilder
             return null;
         }
 
+        if ($this->isBroadGroupHoldSlug((string) $family->canonical_slug)) {
+            return null;
+        }
+
         /** @var Collection<int, Occupation> $occupations */
         $occupations = $family->occupations instanceof Collection
             ? $family->occupations
@@ -301,6 +305,11 @@ final class CareerFamilyHubBundleBuilder
             ?? $this->normalizeString($bundle->family['title_zh'] ?? null)
             ?? $this->normalizeString($bundle->family['canonical_slug'] ?? null)
             ?? 'Career family';
+    }
+
+    private function isBroadGroupHoldSlug(string $slug): bool
+    {
+        return str_ends_with(trim($slug), '-all-other');
     }
 
     private function normalizeString(mixed $value): ?string
