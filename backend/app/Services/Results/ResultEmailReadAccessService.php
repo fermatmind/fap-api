@@ -68,10 +68,6 @@ final class ResultEmailReadAccessService
         if (! $binding instanceof AttemptEmailBinding) {
             return null;
         }
-        if (! $this->bindingMatchesRequestActor($binding, $request)) {
-            return null;
-        }
-
         $request->attributes->set($cacheKey, $binding);
 
         return $binding;
@@ -111,24 +107,6 @@ final class ResultEmailReadAccessService
         }
 
         return '';
-    }
-
-    private function bindingMatchesRequestActor(AttemptEmailBinding $binding, Request $request): bool
-    {
-        $boundUserId = $this->normalizeNumericString($binding->bound_user_id ?? null);
-        $requestUserId = $this->normalizeNumericString(
-            $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id')
-        );
-        if ($boundUserId !== null && $requestUserId !== null && hash_equals($boundUserId, $requestUserId)) {
-            return true;
-        }
-
-        $boundAnonId = $this->normalizeString($binding->bound_anon_id ?? null);
-        $requestAnonId = $this->normalizeString(
-            $request->attributes->get('fm_anon_id') ?? $request->attributes->get('anon_id')
-        );
-
-        return $boundAnonId !== null && $requestAnonId !== null && hash_equals($boundAnonId, $requestAnonId);
     }
 
     private function normalizeNumericString(mixed $candidate): ?string
