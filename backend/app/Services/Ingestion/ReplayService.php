@@ -176,11 +176,19 @@ class ReplayService
                 $externalIdsThisChunk = [];
                 $now = now();
 
+                $samples = [];
                 foreach ($rows as $row) {
-                    $sample = $this->normalizeSample($row, $defaultDomain);
+                    $samples[] = $this->normalizeSample($row, $defaultDomain);
+                }
+
+                $originalExternalIds = $this->originalExternalIdsForReplay($provider, $batchId, $samples);
+
+                foreach ($samples as $sample) {
                     $domain = (string) ($sample['domain'] ?? '');
                     $recordedAt = (string) ($sample['recorded_at'] ?? '');
-                    $externalId = (string) ($sample['external_id'] ?? '');
+                    $payloadHash = (string) ($sample['payload_hash'] ?? '');
+                    $externalId = $originalExternalIds[$this->replayLookupKey($recordedAt, $payloadHash)]
+                        ?? (string) ($sample['external_id'] ?? '');
                     $value = $sample['value'] ?? [];
 
                     $idKey = IdempotencyKey::build($provider, $externalId !== '' ? $externalId : $recordedAt, $recordedAt, $value);
@@ -199,7 +207,6 @@ class ReplayService
                     ];
                     $externalIdsThisChunk[] = $resolvedExternalId;
 
-                    $payloadHash = IdempotencyKey::hashPayload($value);
                     $confidence = (float) ($sample['confidence'] ?? 1.0);
                     $userId = $sample['user_id'] ?? null;
                     $source = (string) ($sample['source'] ?? $provider);
@@ -312,11 +319,62 @@ class ReplayService
             'domain' => $domain === 'health' ? ((string) ($row->domain ?? $domain)) : $domain,
             'recorded_at' => $recordedAt,
             'external_id' => $stableExternalId,
+            'payload_hash' => IdempotencyKey::hashPayload($value),
             'value' => $value,
             'confidence' => (float) ($row->confidence ?? 1.0),
             'user_id' => $row->user_id ?? null,
             'source' => (string) ($row->source ?? ''),
         ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $samples
+     * @return array<string,string>
+     */
+    private function originalExternalIdsForReplay(string $provider, string $batchId, array $samples): array
+    {
+        $recordedAt = [];
+        $hashes = [];
+        foreach ($samples as $sample) {
+            $recorded = trim((string) ($sample['recorded_at'] ?? ''));
+            $hash = trim((string) ($sample['payload_hash'] ?? ''));
+            if ($recorded === '' || $hash === '') {
+                continue;
+            }
+
+            $recordedAt[$recorded] = true;
+            $hashes[$hash] = true;
+        }
+
+        if ($recordedAt === [] || $hashes === []) {
+            return [];
+        }
+
+        $rows = DB::table('idempotency_keys')
+            ->where('provider', $provider)
+            ->where('ingest_batch_id', $batchId)
+            ->whereIn('recorded_at', array_keys($recordedAt))
+            ->whereIn('hash', array_keys($hashes))
+            ->orderBy('id')
+            ->get(['recorded_at', 'hash', 'external_id']);
+
+        $map = [];
+        foreach ($rows as $row) {
+            $externalId = trim((string) ($row->external_id ?? ''));
+            if ($externalId === '') {
+                continue;
+            }
+
+            $key = $this->replayLookupKey((string) ($row->recorded_at ?? ''), (string) ($row->hash ?? ''));
+            $map[$key] ??= $externalId;
+        }
+
+        return $map;
+    }
+
+    private function replayLookupKey(string $recordedAt, string $payloadHash): string
+    {
+        return $recordedAt.'|'.$payloadHash;
     }
 
     private function flushInserts(string $table, array $rows): int

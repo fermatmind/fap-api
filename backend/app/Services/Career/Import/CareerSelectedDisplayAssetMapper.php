@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Import;
 
+use App\Support\Xlsx\XlsxCellReference;
 use DOMDocument;
 use DOMElement;
 use DOMNode;
@@ -1283,16 +1284,7 @@ final class CareerSelectedDisplayAssetMapper
 
     private function columnIndex(string $cellRef): int
     {
-        if (! preg_match('/^([A-Z]+)/', $cellRef, $matches)) {
-            return 0;
-        }
-
-        $index = 0;
-        foreach (str_split($matches[1]) as $char) {
-            $index = ($index * 26) + (ord($char) - ord('A') + 1);
-        }
-
-        return $index - 1;
+        return XlsxCellReference::columnIndex($cellRef);
     }
 
     /**

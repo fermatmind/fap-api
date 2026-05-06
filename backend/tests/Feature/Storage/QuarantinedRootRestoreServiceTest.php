@@ -281,6 +281,30 @@ final class QuarantinedRootRestoreServiceTest extends TestCase
             (string) ($invalidShapePlan['blocked_reason'] ?? '')
         );
 
+        $escapeRoot = sys_get_temp_dir().'/fap-restore-escape-'.Str::uuid();
+        $linkParent = storage_path('app/private/content_releases/'.Str::uuid());
+        File::ensureDirectoryExists($escapeRoot);
+        symlink($escapeRoot, $linkParent);
+        try {
+            $symlinkFixture = $this->quarantineLegacySourcePackFixture(
+                'restore_blocked_symlink_parent',
+                $linkParent.'/source_pack'
+            );
+            $symlinkPlan = $service->buildPlan($symlinkFixture['item_root']);
+            $this->assertSame('blocked', (string) ($symlinkPlan['status'] ?? ''));
+            $this->assertSame(
+                'restore target parent escapes the canonical allowlist.',
+                (string) ($symlinkPlan['blocked_reason'] ?? '')
+            );
+        } finally {
+            if (is_link($linkParent)) {
+                unlink($linkParent);
+            }
+            if (is_dir($escapeRoot)) {
+                File::deleteDirectory($escapeRoot);
+            }
+        }
+
         $invalidPrimaryFixture = $this->quarantineV2PrimaryFixture(
             'restore_blocked_invalid_primary_shape',
             storage_path('app/private/packs_v2/BIG5_OCEAN/v1/nested/'.Str::uuid())
