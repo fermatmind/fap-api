@@ -462,6 +462,15 @@
           "command": "bash backend/scripts/ci_verify_mbti.sh",
           "evidence": "Full script exited 0; Big Five pilot observability, OpenAPI diff gate, order security gate, dependency security gate, and webhook/attempt regression gates passed."
         },
+        "github_required_checks": {
+          "status": "failed_then_fix_pushed",
+          "evidence": "PR #1215 verify-mbti-v2 and verify-mbti-legacy failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier did not allowlist PR-4 privacy/DSAR/PII runtime plumbing files. Added a precise classifier allowlist and local focused runtime_freeze_classifier tests pass."
+        },
+        "github_ci_fix_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_freeze_classifier",
+          "evidence": "18 tests passed, 18 assertions."
+        },
         "diff_check": {
           "status": "pass",
           "command": "git diff --check"
