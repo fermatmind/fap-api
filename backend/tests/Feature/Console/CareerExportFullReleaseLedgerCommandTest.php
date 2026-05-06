@@ -164,6 +164,57 @@ final class CareerExportFullReleaseLedgerCommandTest extends TestCase
         }
     }
 
+    public function test_command_records_broad_group_rows_as_blocked_until_policy_without_public_hubs(): void
+    {
+        $timestamp = 'career-broad-group-ledger-test-export';
+        $planPath = $this->writePublicResolutionPlanFixture();
+
+        $exitCode = Artisan::call('career:export-full-release-ledger', [
+            '--timestamp' => $timestamp,
+            '--public-resolution-plan' => $planPath,
+            '--json' => true,
+        ]);
+
+        $payload = json_decode(trim((string) Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertIsArray($payload);
+
+        $artifactPath = $payload['artifacts'][CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
+        $this->assertIsString($artifactPath);
+        $this->assertFileExists($artifactPath);
+
+        $ledger = json_decode((string) file_get_contents($artifactPath), true);
+        $this->assertIsArray($ledger);
+
+        $publicResolution = (array) data_get($ledger, 'public_resolution');
+        $this->assertSame(75, (int) data_get($publicResolution, 'counts.broad_group_hold'));
+        $this->assertSame(75, (int) data_get($publicResolution, 'counts.broad_group_blocked_non_public'));
+        $this->assertSame(0, (int) data_get($publicResolution, 'counts.broad_group_family_hub_decisions'));
+        $this->assertSame(0, (int) data_get($publicResolution, 'counts.broad_group_canonical_promotions'));
+
+        $rows = collect((array) data_get($publicResolution, 'rows'));
+        $broadRows = $rows->where('current_status', 'broad_group_hold')->values();
+
+        $this->assertCount(75, $broadRows);
+        $this->assertSame([], $broadRows->where('public_resolution_type', 'public_canonical_job')->values()->all());
+        $this->assertSame([], $broadRows->where('public_resolution_type', 'public_family_hub')->values()->all());
+
+        foreach ($broadRows as $row) {
+            $this->assertSame('blocked_until_broad_group_policy', $row['governance_decision'] ?? null);
+            $this->assertSame('blocked_until_governance_approval', $row['public_resolution_type'] ?? null);
+            $this->assertSame('not_public', $row['indexability'] ?? null);
+            $this->assertFalse((bool) ($row['public_eligible'] ?? true));
+            $this->assertFalse((bool) ($row['sitemap_eligible'] ?? true));
+            $this->assertFalse((bool) ($row['llms_eligible'] ?? true));
+            $this->assertFalse((bool) ($row['llms_full_eligible'] ?? true));
+            $this->assertTrue((bool) ($row['trust_manifest_required'] ?? false));
+            $this->assertNull($row['family_hub_slug'] ?? null);
+            $this->assertNull($row['target_canonical_slug'] ?? null);
+            $this->assertSame('broad_group_family_or_split_policy_required_before_public_schema', $row['schema_policy'] ?? null);
+        }
+    }
+
     public function test_command_does_not_implicitly_read_predictable_tmp_public_resolution_plan(): void
     {
         $timestamp = 'career-no-tmp-plan-fallback-test-export';
