@@ -16,19 +16,6 @@ final class CareerExportFullReleaseLedger extends Command
 
     private const PUBLIC_RESOLUTION_SCOPE = 'career_2786_public_resolution';
 
-    /**
-     * @var list<string>
-     */
-    private const PUBLIC_RESOLUTION_TYPES = [
-        'public_canonical_job',
-        'public_alias_redirect',
-        'public_family_hub',
-        'public_cn_proxy_page',
-        'public_nonindex_reference',
-        'keep_non_public_with_policy',
-        'blocked_until_governance_approval',
-    ];
-
     private const EXPECTED_PUBLIC_RESOLUTION_ROWS = 2786;
 
     private const MAX_PUBLIC_RESOLUTION_PLAN_BYTES = 5_000_000;
@@ -286,12 +273,14 @@ final class CareerExportFullReleaseLedger extends Command
                 'source_sheet' => $this->normalizeNullableString(data_get($payload, 'workbook.sheet')),
                 'duplicate_identity_scan_path' => $duplicateIdentityScanPath,
             ],
-            'allowed_public_resolution_types' => self::PUBLIC_RESOLUTION_TYPES,
+            'allowed_public_resolution_types' => CareerPublicResolutionTypeMatrix::allowedTypes(),
+            'public_type_owner_matrix' => CareerPublicResolutionTypeMatrix::matrix(),
             'counts' => $counts,
             'guards' => [
                 'no_decision_no_public_eligibility' => true,
                 'hold_rows_non_public_by_default' => true,
                 'software_developers_manual_hold_non_public' => true,
+                'public_type_owner_matrix_enforced' => true,
                 'public_urls_created' => false,
                 'db_writes' => false,
                 'sitemap_llms_changed' => false,
@@ -331,7 +320,7 @@ final class CareerExportFullReleaseLedger extends Command
             $decision = $this->duplicateIdentityGovernanceDecision($sourceSlug, $duplicateDecision, $publicCanonicalSlugs);
         }
         $resolutionType = $decision['public_resolution_type'];
-        if (! in_array($resolutionType, self::PUBLIC_RESOLUTION_TYPES, true)) {
+        if (! in_array($resolutionType, CareerPublicResolutionTypeMatrix::allowedTypes(), true)) {
             throw new \RuntimeException('unsupported public resolution type for '.$sourceSlug.': '.$resolutionType);
         }
 

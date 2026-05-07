@@ -83,6 +83,23 @@ final class CareerExportFullReleaseLedgerCommandTest extends TestCase
 
         $publicResolution = (array) data_get($ledger, 'public_resolution');
         $this->assertSame('career_public_resolution_ledger', $publicResolution['ledger_kind'] ?? null);
+        $this->assertSame([
+            'public_canonical_job',
+            'public_alias_redirect',
+            'public_family_hub',
+            'public_cn_proxy_page',
+            'public_nonindex_reference',
+            'keep_non_public_with_policy',
+            'blocked_until_governance_approval',
+        ], data_get($publicResolution, 'allowed_public_resolution_types'));
+        $this->assertTrue((bool) data_get($publicResolution, 'guards.public_type_owner_matrix_enforced'));
+        $this->assertTrue((bool) data_get($publicResolution, 'public_type_owner_matrix.public_canonical_job.manifest_eligible'));
+        $this->assertFalse((bool) data_get($publicResolution, 'public_type_owner_matrix.public_alias_redirect.manifest_eligible'));
+        $this->assertFalse((bool) data_get($publicResolution, 'public_type_owner_matrix.public_family_hub.job_detail_owner'));
+        $this->assertFalse((bool) data_get($publicResolution, 'public_type_owner_matrix.public_cn_proxy_page.us_canonical_job_allowed'));
+        $this->assertTrue((bool) data_get($publicResolution, 'public_type_owner_matrix.public_nonindex_reference.noindex_required'));
+        $this->assertFalse((bool) data_get($publicResolution, 'public_type_owner_matrix.keep_non_public_with_policy.public_url_allowed'));
+        $this->assertFalse((bool) data_get($publicResolution, 'public_type_owner_matrix.blocked_until_governance_approval.public_url_allowed'));
         $this->assertSame(2786, (int) data_get($publicResolution, 'counts.total_rows'));
         $this->assertSame(793, (int) data_get($publicResolution, 'counts.public_canonical_job'));
         $this->assertSame(1992, (int) data_get($publicResolution, 'counts.blocked_until_governance_approval'));
