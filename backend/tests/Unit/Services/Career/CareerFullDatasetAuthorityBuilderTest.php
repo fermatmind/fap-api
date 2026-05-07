@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerImportRun;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
@@ -11,11 +12,22 @@ use App\Models\OccupationFamily;
 use App\Services\Career\Dataset\CareerFullDatasetAuthorityBuilder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerFullDatasetAuthorityBuilderTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture,
+        );
+    }
 
     public function test_it_builds_full_342_dataset_authority_with_included_excluded_truth(): void
     {
@@ -66,6 +78,22 @@ final class CareerFullDatasetAuthorityBuilderTest extends TestCase
         $this->assertSame('directory_draft_detail_pending', $draftMember['strong_index_decision'] ?? null);
         $this->assertTrue((bool) ($draftMember['included_in_public_dataset'] ?? false));
         $this->assertSame('目录草稿职业', $draftMember['canonical_title_zh'] ?? null);
+    }
+
+    public function test_it_excludes_members_when_runtime_projection_marks_dataset_not_visible(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(datasetVisible: [
+                'data-scientists' => false,
+            ]),
+        );
+        $this->materializeCurrentFirstWaveFixture();
+
+        $authority = app(CareerFullDatasetAuthorityBuilder::class)->build()->toArray();
+        $members = collect((array) ($authority['members'] ?? []));
+
+        $this->assertNull($members->firstWhere('canonical_slug', 'data-scientists'));
     }
 
     private function materializeCurrentFirstWaveFixture(): void

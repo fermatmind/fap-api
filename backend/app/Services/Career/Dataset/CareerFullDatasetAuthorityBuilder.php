@@ -6,6 +6,7 @@ namespace App\Services\Career\Dataset;
 
 use App\Domain\Career\Production\CareerAssetBatchManifestBuilder;
 use App\Domain\Career\Publish\CareerFullReleaseLedgerService;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Domain\Career\Publish\CareerStrongIndexEligibilityService;
 use App\Domain\Career\Publish\FirstWaveManifestReader;
 use App\DTO\Career\CareerFullDatasetAuthority;
@@ -47,6 +48,7 @@ final class CareerFullDatasetAuthorityBuilder
     public function __construct(
         private readonly CareerFullReleaseLedgerService $fullReleaseLedgerService,
         private readonly CareerStrongIndexEligibilityService $strongIndexEligibilityService,
+        private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
         private readonly CareerDatasetPublicationMetadataService $publicationMetadataService,
         private readonly CareerAssetBatchManifestBuilder $batchManifestBuilder,
         private readonly FirstWaveManifestReader $firstWaveManifestReader,
@@ -90,6 +92,12 @@ final class CareerFullDatasetAuthorityBuilder
                 continue;
             }
             $ledgerSlugs[$slug] = true;
+
+            if (! $this->runtimePublishProjection->datasetVisible($slug)) {
+                $excludedCount++;
+
+                continue;
+            }
 
             $releaseCohort = $this->normalizeNullableString($ledgerMember['release_cohort'] ?? null);
             $publicIndexState = $this->normalizeNullableString($ledgerMember['public_index_state'] ?? null);
@@ -176,6 +184,12 @@ final class CareerFullDatasetAuthorityBuilder
         }
 
         foreach ($this->loadDirectoryDraftMembers(array_keys($ledgerSlugs)) as $directoryDraftMember) {
+            if (! $this->runtimePublishProjection->datasetVisible($directoryDraftMember->canonicalSlug)) {
+                $excludedCount++;
+
+                continue;
+            }
+
             $releaseCohort = 'directory_draft_pending_detail';
             $publicIndexState = 'noindex';
             $strongIndexDecision = 'directory_draft_detail_pending';

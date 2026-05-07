@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-07T22:34:56+08:00",
+  "updated_at": "2026-05-07T22:58:30+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -733,8 +733,8 @@
     "career-runtime-publish-projection": {
       "repo": "fap-api",
       "branch": "codex/career-runtime-publish-projection",
-      "status": "ci_fix_local_checks_passed",
-      "commit_sha": "9787e10f3f96c7bea56f0dcad9b26258e47ce2b7",
+      "status": "merged",
+      "commit_sha": "c4d7304cf16c1009bff16183d9c5092c4f52ad73",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1282",
       "checks": {
         "scope_validation": {
@@ -797,6 +797,80 @@
           "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_paths_have_no_uncommitted_diff && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter career_runtime_publish_projection_owner_changes"
         }
       },
+      "failure_reason": null,
+      "merged_at": "2026-05-07T22:34:56+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": false
+    },
+    "career-runtime-surface-projection-consumers": {
+      "repo": "fap-api",
+      "branch": "codex/career-runtime-surface-projection-consumers",
+      "status": "local_checks_passed",
+      "commit_sha": "808c38c4",
+      "pr_url": null,
+      "checks": {
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Career runtime projection visibility lookup, dataset/list/search/detail/family hub consumers, focused tests, BigFive runtime freeze allowlist, and PR train metadata."
+        },
+        "command_registration": {
+          "status": "pass",
+          "command": "php artisan list | grep -i runtime-publish",
+          "evidence": "career:export-runtime-publish-projection and career:validate-runtime-publish-projection remain registered."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list | grep -i career",
+          "evidence": "Career API routes generated successfully."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test <scoped Career runtime surface files>"
+        },
+        "surface_consumer_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php tests/Unit/Services/Career/CareerJobListBundleBuilderTest.php tests/Unit/Services/Career/CareerSearchBundleBuilderTest.php tests/Unit/Services/Career/CareerJobDetailBundleBuilderTest.php tests/Unit/Services/Career/CareerFamilyHubBundleBuilderTest.php tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php",
+          "evidence": "26 tests passed, 428 assertions."
+        },
+        "projection_regression_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionServiceTest.php tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php",
+          "evidence": "6 tests passed, 63 assertions."
+        },
+        "ledger_regression_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php tests/Feature/Console/CareerExportFullReleaseLedgerCommandTest.php",
+          "evidence": "10 tests passed, 27046 assertions."
+        },
+        "bigfive_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter \"career_runtime_projection|career_runtime_publish_projection\"",
+          "evidence": "2 tests passed, 2 assertions."
+        },
+        "runtime_projection_fixture_validate": {
+          "status": "pass",
+          "command": "php artisan career:validate-runtime-publish-projection --ledger=/tmp/career_runtime_projection_fixture_ledger.json --json && php artisan career:export-runtime-publish-projection --ledger=/tmp/career_runtime_projection_fixture_ledger.json --timestamp=career-runtime-surface-consumer-fixture-check --json",
+          "evidence": "Fixture projection validates and exports with dataset/search/detail/sitemap/llms visibility only for public canonical rows."
+        },
+        "release_gate_smoke": {
+          "status": "external_pre_existing_blocker",
+          "command": "php artisan career:validate-release-gate --slugs=accountants-and-auditors,actors,registered-nurses --json",
+          "evidence": "Known PR-4 runtime noindex mismatch remains: 6/6 sampled canonical job URLs returned noindex_present. This is outside PR-2 backend projection consumer scope."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [
+        {
+          "blocker": "Canonical Career runtime pages still return noindex in live release-gate smoke.",
+          "class": "external_pre_existing",
+          "evidence": "career:validate-release-gate sampled accountants-and-auditors, actors, and registered-nurses; all zh/en URLs returned Release_Gate_Result=blocked with Failure_Reason noindex_present.",
+          "why_external_to_current_pr": "PR-2 changes backend runtime projection consumers. The noindex mismatch is the declared PR-4 web/release-gate reconciliation scope.",
+          "impact_on_current_pr": "Does not invalidate backend projection consumer local tests or scope validation, but remains a final runtime reconciliation blocker until PR-4."
+        }
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Career\Bundles;
 
 use App\Domain\Career\IndexStateValue;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\DTO\Career\CareerSearchResultBundle;
 use App\Models\Occupation;
 use App\Models\OccupationAlias;
@@ -39,6 +40,7 @@ final class CareerSearchBundleBuilder
 
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
+        private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
     ) {}
 
     /**
@@ -138,6 +140,10 @@ final class CareerSearchBundleBuilder
                     return null;
                 }
 
+                if (! $this->runtimePublishProjection->searchVisible((string) $occupation->canonical_slug)) {
+                    return null;
+                }
+
                 $match = $this->resolveMatch($occupation, $normalizedQuery, $rawQuery, $normalizedLocale, $mode);
                 if ($match === null) {
                     return null;
@@ -231,7 +237,8 @@ final class CareerSearchBundleBuilder
             ->orderBy('canonical_slug')
             ->limit(self::MAX_DIRECTORY_DRAFT_SEARCH_ROWS)
             ->get()
-            ->filter(static fn (Occupation $occupation): bool => ! isset($excluded[(string) $occupation->canonical_slug]))
+            ->filter(fn (Occupation $occupation): bool => ! isset($excluded[(string) $occupation->canonical_slug])
+                && $this->runtimePublishProjection->searchVisible((string) $occupation->canonical_slug))
             ->map(function (Occupation $occupation) use ($query, $rawQuery, $normalizedLocale, $mode): ?array {
                 $match = $this->resolveMatch($occupation, $query, $rawQuery, $normalizedLocale, $mode);
                 if ($match === null) {

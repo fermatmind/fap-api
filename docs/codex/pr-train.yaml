@@ -35,6 +35,34 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: career-runtime-surface-projection-consumers
+    repo: fap-api
+    depends_on:
+      - career-runtime-publish-projection
+    branch: codex/career-runtime-surface-projection-consumers
+    title: "fix(api): unify career runtime surfaces with publish projection"
+    scope:
+      - Add a Career runtime publish projection visibility lookup.
+      - Make Career job dataset/list/search/detail/family hub surfaces consume projection visibility.
+      - Fail closed for software-developers, CN proxy, broad group, duplicate, and governed non-public rows when projection visibility is false.
+      - Preserve the existing CareerFullReleaseLedger as the source authority.
+    do_not:
+      - Change ledger governance decisions.
+      - Change display imports, authority force, sitemap, llms, or frontend behavior.
+      - Add a second Career publish authority or frontend fallback.
+      - Hardcode the governed hold slugs as one-off deny lists.
+    validation:
+      - php artisan list | grep -i runtime-publish
+      - php artisan route:list | grep -i career
+      - vendor/bin/pint --test <scoped Career runtime surface files>
+      - php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php tests/Unit/Services/Career/CareerJobListBundleBuilderTest.php tests/Unit/Services/Career/CareerSearchBundleBuilderTest.php
+      - php artisan test tests/Unit/Services/Career/CareerJobDetailBundleBuilderTest.php tests/Unit/Services/Career/CareerFamilyHubBundleBuilderTest.php tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php
+      - php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionServiceTest.php tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php
+      - php artisan test tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php tests/Feature/Console/CareerExportFullReleaseLedgerCommandTest.php
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: backend-email-binding-foundation
     repo: fap-api
     branch: codex/backend-email-binding-foundation

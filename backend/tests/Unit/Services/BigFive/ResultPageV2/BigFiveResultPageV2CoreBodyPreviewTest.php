@@ -423,6 +423,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_runtime_projection_consumer_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php',
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionVisibility.php',
+            'backend/app/Providers/AppServiceProvider.php',
+            'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerJobListBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerSearchBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerFamilyHubBundleBuilder.php',
+            'backend/app/Services/Career/Dataset/CareerFullDatasetAuthorityBuilder.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_bigfive_v2_content_asset_loader_changes(): void
     {
         $changed = [
@@ -771,6 +787,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerRuntimeProjectionConsumerFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsCareerPublicDistributionOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
@@ -926,6 +946,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php',
             'backend/app/Services/Career/Bundles/CareerFamilyHubBundleBuilder.php',
+        ], true);
+    }
+
+    private function isCareerRuntimeProjectionConsumerFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php',
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionVisibility.php',
+            'backend/app/Providers/AppServiceProvider.php',
+            'backend/app/Services/Career/Bundles/CareerJobListBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerSearchBundleBuilder.php',
+            'backend/app/Services/Career/Dataset/CareerFullDatasetAuthorityBuilder.php',
         ], true);
     }
 

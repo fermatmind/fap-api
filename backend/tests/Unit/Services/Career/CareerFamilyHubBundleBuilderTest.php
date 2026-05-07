@@ -4,15 +4,27 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\OccupationFamily;
 use App\Services\Career\Bundles\CareerFamilyHubBundleBuilder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerFamilyHubBundleBuilderTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture,
+        );
+    }
 
     public function test_it_builds_a_family_hub_with_publish_ready_visible_children_and_blocked_counts(): void
     {
@@ -70,6 +82,26 @@ final class CareerFamilyHubBundleBuilderTest extends TestCase
         ]);
 
         $bundle = app(CareerFamilyHubBundleBuilder::class)->buildBySlug('artists-and-related-workers-all-other');
+
+        $this->assertNull($bundle);
+    }
+
+    public function test_it_returns_null_when_runtime_projection_does_not_publish_family_hub(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(familyHubLive: [
+                'empty-family' => false,
+            ]),
+        );
+
+        OccupationFamily::query()->create([
+            'canonical_slug' => 'empty-family',
+            'title_en' => 'Empty Family',
+            'title_zh' => '空家族',
+        ]);
+
+        $bundle = app(CareerFamilyHubBundleBuilder::class)->buildBySlug('empty-family');
 
         $this->assertNull($bundle);
     }
