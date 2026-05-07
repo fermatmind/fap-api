@@ -1,0 +1,26 @@
+{
+  "report": "big5_v2_norm_snapshot_readiness",
+  "version": "v0_1",
+  "snapshot_readiness": "GO_INTERNAL_ONLY",
+  "immutable_snapshot": "required",
+  "lineage": "required",
+  "rollback_linkage": "snapshot_revert",
+  "reproducible_hashes": "required",
+  "traceability": [
+    "content_version",
+    "score_version",
+    "score_trace_hash",
+    "observation_id",
+    "input_manifest_hash"
+  ],
+  "public_percentile_display_enabled": false,
+  "runtime_percentile_attachment_enabled": false,
+  "production_rollout_enabled": false,
+  "remaining_blockers_before_public_percentile": [
+    "recompute_engine",
+    "segmented_aggregation",
+    "drift_monitoring",
+    "internal_percentile_fail_closed_runtime",
+    "public_percentile_governance_approval"
+  ]
+}
