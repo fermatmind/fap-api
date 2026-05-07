@@ -503,6 +503,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_allows_bigfive_dne_internal_snapshot_scope_only(): void
+    {
+        $allowed = [
+            'backend/app/Services/BigFive/Norms/BigFiveNormSnapshot.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormSnapshotBuilder.php',
+        ];
+
+        $blocked = [
+            'backend/app/Services/BigFive/Norms/BigFiveNormRuntimeSnapshotResolver.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormPublicPercentilePresenter.php',
+            'backend/app/Services/BigFive/BigFivePublicProjectionService.php',
+            'backend/routes/api.php',
+            'frontend/src/big5/dynamic-norms.ts',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_allows_bigfive_v2_cms_editorial_governance_scope_only(): void
     {
         $allowed = [
@@ -747,6 +766,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveDynamicNormEngineInternalFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveV2CmsEditorialGovernanceFile($file)) {
                 continue;
             }
@@ -914,6 +937,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/BigFive/Norms/BigFiveNormPrivacyPolicy.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormAggregationDryRun.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormAggregationResult.php',
+        ], true);
+    }
+
+    private function isBigFiveDynamicNormEngineInternalFile(string $file): bool
+    {
+        $filename = basename($file);
+        if (preg_match('#(Runtime|PublicPercentile|Presenter|Projection)#', $filename) === 1) {
+            return false;
+        }
+
+        return in_array($file, [
+            'backend/app/Services/BigFive/Norms/BigFiveNormSnapshot.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormSnapshotBuilder.php',
         ], true);
     }
 
