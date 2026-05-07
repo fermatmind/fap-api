@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-06T14:31:00+08:00",
+  "updated_at": "2026-05-07T22:34:56+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -725,6 +725,78 @@
       "pr_url": null,
       "checks": {},
       "sidecar_issues": [],
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "career-runtime-publish-projection": {
+      "repo": "fap-api",
+      "branch": "codex/career-runtime-publish-projection",
+      "status": "ci_fix_local_checks_passed",
+      "commit_sha": "9787e10f3f96c7bea56f0dcad9b26258e47ce2b7",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1282",
+      "checks": {
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Career runtime projection owner, export/validate commands, focused tests, and PR train metadata."
+        },
+        "php_lint": {
+          "status": "pass",
+          "command": "php -l app/Domain/Career/Publish/CareerRuntimePublishProjection*.php app/Console/Commands/Career*RuntimePublishProjection.php"
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list",
+          "evidence": "Route list generated successfully; 201 lines captured."
+        },
+        "command_registration": {
+          "status": "pass",
+          "command": "php artisan list | grep -i runtime-publish",
+          "evidence": "career:export-runtime-publish-projection and career:validate-runtime-publish-projection are registered."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test <scoped projection files>"
+        },
+        "projection_unit_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionServiceTest.php",
+          "evidence": "4 tests passed, 58 assertions."
+        },
+        "projection_command_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php",
+          "evidence": "2 tests passed, 5 assertions."
+        },
+        "ledger_regression_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php",
+          "evidence": "2 tests passed, 74 assertions."
+        },
+        "artifact_export_validate": {
+          "status": "pass",
+          "command": "php artisan career:export-runtime-publish-projection --ledger=/tmp/career_runtime_projection_fixture_ledger.json --json && php artisan career:validate-runtime-publish-projection --ledger=/tmp/career_runtime_projection_fixture_ledger.json --json",
+          "evidence": "fixture export materialized; validator status pass."
+        },
+        "default_export": {
+          "status": "external_blocker",
+          "command": "php artisan career:export-runtime-publish-projection --json",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user root@localhost while selecting editorial_patches from local MySQL."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "github_required_checks": {
+          "status": "failed_then_fix_pushed",
+          "evidence": "verify-mbti-legacy and verify-mbti-v2 failed because BigFive runtime freeze classifier flagged new CareerRuntimePublishProjection domain owner files; same PR updates the existing Career-only allowlist and adds a focused classifier test."
+        },
+        "bigfive_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_paths_have_no_uncommitted_diff && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter career_runtime_publish_projection_owner_changes"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,

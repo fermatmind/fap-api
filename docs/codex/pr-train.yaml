@@ -10,6 +10,31 @@ continuation_protocol:
     record_as_sidecar_issue: true
     do_not_stop_train_when_external_and_required_checks_green: true
 prs:
+
+  - id: career-runtime-publish-projection
+    repo: fap-api
+    branch: codex/career-runtime-publish-projection
+    title: "fix(api): add career runtime publish projection authority"
+    scope:
+      - Add CareerRuntimePublishProjection DTO/service/exporter/validator.
+      - Add export and validate artisan commands for runtime publish projection.
+      - Source projection only from CareerFullReleaseLedger payloads.
+      - Keep runtime state minimal: blocked, published_candidate, published, quarantined.
+    do_not:
+      - Change runtime API consumers.
+      - Change frontend sitemap or llms consumers.
+      - Change DB or import behavior.
+      - Change ledger governance decisions.
+    validation:
+      - php artisan route:list
+      - php artisan career:export-runtime-publish-projection --help
+      - php artisan career:validate-runtime-publish-projection --help
+      - vendor/bin/pint --test app/Domain/Career/Publish/CareerRuntimePublishProjectionDTO.php app/Domain/Career/Publish/CareerRuntimePublishProjectionService.php app/Domain/Career/Publish/CareerRuntimePublishProjectionExporter.php app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php app/Console/Commands/CareerExportRuntimePublishProjection.php app/Console/Commands/CareerValidateRuntimePublishProjection.php tests/Unit/Services/Career/CareerRuntimePublishProjectionServiceTest.php tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php
+      - php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionServiceTest.php
+      - php artisan test tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: backend-email-binding-foundation
     repo: fap-api
     branch: codex/backend-email-binding-foundation
