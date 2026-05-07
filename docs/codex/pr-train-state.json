@@ -805,8 +805,8 @@
     "career-runtime-surface-projection-consumers": {
       "repo": "fap-api",
       "branch": "codex/career-runtime-surface-projection-consumers",
-      "status": "pr_open",
-      "commit_sha": "8eb2f749a03cbb370fd92dc3394e08d937845515",
+      "status": "merged",
+      "commit_sha": "e6f3c79a08fccd681348b85c5fe3af22ee7c2839",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1283",
       "checks": {
         "scope_validation": {
@@ -871,6 +871,77 @@
           "impact_on_current_pr": "Does not invalidate backend projection consumer local tests or scope validation, but remains a final runtime reconciliation blocker until PR-4."
         }
       ],
+      "failure_reason": null,
+      "merged_at": "2026-05-07T23:08:54+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": false
+    },
+    "career-release-gate-reconciliation": {
+      "repo": "fap-api",
+      "branch": "codex/career-release-gate-reconciliation",
+      "status": "pr_open",
+      "commit_sha": "79a99b06",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1284",
+      "checks": {
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "PR-4 is scoped to Career runtime projection SEO visibility, release-gate reconciliation tests, and PR train metadata."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test app/Domain/Career/Publish/CareerRuntimePublishProjectionVisibility.php app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php tests/Fixtures/Career/CareerRuntimePublishProjectionVisibilityFixture.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php"
+        },
+        "job_display_surface_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php",
+          "evidence": "14 tests passed, 786 assertions."
+        },
+        "job_detail_builder_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/Career/CareerJobDetailBundleBuilderTest.php",
+          "evidence": "4 tests passed, 13 assertions."
+        },
+        "projection_lookup_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php",
+          "evidence": "1 test passed, 11 assertions."
+        },
+        "surface_consumer_regression_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/Career/CareerJobListBundleBuilderTest.php tests/Unit/Services/Career/CareerSearchBundleBuilderTest.php tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php tests/Unit/Services/Career/CareerFamilyHubBundleBuilderTest.php",
+          "evidence": "21 tests passed, 408 assertions."
+        },
+        "projection_regression_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionServiceTest.php tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php",
+          "evidence": "6 tests passed, 63 assertions."
+        },
+        "ledger_regression_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Console/CareerExportFullReleaseLedgerCommandTest.php tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php",
+          "evidence": "10 tests passed, 27046 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list | grep -i career",
+          "evidence": "Career API routes generated successfully."
+        },
+        "bigfive_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter \"career_runtime_projection|career_runtime_publish_projection\"",
+          "evidence": "2 tests passed, 2 assertions."
+        },
+        "release_gate_smoke_pre_deploy": {
+          "status": "external_pre_existing_blocker",
+          "command": "php artisan career:validate-release-gate --slugs=accountants-and-auditors,actors,registered-nurses --json",
+          "evidence": "Current live deployment still returns noindex_present for sampled canonical pages. This is the PR-4 target behavior and cannot pass until this backend PR is merged and deployed."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,

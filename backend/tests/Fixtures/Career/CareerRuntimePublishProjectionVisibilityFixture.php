@@ -12,16 +12,22 @@ final class CareerRuntimePublishProjectionVisibilityFixture implements CareerRun
      * @param  array<string, bool>  $datasetVisible
      * @param  array<string, bool>  $searchVisible
      * @param  array<string, bool>  $detailRouteEnabled
+     * @param  array<string, bool>  $robotsIndexable
+     * @param  array<string, bool>  $releaseGatePass
      * @param  array<string, bool>  $familyHubLive
      */
     public function __construct(
         private readonly bool $defaultDatasetVisible = true,
         private readonly bool $defaultSearchVisible = true,
         private readonly bool $defaultDetailRouteEnabled = true,
+        private readonly bool $defaultRobotsIndexable = true,
+        private readonly bool $defaultReleaseGatePass = true,
         private readonly bool $defaultFamilyHubLive = true,
         private readonly array $datasetVisible = [],
         private readonly array $searchVisible = [],
         private readonly array $detailRouteEnabled = [],
+        private readonly array $robotsIndexable = [],
+        private readonly array $releaseGatePass = [],
         private readonly array $familyHubLive = [],
     ) {}
 
@@ -38,6 +44,16 @@ final class CareerRuntimePublishProjectionVisibilityFixture implements CareerRun
     public function detailRouteEnabled(string $slug): bool
     {
         return $this->detailRouteEnabled[$this->normalizeSlug($slug)] ?? $this->defaultDetailRouteEnabled;
+    }
+
+    public function robotsIndexable(string $slug): bool
+    {
+        return $this->robotsIndexable[$this->normalizeSlug($slug)] ?? $this->defaultRobotsIndexable;
+    }
+
+    public function releaseGatePass(string $slug): bool
+    {
+        return $this->releaseGatePass[$this->normalizeSlug($slug)] ?? $this->defaultReleaseGatePass;
     }
 
     public function familyHubLive(string $slug): bool

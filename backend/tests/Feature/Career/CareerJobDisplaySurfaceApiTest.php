@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\CareerJobDisplayAsset;
@@ -13,6 +14,7 @@ use App\Models\OccupationFamily;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerFoundationFixture;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerJobDisplaySurfaceApiTest extends TestCase
@@ -80,6 +82,18 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         'boundary_notice',
         'final_cta',
     ];
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(detailRouteEnabled: [
+                'software-developers' => false,
+            ]),
+        );
+    }
 
     public function test_it_adds_display_surface_for_eligible_actors_asset(): void
     {
@@ -314,6 +328,39 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
         $this->assertCount(24, $response->json('display_surface_v1.component_order'));
+    }
+
+    public function test_display_asset_backed_bundle_remains_noindex_when_runtime_projection_rejects_indexing(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(
+                detailRouteEnabled: [
+                    'actors' => true,
+                    'software-developers' => false,
+                ],
+                robotsIndexable: [
+                    'actors' => false,
+                ],
+                releaseGatePass: [
+                    'actors' => false,
+                ],
+            ),
+        );
+
+        $occupation = $this->seedDisplayAssetBackedDirectoryDraftOccupation('actors');
+        $occupation->forceFill([
+            'crosswalk_mode' => 'direct_match',
+        ])->save();
+        $this->createDisplayAsset($occupation->refresh());
+
+        $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('identity.canonical_slug', 'actors')
+            ->assertJsonPath('seo_contract.index_eligible', false)
+            ->assertJsonPath('seo_contract.index_state', 'trust_limited')
+            ->assertJsonPath('seo_contract.robots_policy', 'noindex,follow')
+            ->assertJsonPath('seo_contract.reason_codes.0', 'display_asset_backed_pilot_noindex');
     }
 
     public function test_manual_hold_software_developers_is_not_force_enabled_even_with_display_asset(): void

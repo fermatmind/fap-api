@@ -58,6 +58,16 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
         return ($this->itemForSlug($slug)['detail_route_enabled'] ?? false) === true;
     }
 
+    public function robotsIndexable(string $slug): bool
+    {
+        return ($this->itemForSlug($slug)['robots_indexable'] ?? false) === true;
+    }
+
+    public function releaseGatePass(string $slug): bool
+    {
+        return ($this->itemForSlug($slug)['release_gate_pass'] ?? false) === true;
+    }
+
     public function familyHubLive(string $slug): bool
     {
         $item = $this->itemForSlug($slug);

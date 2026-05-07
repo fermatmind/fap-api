@@ -781,7 +781,9 @@ final class CareerJobDetailBundleBuilder
     private function buildDisplayAssetBackedSeoContract(Occupation $occupation): array
     {
         $canonicalPath = '/career/jobs/'.$occupation->canonical_slug;
-        $robotsPolicy = 'noindex,follow';
+        $indexEligible = $this->runtimeProjectionAllowsIndexing((string) $occupation->canonical_slug);
+        $indexState = $indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::TRUST_LIMITED;
+        $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
         $surface = $this->seoSurfaceContractService->build([
             'metadata_scope' => 'career_protocol_bundle',
             'surface_type' => 'career_job_detail_display_asset_backed_bundle',
@@ -789,21 +791,30 @@ final class CareerJobDetailBundleBuilder
             'robots_policy' => $robotsPolicy,
             'title' => $occupation->canonical_title_en,
             'description' => $occupation->canonical_title_en,
-            'indexability_state' => IndexStateValue::TRUST_LIMITED,
-            'sitemap_state' => 'excluded',
+            'indexability_state' => $indexState,
+            'sitemap_state' => $indexEligible ? 'included' : 'excluded',
         ]);
 
         return [
             'canonical_path' => $canonicalPath,
             'canonical_target' => $canonicalPath,
-            'index_state' => IndexStateValue::TRUST_LIMITED,
-            'index_eligible' => false,
-            'reason_codes' => ['display_asset_backed_pilot_noindex'],
+            'index_state' => $indexState,
+            'index_eligible' => $indexEligible,
+            'reason_codes' => $indexEligible
+                ? ['validated_display_asset_backed_release', 'runtime_publish_projection']
+                : ['display_asset_backed_pilot_noindex'],
             'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
             'surface_type' => $surface['surface_type'] ?? null,
             'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
             'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
         ];
+    }
+
+    private function runtimeProjectionAllowsIndexing(string $slug): bool
+    {
+        return $this->runtimePublishProjection->detailRouteEnabled($slug)
+            && $this->runtimePublishProjection->robotsIndexable($slug)
+            && $this->runtimePublishProjection->releaseGatePass($slug);
     }
 
     private function hasDisplayAssetBackedAuthority(Occupation $occupation): bool
