@@ -52,6 +52,8 @@ final class BigFiveV2ContentAssetLookup
      */
     private ?array $assetsByPackage = null;
 
+    private ?BigFiveV2AssetInventory $inventory = null;
+
     public function __construct(
         private readonly BigFiveV2AssetPackageLoader $packageLoader = new BigFiveV2AssetPackageLoader(),
         private readonly BigFiveV2CouplingResolver $couplingResolver = new BigFiveV2CouplingResolver(),
@@ -59,7 +61,7 @@ final class BigFiveV2ContentAssetLookup
 
     public function resolve(BigFiveV2SelectedAssetRef $ref, ?BigFiveV2SelectorInput $input = null): BigFiveV2ResolvedContentAsset
     {
-        $inventory = $this->packageLoader->inventory();
+        $inventory = $this->inventory();
         if (! $inventory->isValid()) {
             throw new RuntimeException('Big Five V2 content asset lookup requires validator-clean staging assets.');
         }
@@ -74,6 +76,15 @@ final class BigFiveV2ContentAssetLookup
             'scenario_registry', 'action_plan_registry' => $this->resolveScenario($ref, $selectorAsset, $input),
             default => throw new RuntimeException("Unsupported Big Five V2 content asset registry: {$ref->registryKey}"),
         };
+    }
+
+    private function inventory(): BigFiveV2AssetInventory
+    {
+        if ($this->inventory !== null) {
+            return $this->inventory;
+        }
+
+        return $this->inventory = $this->packageLoader->inventory();
     }
 
     /**
