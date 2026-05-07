@@ -40,8 +40,8 @@ final class SegmentedNormTest extends TestCase
             'occupation_bucket' => 'engineering',
         ]);
 
-        $snapshot = (new BigFiveNormSnapshotBuilder())->build(['snapshot_version' => 'big5_norm_segmented_v1']);
-        $result = (new BigFiveNormSegmentedAggregator())->aggregate($snapshot, ['minimum_cell_count' => 2])->toArray();
+        $snapshot = (new BigFiveNormSnapshotBuilder)->build(['snapshot_version' => 'big5_norm_segmented_v1']);
+        $result = (new BigFiveNormSegmentedAggregator)->aggregate($snapshot, ['minimum_cell_count' => 2])->toArray();
 
         $this->assertSame('big5_segmented_norm_aggregation', data_get($result, 'summary.mode'));
         $this->assertSame(['locale', 'region', 'age_band', 'gender_bucket', 'occupation_bucket'], data_get($result, 'summary.segment_fields'));
@@ -62,8 +62,26 @@ final class SegmentedNormTest extends TestCase
         ], $studentSegment['segments']);
         $this->assertFalse((bool) $studentSegment['small_cell_suppressed']);
         $this->assertFalse((bool) $studentSegment['sparse_segment_rejected']);
+        $this->assertFalse((bool) $studentSegment['sparse_domain_metrics_rejected']);
         $this->assertFalse((bool) $studentSegment['public_output_allowed']);
         $this->assertSame(['C' => ['mean' => 30.0, 'sd' => 14.142136, 'sample_n' => 2], 'O' => ['mean' => 20.0, 'sd' => 14.142136, 'sample_n' => 2]], $studentSegment['domain_metrics']);
+    }
+
+    public function test_sparse_domain_metrics_are_suppressed_even_when_segment_cell_count_passes(): void
+    {
+        $this->observation('obs-a', ['O' => 10.0, 'C' => 20.0], ['occupation_bucket' => 'student']);
+        $this->observation('obs-b', ['O' => 30.0], ['occupation_bucket' => 'student']);
+
+        $snapshot = (new BigFiveNormSnapshotBuilder)->build(['snapshot_version' => 'big5_norm_segmented_sparse_domain_v1']);
+        $result = (new BigFiveNormSegmentedAggregator)->aggregate($snapshot, ['minimum_cell_count' => 2])->toArray();
+
+        $segment = $this->segmentByKey($result['segments'], 'en-US|US|18-29|all|student');
+        $this->assertSame(2, $segment['cell_count']);
+        $this->assertTrue((bool) $segment['small_cell_suppressed']);
+        $this->assertTrue((bool) $segment['sparse_segment_rejected']);
+        $this->assertTrue((bool) $segment['sparse_domain_metrics_rejected']);
+        $this->assertNull($segment['domain_metrics']);
+        $this->assertFalse((bool) $segment['public_output_allowed']);
     }
 
     public function test_sparse_segments_are_rejected_and_small_cell_suppressed(): void
@@ -71,8 +89,8 @@ final class SegmentedNormTest extends TestCase
         $this->observation('obs-a', ['O' => 10.0], ['occupation_bucket' => 'student']);
         $this->observation('obs-b', ['O' => 20.0], ['occupation_bucket' => 'engineering']);
 
-        $snapshot = (new BigFiveNormSnapshotBuilder())->build(['snapshot_version' => 'big5_norm_segmented_v2']);
-        $result = (new BigFiveNormSegmentedAggregator())->aggregate($snapshot, ['minimum_cell_count' => 2])->toArray();
+        $snapshot = (new BigFiveNormSnapshotBuilder)->build(['snapshot_version' => 'big5_norm_segmented_v2']);
+        $result = (new BigFiveNormSegmentedAggregator)->aggregate($snapshot, ['minimum_cell_count' => 2])->toArray();
 
         foreach ($result['segments'] as $segment) {
             $this->assertTrue((bool) $segment['small_cell_suppressed']);
@@ -85,13 +103,13 @@ final class SegmentedNormTest extends TestCase
     public function test_segmented_aggregation_rejects_public_or_runtime_attached_snapshots(): void
     {
         $this->observation('obs-a', ['O' => 10.0]);
-        $snapshotArray = (new BigFiveNormSnapshotBuilder())->build(['snapshot_version' => 'big5_norm_segmented_v3'])->toArray();
+        $snapshotArray = (new BigFiveNormSnapshotBuilder)->build(['snapshot_version' => 'big5_norm_segmented_v3'])->toArray();
         data_set($snapshotArray, 'release_metadata.runtime_attachment', 'enabled');
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('runtime attachment must remain disabled');
 
-        (new BigFiveNormSegmentedAggregator())->aggregate(new BigFiveNormSnapshot($snapshotArray), ['minimum_cell_count' => 1]);
+        (new BigFiveNormSegmentedAggregator)->aggregate(new BigFiveNormSnapshot($snapshotArray), ['minimum_cell_count' => 1]);
     }
 
     /**
