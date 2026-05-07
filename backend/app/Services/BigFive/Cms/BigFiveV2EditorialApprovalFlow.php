@@ -14,8 +14,8 @@ use LogicException;
 final class BigFiveV2EditorialApprovalFlow
 {
     public function __construct(
-        private readonly BigFiveV2EditorialWorkflow $workflow = new BigFiveV2EditorialWorkflow(),
-        private readonly BigFiveV2EditorialRevisionPolicy $policy = new BigFiveV2EditorialRevisionPolicy(),
+        private readonly BigFiveV2EditorialWorkflow $workflow = new BigFiveV2EditorialWorkflow,
+        private readonly BigFiveV2EditorialRevisionPolicy $policy = new BigFiveV2EditorialRevisionPolicy,
     ) {}
 
     /**
@@ -77,6 +77,7 @@ final class BigFiveV2EditorialApprovalFlow
         ?string $note = null,
     ): BigFiveV2EditorialRevision {
         $this->authorize($this->policy->rollback($actor, $revision), 'archive Big Five V2 editorial revision for rollback');
+        $this->assertRollbackRoleSeparation($actor, $revision);
 
         $from = (string) $revision->workflow_state;
         $updated = $this->workflow->archive($revision, (int) $actor->id, $note);
@@ -127,6 +128,24 @@ final class BigFiveV2EditorialApprovalFlow
             (int) $revision->submitted_by_admin_user_id,
         ], true)) {
             throw new LogicException('Big Five V2 editorial role separation prevents '.$action.' by the author or submitter.');
+        }
+    }
+
+    private function assertRollbackRoleSeparation(AdminUser $actor, BigFiveV2EditorialRevision $revision): void
+    {
+        $actorId = (int) $actor->id;
+        if ($actorId <= 0) {
+            throw new LogicException('Big Five V2 editorial rollback requires an identified admin actor.');
+        }
+
+        $priorActorIds = array_values(array_filter(array_unique([
+            (int) $revision->created_by_admin_user_id,
+            (int) $revision->submitted_by_admin_user_id,
+            (int) $revision->reviewed_by_admin_user_id,
+        ])));
+
+        if (in_array($actorId, $priorActorIds, true)) {
+            throw new LogicException('Big Five V2 editorial role separation prevents rollback by the author, submitter, or reviewer.');
         }
     }
 

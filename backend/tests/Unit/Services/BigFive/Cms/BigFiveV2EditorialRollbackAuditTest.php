@@ -16,6 +16,7 @@ use App\Services\BigFive\Cms\BigFiveV2EditorialWorkflow;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use LogicException;
 use RuntimeException;
 use Tests\TestCase;
 
@@ -27,10 +28,10 @@ final class BigFiveV2EditorialRollbackAuditTest extends TestCase
 
     public function test_rollback_archive_records_release_based_audit_evidence(): void
     {
-        [$approved, $reviewer] = $this->approvedRevisionAndReviewer();
+        [$approved, $reviewer, $rollbacker] = $this->approvedRevisionReviewerAndRollbacker();
 
-        $evidence = (new BigFiveV2EditorialRollbackAudit())->archiveForRollback(
-            $reviewer,
+        $evidence = (new BigFiveV2EditorialRollbackAudit)->archiveForRollback(
+            $rollbacker,
             $approved,
             'rollback to previous Git-backed release snapshot'
         );
@@ -44,14 +45,16 @@ final class BigFiveV2EditorialRollbackAuditTest extends TestCase
         $this->assertTrue($evidence['audit_evidence']['approval_audit_present']);
         $this->assertTrue($evidence['audit_evidence']['release_audit_present']);
         $this->assertTrue($evidence['audit_evidence']['rollback_audit_present']);
-        $this->assertSame((int) $reviewer->id, $evidence['rollback_authority']['rollback_actor_admin_user_id']);
+        $this->assertSame((int) $rollbacker->id, $evidence['rollback_authority']['rollback_actor_admin_user_id']);
+        $this->assertTrue($evidence['rollback_authority']['role_separation_verified']);
+        $this->assertNotSame((int) $reviewer->id, $evidence['rollback_authority']['rollback_actor_admin_user_id']);
         $this->assertSame('git_backed_release_snapshot_revert', $evidence['runtime_isolation']['rollback_path']);
     }
 
     public function test_rollback_audit_rejects_missing_approval_or_rollback_evidence(): void
     {
-        [$approved] = $this->approvedRevisionAndReviewer();
-        $service = new BigFiveV2EditorialRollbackAudit();
+        [$approved] = $this->approvedRevisionReviewerAndRollbacker();
+        $service = new BigFiveV2EditorialRollbackAudit;
 
         $this->assertFalse($service->canProduceEvidence($approved));
 
@@ -63,12 +66,51 @@ final class BigFiveV2EditorialRollbackAuditTest extends TestCase
 
     public function test_under_privileged_actor_cannot_archive_for_rollback(): void
     {
-        [$approved] = $this->approvedRevisionAndReviewer();
+        [$approved] = $this->approvedRevisionReviewerAndRollbacker();
         $underPrivileged = $this->adminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
 
         $this->expectException(AuthorizationException::class);
 
-        (new BigFiveV2EditorialRollbackAudit())->archiveForRollback($underPrivileged, $approved);
+        (new BigFiveV2EditorialRollbackAudit)->archiveForRollback($underPrivileged, $approved);
+    }
+
+    public function test_reviewer_cannot_archive_for_rollback(): void
+    {
+        [$approved, $reviewer] = $this->approvedRevisionReviewerAndRollbacker();
+
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('role separation');
+
+        (new BigFiveV2EditorialRollbackAudit)->archiveForRollback($reviewer, $approved);
+    }
+
+    public function test_evidence_rejects_historical_rollback_without_role_separation(): void
+    {
+        [$approved, $reviewer] = $this->approvedRevisionReviewerAndRollbacker();
+        $flow = new BigFiveV2EditorialApprovalFlow;
+        $trail = $flow->auditTrail($approved);
+        $trail[] = [
+            'action' => 'rollback_archived',
+            'actor_admin_user_id' => (int) $reviewer->id,
+            'from_state' => BigFiveV2EditorialRevision::STATE_APPROVED,
+            'to_state' => BigFiveV2EditorialRevision::STATE_ARCHIVED,
+            'note' => 'legacy rollback audit fixture',
+            'occurred_at' => '2026-05-07T00:00:00Z',
+        ];
+
+        $approved->workflow_state = BigFiveV2EditorialRevision::STATE_ARCHIVED;
+        $approved->archived_by_admin_user_id = (int) $reviewer->id;
+        $approved->metadata_json = ['editorial_audit_trail' => $trail];
+        $approved->save();
+
+        $service = new BigFiveV2EditorialRollbackAudit;
+
+        $this->assertFalse($service->canProduceEvidence($approved->refresh()));
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('role separation');
+
+        $service->evidencePackage($approved);
     }
 
     public function test_qa_policy_package_exists_and_sha256sums_are_reproducible(): void
@@ -98,8 +140,8 @@ final class BigFiveV2EditorialRollbackAuditTest extends TestCase
 
     public function test_rollback_evidence_does_not_expose_forbidden_metadata_or_enable_runtime(): void
     {
-        [$approved, $reviewer] = $this->approvedRevisionAndReviewer();
-        $evidence = (new BigFiveV2EditorialRollbackAudit())->archiveForRollback($reviewer, $approved);
+        [$approved, , $rollbacker] = $this->approvedRevisionReviewerAndRollbacker();
+        $evidence = (new BigFiveV2EditorialRollbackAudit)->archiveForRollback($rollbacker, $approved);
         $encoded = json_encode($evidence, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
 
         foreach ([
@@ -127,23 +169,28 @@ final class BigFiveV2EditorialRollbackAuditTest extends TestCase
     }
 
     /**
-     * @return array{0:BigFiveV2EditorialRevision,1:AdminUser}
+     * @return array{0:BigFiveV2EditorialRevision,1:AdminUser,2:AdminUser}
      */
-    private function approvedRevisionAndReviewer(): array
+    private function approvedRevisionReviewerAndRollbacker(): array
     {
         $editor = $this->adminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
         $reviewer = $this->adminWithPermissions([
             PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
-        $workflow = new BigFiveV2EditorialWorkflow();
-        $flow = new BigFiveV2EditorialApprovalFlow();
+        $rollbacker = $this->adminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $workflow = new BigFiveV2EditorialWorkflow;
+        $flow = new BigFiveV2EditorialApprovalFlow;
         $draft = $workflow->createDraftFromAsset($this->linkedAsset(), (int) $editor->id);
         $review = $flow->submitForReview($editor, $draft, 'rollback audit candidate');
 
         return [
             $flow->approve($reviewer, $review, 'approved for release-based rollback evidence'),
             $reviewer,
+            $rollbacker,
         ];
     }
 
@@ -178,7 +225,7 @@ final class BigFiveV2EditorialRollbackAuditTest extends TestCase
 
     private function linkedAsset(): BigFiveV2EditorialAssetIndexEntry
     {
-        foreach ((new BigFiveV2EditorialAssetIndex())->entries() as $entry) {
+        foreach ((new BigFiveV2EditorialAssetIndex)->entries() as $entry) {
             if ($entry->linkedReleaseSnapshotIds !== []) {
                 return $entry;
             }

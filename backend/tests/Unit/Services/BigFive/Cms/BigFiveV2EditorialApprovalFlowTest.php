@@ -129,13 +129,17 @@ final class BigFiveV2EditorialApprovalFlowTest extends TestCase
             PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
+        $rollbacker = $this->adminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
         $flow = $this->flow();
 
         $review = $flow->submitForReview($editor, $this->draftFor($editor), 'needs review');
         $rejected = $flow->reject($reviewer, $review, 'needs revision');
         $this->assertSame(BigFiveV2EditorialRevision::STATE_REJECTED, $rejected->workflow_state);
 
-        $archived = $flow->archiveForRollback($reviewer, $rejected, 'rollback audit archive');
+        $archived = $flow->archiveForRollback($rollbacker, $rejected, 'rollback audit archive');
         $this->assertSame(BigFiveV2EditorialRevision::STATE_ARCHIVED, $archived->workflow_state);
 
         $trail = $flow->auditTrail($archived);
@@ -182,17 +186,17 @@ final class BigFiveV2EditorialApprovalFlowTest extends TestCase
 
     private function draftFor(AdminUser $editor): BigFiveV2EditorialRevision
     {
-        return (new BigFiveV2EditorialWorkflow())->createDraftFromAsset($this->linkedAsset(), (int) $editor->id);
+        return (new BigFiveV2EditorialWorkflow)->createDraftFromAsset($this->linkedAsset(), (int) $editor->id);
     }
 
     private function flow(): BigFiveV2EditorialApprovalFlow
     {
-        return new BigFiveV2EditorialApprovalFlow();
+        return new BigFiveV2EditorialApprovalFlow;
     }
 
     private function linkedAsset(): BigFiveV2EditorialAssetIndexEntry
     {
-        foreach ((new BigFiveV2EditorialAssetIndex())->entries() as $entry) {
+        foreach ((new BigFiveV2EditorialAssetIndex)->entries() as $entry) {
             if ($entry->linkedReleaseSnapshotIds !== []) {
                 return $entry;
             }
