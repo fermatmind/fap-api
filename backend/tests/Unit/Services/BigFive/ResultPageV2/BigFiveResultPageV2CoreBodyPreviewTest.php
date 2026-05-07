@@ -508,6 +508,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $allowed = [
             'backend/app/Services/BigFive/Norms/BigFiveNormSnapshot.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormSnapshotBuilder.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormRecomputeEngine.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormRecomputeResult.php',
         ];
 
         $blocked = [
@@ -950,6 +952,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Services/BigFive/Norms/BigFiveNormSnapshot.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormSnapshotBuilder.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormRecomputeEngine.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormRecomputeResult.php',
         ], true);
     }
 
