@@ -311,9 +311,17 @@ final class CareerImportSelectedDisplayAssets extends Command
             if (! $importEligible) {
                 continue;
             }
+            $publicResolutionType = trim((string) ($row['public_resolution_type'] ?? ''));
 
             if ($slug === '' || $slug === 'software-developers') {
                 $errors[] = 'Manifest import candidates must not include empty slugs or software-developers.';
+            }
+            if ($publicResolutionType === '') {
+                $errors[] = "Manifest import candidate {$slug} must declare public_resolution_type public_canonical_job.";
+            } elseif (! in_array($publicResolutionType, CareerPublicResolutionTypeMatrix::allowedTypes(), true)) {
+                $errors[] = "Manifest import candidate {$slug} has unsupported public_resolution_type {$publicResolutionType}.";
+            } elseif ($publicResolutionType !== CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB) {
+                $errors[] = "Manifest import candidate {$slug} must have public_resolution_type public_canonical_job.";
             }
             if ($status !== 'upload_candidate') {
                 $errors[] = "Manifest import candidate {$slug} must have status upload_candidate.";
