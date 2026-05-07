@@ -25,6 +25,7 @@ final class CareerValidateReleaseGate extends Command
         {--slugs= : Comma-separated career slugs}
         {--locales=zh,en : Comma-separated locales}
         {--base-url=https://fermatmind.com : Public site base URL}
+        {--public-resolution-ledger= : Optional full release ledger JSON artifact for public type matrix validation}
         {--json : Emit JSON report}
         {--output= : Optional report output path}';
 
@@ -33,6 +34,11 @@ final class CareerValidateReleaseGate extends Command
     public function handle(): int
     {
         try {
+            $publicResolutionLedgerPath = trim((string) ($this->option('public-resolution-ledger') ?? ''));
+            if ($publicResolutionLedgerPath !== '') {
+                return $this->finish($this->validatePublicTypeMatrix($publicResolutionLedgerPath));
+            }
+
             $slugs = $this->requiredCsvOption('slugs');
             $locales = $this->requiredCsvOption('locales');
             $baseUrl = rtrim(trim((string) $this->option('base-url')), '/');
@@ -75,6 +81,250 @@ final class CareerValidateReleaseGate extends Command
                 'errors' => [$throwable->getMessage()],
             ]);
         }
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function validatePublicTypeMatrix(string $ledgerPath): array
+    {
+        if (! is_file($ledgerPath)) {
+            throw new RuntimeException('career public resolution ledger artifact not found: '.$ledgerPath);
+        }
+
+        $payload = json_decode((string) file_get_contents($ledgerPath), true);
+        if (! is_array($payload)) {
+            throw new RuntimeException('career public resolution ledger artifact is not valid JSON: '.$ledgerPath);
+        }
+
+        $rows = data_get($payload, 'public_resolution.rows');
+        if (! is_array($rows)) {
+            $rows = data_get($payload, 'rows');
+        }
+        if (! is_array($rows)) {
+            throw new RuntimeException('career public resolution ledger artifact has no public resolution rows: '.$ledgerPath);
+        }
+
+        $items = [];
+        foreach (array_values(array_filter($rows, static fn (mixed $row): bool => is_array($row))) as $row) {
+            $items[] = $this->validatePublicTypeRow($row);
+        }
+
+        $blocked = array_values(array_filter(
+            $items,
+            static fn (array $item): bool => ($item['Release_Gate_Result'] ?? null) !== 'pass',
+        ));
+
+        return [
+            'command' => 'career:validate-release-gate',
+            'validator_version' => 'career_release_gate_public_type_matrix_v0.1',
+            'read_only' => true,
+            'writes_database' => false,
+            'release_states_changed' => false,
+            'sitemap_changed' => false,
+            'llms_changed' => false,
+            'public_resolution_ledger' => $ledgerPath,
+            'validated_count' => count($items),
+            'decision' => $blocked === [] && $items !== [] ? 'pass' : 'no_go',
+            'summary' => [
+                'pass' => count($items) - count($blocked),
+                'blocked' => count($blocked),
+            ],
+            'items' => $items,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return array<string, mixed>
+     */
+    private function validatePublicTypeRow(array $row): array
+    {
+        $type = trim((string) ($row['public_resolution_type'] ?? ''));
+        $reasons = [];
+        $sourceSlug = trim((string) ($row['source_slug'] ?? ''));
+        $currentStatus = trim((string) ($row['current_status'] ?? ''));
+        $publicEligible = (bool) ($row['public_eligible'] ?? false);
+
+        if ($type === '') {
+            $reasons[] = $publicEligible ? 'public_row_missing_public_resolution_type' : 'missing_public_resolution_type';
+        } elseif (! in_array($type, CareerPublicResolutionTypeMatrix::allowedTypes(), true)) {
+            $reasons[] = 'unknown_public_resolution_type';
+        }
+
+        if ($sourceSlug === 'software-developers' && $publicEligible) {
+            $reasons[] = 'software_developers_public_leakage';
+        }
+
+        if (in_array($currentStatus, ['duplicate_identity_hold', 'CN_proxy_hold', 'broad_group_hold', 'manual_hold'], true)
+            && $type === CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB) {
+            $reasons[] = 'held_row_public_canonical_job_leakage';
+        }
+
+        $reasons = [...$reasons, ...match ($type) {
+            CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB => $this->validatePublicCanonicalJobRow($row),
+            CareerPublicResolutionTypeMatrix::PUBLIC_ALIAS_REDIRECT => $this->validatePublicAliasRedirectRow($row),
+            CareerPublicResolutionTypeMatrix::PUBLIC_FAMILY_HUB => $this->validatePublicFamilyHubRow($row),
+            CareerPublicResolutionTypeMatrix::PUBLIC_CN_PROXY_PAGE => $this->validatePublicCnProxyPageRow($row),
+            CareerPublicResolutionTypeMatrix::PUBLIC_NONINDEX_REFERENCE => $this->validatePublicNonindexReferenceRow($row),
+            CareerPublicResolutionTypeMatrix::KEEP_NON_PUBLIC_WITH_POLICY,
+            CareerPublicResolutionTypeMatrix::BLOCKED_UNTIL_GOVERNANCE_APPROVAL => $this->validateNonPublicRow($row),
+            default => [],
+        }];
+
+        return [
+            'source_slug' => $sourceSlug,
+            'current_status' => $currentStatus,
+            'public_resolution_type' => $type,
+            'public_eligible' => $publicEligible,
+            'Release_Gate_Result' => $reasons === [] ? 'pass' : 'blocked',
+            'Failure_Reason' => array_values(array_unique($reasons)),
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function validatePublicCanonicalJobRow(array $row): array
+    {
+        $reasons = [];
+        if (! (bool) ($row['public_eligible'] ?? false)) {
+            $reasons[] = 'public_canonical_job_not_public_eligible';
+        }
+        if ((string) ($row['indexability'] ?? '') !== 'indexable') {
+            $reasons[] = 'public_canonical_job_not_indexable';
+        }
+        foreach (['sitemap_eligible', 'llms_eligible', 'llms_full_eligible'] as $field) {
+            if (! (bool) ($row[$field] ?? false)) {
+                $reasons[] = 'public_canonical_job_'.$field.'_false';
+            }
+        }
+
+        return $reasons;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function validatePublicAliasRedirectRow(array $row): array
+    {
+        $reasons = [];
+        if (! (bool) ($row['public_eligible'] ?? false)) {
+            $reasons[] = 'public_alias_redirect_not_public_eligible';
+        }
+        if (trim((string) ($row['target_canonical_slug'] ?? '')) === '') {
+            $reasons[] = 'public_alias_redirect_missing_release_approved_target';
+        }
+        if ((string) ($row['indexability'] ?? '') !== 'no_independent_index') {
+            $reasons[] = 'public_alias_redirect_independent_indexability';
+        }
+        $reasons = [...$reasons, ...$this->forbidSitemapLlms($row, 'public_alias_redirect')];
+
+        return $reasons;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function validatePublicFamilyHubRow(array $row): array
+    {
+        $reasons = [];
+        if (! (bool) ($row['public_eligible'] ?? false)) {
+            $reasons[] = 'public_family_hub_not_public_eligible';
+        }
+        if (trim((string) ($row['family_hub_slug'] ?? '')) === '') {
+            $reasons[] = 'public_family_hub_missing_slug';
+        }
+        if (! is_array($row['child_canonical_slugs'] ?? null) || $row['child_canonical_slugs'] === []) {
+            $reasons[] = 'public_family_hub_missing_child_canonical_links';
+        }
+        if (trim((string) ($row['schema_policy'] ?? '')) === '') {
+            $reasons[] = 'public_family_hub_missing_schema_policy';
+        }
+        if (! (bool) ($row['trust_manifest_required'] ?? false)) {
+            $reasons[] = 'public_family_hub_missing_trust_manifest_requirement';
+        }
+
+        return $reasons;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function validatePublicCnProxyPageRow(array $row): array
+    {
+        $reasons = [];
+        if (! (bool) ($row['public_eligible'] ?? false)) {
+            $reasons[] = 'public_cn_proxy_page_not_public_eligible';
+        }
+        if (! (bool) ($row['boundary_disclaimer_required'] ?? false)) {
+            $reasons[] = 'public_cn_proxy_page_missing_disclaimer';
+        }
+        if (! (bool) ($row['trust_manifest_required'] ?? false)) {
+            $reasons[] = 'public_cn_proxy_page_missing_trust_manifest_requirement';
+        }
+        if ((string) ($row['indexability'] ?? '') !== 'noindex') {
+            $reasons[] = 'public_cn_proxy_page_not_noindex_default';
+        }
+        $reasons = [...$reasons, ...$this->forbidSitemapLlms($row, 'public_cn_proxy_page')];
+
+        return $reasons;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function validatePublicNonindexReferenceRow(array $row): array
+    {
+        $reasons = [];
+        if (! (bool) ($row['public_eligible'] ?? false)) {
+            $reasons[] = 'public_nonindex_reference_not_public_eligible';
+        }
+        if (! in_array((string) ($row['indexability'] ?? ''), ['noindex', 'no_independent_index'], true)) {
+            $reasons[] = 'public_nonindex_reference_without_noindex';
+        }
+        $reasons = [...$reasons, ...$this->forbidSitemapLlms($row, 'public_nonindex_reference')];
+
+        return $reasons;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function validateNonPublicRow(array $row): array
+    {
+        $reasons = [];
+        if ((bool) ($row['public_eligible'] ?? false)) {
+            $reasons[] = 'non_public_type_marked_public_eligible';
+        }
+        if ((string) ($row['indexability'] ?? '') !== 'not_public') {
+            $reasons[] = 'non_public_type_indexability_not_public';
+        }
+        $reasons = [...$reasons, ...$this->forbidSitemapLlms($row, 'non_public_type')];
+
+        return $reasons;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function forbidSitemapLlms(array $row, string $type): array
+    {
+        $reasons = [];
+        foreach (['sitemap_eligible', 'llms_eligible', 'llms_full_eligible'] as $field) {
+            if ((bool) ($row[$field] ?? false)) {
+                $reasons[] = $type.'_'.$field;
+            }
+        }
+
+        return $reasons;
     }
 
     /**
