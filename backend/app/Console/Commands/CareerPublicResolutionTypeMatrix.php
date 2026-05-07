@@ -131,6 +131,7 @@ final class CareerPublicResolutionTypeMatrix
             self::PUBLIC_NONINDEX_REFERENCE => [
                 'owner' => 'career_public_nonindex_reference',
                 'owner_paths' => [
+                    'app/Console/Commands/CareerValidatePublicNonindexReference.php',
                     'app/Console/Commands/CareerValidateReleaseGate.php',
                     'app/Console/Commands/CareerReleaseGateNoindexCleanup.php',
                     'app/Services/PublicSurface/SeoSurfaceContractService.php',

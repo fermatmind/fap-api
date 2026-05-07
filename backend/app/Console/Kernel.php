@@ -43,6 +43,7 @@ use App\Console\Commands\CareerValidateCnTrustManifest;
 use App\Console\Commands\CareerValidateDisplayAssetLineage;
 use App\Console\Commands\CareerValidateDisplayBatch;
 use App\Console\Commands\CareerValidateOccupationDirectoryReviewQueues;
+use App\Console\Commands\CareerValidatePublicNonindexReference;
 use App\Console\Commands\CareerValidateReleaseGate;
 use App\Console\Commands\CareerWarmPublicAuthorityCache;
 use App\Console\Commands\CiScaleImpact;
@@ -191,6 +192,7 @@ class Kernel extends ConsoleKernel
         CareerValidateCnTrustManifest::class,
         CareerValidateDisplayBatch::class,
         CareerValidateDisplayAssetLineage::class,
+        CareerValidatePublicNonindexReference::class,
         CareerValidateReleaseGate::class,
         CareerFullDisplayWorkbookValidator::class,
         CareerCompileAuthorityWave::class,
