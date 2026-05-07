@@ -37,40 +37,11 @@ final class ResultEmailLookupService
      */
     public function lookup(string $email, int $orgId, ?string $locale = null): array
     {
-        $normalizedEmail = $this->piiCipher->normalizeEmail($email);
-        $emailHash = $this->piiCipher->emailHash($normalizedEmail);
-        $items = [];
-        $now = now();
-
-        $bindings = AttemptEmailBinding::query()
-            ->where('org_id', max(0, $orgId))
-            ->where('email_hash', $emailHash)
-            ->where('status', AttemptEmailBinding::STATUS_ACTIVE)
-            ->orderByDesc('created_at')
-            ->orderByDesc('updated_at')
-            ->limit(25)
-            ->get();
-
-        foreach ($bindings as $binding) {
-            if (! $binding instanceof AttemptEmailBinding) {
-                continue;
-            }
-
-            $item = $this->lookupItemForBinding($binding, $locale);
-            if ($item === null) {
-                continue;
-            }
-
-            $items[] = $item;
-            $binding->last_accessed_at = $now;
-            $binding->save();
-        }
-
         return [
             'ok' => true,
-            'items' => $items,
-            'email_verification_required' => false,
-            'message' => 'Saved results are listed for this email.',
+            'items' => [],
+            'email_verification_required' => true,
+            'message' => 'Email verification is required before saved results can be listed.',
         ];
     }
 

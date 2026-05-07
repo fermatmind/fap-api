@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Results;
 
 use App\Models\AttemptEmailBinding;
+use App\Support\OrgContext;
 use Illuminate\Http\Request;
 
 final class ResultEmailReadAccessService
@@ -68,6 +69,11 @@ final class ResultEmailReadAccessService
         if (! $binding instanceof AttemptEmailBinding) {
             return null;
         }
+
+        if (! $this->bindingMatchesRequestActor($request, $binding)) {
+            return null;
+        }
+
         $request->attributes->set($cacheKey, $binding);
 
         return $binding;
@@ -128,5 +134,56 @@ final class ResultEmailReadAccessService
         $value = trim((string) $candidate);
 
         return $value !== '' ? $value : null;
+    }
+
+    private function bindingMatchesRequestActor(Request $request, AttemptEmailBinding $binding): bool
+    {
+        $requestUserId = $this->requestUserId($request);
+        $boundUserId = $this->normalizeNumericString($binding->bound_user_id ?? null);
+        if ($requestUserId !== null && $boundUserId !== null && hash_equals($requestUserId, $boundUserId)) {
+            return true;
+        }
+
+        $requestAnonId = $this->requestAnonId($request);
+        $boundAnonId = $this->normalizeString($binding->bound_anon_id ?? null);
+
+        return $requestAnonId !== null && $boundAnonId !== null && hash_equals($requestAnonId, $boundAnonId);
+    }
+
+    private function requestUserId(Request $request): ?string
+    {
+        $candidates = [
+            $request->user()?->id,
+            $request->attributes->get('fm_user_id'),
+            $request->attributes->get('user_id'),
+            app(OrgContext::class)->userId(),
+        ];
+
+        foreach ($candidates as $candidate) {
+            $normalized = $this->normalizeNumericString($candidate);
+            if ($normalized !== null) {
+                return $normalized;
+            }
+        }
+
+        return null;
+    }
+
+    private function requestAnonId(Request $request): ?string
+    {
+        $candidates = [
+            $request->attributes->get('anon_id'),
+            $request->attributes->get('fm_anon_id'),
+            app(OrgContext::class)->anonId(),
+        ];
+
+        foreach ($candidates as $candidate) {
+            $normalized = $this->normalizeString($candidate);
+            if ($normalized !== null) {
+                return $normalized;
+            }
+        }
+
+        return null;
     }
 }

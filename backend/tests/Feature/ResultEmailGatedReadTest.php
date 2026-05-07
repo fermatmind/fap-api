@@ -88,7 +88,7 @@ final class ResultEmailGatedReadTest extends TestCase
         $response->assertJsonPath('attempt_id', $attemptId);
     }
 
-    public function test_result_access_token_grants_read_only_result_access_without_matching_actor(): void
+    public function test_result_access_token_does_not_grant_result_access_without_matching_actor(): void
     {
         config()->set('fap.features.email_first_result_access', true);
 
@@ -100,22 +100,42 @@ final class ResultEmailGatedReadTest extends TestCase
             'X-Result-Access-Token' => $token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
 
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'RESOURCE_NOT_FOUND');
+    }
+
+    public function test_result_access_token_grants_read_only_result_access_for_matching_actor(): void
+    {
+        config()->set('fap.features.email_first_result_access', true);
+
+        $attemptId = $this->seedAttemptWithResult('anon_email_gate_token_match', 'MBTI');
+        $bindingId = $this->seedBinding($attemptId, 'owner@example.test', 'anon_email_gate_token_match');
+        $resultAccessToken = $this->issueResultAccessToken($bindingId, $attemptId);
+        $fmToken = $this->seedFmToken('anon_email_gate_token_match');
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$fmToken}",
+            'X-Result-Access-Token' => $resultAccessToken,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
+
         $response->assertOk();
         $response->assertJsonPath('ok', true);
         $response->assertJsonPath('attempt_id', $attemptId);
         $response->assertJsonPath('type_code', 'INTJ-A');
     }
 
-    public function test_result_access_token_grants_report_access_read_without_matching_actor(): void
+    public function test_result_access_token_grants_report_access_read_for_matching_actor(): void
     {
         config()->set('fap.features.email_first_result_access', true);
 
         $attemptId = $this->seedAttemptWithResult('anon_email_gate_report_access', 'MBTI');
         $bindingId = $this->seedBinding($attemptId, 'owner@example.test', 'anon_email_gate_report_access');
-        $token = $this->issueResultAccessToken($bindingId, $attemptId);
+        $resultAccessToken = $this->issueResultAccessToken($bindingId, $attemptId);
+        $fmToken = $this->seedFmToken('anon_email_gate_report_access');
 
         $response = $this->withHeaders([
-            'X-Result-Access-Token' => $token,
+            'Authorization' => "Bearer {$fmToken}",
+            'X-Result-Access-Token' => $resultAccessToken,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
 
         $response->assertOk();
@@ -124,17 +144,19 @@ final class ResultEmailGatedReadTest extends TestCase
         $response->assertJsonPath('report_state', 'ready');
     }
 
-    public function test_result_access_token_grants_report_read_without_matching_actor(): void
+    public function test_result_access_token_grants_report_read_for_matching_actor(): void
     {
         config()->set('fap.features.email_first_result_access', true);
         config()->set('fap.features.report_snapshot_strict_v2', false);
 
         $attemptId = $this->seedAttemptWithResult('anon_email_gate_report_token', 'MBTI');
         $bindingId = $this->seedBinding($attemptId, 'owner@example.test', 'anon_email_gate_report_token');
-        $token = $this->issueResultAccessToken($bindingId, $attemptId);
+        $resultAccessToken = $this->issueResultAccessToken($bindingId, $attemptId);
+        $fmToken = $this->seedFmToken('anon_email_gate_report_token');
 
         $response = $this->withHeaders([
-            'X-Result-Access-Token' => $token,
+            'Authorization' => "Bearer {$fmToken}",
+            'X-Result-Access-Token' => $resultAccessToken,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
         $response->assertOk();
