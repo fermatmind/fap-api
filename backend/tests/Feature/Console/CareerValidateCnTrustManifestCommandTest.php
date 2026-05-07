@@ -109,6 +109,37 @@ final class CareerValidateCnTrustManifestCommandTest extends TestCase
         $this->assertContains('CN_manifest_public_eligibility_present_before_policy', (array) ($payload['blockers'] ?? []));
     }
 
+    public function test_it_rejects_manifest_that_marks_cn_claim_index_sitemap_or_llms_eligible(): void
+    {
+        $scopePath = $this->writeCnProxyScopeFixture();
+        $manifestPath = $this->writeCnTrustManifestFixture(
+            indexability: 'indexable',
+            sitemapEligible: true,
+            llmsEligible: true,
+            llmsFullEligible: true,
+        );
+
+        $exitCode = Artisan::call('career:validate-cn-trust-manifest', [
+            '--scope' => $scopePath,
+            '--manifest' => $manifestPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = json_decode(trim((string) Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertIsArray($payload);
+        $this->assertSame(1, (int) ($payload['CN_public_indexable_rows'] ?? 0));
+        $this->assertSame(1, (int) ($payload['CN_sitemap_eligible_rows'] ?? 0));
+        $this->assertSame(1, (int) ($payload['CN_llms_eligible_rows'] ?? 0));
+        $this->assertSame(1, (int) ($payload['CN_llms_full_eligible_rows'] ?? 0));
+        $this->assertContains('CN_manifest_indexable_eligibility_present_before_policy', (array) ($payload['blockers'] ?? []));
+        $this->assertContains('CN_manifest_sitemap_eligibility_present_before_policy', (array) ($payload['blockers'] ?? []));
+        $this->assertContains('CN_manifest_llms_eligibility_present_before_policy', (array) ($payload['blockers'] ?? []));
+        $this->assertContains('CN_manifest_llms_full_eligibility_present_before_policy', (array) ($payload['blockers'] ?? []));
+    }
+
     private function writeCnProxyScopeFixture(): string
     {
         $path = storage_path('framework/testing/career-phase2c-cn-proxy-scope.json');
@@ -136,8 +167,14 @@ final class CareerValidateCnTrustManifestCommandTest extends TestCase
         return $path;
     }
 
-    private function writeCnTrustManifestFixture(bool $missingFieldsForFirstClaim = false, bool $publicEligible = false): string
-    {
+    private function writeCnTrustManifestFixture(
+        bool $missingFieldsForFirstClaim = false,
+        bool $publicEligible = false,
+        string $indexability = 'not_public',
+        bool $sitemapEligible = false,
+        bool $llmsEligible = false,
+        bool $llmsFullEligible = false,
+    ): string {
         $path = storage_path('framework/testing/career-cn-trust-manifest.json');
         File::ensureDirectoryExists(dirname($path));
 
@@ -154,10 +191,10 @@ final class CareerValidateCnTrustManifestCommandTest extends TestCase
             'reviewer' => 'career-cn-policy-reviewer',
             'reviewed_at' => '2026-05-06T00:00:00Z',
             'schema_policy' => 'CN_proxy_schema_policy_required_before_public_schema',
-            'indexability' => 'not_public',
-            'sitemap_eligible' => false,
-            'llms_eligible' => false,
-            'llms_full_eligible' => false,
+            'indexability' => $indexability,
+            'sitemap_eligible' => $sitemapEligible,
+            'llms_eligible' => $llmsEligible,
+            'llms_full_eligible' => $llmsFullEligible,
             'boundary_disclaimer' => 'US SOC/O*NET mapping is comparison-only.',
             'rollback_condition' => 'remove_CN_public_resolution_before_publication',
             'last_validated_at' => '2026-05-06T00:00:00Z',

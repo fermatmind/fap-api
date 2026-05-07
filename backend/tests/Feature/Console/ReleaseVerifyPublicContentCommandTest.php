@@ -140,6 +140,16 @@ final class ReleaseVerifyPublicContentCommandTest extends TestCase
                     'llms_eligible' => true,
                     'llms_full_eligible' => true,
                 ],
+                [
+                    'source_slug' => 'held-public-noindex-row',
+                    'current_status' => 'manual_hold',
+                    'public_resolution_type' => 'public_nonindex_reference',
+                    'indexability' => 'noindex',
+                    'public_eligible' => false,
+                    'sitemap_eligible' => false,
+                    'llms_eligible' => false,
+                    'llms_full_eligible' => false,
+                ],
             ],
         );
 
@@ -148,8 +158,9 @@ final class ReleaseVerifyPublicContentCommandTest extends TestCase
             '--content-source-dir' => '../content_baselines/content_pages',
         ])
             ->expectsOutputToContain('career_public_resolution ok=0')
-            ->expectsOutputToContain('career_public_resolution: career_public_resolution_terminal_rows_mismatch:2788<>2786')
+            ->expectsOutputToContain('career_public_resolution: career_public_resolution_terminal_rows_mismatch:2789<>2786')
             ->expectsOutputToContain('career_public_resolution: career_public_resolution_held_leakage:1')
+            ->expectsOutputToContain('career_public_resolution: career_public_resolution_held_public_noindex_leakage:1')
             ->expectsOutputToContain('career_public_resolution: career_public_resolution_software_developers_leakage:1')
             ->expectsOutputToContain('career_public_resolution: career_public_resolution_sitemap_bad_count:1')
             ->expectsOutputToContain('career_public_resolution: career_public_resolution_llms_bad_count:1')
