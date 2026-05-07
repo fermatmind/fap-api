@@ -15,7 +15,7 @@ final class BigFiveV2EditorialRollbackAudit
     private const RELEASE_EVIDENCE_ARCHIVE_PATH = 'backend/content_assets/big5/result_page_v2/qa/release_evidence_archive/v0_1/big5_v2_release_evidence_archive_v0_1.json';
 
     public function __construct(
-        private readonly BigFiveV2EditorialApprovalFlow $approvalFlow = new BigFiveV2EditorialApprovalFlow(),
+        private readonly BigFiveV2EditorialApprovalFlow $approvalFlow = new BigFiveV2EditorialApprovalFlow,
     ) {}
 
     /**
@@ -72,6 +72,7 @@ final class BigFiveV2EditorialRollbackAudit
                 ],
                 'rollback_actor_admin_user_id' => $this->lastActorFor($trail, 'rollback_archived'),
                 'role_separation_required' => true,
+                'role_separation_verified' => true,
             ],
             'runtime_isolation' => [
                 'cms_can_mutate_runtime' => false,
@@ -118,6 +119,8 @@ final class BigFiveV2EditorialRollbackAudit
         if (! $this->hasAuditAction($trail, 'rollback_archived')) {
             throw new RuntimeException('Big Five V2 editorial rollback evidence requires rollback audit evidence.');
         }
+
+        $this->assertRollbackRoleSeparation($revision, $trail);
     }
 
     /**
@@ -147,6 +150,47 @@ final class BigFiveV2EditorialRollbackAudit
         }
 
         return $actorId > 0 ? $actorId : null;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $trail
+     */
+    private function assertRollbackRoleSeparation(BigFiveV2EditorialRevision $revision, array $trail): void
+    {
+        $rollbackActorId = $this->lastActorFor($trail, 'rollback_archived');
+        if ($rollbackActorId === null) {
+            throw new RuntimeException('Big Five V2 editorial rollback evidence requires an identified rollback actor.');
+        }
+
+        $priorActorIds = array_values(array_filter(array_unique(array_merge([
+            (int) $revision->created_by_admin_user_id,
+            (int) $revision->submitted_by_admin_user_id,
+            (int) $revision->reviewed_by_admin_user_id,
+        ], $this->actorsFor($trail, ['approved', 'rejected'])))));
+
+        if (in_array($rollbackActorId, $priorActorIds, true)) {
+            throw new RuntimeException('Big Five V2 editorial rollback evidence requires rollback role separation from author, submitter, and reviewer.');
+        }
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $trail
+     * @param  list<string>  $actions
+     * @return list<int>
+     */
+    private function actorsFor(array $trail, array $actions): array
+    {
+        $actorIds = [];
+        foreach ($trail as $event) {
+            if (in_array((string) ($event['action'] ?? ''), $actions, true)) {
+                $actorId = (int) ($event['actor_admin_user_id'] ?? 0);
+                if ($actorId > 0) {
+                    $actorIds[] = $actorId;
+                }
+            }
+        }
+
+        return array_values(array_unique($actorIds));
     }
 
     /**
