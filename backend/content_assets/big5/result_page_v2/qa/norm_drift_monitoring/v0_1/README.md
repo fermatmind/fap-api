@@ -1,0 +1,1 @@
+This QA package records internal-only Big Five V2 norm drift monitoring requirements. It defines drift alerts, anomaly checks, and rebuild evidence expectations without enabling public percentile display or runtime attachment.
