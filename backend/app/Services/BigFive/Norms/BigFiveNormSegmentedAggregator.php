@@ -93,8 +93,9 @@ final class BigFiveNormSegmentedAggregator
     {
         $first = $segment->first();
         $cellCount = $segment->count();
-        $publishable = $cellCount >= $minimumCellCount;
         $domainKeys = $this->domainKeys($segment);
+        $hasSparseDomainMetrics = $this->hasSparseDomainMetrics($segment, $domainKeys, $minimumCellCount);
+        $publishable = $cellCount >= $minimumCellCount && ! $hasSparseDomainMetrics;
 
         return [
             'segment_key' => $key,
@@ -110,6 +111,7 @@ final class BigFiveNormSegmentedAggregator
             'quality_levels' => $segment->pluck('quality_level')->unique()->sort()->values()->all(),
             'small_cell_suppressed' => ! $publishable,
             'sparse_segment_rejected' => ! $publishable,
+            'sparse_domain_metrics_rejected' => $hasSparseDomainMetrics,
             'public_output_allowed' => false,
             'public_percentile_display' => 'disabled',
             'runtime_attachment' => 'disabled',
@@ -167,6 +169,25 @@ final class BigFiveNormSegmentedAggregator
         ksort($metrics);
 
         return $metrics;
+    }
+
+    /**
+     * @param  Collection<int,BigFiveNormObservation>  $segment
+     * @param  list<string>  $domainKeys
+     */
+    private function hasSparseDomainMetrics(Collection $segment, array $domainKeys, int $minimumCellCount): bool
+    {
+        if ($domainKeys === []) {
+            return true;
+        }
+
+        foreach ($domainKeys as $domainKey) {
+            if (count($this->numericValues($segment, $domainKey)) < $minimumCellCount) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
