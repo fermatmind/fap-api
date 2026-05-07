@@ -514,6 +514,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/BigFive/Norms/BigFiveNormSegmentedAggregationResult.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormDriftDetector.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormDriftResult.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormInternalPercentileResolver.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormInternalPercentileDecision.php',
         ];
 
         $blocked = [
@@ -962,6 +964,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/BigFive/Norms/BigFiveNormSegmentedAggregationResult.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormDriftDetector.php',
             'backend/app/Services/BigFive/Norms/BigFiveNormDriftResult.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormInternalPercentileResolver.php',
+            'backend/app/Services/BigFive/Norms/BigFiveNormInternalPercentileDecision.php',
         ], true);
     }
 
