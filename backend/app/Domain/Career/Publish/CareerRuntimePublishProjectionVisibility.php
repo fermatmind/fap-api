@@ -12,5 +12,9 @@ interface CareerRuntimePublishProjectionVisibility
 
     public function detailRouteEnabled(string $slug): bool;
 
+    public function robotsIndexable(string $slug): bool;
+
+    public function releaseGatePass(string $slug): bool;
+
     public function familyHubLive(string $slug): bool;
 }

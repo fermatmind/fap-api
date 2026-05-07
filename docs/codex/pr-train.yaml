@@ -63,6 +63,31 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: career-release-gate-reconciliation
+    repo: fap-api
+    depends_on:
+      - career-runtime-surface-projection-consumers
+    branch: codex/career-release-gate-reconciliation
+    title: "fix(api): reconcile career release gate runtime validation"
+    scope:
+      - Make Career job detail SEO indexability consume the runtime publish projection.
+      - Fix display-asset-backed canonical job bundles that were still emitted as noindex despite projection release eligibility.
+      - Preserve software-developers and governed non-public detail route blocking.
+    do_not:
+      - Change ledger governance decisions.
+      - Change frontend metadata authority or add frontend SEO fallbacks.
+      - Change dataset, sitemap, llms, display import, or authority force behavior.
+      - Add a second Career publish authority or hardcoded visibility list.
+    validation:
+      - vendor/bin/pint --test app/Domain/Career/Publish/CareerRuntimePublishProjectionVisibility.php app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php tests/Fixtures/Career/CareerRuntimePublishProjectionVisibilityFixture.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php
+      - php artisan test tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php
+      - php artisan test tests/Unit/Services/Career/CareerJobDetailBundleBuilderTest.php
+      - php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php
+      - php artisan route:list | grep -i career
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: backend-email-binding-foundation
     repo: fap-api
     branch: codex/backend-email-binding-foundation
