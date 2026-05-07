@@ -36,6 +36,7 @@ final class CareerValidateSitemapLlmsPublicTypeMatrix extends Command
                 'locales' => $locales,
                 'ledger_rows' => count($rows),
                 'canonical_job_rows' => $summary['canonical_job_rows'],
+                'held_canonical_job_rows' => $summary['held_canonical_job_rows'],
                 'canonical_career_job_urls' => $summary['canonical_job_rows'] * count($locales),
                 'alias_urls_in_sitemap' => 0,
                 'alias_urls_in_llms' => 0,
@@ -61,6 +62,7 @@ final class CareerValidateSitemapLlmsPublicTypeMatrix extends Command
                 $summary['canonical_missing_sitemap_rows'] === 0 ? null : 'public_canonical_job_missing_sitemap_eligibility',
                 $summary['canonical_missing_llms_rows'] === 0 ? null : 'public_canonical_job_missing_llms_eligibility',
                 $summary['canonical_missing_llms_full_rows'] === 0 ? null : 'public_canonical_job_missing_llms_full_eligibility',
+                $summary['held_canonical_job_rows'] === 0 ? null : 'held_public_canonical_job_rows',
                 $summary['alias_sitemap_or_llms_rows'] === 0 ? null : 'public_alias_redirect_sitemap_llms_leakage',
                 $summary['family_eligible_without_required_fields'] === 0 ? null : 'public_family_hub_sitemap_llms_without_schema_children_trust',
                 $summary['cn_sitemap_or_llms_rows'] === 0 ? null : 'public_cn_proxy_page_sitemap_llms_leakage',
@@ -154,6 +156,7 @@ final class CareerValidateSitemapLlmsPublicTypeMatrix extends Command
     {
         $summary = [
             'canonical_job_rows' => 0,
+            'held_canonical_job_rows' => 0,
             'canonical_missing_sitemap_rows' => 0,
             'canonical_missing_llms_rows' => 0,
             'canonical_missing_llms_full_rows' => 0,
@@ -205,6 +208,10 @@ final class CareerValidateSitemapLlmsPublicTypeMatrix extends Command
     private function summarizeCanonical(array $row, array &$summary): void
     {
         $summary['canonical_job_rows']++;
+        if ($this->isHeldStatus((string) ($row['current_status'] ?? ''))) {
+            $summary['held_canonical_job_rows']++;
+        }
+
         if (! (bool) ($row['sitemap_eligible'] ?? false)) {
             $summary['canonical_missing_sitemap_rows']++;
         }
@@ -288,6 +295,16 @@ final class CareerValidateSitemapLlmsPublicTypeMatrix extends Command
         return (bool) ($row['sitemap_eligible'] ?? false)
             || (bool) ($row['llms_eligible'] ?? false)
             || (bool) ($row['llms_full_eligible'] ?? false);
+    }
+
+    private function isHeldStatus(string $status): bool
+    {
+        return in_array($status, [
+            'duplicate_identity_hold',
+            'CN_proxy_hold',
+            'broad_group_hold',
+            'manual_hold',
+        ], true);
     }
 
     /**

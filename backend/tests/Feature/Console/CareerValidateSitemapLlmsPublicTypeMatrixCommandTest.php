@@ -76,6 +76,34 @@ final class CareerValidateSitemapLlmsPublicTypeMatrixCommandTest extends TestCas
         $this->assertContains('non_public_type_sitemap_llms_leakage', (array) ($payload['blockers'] ?? []));
     }
 
+    public function test_it_rejects_held_rows_even_when_marked_as_public_canonical_jobs(): void
+    {
+        $ledgerPath = $this->writeLedgerFixture([
+            $this->canonicalRow('accountants-and-auditors'),
+            [
+                'source_slug' => 'held-canonical-row',
+                'current_status' => 'manual_hold',
+                'public_resolution_type' => 'public_canonical_job',
+                'indexability' => 'indexable',
+                'public_eligible' => true,
+                'sitemap_eligible' => true,
+                'llms_eligible' => true,
+                'llms_full_eligible' => true,
+            ],
+        ]);
+
+        $exitCode = Artisan::call('career:validate-sitemap-llms-public-type-matrix', [
+            '--ledger' => $ledgerPath,
+            '--json' => true,
+        ]);
+        $payload = json_decode(trim((string) Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertIsArray($payload);
+        $this->assertSame(1, (int) ($payload['held_canonical_job_rows'] ?? 0));
+        $this->assertContains('held_public_canonical_job_rows', (array) ($payload['blockers'] ?? []));
+    }
+
     public function test_it_allows_family_hub_sitemap_llms_only_with_explicit_required_fields(): void
     {
         $ledgerPath = $this->writeLedgerFixture([

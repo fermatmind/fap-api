@@ -303,6 +303,7 @@ final class ReleaseVerifyPublicContent extends Command
         $totalRows = count($rows);
         $canonicalAssets = 0;
         $heldLeakage = 0;
+        $heldPublicNoindexLeakage = 0;
         $softwareDevelopersLeakage = 0;
         $sitemapBadCount = 0;
         $llmsBadCount = 0;
@@ -314,6 +315,7 @@ final class ReleaseVerifyPublicContent extends Command
             $slug = trim((string) ($row['source_slug'] ?? ''));
             $isCanonical = $type === CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB;
             $isHeld = in_array($status, ['duplicate_identity_hold', 'CN_proxy_hold', 'broad_group_hold', 'manual_hold'], true);
+            $publicUrlAllowed = $this->publicResolutionTypeAllowsPublicUrl($type);
             $sitemapEligible = (bool) ($row['sitemap_eligible'] ?? false);
             $llmsEligible = (bool) ($row['llms_eligible'] ?? false);
             $llmsFullEligible = (bool) ($row['llms_full_eligible'] ?? false);
@@ -345,6 +347,9 @@ final class ReleaseVerifyPublicContent extends Command
             if ($isHeld && $isCanonical) {
                 $heldLeakage++;
             }
+            if ($isHeld && $publicUrlAllowed && ! $isCanonical) {
+                $heldPublicNoindexLeakage++;
+            }
 
             if ($slug === 'software-developers' && ($publicEligible || $sitemapEligible || $llmsEligible || $llmsFullEligible || $isCanonical)) {
                 $softwareDevelopersLeakage++;
@@ -365,6 +370,9 @@ final class ReleaseVerifyPublicContent extends Command
         }
         if ($heldLeakage > 0) {
             $failures[] = "career_public_resolution_held_leakage:{$heldLeakage}";
+        }
+        if ($heldPublicNoindexLeakage > 0) {
+            $failures[] = "career_public_resolution_held_public_noindex_leakage:{$heldPublicNoindexLeakage}";
         }
         if ($softwareDevelopersLeakage > 0) {
             $failures[] = "career_public_resolution_software_developers_leakage:{$softwareDevelopersLeakage}";
@@ -390,6 +398,7 @@ final class ReleaseVerifyPublicContent extends Command
                 'governed_non_public_rows' => $governedNonPublicRows,
                 'dataset_jobs_member_count_contract_is_separate' => true,
                 'held_leakage' => $heldLeakage,
+                'held_public_noindex_leakage' => $heldPublicNoindexLeakage,
                 'software_developers_leakage' => $softwareDevelopersLeakage,
                 'sitemap_bad_count' => $sitemapBadCount,
                 'llms_bad_count' => $llmsBadCount,
@@ -422,5 +431,18 @@ final class ReleaseVerifyPublicContent extends Command
         }
 
         return array_values(array_filter($rows, static fn (mixed $row): bool => is_array($row)));
+    }
+
+    private function publicResolutionTypeAllowsPublicUrl(string $type): bool
+    {
+        if ($type === '') {
+            return false;
+        }
+
+        try {
+            return (bool) (CareerPublicResolutionTypeMatrix::policyFor($type)['public_url_allowed'] ?? false);
+        } catch (\InvalidArgumentException) {
+            return false;
+        }
     }
 }

@@ -73,10 +73,10 @@ final class CareerValidateCnTrustManifest extends Command
                 'missing_reviewer_reviewed_at_rows' => $summary['missing_reviewer_reviewed_at_rows'],
                 'missing_rollback_condition_rows' => $summary['missing_rollback_condition_rows'],
                 'CN_trust_manifest_required' => true,
-                'CN_public_indexable_rows' => 0,
-                'CN_sitemap_eligible_rows' => 0,
-                'CN_llms_eligible_rows' => 0,
-                'CN_llms_full_eligible_rows' => 0,
+                'CN_public_indexable_rows' => $summary['public_indexable_claim_rows'],
+                'CN_sitemap_eligible_rows' => $summary['sitemap_eligible_claim_rows'],
+                'CN_llms_eligible_rows' => $summary['llms_eligible_claim_rows'],
+                'CN_llms_full_eligible_rows' => $summary['llms_full_eligible_claim_rows'],
                 'missing_evidence_blocks_CN_SEO_GEO' => true,
                 'missing_disclaimer_blocks_CN_public_eligibility' => true,
                 'missing_reviewer_reviewed_at_blocks_llms_eligibility' => true,
@@ -94,6 +94,10 @@ final class CareerValidateCnTrustManifest extends Command
                 count($rows) === self::EXPECTED_CN_PROXY_ROWS ? null : 'unexpected_CN_proxy_row_count',
                 $summary['non_cn_proxy_rows'] === 0 ? null : 'non_CN_proxy_rows_in_scope',
                 $summary['public_eligible_claim_rows'] === 0 ? null : 'CN_manifest_public_eligibility_present_before_policy',
+                $summary['public_indexable_claim_rows'] === 0 ? null : 'CN_manifest_indexable_eligibility_present_before_policy',
+                $summary['sitemap_eligible_claim_rows'] === 0 ? null : 'CN_manifest_sitemap_eligibility_present_before_policy',
+                $summary['llms_eligible_claim_rows'] === 0 ? null : 'CN_manifest_llms_eligibility_present_before_policy',
+                $summary['llms_full_eligible_claim_rows'] === 0 ? null : 'CN_manifest_llms_full_eligibility_present_before_policy',
             ]));
 
             $this->writeOutputArtifact($payload);
@@ -220,6 +224,10 @@ final class CareerValidateCnTrustManifest extends Command
             'missing_reviewer_reviewed_at_rows' => 0,
             'missing_rollback_condition_rows' => 0,
             'public_eligible_claim_rows' => 0,
+            'public_indexable_claim_rows' => 0,
+            'sitemap_eligible_claim_rows' => 0,
+            'llms_eligible_claim_rows' => 0,
+            'llms_full_eligible_claim_rows' => 0,
         ];
 
         foreach ($rows as $row) {
@@ -259,9 +267,31 @@ final class CareerValidateCnTrustManifest extends Command
             if ((bool) ($claim['public_eligible'] ?? false)) {
                 $summary['public_eligible_claim_rows']++;
             }
+            if ($this->claimIsPublicIndexable($claim)) {
+                $summary['public_indexable_claim_rows']++;
+            }
+            if ((bool) ($claim['sitemap_eligible'] ?? false)) {
+                $summary['sitemap_eligible_claim_rows']++;
+            }
+            if ((bool) ($claim['llms_eligible'] ?? false)) {
+                $summary['llms_eligible_claim_rows']++;
+            }
+            if ((bool) ($claim['llms_full_eligible'] ?? false)) {
+                $summary['llms_full_eligible_claim_rows']++;
+            }
         }
 
         return $summary;
+    }
+
+    /**
+     * @param  array<string, mixed>  $claim
+     */
+    private function claimIsPublicIndexable(array $claim): bool
+    {
+        $indexability = strtolower((string) ($claim['indexability'] ?? ''));
+
+        return in_array($indexability, ['indexable', 'public_indexable'], true);
     }
 
     private function fieldMissing(array $claim, string $field): bool
