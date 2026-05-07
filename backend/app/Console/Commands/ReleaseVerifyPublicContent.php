@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\File;
 final class ReleaseVerifyPublicContent extends Command
 {
     protected $signature = 'release:verify-public-content
-        {--expected-occupations=2787 : Required full career dataset member count}
-        {--min-career-job-items=2786 : Required public career job list item count}
+        {--expected-occupations=0 : Optional Career dataset/jobs API member count contract; 0 records current count only}
+        {--min-career-job-items=0 : Optional public career jobs API item count contract; 0 records current count only}
+        {--public-resolution-ledger= : Optional Career full release ledger JSON artifact for public-resolution validation}
+        {--expected-terminal-resolution-rows=2786 : Expected Career workbook rows classified in the public-resolution ledger}
+        {--expected-canonical-public-assets=793 : Expected canonical public Career assets in the public-resolution ledger}
+        {--expected-governed-non-public-rows=1993 : Expected governed non-public Career rows in the public-resolution ledger}
         {--content-source-dir=../content_baselines/content_pages : Content page baseline directory to verify against}
         {--strict-career : Fail when Career completeness checks are below release thresholds}
         {--json : Emit JSON output}';
@@ -30,6 +34,7 @@ final class ReleaseVerifyPublicContent extends Command
             'content_pages' => $this->verifyContentPages(),
             'career_dataset' => $this->verifyCareerDataset($careerAuthorityCache),
             'career_job_list' => $this->verifyCareerJobList($careerJobListBundleBuilder),
+            'career_public_resolution' => $this->verifyCareerPublicResolutionLedger(),
         ];
 
         $blockingFailures = [];
@@ -205,45 +210,52 @@ final class ReleaseVerifyPublicContent extends Command
     }
 
     /**
-     * @return array{ok: bool, metrics: array<string, int|bool>, failures: list<string>}
+     * @return array{ok: bool, metrics: array<string, int|bool|string>, failures: list<string>}
      */
     private function verifyCareerDataset(PublicCareerAuthorityResponseCache $careerAuthorityCache): array
     {
-        $expectedOccupations = max(0, (int) $this->option('expected-occupations'));
+        $expectedDatasetMemberCount = max(0, (int) $this->option('expected-occupations'));
         $payload = $careerAuthorityCache->datasetHubPayload();
         $memberCount = (int) data_get($payload, 'collection_summary.member_count', 0);
+        $includedCount = (int) data_get($payload, 'collection_summary.included_count', 0);
+        $excludedCount = (int) data_get($payload, 'collection_summary.excluded_count', 0);
+        $publicDetailIndexableCount = (int) data_get($payload, 'collection_summary.public_detail_indexable_count', 0);
         $trackedTotal = (int) data_get($payload, 'collection_summary.tracking_counts.tracked_total_occupations', 0);
         $missingOccupations = (int) data_get($payload, 'collection_summary.tracking_counts.missing_occupations', 0);
         $trackingComplete = (bool) data_get($payload, 'collection_summary.tracking_counts.tracking_complete', false);
 
         $failures = [];
-        if ($memberCount < $expectedOccupations) {
-            $failures[] = "career_dataset_member_count_below_expected:{$memberCount}<{$expectedOccupations}";
+        if ($expectedDatasetMemberCount > 0 && $memberCount < $expectedDatasetMemberCount) {
+            $failures[] = "career_dataset_member_count_below_expected:{$memberCount}<{$expectedDatasetMemberCount}";
         }
 
-        if ($expectedOccupations > 0 && ! $trackingComplete) {
+        if ($expectedDatasetMemberCount > 0 && ! $trackingComplete) {
             $failures[] = 'career_dataset_tracking_incomplete';
         }
 
-        if ($expectedOccupations > 0 && $missingOccupations !== 0) {
+        if ($expectedDatasetMemberCount > 0 && $missingOccupations !== 0) {
             $failures[] = "career_dataset_missing_occupations:{$missingOccupations}";
         }
 
         return [
             'ok' => $failures === [],
             'metrics' => [
-                'expected_occupations' => $expectedOccupations,
+                'expected_dataset_member_count' => $expectedDatasetMemberCount,
                 'member_count' => $memberCount,
+                'included_count' => $includedCount,
+                'excluded_count' => $excludedCount,
+                'public_detail_indexable_count' => $publicDetailIndexableCount,
                 'tracked_total_occupations' => $trackedTotal,
                 'missing_occupations' => $missingOccupations,
                 'tracking_complete' => $trackingComplete,
+                'contract_scope' => 'dataset_jobs_api_count',
             ],
             'failures' => $failures,
         ];
     }
 
     /**
-     * @return array{ok: bool, metrics: array<string, int>, failures: list<string>}
+     * @return array{ok: bool, metrics: array<string, int|string>, failures: list<string>}
      */
     private function verifyCareerJobList(CareerJobListBundleBuilder $careerJobListBundleBuilder): array
     {
@@ -261,8 +273,154 @@ final class ReleaseVerifyPublicContent extends Command
             'metrics' => [
                 'min_career_job_items' => $minimumItems,
                 'item_count' => $itemCount,
+                'contract_scope' => 'career_jobs_api_count',
             ],
             'failures' => $failures,
         ];
+    }
+
+    /**
+     * @return array{ok: bool, metrics: array<string, int|bool|string>, failures: list<string>}
+     */
+    private function verifyCareerPublicResolutionLedger(): array
+    {
+        $ledgerPath = trim((string) ($this->option('public-resolution-ledger') ?? ''));
+        if ($ledgerPath === '') {
+            return [
+                'ok' => true,
+                'metrics' => [
+                    'enabled' => false,
+                    'contract_scope' => 'career_public_resolution_ledger',
+                ],
+                'failures' => [],
+            ];
+        }
+
+        $rows = $this->loadPublicResolutionRows($ledgerPath);
+        $expectedTerminalRows = max(0, (int) $this->option('expected-terminal-resolution-rows'));
+        $expectedCanonicalAssets = max(0, (int) $this->option('expected-canonical-public-assets'));
+        $expectedGovernedRows = max(0, (int) $this->option('expected-governed-non-public-rows'));
+        $totalRows = count($rows);
+        $canonicalAssets = 0;
+        $heldLeakage = 0;
+        $softwareDevelopersLeakage = 0;
+        $sitemapBadCount = 0;
+        $llmsBadCount = 0;
+        $llmsFullBadCount = 0;
+
+        foreach ($rows as $row) {
+            $type = trim((string) ($row['public_resolution_type'] ?? ''));
+            $status = trim((string) ($row['current_status'] ?? ''));
+            $slug = trim((string) ($row['source_slug'] ?? ''));
+            $isCanonical = $type === CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB;
+            $isHeld = in_array($status, ['duplicate_identity_hold', 'CN_proxy_hold', 'broad_group_hold', 'manual_hold'], true);
+            $sitemapEligible = (bool) ($row['sitemap_eligible'] ?? false);
+            $llmsEligible = (bool) ($row['llms_eligible'] ?? false);
+            $llmsFullEligible = (bool) ($row['llms_full_eligible'] ?? false);
+            $publicEligible = (bool) ($row['public_eligible'] ?? false);
+
+            if ($isCanonical) {
+                $canonicalAssets++;
+                if (! $sitemapEligible) {
+                    $sitemapBadCount++;
+                }
+                if (! $llmsEligible) {
+                    $llmsBadCount++;
+                }
+                if (! $llmsFullEligible) {
+                    $llmsFullBadCount++;
+                }
+            } else {
+                if ($sitemapEligible) {
+                    $sitemapBadCount++;
+                }
+                if ($llmsEligible) {
+                    $llmsBadCount++;
+                }
+                if ($llmsFullEligible) {
+                    $llmsFullBadCount++;
+                }
+            }
+
+            if ($isHeld && $isCanonical) {
+                $heldLeakage++;
+            }
+
+            if ($slug === 'software-developers' && ($publicEligible || $sitemapEligible || $llmsEligible || $llmsFullEligible || $isCanonical)) {
+                $softwareDevelopersLeakage++;
+            }
+        }
+
+        $governedNonPublicRows = $totalRows - $canonicalAssets;
+        $failures = [];
+
+        if ($expectedTerminalRows > 0 && $totalRows !== $expectedTerminalRows) {
+            $failures[] = "career_public_resolution_terminal_rows_mismatch:{$totalRows}<>{$expectedTerminalRows}";
+        }
+        if ($expectedCanonicalAssets > 0 && $canonicalAssets !== $expectedCanonicalAssets) {
+            $failures[] = "career_public_resolution_canonical_public_assets_mismatch:{$canonicalAssets}<>{$expectedCanonicalAssets}";
+        }
+        if ($expectedGovernedRows > 0 && $governedNonPublicRows !== $expectedGovernedRows) {
+            $failures[] = "career_public_resolution_governed_non_public_rows_mismatch:{$governedNonPublicRows}<>{$expectedGovernedRows}";
+        }
+        if ($heldLeakage > 0) {
+            $failures[] = "career_public_resolution_held_leakage:{$heldLeakage}";
+        }
+        if ($softwareDevelopersLeakage > 0) {
+            $failures[] = "career_public_resolution_software_developers_leakage:{$softwareDevelopersLeakage}";
+        }
+        if ($sitemapBadCount > 0) {
+            $failures[] = "career_public_resolution_sitemap_bad_count:{$sitemapBadCount}";
+        }
+        if ($llmsBadCount > 0) {
+            $failures[] = "career_public_resolution_llms_bad_count:{$llmsBadCount}";
+        }
+        if ($llmsFullBadCount > 0) {
+            $failures[] = "career_public_resolution_llms_full_bad_count:{$llmsFullBadCount}";
+        }
+
+        return [
+            'ok' => $failures === [],
+            'metrics' => [
+                'enabled' => true,
+                'contract_scope' => 'career_public_resolution_ledger',
+                'ledger_path' => $ledgerPath,
+                'terminal_resolution_rows' => $totalRows,
+                'canonical_public_assets' => $canonicalAssets,
+                'governed_non_public_rows' => $governedNonPublicRows,
+                'dataset_jobs_member_count_contract_is_separate' => true,
+                'held_leakage' => $heldLeakage,
+                'software_developers_leakage' => $softwareDevelopersLeakage,
+                'sitemap_bad_count' => $sitemapBadCount,
+                'llms_bad_count' => $llmsBadCount,
+                'llms_full_bad_count' => $llmsFullBadCount,
+            ],
+            'failures' => $failures,
+        ];
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function loadPublicResolutionRows(string $ledgerPath): array
+    {
+        if (! is_file($ledgerPath)) {
+            throw new \RuntimeException('career public resolution ledger artifact not found: '.$ledgerPath);
+        }
+
+        $decoded = json_decode((string) file_get_contents($ledgerPath), true);
+        if (! is_array($decoded)) {
+            throw new \RuntimeException('career public resolution ledger artifact is not valid JSON: '.$ledgerPath);
+        }
+
+        $rows = data_get($decoded, 'public_resolution.rows');
+        if (! is_array($rows)) {
+            $rows = data_get($decoded, 'rows');
+        }
+        if (! is_array($rows)) {
+            throw new \RuntimeException('career public resolution ledger artifact has no public resolution rows: '.$ledgerPath);
+        }
+
+        return array_values(array_filter($rows, static fn (mixed $row): bool => is_array($row)));
     }
 }

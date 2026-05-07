@@ -142,7 +142,7 @@ php artisan release:verify-public-content \
 php artisan route:list | grep -E 'api/v0\.5/landing-surfaces|api/v0\.3/scales/lookup|api/v0\.3/scales/.*/questions|api/v0\.3/attempts/.*/report-access'
 ```
 
-`release:verify-public-content` hard-fails missing backend content pages. Career dataset and job-list completeness are warning-only unless the operator reruns with `--strict-career` or deploys with `DEPLOY_PUBLIC_CONTENT_STRICT_CAREER=1`.
+`release:verify-public-content` hard-fails missing backend content pages. Career dataset and job-list API counts are warning-only unless the operator reruns with `--strict-career` or deploys with `DEPLOY_PUBLIC_CONTENT_STRICT_CAREER=1`; these counts must not be compared to the 2786-row public-resolution workbook. When validating the Career final public-resolution model, pass `--public-resolution-ledger=/absolute/path/to/career-full-release-ledger.json` and require 2786 terminal rows, 793 canonical public assets, 1993 governed non-public rows, and zero sitemap/llms/held/software-developers leakage.
 
 Then run:
 

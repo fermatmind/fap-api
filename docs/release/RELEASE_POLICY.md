@@ -33,8 +33,6 @@
 
 ```bash
 php artisan release:verify-public-content \
-  --expected-occupations=2787 \
-  --min-career-job-items=2786 \
   --content-source-dir=/absolute/path/to/content_baselines/content_pages
 ```
 
@@ -43,5 +41,7 @@ php artisan release:verify-public-content \
 守卫覆盖：
 
 - `content_pages` 中公司、政策、帮助页 baseline 均已发布且公开
-- 职业完整数据集达到 2787 个追踪职业，且 tracking complete
-- 职业列表 API 对应的 backend bundle 至少有 2786 个可展示条目
+- Career dataset/jobs API 当前可见计数会被记录为 `dataset_jobs_api_count`，不再与 workbook row count 混用
+- 如提供 `--public-resolution-ledger`，职业 public-resolution ledger 必须满足 2786 terminal rows、793 canonical public assets、1993 governed non-public rows，并保持 sitemap/llms/llms-full 与 held/software-developers leakage 为 0
+
+Career dataset/jobs API 计数不是 2786 workbook rows，也不是 793 canonical public assets。不要把 `member_count` 或 job list `item_count` 与 public-resolution ledger 口径互相比较。
