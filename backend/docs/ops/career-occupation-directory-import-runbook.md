@@ -151,18 +151,28 @@ Every production deploy that can affect career directory visibility or CMS-backe
 
 ```bash
 php artisan release:verify-public-content \
-  --expected-occupations=2787 \
-  --min-career-job-items=2786 \
   --content-source-dir=/absolute/path/to/content_baselines/content_pages
 ```
 
 The deploy recipe runs this command automatically. By default, the release must stop when any content page baseline row is not present as `status=published` and `is_public=true` in `content_pages`.
 
-Career completeness is a default warning, not a release blocker. The guard still reports warnings when:
+Career dataset/jobs API completeness is a default warning, not a release blocker. The guard records these as the `dataset_jobs_api_count` and `career_jobs_api_count` contracts. These counts are separate from the Career public-resolution ledger.
 
-- the career dataset member count is below `2787`
-- career dataset tracking is incomplete or has missing occupations
-- the career job list item count is below `2786`
+When validating the final Career public-resolution model, pass the full release ledger artifact:
+
+```bash
+php artisan release:verify-public-content \
+  --content-source-dir=/absolute/path/to/content_baselines/content_pages \
+  --public-resolution-ledger=/absolute/path/to/career-full-release-ledger.json
+```
+
+That ledger validation blocks on:
+
+- terminal resolution rows not equal to `2786`
+- canonical public assets not equal to `793`
+- governed non-public rows not equal to `1993`
+- sitemap, llms, or llms-full bad counts above `0`
+- held-row or `software-developers` leakage
 
 Use strict Career mode only when the operator intentionally wants Career completeness to block the deploy:
 
@@ -170,13 +180,11 @@ Use strict Career mode only when the operator intentionally wants Career complet
 DEPLOY_PUBLIC_CONTENT_STRICT_CAREER=1 vendor/bin/dep deploy production
 
 php artisan release:verify-public-content \
-  --expected-occupations=2787 \
-  --min-career-job-items=2786 \
   --content-source-dir=/absolute/path/to/content_baselines/content_pages \
   --strict-career
 ```
 
-If the guard fails, fix the backend-authoritative data import or compile path first. If Career warnings appear in non-strict mode, either continue the deploy with the warnings recorded or rerun in strict mode when Career completeness is required. Do not patch frontend fallback content to hide the failure.
+If the guard fails, fix the backend-authoritative data import or compile path first. If Career dataset/jobs API warnings appear in non-strict mode, either continue the deploy with the warnings recorded or rerun in strict mode when that API count contract is intentionally required. Do not patch frontend fallback content to hide the failure.
 
 ## Repository Rule Impact
 
