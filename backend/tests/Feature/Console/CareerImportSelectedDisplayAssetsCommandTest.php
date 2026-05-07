@@ -133,6 +133,52 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
         $this->assertSame(1, $exitCode);
         $this->assertStringContainsString('expected display asset delta must equal import candidate count', implode(' ', $report['errors']));
 
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $workbook,
+            $this->writeManifest($workbook, [$row], publicResolutionType: null),
+        );
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('must declare public_resolution_type public_canonical_job', implode(' ', $report['errors']));
+
+        foreach ([
+            'public_alias_redirect',
+            'public_family_hub',
+            'public_cn_proxy_page',
+            'public_nonindex_reference',
+            'keep_non_public_with_policy',
+            'blocked_until_governance_approval',
+        ] as $publicResolutionType) {
+            [$exitCode, $report] = $this->runImportWithManifest(
+                $workbook,
+                $this->writeManifest($workbook, [$row], publicResolutionType: $publicResolutionType),
+            );
+            $this->assertSame(1, $exitCode, $publicResolutionType);
+            $this->assertStringContainsString('must have public_resolution_type public_canonical_job', implode(' ', $report['errors']));
+        }
+
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $workbook,
+            $this->writeManifest($workbook, [$row], publicResolutionType: 'public_future_type'),
+        );
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('unsupported public_resolution_type public_future_type', implode(' ', $report['errors']));
+
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $workbook,
+            $this->writeManifest($workbook, [$row], rowStatus: 'needs_workbook_repair'),
+        );
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('must have status upload_candidate', implode(' ', $report['errors']));
+
+        foreach (['manual_hold', 'duplicate_identity_hold', 'broad_group_hold', 'CN_proxy_hold'] as $heldStatus) {
+            [$exitCode, $report] = $this->runImportWithManifest(
+                $workbook,
+                $this->writeManifest($workbook, [$row], rowStatus: $heldStatus),
+            );
+            $this->assertSame(1, $exitCode, $heldStatus);
+            $this->assertStringContainsString('is a held row', implode(' ', $report['errors']));
+        }
+
         $software = $this->row('software-developers', title: 'Software Developers', cnTitle: '软件开发人员', soc: '15-1252', onet: '15-1252.00');
         $softwareWorkbook = $this->writeWorkbook([$software]);
         [$exitCode, $report] = $this->runImportWithManifest(
@@ -904,16 +950,26 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
         string $plannerVersion = 'career_full_upload_planner_v0.1',
         ?int $expectedDelta = null,
         int $baselineDisplayAssets = 0,
+        ?string $publicResolutionType = 'public_canonical_job',
+        string $rowStatus = 'upload_candidate',
     ): string {
-        $manifestRows = array_map(static fn (array $row, int $index): array => [
-            'row_number' => $index + 2,
-            'slug' => $row['Slug'],
-            'status' => 'upload_candidate',
-            'canonical_slug' => $row['Slug'],
-            'hold_reason' => null,
-            'import_eligible' => true,
-            'cohort_id' => 'full_upload_manifest',
-        ], $rows, array_keys($rows));
+        $manifestRows = array_map(static function (array $row, int $index) use ($publicResolutionType, $rowStatus): array {
+            $manifestRow = [
+                'row_number' => $index + 2,
+                'slug' => $row['Slug'],
+                'status' => $rowStatus,
+                'canonical_slug' => $row['Slug'],
+                'hold_reason' => null,
+                'import_eligible' => true,
+                'cohort_id' => 'full_upload_manifest',
+            ];
+
+            if ($publicResolutionType !== null) {
+                $manifestRow['public_resolution_type'] = $publicResolutionType;
+            }
+
+            return $manifestRow;
+        }, $rows, array_keys($rows));
         $candidateSlugs = array_values(array_map(
             static fn (array $row): string => strtolower((string) $row['Slug']),
             $rows,

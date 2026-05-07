@@ -1260,6 +1260,9 @@ final class CareerValidateDisplayBatch extends Command
             'row_number' => (int) ($identity['row_number'] ?? 0),
             'slug' => (string) ($identity['slug'] ?? ''),
             'status' => $status,
+            'public_resolution_type' => $importEligible
+                ? CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB
+                : CareerPublicResolutionTypeMatrix::BLOCKED_UNTIL_GOVERNANCE_APPROVAL,
             'canonical_slug' => (string) ($identity['slug'] ?? ''),
             'hold_reason' => $this->fullUploadHoldReason($status),
             'import_eligible' => $importEligible,
