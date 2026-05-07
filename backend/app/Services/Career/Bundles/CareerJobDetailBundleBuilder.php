@@ -7,6 +7,7 @@ namespace App\Services\Career\Bundles;
 use App\Domain\Career\Feedback\CareerFeedbackTimelineAuthorityService;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerLifecycleOperationalSummaryService;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
@@ -37,16 +38,6 @@ final class CareerJobDetailBundleBuilder
         'software-developers',
     ];
 
-    private const PUBLIC_CANONICAL_PLAN_STATUSES = [
-        'already_imported_validated' => true,
-        'upload_candidate' => true,
-    ];
-
-    /**
-     * @var array<string, array{rows: array<string, string>, mtime: int}>
-     */
-    private static array $publicResolutionPlanCache = [];
-
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
@@ -54,6 +45,7 @@ final class CareerJobDetailBundleBuilder
         private readonly CareerLifecycleOperationalSummaryService $lifecycleOperationalSummaryService,
         private readonly CareerConversionClosureBuilder $conversionClosureBuilder,
         private readonly CareerJobDisplaySurfaceBuilder $displaySurfaceBuilder,
+        private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
     ) {}
 
     public function buildBySlug(string $slug): ?CareerJobDetailBundle
@@ -63,8 +55,7 @@ final class CareerJobDetailBundleBuilder
             return null;
         }
 
-        $publicResolutionEligible = $this->publicResolutionAllowsJobDetail($normalizedSlug);
-        if ($publicResolutionEligible === false) {
+        if (! $this->runtimePublishProjection->detailRouteEnabled($normalizedSlug)) {
             return null;
         }
 
@@ -79,7 +70,7 @@ final class CareerJobDetailBundleBuilder
             ->first();
 
         if (! $occupation instanceof Occupation) {
-            return $this->buildFromPublishedDocxCareerJobIfAllowed($normalizedSlug, $publicResolutionEligible);
+            return $this->buildFromPublishedDocxCareerJob($normalizedSlug);
         }
 
         if ($occupation->crosswalk_mode === self::DIRECTORY_DRAFT_CROSSWALK_MODE) {
@@ -114,7 +105,7 @@ final class CareerJobDetailBundleBuilder
                 return $displayAssetBackedBundle;
             }
 
-            return $this->buildFromPublishedDocxCareerJobIfAllowed($normalizedSlug, $publicResolutionEligible);
+            return $this->buildFromPublishedDocxCareerJob($normalizedSlug);
         }
 
         $payload = is_array($snapshot->snapshot_payload) ? $snapshot->snapshot_payload : [];
@@ -276,15 +267,6 @@ final class CareerJobDetailBundleBuilder
             ],
             conversionClosure: $conversionClosure,
         );
-    }
-
-    private function buildFromPublishedDocxCareerJobIfAllowed(string $slug, ?bool $publicResolutionEligible): ?CareerJobDetailBundle
-    {
-        if ($publicResolutionEligible !== true) {
-            return null;
-        }
-
-        return $this->buildFromPublishedDocxCareerJob($slug);
     }
 
     private function buildDisplayAssetBackedBundle(Occupation $occupation, string $requestedSlug): ?CareerJobDetailBundle
@@ -716,43 +698,6 @@ final class CareerJobDetailBundleBuilder
         return $job;
     }
 
-    private function publicResolutionAllowsJobDetail(string $slug): ?bool
-    {
-        $normalizedSlug = strtolower(trim($slug));
-        if ($normalizedSlug === '' || in_array($normalizedSlug, self::DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS, true)) {
-            return false;
-        }
-
-        $planPath = $this->configuredPublicResolutionPlanPath();
-        if ($planPath === null) {
-            return null;
-        }
-
-        $planRows = $this->publicResolutionPlanRows($planPath);
-        if ($planRows === null) {
-            return false;
-        }
-
-        $status = $planRows[$normalizedSlug] ?? null;
-        if ($status === null) {
-            return false;
-        }
-
-        return isset(self::PUBLIC_CANONICAL_PLAN_STATUSES[$status]);
-    }
-
-    private function configuredPublicResolutionPlanPath(): ?string
-    {
-        $configuredPath = config('fap.career.public_resolution_plan_path');
-        if (! is_string($configuredPath)) {
-            return null;
-        }
-
-        $path = trim($configuredPath);
-
-        return $path === '' ? null : $path;
-    }
-
     private function normalizeNullableString(mixed $value): ?string
     {
         if (! is_scalar($value)) {
@@ -762,61 +707,6 @@ final class CareerJobDetailBundleBuilder
         $normalized = trim((string) $value);
 
         return $normalized === '' ? null : $normalized;
-    }
-
-    /**
-     * @return array<string, string>|null
-     */
-    private function publicResolutionPlanRows(string $path): ?array
-    {
-        if (! is_file($path) || is_link($path)) {
-            return null;
-        }
-
-        $realPath = realpath($path);
-        if (! is_string($realPath) || $realPath === '' || ! is_file($realPath) || is_link($realPath)) {
-            return null;
-        }
-
-        $mtime = filemtime($realPath);
-        if (! is_int($mtime)) {
-            return null;
-        }
-
-        $cacheKey = $realPath;
-        $cached = self::$publicResolutionPlanCache[$cacheKey] ?? null;
-        if (is_array($cached) && ($cached['mtime'] ?? null) === $mtime) {
-            return $cached['rows'];
-        }
-
-        $payload = json_decode((string) file_get_contents($realPath), true);
-        if (! is_array($payload) || ! is_array($payload['rows'] ?? null)) {
-            return null;
-        }
-
-        $rows = [];
-        foreach ($payload['rows'] as $row) {
-            if (! is_array($row)) {
-                continue;
-            }
-
-            $slug = $this->normalizeNullableString($row['slug'] ?? null)
-                ?? $this->normalizeNullableString($row['canonical_slug'] ?? null);
-            $status = $this->normalizeNullableString($row['status'] ?? null);
-
-            if ($slug === null || $status === null) {
-                continue;
-            }
-
-            $rows[strtolower($slug)] = $status;
-        }
-
-        self::$publicResolutionPlanCache[$cacheKey] = [
-            'rows' => $rows,
-            'mtime' => $mtime,
-        ];
-
-        return $rows;
     }
 
     /**

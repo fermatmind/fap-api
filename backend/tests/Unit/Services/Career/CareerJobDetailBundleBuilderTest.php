@@ -4,17 +4,29 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerFoundationFixture;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerJobDetailBundleBuilderTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture,
+        );
+    }
 
     public function test_it_builds_an_explicit_job_detail_bundle_from_authority_rows(): void
     {
@@ -146,5 +158,21 @@ final class CareerJobDetailBundleBuilderTest extends TestCase
             $compileRun->id,
             data_get($bundle?->toArray(), 'provenance_meta.compile_run_id')
         );
+    }
+
+    public function test_it_returns_null_when_runtime_projection_disables_detail_route(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(detailRouteEnabled: [
+                'backend-architect' => false,
+            ]),
+        );
+
+        CareerFoundationFixture::seedHighTrustCompleteChain();
+
+        $bundle = app(CareerJobDetailBundleBuilder::class)->buildBySlug('backend-architect');
+
+        $this->assertNull($bundle);
     }
 }

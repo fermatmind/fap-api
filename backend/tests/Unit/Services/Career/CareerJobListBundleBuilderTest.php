@@ -4,17 +4,29 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Services\Career\Bundles\CareerJobListBundleBuilder;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerFoundationFixture;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerJobListBundleBuilderTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture,
+        );
+    }
 
     public function test_it_returns_only_first_wave_indexable_jobs_by_default(): void
     {
@@ -74,6 +86,24 @@ final class CareerJobListBundleBuilderTest extends TestCase
         $this->compileJobChain($chain, now()->subMinute());
 
         $items = app(CareerJobListBundleBuilder::class)->build();
+
+        $this->assertSame([], $items);
+    }
+
+    public function test_it_excludes_dataset_rows_when_runtime_projection_marks_them_not_visible(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(datasetVisible: [
+                'backend-architect-hidden' => false,
+            ]),
+        );
+
+        $this->compileJobChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-hidden'])
+        );
+
+        $items = app(CareerJobListBundleBuilder::class)->build(includeNonIndexable: true);
 
         $this->assertSame([], $items);
     }

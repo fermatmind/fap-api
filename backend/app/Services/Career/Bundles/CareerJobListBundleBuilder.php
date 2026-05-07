@@ -6,6 +6,7 @@ namespace App\Services\Career\Bundles;
 
 use App\Domain\Career\Import\RunStatus;
 use App\Domain\Career\IndexStateValue;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\DTO\Career\CareerJobListItemBundle;
 use App\Models\CareerCompileRun;
 use App\Models\CareerJob;
@@ -31,6 +32,7 @@ final class CareerJobListBundleBuilder
 
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
+        private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
     ) {}
 
     /**
@@ -99,6 +101,10 @@ final class CareerJobListBundleBuilder
                     return null;
                 }
 
+                if (! $this->runtimePublishProjection->datasetVisible((string) $occupation->canonical_slug)) {
+                    return null;
+                }
+
                 $indexState = $snapshot->indexState;
                 if (! $includeNonIndexable && ! (bool) ($indexState?->index_eligible ?? false)) {
                     return null;
@@ -160,7 +166,9 @@ final class CareerJobListBundleBuilder
             ->orderBy('slug')
             ->limit(self::MAX_PUBLIC_DOCX_ROWS)
             ->get()
-            ->filter(fn (CareerJob $job): bool => ! isset($excluded[(string) $job->slug]) && $this->isDocxCareerJob($job))
+            ->filter(fn (CareerJob $job): bool => ! isset($excluded[(string) $job->slug])
+                && $this->isDocxCareerJob($job)
+                && $this->runtimePublishProjection->datasetVisible((string) $job->slug))
             ->values()
             ->map(fn (CareerJob $job): CareerJobListItemBundle => $this->buildDocxCareerJobItem($job))
             ->all();
@@ -180,7 +188,8 @@ final class CareerJobListBundleBuilder
             ->orderBy('canonical_slug')
             ->limit(self::MAX_PUBLIC_DIRECTORY_DRAFT_ROWS)
             ->get()
-            ->filter(static fn (Occupation $occupation): bool => ! isset($excluded[(string) $occupation->canonical_slug]))
+            ->filter(fn (Occupation $occupation): bool => ! isset($excluded[(string) $occupation->canonical_slug])
+                && $this->runtimePublishProjection->datasetVisible((string) $occupation->canonical_slug))
             ->values()
             ->map(fn (Occupation $occupation): CareerJobListItemBundle => $this->buildDirectoryDraftCareerJobItem($occupation))
             ->all();

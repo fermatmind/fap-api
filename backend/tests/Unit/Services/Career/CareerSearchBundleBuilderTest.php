@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\OccupationAlias;
@@ -12,11 +13,22 @@ use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\Fixtures\Career\CareerFoundationFixture;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerSearchBundleBuilderTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture,
+        );
+    }
 
     public function test_it_supports_canonical_slug_exact_and_prefix_matching(): void
     {
@@ -251,6 +263,23 @@ final class CareerSearchBundleBuilderTest extends TestCase
         ]);
 
         $this->assertSame([], app(CareerSearchBundleBuilder::class)->build('direct match architect'));
+    }
+
+    public function test_it_excludes_search_rows_when_runtime_projection_marks_them_not_visible(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(searchVisible: [
+                'hidden-search-architect' => false,
+            ]),
+        );
+
+        $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
+            'slug' => 'hidden-search-architect',
+            'crosswalk_mode' => 'exact',
+        ]));
+
+        $this->assertSame([], app(CareerSearchBundleBuilder::class)->build('hidden-search-architect'));
     }
 
     /**

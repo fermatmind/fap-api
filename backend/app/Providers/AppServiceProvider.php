@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Contracts\Cms\ArticleMachineTranslationProvider;
 use App\Contracts\Cms\CmsMachineTranslationProvider;
 use App\Contracts\Security\PiiEnvelopeAdapter;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Livewire\Filament\Ops\Livewire\CurrentOrgSwitcher;
 use App\Livewire\Filament\Ops\Livewire\LocaleSwitcher;
 use App\Models\AdminApproval;
@@ -90,6 +92,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(CmsMachineTranslationProviderRegistry::class);
         $this->app->bind(CmsMachineTranslationProvider::class, static fn ($app): CmsMachineTranslationProvider => $app->make(DisabledCmsMachineTranslationProvider::class));
         $this->app->bind(BigFiveResultPageV2TransformerContract::class, BigFiveResultPageV2CompatibilityTransformer::class);
+        $this->app->singleton(CareerRuntimePublishProjectionVisibility::class, CareerRuntimePublishProjectionLookup::class);
 
         $this->app->singleton(PiiEnvelopeAdapter::class, function ($app) {
             $adapterRaw = strtolower(trim((string) config('services.pii.adapter', 'local')));

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Career\Bundles;
 
 use App\Domain\Career\IndexStateValue;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Domain\Career\Publish\FirstWaveReadinessSummaryService;
 use App\DTO\Career\CareerFamilyHubBundle;
 use App\Models\Occupation;
@@ -22,13 +23,19 @@ final class CareerFamilyHubBundleBuilder
         private readonly FirstWaveReadinessSummaryService $readinessSummaryService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerStructuredDataBuilder $structuredDataBuilder,
+        private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
     ) {}
 
     public function buildBySlug(string $slug): ?CareerFamilyHubBundle
     {
+        $normalizedSlug = trim($slug);
+        if ($normalizedSlug === '' || ! $this->runtimePublishProjection->familyHubLive($normalizedSlug)) {
+            return null;
+        }
+
         $family = OccupationFamily::query()
             ->with('occupations')
-            ->where('canonical_slug', trim($slug))
+            ->where('canonical_slug', $normalizedSlug)
             ->first();
 
         if (! $family instanceof OccupationFamily) {
