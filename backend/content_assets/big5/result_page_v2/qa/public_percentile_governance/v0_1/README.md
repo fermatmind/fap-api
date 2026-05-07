@@ -1,0 +1,1 @@
+This package closes the Dynamic Norm Engine train with a public percentile governance report. It confirms that snapshot, recomputation, segmented aggregation, drift monitoring, and internal percentile foundations exist while public percentile display remains NO-GO pending future statistical and governance approval.

@@ -1,0 +1,57 @@
+{
+  "schema_version": "big5_v2_public_percentile_governance_report_v0_1",
+  "mode": "public_percentile_governance_report",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "dynamic_norm_engine_attached": false,
+  "public_percentile_display_enabled": false,
+  "readiness": {
+    "immutable_norm_snapshots": "GO",
+    "norm_recomputation": "GO",
+    "segmented_aggregation": "GO",
+    "drift_monitoring": "GO",
+    "internal_percentile_runtime": "GO",
+    "public_percentile_display": "NO-GO"
+  },
+  "statistical_trustworthiness": {
+    "status": "NO-GO",
+    "reason": "Representative sample review, live drift history, and public interpretation governance are not yet approved.",
+    "minimum_sample_thresholds": {
+      "global_norm_minimum_n": 1000,
+      "locale_region_segment_minimum_n": 200,
+      "occupation_segment_minimum_n": 500,
+      "small_cell_suppression_below_n": 50
+    }
+  },
+  "sparse_segment_policy": {
+    "small_cell_suppression_required": true,
+    "sparse_segment_rejection_required": true,
+    "fallback_to_fake_percentile_allowed": false,
+    "fallback_to_public_prose_allowed": false
+  },
+  "public_percentile_go_no_go": {
+    "decision": "NO-GO",
+    "future_approval_required": true,
+    "required_before_go": [
+      "representative_sample_review",
+      "minimum_threshold_evidence",
+      "drift_monitoring_history",
+      "public_copy_review",
+      "release_approval",
+      "explicit_public_display_gate"
+    ]
+  },
+  "relationships": {
+    "production_rollout": "unaffected",
+    "cms": "unaffected",
+    "dynamic_norm_engine": "internal_foundation_only"
+  },
+  "hard_blockers": [
+    "public_percentile_display_not_approved",
+    "statistical_trust_review_missing",
+    "public_interpretation_copy_not_approved",
+    "explicit_public_display_gate_missing"
+  ]
+}
