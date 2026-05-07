@@ -1,0 +1,61 @@
+{
+  "schema_version": "big5_v2_dependency_graph.v1",
+  "graph_name": "Big Five V2 runtime governance dependency graph",
+  "source_head": "0814af350c5119994ff65fe7e965e68bc3decb35",
+  "nodes": [
+    {"id": "content_assets", "label": "Content assets", "status": "GO"},
+    {"id": "route_matrix", "label": "O1..O5 route matrix", "status": "GO"},
+    {"id": "selector", "label": "Route-driven selector", "status": "GO"},
+    {"id": "composer", "label": "Payload composer", "status": "GO"},
+    {"id": "runtime_wrapper", "label": "Runtime wrapper", "status": "GO"},
+    {"id": "surface_adapters", "label": "Desktop/mobile/PDF/share/history/compare adapters", "status": "GO"},
+    {"id": "release_snapshots", "label": "Git-backed release snapshots", "status": "GO"},
+    {"id": "import_gate", "label": "Production import gate", "status": "GO"},
+    {"id": "runtime_gate", "label": "Production runtime gate", "status": "GO"},
+    {"id": "all_surface_gate", "label": "All-surface release gate", "status": "GO"},
+    {"id": "production_governance", "label": "Production governance", "status": "GO"},
+    {"id": "rollout_governance", "label": "Rollout governance", "status": "GO_CONTROLLED"},
+    {"id": "norm_foundation", "label": "Dynamic norms foundation", "status": "GO"},
+    {"id": "dynamic_norm_engine_internal", "label": "Internal dynamic norm engine", "status": "GO_INTERNAL"},
+    {"id": "public_percentile_display", "label": "Public percentile display", "status": "NO_GO"},
+    {"id": "cms_editorial_governance", "label": "CMS/editorial governance", "status": "GO"},
+    {"id": "production_rollout", "label": "Production rollout", "status": "CONTROLLED_NO_GO_BY_DEFAULT"}
+  ],
+  "edges": [
+    ["content_assets", "route_matrix"],
+    ["route_matrix", "selector"],
+    ["selector", "composer"],
+    ["composer", "runtime_wrapper"],
+    ["runtime_wrapper", "surface_adapters"],
+    ["content_assets", "release_snapshots"],
+    ["release_snapshots", "import_gate"],
+    ["import_gate", "runtime_gate"],
+    ["surface_adapters", "all_surface_gate"],
+    ["runtime_gate", "production_governance"],
+    ["all_surface_gate", "production_governance"],
+    ["production_governance", "rollout_governance"],
+    ["rollout_governance", "production_rollout"],
+    ["norm_foundation", "dynamic_norm_engine_internal"],
+    ["dynamic_norm_engine_internal", "public_percentile_display"],
+    ["cms_editorial_governance", "release_snapshots"],
+    ["cms_editorial_governance", "production_governance"]
+  ],
+  "source_of_truth": {
+    "runtime_source_of_truth": "Git-backed release snapshots plus import gate plus runtime gate",
+    "cms_runtime_owner": false,
+    "cms_role": "editorial governance layer only"
+  },
+  "blocked_nodes": [
+    "public_percentile_display",
+    "production_rollout_full_scale"
+  ],
+  "must_not_bypass": [
+    "release_snapshots",
+    "import_gate",
+    "runtime_gate",
+    "all_surface_gate",
+    "manual_approval",
+    "drift_monitoring",
+    "small_cell_suppression"
+  ]
+}
