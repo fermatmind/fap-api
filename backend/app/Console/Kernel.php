@@ -22,6 +22,7 @@ use App\Console\Commands\CareerExportFirstWaveReleaseArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutBundleArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutWavePlanArtifact;
 use App\Console\Commands\CareerExportFullReleaseLedger;
+use App\Console\Commands\CareerExportRuntimePublishProjection;
 use App\Console\Commands\CareerExportLaunchGovernanceClosure;
 use App\Console\Commands\CareerExportOccupationDirectoryReviewQueues;
 use App\Console\Commands\CareerExportStrongIndexEligibility;
@@ -45,6 +46,7 @@ use App\Console\Commands\CareerValidateDisplayBatch;
 use App\Console\Commands\CareerValidateOccupationDirectoryReviewQueues;
 use App\Console\Commands\CareerValidatePublicNonindexReference;
 use App\Console\Commands\CareerValidateReleaseGate;
+use App\Console\Commands\CareerValidateRuntimePublishProjection;
 use App\Console\Commands\CareerValidateSitemapLlmsPublicTypeMatrix;
 use App\Console\Commands\CareerWarmPublicAuthorityCache;
 use App\Console\Commands\CiScaleImpact;
@@ -195,6 +197,7 @@ class Kernel extends ConsoleKernel
         CareerValidateDisplayAssetLineage::class,
         CareerValidatePublicNonindexReference::class,
         CareerValidateReleaseGate::class,
+        CareerValidateRuntimePublishProjection::class,
         CareerValidateSitemapLlmsPublicTypeMatrix::class,
         CareerFullDisplayWorkbookValidator::class,
         CareerCompileAuthorityWave::class,
@@ -202,6 +205,7 @@ class Kernel extends ConsoleKernel
         CareerCrosswalkOps::class,
         CareerExportCrosswalkBacklogConvergence::class,
         CareerExportFullReleaseLedger::class,
+        CareerExportRuntimePublishProjection::class,
         CareerExportLaunchGovernanceClosure::class,
         CareerExportOccupationDirectoryReviewQueues::class,
         CareerExportStrongIndexEligibility::class,

@@ -218,6 +218,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_runtime_publish_projection_owner_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionDTO.php',
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionExporter.php',
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionService.php',
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_commerce_payment_action_changes(): void
     {
         $changed = [
@@ -755,6 +767,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerRuntimePublishProjectionFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsCareerPublicDistributionOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
@@ -919,6 +935,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php',
             'backend/app/Services/SEO/SitemapGenerator.php',
             'backend/app/Services/SEO/SitemapCache.php',
+        ], true);
+    }
+
+    private function isCareerRuntimePublishProjectionFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionDTO.php',
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionExporter.php',
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionService.php',
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
         ], true);
     }
 
