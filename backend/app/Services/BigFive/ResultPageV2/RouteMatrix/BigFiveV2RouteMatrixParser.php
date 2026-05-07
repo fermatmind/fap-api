@@ -82,6 +82,67 @@ final class BigFiveV2RouteMatrixParser
         return new BigFiveV2RouteMatrixParseResult($matrixPath, $rowsByCombinationKey, $rowCountsByShard, array_values(array_unique($errors)));
     }
 
+    public function lookupRow(string $combinationKey, ?string $matrixPath = null): ?BigFiveV2RouteMatrixRow
+    {
+        $combinationKey = strtoupper(trim($combinationKey));
+        if (! $this->isValidCombinationKey($combinationKey)) {
+            return null;
+        }
+
+        $matrixPath = $matrixPath ?? base_path(self::RELATIVE_PATH);
+        if (! is_dir($matrixPath)) {
+            return null;
+        }
+
+        $shardKey = substr($combinationKey, 0, 2);
+        if (! in_array($shardKey, self::EXPECTED_SHARDS, true)) {
+            return null;
+        }
+
+        $file = $matrixPath.DIRECTORY_SEPARATOR."big5_3125_route_matrix_{$shardKey}_v0_1_1.jsonl";
+        if (! is_file($file)) {
+            return null;
+        }
+
+        $handle = fopen($file, 'rb');
+        if ($handle === false) {
+            return null;
+        }
+
+        try {
+            while (($line = fgets($handle)) !== false) {
+                $decoded = json_decode($line, true);
+                if (! is_array($decoded)) {
+                    continue;
+                }
+
+                if ((string) ($decoded['combination_key'] ?? '') !== $combinationKey) {
+                    continue;
+                }
+
+                if (! str_starts_with($combinationKey, $shardKey.'_')) {
+                    return null;
+                }
+
+                if ($this->validateRowDocument($decoded, $combinationKey) !== []) {
+                    return null;
+                }
+
+                return new BigFiveV2RouteMatrixRow(
+                    combinationKey: $combinationKey,
+                    profileFamily: (string) ($decoded['profile_family'] ?? ''),
+                    profileKey: (string) ($decoded['nearest_canonical_profile_key'] ?? ''),
+                    interpretationScope: (string) ($decoded['interpretation_scope'] ?? ''),
+                    data: $decoded,
+                );
+            }
+        } finally {
+            fclose($handle);
+        }
+
+        return null;
+    }
+
     /**
      * @return list<BigFiveV2RouteMatrixRow>
      */

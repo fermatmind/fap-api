@@ -38,6 +38,26 @@ final class BigFiveResultPageV2RouteMatrixParserTest extends TestCase
         $this->assertTrue($row->data['profile_label_public_allowed'] ?? null);
     }
 
+    public function test_lookup_row_returns_single_route_without_full_matrix_parse(): void
+    {
+        $row = app(BigFiveV2RouteMatrixParser::class)->lookupRow(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);
+
+        $this->assertNotNull($row);
+        $this->assertSame('O3_C2_E2_A3_N4', $row->combinationKey);
+        $this->assertSame('sensitive_independent_thinker', $row->profileKey);
+        $this->assertSame('high_tension_or_mixed', $row->interpretationScope);
+        $this->assertSame('敏锐的独立思考者', $row->data['nearest_canonical_profile_label_zh'] ?? null);
+    }
+
+    public function test_lookup_row_fails_closed_for_missing_or_invalid_keys(): void
+    {
+        $parser = app(BigFiveV2RouteMatrixParser::class);
+
+        $this->assertNull($parser->lookupRow('O9_C9_E9_A9_N9'));
+        $this->assertNull($parser->lookupRow(''));
+        $this->assertNull($parser->lookupRow('O3_C2_E2_A3_N4', sys_get_temp_dir().'/missing-big5-route-matrix'));
+    }
+
     public function test_parser_validates_section_routes_staging_flags_and_no_body_copy(): void
     {
         $result = app(BigFiveV2RouteMatrixParser::class)->parse();
