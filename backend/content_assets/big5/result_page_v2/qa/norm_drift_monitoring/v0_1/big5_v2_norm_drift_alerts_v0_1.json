@@ -1,0 +1,24 @@
+{
+  "schema_version": "big5_v2_norm_drift_alerts_v0_1",
+  "mode": "norm_drift_alerts",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "dynamic_norm_engine_attached": false,
+  "public_percentile_display_enabled": false,
+  "recomputation_drift_alert_required": true,
+  "percentile_anomaly_alert_required": true,
+  "aggregation_anomaly_alert_required": true,
+  "default_thresholds": {
+    "mean_delta": 5,
+    "sd_delta": 2,
+    "percentile_delta": 15,
+    "sample_n_delta_ratio": 0.25
+  },
+  "routing": {
+    "runtime_blocking": false,
+    "public_display_blocking": true,
+    "rebuild_review_required_on_alert": true
+  }
+}

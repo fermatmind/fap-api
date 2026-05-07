@@ -1,0 +1,26 @@
+{
+  "schema_version": "big5_v2_norm_drift_monitoring_report_v0_1",
+  "mode": "norm_drift_monitoring_report",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "dynamic_norm_engine_attached": false,
+  "public_percentile_display_enabled": false,
+  "drift_detection_required": true,
+  "rebuild_evidence_required": true,
+  "recomputation_drift_alerts_required": true,
+  "percentile_anomaly_alerts_required": true,
+  "aggregation_anomaly_detection_required": true,
+  "rebuild_evidence": {
+    "baseline_snapshot_version_required": true,
+    "current_snapshot_version_required": true,
+    "baseline_output_hash_required": true,
+    "current_output_hash_required": true,
+    "alert_keys_required": true
+  },
+  "public_percentile_governance": {
+    "public_display": "NO-GO",
+    "reason": "Drift monitoring is internal evidence only. Public percentile display requires future approval, stable thresholds, and release governance."
+  }
+}
