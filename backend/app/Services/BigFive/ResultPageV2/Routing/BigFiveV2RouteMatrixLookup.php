@@ -19,11 +19,6 @@ final class BigFiveV2RouteMatrixLookup
             ? $routeInput->combinationKey
             : $routeInput;
 
-        $result = $this->parser->parse();
-        if (! $result->isValid()) {
-            return null;
-        }
-
-        return $result->row($combinationKey);
+        return $this->parser->lookupRow($combinationKey);
     }
 }
