@@ -43,6 +43,56 @@ final class CareerRuntimePublishProjectionServiceTest extends TestCase
         }
     }
 
+    public function test_it_aligns_public_canonical_runtime_surfaces_from_release_gate(): void
+    {
+        $projection = (new CareerRuntimePublishProjectionService)->buildFromLedgerArray($this->ledger([
+            [
+                'source_slug' => 'actors',
+                'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                'public_eligible' => true,
+                'indexability' => 'indexable',
+                'sitemap_eligible' => false,
+                'llms_eligible' => false,
+                'llms_full_eligible' => false,
+            ],
+            [
+                'source_slug' => 'noindex-canonical',
+                'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                'public_eligible' => true,
+                'indexability' => 'noindex',
+            ],
+        ]));
+
+        $publishedRows = array_values(array_filter(
+            $projection['items'],
+            static fn (array $item): bool => $item['slug'] === 'actors',
+        ));
+        $candidateRows = array_values(array_filter(
+            $projection['items'],
+            static fn (array $item): bool => $item['slug'] === 'noindex-canonical',
+        ));
+
+        foreach ($publishedRows as $item) {
+            $this->assertSame(CareerRuntimePublishProjectionService::STATE_PUBLISHED, $item['runtime_publish_state']);
+            $this->assertTrue($item['detail_route_enabled']);
+            $this->assertTrue($item['dataset_visible']);
+            $this->assertTrue($item['search_visible']);
+            $this->assertTrue($item['sitemap_live']);
+            $this->assertTrue($item['llms_live']);
+            $this->assertTrue($item['llms_full_live']);
+        }
+
+        foreach ($candidateRows as $item) {
+            $this->assertSame(CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE, $item['runtime_publish_state']);
+            $this->assertFalse($item['detail_route_enabled']);
+            $this->assertFalse($item['dataset_visible']);
+            $this->assertFalse($item['search_visible']);
+            $this->assertFalse($item['sitemap_live']);
+            $this->assertFalse($item['llms_live']);
+            $this->assertFalse($item['llms_full_live']);
+        }
+    }
+
     public function test_it_blocks_non_public_rows_and_hard_blocks_software_developers(): void
     {
         $projection = (new CareerRuntimePublishProjectionService)->buildFromLedgerArray($this->ledger([
