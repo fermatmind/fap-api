@@ -46,6 +46,7 @@ final class CareerJobDetailBundleBuilder
         private readonly CareerConversionClosureBuilder $conversionClosureBuilder,
         private readonly CareerJobDisplaySurfaceBuilder $displaySurfaceBuilder,
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
+        private readonly CareerLocaleIntegrityGate $localeIntegrityGate,
     ) {}
 
     public function buildBySlug(string $slug): ?CareerJobDetailBundle
@@ -122,8 +123,10 @@ final class CareerJobDetailBundleBuilder
         $warnings = $this->normalizeArray($payload['warnings'] ?? []);
         $subjectSlug = strtolower((string) $occupation->canonical_slug);
         $docxJob = $this->findPublishedDocxCareerJob($subjectSlug);
-        $canonicalTitleZh = $occupation->canonical_title_zh ?: ($docxJob?->title ? (string) $docxJob->title : null);
-        $searchH1Zh = $occupation->search_h1_zh ?: $canonicalTitleZh;
+        $canonicalTitleZh = $this->localeIntegrityGate->validZhAuthorityText($occupation->canonical_title_zh)
+            ?? $this->localeIntegrityGate->validZhAuthorityText($docxJob?->title);
+        $searchH1Zh = $this->localeIntegrityGate->validZhAuthorityText($occupation->search_h1_zh)
+            ?? $canonicalTitleZh;
         $lifecycleOperational = $this->lifecycleOperationalSummaryService->buildForSlug($subjectSlug);
         $conversionClosure = $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
 
@@ -290,13 +293,14 @@ final class CareerJobDetailBundleBuilder
         }
 
         if (
-            $this->displaySurfaceBuilder->buildForOccupation($occupation, 'zh-CN') === null
-            || $this->displaySurfaceBuilder->buildForOccupation($occupation, 'en') === null
+            $this->displaySurfaceBuilder->buildForOccupation($occupation, 'en') === null
         ) {
             return null;
         }
 
-        $canonicalTitleZh = $occupation->canonical_title_zh ?: $occupation->canonical_title_en;
+        $canonicalTitleZh = $this->localeIntegrityGate->validZhAuthorityText($occupation->canonical_title_zh);
+        $searchH1Zh = $this->localeIntegrityGate->validZhAuthorityText($occupation->search_h1_zh)
+            ?? $canonicalTitleZh;
         $scoreBundle = $this->displayAssetBackedScoreBundle();
         $warnings = [
             'red_flags' => [],
@@ -326,7 +330,7 @@ final class CareerJobDetailBundleBuilder
             titles: [
                 'canonical_en' => $occupation->canonical_title_en,
                 'canonical_zh' => $canonicalTitleZh,
-                'search_h1_zh' => $occupation->search_h1_zh ?: $canonicalTitleZh,
+                'search_h1_zh' => $searchH1Zh,
                 'short_title_en' => $occupation->canonical_title_en,
                 'short_title_zh' => $canonicalTitleZh,
             ],

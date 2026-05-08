@@ -7,12 +7,14 @@ namespace App\Services\Cms;
 use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
 use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
+use App\Services\Career\Bundles\CareerLocaleIntegrityGate;
 use App\Support\CanonicalFrontendUrl;
 
 final class CareerJobSeoService
 {
     public function __construct(
         private readonly CareerJobDetailBundleBuilder $careerJobDetailBundleBuilder,
+        private readonly CareerLocaleIntegrityGate $localeIntegrityGate,
     ) {}
 
     /**
@@ -136,6 +138,10 @@ final class CareerJobSeoService
         $isFrontendAvailable = $frontendDetailAvailable
             ?? $this->isFrontendDetailAvailable($job, $locale);
         if (! $isFrontendAvailable) {
+            return false;
+        }
+
+        if (! $this->localeIntegrityGate->careerJobReadyForPublicLocale($job, $locale)) {
             return false;
         }
 

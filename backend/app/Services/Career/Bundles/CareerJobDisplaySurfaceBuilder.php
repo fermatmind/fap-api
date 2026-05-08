@@ -55,6 +55,10 @@ final class CareerJobDisplaySurfaceBuilder
         'evidence_basis',
     ];
 
+    public function __construct(
+        private readonly CareerLocaleIntegrityGate $localeIntegrityGate,
+    ) {}
+
     /**
      * @return array<string, mixed>|null
      */
@@ -109,6 +113,10 @@ final class CareerJobDisplaySurfaceBuilder
         $localizedPages = $this->localizedPages($asset);
         $pageContent = $localizedPages[$normalizedLocale] ?? null;
         if (! is_array($pageContent)) {
+            return null;
+        }
+
+        if (! $this->localeIntegrityGate->displaySurfaceReadyForLocale($asset, $pageContent, $locale)) {
             return null;
         }
 

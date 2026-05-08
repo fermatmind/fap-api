@@ -398,6 +398,7 @@ final class CareerJobPublicApiTest extends TestCase
             'title' => '会计师和审计师',
             'subtitle' => 'Accountants and Auditors',
             'excerpt' => '了解会计师和审计师的职责、薪资和职业发展。',
+            'body_md' => '# 会计师和审计师',
             'status' => CareerJob::STATUS_PUBLISHED,
             'is_public' => true,
             'is_indexable' => true,
@@ -428,6 +429,43 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('answer_surface_v1.indexability_state', 'indexable');
 
         $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
+    }
+
+    public function test_zh_seo_endpoint_forces_noindex_when_docx_core_title_is_english(): void
+    {
+        $job = $this->createJob([
+            'job_code' => 'data-scientists',
+            'slug' => 'data-scientists',
+            'locale' => 'zh-CN',
+            'title' => 'Data Scientists',
+            'subtitle' => 'Data Scientists',
+            'excerpt' => 'Build models from data.',
+            'body_md' => '# Data Scientists',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'market_demand_json' => [
+                'source_refs' => [
+                    ['url' => 'https://www.bls.gov/ooh/math/data-scientists.htm'],
+                ],
+            ],
+        ]);
+        $this->createSeoMeta($job, [
+            'canonical_url' => 'https://www.fermatmind.com/zh/career/jobs/data-scientists',
+            'robots' => 'index,follow',
+            'jsonld_overrides_json' => [
+                'source_docx' => 'data-scientists.docx',
+            ],
+        ]);
+
+        $this->getJson('/api/v0.5/career-jobs/data-scientists/seo?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('meta.canonical', 'https://fermatmind.com/zh/career/jobs/data-scientists')
+            ->assertJsonPath('meta.robots', 'noindex,follow')
+            ->assertJsonPath('seo_surface_v1.indexability_state', 'noindex')
+            ->assertJsonPath('seo_surface_v1.sitemap_state', 'excluded')
+            ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'withhold');
     }
 
     public function test_imported_local_baseline_publishes_family_jobs_for_en_and_zh_cn(): void
