@@ -2,12 +2,16 @@
 
 namespace Tests\Feature\SEO;
 
+use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 class SitemapSourceApiTest extends TestCase
@@ -26,6 +30,24 @@ class SitemapSourceApiTest extends TestCase
             $this->createOccupation('software-developers', 'Software Developers'),
             ['updated_at' => Carbon::create(2026, 1, 31, 12, 56, 0)]
         );
+        $this->writeProjectionArtifact([
+            $this->projectionItem('agricultural-inspectors', 'en'),
+            $this->projectionItem('agricultural-inspectors', 'zh'),
+            $this->projectionItem(
+                'software-developers',
+                'en',
+                CareerRuntimePublishProjectionService::STATE_QUARANTINED,
+                [
+                    'public_resolution_type' => CareerPublicResolutionTypeMatrix::KEEP_NON_PUBLIC_WITH_POLICY,
+                    'detail_route_enabled' => false,
+                    'sitemap_live' => false,
+                    'robots_indexable' => false,
+                    'release_gate_pass' => false,
+                    'canonical_self' => false,
+                    'canonical_url' => null,
+                ],
+            ),
+        ]);
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
@@ -43,7 +65,7 @@ class SitemapSourceApiTest extends TestCase
         $this->assertSame(count($locs), $response->json('count'));
     }
 
-    public function test_sitemap_source_only_exports_display_asset_backed_career_job_detail_urls(): void
+    public function test_sitemap_source_only_exports_runtime_published_career_job_detail_urls(): void
     {
         config(['app.frontend_url' => 'https://www.fermatmind.com']);
 
@@ -56,6 +78,22 @@ class SitemapSourceApiTest extends TestCase
             $this->createOccupation('data-scientists', 'Data Scientists'),
             ['updated_at' => Carbon::create(2026, 1, 31, 12, 57, 0)]
         );
+        $this->writeProjectionArtifact([
+            $this->projectionItem('data-scientists', 'en'),
+            $this->projectionItem(
+                'data-scientists',
+                'zh',
+                CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
+                [
+                    'detail_route_enabled' => false,
+                    'dataset_visible' => false,
+                    'search_visible' => false,
+                    'sitemap_live' => false,
+                    'llms_live' => false,
+                    'llms_full_live' => false,
+                ],
+            ),
+        ]);
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
@@ -63,13 +101,61 @@ class SitemapSourceApiTest extends TestCase
         $locs = collect($response->json('items'))->pluck('loc')->all();
 
         $this->assertContains('https://fermatmind.com/en/career/jobs/data-scientists', $locs);
-        $this->assertContains('https://fermatmind.com/zh/career/jobs/data-scientists', $locs);
+        $this->assertNotContains('https://fermatmind.com/zh/career/jobs/data-scientists', $locs);
         $this->assertNotContains('https://www.fermatmind.com/en/career/jobs/data-scientists', $locs);
         $this->assertNotContains('https://www.fermatmind.com/zh/career/jobs/data-scientists', $locs);
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/backend-engineer', $locs);
         $this->assertNotContains('https://fermatmind.com/zh/career/jobs/backend-engineer', $locs);
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/software-engineer', $locs);
         $this->assertNotContains('https://fermatmind.com/zh/career/jobs/software-engineer', $locs);
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     */
+    private function writeProjectionArtifact(array $items): void
+    {
+        $timestamp = str_replace('.', '', sprintf('%.6F', microtime(true)));
+        $directory = storage_path('app/private/career_runtime_publish_projection/zzzzzzzz-sitemap-source-test-'.$timestamp.'-'.strtolower(str()->random(8)));
+
+        File::ensureDirectoryExists($directory);
+        File::put($directory.DIRECTORY_SEPARATOR.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME, json_encode([
+            'projection_kind' => CareerRuntimePublishProjectionService::PROJECTION_KIND,
+            'projection_version' => CareerRuntimePublishProjectionService::PROJECTION_VERSION,
+            'source_authority' => 'CareerFullReleaseLedger',
+            'items' => $items,
+        ], JSON_THROW_ON_ERROR));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     * @return array<string, mixed>
+     */
+    private function projectionItem(
+        string $slug,
+        string $locale,
+        string $state = CareerRuntimePublishProjectionService::STATE_PUBLISHED,
+        array $overrides = [],
+    ): array {
+        $published = $state === CareerRuntimePublishProjectionService::STATE_PUBLISHED;
+
+        return array_merge([
+            'slug' => $slug,
+            'locale' => $locale,
+            'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+            'runtime_publish_state' => $state,
+            'detail_route_enabled' => $published,
+            'dataset_visible' => $published,
+            'search_visible' => $published,
+            'sitemap_live' => $published,
+            'llms_live' => $published,
+            'llms_full_live' => $published,
+            'canonical_url' => $published ? 'https://fermatmind.com/'.$locale.'/career/jobs/'.$slug : null,
+            'canonical_self' => $published,
+            'robots_indexable' => $published,
+            'release_gate_pass' => $published,
+            'blockers' => [],
+        ], $overrides);
     }
 
     private function createOccupation(string $slug, string $title): Occupation
