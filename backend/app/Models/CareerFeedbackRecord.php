@@ -32,4 +32,3 @@ class CareerFeedbackRecord extends CareerImmutableFoundationModel
         return $this->belongsTo(RecommendationSnapshot::class, 'recommendation_snapshot_id', 'id');
     }
 }
-

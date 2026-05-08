@@ -25,7 +25,7 @@ final class NormSnapshotTest extends TestCase
         $this->observation('c', 'C', false, ['O' => 99.0, 'C' => 99.0]);
         $this->observation('d', 'A', true, ['O' => 88.0, 'C' => 88.0]);
 
-        $builder = new BigFiveNormSnapshotBuilder();
+        $builder = new BigFiveNormSnapshotBuilder;
         $first = $builder->build(['snapshot_version' => 'big5_norm_snapshot_2026_05_07_v1'])->toArray();
         $second = $builder->build(['snapshot_version' => 'big5_norm_snapshot_2026_05_07_v1'])->toArray();
 
@@ -45,7 +45,7 @@ final class NormSnapshotTest extends TestCase
     {
         $this->observation('a', 'A', false, ['O' => 10.0]);
 
-        $snapshot = (new BigFiveNormSnapshotBuilder())->build([
+        $snapshot = (new BigFiveNormSnapshotBuilder)->build([
             'snapshot_version' => 'big5_norm_snapshot_2026_05_07_v2',
             'parent_snapshot_version' => 'big5_norm_snapshot_2026_05_01_v1',
             'rollback_target_snapshot_version' => 'big5_norm_snapshot_2026_05_01_v1',

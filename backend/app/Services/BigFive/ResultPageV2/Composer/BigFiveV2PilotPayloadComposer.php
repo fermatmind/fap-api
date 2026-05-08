@@ -91,7 +91,7 @@ final class BigFiveV2PilotPayloadComposer
     ];
 
     public function __construct(
-        private readonly BigFiveV2ContentAssetLookup $contentAssetLookup = new BigFiveV2ContentAssetLookup(),
+        private readonly BigFiveV2ContentAssetLookup $contentAssetLookup = new BigFiveV2ContentAssetLookup,
     ) {}
 
     /**

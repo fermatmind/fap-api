@@ -61,11 +61,11 @@ final class BigFiveNormObservation extends Model
 
     protected static function booted(): void
     {
-        static::updating(static function (): void {
+        self::updating(static function (): void {
             throw new LogicException('Big Five norm observations are append-only and cannot be updated.');
         });
 
-        static::deleting(static function (): void {
+        self::deleting(static function (): void {
             throw new LogicException('Big Five norm observations are append-only and cannot be deleted.');
         });
     }

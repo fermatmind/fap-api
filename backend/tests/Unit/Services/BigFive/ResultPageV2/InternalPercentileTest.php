@@ -23,8 +23,8 @@ final class InternalPercentileTest extends TestCase
         $this->observation('obs-c', ['O' => 30.0]);
 
         $snapshot = $this->snapshot();
-        $recompute = (new BigFiveNormRecomputeEngine())->recompute($snapshot)->toArray();
-        $decision = (new BigFiveNormInternalPercentileResolver())->resolve($snapshot, $recompute, [
+        $recompute = (new BigFiveNormRecomputeEngine)->recompute($snapshot)->toArray();
+        $decision = (new BigFiveNormInternalPercentileResolver)->resolve($snapshot, $recompute, [
             'observation_id' => $target->id,
             'segment' => [
                 'cell_count' => 3,
@@ -48,8 +48,8 @@ final class InternalPercentileTest extends TestCase
     {
         $target = $this->observation('obs-a', ['O' => 10.0]);
         $snapshot = $this->snapshot();
-        $recompute = (new BigFiveNormRecomputeEngine())->recompute($snapshot)->toArray();
-        $resolver = new BigFiveNormInternalPercentileResolver();
+        $recompute = (new BigFiveNormRecomputeEngine)->recompute($snapshot)->toArray();
+        $resolver = new BigFiveNormInternalPercentileResolver;
 
         $this->assertSame('stale_snapshot', $resolver->resolve($snapshot, $recompute, [
             'observation_id' => $target->id,
@@ -71,11 +71,11 @@ final class InternalPercentileTest extends TestCase
     {
         $target = $this->observation('obs-a', ['O' => 10.0]);
         $snapshot = $this->snapshot();
-        $recompute = (new BigFiveNormRecomputeEngine())->recompute($snapshot)->toArray();
+        $recompute = (new BigFiveNormRecomputeEngine)->recompute($snapshot)->toArray();
         $snapshotArray = $snapshot->toArray();
         unset($snapshotArray['lineage']);
 
-        $resolver = new BigFiveNormInternalPercentileResolver();
+        $resolver = new BigFiveNormInternalPercentileResolver;
         $this->assertSame('missing_snapshot_lineage', $resolver->resolve(new BigFiveNormSnapshot($snapshotArray), $recompute, [
             'observation_id' => $target->id,
             'segment' => ['cell_count' => 10, 'minimum_cell_count' => 2],
@@ -90,7 +90,7 @@ final class InternalPercentileTest extends TestCase
 
     private function snapshot(): BigFiveNormSnapshot
     {
-        return (new BigFiveNormSnapshotBuilder())->build([
+        return (new BigFiveNormSnapshotBuilder)->build([
             'snapshot_version' => 'big5_norm_internal_percentile_v1',
             'parent_snapshot_version' => 'big5_norm_snapshot_parent_v1',
             'rollback_target_snapshot_version' => 'big5_norm_snapshot_parent_v1',

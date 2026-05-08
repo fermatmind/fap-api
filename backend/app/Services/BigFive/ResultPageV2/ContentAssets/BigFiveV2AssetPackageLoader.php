@@ -21,7 +21,7 @@ final class BigFiveV2AssetPackageLoader
     ];
 
     public function __construct(
-        private readonly BigFiveV2AssetManifestValidator $validator = new BigFiveV2AssetManifestValidator(),
+        private readonly BigFiveV2AssetManifestValidator $validator = new BigFiveV2AssetManifestValidator,
     ) {}
 
     public function inventory(?string $rootPath = null): BigFiveV2AssetInventory
@@ -70,6 +70,7 @@ final class BigFiveV2AssetPackageLoader
             if ($this->isChecksumFile($file)) {
                 $checksumFiles[] = $fileRelativePath;
                 $errors = array_merge($errors, $this->validator->validateChecksumFile($filePath, $packagePath, $relativePath));
+
                 continue;
             }
 

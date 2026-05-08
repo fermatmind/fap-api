@@ -16,7 +16,7 @@ final class NormPrivacyTest extends TestCase
 
     public function test_anonymizer_creates_stable_irreversible_subject_key_inside_internal_boundary(): void
     {
-        $anonymizer = new BigFiveNormAnonymizer();
+        $anonymizer = new BigFiveNormAnonymizer;
         $subject = $this->subjectContext();
         $policy = $this->policyContext();
 
@@ -31,7 +31,7 @@ final class NormPrivacyTest extends TestCase
 
     public function test_anonymizer_requires_consent_and_rejects_revoked_or_deleted_subjects(): void
     {
-        $anonymizer = new BigFiveNormAnonymizer();
+        $anonymizer = new BigFiveNormAnonymizer;
 
         $this->expectException(InvalidArgumentException::class);
         $anonymizer->subjectKey([
@@ -42,7 +42,7 @@ final class NormPrivacyTest extends TestCase
 
     public function test_anonymizer_rejects_non_internal_capture_and_short_secret(): void
     {
-        $anonymizer = new BigFiveNormAnonymizer();
+        $anonymizer = new BigFiveNormAnonymizer;
 
         $this->assertFalse($anonymizer->canCapture([
             ...$this->subjectContext(),
@@ -58,7 +58,7 @@ final class NormPrivacyTest extends TestCase
 
     public function test_privacy_policy_defines_retention_dsar_and_small_cell_suppression(): void
     {
-        $defaults = (new BigFiveNormPrivacyPolicy())->defaults();
+        $defaults = (new BigFiveNormPrivacyPolicy)->defaults();
 
         $this->assertSame(BigFiveNormPrivacyPolicy::POLICY_VERSION, $defaults['policy_version'] ?? null);
         $this->assertSame('internal_only', $defaults['capture_default'] ?? null);
@@ -73,7 +73,7 @@ final class NormPrivacyTest extends TestCase
 
     public function test_small_cell_and_public_exposure_guards_fail_closed(): void
     {
-        $policy = new BigFiveNormPrivacyPolicy();
+        $policy = new BigFiveNormPrivacyPolicy;
 
         $this->assertFalse($policy->canPublishCell(49));
         $this->assertTrue($policy->canPublishCell(50));
@@ -83,7 +83,7 @@ final class NormPrivacyTest extends TestCase
 
     public function test_observation_model_does_not_store_direct_identifiers(): void
     {
-        $fillable = (new BigFiveNormObservation())->getFillable();
+        $fillable = (new BigFiveNormObservation)->getFillable();
         $forbidden = [
             'user'.'_id',
             'anon'.'_id',

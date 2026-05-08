@@ -94,6 +94,7 @@ final class BigFiveResultPageV2CoreBodyO59Test extends TestCase
         foreach ($terms as $term) {
             if ($term === 'all') {
                 $this->assertDoesNotMatchRegularExpression('/(^|[\\s:：])all($|[\\s,，.。:：])/iu', $visibleText);
+
                 continue;
             }
 
@@ -241,6 +242,7 @@ final class BigFiveResultPageV2CoreBodyO59Test extends TestCase
                 $parts[] = is_array($value)
                     ? json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)
                     : (string) $value;
+
                 continue;
             }
 

@@ -80,7 +80,7 @@ final class MigrationHotTableNotNullGateTest extends TestCase
             }
 
             $source = file_get_contents($filePath);
-            $this->assertIsString($source, 'unable to read migration file: ' . $filePath);
+            $this->assertIsString($source, 'unable to read migration file: '.$filePath);
 
             $violations = array_merge($violations, $this->collectViolations($filePath, $source));
         }
@@ -88,7 +88,7 @@ final class MigrationHotTableNotNullGateTest extends TestCase
         $this->assertSame(
             [],
             $violations,
-            "hot table nullable/default gate violations:\n" . implode("\n", $violations)
+            "hot table nullable/default gate violations:\n".implode("\n", $violations)
         );
     }
 
@@ -99,7 +99,7 @@ final class MigrationHotTableNotNullGateTest extends TestCase
     {
         $constTables = $this->constantTableMap($source);
         $lines = preg_split('/\R/', $source);
-        if (!is_array($lines)) {
+        if (! is_array($lines)) {
             return [];
         }
 
@@ -112,7 +112,7 @@ final class MigrationHotTableNotNullGateTest extends TestCase
         for ($i = 0; $i < $lineCount; $i++) {
             $line = $lines[$i];
 
-            if (!$inHotBlock) {
+            if (! $inHotBlock) {
                 [$tableName, $signatureEndLine, $signatureSource] = $this->detectBlockStart($lines, $i, $constTables);
                 if ($tableName === null || $signatureSource === null) {
                     continue;
@@ -122,6 +122,7 @@ final class MigrationHotTableNotNullGateTest extends TestCase
                 $currentTable = $tableName;
                 $braceDepth = substr_count($signatureSource, '{') - substr_count($signatureSource, '}');
                 $i = $signatureEndLine;
+
                 continue;
             }
 
@@ -133,7 +134,7 @@ final class MigrationHotTableNotNullGateTest extends TestCase
                 $hasNullableFalse = preg_match('/->nullable\s*\(\s*false\s*\)/i', $statement) === 1;
                 $hasDefaultNull = preg_match('/->default\s*\(\s*null\s*\)/i', $statement) === 1;
 
-                if (!$hasPrimary && ((!$hasNullable && !$hasDefault) || $hasNullableFalse || $hasDefaultNull)) {
+                if (! $hasPrimary && ((! $hasNullable && ! $hasDefault) || $hasNullableFalse || $hasDefaultNull)) {
                     $violations[] = sprintf(
                         'file=%s table=%s line=%d snippet=%s',
                         basename($filePath),
@@ -156,8 +157,8 @@ final class MigrationHotTableNotNullGateTest extends TestCase
     }
 
     /**
-     * @param array<int, string> $lines
-     * @param array<string, string> $constTables
+     * @param  array<int, string>  $lines
+     * @param  array<string, string>  $constTables
      * @return array{0: ?string, 1: int, 2: ?string}
      */
     private function detectBlockStart(array $lines, int $startLine, array $constTables): array
@@ -168,11 +169,11 @@ final class MigrationHotTableNotNullGateTest extends TestCase
 
         while (
             $endLine + 1 < $lineCount
-            && !str_contains($signature, '{')
+            && ! str_contains($signature, '{')
             && ($endLine - $startLine + 1) < self::LOOKAHEAD_LINES
         ) {
             $endLine++;
-            $signature .= "\n" . $lines[$endLine];
+            $signature .= "\n".$lines[$endLine];
         }
 
         $tableName = null;
@@ -192,7 +193,7 @@ final class MigrationHotTableNotNullGateTest extends TestCase
             $tableName = $constTables[$constName] ?? null;
         }
 
-        if ($tableName === null || !in_array($tableName, self::HOT_TABLES, true)) {
+        if ($tableName === null || ! in_array($tableName, self::HOT_TABLES, true)) {
             return [null, $startLine, null];
         }
 
@@ -200,7 +201,7 @@ final class MigrationHotTableNotNullGateTest extends TestCase
     }
 
     /**
-     * @param array<int, string> $lines
+     * @param  array<int, string>  $lines
      */
     private function statementSnippet(array $lines, int $startLine): string
     {
@@ -258,7 +259,7 @@ final class MigrationHotTableNotNullGateTest extends TestCase
             return $snippet;
         }
 
-        return substr($snippet, 0, 217) . '...';
+        return substr($snippet, 0, 217).'...';
     }
 
     /**
@@ -268,7 +269,7 @@ final class MigrationHotTableNotNullGateTest extends TestCase
     {
         $files = glob(base_path('database/migrations/*.php'));
 
-        if (!is_array($files)) {
+        if (! is_array($files)) {
             return [];
         }
 

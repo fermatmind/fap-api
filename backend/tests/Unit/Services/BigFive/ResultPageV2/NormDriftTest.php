@@ -13,7 +13,7 @@ final class NormDriftTest extends TestCase
 
     public function test_drift_detector_emits_recomputation_percentile_and_aggregation_alerts(): void
     {
-        $result = (new BigFiveNormDriftDetector())->analyze(
+        $result = (new BigFiveNormDriftDetector)->analyze(
             $this->recomputeResult('baseline', 20.0, 10.0, 100, ['obs-a' => ['O' => 40]]),
             $this->recomputeResult('current', 31.0, 16.0, 150, ['obs-a' => ['O' => 70]]),
             ['mean_delta' => 5.0, 'sd_delta' => 2.0, 'percentile_delta' => 15, 'sample_n_delta_ratio' => 0.25],
@@ -40,7 +40,7 @@ final class NormDriftTest extends TestCase
 
     public function test_drift_detector_returns_clear_when_thresholds_are_not_crossed(): void
     {
-        $result = (new BigFiveNormDriftDetector())->analyze(
+        $result = (new BigFiveNormDriftDetector)->analyze(
             $this->recomputeResult('baseline', 20.0, 10.0, 100, ['obs-a' => ['O' => 50]]),
             $this->recomputeResult('current', 21.0, 10.5, 105, ['obs-a' => ['O' => 55]]),
         )->toArray();

@@ -155,7 +155,7 @@ final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
 
     private function selector(): BigFiveV2DeterministicSelector
     {
-        return new BigFiveV2DeterministicSelector();
+        return new BigFiveV2DeterministicSelector;
     }
 
     private function o59Input(): BigFiveV2SelectorInput
@@ -165,7 +165,7 @@ final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
 
     private function o59RouteRow(): \App\Services\BigFive\ResultPageV2\RouteMatrix\BigFiveV2RouteMatrixRow
     {
-        $result = (new BigFiveV2RouteMatrixParser())->parse();
+        $result = (new BigFiveV2RouteMatrixParser)->parse();
         $this->assertSame([], $result->errors);
 
         $row = $result->row(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);

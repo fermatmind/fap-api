@@ -495,7 +495,6 @@ final class BigFiveScorerV3
      * @param  array<string,float>  $facetMeans
      * @param  array<string,mixed>  $policy
      * @param  array<string,mixed>  $ctx
-     * @param  int  $expectedQuestionCount
      * @return array<string,mixed>
      */
     private function buildQuality(

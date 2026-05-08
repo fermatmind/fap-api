@@ -15,7 +15,7 @@ final class BigFiveV2CompareSnapshotAdapter
     public const SCHEMA_VERSION = 'fap.big5.result_page_v2.compare_snapshot.v0_1';
 
     public function __construct(
-        private readonly BigFiveResultPageV2Validator $validator = new BigFiveResultPageV2Validator(),
+        private readonly BigFiveResultPageV2Validator $validator = new BigFiveResultPageV2Validator,
     ) {}
 
     /**

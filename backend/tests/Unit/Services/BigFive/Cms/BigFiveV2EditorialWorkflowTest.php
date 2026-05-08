@@ -148,12 +148,12 @@ final class BigFiveV2EditorialWorkflowTest extends TestCase
 
     private function workflow(): BigFiveV2EditorialWorkflow
     {
-        return new BigFiveV2EditorialWorkflow();
+        return new BigFiveV2EditorialWorkflow;
     }
 
     private function linkedAsset(): BigFiveV2EditorialAssetIndexEntry
     {
-        foreach ((new BigFiveV2EditorialAssetIndex())->entries() as $entry) {
+        foreach ((new BigFiveV2EditorialAssetIndex)->entries() as $entry) {
             if ($entry->linkedReleaseSnapshotIds !== []) {
                 return $entry;
             }

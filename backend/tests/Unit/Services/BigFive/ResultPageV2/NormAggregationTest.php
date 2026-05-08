@@ -22,7 +22,7 @@ final class NormAggregationTest extends TestCase
         $this->observation('c', 'en-US', 'US', 'C', false, ['O' => 100.0, 'C' => 100.0]);
         $this->observation('d', 'en-US', 'US', 'A', true, ['O' => 100.0, 'C' => 100.0]);
 
-        $result = (new BigFiveNormAggregationDryRun())->aggregate(['minimum_cell_count' => 2])->toArray();
+        $result = (new BigFiveNormAggregationDryRun)->aggregate(['minimum_cell_count' => 2])->toArray();
 
         $this->assertSame('norm_aggregation_dry_run', $result['summary']['mode'] ?? null);
         $this->assertTrue((bool) ($result['summary']['dry_run_only'] ?? false));
@@ -37,7 +37,7 @@ final class NormAggregationTest extends TestCase
     {
         $this->observation('a', 'en-US', 'US', 'A', false, ['O' => 10.0]);
 
-        $group = (new BigFiveNormAggregationDryRun())->aggregate(['minimum_cell_count' => 2])->groups[0];
+        $group = (new BigFiveNormAggregationDryRun)->aggregate(['minimum_cell_count' => 2])->groups[0];
 
         $this->assertTrue((bool) ($group['small_cell_suppressed'] ?? false));
         $this->assertFalse((bool) ($group['public_output_allowed'] ?? true));
@@ -50,7 +50,7 @@ final class NormAggregationTest extends TestCase
         $this->observation('a', 'en-US', 'US', 'A', false, ['O' => 10.0]);
         $this->observation('b', 'zh-CN', 'CN', 'A', false, ['O' => 20.0]);
 
-        $result = (new BigFiveNormAggregationDryRun())->aggregate(['minimum_cell_count' => 1])->toArray();
+        $result = (new BigFiveNormAggregationDryRun)->aggregate(['minimum_cell_count' => 1])->toArray();
         $groups = collect($result['groups'])->pluck('group_key')->all();
 
         $this->assertContains('BIG5_OCEAN|en-US|US', $groups);

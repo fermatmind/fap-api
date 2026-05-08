@@ -175,8 +175,7 @@ final class MbtiFormCatalog
         string $filename,
         string $packId,
         string $dirVersion
-    ): array
-    {
+    ): array {
         if ($path === '' || ! File::exists($path) || ! File::isFile($path)) {
             $this->logAndThrowContentPackError(
                 $filename === 'questions.json' ? 'QUESTIONS_FILE_MISSING' : 'CONTENT_PACK_FILE_MISSING',

@@ -9,7 +9,7 @@ trait SignedBillingWebhook
     protected function postSignedBillingWebhook(array $payload, array $headers = []): TestResponse
     {
         $rawBody = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($rawBody)) {
+        if (! is_string($rawBody)) {
             self::fail('json_encode payload failed.');
         }
 
@@ -33,13 +33,15 @@ trait SignedBillingWebhook
             $normalized = strtoupper(str_replace('-', '_', (string) $name));
             if ($normalized === 'CONTENT_TYPE') {
                 $server['CONTENT_TYPE'] = (string) $value;
+
                 continue;
             }
             if ($normalized === 'ACCEPT') {
                 $server['HTTP_ACCEPT'] = (string) $value;
+
                 continue;
             }
-            $server['HTTP_' . $normalized] = (string) $value;
+            $server['HTTP_'.$normalized] = (string) $value;
         }
 
         return $this->call(

@@ -198,8 +198,7 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
         string $typeCode,
         \DateTimeInterface $submittedAt,
         string $formCode = 'mbti_144'
-    ): string
-    {
+    ): string {
         $attemptId = (string) Str::uuid();
         $is93 = $formCode === 'mbti_93';
 

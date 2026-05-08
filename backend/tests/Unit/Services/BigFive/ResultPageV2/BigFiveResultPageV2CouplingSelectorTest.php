@@ -15,7 +15,7 @@ final class BigFiveResultPageV2CouplingSelectorTest extends TestCase
     {
         parent::setUp();
 
-        $this->resolver = new BigFiveV2CouplingResolver();
+        $this->resolver = new BigFiveV2CouplingResolver;
     }
 
     public function test_canonical_twelve_coupling_keys_are_resolvable(): void

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\BigFive\ResultPageV2;
 
-use App\Services\BigFive\ResultPageV2\ContentAssets\BigFiveV2AssetPackageLoader;
 use App\Services\BigFive\ResultPageV2\ContentAssets\BigFiveV2AssetManifestValidator;
+use App\Services\BigFive\ResultPageV2\ContentAssets\BigFiveV2AssetPackageLoader;
 use Tests\TestCase;
 
 final class BigFiveResultPageV2AssetLoaderTest extends TestCase
@@ -72,7 +72,7 @@ final class BigFiveResultPageV2AssetLoaderTest extends TestCase
 
     public function test_manifest_validator_rejects_production_and_runtime_ready_flags(): void
     {
-        $validator = new BigFiveV2AssetManifestValidator();
+        $validator = new BigFiveV2AssetManifestValidator;
 
         $errors = $validator->validateDocument([
             'runtime_use' => 'runtime',

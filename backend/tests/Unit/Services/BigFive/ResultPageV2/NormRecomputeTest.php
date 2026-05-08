@@ -21,8 +21,8 @@ final class NormRecomputeTest extends TestCase
         $mid = $this->observation('obs-b', ['O' => 20.0, 'C' => 30.0]);
         $high = $this->observation('obs-c', ['O' => 30.0, 'C' => 40.0]);
 
-        $snapshot = (new BigFiveNormSnapshotBuilder())->build(['snapshot_version' => 'big5_norm_snapshot_recompute_v1']);
-        $engine = new BigFiveNormRecomputeEngine();
+        $snapshot = (new BigFiveNormSnapshotBuilder)->build(['snapshot_version' => 'big5_norm_snapshot_recompute_v1']);
+        $engine = new BigFiveNormRecomputeEngine;
 
         $first = $engine->recompute($snapshot)->toArray();
         $second = $engine->recompute($snapshot)->toArray();
@@ -43,25 +43,25 @@ final class NormRecomputeTest extends TestCase
     public function test_recompute_fails_closed_for_mutated_snapshot_without_hash(): void
     {
         $this->observation('obs-a', ['O' => 10.0]);
-        $snapshotArray = (new BigFiveNormSnapshotBuilder())->build(['snapshot_version' => 'big5_norm_snapshot_recompute_v2'])->toArray();
+        $snapshotArray = (new BigFiveNormSnapshotBuilder)->build(['snapshot_version' => 'big5_norm_snapshot_recompute_v2'])->toArray();
         unset($snapshotArray['snapshot_hash']);
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('snapshot hash is required');
 
-        (new BigFiveNormRecomputeEngine())->recompute(new \App\Services\BigFive\Norms\BigFiveNormSnapshot($snapshotArray));
+        (new BigFiveNormRecomputeEngine)->recompute(new \App\Services\BigFive\Norms\BigFiveNormSnapshot($snapshotArray));
     }
 
     public function test_recompute_rejects_public_or_runtime_attached_snapshots(): void
     {
         $this->observation('obs-a', ['O' => 10.0]);
-        $snapshotArray = (new BigFiveNormSnapshotBuilder())->build(['snapshot_version' => 'big5_norm_snapshot_recompute_v3'])->toArray();
+        $snapshotArray = (new BigFiveNormSnapshotBuilder)->build(['snapshot_version' => 'big5_norm_snapshot_recompute_v3'])->toArray();
         data_set($snapshotArray, 'release_metadata.public_percentile_display', 'enabled');
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('public percentile display must remain disabled');
 
-        (new BigFiveNormRecomputeEngine())->recompute(new \App\Services\BigFive\Norms\BigFiveNormSnapshot($snapshotArray));
+        (new BigFiveNormRecomputeEngine)->recompute(new \App\Services\BigFive\Norms\BigFiveNormSnapshot($snapshotArray));
     }
 
     /**

@@ -37,6 +37,7 @@ final class BigFiveV2AssetManifestValidator
         foreach ($lines as $lineNumber => $line) {
             if (! preg_match('/^([a-f0-9]{64})\s+\*?(.+)$/', trim($line), $matches)) {
                 $errors[] = "{$packageRelativePath}: checksum line ".($lineNumber + 1).' is malformed';
+
                 continue;
             }
 
@@ -44,12 +45,14 @@ final class BigFiveV2AssetManifestValidator
             $fileName = trim($matches[2]);
             if ($fileName === '' || str_contains($fileName, '..')) {
                 $errors[] = "{$packageRelativePath}: checksum line ".($lineNumber + 1).' has unsafe file path';
+
                 continue;
             }
 
             $targetPath = $packagePath.DIRECTORY_SEPARATOR.$fileName;
             if (! is_file($targetPath)) {
                 $errors[] = "{$packageRelativePath}: checksum target missing: {$fileName}";
+
                 continue;
             }
 

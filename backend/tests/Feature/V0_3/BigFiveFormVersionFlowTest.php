@@ -36,7 +36,7 @@ final class BigFiveFormVersionFlowTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
     }
 
     /**

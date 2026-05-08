@@ -190,7 +190,7 @@ final class RolloutDryRunTest extends TestCase
 
     private function gate(): BigFiveV2ProductionRolloutGate
     {
-        return new BigFiveV2ProductionRolloutGate();
+        return new BigFiveV2ProductionRolloutGate;
     }
 
     /**

@@ -23,7 +23,7 @@ final class NormCaptureTest extends TestCase
 
         $this->assertNotContains(BigFiveNormObservationCaptureWriter::class, $actions);
 
-        $result = (new BigFiveNormObservationCaptureWriter())->capture([
+        $result = (new BigFiveNormObservationCaptureWriter)->capture([
             'raw_domain_scores' => ['O' => 70],
             'raw_facet_scores' => ['O1' => 14],
         ], [

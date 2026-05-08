@@ -15,7 +15,7 @@ final class BigFiveV2ShareSafeSummaryAdapter
     public const SCHEMA_VERSION = 'fap.big5.result_page_v2.share_card.v0_1';
 
     public function __construct(
-        private readonly BigFiveResultPageV2Validator $validator = new BigFiveResultPageV2Validator(),
+        private readonly BigFiveResultPageV2Validator $validator = new BigFiveResultPageV2Validator,
     ) {}
 
     /**

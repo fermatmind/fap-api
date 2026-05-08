@@ -19,7 +19,7 @@ class AssetUrlResolverTest extends TestCase
             'cdn_map.map.CN_MAINLAND.assets_base_url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com',
         ]);
 
-        $resolver = new AssetUrlResolver(new ContentPacksIndex(), new RegionContext());
+        $resolver = new AssetUrlResolver(new ContentPacksIndex, new RegionContext);
 
         $resolved = $resolver->resolve(
             'MBTI-CN-v0.2.1-TEST',

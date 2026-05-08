@@ -16,7 +16,7 @@ final class BigFiveResultPageV2PdfPayloadAdapterTest extends TestCase
 
     public function test_o59_route_driven_payload_adapts_to_pdf_payload_fixture(): void
     {
-        $adapter = new BigFiveV2PdfPayloadAdapter();
+        $adapter = new BigFiveV2PdfPayloadAdapter;
         $pdfEnvelope = $adapter->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH));
         $pdfPayload = $pdfEnvelope[BigFiveV2PdfPayloadAdapter::PAYLOAD_KEY] ?? null;
 
@@ -41,7 +41,7 @@ final class BigFiveResultPageV2PdfPayloadAdapterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('requires a valid route-driven payload');
 
-        (new BigFiveV2PdfPayloadAdapter())->adapt([
+        (new BigFiveV2PdfPayloadAdapter)->adapt([
             'big5_result_page_v2' => [
                 'schema_version' => 'invalid',
                 'modules' => [],
@@ -52,7 +52,7 @@ final class BigFiveResultPageV2PdfPayloadAdapterTest extends TestCase
     public function test_pdf_payload_filters_internal_metadata_and_runtime_flags(): void
     {
         $encoded = json_encode(
-            (new BigFiveV2PdfPayloadAdapter())->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH)),
+            (new BigFiveV2PdfPayloadAdapter)->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH)),
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
         );
 
@@ -80,7 +80,7 @@ final class BigFiveResultPageV2PdfPayloadAdapterTest extends TestCase
     public function test_pdf_payload_strips_share_specific_and_score_vector_fields(): void
     {
         $encoded = json_encode(
-            (new BigFiveV2PdfPayloadAdapter())->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH)),
+            (new BigFiveV2PdfPayloadAdapter)->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH)),
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
         );
 

@@ -19,8 +19,8 @@ final class BigFiveResultPageV2ContentAssetLookupTest extends TestCase
     public function test_lookup_resolves_route_driven_o59_refs_across_repo_owned_content_registries(): void
     {
         $input = $this->o59RouteDrivenInput();
-        $selection = (new BigFiveV2DeterministicSelector())->select($input);
-        $lookup = new BigFiveV2ContentAssetLookup();
+        $selection = (new BigFiveV2DeterministicSelector)->select($input);
+        $lookup = new BigFiveV2ContentAssetLookup;
 
         $domain = $lookup->resolve($this->selectedRef($selection->selectedAssetRefs, 'domain_registry'), $input);
         $this->assertSame('B5-CONTENT-1', $domain->sourcePackage);
@@ -45,8 +45,8 @@ final class BigFiveResultPageV2ContentAssetLookupTest extends TestCase
     public function test_lookup_resolves_canonical_alias_and_supplemental_coupling_refs(): void
     {
         $input = $this->o59RouteDrivenInput();
-        $selection = (new BigFiveV2DeterministicSelector())->select($input);
-        $lookup = new BigFiveV2ContentAssetLookup();
+        $selection = (new BigFiveV2DeterministicSelector)->select($input);
+        $lookup = new BigFiveV2ContentAssetLookup;
 
         $canonical = $lookup->resolve(
             $this->selectedRef($selection->selectedAssetRefs, 'coupling_registry', 'module_04_coupling.coupling_card.e_n.low_high'),
@@ -73,8 +73,8 @@ final class BigFiveResultPageV2ContentAssetLookupTest extends TestCase
     public function test_lookup_filters_internal_metadata_and_production_flags_from_public_content(): void
     {
         $input = $this->o59RouteDrivenInput();
-        $selection = (new BigFiveV2DeterministicSelector())->select($input);
-        $lookup = new BigFiveV2ContentAssetLookup();
+        $selection = (new BigFiveV2DeterministicSelector)->select($input);
+        $lookup = new BigFiveV2ContentAssetLookup;
         $resolved = $lookup->resolve($this->selectedRef($selection->selectedAssetRefs, 'coupling_registry'), $input);
 
         $encoded = json_encode($resolved->publicContent, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
@@ -101,7 +101,7 @@ final class BigFiveResultPageV2ContentAssetLookupTest extends TestCase
     public function test_lookup_fails_closed_for_missing_selected_ref(): void
     {
         $input = $this->o59RouteDrivenInput();
-        $lookup = new BigFiveV2ContentAssetLookup();
+        $lookup = new BigFiveV2ContentAssetLookup;
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('selector asset is missing');
@@ -133,7 +133,7 @@ final class BigFiveResultPageV2ContentAssetLookupTest extends TestCase
 
     private function o59RouteDrivenInput(): BigFiveV2SelectorInput
     {
-        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter())->fromScoreResult([
+        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter)->fromScoreResult([
             'scale_code' => 'BIG5_OCEAN',
             'scores_0_100' => [
                 'domains_percentile' => [
@@ -153,11 +153,11 @@ final class BigFiveResultPageV2ContentAssetLookupTest extends TestCase
         ]);
         $this->assertNotNull($routeInput);
 
-        $parseResult = (new BigFiveV2RouteMatrixParser())->parse();
+        $parseResult = (new BigFiveV2RouteMatrixParser)->parse();
         $this->assertSame([], $parseResult->errors);
         $routeRow = $parseResult->row(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);
         $this->assertNotNull($routeRow);
 
-        return (new BigFiveV2RouteDrivenSelectorInputBuilder())->build($routeInput, $routeRow);
+        return (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($routeInput, $routeRow);
     }
 }
