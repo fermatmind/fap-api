@@ -37,6 +37,14 @@ final class CanonicalExpansionManifestValidator
         if (($manifest['release_gate_required'] ?? null) !== true) {
             $failures[] = $this->failure('release_gate_required', 'release_gate_required_must_be_true');
         }
+        if (($manifest['rollout_state'] ?? null) === CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED_CANDIDATE) {
+            if (($manifest['candidate_route_semantics'] ?? null) !== 'expected_pre_route') {
+                $failures[] = $this->failure('candidate_route_semantics', 'candidate_route_semantics_must_be_expected_pre_route');
+            }
+            if (($manifest['candidate_release_gate_applicability'] ?? null) !== 'not_applicable_before_promotion') {
+                $failures[] = $this->failure('candidate_release_gate_applicability', 'candidate_release_gate_must_be_not_applicable_before_promotion');
+            }
+        }
         if (($manifest['surface_equality_required'] ?? null) !== true) {
             $failures[] = $this->failure('surface_equality_required', 'surface_equality_required_must_be_true');
         }

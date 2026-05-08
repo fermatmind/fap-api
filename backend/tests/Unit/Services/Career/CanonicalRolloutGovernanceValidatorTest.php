@@ -58,6 +58,50 @@ final class CanonicalRolloutGovernanceValidatorTest extends TestCase
         $this->assertContains('family_leakage', $reasons);
     }
 
+    public function test_it_allows_published_candidate_pre_route_inventory_without_public_release_gate(): void
+    {
+        $result = app(CanonicalRolloutGovernanceValidator::class)->validate(
+            $this->manifest(),
+            $this->truth([
+                $this->truthItem([
+                    'projection_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
+                    'route_exists' => false,
+                    'final_200' => false,
+                    'robots_indexable' => false,
+                    'canonical_self' => false,
+                    'dataset_visible' => false,
+                    'search_visible' => false,
+                    'sitemap_live' => false,
+                    'llms_live' => false,
+                    'llms_full_live' => false,
+                    'release_gate_pass' => false,
+                    'fully_live' => false,
+                    'candidate_pre_route_expected' => true,
+                    'candidate_route_expectation' => 'expected_pre_route',
+                    'candidate_release_gate_applicability' => 'not_applicable_before_promotion',
+                ]),
+            ]),
+            $this->projection([
+                $this->projectionItem([
+                    'runtime_publish_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
+                    'detail_route_enabled' => false,
+                    'dataset_visible' => false,
+                    'search_visible' => false,
+                    'sitemap_live' => false,
+                    'llms_live' => false,
+                    'llms_full_live' => false,
+                    'robots_indexable' => false,
+                    'release_gate_pass' => false,
+                ]),
+            ]),
+        );
+
+        $this->assertSame('pass', $result['status']);
+        $this->assertSame(1, data_get($result, 'counts.candidate_pre_route_expected_count'));
+        $this->assertSame(1, data_get($result, 'counts.candidate_release_gate_not_applicable_count'));
+        $this->assertSame('not_applicable_before_promotion', data_get($result, 'candidate_semantics.public_release_gate_route_validation'));
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      * @return array<string, mixed>
@@ -74,6 +118,8 @@ final class CanonicalRolloutGovernanceValidatorTest extends TestCase
             'surface_equality_required' => true,
             'rollback_group' => ['actors'],
             'rollout_state' => CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED_CANDIDATE,
+            'candidate_route_semantics' => 'expected_pre_route',
+            'candidate_release_gate_applicability' => 'not_applicable_before_promotion',
         ], $overrides);
     }
 

@@ -49,6 +49,8 @@ final class CanonicalExpansionManifestServiceTest extends TestCase
         $this->assertTrue(data_get($manifest, 'manifest.surface_equality_required'));
         $this->assertSame(['actors'], data_get($manifest, 'manifest.rollback_group'));
         $this->assertSame(CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE, data_get($manifest, 'manifest.rollout_state'));
+        $this->assertSame('expected_pre_route', data_get($manifest, 'manifest.candidate_route_semantics'));
+        $this->assertSame('not_applicable_before_promotion', data_get($manifest, 'manifest.candidate_release_gate_applicability'));
     }
 
     public function test_validator_rejects_forbidden_rows_and_missing_gates(): void

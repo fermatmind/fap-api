@@ -6,6 +6,40 @@ require_clean_worktree: true
 execution_mode: local_clone_preferred
 
 prs:
+  - id: PR-CANDIDATE-SEMANTICS-PREROUTE
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/candidate-validator-semantics-preroute
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Canonical candidate pre-route semantics backend-only. Clarify
+      published_candidate as invisible pre-route inventory in canonical runtime
+      truth export, validation, finalization, expansion manifest, rollout
+      governance, and state-machine reporting. Do not promote candidates,
+      materialize candidate routes, include candidates in dataset/search,
+      sitemap, llms, or llms-full, change fap-web, alter CareerFullReleaseLedger
+      governance decisions, or modify content assets.
+    checks:
+      - "vendor/bin/pint --test app/Console/Commands/CareerFinalizeCanonicalRuntimeTruth.php app/Domain/Career/Expansion/CanonicalExpansionManifestDTO.php app/Domain/Career/Expansion/CanonicalExpansionManifestValidator.php app/Domain/Career/Expansion/CanonicalRolloutBatchStateMachine.php app/Domain/Career/Expansion/CanonicalRolloutGovernanceValidator.php app/Domain/Career/Publish/CareerCanonicalRuntimeTruthExporter.php app/Domain/Career/Publish/CareerCanonicalRuntimeTruthValidator.php tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php tests/Unit/Services/Career/CanonicalExpansionManifestServiceTest.php tests/Unit/Services/Career/CanonicalRolloutGovernanceValidatorTest.php tests/Unit/Services/Career/CareerCanonicalRuntimeTruthExporterTest.php tests/Unit/Services/Career/CareerCanonicalRuntimeTruthValidatorTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerCanonicalRuntimeTruthExporterTest.php tests/Unit/Services/Career/CareerCanonicalRuntimeTruthValidatorTest.php tests/Unit/Services/Career/CanonicalExpansionManifestServiceTest.php tests/Unit/Services/Career/CanonicalRolloutGovernanceValidatorTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php"
+      - "php artisan career:export-runtime-publish-projection --ledger=/tmp/candidate_semantics_preroute_ledger.json --timestamp=candidate-semantics-preroute-ledger --json"
+      - "php artisan career:export-canonical-runtime-truth --ledger=/tmp/candidate_semantics_preroute_ledger.json --timestamp=candidate-semantics-preroute-ledger --json"
+      - "php artisan career:validate-canonical-runtime-truth --ledger=/tmp/candidate_semantics_preroute_ledger.json --json"
+      - "php artisan career:finalize-canonical-runtime-truth --ledger=/tmp/candidate_semantics_preroute_ledger.json --timestamp=candidate-semantics-preroute-ledger --json"
+      - "php artisan route:list --path=career"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-A2d
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

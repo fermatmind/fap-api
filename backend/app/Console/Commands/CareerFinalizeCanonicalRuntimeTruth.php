@@ -92,9 +92,12 @@ final class CareerFinalizeCanonicalRuntimeTruth extends Command
         $counts = is_array($truth['counts'] ?? null) ? $truth['counts'] : [];
         $validationCounts = is_array($validation['counts'] ?? null) ? $validation['counts'] : [];
         $surfaceEquality = ($validation['status'] ?? null) === 'pass' ? 'pass' : 'blocked';
+        $candidateUnexpectedExposureCount = $this->candidateUnexpectedExposureCount($validationCounts);
+        $candidatePublicExposureBlocker = $candidateUnexpectedExposureCount > 0;
+        $readyForExpansionBatches = $surfaceEquality === 'pass' && ! $candidatePublicExposureBlocker;
 
         return [
-            'status' => $surfaceEquality === 'pass' ? 'complete' : 'blocked',
+            'status' => $readyForExpansionBatches ? 'complete' : 'blocked',
             'phase' => 'Canonical Runtime Truth Finalization',
             'source_authority' => $truth['source_authority'] ?? 'CareerFullReleaseLedger',
             'truth_kind' => $truth['truth_kind'] ?? null,
@@ -102,6 +105,9 @@ final class CareerFinalizeCanonicalRuntimeTruth extends Command
             'counts' => [
                 'canonical_projection_rows' => (int) ($counts['canonical_projection_rows'] ?? 0),
                 'published' => (int) ($counts['published'] ?? 0),
+                'published_candidate' => (int) ($counts['published_candidate'] ?? 0),
+                'blocked' => (int) ($counts['blocked'] ?? 0),
+                'quarantined' => (int) ($counts['quarantined'] ?? 0),
                 'route_live' => (int) ($counts['final_200'] ?? 0),
                 'dataset_visible' => (int) ($counts['dataset_visible'] ?? 0),
                 'search_visible' => (int) ($counts['search_visible'] ?? 0),
@@ -109,6 +115,16 @@ final class CareerFinalizeCanonicalRuntimeTruth extends Command
                 'llms_live' => (int) ($counts['llms_live'] ?? 0),
                 'llms_full_live' => (int) ($counts['llms_full_live'] ?? 0),
                 'fully_live' => (int) ($counts['fully_live'] ?? 0),
+                'candidate_pre_route_expected_count' => (int) ($counts['candidate_pre_route_expected_count'] ?? 0),
+                'candidate_release_gate_not_applicable_count' => (int) ($counts['candidate_release_gate_not_applicable_count'] ?? 0),
+                'candidate_unexpected_route_exposure_count' => (int) ($counts['candidate_unexpected_route_exposure_count'] ?? 0),
+                'candidate_unexpected_api_exposure_count' => (int) ($counts['candidate_unexpected_api_exposure_count'] ?? 0),
+                'candidate_unexpected_dataset_exposure_count' => (int) ($counts['candidate_unexpected_dataset_exposure_count'] ?? 0),
+                'candidate_unexpected_search_exposure_count' => (int) ($counts['candidate_unexpected_search_exposure_count'] ?? 0),
+                'candidate_unexpected_sitemap_exposure_count' => (int) ($counts['candidate_unexpected_sitemap_exposure_count'] ?? 0),
+                'candidate_unexpected_llms_exposure_count' => (int) ($counts['candidate_unexpected_llms_exposure_count'] ?? 0),
+                'candidate_unexpected_llms_full_exposure_count' => (int) ($counts['candidate_unexpected_llms_full_exposure_count'] ?? 0),
+                'candidate_unexpected_indexable_exposure_count' => (int) ($counts['candidate_unexpected_indexable_exposure_count'] ?? 0),
             ],
             'surface_equality' => $surfaceEquality,
             'validation' => [
@@ -121,14 +137,50 @@ final class CareerFinalizeCanonicalRuntimeTruth extends Command
                 'sitemap_only' => (int) ($validationCounts['sitemap_only'] ?? 0),
                 'llms_only' => (int) ($validationCounts['llms_only'] ?? 0),
                 'llms_full_only' => (int) ($validationCounts['llms_full_only'] ?? 0),
+                'candidate_pre_route_expected_count' => (int) ($validationCounts['candidate_pre_route_expected_count'] ?? 0),
+                'candidate_release_gate_not_applicable_count' => (int) ($validationCounts['candidate_release_gate_not_applicable_count'] ?? 0),
+                'candidate_unexpected_route_exposure_count' => (int) ($validationCounts['candidate_unexpected_route_exposure_count'] ?? 0),
+                'candidate_unexpected_api_exposure_count' => (int) ($validationCounts['candidate_unexpected_api_exposure_count'] ?? 0),
+                'candidate_unexpected_dataset_exposure_count' => (int) ($validationCounts['candidate_unexpected_dataset_exposure_count'] ?? 0),
+                'candidate_unexpected_search_exposure_count' => (int) ($validationCounts['candidate_unexpected_search_exposure_count'] ?? 0),
+                'candidate_unexpected_sitemap_exposure_count' => (int) ($validationCounts['candidate_unexpected_sitemap_exposure_count'] ?? 0),
+                'candidate_unexpected_llms_exposure_count' => (int) ($validationCounts['candidate_unexpected_llms_exposure_count'] ?? 0),
+                'candidate_unexpected_llms_full_exposure_count' => (int) ($validationCounts['candidate_unexpected_llms_full_exposure_count'] ?? 0),
+                'candidate_unexpected_indexable_exposure_count' => (int) ($validationCounts['candidate_unexpected_indexable_exposure_count'] ?? 0),
                 'failures' => $validation['failures'] ?? [],
             ],
+            'candidate_semantics' => [
+                'published_candidate_state' => 'expected_pre_route_inventory',
+                'detail_api_404' => 'expected_pre_route',
+                'frontend_route_404' => 'expected_pre_route',
+                'dataset_search_visibility' => 'expected_hidden',
+                'sitemap_llms_visibility' => 'expected_hidden',
+                'public_release_gate_route_validation' => 'not_applicable_before_promotion',
+                'public_exposure_failure_condition' => 'published_candidate_visible_on_any_public_runtime_surface',
+            ],
             'rollout_readiness' => [
-                'ready_for_expansion_batches' => $surfaceEquality === 'pass',
-                'recommended_first_batch_size' => $surfaceEquality === 'pass' ? 50 : 0,
+                'ready_for_expansion_batches' => $readyForExpansionBatches,
+                'recommended_first_batch_size' => $readyForExpansionBatches ? 50 : 0,
                 'requires_surface_reconciliation_before_rollout' => $surfaceEquality !== 'pass',
+                'candidate_public_exposure_blocker' => $candidatePublicExposureBlocker,
+                'candidate_unexpected_exposure_count' => $candidateUnexpectedExposureCount,
             ],
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $validationCounts
+     */
+    private function candidateUnexpectedExposureCount(array $validationCounts): int
+    {
+        return (int) ($validationCounts['candidate_unexpected_route_exposure_count'] ?? 0)
+            + (int) ($validationCounts['candidate_unexpected_api_exposure_count'] ?? 0)
+            + (int) ($validationCounts['candidate_unexpected_dataset_exposure_count'] ?? 0)
+            + (int) ($validationCounts['candidate_unexpected_search_exposure_count'] ?? 0)
+            + (int) ($validationCounts['candidate_unexpected_sitemap_exposure_count'] ?? 0)
+            + (int) ($validationCounts['candidate_unexpected_llms_exposure_count'] ?? 0)
+            + (int) ($validationCounts['candidate_unexpected_llms_full_exposure_count'] ?? 0)
+            + (int) ($validationCounts['candidate_unexpected_indexable_exposure_count'] ?? 0);
     }
 
     private function normalizeTimestamp(?string $value): string
