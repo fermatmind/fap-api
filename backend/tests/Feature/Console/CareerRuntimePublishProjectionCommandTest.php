@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Console;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Publish\CareerCanonicalRuntimeTruthExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
@@ -67,6 +68,67 @@ final class CareerRuntimePublishProjectionCommandTest extends TestCase
             '--projection' => $projectionPath,
             '--json' => true,
         ])->assertExitCode(1);
+    }
+
+    public function test_canonical_runtime_truth_command_materializes_truth_from_projection_artifact(): void
+    {
+        $projectionPath = storage_path('app/testing/runtime-projection-truth-'.strtolower(str()->random(8)).'.json');
+        File::ensureDirectoryExists(dirname($projectionPath));
+        File::put($projectionPath, json_encode([
+            'projection_kind' => 'career_runtime_publish_projection',
+            'projection_version' => 'test',
+            'source_authority' => 'CareerFullReleaseLedger',
+            'items' => [
+                [
+                    'slug' => 'actors',
+                    'locale' => 'en',
+                    'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                    'runtime_publish_state' => 'published',
+                    'detail_route_enabled' => true,
+                    'dataset_visible' => true,
+                    'search_visible' => true,
+                    'sitemap_live' => true,
+                    'llms_live' => true,
+                    'llms_full_live' => true,
+                    'canonical_url' => 'https://fermatmind.com/en/career/jobs/actors',
+                    'canonical_self' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                ],
+                [
+                    'slug' => 'software-developers',
+                    'locale' => 'en',
+                    'public_resolution_type' => CareerPublicResolutionTypeMatrix::KEEP_NON_PUBLIC_WITH_POLICY,
+                    'runtime_publish_state' => 'quarantined',
+                    'detail_route_enabled' => false,
+                    'dataset_visible' => false,
+                    'search_visible' => false,
+                    'sitemap_live' => false,
+                    'llms_live' => false,
+                    'llms_full_live' => false,
+                    'canonical_url' => null,
+                    'canonical_self' => false,
+                    'robots_indexable' => false,
+                    'release_gate_pass' => false,
+                ],
+            ],
+        ], JSON_THROW_ON_ERROR));
+        $timestamp = 'canonical-truth-test-'.strtolower(str()->random(8));
+
+        $this->artisan('career:export-canonical-runtime-truth', [
+            '--projection' => $projectionPath,
+            '--timestamp' => $timestamp,
+            '--json' => true,
+        ])->assertExitCode(0);
+
+        $path = storage_path('app/private/career_canonical_runtime_truth/'.$timestamp.'/'.CareerCanonicalRuntimeTruthExporter::TRUTH_FILENAME);
+        $this->assertFileExists($path);
+
+        $payload = json_decode((string) file_get_contents($path), true);
+        $this->assertSame('career_canonical_runtime_truth', data_get($payload, 'truth_kind'));
+        $this->assertSame(1, (int) data_get($payload, 'counts.canonical_projection_rows'));
+        $this->assertSame(1, (int) data_get($payload, 'counts.fully_live'));
+        $this->assertSame(1, (int) data_get($payload, 'excluded_counts_by_public_resolution_type.keep_non_public_with_policy'));
     }
 
     /**

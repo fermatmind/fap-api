@@ -17,6 +17,7 @@ use App\Console\Commands\CareerApplyOccupationDirectoryReviewDecisions;
 use App\Console\Commands\CareerCompileAuthorityWave;
 use App\Console\Commands\CareerCompileRecommendationSubjects;
 use App\Console\Commands\CareerCrosswalkOps;
+use App\Console\Commands\CareerExportCanonicalRuntimeTruth;
 use App\Console\Commands\CareerExportCrosswalkBacklogConvergence;
 use App\Console\Commands\CareerExportFirstWaveReleaseArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutBundleArtifacts;
@@ -203,6 +204,7 @@ class Kernel extends ConsoleKernel
         CareerCompileAuthorityWave::class,
         CareerCompileRecommendationSubjects::class,
         CareerCrosswalkOps::class,
+        CareerExportCanonicalRuntimeTruth::class,
         CareerExportCrosswalkBacklogConvergence::class,
         CareerExportFullReleaseLedger::class,
         CareerExportRuntimePublishProjection::class,
