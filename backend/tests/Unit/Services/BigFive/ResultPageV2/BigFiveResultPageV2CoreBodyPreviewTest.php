@@ -985,6 +985,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerRuntimePublishProjectionFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestDTO.php',
+            'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestExporter.php',
+            'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestService.php',
+            'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestValidator.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionDTO.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionExporter.php',
             'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthExporter.php',
