@@ -193,7 +193,45 @@ final class CareerRuntimePublishProjectionCommandTest extends TestCase
         $this->assertSame('complete', data_get($payload, 'status'));
         $this->assertSame('pass', data_get($payload, 'surface_equality'));
         $this->assertSame(2, (int) data_get($payload, 'counts.fully_live'));
+        $this->assertSame(0, (int) data_get($payload, 'counts.candidate_pre_route_expected_count'));
+        $this->assertSame(0, (int) data_get($payload, 'counts.candidate_unexpected_route_exposure_count'));
+        $this->assertSame('expected_pre_route_inventory', data_get($payload, 'candidate_semantics.published_candidate_state'));
         $this->assertSame(50, (int) data_get($payload, 'rollout_readiness.recommended_first_batch_size'));
+    }
+
+    public function test_canonical_runtime_truth_finalization_reports_candidates_as_expected_pre_route(): void
+    {
+        $ledgerPath = $this->writeLedgerArtifact([
+            [
+                'source_slug' => 'actuaries',
+                'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                'public_eligible' => true,
+                'indexability' => 'noindex',
+            ],
+        ]);
+        $timestamp = 'canonical-truth-finalization-candidate-test-'.strtolower(str()->random(8));
+
+        $this->artisan('career:finalize-canonical-runtime-truth', [
+            '--ledger' => $ledgerPath,
+            '--timestamp' => $timestamp,
+            '--json' => true,
+        ])->assertExitCode(0);
+
+        $path = storage_path('app/private/career_canonical_runtime_truth_finalization/'.$timestamp.'/'.CareerFinalizeCanonicalRuntimeTruth::FINALIZATION_FILENAME);
+        $this->assertFileExists($path);
+
+        $payload = json_decode((string) file_get_contents($path), true);
+        $this->assertSame('complete', data_get($payload, 'status'));
+        $this->assertSame(0, (int) data_get($payload, 'counts.published'));
+        $this->assertSame(2, (int) data_get($payload, 'counts.published_candidate'));
+        $this->assertSame(2, (int) data_get($payload, 'counts.candidate_pre_route_expected_count'));
+        $this->assertSame(2, (int) data_get($payload, 'counts.candidate_release_gate_not_applicable_count'));
+        $this->assertSame(0, (int) data_get($payload, 'counts.route_live'));
+        $this->assertSame(0, (int) data_get($payload, 'counts.candidate_unexpected_route_exposure_count'));
+        $this->assertSame('expected_pre_route', data_get($payload, 'candidate_semantics.detail_api_404'));
+        $this->assertSame('not_applicable_before_promotion', data_get($payload, 'candidate_semantics.public_release_gate_route_validation'));
+        $this->assertTrue(data_get($payload, 'rollout_readiness.ready_for_expansion_batches'));
+        $this->assertFalse(data_get($payload, 'rollout_readiness.candidate_public_exposure_blocker'));
     }
 
     /**

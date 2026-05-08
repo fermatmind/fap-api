@@ -64,6 +64,68 @@ final class CareerCanonicalRuntimeTruthValidatorTest extends TestCase
         $this->assertSame(1, data_get($result, 'counts.llms_full_only'));
     }
 
+    public function test_it_treats_hidden_published_candidate_as_expected_pre_route(): void
+    {
+        $item = $this->item([
+            'projection_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
+            'route_exists' => false,
+            'final_200' => false,
+            'robots_indexable' => false,
+            'canonical_self' => false,
+            'dataset_visible' => false,
+            'search_visible' => false,
+            'sitemap_live' => false,
+            'llms_live' => false,
+            'llms_full_live' => false,
+            'release_gate_pass' => false,
+            'fully_live' => false,
+            'candidate_pre_route_expected' => true,
+            'candidate_route_expectation' => 'expected_pre_route',
+            'candidate_release_gate_applicability' => 'not_applicable_before_promotion',
+        ]);
+
+        $result = app(CareerCanonicalRuntimeTruthValidator::class)->validate($this->truth([$item]));
+
+        $this->assertSame('pass', $result['status']);
+        $this->assertSame(1, data_get($result, 'counts.candidate_pre_route_expected_count'));
+        $this->assertSame(1, data_get($result, 'counts.candidate_release_gate_not_applicable_count'));
+        $this->assertSame(0, data_get($result, 'counts.candidate_unexpected_route_exposure_count'));
+        $this->assertSame(0, data_get($result, 'counts.failures'));
+    }
+
+    public function test_it_blocks_published_candidate_public_exposure(): void
+    {
+        $item = $this->item([
+            'projection_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
+            'route_exists' => true,
+            'final_200' => true,
+            'robots_indexable' => true,
+            'canonical_self' => true,
+            'dataset_visible' => true,
+            'search_visible' => true,
+            'sitemap_live' => true,
+            'llms_live' => true,
+            'llms_full_live' => true,
+            'release_gate_pass' => true,
+            'fully_live' => false,
+        ]);
+
+        $result = app(CareerCanonicalRuntimeTruthValidator::class)->validate($this->truth([$item]));
+
+        $this->assertSame('blocked', $result['status']);
+        $this->assertSame(0, data_get($result, 'counts.candidate_pre_route_expected_count'));
+        $this->assertSame(1, data_get($result, 'counts.candidate_unexpected_route_exposure_count'));
+        $this->assertSame(1, data_get($result, 'counts.candidate_unexpected_api_exposure_count'));
+        $this->assertSame(1, data_get($result, 'counts.candidate_unexpected_dataset_exposure_count'));
+        $this->assertSame(1, data_get($result, 'counts.candidate_unexpected_search_exposure_count'));
+        $this->assertSame(1, data_get($result, 'counts.candidate_unexpected_sitemap_exposure_count'));
+        $this->assertSame(1, data_get($result, 'counts.candidate_unexpected_llms_exposure_count'));
+        $this->assertSame(1, data_get($result, 'counts.candidate_unexpected_llms_full_exposure_count'));
+        $this->assertSame(1, data_get($result, 'counts.candidate_unexpected_indexable_exposure_count'));
+        $this->assertContains('candidate_unexpected_route_exposure', array_column($result['failures'], 'reason'));
+        $this->assertContains('candidate_unexpected_sitemap_exposure', array_column($result['failures'], 'reason'));
+    }
+
     /**
      * @param  list<array<string, mixed>>  $items
      * @return array<string, mixed>

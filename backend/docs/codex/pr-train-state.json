@@ -6,6 +6,64 @@
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "PR-CANDIDATE-SEMANTICS-PREROUTE": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/candidate-validator-semantics-preroute",
+      "commit_sha": "916723081fbd1f0c227aeb21048e57621d5a9b92",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1297",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/CareerFinalizeCanonicalRuntimeTruth.php app/Domain/Career/Expansion/CanonicalExpansionManifestDTO.php app/Domain/Career/Expansion/CanonicalExpansionManifestValidator.php app/Domain/Career/Expansion/CanonicalRolloutBatchStateMachine.php app/Domain/Career/Expansion/CanonicalRolloutGovernanceValidator.php app/Domain/Career/Publish/CareerCanonicalRuntimeTruthExporter.php app/Domain/Career/Publish/CareerCanonicalRuntimeTruthValidator.php tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php tests/Unit/Services/Career/CanonicalExpansionManifestServiceTest.php tests/Unit/Services/Career/CanonicalRolloutGovernanceValidatorTest.php tests/Unit/Services/Career/CareerCanonicalRuntimeTruthExporterTest.php tests/Unit/Services/Career/CareerCanonicalRuntimeTruthValidatorTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerCanonicalRuntimeTruthExporterTest.php tests/Unit/Services/Career/CareerCanonicalRuntimeTruthValidatorTest.php tests/Unit/Services/Career/CanonicalExpansionManifestServiceTest.php tests/Unit/Services/Career/CanonicalRolloutGovernanceValidatorTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:export-runtime-publish-projection --ledger=/tmp/candidate_semantics_preroute_ledger.json --json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:export-canonical-runtime-truth --ledger=/tmp/candidate_semantics_preroute_ledger.json --json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:validate-canonical-runtime-truth --ledger=/tmp/candidate_semantics_preroute_ledger.json --json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:finalize-canonical-runtime-truth --ledger=/tmp/candidate_semantics_preroute_ledger.json --json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list --path=career",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
     "PR-A2d": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",

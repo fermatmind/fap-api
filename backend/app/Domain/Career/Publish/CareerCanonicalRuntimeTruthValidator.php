@@ -44,6 +44,16 @@ final class CareerCanonicalRuntimeTruthValidator
                 'sitemap_only' => $this->countFailures($failures, 'sitemap_only'),
                 'llms_only' => $this->countFailures($failures, 'llms_only'),
                 'llms_full_only' => $this->countFailures($failures, 'llms_full_only'),
+                'candidate_pre_route_expected_count' => $this->countCandidatePreRouteExpected($items),
+                'candidate_release_gate_not_applicable_count' => $this->countCandidateRows($items),
+                'candidate_unexpected_route_exposure_count' => $this->countFailures($failures, 'candidate_unexpected_route_exposure'),
+                'candidate_unexpected_api_exposure_count' => $this->countFailures($failures, 'candidate_unexpected_api_exposure'),
+                'candidate_unexpected_dataset_exposure_count' => $this->countFailures($failures, 'candidate_unexpected_dataset_exposure'),
+                'candidate_unexpected_search_exposure_count' => $this->countFailures($failures, 'candidate_unexpected_search_exposure'),
+                'candidate_unexpected_sitemap_exposure_count' => $this->countFailures($failures, 'candidate_unexpected_sitemap_exposure'),
+                'candidate_unexpected_llms_exposure_count' => $this->countFailures($failures, 'candidate_unexpected_llms_exposure'),
+                'candidate_unexpected_llms_full_exposure_count' => $this->countFailures($failures, 'candidate_unexpected_llms_full_exposure'),
+                'candidate_unexpected_indexable_exposure_count' => $this->countFailures($failures, 'candidate_unexpected_indexable_exposure'),
             ],
             'failures' => $failures,
         ];
@@ -57,7 +67,9 @@ final class CareerCanonicalRuntimeTruthValidator
         $failures = [];
         $slug = strtolower(trim((string) ($item['slug'] ?? '')));
         $locale = strtolower(trim((string) ($item['locale'] ?? '')));
-        $published = ($item['projection_state'] ?? null) === CareerRuntimePublishProjectionService::STATE_PUBLISHED;
+        $state = (string) ($item['projection_state'] ?? '');
+        $published = $state === CareerRuntimePublishProjectionService::STATE_PUBLISHED;
+        $publishedCandidate = $state === CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE;
         $releaseGatePass = (bool) ($item['release_gate_pass'] ?? false);
         $canonicalProjected = $published && $releaseGatePass;
         $surfaces = [
@@ -81,6 +93,13 @@ final class CareerCanonicalRuntimeTruthValidator
             $failures[] = $this->failure($index, $slug, $locale, 'missing_locale', $surfaces);
         }
 
+        if ($publishedCandidate) {
+            return [
+                ...$failures,
+                ...$this->validatePublishedCandidateItem($item, $index, $slug, $locale, $surfaces),
+            ];
+        }
+
         if ($canonicalProjected && ! $fullyLive) {
             $failures[] = $this->failure($index, $slug, $locale, 'projection_only', $surfaces);
         }
@@ -92,6 +111,46 @@ final class CareerCanonicalRuntimeTruthValidator
         }
 
         if ((bool) ($item['fully_live'] ?? false) !== $fullyLive) {
+            $failures[] = $this->failure($index, $slug, $locale, 'fully_live_flag_mismatch', $surfaces);
+        }
+
+        return $failures;
+    }
+
+    /**
+     * @param  array<string, bool>  $surfaces
+     * @return list<array<string, mixed>>
+     */
+    private function validatePublishedCandidateItem(array $item, int $index, string $slug, string $locale, array $surfaces): array
+    {
+        $failures = [];
+
+        if ((bool) ($item['route_exists'] ?? false) || (bool) ($item['final_200'] ?? false)) {
+            $failures[] = $this->failure($index, $slug, $locale, 'candidate_unexpected_route_exposure', $surfaces);
+            $failures[] = $this->failure($index, $slug, $locale, 'candidate_unexpected_api_exposure', $surfaces);
+        }
+        if ((bool) ($item['dataset_visible'] ?? false)) {
+            $failures[] = $this->failure($index, $slug, $locale, 'candidate_unexpected_dataset_exposure', $surfaces);
+        }
+        if ((bool) ($item['search_visible'] ?? false)) {
+            $failures[] = $this->failure($index, $slug, $locale, 'candidate_unexpected_search_exposure', $surfaces);
+        }
+        if ((bool) ($item['sitemap_live'] ?? false)) {
+            $failures[] = $this->failure($index, $slug, $locale, 'candidate_unexpected_sitemap_exposure', $surfaces);
+        }
+        if ((bool) ($item['llms_live'] ?? false)) {
+            $failures[] = $this->failure($index, $slug, $locale, 'candidate_unexpected_llms_exposure', $surfaces);
+        }
+        if ((bool) ($item['llms_full_live'] ?? false)) {
+            $failures[] = $this->failure($index, $slug, $locale, 'candidate_unexpected_llms_full_exposure', $surfaces);
+        }
+        if ((bool) ($item['robots_indexable'] ?? false)) {
+            $failures[] = $this->failure($index, $slug, $locale, 'candidate_unexpected_indexable_exposure', $surfaces);
+        }
+        if ((bool) ($item['release_gate_pass'] ?? false)) {
+            $failures[] = $this->failure($index, $slug, $locale, 'candidate_unexpected_release_gate_pass', $surfaces);
+        }
+        if ((bool) ($item['fully_live'] ?? false)) {
             $failures[] = $this->failure($index, $slug, $locale, 'fully_live_flag_mismatch', $surfaces);
         }
 
@@ -127,5 +186,34 @@ final class CareerCanonicalRuntimeTruthValidator
     private function countFailures(array $failures, string $reason): int
     {
         return count(array_filter($failures, static fn (array $failure): bool => ($failure['reason'] ?? null) === $reason));
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     */
+    private function countCandidateRows(array $items): int
+    {
+        return count(array_filter($items, static fn (array $item): bool => ($item['projection_state'] ?? null) === CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE));
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     */
+    private function countCandidatePreRouteExpected(array $items): int
+    {
+        return count(array_filter($items, function (array $item): bool {
+            if (($item['projection_state'] ?? null) !== CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE) {
+                return false;
+            }
+
+            return $this->validatePublishedCandidateItem($item, -1, '', '', [
+                'dataset' => (bool) ($item['dataset_visible'] ?? false),
+                'search' => (bool) ($item['search_visible'] ?? false),
+                'route' => (bool) ($item['route_exists'] ?? false) && (bool) ($item['final_200'] ?? false),
+                'sitemap' => (bool) ($item['sitemap_live'] ?? false),
+                'llms' => (bool) ($item['llms_live'] ?? false),
+                'llms_full' => (bool) ($item['llms_full_live'] ?? false),
+            ]) === [];
+        }));
     }
 }

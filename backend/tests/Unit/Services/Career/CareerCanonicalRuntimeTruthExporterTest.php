@@ -87,6 +87,45 @@ final class CareerCanonicalRuntimeTruthExporterTest extends TestCase
         $this->assertFalse($truth['items'][0]['fully_live']);
     }
 
+    public function test_it_reports_published_candidate_rows_as_expected_pre_route_inventory(): void
+    {
+        $projection = (new CareerRuntimePublishProjectionService)->buildFromLedgerArray($this->ledger([
+            [
+                'source_slug' => 'actuaries',
+                'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                'public_eligible' => true,
+                'indexability' => 'noindex',
+            ],
+        ]));
+
+        $truth = app(CareerCanonicalRuntimeTruthExporter::class)->buildFromProjectionArray($projection);
+
+        $this->assertSame(2, data_get($truth, 'counts.published_candidate'));
+        $this->assertSame(2, data_get($truth, 'counts.candidate_pre_route_expected_count'));
+        $this->assertSame(2, data_get($truth, 'counts.candidate_release_gate_not_applicable_count'));
+        $this->assertSame(0, data_get($truth, 'counts.candidate_unexpected_route_exposure_count'));
+        $this->assertSame(0, data_get($truth, 'counts.candidate_unexpected_dataset_exposure_count'));
+        $this->assertSame(0, data_get($truth, 'counts.candidate_unexpected_sitemap_exposure_count'));
+        $this->assertSame(0, data_get($truth, 'counts.candidate_unexpected_llms_exposure_count'));
+
+        foreach ($truth['items'] as $item) {
+            $this->assertSame(CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE, $item['projection_state']);
+            $this->assertFalse($item['route_exists']);
+            $this->assertFalse($item['final_200']);
+            $this->assertFalse($item['dataset_visible']);
+            $this->assertFalse($item['search_visible']);
+            $this->assertFalse($item['sitemap_live']);
+            $this->assertFalse($item['llms_live']);
+            $this->assertFalse($item['llms_full_live']);
+            $this->assertFalse($item['robots_indexable']);
+            $this->assertFalse($item['canonical_self']);
+            $this->assertSame('expected_pre_route', $item['candidate_route_expectation']);
+            $this->assertSame('not_applicable_before_promotion', $item['candidate_release_gate_applicability']);
+            $this->assertTrue($item['candidate_pre_route_expected']);
+            $this->assertSame([], $item['candidate_unexpected_exposures']);
+        }
+    }
+
     /**
      * @param  list<array<string, mixed>>  $rows
      * @return array<string, mixed>

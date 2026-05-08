@@ -71,6 +71,13 @@ final class CanonicalRolloutBatchStateMachine
             'current_state' => $currentState,
             'target_state' => $targetState,
             'allowed_states' => CanonicalExpansionManifestService::ALLOWED_ROLLOUT_STATES,
+            'published_candidate_semantics' => [
+                'state' => 'expected_pre_route_inventory',
+                'detail_api_404' => 'expected_pre_route',
+                'frontend_route_404' => 'expected_pre_route',
+                'public_release_gate_route_validation' => 'not_applicable_before_promotion',
+                'public_exposure_failure_condition' => 'published_candidate_visible_on_any_public_runtime_surface',
+            ],
             'updated_manifest' => $updatedManifest,
             'failures' => $failures,
         ];

@@ -75,15 +75,25 @@ final class CareerCanonicalRuntimeTruthExporter
     private function truthItem(array $projectionItem): array
     {
         $state = trim((string) ($projectionItem['runtime_publish_state'] ?? ''));
+        $isPublishedCandidate = $state === CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE;
         $detailRouteEnabled = ($projectionItem['detail_route_enabled'] ?? false) === true;
         $releaseGatePass = (bool) ($projectionItem['release_gate_pass'] ?? false);
-        $robotsIndexable = (bool) ($projectionItem['robots_indexable'] ?? false);
-        $canonicalSelf = (bool) ($projectionItem['canonical_self'] ?? false);
+        $robotsIndexable = $isPublishedCandidate ? false : (bool) ($projectionItem['robots_indexable'] ?? false);
+        $canonicalSelf = $isPublishedCandidate ? false : (bool) ($projectionItem['canonical_self'] ?? false);
         $datasetVisible = (bool) ($projectionItem['dataset_visible'] ?? false);
         $searchVisible = (bool) ($projectionItem['search_visible'] ?? false);
         $sitemapLive = (bool) ($projectionItem['sitemap_live'] ?? false);
         $llmsLive = (bool) ($projectionItem['llms_live'] ?? false);
         $llmsFullLive = (bool) ($projectionItem['llms_full_live'] ?? false);
+        $candidateUnexpectedExposures = $this->candidateUnexpectedExposures(
+            projectionItem: $projectionItem,
+            detailRouteEnabled: $detailRouteEnabled,
+            datasetVisible: $datasetVisible,
+            searchVisible: $searchVisible,
+            sitemapLive: $sitemapLive,
+            llmsLive: $llmsLive,
+            llmsFullLive: $llmsFullLive,
+        );
         $final200 = $state === CareerRuntimePublishProjectionService::STATE_PUBLISHED
             && $detailRouteEnabled
             && $releaseGatePass;
@@ -115,7 +125,55 @@ final class CareerCanonicalRuntimeTruthExporter
             'release_gate_pass' => $releaseGatePass,
             'canonical_url' => $projectionItem['canonical_url'] ?? null,
             'fully_live' => $fullyLive,
+            'candidate_pre_route_expected' => $isPublishedCandidate && $candidateUnexpectedExposures === [],
+            'candidate_route_expectation' => $isPublishedCandidate ? 'expected_pre_route' : 'not_candidate',
+            'candidate_release_gate_applicability' => $isPublishedCandidate ? 'not_applicable_before_promotion' : 'required_for_published',
+            'candidate_unexpected_exposures' => $candidateUnexpectedExposures,
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function candidateUnexpectedExposures(
+        array $projectionItem,
+        bool $detailRouteEnabled,
+        bool $datasetVisible,
+        bool $searchVisible,
+        bool $sitemapLive,
+        bool $llmsLive,
+        bool $llmsFullLive,
+    ): array {
+        $state = trim((string) ($projectionItem['runtime_publish_state'] ?? ''));
+        if ($state !== CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE) {
+            return [];
+        }
+
+        $exposures = [];
+        if ($detailRouteEnabled) {
+            $exposures[] = 'route';
+            $exposures[] = 'api';
+        }
+        if ($datasetVisible) {
+            $exposures[] = 'dataset';
+        }
+        if ($searchVisible) {
+            $exposures[] = 'search';
+        }
+        if ($sitemapLive) {
+            $exposures[] = 'sitemap';
+        }
+        if ($llmsLive) {
+            $exposures[] = 'llms';
+        }
+        if ($llmsFullLive) {
+            $exposures[] = 'llms_full';
+        }
+        if ((bool) ($projectionItem['robots_indexable'] ?? false)) {
+            $exposures[] = 'indexable';
+        }
+
+        return array_values(array_unique($exposures));
     }
 
     /**
@@ -143,6 +201,16 @@ final class CareerCanonicalRuntimeTruthExporter
             'llms_full_live' => $this->countTrue($items, 'llms_full_live'),
             'release_gate_pass' => $this->countTrue($items, 'release_gate_pass'),
             'fully_live' => $this->countTrue($items, 'fully_live'),
+            'candidate_pre_route_expected_count' => $this->countTrue($items, 'candidate_pre_route_expected'),
+            'candidate_release_gate_not_applicable_count' => $this->countWhere($items, 'projection_state', CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE),
+            'candidate_unexpected_route_exposure_count' => $this->countCandidateExposure($items, 'route'),
+            'candidate_unexpected_api_exposure_count' => $this->countCandidateExposure($items, 'api'),
+            'candidate_unexpected_dataset_exposure_count' => $this->countCandidateExposure($items, 'dataset'),
+            'candidate_unexpected_search_exposure_count' => $this->countCandidateExposure($items, 'search'),
+            'candidate_unexpected_sitemap_exposure_count' => $this->countCandidateExposure($items, 'sitemap'),
+            'candidate_unexpected_llms_exposure_count' => $this->countCandidateExposure($items, 'llms'),
+            'candidate_unexpected_llms_full_exposure_count' => $this->countCandidateExposure($items, 'llms_full'),
+            'candidate_unexpected_indexable_exposure_count' => $this->countCandidateExposure($items, 'indexable'),
         ];
     }
 
@@ -160,6 +228,18 @@ final class CareerCanonicalRuntimeTruthExporter
     private function countWhere(array $items, string $field, string $value): int
     {
         return count(array_filter($items, static fn (array $item): bool => ($item[$field] ?? null) === $value));
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     */
+    private function countCandidateExposure(array $items, string $exposure): int
+    {
+        return count(array_filter($items, static function (array $item) use ($exposure): bool {
+            $exposures = $item['candidate_unexpected_exposures'] ?? [];
+
+            return is_array($exposures) && in_array($exposure, $exposures, true);
+        }));
     }
 
     /**
