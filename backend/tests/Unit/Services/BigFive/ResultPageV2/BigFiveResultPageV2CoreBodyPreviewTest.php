@@ -223,6 +223,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionDTO.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionExporter.php',
+            'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthExporter.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionService.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
         ];
@@ -979,6 +980,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionDTO.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionExporter.php',
+            'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthExporter.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionService.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
         ], true);
