@@ -59,9 +59,12 @@ final class CanonicalRolloutBatchStateMachine
         $updatedManifest = $manifest;
         if ($failures === []) {
             $updatedManifest['rollout_state'] = $targetState;
-            $updatedManifest['projection_state'] = $targetState === CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED
-                ? CareerRuntimePublishProjectionService::STATE_PUBLISHED
-                : CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE;
+            $updatedManifest['projection_state'] = match ($targetState) {
+                CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED => CareerRuntimePublishProjectionService::STATE_PUBLISHED,
+                CanonicalExpansionManifestService::ROLLOUT_STATE_QUARANTINED => CareerRuntimePublishProjectionService::STATE_QUARANTINED,
+                CanonicalExpansionManifestService::ROLLOUT_STATE_BLOCKED => CareerRuntimePublishProjectionService::STATE_BLOCKED,
+                default => CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
+            };
         }
 
         return [

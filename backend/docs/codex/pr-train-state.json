@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-05T10:16:18+08:00",
+  "updated_at": "2026-05-09T00:00:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,7 +9,7 @@
     "PR-CANDIDATE-SEMANTICS-PREROUTE": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/candidate-validator-semantics-preroute",
       "commit_sha": "916723081fbd1f0c227aeb21048e57621d5a9b92",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1297",
@@ -60,9 +60,9 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-09T00:00:00Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-A2d": {
       "repo": "fap-api",
@@ -4600,6 +4600,64 @@
           "summary": "Scoped Pint, D7b policy tests, full workbook validator test, and real D5-ready workbook dry-run passed; broad tests/Unit/Services/Career failed in out-of-scope CareerRecommendationDetailBundleBuilderTest, so no D7b commit or PR was opened."
         }
       ]
+    },
+    "PR-CANONICAL-ATOMIC-PROMOTION-ROLLBACK-GATE": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "in_progress",
+      "branch": "codex/canonical-atomic-promotion-rollback-gate",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Domain/Career/Expansion/CanonicalBatchPromotionService.php app/Domain/Career/Expansion/CanonicalPromotionResultDTO.php app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php app/Domain/Career/Expansion/CanonicalPromotionRollbackResultDTO.php app/Domain/Career/Expansion/CanonicalPromotionTransaction.php app/Domain/Career/Expansion/CanonicalRolloutBatchStateMachine.php tests/Unit/Services/Career/CanonicalBatchPromotionServiceTest.php tests/Unit/Services/Career/CanonicalPromotionRollbackGateTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CanonicalBatchPromotionServiceTest.php tests/Unit/Services/Career/CanonicalPromotionRollbackGateTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php tests/Unit/Services/Career/CanonicalRolloutGovernanceValidatorTest.php tests/Unit/Services/Career/CareerCanonicalRuntimeTruthValidatorTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list --path=career",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:export-runtime-publish-projection --ledger=/tmp/candidate_semantics_preroute_ledger.json --timestamp=canonical-atomic-promotion-rollback-gate --json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:export-canonical-runtime-truth --ledger=/tmp/candidate_semantics_preroute_ledger.json --timestamp=canonical-atomic-promotion-rollback-gate --json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:validate-canonical-runtime-truth --ledger=/tmp/candidate_semantics_preroute_ledger.json --json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:finalize-canonical-runtime-truth --ledger=/tmp/candidate_semantics_preroute_ledger.json --timestamp=canonical-atomic-promotion-rollback-gate --json",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   },
   "prs": {

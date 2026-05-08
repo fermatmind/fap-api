@@ -51,6 +51,21 @@ final class CanonicalRolloutBatchStateMachineTest extends TestCase
         $this->assertSame(CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE, data_get($result, 'updated_manifest.projection_state'));
     }
 
+    public function test_it_preserves_quarantine_projection_state(): void
+    {
+        $result = (new CanonicalRolloutBatchStateMachine)->transition(
+            $this->manifest([
+                'rollout_state' => CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED,
+                'projection_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED,
+            ]),
+            CanonicalExpansionManifestService::ROLLOUT_STATE_QUARANTINED,
+        );
+
+        $this->assertSame('planned', $result['status']);
+        $this->assertSame(CanonicalExpansionManifestService::ROLLOUT_STATE_QUARANTINED, data_get($result, 'updated_manifest.rollout_state'));
+        $this->assertSame(CareerRuntimePublishProjectionService::STATE_QUARANTINED, data_get($result, 'updated_manifest.projection_state'));
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      * @return array<string, mixed>
