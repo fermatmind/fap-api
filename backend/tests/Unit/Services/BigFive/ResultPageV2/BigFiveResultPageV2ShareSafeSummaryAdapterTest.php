@@ -16,7 +16,7 @@ final class BigFiveResultPageV2ShareSafeSummaryAdapterTest extends TestCase
 
     public function test_o59_route_driven_payload_adapts_to_share_safe_summary_fixture(): void
     {
-        $adapter = new BigFiveV2ShareSafeSummaryAdapter();
+        $adapter = new BigFiveV2ShareSafeSummaryAdapter;
         $shareEnvelope = $adapter->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH));
         $sharePayload = $shareEnvelope[BigFiveV2ShareSafeSummaryAdapter::PAYLOAD_KEY] ?? null;
 
@@ -36,7 +36,7 @@ final class BigFiveResultPageV2ShareSafeSummaryAdapterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('requires a valid route-driven payload');
 
-        (new BigFiveV2ShareSafeSummaryAdapter())->adapt([
+        (new BigFiveV2ShareSafeSummaryAdapter)->adapt([
             'big5_result_page_v2' => [
                 'schema_version' => 'invalid',
                 'modules' => [],
@@ -52,13 +52,13 @@ final class BigFiveResultPageV2ShareSafeSummaryAdapterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('missing route score for N');
 
-        (new BigFiveV2ShareSafeSummaryAdapter())->adapt($envelope);
+        (new BigFiveV2ShareSafeSummaryAdapter)->adapt($envelope);
     }
 
     public function test_share_payload_does_not_expose_raw_scores_or_internal_metadata(): void
     {
         $encoded = json_encode(
-            (new BigFiveV2ShareSafeSummaryAdapter())->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH)),
+            (new BigFiveV2ShareSafeSummaryAdapter)->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH)),
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
         );
 

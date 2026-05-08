@@ -99,7 +99,7 @@ final class NormCaptureTest extends TestCase
 
     private function writer(): BigFiveNormObservationCaptureWriter
     {
-        return new BigFiveNormObservationCaptureWriter();
+        return new BigFiveNormObservationCaptureWriter;
     }
 
     /**

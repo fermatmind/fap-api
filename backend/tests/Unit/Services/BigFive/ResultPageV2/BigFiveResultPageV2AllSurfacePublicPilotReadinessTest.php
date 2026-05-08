@@ -116,7 +116,7 @@ final class BigFiveResultPageV2AllSurfacePublicPilotReadinessTest extends TestCa
     }
 
     /**
-     * @param array<string,mixed> $values
+     * @param  array<string,mixed>  $values
      * @return array<string,mixed>
      */
     private function ksort(array $values): array

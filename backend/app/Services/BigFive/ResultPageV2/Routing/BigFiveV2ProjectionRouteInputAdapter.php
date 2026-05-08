@@ -16,7 +16,7 @@ final class BigFiveV2ProjectionRouteInputAdapter
     private array $errors = [];
 
     public function __construct(
-        private readonly BigFiveV2BandMapper $bandMapper = new BigFiveV2BandMapper(),
+        private readonly BigFiveV2BandMapper $bandMapper = new BigFiveV2BandMapper,
     ) {}
 
     /**

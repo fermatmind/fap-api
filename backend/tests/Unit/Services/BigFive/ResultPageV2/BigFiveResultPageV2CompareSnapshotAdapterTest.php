@@ -16,7 +16,7 @@ final class BigFiveResultPageV2CompareSnapshotAdapterTest extends TestCase
 
     public function test_o59_route_driven_payload_adapts_to_compare_snapshot_fixture(): void
     {
-        $adapter = new BigFiveV2CompareSnapshotAdapter();
+        $adapter = new BigFiveV2CompareSnapshotAdapter;
         $compareEnvelope = $adapter->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH));
         $comparePayload = $compareEnvelope[BigFiveV2CompareSnapshotAdapter::PAYLOAD_KEY] ?? null;
 
@@ -37,7 +37,7 @@ final class BigFiveResultPageV2CompareSnapshotAdapterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('requires a valid route-driven payload');
 
-        (new BigFiveV2CompareSnapshotAdapter())->adapt([
+        (new BigFiveV2CompareSnapshotAdapter)->adapt([
             'big5_result_page_v2' => [
                 'schema_version' => 'invalid',
                 'modules' => [],
@@ -53,13 +53,13 @@ final class BigFiveResultPageV2CompareSnapshotAdapterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('missing route score for N');
 
-        (new BigFiveV2CompareSnapshotAdapter())->adapt($envelope);
+        (new BigFiveV2CompareSnapshotAdapter)->adapt($envelope);
     }
 
     public function test_compare_snapshot_does_not_expose_full_body_raw_scores_or_internal_metadata(): void
     {
         $encoded = json_encode(
-            (new BigFiveV2CompareSnapshotAdapter())->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH)),
+            (new BigFiveV2CompareSnapshotAdapter)->adapt($this->decodeJson(self::ROUTE_DRIVEN_O59_FIXTURE_PATH)),
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
         );
 

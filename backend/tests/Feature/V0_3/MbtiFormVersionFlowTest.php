@@ -37,7 +37,7 @@ final class MbtiFormVersionFlowTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
     }
 
     public function test_mbti_questions_default_to_144_form(): void

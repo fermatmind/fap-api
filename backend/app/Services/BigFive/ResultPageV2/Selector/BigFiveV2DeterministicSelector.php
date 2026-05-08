@@ -14,8 +14,8 @@ final class BigFiveV2DeterministicSelector
     private const REFERENCE_REPORT_PATH = 'content_assets/big5/result_page_v2/qa/selector_reference_consistency/v0_1/selector_reference_consistency_report_v0_1.json';
 
     public function __construct(
-        private readonly BigFiveV2AssetPackageLoader $packageLoader = new BigFiveV2AssetPackageLoader(),
-        private readonly BigFiveV2CouplingResolver $couplingResolver = new BigFiveV2CouplingResolver(),
+        private readonly BigFiveV2AssetPackageLoader $packageLoader = new BigFiveV2AssetPackageLoader,
+        private readonly BigFiveV2CouplingResolver $couplingResolver = new BigFiveV2CouplingResolver,
     ) {}
 
     public function select(BigFiveV2SelectorInput $input): BigFiveV2SelectionResult
@@ -46,6 +46,7 @@ final class BigFiveV2DeterministicSelector
 
             if (isset($unresolvedAssetKeys[$assetKey])) {
                 $suppressed[] = $this->suppression($asset, 'unresolved_asset_reference');
+
                 continue;
             }
 

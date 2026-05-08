@@ -178,7 +178,7 @@ final class BigFiveResultPageV2StagingComposerTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('does not resolve');
 
-        (new BigFiveV2PilotPayloadComposer())->compose($input, $selection);
+        (new BigFiveV2PilotPayloadComposer)->compose($input, $selection);
     }
 
     /**
@@ -187,9 +187,9 @@ final class BigFiveResultPageV2StagingComposerTest extends TestCase
     private function composeO59Envelope(): array
     {
         $input = $this->o59Input();
-        $selection = (new BigFiveV2DeterministicSelector())->select($input);
+        $selection = (new BigFiveV2DeterministicSelector)->select($input);
 
-        return (new BigFiveV2PilotPayloadComposer())->compose($input, $selection);
+        return (new BigFiveV2PilotPayloadComposer)->compose($input, $selection);
     }
 
     /**
@@ -202,9 +202,9 @@ final class BigFiveResultPageV2StagingComposerTest extends TestCase
         }
 
         $input = $this->routeDrivenO59Input();
-        $selection = (new BigFiveV2DeterministicSelector())->select($input);
+        $selection = (new BigFiveV2DeterministicSelector)->select($input);
 
-        return self::$routeDrivenO59Envelope = (new BigFiveV2PilotPayloadComposer())->compose($input, $selection);
+        return self::$routeDrivenO59Envelope = (new BigFiveV2PilotPayloadComposer)->compose($input, $selection);
     }
 
     private function o59Input(): BigFiveV2SelectorInput
@@ -214,7 +214,7 @@ final class BigFiveResultPageV2StagingComposerTest extends TestCase
 
     private function routeDrivenO59Input(): BigFiveV2SelectorInput
     {
-        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter())->fromScoreResult([
+        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter)->fromScoreResult([
             'scale_code' => 'BIG5_OCEAN',
             'scores_0_100' => [
                 'domains_percentile' => [
@@ -234,12 +234,12 @@ final class BigFiveResultPageV2StagingComposerTest extends TestCase
         ]);
         $this->assertNotNull($routeInput);
 
-        return (new BigFiveV2RouteDrivenSelectorInputBuilder())->build($routeInput, $this->o59RouteRow());
+        return (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($routeInput, $this->o59RouteRow());
     }
 
     private function o59RouteRow(): \App\Services\BigFive\ResultPageV2\RouteMatrix\BigFiveV2RouteMatrixRow
     {
-        $result = (new BigFiveV2RouteMatrixParser())->parse();
+        $result = (new BigFiveV2RouteMatrixParser)->parse();
         $this->assertSame([], $result->errors);
 
         $row = $result->row(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);

@@ -27,7 +27,7 @@ final class BigFiveV2EditorialReleaseLinkageTest extends TestCase
     public function test_approved_revision_builds_export_only_release_linkage_plan(): void
     {
         $revision = $this->approvedRevision();
-        $plan = (new BigFiveV2EditorialReleaseLinkage())->exportPlan($revision);
+        $plan = (new BigFiveV2EditorialReleaseLinkage)->exportPlan($revision);
 
         $this->assertSame('big5_v2_cms_release_linkage_export_plan.v0_1', $plan['schema_version']);
         $this->assertTrue($plan['cms_export_only']);
@@ -48,8 +48,8 @@ final class BigFiveV2EditorialReleaseLinkageTest extends TestCase
 
     public function test_release_linkage_rejects_unapproved_or_missing_audit_revisions(): void
     {
-        $service = new BigFiveV2EditorialReleaseLinkage();
-        $draft = (new BigFiveV2EditorialWorkflow())->createDraftFromAsset($this->linkedAsset(), 501);
+        $service = new BigFiveV2EditorialReleaseLinkage;
+        $draft = (new BigFiveV2EditorialWorkflow)->createDraftFromAsset($this->linkedAsset(), 501);
 
         $this->assertFalse($service->canExportReleaseCandidate($draft));
 
@@ -59,7 +59,7 @@ final class BigFiveV2EditorialReleaseLinkageTest extends TestCase
 
     public function test_release_linkage_requires_approval_audit_evidence(): void
     {
-        $workflow = new BigFiveV2EditorialWorkflow();
+        $workflow = new BigFiveV2EditorialWorkflow;
         $revision = $workflow->approve(
             $workflow->submitForReview($workflow->createDraftFromAsset($this->linkedAsset(), 501), 502),
             503
@@ -68,7 +68,7 @@ final class BigFiveV2EditorialReleaseLinkageTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('approval audit');
 
-        (new BigFiveV2EditorialReleaseLinkage())->exportPlan($revision);
+        (new BigFiveV2EditorialReleaseLinkage)->exportPlan($revision);
     }
 
     public function test_policy_package_exists_and_sha256sums_are_reproducible(): void
@@ -97,7 +97,7 @@ final class BigFiveV2EditorialReleaseLinkageTest extends TestCase
 
     public function test_release_linkage_outputs_do_not_expose_forbidden_metadata_or_enable_runtime(): void
     {
-        $plan = (new BigFiveV2EditorialReleaseLinkage())->exportPlan($this->approvedRevision());
+        $plan = (new BigFiveV2EditorialReleaseLinkage)->exportPlan($this->approvedRevision());
         $encoded = json_encode($plan, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
 
         foreach ([
@@ -129,8 +129,8 @@ final class BigFiveV2EditorialReleaseLinkageTest extends TestCase
             PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
-        $workflow = new BigFiveV2EditorialWorkflow();
-        $flow = new BigFiveV2EditorialApprovalFlow();
+        $workflow = new BigFiveV2EditorialWorkflow;
+        $flow = new BigFiveV2EditorialApprovalFlow;
         $draft = $workflow->createDraftFromAsset($this->linkedAsset(), (int) $editor->id);
         $review = $flow->submitForReview($editor, $draft, 'linkage candidate');
 
@@ -168,7 +168,7 @@ final class BigFiveV2EditorialReleaseLinkageTest extends TestCase
 
     private function linkedAsset(): BigFiveV2EditorialAssetIndexEntry
     {
-        foreach ((new BigFiveV2EditorialAssetIndex())->entries() as $entry) {
+        foreach ((new BigFiveV2EditorialAssetIndex)->entries() as $entry) {
             if ($entry->linkedReleaseSnapshotIds !== []) {
                 return $entry;
             }

@@ -37,7 +37,7 @@ final class BigFiveV2EditorialPreviewServiceTest extends TestCase
         $this->assertIsString($preview['route']['combination_key']);
         $this->assertNotSame('', $preview['route']['combination_key']);
         $this->assertIsArray($payload);
-        $this->assertSame([], (new BigFiveResultPageV2Validator())->validateEnvelope($preview['payload_envelope']));
+        $this->assertSame([], (new BigFiveResultPageV2Validator)->validateEnvelope($preview['payload_envelope']));
     }
 
     public function test_preview_does_not_expose_forbidden_metadata_or_direct_publish_controls(): void
@@ -75,7 +75,7 @@ final class BigFiveV2EditorialPreviewServiceTest extends TestCase
 
     public function test_archived_revision_is_not_previewable(): void
     {
-        $workflow = new BigFiveV2EditorialWorkflow();
+        $workflow = new BigFiveV2EditorialWorkflow;
         $revision = $workflow->archive($this->draftRevision(), 202, 'archived draft');
 
         $this->expectException(RuntimeException::class);
@@ -91,17 +91,17 @@ final class BigFiveV2EditorialPreviewServiceTest extends TestCase
 
     private function service(): BigFiveV2EditorialPreviewService
     {
-        return new BigFiveV2EditorialPreviewService();
+        return new BigFiveV2EditorialPreviewService;
     }
 
     private function draftRevision(): BigFiveV2EditorialRevision
     {
-        return (new BigFiveV2EditorialWorkflow())->createDraftFromAsset($this->linkedAsset(), 201);
+        return (new BigFiveV2EditorialWorkflow)->createDraftFromAsset($this->linkedAsset(), 201);
     }
 
     private function linkedAsset(): BigFiveV2EditorialAssetIndexEntry
     {
-        foreach ((new BigFiveV2EditorialAssetIndex())->entries() as $entry) {
+        foreach ((new BigFiveV2EditorialAssetIndex)->entries() as $entry) {
             if ($entry->linkedReleaseSnapshotIds !== []) {
                 return $entry;
             }

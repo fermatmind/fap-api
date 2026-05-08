@@ -1,40 +1,46 @@
 <?php
+
 declare(strict_types=1);
 
-$defaultDir = realpath(__DIR__ . '/../../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3');
+$defaultDir = realpath(__DIR__.'/../../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3');
 $packDir = $argv[1] ?? ($defaultDir ?: '');
-if ($packDir === '' || !is_dir($packDir)) {
+if ($packDir === '' || ! is_dir($packDir)) {
     fwrite(STDERR, "usage: php backend/scripts/validate_mbti_pack_v022.php <pack_dir>\n");
     exit(2);
 }
 
-function load_json(string $path, array &$errors): ?array {
-    if (!is_file($path)) {
+function load_json(string $path, array &$errors): ?array
+{
+    if (! is_file($path)) {
         $errors[] = "missing file: {$path}";
+
         return null;
     }
     $raw = file_get_contents($path);
     if ($raw === false || trim($raw) === '') {
         $errors[] = "empty file: {$path}";
+
         return null;
     }
     $decoded = json_decode($raw, true);
-    if (!is_array($decoded)) {
+    if (! is_array($decoded)) {
         $errors[] = "invalid json: {$path}";
+
         return null;
     }
+
     return $decoded;
 }
 
 $errors = [];
-$version = load_json($packDir . '/version.json', $errors);
-$manifest = load_json($packDir . '/manifest.json', $errors);
-$questions = load_json($packDir . '/questions.json', $errors);
-$scoringSpec = load_json($packDir . '/scoring_spec.json', $errors);
-$commercial = load_json($packDir . '/commercial_spec.json', $errors);
-$aiSpec = load_json($packDir . '/ai_spec.json', $errors);
-$telemetry = load_json($packDir . '/telemetry_spec.json', $errors);
-$audit = load_json($packDir . '/audit_spec.json', $errors);
+$version = load_json($packDir.'/version.json', $errors);
+$manifest = load_json($packDir.'/manifest.json', $errors);
+$questions = load_json($packDir.'/questions.json', $errors);
+$scoringSpec = load_json($packDir.'/scoring_spec.json', $errors);
+$commercial = load_json($packDir.'/commercial_spec.json', $errors);
+$aiSpec = load_json($packDir.'/ai_spec.json', $errors);
+$telemetry = load_json($packDir.'/telemetry_spec.json', $errors);
+$audit = load_json($packDir.'/audit_spec.json', $errors);
 
 if ($version) {
     $packId = (string) ($version['pack_id'] ?? '');
@@ -59,7 +65,7 @@ if ($version) {
 
 if ($manifest) {
     $assets = $manifest['assets'] ?? null;
-    if (!is_array($assets)) {
+    if (! is_array($assets)) {
         $errors[] = 'manifest.assets missing or invalid';
         $assets = [];
     }
@@ -75,7 +81,7 @@ if ($manifest) {
         'audit_spec.json',
     ];
     foreach ($requiredAssets as $asset) {
-        if (!isset($assetsSet[$asset])) {
+        if (! isset($assetsSet[$asset])) {
             $errors[] = "manifest.assets missing: {$asset}";
         }
     }
@@ -99,7 +105,7 @@ if ($scoringSpec) {
 
 if ($commercial) {
     $skuHint = $commercial['sku_hint'] ?? null;
-    if (!is_array($skuHint)) {
+    if (! is_array($skuHint)) {
         $errors[] = 'commercial_spec.sku_hint missing';
     } else {
         $expect = [
@@ -110,8 +116,9 @@ if ($commercial) {
         ];
         foreach ($expect as $key => $rule) {
             $row = $skuHint[$key] ?? null;
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 $errors[] = "commercial_spec.sku_hint missing: {$key}";
+
                 continue;
             }
             if ((string) ($row['code'] ?? '') !== $rule['code']) {
@@ -126,7 +133,7 @@ if ($commercial) {
 
 if ($telemetry) {
     $experiments = $telemetry['experiments'] ?? null;
-    if (!is_array($experiments)) {
+    if (! is_array($experiments)) {
         $errors[] = 'telemetry_spec.experiments missing';
     } else {
         $found = false;
@@ -136,7 +143,7 @@ if ($telemetry) {
                 break;
             }
         }
-        if (!$found) {
+        if (! $found) {
             $errors[] = 'telemetry_spec.experiments missing mbti_paywall_variant';
         }
     }
@@ -144,29 +151,29 @@ if ($telemetry) {
 
 if ($audit) {
     $replay = $audit['replay_fields'] ?? null;
-    if (!is_array($replay)) {
+    if (! is_array($replay)) {
         $errors[] = 'audit_spec.replay_fields missing';
     } else {
         $attemptReq = $replay['attempt_snapshot_required'] ?? null;
         $resultReq = $replay['result_snapshot_required'] ?? null;
-        if (!is_array($attemptReq) || !is_array($resultReq)) {
+        if (! is_array($attemptReq) || ! is_array($resultReq)) {
             $errors[] = 'audit_spec.replay_fields invalid';
         } else {
             $needAttempt = [
-                'pack_id','dir_version','content_pack_version','scoring_spec_version','norm_version',
-                'manifest_sha256','scoring_spec_sha256','questions_sha256','engine_version',
-                'answers_hash','quality_flags','experiment_assignments',
+                'pack_id', 'dir_version', 'content_pack_version', 'scoring_spec_version', 'norm_version',
+                'manifest_sha256', 'scoring_spec_sha256', 'questions_sha256', 'engine_version',
+                'answers_hash', 'quality_flags', 'experiment_assignments',
             ];
             $needResult = [
-                'type_code','dimension_scores','pci','facet_scores','norm_percentiles','entitlement_state','variant_id',
+                'type_code', 'dimension_scores', 'pci', 'facet_scores', 'norm_percentiles', 'entitlement_state', 'variant_id',
             ];
             foreach ($needAttempt as $field) {
-                if (!in_array($field, $attemptReq, true)) {
+                if (! in_array($field, $attemptReq, true)) {
                     $errors[] = "audit_spec.replay_fields.attempt_snapshot_required missing: {$field}";
                 }
             }
             foreach ($needResult as $field) {
-                if (!in_array($field, $resultReq, true)) {
+                if (! in_array($field, $resultReq, true)) {
                     $errors[] = "audit_spec.replay_fields.result_snapshot_required missing: {$field}";
                 }
             }
@@ -174,8 +181,8 @@ if ($audit) {
     }
 }
 
-if (!empty($errors)) {
-    fwrite(STDERR, "[FAIL] validate_mbti_pack_v022\n" . implode("\n", $errors) . "\n");
+if (! empty($errors)) {
+    fwrite(STDERR, "[FAIL] validate_mbti_pack_v022\n".implode("\n", $errors)."\n");
     exit(1);
 }
 

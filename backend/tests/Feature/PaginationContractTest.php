@@ -100,7 +100,7 @@ final class PaginationContractTest extends TestCase
 
     private function seedFmToken(string $anonId, int $userId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
 
         DB::table('fm_tokens')->insert([
             'token' => $token,

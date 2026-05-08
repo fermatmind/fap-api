@@ -13,6 +13,7 @@ use Tests\TestCase;
 final class ContentPacksIndexManifestConsistencyTest extends TestCase
 {
     private string $packsRoot;
+
     private ?string $relativePacksRoot = null;
 
     protected function setUp(): void

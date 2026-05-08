@@ -18,7 +18,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
 {
     public function test_o59_route_row_builds_selector_input_without_changing_selector_semantics(): void
     {
-        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder())->build($this->o59RouteInput(), $this->o59RouteRow());
+        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($this->o59RouteInput(), $this->o59RouteRow());
 
         $this->assertSame('BIG5_OCEAN', $input->scaleCode);
         $this->assertSame('big5_120', $input->formCode);
@@ -57,7 +57,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
 
     public function test_o59_route_trait_assets_translate_to_domain_selector_slots(): void
     {
-        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder())->build($this->o59RouteInput(), $this->o59RouteRow());
+        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($this->o59RouteInput(), $this->o59RouteRow());
 
         foreach ([
             'module_01_hero.domain_signal.O.mid',
@@ -77,7 +77,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
 
     public function test_o59_route_coupling_candidates_translate_through_canonical_and_alias_slots(): void
     {
-        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder())->build($this->o59RouteInput(), $this->o59RouteRow());
+        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($this->o59RouteInput(), $this->o59RouteRow());
 
         $this->assertSame([
             'n_high_x_o_mid_high',
@@ -100,7 +100,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
 
     public function test_profile_label_is_assistive_and_only_used_for_high_confidence_profile_rows(): void
     {
-        $builder = new BigFiveV2RouteDrivenSelectorInputBuilder();
+        $builder = new BigFiveV2RouteDrivenSelectorInputBuilder;
 
         $highConfidence = $builder->build($this->o59RouteInput(), $this->o59RouteRow());
         $this->assertContains('module_01_hero.primary_signature.sensitive_independent_thinker', $highConfidence->includeSlots);
@@ -126,7 +126,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
             ],
         ]);
 
-        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder())->build($this->o59RouteInput(), $row);
+        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($this->o59RouteInput(), $row);
 
         $this->assertNotContains('module_04_coupling.coupling_card.a_n.mid_high', $input->includeSlots);
         $this->assertContains('module_04_coupling.coupling_card.c_n.low_high', $input->includeSlots);
@@ -135,7 +135,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
 
     public function test_facets_are_only_added_when_route_input_carries_matching_facet_signals(): void
     {
-        $builder = new BigFiveV2RouteDrivenSelectorInputBuilder();
+        $builder = new BigFiveV2RouteDrivenSelectorInputBuilder;
         $withoutFacets = $builder->build(new BigFiveV2RouteInput(
             domainRouteBands: ['O' => 3, 'C' => 2, 'E' => 2, 'A' => 3, 'N' => 4],
             combinationKey: BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY,
@@ -152,8 +152,8 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
 
     public function test_route_driven_input_can_be_passed_to_deterministic_selector_as_refs_only_contract(): void
     {
-        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder())->build($this->o59RouteInput(), $this->o59RouteRow());
-        $result = (new BigFiveV2DeterministicSelector())->select($input);
+        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($this->o59RouteInput(), $this->o59RouteRow());
+        $result = (new BigFiveV2DeterministicSelector)->select($input);
 
         $this->assertNotSame([], $result->selectedAssetRefs);
         $this->assertContains('pdf', $result->pendingSurfaces);
@@ -197,8 +197,8 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
 
     public function test_route_driven_selector_selects_resolved_o59_coupling_slots(): void
     {
-        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder())->build($this->o59RouteInput(), $this->o59RouteRow());
-        $result = (new BigFiveV2DeterministicSelector())->select($input);
+        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($this->o59RouteInput(), $this->o59RouteRow());
+        $result = (new BigFiveV2DeterministicSelector)->select($input);
         $selectedSlots = array_map(
             static fn (BigFiveV2SelectedAssetRef $ref): string => $ref->slotKey,
             $result->selectedAssetRefs,
@@ -223,8 +223,8 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
 
     public function test_unresolved_profile_and_scenario_refs_remain_suppressed_for_route_driven_selection(): void
     {
-        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder())->build($this->o59RouteInput(), $this->o59RouteRow());
-        $result = (new BigFiveV2DeterministicSelector())->select($input);
+        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($this->o59RouteInput(), $this->o59RouteRow());
+        $result = (new BigFiveV2DeterministicSelector)->select($input);
 
         $suppressedTypes = [];
         $suppressedAssetKeys = [];
@@ -247,7 +247,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
 
     public function test_unknown_route_requested_slots_do_not_enter_selected_refs(): void
     {
-        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder())->build($this->o59RouteInput(), $this->o59RouteRow());
+        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($this->o59RouteInput(), $this->o59RouteRow());
         $inputWithUnknownSlot = new BigFiveV2SelectorInput(
             scaleCode: $input->scaleCode,
             formCode: $input->formCode,
@@ -267,7 +267,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
             enableResolvedCouplingRefs: $input->enableResolvedCouplingRefs,
         );
 
-        $result = (new BigFiveV2DeterministicSelector())->select($inputWithUnknownSlot);
+        $result = (new BigFiveV2DeterministicSelector)->select($inputWithUnknownSlot);
 
         foreach ($result->selectedAssetRefs as $ref) {
             $this->assertNotSame('module_04_coupling.coupling_card.unknown_unsafe.high_low', $ref->slotKey);
@@ -276,7 +276,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
 
     private function o59RouteInput(): BigFiveV2RouteInput
     {
-        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter())->fromScoreResult([
+        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter)->fromScoreResult([
             'scale_code' => 'BIG5_OCEAN',
             'scores_0_100' => [
                 'domains_percentile' => [
@@ -302,7 +302,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
 
     private function o59RouteRow(): BigFiveV2RouteMatrixRow
     {
-        $result = (new BigFiveV2RouteMatrixParser())->parse();
+        $result = (new BigFiveV2RouteMatrixParser)->parse();
         $this->assertSame([], $result->errors);
 
         $row = $result->row(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);

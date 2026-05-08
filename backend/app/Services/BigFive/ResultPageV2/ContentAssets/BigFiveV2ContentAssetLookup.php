@@ -55,8 +55,8 @@ final class BigFiveV2ContentAssetLookup
     private ?BigFiveV2AssetInventory $inventory = null;
 
     public function __construct(
-        private readonly BigFiveV2AssetPackageLoader $packageLoader = new BigFiveV2AssetPackageLoader(),
-        private readonly BigFiveV2CouplingResolver $couplingResolver = new BigFiveV2CouplingResolver(),
+        private readonly BigFiveV2AssetPackageLoader $packageLoader = new BigFiveV2AssetPackageLoader,
+        private readonly BigFiveV2CouplingResolver $couplingResolver = new BigFiveV2CouplingResolver,
     ) {}
 
     public function resolve(BigFiveV2SelectedAssetRef $ref, ?BigFiveV2SelectorInput $input = null): BigFiveV2ResolvedContentAsset

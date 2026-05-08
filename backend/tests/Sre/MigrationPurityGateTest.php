@@ -74,11 +74,11 @@ final class MigrationPurityGateTest extends TestCase
             }
 
             $source = file_get_contents($filePath);
-            $this->assertIsString($source, 'unable to read migration file: ' . $filePath);
+            $this->assertIsString($source, 'unable to read migration file: '.$filePath);
 
             $cleanSource = $this->stripCommentsPreservingLineNumbers($source);
             $lines = preg_split('/\R/', $cleanSource);
-            if (!is_array($lines)) {
+            if (! is_array($lines)) {
                 continue;
             }
 
@@ -96,13 +96,13 @@ final class MigrationPurityGateTest extends TestCase
         $this->assertSame(
             [],
             $violations,
-            "migration purity gate violations:\n" . implode("\n", $violations)
+            "migration purity gate violations:\n".implode("\n", $violations)
         );
     }
 
     /**
-     * @param array<int, string> $lines
-     * @param array<string, bool> $seen
+     * @param  array<int, string>  $lines
+     * @param  array<string, bool>  $seen
      * @return list<string>
      */
     private function collectForbiddenPatternViolations(string $filePath, array $lines, array &$seen): array
@@ -140,9 +140,9 @@ final class MigrationPurityGateTest extends TestCase
     }
 
     /**
-     * @param array<int, string> $lines
-     * @param list<string> $modelAliases
-     * @param array<string, bool> $seen
+     * @param  array<int, string>  $lines
+     * @param  list<string>  $modelAliases
+     * @param  array<string, bool>  $seen
      * @return list<string>
      */
     private function collectModelAliasViolations(
@@ -160,10 +160,10 @@ final class MigrationPurityGateTest extends TestCase
         foreach ($lines as $lineIndex => $line) {
             foreach ($modelAliases as $alias) {
                 $quoted = preg_quote($alias, '/');
-                $isNewModel = preg_match('/\bnew\s+' . $quoted . '\s*\(/', $line) === 1;
-                $isStaticModelCall = preg_match('/\b' . $quoted . '::/', $line) === 1;
+                $isNewModel = preg_match('/\bnew\s+'.$quoted.'\s*\(/', $line) === 1;
+                $isStaticModelCall = preg_match('/\b'.$quoted.'::/', $line) === 1;
 
-                if (!$isNewModel && !$isStaticModelCall) {
+                if (! $isNewModel && ! $isStaticModelCall) {
                     continue;
                 }
 
@@ -188,7 +188,7 @@ final class MigrationPurityGateTest extends TestCase
     }
 
     /**
-     * @param array<int, string> $lines
+     * @param  array<int, string>  $lines
      * @return list<string>
      */
     private function modelAliases(array $lines): array
@@ -212,7 +212,7 @@ final class MigrationPurityGateTest extends TestCase
 
     private function isAllowlisted(string $keyword, string $snippet): bool
     {
-        if (!in_array($keyword, ['DB::select(', 'DB::statement('], true)) {
+        if (! in_array($keyword, ['DB::select(', 'DB::statement('], true)) {
             return false;
         }
 
@@ -226,7 +226,7 @@ final class MigrationPurityGateTest extends TestCase
     }
 
     /**
-     * @param array<int, string> $lines
+     * @param  array<int, string>  $lines
      */
     private function statementSnippet(array $lines, int $startLine): string
     {
@@ -252,6 +252,7 @@ final class MigrationPurityGateTest extends TestCase
         foreach ($tokens as $token) {
             if (is_string($token)) {
                 $clean .= $token;
+
                 continue;
             }
 
@@ -260,6 +261,7 @@ final class MigrationPurityGateTest extends TestCase
 
             if ($tokenId === T_COMMENT || $tokenId === T_DOC_COMMENT) {
                 $clean .= str_repeat("\n", substr_count($tokenText, "\n"));
+
                 continue;
             }
 
@@ -275,7 +277,7 @@ final class MigrationPurityGateTest extends TestCase
             return $snippet;
         }
 
-        return substr($snippet, 0, 217) . '...';
+        return substr($snippet, 0, 217).'...';
     }
 
     /**
@@ -285,7 +287,7 @@ final class MigrationPurityGateTest extends TestCase
     {
         $files = glob(base_path('database/migrations/*.php'));
 
-        if (!is_array($files)) {
+        if (! is_array($files)) {
             return [];
         }
 

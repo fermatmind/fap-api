@@ -46,6 +46,7 @@ final class SchemaBaseline
         if ($table === '') {
             $reason = 'invalid_input';
             $exceptionClass = null;
+
             return false;
         }
 
@@ -59,6 +60,7 @@ final class SchemaBaseline
             ];
             $reason = 'feature_disabled';
             $exceptionClass = null;
+
             return false;
         }
 
@@ -70,6 +72,7 @@ final class SchemaBaseline
             ];
             $reason = $meta['reason'];
             $exceptionClass = $meta['exception_class'];
+
             return self::$tableExistsCache[$cacheKey];
         }
 
@@ -121,6 +124,7 @@ final class SchemaBaseline
         if ($table === '' || $column === '') {
             $reason = 'invalid_input';
             $exceptionClass = null;
+
             return false;
         }
 
@@ -148,6 +152,7 @@ final class SchemaBaseline
                 'reason' => $reason,
                 'exception_class' => $exceptionClass,
             ];
+
             return false;
         }
 

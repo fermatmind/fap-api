@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\Content;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Database\QueryException;
 use Throwable;
 
 final class ContentPackV2Resolver

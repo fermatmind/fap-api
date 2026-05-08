@@ -6,7 +6,6 @@ namespace App\Services\Mbti;
 
 use App\Models\Attempt;
 use App\Models\Result;
-use Illuminate\Support\Facades\DB;
 
 final class MbtiPublicFormSummaryBuilder
 {

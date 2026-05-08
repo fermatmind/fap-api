@@ -49,7 +49,7 @@ final class BigFiveV2PdfPayloadAdapter
     ];
 
     public function __construct(
-        private readonly BigFiveResultPageV2Validator $validator = new BigFiveResultPageV2Validator(),
+        private readonly BigFiveResultPageV2Validator $validator = new BigFiveResultPageV2Validator,
     ) {}
 
     /**

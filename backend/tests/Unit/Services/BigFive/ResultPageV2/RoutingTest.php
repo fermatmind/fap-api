@@ -15,7 +15,7 @@ final class RoutingTest extends TestCase
 {
     public function test_band_mapper_uses_b5_content_five_band_boundaries(): void
     {
-        $mapper = new BigFiveV2BandMapper();
+        $mapper = new BigFiveV2BandMapper;
 
         $cases = [
             0 => 1,
@@ -37,7 +37,7 @@ final class RoutingTest extends TestCase
 
     public function test_o59_score_result_maps_to_reconciled_route_key(): void
     {
-        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter())->fromScoreResult($this->scoreResult([
+        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter)->fromScoreResult($this->scoreResult([
             'O' => 59,
             'C' => 32,
             'E' => 20,
@@ -59,7 +59,7 @@ final class RoutingTest extends TestCase
 
     public function test_missing_domain_percentile_fails_closed(): void
     {
-        $adapter = new BigFiveV2ProjectionRouteInputAdapter();
+        $adapter = new BigFiveV2ProjectionRouteInputAdapter;
         $scoreResult = $this->scoreResult([
             'O' => 59,
             'C' => 32,
@@ -73,7 +73,7 @@ final class RoutingTest extends TestCase
 
     public function test_out_of_range_percentile_fails_closed(): void
     {
-        $adapter = new BigFiveV2ProjectionRouteInputAdapter();
+        $adapter = new BigFiveV2ProjectionRouteInputAdapter;
         $scoreResult = $this->scoreResult([
             'O' => 101,
             'C' => 32,
@@ -88,7 +88,7 @@ final class RoutingTest extends TestCase
 
     public function test_locked_or_redacted_projection_fails_closed(): void
     {
-        $adapter = new BigFiveV2ProjectionRouteInputAdapter();
+        $adapter = new BigFiveV2ProjectionRouteInputAdapter;
 
         $this->assertNull($adapter->fromProjection([
             '_meta' => [
@@ -108,7 +108,7 @@ final class RoutingTest extends TestCase
 
     public function test_full_projection_percentiles_can_build_route_input_without_trait_bands(): void
     {
-        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter())->fromProjection([
+        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter)->fromProjection([
             '_meta' => [
                 'schema_version' => 'big5.public_projection.v1',
             ],
@@ -140,7 +140,7 @@ final class RoutingTest extends TestCase
 
     public function test_degraded_quality_and_missing_norms_carry_suppression_hints(): void
     {
-        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter())->fromScoreResult($this->scoreResult(
+        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter)->fromScoreResult($this->scoreResult(
             [
                 'O' => 59,
                 'C' => 32,
@@ -160,8 +160,8 @@ final class RoutingTest extends TestCase
 
     public function test_route_matrix_lookup_returns_existing_row_and_does_not_fabricate_fallback(): void
     {
-        $lookup = new BigFiveV2RouteMatrixLookup();
-        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter())->fromScoreResult($this->scoreResult([
+        $lookup = new BigFiveV2RouteMatrixLookup;
+        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter)->fromScoreResult($this->scoreResult([
             'O' => 59,
             'C' => 32,
             'E' => 20,
@@ -183,7 +183,7 @@ final class RoutingTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('percentile must be an integer from 0 to 100');
 
-        (new BigFiveV2BandMapper())->mapPercentile('high');
+        (new BigFiveV2BandMapper)->mapPercentile('high');
     }
 
     /**

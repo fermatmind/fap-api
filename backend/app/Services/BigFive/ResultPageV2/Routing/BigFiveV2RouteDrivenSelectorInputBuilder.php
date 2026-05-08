@@ -19,7 +19,7 @@ final class BigFiveV2RouteDrivenSelectorInputBuilder
     private ?array $selectorAssets = null;
 
     public function __construct(
-        private readonly BigFiveV2CouplingResolver $couplingResolver = new BigFiveV2CouplingResolver(),
+        private readonly BigFiveV2CouplingResolver $couplingResolver = new BigFiveV2CouplingResolver,
     ) {}
 
     public function build(
@@ -245,6 +245,7 @@ final class BigFiveV2RouteDrivenSelectorInputBuilder
             $internalBand = data_get($routeRow->toArray(), "domain_bands.{$trait}.internal_band");
             if (is_string($internalBand) && $internalBand !== '') {
                 $bands[$trait] = $internalBand;
+
                 continue;
             }
 

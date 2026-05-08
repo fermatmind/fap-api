@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Publish;
 
+use App\DTO\Career\CareerFirstWaveIndexPolicyMember;
 use App\DTO\Career\CareerFirstWaveLaunchManifest;
 use App\DTO\Career\CareerFirstWaveLaunchManifestMember;
 use App\DTO\Career\CareerFirstWaveLaunchReadinessAuditMember;
-use App\DTO\Career\CareerFirstWaveIndexPolicyMember;
 use App\Services\Career\Bundles\CareerFamilyHubBundleBuilder;
 use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
 use App\Services\Career\StructuredData\CareerStructuredDataBuilder;
@@ -189,8 +189,7 @@ final class CareerFirstWaveLaunchManifestService
     private function classifyGroup(
         CareerFirstWaveLaunchReadinessAuditMember $member,
         ?CareerFirstWaveIndexPolicyMember $policyMember = null,
-    ): string
-    {
+    ): string {
         if (
             $member->blockedGovernanceStatus !== null
             || in_array($member->readinessStatus, ['blocked_override_eligible', 'blocked_not_safely_remediable'], true)

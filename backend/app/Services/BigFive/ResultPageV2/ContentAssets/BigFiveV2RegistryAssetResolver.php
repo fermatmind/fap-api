@@ -10,7 +10,7 @@ use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectorInput;
 final readonly class BigFiveV2RegistryAssetResolver
 {
     public function __construct(
-        private BigFiveV2ContentAssetLookup $lookup = new BigFiveV2ContentAssetLookup(),
+        private BigFiveV2ContentAssetLookup $lookup = new BigFiveV2ContentAssetLookup,
     ) {}
 
     public function resolve(BigFiveV2SelectedAssetRef $ref, ?BigFiveV2SelectorInput $input = null): BigFiveV2ResolvedContentAsset

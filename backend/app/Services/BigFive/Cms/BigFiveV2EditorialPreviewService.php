@@ -19,12 +19,12 @@ final class BigFiveV2EditorialPreviewService
     public const PREVIEW_SCHEMA_VERSION = 'big5_v2_editorial_preview.v0_1';
 
     public function __construct(
-        private readonly BigFiveV2ProjectionRouteInputAdapter $routeInputAdapter = new BigFiveV2ProjectionRouteInputAdapter(),
-        private readonly BigFiveV2RouteMatrixLookup $routeMatrixLookup = new BigFiveV2RouteMatrixLookup(),
-        private readonly BigFiveV2RouteDrivenSelectorInputBuilder $selectorInputBuilder = new BigFiveV2RouteDrivenSelectorInputBuilder(),
-        private readonly BigFiveV2DeterministicSelector $selector = new BigFiveV2DeterministicSelector(),
-        private readonly BigFiveV2PilotPayloadComposer $composer = new BigFiveV2PilotPayloadComposer(),
-        private readonly BigFiveResultPageV2Validator $validator = new BigFiveResultPageV2Validator(),
+        private readonly BigFiveV2ProjectionRouteInputAdapter $routeInputAdapter = new BigFiveV2ProjectionRouteInputAdapter,
+        private readonly BigFiveV2RouteMatrixLookup $routeMatrixLookup = new BigFiveV2RouteMatrixLookup,
+        private readonly BigFiveV2RouteDrivenSelectorInputBuilder $selectorInputBuilder = new BigFiveV2RouteDrivenSelectorInputBuilder,
+        private readonly BigFiveV2DeterministicSelector $selector = new BigFiveV2DeterministicSelector,
+        private readonly BigFiveV2PilotPayloadComposer $composer = new BigFiveV2PilotPayloadComposer,
+        private readonly BigFiveResultPageV2Validator $validator = new BigFiveResultPageV2Validator,
     ) {}
 
     /**

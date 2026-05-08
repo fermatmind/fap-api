@@ -15,8 +15,7 @@ final class BigFiveNormRecomputeResult
         public readonly array $summary,
         public readonly array $metrics,
         public readonly array $internalPercentiles,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string,mixed>

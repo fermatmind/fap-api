@@ -78,7 +78,7 @@ final class BigFiveResultPageV2RouteDrivenGoldenCasesTest extends TestCase
 
     public function test_route_keys_exist_and_expected_refs_have_registry_shape(): void
     {
-        $lookup = new BigFiveV2RouteMatrixLookup();
+        $lookup = new BigFiveV2RouteMatrixLookup;
 
         foreach ($this->cases() as $case) {
             $combinationKey = (string) ($case['combination_key'] ?? '');

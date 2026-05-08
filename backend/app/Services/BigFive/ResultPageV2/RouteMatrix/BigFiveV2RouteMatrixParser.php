@@ -26,7 +26,7 @@ final class BigFiveV2RouteMatrixParser
     ];
 
     public function __construct(
-        private readonly BigFiveV2AssetManifestValidator $manifestValidator = new BigFiveV2AssetManifestValidator(),
+        private readonly BigFiveV2AssetManifestValidator $manifestValidator = new BigFiveV2AssetManifestValidator,
     ) {}
 
     public function parse(?string $matrixPath = null): BigFiveV2RouteMatrixParseResult
@@ -45,6 +45,7 @@ final class BigFiveV2RouteMatrixParser
             $file = $matrixPath.DIRECTORY_SEPARATOR."big5_3125_route_matrix_{$shardKey}_v0_1_1.jsonl";
             if (! is_file($file)) {
                 $errors[] = "missing route matrix shard {$shardKey}";
+
                 continue;
             }
 
@@ -55,6 +56,7 @@ final class BigFiveV2RouteMatrixParser
             foreach ($rows as $row) {
                 if (isset($rowsByCombinationKey[$row->combinationKey])) {
                     $errors[] = "duplicate combination_key {$row->combinationKey}";
+
                     continue;
                 }
 
@@ -160,12 +162,14 @@ final class BigFiveV2RouteMatrixParser
             $decoded = json_decode($line, true);
             if (! is_array($decoded)) {
                 $errors[] = "route matrix shard {$shardKey} line ".($lineNumber + 1).' is not valid JSON';
+
                 continue;
             }
 
             $combinationKey = (string) ($decoded['combination_key'] ?? '');
             if (! $this->isValidCombinationKey($combinationKey)) {
                 $errors[] = "route matrix shard {$shardKey} line ".($lineNumber + 1)." has invalid combination_key {$combinationKey}";
+
                 continue;
             }
 

@@ -15,7 +15,7 @@ final class BigFiveResultPageV2GoldenCasesSelectorTest extends TestCase
 
     public function test_golden_cases_select_only_resolved_refs_or_fail_closed_with_suppression_trace(): void
     {
-        $selector = new BigFiveV2DeterministicSelector();
+        $selector = new BigFiveV2DeterministicSelector;
         $routeRow = $this->o59RouteRow();
 
         foreach ($this->goldenCases() as $case) {
@@ -35,7 +35,7 @@ final class BigFiveResultPageV2GoldenCasesSelectorTest extends TestCase
 
     public function test_o59_golden_case_stays_selector_qa_only_and_not_runtime_payload(): void
     {
-        $selector = new BigFiveV2DeterministicSelector();
+        $selector = new BigFiveV2DeterministicSelector;
         $result = $selector->select(BigFiveV2SelectorInput::fromGoldenCase($this->o59GoldenCase(), $this->o59RouteRow()));
 
         $this->assertSame('O3_C2_E2_A3_N4', data_get($result->selectionTraceInternal, 'route_combination_key'));
@@ -48,7 +48,7 @@ final class BigFiveResultPageV2GoldenCasesSelectorTest extends TestCase
 
     private function o59RouteRow(): \App\Services\BigFive\ResultPageV2\RouteMatrix\BigFiveV2RouteMatrixRow
     {
-        $result = (new BigFiveV2RouteMatrixParser())->parse();
+        $result = (new BigFiveV2RouteMatrixParser)->parse();
         $this->assertSame([], $result->errors);
 
         $row = $result->row(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);

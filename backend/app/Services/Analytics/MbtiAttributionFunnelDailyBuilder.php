@@ -124,6 +124,7 @@ final class MbtiAttributionFunnelDailyBuilder
                 }
 
                 $this->incrementMetric($rows, $day, $dimensions, self::ENTRY_EVENT_METRIC_MAP[$eventCode], 1);
+
                 continue;
             }
 

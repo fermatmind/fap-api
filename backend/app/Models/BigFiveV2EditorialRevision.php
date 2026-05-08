@@ -114,13 +114,13 @@ final class BigFiveV2EditorialRevision extends Model
 
     protected static function booted(): void
     {
-        static::creating(static function (self $revision): void {
+        self::creating(static function (self $revision): void {
             if ((string) $revision->id === '') {
                 $revision->id = (string) Str::uuid();
             }
         });
 
-        static::updating(static function (self $revision): void {
+        self::updating(static function (self $revision): void {
             $immutableColumns = [
                 'asset_key',
                 'asset_type',

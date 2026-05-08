@@ -19,13 +19,13 @@ final class InternalPercentileTest extends TestCase
     {
         $target = $this->observation('obs-a', ['O' => 10.0]);
         $this->observation('obs-b', ['O' => 30.0]);
-        $snapshot = (new BigFiveNormSnapshotBuilder())->build([
+        $snapshot = (new BigFiveNormSnapshotBuilder)->build([
             'snapshot_version' => 'big5_norm_internal_percentile_feature_v1',
             'parent_snapshot_version' => 'big5_norm_snapshot_parent_v1',
         ]);
-        $recompute = (new BigFiveNormRecomputeEngine())->recompute($snapshot)->toArray();
+        $recompute = (new BigFiveNormRecomputeEngine)->recompute($snapshot)->toArray();
 
-        $decision = (new BigFiveNormInternalPercentileResolver())->resolve($snapshot, $recompute, [
+        $decision = (new BigFiveNormInternalPercentileResolver)->resolve($snapshot, $recompute, [
             'observation_id' => $target->id,
             'segment' => [
                 'cell_count' => 2,
