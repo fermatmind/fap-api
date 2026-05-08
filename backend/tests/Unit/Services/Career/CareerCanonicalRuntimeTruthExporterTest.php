@@ -56,22 +56,32 @@ final class CareerCanonicalRuntimeTruthExporterTest extends TestCase
 
     public function test_it_keeps_surface_mismatch_visible_without_promoting_to_fully_live(): void
     {
-        $projection = (new CareerRuntimePublishProjectionService)->buildFromLedgerArray($this->ledger([
-            [
-                'source_slug' => 'actors',
-                'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
-                'public_eligible' => true,
-                'indexability' => 'indexable',
-                'sitemap_eligible' => true,
-                'llms_eligible' => false,
-                'llms_full_eligible' => false,
+        $projection = [
+            'projection_kind' => 'career_runtime_publish_projection',
+            'items' => [
+                [
+                    'slug' => 'actors',
+                    'locale' => 'en',
+                    'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                    'runtime_publish_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED,
+                    'detail_route_enabled' => true,
+                    'dataset_visible' => true,
+                    'search_visible' => true,
+                    'sitemap_live' => true,
+                    'llms_live' => false,
+                    'llms_full_live' => false,
+                    'canonical_url' => 'https://fermatmind.com/en/career/jobs/actors',
+                    'canonical_self' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                ],
             ],
-        ]));
+        ];
 
         $truth = app(CareerCanonicalRuntimeTruthExporter::class)->buildFromProjectionArray($projection);
 
-        $this->assertSame(2, data_get($truth, 'counts.route_exists'));
-        $this->assertSame(2, data_get($truth, 'counts.sitemap_live'));
+        $this->assertSame(1, data_get($truth, 'counts.route_exists'));
+        $this->assertSame(1, data_get($truth, 'counts.sitemap_live'));
         $this->assertSame(0, data_get($truth, 'counts.llms_live'));
         $this->assertSame(0, data_get($truth, 'counts.fully_live'));
         $this->assertFalse($truth['items'][0]['fully_live']);

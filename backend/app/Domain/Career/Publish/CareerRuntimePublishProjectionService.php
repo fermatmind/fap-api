@@ -157,9 +157,9 @@ final class CareerRuntimePublishProjectionService
             && $robotsIndexable;
 
         if ($releaseGatePass) {
-            $sitemapLive = (bool) ($row['sitemap_eligible'] ?? true);
-            $llmsLive = (bool) ($row['llms_eligible'] ?? true);
-            $llmsFullLive = (bool) ($row['llms_full_eligible'] ?? $llmsLive);
+            $sitemapLive = true;
+            $llmsLive = true;
+            $llmsFullLive = true;
         }
 
         $runtimePublishState = $this->runtimePublishState(
@@ -171,6 +171,11 @@ final class CareerRuntimePublishProjectionService
         );
 
         if ($runtimePublishState !== self::STATE_PUBLISHED) {
+            if ($detailRouteEnabled === true) {
+                $detailRouteEnabled = false;
+            }
+            $datasetVisible = false;
+            $searchVisible = false;
             $sitemapLive = false;
             $llmsLive = false;
             $llmsFullLive = false;
