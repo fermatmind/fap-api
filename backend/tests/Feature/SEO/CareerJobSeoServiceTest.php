@@ -49,6 +49,8 @@ final class CareerJobSeoServiceTest extends TestCase
             'locale' => 'zh-CN',
             'title' => '会计师和审计师',
             'subtitle' => 'Accountants and Auditors',
+            'excerpt' => '了解会计师和审计师的职责、薪资和职业发展。',
+            'body_md' => '# 会计师和审计师',
             'status' => CareerJob::STATUS_PUBLISHED,
             'is_public' => true,
             'is_indexable' => true,
@@ -76,6 +78,44 @@ final class CareerJobSeoServiceTest extends TestCase
 
         $this->assertSame('https://fermatmind.com/zh/career/jobs/accountants-and-auditors', $meta['canonical']);
         $this->assertSame('index,follow', $meta['robots']);
+    }
+
+    public function test_docx_backed_zh_job_with_english_core_title_is_forced_noindex(): void
+    {
+        $job = $this->createJob([
+            'job_code' => 'data-scientists',
+            'slug' => 'data-scientists',
+            'locale' => 'zh-CN',
+            'title' => 'Data Scientists',
+            'subtitle' => 'Data Scientists',
+            'excerpt' => 'Build models from data.',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'market_demand_json' => [
+                'source_refs' => [
+                    ['url' => 'https://www.bls.gov/ooh/math/data-scientists.htm'],
+                ],
+            ],
+        ]);
+        $this->createSeoMeta($job, [
+            'canonical_url' => 'https://www.fermatmind.com/zh/career/jobs/data-scientists',
+            'robots' => 'index,follow',
+            'jsonld_overrides_json' => [
+                'source_docx' => 'data-scientists.docx',
+            ],
+        ]);
+
+        $service = app(CareerJobSeoService::class);
+
+        $this->assertTrue($service->isFrontendDetailAvailable($job, 'zh-CN'));
+        $this->assertFalse($service->isPublicIndexable($job, 'zh-CN'));
+
+        $meta = $service->buildMeta($job, 'zh-CN');
+
+        $this->assertSame('https://fermatmind.com/zh/career/jobs/data-scientists', $meta['canonical']);
+        $this->assertSame('noindex,follow', $meta['robots']);
     }
 
     public function test_noindex_robot_override_is_preserved_when_exposure_is_withheld(): void

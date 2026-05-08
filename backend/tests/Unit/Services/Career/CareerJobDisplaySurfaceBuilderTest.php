@@ -294,6 +294,52 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertSame('Actor career fit', $surface['page']['content']['hero']['title']);
     }
 
+    public function test_it_holds_zh_surface_when_core_hero_is_english_without_blocking_en(): void
+    {
+        $occupation = $this->createOccupation('data-scientists');
+        $this->createDisplayAsset($occupation, [
+            'page_payload_json' => [
+                'zh' => [
+                    'hero' => ['title' => 'Data Scientists'],
+                    'primary_cta' => ['label' => 'Start career fit test'],
+                    'faq_block' => [
+                        'items' => [
+                            ['q' => 'What do data scientists do?', 'a' => 'They build models from data.'],
+                        ],
+                    ],
+                ],
+                'en' => [
+                    'hero' => ['title' => 'Data scientist career fit'],
+                    'primary_cta' => ['label' => 'Start career fit test'],
+                ],
+            ],
+        ]);
+
+        $zhSurface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+        $enSurface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'en');
+
+        $this->assertNull($zhSurface);
+        $this->assertIsArray($enSurface);
+        $this->assertSame('en', $enSurface['page']['locale']);
+        $this->assertSame('Data scientist career fit', $enSurface['page']['content']['hero']['title']);
+    }
+
+    public function test_it_holds_zh_surface_when_locale_readiness_marks_it_not_ready(): void
+    {
+        $occupation = $this->createOccupation('data-scientists');
+        $this->createDisplayAsset($occupation, [
+            'metadata_json' => [
+                'locale_readiness' => [
+                    'zh-CN' => ['status' => 'not_ready'],
+                ],
+            ],
+        ]);
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertNull($surface);
+    }
+
     public function test_it_returns_null_when_requested_locale_is_missing(): void
     {
         $occupation = $this->createOccupation('actors');

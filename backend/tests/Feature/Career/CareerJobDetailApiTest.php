@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\CareerJob;
@@ -16,11 +17,22 @@ use App\Models\OccupationFamily;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerFoundationFixture;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerJobDetailApiTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(),
+        );
+    }
 
     public function test_it_returns_a_resource_backed_job_detail_bundle_with_explicit_sections(): void
     {
@@ -274,6 +286,44 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('seo_contract.canonical_path', '/career/jobs/display-backed-public-canonical');
     }
 
+    public function test_zh_display_asset_backed_bundle_holds_english_surface_without_blocking_en(): void
+    {
+        $this->configurePublicResolutionPlan([
+            ['slug' => 'data-scientists', 'status' => 'already_imported_validated'],
+        ]);
+
+        $occupation = $this->createDisplayAssetBackedOccupation('data-scientists');
+        $this->createDisplayAsset($occupation, [
+            'page_payload_json' => [
+                'page' => [
+                    'zh' => [
+                        'hero' => ['title' => 'Data Scientists'],
+                        'primary_cta' => ['label' => 'Start career fit test'],
+                    ],
+                    'en' => [
+                        'hero' => ['title' => 'Data scientist career fit'],
+                        'primary_cta' => ['label' => 'Start career fit test'],
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->getJson('/api/v0.5/career/jobs/data-scientists?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('titles.canonical_zh', '展示资产职业')
+            ->assertJsonPath('seo_contract.index_state', 'locale_not_ready')
+            ->assertJsonPath('seo_contract.index_eligible', false)
+            ->assertJsonPath('seo_contract.robots_policy', 'noindex,follow')
+            ->assertJsonPath('locale_policy.locale_warning', 'zh_locale_not_ready')
+            ->assertJsonMissingPath('display_surface_v1');
+
+        $this->getJson('/api/v0.5/career/jobs/data-scientists?locale=en')
+            ->assertOk()
+            ->assertJsonPath('seo_contract.index_state', 'indexable')
+            ->assertJsonPath('display_surface_v1.page.locale', 'en')
+            ->assertJsonPath('display_surface_v1.page.content.hero.title', 'Data scientist career fit');
+    }
+
     /**
      * @param  list<array{slug: string, status: string}>  $rows
      */
@@ -287,6 +337,34 @@ final class CareerJobDetailApiTest extends TestCase
         file_put_contents($path, json_encode(['rows' => $rows], JSON_THROW_ON_ERROR));
 
         config(['fap.career.public_resolution_plan_path' => $path]);
+
+        $detailRouteEnabled = [];
+        $robotsIndexable = [];
+        $releaseGatePass = [];
+        foreach ($rows as $row) {
+            $slug = strtolower(trim((string) ($row['slug'] ?? '')));
+            if ($slug === '') {
+                continue;
+            }
+
+            $enabled = in_array((string) ($row['status'] ?? ''), ['already_imported_validated', 'upload_candidate'], true)
+                && $slug !== 'software-developers';
+            $detailRouteEnabled[$slug] = $enabled;
+            $robotsIndexable[$slug] = $enabled;
+            $releaseGatePass[$slug] = $enabled;
+        }
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(
+                defaultDetailRouteEnabled: false,
+                defaultRobotsIndexable: false,
+                defaultReleaseGatePass: false,
+                detailRouteEnabled: $detailRouteEnabled,
+                robotsIndexable: $robotsIndexable,
+                releaseGatePass: $releaseGatePass,
+            ),
+        );
     }
 
     private function createPublishedDocxCareerJob(string $slug): CareerJob
@@ -372,9 +450,20 @@ final class CareerJobDetailApiTest extends TestCase
         return $occupation;
     }
 
-    private function createDisplayAsset(Occupation $occupation): CareerJobDisplayAsset
+    private function createDisplayAsset(Occupation $occupation, array $overrides = []): CareerJobDisplayAsset
     {
-        $page = [
+        $zhPage = [
+            'hero' => ['title' => '展示资产职业'],
+            'market_signal_card' => [
+                'salary_data_type' => 'BLS official wage evidence',
+                'body' => 'Official market signal from BLS.',
+            ],
+            'ai_impact_table' => [
+                'score_normalized' => '82',
+                'source' => 'FermatMind central score',
+            ],
+        ];
+        $enPage = [
             'hero' => ['title' => 'Display backed career'],
             'market_signal_card' => [
                 'salary_data_type' => 'BLS official wage evidence',
@@ -386,7 +475,7 @@ final class CareerJobDetailApiTest extends TestCase
             ],
         ];
 
-        return CareerJobDisplayAsset::query()->create([
+        return CareerJobDisplayAsset::query()->create(array_replace([
             'occupation_id' => $occupation->id,
             'canonical_slug' => (string) $occupation->canonical_slug,
             'surface_version' => 'display.surface.v1',
@@ -398,8 +487,8 @@ final class CareerJobDetailApiTest extends TestCase
             'component_order_json' => array_map(static fn (int $index): string => 'component_'.$index, range(1, 24)),
             'page_payload_json' => [
                 'page' => [
-                    'zh' => $page,
-                    'en' => $page,
+                    'zh' => $zhPage,
+                    'en' => $enPage,
                 ],
             ],
             'seo_payload_json' => [],
@@ -414,6 +503,6 @@ final class CareerJobDetailApiTest extends TestCase
             ],
             'implementation_contract_json' => [],
             'metadata_json' => [],
-        ]);
+        ], $overrides));
     }
 }

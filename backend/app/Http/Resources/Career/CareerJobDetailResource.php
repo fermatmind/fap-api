@@ -6,6 +6,7 @@ namespace App\Http\Resources\Career;
 
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
+use App\Services\Career\Bundles\CareerLocaleIntegrityGate;
 use App\Services\Career\StructuredData\CareerStructuredDataBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -29,16 +30,45 @@ final class CareerJobDetailResource extends JsonResource
             'structured_data' => $this->buildStructuredData($bundle),
         ]);
 
-        $displaySurface = app(CareerJobDisplaySurfaceBuilder::class)->buildForBundle(
-            $bundle,
-            is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN'
-        );
+        $requestedLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
+        $displaySurface = app(CareerJobDisplaySurfaceBuilder::class)->buildForBundle($bundle, $requestedLocale);
 
         if ($displaySurface !== null) {
             $payload['display_surface_v1'] = $displaySurface;
         }
 
+        if (! app(CareerLocaleIntegrityGate::class)->bundleReadyForPublicLocale($bundle, $displaySurface, $requestedLocale)) {
+            unset($payload['display_surface_v1']);
+            $payload['seo_contract'] = $this->withLocaleNotReadySeoContract($payload['seo_contract'] ?? []);
+            $payload['locale_policy']['locale_warning'] = 'zh_locale_not_ready';
+            $payload['locale_policy']['truth_notice_required'] = true;
+            $payload['integrity_summary']['integrity_state'] = 'locale_not_ready';
+            $payload['integrity_summary']['critical_missing_fields'] = array_values(array_unique(array_merge(
+                is_array($payload['integrity_summary']['critical_missing_fields'] ?? null)
+                    ? $payload['integrity_summary']['critical_missing_fields']
+                    : [],
+                ['zh_display_surface']
+            )));
+        }
+
         return $payload;
+    }
+
+    /**
+     * @param  array<string, mixed>  $seoContract
+     * @return array<string, mixed>
+     */
+    private function withLocaleNotReadySeoContract(array $seoContract): array
+    {
+        $reasonCodes = is_array($seoContract['reason_codes'] ?? null) ? $seoContract['reason_codes'] : [];
+        $reasonCodes[] = 'zh_locale_not_ready';
+
+        return array_merge($seoContract, [
+            'index_state' => 'locale_not_ready',
+            'index_eligible' => false,
+            'robots_policy' => 'noindex,follow',
+            'reason_codes' => array_values(array_unique($reasonCodes)),
+        ]);
     }
 
     /**
