@@ -131,6 +131,39 @@ final class CareerRuntimePublishProjectionCommandTest extends TestCase
         $this->assertSame(1, (int) data_get($payload, 'excluded_counts_by_public_resolution_type.keep_non_public_with_policy'));
     }
 
+    public function test_canonical_runtime_truth_validator_blocks_surface_mismatch(): void
+    {
+        $truthPath = storage_path('app/testing/canonical-runtime-truth-invalid-'.strtolower(str()->random(8)).'.json');
+        File::ensureDirectoryExists(dirname($truthPath));
+        File::put($truthPath, json_encode([
+            'truth_kind' => 'career_canonical_runtime_truth',
+            'truth_version' => 'test',
+            'items' => [
+                [
+                    'slug' => 'actors',
+                    'locale' => 'en',
+                    'projection_state' => 'published',
+                    'route_exists' => true,
+                    'final_200' => true,
+                    'robots_indexable' => true,
+                    'canonical_self' => true,
+                    'dataset_visible' => true,
+                    'search_visible' => true,
+                    'sitemap_live' => true,
+                    'llms_live' => false,
+                    'llms_full_live' => false,
+                    'release_gate_pass' => true,
+                    'fully_live' => false,
+                ],
+            ],
+        ], JSON_THROW_ON_ERROR));
+
+        $this->artisan('career:validate-canonical-runtime-truth', [
+            '--truth' => $truthPath,
+            '--json' => true,
+        ])->assertExitCode(1);
+    }
+
     /**
      * @param  list<array<string, mixed>>  $rows
      */

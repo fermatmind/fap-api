@@ -224,6 +224,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionDTO.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionExporter.php',
             'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthExporter.php',
+            'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthValidator.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionService.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
         ];
@@ -981,6 +982,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionDTO.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionExporter.php',
             'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthExporter.php',
+            'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthValidator.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionService.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
         ], true);
