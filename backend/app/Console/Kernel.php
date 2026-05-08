@@ -36,6 +36,7 @@ use App\Console\Commands\CareerImportOccupationDirectoryDrafts;
 use App\Console\Commands\CareerImportOccupationDirectoryDryRun;
 use App\Console\Commands\CareerImportSelectedDisplayAssets;
 use App\Console\Commands\CareerNormalizeLegacyDisplayAssets;
+use App\Console\Commands\CareerPlanCanonicalRolloutBatchTransition;
 use App\Console\Commands\CareerReleaseGateNoindexCleanup;
 use App\Console\Commands\CareerRunAssetBatch;
 use App\Console\Commands\CareerSyncOccupationDirectoryDisplay;
@@ -192,6 +193,7 @@ class Kernel extends ConsoleKernel
         CareerImportOccupationDirectoryDryRun::class,
         CareerImportSelectedDisplayAssets::class,
         CareerNormalizeLegacyDisplayAssets::class,
+        CareerPlanCanonicalRolloutBatchTransition::class,
         CareerReleaseGateNoindexCleanup::class,
         CareerValidateAssetImport::class,
         CareerValidateBroadGroupFamilyMap::class,
