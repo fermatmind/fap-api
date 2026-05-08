@@ -53,13 +53,15 @@ prs:
       output, and focused tests so published_candidate to published promotion
       is planned atomically, requires immediate post-promotion runtime
       validation, and rolls back or quarantines the full rollback group on
-      failure. Do not promote production rows, run rollout batches, modify DB
-      state, materialize candidate routes, include candidates in dataset/search,
-      sitemap, llms, or llms-full, alter CareerFullReleaseLedger governance
-      decisions, change fap-web, or modify content assets.
+      failure. Update the Big Five runtime freeze classifier only to recognize
+      the new Career expansion owner files as Career-only. Do not promote
+      production rows, run rollout batches, modify DB state, materialize
+      candidate routes, include candidates in dataset/search, sitemap, llms, or
+      llms-full, alter CareerFullReleaseLedger governance decisions, change
+      fap-web, or modify content assets.
     checks:
-      - "vendor/bin/pint --test app/Domain/Career/Expansion/CanonicalBatchPromotionService.php app/Domain/Career/Expansion/CanonicalPromotionResultDTO.php app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php app/Domain/Career/Expansion/CanonicalPromotionRollbackResultDTO.php app/Domain/Career/Expansion/CanonicalPromotionTransaction.php app/Domain/Career/Expansion/CanonicalRolloutBatchStateMachine.php tests/Unit/Services/Career/CanonicalBatchPromotionServiceTest.php tests/Unit/Services/Career/CanonicalPromotionRollbackGateTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php"
-      - "php artisan test tests/Unit/Services/Career/CanonicalBatchPromotionServiceTest.php tests/Unit/Services/Career/CanonicalPromotionRollbackGateTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php tests/Unit/Services/Career/CanonicalRolloutGovernanceValidatorTest.php tests/Unit/Services/Career/CareerCanonicalRuntimeTruthValidatorTest.php"
+      - "vendor/bin/pint --test app/Domain/Career/Expansion/CanonicalBatchPromotionService.php app/Domain/Career/Expansion/CanonicalPromotionResultDTO.php app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php app/Domain/Career/Expansion/CanonicalPromotionRollbackResultDTO.php app/Domain/Career/Expansion/CanonicalPromotionTransaction.php app/Domain/Career/Expansion/CanonicalRolloutBatchStateMachine.php tests/Unit/Services/Career/CanonicalBatchPromotionServiceTest.php tests/Unit/Services/Career/CanonicalPromotionRollbackGateTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      - "php artisan test tests/Unit/Services/Career/CanonicalBatchPromotionServiceTest.php tests/Unit/Services/Career/CanonicalPromotionRollbackGateTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php tests/Unit/Services/Career/CanonicalRolloutGovernanceValidatorTest.php tests/Unit/Services/Career/CareerCanonicalRuntimeTruthValidatorTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
       - "php artisan route:list --path=career"
       - "git diff --check"
     stop_if_changed_files_outside_scope: true

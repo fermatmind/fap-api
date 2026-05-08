@@ -4604,9 +4604,9 @@
     "PR-CANONICAL-ATOMIC-PROMOTION-ROLLBACK-GATE": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "pr_open_ci_fix_pushed",
       "branch": "codex/canonical-atomic-promotion-rollback-gate",
-      "commit_sha": "7043f45bdfbe239a7bc85f3fb29548362cd97fd0",
+      "commit_sha": "fae2c94caca6f0491b724d094ef90f6efdb88378",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1298",
       "checks": {
         "local": [
@@ -4619,11 +4619,11 @@
             "status": "passed"
           },
           {
-            "command": "vendor/bin/pint --test app/Domain/Career/Expansion/CanonicalBatchPromotionService.php app/Domain/Career/Expansion/CanonicalPromotionResultDTO.php app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php app/Domain/Career/Expansion/CanonicalPromotionRollbackResultDTO.php app/Domain/Career/Expansion/CanonicalPromotionTransaction.php app/Domain/Career/Expansion/CanonicalRolloutBatchStateMachine.php tests/Unit/Services/Career/CanonicalBatchPromotionServiceTest.php tests/Unit/Services/Career/CanonicalPromotionRollbackGateTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php",
+            "command": "vendor/bin/pint --test app/Domain/Career/Expansion/CanonicalBatchPromotionService.php app/Domain/Career/Expansion/CanonicalPromotionResultDTO.php app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php app/Domain/Career/Expansion/CanonicalPromotionRollbackResultDTO.php app/Domain/Career/Expansion/CanonicalPromotionTransaction.php app/Domain/Career/Expansion/CanonicalRolloutBatchStateMachine.php tests/Unit/Services/Career/CanonicalBatchPromotionServiceTest.php tests/Unit/Services/Career/CanonicalPromotionRollbackGateTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
             "status": "passed"
           },
           {
-            "command": "php artisan test tests/Unit/Services/Career/CanonicalBatchPromotionServiceTest.php tests/Unit/Services/Career/CanonicalPromotionRollbackGateTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php tests/Unit/Services/Career/CanonicalRolloutGovernanceValidatorTest.php tests/Unit/Services/Career/CareerCanonicalRuntimeTruthValidatorTest.php",
+            "command": "php artisan test tests/Unit/Services/Career/CanonicalBatchPromotionServiceTest.php tests/Unit/Services/Career/CanonicalPromotionRollbackGateTest.php tests/Unit/Services/Career/CanonicalRolloutBatchStateMachineTest.php tests/Unit/Services/Career/CanonicalRolloutGovernanceValidatorTest.php tests/Unit/Services/Career/CareerCanonicalRuntimeTruthValidatorTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
             "status": "passed"
           },
           {
@@ -4649,11 +4649,30 @@
           {
             "command": "git diff --check",
             "status": "passed"
+          },
+          {
+            "command": "APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh",
+            "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "failed_before_classifier_fix",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/25567857661/job/75055976438"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "failed_before_classifier_fix",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/25567857661/job/75055976428"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "Initial GitHub verify-mbti checks failed because Big Five runtime freeze classifier did not recognize the new Career Expansion promotion gate owner files as Career-only. Local ci_verify_mbti.sh passed after updating the classifier; GitHub recheck pending after push.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
