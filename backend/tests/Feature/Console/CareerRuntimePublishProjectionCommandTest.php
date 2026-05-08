@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Console\Commands\CareerFinalizeCanonicalRuntimeTruth;
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Domain\Career\Publish\CareerCanonicalRuntimeTruthExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
@@ -162,6 +163,37 @@ final class CareerRuntimePublishProjectionCommandTest extends TestCase
             '--truth' => $truthPath,
             '--json' => true,
         ])->assertExitCode(1);
+    }
+
+    public function test_canonical_runtime_truth_finalization_writes_complete_payload(): void
+    {
+        $ledgerPath = $this->writeLedgerArtifact([
+            [
+                'source_slug' => 'actors',
+                'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                'public_eligible' => true,
+                'indexability' => 'indexable',
+                'sitemap_eligible' => false,
+                'llms_eligible' => false,
+                'llms_full_eligible' => false,
+            ],
+        ]);
+        $timestamp = 'canonical-truth-finalization-test-'.strtolower(str()->random(8));
+
+        $this->artisan('career:finalize-canonical-runtime-truth', [
+            '--ledger' => $ledgerPath,
+            '--timestamp' => $timestamp,
+            '--json' => true,
+        ])->assertExitCode(0);
+
+        $path = storage_path('app/private/career_canonical_runtime_truth_finalization/'.$timestamp.'/'.CareerFinalizeCanonicalRuntimeTruth::FINALIZATION_FILENAME);
+        $this->assertFileExists($path);
+
+        $payload = json_decode((string) file_get_contents($path), true);
+        $this->assertSame('complete', data_get($payload, 'status'));
+        $this->assertSame('pass', data_get($payload, 'surface_equality'));
+        $this->assertSame(2, (int) data_get($payload, 'counts.fully_live'));
+        $this->assertSame(50, (int) data_get($payload, 'rollout_readiness.recommended_first_batch_size'));
     }
 
     /**

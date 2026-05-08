@@ -27,6 +27,7 @@ use App\Console\Commands\CareerExportLaunchGovernanceClosure;
 use App\Console\Commands\CareerExportOccupationDirectoryReviewQueues;
 use App\Console\Commands\CareerExportRuntimePublishProjection;
 use App\Console\Commands\CareerExportStrongIndexEligibility;
+use App\Console\Commands\CareerFinalizeCanonicalRuntimeTruth;
 use App\Console\Commands\CareerFullDisplayWorkbookValidator;
 use App\Console\Commands\CareerImportActorsDisplayAsset;
 use App\Console\Commands\CareerImportAuthorityWave;
@@ -213,6 +214,7 @@ class Kernel extends ConsoleKernel
         CareerExportLaunchGovernanceClosure::class,
         CareerExportOccupationDirectoryReviewQueues::class,
         CareerExportStrongIndexEligibility::class,
+        CareerFinalizeCanonicalRuntimeTruth::class,
         CareerRunAssetBatch::class,
         CareerSyncOccupationDirectoryDisplay::class,
         CareerValidateOccupationDirectoryReviewQueues::class,
