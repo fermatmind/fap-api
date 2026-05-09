@@ -221,6 +221,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_career_runtime_publish_projection_owner_changes(): void
     {
         $changed = [
+            'backend/app/Domain/Career/Expansion/CanonicalBatchPromotionService.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPromotionResultDTO.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPromotionRollbackResultDTO.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPromotionTransaction.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionDTO.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionExporter.php',
             'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthExporter.php',
@@ -989,6 +994,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestExporter.php',
             'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestService.php',
             'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestValidator.php',
+            'backend/app/Domain/Career/Expansion/CanonicalBatchPromotionService.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPromotionResultDTO.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPromotionRollbackResultDTO.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPromotionTransaction.php',
             'backend/app/Domain/Career/Expansion/CanonicalRolloutBatchStateMachine.php',
             'backend/app/Domain/Career/Expansion/CanonicalRolloutGovernanceValidator.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionDTO.php',
