@@ -60,20 +60,53 @@ final class CanonicalBatchPromotionExecutorService
 
         $preStates = $this->capturePreStates($slugs);
 
-        return DB::transaction(function () use (
-            $slugs,
-            $locales,
-            $rollbackGroup,
-            $batchId,
-            $transaction,
-            $quarantineOnFailure,
-            $preStates,
-        ) {
+        $promotionResult = $this->executePromotion(
+            $slugs, $locales, $rollbackGroup, $batchId, $transaction, $preStates,
+        );
+
+        if (($promotionResult['status'] ?? null) === 'promoted_success') {
+            return $promotionResult;
+        }
+
+        return $this->executeRemediation(
+            $slugs, $batchId, $transaction, $preStates,
+            $promotionResult, $quarantineOnFailure,
+        );
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @param  array<string, string>  $preStates
+     * @return array<string, mixed>
+     */
+    private function executePromotion(
+        array $slugs,
+        array $locales,
+        array $rollbackGroup,
+        string $batchId,
+        CanonicalPromotionTransaction $transaction,
+        array $preStates,
+    ): array {
+        DB::beginTransaction();
+
+        try {
             $promotedStates = $this->createPromotionIndexStates($slugs, $batchId);
 
-            $postLedger = $this->ledgerService->build();
-            $postProjection = $this->projectionService->buildFromLedgerArray($postLedger->toArray());
+            $postProjection = $this->freshProjection();
             $postTruth = $this->truthExporter->buildFromProjectionArray($postProjection);
+
+            $expectedLocaleRows = $transaction->expectedLocaleRows();
+            $persistenceCheck = $this->verifyPromotionPersistence(
+                $postProjection, $postTruth, $expectedLocaleRows,
+            );
+
+            if (! $persistenceCheck['persisted']) {
+                DB::rollBack();
+
+                return $this->promotionNotPersistedResult(
+                    $transaction, $preStates, $promotedStates, $persistenceCheck,
+                );
+            }
 
             $postPromotionValidation = $this->rollbackGate->validatePostPromotion(
                 $this->publishedManifest($batchId, $slugs, $locales, $rollbackGroup),
@@ -81,49 +114,103 @@ final class CanonicalBatchPromotionExecutorService
                 $postProjection,
             );
 
-            if (($postPromotionValidation['status'] ?? null) === 'pass') {
-                $releaseGate = $this->releaseGateService->evaluate(
-                    $this->publishedManifest($batchId, $slugs, $locales, $rollbackGroup),
-                    $postTruth,
-                    $postProjection,
-                );
-
-                $closeoutAllowed = (bool) ($releaseGate['closeout_allowed'] ?? false);
-
-                if ($closeoutAllowed) {
-                    return $this->successResult(
-                        $transaction,
-                        $preStates,
-                        $promotedStates,
-                        $releaseGate,
-                        $postProjection,
-                        $postTruth,
-                    );
-                }
-
-                $this->rollbackPromotion($slugs, $preStates, $batchId, 'release_gate_failed', $quarantineOnFailure);
+            if (($postPromotionValidation['status'] ?? null) !== 'pass') {
                 DB::rollBack();
 
-                return $this->rollbackResult(
-                    $transaction,
-                    $postPromotionValidation,
-                    $releaseGate,
-                    $preStates,
-                    $quarantineOnFailure,
+                return $this->promotionValidationFailedResult(
+                    $transaction, $preStates, $promotedStates,
+                    $postPromotionValidation, null,
                 );
             }
 
-            $this->rollbackPromotion($slugs, $preStates, $batchId, 'post_promotion_validation_failed', $quarantineOnFailure);
+            $releaseGate = $this->releaseGateService->evaluate(
+                $this->publishedManifest($batchId, $slugs, $locales, $rollbackGroup),
+                $postTruth,
+                $postProjection,
+            );
+
+            $closeoutAllowed = (bool) ($releaseGate['closeout_allowed'] ?? false);
+
+            if (! $closeoutAllowed) {
+                DB::rollBack();
+
+                return $this->promotionValidationFailedResult(
+                    $transaction, $preStates, $promotedStates,
+                    $postPromotionValidation, $releaseGate,
+                );
+            }
+
+            DB::commit();
+
+            return $this->successResult(
+                $transaction, $preStates, $promotedStates, $releaseGate,
+                $postProjection, $postTruth,
+            );
+        } catch (\Throwable $e) {
             DB::rollBack();
 
-            return $this->rollbackResult(
-                $transaction,
-                $postPromotionValidation,
-                null,
-                $preStates,
-                $quarantineOnFailure,
+            throw $e;
+        }
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @param  array<string, string>  $preStates
+     * @param  array<string, mixed>  $promotionResult
+     * @return array<string, mixed>
+     */
+    private function executeRemediation(
+        array $slugs,
+        string $batchId,
+        CanonicalPromotionTransaction $transaction,
+        array $preStates,
+        array $promotionResult,
+        bool $quarantineOnFailure,
+    ): array {
+        $reason = $quarantineOnFailure ? 'quarantine' : 'rollback';
+        $targetState = $quarantineOnFailure ? 'noindex' : 'promotion_candidate';
+
+        DB::beginTransaction();
+
+        try {
+            $this->createRemediationIndexStates($slugs, $batchId, $targetState, $quarantineOnFailure);
+
+            $postProjection = $this->freshProjection();
+            $expectedLocaleRows = $transaction->expectedLocaleRows();
+            $quarantineCheck = $this->verifyQuarantinePersistence(
+                $postProjection, $expectedLocaleRows, $quarantineOnFailure, $targetState,
             );
-        });
+
+            if (! ($quarantineCheck['persisted'] ?? false)) {
+                DB::rollBack();
+
+                return $this->remediationNotPersistedResult(
+                    $transaction, $preStates, $quarantineOnFailure, $quarantineCheck,
+                );
+            }
+
+            DB::commit();
+
+            return $this->rollbackResult(
+                $transaction, $promotionResult['post_promotion_validation'] ?? null,
+                $promotionResult['release_gate'] ?? null,
+                $preStates, $quarantineOnFailure,
+            );
+        } catch (\Throwable $e) {
+            DB::rollBack();
+
+            throw $e;
+        }
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function freshProjection(): array
+    {
+        $ledger = $this->ledgerService->build();
+
+        return $this->projectionService->buildFromLedgerArray($ledger->toArray());
     }
 
     /**
@@ -161,6 +248,7 @@ final class CanonicalBatchPromotionExecutorService
      */
     private function createPromotionIndexStates(array $slugs, string $batchId): array
     {
+        $now = now()->addSeconds(5);
         $promoted = [];
         $occupations = Occupation::query()->whereIn('canonical_slug', $slugs)->get(['id', 'canonical_slug']);
 
@@ -177,7 +265,7 @@ final class CanonicalBatchPromotionExecutorService
                     'canonical_rollout_batch_promotion',
                     'batch_id:'.$batchId,
                 ],
-                'changed_at' => now(),
+                'changed_at' => $now,
             ]);
 
             $promoted[$slug] = [
@@ -192,16 +280,14 @@ final class CanonicalBatchPromotionExecutorService
 
     /**
      * @param  list<string>  $slugs
-     * @param  array<string, string>  $preStates
      */
-    private function rollbackPromotion(
+    private function createRemediationIndexStates(
         array $slugs,
-        array $preStates,
         string $batchId,
-        string $reason,
+        string $targetState,
         bool $quarantine,
     ): void {
-        $targetState = $quarantine ? 'noindex' : 'promotion_candidate';
+        $now = now()->addSeconds(5);
         $occupations = Occupation::query()->whereIn('canonical_slug', $slugs)->get(['id', 'canonical_slug']);
 
         foreach ($occupations as $occupation) {
@@ -214,13 +300,118 @@ final class CanonicalBatchPromotionExecutorService
                 'canonical_path' => '/career/jobs/'.$slug,
                 'canonical_target' => null,
                 'reason_codes' => [
-                    'canonical_rollout_batch_'.$reason,
+                    'canonical_rollout_batch_remediation',
                     'batch_id:'.$batchId,
-                    $quarantine ? 'quarantine' : 'rollback',
+                    $quarantine ? 'quarantine' : 'rollback_to_candidate',
                 ],
-                'changed_at' => now(),
+                'changed_at' => $now,
             ]);
         }
+    }
+
+    /**
+     * @param  array<string, mixed>  $projection
+     * @param  array<string, mixed>  $truth
+     * @param  list<array{slug: string, locale: string}>  $expectedRows
+     * @return array{persisted: bool, expected: int, found_published: int, missing: list<array{slug: string, locale: string}>, not_published: list<array{slug: string, locale: string, state: string}>}
+     */
+    private function verifyPromotionPersistence(
+        array $projection,
+        array $truth,
+        array $expectedRows,
+    ): array {
+        $projectionItems = $this->itemsFromPayload($projection);
+        $truthItems = $this->itemsFromPayload($truth);
+        $foundPublished = 0;
+        $missing = [];
+        $notPublished = [];
+
+        foreach ($expectedRows as $expected) {
+            $item = $this->itemFor($truthItems, $expected['slug'], $expected['locale']);
+
+            if ($item === null) {
+                $missing[] = $expected;
+
+                continue;
+            }
+
+            $state = (string) ($item['projection_state'] ?? '');
+
+            if ($state === CareerRuntimePublishProjectionService::STATE_PUBLISHED) {
+                $foundPublished++;
+            } else {
+                $notPublished[] = [
+                    'slug' => $expected['slug'],
+                    'locale' => $expected['locale'],
+                    'state' => $state,
+                ];
+            }
+        }
+
+        return [
+            'persisted' => count($missing) === 0 && count($notPublished) === 0,
+            'expected' => count($expectedRows),
+            'found_published' => $foundPublished,
+            'missing' => $missing,
+            'not_published' => $notPublished,
+            'projection_items_total' => count($projectionItems),
+            'truth_items_total' => count($truthItems),
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $projection
+     * @param  list<array{slug: string, locale: string}>  $expectedRows
+     * @return array{persisted: bool, expected: int, found_target: int, not_converged: list<array{slug: string, locale: string, state: string}>}
+     */
+    private function verifyQuarantinePersistence(
+        array $projection,
+        array $expectedRows,
+        bool $quarantineOnFailure,
+        string $targetState,
+    ): array {
+        $truth = $this->truthExporter->buildFromProjectionArray($projection);
+        $truthItems = $this->itemsFromPayload($truth);
+        $expectedTargetState = $quarantineOnFailure
+            ? CareerRuntimePublishProjectionService::STATE_QUARANTINED
+            : CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE;
+        $foundTarget = 0;
+        $notConverged = [];
+
+        foreach ($expectedRows as $expected) {
+            $item = $this->itemFor($truthItems, $expected['slug'], $expected['locale']);
+
+            if ($item === null) {
+                $notConverged[] = [
+                    'slug' => $expected['slug'],
+                    'locale' => $expected['locale'],
+                    'state' => 'missing',
+                ];
+
+                continue;
+            }
+
+            $state = (string) ($item['projection_state'] ?? '');
+
+            if ($state === $expectedTargetState) {
+                $foundTarget++;
+            } else {
+                $notConverged[] = [
+                    'slug' => $expected['slug'],
+                    'locale' => $expected['locale'],
+                    'state' => $state,
+                ];
+            }
+        }
+
+        return [
+            'persisted' => count($notConverged) === 0,
+            'expected' => count($expectedRows),
+            'found_target' => $foundTarget,
+            'target_state' => $targetState,
+            'expected_projection_state' => $expectedTargetState,
+            'not_converged' => $notConverged,
+        ];
     }
 
     /**
@@ -232,8 +423,20 @@ final class CanonicalBatchPromotionExecutorService
         return $this->truthExporter->buildFromProjectionArray($projection);
     }
 
+    private function publishedManifest(string $batchId, array $slugs, array $locales, array $rollbackGroup): array
+    {
+        return [
+            'batch_id' => $batchId,
+            'slugs' => $slugs,
+            'locales' => $locales,
+            'rollback_group' => $rollbackGroup,
+            'rollout_state' => CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED,
+            'projection_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED,
+        ];
+    }
+
     /**
-     * @param  list<string>  $params
+     * @param  array{batch_id: string, slugs: list<string>, locales: list<string>, rollback_group: list<string>}  $params
      * @return array{batch_id: string, slugs: list<string>, locales: list<string>, rollback_group: list<string>, rollout_state: string, projection_state: string}
      */
     private function toManifest(array $params): array
@@ -248,17 +451,37 @@ final class CanonicalBatchPromotionExecutorService
         ];
     }
 
-    private function publishedManifest(string $batchId, array $slugs, array $locales, array $rollbackGroup): array
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return list<array<string, mixed>>
+     */
+    private function itemsFromPayload(array $payload): array
     {
-        return [
-            'batch_id' => $batchId,
-            'slugs' => $slugs,
-            'locales' => $locales,
-            'rollback_group' => $rollbackGroup,
-            'rollout_state' => CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED,
-            'projection_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED,
-        ];
+        $items = $payload['items'] ?? [];
+
+        return is_array($items)
+            ? array_values(array_filter($items, static fn (mixed $item): bool => is_array($item)))
+            : [];
     }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     */
+    private function itemFor(array $items, string $slug, string $locale): ?array
+    {
+        foreach ($items as $item) {
+            if (
+                strtolower(trim((string) ($item['slug'] ?? ''))) === $slug
+                && strtolower(trim((string) ($item['locale'] ?? ''))) === $locale
+            ) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
+
+    // ─── Result DTO methods ────────────────────────────────────────────────
 
     /**
      * @param  array<string, mixed>  $preStates
@@ -287,6 +510,7 @@ final class CanonicalBatchPromotionExecutorService
             'rollback_group' => $transaction->rollbackGroup,
             'dry_run' => false,
             'writes_database' => true,
+            'write_verified' => true,
             'pre_states' => $preStates,
             'promoted_states' => $promotedStates,
             'post_promotion_validation' => [
@@ -349,6 +573,120 @@ final class CanonicalBatchPromotionExecutorService
     }
 
     /**
+     * @param  array<string, string>  $preStates
+     * @param  array<string, mixed>  $promotedStates
+     * @param  array<string, mixed>  $persistenceCheck
+     * @return array<string, mixed>
+     */
+    private function promotionNotPersistedResult(
+        CanonicalPromotionTransaction $transaction,
+        array $preStates,
+        array $promotedStates,
+        array $persistenceCheck,
+    ): array {
+        return [
+            'status' => 'promotion_write_not_persisted',
+            'batch_id' => $transaction->batchId,
+            'promoted_slugs' => $transaction->slugs,
+            'promoted_locale_rows' => count($transaction->expectedLocaleRows()),
+            'rollback_group' => $transaction->rollbackGroup,
+            'dry_run' => false,
+            'writes_database' => false,
+            'write_verified' => false,
+            'persistence_check' => $persistenceCheck,
+            'pre_states' => $preStates,
+            'promoted_states' => $promotedStates,
+            'rollback_required' => false,
+            'quarantine_required' => false,
+            'failures' => [
+                [
+                    'reason' => 'promotion_write_not_persisted',
+                    'context' => [
+                        'expected' => $persistenceCheck['expected'] ?? 0,
+                        'found_published' => $persistenceCheck['found_published'] ?? 0,
+                        'missing_count' => count($persistenceCheck['missing'] ?? []),
+                        'not_published_count' => count($persistenceCheck['not_published'] ?? []),
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string, string>  $preStates
+     * @param  array<string, mixed>  $postPromotionValidation
+     * @param  array<string, mixed>|null  $releaseGate
+     * @return array<string, mixed>
+     */
+    private function promotionValidationFailedResult(
+        CanonicalPromotionTransaction $transaction,
+        array $preStates,
+        array $promotedStates,
+        array $postPromotionValidation,
+        ?array $releaseGate,
+    ): array {
+        return [
+            'status' => 'promotion_validated_as_failed',
+            'batch_id' => $transaction->batchId,
+            'promoted_slugs' => $transaction->slugs,
+            'promoted_locale_rows' => count($transaction->expectedLocaleRows()),
+            'rollback_group' => $transaction->rollbackGroup,
+            'dry_run' => false,
+            'writes_database' => false,
+            'promotion_rolled_back' => true,
+            'pre_states' => $preStates,
+            'promoted_states' => $promotedStates,
+            'post_promotion_validation' => $postPromotionValidation,
+            'release_gate' => $releaseGate,
+            'failures' => is_array($postPromotionValidation['failures'] ?? null)
+                ? $postPromotionValidation['failures']
+                : [],
+        ];
+    }
+
+    /**
+     * @param  array<string, string>  $preStates
+     * @param  array<string, mixed>  $quarantineCheck
+     * @return array<string, mixed>
+     */
+    private function remediationNotPersistedResult(
+        CanonicalPromotionTransaction $transaction,
+        array $preStates,
+        bool $quarantineOnFailure,
+        array $quarantineCheck,
+    ): array {
+        $status = $quarantineOnFailure ? 'quarantine_write_not_persisted' : 'rollback_write_not_persisted';
+
+        return [
+            'status' => $status,
+            'batch_id' => $transaction->batchId,
+            'promoted_slugs' => $transaction->slugs,
+            'promoted_locale_rows' => count($transaction->expectedLocaleRows()),
+            'rollback_group' => $transaction->rollbackGroup,
+            'dry_run' => false,
+            'writes_database' => false,
+            'write_verified' => false,
+            'quarantine_check' => $quarantineCheck,
+            'pre_states' => $preStates,
+            'rollback_required' => false,
+            'quarantine_required' => false,
+            'failures' => [
+                [
+                    'reason' => $quarantineOnFailure
+                        ? 'quarantine_write_not_persisted'
+                        : 'rollback_write_not_persisted',
+                    'context' => [
+                        'expected' => $quarantineCheck['expected'] ?? 0,
+                        'found_target' => $quarantineCheck['found_target'] ?? 0,
+                        'expected_projection_state' => $quarantineCheck['expected_projection_state'] ?? null,
+                        'not_converged_count' => count($quarantineCheck['not_converged'] ?? []),
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
      * @param  array<string, mixed>  $postPromotionValidation
      * @param  array<string, mixed>|null  $releaseGate
      * @param  array<string, string>  $preStates
@@ -356,7 +694,7 @@ final class CanonicalBatchPromotionExecutorService
      */
     private function rollbackResult(
         CanonicalPromotionTransaction $transaction,
-        array $postPromotionValidation,
+        ?array $postPromotionValidation,
         ?array $releaseGate,
         array $preStates,
         bool $quarantineOnFailure,
@@ -371,6 +709,7 @@ final class CanonicalBatchPromotionExecutorService
             'rollback_group' => $transaction->rollbackGroup,
             'dry_run' => false,
             'writes_database' => true,
+            'write_verified' => true,
             'pre_states' => $preStates,
             'post_promotion_validation' => $postPromotionValidation,
             'release_gate' => $releaseGate,
@@ -382,6 +721,8 @@ final class CanonicalBatchPromotionExecutorService
                 : [],
         ];
     }
+
+    // ─── Normalization helpers ─────────────────────────────────────────────
 
     /**
      * @param  string[]|mixed  $value
