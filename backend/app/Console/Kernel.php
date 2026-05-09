@@ -42,6 +42,7 @@ use App\Console\Commands\CareerRunAssetBatch;
 use App\Console\Commands\CareerSyncOccupationDirectoryDisplay;
 use App\Console\Commands\CareerValidateAssetImport;
 use App\Console\Commands\CareerValidateBroadGroupFamilyMap;
+use App\Console\Commands\CareerValidateCanonicalPostPromotionReleaseGate;
 use App\Console\Commands\CareerValidateCanonicalRolloutGovernance;
 use App\Console\Commands\CareerValidateCanonicalRuntimeTruth;
 use App\Console\Commands\CareerValidateCnAuthorityPolicy;
@@ -198,6 +199,7 @@ class Kernel extends ConsoleKernel
         CareerValidateAssetImport::class,
         CareerValidateBroadGroupFamilyMap::class,
         CareerValidateCanonicalRuntimeTruth::class,
+        CareerValidateCanonicalPostPromotionReleaseGate::class,
         CareerValidateCanonicalRolloutGovernance::class,
         CareerValidateCnAuthorityPolicy::class,
         CareerValidateCnProxyPublicOwner::class,

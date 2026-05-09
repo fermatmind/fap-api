@@ -232,6 +232,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthValidator.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionService.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
+            'backend/app/Domain/Career/Expansion/CanonicalBatchCloseoutResultDTO.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPostPromotionReleaseGateService.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPostPromotionReleaseGateValidator.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -995,6 +998,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestService.php',
             'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestValidator.php',
             'backend/app/Domain/Career/Expansion/CanonicalBatchPromotionService.php',
+            'backend/app/Domain/Career/Expansion/CanonicalBatchCloseoutResultDTO.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPostPromotionReleaseGateService.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPostPromotionReleaseGateValidator.php',
             'backend/app/Domain/Career/Expansion/CanonicalPromotionResultDTO.php',
             'backend/app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php',
             'backend/app/Domain/Career/Expansion/CanonicalPromotionRollbackResultDTO.php',
