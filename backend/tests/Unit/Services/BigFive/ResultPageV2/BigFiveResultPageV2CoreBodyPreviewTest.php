@@ -994,6 +994,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Domain/Career/Expansion/CanonicalBatchPromotionExecutorService.php',
+            'backend/app/Domain/Career/Publish/CareerFullReleaseLedgerService.php',
             'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestDTO.php',
             'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestExporter.php',
             'backend/app/Domain/Career/Expansion/CanonicalExpansionManifestService.php',
