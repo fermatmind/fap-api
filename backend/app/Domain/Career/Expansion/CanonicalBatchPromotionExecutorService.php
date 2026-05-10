@@ -68,9 +68,13 @@ final class CanonicalBatchPromotionExecutorService
             return $promotionResult;
         }
 
-        return $this->executeRemediation(
+        $remediationResult = $this->executeRemediation(
             $slugs, $batchId, $transaction, $preStates,
             $promotionResult, $quarantineOnFailure,
+        );
+
+        return $this->mergeFailureWithRemediation(
+            $promotionResult, $remediationResult, $quarantineOnFailure,
         );
     }
 
@@ -204,6 +208,32 @@ final class CanonicalBatchPromotionExecutorService
     }
 
     /**
+     * @param  array<string, mixed>  $promotionResult
+     * @param  array<string, mixed>  $remediationResult
+     * @return array<string, mixed>
+     */
+    private function mergeFailureWithRemediation(
+        array $promotionResult,
+        array $remediationResult,
+        bool $quarantineOnFailure,
+    ): array {
+        $remediationWriteVerified = (bool) ($remediationResult['write_verified'] ?? false);
+        $remediationStatus = $remediationResult['status'] ?? 'remediation_unknown';
+
+        return array_merge($promotionResult, [
+            'remediation' => [
+                'attempted' => true,
+                'mode' => $quarantineOnFailure ? 'quarantine' : 'rollback',
+                'status' => $remediationWriteVerified
+                    ? ($quarantineOnFailure ? 'quarantined' : 'rolled_back_to_candidate')
+                    : ($quarantineOnFailure ? 'quarantine_not_persisted' : 'rollback_not_persisted'),
+                'succeeded' => $remediationWriteVerified,
+                'output' => $remediationResult,
+            ],
+        ]);
+    }
+
+    /**
      * @return array<string, mixed>
      */
     private function freshProjection(): array
@@ -248,7 +278,7 @@ final class CanonicalBatchPromotionExecutorService
      */
     private function createPromotionIndexStates(array $slugs, string $batchId): array
     {
-        $now = now()->addSeconds(5);
+        $now = now();
         $promoted = [];
         $occupations = Occupation::query()->whereIn('canonical_slug', $slugs)->get(['id', 'canonical_slug']);
 
@@ -287,7 +317,7 @@ final class CanonicalBatchPromotionExecutorService
         string $targetState,
         bool $quarantine,
     ): void {
-        $now = now()->addSeconds(5);
+        $now = now();
         $occupations = Occupation::query()->whereIn('canonical_slug', $slugs)->get(['id', 'canonical_slug']);
 
         foreach ($occupations as $occupation) {
