@@ -96,7 +96,7 @@ final class CanonicalBatchPromotionExecutorService
         try {
             $promotedStates = $this->createPromotionIndexStates($slugs, $batchId);
 
-            $postProjection = $this->freshProjection($slugs);
+            $postProjection = $this->freshProjection();
             $postTruth = $this->truthExporter->buildFromProjectionArray($postProjection);
 
             $expectedLocaleRows = $transaction->expectedLocaleRows();
@@ -179,7 +179,7 @@ final class CanonicalBatchPromotionExecutorService
         try {
             $this->createRemediationIndexStates($slugs, $batchId, $targetState, $quarantineOnFailure);
 
-            $postProjection = $this->freshProjection($slugs);
+            $postProjection = $this->freshProjection();
             $expectedLocaleRows = $transaction->expectedLocaleRows();
             $quarantineCheck = $this->verifyQuarantinePersistence(
                 $postProjection, $expectedLocaleRows, $quarantineOnFailure, $targetState,
@@ -234,12 +234,11 @@ final class CanonicalBatchPromotionExecutorService
     }
 
     /**
-     * @param  list<string>  $slugs
      * @return array<string, mixed>
      */
-    private function freshProjection(array $slugs = []): array
+    private function freshProjection(): array
     {
-        $ledger = $this->ledgerService->build($slugs);
+        $ledger = $this->ledgerService->build();
 
         return $this->projectionService->buildFromLedgerArray($ledger->toArray());
     }

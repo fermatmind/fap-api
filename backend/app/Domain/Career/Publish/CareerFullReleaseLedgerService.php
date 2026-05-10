@@ -48,10 +48,7 @@ final class CareerFullReleaseLedgerService
         private readonly CareerCrosswalkOverrideResolver $crosswalkOverrideResolver,
     ) {}
 
-    /**
-     * @param  list<string>  $additionalSlugs
-     */
-    public function build(array $additionalSlugs = []): CareerFullReleaseLedger
+    public function build(): CareerFullReleaseLedger
     {
         $firstWaveManifest = $this->firstWaveManifestReader->read();
         $firstWaveAuditPayload = $this->safeFirstWaveAudit();
@@ -59,8 +56,6 @@ final class CareerFullReleaseLedgerService
         $firstWaveAuditAvailable = (bool) ($firstWaveAuditPayload['available'] ?? false);
         $batchMembers = $this->loadBatchMembers();
         $trackedMembers = $this->buildTrackedMembers($firstWaveManifest, $batchMembers);
-
-        $additionalIndexStates = $this->loadIndexStateBySlug($additionalSlugs);
 
         $auditBySlug = $this->mapBySlug((array) ($firstWaveAudit['members'] ?? []));
         $batchContextBySlug = $this->buildBatchContextBySlug($trackedMembers);
@@ -171,47 +166,13 @@ final class CareerFullReleaseLedgerService
             );
         }
 
-        foreach ($additionalSlugs as $slug) {
-            if (isset($trackedMembers[$slug])) {
-                continue;
-            }
-
-            $indexRow = $additionalIndexStates[$slug] ?? null;
-            $indexEligible = (bool) ($indexRow['index_eligible'] ?? false);
-            $publicIndexState = $this->normalizePublicIndexState(
-                (string) ($indexRow['public_index_state'] ?? ''),
-                $indexEligible,
-            );
-            $releaseCohort = in_array($publicIndexState, [IndexStateValue::INDEXABLE, 'indexable'], true)
-                ? 'public_detail_indexable'
-                : 'public_detail_conservative';
-
-            $releaseCounts[$releaseCohort]++;
-
-            $members[] = new CareerFullReleaseLedgerMember(
-                memberKind: 'career_rollout_batch_additional',
-                canonicalSlug: $slug,
-                canonicalTitleEn: null,
-                batchOrigin: 'canonical_rollout_batch_executor',
-                currentCrosswalkMode: null,
-                currentIndexState: $this->normalizeIndexState((string) ($indexRow['current_index_state'] ?? '')),
-                publicIndexState: $publicIndexState,
-                indexEligible: $indexEligible,
-                releaseCohort: $releaseCohort,
-                blockerReasons: [],
-                evidenceRefs: [
-                    'tracking_source' => ['kind' => 'canonical_rollout_batch_executor', 'scope' => self::SCOPE],
-                ],
-            );
-        }
-
         usort($members, static fn (CareerFullReleaseLedgerMember $left, CareerFullReleaseLedgerMember $right): int => strcmp(
             $left->canonicalSlug,
             $right->canonicalSlug,
         ));
 
         $expectedTotal = (int) data_get($batchMembers, 'coverage.expected_total_occupations', 0);
-        $trackedTotal = count($trackedMembers) + count($additionalSlugs);
+        $trackedTotal = count($trackedMembers);
         $missing = $expectedTotal > 0 ? max(0, $expectedTotal - $trackedTotal) : 0;
 
         return new CareerFullReleaseLedger(
