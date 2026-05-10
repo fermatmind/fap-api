@@ -5,18 +5,43 @@ declare(strict_types=1);
 namespace Tests\Feature\Console;
 
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
+use App\Models\Occupation;
+use App\Models\OccupationFamily;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
 {
+    use RefreshDatabase;
+
     private string $tmpProjectionPath;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->tmpProjectionPath = sys_get_temp_dir().'/test-projection-'.uniqid().'.json';
+
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'test-family',
+            'title_en' => 'Test Family',
+            'title_zh' => '测试族',
+        ]);
+
+        foreach (['actuaries', 'economists', 'web-developers', 'software-developers', 'cn-engineers'] as $slug) {
+            Occupation::query()->create([
+                'family_id' => $family->id,
+                'canonical_slug' => $slug,
+                'entity_level' => 'market_child',
+                'truth_market' => 'US',
+                'display_market' => 'US',
+                'crosswalk_mode' => 'global_standard',
+                'canonical_title_en' => ucfirst(str_replace('-', ' ', $slug)),
+                'canonical_title_zh' => $slug,
+                'search_h1_zh' => $slug,
+            ]);
+        }
     }
 
     protected function tearDown(): void

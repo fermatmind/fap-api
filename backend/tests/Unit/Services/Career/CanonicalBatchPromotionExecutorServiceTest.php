@@ -6,10 +6,86 @@ namespace Tests\Unit\Services\Career;
 
 use App\Domain\Career\Expansion\CanonicalBatchPromotionExecutorService;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
+use App\Models\Occupation;
+use App\Models\OccupationFamily;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 final class CanonicalBatchPromotionExecutorServiceTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'test-family',
+            'title_en' => 'Test Family',
+            'title_zh' => '测试族',
+        ]);
+
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'actuaries',
+            'entity_level' => 'market_child',
+            'truth_market' => 'US',
+            'display_market' => 'US',
+            'crosswalk_mode' => 'global_standard',
+            'canonical_title_en' => 'Actuaries',
+            'canonical_title_zh' => '精算师',
+            'search_h1_zh' => '精算师',
+        ]);
+
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'economists',
+            'entity_level' => 'market_child',
+            'truth_market' => 'US',
+            'display_market' => 'US',
+            'crosswalk_mode' => 'global_standard',
+            'canonical_title_en' => 'Economists',
+            'canonical_title_zh' => '经济学家',
+            'search_h1_zh' => '经济学家',
+        ]);
+
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'web-developers',
+            'entity_level' => 'market_child',
+            'truth_market' => 'US',
+            'display_market' => 'US',
+            'crosswalk_mode' => 'global_standard',
+            'canonical_title_en' => 'Web Developers',
+            'canonical_title_zh' => '网页开发者',
+            'search_h1_zh' => '网页开发者',
+        ]);
+
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'software-developers',
+            'entity_level' => 'market_child',
+            'truth_market' => 'US',
+            'display_market' => 'US',
+            'crosswalk_mode' => 'global_standard',
+            'canonical_title_en' => 'Software Developers',
+            'canonical_title_zh' => '软件开发者',
+            'search_h1_zh' => '软件开发者',
+        ]);
+
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'cn-aerospace-engineers',
+            'entity_level' => 'market_child',
+            'truth_market' => 'CN',
+            'display_market' => 'CN',
+            'crosswalk_mode' => 'global_standard',
+            'canonical_title_en' => 'CN Aerospace Engineers',
+            'canonical_title_zh' => '航空航天工程师',
+            'search_h1_zh' => '航空航天工程师',
+        ]);
+    }
+
     public function test_dry_run_does_not_write_database(): void
     {
         $result = app(CanonicalBatchPromotionExecutorService::class)->execute(
@@ -22,6 +98,34 @@ final class CanonicalBatchPromotionExecutorServiceTest extends TestCase
         $this->assertSame('planned', $result['status']);
         $this->assertTrue($result['dry_run']);
         $this->assertFalse($result['writes_database']);
+    }
+
+    public function test_entity_gate_blocks_missing_occupations(): void
+    {
+        $result = app(CanonicalBatchPromotionExecutorService::class)->execute(
+            params: $this->batchParams(['actuaries', 'compliance-officers']),
+            dryRun: true,
+            quarantineOnFailure: false,
+            prePromotionProjection: $this->candidateProjection(['actuaries', 'compliance-officers']),
+        );
+
+        $this->assertSame('blocked', $result['status']);
+        $this->assertSame('canonical_occupation_records_missing', $result['reason'] ?? null);
+        $this->assertSame('missing_occupation_records', $result['entity_authority_status'] ?? null);
+        $this->assertContains('compliance-officers', $result['missing_occupation_slugs'] ?? []);
+        $this->assertFalse($result['writes_database']);
+    }
+
+    public function test_entity_gate_passes_when_all_occupations_exist(): void
+    {
+        $result = app(CanonicalBatchPromotionExecutorService::class)->execute(
+            params: $this->batchParams(['actuaries', 'economists', 'web-developers']),
+            dryRun: true,
+            quarantineOnFailure: false,
+            prePromotionProjection: $this->candidateProjection(['actuaries', 'economists', 'web-developers']),
+        );
+
+        $this->assertSame('planned', $result['status']);
     }
 
     public function test_dry_run_rejects_blocked_rows(): void
@@ -164,6 +268,19 @@ final class CanonicalBatchPromotionExecutorServiceTest extends TestCase
         );
 
         $this->assertSame('pass', $result['plan_validation']['status']);
+    }
+
+    public function test_dry_run_has_occupation_count_in_result(): void
+    {
+        $result = app(CanonicalBatchPromotionExecutorService::class)->execute(
+            params: $this->batchParams(['actuaries', 'economists'], ['en', 'zh']),
+            dryRun: true,
+            quarantineOnFailure: false,
+            prePromotionProjection: $this->candidateProjection(['actuaries', 'economists']),
+        );
+
+        $this->assertSame(2, $result['occupation_count'] ?? 0);
+        $this->assertSame([], $result['missing_occupation_slugs'] ?? null);
     }
 
     // ─── helpers ───────────────────────────────────────────────────────────
