@@ -124,6 +124,50 @@ final class CanonicalBatchPromotionExecutorServiceTest extends TestCase
         $this->assertCount(6, $result['promotion_plan']['expected_published_rows']);
     }
 
+    public function test_blocked_result_has_failures_array(): void
+    {
+        $result = app(CanonicalBatchPromotionExecutorService::class)->execute(
+            params: $this->batchParams(['software-developers']),
+            dryRun: false,
+            quarantineOnFailure: false,
+            prePromotionProjection: $this->candidateProjection(['software-developers']),
+        );
+
+        $this->assertSame('blocked', $result['status']);
+        $this->assertFalse($result['writes_database']);
+        $this->assertIsArray($result['failures']);
+        $this->assertNotEmpty($result['failures']);
+    }
+
+    public function test_dry_run_result_includes_expected_published_rows(): void
+    {
+        $result = app(CanonicalBatchPromotionExecutorService::class)->execute(
+            params: $this->batchParams(['actuaries'], ['en', 'zh']),
+            dryRun: true,
+            quarantineOnFailure: false,
+            prePromotionProjection: $this->candidateProjection(['actuaries']),
+        );
+
+        $expected = $result['promotion_plan']['expected_published_rows'];
+        $this->assertCount(2, $expected);
+        $this->assertSame('actuaries', $expected[0]['slug']);
+        $this->assertSame('en', $expected[0]['locale']);
+    }
+
+    public function test_dry_run_plan_validation_status_is_pass_for_candidates(): void
+    {
+        $result = app(CanonicalBatchPromotionExecutorService::class)->execute(
+            params: $this->batchParams(['actuaries'], ['en', 'zh']),
+            dryRun: true,
+            quarantineOnFailure: false,
+            prePromotionProjection: $this->candidateProjection(['actuaries']),
+        );
+
+        $this->assertSame('pass', $result['plan_validation']['status']);
+    }
+
+    // ─── helpers ───────────────────────────────────────────────────────────
+
     /**
      * @param  list<string>  $slugs
      * @param  list<string>  $locales
@@ -145,18 +189,7 @@ final class CanonicalBatchPromotionExecutorServiceTest extends TestCase
      */
     private function candidateProjection(array $slugs): array
     {
-        $items = [];
-
-        foreach ($slugs as $slug) {
-            foreach (['en', 'zh'] as $locale) {
-                $items[] = $this->projectionItem($slug, $locale, CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE);
-            }
-        }
-
-        return [
-            'projection_kind' => 'career_runtime_publish_projection',
-            'items' => $items,
-        ];
+        return $this->buildProjection($slugs, CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE);
     }
 
     /**
@@ -165,18 +198,7 @@ final class CanonicalBatchPromotionExecutorServiceTest extends TestCase
      */
     private function blockedProjection(array $slugs): array
     {
-        $items = [];
-
-        foreach ($slugs as $slug) {
-            foreach (['en', 'zh'] as $locale) {
-                $items[] = $this->projectionItem($slug, $locale, CareerRuntimePublishProjectionService::STATE_BLOCKED);
-            }
-        }
-
-        return [
-            'projection_kind' => 'career_runtime_publish_projection',
-            'items' => $items,
-        ];
+        return $this->buildProjection($slugs, CareerRuntimePublishProjectionService::STATE_BLOCKED);
     }
 
     /**
@@ -185,11 +207,20 @@ final class CanonicalBatchPromotionExecutorServiceTest extends TestCase
      */
     private function publishedProjection(array $slugs): array
     {
+        return $this->buildProjection($slugs, CareerRuntimePublishProjectionService::STATE_PUBLISHED);
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return array<string, mixed>
+     */
+    private function buildProjection(array $slugs, string $state): array
+    {
         $items = [];
 
         foreach ($slugs as $slug) {
             foreach (['en', 'zh'] as $locale) {
-                $items[] = $this->projectionItem($slug, $locale, CareerRuntimePublishProjectionService::STATE_PUBLISHED);
+                $items[] = $this->projectionItem($slug, $locale, $state);
             }
         }
 
@@ -204,7 +235,6 @@ final class CanonicalBatchPromotionExecutorServiceTest extends TestCase
      */
     private function projectionItem(string $slug, string $locale, string $state): array
     {
-        $isCandidate = $state === CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE;
         $isPublished = $state === CareerRuntimePublishProjectionService::STATE_PUBLISHED;
 
         return [

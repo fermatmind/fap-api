@@ -403,13 +403,15 @@ final class CareerFullReleaseLedgerService
         }
 
         return Occupation::query()
-            ->with('indexStates:id,occupation_id,index_state,index_eligible,changed_at,updated_at')
+            ->with(['indexStates' => function ($q): void {
+                $q->select(['id', 'occupation_id', 'index_state', 'index_eligible', 'changed_at', 'updated_at', 'created_at'])
+                    ->orderByDesc('changed_at')
+                    ->orderByDesc('created_at');
+            }])
             ->whereIn('canonical_slug', $slugs)
             ->get(['id', 'canonical_slug'])
             ->mapWithKeys(function (Occupation $occupation): array {
-                $indexState = $occupation->indexStates->sortByDesc(
-                    static fn ($row): int => strtotime((string) ($row->changed_at ?? $row->updated_at ?? '')) ?: 0
-                )->first();
+                $indexState = $occupation->indexStates->first();
 
                 $indexEligible = (bool) ($indexState?->index_eligible ?? false);
                 $currentIndexState = $this->normalizeIndexState((string) ($indexState?->index_state ?? ''));

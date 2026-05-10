@@ -73,6 +73,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
 
         $this->assertIsArray($payload);
         $this->assertSame('blocked', $payload['status'] ?? null);
+        $this->assertFalse($payload['writes_database'] ?? true);
     }
 
     public function test_command_rejects_software_developers(): void
@@ -207,6 +208,49 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
 
         $content = json_decode((string) file_get_contents($files[0]->getPathname()), true);
         $this->assertSame('planned', $content['status'] ?? null);
+    }
+
+    public function test_command_help_shows_all_options(): void
+    {
+        $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+            '--help' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $output = Artisan::output();
+
+        $this->assertStringContainsString('--batch-id', $output);
+        $this->assertStringContainsString('--slugs', $output);
+        $this->assertStringContainsString('--locales', $output);
+        $this->assertStringContainsString('--rollback-group', $output);
+        $this->assertStringContainsString('--dry-run', $output);
+        $this->assertStringContainsString('--apply', $output);
+        $this->assertStringContainsString('--quarantine-on-failure', $output);
+    }
+
+    public function test_dry_run_with_quarantine_flag_is_accepted(): void
+    {
+        $this->writeProjection($this->candidateProjection(['actuaries']));
+
+        $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+            '--batch-id' => 'batch-001',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en,zh',
+            '--rollback-group' => 'actuaries',
+            '--dry-run' => true,
+            '--quarantine-on-failure' => true,
+            '--projection' => $this->tmpProjectionPath,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $output = Artisan::output();
+        $payload = json_decode($output, true);
+
+        $this->assertIsArray($payload);
+        $this->assertSame('planned', $payload['status'] ?? null);
+        $this->assertTrue($payload['dry_run'] ?? false);
+        $this->assertFalse($payload['writes_database'] ?? true);
     }
 
     /**
