@@ -21,9 +21,15 @@ final class CareerBackfillCanonicalOccupationRecords extends Command
 
     private const DEFAULT_SOURCE = 'career_jobs_zh_cn_baseline';
 
-    private const BASELINE_PATH = 'content_baselines/career_jobs/career_jobs.zh-CN.json';
+    private const ZH_CN_BASELINE_RELATIVE = '../content_baselines/career_jobs/career_jobs.zh-CN.json';
 
-    private const EN_BASELINE_PATH = 'content_baselines/career_jobs/career_jobs.en.json';
+    private const EN_BASELINE_RELATIVE = '../content_baselines/career_jobs/career_jobs.en.json';
+
+    private const BATCH_MANIFEST_PATHS = [
+        '../docs/career/batches/batch_2_manifest.json',
+        '../docs/career/batches/batch_3_manifest.json',
+        '../docs/career/batches/batch_4_manifest.json',
+    ];
 
     public function handle(): int
     {
@@ -53,8 +59,12 @@ final class CareerBackfillCanonicalOccupationRecords extends Command
                 ? trim((string) $this->option('source'))
                 : self::DEFAULT_SOURCE;
 
-            $baselineData = $this->loadBaselineData($slugs);
-            $enBaselineData = $this->loadEnglishBaselineData($slugs);
+            $zhCnBaselinePath = $this->baselineFilePath(self::ZH_CN_BASELINE_RELATIVE);
+            $enBaselinePath = $this->baselineFilePath(self::EN_BASELINE_RELATIVE);
+
+            $zhBaselineData = $this->loadBaselineData($slugs, $zhCnBaselinePath);
+            $enBaselineData = $this->loadBaselineData($slugs, $enBaselinePath);
+            $batchManifestTitles = $this->loadBatchManifestTitles($slugs);
 
             $existingOccupations = Occupation::query()
                 ->whereIn('canonical_slug', $slugs)
@@ -74,26 +84,47 @@ final class CareerBackfillCanonicalOccupationRecords extends Command
                     continue;
                 }
 
-                $meta = $baselineData[$slug] ?? null;
+                $zhMeta = $zhBaselineData[$slug] ?? null;
+                $enMeta = $enBaselineData[$slug] ?? null;
+                $hasZhBaseline = $zhMeta !== null;
+                $hasEnBaseline = $enMeta !== null;
 
-                if ($meta === null) {
+                if ($zhMeta === null) {
                     $missingRequiredMetadata[] = [
                         'slug' => $slug,
                         'reason' => 'not_found_in_baseline',
+                        'has_zh_baseline' => false,
+                        'has_en_baseline' => $hasEnBaseline,
                     ];
 
                     continue;
                 }
 
-                $titleZh = $meta['title'] ?? null;
-                $titleEn = $enBaselineData[$slug]['title'] ?? null;
+                $titleZh = $zhMeta['title'] ?? '';
+                $titleZhSource = 'zh_cn_baseline';
+                $titleEn = null;
+                $titleEnSource = null;
 
-                if ($titleZh === null || $titleEn === null) {
+                if ($hasEnBaseline && ($enMeta['title'] ?? null) !== null) {
+                    $titleEn = $enMeta['title'];
+                    $titleEnSource = 'en_baseline';
+                } elseif (isset($batchManifestTitles[$slug])) {
+                    $titleEn = $batchManifestTitles[$slug];
+                    $titleEnSource = 'batch_manifest';
+                } else {
+                    $titleEn = $this->deriveEnglishTitleFromSlug($slug);
+                    $titleEnSource = 'canonical_slug_derived';
+                }
+
+                if ($titleZh === '' || $titleEn === null) {
                     $missingRequiredMetadata[] = [
                         'slug' => $slug,
-                        'reason' => 'missing_title',
-                        'has_title_zh' => $titleZh !== null,
+                        'reason' => $titleZh === '' ? 'missing_zh_title' : 'missing_english_title',
+                        'has_zh_baseline' => true,
+                        'has_title_zh' => $titleZh !== '',
                         'has_title_en' => $titleEn !== null,
+                        'has_en_baseline' => $hasEnBaseline,
+                        'has_batch_manifest' => isset($batchManifestTitles[$slug]),
                     ];
 
                     continue;
@@ -103,7 +134,11 @@ final class CareerBackfillCanonicalOccupationRecords extends Command
                     'slug' => $slug,
                     'title_zh' => $titleZh,
                     'title_en' => $titleEn,
-                    'industry_label' => $meta['industry_label'] ?? null,
+                    'title_zh_source' => $titleZhSource,
+                    'title_en_source' => $titleEnSource,
+                    'metadata_source' => 'zh_cn_baseline',
+                    'job_code' => $zhMeta['job_code'] ?? null,
+                    'industry_label' => $zhMeta['industry_label'] ?? null,
                 ];
             }
 
@@ -233,7 +268,10 @@ final class CareerBackfillCanonicalOccupationRecords extends Command
     private function outputResult(array $result): void
     {
         if ((bool) $this->option('json')) {
-            $this->line((string) json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+            $this->line((string) json_encode(
+                $result,
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT,
+            ));
         } else {
             $this->line('status='.($result['status'] ?? 'unknown'));
             $this->line('requested_count='.($result['requested_count'] ?? 0));
@@ -245,66 +283,44 @@ final class CareerBackfillCanonicalOccupationRecords extends Command
         }
     }
 
-    /**
-     * @param  list<string>  $slugs
-     * @return array<string, array{title: string, industry_label: string|null}>
-     */
-    private function loadBaselineData(array $slugs): array
+    // ─── Path resolution ────────────────────────────────────────────────────
+
+    private function baselineFilePath(string $relativePath): string
     {
-        $path = base_path(self::BASELINE_PATH);
+        $candidate = base_path($relativePath);
 
-        if (! is_file($path)) {
-            return [];
+        if (is_file($candidate)) {
+            return $candidate;
         }
 
-        $payload = json_decode((string) file_get_contents($path), true);
+        $candidate = dirname(base_path()).'/'.ltrim($relativePath, '/.');
 
-        if (! is_array($payload)) {
-            return [];
+        if (is_file($candidate)) {
+            return $candidate;
         }
 
-        $jobs = $payload['jobs'] ?? [];
-
-        if (! is_array($jobs)) {
-            return [];
-        }
-
-        $slugSet = array_flip($slugs);
-        $data = [];
-
-        foreach ($jobs as $job) {
-            if (! is_array($job)) {
-                continue;
-            }
-
-            $slug = strtolower(trim((string) ($job['slug'] ?? $job['job_code'] ?? '')));
-
-            if ($slug === '' || ! isset($slugSet[$slug])) {
-                continue;
-            }
-
-            $data[$slug] = [
-                'title' => trim((string) ($job['title'] ?? '')),
-                'industry_label' => isset($job['industry_label']) ? trim((string) $job['industry_label']) : null,
-            ];
-        }
-
-        return $data;
+        return $candidate;
     }
 
+    // ─── Baseline loaders ───────────────────────────────────────────────────
+
     /**
      * @param  list<string>  $slugs
-     * @return array<string, array{title: string|null}>
+     * @return array<string, array{title: string|null, industry_label: string|null, job_code: string|null}>
      */
-    private function loadEnglishBaselineData(array $slugs): array
+    private function loadBaselineData(array $slugs, string $path): array
     {
-        $path = base_path(self::EN_BASELINE_PATH);
-
         if (! is_file($path)) {
             return [];
         }
 
-        $payload = json_decode((string) file_get_contents($path), true);
+        $raw = file_get_contents($path);
+
+        if ($raw === false) {
+            return [];
+        }
+
+        $payload = json_decode($raw, true);
 
         if (! is_array($payload)) {
             return [];
@@ -331,11 +347,82 @@ final class CareerBackfillCanonicalOccupationRecords extends Command
             }
 
             $title = trim((string) ($job['title'] ?? ''));
+
             $data[$slug] = [
                 'title' => $title !== '' ? $title : null,
+                'job_code' => isset($job['job_code']) ? trim((string) $job['job_code']) : null,
+                'industry_label' => isset($job['industry_label']) ? trim((string) $job['industry_label']) : null,
             ];
         }
 
         return $data;
+    }
+
+    // ─── Batch manifest title loader ────────────────────────────────────────
+
+    /**
+     * @param  list<string>  $slugs
+     * @return array<string, string>
+     */
+    private function loadBatchManifestTitles(array $slugs): array
+    {
+        $titles = [];
+        $slugSet = array_flip($slugs);
+
+        foreach (self::BATCH_MANIFEST_PATHS as $relativePath) {
+            $path = $this->baselineFilePath($relativePath);
+
+            if (! is_file($path)) {
+                continue;
+            }
+
+            $raw = file_get_contents($path);
+
+            if ($raw === false) {
+                continue;
+            }
+
+            $payload = json_decode($raw, true);
+
+            if (! is_array($payload)) {
+                continue;
+            }
+
+            $members = $payload['members'] ?? [];
+
+            if (! is_array($members)) {
+                continue;
+            }
+
+            foreach ($members as $member) {
+                if (! is_array($member)) {
+                    continue;
+                }
+
+                $slug = strtolower(trim((string) ($member['canonical_slug'] ?? $member['canonicalSlug'] ?? '')));
+
+                if ($slug === '' || ! isset($slugSet[$slug])) {
+                    continue;
+                }
+
+                $title = trim((string) ($member['canonical_title_en'] ?? $member['canonicalTitleEn'] ?? ''));
+
+                if ($title !== '' && ! isset($titles[$slug])) {
+                    $titles[$slug] = $title;
+                }
+            }
+        }
+
+        return $titles;
+    }
+
+    // ─── English title derivation ───────────────────────────────────────────
+
+    private function deriveEnglishTitleFromSlug(string $slug): string
+    {
+        return implode(' ', array_map(
+            'ucfirst',
+            explode('-', $slug),
+        ));
     }
 }
