@@ -490,7 +490,7 @@ final class CareerJobDetailBundleBuilder
             'amber_flags' => ['docx_baseline_authority_without_compiled_snapshot'],
             'blocked_claims' => [],
         ];
-        $canonicalPath = $this->localeCanonicalPath((string) $job->locale, (string) $job->slug);
+        $canonicalPath = '/career/jobs/'.(string) $job->slug;
         $indexEligible = (bool) $job->is_indexable;
         $publicIndexState = $indexEligible ? 'index' : 'noindex';
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
@@ -988,16 +988,5 @@ final class CareerJobDetailBundleBuilder
     private function normalizeArray(mixed $value): array
     {
         return is_array($value) ? $value : [];
-    }
-
-    private function localeCanonicalPath(string $locale, string $slug): string
-    {
-        $prefix = match (strtolower(trim($locale))) {
-            'zh-cn', 'zh' => '/zh',
-            'en', 'en-us', 'en_us' => '/en',
-            default => '',
-        };
-
-        return $prefix.'/career/jobs/'.$slug;
     }
 }
