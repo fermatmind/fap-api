@@ -1496,6 +1496,101 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "AUDIT-7": {
+      "repo": "fap-api",
+      "branch": "fix/career-seo-geo-readiness-audit7",
+      "title": "feat(api): add career seo geo readiness audit",
+      "name": "Career SEO/GEO Readiness Audit",
+      "status": "in_progress",
+      "depends_on": [
+        "AUDIT-6"
+      ],
+      "scope_type": "seo_geo_readiness_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "non_goals": [
+        "no audit command",
+        "no surface audit",
+        "no live HTML fetch",
+        "no rollout",
+        "no apply",
+        "no backfill",
+        "no DB mutation",
+        "no production mutation",
+        "no deployment"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User requested continuous autonomous execution of remaining Career 2786 canonical eligibility audit PR train items."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "AUDIT-6 merged as PR #1324 with merge commit d847a6bf7899389ec591e63e8e0de8d6209d38f2 and local main was synced before AUDIT-7 branch creation."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to backend/app/Domain/Career/Audit, backend/tests/Unit/Domain/Career/Audit, backend/docs/career/audits, the test-only BigFive freeze classifier allowlist, and docs/codex train files."
+        },
+        "seo_geo_readiness_tests": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerSeoGeoReadinessAuditor --no-ansi",
+          "evidence": "11 tests passed, 20 assertions."
+        },
+        "runtime_projection_truth_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerRuntimeProjectionTruthEligibilityAuditor --no-ansi",
+          "evidence": "16 tests passed, 35 assertions."
+        },
+        "occupation_entity_inventory_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerOccupationEntityInventoryAuditor --no-ansi",
+          "evidence": "13 tests passed, 45 assertions."
+        },
+        "index_state_authority_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerIndexStateAuthorityAuditor --no-ansi",
+          "evidence": "12 tests passed, 28 assertions."
+        },
+        "public_resolution_resolver_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi",
+          "evidence": "14 tests passed, 37 assertions."
+        },
+        "canonical_schema_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi",
+          "evidence": "14 tests passed, 28 assertions."
+        },
+        "runtime_freeze_allowlist_fix": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "Added AUDIT-7 CareerSeoGeoReadiness* files to the test-only freeze classifier allowlist; the runtime path gate passes locally."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "3093 files checked."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [],
+      "failure_reason": null,
+      "next_pr": "AUDIT-8 Surface readiness audit",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }

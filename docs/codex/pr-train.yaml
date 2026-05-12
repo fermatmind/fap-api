@@ -723,3 +723,46 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: AUDIT-7
+    repo: fap-api
+    depends_on:
+      - AUDIT-6
+    branch: fix/career-seo-geo-readiness-audit7
+    title: "feat(api): add career seo geo readiness audit"
+    name: "Career SEO/GEO Readiness Audit"
+    scope_type: seo_geo_readiness_only
+    scope:
+      - Add a read-only static SEO/GEO readiness auditor for canonical slugs from AUDIT-2 plan rows or slug lists.
+      - Consume synthetic or backend artifact arrays for canonical self path, robots indexability, sitemap, LLMS, LLMS-full, structured metadata, dataset, search, and citation metadata readiness.
+      - Emit AUDIT-1-compatible seo_geo layer statuses.
+      - Document AUDIT-7 SEO/GEO readiness contract and future AUDIT-8+ consumption policy.
+      - Add focused tests proving stable JSON, read-only behavior, no live HTML fetch, and no DB mutation.
+      - Update the Big Five runtime freeze classifier owner allowlist for AUDIT-7 SEO/GEO audit files.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add a career canonical eligibility audit command.
+      - Add surface audit or live HTML fetch.
+      - Add rollout/apply/backfill behavior.
+      - Modify fap-web.
+      - Mutate DB or production data.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerSeoGeoReadinessAuditor --no-ansi
+      - php artisan test --filter=CareerRuntimeProjectionTruthEligibilityAuditor --no-ansi
+      - php artisan test --filter=CareerOccupationEntityInventoryAuditor --no-ansi
+      - php artisan test --filter=CareerIndexStateAuthorityAuditor --no-ansi
+      - php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "AUDIT-8 Surface readiness audit"
+    merge_policy:
+      github_checks_required: true
+      squash: true

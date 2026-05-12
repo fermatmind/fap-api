@@ -329,6 +329,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_seo_geo_readiness_audit_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Audit/CareerSeoGeoReadinessAuditor.php',
+            'backend/app/Domain/Career/Audit/CareerSeoGeoReadinessIssue.php',
+            'backend/app/Domain/Career/Audit/CareerSeoGeoReadinessResult.php',
+            'backend/app/Domain/Career/Audit/CareerSeoGeoReadinessRow.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_commerce_payment_action_changes(): void
     {
         $changed = [
@@ -1012,6 +1024,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerSeoGeoReadinessAuditFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerRuntimeProjectionConsumerFile($file)) {
                 continue;
             }
@@ -1397,6 +1413,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerRuntimeProjectionTruthEligibilityIssue.php',
             'backend/app/Domain/Career/Audit/CareerRuntimeProjectionTruthEligibilityResult.php',
             'backend/app/Domain/Career/Audit/CareerRuntimeProjectionTruthEligibilityRow.php',
+        ], true);
+    }
+
+    private function isCareerSeoGeoReadinessAuditFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Audit/CareerSeoGeoReadinessAuditor.php',
+            'backend/app/Domain/Career/Audit/CareerSeoGeoReadinessIssue.php',
+            'backend/app/Domain/Career/Audit/CareerSeoGeoReadinessResult.php',
+            'backend/app/Domain/Career/Audit/CareerSeoGeoReadinessRow.php',
         ], true);
     }
 
