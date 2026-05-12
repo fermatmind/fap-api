@@ -976,3 +976,44 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: AUDIT-12
+    repo: fap-api
+    depends_on:
+      - AUDIT-11
+    branch: fix/career-batch-live-acceptance-v2-audit12
+    title: "feat(api): add career batch live acceptance v2"
+    name: "Career Batch Live Acceptance V2"
+    scope_type: batch_live_acceptance_v2_only
+    scope:
+      - Add a read-only batch live acceptance v2 auditor for arbitrary batch id, slug, and locale sets.
+      - Validate projection rows, truth rows, release gate counts, surface equality, optional live HTML unverified state, and failure rows.
+      - Preserve stable JSON, sidecars, and by_reason output for AUDIT-13.
+      - Document AUDIT-12 acceptance v2 contract and future AUDIT-13 consumption policy.
+      - Add focused unit tests proving arbitrary batch pass, mismatch rows, unverified surfaces, stable JSON, and no DB mutation.
+      - Update the Big Five runtime freeze classifier owner allowlist for AUDIT-12 batch acceptance files.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Apply rollout.
+      - Publish occupations.
+      - Backfill data.
+      - Mutate DB or production state.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerBatchLiveAcceptanceV2Auditor --no-ansi
+      - php artisan test --filter=CareerCanonicalExpansionManifestTrainGenerator --no-ansi
+      - php artisan test --filter=CareerCanonical80CohortReadinessPlanner --no-ansi
+      - php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "AUDIT-13 2786 full audit artifact/report"
+    merge_policy:
+      github_checks_required: true
+      squash: true
