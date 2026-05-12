@@ -305,6 +305,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_index_state_authority_audit_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityAuditor.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityIssue.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityResult.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityRow.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_commerce_payment_action_changes(): void
     {
         $changed = [
@@ -947,6 +959,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerIndexStateAuthorityAuditFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerRuntimeProjectionConsumerFile($file)) {
                 continue;
             }
@@ -1273,6 +1289,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerBaselineMetadataInventoryIssue.php',
             'backend/app/Domain/Career/Audit/CareerBaselineMetadataInventoryResult.php',
             'backend/app/Domain/Career/Audit/CareerBaselineMetadataInventoryRow.php',
+        ], true);
+    }
+
+    private function isCareerIndexStateAuthorityAuditFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityAuditor.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityIssue.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityResult.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityRow.php',
         ], true);
     }
 
