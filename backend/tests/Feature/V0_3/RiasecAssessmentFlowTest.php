@@ -115,6 +115,13 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.quality_rule_status', 'minimal_answer_completion_only');
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', false);
         $readback->assertJsonPath('riasec_public_projection_v2.claim_boundary.does_not_measure.3', 'career_success_probability');
+        $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.schema_version', 'riasec.activity_explorer.v0.1');
+        $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.status', 'content_examples_only');
+        $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.source_status', 'content_example_not_registry_match');
+        $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.boundary.registry_source_connected', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.boundary.fit_score_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.dimension_activity_families.0.dimension', 'R');
+        $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.code_activity_pack.status', 'not_available_for_code_v0_1');
 
         $report = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -131,6 +138,7 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('report._meta.riasec_public_projection_v2.schema_version', 'riasec.public_projection.v2');
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
+        $report->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.boundary.occupation_examples_policy', 'content_example_not_registry_match_without_reviewed_registry_source');
 
         $reportAccess = $this->withHeaders([
             'X-Anon-Id' => $anonId,

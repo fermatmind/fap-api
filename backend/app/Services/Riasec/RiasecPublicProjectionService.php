@@ -19,6 +19,7 @@ final class RiasecPublicProjectionService
 
     public function __construct(
         private readonly RiasecMeasurementContract $measurementContract,
+        private readonly RiasecActivityExplorerService $activityExplorer,
     ) {}
 
     public function buildFromResult(Result $result, string $locale = 'zh-CN'): array
@@ -160,6 +161,7 @@ final class RiasecPublicProjectionService
                     'content_example_not_registry_match_without_reviewed_registry_source'
                 ),
             ],
+            'activity_explorer_v0_1' => $this->activityExplorer->build((string) ($v1['top_code'] ?? ''), $locale),
         ];
     }
 
