@@ -994,6 +994,7 @@ prs:
       - backend/app/Console/Commands/ArticleImportLocalBaseline.php
       - backend/public/static/articles/covers/*
       - backend/tests/Feature/CareerCms/ArticleBaselineImportTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - content_baselines/articles/articles.zh-CN.json
       - content_baselines/landing_surfaces/home.zh-CN.json
       - docs/codex/pr-train.yaml

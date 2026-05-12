@@ -2229,6 +2229,11 @@
           "command": "vendor/bin/pint --test app/Console/Commands/ArticleImportLocalBaseline.php tests/Feature/CareerCms/ArticleBaselineImportTest.php",
           "evidence": "Scoped Pint check passed for 2 files."
         },
+        "bigfive_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_article_publishing_runtime_truth_gate_changes' --no-ansi",
+          "evidence": "2 tests passed, 4 assertions. Added test-only freeze classifier allowance for ArticleImportLocalBaseline.php as Article publishing runtime truth gate scope."
+        },
         "diff_check": {
           "status": "pass",
           "command": "git diff --check && git diff --cached --check"
