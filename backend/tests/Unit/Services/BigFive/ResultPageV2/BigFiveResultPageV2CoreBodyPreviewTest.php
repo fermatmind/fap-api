@@ -428,6 +428,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_publishing_runtime_truth_gate_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php',
+            'backend/app/Services/Cms/ArticleSeoService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_privacy_logs_dsar_key_rotation_changes(): void
     {
         $changed = [
@@ -620,6 +630,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Services/Riasec/RiasecActivityExplorerService.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
+    public function test_runtime_freeze_classifier_ignores_riasec_exploration_feedback_overlay_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php',
             'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
         ];
 
@@ -1034,6 +1054,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticlePublishingRuntimeTruthGateFile($file)) {
+                continue;
+            }
+
             if ($this->isPrivacyLogsDsarKeyRotationFile($file)) {
                 continue;
             }
@@ -1177,6 +1201,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecExplorationFeedbackOverlayFile($file)) {
+                continue;
+            }
+
             if ($this->isIqReportFoundationFile($file)) {
                 continue;
             }
@@ -1266,6 +1294,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isArticlePublishingRuntimeTruthGateFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php',
+            'backend/app/Services/Cms/ArticleSeoService.php',
+        ], true);
+    }
+
     private function isPrivacyLogsDsarKeyRotationFile(string $file): bool
     {
         return in_array($file, [
@@ -1349,6 +1385,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Services/Riasec/RiasecActivityExplorerService.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
+        ], true);
+    }
+
+    private function isRiasecExplorationFeedbackOverlayFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php',
             'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
         ], true);
     }

@@ -42,6 +42,10 @@ final class CareerArticleStructuredDataBuilder
             $fragment['description'] = $description;
         }
 
+        if ($image = $this->normalizeString($payload['image'] ?? null)) {
+            $fragment['image'] = $image;
+        }
+
         if ($datePublished = $this->normalizeString($payload['date_published'] ?? null)) {
             $fragment['datePublished'] = $datePublished;
         }
