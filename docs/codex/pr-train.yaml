@@ -1017,3 +1017,44 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: AUDIT-13
+    repo: fap-api
+    depends_on:
+      - AUDIT-12
+    branch: fix/career-2786-full-audit-report-audit13
+    title: "feat(api): add career 2786 full audit artifact report"
+    name: "Career 2786 Full Audit Artifact Report"
+    scope_type: full_audit_artifact_only
+    scope:
+      - Add a read-only final artifact builder for the Career 2786 canonical eligibility audit stack.
+      - Summarize total expected, audited, eligible, blocked, by_reason, by_layer, sections, and sidecars.
+      - Include readiness, manifest train, and batch live acceptance sections when supplied.
+      - Document that AUDIT-13 does not start expansion or publish occupations.
+      - Add focused unit tests proving synthetic 2786-like summary, blocked aggregation, and stable JSON.
+      - Update the Big Five runtime freeze classifier owner allowlist for AUDIT-13 artifact files.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Apply rollout.
+      - Publish occupations.
+      - Backfill data.
+      - Mutate DB or production state.
+      - Deploy.
+      - Start expansion.
+    validation:
+      - php artisan test --filter=Career2786FullAuditArtifactBuilder --no-ansi
+      - php artisan test --filter=CareerBatchLiveAcceptanceV2Auditor --no-ansi
+      - php artisan test --filter=CareerCanonicalExpansionManifestTrainGenerator --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "End of 2786 eligibility audit PR train"
+    merge_policy:
+      github_checks_required: true
+      squash: true

@@ -2107,6 +2107,89 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "AUDIT-13": {
+      "repo": "fap-api",
+      "branch": "fix/career-2786-full-audit-report-audit13",
+      "title": "feat(api): add career 2786 full audit artifact report",
+      "name": "Career 2786 Full Audit Artifact Report",
+      "status": "in_progress",
+      "depends_on": [
+        "AUDIT-12"
+      ],
+      "scope_type": "full_audit_artifact_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "non_goals": [
+        "no rollout",
+        "no apply",
+        "no backfill",
+        "no DB mutation",
+        "no production mutation",
+        "no deployment",
+        "no automatic expansion start"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User requested continuous autonomous execution of remaining Career 2786 canonical eligibility audit PR train items."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "AUDIT-12 merged as PR #1335 with merge commit 28bdbcda4ceaf170581fda9615db1018fd110ffe and origin/main contains it."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to backend/app/Domain/Career/Audit, backend/tests/Unit/Domain/Career/Audit, backend/docs/career/audits, the scoped Big Five freeze classifier allowlist, and docs/codex train files."
+        },
+        "full_artifact_tests": {
+          "status": "pass",
+          "command": "php artisan test --filter=Career2786FullAuditArtifactBuilder --no-ansi",
+          "evidence": "3 tests passed, 10 assertions."
+        },
+        "batch_live_acceptance_v2_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerBatchLiveAcceptanceV2Auditor --no-ansi",
+          "evidence": "7 tests passed, 20 assertions."
+        },
+        "manifest_train_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerCanonicalExpansionManifestTrainGenerator --no-ansi",
+          "evidence": "8 tests passed, 24 assertions."
+        },
+        "canonical_schema_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi",
+          "evidence": "14 tests passed, 28 assertions."
+        },
+        "runtime_freeze_gate": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "Added AUDIT-13 Career2786FullAuditArtifact* files to the test-only freeze classifier allowlist; runtime path gate passed with 1 test and 3 assertions."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "3126 files checked."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [],
+      "failure_reason": null,
+      "next_pr": "End of 2786 eligibility audit PR train",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }
