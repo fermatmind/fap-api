@@ -131,6 +131,7 @@ final class ArticleSeoService
                 ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160),
             'url' => $canonical,
             'main_entity_of_page' => $canonical,
+            'image' => $seo?->og_image_url ?? $this->resolveArticleImageUrl($article),
             'date_published' => $revision?->published_at?->toAtomString() ?? $article->published_at?->toAtomString(),
             'date_modified' => $revision?->updated_at?->toAtomString() ?? $article->updated_at?->toAtomString(),
             'article_section' => $this->normalizeString($article->category?->name),

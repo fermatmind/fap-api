@@ -416,6 +416,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_publishing_runtime_truth_gate_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php',
+            'backend/app/Services/Cms/ArticleSeoService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_privacy_logs_dsar_key_rotation_changes(): void
     {
         $changed = [
@@ -1032,6 +1042,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticlePublishingRuntimeTruthGateFile($file)) {
+                continue;
+            }
+
             if ($this->isPrivacyLogsDsarKeyRotationFile($file)) {
                 continue;
             }
@@ -1261,6 +1275,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/ArticlePublishService.php',
             'backend/app/Services/Cms/ArticleService.php',
             'backend/database/migrations/2026_05_06_010000_add_org_scope_to_personality_profile_children.php',
+        ], true);
+    }
+
+    private function isArticlePublishingRuntimeTruthGateFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php',
+            'backend/app/Services/Cms/ArticleSeoService.php',
         ], true);
     }
 

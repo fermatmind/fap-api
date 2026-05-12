@@ -939,3 +939,40 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: PR-RT-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/pr-rt-01-article-runtime-truth-gate
+    title: "test(api): add article publishing runtime truth gate"
+    name: "Article Publishing Runtime Truth Acceptance Gate"
+    scope_type: article_runtime_truth_gate_only
+    scope:
+      - Add six-article dry-run fixture shaped like CMS Article publication input.
+      - Add backend Article API and ArticleSeoService acceptance tests.
+      - Validate public readable, draft/private/noindex exclusion, SEO payload, canonical, robots, structured data, cover, and alt completeness.
+      - Preserve backend/CMS Article authority and avoid production article import.
+    allowed_paths:
+      - backend/app/Services/Cms/ArticleSeoService.php
+      - backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php
+      - backend/tests/Feature/V0_5/ArticlePublishingRuntimeTruthTest.php
+      - backend/tests/Fixtures/article_publishing_runtime_truth.v1.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Import production articles.
+      - Rewrite ArticleController or ArticleResource.
+      - Touch payment, report, invite, order, scoring, MBTI, Big Five, Personality, or Career expansion runtime.
+    validation:
+      - php artisan test tests/Feature/V0_5/ArticlePublishingRuntimeTruthTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+      - backend/vendor/bin/pint --test backend/app/Services/Cms/ArticleSeoService.php backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php backend/tests/Feature/V0_5/ArticlePublishingRuntimeTruthTest.php
+      - php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi
+      - git diff --check
+    companion_pr:
+      repo: fap-web
+      branch: codex/pr-rt-01-article-runtime-truth-gate
+    merge_policy:
+      github_checks_required: true
+      squash: true

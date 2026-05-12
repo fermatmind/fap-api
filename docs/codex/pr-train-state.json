@@ -1957,6 +1957,69 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-RT-01": {
+      "repo": "fap-api",
+      "branch": "codex/pr-rt-01-article-runtime-truth-gate",
+      "status": "open",
+      "commit_sha": "05036aa710658e589ff0be7d1c19ac6059884389",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1331",
+      "checks": {
+        "focused_article_runtime_truth": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/V0_5/ArticlePublishingRuntimeTruthTest.php --no-ansi",
+          "evidence": "2 tests passed, 250 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "197 routes listed successfully."
+        },
+        "sqlite_migrate_pretend": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "backend/vendor/bin/pint --test backend/app/Services/Cms/ArticleSeoService.php backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php backend/tests/Feature/V0_5/ArticlePublishingRuntimeTruthTest.php"
+        },
+        "bigfive_freeze_gate": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "Added and locally validated a test-only freeze classifier allowlist for PR-RT-01 Article SEO/JSON-LD runtime truth gate files; no Big Five runtime files changed."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "full_phpunit": {
+          "status": "sidecar_unrelated_pre_existing_issue",
+          "command": "php artisan test --no-ansi",
+          "evidence": "Full suite fails on unrelated pre-existing unit/domain failures and then memory exhaustion in routes/api.php; focused PR-RT-01 feature test passes."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "companion_pr": {
+        "repo": "fap-web",
+        "branch": "codex/pr-rt-01-article-runtime-truth-gate"
+      },
+      "sidecar_issues": [
+        {
+          "title": "Repo-wide backend phpunit failures and memory exhaustion remain outside PR-RT-01 scope",
+          "severity": "P2",
+          "scope_impact": "Full php artisan test fails on existing migration/security/career/content/MBTI tests and later exhausts memory; the focused article runtime truth acceptance test passes.",
+          "introduced_by_current_pr": false,
+          "recommended_future_phase": "backend test-suite stabilization",
+          "blocks_merge": false,
+          "evidence": [
+            "php artisan test tests/Feature/V0_5/ArticlePublishingRuntimeTruthTest.php --no-ansi passes with 2 tests and 250 assertions.",
+            "php artisan test --no-ansi reports unrelated failures before PR-RT-01 code paths and exits with Allowed memory size exhausted in routes/api.php."
+          ]
+        }
+      ]
     }
   }
 }
