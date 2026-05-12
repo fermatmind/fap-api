@@ -317,6 +317,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_runtime_projection_truth_audit_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Audit/CareerRuntimeProjectionTruthEligibilityAuditor.php',
+            'backend/app/Domain/Career/Audit/CareerRuntimeProjectionTruthEligibilityIssue.php',
+            'backend/app/Domain/Career/Audit/CareerRuntimeProjectionTruthEligibilityResult.php',
+            'backend/app/Domain/Career/Audit/CareerRuntimeProjectionTruthEligibilityRow.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_commerce_payment_action_changes(): void
     {
         $changed = [
@@ -975,6 +987,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerRuntimeProjectionTruthAuditFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerRuntimeProjectionConsumerFile($file)) {
                 continue;
             }
@@ -1325,6 +1341,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityIssue.php',
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityResult.php',
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityRow.php',
+        ], true);
+    }
+
+    private function isCareerRuntimeProjectionTruthAuditFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Audit/CareerRuntimeProjectionTruthEligibilityAuditor.php',
+            'backend/app/Domain/Career/Audit/CareerRuntimeProjectionTruthEligibilityIssue.php',
+            'backend/app/Domain/Career/Audit/CareerRuntimeProjectionTruthEligibilityResult.php',
+            'backend/app/Domain/Career/Audit/CareerRuntimeProjectionTruthEligibilityRow.php',
         ], true);
     }
 

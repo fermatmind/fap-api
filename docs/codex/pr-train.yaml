@@ -677,3 +677,49 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: AUDIT-6
+    repo: fap-api
+    depends_on:
+      - AUDIT-5
+    branch: fix/career-runtime-projection-truth-audit6
+    title: "feat(api): add career runtime projection truth eligibility audit"
+    name: "Career Runtime Projection Truth Eligibility Audit"
+    scope_type: runtime_projection_truth_only
+    scope:
+      - Add a read-only runtime projection/truth eligibility auditor for canonical slugs from AUDIT-2 plan rows or slug lists.
+      - Consume synthetic or artifact-derived runtime publish projection, canonical runtime truth, and optional full release ledger arrays.
+      - Report missing projection rows, missing truth rows, not-published states, invalid public types, missing locale rows, and optional ledger membership gaps.
+      - Emit AUDIT-1-compatible runtime layer statuses.
+      - Document AUDIT-6 runtime projection/truth contract and future AUDIT-7+ consumption policy.
+      - Add focused tests proving stable JSON, read-only behavior, optional ledger handling, and no DB/SEO/surface audit logic.
+      - Update the Big Five runtime freeze classifier owner allowlist for AUDIT-6 runtime projection/truth audit files.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add a career canonical eligibility audit command.
+      - Add baseline metadata audit.
+      - Add index-state audit.
+      - Add SEO/GEO audit.
+      - Add surface audit.
+      - Modify rollout state.
+      - Apply rollout or backfill data.
+      - Mutate production data.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerRuntimeProjectionTruthEligibilityAuditor --no-ansi
+      - php artisan test --filter=CareerOccupationEntityInventoryAuditor --no-ansi
+      - php artisan test --filter=CareerIndexStateAuthorityAuditor --no-ansi
+      - php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "AUDIT-7 SEO/GEO readiness audit"
+    merge_policy:
+      github_checks_required: true
+      squash: true
