@@ -27,6 +27,7 @@ class ReportSnapshotStore
         private Sds20ReportComposer $sds20ReportComposer,
         private Eq60ReportComposer $eq60ReportComposer,
         private EnneagramReportComposer $enneagramReportComposer,
+        private RiasecReportComposer $riasecReportComposer,
         private IqReportBuilder $iqReportBuilder,
         private GenericReportBuilder $genericReportBuilder,
         private EventRecorder $eventRecorder,
@@ -428,6 +429,27 @@ class ReportSnapshotStore
                     : ReportAccess::REPORT_ACCESS_FULL,
                 'modules_allowed' => $modulesAllowed,
                 'modules_preview' => $modulesPreview,
+            ]);
+            if (! ($composed['ok'] ?? false)) {
+                return null;
+            }
+            $report = $composed['report'] ?? null;
+
+            return is_array($report) ? $report : null;
+        }
+
+        if ($scaleCode === 'RIASEC') {
+            $composed = $this->riasecReportComposer->composeVariant($attempt, $result, $variant, [
+                'org_id' => (int) ($attempt->org_id ?? 0),
+                'variant' => $variant,
+                'report_access_level' => $variant === ReportAccess::VARIANT_FREE
+                    ? ReportAccess::REPORT_ACCESS_FREE
+                    : ReportAccess::REPORT_ACCESS_FULL,
+                'modules_allowed' => $modulesAllowed,
+                'modules_preview' => $modulesPreview,
+                'snapshot_bound' => true,
+                'snapshot_version' => self::SNAPSHOT_VERSION,
+                'report_engine_version' => self::REPORT_ENGINE_VERSION,
             ]);
             if (! ($composed['ok'] ?? false)) {
                 return null;

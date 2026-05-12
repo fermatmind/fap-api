@@ -130,6 +130,7 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('riasec_form_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $report->assertJsonPath('report._meta.riasec_public_projection_v2.schema_version', 'riasec.public_projection.v2');
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
+        $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
 
         $reportAccess = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -174,6 +175,75 @@ final class RiasecAssessmentFlowTest extends TestCase
         $history->assertJsonPath('items.0.compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $history->assertJsonPath('items.0.compare_policy_v1.raw_score_delta_allowed', false);
         $history->assertJsonPath('history_compare.current_compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
+    }
+
+    public function test_riasec_report_reads_from_snapshot_after_first_formal_report_build(): void
+    {
+        $this->seedScales();
+
+        $anonId = 'anon_riasec_snapshot_bound';
+        $token = $this->issueAnonToken($anonId);
+
+        $start = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'RIASEC',
+            'anon_id' => $anonId,
+            'locale' => 'zh-CN',
+            'region' => 'CN_MAINLAND',
+            'form_code' => 'riasec_60',
+        ]);
+        $start->assertStatus(200);
+        $attemptId = (string) $start->json('attempt_id');
+
+        $submit = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $this->answers(60),
+            'duration_ms' => 180000,
+        ]);
+        $submit->assertStatus(200);
+
+        $first = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
+        $first->assertStatus(200);
+        $first->assertJsonPath('ok', true);
+        $first->assertJsonPath('locked', false);
+        $first->assertJsonPath('report.top_code', 'RIA');
+        $first->assertJsonPath('report._meta.riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
+        $first->assertJsonPath('report._meta.snapshot_binding_v1.schema_version', 'riasec.snapshot_binding.v1');
+        $first->assertJsonPath('report._meta.snapshot_binding_v1.snapshot_bound', true);
+
+        $snapshot = DB::table('report_snapshots')->where('attempt_id', $attemptId)->first();
+        $this->assertNotNull($snapshot);
+        $this->assertSame('ready', (string) ($snapshot->status ?? ''));
+        $reportFull = json_decode((string) ($snapshot->report_full_json ?? '{}'), true);
+        $this->assertIsArray($reportFull);
+        $this->assertSame('RIA', (string) data_get($reportFull, 'top_code'));
+        $this->assertTrue((bool) data_get($reportFull, '_meta.riasec_public_projection_v2.measurement_evidence.snapshot_bound'));
+
+        /** @var Result $stored */
+        $stored = Result::query()->where('attempt_id', $attemptId)->firstOrFail();
+        $resultJson = is_array($stored->result_json) ? $stored->result_json : [];
+        data_set($resultJson, 'top_code', 'SEC');
+        data_set($resultJson, 'primary_type', 'Social');
+        $stored->type_code = 'SEC';
+        $stored->result_json = $resultJson;
+        $stored->save();
+
+        $second = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
+        $second->assertStatus(200);
+        $second->assertJsonPath('ok', true);
+        $second->assertJsonPath('report.top_code', 'RIA');
+        $second->assertJsonPath('riasec_public_projection_v2.holland_code.code', 'RIA');
+        $second->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
+        $this->assertSame($first->json('report.generated_at'), $second->json('report.generated_at'));
+        $this->assertSame(1, DB::table('report_snapshots')->where('attempt_id', $attemptId)->count());
     }
 
     public function test_riasec_enhanced_140_persists_quality_and_layer_scores(): void

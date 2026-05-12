@@ -511,6 +511,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_snapshot_bound_report_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Report/ReportGatekeeper.php',
+            'backend/app/Services/Report/ReportSnapshotStore.php',
+            'backend/app/Services/Report/RiasecReportComposer.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -1022,6 +1034,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecSnapshotBoundReportFile($file)) {
+                continue;
+            }
+
             if ($this->isIqReportFoundationFile($file)) {
                 continue;
             }
@@ -1158,6 +1174,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
             'backend/app/Services/Assessment/Drivers/RiasecDriver.php',
+            'backend/app/Services/Report/RiasecReportComposer.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
+        ], true);
+    }
+
+    private function isRiasecSnapshotBoundReportFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Report/ReportGatekeeper.php',
+            'backend/app/Services/Report/ReportSnapshotStore.php',
             'backend/app/Services/Report/RiasecReportComposer.php',
             'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
         ], true);

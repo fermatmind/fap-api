@@ -78,7 +78,7 @@ final class RiasecPublicProjectionService
     /**
      * @return array<string,mixed>
      */
-    public function buildV2FromResult(Result $result, string $locale = 'zh-CN'): array
+    public function buildV2FromResult(Result $result, string $locale = 'zh-CN', bool $snapshotBound = false): array
     {
         $payload = is_array($result->result_json ?? null) ? $result->result_json : [];
         $v1 = $this->buildFromResult($result, $locale);
@@ -140,7 +140,7 @@ final class RiasecPublicProjectionService
                 'quality_rule_status' => (string) data_get($measurementContract, 'quality.quality_rule_status', ''),
                 'interpretation_rule_version' => null,
                 'validation_status' => 'runtime_contract_defined_validation_pending',
-                'snapshot_bound' => false,
+                'snapshot_bound' => $snapshotBound,
             ],
             'quality' => [
                 'grade' => (string) ($v1['quality_grade'] ?? ''),

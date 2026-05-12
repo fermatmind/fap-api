@@ -212,14 +212,52 @@ class ReportGatekeeper
         };
         $locked = $unlockStage === ReportAccess::UNLOCK_STAGE_LOCKED;
 
-        $shouldUseSnapshot = in_array($scaleCode, [ReportAccess::SCALE_RIASEC], true)
-            ? false
+        $shouldUseSnapshot = $scaleCode === ReportAccess::SCALE_RIASEC
+            ? $hasFullAccess
             : $hasFullAccess && $this->offerResolver->modulesCoverOffered($modulesAllowed, $modulesOffered);
+        $requiresSnapshotBoundReport = $scaleCode === ReportAccess::SCALE_RIASEC
+            && $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
+            && $shouldUseSnapshot;
         $snapshotStrictMode = in_array($scaleCode, [ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true) ? false : $this->strictSnapshotModeEnabled();
         $shouldReadFromSnapshot = $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
             && ($snapshotStrictMode || $shouldUseSnapshot);
         $allowLiveBuildFallbackForSnapshot = $scaleCode === ReportAccess::SCALE_ENNEAGRAM && ! $snapshotStrictMode;
-        if ($shouldReadFromSnapshot && ($snapshotStrictMode || ! $forceRefresh)) {
+        if ($requiresSnapshotBoundReport) {
+            $snapshotResult = $this->snapshotStore->createSnapshotForAttempt([
+                'org_id' => $effectiveOrgId,
+                'attempt_id' => $attemptId,
+                'trigger_source' => 'report_api_sync',
+                'order_no' => null,
+                'user_id' => $userId,
+                'anon_id' => $anonId,
+                'org_role' => $role,
+            ]);
+
+            if (! ($snapshotResult['ok'] ?? false)) {
+                return $this->responsePayload(
+                    $locked,
+                    $reportAccessLevel,
+                    $variant,
+                    $viewPolicy,
+                    [],
+                    $paywall,
+                    [
+                        'generating' => false,
+                        'snapshot_error' => true,
+                        'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                        'snapshot_status' => 'failed',
+                    ],
+                    $modulesAllowed,
+                    $modulesOffered,
+                    $modulesPreview,
+                    $normsPayload,
+                    $qualityPayload,
+                    $isMbtiContract
+                );
+            }
+        }
+
+        if ($shouldReadFromSnapshot && ($snapshotStrictMode || ! $forceRefresh || $requiresSnapshotBoundReport)) {
             $snapshotRow = DB::table('report_snapshots')
                 ->where('org_id', $effectiveOrgId)
                 ->where('attempt_id', $attemptId)

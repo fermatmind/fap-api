@@ -26,8 +26,9 @@ final class RiasecReportComposer
             $locale = 'zh-CN';
         }
 
+        $snapshotBound = (bool) ($ctx['snapshot_bound'] ?? false);
         $projection = $this->projectionService->buildFromResult($result, $locale);
-        $projectionV2 = $this->projectionService->buildV2FromResult($result, $locale);
+        $projectionV2 = $this->projectionService->buildV2FromResult($result, $locale, $snapshotBound);
         $topCode = trim((string) ($projection['top_code'] ?? $result->type_code ?? ''));
         if ($topCode === '') {
             return [
@@ -61,12 +62,33 @@ final class RiasecReportComposer
                     'breadth_index' => (float) ($projection['breadth_index'] ?? 0),
                 ],
                 'sections' => $this->buildSections($projection),
-                '_meta' => [
+                '_meta' => array_filter([
                     'riasec_public_projection_v1' => $projection,
                     'riasec_public_projection_v2' => $projectionV2,
-                ],
+                    'snapshot_binding_v1' => $snapshotBound ? $this->buildSnapshotBinding($ctx, $projectionV2) : null,
+                ], static fn (mixed $value): bool => $value !== null),
                 'generated_at' => now()->toISOString(),
             ],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $ctx
+     * @param  array<string,mixed>  $projectionV2
+     * @return array<string,mixed>
+     */
+    private function buildSnapshotBinding(array $ctx, array $projectionV2): array
+    {
+        return [
+            'schema_version' => 'riasec.snapshot_binding.v1',
+            'snapshot_bound' => true,
+            'snapshot_version' => trim((string) ($ctx['snapshot_version'] ?? 'v1')),
+            'report_engine_version' => trim((string) ($ctx['report_engine_version'] ?? 'v1.2')),
+            'measurement_contract_version' => data_get($projectionV2, 'measurement_evidence.measurement_contract_version'),
+            'scoring_spec_version' => data_get($projectionV2, 'measurement_evidence.scoring_spec_version'),
+            'score_space_version' => data_get($projectionV2, 'measurement_evidence.score_space_version'),
+            'form_code' => data_get($projectionV2, 'form.form_code'),
+            'validation_status' => data_get($projectionV2, 'measurement_evidence.validation_status'),
         ];
     }
 
