@@ -1314,6 +1314,97 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "AUDIT-5": {
+      "repo": "fap-api",
+      "branch": "fix/career-index-state-authority-audit5",
+      "title": "feat(api): add career index-state authority audit",
+      "name": "Career Index-state Authority Audit",
+      "status": "in_progress",
+      "depends_on": [
+        "AUDIT-4"
+      ],
+      "scope_type": "index_state_authority_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "non_goals": [
+        "no audit command",
+        "no baseline metadata inventory",
+        "no runtime projection/truth audit",
+        "no SEO/GEO audit",
+        "no live HTML/surface audit",
+        "no rollout",
+        "no index-state backfill",
+        "no manifest train generator",
+        "no production mutation",
+        "no deployment"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User requested continuing the Career 2786 audit PR train from AUDIT-4 through AUDIT-13 and authorized per-item PR train manifest/state updates."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "AUDIT-4 merged as PR #1320 with merge commit 4d180ff31530a73417d982bb6fc448ac8ca4ca86 and origin/main contains it."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to backend/app/Domain/Career/Audit, backend/tests/Feature/Domain/Career/Audit, backend/docs/career/audits, the test-only BigFive freeze classifier allowlist, and docs/codex train files."
+        },
+        "index_state_authority_tests": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerIndexStateAuthorityAuditor --no-ansi",
+          "evidence": "12 tests passed, 28 assertions."
+        },
+        "baseline_metadata_inventory_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerBaselineMetadataInventoryAuditor --no-ansi",
+          "evidence": "9 tests passed, 22 assertions."
+        },
+        "occupation_entity_inventory_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerOccupationEntityInventoryAuditor --no-ansi",
+          "evidence": "13 tests passed, 45 assertions."
+        },
+        "public_resolution_resolver_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi",
+          "evidence": "14 tests passed, 37 assertions."
+        },
+        "canonical_schema_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi",
+          "evidence": "14 tests passed, 28 assertions."
+        },
+        "runtime_freeze_allowlist_fix": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "Added AUDIT-5 CareerIndexStateAuthority* files to the test-only freeze classifier allowlist; the runtime path gate passes locally."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "3083 files checked after formatting the new auditor."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [],
+      "failure_reason": null,
+      "next_pr": "AUDIT-6 Runtime projection/truth eligibility audit",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }
