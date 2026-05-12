@@ -602,6 +602,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_exploration_feedback_overlay_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -1145,6 +1155,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecExplorationFeedbackOverlayFile($file)) {
+                continue;
+            }
+
             if ($this->isIqReportFoundationFile($file)) {
                 continue;
             }
@@ -1317,6 +1331,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Services/Riasec/RiasecActivityExplorerService.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
+        ], true);
+    }
+
+    private function isRiasecExplorationFeedbackOverlayFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php',
             'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
         ], true);
     }

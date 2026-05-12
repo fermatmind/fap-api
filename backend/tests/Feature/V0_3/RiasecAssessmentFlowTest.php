@@ -122,6 +122,16 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.boundary.fit_score_allowed', false);
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.dimension_activity_families.0.dimension', 'R');
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.code_activity_pack.status', 'not_available_for_code_v0_1');
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.schema_version', 'riasec.exploration_feedback_overlay.v0.1');
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.status', 'overlay_contract_only');
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.feedback_stream_status', 'not_connected_v0_1');
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.snapshot_identity.measured_holland_code', 'RIA');
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.snapshot_identity.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.measured_result_guard.scores_mutation_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.measured_result_guard.holland_code_mutation_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.surface_policy.raw_feedback_public_exposure_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.read_model.raw_feedback_included', false);
+        $this->assertNull($readback->json('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.attempt_id'));
 
         $report = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -139,6 +149,9 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
         $report->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.boundary.occupation_examples_policy', 'content_example_not_registry_match_without_reviewed_registry_source');
+        $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.snapshot_bound', true);
+        $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.surface_policy.formal_report_mutation_allowed', false);
+        $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.claim_boundary.feedback_changes_measured_holland_code', false);
 
         $reportAccess = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -262,6 +275,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $share->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
         $share->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
         $share->assertJsonPath('riasec_snapshot_binding_v1.snapshot_bound', true);
+        $share->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.read_model.raw_feedback_included', false);
+        $share->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.surface_policy.share_pdf_exposure_allowed', false);
 
         $history = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -272,6 +287,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $history->assertJsonPath('items.0.riasec_public_projection_v1.top_code', 'RIA');
         $history->assertJsonPath('items.0.riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
         $history->assertJsonPath('items.0.riasec_snapshot_binding_v1.snapshot_bound', true);
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.exploration_feedback_overlay_v0_1.measured_result_guard.scores_mutation_allowed', false);
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.exploration_feedback_overlay_v0_1.claim_boundary.feedback_is_career_match', false);
         $history->assertJsonPath('history_compare.current_top_code', 'RIA');
 
         $pdf = $this->withHeaders([
