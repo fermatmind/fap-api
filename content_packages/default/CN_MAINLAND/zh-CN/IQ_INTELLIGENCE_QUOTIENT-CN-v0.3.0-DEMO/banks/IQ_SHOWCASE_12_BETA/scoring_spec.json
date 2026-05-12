@@ -1,0 +1,382 @@
+{
+    "answer_key_version": "showcase12.v1",
+    "item_bank": {
+        "bank_id": "IQ_SHOWCASE_12_BETA",
+        "canonical_scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+        "dimensions": [
+            "VSPR",
+            "VSI",
+            "NPR"
+        ],
+        "item_count": 12,
+        "option_codes": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "production_ready": false,
+        "schema_version": "fm.iq.item_bank.items.v1",
+        "status": "beta"
+    },
+    "items": [
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:e32e83ffd91631a79ca5147569b76ec95b8169bd5e220a18caa17684aa8f46d8",
+                    "B": "sha256:611360163b760908cf7ac79c352bfa4d6cacee7ff698add431071d924ae47c25",
+                    "C": "sha256:2c503abc349886dacc0c701ed97b3d7c9f36d227e59d100aac2d091a01c9420c",
+                    "D": "sha256:78195b4d7b9e65950ef116754abd5662ec45f253eaba61c2af1f6099dc3faa06"
+                },
+                "stem": "sha256:a46c5261889c6a345bf08186950e0e69773ad97e4948fb20b1e1faf5f9ff936f"
+            },
+            "correct_answer": "A",
+            "difficulty_level": "L2",
+            "dimension": "VSPR",
+            "distractor_logic": "The distractors keep the same visual style but use lower or higher square counts to catch undercounting.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:11c9889f4d4fa4b5a4f3a90b6e94782252e0f44e3d7af49232a6604f330bcbc5",
+                "seed": "iqs12_q01_seed",
+                "source_mode": "repo_generated",
+                "template_key": "matrix_square_count_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "matrix_reasoning",
+            "item_id": "FM-IQ-VSPR-MX-L2-SH001",
+            "question_id": "IQS12_Q01",
+            "raw_points": 1,
+            "solution_rule": "The square count increases by one across the sequence, so the next panel needs four filled squares.",
+            "status": "beta"
+        },
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:221a7d77d9752f17d9c6acfc634e7055b5c9260f50f25900da544483a0e47847",
+                    "B": "sha256:096f4ab1774ff98df61cab4b1fea2274a46fd1f99794f78e6e029754d9ed8128",
+                    "C": "sha256:bc11dd1bdd3f225863dc0243c364dbf79cc60ebff3fc29aeacb1c940f435b70b",
+                    "D": "sha256:1eed655959e09ae782df49e6a7d6da0c6b30051cc61f2319946223504085885e"
+                },
+                "stem": "sha256:a20b3828393702c890cda4aaae083073e074213769311d31a7a2dac426d93f41"
+            },
+            "correct_answer": "B",
+            "difficulty_level": "L2",
+            "dimension": "VSPR",
+            "distractor_logic": "Distractors reuse prior orientations or partial rotations to test whether the rotation rule was tracked consistently.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:f7bed9635d908207d1d32380249fb0f13dfe0b56f6544c24510cb45849058a64",
+                "seed": "iqs12_q02_seed",
+                "source_mode": "repo_generated",
+                "template_key": "arrow_rotation_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "matrix_reasoning",
+            "item_id": "FM-IQ-VSPR-MX-L2-SH002",
+            "question_id": "IQS12_Q02",
+            "raw_points": 1,
+            "solution_rule": "The arrow rotates 90 degrees clockwise on each step, so the next state is the 270-degree orientation.",
+            "status": "beta"
+        },
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:591d651d9a398bc9eee6b31bd4c455a901fd5519c31b2cc8a07f721ca0188d49",
+                    "B": "sha256:fc4c47084fd154a5dae88d6957be861bf48b1bd3aaeace9b0b4d10d4eef7dc90",
+                    "C": "sha256:cf316b9777c120d099243f97ddad057f994d80affcfe17a39f8143dc548e36cb",
+                    "D": "sha256:fbe42f41ee75f1f49ca61f0435ae912c1acd9a3c76fdfe16538a484895e6db8a"
+                },
+                "stem": "sha256:f3c166570daf73fb6752695a1a7fa7bda102e58494b3cfef4b5216aad802d94c"
+            },
+            "correct_answer": "C",
+            "difficulty_level": "L3",
+            "dimension": "VSPR",
+            "distractor_logic": "Distractors place the dot on earlier positions in the cycle or repeat the start position.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:1a4909057305f14430de25af419e927977bbe507e90a14d94c276a6b0a5a3076",
+                "seed": "iqs12_q03_seed",
+                "source_mode": "repo_generated",
+                "template_key": "corner_dot_cycle_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "shape_sequence",
+            "item_id": "FM-IQ-VSPR-SEQ-L3-SH003",
+            "question_id": "IQS12_Q03",
+            "raw_points": 1,
+            "solution_rule": "The dot moves clockwise around the four corners of the square, so the missing position is bottom-left.",
+            "status": "beta"
+        },
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:60ef09bdd6c07f38e25020d550473d408b088104d2a24ba85411c90785974f60",
+                    "B": "sha256:42dda0aa20cad4f3ecaab6431d02fd63533653a73bab269bd9f9b9a1f2448aa8",
+                    "C": "sha256:47e51d1896faa53156e8bb16742f1bd8a413dda0cb5499b6b40b9f44131e7c11",
+                    "D": "sha256:cab0c4dac524058382cea5b64be5af70446827abfbbca25f600f592adce1f794"
+                },
+                "stem": "sha256:660c48e026f9a17b1930e5498978115569b6da24b6c306b6e54c9f79126bba86"
+            },
+            "correct_answer": "D",
+            "difficulty_level": "L3",
+            "dimension": "VSPR",
+            "distractor_logic": "Distractors preserve the wrong shape or fail to apply the fill transformation consistently.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:368777543e06c4aa0996f43cc4a058323935f65823708350fb74ce43e7b5fac1",
+                "seed": "iqs12_q04_seed",
+                "source_mode": "repo_generated",
+                "template_key": "outline_fill_analogy_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "shape_analogy",
+            "item_id": "FM-IQ-VSPR-ANL-L3-SH004",
+            "question_id": "IQS12_Q04",
+            "raw_points": 1,
+            "solution_rule": "The left pair changes an outlined circle into a filled circle; applying the same rule to an outlined square yields a filled square.",
+            "status": "beta"
+        },
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:be6d1e4fe9c6b464a2a3368ae2c7dd41deac5af696399f616f3d8d4fe5d42e7e",
+                    "B": "sha256:bc8d1f11d6440a05f1531fa5b6f788c4412bd484daf020c3f53590b6bdb8c3ce",
+                    "C": "sha256:40564ca992cd89d66eb8b377888b4a69554395e5f0d3a819a205a1edf3d993cc",
+                    "D": "sha256:75cb878d4649b9ff2fb940573fd3e2043663d945fbcab120029463234eeeaac2"
+                },
+                "stem": "sha256:65703ab2e5804bbb877cf297c8e8d76b13f5904edd61e1aabe93ea0607284911"
+            },
+            "correct_answer": "A",
+            "difficulty_level": "L2",
+            "dimension": "VSI",
+            "distractor_logic": "The distractors mirror or rotate the target shape so they look similar without preserving the original orientation.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:a6df17ac264e51f60d8aae149d1f7b374ff20fe557507c6ab8b608189b47e374",
+                "seed": "iqs12_q05_seed",
+                "source_mode": "repo_generated",
+                "template_key": "hidden_l_shape_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "hidden_shape",
+            "item_id": "FM-IQ-VSI-HS-L2-SH005",
+            "question_id": "IQS12_Q05",
+            "raw_points": 1,
+            "solution_rule": "The target is the same L-shape orientation shown in the stem, and only option A contains that orientation unchanged.",
+            "status": "beta"
+        },
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:9f6c3d821eb070979ccea8b23dc2c33828c8c4270a0b9c97b2b41c56ccd79208",
+                    "B": "sha256:618e2e14ca35217bacd44203603530b02f0262748aab15f777f7556bf09e0a0a",
+                    "C": "sha256:f22c168d0d5e3528cfe6ac26cdeb2cb64084236bb7c35913c11f6bec5eec8ab4",
+                    "D": "sha256:18d9d9dd0a6a040a50951bfe15aa466e89a76da78a41ca25522fee378dcc9be9"
+                },
+                "stem": "sha256:197b85cbc94e609855d66bfcd1e103fe64155ed3013ce5401a4ffbb459c75371"
+            },
+            "correct_answer": "B",
+            "difficulty_level": "L3",
+            "dimension": "VSI",
+            "distractor_logic": "Distractors mirror the shape or keep the original orientation, which is visually close but rule-inconsistent.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:6fd1a7a15e95eb67419d7e6cd67f08d40b6e9f1c85746c7418dfe9360a07d917",
+                "seed": "iqs12_q06_seed",
+                "source_mode": "repo_generated",
+                "template_key": "polyomino_rotation_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "mental_rotation",
+            "item_id": "FM-IQ-VSI-MR-L3-SH006",
+            "question_id": "IQS12_Q06",
+            "raw_points": 1,
+            "solution_rule": "The base polyomino is rotated without mirroring, and only option B matches a pure 90-degree rotation.",
+            "status": "beta"
+        },
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:35aee7e19f1d072e6f01419501e12ce1d0fd3c4590882296970285cbd06cd7fe",
+                    "B": "sha256:4be8a48ae51cbe43223c1aafe60b5c93ba333cbd18b469b14213327b9115a1e2",
+                    "C": "sha256:853a1aa6f7726ba09b8a3aa0f4a80e45edb935be53f3583a0d51bc9fc3914027",
+                    "D": "sha256:a65ac58d39aa2c773882105c9580656f0e52e8b420a40f6c0d5252f14b230ea3"
+                },
+                "stem": "sha256:2654025f8e72063d072a1c9afecdb92c8290faea8eab204810ac2b15058468b2"
+            },
+            "correct_answer": "C",
+            "difficulty_level": "L3",
+            "dimension": "VSI",
+            "distractor_logic": "Distractors supply pieces with the wrong footprint, missing the horizontal foot or overfilling the gap.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:605913ccf664c55a8ee813143284439824afbd8c452a2426044c9fabcbffe8ca",
+                "seed": "iqs12_q07_seed",
+                "source_mode": "repo_generated",
+                "template_key": "missing_piece_square_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "shape_assembly",
+            "item_id": "FM-IQ-VSI-ASM-L3-SH007",
+            "question_id": "IQS12_Q07",
+            "raw_points": 1,
+            "solution_rule": "The gap in the square needs one long vertical segment plus a short horizontal foot, which matches the L-shaped piece.",
+            "status": "beta"
+        },
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:f7f859a730a169f861a60228b1d9dac2dc757fcf278f047a7c6ac7660c764792",
+                    "B": "sha256:76b3330b7d8c2ed969a912fe8c9d74d85cc89762790ef1d5020382cc5ff3912a",
+                    "C": "sha256:61d5cf2453fdfcd998bf9d3887cbd657818dbb5a41cc506039e693ba44c5523f",
+                    "D": "sha256:0ead8d5f5dd5a831a4af7743430c4d7ce35ca52444f742c15349c171568a0f3d"
+                },
+                "stem": "sha256:edc0c11bf6822bbc0b7eba6cd3b9a01a09c281726c6e1d7c3c0e170d23f00799"
+            },
+            "correct_answer": "D",
+            "difficulty_level": "L4",
+            "dimension": "VSI",
+            "distractor_logic": "The distractors all preserve simple reflection symmetry, so the odd one out is the only asymmetric pattern.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:c502c70cafc3d057a07ae96617ebadcf3d532c341e2dba72d29337ee7325076a",
+                "seed": "iqs12_q08_seed",
+                "source_mode": "repo_generated",
+                "template_key": "symmetry_exception_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "odd_one_out",
+            "item_id": "FM-IQ-VSI-ODD-L4-SH008",
+            "question_id": "IQS12_Q08",
+            "raw_points": 1,
+            "solution_rule": "Three options are mirror-symmetric around at least one axis, while option D breaks that symmetry with an offset cluster.",
+            "status": "beta"
+        },
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:76cd6a3255a86734431ab0f110c3a3c8e2e4653bc3f0b0bde30836451d511574",
+                    "B": "sha256:7ad74efdb5288984f686fcc5dcadc2c31c7c55984835a5add9c77c1b89c9919c",
+                    "C": "sha256:2bd4c01adbb7ceedc144748981712316cf86b506fc0ea75699dd92d98d4202bd",
+                    "D": "sha256:99b6f25c27d125a9fc291c418e908bdca98c7bbe6fc1edfe90c9a4f4ecd4dfaf"
+                },
+                "stem": "sha256:c9f6956e1afc3dac75e4bb42e66ab1da4c79de249b789f57f4212608a9db317c"
+            },
+            "correct_answer": "A",
+            "difficulty_level": "L2",
+            "dimension": "NPR",
+            "distractor_logic": "Distractors include nearby even numbers and repeated powers to catch skipped or partial doubling.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:2b6a60c3d6bafc31eca3c2f80cbae3eef9132bad11fd2ba50079c72fbd0e068a",
+                "seed": "iqs12_q09_seed",
+                "source_mode": "repo_generated",
+                "template_key": "doubling_sequence_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "number_sequence",
+            "item_id": "FM-IQ-NPR-NS-L2-SH009",
+            "question_id": "IQS12_Q09",
+            "raw_points": 1,
+            "solution_rule": "Each term doubles the previous term, so the next value after 16 is 32.",
+            "status": "beta"
+        },
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:74aa182d9c17efe4288c38ade27360cbafc92c4610bd46abd869d658453975f7",
+                    "B": "sha256:015c2de4011cc043b645d97769ed0a0b662ca75b479485f7e31b0d3eea12cc93",
+                    "C": "sha256:737af3a89acf613f603e272d87844894b32f77140d9b4dffe602df566c82e6cb",
+                    "D": "sha256:94862ae363d9fcf29f960859f08ad1ed939547d2c6e54cb45a2d9cf43c9dc1ca"
+                },
+                "stem": "sha256:30422613ade45637e4d33f46c745ca1f171fae32900292337ecbde0307b39618"
+            },
+            "correct_answer": "B",
+            "difficulty_level": "L3",
+            "dimension": "NPR",
+            "distractor_logic": "Distractors keep the numbers close but break the row-doubling rule by under- or over-shooting the product.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:5dd2ca40a029e5eb576be1f326f16855b0b7e7574eabbd0944b72ac5b7cf0c73",
+                "seed": "iqs12_q10_seed",
+                "source_mode": "repo_generated",
+                "template_key": "row_double_grid_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "number_grid",
+            "item_id": "FM-IQ-NPR-GRD-L3-SH010",
+            "question_id": "IQS12_Q10",
+            "raw_points": 1,
+            "solution_rule": "In each row the second number is double the first, so the row starting with 5 must end with 10.",
+            "status": "beta"
+        },
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:f8d0c1491a4b6190395f8e67af2f5c2d6677b36657458166af2c3aff3f1bc4d8",
+                    "B": "sha256:3b872f92b834610fe427dd3c1bf3d53cc1b341ea4cfdbfff8cfdbbcf2b02b175",
+                    "C": "sha256:1ee0aefd125c62902db9556c03c6718b1fd8aaa266a9bd9ff17bb293b46bb3fc",
+                    "D": "sha256:bdfa60bee025b6745131326d97f9912dff513843521115cd3885259f5120806d"
+                },
+                "stem": "sha256:b73bb8b57527e21a2cde716e988b94d6eda5d71c2023a46a383ea188b34d1124"
+            },
+            "correct_answer": "C",
+            "difficulty_level": "L3",
+            "dimension": "NPR",
+            "distractor_logic": "Distractors reuse one of the symbol values or add an extra step to test whether the mapping was applied cleanly.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:c8fcc5a9575d0e637db4d459754bd1f1129cdd7d1066d083c57a1ee2bb4c3161",
+                "seed": "iqs12_q11_seed",
+                "source_mode": "repo_generated",
+                "template_key": "symbol_value_addition_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "symbol_operation",
+            "item_id": "FM-IQ-NPR-SYM-L3-SH011",
+            "question_id": "IQS12_Q11",
+            "raw_points": 1,
+            "solution_rule": "The stem assigns values triangle=2 and circle=4, so adding them yields 6.",
+            "status": "beta"
+        },
+        {
+            "asset_hashes": {
+                "options": {
+                    "A": "sha256:3b872f92b834610fe427dd3c1bf3d53cc1b341ea4cfdbfff8cfdbbcf2b02b175",
+                    "B": "sha256:1ee0aefd125c62902db9556c03c6718b1fd8aaa266a9bd9ff17bb293b46bb3fc",
+                    "C": "sha256:bdfa60bee025b6745131326d97f9912dff513843521115cd3885259f5120806d",
+                    "D": "sha256:74aa182d9c17efe4288c38ade27360cbafc92c4610bd46abd869d658453975f7"
+                },
+                "stem": "sha256:cbfe6d962ac9a23195bbedccf7c50cc4c439918b6023e71c33c9d0bb14ba1edc"
+            },
+            "correct_answer": "D",
+            "difficulty_level": "L4",
+            "dimension": "NPR",
+            "distractor_logic": "Distractors represent common under-counts that miss overlapping or edge triangles in the figure.",
+            "generator_metadata": {
+                "generator_version": "iq_showcase12_generator_v1",
+                "params_hash": "sha256:11ee7013229bf08462ba79964887ac6944ef0f5f785cddc9925e27ea1f793033",
+                "seed": "iqs12_q12_seed",
+                "source_mode": "repo_generated",
+                "template_key": "triangle_count_v1",
+                "theme_version": "iq_showcase12_theme_v1"
+            },
+            "item_family": "shape_counting",
+            "item_id": "FM-IQ-NPR-CNT-L4-SH012",
+            "question_id": "IQS12_Q12",
+            "raw_points": 1,
+            "solution_rule": "The figure can be decomposed into eight distinct small triangles when counted systematically from top to bottom.",
+            "status": "beta"
+        }
+    ],
+    "norm_table_version": "unavailable",
+    "quality_rules": {
+        "abnormal_quality_policy": "review_with_caution",
+        "speeding_seconds_lt": 30,
+        "straightlining_run_len_gte": 8
+    },
+    "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+    "scoring_engine_version": "iq_scoring_v2",
+    "scoring_mode": "scored",
+    "version": "showcase12.v1"
+}

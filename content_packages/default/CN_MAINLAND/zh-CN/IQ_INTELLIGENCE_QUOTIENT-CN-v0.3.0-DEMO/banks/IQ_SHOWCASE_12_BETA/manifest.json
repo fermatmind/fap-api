@@ -1,0 +1,49 @@
+{
+    "activation": {
+        "reason": "showcase_only_until_beta50_and_norms_are_ready",
+        "runtime_bound": false
+    },
+    "answer_distribution": {
+        "A": 3,
+        "B": 3,
+        "C": 3,
+        "D": 3
+    },
+    "bank_dir": "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_SHOWCASE_12_BETA",
+    "bank_id": "IQ_SHOWCASE_12_BETA",
+    "beta_50_status": "future_work",
+    "content_package_version": "v0.3.0-DEMO",
+    "dimension_counts": {
+        "NPR": 4,
+        "VSI": 4,
+        "VSPR": 4
+    },
+    "files": {
+        "answer_key": "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_SHOWCASE_12_BETA/answer_key.json",
+        "items": "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_SHOWCASE_12_BETA/items.json",
+        "scoring_spec": "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_SHOWCASE_12_BETA/scoring_spec.json"
+    },
+    "item_count": 12,
+    "item_families": [
+        "matrix_reasoning",
+        "shape_sequence",
+        "shape_analogy",
+        "hidden_shape",
+        "mental_rotation",
+        "shape_assembly",
+        "odd_one_out",
+        "number_sequence",
+        "number_grid",
+        "symbol_operation",
+        "shape_counting"
+    ],
+    "notes": {
+        "beta_50_imported": false,
+        "commerce_required": false,
+        "norm_table_required_before_production": true,
+        "showcase_12_imported": true
+    },
+    "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+    "schema_version": "fm.iq.item_bank_manifest.v1",
+    "status": "beta"
+}
