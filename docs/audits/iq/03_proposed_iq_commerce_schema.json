@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fermatmind.com/schemas/iq/iq_commerce.v1.json",
+  "title": "FermatMind IQ Commerce Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scale_code",
+    "price_tier",
+    "default_offer_sku",
+    "offers",
+    "report_access_contract"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "iq_commerce.v1"
+    },
+    "scale_code": {
+      "const": "IQ_INTELLIGENCE_QUOTIENT"
+    },
+    "price_tier": {
+      "const": "PAID"
+    },
+    "default_offer_sku": {
+      "const": "IQ_ADAPTIVE_199"
+    },
+    "offers": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/offer"
+      }
+    },
+    "report_access_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "states"
+      ],
+      "properties": {
+        "states": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "locked",
+              "unlocked_adaptive",
+              "unlocked_pro"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "offer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sku",
+        "price_cents",
+        "currency",
+        "benefit_code",
+        "scope",
+        "benefit_type"
+      ],
+      "properties": {
+        "sku": {
+          "type": "string",
+          "enum": [
+            "IQ_ADAPTIVE_199",
+            "IQ_PRO_500"
+          ]
+        },
+        "price_cents": {
+          "type": "integer",
+          "enum": [
+            199,
+            500
+          ]
+        },
+        "currency": {
+          "const": "CNY"
+        },
+        "benefit_code": {
+          "type": "string",
+          "enum": [
+            "IQ_ADAPTIVE_REPORT",
+            "IQ_PRO_REPORT"
+          ]
+        },
+        "scope": {
+          "const": "attempt"
+        },
+        "benefit_type": {
+          "const": "report_unlock"
+        }
+      }
+    }
+  }
+}

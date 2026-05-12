@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fermatmind.com/schemas/iq/iq_report.v1.json",
+  "title": "FermatMind IQ Report Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scale_code",
+    "attempt_id",
+    "unlock",
+    "summary",
+    "dimensions",
+    "quality",
+    "stability"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "iq_report.v1"
+    },
+    "scale_code": {
+      "const": "IQ_INTELLIGENCE_QUOTIENT"
+    },
+    "attempt_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "benefit_code",
+        "effective_sku"
+      ],
+      "properties": {
+        "stage": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked_adaptive",
+            "unlocked_pro"
+          ]
+        },
+        "benefit_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effective_sku": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_score",
+        "iq_estimate",
+        "percentile",
+        "confidence_interval"
+      ],
+      "properties": {
+        "raw_score": {
+          "type": "number"
+        },
+        "iq_estimate": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "percentile": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "confidence_interval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "lower",
+            "upper",
+            "level"
+          ],
+          "properties": {
+            "lower": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "upper": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "level": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "visual_spatial_insight",
+        "visual_spatial_pattern_reasoning",
+        "numerical_pattern_reasoning"
+      ],
+      "properties": {
+        "visual_spatial_insight": {
+          "$ref": "#/$defs/dimensionScore"
+        },
+        "visual_spatial_pattern_reasoning": {
+          "$ref": "#/$defs/dimensionScore"
+        },
+        "numerical_pattern_reasoning": {
+          "$ref": "#/$defs/dimensionScore"
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "flags"
+      ],
+      "properties": {
+        "level": {
+          "type": "string"
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "stability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "stable",
+            "review_with_caution",
+            "unstable"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "iq_pro": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pdf_payload": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "certificate_payload": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    }
+  },
+  "$defs": {
+    "dimensionScore": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_score",
+        "scaled_score",
+        "percentile"
+      ],
+      "properties": {
+        "raw_score": {
+          "type": "number"
+        },
+        "scaled_score": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "percentile": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
