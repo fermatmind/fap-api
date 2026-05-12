@@ -20,6 +20,7 @@ final class RiasecPublicProjectionService
     public function __construct(
         private readonly RiasecMeasurementContract $measurementContract,
         private readonly RiasecActivityExplorerService $activityExplorer,
+        private readonly RiasecExplorationFeedbackOverlayService $feedbackOverlay,
     ) {}
 
     public function buildFromResult(Result $result, string $locale = 'zh-CN'): array
@@ -94,7 +95,7 @@ final class RiasecPublicProjectionService
         $scoreSpaceVersion = (string) data_get($measurementContract, 'form.score_space_version', data_get($v1, 'form.score_space_version', ''));
         $formCode = (string) data_get($measurementContract, 'form.form_code', data_get($v1, 'form.form_code', ''));
 
-        return [
+        $projection = [
             'schema_version' => 'riasec.public_projection.v2',
             'scale_code' => 'RIASEC',
             'locale' => str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en',
@@ -163,6 +164,9 @@ final class RiasecPublicProjectionService
             ],
             'activity_explorer_v0_1' => $this->activityExplorer->build((string) ($v1['top_code'] ?? ''), $locale),
         ];
+        $projection['exploration_feedback_overlay_v0_1'] = $this->feedbackOverlay->build($result, $projection, $snapshotBound);
+
+        return $projection;
     }
 
     /**
