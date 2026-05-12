@@ -1461,13 +1461,23 @@ class AttemptReadController extends Controller
     private function projectScaleCodePayload(array $payload, array $responseCodes): array
     {
         if (array_key_exists('scale_code', $payload)) {
-            $payload['scale_code'] = $responseCodes['scale_code'];
+            $payload['scale_code'] = $this->shouldPreserveCanonicalScaleCode($payload)
+                ? $responseCodes['scale_code_v2']
+                : $responseCodes['scale_code'];
             $payload['scale_code_legacy'] = $responseCodes['scale_code_legacy'];
             $payload['scale_code_v2'] = $responseCodes['scale_code_v2'];
             $payload['scale_uid'] = $responseCodes['scale_uid'];
         }
 
         return $payload;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function shouldPreserveCanonicalScaleCode(array $payload): bool
+    {
+        return (string) ($payload['schema_version'] ?? '') === 'iq.report.v1';
     }
 
     private function resolveAttemptForResultRead(Request $request, int $orgId, string $attemptId, string $scaleCode): ?Attempt
