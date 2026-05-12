@@ -107,6 +107,9 @@ class AttemptStartService
         $resolvedScoringSpecVersion = null;
         $resolvedQualityVersion = null;
         $resolvedQuestionCount = null;
+        $resolvedMeasurementContractVersion = null;
+        $resolvedScoreSpaceVersion = null;
+        $resolvedCompareCompatibilityGroup = null;
         $contentPackageVersion = '';
 
         if (strtoupper($scaleCode) === 'MBTI') {
@@ -163,6 +166,9 @@ class AttemptStartService
             $resolvedScoringSpecVersion = trim((string) ($resolvedForm['scoring_spec_version'] ?? ''));
             $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));
             $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
+            $resolvedMeasurementContractVersion = trim((string) ($resolvedForm['measurement_contract_version'] ?? ''));
+            $resolvedScoreSpaceVersion = trim((string) ($resolvedForm['score_space_version'] ?? ''));
+            $resolvedCompareCompatibilityGroup = trim((string) ($resolvedForm['compare_compatibility_group'] ?? ''));
         }
 
         if ($packId === '' || $dirVersion === '') {
@@ -281,6 +287,17 @@ class AttemptStartService
         }
         if ($resolvedQualityVersion !== null && $resolvedQualityVersion !== '') {
             $answersMeta['quality_version'] = $resolvedQualityVersion;
+        }
+        if ($resolvedMeasurementContractVersion !== null && $resolvedMeasurementContractVersion !== '') {
+            $answersMeta['measurement_contract_version'] = $resolvedMeasurementContractVersion;
+        }
+        if ($resolvedScoreSpaceVersion !== null && $resolvedScoreSpaceVersion !== '') {
+            $answersMeta['score_space_version'] = $resolvedScoreSpaceVersion;
+        }
+        if ($resolvedCompareCompatibilityGroup !== null && $resolvedCompareCompatibilityGroup !== '') {
+            $answersMeta['compare_compatibility_group'] = $resolvedCompareCompatibilityGroup;
+            $answersMeta['cross_form_comparable'] = false;
+            $answersMeta['raw_score_delta_allowed'] = false;
         }
         $manifestHash = $this->resolveScaleManifestHash($scaleCode, $dirVersion);
         if ($manifestHash !== '') {
@@ -686,7 +703,7 @@ class AttemptStartService
             $resumeExpiresAt = $resumeExpiresAt->format(\DateTimeInterface::ATOM);
         }
 
-        return [
+        $response = [
             'ok' => true,
             'org_id' => $orgId,
             'anon_id' => $anonId,
@@ -712,6 +729,20 @@ class AttemptStartService
             'resume_token' => (string) ($draft['token'] ?? ''),
             'resume_expires_at' => $resumeExpiresAt,
         ];
+
+        foreach ([
+            'measurement_contract_version',
+            'score_space_version',
+            'compare_compatibility_group',
+            'cross_form_comparable',
+            'raw_score_delta_allowed',
+        ] as $metaKey) {
+            if (data_get($attempt->answers_summary_json, 'meta.'.$metaKey) !== null) {
+                $response[$metaKey] = data_get($attempt->answers_summary_json, 'meta.'.$metaKey);
+            }
+        }
+
+        return $response;
     }
 
     private function eventRecorder(): EventRecorder

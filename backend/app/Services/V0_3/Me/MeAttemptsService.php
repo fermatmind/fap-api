@@ -16,6 +16,7 @@ use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Report\InviteUnlockSummaryBuilder;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\Resolvers\OfferResolver;
+use App\Services\Riasec\RiasecCompareGuardService;
 use App\Services\Riasec\RiasecPublicFormSummaryBuilder;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
@@ -75,6 +76,7 @@ class MeAttemptsService
         private readonly EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
         private readonly EnneagramCompareGuardService $enneagramCompareGuardService,
         private readonly EnneagramObservationStateService $enneagramObservationStateService,
+        private readonly RiasecCompareGuardService $riasecCompareGuardService,
         private readonly RiasecPublicFormSummaryBuilder $riasecPublicFormSummaryBuilder,
         private readonly InviteUnlockSummaryBuilder $inviteUnlockSummaryBuilder,
     ) {}
@@ -222,6 +224,7 @@ class MeAttemptsService
                 $presented['enneagram_form_v1'] = $this->enneagramPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'RIASEC') {
                 $presented['riasec_form_v1'] = $this->riasecPublicFormSummaryBuilder->build($attempt, $result);
+                $presented['compare_policy_v1'] = $this->riasecCompareGuardService->summarizeAttempt($attempt, $result);
             }
             $items[] = $presented;
         }
@@ -234,6 +237,8 @@ class MeAttemptsService
             $historyCompare = $this->buildBigFiveHistoryCompare($attemptModels, $resultByAttemptId);
         } elseif ($normalizedScaleCode === 'ENNEAGRAM') {
             $historyCompare = $this->buildEnneagramHistorySummary($attemptModels, $resultByAttemptId);
+        } elseif ($normalizedScaleCode === 'RIASEC') {
+            $historyCompare = $this->buildRiasecHistorySummary($attemptModels, $resultByAttemptId);
         }
 
         return [
@@ -582,6 +587,61 @@ class MeAttemptsService
     }
 
     /**
+     * @param  list<Attempt>  $attemptModels
+     * @param  array<string,Result>  $resultByAttemptId
+     * @return array<string,mixed>|null
+     */
+    private function buildRiasecHistorySummary(array $attemptModels, array $resultByAttemptId): ?array
+    {
+        if ($attemptModels === []) {
+            return null;
+        }
+
+        $latest = $attemptModels[0];
+        $latestId = (string) ($latest->id ?? '');
+        if ($latestId === '') {
+            return null;
+        }
+
+        $latestScore = $this->extractRiasecScoreResult($resultByAttemptId[$latestId] ?? null);
+        if ($latestScore === []) {
+            return null;
+        }
+
+        $payload = [
+            'scale_code' => 'RIASEC',
+            'current_attempt_id' => $latestId,
+            'current_top_code' => (string) ($latestScore['top_code'] ?? ''),
+            'current_primary_type' => (string) ($latestScore['primary_type'] ?? ''),
+            'current_compare_policy_v1' => $this->riasecCompareGuardService->summarizeAttempt($latest, $resultByAttemptId[$latestId] ?? null),
+        ];
+
+        $previous = $attemptModels[1] ?? null;
+        if ($previous instanceof Attempt) {
+            $previousId = (string) ($previous->id ?? '');
+            $previousScore = $this->extractRiasecScoreResult($resultByAttemptId[$previousId] ?? null);
+            if ($previousId !== '' && $previousScore !== []) {
+                $payload['previous_attempt_id'] = $previousId;
+                $payload['previous_top_code'] = (string) ($previousScore['top_code'] ?? '');
+                $payload['previous_primary_type'] = (string) ($previousScore['primary_type'] ?? '');
+                $payload['top_code_changed'] = $payload['previous_top_code'] !== $payload['current_top_code'];
+                $payload['previous_compare_policy_v1'] = $this->riasecCompareGuardService->summarizeAttempt(
+                    $previous,
+                    $resultByAttemptId[$previousId] ?? null
+                );
+                $payload['compare_guard_v1'] = $this->riasecCompareGuardService->evaluate(
+                    $latest,
+                    $resultByAttemptId[$latestId] ?? null,
+                    $previous,
+                    $resultByAttemptId[$previousId] ?? null
+                );
+            }
+        }
+
+        return $payload;
+    }
+
+    /**
      * @return array<string,float>
      */
     private function extractDomainsMean(mixed $resultJson): array
@@ -746,6 +806,39 @@ class MeAttemptsService
 
         foreach ($candidates as $candidate) {
             if (is_array($candidate) && strtoupper(trim((string) ($candidate['scale_code'] ?? ''))) === 'ENNEAGRAM') {
+                return $candidate;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function extractRiasecScoreResult(?Result $result): array
+    {
+        if (! $result instanceof Result) {
+            return [];
+        }
+
+        $resultJson = $this->decodeResultJson($result->result_json);
+        $candidates = [
+            $resultJson['normed_json'] ?? null,
+            $resultJson,
+            data_get($resultJson, 'breakdown_json.score_result'),
+            data_get($resultJson, 'axis_scores_json.score_result'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (! is_array($candidate)) {
+                continue;
+            }
+
+            $hasRiasecShape = array_key_exists('scores_0_100', $candidate)
+                || array_key_exists('top_code', $candidate)
+                || strtoupper(trim((string) ($candidate['scale_code'] ?? ''))) === 'RIASEC';
+            if ($hasRiasecShape) {
                 return $candidate;
             }
         }

@@ -17,6 +17,10 @@ final class RiasecPublicProjectionService
         'C' => ['en' => 'Conventional', 'zh-CN' => '常规型'],
     ];
 
+    public function __construct(
+        private readonly RiasecMeasurementContract $measurementContract,
+    ) {}
+
     public function buildFromResult(Result $result, string $locale = 'zh-CN'): array
     {
         $payload = is_array($result->result_json ?? null) ? $result->result_json : [];
@@ -29,6 +33,18 @@ final class RiasecPublicProjectionService
         $primary = trim((string) ($payload['primary_type'] ?? substr($topCode, 0, 1)));
         $secondary = trim((string) ($payload['secondary_type'] ?? substr($topCode, 1, 1)));
         $tertiary = trim((string) ($payload['tertiary_type'] ?? substr($topCode, 2, 1)));
+        $formCode = $this->measurementContract->canonicalFormCode(
+            (string) ($payload['form_code'] ?? data_get($payload, 'measurement_contract_v1.form.form_code', '')),
+            (int) ($payload['answer_count'] ?? 0)
+        );
+        $measurementContract = is_array($payload['measurement_contract_v1'] ?? null)
+            ? $payload['measurement_contract_v1']
+            : $this->measurementContract->forFormCode($formCode, (int) ($payload['answer_count'] ?? 0));
+        $comparePolicy = is_array($payload['compare_policy_v1'] ?? null)
+            ? $payload['compare_policy_v1']
+            : (is_array($measurementContract['compare_policy'] ?? null)
+                ? $measurementContract['compare_policy']
+                : $this->measurementContract->comparePolicyForFormCode($formCode, (int) ($payload['answer_count'] ?? 0)));
 
         return [
             'schema' => 'fap.riasec.public_projection.v1',
@@ -42,6 +58,15 @@ final class RiasecPublicProjectionService
             'quality_grade' => (string) ($payload['quality_grade'] ?? data_get($payload, 'quality.grade', 'A')),
             'quality_flags' => array_values(array_filter(array_map('strval', (array) ($payload['quality_flags'] ?? data_get($payload, 'quality.flags', []))))),
             'dimension_labels' => $this->dimensionLabels($locale),
+            'form' => [
+                'form_code' => $formCode,
+                'score_space_version' => (string) data_get($measurementContract, 'form.score_space_version', ''),
+                'compare_compatibility_group' => (string) ($comparePolicy['compare_compatibility_group'] ?? ''),
+                'cross_form_comparable' => false,
+                'raw_score_delta_allowed' => false,
+            ],
+            'measurement_contract_v1' => $measurementContract,
+            'compare_policy_v1' => $comparePolicy,
             'enhanced_breakdown' => [
                 'activity' => $this->prefixedScores($payload, 'activity_'),
                 'environment' => $this->prefixedScores($payload, 'env_'),

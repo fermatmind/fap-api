@@ -7,12 +7,14 @@ namespace App\Services\Assessment\Drivers;
 use App\Services\Assessment\ScoreResult;
 use App\Services\Assessment\Scorers\RiasecScorer;
 use App\Services\Content\RiasecPackLoader;
+use App\Services\Riasec\RiasecMeasurementContract;
 
 final class RiasecDriver implements DriverInterface
 {
     public function __construct(
         private readonly RiasecPackLoader $packLoader,
         private readonly RiasecScorer $scorer,
+        private readonly RiasecMeasurementContract $measurementContract,
     ) {}
 
     public function score(array $answers, array $spec, array $ctx): ScoreResult
@@ -36,11 +38,33 @@ final class RiasecDriver implements DriverInterface
             $scoringSpecVersion = (string) ($scorePayload['scoring_spec_version'] ?? 'riasec_standard_60_v1');
         }
 
+        $formCode = $this->measurementContract->canonicalFormCode(
+            (string) ($ctx['form_code'] ?? ($policy['form_code'] ?? ($scorePayload['form_code'] ?? ''))),
+            (int) ($scorePayload['answer_count'] ?? count($answers))
+        );
+        $measurementContract = $this->measurementContract->forFormCode(
+            $formCode,
+            (int) ($scorePayload['answer_count'] ?? count($answers))
+        );
+        $comparePolicy = is_array($measurementContract['compare_policy'] ?? null)
+            ? $measurementContract['compare_policy']
+            : $this->measurementContract->comparePolicyForFormCode($formCode);
+        $scoreSpaceVersion = (string) data_get($measurementContract, 'form.score_space_version', '');
+
+        $scorePayload['form_code'] = $formCode;
+        $scorePayload['score_space_version'] = $scoreSpaceVersion;
+        $scorePayload['compare_compatibility_group'] = (string) ($comparePolicy['compare_compatibility_group'] ?? '');
+        $scorePayload['cross_form_comparable'] = false;
+        $scorePayload['raw_score_delta_allowed'] = false;
+        $scorePayload['measurement_contract_v1'] = $measurementContract;
+        $scorePayload['compare_policy_v1'] = $comparePolicy;
         $scorePayload['version_snapshot'] = [
             'pack_id' => (string) ($ctx['pack_id'] ?? RiasecPackLoader::PACK_ID),
             'pack_version' => $version,
             'engine_version' => (string) ($scorePayload['engine_version'] ?? ($policy['engine_version'] ?? 'riasec_v1.0.0')),
             'scoring_spec_version' => $scoringSpecVersion,
+            'measurement_contract_version' => RiasecMeasurementContract::SCHEMA_VERSION,
+            'score_space_version' => $scoreSpaceVersion,
             'content_manifest_hash' => $manifestHash,
         ];
 
