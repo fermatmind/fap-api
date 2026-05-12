@@ -766,3 +766,46 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: AUDIT-8
+    repo: fap-api
+    depends_on:
+      - AUDIT-7
+    branch: fix/career-surface-readiness-audit8
+    title: "feat(api): add career surface readiness audit"
+    name: "Career Surface Readiness Audit"
+    scope_type: surface_readiness_only
+    scope:
+      - Add a read-only surface readiness auditor for canonical slugs from AUDIT-2 plan rows or slug lists.
+      - Support API artifact mode for canonical/noindex readiness.
+      - Support optional synthetic live HTML validation only when base URL and verifier HTML are supplied.
+      - Report surface mismatches, noindex, missing CTA attribution, and unverified live verifier/context.
+      - Emit AUDIT-1-compatible surface layer statuses.
+      - Document AUDIT-8 surface readiness contract and future AUDIT-9 command consumption policy.
+      - Update the Big Five runtime freeze classifier owner allowlist for AUDIT-8 surface audit files.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add a career canonical eligibility audit command.
+      - Change frontend code.
+      - Fetch production live HTML.
+      - Add rollout/apply/backfill behavior.
+      - Mutate DB or production data.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerSurfaceReadinessAuditor --no-ansi
+      - php artisan test --filter=CareerSeoGeoReadinessAuditor --no-ansi
+      - php artisan test --filter=CareerRuntimeProjectionTruthEligibilityAuditor --no-ansi
+      - php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "AUDIT-9 career:audit-canonical-eligibility command integration"
+    merge_policy:
+      github_checks_required: true
+      squash: true

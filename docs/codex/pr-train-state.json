@@ -1591,6 +1591,96 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "AUDIT-8": {
+      "repo": "fap-api",
+      "branch": "fix/career-surface-readiness-audit8",
+      "title": "feat(api): add career surface readiness audit",
+      "name": "Career Surface Readiness Audit",
+      "status": "in_progress",
+      "depends_on": [
+        "AUDIT-7"
+      ],
+      "scope_type": "surface_readiness_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "non_goals": [
+        "no audit command",
+        "no frontend code changes",
+        "no production live HTML fetch",
+        "no rollout",
+        "no apply",
+        "no backfill",
+        "no DB mutation",
+        "no production mutation",
+        "no deployment"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User requested continuous autonomous execution of remaining Career 2786 canonical eligibility audit PR train items."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "AUDIT-7 merged as PR #1327 with merge commit 422f5e3fd548eb0aa0a20bc9f1918f4cbab69741 and origin/main contains it."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to backend/app/Domain/Career/Audit, backend/tests/Unit/Domain/Career/Audit, backend/docs/career/audits, the test-only BigFive freeze classifier allowlist, and docs/codex train files."
+        },
+        "surface_readiness_tests": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerSurfaceReadinessAuditor --no-ansi",
+          "evidence": "10 tests passed, 17 assertions."
+        },
+        "seo_geo_readiness_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerSeoGeoReadinessAuditor --no-ansi",
+          "evidence": "11 tests passed, 20 assertions."
+        },
+        "runtime_projection_truth_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerRuntimeProjectionTruthEligibilityAuditor --no-ansi",
+          "evidence": "16 tests passed, 35 assertions."
+        },
+        "public_resolution_resolver_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi",
+          "evidence": "14 tests passed, 37 assertions."
+        },
+        "canonical_schema_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi",
+          "evidence": "14 tests passed, 28 assertions."
+        },
+        "runtime_freeze_allowlist_fix": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "Added AUDIT-8 CareerSurfaceReadiness* files to the test-only freeze classifier allowlist; the runtime path gate passes locally."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "3101 files checked."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [],
+      "failure_reason": null,
+      "next_pr": "AUDIT-9 career:audit-canonical-eligibility command integration",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }
