@@ -370,6 +370,33 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_identity_metadata_seed_changes(): void
+    {
+        $changed = [
+            'backend/database/seeders/ScaleRegistrySeeder.php',
+        ];
+        $scaleRegistrySeederChangedLines = [
+            "-            'default_dir_version' => 'IQ-RAVEN-CN-v0.3.0-DEMO',",
+            "+            'default_dir_version' => 'IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO',",
+            '-                questions: 60,',
+            '+                questions: 30,',
+            '-                minutes: 12,',
+            '+                minutes: 20,',
+            "-        \$this->command?->info('ScaleRegistrySeeder: IQ_RAVEN scale upserted.');",
+            "+        \$this->command?->info('ScaleRegistrySeeder: IQ public slug scale upserted with IQ_RAVEN legacy identity and IQ_INTELLIGENCE_QUOTIENT canonical pack metadata.');",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            null,
+            null,
+            null,
+            $scaleRegistrySeederChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -757,6 +784,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $kernelChangedLines = null,
         ?array $routeChangedLines = null,
         ?array $appServiceProviderChangedLines = null,
+        ?array $scaleRegistrySeederChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -874,6 +902,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             if (
                 $file === 'backend/app/Console/Kernel.php'
                 && $this->kernelDiffIsCareerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/database/seeders/ScaleRegistrySeeder.php'
+                && $this->scaleRegistrySeederDiffIsIqIdentityMetadataOnly(
+                    $scaleRegistrySeederChangedLines ?? $this->scaleRegistrySeederChangedLines($repoRoot, $baseRef)
+                )
             ) {
                 continue;
             }
@@ -1244,6 +1281,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return true;
     }
 
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function scaleRegistrySeederDiffIsIqIdentityMetadataOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/^\s*[+-]\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/default_dir_version|IQ-RAVEN-CN-v0\.3\.0-DEMO|IQ_INTELLIGENCE_QUOTIENT-CN-v0\.3\.0-DEMO|questions:\s*(30|60)|minutes:\s*(12|20)|ScaleRegistrySeeder:\s+IQ_RAVEN scale upserted\.|ScaleRegistrySeeder:\s+IQ public slug scale upserted with IQ_RAVEN legacy identity and IQ_INTELLIGENCE_QUOTIENT canonical pack metadata\./u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private function isBackendPintBaselineStyleOnlyChange(string $file, string $repoRoot, string $baseRef): bool
     {
         if ($repoRoot === '' || $baseRef === '') {
@@ -1468,6 +1527,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             },
             $output,
         )));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function scaleRegistrySeederChangedLines(string $repoRoot, string $baseRef): array
+    {
+        if ($repoRoot === '' || $baseRef === '') {
+            return [];
+        }
+
+        return $this->changedLinesForFile($repoRoot, $baseRef, 'backend/database/seeders/ScaleRegistrySeeder.php');
     }
 
     private function mergeBaseWithMain(string $repoRoot): string
