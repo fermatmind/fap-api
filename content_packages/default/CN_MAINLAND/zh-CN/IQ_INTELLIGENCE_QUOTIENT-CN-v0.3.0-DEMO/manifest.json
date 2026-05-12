@@ -1,11 +1,16 @@
 {
     "schema_version": "pack-manifest@v1",
     "pack_type": "content_pack",
-    "scale_code": "IQ_RAVEN",
+    "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
     "region": "CN_MAINLAND",
     "locale": "zh-CN",
     "content_package_version": "v0.3.0-DEMO",
     "pack_id": "default",
+    "lifecycle": {
+        "status": "legacy_demo",
+        "identity_role": "canonical_v2",
+        "legacy_scale_code": "IQ_RAVEN"
+    },
     "fallback": [],
     "capabilities": {
         "questions": true,

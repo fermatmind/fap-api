@@ -100,7 +100,8 @@ return [
         'BIG5_OCEAN' => 'v1',
         'CLINICAL_COMBO_68' => 'v1',
         'SDS_20' => 'v1',
-        'IQ_RAVEN' => 'IQ-RAVEN-CN-v0.3.0-DEMO',
+        // Legacy IQ requests now resolve against the canonical v2 IQ demo directory.
+        'IQ_RAVEN' => 'IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO',
         'EQ_60' => 'v1',
         'ENNEAGRAM' => 'v1-likert-105',
         'RIASEC' => 'v1-standard-60',
