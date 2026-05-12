@@ -397,6 +397,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_scoring_contract_driver_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Assessment/Drivers/IqTestDriver.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -876,6 +885,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isIqScoringContractFoundationFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsCiAuthBypassHardeningOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
@@ -982,6 +995,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Storage/QuarantinedRootRestoreService.php',
             'backend/app/Support/Xlsx/XlsxCellReference.php',
         ], true);
+    }
+
+    private function isIqScoringContractFoundationFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Assessment/Drivers/IqTestDriver.php';
     }
 
     private function isCiAuthBypassHardeningFile(string $file): bool
