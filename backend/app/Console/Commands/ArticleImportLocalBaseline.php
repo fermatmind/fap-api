@@ -6,9 +6,13 @@ namespace App\Console\Commands;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
+use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticlePublishService;
+use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ArticleService;
+use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -31,6 +35,8 @@ final class ArticleImportLocalBaseline extends Command
     public function handle(
         ArticleService $articleService,
         ArticlePublishService $articlePublishService,
+        ArticleTranslationRevisionWorkspace $translationRevisionWorkspace,
+        ArticleSeoService $articleSeoService,
     ): int {
         try {
             $status = trim((string) $this->option('status'));
@@ -60,6 +66,8 @@ final class ArticleImportLocalBaseline extends Command
                 ],
                 $articleService,
                 $articlePublishService,
+                $translationRevisionWorkspace,
+                $articleSeoService,
             );
 
             $this->line('baseline_source_dir='.$sourceDir);
@@ -286,6 +294,12 @@ final class ArticleImportLocalBaseline extends Command
 
         $publishedAt = $this->normalizeNullableDateString($row['published_at'] ?? null, $file, $slug);
         $coverImageVariants = $this->normalizeImageVariants($row['cover_image_variants'] ?? null, $file, $slug);
+        $editorialMetadata = $this->normalizeEditorialMetadata($row, $file, $slug);
+        if ($editorialMetadata !== []) {
+            $coverImageVariants = array_merge($coverImageVariants ?? [], [
+                'editorial_metadata' => $editorialMetadata,
+            ]);
+        }
 
         return [
             'org_id' => 0,
@@ -294,6 +308,8 @@ final class ArticleImportLocalBaseline extends Command
             'title' => $title,
             'excerpt' => $excerpt,
             'content_md' => $contentMd,
+            'seo_title' => $this->normalizeNullableString($row['seo_title'] ?? null),
+            'seo_description' => $this->normalizeNullableString($row['seo_description'] ?? $row['meta_description'] ?? null),
             'author_name' => $this->normalizeNullableString($row['author_name'] ?? null),
             'reviewer_name' => $this->normalizeNullableString($row['reviewer_name'] ?? null),
             'reading_minutes' => $this->normalizeNullablePositiveInteger($row['reading_minutes'] ?? null, $file, $slug, 'reading_minutes'),
@@ -324,6 +340,8 @@ final class ArticleImportLocalBaseline extends Command
         array $options,
         ArticleService $articleService,
         ArticlePublishService $articlePublishService,
+        ArticleTranslationRevisionWorkspace $translationRevisionWorkspace,
+        ArticleSeoService $articleSeoService,
     ): array {
         $dryRun = (bool) ($options['dry_run'] ?? false);
         $upsert = (bool) ($options['upsert'] ?? false);
@@ -418,28 +436,27 @@ final class ArticleImportLocalBaseline extends Command
                 'is_indexable' => (bool) $desired['is_indexable'],
             ], $tagIds);
 
+            $article = $this->syncSeoAuthority(
+                $article,
+                $desired,
+                $translationRevisionWorkspace,
+                $articleSeoService,
+            );
+
             if ((string) $desired['status'] === 'published') {
                 if ((string) $article->status !== 'published' || ! (bool) $article->is_public) {
                     $article = $articlePublishService->publishArticle((int) $article->id);
                 }
 
                 if (is_string($desired['published_at']) && $desired['published_at'] !== '') {
-                    $article = $articleService->updateArticle((int) $article->id, [
-                        'status' => 'published',
-                        'is_public' => true,
-                        'published_at' => $desired['published_at'],
-                    ]);
+                    $article = $this->applyPublishedAt($article, (string) $desired['published_at']);
                 }
             } else {
                 if ((string) $article->status !== 'draft' || (bool) $article->is_public) {
                     $article = $articlePublishService->unpublishArticle((int) $article->id);
                 }
 
-                $articleService->updateArticle((int) $article->id, [
-                    'status' => 'draft',
-                    'is_public' => false,
-                    'published_at' => null,
-                ]);
+                $this->applyDraftState($article);
             }
         }
 
@@ -460,6 +477,8 @@ final class ArticleImportLocalBaseline extends Command
             'title' => (string) $row['title'],
             'excerpt' => (string) $row['excerpt'],
             'content_md' => (string) $row['content_md'],
+            'seo_title' => $row['seo_title'],
+            'seo_description' => $row['seo_description'],
             'author_name' => $row['author_name'],
             'reviewer_name' => $row['reviewer_name'],
             'reading_minutes' => $row['reading_minutes'],
@@ -494,6 +513,12 @@ final class ArticleImportLocalBaseline extends Command
             return false;
         }
         if ((string) $article->content_md !== (string) $desired['content_md']) {
+            return false;
+        }
+        if ($this->currentSeoTitle($article) !== ($desired['seo_title'] ?? null)) {
+            return false;
+        }
+        if ($this->currentSeoDescription($article) !== ($desired['seo_description'] ?? null)) {
             return false;
         }
         if ((string) ($article->author_name ?? '') !== (string) ($desired['author_name'] ?? '')) {
@@ -559,6 +584,103 @@ final class ArticleImportLocalBaseline extends Command
             ->where('slug', $slug)
             ->where('locale', $locale)
             ->first();
+    }
+
+    /**
+     * @param  array<string, mixed>  $desired
+     */
+    private function syncSeoAuthority(
+        Article $article,
+        array $desired,
+        ArticleTranslationRevisionWorkspace $translationRevisionWorkspace,
+        ArticleSeoService $articleSeoService,
+    ): Article {
+        $seoTitle = $this->normalizeNullableString($desired['seo_title'] ?? null);
+        $seoDescription = $this->normalizeNullableString($desired['seo_description'] ?? null);
+        $canonicalUrl = $articleSeoService->buildCanonicalUrl((string) $desired['slug'], (string) $desired['locale']);
+        $robots = (bool) ($desired['is_indexable'] ?? true) ? 'index,follow' : 'noindex,nofollow';
+
+        ArticleSeoMeta::query()
+            ->withoutGlobalScopes()
+            ->updateOrCreate(
+                [
+                    'org_id' => (int) $article->org_id,
+                    'article_id' => (int) $article->id,
+                    'locale' => (string) $desired['locale'],
+                ],
+                [
+                    'seo_title' => $seoTitle,
+                    'seo_description' => $seoDescription,
+                    'canonical_url' => $canonicalUrl,
+                    'og_title' => $seoTitle,
+                    'og_description' => $seoDescription,
+                    'og_image_url' => $desired['cover_image_url'],
+                    'robots' => $robots,
+                    'is_indexable' => (bool) $desired['is_indexable'],
+                ],
+            );
+
+        $article = $article->fresh(['seoMeta']) ?? $article;
+        $revision = $translationRevisionWorkspace->resolveWorkingRevision($article);
+        $revisionHash = $translationRevisionWorkspace->hashForRevision($article, [
+            'title' => (string) $desired['title'],
+            'excerpt' => (string) $desired['excerpt'],
+            'content_md' => (string) $desired['content_md'],
+        ]);
+
+        $revision->forceFill([
+            'org_id' => (int) $article->org_id,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => (string) $article->translation_group_id,
+            'locale' => (string) $desired['locale'],
+            'source_locale' => (string) $desired['locale'],
+            'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
+            'source_version_hash' => $revisionHash,
+            'translated_from_version_hash' => $revisionHash,
+            'title' => (string) $desired['title'],
+            'excerpt' => (string) $desired['excerpt'],
+            'content_md' => (string) $desired['content_md'],
+            'seo_title' => $seoTitle,
+            'seo_description' => $seoDescription,
+        ])->save();
+
+        $article->forceFill([
+            'working_revision_id' => (int) $revision->id,
+            'source_version_hash' => $revisionHash,
+        ])->save();
+
+        return $article->fresh(['seoMeta', 'workingRevision']) ?? $article;
+    }
+
+    private function applyPublishedAt(Article $article, string $publishedAt): Article
+    {
+        $normalized = Carbon::parse($publishedAt)->utc();
+
+        $article->forceFill([
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => $normalized,
+        ])->save();
+
+        if ($article->published_revision_id !== null) {
+            ArticleTranslationRevision::query()
+                ->withoutGlobalScopes()
+                ->where('id', (int) $article->published_revision_id)
+                ->update(['published_at' => $normalized]);
+        }
+
+        return $article->fresh(['publishedRevision']) ?? $article;
+    }
+
+    private function applyDraftState(Article $article): void
+    {
+        $article->forceFill([
+            'status' => 'draft',
+            'is_public' => false,
+            'published_at' => null,
+            'published_revision_id' => null,
+        ])->save();
     }
 
     private function resolveCategoryId(array $row): ?int
@@ -646,6 +768,36 @@ final class ArticleImportLocalBaseline extends Command
             ->value('name');
 
         return $this->normalizeNullableString($name);
+    }
+
+    private function currentSeoTitle(Article $article): ?string
+    {
+        $article->loadMissing('publishedRevision', 'workingRevision', 'seoMeta');
+
+        if ($article->publishedRevision instanceof ArticleTranslationRevision) {
+            return $this->normalizeNullableString($article->publishedRevision->seo_title);
+        }
+
+        if ($article->workingRevision instanceof ArticleTranslationRevision) {
+            return $this->normalizeNullableString($article->workingRevision->seo_title);
+        }
+
+        return $this->normalizeNullableString($article->seoMeta?->seo_title);
+    }
+
+    private function currentSeoDescription(Article $article): ?string
+    {
+        $article->loadMissing('publishedRevision', 'workingRevision', 'seoMeta');
+
+        if ($article->publishedRevision instanceof ArticleTranslationRevision) {
+            return $this->normalizeNullableString($article->publishedRevision->seo_description);
+        }
+
+        if ($article->workingRevision instanceof ArticleTranslationRevision) {
+            return $this->normalizeNullableString($article->workingRevision->seo_description);
+        }
+
+        return $this->normalizeNullableString($article->seoMeta?->seo_description);
     }
 
     /**
@@ -840,5 +992,41 @@ final class ArticleImportLocalBaseline extends Command
         }
 
         return $value !== [] ? $value : null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return array<string, mixed>
+     */
+    private function normalizeEditorialMetadata(array $row, string $file, string $slug): array
+    {
+        $metadata = is_array($row['editorial_metadata'] ?? null) ? $row['editorial_metadata'] : [];
+
+        foreach (['cover_image_prompt', 'cover_image_style_tag', 'claim_boundary_notes'] as $key) {
+            $value = $this->normalizeNullableString($row[$key] ?? $metadata[$key] ?? null);
+            if ($value !== null) {
+                $metadata[$key] = $value;
+            }
+        }
+
+        foreach (['internal_links', 'cta_slots', 'references'] as $key) {
+            $value = $row[$key] ?? $metadata[$key] ?? null;
+            if ($value === null) {
+                continue;
+            }
+
+            if (! is_array($value)) {
+                throw new RuntimeException(sprintf(
+                    'Baseline file %s has invalid %s for slug=%s.',
+                    $file,
+                    $key,
+                    $slug,
+                ));
+            }
+
+            $metadata[$key] = $value;
+        }
+
+        return $metadata;
     }
 }
