@@ -809,3 +809,47 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: AUDIT-9
+    repo: fap-api
+    depends_on:
+      - AUDIT-8
+    branch: fix/career-canonical-eligibility-command-audit9
+    title: "feat(api): add career canonical eligibility audit command"
+    name: "Career Canonical Eligibility Audit Command"
+    scope_type: canonical_eligibility_command_only
+    scope:
+      - Add read-only career:audit-canonical-eligibility artisan command.
+      - Wire AUDIT-1 report/row schema and AUDIT-2 plan resolver into command JSON output.
+      - Preserve unverified/context-missing layer states when artifacts are not supplied.
+      - Support slugs mode and structured missing public-resolution-plan errors.
+      - Document AUDIT-9 command contract and future AUDIT-10 consumption policy.
+      - Add focused command tests proving registration, read-only JSON, missing plan handling, live HTML context handling, and stable schema.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/app/Console/Commands/CareerAuditCanonicalEligibility.php
+      - backend/app/Console/Kernel.php
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/CareerAuditCanonicalEligibilityCommandTest.php
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Apply rollout.
+      - Backfill data.
+      - Mutate DB or production state.
+      - Fetch production live HTML.
+      - Generate expansion manifests.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerAuditCanonicalEligibilityCommand --no-ansi
+      - php artisan test --filter=CareerSurfaceReadinessAuditor --no-ansi
+      - php artisan test --filter=CareerSeoGeoReadinessAuditor --no-ansi
+      - php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "AUDIT-10 80-cohort readiness plan"
+    merge_policy:
+      github_checks_required: true
+      squash: true
