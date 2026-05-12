@@ -588,3 +588,48 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: AUDIT-4
+    repo: fap-api
+    depends_on:
+      - AUDIT-3
+    branch: fix/career-baseline-metadata-inventory-audit4
+    title: "feat(api): add career baseline metadata inventory audit"
+    name: "Career Baseline/display Metadata Inventory Audit"
+    scope_type: baseline_metadata_inventory_only
+    scope:
+      - Add a read-only baseline/display metadata inventory auditor for canonical slugs from AUDIT-2 plan rows.
+      - Load existing Career zh-CN/en baseline files and batch manifests from explicit or repo-default paths.
+      - Report zh baseline availability, English title source, required display field gaps, and structured baseline issues.
+      - Emit AUDIT-1-compatible baseline layer statuses.
+      - Document AUDIT-4 baseline inventory contract and future AUDIT-5+ consumption policy.
+      - Add focused tests proving stable JSON, read-only behavior, and no DB/runtime/index/surface audit logic.
+      - Update the Big Five runtime freeze classifier owner allowlist for AUDIT-4 baseline metadata audit files.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add a career canonical eligibility audit command.
+      - Add Occupation entity inventory.
+      - Add index-state inventory.
+      - Add runtime projection/truth audit.
+      - Add SEO/GEO or surface audit.
+      - Modify rollout state.
+      - Backfill display metadata.
+      - Mutate production data.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerBaselineMetadataInventoryAuditor --no-ansi
+      - php artisan test --filter=CareerOccupationEntityInventoryAuditor --no-ansi
+      - php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "AUDIT-5 Index-state authority audit"
+    merge_policy:
+      github_checks_required: true
+      squash: true
