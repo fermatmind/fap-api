@@ -976,6 +976,53 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: PR-RT-02
+    repo: fap-api
+    depends_on:
+      - PR-RT-01
+    branch: codex/pr-rt-02-article-import-svg-covers
+    title: "feat(api): import six SEO articles with SVG covers"
+    name: "6 SEO Articles Formal Import + SVG Cover Placeholders"
+    scope_type: article_authority_import_only
+    scope:
+      - Import the six user-provided Chinese editorial packages into existing Article baseline authority.
+      - Preserve title, slug, SEO title, meta description, excerpt, body markdown, references, claim boundaries, internal links, and CTA metadata.
+      - Generate six in-house 1200x675 SVG cover placeholders and wire cover image and alt metadata.
+      - Sync baseline import to Article published revision SEO fields and ArticleSeoMeta without frontend editorial fallback.
+      - Keep homepage recommended articles backed by landing surface baseline article references.
+    allowed_paths:
+      - backend/app/Console/Commands/ArticleImportLocalBaseline.php
+      - backend/public/static/articles/covers/*
+      - backend/tests/Feature/CareerCms/ArticleBaselineImportTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - content_baselines/articles/articles.zh-CN.json
+      - content_baselines/landing_surfaces/home.zh-CN.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rewrite editorial body, title, SEO title, meta description, excerpt, or references.
+      - Add article body content to fap-web or create a second Article authority.
+      - Touch MBTI, Big Five, RIASEC, IQ, Personality, Career expansion, payment, report, invite, order, scoring, or Ads runtime.
+      - Generate external AI images or publish non-Article-authoritative frontend content.
+    validation:
+      - php artisan test tests/Feature/CareerCms/ArticleBaselineImportTest.php --no-ansi
+      - php artisan test tests/Feature/V0_5/ArticlePublishingRuntimeTruthTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+      - backend/vendor/bin/pint --test backend/app/Console/Commands/ArticleImportLocalBaseline.php backend/tests/Feature/CareerCms/ArticleBaselineImportTest.php
+      - git diff --check
+    companion_validation:
+      repo: fap-web
+      branch: main
+      checks:
+        - pnpm test:contract -- article-publishing-runtime-truth.contract.test.ts
+        - pnpm typecheck
+        - pnpm build
+        - pnpm seo:generate-sitemap
+        - pnpm seo:check-sitemap
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: AUDIT-12
     repo: fap-api
     depends_on:

@@ -706,7 +706,7 @@
       "depends_on": [
         "backend-email-gated-report-read"
       ],
-      "commit_sha": null,
+      "commit_sha": "32f35c17a0f29758f0f700010ac1b0c7492ffb6c",
       "pr_url": null,
       "checks": {},
       "sidecar_issues": [],
@@ -1042,7 +1042,7 @@
       "branch": "fix/career-audit-schema-audit1-202605121641",
       "title": "feat(api): add career canonical eligibility audit schema",
       "name": "Career Canonical Eligibility Audit Schema + Sidecar Schema",
-      "status": "in_progress",
+      "status": "open",
       "scope_type": "schema_only",
       "allowed_paths": [
         "backend/app/Domain/Career/Audit/*",
@@ -1961,8 +1961,8 @@
     "PR-RT-01": {
       "repo": "fap-api",
       "branch": "codex/pr-rt-01-article-runtime-truth-gate",
-      "status": "open",
-      "commit_sha": "05036aa710658e589ff0be7d1c19ac6059884389",
+      "status": "merged",
+      "commit_sha": "ac56410db6f0bf464f2b236d3431f2ff4b962233",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1331",
       "checks": {
         "focused_article_runtime_truth": {
@@ -1999,9 +1999,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-12T15:19:09Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "companion_pr": {
         "repo": "fap-web",
         "branch": "codex/pr-rt-01-article-runtime-truth-gate"
@@ -2190,6 +2190,65 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-RT-02": {
+      "repo": "fap-api",
+      "branch": "codex/pr-rt-02-article-import-svg-covers",
+      "title": "feat(api): import six SEO articles with SVG covers",
+      "name": "6 SEO Articles Formal Import + SVG Cover Placeholders",
+      "status": "in_progress",
+      "depends_on": [
+        "PR-RT-01"
+      ],
+      "scope_type": "article_authority_import_only",
+      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1337",
+      "checks": {
+        "focused_article_baseline_import": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/CareerCms/ArticleBaselineImportTest.php --no-ansi",
+          "evidence": "2 tests passed, 193 assertions after rebasing onto origin/main."
+        },
+        "article_runtime_truth": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/V0_5/ArticlePublishingRuntimeTruthTest.php --no-ansi",
+          "evidence": "2 tests passed, 250 assertions after rebasing onto origin/main."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Command completed successfully; output captured in /tmp/pr-rt-02-route-list.txt."
+        },
+        "sqlite_migrate_pretend": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "evidence": "Command completed successfully; output captured in /tmp/pr-rt-02-migrate-pretend.txt."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test app/Console/Commands/ArticleImportLocalBaseline.php tests/Feature/CareerCms/ArticleBaselineImportTest.php",
+          "evidence": "Scoped Pint check passed for 2 files."
+        },
+        "bigfive_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_article_publishing_runtime_truth_gate_changes' --no-ansi",
+          "evidence": "2 tests passed, 4 assertions. Added test-only freeze classifier allowance for ArticleImportLocalBaseline.php as Article publishing runtime truth gate scope."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "fap_web_companion_validation": {
+          "status": "pass",
+          "command": "pnpm test:contract -- article-publishing-runtime-truth.contract.test.ts; pnpm typecheck; NEXT_PUBLIC_API_URL=https://api.fermatmind.com pnpm build; pnpm seo:check-sitemap",
+          "evidence": "fap-web contracts passed across 340 files / 1904 tests, typecheck passed, production build passed with API URL override because local .env.local points to offline 127.0.0.1:8000, and sitemap indexability check passed for 206 URLs."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
     }
   }
 }
