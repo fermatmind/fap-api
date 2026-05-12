@@ -1023,6 +1023,45 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: PR-RT-03
+    repo: fap-api
+    depends_on:
+      - PR-RT-02
+    branch: codex/pr-rt-03-article-graph-authority
+    title: "feat(api): close six-article graph recommendation authority"
+    name: "6 Articles Site Graph and Recommendation Authority Closure"
+    scope_type: article_graph_authority_closure_only
+    scope:
+      - Attach the six published Chinese editorial articles to existing backend Topic entry group authority.
+      - Attach the childhood career article to existing Career Guide related article authority.
+      - Preserve homepage recommended article authority from landing surface baseline.
+      - Add backend tests proving referenced articles are published, indexable, public, and not attached to sensitive tests.
+      - Defer Article detail related articles, Personality type related articles, and broader Test detail recommendation changes.
+    allowed_paths:
+      - content_baselines/topics/mbti.zh-CN.json
+      - content_baselines/topics/big-five.zh-CN.json
+      - content_baselines/career_guides/career_guides.zh-CN.json
+      - backend/tests/Feature/CareerCms/ArticleGraphAuthorityClosureTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rewrite article body, title, SEO title, meta description, excerpt, references, or cover metadata.
+      - Add article body content to fap-web or create a second related articles system.
+      - Implement Article detail or Personality related article rendering.
+      - Change test detail recommendation structure or attach articles to depression, depression/anxiety, or IQ tests.
+      - Touch MBTI, Big Five, RIASEC, IQ, Personality, Career expansion, payment, report, invite, order, scoring, Ads, or launch smoke runtime.
+    validation:
+      - php artisan test tests/Feature/CareerCms/ArticleGraphAuthorityClosureTest.php --no-ansi
+      - php artisan test tests/Feature/CareerCms/ArticleBaselineImportTest.php --no-ansi
+      - php artisan test tests/Feature/TopicsCms/TopicBaselineImportTest.php --no-ansi
+      - php artisan test tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php --filter=baseline_import_creates_home_tests_and_career_surfaces --no-ansi
+      - php artisan route:list --no-ansi
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+      - vendor/bin/pint --test tests/Feature/CareerCms/ArticleGraphAuthorityClosureTest.php
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: AUDIT-12
     repo: fap-api
     depends_on:
