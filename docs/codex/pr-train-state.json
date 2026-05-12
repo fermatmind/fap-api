@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-12T19:04:18+08:00",
+  "updated_at": "2026-05-12T19:19:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -1183,10 +1183,20 @@
           "status": "pass",
           "command": "git diff --check"
         },
+        "github_check_failure_classification": {
+          "status": "fixed",
+          "classification": "introduced_by_current_pr",
+          "evidence": "PR #1318 verify-mbti-legacy and verify-mbti-v2 failed in BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because AUDIT-3 app/Domain/Career/Audit entity inventory files were not yet in the test-only runtime freeze classifier allowlist."
+        },
+        "runtime_freeze_allowlist_fix": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "Added AUDIT-3 CareerOccupationEntityInventory* files to the test-only freeze classifier allowlist; the failing gate now passes locally."
+        },
         "mbti_ci": {
           "status": "pass",
           "command": "bash backend/scripts/ci_verify_mbti.sh",
-          "evidence": "Full MBTI CI chain exited 0; generated compiled artifacts were restored because they are outside AUDIT-3 scope."
+          "evidence": "Full MBTI CI chain exited 0 after the test-only allowlist fix; generated compiled artifacts were restored because they are outside AUDIT-3 scope."
         }
       },
       "sidecar_issues": [],
