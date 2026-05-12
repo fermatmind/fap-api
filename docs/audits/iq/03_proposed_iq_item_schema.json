@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fermatmind.com/schemas/iq/iq_item.v1.json",
+  "title": "FermatMind IQ Item Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scale_code",
+    "bank_id",
+    "item_id",
+    "status",
+    "dimension",
+    "dimension_name",
+    "item_family",
+    "difficulty_level",
+    "correct_answer",
+    "solution_rule",
+    "distractor_logic",
+    "assets",
+    "asset_hashes",
+    "generator_metadata"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "iq_item.v1"
+    },
+    "scale_code": {
+      "const": "IQ_INTELLIGENCE_QUOTIENT"
+    },
+    "bank_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "item_id": {
+      "type": "string",
+      "pattern": "^FM-IQ-(VSPR|VSI|NPR)-[A-Z0-9_]+-L[1-5]-[A-Z0-9]{4,6}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "legacy_demo",
+        "beta",
+        "production"
+      ]
+    },
+    "dimension": {
+      "type": "string",
+      "enum": [
+        "VSPR",
+        "VSI",
+        "NPR"
+      ]
+    },
+    "dimension_name": {
+      "type": "string",
+      "enum": [
+        "视觉空间模式推理",
+        "视觉空间洞察",
+        "数字规律推理"
+      ]
+    },
+    "item_family": {
+      "type": "string",
+      "enum": [
+        "matrix_reasoning",
+        "shape_sequence",
+        "shape_analogy",
+        "mental_rotation",
+        "shape_assembly",
+        "hidden_shape",
+        "odd_one_out",
+        "number_sequence",
+        "number_grid",
+        "symbol_operation",
+        "shape_counting",
+        "unknown"
+      ]
+    },
+    "difficulty_level": {
+      "type": "string",
+      "enum": [
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5"
+      ]
+    },
+    "correct_answer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "solution_rule": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "summary"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "distractor_logic": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "summary"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "assets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stem",
+        "options"
+      ],
+      "properties": {
+        "stem": {
+          "$ref": "#/$defs/assetRef"
+        },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/assetRef"
+          }
+        },
+        "explanation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assetRef"
+          }
+        }
+      }
+    },
+    "asset_hashes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/assetHash"
+      }
+    },
+    "generator_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generated_or_static",
+        "generator_version",
+        "theme_version",
+        "template_id",
+        "params_hash",
+        "seed"
+      ],
+      "properties": {
+        "generated_or_static": {
+          "type": "string",
+          "enum": [
+            "static_svg",
+            "dynamic_svg",
+            "raster_image",
+            "hardcoded_component",
+            "unknown"
+          ]
+        },
+        "generator_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "theme_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "template_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "params_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "seed": {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "view_box": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "style_tokens": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "assetRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "kind"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "svg",
+            "png",
+            "jpg",
+            "webp",
+            "pdf",
+            "json",
+            "inline"
+          ]
+        },
+        "label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "assetHash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "view_box": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

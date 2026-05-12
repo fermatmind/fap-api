@@ -1,0 +1,339 @@
+{
+  "schema_version": "iq_asset_inventory.v1",
+  "generated_at": "2026-05-12",
+  "regenerated_in_pr0_r": true,
+  "summary": {
+    "current_runtime_scale_code": "IQ_RAVEN",
+    "canonical_target_scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+    "public_slug": "iq-test-intelligence-quotient-assessment",
+    "public_take_path": "/zh/tests/iq-test-intelligence-quotient-assessment/take",
+    "legacy_pack_path": "/test/iq-raven-demo",
+    "question_count": 30,
+    "sections": {
+      "matrix": 9,
+      "odd": 10,
+      "series": 11
+    },
+    "stable_dimension_counts": {
+      "VSPR": 20,
+      "VSI": "not found",
+      "NPR": "not found"
+    },
+    "answer_key": "not found",
+    "frontend_iq_page_source": "not found"
+  },
+  "routes": [
+    {
+      "path": "/tests/iq-test-intelligence-quotient-assessment",
+      "category": "public_landing",
+      "source": [
+        "backend/app/Services/PublicSurface/PublicGatewaySurfaceService.php",
+        "backend/tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php"
+      ],
+      "page_file": "not found",
+      "entry_relation": "public home/tests gateway surface"
+    },
+    {
+      "path": "/zh/tests/iq-test-intelligence-quotient-assessment/take",
+      "category": "test_page_contract",
+      "source": [
+        "backend/tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php"
+      ],
+      "page_file": "not found",
+      "entry_relation": "canonical take path contract"
+    },
+    {
+      "path": "/test/iq-raven-demo",
+      "category": "legacy_pack_metadata",
+      "source": [
+        "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/meta/landing.json"
+      ],
+      "page_file": "not found",
+      "entry_relation": "legacy pack canonical_path"
+    },
+    {
+      "path": "/api/v0.3/scales/lookup?slug=iq-test-intelligence-quotient-assessment",
+      "category": "scale_lookup_api",
+      "source": [
+        "backend/routes/api.php",
+        "backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php"
+      ],
+      "page_file": "not applicable",
+      "entry_relation": "public slug -> registry resolution"
+    },
+    {
+      "path": "/api/v0.3/scales/{scale_code}/questions",
+      "category": "questions_api",
+      "source": [
+        "backend/routes/api.php",
+        "backend/app/Http/Controllers/API/V0_3/ScalesController.php"
+      ],
+      "page_file": "not applicable",
+      "entry_relation": "returns IQ question bank"
+    },
+    {
+      "path": "/api/v0.3/attempts/start",
+      "category": "attempt_start_api",
+      "source": [
+        "backend/routes/api.php",
+        "backend/app/Http/Controllers/API/V0_3/AttemptWriteController.php"
+      ],
+      "page_file": "not applicable",
+      "entry_relation": "attempt lifecycle start"
+    },
+    {
+      "path": "/api/v0.3/attempts/submit",
+      "category": "attempt_submit_api",
+      "source": [
+        "backend/routes/api.php",
+        "backend/app/Http/Controllers/API/V0_3/AttemptWriteController.php"
+      ],
+      "page_file": "not applicable",
+      "entry_relation": "attempt lifecycle submit"
+    },
+    {
+      "path": "/api/v0.3/attempts/{id}/result",
+      "category": "result_api",
+      "source": [
+        "backend/routes/api.php",
+        "backend/app/Http/Controllers/API/V0_3/AttemptReadController.php"
+      ],
+      "page_file": "not applicable",
+      "entry_relation": "result envelope read"
+    },
+    {
+      "path": "/api/v0.3/attempts/{id}/report",
+      "category": "report_api",
+      "source": [
+        "backend/routes/api.php",
+        "backend/app/Http/Controllers/API/V0_3/AttemptReadController.php"
+      ],
+      "page_file": "not applicable",
+      "entry_relation": "gated report read"
+    },
+    {
+      "path": "/api/v0.3/attempts/{id}/report-access",
+      "category": "report_access_api",
+      "source": [
+        "backend/routes/api.php",
+        "backend/app/Http/Controllers/API/V0_3/AttemptReadController.php"
+      ],
+      "page_file": "not applicable",
+      "entry_relation": "locked/unlocked access state"
+    },
+    {
+      "path": "/api/v0.3/orders/checkout",
+      "category": "commerce_api",
+      "source": [
+        "backend/routes/api.php",
+        "backend/app/Http/Controllers/API/V0_3/CommerceController.php"
+      ],
+      "page_file": "not applicable",
+      "entry_relation": "generic checkout"
+    },
+    {
+      "path": "/api/v0.3/orders/lookup",
+      "category": "commerce_api",
+      "source": [
+        "backend/routes/api.php",
+        "backend/app/Http/Controllers/API/V0_3/CommerceController.php"
+      ],
+      "page_file": "not applicable",
+      "entry_relation": "generic order lookup"
+    },
+    {
+      "path": "/api/v0.3/webhooks/payment/{provider}",
+      "category": "payment_webhook",
+      "source": [
+        "backend/routes/api.php",
+        "backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php"
+      ],
+      "page_file": "not applicable",
+      "entry_relation": "generic payment callback"
+    }
+  ],
+  "identity": {
+    "seeded_registry_code": "IQ_RAVEN",
+    "seeded_primary_slug": "iq-test-intelligence-quotient-assessment",
+    "seeded_default_dir_version": "IQ-RAVEN-CN-v0.3.0-DEMO",
+    "alias_map": {
+      "v1_to_v2": "IQ_RAVEN -> IQ_INTELLIGENCE_QUOTIENT",
+      "v2_to_v1": "IQ_INTELLIGENCE_QUOTIENT -> IQ_RAVEN"
+    },
+    "packs": [
+      {
+        "path": "content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO",
+        "pack_role": "current_runtime_source",
+        "questions_sha256": "3da004dddfa7df46673efb9e1496cf142f32fcf15b55b0b978dded02fbcef51c",
+        "scoring_spec_sha256": "39143e8f7c9d2c3a03c9a1252cfa9fa85e8f02db772d9ee7b53d24eec18fcf23"
+      },
+      {
+        "path": "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO",
+        "pack_role": "v2_mirror_pack",
+        "questions_sha256": "3da004dddfa7df46673efb9e1496cf142f32fcf15b55b0b978dded02fbcef51c",
+        "scoring_spec_sha256": "39143e8f7c9d2c3a03c9a1252cfa9fa85e8f02db772d9ee7b53d24eec18fcf23"
+      }
+    ]
+  },
+  "components": [
+    {
+      "path": "backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php",
+      "purpose": "scale slug lookup",
+      "renders_questions": false,
+      "renders_svg": false,
+      "renders_result": false,
+      "handles_payment_unlock": false
+    },
+    {
+      "path": "backend/app/Http/Controllers/API/V0_3/ScalesController.php",
+      "purpose": "serve questions payload",
+      "renders_questions": false,
+      "renders_svg": true,
+      "renders_result": false,
+      "handles_payment_unlock": false
+    },
+    {
+      "path": "backend/app/Http/Controllers/API/V0_3/AttemptWriteController.php",
+      "purpose": "attempt start and submit",
+      "renders_questions": false,
+      "renders_svg": false,
+      "renders_result": false,
+      "handles_payment_unlock": false
+    },
+    {
+      "path": "backend/app/Http/Controllers/API/V0_3/AttemptReadController.php",
+      "purpose": "result/report/report-access reads",
+      "renders_questions": false,
+      "renders_svg": false,
+      "renders_result": true,
+      "handles_payment_unlock": false
+    },
+    {
+      "path": "backend/app/Services/Assessment/Drivers/IqTestDriver.php",
+      "purpose": "IQ answer normalization and quality flags",
+      "renders_questions": false,
+      "renders_svg": false,
+      "renders_result": false,
+      "handles_payment_unlock": false
+    },
+    {
+      "path": "backend/app/Services/Assessment/GenericReportBuilder.php",
+      "purpose": "generic fallback report builder",
+      "renders_questions": false,
+      "renders_svg": false,
+      "renders_result": true,
+      "handles_payment_unlock": false
+    },
+    {
+      "path": "backend/app/Services/Report/ReportGatekeeper.php",
+      "purpose": "generic report gate",
+      "renders_questions": false,
+      "renders_svg": false,
+      "renders_result": true,
+      "handles_payment_unlock": true
+    },
+    {
+      "path": "not found",
+      "purpose": "frontend IQ page component",
+      "renders_questions": "not found",
+      "renders_svg": "not found",
+      "renders_result": "not found",
+      "handles_payment_unlock": "not found"
+    }
+  ],
+  "assets": {
+    "svg_files": "not found",
+    "raster_images": "not found",
+    "pdf_templates": "not found",
+    "runtime_question_bank": [
+      "content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/questions.json",
+      "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/questions.json"
+    ],
+    "runtime_rules": [
+      "content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/scoring_spec.json",
+      "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/scoring_spec.json"
+    ],
+    "metadata_files": [
+      "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/manifest.json",
+      "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/meta/landing.json",
+      "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/version.json"
+    ]
+  },
+  "svg_generation_chain": {
+    "runtime_mode": "static_inline_svg",
+    "build_time_script": "backend/scripts/iq/build_iq30_questions_from_prototype.php",
+    "external_input_zip": "/Users/rainie/Desktop/iq_ui_prototype_30_svg_grid.zip",
+    "per_item_hash": false,
+    "generator_version": "not found",
+    "theme_version": "not found",
+    "params_hash": false,
+    "seed": false,
+    "view_box": true
+  },
+  "scoring_report": {
+    "driver_file": "backend/app/Services/Assessment/Drivers/IqTestDriver.php",
+    "driver_status": "unscored",
+    "scoring_mode": "pending_answer_key",
+    "answer_key": "not found",
+    "iq_specific_report_builder": "not found",
+    "fallback_report_builder": "backend/app/Services/Assessment/GenericReportBuilder.php",
+    "three_formal_dimensions": {
+      "visual_spatial_insight": "not found",
+      "visual_spatial_pattern_reasoning": "not found",
+      "numerical_pattern_reasoning": "not found"
+    }
+  },
+  "commerce_unlock": {
+    "price_tier": "FREE",
+    "report_benefit_code": "not found",
+    "report_unlock_sku": "not found",
+    "iq_specific_skus": "not found",
+    "generic_order_routes": [
+      "/api/v0.3/orders/checkout",
+      "/api/v0.3/orders",
+      "/api/v0.3/orders/{provider}",
+      "/api/v0.3/orders/{order_no}",
+      "/api/v0.3/orders/lookup"
+    ],
+    "payment_webhook_route": "/api/v0.3/webhooks/payment/{provider}"
+  },
+  "frontend": {
+    "iq_page_source": "not found",
+    "observed_files": [
+      "fap-web/app/robots.ts",
+      "fap-web/app/sitemap.ts"
+    ]
+  },
+  "risks": [
+    {
+      "severity": "high",
+      "code": "ANSWER_KEY_MISSING",
+      "detail": "All 30 IQ items are currently unscored."
+    },
+    {
+      "severity": "high",
+      "code": "IDENTITY_SPLIT",
+      "detail": "Scale registry still uses IQ_RAVEN while v2 identity and mirror pack use IQ_INTELLIGENCE_QUOTIENT."
+    },
+    {
+      "severity": "high",
+      "code": "LEGACY_CANONICAL_PATH_CONFLICT",
+      "detail": "Mirror pack metadata still emits /test/iq-raven-demo."
+    },
+    {
+      "severity": "high",
+      "code": "SVG_PROVENANCE_INCOMPLETE",
+      "detail": "Inline SVG payload lacks per-item hash and persisted generator metadata."
+    },
+    {
+      "severity": "high",
+      "code": "ODD_DIMENSION_UNRESOLVED",
+      "detail": "ODD_Q01-10 lack stable dimension binding and solution rules."
+    },
+    {
+      "severity": "medium",
+      "code": "FRONTEND_GAP",
+      "detail": "No IQ page source was found in repo-local fap-web/app."
+    }
+  ]
+}

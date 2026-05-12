@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-07T22:58:30+08:00",
+  "updated_at": "2026-05-12T14:04:31+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -946,6 +946,59 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "iq-identity-and-metadata-cleanup": {
+      "repo": "fap-api",
+      "branch": "codex/iq-identity-and-metadata-cleanup",
+      "title": "fix(iq): align canonical identity and public metadata",
+      "status": "planned"
+    },
+    "iq-item-schema-answer-key-scoring-spec": {
+      "repo": "fap-api",
+      "branch": "codex/iq-item-schema-answer-key-scoring-spec",
+      "title": "feat(iq): add formal item schema answer key and scoring contract",
+      "status": "planned",
+      "depends_on": [
+        "iq-identity-and-metadata-cleanup"
+      ]
+    },
+    "iq-report-builder-three-dimension-result-schema": {
+      "repo": "fap-api",
+      "branch": "codex/iq-report-builder-three-dimension-result-schema",
+      "title": "feat(iq): add IQ report builder and three-dimension result schema",
+      "status": "planned",
+      "depends_on": [
+        "iq-item-schema-answer-key-scoring-spec"
+      ]
+    },
+    "iq-commerce-unlock-199-500": {
+      "repo": "fap-api",
+      "branch": "codex/iq-commerce-unlock-199-500",
+      "title": "feat(iq): add adaptive and pro IQ report unlock offers",
+      "status": "planned",
+      "depends_on": [
+        "iq-report-builder-three-dimension-result-schema"
+      ]
+    },
+    "iq-svg-asset-freeze-hash-verification": {
+      "repo": "fap-api",
+      "branch": "codex/iq-svg-asset-freeze-hash-verification",
+      "title": "chore(iq): freeze legacy SVG assets and add provenance verification",
+      "status": "planned",
+      "depends_on": [
+        "iq-identity-and-metadata-cleanup",
+        "iq-item-schema-answer-key-scoring-spec"
+      ]
+    },
+    "iq-showcase12-beta50-item-bank-import": {
+      "repo": "fap-api",
+      "branch": "codex/iq-showcase12-beta50-item-bank-import",
+      "title": "feat(iq): import showcase-12 and beta-50 item banks",
+      "status": "planned",
+      "depends_on": [
+        "iq-svg-asset-freeze-hash-verification",
+        "iq-commerce-unlock-199-500"
+      ]
     }
   }
 }
