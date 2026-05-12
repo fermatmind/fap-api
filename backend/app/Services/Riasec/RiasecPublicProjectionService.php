@@ -76,6 +76,94 @@ final class RiasecPublicProjectionService
     }
 
     /**
+     * @return array<string,mixed>
+     */
+    public function buildV2FromResult(Result $result, string $locale = 'zh-CN'): array
+    {
+        $payload = is_array($result->result_json ?? null) ? $result->result_json : [];
+        $v1 = $this->buildFromResult($result, $locale);
+        $measurementContract = is_array($v1['measurement_contract_v1'] ?? null)
+            ? $v1['measurement_contract_v1']
+            : $this->measurementContract->forFormCode((string) data_get($v1, 'form.form_code', ''));
+        $comparePolicy = is_array($v1['compare_policy_v1'] ?? null)
+            ? $v1['compare_policy_v1']
+            : (is_array($measurementContract['compare_policy'] ?? null)
+                ? $measurementContract['compare_policy']
+                : $this->measurementContract->comparePolicyForFormCode((string) data_get($v1, 'form.form_code', '')));
+        $scoreSpaceVersion = (string) data_get($measurementContract, 'form.score_space_version', data_get($v1, 'form.score_space_version', ''));
+        $formCode = (string) data_get($measurementContract, 'form.form_code', data_get($v1, 'form.form_code', ''));
+
+        return [
+            'schema_version' => 'riasec.public_projection.v2',
+            'scale_code' => 'RIASEC',
+            'locale' => str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en',
+            'holland_code' => [
+                'code' => (string) ($v1['top_code'] ?? ''),
+                'primary_type' => (string) ($v1['primary_type'] ?? ''),
+                'secondary_type' => (string) ($v1['secondary_type'] ?? ''),
+                'tertiary_type' => (string) ($v1['tertiary_type'] ?? ''),
+            ],
+            'scores' => [
+                'score_kind' => 'dimension_scores_0_100',
+                'dimensions' => $this->dimensionScoreRows(is_array($v1['scores_0_100'] ?? null) ? $v1['scores_0_100'] : [], $locale),
+            ],
+            'form' => [
+                'form_code' => $formCode,
+                'question_count' => (int) data_get($measurementContract, 'form.question_count', 0),
+                'form_kind' => (string) data_get($measurementContract, 'form.form_kind', ''),
+                'score_space_version' => $scoreSpaceVersion,
+                'compare_compatibility_group' => (string) ($comparePolicy['compare_compatibility_group'] ?? ''),
+                'cross_form_comparable' => false,
+                'raw_score_delta_allowed' => false,
+            ],
+            'measurement_evidence' => [
+                'measurement_contract_version' => (string) ($measurementContract['schema_version'] ?? RiasecMeasurementContract::SCHEMA_VERSION),
+                'scoring_spec_version' => $this->firstString([
+                    $result->scoring_spec_version ?? null,
+                    data_get($payload, 'version_snapshot.scoring_spec_version'),
+                    data_get($payload, 'scoring_spec_version'),
+                ]),
+                'form_version' => $this->firstString([
+                    $result->dir_version ?? null,
+                    data_get($payload, 'version_snapshot.pack_version'),
+                ]),
+                'content_package_version' => $this->firstString([
+                    $result->content_package_version ?? null,
+                    data_get($payload, 'version_snapshot.pack_version'),
+                ]),
+                'score_space_version' => $scoreSpaceVersion,
+                'normalization_method' => (string) data_get($measurementContract, 'scoring.normalization_method', ''),
+                'quality_rule_version' => $this->firstString([
+                    data_get($payload, 'version_snapshot.quality_rule_version'),
+                    data_get($payload, 'quality_rule_version'),
+                ]),
+                'quality_rule_status' => (string) data_get($measurementContract, 'quality.quality_rule_status', ''),
+                'interpretation_rule_version' => null,
+                'validation_status' => 'runtime_contract_defined_validation_pending',
+                'snapshot_bound' => false,
+            ],
+            'quality' => [
+                'grade' => (string) ($v1['quality_grade'] ?? ''),
+                'flags' => is_array($v1['quality_flags'] ?? null) ? array_values($v1['quality_flags']) : [],
+                'low_quality_strength' => (string) data_get($measurementContract, 'quality.low_quality_strength', ''),
+            ],
+            'indices' => [
+                'clarity_index' => (float) ($v1['clarity_index'] ?? 0),
+                'breadth_index' => (float) ($v1['breadth_index'] ?? 0),
+            ],
+            'claim_boundary' => is_array($measurementContract['claim_boundary'] ?? null) ? $measurementContract['claim_boundary'] : [],
+            'compare_policy_v1' => $comparePolicy,
+            'content_boundary' => [
+                'occupation_examples_policy' => (string) data_get(
+                    $measurementContract,
+                    'claim_boundary.occupation_examples_policy',
+                    'content_example_not_registry_match_without_reviewed_registry_source'
+                ),
+            ],
+        ];
+    }
+
+    /**
      * @param  array<string,mixed>  $scores
      * @return array<string,float>
      */
@@ -118,5 +206,43 @@ final class RiasecPublicProjectionService
         }
 
         return $out;
+    }
+
+    /**
+     * @param  array<string,mixed>  $scores
+     * @return list<array{code:string,label:string,score:float}>
+     */
+    private function dimensionScoreRows(array $scores, string $locale): array
+    {
+        $labels = $this->dimensionLabels($locale);
+        $out = [];
+        foreach ($this->normalizeScores($scores) as $code => $score) {
+            $out[] = [
+                'code' => $code,
+                'label' => (string) ($labels[$code] ?? $code),
+                'score' => $score,
+            ];
+        }
+
+        return $out;
+    }
+
+    /**
+     * @param  list<mixed>  $candidates
+     */
+    private function firstString(array $candidates): ?string
+    {
+        foreach ($candidates as $candidate) {
+            if (! is_scalar($candidate)) {
+                continue;
+            }
+
+            $normalized = trim((string) $candidate);
+            if ($normalized !== '') {
+                return $normalized;
+            }
+        }
+
+        return null;
     }
 }

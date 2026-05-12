@@ -106,6 +106,15 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('riasec_form_v1.raw_score_delta_allowed', false);
         $readback->assertJsonPath('riasec_public_projection_v1.form.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $readback->assertJsonPath('riasec_public_projection_v1.measurement_contract_v1.claim_boundary.does_not_measure.0', 'ability');
+        $readback->assertJsonPath('riasec_public_projection_v2.schema_version', 'riasec.public_projection.v2');
+        $readback->assertJsonPath('riasec_public_projection_v2.form.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
+        $readback->assertJsonPath('riasec_public_projection_v2.form.raw_score_delta_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.measurement_contract_version', 'riasec.measurement_contract.v1');
+        $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.scoring_spec_version', 'riasec_standard_60_v1');
+        $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.normalization_method', 'raw_sum_per_dimension_min10_max50_to_0_100');
+        $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.quality_rule_status', 'minimal_answer_completion_only');
+        $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.claim_boundary.does_not_measure.3', 'career_success_probability');
 
         $report = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -119,6 +128,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
         $report->assertJsonPath('riasec_form_v1.form_code', 'riasec_60');
         $report->assertJsonPath('riasec_form_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
+        $report->assertJsonPath('report._meta.riasec_public_projection_v2.schema_version', 'riasec.public_projection.v2');
+        $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
 
         $reportAccess = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -201,6 +212,21 @@ final class RiasecAssessmentFlowTest extends TestCase
         $submit->assertJsonPath('result.env_R', 100);
         $submit->assertJsonPath('result.role_R', 100);
         $submit->assertJsonPath('result.quality_grade', 'A');
+
+        $stored = Result::query()->where('attempt_id', $attemptId)->first();
+        $this->assertNotNull($stored);
+        $this->assertSame('riasec_quality_v1', (string) data_get($stored->result_json, 'version_snapshot.quality_rule_version'));
+
+        $readback = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
+        $readback->assertStatus(200);
+        $readback->assertJsonPath('riasec_public_projection_v2.schema_version', 'riasec.public_projection.v2');
+        $readback->assertJsonPath('riasec_public_projection_v2.form.score_space_version', 'riasec_140_likert5_activity_context_space.v1');
+        $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.normalization_method', 'activity_environment_role_weighted_0_100');
+        $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.quality_rule_version', 'riasec_quality_v1');
+        $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.quality_rule_status', 'quality_flags_available');
     }
 
     public function test_riasec_history_compare_guard_blocks_60_and_140_raw_delta(): void

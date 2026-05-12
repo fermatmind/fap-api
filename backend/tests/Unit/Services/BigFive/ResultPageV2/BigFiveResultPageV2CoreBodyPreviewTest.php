@@ -475,6 +475,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_projection_v2_minimal_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
+            'backend/app/Services/Assessment/Drivers/RiasecDriver.php',
+            'backend/app/Services/Report/RiasecReportComposer.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -974,6 +986,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecProjectionV2MinimalFile($file)) {
+                continue;
+            }
+
             if ($this->isIqReportFoundationFile($file)) {
                 continue;
             }
@@ -1102,6 +1118,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Riasec/RiasecPublicFormSummaryBuilder.php',
             'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
             'backend/app/Services/V0_3/Me/MeAttemptsService.php',
+        ], true);
+    }
+
+    private function isRiasecProjectionV2MinimalFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
+            'backend/app/Services/Assessment/Drivers/RiasecDriver.php',
+            'backend/app/Services/Report/RiasecReportComposer.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
         ], true);
     }
 

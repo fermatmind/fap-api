@@ -37,6 +37,7 @@ final class RiasecDriver implements DriverInterface
         if ($scoringSpecVersion === '') {
             $scoringSpecVersion = (string) ($scorePayload['scoring_spec_version'] ?? 'riasec_standard_60_v1');
         }
+        $qualityRuleVersion = trim((string) ($ctx['quality_version'] ?? ($policy['quality_version'] ?? '')));
 
         $formCode = $this->measurementContract->canonicalFormCode(
             (string) ($ctx['form_code'] ?? ($policy['form_code'] ?? ($scorePayload['form_code'] ?? ''))),
@@ -56,6 +57,7 @@ final class RiasecDriver implements DriverInterface
         $scorePayload['compare_compatibility_group'] = (string) ($comparePolicy['compare_compatibility_group'] ?? '');
         $scorePayload['cross_form_comparable'] = false;
         $scorePayload['raw_score_delta_allowed'] = false;
+        $scorePayload['quality_rule_version'] = $qualityRuleVersion;
         $scorePayload['measurement_contract_v1'] = $measurementContract;
         $scorePayload['compare_policy_v1'] = $comparePolicy;
         $scorePayload['version_snapshot'] = [
@@ -63,6 +65,7 @@ final class RiasecDriver implements DriverInterface
             'pack_version' => $version,
             'engine_version' => (string) ($scorePayload['engine_version'] ?? ($policy['engine_version'] ?? 'riasec_v1.0.0')),
             'scoring_spec_version' => $scoringSpecVersion,
+            'quality_rule_version' => $qualityRuleVersion,
             'measurement_contract_version' => RiasecMeasurementContract::SCHEMA_VERSION,
             'score_space_version' => $scoreSpaceVersion,
             'content_manifest_hash' => $manifestHash,
