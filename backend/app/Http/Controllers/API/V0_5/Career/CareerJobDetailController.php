@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Career\CareerJobDetailResource;
 use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 final class CareerJobDetailController extends Controller
 {
@@ -18,9 +19,10 @@ final class CareerJobDetailController extends Controller
         private readonly CareerJobDetailBundleBuilder $bundleBuilder,
     ) {}
 
-    public function show(string $slug): JsonResponse|CareerJobDetailResource
+    public function show(Request $request, string $slug): JsonResponse|CareerJobDetailResource
     {
-        $bundle = $this->bundleBuilder->buildBySlug($slug);
+        $publicLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
+        $bundle = $this->bundleBuilder->buildBySlug($slug, $publicLocale);
 
         if ($bundle === null) {
             return $this->notFoundResponse('career job detail bundle unavailable.');

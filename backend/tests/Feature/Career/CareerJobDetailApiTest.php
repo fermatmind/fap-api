@@ -30,7 +30,7 @@ final class CareerJobDetailApiTest extends TestCase
 
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
-            new CareerRuntimePublishProjectionVisibilityFixture(),
+            new CareerRuntimePublishProjectionVisibilityFixture,
         );
     }
 
@@ -77,7 +77,7 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('bundle_kind', 'career_job_detail')
             ->assertJsonPath('identity.canonical_slug', 'backend-architect')
             ->assertJsonPath('trust_manifest.content_version', 'v4.1')
-            ->assertJsonPath('seo_contract.canonical_path', '/career/jobs/backend-architect')
+            ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/backend-architect')
             ->assertJsonPath('structured_data.occupation.@type', 'Occupation')
             ->assertJsonPath('structured_data.breadcrumb_list.@type', 'BreadcrumbList')
             ->assertJsonMissingPath('structured_data.occupation.description')
@@ -224,9 +224,61 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('content_sections.0.title', '01 你通常会在这些工作场景里接触这份职业')
             ->assertJsonPath('content_sections.0.body_md', '• 处理需要准确记录、核对或解释的财务与经营信息。')
             ->assertJsonPath('content_body_md', "# 会计师和审计师\n\n会计师和审计师不是单纯处理数字的岗位。")
-            ->assertJsonPath('seo_contract.canonical_path', '/career/jobs/accountants-and-auditors')
+            ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/accountants-and-auditors')
             ->assertJsonPath('claim_permissions.allow_strong_claim', true)
             ->assertJsonPath('provenance_meta.compile_refs.source_docx', '01_会计师和审计师_accountants-and-auditors.docx');
+    }
+
+    public function test_docx_baseline_canonical_uses_requested_public_locale_instead_of_job_locale(): void
+    {
+        $this->configurePublicResolutionPlan([
+            ['slug' => 'canonical-locale-regression', 'status' => 'already_imported_validated'],
+        ]);
+
+        $job = CareerJob::query()->create([
+            'org_id' => 0,
+            'job_code' => 'canonical-locale-regression',
+            'slug' => 'canonical-locale-regression',
+            'locale' => 'zh-CN',
+            'title' => '规范链接回归职业',
+            'subtitle' => 'Canonical Locale Regression',
+            'excerpt' => 'Verify public locale canonical path.',
+            'body_md' => "# 规范链接回归职业\n\n这是用于验证公开语言路径的职业内容。",
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'salary_json' => ['annual_median_usd' => 81350],
+            'outlook_json' => ['jobs_2024' => 1000],
+            'growth_path_json' => ['raw' => ['Fixture growth path.']],
+            'market_demand_json' => [
+                'ai_exposure_score_10' => 6,
+                'source_refs' => [
+                    [
+                        'label' => 'BLS Occupational Outlook Handbook',
+                        'url' => 'https://www.bls.gov/ooh/fixture.htm',
+                    ],
+                ],
+            ],
+        ]);
+        CareerJobSeoMeta::query()->create([
+            'job_id' => (int) $job->id,
+            'jsonld_overrides_json' => [
+                'source_docx' => 'canonical-locale-regression.docx',
+            ],
+        ]);
+
+        $this->getJson('/api/v0.5/career/jobs/canonical-locale-regression?locale=en')
+            ->assertOk()
+            ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/canonical-locale-regression')
+            ->assertJsonPath('seo_contract.canonical_target', '/en/career/jobs/canonical-locale-regression')
+            ->assertJsonPath('seo_contract.robots_policy', 'index,follow');
+
+        $this->getJson('/api/v0.5/career/jobs/canonical-locale-regression?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/canonical-locale-regression')
+            ->assertJsonPath('seo_contract.canonical_target', '/zh/career/jobs/canonical-locale-regression')
+            ->assertJsonPath('seo_contract.robots_policy', 'index,follow');
     }
 
     public function test_public_resolution_guard_blocks_governed_docx_fallback_rows(): void
@@ -283,7 +335,7 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('bundle_kind', 'career_job_detail')
             ->assertJsonPath('identity.canonical_slug', 'display-backed-public-canonical')
-            ->assertJsonPath('seo_contract.canonical_path', '/career/jobs/display-backed-public-canonical');
+            ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/display-backed-public-canonical');
     }
 
     public function test_zh_display_asset_backed_bundle_holds_english_surface_without_blocking_en(): void
