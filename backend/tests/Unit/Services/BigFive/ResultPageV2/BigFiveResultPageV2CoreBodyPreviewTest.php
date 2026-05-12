@@ -251,6 +251,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_canonical_eligibility_audit_schema_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRow.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityCheckProtocol.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityLayer.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityLayerStatus.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityReport.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityScope.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilitySeverity.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilitySidecar.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityStatus.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_commerce_payment_action_changes(): void
     {
         $changed = [
@@ -849,6 +866,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerCanonicalEligibilityAuditSchemaFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerRuntimeProjectionConsumerFile($file)) {
                 continue;
             }
@@ -1097,6 +1118,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthValidator.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionService.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
+        ], true);
+    }
+
+    private function isCareerCanonicalEligibilityAuditSchemaFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRow.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityCheckProtocol.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityLayer.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityLayerStatus.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityReport.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityScope.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilitySeverity.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilitySidecar.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityStatus.php',
         ], true);
     }
 

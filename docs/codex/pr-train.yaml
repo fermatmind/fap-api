@@ -483,10 +483,12 @@ prs:
       - Add sidecar validation for continuation and stop logic.
       - Document AUDIT-1 schema and PR train policy.
       - Add unit tests proving JSON stability and sidecar continuation logic.
+      - Update the Big Five runtime freeze classifier owner allowlist for AUDIT-1 schema-only Career audit files.
     allowed_paths:
       - backend/app/Domain/Career/Audit/*
       - backend/tests/Unit/Domain/Career/Audit/*
       - backend/docs/career/audits/*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
