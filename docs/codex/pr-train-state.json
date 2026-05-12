@@ -1205,6 +1205,115 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "AUDIT-4": {
+      "repo": "fap-api",
+      "branch": "fix/career-baseline-metadata-inventory-audit4",
+      "title": "feat(api): add career baseline metadata inventory audit",
+      "name": "Career Baseline/display Metadata Inventory Audit",
+      "status": "in_progress",
+      "depends_on": [
+        "AUDIT-3"
+      ],
+      "scope_type": "baseline_metadata_inventory_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "non_goals": [
+        "no audit command",
+        "no Occupation entity inventory",
+        "no index-state inventory",
+        "no runtime projection/truth audit",
+        "no SEO/GEO audit",
+        "no live HTML/surface audit",
+        "no rollout",
+        "no display metadata backfill",
+        "no manifest train generator",
+        "no production mutation",
+        "no deployment"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User requested continuing the Career 2786 audit PR train from AUDIT-4 through AUDIT-13 and authorized per-item PR train manifest/state updates."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "AUDIT-3 is present on main as PR #1318 merge fbc90e6d and origin/main contains it."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to backend/app/Domain/Career/Audit, backend/tests/Unit/Domain/Career/Audit, backend/docs/career/audits, the test-only BigFive freeze classifier allowlist, and docs/codex train files."
+        },
+        "baseline_metadata_inventory_tests": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerBaselineMetadataInventoryAuditor --no-ansi",
+          "evidence": "9 tests passed, 22 assertions."
+        },
+        "occupation_entity_inventory_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerOccupationEntityInventoryAuditor --no-ansi",
+          "evidence": "13 tests passed, 45 assertions."
+        },
+        "public_resolution_resolver_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi",
+          "evidence": "14 tests passed, 37 assertions."
+        },
+        "canonical_schema_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi",
+          "evidence": "14 tests passed, 28 assertions."
+        },
+        "runtime_freeze_allowlist_fix": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "Added AUDIT-4 CareerBaselineMetadataInventory* files to the test-only freeze classifier allowlist; the runtime path gate passes locally."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "3075 files checked."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "mbti_ci": {
+          "status": "external_flaky_or_infrastructure",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "After the AUDIT-4 freeze allowlist fix, the full local chain failed in unrelated BigFive norm/content tests with SQLite /tmp/fap-ci.sqlite database locked DeadlockException. Scoped AUDIT-4 validation and the runtime freeze classifier gate pass."
+        }
+      },
+      "sidecar_issues": [
+        {
+          "sidecar_id": "AUDIT-4-SIDECAR-LOCAL-MBTI-SQLITE-LOCK",
+          "title": "Local MBTI CI chain hit SQLite database lock outside AUDIT-4 scope",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [],
+          "evidence": [
+            "bash backend/scripts/ci_verify_mbti.sh failed after AUDIT-4 allowlist fix in unrelated BigFive norm/content tests with SQLSTATE[HY000]: General error: 5 database is locked against /tmp/fap-ci.sqlite.",
+            "Scoped AUDIT-4 tests, AUDIT-1/2/3 regressions, pint, git diff --check, and BigFive runtime freeze path gate passed."
+          ],
+          "severity": "low",
+          "next_goal": "Let GitHub required checks run in isolated CI; inspect logs if the same failure appears there.",
+          "may_continue_train": true
+        }
+      ],
+      "failure_reason": null,
+      "next_pr": "AUDIT-5 Index-state authority audit",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }
