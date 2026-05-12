@@ -321,3 +321,153 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: iq-identity-and-metadata-cleanup
+    repo: fap-api
+    branch: codex/iq-identity-and-metadata-cleanup
+    title: "fix(iq): align canonical identity and public metadata"
+    scope:
+      - Canonicalize the IQ production identity to IQ_INTELLIGENCE_QUOTIENT.
+      - Keep IQ_RAVEN only as a legacy alias for read compatibility.
+      - Align public slug, canonical path, scale registry metadata, and IQ pack identity references.
+      - Add focused identity and landing-surface regression coverage.
+    do_not:
+      - Change question content or answer content.
+      - Change scoring, payment, order, report-gate, driver, or router runtime behavior.
+      - Add or modify frontend pages.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - curl -s "http://127.0.0.1:18002/api/v0.3/scales/lookup?slug=iq-test-intelligence-quotient-assessment"
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: iq-item-schema-answer-key-scoring-spec
+    repo: fap-api
+    depends_on:
+      - iq-identity-and-metadata-cleanup
+    branch: codex/iq-item-schema-answer-key-scoring-spec
+    title: "feat(iq): add formal item schema answer key and scoring contract"
+    scope:
+      - Add the formal IQ item schema and validation contract.
+      - Bind answer keys by item_id, dimension, and correct_answer.
+      - Add a scored IQ scoring contract with answer_key_version, norm_table_version, and scoring_engine_version.
+      - Add focused fixtures and tests for questions and scoring bindings.
+    do_not:
+      - Change checkout provider logic or non-IQ commerce behavior.
+      - Change frontend pages.
+      - Redraw legacy demo SVG items as part of this PR.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - curl -s "http://127.0.0.1:18002/api/v0.3/scales/IQ_INTELLIGENCE_QUOTIENT/questions"
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: iq-report-builder-three-dimension-result-schema
+    repo: fap-api
+    depends_on:
+      - iq-item-schema-answer-key-scoring-spec
+    branch: codex/iq-report-builder-three-dimension-result-schema
+    title: "feat(iq): add IQ report builder and three-dimension result schema"
+    scope:
+      - Add IqReportBuilder and IQ-specific result and report payload contracts.
+      - Add three-dimension result fields for visual_spatial_insight, visual_spatial_pattern_reasoning, and numerical_pattern_reasoning.
+      - Define adaptive and pro unlock output payloads, including PDF and certificate contract payloads.
+      - Add focused result and report regression tests.
+    do_not:
+      - Change question art assets.
+      - Change payment callback provider integrations.
+      - Add or modify frontend pages.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - curl -s "http://127.0.0.1:18002/api/v0.3/attempts/<ATTEMPT_ID>/report-access"
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: iq-commerce-unlock-199-500
+    repo: fap-api
+    depends_on:
+      - iq-report-builder-three-dimension-result-schema
+    branch: codex/iq-commerce-unlock-199-500
+    title: "feat(iq): add adaptive and pro IQ report unlock offers"
+    scope:
+      - Define IQ_ADAPTIVE_199 and IQ_PRO_500 as the only IQ report unlock offers.
+      - Bind IQ benefit codes and attempt-scoped report unlock behavior.
+      - Map report-access states to locked, unlocked_adaptive, and unlocked_pro.
+      - Add focused commerce and entitlement regression tests for IQ unlock flows.
+    do_not:
+      - Add discounts, bundles, credits, or membership packages.
+      - Change non-IQ payment provider integrations.
+      - Add or modify frontend pages.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - curl -s "http://127.0.0.1:18002/api/v0.3/attempts/<ATTEMPT_ID>/report-access"
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: iq-svg-asset-freeze-hash-verification
+    repo: fap-api
+    depends_on:
+      - iq-identity-and-metadata-cleanup
+      - iq-item-schema-answer-key-scoring-spec
+    branch: codex/iq-svg-asset-freeze-hash-verification
+    title: "chore(iq): freeze legacy SVG assets and add provenance verification"
+    scope:
+      - Freeze the legacy_demo IQ SVG bank against silent redraws or option reorder.
+      - Add item-level asset hashes and provenance metadata requirements.
+      - Add verification tooling for asset existence, hash integrity, and generator metadata coverage.
+      - Add focused provenance and verification regression tests.
+    do_not:
+      - Change payment, order, or entitlement runtime logic.
+      - Modify unrelated visual assets.
+      - Add or modify frontend pages.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - curl -s "http://127.0.0.1:18002/api/v0.3/scales/IQ_INTELLIGENCE_QUOTIENT/questions"
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: iq-showcase12-beta50-item-bank-import
+    repo: fap-api
+    depends_on:
+      - iq-svg-asset-freeze-hash-verification
+      - iq-commerce-unlock-199-500
+    branch: codex/iq-showcase12-beta50-item-bank-import
+    title: "feat(iq): import showcase-12 and beta-50 item banks"
+    scope:
+      - Import showcase-12 and beta-50 IQ item banks under the formal item schema.
+      - Bind answer keys and scoring inputs for the imported banks.
+      - Ensure production IQ coverage spans VSPR, VSI, and NPR.
+      - Add focused import and read-contract regression tests.
+    do_not:
+      - Change MBTI or BIG5 runtime flows.
+      - Add or modify frontend pages while the frontend source remains unresolved.
+      - Add discounts, bundles, credits, or membership packages.
+    validation:
+      - php artisan route:list
+      - php artisan migrate
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force
+      - curl -s "http://127.0.0.1:18002/api/v0.3/scales/IQ_INTELLIGENCE_QUOTIENT/questions"
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
