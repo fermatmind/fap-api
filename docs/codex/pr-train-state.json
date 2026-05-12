@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-12T14:04:31+08:00",
+  "updated_at": "2026-05-12T14:33:39+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -975,10 +975,48 @@
       "repo": "fap-api",
       "branch": "codex/iq-commerce-unlock-199-500",
       "title": "feat(iq): add adaptive and pro IQ report unlock offers",
-      "status": "planned",
+      "status": "external_blocker_sidecar",
       "depends_on": [
         "iq-report-builder-three-dimension-result-schema"
-      ]
+      ],
+      "checks": {},
+      "sidecar_issues": [
+        {
+          "sidecar_id": "IQ-SIDECAR-COMMERCE-DEFERRED-001",
+          "title": "defer(iq): commerce unlock \u00a51.99 / \u00a55 implementation",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_area": "commerce_unlock",
+          "affected_files": [
+            "docs/codex/pr-train.yaml",
+            "docs/codex/pr-train-state.json",
+            "docs/codex/sidecar/iq-foundation-sidecar-issues.md"
+          ],
+          "affected_scale_codes": [
+            "IQ_INTELLIGENCE_QUOTIENT"
+          ],
+          "affected_routes": [
+            "api/v0.3/attempts/{id}/report-access",
+            "api/v0.3/orders/*",
+            "api/v0.3/webhooks/payment/*"
+          ],
+          "evidence": [
+            "User intentionally deferred the \u00a51.99 / \u00a55 commerce PR.",
+            "Paid unlock is not required for identity/scoring/report/SVG provenance foundation.",
+            "The train can continue without checkout/SKU/webhook changes."
+          ],
+          "severity": "medium",
+          "proposed_owner_pr": "iq-commerce-unlock-199-500",
+          "next_goal": "Implement deferred IQ commerce unlock after identity, scoring, report, provenance, and item bank import are stable.",
+          "may_continue_train": true,
+          "resume_condition": "Re-enable iq-commerce-unlock-199-500 when IQ scored runtime, report contract, SVG provenance, and item bank import are stable."
+        }
+      ],
+      "failure_reason": "intentionally deferred by goal; continue remaining IQ foundation PRs without commerce implementation",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     },
     "iq-svg-asset-freeze-hash-verification": {
       "repo": "fap-api",
@@ -996,8 +1034,7 @@
       "title": "feat(iq): import showcase-12 and beta-50 item banks",
       "status": "planned",
       "depends_on": [
-        "iq-svg-asset-freeze-hash-verification",
-        "iq-commerce-unlock-199-500"
+        "iq-svg-asset-freeze-hash-verification"
       ]
     }
   }

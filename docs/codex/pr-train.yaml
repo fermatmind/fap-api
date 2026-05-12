@@ -400,6 +400,8 @@ prs:
       - iq-report-builder-three-dimension-result-schema
     branch: codex/iq-commerce-unlock-199-500
     title: "feat(iq): add adaptive and pro IQ report unlock offers"
+    execution_policy: deferred_for_now
+    deferred_reason: "User deferred ¥1.99 / ¥5 IQ commerce unlock while foundation train proceeds through identity, scoring, report, SVG provenance, and item bank import."
     scope:
       - Define IQ_ADAPTIVE_199 and IQ_PRO_500 as the only IQ report unlock offers.
       - Bind IQ benefit codes and attempt-scoped report unlock behavior.
@@ -449,7 +451,6 @@ prs:
     repo: fap-api
     depends_on:
       - iq-svg-asset-freeze-hash-verification
-      - iq-commerce-unlock-199-500
     branch: codex/iq-showcase12-beta50-item-bank-import
     title: "feat(iq): import showcase-12 and beta-50 item banks"
     scope:
