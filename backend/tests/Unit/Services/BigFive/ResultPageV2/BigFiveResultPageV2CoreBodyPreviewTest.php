@@ -377,6 +377,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_batch_live_acceptance_v2_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Audit/CareerBatchLiveAcceptanceV2Auditor.php',
+            'backend/app/Domain/Career/Audit/CareerBatchLiveAcceptanceV2Issue.php',
+            'backend/app/Domain/Career/Audit/CareerBatchLiveAcceptanceV2Result.php',
+            'backend/app/Domain/Career/Audit/CareerBatchLiveAcceptanceV2Row.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_commerce_payment_action_changes(): void
     {
         $changed = [
@@ -1086,6 +1098,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerBatchLiveAcceptanceV2File($file)) {
+                continue;
+            }
+
             if ($this->isCareerRuntimeProjectionConsumerFile($file)) {
                 continue;
             }
@@ -1523,6 +1539,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerCanonicalExpansionManifestTrainGenerator.php',
             'backend/app/Domain/Career/Audit/CareerCanonicalExpansionManifestTrainIssue.php',
             'backend/app/Domain/Career/Audit/CareerCanonicalExpansionManifestTrainResult.php',
+        ], true);
+    }
+
+    private function isCareerBatchLiveAcceptanceV2File(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Audit/CareerBatchLiveAcceptanceV2Auditor.php',
+            'backend/app/Domain/Career/Audit/CareerBatchLiveAcceptanceV2Issue.php',
+            'backend/app/Domain/Career/Audit/CareerBatchLiveAcceptanceV2Result.php',
+            'backend/app/Domain/Career/Audit/CareerBatchLiveAcceptanceV2Row.php',
         ], true);
     }
 
