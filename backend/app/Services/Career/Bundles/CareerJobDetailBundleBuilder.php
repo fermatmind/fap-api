@@ -49,7 +49,7 @@ final class CareerJobDetailBundleBuilder
         private readonly CareerLocaleIntegrityGate $localeIntegrityGate,
     ) {}
 
-    public function buildBySlug(string $slug): ?CareerJobDetailBundle
+    public function buildBySlug(string $slug, ?string $publicLocale = null): ?CareerJobDetailBundle
     {
         $normalizedSlug = strtolower(trim($slug));
         if ($normalizedSlug === '') {
@@ -71,11 +71,11 @@ final class CareerJobDetailBundleBuilder
             ->first();
 
         if (! $occupation instanceof Occupation) {
-            return $this->buildFromPublishedDocxCareerJob($normalizedSlug);
+            return $this->buildFromPublishedDocxCareerJob($normalizedSlug, $publicLocale);
         }
 
         if ($occupation->crosswalk_mode === self::DIRECTORY_DRAFT_CROSSWALK_MODE) {
-            return $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug);
+            return $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug, $publicLocale);
         }
 
         $snapshot = RecommendationSnapshot::query()
@@ -101,12 +101,12 @@ final class CareerJobDetailBundleBuilder
             ->first();
 
         if (! $snapshot instanceof RecommendationSnapshot) {
-            $displayAssetBackedBundle = $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug);
+            $displayAssetBackedBundle = $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug, $publicLocale);
             if ($displayAssetBackedBundle instanceof CareerJobDetailBundle) {
                 return $displayAssetBackedBundle;
             }
 
-            return $this->buildFromPublishedDocxCareerJob($normalizedSlug);
+            return $this->buildFromPublishedDocxCareerJob($normalizedSlug, $publicLocale);
         }
 
         $payload = is_array($snapshot->snapshot_payload) ? $snapshot->snapshot_payload : [];
@@ -243,7 +243,7 @@ final class CareerJobDetailBundleBuilder
             warnings: $warnings,
             claimPermissions: $this->normalizeArray($payload['claim_permissions'] ?? []),
             integritySummary: $this->normalizeArray($payload['integrity_summary'] ?? []),
-            seoContract: $this->buildSeoContract($occupation, $snapshot),
+            seoContract: $this->buildSeoContract($occupation, $snapshot, $publicLocale),
             provenanceMeta: [
                 'content_version' => $trustManifest?->content_version,
                 'data_version' => $trustManifest?->data_version,
@@ -272,7 +272,7 @@ final class CareerJobDetailBundleBuilder
         );
     }
 
-    private function buildDisplayAssetBackedBundle(Occupation $occupation, string $requestedSlug): ?CareerJobDetailBundle
+    private function buildDisplayAssetBackedBundle(Occupation $occupation, string $requestedSlug, ?string $publicLocale = null): ?CareerJobDetailBundle
     {
         $subjectSlug = strtolower((string) $occupation->canonical_slug);
         if ($subjectSlug === '' || $subjectSlug !== strtolower($requestedSlug)) {
@@ -427,7 +427,7 @@ final class CareerJobDetailBundleBuilder
                 'confidence_cap' => 60,
                 'degradation_factor' => 1,
             ],
-            seoContract: $this->buildDisplayAssetBackedSeoContract($occupation),
+            seoContract: $this->buildDisplayAssetBackedSeoContract($occupation, $publicLocale),
             provenanceMeta: [
                 'content_version' => 'display_asset_backed_v4_2',
                 'data_version' => 'career_job_display_assets.v4.2',
@@ -471,7 +471,7 @@ final class CareerJobDetailBundleBuilder
         return $this->findPublishedDocxCareerJob($slug) instanceof CareerJob;
     }
 
-    private function buildFromPublishedDocxCareerJob(string $slug): ?CareerJobDetailBundle
+    private function buildFromPublishedDocxCareerJob(string $slug, ?string $publicLocale = null): ?CareerJobDetailBundle
     {
         $job = $this->findPublishedDocxCareerJob($slug);
 
@@ -490,7 +490,7 @@ final class CareerJobDetailBundleBuilder
             'amber_flags' => ['docx_baseline_authority_without_compiled_snapshot'],
             'blocked_claims' => [],
         ];
-        $canonicalPath = '/career/jobs/'.(string) $job->slug;
+        $canonicalPath = $this->canonicalPathForPublicLocale($publicLocale, (string) $job->slug);
         $indexEligible = (bool) $job->is_indexable;
         $publicIndexState = $indexEligible ? 'index' : 'noindex';
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
@@ -747,11 +747,15 @@ final class CareerJobDetailBundleBuilder
     /**
      * @return array<string, mixed>
      */
-    private function buildSeoContract(Occupation $occupation, RecommendationSnapshot $snapshot): array
+    private function buildSeoContract(Occupation $occupation, RecommendationSnapshot $snapshot, ?string $publicLocale = null): array
     {
         $indexState = $snapshot->indexState;
         $canonicalPath = is_string($indexState?->canonical_path) ? $indexState->canonical_path : '/career/jobs/'.$occupation->canonical_slug;
         $canonicalTarget = $indexState?->canonical_target;
+        if ($publicLocale !== null) {
+            $canonicalPath = $this->canonicalPathForPublicLocale($publicLocale, (string) $occupation->canonical_slug);
+            $canonicalTarget = $canonicalPath;
+        }
         $indexEligible = (bool) ($indexState?->index_eligible ?? false);
         $publicIndexState = IndexStateValue::publicFacing((string) ($indexState?->index_state ?? ''), $indexEligible);
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
@@ -782,9 +786,9 @@ final class CareerJobDetailBundleBuilder
     /**
      * @return array<string, mixed>
      */
-    private function buildDisplayAssetBackedSeoContract(Occupation $occupation): array
+    private function buildDisplayAssetBackedSeoContract(Occupation $occupation, ?string $publicLocale = null): array
     {
-        $canonicalPath = '/career/jobs/'.$occupation->canonical_slug;
+        $canonicalPath = $this->canonicalPathForPublicLocale($publicLocale, (string) $occupation->canonical_slug);
         $indexEligible = $this->runtimeProjectionAllowsIndexing((string) $occupation->canonical_slug);
         $indexState = $indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::TRUST_LIMITED;
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
@@ -988,5 +992,17 @@ final class CareerJobDetailBundleBuilder
     private function normalizeArray(mixed $value): array
     {
         return is_array($value) ? $value : [];
+    }
+
+    private function canonicalPathForPublicLocale(?string $publicLocale, string $slug): string
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        $prefix = match (strtolower(trim((string) $publicLocale))) {
+            'en', 'en-us', 'en_us' => '/en',
+            'zh', 'zh-cn', 'zh_cn' => '/zh',
+            default => '',
+        };
+
+        return $prefix.'/career/jobs/'.$normalizedSlug;
     }
 }
