@@ -309,6 +309,12 @@ class AttemptReadController extends Controller
                 (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
             )
             : [];
+        $riasecProjectionV2 = $scaleCode === 'RIASEC'
+            ? $this->riasecPublicProjectionService->buildV2FromResult(
+                $result,
+                (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
+            )
+            : [];
 
         $mbtiEventMeta = $scaleCode === 'MBTI'
             ? $this->resolveMbtiResultViewEventMeta($request, $result, $attempt, $attemptId)
@@ -396,6 +402,9 @@ class AttemptReadController extends Controller
         }
         if ($riasecProjection !== []) {
             $responsePayload['riasec_public_projection_v1'] = $riasecProjection;
+        }
+        if ($riasecProjectionV2 !== []) {
+            $responsePayload['riasec_public_projection_v2'] = $riasecProjectionV2;
         }
         if (is_array($riasecFormSummary)) {
             $responsePayload['riasec_form_v1'] = $riasecFormSummary;
@@ -607,7 +616,15 @@ class AttemptReadController extends Controller
                     (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
                 );
             }
+            $projectionV2 = data_get($responsePayload, 'report._meta.riasec_public_projection_v2');
+            if (! is_array($projectionV2)) {
+                $projectionV2 = $this->riasecPublicProjectionService->buildV2FromResult(
+                    $result,
+                    (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
+                );
+            }
             $responsePayload['riasec_public_projection_v1'] = $projection;
+            $responsePayload['riasec_public_projection_v2'] = $projectionV2;
         }
 
         $effectiveMbtiPersonalization = $scaleCode === 'MBTI'

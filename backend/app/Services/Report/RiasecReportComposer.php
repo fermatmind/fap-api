@@ -27,6 +27,7 @@ final class RiasecReportComposer
         }
 
         $projection = $this->projectionService->buildFromResult($result, $locale);
+        $projectionV2 = $this->projectionService->buildV2FromResult($result, $locale);
         $topCode = trim((string) ($projection['top_code'] ?? $result->type_code ?? ''));
         if ($topCode === '') {
             return [
@@ -62,6 +63,7 @@ final class RiasecReportComposer
                 'sections' => $this->buildSections($projection),
                 '_meta' => [
                     'riasec_public_projection_v1' => $projection,
+                    'riasec_public_projection_v2' => $projectionV2,
                 ],
                 'generated_at' => now()->toISOString(),
             ],
