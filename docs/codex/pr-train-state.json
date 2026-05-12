@@ -1777,6 +1777,99 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "AUDIT-10": {
+      "repo": "fap-api",
+      "branch": "fix/career-80-cohort-readiness-audit10",
+      "title": "feat(api): add career 80 cohort readiness plan",
+      "name": "Career 80-Cohort Readiness Plan",
+      "status": "in_progress",
+      "depends_on": [
+        "AUDIT-9"
+      ],
+      "scope_type": "80_cohort_readiness_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "non_goals": [
+        "no rollout",
+        "no apply",
+        "no backfill",
+        "no DB mutation",
+        "no production mutation",
+        "no manifest generation",
+        "no deployment"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User requested continuous autonomous execution of remaining Career 2786 canonical eligibility audit PR train items."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "AUDIT-9 merged as PR #1329 with merge commit 70ec4c20e5252a2871c29f3bf4676f516a1ebc4e and origin/main contains it."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to backend/app/Domain/Career/Audit, backend/tests/Unit/Domain/Career/Audit, backend/docs/career/audits, the scoped Big Five freeze classifier allowlist, and docs/codex train files."
+        },
+        "readiness_planner_tests": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerCanonical80CohortReadinessPlanner --no-ansi",
+          "evidence": "8 tests passed, 24 assertions."
+        },
+        "command_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerAuditCanonicalEligibilityCommand --no-ansi",
+          "evidence": "5 tests passed, 19 assertions."
+        },
+        "surface_readiness_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerSurfaceReadinessAuditor --no-ansi",
+          "evidence": "10 tests passed, 17 assertions."
+        },
+        "seo_geo_readiness_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerSeoGeoReadinessAuditor --no-ansi",
+          "evidence": "11 tests passed, 20 assertions."
+        },
+        "public_resolution_resolver_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi",
+          "evidence": "14 tests passed, 37 assertions."
+        },
+        "canonical_schema_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi",
+          "evidence": "14 tests passed, 28 assertions."
+        },
+        "runtime_freeze_gate": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "Added AUDIT-10 CareerCanonical80CohortReadiness* files to the test-only freeze classifier allowlist; runtime path gate passed with 1 test and 3 assertions."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "3108 files checked."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [],
+      "failure_reason": null,
+      "next_pr": "AUDIT-11 Manifest train generator",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }

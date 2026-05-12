@@ -353,6 +353,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_80_cohort_readiness_plan_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessIssue.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessPlanner.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessResult.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessRow.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_commerce_payment_action_changes(): void
     {
         $changed = [
@@ -1054,6 +1066,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareer80CohortReadinessPlanFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerRuntimeProjectionConsumerFile($file)) {
                 continue;
             }
@@ -1471,6 +1487,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerSurfaceReadinessIssue.php',
             'backend/app/Domain/Career/Audit/CareerSurfaceReadinessResult.php',
             'backend/app/Domain/Career/Audit/CareerSurfaceReadinessRow.php',
+        ], true);
+    }
+
+    private function isCareer80CohortReadinessPlanFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessIssue.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessPlanner.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessResult.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessRow.php',
         ], true);
     }
 
