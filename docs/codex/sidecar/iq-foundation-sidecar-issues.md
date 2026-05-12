@@ -49,3 +49,28 @@
 - PR2 formalizes a scored contract and explicit answer-key gate, but no validated `norm_table_version` exists yet.
 - Runtime now reports `unavailable_without_norm_table` instead of fabricating IQ estimates or percentiles.
 - Identity/scoring/report/SVG provenance work can continue without a production norm table.
+
+## IQ-SIDECAR-PROTOTYPE-ZIP-EXTERNAL-001
+
+| Field | Value |
+|---|---|
+| sidecar_id | `IQ-SIDECAR-PROTOTYPE-ZIP-EXTERNAL-001` |
+| title | `note(iq): prototype zip source remains external to git while legacy SVG hashes are frozen` |
+| owner_repo | `fap-api` |
+| scope_relation | `external_to_current_pr` |
+| introduced_by_current_pr | `false` |
+| affected_area | `svg_provenance_source_of_truth` |
+| affected_files | `backend/scripts/iq/build_iq30_questions_from_prototype.php`, `content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/svg_provenance_manifest.json`, `content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/svg_provenance_manifest.json` |
+| affected_scale_codes | `IQ_INTELLIGENCE_QUOTIENT`, `IQ_RAVEN` |
+| affected_routes | `api/v0.3/scales/{scale_code}/questions` |
+| severity | `low` |
+| proposed_owner_pr | `iq-showcase12-beta50-item-bank-import` |
+| next_goal | `Move future production-ready IQ banks onto repo-tracked generator metadata and reproducible source assets.` |
+| may_continue_train | `true` |
+| resume_condition | `A future IQ bank ships with repo-tracked generator metadata or source assets, making prototype reproduction independent of the external zip archive.` |
+
+### Evidence
+
+- `backend/scripts/iq/build_iq30_questions_from_prototype.php` records an absolute prototype zip path outside the repository.
+- PR5 freezes deterministic hashes for the current legacy demo assets, so train scope can continue without vendoring the external archive.
+- Future production banks should not depend on an external untracked prototype zip.
