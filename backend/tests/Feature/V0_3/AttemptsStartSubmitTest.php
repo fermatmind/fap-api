@@ -107,7 +107,7 @@ class AttemptsStartSubmitTest extends TestCase
         $this->assertSame(1, Result::where('attempt_id', $attemptId)->count());
     }
 
-    public function test_iq_raven_submit_unscored_status(): void
+    public function test_iq_raven_submit_blocked_unscored_status(): void
     {
         $this->seedScales();
         $anonId = 'v03_iq_owner';
@@ -139,8 +139,9 @@ class AttemptsStartSubmitTest extends TestCase
         ]);
 
         $submit->assertStatus(200);
-        $this->assertSame('unscored', (string) $submit->json('result.breakdown_json.status'));
+        $this->assertSame('blocked_unscored', (string) $submit->json('result.breakdown_json.status'));
         $this->assertSame('ANSWER_KEY_MISSING', (string) $submit->json('result.breakdown_json.reason_code'));
+        $this->assertSame('scored', (string) $submit->json('result.breakdown_json.scoring_mode'));
         $this->assertSame(0, (int) $submit->json('result.raw_score'));
         $this->assertSame(0, (int) $submit->json('result.final_score'));
         $this->assertNull(data_get($submit->json(), 'result.breakdown_json.time_bonus'));
@@ -160,7 +161,7 @@ class AttemptsStartSubmitTest extends TestCase
             'attempt_id' => $attemptId,
             'idempotent' => true,
         ]);
-        $this->assertSame('unscored', (string) $dup->json('result.breakdown_json.status'));
+        $this->assertSame('blocked_unscored', (string) $dup->json('result.breakdown_json.status'));
     }
 
     public function test_mbti_report_locked_true_without_entitlement(): void

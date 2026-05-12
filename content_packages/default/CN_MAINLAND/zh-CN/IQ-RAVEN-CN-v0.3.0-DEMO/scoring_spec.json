@@ -1,11 +1,33 @@
 {
-    "version": "2026.02",
-    "scale_code": "IQ_RAVEN",
+    "version": "2026.03",
+    "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
     "driver_type": "iq_test",
-    "engine_version": "v1_iq30_unscored",
-    "scoring_mode": "pending_answer_key",
+    "engine_version": "v1_iq30_legacy_demo_contract",
+    "scoring_engine_version": "iq_scoring_v2",
+    "scoring_mode": "scored",
+    "answer_key_version": "legacy_demo_answer_key_not_available",
+    "norm_table_version": "unavailable",
+    "dimensions": [
+        {
+            "code": "VSPR",
+            "name": "视觉空间模式推理"
+        },
+        {
+            "code": "VSI",
+            "name": "视觉空间洞察"
+        },
+        {
+            "code": "NPR",
+            "name": "数字规律推理"
+        }
+    ],
     "item_bank": {
-        "bank_id": "IQ_RAVEN_30_SVG_CN_DEMO",
+        "bank_id": "IQ_INTELLIGENCE_QUOTIENT_LEGACY_DEMO_30",
+        "schema_version": "fm_iq_item_contract.v1",
+        "status": "legacy_demo",
+        "production_ready": false,
+        "canonical_scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+        "legacy_alias_scale_code": "IQ_RAVEN",
         "item_count": 30,
         "option_codes": [
             "A",
@@ -33,9 +55,17 @@
             }
         ]
     },
+    "runtime_policy": {
+        "legacy_demo": true,
+        "allow_scoring_without_complete_answer_key": false,
+        "blocked_reason_code": "ANSWER_KEY_MISSING",
+        "norms_policy": "unavailable_without_norm_table"
+    },
     "quality_rules": {
         "speeding_seconds_lt": 30,
-        "straightlining_run_len_gte": 8
+        "straightlining_run_len_gte": 8,
+        "abnormal_quality_policy": "review_with_caution"
     },
+    "items": [],
     "schema": "fap.report.rules.v1"
 }
