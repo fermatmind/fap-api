@@ -71,3 +71,20 @@ Prefer a repo-compatible default implementation and mark options as optional.
 ### Commit & Pull Request Guidelines
 - Follow `type(scope): summary` (e.g., `feat(tp5): ...`).
 - PR description must include summary + tests ran.
+
+### PR Train Manifest Discipline
+- If a requested PR train item is missing from `docs/codex/pr-train.yaml`, stop and report the gap unless the user explicitly authorizes updating the train manifest and state ledger.
+- If the user explicitly authorizes proceeding with a missing PR train item, Codex may add the missing `docs/codex/pr-train.yaml` and `docs/codex/pr-train-state.json` entries first, then continue under the declared scope.
+- Never invent a PR id or scope that is not either:
+  - already present in the manifest, or
+  - explicitly provided by the user.
+- For scan/planning-only tasks, Codex must anticipate PR-train execution. If it proposes a future PR that is not already in `docs/codex/pr-train.yaml`, the scan output must include:
+  - proposed PR train id
+  - proposed PR title
+  - proposed scope and files likely touched
+  - required local checks
+  - dependency assumptions
+  - exact manifest/state entries that would need user authorization before implementation
+  - a follow-up execution prompt that explicitly asks for manifest/state authorization
+- Scan/planning-only tasks must not modify `docs/codex/pr-train.yaml` or `docs/codex/pr-train-state.json` unless the user explicitly authorizes manifest/state updates in that same turn.
+- If the user provides a concrete `/goal` or equivalent execution request with an explicit PR id, title, and scope, Codex may treat those as user-provided manifest details. If the id is missing from the manifest, Codex may add the manifest/state entry before implementation only when the user also explicitly authorizes updating both files.
