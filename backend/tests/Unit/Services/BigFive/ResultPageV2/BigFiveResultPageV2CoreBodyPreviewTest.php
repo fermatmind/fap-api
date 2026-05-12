@@ -365,6 +365,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_expansion_manifest_train_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Audit/CareerCanonicalExpansionManifestTrainBatch.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalExpansionManifestTrainGenerator.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalExpansionManifestTrainIssue.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalExpansionManifestTrainResult.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_commerce_payment_action_changes(): void
     {
         $changed = [
@@ -1070,6 +1082,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerExpansionManifestTrainFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerRuntimeProjectionConsumerFile($file)) {
                 continue;
             }
@@ -1497,6 +1513,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessPlanner.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessResult.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessRow.php',
+        ], true);
+    }
+
+    private function isCareerExpansionManifestTrainFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Audit/CareerCanonicalExpansionManifestTrainBatch.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalExpansionManifestTrainGenerator.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalExpansionManifestTrainIssue.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalExpansionManifestTrainResult.php',
         ], true);
     }
 
