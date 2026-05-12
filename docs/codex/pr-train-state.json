@@ -1870,6 +1870,93 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "AUDIT-11": {
+      "repo": "fap-api",
+      "branch": "fix/career-expansion-manifest-train-audit11",
+      "title": "feat(api): add career canonical expansion manifest train generator",
+      "name": "Career Canonical Expansion Manifest Train Generator",
+      "status": "in_progress",
+      "depends_on": [
+        "AUDIT-10"
+      ],
+      "scope_type": "manifest_train_generator_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "non_goals": [
+        "no rollout",
+        "no apply",
+        "no backfill",
+        "no DB mutation",
+        "no production mutation",
+        "no deployment"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User requested continuous autonomous execution of remaining Career 2786 canonical eligibility audit PR train items."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "AUDIT-10 merged as PR #1332 with merge commit 3728381923bb6ad18e32060db85bcf6e2c6ca080 and origin/main contains it."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to backend/app/Domain/Career/Audit, backend/tests/Unit/Domain/Career/Audit, backend/docs/career/audits, the scoped Big Five freeze classifier allowlist, and docs/codex train files."
+        },
+        "manifest_train_tests": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerCanonicalExpansionManifestTrainGenerator --no-ansi",
+          "evidence": "8 tests passed, 24 assertions."
+        },
+        "readiness_planner_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerCanonical80CohortReadinessPlanner --no-ansi",
+          "evidence": "8 tests passed, 24 assertions."
+        },
+        "command_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerAuditCanonicalEligibilityCommand --no-ansi",
+          "evidence": "5 tests passed, 19 assertions."
+        },
+        "public_resolution_resolver_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi",
+          "evidence": "14 tests passed, 37 assertions."
+        },
+        "canonical_schema_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi",
+          "evidence": "14 tests passed, 28 assertions."
+        },
+        "runtime_freeze_gate": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "Added AUDIT-11 CareerCanonicalExpansionManifestTrain* files to the test-only freeze classifier allowlist; runtime path gate passed with 1 test and 3 assertions."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "3115 files checked."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [],
+      "failure_reason": null,
+      "next_pr": "AUDIT-12 Batch live acceptance v2",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }
