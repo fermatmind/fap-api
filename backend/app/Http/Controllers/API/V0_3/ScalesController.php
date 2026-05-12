@@ -16,6 +16,7 @@ use App\Services\Enneagram\EnneagramFormCatalog;
 use App\Services\Enneagram\EnneagramTechnicalNoteService;
 use App\Services\Mbti\MbtiFormCatalog;
 use App\Services\Riasec\RiasecFormCatalog;
+use App\Services\Riasec\RiasecTechnicalNoteService;
 use App\Services\Scale\PublicScaleInputGuard;
 use App\Services\Scale\ScaleCodeInputGuard;
 use App\Services\Scale\ScaleCodeResponseProjector;
@@ -97,8 +98,12 @@ class ScalesController extends Controller
     /**
      * GET /api/v0.3/scales/{scale_code}/technical-note
      */
-    public function technicalNote(Request $request, string $scale_code, EnneagramTechnicalNoteService $technicalNoteService): JsonResponse
-    {
+    public function technicalNote(
+        Request $request,
+        string $scale_code,
+        EnneagramTechnicalNoteService $enneagramTechnicalNoteService,
+        RiasecTechnicalNoteService $riasecTechnicalNoteService
+    ): JsonResponse {
         $orgId = $this->orgContext->orgId();
         $code = $this->publicInputGuard->normalizeScaleCode($scale_code);
         if ($code === null) {
@@ -120,20 +125,23 @@ class ScalesController extends Controller
         }
 
         $resolvedScaleCode = strtoupper(trim((string) ($row['code'] ?? $code)));
-        if ($resolvedScaleCode !== 'ENNEAGRAM') {
+        if (! in_array($resolvedScaleCode, ['ENNEAGRAM', 'RIASEC'], true)) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'SCALE_NOT_SUPPORTED',
-                'message' => 'technical note contract is only available for ENNEAGRAM.',
+                'message' => 'technical note contract is only available for ENNEAGRAM or RIASEC.',
             ], 422);
         }
 
         $scaleCodeMeta = $this->buildScaleCodeMeta($code, $row);
+        $contract = $resolvedScaleCode === 'RIASEC'
+            ? $riasecTechnicalNoteService->contract()
+            : $enneagramTechnicalNoteService->contract();
 
         return response()->json(array_merge([
             'ok' => true,
             'scale_code' => $scaleCodeMeta['scale_code'],
-        ], $scaleCodeMeta, $technicalNoteService->contract()));
+        ], $scaleCodeMeta, $contract));
     }
 
     /**

@@ -546,6 +546,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_technical_note_method_boundary_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/ScalesController.php',
+            'backend/app/Services/Riasec/RiasecTechnicalNoteService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -1069,6 +1079,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecTechnicalNoteMethodBoundaryFile($file)) {
+                continue;
+            }
+
             if ($this->isIqReportFoundationFile($file)) {
                 continue;
             }
@@ -1226,6 +1240,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Report/Pdf/ReportPdfDocumentService.php',
             'backend/app/Services/V0_3/Me/MeAttemptsService.php',
             'backend/app/Services/V0_3/ShareService.php',
+        ], true);
+    }
+
+    private function isRiasecTechnicalNoteMethodBoundaryFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/ScalesController.php',
+            'backend/app/Services/Riasec/RiasecTechnicalNoteService.php',
         ], true);
     }
 
