@@ -562,7 +562,7 @@ final class ScaleRegistrySeeder extends Seeder
             'default_pack_id' => $demoPackId,
             'default_region' => $defaultRegion,
             'default_locale' => $defaultLocale,
-            'default_dir_version' => 'IQ-RAVEN-CN-v0.3.0-DEMO',
+            'default_dir_version' => 'IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO',
             'capabilities_json' => [
                 'questions' => true,
                 'enabled_in_prod' => true,
@@ -599,8 +599,8 @@ final class ScaleRegistrySeeder extends Seeder
                 zhTitle: '智商（IQ）测试',
                 enDescription: 'Assess your matrix reasoning, pattern recognition, and abstract problem-solving ability.',
                 zhDescription: '评估矩阵推理、模式识别与抽象问题解决能力。',
-                questions: 60,
-                minutes: 12,
+                questions: 30,
+                minutes: 20,
                 cardVisual: 'spark_minimal',
                 cardTone: 'editorial',
                 cardSeed: 'iq',
@@ -619,7 +619,7 @@ final class ScaleRegistrySeeder extends Seeder
         ]);
 
         $writer->syncSlugsForScale($iqRaven);
-        $this->command?->info('ScaleRegistrySeeder: IQ_RAVEN scale upserted.');
+        $this->command?->info('ScaleRegistrySeeder: IQ public slug scale upserted with IQ_RAVEN legacy identity and IQ_INTELLIGENCE_QUOTIENT canonical pack metadata.');
 
         $eq60 = $writer->upsertScale([
             'code' => 'EQ_60',

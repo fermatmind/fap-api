@@ -9,8 +9,9 @@
     "last_updated": "2026-02-24",
     "index_policy": {
         "landing": {
-            "index": true,
-            "follow": true
+            "index": false,
+            "follow": false,
+            "nocache": true
         },
         "take": {
             "index": false,
@@ -71,5 +72,12 @@
                 ]
             }
         }
+    },
+    "lifecycle": {
+        "status": "legacy_demo",
+        "identity_role": "legacy_alias",
+        "canonical_scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+        "canonical_slug": "iq-test-intelligence-quotient-assessment",
+        "canonical_path": "/tests/iq-test-intelligence-quotient-assessment"
     }
 }
