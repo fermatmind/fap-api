@@ -6,26 +6,114 @@ use App\Services\Assessment\ScoreResult;
 
 class IqTestDriver implements DriverInterface
 {
+    private const DIMENSIONS = ['VSPR', 'VSI', 'NPR'];
+
+    /**
+     * @var array<string,string>
+     */
+    private const DIMENSION_NAMES = [
+        'VSPR' => '视觉空间模式推理',
+        'VSI' => '视觉空间洞察',
+        'NPR' => '数字规律推理',
+    ];
+
     public function score(array $answers, array $spec, array $ctx): ScoreResult
     {
         $durationMs = max(0, (int) ($ctx['duration_ms'] ?? 0));
         $normalizedItems = $this->normalizeAnswers($answers);
-        $quality = $this->buildQuality($durationMs, $normalizedItems, $spec);
+        $contract = $this->resolveContract($spec, $ctx);
+        $quality = $this->buildQuality(
+            $durationMs,
+            $normalizedItems,
+            $contract['quality_rules'],
+            $contract['expected_item_count']
+        );
 
-        $breakdown = [
-            'status' => 'unscored',
-            'reason_code' => 'ANSWER_KEY_MISSING',
-            'scoring_mode' => (string) ($spec['scoring_mode'] ?? 'pending_answer_key'),
-            'duration_ms' => $durationMs,
+        if ($contract['status'] !== 'scored') {
+            return $this->blockedUnscoredResult(
+                $durationMs,
+                $normalizedItems,
+                $quality,
+                $contract
+            );
+        }
+
+        $scoredItems = $this->scoreItems($normalizedItems, $contract['items']);
+        $dimensionScores = $this->buildDimensionScores($contract['items'], $scoredItems);
+        $rawScore = array_reduce(
+            $scoredItems,
+            static fn (float $carry, array $item): float => $carry + (float) ($item['awarded_points'] ?? 0.0),
+            0.0
+        );
+        $correctCount = count(array_filter(
+            $scoredItems,
+            static fn (array $item): bool => (bool) ($item['is_correct'] ?? false)
+        ));
+        $stability = $this->buildResultStability($quality, $normalizedItems, $contract['expected_item_count']);
+        $normStatus = $this->resolveNormStatus($contract['norm_table_version']);
+        $scorePayload = [
+            'scale_code' => $contract['scale_code'],
+            'bank_id' => $contract['bank_id'],
+            'status' => 'scored',
+            'scoring_mode' => 'scored',
+            'answer_key_version' => $contract['answer_key_version'],
+            'norm_table_version' => $contract['norm_table_version'],
+            'scoring_engine_version' => $contract['scoring_engine_version'],
+            'raw_score' => $rawScore,
+            'final_score' => $rawScore,
             'answer_count' => count($normalizedItems),
+            'expected_item_count' => $contract['expected_item_count'],
+            'correct_count' => $correctCount,
+            'dimension_scores' => $dimensionScores,
             'quality' => $quality,
-            'items' => $normalizedItems,
+            'quality_rules' => $contract['quality_rules'],
+            'result_stability' => $stability,
+            'norms' => [
+                'status' => $normStatus,
+                'iq_estimate' => null,
+                'percentile' => null,
+                'confidence_interval' => null,
+            ],
+            'items' => $scoredItems,
+            'version_snapshot' => [
+                'pack_id' => (string) ($ctx['pack_id'] ?? ''),
+                'pack_version' => (string) ($ctx['content_package_version'] ?? ($ctx['dir_version'] ?? '')),
+                'engine_version' => (string) ($spec['engine_version'] ?? ''),
+                'scoring_spec_version' => (string) ($ctx['scoring_spec_version'] ?? ($spec['version'] ?? '')),
+                'content_manifest_hash' => (string) ($ctx['content_manifest_hash'] ?? ''),
+            ],
         ];
 
-        return new ScoreResult(0.0, 0.0, $breakdown, null, null, [
-            'status' => 'unscored',
-            'reason_code' => 'ANSWER_KEY_MISSING',
-        ]);
+        return new ScoreResult(
+            rawScore: $rawScore,
+            finalScore: $rawScore,
+            breakdownJson: [
+                'status' => 'scored',
+                'reason_code' => null,
+                'scoring_mode' => 'scored',
+                'duration_ms' => $durationMs,
+                'answer_count' => count($normalizedItems),
+                'bank_id' => $contract['bank_id'],
+                'quality' => $quality,
+                'dimension_scores' => $dimensionScores,
+                'result_stability' => $stability,
+                'score_result' => $scorePayload,
+            ],
+            typeCode: null,
+            axisScoresJson: [
+                'scores_json' => array_map(
+                    static fn (array $row): float => (float) ($row['raw_score'] ?? 0.0),
+                    $dimensionScores
+                ),
+                'scores_pct' => array_map(
+                    static fn (array $row): ?float => isset($row['percent_correct']) ? (float) $row['percent_correct'] : null,
+                    $dimensionScores
+                ),
+                'axis_states' => [],
+                'score_result' => $scorePayload,
+            ],
+            normedJson: $scorePayload,
+        );
     }
 
     /**
@@ -62,12 +150,135 @@ class IqTestDriver implements DriverInterface
     }
 
     /**
-     * @param  list<array{question_id:string,code:string}>  $items
-     * @return array{level:string,flags:list<string>}
+     * @return array{
+     *   status:string,
+     *   reason_code:?string,
+     *   scale_code:string,
+     *   bank_id:string,
+     *   answer_key_version:string,
+     *   norm_table_version:?string,
+     *   scoring_engine_version:string,
+     *   expected_item_count:int,
+     *   quality_rules:array<string,mixed>,
+     *   items:array<string,array{
+     *     item_id:string,
+     *     question_id:string,
+     *     dimension:string,
+     *     correct_answer:string,
+     *     raw_points:float
+     *   }>
+     * }
      */
-    private function buildQuality(int $durationMs, array $items, array $spec): array
+    private function resolveContract(array $spec, array $ctx): array
     {
         $qualityRules = is_array($spec['quality_rules'] ?? null) ? $spec['quality_rules'] : [];
+        $scaleCode = strtoupper(trim((string) ($spec['scale_code'] ?? ($ctx['scale_code'] ?? 'IQ_INTELLIGENCE_QUOTIENT'))));
+        if ($scaleCode === '') {
+            $scaleCode = 'IQ_INTELLIGENCE_QUOTIENT';
+        }
+
+        $contract = [
+            'status' => 'blocked_unscored',
+            'reason_code' => 'ANSWER_KEY_MISSING',
+            'scale_code' => $scaleCode,
+            'bank_id' => trim((string) data_get($spec, 'item_bank.bank_id', '')),
+            'answer_key_version' => trim((string) ($spec['answer_key_version'] ?? '')),
+            'norm_table_version' => $this->nullableTrimmedString($spec['norm_table_version'] ?? null),
+            'scoring_engine_version' => trim((string) ($spec['scoring_engine_version'] ?? ($spec['engine_version'] ?? ''))),
+            'expected_item_count' => (int) data_get($spec, 'item_bank.item_count', 0),
+            'quality_rules' => $qualityRules,
+            'items' => [],
+        ];
+
+        $scoringMode = strtolower(trim((string) ($spec['scoring_mode'] ?? 'pending_answer_key')));
+        if ($scoringMode !== 'scored') {
+            return $contract;
+        }
+
+        $rawItems = is_array($spec['items'] ?? null) ? $spec['items'] : [];
+        if ($rawItems === []) {
+            $contract['reason_code'] = 'ANSWER_KEY_MISSING';
+
+            return $contract;
+        }
+
+        $items = [];
+        foreach ($rawItems as $item) {
+            if (! is_array($item)) {
+                $contract['reason_code'] = 'ANSWER_KEY_INCOMPLETE';
+
+                return $contract;
+            }
+
+            $itemId = strtoupper(trim((string) ($item['item_id'] ?? '')));
+            $questionId = strtoupper(trim((string) ($item['question_id'] ?? $item['current_id'] ?? $itemId)));
+            $dimension = strtoupper(trim((string) ($item['dimension'] ?? '')));
+            $correctAnswer = strtoupper(trim((string) ($item['correct_answer'] ?? '')));
+            $itemFamily = trim((string) ($item['item_family'] ?? ''));
+            $difficultyLevel = trim((string) ($item['difficulty_level'] ?? ''));
+            $solutionRule = trim((string) ($item['solution_rule'] ?? ''));
+            $distractorLogic = trim((string) ($item['distractor_logic'] ?? ''));
+            $assets = $item['assets'] ?? null;
+            $assetHashes = $item['asset_hashes'] ?? null;
+            $generatorMetadata = $item['generator_metadata'] ?? null;
+
+            if (
+                $itemId === ''
+                || $questionId === ''
+                || ! in_array($dimension, self::DIMENSIONS, true)
+                || preg_match('/^[A-F]$/', $correctAnswer) !== 1
+                || $itemFamily === ''
+                || $difficultyLevel === ''
+                || $solutionRule === ''
+                || $distractorLogic === ''
+                || ! is_array($assets) || $assets === []
+                || ! is_array($assetHashes) || $assetHashes === []
+                || ! is_array($generatorMetadata) || $generatorMetadata === []
+            ) {
+                $contract['reason_code'] = 'ANSWER_KEY_INCOMPLETE';
+
+                return $contract;
+            }
+
+            $items[$questionId] = [
+                'item_id' => $itemId,
+                'question_id' => $questionId,
+                'dimension' => $dimension,
+                'correct_answer' => $correctAnswer,
+                'raw_points' => max(0.0, (float) ($item['raw_points'] ?? 1.0)),
+            ];
+        }
+
+        if ($items === []) {
+            $contract['reason_code'] = 'ANSWER_KEY_MISSING';
+
+            return $contract;
+        }
+
+        if ($contract['expected_item_count'] <= 0) {
+            $contract['expected_item_count'] = count($items);
+        }
+        if ($contract['answer_key_version'] === '') {
+            $contract['answer_key_version'] = 'unversioned';
+        }
+        if ($contract['scoring_engine_version'] === '') {
+            $contract['scoring_engine_version'] = 'iq_scoring_v2';
+        }
+
+        $contract['status'] = 'scored';
+        $contract['reason_code'] = null;
+        $contract['items'] = $items;
+
+        return $contract;
+    }
+
+    /**
+     * @param  list<array{question_id:string,code:string}>  $items
+     * @param  array<string,mixed>  $qualityRules
+     * @return array{level:string,flags:list<string>}
+     */
+    private function buildQuality(int $durationMs, array $items, array $qualityRules, int $expectedItemCount): array
+    {
         $flags = [];
 
         $speedingSecondsLt = (int) ($qualityRules['speeding_seconds_lt'] ?? 0);
@@ -84,8 +295,13 @@ class IqTestDriver implements DriverInterface
             $flags[] = 'NO_VALID_ANSWERS';
         }
 
+        if ($expectedItemCount > 0 && count($items) < $expectedItemCount) {
+            $flags[] = 'PARTIAL_COMPLETION';
+        }
+
         $level = match (true) {
             in_array('NO_VALID_ANSWERS', $flags, true) => 'D',
+            in_array('PARTIAL_COMPLETION', $flags, true) || count($flags) >= 2 => 'C',
             $flags === [] => 'A',
             default => 'B',
         };
@@ -94,6 +310,220 @@ class IqTestDriver implements DriverInterface
             'level' => $level,
             'flags' => array_values(array_unique($flags)),
         ];
+    }
+
+    /**
+     * @param  list<array{question_id:string,code:string}>  $items
+     * @param  array<string,array{item_id:string,question_id:string,dimension:string,correct_answer:string,raw_points:float}>  $answerKey
+     * @return list<array{
+     *   item_id:string,
+     *   question_id:string,
+     *   dimension:string,
+     *   selected_code:string,
+     *   correct_answer:string,
+     *   is_correct:bool,
+     *   raw_points:float,
+     *   awarded_points:float
+     * }>
+     */
+    private function scoreItems(array $items, array $answerKey): array
+    {
+        $scored = [];
+
+        foreach ($items as $item) {
+            $questionId = (string) ($item['question_id'] ?? '');
+            $selectedCode = (string) ($item['code'] ?? '');
+            $definition = $answerKey[$questionId] ?? null;
+            if (! is_array($definition)) {
+                continue;
+            }
+
+            $isCorrect = $selectedCode === (string) ($definition['correct_answer'] ?? '');
+            $rawPoints = (float) ($definition['raw_points'] ?? 0.0);
+
+            $scored[] = [
+                'item_id' => (string) ($definition['item_id'] ?? $questionId),
+                'question_id' => $questionId,
+                'dimension' => (string) ($definition['dimension'] ?? ''),
+                'selected_code' => $selectedCode,
+                'correct_answer' => (string) ($definition['correct_answer'] ?? ''),
+                'is_correct' => $isCorrect,
+                'raw_points' => $rawPoints,
+                'awarded_points' => $isCorrect ? $rawPoints : 0.0,
+            ];
+        }
+
+        return $scored;
+    }
+
+    /**
+     * @param  array<string,array{item_id:string,question_id:string,dimension:string,correct_answer:string,raw_points:float}>  $answerKey
+     * @param  list<array{
+     *   item_id:string,
+     *   question_id:string,
+     *   dimension:string,
+     *   selected_code:string,
+     *   correct_answer:string,
+     *   is_correct:bool,
+     *   raw_points:float,
+     *   awarded_points:float
+     * }>  $scoredItems
+     * @return array<string,array{dimension_name:string,item_count:int,answered_count:int,correct_count:int,raw_score:float,percent_correct:?float}>
+     */
+    private function buildDimensionScores(array $answerKey, array $scoredItems): array
+    {
+        $byDimension = [];
+        foreach (self::DIMENSIONS as $dimension) {
+            $byDimension[$dimension] = [
+                'dimension_name' => self::DIMENSION_NAMES[$dimension],
+                'item_count' => 0,
+                'answered_count' => 0,
+                'correct_count' => 0,
+                'raw_score' => 0.0,
+                'percent_correct' => null,
+            ];
+        }
+
+        foreach ($answerKey as $item) {
+            $dimension = (string) ($item['dimension'] ?? '');
+            if (! isset($byDimension[$dimension])) {
+                continue;
+            }
+
+            $byDimension[$dimension]['item_count']++;
+        }
+
+        foreach ($scoredItems as $item) {
+            $dimension = (string) ($item['dimension'] ?? '');
+            if (! isset($byDimension[$dimension])) {
+                continue;
+            }
+
+            $byDimension[$dimension]['answered_count']++;
+            $byDimension[$dimension]['raw_score'] += (float) ($item['awarded_points'] ?? 0.0);
+            if ((bool) ($item['is_correct'] ?? false)) {
+                $byDimension[$dimension]['correct_count']++;
+            }
+        }
+
+        foreach ($byDimension as $dimension => $row) {
+            if (($row['item_count'] ?? 0) > 0) {
+                $byDimension[$dimension]['percent_correct'] = round(
+                    (((int) $row['correct_count']) / ((int) $row['item_count'])) * 100,
+                    2
+                );
+            }
+        }
+
+        return $byDimension;
+    }
+
+    /**
+     * @param  list<array{question_id:string,code:string}>  $items
+     * @param  array{level:string,flags:list<string>}  $quality
+     * @param  array{
+     *   reason_code:?string,
+     *   status:string,
+     *   scale_code:string,
+     *   bank_id:string,
+     *   answer_key_version:string,
+     *   norm_table_version:?string,
+     *   scoring_engine_version:string,
+     *   expected_item_count:int,
+     *   quality_rules:array<string,mixed>,
+     *   items:array<string,array{item_id:string,question_id:string,dimension:string,correct_answer:string,raw_points:float}>
+     * }  $contract
+     */
+    private function blockedUnscoredResult(
+        int $durationMs,
+        array $items,
+        array $quality,
+        array $contract
+    ): ScoreResult {
+        $breakdown = [
+            'status' => 'blocked_unscored',
+            'reason_code' => $contract['reason_code'],
+            'scoring_mode' => 'scored',
+            'duration_ms' => $durationMs,
+            'answer_count' => count($items),
+            'expected_item_count' => $contract['expected_item_count'],
+            'bank_id' => $contract['bank_id'],
+            'answer_key_version' => $contract['answer_key_version'],
+            'norm_table_version' => $contract['norm_table_version'],
+            'scoring_engine_version' => $contract['scoring_engine_version'],
+            'quality' => $quality,
+            'items' => $items,
+        ];
+
+        return new ScoreResult(
+            0.0,
+            0.0,
+            $breakdown,
+            null,
+            null,
+            [
+                'scale_code' => $contract['scale_code'],
+                'status' => 'blocked_unscored',
+                'reason_code' => $contract['reason_code'],
+                'answer_key_version' => $contract['answer_key_version'],
+                'norm_table_version' => $contract['norm_table_version'],
+                'scoring_engine_version' => $contract['scoring_engine_version'],
+                'quality' => $quality,
+            ]
+        );
+    }
+
+    /**
+     * @param  array{level:string,flags:list<string>}  $quality
+     * @param  list<array{question_id:string,code:string}>  $items
+     * @return array{status:string,reason:string}
+     */
+    private function buildResultStability(array $quality, array $items, int $expectedItemCount): array
+    {
+        $flags = $quality['flags'] ?? [];
+        $answeredCount = count($items);
+
+        if (in_array('NO_VALID_ANSWERS', $flags, true) || ($expectedItemCount > 0 && $answeredCount === 0)) {
+            return [
+                'status' => 'unstable',
+                'reason' => 'no_valid_answers',
+            ];
+        }
+
+        if ($expectedItemCount > 0 && $answeredCount < $expectedItemCount) {
+            return [
+                'status' => 'review_with_caution',
+                'reason' => 'partial_completion',
+            ];
+        }
+
+        if ($flags !== []) {
+            return [
+                'status' => 'review_with_caution',
+                'reason' => 'quality_flags_present',
+            ];
+        }
+
+        return [
+            'status' => 'stable',
+            'reason' => 'quality_clear',
+        ];
+    }
+
+    private function resolveNormStatus(?string $normTableVersion): string
+    {
+        $normalized = strtolower(trim((string) $normTableVersion));
+
+        return $normalized === '' || in_array($normalized, ['unavailable', 'not_found', 'pending'], true)
+            ? 'unavailable_without_norm_table'
+            : 'unavailable_without_runtime_calibration';
+    }
+
+    private function nullableTrimmedString(mixed $value): ?string
+    {
+        $normalized = trim((string) $value);
+
+        return $normalized === '' ? null : $normalized;
     }
 
     /**
