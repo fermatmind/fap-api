@@ -43,7 +43,9 @@ cd /Users/rainie/Desktop/GitHub/fap-api && git diff --check
 ```
 
 ## Output contract
+- Always report changed files, acceptance commands run, PR URL if a PR was created, CI status, Deploy Application or deploy/runtime status when relevant, merge commit if merged, branch cleanup status when cleanup is requested, revalidation status for security-related work, stop reason when blocked, and confirmation that no unrelated files were touched.
 - Report runtime impact, migration result, route result, MBTI verification, Deploy Application status, rollback notes, and release blockers.
 
 ## Stop conditions
+- Stop if active Critical/High/Medium appears during Low/Informational work, required checks fail, Deploy Application or deploy/runtime status regresses where relevant, the worktree is dirty in a way that cannot be isolated, scope drift appears, product/runtime behavior is ambiguous, closure would lack source/test evidence, or production deploy/rollback is requested without explicit manual confirmation.
 - Stop on failed migration, failed route check, failed MBTI verification, dirty scope, missing Deploy Application status, or absent manual confirmation for live deployment.
