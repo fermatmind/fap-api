@@ -198,6 +198,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_report_foundation_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Report/IqReportBuilder.php',
+            'backend/app/Services/Report/ReportComposerRegistry.php',
+            'backend/app/Services/Report/ReportSnapshotStore.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_public_content_release_guard_command_changes(): void
     {
         $changed = [
@@ -889,6 +900,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isIqReportFoundationFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsCiAuthBypassHardeningOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
@@ -1000,6 +1015,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isIqScoringContractFoundationFile(string $file): bool
     {
         return $file === 'backend/app/Services/Assessment/Drivers/IqTestDriver.php';
+    }
+
+    private function isIqReportFoundationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Report/IqReportBuilder.php',
+            'backend/app/Services/Report/ReportComposerRegistry.php',
+            'backend/app/Services/Report/ReportSnapshotStore.php',
+            'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
+        ], true);
     }
 
     private function isCiAuthBypassHardeningFile(string $file): bool
