@@ -43,6 +43,10 @@ final class ReportPdfDocumentService
     public function metadata(Attempt $attempt, array $gate = [], ?Result $result = null): array
     {
         $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        if ($scaleCode === 'RIASEC') {
+            return $this->riasecMetadata($attempt, $gate);
+        }
+
         if ($scaleCode !== 'ENNEAGRAM') {
             return [
                 'pdf_surface_version' => 'report_pdf.surface.v1',
@@ -113,6 +117,58 @@ final class ReportPdfDocumentService
                 ?? data_get($snapshotBinding, 'compare_compatibility_group'),
             'cross_form_comparable' => data_get($projectionV2, 'methodology.cross_form_comparable')
                 ?? data_get($snapshotBinding, 'cross_form_comparable'),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $gate
+     * @return array<string,mixed>
+     */
+    private function riasecMetadata(Attempt $attempt, array $gate): array
+    {
+        $report = is_array($gate['report'] ?? null) ? $gate['report'] : [];
+        if ($report === []) {
+            $snapshot = ReportSnapshot::query()
+                ->where('org_id', (int) ($attempt->org_id ?? 0))
+                ->where('attempt_id', (string) $attempt->id)
+                ->where('status', 'ready')
+                ->first();
+            if ($snapshot instanceof ReportSnapshot) {
+                $report = is_array($snapshot->report_full_json) ? $snapshot->report_full_json : [];
+                if ($report === []) {
+                    $report = is_array($snapshot->report_json) ? $snapshot->report_json : [];
+                }
+            }
+        }
+
+        $projectionV2 = is_array(data_get($report, '_meta.riasec_public_projection_v2'))
+            ? data_get($report, '_meta.riasec_public_projection_v2')
+            : [];
+        $snapshotBinding = $this->extractSnapshotBinding($report);
+        $formCode = trim((string) (
+            data_get($projectionV2, 'form.form_code')
+            ?? data_get($snapshotBinding, 'form_code')
+            ?? $attempt->form_code
+        ));
+        $date = $attempt->submitted_at?->format('Y-m-d')
+            ?? $attempt->created_at?->format('Y-m-d')
+            ?? now()->format('Y-m-d');
+
+        return [
+            'pdf_surface_version' => 'riasec.pdf_surface.v1',
+            'scale_code' => 'RIASEC',
+            'form_code' => $formCode !== '' ? $formCode : null,
+            'form_label' => $this->riasecFormLabel($formCode),
+            'filename_hint' => $this->riasecFileNameHint($formCode, $date),
+            'report_schema_version' => data_get($report, 'schema_version'),
+            'projection_version' => data_get($projectionV2, 'schema_version'),
+            'report_engine_version' => data_get($snapshotBinding, 'report_engine_version'),
+            'interpretation_context_id' => null,
+            'content_release_hash' => null,
+            'content_snapshot_status' => null,
+            'snapshot_binding_v1' => $snapshotBinding,
+            'compare_compatibility_group' => data_get($projectionV2, 'form.compare_compatibility_group'),
+            'cross_form_comparable' => false,
         ];
     }
 
@@ -318,6 +374,25 @@ final class ReportPdfDocumentService
             'enneagram_forced_choice_144' => 'FC144 深度版',
             default => null,
         };
+    }
+
+    private function riasecFormLabel(string $formCode): ?string
+    {
+        return match (trim($formCode)) {
+            'riasec_60' => 'RIASEC 60Q',
+            'riasec_140' => 'RIASEC 140Q',
+            default => null,
+        };
+    }
+
+    private function riasecFileNameHint(string $formCode, string $date): string
+    {
+        $suffix = match (trim($formCode)) {
+            'riasec_140' => '140q',
+            default => '60q',
+        };
+
+        return 'riasec_'.$suffix.'_report_'.$date.'.pdf';
     }
 
     private function enneagramFileNameHint(string $formCode, string $date): string

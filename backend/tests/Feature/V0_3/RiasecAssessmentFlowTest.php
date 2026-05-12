@@ -244,6 +244,38 @@ final class RiasecAssessmentFlowTest extends TestCase
         $second->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
         $this->assertSame($first->json('report.generated_at'), $second->json('report.generated_at'));
         $this->assertSame(1, DB::table('report_snapshots')->where('attempt_id', $attemptId)->count());
+
+        $share = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/share");
+        $share->assertStatus(200);
+        $share->assertJsonPath('type_code', 'RIA');
+        $share->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
+        $share->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
+        $share->assertJsonPath('riasec_snapshot_binding_v1.snapshot_bound', true);
+
+        $history = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/me/attempts?scale=RIASEC');
+        $history->assertStatus(200);
+        $history->assertJsonPath('items.0.type_code', 'RIA');
+        $history->assertJsonPath('items.0.riasec_public_projection_v1.top_code', 'RIA');
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
+        $history->assertJsonPath('items.0.riasec_snapshot_binding_v1.snapshot_bound', true);
+        $history->assertJsonPath('history_compare.current_top_code', 'RIA');
+
+        $pdf = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->get("/api/v0.3/attempts/{$attemptId}/report.pdf?inline=1");
+        $pdf->assertStatus(200);
+        $this->assertSame('riasec.pdf_surface.v1', $pdf->headers->get('X-Pdf-Surface-Version'));
+        $this->assertSame('riasec.report.v1', $pdf->headers->get('X-Report-Schema-Version'));
+        $this->assertSame('riasec.public_projection.v2', $pdf->headers->get('X-Projection-Version'));
+        $this->assertSame('riasec_60', $pdf->headers->get('X-Report-Form-Code'));
+        $this->assertSame('false', $pdf->headers->get('X-Cross-Form-Comparable'));
     }
 
     public function test_riasec_enhanced_140_persists_quality_and_layer_scores(): void

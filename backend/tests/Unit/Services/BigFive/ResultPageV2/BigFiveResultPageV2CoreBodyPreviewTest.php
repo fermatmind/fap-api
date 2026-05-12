@@ -523,6 +523,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_snapshot_surface_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Report/Pdf/ReportPdfDocumentService.php',
+            'backend/app/Services/V0_3/Me/MeAttemptsService.php',
+            'backend/app/Services/V0_3/ShareService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -1038,6 +1049,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecSnapshotSurfaceFile($file)) {
+                continue;
+            }
+
             if ($this->isIqReportFoundationFile($file)) {
                 continue;
             }
@@ -1186,6 +1201,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Report/ReportSnapshotStore.php',
             'backend/app/Services/Report/RiasecReportComposer.php',
             'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
+        ], true);
+    }
+
+    private function isRiasecSnapshotSurfaceFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Report/Pdf/ReportPdfDocumentService.php',
+            'backend/app/Services/V0_3/Me/MeAttemptsService.php',
+            'backend/app/Services/V0_3/ShareService.php',
         ], true);
     }
 

@@ -15,6 +15,7 @@ use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Report\InviteUnlockSummaryBuilder;
 use App\Services\Report\ReportAccess;
+use App\Services\Report\ReportSnapshotStore;
 use App\Services\Report\Resolvers\OfferResolver;
 use App\Services\Riasec\RiasecCompareGuardService;
 use App\Services\Riasec\RiasecPublicFormSummaryBuilder;
@@ -79,6 +80,7 @@ class MeAttemptsService
         private readonly RiasecCompareGuardService $riasecCompareGuardService,
         private readonly RiasecPublicFormSummaryBuilder $riasecPublicFormSummaryBuilder,
         private readonly InviteUnlockSummaryBuilder $inviteUnlockSummaryBuilder,
+        private readonly ReportSnapshotStore $reportSnapshotStore,
     ) {}
 
     public function list(
@@ -205,6 +207,8 @@ class MeAttemptsService
             }
         }
 
+        $riasecSnapshotReportByAttemptId = $this->riasecSnapshotReportsByAttemptId($orgId, $attemptModels, $resultByAttemptId, $userId, $anonId);
+
         $items = [];
         foreach ($attemptModels as $attempt) {
             $attemptId = (string) ($attempt->id ?? '');
@@ -223,8 +227,29 @@ class MeAttemptsService
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'ENNEAGRAM') {
                 $presented['enneagram_form_v1'] = $this->enneagramPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'RIASEC') {
+                $riasecSnapshotReport = $riasecSnapshotReportByAttemptId[$attemptId] ?? [];
                 $presented['riasec_form_v1'] = $this->riasecPublicFormSummaryBuilder->build($attempt, $result);
                 $presented['compare_policy_v1'] = $this->riasecCompareGuardService->summarizeAttempt($attempt, $result);
+                $projection = is_array(data_get($riasecSnapshotReport, '_meta.riasec_public_projection_v1'))
+                    ? data_get($riasecSnapshotReport, '_meta.riasec_public_projection_v1')
+                    : [];
+                $projectionV2 = is_array(data_get($riasecSnapshotReport, '_meta.riasec_public_projection_v2'))
+                    ? data_get($riasecSnapshotReport, '_meta.riasec_public_projection_v2')
+                    : [];
+                if ($projection !== []) {
+                    $presented['riasec_public_projection_v1'] = $projection;
+                    $snapshotTopCode = trim((string) ($projection['top_code'] ?? ''));
+                    if ($snapshotTopCode !== '') {
+                        $presented['type_code'] = $snapshotTopCode;
+                    }
+                }
+                if ($projectionV2 !== []) {
+                    $presented['riasec_public_projection_v2'] = $projectionV2;
+                }
+                $snapshotBinding = data_get($riasecSnapshotReport, '_meta.snapshot_binding_v1');
+                if (is_array($snapshotBinding)) {
+                    $presented['riasec_snapshot_binding_v1'] = $snapshotBinding;
+                }
             }
             $items[] = $presented;
         }
@@ -238,7 +263,7 @@ class MeAttemptsService
         } elseif ($normalizedScaleCode === 'ENNEAGRAM') {
             $historyCompare = $this->buildEnneagramHistorySummary($attemptModels, $resultByAttemptId);
         } elseif ($normalizedScaleCode === 'RIASEC') {
-            $historyCompare = $this->buildRiasecHistorySummary($attemptModels, $resultByAttemptId);
+            $historyCompare = $this->buildRiasecHistorySummary($attemptModels, $resultByAttemptId, $riasecSnapshotReportByAttemptId);
         }
 
         return [
@@ -591,7 +616,7 @@ class MeAttemptsService
      * @param  array<string,Result>  $resultByAttemptId
      * @return array<string,mixed>|null
      */
-    private function buildRiasecHistorySummary(array $attemptModels, array $resultByAttemptId): ?array
+    private function buildRiasecHistorySummary(array $attemptModels, array $resultByAttemptId, array $snapshotReportByAttemptId = []): ?array
     {
         if ($attemptModels === []) {
             return null;
@@ -603,7 +628,8 @@ class MeAttemptsService
             return null;
         }
 
-        $latestScore = $this->extractRiasecScoreResult($resultByAttemptId[$latestId] ?? null);
+        $latestScore = $this->extractRiasecScoreResultFromSnapshot($snapshotReportByAttemptId[$latestId] ?? [])
+            ?: $this->extractRiasecScoreResult($resultByAttemptId[$latestId] ?? null);
         if ($latestScore === []) {
             return null;
         }
@@ -619,7 +645,8 @@ class MeAttemptsService
         $previous = $attemptModels[1] ?? null;
         if ($previous instanceof Attempt) {
             $previousId = (string) ($previous->id ?? '');
-            $previousScore = $this->extractRiasecScoreResult($resultByAttemptId[$previousId] ?? null);
+            $previousScore = $this->extractRiasecScoreResultFromSnapshot($snapshotReportByAttemptId[$previousId] ?? [])
+                ?: $this->extractRiasecScoreResult($resultByAttemptId[$previousId] ?? null);
             if ($previousId !== '' && $previousScore !== []) {
                 $payload['previous_attempt_id'] = $previousId;
                 $payload['previous_top_code'] = (string) ($previousScore['top_code'] ?? '');
@@ -639,6 +666,105 @@ class MeAttemptsService
         }
 
         return $payload;
+    }
+
+    /**
+     * @param  list<Attempt>  $attemptModels
+     * @param  array<string,Result>  $resultByAttemptId
+     * @return array<string,array<string,mixed>>
+     */
+    private function riasecSnapshotReportsByAttemptId(
+        int $orgId,
+        array $attemptModels,
+        array $resultByAttemptId,
+        ?string $userId,
+        ?string $anonId
+    ): array {
+        $riasecAttemptIds = [];
+        foreach ($attemptModels as $attempt) {
+            if (! $attempt instanceof Attempt) {
+                continue;
+            }
+            if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== ReportAccess::SCALE_RIASEC) {
+                continue;
+            }
+            $attemptId = (string) ($attempt->id ?? '');
+            if ($attemptId !== '' && isset($resultByAttemptId[$attemptId])) {
+                $riasecAttemptIds[] = $attemptId;
+            }
+        }
+
+        if ($riasecAttemptIds === []) {
+            return [];
+        }
+
+        $reports = $this->readReadySnapshotReports($orgId, $riasecAttemptIds);
+        foreach ($attemptModels as $attempt) {
+            $attemptId = (string) ($attempt->id ?? '');
+            if (! in_array($attemptId, $riasecAttemptIds, true) || isset($reports[$attemptId])) {
+                continue;
+            }
+
+            $this->reportSnapshotStore->createSnapshotForAttempt([
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'trigger_source' => 'history_surface_sync',
+                'order_no' => null,
+                'user_id' => $userId,
+                'anon_id' => $anonId,
+                'org_role' => 'public',
+            ]);
+        }
+
+        return $this->readReadySnapshotReports($orgId, $riasecAttemptIds);
+    }
+
+    /**
+     * @param  list<string>  $attemptIds
+     * @return array<string,array<string,mixed>>
+     */
+    private function readReadySnapshotReports(int $orgId, array $attemptIds): array
+    {
+        if ($attemptIds === []) {
+            return [];
+        }
+
+        $rows = ReportSnapshot::query()
+            ->where('org_id', $orgId)
+            ->whereIn('attempt_id', $attemptIds)
+            ->where('status', 'ready')
+            ->get();
+
+        $reports = [];
+        foreach ($rows as $snapshot) {
+            if (! $snapshot instanceof ReportSnapshot) {
+                continue;
+            }
+
+            $report = is_array($snapshot->report_full_json) ? $snapshot->report_full_json : [];
+            if ($report === []) {
+                $report = is_array($snapshot->report_json) ? $snapshot->report_json : [];
+            }
+            if ($report !== []) {
+                $reports[(string) $snapshot->attempt_id] = $report;
+            }
+        }
+
+        return $reports;
+    }
+
+    /**
+     * @param  array<string,mixed>  $report
+     * @return array<string,mixed>
+     */
+    private function extractRiasecScoreResultFromSnapshot(array $report): array
+    {
+        $projection = data_get($report, '_meta.riasec_public_projection_v1');
+        if (is_array($projection) && $projection !== []) {
+            return $projection;
+        }
+
+        return $report;
     }
 
     /**

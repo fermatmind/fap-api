@@ -22,6 +22,7 @@ use App\Services\PublicSurface\PublicSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportComposer;
+use App\Services\Report\ReportSnapshotStore;
 use App\Services\Riasec\RiasecPublicProjectionService;
 use App\Services\Scale\ScaleIdentityWriteProjector;
 use App\Services\Scale\ScaleRegistry;
@@ -35,6 +36,7 @@ class ShareService
     public function __construct(
         private readonly ScaleIdentityWriteProjector $identityProjector,
         private readonly ReportComposer $reportComposer,
+        private readonly ReportSnapshotStore $reportSnapshotStore,
         private readonly ScaleRegistry $scaleRegistry,
         private readonly PersonalityProfileService $personalityProfileService,
         private readonly MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
@@ -590,26 +592,16 @@ class ShareService
      */
     private function buildPublicSafeReportSnapshot(Attempt $attempt, Result $result): array
     {
-        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'ENNEAGRAM') {
-            $snapshot = ReportSnapshot::query()
-                ->where('org_id', (int) ($attempt->org_id ?? 0))
-                ->where('attempt_id', (string) $attempt->id)
-                ->where('status', 'ready')
-                ->first();
-
-            if ($snapshot instanceof ReportSnapshot) {
-                $report = is_array($snapshot->report_full_json) ? $snapshot->report_full_json : [];
-                if ($report === []) {
-                    $report = is_array($snapshot->report_json) ? $snapshot->report_json : [];
-                }
-
-                return $report;
-            }
-
-            return [];
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        if ($scaleCode === 'RIASEC') {
+            return $this->resolveRiasecSnapshotReport($attempt);
         }
 
-        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== 'MBTI') {
+        if ($scaleCode === 'ENNEAGRAM') {
+            return $this->readReadySnapshotReport($attempt);
+        }
+
+        if ($scaleCode !== 'MBTI') {
             return [];
         }
 
@@ -633,6 +625,50 @@ class ShareService
         }
 
         return $payload['report'];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function resolveRiasecSnapshotReport(Attempt $attempt): array
+    {
+        $report = $this->readReadySnapshotReport($attempt);
+        if ($report !== []) {
+            return $report;
+        }
+
+        $this->reportSnapshotStore->createSnapshotForAttempt([
+            'org_id' => (int) ($attempt->org_id ?? 0),
+            'attempt_id' => (string) $attempt->id,
+            'trigger_source' => 'share_surface_sync',
+            'order_no' => null,
+            'org_role' => 'system',
+        ]);
+
+        return $this->readReadySnapshotReport($attempt);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function readReadySnapshotReport(Attempt $attempt): array
+    {
+        $snapshot = ReportSnapshot::query()
+            ->where('org_id', (int) ($attempt->org_id ?? 0))
+            ->where('attempt_id', (string) $attempt->id)
+            ->where('status', 'ready')
+            ->first();
+
+        if (! $snapshot instanceof ReportSnapshot) {
+            return [];
+        }
+
+        $report = is_array($snapshot->report_full_json) ? $snapshot->report_full_json : [];
+        if ($report === []) {
+            $report = is_array($snapshot->report_json) ? $snapshot->report_json : [];
+        }
+
+        return $report;
     }
 
     private function resolvePublicProfile(
@@ -1089,9 +1125,16 @@ class ShareService
                 true
             )
             : [];
-        $riasecProjection = $normalizedScaleCode === 'RIASEC'
-            ? $this->riasecPublicProjectionService->buildFromResult($result, $normalizedLocale)
-            : [];
+        $riasecProjection = [];
+        $riasecProjectionV2 = [];
+        if ($normalizedScaleCode === 'RIASEC') {
+            $riasecProjection = is_array(data_get($publicSafeReport, '_meta.riasec_public_projection_v1'))
+                ? data_get($publicSafeReport, '_meta.riasec_public_projection_v1')
+                : $this->riasecPublicProjectionService->buildFromResult($result, $normalizedLocale);
+            $riasecProjectionV2 = is_array(data_get($publicSafeReport, '_meta.riasec_public_projection_v2'))
+                ? data_get($publicSafeReport, '_meta.riasec_public_projection_v2')
+                : [];
+        }
         $summary = $this->buildShareSummary($share, $attempt, $result, $publicSafeReport, $big5Projection, $riasecProjection);
         $resolvedShareId = trim((string) $shareId);
         $locale = (string) ($summary['locale'] ?? 'zh-CN');
@@ -1182,6 +1225,13 @@ class ShareService
             }
         } elseif ($scaleCode === 'RIASEC' && $riasecProjection !== []) {
             $payload['riasec_public_projection_v1'] = $riasecProjection;
+            if ($riasecProjectionV2 !== []) {
+                $payload['riasec_public_projection_v2'] = $riasecProjectionV2;
+            }
+            $snapshotBinding = data_get($publicSafeReport, '_meta.snapshot_binding_v1');
+            if (is_array($snapshotBinding)) {
+                $payload['riasec_snapshot_binding_v1'] = $snapshotBinding;
+            }
         }
 
         $payload['public_surface_v1'] = $this->buildPublicSurfaceContract(
