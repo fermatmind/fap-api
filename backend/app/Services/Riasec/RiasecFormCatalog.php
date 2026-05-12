@@ -16,6 +16,7 @@ final class RiasecFormCatalog
 
     public function __construct(
         private readonly RiasecPackLoader $packLoader,
+        private readonly RiasecMeasurementContract $measurementContract,
     ) {}
 
     /**
@@ -27,6 +28,11 @@ final class RiasecFormCatalog
      *   norm_version:string,
      *   scoring_spec_version:string,
      *   quality_version:string,
+     *   measurement_contract_version:string,
+     *   score_space_version:string,
+     *   compare_compatibility_group:string,
+     *   cross_form_comparable:bool,
+     *   raw_score_delta_allowed:bool,
      *   question_count:int,
      *   form_kind:string
      * }
@@ -76,6 +82,7 @@ final class RiasecFormCatalog
         }
 
         $policy = is_array($policyCompiled['policy'] ?? null) ? $policyCompiled['policy'] : [];
+        $comparePolicy = $this->measurementContract->comparePolicyForFormCode($canonical, $questionCount);
         $resolved = [
             'form_code' => $canonical,
             'pack_id' => RiasecPackLoader::PACK_ID,
@@ -84,6 +91,11 @@ final class RiasecFormCatalog
             'norm_version' => '',
             'scoring_spec_version' => trim((string) ($policy['scoring_spec_version'] ?? ($manifest['scoring_spec_version'] ?? ''))),
             'quality_version' => trim((string) ($policy['quality_version'] ?? ($manifest['quality_version'] ?? ''))),
+            'measurement_contract_version' => RiasecMeasurementContract::SCHEMA_VERSION,
+            'score_space_version' => (string) ($comparePolicy['score_space_version'] ?? ''),
+            'compare_compatibility_group' => (string) ($comparePolicy['compare_compatibility_group'] ?? ''),
+            'cross_form_comparable' => false,
+            'raw_score_delta_allowed' => false,
             'question_count' => $questionCount,
             'form_kind' => trim((string) ($formConfig['form_kind'] ?? ($manifest['form_kind'] ?? ''))),
         ];

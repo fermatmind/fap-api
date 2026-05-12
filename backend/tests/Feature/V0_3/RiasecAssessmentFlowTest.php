@@ -61,6 +61,9 @@ final class RiasecAssessmentFlowTest extends TestCase
         $start->assertJsonPath('dir_version', 'v1-standard-60');
         $start->assertJsonPath('question_count', 60);
         $start->assertJsonPath('scoring_spec_version', 'riasec_standard_60_v1');
+        $start->assertJsonPath('measurement_contract_version', 'riasec.measurement_contract.v1');
+        $start->assertJsonPath('score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
+        $start->assertJsonPath('raw_score_delta_allowed', false);
 
         $attemptId = (string) $start->json('attempt_id');
         $answers = $this->answers(60);
@@ -84,6 +87,10 @@ final class RiasecAssessmentFlowTest extends TestCase
         $this->assertSame('RIASEC', (string) $stored->scale_code);
         $this->assertSame('v1-standard-60', (string) $stored->dir_version);
         $this->assertSame('RIA', (string) data_get($stored->result_json, 'top_code'));
+        $this->assertSame('riasec_60', (string) data_get($stored->result_json, 'form_code'));
+        $this->assertSame('riasec_60_likert5_activity_sum_space.v1', (string) data_get($stored->result_json, 'score_space_version'));
+        $this->assertSame('riasec.measurement_contract.v1', (string) data_get($stored->result_json, 'measurement_contract_v1.schema_version'));
+        $this->assertFalse((bool) data_get($stored->result_json, 'raw_score_delta_allowed'));
 
         $readback = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -95,6 +102,10 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('result.top_code', 'RIA');
         $readback->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
         $readback->assertJsonPath('riasec_form_v1.form_code', 'riasec_60');
+        $readback->assertJsonPath('riasec_form_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
+        $readback->assertJsonPath('riasec_form_v1.raw_score_delta_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v1.form.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
+        $readback->assertJsonPath('riasec_public_projection_v1.measurement_contract_v1.claim_boundary.does_not_measure.0', 'ability');
 
         $report = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -107,6 +118,7 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('report.top_code', 'RIA');
         $report->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
         $report->assertJsonPath('riasec_form_v1.form_code', 'riasec_60');
+        $report->assertJsonPath('riasec_form_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
 
         $reportAccess = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -119,6 +131,7 @@ final class RiasecAssessmentFlowTest extends TestCase
         $reportAccess->assertJsonPath('payload.access_level', 'full');
         $reportAccess->assertJsonPath('payload.variant', 'full');
         $reportAccess->assertJsonPath('riasec_form_v1.form_code', 'riasec_60');
+        $reportAccess->assertJsonPath('riasec_form_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
 
         $share = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -147,6 +160,9 @@ final class RiasecAssessmentFlowTest extends TestCase
         $history->assertJsonPath('items.0.attempt_id', $attemptId);
         $history->assertJsonPath('items.0.riasec_form_v1.form_code', 'riasec_60');
         $history->assertJsonPath('items.0.riasec_form_v1.question_count', 60);
+        $history->assertJsonPath('items.0.compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
+        $history->assertJsonPath('items.0.compare_policy_v1.raw_score_delta_allowed', false);
+        $history->assertJsonPath('history_compare.current_compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
     }
 
     public function test_riasec_enhanced_140_persists_quality_and_layer_scores(): void
@@ -185,6 +201,69 @@ final class RiasecAssessmentFlowTest extends TestCase
         $submit->assertJsonPath('result.env_R', 100);
         $submit->assertJsonPath('result.role_R', 100);
         $submit->assertJsonPath('result.quality_grade', 'A');
+    }
+
+    public function test_riasec_history_compare_guard_blocks_60_and_140_raw_delta(): void
+    {
+        $this->seedScales();
+
+        $anonId = 'anon_riasec_compare_guard';
+        $token = $this->issueAnonToken($anonId);
+
+        $standardStart = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'RIASEC',
+            'anon_id' => $anonId,
+            'locale' => 'zh-CN',
+            'region' => 'CN_MAINLAND',
+            'form_code' => '60',
+        ]);
+        $standardStart->assertStatus(200);
+        $standardAttemptId = (string) $standardStart->json('attempt_id');
+        $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $standardAttemptId,
+            'answers' => $this->answers(60),
+            'duration_ms' => 180000,
+        ])->assertStatus(200);
+
+        $this->travel(1)->seconds();
+
+        $enhancedStart = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'RIASEC',
+            'anon_id' => $anonId,
+            'locale' => 'zh-CN',
+            'region' => 'CN_MAINLAND',
+            'form_code' => '140',
+        ]);
+        $enhancedStart->assertStatus(200);
+        $enhancedAttemptId = (string) $enhancedStart->json('attempt_id');
+        $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $enhancedAttemptId,
+            'answers' => $this->answers(140),
+            'duration_ms' => 360000,
+        ])->assertStatus(200);
+
+        $history = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/me/attempts?scale=RIASEC');
+        $history->assertStatus(200);
+        $history->assertJsonPath('history_compare.current_attempt_id', $enhancedAttemptId);
+        $history->assertJsonPath('history_compare.previous_attempt_id', $standardAttemptId);
+        $history->assertJsonPath('history_compare.compare_guard_v1.can_compare', false);
+        $history->assertJsonPath('history_compare.compare_guard_v1.reason', 'cross_form_score_space_mismatch');
+        $history->assertJsonPath('history_compare.compare_guard_v1.raw_score_delta_allowed', false);
+        $history->assertJsonPath('history_compare.current_compare_policy_v1.score_space_version', 'riasec_140_likert5_activity_context_space.v1');
+        $history->assertJsonPath('history_compare.previous_compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
+        $this->assertNull($history->json('history_compare.raw_scores_delta'));
+        $this->assertNull($history->json('history_compare.domains_delta'));
+
+        $this->travelBack();
     }
 
     private function seedScales(): void
