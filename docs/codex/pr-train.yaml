@@ -472,3 +472,38 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: AUDIT-1
+    repo: fap-api
+    branch: fix/career-audit-schema-audit1-202605121641
+    title: "feat(api): add career canonical eligibility audit schema"
+    name: "Career Canonical Eligibility Audit Schema + Sidecar Schema"
+    scope_type: schema_only
+    scope:
+      - Add Career canonical eligibility audit row, layer status, report, sidecar, status, severity, layer, scope, and check protocol schema contracts.
+      - Add sidecar validation for continuation and stop logic.
+      - Document AUDIT-1 schema and PR train policy.
+      - Add unit tests proving JSON stability and sidecar continuation logic.
+      - Update the Big Five runtime freeze classifier owner allowlist for AUDIT-1 schema-only Career audit files.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add a career canonical eligibility audit command.
+      - Add a 2786 public-resolution resolver.
+      - Add DB inventory.
+      - Add a manifest train generator.
+      - Mutate production data.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+      - bash backend/scripts/ci_verify_mbti.sh
+    next_pr: "AUDIT-2 2786 public-resolution source resolver"
+    merge_policy:
+      github_checks_required: true
+      squash: true
