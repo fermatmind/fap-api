@@ -16,6 +16,7 @@ The command is an integration shell for the canonical eligibility stack. It does
 - `--public-resolution-plan=`
 - `--entity-context=`
 - `--index-state-context=`
+- `--surface-context=`
 - `--projection=`
 - `--truth=`
 - `--ledger=`
@@ -28,7 +29,7 @@ The command is an integration shell for the canonical eligibility stack. It does
 
 `scope=slugs` can run from explicit slugs. `scope=all` and `scope=batch` require a public-resolution plan path and report a structured `public_resolution_plan_missing` reason when it is absent.
 
-`--entity-context` and `--index-state-context` are consumer-only JSON artifact inputs. They satisfy entity and index context without querying or exporting a DB context. The artifacts must be produced separately by an approved read-only context export workflow.
+`--entity-context`, `--index-state-context`, and `--surface-context` are consumer-only JSON artifact inputs. They satisfy entity, index, and surface context without querying/exporting production DB context or crawling live HTML. The artifacts must be produced separately by approved read-only workflows.
 
 ## Read-Only Contract
 
@@ -55,14 +56,15 @@ CMD-FIX-1 makes the command call the completed audit layer services instead of e
 - index-state authority uses `CareerIndexStateAuthorityAuditor`
 - runtime projection/truth uses `CareerRuntimeProjectionTruthEligibilityAuditor` when `--projection` and `--truth` are supplied
 - SEO/GEO readiness uses `CareerSeoGeoReadinessAuditor` from plan/backend artifact fields
-- surface readiness uses `CareerSurfaceReadinessAuditor` when `--include-surfaces` or `--include-live-html` is requested
+- surface readiness uses `CareerSurfaceReadinessAuditor` when `--surface-context`, `--include-surfaces`, or `--include-live-html` is requested
 
 When supplied, entity and index artifact rows bypass DB-backed entity/index auditors:
 
 - `--entity-context=/path/to/entity_context.json` supplies `career_entity_context.v1`
 - `--index-state-context=/path/to/index_state_context.json` supplies `career_index_state_context.v1`
+- `--surface-context=/path/to/surface_context.json` supplies `career_surface_context.v1`
 
-Missing or malformed artifact paths produce structured reasons such as `entity_context_file_missing`, `entity_context_json_invalid`, `index_context_file_missing`, and `index_context_json_invalid`; the command does not silently fall back to a DB query when an explicit artifact path is invalid.
+Missing or malformed artifact paths produce structured reasons such as `entity_context_file_missing`, `entity_context_json_invalid`, `index_context_file_missing`, `index_context_json_invalid`, `surface_context_file_missing`, and `surface_context_json_invalid`; the command does not silently fall back to another context source when an explicit artifact path is invalid.
 
 ## Context Handling
 
@@ -73,9 +75,11 @@ The command separates real blockers from missing verifier context. Missing requi
 - `runtime_projection_context_missing`
 - `runtime_truth_context_missing`
 - `surface_context_missing`
+- `surface_context_file_missing`
+- `surface_context_row_missing`
 - `surface_live_html_context_missing`
 
-Missing runtime projection/truth artifacts mark the runtime layer as `unverified`; they do not fabricate runtime pass/fail results. Optional live HTML validation requires `--include-live-html` and `--base-url`; if live verification context is absent, the surface layer is unverified and the report includes a sidecar. The command remains read-only and does not fetch live HTML by itself.
+Missing runtime projection/truth artifacts mark the runtime layer as `unverified`; they do not fabricate runtime pass/fail results. Missing surface artifacts or missing surface rows mark the surface layer as unverified instead of reporting one blanket `surface_context_missing` blocker when `--surface-context` is supplied. Real surface mismatches from artifact evidence, such as API canonical mismatch or noindex state, remain blocked. Optional live HTML validation requires `--include-live-html` and `--base-url`; if live verification context is absent, the surface layer is unverified and the report includes a sidecar. The command remains read-only and does not fetch live HTML by itself.
 
 ## Run Context Contract
 

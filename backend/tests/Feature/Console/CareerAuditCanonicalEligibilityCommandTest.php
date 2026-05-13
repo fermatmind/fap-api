@@ -277,6 +277,64 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertContains('index_context_slug_duplicate', data_get($payload, 'rows.0.index_status.reasons'));
     }
 
+    public function test_surface_context_artifact_marks_context_supplied(): void
+    {
+        $surfacePath = $this->writeSurfaceContext([
+            ['canonical_slug' => 'actuaries', 'locale' => 'en', 'api_canonical_path' => '/en/career/jobs/actuaries', 'api_indexable' => true],
+        ]);
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--surface-context' => $surfacePath,
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame('supplied', $payload['context_summary']['surface_context']);
+        $this->assertSame($surfacePath, $payload['run_context']['surface']['surface_context_path']);
+        $this->assertArrayNotHasKey('surface_context_missing', $payload['by_reason']);
+        $this->assertSame('pass', data_get($payload, 'rows.0.surface_status.status'));
+        $this->assertSame('surface_context_artifact', data_get($payload, 'rows.0.surface_status.source'));
+    }
+
+    public function test_missing_surface_context_file_reports_structured_artifact_issue(): void
+    {
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--surface-context' => sys_get_temp_dir().'/missing-surface-context-'.bin2hex(random_bytes(4)).'.json',
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertArrayHasKey('surface_context_file_missing', $payload['by_reason']);
+        $this->assertSame('missing', $payload['context_summary']['surface_context']);
+        $this->assertContains('surface_context_artifact_issue', array_column($payload['sidecars'], 'sidecar_id'));
+    }
+
+    public function test_surface_context_artifact_canonical_mismatch_remains_blocked(): void
+    {
+        $surfacePath = $this->writeSurfaceContext([
+            ['canonical_slug' => 'actuaries', 'locale' => 'en', 'api_canonical_path' => '/en/career/jobs/actors', 'api_indexable' => true],
+        ]);
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--surface-context' => $surfacePath,
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame('supplied', $payload['context_summary']['surface_context']);
+        $this->assertArrayHasKey('api_canonical_not_self', $payload['by_reason']);
+        $this->assertSame('blocked', data_get($payload, 'rows.0.surface_status.status'));
+    }
+
     public function test_command_writes_output_json_when_requested(): void
     {
         $outputPath = sys_get_temp_dir().'/career-audit-command-output-'.bin2hex(random_bytes(4)).'.json';
@@ -508,6 +566,18 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         return $this->writeJsonArtifact('index-context', [
             'schema_version' => 'career_index_state_context.v1',
             'source' => ['type' => 'read_only_db_export', 'environment' => 'local'],
+            'rows' => $rows,
+        ]);
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     */
+    private function writeSurfaceContext(array $rows): string
+    {
+        return $this->writeJsonArtifact('surface-context', [
+            'schema_version' => 'career_surface_context.v1',
+            'source' => ['type' => 'read_only_surface_export', 'environment' => 'local'],
             'rows' => $rows,
         ]);
     }

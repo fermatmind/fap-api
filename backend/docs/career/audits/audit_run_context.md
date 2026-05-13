@@ -43,7 +43,7 @@ Use `--context-output=/tmp/career_2786_audit_run_context_requirements.json` to w
 - `planner_only`: validates planner rows and static artifact-derived layers only.
 - `planner_plus_local_db`: adds local/read-only DB context for Occupation and index-state layers.
 - `planner_plus_runtime_artifacts`: adds `--projection`, `--truth`, and optionally `--ledger`.
-- `planner_plus_surface_base_url`: adds surface verification context; live HTML requires `--include-live-html` and `--base-url`.
+- `planner_plus_surface_base_url`: adds surface verification context from `--surface-context` or explicit surface mode; live HTML requires `--include-live-html` and `--base-url`.
 - `full_readonly_context`: planner, read-only DB context, runtime artifacts, and surface context are all supplied.
 
 ## Context Interpretation
@@ -54,7 +54,9 @@ Context-level reasons are aggregated:
 - `index_state_context_missing`: index-state authority could not be interpreted from the current DB context.
 - `runtime_projection_context_missing`: `--projection` artifact is absent.
 - `runtime_truth_context_missing`: `--truth` artifact is absent.
-- `surface_context_missing`: surface artifact mode was not requested.
+- `surface_context_missing`: surface artifact mode or `--surface-context` was not requested.
+- `surface_context_file_missing`: an explicit surface artifact path was invalid.
+- `surface_context_row_missing`: the surface artifact was supplied but did not contain an expected slug/locale row.
 - `surface_live_html_context_missing`: live HTML verification was requested without a base URL.
 
 These blockers prevent 80-readiness planning from being meaningful. They do not authorize DB mutation, rollout apply, publication, or deployment.
@@ -95,17 +97,17 @@ php -d memory_limit=512M artisan career:audit-canonical-eligibility \
   --public-resolution-plan=/tmp/career_2786_public_resolution_plan_from_d23b.json \
   --entity-context=/tmp/career_2786_entity_context.json \
   --index-state-context=/tmp/career_2786_index_state_context.json \
+  --surface-context=/tmp/career_2786_surface_context.json \
   --projection=/tmp/career_2786_runtime_projection.json \
   --truth=/tmp/career_2786_runtime_truth.json \
   --ledger=/tmp/career_2786_full_release_ledger.json \
   --locales=en,zh \
-  --include-surfaces \
   --json \
   --output=/tmp/career_2786_canonical_eligibility_audit_with_context.json \
   --context-output=/tmp/career_2786_audit_run_context_requirements.json
 ```
 
-`--entity-context` and `--index-state-context` consume approved read-only JSON artifacts. They do not export production context; that producer workflow remains approval-gated.
+`--entity-context`, `--index-state-context`, and `--surface-context` consume approved read-only JSON artifacts. They do not export production context or crawl live HTML; producer workflows remain approval-gated.
 
 ## Non-Goals
 

@@ -1369,6 +1369,50 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-SURFACE-CONTEXT-1
+    repo: fap-api
+    depends_on:
+      - CTX-BUNDLE-1B
+      - SCAN-3
+    branch: fix/career-surface-context-repair-1
+    title: "fix(api): add career surface context artifact support"
+    name: "Add read-only career surface context artifact support"
+    scope_type: audit_surface_context_only
+    scope:
+      - Add read-only surface context artifact DTOs and reader.
+      - Add --surface-context input to career:audit-canonical-eligibility.
+      - Distinguish missing surface artifact, unverified surface rows, and real surface mismatch evidence.
+      - Preserve no-live-crawl and no-production-mutation behavior.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerAuditCanonicalEligibility.php
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run production live crawl.
+      - Touch fap-web.
+      - Query production DB.
+      - Mutate DB or production state.
+      - Apply rollout.
+      - Backfill data.
+      - Run 80 readiness.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerSurfaceContextArtifact --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan test --filter=CareerSurfaceReadinessAuditor --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "REPAIR-SEO-GEO-1"
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: RIASEC-PERSONALIZATION-00
     repo: fap-api
     branch: codex/riasec-personalization-00-train-registration
