@@ -1192,3 +1192,40 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: RIASEC-AH-04
+    repo: fap-api
+    branch: codex/riasec-ah-04-activity-explorer-coverage
+    title: "feat(api): expand RIASEC Activity Explorer examples-only coverage"
+    name: "RIASEC Activity Explorer v0.1 Coverage Expansion"
+    scope_type: riasec_activity_explorer_examples_only
+    depends_on:
+      - RIASEC-TRAIN-07
+    scope:
+      - Expand RIASEC Activity Explorer v0.1 authored code coverage beyond IAS for selected Holland Codes.
+      - Keep all occupation examples as content_example_not_registry_match examples only.
+      - Preserve not_available_for_code_v0_1 for unauthored codes.
+      - Add contract tests blocking source_url, O*NET/SOC fabrication, ranking, fit-metric, and outcome-probability fields.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecActivityExplorerService.php
+      - backend/tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change RIASEC scoring math.
+      - Change RIASEC content pack item semantics.
+      - Add real career registry matching.
+      - Add O*NET or SOC identifiers.
+      - Add source_url values without reviewed source rows.
+      - Add unsupported occupation-claim wording, ranking, fit metrics, outcome-probability, or recommendation-style copy.
+      - Change 140Q scoring or claims.
+    validation:
+      - php artisan test tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php --no-ansi
+      - php artisan test tests/Feature/V0_3/RiasecAssessmentFlowTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php --no-ansi
+      - vendor/bin/pint --test app/Services/Riasec/RiasecActivityExplorerService.php tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php
+      - php artisan route:list --no-ansi
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - git diff --check
+    next_pr: "RIASEC-AH-05 end-to-end smoke acceptance"
+    merge_policy:
+      github_checks_required: true
+      squash: true

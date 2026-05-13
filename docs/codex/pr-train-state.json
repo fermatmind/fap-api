@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-13T12:00:00+08:00",
+  "updated_at": "2026-05-13T04:42:09.976Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -983,7 +983,7 @@
       "sidecar_issues": [
         {
           "sidecar_id": "IQ-SIDECAR-COMMERCE-DEFERRED-001",
-          "title": "defer(iq): commerce unlock \u00a51.99 / \u00a55 implementation",
+          "title": "defer(iq): commerce unlock ¥1.99 / ¥5 implementation",
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
@@ -1002,7 +1002,7 @@
             "api/v0.3/webhooks/payment/*"
           ],
           "evidence": [
-            "User intentionally deferred the \u00a51.99 / \u00a55 commerce PR.",
+            "User intentionally deferred the ¥1.99 / ¥5 commerce PR.",
             "Paid unlock is not required for identity/scoring/report/SVG provenance foundation.",
             "The train can continue without checkout/SKU/webhook changes."
           ],
@@ -2354,6 +2354,105 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": []
+    },
+    "RIASEC-AH-04": {
+      "repo": "fap-api",
+      "branch": "codex/riasec-ah-04-activity-explorer-coverage",
+      "title": "feat(api): expand RIASEC Activity Explorer examples-only coverage",
+      "name": "RIASEC Activity Explorer v0.1 Coverage Expansion",
+      "status": "in_progress",
+      "depends_on": [
+        "RIASEC-TRAIN-07"
+      ],
+      "scope_type": "riasec_activity_explorer_examples_only",
+      "allowed_paths": [
+        "backend/app/Services/Riasec/RiasecActivityExplorerService.php",
+        "backend/tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "non_goals": [
+        "no scoring math changes",
+        "no content pack item semantics changes",
+        "no real career registry matching",
+        "no O*NET or SOC identifiers",
+        "no invented source_url",
+        "no unsupported occupation-claim wording",
+        "no ranking, fit metrics, outcome-probability, or recommendation-style wording",
+        "no 140Q claim changes"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User authorized RIASEC-AH-04 execution and train manifest/state registration when needed."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "RIASEC-TRAIN-07 was previously merged in fap-api as PR #1330 per supplied train table; AH-04 only expands the existing v0.1 examples-only contract."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "AH-04 staged scope is limited to RiasecActivityExplorerService, its unit contract test, and docs/codex train metadata. Existing career audit dirty files are unrelated and not staged."
+        },
+        "activity_explorer_unit": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php --no-ansi",
+          "evidence": "6 tests passed, 392 assertions."
+        },
+        "riasec_feature_regression": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/V0_3/RiasecAssessmentFlowTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php --no-ansi",
+          "evidence": "6 tests passed, 209 assertions."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test app/Services/Riasec/RiasecActivityExplorerService.php tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php",
+          "evidence": "2 files passed."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "197 routes listed successfully."
+        },
+        "sqlite_migrate_pretend": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "evidence": "Migration pretend completed successfully."
+        },
+        "train_metadata_validation": {
+          "status": "pass",
+          "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\" && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "evidence": "YAML and JSON metadata parse successfully."
+        },
+        "forbidden_phrase_scope_scan": {
+          "status": "pass",
+          "command": "git diff -U0 -- <AH-04 scoped files> | rg forbidden-claim-pattern",
+          "evidence": "Only allowed hits are test assertions proving forbidden phrases are absent from runtime payloads."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [
+        {
+          "title": "Pre-existing local career audit dirty work remains isolated from AH-04",
+          "severity": "P3",
+          "introduced_by_current_pr": false,
+          "blocks_merge": false,
+          "evidence": [
+            "git status shows modified/untracked backend CareerAuditCanonicalEligibility files before AH-04 staging.",
+            "AH-04 path-limited diff contains only RIASEC Activity Explorer files and docs/codex train metadata."
+          ]
+        }
+      ],
+      "failure_reason": null,
+      "next_pr": "RIASEC-AH-05 end-to-end smoke acceptance",
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }
