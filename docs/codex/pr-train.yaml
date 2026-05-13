@@ -1587,6 +1587,47 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-RUNTIME-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-TITLE-1
+      - SCAN-3
+    branch: fix/career-runtime-authority-gap-repair-1
+    title: "fix(api): classify career runtime authority gaps for audit"
+    name: "Classify career runtime authority gaps for audit"
+    scope_type: audit_runtime_authority_classification_only
+    scope:
+      - Distinguish expected published rows from governed non-public rows and not-yet-promoted planner rows.
+      - Preserve strict runtime projection/truth/ledger checks for rows expected to be published.
+      - Avoid misclassifying non-public or not-yet-promoted rows as publication defects.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Promote runtime rows.
+      - Mutate DB or production state.
+      - Apply rollout.
+      - Backfill data.
+      - Touch fap-web.
+      - Run 80 readiness.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerRuntimeProjectionTruthEligibilityAuditor --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan test --filter=Career2786FullAuditArtifactBuilder --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "REPAIR-INDEX-1"
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: RIASEC-PERSONALIZATION-00
     repo: fap-api
     branch: codex/riasec-personalization-00-train-registration

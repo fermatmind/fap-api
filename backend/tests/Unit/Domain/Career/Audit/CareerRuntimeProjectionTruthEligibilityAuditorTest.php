@@ -162,6 +162,47 @@ final class CareerRuntimeProjectionTruthEligibilityAuditorTest extends TestCase
         $this->assertNull($result->rows[0]->ledgerMemberExists);
     }
 
+    public function test_governed_non_public_projection_is_not_misclassified_as_publication_defect(): void
+    {
+        $result = $this->auditor()->audit(
+            planRows: [CareerPublicResolutionPlanRow::fromRaw(['canonical_slug' => 'actors', 'status' => 'ready_for_pilot'])],
+            locales: ['en'],
+            projection: $this->projection([
+                $this->projectionRow('actors', 'en', [
+                    'public_resolution_type' => 'blocked_until_governance_approval',
+                    'runtime_publish_state' => 'blocked',
+                ]),
+            ]),
+            truth: $this->truth([]),
+            ledger: ['members' => [['canonical_slug' => 'actors']]],
+        );
+
+        $this->assertSame(CareerCanonicalEligibilityStatus::PASS, $result->status);
+        $this->assertSame(0, $result->foundPublished);
+        $this->assertSame([], $result->byReason());
+        $this->assertSame('governed_non_public', $result->rows[0]->runtimeStatus->evidence[0]['runtime_expectation']);
+    }
+
+    public function test_not_yet_promoted_plan_row_does_not_require_runtime_artifacts(): void
+    {
+        $result = $this->auditor()->auditPlan(
+            plan: new CareerPublicResolutionPlan(
+                sourcePath: '__fixture__',
+                checksum: null,
+                rows: [CareerPublicResolutionPlanRow::fromRaw(['canonical_slug' => 'actors', 'status' => 'ready_for_pilot'])],
+            ),
+            locales: ['en'],
+            projection: $this->projection([]),
+            truth: $this->truth([]),
+            ledger: ['members' => []],
+        );
+
+        $this->assertSame(CareerCanonicalEligibilityStatus::PASS, $result->status);
+        $this->assertSame(0, $result->foundPublished);
+        $this->assertSame([], $result->byReason());
+        $this->assertSame('not_yet_promoted', $result->rows[0]->runtimeStatus->evidence[0]['runtime_expectation']);
+    }
+
     public function test_result_by_reason_counts_issues(): void
     {
         $result = $this->auditor()->audit(
@@ -208,7 +249,8 @@ final class CareerRuntimeProjectionTruthEligibilityAuditorTest extends TestCase
         "evidence": [
             {
                 "slug": "actuaries",
-                "locale": "en"
+                "locale": "en",
+                "runtime_expectation": "expected_published"
             },
             {
                 "ledger_member_exists": true
@@ -228,7 +270,8 @@ final class CareerRuntimeProjectionTruthEligibilityAuditorTest extends TestCase
     "evidence": [
         {
             "slug": "actuaries",
-            "locale": "en"
+            "locale": "en",
+            "runtime_expectation": "expected_published"
         },
         {
             "ledger_member_exists": true
@@ -291,7 +334,8 @@ JSON,
                 "evidence": [
                     {
                         "slug": "actuaries",
-                        "locale": "en"
+                        "locale": "en",
+                        "runtime_expectation": "expected_published"
                     },
                     {
                         "runtime_publish_state": "published"
@@ -308,7 +352,8 @@ JSON,
             "evidence": [
                 {
                     "slug": "actuaries",
-                    "locale": "en"
+                    "locale": "en",
+                    "runtime_expectation": "expected_published"
                 },
                 {
                     "runtime_publish_state": "published"

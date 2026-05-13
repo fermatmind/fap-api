@@ -32,9 +32,15 @@ Truth rows may expose:
 - `state`
 - `status`
 
-For AUDIT-6 eligibility, exposed runtime/truth state must be `published`. If a ledger artifact is provided, the slug must also exist in that ledger. If no ledger artifact is provided, ledger membership is not audited.
+For AUDIT-6 eligibility, rows with `runtime_expectation=expected_published` are strict: exposed runtime/truth state must be `published`, and if a ledger artifact is provided, the slug must also exist in that ledger. If no ledger artifact is provided, ledger membership is not audited.
 
-The canonical public type is accepted only when it is absent or `public_canonical_job`. Any exposed non-canonical type is reported as an audit issue.
+REPAIR-RUNTIME-1 adds explicit runtime expectation classification:
+
+- `expected_published`: the row is expected to be live/public and remains subject to strict projection, truth, ledger, state, and public-type checks.
+- `governed_non_public`: the row is explicitly blocked by governance/non-public runtime authority and is not misclassified as a publication defect.
+- `not_yet_promoted`: the planner row is ready for pilot or otherwise staged, but no runtime publication is expected yet.
+
+The canonical public type is accepted only when it is absent or `public_canonical_job` for `expected_published` rows. Governed non-public runtime types such as `blocked_until_governance_approval` are preserved as readiness evidence instead of being reported as invalid public type defects.
 
 ## Result Shape
 
@@ -66,6 +72,7 @@ Each row includes an AUDIT-1-compatible runtime layer status:
     {
       "slug": "actuaries",
       "locale": "en",
+      "runtime_expectation": "expected_published",
       "runtime_publish_state": "published",
       "truth_state": "published"
     }
