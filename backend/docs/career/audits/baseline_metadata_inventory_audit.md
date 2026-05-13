@@ -10,6 +10,7 @@ It checks:
 
 - `content_baselines/career_jobs/career_jobs.zh-CN.json`
 - `content_baselines/career_jobs/career_jobs.en.json`
+- planner/workbook display metadata preserved by AUDIT-2
 - existing Career batch manifests that expose canonical English titles
 - canonical slug title derivation as a documented fallback
 
@@ -34,6 +35,17 @@ The primary input is `CareerPublicResolutionPlan`, produced by AUDIT-2. Each row
 - raw planner metadata preserved by AUDIT-2
 
 The baseline auditor loads JSON sources from explicit paths supplied by the caller, or from the repo default baseline and manifest paths.
+
+REPAIR-BASELINE-1 adds a read-only fallback for planner/workbook display metadata. If a zh baseline JSON row is absent but the plan row carries `title_zh` plus zh SEO title and description fields under the top-level row, `raw`, or `seo`, the auditor can satisfy the baseline display metadata source from that planner row. This removes false `zh_baseline_missing` and `required_display_field_missing` blockers for workbook-derived rows without generating new content or mutating DB state.
+
+The default required display metadata fields are:
+
+- `title`
+- `subtitle`
+- `excerpt`
+- `seo_meta`
+
+Full article/body content such as `body_md` is not treated as required metadata in this layer. Missing body/content material remains a content remediation concern, not a DB/backfill authorization.
 
 Supported source row envelopes:
 
@@ -88,7 +100,7 @@ Rows expose an AUDIT-1-compatible `CareerCanonicalEligibilityLayerStatus` with:
 - `status=pass|warning|blocked`
 - `source=career_baselines`
 - `reasons` copied from baseline inventory issue reasons
-- `evidence` containing slug, zh baseline availability, and English title source
+- `evidence` containing slug, zh baseline availability/source, and English title source
 
 ## Consumption by AUDIT-5+
 

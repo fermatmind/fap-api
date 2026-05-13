@@ -15,7 +15,6 @@ final class CareerBaselineMetadataInventoryAuditor
         'title',
         'subtitle',
         'excerpt',
-        'body_md',
         'seo_meta',
     ];
 
@@ -52,7 +51,7 @@ final class CareerBaselineMetadataInventoryAuditor
             $rows[] = $this->buildRow(
                 canonicalSlug: $canonicalSlug,
                 sourceScope: $planRow->batchId ?? 'plan',
-                zhRow: $sources['zh_rows'][$canonicalSlug] ?? null,
+                zhRow: $sources['zh_rows'][$canonicalSlug] ?? $this->plannerZhDisplayRow($planRow),
                 enRow: $sources['en_rows'][$canonicalSlug] ?? null,
                 manifestRow: $sources['manifest_rows'][$canonicalSlug] ?? null
             );
@@ -246,6 +245,7 @@ final class CareerBaselineMetadataInventoryAuditor
             [
                 'canonical_slug' => $canonicalSlug,
                 'zh_baseline_exists' => $zhRow !== null,
+                'zh_baseline_source' => $this->sourceLabel($zhRow),
                 'title_en_source' => $titleEnSource,
             ],
         ];
@@ -376,6 +376,10 @@ final class CareerBaselineMetadataInventoryAuditor
     private function fieldValue(array $row, string $field): ?string
     {
         if (array_key_exists($field, $row)) {
+            if (is_array($row[$field])) {
+                return $row[$field] === [] ? null : json_encode($row[$field], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            }
+
             return $this->normalizeString($row[$field]);
         }
 
@@ -384,6 +388,55 @@ final class CareerBaselineMetadataInventoryAuditor
         }
 
         return null;
+    }
+
+    private function plannerZhDisplayRow(CareerPublicResolutionPlanRow $planRow): ?array
+    {
+        $title = $this->normalizeString($planRow->titleZh);
+        $seoTitle = $this->planString($planRow, ['CN_SEO_Title', 'zh_seo_title']);
+        $seoDescription = $this->planString($planRow, ['CN_SEO_Description', 'zh_seo_description']);
+
+        if ($title === null || $seoTitle === null || $seoDescription === null) {
+            return null;
+        }
+
+        return [
+            'slug' => $planRow->canonicalSlug,
+            'title' => $title,
+            'subtitle' => $seoTitle,
+            'excerpt' => $seoDescription,
+            'seo_meta' => json_encode([
+                'seo_title' => $seoTitle,
+                'seo_description' => $seoDescription,
+                'source' => 'planner_workbook',
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            '_source' => 'planner_workbook',
+        ];
+    }
+
+    /**
+     * @param  list<string>  $keys
+     */
+    private function planString(CareerPublicResolutionPlanRow $planRow, array $keys): ?string
+    {
+        foreach ([$planRow->raw, is_array($planRow->raw['raw'] ?? null) ? $planRow->raw['raw'] : [], is_array($planRow->raw['seo'] ?? null) ? $planRow->raw['seo'] : []] as $source) {
+            foreach ($keys as $key) {
+                $value = $this->normalizeString($source[$key] ?? null);
+                if ($value !== null) {
+                    return $value;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string, mixed>|null  $row
+     */
+    private function sourceLabel(?array $row): string
+    {
+        return $this->normalizeString($row['_source'] ?? null) ?? 'career_baseline';
     }
 
     private function deriveTitleEn(string $canonicalSlug): ?string

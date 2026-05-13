@@ -60,6 +60,60 @@ final class CareerBaselineMetadataInventoryAuditorTest extends TestCase
         $this->assertSame(CareerBaselineMetadataInventoryIssue::ZH_BASELINE_MISSING, $result->rows[0]->issues[0]->reason);
     }
 
+    public function test_zh_baseline_can_be_satisfied_from_planner_workbook_display_metadata(): void
+    {
+        $result = $this->auditor(
+            zhRows: [],
+            enRows: [$this->baselineRow('actuaries', 'Actuaries')],
+        )->auditPlan(new CareerPublicResolutionPlan(
+            sourcePath: 'synthetic-audit-4-plan.json',
+            checksum: null,
+            rows: [
+                CareerPublicResolutionPlanRow::fromRaw([
+                    'canonical_slug' => 'actuaries',
+                    'title_zh' => '精算师',
+                    'raw' => [
+                        'CN_SEO_Title' => '精算师职业指南',
+                        'CN_SEO_Description' => '了解精算师职业证据。',
+                    ],
+                ]),
+            ],
+        ));
+
+        $this->assertSame(CareerCanonicalEligibilityStatus::PASS, $result->status);
+        $this->assertSame(1, $result->zhBaselineFoundCount);
+        $this->assertSame(0, $result->zhBaselineMissingCount);
+        $this->assertSame([], $result->rows[0]->missingDisplayFields);
+        $this->assertSame('精算师', $result->rows[0]->titleZh);
+        $this->assertSame('planner_workbook', $result->rows[0]->evidence[0]['zh_baseline_source']);
+        $this->assertArrayNotHasKey(CareerBaselineMetadataInventoryIssue::ZH_BASELINE_MISSING, $result->byReason());
+        $this->assertArrayNotHasKey(CareerBaselineMetadataInventoryIssue::REQUIRED_DISPLAY_FIELD_MISSING, $result->byReason());
+    }
+
+    public function test_planner_workbook_display_metadata_must_have_zh_title_and_seo_description(): void
+    {
+        $result = $this->auditor(
+            zhRows: [],
+            enRows: [$this->baselineRow('actuaries', 'Actuaries')],
+        )->auditPlan(new CareerPublicResolutionPlan(
+            sourcePath: 'synthetic-audit-4-plan.json',
+            checksum: null,
+            rows: [
+                CareerPublicResolutionPlanRow::fromRaw([
+                    'canonical_slug' => 'actuaries',
+                    'title_zh' => '精算师',
+                    'raw' => [
+                        'CN_SEO_Title' => '精算师职业指南',
+                    ],
+                ]),
+            ],
+        ));
+
+        $this->assertSame(CareerCanonicalEligibilityStatus::BLOCKED, $result->status);
+        $this->assertSame(1, $result->zhBaselineMissingCount);
+        $this->assertArrayHasKey(CareerBaselineMetadataInventoryIssue::ZH_BASELINE_MISSING, $result->byReason());
+    }
+
     public function test_en_title_from_en_baseline(): void
     {
         $result = $this->auditor(
@@ -114,6 +168,25 @@ final class CareerBaselineMetadataInventoryAuditorTest extends TestCase
         $this->assertSame(CareerCanonicalEligibilityStatus::BLOCKED, $result->status);
         $this->assertSame(['excerpt'], $result->rows[0]->missingDisplayFields);
         $this->assertSame(CareerBaselineMetadataInventoryIssue::REQUIRED_DISPLAY_FIELD_MISSING, $result->rows[0]->issues[0]->reason);
+    }
+
+    public function test_non_empty_seo_meta_array_satisfies_display_field(): void
+    {
+        $result = (new CareerBaselineMetadataInventoryAuditor(
+            zhBaselinePath: $this->writeBaseline('zh.json', ['jobs' => [
+                [
+                    'slug' => 'actuaries',
+                    'title' => '精算师',
+                    'seo_meta' => ['seo_title' => '精算师职业指南'],
+                ],
+            ]]),
+            enBaselinePath: $this->writeBaseline('en.json', ['jobs' => [$this->baselineRow('actuaries', 'Actuaries')]]),
+            manifestPaths: [],
+            requiredDisplayFields: ['title', 'seo_meta'],
+        ))->auditPlan($this->plan(['actuaries']));
+
+        $this->assertSame(CareerCanonicalEligibilityStatus::PASS, $result->status);
+        $this->assertSame([], $result->rows[0]->missingDisplayFields);
     }
 
     public function test_invalid_baseline_json_is_reported(): void
@@ -175,6 +248,7 @@ final class CareerBaselineMetadataInventoryAuditorTest extends TestCase
                     {
                         "canonical_slug": "actuaries",
                         "zh_baseline_exists": true,
+                        "zh_baseline_source": "career_baseline",
                         "title_en_source": "en_baseline"
                     },
                     {
@@ -192,6 +266,7 @@ final class CareerBaselineMetadataInventoryAuditorTest extends TestCase
                 {
                     "canonical_slug": "actuaries",
                     "zh_baseline_exists": true,
+                    "zh_baseline_source": "career_baseline",
                     "title_en_source": "en_baseline"
                 },
                 {

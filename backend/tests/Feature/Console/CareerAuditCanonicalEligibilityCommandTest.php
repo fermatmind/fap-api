@@ -156,6 +156,41 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertContains('sitemap_expected_not_ready', data_get($payload, 'rows.0.seo_geo_status.reasons'));
     }
 
+    public function test_planner_workbook_display_metadata_satisfies_baseline_display_fields(): void
+    {
+        $planPath = $this->writePlanner([
+            [
+                'row_number' => 2,
+                'canonical_slug' => 'synthetic-planner-baseline-only',
+                'status' => 'ready_for_pilot',
+                'title_en' => 'Synthetic Planner Baseline Only',
+                'title_zh' => '合成职业',
+                'source_code' => '00-0000.00',
+                'seo' => [
+                    'zh_title' => '合成职业指南',
+                    'zh_description' => '合成职业的展示来源说明。',
+                ],
+                'raw' => [
+                    'CN_SEO_Title' => '合成职业指南',
+                    'CN_SEO_Description' => '合成职业的展示来源说明。',
+                ],
+            ],
+        ]);
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'all',
+            '--public-resolution-plan' => $planPath,
+            '--locales' => 'zh',
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertArrayNotHasKey('zh_baseline_missing', $payload['by_reason']);
+        $this->assertArrayNotHasKey('required_display_field_missing', $payload['by_reason']);
+        $this->assertSame('warning', data_get($payload, 'rows.0.baseline_status.status'));
+        $this->assertSame('planner_workbook', data_get($payload, 'rows.0.baseline_status.evidence.0.zh_baseline_source'));
+    }
+
     public function test_projection_truth_artifacts_drive_runtime_layer_status(): void
     {
         $projectionPath = $this->writeJsonArtifact('projection', [
