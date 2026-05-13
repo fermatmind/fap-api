@@ -1413,6 +1413,49 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-SEO-GEO-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-SURFACE-CONTEXT-1
+      - SCAN-3
+    branch: fix/career-seo-geo-readiness-repair-1
+    title: "fix(api): normalize career seo geo readiness sources"
+    name: "Normalize career SEO/GEO readiness sources"
+    scope_type: audit_seo_geo_mapping_only
+    scope:
+      - Distinguish absent SEO/GEO source evidence from explicit not-ready source policy.
+      - Map nested planner/workbook SEO fields into the audit input for static source availability.
+      - Preserve sitemap, LLMS, and LLMS-full not-ready policy blockers without treating them as missing artifacts.
+      - Defer baseline display-field repair to REPAIR-BASELINE-1.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerAuditCanonicalEligibility.php
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Deploy sitemap or LLMS artifacts.
+      - Touch fap-web.
+      - Query production DB.
+      - Mutate DB or production state.
+      - Apply rollout.
+      - Backfill data.
+      - Run 80 readiness.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerSeoGeoReadinessAuditor --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "REPAIR-BASELINE-1"
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: RIASEC-PERSONALIZATION-00
     repo: fap-api
     branch: codex/riasec-personalization-00-train-registration

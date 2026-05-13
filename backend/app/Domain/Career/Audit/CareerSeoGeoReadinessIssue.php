@@ -14,9 +14,15 @@ final class CareerSeoGeoReadinessIssue
 
     public const SITEMAP_MISSING = 'sitemap_missing';
 
+    public const SITEMAP_EXPECTED_NOT_READY = 'sitemap_expected_not_ready';
+
     public const LLMS_MISSING = 'llms_missing';
 
+    public const LLMS_EXPECTED_NOT_READY = 'llms_expected_not_ready';
+
     public const LLMS_FULL_MISSING = 'llms_full_missing';
+
+    public const LLMS_FULL_EXPECTED_NOT_READY = 'llms_full_expected_not_ready';
 
     public const STRUCTURED_DATA_MISSING = 'structured_data_missing';
 
@@ -60,8 +66,11 @@ final class CareerSeoGeoReadinessIssue
             self::CANONICAL_NOT_SELF,
             self::ROBOTS_NOINDEX,
             self::SITEMAP_MISSING,
+            self::SITEMAP_EXPECTED_NOT_READY,
             self::LLMS_MISSING,
+            self::LLMS_EXPECTED_NOT_READY,
             self::LLMS_FULL_MISSING,
+            self::LLMS_FULL_EXPECTED_NOT_READY,
             self::STRUCTURED_DATA_MISSING,
             self::DATASET_MISSING,
             self::SEARCH_MISSING,

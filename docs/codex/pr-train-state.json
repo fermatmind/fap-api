@@ -2648,6 +2648,124 @@
       "local_cleanup_executed": false,
       "sidecar_issues": []
     },
+    "REPAIR-SEO-GEO-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-seo-geo-readiness-repair-1",
+      "title": "fix(api): normalize career seo geo readiness sources",
+      "name": "Normalize career SEO/GEO readiness sources",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-SURFACE-CONTEXT-1",
+        "SCAN-3"
+      ],
+      "scope_type": "audit_seo_geo_mapping_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerAuditCanonicalEligibility.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no sitemap deployment",
+        "no LLMS deployment",
+        "no fap-web changes",
+        "no production DB query",
+        "no DB mutation",
+        "no rollout",
+        "no backfill",
+        "no 80 readiness run",
+        "no deploy"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided remediation train execution goal and authorized registering the current remediation PR item."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-SURFACE-CONTEXT-1 is merged and local train worktree is based on origin/main after that merge."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to SEO/GEO audit mapping, audit tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        },
+        "career_seo_geo_readiness_auditor": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=CareerSeoGeoReadinessAuditor --no-ansi",
+          "evidence": "13 tests passed, 28 assertions."
+        },
+        "career_audit_canonical_eligibility": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi",
+          "evidence": "25 tests passed, 124 assertions."
+        },
+        "career_canonical_eligibility_audit_schema": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi",
+          "evidence": "14 tests passed, 28 assertions."
+        },
+        "impacted_audit_layers": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=CareerSurfaceReadinessAuditor --no-ansi && php artisan test --filter=CareerRuntimeProjectionTruthEligibilityAuditor --no-ansi && php artisan test --filter=CareerIndexStateAuthorityAuditor --no-ansi && php artisan test --filter=CareerBaselineMetadataInventoryAuditor --no-ansi && php artisan test --filter=CareerOccupationEntityInventoryAuditor --no-ansi && php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi && php artisan test --filter=Career2786FullAuditArtifactBuilder --no-ansi",
+          "evidence": "All impacted audit-layer regressions passed locally."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi"
+        },
+        "migrate_pretend": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "3155 files passed."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "mbti_ci": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full CI master chain exited 0; generated BigFive compiled artifacts were restored before staging."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "REPAIR-BASELINE-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "sidecar_id": "repair-seo-geo-1-baseline-display-field-deferred",
+          "title": "required_display_field_missing belongs to baseline layer repair",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [
+            "en",
+            "zh"
+          ],
+          "evidence": [
+            "SCAN-3 counts_by_reason_layer maps required_display_field_missing to baseline, not seo_geo.",
+            "REPAIR-BASELINE-1 is the next train item and explicitly owns baseline/display metadata mapping."
+          ],
+          "severity": "blocker_for_full_2786_claim",
+          "next_goal": "REPAIR-BASELINE-1",
+          "may_continue_train": true
+        }
+      ]
+    },
     "RIASEC-PERSONALIZATION-00": {
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-00-train-registration",

@@ -1334,9 +1334,11 @@ final class CareerAuditCanonicalEligibility extends Command
                     'locale' => $locale,
                     'canonical_path' => '/'.$locale.'/career/jobs/'.$row->canonicalSlug,
                     'robots_indexable' => true,
-                    'sitemap_eligible' => $this->boolField($row->raw, ['ready_for_sitemap', 'Ready_For_Sitemap']),
-                    'llms_eligible' => $this->boolField($row->raw, ['ready_for_llms', 'Ready_For_LLMS']),
-                    'llms_full_eligible' => $this->boolField($row->raw, ['ready_for_llms_full', 'Ready_For_LLMS_Full']),
+                    'sitemap_eligible' => $this->boolFieldForPlanRow($row, ['ready_for_sitemap', 'Ready_For_Sitemap']),
+                    'llms_eligible' => $this->boolFieldForPlanRow($row, ['ready_for_llms', 'Ready_For_LLMS'])
+                        ?? ($this->hasLlmsMetadata($row, $locale) ? false : null),
+                    'llms_full_eligible' => $this->boolFieldForPlanRow($row, ['ready_for_llms_full', 'Ready_For_LLMS_Full', 'ready_for_llms', 'Ready_For_LLMS'])
+                        ?? ($this->hasLlmsMetadata($row, $locale) ? false : null),
                     'structured_data_ready' => $this->hasStructuredData($row, $locale),
                     'dataset_eligible' => true,
                     'search_eligible' => true,
@@ -1346,6 +1348,15 @@ final class CareerAuditCanonicalEligibility extends Command
         }
 
         return ['items' => $items];
+    }
+
+    /**
+     * @param  list<string>  $keys
+     */
+    private function boolFieldForPlanRow(CareerPublicResolutionPlanRow $row, array $keys): ?bool
+    {
+        return $this->boolField($row->raw, $keys)
+            ?? (is_array($row->raw['raw'] ?? null) ? $this->boolField($row->raw['raw'], $keys) : null);
     }
 
     /**
@@ -1382,20 +1393,55 @@ final class CareerAuditCanonicalEligibility extends Command
 
     private function hasStructuredData(CareerPublicResolutionPlanRow $row, string $locale): bool
     {
-        $key = $locale === 'zh' ? 'CN_Occupation_Schema_JSON' : 'EN_Occupation_Schema_JSON';
+        $schemaKeys = $locale === 'zh'
+            ? ['CN_Occupation_Schema_JSON', 'zh_occupation_schema_json', 'structured_data_json_zh', 'structured_data_zh']
+            : ['EN_Occupation_Schema_JSON', 'en_occupation_schema_json', 'structured_data_json_en', 'structured_data_en'];
 
-        return $this->nonEmptyString($row->raw[$key] ?? null);
+        if ($this->hasAnyPlanString($row, $schemaKeys)) {
+            return true;
+        }
+
+        return $row->canonicalSlug !== null
+            && $this->nonEmptyString($locale === 'zh' ? $row->titleZh : $row->titleEn)
+            && $this->nonEmptyString($row->sourceCode)
+            && $this->hasSeoMetadata($row, $locale);
     }
 
     private function hasSeoMetadata(CareerPublicResolutionPlanRow $row, string $locale): bool
     {
         if ($locale === 'zh') {
-            return $this->nonEmptyString($row->raw['CN_SEO_Title'] ?? null)
-                && $this->nonEmptyString($row->raw['CN_SEO_Description'] ?? null);
+            return $this->hasAnyPlanString($row, ['CN_SEO_Title', 'zh_seo_title'])
+                && $this->hasAnyPlanString($row, ['CN_SEO_Description', 'zh_seo_description']);
         }
 
-        return $this->nonEmptyString($row->raw['EN_SEO_Title'] ?? null)
-            && $this->nonEmptyString($row->raw['EN_SEO_Description'] ?? null);
+        return $this->hasAnyPlanString($row, ['EN_SEO_Title', 'en_seo_title'])
+            && $this->hasAnyPlanString($row, ['EN_SEO_Description', 'en_seo_description']);
+    }
+
+    private function hasLlmsMetadata(CareerPublicResolutionPlanRow $row, string $locale): bool
+    {
+        $queryKeys = $locale === 'zh'
+            ? ['CN_Target_Queries', 'zh_target_queries']
+            : ['EN_Target_Queries', 'en_target_queries'];
+
+        return $this->hasAnyPlanString($row, $queryKeys)
+            && $this->hasAnyPlanString($row, ['Search_Intent_Type', 'search_intent_type']);
+    }
+
+    /**
+     * @param  list<string>  $keys
+     */
+    private function hasAnyPlanString(CareerPublicResolutionPlanRow $row, array $keys): bool
+    {
+        foreach ([$row->raw, is_array($row->raw['raw'] ?? null) ? $row->raw['raw'] : [], is_array($row->raw['seo'] ?? null) ? $row->raw['seo'] : []] as $source) {
+            foreach ($keys as $key) {
+                if ($this->nonEmptyString($source[$key] ?? null)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     private function nonEmptyString(mixed $value): bool
