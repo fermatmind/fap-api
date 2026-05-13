@@ -18,6 +18,7 @@ use App\Console\Commands\CareerAuditCanonicalEligibility;
 use App\Console\Commands\CareerCompileAuthorityWave;
 use App\Console\Commands\CareerCompileRecommendationSubjects;
 use App\Console\Commands\CareerCrosswalkOps;
+use App\Console\Commands\CareerExportCanonicalEligibilityDbContext;
 use App\Console\Commands\CareerExportCanonicalExpansionManifest;
 use App\Console\Commands\CareerExportCanonicalRuntimeTruth;
 use App\Console\Commands\CareerExportCrosswalkBacklogConvergence;
@@ -219,6 +220,7 @@ class Kernel extends ConsoleKernel
         CareerCompileRecommendationSubjects::class,
         CareerCrosswalkOps::class,
         CareerExportCanonicalExpansionManifest::class,
+        CareerExportCanonicalEligibilityDbContext::class,
         CareerExportCanonicalRuntimeTruth::class,
         CareerExportCrosswalkBacklogConvergence::class,
         CareerExportFullReleaseLedger::class,

@@ -1,6 +1,17 @@
 # Career Entity and Index Context Artifacts
 
-CTX-CONSUME-1 adds consumer-only context artifact inputs to `career:audit-canonical-eligibility`.
+CTX-CONSUME-1 adds context artifact inputs to `career:audit-canonical-eligibility`.
+CTX-EXPORT-1 adds the matching read-only producer command:
+
+```bash
+php artisan career:export-canonical-eligibility-db-context \
+  --public-resolution-plan=/path/to/public-resolution-plan.json \
+  --entity-output=/tmp/career_2786_entity_context.json \
+  --index-state-output=/tmp/career_2786_index_state_context.json \
+  --json
+```
+
+The producer command reads the current configured DB only. Production use remains approval-gated.
 
 The command can now consume:
 
@@ -106,9 +117,8 @@ If an explicit artifact path is missing or malformed, the command reports the ar
 
 ## Non-Goals
 
-CTX-CONSUME-1 does not:
+The consumer/producer contract does not:
 
-- produce the entity or index artifacts
 - approve or run production read-only export
 - mutate DB state
 - backfill Occupations
