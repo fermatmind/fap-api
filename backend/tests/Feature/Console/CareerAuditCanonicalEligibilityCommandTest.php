@@ -133,6 +133,150 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertSame('supplied', $payload['context_summary']['runtime_truth_context']);
     }
 
+    public function test_entity_and_index_context_artifacts_mark_contexts_supplied(): void
+    {
+        $planPath = $this->writePlanner([
+            ['row_number' => 2, 'canonical_slug' => 'actuaries', 'status' => 'ready_for_pilot', 'title_en' => 'Actuaries', 'title_zh' => '精算师'],
+        ]);
+        $entityPath = $this->writeEntityContext([
+            ['canonical_slug' => 'actuaries', 'occupation_exists' => true, 'occupation_id' => 123, 'missing_entity_fields' => []],
+        ]);
+        $indexPath = $this->writeIndexContext([
+            ['canonical_slug' => 'actuaries', 'latest_index_state' => 'indexed', 'public_facing_state' => 'indexed', 'index_eligible' => true],
+        ]);
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'all',
+            '--public-resolution-plan' => $planPath,
+            '--entity-context' => $entityPath,
+            '--index-state-context' => $indexPath,
+            '--locales' => 'en',
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame('supplied', $payload['context_summary']['entity_db_context']);
+        $this->assertSame('supplied', $payload['context_summary']['index_state_context']);
+        $this->assertSame($entityPath, $payload['run_context']['entity']['entity_context_path']);
+        $this->assertSame($indexPath, $payload['run_context']['index']['index_state_context_path']);
+        $this->assertArrayNotHasKey('entity_db_context_missing', $payload['by_reason']);
+        $this->assertArrayNotHasKey('index_state_context_missing', $payload['by_reason']);
+        $this->assertSame('pass', data_get($payload, 'rows.0.entity_status.status'));
+        $this->assertSame('pass', data_get($payload, 'rows.0.index_status.status'));
+        $this->assertSame('entity_context_artifact', data_get($payload, 'rows.0.entity_status.source'));
+        $this->assertSame('index_state_context_artifact', data_get($payload, 'rows.0.index_status.source'));
+    }
+
+    public function test_missing_entity_context_file_reports_structured_artifact_issue(): void
+    {
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--entity-context' => sys_get_temp_dir().'/missing-entity-context-'.bin2hex(random_bytes(4)).'.json',
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertArrayHasKey('entity_context_file_missing', $payload['by_reason']);
+        $this->assertSame('missing', $payload['context_summary']['entity_db_context']);
+        $this->assertContains('entity_context_artifact_issue', array_column($payload['sidecars'], 'sidecar_id'));
+    }
+
+    public function test_malformed_entity_context_json_reports_structured_artifact_issue(): void
+    {
+        $path = sys_get_temp_dir().'/career-audit-command-bad-entity-'.bin2hex(random_bytes(4)).'.json';
+        file_put_contents($path, '{bad json');
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--entity-context' => $path,
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertArrayHasKey('entity_context_json_invalid', $payload['by_reason']);
+        $this->assertSame('missing', $payload['context_summary']['entity_db_context']);
+    }
+
+    public function test_duplicate_entity_context_slug_reports_structured_artifact_issue(): void
+    {
+        $entityPath = $this->writeEntityContext([
+            ['canonical_slug' => 'actuaries', 'occupation_exists' => true, 'occupation_id' => 123],
+            ['canonical_slug' => 'actuaries', 'occupation_exists' => true, 'occupation_id' => 456],
+        ]);
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--entity-context' => $entityPath,
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertArrayHasKey('entity_context_slug_duplicate', $payload['by_reason']);
+        $this->assertSame('supplied', $payload['context_summary']['entity_db_context']);
+        $this->assertContains('entity_context_slug_duplicate', data_get($payload, 'rows.0.entity_status.reasons'));
+    }
+
+    public function test_missing_index_context_file_reports_structured_artifact_issue(): void
+    {
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--index-state-context' => sys_get_temp_dir().'/missing-index-context-'.bin2hex(random_bytes(4)).'.json',
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertArrayHasKey('index_context_file_missing', $payload['by_reason']);
+        $this->assertSame('missing', $payload['context_summary']['index_state_context']);
+        $this->assertContains('index_context_artifact_issue', array_column($payload['sidecars'], 'sidecar_id'));
+    }
+
+    public function test_malformed_index_context_json_reports_structured_artifact_issue(): void
+    {
+        $path = sys_get_temp_dir().'/career-audit-command-bad-index-'.bin2hex(random_bytes(4)).'.json';
+        file_put_contents($path, '{bad json');
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--index-state-context' => $path,
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertArrayHasKey('index_context_json_invalid', $payload['by_reason']);
+        $this->assertSame('missing', $payload['context_summary']['index_state_context']);
+    }
+
+    public function test_duplicate_index_context_slug_reports_structured_artifact_issue(): void
+    {
+        $indexPath = $this->writeIndexContext([
+            ['canonical_slug' => 'actuaries', 'latest_index_state' => 'indexed', 'public_facing_state' => 'indexed', 'index_eligible' => true],
+            ['canonical_slug' => 'actuaries', 'latest_index_state' => 'indexed', 'public_facing_state' => 'indexed', 'index_eligible' => true],
+        ]);
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--index-state-context' => $indexPath,
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertArrayHasKey('index_context_slug_duplicate', $payload['by_reason']);
+        $this->assertSame('supplied', $payload['context_summary']['index_state_context']);
+        $this->assertContains('index_context_slug_duplicate', data_get($payload, 'rows.0.index_status.reasons'));
+    }
+
     public function test_command_writes_output_json_when_requested(): void
     {
         $outputPath = sys_get_temp_dir().'/career-audit-command-output-'.bin2hex(random_bytes(4)).'.json';
@@ -340,6 +484,30 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
     {
         return $this->writeJsonArtifact('plan', [
             'workbook' => ['rows' => count($rows)],
+            'rows' => $rows,
+        ]);
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     */
+    private function writeEntityContext(array $rows): string
+    {
+        return $this->writeJsonArtifact('entity-context', [
+            'schema_version' => 'career_entity_context.v1',
+            'source' => ['type' => 'read_only_db_export', 'environment' => 'local'],
+            'rows' => $rows,
+        ]);
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     */
+    private function writeIndexContext(array $rows): string
+    {
+        return $this->writeJsonArtifact('index-context', [
+            'schema_version' => 'career_index_state_context.v1',
+            'source' => ['type' => 'read_only_db_export', 'environment' => 'local'],
             'rows' => $rows,
         ]);
     }

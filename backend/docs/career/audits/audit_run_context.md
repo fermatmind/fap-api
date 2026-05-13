@@ -93,6 +93,8 @@ Full read-only context rerun, after explicit approvals/artifacts:
 php -d memory_limit=512M artisan career:audit-canonical-eligibility \
   --scope=all \
   --public-resolution-plan=/tmp/career_2786_public_resolution_plan_from_d23b.json \
+  --entity-context=/tmp/career_2786_entity_context.json \
+  --index-state-context=/tmp/career_2786_index_state_context.json \
   --projection=/tmp/career_2786_runtime_projection.json \
   --truth=/tmp/career_2786_runtime_truth.json \
   --ledger=/tmp/career_2786_full_release_ledger.json \
@@ -102,6 +104,8 @@ php -d memory_limit=512M artisan career:audit-canonical-eligibility \
   --output=/tmp/career_2786_canonical_eligibility_audit_with_context.json \
   --context-output=/tmp/career_2786_audit_run_context_requirements.json
 ```
+
+`--entity-context` and `--index-state-context` consume approved read-only JSON artifacts. They do not export production context; that producer workflow remains approval-gated.
 
 ## Non-Goals
 

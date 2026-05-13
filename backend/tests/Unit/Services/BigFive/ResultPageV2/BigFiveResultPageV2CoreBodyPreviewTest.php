@@ -321,6 +321,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_entity_index_context_artifact_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Audit/CareerEntityContextArtifact.php',
+            'backend/app/Domain/Career/Audit/CareerEntityContextArtifactIssue.php',
+            'backend/app/Domain/Career/Audit/CareerEntityContextArtifactReader.php',
+            'backend/app/Domain/Career/Audit/CareerEntityContextArtifactRow.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateContextArtifact.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateContextArtifactIssue.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateContextArtifactReader.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateContextArtifactRow.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_runtime_projection_truth_audit_changes(): void
     {
         $changed = [
@@ -1117,6 +1133,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerEntityIndexContextArtifactFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerRuntimeProjectionTruthAuditFile($file)) {
                 continue;
             }
@@ -1557,6 +1577,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityIssue.php',
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityResult.php',
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityRow.php',
+        ], true);
+    }
+
+    private function isCareerEntityIndexContextArtifactFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Audit/CareerEntityContextArtifact.php',
+            'backend/app/Domain/Career/Audit/CareerEntityContextArtifactIssue.php',
+            'backend/app/Domain/Career/Audit/CareerEntityContextArtifactReader.php',
+            'backend/app/Domain/Career/Audit/CareerEntityContextArtifactRow.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateContextArtifact.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateContextArtifactIssue.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateContextArtifactReader.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateContextArtifactRow.php',
         ], true);
     }
 
