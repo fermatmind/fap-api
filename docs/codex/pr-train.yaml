@@ -2138,3 +2138,62 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: RIASEC-DEEP-COPY-06
+    repo: fap-api
+    depends_on:
+      - RIASEC-DEEP-COPY-05
+    branch: codex/riasec-deep-copy-06-structural-difference-slots
+    title: "feat(riasec): add structural difference copy slots"
+    scope:
+      - Add backend-authoritative structural difference copy slots.
+      - Preserve compare guard behavior that blocks cross-form raw score comparison.
+      - Keep structural summaries narrative-only and fail-closed for missing content.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecCompareGuardContractTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scoring, answer scoring, compare math, or question content packs.
+      - Add frontend compare copy/rendering or fallback.
+      - Add 140Q accuracy, override, raw delta, job fit, ranking, success, hiring, or matching claims.
+    validation:
+      - targeted PHPUnit for RIASEC structural difference copy and compare guard contracts
+      - scoped Pint for touched PHP
+      - JSON/YAML validity
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: RIASEC-DEEP-COPY-07
+    repo: fap-api
+    depends_on:
+      - RIASEC-DEEP-COPY-06
+    branch: codex/riasec-deep-copy-07-aspirations-disagree-slots
+    title: "feat(riasec): add aspirations disagree copy slots"
+    scope:
+      - Add backend-authoritative aspirations calibration and disagree path copy slots.
+      - Keep aspirations and feedback as exploration inputs only, with no measured-result mutation.
+      - Keep missing content fail-closed and avoid share/PDF raw feedback expansion.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scoring, measured_holland_code, profile memory, recommendation runtime, share/PDF payloads, or question content packs.
+      - Add frontend aspirations/disagree copy/rendering or fallback.
+      - Add career match, job fit, ranking, success, hiring, score correction, or result override claims.
+    validation:
+      - targeted PHPUnit for RIASEC aspirations and disagree copy contracts
+      - scoped Pint for touched PHP
+      - JSON/YAML validity
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
