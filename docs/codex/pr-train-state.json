@@ -2575,8 +2575,8 @@
         "no 80 readiness run",
         "no deploy"
       ],
-      "commit_sha": "fef4da53",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1367",
+      "commit_sha": null,
+      "pr_url": null,
       "checks": {
         "authorization": {
           "status": "pass",
@@ -2603,7 +2603,7 @@
       "branch": "fix/career-surface-context-repair-1",
       "title": "fix(api): add career surface context artifact support",
       "name": "Add read-only career surface context artifact support",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "CTX-BUNDLE-1B",
         "SCAN-3"
@@ -2658,7 +2658,7 @@
       "branch": "fix/career-seo-geo-readiness-repair-1",
       "title": "fix(api): normalize career seo geo readiness sources",
       "name": "Normalize career SEO/GEO readiness sources",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "REPAIR-SURFACE-CONTEXT-1",
         "SCAN-3"
@@ -3969,7 +3969,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-deep-copy-05-low-quality-slots",
       "title": "feat(riasec): add low quality cautious copy slots",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "RIASEC-DEEP-COPY-04"
       ],
@@ -4042,7 +4042,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-deep-copy-06-structural-difference-slots",
       "title": "feat(riasec): add structural difference copy slots",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "RIASEC-DEEP-COPY-05"
       ],
@@ -4056,8 +4056,8 @@
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "65c005f24eb2036d4983bb96c67fd198b97f662f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1367",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -4084,6 +4084,75 @@
         "scope_validation": {
           "status": "pass",
           "evidence": "Changed files are limited to backend RIASEC deep-copy slot registry/validator, structural difference slot tests, backend RIASEC docs, and docs/codex train metadata. No scoring, question pack, frontend UI, history UI, share/PDF runtime, feedback runtime, analytics, or career runtime files changed."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": "2026-05-13T13:22:12Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "Local main checkout blocked by external linked worktree during PR #1367 cleanup",
+          "severity": "P3",
+          "introduced_by_current_pr": false,
+          "blocks_merge": false,
+          "evidence": [
+            "GitHub PR #1367 merged and origin/main contains 65c005f24eb2036d4983bb96c67fd198b97f662f.",
+            "Local checkout of main was blocked because /private/tmp/fap-api-career-2786-remediation-train owns branch main; train continued from origin/main per continuation policy."
+          ]
+        }
+      ]
+    },
+    "RIASEC-DEEP-COPY-07": {
+      "repo": "fap-api",
+      "branch": "codex/riasec-deep-copy-07-aspirations-disagree-slots",
+      "title": "feat(riasec): add aspirations disagree copy slots",
+      "status": "in_progress",
+      "depends_on": [
+        "RIASEC-DEEP-COPY-06"
+      ],
+      "scope_type": "backend_aspirations_disagree_copy_slots_only",
+      "allowed_paths": [
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php",
+        "backend/tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php",
+        "backend/docs/riasec/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "commit_sha": "ea9701ec",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1368",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "RIASEC-DEEP-COPY-06 is merged as PR #1367 with merge commit 65c005f24eb2036d4983bb96c67fd198b97f662f; origin/main contains the merge commit."
+        },
+        "ledger_reconciliation": {
+          "status": "pass",
+          "evidence": "Corrected prior train metadata drift that had written PR #1367 details onto CTX-EXPORT-1; this is docs/codex bookkeeping only."
+        },
+        "aspirations_disagree_registry_contract": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php --no-ansi",
+          "evidence": "19 tests passed, 636 assertions."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecContentRegistrySlotContract.php tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php",
+          "evidence": "PASS, 6 files."
+        },
+        "json_yaml_validity": {
+          "status": "pass",
+          "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")' && jq empty docs/codex/pr-train-state.json"
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to backend RIASEC deep-copy slot registry/validator, aspirations/disagree slot tests, backend RIASEC docs, and docs/codex train metadata. No scoring, question pack, frontend UI, profile memory, recommendation runtime, share/PDF payloads, feedback stream runtime, analytics, or career runtime files changed."
         }
       },
       "failure_reason": null,
