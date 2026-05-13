@@ -67,3 +67,27 @@ AUDIT-6 should consume this result only as the index layer authority. Runtime pu
 ## Readiness Warning
 
 AUDIT-5 does not claim 2786 readiness. It proves only reusable index-state authority inventory behavior for future command integration.
+
+## REPAIR-INDEX-1 Remediation Planning
+
+REPAIR-INDEX-1 adds a read-only remediation plan shape on top of the existing authority audit. `CareerIndexStateAuthorityAuditor::planRemediation()` consumes a `CareerPublicResolutionPlan`, runs the same latest-index-state inspection, and returns `career_index_state_remediation_plan.v1`.
+
+The remediation plan does not apply, seed, backfill, or mutate `index_states`. It classifies each slug into one of:
+
+- `expected_indexed`
+- `governed_non_public`
+- `not_yet_promoted`
+
+The plan then assigns a non-mutating action:
+
+- `none` for indexed/indexable rows with no issues
+- `create_index_state` for expected-public rows missing an index-state authority row
+- `review_existing_index_state` for existing rows with noindex, ineligible, quarantine, rollback, or non-indexed-like state
+- `defer_governed_non_public` for governed non-public rows that should not be treated as publish-blocking index defects yet
+- `defer_until_runtime_promotion` for planner rows that are present but not promoted into the public runtime authority
+
+Rows requiring production DB writes set `approval_required=true` and emit the approval gate:
+
+`I explicitly approve production index_state remediation apply for Career 2786 using reviewed plan <PLAN_PATH>.`
+
+This approval gate is informational in this PR. No apply command is added, and no production mutation is performed.

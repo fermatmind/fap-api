@@ -25,6 +25,45 @@ final class CareerIndexStateAuthorityAuditor
         ));
     }
 
+    public function planRemediation(CareerPublicResolutionPlan $plan): CareerIndexStateRemediationPlan
+    {
+        $result = $this->auditPlan($plan);
+        $planRows = $this->planRowsBySlug($plan);
+
+        $rows = [];
+        foreach ($result->rows as $row) {
+            $planRow = $planRows[$row->canonicalSlug] ?? null;
+            $expectation = $this->indexExpectation($planRow);
+            [$action, $approvalRequired] = $this->remediationAction($row, $expectation);
+
+            $rows[] = new CareerIndexStateRemediationPlanRow(
+                canonicalSlug: $row->canonicalSlug,
+                expectation: $expectation,
+                action: $action,
+                approvalRequired: $approvalRequired,
+                occupationId: $row->occupationId,
+                indexStateId: $row->indexStateId,
+                rawIndexState: $row->rawIndexState,
+                publicIndexState: $row->publicIndexState,
+                indexEligible: $row->indexEligible,
+                reasons: $row->indexStatus->reasons,
+                evidence: [
+                    ...$row->evidence,
+                    [
+                        'index_expectation' => $expectation,
+                        'plan_state' => $planRow?->publicResolutionState,
+                        'plan_public_type' => $planRow?->canonicalPublicType,
+                        'plan_rollout_state' => $planRow?->rolloutState,
+                        'plan_projection_state' => $planRow?->projectionState,
+                        'plan_index_state_hint' => $planRow?->indexStateHint,
+                    ],
+                ],
+            );
+        }
+
+        return CareerIndexStateRemediationPlan::build($rows, $result->sidecars);
+    }
+
     public function auditEntityInventory(CareerOccupationEntityInventoryResult $result): CareerIndexStateAuthorityResult
     {
         return $this->auditSlugs(array_map(
@@ -105,6 +144,125 @@ final class CareerIndexStateAuthorityAuditor
             evidence: $evidence,
             issues: $issues
         );
+    }
+
+    /**
+     * @return array<string, CareerPublicResolutionPlanRow>
+     */
+    private function planRowsBySlug(CareerPublicResolutionPlan $plan): array
+    {
+        $rows = [];
+        foreach ($plan->rows as $row) {
+            $slug = $this->normalizeSlug($row->canonicalSlug);
+            if ($slug !== null) {
+                $rows[$slug] = $row;
+            }
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @return array{0: string, 1: bool}
+     */
+    private function remediationAction(CareerIndexStateAuthorityRow $row, string $expectation): array
+    {
+        if ($row->issues === []) {
+            return [CareerIndexStateRemediationPlanRow::ACTION_NONE, false];
+        }
+
+        if ($row->indexStateId !== null) {
+            return [CareerIndexStateRemediationPlanRow::ACTION_REVIEW_EXISTING_INDEX_STATE, true];
+        }
+
+        return match ($expectation) {
+            CareerIndexStateRemediationPlanRow::EXPECTATION_GOVERNED_NON_PUBLIC => [CareerIndexStateRemediationPlanRow::ACTION_DEFER_GOVERNED_NON_PUBLIC, false],
+            CareerIndexStateRemediationPlanRow::EXPECTATION_NOT_YET_PROMOTED => [CareerIndexStateRemediationPlanRow::ACTION_DEFER_UNTIL_RUNTIME_PROMOTION, false],
+            default => [CareerIndexStateRemediationPlanRow::ACTION_CREATE_INDEX_STATE, true],
+        };
+    }
+
+    private function indexExpectation(?CareerPublicResolutionPlanRow $row): string
+    {
+        if ($row === null) {
+            return CareerIndexStateRemediationPlanRow::EXPECTATION_EXPECTED_INDEXED;
+        }
+
+        $indexStateHint = strtolower((string) ($row->indexStateHint ?? ''));
+        if (in_array($indexStateHint, [IndexStateValue::INDEXED, IndexStateValue::INDEXABLE], true)) {
+            return CareerIndexStateRemediationPlanRow::EXPECTATION_EXPECTED_INDEXED;
+        }
+
+        $publicType = strtolower((string) ($row->canonicalPublicType ?? ''));
+        if (in_array($publicType, ['public_canonical_job', 'public'], true)) {
+            return CareerIndexStateRemediationPlanRow::EXPECTATION_EXPECTED_INDEXED;
+        }
+
+        if ($this->containsAny($publicType, ['non_public', 'non-public', 'private', 'governed'])) {
+            return CareerIndexStateRemediationPlanRow::EXPECTATION_GOVERNED_NON_PUBLIC;
+        }
+
+        $states = $this->planStates($row);
+        foreach ($states as $state) {
+            if ($this->containsAny($state, ['governance', 'blocked', 'hold', 'non_public', 'non-public', 'private'])) {
+                return CareerIndexStateRemediationPlanRow::EXPECTATION_GOVERNED_NON_PUBLIC;
+            }
+        }
+
+        foreach ($states as $state) {
+            if (in_array($state, ['published', 'indexed', 'indexable', 'live'], true)) {
+                return CareerIndexStateRemediationPlanRow::EXPECTATION_EXPECTED_INDEXED;
+            }
+        }
+
+        foreach ($states as $state) {
+            if (in_array($state, ['ready_for_pilot', 'planned', 'candidate', 'published_candidate', 'approved', 'draft', 'review_needed'], true)) {
+                return CareerIndexStateRemediationPlanRow::EXPECTATION_NOT_YET_PROMOTED;
+            }
+        }
+
+        return CareerIndexStateRemediationPlanRow::EXPECTATION_EXPECTED_INDEXED;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function planStates(CareerPublicResolutionPlanRow $row): array
+    {
+        $states = [];
+        foreach ([
+            $row->publicResolutionState,
+            $row->rolloutState,
+            $row->projectionState,
+            $row->raw['status'] ?? null,
+            $row->raw['release_status'] ?? null,
+            $row->raw['Release_Status'] ?? null,
+            $row->raw['content_status'] ?? null,
+            $row->raw['Content_Status'] ?? null,
+            $row->raw['review_state'] ?? null,
+            $row->raw['Review_State'] ?? null,
+        ] as $value) {
+            $state = $this->normalizeString($value);
+            if ($state !== null) {
+                $states[] = strtolower($state);
+            }
+        }
+
+        return array_values(array_unique($states));
+    }
+
+    /**
+     * @param  list<string>  $needles
+     */
+    private function containsAny(string $value, array $needles): bool
+    {
+        foreach ($needles as $needle) {
+            if (str_contains($value, $needle)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
