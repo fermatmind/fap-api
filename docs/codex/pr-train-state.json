@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-13T17:37:00+08:00",
+  "updated_at": "2026-05-13T19:16:46+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -3484,6 +3484,73 @@
       "local_cleanup_executed": false,
       "sidecar_issues": [],
       "post_merge_runbook_required": true
+    },
+    "RIASEC-DEEP-COPY-01": {
+      "repo": "fap-api",
+      "branch": "codex/riasec-deep-copy-01-slot-schema",
+      "title": "feat(riasec): harden deep copy slot schema contract",
+      "status": "in_progress",
+      "depends_on": [
+        "RIASEC-DEEP-COPY-00"
+      ],
+      "scope_type": "backend_deep_copy_slot_schema_contract_only",
+      "allowed_paths": [
+        "backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php",
+        "backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "backend/docs/riasec/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "RIASEC-DEEP-COPY-00 is merged in fap-web as PR #786 with merge commit c17b55c3b8942eb72ac9845d3414876b14c4fe5c; ledger cleanup PR #787 confirmed state."
+        },
+        "content_registry_contract": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php --no-ansi",
+          "evidence": "6 tests passed, 51 assertions."
+        },
+        "freeze_classifier": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|riasec_content_registry' --no-ansi",
+          "evidence": "2 tests passed, 4 assertions."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecContentRegistrySlotContract.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php"
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --no-ansi",
+          "evidence": "Command completed successfully; PR introduces no route changes."
+        },
+        "sqlite_migrate_pretend": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "evidence": "Command completed successfully; PR introduces no migrations."
+        },
+        "json_yaml_validity": {
+          "status": "pass",
+          "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")' && jq empty docs/codex/pr-train-state.json"
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to RIASEC content slot contract, its unit test, backend RIASEC schema docs, and docs/codex train metadata."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
     }
   }
 }
