@@ -4507,6 +4507,61 @@
       "sidecar_issues": [
 
       ]
+    },
+    "REPAIR-80-READINESS-COMMAND-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-80-cohort-readiness-command",
+      "title": "feat(api): add career 80 cohort readiness command",
+      "name": "Add read-only Career 80 cohort readiness command",
+      "status": "in_progress",
+      "depends_on": [
+        "INDEX-STATE-MINIMUM-APPLY-1"
+      ],
+      "scope_type": "80_readiness_command_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonical80CohortReadiness.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no rollout",
+        "no manifest generation",
+        "no DB mutation",
+        "no apply",
+        "no backfill",
+        "no deploy",
+        "no fap-web change"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided REPAIR-80-READINESS-COMMAND-1 execution goal and authorized docs/codex train metadata updates for this item."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "Post-minimum-index-apply audit reached EIGHTY_READINESS_READY with near_eligible_count=80, but the dedicated read-only 80 readiness command is missing."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to a read-only readiness command, tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "80-READINESS-2 run read-only 80 readiness",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+
+      ]
     }
   }
 }
