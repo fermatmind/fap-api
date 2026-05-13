@@ -20,6 +20,15 @@ final class RiasecDeepCopySlotRegistry
         'E_C',
     ];
 
+    /** @var list<string> */
+    public const LAYER_140Q_STATES = [
+        'agreement',
+        'tension',
+        'unavailable',
+        'insufficient_quality',
+        'not_applicable_60q_only',
+    ];
+
     public function __construct(
         private readonly RiasecContentRegistrySlotContract $contract = new RiasecContentRegistrySlotContract,
     ) {}
@@ -97,6 +106,85 @@ final class RiasecDeepCopySlotRegistry
     }
 
     /**
+     * @return array<string,array<string,mixed>>
+     */
+    public function layer140qSlots(): array
+    {
+        return [
+            'task_activity_card' => $this->layer140qSlot('140q_task_card_copy', 'task_activity_card', [
+                'title' => '任务活动卡',
+                'question' => '你真正喜欢做的，是哪类工作活动？',
+                'summary' => '这张卡把兴趣拆成更具体的任务活动，帮助区分你喜欢的是问题本身，还是某个职业名带来的想象。',
+                'what_user_sees' => ['更容易激活你的任务活动', '可能消耗你的任务活动', '值得先验证的一个小任务'],
+                'layer_state' => 'agreement',
+            ]),
+            'environment_card' => $this->layer140qSlot('140q_environment_card_copy', 'environment_card', [
+                'title' => '工作环境卡',
+                'question' => '这些活动出现在哪种环境里，你仍然有兴趣？',
+                'summary' => '同一个任务在不同环境里感受会不同。环境卡帮助把任务兴趣和工作日常拆开。',
+                'what_user_sees' => ['安静深研 vs 真实反馈', '合作支持 vs 结果导向', '开放表达 vs 流程约束'],
+                'layer_state' => 'agreement',
+            ]),
+            'role_responsibility_card' => $this->layer140qSlot('140q_role_card_copy', 'role_responsibility_card', [
+                'title' => '角色责任卡',
+                'question' => '你愿意在工作里承担哪种责任？',
+                'summary' => '喜欢一个任务，不等于喜欢它所在岗位的责任。角色卡帮助看见你想定义问题、表达答案、支持理解、推动落地，还是守住流程。',
+                'what_user_sees' => ['定义问题', '表达答案', '支持理解', '推动落地', '守住流程'],
+                'layer_state' => 'agreement',
+            ]),
+            'layer_agreement' => $this->layer140qSlot('140q_layer_agreement_copy', 'layer_agreement', [
+                'title' => '任务、环境和角色线索大体一致',
+                'summary' => '你的任务活动、工作环境和角色责任线索大体一致。下一步可以选择一个低风险任务进行验证，而不是急着锁定职业名称。',
+                'layer_state' => 'agreement',
+            ]),
+            'layer_tension' => $this->layer140qSlot('140q_tension_copy', 'layer_tension', [
+                'title' => '任务兴趣和工作日常线索有张力',
+                'summary' => '你的任务兴趣和工作日常线索强调了不同层面。更稳妥的读法是：喜欢的任务、能长期投入的环境、愿意承担的角色责任，需要分开验证。',
+                'layer_state' => 'tension',
+            ]),
+            'layer_unavailable' => $this->layer140qSlot('140q_layer_unavailable_copy', 'layer_unavailable', [
+                'title' => '工作日常三张卡暂不可用',
+                'summary' => '当前结果可以看基础兴趣方向。任务、环境和角色责任三张卡需要完成 140Q 后才会显示；它们只会让工作日常线索更具体。',
+                'layer_state' => 'not_applicable_60q_only',
+            ]),
+            '140q_cta' => $this->layer140qSlot('140q_cta_copy', '140q_cta', [
+                'title' => '你喜欢的是任务本身，还是这份工作的真实日常？',
+                'summary' => '60Q 看兴趣方向；140Q 看工作日常。140Q 提供更具体的情境线索，不代表正确性更高，也不会覆盖 60Q。',
+                'button_label' => '查看 140Q 工作日常三张卡',
+                'layer_state' => 'unavailable',
+            ]),
+            '140q_not_recommended' => $this->layer140qSlot('140q_not_recommended_copy', '140q_not_recommended', [
+                'title' => '暂不建议继续深入版',
+                'summary' => '由于本次作答需要谨慎阅读，暂不展示 140Q 三张卡。建议稍后重测，而不是继续做强解释。',
+                'layer_state' => 'insufficient_quality',
+            ]),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function resolve140qLayerSlot(string $slotName): array
+    {
+        $slotName = trim($slotName);
+        $slot = $this->layer140qSlots()[$slotName] ?? null;
+
+        if ($slot === null) {
+            return [
+                'slot_key' => '140q_layer_unknown',
+                'slot_name' => $slotName,
+                'content_status' => 'unavailable',
+                'module_state' => 'omitted',
+                'fallback_behavior' => 'omit_module',
+                'frontend_fallback_allowed' => false,
+                'reason' => 'unsupported_140q_layer_slot',
+            ];
+        }
+
+        return $slot;
+    }
+
+    /**
      * @return list<string>
      */
     public function validateSlot(array $slot): array
@@ -130,6 +218,17 @@ final class RiasecDeepCopySlotRegistry
                         $errors[] = 'missing_'.$field;
                     }
                 }
+            }
+        }
+
+        if (($slot['slot_group'] ?? null) === '140q_layer_copy') {
+            foreach ($this->layer140qRequiredFields() as $field) {
+                if (! array_key_exists($field, $slot) || $this->isBlank($slot[$field])) {
+                    $errors[] = 'missing_'.$field;
+                }
+            }
+            if (! in_array((string) ($slot['layer_state'] ?? ''), self::LAYER_140Q_STATES, true)) {
+                $errors[] = 'unsupported_140q_layer_state';
             }
         }
 
@@ -187,6 +286,24 @@ final class RiasecDeepCopySlotRegistry
             'real_world_cost',
             'common_misread',
             'activities_to_validate',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function layer140qRequiredFields(): array
+    {
+        return [
+            'slot_name',
+            'title',
+            'summary',
+            'layer_state',
+            'forbidden_claims',
+            'user_visible_boundary',
+            'content_version',
+            'evidence_level',
+            'content_status',
         ];
     }
 
@@ -408,6 +525,42 @@ final class RiasecDeepCopySlotRegistry
             'fallback_behavior' => 'omit_module',
             'frontend_fallback_allowed' => false,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return array<string,mixed>
+     */
+    private function layer140qSlot(string $slotKey, string $slotName, array $content): array
+    {
+        return array_merge([
+            'slot_key' => $slotKey,
+            'slot_group' => '140q_layer_copy',
+            'scale_code' => 'RIASEC',
+            'locale' => 'zh-CN',
+            'content_version' => 'riasec_140q_layer_state_copy_v1',
+            'interpretation_rule_version' => 'riasec_interpretation_rule_spec_v2',
+            'applicable_form_codes' => ['riasec_140'],
+            'applicable_profile_shapes' => ['clear_code', 'blended_code', 'broad_profile', 'near_tie', 'low_clarity'],
+            'applicable_quality_states' => ['normal', 'caution'],
+            'applicable_codes' => ['any'],
+            'slot_name' => $slotName,
+            'forbidden_claims' => [
+                '140q_accuracy_claim',
+                '60q_override',
+                'raw_score_delta',
+                'job_fit',
+                'ability_or_skill_inference',
+            ],
+            'required_boundaries' => $this->requiredBoundaries(),
+            'user_visible_boundary' => '140Q 是工作日常情境线索，不改写 60Q，不比较 raw score，也不输出岗位结论。',
+            'evidence_level' => 'expert_reviewed',
+            'source_status' => 'reviewed_content_copy',
+            'review_status' => 'approved_for_staging',
+            'fallback_behavior' => 'omit_module',
+            'content_status' => 'authored',
+            'frontend_fallback_allowed' => false,
+        ], $content);
     }
 
     /**

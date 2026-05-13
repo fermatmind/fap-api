@@ -2069,3 +2069,37 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: RIASEC-DEEP-COPY-04
+    repo: fap-api
+    depends_on:
+      - RIASEC-DEEP-COPY-03
+    branch: codex/riasec-deep-copy-04-140q-narrative-slots
+    title: "feat(riasec): add 140q narrative runtime slots"
+    scope:
+      - Add backend-authoritative 140Q task, environment, role, CTA, agreement, tension, unavailable, and not-recommended slots.
+      - Define safe 140Q layer state contract without changing 140Q scoring.
+      - Keep frontend rendering, paywall, share/PDF/history, and analytics unchanged.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change 60Q or 140Q scoring.
+      - Add frontend 140Q copy/rendering, sales copy, paywall, or local fallback.
+      - Add accuracy, override, raw delta, job fit, ranking, success, hiring, or matching claims.
+    validation:
+      - targeted PHPUnit for RIASEC 140Q layer and deep copy registry contracts
+      - scoped freeze classifier test if runtime path allowance changes
+      - scoped Pint for touched PHP
+      - JSON/YAML validity
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
