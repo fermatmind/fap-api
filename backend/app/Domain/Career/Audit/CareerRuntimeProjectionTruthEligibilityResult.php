@@ -70,7 +70,10 @@ final class CareerRuntimeProjectionTruthEligibilityResult
             expectedRows: count($rows),
             foundProjectionRows: count(array_filter($rows, static fn (CareerRuntimeProjectionTruthEligibilityRow $row): bool => $row->projectionExists)),
             foundTruthRows: count(array_filter($rows, static fn (CareerRuntimeProjectionTruthEligibilityRow $row): bool => $row->truthExists)),
-            foundPublished: count(array_filter($rows, static fn (CareerRuntimeProjectionTruthEligibilityRow $row): bool => $row->issues === [])),
+            foundPublished: count(array_filter($rows, static fn (CareerRuntimeProjectionTruthEligibilityRow $row): bool => $row->issues === []
+                && $row->runtimePublishState === 'published'
+                && $row->truthState === 'published'
+                && $row->canonicalPublicType === 'public_canonical_job')),
             missingProjectionRows: self::countRowsWithReason($rows, CareerRuntimeProjectionTruthEligibilityIssue::PROJECTION_ROW_MISSING),
             missingTruthRows: self::countRowsWithReason($rows, CareerRuntimeProjectionTruthEligibilityIssue::TRUTH_ROW_MISSING),
             notPublishedRows: count(array_filter($rows, static fn (CareerRuntimeProjectionTruthEligibilityRow $row): bool => self::rowHasAnyReason($row, [
