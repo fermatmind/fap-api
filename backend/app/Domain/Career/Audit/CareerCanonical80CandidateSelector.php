@@ -46,6 +46,10 @@ final class CareerCanonical80CandidateSelector
             throw new InvalidArgumentException('Career 80 candidate selection target_count must be positive.');
         }
 
+        $policy = (new Career2786ReadinessPolicyClassifier)->classify(
+            report: $report,
+            targetCount: $targetCount,
+        );
         $hardBlockers = $this->normalizeReasons($hardBlockers);
         $ranked = $this->rankedRows($report, $hardBlockers);
         $selectedCount = 0;
@@ -75,7 +79,7 @@ final class CareerCanonical80CandidateSelector
             );
         }
 
-        return CareerCanonical80CandidateSelectionReport::build($targetCount, $rows);
+        return CareerCanonical80CandidateSelectionReport::build($targetCount, $rows, $policy->summary());
     }
 
     /**

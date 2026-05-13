@@ -425,6 +425,108 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertSame('blocked', data_get($payload, 'rows.0.surface_status.status'));
     }
 
+    public function test_command_output_includes_policy_summary_for_deferred_surface_and_remediation(): void
+    {
+        $planPath = $this->writePlanner([
+            [
+                'row_number' => 2,
+                'canonical_slug' => 'actuaries',
+                'status' => 'ready_for_pilot',
+                'source_code' => '15-2011.00',
+                'title_en' => 'Actuaries',
+                'title_zh' => '精算师',
+                'ready_for_sitemap' => false,
+                'seo' => [
+                    'en_title' => 'Actuaries Career Guide',
+                    'en_description' => 'Explore actuaries with source-backed career evidence.',
+                    'en_target_queries' => '["actuaries career"]',
+                    'search_intent_type' => '["career_exploration"]',
+                ],
+                'raw' => [
+                    'Ready_For_Sitemap' => false,
+                    'Ready_For_LLMS' => false,
+                    'EN_SEO_Title' => 'Actuaries Career Guide',
+                    'EN_SEO_Description' => 'Explore actuaries with source-backed career evidence.',
+                    'CN_SEO_Title' => '精算师职业指南',
+                    'CN_SEO_Description' => '了解精算师职业证据。',
+                    'EN_Target_Queries' => '["actuaries career"]',
+                    'Search_Intent_Type' => '["career_exploration"]',
+                ],
+            ],
+            [
+                'row_number' => 3,
+                'canonical_slug' => 'missing-index',
+                'status' => 'ready_for_pilot',
+                'source_code' => '00-0000.00',
+                'title_en' => 'Missing Index',
+                'title_zh' => '缺少索引',
+                'ready_for_sitemap' => false,
+                'seo' => [
+                    'en_title' => 'Missing Index Career Guide',
+                    'en_description' => 'Explore missing index with source-backed career evidence.',
+                    'en_target_queries' => '["missing index career"]',
+                    'search_intent_type' => '["career_exploration"]',
+                ],
+                'raw' => [
+                    'Ready_For_Sitemap' => false,
+                    'Ready_For_LLMS' => false,
+                    'EN_SEO_Title' => 'Missing Index Career Guide',
+                    'EN_SEO_Description' => 'Explore missing index with source-backed career evidence.',
+                    'CN_SEO_Title' => '缺少索引职业指南',
+                    'CN_SEO_Description' => '了解缺少索引职业证据。',
+                    'EN_Target_Queries' => '["missing index career"]',
+                    'Search_Intent_Type' => '["career_exploration"]',
+                ],
+            ],
+        ]);
+        $projectionPath = $this->writeJsonArtifact('projection', [
+            'items' => [
+                ['slug' => 'actuaries', 'locale' => 'en', 'runtime_publish_state' => 'published', 'canonical_public_type' => 'public_canonical_job'],
+                ['slug' => 'missing-index', 'locale' => 'en', 'runtime_publish_state' => 'published', 'canonical_public_type' => 'public_canonical_job'],
+            ],
+        ]);
+        $truthPath = $this->writeJsonArtifact('truth', [
+            'items' => [
+                ['slug' => 'actuaries', 'locale' => 'en', 'state' => 'published', 'canonical_public_type' => 'public_canonical_job'],
+                ['slug' => 'missing-index', 'locale' => 'en', 'state' => 'published', 'canonical_public_type' => 'public_canonical_job'],
+            ],
+        ]);
+        $entityPath = $this->writeEntityContext([
+            ['canonical_slug' => 'actuaries', 'occupation_exists' => true, 'occupation_id' => 123, 'missing_entity_fields' => []],
+            ['canonical_slug' => 'missing-index', 'occupation_exists' => true, 'occupation_id' => 456, 'missing_entity_fields' => []],
+        ]);
+        $indexPath = $this->writeIndexContext([
+            ['canonical_slug' => 'actuaries', 'latest_index_state' => 'indexed', 'public_facing_state' => 'indexed', 'index_eligible' => true],
+            ['canonical_slug' => 'missing-index', 'latest_index_state' => null, 'public_facing_state' => null, 'index_eligible' => null, 'evidence' => ['occupation_missing' => false]],
+        ]);
+        $surfacePath = $this->writeSurfaceContext([
+            ['canonical_slug' => 'actuaries', 'locale' => 'en', 'api_canonical_path' => '/en/career/jobs/actuaries', 'api_indexable' => true, 'surface_verified' => false, 'issues' => ['surface_unverified']],
+            ['canonical_slug' => 'missing-index', 'locale' => 'en', 'api_canonical_path' => '/en/career/jobs/missing-index', 'api_indexable' => true, 'surface_verified' => false, 'issues' => ['surface_unverified']],
+        ]);
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'all',
+            '--public-resolution-plan' => $planPath,
+            '--entity-context' => $entityPath,
+            '--index-state-context' => $indexPath,
+            '--surface-context' => $surfacePath,
+            '--projection' => $projectionPath,
+            '--truth' => $truthPath,
+            '--locales' => 'en',
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertArrayHasKey('policy_summary', $payload);
+        $this->assertSame('career_2786_readiness_policy.v1', $payload['policy_summary']['schema_version']);
+        $this->assertSame(1, $payload['policy_summary']['deferred_until_candidate_count']);
+        $this->assertSame(1, $payload['policy_summary']['remediation_required_count']);
+        $this->assertSame(1, $payload['policy_summary']['near_eligible_count']);
+        $this->assertSame(0, $payload['policy_summary']['eligible_candidate_count']);
+        $this->assertContains('resolve_index_entity_remediation_required', $payload['policy_summary']['candidate_cohort_prerequisites']);
+        $this->assertContains('candidate_only_surface_verification_after_80_candidates_exist', $payload['policy_summary']['recommended_order']);
+    }
+
     public function test_command_writes_output_json_when_requested(): void
     {
         $outputPath = sys_get_temp_dir().'/career-audit-command-output-'.bin2hex(random_bytes(4)).'.json';
@@ -601,6 +703,7 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
             'rows',
             'sidecars',
             'context_summary',
+            'policy_summary',
             'run_context',
             'read_only',
             'writes_database',

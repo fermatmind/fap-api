@@ -105,6 +105,14 @@ REPAIR-RUN-CTX-1 adds top-level `context_summary` and `run_context` sections. Th
 
 The context layer intentionally groups row-wide context blockers. For example, `runtime_projection_context_missing` across 5,572 slug/locale rows is one missing `--projection` artifact requirement, not 5,572 separate data defects.
 
+REPAIR-INDEX-ENTITY-POLICY-2 adds top-level `policy_summary`. It classifies broad surface and SEO/GEO policy states separately from entity/index remediation gaps:
+
+- planner-only `surface_unverified` and `surface_artifact_missing` rows are `deferred_until_candidate` until a candidate cohort is selected
+- `sitemap_expected_not_ready`, `llms_expected_not_ready`, and `llms_full_expected_not_ready` are `expected_not_ready` for non-candidate rows
+- `index_state_missing`, `occupation_missing`, and `entity_field_missing` remain remediation-required blockers and approval-gated data tasks
+
+The command still preserves `by_reason`; policy classification adds planning clarity without hiding blockers or claiming surface/live acceptance.
+
 See `backend/docs/career/audits/audit_run_context.md` for rerun modes and approval gate templates.
 
 ## Non-Goals

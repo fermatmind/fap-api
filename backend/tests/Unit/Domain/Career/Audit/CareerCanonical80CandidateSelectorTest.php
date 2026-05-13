@@ -87,8 +87,25 @@ final class CareerCanonical80CandidateSelectorTest extends TestCase
         $this->assertSame(2, $payload['candidate_count']);
         $this->assertSame(1, $payload['selected_count']);
         $this->assertSame(1, $payload['excluded_count']);
+        $this->assertSame('career_2786_readiness_policy.v1', $payload['policy_summary']['schema_version']);
         $this->assertSame(['actuaries'], $payload['selected_slugs']);
         $this->assertSame('excluded_hard_blocker', $payload['rows'][1]['candidate_status']);
+    }
+
+    public function test_policy_summary_defers_surface_and_preserves_index_remediation(): void
+    {
+        $report = $this->report([
+            $this->row('surface-wait', 'en', reasons: ['surface_unverified']),
+            $this->row('index-gap', 'en', reasons: ['index_state_missing']),
+        ]);
+
+        $payload = (new CareerCanonical80CandidateSelector)->select($report, targetCount: 2)->toArray();
+
+        $this->assertSame(1, $payload['policy_summary']['deferred_until_candidate_count']);
+        $this->assertSame(1, $payload['policy_summary']['remediation_required_count']);
+        $this->assertSame(1, $payload['policy_summary']['near_eligible_count']);
+        $this->assertContains('resolve_index_entity_remediation_required', $payload['policy_summary']['candidate_cohort_prerequisites']);
+        $this->assertContains('candidate_only_surface_verification_after_80_candidates_exist', $payload['policy_summary']['recommended_order']);
     }
 
     public function test_custom_hard_blockers_can_exclude_policy_reasons(): void
@@ -138,7 +155,7 @@ final class CareerCanonical80CandidateSelectorTest extends TestCase
             indexStatus: $this->layer(CareerCanonicalEligibilityLayer::INDEX, $this->layerStatus($reasons, 'index_state_missing')),
             runtimeStatus: $this->layer(CareerCanonicalEligibilityLayer::RUNTIME, $this->layerStatus($reasons, 'truth_row_missing')),
             seoGeoStatus: $this->layer(CareerCanonicalEligibilityLayer::SEO_GEO, $this->layerStatus($reasons, 'structured_data_missing')),
-            surfaceStatus: $this->layer(CareerCanonicalEligibilityLayer::SURFACE, $this->layerStatus($reasons, 'surface_context_missing')),
+            surfaceStatus: $this->layer(CareerCanonicalEligibilityLayer::SURFACE, $this->surfaceLayerStatus($reasons)),
             safetyStatus: $this->layer(CareerCanonicalEligibilityLayer::SAFETY, CareerCanonicalEligibilityStatus::PASS),
             overallStatus: $status,
             severity: $severity,
@@ -153,6 +170,13 @@ final class CareerCanonical80CandidateSelectorTest extends TestCase
         return in_array($reason, $reasons, true)
             ? CareerCanonicalEligibilityStatus::BLOCKED
             : CareerCanonicalEligibilityStatus::PASS;
+    }
+
+    private function surfaceLayerStatus(array $reasons): string
+    {
+        return array_intersect($reasons, ['surface_context_missing', 'surface_unverified', 'surface_artifact_missing']) === []
+            ? CareerCanonicalEligibilityStatus::PASS
+            : CareerCanonicalEligibilityStatus::BLOCKED;
     }
 
     private function layer(string $layer, string $status): CareerCanonicalEligibilityLayerStatus

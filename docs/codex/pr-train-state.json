@@ -4390,6 +4390,65 @@
       "sidecar_issues": [
 
       ]
+    },
+    "REPAIR-INDEX-ENTITY-POLICY-2": {
+      "repo": "fap-api",
+      "branch": "fix/career-index-entity-policy-readiness-2",
+      "title": "fix(api): classify career readiness policy blockers",
+      "name": "Defer broad surface verification and classify index/entity/policy readiness",
+      "status": "in_progress",
+      "depends_on": [
+        "RUN-1E",
+        "CTX-SURFACE-EXPORT-1"
+      ],
+      "scope_type": "readiness_policy_classification_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/*",
+        "backend/app/Console/Commands/CareerAuditCanonicalEligibility.php",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no live crawl",
+        "no production DB query",
+        "no DB mutation",
+        "no index_state apply",
+        "no occupation backfill apply",
+        "no 80 readiness run",
+        "no manifest generation",
+        "no rollout",
+        "no fap-web change",
+        "no deploy"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided REPAIR-INDEX-ENTITY-POLICY-2 execution goal and authorized docs/codex train metadata updates for this item."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "RUN-1E completed with surface context supplied; surface_context_missing removed, but broad surface/SEO policy states and index/entity gaps remain."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to audit policy classification/reporting, synthetic tests, career audit docs, train metadata, and optional freeze allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "RUN-1F rerun audit and SCAN-6 policy-aware decision",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+
+      ]
     }
   }
 }

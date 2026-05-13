@@ -12,6 +12,7 @@ final class CareerCanonical80CandidateSelectionReport
 
     /**
      * @param  list<CareerCanonical80CandidateSelectionRow>  $rows
+     * @param  array<string, mixed>  $policySummary
      * @param  list<string>  $selectedSlugs
      * @param  list<string>  $nearEligibleSlugs
      * @param  list<string>  $excludedSlugs
@@ -29,6 +30,7 @@ final class CareerCanonical80CandidateSelectionReport
         public readonly array $selectedSlugs,
         public readonly array $nearEligibleSlugs,
         public readonly array $excludedSlugs,
+        public readonly array $policySummary = [],
     ) {
         self::assertNonEmptyString($this->schemaVersion, 'schema_version');
         CareerCanonicalEligibilityStatus::assertValid($this->status);
@@ -44,6 +46,7 @@ final class CareerCanonical80CandidateSelectionReport
             }
         }
         self::assertRows($this->rows);
+        self::assertMap($this->policySummary, 'policy_summary');
         self::assertListOfStrings($this->selectedSlugs, 'selected_slugs');
         self::assertListOfStrings($this->nearEligibleSlugs, 'near_eligible_slugs');
         self::assertListOfStrings($this->excludedSlugs, 'excluded_slugs');
@@ -51,10 +54,12 @@ final class CareerCanonical80CandidateSelectionReport
 
     /**
      * @param  list<CareerCanonical80CandidateSelectionRow>  $rows
+     * @param  array<string, mixed>  $policySummary
      */
-    public static function build(int $targetCount, array $rows): self
+    public static function build(int $targetCount, array $rows, array $policySummary = []): self
     {
         self::assertRows($rows);
+        self::assertMap($policySummary, 'policy_summary');
 
         $selectedSlugs = array_values(array_map(
             static fn (CareerCanonical80CandidateSelectionRow $row): string => $row->canonicalSlug,
@@ -83,11 +88,12 @@ final class CareerCanonical80CandidateSelectionReport
             selectedSlugs: array_slice($selectedSlugs, 0, $targetCount),
             nearEligibleSlugs: $nearEligibleSlugs,
             excludedSlugs: $excludedSlugs,
+            policySummary: $policySummary,
         );
     }
 
     /**
-     * @return array{schema_version: string, status: string, target_count: int, candidate_count: int, selected_count: int, near_eligible_count: int, excluded_count: int, readiness_can_run: bool, selected_slugs: list<string>, near_eligible_slugs: list<string>, excluded_slugs: list<string>, rows: list<array<string, mixed>>}
+     * @return array{schema_version: string, status: string, target_count: int, candidate_count: int, selected_count: int, near_eligible_count: int, excluded_count: int, readiness_can_run: bool, policy_summary: array<string, mixed>, selected_slugs: list<string>, near_eligible_slugs: list<string>, excluded_slugs: list<string>, rows: list<array<string, mixed>>}
      */
     public function toArray(): array
     {
@@ -100,6 +106,7 @@ final class CareerCanonical80CandidateSelectionReport
             'near_eligible_count' => $this->nearEligibleCount,
             'excluded_count' => $this->excludedCount,
             'readiness_can_run' => $this->readinessCanRun,
+            'policy_summary' => $this->policySummary,
             'selected_slugs' => $this->selectedSlugs,
             'near_eligible_slugs' => $this->nearEligibleSlugs,
             'excluded_slugs' => $this->excludedSlugs,
@@ -108,6 +115,16 @@ final class CareerCanonical80CandidateSelectionReport
                 $this->rows
             ),
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $value
+     */
+    private static function assertMap(array $value, string $key): void
+    {
+        if (array_is_list($value) && $value !== []) {
+            throw new InvalidArgumentException(sprintf('Career 80 candidate selection [%s] must be an object map.', $key));
+        }
     }
 
     private static function assertNonEmptyString(string $value, string $key): void

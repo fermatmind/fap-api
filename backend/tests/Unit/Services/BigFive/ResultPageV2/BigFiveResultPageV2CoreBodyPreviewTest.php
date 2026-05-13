@@ -404,6 +404,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_2786_readiness_policy_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Audit/Career2786ReadinessPolicyClassifier.php',
+            'backend/app/Domain/Career/Audit/Career2786ReadinessPolicyIssue.php',
+            'backend/app/Domain/Career/Audit/Career2786ReadinessPolicyResult.php',
+            'backend/app/Domain/Career/Audit/Career2786ReadinessPolicyRow.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_expansion_manifest_train_changes(): void
     {
         $changed = [
@@ -1224,6 +1236,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareer2786ReadinessPolicyFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerExpansionManifestTrainFile($file)) {
                 continue;
             }
@@ -1762,6 +1778,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelectionReport.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelectionRow.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelector.php',
+        ], true);
+    }
+
+    private function isCareer2786ReadinessPolicyFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Audit/Career2786ReadinessPolicyClassifier.php',
+            'backend/app/Domain/Career/Audit/Career2786ReadinessPolicyIssue.php',
+            'backend/app/Domain/Career/Audit/Career2786ReadinessPolicyResult.php',
+            'backend/app/Domain/Career/Audit/Career2786ReadinessPolicyRow.php',
         ], true);
     }
 
