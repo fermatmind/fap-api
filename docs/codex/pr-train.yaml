@@ -1081,6 +1081,7 @@ prs:
       - backend/app/Http/Controllers/API/V0_5/Cms/LandingSurfaceController.php
       - backend/tests/Feature/CareerCms/ArticleBaselineImportTest.php
       - backend/tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -1096,6 +1097,7 @@ prs:
       - php artisan route:list --no-ansi
       - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
       - vendor/bin/pint --test app/Console/Commands/ArticleImportLocalBaseline.php app/Http/Controllers/API/V0_5/Cms/LandingSurfaceController.php tests/Feature/CareerCms/ArticleBaselineImportTest.php tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php
+      - php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|article_baseline_projection_convergence' --no-ansi
       - git diff --check
     companion_validation:
       repo: fap-web

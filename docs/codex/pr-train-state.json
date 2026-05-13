@@ -2942,7 +2942,7 @@
         },
         "scope_validation": {
           "status": "pass",
-          "evidence": "Changed files are confined to Article baseline importer, landing surface recommended article projection, focused backend tests, and PR train metadata."
+          "evidence": "Changed files are confined to Article baseline importer, landing surface recommended article projection, focused backend tests, test-only Big Five freeze classifier governance, and PR train metadata."
         },
         "article_baseline_import": {
           "status": "pass",
@@ -2971,8 +2971,13 @@
         },
         "pint_scoped": {
           "status": "pass",
-          "command": "vendor/bin/pint --test app/Console/Commands/ArticleImportLocalBaseline.php app/Http/Controllers/API/V0_5/Cms/LandingSurfaceController.php tests/Feature/CareerCms/ArticleBaselineImportTest.php tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php",
-          "evidence": "Scoped Pint check passed for 4 files."
+          "command": "vendor/bin/pint --test app/Console/Commands/ArticleImportLocalBaseline.php app/Http/Controllers/API/V0_5/Cms/LandingSurfaceController.php tests/Feature/CareerCms/ArticleBaselineImportTest.php tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "evidence": "Scoped Pint check passed for 5 files."
+        },
+        "bigfive_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|article_baseline_projection_convergence' --no-ansi",
+          "evidence": "2 tests passed, 4 assertions. Added test-only classifier allowance for PR-RT-04 LandingSurfaceController article projection convergence scope."
         },
         "diff_check": {
           "status": "pass",
