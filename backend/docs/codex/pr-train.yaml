@@ -3322,3 +3322,35 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-CMS-02
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-cms-02-content-release-revalidate-api
+    base: main
+    depends_on: ["PR-CMS-01"]
+    mode: execute
+    scope: >
+      Backend content release revalidate automation. Add locale-aware
+      content release path planning, graph-driven article release paths,
+      llms invalidation paths, cache invalidation config-missing audit, and
+      Article publish service follow-up coverage without publishing content,
+      changing article bodies, changing public rendering, touching fap-web
+      rendering, or accessing attempts/results/reports/orders/payments/shares.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Filament/Ops/Support/ContentReleaseFollowUp.php app/Services/Cms/ArticlePublishService.php app/Services/Cms/ContentReleasePathPlanner.php tests/Feature/Ops/ContentReleasePathPlannerTest.php tests/Feature/Ops/PostReleaseObservabilityPageTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Ops/ContentReleasePathPlannerTest.php tests/Feature/Ops/PostReleaseObservabilityPageTest.php --no-ansi"
+      - "php artisan route:list --no-ansi"
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true

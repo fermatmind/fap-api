@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
+use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ final class ArticlePublishService
             throw new InvalidArgumentException('article_id must be positive.');
         }
 
-        return DB::transaction(function () use ($articleId): Article {
+        $article = DB::transaction(function () use ($articleId): Article {
             $article = Article::query()
                 ->withoutGlobalScopes()
                 ->where('id', $articleId)
@@ -45,6 +46,10 @@ final class ArticlePublishService
 
             return $article->fresh(['publishedRevision']) ?? $article;
         });
+
+        ContentReleaseAudit::log('article', $article, 'article_publish_service');
+
+        return $article;
     }
 
     public function unpublishArticle(int $articleId): Article

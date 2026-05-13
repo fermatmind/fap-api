@@ -4,15 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Support;
 
-use App\Models\CareerGuide;
-use App\Models\CareerJob;
-use App\Models\ContentPage;
-use App\Models\InterpretationGuide;
-use App\Models\SupportArticle;
 use App\Services\Audit\AuditLogger;
-use App\Services\Cms\ArticleSeoService;
-use App\Services\Cms\CareerGuideSeoService;
-use App\Services\Cms\CareerJobSeoService;
+use App\Services\Cms\ContentReleasePathPlanner;
 use App\Services\Ops\OpsAlertService;
 use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Http\Client\RequestException;
@@ -24,15 +17,26 @@ final class ContentReleaseFollowUp
     public static function dispatch(string $type, object $record, string $source, Request $request): void
     {
         $payload = self::payload($type, $record, $source);
+        $cacheInvalidationUrls = self::cacheInvalidationUrls();
+        $cacheInvalidationSecret = self::cacheInvalidationSecret();
 
-        foreach (self::cacheInvalidationUrls() as $endpoint) {
-            self::postEvent(
+        if ($cacheInvalidationUrls === [] || $cacheInvalidationSecret === '') {
+            self::auditCacheConfigMissing(
                 request: $request,
-                action: 'content_release_cache_signal',
-                endpoint: $endpoint,
                 payload: $payload,
-                alertLabel: 'cache invalidation'
+                missingUrls: $cacheInvalidationUrls === [],
+                missingSecret: $cacheInvalidationSecret === ''
             );
+        } else {
+            foreach ($cacheInvalidationUrls as $endpoint) {
+                self::postEvent(
+                    request: $request,
+                    action: 'content_release_cache_signal',
+                    endpoint: $endpoint,
+                    payload: $payload,
+                    alertLabel: 'cache invalidation'
+                );
+            }
         }
 
         $broadcastWebhook = self::broadcastWebhook();
@@ -106,40 +110,34 @@ final class ContentReleaseFollowUp
      */
     private static function invalidateUrls(string $type, object $record): array
     {
-        return array_values(array_filter(match ($type) {
-            'article' => [
-                app(ArticleSeoService::class)->buildCanonicalUrl(
-                    (string) data_get($record, 'slug', ''),
-                    (string) data_get($record, 'locale', 'en'),
-                ),
-                app(ArticleSeoService::class)->buildListUrl((string) data_get($record, 'locale', 'en')),
+        return app(ContentReleasePathPlanner::class)->paths($type, $record);
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private static function auditCacheConfigMissing(
+        Request $request,
+        array $payload,
+        bool $missingUrls,
+        bool $missingSecret,
+    ): void {
+        app(AuditLogger::class)->log(
+            $request,
+            'content_release_cache_config_missing',
+            (string) data_get($payload, 'content.type', 'content'),
+            (string) data_get($payload, 'content.id', ''),
+            [
+                'source' => (string) data_get($payload, 'source', 'unknown'),
+                'title' => data_get($payload, 'content.title', ''),
+                'locale' => data_get($payload, 'content.locale', ''),
+                'missing_cache_invalidation_urls' => $missingUrls,
+                'missing_cache_invalidation_secret' => $missingSecret,
+                'planned_paths' => self::redactStringList(data_get($payload, 'cache_signal.paths', [])),
             ],
-            'support_article' => $record instanceof SupportArticle
-                ? [
-                    trim((string) ($record->canonical_path ?: '/support/articles/'.$record->slug)),
-                    '/support',
-                ]
-                : [],
-            'interpretation_guide' => $record instanceof InterpretationGuide
-                ? [
-                    trim((string) ($record->canonical_path ?: '/support/guides/'.$record->slug)),
-                    '/support',
-                ]
-                : [],
-            'content_page' => $record instanceof ContentPage
-                ? array_values(array_filter([
-                    trim((string) ($record->canonical_path ?: $record->path ?: '/'.$record->slug)),
-                    (string) data_get($record, 'kind') === ContentPage::KIND_HELP ? '/support' : null,
-                ]))
-                : [],
-            'guide' => $record instanceof CareerGuide
-                ? [app(CareerGuideSeoService::class)->buildCanonicalUrl($record)]
-                : [],
-            'job' => $record instanceof CareerJob
-                ? [app(CareerJobSeoService::class)->buildCanonicalUrl($record, (string) data_get($record, 'locale', 'en'))]
-                : [],
-            default => [],
-        }));
+            reason: 'cms_release_observability',
+            result: 'failed',
+        );
     }
 
     /**
