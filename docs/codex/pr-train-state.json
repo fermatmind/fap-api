@@ -1320,7 +1320,7 @@
       "branch": "fix/career-index-state-authority-audit5",
       "title": "feat(api): add career index-state authority audit",
       "name": "Career Index-state Authority Audit",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "AUDIT-4"
       ],
@@ -2521,8 +2521,8 @@
         "no 80 readiness run",
         "no producer/export command"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "f7407631acc06f1beadf12c512abd7f40f2b576d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1362",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -2539,9 +2539,9 @@
       },
       "failure_reason": null,
       "next_pr": "CTX-BUNDLE-1A rerun, then either CTX-EXPORT-1 or approved read-only context export",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-13T12:11:29Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": []
     },
     "CTX-EXPORT-1": {
