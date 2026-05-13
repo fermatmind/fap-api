@@ -89,6 +89,7 @@ final class RiasecReportComposer
             'score_space_version' => data_get($projectionV2, 'measurement_evidence.score_space_version'),
             'form_code' => data_get($projectionV2, 'form.form_code'),
             'validation_status' => data_get($projectionV2, 'measurement_evidence.validation_status'),
+            'deep_content_slots_schema_version' => data_get($projectionV2, 'deep_content_slots_v1.schema_version'),
         ];
     }
 

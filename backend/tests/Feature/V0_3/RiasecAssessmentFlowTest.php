@@ -127,6 +127,11 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('riasec_public_projection_v2.module_visibility_policy.schema_version', 'riasec.module_visibility_policy.v1');
         $readback->assertJsonPath('riasec_public_projection_v2.module_visibility_policy.policy_id', 'riasec_module_visibility_policy_v1');
         $readback->assertJsonPath('riasec_public_projection_v2.module_visibility_policy.fallback_policy.frontend_inference_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.deep_content_slots_v1.schema_version', 'riasec.deep_content_slots.v1');
+        $readback->assertJsonPath('riasec_public_projection_v2.deep_content_slots_v1.source_policy.frontend_fallback_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.deep_content_slots_v1.slot_visibility_policy.frontend_inference_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.deep_content_slots_v1.snapshot_bound', false);
+        $this->assertRiasecDeepContentSlots($readback->json('riasec_public_projection_v2.deep_content_slots_v1'), false);
         $readback->assertJsonPath('riasec_public_projection_v2.claim_boundary.does_not_measure.3', 'career_success_probability');
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.schema_version', 'riasec.activity_explorer.v0.1');
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.status', 'content_examples_only');
@@ -164,6 +169,13 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
         $report->assertJsonPath('riasec_public_projection_v2.interpretation_state.field_authority.reading_strength', 'backend_owned');
         $report->assertJsonPath('riasec_public_projection_v2.module_visibility_policy.policy_id', 'riasec_module_visibility_policy_v1');
+        $report->assertJsonPath('riasec_public_projection_v2.deep_content_slots_v1.schema_version', 'riasec.deep_content_slots.v1');
+        $report->assertJsonPath('riasec_public_projection_v2.deep_content_slots_v1.snapshot_bound', true);
+        $report->assertJsonPath('report._meta.snapshot_binding_v1.deep_content_slots_schema_version', 'riasec.deep_content_slots.v1');
+        $this->assertSame(
+            $report->json('riasec_public_projection_v2.deep_content_slots_v1'),
+            $report->json('report._meta.riasec_public_projection_v2.deep_content_slots_v1')
+        );
         $report->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.boundary.occupation_examples_policy', 'content_example_not_registry_match_without_reviewed_registry_source');
         $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.snapshot_bound', true);
         $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.surface_policy.formal_report_mutation_allowed', false);
@@ -260,6 +272,9 @@ final class RiasecAssessmentFlowTest extends TestCase
         $this->assertIsArray($reportFull);
         $this->assertSame('RIA', (string) data_get($reportFull, 'top_code'));
         $this->assertTrue((bool) data_get($reportFull, '_meta.riasec_public_projection_v2.measurement_evidence.snapshot_bound'));
+        $this->assertSame('riasec.deep_content_slots.v1', (string) data_get($reportFull, '_meta.riasec_public_projection_v2.deep_content_slots_v1.schema_version'));
+        $this->assertTrue((bool) data_get($reportFull, '_meta.riasec_public_projection_v2.deep_content_slots_v1.snapshot_bound'));
+        $this->assertSame('riasec.deep_content_slots.v1', (string) data_get($reportFull, '_meta.snapshot_binding_v1.deep_content_slots_schema_version'));
 
         /** @var Result $stored */
         $stored = Result::query()->where('attempt_id', $attemptId)->firstOrFail();
@@ -291,6 +306,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $share->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
         $share->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
         $share->assertJsonPath('riasec_snapshot_binding_v1.snapshot_bound', true);
+        $share->assertJsonPath('riasec_public_projection_v2.deep_content_slots_v1.snapshot_bound', true);
+        $share->assertJsonPath('riasec_public_projection_v2.deep_content_slots_v1.source_policy.frontend_fallback_allowed', false);
         $share->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.read_model.raw_feedback_included', false);
         $share->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.surface_policy.share_pdf_exposure_allowed', false);
 
@@ -303,6 +320,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $history->assertJsonPath('items.0.riasec_public_projection_v1.top_code', 'RIA');
         $history->assertJsonPath('items.0.riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
         $history->assertJsonPath('items.0.riasec_snapshot_binding_v1.snapshot_bound', true);
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.deep_content_slots_v1.snapshot_bound', true);
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.deep_content_slots_v1.slot_visibility_policy.frontend_inference_allowed', false);
         $history->assertJsonPath('items.0.riasec_public_projection_v2.exploration_feedback_overlay_v0_1.measured_result_guard.scores_mutation_allowed', false);
         $history->assertJsonPath('items.0.riasec_public_projection_v2.exploration_feedback_overlay_v0_1.claim_boundary.feedback_is_career_match', false);
         $history->assertJsonPath('history_compare.current_top_code', 'RIA');
@@ -370,6 +389,15 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.normalization_method', 'activity_environment_role_weighted_0_100');
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.quality_rule_version', 'riasec_quality_v1');
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.quality_rule_status', 'quality_flags_available');
+        $this->assertRiasecDeepContentSlots($readback->json('riasec_public_projection_v2.deep_content_slots_v1'), false);
+        $slotIds = array_map(
+            static fn (array $slot): string => (string) data_get($slot, 'slot_id'),
+            (array) $readback->json('riasec_public_projection_v2.deep_content_slots_v1.slots')
+        );
+        $this->assertContains('140q_task_card_copy:task_activity_card', $slotIds);
+        $this->assertContains('140q_environment_card_copy:environment_card', $slotIds);
+        $this->assertContains('140q_role_card_copy:role_responsibility_card', $slotIds);
+        $this->assertContains('structural_difference_copy:summary', $slotIds);
     }
 
     public function test_riasec_history_compare_guard_blocks_60_and_140_raw_delta(): void
@@ -438,6 +466,58 @@ final class RiasecAssessmentFlowTest extends TestCase
     private function seedScales(): void
     {
         (new ScaleRegistrySeeder)->run();
+    }
+
+    private function assertRiasecDeepContentSlots(mixed $envelope, bool $snapshotBound): void
+    {
+        $this->assertIsArray($envelope);
+        $this->assertSame('riasec.deep_content_slots.v1', (string) data_get($envelope, 'schema_version'));
+        $this->assertSame($snapshotBound, (bool) data_get($envelope, 'snapshot_bound'));
+        $this->assertFalse((bool) data_get($envelope, 'source_policy.frontend_fallback_allowed', true));
+        $this->assertFalse((bool) data_get($envelope, 'slot_visibility_policy.frontend_inference_allowed', true));
+
+        $slots = data_get($envelope, 'slots');
+        $this->assertIsArray($slots);
+        $this->assertNotEmpty($slots);
+
+        $slotIds = [];
+        foreach ($slots as $slot) {
+            $this->assertIsArray($slot);
+            $this->assertSame('authored', (string) data_get($slot, 'status'));
+            $this->assertSame('authored', (string) data_get($slot, 'content_status'));
+            $this->assertFalse((bool) data_get($slot, 'frontend_fallback_allowed', true));
+            $this->assertContains((string) data_get($slot, 'slot_visibility'), ['visible', 'collapsed']);
+            $this->assertNotSame('', (string) data_get($slot, 'content_version'));
+            $this->assertNotSame('', (string) data_get($slot, 'review_status'));
+            $this->assertNotSame('', (string) data_get($slot, 'source_status'));
+            $this->assertNotSame([], data_get($slot, 'content'));
+            $slotIds[] = (string) data_get($slot, 'slot_id');
+        }
+
+        $this->assertContains('dimension_deep_copy:R', $slotIds);
+        $this->assertContains('dimension_deep_copy:I', $slotIds);
+        $this->assertContains('pair_blend_copy:I_A', $slotIds);
+        $this->assertNotContains('pair_blend_copy:R_I', $slotIds, 'Pending pair slots must fail closed instead of becoming frontend-renderable copy.');
+
+        $serialized = json_encode($envelope, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        foreach ([
+            'Matches',
+            'career recommendation',
+            'job fit',
+            'success prediction',
+            'success probability',
+            'hiring suitability',
+            '140Q more accurate',
+            'raw score delta',
+            '60Q wrong',
+            '更准确',
+            '更准',
+            '岗位匹配',
+            '职业推荐',
+            '职业成功',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $serialized);
+        }
     }
 
     /**
