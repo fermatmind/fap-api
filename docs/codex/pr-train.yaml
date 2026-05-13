@@ -1456,6 +1456,48 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-BASELINE-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-SEO-GEO-1
+      - SCAN-3
+    branch: fix/career-baseline-metadata-repair-1
+    title: "fix(api): map career workbook baseline metadata for audit"
+    name: "Map career workbook baseline metadata for audit"
+    scope_type: audit_baseline_metadata_mapping_only
+    scope:
+      - Use planner/workbook display metadata as a read-only baseline source fallback.
+      - Remove false zh_baseline_missing and required_display_field_missing blockers when source title and SEO display metadata exist.
+      - Keep English title derivation remediation for REPAIR-TITLE-1.
+      - Treat body/content material as out of scope for metadata-only audit repair.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Generate fake baseline content.
+      - Mutate DB or production state.
+      - Run import/apply/backfill.
+      - Touch fap-web.
+      - Apply rollout.
+      - Run 80 readiness.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerBaselineMetadataInventoryAuditor --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "REPAIR-TITLE-1"
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: RIASEC-PERSONALIZATION-00
     repo: fap-api
     branch: codex/riasec-personalization-00-train-registration
