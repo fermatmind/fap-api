@@ -24,6 +24,7 @@ final class RiasecPublicProjectionService
         private readonly RiasecInterpretationRuleContract $interpretationRuleContract,
         private readonly RiasecQualityRuleContract $qualityRuleContract,
         private readonly RiasecReportModuleSelector $moduleSelector,
+        private readonly RiasecDeepCopySlotRegistry $deepCopySlots,
     ) {}
 
     public function buildFromResult(Result $result, string $locale = 'zh-CN'): array
@@ -183,9 +184,286 @@ final class RiasecPublicProjectionService
             'activity_explorer_v0_1' => $this->activityExplorer->build((string) ($v1['top_code'] ?? ''), $locale),
         ];
         $projection['module_visibility_policy'] = $this->moduleSelector->build($projection);
+        $projection['deep_content_slots_v1'] = $this->deepContentSlotsEnvelope($projection, $locale);
         $projection['exploration_feedback_overlay_v0_1'] = $this->feedbackOverlay->build($result, $projection, $snapshotBound);
 
         return $projection;
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @return array<string,mixed>
+     */
+    private function deepContentSlotsEnvelope(array $projection, string $locale): array
+    {
+        $qualityState = (string) data_get($projection, 'quality.quality_state', 'normal');
+        $formCode = (string) data_get($projection, 'form.form_code', 'riasec_60');
+        $topCode = (string) data_get($projection, 'holland_code.code', '');
+        $modulePolicy = is_array($projection['module_visibility_policy'] ?? null) ? $projection['module_visibility_policy'] : [];
+
+        $slots = [];
+        foreach ($this->deepCopySlots->dimensionSlots() as $slot) {
+            $this->appendRenderableSlot($slots, $slot, 'six_dimension_map', $modulePolicy, $locale);
+        }
+
+        foreach ($this->selectedPairKeys($topCode) as $pairKey) {
+            $this->appendRenderableSlot(
+                $slots,
+                $this->deepCopySlots->resolvePairBlendSlot($pairKey),
+                'pair_blend',
+                $modulePolicy,
+                $locale
+            );
+        }
+
+        foreach ($this->selected140qSlots($formCode, $qualityState) as $slotName) {
+            $moduleKey = str_starts_with($slotName, '140q_') ? '140q_cta' : '140q_context_cards';
+            $this->appendRenderableSlot(
+                $slots,
+                $this->deepCopySlots->resolve140qLayerSlot($slotName),
+                $moduleKey,
+                $modulePolicy,
+                $locale
+            );
+        }
+
+        foreach ($this->selectedQualitySlots($qualityState, $formCode) as $slotName) {
+            $slot = $this->deepCopySlots->lowQualitySlots()[$slotName] ?? null;
+            if (is_array($slot)) {
+                $this->appendRenderableSlot($slots, $slot, 'quality_copy', $modulePolicy, $locale, 'visible');
+            }
+        }
+
+        if ($formCode === 'riasec_140' && ! in_array($qualityState, ['low_quality', 'retake_recommended'], true)) {
+            foreach ($this->deepCopySlots->structuralDifferenceSlots() as $slot) {
+                $this->appendRenderableSlot($slots, $slot, 'structural_difference', $modulePolicy, $locale, 'collapsed');
+            }
+        }
+
+        if (! in_array($qualityState, ['low_quality', 'retake_recommended'], true)) {
+            foreach (['intro', 'input_boundary', 'no_score_mutation_boundary'] as $slotName) {
+                $this->appendRenderableSlot(
+                    $slots,
+                    $this->deepCopySlots->resolveAspirationsSlot($slotName),
+                    'aspirations_calibration',
+                    $modulePolicy,
+                    $locale,
+                    'collapsed'
+                );
+            }
+            foreach (['user_not_wrong_message', 'feedback_no_mutation_boundary', 'next_step'] as $slotName) {
+                $this->appendRenderableSlot(
+                    $slots,
+                    $this->deepCopySlots->resolveDisagreePathSlot($slotName),
+                    'disagree_path',
+                    $modulePolicy,
+                    $locale,
+                    'collapsed'
+                );
+            }
+        }
+
+        return [
+            'schema_version' => 'riasec.deep_content_slots.v1',
+            'scale_code' => 'RIASEC',
+            'locale' => str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en',
+            'content_authority' => 'backend_riasec_deep_copy_slot_registry',
+            'snapshot_bound' => (bool) data_get($projection, 'measurement_evidence.snapshot_bound', false),
+            'source_policy' => [
+                'frontend_fallback_allowed' => false,
+                'missing_content_behavior' => 'omit_module_fail_closed',
+                'pending_content_behavior' => 'omit_module_fail_closed',
+                'unknown_slot_behavior' => 'hidden',
+                'formal_report_generation' => 'deterministic_backend_snapshot',
+            ],
+            'slot_visibility_policy' => [
+                'module_visibility_policy_id' => (string) data_get($projection, 'module_visibility_policy.policy_id', RiasecReportModuleSelector::POLICY_ID),
+                'hidden_slots_omitted' => true,
+                'pending_or_unavailable_slots_omitted' => true,
+                'frontend_inference_allowed' => false,
+            ],
+            'slots' => array_values($slots),
+        ];
+    }
+
+    /**
+     * @param  array<int,array<string,mixed>>  $slots
+     * @param  array<string,mixed>  $slot
+     * @param  array<string,mixed>  $modulePolicy
+     */
+    private function appendRenderableSlot(
+        array &$slots,
+        array $slot,
+        string $moduleKey,
+        array $modulePolicy,
+        string $locale,
+        ?string $forcedVisibility = null
+    ): void {
+        if (($slot['content_status'] ?? null) !== 'authored') {
+            return;
+        }
+        if (($slot['frontend_fallback_allowed'] ?? true) !== false) {
+            return;
+        }
+        if ($this->deepCopySlots->validateSlot($slot) !== []) {
+            return;
+        }
+
+        $visibility = $forcedVisibility ?? $this->moduleVisibility($modulePolicy, $moduleKey);
+        if ($visibility === 'hidden') {
+            return;
+        }
+
+        $slots[] = $this->publicDeepContentSlot($slot, $moduleKey, $visibility, $locale);
+    }
+
+    /**
+     * @param  array<string,mixed>  $modulePolicy
+     */
+    private function moduleVisibility(array $modulePolicy, string $moduleKey): string
+    {
+        foreach ((array) ($modulePolicy['modules'] ?? []) as $module) {
+            if (is_array($module) && ($module['key'] ?? null) === $moduleKey) {
+                $visibility = (string) ($module['visibility'] ?? 'hidden');
+
+                return in_array($visibility, ['visible', 'collapsed'], true) ? $visibility : 'hidden';
+            }
+        }
+
+        return 'hidden';
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function selectedPairKeys(string $topCode): array
+    {
+        $letters = array_values(array_filter(str_split(strtoupper($topCode)), static fn (string $letter): bool => in_array($letter, RiasecDeepCopySlotRegistry::DIMENSIONS, true)));
+        $pairs = [];
+        for ($i = 0; $i < count($letters); $i++) {
+            for ($j = $i + 1; $j < count($letters); $j++) {
+                $pairs[] = $letters[$i].'_'.$letters[$j];
+            }
+        }
+
+        return $pairs;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function selected140qSlots(string $formCode, string $qualityState): array
+    {
+        if (in_array($qualityState, ['low_quality', 'retake_recommended'], true)) {
+            return [];
+        }
+        if ($formCode === 'riasec_140') {
+            return ['task_activity_card', 'environment_card', 'role_responsibility_card', 'layer_agreement'];
+        }
+
+        return ['layer_unavailable', '140q_cta'];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function selectedQualitySlots(string $qualityState, string $formCode): array
+    {
+        return match ($qualityState) {
+            'low_quality' => ['top_notice', 'user_not_blamed_message', 'what_happened_explanation', 'hidden_modules_explanation', 'retake_guidance', 'share_pdf_boundary', 'next_step'],
+            'retake_recommended' => ['top_notice', 'retake_guidance', 'share_pdf_boundary', 'next_step'],
+            'caution' => ['cautious_reading_notice'],
+            default => $formCode === 'riasec_60' ? ['minimal_quality_boundary_60q'] : [],
+        };
+    }
+
+    /**
+     * @param  array<string,mixed>  $slot
+     * @return array<string,mixed>
+     */
+    private function publicDeepContentSlot(array $slot, string $moduleKey, string $visibility, string $locale): array
+    {
+        $contentKeys = [
+            'title',
+            'summary',
+            'body',
+            'core_drive',
+            'positive_value',
+            'real_world_cost',
+            'high_score_reading',
+            'low_score_safe_reading',
+            'work_activity_examples',
+            'possible_drains',
+            'common_misread',
+            'action_advice',
+            'pair_label',
+            'short_label',
+            'chemistry',
+            'activities_to_validate',
+            'question',
+            'what_user_sees',
+            'button_label',
+        ];
+        $content = [];
+        foreach ($contentKeys as $key) {
+            if (array_key_exists($key, $slot) && $slot[$key] !== null && $slot[$key] !== '' && $slot[$key] !== []) {
+                $content[$key] = $slot[$key];
+            }
+        }
+
+        return [
+            'slot_key' => (string) ($slot['slot_key'] ?? ''),
+            'slot_group' => (string) ($slot['slot_group'] ?? ''),
+            'slot_id' => $this->slotId($slot),
+            'module_key' => $moduleKey,
+            'slot_visibility' => $visibility,
+            'status' => (string) ($slot['content_status'] ?? 'unavailable'),
+            'content_status' => (string) ($slot['content_status'] ?? 'unavailable'),
+            'content_version' => (string) ($slot['content_version'] ?? ''),
+            'review_status' => (string) ($slot['review_status'] ?? ''),
+            'source_status' => (string) ($slot['source_status'] ?? ''),
+            'evidence_level' => (string) ($slot['evidence_level'] ?? ''),
+            'locale' => (string) ($slot['locale'] ?? (str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en')),
+            'frontend_fallback_allowed' => false,
+            'fallback_behavior' => (string) ($slot['fallback_behavior'] ?? 'omit_module'),
+            'applicability' => [
+                'form_codes' => array_values((array) ($slot['applicable_form_codes'] ?? [])),
+                'profile_shapes' => array_values((array) ($slot['applicable_profile_shapes'] ?? [])),
+                'quality_states' => array_values((array) ($slot['applicable_quality_states'] ?? [])),
+                'codes' => array_values((array) ($slot['applicable_codes'] ?? [])),
+                'dimensions' => array_values((array) ($slot['applicable_dimensions'] ?? [])),
+            ],
+            'state' => array_filter([
+                'dimension_code' => $slot['dimension_code'] ?? null,
+                'pair_key' => $slot['pair_key'] ?? null,
+                'slot_name' => $slot['slot_name'] ?? null,
+                'layer_state' => $slot['layer_state'] ?? null,
+                'quality_state' => $slot['quality_state'] ?? null,
+                'structural_difference_state' => $slot['structural_difference_state'] ?? null,
+                'aspirations_state' => $slot['aspirations_state'] ?? null,
+                'disagree_state' => $slot['disagree_state'] ?? null,
+            ], static fn (mixed $value): bool => $value !== null && $value !== ''),
+            'content' => $content,
+            'boundaries' => [
+                'user_visible_boundary' => (string) ($slot['user_visible_boundary'] ?? ''),
+                'required_boundaries' => array_values((array) ($slot['required_boundaries'] ?? [])),
+                'forbidden_claims' => array_values((array) ($slot['forbidden_claims'] ?? [])),
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $slot
+     */
+    private function slotId(array $slot): string
+    {
+        foreach (['dimension_code', 'pair_key', 'slot_name'] as $field) {
+            if (trim((string) ($slot[$field] ?? '')) !== '') {
+                return (string) ($slot['slot_key'] ?? '').':'.(string) $slot[$field];
+            }
+        }
+
+        return (string) ($slot['slot_key'] ?? '');
     }
 
     /**

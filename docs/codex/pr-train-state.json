@@ -4198,7 +4198,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-deep-copy-07-aspirations-disagree-slots",
       "title": "feat(riasec): add aspirations disagree copy slots",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "RIASEC-DEEP-COPY-06"
       ],
@@ -4212,7 +4212,7 @@
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
-      "commit_sha": "ea9701ec",
+      "commit_sha": "058181300f6221f5bfbb5a4455e0b4c86564fb9e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1368",
       "checks": {
         "dependency": {
@@ -4247,11 +4247,90 @@
         }
       },
       "failure_reason": null,
+      "merged_at": "2026-05-13T13:37:47Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "RIASEC-DEEP-COPY-07 local cleanup was not executed in this 08A worktree",
+          "severity": "low",
+          "evidence": "GitHub PR #1368 is merged with commit 058181300f6221f5bfbb5a4455e0b4c86564fb9e and the remote branch is absent. The current task runs in an isolated 08A worktree, so prior local cleanup is recorded as not executed here.",
+          "suggested_owner": "repo-maintenance"
+        }
+      ]
+    },
+    "RIASEC-DEEP-COPY-08A": {
+      "repo": "fap-api",
+      "branch": "codex/riasec-deep-copy-08a-projection-slots",
+      "title": "feat(riasec): expose deep content slots in projection",
+      "status": "in_progress",
+      "depends_on": [
+        "RIASEC-DEEP-COPY-07"
+      ],
+      "scope_type": "backend_projection_report_deep_content_slots_only",
+      "allowed_paths": [
+        "backend/app/Services/Riasec/RiasecPublicProjectionService.php",
+        "backend/app/Services/Report/RiasecReportComposer.php",
+        "backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "commit_sha": "pending_before_push",
+      "pr_url": "",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "RIASEC-DEEP-COPY-07 is merged as PR #1368 with merge commit 058181300f6221f5bfbb5a4455e0b4c86564fb9e; origin/main contains the merge commit."
+        },
+        "riasec_assessment_flow": {
+          "status": "pass_with_existing_warnings",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi",
+          "evidence": "5 tests passed with pre-existing file_get_contents warnings; 629 assertions. Added coverage for projection/report/share/history deep_content_slots_v1 snapshot binding."
+        },
+        "riasec_deep_copy_registry_contracts": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php --no-ansi",
+          "evidence": "39 tests passed, 1622 assertions."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecPublicProjectionService.php app/Services/Report/RiasecReportComposer.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php",
+          "evidence": "PASS, 3 files."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi | rg \"attempts|RIASEC|report\" | head -n 40",
+          "evidence": "Attempt result/report/report-access/report.pdf/share routes remain registered."
+        },
+        "json_yaml_validity": {
+          "status": "pass",
+          "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")' && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+        },
+        "forbidden_runtime_claim_grep": {
+          "status": "pass",
+          "command": "rg -n \"Matches|career recommendation|job fit|success prediction|success probability|hiring suitability|140Q more accurate|raw score delta|更准确|更准|岗位匹配|职业推荐|职业成功\" backend/app/Services/Riasec/RiasecPublicProjectionService.php backend/app/Services/Report/RiasecReportComposer.php || true",
+          "evidence": "No runtime service hits."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to fap-api train metadata, RiasecPublicProjectionService, RiasecReportComposer, and RiasecAssessmentFlowTest. No scorer math, question content packs, fap-web UI, career registry, feedback stream, analytics runtime, or AI report generation files changed."
+        }
+      },
+      "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": [
-
+        {
+          "title": "Primary fap-api worktree contains unrelated PR-CMS train metadata edits",
+          "severity": "medium",
+          "evidence": "/Users/rainie/Desktop/GitHub/fap-api has uncommitted backend/docs/codex/pr-train.yaml and backend/docs/codex/pr-train-state.json edits on codex/pr-cms-01-article-editorial-package-draft-gate. 08A is isolated in /private/tmp/fap-api-riasec-deep-copy-08a.",
+          "suggested_owner": "repo-maintenance"
+        }
       ]
     },
     "CTX-SURFACE-EXPORT-1": {

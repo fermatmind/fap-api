@@ -2244,3 +2244,32 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: RIASEC-DEEP-COPY-08A
+    repo: fap-api
+    depends_on:
+      - RIASEC-DEEP-COPY-07
+    branch: codex/riasec-deep-copy-08a-projection-slots
+    title: "feat(riasec): expose deep content slots in projection"
+    scope:
+      - Expose backend-authoritative RIASEC deep copy slots through riasec_public_projection_v2.
+      - Keep the deep slot envelope deterministic, snapshot-bound through the existing report meta path, and fail-closed for missing or pending content.
+      - Register the PR train item and cover result/report/share/history snapshot consistency.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/app/Services/Report/RiasecReportComposer.php
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change RIASEC scorer math or question content pack semantics.
+      - Add frontend rendering or local interpretation fallback.
+      - Add career matching, recommendation, job fit, ranking, success, hiring, raw delta, or 140Q accuracy claims.
+      - Change career registry, feedback stream, analytics, share/PDF/history runtime behavior, or AI-generated report logic.
+    validation:
+      - targeted PHPUnit for RIASEC assessment flow and deep copy registry contracts
+      - scoped Pint for touched PHP
+      - JSON/YAML validity
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
