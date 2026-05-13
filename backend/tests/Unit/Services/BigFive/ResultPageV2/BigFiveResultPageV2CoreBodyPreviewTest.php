@@ -640,6 +640,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_content_registry_slot_contract_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_riasec_projection_v2_minimal_changes(): void
     {
         $changed = [
@@ -1260,6 +1269,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecContentRegistrySlotContractFile($file)) {
+                continue;
+            }
+
             if ($this->isRiasecProjectionV2MinimalFile($file)) {
                 continue;
             }
@@ -1440,6 +1453,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Riasec/RiasecReportModuleSelector.php',
             'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
         ], true);
+    }
+
+    private function isRiasecContentRegistrySlotContractFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php';
     }
 
     private function isRiasecProjectionV2MinimalFile(string $file): bool
