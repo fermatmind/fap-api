@@ -1963,3 +1963,37 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: RIASEC-DEEP-COPY-02
+    repo: fap-api
+    depends_on:
+      - RIASEC-DEEP-COPY-01
+    branch: codex/riasec-deep-copy-02-dimension-slots
+    title: "feat(riasec): add dimension deep copy runtime slots"
+    scope:
+      - Add backend-authoritative RIASEC dimension deep copy slots for R, I, A, S, E, and C.
+      - Validate core drive, positive value, cost/shadow, high and low safe readings, activity examples, drains, misread clarification, action advice, and boundaries.
+      - Keep frontend rendering and scoring unchanged.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scorer math.
+      - Change RIASEC content pack question semantics.
+      - Add frontend local copy or rendering.
+      - Add career matching, job fit, ranking, success, hiring, O*NET, SOC, or source URL claims.
+      - Change 140Q scoring or compare policy.
+    validation:
+      - targeted PHPUnit for RIASEC deep copy registry and content slot contract
+      - relevant RIASEC flow tests when touched
+      - scoped Pint for touched PHP
+      - JSON/YAML validity
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

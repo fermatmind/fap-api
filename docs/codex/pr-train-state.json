@@ -3704,6 +3704,70 @@
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
       "sidecar_issues": []
+    },
+    "RIASEC-DEEP-COPY-02": {
+      "repo": "fap-api",
+      "branch": "codex/riasec-deep-copy-02-dimension-slots",
+      "title": "feat(riasec): add dimension deep copy runtime slots",
+      "status": "in_progress",
+      "depends_on": [
+        "RIASEC-DEEP-COPY-01"
+      ],
+      "scope_type": "backend_dimension_deep_copy_slots_only",
+      "allowed_paths": [
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php",
+        "backend/tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "backend/docs/riasec/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "commit_sha": "c6f959dca6987dcbbf7c9785a1408043fb2100e8",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1361",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "RIASEC-DEEP-COPY-01 is merged as PR #1356 with merge commit 565ef580525a6feda00bdfba2abb98ae6dfded18; ledger cleanup PR #1359 reconciled state."
+        },
+        "dimension_registry_contract": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php --no-ansi",
+          "evidence": "10 tests passed, 292 assertions."
+        },
+        "riasec_personalization_contracts": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecInterpretationRuleContractTest.php tests/Unit/Services/Riasec/RiasecReportModuleSelectorTest.php --no-ansi",
+          "evidence": "8 tests passed, 188 assertions."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecContentRegistrySlotContract.php tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+        },
+        "freeze_classifier": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|riasec_content_registry' --no-ansi",
+          "evidence": "2 tests passed after adding the RIASEC deep copy registry to the scoped content-registry allowance."
+        },
+        "json_yaml_validity": {
+          "status": "pass",
+          "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")' && jq empty docs/codex/pr-train-state.json"
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to backend RIASEC deep copy slot registry, its unit tests, backend RIASEC docs, and docs/codex train metadata. No scorer, content pack, frontend UI, share/PDF/history, feedback, analytics, or career runtime files changed."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
     }
   }
 }

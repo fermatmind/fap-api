@@ -666,10 +666,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_ignores_riasec_content_registry_slot_contract_changes(): void
+    public function test_runtime_freeze_classifier_ignores_riasec_content_registry_contract_changes(): void
     {
         $changed = [
             'backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php',
+            'backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -1299,7 +1300,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if ($this->isRiasecContentRegistrySlotContractFile($file)) {
+            if ($this->isRiasecContentRegistryContractFile($file)) {
                 continue;
             }
 
@@ -1486,9 +1487,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
-    private function isRiasecContentRegistrySlotContractFile(string $file): bool
+    private function isRiasecContentRegistryContractFile(string $file): bool
     {
-        return $file === 'backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php';
+        return in_array($file, [
+            'backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php',
+            'backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php',
+        ], true);
     }
 
     private function isRiasecProjectionV2MinimalFile(string $file): bool
