@@ -83,6 +83,21 @@ final class ArticleImportLocalBaseline extends Command
             $this->line('will_skip='.(string) $summary['will_skip']);
             $this->line('errors_count='.(string) $summary['errors_count']);
 
+            if ((bool) $this->option('dry-run')) {
+                foreach (($summary['planned_actions'] ?? []) as $plannedAction) {
+                    if (! is_array($plannedAction)) {
+                        continue;
+                    }
+
+                    $this->line(sprintf(
+                        'article_action=%s:%s:%s',
+                        (string) ($plannedAction['locale'] ?? ''),
+                        (string) ($plannedAction['slug'] ?? ''),
+                        (string) ($plannedAction['action'] ?? 'unknown'),
+                    ));
+                }
+            }
+
             $this->info((bool) $this->option('dry-run') ? 'dry-run complete' : 'import complete');
 
             return self::SUCCESS;
@@ -333,7 +348,7 @@ final class ArticleImportLocalBaseline extends Command
     /**
      * @param  array<int, array<string, mixed>>  $rows
      * @param  array{dry_run: bool, upsert: bool, status: string}  $options
-     * @return array<string, int>
+     * @return array<string, mixed>
      */
     private function importRows(
         array $rows,
@@ -353,6 +368,7 @@ final class ArticleImportLocalBaseline extends Command
             'will_update' => 0,
             'will_skip' => 0,
             'errors_count' => 0,
+            'planned_actions' => [],
         ];
 
         $planned = [];
@@ -386,6 +402,15 @@ final class ArticleImportLocalBaseline extends Command
         }
 
         if ($dryRun) {
+            $summary['planned_actions'] = collect($planned)
+                ->map(static fn (array $operation): array => [
+                    'locale' => (string) (($operation['row']['locale'] ?? '') ?: ''),
+                    'slug' => (string) (($operation['row']['slug'] ?? '') ?: ''),
+                    'action' => (string) ($operation['action'] ?? 'unknown'),
+                ])
+                ->values()
+                ->all();
+
             return $summary;
         }
 
@@ -444,7 +469,10 @@ final class ArticleImportLocalBaseline extends Command
             );
 
             if ((string) $desired['status'] === 'published') {
-                if ((string) $article->status !== 'published' || ! (bool) $article->is_public) {
+                $mustRepublishRevision = in_array((string) $operation['action'], ['create', 'update'], true)
+                    || (int) ($article->published_revision_id ?? 0) !== (int) ($article->working_revision_id ?? 0);
+
+                if ($mustRepublishRevision || (string) $article->status !== 'published' || ! (bool) $article->is_public) {
                     $article = $articlePublishService->publishArticle((int) $article->id);
                 }
 
@@ -569,11 +597,55 @@ final class ArticleImportLocalBaseline extends Command
         if ((bool) $article->is_public !== (bool) $desired['is_public']) {
             return false;
         }
+        if ((string) $desired['status'] === 'published' && ! $this->publishedRevisionMatchesDesired($article, $desired)) {
+            return false;
+        }
 
         $desiredPublishedAt = is_string($desired['published_at']) ? $desired['published_at'] : null;
         $currentPublishedAt = $article->published_at?->copy()->utc()->toISOString();
 
         return $desiredPublishedAt === $currentPublishedAt;
+    }
+
+    /**
+     * @param  array<string, mixed>  $desired
+     */
+    private function publishedRevisionMatchesDesired(Article $article, array $desired): bool
+    {
+        $article->loadMissing('publishedRevision');
+
+        if (! $article->publishedRevision instanceof ArticleTranslationRevision) {
+            return false;
+        }
+
+        $revision = $article->publishedRevision;
+        if ((int) $revision->article_id !== (int) $article->id) {
+            return false;
+        }
+        if ((int) $revision->org_id !== (int) $article->org_id) {
+            return false;
+        }
+        if ((string) $revision->locale !== (string) $desired['locale']) {
+            return false;
+        }
+        if ((string) $revision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED) {
+            return false;
+        }
+        if ((string) $revision->title !== (string) $desired['title']) {
+            return false;
+        }
+        if ((string) ($revision->excerpt ?? '') !== (string) $desired['excerpt']) {
+            return false;
+        }
+        if ((string) $revision->content_md !== (string) $desired['content_md']) {
+            return false;
+        }
+        if ($this->normalizeNullableString($revision->seo_title) !== $this->normalizeNullableString($desired['seo_title'] ?? null)) {
+            return false;
+        }
+
+        return $this->normalizeNullableString($revision->seo_description)
+            === $this->normalizeNullableString($desired['seo_description'] ?? null);
     }
 
     private function findExistingArticle(string $slug, string $locale): ?Article
@@ -620,7 +692,16 @@ final class ArticleImportLocalBaseline extends Command
                 ],
             );
 
-        $article = $article->fresh(['seoMeta']) ?? $article;
+        $article = $article->fresh(['seoMeta', 'publishedRevision', 'workingRevision']) ?? $article;
+        if (
+            $article->published_revision_id !== null
+            && $article->working_revision_id !== null
+            && (int) $article->published_revision_id === (int) $article->working_revision_id
+        ) {
+            $article->forceFill(['working_revision_id' => null])->save();
+            $article->unsetRelation('workingRevision');
+        }
+
         $revision = $translationRevisionWorkspace->resolveWorkingRevision($article);
         $revisionHash = $translationRevisionWorkspace->hashForRevision($article, [
             'title' => (string) $desired['title'],
