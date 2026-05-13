@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Tests\Feature\CareerCms;
 
 use App\Models\Article;
+use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleSeoService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 final class ArticleBaselineImportTest extends TestCase
@@ -123,6 +126,147 @@ final class ArticleBaselineImportTest extends TestCase
         $this->assertSame(45, Article::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_upsert_republishes_existing_published_article_revision_from_baseline(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $slug = 'which-love-script-fits-you-best';
+        $baseline = $this->baselineArticle($slug);
+        $oldPublishedAt = Carbon::create(2026, 4, 18, 0, 0, 0, 'UTC');
+
+        /** @var Article $article */
+        $article = Article::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'category_id' => null,
+            'author_name' => 'Fermat Institute',
+            'reviewer_name' => null,
+            'reading_minutes' => 10,
+            'slug' => $slug,
+            'locale' => 'zh-CN',
+            'title' => (string) $baseline['title'],
+            'excerpt' => '很多人以为自己在找“合适的人”，其实更常见的情况是：你还没搞清楚，自己到底在寻求哪一种关系结构。',
+            'content_md' => "# 旧稿标题\n\n## 读完这篇文章，你会带走什么\n\n旧 published revision 正文。",
+            'content_html' => null,
+            'cover_image_url' => null,
+            'cover_image_alt' => null,
+            'cover_image_width' => null,
+            'cover_image_height' => null,
+            'cover_image_variants' => null,
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => $oldPublishedAt,
+        ]);
+
+        /** @var ArticleTranslationRevision $oldRevision */
+        $oldRevision = ArticleTranslationRevision::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => (string) $article->translation_group_id,
+            'locale' => 'zh-CN',
+            'source_locale' => 'zh-CN',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'source_version_hash' => (string) $article->source_version_hash,
+            'translated_from_version_hash' => (string) $article->source_version_hash,
+            'title' => (string) $article->title,
+            'excerpt' => (string) $article->excerpt,
+            'content_md' => (string) $article->content_md,
+            'seo_title' => '旧 SEO 标题',
+            'seo_description' => '旧 SEO 描述。',
+            'published_at' => $oldPublishedAt,
+        ]);
+
+        $article->forceFill([
+            'working_revision_id' => (int) $oldRevision->id,
+            'published_revision_id' => (int) $oldRevision->id,
+        ])->save();
+
+        ArticleSeoMeta::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'locale' => 'zh-CN',
+            'seo_title' => '旧 SEO 标题',
+            'seo_description' => '旧 SEO 描述。',
+            'canonical_url' => 'https://fermatmind.com/zh/articles/'.$slug,
+            'og_title' => '旧 SEO 标题',
+            'og_description' => '旧 SEO 描述。',
+            'og_image_url' => null,
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        $this->artisan('articles:import-local-baseline', [
+            '--dry-run' => true,
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => '../content_baselines/articles',
+            '--locale' => 'zh-CN',
+            '--article' => [$slug],
+        ])
+            ->expectsOutputToContain('articles_found=1')
+            ->expectsOutputToContain('will_update=1')
+            ->expectsOutputToContain('article_action=zh-CN:'.$slug.':update')
+            ->assertExitCode(0);
+
+        $this->assertSame(
+            (int) $oldRevision->id,
+            (int) Article::query()->withoutGlobalScopes()->whereKey($article->id)->value('published_revision_id')
+        );
+
+        $this->artisan('articles:import-local-baseline', [
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => '../content_baselines/articles',
+            '--locale' => 'zh-CN',
+            '--article' => [$slug],
+        ])
+            ->expectsOutputToContain('articles_found=1')
+            ->expectsOutputToContain('will_update=1')
+            ->assertExitCode(0);
+
+        $updated = Article::query()
+            ->withoutGlobalScopes()
+            ->with(['publishedRevision', 'seoMeta', 'category', 'tags'])
+            ->where('org_id', 0)
+            ->where('locale', 'zh-CN')
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $this->assertNotSame((int) $oldRevision->id, (int) $updated->published_revision_id);
+        $this->assertSame((string) $baseline['content_md'], (string) $updated->publishedRevision?->content_md);
+        $this->assertSame((string) $baseline['excerpt'], (string) $updated->publishedRevision?->excerpt);
+        $this->assertSame((string) $baseline['seo_title'], (string) $updated->publishedRevision?->seo_title);
+        $this->assertSame((string) $baseline['seo_description'], (string) $updated->publishedRevision?->seo_description);
+        $this->assertSame((string) $baseline['cover_image_url'], (string) $updated->cover_image_url);
+        $this->assertSame((string) $baseline['cover_image_alt'], (string) $updated->cover_image_alt);
+        $this->assertSame((string) $baseline['category'], (string) $updated->category?->name);
+        $expectedTags = $baseline['tags'];
+        $actualTags = $updated->tags->pluck('name')->values()->all();
+        sort($expectedTags);
+        sort($actualTags);
+        $this->assertSame($expectedTags, $actualTags);
+        $this->assertSame((string) $baseline['seo_title'], (string) $updated->seoMeta?->seo_title);
+        $this->assertSame((string) $baseline['cover_image_url'], (string) $updated->seoMeta?->og_image_url);
+
+        $this->getJson('/api/v0.5/articles/'.$slug.'?locale=zh-CN&org_id=0')
+            ->assertOk()
+            ->assertJsonPath('article.content_md', (string) $baseline['content_md'])
+            ->assertJsonPath('article.excerpt', (string) $baseline['excerpt'])
+            ->assertJsonPath('article.cover_image_url', (string) $baseline['cover_image_url'])
+            ->assertJsonPath('article.cover_image_alt', (string) $baseline['cover_image_alt'])
+            ->assertJsonPath('article.category.name', (string) $baseline['category'])
+            ->assertJsonPath('article.seo_meta.seo_title', (string) $baseline['seo_title']);
+
+        $this->getJson('/api/v0.5/articles/'.$slug.'/seo?locale=zh-CN&org_id=0')
+            ->assertOk()
+            ->assertJsonPath('meta.title', (string) $baseline['seo_title'])
+            ->assertJsonPath('meta.description', (string) $baseline['seo_description'])
+            ->assertJsonPath('jsonld.image', (string) $baseline['cover_image_url'])
+            ->assertJsonPath('jsonld.url', 'https://fermatmind.com/zh/articles/'.$slug);
+    }
+
     private function assertSixEditorialArticlesConvergeThroughSeoAuthority(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
@@ -209,5 +353,23 @@ final class ArticleBaselineImportTest extends TestCase
             $this->assertSame($contract['seo_description'], data_get($jsonLd, 'description'));
             $this->assertSame($cover, data_get($jsonLd, 'image'));
         }
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function baselineArticle(string $slug): array
+    {
+        $path = base_path('../content_baselines/articles/articles.zh-CN.json');
+        $payload = json_decode((string) file_get_contents($path), true);
+        $this->assertIsArray($payload);
+
+        foreach ((array) ($payload['articles'] ?? []) as $article) {
+            if (is_array($article) && (string) ($article['slug'] ?? '') === $slug) {
+                return $article;
+            }
+        }
+
+        $this->fail('Baseline article not found: '.$slug);
     }
 }

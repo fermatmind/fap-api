@@ -481,6 +481,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_baseline_projection_convergence_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleImportLocalBaseline.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/LandingSurfaceController.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_privacy_logs_dsar_key_rotation_changes(): void
     {
         $changed = [
@@ -1406,6 +1416,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/ArticleImportLocalBaseline.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/LandingSurfaceController.php',
             'backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php',
             'backend/app/Services/Cms/ArticleSeoService.php',
         ], true);

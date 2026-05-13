@@ -6,8 +6,14 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\ArticleTag;
+use App\Models\ArticleTranslationRevision;
 use App\Models\LandingSurface;
 use App\Models\PageBlock;
+use App\Services\Cms\ArticleSeoService;
+use App\Support\CanonicalFrontendUrl;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -17,6 +23,10 @@ use Illuminate\Validation\Rule;
 
 final class LandingSurfaceController extends Controller
 {
+    public function __construct(
+        private readonly ArticleSeoService $articleSeoService,
+    ) {}
+
     public function show(Request $request, string $surfaceKey): JsonResponse
     {
         $validated = $this->validateReadQuery($request);
@@ -208,7 +218,7 @@ final class LandingSurfaceController extends Controller
     }
 
     /**
-     * @return array<string, array{published_revision_id: int, published_revision: array{id: int}}>
+     * @return array<string, array<string, mixed>>
      */
     private function recommendedArticlePayloadMap(PageBlock $block, string $locale, int $orgId): array
     {
@@ -236,22 +246,130 @@ final class LandingSurfaceController extends Controller
         /** @var Collection<int, Article> $articles */
         $articles = Article::query()
             ->withoutGlobalScopes()
+            ->with([
+                'category' => fn ($query) => $query->withoutGlobalScopes(),
+                'tags' => fn ($query) => $query->withoutGlobalScopes(),
+                'seoMeta',
+                'publishedRevision',
+            ])
             ->where('org_id', $orgId)
             ->where('locale', $locale)
             ->whereIn('slug', $slugs)
+            ->where('is_indexable', true)
             ->publiclyReadable()
-            ->get(['slug', 'published_revision_id']);
+            ->get();
 
         return $articles
-            ->filter(fn (Article $article): bool => $article->published_revision_id !== null)
+            ->filter(fn (Article $article): bool => $article->publishedRevision instanceof ArticleTranslationRevision)
             ->mapWithKeys(fn (Article $article): array => [
-                (string) $article->slug => [
-                    'published_revision_id' => (int) $article->published_revision_id,
-                    'published_revision' => [
-                        'id' => (int) $article->published_revision_id,
-                    ],
-                ],
+                (string) $article->slug => $this->recommendedArticleProjection($article),
             ])
+            ->all();
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function recommendedArticleProjection(Article $article): array
+    {
+        $revision = $article->publishedRevision;
+        if (! $revision instanceof ArticleTranslationRevision) {
+            return [];
+        }
+
+        $seoMeta = PublicMediaUrlGuard::sanitizeArrayFields(
+            $article->seoMeta?->toArray(),
+            ['og_image_url', 'twitter_image_url']
+        );
+        if (is_array($seoMeta)) {
+            $seoMeta['seo_title'] = $revision->seo_title;
+            $seoMeta['seo_description'] = $revision->seo_description;
+            $seoMeta['canonical_url'] = CanonicalFrontendUrl::normalizeAbsoluteUrl(
+                $seoMeta['canonical_url'] ?? null
+            );
+            if (array_key_exists('schema_json', $seoMeta)) {
+                $seoMeta['schema_json'] = CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json']);
+            }
+        }
+
+        return [
+            'id' => (int) $article->id,
+            'org_id' => (int) $article->org_id,
+            'slug' => (string) $article->slug,
+            'locale' => (string) $article->locale,
+            'title' => (string) $revision->title,
+            'excerpt' => $revision->excerpt,
+            'cover_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($article->cover_image_url),
+            'cover_image_alt' => $article->cover_image_alt,
+            'cover_image_width' => $article->cover_image_width !== null ? (int) $article->cover_image_width : null,
+            'cover_image_height' => $article->cover_image_height !== null ? (int) $article->cover_image_height : null,
+            'cover_image_variants' => PublicMediaUrlGuard::sanitizeArrayFields(
+                $article->cover_image_variants,
+                ['url']
+            ),
+            'category' => $this->recommendedArticleCategory($article),
+            'tags' => $this->recommendedArticleTags($article),
+            'author_name' => $article->author_name,
+            'reading_minutes' => $article->reading_minutes !== null ? (int) $article->reading_minutes : null,
+            'status' => (string) $article->status,
+            'is_public' => (bool) $article->is_public,
+            'is_indexable' => (bool) $article->is_indexable,
+            'published_at' => $article->published_at?->toISOString(),
+            'created_at' => $article->created_at?->toISOString(),
+            'updated_at' => $revision->updated_at?->toISOString() ?? $article->updated_at?->toISOString(),
+            'published_revision_id' => (int) $revision->id,
+            'published_revision' => [
+                'id' => (int) $revision->id,
+            ],
+            'canonical_url' => $this->articleSeoService->buildCanonicalUrl(
+                (string) $article->slug,
+                (string) $article->locale
+            ),
+            'seo_title' => $revision->seo_title,
+            'meta_description' => $revision->seo_description,
+            'seo_meta' => $seoMeta,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function recommendedArticleCategory(Article $article): ?array
+    {
+        if (! $article->relationLoaded('category')) {
+            return null;
+        }
+
+        $category = $article->category;
+        if (! $category instanceof ArticleCategory || (int) $category->org_id !== (int) $article->org_id) {
+            return null;
+        }
+
+        return [
+            'id' => (int) $category->id,
+            'slug' => (string) $category->slug,
+            'name' => (string) $category->name,
+            'title' => (string) $category->name,
+        ];
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function recommendedArticleTags(Article $article): array
+    {
+        if (! $article->relationLoaded('tags')) {
+            return [];
+        }
+
+        return $article->tags
+            ->filter(static fn (ArticleTag $tag): bool => (int) $tag->org_id === (int) $article->org_id)
+            ->map(static fn (ArticleTag $tag): array => [
+                'id' => (int) $tag->id,
+                'slug' => (string) $tag->slug,
+                'name' => (string) $tag->name,
+            ])
+            ->values()
             ->all();
     }
 
@@ -283,24 +401,24 @@ final class LandingSurfaceController extends Controller
 
     /**
      * @param  array<string, mixed>  $payload
-     * @param  array<string, array{published_revision_id: int, published_revision: array{id: int}}>  $articleMap
+     * @param  array<string, array<string, mixed>>  $articleMap
      * @return array<string, mixed>
      */
     private function enrichRecommendedArticlesPayload(array $payload, array $articleMap): array
     {
         $items = $payload['items'] ?? null;
-        if (! is_array($items) || $items === [] || $articleMap === []) {
+        if (! is_array($items) || $items === []) {
             return $payload;
         }
 
-        $payload['items'] = array_map(function (mixed $item) use ($articleMap): mixed {
+        $payload['items'] = array_values(array_filter(array_map(function (mixed $item) use ($articleMap): mixed {
             if (! is_array($item)) {
-                return $item;
+                return null;
             }
 
             $slug = $this->recommendedArticleSlug($item);
             if ($slug === null || ! array_key_exists($slug, $articleMap)) {
-                return $item;
+                return null;
             }
 
             $articlePatch = $articleMap[$slug];
@@ -308,7 +426,7 @@ final class LandingSurfaceController extends Controller
             $item['article'] = array_merge($article, $articlePatch);
 
             return $item;
-        }, $items);
+        }, $items), static fn (mixed $item): bool => $item !== null));
 
         return $payload;
     }

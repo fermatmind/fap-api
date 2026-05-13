@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-13T16:43:00+08:00",
+  "updated_at": "2026-05-13T17:37:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -2256,12 +2256,12 @@
       "branch": "codex/pr-rt-03-article-graph-authority",
       "title": "feat(api): close six-article graph recommendation authority",
       "name": "6 Articles Site Graph and Recommendation Authority Closure",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "PR-RT-02"
       ],
       "scope_type": "article_graph_authority_closure_only",
-      "commit_sha": "119c97ec2ed13f8a22186ab6adecdc6e0ed1f9c8",
+      "commit_sha": "f276bcfe68da52bd804e912cf049bf581c0a4de0",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1338",
       "checks": {
         "authorization": {
@@ -2314,18 +2314,23 @@
         "diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "reconciliation": {
+          "status": "pass",
+          "evidence": "GitHub PR #1338 is MERGED with merge commit 44621613e5255a76631138d641da218e2993e343; origin/main contains the merge commit; local and remote task branches are absent."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-13T03:02:49Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "deferred_decisions": [
         "Article detail related articles remain deferred because the current fap-web Article detail related arrays are empty and no backend Article-to-Article authority exists in this PR scope.",
         "Personality type related articles remain deferred because no stable Personality related article authority was identified for INFJ-A/INFJ-T pages.",
         "Test detail related articles remain deferred because the existing related_test_slug contract is a fixed three-article test page slot and changing it would widen PR-RT-03 scope."
       ],
-      "sidecar_issues": []
+      "sidecar_issues": [],
+      "merge_sha": "44621613e5255a76631138d641da218e2993e343"
     },
     "CMD-FIX-1": {
       "repo": "fap-api",
@@ -3086,6 +3091,87 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": []
+    },
+    "PR-RT-04": {
+      "repo": "fap-api",
+      "branch": "codex/pr-rt-04-article-baseline-republish",
+      "title": "fix(api): republish article baseline and complete public projection",
+      "name": "Article Baseline Republish and Public Projection Convergence",
+      "status": "open",
+      "depends_on": [
+        "PR-RT-03"
+      ],
+      "scope_type": "article_baseline_republish_projection_convergence_only",
+      "commit_sha": "deaa13aaec5114ba84486602db2378fd4de8a0a2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1350",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided explicit PR-RT-04 execute instruction and scope, authorizing manifest/state registration before implementation."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR-RT-03 is merged as PR #1338 with merge commit 44621613e5255a76631138d641da218e2993e343 and origin/main contains it."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Article baseline importer, landing surface recommended article projection, focused backend tests, test-only Big Five freeze classifier governance, and PR train metadata."
+        },
+        "article_baseline_import": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/CareerCms/ArticleBaselineImportTest.php --no-ansi",
+          "evidence": "3 tests passed, 225 assertions; covers dry-run, fresh import, and old production published revision republish."
+        },
+        "article_runtime_truth": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/V0_5/ArticlePublishingRuntimeTruthTest.php --no-ansi",
+          "evidence": "2 tests passed, 250 assertions."
+        },
+        "landing_surface_projection": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php --no-ansi",
+          "evidence": "6 tests passed, 223 assertions; includes complete recommended article projection and noindex filtering."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Command completed successfully; no route changes were introduced."
+        },
+        "sqlite_migrate_pretend": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "evidence": "Command completed successfully; PR-RT-04 adds no migrations."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test app/Console/Commands/ArticleImportLocalBaseline.php app/Http/Controllers/API/V0_5/Cms/LandingSurfaceController.php tests/Feature/CareerCms/ArticleBaselineImportTest.php tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "evidence": "Scoped Pint check passed for 5 files."
+        },
+        "bigfive_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|article_baseline_projection_convergence' --no-ansi",
+          "evidence": "2 tests passed, 4 assertions. Added test-only classifier allowance for PR-RT-04 LandingSurfaceController article projection convergence scope."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "fap_web_companion_validation": {
+          "status": "pass",
+          "command": "pnpm test:contract -- article-publishing-runtime-truth.contract.test.ts homepage-recommended-articles-block.contract.test.ts; pnpm typecheck; NEXT_PUBLIC_API_URL=https://api.fermatmind.com pnpm build; pnpm seo:check-sitemap",
+          "evidence": "Contract suite passed across 340 files / 1912 tests, typecheck passed, production build passed, and sitemap indexability check passed for 206 URLs. Generated sitemap artifact was restored; fap-web worktree clean."
+        },
+        "github_pr": {
+          "status": "open",
+          "evidence": "Opened PR #1350 for PR-RT-04 on branch codex/pr-rt-04-article-baseline-republish."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "post_merge_runbook_required": true
     }
   }
 }

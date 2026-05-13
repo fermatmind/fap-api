@@ -1062,6 +1062,54 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: PR-RT-04
+    repo: fap-api
+    depends_on:
+      - PR-RT-03
+    branch: codex/pr-rt-04-article-baseline-republish
+    title: "fix(api): republish article baseline and complete public projection"
+    name: "Article Baseline Republish and Public Projection Convergence"
+    scope_type: article_baseline_republish_projection_convergence_only
+    scope:
+      - Make article baseline import upsert republish changed existing published articles so public APIs read the new published revision.
+      - Preserve create-missing-only behavior when --upsert is not provided and add dry-run per-article action reporting.
+      - Complete Article list/detail and homepage recommended article public projection from Article authority, including cover, alt, category, tags, SEO, and published revision.
+      - Add backend tests for old production revision republish, complete public projections, landing surface recommendation enrichment, and noindex exclusion.
+      - Provide a post-merge six-article production dry-run and upsert runbook.
+    allowed_paths:
+      - backend/app/Console/Commands/ArticleImportLocalBaseline.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/LandingSurfaceController.php
+      - backend/tests/Feature/CareerCms/ArticleBaselineImportTest.php
+      - backend/tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rewrite article body, title, SEO title, meta description, excerpt, references, or cover assets.
+      - Add article body content or recommendation fallbacks to fap-web.
+      - Change fap-web homepage filtering to hide backend projection gaps.
+      - Implement Topic graph, Article detail related articles, Personality related articles, Career expansion, or test page recommendation changes.
+      - Touch MBTI, Big Five, RIASEC, IQ, Personality, Career expansion, payment, report, invite, order, scoring, Ads, or launch smoke runtime.
+    validation:
+      - php artisan test tests/Feature/CareerCms/ArticleBaselineImportTest.php --no-ansi
+      - php artisan test tests/Feature/V0_5/ArticlePublishingRuntimeTruthTest.php --no-ansi
+      - php artisan test tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php --filter='recommended_articles|home_recommended_articles_are_enriched' --no-ansi
+      - php artisan route:list --no-ansi
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+      - vendor/bin/pint --test app/Console/Commands/ArticleImportLocalBaseline.php app/Http/Controllers/API/V0_5/Cms/LandingSurfaceController.php tests/Feature/CareerCms/ArticleBaselineImportTest.php tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php
+      - php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|article_baseline_projection_convergence' --no-ansi
+      - git diff --check
+    companion_validation:
+      repo: fap-web
+      branch: main
+      checks:
+        - pnpm test:contract -- article-publishing-runtime-truth.contract.test.ts homepage-recommended-articles-block.contract.test.ts
+        - pnpm typecheck
+        - NEXT_PUBLIC_API_URL=https://api.fermatmind.com pnpm build
+        - pnpm seo:check-sitemap
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: AUDIT-12
     repo: fap-api
     depends_on:

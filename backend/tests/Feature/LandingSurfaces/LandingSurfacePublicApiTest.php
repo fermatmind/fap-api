@@ -6,6 +6,9 @@ namespace Tests\Feature\LandingSurfaces;
 
 use App\Models\AdminUser;
 use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use App\Models\LandingSurface;
 use App\Models\PageBlock;
@@ -351,6 +354,8 @@ final class LandingSurfacePublicApiTest extends TestCase
 
     public function test_public_api_enriches_recommended_articles_with_published_revision_pointer(): void
     {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
         $surface = LandingSurface::query()->withoutGlobalScopes()->create([
             'org_id' => 0,
             'surface_key' => 'home',
@@ -406,7 +411,15 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->assertJsonPath(
                 'surface.page_blocks.0.payload_json.items.0.article.published_revision.id',
                 (int) $article->published_revision_id
-            );
+            )
+            ->assertJsonPath('surface.page_blocks.0.payload_json.items.0.article.title', '推荐文章 published')
+            ->assertJsonPath('surface.page_blocks.0.payload_json.items.0.article.cover_image_url', 'https://api.fermatmind.com/static/articles/covers/recommended-article.svg')
+            ->assertJsonPath('surface.page_blocks.0.payload_json.items.0.article.cover_image_alt', '推荐文章封面')
+            ->assertJsonPath('surface.page_blocks.0.payload_json.items.0.article.category.name', '推荐分类')
+            ->assertJsonPath('surface.page_blocks.0.payload_json.items.0.article.tags.0.name', '推荐标签')
+            ->assertJsonPath('surface.page_blocks.0.payload_json.items.0.article.status', 'published')
+            ->assertJsonPath('surface.page_blocks.0.payload_json.items.0.article.is_indexable', true)
+            ->assertJsonPath('surface.page_blocks.0.payload_json.items.0.article.canonical_url', 'https://fermatmind.com/zh/articles/recommended-article');
     }
 
     public function test_public_api_skips_malformed_recommended_article_slugs_without_crashing(): void
@@ -454,12 +467,100 @@ final class LandingSurfacePublicApiTest extends TestCase
         $response->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath(
-                'surface.page_blocks.0.payload_json.items.2.article.published_revision_id',
+                'surface.page_blocks.0.payload_json.items.0.article.published_revision_id',
                 (int) $article->published_revision_id
             );
 
-        $this->assertNull($response->json('surface.page_blocks.0.payload_json.items.0.article.published_revision_id'));
-        $this->assertNull($response->json('surface.page_blocks.0.payload_json.items.1.article.published_revision_id'));
+        $this->assertCount(1, $response->json('surface.page_blocks.0.payload_json.items'));
+    }
+
+    public function test_home_recommended_articles_are_enriched_from_article_authority_baseline(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $this->artisan('articles:import-local-baseline', [
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => '../content_baselines/articles',
+            '--locale' => 'zh-CN',
+            '--article' => [
+                'how-personality-shapes-attitude-toward-ai',
+                'which-love-script-fits-you-best',
+                'are-infj-men-rare-or-socially-silenced',
+                'best-valentines-date-by-personality-and-relationship-science',
+                'how-16-personality-types-talk-to-an-ai-coach',
+                'childhood-dream-job-still-shapes-career-choice',
+            ],
+        ])->assertExitCode(0);
+
+        $this->artisan('landing-surfaces:import-local-baseline', [
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => '../content_baselines/landing_surfaces',
+        ])->assertExitCode(0);
+
+        $response = $this->getJson('/api/v0.5/landing-surfaces/home?locale=zh-CN&org_id=0');
+        $response->assertOk()
+            ->assertJsonPath('ok', true);
+
+        $recommendedBlock = collect($response->json('surface.page_blocks') ?? [])
+            ->firstWhere('block_key', 'recommended_articles');
+        $this->assertIsArray($recommendedBlock);
+
+        $items = data_get($recommendedBlock, 'payload_json.items');
+        $this->assertIsArray($items);
+        $this->assertCount(6, $items);
+
+        $slugs = array_map(static fn (array $item): string => (string) data_get($item, 'article.slug'), $items);
+        $this->assertSame(
+            [
+                'which-love-script-fits-you-best',
+                'how-personality-shapes-attitude-toward-ai',
+                'how-16-personality-types-talk-to-an-ai-coach',
+                'childhood-dream-job-still-shapes-career-choice',
+                'best-valentines-date-by-personality-and-relationship-science',
+                'are-infj-men-rare-or-socially-silenced',
+            ],
+            $slugs
+        );
+
+        foreach ($items as $item) {
+            $article = data_get($item, 'article');
+            $this->assertIsArray($article);
+            $this->assertSame('published', (string) data_get($article, 'status'));
+            $this->assertTrue((bool) data_get($article, 'is_public'));
+            $this->assertTrue((bool) data_get($article, 'is_indexable'));
+            $this->assertNotEmpty(data_get($article, 'published_revision_id'));
+            $this->assertNotEmpty(data_get($article, 'title'));
+            $this->assertNotEmpty(data_get($article, 'excerpt'));
+            $this->assertNotEmpty(data_get($article, 'cover_image_url'));
+            $this->assertNotEmpty(data_get($article, 'cover_image_alt'));
+            $this->assertNotEmpty(data_get($article, 'cover_image_width'));
+            $this->assertNotEmpty(data_get($article, 'cover_image_height'));
+            $this->assertNotEmpty(data_get($article, 'cover_image_variants.hero'));
+            $this->assertNotEmpty(data_get($article, 'category.name'));
+            $this->assertNotEmpty(data_get($article, 'tags.0.name'));
+            $this->assertStringStartsWith('https://fermatmind.com/zh/articles/', (string) data_get($article, 'canonical_url'));
+        }
+
+        $noindex = Article::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('locale', 'zh-CN')
+            ->where('slug', 'which-love-script-fits-you-best')
+            ->firstOrFail();
+        $noindex->forceFill(['is_indexable' => false])->save();
+
+        $afterNoindex = $this->getJson('/api/v0.5/landing-surfaces/home?locale=zh-CN&org_id=0');
+        $afterNoindex->assertOk();
+        $afterNoindexRecommendedBlock = collect($afterNoindex->json('surface.page_blocks') ?? [])
+            ->firstWhere('block_key', 'recommended_articles');
+        $this->assertIsArray($afterNoindexRecommendedBlock);
+        $filteredSlugs = array_map(
+            static fn (array $item): string => (string) data_get($item, 'article.slug'),
+            data_get($afterNoindexRecommendedBlock, 'payload_json.items') ?? []
+        );
+        $this->assertNotContains('which-love-script-fits-you-best', $filteredSlugs);
     }
 
     /**
@@ -472,17 +573,36 @@ final class LandingSurfacePublicApiTest extends TestCase
         bool $withPublishedRevision = true
     ): Article {
         /** @var Article $article */
+        $category = ArticleCategory::query()->firstOrCreate([
+            'org_id' => 0,
+            'slug' => 'recommended-category',
+        ], [
+            'name' => '推荐分类',
+            'description' => null,
+            'sort_order' => 0,
+            'is_active' => true,
+        ]);
+
         $article = Article::query()->create(array_merge([
             'org_id' => 0,
-            'category_id' => null,
+            'category_id' => (int) $category->id,
             'author_admin_user_id' => null,
+            'author_name' => 'Fermat Institute',
             'slug' => 'article-slug',
             'locale' => 'en',
             'title' => 'Article Title',
             'excerpt' => 'Article excerpt.',
             'content_md' => '# Article body',
             'content_html' => null,
-            'cover_image_url' => null,
+            'cover_image_url' => 'https://api.fermatmind.com/static/articles/covers/recommended-article.svg',
+            'cover_image_alt' => '推荐文章封面',
+            'cover_image_width' => 1200,
+            'cover_image_height' => 675,
+            'cover_image_variants' => [
+                'hero' => ['url' => 'https://api.fermatmind.com/static/articles/covers/recommended-article.svg', 'width' => 1200, 'height' => 675],
+                'card' => ['url' => 'https://api.fermatmind.com/static/articles/covers/recommended-article.svg', 'width' => 1200, 'height' => 675],
+                'og' => ['url' => 'https://api.fermatmind.com/static/articles/covers/recommended-article.svg', 'width' => 1200, 'height' => 675],
+            ],
             'status' => 'published',
             'is_public' => true,
             'is_indexable' => true,
@@ -497,7 +617,33 @@ final class LandingSurfacePublicApiTest extends TestCase
             $article->forceFill(['published_revision_id' => $revision->id])->save();
         }
 
-        return $article->fresh(['publishedRevision']) ?? $article;
+        $tag = ArticleTag::query()->firstOrCreate([
+            'org_id' => 0,
+            'slug' => 'recommended-tag',
+        ], [
+            'name' => '推荐标签',
+            'is_active' => true,
+        ]);
+        $article->tags()->syncWithoutDetaching([
+            (int) $tag->id => ['org_id' => 0],
+        ]);
+
+        ArticleSeoMeta::query()->updateOrCreate([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'locale' => (string) $article->locale,
+        ], [
+            'seo_title' => (string) ($revisionOverrides['seo_title'] ?? $article->title),
+            'seo_description' => (string) ($revisionOverrides['seo_description'] ?? $article->excerpt),
+            'canonical_url' => 'https://fermatmind.com/'.((string) $article->locale === 'zh-CN' ? 'zh' : (string) $article->locale).'/articles/'.(string) $article->slug,
+            'og_title' => (string) ($revisionOverrides['seo_title'] ?? $article->title),
+            'og_description' => (string) ($revisionOverrides['seo_description'] ?? $article->excerpt),
+            'og_image_url' => (string) $article->cover_image_url,
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        return $article->fresh(['category', 'tags', 'seoMeta', 'publishedRevision']) ?? $article;
     }
 
     /**
