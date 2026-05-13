@@ -1546,6 +1546,47 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-TITLE-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-BASELINE-1
+      - SCAN-3
+    branch: fix/career-title-source-repair-1
+    title: "fix(api): use workbook english titles in career audit"
+    name: "Use workbook English titles in career audit"
+    scope_type: audit_title_source_mapping_only
+    scope:
+      - Accept authorized planner/workbook English titles as a baseline audit source.
+      - Resolve false en_title_derivation_required warnings when title_en or EN_Title is present.
+      - Keep canonical slug derivation only as a fallback when no approved English title source exists.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Generate fake English titles.
+      - Mutate DB or production state.
+      - Generate content.
+      - Touch fap-web.
+      - Apply rollout.
+      - Run 80 readiness.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerBaselineMetadataInventoryAuditor --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "REPAIR-RUNTIME-1"
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: RIASEC-PERSONALIZATION-00
     repo: fap-api
     branch: codex/riasec-personalization-00-train-registration

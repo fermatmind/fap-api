@@ -38,6 +38,8 @@ The baseline auditor loads JSON sources from explicit paths supplied by the call
 
 REPAIR-BASELINE-1 adds a read-only fallback for planner/workbook display metadata. If a zh baseline JSON row is absent but the plan row carries `title_zh` plus zh SEO title and description fields under the top-level row, `raw`, or `seo`, the auditor can satisfy the baseline display metadata source from that planner row. This removes false `zh_baseline_missing` and `required_display_field_missing` blockers for workbook-derived rows without generating new content or mutating DB state.
 
+REPAIR-TITLE-1 adds a read-only English title source for planner/workbook rows. If no English baseline row or batch manifest title exists, the auditor accepts an authorized plan-row `title_en` / workbook `EN_Title` value before falling back to canonical-slug title derivation. This removes false `en_title_derivation_required` warnings where workbook English titles are already present.
+
 The default required display metadata fields are:
 
 - `title`
@@ -76,6 +78,7 @@ Each `CareerBaselineMetadataInventoryRow` serializes as:
 
 - `en_baseline`
 - `batch_manifest`
+- `planner_workbook`
 - `canonical_slug_derived`
 - `missing`
 

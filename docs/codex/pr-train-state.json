@@ -2776,7 +2776,7 @@
       "branch": "fix/career-baseline-metadata-repair-1",
       "title": "fix(api): map career workbook baseline metadata for audit",
       "name": "Map career workbook baseline metadata for audit",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "REPAIR-SEO-GEO-1",
         "SCAN-3"
@@ -2802,8 +2802,8 @@
         "no 80 readiness run",
         "no deploy"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "49714abc8749e0d3ddda5332768c66968fe3473b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1353",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -2867,6 +2867,112 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-TITLE-1",
+      "merged_at": "2026-05-13T10:31:09Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "sidecar_issues": []
+    },
+    "REPAIR-TITLE-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-title-source-repair-1",
+      "title": "fix(api): use workbook english titles in career audit",
+      "name": "Use workbook English titles in career audit",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-BASELINE-1",
+        "SCAN-3"
+      ],
+      "scope_type": "audit_title_source_mapping_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no generated fake English titles",
+        "no production DB query",
+        "no DB mutation",
+        "no content generation",
+        "no fap-web changes",
+        "no rollout",
+        "no 80 readiness run",
+        "no deploy"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided remediation train execution goal and authorized registering the current remediation PR item."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-BASELINE-1 merged as PR #1353 and local train worktree is based on origin/main after that merge."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to title source mapping in the audit domain, audit tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        },
+        "career_baseline_metadata_inventory": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=CareerBaselineMetadataInventoryAuditor --no-ansi",
+          "evidence": "13 tests passed, 39 assertions."
+        },
+        "career_audit_canonical_eligibility": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi",
+          "evidence": "26 tests passed, 130 assertions."
+        },
+        "career_public_resolution_plan_resolver": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi",
+          "evidence": "14 tests passed, 37 assertions."
+        },
+        "career_canonical_eligibility_audit_schema": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi",
+          "evidence": "14 tests passed, 28 assertions."
+        },
+        "title_only_real_planner_projection": {
+          "status": "pass",
+          "command": "Local PHP domain-only read of /tmp/career_2786_public_resolution_plan_from_d23b.json through CareerPublicResolutionPlanResolver and CareerBaselineMetadataInventoryAuditor.",
+          "evidence": "2786 expected, en_title_found=2786, en_title_derived=0, by_reason empty."
+        },
+        "impacted_audit_layers": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=Career2786FullAuditArtifactBuilder --no-ansi && php artisan test --filter=CareerSurfaceReadinessAuditor --no-ansi && php artisan test --filter=CareerSeoGeoReadinessAuditor --no-ansi && php artisan test --filter=CareerRuntimeProjectionTruthEligibilityAuditor --no-ansi && php artisan test --filter=CareerIndexStateAuthorityAuditor --no-ansi && php artisan test --filter=CareerOccupationEntityInventoryAuditor --no-ansi",
+          "evidence": "All impacted audit-layer regressions passed locally."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi"
+        },
+        "migrate_pretend": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "3155 files passed."
+        },
+        "mbti_master_chain": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "CI master chain exited 0 locally; generated BigFive compiled verification artifacts were restored before staging."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "REPAIR-RUNTIME-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,

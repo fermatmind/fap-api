@@ -12,6 +12,8 @@ final class CareerBaselineMetadataInventoryRow
 
     public const TITLE_EN_SOURCE_BATCH_MANIFEST = 'batch_manifest';
 
+    public const TITLE_EN_SOURCE_PLANNER_WORKBOOK = 'planner_workbook';
+
     public const TITLE_EN_SOURCE_CANONICAL_SLUG_DERIVED = 'canonical_slug_derived';
 
     public const TITLE_EN_SOURCE_MISSING = 'missing';
@@ -69,6 +71,7 @@ final class CareerBaselineMetadataInventoryRow
         return [
             self::TITLE_EN_SOURCE_EN_BASELINE,
             self::TITLE_EN_SOURCE_BATCH_MANIFEST,
+            self::TITLE_EN_SOURCE_PLANNER_WORKBOOK,
             self::TITLE_EN_SOURCE_CANONICAL_SLUG_DERIVED,
             self::TITLE_EN_SOURCE_MISSING,
         ];

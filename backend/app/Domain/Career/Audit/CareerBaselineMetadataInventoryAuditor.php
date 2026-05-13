@@ -53,7 +53,8 @@ final class CareerBaselineMetadataInventoryAuditor
                 sourceScope: $planRow->batchId ?? 'plan',
                 zhRow: $sources['zh_rows'][$canonicalSlug] ?? $this->plannerZhDisplayRow($planRow),
                 enRow: $sources['en_rows'][$canonicalSlug] ?? null,
-                manifestRow: $sources['manifest_rows'][$canonicalSlug] ?? null
+                manifestRow: $sources['manifest_rows'][$canonicalSlug] ?? null,
+                plannerTitleEn: $this->normalizeString($planRow->titleEn)
             );
         }
 
@@ -194,11 +195,12 @@ final class CareerBaselineMetadataInventoryAuditor
         ?array $zhRow,
         ?array $enRow,
         ?array $manifestRow,
+        ?string $plannerTitleEn,
     ): CareerBaselineMetadataInventoryRow {
         $issues = [];
         $missingDisplayFields = $this->missingDisplayFields($zhRow);
         $titleZh = $this->titleForLocale($zhRow, 'zh');
-        [$titleEn, $titleEnSource] = $this->resolveTitleEn($canonicalSlug, $enRow, $manifestRow);
+        [$titleEn, $titleEnSource] = $this->resolveTitleEn($canonicalSlug, $enRow, $manifestRow, $plannerTitleEn);
 
         if ($zhRow === null) {
             $issues[] = new CareerBaselineMetadataInventoryIssue(
@@ -331,7 +333,7 @@ final class CareerBaselineMetadataInventoryAuditor
      * @param  array<string, mixed>|null  $manifestRow
      * @return array{0: string|null, 1: string}
      */
-    private function resolveTitleEn(string $canonicalSlug, ?array $enRow, ?array $manifestRow): array
+    private function resolveTitleEn(string $canonicalSlug, ?array $enRow, ?array $manifestRow, ?string $plannerTitleEn): array
     {
         $title = $this->titleForLocale($enRow, 'en');
         if ($title !== null) {
@@ -341,6 +343,10 @@ final class CareerBaselineMetadataInventoryAuditor
         $title = $this->titleForLocale($manifestRow, 'en');
         if ($title !== null) {
             return [$title, CareerBaselineMetadataInventoryRow::TITLE_EN_SOURCE_BATCH_MANIFEST];
+        }
+
+        if ($plannerTitleEn !== null) {
+            return [$plannerTitleEn, CareerBaselineMetadataInventoryRow::TITLE_EN_SOURCE_PLANNER_WORKBOOK];
         }
 
         $derived = $this->deriveTitleEn($canonicalSlug);
