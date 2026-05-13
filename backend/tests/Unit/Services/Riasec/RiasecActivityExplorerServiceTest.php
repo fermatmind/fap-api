@@ -57,16 +57,86 @@ final class RiasecActivityExplorerServiceTest extends TestCase
         $this->assertGreaterThan(0, $occupationCount);
     }
 
+    public function test_expanded_code_pack_uses_examples_only_boundaries(): void
+    {
+        $payload = (new RiasecActivityExplorerService)->build('RCE', 'zh-CN');
+
+        $this->assertSame('available', data_get($payload, 'code_activity_pack.status'));
+        $this->assertSame('RCE', data_get($payload, 'code_activity_pack.code'));
+        $this->assertSame(
+            ['operate_reliable_processes', 'improve_hands_on_workflow', 'coordinate_practical_delivery'],
+            data_get($payload, 'code_activity_pack.activity_chain'),
+        );
+        $this->assertSame('content_example_not_registry_match', data_get($payload, 'code_activity_pack.source_status'));
+        $this->assertFalse((bool) data_get($payload, 'boundary.registry_source_connected'));
+
+        $activities = (array) data_get($payload, 'code_activity_pack.activities', []);
+        $this->assertCount(2, $activities);
+
+        foreach ($activities as $activity) {
+            $this->assertSame('content_example_not_registry_match', data_get($activity, 'source_status'));
+            $this->assertNotEmpty(data_get($activity, 'task_examples'));
+            $this->assertNotEmpty(data_get($activity, 'occupation_examples'));
+
+            foreach ((array) data_get($activity, 'occupation_examples', []) as $example) {
+                $this->assertSame('content_example_not_registry_match', data_get($example, 'source_status'));
+                $this->assertSame('内容示例，非职业数据库匹配', data_get($example, 'display_label'));
+                $this->assertTrue((bool) data_get($example, 'not_a_recommendation'));
+                $this->assertArrayNotHasKey('source_url', (array) $example);
+                $this->assertArrayNotHasKey('onet_code', (array) $example);
+                $this->assertArrayNotHasKey('soc_code', (array) $example);
+                $this->assertArrayNotHasKey('fit_score', (array) $example);
+                $this->assertArrayNotHasKey('rank', (array) $example);
+                $this->assertArrayNotHasKey('success_prediction', (array) $example);
+            }
+        }
+    }
+
+    public function test_selected_v0_1_codes_have_authored_examples_only_packs(): void
+    {
+        $service = new RiasecActivityExplorerService;
+
+        foreach (['RCE', 'EAS', 'CRI', 'SIC', 'ERC', 'AIR', 'CSE'] as $code) {
+            $payload = $service->build($code, 'zh-CN');
+
+            $this->assertSame($code, data_get($payload, 'code_activity_pack.code'));
+            $this->assertSame('available', data_get($payload, 'code_activity_pack.status'));
+            $this->assertSame('content_example_not_registry_match', data_get($payload, 'code_activity_pack.source_status'));
+            $this->assertCount(3, (array) data_get($payload, 'code_activity_pack.activity_chain'));
+            $this->assertGreaterThanOrEqual(2, count((array) data_get($payload, 'code_activity_pack.activities')));
+        }
+    }
+
+    public function test_uncovered_code_keeps_minimal_not_available_state(): void
+    {
+        $payload = (new RiasecActivityExplorerService)->build('RES', 'zh-CN');
+
+        $this->assertSame(['R', 'E', 'S'], array_column($payload['dimension_activity_families'], 'dimension'));
+        $this->assertSame('not_available_for_code_v0_1', data_get($payload, 'code_activity_pack.status'));
+        $this->assertSame('code_activity_pack_not_authored', data_get($payload, 'code_activity_pack.reason'));
+        $this->assertSame([], data_get($payload, 'code_activity_pack.activities'));
+        $this->assertSame([], data_get($payload, 'code_activity_pack.occupation_examples'));
+    }
+
     public function test_activity_explorer_payload_does_not_emit_forbidden_claim_copy(): void
     {
-        $payload = (new RiasecActivityExplorerService)->build('IAS', 'zh-CN');
-        $text = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $service = new RiasecActivityExplorerService;
+        $payloads = array_map(
+            fn (string $code): array => $service->build($code, 'zh-CN'),
+            ['IAS', 'RCE', 'EAS', 'CRI', 'SIC', 'ERC', 'AIR', 'CSE', 'RES'],
+        );
+        $text = json_encode($payloads, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
 
         $this->assertStringNotContainsString('Matches', $text);
         $this->assertStringNotContainsString('职业推荐', $text);
         $this->assertStringNotContainsString('岗位匹配', $text);
         $this->assertStringNotContainsString('适合度', $text);
         $this->assertStringNotContainsString('成功概率', $text);
+        $this->assertStringNotContainsString('success prediction', $text);
+        $this->assertStringNotContainsString('fit score', $text);
+        $this->assertStringNotContainsString('source_url', $text);
+        $this->assertStringNotContainsString('onet_code', $text);
+        $this->assertStringNotContainsString('soc_code', $text);
         $this->assertStringNotContainsString('最佳职业', $text);
         $this->assertStringNotContainsString('推荐职业排名', $text);
         $this->assertStringContainsString('content_example_not_registry_match', $text);

@@ -194,7 +194,18 @@ final class RiasecActivityExplorerService
      */
     private function codeActivityPack(string $code, string $locale): array
     {
-        if ($code !== 'IAS') {
+        $authoredCodes = [
+            'IAS' => ['analyze_complex_problems', 'explain_complex_information', 'support_decision_making'],
+            'RCE' => ['operate_reliable_processes', 'improve_hands_on_workflow', 'coordinate_practical_delivery'],
+            'EAS' => ['present_and_mobilize_ideas', 'shape_audience_experience', 'support_people_through_expression'],
+            'CRI' => ['audit_tangible_systems', 'investigate_process_failures', 'organize_evidence_materials'],
+            'SIC' => ['clarify_people_needs_with_evidence', 'organize_support_resources', 'support_decision_making'],
+            'ERC' => ['coordinate_operational_delivery', 'negotiate_practical_constraints', 'quality_check_workflows'],
+            'AIR' => ['prototype_expressive_solutions', 'test_creative_materials', 'explain_complex_information'],
+            'CSE' => ['facilitate_structured_action', 'maintain_service_workflows', 'persuade_with_clear_process'],
+        ];
+
+        if (! array_key_exists($code, $authoredCodes)) {
             return [
                 'status' => 'not_available_for_code_v0_1',
                 'reason' => 'code_activity_pack_not_authored',
@@ -205,16 +216,30 @@ final class RiasecActivityExplorerService
 
         return [
             'status' => 'available',
-            'code' => 'IAS',
+            'code' => $code,
             'source_status' => self::SOURCE_STATUS,
             'source_name' => self::SOURCE_NAME,
-            'activity_chain' => [
-                'analyze_complex_problems',
-                'explain_complex_information',
-                'support_decision_making',
-            ],
-            'activities' => $this->iasActivities($locale),
+            'activity_chain' => $authoredCodes[$code],
+            'activities' => $this->codeActivities($code, $locale),
         ];
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function codeActivities(string $code, string $locale): array
+    {
+        return match ($code) {
+            'IAS' => $this->iasActivities($locale),
+            'RCE' => $this->rceActivities($locale),
+            'EAS' => $this->easActivities($locale),
+            'CRI' => $this->criActivities($locale),
+            'SIC' => $this->sicActivities($locale),
+            'ERC' => $this->ercActivities($locale),
+            'AIR' => $this->airActivities($locale),
+            'CSE' => $this->cseActivities($locale),
+            default => [],
+        };
     }
 
     /**
@@ -375,6 +400,414 @@ final class RiasecActivityExplorerService
             ],
         ];
 
+        return $this->normalizeActivities($activities, $locale);
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function rceActivities(string $locale): array
+    {
+        return $this->normalizeActivities([
+            [
+                'activity_key' => 'operate_reliable_processes',
+                'riasec_dimensions' => ['R', 'C'],
+                'activity_label' => ['en' => 'Operate reliable processes', 'zh-CN' => '稳定执行具体流程'],
+                'activity_user_copy' => [
+                    'en' => 'You may like concrete work where steps, tools, and quality checks matter.',
+                    'zh-CN' => '你可能喜欢有明确步骤、工具和质量检查的具体工作。',
+                ],
+                'task_examples' => [
+                    '按标准流程完成设备、物料或现场检查。',
+                    '记录异常并按优先级处理。',
+                    '把重复任务整理成可复用清单。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '运营执行 / 现场支持', 'common_tasks' => ['执行流程', '记录异常', '协调交付']],
+                    ['name' => '质检助理', 'common_tasks' => ['检查样品', '记录结果', '跟进修正']],
+                    ['name' => '实验室技术支持', 'common_tasks' => ['准备材料', '维护设备', '记录数据']],
+                ],
+                'next_experiments' => [
+                    '为一个重复任务写出操作清单。',
+                    '观察一个现场流程并记录 3 个风险点。',
+                    '做一次小型质量检查并复盘遗漏。',
+                ],
+            ],
+            [
+                'activity_key' => 'improve_hands_on_workflow',
+                'riasec_dimensions' => ['R', 'C', 'E'],
+                'activity_label' => ['en' => 'Improve hands-on workflow', 'zh-CN' => '改进可落地的工作流程'],
+                'activity_user_copy' => [
+                    'en' => 'You may enjoy making practical work smoother, clearer, and easier to coordinate.',
+                    'zh-CN' => '你可能喜欢把实际工作变得更顺、更清楚、更容易协作。',
+                ],
+                'task_examples' => [
+                    '找出流程中最容易卡住的一步。',
+                    '调整物料、工具或交接方式。',
+                    '把改进建议写成可执行步骤。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '流程改善助理', 'common_tasks' => ['观察流程', '整理问题', '提出调整步骤']],
+                    ['name' => '供应链运营支持', 'common_tasks' => ['跟进物料', '维护记录', '协调异常']],
+                    ['name' => '项目执行协调', 'common_tasks' => ['追踪进度', '整理风险', '推动交付']],
+                ],
+                'next_experiments' => [
+                    '把一个低效流程画成步骤图。',
+                    '为一次活动设计物料检查表。',
+                    '跟进一个小任务直到完成并记录阻塞。',
+                ],
+            ],
+        ], $locale);
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function easActivities(string $locale): array
+    {
+        return $this->normalizeActivities([
+            [
+                'activity_key' => 'present_and_mobilize_ideas',
+                'riasec_dimensions' => ['E', 'A'],
+                'activity_label' => ['en' => 'Present and mobilize ideas', 'zh-CN' => '表达并推动想法'],
+                'activity_user_copy' => [
+                    'en' => 'You may like turning ideas into messages that move people to act.',
+                    'zh-CN' => '你可能喜欢把想法变成能让别人理解并行动的信息。',
+                ],
+                'task_examples' => [
+                    '为一个主题设计表达角度。',
+                    '向不同对象说明同一个方案。',
+                    '根据反馈调整措辞和呈现方式。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '品牌传播助理', 'common_tasks' => ['整理卖点', '撰写材料', '跟进反馈']],
+                    ['name' => '活动策划支持', 'common_tasks' => ['设计主题', '协调对象', '复盘效果']],
+                    ['name' => '内容运营', 'common_tasks' => ['策划选题', '编辑内容', '观察反馈']],
+                ],
+                'next_experiments' => [
+                    '把一个想法写成 1 分钟说明。',
+                    '为同一主题做两个不同受众版本。',
+                    '收集 5 条反馈并改写表达。',
+                ],
+            ],
+            [
+                'activity_key' => 'shape_audience_experience',
+                'riasec_dimensions' => ['A', 'S', 'E'],
+                'activity_label' => ['en' => 'Shape audience experience', 'zh-CN' => '设计受众体验'],
+                'activity_user_copy' => [
+                    'en' => 'You may enjoy designing moments that help people feel engaged and clear.',
+                    'zh-CN' => '你可能喜欢设计让人更投入、更清楚的体验过程。',
+                ],
+                'task_examples' => [
+                    '设计一次活动的关键触点。',
+                    '把受众反应转化成改进清单。',
+                    '协调内容、节奏和现场执行。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '用户活动运营', 'common_tasks' => ['设计流程', '协调现场', '整理反馈']],
+                    ['name' => '学习体验助理', 'common_tasks' => ['设计材料', '观察参与', '迭代流程']],
+                    ['name' => '社群项目支持', 'common_tasks' => ['组织活动', '回应成员', '复盘内容']],
+                ],
+                'next_experiments' => [
+                    '为一个小活动设计开始、进行、结束三步。',
+                    '观察一次讲解中的参与变化。',
+                    '把一次体验复盘成改进清单。',
+                ],
+            ],
+        ], $locale);
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function criActivities(string $locale): array
+    {
+        return $this->normalizeActivities([
+            [
+                'activity_key' => 'audit_tangible_systems',
+                'riasec_dimensions' => ['C', 'R'],
+                'activity_label' => ['en' => 'Audit tangible systems', 'zh-CN' => '检查具体系统'],
+                'activity_user_copy' => [
+                    'en' => 'You may like checking whether real systems match expected standards.',
+                    'zh-CN' => '你可能喜欢确认真实系统是否符合标准和记录。',
+                ],
+                'task_examples' => [
+                    '核对设备、库存或样本记录。',
+                    '发现偏差并保留证据。',
+                    '把异常整理成可追踪问题。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '质量体系助理', 'common_tasks' => ['核对记录', '整理偏差', '跟进修正']],
+                    ['name' => '数据采集 / 现场调查', 'common_tasks' => ['采集样本', '记录环境', '整理表格']],
+                    ['name' => '仓储运营支持', 'common_tasks' => ['盘点物料', '核对单据', '标注异常']],
+                ],
+                'next_experiments' => [
+                    '做一次库存或资料核对。',
+                    '为一个检查任务设计记录表。',
+                    '把发现的问题按原因归类。',
+                ],
+            ],
+            [
+                'activity_key' => 'investigate_process_failures',
+                'riasec_dimensions' => ['I', 'C', 'R'],
+                'activity_label' => ['en' => 'Investigate process failures', 'zh-CN' => '调查流程失误'],
+                'activity_user_copy' => [
+                    'en' => 'You may be drawn to finding why a concrete process failed.',
+                    'zh-CN' => '你可能会被“具体流程为什么出错”这类问题吸引。',
+                ],
+                'task_examples' => [
+                    '回看记录找出异常发生位置。',
+                    '比较可能原因并保留证据。',
+                    '写出预防再次发生的步骤。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '运营分析支持', 'common_tasks' => ['查看记录', '归纳异常', '准备复盘']],
+                    ['name' => '安全 / 合规助理', 'common_tasks' => ['核查流程', '整理证据', '提醒边界']],
+                    ['name' => '实验流程支持', 'common_tasks' => ['记录步骤', '排查误差', '维护样本']],
+                ],
+                'next_experiments' => [
+                    '复盘一次小失误并写出 3 个原因。',
+                    '把一个流程的风险点标在步骤图上。',
+                    '设计一个避免遗漏的检查清单。',
+                ],
+            ],
+        ], $locale);
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function sicActivities(string $locale): array
+    {
+        return $this->normalizeActivities([
+            [
+                'activity_key' => 'clarify_people_needs_with_evidence',
+                'riasec_dimensions' => ['S', 'I'],
+                'activity_label' => ['en' => 'Clarify people needs with evidence', 'zh-CN' => '用证据澄清人的需求'],
+                'activity_user_copy' => [
+                    'en' => 'You may like helping people by first understanding what is really happening.',
+                    'zh-CN' => '你可能喜欢先弄清真实情况，再帮助别人处理问题。',
+                ],
+                'task_examples' => [
+                    '访谈对象并记录关键事实。',
+                    '把需求、情绪和限制条件分开。',
+                    '整理可验证的支持方案。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '用户研究助理', 'common_tasks' => ['访谈用户', '整理证据', '输出洞察']],
+                    ['name' => '学习支持助理', 'common_tasks' => ['了解困难', '整理资料', '跟进反馈']],
+                    ['name' => '服务运营支持', 'common_tasks' => ['记录诉求', '分类问题', '协调处理']],
+                ],
+                'next_experiments' => [
+                    '写 5 个澄清需求的问题。',
+                    '把一次反馈分成事实、感受和限制。',
+                    '设计一个低风险验证步骤。',
+                ],
+            ],
+            [
+                'activity_key' => 'organize_support_resources',
+                'riasec_dimensions' => ['S', 'C'],
+                'activity_label' => ['en' => 'Organize support resources', 'zh-CN' => '整理支持资源'],
+                'activity_user_copy' => [
+                    'en' => 'You may enjoy making help easier to find, follow, and repeat.',
+                    'zh-CN' => '你可能喜欢把帮助变得更容易找到、执行和复用。',
+                ],
+                'task_examples' => [
+                    '把常见问题整理成清单。',
+                    '维护支持材料和处理记录。',
+                    '根据反馈优化步骤说明。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '客户支持运营', 'common_tasks' => ['整理问题', '维护知识库', '跟进处理']],
+                    ['name' => '教育项目助理', 'common_tasks' => ['整理材料', '通知对象', '记录反馈']],
+                    ['name' => '公益项目协调', 'common_tasks' => ['整理资源', '联系对象', '跟踪进展']],
+                ],
+                'next_experiments' => [
+                    '为一个常见问题写处理流程。',
+                    '整理一组支持资源并标注适用对象。',
+                    '把 10 条反馈归为 3 类。',
+                ],
+            ],
+        ], $locale);
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function ercActivities(string $locale): array
+    {
+        return $this->normalizeActivities([
+            [
+                'activity_key' => 'coordinate_operational_delivery',
+                'riasec_dimensions' => ['E', 'R', 'C'],
+                'activity_label' => ['en' => 'Coordinate operational delivery', 'zh-CN' => '协调实际交付'],
+                'activity_user_copy' => [
+                    'en' => 'You may like keeping practical work moving across people, resources, and constraints.',
+                    'zh-CN' => '你可能喜欢在人员、资源和限制之间推动实际交付。',
+                ],
+                'task_examples' => [
+                    '拆解交付步骤和负责人。',
+                    '跟踪物料、时间和现场限制。',
+                    '推动阻塞项得到处理。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '项目运营助理', 'common_tasks' => ['拆解任务', '追踪进度', '协调资源']],
+                    ['name' => '活动执行统筹', 'common_tasks' => ['安排现场', '确认物料', '处理异常']],
+                    ['name' => '门店 / 区域运营支持', 'common_tasks' => ['巡检执行', '整理问题', '跟进改善']],
+                ],
+                'next_experiments' => [
+                    '为一次小交付写责任清单。',
+                    '记录一个任务的阻塞和处理路径。',
+                    '协调两个人完成一个具体任务。',
+                ],
+            ],
+            [
+                'activity_key' => 'negotiate_practical_constraints',
+                'riasec_dimensions' => ['E', 'C'],
+                'activity_label' => ['en' => 'Negotiate practical constraints', 'zh-CN' => '协调现实限制'],
+                'activity_user_copy' => [
+                    'en' => 'You may enjoy making decisions when resources, rules, and timing all matter.',
+                    'zh-CN' => '你可能喜欢在资源、规则和时间都有限的情况下推进判断。',
+                ],
+                'task_examples' => [
+                    '比较不同执行方案的代价。',
+                    '与相关方确认可接受条件。',
+                    '把决定记录成清楚的执行边界。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '商务运营支持', 'common_tasks' => ['整理条件', '跟进沟通', '记录约定']],
+                    ['name' => '采购协调助理', 'common_tasks' => ['比较方案', '确认条件', '维护记录']],
+                    ['name' => '排期 / 资源协调', 'common_tasks' => ['整理需求', '安排资源', '处理冲突']],
+                ],
+                'next_experiments' => [
+                    '把一个选择的资源限制列成表。',
+                    '模拟一次条件确认对话。',
+                    '写一份简短执行边界说明。',
+                ],
+            ],
+        ], $locale);
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function airActivities(string $locale): array
+    {
+        return $this->normalizeActivities([
+            [
+                'activity_key' => 'prototype_expressive_solutions',
+                'riasec_dimensions' => ['A', 'I', 'R'],
+                'activity_label' => ['en' => 'Prototype expressive solutions', 'zh-CN' => '把想法做成原型'],
+                'activity_user_copy' => [
+                    'en' => 'You may like testing an idea by making something people can see or use.',
+                    'zh-CN' => '你可能喜欢把想法做成别人看得见、用得上的原型。',
+                ],
+                'task_examples' => [
+                    '把抽象概念做成草图、模型或样张。',
+                    '观察别人如何理解原型。',
+                    '根据证据改动结构或表现形式。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '产品原型助理', 'common_tasks' => ['制作草图', '整理反馈', '迭代结构']],
+                    ['name' => '信息设计支持', 'common_tasks' => ['设计图示', '核对信息', '优化表达']],
+                    ['name' => '展陈 / 体验设计助理', 'common_tasks' => ['制作样张', '测试动线', '记录观察']],
+                ],
+                'next_experiments' => [
+                    '为一个想法做低保真原型。',
+                    '让 2 个人试用并记录卡点。',
+                    '把反馈改成下一版结构。',
+                ],
+            ],
+            [
+                'activity_key' => 'test_creative_materials',
+                'riasec_dimensions' => ['A', 'I'],
+                'activity_label' => ['en' => 'Test creative materials', 'zh-CN' => '验证创作材料'],
+                'activity_user_copy' => [
+                    'en' => 'You may enjoy checking whether a creative output really communicates what it should.',
+                    'zh-CN' => '你可能喜欢验证一个创作输出是否真的传达了该传达的内容。',
+                ],
+                'task_examples' => [
+                    '收集读者或用户理解反馈。',
+                    '比较不同版本的表达效果。',
+                    '用证据改写标题、结构或视觉重点。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '内容测试 / 编辑支持', 'common_tasks' => ['比较版本', '整理反馈', '修改结构']],
+                    ['name' => '用户体验研究助理', 'common_tasks' => ['观察理解', '记录问题', '提出调整']],
+                    ['name' => '创意策略助理', 'common_tasks' => ['整理洞察', '测试表达', '准备说明']],
+                ],
+                'next_experiments' => [
+                    '做两个版本的说明材料。',
+                    '记录别人理解错在哪里。',
+                    '用反馈改写一个标题。',
+                ],
+            ],
+        ], $locale);
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function cseActivities(string $locale): array
+    {
+        return $this->normalizeActivities([
+            [
+                'activity_key' => 'facilitate_structured_action',
+                'riasec_dimensions' => ['C', 'S', 'E'],
+                'activity_label' => ['en' => 'Facilitate structured action', 'zh-CN' => '组织清晰行动'],
+                'activity_user_copy' => [
+                    'en' => 'You may like helping groups move from discussion to clear next steps.',
+                    'zh-CN' => '你可能喜欢帮助一群人从讨论进入清楚的下一步。',
+                ],
+                'task_examples' => [
+                    '把讨论整理成决定、负责人和时间点。',
+                    '提醒边界、风险和未确认事项。',
+                    '跟进下一步是否被执行。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '项目助理 / PMO 支持', 'common_tasks' => ['整理会议', '追踪任务', '提醒风险']],
+                    ['name' => '培训运营支持', 'common_tasks' => ['组织学员', '维护流程', '收集反馈']],
+                    ['name' => '客户成功运营', 'common_tasks' => ['整理需求', '协调动作', '复盘结果']],
+                ],
+                'next_experiments' => [
+                    '把一次讨论整理成行动清单。',
+                    '为一个小组任务建立跟进表。',
+                    '练习在会议后写 5 行纪要。',
+                ],
+            ],
+            [
+                'activity_key' => 'maintain_service_workflows',
+                'riasec_dimensions' => ['C', 'S'],
+                'activity_label' => ['en' => 'Maintain service workflows', 'zh-CN' => '维护服务流程'],
+                'activity_user_copy' => [
+                    'en' => 'You may enjoy keeping people-facing processes clear, consistent, and responsive.',
+                    'zh-CN' => '你可能喜欢让面向人的流程保持清楚、稳定、能回应问题。',
+                ],
+                'task_examples' => [
+                    '维护服务记录和处理进度。',
+                    '把重复问题整理成标准步骤。',
+                    '根据实际反馈调整流程说明。',
+                ],
+                'occupation_examples' => [
+                    ['name' => '服务流程运营', 'common_tasks' => ['维护记录', '整理问题', '优化步骤']],
+                    ['name' => '行政 / 学务支持', 'common_tasks' => ['处理申请', '整理材料', '跟进反馈']],
+                    ['name' => '社群运营支持', 'common_tasks' => ['维护规则', '回应问题', '整理活动']],
+                ],
+                'next_experiments' => [
+                    '为一个服务流程写标准步骤。',
+                    '把 10 个问题整理成 FAQ。',
+                    '检查一次流程说明是否能被新用户执行。',
+                ],
+            ],
+        ], $locale);
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $activities
+     * @return list<array<string,mixed>>
+     */
+    private function normalizeActivities(array $activities, string $locale): array
+    {
         return array_map(fn (array $activity): array => $this->normalizeActivity($activity, $locale), $activities);
     }
 
