@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-13T19:16:46+08:00",
+  "updated_at": "2026-05-13T13:23:39Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -708,8 +708,11 @@
       ],
       "commit_sha": "32f35c17a0f29758f0f700010ac1b0c7492ffb6c",
       "pr_url": null,
-      "checks": {},
-      "sidecar_issues": [],
+      "checks": {
+      },
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -723,8 +726,11 @@
       ],
       "commit_sha": "f8d8ff9433a97acfd0ce5a7d161fac20e0283f6d",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1356",
-      "checks": {},
-      "sidecar_issues": [],
+      "checks": {
+      },
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -941,7 +947,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -979,7 +987,8 @@
       "depends_on": [
         "iq-report-builder-three-dimension-result-schema"
       ],
-      "checks": {},
+      "checks": {
+      },
       "sidecar_issues": [
         {
           "sidecar_id": "IQ-SIDECAR-COMMERCE-DEFERRED-001",
@@ -1066,7 +1075,9 @@
           "evidence": "User explicitly authorized registering AUDIT-1 in docs/codex/pr-train.yaml and docs/codex/pr-train-state.json only."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-2 2786 public-resolution source resolver",
       "merged_at": null,
@@ -1107,7 +1118,9 @@
           "evidence": "AUDIT-1 merged as 0c6dc52e9806242dc73cec405c7f09c05161d19b and origin/main contains the merge commit."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-3 Occupation entity inventory audit",
       "merged_at": null,
@@ -1199,7 +1212,9 @@
           "evidence": "Full MBTI CI chain exited 0 after the test-only allowlist fix; generated compiled artifacts were restored because they are outside AUDIT-3 scope."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-4 Baseline/display metadata inventory audit",
       "merged_at": null,
@@ -1298,8 +1313,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed after AUDIT-4 allowlist fix in unrelated BigFive norm/content tests with SQLSTATE[HY000]: General error: 5 database is locked against /tmp/fap-ci.sqlite.",
             "Scoped AUDIT-4 tests, AUDIT-1/2/3 regressions, pint, git diff --check, and BigFive runtime freeze path gate passed."
@@ -1399,7 +1418,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-6 Runtime projection/truth eligibility audit",
       "merged_at": null,
@@ -1490,7 +1511,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-7 SEO/GEO readiness audit",
       "merged_at": null,
@@ -1585,7 +1608,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-8 Surface readiness audit",
       "merged_at": null,
@@ -1675,7 +1700,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-9 career:audit-canonical-eligibility command integration",
       "merged_at": null,
@@ -1771,7 +1798,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-10 80-cohort readiness plan",
       "merged_at": null,
@@ -1864,7 +1893,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-11 Manifest train generator",
       "merged_at": null,
@@ -1951,7 +1982,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-12 Batch live acceptance v2",
       "merged_at": null,
@@ -2101,7 +2134,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-13 2786 full audit artifact/report",
       "merged_at": null,
@@ -2184,7 +2219,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "End of 2786 eligibility audit PR train",
       "merged_at": null,
@@ -2249,7 +2286,9 @@
       "merged_at": "2026-05-12T16:55:20Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "PR-RT-03": {
       "repo": "fap-api",
@@ -2329,7 +2368,9 @@
         "Personality type related articles remain deferred because no stable Personality related article authority was identified for INFJ-A/INFJ-T pages.",
         "Test detail related articles remain deferred because the existing related_test_slug contract is a fixed three-article test page slot and changing it would widen PR-RT-03 scope."
       ],
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "merge_sha": "44621613e5255a76631138d641da218e2993e343"
     },
     "CMD-FIX-1": {
@@ -2358,7 +2399,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-AH-04": {
       "repo": "fap-api",
@@ -2489,7 +2532,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "CTX-CONSUME-1": {
       "repo": "fap-api",
@@ -2542,7 +2587,9 @@
       "merged_at": "2026-05-13T12:11:29Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "CTX-EXPORT-1": {
       "repo": "fap-api",
@@ -2596,7 +2643,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-SURFACE-CONTEXT-1": {
       "repo": "fap-api",
@@ -2651,7 +2700,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-SEO-GEO-1": {
       "repo": "fap-api",
@@ -2756,7 +2807,9 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
+          "affected_slugs": [
+
+          ],
           "affected_locales": [
             "en",
             "zh"
@@ -2870,7 +2923,9 @@
       "merged_at": "2026-05-13T10:31:09Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-TITLE-1": {
       "repo": "fap-api",
@@ -2976,7 +3031,9 @@
       "merged_at": "2026-05-13T10:49:47Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-RUNTIME-1": {
       "repo": "fap-api",
@@ -3081,7 +3138,9 @@
       "merged_at": "2026-05-13T11:08:33Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-INDEX-1": {
       "repo": "fap-api",
@@ -3181,7 +3240,9 @@
       "merged_at": "2026-05-13T11:37:01Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-ENTITY-1": {
       "repo": "fap-api",
@@ -3234,7 +3295,9 @@
       "merged_at": "2026-05-13T11:53:44Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-80-CANDIDATE-1": {
       "repo": "fap-api",
@@ -3287,14 +3350,18 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-00": {
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-00-train-registration",
       "title": "docs(codex): register RIASEC personalization train",
       "status": "merged",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "scope_type": "train_registration_only",
       "allowed_paths": [
         "docs/codex/pr-train.yaml",
@@ -3316,7 +3383,9 @@
       "merged_at": "2026-05-13T07:06:00Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-01": {
       "repo": "fap-api",
@@ -3369,7 +3438,9 @@
       "merged_at": "2026-05-13T07:35:00Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-02": {
       "repo": "fap-api",
@@ -3418,7 +3489,9 @@
       "merged_at": "2026-05-13T07:53:00Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-03": {
       "repo": "fap-api",
@@ -3463,7 +3536,9 @@
       "merged_at": "2026-05-13T08:16:00Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-04": {
       "repo": "fap-api",
@@ -3510,7 +3585,9 @@
       "merged_at": "2026-05-13T08:33:00Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-05": {
       "repo": "fap-api",
@@ -3555,7 +3632,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-06": {
       "repo": "fap-web",
@@ -3575,12 +3654,15 @@
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-07": {
       "repo": "fap-web",
@@ -3603,12 +3685,15 @@
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "PR-RT-04": {
       "repo": "fap-api",
@@ -3688,7 +3773,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "post_merge_runbook_required": true
     },
     "RIASEC-DEEP-COPY-01": {
@@ -3756,7 +3843,9 @@
       "merged_at": "2026-05-13T11:31:25Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-DEEP-COPY-02": {
       "repo": "fap-api",
@@ -3820,7 +3909,9 @@
       "merged_at": "2026-05-13T12:05:30Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-DEEP-COPY-03": {
       "repo": "fap-api",
@@ -4159,7 +4250,67 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
+    },
+    "CTX-SURFACE-EXPORT-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-surface-context-export-producer",
+      "title": "fix(api): add career surface context export producer",
+      "name": "Add read-only Career 2786 surface context artifact producer",
+      "status": "in_progress",
+      "depends_on": [
+        "RUN-1D",
+        "REPAIR-80-CANDIDATE-1"
+      ],
+      "scope_type": "surface_context_producer_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerExportCanonicalEligibilitySurfaceContext.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no production crawl",
+        "no fap-web change",
+        "no production DB query",
+        "no DB mutation",
+        "no rollout",
+        "no backfill",
+        "no 80 readiness run",
+        "no deploy"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided CTX-SURFACE-EXPORT-1 execution goal and authorized updating PR train manifest/state for the current item."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "RUN-1D completed with CONTEXT_ARTIFACT_MISSING because surface context is missing; remediation train PRs are merged."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to read-only surface context producer command, surface artifact reader/DTO compatibility, tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "RUN-1E rerun full-context audit with --surface-context",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+
+      ]
     }
   }
 }

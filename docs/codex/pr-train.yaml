@@ -1461,6 +1461,53 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: CTX-SURFACE-EXPORT-1
+    repo: fap-api
+    depends_on:
+      - RUN-1D
+      - REPAIR-80-CANDIDATE-1
+    branch: fix/career-surface-context-export-producer
+    title: "fix(api): add career surface context export producer"
+    name: "Add read-only Career 2786 surface context artifact producer"
+    scope_type: surface_context_producer_only
+    scope:
+      - Add read-only surface context artifact producer command.
+      - Generate planner-only unverified rows without claiming surface pass.
+      - Preserve compatibility with --surface-context audit consumer.
+      - Document no-live-crawl and no-production-mutation behavior.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerExportCanonicalEligibilitySurfaceContext.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run production crawl.
+      - Touch fap-web.
+      - Query production DB.
+      - Mutate DB or production state.
+      - Apply rollout.
+      - Backfill data.
+      - Run 80 readiness.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerExportCanonicalEligibilitySurfaceContext --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan test --filter=CareerSurfaceReadinessAuditor --no-ansi
+      - php artisan test --filter=CareerSurfaceContext --no-ansi
+      - php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "RUN-1E rerun full-context audit with --surface-context"
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-SEO-GEO-1
     repo: fap-api
     depends_on:
