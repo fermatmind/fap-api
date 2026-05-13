@@ -38,6 +38,17 @@ final class RiasecDeepCopySlotRegistry
         'minimal_quality_boundary_60q',
     ];
 
+    /** @var list<string> */
+    public const STRUCTURAL_DIFFERENCE_STATES = [
+        'same_structure',
+        'different_emphasis',
+        'layer_tension',
+        'insufficient_basis',
+        'cross_form_not_comparable',
+        'near_tie_shift',
+        'quality_limited',
+    ];
+
     public function __construct(
         private readonly RiasecContentRegistrySlotContract $contract = new RiasecContentRegistrySlotContract,
     ) {}
@@ -264,6 +275,73 @@ final class RiasecDeepCopySlotRegistry
     }
 
     /**
+     * @return array<string,array<string,mixed>>
+     */
+    public function structuralDifferenceSlots(): array
+    {
+        return [
+            'summary' => $this->structuralDifferenceSlot('summary', [
+                'title' => '两次结果强调的兴趣线索不同',
+                'summary' => '60Q 看基础兴趣结构；140Q 看任务、环境和角色责任。两次结果强调不同线索时，更适合把差异读成需要验证的线索，而不是最终结论。',
+                'structural_difference_state' => 'different_emphasis',
+            ]),
+            'task_layer_explanation' => $this->structuralDifferenceSlot('task_layer_explanation', [
+                'title' => '任务活动层',
+                'summary' => '任务活动层关注你更容易被哪些具体活动吸引，例如分析、表达、支持、推动或整理。它不说明能力高低，也不替代基础兴趣结构。',
+                'structural_difference_state' => 'same_structure',
+            ]),
+            'environment_layer_explanation' => $this->structuralDifferenceSlot('environment_layer_explanation', [
+                'title' => '工作环境层',
+                'summary' => '同一类任务出现在不同环境里，感受可能不同。环境层帮助你看见哪些情境更容易支持长期投入。',
+                'structural_difference_state' => 'different_emphasis',
+            ]),
+            'role_layer_explanation' => $this->structuralDifferenceSlot('role_layer_explanation', [
+                'title' => '角色责任层',
+                'summary' => '角色责任层关注你更愿意承担定义问题、表达答案、支持理解、推动落地或守住流程中的哪类责任。',
+                'structural_difference_state' => 'layer_tension',
+            ]),
+            'correct_reading' => $this->structuralDifferenceSlot('correct_reading', [
+                'title' => '正确读法',
+                'summary' => '先看两次结果中仍然重叠的活动线索，再看任务、环境和角色责任各自需要验证的部分。排序接近时，也要把 near-tie 当作阅读边界。',
+                'structural_difference_state' => 'near_tie_shift',
+            ]),
+            'forbidden_reading' => $this->structuralDifferenceSlot('forbidden_reading', [
+                'title' => '不要这样读',
+                'summary' => '不要把跨表单差异读成某一次结果失效、长表单覆盖短表单、兴趣身份发生转换，或任何分数涨跌结论。',
+                'structural_difference_state' => 'cross_form_not_comparable',
+            ]),
+            'next_validation_step' => $this->structuralDifferenceSlot('next_validation_step', [
+                'title' => '下一步验证',
+                'summary' => '选择一个低风险任务、一个真实环境和一个角色责任进行小实验。记录它们分别带来能量还是消耗，再决定是否需要重测。',
+                'structural_difference_state' => 'insufficient_basis',
+            ]),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function resolveStructuralDifferenceSlot(string $slotName): array
+    {
+        $slotName = trim($slotName);
+        $slot = $this->structuralDifferenceSlots()[$slotName] ?? null;
+
+        if ($slot === null) {
+            return [
+                'slot_key' => 'structural_difference_copy',
+                'slot_name' => $slotName,
+                'content_status' => 'unavailable',
+                'module_state' => 'omitted',
+                'fallback_behavior' => 'omit_module',
+                'frontend_fallback_allowed' => false,
+                'reason' => 'unsupported_structural_difference_slot',
+            ];
+        }
+
+        return $slot;
+    }
+
+    /**
      * @return list<string>
      */
     public function validateSlot(array $slot): array
@@ -319,6 +397,17 @@ final class RiasecDeepCopySlotRegistry
             }
             if (! in_array((string) ($slot['quality_state'] ?? ''), self::QUALITY_COPY_STATES, true)) {
                 $errors[] = 'unsupported_quality_copy_state';
+            }
+        }
+
+        if (($slot['slot_group'] ?? null) === 'structural_difference_copy') {
+            foreach ($this->structuralDifferenceRequiredFields() as $field) {
+                if (! array_key_exists($field, $slot) || $this->isBlank($slot[$field])) {
+                    $errors[] = 'missing_'.$field;
+                }
+            }
+            if (! in_array((string) ($slot['structural_difference_state'] ?? ''), self::STRUCTURAL_DIFFERENCE_STATES, true)) {
+                $errors[] = 'unsupported_structural_difference_state';
             }
         }
 
@@ -407,6 +496,24 @@ final class RiasecDeepCopySlotRegistry
             'title',
             'summary',
             'quality_state',
+            'forbidden_claims',
+            'user_visible_boundary',
+            'content_version',
+            'evidence_level',
+            'content_status',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function structuralDifferenceRequiredFields(): array
+    {
+        return [
+            'slot_name',
+            'title',
+            'summary',
+            'structural_difference_state',
             'forbidden_claims',
             'user_visible_boundary',
             'content_version',
@@ -698,6 +805,43 @@ final class RiasecDeepCopySlotRegistry
             ],
             'required_boundaries' => $this->requiredBoundaries(),
             'user_visible_boundary' => '质量状态只限制本次结果的阅读强度，不评价用户，也不改变分数或 Holland Code。',
+            'evidence_level' => 'expert_reviewed',
+            'source_status' => 'reviewed_content_copy',
+            'review_status' => 'approved_for_staging',
+            'fallback_behavior' => 'omit_module',
+            'content_status' => 'authored',
+            'frontend_fallback_allowed' => false,
+        ], $content);
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return array<string,mixed>
+     */
+    private function structuralDifferenceSlot(string $slotName, array $content): array
+    {
+        return array_merge([
+            'slot_key' => 'structural_difference_copy',
+            'slot_group' => 'structural_difference_copy',
+            'scale_code' => 'RIASEC',
+            'locale' => 'zh-CN',
+            'content_version' => 'riasec_structural_difference_copy_v1',
+            'interpretation_rule_version' => 'riasec_interpretation_rule_spec_v2',
+            'applicable_form_codes' => ['riasec_60', 'riasec_140'],
+            'applicable_profile_shapes' => ['clear_code', 'blended_code', 'broad_profile', 'near_tie', 'low_clarity'],
+            'applicable_quality_states' => ['normal', 'caution'],
+            'applicable_codes' => ['any'],
+            'slot_name' => $slotName,
+            'forbidden_claims' => [
+                'cross_form_raw_score_delta',
+                '140q_accuracy_claim',
+                '60q_wrong_claim',
+                'form_override_claim',
+                'code_conversion_claim',
+                'career_recommendation',
+            ],
+            'required_boundaries' => $this->requiredBoundaries(),
+            'user_visible_boundary' => '跨表单摘要只说明兴趣线索强调不同；不比较分数，不改写结果，也不形成职业结论。',
             'evidence_level' => 'expert_reviewed',
             'source_status' => 'reviewed_content_copy',
             'review_status' => 'approved_for_staging',

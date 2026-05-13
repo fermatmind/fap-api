@@ -142,3 +142,17 @@ The layer state enum is backend-owned: `agreement`, `tension`, `unavailable`, `i
 - `minimal_quality_boundary_60q`
 
 The quality content contract supports `normal`, `caution`, `low_quality`, `retake_recommended`, and `minimal_quality_boundary_60q` copy states. Low-quality slots must protect user dignity, must not imply user blame, must not promote 140Q as a repair path, and must not alter measured Holland Code or scores. Strong modules remain hidden or collapsed according to `RiasecReportModuleSelector`.
+
+## Structural Difference Runtime Slots
+
+`RIASEC-DEEP-COPY-06` adds backend-authored structural difference slots for safe 60Q / 140Q narrative summaries:
+
+- `summary`
+- `task_layer_explanation`
+- `environment_layer_explanation`
+- `role_layer_explanation`
+- `correct_reading`
+- `forbidden_reading`
+- `next_validation_step`
+
+The structural difference state enum is backend-owned: `same_structure`, `different_emphasis`, `layer_tension`, `insufficient_basis`, `cross_form_not_comparable`, `near_tie_shift`, and `quality_limited`. These slots may describe how 60Q and 140Q emphasize different interest signals, but they must not compare raw scores, mark either form as wrong, rank one form above the other, or describe a person as converting from one Holland Code into another. Missing structural difference content returns `content_status=unavailable`, `module_state=omitted`, and `frontend_fallback_allowed=false`.
