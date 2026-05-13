@@ -255,6 +255,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRow.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRunContext.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRunContextApprovalGate.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRunContextRequirement.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRunContextStatus.php',
             'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityCheckProtocol.php',
             'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityLayer.php',
             'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityLayerStatus.php',
@@ -1500,6 +1504,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRow.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRunContext.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRunContextApprovalGate.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRunContextRequirement.php',
+            'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityAuditRunContextStatus.php',
             'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityCheckProtocol.php',
             'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityLayer.php',
             'backend/app/Domain/Career/Audit/CareerCanonicalEligibilityLayerStatus.php',

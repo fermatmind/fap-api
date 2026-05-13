@@ -19,6 +19,7 @@ The command is an integration shell for the canonical eligibility stack. It does
 - `--ledger=`
 - `--json`
 - `--output=`
+- `--context-output=`
 - `--include-surfaces`
 - `--include-live-html`
 - `--base-url=`
@@ -38,6 +39,7 @@ Every JSON payload includes:
 ```
 
 AUDIT-9 does not write DB rows. `--output` may write the JSON artifact to a caller-specified local file.
+`--context-output` writes only the run-context requirements artifact and does not mutate DB state.
 
 ## Layer Orchestration
 
@@ -63,6 +65,14 @@ The command separates real blockers from missing verifier context. Missing requi
 - `surface_live_html_context_missing`
 
 Missing runtime projection/truth artifacts mark the runtime layer as `unverified`; they do not fabricate runtime pass/fail results. Optional live HTML validation requires `--include-live-html` and `--base-url`; if live verification context is absent, the surface layer is unverified and the report includes a sidecar. The command remains read-only and does not fetch live HTML by itself.
+
+## Run Context Contract
+
+REPAIR-RUN-CTX-1 adds top-level `context_summary` and `run_context` sections. They explain which inputs were supplied, which contexts are missing, which missing contexts block 80-readiness planning, which contexts require explicit approval, and what artifact/input is needed for a meaningful rerun.
+
+The context layer intentionally groups row-wide context blockers. For example, `runtime_projection_context_missing` across 5,572 slug/locale rows is one missing `--projection` artifact requirement, not 5,572 separate data defects.
+
+See `backend/docs/career/audits/audit_run_context.md` for rerun modes and approval gate templates.
 
 ## Non-Goals
 

@@ -1229,3 +1229,51 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-RUN-CTX-1
+    repo: fap-api
+    depends_on:
+      - CMD-FIX-1
+    branch: fix/career-2786-audit-run-context
+    title: "fix(api): make career audit run context explicit"
+    name: "Make 2786 audit run context explicit and reproducible"
+    scope_type: audit_run_context_only
+    scope:
+      - Add explicit run_context and context_summary output to career:audit-canonical-eligibility.
+      - Add a context-output artifact for rerun requirements and approval gates.
+      - Aggregate row-wide missing context reasons into context-level requirements.
+      - Preserve read-only behavior and avoid remediation/apply behavior.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerAuditCanonicalEligibility.php
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Mutate DB or production state.
+      - Run production commands.
+      - Apply rollout.
+      - Backfill data.
+      - Run 80 readiness.
+      - Deploy.
+      - Fabricate planner data.
+    validation:
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan test --filter=Career2786FullAuditArtifactBuilder --no-ansi
+      - php artisan test --filter=CareerSurfaceReadinessAuditor --no-ansi
+      - php artisan test --filter=CareerSeoGeoReadinessAuditor --no-ansi
+      - php artisan test --filter=CareerRuntimeProjectionTruthEligibilityAuditor --no-ansi
+      - php artisan test --filter=CareerIndexStateAuthorityAuditor --no-ansi
+      - php artisan test --filter=CareerBaselineMetadataInventoryAuditor --no-ansi
+      - php artisan test --filter=CareerOccupationEntityInventoryAuditor --no-ansi
+      - php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "RUN-1 rerun with explicit context, then remediation PR train based on actual blockers"
+    merge_policy:
+      github_checks_required: true
+      squash: true
