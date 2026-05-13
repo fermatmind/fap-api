@@ -46,6 +46,46 @@ final class CareerOccupationEntityInventoryAuditor
         );
     }
 
+    public function planRemediation(CareerPublicResolutionPlan $plan): CareerOccupationEntityRemediationPlan
+    {
+        $result = $this->auditPlan($plan);
+        $planRows = $this->planRowsBySlug($plan);
+
+        $rows = [];
+        foreach ($result->rows as $row) {
+            $planRow = $planRows[$row->canonicalSlug] ?? null;
+            [$action, $approvalRequired] = $this->remediationAction($row, $planRow);
+
+            $rows[] = new CareerOccupationEntityRemediationPlanRow(
+                canonicalSlug: $row->canonicalSlug,
+                sourceStatus: $this->sourceStatus($planRow),
+                action: $action,
+                approvalRequired: $approvalRequired,
+                occupationExists: $row->occupationExists,
+                occupationId: $row->occupationId,
+                missingEntityFields: $row->missingEntityFields,
+                plannerTitleEn: $planRow?->titleEn,
+                plannerTitleZh: $planRow?->titleZh,
+                plannerFamily: $planRow?->family,
+                plannerSourceCode: $planRow?->sourceCode,
+                reasons: $row->entityStatus->reasons,
+                evidence: [
+                    ...$row->evidence,
+                    [
+                        'planner_source_available' => $this->hasPlannerSource($planRow),
+                        'planner_row_number' => $planRow?->rowNumber,
+                        'planner_title_en' => $planRow?->titleEn,
+                        'planner_title_zh' => $planRow?->titleZh,
+                        'planner_family' => $planRow?->family,
+                        'planner_source_code' => $planRow?->sourceCode,
+                    ],
+                ],
+            );
+        }
+
+        return CareerOccupationEntityRemediationPlan::build($rows, $result->sidecars);
+    }
+
     /**
      * @param  list<string|null>  $slugs
      */
@@ -335,6 +375,73 @@ final class CareerOccupationEntityInventoryAuditor
         }
 
         return $missing;
+    }
+
+    /**
+     * @return array<string, CareerPublicResolutionPlanRow>
+     */
+    private function planRowsBySlug(CareerPublicResolutionPlan $plan): array
+    {
+        $rows = [];
+        foreach ($plan->rows as $row) {
+            $slug = $this->normalizeSlug($row->canonicalSlug);
+            if ($slug !== null) {
+                $rows[$slug] = $row;
+            }
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @return array{0: string, 1: bool}
+     */
+    private function remediationAction(
+        CareerOccupationEntityInventoryRow $row,
+        ?CareerPublicResolutionPlanRow $planRow,
+    ): array {
+        if ($row->issues === []) {
+            return [CareerOccupationEntityRemediationPlanRow::ACTION_NONE, false];
+        }
+
+        if ($row->duplicateEntitySlug) {
+            return [CareerOccupationEntityRemediationPlanRow::ACTION_REVIEW_DUPLICATE_ENTITY, true];
+        }
+
+        if (! $row->occupationExists) {
+            return $this->hasPlannerSource($planRow)
+                ? [CareerOccupationEntityRemediationPlanRow::ACTION_CREATE_OCCUPATION, true]
+                : [CareerOccupationEntityRemediationPlanRow::ACTION_REVIEW_MISSING_SOURCE, false];
+        }
+
+        if ($row->missingEntityFields !== []) {
+            return [CareerOccupationEntityRemediationPlanRow::ACTION_REPAIR_ENTITY_FIELDS, true];
+        }
+
+        if ($row->duplicateInputSlug) {
+            return [CareerOccupationEntityRemediationPlanRow::ACTION_REVIEW_DUPLICATE_INPUT, false];
+        }
+
+        return [CareerOccupationEntityRemediationPlanRow::ACTION_NONE, false];
+    }
+
+    private function sourceStatus(?CareerPublicResolutionPlanRow $row): string
+    {
+        return $this->hasPlannerSource($row)
+            ? CareerOccupationEntityRemediationPlanRow::SOURCE_AVAILABLE
+            : CareerOccupationEntityRemediationPlanRow::SOURCE_MISSING;
+    }
+
+    private function hasPlannerSource(?CareerPublicResolutionPlanRow $row): bool
+    {
+        if ($row === null) {
+            return false;
+        }
+
+        return $row->titleEn !== null
+            || $row->titleZh !== null
+            || $row->family !== null
+            || $row->sourceCode !== null;
     }
 
     /**

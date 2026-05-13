@@ -8,6 +8,8 @@ use App\Domain\Career\Audit\CareerCanonicalEligibilityLayer;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityStatus;
 use App\Domain\Career\Audit\CareerOccupationEntityInventoryAuditor;
 use App\Domain\Career\Audit\CareerOccupationEntityInventoryIssue;
+use App\Domain\Career\Audit\CareerOccupationEntityRemediationPlan;
+use App\Domain\Career\Audit\CareerOccupationEntityRemediationPlanRow;
 use App\Domain\Career\Audit\CareerPublicResolutionPlan;
 use App\Domain\Career\Audit\CareerPublicResolutionPlanRow;
 use App\Models\Occupation;
@@ -165,6 +167,160 @@ final class CareerOccupationEntityInventoryAuditorTest extends TestCase
         $this->assertStringNotContainsString('index_states', $queries);
         $this->assertStringNotContainsString('career_job_display_assets', $queries);
         $this->assertStringNotContainsString('occupation_truth_metrics', $queries);
+    }
+
+    public function test_missing_occupation_with_planner_source_produces_remediation_plan(): void
+    {
+        $plan = new CareerPublicResolutionPlan(
+            sourcePath: 'synthetic-entity-remediation-plan.json',
+            checksum: null,
+            rows: [
+                CareerPublicResolutionPlanRow::fromRaw([
+                    'canonical_slug' => 'actuaries',
+                    'title_en' => 'Actuaries',
+                    'title_zh' => '精算师',
+                    'family' => 'Business',
+                    'source_code' => '15-2011.00',
+                ]),
+            ]
+        );
+
+        $remediation = (new CareerOccupationEntityInventoryAuditor)->planRemediation($plan);
+
+        $this->assertSame(CareerOccupationEntityRemediationPlan::SCHEMA_VERSION, $remediation->schemaVersion);
+        $this->assertSame(1, $remediation->createOccupationCount());
+        $this->assertCount(1, $remediation->approvalGates);
+        $this->assertSame(
+            CareerOccupationEntityRemediationPlanRow::ACTION_CREATE_OCCUPATION,
+            $remediation->rows[0]->action
+        );
+        $this->assertSame(CareerOccupationEntityRemediationPlanRow::SOURCE_AVAILABLE, $remediation->rows[0]->sourceStatus);
+        $this->assertTrue($remediation->rows[0]->approvalRequired);
+        $this->assertSame('Actuaries', $remediation->rows[0]->plannerTitleEn);
+        $this->assertSame(['occupation_missing'], $remediation->rows[0]->reasons);
+    }
+
+    public function test_missing_occupation_without_planner_source_requires_source_review_not_apply(): void
+    {
+        $plan = new CareerPublicResolutionPlan(
+            sourcePath: 'synthetic-entity-remediation-plan.json',
+            checksum: null,
+            rows: [
+                CareerPublicResolutionPlanRow::fromRaw(['canonical_slug' => 'missing-career']),
+            ]
+        );
+
+        $remediation = (new CareerOccupationEntityInventoryAuditor)->planRemediation($plan);
+
+        $this->assertSame(
+            CareerOccupationEntityRemediationPlanRow::ACTION_REVIEW_MISSING_SOURCE,
+            $remediation->rows[0]->action
+        );
+        $this->assertSame(CareerOccupationEntityRemediationPlanRow::SOURCE_MISSING, $remediation->rows[0]->sourceStatus);
+        $this->assertFalse($remediation->rows[0]->approvalRequired);
+        $this->assertSame([], $remediation->approvalGates);
+    }
+
+    public function test_missing_entity_fields_produce_repair_plan(): void
+    {
+        $occupation = $this->createOccupation('actuaries', ['canonical_title_zh' => '']);
+        $plan = new CareerPublicResolutionPlan(
+            sourcePath: 'synthetic-entity-remediation-plan.json',
+            checksum: null,
+            rows: [
+                CareerPublicResolutionPlanRow::fromRaw([
+                    'canonical_slug' => 'actuaries',
+                    'title_en' => 'Actuaries',
+                    'title_zh' => '精算师',
+                ]),
+            ]
+        );
+
+        $remediation = (new CareerOccupationEntityInventoryAuditor)->planRemediation($plan);
+
+        $this->assertSame(
+            CareerOccupationEntityRemediationPlanRow::ACTION_REPAIR_ENTITY_FIELDS,
+            $remediation->rows[0]->action
+        );
+        $this->assertTrue($remediation->rows[0]->approvalRequired);
+        $this->assertSame($occupation->id, $remediation->rows[0]->occupationId);
+        $this->assertSame(['canonical_title_zh'], $remediation->rows[0]->missingEntityFields);
+        $this->assertSame(1, $remediation->repairEntityFieldsCount());
+    }
+
+    public function test_entity_present_has_no_remediation_action(): void
+    {
+        $occupation = $this->createOccupation('actuaries');
+        $plan = new CareerPublicResolutionPlan(
+            sourcePath: 'synthetic-entity-remediation-plan.json',
+            checksum: null,
+            rows: [
+                CareerPublicResolutionPlanRow::fromRaw([
+                    'canonical_slug' => 'actuaries',
+                    'title_en' => 'Actuaries',
+                ]),
+            ]
+        );
+
+        $remediation = (new CareerOccupationEntityInventoryAuditor)->planRemediation($plan);
+
+        $this->assertSame(CareerOccupationEntityRemediationPlanRow::ACTION_NONE, $remediation->rows[0]->action);
+        $this->assertFalse($remediation->rows[0]->approvalRequired);
+        $this->assertTrue($remediation->rows[0]->occupationExists);
+        $this->assertSame($occupation->id, $remediation->rows[0]->occupationId);
+        $this->assertSame([], $remediation->approvalGates);
+    }
+
+    public function test_remediation_plan_to_array_is_stable(): void
+    {
+        $plan = new CareerPublicResolutionPlan(
+            sourcePath: 'synthetic-entity-remediation-plan.json',
+            checksum: null,
+            rows: [
+                CareerPublicResolutionPlanRow::fromRaw([
+                    'row_number' => 12,
+                    'canonical_slug' => 'actuaries',
+                    'title_en' => 'Actuaries',
+                    'title_zh' => '精算师',
+                    'family' => 'Business',
+                    'source_code' => '15-2011.00',
+                ]),
+            ]
+        );
+
+        $payload = (new CareerOccupationEntityInventoryAuditor)->planRemediation($plan)->toArray();
+
+        $this->assertSame('career_occupation_entity_remediation_plan.v1', $payload['schema_version']);
+        $this->assertSame([
+            'expected_count' => 1,
+            'create_occupation_count' => 1,
+            'repair_entity_fields_count' => 0,
+            'review_count' => 0,
+            'approval_required_count' => 1,
+            'by_action' => ['create_occupation' => 1],
+            'by_source_status' => ['planner_source_available' => 1],
+        ], $payload['summary']);
+        $this->assertSame('actuaries', $payload['rows'][0]['canonical_slug']);
+        $this->assertSame('create_occupation', $payload['rows'][0]['action']);
+        $this->assertSame('I explicitly approve production occupation entity remediation apply for Career 2786 using reviewed plan <PLAN_PATH>.', $payload['approval_gates'][0]['approval_phrase_template']);
+    }
+
+    public function test_remediation_planning_does_not_mutate_database(): void
+    {
+        $this->createOccupation('actuaries', ['canonical_title_zh' => '']);
+        $before = Occupation::query()->count();
+        $plan = new CareerPublicResolutionPlan(
+            sourcePath: 'synthetic-entity-remediation-plan.json',
+            checksum: null,
+            rows: [
+                CareerPublicResolutionPlanRow::fromRaw(['canonical_slug' => 'actuaries', 'title_en' => 'Actuaries']),
+                CareerPublicResolutionPlanRow::fromRaw(['canonical_slug' => 'missing-career', 'title_en' => 'Missing Career']),
+            ]
+        );
+
+        (new CareerOccupationEntityInventoryAuditor)->planRemediation($plan);
+
+        $this->assertSame($before, Occupation::query()->count());
     }
 
     public function test_result_to_array_is_stable(): void

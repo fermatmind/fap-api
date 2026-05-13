@@ -1119,7 +1119,7 @@
       "branch": "fix/career-occupation-entity-inventory-audit3",
       "title": "feat(api): add career occupation entity inventory audit",
       "name": "Career Occupation Entity Inventory Audit",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "AUDIT-2"
       ],
@@ -2453,8 +2453,8 @@
       ],
       "failure_reason": null,
       "next_pr": "RIASEC-AH-05 end-to-end smoke acceptance",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "0244e8fee1784452744c598ae6060c9292431c4c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1357",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
@@ -3178,6 +3178,59 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-ENTITY-1",
+      "merged_at": "2026-05-13T11:37:01Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "sidecar_issues": []
+    },
+    "REPAIR-ENTITY-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-entity-remediation-plan-1",
+      "title": "fix(api): add career occupation entity remediation planning",
+      "name": "Add career occupation entity remediation planning",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-INDEX-1",
+        "SCAN-3"
+      ],
+      "scope_type": "audit_occupation_entity_remediation_planning_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no Occupation/entity apply",
+        "no production DB query",
+        "no DB mutation",
+        "no rollout/backfill",
+        "no fap-web changes",
+        "no 80 readiness run",
+        "no deploy"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided remediation train execution goal and authorized registering the current remediation PR item."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-INDEX-1 merged as PR #1357 and local train worktree is based on origin/main after that merge."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to occupation entity remediation planning, audit tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "REPAIR-80-CANDIDATE-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
