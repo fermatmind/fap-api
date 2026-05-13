@@ -2196,12 +2196,13 @@
       "branch": "codex/pr-rt-02-article-import-svg-covers",
       "title": "feat(api): import six SEO articles with SVG covers",
       "name": "6 SEO Articles Formal Import + SVG Cover Placeholders",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "PR-RT-01"
       ],
       "scope_type": "article_authority_import_only",
-      "commit_sha": null,
+      "commit_sha": "4c14394cfc352c78f3d6f3827a6e42c95fb969dd",
+      "merge_sha": "4c14394cfc352c78f3d6f3827a6e42c95fb969dd",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1337",
       "checks": {
         "focused_article_baseline_import": {
@@ -2245,9 +2246,85 @@
         }
       },
       "failure_reason": null,
+      "merged_at": "2026-05-12T16:55:20Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "sidecar_issues": []
+    },
+    "PR-RT-03": {
+      "repo": "fap-api",
+      "branch": "codex/pr-rt-03-article-graph-authority",
+      "title": "feat(api): close six-article graph recommendation authority",
+      "name": "6 Articles Site Graph and Recommendation Authority Closure",
+      "status": "in_progress",
+      "depends_on": [
+        "PR-RT-02"
+      ],
+      "scope_type": "article_graph_authority_closure_only",
+      "commit_sha": "119c97ec2ed13f8a22186ab6adecdc6e0ed1f9c8",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1338",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding PR-RT-03 to fap-api pr-train manifest/state and reconciling PR-RT-02 before execution."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR-RT-02 is merged as PR #1337 with merge commit 4c14394cfc352c78f3d6f3827a6e42c95fb969dd and origin/main contains it."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to backend topic/career guide baselines, one backend graph authority contract test, and docs/codex train metadata."
+        },
+        "article_graph_authority_closure": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/CareerCms/ArticleGraphAuthorityClosureTest.php --no-ansi",
+          "evidence": "1 test passed, 53 assertions."
+        },
+        "article_baseline_import_regression": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/CareerCms/ArticleBaselineImportTest.php --no-ansi",
+          "evidence": "2 tests passed, 193 assertions."
+        },
+        "topic_baseline_import_regression": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/TopicsCms/TopicBaselineImportTest.php --no-ansi",
+          "evidence": "7 tests passed, 41 assertions."
+        },
+        "homepage_landing_surface_regression": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php --filter=baseline_import_creates_home_tests_and_career_surfaces --no-ansi",
+          "evidence": "1 test passed, 46 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Command completed successfully; output captured in /tmp/pr-rt-03-route-list.txt."
+        },
+        "sqlite_migrate_pretend": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "evidence": "Command completed successfully; output captured in /tmp/pr-rt-03-migrate-pretend.txt."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test tests/Feature/CareerCms/ArticleGraphAuthorityClosureTest.php",
+          "evidence": "Scoped Pint check passed for 1 file."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
+      "deferred_decisions": [
+        "Article detail related articles remain deferred because the current fap-web Article detail related arrays are empty and no backend Article-to-Article authority exists in this PR scope.",
+        "Personality type related articles remain deferred because no stable Personality related article authority was identified for INFJ-A/INFJ-T pages.",
+        "Test detail related articles remain deferred because the existing related_test_slug contract is a fixed three-article test page slot and changing it would widen PR-RT-03 scope."
+      ],
       "sidecar_issues": []
     }
   }
