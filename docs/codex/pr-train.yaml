@@ -1404,6 +1404,7 @@ prs:
     allowed_paths:
       - backend/app/**/Riasec*Interpretation*
       - backend/tests/**/Riasec*Interpretation*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train-state.json
     do_not:
       - Change scorer math.
