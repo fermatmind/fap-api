@@ -130,9 +130,33 @@ final class CareerSurfaceContextArtifactReader
                 liveCanonicalPath: self::optionalString($rowValue['live_canonical_path'] ?? null),
                 liveRobotsPolicy: self::optionalString($rowValue['live_robots_policy'] ?? null),
                 ctaPresent: array_key_exists('cta_present', $rowValue) && is_bool($rowValue['cta_present']) ? $rowValue['cta_present'] : null,
+                surfaceVerified: array_key_exists('surface_verified', $rowValue) && is_bool($rowValue['surface_verified']) ? $rowValue['surface_verified'] : null,
+                surfaceMode: self::optionalString($rowValue['surface_mode'] ?? null),
+                issues: self::issueReasons($rowValue['issues'] ?? []),
                 evidence: self::mapOrEmpty($rowValue['evidence'] ?? []),
                 raw: $rowValue,
             );
+
+            $rowIssues = self::issueReasons($rowValue['issues'] ?? []);
+            if (array_key_exists('surface_verified', $rowValue) && $rowValue['surface_verified'] === false && $rowIssues === []) {
+                $rowIssues[] = CareerSurfaceContextArtifactIssue::SURFACE_UNVERIFIED;
+            }
+
+            foreach ($rowIssues as $reason) {
+                $issues[] = new CareerSurfaceContextArtifactIssue(
+                    reason: $reason,
+                    message: self::messageForIssueReason($reason),
+                    canonicalSlug: $slug,
+                    locale: $locale,
+                    evidence: [[
+                        'row_index' => $index,
+                        'canonical_slug' => $slug,
+                        'locale' => $locale,
+                        'surface_verified' => $rowValue['surface_verified'] ?? null,
+                        'surface_mode' => $rowValue['surface_mode'] ?? null,
+                    ]],
+                );
+            }
         }
 
         return new CareerSurfaceContextArtifact(
@@ -167,6 +191,39 @@ final class CareerSurfaceContextArtifactReader
         $normalized = trim((string) $value);
 
         return $normalized === '' ? null : $normalized;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private static function issueReasons(mixed $value): array
+    {
+        if (! is_array($value) || ! array_is_list($value)) {
+            return [];
+        }
+
+        $reasons = [];
+        foreach ($value as $reason) {
+            $normalized = self::optionalString($reason);
+            if ($normalized === null || ! in_array($normalized, CareerSurfaceContextArtifactIssue::reasons(), true)) {
+                continue;
+            }
+
+            if (! in_array($normalized, $reasons, true)) {
+                $reasons[] = $normalized;
+            }
+        }
+
+        return $reasons;
+    }
+
+    private static function messageForIssueReason(string $reason): string
+    {
+        return match ($reason) {
+            CareerSurfaceContextArtifactIssue::SURFACE_ARTIFACT_MISSING => 'Surface row was produced without concrete surface artifact evidence.',
+            CareerSurfaceContextArtifactIssue::SURFACE_UNVERIFIED => 'Surface row is present but explicitly unverified.',
+            default => 'Surface context row reports an artifact issue.',
+        };
     }
 
     /**

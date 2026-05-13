@@ -29,7 +29,19 @@ The command is an integration shell for the canonical eligibility stack. It does
 
 `scope=slugs` can run from explicit slugs. `scope=all` and `scope=batch` require a public-resolution plan path and report a structured `public_resolution_plan_missing` reason when it is absent.
 
-`--entity-context`, `--index-state-context`, and `--surface-context` are consumer-only JSON artifact inputs. They satisfy entity, index, and surface context without querying/exporting production DB context or crawling live HTML. The artifacts must be produced separately by approved read-only workflows.
+`--entity-context`, `--index-state-context`, and `--surface-context` are JSON artifact inputs. They satisfy entity, index,
+and surface context without querying/exporting production DB context or crawling live HTML. Surface context can be produced by:
+
+```bash
+php artisan career:export-canonical-eligibility-surface-context \
+  --public-resolution-plan=/tmp/career_2786_public_resolution_plan_from_d23b.json \
+  --output=/tmp/career_2786_surface_context.json \
+  --locales=en,zh \
+  --json
+```
+
+Planner-only surface export writes unverified rows. It removes generic `surface_context_missing` but preserves explicit
+`surface_artifact_missing` / `surface_unverified` blockers until real API/static/live surface evidence is supplied.
 
 ## Read-Only Contract
 

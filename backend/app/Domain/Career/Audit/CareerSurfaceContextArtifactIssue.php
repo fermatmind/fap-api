@@ -26,6 +26,10 @@ final class CareerSurfaceContextArtifactIssue
 
     public const REQUIRED_FIELD_MISSING = 'surface_context_required_field_missing';
 
+    public const SURFACE_UNVERIFIED = 'surface_unverified';
+
+    public const SURFACE_ARTIFACT_MISSING = 'surface_artifact_missing';
+
     /**
      * @param  list<mixed>  $evidence
      */
@@ -69,6 +73,8 @@ final class CareerSurfaceContextArtifactIssue
             self::LOCALE_MISSING,
             self::SLUG_LOCALE_DUPLICATE,
             self::REQUIRED_FIELD_MISSING,
+            self::SURFACE_UNVERIFIED,
+            self::SURFACE_ARTIFACT_MISSING,
         ];
     }
 
