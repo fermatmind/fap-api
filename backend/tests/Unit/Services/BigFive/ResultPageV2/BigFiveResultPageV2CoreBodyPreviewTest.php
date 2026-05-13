@@ -621,6 +621,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_quality_rule_contract_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Riasec/RiasecQualityRuleContract.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_riasec_projection_v2_minimal_changes(): void
     {
         $changed = [
@@ -1233,6 +1242,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecQualityRuleContractFile($file)) {
+                continue;
+            }
+
             if ($this->isRiasecProjectionV2MinimalFile($file)) {
                 continue;
             }
@@ -1400,6 +1413,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isRiasecInterpretationRuleContractFile(string $file): bool
     {
         return $file === 'backend/app/Services/Riasec/RiasecInterpretationRuleContract.php';
+    }
+
+    private function isRiasecQualityRuleContractFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Riasec/RiasecQualityRuleContract.php';
     }
 
     private function isRiasecProjectionV2MinimalFile(string $file): bool
