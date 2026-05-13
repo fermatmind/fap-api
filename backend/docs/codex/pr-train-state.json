@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-14T01:05:00+08:00",
+  "updated_at": "2026-05-14T01:12:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -119,10 +119,10 @@
     "PR-CMS-02": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/pr-cms-02-content-release-revalidate-api",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "683349d437e2a3e068da4a7e1d031a472b8a8a62",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1374",
       "checks": {
         "local": [
           {
@@ -168,6 +168,11 @@
           "at": "2026-05-14T01:05:00+08:00",
           "status": "local_checks_passed",
           "summary": "Local backend checks passed for PR-CMS-02."
+        },
+        {
+          "at": "2026-05-14T01:12:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened fap-api PR #1374 for PR-CMS-02."
         }
       ]
     },
