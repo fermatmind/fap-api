@@ -218,6 +218,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_content_release_revalidate_automation_files(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Support/ContentReleaseFollowUp.php',
+            'backend/app/Services/Cms/ContentReleasePathPlanner.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1171,6 +1181,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isContentReleaseRevalidateAutomationFile($file)) {
+                continue;
+            }
+
             if ($this->isCommercePaymentActionFile($file)) {
                 continue;
             }
@@ -1430,6 +1444,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isPublicContentReleaseGuardCommandFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/ReleaseVerifyPublicContent.php';
+    }
+
+    private function isContentReleaseRevalidateAutomationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Support/ContentReleaseFollowUp.php',
+            'backend/app/Services/Cms/ContentReleasePathPlanner.php',
+        ], true);
     }
 
     private function isCommercePaymentActionFile(string $file): bool
