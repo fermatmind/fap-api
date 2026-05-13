@@ -126,7 +126,8 @@ final class CareerPublicResolutionPlanRow
     private static function titleValue(array $raw, string $locale): ?string
     {
         if ($locale === 'en') {
-            $direct = self::normalizeString($raw['title_en'] ?? null);
+            $direct = self::normalizeString($raw['title_en'] ?? null)
+                ?? self::normalizeString($raw['EN_Title'] ?? null);
             if ($direct !== null) {
                 return $direct;
             }

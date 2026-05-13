@@ -187,8 +187,10 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
 
         $this->assertArrayNotHasKey('zh_baseline_missing', $payload['by_reason']);
         $this->assertArrayNotHasKey('required_display_field_missing', $payload['by_reason']);
-        $this->assertSame('warning', data_get($payload, 'rows.0.baseline_status.status'));
+        $this->assertSame('pass', data_get($payload, 'rows.0.baseline_status.status'));
         $this->assertSame('planner_workbook', data_get($payload, 'rows.0.baseline_status.evidence.0.zh_baseline_source'));
+        $this->assertSame('planner_workbook', data_get($payload, 'rows.0.baseline_status.evidence.0.title_en_source'));
+        $this->assertArrayNotHasKey('en_title_derivation_required', $payload['by_reason']);
     }
 
     public function test_projection_truth_artifacts_drive_runtime_layer_status(): void

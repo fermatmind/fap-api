@@ -137,6 +137,29 @@ final class CareerBaselineMetadataInventoryAuditorTest extends TestCase
         $this->assertSame(CareerBaselineMetadataInventoryRow::TITLE_EN_SOURCE_BATCH_MANIFEST, $result->rows[0]->titleEnSource);
     }
 
+    public function test_en_title_from_planner_workbook_when_authorized_source_exists(): void
+    {
+        $result = $this->auditor(
+            zhRows: [$this->baselineRow('actuaries', '精算师')],
+            enRows: [],
+            manifestRows: [],
+        )->auditPlan(new CareerPublicResolutionPlan(
+            sourcePath: 'synthetic-audit-4-plan.json',
+            checksum: null,
+            rows: [
+                CareerPublicResolutionPlanRow::fromRaw([
+                    'canonical_slug' => 'actuaries',
+                    'EN_Title' => 'Actuaries',
+                ]),
+            ],
+        ));
+
+        $this->assertSame(CareerCanonicalEligibilityStatus::PASS, $result->status);
+        $this->assertSame('Actuaries', $result->rows[0]->titleEn);
+        $this->assertSame(CareerBaselineMetadataInventoryRow::TITLE_EN_SOURCE_PLANNER_WORKBOOK, $result->rows[0]->titleEnSource);
+        $this->assertArrayNotHasKey(CareerBaselineMetadataInventoryIssue::EN_TITLE_DERIVATION_REQUIRED, $result->byReason());
+    }
+
     public function test_en_title_can_be_derived_from_canonical_slug(): void
     {
         $result = $this->auditor(
