@@ -126,3 +126,19 @@ The first runtime-authored pair slots are `I_A`, `I_S`, and `A_S`, sourced from 
 - `140q_not_recommended`
 
 The layer state enum is backend-owned: `agreement`, `tension`, `unavailable`, `insufficient_quality`, and `not_applicable_60q_only`. 140Q slots describe work-daily task, environment, and role-responsibility context. They do not overwrite 60Q, do not compare raw scores, and do not make accuracy, ability, job, or occupational conclusions. Low-quality states resolve to `140q_not_recommended` and must not upsell the longer form.
+
+## Low Quality And Cautious Reading Slots
+
+`RIASEC-DEEP-COPY-05` adds backend-authored quality copy slots for cautious and low-quality states:
+
+- `top_notice`
+- `user_not_blamed_message`
+- `what_happened_explanation`
+- `hidden_modules_explanation`
+- `retake_guidance`
+- `share_pdf_boundary`
+- `next_step`
+- `cautious_reading_notice`
+- `minimal_quality_boundary_60q`
+
+The quality content contract supports `normal`, `caution`, `low_quality`, `retake_recommended`, and `minimal_quality_boundary_60q` copy states. Low-quality slots must protect user dignity, must not imply user blame, must not promote 140Q as a repair path, and must not alter measured Holland Code or scores. Strong modules remain hidden or collapsed according to `RiasecReportModuleSelector`.

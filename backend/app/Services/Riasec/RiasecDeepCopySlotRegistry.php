@@ -29,6 +29,15 @@ final class RiasecDeepCopySlotRegistry
         'not_applicable_60q_only',
     ];
 
+    /** @var list<string> */
+    public const QUALITY_COPY_STATES = [
+        'normal',
+        'caution',
+        'low_quality',
+        'retake_recommended',
+        'minimal_quality_boundary_60q',
+    ];
+
     public function __construct(
         private readonly RiasecContentRegistrySlotContract $contract = new RiasecContentRegistrySlotContract,
     ) {}
@@ -185,6 +194,76 @@ final class RiasecDeepCopySlotRegistry
     }
 
     /**
+     * @return array<string,array<string,mixed>>
+     */
+    public function lowQualitySlots(): array
+    {
+        return [
+            'top_notice' => $this->qualitySlot('low_quality_copy', 'top_notice', [
+                'title' => '这次结果适合谨慎阅读',
+                'summary' => '本次结果可以作为初步兴趣线索，但不适合用三字母代码做强结论。更稳妥的做法是先看六维概览，或稍后在状态更稳定时重测。',
+                'quality_state' => 'low_quality',
+            ]),
+            'user_not_blamed_message' => $this->qualitySlot('low_quality_copy', 'user_not_blamed_message', [
+                'title' => '这不是对你的评价',
+                'summary' => '作答太快、注意力分散、题目想象不清楚、缺题或当时状态不稳定，都可能影响结果的可读性。',
+                'quality_state' => 'low_quality',
+            ]),
+            'what_happened_explanation' => $this->qualitySlot('low_quality_copy', 'what_happened_explanation', [
+                'title' => '为什么要降级阅读',
+                'summary' => '当作答质量或结果清晰度不足时，系统暂不把结果写成强解释，以避免把初步线索误读成固定结论。',
+                'quality_state' => 'low_quality',
+            ]),
+            'hidden_modules_explanation' => $this->qualitySlot('low_quality_copy', 'hidden_modules_explanation', [
+                'title' => '哪些模块会暂时隐藏',
+                'summary' => '本次暂不展示单一活动链、维度组合深解、职业例子、140Q CTA 和强分享卡，只保留六维概览、方法边界和重测建议。',
+                'quality_state' => 'low_quality',
+            ]),
+            'retake_guidance' => $this->qualitySlot('low_quality_copy', 'retake_guidance', [
+                'title' => '下次作答时，试着这样做',
+                'summary' => '只判断你对活动本身是否有兴趣；没有经验时按是否愿意尝试回答；注意力分散时先休息后再完成。',
+                'quality_state' => 'retake_recommended',
+            ]),
+            'share_pdf_boundary' => $this->qualitySlot('low_quality_copy', 'share_pdf_boundary', [
+                'title' => '分享和 PDF 边界',
+                'summary' => '这次结果不适合生成强结论分享卡。个人 PDF 可以保存谨慎阅读版，但公开分享默认不展示 Holland Code、活动链或职业例子。',
+                'quality_state' => 'low_quality',
+            ]),
+            'next_step' => $this->qualitySlot('low_quality_copy', 'next_step', [
+                'title' => '下一步',
+                'summary' => '先保存谨慎阅读版，或稍后在状态更稳定时重测。当前不推荐继续进入更长版本。',
+                'quality_state' => 'retake_recommended',
+            ]),
+            'cautious_reading_notice' => $this->qualitySlot('cautious_reading_copy', 'cautious_reading_notice', [
+                'title' => '轻量参考',
+                'summary' => '本次结果适合放轻阅读。建议先看六维概览，再用一个小实验验证兴趣线索。',
+                'quality_state' => 'caution',
+            ]),
+            'minimal_quality_boundary_60q' => $this->qualitySlot('cautious_reading_copy', 'minimal_quality_boundary_60q', [
+                'title' => '60Q 最小质量边界',
+                'summary' => '60Q 当前只在缺题或完成度不足等明确条件下做强降级；其他较弱信号只用于提示谨慎阅读。',
+                'quality_state' => 'minimal_quality_boundary_60q',
+            ]),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function lowQualityModuleDowngradePolicy(): array
+    {
+        return [
+            'quality_state' => 'low_quality',
+            'visible_modules' => ['trust_bar', 'six_dimension_map', 'low_quality_notice', 'technical_note_summary', 'faq', 'final_user_exit'],
+            'hidden_modules' => ['hero_activity_chain', 'pair_blend', 'activity_explorer', 'occupation_examples', '140q_cta', '140q_three_cards'],
+            'collapsed_modules' => ['share_card', 'pdf', 'history'],
+            'score_mutation_allowed' => false,
+            'measured_holland_code_mutation_allowed' => false,
+            'frontend_fallback_allowed' => false,
+        ];
+    }
+
+    /**
      * @return list<string>
      */
     public function validateSlot(array $slot): array
@@ -229,6 +308,17 @@ final class RiasecDeepCopySlotRegistry
             }
             if (! in_array((string) ($slot['layer_state'] ?? ''), self::LAYER_140Q_STATES, true)) {
                 $errors[] = 'unsupported_140q_layer_state';
+            }
+        }
+
+        if (($slot['slot_group'] ?? null) === 'quality_copy') {
+            foreach ($this->qualityCopyRequiredFields() as $field) {
+                if (! array_key_exists($field, $slot) || $this->isBlank($slot[$field])) {
+                    $errors[] = 'missing_'.$field;
+                }
+            }
+            if (! in_array((string) ($slot['quality_state'] ?? ''), self::QUALITY_COPY_STATES, true)) {
+                $errors[] = 'unsupported_quality_copy_state';
             }
         }
 
@@ -299,6 +389,24 @@ final class RiasecDeepCopySlotRegistry
             'title',
             'summary',
             'layer_state',
+            'forbidden_claims',
+            'user_visible_boundary',
+            'content_version',
+            'evidence_level',
+            'content_status',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function qualityCopyRequiredFields(): array
+    {
+        return [
+            'slot_name',
+            'title',
+            'summary',
+            'quality_state',
             'forbidden_claims',
             'user_visible_boundary',
             'content_version',
@@ -554,6 +662,42 @@ final class RiasecDeepCopySlotRegistry
             ],
             'required_boundaries' => $this->requiredBoundaries(),
             'user_visible_boundary' => '140Q 是工作日常情境线索，不改写 60Q，不比较 raw score，也不输出岗位结论。',
+            'evidence_level' => 'expert_reviewed',
+            'source_status' => 'reviewed_content_copy',
+            'review_status' => 'approved_for_staging',
+            'fallback_behavior' => 'omit_module',
+            'content_status' => 'authored',
+            'frontend_fallback_allowed' => false,
+        ], $content);
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return array<string,mixed>
+     */
+    private function qualitySlot(string $slotKey, string $slotName, array $content): array
+    {
+        return array_merge([
+            'slot_key' => $slotKey,
+            'slot_group' => 'quality_copy',
+            'scale_code' => 'RIASEC',
+            'locale' => 'zh-CN',
+            'content_version' => 'riasec_low_quality_copy_slots_v1',
+            'quality_rule_version' => 'riasec_quality_rule_spec_v2',
+            'applicable_form_codes' => ['riasec_60', 'riasec_140'],
+            'applicable_profile_shapes' => ['low_quality', 'low_clarity', 'broad_profile', 'clear_code', 'blended_code', 'near_tie'],
+            'applicable_quality_states' => ['caution', 'low_quality', 'retake_recommended', 'minimal_quality_boundary_60q'],
+            'applicable_codes' => ['any'],
+            'slot_name' => $slotName,
+            'forbidden_claims' => [
+                'user_blame',
+                '140q_upsell_on_low_quality',
+                'career_recommendation',
+                'accuracy_promise',
+                'score_mutation',
+            ],
+            'required_boundaries' => $this->requiredBoundaries(),
+            'user_visible_boundary' => '质量状态只限制本次结果的阅读强度，不评价用户，也不改变分数或 Holland Code。',
             'evidence_level' => 'expert_reviewed',
             'source_status' => 'reviewed_content_copy',
             'review_status' => 'approved_for_staging',

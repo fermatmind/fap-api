@@ -2103,3 +2103,38 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: RIASEC-DEEP-COPY-05
+    repo: fap-api
+    depends_on:
+      - RIASEC-DEEP-COPY-04
+    branch: codex/riasec-deep-copy-05-low-quality-slots
+    title: "feat(riasec): add low quality cautious copy slots"
+    scope:
+      - Add backend-authoritative low_quality and cautious reading copy slots.
+      - Bind copy slot readiness to existing module downgrade and quality state boundaries.
+      - Keep 60Q quality limited and avoid 140Q upsell on low_quality.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scoring, answer scoring, or question content packs.
+      - Add frontend low_quality copy/rendering or fallback.
+      - Add 140Q upsell, career match, job fit, ranking, success, hiring, or blame language.
+    validation:
+      - targeted PHPUnit for RIASEC low-quality copy and deep copy registry contracts
+      - scoped freeze classifier test if runtime path allowance changes
+      - scoped Pint for touched PHP
+      - JSON/YAML validity
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
