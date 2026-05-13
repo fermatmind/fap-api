@@ -58,11 +58,11 @@ final class CareerSeoGeoReadinessAuditor
         $llmsEligible = $this->boolValue($row, ['llms_eligible', 'llms_live', 'llms']);
         $llmsFullEligible = $this->boolValue($row, ['llms_full_eligible', 'llms_full_live', 'llms_full']);
         $structuredDataReady = $this->boolValue($row, ['structured_data_ready', 'structured_metadata_ready'])
-            ?? $this->nonEmptyArrayValue($row, ['structured_data', 'structured_data_json', 'jsonld']);
+            ?? $this->nonEmptyValue($row, ['structured_data', 'structured_data_json', 'jsonld']);
         $datasetEligible = $this->boolValue($row, ['dataset_eligible', 'dataset_visible', 'dataset']);
         $searchEligible = $this->boolValue($row, ['search_eligible', 'search_visible', 'search']);
         $citationMetadataReady = $this->boolValue($row, ['citation_metadata_ready', 'ai_citation_metadata_ready'])
-            ?? $this->nonEmptyArrayValue($row, ['citation_metadata', 'ai_citation_metadata']);
+            ?? $this->nonEmptyValue($row, ['citation_metadata', 'ai_citation_metadata']);
 
         $issues = $this->issuesFor(
             slug: $slug,
@@ -140,14 +140,41 @@ final class CareerSeoGeoReadinessAuditor
         if (! $robotsIndexable) {
             $issues[] = $this->issue($slug, $locale, CareerSeoGeoReadinessIssue::ROBOTS_NOINDEX, 'Robots policy or indexability indicates noindex.', ['robots_policy' => $robotsPolicy, 'robots_indexable' => $robotsIndexable]);
         }
-        if ($sitemapEligible !== true) {
+        if ($sitemapEligible === null) {
             $issues[] = $this->issue($slug, $locale, CareerSeoGeoReadinessIssue::SITEMAP_MISSING, 'Sitemap eligibility is missing or false.', ['sitemap_eligible' => $sitemapEligible]);
+        } elseif (! $sitemapEligible) {
+            $issues[] = $this->issue(
+                $slug,
+                $locale,
+                CareerSeoGeoReadinessIssue::SITEMAP_EXPECTED_NOT_READY,
+                'Sitemap eligibility is explicitly not ready by source policy.',
+                ['sitemap_eligible' => $sitemapEligible],
+                CareerCanonicalEligibilitySeverity::MEDIUM
+            );
         }
-        if ($llmsEligible !== true) {
+        if ($llmsEligible === null) {
             $issues[] = $this->issue($slug, $locale, CareerSeoGeoReadinessIssue::LLMS_MISSING, 'LLMS eligibility is missing or false.', ['llms_eligible' => $llmsEligible]);
+        } elseif (! $llmsEligible) {
+            $issues[] = $this->issue(
+                $slug,
+                $locale,
+                CareerSeoGeoReadinessIssue::LLMS_EXPECTED_NOT_READY,
+                'LLMS eligibility is explicitly not ready by source policy.',
+                ['llms_eligible' => $llmsEligible],
+                CareerCanonicalEligibilitySeverity::MEDIUM
+            );
         }
-        if ($llmsFullEligible !== true) {
+        if ($llmsFullEligible === null) {
             $issues[] = $this->issue($slug, $locale, CareerSeoGeoReadinessIssue::LLMS_FULL_MISSING, 'LLMS-full eligibility is missing or false.', ['llms_full_eligible' => $llmsFullEligible]);
+        } elseif (! $llmsFullEligible) {
+            $issues[] = $this->issue(
+                $slug,
+                $locale,
+                CareerSeoGeoReadinessIssue::LLMS_FULL_EXPECTED_NOT_READY,
+                'LLMS-full eligibility is explicitly not ready by source policy.',
+                ['llms_full_eligible' => $llmsFullEligible],
+                CareerCanonicalEligibilitySeverity::MEDIUM
+            );
         }
         if ($structuredDataReady !== true) {
             $issues[] = $this->issue($slug, $locale, CareerSeoGeoReadinessIssue::STRUCTURED_DATA_MISSING, 'Structured metadata readiness is missing or false.', ['structured_data_ready' => $structuredDataReady]);
@@ -168,12 +195,18 @@ final class CareerSeoGeoReadinessAuditor
     /**
      * @param  array<string, mixed>  $evidence
      */
-    private function issue(string $slug, string $locale, string $reason, string $message, array $evidence): CareerSeoGeoReadinessIssue
-    {
+    private function issue(
+        string $slug,
+        string $locale,
+        string $reason,
+        string $message,
+        array $evidence,
+        string $severity = CareerCanonicalEligibilitySeverity::HIGH,
+    ): CareerSeoGeoReadinessIssue {
         return new CareerSeoGeoReadinessIssue(
             reason: $reason,
             message: $message,
-            severity: CareerCanonicalEligibilitySeverity::HIGH,
+            severity: $severity,
             canonicalSlug: $slug,
             locale: $locale,
             evidence: [$evidence],
@@ -376,11 +409,16 @@ final class CareerSeoGeoReadinessAuditor
      * @param  array<string, mixed>  $row
      * @param  list<string>  $keys
      */
-    private function nonEmptyArrayValue(array $row, array $keys): ?bool
+    private function nonEmptyValue(array $row, array $keys): ?bool
     {
         foreach ($keys as $key) {
             if (array_key_exists($key, $row)) {
-                return is_array($row[$key]) && $row[$key] !== [];
+                $value = $row[$key];
+                if (is_array($value)) {
+                    return $value !== [];
+                }
+
+                return is_scalar($value) && trim((string) $value) !== '';
             }
         }
 

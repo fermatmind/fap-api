@@ -103,6 +103,59 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertSame(2, $payload['run_context']['planner']['found_rows']);
     }
 
+    public function test_planner_nested_seo_fields_are_mapped_and_policy_not_ready_is_distinguished(): void
+    {
+        $planPath = $this->writePlanner([
+            [
+                'row_number' => 2,
+                'canonical_slug' => 'actuaries',
+                'status' => 'ready_for_pilot',
+                'source_code' => '15-2011.00',
+                'title_en' => 'Actuaries',
+                'title_zh' => '精算师',
+                'ready_for_sitemap' => false,
+                'seo' => [
+                    'en_title' => 'Actuaries Career Guide',
+                    'en_description' => 'Explore actuaries with source-backed career evidence.',
+                    'zh_title' => '精算师职业指南',
+                    'zh_description' => '了解精算师职业证据。',
+                    'en_target_queries' => '["actuaries career"]',
+                    'zh_target_queries' => '["精算师职业"]',
+                    'search_intent_type' => '["career_exploration"]',
+                ],
+                'raw' => [
+                    'Ready_For_Sitemap' => false,
+                    'EN_SEO_Title' => 'Actuaries Career Guide',
+                    'EN_SEO_Description' => 'Explore actuaries with source-backed career evidence.',
+                    'CN_SEO_Title' => '精算师职业指南',
+                    'CN_SEO_Description' => '了解精算师职业证据。',
+                    'EN_Target_Queries' => '["actuaries career"]',
+                    'CN_Target_Queries' => '["精算师职业"]',
+                    'Search_Intent_Type' => '["career_exploration"]',
+                ],
+            ],
+        ]);
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'all',
+            '--public-resolution-plan' => $planPath,
+            '--locales' => 'en,zh',
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertArrayNotHasKey('structured_data_missing', $payload['by_reason']);
+        $this->assertArrayNotHasKey('citation_metadata_missing', $payload['by_reason']);
+        $this->assertArrayNotHasKey('sitemap_missing', $payload['by_reason']);
+        $this->assertArrayNotHasKey('llms_missing', $payload['by_reason']);
+        $this->assertArrayNotHasKey('llms_full_missing', $payload['by_reason']);
+        $this->assertSame(2, $payload['by_reason']['sitemap_expected_not_ready']);
+        $this->assertSame(2, $payload['by_reason']['llms_expected_not_ready']);
+        $this->assertSame(2, $payload['by_reason']['llms_full_expected_not_ready']);
+        $this->assertSame('blocked', data_get($payload, 'rows.0.seo_geo_status.status'));
+        $this->assertContains('sitemap_expected_not_ready', data_get($payload, 'rows.0.seo_geo_status.reasons'));
+    }
+
     public function test_projection_truth_artifacts_drive_runtime_layer_status(): void
     {
         $projectionPath = $this->writeJsonArtifact('projection', [

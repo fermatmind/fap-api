@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Audit;
 
 use App\Domain\Career\Audit\CareerCanonicalEligibilityLayer;
+use App\Domain\Career\Audit\CareerCanonicalEligibilitySeverity;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityStatus;
 use App\Domain\Career\Audit\CareerPublicResolutionPlan;
 use App\Domain\Career\Audit\CareerPublicResolutionPlanRow;
@@ -45,13 +46,34 @@ final class CareerSeoGeoReadinessAuditorTest extends TestCase
         $this->assertSame(CareerSeoGeoReadinessIssue::ROBOTS_NOINDEX, $result->issues[0]->reason);
     }
 
-    public function test_sitemap_llms_and_llms_full_missing_are_reported(): void
+    public function test_sitemap_llms_and_llms_full_expected_not_ready_policy_is_distinguished_from_missing_sources(): void
     {
         $result = $this->auditor()->audit(['actuaries'], ['en'], $this->artifact([
             $this->row('actuaries', 'en', [
                 'sitemap_eligible' => false,
                 'llms_eligible' => false,
                 'llms_full_eligible' => false,
+            ]),
+        ]));
+
+        $this->assertSame([
+            CareerSeoGeoReadinessIssue::LLMS_EXPECTED_NOT_READY => 1,
+            CareerSeoGeoReadinessIssue::LLMS_FULL_EXPECTED_NOT_READY => 1,
+            CareerSeoGeoReadinessIssue::SITEMAP_EXPECTED_NOT_READY => 1,
+        ], $result->byReason());
+        $this->assertSame(0, $result->sitemapMissingRows);
+        $this->assertSame(0, $result->llmsMissingRows);
+        $this->assertSame(0, $result->llmsFullMissingRows);
+        $this->assertSame(CareerCanonicalEligibilitySeverity::MEDIUM, $result->issues[0]->severity);
+    }
+
+    public function test_sitemap_llms_and_llms_full_missing_are_reported_when_sources_are_absent(): void
+    {
+        $result = $this->auditor()->audit(['actuaries'], ['en'], $this->artifact([
+            $this->row('actuaries', 'en', [
+                'sitemap_eligible' => null,
+                'llms_eligible' => null,
+                'llms_full_eligible' => null,
             ]),
         ]));
 
@@ -82,6 +104,22 @@ final class CareerSeoGeoReadinessAuditorTest extends TestCase
             CareerSeoGeoReadinessIssue::SEARCH_MISSING => 1,
             CareerSeoGeoReadinessIssue::STRUCTURED_DATA_MISSING => 1,
         ], $result->byReason());
+    }
+
+    public function test_structured_data_and_citation_artifact_strings_are_accepted_as_sources(): void
+    {
+        $result = $this->auditor()->audit(['actuaries'], ['en'], $this->artifact([
+            $this->row('actuaries', 'en', [
+                'structured_data_ready' => null,
+                'structured_data_json' => '{"@type":"Occupation"}',
+                'citation_metadata_ready' => null,
+                'citation_metadata' => 'career source citations available',
+            ]),
+        ]));
+
+        $this->assertSame(CareerCanonicalEligibilityStatus::PASS, $result->status);
+        $this->assertArrayNotHasKey(CareerSeoGeoReadinessIssue::STRUCTURED_DATA_MISSING, $result->byReason());
+        $this->assertArrayNotHasKey(CareerSeoGeoReadinessIssue::CITATION_METADATA_MISSING, $result->byReason());
     }
 
     public function test_missing_artifact_row_reports_all_static_readiness_issues(): void

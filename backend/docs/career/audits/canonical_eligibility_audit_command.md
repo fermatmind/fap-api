@@ -58,6 +58,12 @@ CMD-FIX-1 makes the command call the completed audit layer services instead of e
 - SEO/GEO readiness uses `CareerSeoGeoReadinessAuditor` from plan/backend artifact fields
 - surface readiness uses `CareerSurfaceReadinessAuditor` when `--surface-context`, `--include-surfaces`, or `--include-live-html` is requested
 
+SEO/GEO readiness distinguishes absent source evidence from explicit not-ready release policy. For example, a planner row with
+`Ready_For_Sitemap=false` now reports `sitemap_expected_not_ready` instead of `sitemap_missing`, while absent sitemap evidence
+still reports `sitemap_missing`. The planner mapper also reads nested workbook/export fields under `raw` and `seo` so existing
+SEO titles, descriptions, target queries, and structured source fields can satisfy source availability without implying that
+sitemap, LLMS, or LLMS-full publication has happened.
+
 When supplied, entity and index artifact rows bypass DB-backed entity/index auditors:
 
 - `--entity-context=/path/to/entity_context.json` supplies `career_entity_context.v1`
