@@ -1322,3 +1322,50 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: CTX-EXPORT-1
+    repo: fap-api
+    depends_on:
+      - CTX-CONSUME-1
+    branch: fix/career-audit-db-context-export-producers
+    title: "feat(api): add career audit db context exporters"
+    name: "Add read-only entity/index context export producers"
+    scope_type: audit_context_producer_only
+    scope:
+      - Add a read-only command that exports entity and index-state context artifacts from the current DB.
+      - Emit career_entity_context.v1 and career_index_state_context.v1 JSON compatible with career:audit-canonical-eligibility inputs.
+      - Load canonical slugs through the public-resolution planner resolver.
+      - Preserve approval gating for any production execution.
+    allowed_paths:
+      - backend/app/Console/Commands/*
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run production export.
+      - Query production DB.
+      - Mutate DB or production state.
+      - Apply rollout.
+      - Backfill data.
+      - Run 80 readiness.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerExportCanonicalEligibilityDbContext --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan test --filter=CareerEntityContextArtifact --no-ansi
+      - php artisan test --filter=CareerIndexStateContextArtifact --no-ansi
+      - php artisan test --filter=CareerOccupationEntityInventoryAuditor --no-ansi
+      - php artisan test --filter=CareerIndexStateAuthorityAuditor --no-ansi
+      - php artisan test --filter=CareerPublicResolutionPlanResolver --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "CTX-BUNDLE-1A rerun, then approval-gated read-only context export if ready"
+    merge_policy:
+      github_checks_required: true
+      squash: true
