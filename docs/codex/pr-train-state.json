@@ -3762,7 +3762,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-deep-copy-02-dimension-slots",
       "title": "feat(riasec): add dimension deep copy runtime slots",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "RIASEC-DEEP-COPY-01"
       ],
@@ -3777,7 +3777,7 @@
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
-      "commit_sha": "c6f959dca6987dcbbf7c9785a1408043fb2100e8",
+      "commit_sha": "04b88382367046260656103113cc2937b7b302ea",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1361",
       "checks": {
         "dependency": {
@@ -3817,10 +3817,81 @@
         }
       },
       "failure_reason": null,
+      "merged_at": "2026-05-13T12:05:30Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "sidecar_issues": []
+    },
+    "RIASEC-DEEP-COPY-03": {
+      "repo": "fap-api",
+      "branch": "codex/riasec-deep-copy-03-pair-blend-slots",
+      "title": "feat(riasec): add pair blend copy runtime slots",
+      "status": "in_progress",
+      "depends_on": [
+        "RIASEC-DEEP-COPY-02"
+      ],
+      "scope_type": "backend_pair_blend_copy_slots_only",
+      "allowed_paths": [
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php",
+        "backend/tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "backend/docs/riasec/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "commit_sha": "77f42cf70fb8d742ad365d6a8aabb4aa82920506",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1363",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "RIASEC-DEEP-COPY-02 is merged as PR #1361 with merge commit 04b88382367046260656103113cc2937b7b302ea."
+        },
+        "pair_blend_registry_contract": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php --no-ansi",
+          "evidence": "16 tests passed, 621 assertions."
+        },
+        "freeze_classifier": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|riasec_content_registry' --no-ansi",
+          "evidence": "2 tests passed, 4 assertions."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecContentRegistrySlotContract.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+        },
+        "json_yaml_validity": {
+          "status": "pass",
+          "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")' && jq empty docs/codex/pr-train-state.json"
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to backend RIASEC slot registry/validator, pair blend registry tests, backend RIASEC docs, freeze classifier allowance, and docs/codex train metadata. No scorer, question pack, frontend UI, share/PDF/history, feedback, analytics, or career runtime files changed."
+        }
+      },
+      "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+        {
+          "title": "Non-IAS pair assets deferred pending validator-safe review",
+          "severity": "P3",
+          "introduced_by_current_pr": false,
+          "blocks_merge": false,
+          "evidence": [
+            "PR scope imports reviewed I_A, I_S, and A_S pair copy; other 12 pair slots are explicit pending/unavailable fail-closed slots.",
+            "Prepared pair asset contains broader library, but non-required pairs remain pending to avoid over-broad public runtime copy in this PR."
+          ]
+        }
+      ]
     }
   }
 }

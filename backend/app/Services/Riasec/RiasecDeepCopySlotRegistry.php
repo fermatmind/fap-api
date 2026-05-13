@@ -11,6 +11,15 @@ final class RiasecDeepCopySlotRegistry
     /** @var list<string> */
     public const DIMENSIONS = ['R', 'I', 'A', 'S', 'E', 'C'];
 
+    /** @var list<string> */
+    public const PAIRS = [
+        'R_I', 'R_A', 'R_S', 'R_E', 'R_C',
+        'I_A', 'I_S', 'I_E', 'I_C',
+        'A_S', 'A_E', 'A_C',
+        'S_E', 'S_C',
+        'E_C',
+    ];
+
     public function __construct(
         private readonly RiasecContentRegistrySlotContract $contract = new RiasecContentRegistrySlotContract,
     ) {}
@@ -47,6 +56,47 @@ final class RiasecDeepCopySlotRegistry
     }
 
     /**
+     * @return array<string,array<string,mixed>>
+     */
+    public function pairBlendSlots(): array
+    {
+        $slots = [];
+        foreach (self::PAIRS as $pairKey) {
+            $slots[$pairKey] = $this->pendingPairSlot($pairKey);
+        }
+
+        foreach ($this->authoredPairContent() as $pairKey => $content) {
+            $slots[$pairKey] = $this->authoredPairSlot($pairKey, $content);
+        }
+
+        return $slots;
+    }
+
+    /**
+     * @param  list<string>|string  $pair
+     * @return array<string,mixed>
+     */
+    public function resolvePairBlendSlot(array|string $pair): array
+    {
+        $pairKey = $this->normalizePairKey($pair);
+        $slot = $this->pairBlendSlots()[$pairKey] ?? null;
+
+        if ($slot === null) {
+            return [
+                'slot_key' => 'pair_blend_copy',
+                'pair_key' => $pairKey,
+                'content_status' => 'unavailable',
+                'module_state' => 'omitted',
+                'fallback_behavior' => 'omit_module',
+                'frontend_fallback_allowed' => false,
+                'reason' => 'unsupported_pair_blend_slot',
+            ];
+        }
+
+        return $slot;
+    }
+
+    /**
      * @return list<string>
      */
     public function validateSlot(array $slot): array
@@ -62,6 +112,24 @@ final class RiasecDeepCopySlotRegistry
             }
             if (! in_array((string) ($slot['dimension_code'] ?? ''), self::DIMENSIONS, true)) {
                 $errors[] = 'unsupported_dimension_code';
+            }
+        }
+
+        if (($slot['slot_key'] ?? null) === 'pair_blend_copy') {
+            foreach ($this->pairRequiredFields() as $field) {
+                if (! array_key_exists($field, $slot) || $this->isBlank($slot[$field])) {
+                    $errors[] = 'missing_'.$field;
+                }
+            }
+            if (! in_array((string) ($slot['pair_key'] ?? ''), self::PAIRS, true)) {
+                $errors[] = 'unsupported_pair_key';
+            }
+            if (($slot['content_status'] ?? null) === 'authored') {
+                foreach ($this->authoredPairRequiredFields() as $field) {
+                    if (! array_key_exists($field, $slot) || $this->isBlank($slot[$field])) {
+                        $errors[] = 'missing_'.$field;
+                    }
+                }
             }
         }
 
@@ -89,6 +157,36 @@ final class RiasecDeepCopySlotRegistry
             'user_visible_boundary',
             'content_version',
             'evidence_level',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function pairRequiredFields(): array
+    {
+        return [
+            'pair_key',
+            'pair_label',
+            'forbidden_claims',
+            'user_visible_boundary',
+            'content_version',
+            'evidence_level',
+            'content_status',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function authoredPairRequiredFields(): array
+    {
+        return [
+            'chemistry',
+            'positive_value',
+            'real_world_cost',
+            'common_misread',
+            'activities_to_validate',
         ];
     }
 
@@ -156,7 +254,7 @@ final class RiasecDeepCopySlotRegistry
                 'possible_drains' => ['持续竞争', '高压谈判', '强曝光', '只看短期指标', '每天都要争资源'],
                 'common_misread' => 'E 不是领导能力或商业能力证明；低 E 也不是不能做管理。',
                 'action_advice' => '读 3 条商务/增长/管理岗位描述，只圈出让你有兴趣的任务动词，区分你喜欢影响结果，还是只喜欢想法被看见。',
-                'forbidden_expression' => '不得写成领导力、销售能力、创业成功率、岗位胜任力或雇佣风险。',
+                'forbidden_expression' => '不得写成领导力、销售能力、创业结果、岗位结论或雇佣风险。',
             ]),
             'C' => $this->dimensionSlot('C', '常规型', [
                 'core_drive' => '你的燃料来自秩序：分类、流程、记录、标准、质量校验和稳定交付。',
@@ -209,6 +307,128 @@ final class RiasecDeepCopySlotRegistry
             'content_status' => 'authored',
             'frontend_fallback_allowed' => false,
         ], $content);
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    private function authoredPairContent(): array
+    {
+        return [
+            'I_A' => [
+                'pair_label' => '理性的创造者',
+                'short_label' => '理解之后再表达',
+                'chemistry' => '你的创造力不是无根的灵感，而是建立在理解、证据和结构之上。你最享受的时刻，往往是把一个混乱、晦涩、难懂的系统，转化为一个优雅、清楚、别人能理解的模型、文字、图或方案。',
+                'positive_value' => '这组组合能让复杂问题变得可理解、可表达、可传播。你不只是想研究，也想让答案有形式、有质感。',
+                'real_world_cost' => '如果工作只要快速产出而不允许深入，你会觉得表达空洞；如果工作只允许研究而没有表达出口，你会觉得成果被困住。',
+                'common_misread' => '别人可能以为你只是创意型，或者只是研究型。其实你更像在用理解支撑表达。',
+                'activities_to_validate' => ['把一篇复杂文章或报告改写成 5 句话', '设计一个小图或结构标题'],
+            ],
+            'I_S' => [
+                'pair_label' => '深度的助人者',
+                'short_label' => '先理解根源，再支持别人',
+                'chemistry' => '你不太喜欢用空洞口号安慰人。真正想帮助别人时，你更倾向先研究问题的根源，再用结构化、可信的方式提供支持。你希望有用不是情绪热闹，而是让对方真的更清楚。',
+                'positive_value' => '这组组合能把助人建立在理解和证据之上。你可能擅长澄清问题，而不是只给泛泛建议。',
+                'real_world_cost' => '如果真实人的情绪和复杂需求过多，你可能被 S 消耗；如果帮助只停留在分析，没有真实反馈，S 又会得不到满足。',
+                'common_misread' => '别人可能以为你冷静到不关心人，其实你可能只是想先把问题看清楚再帮。',
+                'activities_to_validate' => ['找一个真实困扰', '写 5 个澄清问题，而不是直接给建议'],
+            ],
+            'A_S' => [
+                'pair_label' => '共情的表达者',
+                'short_label' => '让表达真正被人接住',
+                'chemistry' => '你的表达不是只为了好看。你更在意它能不能触动、解释、启发或支持别人。对你来说，一个作品、材料或方案如果没人因此被照亮，它就少了一层意义。',
+                'positive_value' => '这组组合能让表达更有人味，也让助人更有形式。你可能擅长把感受、知识或复杂体验翻译给真实的人。',
+                'real_world_cost' => '如果受众反馈混乱或情绪很重，你可能被消耗；如果工作只追求漂亮形式、没有真实对象，也会缺少意义。',
+                'common_misread' => '别人可能以为你只是情绪化或创意化，其实你可能非常在意表达能否产生真实帮助。',
+                'activities_to_validate' => ['做一段小讲解或一页材料', '给真实对象看，记录对方是否更清楚'],
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return array<string,mixed>
+     */
+    private function authoredPairSlot(string $pairKey, array $content): array
+    {
+        return array_merge($this->pairSlotBase($pairKey), [
+            'content_version' => 'riasec_pair_blend_copy_slots_v1',
+            'source_status' => 'reviewed_content_copy',
+            'review_status' => 'approved_for_staging',
+            'evidence_level' => 'expert_reviewed',
+            'content_status' => 'authored',
+        ], $content);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function pendingPairSlot(string $pairKey): array
+    {
+        return array_merge($this->pairSlotBase($pairKey), [
+            'content_version' => 'riasec_pair_blend_pending_v1',
+            'pair_label' => str_replace('_', '×', $pairKey),
+            'source_status' => 'docs_only_candidate',
+            'review_status' => 'content_review',
+            'evidence_level' => 'expert_review_required',
+            'content_status' => 'pending',
+            'module_state' => 'omitted',
+            'reason' => 'pair_blend_copy_not_approved_for_runtime',
+        ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function pairSlotBase(string $pairKey): array
+    {
+        $dimensions = explode('_', $pairKey);
+
+        return [
+            'slot_key' => 'pair_blend_copy',
+            'slot_group' => 'pair_blend_copy',
+            'scale_code' => 'RIASEC',
+            'locale' => 'zh-CN',
+            'interpretation_rule_version' => 'riasec_interpretation_rule_spec_v2',
+            'applicable_form_codes' => ['riasec_60', 'riasec_140'],
+            'applicable_profile_shapes' => ['clear_code', 'blended_code', 'near_tie'],
+            'applicable_quality_states' => ['normal', 'caution'],
+            'applicable_codes' => [$pairKey],
+            'applicable_dimensions' => $dimensions,
+            'pair_key' => $pairKey,
+            'forbidden_claims' => [
+                'personality_identity',
+                'career_match',
+                'ability_proof',
+                'success_prediction',
+                'job_fit',
+            ],
+            'required_boundaries' => $this->requiredBoundaries(),
+            'user_visible_boundary' => '这是兴趣组合解释，不是人格标签、能力证明或职业结论。',
+            'fallback_behavior' => 'omit_module',
+            'frontend_fallback_allowed' => false,
+        ];
+    }
+
+    /**
+     * @param  list<string>|string  $pair
+     */
+    private function normalizePairKey(array|string $pair): string
+    {
+        $parts = is_array($pair) ? $pair : preg_split('/[_×x-]/', $pair);
+        $parts = array_values(array_filter(array_map(
+            fn (mixed $part): string => strtoupper(trim((string) $part)),
+            (array) $parts
+        )));
+
+        if (count($parts) !== 2) {
+            return strtoupper(trim(is_string($pair) ? $pair : implode('_', $parts)));
+        }
+
+        $order = array_flip(self::DIMENSIONS);
+        usort($parts, fn (string $a, string $b): int => ($order[$a] ?? 99) <=> ($order[$b] ?? 99));
+
+        return implode('_', $parts);
     }
 
     /**
