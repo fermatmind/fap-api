@@ -1369,3 +1369,217 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: RIASEC-PERSONALIZATION-00
+    repo: fap-api
+    branch: codex/riasec-personalization-00-train-registration
+    title: "docs(codex): register RIASEC personalization train"
+    scope:
+      - Register RIASEC-PERSONALIZATION-00 through RIASEC-PERSONALIZATION-07 for fap-api dependency discipline.
+      - Initialize matching train state entries.
+      - Keep registration metadata-only.
+    allowed_paths:
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change RIASEC scorer math.
+      - Change RIASEC content pack question semantics.
+      - Change runtime PHP services.
+      - Change frontend UI.
+    validation:
+      - ruby -e 'require "yaml"; require "json"; YAML.load_file("docs/codex/pr-train.yaml"); JSON.parse(File.read("docs/codex/pr-train-state.json")); puts "ok"'
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: RIASEC-PERSONALIZATION-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-PERSONALIZATION-00
+    branch: codex/riasec-personalization-01-interpretation-contract
+    title: "feat(riasec): add interpretation rule spec v2 contract"
+    scope:
+      - Add backend-authoritative RIASEC Interpretation Rule Spec v2 contract.
+      - Define profile_shape, profile_shape_version, clarity_label, near_tie_state, alternate_code, alternate_code_reason, top_code_confidence, reading_strength, and interpretation_rule_version ownership.
+      - Keep confidence as interpretation strength, not probability.
+    allowed_paths:
+      - backend/app/**/Riasec*Interpretation*
+      - backend/tests/**/Riasec*Interpretation*
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scorer math.
+      - Change content pack question semantics.
+      - Add frontend interpretation inference.
+      - Add career match, job fit, ranking, or success claims.
+    validation:
+      - targeted PHPUnit for touched RIASEC interpretation contract tests
+      - relevant RIASEC flow tests
+      - scoped Pint for touched PHP
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: RIASEC-PERSONALIZATION-02
+    repo: fap-api
+    depends_on:
+      - RIASEC-PERSONALIZATION-01
+    branch: codex/riasec-personalization-02-quality-contract
+    title: "feat(riasec): add quality rule spec v2 contract"
+    scope:
+      - Add backend-authoritative RIASEC Quality Rule Spec v2 contract.
+      - Define quality_state, reading_strength mapping, normal/caution/low_quality routing, 60Q minimal boundary, and 140Q flag boundary.
+    allowed_paths:
+      - backend/app/**/Riasec*Quality*
+      - backend/tests/**/Riasec*Quality*
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scorer math.
+      - Change content pack question semantics.
+      - Add frontend UI changes.
+      - Add 140Q accuracy or raw delta claims.
+    validation:
+      - targeted PHPUnit for touched RIASEC quality contract tests
+      - relevant RIASEC flow tests
+      - scoped Pint for touched PHP
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: RIASEC-PERSONALIZATION-03
+    repo: fap-api
+    depends_on:
+      - RIASEC-PERSONALIZATION-01
+      - RIASEC-PERSONALIZATION-02
+    branch: codex/riasec-personalization-03-projection-extension
+    title: "feat(riasec): extend projection v2 with interpretation state"
+    scope:
+      - Expose backend-provided interpretation and quality fields through RIASEC projection v2 additively.
+      - Preserve existing v1 and v2 compatibility.
+    allowed_paths:
+      - backend/app/**/RiasecPublicProjectionService*
+      - backend/tests/**/Riasec*Projection*
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scorer math.
+      - Change content pack question semantics.
+      - Add frontend local interpretation inference.
+      - Add career matching.
+    validation:
+      - targeted PHPUnit for touched RIASEC projection tests
+      - relevant RIASEC flow tests
+      - scoped Pint for touched PHP
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: RIASEC-PERSONALIZATION-04
+    repo: fap-api
+    depends_on:
+      - RIASEC-PERSONALIZATION-03
+    branch: codex/riasec-personalization-04-module-selector
+    title: "feat(riasec): add report module selector contract"
+    scope:
+      - Add deterministic backend module visibility policy for interpretation state, quality state, form, and 140Q context.
+      - Ensure low_quality hides strong modules and 140Q tension remains bounded.
+    allowed_paths:
+      - backend/app/**/Riasec*Module*
+      - backend/app/**/RiasecReportComposer*
+      - backend/tests/**/Riasec*Module*
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change frontend UI.
+      - Add final public copy.
+      - Change scorer math.
+      - Add career match language.
+    validation:
+      - targeted PHPUnit for touched RIASEC selector/composer tests
+      - relevant RIASEC flow tests
+      - scoped Pint for touched PHP
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: RIASEC-PERSONALIZATION-05
+    repo: fap-api
+    depends_on:
+      - RIASEC-PERSONALIZATION-04
+    branch: codex/riasec-personalization-05-content-registry-readiness
+    title: "feat(riasec): add content registry readiness contract"
+    scope:
+      - Define backend content registry slots for future RIASEC deep copy without adding final public editorial copy.
+      - Add validators that fail closed for unknown or unsupported slots.
+    allowed_paths:
+      - backend/app/**/Riasec*Content*
+      - backend/tests/**/Riasec*Content*
+      - backend/docs/riasec/**
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add frontend local fallback copy.
+      - Add public career matching.
+      - Change scorer math.
+      - Change content pack question semantics.
+    validation:
+      - targeted PHPUnit for touched RIASEC content registry tests
+      - relevant RIASEC flow tests
+      - scoped Pint for touched PHP
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: RIASEC-PERSONALIZATION-06
+    repo: fap-web
+    depends_on:
+      - RIASEC-PERSONALIZATION-03
+      - RIASEC-PERSONALIZATION-04
+    branch: codex/riasec-personalization-06-frontend-fail-closed
+    title: "feat(riasec): consume backend personalization state fail-closed"
+    scope:
+      - Frontend consumes backend-provided interpretation state and module visibility only.
+      - Unknown state fails closed.
+    allowed_paths:
+      - fap-web/lib/riasec/**
+      - fap-web/components/result/riasec/**
+      - fap-web/tests/contracts/**riasec**
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add backend changes.
+      - Add local interpretation copy.
+      - Add career matching.
+    validation:
+      - fap-web targeted RIASEC contract tests
+      - fap-web pnpm typecheck
+      - fap-web pnpm test:contract where practical
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: RIASEC-PERSONALIZATION-07
+    repo: fap-web
+    depends_on:
+      - RIASEC-PERSONALIZATION-01
+      - RIASEC-PERSONALIZATION-02
+      - RIASEC-PERSONALIZATION-03
+      - RIASEC-PERSONALIZATION-04
+      - RIASEC-PERSONALIZATION-05
+      - RIASEC-PERSONALIZATION-06
+    branch: codex/riasec-personalization-07-fixture-matrix
+    title: "test(riasec): add personalization fixture matrix contracts"
+    scope:
+      - Add fixture matrix contracts for personalization states and forbidden claims.
+      - Keep behavior changes out unless fixing current-scope contract failures.
+    allowed_paths:
+      - fap-web/tests/contracts/**riasec**
+      - fap-web/docs/riasec/**
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scorer math.
+      - Change content pack question semantics.
+      - Add career matching.
+      - Add AI-generated formal reports.
+    validation:
+      - fap-web targeted RIASEC contract tests
+      - fap-web pnpm typecheck
+      - fap-web pnpm test:contract where practical
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
