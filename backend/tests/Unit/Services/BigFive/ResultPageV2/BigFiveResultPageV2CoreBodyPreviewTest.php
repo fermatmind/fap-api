@@ -630,6 +630,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_module_selector_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Riasec/RiasecReportModuleSelector.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_riasec_projection_v2_minimal_changes(): void
     {
         $changed = [
@@ -1246,6 +1256,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecModuleSelectorFile($file)) {
+                continue;
+            }
+
             if ($this->isRiasecProjectionV2MinimalFile($file)) {
                 continue;
             }
@@ -1418,6 +1432,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isRiasecQualityRuleContractFile(string $file): bool
     {
         return $file === 'backend/app/Services/Riasec/RiasecQualityRuleContract.php';
+    }
+
+    private function isRiasecModuleSelectorFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Riasec/RiasecReportModuleSelector.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
+        ], true);
     }
 
     private function isRiasecProjectionV2MinimalFile(string $file): bool

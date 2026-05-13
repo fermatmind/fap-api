@@ -124,6 +124,9 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('riasec_public_projection_v2.interpretation_state.module_visibility_policy_id', 'riasec_module_visibility_policy_v1');
         $readback->assertJsonPath('riasec_public_projection_v2.interpretation_state.top_code_confidence.meaning', 'readability strength, not probability');
         $readback->assertJsonPath('riasec_public_projection_v2.interpretation_state.field_authority.profile_shape', 'backend_owned');
+        $readback->assertJsonPath('riasec_public_projection_v2.module_visibility_policy.schema_version', 'riasec.module_visibility_policy.v1');
+        $readback->assertJsonPath('riasec_public_projection_v2.module_visibility_policy.policy_id', 'riasec_module_visibility_policy_v1');
+        $readback->assertJsonPath('riasec_public_projection_v2.module_visibility_policy.fallback_policy.frontend_inference_allowed', false);
         $readback->assertJsonPath('riasec_public_projection_v2.claim_boundary.does_not_measure.3', 'career_success_probability');
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.schema_version', 'riasec.activity_explorer.v0.1');
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.status', 'content_examples_only');
@@ -160,6 +163,7 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.interpretation_rule_version', 'riasec_interpretation_rule_spec_v2');
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
         $report->assertJsonPath('riasec_public_projection_v2.interpretation_state.field_authority.reading_strength', 'backend_owned');
+        $report->assertJsonPath('riasec_public_projection_v2.module_visibility_policy.policy_id', 'riasec_module_visibility_policy_v1');
         $report->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.boundary.occupation_examples_policy', 'content_example_not_registry_match_without_reviewed_registry_source');
         $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.snapshot_bound', true);
         $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.surface_policy.formal_report_mutation_allowed', false);

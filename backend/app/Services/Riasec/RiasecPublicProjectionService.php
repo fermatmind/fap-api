@@ -23,6 +23,7 @@ final class RiasecPublicProjectionService
         private readonly RiasecExplorationFeedbackOverlayService $feedbackOverlay,
         private readonly RiasecInterpretationRuleContract $interpretationRuleContract,
         private readonly RiasecQualityRuleContract $qualityRuleContract,
+        private readonly RiasecReportModuleSelector $moduleSelector,
     ) {}
 
     public function buildFromResult(Result $result, string $locale = 'zh-CN'): array
@@ -181,6 +182,7 @@ final class RiasecPublicProjectionService
             ],
             'activity_explorer_v0_1' => $this->activityExplorer->build((string) ($v1['top_code'] ?? ''), $locale),
         ];
+        $projection['module_visibility_policy'] = $this->moduleSelector->build($projection);
         $projection['exploration_feedback_overlay_v0_1'] = $this->feedbackOverlay->build($result, $projection, $snapshotBound);
 
         return $projection;

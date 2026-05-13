@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-13T16:02:00+08:00",
+  "updated_at": "2026-05-13T16:25:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -2728,7 +2728,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-03-projection-extension",
       "title": "feat(riasec): extend projection v2 with interpretation state",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "RIASEC-PERSONALIZATION-01",
         "RIASEC-PERSONALIZATION-02"
@@ -2741,8 +2741,8 @@
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "569dd5e4f17f97f95fc052712485d2c25ab5009f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1347",
       "checks": {
         "riasec_flow_projection": {
           "status": "pass",
@@ -2764,29 +2764,52 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-13T08:16:00Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": []
     },
     "RIASEC-PERSONALIZATION-04": {
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-04-module-selector",
       "title": "feat(riasec): add report module selector contract",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "RIASEC-PERSONALIZATION-03"
       ],
       "scope_type": "backend_module_selector_only",
       "allowed_paths": [
         "backend/app/**/Riasec*Module*",
+        "backend/app/**/RiasecPublicProjectionService*",
         "backend/app/**/RiasecReportComposer*",
         "backend/tests/**/Riasec*Module*",
+        "backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "module_selector": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecReportModuleSelectorTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php",
+          "evidence": "8 tests passed, 255 assertions."
+        },
+        "freeze_classifier": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "evidence": "66 tests passed, 411 assertions."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecReportModuleSelector.php app/Services/Riasec/RiasecPublicProjectionService.php tests/Unit/Services/Riasec/RiasecReportModuleSelectorTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to RIASEC module selector, projection emission, RIASEC flow assertions, freeze classifier allowance, and docs/codex metadata."
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
