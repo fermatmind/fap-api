@@ -308,8 +308,11 @@ final class PostReleaseObservabilityPageTest extends TestCase
                 && data_get($request->data(), 'event') === 'content_release_publish'
                 && data_get($request->data(), 'content.type') === 'article'
                 && data_get($request->data(), 'cache_signal.kind') === 'invalidate'
-                && in_array('https://example.test/en/articles/observability-article', $paths, true)
-                && in_array('https://example.test/en/articles', $paths, true)
+                && in_array('/en/articles/observability-article', $paths, true)
+                && in_array('/en/articles', $paths, true)
+                && in_array('/en', $paths, true)
+                && in_array('/llms.txt', $paths, true)
+                && in_array('/llms-full.txt', $paths, true)
                 && $request->hasHeader('X-FM-Content-Release-Token');
         });
         Http::assertSent(function ($request): bool {
@@ -357,6 +360,7 @@ final class PostReleaseObservabilityPageTest extends TestCase
         config()->set('ops.content_release_observability.cache_invalidation_urls', [
             'https://cache.example.test/invalidate?webhook_secret=cache-secret',
         ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
         config()->set('ops.content_release_observability.broadcast_webhook', '');
         config()->set('ops.alert.webhook', 'https://alerts.example.test/ops?token=alert-secret');
 
