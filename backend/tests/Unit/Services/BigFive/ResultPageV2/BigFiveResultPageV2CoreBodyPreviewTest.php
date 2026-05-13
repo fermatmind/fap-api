@@ -316,6 +316,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityIssue.php',
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityResult.php',
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityRow.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateRemediationPlan.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateRemediationPlanRow.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -1680,6 +1682,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityIssue.php',
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityResult.php',
             'backend/app/Domain/Career/Audit/CareerIndexStateAuthorityRow.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateRemediationPlan.php',
+            'backend/app/Domain/Career/Audit/CareerIndexStateRemediationPlanRow.php',
         ], true);
     }
 
