@@ -2485,6 +2485,59 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": []
+    },
+    "CTX-CONSUME-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-audit-entity-index-context-consumer",
+      "title": "fix(api): add career audit entity index context inputs",
+      "name": "Add entity and index context artifact inputs for 2786 audit",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-RUN-CTX-1"
+      ],
+      "scope_type": "audit_context_consumer_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerAuditCanonicalEligibility.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no production export",
+        "no production DB query",
+        "no DB mutation",
+        "no rollout",
+        "no backfill",
+        "no 80 readiness run",
+        "no producer/export command"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided CTX-CONSUME-1 execution goal and authorized updating PR train manifest/state."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-RUN-CTX-1 is merged as PR #1341 and current main contains 3203e9b7e7f11ec71a37dd9353e4d6e526b23fc4."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to audit command context inputs, audit domain artifact readers, audit tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "CTX-BUNDLE-1A rerun, then either CTX-EXPORT-1 or approved read-only context export",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
     }
   }
 }

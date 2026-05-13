@@ -17,8 +17,17 @@ use App\Domain\Career\Audit\CareerCanonicalEligibilityScope;
 use App\Domain\Career\Audit\CareerCanonicalEligibilitySeverity;
 use App\Domain\Career\Audit\CareerCanonicalEligibilitySidecar;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityStatus;
+use App\Domain\Career\Audit\CareerEntityContextArtifact;
+use App\Domain\Career\Audit\CareerEntityContextArtifactIssue;
+use App\Domain\Career\Audit\CareerEntityContextArtifactReader;
 use App\Domain\Career\Audit\CareerIndexStateAuthorityAuditor;
+use App\Domain\Career\Audit\CareerIndexStateAuthorityIssue;
+use App\Domain\Career\Audit\CareerIndexStateContextArtifact;
+use App\Domain\Career\Audit\CareerIndexStateContextArtifactIssue;
+use App\Domain\Career\Audit\CareerIndexStateContextArtifactReader;
+use App\Domain\Career\Audit\CareerIndexStateContextArtifactRow;
 use App\Domain\Career\Audit\CareerOccupationEntityInventoryAuditor;
+use App\Domain\Career\Audit\CareerOccupationEntityInventoryIssue;
 use App\Domain\Career\Audit\CareerPublicResolutionPlan;
 use App\Domain\Career\Audit\CareerPublicResolutionPlanResolver;
 use App\Domain\Career\Audit\CareerPublicResolutionPlanRow;
@@ -36,6 +45,8 @@ final class CareerAuditCanonicalEligibility extends Command
         {--slugs= : Comma-separated canonical slugs when scope=slugs}
         {--locales= : Comma-separated locales, defaults to en,zh}
         {--public-resolution-plan= : Optional public-resolution planner JSON artifact}
+        {--entity-context= : Optional read-only entity context JSON artifact}
+        {--index-state-context= : Optional read-only index-state context JSON artifact}
         {--projection= : Optional runtime publish projection JSON artifact}
         {--truth= : Optional canonical runtime truth JSON artifact}
         {--ledger= : Optional full release ledger JSON artifact}
@@ -164,6 +175,8 @@ final class CareerAuditCanonicalEligibility extends Command
     private function runContext(string $scope, array $planRows, array $slugs, array $locales, array $byReason): CareerCanonicalEligibilityAuditRunContext
     {
         $planPath = $this->stringOption('public-resolution-plan');
+        $entityContextPath = $this->stringOption('entity-context');
+        $indexStateContextPath = $this->stringOption('index-state-context');
         $projectionPath = $this->stringOption('projection');
         $truthPath = $this->stringOption('truth');
         $ledgerPath = $this->stringOption('ledger');
@@ -191,32 +204,40 @@ final class CareerAuditCanonicalEligibility extends Command
             ),
             $this->contextRequirement(
                 contextId: 'entity_db_context',
-                label: 'Occupation entity read-only DB context',
-                status: $this->reasonPresent($byReason, 'entity_db_context_missing')
+                label: 'Occupation entity read-only context',
+                status: $entityContextPath !== null
+                    ? ($this->entityContextSupplied($entityContextPath, $byReason)
+                        ? CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED
+                        : CareerCanonicalEligibilityAuditRunContextStatus::MISSING)
+                    : ($this->reasonPresent($byReason, 'entity_db_context_missing')
                     ? CareerCanonicalEligibilityAuditRunContextStatus::MISSING
-                    : CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED,
+                    : CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED),
                 requiredForMeaningfulRerun: true,
                 blocks80Readiness: true,
-                requiresApproval: $this->reasonPresent($byReason, 'entity_db_context_missing'),
-                approvalGateId: $this->reasonPresent($byReason, 'entity_db_context_missing') ? 'production_readonly_db_context' : null,
-                suppliedInput: $this->reasonPresent($byReason, 'entity_db_context_missing') ? null : 'configured read-only DB connection',
-                requiredInput: 'approved read-only DB context for occupations',
-                reason: 'Entity inventory cannot distinguish missing Occupation rows from unavailable DB context until a read-only DB context is supplied.',
+                requiresApproval: $entityContextPath === null && $this->reasonPresent($byReason, 'entity_db_context_missing'),
+                approvalGateId: $entityContextPath === null && $this->reasonPresent($byReason, 'entity_db_context_missing') ? 'production_readonly_db_context' : null,
+                suppliedInput: $entityContextPath ?? ($this->reasonPresent($byReason, 'entity_db_context_missing') ? null : 'configured read-only DB connection'),
+                requiredInput: '--entity-context=/path/to/entity_context.json',
+                reason: 'Entity inventory can be satisfied by an approved read-only entity context artifact or by a configured read-only DB context.',
                 evidence: [['row_reason_count' => $byReason['entity_db_context_missing'] ?? 0]]
             ),
             $this->contextRequirement(
                 contextId: 'index_state_context',
-                label: 'Index-state read-only DB context',
-                status: $this->reasonPresent($byReason, 'index_state_context_missing')
+                label: 'Index-state read-only context',
+                status: $indexStateContextPath !== null
+                    ? ($this->indexContextSupplied($indexStateContextPath, $byReason)
+                        ? CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED
+                        : CareerCanonicalEligibilityAuditRunContextStatus::MISSING)
+                    : ($this->reasonPresent($byReason, 'index_state_context_missing')
                     ? CareerCanonicalEligibilityAuditRunContextStatus::MISSING
-                    : CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED,
+                    : CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED),
                 requiredForMeaningfulRerun: true,
                 blocks80Readiness: true,
-                requiresApproval: $this->reasonPresent($byReason, 'index_state_context_missing'),
-                approvalGateId: $this->reasonPresent($byReason, 'index_state_context_missing') ? 'production_readonly_db_context' : null,
-                suppliedInput: $this->reasonPresent($byReason, 'index_state_context_missing') ? null : 'configured read-only DB connection',
-                requiredInput: 'approved read-only DB context for index_states',
-                reason: 'Index-state authority cannot be proven until the audit can read occupations and index_states.',
+                requiresApproval: $indexStateContextPath === null && $this->reasonPresent($byReason, 'index_state_context_missing'),
+                approvalGateId: $indexStateContextPath === null && $this->reasonPresent($byReason, 'index_state_context_missing') ? 'production_readonly_db_context' : null,
+                suppliedInput: $indexStateContextPath ?? ($this->reasonPresent($byReason, 'index_state_context_missing') ? null : 'configured read-only DB connection'),
+                requiredInput: '--index-state-context=/path/to/index_state_context.json',
+                reason: 'Index-state authority can be satisfied by an approved read-only index-state context artifact or by a configured read-only DB context.',
                 evidence: [['row_reason_count' => $byReason['index_state_context_missing'] ?? 0]]
             ),
             $this->contextRequirement(
@@ -295,13 +316,15 @@ final class CareerAuditCanonicalEligibility extends Command
             ],
             entity: [
                 'entity_db_context' => $requirements[1]->status,
-                'local_db_available' => ! $this->reasonPresent($byReason, 'entity_db_context_missing'),
-                'production_readonly_db_needed' => $this->reasonPresent($byReason, 'entity_db_context_missing'),
+                'entity_context_path' => $entityContextPath,
+                'local_db_available' => $entityContextPath === null && ! $this->reasonPresent($byReason, 'entity_db_context_missing'),
+                'production_readonly_db_needed' => $entityContextPath === null && $this->reasonPresent($byReason, 'entity_db_context_missing'),
             ],
             index: [
                 'index_state_context' => $requirements[2]->status,
-                'local_db_available' => ! $this->reasonPresent($byReason, 'index_state_context_missing'),
-                'production_readonly_db_needed' => $this->reasonPresent($byReason, 'index_state_context_missing'),
+                'index_state_context_path' => $indexStateContextPath,
+                'local_db_available' => $indexStateContextPath === null && ! $this->reasonPresent($byReason, 'index_state_context_missing'),
+                'production_readonly_db_needed' => $indexStateContextPath === null && $this->reasonPresent($byReason, 'index_state_context_missing'),
             ],
             runtime: [
                 'ledger_path' => $ledgerPath,
@@ -477,6 +500,60 @@ final class CareerAuditCanonicalEligibility extends Command
     }
 
     /**
+     * @param  array<string, int>  $byReason
+     */
+    private function entityContextSupplied(?string $path, array $byReason): bool
+    {
+        if ($path === null) {
+            return false;
+        }
+
+        foreach ([CareerEntityContextArtifactIssue::FILE_MISSING, CareerEntityContextArtifactIssue::JSON_INVALID, CareerEntityContextArtifactIssue::ROWS_MISSING] as $reason) {
+            if ($this->reasonPresent($byReason, $reason)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  array<string, int>  $byReason
+     */
+    private function indexContextSupplied(?string $path, array $byReason): bool
+    {
+        if ($path === null) {
+            return false;
+        }
+
+        foreach ([CareerIndexStateContextArtifactIssue::FILE_MISSING, CareerIndexStateContextArtifactIssue::JSON_INVALID, CareerIndexStateContextArtifactIssue::ROWS_MISSING] as $reason) {
+            if ($this->reasonPresent($byReason, $reason)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $values
+     */
+    private function containsString(string $rawValue, array $values, string $needle): bool
+    {
+        if (str_contains($rawValue, $needle)) {
+            return true;
+        }
+
+        foreach ($values as $value) {
+            if (str_contains($value, $needle)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * @param  list<CareerPublicResolutionPlanRow>  $planRows
      * @param  list<string>  $slugs
      * @param  list<string>  $locales
@@ -487,34 +564,9 @@ final class CareerAuditCanonicalEligibility extends Command
         $sidecars = [];
         $plan = $this->planFromRows($planRows);
 
-        $entityResult = (new CareerOccupationEntityInventoryAuditor)->auditSlugs($slugs, $scope);
         $baselineResult = (new CareerBaselineMetadataInventoryAuditor)->auditRows($planRows);
-        $entityByReason = $entityResult->byReason();
-        $entityContextMissing = array_key_exists('occupation_query_failed', $entityByReason);
-        if ($entityContextMissing) {
-            $sidecars[] = $this->contextSidecar(
-                sidecarId: 'entity_db_context_missing',
-                title: 'Occupation entity inventory DB context could not be queried.',
-                scopeRelation: CareerCanonicalEligibilitySidecar::SCOPE_RELATION_INSIDE,
-                mayContinueTrain: false,
-                evidence: [['reason' => 'occupation_query_failed']]
-            );
-        }
-
-        try {
-            $indexResult = (new CareerIndexStateAuthorityAuditor)->auditSlugs($slugs);
-            $indexStatuses = $this->statusMapBySlug($indexResult->rows, 'canonicalSlug', 'indexStatus');
-        } catch (Throwable $exception) {
-            $indexResult = null;
-            $indexStatuses = [];
-            $sidecars[] = $this->contextSidecar(
-                sidecarId: 'index_state_context_missing',
-                title: 'Index-state authority context could not be queried.',
-                scopeRelation: CareerCanonicalEligibilitySidecar::SCOPE_RELATION_INSIDE,
-                mayContinueTrain: false,
-                evidence: [$this->exceptionEvidence($exception)]
-            );
-        }
+        [$entityStatuses, $entitySidecars] = $this->entityStatuses($slugs, $scope);
+        [$indexStatuses, $indexSidecars] = $this->indexStatuses($slugs);
 
         [$runtimeStatuses, $runtimeSidecars] = $this->runtimeStatuses($plan, $planRows, $slugs, $locales);
         [$surfaceStatuses, $surfaceSidecars] = $this->surfaceStatuses($planRows, $slugs, $locales);
@@ -522,17 +574,14 @@ final class CareerAuditCanonicalEligibility extends Command
 
         $sidecars = [
             ...$sidecars,
-            ...($entityContextMissing ? [] : $entityResult->sidecars),
+            ...$entitySidecars,
             ...$baselineResult->sidecars,
-            ...($indexResult?->sidecars ?? []),
+            ...$indexSidecars,
             ...$runtimeSidecars,
             ...$seoGeoResult->sidecars,
             ...$surfaceSidecars,
         ];
 
-        $entityStatuses = $entityContextMissing
-            ? $this->statusMapForSlugs($slugs, CareerCanonicalEligibilityLayer::ENTITY, ['entity_db_context_missing'], [['reason' => 'occupation_query_failed']], 'occupations')
-            : $this->statusMapBySlug($entityResult->rows, 'canonicalSlug', 'entityStatus');
         $baselineStatuses = $this->statusMapBySlug($baselineResult->rows, 'canonicalSlug', 'baselineStatus');
         $seoGeoStatuses = $this->statusMapByKey($seoGeoResult->rows, 'canonicalSlug', 'locale', 'seoGeoStatus');
 
@@ -578,6 +627,255 @@ final class CareerAuditCanonicalEligibility extends Command
             checksum: null,
             rows: $planRows,
         );
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return array{0: array<string, CareerCanonicalEligibilityLayerStatus>, 1: list<CareerCanonicalEligibilitySidecar>}
+     */
+    private function entityStatuses(array $slugs, string $scope): array
+    {
+        $entityContextPath = $this->stringOption('entity-context');
+        if ($entityContextPath !== null) {
+            $artifact = CareerEntityContextArtifactReader::fromPath($entityContextPath);
+
+            return [
+                $this->entityStatusesFromArtifact($artifact, $slugs),
+                $artifact->issues === [] ? [] : [
+                    $this->contextSidecar(
+                        sidecarId: 'entity_context_artifact_issue',
+                        title: 'Entity context artifact has structured validation issues.',
+                        evidence: [['artifact' => $artifact->toArray()]]
+                    ),
+                ],
+            ];
+        }
+
+        $entityResult = (new CareerOccupationEntityInventoryAuditor)->auditSlugs($slugs, $scope);
+        $entityByReason = $entityResult->byReason();
+        if (array_key_exists('occupation_query_failed', $entityByReason)) {
+            return [
+                $this->statusMapForSlugs($slugs, CareerCanonicalEligibilityLayer::ENTITY, ['entity_db_context_missing'], [['reason' => 'occupation_query_failed']], 'occupations'),
+                [
+                    $this->contextSidecar(
+                        sidecarId: 'entity_db_context_missing',
+                        title: 'Occupation entity inventory DB context could not be queried.',
+                        scopeRelation: CareerCanonicalEligibilitySidecar::SCOPE_RELATION_INSIDE,
+                        mayContinueTrain: false,
+                        evidence: [['reason' => 'occupation_query_failed']]
+                    ),
+                ],
+            ];
+        }
+
+        return [$this->statusMapBySlug($entityResult->rows, 'canonicalSlug', 'entityStatus'), $entityResult->sidecars];
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return array<string, CareerCanonicalEligibilityLayerStatus>
+     */
+    private function entityStatusesFromArtifact(CareerEntityContextArtifact $artifact, array $slugs): array
+    {
+        $rowsBySlug = $artifact->rowsBySlug();
+        $issuesBySlug = $artifact->issuesBySlug();
+        $globalReasons = array_values(array_unique(array_map(
+            static fn (CareerEntityContextArtifactIssue $issue): string => $issue->reason,
+            $artifact->globalIssues()
+        )));
+        $globalEvidence = array_map(
+            static fn (CareerEntityContextArtifactIssue $issue): array => $issue->toArray(),
+            $artifact->globalIssues()
+        );
+
+        $statuses = [];
+        foreach ($slugs as $slug) {
+            $row = $rowsBySlug[$slug] ?? null;
+            $rowIssues = $issuesBySlug[$slug] ?? [];
+            $reasons = [
+                ...$globalReasons,
+                ...array_map(static fn (CareerEntityContextArtifactIssue $issue): string => $issue->reason, $rowIssues),
+            ];
+            $evidence = [
+                ...$globalEvidence,
+                ...array_map(static fn (CareerEntityContextArtifactIssue $issue): array => $issue->toArray(), $rowIssues),
+            ];
+
+            if ($row === null) {
+                $statuses[$slug] = new CareerCanonicalEligibilityLayerStatus(
+                    layer: CareerCanonicalEligibilityLayer::ENTITY,
+                    status: CareerCanonicalEligibilityStatus::BLOCKED,
+                    reasons: array_values(array_unique([...$reasons, CareerOccupationEntityInventoryIssue::OCCUPATION_MISSING])),
+                    evidence: [...$evidence, ['canonical_slug' => $slug, 'context_row_present' => false]],
+                    source: 'entity_context_artifact'
+                );
+
+                continue;
+            }
+
+            if (! $row->occupationExists) {
+                $reasons[] = CareerOccupationEntityInventoryIssue::OCCUPATION_MISSING;
+            }
+            if ($row->missingEntityFields !== []) {
+                $reasons[] = CareerOccupationEntityInventoryIssue::ENTITY_FIELD_MISSING;
+            }
+
+            $statuses[$slug] = new CareerCanonicalEligibilityLayerStatus(
+                layer: CareerCanonicalEligibilityLayer::ENTITY,
+                status: $reasons === [] ? CareerCanonicalEligibilityStatus::PASS : CareerCanonicalEligibilityStatus::BLOCKED,
+                reasons: array_values(array_unique($reasons)),
+                evidence: [
+                    ...$evidence,
+                    [
+                        'canonical_slug' => $slug,
+                        'occupation_exists' => $row->occupationExists,
+                        'occupation_id' => $row->occupationId,
+                        'missing_entity_fields' => $row->missingEntityFields,
+                    ],
+                ],
+                source: 'entity_context_artifact'
+            );
+        }
+
+        return $statuses;
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return array{0: array<string, CareerCanonicalEligibilityLayerStatus>, 1: list<CareerCanonicalEligibilitySidecar>}
+     */
+    private function indexStatuses(array $slugs): array
+    {
+        $indexContextPath = $this->stringOption('index-state-context');
+        if ($indexContextPath !== null) {
+            $artifact = CareerIndexStateContextArtifactReader::fromPath($indexContextPath);
+
+            return [
+                $this->indexStatusesFromArtifact($artifact, $slugs),
+                $artifact->issues === [] ? [] : [
+                    $this->contextSidecar(
+                        sidecarId: 'index_context_artifact_issue',
+                        title: 'Index-state context artifact has structured validation issues.',
+                        evidence: [['artifact' => $artifact->toArray()]]
+                    ),
+                ],
+            ];
+        }
+
+        try {
+            $indexResult = (new CareerIndexStateAuthorityAuditor)->auditSlugs($slugs);
+
+            return [$this->statusMapBySlug($indexResult->rows, 'canonicalSlug', 'indexStatus'), $indexResult->sidecars];
+        } catch (Throwable $exception) {
+            return [
+                [],
+                [
+                    $this->contextSidecar(
+                        sidecarId: 'index_state_context_missing',
+                        title: 'Index-state authority context could not be queried.',
+                        scopeRelation: CareerCanonicalEligibilitySidecar::SCOPE_RELATION_INSIDE,
+                        mayContinueTrain: false,
+                        evidence: [$this->exceptionEvidence($exception)]
+                    ),
+                ],
+            ];
+        }
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return array<string, CareerCanonicalEligibilityLayerStatus>
+     */
+    private function indexStatusesFromArtifact(CareerIndexStateContextArtifact $artifact, array $slugs): array
+    {
+        $rowsBySlug = $artifact->rowsBySlug();
+        $issuesBySlug = $artifact->issuesBySlug();
+        $globalReasons = array_values(array_unique(array_map(
+            static fn (CareerIndexStateContextArtifactIssue $issue): string => $issue->reason,
+            $artifact->globalIssues()
+        )));
+        $globalEvidence = array_map(
+            static fn (CareerIndexStateContextArtifactIssue $issue): array => $issue->toArray(),
+            $artifact->globalIssues()
+        );
+
+        $statuses = [];
+        foreach ($slugs as $slug) {
+            $row = $rowsBySlug[$slug] ?? null;
+            $rowIssues = $issuesBySlug[$slug] ?? [];
+            $reasons = [
+                ...$globalReasons,
+                ...array_map(static fn (CareerIndexStateContextArtifactIssue $issue): string => $issue->reason, $rowIssues),
+            ];
+            $evidence = [
+                ...$globalEvidence,
+                ...array_map(static fn (CareerIndexStateContextArtifactIssue $issue): array => $issue->toArray(), $rowIssues),
+            ];
+
+            if ($row === null) {
+                $statuses[$slug] = new CareerCanonicalEligibilityLayerStatus(
+                    layer: CareerCanonicalEligibilityLayer::INDEX,
+                    status: CareerCanonicalEligibilityStatus::BLOCKED,
+                    reasons: array_values(array_unique([...$reasons, CareerIndexStateAuthorityIssue::INDEX_STATE_MISSING])),
+                    evidence: [...$evidence, ['canonical_slug' => $slug, 'context_row_present' => false]],
+                    source: 'index_state_context_artifact'
+                );
+
+                continue;
+            }
+
+            $reasons = [...$reasons, ...$this->indexArtifactRowReasons($row)];
+            $statuses[$slug] = new CareerCanonicalEligibilityLayerStatus(
+                layer: CareerCanonicalEligibilityLayer::INDEX,
+                status: $reasons === [] ? CareerCanonicalEligibilityStatus::PASS : CareerCanonicalEligibilityStatus::BLOCKED,
+                reasons: array_values(array_unique($reasons)),
+                evidence: [
+                    ...$evidence,
+                    [
+                        'canonical_slug' => $slug,
+                        'latest_index_state' => $row->latestIndexState,
+                        'public_facing_state' => $row->publicFacingState,
+                        'index_eligible' => $row->indexEligible,
+                        'reason_codes' => $row->reasonCodes,
+                    ],
+                ],
+                source: 'index_state_context_artifact'
+            );
+        }
+
+        return $statuses;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function indexArtifactRowReasons(CareerIndexStateContextArtifactRow $row): array
+    {
+        $state = strtolower((string) ($row->publicFacingState ?? $row->latestIndexState ?? ''));
+        $rawState = strtolower((string) ($row->latestIndexState ?? $row->publicFacingState ?? ''));
+        $reasonCodes = array_map('strtolower', $row->reasonCodes);
+        $reasons = [];
+
+        if ($state === '' && $rawState === '') {
+            $reasons[] = CareerIndexStateAuthorityIssue::INDEX_STATE_MISSING;
+        }
+        if ($row->indexEligible === false) {
+            $reasons[] = CareerIndexStateAuthorityIssue::INDEX_ELIGIBLE_FALSE;
+        }
+        if ($state === 'noindex' || $rawState === 'noindex') {
+            $reasons[] = CareerIndexStateAuthorityIssue::EXPLICIT_NOINDEX_BLOCK;
+        }
+        if ($this->containsString($rawState, $reasonCodes, 'quarantine')) {
+            $reasons[] = CareerIndexStateAuthorityIssue::QUARANTINE_BLOCK;
+        }
+        if ($this->containsString($rawState, $reasonCodes, 'rollback')) {
+            $reasons[] = CareerIndexStateAuthorityIssue::ROLLBACK_BLOCK;
+        }
+        if ($reasons === [] && ! in_array($state, ['indexed', 'indexable'], true)) {
+            $reasons[] = CareerIndexStateAuthorityIssue::INDEX_STATE_NOT_INDEXED_LIKE;
+        }
+
+        return array_values(array_unique($reasons));
     }
 
     /**
