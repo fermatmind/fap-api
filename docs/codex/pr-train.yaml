@@ -1997,3 +1997,36 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: RIASEC-DEEP-COPY-03
+    repo: fap-api
+    depends_on:
+      - RIASEC-DEEP-COPY-02
+    branch: codex/riasec-deep-copy-03-pair-blend-slots
+    title: "feat(riasec): add pair blend copy runtime slots"
+    scope:
+      - Add backend-authoritative unordered pair blend slot contract for all 15 RIASEC pairs.
+      - Import reviewed I_A, I_S, and A_S pair copy from expert assets.
+      - Keep non-authored pairs explicit pending/unavailable and fail closed.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scoring or RIASEC question content packs.
+      - Add frontend pair blend fallback copy or rendering.
+      - Add occupation examples as matches, job fit, ranking, success, hiring, or source URL claims.
+    validation:
+      - targeted PHPUnit for RIASEC pair blend and deep copy registry contracts
+      - scoped freeze classifier test if runtime path allowance changes
+      - scoped Pint for touched PHP
+      - JSON/YAML validity
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

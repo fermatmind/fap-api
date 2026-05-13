@@ -99,3 +99,15 @@ Validators must reject content or fields that introduce:
 - `evidence_level`
 
 Dimension copy remains backend-authoritative content. The frontend may render a validated payload in a later PR, but must not hardcode these explanations or synthesize missing copy. If a requested dimension slot is missing, the registry returns `content_status=unavailable`, `module_state=omitted`, and `frontend_fallback_allowed=false`.
+
+## Pair Blend Runtime Slots
+
+`RIASEC-DEEP-COPY-03` extends `RiasecDeepCopySlotRegistry` with a deterministic unordered-pair contract for all 15 Holland Code pairs:
+
+- `R_I`, `R_A`, `R_S`, `R_E`, `R_C`
+- `I_A`, `I_S`, `I_E`, `I_C`
+- `A_S`, `A_E`, `A_C`
+- `S_E`, `S_C`
+- `E_C`
+
+The first runtime-authored pair slots are `I_A`, `I_S`, and `A_S`, sourced from the expert pair blend asset. Other pairs are explicit `content_status=pending` slots and fail closed with `module_state=omitted` until reviewed content is approved. Pair blend copy is an interest-combination reading aid; it is not a subtype, personality identity, ability proof, career conclusion, ranking, or hiring signal.
