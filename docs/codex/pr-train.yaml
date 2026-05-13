@@ -1667,6 +1667,45 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-ENTITY-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-INDEX-1
+      - SCAN-3
+    branch: fix/career-entity-remediation-plan-1
+    title: "fix(api): add career occupation entity remediation planning"
+    name: "Add career occupation entity remediation planning"
+    scope_type: audit_occupation_entity_remediation_planning_only
+    scope:
+      - Add non-mutating Occupation/entity remediation planning from Career public-resolution plan rows and entity inventory results.
+      - Distinguish planner source available from missing planner source for Occupation remediation.
+      - Emit a stable remediation plan artifact shape and explicit approval gate for any future production DB apply.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Apply Occupation/entity changes.
+      - Mutate DB or production state.
+      - Run rollout or backfill.
+      - Touch fap-web.
+      - Run 80 readiness.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerOccupationEntityInventoryAuditor --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "REPAIR-80-CANDIDATE-1"
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: RIASEC-PERSONALIZATION-00
     repo: fap-api
     branch: codex/riasec-personalization-00-train-registration

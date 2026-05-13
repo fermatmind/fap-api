@@ -142,3 +142,35 @@ AUDIT-4+ should consume AUDIT-3 output as the entity layer authority:
 - preserve `issues` and `by_reason` in later aggregate reports
 
 AUDIT-3 does not claim 2786 readiness. It only proves the read-only entity inventory contract for future canonical eligibility audits.
+
+## Remediation Planning
+
+REPAIR-ENTITY-1 adds a non-mutating remediation plan on top of the same inventory result:
+
+```php
+(new CareerOccupationEntityInventoryAuditor())->planRemediation($plan);
+```
+
+The plan schema is `career_occupation_entity_remediation_plan.v1`. It is planning-only and does not create, update, backfill, or publish occupations.
+
+Plan rows distinguish whether the public-resolution planner has enough source evidence to support future review:
+
+- `planner_source_available`
+- `planner_source_missing`
+
+Plan actions are:
+
+- `none`
+- `create_occupation`
+- `repair_entity_fields`
+- `review_duplicate_entity`
+- `review_duplicate_input`
+- `review_missing_source`
+
+Rows that would require future production writes carry `approval_required=true`. The plan emits one approval gate when any row requires an apply step:
+
+```text
+I explicitly approve production occupation entity remediation apply for Career 2786 using reviewed plan <PLAN_PATH>.
+```
+
+That approval gate is for a future task only. REPAIR-ENTITY-1 does not add an apply command, does not mutate DB state, and does not run a production export.
