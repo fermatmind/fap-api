@@ -1211,7 +1211,7 @@
       "branch": "fix/career-baseline-metadata-inventory-audit4",
       "title": "feat(api): add career baseline metadata inventory audit",
       "name": "Career Baseline/display Metadata Inventory Audit",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "AUDIT-3"
       ],
@@ -2469,8 +2469,8 @@
         "CMD-FIX-1"
       ],
       "scope_type": "audit_run_context_only",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "48834b4adcb4e63f998daef556e483cd492f128d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1360",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -3231,6 +3231,59 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-80-CANDIDATE-1",
+      "merged_at": "2026-05-13T11:53:44Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "sidecar_issues": []
+    },
+    "REPAIR-80-CANDIDATE-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-80-candidate-readiness-selector-1",
+      "title": "fix(api): add career 80 candidate readiness selector",
+      "name": "Add career 80 candidate readiness selector",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-ENTITY-1",
+        "SCAN-3"
+      ],
+      "scope_type": "audit_80_candidate_selector_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no 80 readiness run",
+        "no manifest generation",
+        "no production DB query",
+        "no DB mutation",
+        "no rollout/backfill",
+        "no fap-web changes",
+        "no deploy"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided remediation train execution goal and authorized registering the current remediation PR item."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-ENTITY-1 merged as PR #1360 and local train worktree is based on origin/main after that merge."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to 80 candidate selector/report, audit tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "RUN-1D full-context audit rerun and SCAN-4",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,

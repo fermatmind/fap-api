@@ -64,3 +64,30 @@ The result serializes as:
 ## AUDIT-11 Consumption
 
 AUDIT-11 should consume `ready_slugs` and `rollout_allowed`. It must not generate expansion manifests unless `status=pass`, `rollout_allowed=true`, and the expected cohort size is met.
+
+## Candidate Selection Report
+
+REPAIR-80-CANDIDATE-1 adds a planning-only selector before the readiness planner:
+
+```php
+(new CareerCanonical80CandidateSelector())->select($report);
+```
+
+The selector consumes a canonical eligibility report and emits `career_80_candidate_selection.v1`. It does not run 80 readiness, generate manifests, apply rollout, or mutate DB state.
+
+The selector ranks slugs by:
+
+- passing locale count
+- blocked locale count
+- reason count
+- hard blocker count
+
+Rows are classified as:
+
+- `ready`: all audit rows pass and the slug can be selected for a future readiness run
+- `near_eligible`: no configured hard blockers, but one or more locale rows still block
+- `excluded_hard_blocker`: at least one hard blocker remains
+
+Default hard blockers include entity gaps, baseline/title gaps, index gaps, runtime authority gaps, surface context gaps, and SEO/GEO metadata gaps. A future scan can override the hard blocker list for a narrower policy review, but the default stays conservative for Career 2786.
+
+`readiness_can_run=true` only when at least 80 ready slugs are selected. If fewer than 80 qualify, the report remains `blocked` and explains the selected, near-eligible, and excluded slug sets.

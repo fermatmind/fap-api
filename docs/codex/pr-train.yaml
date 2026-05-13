@@ -1706,6 +1706,45 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-80-CANDIDATE-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-ENTITY-1
+      - SCAN-3
+    branch: fix/career-80-candidate-readiness-selector-1
+    title: "fix(api): add career 80 candidate readiness selector"
+    name: "Add career 80 candidate readiness selector"
+    scope_type: audit_80_candidate_selector_only
+    scope:
+      - Add a planning-only selector/report for Career 80-readiness candidates from full-context canonical eligibility audit rows.
+      - Rank near-eligible slugs, exclude configured hard blockers, and explain when fewer than 80 candidates qualify.
+      - Preserve AUDIT-10 readiness planner semantics without running readiness or generating expansion manifests.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run 80 readiness.
+      - Generate expansion manifests.
+      - Mutate DB or production state.
+      - Run rollout or backfill.
+      - Touch fap-web.
+      - Deploy.
+    validation:
+      - php artisan test --filter=CareerCanonical80CandidateSelector --no-ansi
+      - php artisan test --filter=CareerCanonical80CohortReadinessPlanner --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "RUN-1D full-context audit rerun and SCAN-4"
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: RIASEC-PERSONALIZATION-00
     repo: fap-api
     branch: codex/riasec-personalization-00-train-registration

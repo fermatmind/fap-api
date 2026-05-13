@@ -396,6 +396,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessPlanner.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessResult.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessRow.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelectionReport.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelectionRow.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelector.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -1752,6 +1755,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessPlanner.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessResult.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessRow.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelectionReport.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelectionRow.php',
+            'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelector.php',
         ], true);
     }
 
