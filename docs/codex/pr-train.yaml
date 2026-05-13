@@ -1487,8 +1487,12 @@ prs:
       - Ensure low_quality hides strong modules and 140Q tension remains bounded.
     allowed_paths:
       - backend/app/**/Riasec*Module*
+      - backend/app/**/RiasecPublicProjectionService*
       - backend/app/**/RiasecReportComposer*
       - backend/tests/**/Riasec*Module*
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Change frontend UI.
