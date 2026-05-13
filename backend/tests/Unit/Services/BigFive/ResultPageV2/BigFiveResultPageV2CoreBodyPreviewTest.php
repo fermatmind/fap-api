@@ -498,6 +498,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_editorial_package_draft_gate_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleImportEditorialPackage.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\ArticleImportEditorialPackage;',
+            '+        ArticleImportEditorialPackage::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_privacy_logs_dsar_key_rotation_changes(): void
     {
         $changed = [
@@ -1156,6 +1171,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleEditorialPackageDraftGateFile($file)) {
+                continue;
+            }
+
             if ($this->isPrivacyLogsDsarKeyRotationFile($file)) {
                 continue;
             }
@@ -1360,7 +1379,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/app/Console/Kernel.php'
-                && $this->kernelDiffIsCareerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                && (
+                    $this->kernelDiffIsCareerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsArticleEditorialPackageDraftGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                )
             ) {
                 continue;
             }
@@ -1428,6 +1450,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php',
             'backend/app/Services/Cms/ArticleSeoService.php',
         ], true);
+    }
+
+    private function isArticleEditorialPackageDraftGateFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/ArticleImportEditorialPackage.php'
+            || str_starts_with($file, 'backend/app/Services/Cms/EditorialPackage/');
     }
 
     private function isPrivacyLogsDsarKeyRotationFile(string $file): bool
@@ -1970,6 +1998,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bCareer[A-Za-z0-9_\\\\]*\b|career:/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsArticleEditorialPackageDraftGateOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bArticleImportEditorialPackage\b/u', $line) !== 1) {
                 return false;
             }
         }
