@@ -3897,7 +3897,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-deep-copy-04-140q-narrative-slots",
       "title": "feat(riasec): add 140q narrative runtime slots",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "RIASEC-DEEP-COPY-03"
       ],
@@ -3914,7 +3914,7 @@
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
-      "commit_sha": "ee2c4f0c1a953a69acdfa951bf8ac6d543f06e96",
+      "commit_sha": "490829bfc05720b02fcd32de5c2fd4e927112edc",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1365",
       "checks": {
         "dependency": {
@@ -3946,6 +3946,79 @@
         "scope_validation": {
           "status": "pass",
           "evidence": "Changed files are limited to backend RIASEC slot registry/validator, 140Q layer registry tests, backend RIASEC docs, and docs/codex train metadata. No 60Q/140Q scoring, question pack, frontend UI, sales/paywall, share/PDF/history, feedback, analytics, or career runtime files changed."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": "2026-05-13T12:29:47Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "Local main checkout blocked by external linked worktree during PR #1365 cleanup",
+          "severity": "P3",
+          "introduced_by_current_pr": false,
+          "blocks_merge": false,
+          "evidence": [
+            "GitHub PR #1365 merged and origin/main contains 490829bfc05720b02fcd32de5c2fd4e927112edc.",
+            "Local checkout of main was blocked because /private/tmp/fap-api-career-2786-remediation-train owns branch main; train continued from origin/main per continuation policy."
+          ]
+        }
+      ]
+    },
+    "RIASEC-DEEP-COPY-05": {
+      "repo": "fap-api",
+      "branch": "codex/riasec-deep-copy-05-low-quality-slots",
+      "title": "feat(riasec): add low quality cautious copy slots",
+      "status": "in_progress",
+      "depends_on": [
+        "RIASEC-DEEP-COPY-04"
+      ],
+      "scope_type": "backend_low_quality_copy_slots_only",
+      "allowed_paths": [
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php",
+        "backend/tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "backend/docs/riasec/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "commit_sha": "b483be1e5ffbd33d7c016f07769e5875bffe768d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1366",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "RIASEC-DEEP-COPY-04 is merged as PR #1365 with merge commit 490829bfc05720b02fcd32de5c2fd4e927112edc; origin/main contains the merge commit."
+        },
+        "low_quality_registry_contract": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php --no-ansi",
+          "evidence": "27 tests passed, 1056 assertions."
+        },
+        "freeze_classifier": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|riasec_content_registry' --no-ansi",
+          "evidence": "2 tests passed, 4 assertions."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecContentRegistrySlotContract.php tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+        },
+        "json_yaml_validity": {
+          "status": "pass",
+          "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")' && jq empty docs/codex/pr-train-state.json"
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to backend RIASEC slot registry/validator, low-quality copy slot tests, backend RIASEC docs, and docs/codex train metadata. No scoring, question pack, frontend UI, share/PDF/history runtime, feedback runtime, analytics, or career runtime files changed."
         }
       },
       "failure_reason": null,
