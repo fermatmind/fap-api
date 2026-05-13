@@ -113,7 +113,17 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.scoring_spec_version', 'riasec_standard_60_v1');
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.normalization_method', 'raw_sum_per_dimension_min10_max50_to_0_100');
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.quality_rule_status', 'minimal_answer_completion_only');
+        $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.quality_rule_version', 'riasec_quality_rule_spec_v2');
+        $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.interpretation_rule_version', 'riasec_interpretation_rule_spec_v2');
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.quality.quality_state', 'normal');
+        $readback->assertJsonPath('riasec_public_projection_v2.quality.score_mutation_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.quality.measured_holland_code_mutation_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.interpretation_state.interpretation_rule_version', 'riasec_interpretation_rule_spec_v2');
+        $readback->assertJsonPath('riasec_public_projection_v2.interpretation_state.profile_shape_version', 'riasec_profile_shape_v2_0');
+        $readback->assertJsonPath('riasec_public_projection_v2.interpretation_state.module_visibility_policy_id', 'riasec_module_visibility_policy_v1');
+        $readback->assertJsonPath('riasec_public_projection_v2.interpretation_state.top_code_confidence.meaning', 'readability strength, not probability');
+        $readback->assertJsonPath('riasec_public_projection_v2.interpretation_state.field_authority.profile_shape', 'backend_owned');
         $readback->assertJsonPath('riasec_public_projection_v2.claim_boundary.does_not_measure.3', 'career_success_probability');
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.schema_version', 'riasec.activity_explorer.v0.1');
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.status', 'content_examples_only');
@@ -147,7 +157,9 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('riasec_form_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $report->assertJsonPath('report._meta.riasec_public_projection_v2.schema_version', 'riasec.public_projection.v2');
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
+        $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.interpretation_rule_version', 'riasec_interpretation_rule_spec_v2');
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
+        $report->assertJsonPath('riasec_public_projection_v2.interpretation_state.field_authority.reading_strength', 'backend_owned');
         $report->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.boundary.occupation_examples_policy', 'content_example_not_registry_match_without_reviewed_registry_source');
         $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.snapshot_bound', true);
         $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.surface_policy.formal_report_mutation_allowed', false);

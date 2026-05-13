@@ -21,6 +21,8 @@ final class RiasecPublicProjectionService
         private readonly RiasecMeasurementContract $measurementContract,
         private readonly RiasecActivityExplorerService $activityExplorer,
         private readonly RiasecExplorationFeedbackOverlayService $feedbackOverlay,
+        private readonly RiasecInterpretationRuleContract $interpretationRuleContract,
+        private readonly RiasecQualityRuleContract $qualityRuleContract,
     ) {}
 
     public function buildFromResult(Result $result, string $locale = 'zh-CN'): array
@@ -94,6 +96,11 @@ final class RiasecPublicProjectionService
                 : $this->measurementContract->comparePolicyForFormCode((string) data_get($v1, 'form.form_code', '')));
         $scoreSpaceVersion = (string) data_get($measurementContract, 'form.score_space_version', data_get($v1, 'form.score_space_version', ''));
         $formCode = (string) data_get($measurementContract, 'form.form_code', data_get($v1, 'form.form_code', ''));
+        $qualityRule = $this->qualityRuleContract->build(array_merge($payload, [
+            'form_code' => $formCode,
+            'answer_count' => (int) data_get($measurementContract, 'form.question_count', (int) ($payload['answer_count'] ?? 0)),
+        ]));
+        $interpretationRule = $this->interpretationRuleContract->build($payload, $qualityRule);
 
         $projection = [
             'schema_version' => 'riasec.public_projection.v2',
@@ -138,9 +145,10 @@ final class RiasecPublicProjectionService
                 'quality_rule_version' => $this->firstString([
                     data_get($payload, 'version_snapshot.quality_rule_version'),
                     data_get($payload, 'quality_rule_version'),
+                    $qualityRule['quality_rule_version'] ?? null,
                 ]),
                 'quality_rule_status' => (string) data_get($measurementContract, 'quality.quality_rule_status', ''),
-                'interpretation_rule_version' => null,
+                'interpretation_rule_version' => (string) ($interpretationRule['interpretation_rule_version'] ?? ''),
                 'validation_status' => 'runtime_contract_defined_validation_pending',
                 'snapshot_bound' => $snapshotBound,
             ],
@@ -148,7 +156,16 @@ final class RiasecPublicProjectionService
                 'grade' => (string) ($v1['quality_grade'] ?? ''),
                 'flags' => is_array($v1['quality_flags'] ?? null) ? array_values($v1['quality_flags']) : [],
                 'low_quality_strength' => (string) data_get($measurementContract, 'quality.low_quality_strength', ''),
+                'quality_rule_version' => (string) ($qualityRule['quality_rule_version'] ?? ''),
+                'quality_state' => (string) ($qualityRule['quality_state'] ?? ''),
+                'response_quality' => (string) ($qualityRule['response_quality'] ?? ''),
+                'reading_strength' => (string) ($qualityRule['reading_strength'] ?? ''),
+                'result_page_behavior' => (string) ($qualityRule['result_page_behavior'] ?? ''),
+                'module_policy' => is_array($qualityRule['module_policy'] ?? null) ? $qualityRule['module_policy'] : [],
+                'score_mutation_allowed' => false,
+                'measured_holland_code_mutation_allowed' => false,
             ],
+            'interpretation_state' => $this->publicInterpretationState($interpretationRule),
             'indices' => [
                 'clarity_index' => (float) ($v1['clarity_index'] ?? 0),
                 'breadth_index' => (float) ($v1['breadth_index'] ?? 0),
@@ -250,5 +267,28 @@ final class RiasecPublicProjectionService
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $interpretationRule
+     * @return array<string,mixed>
+     */
+    private function publicInterpretationState(array $interpretationRule): array
+    {
+        return [
+            'interpretation_rule_version' => (string) ($interpretationRule['interpretation_rule_version'] ?? ''),
+            'profile_shape' => (string) ($interpretationRule['profile_shape'] ?? ''),
+            'profile_shape_version' => (string) ($interpretationRule['profile_shape_version'] ?? ''),
+            'clarity_label' => (string) ($interpretationRule['clarity_label'] ?? ''),
+            'near_tie_state' => is_array($interpretationRule['near_tie_state'] ?? null) ? $interpretationRule['near_tie_state'] : [],
+            'alternate_code' => is_array($interpretationRule['alternate_code'] ?? null) ? $interpretationRule['alternate_code'] : [],
+            'alternate_code_reason' => $interpretationRule['alternate_code_reason'] ?? null,
+            'top_code_confidence' => is_array($interpretationRule['top_code_confidence'] ?? null) ? $interpretationRule['top_code_confidence'] : [],
+            'reading_strength' => (string) ($interpretationRule['reading_strength'] ?? ''),
+            'result_page_strategy' => is_array($interpretationRule['result_page_strategy'] ?? null) ? $interpretationRule['result_page_strategy'] : [],
+            'module_visibility_policy_id' => (string) ($interpretationRule['module_visibility_policy_id'] ?? ''),
+            'validation_status' => (string) ($interpretationRule['validation_status'] ?? ''),
+            'field_authority' => is_array($interpretationRule['field_authority'] ?? null) ? $interpretationRule['field_authority'] : [],
+        ];
     }
 }
