@@ -76,4 +76,26 @@ Validators must reject content or fields that introduce:
 
 ## Future PR Usage
 
-`RIASEC-DEEP-COPY-02` should add the deterministic registry loader/resolver on top of this schema. Later PRs can wire approved slots into projection/composer output only after the resolver validates slot metadata and fails closed for missing content.
+`RIASEC-DEEP-COPY-02` adds the first deterministic backend registry resolver for six dimension deep copy slots. Later PRs can extend the same resolver with pair blend, 140Q layer, low-quality, structural difference, aspirations, and feedback response slots. Projection/composer output must only consume slots after validator pass and must fail closed for missing content.
+
+## Dimension Deep Copy Runtime Slots
+
+`RiasecDeepCopySlotRegistry` owns the first approved dimension deep copy atoms for `R`, `I`, `A`, `S`, `E`, and `C`. Each slot must include:
+
+- `dimension_code`
+- `title`
+- `core_drive`
+- `positive_value`
+- `real_world_cost`
+- `high_score_reading`
+- `low_score_safe_reading`
+- `work_activity_examples`
+- `possible_drains`
+- `common_misread`
+- `action_advice`
+- `forbidden_claims`
+- `user_visible_boundary`
+- `content_version`
+- `evidence_level`
+
+Dimension copy remains backend-authoritative content. The frontend may render a validated payload in a later PR, but must not hardcode these explanations or synthesize missing copy. If a requested dimension slot is missing, the registry returns `content_status=unavailable`, `module_state=omitted`, and `frontend_fallback_allowed=false`.
