@@ -40,6 +40,7 @@ use App\Console\Commands\CareerImportOccupationDirectoryDrafts;
 use App\Console\Commands\CareerImportOccupationDirectoryDryRun;
 use App\Console\Commands\CareerImportSelectedDisplayAssets;
 use App\Console\Commands\CareerNormalizeLegacyDisplayAssets;
+use App\Console\Commands\CareerPlanCanonical80CohortReadiness;
 use App\Console\Commands\CareerPlanCanonicalRolloutBatchTransition;
 use App\Console\Commands\CareerReleaseGateNoindexCleanup;
 use App\Console\Commands\CareerRemediateCanonicalIndexState;
@@ -201,6 +202,7 @@ class Kernel extends ConsoleKernel
         CareerImportOccupationDirectoryDryRun::class,
         CareerImportSelectedDisplayAssets::class,
         CareerNormalizeLegacyDisplayAssets::class,
+        CareerPlanCanonical80CohortReadiness::class,
         CareerPlanCanonicalRolloutBatchTransition::class,
         CareerReleaseGateNoindexCleanup::class,
         CareerRemediateCanonicalIndexState::class,
