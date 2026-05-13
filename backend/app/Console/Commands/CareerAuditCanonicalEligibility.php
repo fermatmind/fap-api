@@ -33,6 +33,9 @@ use App\Domain\Career\Audit\CareerPublicResolutionPlanResolver;
 use App\Domain\Career\Audit\CareerPublicResolutionPlanRow;
 use App\Domain\Career\Audit\CareerRuntimeProjectionTruthEligibilityAuditor;
 use App\Domain\Career\Audit\CareerSeoGeoReadinessAuditor;
+use App\Domain\Career\Audit\CareerSurfaceContextArtifact;
+use App\Domain\Career\Audit\CareerSurfaceContextArtifactIssue;
+use App\Domain\Career\Audit\CareerSurfaceContextArtifactReader;
 use App\Domain\Career\Audit\CareerSurfaceReadinessAuditor;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -47,6 +50,7 @@ final class CareerAuditCanonicalEligibility extends Command
         {--public-resolution-plan= : Optional public-resolution planner JSON artifact}
         {--entity-context= : Optional read-only entity context JSON artifact}
         {--index-state-context= : Optional read-only index-state context JSON artifact}
+        {--surface-context= : Optional read-only surface context JSON artifact}
         {--projection= : Optional runtime publish projection JSON artifact}
         {--truth= : Optional canonical runtime truth JSON artifact}
         {--ledger= : Optional full release ledger JSON artifact}
@@ -177,10 +181,11 @@ final class CareerAuditCanonicalEligibility extends Command
         $planPath = $this->stringOption('public-resolution-plan');
         $entityContextPath = $this->stringOption('entity-context');
         $indexStateContextPath = $this->stringOption('index-state-context');
+        $surfaceContextPath = $this->stringOption('surface-context');
         $projectionPath = $this->stringOption('projection');
         $truthPath = $this->stringOption('truth');
         $ledgerPath = $this->stringOption('ledger');
-        $includeSurfaces = (bool) $this->option('include-surfaces') || (bool) $this->option('include-live-html');
+        $includeSurfaces = $surfaceContextPath !== null || (bool) $this->option('include-surfaces') || (bool) $this->option('include-live-html');
         $includeLiveHtml = (bool) $this->option('include-live-html');
         $baseUrl = $this->stringOption('base-url');
 
@@ -273,17 +278,24 @@ final class CareerAuditCanonicalEligibility extends Command
             $this->contextRequirement(
                 contextId: 'surface_context',
                 label: 'Surface readiness artifact mode',
-                status: $includeSurfaces
-                    ? CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED
-                    : CareerCanonicalEligibilityAuditRunContextStatus::MISSING,
+                status: $surfaceContextPath !== null
+                    ? ($this->surfaceContextSupplied($surfaceContextPath, $byReason)
+                        ? CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED
+                        : CareerCanonicalEligibilityAuditRunContextStatus::MISSING)
+                    : ($includeSurfaces
+                        ? CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED
+                        : CareerCanonicalEligibilityAuditRunContextStatus::MISSING),
                 requiredForMeaningfulRerun: true,
                 blocks80Readiness: true,
                 requiresApproval: false,
                 approvalGateId: null,
-                suppliedInput: $includeSurfaces ? '--include-surfaces' : null,
-                requiredInput: '--include-surfaces',
-                reason: 'Surface readiness is grouped as one context-level requirement; missing surface context is not 5572 independent data defects.',
-                evidence: [['row_reason_count' => $byReason['surface_context_missing'] ?? 0]]
+                suppliedInput: $surfaceContextPath ?? ($includeSurfaces ? '--include-surfaces' : null),
+                requiredInput: '--surface-context=/path/to/surface_context.json or --include-surfaces',
+                reason: 'Surface readiness is supplied by a read-only surface context artifact or explicitly requested safe artifact mode; missing surface context is not 5572 independent data defects.',
+                evidence: [[
+                    'row_reason_count' => $byReason['surface_context_missing'] ?? 0,
+                    'artifact_issue_count' => array_sum(array_intersect_key($byReason, array_flip(CareerSurfaceContextArtifactIssue::reasons()))),
+                ]]
             ),
             $this->contextRequirement(
                 contextId: 'live_html_context',
@@ -337,6 +349,7 @@ final class CareerAuditCanonicalEligibility extends Command
                 'include_surfaces' => $includeSurfaces,
                 'include_live_html' => $includeLiveHtml,
                 'base_url' => $baseUrl,
+                'surface_context_path' => $surfaceContextPath,
                 'surface_context' => $requirements[5]->status,
                 'live_html_context' => $requirements[6]->status,
             ],
@@ -527,6 +540,24 @@ final class CareerAuditCanonicalEligibility extends Command
         }
 
         foreach ([CareerIndexStateContextArtifactIssue::FILE_MISSING, CareerIndexStateContextArtifactIssue::JSON_INVALID, CareerIndexStateContextArtifactIssue::ROWS_MISSING] as $reason) {
+            if ($this->reasonPresent($byReason, $reason)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  array<string, int>  $byReason
+     */
+    private function surfaceContextSupplied(?string $path, array $byReason): bool
+    {
+        if ($path === null) {
+            return false;
+        }
+
+        foreach ([CareerSurfaceContextArtifactIssue::FILE_MISSING, CareerSurfaceContextArtifactIssue::JSON_INVALID, CareerSurfaceContextArtifactIssue::ROWS_MISSING] as $reason) {
             if ($this->reasonPresent($byReason, $reason)) {
                 return false;
             }
@@ -944,6 +975,29 @@ final class CareerAuditCanonicalEligibility extends Command
      */
     private function surfaceStatuses(array $planRows, array $slugs, array $locales): array
     {
+        $surfaceContextPath = $this->stringOption('surface-context');
+        if ($surfaceContextPath !== null) {
+            $artifact = CareerSurfaceContextArtifactReader::fromPath($surfaceContextPath);
+
+            return [
+                $this->surfaceStatusesFromArtifact(
+                    artifact: $artifact,
+                    planRows: $planRows,
+                    slugs: $slugs,
+                    locales: $locales,
+                    includeLiveHtml: (bool) $this->option('include-live-html'),
+                    baseUrl: $this->stringOption('base-url'),
+                ),
+                $artifact->issues === [] ? [] : [
+                    $this->contextSidecar(
+                        sidecarId: 'surface_context_artifact_issue',
+                        title: 'Surface context artifact has structured validation issues.',
+                        evidence: [['artifact' => $artifact->toArray()]]
+                    ),
+                ],
+            ];
+        }
+
         $includeSurfaces = (bool) $this->option('include-surfaces') || (bool) $this->option('include-live-html');
         if (! $includeSurfaces) {
             return [
@@ -979,6 +1033,114 @@ final class CareerAuditCanonicalEligibility extends Command
         );
 
         return [$this->statusMapByKey($surfaceResult->rows, 'canonicalSlug', 'locale', 'surfaceStatus'), [...$sidecars, ...$surfaceResult->sidecars]];
+    }
+
+    /**
+     * @param  list<CareerPublicResolutionPlanRow>  $planRows
+     * @param  list<string>  $slugs
+     * @param  list<string>  $locales
+     * @return array<string, CareerCanonicalEligibilityLayerStatus>
+     */
+    private function surfaceStatusesFromArtifact(CareerSurfaceContextArtifact $artifact, array $planRows, array $slugs, array $locales, bool $includeLiveHtml, ?string $baseUrl): array
+    {
+        $globalIssues = $artifact->globalIssues();
+        $globalReasons = array_values(array_unique(array_map(
+            static fn (CareerSurfaceContextArtifactIssue $issue): string => $issue->reason,
+            $globalIssues
+        )));
+        $globalEvidence = array_map(
+            static fn (CareerSurfaceContextArtifactIssue $issue): array => $issue->toArray(),
+            $globalIssues
+        );
+
+        if ($this->hasBlockingSurfaceArtifactIssue($globalReasons)) {
+            return $this->statusMapForSlugLocales(
+                slugs: $slugs,
+                locales: $locales,
+                layer: CareerCanonicalEligibilityLayer::SURFACE,
+                reasons: $globalReasons,
+                evidence: $globalEvidence,
+                source: 'surface_context_artifact'
+            );
+        }
+
+        $surfaceResult = (new CareerSurfaceReadinessAuditor)->audit(
+            planRows: $planRows,
+            locales: $locales,
+            apiArtifact: ['items' => $artifact->surfaceApiRows()],
+            includeLiveHtml: $includeLiveHtml,
+            baseUrl: $baseUrl,
+            liveHtmlByKey: [],
+        );
+        $auditedStatuses = $this->statusMapByKey($surfaceResult->rows, 'canonicalSlug', 'locale', 'surfaceStatus');
+        $rowsByKey = $artifact->rowsByKey();
+        $issuesByKey = $artifact->issuesByKey();
+        $statuses = [];
+
+        foreach (array_values(array_unique($slugs)) as $slug) {
+            foreach ($locales as $locale) {
+                $key = $this->rowKey($slug, $locale);
+                if (! isset($rowsByKey[$key])) {
+                    $statuses[$key] = new CareerCanonicalEligibilityLayerStatus(
+                        layer: CareerCanonicalEligibilityLayer::SURFACE,
+                        status: CareerCanonicalEligibilityStatus::UNVERIFIED,
+                        reasons: array_values(array_unique([...$globalReasons, CareerSurfaceContextArtifactIssue::ROW_MISSING])),
+                        evidence: [
+                            ...$globalEvidence,
+                            ['canonical_slug' => $slug, 'locale' => $locale, 'context_row_present' => false],
+                        ],
+                        source: 'surface_context_artifact',
+                    );
+
+                    continue;
+                }
+
+                $artifactIssues = [
+                    ...$globalIssues,
+                    ...($issuesByKey[$key] ?? []),
+                ];
+                $artifactReasons = array_map(
+                    static fn (CareerSurfaceContextArtifactIssue $issue): string => $issue->reason,
+                    $artifactIssues
+                );
+                $artifactEvidence = array_map(
+                    static fn (CareerSurfaceContextArtifactIssue $issue): array => $issue->toArray(),
+                    $artifactIssues
+                );
+                $auditedStatus = $auditedStatuses[$key] ?? $this->unverifiedLayer(
+                    CareerCanonicalEligibilityLayer::SURFACE,
+                    [CareerSurfaceContextArtifactIssue::ROW_MISSING],
+                    [['canonical_slug' => $slug, 'locale' => $locale, 'context_row_present' => false]],
+                    'surface_context_artifact'
+                );
+
+                $statuses[$key] = new CareerCanonicalEligibilityLayerStatus(
+                    layer: CareerCanonicalEligibilityLayer::SURFACE,
+                    status: $artifactReasons === []
+                        ? $auditedStatus->status
+                        : ($auditedStatus->status === CareerCanonicalEligibilityStatus::PASS ? CareerCanonicalEligibilityStatus::BLOCKED : $auditedStatus->status),
+                    reasons: array_values(array_unique([...$auditedStatus->reasons, ...$artifactReasons])),
+                    evidence: [...$auditedStatus->evidence, ...$artifactEvidence],
+                    source: 'surface_context_artifact',
+                );
+            }
+        }
+
+        return $statuses;
+    }
+
+    /**
+     * @param  list<string>  $reasons
+     */
+    private function hasBlockingSurfaceArtifactIssue(array $reasons): bool
+    {
+        foreach ([CareerSurfaceContextArtifactIssue::FILE_MISSING, CareerSurfaceContextArtifactIssue::JSON_INVALID, CareerSurfaceContextArtifactIssue::ROWS_MISSING] as $reason) {
+            if (in_array($reason, $reasons, true)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function auditRow(
