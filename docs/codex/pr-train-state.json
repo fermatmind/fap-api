@@ -4449,6 +4449,64 @@
       "sidecar_issues": [
 
       ]
+    },
+    "REPAIR-INDEX-STATE-MINIMUM-APPLY-PLAN-2": {
+      "repo": "fap-api",
+      "branch": "fix/career-index-state-minimum-remediation-gate",
+      "title": "fix(api): add guarded career index state remediation command",
+      "name": "Add guarded explicit-slug index_state remediation dry-run/apply planning",
+      "status": "in_progress",
+      "depends_on": [
+        "RUN-1F",
+        "REPAIR-INDEX-ENTITY-POLICY-2"
+      ],
+      "scope_type": "index_state_remediation_gate_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerRemediateCanonicalIndexState.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no production apply",
+        "no production DB query",
+        "no DB mutation outside tests",
+        "no rollout",
+        "no backfill",
+        "no 80 readiness run",
+        "no manifest generation",
+        "no deploy",
+        "no fap-web change"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided REPAIR-INDEX-STATE-MINIMUM-APPLY-PLAN-2 execution goal and authorized docs/codex train metadata updates for this item."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "RUN-1F and the index/entity approval review determined a minimum explicit-slug index_state remediation dry-run/apply gate is needed before approval can be used."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to an explicit-slug index_state remediation command, tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "INDEX-STATE-MINIMUM-DRY-RUN-1 using reviewed slug artifact",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+
+      ]
     }
   }
 }
