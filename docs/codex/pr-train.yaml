@@ -1853,3 +1853,35 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: RIASEC-DEEP-COPY-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-DEEP-COPY-00
+    branch: codex/riasec-deep-copy-01-slot-schema
+    title: "feat(riasec): harden deep copy slot schema contract"
+    scope:
+      - Extend backend-authoritative RIASEC deep copy slot schema and validator.
+      - Cover method, dimension, pair blend, quality, module visibility, 140Q, structural difference, aspirations, disagree path, and feedback response slots.
+      - Keep runtime copy absent and missing content fail-closed.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scorer math.
+      - Change RIASEC content pack question semantics.
+      - Import final public copy.
+      - Add frontend fallback copy.
+      - Add career matching, job fit, ranking, success, source URL, O*NET, or SOC claims.
+    validation:
+      - targeted PHPUnit for RIASEC content slot contract
+      - scoped Big Five freeze classifier test if touched
+      - scoped Pint for touched PHP
+      - JSON/YAML validity
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
