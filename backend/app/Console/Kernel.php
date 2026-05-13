@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\AdminBootstrapOwner;
 use App\Console\Commands\ArchiveColdData;
+use App\Console\Commands\ArticleImportEditorialPackage;
 // ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
 use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5PsychometricsReport;
@@ -268,6 +269,7 @@ class Kernel extends ConsoleKernel
         QueueBacklogProbe::class,
         EvidencePack::class,
         ExperimentGuardrailsEvaluate::class,
+        ArticleImportEditorialPackage::class,
     ];
 
     /**

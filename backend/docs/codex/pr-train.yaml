@@ -3287,3 +3287,38 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-CMS-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-cms-01-article-editorial-package-draft-gate
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Backend-only Article Editorial Package Import + CMS Draft Gate. Add a
+      structured editorial package schema, dry-run-first draft importer,
+      track-specific validation for evergreen_knowledge and editorial_journal,
+      exact body/metadata/reference checks, claim-boundary linting, cover and
+      answer-surface boundary validation, and focused tests. The importer may
+      create/update CMS draft/working revision data only. Do not publish
+      articles, modify existing published revisions, change fap-web, expose
+      drafts through public Article APIs, touch tests/personality/career
+      runtime, or access attempts/results/reports/orders/payments/shares.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/ArticleImportEditorialPackage.php app/Console/Kernel.php app/Services/Cms/EditorialPackage tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php"
+      - "php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php"
+      - "php artisan route:list --no-ansi"
+      - "php artisan migrate --pretend --no-ansi"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
