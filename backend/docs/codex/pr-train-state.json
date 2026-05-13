@@ -9,9 +9,9 @@
     "PR-CMS-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "ci_fix_pushed_pending_github",
       "branch": "codex/pr-cms-01-article-editorial-package-draft-gate",
-      "commit_sha": "14191dad",
+      "commit_sha": "f3b44c66",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1372",
       "checks": {
         "local": [
@@ -44,9 +44,39 @@
           {
             "command": "git diff --check && git diff --cached --check",
             "status": "passed"
+          },
+          {
+            "command": "python3 /Users/rainie/.codex/skills/gh-fix-ci/scripts/inspect_pr_checks.py --repo . --pr 1372 --json",
+            "status": "failed_checks_found",
+            "note": "verify-mbti-v2/legacy failed on BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier."
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php app/Console/Commands/ArticleImportEditorialPackage.php app/Console/Kernel.php app/Services/Cms/EditorialPackage tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "verify-mbti-v2",
+            "status": "previously_failed_pending_rerun"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "previously_failed_pending_rerun"
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
@@ -73,6 +103,11 @@
           "at": "2026-05-13T00:00:00+08:00",
           "status": "pr_open",
           "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1372 after successful local verification."
+        },
+        {
+          "at": "2026-05-13T00:00:00+08:00",
+          "status": "ci_fix_pushed_pending_github",
+          "summary": "Fixed CI runtime-freeze classifier to ignore Article Editorial Package draft gate files; local targeted checks passed."
         }
       ]
     },
@@ -4754,9 +4789,9 @@
     "PR-CMS-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "ci_fix_pushed_pending_github",
       "branch": "codex/pr-cms-01-article-editorial-package-draft-gate",
-      "commit_sha": "14191dad",
+      "commit_sha": "f3b44c66",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1372",
       "checks": {
         "local": [
@@ -4789,9 +4824,39 @@
           {
             "command": "git diff --check && git diff --cached --check",
             "status": "passed"
+          },
+          {
+            "command": "python3 /Users/rainie/.codex/skills/gh-fix-ci/scripts/inspect_pr_checks.py --repo . --pr 1372 --json",
+            "status": "failed_checks_found",
+            "note": "verify-mbti-v2/legacy failed on BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier."
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php app/Console/Commands/ArticleImportEditorialPackage.php app/Console/Kernel.php app/Services/Cms/EditorialPackage tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "verify-mbti-v2",
+            "status": "previously_failed_pending_rerun"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "previously_failed_pending_rerun"
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
