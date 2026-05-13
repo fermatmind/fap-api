@@ -1,11 +1,116 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-09T00:00:00+08:00",
+  "updated_at": "2026-05-13T00:00:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "PR-CMS-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "ci_fix_pushed_pending_github",
+      "branch": "codex/pr-cms-01-article-editorial-package-draft-gate",
+      "commit_sha": "f3b44c66",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1372",
+      "checks": {
+        "local": [
+          {
+            "command": "git diff --name-only && git ls-files --others --exclude-standard",
+            "status": "passed",
+            "note": "No database/migrations changes in PR-CMS-01 scope."
+          },
+          {
+            "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+            "status": "passed",
+            "note": "Authorized sqlite substitute for local MySQL root/no-password auth failure because this PR has no migration changes."
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/ArticleImportEditorialPackage.php app/Console/Kernel.php app/Services/Cms/EditorialPackage tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          },
+          {
+            "command": "python3 /Users/rainie/.codex/skills/gh-fix-ci/scripts/inspect_pr_checks.py --repo . --pr 1372 --json",
+            "status": "failed_checks_found",
+            "note": "verify-mbti-v2/legacy failed on BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier."
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php app/Console/Commands/ArticleImportEditorialPackage.php app/Console/Kernel.php app/Services/Cms/EditorialPackage tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "verify-mbti-v2",
+            "status": "previously_failed_pending_rerun"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "previously_failed_pending_rerun"
+          }
+        ]
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-13T00:00:00+08:00",
+          "status": "in_progress",
+          "summary": "Initialized PR-CMS-01 after explicit user authorization to add the Article Editorial Package Import + CMS Draft Gate train item."
+        },
+        {
+          "at": "2026-05-13T00:00:00+08:00",
+          "status": "local_checks_failed",
+          "summary": "Implementation and focused tests completed, but required migrate --pretend local check failed because local MySQL root/no-password connection is unavailable."
+        },
+        {
+          "at": "2026-05-13T00:00:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "No migration files changed. User-authorized testing sqlite migrate pretend passed; focused tests, route list, Pint, JSON, and diff checks passed."
+        },
+        {
+          "at": "2026-05-13T00:00:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1372 after successful local verification."
+        },
+        {
+          "at": "2026-05-13T00:00:00+08:00",
+          "status": "ci_fix_pushed_pending_github",
+          "summary": "Fixed CI runtime-freeze classifier to ignore Article Editorial Package draft gate files; local targeted checks passed."
+        }
+      ]
+    },
     "PR-CANDIDATE-SEMANTICS-PREROUTE": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
@@ -4681,6 +4786,84 @@
     }
   },
   "prs": {
+    "PR-CMS-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "ci_fix_pushed_pending_github",
+      "branch": "codex/pr-cms-01-article-editorial-package-draft-gate",
+      "commit_sha": "f3b44c66",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1372",
+      "checks": {
+        "local": [
+          {
+            "command": "git diff --name-only && git ls-files --others --exclude-standard",
+            "status": "passed",
+            "note": "No database/migrations changes in PR-CMS-01 scope."
+          },
+          {
+            "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+            "status": "passed",
+            "note": "Authorized sqlite substitute for local MySQL root/no-password auth failure because this PR has no migration changes."
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/ArticleImportEditorialPackage.php app/Console/Kernel.php app/Services/Cms/EditorialPackage tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          },
+          {
+            "command": "python3 /Users/rainie/.codex/skills/gh-fix-ci/scripts/inspect_pr_checks.py --repo . --pr 1372 --json",
+            "status": "failed_checks_found",
+            "note": "verify-mbti-v2/legacy failed on BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier."
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php app/Console/Commands/ArticleImportEditorialPackage.php app/Console/Kernel.php app/Services/Cms/EditorialPackage tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "verify-mbti-v2",
+            "status": "previously_failed_pending_rerun"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "previously_failed_pending_rerun"
+          }
+        ]
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
     "PR-B87": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
