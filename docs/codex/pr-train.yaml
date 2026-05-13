@@ -2318,3 +2318,40 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-INDEX-STATE-MINIMUM-APPLY-PLAN-2
+    repo: fap-api
+    depends_on:
+      - RUN-1F
+      - REPAIR-INDEX-ENTITY-POLICY-2
+    branch: fix/career-index-state-minimum-remediation-gate
+    title: "fix(api): add guarded career index state remediation command"
+    scope:
+      - Add explicit reviewed slug artifact support for Career index_state remediation.
+      - Add guarded dry-run/apply command with artifact sha and slug count confirmation.
+      - Keep the command scoped to index_states rows for explicit slugs only.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerRemediateCanonicalIndexState.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run production apply.
+      - Run rollout, backfill, rollback, quarantine, 80 readiness, or manifest generation.
+      - Touch fap-web or deploy.
+      - Expand beyond explicit reviewed slug artifacts.
+    validation:
+      - php artisan test --filter=CareerRemediateCanonicalIndexState --no-ansi
+      - php artisan test --filter=CareerIndexStateAuthorityAuditor --no-ansi
+      - php artisan test --filter=Career2786ReadinessPolicyClassifier --no-ansi
+      - php artisan test --filter=CareerCanonical80CandidateSelector --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

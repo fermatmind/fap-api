@@ -91,3 +91,16 @@ Rows requiring production DB writes set `approval_required=true` and emit the ap
 `I explicitly approve production index_state remediation apply for Career 2786 using reviewed plan <PLAN_PATH>.`
 
 This approval gate is informational in this PR. No apply command is added, and no production mutation is performed.
+
+## Minimum Explicit-Slug Apply Gate
+
+`REPAIR-INDEX-STATE-MINIMUM-APPLY-PLAN-2` adds the guarded command
+`career:remediate-canonical-index-state` for reviewed explicit slug artifacts.
+It supports non-mutating dry-run and a future approval-gated apply path. Apply
+requires artifact sha256 confirmation, expected slug count confirmation, a
+batch id, a reason, and the default `--max-slugs=100` safety guard.
+
+The command does not perform rollout, occupation backfill, sitemap/LLMS changes,
+runtime promotion, or publication expansion. See
+`index_state_minimum_remediation.md` for the command contract and future
+approval phrase.
