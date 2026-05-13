@@ -1519,7 +1519,9 @@ prs:
     allowed_paths:
       - backend/app/**/Riasec*Content*
       - backend/tests/**/Riasec*Content*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Add frontend local fallback copy.

@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-13T16:25:00+08:00",
+  "updated_at": "2026-05-13T16:43:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -2773,7 +2773,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-04-module-selector",
       "title": "feat(riasec): add report module selector contract",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "RIASEC-PERSONALIZATION-03"
       ],
@@ -2788,8 +2788,8 @@
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "337da6de12610b90948390ddfb6a3ea67c11130b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1348",
       "checks": {
         "module_selector": {
           "status": "pass",
@@ -2811,16 +2811,16 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-13T08:33:00Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": []
     },
     "RIASEC-PERSONALIZATION-05": {
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-05-content-registry-readiness",
       "title": "feat(riasec): add content registry readiness contract",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "RIASEC-PERSONALIZATION-04"
       ],
@@ -2828,12 +2828,33 @@
       "allowed_paths": [
         "backend/app/**/Riasec*Content*",
         "backend/tests/**/Riasec*Content*",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
         "backend/docs/riasec/**",
+        "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "content_registry_contract": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php",
+          "evidence": "4 tests passed, 27 assertions."
+        },
+        "freeze_classifier": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "evidence": "67 tests passed, 412 assertions."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecContentRegistrySlotContract.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to RIASEC content registry slot contract, its tests, freeze classifier allowance, and docs/codex metadata."
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
