@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-13T15:12:00+08:00",
+  "updated_at": "2026-05-13T15:44:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -2626,7 +2626,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-01-interpretation-contract",
       "title": "feat(riasec): add interpretation rule spec v2 contract",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "RIASEC-PERSONALIZATION-00"
       ],
@@ -2638,8 +2638,8 @@
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "d02bd229959da50af6eaa9090ad9b02076b77e85",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1345",
       "checks": {
         "focused_interpretation_contract": {
           "status": "pass",
@@ -2670,16 +2670,16 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-13T07:35:00Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": []
     },
     "RIASEC-PERSONALIZATION-02": {
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-02-quality-contract",
       "title": "feat(riasec): add quality rule spec v2 contract",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "RIASEC-PERSONALIZATION-01"
       ],
@@ -2687,11 +2687,37 @@
       "allowed_paths": [
         "backend/app/**/Riasec*Quality*",
         "backend/tests/**/Riasec*Quality*",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "focused_quality_contract": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecQualityRuleContractTest.php tests/Unit/Services/Riasec/RiasecInterpretationRuleContractTest.php tests/Unit/Assessment/RiasecScorerTest.php",
+          "evidence": "13 tests passed, 312 assertions."
+        },
+        "riasec_flow": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/RiasecAssessmentFlowTest.php",
+          "evidence": "5 tests passed, 193 assertions."
+        },
+        "freeze_classifier": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "evidence": "65 tests passed, 410 assertions."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecQualityRuleContract.php tests/Unit/Services/Riasec/RiasecQualityRuleContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to RIASEC quality contract, its tests, freeze classifier allowance, and docs/codex metadata."
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
