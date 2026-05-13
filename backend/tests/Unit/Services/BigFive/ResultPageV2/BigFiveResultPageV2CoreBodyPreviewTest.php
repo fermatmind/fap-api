@@ -373,6 +373,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_surface_context_artifact_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Audit/CareerSurfaceContextArtifact.php',
+            'backend/app/Domain/Career/Audit/CareerSurfaceContextArtifactIssue.php',
+            'backend/app/Domain/Career/Audit/CareerSurfaceContextArtifactReader.php',
+            'backend/app/Domain/Career/Audit/CareerSurfaceContextArtifactRow.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_80_cohort_readiness_plan_changes(): void
     {
         $changed = [
@@ -1186,6 +1198,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerSurfaceContextArtifactFile($file)) {
+                continue;
+            }
+
             if ($this->isCareer80CohortReadinessPlanFile($file)) {
                 continue;
             }
@@ -1697,6 +1713,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerSurfaceReadinessIssue.php',
             'backend/app/Domain/Career/Audit/CareerSurfaceReadinessResult.php',
             'backend/app/Domain/Career/Audit/CareerSurfaceReadinessRow.php',
+        ], true);
+    }
+
+    private function isCareerSurfaceContextArtifactFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Audit/CareerSurfaceContextArtifact.php',
+            'backend/app/Domain/Career/Audit/CareerSurfaceContextArtifactIssue.php',
+            'backend/app/Domain/Career/Audit/CareerSurfaceContextArtifactReader.php',
+            'backend/app/Domain/Career/Audit/CareerSurfaceContextArtifactRow.php',
         ], true);
     }
 
