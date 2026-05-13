@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-13T17:32:00+08:00",
+  "updated_at": "2026-05-13T17:37:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -2924,13 +2924,13 @@
       "branch": "codex/pr-rt-04-article-baseline-republish",
       "title": "fix(api): republish article baseline and complete public projection",
       "name": "Article Baseline Republish and Public Projection Convergence",
-      "status": "in_progress",
+      "status": "open",
       "depends_on": [
         "PR-RT-03"
       ],
       "scope_type": "article_baseline_republish_projection_convergence_only",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "deaa13aaec5114ba84486602db2378fd4de8a0a2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1350",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -2982,6 +2982,10 @@
           "status": "pass",
           "command": "pnpm test:contract -- article-publishing-runtime-truth.contract.test.ts homepage-recommended-articles-block.contract.test.ts; pnpm typecheck; NEXT_PUBLIC_API_URL=https://api.fermatmind.com pnpm build; pnpm seo:check-sitemap",
           "evidence": "Contract suite passed across 340 files / 1912 tests, typecheck passed, production build passed, and sitemap indexability check passed for 206 URLs. Generated sitemap artifact was restored; fap-web worktree clean."
+        },
+        "github_pr": {
+          "status": "open",
+          "evidence": "Opened PR #1350 for PR-RT-04 on branch codex/pr-rt-04-article-baseline-republish."
         }
       },
       "failure_reason": null,
