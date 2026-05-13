@@ -3589,7 +3589,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-deep-copy-01-slot-schema",
       "title": "feat(riasec): harden deep copy slot schema contract",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "RIASEC-DEEP-COPY-00"
       ],
@@ -3602,8 +3602,8 @@
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "565ef580525a6feda00bdfba2abb98ae6dfded18",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1356",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -3647,9 +3647,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-13T11:31:25Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": []
     }
   }
