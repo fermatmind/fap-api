@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\Career\Audit\Career2786ReadinessPolicyClassifier;
 use App\Domain\Career\Audit\CareerBaselineMetadataInventoryAuditor;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRow;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRunContext;
@@ -112,6 +113,8 @@ final class CareerAuditCanonicalEligibility extends Command
             rows: $rows,
             sidecars: $sidecars,
         );
+        $policyResult = (new Career2786ReadinessPolicyClassifier)->classify($report);
+        $policySummary = $policyResult->summary();
         $runContext = $this->runContext(
             scope: $scope,
             planRows: $planRows,
@@ -129,6 +132,7 @@ final class CareerAuditCanonicalEligibility extends Command
         $payload = [
             ...$report->toArray(),
             'context_summary' => $contextPayload['context_summary'],
+            'policy_summary' => $policySummary,
             'run_context' => $contextPayload['run_context'],
             'read_only' => true,
             'writes_database' => false,

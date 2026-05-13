@@ -1792,6 +1792,51 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-INDEX-ENTITY-POLICY-2
+    repo: fap-api
+    depends_on:
+      - RUN-1E
+      - CTX-SURFACE-EXPORT-1
+    branch: fix/career-index-entity-policy-readiness-2
+    title: "fix(api): classify career readiness policy blockers"
+    name: "Defer broad surface verification and classify index/entity/policy readiness"
+    scope_type: readiness_policy_classification_only
+    scope:
+      - Add policy classification for broad surface verification, SEO/GEO expected-not-ready states, and entity/index remediation gaps.
+      - Defer all-2786 surface verification until candidate cohort readiness without fabricating surface pass results.
+      - Preserve index/entity gaps as remediation-required and approval-gated planning blockers.
+      - Add policy summary output for audit and 80-candidate reports.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/*
+      - backend/app/Console/Commands/CareerAuditCanonicalEligibility.php
+      - backend/tests/Unit/Domain/Career/Audit/*
+      - backend/tests/Feature/Console/*
+      - backend/tests/Feature/Domain/Career/Audit/*
+      - backend/docs/career/audits/*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run production live crawl.
+      - Query production DB.
+      - Mutate DB or production state.
+      - Apply index_state remediation.
+      - Backfill occupations.
+      - Run 80 readiness.
+      - Generate expansion manifests.
+      - Run rollout.
+      - Touch fap-web.
+      - Deploy.
+    validation:
+      - php artisan test --filter=Career2786ReadinessPolicyClassifier --no-ansi
+      - php artisan test --filter=CareerCanonical80CandidateSelector --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    next_pr: "RUN-1F rerun audit and SCAN-6 policy-aware decision"
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: RIASEC-PERSONALIZATION-00
     repo: fap-api
     branch: codex/riasec-personalization-00-train-registration
