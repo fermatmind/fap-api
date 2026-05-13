@@ -612,6 +612,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_interpretation_rule_contract_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Riasec/RiasecInterpretationRuleContract.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_riasec_projection_v2_minimal_changes(): void
     {
         $changed = [
@@ -1220,6 +1229,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecInterpretationRuleContractFile($file)) {
+                continue;
+            }
+
             if ($this->isRiasecProjectionV2MinimalFile($file)) {
                 continue;
             }
@@ -1382,6 +1395,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
             'backend/app/Services/V0_3/Me/MeAttemptsService.php',
         ], true);
+    }
+
+    private function isRiasecInterpretationRuleContractFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Riasec/RiasecInterpretationRuleContract.php';
     }
 
     private function isRiasecProjectionV2MinimalFile(string $file): bool
