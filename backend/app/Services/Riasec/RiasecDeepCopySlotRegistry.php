@@ -49,6 +49,24 @@ final class RiasecDeepCopySlotRegistry
         'quality_limited',
     ];
 
+    /** @var list<string> */
+    public const ASPIRATIONS_STATES = [
+        'not_provided',
+        'overlap',
+        'tension',
+        'needs_reality_check',
+        'high_risk_boundary',
+        'low_quality_suppressed',
+    ];
+
+    /** @var list<string> */
+    public const DISAGREE_STATES = [
+        'disagrees_quality_normal',
+        'disagrees_quality_caution',
+        'retake_recommended',
+        'save_feedback_only',
+    ];
+
     public function __construct(
         private readonly RiasecContentRegistrySlotContract $contract = new RiasecContentRegistrySlotContract,
     ) {}
@@ -342,6 +360,145 @@ final class RiasecDeepCopySlotRegistry
     }
 
     /**
+     * @return array<string,array<string,mixed>>
+     */
+    public function aspirationsSlots(): array
+    {
+        return [
+            'intro' => $this->aspirationSlot('intro', [
+                'title' => '把你原本想探索的方向放到旁边看',
+                'summary' => '你可以记录职业、专业、课程、项目或工作场景。它们只用于生成验证问题，不进入测评分数。',
+                'aspirations_state' => 'not_provided',
+            ]),
+            'input_boundary' => $this->aspirationSlot('input_boundary', [
+                'title' => '输入边界',
+                'summary' => '愿望是探索材料，不是测评答案。系统只会帮助你看这些方向里有哪些活动与当前兴趣线索重叠，哪些现实部分需要验证。',
+                'aspirations_state' => 'not_provided',
+            ]),
+            'overlap_reading' => $this->aspirationSlot('overlap_reading', [
+                'title' => '有活动重叠',
+                'summary' => '这个方向与你当前兴趣结构有活动重叠。下一步是验证这些活动进入真实任务、环境和角色责任后是否仍然有能量。',
+                'aspirations_state' => 'overlap',
+            ]),
+            'tension_reading' => $this->aspirationSlot('tension_reading', [
+                'title' => '有张力，需要拆开看',
+                'summary' => '这个方向与你当前兴趣结构存在张力。张力不是排除结论，只说明其中的日常任务、环境或角色责任需要先验证。',
+                'aspirations_state' => 'tension',
+            ]),
+            'reality_questions' => $this->aspirationSlot('reality_questions', [
+                'title' => '现实验证问题',
+                'summary' => '先问三个问题：你喜欢的是任务本身还是职业想象；你能接受这个方向的环境约束吗；你愿意承担它的角色责任吗。',
+                'aspirations_state' => 'needs_reality_check',
+            ]),
+            'education_skill_qualification_boundary' => $this->aspirationSlot('education_skill_qualification_boundary', [
+                'title' => '教育、技能、资格和伦理边界',
+                'summary' => '涉及教育要求、专业技能、资格证书、行业法规或伦理责任的方向，必须另行验证训练、作品、证书、监督和现实机会。',
+                'aspirations_state' => 'high_risk_boundary',
+            ]),
+            'next_experiment_prompt' => $this->aspirationSlot('next_experiment_prompt', [
+                'title' => '下一步小实验',
+                'summary' => '选择一个低风险任务，用 15 到 30 分钟验证它让你更有能量还是更消耗。先验证活动，不急着形成职业结论。',
+                'aspirations_state' => 'needs_reality_check',
+            ]),
+            'no_score_mutation_boundary' => $this->aspirationSlot('no_score_mutation_boundary', [
+                'title' => '不改写测评结果',
+                'summary' => '愿望不会覆盖 measured Holland Code，也不会改变 RIASEC 分数、报告快照、分享内容或 PDF 内容。',
+                'aspirations_state' => 'not_provided',
+            ]),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function resolveAspirationsSlot(string $slotName): array
+    {
+        $slotName = trim($slotName);
+        $slot = $this->aspirationsSlots()[$slotName] ?? null;
+
+        if ($slot === null) {
+            return [
+                'slot_key' => 'aspirations_calibration_copy',
+                'slot_name' => $slotName,
+                'content_status' => 'unavailable',
+                'module_state' => 'omitted',
+                'fallback_behavior' => 'omit_module',
+                'frontend_fallback_allowed' => false,
+                'reason' => 'unsupported_aspirations_slot',
+            ];
+        }
+
+        return $slot;
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    public function disagreePathSlots(): array
+    {
+        return [
+            'user_not_wrong_message' => $this->disagreePathSlot('user_not_wrong_message', [
+                'title' => '你可以不认同这个结果',
+                'summary' => '不认同结果本身是有效反馈。它会进入探索路径，帮助你检查作答状态、近似并列和活动验证方向。',
+                'disagree_state' => 'disagrees_quality_normal',
+            ]),
+            'possible_reasons' => $this->disagreePathSlot('possible_reasons', [
+                'title' => '可能原因',
+                'summary' => '结果不像你，可能来自按能力作答、职业名想象、前几个维度接近、profile 较宽，或当时状态不稳定。',
+                'disagree_state' => 'disagrees_quality_normal',
+            ]),
+            'retake_when' => $this->disagreePathSlot('retake_when', [
+                'title' => '什么时候适合重测',
+                'summary' => '如果作答时注意力不稳定、题目想象不清楚，或结果质量需要谨慎阅读，稍后重测比手动修正结果更可靠。',
+                'disagree_state' => 'retake_recommended',
+            ]),
+            'experiment_when' => $this->disagreePathSlot('experiment_when', [
+                'title' => '什么时候适合做实验',
+                'summary' => '如果你只是更认同另一个方向，可以选择一个活动做低风险实验。实验记录只帮助探索下一步，不形成职业结论。',
+                'disagree_state' => 'save_feedback_only',
+            ]),
+            'record_preferred_direction_boundary' => $this->disagreePathSlot('record_preferred_direction_boundary', [
+                'title' => '记录偏好方向的边界',
+                'summary' => '你可以记录更想探索的方向；它只作为偏好线索保存，不覆盖 measured Holland Code，不重算六维分数。',
+                'disagree_state' => 'save_feedback_only',
+            ]),
+            'feedback_no_mutation_boundary' => $this->disagreePathSlot('feedback_no_mutation_boundary', [
+                'title' => '反馈不改分',
+                'summary' => '不认同、收藏、排除和实验反馈都不会修改测评结果、报告快照、默认分享内容或 PDF 内容。',
+                'disagree_state' => 'disagrees_quality_caution',
+            ]),
+            'next_step' => $this->disagreePathSlot('next_step', [
+                'title' => '下一步',
+                'summary' => '先检查作答质量和 near-tie，再选择重测、保存偏好方向，或做一个小实验验证具体活动。',
+                'disagree_state' => 'save_feedback_only',
+            ]),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function resolveDisagreePathSlot(string $slotName): array
+    {
+        $slotName = trim($slotName);
+        $slot = $this->disagreePathSlots()[$slotName] ?? null;
+
+        if ($slot === null) {
+            return [
+                'slot_key' => 'disagree_path_copy',
+                'slot_name' => $slotName,
+                'content_status' => 'unavailable',
+                'module_state' => 'omitted',
+                'fallback_behavior' => 'omit_module',
+                'frontend_fallback_allowed' => false,
+                'reason' => 'unsupported_disagree_path_slot',
+            ];
+        }
+
+        return $slot;
+    }
+
+    /**
      * @return list<string>
      */
     public function validateSlot(array $slot): array
@@ -408,6 +565,28 @@ final class RiasecDeepCopySlotRegistry
             }
             if (! in_array((string) ($slot['structural_difference_state'] ?? ''), self::STRUCTURAL_DIFFERENCE_STATES, true)) {
                 $errors[] = 'unsupported_structural_difference_state';
+            }
+        }
+
+        if (($slot['slot_key'] ?? null) === 'aspirations_calibration_copy') {
+            foreach ($this->aspirationsRequiredFields() as $field) {
+                if (! array_key_exists($field, $slot) || $this->isBlank($slot[$field])) {
+                    $errors[] = 'missing_'.$field;
+                }
+            }
+            if (! in_array((string) ($slot['aspirations_state'] ?? ''), self::ASPIRATIONS_STATES, true)) {
+                $errors[] = 'unsupported_aspirations_state';
+            }
+        }
+
+        if (($slot['slot_key'] ?? null) === 'disagree_path_copy') {
+            foreach ($this->disagreePathRequiredFields() as $field) {
+                if (! array_key_exists($field, $slot) || $this->isBlank($slot[$field])) {
+                    $errors[] = 'missing_'.$field;
+                }
+            }
+            if (! in_array((string) ($slot['disagree_state'] ?? ''), self::DISAGREE_STATES, true)) {
+                $errors[] = 'unsupported_disagree_state';
             }
         }
 
@@ -514,6 +693,52 @@ final class RiasecDeepCopySlotRegistry
             'title',
             'summary',
             'structural_difference_state',
+            'forbidden_claims',
+            'user_visible_boundary',
+            'content_version',
+            'evidence_level',
+            'content_status',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function aspirationsRequiredFields(): array
+    {
+        return [
+            'slot_name',
+            'title',
+            'summary',
+            'aspirations_state',
+            'affects_measured_code',
+            'affects_score',
+            'report_snapshot_mutation_allowed',
+            'share_pdf_payload_expansion_allowed',
+            'raw_feedback_exposure_allowed',
+            'forbidden_claims',
+            'user_visible_boundary',
+            'content_version',
+            'evidence_level',
+            'content_status',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function disagreePathRequiredFields(): array
+    {
+        return [
+            'slot_name',
+            'title',
+            'summary',
+            'disagree_state',
+            'affects_measured_code',
+            'affects_score',
+            'report_snapshot_mutation_allowed',
+            'share_pdf_payload_expansion_allowed',
+            'raw_feedback_exposure_allowed',
             'forbidden_claims',
             'user_visible_boundary',
             'content_version',
@@ -849,6 +1074,74 @@ final class RiasecDeepCopySlotRegistry
             'content_status' => 'authored',
             'frontend_fallback_allowed' => false,
         ], $content);
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return array<string,mixed>
+     */
+    private function aspirationSlot(string $slotName, array $content): array
+    {
+        return array_merge($this->explorationCopyBase('aspirations_calibration_copy', 'aspirations_copy', $slotName, 'riasec_aspirations_calibration_copy_v1'), [
+            'forbidden_claims' => [
+                'aspiration_overrides_measured_result',
+                'career_suitability_claim',
+                'job_fit',
+                'ability_or_skill_inference',
+                'qualification_judgment',
+            ],
+            'user_visible_boundary' => '愿望只校准探索问题，不覆盖 measured Holland Code，不改变 RIASEC 分数，也不形成职业结论。',
+        ], $content);
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return array<string,mixed>
+     */
+    private function disagreePathSlot(string $slotName, array $content): array
+    {
+        return array_merge($this->explorationCopyBase('disagree_path_copy', 'feedback_response_copy', $slotName, 'riasec_feedback_response_copy_v1'), [
+            'forbidden_claims' => [
+                'feedback_overrides_measured_result',
+                'score_correction',
+                'career_recommendation',
+                'job_fit',
+                'raw_feedback_public_exposure',
+            ],
+            'user_visible_boundary' => '不认同结果只影响探索路径，不修改 measured Holland Code、RIASEC 分数、报告快照、分享或 PDF。',
+        ], $content);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function explorationCopyBase(string $slotKey, string $slotGroup, string $slotName, string $contentVersion): array
+    {
+        return [
+            'slot_key' => $slotKey,
+            'slot_group' => $slotGroup,
+            'scale_code' => 'RIASEC',
+            'locale' => 'zh-CN',
+            'content_version' => $contentVersion,
+            'interpretation_rule_version' => 'riasec_interpretation_rule_spec_v2',
+            'applicable_form_codes' => ['riasec_60', 'riasec_140'],
+            'applicable_profile_shapes' => ['clear_code', 'blended_code', 'broad_profile', 'near_tie', 'low_clarity'],
+            'applicable_quality_states' => ['normal', 'caution'],
+            'applicable_codes' => ['any'],
+            'slot_name' => $slotName,
+            'required_boundaries' => $this->requiredBoundaries(),
+            'evidence_level' => 'expert_reviewed',
+            'source_status' => 'reviewed_content_copy',
+            'review_status' => 'approved_for_staging',
+            'fallback_behavior' => 'omit_module',
+            'content_status' => 'authored',
+            'affects_measured_code' => false,
+            'affects_score' => false,
+            'report_snapshot_mutation_allowed' => false,
+            'share_pdf_payload_expansion_allowed' => false,
+            'raw_feedback_exposure_allowed' => false,
+            'frontend_fallback_allowed' => false,
+        ];
     }
 
     /**

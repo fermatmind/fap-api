@@ -156,3 +156,30 @@ The quality content contract supports `normal`, `caution`, `low_quality`, `retak
 - `next_validation_step`
 
 The structural difference state enum is backend-owned: `same_structure`, `different_emphasis`, `layer_tension`, `insufficient_basis`, `cross_form_not_comparable`, `near_tie_shift`, and `quality_limited`. These slots may describe how 60Q and 140Q emphasize different interest signals, but they must not compare raw scores, mark either form as wrong, rank one form above the other, or describe a person as converting from one Holland Code into another. Missing structural difference content returns `content_status=unavailable`, `module_state=omitted`, and `frontend_fallback_allowed=false`.
+
+## Aspirations And Disagree Path Runtime Slots
+
+`RIASEC-DEEP-COPY-07` adds backend-authored slots for aspirations calibration and disagree path responses.
+
+Aspirations slots:
+
+- `intro`
+- `input_boundary`
+- `overlap_reading`
+- `tension_reading`
+- `reality_questions`
+- `education_skill_qualification_boundary`
+- `next_experiment_prompt`
+- `no_score_mutation_boundary`
+
+Disagree path slots:
+
+- `user_not_wrong_message`
+- `possible_reasons`
+- `retake_when`
+- `experiment_when`
+- `record_preferred_direction_boundary`
+- `feedback_no_mutation_boundary`
+- `next_step`
+
+The aspirations state enum is backend-owned: `not_provided`, `overlap`, `tension`, `needs_reality_check`, `high_risk_boundary`, and `low_quality_suppressed`. The disagree state enum is backend-owned: `disagrees_quality_normal`, `disagrees_quality_caution`, `retake_recommended`, and `save_feedback_only`. These slots only shape exploration prompts. They must not alter measured Holland Code, RIASEC scores, report snapshots, share payloads, PDF payloads, or public-safe feedback exposure. Missing aspirations or disagree content returns `content_status=unavailable`, `module_state=omitted`, and `frontend_fallback_allowed=false`.
