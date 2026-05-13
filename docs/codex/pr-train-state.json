@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-13T04:42:09.976Z",
+  "updated_at": "2026-05-13T12:56:06+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -2453,6 +2453,38 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "REPAIR-RUN-CTX-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-2786-audit-run-context",
+      "title": "fix(api): make career audit run context explicit",
+      "name": "Make 2786 audit run context explicit and reproducible",
+      "status": "in_progress",
+      "depends_on": [
+        "CMD-FIX-1"
+      ],
+      "scope_type": "audit_run_context_only",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided REPAIR-RUN-CTX-1 execution goal and authorized updating PR train manifest/state."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "CMD-FIX-1 is merged as PR #1339 and current main contains 22cd24d5564afb277a710c89b02d205b7d034045."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to audit command/context DTOs, audit tests/docs, PR train state, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
     }
   }
 }

@@ -6,6 +6,10 @@ namespace App\Console\Commands;
 
 use App\Domain\Career\Audit\CareerBaselineMetadataInventoryAuditor;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRow;
+use App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRunContext;
+use App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRunContextApprovalGate;
+use App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRunContextRequirement;
+use App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRunContextStatus;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityLayer;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityLayerStatus;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityReport;
@@ -37,6 +41,7 @@ final class CareerAuditCanonicalEligibility extends Command
         {--ledger= : Optional full release ledger JSON artifact}
         {--json : Emit JSON output}
         {--output= : Optional output path for JSON payload}
+        {--context-output= : Optional output path for run context requirements JSON}
         {--include-surfaces : Include surface layer context}
         {--include-live-html : Include optional live HTML surface context}
         {--base-url= : Required only when live HTML verification is requested later}';
@@ -92,8 +97,24 @@ final class CareerAuditCanonicalEligibility extends Command
             rows: $rows,
             sidecars: $sidecars,
         );
+        $runContext = $this->runContext(
+            scope: $scope,
+            planRows: $planRows,
+            slugs: $slugs,
+            locales: $locales,
+            byReason: $byReason
+        );
+        $contextPayload = [
+            'context_summary' => $runContext->summary(),
+            'run_context' => $runContext->toArray(),
+            'read_only' => true,
+            'writes_database' => false,
+            'audit_command' => 'career:audit-canonical-eligibility',
+        ];
         $payload = [
             ...$report->toArray(),
+            'context_summary' => $contextPayload['context_summary'],
+            'run_context' => $contextPayload['run_context'],
             'read_only' => true,
             'writes_database' => false,
             'audit_command' => 'career:audit-canonical-eligibility',
@@ -110,6 +131,18 @@ final class CareerAuditCanonicalEligibility extends Command
             File::put($output, $encoded.PHP_EOL);
         }
 
+        $contextOutput = $this->stringOption('context-output');
+        if ($contextOutput !== null) {
+            $contextEncoded = json_encode($contextPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+            if (! is_string($contextEncoded)) {
+                $this->error('failed to encode career canonical eligibility audit context payload');
+
+                return self::FAILURE;
+            }
+
+            File::put($contextOutput, $contextEncoded.PHP_EOL);
+        }
+
         if ((bool) $this->option('json')) {
             $this->line($encoded);
         } else {
@@ -120,6 +153,327 @@ final class CareerAuditCanonicalEligibility extends Command
         }
 
         return $payload['status'] === CareerCanonicalEligibilityStatus::PASS ? self::SUCCESS : self::FAILURE;
+    }
+
+    /**
+     * @param  list<CareerPublicResolutionPlanRow>  $planRows
+     * @param  list<string>  $slugs
+     * @param  list<string>  $locales
+     * @param  array<string, int>  $byReason
+     */
+    private function runContext(string $scope, array $planRows, array $slugs, array $locales, array $byReason): CareerCanonicalEligibilityAuditRunContext
+    {
+        $planPath = $this->stringOption('public-resolution-plan');
+        $projectionPath = $this->stringOption('projection');
+        $truthPath = $this->stringOption('truth');
+        $ledgerPath = $this->stringOption('ledger');
+        $includeSurfaces = (bool) $this->option('include-surfaces') || (bool) $this->option('include-live-html');
+        $includeLiveHtml = (bool) $this->option('include-live-html');
+        $baseUrl = $this->stringOption('base-url');
+
+        $requirements = [
+            $this->contextRequirement(
+                contextId: 'public_resolution_plan',
+                label: 'Public resolution planner JSON',
+                status: $planPath !== null || $scope === CareerCanonicalEligibilityScope::SLUGS
+                    ? CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED
+                    : CareerCanonicalEligibilityAuditRunContextStatus::MISSING,
+                requiredForMeaningfulRerun: $scope !== CareerCanonicalEligibilityScope::SLUGS,
+                blocks80Readiness: true,
+                requiresApproval: false,
+                approvalGateId: null,
+                suppliedInput: $planPath,
+                requiredInput: '--public-resolution-plan=/path/to/plan.json',
+                reason: $scope === CareerCanonicalEligibilityScope::SLUGS
+                    ? 'Explicit slug scope was supplied; full 2786 rerun still requires the planner artifact.'
+                    : 'The full 2786 audit must start from the authorized public-resolution planner JSON.',
+                evidence: [['scope' => $scope, 'found_rows' => count($planRows)]]
+            ),
+            $this->contextRequirement(
+                contextId: 'entity_db_context',
+                label: 'Occupation entity read-only DB context',
+                status: $this->reasonPresent($byReason, 'entity_db_context_missing')
+                    ? CareerCanonicalEligibilityAuditRunContextStatus::MISSING
+                    : CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED,
+                requiredForMeaningfulRerun: true,
+                blocks80Readiness: true,
+                requiresApproval: $this->reasonPresent($byReason, 'entity_db_context_missing'),
+                approvalGateId: $this->reasonPresent($byReason, 'entity_db_context_missing') ? 'production_readonly_db_context' : null,
+                suppliedInput: $this->reasonPresent($byReason, 'entity_db_context_missing') ? null : 'configured read-only DB connection',
+                requiredInput: 'approved read-only DB context for occupations',
+                reason: 'Entity inventory cannot distinguish missing Occupation rows from unavailable DB context until a read-only DB context is supplied.',
+                evidence: [['row_reason_count' => $byReason['entity_db_context_missing'] ?? 0]]
+            ),
+            $this->contextRequirement(
+                contextId: 'index_state_context',
+                label: 'Index-state read-only DB context',
+                status: $this->reasonPresent($byReason, 'index_state_context_missing')
+                    ? CareerCanonicalEligibilityAuditRunContextStatus::MISSING
+                    : CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED,
+                requiredForMeaningfulRerun: true,
+                blocks80Readiness: true,
+                requiresApproval: $this->reasonPresent($byReason, 'index_state_context_missing'),
+                approvalGateId: $this->reasonPresent($byReason, 'index_state_context_missing') ? 'production_readonly_db_context' : null,
+                suppliedInput: $this->reasonPresent($byReason, 'index_state_context_missing') ? null : 'configured read-only DB connection',
+                requiredInput: 'approved read-only DB context for index_states',
+                reason: 'Index-state authority cannot be proven until the audit can read occupations and index_states.',
+                evidence: [['row_reason_count' => $byReason['index_state_context_missing'] ?? 0]]
+            ),
+            $this->contextRequirement(
+                contextId: 'runtime_projection_context',
+                label: 'Runtime publish projection artifact',
+                status: $projectionPath !== null && is_file($projectionPath)
+                    ? CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED
+                    : CareerCanonicalEligibilityAuditRunContextStatus::MISSING,
+                requiredForMeaningfulRerun: true,
+                blocks80Readiness: true,
+                requiresApproval: $projectionPath === null,
+                approvalGateId: $projectionPath === null ? 'production_runtime_projection_export' : null,
+                suppliedInput: $projectionPath,
+                requiredInput: '--projection=/path/to/runtime_projection.json',
+                reason: 'Runtime projection eligibility must be audited from a read-only projection artifact before readiness planning.',
+                evidence: [['row_reason_count' => $byReason['runtime_projection_context_missing'] ?? 0]]
+            ),
+            $this->contextRequirement(
+                contextId: 'runtime_truth_context',
+                label: 'Canonical runtime truth artifact',
+                status: $truthPath !== null && is_file($truthPath)
+                    ? CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED
+                    : CareerCanonicalEligibilityAuditRunContextStatus::MISSING,
+                requiredForMeaningfulRerun: true,
+                blocks80Readiness: true,
+                requiresApproval: $truthPath === null,
+                approvalGateId: $truthPath === null ? 'production_truth_export' : null,
+                suppliedInput: $truthPath,
+                requiredInput: '--truth=/path/to/runtime_truth.json',
+                reason: 'Canonical runtime truth must be supplied as a read-only artifact before runtime readiness can be interpreted.',
+                evidence: [['row_reason_count' => $byReason['runtime_truth_context_missing'] ?? 0]]
+            ),
+            $this->contextRequirement(
+                contextId: 'surface_context',
+                label: 'Surface readiness artifact mode',
+                status: $includeSurfaces
+                    ? CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED
+                    : CareerCanonicalEligibilityAuditRunContextStatus::MISSING,
+                requiredForMeaningfulRerun: true,
+                blocks80Readiness: true,
+                requiresApproval: false,
+                approvalGateId: null,
+                suppliedInput: $includeSurfaces ? '--include-surfaces' : null,
+                requiredInput: '--include-surfaces',
+                reason: 'Surface readiness is grouped as one context-level requirement; missing surface context is not 5572 independent data defects.',
+                evidence: [['row_reason_count' => $byReason['surface_context_missing'] ?? 0]]
+            ),
+            $this->contextRequirement(
+                contextId: 'live_html_context',
+                label: 'Optional live HTML verification context',
+                status: $includeLiveHtml && $baseUrl !== null
+                    ? CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED
+                    : ($includeLiveHtml ? CareerCanonicalEligibilityAuditRunContextStatus::MISSING : CareerCanonicalEligibilityAuditRunContextStatus::NOT_REQUESTED),
+                requiredForMeaningfulRerun: false,
+                blocks80Readiness: $includeLiveHtml && $baseUrl === null,
+                requiresApproval: $includeLiveHtml && $baseUrl === null,
+                approvalGateId: $includeLiveHtml && $baseUrl === null ? 'live_html_crawl' : null,
+                suppliedInput: $baseUrl,
+                requiredInput: '--base-url=https://example.com',
+                reason: 'Live HTML checks are optional and require an explicit base URL plus approval before production-scale crawling.',
+                evidence: [['include_live_html' => $includeLiveHtml]]
+            ),
+        ];
+
+        $staticSources = $this->staticSourceContext($byReason);
+
+        return new CareerCanonicalEligibilityAuditRunContext(
+            planner: [
+                'status' => $planPath !== null || $scope === CareerCanonicalEligibilityScope::SLUGS
+                    ? CareerCanonicalEligibilityAuditRunContextStatus::SUPPLIED
+                    : CareerCanonicalEligibilityAuditRunContextStatus::MISSING,
+                'public_resolution_plan_path' => $planPath,
+                'expected_rows' => count(array_unique($slugs)),
+                'found_rows' => count($planRows),
+                'source_type' => $planPath !== null ? 'public_resolution_plan_json' : ($scope === CareerCanonicalEligibilityScope::SLUGS ? 'explicit_slugs' : 'missing'),
+            ],
+            entity: [
+                'entity_db_context' => $requirements[1]->status,
+                'local_db_available' => ! $this->reasonPresent($byReason, 'entity_db_context_missing'),
+                'production_readonly_db_needed' => $this->reasonPresent($byReason, 'entity_db_context_missing'),
+            ],
+            index: [
+                'index_state_context' => $requirements[2]->status,
+                'local_db_available' => ! $this->reasonPresent($byReason, 'index_state_context_missing'),
+                'production_readonly_db_needed' => $this->reasonPresent($byReason, 'index_state_context_missing'),
+            ],
+            runtime: [
+                'ledger_path' => $ledgerPath,
+                'projection_path' => $projectionPath,
+                'truth_path' => $truthPath,
+                'runtime_projection_context' => $requirements[3]->status,
+                'runtime_truth_context' => $requirements[4]->status,
+            ],
+            surface: [
+                'include_surfaces' => $includeSurfaces,
+                'include_live_html' => $includeLiveHtml,
+                'base_url' => $baseUrl,
+                'surface_context' => $requirements[5]->status,
+                'live_html_context' => $requirements[6]->status,
+            ],
+            staticSources: $staticSources,
+            requirements: $requirements,
+            approvalGates: $this->approvalGates(),
+            suggestedRerunModes: [
+                'planner_only',
+                'planner_plus_local_db',
+                'planner_plus_runtime_artifacts',
+                'planner_plus_surface_base_url',
+                'full_readonly_context',
+            ],
+        );
+    }
+
+    /**
+     * @param  array<string, int>  $byReason
+     * @return array<string, mixed>
+     */
+    private function staticSourceContext(array $byReason): array
+    {
+        $repoRoot = dirname(base_path());
+        $zhBaseline = $repoRoot.'/content_baselines/career_jobs/career_jobs.zh-CN.json';
+        $enBaseline = $repoRoot.'/content_baselines/career_jobs/career_jobs.en.json';
+
+        return [
+            'baseline_sources' => [
+                'zh_baseline_path' => $zhBaseline,
+                'zh_baseline_exists' => is_file($zhBaseline),
+                'en_baseline_path' => $enBaseline,
+                'en_baseline_exists' => is_file($enBaseline),
+            ],
+            'seo_geo_sources' => [
+                'sitemap_source_available' => ! $this->reasonPresent($byReason, 'sitemap_missing'),
+                'llms_source_available' => ! $this->reasonPresent($byReason, 'llms_missing'),
+                'llms_full_source_available' => ! $this->reasonPresent($byReason, 'llms_full_missing'),
+                'structured_data_source_available' => ! $this->reasonPresent($byReason, 'structured_data_missing'),
+                'citation_metadata_source_available' => ! $this->reasonPresent($byReason, 'citation_metadata_missing'),
+            ],
+            'context_note' => 'Static source gaps are artifact/metadata blockers, not approval to mutate DB or publish.',
+        ];
+    }
+
+    /**
+     * @param  list<mixed>  $evidence
+     */
+    private function contextRequirement(
+        string $contextId,
+        string $label,
+        string $status,
+        bool $requiredForMeaningfulRerun,
+        bool $blocks80Readiness,
+        bool $requiresApproval,
+        ?string $approvalGateId,
+        ?string $suppliedInput,
+        ?string $requiredInput,
+        string $reason,
+        array $evidence,
+    ): CareerCanonicalEligibilityAuditRunContextRequirement {
+        return new CareerCanonicalEligibilityAuditRunContextRequirement(
+            contextId: $contextId,
+            label: $label,
+            status: $status,
+            requiredForMeaningfulRerun: $requiredForMeaningfulRerun,
+            blocks80Readiness: $blocks80Readiness,
+            requiresApproval: $requiresApproval,
+            approvalGateId: $approvalGateId,
+            suppliedInput: $suppliedInput,
+            requiredInput: $requiredInput,
+            reason: $reason,
+            evidence: $evidence,
+        );
+    }
+
+    /**
+     * @return list<CareerCanonicalEligibilityAuditRunContextApprovalGate>
+     */
+    private function approvalGates(): array
+    {
+        return [
+            new CareerCanonicalEligibilityAuditRunContextApprovalGate(
+                gateId: 'production_readonly_db_context',
+                title: 'Approved read-only DB context for Career 2786 audit',
+                required: true,
+                reason: 'Entity and index-state findings cannot be interpreted as production data defects until an approved read-only DB context is supplied.',
+                approvalPhraseTemplate: 'I approve a read-only Career 2786 audit DB query against <environment> using <credential/profile>, with no writes.',
+                allowedAction: 'Read-only audit queries for occupations and index_states.',
+                forbiddenActions: ['insert', 'update', 'delete', 'backfill', 'apply', 'rollback', 'quarantine'],
+                preconditions: ['read-only credentials', 'no mutation command flags', 'output path outside production storage'],
+            ),
+            new CareerCanonicalEligibilityAuditRunContextApprovalGate(
+                gateId: 'production_runtime_projection_export',
+                title: 'Approved read-only runtime projection artifact export',
+                required: true,
+                reason: 'Runtime projection must be supplied as an artifact; export approval must not imply rollout apply.',
+                approvalPhraseTemplate: 'I approve read-only runtime projection export for Career 2786 audit; no apply or publish is approved.',
+                allowedAction: 'Read-only export of runtime projection JSON.',
+                forbiddenActions: ['rollout apply', 'publish', 'backfill', 'production mutation'],
+                preconditions: ['export command inspected', 'artifact output path selected', 'no apply flags'],
+            ),
+            new CareerCanonicalEligibilityAuditRunContextApprovalGate(
+                gateId: 'production_truth_export',
+                title: 'Approved read-only canonical runtime truth artifact export',
+                required: true,
+                reason: 'Canonical runtime truth must be supplied as an artifact before runtime eligibility can be interpreted.',
+                approvalPhraseTemplate: 'I approve read-only canonical runtime truth export for Career 2786 audit; no apply or publish is approved.',
+                allowedAction: 'Read-only export of canonical runtime truth JSON.',
+                forbiddenActions: ['rollout apply', 'publish', 'backfill', 'production mutation'],
+                preconditions: ['export command inspected', 'artifact output path selected', 'no apply flags'],
+            ),
+            new CareerCanonicalEligibilityAuditRunContextApprovalGate(
+                gateId: 'live_html_crawl',
+                title: 'Approved live HTML verification crawl',
+                required: false,
+                reason: 'Live HTML verification can create external traffic and must be explicitly scoped before use.',
+                approvalPhraseTemplate: 'I approve read-only live HTML verification for Career 2786 against <base-url> with rate limit <limit>; no deploy is approved.',
+                allowedAction: 'Read-only live HTML fetches within the approved rate limit.',
+                forbiddenActions: ['deploy', 'frontend mutation', 'rollout apply', 'publication'],
+                preconditions: ['base URL confirmed', 'rate limit defined', 'small-sample verifier passed'],
+            ),
+            new CareerCanonicalEligibilityAuditRunContextApprovalGate(
+                gateId: 'db_backfill_apply',
+                title: 'DB backfill apply approval',
+                required: false,
+                reason: 'Backfills mutate DB state and are outside this command run context PR.',
+                approvalPhraseTemplate: 'I approve Career 2786 DB backfill apply for reviewed artifact <path> in <environment>.',
+                allowedAction: 'Apply the reviewed DB remediation plan only.',
+                forbiddenActions: ['unreviewed slug mutation', 'rollout apply', 'deploy'],
+                preconditions: ['reviewed dry-run artifact', 'explicit slug list', 'rollback plan'],
+            ),
+            new CareerCanonicalEligibilityAuditRunContextApprovalGate(
+                gateId: 'index_state_apply',
+                title: 'Index-state apply approval',
+                required: false,
+                reason: 'Index-state writes can change public eligibility and require a reviewed plan.',
+                approvalPhraseTemplate: 'I approve index_state remediation apply for reviewed slugs <path> in <environment>.',
+                allowedAction: 'Apply reviewed index_state changes only.',
+                forbiddenActions: ['unreviewed index changes', 'rollout apply', 'deploy'],
+                preconditions: ['previous-state snapshot', 'reviewed dry-run artifact', 'explicit slug list'],
+            ),
+            new CareerCanonicalEligibilityAuditRunContextApprovalGate(
+                gateId: 'rollout_apply',
+                title: 'Expansion rollout apply approval',
+                required: false,
+                reason: 'Expansion apply publishes/exposes occupations and must wait for eligibility proof.',
+                approvalPhraseTemplate: 'I approve Career canonical expansion apply for batch <80|300|800|2786> using manifest <path>.',
+                allowedAction: 'Apply only the reviewed expansion manifest.',
+                forbiddenActions: ['unreviewed publication', 'implicit deploy', 'implicit backfill'],
+                preconditions: ['full audit pass or approved sidecars', 'manifest reviewed', 'rollback group slug list reviewed'],
+            ),
+        ];
+    }
+
+    /**
+     * @param  array<string, int>  $byReason
+     */
+    private function reasonPresent(array $byReason, string $reason): bool
+    {
+        return ($byReason[$reason] ?? 0) > 0;
     }
 
     /**

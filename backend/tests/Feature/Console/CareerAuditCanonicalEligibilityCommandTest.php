@@ -35,6 +35,9 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertArrayNotHasKey('validator_context_missing', $payload['by_reason']);
         $this->assertArrayHasKey('runtime_projection_context_missing', $payload['by_reason']);
         $this->assertArrayHasKey('runtime_truth_context_missing', $payload['by_reason']);
+        $this->assertSame('missing', $payload['context_summary']['runtime_projection_context']);
+        $this->assertSame('missing', $payload['context_summary']['runtime_truth_context']);
+        $this->assertSame('provide_read_only_context_bundle', $payload['context_summary']['required_next_action']);
     }
 
     public function test_missing_public_resolution_plan_reports_structured_error(): void
@@ -49,6 +52,8 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertSame('blocked', $payload['status']);
         $this->assertSame(['public_resolution_plan_missing' => 1], $payload['by_reason']);
         $this->assertTrue($payload['read_only']);
+        $this->assertFalse($payload['context_summary']['planner_supplied']);
+        $this->assertContains('public_resolution_plan', array_column($payload['run_context']['next_required_inputs'], 'context_id'));
     }
 
     public function test_include_live_html_without_base_url_reports_unverified_context_issue(): void
@@ -68,6 +73,8 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertContains('validator_context_missing', data_get($payload, 'rows.0.surface_status.reasons'));
         $this->assertSame(1, $payload['by_reason']['validator_context_missing']);
         $this->assertContains('surface_live_html_context_missing', array_column($payload['sidecars'], 'sidecar_id'));
+        $this->assertSame('missing', $payload['context_summary']['live_html_context']);
+        $this->assertContains('live_html_context', array_column($payload['run_context']['unverified_contexts'], 'context_id'));
     }
 
     public function test_valid_public_resolution_plan_runs_layer_specific_audit_reasons(): void
@@ -91,6 +98,9 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertArrayNotHasKey('validator_context_missing', $payload['by_reason']);
         $this->assertArrayHasKey('runtime_projection_context_missing', $payload['by_reason']);
         $this->assertNotSame(['validator_context_missing' => count($payload['rows'])], $payload['by_reason']);
+        $this->assertTrue($payload['context_summary']['planner_supplied']);
+        $this->assertSame('public_resolution_plan_json', $payload['run_context']['planner']['source_type']);
+        $this->assertSame(2, $payload['run_context']['planner']['found_rows']);
     }
 
     public function test_projection_truth_artifacts_drive_runtime_layer_status(): void
@@ -119,6 +129,8 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertSame('pass', data_get($payload, 'rows.0.runtime_status.status'));
         $this->assertArrayNotHasKey('runtime_projection_context_missing', $payload['by_reason']);
         $this->assertArrayNotHasKey('runtime_truth_context_missing', $payload['by_reason']);
+        $this->assertSame('supplied', $payload['context_summary']['runtime_projection_context']);
+        $this->assertSame('supplied', $payload['context_summary']['runtime_truth_context']);
     }
 
     public function test_command_writes_output_json_when_requested(): void
@@ -136,6 +148,127 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertFileExists($outputPath);
         $payload = json_decode((string) file_get_contents($outputPath), true, flags: JSON_THROW_ON_ERROR);
         $this->assertTrue($payload['read_only']);
+        $this->assertFalse($payload['writes_database']);
+    }
+
+    public function test_command_output_includes_run_context_and_context_summary(): void
+    {
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertArrayHasKey('context_summary', $payload);
+        $this->assertArrayHasKey('run_context', $payload);
+        $this->assertSame([
+            'planner_supplied',
+            'entity_db_context',
+            'index_state_context',
+            'runtime_projection_context',
+            'runtime_truth_context',
+            'surface_context',
+            'live_html_context',
+            'required_next_action',
+        ], array_keys($payload['context_summary']));
+        $this->assertSame([
+            'planner',
+            'entity',
+            'index',
+            'runtime',
+            'surface',
+            'static_sources',
+            'missing_contexts',
+            'unverified_contexts',
+            'approval_gates',
+            'next_required_inputs',
+            'suggested_rerun_modes',
+        ], array_keys($payload['run_context']));
+    }
+
+    public function test_missing_contexts_are_aggregated_as_context_requirements(): void
+    {
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries,actors',
+            '--locales' => 'en,zh',
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+        $missingContextIds = array_column($payload['run_context']['missing_contexts'], 'context_id');
+        $runtimeProjection = collect($payload['run_context']['missing_contexts'])->firstWhere('context_id', 'runtime_projection_context');
+        $runtimeTruth = collect($payload['run_context']['missing_contexts'])->firstWhere('context_id', 'runtime_truth_context');
+        $surface = collect($payload['run_context']['missing_contexts'])->firstWhere('context_id', 'surface_context');
+
+        $this->assertContains('runtime_projection_context', $missingContextIds);
+        $this->assertContains('runtime_truth_context', $missingContextIds);
+        $this->assertContains('surface_context', $missingContextIds);
+        $this->assertSame(4, data_get($runtimeProjection, 'evidence.0.row_reason_count'));
+        $this->assertSame(4, data_get($runtimeTruth, 'evidence.0.row_reason_count'));
+        $this->assertSame(4, data_get($surface, 'evidence.0.row_reason_count'));
+        $this->assertSame('provide_read_only_context_bundle', $payload['context_summary']['required_next_action']);
+    }
+
+    public function test_approval_gates_are_emitted_for_read_only_db_and_runtime_artifacts(): void
+    {
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+        $gateIds = array_column($payload['run_context']['approval_gates'], 'gate_id');
+
+        $this->assertContains('production_readonly_db_context', $gateIds);
+        $this->assertContains('production_runtime_projection_export', $gateIds);
+        $this->assertContains('production_truth_export', $gateIds);
+        $this->assertContains('live_html_crawl', $gateIds);
+        $this->assertContains('db_backfill_apply', $gateIds);
+        $this->assertContains('index_state_apply', $gateIds);
+        $this->assertContains('rollout_apply', $gateIds);
+    }
+
+    public function test_context_output_writes_stable_json(): void
+    {
+        $contextPath = sys_get_temp_dir().'/career-audit-command-context-'.bin2hex(random_bytes(4)).'.json';
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--json' => true,
+            '--context-output' => $contextPath,
+        ]);
+        $payload = json_decode((string) file_get_contents($contextPath), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertFileExists($contextPath);
+        $this->assertSame([
+            'context_summary',
+            'run_context',
+            'read_only',
+            'writes_database',
+            'audit_command',
+        ], array_keys($payload));
+        $this->assertTrue($payload['read_only']);
+        $this->assertFalse($payload['writes_database']);
+        $this->assertContains('full_readonly_context', $payload['run_context']['suggested_rerun_modes']);
+    }
+
+    public function test_output_recommends_context_bundle_not_rollout_apply(): void
+    {
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame('provide_read_only_context_bundle', $payload['context_summary']['required_next_action']);
+        $this->assertArrayNotHasKey('rollout_allowed', $payload);
         $this->assertFalse($payload['writes_database']);
     }
 
@@ -175,6 +308,8 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
             'by_reason',
             'rows',
             'sidecars',
+            'context_summary',
+            'run_context',
             'read_only',
             'writes_database',
             'audit_command',
