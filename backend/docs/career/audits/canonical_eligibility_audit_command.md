@@ -14,6 +14,9 @@ The command is an integration shell for the canonical eligibility stack. It does
 - `--slugs=`
 - `--locales=`
 - `--public-resolution-plan=`
+- `--projection=`
+- `--truth=`
+- `--ledger=`
 - `--json`
 - `--output=`
 - `--include-surfaces`
@@ -36,9 +39,30 @@ Every JSON payload includes:
 
 AUDIT-9 does not write DB rows. `--output` may write the JSON artifact to a caller-specified local file.
 
+## Layer Orchestration
+
+CMD-FIX-1 makes the command call the completed audit layer services instead of emitting one generic row for every slug and locale:
+
+- public-resolution planner rows are loaded through `CareerPublicResolutionPlanResolver`
+- entity inventory uses `CareerOccupationEntityInventoryAuditor`
+- baseline/display metadata uses `CareerBaselineMetadataInventoryAuditor`
+- index-state authority uses `CareerIndexStateAuthorityAuditor`
+- runtime projection/truth uses `CareerRuntimeProjectionTruthEligibilityAuditor` when `--projection` and `--truth` are supplied
+- SEO/GEO readiness uses `CareerSeoGeoReadinessAuditor` from plan/backend artifact fields
+- surface readiness uses `CareerSurfaceReadinessAuditor` when `--include-surfaces` or `--include-live-html` is requested
+
 ## Context Handling
 
-The command separates real blockers from missing verifier context. Layers without supplied artifacts are marked `unverified` with `validator_context_missing`. Optional live HTML validation requires `--include-live-html` and `--base-url`; otherwise the surface layer remains unverified instead of passing.
+The command separates real blockers from missing verifier context. Missing required or optional context now uses context-specific reasons and sidecars instead of the previous all-row `validator_context_missing` pattern:
+
+- `entity_db_context_missing`
+- `index_state_context_missing`
+- `runtime_projection_context_missing`
+- `runtime_truth_context_missing`
+- `surface_context_missing`
+- `surface_live_html_context_missing`
+
+Missing runtime projection/truth artifacts mark the runtime layer as `unverified`; they do not fabricate runtime pass/fail results. Optional live HTML validation requires `--include-live-html` and `--base-url`; if live verification context is absent, the surface layer is unverified and the report includes a sidecar. The command remains read-only and does not fetch live HTML by itself.
 
 ## Non-Goals
 

@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-12T19:19:00+08:00",
+  "updated_at": "2026-05-13T12:00:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -2325,6 +2325,34 @@
         "Personality type related articles remain deferred because no stable Personality related article authority was identified for INFJ-A/INFJ-T pages.",
         "Test detail related articles remain deferred because the existing related_test_slug contract is a fixed three-article test page slot and changing it would widen PR-RT-03 scope."
       ],
+      "sidecar_issues": []
+    },
+    "CMD-FIX-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-audit-command-layer-orchestration",
+      "title": "fix(api): wire career eligibility audit command to layer services",
+      "name": "Wire career audit command to audit layer services",
+      "status": "in_progress",
+      "depends_on": [
+        "AUDIT-13"
+      ],
+      "scope_type": "audit_command_orchestration_only",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided CMD-FIX-1 corrective command-integration goal and authorized updating PR train manifest/state."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "AUDIT-13 is merged and current main contains 06b697e7dfb54c99c0f2cf6e5313db9ea46adb6c."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
       "sidecar_issues": []
     }
   }

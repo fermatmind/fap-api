@@ -4,17 +4,26 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\Career\Audit\CareerBaselineMetadataInventoryAuditor;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRow;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityLayer;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityLayerStatus;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityReport;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityScope;
 use App\Domain\Career\Audit\CareerCanonicalEligibilitySeverity;
+use App\Domain\Career\Audit\CareerCanonicalEligibilitySidecar;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityStatus;
+use App\Domain\Career\Audit\CareerIndexStateAuthorityAuditor;
+use App\Domain\Career\Audit\CareerOccupationEntityInventoryAuditor;
+use App\Domain\Career\Audit\CareerPublicResolutionPlan;
 use App\Domain\Career\Audit\CareerPublicResolutionPlanResolver;
+use App\Domain\Career\Audit\CareerPublicResolutionPlanRow;
+use App\Domain\Career\Audit\CareerRuntimeProjectionTruthEligibilityAuditor;
+use App\Domain\Career\Audit\CareerSeoGeoReadinessAuditor;
 use App\Domain\Career\Audit\CareerSurfaceReadinessAuditor;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Throwable;
 
 final class CareerAuditCanonicalEligibility extends Command
 {
@@ -23,6 +32,9 @@ final class CareerAuditCanonicalEligibility extends Command
         {--slugs= : Comma-separated canonical slugs when scope=slugs}
         {--locales= : Comma-separated locales, defaults to en,zh}
         {--public-resolution-plan= : Optional public-resolution planner JSON artifact}
+        {--projection= : Optional runtime publish projection JSON artifact}
+        {--truth= : Optional canonical runtime truth JSON artifact}
+        {--ledger= : Optional full release ledger JSON artifact}
         {--json : Emit JSON output}
         {--output= : Optional output path for JSON payload}
         {--include-surfaces : Include surface layer context}
@@ -35,45 +47,50 @@ final class CareerAuditCanonicalEligibility extends Command
     {
         $scope = $this->scopeOption();
         $locales = $this->csvOption('locales', default: 'en,zh');
-        $slugs = $this->slugsForScope($scope);
+        $planRows = $this->planRowsForScope($scope);
+        $slugs = $this->slugsFromPlanRows($planRows);
         $issues = [];
+        $sidecars = [];
 
         if ($scope !== CareerCanonicalEligibilityScope::SLUGS) {
             $planPath = $this->stringOption('public-resolution-plan');
             if ($planPath === null) {
                 $issues['public_resolution_plan_missing'] = 1;
+                $sidecars[] = $this->contextSidecar(
+                    sidecarId: 'public_resolution_plan_missing',
+                    title: 'Public resolution planner path was not supplied.',
+                    evidence: [['option' => '--public-resolution-plan']]
+                );
             } else {
                 $planResult = CareerPublicResolutionPlanResolver::fromPath($planPath);
                 if ($planResult->issues !== []) {
                     $issues = $planResult->byReason();
                 }
-                $slugs = array_values(array_filter(array_map(
-                    static fn ($row): ?string => $row->canonicalSlug,
-                    $planResult->rows()
-                )));
+                $planRows = $planResult->rows();
+                $slugs = $this->slugsFromPlanRows($planRows);
             }
         }
 
-        $rows = $this->rows($slugs, $locales);
-        if ((bool) $this->option('include-live-html') && $this->stringOption('base-url') === null) {
-            $rows = $this->rowsWithLiveHtmlContext($slugs, $locales, $rows);
-        }
+        $auditContext = $this->auditContext($scope, $planRows, $slugs, $locales);
+        $rows = $auditContext['rows'];
+        $sidecars = [...$sidecars, ...$auditContext['sidecars']];
 
         $byReason = $this->mergeReasons($issues, CareerCanonicalEligibilityReport::byReasonFromRows($rows));
         $blockedCount = count(array_filter(
             $rows,
             static fn (CareerCanonicalEligibilityAuditRow $row): bool => $row->overallStatus !== CareerCanonicalEligibilityStatus::PASS
         ));
+        $eligibleCount = $this->eligibleSlugCount($rows);
         $report = new CareerCanonicalEligibilityReport(
             status: $byReason === [] && $blockedCount === 0 ? CareerCanonicalEligibilityStatus::PASS : CareerCanonicalEligibilityStatus::BLOCKED,
             scope: $scope,
             expectedOccupations: count(array_unique($slugs)),
             auditedOccupations: count(array_unique($slugs)),
-            eligibleCount: max(0, count(array_unique($slugs)) - $blockedCount),
+            eligibleCount: $eligibleCount,
             blockedCount: $blockedCount,
             byReason: $byReason,
             rows: $rows,
-            sidecars: [],
+            sidecars: $sidecars,
         );
         $payload = [
             ...$report->toArray(),
@@ -106,107 +123,587 @@ final class CareerAuditCanonicalEligibility extends Command
     }
 
     /**
+     * @param  list<CareerPublicResolutionPlanRow>  $planRows
      * @param  list<string>  $slugs
      * @param  list<string>  $locales
-     * @return list<CareerCanonicalEligibilityAuditRow>
+     * @return array{rows: list<CareerCanonicalEligibilityAuditRow>, sidecars: list<CareerCanonicalEligibilitySidecar>}
      */
-    private function rows(array $slugs, array $locales): array
+    private function auditContext(string $scope, array $planRows, array $slugs, array $locales): array
     {
+        $sidecars = [];
+        $plan = $this->planFromRows($planRows);
+
+        $entityResult = (new CareerOccupationEntityInventoryAuditor)->auditSlugs($slugs, $scope);
+        $baselineResult = (new CareerBaselineMetadataInventoryAuditor)->auditRows($planRows);
+        $entityByReason = $entityResult->byReason();
+        $entityContextMissing = array_key_exists('occupation_query_failed', $entityByReason);
+        if ($entityContextMissing) {
+            $sidecars[] = $this->contextSidecar(
+                sidecarId: 'entity_db_context_missing',
+                title: 'Occupation entity inventory DB context could not be queried.',
+                scopeRelation: CareerCanonicalEligibilitySidecar::SCOPE_RELATION_INSIDE,
+                mayContinueTrain: false,
+                evidence: [['reason' => 'occupation_query_failed']]
+            );
+        }
+
+        try {
+            $indexResult = (new CareerIndexStateAuthorityAuditor)->auditSlugs($slugs);
+            $indexStatuses = $this->statusMapBySlug($indexResult->rows, 'canonicalSlug', 'indexStatus');
+        } catch (Throwable $exception) {
+            $indexResult = null;
+            $indexStatuses = [];
+            $sidecars[] = $this->contextSidecar(
+                sidecarId: 'index_state_context_missing',
+                title: 'Index-state authority context could not be queried.',
+                scopeRelation: CareerCanonicalEligibilitySidecar::SCOPE_RELATION_INSIDE,
+                mayContinueTrain: false,
+                evidence: [$this->exceptionEvidence($exception)]
+            );
+        }
+
+        [$runtimeStatuses, $runtimeSidecars] = $this->runtimeStatuses($plan, $planRows, $slugs, $locales);
+        [$surfaceStatuses, $surfaceSidecars] = $this->surfaceStatuses($planRows, $slugs, $locales);
+        $seoGeoResult = (new CareerSeoGeoReadinessAuditor)->audit($planRows, $locales, $this->seoGeoArtifact($planRows, $locales));
+
+        $sidecars = [
+            ...$sidecars,
+            ...($entityContextMissing ? [] : $entityResult->sidecars),
+            ...$baselineResult->sidecars,
+            ...($indexResult?->sidecars ?? []),
+            ...$runtimeSidecars,
+            ...$seoGeoResult->sidecars,
+            ...$surfaceSidecars,
+        ];
+
+        $entityStatuses = $entityContextMissing
+            ? $this->statusMapForSlugs($slugs, CareerCanonicalEligibilityLayer::ENTITY, ['entity_db_context_missing'], [['reason' => 'occupation_query_failed']], 'occupations')
+            : $this->statusMapBySlug($entityResult->rows, 'canonicalSlug', 'entityStatus');
+        $baselineStatuses = $this->statusMapBySlug($baselineResult->rows, 'canonicalSlug', 'baselineStatus');
+        $seoGeoStatuses = $this->statusMapByKey($seoGeoResult->rows, 'canonicalSlug', 'locale', 'seoGeoStatus');
+
         $rows = [];
         foreach (array_values(array_unique($slugs)) as $slug) {
             foreach ($locales as $locale) {
-                $rows[] = $this->unverifiedRow($slug, $locale);
+                $runtimeStatus = $runtimeStatuses[$this->rowKey($slug, $locale)] ?? $this->unverifiedLayer(
+                    CareerCanonicalEligibilityLayer::RUNTIME,
+                    ['runtime_projection_context_missing', 'runtime_truth_context_missing'],
+                    [['projection' => $this->stringOption('projection'), 'truth' => $this->stringOption('truth')]],
+                    'runtime_projection_truth'
+                );
+                $surfaceStatus = $surfaceStatuses[$this->rowKey($slug, $locale)] ?? $this->unverifiedLayer(
+                    CareerCanonicalEligibilityLayer::SURFACE,
+                    ['surface_context_missing'],
+                    [['include_surfaces' => (bool) $this->option('include-surfaces')]],
+                    'surface_artifacts'
+                );
+                $rows[] = $this->auditRow(
+                    scope: $scope,
+                    slug: $slug,
+                    locale: $locale,
+                    entityStatus: $entityStatuses[$slug] ?? $this->unverifiedLayer(CareerCanonicalEligibilityLayer::ENTITY, ['entity_db_context_missing'], [['slug' => $slug]], 'occupations'),
+                    baselineStatus: $baselineStatuses[$slug] ?? $this->unverifiedLayer(CareerCanonicalEligibilityLayer::BASELINE, ['baseline_context_missing'], [['slug' => $slug]], 'career_baselines'),
+                    indexStatus: $indexStatuses[$slug] ?? $this->unverifiedLayer(CareerCanonicalEligibilityLayer::INDEX, ['index_state_context_missing'], [['slug' => $slug]], 'index_states'),
+                    runtimeStatus: $runtimeStatus,
+                    seoGeoStatus: $seoGeoStatuses[$this->rowKey($slug, $locale)] ?? $this->unverifiedLayer(CareerCanonicalEligibilityLayer::SEO_GEO, ['seo_geo_context_missing'], [['slug' => $slug, 'locale' => $locale]], 'seo_geo_artifacts'),
+                    surfaceStatus: $surfaceStatus
+                );
             }
         }
 
-        return $rows;
+        return ['rows' => $rows, 'sidecars' => $sidecars];
     }
 
     /**
-     * @param  list<string>  $slugs
-     * @param  list<string>  $locales
-     * @param  list<CareerCanonicalEligibilityAuditRow>  $existingRows
-     * @return list<CareerCanonicalEligibilityAuditRow>
+     * @param  list<CareerPublicResolutionPlanRow>  $planRows
      */
-    private function rowsWithLiveHtmlContext(array $slugs, array $locales, array $existingRows): array
+    private function planFromRows(array $planRows): CareerPublicResolutionPlan
     {
-        $surfaceResult = (new CareerSurfaceReadinessAuditor)->audit(
-            planRows: $slugs,
-            locales: $locales,
-            apiArtifact: $this->surfaceApiArtifact($slugs, $locales),
-            includeLiveHtml: true,
-            baseUrl: $this->stringOption('base-url'),
-            liveHtmlByKey: [],
+        return new CareerPublicResolutionPlan(
+            sourcePath: $this->stringOption('public-resolution-plan') ?? 'command_slugs',
+            checksum: null,
+            rows: $planRows,
         );
-        $surfaceByKey = [];
-        foreach ($surfaceResult->rows as $row) {
-            $surfaceByKey[$row->canonicalSlug.'|'.$row->locale] = $row->surfaceStatus;
-        }
-
-        return array_map(function (CareerCanonicalEligibilityAuditRow $row) use ($surfaceByKey): CareerCanonicalEligibilityAuditRow {
-            $surfaceStatus = $surfaceByKey[$row->slug.'|'.$row->locale] ?? $row->surfaceStatus;
-            $reasons = array_values(array_unique([...$row->reasons, ...$surfaceStatus->reasons]));
-
-            return new CareerCanonicalEligibilityAuditRow(
-                slug: $row->slug,
-                locale: $row->locale,
-                sourceScope: $row->sourceScope,
-                entityStatus: $row->entityStatus,
-                baselineStatus: $row->baselineStatus,
-                indexStatus: $row->indexStatus,
-                runtimeStatus: $row->runtimeStatus,
-                seoGeoStatus: $row->seoGeoStatus,
-                surfaceStatus: $surfaceStatus,
-                safetyStatus: $row->safetyStatus,
-                overallStatus: CareerCanonicalEligibilityStatus::BLOCKED,
-                severity: CareerCanonicalEligibilitySeverity::MEDIUM,
-                reasons: $reasons,
-                evidence: $row->evidence,
-                sidecars: [],
-            );
-        }, $existingRows);
     }
 
-    private function unverifiedRow(string $slug, string $locale): CareerCanonicalEligibilityAuditRow
+    /**
+     * @param  list<CareerPublicResolutionPlanRow>  $planRows
+     * @param  list<string>  $slugs
+     * @param  list<string>  $locales
+     * @return array{0: array<string, CareerCanonicalEligibilityLayerStatus>, 1: list<CareerCanonicalEligibilitySidecar>}
+     */
+    private function runtimeStatuses(CareerPublicResolutionPlan $plan, array $planRows, array $slugs, array $locales): array
     {
-        $unverified = static fn (string $layer): CareerCanonicalEligibilityLayerStatus => new CareerCanonicalEligibilityLayerStatus(
-            layer: $layer,
-            status: CareerCanonicalEligibilityStatus::UNVERIFIED,
-            reasons: ['validator_context_missing'],
-            evidence: [['command_context' => 'integration_only']],
-            source: 'career_audit_command',
+        $projectionPath = $this->stringOption('projection');
+        $truthPath = $this->stringOption('truth');
+        $ledgerPath = $this->stringOption('ledger');
+        $sidecars = [];
+
+        if ($projectionPath === null || $truthPath === null) {
+            $reasons = [];
+            $evidence = [];
+            if ($projectionPath === null) {
+                $reasons[] = 'runtime_projection_context_missing';
+                $evidence[] = ['missing_option' => '--projection'];
+                $sidecars[] = $this->contextSidecar(
+                    sidecarId: 'runtime_projection_context_missing',
+                    title: 'Runtime projection artifact was not supplied.',
+                    evidence: [['missing_option' => '--projection']]
+                );
+            }
+            if ($truthPath === null) {
+                $reasons[] = 'runtime_truth_context_missing';
+                $evidence[] = ['missing_option' => '--truth'];
+                $sidecars[] = $this->contextSidecar(
+                    sidecarId: 'runtime_truth_context_missing',
+                    title: 'Runtime truth artifact was not supplied.',
+                    evidence: [['missing_option' => '--truth']]
+                );
+            }
+
+            return [$this->statusMapForSlugLocales($slugs, $locales, CareerCanonicalEligibilityLayer::RUNTIME, $reasons, $evidence, 'runtime_projection_truth'), $sidecars];
+        }
+
+        [$projection, $projectionSidecar] = $this->jsonArtifact($projectionPath, 'runtime_projection_context_missing', '--projection');
+        [$truth, $truthSidecar] = $this->jsonArtifact($truthPath, 'runtime_truth_context_missing', '--truth');
+        $sidecars = array_values(array_filter([$projectionSidecar, $truthSidecar]));
+        $ledger = null;
+        if ($ledgerPath !== null) {
+            [$ledger, $ledgerSidecar] = $this->jsonArtifact($ledgerPath, 'runtime_ledger_context_missing', '--ledger');
+            if ($ledgerSidecar !== null) {
+                $sidecars[] = $ledgerSidecar;
+            }
+        }
+
+        if ($projection === null || $truth === null) {
+            return [$this->statusMapForSlugLocales($slugs, $locales, CareerCanonicalEligibilityLayer::RUNTIME, ['runtime_artifact_invalid'], [['projection' => $projectionPath, 'truth' => $truthPath]], 'runtime_projection_truth'), $sidecars];
+        }
+
+        $runtimeResult = (new CareerRuntimeProjectionTruthEligibilityAuditor)->auditPlan($plan, $locales, $projection, $truth, $ledger);
+
+        return [$this->statusMapByKey($runtimeResult->rows, 'canonicalSlug', 'locale', 'runtimeStatus'), [...$sidecars, ...$runtimeResult->sidecars]];
+    }
+
+    /**
+     * @param  list<CareerPublicResolutionPlanRow>  $planRows
+     * @param  list<string>  $slugs
+     * @param  list<string>  $locales
+     * @return array{0: array<string, CareerCanonicalEligibilityLayerStatus>, 1: list<CareerCanonicalEligibilitySidecar>}
+     */
+    private function surfaceStatuses(array $planRows, array $slugs, array $locales): array
+    {
+        $includeSurfaces = (bool) $this->option('include-surfaces') || (bool) $this->option('include-live-html');
+        if (! $includeSurfaces) {
+            return [
+                $this->statusMapForSlugLocales($slugs, $locales, CareerCanonicalEligibilityLayer::SURFACE, ['surface_context_missing'], [['include_surfaces' => false]], 'surface_artifacts'),
+                [
+                    $this->contextSidecar(
+                        sidecarId: 'surface_context_missing',
+                        title: 'Surface artifact mode was not requested.',
+                        evidence: [['option' => '--include-surfaces']]
+                    ),
+                ],
+            ];
+        }
+
+        $includeLiveHtml = (bool) $this->option('include-live-html');
+        $baseUrl = $this->stringOption('base-url');
+        $sidecars = [];
+        if ($includeLiveHtml && $baseUrl === null) {
+            $sidecars[] = $this->contextSidecar(
+                sidecarId: 'surface_live_html_context_missing',
+                title: 'Live HTML validation was requested without a base URL.',
+                evidence: [['missing_option' => '--base-url']]
+            );
+        }
+
+        $surfaceResult = (new CareerSurfaceReadinessAuditor)->audit(
+            planRows: $planRows,
+            locales: $locales,
+            apiArtifact: $this->surfaceApiArtifact($slugs, $locales),
+            includeLiveHtml: $includeLiveHtml,
+            baseUrl: $baseUrl,
+            liveHtmlByKey: [],
         );
-        $safety = new CareerCanonicalEligibilityLayerStatus(
+
+        return [$this->statusMapByKey($surfaceResult->rows, 'canonicalSlug', 'locale', 'surfaceStatus'), [...$sidecars, ...$surfaceResult->sidecars]];
+    }
+
+    private function auditRow(
+        string $scope,
+        string $slug,
+        string $locale,
+        CareerCanonicalEligibilityLayerStatus $entityStatus,
+        CareerCanonicalEligibilityLayerStatus $baselineStatus,
+        CareerCanonicalEligibilityLayerStatus $indexStatus,
+        CareerCanonicalEligibilityLayerStatus $runtimeStatus,
+        CareerCanonicalEligibilityLayerStatus $seoGeoStatus,
+        CareerCanonicalEligibilityLayerStatus $surfaceStatus,
+    ): CareerCanonicalEligibilityAuditRow {
+        $safetyStatus = new CareerCanonicalEligibilityLayerStatus(
             layer: CareerCanonicalEligibilityLayer::SAFETY,
             status: CareerCanonicalEligibilityStatus::PASS,
             reasons: [],
             evidence: [['read_only' => true, 'writes_database' => false]],
             source: 'career_audit_command',
         );
+        $layers = [$entityStatus, $baselineStatus, $indexStatus, $runtimeStatus, $seoGeoStatus, $surfaceStatus, $safetyStatus];
+        $reasons = [];
+        $evidence = [['slug' => $slug, 'locale' => $locale]];
+        foreach ($layers as $layer) {
+            $reasons = [...$reasons, ...$layer->reasons];
+            if ($layer->evidence !== []) {
+                $evidence[] = [$layer->layer => $layer->evidence];
+            }
+        }
+        $reasons = array_values(array_unique($reasons));
+        $overallStatus = $this->overallStatus($layers);
 
         return new CareerCanonicalEligibilityAuditRow(
             slug: $slug,
             locale: $locale,
-            sourceScope: CareerCanonicalEligibilityScope::SLUGS,
-            entityStatus: $unverified(CareerCanonicalEligibilityLayer::ENTITY),
-            baselineStatus: $unverified(CareerCanonicalEligibilityLayer::BASELINE),
-            indexStatus: $unverified(CareerCanonicalEligibilityLayer::INDEX),
-            runtimeStatus: $unverified(CareerCanonicalEligibilityLayer::RUNTIME),
-            seoGeoStatus: $unverified(CareerCanonicalEligibilityLayer::SEO_GEO),
-            surfaceStatus: $unverified(CareerCanonicalEligibilityLayer::SURFACE),
-            safetyStatus: $safety,
-            overallStatus: CareerCanonicalEligibilityStatus::BLOCKED,
-            severity: CareerCanonicalEligibilitySeverity::MEDIUM,
-            reasons: ['validator_context_missing'],
-            evidence: [['command_context' => 'integration_only']],
+            sourceScope: $scope,
+            entityStatus: $entityStatus,
+            baselineStatus: $baselineStatus,
+            indexStatus: $indexStatus,
+            runtimeStatus: $runtimeStatus,
+            seoGeoStatus: $seoGeoStatus,
+            surfaceStatus: $surfaceStatus,
+            safetyStatus: $safetyStatus,
+            overallStatus: $overallStatus,
+            severity: $overallStatus === CareerCanonicalEligibilityStatus::PASS
+                ? CareerCanonicalEligibilitySeverity::INFO
+                : CareerCanonicalEligibilitySeverity::HIGH,
+            reasons: $reasons,
+            evidence: $evidence,
             sidecars: [],
+        );
+    }
+
+    /**
+     * @param  list<CareerCanonicalEligibilityLayerStatus>  $layers
+     */
+    private function overallStatus(array $layers): string
+    {
+        foreach ($layers as $layer) {
+            if ($layer->status === CareerCanonicalEligibilityStatus::BLOCKED || $layer->status === CareerCanonicalEligibilityStatus::FAIL) {
+                return CareerCanonicalEligibilityStatus::BLOCKED;
+            }
+        }
+
+        foreach ($layers as $layer) {
+            if ($layer->status === CareerCanonicalEligibilityStatus::UNVERIFIED) {
+                return CareerCanonicalEligibilityStatus::BLOCKED;
+            }
+        }
+
+        foreach ($layers as $layer) {
+            if ($layer->status === CareerCanonicalEligibilityStatus::WARNING) {
+                return CareerCanonicalEligibilityStatus::WARNING;
+            }
+        }
+
+        return CareerCanonicalEligibilityStatus::PASS;
+    }
+
+    /**
+     * @param  list<CareerCanonicalEligibilityAuditRow>  $rows
+     */
+    private function eligibleSlugCount(array $rows): int
+    {
+        $bySlug = [];
+        foreach ($rows as $row) {
+            $bySlug[$row->slug] ??= true;
+            $bySlug[$row->slug] = $bySlug[$row->slug] && $row->overallStatus === CareerCanonicalEligibilityStatus::PASS;
+        }
+
+        return count(array_filter($bySlug));
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @param  list<string>  $reasons
+     * @param  list<mixed>  $evidence
+     * @return array<string, CareerCanonicalEligibilityLayerStatus>
+     */
+    private function statusMapForSlugs(array $slugs, string $layer, array $reasons, array $evidence, string $source): array
+    {
+        $statuses = [];
+        foreach ($slugs as $slug) {
+            $statuses[$slug] = $this->unverifiedLayer($layer, $reasons, $evidence, $source);
+        }
+
+        return $statuses;
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @param  list<string>  $locales
+     * @param  list<string>  $reasons
+     * @param  list<mixed>  $evidence
+     * @return array<string, CareerCanonicalEligibilityLayerStatus>
+     */
+    private function statusMapForSlugLocales(array $slugs, array $locales, string $layer, array $reasons, array $evidence, string $source): array
+    {
+        $statuses = [];
+        foreach ($slugs as $slug) {
+            foreach ($locales as $locale) {
+                $statuses[$this->rowKey($slug, $locale)] = $this->unverifiedLayer($layer, $reasons, $evidence, $source);
+            }
+        }
+
+        return $statuses;
+    }
+
+    /**
+     * @param  list<object>  $rows
+     * @return array<string, CareerCanonicalEligibilityLayerStatus>
+     */
+    private function statusMapBySlug(array $rows, string $slugProperty, string $statusProperty): array
+    {
+        $map = [];
+        foreach ($rows as $row) {
+            if (property_exists($row, $slugProperty) && property_exists($row, $statusProperty)) {
+                $map[$row->{$slugProperty}] = $row->{$statusProperty};
+            }
+        }
+
+        return $map;
+    }
+
+    /**
+     * @param  list<object>  $rows
+     * @return array<string, CareerCanonicalEligibilityLayerStatus>
+     */
+    private function statusMapByKey(array $rows, string $slugProperty, string $localeProperty, string $statusProperty): array
+    {
+        $map = [];
+        foreach ($rows as $row) {
+            if (property_exists($row, $slugProperty) && property_exists($row, $localeProperty) && property_exists($row, $statusProperty)) {
+                $map[$this->rowKey($row->{$slugProperty}, $row->{$localeProperty})] = $row->{$statusProperty};
+            }
+        }
+
+        return $map;
+    }
+
+    /**
+     * @param  list<string>  $reasons
+     * @param  list<mixed>  $evidence
+     */
+    private function unverifiedLayer(string $layer, array $reasons, array $evidence, string $source): CareerCanonicalEligibilityLayerStatus
+    {
+        return new CareerCanonicalEligibilityLayerStatus(
+            layer: $layer,
+            status: CareerCanonicalEligibilityStatus::UNVERIFIED,
+            reasons: array_values(array_unique($reasons)),
+            evidence: $evidence,
+            source: $source,
+        );
+    }
+
+    /**
+     * @param  list<CareerPublicResolutionPlanRow>  $planRows
+     * @param  list<string>  $locales
+     * @return array{items: list<array<string, mixed>>}
+     */
+    private function seoGeoArtifact(array $planRows, array $locales): array
+    {
+        $items = [];
+        foreach ($planRows as $row) {
+            if ($row->canonicalSlug === null) {
+                continue;
+            }
+            foreach ($locales as $locale) {
+                $items[] = [
+                    'slug' => $row->canonicalSlug,
+                    'locale' => $locale,
+                    'canonical_path' => '/'.$locale.'/career/jobs/'.$row->canonicalSlug,
+                    'robots_indexable' => true,
+                    'sitemap_eligible' => $this->boolField($row->raw, ['ready_for_sitemap', 'Ready_For_Sitemap']),
+                    'llms_eligible' => $this->boolField($row->raw, ['ready_for_llms', 'Ready_For_LLMS']),
+                    'llms_full_eligible' => $this->boolField($row->raw, ['ready_for_llms_full', 'Ready_For_LLMS_Full']),
+                    'structured_data_ready' => $this->hasStructuredData($row, $locale),
+                    'dataset_eligible' => true,
+                    'search_eligible' => true,
+                    'citation_metadata_ready' => $this->hasSeoMetadata($row, $locale),
+                ];
+            }
+        }
+
+        return ['items' => $items];
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @param  list<string>  $keys
+     */
+    private function boolField(array $row, array $keys): ?bool
+    {
+        foreach ($keys as $key) {
+            if (! array_key_exists($key, $row)) {
+                continue;
+            }
+
+            $value = $row[$key];
+            if (is_bool($value)) {
+                return $value;
+            }
+            if (is_int($value)) {
+                return $value === 1;
+            }
+            if (is_string($value)) {
+                $normalized = strtolower(trim($value));
+                if (in_array($normalized, ['1', 'true', 'yes', 'ready', 'eligible', 'live'], true)) {
+                    return true;
+                }
+                if (in_array($normalized, ['0', 'false', 'no', 'missing', 'not_ready'], true)) {
+                    return false;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private function hasStructuredData(CareerPublicResolutionPlanRow $row, string $locale): bool
+    {
+        $key = $locale === 'zh' ? 'CN_Occupation_Schema_JSON' : 'EN_Occupation_Schema_JSON';
+
+        return $this->nonEmptyString($row->raw[$key] ?? null);
+    }
+
+    private function hasSeoMetadata(CareerPublicResolutionPlanRow $row, string $locale): bool
+    {
+        if ($locale === 'zh') {
+            return $this->nonEmptyString($row->raw['CN_SEO_Title'] ?? null)
+                && $this->nonEmptyString($row->raw['CN_SEO_Description'] ?? null);
+        }
+
+        return $this->nonEmptyString($row->raw['EN_SEO_Title'] ?? null)
+            && $this->nonEmptyString($row->raw['EN_SEO_Description'] ?? null);
+    }
+
+    private function nonEmptyString(mixed $value): bool
+    {
+        return is_scalar($value) && trim((string) $value) !== '';
+    }
+
+    /**
+     * @return array{exception: class-string<Throwable>, message: string}
+     */
+    private function exceptionEvidence(Throwable $exception): array
+    {
+        $message = $exception->getMessage();
+        if (strlen($message) > 500) {
+            $message = substr($message, 0, 500).'...';
+        }
+
+        return [
+            'exception' => $exception::class,
+            'message' => $message,
+        ];
+    }
+
+    /**
+     * @return array{0: array<string, mixed>|list<mixed>|null, 1: CareerCanonicalEligibilitySidecar|null}
+     */
+    private function jsonArtifact(string $path, string $sidecarId, string $option): array
+    {
+        if (! is_file($path)) {
+            return [
+                null,
+                $this->contextSidecar(
+                    sidecarId: $sidecarId,
+                    title: 'Audit artifact path was not found.',
+                    evidence: [['option' => $option, 'path' => $path]]
+                ),
+            ];
+        }
+
+        $payload = json_decode((string) file_get_contents($path), true);
+        if (! is_array($payload)) {
+            return [
+                null,
+                $this->contextSidecar(
+                    sidecarId: $sidecarId,
+                    title: 'Audit artifact JSON could not be parsed.',
+                    evidence: [['option' => $option, 'path' => $path, 'json_error' => json_last_error_msg()]]
+                ),
+            ];
+        }
+
+        return [$payload, null];
+    }
+
+    private function contextSidecar(
+        string $sidecarId,
+        string $title,
+        array $evidence,
+        string $scopeRelation = CareerCanonicalEligibilitySidecar::SCOPE_RELATION_EXTERNAL,
+        bool $mayContinueTrain = true,
+    ): CareerCanonicalEligibilitySidecar {
+        return new CareerCanonicalEligibilitySidecar(
+            sidecarId: $sidecarId,
+            title: $title,
+            ownerRepo: CareerCanonicalEligibilitySidecar::OWNER_REPO_FAP_API,
+            scopeRelation: $scopeRelation,
+            introducedByCurrentPr: false,
+            affectedSlugs: [],
+            affectedLocales: [],
+            evidence: $evidence,
+            severity: CareerCanonicalEligibilitySeverity::HIGH,
+            nextGoal: 'RUN-1 rerun real 2786 canonical eligibility audit',
+            mayContinueTrain: $mayContinueTrain,
+        );
+    }
+
+    /**
+     * @param  list<CareerPublicResolutionPlanRow>  $planRows
+     * @return list<string>
+     */
+    private function slugsFromPlanRows(array $planRows): array
+    {
+        return array_values(array_unique(array_filter(array_map(
+            static fn (CareerPublicResolutionPlanRow $row): ?string => $row->canonicalSlug,
+            $planRows
+        ))));
+    }
+
+    /**
+     * @return list<CareerPublicResolutionPlanRow>
+     */
+    private function planRowsForScope(string $scope): array
+    {
+        if ($scope !== CareerCanonicalEligibilityScope::SLUGS) {
+            return [];
+        }
+
+        return array_map(
+            static fn (string $slug): CareerPublicResolutionPlanRow => new CareerPublicResolutionPlanRow(
+                rowNumber: null,
+                canonicalSlug: $slug,
+                publicResolutionState: 'explicit_slug',
+                canonicalPublicType: null,
+                rolloutState: null,
+                projectionState: null,
+                indexStateHint: null,
+                titleEn: null,
+                titleZh: null,
+                sourceCode: null,
+                family: null,
+                batchId: null,
+                locales: [],
+                raw: ['slug' => $slug, 'status' => 'explicit_slug'],
+            ),
+            $this->slugsForScope($scope)
         );
     }
 
     /**
      * @param  list<string>  $slugs
      * @param  list<string>  $locales
-     * @return array{items: list<array<string, mixed>>}
+     * @return list<CareerCanonicalEligibilityAuditRow>
      */
     private function surfaceApiArtifact(array $slugs, array $locales): array
     {
@@ -223,6 +720,11 @@ final class CareerAuditCanonicalEligibility extends Command
         }
 
         return ['items' => $items];
+    }
+
+    private function rowKey(string $slug, string $locale): string
+    {
+        return strtolower($slug).'|'.strtolower($locale);
     }
 
     private function scopeOption(): string
