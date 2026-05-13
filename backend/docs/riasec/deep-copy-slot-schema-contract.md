@@ -111,3 +111,18 @@ Dimension copy remains backend-authoritative content. The frontend may render a 
 - `E_C`
 
 The first runtime-authored pair slots are `I_A`, `I_S`, and `A_S`, sourced from the expert pair blend asset. Other pairs are explicit `content_status=pending` slots and fail closed with `module_state=omitted` until reviewed content is approved. Pair blend copy is an interest-combination reading aid; it is not a subtype, personality identity, ability proof, career conclusion, ranking, or hiring signal.
+
+## 140Q Layer Runtime Slots
+
+`RIASEC-DEEP-COPY-04` adds backend-authored 140Q narrative slots for:
+
+- `task_activity_card`
+- `environment_card`
+- `role_responsibility_card`
+- `layer_agreement`
+- `layer_tension`
+- `layer_unavailable`
+- `140q_cta`
+- `140q_not_recommended`
+
+The layer state enum is backend-owned: `agreement`, `tension`, `unavailable`, `insufficient_quality`, and `not_applicable_60q_only`. 140Q slots describe work-daily task, environment, and role-responsibility context. They do not overwrite 60Q, do not compare raw scores, and do not make accuracy, ability, job, or occupational conclusions. Low-quality states resolve to `140q_not_recommended` and must not upsell the longer form.

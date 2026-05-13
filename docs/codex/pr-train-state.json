@@ -3826,7 +3826,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-deep-copy-03-pair-blend-slots",
       "title": "feat(riasec): add pair blend copy runtime slots",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "RIASEC-DEEP-COPY-02"
       ],
@@ -3842,7 +3842,7 @@
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
-      "commit_sha": "77f42cf70fb8d742ad365d6a8aabb4aa82920506",
+      "commit_sha": "160bc108aed2a1527d89ec04e79096fbd0209175",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1363",
       "checks": {
         "dependency": {
@@ -3877,9 +3877,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-13T12:18:04Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "title": "Non-IAS pair assets deferred pending validator-safe review",
@@ -3892,6 +3892,67 @@
           ]
         }
       ]
+    },
+    "RIASEC-DEEP-COPY-04": {
+      "repo": "fap-api",
+      "branch": "codex/riasec-deep-copy-04-140q-narrative-slots",
+      "title": "feat(riasec): add 140q narrative runtime slots",
+      "status": "in_progress",
+      "depends_on": [
+        "RIASEC-DEEP-COPY-03"
+      ],
+      "scope_type": "backend_140q_narrative_slots_only",
+      "allowed_paths": [
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php",
+        "backend/tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php",
+        "backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "backend/docs/riasec/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "commit_sha": "ee2c4f0c1a953a69acdfa951bf8ac6d543f06e96",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1365",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "RIASEC-DEEP-COPY-03 is merged as PR #1363 with merge commit 160bc108aed2a1527d89ec04e79096fbd0209175."
+        },
+        "140q_layer_registry_contract": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php --no-ansi",
+          "evidence": "21 tests passed, 827 assertions."
+        },
+        "freeze_classifier": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|riasec_content_registry' --no-ansi",
+          "evidence": "2 tests passed, 4 assertions."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecContentRegistrySlotContract.php tests/Unit/Services/Riasec/Riasec140qLayerSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+        },
+        "json_yaml_validity": {
+          "status": "pass",
+          "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")' && jq empty docs/codex/pr-train-state.json"
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to backend RIASEC slot registry/validator, 140Q layer registry tests, backend RIASEC docs, and docs/codex train metadata. No 60Q/140Q scoring, question pack, frontend UI, sales/paywall, share/PDF/history, feedback, analytics, or career runtime files changed."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
     }
   }
 }

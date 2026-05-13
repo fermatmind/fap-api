@@ -81,6 +81,22 @@ final class RiasecContentRegistrySlotContract
             'slot_group' => '140q_layer_copy',
             'required_versions' => ['interpretation_rule_version'],
         ],
+        '140q_layer_agreement_copy' => [
+            'slot_group' => '140q_layer_copy',
+            'required_versions' => ['interpretation_rule_version'],
+        ],
+        '140q_layer_unavailable_copy' => [
+            'slot_group' => '140q_layer_copy',
+            'required_versions' => ['interpretation_rule_version'],
+        ],
+        '140q_cta_copy' => [
+            'slot_group' => '140q_layer_copy',
+            'required_versions' => ['interpretation_rule_version'],
+        ],
+        '140q_not_recommended_copy' => [
+            'slot_group' => '140q_layer_copy',
+            'required_versions' => ['interpretation_rule_version'],
+        ],
         'low_quality_copy' => [
             'slot_group' => 'quality_copy',
             'required_versions' => ['quality_rule_version'],
@@ -180,8 +196,13 @@ final class RiasecContentRegistrySlotContract
         '140Q more accurate',
         'more accurate',
         '更准确',
+        '更准',
+        '推翻',
+        '最终答案',
         '60Q wrong',
         'raw delta',
+        '分数上升',
+        '分数下降',
         'score increased',
         'score decreased',
         'percentile',
