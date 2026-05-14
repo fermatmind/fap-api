@@ -40,6 +40,64 @@ final class Career80TotalLiveAcceptancePlannerTest extends TestCase
         $this->assertSame('80_TOTAL_LIVE_ACCEPTANCE_COMPLETE', $result['next_required_action']);
     }
 
+    public function test_plans_300_progressive_live_acceptance_rows(): void
+    {
+        $result = (new Career80TotalLiveAcceptancePlanner)->plan(
+            targetDelta: $this->progressiveTargetDelta(current: 80, target: 300, delta: 220),
+            targetPublicTotal: 300,
+        )->toArray();
+
+        $this->assertSame('career_300_total', $result['target']);
+        $this->assertSame('planned', $result['status']);
+        $this->assertSame(80, $result['baseline_count']);
+        $this->assertSame(220, $result['delta_count']);
+        $this->assertSame(300, $result['total_slug_count']);
+        $this->assertSame(600, $result['expected_locale_rows']);
+        $this->assertSame('RUN_PROGRESSIVE_LIVE_ACCEPTANCE_READ_ONLY', $result['next_required_action']);
+        $this->assertFalse($result['writes_database']);
+    }
+
+    public function test_plans_800_progressive_live_acceptance_rows(): void
+    {
+        $result = (new Career80TotalLiveAcceptancePlanner)->plan(
+            targetDelta: $this->progressiveTargetDelta(current: 300, target: 800, delta: 500),
+            targetPublicTotal: 800,
+        )->toArray();
+
+        $this->assertSame('career_800_total', $result['target']);
+        $this->assertSame(300, $result['baseline_count']);
+        $this->assertSame(500, $result['delta_count']);
+        $this->assertSame(800, $result['total_slug_count']);
+        $this->assertSame(1600, $result['expected_locale_rows']);
+    }
+
+    public function test_plans_2786_progressive_live_acceptance_rows(): void
+    {
+        $result = (new Career80TotalLiveAcceptancePlanner)->plan(
+            targetDelta: $this->progressiveTargetDelta(current: 800, target: 2786, delta: 1986),
+            targetPublicTotal: 2786,
+        )->toArray();
+
+        $this->assertSame('career_2786_total', $result['target']);
+        $this->assertSame(800, $result['baseline_count']);
+        $this->assertSame(1986, $result['delta_count']);
+        $this->assertSame(2786, $result['total_slug_count']);
+        $this->assertSame(5572, $result['expected_locale_rows']);
+    }
+
+    public function test_passes_progressive_acceptance_when_artifact_is_accepted(): void
+    {
+        $result = (new Career80TotalLiveAcceptancePlanner)->plan(
+            targetDelta: $this->progressiveTargetDelta(current: 80, target: 300, delta: 220),
+            liveAcceptance: $this->liveAcceptance(accepted: true, expectedRows: 600),
+            targetPublicTotal: 300,
+        )->toArray();
+
+        $this->assertSame('pass', $result['status']);
+        $this->assertTrue($result['accepted']);
+        $this->assertSame('PROGRESSIVE_LIVE_ACCEPTANCE_COMPLETE', $result['next_required_action']);
+    }
+
     public function test_blocks_when_target_total_does_not_match_combined_slugs(): void
     {
         $result = (new Career80TotalLiveAcceptancePlanner)->plan(
@@ -135,6 +193,31 @@ final class Career80TotalLiveAcceptancePlannerTest extends TestCase
             'published_baseline_slugs' => $baseline,
             'delta_promotion_slugs' => $delta,
             'recommended_rollout_delta_slugs' => $delta,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function progressiveTargetDelta(int $current, int $target, int $delta): array
+    {
+        $currentSlugs = $this->slugs('current', $current);
+        $deltaSlugs = $this->slugs('delta', $delta);
+
+        return [
+            'schema_version' => 'career_progressive_cohort_delta_plan.v1',
+            'status' => 'pass',
+            'read_only' => true,
+            'writes_database' => false,
+            'current_public_total' => $current,
+            'target_public_total' => $target,
+            'delta_slug_count' => $delta,
+            'locale_count' => 2,
+            'expected_delta_locale_rows' => $delta * 2,
+            'expected_total_locale_rows' => $target * 2,
+            'current_public_slugs' => $currentSlugs,
+            'delta_promotion_slugs' => $deltaSlugs,
+            'recommended_rollout_delta_slugs' => $deltaSlugs,
         ];
     }
 

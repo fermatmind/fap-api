@@ -62,6 +62,7 @@ use App\Console\Commands\CareerValidateBroadGroupFamilyMap;
 use App\Console\Commands\CareerValidateCanonical80TotalLiveAcceptance;
 use App\Console\Commands\CareerValidateCanonicalBatchLiveAcceptance;
 use App\Console\Commands\CareerValidateCanonicalPostPromotionReleaseGate;
+use App\Console\Commands\CareerValidateCanonicalProgressiveLiveAcceptance;
 use App\Console\Commands\CareerValidateCanonicalRolloutGovernance;
 use App\Console\Commands\CareerValidateCanonicalRuntimeTruth;
 use App\Console\Commands\CareerValidateCnAuthorityPolicy;
@@ -230,6 +231,7 @@ class Kernel extends ConsoleKernel
         CareerValidateCanonicalRuntimeTruth::class,
         CareerValidateCanonicalBatchLiveAcceptance::class,
         CareerValidateCanonical80TotalLiveAcceptance::class,
+        CareerValidateCanonicalProgressiveLiveAcceptance::class,
         CareerValidateCanonicalPostPromotionReleaseGate::class,
         CareerValidateCanonicalRolloutGovernance::class,
         CareerValidateCnAuthorityPolicy::class,
