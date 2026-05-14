@@ -5044,7 +5044,7 @@
       "branch": "fix/career-80-total-live-acceptance-1",
       "title": "fix(api): add career 80 total live acceptance report",
       "name": "Add Career 80 total live acceptance report",
-      "status": "in_progress",
+      "status": "pr_open",
       "depends_on": [
         "REPAIR-DELTA-ROLLOUT-GATE-1"
       ],
@@ -5070,8 +5070,8 @@
         "no fap-web change",
         "no production command"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "fd409e0de484e86666948fbe1e68cdd87e252ba1",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1388",
       "checks": {
         "authorization": {
           "status": "pass",
