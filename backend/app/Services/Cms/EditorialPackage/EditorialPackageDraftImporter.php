@@ -95,6 +95,64 @@ final class EditorialPackageDraftImporter
         '录用概率' => '职业准备线索',
     ];
 
+    private const EVERGREEN_DEFINITION_HEADING_TERMS = [
+        'definition',
+        'what does',
+        'measure',
+        '定义',
+        '是什么',
+        '测什么',
+    ];
+
+    private const EVERGREEN_METHOD_HEADING_TERMS = [
+        'method',
+        'theory',
+        'model',
+        'framework',
+        'science',
+        'measure',
+        '方法',
+        '理论',
+        '模型',
+        '框架',
+        '科学',
+        '逻辑',
+        '如何正确使用',
+    ];
+
+    private const CLAIM_BOUNDARY_CONTEXT_TERMS = [
+        '不能',
+        '不应',
+        '不应该',
+        '不会',
+        '不得',
+        '不要',
+        '不是',
+        '避免',
+        '不说',
+        '不宣称',
+        '不代表',
+        '不等于',
+        '无法',
+        '并不',
+        '边界',
+        '规避',
+        'overclaim',
+        'cannot',
+        "can't",
+        'does not',
+        'do not',
+        'should not',
+        'is not',
+        'not a',
+        'not claim',
+        'not say',
+        'not imply',
+        'not predict',
+        'doesnt',
+        'dont',
+    ];
+
     public function __construct(
         private readonly ArticleTranslationRevisionWorkspace $revisionWorkspace,
     ) {}
@@ -432,7 +490,7 @@ final class EditorialPackageDraftImporter
 
         $claimMatches = $this->claimMatches($package);
         foreach ($claimMatches as $match) {
-            if ($allowClaimWarnings) {
+            if (($match['boundary_context'] ?? false) === true || $allowClaimWarnings) {
                 $warnings[] = $match;
             } else {
                 $errors[] = $match;
@@ -456,10 +514,10 @@ final class EditorialPackageDraftImporter
         $headingText = mb_strtolower(implode("\n", $headings));
 
         if ($package['content_track'] === 'evergreen_knowledge') {
-            if (! str_contains($headingText, 'definition') && ! str_contains($headingText, '定义') && ! str_contains($headingText, '是什么')) {
+            if (! $this->containsAny($headingText, self::EVERGREEN_DEFINITION_HEADING_TERMS)) {
                 $errors[] = $this->issue('body_markdown', 'evergreen_definition_required', 'evergreen_knowledge requires a definition section.');
             }
-            if (! str_contains($headingText, 'method') && ! str_contains($headingText, 'theory') && ! str_contains($headingText, '方法') && ! str_contains($headingText, '理论')) {
+            if (! $this->containsAny($headingText, self::EVERGREEN_METHOD_HEADING_TERMS)) {
                 $errors[] = $this->issue('body_markdown', 'evergreen_method_required', 'evergreen_knowledge requires method or theory explanation.');
             }
             if (! str_contains($headingText, 'faq') && ! str_contains($headingText, '常见问题') && ! str_contains($headingText, 'key questions')) {
@@ -547,11 +605,33 @@ final class EditorialPackageDraftImporter
                     'phrase' => $phrase,
                     'suggested_replacement' => $replacement,
                     'snippet' => mb_substr($text, max(0, $position - 24), mb_strlen($phrase) + 48),
+                    'boundary_context' => $this->hasClaimBoundaryContext($text, $position, mb_strlen($phrase)),
                 ];
             }
         }
 
         return $matches;
+    }
+
+    /**
+     * @param  list<string>  $needles
+     */
+    private function containsAny(string $haystack, array $needles): bool
+    {
+        foreach ($needles as $needle) {
+            if ($needle !== '' && str_contains($haystack, $needle)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasClaimBoundaryContext(string $text, int $position, int $phraseLength): bool
+    {
+        $window = mb_strtolower(mb_substr($text, max(0, $position - 80), $phraseLength + 160));
+
+        return $this->containsAny($window, self::CLAIM_BOUNDARY_CONTEXT_TERMS);
     }
 
     private function existingArticle(array $package): ?Article
