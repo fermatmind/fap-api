@@ -4824,6 +4824,61 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": []
+    },
+    "REPAIR-RUNTIME-CANDIDATE-PREP-APPLY-GATE-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-runtime-candidate-prep-apply-gate-1",
+      "title": "fix(api): add guarded runtime candidate preparation command",
+      "name": "Add guarded runtime candidate preparation dry-run/apply command",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-RUNTIME-CANDIDATE-PREP-1"
+      ],
+      "scope_type": "runtime_candidate_prep_apply_gate_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPrepareCanonicalRuntimeCandidates.php",
+        "backend/app/Console/Kernel.php",
+        "backend/tests/Feature/Console/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no apply outside local tests",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no promotion to published",
+        "no backfill",
+        "no rollback",
+        "no quarantine",
+        "no DB mutation outside local tests",
+        "no production command",
+        "no deploy",
+        "no fap-web change"
+      ],
+      "commit_sha": "5ac4aef963fa184c3f52ee12f0e716a9ee0db799",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1383",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly requested REPAIR-RUNTIME-CANDIDATE-PREP-APPLY-GATE-1 and authorized current train metadata updates."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR #1381 merged the read-only runtime candidate preparation planner."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Current PR scope is limited to the guarded runtime candidate preparation command, registration, tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "REPAIR-RUNTIME-ARTIFACT-REFRESH-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
     }
   }
 }
