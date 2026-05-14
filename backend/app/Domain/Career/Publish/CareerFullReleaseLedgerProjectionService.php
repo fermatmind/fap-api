@@ -10,6 +10,7 @@ final class CareerFullReleaseLedgerProjectionService
 
     public function __construct(
         private readonly CareerFullReleaseLedgerService $ledgerService,
+        private readonly CareerVerifiedRolloutBatchSlugAuthority $verifiedRolloutBatchSlugAuthority,
     ) {}
 
     /**
@@ -18,7 +19,9 @@ final class CareerFullReleaseLedgerProjectionService
     public function build(): array
     {
         return [
-            self::LEDGER_FILENAME => $this->ledgerService->build()->toArray(),
+            self::LEDGER_FILENAME => $this->ledgerService
+                ->build($this->verifiedRolloutBatchSlugAuthority->slugs())
+                ->toArray(),
         ];
     }
 }

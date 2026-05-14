@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-14T22:56:43+08:00",
+  "updated_at": "2026-05-15T00:08:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -5362,6 +5362,53 @@
       },
       "failure_reason": null,
       "next_pr": "51-DELTA-ROLLOUT-DRY-RUN-RETRY-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
+    "REPAIR-POST-ROLLOUT-RUNTIME-PROJECTION-AUTHORITY-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-post-rollout-runtime-projection-authority-1",
+      "title": "fix(api): include verified rollout batches in career runtime projection",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-DELTA-ROLLOUT-APPLY-BATCH-AUTHORITY-1"
+      ],
+      "scope_type": "post_rollout_runtime_projection_authority_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Publish/**",
+        "backend/tests/Unit/Services/Career/**",
+        "backend/tests/Feature/Console/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no rollout apply",
+        "no production DB mutation",
+        "no rollback",
+        "no quarantine",
+        "no deploy",
+        "no fap-web change",
+        "do not weaken final live acceptance",
+        "do not treat candidate-aware planning artifacts as final published authority"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-POST-ROLLOUT-RUNTIME-PROJECTION-AUTHORITY-1, then implementing the PR."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR #1392 is merged into main and production apply retry succeeded; SCAN-20 shows remaining blocker is post-rollout runtime projection authority."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "POST-ROLLOUT-RUNTIME-PROJECTION-REFRESH-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
