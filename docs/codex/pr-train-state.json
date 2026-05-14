@@ -4723,7 +4723,7 @@
       "branch": "fix/career-80-target-delta-decomposition-1",
       "title": "fix(api): add career 80 target delta decomposition",
       "name": "Represent Career 80 as published baseline plus delta promotion slugs",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "SCAN-14"
       ],
@@ -4749,8 +4749,8 @@
         "no deploy",
         "no fap-web change"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "ac495c7f4ccef6b2dc7f1a3ae9c7465481a7ec20",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1380",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -4767,9 +4767,9 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-RUNTIME-CANDIDATE-PREP-1",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-14T06:05:11Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": []
     },
     "REPAIR-RUNTIME-CANDIDATE-PREP-1": {
@@ -4777,7 +4777,7 @@
       "branch": "fix/career-runtime-candidate-prep-plan-1",
       "title": "fix(api): add career runtime candidate preparation planner",
       "name": "Add read-only runtime candidate preparation planner for 51 delta slugs",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "REPAIR-80-TARGET-DELTA-1"
       ],
@@ -4802,7 +4802,7 @@
         "no deploy",
         "no fap-web change"
       ],
-      "commit_sha": "8e64f57d9fc67f2cb967b2d072d67032f2711ab8",
+      "commit_sha": "6b62a50f53ec4e7b16bf9100316c7adedab2d622",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1381",
       "checks": {
         "authorization": {
@@ -4820,9 +4820,9 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-RUNTIME-CANDIDATE-PREP-APPLY-GATE-1",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-14T06:29:28Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": []
     },
     "REPAIR-RUNTIME-CANDIDATE-PREP-APPLY-GATE-1": {
@@ -4830,7 +4830,7 @@
       "branch": "fix/career-runtime-candidate-prep-apply-gate-1",
       "title": "fix(api): add guarded runtime candidate preparation command",
       "name": "Add guarded runtime candidate preparation dry-run/apply command",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "REPAIR-RUNTIME-CANDIDATE-PREP-1"
       ],
@@ -4857,7 +4857,7 @@
         "no deploy",
         "no fap-web change"
       ],
-      "commit_sha": "5ac4aef963fa184c3f52ee12f0e716a9ee0db799",
+      "commit_sha": "be2b44c3a74a5dc4f38f252a76762001decb6f17",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1383",
       "checks": {
         "authorization": {
@@ -4875,9 +4875,9 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-RUNTIME-ARTIFACT-REFRESH-1",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-14T07:00:35Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": []
     },
     "REPAIR-RUNTIME-ARTIFACT-REFRESH-1": {
@@ -4885,7 +4885,7 @@
       "branch": "fix/career-runtime-artifact-refresh-flow-1",
       "title": "fix(api): add career runtime artifact refresh plan",
       "name": "Add Career runtime artifact refresh plan for 51 delta candidate prep",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "REPAIR-RUNTIME-CANDIDATE-PREP-APPLY-GATE-1"
       ],
@@ -4910,8 +4910,8 @@
         "no deploy",
         "no fap-web change"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "7ed7d911dae7a0d1fe4a645eac4df1775eb8e352",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1384",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -4991,7 +4991,7 @@
       "branch": "fix/career-delta-rollout-gate-1",
       "title": "fix(api): add career delta rollout gate semantics",
       "name": "Add Career delta rollout gate semantics",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "REPAIR-51-DELTA-ROLLOUT-MANIFEST-1"
       ],
@@ -5016,8 +5016,8 @@
         "no fap-web change",
         "no production command"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "9703d87c34b4d63a40834621f85a18382a88a7e1",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1387",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -5034,6 +5034,60 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-80-TOTAL-LIVE-ACCEPTANCE-1",
+      "merged_at": "2026-05-14T08:27:04Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "sidecar_issues": []
+    },
+    "REPAIR-80-TOTAL-LIVE-ACCEPTANCE-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-80-total-live-acceptance-1",
+      "title": "fix(api): add career 80 total live acceptance report",
+      "name": "Add Career 80 total live acceptance report",
+      "status": "pr_open",
+      "depends_on": [
+        "REPAIR-DELTA-ROLLOUT-GATE-1"
+      ],
+      "scope_type": "career_80_total_live_acceptance_report_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerValidateCanonical80TotalLiveAcceptance.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no live crawl",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no candidate prep apply",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change",
+        "no production command"
+      ],
+      "commit_sha": "fd409e0de484e86666948fbe1e68cdd87e252ba1",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1388",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User requested the autonomous Career 80 delta PR train and authorized train metadata updates."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR #1387 merged the read-only delta rollout gate semantics."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Current PR scope is limited to read-only Career 80-total live acceptance planning, command registration, tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "RUNTIME-CANDIDATE-PREP-DRY-RUN-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
