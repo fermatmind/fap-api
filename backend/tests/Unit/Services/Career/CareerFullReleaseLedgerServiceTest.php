@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Tests\Unit\Services\Career;
 
 use App\Domain\Career\Publish\CareerFullReleaseLedgerService;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
+use App\Models\IndexState;
+use App\Models\Occupation;
+use App\Models\OccupationFamily;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -62,5 +66,125 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
         $this->assertArrayNotHasKey('demand_signal', $sample);
         $this->assertArrayNotHasKey('novelty_score', $sample);
         $this->assertArrayNotHasKey('canonical_conflict', $sample);
+    }
+
+    public function test_explicit_rollout_batch_slugs_can_override_tracked_review_handoff_for_current_batch_only(): void
+    {
+        $service = app(CareerFullReleaseLedgerService::class);
+        $baseLedger = $service->build()->toArray();
+        $baseMember = collect((array) ($baseLedger['members'] ?? []))
+            ->first(static fn (array $member): bool => in_array($member['release_cohort'] ?? '', ['review_needed', 'family_handoff'], true));
+
+        $this->assertIsArray($baseMember);
+        $slug = (string) $baseMember['canonical_slug'];
+
+        $this->materializeIndexedOccupation($slug);
+
+        $strictLedger = $service->build()->toArray();
+        $strictMember = collect((array) ($strictLedger['members'] ?? []))
+            ->firstWhere('canonical_slug', $slug);
+
+        $this->assertContains($strictMember['release_cohort'] ?? null, ['review_needed', 'family_handoff']);
+        $this->assertArrayNotHasKey('explicit_rollout_batch', (array) ($strictMember['evidence_refs'] ?? []));
+
+        $batchLedger = $service->build([$slug])->toArray();
+        $batchMember = collect((array) ($batchLedger['members'] ?? []))
+            ->firstWhere('canonical_slug', $slug);
+
+        $this->assertSame('public_detail_indexable', $batchMember['release_cohort'] ?? null);
+        $this->assertSame('indexed', $batchMember['current_index_state'] ?? null);
+        $this->assertSame('indexable', $batchMember['public_index_state'] ?? null);
+        $this->assertSame([], $batchMember['blocker_reasons'] ?? null);
+        $this->assertSame(
+            'current_explicit_batch_only',
+            data_get($batchMember, 'evidence_refs.explicit_rollout_batch.scope')
+        );
+    }
+
+    public function test_explicit_rollout_batch_candidate_state_projects_as_conservative_candidate_for_tracked_members(): void
+    {
+        $service = app(CareerFullReleaseLedgerService::class);
+        $baseLedger = $service->build()->toArray();
+        $baseMember = collect((array) ($baseLedger['members'] ?? []))
+            ->first(static fn (array $member): bool => in_array($member['release_cohort'] ?? '', ['review_needed', 'family_handoff'], true));
+
+        $this->assertIsArray($baseMember);
+        $slug = (string) $baseMember['canonical_slug'];
+
+        $this->materializeIndexedOccupation($slug, 'promotion_candidate');
+
+        $batchLedger = $service->build([$slug])->toArray();
+        $batchMember = collect((array) ($batchLedger['members'] ?? []))
+            ->firstWhere('canonical_slug', $slug);
+
+        $this->assertSame('public_detail_conservative', $batchMember['release_cohort'] ?? null);
+        $this->assertSame('promotion_candidate', $batchMember['current_index_state'] ?? null);
+        $this->assertSame('trust_limited', $batchMember['public_index_state'] ?? null);
+        $this->assertSame(
+            'current_explicit_batch_only',
+            data_get($batchMember, 'evidence_refs.explicit_rollout_batch.scope')
+        );
+    }
+
+    public function test_explicit_rollout_batch_indexed_tracked_members_project_as_published(): void
+    {
+        $ledgerService = app(CareerFullReleaseLedgerService::class);
+        $baseLedger = $ledgerService->build()->toArray();
+        $baseMember = collect((array) ($baseLedger['members'] ?? []))
+            ->first(static fn (array $member): bool => in_array($member['release_cohort'] ?? '', ['review_needed', 'family_handoff'], true));
+
+        $this->assertIsArray($baseMember);
+        $slug = (string) $baseMember['canonical_slug'];
+
+        $this->materializeIndexedOccupation($slug);
+
+        $projection = (new CareerRuntimePublishProjectionService)->buildFromLedgerArray(
+            $ledgerService->build([$slug])->toArray()
+        );
+        $rows = array_values(array_filter(
+            (array) ($projection['items'] ?? []),
+            static fn (array $item): bool => ($item['slug'] ?? null) === $slug,
+        ));
+
+        $this->assertCount(2, $rows);
+        foreach ($rows as $row) {
+            $this->assertSame(CareerRuntimePublishProjectionService::STATE_PUBLISHED, $row['runtime_publish_state']);
+            $this->assertTrue($row['detail_route_enabled']);
+            $this->assertTrue($row['release_gate_pass']);
+        }
+    }
+
+    private function materializeIndexedOccupation(string $slug, string $indexState = 'indexed'): void
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'test-family-'.$indexState,
+            'title_en' => 'Test Family',
+            'title_zh' => '测试族',
+        ]);
+
+        $occupation = Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => $slug,
+            'entity_level' => 'market_child',
+            'truth_market' => 'US',
+            'display_market' => 'US',
+            'crosswalk_mode' => 'global_standard',
+            'canonical_title_en' => ucwords(str_replace('-', ' ', $slug)),
+            'canonical_title_zh' => $slug,
+            'search_h1_zh' => $slug,
+        ]);
+
+        IndexState::query()->create([
+            'occupation_id' => $occupation->id,
+            'index_state' => $indexState,
+            'index_eligible' => true,
+            'canonical_path' => '/career/jobs/'.$slug,
+            'canonical_target' => null,
+            'reason_codes' => [
+                'canonical_rollout_batch_promotion',
+                'batch_id:batch-001-test',
+            ],
+            'changed_at' => now(),
+        ]);
     }
 }

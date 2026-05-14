@@ -2943,3 +2943,42 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-DELTA-ROLLOUT-APPLY-BATCH-AUTHORITY-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-CANDIDATE-AWARE-AUDIT-POLICY-1
+    branch: codex/repair-delta-rollout-apply-batch-authority-1
+    title: "fix(api): repair career delta rollout apply batch authority"
+    name: "Fix 51-delta rollout apply batch authority for tracked candidates"
+    scope:
+      - Make explicit rollout batch slugs authority for post-apply projection verification.
+      - Allow tracked review_needed and family_handoff slugs in the current explicit batch to project from indexed state.
+      - Preserve strict default ledger behavior when no explicit rollout batch slugs are supplied.
+      - Preserve strict final live acceptance and public surface verification.
+    allowed_paths:
+      - backend/app/Domain/Career/Expansion/**
+      - backend/app/Domain/Career/Publish/**
+      - backend/tests/Unit/Services/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout apply.
+      - Retry production apply.
+      - Run rollback or quarantine.
+      - Run deploy.
+      - Touch fap-web.
+      - Weaken final live acceptance.
+    validation:
+      - php artisan test --filter=CareerFullReleaseLedgerService --no-ansi
+      - php artisan test --filter=CareerExecuteCanonicalRolloutBatch --no-ansi
+      - php artisan test --filter=CanonicalBatchPromotionExecutorService --no-ansi
+      - php artisan test --filter=Career80TotalLiveAcceptance --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

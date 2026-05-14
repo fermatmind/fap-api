@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-14T21:20:00+08:00",
+  "updated_at": "2026-05-14T22:56:43+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -5282,6 +5282,86 @@
       },
       "failure_reason": null,
       "next_pr": "RUNTIME-CANDIDATE-AWARE-AUDIT-REFRESH-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
+    "REPAIR-DELTA-ROLLOUT-APPLY-BATCH-AUTHORITY-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-delta-rollout-apply-batch-authority-1",
+      "title": "fix(api): repair career delta rollout apply batch authority",
+      "status": "pr_open",
+      "depends_on": [
+        "REPAIR-CANDIDATE-AWARE-AUDIT-POLICY-1"
+      ],
+      "scope_type": "delta_rollout_apply_batch_authority_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Expansion/**",
+        "backend/app/Domain/Career/Publish/**",
+        "backend/tests/Unit/Services/Career/**",
+        "backend/tests/Feature/Console/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no production apply retry",
+        "no rollback",
+        "no quarantine",
+        "no deploy",
+        "no fap-web change",
+        "do not weaken final live acceptance"
+      ],
+      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1392",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-DELTA-ROLLOUT-APPLY-BATCH-AUTHORITY-1, then implementing the PR."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR #1391 is merged; SCAN-18 shows the remaining blocker is apply-time batch authority for tracked review/family handoff slugs."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are confined to explicit delta rollout apply batch authority, focused Career release ledger tests, documentation, and authorized PR train metadata."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerFullReleaseLedgerService --no-ansi && php artisan test --filter=CanonicalBatchPromotionExecutorService --no-ansi && php artisan test --filter=CareerExecuteCanonicalRolloutBatch --no-ansi && php artisan test --filter=Career80TotalLiveAcceptance --no-ansi && php artisan test --filter=CareerRuntimeCandidate --no-ansi && php artisan test --filter=CareerPlanCanonical80RuntimeCandidatePool --no-ansi && php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi",
+          "evidence": "Focused Career ledger, rollout executor, rollout command, runtime candidate pool, runtime candidate prep, audit, and final live acceptance strictness tests passed."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; no route changes were introduced."
+        },
+        "sqlite_migrate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-repair-delta-rollout.sqlite php artisan migrate --force --no-ansi",
+          "evidence": "Full sqlite migration path completed successfully."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Pint passed after formatting the scoped Career release ledger files."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check",
+          "evidence": "No whitespace errors."
+        },
+        "mbti_ci": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full MBTI CI master chain exited 0."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "51-DELTA-ROLLOUT-DRY-RUN-RETRY-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,

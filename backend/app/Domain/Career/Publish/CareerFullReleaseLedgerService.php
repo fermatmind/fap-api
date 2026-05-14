@@ -53,6 +53,7 @@ final class CareerFullReleaseLedgerService
      */
     public function build(array $additionalSlugs = []): CareerFullReleaseLedger
     {
+        $explicitBatchSlugs = $this->slugSet($additionalSlugs);
         $firstWaveManifest = $this->firstWaveManifestReader->read();
         $firstWaveAuditPayload = $this->safeFirstWaveAudit();
         $firstWaveAudit = $firstWaveAuditPayload['audit'];
@@ -115,16 +116,23 @@ final class CareerFullReleaseLedgerService
             $blockedGovernanceStatus = $this->normalizeNullableString($auditRow['blocked_governance_status'] ?? null);
             $readinessStatus = $this->normalizeNullableString($auditRow['readiness_status'] ?? null);
 
-            $releaseCohort = $this->resolveReleaseCohort(
-                firstWaveMember: (bool) ($tracked['first_wave_member'] ?? false),
-                batchOrigin: $this->normalizeNullableString($tracked['batch_origin'] ?? null),
-                crosswalkMode: $currentCrosswalkMode,
-                readinessStatus: $readinessStatus,
-                blockedGovernanceStatus: $blockedGovernanceStatus,
-                publicIndexState: $publicIndexState,
-                queueRow: $queueRow,
-                resolvedRow: $resolvedRow,
-            );
+            $explicitBatchMember = isset($explicitBatchSlugs[$slug]);
+            $releaseCohort = $explicitBatchMember
+                ? $this->resolveExplicitBatchReleaseCohort(
+                    readinessStatus: $readinessStatus,
+                    blockedGovernanceStatus: $blockedGovernanceStatus,
+                    publicIndexState: $publicIndexState,
+                )
+                : $this->resolveReleaseCohort(
+                    firstWaveMember: (bool) ($tracked['first_wave_member'] ?? false),
+                    batchOrigin: $this->normalizeNullableString($tracked['batch_origin'] ?? null),
+                    crosswalkMode: $currentCrosswalkMode,
+                    readinessStatus: $readinessStatus,
+                    blockedGovernanceStatus: $blockedGovernanceStatus,
+                    publicIndexState: $publicIndexState,
+                    queueRow: $queueRow,
+                    resolvedRow: $resolvedRow,
+                );
 
             $blockerReasons = $this->buildBlockerReasons(
                 releaseCohort: $releaseCohort,
@@ -134,6 +142,7 @@ final class CareerFullReleaseLedgerService
                 publicIndexState: $publicIndexState,
                 queueRow: $queueRow,
                 firstWaveAuditAvailable: $firstWaveAuditAvailable,
+                suppressReviewHandoffReasons: $explicitBatchMember,
             );
 
             $releaseCounts[$releaseCohort]++;
@@ -161,7 +170,7 @@ final class CareerFullReleaseLedgerService
                 indexEligible: $indexEligible,
                 releaseCohort: $releaseCohort,
                 blockerReasons: $blockerReasons,
-                evidenceRefs: $this->buildEvidenceRefs($tracked, $queueRow, $resolvedRow),
+                evidenceRefs: $this->buildEvidenceRefs($tracked, $queueRow, $resolvedRow, $explicitBatchMember),
                 resolvedTargetKind: $this->normalizeNullableString($resolvedRow['resolved_target_kind'] ?? null),
                 resolvedTargetSlug: $this->normalizeNullableString($resolvedRow['resolved_target_slug'] ?? null),
                 reviewQueueStatus: is_array($queueRow) ? 'queued' : null,
@@ -520,6 +529,23 @@ final class CareerFullReleaseLedgerService
         return 'review_needed';
     }
 
+    private function resolveExplicitBatchReleaseCohort(
+        ?string $readinessStatus,
+        ?string $blockedGovernanceStatus,
+        string $publicIndexState,
+    ): string {
+        if (
+            $blockedGovernanceStatus !== null
+            || in_array((string) $readinessStatus, ['blocked_override_eligible', 'blocked_not_safely_remediable'], true)
+        ) {
+            return 'blocked';
+        }
+
+        return $publicIndexState === IndexStateValue::INDEXABLE
+            ? 'public_detail_indexable'
+            : 'public_detail_conservative';
+    }
+
     /**
      * @param  array<string, mixed>  $tracked
      * @param  array<string, mixed>|null  $queueRow
@@ -533,6 +559,7 @@ final class CareerFullReleaseLedgerService
         string $publicIndexState,
         ?array $queueRow,
         bool $firstWaveAuditAvailable,
+        bool $suppressReviewHandoffReasons = false,
     ): array {
         $reasons = [];
 
@@ -540,7 +567,7 @@ final class CareerFullReleaseLedgerService
             $reasons[] = 'blocked_governance';
         }
 
-        if (($tracked['first_wave_member'] ?? false) !== true) {
+        if (! $suppressReviewHandoffReasons && ($tracked['first_wave_member'] ?? false) !== true) {
             $reasons[] = 'full_scope_readiness_authority_not_materialized';
         }
         if (($tracked['first_wave_member'] ?? false) === true && $firstWaveAuditAvailable === false) {
@@ -560,11 +587,11 @@ final class CareerFullReleaseLedgerService
             $reasons[] = 'family_proxy_explorer_only';
         }
 
-        if ($releaseCohort === 'family_handoff') {
+        if ($releaseCohort === 'family_handoff' && ! $suppressReviewHandoffReasons) {
             $reasons[] = 'family_handoff_required';
         }
 
-        if ($releaseCohort === 'review_needed') {
+        if ($releaseCohort === 'review_needed' && ! $suppressReviewHandoffReasons) {
             $reasons[] = 'review_queue_required';
             if (is_array($queueRow)) {
                 foreach ((array) ($queueRow['queue_reason'] ?? []) as $reason) {
@@ -588,9 +615,13 @@ final class CareerFullReleaseLedgerService
      * @param  array<string, mixed>|null  $resolvedRow
      * @return array<string, mixed>
      */
-    private function buildEvidenceRefs(array $tracked, ?array $queueRow, ?array $resolvedRow): array
-    {
-        return [
+    private function buildEvidenceRefs(
+        array $tracked,
+        ?array $queueRow,
+        ?array $resolvedRow,
+        bool $explicitBatchMember = false,
+    ): array {
+        $refs = [
             'tracking_source' => [
                 'kind' => 'career_batch_coverage_set',
                 'path' => 'docs/career/batches/b71x_batch_set.json',
@@ -613,6 +644,16 @@ final class CareerFullReleaseLedgerService
                 'override_applied' => is_array($resolvedRow) ? (bool) ($resolvedRow['override_applied'] ?? false) : false,
             ],
         ];
+
+        if ($explicitBatchMember) {
+            $refs['explicit_rollout_batch'] = [
+                'kind' => 'canonical_rollout_batch_additional_slug_override',
+                'scope' => 'current_explicit_batch_only',
+                'authority_note' => 'Overrides review/family handoff cohort only for a separately approved explicit rollout batch.',
+            ];
+        }
+
+        return $refs;
     }
 
     private function normalizeIndexState(string $state): string
@@ -637,6 +678,24 @@ final class CareerFullReleaseLedgerService
         }
 
         return IndexStateValue::publicFacing($normalized, $indexEligible);
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return array<string, true>
+     */
+    private function slugSet(array $slugs): array
+    {
+        $set = [];
+
+        foreach ($slugs as $slug) {
+            $normalized = strtolower(trim($slug));
+            if ($normalized !== '') {
+                $set[$normalized] = true;
+            }
+        }
+
+        return $set;
     }
 
     /**
