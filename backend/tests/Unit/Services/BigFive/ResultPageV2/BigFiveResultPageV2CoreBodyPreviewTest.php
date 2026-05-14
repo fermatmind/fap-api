@@ -424,6 +424,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Domain/Career/Audit/Career80TargetDeltaPlanner.php',
             'backend/app/Domain/Career/Audit/Career80TargetDeltaResult.php',
+            'backend/app/Domain/Career/Audit/CareerProgressiveCohortDeltaPlanner.php',
+            'backend/app/Domain/Career/Audit/CareerProgressiveCohortDeltaPlanResult.php',
             'backend/app/Domain/Career/Audit/CareerRuntimeCandidateAwareArtifactRefresh.php',
             'backend/app/Domain/Career/Audit/CareerRuntimeArtifactRefreshPlanner.php',
             'backend/app/Domain/Career/Audit/CareerRuntimeArtifactRefreshResult.php',
@@ -1926,6 +1928,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Domain/Career/Audit/Career80TargetDeltaPlanner.php',
             'backend/app/Domain/Career/Audit/Career80TargetDeltaResult.php',
+            'backend/app/Domain/Career/Audit/CareerProgressiveCohortDeltaPlanner.php',
+            'backend/app/Domain/Career/Audit/CareerProgressiveCohortDeltaPlanResult.php',
             'backend/app/Domain/Career/Audit/CareerRuntimeCandidateAwareArtifactRefresh.php',
             'backend/app/Domain/Career/Audit/CareerRuntimeArtifactRefreshPlanner.php',
             'backend/app/Domain/Career/Audit/CareerRuntimeArtifactRefreshResult.php',
