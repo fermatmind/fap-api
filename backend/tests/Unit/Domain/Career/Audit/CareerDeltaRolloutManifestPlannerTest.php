@@ -29,6 +29,51 @@ final class CareerDeltaRolloutManifestPlannerTest extends TestCase
         $this->assertFalse($result['writes_database']);
     }
 
+    public function test_generates_220_delta_manifest_for_300_total_progressive_cohort(): void
+    {
+        $result = (new CareerDeltaRolloutManifestPlanner)->plan(
+            targetDeltaPlan: $this->progressiveTargetDeltaPlan($this->slugs('current', 80), $this->slugs('delta', 220), 300),
+            targetPublicTotal: 300,
+            expectedDeltaCount: 220,
+            batchId: 'career_80_to_300_canonical_001',
+        )->toArray();
+
+        $this->assertSame('pass', $result['status']);
+        $this->assertSame('career_80_to_300_delta', $result['target']);
+        $this->assertSame(300, $result['target_public_total']);
+        $this->assertSame(80, $result['published_baseline_count']);
+        $this->assertSame(220, $result['delta_slug_count']);
+        $this->assertSame(440, $result['expected_delta_locale_rows']);
+        $this->assertSame(220, $result['validation']['rollback_group_count']);
+        $this->assertSame($result['slugs'], $result['rollback_group']);
+        $this->assertTrue($result['dry_run_allowed']);
+        $this->assertFalse($result['apply_allowed']);
+        $this->assertSame('PROGRESSIVE_ROLLOUT_DRY_RUN', $result['next_required_action']);
+    }
+
+    public function test_generates_500_and_1986_delta_progressive_manifests(): void
+    {
+        $eightHundred = (new CareerDeltaRolloutManifestPlanner)->plan(
+            targetDeltaPlan: $this->progressiveTargetDeltaPlan($this->slugs('current', 300), $this->slugs('delta', 500), 800),
+            targetPublicTotal: 800,
+            expectedDeltaCount: 500,
+        )->toArray();
+
+        $this->assertSame('career_300_to_800_delta', $eightHundred['target']);
+        $this->assertSame(500, $eightHundred['delta_slug_count']);
+        $this->assertSame(1000, $eightHundred['expected_delta_locale_rows']);
+
+        $full = (new CareerDeltaRolloutManifestPlanner)->plan(
+            targetDeltaPlan: $this->progressiveTargetDeltaPlan($this->slugs('current', 800), $this->slugs('delta', 1986), 2786),
+            targetPublicTotal: 2786,
+            expectedDeltaCount: 1986,
+        )->toArray();
+
+        $this->assertSame('career_800_to_2786_delta', $full['target']);
+        $this->assertSame(1986, $full['delta_slug_count']);
+        $this->assertSame(3972, $full['expected_delta_locale_rows']);
+    }
+
     public function test_blocks_when_target_delta_is_not_passed(): void
     {
         $plan = $this->targetDeltaPlan(['baseline-001'], ['delta-001'], target: 2);
@@ -158,6 +203,36 @@ final class CareerDeltaRolloutManifestPlannerTest extends TestCase
             'published_baseline_count' => count($baseline),
             'delta_promotion_count' => count($delta),
             'published_baseline_slugs' => $baseline,
+            'delta_promotion_slugs' => $delta,
+            'recommended_rollout_delta_slugs' => $delta,
+            'rollout' => [
+                'delta_manifest_allowed' => true,
+                'apply_allowed' => false,
+            ],
+        ];
+    }
+
+    /**
+     * @param  list<string>  $current
+     * @param  list<string>  $delta
+     * @return array<string, mixed>
+     */
+    private function progressiveTargetDeltaPlan(array $current, array $delta, int $target): array
+    {
+        sort($current);
+        sort($delta);
+
+        return [
+            'schema_version' => 'career_progressive_cohort_delta_plan.v1',
+            'status' => 'pass',
+            'read_only' => true,
+            'writes_database' => false,
+            'current_public_total' => count($current),
+            'target_public_total' => $target,
+            'delta_slug_count' => count($delta),
+            'expected_delta_locale_rows' => count($delta) * 2,
+            'current_public_slugs' => $current,
+            'published_baseline_slugs' => $current,
             'delta_promotion_slugs' => $delta,
             'recommended_rollout_delta_slugs' => $delta,
             'rollout' => [

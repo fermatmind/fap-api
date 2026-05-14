@@ -84,6 +84,32 @@ final class CareerDeltaRolloutGatePlannerTest extends TestCase
         $this->assertSame(6, $result['validation']['expected_delta_locale_rows']);
     }
 
+    public function test_accepts_progressive_manifest_with_explicit_rollback_group(): void
+    {
+        $manifest = $this->manifest(
+            baseline: $this->slugs('current', 80),
+            delta: $this->slugs('delta', 220),
+            target: 300,
+        );
+        $manifest['target'] = 'career_80_to_300_delta';
+        $manifest['batch_id'] = 'career_80_to_300_canonical_001';
+
+        $result = (new CareerDeltaRolloutGatePlanner)->plan(
+            $manifest,
+            targetPublicTotal: 300,
+            expectedDeltaCount: 220,
+        )->toArray();
+
+        $this->assertSame('pass', $result['status']);
+        $this->assertSame('career_80_to_300_delta', $result['target']);
+        $this->assertSame(220, $result['delta_slug_count']);
+        $this->assertSame(440, $result['expected_delta_locale_rows']);
+        $this->assertSame(220, $result['validation']['rollback_group_count']);
+        $this->assertSame($result['delta_slugs'], $result['rollback_group']);
+        $this->assertSame('PROGRESSIVE_ROLLOUT_DRY_RUN', $result['next_required_action']);
+        $this->assertFalse($result['rollout_apply_allowed']);
+    }
+
     public function test_rejects_total_public_target_mismatch(): void
     {
         $result = (new CareerDeltaRolloutGatePlanner)->plan(

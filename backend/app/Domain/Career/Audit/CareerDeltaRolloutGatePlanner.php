@@ -18,6 +18,7 @@ final class CareerDeltaRolloutGatePlanner
         int $targetPublicTotal = 80,
         int $expectedDeltaCount = 51,
         ?string $manifestPath = null,
+        ?string $target = null,
     ): CareerDeltaRolloutGateResult {
         if ($targetPublicTotal < 1) {
             throw new RuntimeException('target_public_total_invalid');
@@ -45,11 +46,12 @@ final class CareerDeltaRolloutGatePlanner
             expectedRows: $expectedRows,
         );
         $pass = $blockers === [];
+        $target = $this->target($target, $manifest, $targetPublicTotal);
 
         return new CareerDeltaRolloutGateResult([
             'schema_version' => self::SCHEMA_VERSION,
             'status' => $pass ? 'pass' : 'blocked',
-            'target' => 'career_80_delta',
+            'target' => $target,
             'read_only' => true,
             'writes_database' => false,
             'target_public_total' => $targetPublicTotal,
@@ -99,8 +101,30 @@ final class CareerDeltaRolloutGatePlanner
             'rollout_apply_executed' => false,
             'blockers' => $blockers,
             'sidecars' => [],
-            'next_required_action' => $pass ? 'DELTA_ROLLOUT_DRY_RUN_51' : 'FIX_DELTA_ROLLOUT_GATE_BLOCKERS',
+            'next_required_action' => $pass ? $this->nextRequiredAction($target) : 'FIX_DELTA_ROLLOUT_GATE_BLOCKERS',
         ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     */
+    private function target(?string $target, array $manifest, int $targetPublicTotal): string
+    {
+        $candidate = trim((string) ($target ?? ($manifest['target'] ?? '')));
+        if ($candidate === '') {
+            $candidate = $targetPublicTotal === 80 ? 'career_80_delta' : 'career_'.$targetPublicTotal.'_delta';
+        }
+
+        $normalized = preg_replace('/[^a-z0-9]+/', '_', strtolower($candidate)) ?? $candidate;
+
+        return trim($normalized, '_') ?: 'career_80_delta';
+    }
+
+    private function nextRequiredAction(string $target): string
+    {
+        return $target === 'career_80_delta'
+            ? 'DELTA_ROLLOUT_DRY_RUN_51'
+            : 'PROGRESSIVE_ROLLOUT_DRY_RUN';
     }
 
     /**
