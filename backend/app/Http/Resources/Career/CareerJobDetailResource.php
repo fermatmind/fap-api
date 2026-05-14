@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
 use App\Services\Career\Bundles\CareerLocaleIntegrityGate;
+use App\Services\Career\Bundles\CareerRuntimePublishedDisplaySurfaceBuilder;
 use App\Services\Career\StructuredData\CareerStructuredDataBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -32,6 +34,11 @@ final class CareerJobDetailResource extends JsonResource
 
         $requestedLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
         $displaySurface = app(CareerJobDisplaySurfaceBuilder::class)->buildForBundle($bundle, $requestedLocale);
+        $runtimeProjectionItem = $this->runtimePublishedProjectionItem($bundle, $requestedLocale);
+        if ($displaySurface === null && $runtimeProjectionItem !== null) {
+            $displaySurface = app(CareerRuntimePublishedDisplaySurfaceBuilder::class)
+                ->build($bundle, $requestedLocale, $runtimeProjectionItem);
+        }
 
         if ($displaySurface !== null) {
             $payload['display_surface_v1'] = $displaySurface;
@@ -52,6 +59,41 @@ final class CareerJobDetailResource extends JsonResource
         }
 
         return $payload;
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private function runtimePublishedProjectionItem(CareerJobDetailBundle $bundle, string $locale): ?array
+    {
+        $slug = strtolower(trim((string) ($bundle->identity['canonical_slug'] ?? '')));
+        if ($slug === '') {
+            return null;
+        }
+
+        $item = app(CareerRuntimePublishProjectionVisibility::class)->itemForSlug($slug, $locale);
+        if (! is_array($item)) {
+            return null;
+        }
+
+        $state = (string) (
+            $item['runtime_publish_state']
+            ?? $item['runtime_state']
+            ?? $item['projection_state']
+            ?? $item['state']
+            ?? ''
+        );
+
+        if (
+            $state !== 'published'
+            || ($item['detail_route_enabled'] ?? false) !== true
+            || ($item['robots_indexable'] ?? false) !== true
+            || ($item['release_gate_pass'] ?? false) !== true
+        ) {
+            return null;
+        }
+
+        return $item;
     }
 
     /**

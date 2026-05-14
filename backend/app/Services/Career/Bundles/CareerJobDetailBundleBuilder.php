@@ -75,7 +75,8 @@ final class CareerJobDetailBundleBuilder
         }
 
         if ($occupation->crosswalk_mode === self::DIRECTORY_DRAFT_CROSSWALK_MODE) {
-            return $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug, $publicLocale);
+            return $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug, $publicLocale)
+                ?? $this->buildRuntimePublishedFallbackBundle($occupation, $normalizedSlug, $publicLocale);
         }
 
         $snapshot = RecommendationSnapshot::query()
@@ -106,7 +107,8 @@ final class CareerJobDetailBundleBuilder
                 return $displayAssetBackedBundle;
             }
 
-            return $this->buildFromPublishedDocxCareerJob($normalizedSlug, $publicLocale);
+            return $this->buildFromPublishedDocxCareerJob($normalizedSlug, $publicLocale)
+                ?? $this->buildRuntimePublishedFallbackBundle($occupation, $normalizedSlug, $publicLocale);
         }
 
         $payload = is_array($snapshot->snapshot_payload) ? $snapshot->snapshot_payload : [];
@@ -259,6 +261,175 @@ final class CareerJobDetailBundleBuilder
                 'compile_refs' => $this->normalizeArray($payload['compile_refs'] ?? []),
             ],
             lifecycleCompanion: $this->feedbackTimelineAuthorityService->buildCompanionForJobSnapshot($snapshot),
+            lifecycleOperational: $lifecycleOperational,
+            shortlistContract: [
+                'enabled' => true,
+                'subject_kind' => 'job_slug',
+                'subject_slug' => $subjectSlug,
+                'source_page_type' => 'career_job_detail',
+                'state_endpoint' => '/api/v0.5/career/shortlist/state',
+                'write_endpoint' => '/api/v0.5/career/shortlist',
+            ],
+            conversionClosure: $conversionClosure,
+        );
+    }
+
+    private function buildRuntimePublishedFallbackBundle(Occupation $occupation, string $requestedSlug, ?string $publicLocale = null): ?CareerJobDetailBundle
+    {
+        $subjectSlug = strtolower((string) $occupation->canonical_slug);
+        if ($subjectSlug === '' || $subjectSlug !== strtolower($requestedSlug)) {
+            return null;
+        }
+
+        if (! $this->runtimeProjectionItemAllowsIndexing($subjectSlug, $publicLocale)) {
+            return null;
+        }
+
+        $canonicalTitleZh = $this->localeIntegrityGate->validZhAuthorityText($occupation->canonical_title_zh);
+        $searchH1Zh = $this->localeIntegrityGate->validZhAuthorityText($occupation->search_h1_zh)
+            ?? $canonicalTitleZh;
+        $scoreBundle = $this->displayAssetBackedScoreBundle();
+        $warnings = [
+            'red_flags' => [],
+            'amber_flags' => ['runtime_published_navigation_shell'],
+            'blocked_claims' => ['compiled_recommendation_claims_unavailable', 'display_asset_claims_unavailable'],
+        ];
+        $lifecycleOperational = $this->lifecycleOperationalSummaryService->buildForSlug($subjectSlug);
+        $conversionClosure = $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
+
+        return new CareerJobDetailBundle(
+            identity: [
+                'occupation_uuid' => $occupation->id,
+                'canonical_slug' => $subjectSlug,
+                'entity_level' => $occupation->entity_level,
+                'family_uuid' => $occupation->family_id,
+                'parent_uuid' => $occupation->parent_id,
+            ],
+            localePolicy: [
+                'truth_market' => $occupation->truth_market,
+                'display_market' => $occupation->display_market,
+                'crosswalk_mode' => $occupation->crosswalk_mode,
+                'locale_warning' => 'runtime_published_navigation_shell',
+                'truth_notice_required' => true,
+            ],
+            titles: [
+                'canonical_en' => $occupation->canonical_title_en,
+                'canonical_zh' => $canonicalTitleZh,
+                'search_h1_zh' => $searchH1Zh,
+                'short_title_en' => $occupation->canonical_title_en,
+                'short_title_zh' => $canonicalTitleZh,
+            ],
+            aliasIndex: $occupation->aliases
+                ->sortBy([
+                    ['lang', 'asc'],
+                    ['register', 'asc'],
+                    ['alias', 'asc'],
+                ])
+                ->values()
+                ->map(static fn ($alias): array => [
+                    'alias' => $alias->alias,
+                    'normalized' => $alias->normalized,
+                    'lang' => $alias->lang,
+                    'register' => $alias->register,
+                    'intent_scope' => $alias->intent_scope,
+                    'target_kind' => $alias->target_kind,
+                    'target_uuid' => $alias->occupation_id ?? $alias->family_id,
+                    'precision' => $alias->precision_score,
+                    'confidence' => $alias->confidence_score,
+                ])
+                ->all(),
+            ontology: [
+                'task_prototype_signature' => is_array($occupation->task_prototype_signature) ? $occupation->task_prototype_signature : [],
+                'structural_stability' => $occupation->structural_stability,
+                'market_semantics_gap' => $occupation->market_semantics_gap,
+                'regulatory_divergence' => $occupation->regulatory_divergence,
+                'toolchain_divergence' => $occupation->toolchain_divergence,
+                'skill_gap_threshold' => $occupation->skill_gap_threshold,
+                'trust_inheritance_scope' => is_array($occupation->trust_inheritance_scope) ? $occupation->trust_inheritance_scope : [],
+                'crosswalks' => $this->crosswalkPayload($occupation),
+            ],
+            truthLayer: [
+                'source_refs' => [],
+                'summary' => null,
+                'median_pay_usd_annual' => null,
+                'jobs_2024' => null,
+                'projected_jobs_2034' => null,
+                'employment_change' => null,
+                'outlook_pct_2024_2034' => null,
+                'outlook_description' => null,
+                'entry_education' => null,
+                'work_experience' => null,
+                'on_the_job_training' => null,
+                'ai_exposure' => null,
+                'ai_rationale' => null,
+                'truth_market' => $occupation->truth_market,
+                'truth_last_reviewed_at' => null,
+            ],
+            contentSections: [],
+            contentBodyMd: null,
+            trustManifest: [
+                'manifest_version' => 'trust_manifest.v1',
+                'entity_id' => $subjectSlug,
+                'page_type' => 'career_job_detail',
+                'page_slug' => $subjectSlug,
+                'content_version' => 'runtime_published_navigation_shell',
+                'data_version' => 'career_runtime_publish_projection',
+                'logic_version' => 'career.protocol.job_detail.runtime_published_shell.v1',
+                'locale_context' => [
+                    'truth_market' => $occupation->truth_market,
+                    'display_market' => $occupation->display_market,
+                ],
+                'methodology' => [
+                    'derivation_policy' => 'runtime_projection_release_gate_shell',
+                    'notes' => ['Runtime projection permits the route and indexing; public copy remains restricted until compiled/detail display authority exists.'],
+                ],
+                'reviewer_status' => 'runtime_projection_release_gate',
+                'reviewed_at' => null,
+                'ai_assistance' => [],
+                'quality' => [
+                    'complete' => false,
+                    'reviewed' => false,
+                    'stale' => false,
+                    'blocked_reasons' => ['compiled_recommendation_snapshot_missing', 'display_asset_claims_unavailable'],
+                ],
+                'last_substantive_update_at' => null,
+                'next_review_due_at' => null,
+            ],
+            scoreBundle: $scoreBundle,
+            whiteBoxScores: $this->whiteBoxScorePayloadBuilder->build($scoreBundle, $warnings),
+            warnings: $warnings,
+            claimPermissions: [
+                'allow_strong_claim' => false,
+                'allow_salary_comparison' => false,
+                'allow_ai_strategy' => false,
+                'allow_transition_recommendation' => false,
+                'allow_cross_market_pay_copy' => false,
+                'reason_codes' => ['runtime_published_shell_no_strong_claims'],
+            ],
+            integritySummary: [
+                'integrity_state' => 'runtime_published_shell',
+                'critical_missing_fields' => ['compiled_recommendation_snapshot', 'display_asset_claims'],
+                'confidence_cap' => 50,
+                'degradation_factor' => 1,
+            ],
+            seoContract: $this->buildRuntimeProjectionSeoContract($occupation, $publicLocale),
+            provenanceMeta: [
+                'content_version' => 'runtime_published_navigation_shell',
+                'data_version' => 'career_runtime_publish_projection',
+                'logic_version' => 'career.protocol.job_detail.runtime_published_shell.v1',
+                'compiler_version' => null,
+                'compiled_at' => null,
+                'truth_metric_id' => null,
+                'trust_manifest_id' => null,
+                'index_state_id' => null,
+                'compile_run_id' => null,
+                'import_run_id' => null,
+                'source_trace_id' => null,
+                'compile_refs' => [
+                    'runtime_publish_projection' => 'release_gate_pass',
+                ],
+            ],
+            lifecycleCompanion: [],
             lifecycleOperational: $lifecycleOperational,
             shortlistContract: [
                 'enabled' => true,
@@ -789,7 +960,7 @@ final class CareerJobDetailBundleBuilder
     private function buildDisplayAssetBackedSeoContract(Occupation $occupation, ?string $publicLocale = null): array
     {
         $canonicalPath = $this->canonicalPathForPublicLocale($publicLocale, (string) $occupation->canonical_slug);
-        $indexEligible = $this->runtimeProjectionAllowsIndexing((string) $occupation->canonical_slug);
+        $indexEligible = $this->runtimeProjectionVisibilityAllowsIndexing((string) $occupation->canonical_slug);
         $indexState = $indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::TRUST_LIMITED;
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
         $surface = $this->seoSurfaceContractService->build([
@@ -818,11 +989,66 @@ final class CareerJobDetailBundleBuilder
         ];
     }
 
-    private function runtimeProjectionAllowsIndexing(string $slug): bool
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildRuntimeProjectionSeoContract(Occupation $occupation, ?string $publicLocale = null): array
+    {
+        $canonicalPath = $this->canonicalPathForPublicLocale($publicLocale, (string) $occupation->canonical_slug);
+        $indexEligible = $this->runtimeProjectionItemAllowsIndexing((string) $occupation->canonical_slug, $publicLocale);
+        $indexState = $indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::TRUST_LIMITED;
+        $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
+        $surface = $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'career_protocol_bundle',
+            'surface_type' => 'career_job_detail_runtime_published_shell',
+            'canonical_url' => $canonicalPath,
+            'robots_policy' => $robotsPolicy,
+            'title' => $occupation->canonical_title_en,
+            'description' => $occupation->canonical_title_en,
+            'indexability_state' => $indexState,
+            'sitemap_state' => $indexEligible ? 'included' : 'excluded',
+        ]);
+
+        return [
+            'canonical_path' => $canonicalPath,
+            'canonical_target' => $canonicalPath,
+            'index_state' => $indexState,
+            'index_eligible' => $indexEligible,
+            'reason_codes' => $indexEligible
+                ? ['runtime_publish_projection', 'release_gate_pass', 'runtime_published_navigation_shell']
+                : ['runtime_projection_noindex'],
+            'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
+            'surface_type' => $surface['surface_type'] ?? null,
+            'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
+            'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
+        ];
+    }
+
+    private function runtimeProjectionVisibilityAllowsIndexing(string $slug): bool
     {
         return $this->runtimePublishProjection->detailRouteEnabled($slug)
             && $this->runtimePublishProjection->robotsIndexable($slug)
             && $this->runtimePublishProjection->releaseGatePass($slug);
+    }
+
+    private function runtimeProjectionItemAllowsIndexing(string $slug, ?string $publicLocale = null): bool
+    {
+        $item = $this->runtimePublishProjection->itemForSlug($slug, $publicLocale ?? 'en');
+        $state = is_array($item)
+            ? (string) (
+                $item['runtime_publish_state']
+                ?? $item['runtime_state']
+                ?? $item['projection_state']
+                ?? $item['state']
+                ?? ''
+            )
+            : '';
+
+        return is_array($item)
+            && $state === 'published'
+            && ($item['detail_route_enabled'] ?? false) === true
+            && ($item['robots_indexable'] ?? false) === true
+            && ($item['release_gate_pass'] ?? false) === true;
     }
 
     private function hasDisplayAssetBackedAuthority(Occupation $occupation): bool

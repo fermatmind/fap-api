@@ -6,6 +6,11 @@ namespace App\Domain\Career\Publish;
 
 interface CareerRuntimePublishProjectionVisibility
 {
+    /**
+     * @return array<string, mixed>|null
+     */
+    public function itemForSlug(string $slug, string $locale = 'en'): ?array;
+
     public function datasetVisible(string $slug): bool;
 
     public function searchVisible(string $slug): bool;

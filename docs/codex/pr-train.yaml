@@ -3022,3 +3022,45 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-80-LIVE-SURFACE-AUTHORITY-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-POST-ROLLOUT-RUNTIME-PROJECTION-AUTHORITY-1
+    branch: fix/career-80-live-surface-authority-1
+    title: "fix(api): align career 80 live surface with runtime authority"
+    name: "Repair Career 80 live surface authority after successful rollout"
+    scope:
+      - Align Career job detail API live surfaces with locale-specific runtime-published projection authority.
+      - Emit a restricted runtime-published display surface shell only when runtime projection explicitly passes route, robots, and release gate for the locale.
+      - Allow runtime-published occupations without compiled/detail display assets to return a restricted public shell instead of 404.
+      - Preserve strict final live acceptance and avoid strong claims on restricted shells.
+    allowed_paths:
+      - backend/app/Domain/Career/Publish/**
+      - backend/app/Http/Resources/Career/**
+      - backend/app/Services/Career/Bundles/**
+      - backend/tests/Feature/Career/**
+      - backend/tests/Fixtures/Career/**
+      - backend/tests/Unit/Services/Career/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout apply.
+      - Run production DB mutation.
+      - Run rollback or quarantine.
+      - Run deploy.
+      - Touch fap-web.
+      - Weaken final live acceptance.
+      - Mark restricted runtime shells as human reviewed or strong-claim surfaces.
+    validation:
+      - php artisan test tests/Feature/Career/CareerJobDetailApiTest.php --no-ansi
+      - php artisan test tests/Unit/Services/Career/CareerJobDetailBundleBuilderTest.php --no-ansi
+      - php artisan test --filter=CareerValidateCanonicalBatchLiveAcceptance --no-ansi
+      - php artisan test --filter=Career80TotalLiveAcceptance --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
