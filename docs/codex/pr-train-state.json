@@ -4562,6 +4562,61 @@
       "sidecar_issues": [
 
       ]
+    },
+    "REPAIR-80-MANIFEST-TRAIN-COMMAND-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-80-manifest-train-command",
+      "title": "feat(api): add career 80 manifest train command",
+      "name": "Add read-only Career 80 manifest train command",
+      "status": "in_progress",
+      "depends_on": [
+        "80-READINESS-2"
+      ],
+      "scope_type": "80_manifest_train_command_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerGenerateCanonicalExpansionManifestTrain.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no rollout",
+        "no rollout dry-run",
+        "no apply",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change",
+        "no 300/800/2786 expansion execution"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided REPAIR-80-MANIFEST-TRAIN-COMMAND-1 execution goal and authorized docs/codex train metadata updates for this item."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "80-READINESS-2 passed with selected_count=80 and manifest_generation_allowed=true, but a read-only manifest train command is missing."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to a read-only manifest train command, tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "80-MANIFEST-TRAIN-2 run read-only manifest train",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+
+      ]
     }
   }
 }

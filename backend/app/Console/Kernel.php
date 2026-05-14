@@ -34,6 +34,7 @@ use App\Console\Commands\CareerExportRuntimePublishProjection;
 use App\Console\Commands\CareerExportStrongIndexEligibility;
 use App\Console\Commands\CareerFinalizeCanonicalRuntimeTruth;
 use App\Console\Commands\CareerFullDisplayWorkbookValidator;
+use App\Console\Commands\CareerGenerateCanonicalExpansionManifestTrain;
 use App\Console\Commands\CareerImportActorsDisplayAsset;
 use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\CareerImportOccupationDirectoryDrafts;
@@ -225,6 +226,7 @@ class Kernel extends ConsoleKernel
         CareerCompileAuthorityWave::class,
         CareerCompileRecommendationSubjects::class,
         CareerCrosswalkOps::class,
+        CareerGenerateCanonicalExpansionManifestTrain::class,
         CareerExportCanonicalExpansionManifest::class,
         CareerExportCanonicalEligibilityDbContext::class,
         CareerExportCanonicalEligibilitySurfaceContext::class,
