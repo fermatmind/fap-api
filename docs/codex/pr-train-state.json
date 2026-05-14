@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-14T03:48:30Z",
+  "updated_at": "2026-05-14T04:00:30Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -4573,7 +4573,7 @@
     "PR-CMS-03": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-03-article-publishing-ops",
-      "status": "pr_opened",
+      "status": "ci_fix_pushed",
       "depends_on": [
         "PR-CMS-01",
         "PR-CMS-02"
@@ -4638,6 +4638,25 @@
         "pr_created": {
           "status": "pass",
           "url": "https://github.com/fermatmind/fap-api/pull/1378"
+        },
+        "github_ci_failure_diagnosis": {
+          "status": "fixed_locally",
+          "evidence": "GitHub Actions verify-mbti-legacy/v2 failed because BigFive runtime freeze classifier treated PR-CMS-03 Ops-only files as runtime-impacting changes.",
+          "failing_test": "tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php::test_runtime_paths_have_no_uncommitted_diff"
+        },
+        "ci_fix_bigfive_freeze_classifier": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi",
+          "result": "73 passed, 418 assertions"
+        },
+        "ci_fix_pr_scope_regression": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi",
+            "cd backend && php artisan test tests/Feature/Ops/ArticlePublishingOpsPageTest.php --no-ansi",
+            "cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php app/Console/Commands/ArticleImportEditorialPackage.php app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php app/Models/ArticleEditorialPackageImport.php app/Filament/Ops/Pages/ArticlePublishingOpsPage.php tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php tests/Feature/Ops/ArticlePublishingOpsPageTest.php tests/Feature/Ops/OpsShellPolishTest.php tests/Feature/Ops/OpsCustomPagesI18nContractTest.php",
+            "git diff --check && git diff --cached --check"
+          ]
         }
       },
       "failure_reason": null,

@@ -536,6 +536,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_publishing_ops_dashboard_changes(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Pages/ArticlePublishingOpsPage.php',
+            'backend/app/Models/ArticleEditorialPackageImport.php',
+            'backend/database/migrations/2026_05_14_000100_create_article_editorial_package_imports_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_privacy_logs_dsar_key_rotation_changes(): void
     {
         $changed = [
@@ -1202,6 +1213,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticlePublishingOpsDashboardFile($file)) {
+                continue;
+            }
+
             if ($this->isPrivacyLogsDsarKeyRotationFile($file)) {
                 continue;
             }
@@ -1495,6 +1510,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return $file === 'backend/app/Console/Commands/ArticleImportEditorialPackage.php'
             || str_starts_with($file, 'backend/app/Services/Cms/EditorialPackage/');
+    }
+
+    private function isArticlePublishingOpsDashboardFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Pages/ArticlePublishingOpsPage.php',
+            'backend/app/Models/ArticleEditorialPackageImport.php',
+            'backend/database/migrations/2026_05_14_000100_create_article_editorial_package_imports_table.php',
+        ], true);
     }
 
     private function isPrivacyLogsDsarKeyRotationFile(string $file): bool
