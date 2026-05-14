@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T00:29:40+08:00",
+  "updated_at": "2026-05-15T01:41:30+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -5421,6 +5421,64 @@
       },
       "failure_reason": null,
       "next_pr": "POST-ROLLOUT-RUNTIME-PROJECTION-REFRESH-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
+    "REPAIR-80-LIVE-SURFACE-AUTHORITY-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-80-live-surface-authority-1",
+      "title": "fix(api): align career 80 live surface with runtime authority",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-POST-ROLLOUT-RUNTIME-PROJECTION-AUTHORITY-1"
+      ],
+      "scope_type": "career_80_live_surface_authority_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Publish/**",
+        "backend/app/Http/Resources/Career/**",
+        "backend/app/Services/Career/Bundles/**",
+        "backend/tests/Feature/Career/**",
+        "backend/tests/Fixtures/Career/**",
+        "backend/tests/Unit/Services/Career/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no rollout apply",
+        "no production DB mutation",
+        "no rollback",
+        "no quarantine",
+        "no deploy",
+        "no fap-web change",
+        "do not weaken final live acceptance",
+        "do not mark restricted runtime shells as human reviewed or strong-claim surfaces"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-80-LIVE-SURFACE-AUTHORITY-1, then implementing the PR."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR #1393 is merged/deployed into the current codebase; SCAN-20 shows remaining blockers are live API surface authority, noindex/CTA omissions, and one runtime-published 404."
+        },
+        "local_validation": {
+          "status": "pass",
+          "evidence": "Career detail API, display surface, bundle builder, runtime projection, ledger, live acceptance tests, route:list, sqlite migrate, Pint, git diff --check, and backend/scripts/ci_verify_mbti.sh passed locally."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to Career runtime publish visibility, Career job detail API/bundle surface authority, tests, audit docs, and authorized train metadata."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "POST-80-LIVE-ACCEPTANCE-RERUN-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,

@@ -15,6 +15,7 @@ final class CareerRuntimePublishProjectionVisibilityFixture implements CareerRun
      * @param  array<string, bool>  $robotsIndexable
      * @param  array<string, bool>  $releaseGatePass
      * @param  array<string, bool>  $familyHubLive
+     * @param  array<string, array<string, mixed>>  $items
      */
     public function __construct(
         private readonly bool $defaultDatasetVisible = true,
@@ -29,7 +30,22 @@ final class CareerRuntimePublishProjectionVisibilityFixture implements CareerRun
         private readonly array $robotsIndexable = [],
         private readonly array $releaseGatePass = [],
         private readonly array $familyHubLive = [],
+        private readonly array $items = [],
     ) {}
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    public function itemForSlug(string $slug, string $locale = 'en'): ?array
+    {
+        $normalizedSlug = $this->normalizeSlug($slug);
+        $normalizedLocale = $this->normalizeLocale($locale);
+
+        return $this->items[$normalizedSlug.'|'.$normalizedLocale]
+            ?? $this->items[$normalizedSlug.'|en']
+            ?? $this->items[$normalizedSlug]
+            ?? null;
+    }
 
     public function datasetVisible(string $slug): bool
     {
@@ -64,5 +80,10 @@ final class CareerRuntimePublishProjectionVisibilityFixture implements CareerRun
     private function normalizeSlug(string $slug): string
     {
         return strtolower(trim($slug));
+    }
+
+    private function normalizeLocale(string $locale): string
+    {
+        return str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh' : 'en';
     }
 }

@@ -338,7 +338,7 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/display-backed-public-canonical');
     }
 
-    public function test_zh_display_asset_backed_bundle_holds_english_surface_without_blocking_en(): void
+    public function test_zh_display_asset_backed_bundle_uses_runtime_published_shell_when_locale_surface_is_english(): void
     {
         $this->configurePublicResolutionPlan([
             ['slug' => 'data-scientists', 'status' => 'already_imported_validated'],
@@ -363,17 +363,54 @@ final class CareerJobDetailApiTest extends TestCase
         $this->getJson('/api/v0.5/career/jobs/data-scientists?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('titles.canonical_zh', '展示资产职业')
-            ->assertJsonPath('seo_contract.index_state', 'locale_not_ready')
-            ->assertJsonPath('seo_contract.index_eligible', false)
-            ->assertJsonPath('seo_contract.robots_policy', 'noindex,follow')
-            ->assertJsonPath('locale_policy.locale_warning', 'zh_locale_not_ready')
-            ->assertJsonMissingPath('display_surface_v1');
+            ->assertJsonPath('seo_contract.index_state', 'indexable')
+            ->assertJsonPath('seo_contract.index_eligible', true)
+            ->assertJsonPath('seo_contract.robots_policy', 'index,follow')
+            ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN')
+            ->assertJsonPath('display_surface_v1.implementation_contract.authority', 'runtime_publish_projection')
+            ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'restricted');
 
         $this->getJson('/api/v0.5/career/jobs/data-scientists?locale=en')
             ->assertOk()
             ->assertJsonPath('seo_contract.index_state', 'indexable')
             ->assertJsonPath('display_surface_v1.page.locale', 'en')
             ->assertJsonPath('display_surface_v1.page.content.hero.title', 'Data scientist career fit');
+    }
+
+    public function test_runtime_published_occupation_without_display_or_docx_asset_returns_restricted_public_shell(): void
+    {
+        $this->configurePublicResolutionPlan([
+            ['slug' => 'agricultural-workers-all-other', 'status' => 'already_imported_validated'],
+        ]);
+
+        $this->createDisplayAssetBackedOccupation('agricultural-workers-all-other');
+
+        $this->getJson('/api/v0.5/career/jobs/agricultural-workers-all-other?locale=en')
+            ->assertOk()
+            ->assertJsonPath('identity.canonical_slug', 'agricultural-workers-all-other')
+            ->assertJsonPath('trust_manifest.logic_version', 'career.protocol.job_detail.runtime_published_shell.v1')
+            ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/agricultural-workers-all-other')
+            ->assertJsonPath('seo_contract.index_state', 'indexable')
+            ->assertJsonPath('seo_contract.robots_policy', 'index,follow')
+            ->assertJsonPath('display_surface_v1.page.locale', 'en')
+            ->assertJsonPath('display_surface_v1.implementation_contract.authority', 'runtime_publish_projection')
+            ->assertJsonPath('display_surface_v1.page.content.primary_cta.test_slug', 'holland-career-interest-test-riasec')
+            ->assertJsonPath('display_surface_v1.page.content.primary_cta.target_action', 'start_riasec_test')
+            ->assertJsonPath('display_surface_v1.page.content.primary_cta.subject_key', 'agricultural-workers-all-other');
+    }
+
+    public function test_runtime_shell_does_not_bypass_projection_release_gate(): void
+    {
+        $this->configurePublicResolutionPlan([
+            ['slug' => 'blocked-runtime-shell', 'status' => 'requires_governance_review'],
+        ]);
+
+        $this->createDisplayAssetBackedOccupation('blocked-runtime-shell');
+
+        $this->getJson('/api/v0.5/career/jobs/blocked-runtime-shell?locale=en')
+            ->assertStatus(404)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
     /**
@@ -393,6 +430,7 @@ final class CareerJobDetailApiTest extends TestCase
         $detailRouteEnabled = [];
         $robotsIndexable = [];
         $releaseGatePass = [];
+        $items = [];
         foreach ($rows as $row) {
             $slug = strtolower(trim((string) ($row['slug'] ?? '')));
             if ($slug === '') {
@@ -404,6 +442,18 @@ final class CareerJobDetailApiTest extends TestCase
             $detailRouteEnabled[$slug] = $enabled;
             $robotsIndexable[$slug] = $enabled;
             $releaseGatePass[$slug] = $enabled;
+            foreach (['en', 'zh'] as $locale) {
+                $items[$slug.'|'.$locale] = [
+                    'slug' => $slug,
+                    'locale' => $locale,
+                    'dataset_visible' => $enabled,
+                    'search_visible' => $enabled,
+                    'detail_route_enabled' => $enabled,
+                    'robots_indexable' => $enabled,
+                    'release_gate_pass' => $enabled,
+                    'runtime_publish_state' => $enabled ? 'published' : 'blocked',
+                ];
+            }
         }
 
         $this->app->instance(
@@ -415,6 +465,7 @@ final class CareerJobDetailApiTest extends TestCase
                 detailRouteEnabled: $detailRouteEnabled,
                 robotsIndexable: $robotsIndexable,
                 releaseGatePass: $releaseGatePass,
+                items: $items,
             ),
         );
     }

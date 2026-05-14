@@ -888,6 +888,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
             'backend/app/Http/Resources/Career/CareerJobDetailResource.php',
+            'backend/app/Services/Career/Bundles/CareerRuntimePublishedDisplaySurfaceBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php',
             'backend/app/Services/Career/Bundles/CareerLocaleIntegrityGate.php',
             'backend/app/Services/Cms/CareerJobSeoService.php',
@@ -1743,6 +1744,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerLocaleIntegrityGate.php',
             'backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerRuntimePublishedDisplaySurfaceBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php',
             'backend/app/Services/Career/Bundles/CareerFamilyHubBundleBuilder.php',
             'backend/app/Http/Resources/Career/CareerJobDetailResource.php',
