@@ -5093,6 +5093,64 @@
       "local_cleanup_executed": false,
       "sidecar_issues": []
     },
+    "REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2": {
+      "repo": "fap-api",
+      "branch": "fix/career-runtime-candidate-artifact-refresh-2",
+      "title": "fix(api): add candidate-aware runtime artifact refresh",
+      "name": "Add candidate-aware runtime artifact refresh after verified candidate prep apply",
+      "status": "in_progress",
+      "depends_on": [
+        "RUNTIME-CANDIDATE-PREP-APPLY-1",
+        "REPAIR-RUNTIME-ARTIFACT-REFRESH-1"
+      ],
+      "scope_type": "candidate_aware_runtime_artifact_refresh_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonicalRuntimeArtifactRefresh.php",
+        "backend/app/Console/Commands/CareerRefreshCanonicalRuntimeArtifactsCandidateAware.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/tests/Feature/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no DB mutation",
+        "no candidate prep apply",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no backfill",
+        "no rollback",
+        "no quarantine",
+        "no deploy",
+        "no fap-web change"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized docs/codex/pr-train.yaml and docs/codex/pr-train-state.json updates for REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "Candidate prep apply succeeded with write_verified=true, and SCAN-15 identified that canonical refresh artifacts did not consume the verified apply artifact."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Scope is limited to read-only candidate-aware artifact refresh semantics, tests, docs, and train metadata."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "RUNTIME-CANDIDATE-ARTIFACT-REFRESH-RUN-2",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
     "PR-CMS-04": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-04-controlled-codex-publish-sop",
