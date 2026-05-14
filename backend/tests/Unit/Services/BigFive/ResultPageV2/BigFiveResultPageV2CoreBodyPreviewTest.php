@@ -687,6 +687,38 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_funnel_attribution_ingest_contract_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php',
+        ];
+        $allowedChangedLines = [
+            "+        'submit_attempt',",
+            "+            'payload.durationMs' => ['nullable', 'integer', 'min:0', 'max:86400000'],",
+            '+        $payloadInput = $request->input(\'payload\');',
+            "+            'payload' => ['nullable', 'array'],",
+            "-            'payload' => ['nullable', 'array:'.implode(',', self::PAYLOAD_KEYS)],",
+            "+        \$scaleCode = \$this->normalizeOptionalString(",
+            "+            'scale_code' => \$scaleCode,",
+        ];
+        $blockedChangedLines = [
+            '+        abort(403);',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            attributionControllerChangedLines: $allowedChangedLines,
+        ));
+        $this->assertSame($changed, $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            attributionControllerChangedLines: $blockedChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_iq_identity_metadata_seed_changes(): void
     {
         $changed = [
@@ -1232,6 +1264,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $appServiceProviderChangedLines = null,
         ?array $scaleRegistrySeederChangedLines = null,
         ?array $articleControllerChangedLines = null,
+        ?array $attributionControllerChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -1413,6 +1446,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isResultEmailGatedReadFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php'
+                && $this->attributionControllerDiffIsSeoFunnelContractOnly(
+                    $attributionControllerChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
                 continue;
             }
 
@@ -2098,6 +2144,54 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
             'backend/app/Services/Results/ResultEmailReadAccessService.php',
         ], true);
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function attributionControllerDiffIsSeoFunnelContractOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/^[+-]\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^[+]\s*[}\]);,]*\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^[+]\s*\'(slug|scaleCode|scale_code|current_path|attemptIdMasked|answered_count|durationMs|duration_ms|duration_bucket|order_no|orderNo|orderNoMasked|order_id|transaction_id|amount|value|price|currency|provider|pack_version|manifest_hash|norms_version|quality_level|locked|variant|sku_id|utm_source|utm_medium|utm_campaign|utm_term|utm_content|gclid|msclkid|fbclid|referrer|session_id|submit_attempt)\',\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^[+]\s*\'payload\.(slug|scaleCode|scale_code|current_path|attemptIdMasked|answered_count|durationMs|duration_ms|duration_bucket|order_no|orderNo|orderNoMasked|order_id|transaction_id|amount|value|price|currency|provider|pack_version|manifest_hash|norms_version|quality_level|locked|variant|sku_id|utm_source|utm_medium|utm_campaign|utm_term|utm_content|gclid|msclkid|fbclid|referrer|session_id)\'\s*=>\s*\[/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^-\s*\'payload\'\s*=>\s*\[\'nullable\',\s*\'array:\'\.implode\(.*, self::PAYLOAD_KEYS\)\],\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^[+]\s*\'payload\'\s*=>\s*\[\'nullable\',\s*\'array\'\],\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^[+]\s*(\$payloadInput = \$request->input\(\'payload\'\);|if \(\$payloadInput !== null && ! is_array\(\$payloadInput\)\) \{|throw ValidationException::withMessages\(\[|\'payload\' => \'The payload field must be an array\.\',|if \(is_array\(\$payloadInput\)\) \{|\$this->rejectUnexpectedKeys\(\$payloadInput, self::PAYLOAD_KEYS, \'payload\'\);)\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^[+-]\s*(\$scaleCode = \$this->normalizeOptionalString\(|\$payload\[\'scale_code\'\]|\?\? \$payload\[\'scaleCode\'\]|\?\? null,|64|\) \?\? \'MBTI\';|\'scale_code\' => (?:\'MBTI\'|\$scaleCode),|\$attributes\[\'scale_code_v2\'\] = (?:\'MBTI\'|\$scaleCode);)\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            return false;
+        }
+
+        return true;
     }
 
     /**
