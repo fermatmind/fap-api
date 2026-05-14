@@ -5092,6 +5092,85 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": []
+    },
+    "PR-CMS-04": {
+      "repo": "fap-api",
+      "branch": "codex/pr-cms-04-controlled-codex-publish-sop",
+      "title": "PR-CMS-04｜Controlled Codex-Assisted CMS Publish SOP",
+      "status": "local_checks_passed",
+      "depends_on": [
+        "PR-CMS-01",
+        "PR-CMS-02",
+        "PR-CMS-03"
+      ],
+      "scope_type": "controlled_codex_assisted_cms_publish_sop",
+      "allowed_paths": [
+        "AGENTS.md",
+        "backend/AGENTS.md",
+        "backend/app/Console/Commands/ArticlePublishControlled.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Services/Cms/ArticlePublishService.php",
+        "backend/tests/Feature/Console/ArticlePublishControlledCommandTest.php",
+        "docs/04-ops/controlled-codex-assisted-cms-publish.md",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "non_goals": [
+        "no production article publish",
+        "no article content rewrite",
+        "no fap-web changes",
+        "no user attempts/results/reports/orders/payments/shares access",
+        "no uncontrolled CMS UI publish"
+      ],
+      "commit_sha": "951be675de1f11d1b67181db66a3f73624d59b52",
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding PR-CMS-04 to fap-api pr-train manifest/state and executing Controlled Codex-Assisted CMS Publish SOP."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Scope limited to controlled publish command, SOP/rule updates, publish service audit source, tests, and train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR-CMS-01/02/03 workflows are merged; this PR only extends the publishing SOP after draft gate, revalidate automation, and Ops queue readiness."
+        },
+        "article_publish_controlled_test": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Console/ArticlePublishControlledCommandTest.php --no-ansi",
+          "evidence": "3 tests passed, 31 assertions."
+        },
+        "article_import_editorial_package_regression": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi",
+          "evidence": "6 tests passed, 112 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi"
+        },
+        "sqlite_migrate_pretend": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "evidence": "No migration changes in this PR; sqlite pretend used to avoid unrelated local MySQL root auth failure."
+        },
+        "scoped_pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test app/Console/Commands/ArticlePublishControlled.php app/Services/Cms/ArticlePublishService.php app/Console/Kernel.php tests/Feature/Console/ArticlePublishControlledCommandTest.php"
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        }
+      },
+      "failure_reason": null,
+      "next_pr": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
     }
   }
 }

@@ -40,6 +40,39 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+
+  - id: PR-CMS-04
+    repo: fap-api
+    depends_on:
+      - PR-CMS-01
+      - PR-CMS-02
+      - PR-CMS-03
+    branch: codex/pr-cms-04-controlled-codex-publish-sop
+    title: "PR-CMS-04｜Controlled Codex-Assisted CMS Publish SOP"
+    scope:
+      - Add a controlled Codex-assisted article publish SOP and guarded artisan command.
+      - Require exact human confirmation phrase, preflight gates, claim-warning acknowledgement, exactness/media/references/graph validation, and audit logging before publish.
+      - Keep generic CMS/UI publish behavior separate and do not publish production content in this PR.
+    do_not:
+      - Publish articles or mutate production content.
+      - Touch fap-web.
+      - Touch user attempts, results, reports, orders, payments, shares, scoring, result pages, payment, invite, or raw answers.
+      - Allow uncontrolled Codex CMS UI publish.
+    validation:
+      - php artisan test tests/Feature/Console/ArticlePublishControlledCommandTest.php --no-ansi
+      - php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - vendor/bin/pint --test app/Console/Commands/ArticlePublishControlled.php app/Services/Cms/ArticlePublishService.php app/Console/Kernel.php tests/Feature/Console/ArticlePublishControlledCommandTest.php
+      - php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=controlled_article_publish --no-ansi
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+
   - id: career-runtime-publish-projection
     repo: fap-api
     branch: codex/career-runtime-publish-projection

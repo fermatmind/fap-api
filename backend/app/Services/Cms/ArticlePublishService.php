@@ -13,7 +13,7 @@ use RuntimeException;
 
 final class ArticlePublishService
 {
-    public function publishArticle(int $articleId): Article
+    public function publishArticle(int $articleId, string $source = 'article_publish_service'): Article
     {
         if ($articleId <= 0) {
             throw new InvalidArgumentException('article_id must be positive.');
@@ -47,7 +47,7 @@ final class ArticlePublishService
             return $article->fresh(['publishedRevision']) ?? $article;
         });
 
-        ContentReleaseAudit::log('article', $article, 'article_publish_service');
+        ContentReleaseAudit::log('article', $article, $source);
 
         return $article;
     }
