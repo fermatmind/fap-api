@@ -404,6 +404,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Domain/Career/Audit/Career80TargetDeltaPlanner.php',
             'backend/app/Domain/Career/Audit/Career80TargetDeltaResult.php',
+            'backend/app/Domain/Career/Audit/CareerRuntimeCandidatePrepPlanner.php',
+            'backend/app/Domain/Career/Audit/CareerRuntimeCandidatePrepResult.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessIssue.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessPlanner.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessResult.php',
@@ -1850,6 +1852,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Domain/Career/Audit/Career80TargetDeltaPlanner.php',
             'backend/app/Domain/Career/Audit/Career80TargetDeltaResult.php',
+            'backend/app/Domain/Career/Audit/CareerRuntimeCandidatePrepPlanner.php',
+            'backend/app/Domain/Career/Audit/CareerRuntimeCandidatePrepResult.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessIssue.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessPlanner.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessResult.php',
