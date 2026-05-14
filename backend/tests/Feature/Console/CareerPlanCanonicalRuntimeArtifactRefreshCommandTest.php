@@ -204,6 +204,37 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
         $this->assertFalse($ledger['members'][1]['canonical_ledger_authority_claimed']);
     }
 
+    public function test_candidate_aware_mode_supports_220_delta_progressive_overlay(): void
+    {
+        $payload = $this->runCandidateAwareProgressiveOverlay(220, 'career_80_to_300_delta');
+
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame('career_80_to_300_delta', $payload['target']);
+        $this->assertSame(220, $payload['delta_slug_count']);
+        $this->assertSame(440, $payload['expected_delta_locale_rows']);
+        $this->assertSame(440, $payload['projection']['overlay_rows']);
+        $this->assertSame(440, $payload['truth']['overlay_rows']);
+        $this->assertSame(220, $payload['ledger']['overlay_members']);
+        $this->assertSame('PROGRESSIVE_ROLLOUT_DRY_RUN', $payload['next_required_action']);
+    }
+
+    public function test_candidate_aware_mode_supports_500_and_1986_delta_progressive_overlays(): void
+    {
+        $fiveHundred = $this->runCandidateAwareProgressiveOverlay(500, 'career_300_to_800_delta');
+
+        $this->assertSame(500, $fiveHundred['delta_slug_count']);
+        $this->assertSame(1000, $fiveHundred['projection']['overlay_rows']);
+        $this->assertSame(1000, $fiveHundred['truth']['overlay_rows']);
+        $this->assertSame(500, $fiveHundred['ledger']['overlay_members']);
+
+        $full = $this->runCandidateAwareProgressiveOverlay(1986, 'career_800_to_2786_delta');
+
+        $this->assertSame(1986, $full['delta_slug_count']);
+        $this->assertSame(3972, $full['projection']['overlay_rows']);
+        $this->assertSame(3972, $full['truth']['overlay_rows']);
+        $this->assertSame(1986, $full['ledger']['overlay_members']);
+    }
+
     public function test_candidate_aware_artifacts_pass_runtime_candidate_pool_synthetic_integration(): void
     {
         $slugs = ['alpha-career', 'beta-career'];
@@ -303,6 +334,39 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
         return Artisan::call('career:plan-canonical-runtime-artifact-refresh', array_merge([
             '--json' => true,
         ], $options));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function runCandidateAwareProgressiveOverlay(int $count, string $target): array
+    {
+        $projectionOutput = $this->tempPath($target.'-projection');
+        $truthOutput = $this->tempPath($target.'-truth');
+        $ledgerOutput = $this->tempPath($target.'-ledger');
+        $summaryOutput = $this->tempPath($target.'-summary');
+
+        $exitCode = $this->callCommand([
+            '--target' => $target,
+            '--candidate-aware' => true,
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', $this->candidatePrepApplyForSlugs($this->slugs($count))),
+            '--projection' => $this->writeJson('projection', ['items' => []]),
+            '--truth' => $this->writeJson('truth', ['items' => []]),
+            '--ledger' => $this->writeJson('ledger', ['members' => []]),
+            '--projection-output' => $projectionOutput,
+            '--truth-output' => $truthOutput,
+            '--ledger-output' => $ledgerOutput,
+            '--expect-slug-count' => $count,
+            '--output' => $summaryOutput,
+        ]);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertFileExists($summaryOutput);
+        $this->assertFileExists($projectionOutput);
+        $this->assertFileExists($truthOutput);
+        $this->assertFileExists($ledgerOutput);
+
+        return json_decode((string) file_get_contents($summaryOutput), true, flags: JSON_THROW_ON_ERROR);
     }
 
     /**
@@ -515,10 +579,10 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
     /**
      * @return list<string>
      */
-    private function slugs(): array
+    private function slugs(int $count = 51): array
     {
         $slugs = [];
-        for ($i = 1; $i <= 51; $i++) {
+        for ($i = 1; $i <= $count; $i++) {
             $slugs[] = sprintf('delta-%03d', $i);
         }
 
