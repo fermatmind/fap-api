@@ -3113,8 +3113,8 @@
         "no 80 readiness run",
         "no deploy"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "93299919315f7ecced945248ebd3f70eb3838951",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1387",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -4938,7 +4938,7 @@
       "branch": "fix/career-51-delta-rollout-manifest-1",
       "title": "fix(api): add career 51-delta rollout manifest",
       "name": "Add Career 51-delta rollout manifest",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "REPAIR-RUNTIME-ARTIFACT-REFRESH-1"
       ],
@@ -4963,7 +4963,7 @@
         "no fap-web change",
         "no production command"
       ],
-      "commit_sha": "371ce8edbd74be1c89c75c8975181b050aaab851",
+      "commit_sha": "f252ca1b7859bc7b9c2856eb3fc10a8f9a654435",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1386",
       "checks": {
         "authorization": {
@@ -4981,6 +4981,59 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-DELTA-ROLLOUT-GATE-1",
+      "merged_at": "2026-05-14T08:07:46Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "sidecar_issues": []
+    },
+    "REPAIR-DELTA-ROLLOUT-GATE-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-delta-rollout-gate-1",
+      "title": "fix(api): add career delta rollout gate semantics",
+      "name": "Add Career delta rollout gate semantics",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-51-DELTA-ROLLOUT-MANIFEST-1"
+      ],
+      "scope_type": "delta_rollout_gate_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonicalDeltaRolloutGate.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no rollout dry-run",
+        "no rollout apply",
+        "no candidate prep apply",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change",
+        "no production command"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User requested the autonomous Career 80 delta PR train and authorized train metadata updates."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR #1386 merged the read-only 51-delta rollout manifest."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Current PR scope is limited to read-only delta rollout gate semantics, command registration, tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "REPAIR-80-TOTAL-LIVE-ACCEPTANCE-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
