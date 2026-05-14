@@ -983,7 +983,7 @@
       "sidecar_issues": [
         {
           "sidecar_id": "IQ-SIDECAR-COMMERCE-DEFERRED-001",
-          "title": "defer(iq): commerce unlock \u00a51.99 / \u00a55 implementation",
+          "title": "defer(iq): commerce unlock ¥1.99 / ¥5 implementation",
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
@@ -1002,7 +1002,7 @@
             "api/v0.3/webhooks/payment/*"
           ],
           "evidence": [
-            "User intentionally deferred the \u00a51.99 / \u00a55 commerce PR.",
+            "User intentionally deferred the ¥1.99 / ¥5 commerce PR.",
             "Paid unlock is not required for identity/scoring/report/SVG provenance foundation.",
             "The train can continue without checkout/SKU/webhook changes."
           ],
@@ -4217,7 +4217,7 @@
         },
         "forbidden_runtime_claim_grep": {
           "status": "pass",
-          "command": "rg -n \"Matches|career recommendation|job fit|success prediction|success probability|hiring suitability|140Q more accurate|raw score delta|\u66f4\u51c6\u786e|\u66f4\u51c6|\u5c97\u4f4d\u5339\u914d|\u804c\u4e1a\u63a8\u8350|\u804c\u4e1a\u6210\u529f\" backend/app/Services/Riasec/RiasecPublicProjectionService.php backend/app/Services/Report/RiasecReportComposer.php || true",
+          "command": "rg -n \"Matches|career recommendation|job fit|success prediction|success probability|hiring suitability|140Q more accurate|raw score delta|更准确|更准|岗位匹配|职业推荐|职业成功\" backend/app/Services/Riasec/RiasecPublicProjectionService.php backend/app/Services/Report/RiasecReportComposer.php || true",
           "evidence": "No runtime service hits."
         },
         "diff_check": {
@@ -4713,6 +4713,60 @@
       },
       "failure_reason": null,
       "next_pr": "80-CANDIDATE-RUNTIME-POOL-RUN-1 read-only pool planning",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
+    "REPAIR-80-TARGET-DELTA-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-80-target-delta-decomposition-1",
+      "title": "fix(api): add career 80 target delta decomposition",
+      "name": "Represent Career 80 as published baseline plus delta promotion slugs",
+      "status": "in_progress",
+      "depends_on": [
+        "SCAN-14"
+      ],
+      "scope_type": "80_target_delta_decomposition_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonical80TargetDelta.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no runtime candidate preparation",
+        "no manifest generation",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no apply",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json as needed for the current PR item in the 7-PR train."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SCAN-14 established the Career 80 target should be represented as 29 already-published baseline slugs plus 51 delta promotion slugs."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Current PR scope is limited to read-only target delta decomposition, tests/docs, command registration, and train metadata."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "REPAIR-RUNTIME-CANDIDATE-PREP-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
