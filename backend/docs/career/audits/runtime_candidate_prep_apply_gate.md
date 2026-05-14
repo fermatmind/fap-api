@@ -78,6 +78,18 @@ Apply outputs:
 
 The apply path writes `promotion_candidate` index-state rows with `index_eligible=true`. In the current runtime projection semantics, that is the persisted authority that prepares a hidden pre-route `published_candidate` row. It does not promote the slug to `published`.
 
+After a future approved apply returns `write_verified=true`, run the read-only artifact refresh planner before any delta rollout dry-run:
+
+```bash
+php artisan career:plan-canonical-runtime-artifact-refresh \
+  --target=career_80_delta \
+  --delta-plan=/tmp/career_80_target_delta_plan.json \
+  --candidate-prep-plan=/tmp/career_80_delta_runtime_candidate_prep_plan.json \
+  --candidate-prep-apply=/tmp/career_80_delta_runtime_candidate_prep_apply.json \
+  --json \
+  --output=/tmp/career_80_delta_runtime_artifact_refresh_plan_after_apply.json
+```
+
 ## Non-goals
 
 - No rollout dry-run.

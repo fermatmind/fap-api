@@ -707,7 +707,7 @@
         "backend-email-gated-report-read"
       ],
       "commit_sha": "32f35c17a0f29758f0f700010ac1b0c7492ffb6c",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1384",
       "checks": {},
       "sidecar_issues": [],
       "failure_reason": null,
@@ -2630,7 +2630,7 @@
         "no 80 readiness run",
         "no deploy"
       ],
-      "commit_sha": null,
+      "commit_sha": "8589f43480d69100ba6d7333e4032dba039bf924",
       "pr_url": null,
       "checks": {
         "authorization": {
@@ -4875,6 +4875,59 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-RUNTIME-ARTIFACT-REFRESH-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
+    "REPAIR-RUNTIME-ARTIFACT-REFRESH-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-runtime-artifact-refresh-flow-1",
+      "title": "fix(api): add career runtime artifact refresh plan",
+      "name": "Add Career runtime artifact refresh plan for 51 delta candidate prep",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-RUNTIME-CANDIDATE-PREP-APPLY-GATE-1"
+      ],
+      "scope_type": "runtime_artifact_refresh_plan_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonicalRuntimeArtifactRefresh.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no artifact export execution",
+        "no candidate prep apply",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly requested REPAIR-RUNTIME-ARTIFACT-REFRESH-1 and authorized current train metadata updates."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR #1383 merged the guarded runtime candidate preparation dry-run/apply command."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Current PR scope is limited to read-only runtime artifact refresh planning, command registration, tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "REPAIR-51-DELTA-ROLLOUT-MANIFEST-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
