@@ -53,6 +53,16 @@ A selected slug must:
 - use `public_canonical_job`;
 - have no route/API exposure before promotion.
 
+Candidate-aware 51-delta planning has a narrower pre-promotion exception. A slug may pass the runtime candidate pool even when the refreshed audit still carries full-publication blockers such as `index_state_not_indexed_like`, `runtime_publish_state_not_published`, or `truth_state_not_published`, but only when the supplied planning artifacts prove all of the following:
+
+- the ledger member, projection rows, and truth rows are candidate-aware overlay rows with `overlay_source=candidate_prep_apply_overlay`;
+- the ledger evidence shows the candidate prep apply was `write_verified=true`;
+- the index evidence shows `latest_index_state=promotion_candidate`;
+- the projection/truth runtime state is `published_candidate` for every required locale;
+- the slug is evaluated as a delta pre-promotion candidate and not as an already-published baseline slug.
+
+This exception is only for rollout dry-run planning. It does not make the slug published, does not authorize apply, and does not satisfy final 80-total live acceptance.
+
 The command excludes:
 
 - already-published slugs;

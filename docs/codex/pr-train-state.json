@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-14T18:05:00+08:00",
+  "updated_at": "2026-05-14T21:20:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -5231,6 +5231,57 @@
       },
       "failure_reason": null,
       "next_pr": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
+    "REPAIR-CANDIDATE-AWARE-AUDIT-POLICY-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-candidate-aware-audit-policy-1",
+      "title": "fix(api): accept candidate-aware runtime states for delta planning",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2"
+      ],
+      "scope_type": "candidate_aware_audit_policy_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/**",
+        "backend/app/Console/Commands/**",
+        "backend/tests/Feature/Console/**",
+        "backend/tests/Unit/Domain/Career/Audit/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no rollout dry-run",
+        "no rollout apply",
+        "no candidate prep apply",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change",
+        "do not weaken final live acceptance"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided explicit PR id, scope, allowed paths, commit/PR instructions, and allowed docs/codex train metadata paths for REPAIR-CANDIDATE-AWARE-AUDIT-POLICY-1."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR #1389 candidate-aware runtime artifact refresh is merged; candidate-aware artifacts and audit/pool blocker evidence exist."
+        },
+        "scope": {
+          "status": "pending",
+          "evidence": "Implementation in progress; scope validation will run before commit."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "RUNTIME-CANDIDATE-AWARE-AUDIT-REFRESH-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
