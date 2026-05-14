@@ -983,7 +983,7 @@
       "sidecar_issues": [
         {
           "sidecar_id": "IQ-SIDECAR-COMMERCE-DEFERRED-001",
-          "title": "defer(iq): commerce unlock ¥1.99 / ¥5 implementation",
+          "title": "defer(iq): commerce unlock \u00a51.99 / \u00a55 implementation",
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
@@ -1002,7 +1002,7 @@
             "api/v0.3/webhooks/payment/*"
           ],
           "evidence": [
-            "User intentionally deferred the ¥1.99 / ¥5 commerce PR.",
+            "User intentionally deferred the \u00a51.99 / \u00a55 commerce PR.",
             "Paid unlock is not required for identity/scoring/report/SVG provenance foundation.",
             "The train can continue without checkout/SKU/webhook changes."
           ],
@@ -4217,7 +4217,7 @@
         },
         "forbidden_runtime_claim_grep": {
           "status": "pass",
-          "command": "rg -n \"Matches|career recommendation|job fit|success prediction|success probability|hiring suitability|140Q more accurate|raw score delta|更准确|更准|岗位匹配|职业推荐|职业成功\" backend/app/Services/Riasec/RiasecPublicProjectionService.php backend/app/Services/Report/RiasecReportComposer.php || true",
+          "command": "rg -n \"Matches|career recommendation|job fit|success prediction|success probability|hiring suitability|140Q more accurate|raw score delta|\u66f4\u51c6\u786e|\u66f4\u51c6|\u5c97\u4f4d\u5339\u914d|\u804c\u4e1a\u63a8\u8350|\u804c\u4e1a\u6210\u529f\" backend/app/Services/Riasec/RiasecPublicProjectionService.php backend/app/Services/Report/RiasecReportComposer.php || true",
           "evidence": "No runtime service hits."
         },
         "diff_check": {
@@ -4663,6 +4663,60 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "REPAIR-80-CANDIDATE-RUNTIME-POOL-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-80-candidate-runtime-pool-1",
+      "title": "feat(api): add career 80 runtime candidate pool planner",
+      "name": "Add read-only Career 80 runtime candidate pool planner",
+      "status": "in_progress",
+      "depends_on": [
+        "80-READINESS-3"
+      ],
+      "scope_type": "80_runtime_candidate_pool_planner_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonical80RuntimeCandidatePool.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no rollout",
+        "no rollout dry-run",
+        "no manifest generation",
+        "no apply",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change",
+        "no 300/800/2786 expansion execution"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-80-CANDIDATE-RUNTIME-POOL-1, then implementing the PR."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "80-READINESS-3 blocked correctly with rollout_candidate_eligible_count=0, and SCAN-12 determined a read-only runtime candidate pool planner is the next remediation step."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to read-only runtime candidate pool planning, tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "80-CANDIDATE-RUNTIME-POOL-RUN-1 read-only pool planning",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
     }
   }
 }
