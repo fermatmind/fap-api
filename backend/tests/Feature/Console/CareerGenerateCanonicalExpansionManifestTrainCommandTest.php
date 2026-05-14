@@ -88,6 +88,22 @@ final class CareerGenerateCanonicalExpansionManifestTrainCommandTest extends Tes
         $this->assertContains('selected_count_below_target', array_column($payload['blockers'], 'reason'));
     }
 
+    public function test_rollout_candidate_gate_below_target_blocks(): void
+    {
+        $path = $this->writeReadiness(['alpha-career', 'beta-career'], rolloutCandidateEligibleCount: 1);
+
+        $exitCode = $this->callCommand([
+            '--readiness' => $path,
+            '--target' => 2,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('rollout_candidate_gate_below_target', array_column($payload['blockers'], 'reason'));
+        $this->assertFalse($payload['dry_run_allowed']);
+        $this->assertFalse($payload['apply_allowed']);
+    }
+
     public function test_duplicate_slugs_block(): void
     {
         $path = $this->writeReadiness(['alpha-career', 'alpha-career']);
@@ -101,6 +117,21 @@ final class CareerGenerateCanonicalExpansionManifestTrainCommandTest extends Tes
         $this->assertSame(1, $exitCode);
         $this->assertSame('selected_slugs_duplicate', $payload['blockers'][0]['reason']);
         $this->assertSame('alpha-career', $payload['blockers'][0]['evidence']['slug']);
+    }
+
+    public function test_selected_rollout_candidate_ineligible_row_blocks(): void
+    {
+        $path = $this->writeReadiness(['alpha-career'], ineligibleSelectedSlugs: ['alpha-career']);
+
+        $exitCode = $this->callCommand([
+            '--readiness' => $path,
+            '--target' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('selected_slug_not_rollout_candidate_eligible', array_column($payload['blockers'], 'reason'));
+        $this->assertFalse($payload['dry_run_allowed']);
     }
 
     public function test_target_defaults_to_80(): void
@@ -277,17 +308,30 @@ final class CareerGenerateCanonicalExpansionManifestTrainCommandTest extends Tes
         array $slugs,
         bool $readinessPass = true,
         bool $manifestGenerationAllowed = true,
+        ?int $rolloutCandidateEligibleCount = null,
+        array $ineligibleSelectedSlugs = [],
     ): string {
         $rows = [];
         foreach ($slugs as $index => $slug) {
+            $rolloutEligible = ! in_array($slug, $ineligibleSelectedSlugs, true);
             $rows[] = [
                 'slug' => $slug,
                 'locales' => ['en', 'zh'],
                 'score' => $index + 1,
                 'reasons' => [],
+                'rollout_candidate_eligible' => $rolloutEligible,
+                'runtime_state_evidence' => [
+                    'runtime_publish_states' => ['published_candidate'],
+                    'truth_states' => ['published_candidate'],
+                    'projection_states' => ['published_candidate'],
+                    'canonical_public_types' => ['public_canonical_job'],
+                    'candidate_pre_route_expected' => [true],
+                    'candidate_unexpected_exposures' => [],
+                ],
                 'deferred_until_candidate' => ['surface_unverified'],
                 'expected_not_ready' => [],
                 'remediation_required' => [],
+                'rollout_candidate_exclusions' => $rolloutEligible ? [] : ['already_published'],
             ];
         }
 
@@ -300,6 +344,15 @@ final class CareerGenerateCanonicalExpansionManifestTrainCommandTest extends Tes
             'selected_count' => count($slugs),
             'read_only' => true,
             'writes_database' => false,
+            'rollout_candidate_gate' => [
+                'required' => true,
+                'expected_runtime_state' => 'published_candidate',
+                'eligible_count' => $rolloutCandidateEligibleCount ?? count($slugs),
+                'excluded_count' => count($ineligibleSelectedSlugs),
+                'exclusions_by_reason' => $ineligibleSelectedSlugs === [] ? [] : ['already_published' => count($ineligibleSelectedSlugs)],
+                'eligible_slugs' => array_values(array_diff($slugs, $ineligibleSelectedSlugs)),
+                'excluded_rows' => [],
+            ],
             'source_audit' => [
                 'path' => '/tmp/synthetic-career-audit.json',
                 'status' => 'blocked',

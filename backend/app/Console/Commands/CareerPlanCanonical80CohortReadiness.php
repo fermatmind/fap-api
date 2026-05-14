@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Domain\Career\Audit\Career2786ReadinessPolicyClassifier;
 use App\Domain\Career\Audit\Career2786ReadinessPolicyRow;
+use App\Domain\Career\Audit\Career80RolloutCandidateGate;
 use App\Domain\Career\Audit\CareerCanonical80CandidateSelectionRow;
 use App\Domain\Career\Audit\CareerCanonical80CandidateSelector;
 use App\Domain\Career\Audit\CareerCanonicalEligibilityReport;
@@ -118,8 +119,12 @@ final class CareerPlanCanonical80CohortReadiness extends Command
             $policyRowsBySlug[$row->canonicalSlug] = $row;
         }
 
+        $auditRowsBySlug = $this->auditRowsBySlug($report);
+        $rolloutGate = new Career80RolloutCandidateGate;
         $selection = (new CareerCanonical80CandidateSelector)->select($report, $target);
         $selectable = [];
+        $excluded = [];
+        $exclusionsByReason = [];
         foreach ($selection->rows as $row) {
             $policyRow = $policyRowsBySlug[$row->canonicalSlug] ?? null;
             if (! $policyRow instanceof Career2786ReadinessPolicyRow) {
@@ -130,7 +135,18 @@ final class CareerPlanCanonical80CohortReadiness extends Command
                 continue;
             }
 
-            $selectable[] = [$row, $policyRow];
+            $gate = $rolloutGate->evaluate($auditRowsBySlug[$row->canonicalSlug] ?? []);
+            if ($gate['eligible'] === true) {
+                $selectable[] = [$row, $policyRow, $gate];
+
+                continue;
+            }
+
+            foreach ($gate['reasons'] as $reason) {
+                $exclusionsByReason[$reason] = ($exclusionsByReason[$reason] ?? 0) + 1;
+            }
+            ksort($exclusionsByReason);
+            $excluded[] = $this->excludedRow($row, $policyRow, $gate);
         }
 
         $selected = array_slice($selectable, 0, $target);
@@ -146,6 +162,18 @@ final class CareerPlanCanonical80CohortReadiness extends Command
             'selected_count' => count($selected),
             'read_only' => true,
             'writes_database' => false,
+            'rollout_candidate_gate' => [
+                'required' => true,
+                'expected_runtime_state' => Career80RolloutCandidateGate::EXPECTED_RUNTIME_STATE,
+                'eligible_count' => count($selectable),
+                'excluded_count' => count($excluded),
+                'exclusions_by_reason' => $exclusionsByReason,
+                'eligible_slugs' => array_map(
+                    static fn (array $pair): string => $pair[0]->canonicalSlug,
+                    $selectable
+                ),
+                'excluded_rows' => $excluded,
+            ],
             'source_audit' => [
                 'path' => $auditPath,
                 'status' => $report->status,
@@ -163,7 +191,7 @@ final class CareerPlanCanonical80CohortReadiness extends Command
                     $selected
                 ),
                 'rows' => array_map(
-                    fn (array $pair): array => $this->selectionRow($pair[0], $pair[1]),
+                    fn (array $pair): array => $this->selectionRow($pair[0], $pair[1], $pair[2]),
                     $selected
                 ),
             ],
@@ -212,7 +240,7 @@ final class CareerPlanCanonical80CohortReadiness extends Command
             ]);
         }
         if ($candidateCount < $target || $selectedCount < $target) {
-            $blockers[] = $this->blocker('insufficient_near_eligible_candidates', 'Fewer than the target near-eligible slugs can be evaluated.', [
+            $blockers[] = $this->blocker('insufficient_rollout_candidate_eligible_slugs', 'Fewer than the target rollout-candidate eligible slugs can be evaluated.', [
                 'target' => $target,
                 'candidate_count' => $candidateCount,
                 'selected_count' => $selectedCount,
@@ -223,9 +251,10 @@ final class CareerPlanCanonical80CohortReadiness extends Command
     }
 
     /**
+     * @param  array{eligible: bool, reasons: list<string>, evidence: array<string, mixed>}  $gate
      * @return array<string, mixed>
      */
-    private function selectionRow(CareerCanonical80CandidateSelectionRow $row, Career2786ReadinessPolicyRow $policyRow): array
+    private function selectionRow(CareerCanonical80CandidateSelectionRow $row, Career2786ReadinessPolicyRow $policyRow, array $gate): array
     {
         return [
             'slug' => $row->canonicalSlug,
@@ -233,9 +262,44 @@ final class CareerPlanCanonical80CohortReadiness extends Command
             'score' => $row->score,
             'rank' => $row->rank,
             'reasons' => $policyRow->reasons,
+            'rollout_candidate_eligible' => true,
+            'runtime_state_evidence' => $gate['evidence'],
             'deferred_until_candidate' => $policyRow->deferredUntilCandidateReasons,
             'expected_not_ready' => $policyRow->expectedNotReadyReasons,
             'remediation_required' => $policyRow->remediationRequiredReasons,
+            'rollout_candidate_exclusions' => [],
+        ];
+    }
+
+    /**
+     * @return array<string, list<\App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRow>>
+     */
+    private function auditRowsBySlug(CareerCanonicalEligibilityReport $report): array
+    {
+        $rowsBySlug = [];
+        foreach ($report->rows as $row) {
+            $rowsBySlug[$row->slug] ??= [];
+            $rowsBySlug[$row->slug][] = $row;
+        }
+
+        return $rowsBySlug;
+    }
+
+    /**
+     * @param  array{eligible: bool, reasons: list<string>, evidence: array<string, mixed>}  $gate
+     * @return array<string, mixed>
+     */
+    private function excludedRow(CareerCanonical80CandidateSelectionRow $row, Career2786ReadinessPolicyRow $policyRow, array $gate): array
+    {
+        return [
+            'slug' => $row->canonicalSlug,
+            'locales' => $policyRow->locales,
+            'candidate_status' => $row->candidateStatus,
+            'score' => $row->score,
+            'rank' => $row->rank,
+            'reasons' => $policyRow->reasons,
+            'exclusion_reasons' => $gate['reasons'],
+            'runtime_state_evidence' => $gate['evidence'],
         ];
     }
 
@@ -266,6 +330,15 @@ final class CareerPlanCanonical80CohortReadiness extends Command
             'selected_count' => 0,
             'read_only' => true,
             'writes_database' => false,
+            'rollout_candidate_gate' => [
+                'required' => true,
+                'expected_runtime_state' => Career80RolloutCandidateGate::EXPECTED_RUNTIME_STATE,
+                'eligible_count' => 0,
+                'excluded_count' => 0,
+                'exclusions_by_reason' => [],
+                'eligible_slugs' => [],
+                'excluded_rows' => [],
+            ],
             'source_audit' => null,
             'policy_summary' => [],
             'selection' => [

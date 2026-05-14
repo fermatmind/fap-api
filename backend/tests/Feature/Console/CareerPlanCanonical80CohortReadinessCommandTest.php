@@ -55,7 +55,7 @@ final class CareerPlanCanonical80CohortReadinessCommandTest extends TestCase
         $this->assertSame(1, $exitCode);
         $this->assertSame(80, $payload['target']);
         $this->assertSame(1, $payload['candidate_count']);
-        $this->assertSame('insufficient_near_eligible_candidates', $payload['blockers'][0]['reason']);
+        $this->assertSame('insufficient_rollout_candidate_eligible_slugs', $payload['blockers'][0]['reason']);
         $this->assertFalse($payload['rollout']['manifest_generation_allowed']);
         $this->assertFalse($payload['rollout']['apply_allowed']);
     }
@@ -80,7 +80,90 @@ final class CareerPlanCanonical80CohortReadinessCommandTest extends TestCase
         $this->assertSame(['alpha-career', 'beta-career'], $payload['selection']['slugs']);
         $this->assertTrue($payload['rollout']['manifest_generation_allowed']);
         $this->assertFalse($payload['rollout']['apply_allowed']);
+        $this->assertSame(3, $payload['rollout_candidate_gate']['eligible_count']);
+        $this->assertSame(0, $payload['rollout_candidate_gate']['excluded_count']);
+        $this->assertTrue($payload['selection']['rows'][0]['rollout_candidate_eligible']);
         $this->assertFileExists($output);
+    }
+
+    public function test_rollout_candidate_gate_excludes_runtime_invalid_candidates(): void
+    {
+        $path = $this->writeRows([
+            $this->row('valid-candidate', 'en', []),
+            $this->row('valid-candidate', 'zh', []),
+            $this->row('already-published', 'en', [], runtimeEvidence: [
+                ['runtime_publish_state' => 'published'],
+                ['truth_state' => 'published'],
+                ['canonical_public_type' => 'public_canonical_job'],
+            ]),
+            $this->row('api-exposed', 'en', [], runtimeEvidence: [
+                ['runtime_publish_state' => 'published_candidate'],
+                ['truth_state' => 'published_candidate'],
+                ['canonical_public_type' => 'public_canonical_job'],
+                ['candidate_unexpected_exposures' => ['api']],
+            ]),
+            $this->row('route-exposed', 'en', [], runtimeEvidence: [
+                ['runtime_publish_state' => 'published_candidate'],
+                ['truth_state' => 'published_candidate'],
+                ['canonical_public_type' => 'public_canonical_job'],
+                ['candidate_unexpected_exposures' => ['route']],
+            ]),
+            $this->row('missing-truth', 'en', [], runtimeEvidence: [
+                ['runtime_publish_state' => 'published_candidate'],
+                ['canonical_public_type' => 'public_canonical_job'],
+            ]),
+            $this->row('missing-projection', 'en', [], runtimeEvidence: [
+                ['truth_state' => 'published_candidate'],
+                ['canonical_public_type' => 'public_canonical_job'],
+            ]),
+            $this->row('state-mismatch', 'en', [], runtimeEvidence: [
+                ['runtime_publish_state' => 'blocked'],
+                ['truth_state' => 'blocked'],
+                ['canonical_public_type' => 'blocked_until_governance_approval'],
+            ]),
+        ]);
+
+        $exitCode = $this->callCommand([
+            '--audit' => $path,
+            '--target' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(['valid-candidate'], $payload['selection']['slugs']);
+        $this->assertSame(1, $payload['rollout_candidate_gate']['eligible_count']);
+        $this->assertSame(6, $payload['rollout_candidate_gate']['excluded_count']);
+        $this->assertSame(1, $payload['rollout_candidate_gate']['exclusions_by_reason']['already_published']);
+        $this->assertSame(1, $payload['rollout_candidate_gate']['exclusions_by_reason']['unexpected_api_exposure']);
+        $this->assertSame(1, $payload['rollout_candidate_gate']['exclusions_by_reason']['unexpected_route_exposure']);
+        $this->assertSame(1, $payload['rollout_candidate_gate']['exclusions_by_reason']['truth_row_missing']);
+        $this->assertSame(1, $payload['rollout_candidate_gate']['exclusions_by_reason']['projection_row_missing']);
+        $this->assertSame(1, $payload['rollout_candidate_gate']['exclusions_by_reason']['runtime_state_blocked']);
+        $this->assertSame(1, $payload['rollout_candidate_gate']['exclusions_by_reason']['projection_state_mismatch']);
+    }
+
+    public function test_blocks_when_fewer_than_target_valid_rollout_candidates_exist(): void
+    {
+        $path = $this->writeRows([
+            $this->row('valid-candidate', 'en', []),
+            $this->row('published-candidate', 'en', [], runtimeEvidence: [
+                ['runtime_publish_state' => 'published'],
+                ['truth_state' => 'published'],
+                ['canonical_public_type' => 'public_canonical_job'],
+            ]),
+        ]);
+
+        $exitCode = $this->callCommand([
+            '--audit' => $path,
+            '--target' => 2,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['readiness_pass']);
+        $this->assertSame(1, $payload['selected_count']);
+        $this->assertSame('insufficient_rollout_candidate_eligible_slugs', $payload['blockers'][0]['reason']);
+        $this->assertFalse($payload['rollout']['manifest_generation_allowed']);
     }
 
     public function test_selected_slugs_are_unique_and_exclude_remediation_required_rows(): void
@@ -150,6 +233,7 @@ final class CareerPlanCanonical80CohortReadinessCommandTest extends TestCase
             'selected_count',
             'read_only',
             'writes_database',
+            'rollout_candidate_gate',
             'source_audit',
             'policy_summary',
             'selection',
@@ -159,6 +243,15 @@ final class CareerPlanCanonical80CohortReadinessCommandTest extends TestCase
             'next_required_action',
         ], array_keys($payload));
         $this->assertSame('career_80_cohort_readiness.v1', $payload['schema_version']);
+        $this->assertSame([
+            'required',
+            'expected_runtime_state',
+            'eligible_count',
+            'excluded_count',
+            'exclusions_by_reason',
+            'eligible_slugs',
+            'excluded_rows',
+        ], array_keys($payload['rollout_candidate_gate']));
         $this->assertSame('surface-evidence', $payload['sidecars'][0]['sidecar_id']);
         $this->assertSame('80_MANIFEST_TRAIN_READ_ONLY', $payload['next_required_action']);
     }
@@ -211,6 +304,19 @@ final class CareerPlanCanonical80CohortReadinessCommandTest extends TestCase
             $rows[] = $this->row($slug, 'zh', ['index_state_missing']);
         }
 
+        return $this->writeRows($rows, $expectedOccupations, $auditedOccupations, $sidecars);
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     * @param  list<array<string, mixed>>  $sidecars
+     */
+    private function writeRows(
+        array $rows,
+        int $expectedOccupations = 2786,
+        int $auditedOccupations = 2786,
+        array $sidecars = [],
+    ): string {
         $path = $this->tempPath('audit');
         file_put_contents($path, json_encode([
             'status' => 'blocked',
@@ -222,7 +328,10 @@ final class CareerPlanCanonical80CohortReadinessCommandTest extends TestCase
             'by_reason' => $this->byReason($rows),
             'context_summary' => ['surface_context' => 'supplied'],
             'policy_summary' => [
-                'near_eligible_count' => count(array_unique($nearEligibleSlugs)),
+                'near_eligible_count' => count(array_unique(array_map(
+                    static fn (array $row): string => (string) $row['slug'],
+                    $rows
+                ))),
             ],
             'rows' => $rows,
             'sidecars' => $sidecars,
@@ -235,8 +344,15 @@ final class CareerPlanCanonical80CohortReadinessCommandTest extends TestCase
      * @param  list<string>  $reasons
      * @return array<string, mixed>
      */
-    private function row(string $slug, string $locale, array $reasons): array
+    private function row(string $slug, string $locale, array $reasons, ?array $runtimeEvidence = null): array
     {
+        $runtimeEvidence ??= [
+            ['runtime_publish_state' => 'published_candidate'],
+            ['truth_state' => 'published_candidate'],
+            ['canonical_public_type' => 'public_canonical_job'],
+            ['candidate_pre_route_expected' => true],
+        ];
+
         return [
             'slug' => $slug,
             'locale' => $locale,
@@ -244,7 +360,15 @@ final class CareerPlanCanonical80CohortReadinessCommandTest extends TestCase
             'entity_status' => $this->layer('entity', $this->layerReadiness($reasons, ['occupation_missing', 'entity_field_missing'])),
             'baseline_status' => $this->layer('baseline', 'pass'),
             'index_status' => $this->layer('index', $this->layerReadiness($reasons, ['index_state_missing'])),
-            'runtime_status' => $this->layer('runtime', 'pass'),
+            'runtime_status' => $this->layer('runtime', $this->layerReadiness($reasons, [
+                'truth_row_missing',
+                'projection_row_missing',
+                'candidate_truth_row_missing',
+                'candidate_projection_row_missing',
+                'candidate_projection_state_mismatch',
+                'candidate_truth_state_mismatch',
+                'candidate_pre_route_not_expected',
+            ]), $runtimeEvidence),
             'seo_geo_status' => $this->layer('seo_geo', $this->layerReadiness($reasons, [
                 'sitemap_expected_not_ready',
                 'llms_expected_not_ready',
@@ -275,13 +399,13 @@ final class CareerPlanCanonical80CohortReadinessCommandTest extends TestCase
     /**
      * @return array<string, mixed>
      */
-    private function layer(string $layer, string $status): array
+    private function layer(string $layer, string $status, array $evidence = []): array
     {
         return [
             'layer' => $layer,
             'status' => $status,
             'reasons' => [],
-            'evidence' => [],
+            'evidence' => $evidence,
             'source' => 'synthetic_test_fixture',
         ];
     }

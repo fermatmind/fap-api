@@ -2431,3 +2431,43 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-80-READINESS-SELECTION-2
+    repo: fap-api
+    depends_on:
+      - 80-ROLLOUT-DRY-RUN-1
+    branch: fix/career-80-readiness-selection-runtime-gate
+    title: "fix(api): tighten career 80 readiness candidate selection"
+    name: "Exclude already-published and runtime-missing slugs from Career 80 readiness selection"
+    scope:
+      - Add a rollout-candidate gate to Career 80 readiness selection.
+      - Exclude already-published/public-exposed slugs and slugs missing projection/truth candidate evidence.
+      - Keep manifest generation and rollout apply out of scope.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerPlanCanonical80CohortReadiness.php
+      - backend/app/Console/Commands/CareerGenerateCanonicalExpansionManifestTrain.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout or rollout dry-run.
+      - Run apply, backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+      - Run 300/800/2786 expansion.
+    validation:
+      - php artisan test --filter=CareerPlanCanonical80CohortReadiness --no-ansi
+      - php artisan test --filter=CareerGenerateCanonicalExpansionManifestTrain --no-ansi
+      - php artisan test --filter=CareerCanonical80CandidateSelector --no-ansi
+      - php artisan test --filter=Career2786ReadinessPolicyClassifier --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

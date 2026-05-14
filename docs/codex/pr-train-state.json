@@ -4617,6 +4617,61 @@
       "sidecar_issues": [
 
       ]
+    },
+    "REPAIR-80-READINESS-SELECTION-2": {
+      "repo": "fap-api",
+      "branch": "fix/career-80-readiness-selection-runtime-gate",
+      "title": "fix(api): tighten career 80 readiness candidate selection",
+      "name": "Exclude already-published and runtime-missing slugs from Career 80 readiness selection",
+      "status": "in_progress",
+      "depends_on": [
+        "80-ROLLOUT-DRY-RUN-1"
+      ],
+      "scope_type": "80_readiness_selection_gate_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonical80CohortReadiness.php",
+        "backend/app/Console/Commands/CareerGenerateCanonicalExpansionManifestTrain.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no rollout",
+        "no rollout dry-run",
+        "no apply",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change",
+        "no 300/800/2786 expansion execution"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User provided REPAIR-80-READINESS-SELECTION-2 execution goal and authorized docs/codex train metadata updates for this item."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SCAN-11 showed the 80 rollout dry-run was blocked because the selected cohort included already-published/public-exposed slugs and runtime projection/truth gaps while the manifest structure was correct."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Allowed scope is limited to Career 80 readiness selection gating, manifest compatibility guard, tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "80-READINESS-3 rerun read-only 80 readiness with rollout-candidate gate",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+
+      ]
     }
   }
 }
