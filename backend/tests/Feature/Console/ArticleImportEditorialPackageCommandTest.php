@@ -6,6 +6,7 @@ namespace Tests\Feature\Console;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -56,6 +57,7 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
     }
 
     public function test_import_creates_non_public_cms_draft_with_exact_body_metadata_and_answer_surface_boundary(): void
@@ -119,6 +121,21 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame(['1:AI 与人格如何共同影响判断', '2:执行摘要', '2:为什么这不是单纯技术问题', '2:结论'], data_get($metadata, 'validation.heading_sequence'));
 
         $this->assertSame($sensitiveCounts, $this->sensitiveTableCounts());
+        $importLog = ArticleEditorialPackageImport::query()
+            ->withoutGlobalScopes()
+            ->where('slug', 'ai-personality-editorial-draft')
+            ->firstOrFail();
+        $this->assertSame(ArticleEditorialPackageImport::STATUS_IMPORTED, (string) $importLog->status);
+        $this->assertSame((int) $article->id, (int) $importLog->article_id);
+        $this->assertSame('editorial_journal', (string) $importLog->content_track);
+        $this->assertSame($this->normalizedBodyHash($package['body_markdown']), (string) $importLog->body_hash);
+        $this->assertSame(2, (int) $importLog->references_count);
+        $this->assertSame('complete', data_get($importLog->references_json, 'status'));
+        $this->assertSame('complete', data_get($importLog->media_json, 'status'));
+        $this->assertSame('complete', data_get($importLog->graph_json, 'status'));
+        $this->assertSame('passed', data_get($importLog->claim_result_json, 'status'));
+        $this->assertSame(['1:AI 与人格如何共同影响判断', '2:执行摘要', '2:为什么这不是单纯技术问题', '2:结论'], $importLog->heading_sequence_json);
+        $this->assertStringNotContainsString($package['body_markdown'], json_encode($importLog->toArray(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         $this->getJson('/api/v0.5/articles/ai-personality-editorial-draft?locale=zh-CN')
             ->assertNotFound();
         $this->getJson('/api/v0.5/articles/ai-personality-editorial-draft/seo?locale=zh-CN')
@@ -140,6 +157,13 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
             ->assertExitCode(1);
 
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+        $blockedLog = ArticleEditorialPackageImport::query()
+            ->withoutGlobalScopes()
+            ->where('slug', 'blocked-claim-draft')
+            ->firstOrFail();
+        $this->assertSame(ArticleEditorialPackageImport::STATUS_BLOCKED, (string) $blockedLog->status);
+        $this->assertSame('blocked', data_get($blockedLog->claim_result_json, 'status'));
+        $this->assertSame('claim_boundary_forbidden_phrase', data_get($blockedLog->blocked_reasons_json, '0.code'));
 
         $warningPath = $this->writePackage($this->editorialPackage([
             'slug' => 'claim-warning-draft-only',
@@ -165,6 +189,12 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame('draft', (string) $article->status);
         $this->assertNull($article->published_revision_id);
         $this->assertSame(ArticleTranslationRevision::STATUS_MACHINE_DRAFT, (string) $article->workingRevision?->revision_status);
+        $warningLog = ArticleEditorialPackageImport::query()
+            ->withoutGlobalScopes()
+            ->where('slug', 'claim-warning-draft-only')
+            ->firstOrFail();
+        $this->assertSame(ArticleEditorialPackageImport::STATUS_WARNING, (string) $warningLog->status);
+        $this->assertSame('warning', data_get($warningLog->claim_result_json, 'status'));
     }
 
     public function test_track_and_answer_surface_validation_block_invalid_packages_without_writes(): void

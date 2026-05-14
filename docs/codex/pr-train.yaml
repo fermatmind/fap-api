@@ -11,6 +11,36 @@ continuation_protocol:
     do_not_stop_train_when_external_and_required_checks_green: true
 prs:
 
+  - id: PR-CMS-03
+    repo: fap-api
+    depends_on:
+      - PR-CMS-01
+      - PR-CMS-02
+    branch: codex/pr-cms-03-article-publishing-ops
+    title: "PR-CMS-03｜Article Publishing Ops Queue + Daily SEO Dashboard"
+    scope:
+      - Add article editorial package import/gate result persistence for operational visibility.
+      - Add an fap-api Filament Ops page for Article Publishing Ops Queue and Daily SEO Health.
+      - Surface draft/review/blocked/publish-ready/release-failed/review-due queues from backend content authority.
+      - Keep dashboard read-only and limited to Article, Revision, SEO Meta, import validation, release audit, and review status.
+    do_not:
+      - Change existing published article content or metadata.
+      - Re-import or publish articles.
+      - Touch fap-web.
+      - Touch user attempts, results, reports, orders, payments, shares, scoring, result pages, payment, or invite flows.
+      - Add GSC, Baidu, revenue-per-cluster, video pipeline, or a new SEO intelligence stack.
+    validation:
+      - php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi
+      - php artisan test tests/Feature/Ops/ArticlePublishingOpsPageTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - vendor/bin/pint --test app/Models/ArticleEditorialPackageImport.php app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php app/Filament/Ops/Pages/ArticlePublishingOpsPage.php tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php tests/Feature/Ops/ArticlePublishingOpsPageTest.php
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
   - id: career-runtime-publish-projection
     repo: fap-api
     branch: codex/career-runtime-publish-projection

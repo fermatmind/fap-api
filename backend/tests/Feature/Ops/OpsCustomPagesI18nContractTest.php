@@ -202,6 +202,14 @@ final class OpsCustomPagesI18nContractTest extends TestCase
             ['SEO运营', '问题焦点', '关注队列', '当前筛选下没有匹配的 SEO 问题。'],
         ];
 
+        yield 'article publishing ops' => [
+            '/ops/article-publishing-ops',
+            '文章发布运营',
+            'Article Publishing Ops',
+            ['Article Publishing Ops', 'Publishing queue', 'Daily SEO health', 'Content safety boundary'],
+            ['文章发布运营', '发布队列', '每日 SEO 健康', '内容安全边界'],
+        ];
+
         yield 'post release observability' => [
             '/ops/post-release-observability',
             '发布后可观测性',
