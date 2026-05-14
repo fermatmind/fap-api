@@ -439,6 +439,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/Career80TotalLiveAcceptanceResult.php',
             'backend/app/Domain/Career/Audit/CareerProgressiveCohortCloseoutPlanner.php',
             'backend/app/Domain/Career/Audit/CareerProgressiveCohortCloseoutResult.php',
+            'backend/app/Domain/Career/Audit/CareerProgressiveLiveVerificationScalingPlanner.php',
+            'backend/app/Domain/Career/Audit/CareerProgressiveLiveVerificationScalingResult.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessIssue.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessPlanner.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessResult.php',
@@ -700,7 +702,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '+        $payloadInput = $request->input(\'payload\');',
             "+            'payload' => ['nullable', 'array'],",
             "-            'payload' => ['nullable', 'array:'.implode(',', self::PAYLOAD_KEYS)],",
-            "+        \$scaleCode = \$this->normalizeOptionalString(",
+            '+        $scaleCode = $this->normalizeOptionalString(',
             "+            'scale_code' => \$scaleCode,",
         ];
         $blockedChangedLines = [
@@ -1991,6 +1993,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/Career80TotalLiveAcceptanceResult.php',
             'backend/app/Domain/Career/Audit/CareerProgressiveCohortCloseoutPlanner.php',
             'backend/app/Domain/Career/Audit/CareerProgressiveCohortCloseoutResult.php',
+            'backend/app/Domain/Career/Audit/CareerProgressiveLiveVerificationScalingPlanner.php',
+            'backend/app/Domain/Career/Audit/CareerProgressiveLiveVerificationScalingResult.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessIssue.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessPlanner.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessResult.php',
