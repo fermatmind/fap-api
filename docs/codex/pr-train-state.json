@@ -5886,7 +5886,7 @@
       "repo": "fap-api",
       "branch": "fix/career-progressive-closeout-1",
       "title": "fix(api): add career progressive cohort closeout",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "REPAIR-PROGRESSIVE-LIVE-ACCEPTANCE-1"
       ],
@@ -5915,8 +5915,8 @@
         "no deploy",
         "no fap-web change"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "e803b6fbbc373d929cd1f3107aed10f86b2bf874",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1401",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -5937,9 +5937,9 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-PROGRESSIVE-LIVE-VERIFICATION-SCALING-1",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-14T21:09:18Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "sidecar_id": "SIDECAR-BIG5-CONTENT-PACK-PUBLISH-ROLLBACK-ENV-1",
@@ -5973,6 +5973,83 @@
           ],
           "severity": "medium",
           "next_goal": "SCAN-BIG5-RUNTIME-FREEZE-EXTERNAL-MBTI-ATTRIBUTION-1",
+          "may_continue_train": true
+        }
+      ]
+    },
+    "REPAIR-PROGRESSIVE-LIVE-VERIFICATION-SCALING-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-progressive-live-verification-scaling-1",
+      "title": "fix(api): add chunked career live verification scaling",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-PROGRESSIVE-CLOSEOUT-1"
+      ],
+      "scope_type": "progressive_live_verification_scaling_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/**",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/**",
+        "backend/tests/Feature/Console/**",
+        "backend/tests/Unit/Domain/Career/Audit/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no live crawl",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no candidate prep apply",
+        "no backfill",
+        "no rollback",
+        "no quarantine",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for the progressive expansion PR train."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-PROGRESSIVE-CLOSEOUT-1 merged as PR #1401 and provides accepted cohort closeout records for progressive baselines."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Current PR scope is limited to read-only progressive live verification scaling artifacts, tests/docs, command registration, freeze allowlist, and train metadata."
+        },
+        "local_validation": {
+          "status": "pass_with_external_sidecar",
+          "evidence": "CareerProgressiveLiveVerification, CareerPlanCanonicalProgressiveLiveVerification, BigFiveResultPageV2CoreBodyPreviewTest, Career80TotalLiveAcceptance, route:list, sqlite migrate, Pint, git diff --check, JSON/YAML metadata validation passed. backend/scripts/ci_verify_mbti.sh failed only known Big5 pack publish/rollback compiled-directory assertions outside this Career PR scope."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "300-READINESS-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "sidecar_id": "SIDECAR-BIG5-PACK-PUBLISH-ROLLBACK-COMPILED-DIR-PR7",
+          "title": "Local MBTI CI Big5 pack publish and rollback compiled-directory assertions fail",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [],
+          "evidence": [
+            "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at tests/Feature/Content/PacksPublishBig5Test.php:94 asserting File::isDirectory($target.'/compiled').",
+            "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at tests/Feature/Content/PacksRollbackBig5Test.php:97 asserting File::isDirectory($target.'/compiled').",
+            "Current PR only adds Career progressive live verification scaling planner/command/tests/docs and BigFive runtime freeze allowlist entries; it does not modify Big5 pack publish/rollback code or content package publish semantics."
+          ],
+          "severity": "medium",
+          "next_goal": "SCAN-BIG5-PACK-PUBLISH-ROLLBACK-COMPILED-DIR-1",
           "may_continue_train": true
         }
       ]
