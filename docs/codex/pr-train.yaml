@@ -2501,3 +2501,43 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-80-CANDIDATE-RUNTIME-POOL-1
+    repo: fap-api
+    depends_on:
+      - 80-READINESS-3
+    branch: codex/repair-80-candidate-runtime-pool-1
+    title: "feat(api): add career 80 runtime candidate pool planner"
+    name: "Add read-only Career 80 runtime candidate pool planner"
+    scope:
+      - Add a read-only Career 80 runtime candidate pool planner command.
+      - Consume audit, runtime projection, runtime truth, and release ledger artifacts.
+      - Report whether 80 published_candidate pre-promotion candidates exist and classify exclusions.
+      - Keep manifest generation, rollout dry-run, rollout apply, and DB mutation out of scope.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerPlanCanonical80RuntimeCandidatePool.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout or rollout dry-run.
+      - Run apply, backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+      - Run manifest generation.
+    validation:
+      - php artisan test --filter=CareerPlanCanonical80RuntimeCandidatePool --no-ansi
+      - php artisan test --filter=CareerPlanCanonical80CohortReadiness --no-ansi
+      - php artisan test --filter=CareerGenerateCanonicalExpansionManifestTrain --no-ansi
+      - php artisan test --filter=CareerCanonical80CandidateSelector --no-ansi
+      - php artisan test --filter=Career2786ReadinessPolicyClassifier --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

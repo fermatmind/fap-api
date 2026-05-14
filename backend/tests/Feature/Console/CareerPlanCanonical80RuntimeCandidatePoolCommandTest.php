@@ -1,0 +1,383 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Feature\Console;
+
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Str;
+use Tests\TestCase;
+
+final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCase
+{
+    public function test_command_is_registered(): void
+    {
+        $this->assertArrayHasKey('career:plan-canonical-80-runtime-candidate-pool', Artisan::all());
+    }
+
+    public function test_missing_audit_blocks(): void
+    {
+        $exitCode = $this->callCommand([
+            '--audit' => sys_get_temp_dir().'/missing-career-audit.json',
+            '--projection' => $this->writeProjection([]),
+            '--truth' => $this->writeTruth([]),
+            '--ledger' => $this->writeLedger([]),
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertFalse($payload['pool_pass']);
+        $this->assertSame('audit_artifact_missing', $payload['blockers'][0]['reason']);
+        $this->assertFalse($payload['writes_database']);
+    }
+
+    public function test_invalid_projection_json_blocks(): void
+    {
+        $audit = $this->writeAudit(['alpha-career']);
+        $projection = $this->tempPath('projection');
+        file_put_contents($projection, '{not json');
+
+        $exitCode = $this->callCommand([
+            '--audit' => $audit,
+            '--projection' => $projection,
+            '--truth' => $this->writeTruth([]),
+            '--ledger' => $this->writeLedger([]),
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('projection_artifact_json_invalid', $payload['blockers'][0]['reason']);
+    }
+
+    public function test_passes_with_target_override_and_writes_output(): void
+    {
+        $slugs = ['zeta-career', 'alpha-career', 'beta-career'];
+        $audit = $this->writeAudit($slugs);
+        $output = $this->tempPath('runtime-pool-output');
+
+        $exitCode = $this->callCommand([
+            '--audit' => $audit,
+            '--projection' => $this->writeProjection($slugs),
+            '--truth' => $this->writeTruth($slugs),
+            '--ledger' => $this->writeLedger($slugs),
+            '--target' => 2,
+            '--output' => $output,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('pass', $payload['status']);
+        $this->assertTrue($payload['pool_pass']);
+        $this->assertSame(3, $payload['eligible_count']);
+        $this->assertSame(2, $payload['selected_count']);
+        $this->assertSame(['alpha-career', 'beta-career'], $payload['selection']['slugs']);
+        $this->assertTrue($payload['rollout']['manifest_generation_allowed']);
+        $this->assertTrue($payload['rollout']['dry_run_allowed']);
+        $this->assertFalse($payload['rollout']['apply_allowed']);
+        $this->assertFileExists($output);
+    }
+
+    public function test_excludes_runtime_invalid_candidates(): void
+    {
+        $slugs = [
+            'valid-candidate',
+            'already-published',
+            'missing-ledger',
+            'missing-projection',
+            'missing-truth',
+            'blocked-runtime',
+            'route-exposed',
+        ];
+        $audit = $this->writeAudit($slugs);
+        $projection = $this->writeProjection([
+            'valid-candidate',
+            'already-published' => 'published',
+            'missing-ledger',
+            'missing-truth',
+            'blocked-runtime' => 'blocked',
+            'route-exposed' => 'published_candidate',
+        ], routeExposedSlugs: ['route-exposed']);
+        $truth = $this->writeTruth([
+            'valid-candidate',
+            'already-published' => 'published',
+            'missing-ledger',
+            'missing-projection',
+            'blocked-runtime' => 'blocked',
+            'route-exposed',
+        ], routeExposedSlugs: ['route-exposed']);
+        $ledger = $this->writeLedger([
+            'valid-candidate',
+            'already-published',
+            'missing-projection',
+            'missing-truth',
+            'blocked-runtime',
+            'route-exposed',
+        ], blockedSlugs: ['blocked-runtime']);
+
+        $exitCode = $this->callCommand([
+            '--audit' => $audit,
+            '--projection' => $projection,
+            '--truth' => $truth,
+            '--ledger' => $ledger,
+            '--target' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(['valid-candidate'], $payload['selection']['slugs']);
+        $this->assertSame(1, $payload['eligible_count']);
+        $this->assertSame(6, $payload['excluded_count']);
+        $this->assertSame(1, $payload['exclusions_by_reason']['already_published']);
+        $this->assertSame(1, $payload['exclusions_by_reason']['ledger_member_missing']);
+        $this->assertSame(1, $payload['exclusions_by_reason']['projection_row_missing']);
+        $this->assertSame(1, $payload['exclusions_by_reason']['truth_row_missing']);
+        $this->assertSame(1, $payload['exclusions_by_reason']['runtime_state_blocked']);
+        $this->assertSame(1, $payload['exclusions_by_reason']['ledger_not_candidate_ready']);
+        $this->assertSame(1, $payload['exclusions_by_reason']['unexpected_route_exposure']);
+    }
+
+    public function test_blocks_when_fewer_than_target_runtime_candidates_exist(): void
+    {
+        $audit = $this->writeAudit(['valid-candidate', 'already-published']);
+
+        $exitCode = $this->callCommand([
+            '--audit' => $audit,
+            '--projection' => $this->writeProjection(['valid-candidate', 'already-published' => 'published']),
+            '--truth' => $this->writeTruth(['valid-candidate', 'already-published' => 'published']),
+            '--ledger' => $this->writeLedger(['valid-candidate', 'already-published']),
+            '--target' => 2,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['pool_pass']);
+        $this->assertSame(1, $payload['selected_count']);
+        $this->assertSame('insufficient_runtime_candidate_pool', $payload['blockers'][0]['reason']);
+        $this->assertFalse($payload['rollout']['manifest_generation_allowed']);
+        $this->assertFalse($payload['rollout']['dry_run_allowed']);
+    }
+
+    public function test_schema_is_stable_and_never_allows_apply(): void
+    {
+        $audit = $this->writeAudit(['alpha-career']);
+
+        $exitCode = $this->callCommand([
+            '--audit' => $audit,
+            '--projection' => $this->writeProjection(['alpha-career']),
+            '--truth' => $this->writeTruth(['alpha-career']),
+            '--ledger' => $this->writeLedger(['alpha-career']),
+            '--target' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame([
+            'schema_version',
+            'status',
+            'pool_pass',
+            'read_only',
+            'writes_database',
+            'target',
+            'locales',
+            'base_candidate_count',
+            'eligible_count',
+            'selected_count',
+            'excluded_count',
+            'exclusions_by_reason',
+            'source_artifacts',
+            'runtime_candidate_gate',
+            'selection',
+            'recovery_plan',
+            'blockers',
+            'rollout',
+            'next_required_action',
+        ], array_keys($payload));
+        $this->assertSame('career_80_runtime_candidate_pool_plan.v1', $payload['schema_version']);
+        $this->assertFalse($payload['writes_database']);
+        $this->assertFalse($payload['rollout']['apply_allowed']);
+        $this->assertFalse($payload['recovery_plan']['approval_gated_apply_ready']);
+    }
+
+    /**
+     * @param  array<string, mixed>  $options
+     */
+    private function callCommand(array $options): int
+    {
+        return Artisan::call('career:plan-canonical-80-runtime-candidate-pool', array_merge([
+            '--json' => true,
+        ], $options));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function payload(): array
+    {
+        return json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @param  list<string>  $nearEligibleSlugs
+     */
+    private function writeAudit(array $nearEligibleSlugs): string
+    {
+        $rows = [];
+        foreach (array_values(array_unique($nearEligibleSlugs)) as $slug) {
+            $rows[] = $this->row($slug, 'en');
+            $rows[] = $this->row($slug, 'zh');
+        }
+
+        $path = $this->tempPath('audit');
+        file_put_contents($path, json_encode([
+            'status' => 'blocked',
+            'scope' => 'all',
+            'expected_occupations' => 2786,
+            'audited_occupations' => 2786,
+            'eligible_count' => 0,
+            'blocked_count' => count($rows),
+            'by_reason' => [
+                'llms_expected_not_ready' => count($rows),
+                'surface_unverified' => count($rows),
+            ],
+            'context_summary' => ['surface_context' => 'supplied'],
+            'policy_summary' => ['near_eligible_count' => count($nearEligibleSlugs)],
+            'rows' => $rows,
+            'sidecars' => [],
+        ], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
+
+        return $path;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function row(string $slug, string $locale): array
+    {
+        return [
+            'slug' => $slug,
+            'locale' => $locale,
+            'source_scope' => 'all',
+            'entity_status' => $this->layer('entity', 'pass'),
+            'baseline_status' => $this->layer('baseline', 'pass'),
+            'index_status' => $this->layer('index', 'pass'),
+            'runtime_status' => $this->layer('runtime', 'pass', [
+                ['runtime_publish_state' => 'published_candidate'],
+                ['truth_state' => 'published_candidate'],
+                ['canonical_public_type' => 'public_canonical_job'],
+                ['candidate_pre_route_expected' => true],
+            ]),
+            'seo_geo_status' => $this->layer('seo_geo', 'blocked', [], ['llms_expected_not_ready']),
+            'surface_status' => $this->layer('surface', 'blocked', [], ['surface_unverified']),
+            'safety_status' => $this->layer('safety', 'pass'),
+            'overall_status' => 'blocked',
+            'severity' => 'high',
+            'reasons' => ['llms_expected_not_ready', 'surface_unverified'],
+            'evidence' => [['slug' => $slug]],
+            'sidecars' => [],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function layer(string $layer, string $status, array $evidence = [], array $reasons = []): array
+    {
+        return [
+            'layer' => $layer,
+            'status' => $status,
+            'reasons' => $status === 'pass' ? [] : $reasons,
+            'evidence' => $evidence,
+            'source' => 'synthetic_test_fixture',
+        ];
+    }
+
+    /**
+     * @param  list<string>|array<string, string>  $slugs
+     * @param  list<string>  $routeExposedSlugs
+     */
+    private function writeProjection(array $slugs, array $routeExposedSlugs = []): string
+    {
+        $rows = [];
+        foreach ($slugs as $key => $value) {
+            $slug = is_string($key) ? $key : $value;
+            $state = is_string($key) ? $value : 'published_candidate';
+            foreach (['en', 'zh'] as $locale) {
+                $rows[] = [
+                    'slug' => $slug,
+                    'locale' => $locale,
+                    'public_resolution_type' => $state === 'blocked' ? 'blocked_until_governance_approval' : 'public_canonical_job',
+                    'runtime_publish_state' => $state,
+                    'detail_route_enabled' => in_array($slug, $routeExposedSlugs, true),
+                    'dataset_visible' => false,
+                    'search_visible' => false,
+                ];
+            }
+        }
+
+        return $this->writeJson('projection', ['items' => $rows]);
+    }
+
+    /**
+     * @param  list<string>|array<string, string>  $slugs
+     * @param  list<string>  $routeExposedSlugs
+     */
+    private function writeTruth(array $slugs, array $routeExposedSlugs = []): string
+    {
+        $rows = [];
+        foreach ($slugs as $key => $value) {
+            $slug = is_string($key) ? $key : $value;
+            $state = is_string($key) ? $value : 'published_candidate';
+            foreach (['en', 'zh'] as $locale) {
+                $rows[] = [
+                    'slug' => $slug,
+                    'locale' => $locale,
+                    'public_resolution_type' => $state === 'blocked' ? 'blocked_until_governance_approval' : 'public_canonical_job',
+                    'projection_state' => $state,
+                    'route_exists' => in_array($slug, $routeExposedSlugs, true),
+                    'final_200' => false,
+                    'dataset_visible' => false,
+                    'search_visible' => false,
+                    'candidate_pre_route_expected' => $state === 'published_candidate',
+                    'candidate_unexpected_exposures' => in_array($slug, $routeExposedSlugs, true) ? ['route'] : [],
+                ];
+            }
+        }
+
+        return $this->writeJson('truth', ['items' => $rows]);
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @param  list<string>  $blockedSlugs
+     */
+    private function writeLedger(array $slugs, array $blockedSlugs = []): string
+    {
+        $members = [];
+        foreach ($slugs as $slug) {
+            $members[] = [
+                'canonical_slug' => $slug,
+                'release_cohort' => in_array($slug, $blockedSlugs, true) ? 'review_needed' : 'public_detail_conservative',
+                'public_index_state' => in_array($slug, $blockedSlugs, true) ? 'noindex' : 'indexable',
+            ];
+        }
+
+        return $this->writeJson('ledger', ['members' => $members]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private function writeJson(string $name, array $payload): string
+    {
+        $path = $this->tempPath($name);
+        file_put_contents($path, json_encode($payload, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
+
+        return $path;
+    }
+
+    private function tempPath(string $name): string
+    {
+        return sys_get_temp_dir().'/career-80-runtime-pool-'.Str::uuid().'-'.$name.'.json';
+    }
+}
