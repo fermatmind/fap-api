@@ -4771,6 +4771,59 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": []
+    },
+    "REPAIR-RUNTIME-CANDIDATE-PREP-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-runtime-candidate-prep-plan-1",
+      "title": "fix(api): add career runtime candidate preparation planner",
+      "name": "Add read-only runtime candidate preparation planner for 51 delta slugs",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-80-TARGET-DELTA-1"
+      ],
+      "scope_type": "runtime_candidate_prep_planner_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonicalRuntimeCandidatePrep.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/*",
+        "backend/tests/Feature/Console/*",
+        "backend/tests/Unit/Domain/Career/Audit/*",
+        "backend/docs/career/audits/*",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no runtime candidate preparation apply",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no manifest generation",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json as needed for current PR items in the 7-PR train."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR #1380 added the read-only Career 80 target delta decomposition model used as this planner input."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Current PR scope is limited to read-only runtime candidate preparation planning, command registration, tests/docs, train metadata, and optional freeze classifier allowlist if required."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "REPAIR-RUNTIME-CANDIDATE-PREP-APPLY-GATE-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
     }
   }
 }

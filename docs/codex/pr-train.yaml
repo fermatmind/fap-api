@@ -2577,3 +2577,39 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-RUNTIME-CANDIDATE-PREP-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-80-TARGET-DELTA-1
+    branch: fix/career-runtime-candidate-prep-plan-1
+    title: "fix(api): add career runtime candidate preparation planner"
+    name: "Add read-only runtime candidate preparation planner for 51 delta slugs"
+    scope:
+      - Add a read-only Career runtime candidate preparation planner.
+      - Consume the Career 80 target delta artifact and optional projection/truth/ledger artifacts.
+      - Emit planned published_candidate rows for explicit 51 delta slugs without DB writes, apply, or rollout.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerPlanCanonicalRuntimeCandidatePrep.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout or rollout dry-run.
+      - Run apply, backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+      - Prepare runtime candidates in production.
+    validation:
+      - php artisan test --filter=CareerRuntimeCandidatePrep --no-ansi
+      - php artisan test --filter=Career80TargetDelta --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
