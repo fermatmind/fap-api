@@ -2541,3 +2541,39 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-80-TARGET-DELTA-1
+    repo: fap-api
+    depends_on:
+      - SCAN-14
+    branch: fix/career-80-target-delta-decomposition-1
+    title: "fix(api): add career 80 target delta decomposition"
+    name: "Represent Career 80 as published baseline plus delta promotion slugs"
+    scope:
+      - Add a read-only Career 80 target delta decomposition planner.
+      - Separate already-published baseline slugs from 51 delta promotion slugs.
+      - Preserve 80 total public target accounting without candidate preparation, manifest generation, rollout, apply, or DB mutation.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerPlanCanonical80TargetDelta.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout or rollout dry-run.
+      - Run apply, backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+      - Prepare runtime candidates.
+    validation:
+      - php artisan test --filter=Career80TargetDelta --no-ansi
+      - php artisan test --filter=CareerPlanCanonical80RuntimeCandidatePool --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

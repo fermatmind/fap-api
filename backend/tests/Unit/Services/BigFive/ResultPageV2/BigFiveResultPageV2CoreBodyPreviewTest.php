@@ -402,6 +402,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_career_80_cohort_readiness_plan_changes(): void
     {
         $changed = [
+            'backend/app/Domain/Career/Audit/Career80TargetDeltaPlanner.php',
+            'backend/app/Domain/Career/Audit/Career80TargetDeltaResult.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessIssue.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessPlanner.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessResult.php',
@@ -1846,6 +1848,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareer80CohortReadinessPlanFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Domain/Career/Audit/Career80TargetDeltaPlanner.php',
+            'backend/app/Domain/Career/Audit/Career80TargetDeltaResult.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessIssue.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessPlanner.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CohortReadinessResult.php',
