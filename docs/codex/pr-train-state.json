@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T00:08:00+08:00",
+  "updated_at": "2026-05-15T00:22:47+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -1597,7 +1597,7 @@
       "branch": "fix/career-surface-readiness-audit8",
       "title": "feat(api): add career surface readiness audit",
       "name": "Career Surface Readiness Audit",
-      "status": "in_progress",
+      "status": "pr_open",
       "depends_on": [
         "AUDIT-7"
       ],
@@ -3213,8 +3213,8 @@
         "no 80 readiness run",
         "no deploy"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "8dd4a7da3e93906b4e3bd7ee8ad24fcf528ac157",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1393",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -5405,6 +5405,14 @@
         "dependency": {
           "status": "pass",
           "evidence": "PR #1392 is merged into main and production apply retry succeeded; SCAN-20 shows remaining blocker is post-rollout runtime projection authority."
+        },
+        "local_validation": {
+          "status": "pass",
+          "evidence": "Targeted Career projection/live acceptance tests, route:list, sqlite migrate, Pint, git diff --check, and backend/scripts/ci_verify_mbti.sh passed locally."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to Career publish authority, related unit test, Career audit docs, and authorized train metadata."
         }
       },
       "failure_reason": null,
