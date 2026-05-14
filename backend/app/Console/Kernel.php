@@ -37,6 +37,7 @@ use App\Console\Commands\CareerFinalizeCanonicalRuntimeTruth;
 use App\Console\Commands\CareerFullDisplayWorkbookValidator;
 use App\Console\Commands\CareerGenerateCanonicalDeltaRolloutManifest;
 use App\Console\Commands\CareerGenerateCanonicalExpansionManifestTrain;
+use App\Console\Commands\CareerGenerateCanonicalProgressiveRolloutManifest;
 use App\Console\Commands\CareerImportActorsDisplayAsset;
 use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\CareerImportOccupationDirectoryDrafts;
@@ -246,6 +247,7 @@ class Kernel extends ConsoleKernel
         CareerCrosswalkOps::class,
         CareerGenerateCanonicalDeltaRolloutManifest::class,
         CareerGenerateCanonicalExpansionManifestTrain::class,
+        CareerGenerateCanonicalProgressiveRolloutManifest::class,
         CareerExportCanonicalExpansionManifest::class,
         CareerExportCanonicalEligibilityDbContext::class,
         CareerExportCanonicalEligibilitySurfaceContext::class,

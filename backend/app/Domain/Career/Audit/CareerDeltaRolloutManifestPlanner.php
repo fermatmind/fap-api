@@ -24,6 +24,7 @@ final class CareerDeltaRolloutManifestPlanner
         string $batchId = 'career_80_delta_canonical_001',
         ?string $targetDeltaPath = null,
         ?string $candidatePrepPlanPath = null,
+        ?string $target = null,
     ): CareerDeltaRolloutManifestResult {
         if ($targetPublicTotal < 1) {
             throw new RuntimeException('target_public_total_invalid');
@@ -51,10 +52,11 @@ final class CareerDeltaRolloutManifestPlanner
             locales: $locales,
         );
         $pass = $blockers === [];
-        $members = array_map(static fn (string $slug): array => [
+        $target = $this->target($target, $targetDeltaPlan, $targetPublicTotal);
+        $members = array_map(fn (string $slug): array => [
             'slug' => $slug,
             'locales' => $locales,
-            'source' => 'career_80_delta_target_delta',
+            'source' => $target.'_target_delta',
             'baseline_included' => false,
             'reasons' => [],
             'sidecars' => [],
@@ -63,7 +65,7 @@ final class CareerDeltaRolloutManifestPlanner
         return new CareerDeltaRolloutManifestResult([
             'schema_version' => self::SCHEMA_VERSION,
             'status' => $pass ? 'pass' : 'blocked',
-            'target' => 'career_80_delta',
+            'target' => $target,
             'target_public_total' => $targetPublicTotal,
             'published_baseline_count' => count($baselineSlugs),
             'delta_slug_count' => count($deltaSlugs),
@@ -85,6 +87,7 @@ final class CareerDeltaRolloutManifestPlanner
                 'path' => $targetDeltaPath,
                 'schema_version' => $targetDeltaPlan['schema_version'] ?? null,
                 'status' => $targetDeltaPlan['status'] ?? null,
+                'current_public_total' => $targetDeltaPlan['current_public_total'] ?? null,
                 'target_public_total' => $targetDeltaPlan['target_public_total'] ?? null,
                 'published_baseline_count' => $targetDeltaPlan['published_baseline_count'] ?? null,
                 'delta_promotion_count' => $targetDeltaPlan['delta_promotion_count'] ?? null,
@@ -106,7 +109,7 @@ final class CareerDeltaRolloutManifestPlanner
             ],
             'batches' => [[
                 'batch_id' => $batchId,
-                'target' => 'career_80_delta',
+                'target' => $target,
                 'target_public_total' => $targetPublicTotal,
                 'published_baseline_count' => count($baselineSlugs),
                 'delta_slug_count' => count($deltaSlugs),
@@ -121,8 +124,35 @@ final class CareerDeltaRolloutManifestPlanner
             ]],
             'blockers' => $blockers,
             'sidecars' => [],
-            'next_required_action' => $pass ? 'DELTA_ROLLOUT_DRY_RUN_51' : 'FIX_DELTA_ROLLOUT_MANIFEST_BLOCKERS',
+            'next_required_action' => $pass ? $this->nextRequiredAction($target) : 'FIX_DELTA_ROLLOUT_MANIFEST_BLOCKERS',
         ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $targetDeltaPlan
+     */
+    private function target(?string $target, array $targetDeltaPlan, int $targetPublicTotal): string
+    {
+        $candidate = trim((string) ($target ?? ($targetDeltaPlan['target'] ?? '')));
+        if ($candidate === '') {
+            $currentTotal = $targetDeltaPlan['current_public_total'] ?? null;
+            if (is_numeric($currentTotal)) {
+                $candidate = 'career_'.(int) $currentTotal.'_to_'.$targetPublicTotal.'_delta';
+            } else {
+                $candidate = $targetPublicTotal === 80 ? 'career_80_delta' : 'career_'.$targetPublicTotal.'_delta';
+            }
+        }
+
+        $normalized = preg_replace('/[^a-z0-9]+/', '_', strtolower($candidate)) ?? $candidate;
+
+        return trim($normalized, '_') ?: 'career_80_delta';
+    }
+
+    private function nextRequiredAction(string $target): string
+    {
+        return $target === 'career_80_delta'
+            ? 'DELTA_ROLLOUT_DRY_RUN_51'
+            : 'PROGRESSIVE_ROLLOUT_DRY_RUN';
     }
 
     /**
