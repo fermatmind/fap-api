@@ -36,7 +36,7 @@ The command is read-only. It never queries production, mutates the database, gen
 
 ## Gates
 
-A passing target decomposition only allows the next read-only planning step: runtime candidate preparation planning for the 51 delta slugs. It does not approve candidate preparation apply, rollout dry-run, rollout apply, deploy, live crawl, or publication expansion.
+A passing target decomposition only allows the next read-only planning steps: runtime candidate preparation planning and 51-delta rollout manifest generation. The manifest promotes only the 51 delta slugs and keeps the 29 already-published slugs as baseline accounting. It does not approve candidate preparation apply, rollout dry-run, rollout apply, deploy, live crawl, or publication expansion.
 
 ## Non-goals
 

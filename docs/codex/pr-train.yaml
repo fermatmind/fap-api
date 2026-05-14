@@ -2694,3 +2694,45 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-51-DELTA-ROLLOUT-MANIFEST-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-RUNTIME-ARTIFACT-REFRESH-1
+    branch: fix/career-51-delta-rollout-manifest-1
+    title: "fix(api): add career 51-delta rollout manifest"
+    name: "Add Career 51-delta rollout manifest"
+    scope:
+      - Add a read-only Career 51-delta rollout manifest planner.
+      - Generate an explicit rollback_group for the 51 delta promotion slugs.
+      - Preserve 80-total target accounting as 29 published baseline plus 51 delta slugs.
+      - Register a read-only command that does not run rollout dry-run, rollout apply, or DB writes.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerGenerateCanonicalDeltaRolloutManifest.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout dry-run.
+      - Run rollout apply.
+      - Run candidate preparation apply.
+      - Run backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+    validation:
+      - php artisan test --filter=CareerDeltaRolloutManifest --no-ansi
+      - php artisan test --filter=CareerGenerateCanonicalDeltaRolloutManifest --no-ansi
+      - php artisan test --filter=CareerRuntimeArtifactRefresh --no-ansi
+      - php artisan test --filter=CareerRuntimeCandidate --no-ansi
+      - php artisan test --filter=Career80TargetDelta --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
