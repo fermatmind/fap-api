@@ -12,7 +12,7 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
 
     public const OVERLAY_SOURCE = 'candidate_prep_apply_overlay';
 
-    private const TARGET = 'career_80_delta';
+    private const DEFAULT_TARGET = 'career_80_delta';
 
     private const RUNTIME_STATE = 'published_candidate';
 
@@ -39,6 +39,7 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
         string $truthOutputPath,
         string $ledgerOutputPath,
         int $expectedSlugCount = 51,
+        string $target = self::DEFAULT_TARGET,
     ): array {
         $source = $this->verifiedSource($candidatePrepApply, $candidatePrepApplyPath, $candidatePrepApplyFileSha256, $expectedSlugCount);
         $slugs = $source['slugs'];
@@ -61,7 +62,7 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
                     'artifact_sha256' => $source['artifact_sha256'],
                     'file_sha256' => $candidatePrepApplyFileSha256,
                 ],
-                'target' => self::TARGET,
+                'target' => $this->target($target),
                 'delta_slug_count' => count($slugs),
                 'expected_delta_locale_rows' => count($slugs) * count($locales),
                 'locales' => $locales,
@@ -87,12 +88,33 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
                 'writes_database' => false,
                 'read_only' => true,
                 'apply_allowed' => false,
-                'next_required_action' => '51_DELTA_ROLLOUT_DRY_RUN',
+                'next_required_action' => $this->nextRequiredAction($target),
             ],
             'projection' => $projectionArtifact,
             'truth' => $truthArtifact,
             'ledger' => $ledgerArtifact,
         ];
+    }
+
+    private function target(string $target): string
+    {
+        $normalized = strtolower(trim($target));
+        if ($normalized === '') {
+            return self::DEFAULT_TARGET;
+        }
+
+        $key = preg_replace('/[^a-z0-9]+/', '_', $normalized) ?? $normalized;
+
+        return trim($key, '_') ?: self::DEFAULT_TARGET;
+    }
+
+    private function nextRequiredAction(string $target): string
+    {
+        $target = $this->target($target);
+
+        return $target === self::DEFAULT_TARGET
+            ? '51_DELTA_ROLLOUT_DRY_RUN'
+            : 'PROGRESSIVE_ROLLOUT_DRY_RUN';
     }
 
     /**

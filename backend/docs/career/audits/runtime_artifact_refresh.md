@@ -1,8 +1,8 @@
 # Career Runtime Artifact Refresh Plan
 
-`career:plan-canonical-runtime-artifact-refresh` defines the read-only artifact refresh sequence required after a separately approved Career 80 delta runtime candidate preparation apply.
+`career:plan-canonical-runtime-artifact-refresh` defines the read-only artifact refresh sequence required after a separately approved Career runtime candidate preparation apply.
 
-The plan exists because the 51 delta slugs must first be prepared as runtime `published_candidate` inventory, then projection, truth, and ledger artifacts must be refreshed before any 51-delta rollout dry-run is attempted.
+The plan exists because delta slugs must first be prepared as runtime `published_candidate` inventory, then projection, truth, and ledger artifacts must be refreshed before any rollout dry-run is attempted. It supports the 51 Career 80 delta path and progressive cohort deltas such as 220, 500, and 1986 slugs.
 
 ## Usage
 
@@ -45,6 +45,24 @@ php artisan career:plan-canonical-runtime-artifact-refresh \
   --output=/tmp/career_80_delta_runtime_artifact_refresh_candidate_aware.json
 ```
 
+Progressive candidate-aware refresh uses the same command with an explicit target, expected slug count, and cohort-specific outputs:
+
+```bash
+php artisan career:plan-canonical-runtime-artifact-refresh \
+  --target=career_80_to_300_delta \
+  --candidate-prep-apply=/tmp/career_300_runtime_candidate_prep_apply.json \
+  --projection=/tmp/career_300_runtime_projection_after_candidate_prep.json \
+  --truth=/tmp/career_300_runtime_truth_after_candidate_prep.json \
+  --ledger=/tmp/career_300_full_release_ledger_after_candidate_prep.json \
+  --candidate-aware \
+  --expect-slug-count=220 \
+  --projection-output=/tmp/career_300_runtime_projection_candidate_aware.json \
+  --truth-output=/tmp/career_300_runtime_truth_candidate_aware.json \
+  --ledger-output=/tmp/career_300_full_release_ledger_candidate_aware.json \
+  --json \
+  --output=/tmp/career_300_runtime_artifact_refresh_candidate_aware.json
+```
+
 ## Output
 
 The output schema is `career_runtime_artifact_refresh_plan.v1`.
@@ -64,7 +82,7 @@ Key fields:
 
 Candidate-aware refresh output schema is `career_runtime_candidate_aware_artifact_refresh.v1`.
 
-The candidate-aware mode consumes the verified candidate-prep apply artifact and overlays its 51 verified slugs into read-only projection, truth, and ledger artifacts as hidden pre-route `published_candidate` rows. Overlay rows and members carry `candidate_prep_apply_overlay` provenance and explicitly set `canonical_ledger_authority_claimed=false`. This matters because the canonical full release ledger exporter alone may omit newly prepared candidate rows or keep previously tracked members in `review_needed` / `family_handoff`; candidate-aware artifacts are planning artifacts derived from write verification, not a replacement claim that those rows originated from canonical ledger authority.
+The candidate-aware mode consumes the verified candidate-prep apply artifact and overlays its verified slugs into read-only projection, truth, and ledger artifacts as hidden pre-route `published_candidate` rows. Overlay rows equal `delta_slug_count * locale_count`, and ledger overlay members equal `delta_slug_count`. Overlay rows and members carry `candidate_prep_apply_overlay` provenance and explicitly set `canonical_ledger_authority_claimed=false`. This matters because the canonical full release ledger exporter alone may omit newly prepared candidate rows or keep previously tracked members in `review_needed` / `family_handoff`; candidate-aware artifacts are planning artifacts derived from write verification, not a replacement claim that those rows originated from canonical ledger authority.
 
 Candidate-aware artifact paths:
 
@@ -73,7 +91,7 @@ Candidate-aware artifact paths:
 - `/tmp/career_80_delta_full_release_ledger_candidate_aware.json`
 - `/tmp/career_80_delta_runtime_artifact_refresh_candidate_aware.json`
 
-The candidate-aware artifacts are intended for the next read-only 51-delta rollout dry-run. They do not publish pages, do not run rollout, and do not mutate the database.
+The candidate-aware artifacts are intended for the next read-only rollout dry-run for the current delta cohort. They do not publish pages, do not run rollout, and do not mutate the database.
 
 ## Approval Gates
 

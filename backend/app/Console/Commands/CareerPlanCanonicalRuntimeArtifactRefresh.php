@@ -14,7 +14,7 @@ use Throwable;
 final class CareerPlanCanonicalRuntimeArtifactRefresh extends Command
 {
     protected $signature = 'career:plan-canonical-runtime-artifact-refresh
-        {--target=career_80_delta : Refresh target}
+        {--target=career_80_delta : Refresh target or progressive cohort key}
         {--delta-plan= : Optional Career 80 target delta artifact}
         {--candidate-prep-plan= : Optional runtime candidate prep plan artifact}
         {--candidate-prep-apply= : Optional runtime candidate prep apply artifact}
@@ -81,6 +81,7 @@ final class CareerPlanCanonicalRuntimeArtifactRefresh extends Command
         $truthOutputPath = $this->requiredPathOption('truth-output');
         $ledgerOutputPath = $this->requiredPathOption('ledger-output');
         $expectedSlugCount = $this->positiveIntOption('expect-slug-count', 51);
+        $target = trim((string) ($this->option('target') ?? 'career_80_delta')) ?: 'career_80_delta';
 
         try {
             $result = app(CareerRuntimeCandidateAwareArtifactRefresh::class)->build(
@@ -97,6 +98,7 @@ final class CareerPlanCanonicalRuntimeArtifactRefresh extends Command
                 truthOutputPath: $truthOutputPath,
                 ledgerOutputPath: $ledgerOutputPath,
                 expectedSlugCount: $expectedSlugCount,
+                target: $target,
             );
 
             $this->writeJson($projectionOutputPath, $result['projection']);
@@ -114,7 +116,7 @@ final class CareerPlanCanonicalRuntimeArtifactRefresh extends Command
                     'slug_count' => 0,
                     'artifact_sha256' => null,
                 ],
-                'target' => 'career_80_delta',
+                'target' => $target,
                 'delta_slug_count' => 0,
                 'expected_delta_locale_rows' => 0,
                 'projection' => [
