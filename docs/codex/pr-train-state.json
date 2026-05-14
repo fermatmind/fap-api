@@ -5111,6 +5111,7 @@
         "backend/app/Console/Kernel.php",
         "backend/app/Services/Cms/ArticlePublishService.php",
         "backend/tests/Feature/Console/ArticlePublishControlledCommandTest.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
         "docs/04-ops/controlled-codex-assisted-cms-publish.md",
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
@@ -5159,6 +5160,11 @@
         "scoped_pint": {
           "status": "pass",
           "command": "vendor/bin/pint --test app/Console/Commands/ArticlePublishControlled.php app/Services/Cms/ArticlePublishService.php app/Console/Kernel.php tests/Feature/Console/ArticlePublishControlledCommandTest.php"
+        },
+        "bigfive_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=controlled_article_publish --no-ansi",
+          "evidence": "1 test passed, 1 assertion; CI failure root cause was freeze classifier allowlist missing the controlled publish SOP command and Kernel registration."
         },
         "diff_check": {
           "status": "pass",
