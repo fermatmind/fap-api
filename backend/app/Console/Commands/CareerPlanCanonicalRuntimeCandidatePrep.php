@@ -14,6 +14,8 @@ final class CareerPlanCanonicalRuntimeCandidatePrep extends Command
 {
     protected $signature = 'career:plan-canonical-runtime-candidate-prep
         {--target-delta= : Required Career 80 target delta JSON artifact}
+        {--target-total= : Optional target public total guard for progressive cohorts}
+        {--cohort= : Optional cohort key such as career_80_to_300_delta}
         {--projection= : Optional runtime projection JSON artifact}
         {--truth= : Optional runtime truth JSON artifact}
         {--ledger= : Optional full release ledger JSON artifact}
@@ -33,6 +35,8 @@ final class CareerPlanCanonicalRuntimeCandidatePrep extends Command
                 truth: $this->optionalJson('truth'),
                 ledger: $this->optionalJson('ledger'),
                 locales: $this->localesOption(),
+                targetPublicTotal: $this->nullablePositiveIntOption('target-total'),
+                cohort: $this->nullableStringOption('cohort'),
             )->toArray();
 
             return $this->finish($payload, ($payload['status'] ?? null) === 'planned' ? self::SUCCESS : self::FAILURE);
@@ -61,6 +65,28 @@ final class CareerPlanCanonicalRuntimeCandidatePrep extends Command
         $value = trim((string) ($this->option($name) ?? ''));
         if ($value === '') {
             throw new RuntimeException(str_replace('-', '_', $name).'_missing');
+        }
+
+        return $value;
+    }
+
+    private function nullableStringOption(string $name): ?string
+    {
+        $value = trim((string) ($this->option($name) ?? ''));
+
+        return $value === '' ? null : $value;
+    }
+
+    private function nullablePositiveIntOption(string $name): ?int
+    {
+        $raw = $this->option($name);
+        if ($raw === null || trim((string) $raw) === '') {
+            return null;
+        }
+
+        $value = filter_var($raw, FILTER_VALIDATE_INT);
+        if (! is_int($value) || $value < 1) {
+            throw new RuntimeException(str_replace('-', '_', $name).'_invalid');
         }
 
         return $value;

@@ -5488,7 +5488,7 @@
       "repo": "fap-api",
       "branch": "fix/career-progressive-cohort-target-delta-1",
       "title": "fix(api): add progressive career cohort delta planner",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "80-CLOSEOUT-1"
       ],
@@ -5513,8 +5513,8 @@
         "no deploy",
         "no fap-web change"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "bb3f9444646533f18a874c44716b5c6b9d5f3711",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1395",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -5535,6 +5535,83 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-PROGRESSIVE-RUNTIME-CANDIDATE-PREP-1",
+      "merged_at": "2026-05-14T19:26:45Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "sidecar_issues": [
+        {
+          "sidecar_id": "SIDECAR-BIG5-CONTENT-PACK-PUBLISH-ROLLBACK-ENV-1",
+          "title": "ci_verify_mbti content pack publish/rollback target compiled directory failure",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [],
+          "evidence": [
+            "backend/scripts/ci_verify_mbti.sh failed only Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
+            "Current PR changed only Career progressive audit/command/test/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
+            "Targeted Career tests, route:list, sqlite migrate, Pint, and git diff --check passed."
+          ],
+          "severity": "medium",
+          "next_goal": "SCAN-BIG5-CONTENT-PACK-PUBLISH-ROLLBACK-ENV-1",
+          "may_continue_train": true
+        }
+      ]
+    },
+    "REPAIR-PROGRESSIVE-RUNTIME-CANDIDATE-PREP-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-progressive-runtime-candidate-prep-1",
+      "title": "fix(api): generalize career runtime candidate preparation",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-PROGRESSIVE-COHORT-TARGET-DELTA-1"
+      ],
+      "scope_type": "progressive_runtime_candidate_preparation_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonicalRuntimeCandidatePrep.php",
+        "backend/app/Console/Commands/CareerPrepareCanonicalRuntimeCandidates.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/**",
+        "backend/tests/Feature/Console/**",
+        "backend/tests/Unit/Domain/Career/Audit/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no candidate prep apply",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no backfill",
+        "no rollback",
+        "no quarantine",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for the progressive expansion PR train."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-PROGRESSIVE-COHORT-TARGET-DELTA-1 merged as PR #1395 and provides explicit progressive delta artifacts."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Current PR scope is limited to progressive runtime candidate preparation planning/guards, tests/docs, and train metadata."
+        },
+        "local_validation": {
+          "status": "pass_with_external_sidecar",
+          "evidence": "CareerRuntimeCandidate, CareerProgressiveCohortDelta, Career80TargetDelta, CareerAuditCanonicalEligibility, route:list, sqlite migrate, Pint, and git diff --check passed locally. backend/scripts/ci_verify_mbti.sh still fails the pre-existing BigFive content pack publish/rollback compiled directory assertions outside this PR scope."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "REPAIR-PROGRESSIVE-RUNTIME-ARTIFACT-REFRESH-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -5548,8 +5625,8 @@
           "affected_slugs": [],
           "affected_locales": [],
           "evidence": [
-            "backend/scripts/ci_verify_mbti.sh failed only Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
-            "Current PR changed only Career progressive audit/command/test/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
+            "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
+            "Current PR changed only Career runtime candidate prep command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
             "Targeted Career tests, route:list, sqlite migrate, Pint, and git diff --check passed."
           ],
           "severity": "medium",

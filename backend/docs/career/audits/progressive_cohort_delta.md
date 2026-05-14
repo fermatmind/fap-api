@@ -43,3 +43,27 @@ Expected cohort arithmetic:
 | 800 | 2786 | 1986 | 3972 | 5572 |
 
 This command does not run candidate preparation, rollout dry-run, rollout apply, artifact export, deploy, rollback, quarantine, or DB mutation. Later steps must use the emitted explicit delta slug list and pass their own dry-run/apply guards.
+
+## Candidate Preparation Handoff
+
+The runtime candidate preparation planner can consume this artifact directly:
+
+```bash
+php artisan career:plan-canonical-runtime-candidate-prep \
+  --target-delta=/tmp/career_300_target_delta.json \
+  --target-total=300 \
+  --cohort=career_80_to_300_delta \
+  --locales=en,zh \
+  --json \
+  --output=/tmp/career_300_runtime_candidate_prep_plan.json
+```
+
+For progressive cohorts, the guarded preparation dry-run/apply command must use the reviewed artifact with explicit count guards. The `--max-slugs` value must exactly match the cohort delta:
+
+| Cohort | `--expect-slug-count` | `--max-slugs` |
+| --- | ---: | ---: |
+| 80 -> 300 | 220 | 220 |
+| 300 -> 800 | 500 | 500 |
+| 800 -> 2786 | 1986 | 1986 |
+
+The preparation commands still do not select slugs implicitly and have no wildcard or all-2786 mode before the explicit 2786 phase artifact exists.

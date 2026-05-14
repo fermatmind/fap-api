@@ -40,6 +40,43 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-PROGRESSIVE-RUNTIME-CANDIDATE-PREP-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-PROGRESSIVE-COHORT-TARGET-DELTA-1
+    branch: fix/career-progressive-runtime-candidate-prep-1
+    title: "fix(api): generalize career runtime candidate preparation"
+    name: "Generalize runtime candidate preparation for progressive Career cohorts"
+    scope:
+      - Extend runtime candidate preparation planning to consume progressive cohort delta artifacts.
+      - Support explicit 220, 500, and 1986 slug deltas without wildcard or all-2786 selection.
+      - Preserve guarded dry-run/apply SHA, expected count, and max-slugs controls without running production writes.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerPlanCanonicalRuntimeCandidatePrep.php
+      - backend/app/Console/Commands/CareerPrepareCanonicalRuntimeCandidates.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run candidate preparation apply.
+      - Run rollout or rollout dry-run.
+      - Run backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+    validation:
+      - php artisan test --filter=CareerRuntimeCandidate --no-ansi
+      - php artisan test --filter=CareerProgressiveCohortDelta --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
     repo: fap-api
     depends_on:

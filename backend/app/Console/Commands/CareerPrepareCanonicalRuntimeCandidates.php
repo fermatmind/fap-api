@@ -15,7 +15,7 @@ use Throwable;
 
 final class CareerPrepareCanonicalRuntimeCandidates extends Command
 {
-    private const SOURCE = 'career_80_delta_runtime_candidate_preparation';
+    private const DEFAULT_SOURCE = 'career_80_delta_runtime_candidate_preparation';
 
     private const TARGET_INDEX_STATE = IndexStateValue::PROMOTION_CANDIDATE;
 
@@ -26,6 +26,8 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
     protected $signature = 'career:prepare-canonical-runtime-candidates
         {--plan= : Reviewed runtime candidate preparation plan JSON path}
         {--slug-artifact= : Reviewed explicit slug artifact JSON path}
+        {--target-total= : Optional target public total guard for progressive cohorts}
+        {--cohort= : Optional cohort key such as career_80_to_300_delta}
         {--dry-run : Plan without writing}
         {--apply : Execute guarded published_candidate preparation writes}
         {--batch-id= : Reviewed preparation batch id}
@@ -51,13 +53,15 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
             [$artifact, $artifactSha] = $this->readSourceArtifact($sourcePath);
             $slugs = $artifact['slugs'];
             $slugCount = count($slugs);
+            $source = $this->sourceName($artifact);
 
             $blockers = [
                 ...$this->confirmationBlockers($mode, $artifactSha, $slugCount, $expectedSlugCount),
-                ...$this->artifactSafetyBlockers($slugCount, $maxSlugs),
+                ...$this->artifactSafetyBlockers($artifact, $slugCount, $maxSlugs),
+                ...$this->progressiveTargetBlockers($artifact),
             ];
 
-            $plan = $this->plan($slugs, $artifact['locales'], $batchId, $reason, $sourcePath, $artifactSha);
+            $plan = $this->plan($slugs, $artifact['locales'], $batchId, $reason, $sourcePath, $artifactSha, $source);
             $blockers = [
                 ...$blockers,
                 ...$plan['blockers'],
@@ -69,6 +73,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
                     $artifact,
                     $sourcePath,
                     $artifactSha,
+                    $source,
                     $batchId,
                     $reason,
                     $maxSlugs,
@@ -83,6 +88,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
                     $artifact,
                     $sourcePath,
                     $artifactSha,
+                    $source,
                     $batchId,
                     $reason,
                     $maxSlugs,
@@ -91,7 +97,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
                 ), self::FAILURE);
             }
 
-            $payload = $this->apply($plan, $artifact, $sourcePath, $artifactSha, $batchId, $reason, $maxSlugs, $expectedSlugCount);
+            $payload = $this->apply($plan, $artifact, $sourcePath, $artifactSha, $source, $batchId, $reason, $maxSlugs, $expectedSlugCount);
 
             return $this->finish($payload, ($payload['status'] ?? null) === 'applied' ? self::SUCCESS : self::FAILURE);
         } catch (Throwable $exception) {
@@ -220,6 +226,8 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
             'raw_summary' => is_array($decoded) && ! array_is_list($decoded) ? [
                 'status' => $decoded['status'] ?? null,
                 'target' => $decoded['target'] ?? null,
+                'current_public_total' => $decoded['current_public_total'] ?? null,
+                'target_public_total' => $decoded['target_public_total'] ?? null,
                 'delta_slug_count' => $decoded['delta_slug_count'] ?? null,
                 'expected_locale_rows' => $decoded['expected_locale_rows'] ?? null,
             ] : null,
@@ -378,13 +386,82 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
     /**
      * @return list<array<string, mixed>>
      */
-    private function artifactSafetyBlockers(int $slugCount, int $maxSlugs): array
+    private function artifactSafetyBlockers(array $artifact, int $slugCount, int $maxSlugs): array
     {
         if ($slugCount > $maxSlugs) {
             return [$this->blocker('slug_count_exceeds_max_slugs', 'Artifact slug count exceeds --max-slugs guard.')];
         }
 
+        if ($this->isProgressiveArtifact($artifact) && $slugCount !== $maxSlugs) {
+            return [$this->blocker('progressive_max_slugs_must_match_delta_count', 'Progressive cohort preparation requires --max-slugs to exactly match the cohort delta slug count.', [
+                'slug_count' => $slugCount,
+                'max_slugs' => $maxSlugs,
+            ])];
+        }
+
         return [];
+    }
+
+    /**
+     * @param  array<string, mixed>  $artifact
+     * @return list<array<string, mixed>>
+     */
+    private function progressiveTargetBlockers(array $artifact): array
+    {
+        $blockers = [];
+        $targetTotal = $this->nullablePositiveIntOption('target-total');
+        $artifactTargetTotal = data_get($artifact, 'raw_summary.target_public_total');
+
+        if ($targetTotal !== null && is_numeric($artifactTargetTotal) && $targetTotal !== (int) $artifactTargetTotal) {
+            $blockers[] = $this->blocker('target_public_total_mismatch', 'Requested target public total does not match the preparation artifact.', [
+                'requested' => $targetTotal,
+                'artifact' => (int) $artifactTargetTotal,
+            ]);
+        }
+
+        $cohort = trim((string) ($this->option('cohort') ?? ''));
+        $artifactTarget = data_get($artifact, 'raw_summary.target');
+        if ($cohort !== '' && is_string($artifactTarget) && $artifactTarget !== '' && strtolower($cohort) !== strtolower($artifactTarget)) {
+            $blockers[] = $this->blocker('cohort_mismatch', 'Requested cohort does not match the preparation artifact target.', [
+                'requested' => strtolower($cohort),
+                'artifact' => strtolower($artifactTarget),
+            ]);
+        }
+
+        return $blockers;
+    }
+
+    /**
+     * @param  array<string, mixed>  $artifact
+     */
+    private function isProgressiveArtifact(array $artifact): bool
+    {
+        $schema = (string) ($artifact['schema_version'] ?? '');
+        $target = (string) data_get($artifact, 'raw_summary.target', '');
+        $targetTotal = data_get($artifact, 'raw_summary.target_public_total');
+
+        return $schema === 'career_progressive_cohort_delta_plan.v1'
+            || str_starts_with($target, 'career_progressive_')
+            || str_contains($target, '_to_')
+            || (is_numeric($targetTotal) && (int) $targetTotal > 80);
+    }
+
+    /**
+     * @param  array<string, mixed>  $artifact
+     */
+    private function sourceName(array $artifact): string
+    {
+        $target = (string) data_get($artifact, 'raw_summary.target', '');
+        $target = strtolower(trim($target));
+
+        if ($target === '' || $target === 'career_80_delta') {
+            return self::DEFAULT_SOURCE;
+        }
+
+        $source = preg_replace('/[^a-z0-9]+/', '_', $target) ?? $target;
+        $source = trim($source, '_');
+
+        return ($source === '' ? 'career_progressive_delta' : $source).'_runtime_candidate_preparation';
     }
 
     /**
@@ -392,7 +469,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
      * @param  list<string>  $locales
      * @return array{slugs: list<string>, locales: list<string>, missing_occupations: list<string>, existing_latest_states: list<array<string, mixed>>, planned_writes: list<array<string, mixed>>, blockers: list<array<string, mixed>>}
      */
-    private function plan(array $slugs, array $locales, string $batchId, string $reason, string $artifactPath, string $artifactSha): array
+    private function plan(array $slugs, array $locales, string $batchId, string $reason, string $artifactPath, string $artifactSha, string $source): array
     {
         $occupations = Occupation::query()
             ->whereIn('canonical_slug', $slugs)
@@ -429,8 +506,8 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
                 'index_eligible' => true,
                 'canonical_path' => '/career/jobs/'.$slug,
                 'canonical_target' => null,
-                'reason_codes' => $this->reasonCodes($batchId, $reason, $artifactPath, $artifactSha),
-                'row_fingerprint' => $this->rowFingerprint($slug, $batchId, $artifactSha),
+                'reason_codes' => $this->reasonCodes($batchId, $reason, $artifactPath, $artifactSha, $source),
+                'row_fingerprint' => $this->rowFingerprint($slug, $batchId, $artifactSha, $source),
             ];
         }
 
@@ -447,10 +524,10 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
     /**
      * @return list<string>
      */
-    private function reasonCodes(string $batchId, string $reason, string $artifactPath, string $artifactSha): array
+    private function reasonCodes(string $batchId, string $reason, string $artifactPath, string $artifactSha, string $source): array
     {
         return [
-            self::SOURCE,
+            $source,
             'prepare_published_candidate_runtime_rows',
             'batch_id:'.$batchId,
             'reason:'.Str::slug($reason, '_'),
@@ -461,10 +538,10 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
         ];
     }
 
-    private function rowFingerprint(string $slug, string $batchId, string $artifactSha): string
+    private function rowFingerprint(string $slug, string $batchId, string $artifactSha, string $source): string
     {
         return hash('sha256', json_encode([
-            'source' => self::SOURCE,
+            'source' => $source,
             'canonical_slug' => $slug,
             'target_index_state' => self::TARGET_INDEX_STATE,
             'target_runtime_state' => self::TARGET_RUNTIME_STATE,
@@ -509,7 +586,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
      * @param  list<array<string, mixed>>  $blockers
      * @return array<string, mixed>
      */
-    private function dryRunPayload(array $plan, array $artifact, string $artifactPath, string $artifactSha, string $batchId, string $reason, int $maxSlugs, ?int $expectedSlugCount, array $blockers): array
+    private function dryRunPayload(array $plan, array $artifact, string $artifactPath, string $artifactSha, string $source, string $batchId, string $reason, int $maxSlugs, ?int $expectedSlugCount, array $blockers): array
     {
         return [
             'status' => $blockers === [] ? 'planned' : 'blocked',
@@ -522,6 +599,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
             'batch_id' => $batchId,
             'reason' => $reason,
             'source_artifact' => $artifactPath,
+            'preparation_source' => $source,
             'source_kind' => $artifact['source_kind'],
             'artifact_schema_version' => $artifact['schema_version'],
             'artifact_sha256' => $artifactSha,
@@ -554,7 +632,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
      * @param  list<array<string, mixed>>  $blockers
      * @return array<string, mixed>
      */
-    private function blockedApplyPayload(array $plan, array $artifact, string $artifactPath, string $artifactSha, string $batchId, string $reason, int $maxSlugs, ?int $expectedSlugCount, array $blockers): array
+    private function blockedApplyPayload(array $plan, array $artifact, string $artifactPath, string $artifactSha, string $source, string $batchId, string $reason, int $maxSlugs, ?int $expectedSlugCount, array $blockers): array
     {
         return [
             'status' => 'blocked',
@@ -567,6 +645,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
             'batch_id' => $batchId,
             'reason' => $reason,
             'source_artifact' => $artifactPath,
+            'preparation_source' => $source,
             'source_kind' => $artifact['source_kind'],
             'artifact_schema_version' => $artifact['schema_version'],
             'artifact_sha256' => $artifactSha,
@@ -592,7 +671,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
      * @param  array<string, mixed>  $artifact
      * @return array<string, mixed>
      */
-    private function apply(array $plan, array $artifact, string $artifactPath, string $artifactSha, string $batchId, string $reason, int $maxSlugs, ?int $expectedSlugCount): array
+    private function apply(array $plan, array $artifact, string $artifactPath, string $artifactSha, string $source, string $batchId, string $reason, int $maxSlugs, ?int $expectedSlugCount): array
     {
         $created = [];
         $failures = [];
@@ -631,7 +710,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
             }
         });
 
-        $verification = $this->verifyWrites($plan['slugs'], $artifactSha);
+        $verification = $this->verifyWrites($plan['slugs'], $artifactSha, $source);
         $blockers = $verification['blockers'];
 
         return [
@@ -645,6 +724,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
             'batch_id' => $batchId,
             'reason' => $reason,
             'source_artifact' => $artifactPath,
+            'preparation_source' => $source,
             'source_kind' => $artifact['source_kind'],
             'artifact_schema_version' => $artifact['schema_version'],
             'artifact_sha256' => $artifactSha,
@@ -666,7 +746,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
      * @param  list<string>  $slugs
      * @return array{verified_count: int, blockers: list<array<string, mixed>>}
      */
-    private function verifyWrites(array $slugs, string $artifactSha): array
+    private function verifyWrites(array $slugs, string $artifactSha, string $source): array
     {
         $occupations = Occupation::query()
             ->whereIn('canonical_slug', $slugs)
@@ -695,7 +775,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
                 continue;
             }
 
-            if (! in_array(self::SOURCE, $reasonCodes, true) || ! in_array('artifact_sha256:'.$artifactSha, $reasonCodes, true)) {
+            if (! in_array($source, $reasonCodes, true) || ! in_array('artifact_sha256:'.$artifactSha, $reasonCodes, true)) {
                 $blockers[] = $this->blocker('write_metadata_verification_failed', 'Latest prepared candidate row is missing source or artifact metadata.', ['canonical_slug' => $slug]);
 
                 continue;

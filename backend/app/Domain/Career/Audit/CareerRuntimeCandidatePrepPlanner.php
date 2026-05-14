@@ -23,9 +23,15 @@ final class CareerRuntimeCandidatePrepPlanner
         ?array $truth = null,
         ?array $ledger = null,
         array $locales = ['en', 'zh'],
+        ?int $targetPublicTotal = null,
+        ?string $cohort = null,
     ): CareerRuntimeCandidatePrepResult {
         $deltaSlugs = $this->deltaSlugs($targetDeltaPlan);
         $locales = $this->normalizedUniqueStrings($locales, 'locale');
+        $artifactTargetPublicTotal = $this->artifactTargetPublicTotal($targetDeltaPlan);
+        $currentPublicTotal = $this->artifactCurrentPublicTotal($targetDeltaPlan);
+        $targetPublicTotal ??= $artifactTargetPublicTotal ?? 80;
+        $cohort = $this->cohortValue($cohort, $targetPublicTotal, $currentPublicTotal);
 
         $projectionBySlugLocale = $this->rowsBySlugLocale($this->artifactRows($projection, ['items', 'rows']));
         $truthBySlugLocale = $this->rowsBySlugLocale($this->artifactRows($truth, ['items', 'rows']));
@@ -96,7 +102,7 @@ final class CareerRuntimeCandidatePrepPlanner
                     'projection_state' => Career80RolloutCandidateGate::EXPECTED_RUNTIME_STATE,
                     'public_resolution_type' => 'public_canonical_job',
                     'candidate_pre_route_expected' => true,
-                    'source' => 'career_80_delta_runtime_candidate_prep',
+                    'source' => $cohort.'_runtime_candidate_prep',
                     'write_intent' => 'planned_only',
                 ];
             }
@@ -109,7 +115,7 @@ final class CareerRuntimeCandidatePrepPlanner
             $slugRows[] = $slugEvidence;
         }
 
-        $blockers = $this->blockers($targetDeltaPlan, $deltaSlugs);
+        $blockers = $this->blockers($targetDeltaPlan, $deltaSlugs, $targetPublicTotal, $artifactTargetPublicTotal);
         $status = $blockers === [] ? 'planned' : 'blocked';
 
         return new CareerRuntimeCandidatePrepResult([
@@ -117,11 +123,13 @@ final class CareerRuntimeCandidatePrepPlanner
             'status' => $status,
             'read_only' => true,
             'writes_database' => false,
-            'target' => 'career_80_delta',
-            'target_public_total' => (int) ($targetDeltaPlan['target_public_total'] ?? 80),
+            'target' => $cohort,
+            'current_public_total' => $currentPublicTotal,
+            'target_public_total' => $targetPublicTotal,
             'delta_slug_count' => count($deltaSlugs),
             'locales' => $locales,
             'expected_locale_rows' => count($deltaSlugs) * count($locales),
+            'expected_delta_locale_rows' => count($deltaSlugs) * count($locales),
             'planned_candidate_rows_count' => count($plannedRows),
             'planned_candidate_rows' => $plannedRows,
             'slug_rows' => $slugRows,
@@ -297,10 +305,46 @@ final class CareerRuntimeCandidatePrepPlanner
 
     /**
      * @param  array<string, mixed>  $targetDeltaPlan
+     */
+    private function artifactTargetPublicTotal(array $targetDeltaPlan): ?int
+    {
+        $value = $targetDeltaPlan['target_public_total'] ?? data_get($targetDeltaPlan, 'target.public_total');
+
+        return is_numeric($value) ? (int) $value : null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $targetDeltaPlan
+     */
+    private function artifactCurrentPublicTotal(array $targetDeltaPlan): ?int
+    {
+        $value = $targetDeltaPlan['current_public_total'] ?? data_get($targetDeltaPlan, 'current.public_total');
+
+        return is_numeric($value) ? (int) $value : null;
+    }
+
+    private function cohortValue(?string $cohort, int $targetPublicTotal, ?int $currentPublicTotal): string
+    {
+        $normalized = strtolower(trim((string) $cohort));
+        if ($normalized !== '') {
+            $key = preg_replace('/[^a-z0-9]+/', '_', $normalized) ?? $normalized;
+
+            return trim($key, '_') ?: $normalized;
+        }
+
+        if ($currentPublicTotal !== null && $targetPublicTotal !== 80) {
+            return sprintf('career_%d_to_%d_delta', $currentPublicTotal, $targetPublicTotal);
+        }
+
+        return $targetPublicTotal === 80 ? 'career_80_delta' : sprintf('career_progressive_%d_delta', $targetPublicTotal);
+    }
+
+    /**
+     * @param  array<string, mixed>  $targetDeltaPlan
      * @param  list<string>  $deltaSlugs
      * @return list<array<string, mixed>>
      */
-    private function blockers(array $targetDeltaPlan, array $deltaSlugs): array
+    private function blockers(array $targetDeltaPlan, array $deltaSlugs, int $targetPublicTotal, ?int $artifactTargetPublicTotal): array
     {
         $blockers = [];
         if (($targetDeltaPlan['status'] ?? null) !== 'pass') {
@@ -318,6 +362,17 @@ final class CareerRuntimeCandidatePrepPlanner
                 'evidence' => [
                     'declared' => (int) $declaredDeltaCount,
                     'actual' => count($deltaSlugs),
+                ],
+            ];
+        }
+
+        if ($artifactTargetPublicTotal !== null && $artifactTargetPublicTotal !== $targetPublicTotal) {
+            $blockers[] = [
+                'reason' => 'target_public_total_mismatch',
+                'message' => 'Requested target public total does not match the target delta artifact.',
+                'evidence' => [
+                    'requested' => $targetPublicTotal,
+                    'artifact' => $artifactTargetPublicTotal,
                 ],
             ];
         }

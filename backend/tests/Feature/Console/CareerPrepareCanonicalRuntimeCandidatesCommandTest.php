@@ -152,6 +152,75 @@ final class CareerPrepareCanonicalRuntimeCandidatesCommandTest extends TestCase
         $this->assertSame(0, IndexState::query()->count());
     }
 
+    public function test_progressive_dry_run_requires_max_slugs_to_match_delta_count(): void
+    {
+        $artifact = $this->writePlanArtifact($this->slugs('delta', 220), target: 'career_80_to_300_delta', targetTotal: 300);
+
+        $exitCode = $this->callCommand([
+            '--plan' => $artifact,
+            '--dry-run' => true,
+            '--expect-slug-count' => 220,
+            '--max-slugs' => 300,
+            '--target-total' => 300,
+            '--cohort' => 'career_80_to_300_delta',
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame(1, $payload['by_reason']['progressive_max_slugs_must_match_delta_count']);
+        $this->assertFalse($payload['writes_database']);
+        $this->assertSame(0, IndexState::query()->count());
+    }
+
+    public function test_progressive_dry_run_allows_exact_220_guard_without_writes(): void
+    {
+        $slugs = $this->slugs('delta', 220);
+        foreach ($slugs as $slug) {
+            $this->createOccupation($slug);
+        }
+        $artifact = $this->writePlanArtifact($slugs, target: 'career_80_to_300_delta', targetTotal: 300);
+        $before = IndexState::query()->count();
+
+        $exitCode = $this->callCommand([
+            '--plan' => $artifact,
+            '--dry-run' => true,
+            '--expect-slug-count' => 220,
+            '--max-slugs' => 220,
+            '--target-total' => 300,
+            '--cohort' => 'career_80_to_300_delta',
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('planned', $payload['status']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['writes_database']);
+        $this->assertSame(220, $payload['slug_count']);
+        $this->assertSame(440, $payload['expected_locale_rows']);
+        $this->assertSame(220, $payload['planned_write_count']);
+        $this->assertSame('career_80_to_300_delta_runtime_candidate_preparation', $payload['preparation_source']);
+        $this->assertSame($before, IndexState::query()->count());
+    }
+
+    public function test_progressive_target_guard_blocks_mismatch(): void
+    {
+        $artifact = $this->writePlanArtifact($this->slugs('delta', 220), target: 'career_80_to_300_delta', targetTotal: 300);
+
+        $exitCode = $this->callCommand([
+            '--plan' => $artifact,
+            '--dry-run' => true,
+            '--expect-slug-count' => 220,
+            '--max-slugs' => 220,
+            '--target-total' => 800,
+            '--cohort' => 'career_80_to_300_delta',
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame(1, $payload['by_reason']['target_public_total_mismatch']);
+        $this->assertFalse($payload['writes_database']);
+    }
+
     public function test_apply_writes_only_explicit_slugs_and_verifies_candidate_rows(): void
     {
         $actuaries = $this->createOccupation('actuaries');
@@ -231,6 +300,7 @@ final class CareerPrepareCanonicalRuntimeCandidatesCommandTest extends TestCase
             'batch_id',
             'reason',
             'source_artifact',
+            'preparation_source',
             'source_kind',
             'artifact_schema_version',
             'artifact_sha256',
@@ -250,6 +320,7 @@ final class CareerPrepareCanonicalRuntimeCandidatesCommandTest extends TestCase
             'non_goals',
         ], array_keys($payload));
         $this->assertSame('plan', $payload['source_kind']);
+        $this->assertSame('career_80_delta_runtime_candidate_preparation', $payload['preparation_source']);
         $this->assertSame('published_candidate', $payload['target_runtime_state']);
         $this->assertSame(IndexStateValue::PROMOTION_CANDIDATE, $payload['target_index_state']);
         $this->assertContains('no_rollout_apply', $payload['non_goals']);
@@ -293,6 +364,19 @@ final class CareerPrepareCanonicalRuntimeCandidatesCommandTest extends TestCase
     }
 
     /**
+     * @return list<string>
+     */
+    private function slugs(string $prefix, int $count): array
+    {
+        $slugs = [];
+        for ($i = 1; $i <= $count; $i++) {
+            $slugs[] = sprintf('%s-%03d', $prefix, $i);
+        }
+
+        return $slugs;
+    }
+
+    /**
      * @param  list<string>  $slugs
      */
     private function writeSlugArtifact(array $slugs, ?int $countOverride = null): string
@@ -307,7 +391,7 @@ final class CareerPrepareCanonicalRuntimeCandidatesCommandTest extends TestCase
     /**
      * @param  list<string>  $slugs
      */
-    private function writePlanArtifact(array $slugs): string
+    private function writePlanArtifact(array $slugs, string $target = 'career_80_delta', int $targetTotal = 80): string
     {
         $rows = [];
         foreach ($slugs as $slug) {
@@ -324,9 +408,11 @@ final class CareerPrepareCanonicalRuntimeCandidatesCommandTest extends TestCase
         return $this->writeJson('runtime-candidate-plan', [
             'schema_version' => 'career_runtime_candidate_prep_plan.v1',
             'status' => 'planned',
-            'target' => 'career_80_delta',
+            'target' => $target,
+            'target_public_total' => $targetTotal,
             'delta_slug_count' => count($slugs),
             'locales' => ['en', 'zh'],
+            'expected_locale_rows' => count($slugs) * 2,
             'planned_candidate_rows' => $rows,
         ]);
     }
