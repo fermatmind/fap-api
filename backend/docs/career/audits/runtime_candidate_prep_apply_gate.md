@@ -1,6 +1,6 @@
 # Career Runtime Candidate Preparation Apply Gate
 
-`career:prepare-canonical-runtime-candidates` is the guarded dry-run/apply command for preparing the 51 Career 80 delta slugs as runtime `published_candidate` inventory.
+`career:prepare-canonical-runtime-candidates` is the guarded dry-run/apply command for preparing explicit Career delta slugs as runtime `published_candidate` inventory. It supports the completed 51 Career 80 delta path and progressive cohort deltas such as 80 -> 300, 300 -> 800, and 800 -> 2786.
 
 The command consumes either:
 
@@ -22,6 +22,22 @@ php artisan career:prepare-canonical-runtime-candidates \
   --expect-slug-count=51 \
   --json \
   --output=/tmp/career_80_delta_runtime_candidate_prep_dry_run.json
+```
+
+Progressive dry-run example:
+
+```bash
+php artisan career:prepare-canonical-runtime-candidates \
+  --plan=/tmp/career_300_runtime_candidate_prep_plan.json \
+  --target-total=300 \
+  --cohort=career_80_to_300_delta \
+  --dry-run \
+  --batch-id=career_300_candidate_prep_001 \
+  --reason=career_300_runtime_candidate_prep \
+  --expect-slug-count=220 \
+  --max-slugs=220 \
+  --json \
+  --output=/tmp/career_300_runtime_candidate_prep_dry_run.json
 ```
 
 Apply, only after explicit production approval:
@@ -47,6 +63,8 @@ php artisan career:prepare-canonical-runtime-candidates \
 - `--apply` requires `--confirm-artifact-sha256`.
 - `--apply` requires `--expect-slug-count`.
 - `--max-slugs` defaults to 100.
+- Progressive cohort artifacts require `--max-slugs` to exactly match the artifact delta slug count.
+- Optional `--target-total` and `--cohort` guards must match the reviewed artifact when supplied.
 - Duplicate, empty, wildcard, or missing slug lists block.
 - Missing `Occupation` rows block before writes.
 

@@ -69,6 +69,38 @@ final class CareerPlanCanonicalRuntimeCandidatePrepCommandTest extends TestCase
         $this->assertFileExists($output);
     }
 
+    public function test_generates_progressive_220_prep_plan_with_target_guard(): void
+    {
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeTargetDelta($this->slugs('delta', 220), currentTotal: 80, targetTotal: 300, schemaVersion: 'career_progressive_cohort_delta_plan.v1'),
+            '--target-total' => 300,
+            '--cohort' => 'career_80_to_300_delta',
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('planned', $payload['status']);
+        $this->assertSame('career_80_to_300_delta', $payload['target']);
+        $this->assertSame(80, $payload['current_public_total']);
+        $this->assertSame(300, $payload['target_public_total']);
+        $this->assertSame(220, $payload['delta_slug_count']);
+        $this->assertSame(440, $payload['expected_locale_rows']);
+        $this->assertSame(440, $payload['planned_candidate_rows_count']);
+    }
+
+    public function test_blocks_progressive_target_total_mismatch(): void
+    {
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeTargetDelta($this->slugs('delta', 220), currentTotal: 80, targetTotal: 300, schemaVersion: 'career_progressive_cohort_delta_plan.v1'),
+            '--target-total' => 800,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertSame('target_public_total_mismatch', $payload['blockers'][0]['reason']);
+    }
+
     public function test_target_locales_can_be_overridden(): void
     {
         $exitCode = $this->callCommand([
@@ -131,13 +163,15 @@ final class CareerPlanCanonicalRuntimeCandidatePrepCommandTest extends TestCase
     /**
      * @param  list<string>  $slugs
      */
-    private function writeTargetDelta(array $slugs): string
+    private function writeTargetDelta(array $slugs, int $currentTotal = 29, int $targetTotal = 80, string $schemaVersion = 'career_80_target_delta.v1'): string
     {
         return $this->writeJson('target-delta', [
-            'schema_version' => 'career_80_target_delta.v1',
+            'schema_version' => $schemaVersion,
             'status' => 'pass',
-            'target_public_total' => 80,
+            'current_public_total' => $currentTotal,
+            'target_public_total' => $targetTotal,
             'delta_promotion_count' => count($slugs),
+            'delta_slug_count' => count($slugs),
             'recommended_rollout_delta_slugs' => $slugs,
         ]);
     }

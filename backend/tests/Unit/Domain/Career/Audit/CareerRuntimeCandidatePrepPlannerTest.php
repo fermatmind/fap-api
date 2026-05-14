@@ -23,6 +23,7 @@ final class CareerRuntimeCandidatePrepPlannerTest extends TestCase
 
         $this->assertSame('planned', $payload['status']);
         $this->assertSame('career_runtime_candidate_prep_plan.v1', $payload['schema_version']);
+        $this->assertSame('career_80_delta', $payload['target']);
         $this->assertSame(51, $payload['delta_slug_count']);
         $this->assertSame(102, $payload['expected_locale_rows']);
         $this->assertSame(102, $payload['planned_candidate_rows_count']);
@@ -30,6 +31,44 @@ final class CareerRuntimeCandidatePrepPlannerTest extends TestCase
         $this->assertTrue($payload['planned_candidate_rows'][0]['candidate_pre_route_expected']);
         $this->assertFalse($payload['writes_database']);
         $this->assertFalse($payload['apply_allowed']);
+    }
+
+    public function test_plans_220_delta_rows_for_300_progressive_target(): void
+    {
+        $payload = (new CareerRuntimeCandidatePrepPlanner)->plan(
+            targetDeltaPlan: $this->targetDelta($this->slugs('delta', 220), currentTotal: 80, targetTotal: 300, schemaVersion: 'career_progressive_cohort_delta_plan.v1'),
+            targetPublicTotal: 300,
+            cohort: 'career_80_to_300_delta',
+        )->toArray();
+
+        $this->assertSame('planned', $payload['status']);
+        $this->assertSame('career_80_to_300_delta', $payload['target']);
+        $this->assertSame(80, $payload['current_public_total']);
+        $this->assertSame(300, $payload['target_public_total']);
+        $this->assertSame(220, $payload['delta_slug_count']);
+        $this->assertSame(440, $payload['expected_locale_rows']);
+        $this->assertSame(440, $payload['expected_delta_locale_rows']);
+        $this->assertSame(440, $payload['planned_candidate_rows_count']);
+        $this->assertSame('career_80_to_300_delta_runtime_candidate_prep', $payload['planned_candidate_rows'][0]['source']);
+    }
+
+    public function test_plans_500_and_1986_progressive_delta_rows(): void
+    {
+        $fiveHundred = (new CareerRuntimeCandidatePrepPlanner)->plan(
+            targetDeltaPlan: $this->targetDelta($this->slugs('delta', 500), currentTotal: 300, targetTotal: 800, schemaVersion: 'career_progressive_cohort_delta_plan.v1'),
+        )->toArray();
+
+        $this->assertSame('career_300_to_800_delta', $fiveHundred['target']);
+        $this->assertSame(500, $fiveHundred['delta_slug_count']);
+        $this->assertSame(1000, $fiveHundred['expected_delta_locale_rows']);
+
+        $full = (new CareerRuntimeCandidatePrepPlanner)->plan(
+            targetDeltaPlan: $this->targetDelta($this->slugs('delta', 1986), currentTotal: 800, targetTotal: 2786, schemaVersion: 'career_progressive_cohort_delta_plan.v1'),
+        )->toArray();
+
+        $this->assertSame('career_800_to_2786_delta', $full['target']);
+        $this->assertSame(1986, $full['delta_slug_count']);
+        $this->assertSame(3972, $full['expected_delta_locale_rows']);
     }
 
     public function test_blocks_target_delta_plan_that_did_not_pass(): void
@@ -44,6 +83,17 @@ final class CareerRuntimeCandidatePrepPlannerTest extends TestCase
         $this->assertSame('blocked', $payload['status']);
         $this->assertSame('target_delta_plan_not_pass', $payload['blockers'][0]['reason']);
         $this->assertSame(2, $payload['planned_candidate_rows_count']);
+    }
+
+    public function test_blocks_target_public_total_mismatch(): void
+    {
+        $payload = (new CareerRuntimeCandidatePrepPlanner)->plan(
+            targetDeltaPlan: $this->targetDelta($this->slugs('delta', 220), currentTotal: 80, targetTotal: 300, schemaVersion: 'career_progressive_cohort_delta_plan.v1'),
+            targetPublicTotal: 800,
+        )->toArray();
+
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertSame('target_public_total_mismatch', $payload['blockers'][0]['reason']);
     }
 
     public function test_blocks_duplicate_delta_slugs(): void
@@ -93,10 +143,12 @@ final class CareerRuntimeCandidatePrepPlannerTest extends TestCase
             'read_only',
             'writes_database',
             'target',
+            'current_public_total',
             'target_public_total',
             'delta_slug_count',
             'locales',
             'expected_locale_rows',
+            'expected_delta_locale_rows',
             'planned_candidate_rows_count',
             'planned_candidate_rows',
             'slug_rows',
@@ -126,13 +178,15 @@ final class CareerRuntimeCandidatePrepPlannerTest extends TestCase
      * @param  list<string>  $slugs
      * @return array<string, mixed>
      */
-    private function targetDelta(array $slugs): array
+    private function targetDelta(array $slugs, int $currentTotal = 29, int $targetTotal = 80, string $schemaVersion = 'career_80_target_delta.v1'): array
     {
         return [
-            'schema_version' => 'career_80_target_delta.v1',
+            'schema_version' => $schemaVersion,
             'status' => 'pass',
-            'target_public_total' => 80,
+            'current_public_total' => $currentTotal,
+            'target_public_total' => $targetTotal,
             'delta_promotion_count' => count($slugs),
+            'delta_slug_count' => count($slugs),
             'recommended_rollout_delta_slugs' => $slugs,
         ];
     }
