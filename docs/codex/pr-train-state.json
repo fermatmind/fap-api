@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T00:22:47+08:00",
+  "updated_at": "2026-05-15T00:29:40+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -3213,8 +3213,8 @@
         "no 80 readiness run",
         "no deploy"
       ],
-      "commit_sha": "8dd4a7da3e93906b4e3bd7ee8ad24fcf528ac157",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1393",
+      "commit_sha": null,
+      "pr_url": null,
       "checks": {
         "authorization": {
           "status": "pass",
@@ -3266,8 +3266,8 @@
         "no fap-web changes",
         "no deploy"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "8dd4a7da3e93906b4e3bd7ee8ad24fcf528ac157",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1393",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -5371,7 +5371,7 @@
       "repo": "fap-api",
       "branch": "fix/career-post-rollout-runtime-projection-authority-1",
       "title": "fix(api): include verified rollout batches in career runtime projection",
-      "status": "in_progress",
+      "status": "pr_open",
       "depends_on": [
         "REPAIR-DELTA-ROLLOUT-APPLY-BATCH-AUTHORITY-1"
       ],
@@ -5395,8 +5395,8 @@
         "do not weaken final live acceptance",
         "do not treat candidate-aware planning artifacts as final published authority"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "8dd4a7da3e93906b4e3bd7ee8ad24fcf528ac157",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1393",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -5413,6 +5413,10 @@
         "scope_validation": {
           "status": "pass",
           "evidence": "Changed files are limited to Career publish authority, related unit test, Career audit docs, and authorized train metadata."
+        },
+        "github_check_remediation": {
+          "status": "fixed_and_waiting",
+          "evidence": "GitHub verify-mbti checks failed on BigFive runtime freeze classifier allowlist for the two current Career Publish authority files; scoped allowlist test was updated and passes locally."
         }
       },
       "failure_reason": null,
