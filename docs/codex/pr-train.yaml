@@ -2652,3 +2652,45 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-RUNTIME-ARTIFACT-REFRESH-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-RUNTIME-CANDIDATE-PREP-APPLY-GATE-1
+    branch: fix/career-runtime-artifact-refresh-flow-1
+    title: "fix(api): add career runtime artifact refresh plan"
+    name: "Add Career runtime artifact refresh plan for 51 delta candidate prep"
+    scope:
+      - Add a read-only Career runtime artifact refresh planner.
+      - Define projection, truth, ledger, and summary artifact outputs after candidate prep apply.
+      - Require a write-verified candidate prep apply artifact before refresh readiness.
+      - Register a read-only planning command that does not execute exports, apply, rollout, or DB writes.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerPlanCanonicalRuntimeArtifactRefresh.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Execute artifact exports.
+      - Run candidate preparation apply.
+      - Run rollout or rollout dry-run.
+      - Run backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+    validation:
+      - php artisan test --filter=CareerRuntimeArtifactRefresh --no-ansi
+      - php artisan test --filter=CareerPrepareCanonicalRuntimeCandidates --no-ansi
+      - php artisan test --filter=CareerRuntimeCandidate --no-ansi
+      - php artisan test --filter=Career80TargetDelta --no-ansi
+      - php artisan test --filter=CareerPlanCanonical80RuntimeCandidatePool --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
