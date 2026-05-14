@@ -409,6 +409,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelectionReport.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelectionRow.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelector.php',
+            'backend/app/Domain/Career/Audit/Career80RolloutCandidateGate.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -1828,6 +1829,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelectionReport.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelectionRow.php',
             'backend/app/Domain/Career/Audit/CareerCanonical80CandidateSelector.php',
+            'backend/app/Domain/Career/Audit/Career80RolloutCandidateGate.php',
         ], true);
     }
 
