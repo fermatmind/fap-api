@@ -2392,3 +2392,42 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-80-MANIFEST-TRAIN-COMMAND-1
+    repo: fap-api
+    depends_on:
+      - 80-READINESS-2
+    branch: fix/career-80-manifest-train-command
+    title: "feat(api): add career 80 manifest train command"
+    scope:
+      - Add a read-only Career canonical expansion manifest train command.
+      - Consume the passed 80 readiness artifact and emit a stable manifest train artifact.
+      - Keep rollback_group as an explicit slug list and keep apply_allowed=false.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerGenerateCanonicalExpansionManifestTrain.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout or rollout dry-run.
+      - Run apply, backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+      - Implement 300/800/2786 expansion beyond generic schema support.
+    validation:
+      - php artisan test --filter=CareerGenerateCanonicalExpansionManifestTrain --no-ansi
+      - php artisan test --filter=CareerPlanCanonical80CohortReadiness --no-ansi
+      - php artisan test --filter=CareerCanonical80CandidateSelector --no-ansi
+      - php artisan test --filter=Career2786ReadinessPolicyClassifier --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan test --filter=CareerCanonicalEligibilityAuditSchema --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
