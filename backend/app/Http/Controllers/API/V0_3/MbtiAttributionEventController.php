@@ -114,6 +114,7 @@ final class MbtiAttributionEventController extends Controller
 
         $data = $request->validate([
             'eventName' => ['required', 'string', 'max:64'],
+            'payload' => ['nullable', 'array'],
             'payload.entry_surface' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.source_page_type' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.target_action' => ['nullable', 'string', 'max:128', 'regex:/\A[a-z0-9]+(?:_[a-z0-9]+)*\z/'],
