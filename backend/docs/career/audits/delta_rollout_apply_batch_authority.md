@@ -24,3 +24,27 @@ Rules:
 - `promotion_candidate` batch slugs project as `published_candidate` for rollback/candidate verification.
 
 After this repair, any failed apply must still stop. A fresh dry-run is required before retrying apply.
+
+## Post-apply runtime authority
+
+After a rollout apply succeeds, runtime projection/truth/ledger export must use the same explicit
+batch authority that the apply verifier used. Verified rollout execution reports are eligible only
+when they show:
+
+- `status=promoted_success`
+- `dry_run=false`
+- `writes_database=true`
+- `write_verified=true`
+- `rollback_required=false`
+- `quarantine_required=false`
+- post-promotion validation `status=pass`
+- release gate blocked count `0`
+- persistence found every expected published row
+
+Only those verified reports may contribute their `promoted_slugs` to the default full release ledger
+projection authority. Dry-runs, failed applies, rollback/quarantine outputs, and unverifiable reports
+are ignored.
+
+This keeps the post-rollout runtime surface aligned with the write-verified production state without
+turning candidate-aware planning artifacts into final published evidence. Final 80-total live
+acceptance still requires published projection/truth rows and real live surface checks.

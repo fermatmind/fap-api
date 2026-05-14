@@ -2982,3 +2982,43 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-POST-ROLLOUT-RUNTIME-PROJECTION-AUTHORITY-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-DELTA-ROLLOUT-APPLY-BATCH-AUTHORITY-1
+    branch: fix/career-post-rollout-runtime-projection-authority-1
+    title: "fix(api): include verified rollout batches in career runtime projection"
+    name: "Repair post-rollout runtime projection authority for 80 live acceptance"
+    scope:
+      - Include verified canonical rollout batch execution slugs in the default full release ledger projection authority.
+      - Let post-rollout runtime projection/truth/ledger exports consume write-verified explicit rollout batch slugs.
+      - Preserve strict final live acceptance and ignore dry-run, failed, rollback, quarantine, or unverifiable reports.
+      - Keep frontend behavior backend-authoritative through the existing runtime projection lookup.
+    allowed_paths:
+      - backend/app/Domain/Career/Publish/**
+      - backend/tests/Unit/Services/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout apply.
+      - Run production DB mutation.
+      - Run rollback or quarantine.
+      - Run deploy.
+      - Touch fap-web.
+      - Weaken final live acceptance.
+      - Treat candidate-aware planning artifacts as final published authority.
+    validation:
+      - php artisan test --filter=CareerFullReleaseLedgerService --no-ansi
+      - php artisan test --filter=CareerRuntimePublishProjection --no-ansi
+      - php artisan test --filter=CareerValidateCanonicalBatchLiveAcceptance --no-ansi
+      - php artisan test --filter=CareerExecuteCanonicalRolloutBatch --no-ansi
+      - php artisan test --filter=Career80TotalLiveAcceptance --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
