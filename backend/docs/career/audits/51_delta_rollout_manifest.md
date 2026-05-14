@@ -62,3 +62,14 @@ php artisan career:generate-canonical-delta-rollout-manifest \
 ## Follow-up
 
 The next code layer is `REPAIR-DELTA-ROLLOUT-GATE-1`, which makes the rollout dry-run gate understand delta-only promotion while validating the 80-total public target.
+
+That gate should consume this manifest through:
+
+```bash
+php artisan career:plan-canonical-delta-rollout-gate \
+  --manifest=/tmp/career_80_delta_rollout_manifest.json \
+  --target-public-total=80 \
+  --expect-delta-count=51 \
+  --json \
+  --output=/tmp/career_80_delta_rollout_gate.json
+```

@@ -40,7 +40,6 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
-
   - id: career-runtime-publish-projection
     repo: fap-api
     branch: codex/career-runtime-publish-projection
@@ -2726,6 +2725,49 @@ prs:
     validation:
       - php artisan test --filter=CareerDeltaRolloutManifest --no-ansi
       - php artisan test --filter=CareerGenerateCanonicalDeltaRolloutManifest --no-ansi
+      - php artisan test --filter=CareerRuntimeArtifactRefresh --no-ansi
+      - php artisan test --filter=CareerRuntimeCandidate --no-ansi
+      - php artisan test --filter=Career80TargetDelta --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+  - id: REPAIR-DELTA-ROLLOUT-GATE-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-51-DELTA-ROLLOUT-MANIFEST-1
+    branch: fix/career-delta-rollout-gate-1
+    title: "fix(api): add career delta rollout gate semantics"
+    name: "Add Career delta rollout gate semantics"
+    scope:
+      - Add a read-only Career 51-delta rollout gate planner.
+      - Validate 29 published baseline plus 51 delta promotion slugs equals the 80-total public target.
+      - Validate rollback_group is the explicit 51 delta slug list.
+      - Emit future dry-run command parameters without executing rollout dry-run, rollout apply, or DB writes.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerPlanCanonicalDeltaRolloutGate.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout dry-run.
+      - Run rollout apply.
+      - Run candidate preparation apply.
+      - Run backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+    validation:
+      - php artisan test --filter=CareerDeltaRolloutGate --no-ansi
+      - php artisan test --filter=CareerPlanCanonicalDeltaRolloutGate --no-ansi
+      - php artisan test --filter=CareerDeltaRolloutManifest --no-ansi
       - php artisan test --filter=CareerRuntimeArtifactRefresh --no-ansi
       - php artisan test --filter=CareerRuntimeCandidate --no-ansi
       - php artisan test --filter=Career80TargetDelta --no-ansi
