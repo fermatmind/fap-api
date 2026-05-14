@@ -96,6 +96,150 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
         $this->assertSame([true, true, true], array_column($payload['commands'], 'read_only'));
     }
 
+    public function test_candidate_aware_mode_blocks_when_source_projection_is_missing(): void
+    {
+        $exitCode = $this->callCommand([
+            '--candidate-aware' => true,
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', $this->candidatePrepApplyForSlugs(['delta-001'])),
+            '--projection' => sys_get_temp_dir().'/missing-candidate-aware-projection.json',
+            '--truth' => $this->writeJson('truth', ['items' => []]),
+            '--ledger' => $this->writeJson('ledger', ['members' => []]),
+            '--expect-slug-count' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertSame('projection_artifact_missing', $payload['blockers'][0]['reason']);
+        $this->assertFalse($payload['writes_database']);
+        $this->assertFalse($payload['apply_allowed']);
+    }
+
+    public function test_candidate_aware_mode_blocks_unverified_apply_artifact(): void
+    {
+        $exitCode = $this->callCommand([
+            '--candidate-aware' => true,
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', [
+                ...$this->candidatePrepApplyForSlugs(['delta-001']),
+                'write_verified' => false,
+            ]),
+            '--projection' => $this->writeJson('projection', ['items' => []]),
+            '--truth' => $this->writeJson('truth', ['items' => []]),
+            '--ledger' => $this->writeJson('ledger', ['members' => []]),
+            '--expect-slug-count' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('candidate_prep_apply_not_verified', $payload['blockers'][0]['reason']);
+    }
+
+    public function test_candidate_aware_mode_blocks_apply_artifact_with_failures(): void
+    {
+        $exitCode = $this->callCommand([
+            '--candidate-aware' => true,
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', $this->candidatePrepApplyForSlugs(['delta-001'], failures: [['reason' => 'write_failed']])),
+            '--projection' => $this->writeJson('projection', ['items' => []]),
+            '--truth' => $this->writeJson('truth', ['items' => []]),
+            '--ledger' => $this->writeJson('ledger', ['members' => []]),
+            '--expect-slug-count' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('candidate_prep_apply_failures_present', $payload['blockers'][0]['reason']);
+    }
+
+    public function test_candidate_aware_mode_blocks_slug_count_mismatch(): void
+    {
+        $exitCode = $this->callCommand([
+            '--candidate-aware' => true,
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', $this->candidatePrepApplyForSlugs(['delta-001'])),
+            '--projection' => $this->writeJson('projection', ['items' => []]),
+            '--truth' => $this->writeJson('truth', ['items' => []]),
+            '--ledger' => $this->writeJson('ledger', ['members' => []]),
+            '--expect-slug-count' => 2,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('candidate_prep_apply_slug_count_mismatch', $payload['blockers'][0]['reason']);
+    }
+
+    public function test_candidate_aware_mode_writes_overlay_artifacts(): void
+    {
+        $projectionOutput = $this->tempPath('candidate-aware-projection');
+        $truthOutput = $this->tempPath('candidate-aware-truth');
+        $ledgerOutput = $this->tempPath('candidate-aware-ledger');
+
+        $exitCode = $this->callCommand([
+            '--candidate-aware' => true,
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', $this->candidatePrepApplyForSlugs(['delta-001', 'delta-002'])),
+            '--projection' => $this->writeJson('projection', $this->sourceProjection()),
+            '--truth' => $this->writeJson('truth', $this->sourceTruth()),
+            '--ledger' => $this->writeJson('ledger', $this->sourceLedger()),
+            '--projection-output' => $projectionOutput,
+            '--truth-output' => $truthOutput,
+            '--ledger-output' => $ledgerOutput,
+            '--expect-slug-count' => 2,
+        ]);
+        $payload = $this->payload();
+        $projection = json_decode((string) file_get_contents($projectionOutput), true, flags: JSON_THROW_ON_ERROR);
+        $truth = json_decode((string) file_get_contents($truthOutput), true, flags: JSON_THROW_ON_ERROR);
+        $ledger = json_decode((string) file_get_contents($ledgerOutput), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('career_runtime_candidate_aware_artifact_refresh.v1', $payload['schema_version']);
+        $this->assertSame('pass', $payload['status']);
+        $this->assertFalse($payload['writes_database']);
+        $this->assertFalse($payload['apply_allowed']);
+        $this->assertSame(4, $payload['projection']['overlay_rows']);
+        $this->assertSame(4, $payload['truth']['overlay_rows']);
+        $this->assertSame(2, $payload['ledger']['overlay_members']);
+        $this->assertSame('candidate_prep_apply_overlay', $projection['items'][1]['overlay_source']);
+        $this->assertSame('published_candidate', $projection['items'][1]['runtime_publish_state']);
+        $this->assertSame('candidate_prep_apply_overlay', $truth['items'][1]['overlay_source']);
+        $this->assertTrue($truth['items'][1]['candidate_pre_route_expected']);
+        $this->assertSame('candidate_prep_apply_overlay', $ledger['members'][1]['overlay_source']);
+        $this->assertFalse($ledger['members'][1]['canonical_ledger_authority_claimed']);
+    }
+
+    public function test_candidate_aware_artifacts_pass_runtime_candidate_pool_synthetic_integration(): void
+    {
+        $slugs = ['alpha-career', 'beta-career'];
+        $projectionOutput = $this->tempPath('candidate-aware-projection');
+        $truthOutput = $this->tempPath('candidate-aware-truth');
+        $ledgerOutput = $this->tempPath('candidate-aware-ledger');
+
+        $exitCode = $this->callCommand([
+            '--candidate-aware' => true,
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', $this->candidatePrepApplyForSlugs($slugs)),
+            '--projection' => $this->writeJson('projection', ['items' => []]),
+            '--truth' => $this->writeJson('truth', ['items' => []]),
+            '--ledger' => $this->writeJson('ledger', ['members' => []]),
+            '--projection-output' => $projectionOutput,
+            '--truth-output' => $truthOutput,
+            '--ledger-output' => $ledgerOutput,
+            '--expect-slug-count' => 2,
+        ]);
+        $this->assertSame(0, $exitCode, Artisan::output());
+
+        $poolExitCode = Artisan::call('career:plan-canonical-80-runtime-candidate-pool', [
+            '--audit' => $this->writeAudit($slugs),
+            '--projection' => $projectionOutput,
+            '--truth' => $truthOutput,
+            '--ledger' => $ledgerOutput,
+            '--target' => 2,
+            '--json' => true,
+        ]);
+        $pool = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $poolExitCode, Artisan::output());
+        $this->assertTrue($pool['pool_pass']);
+        $this->assertSame(2, $pool['selected_count']);
+        $this->assertSame($slugs, $pool['selection']['slugs']);
+    }
+
     public function test_json_output_shape_is_stable(): void
     {
         $this->callCommand([]);
@@ -116,6 +260,37 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
             'commands',
             'blockers',
             'approval_gates',
+            'next_required_action',
+        ], array_keys($payload));
+    }
+
+    public function test_candidate_aware_json_output_shape_is_stable(): void
+    {
+        $this->callCommand([
+            '--candidate-aware' => true,
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', $this->candidatePrepApplyForSlugs(['delta-001'])),
+            '--projection' => $this->writeJson('projection', ['items' => []]),
+            '--truth' => $this->writeJson('truth', ['items' => []]),
+            '--ledger' => $this->writeJson('ledger', ['members' => []]),
+            '--expect-slug-count' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame([
+            'schema_version',
+            'status',
+            'source_apply_artifact',
+            'target',
+            'delta_slug_count',
+            'expected_delta_locale_rows',
+            'locales',
+            'projection',
+            'truth',
+            'ledger',
+            'blockers',
+            'writes_database',
+            'read_only',
+            'apply_allowed',
             'next_required_action',
         ], array_keys($payload));
     }
@@ -177,6 +352,163 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
             'write_verified' => $writeVerified,
             'created_count' => $writeVerified ? 51 : 0,
             'verified_count' => $writeVerified ? 51 : 0,
+        ];
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @param  list<array<string, mixed>>  $failures
+     * @return array<string, mixed>
+     */
+    private function candidatePrepApplyForSlugs(array $slugs, bool $writeVerified = true, array $failures = []): array
+    {
+        return [
+            'status' => $writeVerified ? 'applied' : 'blocked',
+            'writes_database' => $writeVerified,
+            'write_verified' => $writeVerified,
+            'slug_count' => count($slugs),
+            'expected_locale_rows' => count($slugs) * 2,
+            'created_count' => $writeVerified ? count($slugs) : 0,
+            'verified_count' => $writeVerified ? count($slugs) : 0,
+            'failures' => $failures,
+            'locales' => ['en', 'zh'],
+            'artifact_sha256' => 'fixture-sha',
+            'created' => array_map(static fn (string $slug): array => [
+                'canonical_slug' => $slug,
+                'index_state_id' => 'fixture-'.$slug,
+                'runtime_publish_state' => 'published_candidate',
+            ], $slugs),
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function sourceProjection(): array
+    {
+        return [
+            'projection_kind' => 'career_runtime_publish_projection',
+            'items' => [[
+                'slug' => 'published-baseline',
+                'locale' => 'en',
+                'public_resolution_type' => 'public_canonical_job',
+                'runtime_publish_state' => 'published',
+                'detail_route_enabled' => true,
+                'dataset_visible' => true,
+                'search_visible' => true,
+            ]],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function sourceTruth(): array
+    {
+        return [
+            'truth_kind' => 'career_canonical_runtime_truth',
+            'items' => [[
+                'slug' => 'published-baseline',
+                'locale' => 'en',
+                'public_resolution_type' => 'public_canonical_job',
+                'projection_state' => 'published',
+                'route_exists' => true,
+                'final_200' => true,
+                'dataset_visible' => true,
+                'search_visible' => true,
+                'candidate_pre_route_expected' => false,
+                'candidate_unexpected_exposures' => [],
+            ]],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function sourceLedger(): array
+    {
+        return [
+            'ledger_kind' => 'career_full_release_ledger',
+            'members' => [[
+                'member_kind' => 'career_tracked_occupation',
+                'canonical_slug' => 'published-baseline',
+                'release_cohort' => 'public_detail_indexable',
+                'public_index_state' => 'indexable',
+            ]],
+        ];
+    }
+
+    /**
+     * @param  list<string>  $nearEligibleSlugs
+     */
+    private function writeAudit(array $nearEligibleSlugs): string
+    {
+        $rows = [];
+        foreach (array_values(array_unique($nearEligibleSlugs)) as $slug) {
+            $rows[] = $this->auditRow($slug, 'en');
+            $rows[] = $this->auditRow($slug, 'zh');
+        }
+
+        return $this->writeJson('audit', [
+            'status' => 'blocked',
+            'scope' => 'all',
+            'expected_occupations' => 2786,
+            'audited_occupations' => 2786,
+            'eligible_count' => 0,
+            'blocked_count' => count($rows),
+            'by_reason' => [
+                'llms_expected_not_ready' => count($rows),
+                'surface_unverified' => count($rows),
+            ],
+            'context_summary' => ['surface_context' => 'supplied'],
+            'policy_summary' => ['near_eligible_count' => count($nearEligibleSlugs)],
+            'rows' => $rows,
+            'sidecars' => [],
+        ]);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function auditRow(string $slug, string $locale): array
+    {
+        return [
+            'slug' => $slug,
+            'locale' => $locale,
+            'source_scope' => 'all',
+            'entity_status' => $this->layer('entity', 'pass'),
+            'baseline_status' => $this->layer('baseline', 'pass'),
+            'index_status' => $this->layer('index', 'pass'),
+            'runtime_status' => $this->layer('runtime', 'pass', [
+                ['runtime_publish_state' => 'published_candidate'],
+                ['truth_state' => 'published_candidate'],
+                ['canonical_public_type' => 'public_canonical_job'],
+                ['candidate_pre_route_expected' => true],
+            ]),
+            'seo_geo_status' => $this->layer('seo_geo', 'blocked', [], ['llms_expected_not_ready']),
+            'surface_status' => $this->layer('surface', 'blocked', [], ['surface_unverified']),
+            'safety_status' => $this->layer('safety', 'pass'),
+            'overall_status' => 'blocked',
+            'severity' => 'high',
+            'reasons' => ['llms_expected_not_ready', 'surface_unverified'],
+            'evidence' => [['slug' => $slug]],
+            'sidecars' => [],
+        ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $evidence
+     * @param  list<string>  $reasons
+     * @return array<string, mixed>
+     */
+    private function layer(string $layer, string $status, array $evidence = [], array $reasons = []): array
+    {
+        return [
+            'layer' => $layer,
+            'status' => $status,
+            'reasons' => $status === 'pass' ? [] : $reasons,
+            'evidence' => $evidence,
+            'source' => 'synthetic_test_fixture',
         ];
     }
 

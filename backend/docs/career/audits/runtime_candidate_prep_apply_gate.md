@@ -90,6 +90,22 @@ php artisan career:plan-canonical-runtime-artifact-refresh \
   --output=/tmp/career_80_delta_runtime_artifact_refresh_plan_after_apply.json
 ```
 
+If the canonical projection/truth/ledger export does not include the verified 51 prepared candidates as hidden `published_candidate` rows, use the candidate-aware refresh mode. It overlays only the verified apply artifact slugs, marks every overlay row with `candidate_prep_apply_overlay`, and does not claim canonical full release ledger authority:
+
+```bash
+php artisan career:plan-canonical-runtime-artifact-refresh \
+  --candidate-prep-apply=/tmp/career_80_delta_runtime_candidate_prep_apply.json \
+  --projection=/tmp/career_80_delta_runtime_projection_after_candidate_prep.json \
+  --truth=/tmp/career_80_delta_runtime_truth_after_candidate_prep.json \
+  --ledger=/tmp/career_80_delta_full_release_ledger_after_candidate_prep.json \
+  --candidate-aware \
+  --projection-output=/tmp/career_80_delta_runtime_projection_candidate_aware.json \
+  --truth-output=/tmp/career_80_delta_runtime_truth_candidate_aware.json \
+  --ledger-output=/tmp/career_80_delta_full_release_ledger_candidate_aware.json \
+  --json \
+  --output=/tmp/career_80_delta_runtime_artifact_refresh_candidate_aware.json
+```
+
 ## Non-goals
 
 - No rollout dry-run.

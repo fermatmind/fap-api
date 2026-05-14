@@ -29,6 +29,22 @@ php artisan career:plan-canonical-runtime-artifact-refresh \
   --output=/tmp/career_80_delta_runtime_artifact_refresh_plan_after_apply.json
 ```
 
+Candidate-aware read-only artifact refresh after `write_verified=true`:
+
+```bash
+php artisan career:plan-canonical-runtime-artifact-refresh \
+  --candidate-prep-apply=/tmp/career_80_delta_runtime_candidate_prep_apply.json \
+  --projection=/tmp/career_80_delta_runtime_projection_after_candidate_prep.json \
+  --truth=/tmp/career_80_delta_runtime_truth_after_candidate_prep.json \
+  --ledger=/tmp/career_80_delta_full_release_ledger_after_candidate_prep.json \
+  --candidate-aware \
+  --projection-output=/tmp/career_80_delta_runtime_projection_candidate_aware.json \
+  --truth-output=/tmp/career_80_delta_runtime_truth_candidate_aware.json \
+  --ledger-output=/tmp/career_80_delta_full_release_ledger_candidate_aware.json \
+  --json \
+  --output=/tmp/career_80_delta_runtime_artifact_refresh_candidate_aware.json
+```
+
 ## Output
 
 The output schema is `career_runtime_artifact_refresh_plan.v1`.
@@ -45,6 +61,19 @@ Key fields:
   - `/tmp/career_80_delta_runtime_artifact_refresh_summary.json`
 - `commands`: the read-only export sequence to run later, after candidate-prep apply has passed.
 - `approval_gates`: the apply and read-only gates that must remain separate from rollout apply.
+
+Candidate-aware refresh output schema is `career_runtime_candidate_aware_artifact_refresh.v1`.
+
+The candidate-aware mode consumes the verified candidate-prep apply artifact and overlays its 51 verified slugs into read-only projection, truth, and ledger artifacts as hidden pre-route `published_candidate` rows. Overlay rows and members carry `candidate_prep_apply_overlay` provenance and explicitly set `canonical_ledger_authority_claimed=false`. This matters because the canonical full release ledger exporter alone may omit newly prepared candidate rows or keep previously tracked members in `review_needed` / `family_handoff`; candidate-aware artifacts are planning artifacts derived from write verification, not a replacement claim that those rows originated from canonical ledger authority.
+
+Candidate-aware artifact paths:
+
+- `/tmp/career_80_delta_runtime_projection_candidate_aware.json`
+- `/tmp/career_80_delta_runtime_truth_candidate_aware.json`
+- `/tmp/career_80_delta_full_release_ledger_candidate_aware.json`
+- `/tmp/career_80_delta_runtime_artifact_refresh_candidate_aware.json`
+
+The candidate-aware artifacts are intended for the next read-only 51-delta rollout dry-run. They do not publish pages, do not run rollout, and do not mutate the database.
 
 ## Approval Gates
 
