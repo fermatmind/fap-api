@@ -154,6 +154,45 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-PROGRESSIVE-LIVE-ACCEPTANCE-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-PROGRESSIVE-ROLLOUT-MANIFEST-GATE-1
+    branch: fix/career-progressive-live-acceptance-1
+    title: "fix(api): generalize career progressive live acceptance"
+    name: "Generalize full live acceptance accounting for progressive Career cohorts"
+    scope:
+      - Extend live acceptance planning to support 300, 800, and 2786 target totals.
+      - Validate current public baseline plus explicit delta equals the target public total.
+      - Compute expected locale rows from target total and locale count without running live crawls.
+      - Preserve read-only final acceptance semantics and require separate live evidence artifacts for pass status.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run live crawl.
+      - Run rollout dry-run.
+      - Run rollout apply.
+      - Run candidate preparation apply.
+      - Run backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+    validation:
+      - php artisan test --filter=Career80TotalLiveAcceptance --no-ansi
+      - php artisan test --filter=CareerValidateCanonicalProgressiveLiveAcceptance --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
     repo: fap-api
     depends_on:

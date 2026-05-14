@@ -25,17 +25,19 @@ final class Career80TotalLiveAcceptancePlanner
         ?string $targetDeltaPath = null,
         ?string $deltaManifestPath = null,
         ?string $liveAcceptancePath = null,
+        ?string $target = null,
     ): Career80TotalLiveAcceptanceResult {
         if ($targetPublicTotal < 1) {
             throw new RuntimeException('target_public_total_invalid');
         }
 
         $locales = $this->stringList($locales, 'locale');
-        $baselineSlugs = $this->slugList($targetDelta, 'published_baseline_slugs');
+        $baselineSlugs = $this->baselineSlugs($targetDelta);
         $deltaSlugs = $this->deltaSlugs($targetDelta);
         $combinedSlugs = array_values(array_unique([...$baselineSlugs, ...$deltaSlugs]));
         sort($combinedSlugs);
         $expectedLocaleRows = count($combinedSlugs) * count($locales);
+        $target = $this->target($target, $targetDelta, $targetPublicTotal);
         $blockers = $this->blockers(
             targetDelta: $targetDelta,
             deltaManifest: $deltaManifest,
@@ -54,7 +56,7 @@ final class Career80TotalLiveAcceptancePlanner
         return new Career80TotalLiveAcceptanceResult([
             'schema_version' => self::SCHEMA_VERSION,
             'status' => $status,
-            'target' => 'career_80_total',
+            'target' => $target,
             'target_public_total' => $targetPublicTotal,
             'baseline_count' => count($baselineSlugs),
             'delta_count' => count($deltaSlugs),
@@ -74,6 +76,7 @@ final class Career80TotalLiveAcceptancePlanner
                 'path' => $targetDeltaPath,
                 'schema_version' => $targetDelta['schema_version'] ?? null,
                 'status' => $targetDelta['status'] ?? null,
+                'current_public_total' => $targetDelta['current_public_total'] ?? null,
                 'target_public_total' => $targetDelta['target_public_total'] ?? null,
             ],
             'source_delta_manifest' => [
@@ -88,7 +91,7 @@ final class Career80TotalLiveAcceptancePlanner
                 'supplied' => $acceptanceSupplied,
                 'status' => $liveAcceptance['status'] ?? null,
                 'accepted' => $liveAcceptance['accepted'] ?? null,
-                'expected_rows' => $liveAcceptance['expected_rows'] ?? null,
+                'expected_rows' => $this->liveAcceptanceExpectedRows($liveAcceptance),
             ],
             'requirements' => $this->requirements(),
             'validation' => [
@@ -101,8 +104,37 @@ final class Career80TotalLiveAcceptancePlanner
             ],
             'blockers' => $blockers,
             'sidecars' => [],
-            'next_required_action' => $accepted ? '80_TOTAL_LIVE_ACCEPTANCE_COMPLETE' : 'RUN_80_TOTAL_LIVE_ACCEPTANCE_READ_ONLY',
+            'next_required_action' => $accepted ? $this->completeAction($target) : $this->runAction($target),
         ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $targetDelta
+     */
+    private function target(?string $target, array $targetDelta, int $targetPublicTotal): string
+    {
+        $candidate = trim((string) ($target ?? ($targetDelta['target'] ?? '')));
+        if ($candidate === '') {
+            $candidate = $targetPublicTotal === 80 ? 'career_80_total' : 'career_'.$targetPublicTotal.'_total';
+        }
+
+        $normalized = preg_replace('/[^a-z0-9]+/', '_', strtolower($candidate)) ?? $candidate;
+
+        return trim($normalized, '_') ?: 'career_80_total';
+    }
+
+    private function completeAction(string $target): string
+    {
+        return $target === 'career_80_total'
+            ? '80_TOTAL_LIVE_ACCEPTANCE_COMPLETE'
+            : 'PROGRESSIVE_LIVE_ACCEPTANCE_COMPLETE';
+    }
+
+    private function runAction(string $target): string
+    {
+        return $target === 'career_80_total'
+            ? 'RUN_80_TOTAL_LIVE_ACCEPTANCE_READ_ONLY'
+            : 'RUN_PROGRESSIVE_LIVE_ACCEPTANCE_READ_ONLY';
     }
 
     /**
@@ -128,9 +160,13 @@ final class Career80TotalLiveAcceptancePlanner
     ): array {
         $blockers = [];
 
-        if (($targetDelta['schema_version'] ?? null) !== Career80TargetDeltaPlanner::SCHEMA_VERSION) {
+        $schemaVersion = $targetDelta['schema_version'] ?? null;
+        if (! in_array($schemaVersion, [
+            Career80TargetDeltaPlanner::SCHEMA_VERSION,
+            CareerProgressiveCohortDeltaPlanner::SCHEMA_VERSION,
+        ], true)) {
             $blockers[] = $this->blocker('target_delta_schema_mismatch', [
-                'schema_version' => $targetDelta['schema_version'] ?? null,
+                'schema_version' => $schemaVersion,
             ]);
         }
 
@@ -182,15 +218,31 @@ final class Career80TotalLiveAcceptancePlanner
                     'accepted' => $liveAcceptance['accepted'] ?? null,
                 ]);
             }
-            if ((int) ($liveAcceptance['expected_rows'] ?? 0) !== $expectedLocaleRows) {
+            if ($this->liveAcceptanceExpectedRows($liveAcceptance) !== $expectedLocaleRows) {
                 $blockers[] = $this->blocker('live_acceptance_expected_rows_mismatch', [
                     'expected' => $expectedLocaleRows,
-                    'actual' => $liveAcceptance['expected_rows'] ?? null,
+                    'actual' => $this->liveAcceptanceExpectedRows($liveAcceptance),
                 ]);
             }
         }
 
         return $blockers;
+    }
+
+    /**
+     * @param  array<string, mixed>|null  $liveAcceptance
+     */
+    private function liveAcceptanceExpectedRows(?array $liveAcceptance): ?int
+    {
+        if ($liveAcceptance === null) {
+            return null;
+        }
+
+        $value = $liveAcceptance['expected_rows']
+            ?? $liveAcceptance['expected_locale_rows']
+            ?? null;
+
+        return is_numeric($value) ? (int) $value : null;
     }
 
     /**
@@ -228,6 +280,22 @@ final class Career80TotalLiveAcceptancePlanner
         }
 
         return $this->stringList($slugs, 'delta_slug');
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return list<string>
+     */
+    private function baselineSlugs(array $payload): array
+    {
+        $slugs = $payload['published_baseline_slugs']
+            ?? $payload['current_public_slugs']
+            ?? null;
+        if (! is_array($slugs) || ! array_is_list($slugs)) {
+            throw new RuntimeException('published_baseline_slugs_missing');
+        }
+
+        return $this->stringList($slugs, 'published_baseline_slugs');
     }
 
     /**
