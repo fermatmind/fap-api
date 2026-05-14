@@ -5483,6 +5483,80 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": []
+    },
+    "REPAIR-PROGRESSIVE-COHORT-TARGET-DELTA-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-progressive-cohort-target-delta-1",
+      "title": "fix(api): add progressive career cohort delta planner",
+      "status": "in_progress",
+      "depends_on": [
+        "80-CLOSEOUT-1"
+      ],
+      "scope_type": "progressive_cohort_target_delta_planning_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonicalProgressiveCohortDelta.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/**",
+        "backend/tests/Feature/Console/**",
+        "backend/tests/Unit/Domain/Career/Audit/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no candidate preparation",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no apply",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for the progressive expansion PR train."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "Career 80 closeout is complete and the next required action is 300 readiness/progressive expansion planning."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Current PR scope is limited to read-only progressive target-delta planning, command registration, tests/docs, and train metadata."
+        },
+        "local_validation": {
+          "status": "pass",
+          "evidence": "CareerProgressiveCohortDelta, Career80TargetDelta, Career80TotalLiveAcceptance, route:list, sqlite migrate, Pint, and git diff --check passed locally."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "REPAIR-PROGRESSIVE-RUNTIME-CANDIDATE-PREP-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "sidecar_id": "SIDECAR-BIG5-CONTENT-PACK-PUBLISH-ROLLBACK-ENV-1",
+          "title": "ci_verify_mbti content pack publish/rollback target compiled directory failure",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [],
+          "evidence": [
+            "backend/scripts/ci_verify_mbti.sh failed only Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
+            "Current PR changed only Career progressive audit/command/test/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
+            "Targeted Career tests, route:list, sqlite migrate, Pint, and git diff --check passed."
+          ],
+          "severity": "medium",
+          "next_goal": "SCAN-BIG5-CONTENT-PACK-PUBLISH-ROLLBACK-ENV-1",
+          "may_continue_train": true
+        }
+      ]
     }
   }
 }
