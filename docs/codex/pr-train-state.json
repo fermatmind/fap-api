@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-14T03:44:00Z",
+  "updated_at": "2026-05-14T03:48:30Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -4573,13 +4573,13 @@
     "PR-CMS-03": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-03-article-publishing-ops",
-      "status": "committed",
+      "status": "pr_opened",
       "depends_on": [
         "PR-CMS-01",
         "PR-CMS-02"
       ],
-      "commit_sha": "538b588d5413e5db0e2c8a1fa1334f15051b2233",
-      "pr_url": null,
+      "commit_sha": "a5561b6dbb303a91f3b6b145f68c0d05776d84fc",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1378",
       "checks": {
         "manifest_authorization": {
           "status": "pass",
@@ -4634,6 +4634,10 @@
         "commit": {
           "status": "pass",
           "sha": "538b588d5413e5db0e2c8a1fa1334f15051b2233"
+        },
+        "pr_created": {
+          "status": "pass",
+          "url": "https://github.com/fermatmind/fap-api/pull/1378"
         }
       },
       "failure_reason": null,
