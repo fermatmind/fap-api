@@ -52,10 +52,14 @@ The command blocks when:
 - the readiness artifact is missing or malformed;
 - `readiness_pass` is not true;
 - `rollout.manifest_generation_allowed` is not true;
+- `rollout_candidate_gate.required=true` and `rollout_candidate_gate.eligible_count` is below the target;
+- any selected row is marked `rollout_candidate_eligible=false`;
 - `selected_count` is below the requested target;
 - selected slugs are missing or duplicated;
 - locales are empty;
 - the output path is not writable.
+
+The manifest train trusts only selected rows that passed the readiness command's rollout-candidate gate. A slug that is already published, already publicly exposed, missing projection/truth evidence, blocked in runtime projection, or otherwise not in `published_candidate` pre-promotion state must be excluded before manifest generation.
 
 The command always reports:
 

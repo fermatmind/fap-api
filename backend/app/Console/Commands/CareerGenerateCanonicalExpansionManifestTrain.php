@@ -219,6 +219,26 @@ final class CareerGenerateCanonicalExpansionManifestTrain extends Command
             $blockers[] = $this->blocker('selected_slugs_missing', 'Readiness artifact must include selection.slugs.');
         }
 
+        $rolloutGate = data_get($readiness, 'rollout_candidate_gate');
+        if (is_array($rolloutGate) && ($rolloutGate['required'] ?? null) === true) {
+            $eligibleCount = $rolloutGate['eligible_count'] ?? null;
+            if (! is_int($eligibleCount) || $eligibleCount < $target) {
+                $blockers[] = $this->blocker('rollout_candidate_gate_below_target', 'Readiness artifact does not contain enough rollout-candidate eligible slugs.', [
+                    'target' => $target,
+                    'eligible_count' => $eligibleCount,
+                ]);
+            }
+        }
+
+        foreach ($this->selectedRows($readiness, $target) as $row) {
+            if (($row['rollout_candidate_eligible'] ?? true) !== true) {
+                $blockers[] = $this->blocker('selected_slug_not_rollout_candidate_eligible', 'Readiness artifact selected a slug excluded by the rollout candidate gate.', [
+                    'slug' => $row['slug'] ?? null,
+                    'exclusion_reasons' => $row['rollout_candidate_exclusions'] ?? [],
+                ]);
+            }
+        }
+
         return $blockers;
     }
 
@@ -247,6 +267,33 @@ final class CareerGenerateCanonicalExpansionManifestTrain extends Command
         }
 
         return array_slice($slugs, 0, max($target, count($slugs)));
+    }
+
+    /**
+     * @param  array<string, mixed>  $readiness
+     * @return list<array<string, mixed>>
+     */
+    private function selectedRows(array $readiness, int $target): array
+    {
+        $selected = $this->selectedSlugs($readiness, $target);
+        $selectedSet = array_fill_keys(array_slice($selected, 0, $target), true);
+        $rows = data_get($readiness, 'selection.rows');
+        if (! is_array($rows)) {
+            return [];
+        }
+
+        $selectedRows = [];
+        foreach ($rows as $row) {
+            if (! is_array($row) || ! isset($row['slug']) || ! is_string($row['slug'])) {
+                continue;
+            }
+
+            if (isset($selectedSet[$row['slug']])) {
+                $selectedRows[] = $row;
+            }
+        }
+
+        return $selectedRows;
     }
 
     /**
