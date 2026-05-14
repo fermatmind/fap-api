@@ -2613,3 +2613,42 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-RUNTIME-CANDIDATE-PREP-APPLY-GATE-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-RUNTIME-CANDIDATE-PREP-1
+    branch: fix/career-runtime-candidate-prep-apply-gate-1
+    title: "fix(api): add guarded runtime candidate preparation command"
+    name: "Add guarded runtime candidate preparation dry-run/apply command"
+    scope:
+      - Add an explicit-slug Career runtime candidate preparation command.
+      - Support dry-run planning with artifact SHA and approval phrase output.
+      - Support apply only behind explicit SHA, slug-count, max-slug, batch-id, and reason guards.
+      - Prepare only published_candidate runtime authority rows via promotion_candidate index_state writes for reviewed explicit slugs.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerPrepareCanonicalRuntimeCandidates.php
+      - backend/app/Console/Kernel.php
+      - backend/tests/Feature/Console/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run apply outside local tests.
+      - Run rollout or rollout dry-run.
+      - Promote candidates to published.
+      - Run backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+    validation:
+      - php artisan test --filter=CareerPrepareCanonicalRuntimeCandidates --no-ansi
+      - php artisan test --filter=CareerRuntimeCandidate --no-ansi
+      - php artisan test --filter=Career80TargetDelta --no-ansi
+      - php artisan test --filter=CareerPlanCanonical80RuntimeCandidatePool --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
