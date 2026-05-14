@@ -53,7 +53,7 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
     public function test_passes_with_target_override_and_writes_output(): void
     {
         $slugs = ['zeta-career', 'alpha-career', 'beta-career'];
-        $audit = $this->writeAudit($slugs);
+        $audit = $this->writeCandidateAwareBlockedAudit($slugs);
         $output = $this->tempPath('runtime-pool-output');
 
         $exitCode = $this->callCommand([
@@ -72,10 +72,52 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
         $this->assertSame(3, $payload['eligible_count']);
         $this->assertSame(2, $payload['selected_count']);
         $this->assertSame(['alpha-career', 'beta-career'], $payload['selection']['slugs']);
+        $this->assertSame('promotion_candidate', $payload['selection']['rows'][0]['runtime_state_evidence']['candidate_aware_overlay']['ledger_index_state']);
+        $this->assertTrue($payload['selection']['rows'][0]['runtime_state_evidence']['candidate_aware_overlay']['candidate_prep_apply_write_verified']);
         $this->assertTrue($payload['rollout']['manifest_generation_allowed']);
         $this->assertTrue($payload['rollout']['dry_run_allowed']);
         $this->assertFalse($payload['rollout']['apply_allowed']);
         $this->assertFileExists($output);
+    }
+
+    public function test_requires_candidate_aware_overlay_source_for_delta_planning(): void
+    {
+        $audit = $this->writeCandidateAwareBlockedAudit(['alpha-career']);
+
+        $exitCode = $this->callCommand([
+            '--audit' => $audit,
+            '--projection' => $this->writeProjection(['alpha-career'], candidateAware: false),
+            '--truth' => $this->writeTruth(['alpha-career'], candidateAware: false),
+            '--ledger' => $this->writeLedger(['alpha-career'], candidateAware: false),
+            '--target' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['pool_pass']);
+        $this->assertSame(0, $payload['selected_count']);
+        $this->assertContains('candidate_aware_overlay_missing', $payload['runtime_candidate_gate']['excluded_rows'][0]['exclusion_reasons']);
+        $this->assertContains('candidate_prep_apply_not_verified', $payload['runtime_candidate_gate']['excluded_rows'][0]['exclusion_reasons']);
+    }
+
+    public function test_stale_full_publication_audit_reasons_do_not_veto_verified_candidate_aware_overlay(): void
+    {
+        $slugs = ['delta-001', 'delta-002'];
+
+        $exitCode = $this->callCommand([
+            '--audit' => $this->writeCandidateAwareBlockedAudit($slugs),
+            '--projection' => $this->writeProjection($slugs),
+            '--truth' => $this->writeTruth($slugs),
+            '--ledger' => $this->writeLedger($slugs),
+            '--target' => 2,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['pool_pass']);
+        $this->assertSame($slugs, $payload['selection']['slugs']);
+        $this->assertSame(2, $payload['eligible_count']);
+        $this->assertSame(0, $payload['excluded_count']);
     }
 
     public function test_excludes_runtime_invalid_candidates(): void
@@ -250,6 +292,37 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
     }
 
     /**
+     * @param  list<string>  $slugs
+     */
+    private function writeCandidateAwareBlockedAudit(array $slugs): string
+    {
+        $rows = [];
+        foreach (array_values(array_unique($slugs)) as $slug) {
+            $rows[] = $this->candidateAwareBlockedRow($slug, 'en');
+            $rows[] = $this->candidateAwareBlockedRow($slug, 'zh');
+        }
+
+        return $this->writeJson('audit', [
+            'status' => 'blocked',
+            'scope' => 'all',
+            'expected_occupations' => 2786,
+            'audited_occupations' => 2786,
+            'eligible_count' => 0,
+            'blocked_count' => count($rows),
+            'by_reason' => [
+                'index_state_not_indexed_like' => count($rows),
+                'runtime_publish_state_not_published' => count($rows),
+                'truth_state_not_published' => count($rows),
+                'surface_unverified' => count($rows),
+            ],
+            'context_summary' => ['surface_context' => 'supplied'],
+            'policy_summary' => ['near_eligible_count' => 0],
+            'rows' => $rows,
+            'sidecars' => [],
+        ]);
+    }
+
+    /**
      * @return array<string, mixed>
      */
     private function row(string $slug, string $locale): array
@@ -281,6 +354,52 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
     /**
      * @return array<string, mixed>
      */
+    private function candidateAwareBlockedRow(string $slug, string $locale): array
+    {
+        return [
+            'slug' => $slug,
+            'locale' => $locale,
+            'source_scope' => 'all',
+            'entity_status' => $this->layer('entity', 'pass'),
+            'baseline_status' => $this->layer('baseline', 'pass'),
+            'index_status' => $this->layer('index', 'blocked', [
+                [
+                    'latest_index_state' => 'promotion_candidate',
+                    'reason_codes' => [
+                        'prepare_published_candidate_runtime_rows',
+                        'target_runtime_state:published_candidate',
+                        'target_index_state:promotion_candidate',
+                    ],
+                ],
+            ], ['index_state_not_indexed_like']),
+            'runtime_status' => $this->layer('runtime', 'blocked', [
+                ['runtime_publish_state' => 'published_candidate'],
+                ['truth_state' => 'published_candidate'],
+                ['canonical_public_type' => 'public_canonical_job'],
+                ['candidate_pre_route_expected' => true],
+            ], ['runtime_publish_state_not_published', 'truth_state_not_published']),
+            'seo_geo_status' => $this->layer('seo_geo', 'blocked', [], ['sitemap_missing', 'llms_missing', 'llms_full_missing']),
+            'surface_status' => $this->layer('surface', 'blocked', [], ['surface_unverified']),
+            'safety_status' => $this->layer('safety', 'pass'),
+            'overall_status' => 'blocked',
+            'severity' => 'high',
+            'reasons' => [
+                'index_state_not_indexed_like',
+                'runtime_publish_state_not_published',
+                'truth_state_not_published',
+                'sitemap_missing',
+                'llms_missing',
+                'llms_full_missing',
+                'surface_unverified',
+            ],
+            'evidence' => [['slug' => $slug]],
+            'sidecars' => [],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
     private function layer(string $layer, string $status, array $evidence = [], array $reasons = []): array
     {
         return [
@@ -296,14 +415,14 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
      * @param  list<string>|array<string, string>  $slugs
      * @param  list<string>  $routeExposedSlugs
      */
-    private function writeProjection(array $slugs, array $routeExposedSlugs = []): string
+    private function writeProjection(array $slugs, array $routeExposedSlugs = [], bool $candidateAware = true): string
     {
         $rows = [];
         foreach ($slugs as $key => $value) {
             $slug = is_string($key) ? $key : $value;
             $state = is_string($key) ? $value : 'published_candidate';
             foreach (['en', 'zh'] as $locale) {
-                $rows[] = [
+                $row = [
                     'slug' => $slug,
                     'locale' => $locale,
                     'public_resolution_type' => $state === 'blocked' ? 'blocked_until_governance_approval' : 'public_canonical_job',
@@ -312,6 +431,11 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
                     'dataset_visible' => false,
                     'search_visible' => false,
                 ];
+                if ($candidateAware) {
+                    $row['overlay_source'] = 'candidate_prep_apply_overlay';
+                    $row['source_artifact_sha256'] = str_repeat('a', 64);
+                }
+                $rows[] = $row;
             }
         }
 
@@ -322,14 +446,14 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
      * @param  list<string>|array<string, string>  $slugs
      * @param  list<string>  $routeExposedSlugs
      */
-    private function writeTruth(array $slugs, array $routeExposedSlugs = []): string
+    private function writeTruth(array $slugs, array $routeExposedSlugs = [], bool $candidateAware = true): string
     {
         $rows = [];
         foreach ($slugs as $key => $value) {
             $slug = is_string($key) ? $key : $value;
             $state = is_string($key) ? $value : 'published_candidate';
             foreach (['en', 'zh'] as $locale) {
-                $rows[] = [
+                $row = [
                     'slug' => $slug,
                     'locale' => $locale,
                     'public_resolution_type' => $state === 'blocked' ? 'blocked_until_governance_approval' : 'public_canonical_job',
@@ -341,6 +465,11 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
                     'candidate_pre_route_expected' => $state === 'published_candidate',
                     'candidate_unexpected_exposures' => in_array($slug, $routeExposedSlugs, true) ? ['route'] : [],
                 ];
+                if ($candidateAware) {
+                    $row['overlay_source'] = 'candidate_prep_apply_overlay';
+                    $row['source_artifact_sha256'] = str_repeat('a', 64);
+                }
+                $rows[] = $row;
             }
         }
 
@@ -351,15 +480,30 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
      * @param  list<string>  $slugs
      * @param  list<string>  $blockedSlugs
      */
-    private function writeLedger(array $slugs, array $blockedSlugs = []): string
+    private function writeLedger(array $slugs, array $blockedSlugs = [], bool $candidateAware = true): string
     {
         $members = [];
         foreach ($slugs as $slug) {
-            $members[] = [
+            $member = [
                 'canonical_slug' => $slug,
                 'release_cohort' => in_array($slug, $blockedSlugs, true) ? 'review_needed' : 'public_detail_conservative',
                 'public_index_state' => in_array($slug, $blockedSlugs, true) ? 'noindex' : 'indexable',
+                'current_index_state' => 'promotion_candidate',
+                'runtime_publish_state' => 'published_candidate',
             ];
+            if ($candidateAware) {
+                $member['overlay_source'] = 'candidate_prep_apply_overlay';
+                $member['source_artifact_sha256'] = str_repeat('a', 64);
+                $member['canonical_ledger_authority_claimed'] = false;
+                $member['evidence_refs'] = [
+                    'candidate_prep_apply' => [
+                        'kind' => 'candidate_prep_apply_overlay',
+                        'write_verified' => true,
+                        'artifact_sha256' => str_repeat('a', 64),
+                    ],
+                ];
+            }
+            $members[] = $member;
         }
 
         return $this->writeJson('ledger', ['members' => $members]);

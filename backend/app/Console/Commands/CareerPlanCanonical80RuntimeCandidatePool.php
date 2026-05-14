@@ -20,6 +20,63 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
 {
     private const SCHEMA_VERSION = 'career_80_runtime_candidate_pool_plan.v1';
 
+    private const CANDIDATE_AWARE_OVERLAY_SOURCE = 'candidate_prep_apply_overlay';
+
+    private const CANDIDATE_AWARE_INDEX_STATE = 'promotion_candidate';
+
+    /**
+     * These stale audit blockers specifically indicate a verified pre-promotion candidate overlay is required before
+     * rollout planning can treat promotion_candidate / published_candidate evidence as valid.
+     *
+     * @var list<string>
+     */
+    private const CANDIDATE_AWARE_STATE_POLICY_BLOCKERS = [
+        'index_state_not_indexed_like',
+        'runtime_publish_state_not_published',
+        'truth_state_not_published',
+    ];
+
+    /**
+     * Runtime candidate pool planning validates projection/truth/ledger state directly below. These audit reasons are
+     * expected stale/full-publication blockers for verified pre-promotion candidates and must not remove them before
+     * candidate-aware artifact evidence can be evaluated.
+     *
+     * @var list<string>
+     */
+    private const RUNTIME_POOL_SELECTOR_HARD_BLOCKERS = [
+        'occupation_missing',
+        'entity_field_missing',
+        'index_state_missing',
+        'projection_row_missing',
+        'truth_row_missing',
+        'locale_row_missing',
+        'ledger_member_missing',
+        'canonical_public_type_invalid',
+        'surface_context_missing',
+    ];
+
+    /**
+     * @var list<string>
+     */
+    private const CANDIDATE_AWARE_ALLOWED_POLICY_BLOCKERS = [
+        'index_state_not_indexed_like',
+        'runtime_publish_state_not_published',
+        'truth_state_not_published',
+        'sitemap_expected_not_ready',
+        'llms_expected_not_ready',
+        'llms_full_expected_not_ready',
+        'sitemap_missing',
+        'llms_missing',
+        'llms_full_missing',
+        'structured_data_missing',
+        'citation_metadata_missing',
+        'surface_artifact_missing',
+        'surface_unverified',
+        'zh_baseline_missing',
+        'en_title_derivation_required',
+        'required_display_field_missing',
+    ];
+
     protected $signature = 'career:plan-canonical-80-runtime-candidate-pool
         {--audit= : Required post-apply Career canonical eligibility audit JSON artifact}
         {--projection= : Required runtime projection JSON artifact}
@@ -191,7 +248,11 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         $truthBySlug = $this->rowsBySlugLocale($this->artifactRows($truth, ['items', 'rows']));
         $ledgerBySlug = $this->ledgerBySlug($this->artifactRows($ledger, ['members', 'items', 'rows']));
         $auditRowsBySlug = $this->auditRowsBySlug($report);
-        $selection = (new CareerCanonical80CandidateSelector)->select($report, $target);
+        $selection = (new CareerCanonical80CandidateSelector)->select(
+            report: $report,
+            targetCount: $target,
+            hardBlockers: self::RUNTIME_POOL_SELECTOR_HARD_BLOCKERS,
+        );
 
         $eligible = [];
         $excluded = [];
@@ -205,7 +266,17 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
                 continue;
             }
 
-            if (! $this->isBaseCandidate($row, $policyRow)) {
+            $candidateAwareEvidence = $this->candidateAwarePlanningEvidence(
+                slug: $row->canonicalSlug,
+                locales: $locales,
+                projectionRows: $projectionBySlug[$row->canonicalSlug] ?? [],
+                truthRows: $truthBySlug[$row->canonicalSlug] ?? [],
+                ledgerMember: $ledgerBySlug[$row->canonicalSlug] ?? null,
+                auditRows: $auditRowsBySlug[$row->canonicalSlug] ?? [],
+                policyRow: $policyRow,
+            );
+
+            if (! $this->isBaseCandidate($row, $policyRow, $candidateAwareEvidence)) {
                 continue;
             }
 
@@ -217,6 +288,7 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
                 truthRows: $truthBySlug[$row->canonicalSlug] ?? [],
                 ledgerMember: $ledgerBySlug[$row->canonicalSlug] ?? null,
                 auditGate: $auditGate->evaluate($auditRowsBySlug[$row->canonicalSlug] ?? []),
+                candidateAwareEvidence: $candidateAwareEvidence,
             );
 
             if ($gate['eligible'] === true) {
@@ -300,13 +372,20 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         ];
     }
 
-    private function isBaseCandidate(CareerCanonical80CandidateSelectionRow $row, Career2786ReadinessPolicyRow $policyRow): bool
+    /**
+     * @param  array{required: bool, eligible: bool, reasons: list<string>, evidence: array<string, mixed>}  $candidateAwareEvidence
+     */
+    private function isBaseCandidate(CareerCanonical80CandidateSelectionRow $row, Career2786ReadinessPolicyRow $policyRow, array $candidateAwareEvidence): bool
     {
         if (! in_array($row->candidateStatus, [
             CareerCanonical80CandidateSelectionRow::STATUS_READY,
             CareerCanonical80CandidateSelectionRow::STATUS_NEAR_ELIGIBLE,
         ], true)) {
             return false;
+        }
+
+        if ($candidateAwareEvidence['required'] && $row->hardBlockers === [] && $this->policyOnlyHasCandidateAwarePlanningBlockers($policyRow)) {
+            return true;
         }
 
         return $row->hardBlockers === []
@@ -320,6 +399,7 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
      * @param  array<string, list<array<string, mixed>>>  $truthRows
      * @param  array<string, mixed>|null  $ledgerMember
      * @param  array{eligible: bool, reasons: list<string>, evidence: array<string, mixed>}  $auditGate
+     * @param  array{required: bool, eligible: bool, reasons: list<string>, evidence: array<string, mixed>}  $candidateAwareEvidence
      * @param  list<string>  $locales
      * @return array{eligible: bool, reasons: list<string>, evidence: array<string, mixed>}
      */
@@ -330,14 +410,16 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         array $truthRows,
         ?array $ledgerMember,
         array $auditGate,
+        array $candidateAwareEvidence,
     ): array {
-        $reasons = [];
+        $reasons = $candidateAwareEvidence['reasons'];
         $evidence = [
             'slug' => $slug,
             'required_locales' => $locales,
             'ledger_member_exists' => $ledgerMember !== null,
             'ledger_release_cohort' => $ledgerMember['release_cohort'] ?? null,
             'ledger_public_index_state' => $ledgerMember['public_index_state'] ?? null,
+            'candidate_aware_overlay' => $candidateAwareEvidence['evidence'],
             'projection_states' => [],
             'truth_states' => [],
             'projection_locales_present' => [],
@@ -470,6 +552,151 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
                 $reasons[] = 'unexpected_route_exposure';
             }
         }
+    }
+
+    /**
+     * @param  array<string, list<array<string, mixed>>>  $projectionRows
+     * @param  array<string, list<array<string, mixed>>>  $truthRows
+     * @param  array<string, mixed>|null  $ledgerMember
+     * @param  list<\App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRow>  $auditRows
+     * @return array{required: bool, eligible: bool, reasons: list<string>, evidence: array<string, mixed>}
+     */
+    private function candidateAwarePlanningEvidence(
+        string $slug,
+        array $locales,
+        array $projectionRows,
+        array $truthRows,
+        ?array $ledgerMember,
+        array $auditRows,
+        Career2786ReadinessPolicyRow $policyRow,
+    ): array {
+        $reasons = [];
+        $projectionOverlayRows = 0;
+        $truthOverlayRows = 0;
+        $sourceHashes = [];
+        $required = $this->candidateAwarePlanningRequired($policyRow);
+
+        $ledgerOverlay = $ledgerMember !== null
+            && ($this->stringValue($ledgerMember, 'overlay_source') ?? '') === self::CANDIDATE_AWARE_OVERLAY_SOURCE;
+        $writeVerified = $ledgerOverlay
+            && (bool) data_get($ledgerMember, 'evidence_refs.candidate_prep_apply.write_verified', false) === true;
+        $ledgerIndexState = $ledgerMember === null ? null : $this->stringValue($ledgerMember, 'current_index_state');
+        $ledgerRuntimeState = $ledgerMember === null ? null : $this->stringValue($ledgerMember, 'runtime_publish_state');
+
+        if (! $ledgerOverlay) {
+            $reasons[] = 'candidate_aware_overlay_missing';
+        }
+        if (! $writeVerified) {
+            $reasons[] = 'candidate_prep_apply_not_verified';
+        }
+        if ($ledgerIndexState !== self::CANDIDATE_AWARE_INDEX_STATE) {
+            $reasons[] = 'candidate_index_state_mismatch';
+        }
+        if ($ledgerRuntimeState !== Career80RolloutCandidateGate::EXPECTED_RUNTIME_STATE) {
+            $reasons[] = 'candidate_runtime_state_mismatch';
+        }
+
+        foreach ($locales as $locale) {
+            foreach ($projectionRows[$locale] ?? [] as $projectionRow) {
+                if (($this->stringValue($projectionRow, 'overlay_source') ?? '') === self::CANDIDATE_AWARE_OVERLAY_SOURCE) {
+                    $projectionOverlayRows++;
+                    $hash = $this->stringValue($projectionRow, 'source_artifact_sha256');
+                    if ($hash !== null) {
+                        $sourceHashes[] = $hash;
+                    }
+                }
+            }
+            foreach ($truthRows[$locale] ?? [] as $truthRow) {
+                if (($this->stringValue($truthRow, 'overlay_source') ?? '') === self::CANDIDATE_AWARE_OVERLAY_SOURCE) {
+                    $truthOverlayRows++;
+                    $hash = $this->stringValue($truthRow, 'source_artifact_sha256');
+                    if ($hash !== null) {
+                        $sourceHashes[] = $hash;
+                    }
+                }
+            }
+        }
+
+        if ($projectionOverlayRows < count($locales)) {
+            $reasons[] = 'candidate_aware_projection_overlay_missing';
+        }
+        if ($truthOverlayRows < count($locales)) {
+            $reasons[] = 'candidate_aware_truth_overlay_missing';
+        }
+        if (! $this->auditShowsCandidateAwareIndexState($auditRows)) {
+            $reasons[] = 'candidate_aware_audit_index_evidence_missing';
+        }
+        if (! $this->policyOnlyHasCandidateAwarePlanningBlockers($policyRow)) {
+            $reasons[] = 'candidate_policy_has_non_candidate_aware_blocker';
+        }
+
+        $reasons = $required ? $this->normalizeStrings($reasons) : [];
+
+        return [
+            'required' => $required,
+            'eligible' => $reasons === [],
+            'reasons' => $reasons,
+            'evidence' => [
+                'required' => $required,
+                'overlay_source' => self::CANDIDATE_AWARE_OVERLAY_SOURCE,
+                'ledger_overlay' => $ledgerOverlay,
+                'candidate_prep_apply_write_verified' => $writeVerified,
+                'ledger_index_state' => $ledgerIndexState,
+                'ledger_runtime_state' => $ledgerRuntimeState,
+                'projection_overlay_rows' => $projectionOverlayRows,
+                'truth_overlay_rows' => $truthOverlayRows,
+                'audit_index_state' => $this->auditIndexStates($auditRows),
+                'source_artifact_sha256_values' => $this->normalizeStrings($sourceHashes),
+            ],
+        ];
+    }
+
+    private function candidateAwarePlanningRequired(Career2786ReadinessPolicyRow $policyRow): bool
+    {
+        return array_intersect($policyRow->reasons, self::CANDIDATE_AWARE_STATE_POLICY_BLOCKERS) !== []
+            || array_intersect($policyRow->hardBlockerReasons, self::CANDIDATE_AWARE_STATE_POLICY_BLOCKERS) !== [];
+    }
+
+    private function policyOnlyHasCandidateAwarePlanningBlockers(Career2786ReadinessPolicyRow $policyRow): bool
+    {
+        $blockingReasons = $this->normalizeStrings(array_values(array_diff([
+            ...$policyRow->hardBlockerReasons,
+            ...$policyRow->remediationRequiredReasons,
+            ...$policyRow->reasons,
+        ], self::CANDIDATE_AWARE_ALLOWED_POLICY_BLOCKERS)));
+
+        return $blockingReasons === [];
+    }
+
+    /**
+     * @param  list<\App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRow>  $auditRows
+     */
+    private function auditShowsCandidateAwareIndexState(array $auditRows): bool
+    {
+        return in_array(self::CANDIDATE_AWARE_INDEX_STATE, $this->auditIndexStates($auditRows), true);
+    }
+
+    /**
+     * @param  list<\App\Domain\Career\Audit\CareerCanonicalEligibilityAuditRow>  $auditRows
+     * @return list<string>
+     */
+    private function auditIndexStates(array $auditRows): array
+    {
+        $states = [];
+        foreach ($auditRows as $row) {
+            foreach ($row->indexStatus->evidence as $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+
+                $state = $this->stringValue($item, 'latest_index_state');
+                if ($state !== null) {
+                    $states[] = $state;
+                }
+            }
+        }
+
+        return $this->normalizeStrings($states);
     }
 
     /**

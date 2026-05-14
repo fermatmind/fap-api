@@ -77,6 +77,19 @@ final class Career80TotalLiveAcceptancePlannerTest extends TestCase
         $this->assertContains('live_acceptance_not_accepted', array_column($result['blockers'], 'reason'));
     }
 
+    public function test_candidate_planning_artifacts_do_not_replace_final_live_acceptance(): void
+    {
+        $result = (new Career80TotalLiveAcceptancePlanner)->plan(
+            targetDelta: $this->targetDelta(),
+            deltaManifest: $this->deltaManifest(),
+        )->toArray();
+
+        $this->assertSame('planned', $result['status']);
+        $this->assertFalse($result['accepted']);
+        $this->assertSame('RUN_80_TOTAL_LIVE_ACCEPTANCE_READ_ONLY', $result['next_required_action']);
+        $this->assertFalse($result['live_crawl_executed']);
+    }
+
     public function test_blocks_when_live_acceptance_expected_rows_do_not_match(): void
     {
         $result = (new Career80TotalLiveAcceptancePlanner)->plan(

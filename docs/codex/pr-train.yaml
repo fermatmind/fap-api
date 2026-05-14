@@ -2901,3 +2901,45 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-CANDIDATE-AWARE-AUDIT-POLICY-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
+    branch: fix/career-candidate-aware-audit-policy-1
+    title: "fix(api): accept candidate-aware runtime states for delta planning"
+    name: "Accept candidate-aware runtime states for delta planning"
+    scope:
+      - Allow verified candidate-aware 51-delta planning artifacts to satisfy runtime candidate pool pre-promotion state checks.
+      - Accept promotion_candidate index-state and published_candidate projection/truth state only for candidate-aware rollout dry-run planning.
+      - Require candidate_prep_apply_overlay provenance and write_verified candidate prep evidence.
+      - Preserve strict final published/live acceptance semantics.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/**
+      - backend/app/Console/Commands/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout dry-run.
+      - Run rollout apply.
+      - Run candidate preparation apply.
+      - Run DB mutation, backfill, rollback, quarantine, or publication expansion.
+      - Deploy backend or frontend.
+      - Touch fap-web.
+      - Weaken final live acceptance or final published-state validation.
+    validation:
+      - php artisan test --filter=CareerPlanCanonical80RuntimeCandidatePool --no-ansi
+      - php artisan test --filter=Career80RolloutCandidateGate --no-ansi
+      - php artisan test --filter=CareerRuntimeCandidate --no-ansi
+      - php artisan test --filter=CareerRuntimeArtifactRefresh --no-ansi
+      - php artisan test --filter=Career80TotalLiveAcceptance --no-ansi
+      - php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
