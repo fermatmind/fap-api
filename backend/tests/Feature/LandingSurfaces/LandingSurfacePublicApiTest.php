@@ -422,6 +422,86 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->assertJsonPath('surface.page_blocks.0.payload_json.items.0.article.canonical_url', 'https://fermatmind.com/zh/articles/recommended-article');
     }
 
+    public function test_home_recommended_articles_auto_sync_latest_articles_and_preserve_explicit_pins(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $surface = LandingSurface::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'surface_key' => 'home',
+            'locale' => 'zh-CN',
+            'title' => '首页',
+            'description' => '首页',
+            'schema_version' => 'v1',
+            'payload_json' => [],
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 4, 25, 0, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+        ]);
+
+        $surface->blocks()->create([
+            'block_key' => 'recommended_articles',
+            'block_type' => 'json',
+            'title' => '推荐阅读',
+            'payload_json' => [
+                'items' => [
+                    [
+                        'is_pinned' => true,
+                        'article' => ['slug' => 'editor-pinned-article'],
+                    ],
+                    ['article' => ['slug' => 'older-configured-article']],
+                    ['article' => ['slug' => 'missing-configured-article']],
+                ],
+            ],
+            'sort_order' => 0,
+            'is_enabled' => true,
+        ]);
+
+        $this->createArticle([
+            'slug' => 'editor-pinned-article',
+            'locale' => 'zh-CN',
+            'title' => '编辑置顶文章',
+            'published_at' => Carbon::create(2026, 4, 1, 8, 0, 0, 'UTC'),
+        ]);
+        $this->createArticle([
+            'slug' => 'older-configured-article',
+            'locale' => 'zh-CN',
+            'title' => '旧配置文章',
+            'published_at' => Carbon::create(2026, 4, 2, 8, 0, 0, 'UTC'),
+        ]);
+        $this->createArticle([
+            'slug' => 'newest-uploaded-article',
+            'locale' => 'zh-CN',
+            'title' => '最新上传文章',
+            'published_at' => Carbon::create(2026, 5, 14, 8, 0, 0, 'UTC'),
+        ]);
+        $this->createArticle([
+            'slug' => 'second-newest-uploaded-article',
+            'locale' => 'zh-CN',
+            'title' => '第二新文章',
+            'published_at' => Carbon::create(2026, 5, 13, 8, 0, 0, 'UTC'),
+        ]);
+
+        $response = $this->getJson('/api/v0.5/landing-surfaces/home?locale=zh-CN&org_id=0');
+
+        $response->assertOk();
+        $items = $response->json('surface.page_blocks.0.payload_json.items');
+        $this->assertIsArray($items);
+        $this->assertSame(
+            [
+                'editor-pinned-article',
+                'newest-uploaded-article',
+                'second-newest-uploaded-article',
+            ],
+            array_map(static fn (array $item): string => (string) data_get($item, 'article.slug'), $items)
+        );
+        $this->assertTrue((bool) data_get($items[0], 'is_pinned'));
+        $this->assertSame('最新上传文章', (string) data_get($items[1], 'article.title'));
+        $this->assertSame('第二新文章', (string) data_get($items[2], 'article.title'));
+    }
+
     public function test_public_api_skips_malformed_recommended_article_slugs_without_crashing(): void
     {
         $surface = LandingSurface::query()->withoutGlobalScopes()->create([

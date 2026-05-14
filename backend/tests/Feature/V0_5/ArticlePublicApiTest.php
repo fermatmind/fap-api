@@ -71,6 +71,30 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('items.0.locale', 'zh-CN');
     }
 
+    public function test_list_orders_newest_articles_before_legacy_voice_order(): void
+    {
+        $this->createArticle([
+            'slug' => 'older-voice-ordered-article',
+            'locale' => 'zh-CN',
+            'title' => 'Older voice ordered article',
+            'voice_order' => 1,
+            'published_at' => Carbon::create(2026, 4, 18, 8, 0, 0, 'UTC'),
+        ]);
+
+        $this->createArticle([
+            'slug' => 'newest-uploaded-article',
+            'locale' => 'zh-CN',
+            'title' => 'Newest uploaded article',
+            'voice_order' => null,
+            'published_at' => Carbon::create(2026, 5, 14, 8, 0, 0, 'UTC'),
+        ]);
+
+        $this->getJson('/api/v0.5/articles?locale=zh-CN&page=1')
+            ->assertOk()
+            ->assertJsonPath('items.0.slug', 'newest-uploaded-article')
+            ->assertJsonPath('items.1.slug', 'older-voice-ordered-article');
+    }
+
     public function test_article_seo_detail_returns_localized_frontend_canonical_alternates_and_jsonld_urls(): void
     {
         config([

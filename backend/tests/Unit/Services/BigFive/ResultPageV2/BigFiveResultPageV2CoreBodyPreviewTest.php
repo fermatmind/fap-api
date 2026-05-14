@@ -228,6 +228,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_public_recency_ordering_only(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php',
+        ];
+        $articleControllerChangedLines = [
+            "+            ->orderByDesc('published_at')",
+            "-            ->orderByDesc('published_at')",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            articleControllerChangedLines: $articleControllerChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1208,6 +1226,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $routeChangedLines = null,
         ?array $appServiceProviderChangedLines = null,
         ?array $scaleRegistrySeederChangedLines = null,
+        ?array $articleControllerChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -1229,6 +1248,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCmsLifecycleTenantScopeFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php'
+                && $this->articleControllerDiffIsPublicArticleRecencyOrderingOnly(
+                    $articleControllerChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
                 continue;
             }
 
@@ -2236,6 +2268,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function articleControllerDiffIsPublicArticleRecencyOrderingOnly(array $changedLines): bool
+    {
+        return $changedLines === [
+            "+            ->orderByDesc('published_at')",
+            "-            ->orderByDesc('published_at')",
+        ];
     }
 
     private function isBackendPintBaselineStyleOnlyChange(string $file, string $repoRoot, string $baseRef): bool

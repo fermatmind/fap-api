@@ -232,39 +232,73 @@ final class LandingSurfaceController extends Controller
             return [];
         }
 
-        $slugs = collect($items)
+        $limit = $this->recommendedArticleLimit($payload, $items);
+        $pinnedSlugs = collect($items)
+            ->filter(fn (mixed $item): bool => is_array($item) && $this->isPinnedRecommendedArticleItem($item))
             ->map(fn (mixed $item): ?string => is_array($item) ? $this->recommendedArticleSlug($item) : null)
             ->filter(fn (?string $slug): bool => $slug !== null)
             ->unique()
             ->values()
             ->all();
 
-        if ($slugs === []) {
+        /** @var Collection<int, Article> $latestArticles */
+        $latestArticles = Article::query()
+            ->withoutGlobalScopes()
+            ->with($this->recommendedArticleRelations())
+            ->where('org_id', $orgId)
+            ->where('locale', $locale)
+            ->where('is_indexable', true)
+            ->publiclyReadable()
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
+            ->limit($limit + count($pinnedSlugs))
+            ->get();
+
+        /** @var Collection<string, Article> $pinnedArticles */
+        $pinnedArticles = $pinnedSlugs !== []
+            ? Article::query()
+                ->withoutGlobalScopes()
+                ->with($this->recommendedArticleRelations())
+                ->where('org_id', $orgId)
+                ->where('locale', $locale)
+                ->whereIn('slug', $pinnedSlugs)
+                ->where('is_indexable', true)
+                ->publiclyReadable()
+                ->get()
+                ->keyBy(fn (Article $article): string => (string) $article->slug)
+            : collect();
+
+        $orderedArticles = collect($pinnedSlugs)
+            ->map(fn (string $slug): ?Article => $pinnedArticles->get($slug))
+            ->filter(fn (?Article $article): bool => $article instanceof Article)
+            ->concat($latestArticles)
+            ->unique(fn (Article $article): string => (string) $article->slug)
+            ->take($limit)
+            ->values();
+
+        if ($orderedArticles->isEmpty()) {
             return [];
         }
 
-        /** @var Collection<int, Article> $articles */
-        $articles = Article::query()
-            ->withoutGlobalScopes()
-            ->with([
-                'category' => fn ($query) => $query->withoutGlobalScopes(),
-                'tags' => fn ($query) => $query->withoutGlobalScopes(),
-                'seoMeta',
-                'publishedRevision',
-            ])
-            ->where('org_id', $orgId)
-            ->where('locale', $locale)
-            ->whereIn('slug', $slugs)
-            ->where('is_indexable', true)
-            ->publiclyReadable()
-            ->get();
-
-        return $articles
+        return $orderedArticles
             ->filter(fn (Article $article): bool => $article->publishedRevision instanceof ArticleTranslationRevision)
             ->mapWithKeys(fn (Article $article): array => [
                 (string) $article->slug => $this->recommendedArticleProjection($article),
             ])
             ->all();
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function recommendedArticleRelations(): array
+    {
+        return [
+            'category' => fn ($query) => $query->withoutGlobalScopes(),
+            'tags' => fn ($query) => $query->withoutGlobalScopes(),
+            'seoMeta',
+            'publishedRevision',
+        ];
     }
 
     /**
@@ -399,6 +433,32 @@ final class LandingSurfaceController extends Controller
             : null;
     }
 
+    private function recommendedArticleLimit(array $payload, array $items): int
+    {
+        $limit = $payload['limit'] ?? $payload['max_items'] ?? count($items);
+        if (! is_numeric($limit)) {
+            $limit = count($items);
+        }
+
+        return max(1, min(12, (int) $limit));
+    }
+
+    private function isPinnedRecommendedArticleItem(array $item): bool
+    {
+        foreach (['pinned', 'is_pinned', 'pin_to_top', 'is_featured'] as $key) {
+            if (filter_var($item[$key] ?? null, FILTER_VALIDATE_BOOL)) {
+                return true;
+            }
+
+            $article = $item['article'] ?? null;
+            if (is_array($article) && filter_var($article[$key] ?? null, FILTER_VALIDATE_BOOL)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * @param  array<string, mixed>  $payload
      * @param  array<string, array<string, mixed>>  $articleMap
@@ -411,22 +471,26 @@ final class LandingSurfaceController extends Controller
             return $payload;
         }
 
-        $payload['items'] = array_values(array_filter(array_map(function (mixed $item) use ($articleMap): mixed {
-            if (! is_array($item)) {
-                return null;
-            }
+        $itemsBySlug = collect($items)
+            ->filter(fn (mixed $item): bool => is_array($item) && $this->recommendedArticleSlug($item) !== null)
+            ->mapWithKeys(fn (mixed $item): array => [
+                (string) $this->recommendedArticleSlug($item) => $item,
+            ]);
 
-            $slug = $this->recommendedArticleSlug($item);
-            if ($slug === null || ! array_key_exists($slug, $articleMap)) {
-                return null;
-            }
+        $payload['items'] = collect($articleMap)
+            ->map(function (array $articlePatch, string $slug) use ($itemsBySlug): array {
+                $item = $itemsBySlug->get($slug);
+                if (! is_array($item)) {
+                    $item = ['article' => ['slug' => $slug]];
+                }
 
-            $articlePatch = $articleMap[$slug];
-            $article = is_array($item['article'] ?? null) ? $item['article'] : [];
-            $item['article'] = array_merge($article, $articlePatch);
+                $article = is_array($item['article'] ?? null) ? $item['article'] : [];
+                $item['article'] = array_merge($article, $articlePatch);
 
-            return $item;
-        }, $items), static fn (mixed $item): bool => $item !== null));
+                return $item;
+            })
+            ->values()
+            ->all();
 
         return $payload;
     }
