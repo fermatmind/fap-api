@@ -6,6 +6,7 @@ namespace App\Services\Cms\EditorialPackage;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
@@ -150,10 +151,14 @@ final class EditorialPackageDraftImporter
     {
         $plan = $this->planFromFile($file, $localeOverride, $allowClaimWarnings);
         if (($plan['errors'] ?? []) !== []) {
+            $this->persistImportRecord($plan, $this->statusForPlan($plan, false));
+
             return $plan;
         }
 
         if (! in_array($plan['action'], ['will_create', 'will_update'], true)) {
+            $this->persistImportRecord($plan, $this->statusForPlan($plan, false));
+
             return $plan;
         }
 
@@ -249,13 +254,17 @@ final class EditorialPackageDraftImporter
                 ],
             );
 
-            return array_merge($plan, [
+            $result = array_merge($plan, [
                 'imported' => true,
                 'article_id' => (int) $article->id,
                 'working_revision_id' => (int) $revision->id,
                 'working_revision_status' => (string) $revision->revision_status,
                 'published_revision_id' => null,
             ]);
+
+            $this->persistImportRecord($result, $this->statusForPlan($result, false));
+
+            return $result;
         });
     }
 
@@ -577,6 +586,170 @@ final class EditorialPackageDraftImporter
         return (string) $article->status === 'published'
             || (bool) $article->is_public
             || $article->published_revision_id !== null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $plan
+     */
+    private function statusForPlan(array $plan, bool $dryRun): string
+    {
+        if ($dryRun && ($plan['errors'] ?? []) === [] && ($plan['ok'] ?? false) === true) {
+            return ArticleEditorialPackageImport::STATUS_DRY_RUN_PASSED;
+        }
+
+        $errors = is_array($plan['errors'] ?? null) ? $plan['errors'] : [];
+        $warnings = is_array($plan['warnings'] ?? null) ? $plan['warnings'] : [];
+        $claimMatches = is_array($plan['claim_matches'] ?? null) ? $plan['claim_matches'] : [];
+
+        if ($errors !== []) {
+            return $claimMatches !== []
+                ? ArticleEditorialPackageImport::STATUS_BLOCKED
+                : ArticleEditorialPackageImport::STATUS_FAILED;
+        }
+
+        if ($warnings !== [] || ($plan['action'] ?? null) === 'will_skip') {
+            return ArticleEditorialPackageImport::STATUS_WARNING;
+        }
+
+        return ArticleEditorialPackageImport::STATUS_IMPORTED;
+    }
+
+    /**
+     * @param  array<string, mixed>  $plan
+     */
+    private function persistImportRecord(array $plan, string $status): void
+    {
+        $package = is_array($plan['package'] ?? null) ? $plan['package'] : [];
+        if ($package === []) {
+            return;
+        }
+
+        $errors = $this->issueList($plan['errors'] ?? []);
+        $warnings = $this->issueList($plan['warnings'] ?? []);
+        $claimMatches = $this->issueList($plan['claim_matches'] ?? []);
+        $missingFields = $this->missingFieldIssues($errors);
+        $blockedReasons = array_values(array_merge($errors, $warnings));
+        $graphEdges = is_array($package['graph_edges'] ?? null) ? $package['graph_edges'] : [];
+        $targetTests = $this->stringList($package['target_tests'] ?? []);
+        $targetTopics = $this->stringList($package['target_topics'] ?? []);
+        $targetCareerPages = $this->stringList($package['target_career_pages'] ?? []);
+        $targetPersonalityPages = $this->stringList($package['target_personality_pages'] ?? []);
+        $coverImage = trim((string) ($package['cover_image'] ?? ''));
+        $coverAlt = trim((string) ($package['cover_image_alt'] ?? ''));
+        $coverPrompt = trim((string) ($package['cover_image_prompt'] ?? ''));
+        $coverStyle = trim((string) ($package['cover_image_style_tag'] ?? ''));
+        $references = $this->stringList($package['references'] ?? []);
+        $answerSurface = is_array($package['answer_surface_v1'] ?? null) ? $package['answer_surface_v1'] : [];
+
+        ArticleEditorialPackageImport::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'article_id' => isset($plan['article_id']) ? (int) $plan['article_id'] : ($plan['existing_article_id'] ?? null),
+            'slug' => (string) ($package['slug'] ?? ''),
+            'locale' => (string) ($package['locale'] ?? ''),
+            'title' => (string) ($package['title'] ?? ''),
+            'content_track' => (string) ($package['content_track'] ?? ''),
+            'status' => $status,
+            'intended_status' => (string) ($package['intended_status'] ?? ''),
+            'validation_summary_json' => [
+                'ok' => (bool) ($plan['ok'] ?? false),
+                'action' => (string) ($plan['action'] ?? ''),
+                'would_write' => (bool) ($plan['would_write'] ?? false),
+                'errors_count' => count($errors),
+                'warnings_count' => count($warnings),
+                'claim_matches_count' => count($claimMatches),
+                'existing_article_id' => $plan['existing_article_id'] ?? null,
+                'working_revision_id' => $plan['working_revision_id'] ?? null,
+                'working_revision_status' => $plan['working_revision_status'] ?? null,
+                'published_revision_id' => $plan['published_revision_id'] ?? null,
+            ],
+            'claim_result_json' => [
+                'status' => $claimMatches === [] ? 'passed' : ($status === ArticleEditorialPackageImport::STATUS_BLOCKED ? 'blocked' : 'warning'),
+                'matches' => $claimMatches,
+            ],
+            'exactness_json' => [
+                'body_hash' => (string) ($plan['body_hash'] ?? ''),
+                'answer_surface_hash' => (string) ($plan['answer_surface_hash'] ?? ''),
+                'first_500_chars' => (string) ($plan['first_500_chars'] ?? ''),
+                'heading_sequence' => $this->stringList($plan['heading_sequence'] ?? []),
+                'title_exact' => (string) ($package['title'] ?? ''),
+                'slug_exact' => (string) ($package['slug'] ?? ''),
+                'seo_title_exact' => (string) ($package['seo_title'] ?? ''),
+                'meta_description_exact' => (string) ($package['meta_description'] ?? ''),
+                'excerpt_exact' => (string) ($package['excerpt'] ?? ''),
+            ],
+            'references_json' => [
+                'status' => $references === [] ? 'missing' : 'complete',
+                'count' => count($references),
+                'items' => $references,
+            ],
+            'media_json' => [
+                'status' => $coverImage !== '' && $coverAlt !== '' && $coverPrompt !== '' && $coverStyle !== '' ? 'complete' : 'missing',
+                'cover_image_present' => $coverImage !== '',
+                'cover_image_alt_present' => $coverAlt !== '',
+                'cover_image_prompt_present' => $coverPrompt !== '',
+                'cover_image_style_tag_present' => $coverStyle !== '',
+            ],
+            'graph_json' => [
+                'status' => $targetTests !== [] || $targetTopics !== [] || $targetCareerPages !== [] || $targetPersonalityPages !== [] || $graphEdges !== [] ? 'complete' : 'missing',
+                'target_tests' => $targetTests,
+                'target_topics' => $targetTopics,
+                'target_career_pages' => $targetCareerPages,
+                'target_personality_pages' => $targetPersonalityPages,
+                'graph_edges' => $graphEdges,
+            ],
+            'answer_surface_json' => [
+                'policy' => (string) ($package['answer_surface_policy'] ?? ''),
+                'visibility' => (string) ($package['answer_surface_visibility'] ?? ''),
+                'hash' => (string) ($plan['answer_surface_hash'] ?? ''),
+                'has_answer_surface' => $answerSurface !== [],
+            ],
+            'body_hash' => (string) ($plan['body_hash'] ?? ''),
+            'heading_sequence_json' => $this->stringList($plan['heading_sequence'] ?? []),
+            'references_count' => (int) ($plan['references_count'] ?? count($references)),
+            'missing_fields_json' => $missingFields,
+            'blocked_reasons_json' => $blockedReasons,
+            'imported_by' => $this->actorAdminId(),
+        ]);
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function issueList(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $issues = [];
+        foreach ($value as $issue) {
+            if (is_array($issue)) {
+                $issues[] = $issue;
+            }
+        }
+
+        return $issues;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $issues
+     * @return list<array<string,mixed>>
+     */
+    private function missingFieldIssues(array $issues): array
+    {
+        return array_values(array_filter(
+            $issues,
+            static fn (array $issue): bool => str_contains((string) ($issue['code'] ?? ''), 'missing')
+                || str_contains((string) ($issue['code'] ?? ''), 'required')
+        ));
+    }
+
+    private function actorAdminId(): ?int
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user) && isset($user->id) ? (int) $user->id : null;
     }
 
     private function resolveCategory(string $name): ArticleCategory

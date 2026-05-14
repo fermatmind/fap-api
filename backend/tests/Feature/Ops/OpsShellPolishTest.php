@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Filament\Ops\Pages\ArticlePublishingOpsPage;
 use App\Filament\Ops\Pages\ArticleTranslationOpsPage;
 use App\Filament\Ops\Pages\ContentReleasePage;
 use App\Filament\Ops\Pages\ContentWorkspacePage;
@@ -75,6 +76,7 @@ final class OpsShellPolishTest extends TestCase
         $this->assertSame('Operations', PostReleaseObservabilityPage::getNavigationGroup());
 
         $this->assertSame('Insights', QuestionAnalyticsPage::getNavigationGroup());
+        $this->assertSame('Insights', ArticlePublishingOpsPage::getNavigationGroup());
         $this->assertSame('Insights', SeoOperationsPage::getNavigationGroup());
 
         $this->assertSame('Governance', AdminUserResource::getNavigationGroup());
