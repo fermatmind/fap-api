@@ -5792,7 +5792,7 @@
       "repo": "fap-api",
       "branch": "fix/career-progressive-live-acceptance-1",
       "title": "fix(api): generalize career progressive live acceptance",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "REPAIR-PROGRESSIVE-ROLLOUT-MANIFEST-GATE-1"
       ],
@@ -5820,8 +5820,8 @@
         "no deploy",
         "no fap-web change"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "ab4af37c6a8f898848c377d90bbfe7dc4266d19c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1400",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -5842,9 +5842,9 @@
       },
       "failure_reason": null,
       "next_pr": "REPAIR-PROGRESSIVE-CLOSEOUT-1",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-14T20:48:39Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "sidecar_id": "SIDECAR-BIG5-CONTENT-PACK-PUBLISH-ROLLBACK-ENV-1",
@@ -5875,6 +5875,101 @@
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Unit\\Services\\BigFive\\ResultPageV2\\BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff with backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
             "Current PR does not modify backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
             "Manual git diff from merge-base origin/main to HEAD for backend/app/routes/database/content_packs/frontend/selector_ready_assets is empty before staging current PR changes."
+          ],
+          "severity": "medium",
+          "next_goal": "SCAN-BIG5-RUNTIME-FREEZE-EXTERNAL-MBTI-ATTRIBUTION-1",
+          "may_continue_train": true
+        }
+      ]
+    },
+    "REPAIR-PROGRESSIVE-CLOSEOUT-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-progressive-closeout-1",
+      "title": "fix(api): add career progressive cohort closeout",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-PROGRESSIVE-LIVE-ACCEPTANCE-1"
+      ],
+      "scope_type": "progressive_closeout_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/**",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/**",
+        "backend/tests/Feature/Console/**",
+        "backend/tests/Unit/Domain/Career/Audit/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no readiness run",
+        "no live crawl",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no candidate prep apply",
+        "no backfill",
+        "no rollback",
+        "no quarantine",
+        "no DB mutation",
+        "no deploy",
+        "no fap-web change"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for the progressive expansion PR train."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-PROGRESSIVE-LIVE-ACCEPTANCE-1 merged as PR #1400 and provides read-only progressive live acceptance accounting."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Current PR scope is limited to read-only progressive cohort closeout artifacts, tests/docs, command registration, and train metadata."
+        },
+        "local_validation": {
+          "status": "pass_with_external_sidecar",
+          "evidence": "CareerProgressiveCohortCloseout and CareerCloseoutCanonicalProgressiveCohort tests, route:list, sqlite migrate, command list, Pint, and git diff --check passed locally. backend/scripts/ci_verify_mbti.sh fails pre-existing/out-of-scope BigFive content pack publish/rollback compiled directory assertions and a runtime freeze diff for MbtiAttributionEventController outside current PR scope."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "REPAIR-PROGRESSIVE-LIVE-VERIFICATION-SCALING-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "sidecar_id": "SIDECAR-BIG5-CONTENT-PACK-PUBLISH-ROLLBACK-ENV-1",
+          "title": "ci_verify_mbti content pack publish/rollback target compiled directory failure",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [],
+          "evidence": [
+            "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
+            "Current PR changed only Career progressive closeout command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
+            "Targeted Career closeout tests, route:list, sqlite migrate, command list, Pint, and git diff --check passed."
+          ],
+          "severity": "medium",
+          "next_goal": "SCAN-BIG5-CONTENT-PACK-PUBLISH-ROLLBACK-ENV-1",
+          "may_continue_train": true
+        },
+        {
+          "sidecar_id": "SIDECAR-BIG5-RUNTIME-FREEZE-EXTERNAL-MBTI-ATTRIBUTION-1",
+          "title": "ci_verify_mbti runtime freeze reports out-of-scope MbtiAttributionEventController diff",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [],
+          "evidence": [
+            "backend/scripts/ci_verify_mbti.sh failed Tests\\Unit\\Services\\BigFive\\ResultPageV2\\BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff with backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
+            "Current PR does not modify backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
+            "The failure matches the external sidecar observed on REPAIR-PROGRESSIVE-LIVE-ACCEPTANCE-1."
           ],
           "severity": "medium",
           "next_goal": "SCAN-BIG5-RUNTIME-FREEZE-EXTERNAL-MBTI-ATTRIBUTION-1",
