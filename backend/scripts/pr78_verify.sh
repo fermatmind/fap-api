@@ -35,28 +35,44 @@ fail() {
   exit 1
 }
 
+audit_json_is_valid() {
+  [[ -s "${AUDIT_JSON}" ]] || return 1
+
+  AUDIT_JSON_PATH="${AUDIT_JSON}" php <<'PHP'
+<?php
+declare(strict_types=1);
+
+$payload = json_decode((string) file_get_contents((string) getenv('AUDIT_JSON_PATH')), true);
+exit(is_array($payload) ? 0 : 1);
+PHP
+}
+
 echo "[PR78][VERIFY] start"
 echo "[PR78][VERIFY] run_ts=${RUN_TS} week=${WEEK_TAG}"
 
 AUDIT_EXIT=0
 for attempt in 1 2 3; do
   set +e
-  composer audit --no-interaction --format=json >"${AUDIT_JSON}" 2>"${AUDIT_STDERR}"
+  composer audit --no-interaction --no-ansi --format=json >"${AUDIT_JSON}" 2>"${AUDIT_STDERR}"
   AUDIT_EXIT=$?
   set -e
 
-  if [[ -s "${AUDIT_JSON}" ]]; then
+  if audit_json_is_valid; then
     break
   fi
 
   if [[ "${attempt}" -lt 3 ]]; then
-    echo "[PR78][VERIFY] composer audit produced no JSON (attempt ${attempt}/3), retrying in 5s..."
+    echo "[PR78][VERIFY] composer audit produced invalid JSON (attempt ${attempt}/3), retrying in 5s..."
     sleep 5
   fi
 done
 
-if [[ ! -s "${AUDIT_JSON}" ]]; then
-  fail "composer audit did not produce JSON output after retries"
+if ! audit_json_is_valid; then
+  echo "[PR78][VERIFY] composer audit stdout head:"
+  head -n 20 "${AUDIT_JSON}" || true
+  echo "[PR78][VERIFY] composer audit stderr head:"
+  head -n 20 "${AUDIT_STDERR}" || true
+  fail "composer audit did not produce valid JSON output after retries"
 fi
 
 AUDIT_JSON_PATH="${AUDIT_JSON}" NORMALIZED_JSON_PATH="${NORMALIZED_JSON}" SUMMARY_JSON_PATH="${SUMMARY_JSON}" IGNORE_JSON_PATH="${IGNORE_JSON}" LOCK_PATH="${BACKEND_DIR}/composer.lock" php <<'PHP'
