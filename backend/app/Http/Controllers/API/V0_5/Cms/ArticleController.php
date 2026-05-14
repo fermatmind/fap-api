@@ -61,9 +61,9 @@ class ArticleController extends Controller
         }
 
         $paginator = $query
+            ->orderByDesc('published_at')
             ->orderByRaw('voice_order is null')
             ->orderBy('voice_order')
-            ->orderByDesc('published_at')
             ->orderByDesc('id')
             ->paginate(20, ['*'], 'page', $validated['page']);
 
