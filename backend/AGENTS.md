@@ -88,6 +88,7 @@
 ## Content authority rules
 - CMS/backend is the source of truth for publishable content, operational metadata, mutable media references, public SEO fields, and publishing state.
 - Article content, article SEO, covers, categories/tags, related placement, and publication state must be managed through backend Article resources and APIs.
+- Controlled Codex-assisted article publish is allowed only through the backend `articles:publish-controlled` command after exact user confirmation, passing preflight gates, required claim-warning acknowledgement, and audit logging. Codex must not use generic CMS UI publish clicks or uncontrolled publish endpoints as the default production publishing mechanism.
 - Homepage, tests hub, test category, career center, CTA text, module ordering, featured items, and landing SEO must be managed through `landing_surfaces` / `page_blocks`.
 - Help, policy, company, brand, careers, about, charter, foundation, privacy, terms, refund, support, and similar static-content pages must be managed through `content_pages`.
 - Career guides, career jobs, career recommendations, personality profiles, topic pages, FAQ, sections, and SEO must be managed through backend CMS resources and public APIs.
