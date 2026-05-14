@@ -197,6 +197,28 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame('warning', data_get($warningLog->claim_result_json, 'status'));
     }
 
+    public function test_evergreen_semantic_headings_and_boundary_claim_context_pass_as_warnings(): void
+    {
+        $path = $this->writePackage($this->evergreenPackage([
+            'slug' => 'riasec-semantic-evergreen-draft',
+            'body_markdown' => "# 霍兰德职业兴趣测试能告诉你什么？\n\n## 执行摘要\n\n霍兰德测试不能告诉你唯一最适合的职业，也不能预测你的职业成功率。\n\n## 霍兰德职业兴趣测试到底测什么？\n\nRIASEC 是一种职业兴趣结构入口，用来解释人与工作环境之间的兴趣线索。\n\n## 如何正确使用霍兰德测试结果？\n\n它应该作为职业探索的第一层证据，也不能说某职业一定适合你一生。\n\n## FAQ\n\n### 霍兰德测试能直接决定职业吗？\n\n不能。\n\n## 结论\n\nRIASEC 应作为职业探索入口，而不是最终职业答案.",
+        ]));
+
+        $this->artisan('articles:import-editorial-package', [
+            '--file' => $path,
+            '--locale' => 'zh-CN',
+            '--dry-run' => true,
+        ])
+            ->expectsOutputToContain('action=will_create')
+            ->expectsOutputToContain('errors_count=0')
+            ->expectsOutputToContain('claim_warning=body_markdown:claim_boundary_forbidden_phrase')
+            ->expectsOutputToContain('claim_matches_count=3')
+            ->assertExitCode(0);
+
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
     public function test_track_and_answer_surface_validation_block_invalid_packages_without_writes(): void
     {
         $invalidEvergreenPath = $this->writePackage($this->evergreenPackage([
