@@ -33,12 +33,48 @@ final class MbtiAttributionEventController extends Controller
         'entry_surface',
         'source_page_type',
         'target_action',
+        'slug',
         'test_slug',
+        'scaleCode',
+        'scale_code',
         'form_code',
         'landing_path',
+        'current_path',
         'locale',
         'attempt_id',
+        'attemptIdMasked',
         'target_attempt_id',
+        'answered_count',
+        'durationMs',
+        'duration_ms',
+        'duration_bucket',
+        'order_no',
+        'orderNo',
+        'orderNoMasked',
+        'order_id',
+        'transaction_id',
+        'amount',
+        'value',
+        'price',
+        'currency',
+        'provider',
+        'pack_version',
+        'manifest_hash',
+        'norms_version',
+        'quality_level',
+        'locked',
+        'variant',
+        'sku_id',
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+        'gclid',
+        'msclkid',
+        'fbclid',
+        'referrer',
+        'session_id',
     ];
 
     /**
@@ -48,6 +84,7 @@ final class MbtiAttributionEventController extends Controller
         'landing_view',
         'start_click',
         'start_attempt',
+        'submit_attempt',
         'view_result',
         'click_unlock',
         'create_order',
@@ -65,19 +102,63 @@ final class MbtiAttributionEventController extends Controller
     {
         $this->authorizeIngest($request);
         $this->rejectUnexpectedKeys($request->all(), self::TOP_LEVEL_KEYS, 'request');
+        $payloadInput = $request->input('payload');
+        if ($payloadInput !== null && ! is_array($payloadInput)) {
+            throw ValidationException::withMessages([
+                'payload' => 'The payload field must be an array.',
+            ]);
+        }
+        if (is_array($payloadInput)) {
+            $this->rejectUnexpectedKeys($payloadInput, self::PAYLOAD_KEYS, 'payload');
+        }
 
         $data = $request->validate([
             'eventName' => ['required', 'string', 'max:64'],
-            'payload' => ['nullable', 'array:'.implode(',', self::PAYLOAD_KEYS)],
             'payload.entry_surface' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.source_page_type' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.target_action' => ['nullable', 'string', 'max:128', 'regex:/\A[a-z0-9]+(?:_[a-z0-9]+)*\z/'],
+            'payload.slug' => ['nullable', 'string', 'max:128', 'regex:/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/'],
             'payload.test_slug' => ['nullable', 'string', 'max:128', 'regex:/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/'],
+            'payload.scaleCode' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.scale_code' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.form_code' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.landing_path' => ['nullable', 'string', 'max:512', 'regex:/\A\/[^\r\n]*\z/'],
+            'payload.current_path' => ['nullable', 'string', 'max:512', 'regex:/\A\/[^\r\n]*\z/'],
             'payload.locale' => ['nullable', 'string', 'max:16', 'in:en,zh,zh-cn,zh-CN'],
             'payload.attempt_id' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.attemptIdMasked' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.target_attempt_id' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.answered_count' => ['nullable', 'integer', 'min:0', 'max:1000'],
+            'payload.durationMs' => ['nullable', 'integer', 'min:0', 'max:86400000'],
+            'payload.duration_ms' => ['nullable', 'integer', 'min:0', 'max:86400000'],
+            'payload.duration_bucket' => ['nullable', 'string', 'max:32', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.order_no' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.orderNo' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.orderNoMasked' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.order_id' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.transaction_id' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.amount' => ['nullable', 'numeric', 'min:0'],
+            'payload.value' => ['nullable', 'numeric', 'min:0'],
+            'payload.price' => ['nullable', 'numeric', 'min:0'],
+            'payload.currency' => ['nullable', 'string', 'size:3', 'regex:/\A[A-Z]{3}\z/'],
+            'payload.provider' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.pack_version' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.manifest_hash' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.norms_version' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.quality_level' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.locked' => ['nullable', 'boolean'],
+            'payload.variant' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.sku_id' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.utm_source' => ['nullable', 'string', 'max:128', 'regex:/\A[^\r\n]*\z/'],
+            'payload.utm_medium' => ['nullable', 'string', 'max:128', 'regex:/\A[^\r\n]*\z/'],
+            'payload.utm_campaign' => ['nullable', 'string', 'max:128', 'regex:/\A[^\r\n]*\z/'],
+            'payload.utm_term' => ['nullable', 'string', 'max:128', 'regex:/\A[^\r\n]*\z/'],
+            'payload.utm_content' => ['nullable', 'string', 'max:128', 'regex:/\A[^\r\n]*\z/'],
+            'payload.gclid' => ['nullable', 'string', 'max:256', 'regex:/\A[^\r\n]*\z/'],
+            'payload.msclkid' => ['nullable', 'string', 'max:256', 'regex:/\A[^\r\n]*\z/'],
+            'payload.fbclid' => ['nullable', 'string', 'max:256', 'regex:/\A[^\r\n]*\z/'],
+            'payload.referrer' => ['nullable', 'string', 'max:512', 'regex:/\A[^\r\n]*\z/'],
+            'payload.session_id' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'anonymousId' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'path' => ['nullable', 'string', 'max:512', 'regex:/\A\/[^\r\n]*\z/'],
             'timestamp' => ['nullable', 'date'],
@@ -122,6 +203,12 @@ final class MbtiAttributionEventController extends Controller
             ?? ($path !== '' && str_starts_with($path, '/zh') ? 'zh' : 'en');
 
         $orgId = $this->resolveOrgId($request);
+        $scaleCode = $this->normalizeOptionalString(
+            $payload['scale_code']
+                ?? $payload['scaleCode']
+                ?? null,
+            64
+        ) ?? 'MBTI';
 
         $attributes = [
             'id' => (string) Str::uuid(),
@@ -132,7 +219,7 @@ final class MbtiAttributionEventController extends Controller
             'attempt_id' => $attemptId,
             'meta_json' => $meta,
             'occurred_at' => $occurredAt,
-            'scale_code' => 'MBTI',
+            'scale_code' => $scaleCode,
             'channel' => 'web',
             'locale' => $locale,
             'created_at' => now(),
@@ -140,7 +227,7 @@ final class MbtiAttributionEventController extends Controller
         ];
 
         if (SchemaBaseline::hasColumn('events', 'scale_code_v2')) {
-            $attributes['scale_code_v2'] = 'MBTI';
+            $attributes['scale_code_v2'] = $scaleCode;
         }
 
         Event::query()->create($attributes);
