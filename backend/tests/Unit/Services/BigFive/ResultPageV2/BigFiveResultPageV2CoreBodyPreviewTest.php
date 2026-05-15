@@ -228,6 +228,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_cms_media_pipeline_files(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Resources/ArticleResource.php',
+            'backend/app/Filament/Ops/Resources/MediaAssetResource.php',
+            'backend/app/Filament/Ops/Resources/MediaAssetResource/Pages/CreateMediaAsset.php',
+            'backend/app/Filament/Ops/Resources/MediaAssetResource/Pages/EditMediaAsset.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php',
+            'backend/app/Models/MediaAsset.php',
+            'backend/app/Models/MediaVariant.php',
+            'backend/app/Services/Cms/MediaAssetStorageSyncService.php',
+            'backend/database/migrations/2026_05_16_000100_add_media_asset_sync_status.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_public_recency_ordering_only(): void
     {
         $changed = [
@@ -1303,6 +1320,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCmsMediaPipelineFile($file)) {
+                continue;
+            }
+
             if ($this->isCommercePaymentActionFile($file)) {
                 continue;
             }
@@ -1608,6 +1629,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Filament/Ops/Support/ContentReleaseFollowUp.php',
             'backend/app/Services/Cms/ContentReleasePathPlanner.php',
+        ], true);
+    }
+
+    private function isCmsMediaPipelineFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Resources/ArticleResource.php',
+            'backend/app/Filament/Ops/Resources/MediaAssetResource.php',
+            'backend/app/Filament/Ops/Resources/MediaAssetResource/Pages/CreateMediaAsset.php',
+            'backend/app/Filament/Ops/Resources/MediaAssetResource/Pages/EditMediaAsset.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php',
+            'backend/app/Models/MediaAsset.php',
+            'backend/app/Models/MediaVariant.php',
+            'backend/app/Services/Cms/MediaAssetStorageSyncService.php',
+            'backend/database/migrations/2026_05_16_000100_add_media_asset_sync_status.php',
         ], true);
     }
 

@@ -69,6 +69,7 @@ prs:
       - backend/database/migrations/**
       - backend/tests/Feature/V0_5/MediaLibraryOssSyncTest.php
       - backend/tests/Feature/V0_5/InternalCmsRouteAuthTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -81,9 +82,10 @@ prs:
     validation:
       - php artisan test tests/Feature/V0_5/MediaLibraryOssSyncTest.php --no-ansi
       - php artisan test tests/Feature/V0_5/InternalCmsRouteAuthTest.php --no-ansi
+      - php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi
       - php artisan route:list --no-ansi
       - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
-      - vendor/bin/pint --test app/Models/MediaAsset.php app/Models/MediaVariant.php app/Services/Cms/MediaAssetStorageSyncService.php app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php app/Filament/Ops/Resources/MediaAssetResource.php app/Filament/Ops/Resources/MediaAssetResource/Pages/CreateMediaAsset.php app/Filament/Ops/Resources/MediaAssetResource/Pages/EditMediaAsset.php app/Filament/Ops/Resources/ArticleResource.php tests/Feature/V0_5/MediaLibraryOssSyncTest.php database/migrations/2026_05_16_000100_add_media_asset_sync_status.php
+      - vendor/bin/pint --test app/Models/MediaAsset.php app/Models/MediaVariant.php app/Services/Cms/MediaAssetStorageSyncService.php app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php app/Filament/Ops/Resources/MediaAssetResource.php app/Filament/Ops/Resources/MediaAssetResource/Pages/CreateMediaAsset.php app/Filament/Ops/Resources/MediaAssetResource/Pages/EditMediaAsset.php app/Filament/Ops/Resources/ArticleResource.php tests/Feature/V0_5/MediaLibraryOssSyncTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php database/migrations/2026_05_16_000100_add_media_asset_sync_status.php
       - git diff --check
       - git diff --cached --check
     merge_policy:
