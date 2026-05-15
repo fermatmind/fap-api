@@ -37,7 +37,6 @@ if (!is_string($source)) {
 $checks = [
     "v0.2 retired_prefix" => "/Route::prefix\\(\\s*[\\x27\\x22]v0\\.2[\\x27\\x22]\\s*\\)/s",
     "v0.2 retired_any_route" => "/Route::any\\(\\s*[\\x27\\x22]\\/\\{any\\?\\}[\\x27\\x22]\\s*,\\s*static\\s+function\\s*\\(\\s*\\)\\s*\\{/s",
-    "v0.3 attempts_submit_auth" => "/Route::post\\(\\s*[\\x27\\x22]\\/attempts\\/submit[\\x27\\x22]\\s*,\\s*\\[\\s*AttemptWriteController::class\\s*,\\s*[\\x27\\x22]submit[\\x27\\x22]\\s*\\]\\s*\\)\\s*->middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*\\)\\s*;/s",
     "v0.3 auth_plus_ctx_group" => "/Route::middleware\\(\\s*\\[\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*,\\s*ResolveO[r]gContext::class\\s*\\]\\s*\\)\\s*->\\s*group\\s*\\(/s",
 ];
 
@@ -45,6 +44,19 @@ $missing = [];
 foreach ($checks as $name => $regex) {
     if (preg_match($regex, $source) !== 1) {
         $missing[] = $name;
+    }
+}
+
+$submitRouteRegex = "/Route::post\\(\\s*[\\x27\\x22]\\/attempts\\/submit[\\x27\\x22]\\s*,\\s*\\[\\s*AttemptWriteController::class\\s*,\\s*[\\x27\\x22]submit[\\x27\\x22]\\s*\\]\\s*\\)\\s*->middleware\\(\\s*\\[(?<middleware>[^\\]]*)\\]\\s*\\)\\s*->defaults\\(\\s*[\\x27\\x22]public_realm[\\x27\\x22]\\s*,\\s*true\\s*\\)/s";
+if (preg_match($submitRouteRegex, $source, $submitMatch) !== 1) {
+    $missing[] = "v0.3 attempts_submit_auth";
+} else {
+    $submitMiddleware = (string) ($submitMatch["middleware"] ?? "");
+    if (
+        preg_match("/[\\x27\\x22]throttle:api_attempt_submit[\\x27\\x22]/", $submitMiddleware) !== 1
+        || preg_match("/\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class/", $submitMiddleware) !== 1
+    ) {
+        $missing[] = "v0.3 attempts_submit_auth";
     }
 }
 
