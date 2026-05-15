@@ -51,6 +51,7 @@ use App\Console\Commands\CareerPlanCanonical80TargetDelta;
 use App\Console\Commands\CareerPlanCanonicalDeltaRolloutGate;
 use App\Console\Commands\CareerPlanCanonicalProgressiveCohortDelta;
 use App\Console\Commands\CareerPlanCanonicalProgressiveLiveVerification;
+use App\Console\Commands\CareerPlanCanonicalProgressiveReadinessSelection;
 use App\Console\Commands\CareerPlanCanonicalRolloutBatchTransition;
 use App\Console\Commands\CareerPlanCanonicalRuntimeArtifactRefresh;
 use App\Console\Commands\CareerPlanCanonicalRuntimeCandidatePrep;
@@ -224,6 +225,7 @@ class Kernel extends ConsoleKernel
         CareerPlanCanonicalDeltaRolloutGate::class,
         CareerPlanCanonicalProgressiveCohortDelta::class,
         CareerPlanCanonicalProgressiveLiveVerification::class,
+        CareerPlanCanonicalProgressiveReadinessSelection::class,
         CareerPlanCanonicalRolloutBatchTransition::class,
         CareerPlanCanonicalRuntimeArtifactRefresh::class,
         CareerPlanCanonicalRuntimeCandidatePrep::class,
