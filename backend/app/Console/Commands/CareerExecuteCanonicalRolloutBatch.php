@@ -127,6 +127,10 @@ final class CareerExecuteCanonicalRolloutBatch extends Command
             throw new \RuntimeException('projection artifact is not valid JSON: '.$path);
         }
 
+        if (is_array($payload['items'] ?? null)) {
+            return $payload;
+        }
+
         return is_array($payload['projection'] ?? null) ? $payload['projection'] : $payload;
     }
 

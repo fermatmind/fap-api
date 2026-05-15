@@ -465,6 +465,44 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-ROLLOUT-CANDIDATE-AWARE-PROJECTION-ARTIFACT-SHAPE-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-RUNTIME-PROJECTION-LOOKUP-LATEST-SELECTION-1
+    branch: codex/repair-rollout-candidate-aware-projection-artifact-shape-1
+    title: "fix(api): normalize candidate-aware rollout projection artifacts"
+    name: "Fix rollout candidate-aware projection artifact normalization"
+    scope:
+      - Make canonical rollout dry-run consume top-level candidate-aware projection items when a projection artifact also contains projection metadata.
+      - Preserve legacy projection-wrapped artifact support for existing rollout dry-run flows.
+      - Prevent metadata or stale nested projection rows from being treated as the candidate row authority.
+      - Preserve strict rollout gates and final live acceptance semantics.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerExecuteCanonicalRolloutBatch.php
+      - backend/tests/Feature/Console/CareerExecuteCanonicalRolloutBatchTest.php
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout dry-run.
+      - Run rollout apply.
+      - Run candidate preparation apply.
+      - Run production DB mutation.
+      - Run rollback or quarantine.
+      - Run deploy.
+      - Touch fap-web.
+      - Weaken final live acceptance.
+      - Treat candidate-aware planning artifacts as final published authority.
+    validation:
+      - php artisan test --filter=CareerExecuteCanonicalRolloutBatch --no-ansi
+      - php artisan test --filter=CanonicalBatchPromotionExecutorService --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
     repo: fap-api
     depends_on:
