@@ -15,7 +15,9 @@ use App\Filament\Ops\Support\OpsTable;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
+use App\Models\MediaAsset;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
+use App\Support\PublicMediaUrlGuard;
 use Filament\Forms;
 use Filament\Forms\Components\BelongsToManyMultiSelect;
 use Filament\Forms\Form;
@@ -139,6 +141,28 @@ class ArticleResource extends Resource
                                     ->minValue(1)
                                     ->maxValue(1440)
                                     ->helperText(__('ops.resources.articles.helpers.reading_minutes')),
+                                Forms\Components\Select::make('cover_media_asset_id')
+                                    ->label('CMS media cover')
+                                    ->helperText('Select a Media Library asset to populate article cover URL, dimensions, alt, and variants.')
+                                    ->dehydrated(false)
+                                    ->searchable()
+                                    ->getSearchResultsUsing(fn (string $search): array => self::mediaAssetOptions($search))
+                                    ->getOptionLabelUsing(fn (mixed $value): ?string => self::mediaAssetLabel($value))
+                                    ->live()
+                                    ->afterStateUpdated(function (mixed $state, Forms\Set $set): void {
+                                        $asset = self::resolveMediaAsset($state);
+                                        if (! $asset instanceof MediaAsset) {
+                                            return;
+                                        }
+
+                                        $payload = self::articleCoverPayload($asset);
+                                        $set('cover_image_url', $payload['cover_image_url']);
+                                        $set('cover_image_alt', $payload['cover_image_alt']);
+                                        $set('cover_image_width', $payload['cover_image_width']);
+                                        $set('cover_image_height', $payload['cover_image_height']);
+                                        $set('cover_image_variants', $payload['cover_image_variants']);
+                                    })
+                                    ->columnSpanFull(),
                                 Forms\Components\TextInput::make('cover_image_url')
                                     ->label(__('ops.resources.articles.fields.cover_image_url'))
                                     ->maxLength(255)
@@ -645,6 +669,102 @@ class ArticleResource extends Resource
     private static function revisionWorkspace(): ArticleTranslationRevisionWorkspace
     {
         return app(ArticleTranslationRevisionWorkspace::class);
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private static function mediaAssetOptions(string $search): array
+    {
+        $search = trim($search);
+
+        return MediaAsset::query()
+            ->withoutGlobalScopes()
+            ->publishedPublic()
+            ->when($search !== '', fn (Builder $query) => $query
+                ->where(function (Builder $nested) use ($search): void {
+                    $nested->where('asset_key', 'like', '%'.$search.'%')
+                        ->orWhere('alt', 'like', '%'.$search.'%');
+                }))
+            ->orderByDesc('updated_at')
+            ->limit(50)
+            ->get()
+            ->mapWithKeys(fn (MediaAsset $asset): array => [
+                (int) $asset->id => self::mediaAssetOptionLabel($asset),
+            ])
+            ->all();
+    }
+
+    private static function mediaAssetLabel(mixed $value): ?string
+    {
+        $asset = self::resolveMediaAsset($value);
+
+        return $asset instanceof MediaAsset ? self::mediaAssetOptionLabel($asset) : null;
+    }
+
+    private static function mediaAssetOptionLabel(MediaAsset $asset): string
+    {
+        return sprintf(
+            '%s · %s · %s',
+            (string) $asset->asset_key,
+            (string) ($asset->alt ?? 'no alt'),
+            (string) ($asset->cdn_status ?? MediaAsset::CDN_NOT_VERIFIED)
+        );
+    }
+
+    private static function resolveMediaAsset(mixed $value): ?MediaAsset
+    {
+        $id = (int) $value;
+        if ($id <= 0) {
+            return null;
+        }
+
+        return MediaAsset::query()
+            ->withoutGlobalScopes()
+            ->with('variants')
+            ->where('org_id', 0)
+            ->whereKey($id)
+            ->first();
+    }
+
+    /**
+     * @return array{cover_image_url: ?string, cover_image_alt: ?string, cover_image_width: ?int, cover_image_height: ?int, cover_image_variants: array<string, array<string, mixed>>}
+     */
+    private static function articleCoverPayload(MediaAsset $asset): array
+    {
+        $asset->loadMissing('variants');
+        $variants = [];
+
+        foreach ($asset->variants as $variant) {
+            $key = trim((string) $variant->variant_key);
+            if ($key === '' || $key === 'original') {
+                continue;
+            }
+
+            $url = PublicMediaUrlGuard::canonicalMediaUrl((string) $asset->disk, $variant->path, $variant->url);
+            if ($url === null) {
+                continue;
+            }
+
+            $variants[$key] = [
+                'url' => $url,
+                'width' => $variant->width,
+                'height' => $variant->height,
+                'mime_type' => $variant->mime_type,
+            ];
+        }
+
+        $cover = $variants['hero']['url']
+            ?? $variants['card']['url']
+            ?? PublicMediaUrlGuard::canonicalMediaUrl((string) $asset->disk, $asset->path, $asset->url);
+
+        return [
+            'cover_image_url' => $cover,
+            'cover_image_alt' => $asset->alt,
+            'cover_image_width' => $asset->width,
+            'cover_image_height' => $asset->height,
+            'cover_image_variants' => $variants,
+        ];
     }
 
     public static function releaseRecord(Article $record, string $source = 'resource_table'): void

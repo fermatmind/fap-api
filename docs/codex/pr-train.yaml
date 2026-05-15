@@ -40,6 +40,57 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: PR-MEDIA-01
+    repo: fap-api
+    depends_on:
+      - PR-CMS-01
+      - PR-CMS-02
+      - PR-CMS-03
+      - PR-CMS-04
+    branch: codex/pr-media-01-oss-cdn
+    title: "PR-MEDIA-01｜CMS Media Library OSS/CDN Upload Automation"
+    scope:
+      - Automate CMS Media Library source upload, variant generation, OSS sync, CDN verification, and visible sync status.
+      - Let ArticleResource populate article cover metadata from a MediaAsset without changing article body content.
+      - Keep MediaAsset/MediaVariant as backend CMS media authority and keep fap-web as a renderer only.
+      - Record sync failures without failing CMS upload so editors can retry from Ops.
+    allowed_paths:
+      - backend/.env.example
+      - backend/config/fap.php
+      - backend/app/Models/MediaAsset.php
+      - backend/app/Models/MediaVariant.php
+      - backend/app/Services/Cms/MediaAssetStorageSyncService.php
+      - backend/app/Services/Cms/MediaVariantGenerator.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php
+      - backend/app/Filament/Ops/Resources/MediaAssetResource.php
+      - backend/app/Filament/Ops/Resources/MediaAssetResource/Pages/CreateMediaAsset.php
+      - backend/app/Filament/Ops/Resources/MediaAssetResource/Pages/EditMediaAsset.php
+      - backend/app/Filament/Ops/Resources/ArticleResource.php
+      - backend/database/migrations/**
+      - backend/tests/Feature/V0_5/MediaLibraryOssSyncTest.php
+      - backend/tests/Feature/V0_5/InternalCmsRouteAuthTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Do not change article body content.
+      - Do not publish, unpublish, import, or mutate production content.
+      - Do not touch fap-web.
+      - Do not touch user attempts, results, reports, orders, payments, shares, scoring, result pages, payment, or invite flows.
+      - Do not make Tencent/COS or frontend static assets the media authority.
+      - Do not trigger production revalidate or deployment.
+    validation:
+      - php artisan test tests/Feature/V0_5/MediaLibraryOssSyncTest.php --no-ansi
+      - php artisan test tests/Feature/V0_5/InternalCmsRouteAuthTest.php --no-ansi
+      - php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi
+      - php artisan route:list --no-ansi
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - vendor/bin/pint --test app/Models/MediaAsset.php app/Models/MediaVariant.php app/Services/Cms/MediaAssetStorageSyncService.php app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php app/Filament/Ops/Resources/MediaAssetResource.php app/Filament/Ops/Resources/MediaAssetResource/Pages/CreateMediaAsset.php app/Filament/Ops/Resources/MediaAssetResource/Pages/EditMediaAsset.php app/Filament/Ops/Resources/ArticleResource.php tests/Feature/V0_5/MediaLibraryOssSyncTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php database/migrations/2026_05_16_000100_add_media_asset_sync_status.php
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: PR-GRAPH-01
     repo: fap-api
     depends_on:

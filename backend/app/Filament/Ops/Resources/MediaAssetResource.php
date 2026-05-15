@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\MediaAssetResource\Pages;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\OpsTable;
 use App\Models\MediaAsset;
+use App\Services\Cms\MediaAssetStorageSyncService;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -135,6 +136,17 @@ class MediaAssetResource extends Resource
                 ->columns(2),
             Forms\Components\Section::make('Metadata')
                 ->schema([
+                    Forms\Components\Placeholder::make('sync_state')
+                        ->label('OSS/CDN state')
+                        ->content(fn (?MediaAsset $record): string => $record instanceof MediaAsset
+                            ? sprintf(
+                                'sync=%s, cdn=%s%s',
+                                (string) ($record->sync_status ?? MediaAsset::SYNC_PENDING),
+                                (string) ($record->cdn_status ?? MediaAsset::CDN_NOT_VERIFIED),
+                                $record->last_error ? ', error='.$record->last_error : ''
+                            )
+                            : 'sync=pending, cdn=not_verified')
+                        ->columnSpanFull(),
                     Forms\Components\Textarea::make('payload_json')
                         ->label('Asset metadata')
                         ->rows(8)
@@ -203,6 +215,14 @@ class MediaAssetResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 OpsTable::status(),
+                Tables\Columns\TextColumn::make('sync_status')
+                    ->label('OSS')
+                    ->badge()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('cdn_status')
+                    ->label('CDN')
+                    ->badge()
+                    ->sortable(),
                 Tables\Columns\IconColumn::make('is_public')
                     ->label(__('ops.table.public'))
                     ->boolean()
@@ -227,6 +247,11 @@ class MediaAssetResource extends Resource
             ->defaultSort('asset_key')
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('retry_sync')
+                    ->label('Retry OSS/CDN sync')
+                    ->icon('heroicon-o-arrow-path')
+                    ->visible(fn (): bool => self::canWrite())
+                    ->action(fn (MediaAsset $record): MediaAsset => app(MediaAssetStorageSyncService::class)->syncAndVerify($record)),
             ])
             ->bulkActions([]);
     }
