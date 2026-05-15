@@ -508,6 +508,39 @@ prs:
       squash: true
 
 
+  - id: PR-CMS-FIX-MASTER
+    repo: fap-api
+    depends_on:
+      - PR-CMS-01
+    branch: codex/pr-cms-fix-master-semantic-content-gate
+    title: "PR-CMS-FIX-MASTER｜Scalable Semantic Content Gate Architecture"
+    scope:
+      - Replace hard-coded evergreen definition heading matching with reusable semantic anchor configuration.
+      - Add multilingual definition, origin, methodology, and utility anchor intent groups for editorial package gates.
+      - Support case-insensitive heading matching across Chinese/English punctuation and mixed-language headings.
+      - Keep editorial package imports draft-only and do not mutate published content.
+    allowed_paths:
+      - backend/app/Services/Cms/EditorialPackage/Config/EvergreenAnchors.php
+      - backend/app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php
+      - backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Import or publish articles.
+      - Modify article bodies, metadata, baselines, or production content.
+      - Touch fap-web.
+      - Touch user attempts, results, reports, orders, payments, shares, scoring, result pages, payment, invite, or raw answers.
+      - Add LLM runtime dependencies.
+    validation:
+      - php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test app/Services/Cms/EditorialPackage/Config/EvergreenAnchors.php app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php
+      - php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: career-runtime-publish-projection
     repo: fap-api
     branch: codex/career-runtime-publish-projection

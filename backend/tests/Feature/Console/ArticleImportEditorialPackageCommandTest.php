@@ -60,6 +60,38 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_evergreen_definition_gate_accepts_multilingual_semantic_anchor_headings(): void
+    {
+        $cases = [
+            'mbti-origin' => 'MBTI 从哪里来？',
+            'big-five-origin' => '大五人格的起源',
+            'eq-definition' => '什么是情商测试',
+            'holland-birth' => 'The birth of Holland career-interest theory',
+            'big-five-what-is' => 'What is a Big Five personality test?',
+            'dimension-methodology' => '测量维度：MBTI 四个偏好',
+        ];
+
+        foreach ($cases as $slugSuffix => $definitionHeading) {
+            $path = $this->writePackage($this->evergreenPackage([
+                'slug' => 'semantic-anchor-'.$slugSuffix,
+                'body_markdown' => "# Semantic Anchor\n\n## {$definitionHeading}\n\nThis section gives the core concept, background, or definition.\n\n## Methodology and theory\n\nThis section explains the model, measures, and framework behind the assessment.\n\n## FAQ\n\n### Is this a prediction tool?\n\nNo. It is an exploratory signal.\n\n## Conclusion\n\nUse the result as one decision input.",
+            ]));
+
+            $this->artisan('articles:import-editorial-package', [
+                '--file' => $path,
+                '--locale' => 'zh-CN',
+                '--dry-run' => true,
+            ])
+                ->expectsOutputToContain('dry_run=1')
+                ->expectsOutputToContain('action=will_create')
+                ->expectsOutputToContain('errors_count=0')
+                ->assertExitCode(0);
+        }
+
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+    }
+
     public function test_import_creates_non_public_cms_draft_with_exact_body_metadata_and_answer_surface_boundary(): void
     {
         $package = $this->editorialPackage([

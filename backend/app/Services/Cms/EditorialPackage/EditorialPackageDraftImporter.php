@@ -11,6 +11,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
+use App\Services\Cms\EditorialPackage\Config\EvergreenAnchors;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -93,31 +94,6 @@ final class EditorialPackageDraftImporter
         '一定适合' => '可能适合探索',
         '职业成功率' => '工作结构线索',
         '录用概率' => '职业准备线索',
-    ];
-
-    private const EVERGREEN_DEFINITION_HEADING_TERMS = [
-        'definition',
-        'what does',
-        'measure',
-        '定义',
-        '是什么',
-        '测什么',
-    ];
-
-    private const EVERGREEN_METHOD_HEADING_TERMS = [
-        'method',
-        'theory',
-        'model',
-        'framework',
-        'science',
-        'measure',
-        '方法',
-        '理论',
-        '模型',
-        '框架',
-        '科学',
-        '逻辑',
-        '如何正确使用',
     ];
 
     private const CLAIM_BOUNDARY_CONTEXT_TERMS = [
@@ -514,10 +490,10 @@ final class EditorialPackageDraftImporter
         $headingText = mb_strtolower(implode("\n", $headings));
 
         if ($package['content_track'] === 'evergreen_knowledge') {
-            if (! $this->containsAny($headingText, self::EVERGREEN_DEFINITION_HEADING_TERMS)) {
+            if (! $this->matchesSemanticAnchor($headings, EvergreenAnchors::definitionGateIntentGroups())) {
                 $errors[] = $this->issue('body_markdown', 'evergreen_definition_required', 'evergreen_knowledge requires a definition section.');
             }
-            if (! $this->containsAny($headingText, self::EVERGREEN_METHOD_HEADING_TERMS)) {
+            if (! $this->matchesSemanticAnchor($headings, EvergreenAnchors::methodologyGateIntentGroups())) {
                 $errors[] = $this->issue('body_markdown', 'evergreen_method_required', 'evergreen_knowledge requires method or theory explanation.');
             }
             if (! str_contains($headingText, 'faq') && ! str_contains($headingText, '常见问题') && ! str_contains($headingText, 'key questions')) {
@@ -624,6 +600,32 @@ final class EditorialPackageDraftImporter
             }
         }
 
+        return false;
+    }
+
+    /**
+     * @param  list<string>  $headings
+     * @param  list<string>  $intentGroups
+     */
+    private function matchesSemanticAnchor(array $headings, array $intentGroups): bool
+    {
+        if (EvergreenAnchors::matchesAnyIntent($headings, $intentGroups)) {
+            return true;
+        }
+
+        return $this->checkByLLM($headings, $intentGroups);
+    }
+
+    /**
+     * Future semantic fallback hook. Intentionally disabled for now so the importer
+     * remains deterministic; when rules miss high-value multilingual headings, this
+     * can delegate to a small local LLM without changing the gate call site.
+     *
+     * @param  list<string>  $headings
+     * @param  list<string>  $intentGroups
+     */
+    private function checkByLLM(array $headings, array $intentGroups): bool
+    {
         return false;
     }
 
