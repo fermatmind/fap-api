@@ -667,6 +667,46 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: 2786-CN-PROXY-PUBLIC-OWNER-PR-TRAIN-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-2786-FINAL-PUBLIC-RESOLUTION-PARTITION-1
+      - CN-PROXY-AUTHORITY-POLICY-DECISION-1
+      - 2786-CN-PROXY-TRUST-MANIFEST-REVIEW-1
+    branch: codex/2786-cn-proxy-public-owner-pr-train-1
+    title: "fix(api): gate reviewed CN proxy public owner plan"
+    name: "Gate reviewed CN proxy public owner plan for 2786"
+    scope:
+      - Extend the read-only CN proxy public owner validator to consume a reviewed trust manifest.
+      - Mark the separate noindex public CN proxy owner plan ready only when reviewed manifest evidence is complete.
+      - Preserve canonical rollout exclusion, noindex, sitemap, llms, llms-full, and no public route exposure semantics.
+      - Keep the command read-only with no DB mutation, deploy, candidate prep, rollout, or frontend change.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerValidateCnProxyPublicOwner.php
+      - backend/tests/Feature/Console/CareerValidateCnProxyPublicOwnerCommandTest.php
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run 2786 readiness execution.
+      - Run candidate prep dry-run or apply.
+      - Run rollout dry-run.
+      - Run rollout apply.
+      - Run backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+      - Enable CN proxy indexability, sitemap, llms, llms-full, or public route exposure.
+      - Mark CN proxy rows as canonical rollout candidates.
+    validation:
+      - php artisan test --filter=CareerValidateCnProxyPublicOwner --no-ansi
+      - php artisan test --filter=CareerValidateCnTrustManifest --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
     repo: fap-api
     depends_on:
