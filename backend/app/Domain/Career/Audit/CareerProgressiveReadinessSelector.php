@@ -26,6 +26,7 @@ final class CareerProgressiveReadinessSelector
         array $excludeSlugs = [],
         ?array $occupationExistingSlugs = null,
         ?array $cnProxyPublicOwnerPlan = null,
+        ?array $softwareManualHoldDecision = null,
         bool $strict = false,
     ): CareerProgressiveReadinessSelectionResult {
         $locales = $this->normalizedStringList($locales, 'locale');
@@ -44,10 +45,17 @@ final class CareerProgressiveReadinessSelector
         foreach ($cnProxyPublicOwnerAuthority['issues'] as $issue) {
             $issues[] = $issue;
         }
+        $softwareManualHoldAuthority = $this->softwareManualHoldAuthority($softwareManualHoldDecision, $targetPublicTotal);
+        foreach ($softwareManualHoldAuthority['issues'] as $issue) {
+            $issues[] = $issue;
+        }
         $publicOwnerDeltaCount = $cnProxyPublicOwnerAuthority['ready']
             ? min((int) $cnProxyPublicOwnerAuthority['public_owner_count'], $deltaNeeded)
             : 0;
-        $canonicalDeltaNeeded = max(0, $deltaNeeded - $publicOwnerDeltaCount);
+        $softwareManualHoldDeltaCount = $softwareManualHoldAuthority['ready']
+            ? min((int) $softwareManualHoldAuthority['governed_non_public_count'], max(0, $deltaNeeded - $publicOwnerDeltaCount))
+            : 0;
+        $canonicalDeltaNeeded = max(0, $deltaNeeded - $publicOwnerDeltaCount - $softwareManualHoldDeltaCount);
         $candidates = [];
         $selectedSlugs = [];
         $duplicateSourceSlugs = [];
@@ -138,20 +146,21 @@ final class CareerProgressiveReadinessSelector
         }
 
         if (count($selectedSlugs) < $canonicalDeltaNeeded) {
-            $finalPublicAccountedCount = $currentPublicTotal + count($selectedSlugs) + $publicOwnerDeltaCount;
-            $reason = $publicOwnerDeltaCount > 0
+            $finalPublicAccountedCount = $currentPublicTotal + count($selectedSlugs) + $publicOwnerDeltaCount + $softwareManualHoldDeltaCount;
+            $reason = $publicOwnerDeltaCount > 0 || $softwareManualHoldDeltaCount > 0
                 ? 'insufficient_final_public_partition_authority'
                 : 'insufficient_source_ready_delta_slugs';
             $issues[] = new CareerProgressiveReadinessSelectionIssue(
                 reason: $reason,
-                message: $publicOwnerDeltaCount > 0
-                    ? 'Final 2786 public accounting still has an unresolved partition shortfall after CN proxy public-owner evidence.'
+                message: $publicOwnerDeltaCount > 0 || $softwareManualHoldDeltaCount > 0
+                    ? 'Final 2786 public accounting still has an unresolved partition shortfall after policy partition evidence.'
                     : 'Fewer than the required progressive delta source-ready slugs are available.',
                 severity: 'blocker_for_publication',
                 evidence: [
                     'required_delta_slug_count' => $deltaNeeded,
                     'required_canonical_delta_slug_count' => $canonicalDeltaNeeded,
                     'public_owner_delta_slug_count' => $publicOwnerDeltaCount,
+                    'software_manual_hold_delta_slug_count' => $softwareManualHoldDeltaCount,
                     'selected_count' => count($selectedSlugs),
                     'final_public_accounted_count' => $finalPublicAccountedCount,
                     'final_public_shortfall' => max(0, $targetPublicTotal - $finalPublicAccountedCount),
@@ -169,11 +178,13 @@ final class CareerProgressiveReadinessSelector
         ksort($excludedByReason);
         $targetSlugs = [...$baselineSlugs, ...$selectedSlugs];
         $status = $issues === [] ? 'pass' : 'blocked';
-        $finalPublicAccountedCount = $currentPublicTotal + count($selectedSlugs) + $publicOwnerDeltaCount;
+        $finalPublicAccountedCount = $currentPublicTotal + count($selectedSlugs) + $publicOwnerDeltaCount + $softwareManualHoldDeltaCount;
         $finalPublicShortfall = max(0, $targetPublicTotal - $finalPublicAccountedCount);
-        $selectionStrategy = $publicOwnerDeltaCount > 0
-            ? 'progressive_source_ready_after_closeout_baseline_with_public_owner_partition'
-            : 'progressive_source_ready_after_closeout_baseline';
+        $selectionStrategy = $softwareManualHoldDeltaCount > 0
+            ? 'progressive_source_ready_after_closeout_baseline_with_policy_partitions'
+            : ($publicOwnerDeltaCount > 0
+                ? 'progressive_source_ready_after_closeout_baseline_with_public_owner_partition'
+                : 'progressive_source_ready_after_closeout_baseline');
 
         return new CareerProgressiveReadinessSelectionResult([
             'schema_version' => self::SCHEMA_VERSION,
@@ -189,6 +200,7 @@ final class CareerProgressiveReadinessSelector
             'delta_slug_count' => $deltaNeeded,
             'canonical_delta_slug_count' => $canonicalDeltaNeeded,
             'public_owner_delta_slug_count' => $publicOwnerDeltaCount,
+            'software_manual_hold_delta_slug_count' => $softwareManualHoldDeltaCount,
             'selected_count' => count($selectedSlugs),
             'candidate_count' => $selectableCandidateCount,
             'source_ready_count' => $sourceReadyCount,
@@ -197,6 +209,7 @@ final class CareerProgressiveReadinessSelector
             'expected_delta_locale_rows' => $deltaNeeded * count($locales),
             'expected_canonical_delta_locale_rows' => $canonicalDeltaNeeded * count($locales),
             'expected_public_owner_locale_rows' => $publicOwnerDeltaCount * count($locales),
+            'expected_software_manual_hold_locale_rows' => $softwareManualHoldDeltaCount * count($locales),
             'expected_total_locale_rows' => $targetPublicTotal * count($locales),
             'final_public_accounted_count' => $finalPublicAccountedCount,
             'final_public_shortfall' => $finalPublicShortfall,
@@ -229,6 +242,7 @@ final class CareerProgressiveReadinessSelector
                 'occupation_missing_excluded_count' => $occupationMissingExcludedCount,
             ],
             'cn_proxy_public_owner_plan' => $cnProxyPublicOwnerAuthority['summary'],
+            'software_manual_hold_decision' => $softwareManualHoldAuthority['summary'],
             'excluded' => [
                 'excluded_by_reason' => $excludedByReason,
                 'baseline_excluded_count' => count($baselineSlugs),
@@ -461,6 +475,102 @@ final class CareerProgressiveReadinessSelector
         return [
             'ready' => false,
             'public_owner_count' => 0,
+            'issues' => [$issue],
+            'summary' => $summary,
+        ];
+    }
+
+    /**
+     * @return array{ready: bool, governed_non_public_count: int, issues: list<CareerProgressiveReadinessSelectionIssue>, summary: array<string, mixed>}
+     */
+    private function softwareManualHoldAuthority(?array $decision, int $targetPublicTotal): array
+    {
+        $summary = [
+            'provided' => $decision !== null,
+            'ready' => false,
+            'governed_non_public_count' => 0,
+            'source_path' => $decision['source_path'] ?? null,
+            'decision' => $decision['decision'] ?? null,
+            'governed_non_public_partition' => $decision['governed_non_public_partition'] ?? null,
+        ];
+
+        if ($decision === null) {
+            return [
+                'ready' => false,
+                'governed_non_public_count' => 0,
+                'issues' => [],
+                'summary' => $summary,
+            ];
+        }
+
+        if ($targetPublicTotal !== 2786) {
+            $issue = new CareerProgressiveReadinessSelectionIssue(
+                reason: 'software_manual_hold_decision_target_scope_invalid',
+                message: 'Software manual-hold decision evidence is valid only for the final 2786 readiness target.',
+                severity: 'high',
+                evidence: ['target_public_total' => $targetPublicTotal],
+            );
+
+            return [
+                'ready' => false,
+                'governed_non_public_count' => 0,
+                'issues' => [$issue],
+                'summary' => $summary,
+            ];
+        }
+
+        $count = (int) ($decision['governed_non_public_count'] ?? 0);
+        $required = [
+            'schema_version' => ($decision['schema_version'] ?? null) === 'career_2786_software_manual_hold_final_policy_decision.v1',
+            'status' => ($decision['status'] ?? null) === 'decided',
+            'slug' => ($decision['slug'] ?? null) === 'software-developers',
+            'decision' => ($decision['decision'] ?? null) === 'resolve_as_governed_non_public_manual_hold',
+            'accepted_for_final_resolution_accounting' => ($decision['accepted_for_final_resolution_accounting'] ?? null) === true,
+            'accepted_as_canonical_public_rollout_candidate' => ($decision['accepted_as_canonical_public_rollout_candidate'] ?? null) === false,
+            'accepted_as_public_nonindex_reference' => ($decision['accepted_as_public_nonindex_reference'] ?? null) === false,
+            'canonical_rollout_allowed' => ($decision['canonical_rollout_allowed'] ?? null) === false,
+            'candidate_prep_allowed' => ($decision['candidate_prep_allowed'] ?? null) === false,
+            'rollout_apply_allowed' => ($decision['rollout_apply_allowed'] ?? null) === false,
+            'public_route_allowed' => ($decision['public_route_allowed'] ?? null) === false,
+            'sitemap_allowed' => ($decision['sitemap_allowed'] ?? null) === false,
+            'llms_allowed' => ($decision['llms_allowed'] ?? null) === false,
+            'llms_full_allowed' => ($decision['llms_full_allowed'] ?? null) === false,
+            'governed_non_public_partition' => ($decision['governed_non_public_partition'] ?? null) === 'software_manual_hold',
+            'governed_non_public_count' => $count === 1,
+            'writes_database' => ($decision['writes_database'] ?? null) === false,
+            'blockers_not_resolved_empty' => ($decision['blockers_not_resolved_by_this_decision'] ?? []) === [],
+        ];
+        $failed = array_keys(array_filter($required, static fn (bool $passed): bool => ! $passed));
+        $summary = [
+            ...$summary,
+            'ready' => $failed === [],
+            'governed_non_public_count' => $failed === [] ? $count : 0,
+            'declared_governed_non_public_count' => $count,
+            'failed_requirements' => $failed,
+        ];
+
+        if ($failed === []) {
+            return [
+                'ready' => true,
+                'governed_non_public_count' => $count,
+                'issues' => [],
+                'summary' => $summary,
+            ];
+        }
+
+        $issue = new CareerProgressiveReadinessSelectionIssue(
+            reason: 'software_manual_hold_decision_invalid',
+            message: 'Software manual-hold decision cannot be used for final 2786 partition accounting.',
+            severity: 'blocker_for_publication',
+            evidence: [
+                'failed_requirements' => $failed,
+                'declared_governed_non_public_count' => $count,
+            ],
+        );
+
+        return [
+            'ready' => false,
+            'governed_non_public_count' => 0,
             'issues' => [$issue],
             'summary' => $summary,
         ];

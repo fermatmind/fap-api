@@ -103,6 +103,43 @@ final class CareerPlanCanonical2786PublicResolutionPartitionCommandTest extends 
         $this->assertFileExists($output);
     }
 
+    public function test_command_accounts_software_manual_hold_decision_without_unlocking_rollout_candidates(): void
+    {
+        $baseline = $this->slugs('baseline', 800);
+        $canonical = $this->slugs('canonical', 322);
+        $cnProxy = $this->slugs('policy', 1663, 'cn-');
+        $software = ['software-developers'];
+        $baselinePath = $this->writeSlugs('baseline', $baseline);
+        $output = $this->tempPath('output');
+
+        $exitCode = Artisan::call('career:plan-canonical-2786-public-resolution-partition', [
+            '--source-plan' => $this->writeSourcePlan([...$baseline, ...$canonical, ...$cnProxy, ...$software]),
+            '--closeout' => $this->writeCloseout($baselinePath),
+            '--current-total' => '800',
+            '--target-total' => '2786',
+            '--locales' => 'en,zh',
+            '--entity-context' => $this->writeEntityContext([...$baseline, ...$canonical, ...$cnProxy, ...$software], []),
+            '--cn-proxy-public-owner-plan' => $this->writeCnProxyPublicOwnerPlan(1663),
+            '--software-manual-hold-decision' => $this->writeSoftwareManualHoldDecision(),
+            '--json' => true,
+            '--output' => $output,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('pass', $payload['status']);
+        $this->assertTrue($payload['readiness_pass']);
+        $this->assertSame(322, $payload['canonical_rollout_candidate_count']);
+        $this->assertSame(1, $payload['software_manual_hold_count']);
+        $this->assertSame(1, $payload['software_manual_hold_decision_count']);
+        $this->assertSame(0, $payload['software_manual_hold_unresolved_count']);
+        $this->assertSame(2786, $payload['final_public_accounted_total']);
+        $this->assertSame(0, $payload['final_public_shortfall']);
+        $this->assertTrue($payload['software_manual_hold_decision']['ready']);
+        $this->assertNotContains('SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1', $payload['next_required_actions']);
+        $this->assertFileExists($output);
+    }
+
     public function test_missing_source_plan_blocks_without_mutation(): void
     {
         $baselinePath = $this->writeSlugs('baseline', $this->slugs('baseline', 800));
@@ -239,6 +276,30 @@ final class CareerPlanCanonical2786PublicResolutionPartitionCommandTest extends 
             'llms_full_CN_urls' => 0,
             'guarded_public_owner_state' => 'reviewed_noindex_public_cn_proxy_page_ready_for_separate_owner_train',
             'blockers' => [],
+        ]);
+    }
+
+    private function writeSoftwareManualHoldDecision(): string
+    {
+        return $this->writeJson('software-manual-hold-decision', [
+            'schema_version' => 'career_2786_software_manual_hold_final_policy_decision.v1',
+            'status' => 'decided',
+            'slug' => 'software-developers',
+            'decision' => 'resolve_as_governed_non_public_manual_hold',
+            'accepted_for_final_resolution_accounting' => true,
+            'accepted_as_canonical_public_rollout_candidate' => false,
+            'accepted_as_public_nonindex_reference' => false,
+            'canonical_rollout_allowed' => false,
+            'candidate_prep_allowed' => false,
+            'rollout_apply_allowed' => false,
+            'public_route_allowed' => false,
+            'sitemap_allowed' => false,
+            'llms_allowed' => false,
+            'llms_full_allowed' => false,
+            'governed_non_public_partition' => 'software_manual_hold',
+            'governed_non_public_count' => 1,
+            'writes_database' => false,
+            'blockers_not_resolved_by_this_decision' => [],
         ]);
     }
 

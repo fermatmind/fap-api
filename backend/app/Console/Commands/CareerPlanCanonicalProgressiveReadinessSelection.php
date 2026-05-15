@@ -21,6 +21,7 @@ final class CareerPlanCanonicalProgressiveReadinessSelection extends Command
         {--locales=en,zh : Comma-separated locales}
         {--entity-context= : Optional production-derived entity context JSON; if supplied, selected delta slugs must have occupation_exists=true}
         {--cn-proxy-public-owner-plan= : Optional reviewed CN proxy public-owner plan JSON for final 2786 partition accounting}
+        {--software-manual-hold-decision= : Optional reviewed software-developers manual-hold decision JSON for final 2786 partition accounting}
         {--exclude-slugs= : Optional newline, comma, or JSON slug artifact to exclude}
         {--strict : Fail on source-plan validation issues}
         {--json : Emit JSON output}
@@ -47,11 +48,18 @@ final class CareerPlanCanonicalProgressiveReadinessSelection extends Command
             $excludePath = $this->pathOption('exclude-slugs');
             $entityContextPath = $this->pathOption('entity-context');
             $cnProxyPublicOwnerPlanPath = $this->pathOption('cn-proxy-public-owner-plan');
+            $softwareManualHoldDecisionPath = $this->pathOption('software-manual-hold-decision');
             $cnProxyPublicOwnerPlan = $cnProxyPublicOwnerPlanPath === null
                 ? null
                 : [
                     ...$this->readJson($cnProxyPublicOwnerPlanPath, 'cn_proxy_public_owner_plan'),
                     'source_path' => $cnProxyPublicOwnerPlanPath,
+                ];
+            $softwareManualHoldDecision = $softwareManualHoldDecisionPath === null
+                ? null
+                : [
+                    ...$this->readJson($softwareManualHoldDecisionPath, 'software_manual_hold_decision'),
+                    'source_path' => $softwareManualHoldDecisionPath,
                 ];
             $payload = app(CareerProgressiveReadinessSelector::class)->select(
                 sourcePlan: $sourcePlan,
@@ -63,6 +71,7 @@ final class CareerPlanCanonicalProgressiveReadinessSelection extends Command
                 excludeSlugs: $excludePath === null ? [] : $this->readSlugList($excludePath, 'exclude_slug'),
                 occupationExistingSlugs: $entityContextPath === null ? null : $this->readOccupationExistingSlugs($entityContextPath),
                 cnProxyPublicOwnerPlan: $cnProxyPublicOwnerPlan,
+                softwareManualHoldDecision: $softwareManualHoldDecision,
                 strict: (bool) $this->option('strict'),
             )->toArray();
 

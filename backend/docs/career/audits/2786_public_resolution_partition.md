@@ -13,6 +13,8 @@ The command does not treat every remaining source row as a canonical rollout can
 - `--locales=en,zh`
 - `--entity-context=` optional entity context with `occupation_exists=true` evidence.
 - `--cn-proxy-public-owner-plan=` optional reviewed CN proxy public-owner plan.
+- `--software-manual-hold-decision=` optional reviewed `software-developers`
+  manual-hold decision artifact.
 
 ## Partitions
 
@@ -52,6 +54,39 @@ If the plan resolves all CN proxy policy assets, the next actions no longer
 include `CN_PROXY_AUTHORITY_POLICY_DECISION_1`. Other partitions, such as
 `software_manual_hold`, remain independent blockers until they have their own
 authority decision.
+
+## Software Manual-Hold Authority
+
+The final 2786 partition can consume the
+`career_2786_software_manual_hold_final_policy_decision.v1` artifact for
+`software-developers`. This decision is accounting-only. It resolves the one-row
+manual-hold partition as governed non-public evidence for final 2786 resolution
+accounting only when all guards pass:
+
+- `status=decided`
+- `slug=software-developers`
+- `decision=resolve_as_governed_non_public_manual_hold`
+- final resolution accounting is explicitly accepted
+- canonical rollout, candidate prep, rollout apply, public route, sitemap,
+  llms, and llms-full are all disabled
+- public nonindex reference is not accepted
+- governed non-public partition is `software_manual_hold`
+- governed non-public count is exactly `1`
+- `writes_database=false`
+- no unresolved blockers remain in the decision artifact
+
+When accepted, the output includes:
+
+- `software_manual_hold_decision_count`
+- `software_manual_hold_unresolved_count`
+- `software_manual_hold_decision`
+- updated `final_public_accounted_total`
+- updated `final_public_shortfall`
+
+This authority does not publish `software-developers`, does not create a public
+route, and does not permit candidate preparation or canonical rollout for the
+slug. The rollout manifest gate and rollout executor must continue to reject
+`software-developers` if it appears in a delta manifest.
 
 ## Non-goals
 

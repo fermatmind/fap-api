@@ -26,6 +26,7 @@ final class Career2786PublicResolutionPartitionPlanner
         array $locales = ['en', 'zh'],
         ?array $occupationExistingSlugs = null,
         ?array $cnProxyPublicOwnerPlan = null,
+        ?array $softwareManualHoldDecision = null,
     ): Career2786PublicResolutionPartitionResult {
         $locales = $this->normalizedStringList($locales, 'locale');
         $baselineSlugs = $this->normalizedSlugList($currentPublicSlugs, 'baseline_slug');
@@ -36,6 +37,7 @@ final class Career2786PublicResolutionPartitionPlanner
         $occupationExistingSet = $occupationExistingSlugs === null ? [] : array_fill_keys($occupationExistingSlugs, true);
         $requiresOccupationExists = $occupationExistingSlugs !== null;
         $cnProxyPublicOwnerAuthority = $this->cnProxyPublicOwnerAuthority($cnProxyPublicOwnerPlan, $targetPublicTotal);
+        $softwareManualHoldAuthority = $this->softwareManualHoldAuthority($softwareManualHoldDecision, $targetPublicTotal);
         $seenSourceSlugs = [];
         $duplicateSourceSlugs = [];
         $sourceSlugMissingCount = 0;
@@ -103,6 +105,9 @@ final class Career2786PublicResolutionPartitionPlanner
         foreach ($cnProxyPublicOwnerAuthority['issues'] as $issue) {
             $issues[] = $issue;
         }
+        foreach ($softwareManualHoldAuthority['issues'] as $issue) {
+            $issues[] = $issue;
+        }
         $partitionCounts = [];
         foreach ($partitions as $partition => $slugs) {
             $partitionCounts[$partition] = count($slugs);
@@ -117,7 +122,9 @@ final class Career2786PublicResolutionPartitionPlanner
         $softwareManualHoldCount = $partitionCounts['software_manual_hold'];
         $cnProxyPublicOwnerCount = min((int) $cnProxyPublicOwnerAuthority['public_owner_count'], $cnProxyCount);
         $cnProxyPolicyUnresolvedCount = max(0, $cnProxyCount - $cnProxyPublicOwnerCount);
-        $finalPublicAccountedTotal = count($baselineSlugs) + $canonicalCandidateCount + $cnProxyPublicOwnerCount;
+        $softwareManualHoldDecisionCount = min((int) $softwareManualHoldAuthority['governed_non_public_count'], $softwareManualHoldCount);
+        $softwareManualHoldUnresolvedCount = max(0, $softwareManualHoldCount - $softwareManualHoldDecisionCount);
+        $finalPublicAccountedTotal = count($baselineSlugs) + $canonicalCandidateCount + $cnProxyPublicOwnerCount + $softwareManualHoldDecisionCount;
         $finalPublicShortfall = max(0, $targetPublicTotal - $finalPublicAccountedTotal);
         $finalPublicCanReachTarget = $finalPublicShortfall === 0;
         $readinessPass = $issues === [] && $finalPublicCanReachTarget;
@@ -153,9 +160,12 @@ final class Career2786PublicResolutionPartitionPlanner
             'cn_proxy_public_owner_plan_count' => $cnProxyPublicOwnerCount,
             'cn_proxy_policy_asset_unresolved_count' => $cnProxyPolicyUnresolvedCount,
             'software_manual_hold_count' => $softwareManualHoldCount,
-            'policy_partition_required' => $cnProxyPolicyUnresolvedCount > 0 || $softwareManualHoldCount > 0,
+            'software_manual_hold_decision_count' => $softwareManualHoldDecisionCount,
+            'software_manual_hold_unresolved_count' => $softwareManualHoldUnresolvedCount,
+            'policy_partition_required' => $cnProxyPolicyUnresolvedCount > 0 || $softwareManualHoldUnresolvedCount > 0,
             'entity_remediation_required' => $occupationMissingCount > 0,
             'cn_proxy_public_owner_plan' => $cnProxyPublicOwnerAuthority['summary'],
+            'software_manual_hold_decision' => $softwareManualHoldAuthority['summary'],
             'partitions' => $partitions,
             'rows' => $rows,
             'source_plan' => [
@@ -177,7 +187,7 @@ final class Career2786PublicResolutionPartitionPlanner
                 finalPublicCanReachTarget: $finalPublicCanReachTarget,
                 occupationMissingCount: $occupationMissingCount,
                 cnProxyUnresolvedCount: $cnProxyPolicyUnresolvedCount,
-                softwareManualHoldCount: $softwareManualHoldCount,
+                softwareManualHoldUnresolvedCount: $softwareManualHoldUnresolvedCount,
             ),
             'next_required_action' => $readinessPass
                 ? '2786_RUNTIME_CANDIDATE_PREP_PLAN'
@@ -440,13 +450,109 @@ final class Career2786PublicResolutionPartitionPlanner
     }
 
     /**
+     * @return array{ready: bool, governed_non_public_count: int, issues: list<CareerProgressiveReadinessSelectionIssue>, summary: array<string, mixed>}
+     */
+    private function softwareManualHoldAuthority(?array $decision, int $targetPublicTotal): array
+    {
+        $summary = [
+            'provided' => $decision !== null,
+            'ready' => false,
+            'governed_non_public_count' => 0,
+            'source_path' => $decision['source_path'] ?? null,
+            'decision' => $decision['decision'] ?? null,
+            'governed_non_public_partition' => $decision['governed_non_public_partition'] ?? null,
+        ];
+
+        if ($decision === null) {
+            return [
+                'ready' => false,
+                'governed_non_public_count' => 0,
+                'issues' => [],
+                'summary' => $summary,
+            ];
+        }
+
+        if ($targetPublicTotal !== self::TARGET_PUBLIC_TOTAL) {
+            $issue = new CareerProgressiveReadinessSelectionIssue(
+                reason: 'software_manual_hold_decision_target_scope_invalid',
+                message: 'Software manual-hold decision evidence is valid only for target_public_total=2786.',
+                severity: 'high',
+                evidence: ['target_public_total' => $targetPublicTotal],
+            );
+
+            return [
+                'ready' => false,
+                'governed_non_public_count' => 0,
+                'issues' => [$issue],
+                'summary' => $summary,
+            ];
+        }
+
+        $count = (int) ($decision['governed_non_public_count'] ?? 0);
+        $required = [
+            'schema_version' => ($decision['schema_version'] ?? null) === 'career_2786_software_manual_hold_final_policy_decision.v1',
+            'status' => ($decision['status'] ?? null) === 'decided',
+            'slug' => ($decision['slug'] ?? null) === 'software-developers',
+            'decision' => ($decision['decision'] ?? null) === 'resolve_as_governed_non_public_manual_hold',
+            'accepted_for_final_resolution_accounting' => ($decision['accepted_for_final_resolution_accounting'] ?? null) === true,
+            'accepted_as_canonical_public_rollout_candidate' => ($decision['accepted_as_canonical_public_rollout_candidate'] ?? null) === false,
+            'accepted_as_public_nonindex_reference' => ($decision['accepted_as_public_nonindex_reference'] ?? null) === false,
+            'canonical_rollout_allowed' => ($decision['canonical_rollout_allowed'] ?? null) === false,
+            'candidate_prep_allowed' => ($decision['candidate_prep_allowed'] ?? null) === false,
+            'rollout_apply_allowed' => ($decision['rollout_apply_allowed'] ?? null) === false,
+            'public_route_allowed' => ($decision['public_route_allowed'] ?? null) === false,
+            'sitemap_allowed' => ($decision['sitemap_allowed'] ?? null) === false,
+            'llms_allowed' => ($decision['llms_allowed'] ?? null) === false,
+            'llms_full_allowed' => ($decision['llms_full_allowed'] ?? null) === false,
+            'governed_non_public_partition' => ($decision['governed_non_public_partition'] ?? null) === 'software_manual_hold',
+            'governed_non_public_count' => $count === 1,
+            'writes_database' => ($decision['writes_database'] ?? null) === false,
+            'blockers_not_resolved_empty' => ($decision['blockers_not_resolved_by_this_decision'] ?? []) === [],
+        ];
+        $failed = array_keys(array_filter($required, static fn (bool $passed): bool => ! $passed));
+        $summary = [
+            ...$summary,
+            'ready' => $failed === [],
+            'governed_non_public_count' => $failed === [] ? $count : 0,
+            'declared_governed_non_public_count' => $count,
+            'failed_requirements' => $failed,
+        ];
+
+        if ($failed === []) {
+            return [
+                'ready' => true,
+                'governed_non_public_count' => $count,
+                'issues' => [],
+                'summary' => $summary,
+            ];
+        }
+
+        $issue = new CareerProgressiveReadinessSelectionIssue(
+            reason: 'software_manual_hold_decision_invalid',
+            message: 'Software manual-hold decision cannot be used for final 2786 partition accounting.',
+            severity: 'blocker_for_publication',
+            evidence: [
+                'failed_requirements' => $failed,
+                'declared_governed_non_public_count' => $count,
+            ],
+        );
+
+        return [
+            'ready' => false,
+            'governed_non_public_count' => 0,
+            'issues' => [$issue],
+            'summary' => $summary,
+        ];
+    }
+
+    /**
      * @return list<string>
      */
     private function nextRequiredActions(
         bool $finalPublicCanReachTarget,
         int $occupationMissingCount,
         int $cnProxyUnresolvedCount,
-        int $softwareManualHoldCount,
+        int $softwareManualHoldUnresolvedCount,
     ): array {
         $actions = [];
         if (! $finalPublicCanReachTarget) {
@@ -458,7 +564,7 @@ final class Career2786PublicResolutionPartitionPlanner
         if ($cnProxyUnresolvedCount > 0) {
             $actions[] = 'CN_PROXY_AUTHORITY_POLICY_DECISION_1';
         }
-        if ($softwareManualHoldCount > 0) {
+        if ($softwareManualHoldUnresolvedCount > 0) {
             $actions[] = 'SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1';
         }
         $actions[] = '2786_READINESS_RERUN_AFTER_PARTITION_DECISIONS';

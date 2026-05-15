@@ -750,6 +750,51 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-2786-FINAL-READINESS-SOFTWARE-MANUAL-HOLD-AUTHORITY-1
+    repo: fap-api
+    depends_on:
+      - SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1
+      - REPAIR-2786-FINAL-READINESS-PUBLIC-OWNER-PARTITION-AUTHORITY-1
+    branch: fix/career-2786-final-readiness-software-manual-hold-authority-1
+    title: "fix(api): account software manual hold in 2786 readiness"
+    name: "Account software-developers manual-hold decision in final 2786 readiness"
+    scope:
+      - Extend final 2786 readiness and public-resolution partition commands to consume reviewed software-developers manual-hold decision evidence.
+      - Count the accepted software manual-hold decision only toward final 2786 governed non-public accounting.
+      - Keep software-developers excluded from canonical rollout selection, candidate prep, rollout manifests, public routes, sitemap, llms, and llms-full eligibility.
+      - Preserve CN proxy public-owner authority, rollout executor rejection, and final live acceptance strictness.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerPlanCanonicalProgressiveReadinessSelection.php
+      - backend/app/Console/Commands/CareerPlanCanonical2786PublicResolutionPartition.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run 2786 readiness execution beyond read-only local smoke.
+      - Run candidate prep dry-run or apply.
+      - Run rollout dry-run.
+      - Run rollout apply.
+      - Run backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+      - Mark software-developers as a canonical rollout candidate.
+      - Enable software-developers public route, indexability, sitemap, llms, or llms-full exposure.
+      - Weaken final live acceptance.
+    validation:
+      - php artisan test --filter=CareerProgressiveReadinessSelection --no-ansi
+      - php artisan test --filter=Career2786PublicResolutionPartition --no-ansi
+      - php artisan test tests/Feature/Console/CareerPlanCanonicalProgressiveReadinessSelectionCommandTest.php --no-ansi
+      - php artisan test tests/Feature/Console/CareerPlanCanonical2786PublicResolutionPartitionCommandTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
     repo: fap-api
     depends_on:
