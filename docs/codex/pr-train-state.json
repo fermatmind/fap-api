@@ -6707,6 +6707,8 @@
             "vendor/bin/pint --test: pass after formatting Kernel import order",
             "git diff --check: pass",
             "bash backend/scripts/ci_verify_mbti.sh: external blocker in BigFive pack publish/rollback compiled-directory checks; scoped Career tests pass and current PR does not modify BigFive content pack publish/rollback code.",
+            "GitHub verify-mbti initially failed because the BigFive runtime freeze classifier did not allow the new Career2786PublicResolutionPartition domain files; added scoped allowlist in the existing Career audit allowlist test.",
+            "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi: pass (65 tests, 69 assertions)",
             "Local read-only smoke against /tmp 2786 artifacts: status=pass, canonical_rollout_candidate_count=85, occupation_missing_remediation_count=237, cn_proxy_policy_asset_count=1663, software_manual_hold_count=1, readiness_pass=false, writes_database=false."
           ]
         },
