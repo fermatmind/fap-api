@@ -209,6 +209,12 @@ final class CareerDeltaRolloutManifestPlanner
             ]);
         }
 
+        if (in_array('software-developers', $deltaSlugs, true)) {
+            $blockers[] = $this->blocker('software_developers_manual_hold_in_delta_manifest', [
+                'slugs' => ['software-developers'],
+            ]);
+        }
+
         if (data_get($targetDeltaPlan, 'rollout.delta_manifest_allowed') !== true) {
             $blockers[] = $this->blocker('target_delta_manifest_not_allowed', [
                 'delta_manifest_allowed' => data_get($targetDeltaPlan, 'rollout.delta_manifest_allowed'),

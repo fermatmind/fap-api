@@ -150,6 +150,28 @@ final class CareerProgressiveReadinessSelectionTest extends TestCase
         $this->assertSame(219, $payload['blockers'][0]['evidence']['selectable_candidate_count']);
     }
 
+    public function test_excludes_software_developers_manual_hold_from_progressive_readiness_selection(): void
+    {
+        $baseline = $this->slugs('current', 300);
+        $replacementDelta = $this->slugs('delta', 500);
+
+        $payload = $this->select(
+            $baseline,
+            [...$baseline, 'software-developers', ...$replacementDelta],
+            300,
+            800,
+        );
+
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame(500, $payload['selected_count']);
+        $this->assertSame($replacementDelta, $payload['selected_slugs']);
+        $this->assertNotContains('software-developers', $payload['selected_slugs']);
+        $this->assertSame(
+            1,
+            $payload['excluded']['excluded_by_reason']['software_developers_manual_hold_excluded_from_canonical_rollout'],
+        );
+    }
+
     public function test_preserves_deterministic_source_order(): void
     {
         $baseline = $this->slugs('current', 80);

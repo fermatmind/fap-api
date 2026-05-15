@@ -27,6 +27,12 @@ delta. They are reported as
 non-CN rows when enough candidates exist. This keeps readiness selection aligned
 with the rollout executor, which rejects CN proxy promotion before any write.
 
+The selector also excludes the protected `software-developers` slug from
+progressive rollout readiness. That slug is governed by a manual-hold policy and
+the rollout executor rejects it before any write. Readiness reports it as
+`software_developers_manual_hold_excluded_from_canonical_rollout` and selects a
+later eligible replacement when available.
+
 ## Readiness Selection vs Rollout Validation
 
 This step is intentionally earlier than rollout-candidate validation. It does
@@ -73,7 +79,8 @@ The command emits stable JSON using:
   "excluded": {
     "excluded_by_reason": {
       "already_public_baseline": 80,
-      "cn_proxy_excluded_from_canonical_rollout": 120
+      "cn_proxy_excluded_from_canonical_rollout": 120,
+      "software_developers_manual_hold_excluded_from_canonical_rollout": 1
     }
   },
   "writes_database": false,
@@ -116,6 +123,19 @@ This exclusion is not a rollout executor relaxation. The executor and rollback
 gate must continue to reject CN proxy slugs if they appear in a manifest or
 manual override artifact. The selector simply prevents those rows from being
 chosen earlier in the progressive readiness pipeline.
+
+## Software Developers Manual Hold
+
+`software-developers` is a protected manual-hold slug. It is not eligible for
+canonical progressive rollout selection for 300, 800, or 2786 cohorts, even when
+it appears source-ready in a public-resolution plan. The selector excludes it
+with `software_developers_manual_hold_excluded_from_canonical_rollout` so a
+later source-ready slug can replace it before candidate preparation.
+
+The rollout manifest gate also fails closed if `software-developers` appears in
+an explicit delta manifest. This is an earlier planning guard only; it does not
+weaken the existing rollout executor, rollback gate, or final live acceptance
+checks.
 
 ## Non-Goals
 
