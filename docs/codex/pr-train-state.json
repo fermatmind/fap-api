@@ -7130,7 +7130,7 @@
       "repo": "fap-api",
       "branch": "codex/pr-media-01-oss-cdn",
       "title": "PR-MEDIA-01｜CMS Media Library OSS/CDN Upload Automation",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "PR-CMS-01",
         "PR-CMS-02",
@@ -7145,7 +7145,7 @@
         "no Tencent/COS or frontend static asset authority"
       ],
       "commit_sha": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1418",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -7182,6 +7182,10 @@
         "diff_check": {
           "status": "pass",
           "evidence": "git diff --check && git diff --cached --check"
+        },
+        "github_pr_created": {
+          "status": "pass",
+          "evidence": "https://github.com/fermatmind/fap-api/pull/1418"
         }
       },
       "failure_reason": null,
