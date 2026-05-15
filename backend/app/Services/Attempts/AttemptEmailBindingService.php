@@ -52,10 +52,6 @@ final class AttemptEmailBindingService
             ->where('attempt_id', $attemptId)
             ->first();
 
-        if (! $result instanceof Result) {
-            throw new ApiProblemException(404, 'RESULT_NOT_FOUND', 'result not found.');
-        }
-
         $scaleCode = $this->resolveScaleCode($attempt, $result);
         if (in_array($scaleCode, self::EXCLUDED_SENSITIVE_SCALES, true)) {
             throw new ApiProblemException(422, 'EMAIL_BIND_UNSUPPORTED_SCALE', 'email result binding is not available for this scale.');
@@ -119,16 +115,17 @@ final class AttemptEmailBindingService
             'attempt_id' => $attemptId,
             'status' => AttemptEmailBinding::STATUS_ACTIVE,
             'binding_id' => (string) $binding->getKey(),
+            'result_ready' => $result instanceof Result,
             'result_url' => $this->localizedResultUrl($attemptId, $context['locale'] ?? null),
         ];
     }
 
-    private function resolveScaleCode(Attempt $attempt, Result $result): string
+    private function resolveScaleCode(Attempt $attempt, ?Result $result): string
     {
         $projected = $this->scaleCodeProjector->project(
-            (string) (($result->scale_code ?? null) ?: ($attempt->scale_code ?? '')),
-            (string) (($result->scale_code_v2 ?? null) ?: ($attempt->scale_code_v2 ?? '')),
-            ($result->scale_uid ?? null) !== null
+            (string) (($result?->scale_code ?? null) ?: ($attempt->scale_code ?? '')),
+            (string) (($result?->scale_code_v2 ?? null) ?: ($attempt->scale_code_v2 ?? '')),
+            ($result?->scale_uid ?? null) !== null
                 ? (string) $result->scale_uid
                 : (($attempt->scale_uid ?? null) !== null ? (string) $attempt->scale_uid : null)
         );

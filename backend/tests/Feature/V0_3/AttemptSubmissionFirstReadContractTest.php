@@ -332,6 +332,31 @@ final class AttemptSubmissionFirstReadContractTest extends TestCase
         $response->assertJsonPath('actions.wait_href', "/result/{$attemptId}");
     }
 
+    public function test_report_access_returns_result_readiness_before_email_gate_for_pending_riasec_submission(): void
+    {
+        config()->set('fap.features.email_first_result_access', true);
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_submission_first_access_pending_riasec';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId, 'RIASEC');
+        $submissionId = $this->createSubmission($attemptId, $anonId, 'pending');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertOk();
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'locked');
+        $response->assertJsonPath('report_state', 'pending');
+        $response->assertJsonPath('reason_code', 'submission_pending');
+        $response->assertJsonPath('payload.submission.id', $submissionId);
+        $response->assertJsonMissingPath('error_code');
+    }
+
     public function test_report_access_prefers_pending_submission_over_existing_ready_projection(): void
     {
         $attemptId = (string) Str::uuid();
