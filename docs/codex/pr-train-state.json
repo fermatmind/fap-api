@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T21:20:00+08:00",
+  "updated_at": "2026-05-15T21:28:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6639,7 +6639,7 @@
       "repo": "fap-api",
       "branch": "codex/pr-graph-01-multi-test-edges",
       "title": "PR-GRAPH-01｜Article Multi-Test Graph Edges",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "PR-CMS-01",
         "PR-CMS-02",
@@ -6664,8 +6664,8 @@
         "no fap-web changes in backend PR",
         "no removal of related_test_slug backward compatibility"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "42c0bf2c05d46fbe55d29136cd6e4b2bc1e3444b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1413",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -6702,6 +6702,10 @@
         "diff_check": {
           "status": "pass",
           "evidence": "git diff --check && git diff --cached --check"
+        },
+        "github_pr_created": {
+          "status": "pass",
+          "evidence": "https://github.com/fermatmind/fap-api/pull/1413"
         }
       },
       "failure_reason": null,
