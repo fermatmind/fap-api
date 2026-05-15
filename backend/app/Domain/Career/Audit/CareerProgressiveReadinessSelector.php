@@ -347,6 +347,11 @@ final class CareerProgressiveReadinessSelector
     private function hardBlockerReasons(CareerPublicResolutionPlanRow $row): array
     {
         $reasons = [];
+        $slug = strtolower(trim((string) $row->canonicalSlug));
+        if (str_starts_with($slug, 'cn-')) {
+            $reasons[] = 'cn_proxy_excluded_from_canonical_rollout';
+        }
+
         $state = strtolower(trim((string) $row->publicResolutionState));
         if (in_array($state, [
             'occupation_missing',
@@ -356,6 +361,8 @@ final class CareerProgressiveReadinessSelector
             'do_not_publish',
             'not_public',
             'excluded',
+            'cn_proxy_hold',
+            'blocked_until_cn_authority_policy',
         ], true)) {
             $reasons[] = 'source_state_'.$state;
         }
@@ -364,11 +371,19 @@ final class CareerProgressiveReadinessSelector
         if (in_array($publicType, ['non_public', 'private', 'excluded'], true)) {
             $reasons[] = 'source_public_type_'.$publicType;
         }
+        if (in_array($publicType, ['public_cn_proxy_page', 'public_cn_proxy_page_candidate'], true)) {
+            $reasons[] = 'cn_proxy_excluded_from_canonical_rollout';
+        }
 
         foreach (['occupation_missing', 'missing_occupation', 'hard_blocked', 'safety_blocked'] as $key) {
             if (($row->raw[$key] ?? false) === true) {
                 $reasons[] = $key;
             }
+        }
+
+        $recommendedResolution = strtolower(trim((string) ($row->raw['recommended_resolution'] ?? '')));
+        if (in_array($recommendedResolution, ['public_cn_proxy_page', 'public_cn_proxy_page_candidate'], true)) {
+            $reasons[] = 'cn_proxy_excluded_from_canonical_rollout';
         }
 
         foreach (['hard_blockers', 'safety_blockers'] as $key) {

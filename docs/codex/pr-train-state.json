@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T12:47:49+08:00",
+  "updated_at": "2026-05-15T13:35:35+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6220,6 +6220,75 @@
       },
       "failure_reason": null,
       "next_pr": "300-RUNTIME-CANDIDATE-POOL-RERUN-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
+    "REPAIR-PROGRESSIVE-READINESS-CN-PROXY-EXCLUSION-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-progressive-readiness-cn-proxy-exclusion-1",
+      "title": "fix(api): exclude CN proxy rows from progressive readiness",
+      "name": "Exclude CN proxy rows from canonical progressive rollout readiness",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-PROGRESSIVE-RUNTIME-CANDIDATE-POOL-SELECTION-1"
+      ],
+      "scope_type": "progressive_readiness_cn_proxy_exclusion_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/**",
+        "backend/tests/Unit/Domain/Career/Audit/**",
+        "backend/tests/Feature/Console/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no DB mutation",
+        "no candidate prep dry-run",
+        "no candidate prep apply",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no deploy",
+        "no fap-web",
+        "no production DB query",
+        "no live crawl",
+        "no weakening CN proxy rollout rejection"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-PROGRESSIVE-READINESS-CN-PROXY-EXCLUSION-1."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-PROGRESSIVE-RUNTIME-CANDIDATE-POOL-SELECTION-1 is present on main as PR #1405 before this PR started."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files remain within backend Career audit selector/tests/docs and docs/codex train metadata."
+        },
+        "local_validation": {
+          "status": "pass",
+          "evidence": [
+            "php artisan test --filter=CareerProgressiveReadinessSelection --no-ansi: pass (15 tests, 64 assertions)",
+            "php artisan test --filter=CareerPlanCanonicalProgressiveReadinessSelection --no-ansi: pass with non-blocking temp path warnings",
+            "php artisan test --filter=CareerProgressive --no-ansi: pass with non-blocking temp path warnings",
+            "php artisan test --filter=CareerRuntimeCandidate --no-ansi: pass (8 tests, 40 assertions)",
+            "php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi: pass with non-blocking temp path warnings",
+            "php artisan route:list --no-ansi: pass",
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-cn-proxy-exclusion.sqlite php artisan migrate --force --no-ansi: pass",
+            "vendor/bin/pint --test: pass",
+            "bash backend/scripts/ci_verify_mbti.sh: pass",
+            "git diff --check: pass"
+          ]
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "300-READINESS-1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,

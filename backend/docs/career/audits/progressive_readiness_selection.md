@@ -19,6 +19,14 @@ selection requires `occupation_exists=true`; source-ready rows whose canonical
 occupation is absent from production are excluded with `occupation_missing` so
 they do not block the later candidate-prep dry-run.
 
+Canonical progressive rollout readiness also excludes CN proxy rows. Slugs with
+the `cn-` prefix and rows marked as `public_cn_proxy_page` or
+`public_cn_proxy_page_candidate` are not eligible for the canonical US rollout
+delta. They are reported as
+`cn_proxy_excluded_from_canonical_rollout` and replaced by later source-ready
+non-CN rows when enough candidates exist. This keeps readiness selection aligned
+with the rollout executor, which rejects CN proxy promotion before any write.
+
 ## Readiness Selection vs Rollout Validation
 
 This step is intentionally earlier than rollout-candidate validation. It does
@@ -62,6 +70,12 @@ The command emits stable JSON using:
     "occupation_exists_count": 2469,
     "occupation_missing_excluded_count": 27
   },
+  "excluded": {
+    "excluded_by_reason": {
+      "already_public_baseline": 80,
+      "cn_proxy_excluded_from_canonical_rollout": 120
+    }
+  },
   "writes_database": false,
   "apply_allowed": false,
   "next_required_action": "PROGRESSIVE_RUNTIME_CANDIDATE_PREP"
@@ -84,6 +98,24 @@ not publish occupations, does not create missing occupations, and does not
 weaken rollout or live-acceptance validation. Missing production occupations
 remain explicit exclusions until a later source/import repair chooses to add
 them.
+
+## CN Proxy Exclusion
+
+CN proxy rows are governed by a separate CN authority policy. They must not enter
+the canonical US rollout promotion path for 300, 800, or 2786 cohorts. The
+selector therefore treats these rows as hard readiness exclusions when:
+
+- the canonical slug starts with `cn-`;
+- `canonical_public_type` / `public_resolution_type` is `public_cn_proxy_page`
+  or `public_cn_proxy_page_candidate`;
+- `recommended_resolution` is `public_cn_proxy_page` or
+  `public_cn_proxy_page_candidate`; or
+- the source state is `CN_proxy_hold` / `blocked_until_CN_authority_policy`.
+
+This exclusion is not a rollout executor relaxation. The executor and rollback
+gate must continue to reject CN proxy slugs if they appear in a manifest or
+manual override artifact. The selector simply prevents those rows from being
+chosen earlier in the progressive readiness pipeline.
 
 ## Non-Goals
 
