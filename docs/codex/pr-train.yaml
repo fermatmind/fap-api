@@ -313,6 +313,46 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-PROGRESSIVE-READINESS-OCCUPATION-AWARE-SELECTION-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-PROGRESSIVE-READINESS-SELECTION-1
+    branch: codex/repair-progressive-readiness-occupation-aware-selection-1
+    title: "fix(api): make progressive readiness selection occupation-aware"
+    name: "Add occupation-aware progressive Career readiness selection"
+    scope:
+      - Add optional production-derived entity context input to progressive readiness selection.
+      - Require occupation_exists=true for runtime-candidate-prep readiness when entity context is supplied.
+      - Preserve deterministic source ordering while replacing source-ready rows missing production occupations.
+      - Keep readiness selection read-only and separate from rollout/apply/live-acceptance validation.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run 300 readiness execution.
+      - Run candidate prep dry-run or apply.
+      - Run rollout dry-run.
+      - Run rollout apply.
+      - Run backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+    validation:
+      - php artisan test --filter=CareerProgressiveReadinessSelection --no-ansi
+      - php artisan test --filter=CareerPlanCanonicalProgressiveReadinessSelection --no-ansi
+      - php artisan test --filter=CareerProgressive --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
     repo: fap-api
     depends_on:

@@ -6109,6 +6109,64 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": []
+    },
+    "REPAIR-PROGRESSIVE-READINESS-OCCUPATION-AWARE-SELECTION-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-progressive-readiness-occupation-aware-selection-1",
+      "title": "fix(api): make progressive readiness selection occupation-aware",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-PROGRESSIVE-READINESS-SELECTION-1"
+      ],
+      "scope_type": "progressive_readiness_occupation_aware_selection_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/**",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/**",
+        "backend/tests/Feature/Console/**",
+        "backend/tests/Unit/Domain/Career/Audit/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no DB mutation",
+        "no candidate prep dry-run",
+        "no candidate prep apply",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no deploy",
+        "no fap-web",
+        "no production DB query",
+        "no live crawl"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-PROGRESSIVE-READINESS-OCCUPATION-AWARE-SELECTION-1."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-PROGRESSIVE-READINESS-SELECTION-1 is present on main as commit 9a2032ebcd593deb2e2ad7537775b96855badad4."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are limited to occupation-aware progressive readiness selection logic, command tests/docs, docs, and train metadata."
+        },
+        "local_validation": {
+          "status": "pass",
+          "evidence": "CareerProgressiveReadinessSelection tests passed; CareerPlanCanonicalProgressiveReadinessSelection tests passed; CareerProgressive and CareerProgressiveCohort filters passed; CareerRuntimeCandidate and CareerAuditCanonicalEligibility filters passed; route:list passed; sqlite migrate passed; Pint --test passed; git diff --check passed; bash backend/scripts/ci_verify_mbti.sh exited 0."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "300-READINESS-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
     }
   }
 }

@@ -124,6 +124,53 @@ final class CareerProgressiveReadinessSelectionTest extends TestCase
         $this->assertSame($delta, $deltaPlan['recommended_rollout_delta_slugs']);
     }
 
+    public function test_entity_context_occupation_exists_filter_replaces_missing_occupations(): void
+    {
+        $baseline = $this->slugs('current', 80);
+        $delta = $this->slugs('delta', 225);
+        $missing = array_slice($delta, 0, 5);
+        $occupationExisting = array_values(array_diff($delta, $missing));
+
+        $payload = $this->select(
+            baseline: $baseline,
+            sourceSlugs: [...$baseline, ...$delta],
+            currentTotal: 80,
+            targetTotal: 300,
+            occupationExistingSlugs: $occupationExisting,
+        );
+
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame(220, $payload['selected_count']);
+        $this->assertSame($occupationExisting, $payload['selected_slugs']);
+        $this->assertSame(225, $payload['source_ready_count']);
+        $this->assertSame(220, $payload['candidate_count']);
+        $this->assertSame(5, $payload['excluded']['excluded_by_reason']['occupation_missing']);
+        $this->assertTrue($payload['entity_context']['required_for_selection']);
+        $this->assertSame(220, $payload['entity_context']['occupation_exists_count']);
+        $this->assertSame(5, $payload['entity_context']['occupation_missing_excluded_count']);
+    }
+
+    public function test_entity_context_blocks_when_not_enough_occupation_present_candidates(): void
+    {
+        $baseline = $this->slugs('current', 80);
+        $delta = $this->slugs('delta', 220);
+        $occupationExisting = array_slice($delta, 0, 219);
+
+        $payload = $this->select(
+            baseline: $baseline,
+            sourceSlugs: [...$baseline, ...$delta],
+            currentTotal: 80,
+            targetTotal: 300,
+            occupationExistingSlugs: $occupationExisting,
+        );
+
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertSame(219, $payload['selected_count']);
+        $this->assertContains('insufficient_source_ready_delta_slugs', array_column($payload['blockers'], 'reason'));
+        $this->assertSame(1, $payload['blockers'][0]['evidence']['occupation_missing_excluded_count']);
+        $this->assertSame(219, $payload['blockers'][0]['evidence']['selectable_candidate_count']);
+    }
+
     public function test_readiness_selection_does_not_require_rollout_candidate_runtime_state(): void
     {
         $payload = $this->select(['career-001'], ['career-001', 'career-002'], 1, 300);
@@ -136,10 +183,16 @@ final class CareerProgressiveReadinessSelectionTest extends TestCase
     /**
      * @param  list<string>  $baseline
      * @param  list<string>  $sourceSlugs
+     * @param  list<string>|null  $occupationExistingSlugs
      * @return array<string, mixed>
      */
-    private function select(array $baseline, array $sourceSlugs, int $currentTotal, int $targetTotal): array
-    {
+    private function select(
+        array $baseline,
+        array $sourceSlugs,
+        int $currentTotal,
+        int $targetTotal,
+        ?array $occupationExistingSlugs = null,
+    ): array {
         return (new CareerProgressiveReadinessSelector)->select(
             sourcePlan: $this->sourcePlan($sourceSlugs),
             currentCloseout: $this->closeout($currentTotal),
@@ -147,6 +200,7 @@ final class CareerProgressiveReadinessSelectionTest extends TestCase
             currentPublicTotal: $currentTotal,
             targetPublicTotal: $targetTotal,
             locales: ['en', 'zh'],
+            occupationExistingSlugs: $occupationExistingSlugs,
         )->toArray();
     }
 
