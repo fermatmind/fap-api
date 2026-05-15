@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T14:33:19+08:00",
+  "updated_at": "2026-05-15T15:16:53+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -1783,7 +1783,7 @@
       "branch": "fix/career-80-cohort-readiness-audit10",
       "title": "feat(api): add career 80 cohort readiness plan",
       "name": "Career 80-Cohort Readiness Plan",
-      "status": "in_progress",
+      "status": "draft_pr_open",
       "depends_on": [
         "AUDIT-9"
       ],
@@ -2631,7 +2631,7 @@
         "no deploy"
       ],
       "commit_sha": "8589f43480d69100ba6d7333e4032dba039bf924",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1408",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -6297,6 +6297,90 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": []
+    },
+    "REPAIR-RUNTIME-PROJECTION-LOOKUP-LATEST-SELECTION-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-runtime-projection-lookup-latest-selection-1",
+      "title": "fix(api): select newest career runtime projection artifact",
+      "name": "Fix latest materialized Career runtime projection lookup selection",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-PROGRESSIVE-READINESS-CN-PROXY-EXCLUSION-1"
+      ],
+      "scope_type": "runtime_projection_lookup_latest_selection_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Publish/**",
+        "backend/tests/Unit/Services/Career/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no rollout apply",
+        "no production DB mutation",
+        "no rollback",
+        "no quarantine",
+        "no deploy",
+        "no fap-web change",
+        "do not weaken final live acceptance",
+        "do not treat candidate-aware planning artifacts as final published authority"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-RUNTIME-PROJECTION-LOOKUP-LATEST-SELECTION-1, then implementing the PR."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SCAN-27 showed 300 runtime/release authority is green and the remaining blocker is stale runtime projection lookup selection after REPAIR-PROGRESSIVE-READINESS-CN-PROXY-EXCLUSION-1."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are limited to Career runtime projection lookup, its focused unit test, and authorized train metadata."
+        },
+        "local_validation": {
+          "status": "pass_with_external_ci_sidecar",
+          "evidence": [
+            "php artisan test --filter=CareerRuntimePublishProjectionLookup --no-ansi: pass (2 tests, 16 assertions)",
+            "php artisan test --filter=CareerJobDetail --no-ansi: pass (15 tests, 147 assertions)",
+            "php artisan route:list --no-ansi: pass",
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-runtime-projection-lookup.sqlite php artisan migrate --force --no-ansi: pass",
+            "vendor/bin/pint --test: pass (3260 files)",
+            "git diff --check && git diff --cached --check: pass",
+            "bash backend/scripts/ci_verify_mbti.sh: external failure in Big5 pack publish/rollback compiled directory assertions, outside this Career runtime projection lookup PR scope"
+          ]
+        },
+        "github_pr": {
+          "status": "draft_open_waiting_for_checks",
+          "evidence": "Draft PR opened at https://github.com/fermatmind/fap-api/pull/1408; hygiene checks passed and verify-mbti-v2 / verify-mbti-legacy were still in progress at last poll."
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "BACKEND-DEPLOY-THEN-300-TOTAL-LIVE-ACCEPTANCE-RERUN",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "sidecar_id": "SIDECAR-BIG5-PACK-PUBLISH-ROLLBACK-COMPILED-DIR-20260515",
+          "title": "Local MBTI CI Big5 pack publish/rollback compiled directory assertions fail in temporary worktree",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [],
+          "evidence": [
+            "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksPublishBig5Test at compiled directory assertion.",
+            "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksRollbackBig5Test at compiled directory assertion.",
+            "Current PR changed only Career runtime projection lookup logic/tests and train metadata; no Big5 content pack publish/rollback code was modified."
+          ],
+          "severity": "medium",
+          "next_goal": "SCAN-BIG5-PACK-PUBLISH-ROLLBACK-COMPILED-DIR-LOCAL-CI",
+          "may_continue_train": true
+        }
+      ]
     },
     "PR-CMS-FIX-MASTER": {
       "repo": "fap-api",

@@ -172,29 +172,10 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
      */
     private function latestMaterializedProjection(): ?array
     {
-        $root = storage_path('app/private/career_runtime_publish_projection');
-        if (! is_dir($root)) {
-            return null;
-        }
-
-        $directories = glob($root.DIRECTORY_SEPARATOR.'*', GLOB_ONLYDIR);
-        if (! is_array($directories) || $directories === []) {
-            return null;
-        }
-
-        rsort($directories, SORT_STRING);
-        foreach ($directories as $directory) {
-            $path = $directory.DIRECTORY_SEPARATOR.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME;
-            if (! is_file($path)) {
-                continue;
-            }
-
-            $payload = json_decode((string) file_get_contents($path), true);
-
-            return is_array($payload) ? $payload : null;
-        }
-
-        return null;
+        return $this->latestMaterializedJsonPayload(
+            storage_path('app/private/career_runtime_publish_projection'),
+            CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME,
+        );
     }
 
     /**
@@ -202,7 +183,17 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
      */
     private function latestMaterializedFullReleaseLedger(): ?array
     {
-        $root = storage_path('app/private/career_release_ledger');
+        return $this->latestMaterializedJsonPayload(
+            storage_path('app/private/career_release_ledger'),
+            CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME,
+        );
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private function latestMaterializedJsonPayload(string $root, string $filename): ?array
+    {
         if (! is_dir($root)) {
             return null;
         }
@@ -212,18 +203,39 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
             return null;
         }
 
-        rsort($directories, SORT_STRING);
+        $candidates = [];
         foreach ($directories as $directory) {
-            $path = $directory.DIRECTORY_SEPARATOR.CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME;
+            $path = $directory.DIRECTORY_SEPARATOR.$filename;
             if (! is_file($path)) {
                 continue;
             }
 
             $payload = json_decode((string) file_get_contents($path), true);
+            if (! is_array($payload)) {
+                continue;
+            }
 
-            return is_array($payload) ? $payload : null;
+            clearstatcache(true, $path);
+            $candidates[] = [
+                'path' => $path,
+                'mtime' => filemtime($path) ?: 0,
+                'payload' => $payload,
+            ];
         }
 
-        return null;
+        if ($candidates === []) {
+            return null;
+        }
+
+        usort($candidates, static function (array $left, array $right): int {
+            $mtimeComparison = $right['mtime'] <=> $left['mtime'];
+            if ($mtimeComparison !== 0) {
+                return $mtimeComparison;
+            }
+
+            return strcmp((string) $right['path'], (string) $left['path']);
+        });
+
+        return $candidates[0]['payload'];
     }
 }
