@@ -20,6 +20,7 @@ final class CareerPlanCanonical2786PublicResolutionPartition extends Command
         {--target-total=2786 : Target public total}
         {--locales=en,zh : Comma-separated locales}
         {--entity-context= : Optional entity context JSON; if supplied, rows without occupation_exists=true are partitioned for remediation}
+        {--cn-proxy-public-owner-plan= : Optional reviewed CN proxy public-owner plan JSON for final 2786 partition accounting}
         {--strict : Fail on source-plan validation issues}
         {--json : Emit JSON output}
         {--output= : Optional output path for final 2786 partition JSON}';
@@ -45,6 +46,13 @@ final class CareerPlanCanonical2786PublicResolutionPartition extends Command
 
             $closeout = $this->readJson($closeoutPath, 'closeout');
             $entityContextPath = $this->pathOption('entity-context');
+            $cnProxyPublicOwnerPlanPath = $this->pathOption('cn-proxy-public-owner-plan');
+            $cnProxyPublicOwnerPlan = $cnProxyPublicOwnerPlanPath === null
+                ? null
+                : [
+                    ...$this->readJson($cnProxyPublicOwnerPlanPath, 'cn_proxy_public_owner_plan'),
+                    'source_path' => $cnProxyPublicOwnerPlanPath,
+                ];
             $payload = app(Career2786PublicResolutionPartitionPlanner::class)->partition(
                 sourcePlan: $sourcePlan,
                 currentCloseout: $closeout,
@@ -53,6 +61,7 @@ final class CareerPlanCanonical2786PublicResolutionPartition extends Command
                 targetPublicTotal: $this->intOption('target-total'),
                 locales: $this->localesOption(),
                 occupationExistingSlugs: $entityContextPath === null ? null : $this->readOccupationExistingSlugs($entityContextPath),
+                cnProxyPublicOwnerPlan: $cnProxyPublicOwnerPlan,
             )->toArray();
 
             $payload['source_plan']['validation_issue_count'] = count($sourcePlanValidation->issues);

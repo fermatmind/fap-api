@@ -76,6 +76,82 @@ final class Career2786PublicResolutionPartitionPlannerTest extends TestCase
         }
     }
 
+    public function test_reviewed_cn_proxy_public_owner_plan_accounts_for_cn_partition_without_making_it_rollout_candidate(): void
+    {
+        $baseline = $this->slugs('baseline', 800);
+        $canonical = $this->slugs('canonical', 322);
+        $cnProxy = $this->slugs('policy', 1663, 'cn-');
+        $software = ['software-developers'];
+
+        $payload = $this->partition(
+            sourceSlugs: [...$baseline, ...$canonical, ...$cnProxy, ...$software],
+            baselineSlugs: $baseline,
+            occupationExistingSlugs: [...$baseline, ...$canonical, ...$cnProxy, ...$software],
+            cnProxyPublicOwnerPlan: $this->cnProxyPublicOwnerPlan(1663),
+        );
+
+        $this->assertSame('pass', $payload['status']);
+        $this->assertFalse($payload['readiness_pass']);
+        $this->assertSame(322, $payload['canonical_rollout_candidate_count']);
+        $this->assertSame(1663, $payload['cn_proxy_policy_asset_count']);
+        $this->assertSame(1663, $payload['cn_proxy_public_owner_plan_count']);
+        $this->assertSame(0, $payload['cn_proxy_policy_asset_unresolved_count']);
+        $this->assertSame(2785, $payload['final_public_accounted_total']);
+        $this->assertSame(1, $payload['final_public_shortfall']);
+        $this->assertTrue($payload['cn_proxy_public_owner_plan']['ready']);
+        $this->assertNotContains('CN_PROXY_AUTHORITY_POLICY_DECISION_1', $payload['next_required_actions']);
+        $this->assertContains('SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1', $payload['next_required_actions']);
+        $this->assertContains('DO_NOT_RUN_2786_CANONICAL_CANDIDATE_PREP', $payload['next_required_actions']);
+    }
+
+    public function test_reviewed_cn_proxy_public_owner_plan_allows_final_partition_readiness_when_accounting_is_complete(): void
+    {
+        $baseline = $this->slugs('baseline', 800);
+        $canonical = $this->slugs('canonical', 323);
+        $cnProxy = $this->slugs('policy', 1663, 'cn-');
+
+        $payload = $this->partition(
+            sourceSlugs: [...$baseline, ...$canonical, ...$cnProxy],
+            baselineSlugs: $baseline,
+            occupationExistingSlugs: [...$baseline, ...$canonical, ...$cnProxy],
+            cnProxyPublicOwnerPlan: $this->cnProxyPublicOwnerPlan(1663),
+        );
+
+        $this->assertSame('pass', $payload['status']);
+        $this->assertTrue($payload['readiness_pass']);
+        $this->assertSame(2786, $payload['final_public_accounted_total']);
+        $this->assertSame(0, $payload['final_public_shortfall']);
+        $this->assertTrue($payload['final_public_can_reach_target']);
+        $this->assertSame('2786_RUNTIME_CANDIDATE_PREP_PLAN', $payload['next_required_action']);
+        $this->assertNotContains('DO_NOT_RUN_2786_CANONICAL_CANDIDATE_PREP', $payload['next_required_actions']);
+        $this->assertNotContains('CN_PROXY_AUTHORITY_POLICY_DECISION_1', $payload['next_required_actions']);
+    }
+
+    public function test_invalid_cn_proxy_public_owner_plan_blocks_final_partition_accounting(): void
+    {
+        $baseline = $this->slugs('baseline', 800);
+        $canonical = $this->slugs('canonical', 323);
+        $cnProxy = $this->slugs('policy', 1663, 'cn-');
+        $invalidPlan = [
+            ...$this->cnProxyPublicOwnerPlan(1663),
+            'sitemap_CN_urls' => 1,
+        ];
+
+        $payload = $this->partition(
+            sourceSlugs: [...$baseline, ...$canonical, ...$cnProxy],
+            baselineSlugs: $baseline,
+            occupationExistingSlugs: [...$baseline, ...$canonical, ...$cnProxy],
+            cnProxyPublicOwnerPlan: $invalidPlan,
+        );
+
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertSame(0, $payload['cn_proxy_public_owner_plan_count']);
+        $this->assertSame(1663, $payload['cn_proxy_policy_asset_unresolved_count']);
+        $this->assertFalse($payload['cn_proxy_public_owner_plan']['ready']);
+        $this->assertContains('sitemap_CN_urls', $payload['cn_proxy_public_owner_plan']['failed_requirements']);
+        $this->assertContains('cn_proxy_public_owner_plan_invalid', array_column($payload['blockers'], 'reason'));
+    }
+
     public function test_blocks_when_source_plan_is_not_complete_2786(): void
     {
         $baseline = $this->slugs('baseline', 800);
@@ -95,8 +171,12 @@ final class Career2786PublicResolutionPartitionPlannerTest extends TestCase
      * @param  list<string>  $occupationExistingSlugs
      * @return array<string, mixed>
      */
-    private function partition(array $sourceSlugs, array $baselineSlugs, array $occupationExistingSlugs): array
-    {
+    private function partition(
+        array $sourceSlugs,
+        array $baselineSlugs,
+        array $occupationExistingSlugs,
+        ?array $cnProxyPublicOwnerPlan = null,
+    ): array {
         return (new Career2786PublicResolutionPartitionPlanner)->partition(
             sourcePlan: new CareerPublicResolutionPlan(
                 sourcePath: '/tmp/synthetic-career-2786-source.json',
@@ -115,6 +195,7 @@ final class Career2786PublicResolutionPartitionPlannerTest extends TestCase
             targetPublicTotal: 2786,
             locales: ['en', 'zh'],
             occupationExistingSlugs: $occupationExistingSlugs,
+            cnProxyPublicOwnerPlan: $cnProxyPublicOwnerPlan,
         )->toArray();
     }
 
@@ -154,5 +235,32 @@ final class Career2786PublicResolutionPartitionPlannerTest extends TestCase
         }
 
         return $slugs;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function cnProxyPublicOwnerPlan(int $count): array
+    {
+        return [
+            'schema_version' => 'career_2786_cn_proxy_public_owner_plan.v1',
+            'status' => 'validated',
+            'dry_run' => true,
+            'did_write' => false,
+            'cn_proxy_rows' => $count,
+            'public_cn_proxy_page_rows' => $count,
+            'reviewed_trust_manifest_complete' => true,
+            'public_owner_plan_ready' => true,
+            'route_owner_enabled' => false,
+            'public_route_allowed' => false,
+            'public_pages_exposed' => 0,
+            'noindex_default' => true,
+            'indexable_CN_proxy_rows' => 0,
+            'sitemap_CN_urls' => 0,
+            'llms_CN_urls' => 0,
+            'llms_full_CN_urls' => 0,
+            'guarded_public_owner_state' => 'reviewed_noindex_public_cn_proxy_page_ready_for_separate_owner_train',
+            'blockers' => [],
+        ];
     }
 }

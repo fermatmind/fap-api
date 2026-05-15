@@ -66,6 +66,43 @@ final class CareerPlanCanonical2786PublicResolutionPartitionCommandTest extends 
         $this->assertFileExists($output);
     }
 
+    public function test_command_accounts_reviewed_cn_proxy_public_owner_plan_without_unlocking_rollout_candidates(): void
+    {
+        $baseline = $this->slugs('baseline', 800);
+        $canonical = $this->slugs('canonical', 322);
+        $cnProxy = $this->slugs('policy', 1663, 'cn-');
+        $software = ['software-developers'];
+        $baselinePath = $this->writeSlugs('baseline', $baseline);
+        $output = $this->tempPath('output');
+
+        $exitCode = Artisan::call('career:plan-canonical-2786-public-resolution-partition', [
+            '--source-plan' => $this->writeSourcePlan([...$baseline, ...$canonical, ...$cnProxy, ...$software]),
+            '--closeout' => $this->writeCloseout($baselinePath),
+            '--current-total' => '800',
+            '--target-total' => '2786',
+            '--locales' => 'en,zh',
+            '--entity-context' => $this->writeEntityContext([...$baseline, ...$canonical, ...$cnProxy, ...$software], []),
+            '--cn-proxy-public-owner-plan' => $this->writeCnProxyPublicOwnerPlan(1663),
+            '--json' => true,
+            '--output' => $output,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('pass', $payload['status']);
+        $this->assertFalse($payload['readiness_pass']);
+        $this->assertSame(322, $payload['canonical_rollout_candidate_count']);
+        $this->assertSame(1663, $payload['cn_proxy_policy_asset_count']);
+        $this->assertSame(1663, $payload['cn_proxy_public_owner_plan_count']);
+        $this->assertSame(0, $payload['cn_proxy_policy_asset_unresolved_count']);
+        $this->assertSame(2785, $payload['final_public_accounted_total']);
+        $this->assertSame(1, $payload['final_public_shortfall']);
+        $this->assertTrue($payload['cn_proxy_public_owner_plan']['ready']);
+        $this->assertNotContains('CN_PROXY_AUTHORITY_POLICY_DECISION_1', $payload['next_required_actions']);
+        $this->assertContains('SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1', $payload['next_required_actions']);
+        $this->assertFileExists($output);
+    }
+
     public function test_missing_source_plan_blocks_without_mutation(): void
     {
         $baselinePath = $this->writeSlugs('baseline', $this->slugs('baseline', 800));
@@ -178,6 +215,30 @@ final class CareerPlanCanonical2786PublicResolutionPartitionCommandTest extends 
         return $this->writeJson('entity-context', [
             'schema_version' => 'career_entity_context.v1',
             'rows' => $rows,
+        ]);
+    }
+
+    private function writeCnProxyPublicOwnerPlan(int $count): string
+    {
+        return $this->writeJson('cn-proxy-public-owner-plan', [
+            'schema_version' => 'career_2786_cn_proxy_public_owner_plan.v1',
+            'status' => 'validated',
+            'dry_run' => true,
+            'did_write' => false,
+            'cn_proxy_rows' => $count,
+            'public_cn_proxy_page_rows' => $count,
+            'reviewed_trust_manifest_complete' => true,
+            'public_owner_plan_ready' => true,
+            'route_owner_enabled' => false,
+            'public_route_allowed' => false,
+            'public_pages_exposed' => 0,
+            'noindex_default' => true,
+            'indexable_CN_proxy_rows' => 0,
+            'sitemap_CN_urls' => 0,
+            'llms_CN_urls' => 0,
+            'llms_full_CN_urls' => 0,
+            'guarded_public_owner_state' => 'reviewed_noindex_public_cn_proxy_page_ready_for_separate_owner_train',
+            'blockers' => [],
         ]);
     }
 

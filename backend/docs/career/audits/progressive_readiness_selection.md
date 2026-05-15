@@ -33,6 +33,13 @@ the rollout executor rejects it before any write. Readiness reports it as
 `software_developers_manual_hold_excluded_from_canonical_rollout` and selects a
 later eligible replacement when available.
 
+For the final 800 -> 2786 step, the selector may consume
+`--cn-proxy-public-owner-plan`. This artifact lets a reviewed, noindex CN proxy
+public-owner partition count toward final 2786 public accounting without adding
+those CN proxy rows to the canonical rollout delta. The plan is accepted only
+when it is read-only, reviewed, disabled for public route exposure, noindex by
+default, and absent from sitemap, llms, and llms-full outputs.
+
 ## Readiness Selection vs Rollout Validation
 
 This step is intentionally earlier than rollout-candidate validation. It does
@@ -52,6 +59,8 @@ projection/truth/ledger artifacts and explicit rollout gates.
 - Locale list, normally `en,zh`.
 - Optional production-derived entity context from
   `career:export-canonical-eligibility-db-context`.
+- Optional final-only CN proxy public-owner plan from
+  `career:validate-cn-proxy-public-owner`.
 
 ## Output
 
@@ -64,8 +73,14 @@ The command emits stable JSON using:
   "current_public_total": 80,
   "target_public_total": 300,
   "delta_slug_count": 220,
+  "canonical_delta_slug_count": 220,
+  "public_owner_delta_slug_count": 0,
   "expected_delta_locale_rows": 440,
+  "expected_canonical_delta_locale_rows": 440,
+  "expected_public_owner_locale_rows": 0,
   "selected_count": 220,
+  "final_public_accounted_count": 300,
+  "final_public_shortfall": 0,
   "selected_slugs": [],
   "selection": {
     "slugs": [],
@@ -75,6 +90,11 @@ The command emits stable JSON using:
     "required_for_selection": true,
     "occupation_exists_count": 2469,
     "occupation_missing_excluded_count": 27
+  },
+  "cn_proxy_public_owner_plan": {
+    "provided": false,
+    "ready": false,
+    "public_owner_count": 0
   },
   "excluded": {
     "excluded_by_reason": {
@@ -136,6 +156,28 @@ The rollout manifest gate also fails closed if `software-developers` appears in
 an explicit delta manifest. This is an earlier planning guard only; it does not
 weaken the existing rollout executor, rollback gate, or final live acceptance
 checks.
+
+## Final 2786 Public Owner Partition
+
+`--cn-proxy-public-owner-plan` is scoped to target `2786`. It does not apply to
+the 300 or 800 cohorts. When supplied and valid, the selector:
+
+- keeps CN proxy rows excluded from `selected_slugs`,
+  `delta_promotion_slugs`, and `canonical_rollout_slugs`;
+- records `public_owner_delta_slug_count` and
+  `expected_public_owner_locale_rows`;
+- reduces `canonical_delta_slug_count` to the remaining canonical rollout
+  shortfall after the public-owner partition; and
+- reports `final_public_accounted_count` / `final_public_shortfall`.
+
+The public-owner plan must be validated, read-only, write-free, reviewed, noindex
+by default, route-disabled, and absent from sitemap, llms, and llms-full outputs.
+Invalid public-owner evidence is reported as
+`cn_proxy_public_owner_plan_invalid` and is not counted toward the final target.
+
+This authority is accounting-only for final readiness. It does not publish CN
+proxy rows, does not permit canonical rollout promotion for CN proxy rows, and
+does not weaken final live acceptance.
 
 ## Non-Goals
 
