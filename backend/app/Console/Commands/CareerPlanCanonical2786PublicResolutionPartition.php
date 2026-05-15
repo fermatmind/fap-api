@@ -21,6 +21,7 @@ final class CareerPlanCanonical2786PublicResolutionPartition extends Command
         {--locales=en,zh : Comma-separated locales}
         {--entity-context= : Optional entity context JSON; if supplied, rows without occupation_exists=true are partitioned for remediation}
         {--cn-proxy-public-owner-plan= : Optional reviewed CN proxy public-owner plan JSON for final 2786 partition accounting}
+        {--software-manual-hold-decision= : Optional reviewed software-developers manual-hold decision JSON for final 2786 partition accounting}
         {--strict : Fail on source-plan validation issues}
         {--json : Emit JSON output}
         {--output= : Optional output path for final 2786 partition JSON}';
@@ -47,11 +48,18 @@ final class CareerPlanCanonical2786PublicResolutionPartition extends Command
             $closeout = $this->readJson($closeoutPath, 'closeout');
             $entityContextPath = $this->pathOption('entity-context');
             $cnProxyPublicOwnerPlanPath = $this->pathOption('cn-proxy-public-owner-plan');
+            $softwareManualHoldDecisionPath = $this->pathOption('software-manual-hold-decision');
             $cnProxyPublicOwnerPlan = $cnProxyPublicOwnerPlanPath === null
                 ? null
                 : [
                     ...$this->readJson($cnProxyPublicOwnerPlanPath, 'cn_proxy_public_owner_plan'),
                     'source_path' => $cnProxyPublicOwnerPlanPath,
+                ];
+            $softwareManualHoldDecision = $softwareManualHoldDecisionPath === null
+                ? null
+                : [
+                    ...$this->readJson($softwareManualHoldDecisionPath, 'software_manual_hold_decision'),
+                    'source_path' => $softwareManualHoldDecisionPath,
                 ];
             $payload = app(Career2786PublicResolutionPartitionPlanner::class)->partition(
                 sourcePlan: $sourcePlan,
@@ -62,6 +70,7 @@ final class CareerPlanCanonical2786PublicResolutionPartition extends Command
                 locales: $this->localesOption(),
                 occupationExistingSlugs: $entityContextPath === null ? null : $this->readOccupationExistingSlugs($entityContextPath),
                 cnProxyPublicOwnerPlan: $cnProxyPublicOwnerPlan,
+                softwareManualHoldDecision: $softwareManualHoldDecision,
             )->toArray();
 
             $payload['source_plan']['validation_issue_count'] = count($sourcePlanValidation->issues);

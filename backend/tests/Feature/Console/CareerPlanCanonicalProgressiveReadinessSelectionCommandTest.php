@@ -138,6 +138,72 @@ final class CareerPlanCanonicalProgressiveReadinessSelectionCommandTest extends 
         $this->assertFileExists($output);
     }
 
+    public function test_final_2786_selection_uses_software_manual_hold_decision_for_partition_accounting_only(): void
+    {
+        $current = $this->slugs('current', 800);
+        $canonical = $this->slugs('canonical', 322);
+        $cnProxy = $this->prefixedSlugs('policy', 1663, 'cn-');
+        $currentSlugs = $this->writeSlugs('current', $current);
+        $output = $this->tempPath('output');
+
+        $exitCode = Artisan::call('career:plan-canonical-progressive-readiness-selection', [
+            '--source-plan' => $this->writeSourcePlan([...$current, ...$canonical, ...$cnProxy, 'software-developers']),
+            '--closeout' => $this->writeCloseout(800, $currentSlugs),
+            '--current-total' => '800',
+            '--target-total' => '2786',
+            '--locales' => 'en,zh',
+            '--cn-proxy-public-owner-plan' => $this->writeCnProxyPublicOwnerPlan(1663),
+            '--software-manual-hold-decision' => $this->writeSoftwareManualHoldDecision(),
+            '--json' => true,
+            '--output' => $output,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame(1986, $payload['delta_slug_count']);
+        $this->assertSame(322, $payload['canonical_delta_slug_count']);
+        $this->assertSame(1663, $payload['public_owner_delta_slug_count']);
+        $this->assertSame(1, $payload['software_manual_hold_delta_slug_count']);
+        $this->assertSame(322, $payload['selected_count']);
+        $this->assertSame(2786, $payload['final_public_accounted_count']);
+        $this->assertSame(0, $payload['final_public_shortfall']);
+        $this->assertTrue($payload['software_manual_hold_decision']['ready']);
+        $this->assertNotContains('software-developers', $payload['selected_slugs']);
+        $this->assertNotContains('software-developers', $payload['canonical_rollout_slugs']);
+        $this->assertFalse($payload['writes_database']);
+        $this->assertFalse($payload['apply_allowed']);
+        $this->assertFalse($payload['rollout_allowed']);
+        $this->assertFileExists($output);
+    }
+
+    public function test_invalid_software_manual_hold_decision_blocks_final_2786_accounting(): void
+    {
+        $current = $this->slugs('current', 800);
+        $canonical = $this->slugs('canonical', 322);
+        $cnProxy = $this->prefixedSlugs('policy', 1663, 'cn-');
+        $currentSlugs = $this->writeSlugs('current', $current);
+
+        $exitCode = Artisan::call('career:plan-canonical-progressive-readiness-selection', [
+            '--source-plan' => $this->writeSourcePlan([...$current, ...$canonical, ...$cnProxy, 'software-developers']),
+            '--closeout' => $this->writeCloseout(800, $currentSlugs),
+            '--current-total' => '800',
+            '--target-total' => '2786',
+            '--locales' => 'en,zh',
+            '--cn-proxy-public-owner-plan' => $this->writeCnProxyPublicOwnerPlan(1663),
+            '--software-manual-hold-decision' => $this->writeSoftwareManualHoldDecision(['public_route_allowed' => true]),
+            '--json' => true,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertSame(0, $payload['software_manual_hold_delta_slug_count']);
+        $this->assertFalse($payload['software_manual_hold_decision']['ready']);
+        $this->assertContains('public_route_allowed', $payload['software_manual_hold_decision']['failed_requirements']);
+        $this->assertContains('software_manual_hold_decision_invalid', array_column($payload['blockers'], 'reason'));
+    }
+
     public function test_entity_context_with_no_existing_occupations_blocks_without_mutation(): void
     {
         $current = $this->slugs('current', 80);
@@ -308,6 +374,36 @@ final class CareerPlanCanonicalProgressiveReadinessSelectionCommandTest extends 
             'llms_full_CN_urls' => 0,
             'guarded_public_owner_state' => 'reviewed_noindex_public_cn_proxy_page_ready_for_separate_owner_train',
             'blockers' => [],
+        ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function writeSoftwareManualHoldDecision(array $overrides = []): string
+    {
+        return $this->writeJson('software-manual-hold-decision', [
+            ...[
+                'schema_version' => 'career_2786_software_manual_hold_final_policy_decision.v1',
+                'status' => 'decided',
+                'slug' => 'software-developers',
+                'decision' => 'resolve_as_governed_non_public_manual_hold',
+                'accepted_for_final_resolution_accounting' => true,
+                'accepted_as_canonical_public_rollout_candidate' => false,
+                'accepted_as_public_nonindex_reference' => false,
+                'canonical_rollout_allowed' => false,
+                'candidate_prep_allowed' => false,
+                'rollout_apply_allowed' => false,
+                'public_route_allowed' => false,
+                'sitemap_allowed' => false,
+                'llms_allowed' => false,
+                'llms_full_allowed' => false,
+                'governed_non_public_partition' => 'software_manual_hold',
+                'governed_non_public_count' => 1,
+                'writes_database' => false,
+                'blockers_not_resolved_by_this_decision' => [],
+            ],
+            ...$overrides,
         ]);
     }
 

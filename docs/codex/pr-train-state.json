@@ -6938,6 +6938,91 @@
         }
       ]
     },
+    "REPAIR-2786-FINAL-READINESS-SOFTWARE-MANUAL-HOLD-AUTHORITY-1": {
+      "repo": "fap-api",
+      "branch": "fix/career-2786-final-readiness-software-manual-hold-authority-1",
+      "title": "fix(api): account software manual hold in 2786 readiness",
+      "name": "Account software-developers manual-hold decision in final 2786 readiness",
+      "status": "in_progress",
+      "depends_on": [
+        "SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1",
+        "REPAIR-2786-FINAL-READINESS-PUBLIC-OWNER-PARTITION-AUTHORITY-1"
+      ],
+      "scope_type": "final_2786_software_manual_hold_authority_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonicalProgressiveReadinessSelection.php",
+        "backend/app/Console/Commands/CareerPlanCanonical2786PublicResolutionPartition.php",
+        "backend/app/Domain/Career/Audit/**",
+        "backend/tests/Unit/Domain/Career/Audit/**",
+        "backend/tests/Feature/Console/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no candidate prep dry-run",
+        "no candidate prep apply",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no production DB mutation",
+        "no rollback",
+        "no quarantine",
+        "no deploy",
+        "no fap-web",
+        "do not mark software-developers as a canonical rollout candidate",
+        "do not enable software-developers public route, indexability, sitemap, llms, or llms-full exposure",
+        "do not weaken final live acceptance"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-2786-FINAL-READINESS-SOFTWARE-MANUAL-HOLD-AUTHORITY-1, then implementing the PR."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1 produced /tmp/career_2786_software_manual_hold_final_policy_decision.json and PR #1417 is present on origin/main."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are limited to final 2786 readiness/partition command and domain logic, focused Career tests, audit docs, and authorized train metadata."
+        },
+        "local_validation": {
+          "status": "pass",
+          "evidence": [
+            "php artisan test --filter=CareerProgressiveReadinessSelection --no-ansi: pass (19 tests, 98 assertions)",
+            "php artisan test --filter=Career2786PublicResolutionPartition --no-ansi: pass (8 tests, 82 assertions)",
+            "php artisan test tests/Feature/Console/CareerPlanCanonicalProgressiveReadinessSelectionCommandTest.php --no-ansi: pass (9 tests, 66 assertions)",
+            "php artisan test tests/Feature/Console/CareerPlanCanonical2786PublicResolutionPartitionCommandTest.php --no-ansi: pass (5 tests, 47 assertions)",
+            "php artisan test --filter=CareerProgressive --no-ansi: pass (37 tests, 171 assertions)",
+            "php artisan test --filter=Career80TotalLiveAcceptance --no-ansi: pass (11 tests, 49 assertions)",
+            "php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi: pass (27 tests, 138 assertions)",
+            "php artisan test --filter=CareerRuntimeCandidate --no-ansi: pass (8 tests, 40 assertions)",
+            "php artisan route:list --no-ansi: pass",
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-2786-software-manual-hold-authority.sqlite php artisan migrate --force --no-ansi: pass",
+            "ruby YAML.load_file docs/codex/pr-train.yaml: pass",
+            "python3 -m json.tool docs/codex/pr-train-state.json: pass",
+            "vendor/bin/pint --test: pass",
+            "git diff --check: pass",
+            "bash backend/scripts/ci_verify_mbti.sh: pass",
+            "Local read-only readiness smoke against /tmp 2786 artifacts: status=pass, selected_count=322, canonical_delta_slug_count=322, public_owner_delta_slug_count=1663, software_manual_hold_delta_slug_count=1, final_public_accounted_count=2786, final_public_shortfall=0, writes_database=false.",
+            "Local read-only partition smoke against /tmp 2786 artifacts: status=pass, canonical_rollout_candidate_count=322, cn_proxy_public_owner_plan_count=1663, software_manual_hold_decision_count=1, software_manual_hold_unresolved_count=0, final_public_accounted_total=2786, final_public_shortfall=0, candidate_prep_allowed=false."
+          ]
+        },
+        "github_pr": {
+          "status": "pending",
+          "evidence": null
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "2786-READINESS-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
     "PR-CMS-FIX-MASTER": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-fix-master-semantic-content-gate",

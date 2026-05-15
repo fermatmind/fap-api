@@ -104,6 +104,72 @@ final class Career2786PublicResolutionPartitionPlannerTest extends TestCase
         $this->assertContains('DO_NOT_RUN_2786_CANONICAL_CANDIDATE_PREP', $payload['next_required_actions']);
     }
 
+    public function test_software_manual_hold_decision_accounts_for_final_partition_without_unlocking_rollout_candidate(): void
+    {
+        $baseline = $this->slugs('baseline', 800);
+        $canonical = $this->slugs('canonical', 322);
+        $cnProxy = $this->slugs('policy', 1663, 'cn-');
+        $software = ['software-developers'];
+
+        $payload = $this->partition(
+            sourceSlugs: [...$baseline, ...$canonical, ...$cnProxy, ...$software],
+            baselineSlugs: $baseline,
+            occupationExistingSlugs: [...$baseline, ...$canonical, ...$cnProxy, ...$software],
+            cnProxyPublicOwnerPlan: $this->cnProxyPublicOwnerPlan(1663),
+            softwareManualHoldDecision: $this->softwareManualHoldDecision(),
+        );
+
+        $softwareRows = array_values(array_filter(
+            $payload['rows'],
+            static fn (array $row): bool => $row['slug'] === 'software-developers',
+        ));
+
+        $this->assertSame('pass', $payload['status']);
+        $this->assertTrue($payload['readiness_pass']);
+        $this->assertSame(322, $payload['canonical_rollout_candidate_count']);
+        $this->assertSame(1, $payload['software_manual_hold_count']);
+        $this->assertSame(1, $payload['software_manual_hold_decision_count']);
+        $this->assertSame(0, $payload['software_manual_hold_unresolved_count']);
+        $this->assertSame(2786, $payload['final_public_accounted_total']);
+        $this->assertSame(0, $payload['final_public_shortfall']);
+        $this->assertTrue($payload['software_manual_hold_decision']['ready']);
+        $this->assertNotContains('SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1', $payload['next_required_actions']);
+        $this->assertNotContains('DO_NOT_RUN_2786_CANONICAL_CANDIDATE_PREP', $payload['next_required_actions']);
+        $this->assertCount(1, $softwareRows);
+        $this->assertFalse($softwareRows[0]['rollout_candidate']);
+        $this->assertFalse($softwareRows[0]['canonical_rollout_candidate']);
+        $this->assertFalse($softwareRows[0]['candidate_prep_allowed']);
+    }
+
+    public function test_invalid_software_manual_hold_decision_blocks_final_partition_accounting(): void
+    {
+        $baseline = $this->slugs('baseline', 800);
+        $canonical = $this->slugs('canonical', 322);
+        $cnProxy = $this->slugs('policy', 1663, 'cn-');
+        $software = ['software-developers'];
+        $invalidDecision = [
+            ...$this->softwareManualHoldDecision(),
+            'sitemap_allowed' => true,
+        ];
+
+        $payload = $this->partition(
+            sourceSlugs: [...$baseline, ...$canonical, ...$cnProxy, ...$software],
+            baselineSlugs: $baseline,
+            occupationExistingSlugs: [...$baseline, ...$canonical, ...$cnProxy, ...$software],
+            cnProxyPublicOwnerPlan: $this->cnProxyPublicOwnerPlan(1663),
+            softwareManualHoldDecision: $invalidDecision,
+        );
+
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertFalse($payload['readiness_pass']);
+        $this->assertSame(0, $payload['software_manual_hold_decision_count']);
+        $this->assertSame(1, $payload['software_manual_hold_unresolved_count']);
+        $this->assertFalse($payload['software_manual_hold_decision']['ready']);
+        $this->assertContains('sitemap_allowed', $payload['software_manual_hold_decision']['failed_requirements']);
+        $this->assertContains('software_manual_hold_decision_invalid', array_column($payload['blockers'], 'reason'));
+        $this->assertContains('SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1', $payload['next_required_actions']);
+    }
+
     public function test_reviewed_cn_proxy_public_owner_plan_allows_final_partition_readiness_when_accounting_is_complete(): void
     {
         $baseline = $this->slugs('baseline', 800);
@@ -176,6 +242,7 @@ final class Career2786PublicResolutionPartitionPlannerTest extends TestCase
         array $baselineSlugs,
         array $occupationExistingSlugs,
         ?array $cnProxyPublicOwnerPlan = null,
+        ?array $softwareManualHoldDecision = null,
     ): array {
         return (new Career2786PublicResolutionPartitionPlanner)->partition(
             sourcePlan: new CareerPublicResolutionPlan(
@@ -196,6 +263,7 @@ final class Career2786PublicResolutionPartitionPlannerTest extends TestCase
             locales: ['en', 'zh'],
             occupationExistingSlugs: $occupationExistingSlugs,
             cnProxyPublicOwnerPlan: $cnProxyPublicOwnerPlan,
+            softwareManualHoldDecision: $softwareManualHoldDecision,
         )->toArray();
     }
 
@@ -261,6 +329,33 @@ final class Career2786PublicResolutionPartitionPlannerTest extends TestCase
             'llms_full_CN_urls' => 0,
             'guarded_public_owner_state' => 'reviewed_noindex_public_cn_proxy_page_ready_for_separate_owner_train',
             'blockers' => [],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function softwareManualHoldDecision(): array
+    {
+        return [
+            'schema_version' => 'career_2786_software_manual_hold_final_policy_decision.v1',
+            'status' => 'decided',
+            'slug' => 'software-developers',
+            'decision' => 'resolve_as_governed_non_public_manual_hold',
+            'accepted_for_final_resolution_accounting' => true,
+            'accepted_as_canonical_public_rollout_candidate' => false,
+            'accepted_as_public_nonindex_reference' => false,
+            'canonical_rollout_allowed' => false,
+            'candidate_prep_allowed' => false,
+            'rollout_apply_allowed' => false,
+            'public_route_allowed' => false,
+            'sitemap_allowed' => false,
+            'llms_allowed' => false,
+            'llms_full_allowed' => false,
+            'governed_non_public_partition' => 'software_manual_hold',
+            'governed_non_public_count' => 1,
+            'writes_database' => false,
+            'blockers_not_resolved_by_this_decision' => [],
         ];
     }
 }

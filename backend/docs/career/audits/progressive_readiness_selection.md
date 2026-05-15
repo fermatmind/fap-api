@@ -179,6 +179,31 @@ This authority is accounting-only for final readiness. It does not publish CN
 proxy rows, does not permit canonical rollout promotion for CN proxy rows, and
 does not weaken final live acceptance.
 
+## Final 2786 Software Manual-Hold Authority
+
+`--software-manual-hold-decision` is scoped to target `2786`. When supplied and
+valid, the selector:
+
+- keeps `software-developers` excluded from `selected_slugs`,
+  `delta_promotion_slugs`, and `canonical_rollout_slugs`;
+- records `software_manual_hold_delta_slug_count` and
+  `expected_software_manual_hold_locale_rows`;
+- reduces `canonical_delta_slug_count` to the remaining canonical rollout
+  shortfall after both CN proxy public-owner and software manual-hold
+  accounting; and
+- reports `final_public_accounted_count` / `final_public_shortfall`.
+
+The decision must be decided, read-only, write-free, scoped to
+`software-developers`, accepted only for final resolution accounting, and must
+keep canonical rollout, candidate prep, rollout apply, public route, sitemap,
+llms, and llms-full disabled. Invalid manual-hold evidence is reported as
+`software_manual_hold_decision_invalid` and is not counted toward the final
+target.
+
+This authority is accounting-only for final readiness. It does not publish
+`software-developers`, does not permit canonical rollout promotion for the slug,
+and does not weaken final live acceptance.
+
 ## Non-Goals
 
 - No DB mutation.
