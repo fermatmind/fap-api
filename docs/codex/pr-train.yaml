@@ -430,6 +430,41 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-RUNTIME-PROJECTION-LOOKUP-LATEST-SELECTION-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-PROGRESSIVE-READINESS-CN-PROXY-EXCLUSION-1
+    branch: fix/career-runtime-projection-lookup-latest-selection-1
+    title: "fix(api): select newest career runtime projection artifact"
+    name: "Fix latest materialized Career runtime projection lookup selection"
+    scope:
+      - Select the newest valid materialized Career runtime projection artifact by artifact freshness instead of raw directory-name lexical order.
+      - Skip invalid or incomplete materialized projection directories.
+      - Preserve strict runtime visibility, release gate, and final live acceptance semantics.
+      - Keep frontend behavior backend-authoritative through the existing runtime projection lookup.
+    allowed_paths:
+      - backend/app/Domain/Career/Publish/**
+      - backend/tests/Unit/Services/Career/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout apply.
+      - Run production DB mutation.
+      - Run rollback or quarantine.
+      - Run deploy.
+      - Touch fap-web.
+      - Weaken final live acceptance.
+      - Treat candidate-aware planning artifacts as final published authority.
+    validation:
+      - php artisan test --filter=CareerRuntimePublishProjectionLookup --no-ansi
+      - php artisan test --filter=CareerJobDetail --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
     repo: fap-api
     depends_on:
