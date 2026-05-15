@@ -20,6 +20,7 @@ final class CareerPlanCanonicalProgressiveReadinessSelection extends Command
         {--target-total= : Required target public total: 300, 800, or 2786}
         {--locales=en,zh : Comma-separated locales}
         {--entity-context= : Optional production-derived entity context JSON; if supplied, selected delta slugs must have occupation_exists=true}
+        {--cn-proxy-public-owner-plan= : Optional reviewed CN proxy public-owner plan JSON for final 2786 partition accounting}
         {--exclude-slugs= : Optional newline, comma, or JSON slug artifact to exclude}
         {--strict : Fail on source-plan validation issues}
         {--json : Emit JSON output}
@@ -45,6 +46,13 @@ final class CareerPlanCanonicalProgressiveReadinessSelection extends Command
             $baselinePath = $this->pathFromCloseout($closeout, 'total_slugs_path');
             $excludePath = $this->pathOption('exclude-slugs');
             $entityContextPath = $this->pathOption('entity-context');
+            $cnProxyPublicOwnerPlanPath = $this->pathOption('cn-proxy-public-owner-plan');
+            $cnProxyPublicOwnerPlan = $cnProxyPublicOwnerPlanPath === null
+                ? null
+                : [
+                    ...$this->readJson($cnProxyPublicOwnerPlanPath, 'cn_proxy_public_owner_plan'),
+                    'source_path' => $cnProxyPublicOwnerPlanPath,
+                ];
             $payload = app(CareerProgressiveReadinessSelector::class)->select(
                 sourcePlan: $sourcePlan,
                 currentCloseout: $closeout,
@@ -54,6 +62,7 @@ final class CareerPlanCanonicalProgressiveReadinessSelection extends Command
                 locales: $this->localesOption(),
                 excludeSlugs: $excludePath === null ? [] : $this->readSlugList($excludePath, 'exclude_slug'),
                 occupationExistingSlugs: $entityContextPath === null ? null : $this->readOccupationExistingSlugs($entityContextPath),
+                cnProxyPublicOwnerPlan: $cnProxyPublicOwnerPlan,
                 strict: (bool) $this->option('strict'),
             )->toArray();
 

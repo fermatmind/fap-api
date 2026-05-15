@@ -25,6 +25,7 @@ final class CareerProgressiveReadinessSelector
         array $locales = ['en', 'zh'],
         array $excludeSlugs = [],
         ?array $occupationExistingSlugs = null,
+        ?array $cnProxyPublicOwnerPlan = null,
         bool $strict = false,
     ): CareerProgressiveReadinessSelectionResult {
         $locales = $this->normalizedStringList($locales, 'locale');
@@ -39,6 +40,14 @@ final class CareerProgressiveReadinessSelector
         $requiresOccupationExists = $occupationExistingSlugs !== null;
         $deltaNeeded = max(0, $targetPublicTotal - $currentPublicTotal);
         $issues = $this->initialIssues($currentCloseout, $baselineSlugs, $currentPublicTotal, $targetPublicTotal);
+        $cnProxyPublicOwnerAuthority = $this->cnProxyPublicOwnerAuthority($cnProxyPublicOwnerPlan, $targetPublicTotal);
+        foreach ($cnProxyPublicOwnerAuthority['issues'] as $issue) {
+            $issues[] = $issue;
+        }
+        $publicOwnerDeltaCount = $cnProxyPublicOwnerAuthority['ready']
+            ? min((int) $cnProxyPublicOwnerAuthority['public_owner_count'], $deltaNeeded)
+            : 0;
+        $canonicalDeltaNeeded = max(0, $deltaNeeded - $publicOwnerDeltaCount);
         $candidates = [];
         $selectedSlugs = [];
         $duplicateSourceSlugs = [];
@@ -96,7 +105,7 @@ final class CareerProgressiveReadinessSelector
                 && ! $baselineExcluded
                 && ! isset($excludeSet[$slug])
                 && ! $occupationMissing
-                && count($selectedSlugs) < $deltaNeeded
+                && count($selectedSlugs) < $canonicalDeltaNeeded
                 && $issues === [];
 
             if ($selected) {
@@ -128,14 +137,24 @@ final class CareerProgressiveReadinessSelector
             );
         }
 
-        if (count($selectedSlugs) < $deltaNeeded) {
+        if (count($selectedSlugs) < $canonicalDeltaNeeded) {
+            $finalPublicAccountedCount = $currentPublicTotal + count($selectedSlugs) + $publicOwnerDeltaCount;
+            $reason = $publicOwnerDeltaCount > 0
+                ? 'insufficient_final_public_partition_authority'
+                : 'insufficient_source_ready_delta_slugs';
             $issues[] = new CareerProgressiveReadinessSelectionIssue(
-                reason: 'insufficient_source_ready_delta_slugs',
-                message: 'Fewer than the required progressive delta source-ready slugs are available.',
+                reason: $reason,
+                message: $publicOwnerDeltaCount > 0
+                    ? 'Final 2786 public accounting still has an unresolved partition shortfall after CN proxy public-owner evidence.'
+                    : 'Fewer than the required progressive delta source-ready slugs are available.',
                 severity: 'blocker_for_publication',
                 evidence: [
                     'required_delta_slug_count' => $deltaNeeded,
+                    'required_canonical_delta_slug_count' => $canonicalDeltaNeeded,
+                    'public_owner_delta_slug_count' => $publicOwnerDeltaCount,
                     'selected_count' => count($selectedSlugs),
+                    'final_public_accounted_count' => $finalPublicAccountedCount,
+                    'final_public_shortfall' => max(0, $targetPublicTotal - $finalPublicAccountedCount),
                     'source_ready_delta_count' => $sourceReadyCount,
                     'selectable_candidate_count' => $selectableCandidateCount,
                     'occupation_missing_excluded_count' => $occupationMissingExcludedCount,
@@ -150,6 +169,11 @@ final class CareerProgressiveReadinessSelector
         ksort($excludedByReason);
         $targetSlugs = [...$baselineSlugs, ...$selectedSlugs];
         $status = $issues === [] ? 'pass' : 'blocked';
+        $finalPublicAccountedCount = $currentPublicTotal + count($selectedSlugs) + $publicOwnerDeltaCount;
+        $finalPublicShortfall = max(0, $targetPublicTotal - $finalPublicAccountedCount);
+        $selectionStrategy = $publicOwnerDeltaCount > 0
+            ? 'progressive_source_ready_after_closeout_baseline_with_public_owner_partition'
+            : 'progressive_source_ready_after_closeout_baseline';
 
         return new CareerProgressiveReadinessSelectionResult([
             'schema_version' => self::SCHEMA_VERSION,
@@ -163,21 +187,29 @@ final class CareerProgressiveReadinessSelector
             'target_public_total' => $targetPublicTotal,
             'baseline_count' => count($baselineSlugs),
             'delta_slug_count' => $deltaNeeded,
+            'canonical_delta_slug_count' => $canonicalDeltaNeeded,
+            'public_owner_delta_slug_count' => $publicOwnerDeltaCount,
             'selected_count' => count($selectedSlugs),
             'candidate_count' => $selectableCandidateCount,
             'source_ready_count' => $sourceReadyCount,
             'locale_count' => count($locales),
             'locales' => $locales,
             'expected_delta_locale_rows' => $deltaNeeded * count($locales),
+            'expected_canonical_delta_locale_rows' => $canonicalDeltaNeeded * count($locales),
+            'expected_public_owner_locale_rows' => $publicOwnerDeltaCount * count($locales),
             'expected_total_locale_rows' => $targetPublicTotal * count($locales),
+            'final_public_accounted_count' => $finalPublicAccountedCount,
+            'final_public_shortfall' => $finalPublicShortfall,
             'baseline_slugs' => $baselineSlugs,
             'selected_slugs' => $selectedSlugs,
             'delta_promotion_slugs' => $selectedSlugs,
+            'canonical_rollout_slugs' => $selectedSlugs,
             'target_public_slugs' => $targetSlugs,
             'selection' => [
-                'strategy' => 'progressive_source_ready_after_closeout_baseline',
+                'strategy' => $selectionStrategy,
                 'slugs' => $targetSlugs,
                 'delta_slugs' => $selectedSlugs,
+                'canonical_delta_slugs' => $selectedSlugs,
                 'rows' => array_map(
                     static fn (CareerProgressiveReadinessCandidate $candidate): array => $candidate->toArray(),
                     array_values(array_filter(
@@ -196,6 +228,7 @@ final class CareerProgressiveReadinessSelector
                 'occupation_exists_count' => $occupationExistingSlugs === null ? null : count($occupationExistingSlugs),
                 'occupation_missing_excluded_count' => $occupationMissingExcludedCount,
             ],
+            'cn_proxy_public_owner_plan' => $cnProxyPublicOwnerAuthority['summary'],
             'excluded' => [
                 'excluded_by_reason' => $excludedByReason,
                 'baseline_excluded_count' => count($baselineSlugs),
@@ -339,6 +372,98 @@ final class CareerProgressiveReadinessSelector
         }
 
         return $issues;
+    }
+
+    /**
+     * @return array{ready: bool, public_owner_count: int, issues: list<CareerProgressiveReadinessSelectionIssue>, summary: array<string, mixed>}
+     */
+    private function cnProxyPublicOwnerAuthority(?array $plan, int $targetPublicTotal): array
+    {
+        $summary = [
+            'provided' => $plan !== null,
+            'ready' => false,
+            'public_owner_count' => 0,
+            'source_path' => $plan['source_path'] ?? null,
+            'guarded_public_owner_state' => $plan['guarded_public_owner_state'] ?? null,
+        ];
+
+        if ($plan === null) {
+            return [
+                'ready' => false,
+                'public_owner_count' => 0,
+                'issues' => [],
+                'summary' => $summary,
+            ];
+        }
+
+        if ($targetPublicTotal !== 2786) {
+            $issue = new CareerProgressiveReadinessSelectionIssue(
+                reason: 'cn_proxy_public_owner_plan_target_scope_invalid',
+                message: 'CN proxy public-owner partition evidence is valid only for the final 2786 readiness target.',
+                severity: 'high',
+                evidence: ['target_public_total' => $targetPublicTotal],
+            );
+
+            return [
+                'ready' => false,
+                'public_owner_count' => 0,
+                'issues' => [$issue],
+                'summary' => $summary,
+            ];
+        }
+
+        $count = (int) ($plan['public_cn_proxy_page_rows'] ?? $plan['cn_proxy_rows'] ?? 0);
+        $required = [
+            'status' => ($plan['status'] ?? null) === 'validated',
+            'dry_run' => ($plan['dry_run'] ?? null) === true,
+            'did_write' => ($plan['did_write'] ?? null) === false,
+            'reviewed_trust_manifest_complete' => ($plan['reviewed_trust_manifest_complete'] ?? null) === true,
+            'public_owner_plan_ready' => ($plan['public_owner_plan_ready'] ?? null) === true,
+            'route_owner_enabled' => ($plan['route_owner_enabled'] ?? null) === false,
+            'public_route_allowed' => ($plan['public_route_allowed'] ?? null) === false,
+            'public_pages_exposed' => (int) ($plan['public_pages_exposed'] ?? -1) === 0,
+            'noindex_default' => ($plan['noindex_default'] ?? null) === true,
+            'indexable_CN_proxy_rows' => (int) ($plan['indexable_CN_proxy_rows'] ?? -1) === 0,
+            'sitemap_CN_urls' => (int) ($plan['sitemap_CN_urls'] ?? -1) === 0,
+            'llms_CN_urls' => (int) ($plan['llms_CN_urls'] ?? -1) === 0,
+            'llms_full_CN_urls' => (int) ($plan['llms_full_CN_urls'] ?? -1) === 0,
+            'blockers_empty' => ($plan['blockers'] ?? []) === [],
+            'public_owner_count_positive' => $count > 0,
+        ];
+        $failed = array_keys(array_filter($required, static fn (bool $passed): bool => ! $passed));
+        $summary = [
+            ...$summary,
+            'ready' => $failed === [],
+            'public_owner_count' => $failed === [] ? $count : 0,
+            'declared_public_owner_count' => $count,
+            'failed_requirements' => $failed,
+        ];
+
+        if ($failed === []) {
+            return [
+                'ready' => true,
+                'public_owner_count' => $count,
+                'issues' => [],
+                'summary' => $summary,
+            ];
+        }
+
+        $issue = new CareerProgressiveReadinessSelectionIssue(
+            reason: 'cn_proxy_public_owner_plan_invalid',
+            message: 'CN proxy public-owner plan cannot be used for final 2786 partition accounting.',
+            severity: 'blocker_for_publication',
+            evidence: [
+                'failed_requirements' => $failed,
+                'declared_public_owner_count' => $count,
+            ],
+        );
+
+        return [
+            'ready' => false,
+            'public_owner_count' => 0,
+            'issues' => [$issue],
+            'summary' => $summary,
+        ];
     }
 
     /**

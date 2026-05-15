@@ -105,6 +105,39 @@ final class CareerPlanCanonicalProgressiveReadinessSelectionCommandTest extends 
         $this->assertFileExists($output);
     }
 
+    public function test_final_2786_selection_uses_cn_proxy_public_owner_plan_for_partition_accounting_only(): void
+    {
+        $current = $this->slugs('current', 800);
+        $canonical = $this->slugs('canonical', 322);
+        $cnProxy = $this->prefixedSlugs('policy', 1663, 'cn-');
+        $currentSlugs = $this->writeSlugs('current', $current);
+        $output = $this->tempPath('output');
+
+        $exitCode = Artisan::call('career:plan-canonical-progressive-readiness-selection', [
+            '--source-plan' => $this->writeSourcePlan([...$current, ...$canonical, ...$cnProxy, 'software-developers']),
+            '--closeout' => $this->writeCloseout(800, $currentSlugs),
+            '--current-total' => '800',
+            '--target-total' => '2786',
+            '--locales' => 'en,zh',
+            '--cn-proxy-public-owner-plan' => $this->writeCnProxyPublicOwnerPlan(1663),
+            '--json' => true,
+            '--output' => $output,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode, Artisan::output());
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertSame(1986, $payload['delta_slug_count']);
+        $this->assertSame(323, $payload['canonical_delta_slug_count']);
+        $this->assertSame(1663, $payload['public_owner_delta_slug_count']);
+        $this->assertSame(322, $payload['selected_count']);
+        $this->assertSame(2785, $payload['final_public_accounted_count']);
+        $this->assertSame(1, $payload['final_public_shortfall']);
+        $this->assertTrue($payload['cn_proxy_public_owner_plan']['ready']);
+        $this->assertContains('insufficient_final_public_partition_authority', array_column($payload['blockers'], 'reason'));
+        $this->assertFileExists($output);
+    }
+
     public function test_entity_context_with_no_existing_occupations_blocks_without_mutation(): void
     {
         $current = $this->slugs('current', 80);
@@ -167,6 +200,17 @@ final class CareerPlanCanonicalProgressiveReadinessSelectionCommandTest extends 
         }
 
         return $slugs;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function prefixedSlugs(string $name, int $count, string $prefix): array
+    {
+        return array_map(
+            static fn (string $slug): string => $prefix.$slug,
+            $this->slugs($name, $count),
+        );
     }
 
     /**
@@ -240,6 +284,30 @@ final class CareerPlanCanonicalProgressiveReadinessSelectionCommandTest extends 
         return $this->writeJson('entity-context', [
             'schema_version' => 'career_entity_context.v1',
             'rows' => $rows,
+        ]);
+    }
+
+    private function writeCnProxyPublicOwnerPlan(int $count): string
+    {
+        return $this->writeJson('cn-proxy-public-owner-plan', [
+            'schema_version' => 'career_2786_cn_proxy_public_owner_plan.v1',
+            'status' => 'validated',
+            'dry_run' => true,
+            'did_write' => false,
+            'cn_proxy_rows' => $count,
+            'public_cn_proxy_page_rows' => $count,
+            'reviewed_trust_manifest_complete' => true,
+            'public_owner_plan_ready' => true,
+            'route_owner_enabled' => false,
+            'public_route_allowed' => false,
+            'public_pages_exposed' => 0,
+            'noindex_default' => true,
+            'indexable_CN_proxy_rows' => 0,
+            'sitemap_CN_urls' => 0,
+            'llms_CN_urls' => 0,
+            'llms_full_CN_urls' => 0,
+            'guarded_public_owner_state' => 'reviewed_noindex_public_cn_proxy_page_ready_for_separate_owner_train',
+            'blockers' => [],
         ]);
     }
 

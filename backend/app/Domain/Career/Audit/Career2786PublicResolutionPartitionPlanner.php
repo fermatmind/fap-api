@@ -25,6 +25,7 @@ final class Career2786PublicResolutionPartitionPlanner
         int $targetPublicTotal = self::TARGET_PUBLIC_TOTAL,
         array $locales = ['en', 'zh'],
         ?array $occupationExistingSlugs = null,
+        ?array $cnProxyPublicOwnerPlan = null,
     ): Career2786PublicResolutionPartitionResult {
         $locales = $this->normalizedStringList($locales, 'locale');
         $baselineSlugs = $this->normalizedSlugList($currentPublicSlugs, 'baseline_slug');
@@ -34,6 +35,7 @@ final class Career2786PublicResolutionPartitionPlanner
         $baselineSet = array_fill_keys($baselineSlugs, true);
         $occupationExistingSet = $occupationExistingSlugs === null ? [] : array_fill_keys($occupationExistingSlugs, true);
         $requiresOccupationExists = $occupationExistingSlugs !== null;
+        $cnProxyPublicOwnerAuthority = $this->cnProxyPublicOwnerAuthority($cnProxyPublicOwnerPlan, $targetPublicTotal);
         $seenSourceSlugs = [];
         $duplicateSourceSlugs = [];
         $sourceSlugMissingCount = 0;
@@ -98,6 +100,9 @@ final class Career2786PublicResolutionPartitionPlanner
             sourceSlugMissingCount: $sourceSlugMissingCount,
             duplicateSourceSlugs: $duplicateSourceSlugs,
         );
+        foreach ($cnProxyPublicOwnerAuthority['issues'] as $issue) {
+            $issues[] = $issue;
+        }
         $partitionCounts = [];
         foreach ($partitions as $partition => $slugs) {
             $partitionCounts[$partition] = count($slugs);
@@ -110,13 +115,19 @@ final class Career2786PublicResolutionPartitionPlanner
         $occupationMissingCount = $partitionCounts['occupation_missing_remediation'];
         $cnProxyCount = $partitionCounts['cn_proxy_policy_asset'];
         $softwareManualHoldCount = $partitionCounts['software_manual_hold'];
+        $cnProxyPublicOwnerCount = min((int) $cnProxyPublicOwnerAuthority['public_owner_count'], $cnProxyCount);
+        $cnProxyPolicyUnresolvedCount = max(0, $cnProxyCount - $cnProxyPublicOwnerCount);
+        $finalPublicAccountedTotal = count($baselineSlugs) + $canonicalCandidateCount + $cnProxyPublicOwnerCount;
+        $finalPublicShortfall = max(0, $targetPublicTotal - $finalPublicAccountedTotal);
+        $finalPublicCanReachTarget = $finalPublicShortfall === 0;
+        $readinessPass = $issues === [] && $finalPublicCanReachTarget;
 
         return new Career2786PublicResolutionPartitionResult([
             'schema_version' => self::SCHEMA_VERSION,
             'status' => $status,
             'partition_pass' => $issues === [],
             'partition_status' => $issues === [] ? 'partitioned' : 'blocked',
-            'readiness_pass' => false,
+            'readiness_pass' => $readinessPass,
             'read_only' => true,
             'writes_database' => false,
             'apply_allowed' => false,
@@ -134,11 +145,17 @@ final class Career2786PublicResolutionPartitionPlanner
             'canonical_rollout_possible_total' => count($baselineSlugs) + $canonicalCandidateCount,
             'canonical_rollout_shortfall' => max(0, $targetPublicTotal - count($baselineSlugs) - $canonicalCandidateCount),
             'canonical_rollout_can_reach_target' => $canonicalRolloutCanReachTarget,
+            'final_public_accounted_total' => $finalPublicAccountedTotal,
+            'final_public_shortfall' => $finalPublicShortfall,
+            'final_public_can_reach_target' => $finalPublicCanReachTarget,
             'occupation_missing_remediation_count' => $occupationMissingCount,
             'cn_proxy_policy_asset_count' => $cnProxyCount,
+            'cn_proxy_public_owner_plan_count' => $cnProxyPublicOwnerCount,
+            'cn_proxy_policy_asset_unresolved_count' => $cnProxyPolicyUnresolvedCount,
             'software_manual_hold_count' => $softwareManualHoldCount,
-            'policy_partition_required' => $cnProxyCount > 0 || $softwareManualHoldCount > 0,
+            'policy_partition_required' => $cnProxyPolicyUnresolvedCount > 0 || $softwareManualHoldCount > 0,
             'entity_remediation_required' => $occupationMissingCount > 0,
+            'cn_proxy_public_owner_plan' => $cnProxyPublicOwnerAuthority['summary'],
             'partitions' => $partitions,
             'rows' => $rows,
             'source_plan' => [
@@ -157,14 +174,16 @@ final class Career2786PublicResolutionPartitionPlanner
             ),
             'sidecars' => [],
             'next_required_actions' => $this->nextRequiredActions(
-                canonicalRolloutCanReachTarget: $canonicalRolloutCanReachTarget,
+                finalPublicCanReachTarget: $finalPublicCanReachTarget,
                 occupationMissingCount: $occupationMissingCount,
-                cnProxyCount: $cnProxyCount,
+                cnProxyUnresolvedCount: $cnProxyPolicyUnresolvedCount,
                 softwareManualHoldCount: $softwareManualHoldCount,
             ),
-            'next_required_action' => $issues === []
-                ? '2786_PUBLIC_RESOLUTION_PARTITION_REVIEW'
-                : 'FIX_2786_PUBLIC_RESOLUTION_PARTITION_INPUTS',
+            'next_required_action' => $readinessPass
+                ? '2786_RUNTIME_CANDIDATE_PREP_PLAN'
+                : ($issues === []
+                    ? '2786_PUBLIC_RESOLUTION_PARTITION_REVIEW'
+                    : 'FIX_2786_PUBLIC_RESOLUTION_PARTITION_INPUTS'),
         ]);
     }
 
@@ -329,22 +348,114 @@ final class Career2786PublicResolutionPartitionPlanner
     }
 
     /**
+     * @return array{ready: bool, public_owner_count: int, issues: list<CareerProgressiveReadinessSelectionIssue>, summary: array<string, mixed>}
+     */
+    private function cnProxyPublicOwnerAuthority(?array $plan, int $targetPublicTotal): array
+    {
+        $summary = [
+            'provided' => $plan !== null,
+            'ready' => false,
+            'public_owner_count' => 0,
+            'source_path' => $plan['source_path'] ?? null,
+            'guarded_public_owner_state' => $plan['guarded_public_owner_state'] ?? null,
+        ];
+
+        if ($plan === null) {
+            return [
+                'ready' => false,
+                'public_owner_count' => 0,
+                'issues' => [],
+                'summary' => $summary,
+            ];
+        }
+
+        if ($targetPublicTotal !== self::TARGET_PUBLIC_TOTAL) {
+            $issue = new CareerProgressiveReadinessSelectionIssue(
+                reason: 'cn_proxy_public_owner_plan_target_scope_invalid',
+                message: 'CN proxy public-owner partition evidence is valid only for target_public_total=2786.',
+                severity: 'high',
+                evidence: ['target_public_total' => $targetPublicTotal],
+            );
+
+            return [
+                'ready' => false,
+                'public_owner_count' => 0,
+                'issues' => [$issue],
+                'summary' => $summary,
+            ];
+        }
+
+        $count = (int) ($plan['public_cn_proxy_page_rows'] ?? $plan['cn_proxy_rows'] ?? 0);
+        $required = [
+            'status' => ($plan['status'] ?? null) === 'validated',
+            'dry_run' => ($plan['dry_run'] ?? null) === true,
+            'did_write' => ($plan['did_write'] ?? null) === false,
+            'reviewed_trust_manifest_complete' => ($plan['reviewed_trust_manifest_complete'] ?? null) === true,
+            'public_owner_plan_ready' => ($plan['public_owner_plan_ready'] ?? null) === true,
+            'route_owner_enabled' => ($plan['route_owner_enabled'] ?? null) === false,
+            'public_route_allowed' => ($plan['public_route_allowed'] ?? null) === false,
+            'public_pages_exposed' => (int) ($plan['public_pages_exposed'] ?? -1) === 0,
+            'noindex_default' => ($plan['noindex_default'] ?? null) === true,
+            'indexable_CN_proxy_rows' => (int) ($plan['indexable_CN_proxy_rows'] ?? -1) === 0,
+            'sitemap_CN_urls' => (int) ($plan['sitemap_CN_urls'] ?? -1) === 0,
+            'llms_CN_urls' => (int) ($plan['llms_CN_urls'] ?? -1) === 0,
+            'llms_full_CN_urls' => (int) ($plan['llms_full_CN_urls'] ?? -1) === 0,
+            'blockers_empty' => ($plan['blockers'] ?? []) === [],
+            'public_owner_count_positive' => $count > 0,
+        ];
+        $failed = array_keys(array_filter($required, static fn (bool $passed): bool => ! $passed));
+        $summary = [
+            ...$summary,
+            'ready' => $failed === [],
+            'public_owner_count' => $failed === [] ? $count : 0,
+            'declared_public_owner_count' => $count,
+            'failed_requirements' => $failed,
+        ];
+
+        if ($failed === []) {
+            return [
+                'ready' => true,
+                'public_owner_count' => $count,
+                'issues' => [],
+                'summary' => $summary,
+            ];
+        }
+
+        $issue = new CareerProgressiveReadinessSelectionIssue(
+            reason: 'cn_proxy_public_owner_plan_invalid',
+            message: 'CN proxy public-owner plan cannot be used for final 2786 partition accounting.',
+            severity: 'blocker_for_publication',
+            evidence: [
+                'failed_requirements' => $failed,
+                'declared_public_owner_count' => $count,
+            ],
+        );
+
+        return [
+            'ready' => false,
+            'public_owner_count' => 0,
+            'issues' => [$issue],
+            'summary' => $summary,
+        ];
+    }
+
+    /**
      * @return list<string>
      */
     private function nextRequiredActions(
-        bool $canonicalRolloutCanReachTarget,
+        bool $finalPublicCanReachTarget,
         int $occupationMissingCount,
-        int $cnProxyCount,
+        int $cnProxyUnresolvedCount,
         int $softwareManualHoldCount,
     ): array {
         $actions = [];
-        if (! $canonicalRolloutCanReachTarget) {
+        if (! $finalPublicCanReachTarget) {
             $actions[] = 'DO_NOT_RUN_2786_CANONICAL_CANDIDATE_PREP';
         }
         if ($occupationMissingCount > 0) {
             $actions[] = '2786_OCCUPATION_ENTITY_REMEDIATION_1';
         }
-        if ($cnProxyCount > 0) {
+        if ($cnProxyUnresolvedCount > 0) {
             $actions[] = 'CN_PROXY_AUTHORITY_POLICY_DECISION_1';
         }
         if ($softwareManualHoldCount > 0) {

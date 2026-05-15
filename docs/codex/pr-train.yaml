@@ -707,6 +707,49 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-2786-FINAL-READINESS-PUBLIC-OWNER-PARTITION-AUTHORITY-1
+    repo: fap-api
+    depends_on:
+      - 2786-CN-PROXY-PUBLIC-OWNER-PLAN-1
+    branch: codex/repair-2786-final-readiness-public-owner-partition-authority-1
+    title: "fix(api): account reviewed public owner partition in 2786 readiness"
+    name: "Account reviewed CN proxy public-owner partition in final 2786 readiness"
+    scope:
+      - Extend final 2786 readiness and public-resolution partition commands to consume reviewed CN proxy public-owner plan evidence.
+      - Count reviewed noindex CN proxy public-owner rows only toward final 2786 public accounting.
+      - Keep CN proxy rows excluded from canonical rollout selection, candidate prep, sitemap, llms, and llms-full eligibility.
+      - Preserve software-developers manual-hold and final live acceptance strictness.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerPlanCanonicalProgressiveReadinessSelection.php
+      - backend/app/Console/Commands/CareerPlanCanonical2786PublicResolutionPartition.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run candidate prep dry-run or apply.
+      - Run rollout dry-run.
+      - Run rollout apply.
+      - Run backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+      - Mark CN proxy rows as canonical rollout candidates.
+      - Enable CN proxy indexability, sitemap, llms, llms-full, or public route exposure.
+      - Weaken software-developers manual-hold rejection or final live acceptance.
+    validation:
+      - php artisan test --filter=CareerProgressiveReadinessSelection --no-ansi
+      - php artisan test --filter=Career2786PublicResolutionPartition --no-ansi
+      - php artisan test tests/Feature/Console/CareerPlanCanonicalProgressiveReadinessSelectionCommandTest.php --no-ansi
+      - php artisan test tests/Feature/Console/CareerPlanCanonical2786PublicResolutionPartitionCommandTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
     repo: fap-api
     depends_on:
