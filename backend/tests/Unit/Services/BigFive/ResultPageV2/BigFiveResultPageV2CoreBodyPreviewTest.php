@@ -246,6 +246,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_multi_test_graph_edge_files(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php',
+            'backend/app/Models/ArticleTestEdge.php',
+            'backend/database/migrations/2026_05_15_000300_create_article_test_edges_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1323,6 +1334,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleMultiTestGraphEdgeFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -1642,6 +1657,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Pages/ArticlePublishingOpsPage.php',
             'backend/app/Models/ArticleEditorialPackageImport.php',
             'backend/database/migrations/2026_05_14_000100_create_article_editorial_package_imports_table.php',
+        ], true);
+    }
+
+    private function isArticleMultiTestGraphEdgeFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php',
+            'backend/app/Models/ArticleTestEdge.php',
+            'backend/database/migrations/2026_05_15_000300_create_article_test_edges_table.php',
         ], true);
     }
 

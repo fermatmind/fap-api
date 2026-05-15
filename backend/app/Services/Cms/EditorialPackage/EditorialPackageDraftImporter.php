@@ -9,6 +9,7 @@ use App\Models\ArticleCategory;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
+use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use App\Services\Cms\EditorialPackage\Config\EvergreenAnchors;
@@ -202,6 +203,7 @@ final class EditorialPackageDraftImporter
             $category = $this->resolveCategory((string) $package['category']);
             $tags = $this->resolveTags($package['tags']);
             $article = $this->existingArticle($package);
+            $primaryTestSlug = $this->primaryTestSlug($package);
 
             if ($article instanceof Article && $this->isPublishedOrPublic($article)) {
                 throw new RuntimeException('Existing published/public articles cannot be mutated by editorial package draft import.');
@@ -225,6 +227,7 @@ final class EditorialPackageDraftImporter
                     'cover_image_width' => null,
                     'cover_image_height' => null,
                     'cover_image_variants' => $this->editorialMetadata($package, $plan),
+                    'related_test_slug' => $primaryTestSlug,
                     'status' => 'draft',
                     'is_public' => false,
                     'is_indexable' => (bool) $package['indexability'],
@@ -246,6 +249,7 @@ final class EditorialPackageDraftImporter
                     'cover_image_url' => (string) $package['cover_image'],
                     'cover_image_alt' => (string) $package['cover_image_alt'],
                     'cover_image_variants' => $this->editorialMetadata($package, $plan),
+                    'related_test_slug' => $primaryTestSlug,
                     'status' => 'draft',
                     'is_public' => false,
                     'is_indexable' => (bool) $package['indexability'],
@@ -256,6 +260,7 @@ final class EditorialPackageDraftImporter
             }
 
             $article->tags()->sync($this->tagSyncPayload($tags));
+            $this->syncArticleTestEdges($article, $package);
 
             $revisionStatus = $this->workingRevisionStatus((string) $package['intended_status'], $plan['warnings'] ?? []);
             $revision = $this->revisionWorkspace->saveWorkingRevision($article, [
@@ -875,6 +880,151 @@ final class EditorialPackageDraftImporter
         }
 
         return $payload;
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     */
+    private function primaryTestSlug(array $package): ?string
+    {
+        $edges = $this->articleTestEdgesFromPackage($package);
+        foreach ($edges as $edge) {
+            if (($edge['role'] ?? '') === ArticleTestEdge::ROLE_PRIMARY) {
+                return (string) $edge['test_slug'];
+            }
+        }
+
+        return isset($edges[0]['test_slug']) ? (string) $edges[0]['test_slug'] : null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     */
+    private function syncArticleTestEdges(Article $article, array $package): void
+    {
+        $edges = $this->articleTestEdgesFromPackage($package);
+        ArticleTestEdge::query()
+            ->withoutGlobalScopes()
+            ->where('article_id', (int) $article->id)
+            ->delete();
+
+        foreach ($edges as $edge) {
+            ArticleTestEdge::query()->withoutGlobalScopes()->create([
+                'org_id' => (int) $article->org_id,
+                'article_id' => (int) $article->id,
+                'locale' => (string) $article->locale,
+                'test_slug' => (string) $edge['test_slug'],
+                'role' => (string) $edge['role'],
+                'sort_order' => (int) $edge['sort_order'],
+                'safety_level' => (string) $edge['safety_level'],
+                'visibility' => (string) $edge['visibility'],
+                'source' => (string) $edge['source'],
+                'metadata_json' => $edge['metadata_json'],
+            ]);
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     * @return list<array<string,mixed>>
+     */
+    private function articleTestEdgesFromPackage(array $package): array
+    {
+        $candidates = [];
+        foreach ($this->stringList($package['target_tests'] ?? []) as $index => $testSlug) {
+            $candidates[] = [
+                'test_slug' => $testSlug,
+                'role' => $index === 0 ? ArticleTestEdge::ROLE_PRIMARY : ArticleTestEdge::ROLE_SECONDARY,
+                'sort_order' => ($index + 1) * 10,
+                'source' => 'target_tests',
+            ];
+        }
+
+        $graphEdges = is_array($package['graph_edges'] ?? null) ? $package['graph_edges'] : [];
+        foreach (['from_article_to_test', 'article_to_test'] as $field) {
+            foreach ($this->graphTestEdgeItems($graphEdges[$field] ?? []) as $item) {
+                $candidates[] = $item + ['source' => 'graph_edges.'.$field];
+            }
+        }
+
+        $edges = [];
+        foreach ($candidates as $candidate) {
+            $testSlug = Str::slug(trim((string) ($candidate['test_slug'] ?? '')));
+            if ($testSlug === '' || isset($edges[$testSlug])) {
+                continue;
+            }
+
+            $role = (string) ($candidate['role'] ?? ArticleTestEdge::ROLE_CONTEXTUAL);
+            if (! in_array($role, ArticleTestEdge::roles(), true)) {
+                $role = ArticleTestEdge::ROLE_CONTEXTUAL;
+            }
+
+            $visibility = (string) ($candidate['visibility'] ?? ArticleTestEdge::VISIBILITY_PUBLIC);
+            if (! in_array($visibility, ArticleTestEdge::visibilities(), true)) {
+                $visibility = ArticleTestEdge::VISIBILITY_PUBLIC;
+            }
+
+            $safetyLevel = (string) ($candidate['safety_level'] ?? ArticleTestEdge::safetyLevelForTestSlug($testSlug));
+            if (! in_array($safetyLevel, ArticleTestEdge::safetyLevels(), true)) {
+                $safetyLevel = ArticleTestEdge::safetyLevelForTestSlug($testSlug);
+            }
+
+            if (ArticleTestEdge::safetyLevelForTestSlug($testSlug) === ArticleTestEdge::SAFETY_SENSITIVE) {
+                $safetyLevel = ArticleTestEdge::SAFETY_SENSITIVE;
+            }
+
+            $edges[$testSlug] = [
+                'test_slug' => $testSlug,
+                'role' => $role,
+                'sort_order' => max(0, (int) ($candidate['sort_order'] ?? ((count($edges) + 1) * 10))),
+                'safety_level' => $safetyLevel,
+                'visibility' => $visibility,
+                'source' => (string) ($candidate['source'] ?? 'editorial_package'),
+                'metadata_json' => [
+                    'source' => (string) ($candidate['source'] ?? 'editorial_package'),
+                    'sensitive_guard_applied' => ArticleTestEdge::safetyLevelForTestSlug($testSlug) === ArticleTestEdge::SAFETY_SENSITIVE,
+                ],
+            ];
+        }
+
+        return array_values($edges);
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function graphTestEdgeItems(mixed $value): array
+    {
+        if (is_string($value)) {
+            return [['test_slug' => $value]];
+        }
+
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $items = [];
+        foreach ($value as $index => $item) {
+            if (is_string($item)) {
+                $items[] = ['test_slug' => $item, 'role' => ArticleTestEdge::ROLE_CONTEXTUAL];
+
+                continue;
+            }
+
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $items[] = [
+                'test_slug' => $item['test_slug'] ?? $item['slug'] ?? $item['target_slug'] ?? $item['target'] ?? '',
+                'role' => $item['role'] ?? ArticleTestEdge::ROLE_CONTEXTUAL,
+                'sort_order' => $item['sort_order'] ?? (($index + 1) * 10),
+                'safety_level' => $item['safety_level'] ?? null,
+                'visibility' => $item['visibility'] ?? ArticleTestEdge::VISIBILITY_PUBLIC,
+            ];
+        }
+
+        return $items;
     }
 
     private function workingRevisionStatus(string $intendedStatus, array $warnings = []): string
