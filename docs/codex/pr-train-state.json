@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T21:52:00+08:00",
+  "updated_at": "2026-05-16T13:45:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6735,6 +6735,100 @@
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at File::isDirectory($target.'/compiled').",
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled').",
             "Current PR changes only Career 2786 partition command/domain tests/docs/metadata and does not modify BigFive pack publish or rollback implementation."
+          ],
+          "severity": "medium",
+          "next_goal": "SCAN-BIG5-PACK-PUBLISH-ROLLBACK-COMPILED-DIR-LOCAL-CI",
+          "may_continue_train": true
+        }
+      ]
+    },
+    "2786-CN-PROXY-PUBLIC-OWNER-PR-TRAIN-1": {
+      "repo": "fap-api",
+      "branch": "codex/2786-cn-proxy-public-owner-pr-train-1",
+      "title": "fix(api): gate reviewed CN proxy public owner plan",
+      "name": "Gate reviewed CN proxy public owner plan for 2786",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-2786-FINAL-PUBLIC-RESOLUTION-PARTITION-1",
+        "CN-PROXY-AUTHORITY-POLICY-DECISION-1",
+        "2786-CN-PROXY-TRUST-MANIFEST-REVIEW-1"
+      ],
+      "scope_type": "cn_proxy_public_owner_reviewed_manifest_gate_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerValidateCnProxyPublicOwner.php",
+        "backend/tests/Feature/Console/CareerValidateCnProxyPublicOwnerCommandTest.php",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no 2786 readiness execution",
+        "no candidate prep dry-run",
+        "no candidate prep apply",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no production DB mutation",
+        "no rollback",
+        "no quarantine",
+        "no deploy",
+        "no fap-web",
+        "do not enable CN proxy indexability, sitemap, llms, llms-full, or public route exposure",
+        "do not mark CN proxy rows as canonical rollout candidates"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for 2786-CN-PROXY-PUBLIC-OWNER-PR-TRAIN-1, then implementing the PR."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "2786 partition, CN proxy authority policy decision, and reviewed trust manifest artifacts were completed before this PR started."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are limited to the CN proxy public-owner validator, focused Feature tests, audit docs, and authorized train metadata."
+        },
+        "local_validation": {
+          "status": "pass_with_external_mbti_sidecar",
+          "evidence": [
+            "php artisan test --filter=CareerValidateCnProxyPublicOwner --no-ansi: pass (5 tests, 79 assertions)",
+            "php artisan test --filter=CareerValidateCnTrustManifest --no-ansi: pass (4 tests, 56 assertions)",
+            "php artisan route:list --no-ansi: pass",
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-cn-proxy-public-owner.sqlite php artisan migrate --force --no-ansi: pass",
+            "ruby YAML.load_file docs/codex/pr-train.yaml: pass",
+            "python3 -m json.tool docs/codex/pr-train-state.json: pass",
+            "vendor/bin/pint --test: pass",
+            "git diff --check: pass",
+            "Local read-only smoke against /tmp reviewed CN proxy trust manifest: status=validated, cn_proxy_rows=1663, reviewed_trust_manifest_complete=true, public_owner_plan_ready=true, route_owner_enabled=false, public_route_allowed=false, sitemap_CN_urls=0, llms_CN_urls=0, llms_full_CN_urls=0, did_write=false.",
+            "bash backend/scripts/ci_verify_mbti.sh: external blocker in BigFive pack publish/rollback compiled-directory checks; scoped Career tests pass and current PR does not modify BigFive content pack publish/rollback code."
+          ]
+        },
+        "github_pr": {
+          "status": "pending",
+          "evidence": null
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "2786-CN-PROXY-PUBLIC-OWNER-PLAN-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "sidecar_id": "SIDECAR-BIG5-PACK-PUBLISH-ROLLBACK-COMPILED-DIR-20260516-CN-PROXY-OWNER",
+          "title": "Local MBTI CI BigFive pack publish and rollback compiled-directory assertions fail outside CN proxy public-owner scope",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [],
+          "evidence": [
+            "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at File::isDirectory($target.'/compiled').",
+            "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled').",
+            "Current PR changes only the Career CN proxy public-owner validator, focused console tests, audit docs, and authorized train metadata."
           ],
           "severity": "medium",
           "next_goal": "SCAN-BIG5-PACK-PUBLISH-ROLLBACK-COMPILED-DIR-LOCAL-CI",
