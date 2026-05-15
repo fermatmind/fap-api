@@ -120,6 +120,104 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
         $this->assertSame(0, $payload['excluded_count']);
     }
 
+    public function test_explicit_progressive_delta_slugs_drive_pool_selection_instead_of_legacy_80_candidates(): void
+    {
+        $legacySlugs = ['legacy-near-eligible-001', 'legacy-near-eligible-002'];
+        $progressiveSlugs = ['progressive-delta-001', 'progressive-delta-002', 'progressive-delta-003'];
+
+        $exitCode = $this->callCommand([
+            '--audit' => $this->writeProgressiveStaleAudit($progressiveSlugs, $legacySlugs),
+            '--projection' => $this->writeProjection($progressiveSlugs),
+            '--truth' => $this->writeTruth($progressiveSlugs),
+            '--ledger' => $this->writeLedger($progressiveSlugs),
+            '--target' => 3,
+            '--target-total' => 300,
+            '--cohort' => 'career_80_to_300_delta',
+            '--delta-slugs' => $this->writeSlugArtifact($progressiveSlugs),
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('pass', $payload['status']);
+        $this->assertTrue($payload['pool_pass']);
+        $this->assertSame('progressive_explicit_delta_runtime_candidate_pool', $payload['selection']['strategy']);
+        $this->assertSame($progressiveSlugs, $payload['selection']['slugs']);
+        $this->assertSame(3, $payload['base_candidate_count']);
+        $this->assertSame(3, $payload['eligible_count']);
+        $this->assertSame('progressive_delta_slug_artifact', $payload['source_artifacts']['explicit_delta_selection']['strategy']);
+        $this->assertSame(3, $payload['source_artifacts']['explicit_delta_selection']['slug_count']);
+        $this->assertSame('PROGRESSIVE_ROLLOUT_MANIFEST', $payload['next_required_action']);
+        $this->assertTrue($payload['selection']['rows'][0]['runtime_state_evidence']['candidate_aware_overlay']['explicit_progressive_delta']);
+        $this->assertFalse($payload['selection']['rows'][0]['runtime_state_evidence']['candidate_aware_overlay']['audit_index_evidence_required']);
+    }
+
+    public function test_readiness_plan_selected_slugs_can_feed_progressive_pool_selection(): void
+    {
+        $slugs = ['progressive-plan-001', 'progressive-plan-002'];
+
+        $exitCode = $this->callCommand([
+            '--audit' => $this->writeProgressiveStaleAudit($slugs),
+            '--projection' => $this->writeProjection($slugs),
+            '--truth' => $this->writeTruth($slugs),
+            '--ledger' => $this->writeLedger($slugs),
+            '--target' => 2,
+            '--target-total' => 300,
+            '--readiness-plan' => $this->writeJson('readiness-plan', [
+                'status' => 'pass',
+                'readiness_pass' => true,
+                'target_public_total' => 300,
+                'delta_slug_count' => 2,
+                'selected_slugs' => $slugs,
+                'blockers' => [],
+            ]),
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame($slugs, $payload['selection']['slugs']);
+        $this->assertSame('progressive_readiness_plan_selected_slugs', $payload['source_artifacts']['explicit_delta_selection']['strategy']);
+        $this->assertSame(2, $payload['selected_count']);
+    }
+
+    public function test_explicit_progressive_delta_selection_still_requires_verified_candidate_overlay(): void
+    {
+        $slugs = ['progressive-missing-overlay'];
+
+        $exitCode = $this->callCommand([
+            '--audit' => $this->writeProgressiveStaleAudit($slugs),
+            '--projection' => $this->writeProjection($slugs, candidateAware: false),
+            '--truth' => $this->writeTruth($slugs, candidateAware: false),
+            '--ledger' => $this->writeLedger($slugs, candidateAware: false),
+            '--target' => 1,
+            '--target-total' => 300,
+            '--delta-slugs' => $this->writeSlugArtifact($slugs),
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['pool_pass']);
+        $this->assertSame(0, $payload['selected_count']);
+        $this->assertContains('candidate_aware_overlay_missing', $payload['runtime_candidate_gate']['excluded_rows'][0]['exclusion_reasons']);
+        $this->assertContains('candidate_prep_apply_not_verified', $payload['runtime_candidate_gate']['excluded_rows'][0]['exclusion_reasons']);
+    }
+
+    public function test_explicit_progressive_delta_slug_count_mismatch_blocks(): void
+    {
+        $exitCode = $this->callCommand([
+            '--audit' => $this->writeProgressiveStaleAudit(['progressive-delta-001']),
+            '--projection' => $this->writeProjection(['progressive-delta-001']),
+            '--truth' => $this->writeTruth(['progressive-delta-001']),
+            '--ledger' => $this->writeLedger(['progressive-delta-001']),
+            '--target' => 2,
+            '--delta-slugs' => $this->writeSlugArtifact(['progressive-delta-001']),
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('explicit_delta_slug_count_mismatch', $payload['blockers'][0]['reason']);
+        $this->assertFalse($payload['writes_database']);
+    }
+
     public function test_excludes_runtime_invalid_candidates(): void
     {
         $slugs = [
@@ -323,6 +421,43 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
     }
 
     /**
+     * @param  list<string>  $progressiveSlugs
+     * @param  list<string>  $legacyNearEligibleSlugs
+     */
+    private function writeProgressiveStaleAudit(array $progressiveSlugs, array $legacyNearEligibleSlugs = []): string
+    {
+        $rows = [];
+        foreach (array_values(array_unique($legacyNearEligibleSlugs)) as $slug) {
+            $rows[] = $this->row($slug, 'en');
+            $rows[] = $this->row($slug, 'zh');
+        }
+
+        foreach (array_values(array_unique($progressiveSlugs)) as $slug) {
+            $rows[] = $this->progressiveStaleRow($slug, 'en');
+            $rows[] = $this->progressiveStaleRow($slug, 'zh');
+        }
+
+        return $this->writeJson('audit', [
+            'status' => 'blocked',
+            'scope' => 'all',
+            'expected_occupations' => 2786,
+            'audited_occupations' => 2786,
+            'eligible_count' => 0,
+            'blocked_count' => count($rows),
+            'by_reason' => [
+                'index_state_missing' => count($progressiveSlugs) * 2,
+                'runtime_publish_state_not_published' => count($progressiveSlugs) * 2,
+                'truth_state_not_published' => count($progressiveSlugs) * 2,
+                'surface_unverified' => count($rows),
+            ],
+            'context_summary' => ['surface_context' => 'supplied'],
+            'policy_summary' => ['near_eligible_count' => count($legacyNearEligibleSlugs)],
+            'rows' => $rows,
+            'sidecars' => [],
+        ]);
+    }
+
+    /**
      * @return array<string, mixed>
      */
     private function row(string $slug, string $locale): array
@@ -385,6 +520,43 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
             'severity' => 'high',
             'reasons' => [
                 'index_state_not_indexed_like',
+                'runtime_publish_state_not_published',
+                'truth_state_not_published',
+                'sitemap_missing',
+                'llms_missing',
+                'llms_full_missing',
+                'surface_unverified',
+            ],
+            'evidence' => [['slug' => $slug]],
+            'sidecars' => [],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function progressiveStaleRow(string $slug, string $locale): array
+    {
+        return [
+            'slug' => $slug,
+            'locale' => $locale,
+            'source_scope' => 'all',
+            'entity_status' => $this->layer('entity', 'pass'),
+            'baseline_status' => $this->layer('baseline', 'pass'),
+            'index_status' => $this->layer('index', 'blocked', [], ['index_state_missing']),
+            'runtime_status' => $this->layer('runtime', 'blocked', [
+                ['runtime_publish_state' => 'published_candidate'],
+                ['truth_state' => 'published_candidate'],
+                ['canonical_public_type' => 'public_canonical_job'],
+                ['candidate_pre_route_expected' => true],
+            ], ['runtime_publish_state_not_published', 'truth_state_not_published']),
+            'seo_geo_status' => $this->layer('seo_geo', 'blocked', [], ['sitemap_missing', 'llms_missing', 'llms_full_missing']),
+            'surface_status' => $this->layer('surface', 'blocked', [], ['surface_unverified']),
+            'safety_status' => $this->layer('safety', 'pass'),
+            'overall_status' => 'blocked',
+            'severity' => 'high',
+            'reasons' => [
+                'index_state_missing',
                 'runtime_publish_state_not_published',
                 'truth_state_not_published',
                 'sitemap_missing',
@@ -516,6 +688,17 @@ final class CareerPlanCanonical80RuntimeCandidatePoolCommandTest extends TestCas
     {
         $path = $this->tempPath($name);
         file_put_contents($path, json_encode($payload, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
+
+        return $path;
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     */
+    private function writeSlugArtifact(array $slugs): string
+    {
+        $path = $this->tempPath('delta-slugs');
+        file_put_contents($path, implode(PHP_EOL, $slugs).PHP_EOL);
 
         return $path;
     }

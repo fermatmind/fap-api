@@ -18,6 +18,25 @@ php artisan career:plan-canonical-80-runtime-candidate-pool \
   --output=/tmp/career_2786_80_runtime_candidate_pool_plan.json
 ```
 
+For progressive cohorts after candidate preparation and candidate-aware artifact
+refresh, pass the explicit readiness delta slug artifact instead of relying on
+the legacy 80 near-eligible selector:
+
+```bash
+php artisan career:plan-canonical-80-runtime-candidate-pool \
+  --audit=/tmp/career_2786_canonical_eligibility_audit_candidate_aware_300.json \
+  --projection=/tmp/career_300_runtime_projection_candidate_aware.json \
+  --truth=/tmp/career_300_runtime_truth_candidate_aware.json \
+  --ledger=/tmp/career_300_full_release_ledger_candidate_aware.json \
+  --target=220 \
+  --target-total=300 \
+  --cohort=career_80_to_300_delta \
+  --delta-slugs=/tmp/career_300_delta_slugs.txt \
+  --locales=en,zh \
+  --json \
+  --output=/tmp/career_300_runtime_candidate_pool_after_refresh.json
+```
+
 ## Inputs
 
 - `--audit`: full canonical eligibility audit artifact.
@@ -25,6 +44,12 @@ php artisan career:plan-canonical-80-runtime-candidate-pool \
 - `--truth`: runtime truth artifact.
 - `--ledger`: full release ledger artifact.
 - `--target`: cohort size, default `80`.
+- `--delta-slugs`: optional explicit progressive delta slug artifact for
+  300/800/2786 pool planning.
+- `--readiness-plan`: optional progressive readiness artifact containing
+  `selected_slugs`.
+- `--target-total`: optional progressive target public total metadata.
+- `--cohort`: optional progressive cohort identifier.
 - `--locales`: required locale rows for each candidate, default `en,zh`.
 
 All inputs are JSON artifacts. The command does not query the database.
@@ -62,6 +87,16 @@ Candidate-aware 51-delta planning has a narrower pre-promotion exception. A slug
 - the slug is evaluated as a delta pre-promotion candidate and not as an already-published baseline slug.
 
 This exception is only for rollout dry-run planning. It does not make the slug published, does not authorize apply, and does not satisfy final 80-total live acceptance.
+
+Progressive 300/800/2786 planning uses the same candidate-aware runtime gate but
+changes the candidate source. When `--delta-slugs` or `--readiness-plan` is
+present, the planner evaluates exactly that explicit delta set. This avoids
+reusing the old 80 near-eligible source pool after a larger cohort has already
+passed readiness and candidate preparation. In explicit progressive mode, stale
+audit/index evidence is not allowed to veto a slug that has verified
+`candidate_prep_apply_overlay` projection, truth, and ledger rows; missing
+projection/truth/ledger rows, blocked runtime state, already-published state,
+and unexpected route/API exposure still block selection.
 
 The command excludes:
 

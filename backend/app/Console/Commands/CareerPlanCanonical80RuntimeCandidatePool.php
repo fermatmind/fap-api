@@ -83,6 +83,10 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         {--truth= : Required runtime truth JSON artifact}
         {--ledger= : Required full release ledger JSON artifact}
         {--target=80 : Target runtime candidate pool size}
+        {--delta-slugs= : Optional explicit progressive delta slug artifact for 300/800/2786 pool planning}
+        {--readiness-plan= : Optional progressive readiness plan artifact containing selected_slugs}
+        {--target-total= : Optional progressive target public total metadata}
+        {--cohort= : Optional progressive cohort identifier}
         {--locales=en,zh : Comma-separated locales required for each candidate}
         {--json : Emit JSON output}
         {--output= : Optional output path for candidate pool plan JSON}
@@ -98,7 +102,10 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
             $truthPath = $this->requiredOption('truth');
             $ledgerPath = $this->requiredOption('ledger');
             $target = $this->positiveIntOption('target', 80);
+            $targetTotal = $this->optionalPositiveIntOption('target-total');
+            $cohort = $this->optionalStringOption('cohort');
             $locales = $this->localesOption();
+            $explicitDeltaSelection = $this->explicitDeltaSelection($target, $targetTotal, $cohort);
 
             [$audit, $report] = $this->readAudit($auditPath);
             $projection = $this->readArtifact($projectionPath, 'projection');
@@ -116,6 +123,7 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
                 truth: $truth,
                 ledger: $ledger,
                 target: $target,
+                explicitDeltaSelection: $explicitDeltaSelection,
                 locales: $locales,
             );
 
@@ -150,6 +158,28 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         return $value;
     }
 
+    private function optionalPositiveIntOption(string $name): ?int
+    {
+        $raw = $this->option($name);
+        if ($raw === null || trim((string) $raw) === '') {
+            return null;
+        }
+
+        $value = filter_var($raw, FILTER_VALIDATE_INT);
+        if (! is_int($value) || $value < 1) {
+            throw new RuntimeException(str_replace('-', '_', $name).'_invalid');
+        }
+
+        return $value;
+    }
+
+    private function optionalStringOption(string $name): ?string
+    {
+        $value = trim((string) ($this->option($name) ?? ''));
+
+        return $value === '' ? null : $value;
+    }
+
     /**
      * @return list<string>
      */
@@ -168,6 +198,155 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         sort($locales);
 
         return $locales;
+    }
+
+    /**
+     * @return array{strategy: string, path: string, sha256: string|null, slug_count: int, slugs: list<string>, target_total: int|null, cohort: string|null}|null
+     */
+    private function explicitDeltaSelection(int $target, ?int $targetTotal, ?string $cohort): ?array
+    {
+        $readinessPlanPath = $this->optionalStringOption('readiness-plan');
+        $deltaSlugsPath = $this->optionalStringOption('delta-slugs');
+
+        if ($readinessPlanPath === null && $deltaSlugsPath === null) {
+            return null;
+        }
+
+        if ($readinessPlanPath !== null) {
+            $readinessPlan = $this->readArtifact($readinessPlanPath, 'readiness_plan');
+            $slugs = $this->extractSlugListFromArtifact($readinessPlan);
+
+            if ($slugs === []) {
+                throw new RuntimeException('readiness_plan_selected_slugs_missing');
+            }
+
+            if ($targetTotal !== null && (int) ($readinessPlan['target_public_total'] ?? 0) !== $targetTotal) {
+                throw new RuntimeException('readiness_plan_target_total_mismatch');
+            }
+
+            if (isset($readinessPlan['blockers']) && is_array($readinessPlan['blockers']) && $readinessPlan['blockers'] !== []) {
+                throw new RuntimeException('readiness_plan_blocked');
+            }
+
+            $slugs = $this->normalizeSlugList($slugs, 'readiness_plan_selected_slugs');
+            $this->assertExplicitDeltaCount($slugs, $target);
+
+            return [
+                'strategy' => 'progressive_readiness_plan_selected_slugs',
+                'path' => $readinessPlanPath,
+                'sha256' => hash_file('sha256', $readinessPlanPath) ?: null,
+                'slug_count' => count($slugs),
+                'slugs' => $slugs,
+                'target_total' => $targetTotal,
+                'cohort' => $cohort,
+            ];
+        }
+
+        $slugs = $this->normalizeSlugList($this->readSlugArtifact($deltaSlugsPath), 'delta_slugs');
+        $this->assertExplicitDeltaCount($slugs, $target);
+
+        return [
+            'strategy' => 'progressive_delta_slug_artifact',
+            'path' => $deltaSlugsPath,
+            'sha256' => hash_file('sha256', $deltaSlugsPath) ?: null,
+            'slug_count' => count($slugs),
+            'slugs' => $slugs,
+            'target_total' => $targetTotal,
+            'cohort' => $cohort,
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function readSlugArtifact(string $path): array
+    {
+        if (! is_file($path)) {
+            throw new RuntimeException('delta_slugs_artifact_missing');
+        }
+
+        $contents = file_get_contents($path);
+        if (! is_string($contents)) {
+            throw new RuntimeException('delta_slugs_artifact_unreadable');
+        }
+
+        try {
+            $decoded = json_decode($contents, true, flags: JSON_THROW_ON_ERROR);
+        } catch (Throwable) {
+            $decoded = null;
+        }
+
+        if (is_array($decoded)) {
+            if (array_is_list($decoded)) {
+                return $decoded;
+            }
+
+            return $this->extractSlugListFromArtifact($decoded);
+        }
+
+        return preg_split('/[\s,]+/', trim($contents)) ?: [];
+    }
+
+    /**
+     * @param  array<string, mixed>  $artifact
+     * @return list<string>
+     */
+    private function extractSlugListFromArtifact(array $artifact): array
+    {
+        foreach ([
+            ['selected_slugs'],
+            ['delta_slugs'],
+            ['slugs'],
+            ['selection', 'slugs'],
+            ['runtime_candidate_gate', 'selected_slugs'],
+        ] as $path) {
+            $value = data_get($artifact, implode('.', $path));
+            if (is_array($value) && array_is_list($value)) {
+                return $value;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * @param  list<mixed>  $values
+     * @return list<string>
+     */
+    private function normalizeSlugList(array $values, string $context): array
+    {
+        $slugs = [];
+        $seen = [];
+
+        foreach ($values as $value) {
+            if (! is_string($value) || trim($value) === '') {
+                throw new RuntimeException($context.'_invalid_slug');
+            }
+
+            $slug = trim($value);
+            if (isset($seen[$slug])) {
+                throw new RuntimeException($context.'_duplicate_slug');
+            }
+
+            $seen[$slug] = true;
+            $slugs[] = $slug;
+        }
+
+        if ($slugs === []) {
+            throw new RuntimeException($context.'_missing');
+        }
+
+        return $slugs;
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     */
+    private function assertExplicitDeltaCount(array $slugs, int $target): void
+    {
+        if (count($slugs) !== $target) {
+            throw new RuntimeException('explicit_delta_slug_count_mismatch');
+        }
     }
 
     /**
@@ -236,6 +415,7 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         array $truth,
         array $ledger,
         int $target,
+        ?array $explicitDeltaSelection,
         array $locales,
     ): array {
         $policy = (new Career2786ReadinessPolicyClassifier)->classify($report, $target);
@@ -248,11 +428,14 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         $truthBySlug = $this->rowsBySlugLocale($this->artifactRows($truth, ['items', 'rows']));
         $ledgerBySlug = $this->ledgerBySlug($this->artifactRows($ledger, ['members', 'items', 'rows']));
         $auditRowsBySlug = $this->auditRowsBySlug($report);
-        $selection = (new CareerCanonical80CandidateSelector)->select(
-            report: $report,
-            targetCount: $target,
-            hardBlockers: self::RUNTIME_POOL_SELECTOR_HARD_BLOCKERS,
-        );
+        $explicitProgressiveDelta = $explicitDeltaSelection !== null;
+        $selectionRows = $explicitProgressiveDelta
+            ? $this->explicitProgressiveSelectionRows($explicitDeltaSelection['slugs'])
+            : (new CareerCanonical80CandidateSelector)->select(
+                report: $report,
+                targetCount: $target,
+                hardBlockers: self::RUNTIME_POOL_SELECTOR_HARD_BLOCKERS,
+            )->rows;
 
         $eligible = [];
         $excluded = [];
@@ -260,7 +443,7 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         $baseCandidateCount = 0;
         $auditGate = new Career80RolloutCandidateGate;
 
-        foreach ($selection->rows as $row) {
+        foreach ($selectionRows as $row) {
             $policyRow = $policyRowsBySlug[$row->canonicalSlug] ?? null;
             if (! $policyRow instanceof Career2786ReadinessPolicyRow) {
                 continue;
@@ -274,9 +457,10 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
                 ledgerMember: $ledgerBySlug[$row->canonicalSlug] ?? null,
                 auditRows: $auditRowsBySlug[$row->canonicalSlug] ?? [],
                 policyRow: $policyRow,
+                explicitProgressiveDelta: $explicitProgressiveDelta,
             );
 
-            if (! $this->isBaseCandidate($row, $policyRow, $candidateAwareEvidence)) {
+            if (! $this->isBaseCandidate($row, $policyRow, $candidateAwareEvidence, $explicitProgressiveDelta)) {
                 continue;
             }
 
@@ -289,6 +473,7 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
                 ledgerMember: $ledgerBySlug[$row->canonicalSlug] ?? null,
                 auditGate: $auditGate->evaluate($auditRowsBySlug[$row->canonicalSlug] ?? []),
                 candidateAwareEvidence: $candidateAwareEvidence,
+                explicitProgressiveDelta: $explicitProgressiveDelta,
             );
 
             if ($gate['eligible'] === true) {
@@ -338,6 +523,7 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
                 'ledger' => $this->sourceArtifact($ledgerPath, [
                     'member_count' => count($this->artifactRows($ledger, ['members', 'items', 'rows'])),
                 ]),
+                'explicit_delta_selection' => $explicitDeltaSelection,
             ],
             'runtime_candidate_gate' => [
                 'required' => true,
@@ -353,7 +539,9 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
                 'excluded_rows' => $excluded,
             ],
             'selection' => [
-                'strategy' => 'runtime_published_candidate_pool_ranked',
+                'strategy' => $explicitProgressiveDelta
+                    ? 'progressive_explicit_delta_runtime_candidate_pool'
+                    : 'runtime_published_candidate_pool_ranked',
                 'slugs' => array_map(
                     static fn (array $row): string => (string) $row['slug'],
                     $selected
@@ -368,20 +556,26 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
                 'apply_allowed' => false,
                 'reason' => 'runtime candidate pool planning only; rollout apply requires separate approval',
             ],
-            'next_required_action' => $poolPass ? '80_READINESS_RERUN_WITH_RUNTIME_POOL' : 'FIX_RUNTIME_CANDIDATE_POOL',
+            'next_required_action' => $poolPass
+                ? ($explicitProgressiveDelta ? 'PROGRESSIVE_ROLLOUT_MANIFEST' : '80_READINESS_RERUN_WITH_RUNTIME_POOL')
+                : 'FIX_RUNTIME_CANDIDATE_POOL',
         ];
     }
 
     /**
      * @param  array{required: bool, eligible: bool, reasons: list<string>, evidence: array<string, mixed>}  $candidateAwareEvidence
      */
-    private function isBaseCandidate(CareerCanonical80CandidateSelectionRow $row, Career2786ReadinessPolicyRow $policyRow, array $candidateAwareEvidence): bool
+    private function isBaseCandidate(CareerCanonical80CandidateSelectionRow $row, Career2786ReadinessPolicyRow $policyRow, array $candidateAwareEvidence, bool $explicitProgressiveDelta): bool
     {
         if (! in_array($row->candidateStatus, [
             CareerCanonical80CandidateSelectionRow::STATUS_READY,
             CareerCanonical80CandidateSelectionRow::STATUS_NEAR_ELIGIBLE,
         ], true)) {
             return false;
+        }
+
+        if ($explicitProgressiveDelta) {
+            return $row->hardBlockers === [] && $candidateAwareEvidence['required'];
         }
 
         if ($candidateAwareEvidence['required'] && $row->hardBlockers === [] && $this->policyOnlyHasCandidateAwarePlanningBlockers($policyRow)) {
@@ -411,6 +605,7 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         ?array $ledgerMember,
         array $auditGate,
         array $candidateAwareEvidence,
+        bool $explicitProgressiveDelta,
     ): array {
         $reasons = $candidateAwareEvidence['reasons'];
         $evidence = [
@@ -454,8 +649,10 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
             }
         }
 
-        foreach ($auditGate['reasons'] as $reason) {
-            $reasons[] = $reason;
+        if (! ($explicitProgressiveDelta && $candidateAwareEvidence['eligible'])) {
+            foreach ($auditGate['reasons'] as $reason) {
+                $reasons[] = $reason;
+            }
         }
 
         $reasons = $this->normalizeStrings($reasons);
@@ -569,12 +766,13 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         ?array $ledgerMember,
         array $auditRows,
         Career2786ReadinessPolicyRow $policyRow,
+        bool $explicitProgressiveDelta,
     ): array {
         $reasons = [];
         $projectionOverlayRows = 0;
         $truthOverlayRows = 0;
         $sourceHashes = [];
-        $required = $this->candidateAwarePlanningRequired($policyRow);
+        $required = $explicitProgressiveDelta || $this->candidateAwarePlanningRequired($policyRow);
 
         $ledgerOverlay = $ledgerMember !== null
             && ($this->stringValue($ledgerMember, 'overlay_source') ?? '') === self::CANDIDATE_AWARE_OVERLAY_SOURCE;
@@ -623,10 +821,10 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
         if ($truthOverlayRows < count($locales)) {
             $reasons[] = 'candidate_aware_truth_overlay_missing';
         }
-        if (! $this->auditShowsCandidateAwareIndexState($auditRows)) {
+        if (! $explicitProgressiveDelta && ! $this->auditShowsCandidateAwareIndexState($auditRows)) {
             $reasons[] = 'candidate_aware_audit_index_evidence_missing';
         }
-        if (! $this->policyOnlyHasCandidateAwarePlanningBlockers($policyRow)) {
+        if (! $explicitProgressiveDelta && ! $this->policyOnlyHasCandidateAwarePlanningBlockers($policyRow)) {
             $reasons[] = 'candidate_policy_has_non_candidate_aware_blocker';
         }
 
@@ -646,6 +844,9 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
                 'projection_overlay_rows' => $projectionOverlayRows,
                 'truth_overlay_rows' => $truthOverlayRows,
                 'audit_index_state' => $this->auditIndexStates($auditRows),
+                'explicit_progressive_delta' => $explicitProgressiveDelta,
+                'audit_index_evidence_required' => ! $explicitProgressiveDelta,
+                'policy_blocker_veto_required' => ! $explicitProgressiveDelta,
                 'source_artifact_sha256_values' => $this->normalizeStrings($sourceHashes),
             ],
         ];
@@ -674,6 +875,37 @@ final class CareerPlanCanonical80RuntimeCandidatePool extends Command
     private function auditShowsCandidateAwareIndexState(array $auditRows): bool
     {
         return in_array(self::CANDIDATE_AWARE_INDEX_STATE, $this->auditIndexStates($auditRows), true);
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return list<CareerCanonical80CandidateSelectionRow>
+     */
+    private function explicitProgressiveSelectionRows(array $slugs): array
+    {
+        $rows = [];
+        foreach ($slugs as $index => $slug) {
+            $rows[] = new CareerCanonical80CandidateSelectionRow(
+                canonicalSlug: $slug,
+                rank: $index + 1,
+                score: max(1, count($slugs) - $index),
+                candidateStatus: CareerCanonical80CandidateSelectionRow::STATUS_NEAR_ELIGIBLE,
+                selected: false,
+                hardBlocked: false,
+                passedLocaleCount: 0,
+                blockedLocaleCount: 0,
+                locales: [],
+                reasons: [],
+                hardBlockers: [],
+                layerStatuses: [],
+                evidence: [[
+                    'source' => 'progressive_explicit_delta_slug_artifact',
+                    'selection_order' => $index + 1,
+                ]],
+            );
+        }
+
+        return $rows;
     }
 
     /**
