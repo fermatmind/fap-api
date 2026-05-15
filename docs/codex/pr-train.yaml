@@ -62,6 +62,7 @@ prs:
       - backend/database/migrations/**
       - backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php
       - backend/tests/Feature/Cms/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -73,9 +74,10 @@ prs:
     validation:
       - php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi
       - php artisan test tests/Feature/Cms/ArticleMultiTestGraphEdgesTest.php --no-ansi
+      - php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi
       - php artisan route:list --no-ansi
       - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
-      - vendor/bin/pint --test app/Models/Article.php app/Models/ArticleTestEdge.php app/Http/Controllers/API/V0_5/Cms/ArticleController.php app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php tests/Feature/Cms/ArticleMultiTestGraphEdgesTest.php
+      - vendor/bin/pint --test app/Models/Article.php app/Models/ArticleTestEdge.php app/Http/Controllers/API/V0_5/Cms/ArticleController.php app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php tests/Feature/Cms/ArticleMultiTestGraphEdgesTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - git diff --check
       - git diff --cached --check
     merge_policy:
