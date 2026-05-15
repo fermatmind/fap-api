@@ -6382,6 +6382,78 @@
         }
       ]
     },
+    "REPAIR-ROLLOUT-CANDIDATE-AWARE-PROJECTION-ARTIFACT-SHAPE-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-rollout-candidate-aware-projection-artifact-shape-1",
+      "title": "fix(api): normalize candidate-aware rollout projection artifacts",
+      "name": "Fix rollout candidate-aware projection artifact normalization",
+      "status": "pr_open",
+      "depends_on": [
+        "REPAIR-RUNTIME-PROJECTION-LOOKUP-LATEST-SELECTION-1"
+      ],
+      "scope_type": "rollout_command_candidate_aware_artifact_normalization_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerExecuteCanonicalRolloutBatch.php",
+        "backend/tests/Feature/Console/CareerExecuteCanonicalRolloutBatchTest.php",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no rollout dry-run",
+        "no rollout apply",
+        "no candidate prep apply",
+        "no production DB mutation",
+        "no rollback",
+        "no quarantine",
+        "no deploy",
+        "no fap-web",
+        "do not weaken final live acceptance",
+        "do not treat candidate-aware planning artifacts as final published authority"
+      ],
+      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1410",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-ROLLOUT-CANDIDATE-AWARE-PROJECTION-ARTIFACT-SHAPE-1, then implementing the PR."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SCAN-35 found 800 rollout dry-run is blocked because the rollout command consumes projection metadata instead of candidate-aware top-level items after REPAIR-RUNTIME-PROJECTION-LOOKUP-LATEST-SELECTION-1."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Scope is limited to rollout command artifact normalization, focused command test, and authorized train metadata."
+        },
+        "local_validation": {
+          "status": "pass",
+          "evidence": [
+            "composer dump-autoload refreshed stale local autoload that pointed to a previous /private/tmp worktree; no tracked vendor files changed.",
+            "php artisan test --filter=CareerExecuteCanonicalRolloutBatch --no-ansi: pass (12 tests, 45 assertions)",
+            "php artisan test --filter=CanonicalBatchPromotionExecutorService --no-ansi: pass (14 tests, 33 assertions)",
+            "php artisan route:list --no-ansi: pass",
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-rollout-artifact-shape.sqlite php artisan migrate --force --no-ansi: pass",
+            "ruby YAML.load_file docs/codex/pr-train.yaml: pass",
+            "python3 -m json.tool docs/codex/pr-train-state.json: pass",
+            "vendor/bin/pint --test: pass",
+            "git diff --check: pass",
+            "bash backend/scripts/ci_verify_mbti.sh: pass"
+          ]
+        },
+        "github_pr": {
+          "status": "opened",
+          "evidence": "https://github.com/fermatmind/fap-api/pull/1410"
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "800-ROLLOUT-DRY-RUN-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
     "PR-CMS-FIX-MASTER": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-fix-master-semantic-content-gate",

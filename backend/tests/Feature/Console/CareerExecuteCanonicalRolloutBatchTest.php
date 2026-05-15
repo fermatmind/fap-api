@@ -78,6 +78,56 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertSame(['actuaries'], $payload['promoted_slugs'] ?? []);
     }
 
+    public function test_command_prefers_candidate_aware_top_level_items_over_projection_metadata(): void
+    {
+        $candidateProjection = $this->candidateProjection(['actuaries']);
+        $staleProjectionMetadata = $this->publishedProjection(['actuaries']);
+        $candidateAwareProjection = [
+            'status' => 'pass',
+            'projection_kind' => 'career_runtime_publish_projection_candidate_aware',
+            'source_authority' => 'candidate_prep_apply_overlay',
+            'candidate_aware_overlay' => [
+                'source' => 'candidate_prep_apply_overlay',
+                'runtime_publish_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
+                'slug_count' => 1,
+                'locale_count' => 2,
+                'expected_locale_rows' => 2,
+                'canonical_ledger_authority_claimed' => false,
+            ],
+            'items' => $candidateProjection['items'],
+            'projection' => [
+                'projection_kind' => 'career_runtime_publish_projection',
+                'items' => $staleProjectionMetadata['items'],
+            ],
+        ];
+
+        $this->writeRawProjection($candidateAwareProjection);
+        $writtenProjection = json_decode((string) file_get_contents($this->tmpProjectionPath), true);
+        $this->assertSame(
+            CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
+            $writtenProjection['items'][0]['runtime_publish_state'] ?? null,
+        );
+
+        $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+            '--batch-id' => 'batch-001',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en,zh',
+            '--rollback-group' => 'actuaries',
+            '--dry-run' => true,
+            '--projection' => $this->tmpProjectionPath,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $payload = json_decode(Artisan::output(), true);
+
+        $this->assertIsArray($payload);
+        $this->assertSame('planned', $payload['status'] ?? null);
+        $this->assertSame('pass', $payload['plan_validation']['status'] ?? null);
+        $this->assertSame(2, $payload['promoted_locale_rows'] ?? null);
+        $this->assertFalse($payload['writes_database'] ?? true);
+    }
+
     public function test_command_rejects_blocked_state(): void
     {
         $this->writeProjection($this->blockedProjection(['actuaries']));
@@ -300,6 +350,15 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
      * @param  list<string>  $slugs
      * @return array<string, mixed>
      */
+    private function publishedProjection(array $slugs): array
+    {
+        return $this->buildProjection($slugs, CareerRuntimePublishProjectionService::STATE_PUBLISHED);
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return array<string, mixed>
+     */
     private function buildProjection(array $slugs, string $state): array
     {
         $items = [];
@@ -340,5 +399,13 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     {
         $payload = ['projection' => $projection];
         File::put($this->tmpProjectionPath, json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+
+    /**
+     * @param  array<string, mixed>  $projection
+     */
+    private function writeRawProjection(array $projection): void
+    {
+        File::put($this->tmpProjectionPath, json_encode($projection, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 }
