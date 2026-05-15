@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T13:37:12+08:00",
+  "updated_at": "2026-05-15T14:33:19+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6293,6 +6293,94 @@
       },
       "failure_reason": null,
       "next_pr": "300-READINESS-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
+    "PR-CMS-FIX-MASTER": {
+      "repo": "fap-api",
+      "branch": "codex/pr-cms-fix-master-semantic-content-gate",
+      "title": "PR-CMS-FIX-MASTER｜Scalable Semantic Content Gate Architecture",
+      "status": "pr_open",
+      "depends_on": [
+        "PR-CMS-01"
+      ],
+      "scope_type": "semantic_content_gate_architecture",
+      "allowed_paths": [
+        "backend/app/Services/Cms/EditorialPackage/Config/EvergreenAnchors.php",
+        "backend/app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php",
+        "backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "non_goals": [
+        "no article import or publish",
+        "no article body or metadata rewrite",
+        "no production content mutation",
+        "no fap-web changes",
+        "no user attempts/results/reports/orders/payments/shares access",
+        "no LLM runtime dependency"
+      ],
+      "commit_sha": "68f505c8f70964f09de25a0b25ae776f011aee1c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1407",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding PR-CMS-FIX-MASTER to fap-api pr-train manifest/state and continuing execution."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Scope limited to semantic evergreen heading anchor configuration, importer gate matching, focused tests, and train metadata."
+        },
+        "manifest_yaml": {
+          "status": "pass",
+          "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'"
+        },
+        "state_json": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json"
+        },
+        "article_import_editorial_package": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi"
+        },
+        "mbti_package_semantic_dry_run": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/... php artisan articles:import-editorial-package --file=storage/app/editorial-packages/mbti-personality-test-science-vs-pseudoscience.zh-CN.json --locale=zh-CN --dry-run",
+          "evidence": "zh dry-run action=will_create errors_count=0; ORIGIN heading accepted; en dry-run errors_count=0"
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi"
+        },
+        "scoped_pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test app/Config/SEO/EvergreenAnchors.php app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php"
+        },
+        "bigfive_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi"
+        },
+        "migrate_pretend_sqlite": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "evidence": "No migration files changed; sqlite pretend allowed for local DB-independent validation."
+        },
+        "ci_verify_mbti": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh"
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "github_ci_initial": {
+          "status": "failed_fixed",
+          "evidence": "GitHub verify-mbti jobs treated backend/app/Config/SEO/EvergreenAnchors.php as broad runtime diff; moved semantic anchors under the existing Article Editorial Package gate service path."
+        }
+      },
+      "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
