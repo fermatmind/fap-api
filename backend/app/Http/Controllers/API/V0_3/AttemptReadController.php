@@ -710,15 +710,18 @@ class AttemptReadController extends Controller
         $orgId = $this->currentOrgContext()->orgId();
         $attempt = $this->resolveAttemptForAccessRead($request, $orgId, $id);
         $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
-        $this->enforceEmailBindingForRead($request, $orgId, $attempt, $scaleCode);
-        $emailTokenActor = $this->resultEmailReadAccess()->tokenActorForRequest($request, $orgId, (string) $attempt->id);
-        $readUserId = $emailTokenActor['user_id'] ?? $this->resolveUserId($request);
-        $readAnonId = $emailTokenActor['anon_id'] ?? $this->resolveAnonId($request);
         $submissionPayload = $this->latestReadableSubmission($request, (string) $attempt->id);
         $resultExists = Result::query()
             ->where('org_id', $orgId)
             ->where('attempt_id', (string) $attempt->id)
             ->exists();
+        if ($resultExists) {
+            $this->enforceEmailBindingForRead($request, $orgId, $attempt, $scaleCode);
+        }
+
+        $emailTokenActor = $this->resultEmailReadAccess()->tokenActorForRequest($request, $orgId, (string) $attempt->id);
+        $readUserId = $emailTokenActor['user_id'] ?? $this->resolveUserId($request);
+        $readAnonId = $emailTokenActor['anon_id'] ?? $this->resolveAnonId($request);
         $repairFailed = false;
         $repairFailureCode = null;
         if ($resultExists && strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI') {

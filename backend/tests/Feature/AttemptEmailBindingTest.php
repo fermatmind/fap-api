@@ -68,6 +68,66 @@ final class AttemptEmailBindingTest extends TestCase
         $this->assertDatabaseCount('attempt_email_bindings', 0);
     }
 
+    public function test_owned_public_attempt_can_prebind_email_before_result_exists(): void
+    {
+        $anonId = 'anon_email_prebind_owner';
+        $attemptId = $this->seedAttemptWithoutResult($anonId, 'RIASEC');
+        $token = $this->seedFmToken($anonId);
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->postJson("/api/v0.3/attempts/{$attemptId}/email-bind", [
+            'email' => 'prebind@example.test',
+            'locale' => 'zh-CN',
+            'surface' => 'result_gate',
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('status', 'active');
+        $response->assertJsonPath('result_ready', false);
+        $response->assertJsonPath('result_url', "/zh/result/{$attemptId}");
+
+        $this->assertDatabaseHas('attempt_email_bindings', [
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'bound_anon_id' => $anonId,
+            'status' => 'active',
+            'source' => 'result_gate',
+        ]);
+    }
+
+    public function test_prebound_email_allows_riasec_report_access_after_result_exists(): void
+    {
+        config()->set('fap.features.email_first_result_access', true);
+
+        $anonId = 'anon_email_prebind_riasec_ready';
+        $attemptId = $this->seedAttemptWithoutResult($anonId, 'RIASEC');
+        $token = $this->seedFmToken($anonId);
+
+        $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->postJson("/api/v0.3/attempts/{$attemptId}/email-bind", [
+            'email' => 'riasec-ready@example.test',
+            'locale' => 'zh-CN',
+            'surface' => 'result_gate',
+        ])->assertOk();
+
+        $this->seedResultForAttempt($attemptId, 'RIASEC', '');
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+            'X-Anon-Id' => $anonId,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertOk();
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'ready');
+        $response->assertJsonPath('report_state', 'ready');
+    }
+
     public function test_sensitive_clinical_attempt_cannot_bind_email(): void
     {
         $anonId = 'anon_email_bind_clinical';
@@ -108,6 +168,19 @@ final class AttemptEmailBindingTest extends TestCase
 
     private function seedAttemptWithResult(string $anonId, string $scaleCode): string
     {
+        $attemptId = $this->seedAttemptWithoutResult($anonId, $scaleCode);
+
+        $this->seedResultForAttempt(
+            $attemptId,
+            $scaleCode,
+            in_array($scaleCode, ['CLINICAL_COMBO_68', 'SDS_20'], true) ? '' : 'INTJ-A'
+        );
+
+        return $attemptId;
+    }
+
+    private function seedAttemptWithoutResult(string $anonId, string $scaleCode): string
+    {
         $attemptId = (string) Str::uuid();
 
         Attempt::create([
@@ -132,23 +205,26 @@ final class AttemptEmailBindingTest extends TestCase
             'calculation_snapshot_json' => ['seed' => true],
         ]);
 
+        return $attemptId;
+    }
+
+    private function seedResultForAttempt(string $attemptId, string $scaleCode, string $typeCode = 'INTJ-A'): void
+    {
         Result::create([
             'id' => (string) Str::uuid(),
             'attempt_id' => $attemptId,
             'org_id' => 0,
             'scale_code' => $scaleCode,
             'scale_version' => 'v0.3',
-            'type_code' => in_array($scaleCode, ['CLINICAL_COMBO_68', 'SDS_20'], true) ? '' : 'INTJ-A',
+            'type_code' => $typeCode,
             'scores_json' => ['seed' => 1],
             'profile_version' => 'test',
             'is_valid' => true,
             'computed_at' => now(),
             'result_json' => [
-                'type_code' => in_array($scaleCode, ['CLINICAL_COMBO_68', 'SDS_20'], true) ? '' : 'INTJ-A',
+                'type_code' => $typeCode,
             ],
         ]);
-
-        return $attemptId;
     }
 
     private function seedFmToken(string $anonId): string
