@@ -6459,7 +6459,7 @@
       "branch": "codex/repair-progressive-readiness-software-manual-hold-exclusion-1",
       "title": "fix(api): exclude software manual hold from progressive readiness",
       "name": "Exclude software-developers manual hold from progressive readiness",
-      "status": "in_progress",
+      "status": "pr_open_draft",
       "depends_on": [
         "REPAIR-ROLLOUT-CANDIDATE-AWARE-PROJECTION-ARTIFACT-SHAPE-1"
       ],
@@ -6486,7 +6486,7 @@
         "no weakening software-developers rollout rejection"
       ],
       "commit_sha": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1412",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -6516,6 +6516,10 @@
             "git diff --check: pass",
             "bash backend/scripts/ci_verify_mbti.sh: external blocker in BigFive content pack publish/rollback compiled-directory assertions; current PR did not modify content pack publish/rollback code or keep generated content pack artifacts."
           ]
+        },
+        "github_pr": {
+          "status": "opened_draft",
+          "evidence": "https://github.com/fermatmind/fap-api/pull/1412"
         }
       },
       "failure_reason": null,
