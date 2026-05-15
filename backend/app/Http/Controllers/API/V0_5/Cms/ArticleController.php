@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\ArticleTag;
+use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ArticleSeoService;
@@ -54,10 +55,32 @@ class ArticleController extends Controller
             $query->where('locale', $validated['locale']);
         }
         if ($validated['related_test_slug'] !== null) {
-            $query->where('related_test_slug', $validated['related_test_slug']);
+            $relatedTestSlug = $validated['related_test_slug'];
+            $query->where(static function ($relatedQuery) use ($relatedTestSlug, $validated): void {
+                $relatedQuery
+                    ->where('related_test_slug', $relatedTestSlug)
+                    ->orWhereHas('testEdges', static function ($edgeQuery) use ($relatedTestSlug, $validated): void {
+                        $edgeQuery
+                            ->where('test_slug', $relatedTestSlug)
+                            ->where('visibility', ArticleTestEdge::VISIBILITY_PUBLIC);
+
+                        if ($validated['locale'] !== null) {
+                            $edgeQuery->where('locale', $validated['locale']);
+                        }
+                    });
+            });
         }
         if ($validated['voice'] !== null) {
             $query->where('voice', $validated['voice']);
+        }
+
+        if ($validated['related_test_slug'] !== null) {
+            $query
+                ->orderByRaw('CASE WHEN related_test_slug = ? THEN 0 ELSE 1 END', [$validated['related_test_slug']])
+                ->orderByRaw(
+                    '(select min(sort_order) from article_test_edges where article_test_edges.article_id = articles.id and article_test_edges.test_slug = ? and article_test_edges.visibility = ?) asc',
+                    [$validated['related_test_slug'], ArticleTestEdge::VISIBILITY_PUBLIC]
+                );
         }
 
         $paginator = $query
@@ -769,6 +792,10 @@ class ArticleController extends Controller
             'tags' => static fn ($query) => $query->withoutGlobalScopes(),
             'seoMeta' => static fn ($query) => $query->withoutGlobalScopes(),
             'publishedRevision' => static fn ($query) => $query->withoutGlobalScopes(),
+            'testEdges' => static fn ($query) => $query->withoutGlobalScopes()
+                ->where('visibility', ArticleTestEdge::VISIBILITY_PUBLIC)
+                ->orderBy('sort_order')
+                ->orderBy('id'),
         ];
     }
 
@@ -835,6 +862,8 @@ class ArticleController extends Controller
             'cover_image_height' => $article->cover_image_height !== null ? (int) $article->cover_image_height : null,
             'cover_image_variants' => PublicMediaUrlGuard::sanitizeArrayFields($article->cover_image_variants, ['url']),
             'related_test_slug' => $article->related_test_slug,
+            'related_test_slugs' => $this->publicRelatedTestSlugs($article),
+            'test_edges' => $this->publicTestEdges($article),
             'voice' => $article->voice,
             'voice_order' => $article->voice_order !== null ? (int) $article->voice_order : null,
             'status' => (string) $article->status,
@@ -903,6 +932,8 @@ class ArticleController extends Controller
             'cover_image_height' => $article->cover_image_height !== null ? (int) $article->cover_image_height : null,
             'cover_image_variants' => PublicMediaUrlGuard::sanitizeArrayFields($article->cover_image_variants, ['url']),
             'related_test_slug' => $article->related_test_slug,
+            'related_test_slugs' => $this->publicRelatedTestSlugs($article),
+            'test_edges' => $this->publicTestEdges($article),
             'voice' => $article->voice,
             'voice_order' => $article->voice_order !== null ? (int) $article->voice_order : null,
             'status' => (string) $article->status,
@@ -943,6 +974,55 @@ class ArticleController extends Controller
 
         return $article->tags
             ->filter(static fn (ArticleTag $tag): bool => (int) $tag->org_id === (int) $article->org_id)
+            ->values()
+            ->all();
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function publicRelatedTestSlugs(Article $article): array
+    {
+        $slugs = [];
+        if (filled($article->related_test_slug)) {
+            $slugs[] = (string) $article->related_test_slug;
+        }
+
+        foreach ($this->publicTestEdges($article) as $edge) {
+            $slug = (string) ($edge['test_slug'] ?? '');
+            if ($slug !== '') {
+                $slugs[] = $slug;
+            }
+        }
+
+        return array_values(array_unique($slugs));
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function publicTestEdges(Article $article): array
+    {
+        if (! $article->relationLoaded('testEdges')) {
+            return [];
+        }
+
+        return $article->testEdges
+            ->filter(static fn (ArticleTestEdge $edge): bool => (int) $edge->org_id === (int) $article->org_id
+                && (string) $edge->locale === (string) $article->locale
+                && (string) $edge->visibility === ArticleTestEdge::VISIBILITY_PUBLIC)
+            ->sortBy([
+                ['sort_order', 'asc'],
+                ['id', 'asc'],
+            ])
+            ->map(static fn (ArticleTestEdge $edge): array => [
+                'test_slug' => (string) $edge->test_slug,
+                'role' => (string) $edge->role,
+                'locale' => (string) $edge->locale,
+                'sort_order' => (int) $edge->sort_order,
+                'safety_level' => (string) $edge->safety_level,
+                'visibility' => (string) $edge->visibility,
+            ])
             ->values()
             ->all();
     }

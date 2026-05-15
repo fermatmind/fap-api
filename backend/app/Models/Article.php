@@ -232,6 +232,11 @@ class Article extends Model
         return $this->hasOne(ArticleSeoMeta::class, 'article_id', 'id')->withoutGlobalScopes();
     }
 
+    public function testEdges(): HasMany
+    {
+        return $this->hasMany(ArticleTestEdge::class, 'article_id', 'id')->withoutGlobalScopes();
+    }
+
     public static function findBySlug(string $slug, string $locale = 'en'): ?self
     {
         return static::query()

@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T19:13:32+08:00",
+  "updated_at": "2026-05-15T21:20:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6627,6 +6627,81 @@
         "github_ci_initial": {
           "status": "failed_fixed",
           "evidence": "GitHub verify-mbti jobs treated backend/app/Config/SEO/EvergreenAnchors.php as broad runtime diff; moved semantic anchors under the existing Article Editorial Package gate service path."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
+    "PR-GRAPH-01": {
+      "repo": "fap-api",
+      "branch": "codex/pr-graph-01-multi-test-edges",
+      "title": "PR-GRAPH-01｜Article Multi-Test Graph Edges",
+      "status": "local_checks_passed",
+      "depends_on": [
+        "PR-CMS-01",
+        "PR-CMS-02",
+        "PR-CMS-03"
+      ],
+      "scope_type": "article_multi_test_graph_edges",
+      "allowed_paths": [
+        "backend/app/Models/Article.php",
+        "backend/app/Models/ArticleTestEdge.php",
+        "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php",
+        "backend/app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php",
+        "backend/database/migrations/**",
+        "backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+        "backend/tests/Feature/Cms/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "non_goals": [
+        "no article body changes",
+        "no production content mutation",
+        "no user attempts/results/reports/orders/payments/shares access",
+        "no fap-web changes in backend PR",
+        "no removal of related_test_slug backward compatibility"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding PR-GRAPH-01 to fap-api and fap-web pr-train manifest/state and continuing execution."
+        },
+        "branch_preflight": {
+          "status": "pass",
+          "evidence": "Started from latest main and created branch codex/pr-graph-01-multi-test-edges."
+        },
+        "article_multi_test_graph_edges_test": {
+          "status": "pass",
+          "evidence": "php artisan test tests/Feature/Cms/ArticleMultiTestGraphEdgesTest.php --no-ansi"
+        },
+        "editorial_package_importer_regression": {
+          "status": "pass",
+          "evidence": "php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi"
+        },
+        "route_list": {
+          "status": "pass",
+          "evidence": "php artisan route:list --no-ansi"
+        },
+        "migrate_pretend_sqlite": {
+          "status": "pass",
+          "evidence": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+        },
+        "pint": {
+          "status": "pass",
+          "evidence": "vendor/bin/pint --test scoped changed backend files"
+        },
+        "manifest_state_parse": {
+          "status": "pass",
+          "evidence": "ruby YAML.load_file + python3 -m json.tool"
+        },
+        "diff_check": {
+          "status": "pass",
+          "evidence": "git diff --check && git diff --cached --check"
         }
       },
       "failure_reason": null,

@@ -40,6 +40,47 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: PR-GRAPH-01
+    repo: fap-api
+    depends_on:
+      - PR-CMS-01
+      - PR-CMS-02
+      - PR-CMS-03
+    branch: codex/pr-graph-01-multi-test-edges
+    title: "PR-GRAPH-01｜Article Multi-Test Graph Edges"
+    scope:
+      - Add backend Article multi-test graph edge authority without replacing Article.
+      - Keep articles.related_test_slug as the primary/backward-compatible test relation.
+      - Let public article list filtering by related_test_slug also match visible multi-test graph edges.
+      - Persist editorial package target_tests and article-to-test graph intent as scoped article test edges.
+      - Add sensitive test guard metadata for Depression/Anxiety/clinical edges.
+    allowed_paths:
+      - backend/app/Models/Article.php
+      - backend/app/Models/ArticleTestEdge.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php
+      - backend/app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php
+      - backend/database/migrations/**
+      - backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php
+      - backend/tests/Feature/Cms/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify article body content.
+      - Publish, unpublish, import, or mutate production content.
+      - Touch attempts, results, reports, orders, payments, shares, scoring, result pages, payment, or invite flows.
+      - Remove or repurpose articles.related_test_slug.
+      - Add fap-web code in this backend PR.
+    validation:
+      - php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi
+      - php artisan test tests/Feature/Cms/ArticleMultiTestGraphEdgesTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - vendor/bin/pint --test app/Models/Article.php app/Models/ArticleTestEdge.php app/Http/Controllers/API/V0_5/Cms/ArticleController.php app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php tests/Feature/Cms/ArticleMultiTestGraphEdgesTest.php
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-PROGRESSIVE-RUNTIME-CANDIDATE-PREP-1
     repo: fap-api
     depends_on:
