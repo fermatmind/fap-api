@@ -103,6 +103,22 @@ final class CareerDeltaRolloutManifestPlannerTest extends TestCase
         $this->assertContains('baseline_slug_in_delta_manifest', array_column($result['blockers'], 'reason'));
     }
 
+    public function test_blocks_software_developers_manual_hold_in_delta_manifest(): void
+    {
+        $result = (new CareerDeltaRolloutManifestPlanner)->plan(
+            targetDeltaPlan: $this->targetDeltaPlan(['baseline-001'], ['software-developers'], target: 2),
+            targetPublicTotal: 2,
+            expectedDeltaCount: 1,
+        )->toArray();
+
+        $this->assertSame('blocked', $result['status']);
+        $this->assertFalse($result['dry_run_allowed']);
+        $this->assertContains(
+            'software_developers_manual_hold_in_delta_manifest',
+            array_column($result['blockers'], 'reason'),
+        );
+    }
+
     public function test_expected_locale_rows_use_delta_only_count(): void
     {
         $result = (new CareerDeltaRolloutManifestPlanner)->plan(

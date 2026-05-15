@@ -348,6 +348,10 @@ final class CareerProgressiveReadinessSelector
     {
         $reasons = [];
         $slug = strtolower(trim((string) $row->canonicalSlug));
+        if ($slug === 'software-developers') {
+            $reasons[] = 'software_developers_manual_hold_excluded_from_canonical_rollout';
+        }
+
         if (str_starts_with($slug, 'cn-')) {
             $reasons[] = 'cn_proxy_excluded_from_canonical_rollout';
         }

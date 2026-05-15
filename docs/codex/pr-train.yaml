@@ -503,6 +503,45 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-PROGRESSIVE-READINESS-SOFTWARE-MANUAL-HOLD-EXCLUSION-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-ROLLOUT-CANDIDATE-AWARE-PROJECTION-ARTIFACT-SHAPE-1
+    branch: codex/repair-progressive-readiness-software-manual-hold-exclusion-1
+    title: "fix(api): exclude software manual hold from progressive readiness"
+    name: "Exclude software-developers manual hold from progressive readiness"
+    scope:
+      - Exclude the protected software-developers manual-hold slug from 300, 800, and 2786 progressive readiness selections.
+      - Replace excluded software-developers rows with later source-ready eligible rows when enough candidates exist.
+      - Fail closed if software-developers appears in an explicit progressive rollout delta manifest.
+      - Preserve rollout executor, rollback gate, and final live acceptance strictness.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Unit/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run readiness execution.
+      - Run candidate prep dry-run or apply.
+      - Run rollout dry-run.
+      - Run rollout apply.
+      - Run backfill, rollback, quarantine, or publication expansion.
+      - Query or mutate production DB.
+      - Touch fap-web or deploy.
+      - Weaken software-developers rollout rejection.
+    validation:
+      - php artisan test --filter=CareerProgressiveReadinessSelection --no-ansi
+      - php artisan test --filter=CareerDeltaRolloutManifest --no-ansi
+      - php artisan test --filter=CareerProgressive --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
     repo: fap-api
     depends_on:

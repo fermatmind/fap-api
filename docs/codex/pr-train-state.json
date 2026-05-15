@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T15:16:53+08:00",
+  "updated_at": "2026-05-15T19:13:32+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6453,6 +6453,95 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": []
+    },
+    "REPAIR-PROGRESSIVE-READINESS-SOFTWARE-MANUAL-HOLD-EXCLUSION-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-progressive-readiness-software-manual-hold-exclusion-1",
+      "title": "fix(api): exclude software manual hold from progressive readiness",
+      "name": "Exclude software-developers manual hold from progressive readiness",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-ROLLOUT-CANDIDATE-AWARE-PROJECTION-ARTIFACT-SHAPE-1"
+      ],
+      "scope_type": "progressive_readiness_software_manual_hold_exclusion_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Audit/**",
+        "backend/tests/Unit/Domain/Career/Audit/**",
+        "backend/tests/Feature/Console/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no DB mutation",
+        "no candidate prep dry-run",
+        "no candidate prep apply",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no deploy",
+        "no fap-web",
+        "no production DB query",
+        "no live crawl",
+        "no weakening software-developers rollout rejection"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-PROGRESSIVE-READINESS-SOFTWARE-MANUAL-HOLD-EXCLUSION-1, then implementing the PR."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-ROLLOUT-CANDIDATE-AWARE-PROJECTION-ARTIFACT-SHAPE-1 is present on main as commit b555f20575a228bbdbb46e780f9eea669f0ca9ac before this PR started."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are limited to Career progressive readiness/manual-hold exclusion logic, manifest fail-closed planning, unit tests, audit docs, and authorized train metadata."
+        },
+        "local_validation": {
+          "status": "pass_with_external_mbti_sidecar",
+          "evidence": [
+            "composer dump-autoload refreshed stale local autoload that pointed to the parent fap-api vendor path; no tracked vendor files changed.",
+            "php artisan test --filter=CareerProgressiveReadinessSelection --no-ansi: pass (16 tests, 69 assertions)",
+            "php artisan test --filter=CareerDeltaRolloutManifest --no-ansi: pass (9 tests, 44 assertions)",
+            "php artisan test --filter=CareerProgressive --no-ansi: pass (34 tests, 142 assertions)",
+            "php artisan test --filter=CareerPlanCanonicalProgressiveReadinessSelection --no-ansi: pass (6 tests, 33 assertions)",
+            "php artisan route:list --no-ansi: pass",
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-software-manual-hold-exclusion.sqlite php artisan migrate --force --no-ansi: pass",
+            "ruby YAML.load_file docs/codex/pr-train.yaml: pass",
+            "python3 -m json.tool docs/codex/pr-train-state.json: pass",
+            "vendor/bin/pint --test: pass",
+            "git diff --check: pass",
+            "bash backend/scripts/ci_verify_mbti.sh: external blocker in BigFive content pack publish/rollback compiled-directory assertions; current PR did not modify content pack publish/rollback code or keep generated content pack artifacts."
+          ]
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "800-READINESS-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "sidecar_id": "BIG5-PACK-PUBLISH-ROLLBACK-COMPILED-DIR-LOCAL-CI",
+          "title": "Local BigFive pack publish/rollback compiled-directory assertions fail",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [],
+          "evidence": [
+            "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksPublishBig5Test at the target compiled directory assertion.",
+            "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksRollbackBig5Test at the target compiled directory assertion.",
+            "Current PR changed only Career Audit selector/manifest planner/tests/docs/train metadata and removed generated BigFive content pack artifacts from the worktree before staging."
+          ],
+          "severity": "medium",
+          "next_goal": "SCAN-BIG5-PACK-PUBLISH-ROLLBACK-COMPILED-DIR-LOCAL-CI",
+          "may_continue_train": true
+        }
+      ]
     },
     "PR-CMS-FIX-MASTER": {
       "repo": "fap-api",
