@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T13:35:35+08:00",
+  "updated_at": "2026-05-15T13:37:12+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6230,7 +6230,7 @@
       "branch": "codex/repair-progressive-readiness-cn-proxy-exclusion-1",
       "title": "fix(api): exclude CN proxy rows from progressive readiness",
       "name": "Exclude CN proxy rows from canonical progressive rollout readiness",
-      "status": "in_progress",
+      "status": "pr_open",
       "depends_on": [
         "REPAIR-PROGRESSIVE-RUNTIME-CANDIDATE-POOL-SELECTION-1"
       ],
@@ -6256,8 +6256,8 @@
         "no live crawl",
         "no weakening CN proxy rollout rejection"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "fc3eda2ddc513b319bff0643f1be37fc221a62c7",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1406",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -6285,6 +6285,10 @@
             "bash backend/scripts/ci_verify_mbti.sh: pass",
             "git diff --check: pass"
           ]
+        },
+        "github_pr": {
+          "status": "opened",
+          "evidence": "https://github.com/fermatmind/fap-api/pull/1406"
         }
       },
       "failure_reason": null,
