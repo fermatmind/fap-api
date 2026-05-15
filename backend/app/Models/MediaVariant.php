@@ -23,6 +23,11 @@ final class MediaVariant extends Model
         'width',
         'height',
         'bytes',
+        'sync_status',
+        'cdn_status',
+        'synced_at',
+        'verified_at',
+        'last_error',
         'payload_json',
     ];
 
@@ -31,6 +36,8 @@ final class MediaVariant extends Model
         'width' => 'integer',
         'height' => 'integer',
         'bytes' => 'integer',
+        'synced_at' => 'datetime',
+        'verified_at' => 'datetime',
         'payload_json' => 'array',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

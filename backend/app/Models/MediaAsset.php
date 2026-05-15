@@ -17,6 +17,22 @@ final class MediaAsset extends Model
 
     public const STATUS_PUBLISHED = 'published';
 
+    public const SYNC_PENDING = 'pending';
+
+    public const SYNC_SYNCED = 'synced';
+
+    public const SYNC_SKIPPED = 'skipped';
+
+    public const SYNC_FAILED = 'failed';
+
+    public const CDN_NOT_VERIFIED = 'not_verified';
+
+    public const CDN_VERIFIED = 'verified';
+
+    public const CDN_SKIPPED = 'skipped';
+
+    public const CDN_FAILED = 'failed';
+
     protected $table = 'media_assets';
 
     protected $fillable = [
@@ -34,6 +50,11 @@ final class MediaAsset extends Model
         'credit',
         'status',
         'is_public',
+        'sync_status',
+        'cdn_status',
+        'synced_at',
+        'verified_at',
+        'last_error',
         'uploaded_by_admin_user_id',
         'payload_json',
     ];
@@ -44,6 +65,8 @@ final class MediaAsset extends Model
         'height' => 'integer',
         'bytes' => 'integer',
         'is_public' => 'boolean',
+        'synced_at' => 'datetime',
+        'verified_at' => 'datetime',
         'uploaded_by_admin_user_id' => 'integer',
         'payload_json' => 'array',
         'created_at' => 'datetime',

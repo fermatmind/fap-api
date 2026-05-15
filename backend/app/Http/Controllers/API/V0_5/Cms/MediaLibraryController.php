@@ -7,6 +7,7 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 use App\Http\Controllers\Controller;
 use App\Models\MediaAsset;
 use App\Models\MediaVariant;
+use App\Services\Cms\MediaAssetStorageSyncService;
 use App\Services\Cms\MediaVariantGenerator;
 use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
@@ -195,8 +196,12 @@ final class MediaLibraryController extends Controller
         ]);
     }
 
-    public function internalUpload(Request $request, string $assetKey, MediaVariantGenerator $generator): JsonResponse
-    {
+    public function internalUpload(
+        Request $request,
+        string $assetKey,
+        MediaVariantGenerator $generator,
+        MediaAssetStorageSyncService $syncService
+    ): JsonResponse {
         $validator = Validator::make($request->all(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
             'file' => ['required', 'file', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
@@ -243,7 +248,7 @@ final class MediaLibraryController extends Controller
         ]);
         $asset->save();
 
-        $asset = $generator->storeUploadAndGenerate($asset, $file);
+        $asset = $syncService->syncAndVerify($generator->storeUploadAndGenerate($asset, $file));
 
         return response()->json([
             'ok' => true,
@@ -295,6 +300,11 @@ final class MediaLibraryController extends Controller
             'credit' => $asset->credit,
             'status' => (string) $asset->status,
             'is_public' => (bool) $asset->is_public,
+            'sync_status' => (string) ($asset->sync_status ?? MediaAsset::SYNC_PENDING),
+            'cdn_status' => (string) ($asset->cdn_status ?? MediaAsset::CDN_NOT_VERIFIED),
+            'synced_at' => optional($asset->synced_at)->toISOString(),
+            'verified_at' => optional($asset->verified_at)->toISOString(),
+            'last_error' => $asset->last_error,
             'payload_json' => is_array($asset->payload_json) ? $asset->payload_json : [],
             'variants' => $asset->variants
                 ->map(fn (MediaVariant $variant): array => $this->variantPayload($variant, (string) $asset->disk))
@@ -320,6 +330,11 @@ final class MediaLibraryController extends Controller
             'width' => $variant->width,
             'height' => $variant->height,
             'bytes' => $variant->bytes,
+            'sync_status' => (string) ($variant->sync_status ?? MediaAsset::SYNC_PENDING),
+            'cdn_status' => (string) ($variant->cdn_status ?? MediaAsset::CDN_NOT_VERIFIED),
+            'synced_at' => optional($variant->synced_at)->toISOString(),
+            'verified_at' => optional($variant->verified_at)->toISOString(),
+            'last_error' => $variant->last_error,
             'payload_json' => is_array($variant->payload_json) ? $variant->payload_json : [],
         ];
     }

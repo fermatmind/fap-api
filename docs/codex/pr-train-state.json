@@ -3573,7 +3573,7 @@
         "fap-web/tests/contracts/**riasec**",
         "docs/codex/pr-train-state.json"
       ],
-      "commit_sha": null,
+      "commit_sha": "701716fd315e59a321bb70b7ae4dc8ff084cb864",
       "pr_url": null,
       "checks": {},
       "failure_reason": null,
@@ -7118,6 +7118,70 @@
         "pint_migration": {
           "status": "pass",
           "evidence": "vendor/bin/pint --test database/migrations/2026_05_15_000300_create_article_test_edges_table.php"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": []
+    },
+    "PR-MEDIA-01": {
+      "repo": "fap-api",
+      "branch": "codex/pr-media-01-oss-cdn",
+      "title": "PR-MEDIA-01｜CMS Media Library OSS/CDN Upload Automation",
+      "status": "local_checks_passed",
+      "depends_on": [
+        "PR-CMS-01",
+        "PR-CMS-02",
+        "PR-CMS-03",
+        "PR-CMS-04"
+      ],
+      "non_goals": [
+        "no article body changes",
+        "no production content mutation",
+        "no fap-web changes",
+        "no user attempts/results/reports/orders/payments/shares access",
+        "no Tencent/COS or frontend static asset authority"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding PR-MEDIA-01 to fap-api pr-train manifest/state and continuing execution."
+        },
+        "branch_preflight": {
+          "status": "pass",
+          "evidence": "Created isolated worktree /private/tmp/fap-api-pr-media-01-oss-cdn from origin/main on branch codex/pr-media-01-oss-cdn to avoid unrelated local WIP."
+        },
+        "media_oss_sync_test": {
+          "status": "pass",
+          "evidence": "php artisan test tests/Feature/V0_5/MediaLibraryOssSyncTest.php --no-ansi"
+        },
+        "internal_cms_route_auth_regression": {
+          "status": "pass",
+          "evidence": "php artisan test tests/Feature/V0_5/InternalCmsRouteAuthTest.php --no-ansi"
+        },
+        "route_list": {
+          "status": "pass",
+          "evidence": "php artisan route:list --no-ansi"
+        },
+        "migrate_pretend_sqlite": {
+          "status": "pass",
+          "evidence": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+        },
+        "pint": {
+          "status": "pass",
+          "evidence": "vendor/bin/pint --test scoped changed backend files"
+        },
+        "manifest_state_parse": {
+          "status": "pass",
+          "evidence": "ruby YAML.load_file + python3 -m json.tool"
+        },
+        "diff_check": {
+          "status": "pass",
+          "evidence": "git diff --check && git diff --cached --check"
         }
       },
       "failure_reason": null,

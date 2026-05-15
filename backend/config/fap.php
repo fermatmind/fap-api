@@ -59,6 +59,11 @@ return [
     'media' => [
         'asset_origin' => env('FAP_MEDIA_ASSET_ORIGIN', 'https://assets.fermatmind.com'),
         'public_storage_prefix' => env('FAP_MEDIA_PUBLIC_STORAGE_PREFIX', '/storage'),
+        'oss_sync_enabled' => (bool) env('FAP_MEDIA_OSS_SYNC_ENABLED', false),
+        'oss_disk' => env('FAP_MEDIA_OSS_DISK', 's3'),
+        'oss_key_prefix' => env('FAP_MEDIA_OSS_KEY_PREFIX', 'storage'),
+        'cdn_verify_enabled' => (bool) env('FAP_MEDIA_CDN_VERIFY_ENABLED', false),
+        'cdn_verify_timeout_seconds' => (int) env('FAP_MEDIA_CDN_VERIFY_TIMEOUT_SECONDS', 5),
     ],
 
     'scales_registry' => [
