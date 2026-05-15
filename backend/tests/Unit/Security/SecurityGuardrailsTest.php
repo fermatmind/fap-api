@@ -22,6 +22,7 @@ final class SecurityGuardrailsTest extends TestCase
         '/api/v0.3/auth/wx_phone',
         '/api/v0.3/auth/phone/send_code',
         '/api/v0.3/auth/phone/verify',
+        '/api/v0.3/results/lookup-by-email',
         '/api/v0.3/attempts/start',
         '/api/v0.3/attempts/{attempt_id}/progress',
         '/api/v0.3/orders/checkout',
@@ -121,6 +122,23 @@ final class SecurityGuardrailsTest extends TestCase
             $violations,
             "Mutating API routes must require auth middleware unless explicitly allowlisted.\n".implode("\n", $violations)
         );
+    }
+
+    public function test_v0_3_attempt_submit_keeps_token_auth_and_submit_throttle(): void
+    {
+        $route = app('router')->getRoutes()->match(
+            request()->create('/api/v0.3/attempts/submit', 'POST')
+        );
+
+        $middlewares = array_values(array_map(
+            static fn (mixed $mw): string => (string) $mw,
+            $route->gatherMiddleware()
+        ));
+
+        $joined = implode("\n", $middlewares);
+
+        $this->assertStringContainsString('FmTokenAuth', $joined);
+        $this->assertContains('throttle:api_attempt_submit', $middlewares);
     }
 
     public function test_no_mass_assignment_from_request_all_in_controllers_or_services(): void
