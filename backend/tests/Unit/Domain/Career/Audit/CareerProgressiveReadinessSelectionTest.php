@@ -92,6 +92,64 @@ final class CareerProgressiveReadinessSelectionTest extends TestCase
         $this->assertContains('insufficient_source_ready_delta_slugs', array_column($payload['blockers'], 'reason'));
     }
 
+    public function test_excludes_cn_proxy_rows_from_canonical_rollout_selection(): void
+    {
+        $baseline = $this->slugs('current', 80);
+        $cnProxy = $this->slugs('cn-1-01', 120);
+        $replacementDelta = $this->slugs('delta', 220);
+
+        $payload = $this->select($baseline, [...$baseline, ...$cnProxy, ...$replacementDelta], 80, 300);
+
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame(220, $payload['selected_count']);
+        $this->assertSame($replacementDelta, $payload['selected_slugs']);
+        $this->assertSame(120, $payload['excluded']['excluded_by_reason']['cn_proxy_excluded_from_canonical_rollout']);
+        $this->assertSame([], array_values(array_filter(
+            $payload['selected_slugs'],
+            static fn (string $slug): bool => str_starts_with($slug, 'cn-'),
+        )));
+    }
+
+    public function test_cn_proxy_public_type_rows_are_excluded_even_without_cn_slug_prefix(): void
+    {
+        $baseline = $this->slugs('current', 80);
+        $replacementDelta = $this->slugs('delta', 220);
+        $rows = [
+            ...$this->sourceRows($baseline),
+            [
+                'canonical_slug' => 'china-proxy-001',
+                'canonical_public_type' => 'public_cn_proxy_page',
+            ],
+            [
+                'canonical_slug' => 'china-proxy-002',
+                'recommended_resolution' => 'public_cn_proxy_page_candidate',
+            ],
+            ...$this->sourceRows($replacementDelta),
+        ];
+
+        $payload = $this->selectFromRows($baseline, $rows, 80, 300);
+
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame($replacementDelta, $payload['selected_slugs']);
+        $this->assertSame(2, $payload['excluded']['excluded_by_reason']['cn_proxy_excluded_from_canonical_rollout']);
+    }
+
+    public function test_blocks_when_cn_proxy_exclusion_leaves_insufficient_non_cn_candidates(): void
+    {
+        $baseline = $this->slugs('current', 80);
+        $cnProxy = $this->slugs('cn-1-01', 120);
+        $replacementDelta = $this->slugs('delta', 219);
+
+        $payload = $this->select($baseline, [...$baseline, ...$cnProxy, ...$replacementDelta], 80, 300);
+
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertSame(219, $payload['selected_count']);
+        $this->assertContains('insufficient_source_ready_delta_slugs', array_column($payload['blockers'], 'reason'));
+        $this->assertSame(120, $payload['excluded']['excluded_by_reason']['cn_proxy_excluded_from_canonical_rollout']);
+        $this->assertSame(219, $payload['blockers'][0]['evidence']['source_ready_delta_count']);
+        $this->assertSame(219, $payload['blockers'][0]['evidence']['selectable_candidate_count']);
+    }
+
     public function test_preserves_deterministic_source_order(): void
     {
         $baseline = $this->slugs('current', 80);
@@ -205,22 +263,65 @@ final class CareerProgressiveReadinessSelectionTest extends TestCase
     }
 
     /**
+     * @param  list<string>  $baseline
+     * @param  list<array<string, mixed>>  $rows
+     * @return array<string, mixed>
+     */
+    private function selectFromRows(array $baseline, array $rows, int $currentTotal, int $targetTotal): array
+    {
+        return (new CareerProgressiveReadinessSelector)->select(
+            sourcePlan: new CareerPublicResolutionPlan('/tmp/synthetic-career-source-plan.json', null, array_map(
+                static fn (array $row, int $index): CareerPublicResolutionPlanRow => CareerPublicResolutionPlanRow::fromRaw([
+                    'row_number' => $index + 1,
+                    'status' => 'ready_for_pilot',
+                    'canonical_public_type' => 'public_canonical_job',
+                    'locales' => ['en', 'zh'],
+                    ...$row,
+                ]),
+                $rows,
+                array_keys($rows),
+            )),
+            currentCloseout: $this->closeout($currentTotal),
+            currentPublicSlugs: $baseline,
+            currentPublicTotal: $currentTotal,
+            targetPublicTotal: $targetTotal,
+            locales: ['en', 'zh'],
+        )->toArray();
+    }
+
+    /**
      * @param  list<string>  $slugs
      */
     private function sourcePlan(array $slugs): CareerPublicResolutionPlan
     {
+        return new CareerPublicResolutionPlan(
+            '/tmp/synthetic-career-source-plan.json',
+            null,
+            array_map(
+                static fn (array $row): CareerPublicResolutionPlanRow => CareerPublicResolutionPlanRow::fromRaw($row),
+                $this->sourceRows($slugs),
+            ),
+        );
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return list<array<string, mixed>>
+     */
+    private function sourceRows(array $slugs): array
+    {
         $rows = [];
         foreach ($slugs as $index => $slug) {
-            $rows[] = CareerPublicResolutionPlanRow::fromRaw([
+            $rows[] = [
                 'row_number' => $index + 1,
                 'canonical_slug' => $slug,
                 'status' => 'ready_for_pilot',
                 'canonical_public_type' => 'public_canonical_job',
                 'locales' => ['en', 'zh'],
-            ]);
+            ];
         }
 
-        return new CareerPublicResolutionPlan('/tmp/synthetic-career-source-plan.json', null, $rows);
+        return $rows;
     }
 
     /**
