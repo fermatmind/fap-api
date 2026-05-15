@@ -29,7 +29,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
             'title_zh' => '测试族',
         ]);
 
-        foreach (['actuaries', 'economists', 'web-developers', 'software-developers', 'cn-engineers'] as $slug) {
+        foreach (['actuaries', 'economists', 'financial-analysts', 'web-developers', 'software-developers', 'cn-engineers'] as $slug) {
             Occupation::query()->create([
                 'family_id' => $family->id,
                 'canonical_slug' => $slug,
@@ -258,6 +258,34 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertIsArray($payload);
         $this->assertSame('planned', $payload['status'] ?? null);
         $this->assertSame(6, $payload['promoted_locale_rows'] ?? 0);
+    }
+
+    public function test_apply_uses_explicit_batch_ledger_authority_for_stale_blocked_override_member(): void
+    {
+        $this->writeProjection($this->candidateProjection(['financial-analysts']));
+
+        $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+            '--batch-id' => 'batch-financial-analysts',
+            '--slugs' => 'financial-analysts',
+            '--locales' => 'en,zh',
+            '--rollback-group' => 'financial-analysts',
+            '--apply' => true,
+            '--projection' => $this->tmpProjectionPath,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $payload = json_decode(Artisan::output(), true);
+
+        $this->assertIsArray($payload);
+        $this->assertSame('promoted_success', $payload['status'] ?? null);
+        $this->assertTrue($payload['writes_database'] ?? false);
+        $this->assertTrue($payload['write_verified'] ?? false);
+        $this->assertSame(['financial-analysts'], $payload['promoted_slugs'] ?? null);
+        $this->assertSame(2, $payload['promoted_locale_rows'] ?? null);
+        $this->assertSame(2, data_get($payload, 'persistence_check.found_published'));
+        $this->assertSame(0, data_get($payload, 'persistence_check.not_published_count'));
+        $this->assertFalse($payload['rollback_required'] ?? true);
     }
 
     public function test_command_writes_audit_report(): void

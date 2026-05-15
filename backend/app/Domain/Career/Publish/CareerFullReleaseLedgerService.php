@@ -104,19 +104,34 @@ final class CareerFullReleaseLedgerService
             $queueRow = $reviewQueueBySlug[$slug] ?? null;
             $resolvedRow = $resolvedBySlug[$slug] ?? null;
             $indexRow = $indexStateBySlug[$slug] ?? null;
+            $explicitBatchMember = isset($explicitBatchSlugs[$slug]);
 
             $currentCrosswalkMode = $this->normalizeNullableString($tracked['crosswalk_mode'] ?? null);
-            $currentIndexState = $this->normalizeIndexState((string) ($auditRow['lifecycle_state'] ?? $indexRow['current_index_state'] ?? ''));
-            $indexEligible = (bool) ($auditRow['index_eligible'] ?? $indexRow['index_eligible'] ?? false);
-            $publicIndexState = $this->normalizePublicIndexState(
-                (string) ($auditRow['public_index_state'] ?? $indexRow['public_index_state'] ?? ''),
-                $indexEligible,
-            );
+            if ($explicitBatchMember && $indexRow !== null) {
+                $currentIndexState = $this->normalizeIndexState((string) ($indexRow['current_index_state'] ?? ''));
+                $indexEligible = (bool) ($indexRow['index_eligible'] ?? false);
+                $publicIndexState = $this->normalizePublicIndexState(
+                    (string) ($indexRow['public_index_state'] ?? ''),
+                    $indexEligible,
+                );
+            } else {
+                $currentIndexState = $this->normalizeIndexState((string) ($auditRow['lifecycle_state'] ?? $indexRow['current_index_state'] ?? ''));
+                $indexEligible = (bool) ($auditRow['index_eligible'] ?? $indexRow['index_eligible'] ?? false);
+                $publicIndexState = $this->normalizePublicIndexState(
+                    (string) ($auditRow['public_index_state'] ?? $indexRow['public_index_state'] ?? ''),
+                    $indexEligible,
+                );
+            }
 
             $blockedGovernanceStatus = $this->normalizeNullableString($auditRow['blocked_governance_status'] ?? null);
             $readinessStatus = $this->normalizeNullableString($auditRow['readiness_status'] ?? null);
 
-            $explicitBatchMember = isset($explicitBatchSlugs[$slug]);
+            $explicitBatchStaleGovernanceOverride = $explicitBatchMember
+                && $this->explicitBatchAuthorityOverridesStaleGovernance(
+                    readinessStatus: $readinessStatus,
+                    blockedGovernanceStatus: $blockedGovernanceStatus,
+                    publicIndexState: $publicIndexState,
+                );
             $releaseCohort = $explicitBatchMember
                 ? $this->resolveExplicitBatchReleaseCohort(
                     readinessStatus: $readinessStatus,
@@ -143,6 +158,7 @@ final class CareerFullReleaseLedgerService
                 queueRow: $queueRow,
                 firstWaveAuditAvailable: $firstWaveAuditAvailable,
                 suppressReviewHandoffReasons: $explicitBatchMember,
+                suppressStaleGovernanceReasons: $explicitBatchStaleGovernanceOverride,
             );
 
             $releaseCounts[$releaseCohort]++;
@@ -534,6 +550,16 @@ final class CareerFullReleaseLedgerService
         ?string $blockedGovernanceStatus,
         string $publicIndexState,
     ): string {
+        if ($this->explicitBatchAuthorityOverridesStaleGovernance(
+            readinessStatus: $readinessStatus,
+            blockedGovernanceStatus: $blockedGovernanceStatus,
+            publicIndexState: $publicIndexState,
+        )) {
+            return $publicIndexState === IndexStateValue::INDEXABLE
+                ? 'public_detail_indexable'
+                : 'public_detail_conservative';
+        }
+
         if (
             $blockedGovernanceStatus !== null
             || in_array((string) $readinessStatus, ['blocked_override_eligible', 'blocked_not_safely_remediable'], true)
@@ -544,6 +570,26 @@ final class CareerFullReleaseLedgerService
         return $publicIndexState === IndexStateValue::INDEXABLE
             ? 'public_detail_indexable'
             : 'public_detail_conservative';
+    }
+
+    private function explicitBatchAuthorityOverridesStaleGovernance(
+        ?string $readinessStatus,
+        ?string $blockedGovernanceStatus,
+        string $publicIndexState,
+    ): bool {
+        if (! in_array($publicIndexState, [IndexStateValue::INDEXABLE, IndexStateValue::TRUST_LIMITED], true)) {
+            return false;
+        }
+
+        if (
+            $readinessStatus === 'blocked_not_safely_remediable'
+            || $blockedGovernanceStatus === 'blocked_not_safely_remediable'
+        ) {
+            return false;
+        }
+
+        return $readinessStatus === 'blocked_override_eligible'
+            || $blockedGovernanceStatus === 'blocked_override_eligible';
     }
 
     /**
@@ -560,10 +606,11 @@ final class CareerFullReleaseLedgerService
         ?array $queueRow,
         bool $firstWaveAuditAvailable,
         bool $suppressReviewHandoffReasons = false,
+        bool $suppressStaleGovernanceReasons = false,
     ): array {
         $reasons = [];
 
-        if ($blockedGovernanceStatus !== null) {
+        if ($blockedGovernanceStatus !== null && ! $suppressStaleGovernanceReasons) {
             $reasons[] = 'blocked_governance';
         }
 

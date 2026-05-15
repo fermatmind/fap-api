@@ -170,6 +170,57 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
         }
     }
 
+    public function test_stale_first_wave_blocked_override_member_stays_blocked_without_explicit_batch_authority(): void
+    {
+        $slug = 'financial-analysts';
+        $this->materializeIndexedOccupation($slug);
+
+        $ledger = app(CareerFullReleaseLedgerService::class)->build()->toArray();
+        $member = collect((array) ($ledger['members'] ?? []))->firstWhere('canonical_slug', $slug);
+
+        $this->assertIsArray($member);
+        $this->assertSame('blocked', $member['release_cohort'] ?? null);
+        $this->assertContains('blocked_governance', $member['blocker_reasons'] ?? []);
+        $this->assertContains('first_wave_readiness_blocked_override_eligible', $member['blocker_reasons'] ?? []);
+        $this->assertArrayNotHasKey('explicit_rollout_batch', (array) ($member['evidence_refs'] ?? []));
+    }
+
+    public function test_explicit_rollout_batch_authority_overrides_stale_blocked_override_for_indexed_member(): void
+    {
+        $slug = 'financial-analysts';
+        $this->materializeIndexedOccupation($slug);
+
+        $ledger = app(CareerFullReleaseLedgerService::class)->build([$slug])->toArray();
+        $member = collect((array) ($ledger['members'] ?? []))->firstWhere('canonical_slug', $slug);
+
+        $this->assertIsArray($member);
+        $this->assertSame('public_detail_indexable', $member['release_cohort'] ?? null);
+        $this->assertSame('indexed', $member['current_index_state'] ?? null);
+        $this->assertSame('indexable', $member['public_index_state'] ?? null);
+        $this->assertSame([], $member['blocker_reasons'] ?? null);
+        $this->assertSame(
+            'current_explicit_batch_only',
+            data_get($member, 'evidence_refs.explicit_rollout_batch.scope')
+        );
+    }
+
+    public function test_explicit_rollout_batch_authority_keeps_stale_blocked_override_candidate_conservative(): void
+    {
+        $slug = 'financial-analysts';
+        $this->materializeIndexedOccupation($slug, 'promotion_candidate');
+
+        $ledger = app(CareerFullReleaseLedgerService::class)->build([$slug])->toArray();
+        $member = collect((array) ($ledger['members'] ?? []))->firstWhere('canonical_slug', $slug);
+
+        $this->assertIsArray($member);
+        $this->assertSame('public_detail_conservative', $member['release_cohort'] ?? null);
+        $this->assertSame('promotion_candidate', $member['current_index_state'] ?? null);
+        $this->assertSame('trust_limited', $member['public_index_state'] ?? null);
+        $this->assertContains('public_index_not_indexable', $member['blocker_reasons'] ?? []);
+        $this->assertNotContains('blocked_governance', $member['blocker_reasons'] ?? []);
+        $this->assertNotContains('first_wave_readiness_blocked_override_eligible', $member['blocker_reasons'] ?? []);
+    }
+
     public function test_verified_rollout_batch_execution_is_included_in_default_projection_authority(): void
     {
         $baseLedger = app(CareerFullReleaseLedgerService::class)->build()->toArray();

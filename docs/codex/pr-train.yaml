@@ -542,6 +542,46 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-EXPLICIT-ROLLOUT-BATCH-LEDGER-AUTHORITY-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-PROGRESSIVE-READINESS-SOFTWARE-MANUAL-HOLD-EXCLUSION-1
+    branch: codex/repair-explicit-rollout-batch-ledger-authority-1
+    title: "fix(api): honor explicit rollout batch ledger authority"
+    name: "Repair explicit rollout batch ledger authority after 800 apply verification"
+    scope:
+      - Let the full release ledger honor explicit current-batch rollout authority for stale first-wave blocked_override_eligible members when the current DB index state is indexed or promotion_candidate.
+      - Preserve blocked_not_safely_remediable and non-explicit batch blocking semantics.
+      - Preserve final live acceptance strictness and hard rollout exclusions.
+      - Cover the financial-analysts 800 apply verification failure with focused ledger and rollout command tests.
+    allowed_paths:
+      - backend/app/Domain/Career/Publish/**
+      - backend/tests/Unit/Services/Career/**
+      - backend/tests/Feature/Console/CareerExecuteCanonicalRolloutBatchTest.php
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run rollout dry-run.
+      - Run rollout apply.
+      - Run candidate preparation apply.
+      - Run production DB mutation.
+      - Run rollback or quarantine.
+      - Run deploy.
+      - Touch fap-web.
+      - Weaken final live acceptance.
+      - Weaken software-developers or CN proxy rollout rejection.
+    validation:
+      - php artisan test --filter=CareerFullReleaseLedgerService --no-ansi
+      - php artisan test --filter=CareerExecuteCanonicalRolloutBatch --no-ansi
+      - php artisan test --filter=CanonicalBatchPromotionExecutorService --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
     repo: fap-api
     depends_on:

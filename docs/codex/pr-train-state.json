@@ -6547,6 +6547,98 @@
         }
       ]
     },
+    "REPAIR-EXPLICIT-ROLLOUT-BATCH-LEDGER-AUTHORITY-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-explicit-rollout-batch-ledger-authority-1",
+      "title": "fix(api): honor explicit rollout batch ledger authority",
+      "name": "Repair explicit rollout batch ledger authority after 800 apply verification",
+      "status": "in_progress",
+      "depends_on": [
+        "REPAIR-PROGRESSIVE-READINESS-SOFTWARE-MANUAL-HOLD-EXCLUSION-1"
+      ],
+      "scope_type": "explicit_rollout_batch_ledger_authority_only",
+      "allowed_paths": [
+        "backend/app/Domain/Career/Publish/**",
+        "backend/tests/Unit/Services/Career/**",
+        "backend/tests/Feature/Console/CareerExecuteCanonicalRolloutBatchTest.php",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no rollout dry-run",
+        "no rollout apply",
+        "no candidate prep apply",
+        "no production DB mutation",
+        "no rollback",
+        "no quarantine",
+        "no deploy",
+        "no fap-web",
+        "do not weaken final live acceptance",
+        "do not weaken software-developers or CN proxy rollout rejection"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-EXPLICIT-ROLLOUT-BATCH-LEDGER-AUTHORITY-1, then implementing the PR."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "REPAIR-PROGRESSIVE-READINESS-SOFTWARE-MANUAL-HOLD-EXCLUSION-1 is present on main as PR #1412 before this PR started."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are limited to full release ledger explicit batch authority, focused rollout command tests, and authorized train metadata."
+        },
+        "local_validation": {
+          "status": "pass_with_external_mbti_sidecar",
+          "evidence": [
+            "composer dump-autoload refreshed the temporary worktree autoload mapping after symlinking vendor; no tracked vendor files changed.",
+            "php artisan test --filter=CareerFullReleaseLedgerService --no-ansi: pass (10 tests, 128 assertions)",
+            "php artisan test --filter=CareerExecuteCanonicalRolloutBatch --no-ansi: pass (13 tests, 55 assertions)",
+            "php artisan test --filter=CanonicalBatchPromotionExecutorService --no-ansi: pass (14 tests, 33 assertions)",
+            "php artisan route:list --no-ansi: pass",
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-explicit-ledger-authority.sqlite php artisan migrate --force --no-ansi: pass",
+            "ruby YAML.load_file docs/codex/pr-train.yaml: pass",
+            "python3 -m json.tool docs/codex/pr-train-state.json: pass",
+            "vendor/bin/pint --test: pass",
+            "git diff --check: pass",
+            "bash backend/scripts/ci_verify_mbti.sh: external blocker in BigFive runtime freeze/pack publish/rollback checks; scoped Career tests pass and current PR does not modify BigFive runtime or content-pack publish/rollback code."
+          ]
+        },
+        "github_pr": {
+          "status": "pending",
+          "evidence": null
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "800-ROLLOUT-DRY-RUN-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "sidecar_id": "SIDECAR-BIG5-RUNTIME-FREEZE-PACK-CI-20260515",
+          "title": "Local MBTI CI BigFive runtime freeze and pack compiled-directory checks fail outside current PR scope",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [],
+          "evidence": [
+            "bash backend/scripts/ci_verify_mbti.sh failed BigFiveResultPageV2CoreBodyPreviewTest::runtime_paths_have_no_uncommitted_diff while reporting CMS test-edge files from the parent worktree, not the current PR files.",
+            "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at compiled directory assertions.",
+            "Current PR changed only Career full release ledger explicit batch authority, focused Career rollout/ledger tests, and authorized train metadata."
+          ],
+          "severity": "medium",
+          "next_goal": "SCAN-BIG5-RUNTIME-FREEZE-PACK-CI",
+          "may_continue_train": true
+        }
+      ]
+    },
     "PR-CMS-FIX-MASTER": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-fix-master-semantic-content-gate",
