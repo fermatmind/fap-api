@@ -3529,8 +3529,8 @@
         "docs/codex/pr-train.yaml",
         "docs/codex/pr-train-state.json"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "3a3421333223dd45dd4b385432c6941f31205f17",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1415",
       "checks": {
         "content_registry_contract": {
           "status": "pass",
@@ -6610,8 +6610,8 @@
           ]
         },
         "github_pr": {
-          "status": "pending",
-          "evidence": null
+          "status": "created",
+          "evidence": "https://github.com/fermatmind/fap-api/pull/1415"
         }
       },
       "failure_reason": null,
@@ -6635,6 +6635,109 @@
           ],
           "severity": "medium",
           "next_goal": "SCAN-BIG5-RUNTIME-FREEZE-PACK-CI",
+          "may_continue_train": true
+        }
+      ]
+    },
+    "REPAIR-2786-FINAL-PUBLIC-RESOLUTION-PARTITION-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-2786-final-public-resolution-partition-1-202605160412",
+      "title": "fix(api): partition final career 2786 public resolution",
+      "name": "Partition final 2786 public-resolution assets before candidate prep",
+      "status": "in_progress",
+      "depends_on": [
+        "800-CLOSEOUT-1"
+      ],
+      "scope_type": "final_2786_public_resolution_partition_only",
+      "allowed_paths": [
+        "backend/app/Console/Commands/CareerPlanCanonical2786PublicResolutionPartition.php",
+        "backend/app/Console/Kernel.php",
+        "backend/app/Domain/Career/Audit/**",
+        "backend/tests/Unit/Domain/Career/Audit/**",
+        "backend/tests/Feature/Console/**",
+        "backend/docs/career/audits/**",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ],
+      "non_goals": [
+        "no 2786 readiness execution beyond read-only partition planning",
+        "no candidate prep dry-run",
+        "no candidate prep apply",
+        "no rollout dry-run",
+        "no rollout apply",
+        "no production DB mutation",
+        "no rollback",
+        "no quarantine",
+        "no deploy",
+        "no fap-web",
+        "do not weaken CN proxy or software-developers rollout rejection",
+        "do not mark unresolved policy or occupation-missing rows as rollout candidates"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-2786-FINAL-PUBLIC-RESOLUTION-PARTITION-1, then implementing the PR."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "800 closeout artifacts were produced before the 2786 readiness blocker scan; this PR adds only read-only partition logic for the remaining 2786 assets."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are limited to read-only Career 2786 partition command/domain logic, focused tests, audit docs, Kernel registration, and authorized train metadata."
+        },
+        "local_validation": {
+          "status": "pass_with_external_mbti_sidecar",
+          "evidence": [
+            "composer dump-autoload refreshed the temporary worktree autoload mapping after symlinking vendor; no tracked vendor files changed.",
+            "php artisan test --filter=Career2786PublicResolutionPartition --no-ansi: pass (3 tests, 33 assertions)",
+            "php artisan test tests/Feature/Console/CareerPlanCanonical2786PublicResolutionPartitionCommandTest.php --no-ansi: pass (3 tests, 22 assertions)",
+            "php artisan test --filter=CareerProgressiveReadinessSelection --no-ansi: pass (16 tests, 69 assertions)",
+            "php artisan test --filter=CareerProgressive --no-ansi: pass (34 tests, 142 assertions)",
+            "php artisan test --filter=Career80TotalLiveAcceptance --no-ansi: pass (11 tests, 49 assertions)",
+            "php artisan test --filter=CareerAuditCanonicalEligibility --no-ansi: pass (27 tests, 138 assertions)",
+            "php artisan test --filter=CareerRuntimeCandidate --no-ansi: pass (8 tests, 40 assertions)",
+            "php artisan route:list --no-ansi: pass",
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-2786-partition.sqlite php artisan migrate --force --no-ansi: pass",
+            "ruby YAML.load_file docs/codex/pr-train.yaml: pass",
+            "python3 -m json.tool docs/codex/pr-train-state.json: pass",
+            "vendor/bin/pint --test: pass after formatting Kernel import order",
+            "git diff --check: pass",
+            "bash backend/scripts/ci_verify_mbti.sh: external blocker in BigFive pack publish/rollback compiled-directory checks; scoped Career tests pass and current PR does not modify BigFive content pack publish/rollback code.",
+            "GitHub verify-mbti initially failed because the BigFive runtime freeze classifier did not allow the new Career2786PublicResolutionPartition domain files; added scoped allowlist in the existing Career audit allowlist test.",
+            "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi: pass (65 tests, 69 assertions)",
+            "Local read-only smoke against /tmp 2786 artifacts: status=pass, canonical_rollout_candidate_count=85, occupation_missing_remediation_count=237, cn_proxy_policy_asset_count=1663, software_manual_hold_count=1, readiness_pass=false, writes_database=false."
+          ]
+        },
+        "github_pr": {
+          "status": "pending",
+          "evidence": null
+        }
+      },
+      "failure_reason": null,
+      "next_pr": "2786-PARTITION-REMEDIATION-PLAN-1",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "sidecar_id": "SIDECAR-BIG5-PACK-PUBLISH-ROLLBACK-COMPILED-DIR-20260516",
+          "title": "Local MBTI CI BigFive pack publish and rollback compiled-directory assertions fail outside current PR scope",
+          "owner_repo": "fap-api",
+          "scope_relation": "external_to_current_pr",
+          "introduced_by_current_pr": false,
+          "affected_slugs": [],
+          "affected_locales": [],
+          "evidence": [
+            "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at File::isDirectory($target.'/compiled').",
+            "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled').",
+            "Current PR changes only Career 2786 partition command/domain tests/docs/metadata and does not modify BigFive pack publish or rollback implementation."
+          ],
+          "severity": "medium",
+          "next_goal": "SCAN-BIG5-PACK-PUBLISH-ROLLBACK-COMPILED-DIR-LOCAL-CI",
           "may_continue_train": true
         }
       ]

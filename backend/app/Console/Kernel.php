@@ -45,6 +45,7 @@ use App\Console\Commands\CareerImportOccupationDirectoryDrafts;
 use App\Console\Commands\CareerImportOccupationDirectoryDryRun;
 use App\Console\Commands\CareerImportSelectedDisplayAssets;
 use App\Console\Commands\CareerNormalizeLegacyDisplayAssets;
+use App\Console\Commands\CareerPlanCanonical2786PublicResolutionPartition;
 use App\Console\Commands\CareerPlanCanonical80CohortReadiness;
 use App\Console\Commands\CareerPlanCanonical80RuntimeCandidatePool;
 use App\Console\Commands\CareerPlanCanonical80TargetDelta;
@@ -222,6 +223,7 @@ class Kernel extends ConsoleKernel
         CareerPlanCanonical80CohortReadiness::class,
         CareerPlanCanonical80RuntimeCandidatePool::class,
         CareerPlanCanonical80TargetDelta::class,
+        CareerPlanCanonical2786PublicResolutionPartition::class,
         CareerPlanCanonicalDeltaRolloutGate::class,
         CareerPlanCanonicalProgressiveCohortDelta::class,
         CareerPlanCanonicalProgressiveLiveVerification::class,
