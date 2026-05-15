@@ -14,6 +14,7 @@ final class CareerProgressiveReadinessSelector
      * @param  list<string>  $currentPublicSlugs
      * @param  list<string>  $locales
      * @param  list<string>  $excludeSlugs
+     * @param  list<string>|null  $occupationExistingSlugs
      */
     public function select(
         CareerPublicResolutionPlan $sourcePlan,
@@ -23,13 +24,19 @@ final class CareerProgressiveReadinessSelector
         int $targetPublicTotal,
         array $locales = ['en', 'zh'],
         array $excludeSlugs = [],
+        ?array $occupationExistingSlugs = null,
         bool $strict = false,
     ): CareerProgressiveReadinessSelectionResult {
         $locales = $this->normalizedStringList($locales, 'locale');
         $baselineSlugs = $this->normalizedSlugList($currentPublicSlugs, 'baseline_slug');
         $excludeSlugs = $this->normalizedSlugList($excludeSlugs, 'exclude_slug');
+        $occupationExistingSlugs = $occupationExistingSlugs === null
+            ? null
+            : $this->normalizedSlugList($occupationExistingSlugs, 'occupation_existing_slug');
         $baselineSet = array_fill_keys($baselineSlugs, true);
         $excludeSet = array_fill_keys($excludeSlugs, true);
+        $occupationExistingSet = $occupationExistingSlugs === null ? [] : array_fill_keys($occupationExistingSlugs, true);
+        $requiresOccupationExists = $occupationExistingSlugs !== null;
         $deltaNeeded = max(0, $targetPublicTotal - $currentPublicTotal);
         $issues = $this->initialIssues($currentCloseout, $baselineSlugs, $currentPublicTotal, $targetPublicTotal);
         $candidates = [];
@@ -37,6 +44,8 @@ final class CareerProgressiveReadinessSelector
         $duplicateSourceSlugs = [];
         $seenSourceSlugs = [];
         $sourceReadyCount = 0;
+        $selectableCandidateCount = 0;
+        $occupationMissingExcludedCount = 0;
         $excludedByReason = [];
 
         foreach ($sourcePlan->rows as $position => $row) {
@@ -70,10 +79,23 @@ final class CareerProgressiveReadinessSelector
             if ($sourceReady && ! $baselineExcluded && ! isset($excludeSet[$slug])) {
                 $sourceReadyCount++;
             }
+            $occupationMissing = $requiresOccupationExists
+                && $sourceReady
+                && ! $baselineExcluded
+                && ! isset($excludeSet[$slug])
+                && ! isset($occupationExistingSet[$slug]);
+            if ($occupationMissing) {
+                $reasons[] = 'occupation_missing';
+                $occupationMissingExcludedCount++;
+            }
+            if ($sourceReady && ! $baselineExcluded && ! isset($excludeSet[$slug]) && ! $occupationMissing) {
+                $selectableCandidateCount++;
+            }
 
             $selected = $sourceReady
                 && ! $baselineExcluded
                 && ! isset($excludeSet[$slug])
+                && ! $occupationMissing
                 && count($selectedSlugs) < $deltaNeeded
                 && $issues === [];
 
@@ -115,6 +137,8 @@ final class CareerProgressiveReadinessSelector
                     'required_delta_slug_count' => $deltaNeeded,
                     'selected_count' => count($selectedSlugs),
                     'source_ready_delta_count' => $sourceReadyCount,
+                    'selectable_candidate_count' => $selectableCandidateCount,
+                    'occupation_missing_excluded_count' => $occupationMissingExcludedCount,
                 ],
             );
         }
@@ -140,7 +164,8 @@ final class CareerProgressiveReadinessSelector
             'baseline_count' => count($baselineSlugs),
             'delta_slug_count' => $deltaNeeded,
             'selected_count' => count($selectedSlugs),
-            'candidate_count' => $sourceReadyCount,
+            'candidate_count' => $selectableCandidateCount,
+            'source_ready_count' => $sourceReadyCount,
             'locale_count' => count($locales),
             'locales' => $locales,
             'expected_delta_locale_rows' => $deltaNeeded * count($locales),
@@ -165,6 +190,11 @@ final class CareerProgressiveReadinessSelector
                 'source_path' => $sourcePlan->sourcePath,
                 'checksum' => $sourcePlan->checksum,
                 'row_count' => count($sourcePlan->rows),
+            ],
+            'entity_context' => [
+                'required_for_selection' => $requiresOccupationExists,
+                'occupation_exists_count' => $occupationExistingSlugs === null ? null : count($occupationExistingSlugs),
+                'occupation_missing_excluded_count' => $occupationMissingExcludedCount,
             ],
             'excluded' => [
                 'excluded_by_reason' => $excludedByReason,

@@ -73,6 +73,61 @@ final class CareerPlanCanonicalProgressiveReadinessSelectionCommandTest extends 
         $this->assertFileExists($output);
     }
 
+    public function test_entity_context_excludes_missing_occupations_from_selection(): void
+    {
+        $current = $this->slugs('current', 80);
+        $delta = $this->slugs('delta', 225);
+        $missing = array_slice($delta, 0, 5);
+        $occupationExisting = array_values(array_diff($delta, $missing));
+        $currentSlugs = $this->writeSlugs('current', $current);
+        $output = $this->tempPath('output');
+
+        $exitCode = Artisan::call('career:plan-canonical-progressive-readiness-selection', [
+            '--source-plan' => $this->writeSourcePlan([...$current, ...$delta]),
+            '--closeout' => $this->writeCloseout(80, $currentSlugs),
+            '--current-total' => '80',
+            '--target-total' => '300',
+            '--locales' => 'en,zh',
+            '--entity-context' => $this->writeEntityContext([...$current, ...$occupationExisting], $missing),
+            '--json' => true,
+            '--output' => $output,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame(220, $payload['selected_count']);
+        $this->assertSame($occupationExisting, $payload['selected_slugs']);
+        $this->assertSame(5, $payload['excluded']['excluded_by_reason']['occupation_missing']);
+        $this->assertTrue($payload['entity_context']['required_for_selection']);
+        $this->assertSame(300, $payload['entity_context']['occupation_exists_count']);
+        $this->assertSame(5, $payload['entity_context']['occupation_missing_excluded_count']);
+        $this->assertFileExists($output);
+    }
+
+    public function test_entity_context_with_no_existing_occupations_blocks_without_mutation(): void
+    {
+        $current = $this->slugs('current', 80);
+        $delta = $this->slugs('delta', 220);
+        $currentSlugs = $this->writeSlugs('current', $current);
+
+        $exitCode = Artisan::call('career:plan-canonical-progressive-readiness-selection', [
+            '--source-plan' => $this->writeSourcePlan([...$current, ...$delta]),
+            '--closeout' => $this->writeCloseout(80, $currentSlugs),
+            '--current-total' => '80',
+            '--target-total' => '300',
+            '--entity-context' => $this->writeEntityContext([], [...$current, ...$delta]),
+            '--json' => true,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertSame('entity_context_occupation_exists_slugs_missing', $payload['blockers'][0]['reason']);
+        $this->assertFalse($payload['writes_database']);
+        $this->assertFalse($payload['apply_allowed']);
+    }
+
     public function test_target_less_than_current_blocks_without_mutation(): void
     {
         $currentSlugs = $this->writeSlugs('current', $this->slugs('current', 80));
@@ -156,6 +211,34 @@ final class CareerPlanCanonicalProgressiveReadinessSelectionCommandTest extends 
         return $this->writeJson('source-plan', [
             'schema_version' => 'career_public_resolution_plan.v1',
             'expected_rows' => count($rows),
+            'rows' => $rows,
+        ]);
+    }
+
+    /**
+     * @param  list<string>  $existingSlugs
+     * @param  list<string>  $missingSlugs
+     */
+    private function writeEntityContext(array $existingSlugs, array $missingSlugs = []): string
+    {
+        $rows = [];
+        foreach ($existingSlugs as $slug) {
+            $rows[] = [
+                'canonical_slug' => $slug,
+                'occupation_exists' => true,
+                'occupation_id' => 'occ-'.$slug,
+            ];
+        }
+        foreach ($missingSlugs as $slug) {
+            $rows[] = [
+                'canonical_slug' => $slug,
+                'occupation_exists' => false,
+                'occupation_id' => null,
+            ];
+        }
+
+        return $this->writeJson('entity-context', [
+            'schema_version' => 'career_entity_context.v1',
             'rows' => $rows,
         ]);
     }

@@ -19,6 +19,7 @@ final class CareerPlanCanonicalProgressiveReadinessSelection extends Command
         {--current-total= : Required current public total}
         {--target-total= : Required target public total: 300, 800, or 2786}
         {--locales=en,zh : Comma-separated locales}
+        {--entity-context= : Optional production-derived entity context JSON; if supplied, selected delta slugs must have occupation_exists=true}
         {--exclude-slugs= : Optional newline, comma, or JSON slug artifact to exclude}
         {--strict : Fail on source-plan validation issues}
         {--json : Emit JSON output}
@@ -43,6 +44,7 @@ final class CareerPlanCanonicalProgressiveReadinessSelection extends Command
             $closeout = $this->readJson($closeoutPath, 'closeout');
             $baselinePath = $this->pathFromCloseout($closeout, 'total_slugs_path');
             $excludePath = $this->pathOption('exclude-slugs');
+            $entityContextPath = $this->pathOption('entity-context');
             $payload = app(CareerProgressiveReadinessSelector::class)->select(
                 sourcePlan: $sourcePlan,
                 currentCloseout: $closeout,
@@ -51,10 +53,14 @@ final class CareerPlanCanonicalProgressiveReadinessSelection extends Command
                 targetPublicTotal: $this->intOption('target-total'),
                 locales: $this->localesOption(),
                 excludeSlugs: $excludePath === null ? [] : $this->readSlugList($excludePath, 'exclude_slug'),
+                occupationExistingSlugs: $entityContextPath === null ? null : $this->readOccupationExistingSlugs($entityContextPath),
                 strict: (bool) $this->option('strict'),
             )->toArray();
 
             $payload['source_plan']['validation_issue_count'] = count($sourcePlanValidation->issues);
+            if ($entityContextPath !== null) {
+                $payload['entity_context']['source_path'] = $entityContextPath;
+            }
 
             return $this->finish($payload, ($payload['status'] ?? null) === 'pass' ? self::SUCCESS : self::FAILURE);
         } catch (Throwable $exception) {
@@ -195,6 +201,46 @@ final class CareerPlanCanonicalProgressiveReadinessSelection extends Command
             static fn (mixed $slug): string => trim((string) $slug),
             is_array($slugs) ? $slugs : [],
         ), static fn (string $slug): bool => $slug !== ''));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function readOccupationExistingSlugs(string $path): array
+    {
+        $payload = $this->readJson($path, 'entity_context');
+        $rows = $payload['rows'] ?? null;
+        if (! is_array($rows) || ! array_is_list($rows)) {
+            throw new RuntimeException('entity_context_rows_missing');
+        }
+
+        $slugs = [];
+        $seen = [];
+        foreach ($rows as $index => $row) {
+            if (! is_array($row)) {
+                throw new RuntimeException('entity_context_row_invalid_at_'.$index);
+            }
+            if (($row['occupation_exists'] ?? false) !== true) {
+                continue;
+            }
+
+            $slug = $row['canonical_slug'] ?? $row['slug'] ?? null;
+            if (! is_string($slug) || trim($slug) === '') {
+                throw new RuntimeException('entity_context_slug_missing_at_'.$index);
+            }
+
+            $slug = strtolower(trim($slug));
+            if (! isset($seen[$slug])) {
+                $seen[$slug] = true;
+                $slugs[] = $slug;
+            }
+        }
+
+        if ($slugs === []) {
+            throw new RuntimeException('entity_context_occupation_exists_slugs_missing');
+        }
+
+        return $slugs;
     }
 
     /**
