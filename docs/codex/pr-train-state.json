@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-15T21:45:00+08:00",
+  "updated_at": "2026-05-15T21:52:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6719,6 +6719,14 @@
         "ci_failure_diagnosis": {
           "status": "pass",
           "evidence": "GitHub verify-mbti failed only because runtime freeze classifier needed to ignore backend article multi-test graph edge files."
+        },
+        "migration_safety": {
+          "status": "pass",
+          "evidence": "php artisan test tests/Unit/Migrations/MigrationSafetyTest.php tests/Sre/MigrationSafetyTest.php --no-ansi"
+        },
+        "pint_migration": {
+          "status": "pass",
+          "evidence": "vendor/bin/pint --test database/migrations/2026_05_15_000300_create_article_test_edges_table.php"
         }
       },
       "failure_reason": null,

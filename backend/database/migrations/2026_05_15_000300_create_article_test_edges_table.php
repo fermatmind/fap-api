@@ -38,6 +38,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('article_test_edges');
+        // Intentionally non-destructive. Production rollback must preserve article graph data.
     }
 };
