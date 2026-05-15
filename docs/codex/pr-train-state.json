@@ -6387,7 +6387,7 @@
       "branch": "codex/repair-rollout-candidate-aware-projection-artifact-shape-1",
       "title": "fix(api): normalize candidate-aware rollout projection artifacts",
       "name": "Fix rollout candidate-aware projection artifact normalization",
-      "status": "in_progress",
+      "status": "pr_open",
       "depends_on": [
         "REPAIR-RUNTIME-PROJECTION-LOOKUP-LATEST-SELECTION-1"
       ],
@@ -6413,7 +6413,7 @@
         "do not treat candidate-aware planning artifacts as final published authority"
       ],
       "commit_sha": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1410",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -6441,6 +6441,10 @@
             "git diff --check: pass",
             "bash backend/scripts/ci_verify_mbti.sh: pass"
           ]
+        },
+        "github_pr": {
+          "status": "opened",
+          "evidence": "https://github.com/fermatmind/fap-api/pull/1410"
         }
       },
       "failure_reason": null,
