@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-16T16:22:44+08:00",
+  "updated_at": "2026-05-16T16:27:24+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -1597,7 +1597,7 @@
       "branch": "fix/career-surface-readiness-audit8",
       "title": "feat(api): add career surface readiness audit",
       "name": "Career Surface Readiness Audit",
-      "status": "pr_open",
+      "status": "ci_fix_in_progress",
       "depends_on": [
         "AUDIT-7"
       ],
@@ -7516,6 +7516,15 @@
           "status": "pass",
           "command": "git diff --cached --check",
           "evidence": "No staged whitespace errors."
+        },
+        "github_checks_initial": {
+          "status": "fail_current_pr_scope",
+          "evidence": "verify-mbti-v2 and verify-mbti-legacy failed because BigFiveResultPageV2CoreBodyPreviewTest flagged backend/app/Support/PublicMediaUrlGuard.php in runtime path diff. This file is current PR scope and should be classified with CMS media pipeline hardening."
+        },
+        "ci_fix_validation": {
+          "status": "pass",
+          "command": "php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi",
+          "evidence": "79 tests passed after adding PublicMediaUrlGuard.php to the CMS media pipeline freeze classifier."
         }
       },
       "failure_reason": null,
@@ -7575,6 +7584,11 @@
           "at": "2026-05-16T16:22:44+08:00",
           "status": "pr_open",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1423."
+        },
+        {
+          "at": "2026-05-16T16:27:24+08:00",
+          "status": "ci_fix_in_progress",
+          "summary": "Initial GitHub verify-mbti checks failed on a current-scope freeze classifier gap for PublicMediaUrlGuard.php. Added the guard to CMS media pipeline allowance and verified BigFiveResultPageV2CoreBodyPreview locally."
         }
       ]
     },
