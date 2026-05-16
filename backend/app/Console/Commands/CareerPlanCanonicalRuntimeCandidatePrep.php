@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\Career\Audit\CareerRuntimeArtifactRefreshPlanner;
 use App\Domain\Career\Audit\CareerRuntimeCandidatePrepPlanner;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -98,17 +99,14 @@ final class CareerPlanCanonicalRuntimeCandidatePrep extends Command
     private function localesOption(): array
     {
         $raw = trim((string) ($this->option('locales') ?? 'en,zh'));
-        $locales = array_values(array_unique(array_filter(array_map(
-            static fn (string $locale): string => strtolower(trim($locale)),
-            explode(',', $raw)
-        ))));
-        sort($locales);
-
-        if ($locales === []) {
+        if ($raw === '') {
             throw new RuntimeException('locales_missing');
         }
 
-        return $locales;
+        return CareerRuntimeArtifactRefreshPlanner::normalizeLocaleList(
+            array_map(static fn (string $locale): string => trim($locale), explode(',', $raw)),
+            'locale'
+        );
     }
 
     /**

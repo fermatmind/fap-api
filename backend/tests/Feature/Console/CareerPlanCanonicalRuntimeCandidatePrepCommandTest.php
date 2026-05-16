@@ -115,6 +115,31 @@ final class CareerPlanCanonicalRuntimeCandidatePrepCommandTest extends TestCase
         $this->assertSame(2, $payload['planned_candidate_rows_count']);
     }
 
+    public function test_target_locale_aliases_are_normalized_before_planning(): void
+    {
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeTargetDelta(['delta-001']),
+            '--locales' => 'en-US,zh-CN',
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(['en', 'zh'], $payload['locales']);
+        $this->assertSame(2, $payload['expected_locale_rows']);
+    }
+
+    public function test_unsupported_target_locale_blocks_planning(): void
+    {
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeTargetDelta(['delta-001']),
+            '--locales' => 'en,zh-TW',
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('locale_unsupported_zh_tw', $payload['blockers'][0]['reason']);
+    }
+
     public function test_no_db_mutation_or_apply_is_exposed(): void
     {
         $exitCode = $this->callCommand([

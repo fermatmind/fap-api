@@ -202,22 +202,16 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
      */
     private function locales(array $candidatePrepApply): array
     {
-        $rawLocales = $candidatePrepApply['locales'] ?? self::DEFAULT_LOCALES;
-        if (! is_array($rawLocales) || ! array_is_list($rawLocales)) {
+        if (! array_key_exists('locales', $candidatePrepApply)) {
             return self::DEFAULT_LOCALES;
         }
 
-        $locales = [];
-        foreach ($rawLocales as $locale) {
-            if (is_string($locale) && trim($locale) !== '') {
-                $locales[] = trim($locale);
-            }
+        $rawLocales = $candidatePrepApply['locales'];
+        if (! is_array($rawLocales) || ! array_is_list($rawLocales)) {
+            throw new RuntimeException('candidate_prep_apply_locales_invalid');
         }
 
-        $locales = array_values(array_unique($locales));
-        sort($locales);
-
-        return $locales === [] ? self::DEFAULT_LOCALES : $locales;
+        return CareerRuntimeArtifactRefreshPlanner::normalizeLocaleList($rawLocales, 'candidate_prep_apply_locale');
     }
 
     /**

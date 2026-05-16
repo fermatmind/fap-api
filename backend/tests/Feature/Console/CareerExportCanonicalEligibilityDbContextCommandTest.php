@@ -95,6 +95,7 @@ final class CareerExportCanonicalEligibilityDbContextCommandTest extends TestCas
         $this->assertSame(['manual_review_passed'], $indexArtifact->rowsBySlug()['actuaries']->reasonCodes);
         $this->assertSame($latestIndexStateId, $indexArtifact->rowsBySlug()['actuaries']->evidence['index_state_id']);
         $this->assertNull($indexArtifact->rowsBySlug()['missing-career']->latestIndexState);
+        $this->assertFalse($indexArtifact->rowsBySlug()['missing-career']->indexEligible);
     }
 
     public function test_exported_artifacts_can_be_consumed_by_canonical_eligibility_audit(): void

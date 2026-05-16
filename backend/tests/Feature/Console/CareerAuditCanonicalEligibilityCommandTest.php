@@ -367,6 +367,26 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         $this->assertContains('index_context_slug_duplicate', data_get($payload, 'rows.0.index_status.reasons'));
     }
 
+    public function test_index_context_artifact_missing_index_eligible_blocks_index_layer(): void
+    {
+        $indexPath = $this->writeIndexContext([
+            ['canonical_slug' => 'actuaries', 'latest_index_state' => 'indexed', 'public_facing_state' => 'indexed'],
+        ]);
+
+        Artisan::call('career:audit-canonical-eligibility', [
+            '--scope' => 'slugs',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en',
+            '--index-state-context' => $indexPath,
+            '--json' => true,
+        ]);
+        $payload = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame('blocked', data_get($payload, 'rows.0.index_status.status'));
+        $this->assertContains('index_context_required_field_missing', data_get($payload, 'rows.0.index_status.reasons'));
+        $this->assertContains('index_eligible_false', data_get($payload, 'rows.0.index_status.reasons'));
+    }
+
     public function test_surface_context_artifact_marks_context_supplied(): void
     {
         $surfacePath = $this->writeSurfaceContext([
@@ -497,7 +517,7 @@ final class CareerAuditCanonicalEligibilityCommandTest extends TestCase
         ]);
         $indexPath = $this->writeIndexContext([
             ['canonical_slug' => 'actuaries', 'latest_index_state' => 'indexed', 'public_facing_state' => 'indexed', 'index_eligible' => true],
-            ['canonical_slug' => 'missing-index', 'latest_index_state' => null, 'public_facing_state' => null, 'index_eligible' => null, 'evidence' => ['occupation_missing' => false]],
+            ['canonical_slug' => 'missing-index', 'latest_index_state' => null, 'public_facing_state' => null, 'index_eligible' => false, 'evidence' => ['occupation_missing' => false]],
         ]);
         $surfacePath = $this->writeSurfaceContext([
             ['canonical_slug' => 'actuaries', 'locale' => 'en', 'api_canonical_path' => '/en/career/jobs/actuaries', 'api_indexable' => true, 'surface_verified' => false, 'issues' => ['surface_unverified']],

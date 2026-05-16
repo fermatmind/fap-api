@@ -14,10 +14,12 @@ final class Career2786ReadinessPolicyClassifier
         'occupation_missing',
         'entity_field_missing',
         'index_state_missing',
+        'index_eligible_false',
     ];
 
     private const APPROVAL_GATED_REASONS = [
         'index_state_missing',
+        'index_eligible_false',
         'occupation_missing',
         'entity_field_missing',
     ];

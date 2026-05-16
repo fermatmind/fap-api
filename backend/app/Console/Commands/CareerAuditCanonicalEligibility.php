@@ -894,7 +894,7 @@ final class CareerAuditCanonicalEligibility extends Command
         if ($state === '' && $rawState === '') {
             $reasons[] = CareerIndexStateAuthorityIssue::INDEX_STATE_MISSING;
         }
-        if ($row->indexEligible === false) {
+        if ($row->indexEligible !== true) {
             $reasons[] = CareerIndexStateAuthorityIssue::INDEX_ELIGIBLE_FALSE;
         }
         if ($state === 'noindex' || $rawState === 'noindex') {

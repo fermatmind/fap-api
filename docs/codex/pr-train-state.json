@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-16T16:27:24+08:00",
+  "updated_at": "2026-05-16T17:33:21+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -7620,7 +7620,7 @@
       "depends_on": [
         "AUDIT-API-CMS-MEDIA-URL-GUARD"
       ],
-      "status": "pr_open",
+      "status": "merged",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): enforce career rollout authority gates",
@@ -7708,14 +7708,26 @@
           "status": "pass",
           "command": "gh run watch 25958079049 --repo fermatmind/fap-api --exit-status",
           "evidence": "GitHub CI passed for PR #1424 at head 78b080f600b15c1e09723491772b9beb84376390: hygiene, verify-mbti-legacy, and verify-mbti-v2 all completed successfully. Duplicate pull_request runs for the same head also reported success."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "GitHub CI run 25958186942 passed at head 96b13461f04c0c125e0c7b7788538af17017a9a7: hygiene, verify-mbti-legacy, and verify-mbti-v2 were green before squash merge."
+        },
+        "post_merge_cleanup": {
+          "status": "pass",
+          "evidence": "Confirmed PR #1424 merged, origin/main contains ca4e5576e4de9b55980553896c52137481d49d73, local main worktree fast-forwarded, remote branch deleted, local task branch deleted from the primary worktree."
+        },
+        "post_merge_revalidation": {
+          "status": "pass",
+          "evidence": "Post-merge validation passed: php artisan test tests/Feature/Console/CareerExecuteCanonicalRolloutBatchTest.php tests/Unit/Services/Career/CanonicalBatchPromotionExecutorServiceTest.php tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php --no-ansi; php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi; git diff --check."
         }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1424",
-      "commit_sha": "78b080f600b15c1e09723491772b9beb84376390",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "ca4e5576e4de9b55980553896c52137481d49d73",
+      "merged_at": "2026-05-16T09:19:26Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "id": "AUDIT-API-CAREER-ROLLOUT-AUTHORITY-SIDECAR-01",
@@ -7762,6 +7774,11 @@
           "at": "2026-05-16T17:14:05+08:00",
           "status": "ready_to_merge",
           "summary": "GitHub required checks passed for PR #1424 at head 78b080f600b15c1e09723491772b9beb84376390. Broad Career filter and full Pint failures were recorded as external sidecar issues because they are outside current scope, required checks are green, and scope validation is green."
+        },
+        {
+          "at": "2026-05-16T17:33:21+08:00",
+          "status": "merged",
+          "summary": "Squash merged PR #1424 as ca4e5576e4de9b55980553896c52137481d49d73; remote/local task branches cleaned up and post-merge revalidation passed."
         }
       ]
     },
@@ -7773,7 +7790,7 @@
       "depends_on": [
         "AUDIT-API-CAREER-ROLLOUT-AUTHORITY"
       ],
-      "status": "planned",
+      "status": "local_validation_passed_with_external_sidecar_pending",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): fail closed on career readiness artifacts",
@@ -7790,6 +7807,38 @@
         "scope_validation_policy": {
           "status": "planned",
           "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "Depends on AUDIT-API-CAREER-ROLLOUT-AUTHORITY, which is merged in origin/main at ca4e5576e4de9b55980553896c52137481d49d73."
+        },
+        "branch": {
+          "status": "pass",
+          "evidence": "Created codex/audit-api-career-artifact-readiness from origin/main after PR #1424 merge."
+        },
+        "focused_tests": {
+          "status": "pass",
+          "evidence": "php artisan test tests/Unit/Domain/Career/Audit/CareerRuntimeArtifactRefreshPlannerTest.php tests/Feature/Console/CareerPlanCanonicalRuntimeArtifactRefreshCommandTest.php tests/Feature/Console/CareerPlanCanonicalRuntimeCandidatePrepCommandTest.php tests/Unit/Domain/Career/Audit/CareerEntityIndexContextArtifactReaderTest.php tests/Feature/Console/CareerAuditCanonicalEligibilityCommandTest.php --no-ansi passed: 70 tests, 316 assertions."
+        },
+        "db_context_regression": {
+          "status": "pass",
+          "evidence": "php artisan test tests/Feature/Console/CareerExportCanonicalEligibilityDbContextCommandTest.php tests/Feature/Console/CareerAuditCanonicalEligibilityCommandTest.php tests/Unit/Domain/Career/Audit/CareerEntityIndexContextArtifactReaderTest.php --no-ansi passed: 40 tests, 200 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "evidence": "php artisan route:list --no-ansi completed successfully and listed 197 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "evidence": "backend/vendor/bin/pint --test passed for 3276 files."
+        },
+        "broad_career_filter": {
+          "status": "external_fail_pending_sidecar",
+          "evidence": "php artisan test --filter=Career --no-ansi completed with 1255 passed and 50 failed. The remaining failures are in pre-existing first-wave/career public surface and attribution tests outside the AUDIT-API-CAREER-ARTIFACT-READINESS changed files. Current-scope Career artifact readiness tests pass; sidecar will be finalized only if GitHub required checks and scope validation are green."
+        },
+        "diff_check": {
+          "status": "pass",
+          "evidence": "git diff --check passed."
         }
       },
       "failure_reason": null,
@@ -7798,12 +7847,26 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+        {
+          "id": "AUDIT-API-CAREER-ARTIFACT-READINESS-SIDECAR-01",
+          "status": "pending_github_required_checks",
+          "title": "Broad Career test filter has pre-existing first-wave and public career surface failures.",
+          "scope_relation": "external_to_current_pr",
+          "evidence": "After current-scope fixes, php artisan test --filter=Career --no-ansi still reports 50 failures in first-wave launch/readiness/dataset/discoverability, career attribution, job list/search, display asset import, and release public content tests. The failures are not in the artifact readiness files changed by this PR.",
+          "may_continue_train_after_github_green": true
+        }
+      ],
       "history": [
         {
           "at": "2026-05-16T14:10:19+08:00",
           "status": "planned",
           "summary": "Initialized AUDIT-API-CAREER-ARTIFACT-READINESS as a security audit remediation train item. Implementation has not started."
+        },
+        {
+          "at": "2026-05-16T17:33:21+08:00",
+          "status": "local_validation_passed_with_external_sidecar_pending",
+          "summary": "Implemented AUDIT-API-CAREER-ARTIFACT-READINESS. Focused artifact readiness tests, db-context regression tests, route list, full Pint, and git diff --check passed. Broad Career filter still has external pre-existing failures pending sidecar finalization after GitHub required checks pass."
         }
       ]
     },

@@ -95,23 +95,21 @@ final class CareerIndexStateContextArtifactReader
             }
             $seen[$slug] = true;
 
-            if (array_key_exists('index_eligible', $rowValue) && ! is_bool($rowValue['index_eligible']) && $rowValue['index_eligible'] !== null) {
+            if (! array_key_exists('index_eligible', $rowValue) || ! is_bool($rowValue['index_eligible'])) {
                 $issues[] = new CareerIndexStateContextArtifactIssue(
                     reason: CareerIndexStateContextArtifactIssue::REQUIRED_FIELD_MISSING,
-                    message: 'Index-state context row requires nullable boolean index_eligible.',
+                    message: 'Index-state context row requires boolean index_eligible.',
                     canonicalSlug: $slug,
                     field: 'index_eligible',
                     evidence: [['row_index' => $index, 'canonical_slug' => $slug]]
                 );
-
-                continue;
             }
 
             $rows[] = new CareerIndexStateContextArtifactRow(
                 canonicalSlug: $slug,
                 latestIndexState: self::optionalString($rowValue['latest_index_state'] ?? null),
                 publicFacingState: self::optionalString($rowValue['public_facing_state'] ?? null),
-                indexEligible: $rowValue['index_eligible'] ?? null,
+                indexEligible: is_bool($rowValue['index_eligible'] ?? null) ? $rowValue['index_eligible'] : null,
                 changedAt: self::optionalString($rowValue['changed_at'] ?? null),
                 reasonCodes: self::stringListOrEmpty($rowValue['reason_codes'] ?? []),
                 evidence: self::mapOrEmpty($rowValue['evidence'] ?? []),

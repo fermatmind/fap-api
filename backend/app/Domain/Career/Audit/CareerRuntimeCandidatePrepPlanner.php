@@ -27,7 +27,7 @@ final class CareerRuntimeCandidatePrepPlanner
         ?string $cohort = null,
     ): CareerRuntimeCandidatePrepResult {
         $deltaSlugs = $this->deltaSlugs($targetDeltaPlan);
-        $locales = $this->normalizedUniqueStrings($locales, 'locale');
+        $locales = CareerRuntimeArtifactRefreshPlanner::normalizeLocaleList($locales, 'locale');
         $artifactTargetPublicTotal = $this->artifactTargetPublicTotal($targetDeltaPlan);
         $currentPublicTotal = $this->artifactCurrentPublicTotal($targetDeltaPlan);
         $targetPublicTotal ??= $artifactTargetPublicTotal ?? 80;
