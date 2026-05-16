@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-16T15:08:00+08:00",
+  "updated_at": "2026-05-16T16:21:23+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -1876,7 +1876,7 @@
       "branch": "fix/career-expansion-manifest-train-audit11",
       "title": "feat(api): add career canonical expansion manifest train generator",
       "name": "Career Canonical Expansion Manifest Train Generator",
-      "status": "in_progress",
+      "status": "committed",
       "depends_on": [
         "AUDIT-10"
       ],
@@ -4275,7 +4275,7 @@
         "no 80 readiness run",
         "no deploy"
       ],
-      "commit_sha": null,
+      "commit_sha": "ee64c2911f9023dbf07ef2dc73cfa6645407c227",
       "pr_url": null,
       "checks": {
         "authorization": {
@@ -7438,7 +7438,7 @@
       "depends_on": [
         "AUDIT-WEB-LLMS-FANOUT-BUDGET:fap-web"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): enforce public media URL guard for CMS media and JSON-LD",
@@ -7454,6 +7454,68 @@
         "scope_validation_policy": {
           "status": "planned",
           "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "AUDIT-WEB-LLMS-FANOUT-BUDGET merged as fap-web#825 with merge commit 6bf3a89d58b793d086166eb0faa8b6ba620913e1."
+        },
+        "branch_preflight": {
+          "status": "pass",
+          "evidence": "Created codex/audit-api-cms-media-url-guard from fap-api origin/main at ce2e634c6c877f167c71b4c37637c9d3f0986694. Local main is checked out in another worktree, so this worktree started directly from origin/main after verifying HEAD == origin/main."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to CMS services/controllers, Support URL guard, Unit tests, and PR train state; unrelated untracked .playwright-mcp/ is not staged and remains isolated."
+        },
+        "targeted_security_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Support/PublicMediaUrlGuardTest.php tests/Unit/Services/Cms/MediaAssetStorageSyncServiceTest.php tests/Unit/Services/Cms/ArticleSeoServiceMediaGuardTest.php --no-ansi",
+          "evidence": "7 tests passed, covering public media allowlist rejection, private/local URL blocking, CDN verification fail-closed behavior, redirect fail-closed behavior, recursive media variant sanitization, and Article JSON-LD image sanitization."
+        },
+        "manifest_media_tests": {
+          "status": "external_sidecar_candidate",
+          "command": "php artisan test --filter=Media --no-ansi",
+          "evidence": "Current-scope guard tests, MediaAssetStorageSyncService tests, and V0_5 MediaLibraryOssSync tests passed. Existing backend/tests/Feature/MediaLibrary/MediaLibraryPublicApiTest internal media write/upload assertions fail with 401 because those tests do not authenticate against the current CMS admin middleware. The failing file is outside the declared allowed_paths and is not modified by this PR."
+        },
+        "manifest_article_tests": {
+          "status": "external_sidecar_candidate",
+          "command": "php artisan test --filter=Article --no-ansi",
+          "evidence": "Current-scope ArticleSeoServiceMediaGuard test, ArticlePublicApi tests, ArticleSeoService tests, and ArticlePublishingRuntimeTruth tests passed. Existing Ops translation tests fail outside this PR scope: ArticleMachineTranslationProviderTest throws Source article is outside translation content scope, and ArticleTranslationContractTest misses English source in the ops locale list."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "3274 files passed."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check",
+          "evidence": "No whitespace errors."
+        },
+        "bigfive_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi",
+          "evidence": "79 tests passed."
+        },
+        "skill_migration_check": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-skill.sqlite php artisan migrate --force",
+          "evidence": "SQLite migration completed successfully."
+        },
+        "mbti_ci_gate": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Completed successfully, including MBTI, Enneagram, Partner API, migration safety, auth guest, OpenAPI, order security, share flow, dependency security, and queue backlog gates."
+        },
+        "cached_diff_check": {
+          "status": "pass",
+          "command": "git diff --cached --check",
+          "evidence": "No staged whitespace errors."
         }
       },
       "failure_reason": null,
@@ -7462,12 +7524,52 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+        {
+          "id": "AUDIT-API-CMS-MEDIA-URL-GUARD-SIDECAR-01",
+          "title": "MediaLibraryPublicApiTest internal media write/upload fixtures need CMS admin authentication",
+          "scope_relation": "external_to_current_pr",
+          "evidence": "php artisan test --filter=Media --no-ansi fails three backend/tests/Feature/MediaLibrary/MediaLibraryPublicApiTest assertions with 401 on /api/v0.5/internal/media-assets write/upload routes. Current PR does not change route auth or that test file, and focused media guard / OSS sync tests pass.",
+          "next_goal": "Repair or relocate legacy MediaLibraryPublicApiTest auth fixtures in a dedicated CMS media test hygiene PR."
+        },
+        {
+          "id": "AUDIT-API-CMS-MEDIA-URL-GUARD-SIDECAR-02",
+          "title": "Article Ops translation tests have pre-existing scope/list failures",
+          "scope_relation": "external_to_current_pr",
+          "evidence": "php artisan test --filter=Article --no-ansi fails ArticleMachineTranslationProviderTest with Source article is outside translation content scope and ArticleTranslationContractTest missing English source. Current PR only changes media URL guard and JSON-LD image sanitization paths.",
+          "next_goal": "Investigate Ops article translation scope/list fixtures in a dedicated article translation test hygiene PR."
+        }
+      ],
       "history": [
         {
           "at": "2026-05-16T14:10:19+08:00",
           "status": "planned",
           "summary": "Initialized AUDIT-API-CMS-MEDIA-URL-GUARD as a security audit remediation train item. Implementation has not started."
+        },
+        {
+          "at": "2026-05-16T16:08:14+08:00",
+          "status": "in_progress",
+          "summary": "Started implementation on codex/audit-api-cms-media-url-guard after dependency fap-web#825 merge verification."
+        },
+        {
+          "at": "2026-05-16T16:16:12+08:00",
+          "status": "local_validation_with_external_sidecars",
+          "summary": "Implemented scoped media URL guard hardening and JSON-LD image sanitization. Focused tests, route:list, Pint, diff check, and BigFive freeze classifier passed; broad manifest Media/Article filters have external pre-existing failures recorded as sidecar candidates pending GitHub required checks."
+        },
+        {
+          "at": "2026-05-16T16:20:22+08:00",
+          "status": "required_gates_passed_with_sidecar_candidates",
+          "summary": "Skill migration check and backend ci_verify_mbti.sh passed. Big Five compiled artifacts regenerated by the check were restored because they are verification outputs and outside PR scope."
+        },
+        {
+          "at": "2026-05-16T16:21:10+08:00",
+          "status": "staged",
+          "summary": "Path-limited staged scoped files only and git diff --cached --check passed."
+        },
+        {
+          "at": "2026-05-16T16:21:23+08:00",
+          "status": "committed",
+          "summary": "Committed scoped implementation as ee64c2911f9023dbf07ef2dc73cfa6645407c227."
         }
       ]
     },

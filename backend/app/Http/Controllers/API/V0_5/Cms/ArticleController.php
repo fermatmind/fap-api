@@ -900,8 +900,10 @@ class ArticleController extends Controller
         $seoMeta['seo_title'] = $revision->seo_title;
         $seoMeta['seo_description'] = $revision->seo_description;
         $seoMeta['canonical_url'] = CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta['canonical_url'] ?? null);
-        if (array_key_exists('schema_json', $seoMeta)) {
-            $seoMeta['schema_json'] = CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json']);
+        if (is_array($seoMeta['schema_json'] ?? null)) {
+            $seoMeta['schema_json'] = PublicMediaUrlGuard::sanitizeJsonLdImageFields(
+                CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json'])
+            );
         }
 
         return $seoMeta;
@@ -1046,8 +1048,10 @@ class ArticleController extends Controller
         }
 
         $seoMeta['canonical_url'] = CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta['canonical_url'] ?? null);
-        if (array_key_exists('schema_json', $seoMeta)) {
-            $seoMeta['schema_json'] = CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json']);
+        if (is_array($seoMeta['schema_json'] ?? null)) {
+            $seoMeta['schema_json'] = PublicMediaUrlGuard::sanitizeJsonLdImageFields(
+                CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json'])
+            );
         }
 
         return $seoMeta;
