@@ -7620,7 +7620,7 @@
       "depends_on": [
         "AUDIT-API-CMS-MEDIA-URL-GUARD"
       ],
-      "status": "planned",
+      "status": "committed",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): enforce career rollout authority gates",
@@ -7689,7 +7689,7 @@
       },
       "failure_reason": null,
       "pr_url": null,
-      "commit_sha": null,
+      "commit_sha": "347817f34b0ca714883c2ea8e9414e31dace78e9",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -7719,6 +7719,11 @@
           "at": "2026-05-16T16:53:16+08:00",
           "status": "local_validation_with_external_sidecars",
           "summary": "Implemented scoped rollout authority hardening. Focused rollout authority, executor, ledger, delta manifest, progressive manifest, progressive selector, route:list, scoped Pint, and diff checks passed. Broad Career filter and full Pint have external pre-existing failures recorded as sidecar candidates pending GitHub required checks."
+        },
+        {
+          "at": "2026-05-16T16:54:23+08:00",
+          "status": "committed",
+          "summary": "Committed scoped rollout authority implementation as 347817f34b0ca714883c2ea8e9414e31dace78e9; PR creation and GitHub required checks are pending."
         }
       ]
     },
