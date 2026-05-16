@@ -239,6 +239,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Models/MediaAsset.php',
             'backend/app/Models/MediaVariant.php',
             'backend/app/Services/Cms/MediaAssetStorageSyncService.php',
+            'backend/app/Support/PublicMediaUrlGuard.php',
             'backend/database/migrations/2026_05_16_000100_add_media_asset_sync_status.php',
         ];
 
@@ -1694,6 +1695,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Models/MediaAsset.php',
             'backend/app/Models/MediaVariant.php',
             'backend/app/Services/Cms/MediaAssetStorageSyncService.php',
+            'backend/app/Support/PublicMediaUrlGuard.php',
             'backend/database/migrations/2026_05_16_000100_add_media_asset_sync_status.php',
         ], true);
     }

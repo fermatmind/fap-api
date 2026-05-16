@@ -152,7 +152,9 @@ final class MediaAssetStorageSyncService
         }
 
         try {
-            $response = Http::timeout($this->cdnVerifyTimeoutSeconds())->get($candidate);
+            $response = Http::timeout($this->cdnVerifyTimeoutSeconds())
+                ->withoutRedirecting()
+                ->get($candidate);
             $contentType = strtolower((string) $response->header('Content-Type', ''));
             if (! $response->successful() || ! str_starts_with($contentType, 'image/')) {
                 $failures[] = sprintf('%s returned %s %s', $candidate, (string) $response->status(), $contentType);

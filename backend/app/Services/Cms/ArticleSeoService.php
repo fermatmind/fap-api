@@ -9,6 +9,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Career\StructuredData\CareerArticleStructuredDataBuilder;
 use App\Support\CanonicalFrontendUrl;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -88,7 +89,9 @@ final class ArticleSeoService
         $description = $revision?->seo_description ?? $seo?->seo_description
             ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160);
         $canonical = $this->buildCanonicalUrl((string) $article->slug, $locale);
-        $image = $seo?->og_image_url ?? $this->resolveArticleImageUrl($article);
+        $image = PublicMediaUrlGuard::sanitizeNullableUrl(
+            $seo?->og_image_url ?? $this->resolveArticleImageUrl($article)
+        );
 
         return [
             'title' => $title,
@@ -131,7 +134,9 @@ final class ArticleSeoService
                 ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160),
             'url' => $canonical,
             'main_entity_of_page' => $canonical,
-            'image' => $seo?->og_image_url ?? $this->resolveArticleImageUrl($article),
+            'image' => PublicMediaUrlGuard::sanitizeNullableUrl(
+                $seo?->og_image_url ?? $this->resolveArticleImageUrl($article)
+            ),
             'date_published' => $revision?->published_at?->toAtomString() ?? $article->published_at?->toAtomString(),
             'date_modified' => $revision?->updated_at?->toAtomString() ?? $article->updated_at?->toAtomString(),
             'article_section' => $this->normalizeString($article->category?->name),
@@ -148,8 +153,10 @@ final class ArticleSeoService
             $jsonLd = array_replace_recursive($jsonLd, $seo->schema_json);
         }
 
-        return CanonicalFrontendUrl::normalizeNestedUrls(
-            $this->normalizeJsonLdUrls($jsonLd, $canonical, (string) $article->slug)
+        return PublicMediaUrlGuard::sanitizeJsonLdImageFields(
+            CanonicalFrontendUrl::normalizeNestedUrls(
+                $this->normalizeJsonLdUrls($jsonLd, $canonical, (string) $article->slug)
+            )
         );
     }
 
