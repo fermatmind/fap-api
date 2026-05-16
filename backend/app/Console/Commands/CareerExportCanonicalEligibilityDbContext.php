@@ -399,7 +399,7 @@ final class CareerExportCanonicalEligibilityDbContext extends Command
                 'canonical_slug' => $slug,
                 'latest_index_state' => null,
                 'public_facing_state' => null,
-                'index_eligible' => null,
+                'index_eligible' => false,
                 'changed_at' => null,
                 'reason_codes' => [],
                 'evidence' => [
@@ -416,7 +416,7 @@ final class CareerExportCanonicalEligibilityDbContext extends Command
                 'canonical_slug' => $slug,
                 'latest_index_state' => null,
                 'public_facing_state' => null,
-                'index_eligible' => null,
+                'index_eligible' => false,
                 'changed_at' => null,
                 'reason_codes' => [],
                 'evidence' => [

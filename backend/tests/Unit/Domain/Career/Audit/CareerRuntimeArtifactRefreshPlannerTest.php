@@ -66,6 +66,48 @@ final class CareerRuntimeArtifactRefreshPlannerTest extends TestCase
         $this->assertSame('candidate_prep_apply_not_verified', $payload['blockers'][0]['reason']);
     }
 
+    public function test_blocks_malformed_target_and_candidate_artifacts(): void
+    {
+        $payload = (new CareerRuntimeArtifactRefreshPlanner)->plan(
+            deltaPlan: [
+                'schema_version' => 'career_80_target_delta.v1',
+                'status' => 'blocked',
+            ],
+            candidatePrepPlan: [
+                'schema_version' => 'career_runtime_candidate_prep_plan.v1',
+                'status' => 'planned',
+                'target' => 'career_80_delta',
+                'delta_slug_count' => 51,
+                'planned_candidate_rows_count' => 102,
+            ],
+            candidatePrepApply: $this->candidatePrepApply(writeVerified: true),
+        )->toArray();
+
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertContains('target_delta_plan_not_pass', array_column($payload['blockers'], 'reason'));
+        $this->assertContains('target_delta_slug_count_missing', array_column($payload['blockers'], 'reason'));
+        $this->assertContains('target_delta_slug_list_missing', array_column($payload['blockers'], 'reason'));
+    }
+
+    public function test_blocks_apply_artifact_with_failures_or_mismatched_counts(): void
+    {
+        $apply = [
+            ...$this->candidatePrepApply(writeVerified: true),
+            'failures' => [['reason' => 'write_failed']],
+            'verified_count' => 50,
+        ];
+
+        $payload = (new CareerRuntimeArtifactRefreshPlanner)->plan(
+            deltaPlan: $this->deltaPlan(),
+            candidatePrepPlan: $this->candidatePrepPlan(),
+            candidatePrepApply: $apply,
+        )->toArray();
+
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertContains('candidate_prep_apply_failures_present', array_column($payload['blockers'], 'reason'));
+        $this->assertContains('candidate_prep_apply_verified_count_mismatch', array_column($payload['blockers'], 'reason'));
+    }
+
     public function test_marks_writes_database_false_and_commands_read_only(): void
     {
         $payload = (new CareerRuntimeArtifactRefreshPlanner)->plan(
@@ -134,6 +176,8 @@ final class CareerRuntimeArtifactRefreshPlannerTest extends TestCase
             'status' => 'planned',
             'target' => 'career_80_delta',
             'delta_slug_count' => 51,
+            'locales' => ['en', 'zh'],
+            'expected_locale_rows' => 102,
             'planned_candidate_rows_count' => 102,
         ];
     }
@@ -147,8 +191,12 @@ final class CareerRuntimeArtifactRefreshPlannerTest extends TestCase
             'status' => $writeVerified ? 'applied' : 'blocked',
             'writes_database' => $writeVerified,
             'write_verified' => $writeVerified,
+            'slug_count' => $writeVerified ? 51 : 0,
+            'expected_locale_rows' => $writeVerified ? 102 : 0,
             'created_count' => $writeVerified ? 51 : 0,
             'verified_count' => $writeVerified ? 51 : 0,
+            'failures' => [],
+            'locales' => ['en', 'zh-CN'],
         ];
     }
 

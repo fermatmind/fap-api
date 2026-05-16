@@ -98,6 +98,20 @@ final class CareerEntityIndexContextArtifactReaderTest extends TestCase
         $this->assertSame(['index_context_slug_duplicate' => 1], $artifact->byReason());
     }
 
+    public function test_index_context_reader_reports_missing_or_null_index_eligible(): void
+    {
+        $artifact = CareerIndexStateContextArtifactReader::fromPath($this->writeJson('index-missing-eligible', [
+            'rows' => [
+                ['canonical_slug' => 'actuaries', 'latest_index_state' => 'indexed'],
+                ['canonical_slug' => 'auditors', 'latest_index_state' => 'indexed', 'index_eligible' => null],
+            ],
+        ]));
+
+        $this->assertSame(['index_context_required_field_missing' => 2], $artifact->byReason());
+        $this->assertNull($artifact->rowsBySlug()['actuaries']->indexEligible);
+        $this->assertNull($artifact->rowsBySlug()['auditors']->indexEligible);
+    }
+
     /**
      * @param  array<string, mixed>  $payload
      */

@@ -59,6 +59,26 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
         $this->assertSame([], $payload['blockers']);
     }
 
+    public function test_malformed_candidate_prep_plan_blocks_refresh_readiness(): void
+    {
+        $exitCode = $this->callCommand([
+            '--delta-plan' => $this->writeJson('delta-plan', $this->deltaPlan()),
+            '--candidate-prep-plan' => $this->writeJson('prep-plan', [
+                'schema_version' => 'career_runtime_candidate_prep_plan.v1',
+                'status' => 'planned',
+                'target' => 'career_80_delta',
+                'delta_slug_count' => 51,
+                'planned_candidate_rows_count' => 51,
+            ]),
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', $this->candidatePrepApply(writeVerified: true)),
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertContains('candidate_prep_plan_locale_row_count_mismatch', array_column($payload['blockers'], 'reason'));
+    }
+
     public function test_unverified_candidate_prep_apply_blocks(): void
     {
         $exitCode = $this->callCommand([
@@ -71,6 +91,45 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertSame('blocked', $payload['status']);
         $this->assertSame('candidate_prep_apply_not_verified', $payload['blockers'][0]['reason']);
+    }
+
+    public function test_candidate_aware_mode_normalizes_zh_cn_locale_alias(): void
+    {
+        $exitCode = $this->callCommand([
+            '--candidate-aware' => true,
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', [
+                ...$this->candidatePrepApplyForSlugs(['delta-001']),
+                'locales' => ['en-US', 'zh-CN'],
+            ]),
+            '--projection' => $this->writeJson('projection', ['items' => []]),
+            '--truth' => $this->writeJson('truth', ['items' => []]),
+            '--ledger' => $this->writeJson('ledger', ['members' => []]),
+            '--expect-slug-count' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(['en', 'zh'], $payload['locales']);
+        $this->assertSame(2, $payload['projection']['overlay_rows']);
+    }
+
+    public function test_candidate_aware_mode_blocks_unsupported_locale(): void
+    {
+        $exitCode = $this->callCommand([
+            '--candidate-aware' => true,
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', [
+                ...$this->candidatePrepApplyForSlugs(['delta-001']),
+                'locales' => ['en', 'zh-TW'],
+            ]),
+            '--projection' => $this->writeJson('projection', ['items' => []]),
+            '--truth' => $this->writeJson('truth', ['items' => []]),
+            '--ledger' => $this->writeJson('ledger', ['members' => []]),
+            '--expect-slug-count' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('candidate_prep_apply_locale_unsupported_zh_tw', $payload['blockers'][0]['reason']);
     }
 
     public function test_writes_output_file_without_executing_exports(): void
@@ -401,6 +460,8 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
             'status' => 'planned',
             'target' => 'career_80_delta',
             'delta_slug_count' => 51,
+            'locales' => ['en', 'zh'],
+            'expected_locale_rows' => 102,
             'planned_candidate_rows_count' => 102,
         ];
     }
@@ -414,8 +475,12 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
             'status' => $writeVerified ? 'applied' : 'blocked',
             'writes_database' => $writeVerified,
             'write_verified' => $writeVerified,
+            'slug_count' => $writeVerified ? 51 : 0,
+            'expected_locale_rows' => $writeVerified ? 102 : 0,
             'created_count' => $writeVerified ? 51 : 0,
             'verified_count' => $writeVerified ? 51 : 0,
+            'failures' => [],
+            'locales' => ['en', 'zh'],
         ];
     }
 
