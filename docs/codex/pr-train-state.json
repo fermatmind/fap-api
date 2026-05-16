@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-16T14:55:44+08:00",
+  "updated_at": "2026-05-16T14:56:23+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -7295,7 +7295,7 @@
       "depends_on": [
         "AUDIT-WEB-CMS-LINK-XSS:fap-web"
       ],
-      "status": "committed",
+      "status": "pr_open",
       "train_scope": "security_audit_remediation",
       "risk_level": "high",
       "title": "fix(security): redact IQ answer keys and locked report payloads",
@@ -7343,10 +7343,14 @@
         "commit": {
           "status": "pass",
           "evidence": "5154b59e9306539a2bb1424bd367675267809acb"
+        },
+        "github_pr_created": {
+          "status": "pass",
+          "evidence": "https://github.com/fermatmind/fap-api/pull/1422"
         }
       },
       "failure_reason": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1422",
       "commit_sha": "5154b59e9306539a2bb1424bd367675267809acb",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -7382,6 +7386,11 @@
           "at": "2026-05-16T14:55:44+08:00",
           "status": "committed",
           "summary": "Recorded implementation commit 5154b59e9306539a2bb1424bd367675267809acb."
+        },
+        {
+          "at": "2026-05-16T14:56:23+08:00",
+          "status": "pr_open",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1422."
         }
       ]
     },
