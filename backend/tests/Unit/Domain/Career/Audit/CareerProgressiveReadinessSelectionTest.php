@@ -134,6 +134,36 @@ final class CareerProgressiveReadinessSelectionTest extends TestCase
         $this->assertSame(2, $payload['excluded']['excluded_by_reason']['cn_proxy_excluded_from_canonical_rollout']);
     }
 
+    public function test_excludes_audit_policy_blocked_and_ineligible_rows_from_progressive_selection(): void
+    {
+        $baseline = $this->slugs('current', 80);
+        $replacementDelta = $this->slugs('delta', 220);
+        $rows = [
+            ...$this->sourceRows($baseline),
+            [
+                'canonical_slug' => 'blocked-audit-policy',
+                'audit_policy_blockers' => ['editorial_review_required'],
+            ],
+            [
+                'canonical_slug' => 'blocked-rollout-eligibility',
+                'rollout_candidate_eligible' => false,
+            ],
+            [
+                'canonical_slug' => 'blocked-readiness-status',
+                'readiness_status' => 'review_required',
+            ],
+            ...$this->sourceRows($replacementDelta),
+        ];
+
+        $payload = $this->selectFromRows($baseline, $rows, 80, 300);
+
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame($replacementDelta, $payload['selected_slugs']);
+        $this->assertSame(1, $payload['excluded']['excluded_by_reason']['audit_policy_blockers']);
+        $this->assertSame(1, $payload['excluded']['excluded_by_reason']['rollout_candidate_not_eligible']);
+        $this->assertSame(1, $payload['excluded']['excluded_by_reason']['readiness_status_review_required']);
+    }
+
     public function test_blocks_when_cn_proxy_exclusion_leaves_insufficient_non_cn_candidates(): void
     {
         $baseline = $this->slugs('current', 80);

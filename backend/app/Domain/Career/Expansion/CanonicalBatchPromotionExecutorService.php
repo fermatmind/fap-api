@@ -6,6 +6,7 @@ namespace App\Domain\Career\Expansion;
 
 use App\Domain\Career\Publish\CareerCanonicalRuntimeTruthExporter;
 use App\Domain\Career\Publish\CareerFullReleaseLedgerService;
+use App\Domain\Career\Publish\CareerRolloutReportAuthoritySigner;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\IndexState;
 use App\Models\Occupation;
@@ -19,6 +20,7 @@ final class CanonicalBatchPromotionExecutorService
         private readonly CareerRuntimePublishProjectionService $projectionService,
         private readonly CareerCanonicalRuntimeTruthExporter $truthExporter,
         private readonly CanonicalPostPromotionReleaseGateService $releaseGateService,
+        private readonly CareerRolloutReportAuthoritySigner $rolloutReportAuthoritySigner,
     ) {}
 
     /**
@@ -285,7 +287,7 @@ final class CanonicalBatchPromotionExecutorService
      */
     private function freshProjection(array $slugs = []): array
     {
-        $ledger = $this->ledgerService->build($slugs);
+        $ledger = $this->ledgerService->build($slugs, trustedRolloutAuthority: true);
 
         return $this->projectionService->buildFromLedgerArray($ledger->toArray());
     }
@@ -668,7 +670,7 @@ final class CanonicalBatchPromotionExecutorService
         $projectionCounts = is_array($projection['counts'] ?? null) ? $projection['counts'] : [];
         $truthCounts = is_array($truth['counts'] ?? null) ? $truth['counts'] : [];
 
-        return [
+        $result = [
             'status' => 'promoted_success',
             'batch_id' => $transaction->batchId,
             'promoted_slugs' => $transaction->slugs,
@@ -694,6 +696,9 @@ final class CanonicalBatchPromotionExecutorService
             'rollback_required' => false,
             'quarantine_required' => false,
         ];
+        $result['authority'] = $this->rolloutReportAuthoritySigner->sign($result);
+
+        return $result;
     }
 
     /**

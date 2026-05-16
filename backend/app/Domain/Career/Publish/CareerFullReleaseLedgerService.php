@@ -51,9 +51,9 @@ final class CareerFullReleaseLedgerService
     /**
      * @param  list<string>  $additionalSlugs
      */
-    public function build(array $additionalSlugs = []): CareerFullReleaseLedger
+    public function build(array $additionalSlugs = [], bool $trustedRolloutAuthority = false): CareerFullReleaseLedger
     {
-        $explicitBatchSlugs = $this->slugSet($additionalSlugs);
+        $explicitBatchSlugs = $trustedRolloutAuthority ? $this->slugSet($additionalSlugs) : [];
         $firstWaveManifest = $this->firstWaveManifestReader->read();
         $firstWaveAuditPayload = $this->safeFirstWaveAudit();
         $firstWaveAudit = $firstWaveAuditPayload['audit'];
@@ -194,7 +194,7 @@ final class CareerFullReleaseLedgerService
             );
         }
 
-        if ($additionalSlugs !== []) {
+        if ($trustedRolloutAuthority && $additionalSlugs !== []) {
             $additionalIndexStates = $this->loadIndexStateBySlug($additionalSlugs);
 
             foreach ($additionalSlugs as $slug) {
