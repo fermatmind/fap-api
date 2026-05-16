@@ -119,6 +119,83 @@ final class CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest extends 
         $this->assertContains('live_acceptance_expected_rows_mismatch', array_column($payload['blockers'], 'reason'));
     }
 
+    public function test_2786_live_acceptance_blocks_partition_accounting_without_product_surface_counts(): void
+    {
+        $artifact = $this->liveAcceptance(accepted: true, expectedRows: 5572);
+        $artifact['target_public_total'] = 2786;
+        $artifact['canonical_public_slug_count'] = 1122;
+        $artifact['canonical_public_locale_rows'] = 2244;
+        $artifact['partition_accounting'] = [
+            'current_public_baseline' => 800,
+            'canonical_rollout_delta' => 322,
+            'cn_proxy_public_owner_count' => 1663,
+            'software_manual_hold_count' => 1,
+            'final_public_accounted_total' => 2786,
+            'final_public_shortfall' => 0,
+        ];
+        $artifact['acceptance_summary'] = [
+            'found_published' => 2244,
+            'release_gate_pass_count' => 2244,
+        ];
+
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeJson('target-delta', $this->progressiveTargetDelta(800, 2786, 1986)),
+            '--live-acceptance' => $this->writeJson('live-acceptance', $artifact),
+        ]);
+        $payload = $this->payload();
+        $reasons = array_column($payload['blockers'], 'reason');
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertContains('product_directory_member_count_missing', $reasons);
+        $this->assertContains('product_detail_ready_count_missing', $reasons);
+        $this->assertContains('product_found_published_locale_rows_mismatch', $reasons);
+        $this->assertContains('partition_accounting_not_product_publication_evidence', $reasons);
+        $this->assertSame(1122, data_get($payload, 'validation.full_visible_publication_gate.canonical_public_slug_count'));
+    }
+
+    public function test_2786_live_acceptance_requires_directory_and_detail_counts_to_match_target(): void
+    {
+        $artifact = $this->fullVisible2786Acceptance();
+        $artifact['product_surface']['directory_member_count'] = 1122;
+        $artifact['product_surface']['career_jobs_item_count'] = 1122;
+        $artifact['product_surface']['detail_ready_count'] = 808;
+        $artifact['product_surface']['public_detail_indexable_count'] = 808;
+        $artifact['found_published'] = 2244;
+        $artifact['release_gate']['pass_count'] = 2244;
+
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeJson('target-delta', $this->progressiveTargetDelta(800, 2786, 1986)),
+            '--live-acceptance' => $this->writeJson('live-acceptance', $artifact),
+        ]);
+        $payload = $this->payload();
+        $reasons = array_column($payload['blockers'], 'reason');
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('product_directory_member_count_mismatch', $reasons);
+        $this->assertContains('product_career_jobs_item_count_mismatch', $reasons);
+        $this->assertContains('product_detail_ready_count_mismatch', $reasons);
+        $this->assertContains('product_public_detail_indexable_count_mismatch', $reasons);
+        $this->assertContains('product_found_published_locale_rows_mismatch', $reasons);
+        $this->assertContains('product_release_gate_pass_count_mismatch', $reasons);
+    }
+
+    public function test_2786_live_acceptance_passes_only_with_full_visible_product_counts(): void
+    {
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeJson('target-delta', $this->progressiveTargetDelta(800, 2786, 1986)),
+            '--live-acceptance' => $this->writeJson('live-acceptance', $this->fullVisible2786Acceptance()),
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('pass', $payload['status']);
+        $this->assertTrue($payload['accepted']);
+        $this->assertSame(2786, data_get($payload, 'validation.full_visible_publication_gate.directory_member_count'));
+        $this->assertSame(2786, data_get($payload, 'validation.full_visible_publication_gate.detail_ready_count'));
+        $this->assertSame(5572, data_get($payload, 'validation.full_visible_publication_gate.found_published_locale_rows'));
+    }
+
     /**
      * @param  array<string, mixed>  $options
      */
@@ -204,6 +281,33 @@ final class CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest extends 
             'expected_rows' => $expectedRows,
             'read_only' => true,
             'writes_database' => false,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function fullVisible2786Acceptance(): array
+    {
+        return [
+            'status' => 'pass',
+            'accepted' => true,
+            'expected_rows' => 5572,
+            'target_public_total' => 2786,
+            'read_only' => true,
+            'writes_database' => false,
+            'product_surface' => [
+                'directory_member_count' => 2786,
+                'career_jobs_item_count' => 2786,
+                'detail_ready_count' => 2786,
+                'public_detail_indexable_count' => 2786,
+                'canonical_public_slug_count' => 2786,
+            ],
+            'found_published' => 5572,
+            'release_gate' => [
+                'pass_count' => 5572,
+                'blocked_count' => 0,
+            ],
         ];
     }
 

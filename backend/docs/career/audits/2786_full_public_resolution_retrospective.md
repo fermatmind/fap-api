@@ -67,6 +67,12 @@ Final closeout evidence:
 - `blockers_count=0`
 - `sidecars_count=0`
 
+Post-release correction:
+
+- The evidence above proves final public-resolution partition accounting, not 2786 visible public detail pages.
+- A product-visible 2786 publication claim must additionally prove public career directory `member_count=2786`, career jobs item count `2786`, detail-ready / `public_detail_indexable_count=2786`, and `5572` published locale rows.
+- Artifacts with `canonical_public_slug_count=1122` or `canonical_public_locale_rows=2244` must not be accepted as “2786 careers visible” evidence, even when `final_public_accounted_total=2786`.
+
 ## Cohort path
 
 The program intentionally avoided a single all-2786 publication action. It used

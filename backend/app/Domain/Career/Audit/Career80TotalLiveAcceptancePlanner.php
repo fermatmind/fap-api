@@ -101,6 +101,9 @@ final class Career80TotalLiveAcceptancePlanner
                 'expected_locale_rows' => $expectedLocaleRows,
                 'target_public_total_validated' => count($combinedSlugs) === $targetPublicTotal,
                 'acceptance_artifact_supplied' => $acceptanceSupplied,
+                'full_visible_publication_gate' => $liveAcceptance === null
+                    ? ['required' => (new CareerFullVisiblePublicationGate)->appliesTo($targetPublicTotal)]
+                    : (new CareerFullVisiblePublicationGate)->summary($liveAcceptance, $targetPublicTotal, count($locales)),
             ],
             'blockers' => $blockers,
             'sidecars' => [],
@@ -224,6 +227,15 @@ final class Career80TotalLiveAcceptancePlanner
                     'actual' => $this->liveAcceptanceExpectedRows($liveAcceptance),
                 ]);
             }
+
+            $blockers = [
+                ...$blockers,
+                ...(new CareerFullVisiblePublicationGate)->blockers(
+                    liveAcceptance: $liveAcceptance,
+                    targetPublicTotal: $targetPublicTotal,
+                    localeCount: count($locales),
+                ),
+            ];
         }
 
         return $blockers;

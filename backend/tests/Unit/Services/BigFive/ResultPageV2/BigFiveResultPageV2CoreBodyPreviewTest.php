@@ -455,6 +455,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Domain/Career/Audit/Career80TargetDeltaPlanner.php',
             'backend/app/Domain/Career/Audit/Career80TargetDeltaResult.php',
+            'backend/app/Domain/Career/Audit/CareerFullVisiblePublicationGate.php',
             'backend/app/Domain/Career/Audit/CareerProgressiveCohortDeltaPlanner.php',
             'backend/app/Domain/Career/Audit/CareerProgressiveCohortDeltaPlanResult.php',
             'backend/app/Domain/Career/Audit/CareerRuntimeCandidateAwareArtifactRefresh.php',
@@ -2121,6 +2122,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Domain/Career/Audit/Career80TargetDeltaPlanner.php',
             'backend/app/Domain/Career/Audit/Career80TargetDeltaResult.php',
+            'backend/app/Domain/Career/Audit/CareerFullVisiblePublicationGate.php',
             'backend/app/Domain/Career/Audit/CareerProgressiveCohortDeltaPlanner.php',
             'backend/app/Domain/Career/Audit/CareerProgressiveCohortDeltaPlanResult.php',
             'backend/app/Domain/Career/Audit/CareerRuntimeCandidateAwareArtifactRefresh.php',
@@ -2797,11 +2799,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
         }
 
+        exec($gitPrefix.'fetch --no-tags --deepen=1000 origin main:refs/remotes/origin/main 2>/dev/null', output: $deepenOutput, result_code: $deepenExitCode);
+        if ($deepenExitCode === 0) {
+            $baseRef = trim((string) shell_exec($gitPrefix.'merge-base origin/main HEAD 2>/dev/null'));
+            if ($baseRef !== '') {
+                return $baseRef;
+            }
+        }
+
         $isShallow = trim((string) shell_exec($gitPrefix.'rev-parse --is-shallow-repository 2>/dev/null')) === 'true';
         if ($isShallow) {
             exec($gitPrefix.'fetch --no-tags --unshallow origin 2>/dev/null', output: $unshallowOutput, result_code: $unshallowExitCode);
             if ($unshallowExitCode === 0) {
                 exec($gitPrefix.'fetch --no-tags origin main:refs/remotes/origin/main 2>/dev/null');
+            }
+        }
+
+        $baseRef = trim((string) shell_exec($gitPrefix.'merge-base origin/main HEAD 2>/dev/null'));
+        if ($baseRef !== '') {
+            return $baseRef;
+        }
+
+        exec($gitPrefix.'fetch --no-tags origin main:refs/remotes/origin/main 2>/dev/null', output: $fullFetchOutput, result_code: $fullFetchExitCode);
+        if ($fullFetchExitCode === 0) {
+            $baseRef = trim((string) shell_exec($gitPrefix.'merge-base origin/main HEAD 2>/dev/null'));
+            if ($baseRef !== '') {
+                return $baseRef;
             }
         }
 
