@@ -2026,7 +2026,7 @@
       "branch": "fix/career-batch-live-acceptance-v2-audit12",
       "title": "feat(api): add career batch live acceptance v2",
       "name": "Career Batch Live Acceptance V2",
-      "status": "committed",
+      "status": "open",
       "depends_on": [
         "AUDIT-11"
       ],
@@ -7954,8 +7954,8 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": "7409b42500ad2419a5d0e157e00f5b04fb23d535",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1427",
+      "commit_sha": "6b69b7d85c038ad9b9cbf80b00a4317c42042748",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -7988,6 +7988,11 @@
           "at": "2026-05-17T07:42:01+08:00",
           "status": "committed",
           "summary": "Committed scoped AUDIT-API-ARTICLE-PUBLISH-GATE changes locally as 7409b42500ad2419a5d0e157e00f5b04fb23d535."
+        },
+        {
+          "at": "2026-05-17T07:42:01+08:00",
+          "status": "open",
+          "summary": "Pushed codex/audit-api-article-publish-gate and opened PR #1427 at https://github.com/fermatmind/fap-api/pull/1427."
         }
       ]
     },
