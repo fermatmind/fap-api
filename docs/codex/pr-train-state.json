@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-16T16:21:45+08:00",
+  "updated_at": "2026-05-16T16:22:44+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -1876,7 +1876,7 @@
       "branch": "fix/career-expansion-manifest-train-audit11",
       "title": "feat(api): add career canonical expansion manifest train generator",
       "name": "Career Canonical Expansion Manifest Train Generator",
-      "status": "committed",
+      "status": "pr_open",
       "depends_on": [
         "AUDIT-10"
       ],
@@ -3574,7 +3574,7 @@
         "docs/codex/pr-train-state.json"
       ],
       "commit_sha": "bb01c378674b28857b98ddbdf3d657144ef3b83e",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1423",
       "checks": {},
       "failure_reason": null,
       "merged_at": null,
@@ -7570,6 +7570,11 @@
           "at": "2026-05-16T16:21:23+08:00",
           "status": "committed",
           "summary": "Committed scoped implementation as 485949cd5b84b2b1836abefa2b639db8d724d64c."
+        },
+        {
+          "at": "2026-05-16T16:22:44+08:00",
+          "status": "pr_open",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1423."
         }
       ]
     },
