@@ -7438,7 +7438,7 @@
       "depends_on": [
         "AUDIT-WEB-LLMS-FANOUT-BUDGET:fap-web"
       ],
-      "status": "in_progress",
+      "status": "ready_to_merge",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): enforce public media URL guard for CMS media and JSON-LD",
@@ -7473,12 +7473,12 @@
           "evidence": "7 tests passed, covering public media allowlist rejection, private/local URL blocking, CDN verification fail-closed behavior, redirect fail-closed behavior, recursive media variant sanitization, and Article JSON-LD image sanitization."
         },
         "manifest_media_tests": {
-          "status": "external_sidecar_candidate",
+          "status": "external_sidecar_recorded",
           "command": "php artisan test --filter=Media --no-ansi",
           "evidence": "Current-scope guard tests, MediaAssetStorageSyncService tests, and V0_5 MediaLibraryOssSync tests passed. Existing backend/tests/Feature/MediaLibrary/MediaLibraryPublicApiTest internal media write/upload assertions fail with 401 because those tests do not authenticate against the current CMS admin middleware. The failing file is outside the declared allowed_paths and is not modified by this PR."
         },
         "manifest_article_tests": {
-          "status": "external_sidecar_candidate",
+          "status": "external_sidecar_recorded",
           "command": "php artisan test --filter=Article --no-ansi",
           "evidence": "Current-scope ArticleSeoServiceMediaGuard test, ArticlePublicApi tests, ArticleSeoService tests, and ArticlePublishingRuntimeTruth tests passed. Existing Ops translation tests fail outside this PR scope: ArticleMachineTranslationProviderTest throws Source article is outside translation content scope, and ArticleTranslationContractTest misses English source in the ops locale list."
         },
@@ -7525,11 +7525,16 @@
           "status": "pass",
           "command": "php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi",
           "evidence": "79 tests passed after adding PublicMediaUrlGuard.php to the CMS media pipeline freeze classifier."
+        },
+        "github_checks_latest": {
+          "status": "pass",
+          "command": "gh pr checks 1423 --repo fermatmind/fap-api --watch --interval 20",
+          "evidence": "hygiene, verify-mbti-v2, and verify-mbti-legacy all passed for PR #1423 after the scoped freeze-classifier fix."
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1423",
+      "commit_sha": "4b3aa1a93817d3b54d292dfc9bb5b81c28b27f96",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -7589,6 +7594,11 @@
           "at": "2026-05-16T16:27:24+08:00",
           "status": "ci_fix_in_progress",
           "summary": "Initial GitHub verify-mbti checks failed on a current-scope freeze classifier gap for PublicMediaUrlGuard.php. Added the guard to CMS media pipeline allowance and verified BigFiveResultPageV2CoreBodyPreview locally."
+        },
+        {
+          "at": "2026-05-16T16:33:21+08:00",
+          "status": "ready_to_merge",
+          "summary": "GitHub required checks passed after the scoped CI fix. Broad Media/Article filter failures are recorded as external sidecar issues because they were not introduced by this PR, required GitHub checks are green, and scope validation is green."
         }
       ]
     },
