@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T07:28:30+08:00",
+  "updated_at": "2026-05-17T07:42:01+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -2026,7 +2026,7 @@
       "branch": "fix/career-batch-live-acceptance-v2-audit12",
       "title": "feat(api): add career batch live acceptance v2",
       "name": "Career Batch Live Acceptance V2",
-      "status": "in_progress",
+      "status": "open",
       "depends_on": [
         "AUDIT-11"
       ],
@@ -2113,7 +2113,7 @@
       "branch": "fix/career-2786-full-audit-report-audit13",
       "title": "feat(api): add career 2786 full audit artifact report",
       "name": "Career 2786 Full Audit Artifact Report",
-      "status": "in_progress",
+      "status": "committed",
       "depends_on": [
         "AUDIT-12"
       ],
@@ -7790,7 +7790,7 @@
       "depends_on": [
         "AUDIT-API-CAREER-ROLLOUT-AUTHORITY"
       ],
-      "status": "ready_to_merge",
+      "status": "merged",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): fail closed on career readiness artifacts",
@@ -7847,14 +7847,18 @@
         "bigfive_runtime_freeze": {
           "status": "pass",
           "evidence": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi passed after folding locale policy into an existing career readiness planner file."
+        },
+        "post_merge_revalidation": {
+          "status": "pass",
+          "evidence": "After syncing main to origin/main db336b6dca6ac77683393dc50602c3928e8dfa50, targeted artifact readiness tests passed with 77 tests / 362 assertions; php artisan route:list --no-ansi passed; git diff --check passed."
         }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1426",
-      "commit_sha": "88400b47568e64f25c21f985e34b736a20980a2b",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "db336b6dca6ac77683393dc50602c3928e8dfa50",
+      "merged_at": "2026-05-16T23:33:27Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "id": "AUDIT-API-CAREER-ARTIFACT-READINESS-SIDECAR-01",
@@ -7880,6 +7884,11 @@
           "at": "2026-05-17T07:28:30+08:00",
           "status": "ready_to_merge",
           "summary": "PR #1426 is open with scoped diff, local validation passed, GitHub required checks passed on run 25975666613, and the broad Career filter blocker is recorded as an external sidecar."
+        },
+        {
+          "at": "2026-05-17T07:35:30+08:00",
+          "status": "merged",
+          "summary": "Squash merged PR #1426 as db336b6dca6ac77683393dc50602c3928e8dfa50; origin/main contains the merge commit, remote/local task branches were cleaned up, and post-merge revalidation passed."
         }
       ]
     },
@@ -7891,7 +7900,7 @@
       "depends_on": [
         "AUDIT-API-CAREER-ARTIFACT-READINESS"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): require editorial approval for controlled article publish",
@@ -7906,20 +7915,84 @@
         "scope_validation_policy": {
           "status": "planned",
           "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "Depends on AUDIT-API-CAREER-ARTIFACT-READINESS, which is merged in origin/main at db336b6dca6ac77683393dc50602c3928e8dfa50."
+        },
+        "branch": {
+          "status": "pass",
+          "evidence": "Created codex/audit-api-article-publish-gate from latest origin/main after PR #1426 merge."
+        },
+        "implementation": {
+          "status": "pass",
+          "evidence": "Controlled article publish now requires an approved working revision with review actor/timestamp and approval timestamp, rejects stale/published/archived publish inputs, removes publish-time self-approval, and re-runs locked preflight inside the publish transaction before mutation."
+        },
+        "focused_article_publish_tests": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan test tests/Feature/Console/ArticlePublishControlledCommandTest.php --no-ansi passed: 8 tests / 66 assertions."
+        },
+        "manifest_article_filter": {
+          "status": "external_sidecar",
+          "evidence": "cd backend && php artisan test --filter=Article --no-ansi failed with 3 failures outside this PR scope: CareerDatasetPublicApiTest member_count 1 vs 342, ArticleMachineTranslationProviderTest source article outside translation content scope, and ArticleTranslationContractTest missing English source in ops list. The same command on origin/main db336b6dca6ac77683393dc50602c3928e8dfa50 also fails with those three failures plus the older ArticlePublishControlled tests fixed by this PR."
+        },
+        "route_list": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan route:list --no-ansi passed and listed 197 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "evidence": "cd backend && vendor/bin/pint --test passed for 3276 files."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to backend/app/Console/Commands/ArticlePublishControlled.php, backend/tests/Feature/Console/ArticlePublishControlledCommandTest.php, and docs/codex/pr-train-state.json, all within the approved PR scope."
+        },
+        "diff_check": {
+          "status": "pass",
+          "evidence": "git diff --check passed."
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1427",
+      "commit_sha": "6b69b7d85c038ad9b9cbf80b00a4317c42042748",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+        {
+          "id": "AUDIT-API-ARTICLE-PUBLISH-GATE-SIDECAR-01",
+          "title": "Existing broad Article filter failures outside controlled publish gate scope",
+          "status": "open",
+          "evidence": "On this branch, php artisan test --filter=Article --no-ansi fails in CareerDatasetPublicApiTest, ArticleMachineTranslationProviderTest, and ArticleTranslationContractTest. On origin/main db336b6dca6ac77683393dc50602c3928e8dfa50 the same three failures are already present, so they are not introduced by this PR.",
+          "recorded_at": "2026-05-17T07:42:01+08:00"
+        }
+      ],
       "history": [
         {
           "at": "2026-05-16T14:10:19+08:00",
           "status": "planned",
           "summary": "Initialized AUDIT-API-ARTICLE-PUBLISH-GATE as a security audit remediation train item. Implementation has not started."
+        },
+        {
+          "at": "2026-05-17T07:35:30+08:00",
+          "status": "in_progress",
+          "summary": "Started AUDIT-API-ARTICLE-PUBLISH-GATE from latest origin/main after dependency merge and cleanup."
+        },
+        {
+          "at": "2026-05-17T07:42:01+08:00",
+          "status": "local_validated_with_sidecar",
+          "summary": "Implemented controlled publish review gates and transaction revalidation. Focused tests, route list, Pint, scope validation, and diff check passed; broad Article filter failures were confirmed on origin/main and recorded as sidecar."
+        },
+        {
+          "at": "2026-05-17T07:42:01+08:00",
+          "status": "committed",
+          "summary": "Committed scoped AUDIT-API-ARTICLE-PUBLISH-GATE changes locally as 7409b42500ad2419a5d0e157e00f5b04fb23d535."
+        },
+        {
+          "at": "2026-05-17T07:42:01+08:00",
+          "status": "open",
+          "summary": "Pushed codex/audit-api-article-publish-gate and opened PR #1427 at https://github.com/fermatmind/fap-api/pull/1427."
         }
       ]
     },

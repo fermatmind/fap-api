@@ -75,10 +75,22 @@ final class ArticlePublishControlled extends Command
         if ($errors === [] && ! $dryRun) {
             $publishedIds = [];
             foreach ($plans as $plan) {
-                $publishedIds[] = $this->publishPlannedArticle($plan, $publisher, $auditLogger, $expectedConfirmation, $makeIndexable);
+                try {
+                    $publishedIds[] = $this->publishPlannedArticle($plan, $publisher, $auditLogger, $expectedConfirmation, $makeIndexable);
+                } catch (RuntimeException $exception) {
+                    $errors[] = $this->issue(
+                        'publish',
+                        'publish_preflight_failed',
+                        $exception->getMessage(),
+                        ['article_id' => (int) ($plan['article_id'] ?? 0)]
+                    );
+                    break;
+                }
             }
 
             $summary['published_article_ids'] = $publishedIds;
+            $summary['errors'] = $errors;
+            $summary['ok'] = $errors === [];
         }
 
         $this->emitSummary($summary);
@@ -145,11 +157,12 @@ final class ArticlePublishControlled extends Command
      * @param  list<int>  $acknowledgedWarnings
      * @return array<string,mixed>
      */
-    private function preflightArticle(int $articleId, array $acknowledgedWarnings, bool $makeIndexable): array
+    private function preflightArticle(int $articleId, array $acknowledgedWarnings, bool $makeIndexable, bool $lockForUpdate = false): array
     {
         $article = Article::query()
             ->withoutGlobalScopes()
             ->with(['workingRevision', 'seoMeta', 'category', 'tags'])
+            ->when($lockForUpdate, static fn ($query) => $query->lockForUpdate())
             ->find($articleId);
 
         if (! $article instanceof Article) {
@@ -160,10 +173,21 @@ final class ArticlePublishControlled extends Command
             ];
         }
 
+        if ($lockForUpdate && $article->working_revision_id !== null) {
+            $revision = ArticleTranslationRevision::query()
+                ->withoutGlobalScopes()
+                ->whereKey((int) $article->working_revision_id)
+                ->lockForUpdate()
+                ->first();
+
+            $article->setRelation('workingRevision', $revision);
+        }
+
         $import = ArticleEditorialPackageImport::query()
             ->withoutGlobalScopes()
             ->where('article_id', $articleId)
             ->latest('id')
+            ->when($lockForUpdate, static fn ($query) => $query->lockForUpdate())
             ->first();
 
         $seoMeta = $article->seoMeta instanceof ArticleSeoMeta ? $article->seoMeta : null;
@@ -186,6 +210,17 @@ final class ArticlePublishControlled extends Command
             $errors[] = $this->issue('article', 'already_published', 'Article is already published.');
         }
 
+        if ((string) $article->lifecycle_state !== '' && in_array((string) $article->lifecycle_state, [
+            Article::LIFECYCLE_ARCHIVED,
+            Article::LIFECYCLE_SOFT_DELETED,
+        ], true)) {
+            $errors[] = $this->issue('article.lifecycle_state', 'article_lifecycle_not_publishable', 'Archived or soft-deleted articles cannot be controlled-published.');
+        }
+
+        if (method_exists($article, 'trashed') && $article->trashed()) {
+            $errors[] = $this->issue('article.deleted_at', 'article_soft_deleted', 'Soft-deleted articles cannot be controlled-published.');
+        }
+
         if (! in_array((string) $article->status, ['draft', 'review_pending'], true)) {
             $errors[] = $this->issue('article.status', 'invalid_status', 'Controlled publish only accepts draft or review_pending articles.');
         }
@@ -202,6 +237,18 @@ final class ArticlePublishControlled extends Command
             ArticleTranslationRevision::STATUS_PUBLISHED,
         ], true)) {
             $errors[] = $this->issue('working_revision.revision_status', 'invalid_revision_status', 'Working revision status is not publishable.');
+        } elseif ((string) $revision->revision_status !== ArticleTranslationRevision::STATUS_APPROVED) {
+            $errors[] = $this->issue('working_revision.revision_status', 'revision_not_editorially_approved', 'Working revision must be editorially approved before controlled publish.');
+        }
+
+        if ($revision instanceof ArticleTranslationRevision && (string) $revision->revision_status === ArticleTranslationRevision::STATUS_APPROVED) {
+            if ((int) ($revision->reviewed_by ?? 0) <= 0 || $revision->reviewed_at === null) {
+                $errors[] = $this->issue('working_revision.review', 'revision_review_missing', 'Approved working revision must include review actor and timestamp.');
+            }
+
+            if ($revision->approved_at === null) {
+                $errors[] = $this->issue('working_revision.approved_at', 'revision_approval_missing', 'Approved working revision must include approval timestamp.');
+            }
         }
 
         if (! $import instanceof ArticleEditorialPackageImport) {
@@ -298,6 +345,7 @@ final class ArticlePublishControlled extends Command
             'import_id' => $import?->id,
             'import_status' => $import?->status,
             'claim_status' => $claimStatus,
+            'claim_warning_acknowledged' => in_array($articleId, $acknowledgedWarnings, true),
             'claim_matches_count' => count($claimMatches),
             'body_hash' => $bodyHash,
             'references_count' => (int) ($import?->references_count ?? 0),
@@ -323,7 +371,19 @@ final class ArticlePublishControlled extends Command
     ): int {
         $articleId = (int) $plan['article_id'];
 
-        DB::transaction(function () use ($articleId, $makeIndexable): void {
+        $article = DB::transaction(function () use ($articleId, $plan, $publisher, $makeIndexable): Article {
+            $acknowledgedWarnings = ((bool) ($plan['claim_warning_acknowledged'] ?? false)) ? [$articleId] : [];
+            $revalidatedPlan = $this->preflightArticle($articleId, $acknowledgedWarnings, $makeIndexable, lockForUpdate: true);
+
+            if (($revalidatedPlan['errors'] ?? []) !== []) {
+                $codes = collect((array) $revalidatedPlan['errors'])
+                    ->map(static fn (mixed $error): string => is_array($error) ? (string) ($error['code'] ?? '') : '')
+                    ->filter()
+                    ->implode(',');
+
+                throw new RuntimeException('controlled publish preflight failed before publish: '.$codes);
+            }
+
             $article = Article::query()
                 ->withoutGlobalScopes()
                 ->with('workingRevision')
@@ -334,11 +394,6 @@ final class ArticlePublishControlled extends Command
             if (! $article instanceof Article || ! $article->workingRevision instanceof ArticleTranslationRevision) {
                 throw new RuntimeException('planned article disappeared before publish.');
             }
-
-            $article->workingRevision->forceFill([
-                'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
-                'approved_at' => $article->workingRevision->approved_at ?? now(),
-            ])->save();
 
             if ($makeIndexable) {
                 $article->forceFill(['is_indexable' => true])->save();
@@ -351,9 +406,9 @@ final class ArticlePublishControlled extends Command
                         'is_indexable' => true,
                     ]);
             }
-        });
 
-        $article = $publisher->publishArticle($articleId, 'controlled_codex_publish');
+            return $publisher->publishArticle($articleId, 'controlled_codex_publish');
+        });
 
         $auditLogger->log(
             Request::create('/ops/articles/publish-controlled', 'POST'),
