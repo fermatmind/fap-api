@@ -879,7 +879,7 @@
     "career-release-gate-reconciliation": {
       "repo": "fap-api",
       "branch": "codex/career-release-gate-reconciliation",
-      "status": "ci_fix_local_checks_passed",
+      "status": "ready_to_merge",
       "commit_sha": "79a99b06",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1284",
       "checks": {
@@ -7677,14 +7677,14 @@
           "evidence": "No whitespace errors."
         },
         "manifest_career_tests": {
-          "status": "external_sidecar_candidate",
+          "status": "external_sidecar_recorded",
           "command": "php artisan test --filter=Career --no-ansi",
-          "evidence": "Current-scope focused Career rollout tests passed. The broad Career filter completed with 1248 passed and 48 failed in existing first-wave/API/display-surface/public-content tests such as FirstWaveReadinessApi, CareerJobListApi, CareerSearchApi, CareerImportActorsDisplayAssetCommand, CareerImportSelectedDisplayAssetsCommand, and ReleaseVerifyPublicContentCommand. These failures are outside the declared AUDIT-API-CAREER-ROLLOUT-AUTHORITY changed files."
+          "evidence": "Current-scope focused Career rollout tests passed. The broad Career filter completed with 1248 passed and 48 failed in existing first-wave/API/display-surface/public-content tests such as FirstWaveReadinessApi, CareerJobListApi, CareerSearchApi, CareerImportActorsDisplayAssetCommand, CareerImportSelectedDisplayAssetsCommand, and ReleaseVerifyPublicContentCommand. These failures are outside the declared AUDIT-API-CAREER-ROLLOUT-AUTHORITY changed files. Recorded as sidecar after GitHub required checks passed and scope validation was green."
         },
         "manifest_pint_all": {
-          "status": "external_sidecar_candidate",
+          "status": "external_sidecar_recorded",
           "command": "backend/vendor/bin/pint --test",
-          "evidence": "After formatting current PR files, full Pint still reports 4 pre-existing style issues in scripts/quality/guard_max_lines.php and tools/gen_* / tools/rewrite_* files. These files are outside the declared allowed_paths and were not modified."
+          "evidence": "After formatting current PR files, full Pint still reports 4 pre-existing style issues in scripts/quality/guard_max_lines.php and tools/gen_* / tools/rewrite_* files. These files are outside the declared allowed_paths and were not modified. Recorded as sidecar after GitHub required checks passed and scope validation was green."
         },
         "github_pr": {
           "status": "opened",
@@ -7703,11 +7703,16 @@
           "status": "pass",
           "command": "bash backend/scripts/ci_verify_mbti.sh",
           "evidence": "Local CI-equivalent MBTI gate completed successfully after classifying the Career rollout authority signer. Generated Big Five compiled artifacts produced by verification were restored because they are outside PR scope."
+        },
+        "github_checks_latest": {
+          "status": "pass",
+          "command": "gh run watch 25958079049 --repo fermatmind/fap-api --exit-status",
+          "evidence": "GitHub CI passed for PR #1424 at head 78b080f600b15c1e09723491772b9beb84376390: hygiene, verify-mbti-legacy, and verify-mbti-v2 all completed successfully. Duplicate pull_request runs for the same head also reported success."
         }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1424",
-      "commit_sha": "6d161b5782538f1871c1a14246bec01ed2f844b0",
+      "commit_sha": "78b080f600b15c1e09723491772b9beb84376390",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -7752,6 +7757,11 @@
           "at": "2026-05-16T17:08:34+08:00",
           "status": "ci_fix_local_checks_passed",
           "summary": "GitHub verify-mbti checks failed on a current-scope freeze-classifier gap for the new CareerRolloutReportAuthoritySigner.php path. Added it to the Career runtime publish projection classifier, extended the item manifest scope to that classifier test, and verified BigFiveResultPageV2CoreBodyPreview, focused Career rollout authority tests, scoped Pint, diff check, and backend/scripts/ci_verify_mbti.sh locally."
+        },
+        {
+          "at": "2026-05-16T17:14:05+08:00",
+          "status": "ready_to_merge",
+          "summary": "GitHub required checks passed for PR #1424 at head 78b080f600b15c1e09723491772b9beb84376390. Broad Career filter and full Pint failures were recorded as external sidecar issues because they are outside current scope, required checks are green, and scope validation is green."
         }
       ]
     },
