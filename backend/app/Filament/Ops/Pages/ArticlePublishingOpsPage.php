@@ -49,6 +49,7 @@ final class ArticlePublishingOpsPage extends Page
 
     public function mount(): void
     {
+        $selectedOrgId = $this->selectedOrgId();
         $today = Carbon::now()->startOfDay();
         $lastDay = Carbon::now()->subDay();
 
@@ -77,6 +78,7 @@ final class ArticlePublishingOpsPage extends Page
                 'content_release_broadcast',
                 'content_release_failure_alert',
             ])
+            ->where('org_id', $selectedOrgId)
             ->where('created_at', '>=', $lastDay)
             ->where('result', 'failed')
             ->latest('created_at')
@@ -159,6 +161,11 @@ final class ArticlePublishingOpsPage extends Page
     public static function canAccess(): bool
     {
         return ContentAccess::canRead();
+    }
+
+    private function selectedOrgId(): int
+    {
+        return max(0, (int) session('ops_org_id', 0));
     }
 
     /**

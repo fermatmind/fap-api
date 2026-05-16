@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T07:42:01+08:00",
+  "updated_at": "2026-05-17T07:54:48+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -2337,7 +2337,7 @@
       "branch": "fix/career-audit-command-layer-orchestration",
       "title": "fix(api): wire career eligibility audit command to layer services",
       "name": "Wire career audit command to audit layer services",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "AUDIT-13"
       ],
@@ -2365,7 +2365,7 @@
       "branch": "codex/riasec-ah-04-activity-explorer-coverage",
       "title": "feat(api): expand RIASEC Activity Explorer examples-only coverage",
       "name": "RIASEC Activity Explorer v0.1 Coverage Expansion",
-      "status": "in_progress",
+      "status": "local_validated",
       "depends_on": [
         "RIASEC-TRAIN-07"
       ],
@@ -7951,14 +7951,22 @@
         "diff_check": {
           "status": "pass",
           "evidence": "git diff --check passed."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1427 GitHub CI passed on head bf88554cc21cc84b4546ad769f0e49a09d55ecb0: hygiene, verify-mbti-legacy, and verify-mbti-v2 all succeeded."
+        },
+        "post_merge_revalidation": {
+          "status": "pass",
+          "evidence": "After syncing main to origin/main 62069a05395aa67a88075fd3d5230ce33c04aca5, ArticlePublishControlledCommandTest passed with 8 tests / 66 assertions; route:list passed with 197 routes; git diff --check passed."
         }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1427",
-      "commit_sha": "6b69b7d85c038ad9b9cbf80b00a4317c42042748",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "62069a05395aa67a88075fd3d5230ce33c04aca5",
+      "merged_at": "2026-05-16T23:52:33Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "id": "AUDIT-API-ARTICLE-PUBLISH-GATE-SIDECAR-01",
@@ -7993,6 +8001,11 @@
           "at": "2026-05-17T07:42:01+08:00",
           "status": "open",
           "summary": "Pushed codex/audit-api-article-publish-gate and opened PR #1427 at https://github.com/fermatmind/fap-api/pull/1427."
+        },
+        {
+          "at": "2026-05-17T07:54:48+08:00",
+          "status": "merged",
+          "summary": "Squash merged PR #1427 as 62069a05395aa67a88075fd3d5230ce33c04aca5; origin/main contains the merge commit, remote/local task branches were cleaned up, and post-merge revalidation passed."
         }
       ]
     },
@@ -8004,7 +8017,7 @@
       "depends_on": [
         "AUDIT-API-ARTICLE-PUBLISH-GATE"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): scope ops release failure audits by org",
@@ -8019,6 +8032,38 @@
         "scope_validation_policy": {
           "status": "planned",
           "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "Depends on AUDIT-API-ARTICLE-PUBLISH-GATE, which is merged in origin/main at 62069a05395aa67a88075fd3d5230ce33c04aca5."
+        },
+        "branch": {
+          "status": "pass",
+          "evidence": "Created codex/audit-api-ops-tenant-scoping from latest origin/main after PR #1427 merge."
+        },
+        "implementation": {
+          "status": "pass",
+          "evidence": "ArticlePublishingOpsPage now filters release-failure AuditLog rows by the selected Ops org id before counting and rendering release rows."
+        },
+        "ops_page_tests": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan test tests/Feature/Ops/ArticlePublishingOpsPageTest.php --no-ansi passed: 3 tests / 24 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan route:list --no-ansi passed and listed 197 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "evidence": "cd backend && vendor/bin/pint --test passed for 3276 files."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to ArticlePublishingOpsPage.php, ArticlePublishingOpsPageTest.php, and docs/codex/pr-train-state.json, all within the approved PR scope."
+        },
+        "diff_check": {
+          "status": "pass",
+          "evidence": "git diff --check passed."
         }
       },
       "failure_reason": null,
@@ -8033,6 +8078,16 @@
           "at": "2026-05-16T14:10:19+08:00",
           "status": "planned",
           "summary": "Initialized AUDIT-API-OPS-TENANT-SCOPING as a security audit remediation train item. Implementation has not started."
+        },
+        {
+          "at": "2026-05-17T07:54:48+08:00",
+          "status": "in_progress",
+          "summary": "Started AUDIT-API-OPS-TENANT-SCOPING from latest origin/main after dependency merge and cleanup."
+        },
+        {
+          "at": "2026-05-17T07:54:48+08:00",
+          "status": "local_validated",
+          "summary": "Scoped article publishing ops release-failure audit rows to the selected Ops org and validated the targeted Ops page test, route list, Pint, and diff check."
         }
       ]
     },
