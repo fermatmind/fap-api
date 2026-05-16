@@ -67,6 +67,8 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->assertTrue($lookup->searchVisible('actors'));
         $this->assertTrue($lookup->robotsIndexable('actors'));
         $this->assertTrue($lookup->releaseGatePass('actors'));
+        $this->assertSame(['actors'], array_column($lookup->publicDatasetItems(), 'slug'));
+        $this->assertSame(['actors'], array_column($lookup->publicDetailItems(), 'slug'));
         $this->assertFalse($lookup->detailRouteEnabled('software-developers'));
         $this->assertFalse($lookup->datasetVisible('software-developers'));
         $this->assertFalse($lookup->searchVisible('software-developers'));

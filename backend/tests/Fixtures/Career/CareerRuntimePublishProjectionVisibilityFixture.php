@@ -47,6 +47,23 @@ final class CareerRuntimePublishProjectionVisibilityFixture implements CareerRun
             ?? null;
     }
 
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function publicDatasetItems(): array
+    {
+        return $this->visibleItems(static fn (array $item): bool => ($item['dataset_visible'] ?? true) === true);
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function publicDetailItems(): array
+    {
+        return $this->visibleItems(static fn (array $item): bool => ($item['detail_route_enabled'] ?? true) === true
+            && ($item['release_gate_pass'] ?? true) === true);
+    }
+
     public function datasetVisible(string $slug): bool
     {
         return $this->datasetVisible[$this->normalizeSlug($slug)] ?? $this->defaultDatasetVisible;
@@ -75,6 +92,43 @@ final class CareerRuntimePublishProjectionVisibilityFixture implements CareerRun
     public function familyHubLive(string $slug): bool
     {
         return $this->familyHubLive[$this->normalizeSlug($slug)] ?? $this->defaultFamilyHubLive;
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function visibleItems(callable $filter): array
+    {
+        $itemsBySlug = [];
+
+        foreach ($this->items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $slug = $this->normalizeSlug((string) ($item['slug'] ?? ''));
+            if ($slug === '') {
+                continue;
+            }
+
+            $item += [
+                'slug' => $slug,
+                'dataset_visible' => $this->datasetVisible($slug),
+                'detail_route_enabled' => $this->detailRouteEnabled($slug),
+                'release_gate_pass' => $this->releaseGatePass($slug),
+                'robots_indexable' => $this->robotsIndexable($slug),
+            ];
+
+            $itemsBySlug[$slug] ??= $item;
+        }
+
+        $items = array_values(array_filter($itemsBySlug, $filter));
+        usort($items, static fn (array $left, array $right): int => strcmp(
+            (string) ($left['slug'] ?? ''),
+            (string) ($right['slug'] ?? ''),
+        ));
+
+        return $items;
     }
 
     private function normalizeSlug(string $slug): string

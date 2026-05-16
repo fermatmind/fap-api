@@ -19,7 +19,7 @@ final class CareerFullDatasetAuthorityBuilder
 {
     public const AUTHORITY_KIND = 'career_full_dataset_authority';
 
-    public const AUTHORITY_VERSION = 'career.dataset_authority.full_342_plus_directory_drafts.v1';
+    public const AUTHORITY_VERSION = 'career.dataset_authority.runtime_projection_plus_legacy_342.v2';
 
     public const DATASET_KEY = 'career_all_342_occupations_dataset';
 
@@ -65,6 +65,10 @@ final class CareerFullDatasetAuthorityBuilder
             static fn (mixed $row): bool => is_array($row)
         ));
         $strongIndexBySlug = $this->mapBySlug((array) ($strongIndex['members'] ?? []), 'canonical_slug');
+        $runtimeDatasetItemsBySlug = $this->mapRuntimeProjectionItemsBySlug(
+            $this->runtimePublishProjection->publicDatasetItems(),
+        );
+        $hasRuntimeDatasetAuthority = $runtimeDatasetItemsBySlug !== [];
 
         $batchContextBySlug = $this->buildBatchContextBySlug();
         $familyBySlug = $this->loadFamilyBySlug(array_map(
@@ -93,11 +97,12 @@ final class CareerFullDatasetAuthorityBuilder
             }
             $ledgerSlugs[$slug] = true;
 
-            if (! $this->runtimePublishProjection->datasetVisible($slug)) {
+            if ($hasRuntimeDatasetAuthority && ! $this->runtimePublishProjection->datasetVisible($slug)) {
                 $excludedCount++;
 
                 continue;
             }
+            unset($runtimeDatasetItemsBySlug[$slug]);
 
             $releaseCohort = $this->normalizeNullableString($ledgerMember['release_cohort'] ?? null);
             $publicIndexState = $this->normalizeNullableString($ledgerMember['public_index_state'] ?? null);
@@ -184,11 +189,12 @@ final class CareerFullDatasetAuthorityBuilder
         }
 
         foreach ($this->loadDirectoryDraftMembers(array_keys($ledgerSlugs)) as $directoryDraftMember) {
-            if (! $this->runtimePublishProjection->datasetVisible($directoryDraftMember->canonicalSlug)) {
+            if ($hasRuntimeDatasetAuthority && ! $this->runtimePublishProjection->datasetVisible($directoryDraftMember->canonicalSlug)) {
                 $excludedCount++;
 
                 continue;
             }
+            unset($runtimeDatasetItemsBySlug[$directoryDraftMember->canonicalSlug]);
 
             $releaseCohort = 'directory_draft_pending_detail';
             $publicIndexState = 'noindex';
@@ -204,6 +210,32 @@ final class CareerFullDatasetAuthorityBuilder
             $familyDistribution[$familySlug] = (int) ($familyDistribution[$familySlug] ?? 0) + 1;
             $publishTrackDistribution[$publishTrack] = (int) ($publishTrackDistribution[$publishTrack] ?? 0) + 1;
             $members[] = $directoryDraftMember;
+        }
+
+        foreach ($this->buildRuntimeProjectionMembers($runtimeDatasetItemsBySlug) as $runtimeMember) {
+            $releaseCohort = $runtimeMember->releaseCohort;
+            $publicIndexState = $runtimeMember->publicIndexState;
+            $strongIndexDecision = $runtimeMember->strongIndexDecision;
+            $familySlug = $runtimeMember->familySlug ?? '__unknown__';
+            $publishTrack = $runtimeMember->publishTrack ?? '__unknown__';
+
+            $includedCount++;
+            if ($releaseCohort !== null) {
+                $releaseCohortCounts[$releaseCohort] = (int) ($releaseCohortCounts[$releaseCohort] ?? 0) + 1;
+                $includedReleaseCohortCounts[$releaseCohort] = (int) ($includedReleaseCohortCounts[$releaseCohort] ?? 0) + 1;
+            }
+
+            if ($publicIndexState !== null) {
+                $publicIndexStateCounts[$publicIndexState] = (int) ($publicIndexStateCounts[$publicIndexState] ?? 0) + 1;
+            }
+
+            if ($strongIndexDecision !== null) {
+                $strongDecisionCounts[$strongIndexDecision] = (int) ($strongDecisionCounts[$strongIndexDecision] ?? 0) + 1;
+            }
+
+            $familyDistribution[$familySlug] = (int) ($familyDistribution[$familySlug] ?? 0) + 1;
+            $publishTrackDistribution[$publishTrack] = (int) ($publishTrackDistribution[$publishTrack] ?? 0) + 1;
+            $members[] = $runtimeMember;
         }
 
         usort($members, static fn (CareerFullDatasetMember $left, CareerFullDatasetMember $right): int => strcmp(
@@ -268,6 +300,63 @@ final class CareerFullDatasetAuthorityBuilder
     }
 
     /**
+     * @param  array<string, array<string, mixed>>  $runtimeDatasetItemsBySlug
+     * @return list<CareerFullDatasetMember>
+     */
+    private function buildRuntimeProjectionMembers(array $runtimeDatasetItemsBySlug): array
+    {
+        if ($runtimeDatasetItemsBySlug === []) {
+            return [];
+        }
+
+        $occupationsBySlug = $this->loadOccupationsBySlug(array_keys($runtimeDatasetItemsBySlug));
+        $members = [];
+
+        foreach ($runtimeDatasetItemsBySlug as $slug => $item) {
+            $occupation = $occupationsBySlug[$slug] ?? null;
+            if (! $occupation instanceof Occupation) {
+                continue;
+            }
+
+            $familySlug = $this->normalizeNullableString($occupation->family?->canonical_slug);
+            $robotsIndexable = ($item['robots_indexable'] ?? false) === true;
+            $releaseGatePass = ($item['release_gate_pass'] ?? false) === true;
+            $detailRouteEnabled = ($item['detail_route_enabled'] ?? false) === true;
+            $publicIndexState = $robotsIndexable ? 'indexable' : 'noindex';
+            $releaseCohort = $detailRouteEnabled && $releaseGatePass && $robotsIndexable
+                ? 'public_detail_indexable'
+                : 'public_detail_conservative';
+            $strongIndexDecision = $releaseGatePass && $robotsIndexable
+                ? 'strong_index_ready'
+                : 'runtime_publish_projection_visible';
+
+            $members[] = new CareerFullDatasetMember(
+                memberKind: 'career_tracked_occupation',
+                canonicalSlug: $slug,
+                canonicalTitleEn: $this->normalizeNullableString($occupation->canonical_title_en),
+                canonicalTitleZh: $this->normalizeNullableString($occupation->canonical_title_zh),
+                familySlug: $familySlug,
+                publishTrack: 'runtime_publish_projection',
+                batchOrigin: 'runtime_publish_projection',
+                releaseCohort: $releaseCohort,
+                publicIndexState: $publicIndexState,
+                strongIndexDecision: $strongIndexDecision,
+                includedInPublicDataset: true,
+                exclusionReasons: [],
+                publicFacets: [
+                    'release_cohort' => $releaseCohort,
+                    'public_index_state' => $publicIndexState,
+                    'strong_index_decision' => $strongIndexDecision,
+                    'family_slug' => $familySlug,
+                    'publish_track' => 'runtime_publish_projection',
+                ],
+            );
+        }
+
+        return $members;
+    }
+
+    /**
      * @param  list<string>  $excludedSlugs
      * @return list<CareerFullDatasetMember>
      */
@@ -315,6 +404,31 @@ final class CareerFullDatasetAuthorityBuilder
         return Occupation::query()
             ->where('canonical_slug', $slug)
             ->value('canonical_title_zh');
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return array<string, Occupation>
+     */
+    private function loadOccupationsBySlug(array $slugs): array
+    {
+        $normalizedSlugs = array_values(array_filter(array_unique(array_map(
+            static fn (string $slug): string => trim($slug),
+            $slugs,
+        )), static fn (string $slug): bool => $slug !== ''));
+
+        if ($normalizedSlugs === []) {
+            return [];
+        }
+
+        return Occupation::query()
+            ->with('family:id,canonical_slug')
+            ->whereIn('canonical_slug', $normalizedSlugs)
+            ->get()
+            ->mapWithKeys(static fn (Occupation $occupation): array => [
+                (string) $occupation->canonical_slug => $occupation,
+            ])
+            ->all();
     }
 
     /**
@@ -438,6 +552,28 @@ final class CareerFullDatasetAuthorityBuilder
 
             $mapped[$slug] = $row;
         }
+
+        return $mapped;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     * @return array<string, array<string, mixed>>
+     */
+    private function mapRuntimeProjectionItemsBySlug(array $items): array
+    {
+        $mapped = [];
+
+        foreach ($items as $item) {
+            $slug = trim((string) ($item['slug'] ?? ''));
+            if ($slug === '') {
+                continue;
+            }
+
+            $mapped[$slug] = $item;
+        }
+
+        ksort($mapped);
 
         return $mapped;
     }

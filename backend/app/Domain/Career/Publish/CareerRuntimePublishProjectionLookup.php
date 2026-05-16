@@ -43,6 +43,23 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
             ?? null;
     }
 
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function publicDatasetItems(): array
+    {
+        return $this->visibleItems(static fn (array $item): bool => ($item['dataset_visible'] ?? false) === true);
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function publicDetailItems(): array
+    {
+        return $this->visibleItems(static fn (array $item): bool => ($item['detail_route_enabled'] ?? false) === true
+            && ($item['release_gate_pass'] ?? false) === true);
+    }
+
     public function datasetVisible(string $slug): bool
     {
         return (bool) ($this->itemForSlug($slug)['dataset_visible'] ?? false);
@@ -103,6 +120,29 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
         $this->hydrate();
 
         return $this->itemsBySlug ?? [];
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function visibleItems(callable $filter): array
+    {
+        $items = [];
+
+        foreach ($this->itemsBySlug() as $item) {
+            if (! $filter($item)) {
+                continue;
+            }
+
+            $items[] = $item;
+        }
+
+        usort($items, static fn (array $left, array $right): int => strcmp(
+            strtolower((string) ($left['slug'] ?? '')),
+            strtolower((string) ($right['slug'] ?? '')),
+        ));
+
+        return $items;
     }
 
     private function hydrate(): void

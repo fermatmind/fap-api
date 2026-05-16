@@ -7,6 +7,8 @@ namespace Tests\Unit\Services\Career;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
+use App\Models\Occupation;
+use App\Models\OccupationFamily;
 use App\Services\Career\Bundles\CareerJobListBundleBuilder;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -106,6 +108,36 @@ final class CareerJobListBundleBuilderTest extends TestCase
         $items = app(CareerJobListBundleBuilder::class)->build(includeNonIndexable: true);
 
         $this->assertSame([], $items);
+    }
+
+    public function test_it_includes_runtime_projection_detail_jobs_missing_from_legacy_compile_sources(): void
+    {
+        $occupation = $this->createRuntimeProjectionOccupation('runtime-public-specialist');
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(items: [
+                'runtime-public-specialist' => [
+                    'slug' => 'runtime-public-specialist',
+                    'canonical_path' => '/career/jobs/runtime-public-specialist',
+                    'dataset_visible' => true,
+                    'detail_route_enabled' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                    'reason_codes' => ['validated_display_asset_backed_release'],
+                ],
+            ]),
+        );
+
+        $items = app(CareerJobListBundleBuilder::class)->build();
+        $payloads = array_map(static fn ($item): array => $item->toArray(), $items);
+
+        $this->assertCount(1, $payloads);
+        $this->assertSame($occupation->canonical_slug, data_get($payloads[0], 'identity.canonical_slug'));
+        $this->assertSame('Runtime Public Specialist', data_get($payloads[0], 'titles.canonical_en'));
+        $this->assertSame('运行时公开专家', data_get($payloads[0], 'titles.canonical_zh'));
+        $this->assertSame('indexable', data_get($payloads[0], 'seo_contract.index_state'));
+        $this->assertTrue((bool) data_get($payloads[0], 'seo_contract.index_eligible'));
+        $this->assertContains('runtime_publish_projection', data_get($payloads[0], 'seo_contract.reason_codes'));
     }
 
     public function test_it_can_include_current_non_indexable_job_when_explicitly_requested(): void
@@ -217,5 +249,26 @@ final class CareerJobListBundleBuilderTest extends TestCase
             'compileRun' => $compileRun,
             'snapshot' => $snapshot,
         ] + $chain;
+    }
+
+    private function createRuntimeProjectionOccupation(string $slug): Occupation
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'runtime-public-family',
+            'title_en' => 'Runtime Public Family',
+            'title_zh' => '运行时公开职业族',
+        ]);
+
+        return Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => $slug,
+            'entity_level' => 'occupation',
+            'truth_market' => 'US',
+            'display_market' => 'US',
+            'crosswalk_mode' => 'exact',
+            'canonical_title_en' => 'Runtime Public Specialist',
+            'canonical_title_zh' => '运行时公开专家',
+            'search_h1_zh' => '运行时公开专家',
+        ]);
     }
 }

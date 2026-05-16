@@ -134,6 +134,15 @@ final class CareerJobListBundleBuilder
             $items = $items->concat($directoryDraftItems)->values();
         }
 
+        $visibleSlugs = $items
+            ->map(static fn (CareerJobListItemBundle $item): string => (string) ($item->identity['canonical_slug'] ?? ''))
+            ->filter()
+            ->all();
+        $runtimeProjectionItems = $this->buildRuntimeProjectionCareerJobItems($visibleSlugs, $includeNonIndexable);
+        if ($runtimeProjectionItems !== []) {
+            $items = $items->concat($runtimeProjectionItems)->values();
+        }
+
         /** @var Collection<int, CareerJobListItemBundle> $items */
         $items = $items->sortBy(static fn (CareerJobListItemBundle $item): array => [
             strtolower((string) ($item->titles['canonical_en'] ?? '')),
@@ -192,6 +201,45 @@ final class CareerJobListBundleBuilder
                 && $this->runtimePublishProjection->datasetVisible((string) $occupation->canonical_slug))
             ->values()
             ->map(fn (Occupation $occupation): CareerJobListItemBundle => $this->buildDirectoryDraftCareerJobItem($occupation))
+            ->all();
+    }
+
+    /**
+     * @param  list<string>  $excludedSlugs
+     * @return list<CareerJobListItemBundle>
+     */
+    private function buildRuntimeProjectionCareerJobItems(array $excludedSlugs, bool $includeNonIndexable): array
+    {
+        $excluded = array_flip(array_filter($excludedSlugs));
+        $projectionItemsBySlug = [];
+
+        foreach ($this->runtimePublishProjection->publicDetailItems() as $item) {
+            $slug = trim((string) ($item['slug'] ?? ''));
+            if ($slug === '' || isset($excluded[$slug])) {
+                continue;
+            }
+
+            if (! $includeNonIndexable && ($item['robots_indexable'] ?? false) !== true) {
+                continue;
+            }
+
+            $projectionItemsBySlug[$slug] = $item;
+        }
+
+        if ($projectionItemsBySlug === []) {
+            return [];
+        }
+
+        return Occupation::query()
+            ->with('family:id,canonical_slug')
+            ->whereIn('canonical_slug', array_keys($projectionItemsBySlug))
+            ->orderBy('canonical_title_en')
+            ->orderBy('canonical_slug')
+            ->get()
+            ->map(fn (Occupation $occupation): CareerJobListItemBundle => $this->buildRuntimeProjectionCareerJobItem(
+                $occupation,
+                $projectionItemsBySlug[(string) $occupation->canonical_slug] ?? [],
+            ))
             ->all();
     }
 
@@ -404,6 +452,59 @@ final class CareerJobListBundleBuilder
     }
 
     /**
+     * @param  array<string, mixed>  $projectionItem
+     */
+    private function buildRuntimeProjectionCareerJobItem(Occupation $occupation, array $projectionItem): CareerJobListItemBundle
+    {
+        return new CareerJobListItemBundle(
+            identity: [
+                'occupation_uuid' => $occupation->id,
+                'canonical_slug' => $occupation->canonical_slug,
+                'entity_level' => $occupation->entity_level,
+                'family_uuid' => $occupation->family_id,
+            ],
+            titles: [
+                'canonical_en' => $occupation->canonical_title_en,
+                'canonical_zh' => $occupation->canonical_title_zh,
+                'search_h1_zh' => $occupation->search_h1_zh,
+            ],
+            truthSummary: [
+                'truth_market' => $occupation->truth_market,
+            ],
+            trustSummary: [
+                'reviewer_status' => 'runtime_publish_projection',
+                'reviewed_at' => null,
+                'content_version' => 'runtime_publish_projection',
+                'data_version' => 'runtime_publish_projection',
+                'logic_version' => 'career.protocol.job_detail.runtime_projection.v1',
+                'editorial_patch_required' => false,
+                'editorial_patch_status' => null,
+                'allow_strong_claim' => true,
+                'allow_salary_comparison' => false,
+                'allow_ai_strategy' => false,
+                'reason_codes' => array_values(array_unique(array_filter(array_merge(
+                    ['runtime_publish_projection', 'career_job_index_runtime_projection_fallback'],
+                    is_array($projectionItem['reason_codes'] ?? null) ? $projectionItem['reason_codes'] : [],
+                ), static fn (mixed $reason): bool => is_scalar($reason) && trim((string) $reason) !== ''))),
+            ],
+            scoreSummary: [],
+            seoContract: $this->buildRuntimeProjectionSeoContract($occupation, $projectionItem),
+            provenanceMeta: [
+                'content_version' => 'runtime_publish_projection',
+                'data_version' => 'runtime_publish_projection',
+                'logic_version' => 'career.protocol.job_detail.runtime_projection.v1',
+                'compiler_version' => null,
+                'compiled_at' => null,
+                'truth_metric_id' => null,
+                'trust_manifest_id' => null,
+                'index_state_id' => null,
+                'compile_run_id' => null,
+                'import_run_id' => null,
+            ],
+        );
+    }
+
+    /**
      * @return array<string, mixed>
      */
     private function buildSeoContract(Occupation $occupation, RecommendationSnapshot $snapshot): array
@@ -496,6 +597,48 @@ final class CareerJobListBundleBuilder
             'public_stub_kind' => self::PUBLIC_DIRECTORY_STUB_KIND,
             'surface_type' => $surface['surface_type'] ?? null,
             'robots_policy' => $surface['robots_policy'] ?? 'noindex,follow',
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $projectionItem
+     * @return array<string, mixed>
+     */
+    private function buildRuntimeProjectionSeoContract(Occupation $occupation, array $projectionItem): array
+    {
+        $canonicalPath = is_string($projectionItem['canonical_path'] ?? null)
+            ? $projectionItem['canonical_path']
+            : '/career/jobs/'.(string) $occupation->canonical_slug;
+        $canonicalTarget = is_string($projectionItem['canonical_target'] ?? null)
+            ? $projectionItem['canonical_target']
+            : null;
+        $indexEligible = ($projectionItem['robots_indexable'] ?? false) === true;
+        $publicIndexState = $indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::NOINDEX;
+        $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
+        $surface = $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'career_protocol_bundle',
+            'surface_type' => 'career_job_list_item_runtime_projection_bundle',
+            'canonical_url' => $canonicalTarget ?: $canonicalPath,
+            'robots_policy' => $robotsPolicy,
+            'title' => $occupation->canonical_title_en,
+            'description' => $occupation->canonical_title_en,
+            'indexability_state' => $publicIndexState,
+            'sitemap_state' => $indexEligible ? 'included' : 'excluded',
+        ]);
+
+        return [
+            'canonical_path' => $canonicalPath,
+            'canonical_target' => $canonicalTarget,
+            'index_state' => $publicIndexState,
+            'index_eligible' => $indexEligible,
+            'reason_codes' => array_values(array_unique(array_filter(array_merge(
+                ['runtime_publish_projection', 'career_job_index_runtime_projection_fallback'],
+                is_array($projectionItem['reason_codes'] ?? null) ? $projectionItem['reason_codes'] : [],
+            ), static fn (mixed $reason): bool => is_scalar($reason) && trim((string) $reason) !== ''))),
+            'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
+            'surface_type' => $surface['surface_type'] ?? null,
+            'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
+            'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
         ];
     }
 
