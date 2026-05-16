@@ -3940,3 +3940,329 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+  - id: AUDIT-API-IQ-RESULT-SECRECY
+    repo: fap-api
+    depends_on:
+      - AUDIT-WEB-CMS-LINK-XSS:fap-web
+    branch: codex/audit-api-iq-result-secrecy
+    global_sequence: 2
+    title: "fix(security): redact IQ answer keys and locked report payloads"
+    name: "Redact IQ answer keys and locked report payloads"
+    findings:
+      - "IQ result responses expose answer keys"
+      - "Locked IQ reports expose non-free score sections"
+    scope:
+      - Remove answer-key fields from public IQ result serialization and submit responses.
+      - Preserve server-side IQ scoring correctness while redacting correct answers from persisted/public payloads where required.
+      - Enforce locked/free/pro IQ report access gates for score sections and narrative sections.
+      - Add regression tests proving answer keys and paid sections are not exposed publicly.
+    allowed_paths:
+      - backend/app/Services/Assessment/Drivers/IqTestDriver.php
+      - backend/app/Services/Attempts/**
+      - backend/app/Services/Reports/**
+      - backend/app/Services/Iq/**
+      - backend/app/Http/Controllers/API/**
+      - backend/app/Http/Resources/**
+      - backend/tests/Feature/**
+      - backend/tests/Unit/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change IQ scoring semantics or answer-key storage authority.
+      - Touch fap-web.
+      - Modify payment/order/report entitlement business policy beyond redaction/access enforcement.
+      - Run production DB mutation, deploy, rollback, unlock, or process termination.
+    validation:
+      - php artisan test --filter=Iq --no-ansi
+      - php artisan test --filter=AttemptSubmit --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by AUDIT-API-IQ-RESULT-SECRECY
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+  - id: AUDIT-API-CMS-MEDIA-URL-GUARD
+    repo: fap-api
+    depends_on:
+      - AUDIT-WEB-LLMS-FANOUT-BUDGET:fap-web
+    branch: codex/audit-api-cms-media-url-guard
+    global_sequence: 6
+    title: "fix(security): enforce public media URL guard for CMS media and JSON-LD"
+    name: "Enforce public media URL guard for CMS media and JSON-LD"
+    findings:
+      - "CMS media CDN verification permits SSRF"
+      - "JSON-LD image bypasses public media URL guard"
+    scope:
+      - Constrain CMS media CDN verification to approved public media/CDN origins.
+      - Reject localhost, private, link-local, non-http(s), and unapproved redirect targets.
+      - Apply the public media URL guard to JSON-LD image fields and public article media variants.
+      - Add regression tests for blocked and allowed media URLs.
+    allowed_paths:
+      - backend/app/Services/Cms/**
+      - backend/app/Services/Media/**
+      - backend/app/Support/**
+      - backend/app/Http/Resources/**
+      - backend/app/Http/Controllers/API/V0_5/Cms/**
+      - backend/tests/Feature/Cms/**
+      - backend/tests/Unit/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change article content or publish state.
+      - Touch fap-web.
+      - Run media sync against production.
+      - Run production DB mutation, deploy, rollback, unlock, or process termination.
+    validation:
+      - php artisan test --filter=Media --no-ansi
+      - php artisan test --filter=Article --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by AUDIT-API-CMS-MEDIA-URL-GUARD
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+  - id: AUDIT-API-CAREER-ROLLOUT-AUTHORITY
+    repo: fap-api
+    depends_on:
+      - AUDIT-API-CMS-MEDIA-URL-GUARD
+    branch: codex/audit-api-career-rollout-authority
+    global_sequence: 7
+    title: "fix(security): enforce career rollout authority gates"
+    name: "Enforce career rollout authority gates"
+    findings:
+      - "Explicit delta mode bypasses audit policy blockers"
+      - "Progressive selection can promote unready career slugs"
+      - "Unsigned rollout reports can publish career slugs"
+      - "Career rollout slugs bypass review authority"
+    scope:
+      - Require approved rollout/readiness authority for explicit delta slugs.
+      - Preserve hard blockers, audit policy blockers, and review/family handoff authority in progressive selection and rollout ledger paths.
+      - Reject unsigned, stale, or untrusted rollout reports for publication authority.
+      - Add regression tests proving unreviewed/unready slugs cannot be promoted.
+    allowed_paths:
+      - backend/app/Console/Commands/Career*
+      - backend/app/Domain/Career/**
+      - backend/app/Services/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/**
+      - backend/tests/Unit/Services/Career/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run rollout dry-run or apply.
+      - Run candidate preparation apply.
+      - Run backfill, rollback, quarantine, publication expansion, production DB mutation, or deploy.
+      - Touch fap-web.
+      - Weaken final live acceptance.
+    validation:
+      - php artisan test --filter=Career --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by AUDIT-API-CAREER-ROLLOUT-AUTHORITY
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+  - id: AUDIT-API-CAREER-ARTIFACT-READINESS
+    repo: fap-api
+    depends_on:
+      - AUDIT-API-CAREER-ROLLOUT-AUTHORITY
+    branch: codex/audit-api-career-artifact-readiness
+    global_sequence: 8
+    title: "fix(security): fail closed on career readiness artifacts"
+    name: "Fail closed on career readiness artifacts"
+    findings:
+      - "Career refresh planner fails open on artifacts"
+      - "Index context artifacts can bypass index_eligible gate"
+      - "Unsupported locale bypasses zh readiness gate"
+    scope:
+      - Require valid passed target/runtime/candidate artifacts before readiness pass.
+      - Treat missing or null index_eligible as not eligible for artifact-based index context.
+      - Normalize and validate locale before zh readiness gates are evaluated.
+      - Add regression tests for malformed, blocked, and missing readiness artifacts.
+    allowed_paths:
+      - backend/app/Console/Commands/Career*
+      - backend/app/Domain/Career/**
+      - backend/app/Http/Resources/Career/**
+      - backend/app/Services/Career/**
+      - backend/tests/Feature/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/**
+      - backend/tests/Unit/Services/Career/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run rollout dry-run or apply.
+      - Run candidate preparation apply.
+      - Run backfill, rollback, quarantine, publication expansion, production DB mutation, or deploy.
+      - Touch fap-web.
+      - Weaken final live acceptance.
+    validation:
+      - php artisan test --filter=Career --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by AUDIT-API-CAREER-ARTIFACT-READINESS
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+  - id: AUDIT-API-ARTICLE-PUBLISH-GATE
+    repo: fap-api
+    depends_on:
+      - AUDIT-API-CAREER-ARTIFACT-READINESS
+    branch: codex/audit-api-article-publish-gate
+    global_sequence: 9
+    title: "fix(security): require editorial approval for controlled article publish"
+    name: "Require editorial approval for controlled article publish"
+    findings:
+      - "Controlled article publish bypasses review gates"
+    scope:
+      - Require approved editorial review state before controlled article publication.
+      - Revalidate publish preflight atomically immediately before publish.
+      - Add regression tests proving unapproved, stale, archived, or already-published revisions cannot bypass review gates.
+    allowed_paths:
+      - backend/app/Console/Commands/*Article*
+      - backend/app/Models/Article*
+      - backend/app/Services/Cms/**
+      - backend/app/Domain/Cms/**
+      - backend/tests/Feature/Console/*Article*
+      - backend/tests/Feature/Cms/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change article body content.
+      - Publish, unpublish, import, or mutate production content.
+      - Touch attempts, results, reports, orders, payments, shares, scoring, or fap-web.
+      - Run production DB mutation, deploy, rollback, unlock, or process termination.
+    validation:
+      - php artisan test --filter=Article --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by AUDIT-API-ARTICLE-PUBLISH-GATE
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+  - id: AUDIT-API-OPS-TENANT-SCOPING
+    repo: fap-api
+    depends_on:
+      - AUDIT-API-ARTICLE-PUBLISH-GATE
+    branch: codex/audit-api-ops-tenant-scoping
+    global_sequence: 10
+    title: "fix(security): scope ops release failure audits by org"
+    name: "Scope ops release failure audits by org"
+    findings:
+      - "Ops dashboard leaks cross-org release failure audits"
+    scope:
+      - Constrain ops article publishing release-failure audit queries to the selected/current org context.
+      - Avoid unscoped AuditLog exposure unless explicitly safe and still tenant-filtered.
+      - Add regression tests proving cross-org audit rows are not visible.
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/ArticlePublishingOpsPage.php
+      - backend/app/Models/AuditLog.php
+      - backend/app/Services/Ops/**
+      - backend/tests/Feature/Ops/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change article publishing workflow semantics beyond tenant scoping.
+      - Touch fap-web.
+      - Run production DB mutation, deploy, rollback, unlock, or process termination.
+    validation:
+      - php artisan test tests/Feature/Ops/ArticlePublishingOpsPageTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by AUDIT-API-OPS-TENANT-SCOPING
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+  - id: AUDIT-API-SAFE-TMP-ARTIFACTS
+    repo: fap-api
+    depends_on:
+      - AUDIT-API-OPS-TENANT-SCOPING
+    branch: codex/audit-api-safe-tmp-artifacts
+    global_sequence: 11
+    title: "fix(security): write temporary artifacts safely"
+    name: "Write temporary artifacts safely"
+    findings:
+      - "Predictable /tmp artifact outputs allow symlink overwrite"
+    scope:
+      - Replace predictable /tmp artifact output paths with safe temporary file/directory creation.
+      - Prevent symlink overwrite and path traversal for generated artifact outputs.
+      - Add regression tests proving attacker-controlled symlinks cannot be overwritten.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Domain/**/*
+      - backend/app/Support/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/**
+      - backend/docs/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change publication authority semantics.
+      - Touch fap-web.
+      - Run production DB mutation, deploy, rollback, unlock, or process termination.
+    validation:
+      - php artisan test --filter=Artifact --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by AUDIT-API-SAFE-TMP-ARTIFACTS
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true

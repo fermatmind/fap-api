@@ -795,6 +795,38 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_result_secrecy_redaction_only(): void
+    {
+        $changed = [
+            'backend/app/Services/Attempts/AttemptSubmitService.php',
+            'backend/app/Services/Iq/IqResultPayloadRedactor.php',
+        ];
+        $allowedSubmitChangedLines = [
+            '+use App\\Services\\Iq\\IqResultPayloadRedactor;',
+            '+        if (IqResultPayloadRedactor::isIqScale($responseCodes[\'scale_code_legacy\'], $responseCodes[\'scale_code_v2\'])) {',
+            '+            $payload = IqResultPayloadRedactor::redactAnswerKeys($payload);',
+            '+            $compatScores = IqResultPayloadRedactor::redactAnswerKeys($compatScores);',
+            '+        }',
+            '+',
+        ];
+        $blockedSubmitChangedLines = [
+            '+        $payload[\'big5_result_page_v2\'] = [];',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            attemptSubmitServiceChangedLines: $allowedSubmitChangedLines,
+        ));
+        $this->assertSame(['backend/app/Services/Attempts/AttemptSubmitService.php'], $this->mbtiImpactingRuntimeChanges(
+            ['backend/app/Services/Attempts/AttemptSubmitService.php'],
+            '',
+            '',
+            attemptSubmitServiceChangedLines: $blockedSubmitChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_riasec_measurement_contract_compare_policy_changes(): void
     {
         $changed = [
@@ -1305,6 +1337,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $scaleRegistrySeederChangedLines = null,
         ?array $articleControllerChangedLines = null,
         ?array $attributionControllerChangedLines = null,
+        ?array $attemptSubmitServiceChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -1371,6 +1404,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isFileImportIdempotencyHardeningFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Services/Attempts/AttemptSubmitService.php'
+                && $this->attemptSubmitServiceDiffIsIqResultSecrecyRedactionOnly(
+                    $attemptSubmitServiceChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
+                continue;
+            }
+
+            if ($this->isIqResultSecrecyRedactionFile($file)) {
                 continue;
             }
 
@@ -1742,6 +1792,26 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isIqScoringContractFoundationFile(string $file): bool
     {
         return $file === 'backend/app/Services/Assessment/Drivers/IqTestDriver.php';
+    }
+
+    private function isIqResultSecrecyRedactionFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Iq/IqResultPayloadRedactor.php';
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function attemptSubmitServiceDiffIsIqResultSecrecyRedactionOnly(array $changedLines): bool
+    {
+        return $changedLines === [
+            '+use App\\Services\\Iq\\IqResultPayloadRedactor;',
+            '+        if (IqResultPayloadRedactor::isIqScale($responseCodes[\'scale_code_legacy\'], $responseCodes[\'scale_code_v2\'])) {',
+            '+            $payload = IqResultPayloadRedactor::redactAnswerKeys($payload);',
+            '+            $compatScores = IqResultPayloadRedactor::redactAnswerKeys($compatScores);',
+            '+        }',
+            '+',
+        ];
     }
 
     private function isRiasecMeasurementContractComparePolicyFile(string $file): bool

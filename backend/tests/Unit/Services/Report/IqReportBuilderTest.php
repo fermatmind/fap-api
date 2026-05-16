@@ -120,11 +120,14 @@ final class IqReportBuilderTest extends TestCase
 
         $this->assertSame('IQ_INTELLIGENCE_QUOTIENT', data_get($payload, 'scale_code'));
         $this->assertNull(data_get($payload, 'summary.raw_score'));
-        $this->assertSame('blocked_unscored', data_get($payload, 'scoring.status'));
-        $this->assertSame('ANSWER_KEY_MISSING', data_get($payload, 'scoring.reason_code'));
-        $this->assertSame('unstable', data_get($payload, 'stability.status'));
-        $this->assertSame(['PARTIAL_COMPLETION'], data_get($payload, 'quality.flags'));
-        $this->assertArrayHasKey('visual_spatial_insight', (array) data_get($payload, 'dimensions'));
         $this->assertSame('free', data_get($payload, 'access.report_access_level'));
+        $this->assertSame('free', data_get($payload, 'access.variant'));
+        $this->assertSame([], data_get($payload, 'sections'));
+        $this->assertTrue((bool) data_get($payload, '_meta.redacted'));
+        $this->assertNull(data_get($payload, 'scoring'));
+        $this->assertNull(data_get($payload, 'dimensions'));
+        $this->assertNull(data_get($payload, 'quality'));
+        $this->assertNull(data_get($payload, 'stability'));
+        $this->assertNull(data_get($payload, 'iq_pro'));
     }
 }

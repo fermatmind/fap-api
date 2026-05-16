@@ -48,6 +48,15 @@ final class IqReportBuilder
         $reportAccessLevel = ReportAccess::normalizeReportAccessLevel((string) ($ctx['report_access_level'] ?? ReportAccess::REPORT_ACCESS_FULL));
         $normalizedVariant = ReportAccess::normalizeVariant($variant);
         $legacyScaleCode = strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? 'IQ_RAVEN')));
+        if (! $this->allowsPaidReportPayload($normalizedVariant, $reportAccessLevel)) {
+            return $this->buildLockedReport(
+                $attempt,
+                $legacyScaleCode !== '' ? $legacyScaleCode : 'IQ_RAVEN',
+                $summary,
+                $reportAccessLevel,
+                $normalizedVariant
+            );
+        }
 
         return [
             'schema_version' => 'iq.report.v1',
@@ -90,6 +99,49 @@ final class IqReportBuilder
             ],
             'generated_at' => now()->toISOString(),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $summary
+     * @return array<string,mixed>
+     */
+    private function buildLockedReport(
+        Attempt $attempt,
+        string $legacyScaleCode,
+        array $summary,
+        string $reportAccessLevel,
+        string $normalizedVariant
+    ): array {
+        return [
+            'schema_version' => 'iq.report.v1',
+            'scale_code' => self::CANONICAL_SCALE_CODE,
+            'scale_code_legacy' => $legacyScaleCode,
+            'attempt_id' => (string) ($attempt->id ?? ''),
+            'summary' => [
+                'raw_score' => null,
+                'iq_estimate' => null,
+                'percentile' => null,
+                'confidence_interval' => null,
+                'norms_status' => $this->stringOrNull($summary['norms_status'] ?? null),
+            ],
+            'access' => [
+                'report_access_level' => $reportAccessLevel,
+                'variant' => $normalizedVariant,
+            ],
+            'sections' => [],
+            '_meta' => [
+                'locked' => true,
+                'redacted' => true,
+                'redaction_policy' => 'iq.locked_report.v1',
+            ],
+            'generated_at' => now()->toISOString(),
+        ];
+    }
+
+    private function allowsPaidReportPayload(string $normalizedVariant, string $reportAccessLevel): bool
+    {
+        return $normalizedVariant === ReportAccess::VARIANT_FULL
+            && $reportAccessLevel === ReportAccess::REPORT_ACCESS_FULL;
     }
 
     /**

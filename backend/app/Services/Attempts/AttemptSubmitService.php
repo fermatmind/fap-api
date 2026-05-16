@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessment\AssessmentRunner;
 use App\Services\Experiments\ExperimentAssigner;
+use App\Services\Iq\IqResultPayloadRedactor;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Scale\ScaleCodeResponseProjector;
@@ -289,6 +290,11 @@ class AttemptSubmitService
         $payload['scale_code_legacy'] = $responseCodes['scale_code_legacy'];
         $payload['scale_code_v2'] = $responseCodes['scale_code_v2'];
         $payload['scale_uid'] = $responseCodes['scale_uid'];
+
+        if (IqResultPayloadRedactor::isIqScale($responseCodes['scale_code_legacy'], $responseCodes['scale_code_v2'])) {
+            $payload = IqResultPayloadRedactor::redactAnswerKeys($payload);
+            $compatScores = IqResultPayloadRedactor::redactAnswerKeys($compatScores);
+        }
 
         return [
             'ok' => true,

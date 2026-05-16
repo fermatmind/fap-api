@@ -41,6 +41,8 @@ final class IqTestDriverTest extends TestCase
         $this->assertSame(100.0, data_get($result->axisScoresJson, 'scores_pct.VSI'));
         $this->assertSame(0.0, data_get($result->axisScoresJson, 'scores_pct.NPR'));
         $this->assertCount(3, data_get($result->normedJson, 'items', []));
+        $this->assertArrayNotHasKey('correct_answer', data_get($result->normedJson, 'items.0', []));
+        $this->assertStringNotContainsString('correct_answer', json_encode($result->toArray(), JSON_THROW_ON_ERROR));
     }
 
     public function test_missing_answer_key_returns_blocked_unscored_state(): void

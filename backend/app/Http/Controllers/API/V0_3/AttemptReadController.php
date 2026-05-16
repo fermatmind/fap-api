@@ -24,6 +24,7 @@ use App\Services\Content\EnneagramPackLoader;
 use App\Services\Enneagram\EnneagramObservationStateService;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\Enneagram\EnneagramPublicProjectionService;
+use App\Services\Iq\IqResultPayloadRedactor;
 use App\Services\Mbti\MbtiActionJourneyContractService;
 use App\Services\Mbti\MbtiAdaptiveSelectionService;
 use App\Services\Mbti\MbtiIntraTypeProfileService;
@@ -273,6 +274,10 @@ class AttemptReadController extends Controller
         }
         if (! is_array($compatScoresPct)) {
             $compatScoresPct = [];
+        }
+        if (IqResultPayloadRedactor::isIqScale($responseCodes['scale_code_legacy'], $responseCodes['scale_code_v2'])) {
+            $payload = IqResultPayloadRedactor::redactAnswerKeys($payload);
+            $compatScores = IqResultPayloadRedactor::redactAnswerKeys($compatScores);
         }
 
         $hasBigFiveProjectionFullAccess = $scaleCode === 'BIG5_OCEAN'
@@ -2245,7 +2250,7 @@ class AttemptReadController extends Controller
             $this->resolveAnonId($request)
         );
         if (($payload['ok'] ?? false) === true) {
-            return $payload;
+            return $this->redactIqSubmissionPayload($payload, $attempt);
         }
 
         if (! $this->shouldUsePublicArtifactFallback($request, $attempt)) {
@@ -2265,7 +2270,29 @@ class AttemptReadController extends Controller
             $fallbackAnonId
         );
 
-        return ($fallbackPayload['ok'] ?? false) === true ? $fallbackPayload : $payload;
+        return ($fallbackPayload['ok'] ?? false) === true
+            ? $this->redactIqSubmissionPayload($fallbackPayload, $attempt)
+            : $payload;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function redactIqSubmissionPayload(array $payload, Attempt $attempt): array
+    {
+        if (! IqResultPayloadRedactor::isIqScale(
+            (string) ($attempt->scale_code ?? ''),
+            (string) ($attempt->scale_code_v2 ?? '')
+        )) {
+            return $payload;
+        }
+
+        if (is_array($payload['result'] ?? null)) {
+            $payload['result'] = IqResultPayloadRedactor::redactAnswerKeys($payload['result']);
+        }
+
+        return $payload;
     }
 
     private function resolvePublicAttemptFromArtifacts(
