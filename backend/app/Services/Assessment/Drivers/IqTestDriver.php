@@ -320,7 +320,6 @@ class IqTestDriver implements DriverInterface
      *   question_id:string,
      *   dimension:string,
      *   selected_code:string,
-     *   correct_answer:string,
      *   is_correct:bool,
      *   raw_points:float,
      *   awarded_points:float
@@ -346,7 +345,6 @@ class IqTestDriver implements DriverInterface
                 'question_id' => $questionId,
                 'dimension' => (string) ($definition['dimension'] ?? ''),
                 'selected_code' => $selectedCode,
-                'correct_answer' => (string) ($definition['correct_answer'] ?? ''),
                 'is_correct' => $isCorrect,
                 'raw_points' => $rawPoints,
                 'awarded_points' => $isCorrect ? $rawPoints : 0.0,
@@ -363,7 +361,6 @@ class IqTestDriver implements DriverInterface
      *   question_id:string,
      *   dimension:string,
      *   selected_code:string,
-     *   correct_answer:string,
      *   is_correct:bool,
      *   raw_points:float,
      *   awarded_points:float

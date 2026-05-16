@@ -6,6 +6,7 @@ namespace Tests\Feature\V0_3;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Attempts\AttemptSubmitService;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -63,7 +64,7 @@ final class IqReportContractTest extends TestCase
         ]);
     }
 
-    private function createScoredResult(string $attemptId): void
+    private function createScoredResult(string $attemptId): Result
     {
         $score = [
             'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
@@ -114,9 +115,24 @@ final class IqReportContractTest extends TestCase
                     'percent_correct' => 50.0,
                 ],
             ],
+            'answer_key' => [
+                'IQ001' => 'A',
+            ],
+            'items' => [
+                [
+                    'item_id' => 'FM-IQ-VSI-HS-L2-0001',
+                    'question_id' => 'IQ001',
+                    'dimension' => 'VSI',
+                    'selected_code' => 'B',
+                    'correct_answer' => 'A',
+                    'is_correct' => false,
+                    'raw_points' => 1.0,
+                    'awarded_points' => 0.0,
+                ],
+            ],
         ];
 
-        Result::create([
+        return Result::create([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
             'attempt_id' => $attemptId,
@@ -124,7 +140,15 @@ final class IqReportContractTest extends TestCase
             'scale_code_v2' => 'IQ_INTELLIGENCE_QUOTIENT',
             'scale_version' => 'v0.3',
             'type_code' => '',
-            'scores_json' => [],
+            'scores_json' => [
+                'items' => [
+                    [
+                        'question_id' => 'IQ001',
+                        'selected_code' => 'B',
+                        'correct_answer' => 'A',
+                    ],
+                ],
+            ],
             'scores_pct' => [],
             'axis_states' => [],
             'content_package_version' => 'v0.3.0-demo',
@@ -168,15 +192,121 @@ final class IqReportContractTest extends TestCase
         $response->assertJsonPath('report.scale_code', 'IQ_INTELLIGENCE_QUOTIENT');
         $response->assertJsonPath('report.scale_code_legacy', 'IQ_RAVEN');
         $response->assertJsonPath('report.attempt_id', $attemptId);
-        $response->assertJsonPath('report.summary.raw_score', 21);
-        $response->assertJsonPath('report.dimensions.visual_spatial_insight.raw_score', 3);
-        $response->assertJsonPath('report.dimensions.visual_spatial_pattern_reasoning.percent_correct', 100);
-        $response->assertJsonPath('report.dimensions.numerical_pattern_reasoning.correct_count', 2);
-        $response->assertJsonPath('report.quality.level', 'A');
-        $response->assertJsonPath('report.stability.status', 'stable');
-        $response->assertJsonPath('report.iq_pro.pdf_payload.status', 'contract_defined_not_implemented');
+        $response->assertJsonPath('report.summary.raw_score', null);
+        $response->assertJsonPath('report.sections', []);
+        $response->assertJsonPath('report._meta.redacted', true);
         $response->assertJsonPath('report.access.report_access_level', 'free');
+        $response->assertJsonMissingPath('report.dimensions');
+        $response->assertJsonMissingPath('report.quality');
+        $response->assertJsonMissingPath('report.stability');
+        $response->assertJsonMissingPath('report.scoring');
+        $response->assertJsonMissingPath('report.iq_pro');
         $response->assertJsonMissingPath('report.profile');
         $response->assertJsonPath('upgrade_sku', null);
+    }
+
+    public function test_iq_result_endpoint_redacts_legacy_answer_keys_from_public_payload(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_iq_result_redaction';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createScoredResult($attemptId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
+
+        $response->assertStatus(200);
+        $this->assertPayloadHasNoAnswerKeyFields($response->json());
+        $this->assertSame('B', data_get($response->json(), 'result.normed_json.items.0.selected_code'));
+        $this->assertFalse((bool) data_get($response->json(), 'result.normed_json.items.0.is_correct'));
+    }
+
+    public function test_iq_submit_payload_redacts_legacy_answer_keys_before_response_serialization(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_iq_submit_redaction';
+        $this->createAttempt($attemptId, $anonId);
+        $result = $this->createScoredResult($attemptId);
+        $attempt = Attempt::query()->where('id', $attemptId)->firstOrFail();
+
+        $payload = app(AttemptSubmitService::class)->buildSubmitPayload($attempt, $result, true);
+
+        $this->assertPayloadHasNoAnswerKeyFields($payload);
+        $this->assertSame('B', data_get($payload, 'result.normed_json.items.0.selected_code'));
+        $this->assertFalse((bool) data_get($payload, 'result.normed_json.items.0.is_correct'));
+    }
+
+    public function test_iq_submission_read_redacts_stored_submit_response_answer_keys(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_iq_submission_read_redaction';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+
+        DB::table('attempt_submissions')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'actor_user_id' => null,
+            'actor_anon_id' => $anonId,
+            'dedupe_key' => hash('sha256', $attemptId.':iq-submission-redaction'),
+            'mode' => 'async',
+            'state' => 'succeeded',
+            'error_code' => null,
+            'error_message' => null,
+            'request_payload_json' => json_encode(['attempt_id' => $attemptId], JSON_THROW_ON_ERROR),
+            'response_payload_json' => json_encode([
+                'ok' => true,
+                'attempt_id' => $attemptId,
+                'result' => [
+                    'normed_json' => [
+                        'items' => [
+                            [
+                                'question_id' => 'IQ001',
+                                'selected_code' => 'B',
+                                'correct_answer' => 'A',
+                            ],
+                        ],
+                    ],
+                    'answer_key' => ['IQ001' => 'A'],
+                ],
+            ], JSON_THROW_ON_ERROR),
+            'started_at' => now()->subMinute(),
+            'finished_at' => now()->subSeconds(10),
+            'created_at' => now()->subMinute(),
+            'updated_at' => now()->subSeconds(5),
+        ]);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/submission");
+
+        $response->assertStatus(200);
+        $this->assertPayloadHasNoAnswerKeyFields($response->json());
+        $this->assertSame('B', data_get($response->json(), 'result.result.normed_json.items.0.selected_code'));
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function assertPayloadHasNoAnswerKeyFields(array $payload): void
+    {
+        foreach ($payload as $key => $value) {
+            $this->assertNotContains($key, ['answer_key', 'answerKey', 'correct_answer', 'correctAnswer']);
+
+            if (is_array($value)) {
+                $this->assertPayloadHasNoAnswerKeyFields($value);
+            }
+        }
     }
 }

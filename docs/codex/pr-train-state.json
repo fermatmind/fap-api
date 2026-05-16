@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-16T13:45:00+08:00",
+  "updated_at": "2026-05-16T14:55:11+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -7286,6 +7286,345 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": []
+    },
+    "AUDIT-API-IQ-RESULT-SECRECY": {
+      "repo": "fap-api",
+      "branch": "codex/audit-api-iq-result-secrecy",
+      "base": "main",
+      "global_sequence": 2,
+      "depends_on": [
+        "AUDIT-WEB-CMS-LINK-XSS:fap-web"
+      ],
+      "status": "committed",
+      "train_scope": "security_audit_remediation",
+      "risk_level": "high",
+      "title": "fix(security): redact IQ answer keys and locked report payloads",
+      "findings": [
+        "IQ result responses expose answer keys",
+        "Locked IQ reports expose non-free score sections"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding the 11 security audit train items to fap-web and fap-api pr-train manifest/state without starting implementation."
+        },
+        "scope_validation_policy": {
+          "status": "planned",
+          "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "AUDIT-WEB-CMS-LINK-XSS merged as fermatmind/fap-web#822 with merge commit 76ce4d0c81a90473ba39b2866755c12283feca29."
+        },
+        "branch_preflight": {
+          "status": "pass",
+          "evidence": "Created codex/audit-api-iq-result-secrecy from origin/main 99e89da6fca74c9c0360147aaf50ec18811a1e52; unrelated .playwright-mcp/ remains untracked and outside scope."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are limited to IQ result redaction, IQ report gating, submit/result response serialization, focused IQ tests, and authorized PR train metadata."
+        },
+        "local_validation": {
+          "status": "pass",
+          "evidence": [
+            "composer dump-autoload: pass (refreshed stale local autoload path before testing)",
+            "php artisan test tests/Unit/Assessment/IqTestDriverTest.php tests/Unit/Services/Report/IqReportBuilderTest.php tests/Feature/V0_3/IqReportContractTest.php --no-ansi: pass (7 tests, 428 assertions)",
+            "php artisan test tests/Feature/V0_3/IqReportContractTest.php --no-ansi: pass after submission-read redaction addition (4 tests, 404 assertions)",
+            "php artisan test --filter=Iq --no-ansi: pass (37 tests, 1042 assertions)",
+            "php artisan test --filter=AttemptSubmit --no-ansi: pass (8 tests, 88 assertions)",
+            "php artisan route:list --no-ansi: pass",
+            "vendor/bin/pint --test: pass (3272 files)",
+            "ruby YAML.load_file docs/codex/pr-train.yaml: pass",
+            "python3 -m json.tool docs/codex/pr-train-state.json: pass",
+            "git diff --check: pass",
+            "git diff --cached --check: pass"
+          ]
+        },
+        "commit": {
+          "status": "pass",
+          "evidence": "444c24162d83e9fc45ae8322fde6bbf4834b634b"
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": "444c24162d83e9fc45ae8322fde6bbf4834b634b",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-16T14:10:19+08:00",
+          "status": "planned",
+          "summary": "Initialized AUDIT-API-IQ-RESULT-SECRECY as a security audit remediation train item. Implementation has not started."
+        },
+        {
+          "at": "2026-05-16T14:46:59+08:00",
+          "status": "in_progress",
+          "summary": "Started implementation on codex/audit-api-iq-result-secrecy from latest origin/main after dependency merge verification."
+        },
+        {
+          "at": "2026-05-16T14:52:54+08:00",
+          "status": "local_checks_passed",
+          "summary": "Implemented IQ answer-key redaction and locked/free report gating; required local validation passed before commit."
+        },
+        {
+          "at": "2026-05-16T14:54:48+08:00",
+          "status": "local_checks_passed",
+          "summary": "Re-ran required local validation after adding IQ submission-read redaction for stored async submit payloads."
+        },
+        {
+          "at": "2026-05-16T14:55:11+08:00",
+          "status": "committed",
+          "summary": "Committed scoped remediation at 444c24162d83e9fc45ae8322fde6bbf4834b634b."
+        }
+      ]
+    },
+    "AUDIT-API-CMS-MEDIA-URL-GUARD": {
+      "repo": "fap-api",
+      "branch": "codex/audit-api-cms-media-url-guard",
+      "base": "main",
+      "global_sequence": 6,
+      "depends_on": [
+        "AUDIT-WEB-LLMS-FANOUT-BUDGET:fap-web"
+      ],
+      "status": "planned",
+      "train_scope": "security_audit_remediation",
+      "risk_level": "medium",
+      "title": "fix(security): enforce public media URL guard for CMS media and JSON-LD",
+      "findings": [
+        "CMS media CDN verification permits SSRF",
+        "JSON-LD image bypasses public media URL guard"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding the 11 security audit train items to fap-web and fap-api pr-train manifest/state without starting implementation."
+        },
+        "scope_validation_policy": {
+          "status": "planned",
+          "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-16T14:10:19+08:00",
+          "status": "planned",
+          "summary": "Initialized AUDIT-API-CMS-MEDIA-URL-GUARD as a security audit remediation train item. Implementation has not started."
+        }
+      ]
+    },
+    "AUDIT-API-CAREER-ROLLOUT-AUTHORITY": {
+      "repo": "fap-api",
+      "branch": "codex/audit-api-career-rollout-authority",
+      "base": "main",
+      "global_sequence": 7,
+      "depends_on": [
+        "AUDIT-API-CMS-MEDIA-URL-GUARD"
+      ],
+      "status": "planned",
+      "train_scope": "security_audit_remediation",
+      "risk_level": "medium",
+      "title": "fix(security): enforce career rollout authority gates",
+      "findings": [
+        "Explicit delta mode bypasses audit policy blockers",
+        "Progressive selection can promote unready career slugs",
+        "Unsigned rollout reports can publish career slugs",
+        "Career rollout slugs bypass review authority"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding the 11 security audit train items to fap-web and fap-api pr-train manifest/state without starting implementation."
+        },
+        "scope_validation_policy": {
+          "status": "planned",
+          "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-16T14:10:19+08:00",
+          "status": "planned",
+          "summary": "Initialized AUDIT-API-CAREER-ROLLOUT-AUTHORITY as a security audit remediation train item. Implementation has not started."
+        }
+      ]
+    },
+    "AUDIT-API-CAREER-ARTIFACT-READINESS": {
+      "repo": "fap-api",
+      "branch": "codex/audit-api-career-artifact-readiness",
+      "base": "main",
+      "global_sequence": 8,
+      "depends_on": [
+        "AUDIT-API-CAREER-ROLLOUT-AUTHORITY"
+      ],
+      "status": "planned",
+      "train_scope": "security_audit_remediation",
+      "risk_level": "medium",
+      "title": "fix(security): fail closed on career readiness artifacts",
+      "findings": [
+        "Career refresh planner fails open on artifacts",
+        "Index context artifacts can bypass index_eligible gate",
+        "Unsupported locale bypasses zh readiness gate"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding the 11 security audit train items to fap-web and fap-api pr-train manifest/state without starting implementation."
+        },
+        "scope_validation_policy": {
+          "status": "planned",
+          "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-16T14:10:19+08:00",
+          "status": "planned",
+          "summary": "Initialized AUDIT-API-CAREER-ARTIFACT-READINESS as a security audit remediation train item. Implementation has not started."
+        }
+      ]
+    },
+    "AUDIT-API-ARTICLE-PUBLISH-GATE": {
+      "repo": "fap-api",
+      "branch": "codex/audit-api-article-publish-gate",
+      "base": "main",
+      "global_sequence": 9,
+      "depends_on": [
+        "AUDIT-API-CAREER-ARTIFACT-READINESS"
+      ],
+      "status": "planned",
+      "train_scope": "security_audit_remediation",
+      "risk_level": "medium",
+      "title": "fix(security): require editorial approval for controlled article publish",
+      "findings": [
+        "Controlled article publish bypasses review gates"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding the 11 security audit train items to fap-web and fap-api pr-train manifest/state without starting implementation."
+        },
+        "scope_validation_policy": {
+          "status": "planned",
+          "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-16T14:10:19+08:00",
+          "status": "planned",
+          "summary": "Initialized AUDIT-API-ARTICLE-PUBLISH-GATE as a security audit remediation train item. Implementation has not started."
+        }
+      ]
+    },
+    "AUDIT-API-OPS-TENANT-SCOPING": {
+      "repo": "fap-api",
+      "branch": "codex/audit-api-ops-tenant-scoping",
+      "base": "main",
+      "global_sequence": 10,
+      "depends_on": [
+        "AUDIT-API-ARTICLE-PUBLISH-GATE"
+      ],
+      "status": "planned",
+      "train_scope": "security_audit_remediation",
+      "risk_level": "medium",
+      "title": "fix(security): scope ops release failure audits by org",
+      "findings": [
+        "Ops dashboard leaks cross-org release failure audits"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding the 11 security audit train items to fap-web and fap-api pr-train manifest/state without starting implementation."
+        },
+        "scope_validation_policy": {
+          "status": "planned",
+          "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-16T14:10:19+08:00",
+          "status": "planned",
+          "summary": "Initialized AUDIT-API-OPS-TENANT-SCOPING as a security audit remediation train item. Implementation has not started."
+        }
+      ]
+    },
+    "AUDIT-API-SAFE-TMP-ARTIFACTS": {
+      "repo": "fap-api",
+      "branch": "codex/audit-api-safe-tmp-artifacts",
+      "base": "main",
+      "global_sequence": 11,
+      "depends_on": [
+        "AUDIT-API-OPS-TENANT-SCOPING"
+      ],
+      "status": "planned",
+      "train_scope": "security_audit_remediation",
+      "risk_level": "medium",
+      "title": "fix(security): write temporary artifacts safely",
+      "findings": [
+        "Predictable /tmp artifact outputs allow symlink overwrite"
+      ],
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding the 11 security audit train items to fap-web and fap-api pr-train manifest/state without starting implementation."
+        },
+        "scope_validation_policy": {
+          "status": "planned",
+          "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-16T14:10:19+08:00",
+          "status": "planned",
+          "summary": "Initialized AUDIT-API-SAFE-TMP-ARTIFACTS as a security audit remediation train item. Implementation has not started."
+        }
+      ]
     }
   }
 }
