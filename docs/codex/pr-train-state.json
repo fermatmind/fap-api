@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-16T14:56:23+08:00",
+  "updated_at": "2026-05-16T15:06:30+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -7295,7 +7295,7 @@
       "depends_on": [
         "AUDIT-WEB-CMS-LINK-XSS:fap-web"
       ],
-      "status": "pr_open",
+      "status": "ci_fix_local_checks_passed",
       "train_scope": "security_audit_remediation",
       "risk_level": "high",
       "title": "fix(security): redact IQ answer keys and locked report payloads",
@@ -7347,6 +7347,28 @@
         "github_pr_created": {
           "status": "pass",
           "evidence": "https://github.com/fermatmind/fap-api/pull/1422"
+        },
+        "github_checks_initial": {
+          "status": "fail_current_pr_scoped_fix_applied",
+          "evidence": [
+            "GitHub PR #1422 failed verify-mbti-legacy and verify-mbti-v2 on Tests\\Unit\\Services\\BigFive\\ResultPageV2\\BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff.",
+            "Failure listed current PR IQ secrecy files backend/app/Services/Attempts/AttemptSubmitService.php and backend/app/Services/Iq/IqResultPayloadRedactor.php as runtime-impacting until the BigFive freeze classifier had an exact IQ redaction-only allowance.",
+            "This was introduced by the current PR and fixed in scope by adding an exact diff allowlist and negative assertion; no BigFive runtime payload changes were allowed."
+          ]
+        },
+        "ci_fix_local_validation": {
+          "status": "pass",
+          "evidence": [
+            "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze --no-ansi: pass (67 tests, 72 assertions)",
+            "php artisan test --filter=Iq --no-ansi: pass (38 tests, 1044 assertions)",
+            "php artisan test --filter=AttemptSubmit --no-ansi: pass (8 tests, 88 assertions)",
+            "php artisan route:list --no-ansi: pass",
+            "vendor/bin/pint --test: pass (3272 files)",
+            "ruby YAML.load_file docs/codex/pr-train.yaml: pass",
+            "python3 -m json.tool docs/codex/pr-train-state.json: pass",
+            "git diff --check: pass",
+            "bash backend/scripts/ci_verify_mbti.sh: pass"
+          ]
         }
       },
       "failure_reason": null,
@@ -7391,6 +7413,11 @@
           "at": "2026-05-16T14:56:23+08:00",
           "status": "pr_open",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1422."
+        },
+        {
+          "at": "2026-05-16T15:06:30+08:00",
+          "status": "github_checks_failed_scoped_fix_local_passed",
+          "summary": "Inspected verify-mbti failures on PR #1422, added exact IQ result secrecy redaction allowance to the BigFive runtime freeze classifier, and re-ran required plus MBTI CI validation locally."
         }
       ]
     },
