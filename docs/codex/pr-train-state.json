@@ -7620,7 +7620,7 @@
       "depends_on": [
         "AUDIT-API-CMS-MEDIA-URL-GUARD"
       ],
-      "status": "committed",
+      "status": "pr_open",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): enforce career rollout authority gates",
@@ -7685,11 +7685,15 @@
           "status": "external_sidecar_candidate",
           "command": "backend/vendor/bin/pint --test",
           "evidence": "After formatting current PR files, full Pint still reports 4 pre-existing style issues in scripts/quality/guard_max_lines.php and tools/gen_* / tools/rewrite_* files. These files are outside the declared allowed_paths and were not modified."
+        },
+        "github_pr": {
+          "status": "opened",
+          "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1424 from codex/audit-api-career-rollout-authority to main."
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": "347817f34b0ca714883c2ea8e9414e31dace78e9",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1424",
+      "commit_sha": "b5fbb2861a57bfaff7422d433d72125c25332603",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -7724,6 +7728,11 @@
           "at": "2026-05-16T16:54:23+08:00",
           "status": "committed",
           "summary": "Committed scoped rollout authority implementation as 347817f34b0ca714883c2ea8e9414e31dace78e9; PR creation and GitHub required checks are pending."
+        },
+        {
+          "at": "2026-05-16T17:00:15+08:00",
+          "status": "pr_open",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1424 for AUDIT-API-CAREER-ROLLOUT-AUTHORITY."
         }
       ]
     },
