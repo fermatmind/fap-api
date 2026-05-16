@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-16T17:33:21+08:00",
+  "updated_at": "2026-05-17T07:28:30+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -7790,7 +7790,7 @@
       "depends_on": [
         "AUDIT-API-CAREER-ROLLOUT-AUTHORITY"
       ],
-      "status": "local_validation_passed_with_external_sidecar_pending",
+      "status": "ready_to_merge",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): fail closed on career readiness artifacts",
@@ -7805,8 +7805,8 @@
           "evidence": "User explicitly authorized adding the 11 security audit train items to fap-web and fap-api pr-train manifest/state without starting implementation."
         },
         "scope_validation_policy": {
-          "status": "planned",
-          "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+          "status": "pass",
+          "evidence": "Changed files are confined to the AUDIT-API-CAREER-ARTIFACT-READINESS manifest scope. The only unrelated worktree entry is untracked .playwright-mcp/, which was not staged or touched."
         },
         "dependency": {
           "status": "pass",
@@ -7839,21 +7839,29 @@
         "diff_check": {
           "status": "pass",
           "evidence": "git diff --check passed."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "GitHub CI run 25975666613 passed hygiene, verify-mbti-legacy, and verify-mbti-v2 for head 88400b47568e64f25c21f985e34b736a20980a2b."
+        },
+        "bigfive_runtime_freeze": {
+          "status": "pass",
+          "evidence": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi passed after folding locale policy into an existing career readiness planner file."
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1426",
+      "commit_sha": "88400b47568e64f25c21f985e34b736a20980a2b",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "sidecar_issues": [
         {
           "id": "AUDIT-API-CAREER-ARTIFACT-READINESS-SIDECAR-01",
-          "status": "pending_github_required_checks",
+          "status": "recorded_external_sidecar",
           "title": "Broad Career test filter has pre-existing first-wave and public career surface failures.",
           "scope_relation": "external_to_current_pr",
-          "evidence": "After current-scope fixes, php artisan test --filter=Career --no-ansi still reports 50 failures in first-wave launch/readiness/dataset/discoverability, career attribution, job list/search, display asset import, and release public content tests. The failures are not in the artifact readiness files changed by this PR.",
+          "evidence": "After current-scope fixes, php artisan test --filter=Career --no-ansi still reports 50 failures in first-wave launch/readiness/dataset/discoverability, career attribution, job list/search, display asset import, and release public content tests. The failures are not in the artifact readiness files changed by this PR. GitHub required checks and scope validation are green, so this external blocker is recorded as a sidecar and does not stop the train.",
           "may_continue_train_after_github_green": true
         }
       ],
@@ -7867,6 +7875,11 @@
           "at": "2026-05-16T17:33:21+08:00",
           "status": "local_validation_passed_with_external_sidecar_pending",
           "summary": "Implemented AUDIT-API-CAREER-ARTIFACT-READINESS. Focused artifact readiness tests, db-context regression tests, route list, full Pint, and git diff --check passed. Broad Career filter still has external pre-existing failures pending sidecar finalization after GitHub required checks pass."
+        },
+        {
+          "at": "2026-05-17T07:28:30+08:00",
+          "status": "ready_to_merge",
+          "summary": "PR #1426 is open with scoped diff, local validation passed, GitHub required checks passed on run 25975666613, and the broad Career filter blocker is recorded as an external sidecar."
         }
       ]
     },
