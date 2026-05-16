@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-16T15:06:30+08:00",
+  "updated_at": "2026-05-16T15:08:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -7295,7 +7295,7 @@
       "depends_on": [
         "AUDIT-WEB-CMS-LINK-XSS:fap-web"
       ],
-      "status": "ci_fix_local_checks_passed",
+      "status": "ci_fix_committed",
       "train_scope": "security_audit_remediation",
       "risk_level": "high",
       "title": "fix(security): redact IQ answer keys and locked report payloads",
@@ -7369,11 +7369,15 @@
             "git diff --check: pass",
             "bash backend/scripts/ci_verify_mbti.sh: pass"
           ]
+        },
+        "ci_fix_commit": {
+          "status": "pass",
+          "evidence": "3084b090bf76d9e7c293355852c56c2ec2809ac1 records the scoped BigFive runtime freeze classifier fix for IQ result secrecy redaction."
         }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1422",
-      "commit_sha": "5154b59e9306539a2bb1424bd367675267809acb",
+      "commit_sha": "3084b090bf76d9e7c293355852c56c2ec2809ac1",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -7418,6 +7422,11 @@
           "at": "2026-05-16T15:06:30+08:00",
           "status": "github_checks_failed_scoped_fix_local_passed",
           "summary": "Inspected verify-mbti failures on PR #1422, added exact IQ result secrecy redaction allowance to the BigFive runtime freeze classifier, and re-ran required plus MBTI CI validation locally."
+        },
+        {
+          "at": "2026-05-16T15:08:00+08:00",
+          "status": "ci_fix_committed",
+          "summary": "Committed scoped GitHub CI fix at 3084b090bf76d9e7c293355852c56c2ec2809ac1."
         }
       ]
     },
