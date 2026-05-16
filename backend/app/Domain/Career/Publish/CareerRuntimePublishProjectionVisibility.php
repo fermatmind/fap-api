@@ -11,6 +11,16 @@ interface CareerRuntimePublishProjectionVisibility
      */
     public function itemForSlug(string $slug, string $locale = 'en'): ?array;
 
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function publicDatasetItems(): array;
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function publicDetailItems(): array;
+
     public function datasetVisible(string $slug): bool;
 
     public function searchVisible(string $slug): bool;

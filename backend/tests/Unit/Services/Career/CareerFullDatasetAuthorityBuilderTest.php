@@ -36,7 +36,7 @@ final class CareerFullDatasetAuthorityBuilderTest extends TestCase
         $authority = app(CareerFullDatasetAuthorityBuilder::class)->build()->toArray();
 
         $this->assertSame('career_full_dataset_authority', $authority['authority_kind'] ?? null);
-        $this->assertSame('career.dataset_authority.full_342_plus_directory_drafts.v1', $authority['authority_version'] ?? null);
+        $this->assertSame('career.dataset_authority.runtime_projection_plus_legacy_342.v2', $authority['authority_version'] ?? null);
         $this->assertSame('career_all_342_occupations_dataset', $authority['dataset_key'] ?? null);
         $this->assertSame('career_all_342', $authority['dataset_scope'] ?? null);
         $this->assertSame('career_tracked_occupation', $authority['member_kind'] ?? null);
@@ -80,12 +80,60 @@ final class CareerFullDatasetAuthorityBuilderTest extends TestCase
         $this->assertSame('目录草稿职业', $draftMember['canonical_title_zh'] ?? null);
     }
 
+    public function test_it_adds_runtime_projection_public_occupations_missing_from_legacy_ledger(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+        $runtimeOccupation = $this->createRuntimeProjectionOccupation('runtime-public-specialist');
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(items: [
+                'runtime-public-specialist' => [
+                    'slug' => 'runtime-public-specialist',
+                    'dataset_visible' => true,
+                    'detail_route_enabled' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                ],
+            ]),
+        );
+
+        $authority = app(CareerFullDatasetAuthorityBuilder::class)->build()->toArray();
+        $members = collect((array) ($authority['members'] ?? []));
+        $runtimeMember = $members->firstWhere('canonical_slug', $runtimeOccupation->canonical_slug);
+
+        $this->assertSame(343, (int) ($authority['member_count'] ?? 0));
+        $this->assertSame(343, (int) data_get($authority, 'tracking_counts.tracked_total_occupations', 0));
+        $this->assertIsArray($runtimeMember);
+        $this->assertSame('public_detail_indexable', $runtimeMember['release_cohort'] ?? null);
+        $this->assertSame('indexable', $runtimeMember['public_index_state'] ?? null);
+        $this->assertSame('strong_index_ready', $runtimeMember['strong_index_decision'] ?? null);
+        $this->assertSame('runtime_publish_projection', $runtimeMember['publish_track'] ?? null);
+        $this->assertSame('Runtime Public Specialist', $runtimeMember['canonical_title_en'] ?? null);
+        $this->assertSame('运行时公开专家', $runtimeMember['canonical_title_zh'] ?? null);
+        $this->assertTrue((bool) ($runtimeMember['included_in_public_dataset'] ?? false));
+    }
+
     public function test_it_excludes_members_when_runtime_projection_marks_dataset_not_visible(): void
     {
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
             new CareerRuntimePublishProjectionVisibilityFixture(datasetVisible: [
                 'data-scientists' => false,
+            ], items: [
+                'actors' => [
+                    'slug' => 'actors',
+                    'dataset_visible' => true,
+                    'detail_route_enabled' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                ],
+                'data-scientists' => [
+                    'slug' => 'data-scientists',
+                    'dataset_visible' => false,
+                    'detail_route_enabled' => false,
+                    'robots_indexable' => false,
+                    'release_gate_pass' => false,
+                ],
             ]),
         );
         $this->materializeCurrentFirstWaveFixture();
@@ -150,5 +198,26 @@ final class CareerFullDatasetAuthorityBuilderTest extends TestCase
         ]);
 
         return $occupation->fresh();
+    }
+
+    private function createRuntimeProjectionOccupation(string $slug): Occupation
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'runtime-public-family',
+            'title_en' => 'Runtime Public Family',
+            'title_zh' => '运行时公开职业族',
+        ]);
+
+        return Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => $slug,
+            'entity_level' => 'occupation',
+            'truth_market' => 'US',
+            'display_market' => 'US',
+            'crosswalk_mode' => 'exact',
+            'canonical_title_en' => 'Runtime Public Specialist',
+            'canonical_title_zh' => '运行时公开专家',
+            'search_h1_zh' => '运行时公开专家',
+        ]);
     }
 }
