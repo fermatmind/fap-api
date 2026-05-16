@@ -20,7 +20,7 @@ final class CareerFullReleaseLedgerProjectionService
     {
         return [
             self::LEDGER_FILENAME => $this->ledgerService
-                ->build($this->verifiedRolloutBatchSlugAuthority->slugs())
+                ->build($this->verifiedRolloutBatchSlugAuthority->slugs(), trustedRolloutAuthority: true)
                 ->toArray(),
         ];
     }

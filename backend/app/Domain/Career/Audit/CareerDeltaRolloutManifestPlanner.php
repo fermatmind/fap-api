@@ -180,6 +180,14 @@ final class CareerDeltaRolloutManifestPlanner
             ]);
         }
 
+        $targetDeltaBlockers = $this->nonEmptyList($targetDeltaPlan['blockers'] ?? []);
+        if ($targetDeltaBlockers !== []) {
+            $blockers[] = $this->blocker('target_delta_blockers_present', [
+                'blocker_count' => count($targetDeltaBlockers),
+                'blocker_reasons' => $this->blockerReasons($targetDeltaBlockers),
+            ]);
+        }
+
         if ((int) ($targetDeltaPlan['target_public_total'] ?? 0) !== $targetPublicTotal) {
             $blockers[] = $this->blocker('target_public_total_mismatch', [
                 'expected' => $targetPublicTotal,
@@ -219,6 +227,29 @@ final class CareerDeltaRolloutManifestPlanner
             $blockers[] = $this->blocker('target_delta_manifest_not_allowed', [
                 'delta_manifest_allowed' => data_get($targetDeltaPlan, 'rollout.delta_manifest_allowed'),
             ]);
+        }
+
+        if (data_get($targetDeltaPlan, 'rollout.apply_allowed') === true || ($targetDeltaPlan['apply_allowed'] ?? null) === true) {
+            $blockers[] = $this->blocker('target_delta_apply_must_not_be_allowed', [
+                'rollout_apply_allowed' => data_get($targetDeltaPlan, 'rollout.apply_allowed'),
+                'apply_allowed' => $targetDeltaPlan['apply_allowed'] ?? null,
+            ]);
+        }
+
+        foreach ($this->nonEmptyList(data_get($targetDeltaPlan, 'selection.rows', [])) as $index => $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $reasons = $this->nonEmptyList($row['reasons'] ?? []);
+            if (($row['source_ready'] ?? true) !== true || $reasons !== []) {
+                $blockers[] = $this->blocker('target_delta_unready_selection_row', [
+                    'row_index' => $index,
+                    'slug' => $row['slug'] ?? null,
+                    'source_ready' => $row['source_ready'] ?? null,
+                    'reasons' => $reasons,
+                ]);
+            }
         }
 
         if ($candidatePrepPlan !== null) {
@@ -316,5 +347,41 @@ final class CareerDeltaRolloutManifestPlanner
             'reason' => $reason,
             'evidence' => $evidence,
         ];
+    }
+
+    /**
+     * @return list<mixed>
+     */
+    private function nonEmptyList(mixed $value): array
+    {
+        if (! is_array($value) || ! array_is_list($value)) {
+            return [];
+        }
+
+        return array_values(array_filter($value, static fn (mixed $item): bool => $item !== null && $item !== '' && $item !== []));
+    }
+
+    /**
+     * @param  list<mixed>  $blockers
+     * @return list<string>
+     */
+    private function blockerReasons(array $blockers): array
+    {
+        $reasons = [];
+        foreach ($blockers as $blocker) {
+            if (is_array($blocker) && is_scalar($blocker['reason'] ?? null)) {
+                $reason = trim((string) $blocker['reason']);
+                if ($reason !== '') {
+                    $reasons[] = $reason;
+                }
+            } elseif (is_scalar($blocker)) {
+                $reason = trim((string) $blocker);
+                if ($reason !== '') {
+                    $reasons[] = $reason;
+                }
+            }
+        }
+
+        return array_values(array_unique($reasons));
     }
 }

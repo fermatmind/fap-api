@@ -80,6 +80,37 @@ final class CareerGenerateCanonicalProgressiveRolloutManifestCommandTest extends
         $this->assertFalse($payload['apply_allowed']);
     }
 
+    public function test_rejects_progressive_delta_policy_blockers_and_unready_selection_rows(): void
+    {
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeProgressiveTargetDelta(
+                ['current-001'],
+                ['delta-001'],
+                2,
+                extra: [
+                    'blockers' => [['reason' => 'audit_policy_blocked']],
+                    'selection' => [
+                        'rows' => [[
+                            'slug' => 'delta-001',
+                            'source_ready' => false,
+                            'reasons' => ['blocked_governance'],
+                        ]],
+                    ],
+                ],
+            ),
+            '--current-public-total' => 1,
+            '--target-public-total' => 2,
+            '--expect-delta-count' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $reasons = array_column($payload['blockers'], 'reason');
+        $this->assertContains('target_delta_blockers_present', $reasons);
+        $this->assertContains('target_delta_unready_selection_row', $reasons);
+        $this->assertFalse($payload['dry_run_allowed']);
+    }
+
     public function test_rejects_duplicate_delta_slugs(): void
     {
         $exitCode = $this->callCommand([
@@ -149,12 +180,17 @@ final class CareerGenerateCanonicalProgressiveRolloutManifestCommandTest extends
      * @param  list<string>  $current
      * @param  list<string>  $delta
      */
-    private function writeProgressiveTargetDelta(array $current, array $delta, int $target, string $status = 'pass'): string
-    {
+    private function writeProgressiveTargetDelta(
+        array $current,
+        array $delta,
+        int $target,
+        string $status = 'pass',
+        array $extra = [],
+    ): string {
         sort($current);
         sort($delta);
 
-        return $this->writeJson('target-delta', [
+        return $this->writeJson('target-delta', array_replace_recursive([
             'schema_version' => 'career_progressive_cohort_delta_plan.v1',
             'status' => $status,
             'read_only' => true,
@@ -171,7 +207,7 @@ final class CareerGenerateCanonicalProgressiveRolloutManifestCommandTest extends
                 'delta_manifest_allowed' => true,
                 'apply_allowed' => false,
             ],
-        ]);
+        ], $extra));
     }
 
     /**

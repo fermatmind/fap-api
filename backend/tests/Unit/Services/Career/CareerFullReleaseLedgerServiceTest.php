@@ -6,10 +6,13 @@ namespace Tests\Unit\Services\Career;
 
 use App\Domain\Career\Publish\CareerFullReleaseLedgerProjectionService;
 use App\Domain\Career\Publish\CareerFullReleaseLedgerService;
+use App\Domain\Career\Publish\CareerRolloutReportAuthoritySigner;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\IndexState;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use DateTimeImmutable;
+use DateTimeZone;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
@@ -103,7 +106,7 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
         $this->assertContains($strictMember['release_cohort'] ?? null, ['review_needed', 'family_handoff']);
         $this->assertArrayNotHasKey('explicit_rollout_batch', (array) ($strictMember['evidence_refs'] ?? []));
 
-        $batchLedger = $service->build([$slug])->toArray();
+        $batchLedger = $service->build([$slug], trustedRolloutAuthority: true)->toArray();
         $batchMember = collect((array) ($batchLedger['members'] ?? []))
             ->firstWhere('canonical_slug', $slug);
 
@@ -115,6 +118,27 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
             'current_explicit_batch_only',
             data_get($batchMember, 'evidence_refs.explicit_rollout_batch.scope')
         );
+    }
+
+    public function test_caller_supplied_rollout_batch_slugs_are_ignored_without_trusted_authority(): void
+    {
+        $service = app(CareerFullReleaseLedgerService::class);
+        $baseLedger = $service->build()->toArray();
+        $baseMember = collect((array) ($baseLedger['members'] ?? []))
+            ->first(static fn (array $member): bool => in_array($member['release_cohort'] ?? '', ['review_needed', 'family_handoff'], true));
+
+        $this->assertIsArray($baseMember);
+        $slug = (string) $baseMember['canonical_slug'];
+
+        $this->materializeIndexedOccupation($slug);
+
+        $ledger = $service->build([$slug])->toArray();
+        $member = collect((array) ($ledger['members'] ?? []))
+            ->firstWhere('canonical_slug', $slug);
+
+        $this->assertIsArray($member);
+        $this->assertContains($member['release_cohort'] ?? null, ['review_needed', 'family_handoff']);
+        $this->assertArrayNotHasKey('explicit_rollout_batch', (array) ($member['evidence_refs'] ?? []));
     }
 
     public function test_explicit_rollout_batch_candidate_state_projects_as_conservative_candidate_for_tracked_members(): void
@@ -129,7 +153,7 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
 
         $this->materializeIndexedOccupation($slug, 'promotion_candidate');
 
-        $batchLedger = $service->build([$slug])->toArray();
+        $batchLedger = $service->build([$slug], trustedRolloutAuthority: true)->toArray();
         $batchMember = collect((array) ($batchLedger['members'] ?? []))
             ->firstWhere('canonical_slug', $slug);
 
@@ -155,7 +179,7 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
         $this->materializeIndexedOccupation($slug);
 
         $projection = (new CareerRuntimePublishProjectionService)->buildFromLedgerArray(
-            $ledgerService->build([$slug])->toArray()
+            $ledgerService->build([$slug], trustedRolloutAuthority: true)->toArray()
         );
         $rows = array_values(array_filter(
             (array) ($projection['items'] ?? []),
@@ -190,7 +214,7 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
         $slug = 'financial-analysts';
         $this->materializeIndexedOccupation($slug);
 
-        $ledger = app(CareerFullReleaseLedgerService::class)->build([$slug])->toArray();
+        $ledger = app(CareerFullReleaseLedgerService::class)->build([$slug], trustedRolloutAuthority: true)->toArray();
         $member = collect((array) ($ledger['members'] ?? []))->firstWhere('canonical_slug', $slug);
 
         $this->assertIsArray($member);
@@ -209,7 +233,7 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
         $slug = 'financial-analysts';
         $this->materializeIndexedOccupation($slug, 'promotion_candidate');
 
-        $ledger = app(CareerFullReleaseLedgerService::class)->build([$slug])->toArray();
+        $ledger = app(CareerFullReleaseLedgerService::class)->build([$slug], trustedRolloutAuthority: true)->toArray();
         $member = collect((array) ($ledger['members'] ?? []))->firstWhere('canonical_slug', $slug);
 
         $this->assertIsArray($member);
@@ -253,7 +277,7 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
             ],
             'rollback_required' => false,
             'quarantine_required' => false,
-        ]);
+        ], sign: true);
 
         $projected = app(CareerFullReleaseLedgerProjectionService::class)->build();
         $ledger = $projected[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? [];
@@ -315,6 +339,92 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
         $this->assertArrayNotHasKey('explicit_rollout_batch', (array) ($member['evidence_refs'] ?? []));
     }
 
+    public function test_unsigned_successful_rollout_batch_execution_is_ignored_by_default_projection_authority(): void
+    {
+        $baseLedger = app(CareerFullReleaseLedgerService::class)->build()->toArray();
+        $baseMember = collect((array) ($baseLedger['members'] ?? []))
+            ->first(static fn (array $member): bool => in_array($member['release_cohort'] ?? '', ['review_needed', 'family_handoff'], true));
+
+        $this->assertIsArray($baseMember);
+        $slug = (string) $baseMember['canonical_slug'];
+
+        $this->materializeIndexedOccupation($slug);
+        $this->writeRolloutExecutionReport('unsigned-success.json', [
+            'status' => 'promoted_success',
+            'batch_id' => 'career_80_delta_canonical_001',
+            'promoted_slugs' => [$slug],
+            'promoted_locale_rows' => 2,
+            'dry_run' => false,
+            'writes_database' => true,
+            'write_verified' => true,
+            'persistence_check' => [
+                'expected' => 2,
+                'found_published' => 2,
+                'not_published_count' => 0,
+            ],
+            'post_promotion_validation' => [
+                'status' => 'pass',
+            ],
+            'release_gate' => [
+                'release_gate_pass_count' => 2,
+                'release_gate_blocked_count' => 0,
+            ],
+            'rollback_required' => false,
+            'quarantine_required' => false,
+        ]);
+
+        $projected = app(CareerFullReleaseLedgerProjectionService::class)->build();
+        $ledger = $projected[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? [];
+        $member = collect((array) ($ledger['members'] ?? []))->firstWhere('canonical_slug', $slug);
+
+        $this->assertIsArray($member);
+        $this->assertContains($member['release_cohort'] ?? null, ['review_needed', 'family_handoff']);
+        $this->assertArrayNotHasKey('explicit_rollout_batch', (array) ($member['evidence_refs'] ?? []));
+    }
+
+    public function test_stale_signed_rollout_batch_execution_is_ignored_by_default_projection_authority(): void
+    {
+        $baseLedger = app(CareerFullReleaseLedgerService::class)->build()->toArray();
+        $baseMember = collect((array) ($baseLedger['members'] ?? []))
+            ->first(static fn (array $member): bool => in_array($member['release_cohort'] ?? '', ['review_needed', 'family_handoff'], true));
+
+        $this->assertIsArray($baseMember);
+        $slug = (string) $baseMember['canonical_slug'];
+
+        $this->materializeIndexedOccupation($slug);
+        $this->writeRolloutExecutionReport('stale-signed-success.json', [
+            'status' => 'promoted_success',
+            'batch_id' => 'career_80_delta_canonical_001',
+            'promoted_slugs' => [$slug],
+            'promoted_locale_rows' => 2,
+            'dry_run' => false,
+            'writes_database' => true,
+            'write_verified' => true,
+            'persistence_check' => [
+                'expected' => 2,
+                'found_published' => 2,
+                'not_published_count' => 0,
+            ],
+            'post_promotion_validation' => [
+                'status' => 'pass',
+            ],
+            'release_gate' => [
+                'release_gate_pass_count' => 2,
+                'release_gate_blocked_count' => 0,
+            ],
+            'rollback_required' => false,
+            'quarantine_required' => false,
+        ], sign: true, signedAt: new DateTimeImmutable('-30 days', new DateTimeZone('UTC')), expiresAt: new DateTimeImmutable('-16 days', new DateTimeZone('UTC')));
+
+        $projected = app(CareerFullReleaseLedgerProjectionService::class)->build();
+        $ledger = $projected[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? [];
+        $member = collect((array) ($ledger['members'] ?? []))->firstWhere('canonical_slug', $slug);
+
+        $this->assertIsArray($member);
+        $this->assertContains($member['release_cohort'] ?? null, ['review_needed', 'family_handoff']);
+        $this->assertArrayNotHasKey('explicit_rollout_batch', (array) ($member['evidence_refs'] ?? []));
+    }
+
     private function materializeIndexedOccupation(string $slug, string $indexState = 'indexed'): void
     {
         $family = OccupationFamily::query()->create([
@@ -352,10 +462,19 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
     /**
      * @param  array<string, mixed>  $payload
      */
-    private function writeRolloutExecutionReport(string $filename, array $payload): void
-    {
+    private function writeRolloutExecutionReport(
+        string $filename,
+        array $payload,
+        bool $sign = false,
+        ?DateTimeImmutable $signedAt = null,
+        ?DateTimeImmutable $expiresAt = null,
+    ): void {
         $dir = storage_path('app/private/career_canonical_rollout_batch_executions');
         File::ensureDirectoryExists($dir);
+        if ($sign) {
+            $payload['authority'] = app(CareerRolloutReportAuthoritySigner::class)->sign($payload, $signedAt, $expiresAt);
+        }
+
         File::put(
             $dir.DIRECTORY_SEPARATOR.$filename,
             (string) json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)

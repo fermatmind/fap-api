@@ -81,6 +81,33 @@ final class CareerGenerateCanonicalDeltaRolloutManifestCommandTest extends TestC
         $this->assertFalse($payload['dry_run_allowed']);
     }
 
+    public function test_target_delta_policy_blockers_and_apply_authority_block_manifest(): void
+    {
+        $path = $this->writeTargetDelta(
+            ['baseline-001'],
+            ['delta-001'],
+            target: 2,
+            extra: [
+                'blockers' => [['reason' => 'audit_policy_blocked']],
+                'rollout' => ['apply_allowed' => true],
+            ],
+        );
+
+        $exitCode = $this->callCommand([
+            '--target-delta' => $path,
+            '--target-public-total' => 2,
+            '--expect-delta-count' => 1,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $reasons = array_column($payload['blockers'], 'reason');
+        $this->assertContains('target_delta_blockers_present', $reasons);
+        $this->assertContains('target_delta_apply_must_not_be_allowed', $reasons);
+        $this->assertFalse($payload['dry_run_allowed']);
+        $this->assertFalse($payload['apply_allowed']);
+    }
+
     public function test_rejects_baseline_slug_in_delta_list(): void
     {
         $exitCode = $this->callCommand([
@@ -167,12 +194,17 @@ final class CareerGenerateCanonicalDeltaRolloutManifestCommandTest extends TestC
      * @param  list<string>  $baseline
      * @param  list<string>  $delta
      */
-    private function writeTargetDelta(array $baseline, array $delta, int $target, string $status = 'pass'): string
-    {
+    private function writeTargetDelta(
+        array $baseline,
+        array $delta,
+        int $target,
+        string $status = 'pass',
+        array $extra = [],
+    ): string {
         sort($baseline);
         sort($delta);
 
-        return $this->writeJson('target-delta', [
+        return $this->writeJson('target-delta', array_replace_recursive([
             'schema_version' => 'career_80_target_delta.v1',
             'status' => $status,
             'target_public_total' => $target,
@@ -185,7 +217,7 @@ final class CareerGenerateCanonicalDeltaRolloutManifestCommandTest extends TestC
                 'delta_manifest_allowed' => true,
                 'apply_allowed' => false,
             ],
-        ]);
+        ], $extra));
     }
 
     private function writeCandidatePrepPlan(int $deltaCount): string

@@ -631,6 +631,33 @@ final class CareerProgressiveReadinessSelector
             }
         }
 
+        foreach (['blockers', 'audit_policy_blockers', 'policy_blockers', 'readiness_blockers', 'governance_blockers'] as $key) {
+            if (isset($row->raw[$key]) && is_array($row->raw[$key]) && $row->raw[$key] !== []) {
+                $reasons[] = $key;
+            }
+        }
+
+        $readinessStatus = strtolower(trim((string) ($row->raw['readiness_status'] ?? $row->raw['readiness'] ?? '')));
+        if (in_array($readinessStatus, [
+            'blocked',
+            'blocked_override_eligible',
+            'blocked_not_safely_remediable',
+            'review_required',
+            'family_handoff_required',
+            'not_ready',
+            'unready',
+        ], true)) {
+            $reasons[] = 'readiness_status_'.$readinessStatus;
+        }
+
+        if (($row->raw['rollout_candidate_eligible'] ?? true) === false) {
+            $reasons[] = 'rollout_candidate_not_eligible';
+        }
+
+        if (($row->raw['index_eligible'] ?? true) === false) {
+            $reasons[] = 'index_not_eligible';
+        }
+
         return array_values(array_unique($reasons));
     }
 }

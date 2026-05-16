@@ -957,7 +957,7 @@
       "repo": "fap-api",
       "branch": "codex/iq-item-schema-answer-key-scoring-spec",
       "title": "feat(iq): add formal item schema answer key and scoring contract",
-      "status": "planned",
+      "status": "local_validation_with_external_sidecars",
       "depends_on": [
         "iq-identity-and-metadata-cleanup"
       ]
@@ -7438,7 +7438,7 @@
       "depends_on": [
         "AUDIT-WEB-LLMS-FANOUT-BUDGET:fap-web"
       ],
-      "status": "ready_to_merge",
+      "status": "merged",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): enforce public media URL guard for CMS media and JSON-LD",
@@ -7530,14 +7530,19 @@
           "status": "pass",
           "command": "gh pr checks 1423 --repo fermatmind/fap-api --watch --interval 20",
           "evidence": "hygiene, verify-mbti-v2, and verify-mbti-legacy all passed for PR #1423 after the scoped freeze-classifier fix."
+        },
+        "post_merge_revalidation": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Support/PublicMediaUrlGuardTest.php tests/Unit/Services/Cms/MediaAssetStorageSyncServiceTest.php tests/Unit/Services/Cms/ArticleSeoServiceMediaGuardTest.php --no-ansi && php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi && git diff --check",
+          "evidence": "Post-merge focused media guard tests passed with 7 tests / 39 assertions, BigFiveResultPageV2CoreBodyPreview passed with 79 tests / 426 assertions, and git diff --check passed on synchronized main."
         }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1423",
-      "commit_sha": "4b3aa1a93817d3b54d292dfc9bb5b81c28b27f96",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "702a6cc1ef05d0398da3f6602879eb4675a54a3a",
+      "merged_at": "2026-05-16T08:39:27Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "id": "AUDIT-API-CMS-MEDIA-URL-GUARD-SIDECAR-01",
@@ -7599,6 +7604,11 @@
           "at": "2026-05-16T16:33:21+08:00",
           "status": "ready_to_merge",
           "summary": "GitHub required checks passed after the scoped CI fix. Broad Media/Article filter failures are recorded as external sidecar issues because they were not introduced by this PR, required GitHub checks are green, and scope validation is green."
+        },
+        {
+          "at": "2026-05-16T16:45:00+08:00",
+          "status": "merged",
+          "summary": "PR #1423 squash-merged as 702a6cc1ef05d0398da3f6602879eb4675a54a3a. origin/main contains the merge commit, local main was fast-forwarded, remote branch was deleted, local task branch was deleted, and post-merge focused revalidation passed."
         }
       ]
     },
@@ -7628,6 +7638,53 @@
         "scope_validation_policy": {
           "status": "planned",
           "evidence": "External blockers may be recorded as sidecar only when not introduced by the current PR, GitHub required checks are green, and scoped validation is green."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "AUDIT-API-CMS-MEDIA-URL-GUARD merged as fap-api#1423 with merge commit 702a6cc1ef05d0398da3f6602879eb4675a54a3a, and origin/main contains the merge commit."
+        },
+        "branch_preflight": {
+          "status": "pass",
+          "evidence": "Created codex/audit-api-career-rollout-authority from fap-api origin/main at 702a6cc1ef05d0398da3f6602879eb4675a54a3a. Unrelated untracked .playwright-mcp/ remains isolated and unstaged."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to backend/app/Domain/Career, backend/app/Console/Commands/Career* impact via tests only, backend/tests/Feature/Console, backend/tests/Unit/Domain/Career, backend/tests/Unit/Services/Career, and docs/codex state."
+        },
+        "targeted_rollout_authority_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Console/CareerExecuteCanonicalRolloutBatchTest.php tests/Unit/Services/Career/CanonicalBatchPromotionExecutorServiceTest.php tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php --no-ansi",
+          "evidence": "40 tests passed, covering trusted explicit rollout authority, unsigned/stale report rejection, and command/executor promotion guards."
+        },
+        "targeted_delta_progressive_tests": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Console/CareerGenerateCanonicalDeltaRolloutManifestCommandTest.php tests/Feature/Console/CareerGenerateCanonicalProgressiveRolloutManifestCommandTest.php tests/Unit/Domain/Career/Audit/CareerProgressiveReadinessSelectionTest.php --no-ansi",
+          "evidence": "36 tests passed, covering target delta blockers, apply-authority rejection, unready selection-row rejection, and progressive source row exclusion."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully."
+        },
+        "scoped_pint": {
+          "status": "pass",
+          "command": "backend/vendor/bin/pint --test <changed PHP files>",
+          "evidence": "Scoped Pint check passed for the 11 changed PHP files after formatting current PR files."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check",
+          "evidence": "No whitespace errors."
+        },
+        "manifest_career_tests": {
+          "status": "external_sidecar_candidate",
+          "command": "php artisan test --filter=Career --no-ansi",
+          "evidence": "Current-scope focused Career rollout tests passed. The broad Career filter completed with 1248 passed and 48 failed in existing first-wave/API/display-surface/public-content tests such as FirstWaveReadinessApi, CareerJobListApi, CareerSearchApi, CareerImportActorsDisplayAssetCommand, CareerImportSelectedDisplayAssetsCommand, and ReleaseVerifyPublicContentCommand. These failures are outside the declared AUDIT-API-CAREER-ROLLOUT-AUTHORITY changed files."
+        },
+        "manifest_pint_all": {
+          "status": "external_sidecar_candidate",
+          "command": "backend/vendor/bin/pint --test",
+          "evidence": "After formatting current PR files, full Pint still reports 4 pre-existing style issues in scripts/quality/guard_max_lines.php and tools/gen_* / tools/rewrite_* files. These files are outside the declared allowed_paths and were not modified."
         }
       },
       "failure_reason": null,
@@ -7636,12 +7693,32 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+        {
+          "id": "AUDIT-API-CAREER-ROLLOUT-AUTHORITY-SIDECAR-01",
+          "title": "Broad Career test filter has pre-existing first-wave/API/display-surface failures",
+          "scope_relation": "external_to_current_pr",
+          "evidence": "php artisan test --filter=Career --no-ansi reports 48 failures in existing first-wave readiness, discoverability, launch tier, companion links, job list/search APIs, display import, and release public content tests. Focused tests for the current rollout-authority code paths pass, and failing files are outside this PR scope.",
+          "next_goal": "Repair broad Career first-wave/API/display-surface fixtures in a dedicated Career test hygiene PR."
+        },
+        {
+          "id": "AUDIT-API-CAREER-ROLLOUT-AUTHORITY-SIDECAR-02",
+          "title": "Full Pint reports pre-existing scripts/tools style issues",
+          "scope_relation": "external_to_current_pr",
+          "evidence": "backend/vendor/bin/pint --test reports style issues in scripts/quality/guard_max_lines.php, tools/gen_facets_mbti_v022.php, tools/gen_manifest_mbti_v022.php, and tools/rewrite_mbti_questions_v022.php after current PR files were formatted and scoped Pint passed.",
+          "next_goal": "Format or exclude legacy scripts/tools in a dedicated tooling style PR."
+        }
+      ],
       "history": [
         {
           "at": "2026-05-16T14:10:19+08:00",
           "status": "planned",
           "summary": "Initialized AUDIT-API-CAREER-ROLLOUT-AUTHORITY as a security audit remediation train item. Implementation has not started."
+        },
+        {
+          "at": "2026-05-16T16:53:16+08:00",
+          "status": "local_validation_with_external_sidecars",
+          "summary": "Implemented scoped rollout authority hardening. Focused rollout authority, executor, ledger, delta manifest, progressive manifest, progressive selector, route:list, scoped Pint, and diff checks passed. Broad Career filter and full Pint have external pre-existing failures recorded as sidecar candidates pending GitHub required checks."
         }
       ]
     },
