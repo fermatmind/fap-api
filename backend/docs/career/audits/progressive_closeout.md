@@ -33,4 +33,6 @@ The closeout artifact records:
 
 The command refuses closeout when the live acceptance artifact is not `status=pass`, `accepted=true`, and `writes_database=false`, when failures are present, when baseline plus delta does not equal the target total, or when the total slug artifact path is missing.
 
+For `target_public_total=2786`, closeout also refuses partition-accounting-only evidence. The live acceptance artifact must prove the product-visible surface: directory `member_count=2786`, career jobs item count `2786`, detail-ready / `public_detail_indexable_count=2786`, and `5572` published locale rows. A final partition total of `2786` is not sufficient when public routes or detail pages remain disabled.
+
 It does not run readiness, candidate preparation, rollout dry-run, rollout apply, live crawl, backfill, rollback, quarantine, deploy, or any database mutation.

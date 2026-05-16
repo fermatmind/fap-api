@@ -131,6 +131,15 @@ final class CareerProgressiveCohortCloseoutPlanner
             $blockers[] = $this->blocker('total_slugs_path_missing', []);
         }
 
+        $blockers = [
+            ...$blockers,
+            ...(new CareerFullVisiblePublicationGate)->blockers(
+                liveAcceptance: $liveAcceptance,
+                targetPublicTotal: $targetPublicTotal,
+                localeCount: $this->localeCount($liveAcceptance),
+            ),
+        ];
+
         return $blockers;
     }
 
@@ -154,6 +163,11 @@ final class CareerProgressiveCohortCloseoutPlanner
             'unexpected_exposure' => $liveAcceptance['unexpected_exposure'] ?? null,
             'failures_count' => $this->countList($liveAcceptance['failures'] ?? []),
             'sidecars_count' => $this->countList($liveAcceptance['sidecars'] ?? []),
+            'full_visible_publication_gate' => (new CareerFullVisiblePublicationGate)->summary(
+                liveAcceptance: $liveAcceptance,
+                targetPublicTotal: (int) ($liveAcceptance['target_public_total'] ?? $liveAcceptance['expected_slugs'] ?? 0),
+                localeCount: $this->localeCount($liveAcceptance),
+            ),
         ];
     }
 

@@ -44,4 +44,6 @@ php artisan release:verify-public-content \
 - Career dataset/jobs API 当前可见计数会被记录为 `dataset_jobs_api_count`，不再与 workbook row count 混用
 - 如提供 `--public-resolution-ledger`，职业 public-resolution ledger 必须满足 2786 terminal rows、793 canonical public assets、1993 governed non-public rows，并保持 sitemap/llms/llms-full 与 held/software-developers leakage 为 0
 
-Career dataset/jobs API 计数不是 2786 workbook rows，也不是 793 canonical public assets。不要把 `member_count` 或 job list `item_count` 与 public-resolution ledger 口径互相比较。
+Career dataset/jobs API 计数默认不是 2786 workbook rows，也不是 canonical public-resolution ledger 的分区会计数。普通发布不得把 `member_count` 或 job list `item_count` 与 ledger 口径互相混用。
+
+例外：如果发布声明是“2786 个职业资产已上线 / 2786 个职业可见 / 2786 个职业可看详情”，验收必须改用产品真实口径，要求 public career directory `member_count=2786`、career jobs API item count `2786`、detail-ready / `public_detail_indexable_count=2786`，并验证 `5572` locale rows。仅有 `final_public_accounted_total=2786` 的 partition accounting 不得作为全量公开详情上线证据。

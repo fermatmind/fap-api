@@ -90,12 +90,44 @@ final class CareerProgressiveCohortCloseoutPlannerTest extends TestCase
         $this->assertContains('total_slugs_path_missing', array_column($result['blockers'], 'reason'));
     }
 
+    public function test_refuses_2786_closeout_when_acceptance_only_proves_partition_accounting(): void
+    {
+        $artifact = $this->liveAcceptance(target: 2786, baseline: 800, delta: 1986);
+        unset($artifact['product_surface']);
+        $artifact['canonical_public_slug_count'] = 1122;
+        $artifact['canonical_public_locale_rows'] = 2244;
+        $artifact['partition_accounting'] = [
+            'current_public_baseline' => 800,
+            'canonical_rollout_delta' => 322,
+            'cn_proxy_public_owner_count' => 1663,
+            'software_manual_hold_count' => 1,
+            'final_public_accounted_total' => 2786,
+            'final_public_shortfall' => 0,
+        ];
+        $artifact['found_published'] = 2244;
+        $artifact['projection_truth']['found_published'] = 2244;
+        $artifact['release_gate']['pass_count'] = 2244;
+
+        $result = (new CareerProgressiveCohortCloseoutPlanner)->closeout(
+            liveAcceptance: $artifact,
+            totalSlugsPath: '/tmp/career_2786_total_slugs.txt',
+        )->toArray();
+        $reasons = array_column($result['blockers'], 'reason');
+
+        $this->assertSame('blocked', $result['status']);
+        $this->assertFalse($result['accepted']);
+        $this->assertContains('product_directory_member_count_missing', $reasons);
+        $this->assertContains('product_detail_ready_count_missing', $reasons);
+        $this->assertContains('product_found_published_locale_rows_mismatch', $reasons);
+        $this->assertContains('partition_accounting_not_product_publication_evidence', $reasons);
+    }
+
     /**
      * @return array<string, mixed>
      */
     private function liveAcceptance(int $target, int $baseline, int $delta): array
     {
-        return [
+        $artifact = [
             'schema_version' => 'career_80_total_live_acceptance.v1',
             'status' => 'pass',
             'accepted' => true,
@@ -120,5 +152,19 @@ final class CareerProgressiveCohortCloseoutPlannerTest extends TestCase
             'failures' => [],
             'sidecars' => [],
         ];
+
+        if ($target === 2786) {
+            $artifact['product_surface'] = [
+                'directory_member_count' => 2786,
+                'career_jobs_item_count' => 2786,
+                'detail_ready_count' => 2786,
+                'public_detail_indexable_count' => 2786,
+                'canonical_public_slug_count' => 2786,
+            ];
+            $artifact['found_published'] = 5572;
+            $artifact['release_gate']['pass_count'] = 5572;
+        }
+
+        return $artifact;
     }
 }
