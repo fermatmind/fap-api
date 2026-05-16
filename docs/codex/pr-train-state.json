@@ -1876,7 +1876,7 @@
       "branch": "fix/career-expansion-manifest-train-audit11",
       "title": "feat(api): add career canonical expansion manifest train generator",
       "name": "Career Canonical Expansion Manifest Train Generator",
-      "status": "pr_open",
+      "status": "ci_fix_local_checks_passed",
       "depends_on": [
         "AUDIT-10"
       ],
@@ -7649,7 +7649,7 @@
         },
         "scope_validation": {
           "status": "pass",
-          "evidence": "Changed files are confined to backend/app/Domain/Career, backend/app/Console/Commands/Career* impact via tests only, backend/tests/Feature/Console, backend/tests/Unit/Domain/Career, backend/tests/Unit/Services/Career, and docs/codex state."
+          "evidence": "Changed files are confined to backend/app/Domain/Career, backend/app/Console/Commands/Career* impact via tests only, backend/tests/Feature/Console, backend/tests/Unit/Domain/Career, backend/tests/Unit/Services/Career, the BigFive runtime freeze classifier test file explicitly added to this item scope, and docs/codex state/manifest."
         },
         "targeted_rollout_authority_tests": {
           "status": "pass",
@@ -7689,11 +7689,25 @@
         "github_pr": {
           "status": "opened",
           "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1424 from codex/audit-api-career-rollout-authority to main."
+        },
+        "github_checks_initial": {
+          "status": "fail_current_pr_scope",
+          "evidence": "GitHub verify-mbti-legacy and verify-mbti-v2 failed because BigFiveResultPageV2CoreBodyPreviewTest flagged the new backend/app/Domain/Career/Publish/CareerRolloutReportAuthoritySigner.php path. This was introduced by the current PR and fixed by classifying the signer as a Career runtime publish projection owner file."
+        },
+        "ci_fix_validation": {
+          "status": "pass",
+          "command": "php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi && php artisan test tests/Feature/Console/CareerExecuteCanonicalRolloutBatchTest.php tests/Unit/Services/Career/CanonicalBatchPromotionExecutorServiceTest.php tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php --no-ansi",
+          "evidence": "BigFive runtime freeze classifier passed with 79 tests / 426 assertions; focused Career rollout authority tests passed with 40 tests / 228 assertions after the scoped CI fix."
+        },
+        "mbti_ci_gate_after_fix": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Local CI-equivalent MBTI gate completed successfully after classifying the Career rollout authority signer. Generated Big Five compiled artifacts produced by verification were restored because they are outside PR scope."
         }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1424",
-      "commit_sha": "b5fbb2861a57bfaff7422d433d72125c25332603",
+      "commit_sha": "6d161b5782538f1871c1a14246bec01ed2f844b0",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -7733,6 +7747,11 @@
           "at": "2026-05-16T17:00:15+08:00",
           "status": "pr_open",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1424 for AUDIT-API-CAREER-ROLLOUT-AUTHORITY."
+        },
+        {
+          "at": "2026-05-16T17:08:34+08:00",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "GitHub verify-mbti checks failed on a current-scope freeze-classifier gap for the new CareerRolloutReportAuthoritySigner.php path. Added it to the Career runtime publish projection classifier, extended the item manifest scope to that classifier test, and verified BigFiveResultPageV2CoreBodyPreview, focused Career rollout authority tests, scoped Pint, diff check, and backend/scripts/ci_verify_mbti.sh locally."
         }
       ]
     },
