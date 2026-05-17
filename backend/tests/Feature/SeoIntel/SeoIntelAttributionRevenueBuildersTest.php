@@ -73,7 +73,13 @@ final class SeoIntelAttributionRevenueBuildersTest extends TestCase
             'raw_ip',
             'raw_cookie',
         ];
-        $paths = glob(base_path('database/migrations/*seo_*daily*'));
+        $paths = [
+            ...glob(base_path('database/migrations/*seo_event_funnel_daily*')),
+            ...glob(base_path('database/migrations/*seo_landing_attribution_daily*')),
+            ...glob(base_path('database/migrations/*seo_revenue_daily*')),
+            ...glob(base_path('database/migrations/*seo_cluster_daily*')),
+            ...glob(base_path('database/migrations/*seo_consent_daily*')),
+        ];
 
         $this->assertCount(5, $paths);
 

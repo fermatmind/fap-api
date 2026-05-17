@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T16:23:00+08:00",
+  "updated_at": "2026-05-17T18:12:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -9165,7 +9165,7 @@
       "depends_on": [
         "SEO-DASH-03A"
       ],
-      "status": "in_progress",
+      "status": "merged",
       "train_scope": "search_intelligence_backend_attribution_revenue_builders",
       "risk_level": "medium_disabled_aggregate_schema",
       "title": "feat(seo-intel): add attribution and revenue builders",
@@ -9234,11 +9234,11 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1440",
+      "commit_sha": "18815f465ee236e3245a117aadcd2175af9eba99",
+      "merged_at": "2026-05-17T09:29:52Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -9275,9 +9275,133 @@
           "at": "2026-05-17T16:23:00+08:00",
           "status": "pr_open_github_checks_passed",
           "summary": "GitHub checks passed after the scoped runtime freeze classifier fix: hygiene, verify-mbti-v2, and verify-mbti-legacy. PR remains open for human review; auto-merge is disabled."
+        },
+        {
+          "at": "2026-05-17T17:20:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled SEO-DASH-03B after post-merge cleanup: GitHub PR #1440 is merged, origin/main contains merge commit 18815f465ee236e3245a117aadcd2175af9eba99, and local/remote task branches were cleaned up."
         }
       ],
       "next_pr": "SEO-DASH-04A"
+    },
+    "SEO-DASH-04A": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-04a-gsc-disabled-collector",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-03B"
+      ],
+      "status": "pr_open_github_checks_passed",
+      "train_scope": "search_intelligence_gsc_disabled_collector",
+      "risk_level": "medium_disabled_search_channel_schema",
+      "title": "feat(seo-intel): add disabled GSC collector",
+      "name": "GSC disabled collector",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-04A with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-03B is merged in fap-api PR #1440, and origin/main contains merge commit 18815f465ee236e3245a117aadcd2175af9eba99."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "gsc_credentials": {
+          "status": "human_confirm_required"
+        },
+        "external_api_credentials_required": {
+          "status": "human_confirm_required"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to allowed seo_intel config, seo_gsc_daily migration, SeoIntel GSC collector/normalizer/classifier integration, focused SeoIntel tests, docs/generated artifact, and docs/codex PR train metadata. No fap-web runtime, payment/order/report/email/recommendation/scoring, deploy/env, scheduler, queue, external API, sitemap, llms, Node2/Node3 runtime, Baidu/IndexNow live connector, or Metabase files changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "48 tests passed with 696 assertions after the scoped runtime freeze classifier fix."
+        },
+        "gsc_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=gsc_foundation --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, credentials_required=false, gsc_live_api_enabled=false, scheduler_enabled=false, query_purchase_attribution_allowed=false, and source_engine=google."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3324 files after scoped runtime freeze classifier fix."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "bigfive_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+          "evidence": "76 runtime_freeze_classifier tests passed with 81 assertions after adding explicit SEO-DASH-04A GSC foundation coverage."
+        },
+        "json_yaml": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -m json.tool backend/docs/seo/generated/seo-intel-gsc-collector.v1.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\""
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "After adding scoped runtime freeze classifier coverage, PR #1442 GitHub checks passed: hygiene, verify-mbti-v2, and verify-mbti-legacy."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1442",
+      "commit_sha": "5d10f5b4676ff8269564e31e09513c65d3d4685c",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T17:20:00+08:00",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-04A and started disabled-by-default GSC collector foundation from origin/main."
+        },
+        {
+          "at": "2026-05-17T17:32:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Implemented disabled-by-default GSC collector foundation, seo_gsc_daily schema, docs/generated artifact, and tests. SeoIntel tests, GSC dry-run JSON command, route list, Pint, JSON/YAML validation, diff checks, and runtime freeze classifier passed."
+        },
+        {
+          "at": "2026-05-17T17:36:00+08:00",
+          "status": "local_commit_created",
+          "summary": "Created local SEO-DASH-04A commit for disabled GSC collector foundation."
+        },
+        {
+          "at": "2026-05-17T17:39:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1442 for human review; auto-merge is intentionally disabled because this PR adds search feedback schema and disabled collector foundation."
+        },
+        {
+          "at": "2026-05-17T18:01:00+08:00",
+          "status": "github_checks_failed_fix_applied",
+          "summary": "GitHub verify-mbti-v2 and verify-mbti-legacy failed on runtime freeze classifier coverage for SEO-DASH-04A GSC foundation files. Added scoped classifier ignore coverage and reran SeoIntel tests, GSC dry-run command, runtime freeze classifier, full Pint, and diff checks locally."
+        },
+        {
+          "at": "2026-05-17T18:12:00+08:00",
+          "status": "pr_open_github_checks_passed",
+          "summary": "GitHub checks passed after the scoped runtime freeze classifier fix: hygiene, verify-mbti-v2, and verify-mbti-legacy. PR remains open for human review; auto-merge is disabled."
+        }
+      ],
+      "next_pr": "SEO-DASH-04B"
     }
   }
 }

@@ -7,6 +7,7 @@ namespace App\Services\SeoIntel;
 use App\Services\SeoIntel\Collectors\AttributionRevenueFoundationCollector;
 use App\Services\SeoIntel\Collectors\CrawlerLogFoundationCollector;
 use App\Services\SeoIntel\Collectors\DriftFoundationCollector;
+use App\Services\SeoIntel\Collectors\GscCollector;
 use App\Services\SeoIntel\Collectors\NoopSeoIntelCollector;
 use App\Services\SeoIntel\Collectors\UrlTruthInventoryCollector;
 use App\Services\SeoIntel\Drift\CrawlerLogLineParser;
@@ -110,6 +111,14 @@ final class SeoIntelCollectorManager
                 new RevenueDailyBuilder(
                     new SourceEngineNormalizer,
                     new InternalTrafficFilter,
+                ),
+            );
+        }
+
+        if ($collector === 'gsc_foundation') {
+            return new GscCollector(
+                new GscSearchAnalyticsRowNormalizer(
+                    new GscQueryClassifier,
                 ),
             );
         }
