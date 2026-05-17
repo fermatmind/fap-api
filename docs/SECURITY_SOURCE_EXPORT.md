@@ -6,7 +6,7 @@
 
 ## Forbidden
 - Do not use `zip -r` on workspace root.
-- Do not deliver packages that include `.git`, `.env`, `vendor`, `node_modules`, runtime `storage`, logs, sqlite, or artifacts.
+- Do not deliver packages that include `.git`, `.env`, `vendor`, `node_modules`, runtime `storage`, logs, sqlite, artifacts, or `backend/storage/app/private/content_releases`.
 
 ## Delivery artifact
 - Only `dist/fap-api-source.zip` is allowed for external source delivery.

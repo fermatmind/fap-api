@@ -17,7 +17,7 @@
 1. `.env/.env.*`（排除 `.env.example`）：敏感信息泄露风险。
 2. `.git`：源码历史泄露与体积污染。
 3. `vendor`/`node_modules`：体积污染与不可控供应链复制。
-4. `backend/storage/logs`、`backend/artifacts`、`backend/storage/app/private/reports`、`backend/storage/app/archives`：运行时污染物，不可审计交付。
+4. `backend/storage/logs`、`backend/artifacts`、`backend/storage/app/private/reports`、`backend/storage/app/private/artifacts`、`backend/storage/app/private/content_releases`、`backend/storage/app/archives`：运行时污染物，不可审计交付。
 5. `*.sqlite*`：环境数据泄露风险。
 6. `__MACOSX`、`.DS_Store`：非业务污染物。
 
