@@ -54,6 +54,14 @@ return [
     'career' => [
         'public_resolution_plan_path' => env('CAREER_PUBLIC_RESOLUTION_PLAN_PATH', null),
         'duplicate_identity_scan_path' => env('CAREER_DUPLICATE_IDENTITY_SCAN_PATH', null),
+        'cn_proxy_public_owner_plan_path' => env(
+            'CAREER_CN_PROXY_PUBLIC_OWNER_PLAN_PATH',
+            '/tmp/career_2786_cn_proxy_public_owner_plan.json',
+        ),
+        'cn_proxy_trust_manifest_path' => env(
+            'CAREER_CN_PROXY_TRUST_MANIFEST_PATH',
+            '/tmp/career_2786_cn_proxy_trust_manifest_reviewed_validator_normalized.json',
+        ),
     ],
 
     'media' => [

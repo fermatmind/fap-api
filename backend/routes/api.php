@@ -33,6 +33,7 @@ use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\API\V0_4\RotationAuditController;
 use App\Http\Controllers\API\V0_5\Career\CareerAliasResolutionController;
 use App\Http\Controllers\API\V0_5\Career\CareerAttributionEventController;
+use App\Http\Controllers\API\V0_5\Career\CareerCnProxyPublicOwnerController;
 use App\Http\Controllers\API\V0_5\Career\CareerDatasetHubController;
 use App\Http\Controllers\API\V0_5\Career\CareerDatasetMethodController;
 use App\Http\Controllers\API\V0_5\Career\CareerFamilyHubController;
@@ -471,6 +472,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/first-wave/rollout-queue', [CareerFirstWaveRolloutQueueController::class, 'show']);
     Route::get('/career/first-wave/readiness', [CareerFirstWaveReadinessController::class, 'show']);
     Route::get('/career/jobs', [CareerJobListController::class, 'index']);
+    Route::get('/career/cn-proxy/{slug}', [CareerCnProxyPublicOwnerController::class, 'show']);
     Route::get('/career/jobs/{slug}', [CareerJobDetailController::class, 'show']);
     Route::get('/career/jobs/{slug}/explainability', [CareerJobExplainabilityController::class, 'show']);
     Route::get('/career/recommendations/mbti', [CareerRecommendationIndexController::class, 'index']);
