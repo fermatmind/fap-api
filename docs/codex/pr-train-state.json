@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T11:34:42+08:00",
+  "updated_at": "2026-05-17T12:45:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -8405,7 +8405,7 @@
         "SEO-DASH-00B",
         "BACKEND-RUNTIME-02D"
       ],
-      "status": "in_progress",
+      "status": "merged_reconciled",
       "train_scope": "search_intelligence_logical_db_foundation",
       "risk_level": "high_schema_foundation",
       "title": "feat(seo-intel): add logical DB foundation",
@@ -8469,8 +8469,8 @@
           "status": "false"
         },
         "github_required_checks": {
-          "status": "pending_after_ci_fix_push",
-          "evidence": "PR https://github.com/fermatmind/fap-api/pull/1433 failed verify-mbti-v2 and verify-mbti-legacy. The current CI fix updates the BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier to ignore the three SEO-DASH-01A schema-only migration files; local CI fix validation passed and the branch is pending push/re-run."
+          "status": "pass",
+          "evidence": "GitHub PR #1433 merged with hygiene, verify-mbti-v2, and verify-mbti-legacy passing."
         },
         "ci_fix_bigfive_freeze_classifier": {
           "status": "pass",
@@ -8502,10 +8502,10 @@
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1433",
-      "commit_sha": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "235547ab160d66acbae07619d14f654e2bc019ce",
+      "merged_at": "2026-05-17T04:05:13Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "title": "Local default MySQL credentials block php artisan migrate --pretend",
@@ -8567,9 +8567,15 @@
           "at": "2026-05-17T11:58:00+08:00",
           "status": "ci_fix_local_checks_passed_pending_github_rerun",
           "summary": "Amended SEO-DASH-01A commit with the CI classifier fix and recorded the local validation pass. Branch is ready to push for GitHub check rerun."
+        },
+        {
+          "at": "2026-05-17T12:17:54+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled SEO-DASH-01A after PR #1433 was merged; origin/main contains merge commit afddee88d046dc8aed7da7b6426b3a9be0aa00e1 and the task branch was cleaned up."
         }
       ],
-      "next_pr": "SEO-DASH-01B"
+      "next_pr": "SEO-DASH-01B",
+      "merge_commit_sha": "afddee88d046dc8aed7da7b6426b3a9be0aa00e1"
     },
     "REPAIR-DIRECTORY-LIST-DETAIL-API-AUTHORITY-75-1": {
       "repo": "fap-api",
@@ -8662,6 +8668,145 @@
         }
       ],
       "next_pr": "SCAN-2786-VISIBLE-DETAIL-GAP-AFTER-DIRECTORY-LIST-DETAIL-API-AUTHORITY-75-1"
+    },
+    "SEO-DASH-01B": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-01b-collector-skeleton-disabled",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-01A"
+      ],
+      "status": "sync_conflict_resolved_pending_github_rerun",
+      "train_scope": "search_intelligence_collector_skeleton_disabled",
+      "risk_level": "medium_disabled_skeleton",
+      "title": "feat(seo-intel): add disabled collector skeleton",
+      "name": "collector skeleton disabled by default",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-01B with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-01A is merged into origin/main at merge commit afddee88d046dc8aed7da7b6426b3a9be0aa00e1."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "external_api_credentials_required": {
+          "status": "false"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to allowed seo_intel config, services, safe Artisan command, focused SeoIntel tests, Big Five runtime freeze classifier test update, docs/generated artifact, and root docs/codex PR train metadata. No migrations, scheduler activation, queue worker, external API connector, deploy/env, payment/order/report/email/recommendation/scoring, sitemap, or llms behavior files were changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "14 tests passed, 163 assertions."
+        },
+        "noop_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=noop --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test config/seo_intel.php app/Services/SeoIntel/SeoIntelCollector.php app/Services/SeoIntel/SeoIntelCollectorResult.php app/Services/SeoIntel/SeoIntelCollectorManager.php app/Services/SeoIntel/Collectors/NoopSeoIntelCollector.php app/Console/Commands/SeoIntelCollectCommand.php tests/Feature/SeoIntel/SeoIntelCollectorSkeletonTest.php tests/Feature/SeoIntel/SeoIntelLogicalDbFoundationTest.php"
+        },
+        "json": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -m json.tool backend/docs/seo/generated/seo-intel-collector-skeleton.v1.json >/dev/null"
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "github_required_checks": {
+          "status": "pending_rerun",
+          "evidence": "GitHub checks previously passed on c68f6732711518519b334634d953165c78522c6a, but mergeStateStatus was DIRTY after main advanced. Checks will rerun after the rebase push."
+        },
+        "ci_fix_bigfive_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+          "evidence": "71 tests passed, 76 assertions."
+        },
+        "ci_fix_seo_intel_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel --no-ansi",
+          "evidence": "14 tests passed, 163 assertions."
+        },
+        "ci_fix_mbti_full": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full local MBTI CI completed with exit code 0 after the runtime freeze classifier fix."
+        },
+        "ci_fix_pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php config/seo_intel.php app/Services/SeoIntel/SeoIntelCollector.php app/Services/SeoIntel/SeoIntelCollectorResult.php app/Services/SeoIntel/SeoIntelCollectorManager.php app/Services/SeoIntel/Collectors/NoopSeoIntelCollector.php app/Console/Commands/SeoIntelCollectCommand.php tests/Feature/SeoIntel/SeoIntelCollectorSkeletonTest.php tests/Feature/SeoIntel/SeoIntelLogicalDbFoundationTest.php"
+        },
+        "branch_sync": {
+          "status": "pass",
+          "evidence": "Rebased PR branch onto origin/main after PR #1434 advanced main; resolved PR-train state conflict by preserving the main repair entry and retaining SEO-DASH-01A/SEO-DASH-01B state."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1435",
+      "commit_sha": "pending_post_rebase_push",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "Big Five runtime freeze classifier blocks SEO-DASH-01B skeleton files",
+          "repo": "fap-api",
+          "affected_command_or_check": "GitHub CI verify-mbti-v2 and verify-mbti-legacy",
+          "evidence": "BigFiveResultPageV2CoreBodyPreviewTest failed asserting no runtime path changes; changed paths were the SEO-DASH-01B disabled collector command and service skeleton files.",
+          "why_external_to_current_pr": "The classifier must explicitly recognize the current PR disabled collector skeleton files as non-MBTI/Big-Five runtime changes.",
+          "owner": "current_pr",
+          "follow_up_recommendation": "Resolved in current CI fix by adding a narrow classifier allowlist for the SEO-DASH-01B disabled collector skeleton files and rerunning the local MBTI CI gate.",
+          "resolved_by_current_ci_fix": true
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-17T12:17:54+08:00",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-01B and started disabled-by-default collector skeleton from origin/main."
+        },
+        {
+          "at": "2026-05-17T12:19:47+08:00",
+          "status": "local_validation_passed",
+          "summary": "Implemented disabled collector skeleton. SeoIntel tests, noop dry-run JSON command, route list, scoped Pint, JSON validation, and git diff check passed."
+        },
+        {
+          "at": "2026-05-17T12:22:20+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1435 for human review; auto-merge is intentionally disabled because this PR introduces collector skeleton code."
+        },
+        {
+          "at": "2026-05-17T12:31:00+08:00",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "GitHub verify-mbti-v2 and verify-mbti-legacy failed on the Big Five runtime freeze classifier. Added a narrow classifier allowlist and regression test for SEO-DASH-01B disabled collector skeleton files. Targeted classifier tests, SeoIntel tests, scoped Pint, git diff check, and full local backend/scripts/ci_verify_mbti.sh passed."
+        },
+        {
+          "at": "2026-05-17T12:45:00+08:00",
+          "status": "sync_conflict_resolved_pending_github_rerun",
+          "summary": "Rebased SEO-DASH-01B onto latest origin/main after PR #1434 advanced main; preserved the repair PR ledger entry and retained the current SEO-DASH-01B scope."
+        }
+      ],
+      "next_pr": "SEO-DASH-02A"
     }
   }
 }

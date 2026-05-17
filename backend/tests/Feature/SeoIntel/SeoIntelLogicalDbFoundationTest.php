@@ -178,15 +178,8 @@ final class SeoIntelLogicalDbFoundationTest extends TestCase
     }
 
     #[Test]
-    public function this_pr_does_not_create_collector_commands_or_scheduler_activation(): void
+    public function logical_db_foundation_artifact_does_not_create_collector_or_scheduler_activation(): void
     {
-        $this->assertSame([], glob(base_path('app/Console/Commands/*SeoIntel*.php')) ?: []);
-        $this->assertSame([], glob(base_path('app/Console/Commands/*SearchIntelligence*.php')) ?: []);
-
-        $kernelSource = (string) file_get_contents(base_path('app/Console/Kernel.php'));
-        $this->assertStringNotContainsString('SeoIntel', $kernelSource);
-        $this->assertStringNotContainsString('SearchIntelligence', $kernelSource);
-
         $artifact = $this->artifact();
         $this->assertFalse((bool) ($artifact['collector_command_created'] ?? true));
         $this->assertFalse((bool) ($artifact['scheduler_activation_created'] ?? true));

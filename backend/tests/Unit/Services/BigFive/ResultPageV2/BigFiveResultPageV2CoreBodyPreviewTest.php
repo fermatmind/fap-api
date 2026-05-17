@@ -295,6 +295,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_intel_disabled_collector_skeleton_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoIntelCollectCommand.php',
+            'backend/app/Services/SeoIntel/Collectors/NoopSeoIntelCollector.php',
+            'backend/app/Services/SeoIntel/SeoIntelCollector.php',
+            'backend/app/Services/SeoIntel/SeoIntelCollectorManager.php',
+            'backend/app/Services/SeoIntel/SeoIntelCollectorResult.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1443,6 +1456,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelDisabledCollectorSkeletonFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -1824,6 +1841,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/database/migrations/2026_05_17_000100_create_seo_urls_table.php',
             'backend/database/migrations/2026_05_17_000200_create_seo_url_entities_table.php',
             'backend/database/migrations/2026_05_17_000300_create_seo_internal_traffic_rules_table.php',
+        ], true);
+    }
+
+    private function isSeoIntelDisabledCollectorSkeletonFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelCollectCommand.php',
+            'backend/app/Services/SeoIntel/Collectors/NoopSeoIntelCollector.php',
+            'backend/app/Services/SeoIntel/SeoIntelCollector.php',
+            'backend/app/Services/SeoIntel/SeoIntelCollectorManager.php',
+            'backend/app/Services/SeoIntel/SeoIntelCollectorResult.php',
         ], true);
     }
 
