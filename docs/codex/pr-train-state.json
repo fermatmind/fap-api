@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T12:10:00Z",
+  "updated_at": "2026-05-17T12:47:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -2113,7 +2113,7 @@
       "branch": "fix/career-2786-full-audit-report-audit13",
       "title": "feat(api): add career 2786 full audit artifact report",
       "name": "Career 2786 Full Audit Artifact Report",
-      "status": "committed",
+      "status": "pr_open",
       "depends_on": [
         "AUDIT-12"
       ],
@@ -3188,7 +3188,7 @@
       "branch": "fix/career-entity-remediation-plan-1",
       "title": "fix(api): add career occupation entity remediation planning",
       "name": "Add career occupation entity remediation planning",
-      "status": "local_validation_passed",
+      "status": "committed",
       "depends_on": [
         "REPAIR-INDEX-1",
         "SCAN-3"
@@ -4247,7 +4247,7 @@
       "branch": "fix/career-surface-context-export-producer",
       "title": "fix(api): add career surface context export producer",
       "name": "Add read-only Career 2786 surface context artifact producer",
-      "status": "in_progress",
+      "status": "local_validation_passed",
       "depends_on": [
         "RUN-1D",
         "REPAIR-80-CANDIDATE-1"
@@ -4303,7 +4303,7 @@
       "branch": "fix/career-index-entity-policy-readiness-2",
       "title": "fix(api): classify career readiness policy blockers",
       "name": "Defer broad surface verification and classify index/entity/policy readiness",
-      "status": "in_progress",
+      "status": "github_checks_passed",
       "depends_on": [
         "RUN-1E",
         "CTX-SURFACE-EXPORT-1"
@@ -4388,7 +4388,7 @@
         "no deploy",
         "no fap-web change"
       ],
-      "commit_sha": null,
+      "commit_sha": "bb315e305714183e7c0130deacfbcf9159c95bd1",
       "pr_url": null,
       "checks": {
         "authorization": {
@@ -9630,7 +9630,7 @@
       "depends_on": [
         "CHINA-SEARCH-03"
       ],
-      "status": "pr_open",
+      "status": "merged",
       "train_scope": "chinese_crawler_log_collector_foundation",
       "risk_level": "medium_disabled_crawler_log_schema",
       "title": "feat(seo-intel): add Chinese crawler log collector foundation",
@@ -9689,14 +9689,17 @@
           "status": "pass",
           "command": "git diff --check && git diff --cached --check"
         },
-        "github": "pending"
+        "github": {
+          "status": "pass",
+          "evidence": "GitHub required checks passed for PR #1445 and mergeStateStatus was CLEAN before squash merge."
+        }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1445",
-      "commit_sha": "6370c74273a96ca8e639bd140c8bb139abe7d5af",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "f78b71f8e8ffa60133a2c3f3b7e4aee91495a5f1",
+      "merged_at": "2026-05-17T12:07:10Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -9718,9 +9721,119 @@
           "at": "2026-05-17T12:10:00Z",
           "status": "pr_open",
           "summary": "Opened PR #1445 for CHINA-SEARCH-04; GitHub checks pending."
+        },
+        {
+          "at": "2026-05-17T12:07:10Z",
+          "status": "merged",
+          "summary": "PR #1445 merged; origin/main contains merge commit f78b71f8e8ffa60133a2c3f3b7e4aee91495a5f1 and local/remote branch cleanup completed."
         }
       ],
       "next_pr": "SEO-DASH-05"
+    },
+    "SEO-DASH-05": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-05-metabase-mvp-dashboard",
+      "base": "main",
+      "depends_on": [
+        "CHINA-SEARCH-04"
+      ],
+      "status": "in_progress",
+      "train_scope": "metabase_mvp_dashboard_policy_sanitized_views",
+      "risk_level": "low_docs_contract_no_deploy",
+      "title": "docs(seo-intel): add Metabase MVP dashboard spec",
+      "name": "Metabase MVP dashboard spec and sanitized views",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-05 with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "CHINA-SEARCH-04 merged in fap-api PR #1445 and origin/main contains merge commit f78b71f8e8ffa60133a2c3f3b7e4aee91495a5f1."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "metabase_deployment": {
+          "status": "human_confirm_required"
+        },
+        "read_only_db_user": {
+          "status": "human_confirm_required"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Metabase MVP dashboard docs, deployment runbook, generated artifact, static SeoIntel contract test, and docs/codex PR train metadata. No fap-web runtime, payment/order/report/email/recommendation/scoring, deploy/env, scheduler, queue, production DB connection, Metabase credentials/deployment, sitemap, llms, OpenResty/Nginx/CDN/cloud, or Node2/Node3 runtime files changed."
+        },
+        "seo_intel_metabase_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntelMetabaseMvpDashboard",
+          "evidence": "5 tests passed with 201 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "75 tests passed with 1441 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3353 files."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "github": {
+          "status": "pass",
+          "evidence": "PR #1446 CI passed: hygiene, verify-mbti-legacy, and verify-mbti-v2 completed successfully; mergeStateStatus=CLEAN."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1446",
+      "commit_sha": "7680be80d65e36f7fc4fa50764a930f1f2dcf077",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T12:20:00Z",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-05 and started Metabase MVP dashboard policy, sanitized view definitions, runbook, artifact, and static tests from origin/main."
+        },
+        {
+          "at": "2026-05-17T12:28:00Z",
+          "status": "local_validation_passed",
+          "summary": "Implemented Metabase MVP dashboard policy, sanitized view definitions as generated artifact contracts, deployment runbook, and static SeoIntel tests. SeoIntel tests, route list, Pint, JSON/YAML validation, and diff checks passed."
+        },
+        {
+          "at": "2026-05-17T12:31:00Z",
+          "status": "committed",
+          "summary": "Committed SEO-DASH-05 local changes at 06b91f6424752ebfbde56cebe577cd307e7f568e."
+        },
+        {
+          "at": "2026-05-17T12:35:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #1446 for SEO-DASH-05; GitHub checks pending."
+        },
+        {
+          "at": "2026-05-17T12:47:00Z",
+          "status": "github_checks_passed",
+          "summary": "GitHub checks passed for PR #1446 and mergeStateStatus is CLEAN. PR remains open for human review; not merged."
+        }
+      ],
+      "next_pr": "SEO-DASH-06"
     }
   },
   "SEO-DASH-04B": {
