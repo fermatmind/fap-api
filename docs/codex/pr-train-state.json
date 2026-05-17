@@ -707,7 +707,7 @@
         "backend-email-gated-report-read"
       ],
       "commit_sha": "32f35c17a0f29758f0f700010ac1b0c7492ffb6c",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1451",
       "checks": {},
       "sidecar_issues": [],
       "failure_reason": null,
@@ -4522,7 +4522,7 @@
       "branch": "fix/career-80-readiness-selection-runtime-gate",
       "title": "fix(api): tighten career 80 readiness candidate selection",
       "name": "Exclude already-published and runtime-missing slugs from Career 80 readiness selection",
-      "status": "in_progress",
+      "status": "pr_open",
       "depends_on": [
         "80-ROLLOUT-DRY-RUN-1"
       ],
@@ -10086,8 +10086,8 @@
         },
         "pint": {
           "status": "pass",
-          "command": "vendor/bin/pint --test app/Console/Commands/ArticleCoverPropagationSmoke.php app/Console/Kernel.php tests/Feature/Console/ArticleCoverPropagationSmokeCommandTest.php",
-          "evidence": "Pint passed across 3 files after formatting."
+          "command": "vendor/bin/pint --test app/Console/Commands/ArticleCoverPropagationSmoke.php app/Console/Kernel.php tests/Feature/Console/ArticleCoverPropagationSmokeCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "evidence": "Pint passed across 4 files after formatting."
         },
         "diff_check": {
           "status": "pass",
@@ -10095,12 +10095,21 @@
         },
         "scope_validation": {
           "status": "pass",
-          "evidence": "Changed files are confined to ArticleCoverPropagationSmoke command, Console Kernel registration, focused command test, and docs/codex PR train metadata. No article content, media upload, publish/unpublish mutation, fap-web, deploy, rollback, unlock, cache deletion, or process command changed."
+          "evidence": "Changed files are confined to ArticleCoverPropagationSmoke command, Console Kernel registration, focused command test, MBTI runtime freeze classifier allowlist coverage for the new smoke command, and docs/codex PR train metadata. No article content, media upload, publish/unpublish mutation, fap-web, deploy, rollback, unlock, cache deletion, or process command changed."
+        },
+        "github_checks_first_attempt": {
+          "status": "failed_current_pr_scope_fixed",
+          "evidence": "PR #1451 verify-mbti-legacy and verify-mbti-v2 failed because the runtime freeze classifier flagged backend/app/Console/Commands/ArticleCoverPropagationSmoke.php and backend/app/Console/Kernel.php. Added scoped classifier coverage for this read-only publishing smoke command."
+        },
+        "runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test --filter=runtime_freeze_classifier_ignores_article_cover_propagation_smoke_changes --no-ansi && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi",
+          "evidence": "Focused classifier test passed; full BigFiveResultPageV2CoreBodyPreviewTest passed with 93 tests and 444 assertions."
         }
       },
       "failure_reason": null,
       "pr_url": null,
-      "commit_sha": "6c12a810abed94ddeae9d3e2603604897f3a2cc3",
+      "commit_sha": "cfa9de43beb20d32c23cfbd7cdf2c25b21ec7c0e",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -10120,6 +10129,11 @@
           "at": "2026-05-17T13:56:00Z",
           "status": "pr_open",
           "summary": "Created GitHub PR #1451 for PUBLISH-API-ARTICLE-COVER-SMOKE."
+        },
+        {
+          "at": "2026-05-17T14:02:00Z",
+          "status": "github_checks_failed_current_scope_fixed",
+          "summary": "GitHub verify-mbti-legacy and verify-mbti-v2 failed on runtime freeze classifier for the new read-only article cover smoke command and Kernel registration; added scoped classifier coverage and reran focused/full classifier tests locally."
         }
       ]
     }
