@@ -4342,3 +4342,42 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+  - id: REPAIR-DIRECTORY-DETAIL-PENDING-314-1
+    repo: fap-api
+    branch: codex/repair-directory-detail-pending-314-1
+    title: "fix(api): promote display-backed directory draft jobs in list authority"
+    name: "Repair directory pending detail list authority for display-asset-backed Career jobs"
+    findings:
+      - "Post-CN-proxy visible gap scan found directory-draft occupations whose detail endpoints already return validated display-asset-backed bundles while the jobs list still marks them as detail_page_unavailable stubs."
+      - "The product-visible count must be driven by backend detail readiness, not stale directory stub semantics."
+    scope:
+      - Make the Career jobs list upgrade directory_draft occupations to detail-ready list items only when display asset, runtime projection, and release gate evidence match the detail route authority.
+      - Preserve noindex public directory stubs for directory drafts without valid display assets or runtime projection indexability.
+      - Preserve explicit manual holds such as software-developers.
+      - Add regression coverage for display-backed directory draft list readiness and projection rejection.
+    allowed_paths:
+      - backend/app/Services/Career/Bundles/**
+      - backend/tests/Feature/Career/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Mutate DB or generate production content.
+      - Run rollout, apply, backfill, rollback, quarantine, or deploy.
+      - Change CN proxy public-owner noindex policy.
+      - Force-enable software-developers or any manual-hold slug.
+      - Touch fap-web.
+    validation:
+      - php artisan test tests/Feature/Career/CareerJobListApiTest.php --no-ansi
+      - php artisan test tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - vendor/bin/pint --test app/Services/Career/Bundles/CareerJobListBundleBuilder.php tests/Feature/Career/CareerJobListApiTest.php
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
