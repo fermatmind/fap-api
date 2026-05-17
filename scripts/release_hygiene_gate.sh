@@ -92,6 +92,7 @@ for p in \
   "${TARGET}/backend/artifacts" \
   "${TARGET}/backend/storage/app/private/reports" \
   "${TARGET}/backend/storage/app/private/artifacts" \
+  "${TARGET}/backend/storage/app/private/content_releases" \
   "${TARGET}/backend/storage/app/private/packs_v2" \
   "${TARGET}/backend/storage/app/private/packs_v2_materialized" \
   "${TARGET}/backend/storage/app/content_packs_v2" \
