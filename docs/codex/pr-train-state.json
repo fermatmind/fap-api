@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T16:09:09Z",
+  "updated_at": "2026-05-17T16:10:03Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10345,7 +10345,7 @@
       "branch": "codex/docs-shell-safety-guard",
       "base": "main",
       "depends_on": [],
-      "status": "committed",
+      "status": "pr_open",
       "train_scope": "storage_runtime_hygiene",
       "risk_level": "low",
       "title": "chore(security): add docs shell safety guard",
@@ -10412,8 +10412,8 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": "c1e8063a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1455",
+      "commit_sha": "32fb9a3a",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -10433,6 +10433,11 @@
           "at": "2026-05-17T16:09:09Z",
           "status": "committed",
           "summary": "Committed DOCS-SHELL-SAFETY-GUARD scoped changes at c1e8063a."
+        },
+        {
+          "at": "2026-05-17T16:10:03Z",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR #1455 for DOCS-SHELL-SAFETY-GUARD after scoped local validation passed."
         }
       ]
     }
