@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel;
 
 use App\Services\SeoIntel\Collectors\NoopSeoIntelCollector;
+use App\Services\SeoIntel\Collectors\UrlTruthInventoryCollector;
+use App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
 
 final class SeoIntelCollectorManager
 {
@@ -44,9 +46,9 @@ final class SeoIntelCollectorManager
         }
 
         $collectorsEnabled = (bool) config('seo_intel.collectors_enabled', false);
-        $noopDryRunAllowed = $collectorName === 'noop' && $dryRun;
+        $safeDryRunAllowed = $dryRun;
 
-        if (! $collectorsEnabled && ! $noopDryRunAllowed) {
+        if (! $collectorsEnabled && ! $safeDryRunAllowed) {
             return $this->blocked($collectorName, $dryRun, 'collectors_disabled');
         }
 
@@ -61,6 +63,10 @@ final class SeoIntelCollectorManager
     {
         if ($collector === 'noop') {
             return new NoopSeoIntelCollector;
+        }
+
+        if ($collector === 'url_truth_inventory') {
+            return new UrlTruthInventoryCollector(new BackendAuthorityUrlTruthSource);
         }
 
         return new NoopSeoIntelCollector;

@@ -145,6 +145,61 @@ prs:
     external_api_credentials_required: false
     scheduler_activation: false
     next_task: SEO-DASH-02A
+
+  - id: SEO-DASH-02A
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-01B
+    branch: codex/seo-dash-02a-url-truth-inventory
+    title: "feat(seo-intel): add URL truth inventory collector"
+    name: "URL Truth Inventory Collector"
+    findings:
+      - "SEO-DASH-01B merged the disabled collector skeleton and safe seo-intel:collect command."
+      - "BACKEND-RUNTIME-02D accepted Node2 as API edge gateway and Node3/fap-api-prod as backend authority candidate."
+      - "SEO Collector must not read Node2 local Laravel, fap-web fallback, or llms/sitemap fallback as graph truth."
+    scope:
+      - Add url_truth_inventory collector under SeoIntel.
+      - Plan seo_urls and seo_url_entities records from backend authority source rules.
+      - Keep collector disabled by default, dry-run safe, write-gated, and external-API-free.
+      - Exclude private flows, forbidden source authorities, PII detail, public HTML fetching, and drift detection.
+      - Add docs/generated artifact and focused SeoIntel tests.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/app/Services/SeoIntel/**
+      - backend/app/Console/Commands/SeoIntelCollectCommand.php
+      - backend/tests/**/SeoIntel*Test.php
+      - backend/tests/Feature/SeoIntel/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/seo-intel-url-truth-inventory.md
+      - backend/docs/seo/generated/seo-intel-url-truth-inventory.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run production migrations.
+      - Create production seo_intel DB.
+      - Deploy, SSH, edit env, or touch Node2/Node3.
+      - Connect GSC, Baidu, IndexNow, or deploy Metabase.
+      - Enable scheduler jobs or create queue workers.
+      - Fetch public HTML or perform drift detection.
+      - Write live data or call external APIs.
+      - Change payment, order, report, email, recommendation, scoring, sitemap, or llms behavior.
+      - Modify fap-web runtime or use fap-api/fap-web as production frontend runtime.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --json
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: SEO-DASH-02B
   - id: PR-MEDIA-01
     repo: fap-api
     depends_on:
