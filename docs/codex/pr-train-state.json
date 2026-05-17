@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T08:28:18+08:00",
+  "updated_at": "2026-05-17T09:57:18+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -8243,6 +8243,77 @@
         }
       ],
       "next_pr": "PRODUCT_POLICY_DECISION_OR_VISIBLE_GAP_REMEDIATION"
+    },
+    "REPAIR-CN-PROXY-NOINDEX-PUBLIC-OWNER-SURFACE-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-cn-proxy-noindex-public-owner-surface-1",
+      "status": "pr_open",
+      "title": "fix(api): add guarded CN proxy noindex public-owner surface",
+      "checks": {
+        "train_registration_authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-CN-PROXY-NOINDEX-PUBLIC-OWNER-SURFACE-1."
+        },
+        "scope": {
+          "status": "planned",
+          "evidence": "Backend-only guarded CN proxy noindex public-owner surface; no DB mutation, deploy, rollout, sitemap, llms, canonical job publication, or fap-web action."
+        },
+        "openapi_snapshot_scope": {
+          "status": "planned",
+          "evidence": "New public API route requires backend/docs/contracts/openapi.snapshot.json update; no runtime semantics beyond route contract snapshot."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to career API route/controller/service/config/tests, OpenAPI snapshot, and authorized PR train metadata."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=CareerCnProxyPublicOwnerApi --no-ansi",
+          "evidence": "4 tests passed, 24 assertions."
+        },
+        "cn_proxy_validator_regression": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=CareerValidateCnProxyPublicOwner --no-ansi",
+          "evidence": "5 tests passed, 79 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan route:list --no-ansi",
+          "evidence": "api/v0.5/career/cn-proxy/{slug} is registered; route:list exits 0."
+        },
+        "sqlite_migrate_pretend": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan migrate --pretend --no-ansi --force",
+          "evidence": "Migration SQL generation completed successfully; no production DB used."
+        },
+        "openapi_snapshot": {
+          "status": "pass",
+          "command": "bash scripts/export_openapi.sh --check",
+          "evidence": "Snapshot updated for the new route and check reports up-to-date."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "3281 files passed."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "mbti_ci": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full CI master chain exited 0 after OpenAPI snapshot update."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR opened as https://github.com/fermatmind/fap-api/pull/1431; GitHub checks pending at PR creation."
+        }
+      },
+      "sidecar_issues": [],
+      "failure_reason": null,
+      "commit_sha": "39c079a34babf048df02f39bdd9fdda78dc07d9e",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1431"
     }
   }
 }

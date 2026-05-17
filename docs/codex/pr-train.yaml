@@ -4301,3 +4301,44 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+  - id: REPAIR-CN-PROXY-NOINDEX-PUBLIC-OWNER-SURFACE-1
+    repo: fap-api
+    branch: codex/repair-cn-proxy-noindex-public-owner-surface-1
+    title: "fix(api): add guarded CN proxy noindex public-owner surface"
+    name: "Add guarded CN proxy noindex public-owner surface"
+    findings:
+      - "Reviewed CN proxy public-owner rows have policy evidence but no guarded backend route owner surface."
+      - "CN proxy rows must remain noindex and noncanonical while exposing a controlled owner-facing public surface."
+    scope:
+      - Add a backend-owned CN proxy public-owner API surface for reviewed public_cn_proxy_page claims.
+      - Fail closed unless the reviewed trust manifest and public-owner plan prove noindex, noncanonical, non-sitemap, and non-llms policy.
+      - Preserve canonical career job rollout, dataset, search, sitemap, and llms exclusion for CN proxy rows.
+      - Add regression coverage for direct CN proxy route, career job detail fallback, missing manifest, and indexability rejection.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/config/fap.php
+      - backend/app/Http/Controllers/API/V0_5/Career/**
+      - backend/app/Services/Career/Bundles/**
+      - backend/tests/Feature/Career/**
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Publish CN proxy rows as public_canonical_job.
+      - Mark CN proxy rows indexable.
+      - Add CN proxy URLs to sitemap, llms, or llms-full.
+      - Mutate DB, deploy, rollout, backfill, rollback, quarantine, or touch fap-web.
+    validation:
+      - php artisan test --filter=CareerCnProxyPublicOwnerApi --no-ansi
+      - php artisan test --filter=CareerValidateCnProxyPublicOwner --no-ansi
+      - php artisan route:list --no-ansi
+      - bash scripts/export_openapi.sh --check
+      - vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

@@ -2553,6 +2553,23 @@
                 ]
             }
         },
+        "/api/v0.5/career/cn-proxy/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_career_cn_proxy_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerCnProxyPublicOwnerController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/datasets/occupations": {
             "get": {
                 "operationId": "get_api_v0_5_career_datasets_occupations",
