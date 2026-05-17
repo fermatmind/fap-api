@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "source_documents": [
+    "SEO-DASH-00B",
+    "SEO-DASH-01A",
+    "SEO-DASH-TRAIN-00",
+    "BACKEND-RUNTIME-02D"
+  ],
+  "repo": "fap-api",
+  "collectors_enabled_by_default": false,
+  "write_enabled_by_default": false,
+  "dry_run_default": true,
+  "external_api_calls_allowed": false,
+  "scheduler_enabled": false,
+  "queue_worker_enabled": false,
+  "collectors": [
+    "noop"
+  ],
+  "real_collectors_implemented": [],
+  "db_writes_in_noop": false,
+  "production_data_reads_in_noop": false,
+  "node2_local_laravel_data_source": false,
+  "gsc_connected": false,
+  "baidu_connected": false,
+  "indexnow_connected": false,
+  "metabase_deployed": false,
+  "pii_output_forbidden": [
+    "email",
+    "order_no",
+    "attempt_id",
+    "payment_id",
+    "cookie",
+    "token"
+  ],
+  "forbidden_actions": [
+    "production_migration",
+    "production_deploy",
+    "scheduler_activation",
+    "queue_worker_activation",
+    "external_api_call",
+    "node2_local_laravel_read",
+    "live_data_write"
+  ],
+  "next_task": "SEO-DASH-02A"
+}
