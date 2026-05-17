@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T12:45:00+08:00",
+  "updated_at": "2026-05-17T13:32:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -1597,7 +1597,7 @@
       "branch": "fix/career-surface-readiness-audit8",
       "title": "feat(api): add career surface readiness audit",
       "name": "Career Surface Readiness Audit",
-      "status": "ci_fix_in_progress",
+      "status": "pr_open_github_checks_passed",
       "depends_on": [
         "AUDIT-7"
       ],
@@ -8676,7 +8676,7 @@
       "depends_on": [
         "SEO-DASH-01A"
       ],
-      "status": "sync_conflict_resolved_pending_github_rerun",
+      "status": "merged_reconciled",
       "train_scope": "search_intelligence_collector_skeleton_disabled",
       "risk_level": "medium_disabled_skeleton",
       "title": "feat(seo-intel): add disabled collector skeleton",
@@ -8734,8 +8734,8 @@
           "command": "git diff --check"
         },
         "github_required_checks": {
-          "status": "pending_rerun",
-          "evidence": "GitHub checks previously passed on c68f6732711518519b334634d953165c78522c6a, but mergeStateStatus was DIRTY after main advanced. Checks will rerun after the rebase push."
+          "status": "pass",
+          "evidence": "GitHub PR #1435 merged with hygiene, verify-mbti-v2, and verify-mbti-legacy passing."
         },
         "ci_fix_bigfive_freeze_classifier": {
           "status": "pass",
@@ -8763,10 +8763,10 @@
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1435",
-      "commit_sha": "pending_post_rebase_push",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "55878efad8947c0eb195a5a4997ac5f7d9fc7e41",
+      "merged_at": "2026-05-17T04:54:30Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "title": "Big Five runtime freeze classifier blocks SEO-DASH-01B skeleton files",
@@ -8804,9 +8804,146 @@
           "at": "2026-05-17T12:45:00+08:00",
           "status": "sync_conflict_resolved_pending_github_rerun",
           "summary": "Rebased SEO-DASH-01B onto latest origin/main after PR #1434 advanced main; preserved the repair PR ledger entry and retained the current SEO-DASH-01B scope."
+        },
+        {
+          "at": "2026-05-17T12:55:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled SEO-DASH-01B after PR #1435 was merged; origin/main contains merge commit 17ac7b704451d12ae52af8bf9b82a8acd7d6ced4 and the task branch was cleaned up."
         }
       ],
-      "next_pr": "SEO-DASH-02A"
+      "next_pr": "SEO-DASH-02A",
+      "merge_commit_sha": "17ac7b704451d12ae52af8bf9b82a8acd7d6ced4"
+    },
+    "SEO-DASH-02A": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-02a-url-truth-inventory",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-01B"
+      ],
+      "status": "ci_fix_in_progress",
+      "train_scope": "search_intelligence_url_truth_inventory_collector",
+      "risk_level": "medium_disabled_collector",
+      "title": "feat(seo-intel): add URL truth inventory collector",
+      "name": "URL Truth Inventory Collector",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-02A with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-01B is merged into origin/main at merge commit 17ac7b704451d12ae52af8bf9b82a8acd7d6ced4."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "external_api_credentials_required": {
+          "status": "false"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to allowed seo_intel config, services, safe collector command integration, focused SeoIntel tests, docs/generated artifact, BigFive runtime freeze classifier scope test for current PR files, and root docs/codex PR train metadata. No migrations, scheduler activation, queue worker, public HTML fetching, external API connector, deploy/env, payment/order/report/email/recommendation/scoring, sitemap, or llms behavior files were changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel --no-ansi",
+          "evidence": "21 tests passed, 232 assertions."
+        },
+        "url_truth_inventory_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, and no candidate URL records from the default adapter skeleton."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3297 files."
+        },
+        "json_yaml": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -m json.tool backend/docs/seo/generated/seo-intel-url-truth-inventory.v1.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\""
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "bigfive_runtime_freeze_smoke": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "Runtime freeze changed-path smoke test passed without expanding the BigFive classifier."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1436 GitHub checks passed after scoped BigFive runtime freeze classifier fix: hygiene, verify-mbti-v2, and verify-mbti-legacy passed on the amended branch."
+        },
+        "ci_fix_bigfive_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+          "evidence": "72 runtime_freeze_classifier tests passed, including explicit ignore coverage for SEO-DASH-02A UrlTruthInventoryCollector source files."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1436",
+      "commit_sha": "pending_post_push",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "status": "resolved_by_current_ci_fix",
+          "summary": "BigFive runtime freeze classifier blocked SEO-DASH-02A UrlTruthInventoryCollector files until they were explicitly allowlisted as current PR SeoIntel scope."
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-17T13:12:00+08:00",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-02A and started disabled-by-default URL Truth Inventory collector from origin/main."
+        },
+        {
+          "at": "2026-05-17T13:25:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Implemented disabled-by-default URL Truth Inventory collector. SeoIntel tests, dry-run JSON command, route list, full Pint, JSON/YAML validation, diff checks, and BigFive runtime freeze smoke passed."
+        },
+        {
+          "at": "2026-05-17T13:28:00+08:00",
+          "status": "committed_pending_push",
+          "summary": "Created local commit for SEO-DASH-02A; commit SHA will be recorded from GitHub after push to avoid self-referential amend churn."
+        },
+        {
+          "at": "2026-05-17T13:32:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1436 for human review; auto-merge is intentionally disabled because this PR adds a real dry-run collector foundation."
+        },
+        {
+          "at": "2026-05-17T13:16:00+08:00",
+          "status": "ci_fix_in_progress",
+          "summary": "GitHub checks failed on the BigFive runtime freeze classifier because SEO-DASH-02A collector files were not yet explicitly ignored. Applying scoped classifier test update and PR train metadata update."
+        },
+        {
+          "at": "2026-05-17T13:17:00+08:00",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "Scoped CI fix passed BigFive runtime freeze classifier tests, SeoIntel tests, url_truth_inventory dry-run command, route list, targeted Pint, JSON/YAML validation, and diff checks."
+        },
+        {
+          "at": "2026-05-17T13:25:00+08:00",
+          "status": "pr_open_github_checks_passed",
+          "summary": "GitHub checks passed after the scoped CI fix. PR remains open for human review; auto-merge is disabled."
+        }
+      ],
+      "next_pr": "SEO-DASH-02B"
     }
   }
 }

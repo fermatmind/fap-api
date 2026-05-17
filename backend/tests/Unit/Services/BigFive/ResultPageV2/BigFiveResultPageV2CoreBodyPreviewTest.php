@@ -308,6 +308,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_intel_url_truth_inventory_collector_files(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/Collectors/UrlTruthInventoryCollector.php',
+            'backend/app/Services/SeoIntel/Sources/BackendAuthorityUrlTruthSource.php',
+            'backend/app/Services/SeoIntel/Sources/UrlTruthInventorySource.php',
+            'backend/app/Services/SeoIntel/UrlTruthInventoryRecord.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1460,6 +1472,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelUrlTruthInventoryCollectorFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -1852,6 +1868,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/SeoIntelCollector.php',
             'backend/app/Services/SeoIntel/SeoIntelCollectorManager.php',
             'backend/app/Services/SeoIntel/SeoIntelCollectorResult.php',
+        ], true);
+    }
+
+    private function isSeoIntelUrlTruthInventoryCollectorFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/SeoIntel/Collectors/UrlTruthInventoryCollector.php',
+            'backend/app/Services/SeoIntel/Sources/BackendAuthorityUrlTruthSource.php',
+            'backend/app/Services/SeoIntel/Sources/UrlTruthInventorySource.php',
+            'backend/app/Services/SeoIntel/UrlTruthInventoryRecord.php',
         ], true);
     }
 

@@ -19,7 +19,7 @@ final class SeoIntelCollectorSkeletonTest extends TestCase
         $this->assertFalse((bool) config('seo_intel.collectors_enabled'));
         $this->assertTrue((bool) config('seo_intel.dry_run_default'));
         $this->assertFalse((bool) config('seo_intel.allow_external_api_calls'));
-        $this->assertSame(['noop'], config('seo_intel.allowed_collectors'));
+        $this->assertSame(['noop', 'url_truth_inventory'], config('seo_intel.allowed_collectors'));
         $this->assertSame('noop', config('seo_intel.default_collector'));
     }
 
