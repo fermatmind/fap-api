@@ -212,6 +212,89 @@ final class CareerJobListApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1');
     }
 
+    public function test_directory_draft_with_runtime_published_detail_shell_is_listed_as_detail_ready(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(items: [
+                'agricultural-workers-all-other' => [
+                    'slug' => 'agricultural-workers-all-other',
+                    'runtime_publish_state' => 'published',
+                    'dataset_visible' => true,
+                    'detail_route_enabled' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                    'canonical_path' => '/career/jobs/agricultural-workers-all-other',
+                    'reason_codes' => ['runtime_published_navigation_shell'],
+                ],
+            ]),
+        );
+
+        $this->createDirectoryDraftOccupation([
+            'canonical_slug' => 'agricultural-workers-all-other',
+            'canonical_title_en' => 'Agricultural Workers, All Other',
+            'canonical_title_zh' => '其他农业工人',
+            'search_h1_zh' => '其他农业工人',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+        ]);
+
+        $response = $this->getJson('/api/v0.5/career/jobs')
+            ->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.canonical_slug', 'agricultural-workers-all-other')
+            ->assertJsonPath('items.0.identity.entity_level', 'dataset_candidate')
+            ->assertJsonPath('items.0.trust_summary.reviewer_status', 'runtime_publish_projection')
+            ->assertJsonPath('items.0.trust_summary.logic_version', 'career.protocol.job_detail.runtime_projection.v1')
+            ->assertJsonPath('items.0.seo_contract.index_eligible', true)
+            ->assertJsonPath('items.0.seo_contract.index_state', 'indexable')
+            ->assertJsonPath('items.0.seo_contract.robots_policy', 'index,follow')
+            ->assertJsonMissingPath('items.0.trust_summary.public_stub_kind')
+            ->assertJsonMissingPath('items.0.trust_summary.status')
+            ->assertJsonMissingPath('items.0.trust_summary.availability')
+            ->assertJsonMissingPath('items.0.seo_contract.public_stub_kind');
+
+        $this->assertContains('runtime_publish_projection', $response->json('items.0.trust_summary.reason_codes'));
+        $this->assertContains('runtime_published_navigation_shell', $response->json('items.0.trust_summary.reason_codes'));
+        $this->assertContains('runtime_publish_projection', $response->json('items.0.seo_contract.reason_codes'));
+        $this->assertContains('runtime_published_navigation_shell', $response->json('items.0.seo_contract.reason_codes'));
+    }
+
+    public function test_directory_draft_runtime_projection_requires_published_state_before_list_upgrade(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(items: [
+                'water-resource-specialists' => [
+                    'slug' => 'water-resource-specialists',
+                    'runtime_publish_state' => 'candidate',
+                    'dataset_visible' => true,
+                    'detail_route_enabled' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                    'canonical_path' => '/career/jobs/water-resource-specialists',
+                ],
+            ]),
+        );
+
+        $this->createDirectoryDraftOccupation([
+            'canonical_slug' => 'water-resource-specialists',
+            'canonical_title_en' => 'Water Resource Specialists',
+            'canonical_title_zh' => '水资源专家',
+            'search_h1_zh' => '水资源专家',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+        ]);
+
+        $this->getJson('/api/v0.5/career/jobs')
+            ->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.canonical_slug', 'water-resource-specialists')
+            ->assertJsonPath('items.0.trust_summary.public_stub_kind', 'public_directory_stub')
+            ->assertJsonPath('items.0.seo_contract.index_eligible', false)
+            ->assertJsonPath('items.0.seo_contract.reason_codes.0', 'detail_page_unavailable');
+    }
+
     public function test_directory_draft_display_asset_remains_stub_when_runtime_projection_rejects_indexing(): void
     {
         $this->app->instance(

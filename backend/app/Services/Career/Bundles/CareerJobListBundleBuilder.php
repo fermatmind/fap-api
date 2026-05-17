@@ -445,6 +445,11 @@ final class CareerJobListBundleBuilder
             return $this->buildDisplayAssetBackedDirectoryDraftCareerJobItem($occupation);
         }
 
+        $runtimeProjectionItem = $this->runtimePublishedDirectoryDraftProjectionItem($occupation);
+        if ($runtimeProjectionItem !== null) {
+            return $this->buildRuntimeProjectionCareerJobItem($occupation, $runtimeProjectionItem);
+        }
+
         return new CareerJobListItemBundle(
             identity: [
                 'canonical_slug' => $occupation->canonical_slug,
@@ -798,6 +803,51 @@ final class CareerJobListBundleBuilder
         return $this->runtimePublishProjection->detailRouteEnabled($slug)
             && $this->runtimePublishProjection->robotsIndexable($slug)
             && $this->runtimePublishProjection->releaseGatePass($slug);
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private function runtimePublishedDirectoryDraftProjectionItem(Occupation $occupation): ?array
+    {
+        $slug = strtolower(trim((string) $occupation->canonical_slug));
+        if ($slug === '' || in_array($slug, self::DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS, true)) {
+            return null;
+        }
+
+        $item = $this->runtimePublishProjection->itemForSlug($slug, 'en');
+        if (! is_array($item)) {
+            return null;
+        }
+
+        $state = (string) (
+            $item['runtime_publish_state']
+            ?? $item['runtime_state']
+            ?? $item['projection_state']
+            ?? $item['state']
+            ?? ''
+        );
+
+        if ($state !== 'published') {
+            return null;
+        }
+
+        if (($item['detail_route_enabled'] ?? false) !== true
+            || ($item['robots_indexable'] ?? false) !== true
+            || ($item['release_gate_pass'] ?? false) !== true) {
+            return null;
+        }
+
+        return array_merge($item, [
+            'slug' => $slug,
+            'canonical_path' => is_string($item['canonical_path'] ?? null)
+                ? $item['canonical_path']
+                : '/career/jobs/'.$slug,
+            'reason_codes' => array_values(array_unique(array_filter(array_merge(
+                ['runtime_publish_projection', 'runtime_published_navigation_shell'],
+                is_array($item['reason_codes'] ?? null) ? $item['reason_codes'] : [],
+            ), static fn (mixed $reason): bool => is_scalar($reason) && trim((string) $reason) !== ''))),
+        ]);
     }
 
     private function hasDisplayAssetBackedAuthority(Occupation $occupation): bool

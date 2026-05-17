@@ -8396,6 +8396,93 @@
         }
       ],
       "next_pr": "SCAN-2786-VISIBLE-DETAIL-GAP-AFTER-DIRECTORY-DETAIL-REPAIR-1"
+    },
+    "REPAIR-DIRECTORY-LIST-DETAIL-API-AUTHORITY-75-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-directory-list-detail-api-authority-75-1",
+      "base": "main",
+      "depends_on": [
+        "REPAIR-DIRECTORY-DETAIL-PENDING-314-1"
+      ],
+      "status": "in_progress",
+      "train_scope": "career_directory_list_detail_api_authority",
+      "risk_level": "medium",
+      "title": "fix(api): align directory list with runtime detail authority",
+      "name": "Repair remaining Career directory list detail API authority gap",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-DIRECTORY-LIST-DETAIL-API-AUTHORITY-75-1, then implementing the PR."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Career jobs list/detail API authority, dataset authority, focused tests/docs, and authorized train metadata. No fap-web, deploy, DB mutation, rollout, apply, or content generation was performed."
+        },
+        "career_job_list_api": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Career/CareerJobListApiTest.php --no-ansi",
+          "evidence": "7 tests completed with 117 assertions; PHPUnit reported warnings from existing fixture file reads but no failures."
+        },
+        "career_full_dataset_authority_builder": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php --no-ansi",
+          "evidence": "5 tests completed with 363 assertions; PHPUnit reported warnings from existing fixture file reads but no failures."
+        },
+        "career_job_display_surface_api": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php --no-ansi",
+          "evidence": "14 tests passed, 786 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "sqlite_migrate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-directory-list-detail-api-authority-75.sqlite php artisan migrate --force --no-ansi",
+          "evidence": "SQLite migration completed successfully in local testing database."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test app/Services/Career/Bundles/CareerJobListBundleBuilder.php app/Services/Career/Dataset/CareerFullDatasetAuthorityBuilder.php tests/Feature/Career/CareerJobListApiTest.php tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php",
+          "evidence": "Scoped Pint check passed."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check",
+          "evidence": "Whitespace checks passed."
+        },
+        "mbti_ci": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full CI master chain exited 0."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR not opened yet."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T16:20:00+08:00",
+          "status": "in_progress",
+          "summary": "Registered authorized directory list detail API authority PR and started implementation from clean origin/main worktree."
+        },
+        {
+          "at": "2026-05-17T16:45:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Implemented runtime-published detail shell authority for directory draft list and dataset rows, then passed focused Career tests, route list, sqlite migrate, scoped Pint, diff checks, and full MBTI CI chain."
+        }
+      ],
+      "next_pr": "SCAN-2786-VISIBLE-DETAIL-GAP-AFTER-DIRECTORY-LIST-DETAIL-API-AUTHORITY-75-1"
     }
   }
 }

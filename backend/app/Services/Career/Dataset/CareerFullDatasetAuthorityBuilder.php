@@ -45,6 +45,13 @@ final class CareerFullDatasetAuthorityBuilder
 
     private const DIRECTORY_DRAFT_CROSSWALK_MODE = 'directory_draft';
 
+    /**
+     * @var list<string>
+     */
+    private const DIRECTORY_DRAFT_MANUAL_HOLD_SLUGS = [
+        'software-developers',
+    ];
+
     public function __construct(
         private readonly CareerFullReleaseLedgerService $fullReleaseLedgerService,
         private readonly CareerStrongIndexEligibilityService $strongIndexEligibilityService,
@@ -196,15 +203,27 @@ final class CareerFullDatasetAuthorityBuilder
             }
             unset($runtimeDatasetItemsBySlug[$directoryDraftMember->canonicalSlug]);
 
-            $releaseCohort = 'directory_draft_pending_detail';
-            $publicIndexState = 'noindex';
-            $strongIndexDecision = 'directory_draft_detail_pending';
+            $releaseCohort = $directoryDraftMember->releaseCohort ?? 'directory_draft_pending_detail';
+            $publicIndexState = $directoryDraftMember->publicIndexState ?? 'noindex';
+            $strongIndexDecision = $directoryDraftMember->strongIndexDecision ?? 'directory_draft_detail_pending';
             $familySlug = $directoryDraftMember->familySlug ?? '__unknown__';
             $publishTrack = $directoryDraftMember->publishTrack ?? 'directory_draft';
 
-            $includedCount++;
-            $releaseCohortCounts[$releaseCohort] = (int) ($releaseCohortCounts[$releaseCohort] ?? 0) + 1;
-            $includedReleaseCohortCounts[$releaseCohort] = (int) ($includedReleaseCohortCounts[$releaseCohort] ?? 0) + 1;
+            if ($directoryDraftMember->includedInPublicDataset) {
+                $includedCount++;
+            } else {
+                $excludedCount++;
+            }
+
+            if ($releaseCohort !== null) {
+                $releaseCohortCounts[$releaseCohort] = (int) ($releaseCohortCounts[$releaseCohort] ?? 0) + 1;
+                if ($directoryDraftMember->includedInPublicDataset) {
+                    $includedReleaseCohortCounts[$releaseCohort] = (int) ($includedReleaseCohortCounts[$releaseCohort] ?? 0) + 1;
+                } else {
+                    $excludedReleaseCohortCounts[$releaseCohort] = (int) ($excludedReleaseCohortCounts[$releaseCohort] ?? 0) + 1;
+                }
+            }
+
             $publicIndexStateCounts[$publicIndexState] = (int) ($publicIndexStateCounts[$publicIndexState] ?? 0) + 1;
             $strongDecisionCounts[$strongIndexDecision] = (int) ($strongDecisionCounts[$strongIndexDecision] ?? 0) + 1;
             $familyDistribution[$familySlug] = (int) ($familyDistribution[$familySlug] ?? 0) + 1;
@@ -372,6 +391,19 @@ final class CareerFullDatasetAuthorityBuilder
             ->filter(fn (Occupation $occupation): bool => ! isset($excluded[(string) $occupation->canonical_slug]))
             ->map(function (Occupation $occupation): CareerFullDatasetMember {
                 $familySlug = $occupation->family?->canonical_slug;
+                $runtimeProjectionItem = $this->runtimePublishedDirectoryDraftProjectionItem((string) $occupation->canonical_slug);
+                $releaseCohort = $runtimeProjectionItem !== null
+                    ? 'public_detail_indexable'
+                    : 'directory_draft_pending_detail';
+                $publicIndexState = $runtimeProjectionItem !== null ? 'indexable' : 'noindex';
+                $strongIndexDecision = $runtimeProjectionItem !== null
+                    ? 'strong_index_ready'
+                    : 'directory_draft_detail_pending';
+                $publishTrack = $runtimeProjectionItem !== null ? 'runtime_publish_projection' : 'directory_draft';
+                $batchOrigin = $runtimeProjectionItem !== null
+                    ? 'runtime_publish_projection'
+                    : 'china_us_occupation_directories_2026';
+                $exclusionReasons = $runtimeProjectionItem !== null ? [] : ['detail_page_unavailable'];
 
                 return new CareerFullDatasetMember(
                     memberKind: 'career_tracked_occupation',
@@ -379,19 +411,19 @@ final class CareerFullDatasetAuthorityBuilder
                     canonicalTitleEn: $this->normalizeNullableString($occupation->canonical_title_en),
                     canonicalTitleZh: $this->normalizeNullableString($occupation->canonical_title_zh),
                     familySlug: $this->normalizeNullableString($familySlug),
-                    publishTrack: 'directory_draft',
-                    batchOrigin: 'china_us_occupation_directories_2026',
-                    releaseCohort: 'directory_draft_pending_detail',
-                    publicIndexState: 'noindex',
-                    strongIndexDecision: 'directory_draft_detail_pending',
+                    publishTrack: $publishTrack,
+                    batchOrigin: $batchOrigin,
+                    releaseCohort: $releaseCohort,
+                    publicIndexState: $publicIndexState,
+                    strongIndexDecision: $strongIndexDecision,
                     includedInPublicDataset: true,
-                    exclusionReasons: ['detail_page_unavailable'],
+                    exclusionReasons: $exclusionReasons,
                     publicFacets: [
-                        'release_cohort' => 'directory_draft_pending_detail',
-                        'public_index_state' => 'noindex',
-                        'strong_index_decision' => 'directory_draft_detail_pending',
+                        'release_cohort' => $releaseCohort,
+                        'public_index_state' => $publicIndexState,
+                        'strong_index_decision' => $strongIndexDecision,
                         'family_slug' => $this->normalizeNullableString($familySlug),
-                        'publish_track' => 'directory_draft',
+                        'publish_track' => $publishTrack,
                     ],
                 );
             })
@@ -429,6 +461,42 @@ final class CareerFullDatasetAuthorityBuilder
                 (string) $occupation->canonical_slug => $occupation,
             ])
             ->all();
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private function runtimePublishedDirectoryDraftProjectionItem(string $slug): ?array
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        if ($normalizedSlug === '' || in_array($normalizedSlug, self::DIRECTORY_DRAFT_MANUAL_HOLD_SLUGS, true)) {
+            return null;
+        }
+
+        $item = $this->runtimePublishProjection->itemForSlug($normalizedSlug, 'en');
+        if (! is_array($item)) {
+            return null;
+        }
+
+        $state = (string) (
+            $item['runtime_publish_state']
+            ?? $item['runtime_state']
+            ?? $item['projection_state']
+            ?? $item['state']
+            ?? ''
+        );
+
+        if ($state !== 'published') {
+            return null;
+        }
+
+        if (($item['detail_route_enabled'] ?? false) !== true
+            || ($item['robots_indexable'] ?? false) !== true
+            || ($item['release_gate_pass'] ?? false) !== true) {
+            return null;
+        }
+
+        return $item;
     }
 
     /**
