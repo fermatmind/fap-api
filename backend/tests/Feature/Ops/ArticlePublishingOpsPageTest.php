@@ -139,7 +139,7 @@ final class ArticlePublishingOpsPageTest extends TestCase
             'blocked_reasons_json' => [['code' => 'claim_boundary_forbidden_phrase']],
         ]);
         AuditLog::query()->withoutGlobalScopes()->create([
-            'org_id' => 0,
+            'org_id' => (int) $org->id,
             'action' => 'content_release_cache_signal',
             'target_type' => 'article',
             'target_id' => (string) $zhDraft->id,
@@ -177,6 +177,44 @@ final class ArticlePublishingOpsPageTest extends TestCase
             ->assertDontSee('report_json')
             ->assertDontSee('PaymentEvent')
             ->assertDontSee('answers_json');
+    }
+
+    public function test_article_publishing_ops_release_failures_are_scoped_to_selected_org(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Article Publishing Selected Org');
+        $foreignOrg = $this->createOrganization('Article Publishing Foreign Org');
+
+        AuditLog::query()->withoutGlobalScopes()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'action' => 'content_release_failure_alert',
+            'target_type' => 'article',
+            'target_id' => 'selected-article',
+            'meta_json' => ['title' => 'Selected org release failure'],
+            'result' => 'failed',
+            'created_at' => Carbon::now(),
+        ]);
+        AuditLog::query()->withoutGlobalScopes()->create([
+            'org_id' => (int) $foreignOrg->id,
+            'action' => 'content_release_failure_alert',
+            'target_type' => 'article',
+            'target_id' => 'foreign-article',
+            'meta_json' => ['title' => 'Foreign org release failure'],
+            'result' => 'failed',
+            'created_at' => Carbon::now(),
+        ]);
+
+        $this->withSession($this->opsSession($admin, $selectedOrg))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        Livewire::test(ArticlePublishingOpsPage::class)
+            ->assertOk()
+            ->assertSet('dailyHealthFields.6.value', '1')
+            ->assertSet('releaseRows.0.title', 'Selected org release failure')
+            ->assertSee('Selected org release failure')
+            ->assertDontSee('Foreign org release failure');
     }
 
     private function createArticle(string $slug, string $locale, string $title, array $overrides = []): Article
