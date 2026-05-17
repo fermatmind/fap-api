@@ -210,6 +210,22 @@ Markdown text can safely include code fences, variables, backticks, and command 
 EOF
 ```
 
-Do not use an unquoted `<<EOF` heredoc for that content. Unquoted heredocs allow shell expansion, so Markdown code fences and backticks can be interpreted by the shell instead of being written as text.
+Do not use an unquoted heredoc with an EOF delimiter for that content. Unquoted heredocs allow shell expansion, so Markdown code fences and backticks can be interpreted by the shell instead of being written as text.
 
 Do not include directly executable whole-tree deletion examples in operational ledgers or cleanup notes.
+
+## Docs shell safety guard
+
+The repository includes `scripts/security/assert_docs_shell_safety.sh` to catch repeatable documentation hazards before they enter release hygiene or artifact-clean checks.
+
+The guard fails docs that contain:
+
+```text
+unquoted heredoc examples that use EOF as the delimiter
+directly executable backend/storage/app/private/content_releases whole-tree delete examples
+directly executable source_pack or previous_pack bulk delete examples
+```
+
+Quoted heredoc delimiters such as `<<'EOF'`, `<<"EOF"`, and `<<-'EOF'` remain allowed.
+
+This guard is documentation safety only. It must not delete files, move files, run `storage:prune`, write prune plans, mutate the database, or change retention behavior.

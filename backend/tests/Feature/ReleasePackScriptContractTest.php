@@ -74,4 +74,105 @@ final class ReleasePackScriptContractTest extends TestCase
             $artifactClean
         );
     }
+
+    public function test_docs_shell_safety_guard_is_wired_into_artifact_clean_check(): void
+    {
+        $repoRoot = dirname(base_path());
+        $guardPath = $repoRoot.'/scripts/security/assert_docs_shell_safety.sh';
+        $artifactCleanPath = $repoRoot.'/scripts/security/assert_artifact_clean.sh';
+
+        $this->assertFileExists($guardPath);
+        $this->assertFileExists($artifactCleanPath);
+
+        $artifactClean = (string) file_get_contents($artifactCleanPath);
+
+        $this->assertStringContainsString(
+            'bash "${SCRIPT_DIR}/assert_docs_shell_safety.sh" --target "$TARGET"',
+            $artifactClean
+        );
+    }
+
+    public function test_docs_shell_safety_guard_allows_quoted_heredoc(): void
+    {
+        [$exitCode, $output] = $this->runDocsShellSafetyGuard(
+            "```bash\n".
+            "cat > /tmp/ledger.md <<'EOF'\n".
+            "Markdown with code fences and variables is written as text.\n".
+            "EOF\n".
+            "```\n"
+        );
+
+        $this->assertSame(0, $exitCode, $output);
+    }
+
+    public function test_docs_shell_safety_guard_rejects_unquoted_heredoc(): void
+    {
+        [$exitCode, $output] = $this->runDocsShellSafetyGuard(
+            "```bash\n".
+            "cat > /tmp/ledger.md <<EOF\n".
+            "Markdown with backticks can be expanded by the shell.\n".
+            "EOF\n".
+            "```\n"
+        );
+
+        $this->assertNotSame(0, $exitCode, $output);
+        $this->assertStringContainsString('unquoted_heredoc_eof', $output);
+    }
+
+    public function test_docs_shell_safety_guard_rejects_content_releases_tree_delete_example(): void
+    {
+        [$exitCode, $output] = $this->runDocsShellSafetyGuard(
+            "```bash\n".
+            "rm -rf backend/storage/app/private/content_releases\n".
+            "```\n"
+        );
+
+        $this->assertNotSame(0, $exitCode, $output);
+        $this->assertStringContainsString('content_releases_whole_tree_delete_example', $output);
+    }
+
+    public function test_docs_shell_safety_guard_rejects_release_pack_bulk_delete_examples(): void
+    {
+        [$exitCode, $output] = $this->runDocsShellSafetyGuard(
+            "```bash\n".
+            "rm -rf backend/storage/app/private/content_releases/*/source_pack\n".
+            "rm -rf backend/storage/app/private/content_releases/backups/*/previous_pack\n".
+            "```\n"
+        );
+
+        $this->assertNotSame(0, $exitCode, $output);
+        $this->assertStringContainsString('release_pack_bulk_delete_example', $output);
+    }
+
+    public function test_docs_shell_safety_guard_allows_plain_explanatory_text(): void
+    {
+        [$exitCode, $output] = $this->runDocsShellSafetyGuard(
+            "The content release runtime tree must be audited before cleanup.\n".
+            "source_pack and previous_pack require manifest-aware review.\n".
+            "Use quoted heredocs for ledgers that contain Markdown examples.\n"
+        );
+
+        $this->assertSame(0, $exitCode, $output);
+    }
+
+    /**
+     * @return array{0:int,1:string}
+     */
+    private function runDocsShellSafetyGuard(string $markdown): array
+    {
+        $repoRoot = dirname(base_path());
+        $target = sys_get_temp_dir().'/fap-docs-shell-safety-'.bin2hex(random_bytes(8));
+        $docsDir = $target.'/docs';
+
+        mkdir($docsDir, 0777, true);
+        file_put_contents($docsDir.'/example.md', $markdown);
+
+        $command = 'bash '.escapeshellarg($repoRoot.'/scripts/security/assert_docs_shell_safety.sh')
+            .' --target '.escapeshellarg($target).' 2>&1';
+
+        $lines = [];
+        exec($command, $lines, $exitCode);
+
+        return [$exitCode, implode("\n", $lines)];
+    }
 }

@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T15:42:17Z",
+  "updated_at": "2026-05-17T16:09:09Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10337,6 +10337,102 @@
           "at": "2026-05-17T15:42:17Z",
           "status": "ci_failure_fixed_locally",
           "summary": "Fixed GitHub CI failure by teaching the BigFive runtime freeze classifier that the read-only StorageReleaseRootsAudit command is allowed in this scoped PR; reran focused test, StorageReleaseRootsAuditTest, route:list, ci_verify_mbti, and diff checks successfully."
+        }
+      ]
+    },
+    "DOCS-SHELL-SAFETY-GUARD": {
+      "repo": "fap-api",
+      "branch": "codex/docs-shell-safety-guard",
+      "base": "main",
+      "depends_on": [],
+      "status": "committed",
+      "train_scope": "storage_runtime_hygiene",
+      "risk_level": "low",
+      "title": "chore(security): add docs shell safety guard",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding docs/codex/pr-train.yaml and docs/codex/pr-train-state.json entries for docs-shell-safety-guard."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "No manifest dependencies declared for DOCS-SHELL-SAFETY-GUARD."
+        },
+        "safety_boundary": {
+          "status": "pass",
+          "evidence": "Scope excludes cleanup, prune, delete, move, DB mutation, retention behavior changes, and publish/rollback/rehydrate/quarantine business logic changes."
+        },
+        "implementation": {
+          "status": "pass",
+          "evidence": "Added read-only docs shell safety guard, wired it through assert_artifact_clean.sh, covered quoted/unquoted heredoc and destructive docs examples in ReleasePackScriptContractTest, and documented guard purpose in the storage local retention SOP."
+        },
+        "docs_shell_safety_guard": {
+          "status": "pass",
+          "command": "bash scripts/security/assert_docs_shell_safety.sh",
+          "evidence": "Docs shell safety check passed for repository docs."
+        },
+        "artifact_clean_integration": {
+          "status": "pass",
+          "command": "bash scripts/security/assert_artifact_clean.sh",
+          "evidence": "Security artifact clean check invoked docs shell safety guard and passed in repo mode."
+        },
+        "release_pack_contract_test": {
+          "status": "pass",
+          "command": "php artisan test --filter=ReleasePackScriptContractTest --no-ansi",
+          "evidence": "8 tests passed with 26 assertions, including quoted heredoc pass, unquoted heredoc fail, content_releases delete example fail, source_pack/previous_pack bulk delete example fail, and explanatory text pass."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "ci_verify_mbti": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "MBTI CI master chain completed successfully; generated BIG5_OCEAN compiled tracked artifacts were restored to HEAD because they are outside this PR scope."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check",
+          "evidence": "Whitespace checks passed before and after ci_verify_mbti."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to docs shell safety guard, artifact clean integration, ReleasePackScriptContractTest, storage local retention SOP, and docs/codex train metadata. No cleanup, prune, delete, move, DB mutation, retention behavior, or publish/rollback/rehydrate/quarantine business logic changed."
+        },
+        "standalone_migrate": {
+          "status": "not_run",
+          "command": "php artisan migrate",
+          "evidence": "Not run because this PR has no migration or schema changes; ci_verify_mbti used its isolated sqlite harness."
+        },
+        "curl_health": {
+          "status": "not_run",
+          "command": "curl -i http://127.0.0.1:8000/api/health",
+          "evidence": "Not run because no persistent local server check was part of this docs/scripts safety guard PR."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": "c1e8063a",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T16:01:58Z",
+          "status": "in_progress",
+          "summary": "Started DOCS-SHELL-SAFETY-GUARD after explicit manifest/state authorization; no cleanup, prune, delete, move, DB mutation, or retention behavior change performed."
+        },
+        {
+          "at": "2026-05-17T16:08:20Z",
+          "status": "local_checks_passed",
+          "summary": "Implemented docs shell safety guard and completed guard, artifact clean integration, ReleasePackScriptContractTest, route:list, ci_verify_mbti, and diff checks; no cleanup, prune, delete, move, DB mutation, or retention behavior change performed."
+        },
+        {
+          "at": "2026-05-17T16:09:09Z",
+          "status": "committed",
+          "summary": "Committed DOCS-SHELL-SAFETY-GUARD scoped changes at c1e8063a."
         }
       ]
     }
