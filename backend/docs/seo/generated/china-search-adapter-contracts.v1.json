@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "source_documents": [
+    "SEO-DASH-00B",
+    "SEO-DASH-04B",
+    "BACKEND-RUNTIME-02D"
+  ],
+  "collectors": [
+    "so360_foundation",
+    "sogou_foundation",
+    "shenma_foundation"
+  ],
+  "tables": [
+    "seo_search_engine_verification_statuses",
+    "seo_domestic_submission_logs",
+    "seo_domestic_index_samples"
+  ],
+  "enabled_by_default": false,
+  "live_api_enabled_by_default": false,
+  "write_enabled_by_default": false,
+  "dry_run_default": true,
+  "external_api_calls_allowed": false,
+  "real_url_submission_allowed": false,
+  "engine_specific_page_generation_allowed": false,
+  "source_engines": [
+    "so360",
+    "sogou",
+    "shenma"
+  ],
+  "purchase_truth_source": "backend_orders_payment_benefits",
+  "search_channel_purchase_attribution_allowed": false,
+  "seo_truth_source": false,
+  "pii_forbidden": true,
+  "forbidden_columns": [
+    "email",
+    "order_no",
+    "attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "cookie",
+    "raw_payload",
+    "payment_payload",
+    "raw_email",
+    "raw_ip",
+    "raw_cookie",
+    "api_key",
+    "secret",
+    "token",
+    "verification_file_content"
+  ],
+  "draft_url_submission_allowed": false,
+  "private_flow_submission_allowed": false,
+  "noindex_url_submission_allowed": false,
+  "credential_required_before_live_use": true,
+  "scheduler_enabled": false,
+  "queue_worker_enabled": false,
+  "sitemap_llms_changed": false,
+  "node2_local_laravel_data_source": false,
+  "next_task": "CHINA-SEARCH-04"
+}

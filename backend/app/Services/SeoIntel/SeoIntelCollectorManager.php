@@ -11,6 +11,9 @@ use App\Services\SeoIntel\Collectors\DriftFoundationCollector;
 use App\Services\SeoIntel\Collectors\GscCollector;
 use App\Services\SeoIntel\Collectors\IndexNowFoundationCollector;
 use App\Services\SeoIntel\Collectors\NoopSeoIntelCollector;
+use App\Services\SeoIntel\Collectors\ShenmaFoundationCollector;
+use App\Services\SeoIntel\Collectors\So360FoundationCollector;
+use App\Services\SeoIntel\Collectors\SogouFoundationCollector;
 use App\Services\SeoIntel\Collectors\UrlTruthInventoryCollector;
 use App\Services\SeoIntel\Drift\CrawlerLogLineParser;
 use App\Services\SeoIntel\Drift\CrawlerUserAgentClassifier;
@@ -136,6 +139,30 @@ final class SeoIntelCollectorManager
             return new IndexNowFoundationCollector(
                 new IndexNowPayloadValidator,
                 new SearchChannelSubmissionStatusNormalizer,
+            );
+        }
+
+        if ($collector === 'so360_foundation') {
+            return new So360FoundationCollector(
+                new DomesticSearchUrlEligibilityValidator,
+                new DomesticSearchSubmissionStatusNormalizer,
+                new DomesticIndexSampleNormalizer,
+            );
+        }
+
+        if ($collector === 'sogou_foundation') {
+            return new SogouFoundationCollector(
+                new DomesticSearchUrlEligibilityValidator,
+                new DomesticSearchSubmissionStatusNormalizer,
+                new DomesticIndexSampleNormalizer,
+            );
+        }
+
+        if ($collector === 'shenma_foundation') {
+            return new ShenmaFoundationCollector(
+                new DomesticSearchUrlEligibilityValidator,
+                new DomesticSearchSubmissionStatusNormalizer,
+                new DomesticIndexSampleNormalizer,
             );
         }
 
