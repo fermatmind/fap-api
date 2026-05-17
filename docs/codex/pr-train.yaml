@@ -486,6 +486,57 @@ prs:
     external_api_credentials_required: human_confirm_required
     scheduler_activation: false
     next_task: CHINA-SEARCH-04
+  - id: CHINA-SEARCH-04
+    repo: fap-api
+    depends_on:
+      - CHINA-SEARCH-03
+    branch: codex/china-search-04-chinese-crawler-log-collector
+    title: "feat(seo-intel): add Chinese crawler log collector foundation"
+    name: "Chinese crawler log collector"
+    findings:
+      - "CHINA-SEARCH-03 merged disabled-by-default 360/Sogou/Shenma adapter contracts."
+      - "Chinese crawler logs are observation data, not SEO truth or purchase truth."
+      - "Crawler hits must not grant URL indexability or submission eligibility."
+    scope:
+      - Add seo_crawler_logs_daily logical aggregate schema.
+      - Add Chinese crawler user-agent classifier, fixture log parser, privacy sanitizer, daily aggregator, and disabled dry-run collector.
+      - Add generated artifact and focused SeoIntel tests proving no raw IP, cookie, user-agent, production log read, external call, scheduler, or purchase attribution.
+      - Keep OpenResty, Nginx, CDN/cloud, sitemap/llms, scheduler, queue workers, external APIs, and production log access unchanged.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/database/migrations/*seo_crawler_logs_daily*
+      - backend/app/Services/SeoIntel/**
+      - backend/app/Console/Commands/SeoIntelCollectCommand.php
+      - backend/tests/**/SeoIntel*Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/chinese-crawler-log-collector.md
+      - backend/docs/seo/generated/chinese-crawler-log-collector.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Read production logs, connect CDN logs, change OpenResty/Nginx, change DNS/CDN/COS/OSS, deploy, SSH, edit env, or touch Node2/Node3.
+      - Run production migrations, create production seo_intel DB, enable scheduler jobs, create queue workers, or deploy Metabase.
+      - Submit real URLs, call external APIs, or generate search-engine-specific pages.
+      - Store raw IPs, raw cookies, raw user-agent strings, emails, order numbers, attempt ids, payment ids, provider event ids, tokens, secrets, or payment payloads in seo_intel detail.
+      - Use crawler logs, domestic search channels, keywords, queries, or index status as purchase truth.
+      - Change payment, order, report, email, recommendation, scoring, sitemap, or llms behavior.
+      - Modify fap-web runtime or use fap-api/fap-web as production frontend runtime.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:collect --collector=chinese_crawler_log_foundation --dry-run --json
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    production_log_access: human_confirm_required
+    scheduler_activation: false
+    next_task: SEO-DASH-05
   - id: PR-MEDIA-01
     repo: fap-api
     depends_on:

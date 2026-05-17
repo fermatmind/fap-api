@@ -6,6 +6,7 @@ namespace App\Services\SeoIntel;
 
 use App\Services\SeoIntel\Collectors\AttributionRevenueFoundationCollector;
 use App\Services\SeoIntel\Collectors\BaiduFoundationCollector;
+use App\Services\SeoIntel\Collectors\ChineseCrawlerLogCollector;
 use App\Services\SeoIntel\Collectors\CrawlerLogFoundationCollector;
 use App\Services\SeoIntel\Collectors\DriftFoundationCollector;
 use App\Services\SeoIntel\Collectors\GscCollector;
@@ -163,6 +164,17 @@ final class SeoIntelCollectorManager
                 new DomesticSearchUrlEligibilityValidator,
                 new DomesticSearchSubmissionStatusNormalizer,
                 new DomesticIndexSampleNormalizer,
+            );
+        }
+
+        if ($collector === 'chinese_crawler_log_foundation') {
+            $classifier = new ChineseCrawlerUserAgentClassifier;
+
+            return new ChineseCrawlerLogCollector(
+                $classifier,
+                new \App\Services\SeoIntel\CrawlerLogLineParser($classifier),
+                new CrawlerLogPrivacySanitizer,
+                new CrawlerLogDailyAggregator,
             );
         }
 

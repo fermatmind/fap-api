@@ -401,6 +401,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_chinese_crawler_log_foundation_files(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/ChineseCrawlerUserAgentClassifier.php',
+            'backend/app/Services/SeoIntel/Collectors/ChineseCrawlerLogCollector.php',
+            'backend/app/Services/SeoIntel/CrawlerLogDailyAggregator.php',
+            'backend/app/Services/SeoIntel/CrawlerLogLineParser.php',
+            'backend/app/Services/SeoIntel/CrawlerLogPrivacySanitizer.php',
+            'backend/database/migrations/2026_05_17_001600_create_seo_crawler_logs_daily_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1591,6 +1605,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isChineseCrawlerLogFoundationFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -2072,6 +2090,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/database/migrations/2026_05_17_001300_create_seo_search_engine_verification_statuses_table.php',
             'backend/database/migrations/2026_05_17_001400_create_seo_domestic_submission_logs_table.php',
             'backend/database/migrations/2026_05_17_001500_create_seo_domestic_index_samples_table.php',
+        ], true);
+    }
+
+    private function isChineseCrawlerLogFoundationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/SeoIntel/ChineseCrawlerUserAgentClassifier.php',
+            'backend/app/Services/SeoIntel/Collectors/ChineseCrawlerLogCollector.php',
+            'backend/app/Services/SeoIntel/CrawlerLogDailyAggregator.php',
+            'backend/app/Services/SeoIntel/CrawlerLogLineParser.php',
+            'backend/app/Services/SeoIntel/CrawlerLogPrivacySanitizer.php',
+            'backend/database/migrations/2026_05_17_001600_create_seo_crawler_logs_daily_table.php',
         ], true);
     }
 
