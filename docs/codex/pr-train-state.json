@@ -4469,7 +4469,7 @@
       "branch": "fix/career-80-manifest-train-command",
       "title": "feat(api): add career 80 manifest train command",
       "name": "Add read-only Career 80 manifest train command",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "80-READINESS-2"
       ],
@@ -8377,7 +8377,7 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1451",
       "commit_sha": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -10115,6 +10115,11 @@
           "at": "2026-05-17T13:54:00Z",
           "status": "local_checks_passed",
           "summary": "Implemented read-only article cover propagation smoke and completed focused ArticleCoverPropagationSmoke, ArticlePublicApi, route list, Pint, and diff checks for commit 6c12a810abed94ddeae9d3e2603604897f3a2cc3."
+        },
+        {
+          "at": "2026-05-17T13:56:00Z",
+          "status": "pr_open",
+          "summary": "Created GitHub PR #1451 for PUBLISH-API-ARTICLE-COVER-SMOKE."
         }
       ]
     }
