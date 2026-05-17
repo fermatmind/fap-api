@@ -151,15 +151,14 @@ final class SeoIntelGscCollectorTest extends TestCase
     }
 
     #[Test]
-    public function gsc_pr_does_not_enable_scheduler_or_baidu_indexnow_implementation(): void
+    public function gsc_pr_does_not_enable_scheduler_or_live_baidu_indexnow_connections(): void
     {
         $bootstrap = (string) file_get_contents(base_path('bootstrap/app.php'));
-        $config = (string) file_get_contents(config_path('seo_intel.php'));
 
         $this->assertStringNotContainsString('seo-intel:collect', $bootstrap);
         $this->assertStringNotContainsString('SeoIntelCollectCommand', $bootstrap);
-        $this->assertStringNotContainsString('baidu_foundation', $config);
-        $this->assertStringNotContainsString('indexnow_foundation', $config);
+        $this->assertFalse((bool) config('seo_intel.baidu_live_api_enabled'));
+        $this->assertFalse((bool) config('seo_intel.indexnow_live_api_enabled'));
     }
 
     /**

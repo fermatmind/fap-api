@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel;
 
 use App\Services\SeoIntel\Collectors\AttributionRevenueFoundationCollector;
+use App\Services\SeoIntel\Collectors\BaiduFoundationCollector;
 use App\Services\SeoIntel\Collectors\CrawlerLogFoundationCollector;
 use App\Services\SeoIntel\Collectors\DriftFoundationCollector;
 use App\Services\SeoIntel\Collectors\GscCollector;
+use App\Services\SeoIntel\Collectors\IndexNowFoundationCollector;
 use App\Services\SeoIntel\Collectors\NoopSeoIntelCollector;
 use App\Services\SeoIntel\Collectors\UrlTruthInventoryCollector;
 use App\Services\SeoIntel\Drift\CrawlerLogLineParser;
@@ -120,6 +122,20 @@ final class SeoIntelCollectorManager
                 new GscSearchAnalyticsRowNormalizer(
                     new GscQueryClassifier,
                 ),
+            );
+        }
+
+        if ($collector === 'baidu_foundation') {
+            return new BaiduFoundationCollector(
+                new BaiduPushPayloadValidator,
+                new SearchChannelSubmissionStatusNormalizer,
+            );
+        }
+
+        if ($collector === 'indexnow_foundation') {
+            return new IndexNowFoundationCollector(
+                new IndexNowPayloadValidator,
+                new SearchChannelSubmissionStatusNormalizer,
             );
         }
 

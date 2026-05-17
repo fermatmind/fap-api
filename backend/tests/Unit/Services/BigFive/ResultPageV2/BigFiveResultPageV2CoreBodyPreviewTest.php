@@ -366,6 +366,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_intel_baidu_indexnow_foundation_files(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/BaiduPushPayloadValidator.php',
+            'backend/app/Services/SeoIntel/Collectors/BaiduFoundationCollector.php',
+            'backend/app/Services/SeoIntel/Collectors/IndexNowFoundationCollector.php',
+            'backend/app/Services/SeoIntel/IndexNowPayloadValidator.php',
+            'backend/app/Services/SeoIntel/SearchChannelSubmissionStatusNormalizer.php',
+            'backend/database/migrations/2026_05_17_001000_create_seo_baidu_push_logs_table.php',
+            'backend/database/migrations/2026_05_17_001100_create_seo_baidu_landing_daily_table.php',
+            'backend/database/migrations/2026_05_17_001200_create_seo_indexnow_submissions_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1548,6 +1564,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelBaiduIndexNowFoundationFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -1998,6 +2018,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/GscQueryClassifier.php',
             'backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php',
             'backend/database/migrations/2026_05_17_000900_create_seo_gsc_daily_table.php',
+        ], true);
+    }
+
+    private function isSeoIntelBaiduIndexNowFoundationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/SeoIntel/BaiduPushPayloadValidator.php',
+            'backend/app/Services/SeoIntel/Collectors/BaiduFoundationCollector.php',
+            'backend/app/Services/SeoIntel/Collectors/IndexNowFoundationCollector.php',
+            'backend/app/Services/SeoIntel/IndexNowPayloadValidator.php',
+            'backend/app/Services/SeoIntel/SearchChannelSubmissionStatusNormalizer.php',
+            'backend/database/migrations/2026_05_17_001000_create_seo_baidu_push_logs_table.php',
+            'backend/database/migrations/2026_05_17_001100_create_seo_baidu_landing_daily_table.php',
+            'backend/database/migrations/2026_05_17_001200_create_seo_indexnow_submissions_table.php',
         ], true);
     }
 

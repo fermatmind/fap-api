@@ -371,6 +371,63 @@ prs:
     external_api_credentials_required: human_confirm_required
     scheduler_activation: false
     next_task: SEO-DASH-04B
+  - id: SEO-DASH-04B
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-04A
+    branch: codex/seo-dash-04b-baidu-indexnow-disabled-collectors
+    title: "feat(seo-intel): add Baidu and IndexNow collector foundations"
+    name: "Baidu and IndexNow disabled collectors"
+    findings:
+      - "SEO-DASH-04A merged the disabled-by-default Google Search Console collector foundation."
+      - "BACKEND-RUNTIME-02D accepted Node2 as API edge gateway and Node3/fap-api-prod as backend authority candidate."
+      - "Baidu and IndexNow are search channel adapters, not SEO truth or purchase truth."
+    scope:
+      - Add Baidu push/log and landing foundation schema.
+      - Add IndexNow submission foundation schema.
+      - Add disabled-by-default baidu_foundation and indexnow_foundation collectors, payload validators, and safe dry-run command support.
+      - Keep live APIs, credentials, writes, scheduler, queue workers, production submission, sitemap/llms changes, GSC live connector changes, and Metabase disabled.
+      - Add docs/generated artifact and focused SeoIntel tests proving no live API calls, no credentials, no real URL submissions, no scheduler activation, and no purchase attribution.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/database/migrations/*seo_baidu*
+      - backend/database/migrations/*seo_indexnow*
+      - backend/app/Services/SeoIntel/**
+      - backend/app/Console/Commands/SeoIntelCollectCommand.php
+      - backend/tests/**/SeoIntel*Test.php
+      - backend/tests/Feature/SeoIntel/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/seo-intel-baidu-indexnow-collectors.md
+      - backend/docs/seo/generated/seo-intel-baidu-indexnow-collectors.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Connect live Baidu or IndexNow APIs, add credentials, or submit real URLs.
+      - Run production migrations, create production seo_intel DB, deploy, SSH, edit env, or touch Node2/Node3.
+      - Enable scheduler jobs, create queue workers, run production backfills, or call external APIs.
+      - Use Baidu, IndexNow, GSC, GA4, or Baidu analytics as purchase truth.
+      - Directly attribute purchase to search channel, keyword, query, or submission status.
+      - Store PII, raw order numbers, raw attempt ids, payment ids, provider event ids, cookies, tokens, secrets, or payment payloads in seo_intel detail.
+      - Change payment, order, report, email, recommendation, scoring, sitemap, or llms behavior.
+      - Modify fap-web runtime or use fap-api/fap-web as production frontend runtime.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:collect --collector=baidu_foundation --dry-run --json
+      - cd backend && php artisan seo-intel:collect --collector=indexnow_foundation --dry-run --json
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    baidu_indexnow_credentials: human_confirm_required
+    external_api_credentials_required: human_confirm_required
+    scheduler_activation: false
+    next_task: CHINA-SEARCH-03
   - id: PR-MEDIA-01
     repo: fap-api
     depends_on:

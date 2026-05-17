@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T18:12:00+08:00",
+  "updated_at": "2026-05-17T19:18:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -9291,7 +9291,7 @@
       "depends_on": [
         "SEO-DASH-03B"
       ],
-      "status": "pr_open_github_checks_passed",
+      "status": "merged",
       "train_scope": "search_intelligence_gsc_disabled_collector",
       "risk_level": "medium_disabled_search_channel_schema",
       "title": "feat(seo-intel): add disabled GSC collector",
@@ -9364,10 +9364,10 @@
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1442",
-      "commit_sha": "5d10f5b4676ff8269564e31e09513c65d3d4685c",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "931433196e9a37adb08225a7b95b16df21a1125f",
+      "merged_at": "2026-05-17T10:11:08Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -9399,9 +9399,138 @@
           "at": "2026-05-17T18:12:00+08:00",
           "status": "pr_open_github_checks_passed",
           "summary": "GitHub checks passed after the scoped runtime freeze classifier fix: hygiene, verify-mbti-v2, and verify-mbti-legacy. PR remains open for human review; auto-merge is disabled."
+        },
+        {
+          "at": "2026-05-17T19:05:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled SEO-DASH-04A after post-merge cleanup: GitHub PR #1442 is merged, origin/main contains merge commit 931433196e9a37adb08225a7b95b16df21a1125f, and local/remote task branches were cleaned up."
         }
       ],
       "next_pr": "SEO-DASH-04B"
+    },
+    "SEO-DASH-04B": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-04b-baidu-indexnow-disabled-collectors",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-04A"
+      ],
+      "status": "local_validation_passed",
+      "train_scope": "search_intelligence_baidu_indexnow_disabled_collectors",
+      "risk_level": "medium_disabled_search_channel_schema",
+      "title": "feat(seo-intel): add Baidu and IndexNow collector foundations",
+      "name": "Baidu and IndexNow disabled collectors",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-04B with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-04A is merged in fap-api PR #1442, and origin/main contains merge commit 931433196e9a37adb08225a7b95b16df21a1125f."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "baidu_indexnow_credentials": {
+          "status": "human_confirm_required"
+        },
+        "external_api_credentials_required": {
+          "status": "human_confirm_required"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to allowed seo_intel config, Baidu/IndexNow migrations, SeoIntel collectors/validators/status normalizer, focused SeoIntel tests, BigFive runtime freeze classifier allowlist test for current PR files, docs/generated artifact, and docs/codex PR train metadata. No fap-web runtime, payment/order/report/email/recommendation/scoring, deploy/env, scheduler, queue, external API, sitemap, llms, Node2/Node3 runtime, GSC live connector, or Metabase files changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "56 tests passed with 881 assertions; no failures."
+        },
+        "baidu_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=baidu_foundation --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, credentials_required=false, baidu_live_api_enabled=false, submissions_attempted=false, real_url_submission_allowed=false, search_channel_purchase_attribution_allowed=false, and source_engine=baidu."
+        },
+        "indexnow_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=indexnow_foundation --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, credentials_required=false, indexnow_live_api_enabled=false, submissions_attempted=false, real_url_submission_allowed=false, search_channel_purchase_attribution_allowed=false, and source_engine=bing_indexnow."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3333 files after removing one unused import in current-scope tests."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "bigfive_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+          "evidence": "77 runtime_freeze_classifier tests passed with 82 assertions after adding explicit ignore coverage for SEO-DASH-04B Baidu/IndexNow foundation files."
+        },
+        "json_yaml": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -m json.tool backend/docs/seo/generated/seo-intel-baidu-indexnow-collectors.v1.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\""
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T19:05:00+08:00",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-04B and started disabled-by-default Baidu/IndexNow collector foundations from origin/main."
+        },
+        {
+          "at": "2026-05-17T19:18:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Implemented disabled-by-default Baidu/IndexNow collector foundations, search channel schemas, docs/generated artifact, and tests. SeoIntel tests, Baidu/IndexNow dry-run JSON commands, route list, Pint, JSON/YAML validation, diff checks, and runtime freeze classifier passed."
+        }
+      ],
+      "next_pr": "CHINA-SEARCH-03"
     }
+  },
+  "SEO-DASH-04B": {
+    "status": "github_checks_passed",
+    "commit_sha": "2727135d1d5c9b68b5d787cdc550d0d36b83e94b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1443",
+    "checks": {
+      "local": {
+        "php_artisan_test_filter_seo_intel": "passed",
+        "baidu_foundation_dry_run_json": "passed",
+        "indexnow_foundation_dry_run_json": "passed",
+        "php_artisan_route_list": "passed",
+        "pint_test": "passed",
+        "git_diff_check": "passed",
+        "git_diff_cached_check": "passed"
+      },
+      "github": {
+        "hygiene": "passed",
+        "verify-mbti-legacy": "passed",
+        "verify-mbti-v2": "passed",
+        "mergeStateStatus": "CLEAN"
+      }
+    },
+    "failure_reason": null,
+    "updated_at": "2026-05-17T10:36:34.999719Z"
   }
 }
