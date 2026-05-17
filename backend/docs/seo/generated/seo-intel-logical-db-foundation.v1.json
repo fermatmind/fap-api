@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "source_documents": [
+    "SEO-DASH-00B",
+    "SEO-DASH-TRAIN-00",
+    "BACKEND-RUNTIME-02D"
+  ],
+  "repo": "fap-api",
+  "connection_name": "seo_intel",
+  "enabled_by_default": false,
+  "write_enabled_by_default": false,
+  "collectors_enabled_by_default": false,
+  "tables": [
+    "seo_urls",
+    "seo_url_entities",
+    "seo_internal_traffic_rules"
+  ],
+  "forbidden_columns": [
+    "email",
+    "order_no",
+    "attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "cookie",
+    "raw_payload",
+    "payment_payload"
+  ],
+  "allowed_page_entity_types": [
+    "home",
+    "test_hub",
+    "test_detail",
+    "article",
+    "topic",
+    "personality",
+    "career_job",
+    "career_recommendation",
+    "methodology",
+    "dataset",
+    "report_preview",
+    "landing_page"
+  ],
+  "forbidden_page_entity_types": [
+    "take",
+    "result",
+    "order",
+    "share",
+    "pay",
+    "checkout",
+    "report_private"
+  ],
+  "pii_rules": {
+    "allow_pii_detail": false,
+    "allow_raw_email": false,
+    "allow_raw_cookie": false,
+    "allow_raw_order_no_in_normal_dashboards": false,
+    "allow_raw_attempt_id_in_normal_dashboards": false,
+    "allow_provider_event_id_detail": false,
+    "allow_raw_payment_payload": false,
+    "node2_local_laravel_data_source_allowed": false,
+    "node2_local_db_data_source_allowed": false,
+    "purchase_truth_source": "backend_orders_payments_benefits",
+    "ga4_purchase_truth_allowed": false
+  },
+  "deferred_tables": [
+    "seo_event_funnel_daily",
+    "seo_landing_attribution_daily",
+    "seo_revenue_daily",
+    "seo_cluster_daily",
+    "seo_search_channel_status",
+    "seo_consent_daily",
+    "seo_issue_queue",
+    "seo_gsc_daily",
+    "seo_baidu_push_logs",
+    "seo_indexnow_submissions",
+    "seo_crawler_logs_daily"
+  ],
+  "production_migration_executed": false,
+  "production_db_created": false,
+  "external_api_connected": false,
+  "metabase_deployed": false,
+  "collector_command_created": false,
+  "scheduler_activation_created": false,
+  "next_task": "SEO-DASH-01B"
+}
