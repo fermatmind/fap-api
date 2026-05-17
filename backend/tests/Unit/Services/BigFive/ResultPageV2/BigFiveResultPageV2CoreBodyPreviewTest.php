@@ -803,6 +803,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_cover_propagation_smoke_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleCoverPropagationSmoke.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\ArticleCoverPropagationSmoke;',
+            '+        ArticleCoverPropagationSmoke::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_privacy_logs_dsar_key_rotation_changes(): void
     {
         $changed = [
@@ -1631,6 +1645,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleCoverPropagationSmokeFile($file)) {
+                continue;
+            }
+
             if ($this->isPrivacyLogsDsarKeyRotationFile($file)) {
                 continue;
             }
@@ -1884,6 +1902,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     $this->kernelDiffIsCareerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleEditorialPackageDraftGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsControlledArticlePublishSopOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsArticleCoverPropagationSmokeOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
                 continue;
@@ -2140,6 +2159,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/ArticlePublishControlled.php',
             'backend/app/Services/Cms/ArticlePublishService.php',
+        ], true);
+    }
+
+    private function isArticleCoverPropagationSmokeFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ArticleCoverPropagationSmoke.php',
+            'backend/tests/Feature/Console/ArticleCoverPropagationSmokeCommandTest.php',
         ], true);
     }
 
@@ -2845,6 +2872,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bArticlePublishControlled\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsArticleCoverPropagationSmokeOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bArticleCoverPropagationSmoke\b/u', $line) !== 1) {
                 return false;
             }
         }
