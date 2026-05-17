@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T15:28:25Z",
+  "updated_at": "2026-05-17T15:29:34Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10249,7 +10249,7 @@
       "branch": "codex/storage-release-roots-audit",
       "base": "main",
       "depends_on": [],
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "train_scope": "storage_runtime_hygiene",
       "risk_level": "low",
       "title": "chore(storage): add read-only release roots audit",
@@ -10300,8 +10300,8 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1454",
+      "commit_sha": "59b2bf59703a02efa3d640593355b6d9c288475f",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -10316,6 +10316,11 @@
           "at": "2026-05-17T15:28:25Z",
           "status": "local_checks_passed",
           "summary": "Implemented read-only release roots audit and completed focused test, route list, ci_verify_mbti, JSON validation, and diff checks; no cleanup, prune, move, delete, quarantine, DB mutation by the audit command, or plan writing performed."
+        },
+        {
+          "at": "2026-05-17T15:29:34Z",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR #1454 for STORAGE-RELEASE-ROOTS-AUDIT after scoped local validation passed."
         }
       ]
     }
