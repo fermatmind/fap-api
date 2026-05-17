@@ -5256,3 +5256,45 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+  - id: DOCS-SHELL-SAFETY-GUARD
+    repo: fap-api
+    branch: codex/docs-shell-safety-guard
+    base: main
+    depends_on: []
+    title: "chore(security): add docs shell safety guard"
+    name: "Add docs shell safety guard"
+    train_scope: storage_runtime_hygiene
+    risk_level: low
+    findings:
+      - "A local runtime storage incident was caused by writing Markdown ledger content through an unquoted heredoc, allowing shell expansion to execute command examples."
+      - "Docs and release hygiene need a lightweight guard against unquoted heredoc examples and directly executable destructive content_releases cleanup examples."
+    scope:
+      - Add scripts/security/assert_docs_shell_safety.sh as a read-only docs scanner.
+      - Reject unquoted <<EOF and <<-EOF heredoc examples in docs Markdown.
+      - Reject directly executable content_releases whole-tree delete examples and source_pack/previous_pack bulk delete examples in docs.
+      - Wire the guard through security artifact clean checks.
+      - Add focused ReleasePackScriptContractTest coverage and SOP documentation.
+    allowed_paths:
+      - scripts/security/assert_docs_shell_safety.sh
+      - scripts/security/assert_artifact_clean.sh
+      - backend/tests/Feature/ReleasePackScriptContractTest.php
+      - docs/04-ops/storage-local-retention-sop.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Delete files, move files, create quarantine directories, run storage:prune, or write prune plans.
+      - Add cleanup executors or destructive cleanup commands.
+      - Mutate DB or change retention behavior.
+      - Change publish, rollback, rehydrate, or quarantine business logic.
+      - Use unquoted heredocs for Markdown or command-example writing.
+    validation:
+      - bash scripts/security/assert_docs_shell_safety.sh
+      - php artisan test --filter=ReleasePackScriptContractTest --no-ansi
+      - php artisan route:list --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

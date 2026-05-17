@@ -240,6 +240,8 @@ if [[ "$MODE" != "repo" && "$MODE" != "artifact" ]]; then
 fi
 
 TARGET="$(cd "$TARGET" && pwd)"
+bash "${SCRIPT_DIR}/assert_docs_shell_safety.sh" --target "$TARGET"
+
 if [[ "$MODE" == "repo" ]]; then
   check_repo_mode
 else
