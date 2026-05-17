@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T09:56:25+08:00",
+  "updated_at": "2026-05-17T09:57:18+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -8247,7 +8247,7 @@
     "REPAIR-CN-PROXY-NOINDEX-PUBLIC-OWNER-SURFACE-1": {
       "repo": "fap-api",
       "branch": "codex/repair-cn-proxy-noindex-public-owner-surface-1",
-      "status": "local_validated",
+      "status": "pr_open",
       "title": "fix(api): add guarded CN proxy noindex public-owner surface",
       "checks": {
         "train_registration_authorization": {
@@ -8304,10 +8304,16 @@
           "status": "pass",
           "command": "bash backend/scripts/ci_verify_mbti.sh",
           "evidence": "Full CI master chain exited 0 after OpenAPI snapshot update."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR opened as https://github.com/fermatmind/fap-api/pull/1431; GitHub checks pending at PR creation."
         }
       },
       "sidecar_issues": [],
-      "failure_reason": null
+      "failure_reason": null,
+      "commit_sha": "39c079a34babf048df02f39bdd9fdda78dc07d9e",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1431"
     }
   }
 }
