@@ -4434,3 +4434,44 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+  - id: REPAIR-DIRECTORY-LIST-DETAIL-API-AUTHORITY-75-1
+    repo: fap-api
+    branch: codex/repair-directory-list-detail-api-authority-75-1
+    title: "fix(api): align directory list with runtime detail authority"
+    name: "Repair remaining Career directory list detail API authority gap"
+    findings:
+      - "After REPAIR-DIRECTORY-DETAIL-PENDING-314-1 was deployed, the visible gap scan still found 75 jobs-list rows marked noindex/public_directory_stub while their detail APIs returned indexable runtime-published display surfaces."
+      - "The jobs list and dataset summary must consume explicit runtime-published detail shell authority before falling back to directory_draft stub semantics."
+    scope:
+      - Promote directory_draft jobs-list rows when an explicit runtime projection item proves published detail route, robots indexability, and release gate pass.
+      - Align full dataset authority member and summary counts for those runtime-published directory draft rows.
+      - Preserve stub/noindex behavior when runtime projection item is missing, not published, not indexable, or release-gate blocked.
+      - Preserve software manual-hold and CN proxy policy.
+    allowed_paths:
+      - backend/app/Services/Career/Bundles/**
+      - backend/app/Services/Career/Dataset/**
+      - backend/tests/Feature/Career/**
+      - backend/tests/Unit/Services/Career/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Mutate DB or generate production content.
+      - Run rollout, apply, backfill, rollback, quarantine, or deploy.
+      - Change CN proxy public-owner noindex policy.
+      - Force-enable software-developers or any manual-hold slug.
+      - Touch fap-web.
+    validation:
+      - php artisan test tests/Feature/Career/CareerJobListApiTest.php --no-ansi
+      - php artisan test tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-directory-list-detail-api-authority-75.sqlite php artisan migrate --force --no-ansi
+      - vendor/bin/pint --test app/Services/Career/Bundles/CareerJobListBundleBuilder.php app/Services/Career/Dataset/CareerFullDatasetAuthorityBuilder.php tests/Feature/Career/CareerJobListApiTest.php tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

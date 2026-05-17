@@ -80,6 +80,46 @@ final class CareerFullDatasetAuthorityBuilderTest extends TestCase
         $this->assertSame('目录草稿职业', $draftMember['canonical_title_zh'] ?? null);
     }
 
+    public function test_directory_draft_with_runtime_published_shell_updates_dataset_summary_counts(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+        $draft = $this->createDirectoryDraftOccupation();
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(items: [
+                $draft->canonical_slug => [
+                    'slug' => $draft->canonical_slug,
+                    'runtime_publish_state' => 'published',
+                    'dataset_visible' => true,
+                    'detail_route_enabled' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                ],
+            ]),
+        );
+
+        $authority = app(CareerFullDatasetAuthorityBuilder::class)->build()->toArray();
+        $members = collect((array) ($authority['members'] ?? []));
+        $draftMember = $members->firstWhere('canonical_slug', $draft->canonical_slug);
+
+        $this->assertSame(343, (int) ($authority['member_count'] ?? 0));
+        $this->assertIsArray($draftMember);
+        $this->assertSame('public_detail_indexable', $draftMember['release_cohort'] ?? null);
+        $this->assertSame('indexable', $draftMember['public_index_state'] ?? null);
+        $this->assertSame('strong_index_ready', $draftMember['strong_index_decision'] ?? null);
+        $this->assertSame('runtime_publish_projection', $draftMember['publish_track'] ?? null);
+        $this->assertSame('runtime_publish_projection', $draftMember['batch_origin'] ?? null);
+        $this->assertSame([], $draftMember['exclusion_reasons'] ?? null);
+        $this->assertSame('public_detail_indexable', data_get($draftMember, 'public_facets.release_cohort'));
+        $this->assertSame('runtime_publish_projection', data_get($draftMember, 'public_facets.publish_track'));
+        $this->assertGreaterThanOrEqual(1, (int) data_get($authority, 'summary.release_cohort_counts.public_detail_indexable', 0));
+        $this->assertGreaterThanOrEqual(1, (int) data_get($authority, 'summary.public_index_state_counts.indexable', 0));
+        $this->assertSame(
+            0,
+            (int) data_get($authority, 'summary.release_cohort_counts.directory_draft_pending_detail', 0)
+        );
+    }
+
     public function test_it_adds_runtime_projection_public_occupations_missing_from_legacy_ledger(): void
     {
         $this->materializeCurrentFirstWaveFixture();
