@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T09:57:18+08:00",
+  "updated_at": "2026-05-17T11:05:12+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -2496,7 +2496,7 @@
       "branch": "fix/career-audit-entity-index-context-consumer",
       "title": "fix(api): add career audit entity index context inputs",
       "name": "Add entity and index context artifact inputs for 2786 audit",
-      "status": "in_progress",
+      "status": "local_validation_passed",
       "depends_on": [
         "REPAIR-RUN-CTX-1"
       ],
@@ -8314,6 +8314,88 @@
       "failure_reason": null,
       "commit_sha": "39c079a34babf048df02f39bdd9fdda78dc07d9e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1431"
+    },
+    "REPAIR-DIRECTORY-DETAIL-PENDING-314-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-directory-detail-pending-314-1",
+      "base": "main",
+      "depends_on": [
+        "REPAIR-CN-PROXY-NOINDEX-PUBLIC-OWNER-SURFACE-1"
+      ],
+      "status": "in_progress",
+      "train_scope": "career_directory_detail_pending_authority",
+      "risk_level": "medium",
+      "title": "fix(api): promote display-backed directory draft jobs in list authority",
+      "name": "Repair directory pending detail list authority for display-asset-backed Career jobs",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-DIRECTORY-DETAIL-PENDING-314-1, then implementing the PR."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are confined to backend Career jobs list detail readiness authority, focused tests/docs, docs, and authorized train metadata. No fap-web, deploy, DB mutation, rollout, apply, or content generation was performed."
+        },
+        "career_job_list_api": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Career/CareerJobListApiTest.php --no-ansi",
+          "evidence": "5 tests passed, 94 assertions."
+        },
+        "career_job_display_surface_api": {
+          "status": "pass",
+          "command": "php artisan test tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php --no-ansi",
+          "evidence": "14 tests passed, 786 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "sqlite_migrate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-directory-detail-pending-314.sqlite php artisan migrate --force --no-ansi",
+          "evidence": "SQLite migration completed successfully in local testing database."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test app/Services/Career/Bundles/CareerJobListBundleBuilder.php tests/Feature/Career/CareerJobListApiTest.php",
+          "evidence": "Style check passed after formatting scoped files."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check",
+          "evidence": "Whitespace checks passed."
+        },
+        "mbti_ci": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full CI master chain exited 0."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR not opened yet at local validation checkpoint."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T10:54:07+08:00",
+          "status": "in_progress",
+          "summary": "Registered authorized directory detail pending repair PR and started implementation from clean origin/main worktree."
+        },
+        {
+          "at": "2026-05-17T11:05:12+08:00",
+          "status": "local_validation_passed",
+          "summary": "Implemented display-asset-backed directory draft list authority and passed focused Career tests, route list, sqlite migrate, scoped Pint, diff checks, and full MBTI CI chain."
+        }
+      ],
+      "next_pr": "SCAN-2786-VISIBLE-DETAIL-GAP-AFTER-DIRECTORY-DETAIL-REPAIR-1"
     }
   }
 }

@@ -10,7 +10,9 @@ use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\DTO\Career\CareerJobListItemBundle;
 use App\Models\CareerCompileRun;
 use App\Models\CareerJob;
+use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
+use App\Models\OccupationCrosswalk;
 use App\Models\RecommendationSnapshot;
 use App\Models\Scopes\TenantScope;
 use App\Services\PublicSurface\SeoSurfaceContractService;
@@ -24,6 +26,20 @@ final class CareerJobListBundleBuilder
 
     private const PUBLIC_DIRECTORY_STUB_KIND = 'public_directory_stub';
 
+    private const DISPLAY_SURFACE_VERSION = 'display.surface.v1';
+
+    private const DISPLAY_ASSET_VERSION = 'v4.2';
+
+    private const DISPLAY_ASSET_TYPE = 'career_job_public_display';
+
+    private const DISPLAY_READY_STATUS = 'ready_for_pilot';
+
+    private const DISPLAY_COMPONENT_ORDER_COUNT = 24;
+
+    private const DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS = [
+        'software-developers',
+    ];
+
     private const MAX_PUBLIC_COMPILED_ROWS = 3200;
 
     private const MAX_PUBLIC_DOCX_ROWS = 3200;
@@ -33,6 +49,7 @@ final class CareerJobListBundleBuilder
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
+        private readonly CareerJobDisplaySurfaceBuilder $displaySurfaceBuilder,
     ) {}
 
     /**
@@ -424,6 +441,10 @@ final class CareerJobListBundleBuilder
 
     private function buildDirectoryDraftCareerJobItem(Occupation $occupation): CareerJobListItemBundle
     {
+        if ($this->directoryDraftHasDisplayAssetBackedDetail($occupation)) {
+            return $this->buildDisplayAssetBackedDirectoryDraftCareerJobItem($occupation);
+        }
+
         return new CareerJobListItemBundle(
             identity: [
                 'canonical_slug' => $occupation->canonical_slug,
@@ -448,6 +469,53 @@ final class CareerJobListBundleBuilder
             scoreSummary: [],
             seoContract: $this->buildDirectoryDraftSeoContract($occupation, 'career_job_list_item_bundle'),
             provenanceMeta: [],
+        );
+    }
+
+    private function buildDisplayAssetBackedDirectoryDraftCareerJobItem(Occupation $occupation): CareerJobListItemBundle
+    {
+        return new CareerJobListItemBundle(
+            identity: [
+                'occupation_uuid' => $occupation->id,
+                'canonical_slug' => $occupation->canonical_slug,
+                'entity_level' => $occupation->entity_level,
+                'family_uuid' => $occupation->family_id,
+            ],
+            titles: [
+                'canonical_en' => $occupation->canonical_title_en,
+                'canonical_zh' => $occupation->canonical_title_zh,
+                'search_h1_zh' => $occupation->search_h1_zh,
+            ],
+            truthSummary: [
+                'truth_market' => $occupation->truth_market,
+            ],
+            trustSummary: [
+                'reviewer_status' => 'pilot_display_asset',
+                'reviewed_at' => null,
+                'content_version' => 'display_asset_backed_v4_2',
+                'data_version' => 'career_job_display_assets.v4.2',
+                'logic_version' => 'career.protocol.job_list.display_asset_backed.v1',
+                'editorial_patch_required' => false,
+                'editorial_patch_status' => null,
+                'allow_strong_claim' => false,
+                'allow_salary_comparison' => false,
+                'allow_ai_strategy' => false,
+                'reason_codes' => ['validated_display_asset_backed_release', 'runtime_publish_projection'],
+            ],
+            scoreSummary: [],
+            seoContract: $this->buildDisplayAssetBackedDirectoryDraftSeoContract($occupation),
+            provenanceMeta: [
+                'content_version' => 'display_asset_backed_v4_2',
+                'data_version' => 'career_job_display_assets.v4.2',
+                'logic_version' => 'career.protocol.job_list.display_asset_backed.v1',
+                'compiler_version' => null,
+                'compiled_at' => null,
+                'truth_metric_id' => null,
+                'trust_manifest_id' => null,
+                'index_state_id' => null,
+                'compile_run_id' => null,
+                'import_run_id' => null,
+            ],
         );
     }
 
@@ -601,6 +669,41 @@ final class CareerJobListBundleBuilder
     }
 
     /**
+     * @return array<string, mixed>
+     */
+    private function buildDisplayAssetBackedDirectoryDraftSeoContract(Occupation $occupation): array
+    {
+        $canonicalPath = '/career/jobs/'.(string) $occupation->canonical_slug;
+        $indexEligible = $this->runtimeProjectionVisibilityAllowsIndexing((string) $occupation->canonical_slug);
+        $indexState = $indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::TRUST_LIMITED;
+        $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
+        $surface = $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'career_protocol_bundle',
+            'surface_type' => 'career_job_list_item_display_asset_backed_bundle',
+            'canonical_url' => $canonicalPath,
+            'robots_policy' => $robotsPolicy,
+            'title' => $occupation->canonical_title_en,
+            'description' => $occupation->canonical_title_en,
+            'indexability_state' => $indexState,
+            'sitemap_state' => $indexEligible ? 'included' : 'excluded',
+        ]);
+
+        return [
+            'canonical_path' => $canonicalPath,
+            'canonical_target' => $canonicalPath,
+            'index_state' => $indexState,
+            'index_eligible' => $indexEligible,
+            'reason_codes' => $indexEligible
+                ? ['validated_display_asset_backed_release', 'runtime_publish_projection']
+                : ['display_asset_backed_pilot_noindex'],
+            'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
+            'surface_type' => $surface['surface_type'] ?? null,
+            'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
+            'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
+        ];
+    }
+
+    /**
      * @param  array<string, mixed>  $projectionItem
      * @return array<string, mixed>
      */
@@ -666,5 +769,92 @@ final class CareerJobListBundleBuilder
     {
         return is_string(data_get($job->seoMeta?->jsonld_overrides_json, 'source_docx'))
             && data_get($job->market_demand_json, 'source_refs.0.url') !== null;
+    }
+
+    private function directoryDraftHasDisplayAssetBackedDetail(Occupation $occupation): bool
+    {
+        $slug = strtolower(trim((string) $occupation->canonical_slug));
+        if ($slug === '' || in_array($slug, self::DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS, true)) {
+            return false;
+        }
+
+        if (! $this->runtimeProjectionVisibilityAllowsIndexing($slug)) {
+            return false;
+        }
+
+        if (! $this->hasDisplayAssetBackedAuthority($occupation)) {
+            return false;
+        }
+
+        if (! $this->validDisplayAssetBackedAsset($occupation, $slug) instanceof CareerJobDisplayAsset) {
+            return false;
+        }
+
+        return $this->displaySurfaceBuilder->buildForOccupation($occupation, 'en') !== null;
+    }
+
+    private function runtimeProjectionVisibilityAllowsIndexing(string $slug): bool
+    {
+        return $this->runtimePublishProjection->detailRouteEnabled($slug)
+            && $this->runtimePublishProjection->robotsIndexable($slug)
+            && $this->runtimePublishProjection->releaseGatePass($slug);
+    }
+
+    private function hasDisplayAssetBackedAuthority(Occupation $occupation): bool
+    {
+        $occupation->loadMissing('crosswalks');
+
+        $requiredSystems = ['us_soc', 'onet_soc_2019'];
+        foreach ($requiredSystems as $sourceSystem) {
+            $rows = $occupation->crosswalks
+                ->filter(static fn (OccupationCrosswalk $crosswalk): bool => strtolower((string) $crosswalk->source_system) === $sourceSystem)
+                ->values();
+
+            if ($rows->count() !== 1) {
+                return false;
+            }
+
+            $sourceCode = trim((string) $rows->first()?->source_code);
+            if ($sourceCode === '') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function validDisplayAssetBackedAsset(Occupation $occupation, string $subjectSlug): ?CareerJobDisplayAsset
+    {
+        $assets = CareerJobDisplayAsset::query()
+            ->where('occupation_id', $occupation->id)
+            ->where('canonical_slug', $subjectSlug)
+            ->where('surface_version', self::DISPLAY_SURFACE_VERSION)
+            ->where('asset_version', self::DISPLAY_ASSET_VERSION)
+            ->where('template_version', self::DISPLAY_ASSET_VERSION)
+            ->where('status', self::DISPLAY_READY_STATUS)
+            ->where('asset_type', self::DISPLAY_ASSET_TYPE)
+            ->get();
+
+        if ($assets->count() !== 1) {
+            return null;
+        }
+
+        $asset = $assets->first();
+        if (! $asset instanceof CareerJobDisplayAsset) {
+            return null;
+        }
+
+        $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
+        if (count($componentOrder) !== self::DISPLAY_COMPONENT_ORDER_COUNT) {
+            return null;
+        }
+
+        $pages = is_array($asset->page_payload_json) ? $asset->page_payload_json : [];
+        $localizedPages = is_array($pages['page'] ?? null) ? $pages['page'] : $pages;
+        if (! is_array($localizedPages['zh'] ?? null) || ! is_array($localizedPages['en'] ?? null)) {
+            return null;
+        }
+
+        return $asset;
     }
 }
