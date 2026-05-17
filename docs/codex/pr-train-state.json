@@ -4469,7 +4469,7 @@
       "branch": "fix/career-80-manifest-train-command",
       "title": "feat(api): add career 80 manifest train command",
       "name": "Add read-only Career 80 manifest train command",
-      "status": "in_progress",
+      "status": "local_checks_passed",
       "depends_on": [
         "80-READINESS-2"
       ],
@@ -10066,13 +10066,41 @@
           "evidence": "PUBLISH-API-MEDIA-ORIGIN-READYNESS merged as fap-api PR #1448 at 2026-05-17T13:21:17Z; PUBLISH-WEB-CONTENT-CACHE-PURGE merged as fap-web PR #835 at 2026-05-17T13:41:06Z."
         },
         "implementation": {
-          "status": "in_progress",
-          "evidence": "Adding a read-only article cover propagation smoke command and focused tests."
+          "status": "pass",
+          "evidence": "Added read-only articles:cover-smoke command and focused tests for detail/list/SEO/JSON-LD cover propagation and required variant readiness."
+        },
+        "article_cover_smoke": {
+          "status": "pass",
+          "command": "php artisan test --filter=ArticleCoverPropagationSmoke --no-ansi",
+          "evidence": "3 tests passed, 12 assertions."
+        },
+        "article_public_api": {
+          "status": "pass",
+          "command": "php artisan test --filter=ArticlePublicApi --no-ansi",
+          "evidence": "10 tests passed, 114 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test app/Console/Commands/ArticleCoverPropagationSmoke.php app/Console/Kernel.php tests/Feature/Console/ArticleCoverPropagationSmokeCommandTest.php",
+          "evidence": "Pint passed across 3 files after formatting."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to ArticleCoverPropagationSmoke command, Console Kernel registration, focused command test, and docs/codex PR train metadata. No article content, media upload, publish/unpublish mutation, fap-web, deploy, rollback, unlock, cache deletion, or process command changed."
         }
       },
       "failure_reason": null,
       "pr_url": null,
-      "commit_sha": null,
+      "commit_sha": "6c12a810abed94ddeae9d3e2603604897f3a2cc3",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -10082,6 +10110,11 @@
           "at": "2026-05-17T13:43:00Z",
           "status": "in_progress",
           "summary": "Started article cover propagation smoke item from origin/main in an isolated worktree; no publish, media upload, deploy, rollback, unlock, cache deletion, or process command performed."
+        },
+        {
+          "at": "2026-05-17T13:54:00Z",
+          "status": "local_checks_passed",
+          "summary": "Implemented read-only article cover propagation smoke and completed focused ArticleCoverPropagationSmoke, ArticlePublicApi, route list, Pint, and diff checks for commit 6c12a810abed94ddeae9d3e2603604897f3a2cc3."
         }
       ]
     }
