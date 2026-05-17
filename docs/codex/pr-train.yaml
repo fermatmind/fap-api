@@ -40,6 +40,59 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+  - id: SEO-DASH-01A
+    repo: fap-api
+    branch: codex/seo-dash-01a-seo-intel-logical-db-foundation
+    title: "feat(seo-intel): add logical DB foundation"
+    name: "seo_intel logical DB foundation"
+    findings:
+      - "SEO-DASH-00B locked the Search Intelligence data contract before implementation."
+      - "SEO-DASH-TRAIN-00 recommended SEO-DASH-01A as the first implementation PR."
+      - "BACKEND-RUNTIME-02D accepted Node2 as API edge gateway and Node3/fap-api-prod as backend authority candidate."
+    scope:
+      - Add a disabled-by-default seo_intel config boundary.
+      - Add a Laravel seo_intel database connection using env keys only.
+      - Add foundation migrations for seo_urls, seo_url_entities, and seo_internal_traffic_rules.
+      - Add PII guardrails, generated contract artifact, and focused SeoIntel tests.
+      - Record that no production DB was created, no production migration was run, no collectors were created, and no scheduler was enabled.
+    allowed_paths:
+      - backend/config/database.php
+      - backend/config/seo_intel.php
+      - backend/database/migrations/*seo_urls*
+      - backend/database/migrations/*seo_url_entities*
+      - backend/database/migrations/*seo_internal_traffic_rules*
+      - backend/tests/**/SeoIntel*Test.php
+      - backend/tests/Feature/SeoIntel/**
+      - backend/docs/seo/seo-intel-logical-db-foundation.md
+      - backend/docs/seo/generated/seo-intel-logical-db-foundation.v1.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run production migrations.
+      - Create production seo_intel DB.
+      - Deploy, SSH, edit env, or touch Node2/Node3.
+      - Connect GSC, Baidu, IndexNow, or deploy Metabase.
+      - Create collector jobs or enable scheduler jobs.
+      - Change payment, order, report, email, recommendation, scoring, sitemap, or llms behavior.
+      - Modify fap-web runtime or use fap-api/fap-web as production frontend runtime.
+      - Read or write live data.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan migrate --pretend --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    production_db_creation: human_confirm_required
+    external_api_credentials_required: false
+    next_task: SEO-DASH-01B
   - id: PR-MEDIA-01
     repo: fap-api
     depends_on:

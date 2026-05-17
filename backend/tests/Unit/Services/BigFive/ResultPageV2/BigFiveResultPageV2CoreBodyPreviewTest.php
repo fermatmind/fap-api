@@ -284,6 +284,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_intel_logical_db_foundation_migrations(): void
+    {
+        $changed = [
+            'backend/database/migrations/2026_05_17_000100_create_seo_urls_table.php',
+            'backend/database/migrations/2026_05_17_000200_create_seo_url_entities_table.php',
+            'backend/database/migrations/2026_05_17_000300_create_seo_internal_traffic_rules_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1428,6 +1439,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelLogicalDbFoundationMigrationFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -1800,6 +1815,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php',
             'backend/app/Models/ArticleTestEdge.php',
             'backend/database/migrations/2026_05_15_000300_create_article_test_edges_table.php',
+        ], true);
+    }
+
+    private function isSeoIntelLogicalDbFoundationMigrationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/database/migrations/2026_05_17_000100_create_seo_urls_table.php',
+            'backend/database/migrations/2026_05_17_000200_create_seo_url_entities_table.php',
+            'backend/database/migrations/2026_05_17_000300_create_seo_internal_traffic_rules_table.php',
         ], true);
     }
 
