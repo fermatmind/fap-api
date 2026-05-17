@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "source_documents": [
+    "SEO-DASH-PROD-00",
+    "SEO-DASH-00B",
+    "SEO-DASH-01A",
+    "SEO-DASH-06",
+    "BACKEND-RUNTIME-02D"
+  ],
+  "production_db_created_in_this_pr": false,
+  "production_migration_executed_in_this_pr": false,
+  "production_env_edited_in_this_pr": false,
+  "deployment_executed_in_this_pr": false,
+  "collectors_enabled_in_this_pr": false,
+  "scheduler_enabled_in_this_pr": false,
+  "metabase_deployed_in_this_pr": false,
+  "external_search_api_connected_in_this_pr": false,
+  "allowed_db_locations": [
+    "managed_mysql_rds_dedicated_analytics",
+    "approved_managed_mysql_separate_database_or_schema",
+    "private_analytics_database_reachable_from_approved_backend_ops_networks"
+  ],
+  "forbidden_db_locations": [
+    "node2_local_db",
+    "node2_local_laravel",
+    "node2_php84_fap_mysql",
+    "business_db_raw_tables",
+    "cms_write_tables"
+  ],
+  "required_users": [
+    {
+      "name": "seo_intel_writer",
+      "purpose": "runtime writer for approved seo_intel tables only",
+      "permissions": [
+        "insert_approved_seo_intel_tables",
+        "update_approved_seo_intel_tables"
+      ],
+      "forbidden_permissions": [
+        "business_db_read",
+        "business_db_write",
+        "node2_local_db_access",
+        "raw_payment_detail_access",
+        "raw_email_detail_access",
+        "ddl"
+      ]
+    },
+    {
+      "name": "seo_intel_metabase_readonly",
+      "purpose": "Metabase read-only user for sanitized seo_intel aggregates",
+      "permissions": [
+        "select_sanitized_seo_intel_tables_or_views"
+      ],
+      "forbidden_permissions": [
+        "insert",
+        "update",
+        "delete",
+        "alter",
+        "drop",
+        "create",
+        "business_db_read",
+        "cms_write_table_read",
+        "node2_local_db_access",
+        "raw_detail_table_read"
+      ]
+    },
+    {
+      "name": "migration_operator",
+      "purpose": "human-controlled migration-time DDL identity",
+      "permissions": [
+        "ddl_for_approved_seo_intel_migrations_during_change_window"
+      ],
+      "forbidden_permissions": [
+        "collector_runtime_use",
+        "scheduler_runtime_use",
+        "metabase_connection_use"
+      ]
+    }
+  ],
+  "permission_policy": {
+    "writer_can_access_business_tables": false,
+    "writer_can_access_node2_local_db": false,
+    "metabase_can_write": false,
+    "metabase_can_read_business_db_raw_tables": false,
+    "metabase_can_read_cms_write_tables": false,
+    "metabase_can_read_node2_local_db": false,
+    "migration_operator_used_for_collector_runtime": false,
+    "seo_intel_is_cms_source_of_truth": false
+  },
+  "migration_preflight_checklist": [
+    "production_seo_intel_db_created",
+    "seo_intel_writer_confirmed",
+    "seo_intel_metabase_readonly_confirmed",
+    "migration_operator_confirmed",
+    "backup_confirmed",
+    "restore_procedure_known",
+    "restore_test_or_rehearsal_available_before_write_enablement",
+    "change_window_approved",
+    "current_code_sha_confirmed",
+    "migration_list_reviewed",
+    "target_database_confirmed_as_seo_intel",
+    "pii_guard_reviewed",
+    "env_keys_prepared_but_not_printed",
+    "pretend_migration_output_reviewed",
+    "rollback_forward_fix_owner_assigned",
+    "required_github_checks_green",
+    "no_deploy_or_incident_in_progress"
+  ],
+  "command_templates": [
+    "php artisan migrate --database=seo_intel --pretend --no-ansi",
+    "php artisan migrate --database=seo_intel --no-ansi",
+    "php artisan migrate:status --database=seo_intel --no-ansi"
+  ],
+  "backup_restore_policy": {
+    "migrations_are_forward_only": true,
+    "rollback_methods": [
+      "verified_backup_restore",
+      "human_reviewed_forward_fix_migration"
+    ],
+    "restore_test_required_before_write_enablement": true,
+    "on_failure_keep_write_enabled_false": true,
+    "on_failure_keep_collectors_enabled_false": true,
+    "on_failure_keep_scheduler_disabled": true
+  },
+  "post_migration_validation": [
+    "expected_tables_exist",
+    "forbidden_columns_absent",
+    "row_counts_zero_or_expected",
+    "writer_can_write_only_approved_seo_intel_tables",
+    "writer_cannot_read_or_write_business_tables",
+    "metabase_readonly_can_select_only_approved_sanitized_tables_or_views",
+    "metabase_readonly_cannot_write_or_ddl",
+    "metabase_cannot_read_forbidden_data_sources",
+    "collector_dry_run_no_write_smoke_passes",
+    "route_list_unaffected",
+    "production_scheduler_not_enabled",
+    "collector_writes_not_enabled_until_later_step"
+  ],
+  "no_go_conditions": [
+    "missing_production_db_confirmation",
+    "missing_db_user_confirmation",
+    "missing_backup",
+    "missing_restore_plan",
+    "missing_restore_owner",
+    "node2_local_db_selected",
+    "business_db_raw_tables_exposed_to_metabase",
+    "cms_write_tables_exposed_to_metabase",
+    "pii_columns_found",
+    "env_values_would_be_printed",
+    "production_deploy_ongoing",
+    "incident_response_active",
+    "required_checks_red",
+    "migration_target_ambiguous",
+    "rollback_forward_fix_owner_missing"
+  ],
+  "pii_forbidden_fields": [
+    "email",
+    "order_no",
+    "raw_order_no",
+    "attempt_id",
+    "raw_attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "cookie",
+    "raw_cookie",
+    "raw_ip",
+    "ip_address",
+    "raw_user_agent",
+    "user_agent",
+    "raw_payload",
+    "payment_payload",
+    "provider_payload",
+    "token",
+    "api_key",
+    "secret"
+  ],
+  "human_confirmation_required": [
+    "production_db_location",
+    "seo_intel_writer",
+    "seo_intel_metabase_readonly",
+    "migration_operator",
+    "backup_restore",
+    "change_window",
+    "rollback_forward_fix_owner"
+  ],
+  "next_task": "SEO-DASH-PROD-01B"
+}

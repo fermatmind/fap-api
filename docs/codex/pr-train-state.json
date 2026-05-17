@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T13:26:42Z",
+  "updated_at": "2026-05-17T14:08:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -152,7 +152,7 @@
     "backend-email-gated-report-read": {
       "repo": "fap-api",
       "branch": "codex/backend-email-gated-report-read",
-      "status": "github_checks_passed",
+      "status": "merged",
       "depends_on": [
         "backend-email-result-lookup"
       ],
@@ -4441,7 +4441,7 @@
         "no deploy",
         "no fap-web change"
       ],
-      "commit_sha": null,
+      "commit_sha": "0bc77e5ebcbd2ebb81789dfb9e25f1ecc1ea855b",
       "pr_url": null,
       "checks": {
         "authorization": {
@@ -9914,15 +9914,15 @@
         },
         "github": {
           "status": "pass",
-          "evidence": "PR #1447 CI passed after current-scope freeze gate allowlist fix: hygiene, verify-mbti-legacy, and verify-mbti-v2 completed successfully before rebase; final rebased checks pending."
+          "evidence": "PR #1447 CI passed after current-scope freeze gate allowlist fix: hygiene, verify-mbti-legacy, and verify-mbti-v2 completed successfully; PR was squash merged."
         }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1447",
-      "commit_sha": "3eb6f16712f42b73f52d121e2a4b186ab14805d6",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "8e2a7e5508c4644d6b4e7d44ef1beb16b9998b4d",
+      "merged_at": "2026-05-17T13:39:44Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -9954,9 +9954,116 @@
           "at": "2026-05-17T13:26:42Z",
           "status": "rebased",
           "summary": "Rebased SEO-DASH-06 onto latest origin/main after PR #1447 became dirty due to a newer publishing reliability merge."
+        },
+        {
+          "at": "2026-05-17T13:39:44Z",
+          "status": "merged",
+          "summary": "PR #1447 merged; origin/main contains merge commit 8e2a7e5508c4644d6b4e7d44ef1beb16b9998b4d and local/remote branch cleanup completed."
         }
       ],
-      "next_pr": "SEO-DASH-MVP-COMPLETE"
+      "next_pr": "SEO-DASH-PROD-01A"
+    },
+    "SEO-DASH-PROD-01A": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-prod-01a-seo-intel-db-migration-runbook",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-PROD-00"
+      ],
+      "status": "in_progress",
+      "train_scope": "production_seo_intel_db_user_migration_runbook",
+      "risk_level": "low_docs_contract_no_execution",
+      "title": "docs(seo-intel): add production DB migration runbook",
+      "name": "production seo_intel DB user migration runbook",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-PROD-01A with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-PROD-00 was a completed read-only readiness scan. It identified SEO-DASH-PROD-01A as the immediate next task."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "production_db_creation": {
+          "status": "false"
+        },
+        "db_user_creation": {
+          "status": "false"
+        },
+        "human_confirmation_required": {
+          "status": "required",
+          "items": [
+            "production_db_location",
+            "seo_intel_writer",
+            "seo_intel_metabase_readonly",
+            "migration_operator",
+            "backup_restore",
+            "change_window"
+          ]
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to production seo_intel DB migration runbook docs, generated artifact, focused SeoIntel runbook test, and docs/codex PR train metadata. No config, migrations, app runtime, env, deploy, payment/order/report/email/recommendation/scoring, sitemap/llms, cloud/DNS/CDN/OpenResty/Nginx, production credential, or fap-web runtime files changed."
+        },
+        "runbook_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntelProductionActivationRunbook",
+          "evidence": "6 tests passed with 62 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3361 files."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "github": {
+          "status": "pending"
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "type": "local_main_diverged_patch_equivalent",
+          "summary": "Local main contained patch-equivalent release hygiene commit 91baf921 while origin/main contained squash commit ddcce8a1. This PR branch was created from origin/main without rewriting local main."
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-17T14:08:00Z",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-PROD-01A and started production seo_intel DB/user/migration runbook from origin/main. No production execution performed."
+        },
+        {
+          "at": "2026-05-17T14:16:00Z",
+          "status": "local_validation_passed",
+          "summary": "Added production seo_intel DB/user/migration runbook, generated artifact, focused contract test, and train metadata. Runbook test, route list, Pint, JSON/YAML validation, and diff checks passed."
+        },
+        {
+          "at": "2026-05-17T14:18:00Z",
+          "status": "committed",
+          "summary": "Committed SEO-DASH-PROD-01A local changes at 0bc77e5ebcbd2ebb81789dfb9e25f1ecc1ea855b."
+        }
+      ],
+      "next_pr": "SEO-DASH-PROD-01B"
     },
     "PUBLISH-API-MEDIA-ORIGIN-READYNESS": {
       "repo": "fap-api",
