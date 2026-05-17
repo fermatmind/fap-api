@@ -32,6 +32,7 @@ use App\Console\Commands\CareerExportFirstWaveRolloutWavePlanArtifact;
 use App\Console\Commands\CareerExportFullReleaseLedger;
 use App\Console\Commands\CareerExportLaunchGovernanceClosure;
 use App\Console\Commands\CareerExportOccupationDirectoryReviewQueues;
+use App\Console\Commands\CareerExportPublicTrustTaxonomy;
 use App\Console\Commands\CareerExportRuntimePublishProjection;
 use App\Console\Commands\CareerExportStrongIndexEligibility;
 use App\Console\Commands\CareerFinalizeCanonicalRuntimeTruth;
@@ -269,6 +270,7 @@ class Kernel extends ConsoleKernel
         CareerExportRuntimePublishProjection::class,
         CareerExportLaunchGovernanceClosure::class,
         CareerExportOccupationDirectoryReviewQueues::class,
+        CareerExportPublicTrustTaxonomy::class,
         CareerExportStrongIndexEligibility::class,
         CareerFinalizeCanonicalRuntimeTruth::class,
         CareerRunAssetBatch::class,
