@@ -62,6 +62,8 @@ final class CareerProgressiveCohortCloseoutPlannerTest extends TestCase
         $this->assertSame(2786, $result['target_public_total']);
         $this->assertSame(5572, $result['expected_locale_rows']);
         $this->assertSame('CAREER_2786_FINAL_CLOSEOUT_COMPLETE', $result['next_required_action']);
+        $this->assertTrue(data_get($result, 'acceptance_summary.full_visible_publication_gate.product_claim.visible_detail_claim_allowed'));
+        $this->assertSame('product_visible_detail_publication', data_get($result, 'acceptance_summary.full_visible_publication_gate.product_claim.safe_claim_scope'));
     }
 
     public function test_refuses_closeout_when_acceptance_failed(): void
@@ -120,6 +122,9 @@ final class CareerProgressiveCohortCloseoutPlannerTest extends TestCase
         $this->assertContains('product_detail_ready_count_missing', $reasons);
         $this->assertContains('product_found_published_locale_rows_mismatch', $reasons);
         $this->assertContains('partition_accounting_not_product_publication_evidence', $reasons);
+        $this->assertFalse(data_get($result, 'acceptance_summary.full_visible_publication_gate.product_claim.visible_detail_claim_allowed'));
+        $this->assertTrue(data_get($result, 'acceptance_summary.full_visible_publication_gate.product_claim.partition_accounting_claim_allowed'));
+        $this->assertSame('partition_accounted_not_visible_detail', data_get($result, 'acceptance_summary.full_visible_publication_gate.product_claim.safe_claim_scope'));
     }
 
     /**

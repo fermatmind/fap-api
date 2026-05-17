@@ -152,6 +152,13 @@ final class CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest extends 
         $this->assertContains('product_found_published_locale_rows_mismatch', $reasons);
         $this->assertContains('partition_accounting_not_product_publication_evidence', $reasons);
         $this->assertSame(1122, data_get($payload, 'validation.full_visible_publication_gate.canonical_public_slug_count'));
+        $this->assertFalse(data_get($payload, 'validation.full_visible_publication_gate.product_claim.visible_detail_claim_allowed'));
+        $this->assertTrue(data_get($payload, 'validation.full_visible_publication_gate.product_claim.partition_accounting_claim_allowed'));
+        $this->assertSame('partition_accounted_not_visible_detail', data_get($payload, 'validation.full_visible_publication_gate.product_claim.safe_claim_scope'));
+        $this->assertContains(
+            '2786_visible_detail_pages',
+            data_get($payload, 'validation.full_visible_publication_gate.product_claim.blocked_claims'),
+        );
     }
 
     public function test_2786_live_acceptance_requires_directory_and_detail_counts_to_match_target(): void
@@ -178,6 +185,9 @@ final class CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest extends 
         $this->assertContains('product_public_detail_indexable_count_mismatch', $reasons);
         $this->assertContains('product_found_published_locale_rows_mismatch', $reasons);
         $this->assertContains('product_release_gate_pass_count_mismatch', $reasons);
+        $this->assertFalse(data_get($payload, 'validation.full_visible_publication_gate.product_claim.visible_detail_claim_allowed'));
+        $this->assertSame(1122, data_get($payload, 'validation.full_visible_publication_gate.product_claim.claimable_counts.directory_member_count'));
+        $this->assertSame(808, data_get($payload, 'validation.full_visible_publication_gate.product_claim.claimable_counts.detail_ready_count'));
     }
 
     public function test_2786_live_acceptance_passes_only_with_full_visible_product_counts(): void
@@ -194,6 +204,9 @@ final class CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest extends 
         $this->assertSame(2786, data_get($payload, 'validation.full_visible_publication_gate.directory_member_count'));
         $this->assertSame(2786, data_get($payload, 'validation.full_visible_publication_gate.detail_ready_count'));
         $this->assertSame(5572, data_get($payload, 'validation.full_visible_publication_gate.found_published_locale_rows'));
+        $this->assertTrue(data_get($payload, 'validation.full_visible_publication_gate.product_claim.visible_detail_claim_allowed'));
+        $this->assertSame('product_visible_detail_publication', data_get($payload, 'validation.full_visible_publication_gate.product_claim.safe_claim_scope'));
+        $this->assertSame([], data_get($payload, 'validation.full_visible_publication_gate.product_claim.blocked_claims'));
     }
 
     /**

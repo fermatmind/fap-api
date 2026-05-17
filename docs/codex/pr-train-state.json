@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T08:16:00+08:00",
+  "updated_at": "2026-05-17T08:28:18+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -8205,6 +8205,44 @@
           "summary": "Inspected PR #1429 verify-mbti-legacy failure, fixed the Big Five runtime freeze classifier for the safe tmp artifact helper, and validated the focused freeze suite, helper tests, route list, Pint, and diff check locally."
         }
       ]
+    },
+    "REPAIR-PRODUCT-CLAIM-2786-PARTITION-AWARE-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-product-claim-2786-partition-aware-1",
+      "base": "main",
+      "depends_on": [
+        "REPAIR-2786-FINAL-READINESS-SOFTWARE-MANUAL-HOLD-AUTHORITY-1"
+      ],
+      "status": "in_progress",
+      "train_scope": "career_product_claim_authority",
+      "risk_level": "medium",
+      "title": "fix(api): align career 2786 product claim authority",
+      "name": "Align Career 2786 product claim with visible publication truth",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-PRODUCT-CLAIM-2786-PARTITION-AWARE-1, then implementing the PR."
+        },
+        "scope": {
+          "status": "planned",
+          "evidence": "Scope is limited to backend Career visible claim authority, focused tests/docs, and authorized train metadata. No fap-web, deploy, DB mutation, rollout, or content generation is allowed."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T08:28:18+08:00",
+          "status": "in_progress",
+          "summary": "Registered authorized product-visible claim authority PR and started implementation from clean origin/main worktree."
+        }
+      ],
+      "next_pr": "PRODUCT_POLICY_DECISION_OR_VISIBLE_GAP_REMEDIATION"
     }
   }
 }

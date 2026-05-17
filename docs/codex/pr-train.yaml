@@ -846,6 +846,40 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+  - id: REPAIR-PRODUCT-CLAIM-2786-PARTITION-AWARE-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-2786-FINAL-READINESS-SOFTWARE-MANUAL-HOLD-AUTHORITY-1
+    branch: codex/repair-product-claim-2786-partition-aware-1
+    title: "fix(api): align career 2786 product claim authority"
+    name: "Align Career 2786 product claim with visible publication truth"
+    scope:
+      - Add backend claim authority to distinguish partition-accounted 2786 evidence from product-visible 2786 detail publication evidence.
+      - Emit safe claim scope and claimable counts from the final visible publication gate.
+      - Document that 2786 visible/detail claims require product-visible member, job, detail-ready, and locale-row counts.
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/CareerFullVisiblePublicationGate.php
+      - backend/tests/Feature/Console/CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest.php
+      - backend/tests/Unit/Domain/Career/Audit/CareerProgressiveCohortCloseoutPlannerTest.php
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish missing career pages.
+      - Generate occupation content.
+      - Mutate production data.
+      - Deploy, backfill, rollout, rollback, or quarantine.
+      - Touch fap-web or move Career authority to frontend fallback data.
+    validation:
+      - php artisan test --filter=CareerValidateCanonicalProgressiveLiveAcceptance --no-ansi
+      - php artisan test --filter=CareerProgressiveCohortCloseoutPlanner --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
   - id: REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2
     repo: fap-api
     depends_on:
