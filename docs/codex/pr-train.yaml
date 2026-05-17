@@ -5138,6 +5138,7 @@ prs:
       - backend/app/Console/Commands/ArticleCoverPropagationSmoke.php
       - backend/app/Console/Kernel.php
       - backend/tests/Feature/Console/ArticleCoverPropagationSmokeCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -5147,9 +5148,10 @@ prs:
       - Touch fap-web, deploy, rollback, unlock, kill processes, or run production cache deletion.
     validation:
       - php artisan test --filter=ArticleCoverPropagationSmoke --no-ansi
+      - php artisan test --filter=runtime_freeze_classifier_ignores_article_cover_propagation_smoke_changes --no-ansi
       - php artisan test --filter=ArticlePublicApi --no-ansi
       - php artisan route:list --no-ansi
-      - vendor/bin/pint --test app/Console/Commands/ArticleCoverPropagationSmoke.php app/Console/Kernel.php tests/Feature/Console/ArticleCoverPropagationSmokeCommandTest.php
+      - vendor/bin/pint --test app/Console/Commands/ArticleCoverPropagationSmoke.php app/Console/Kernel.php tests/Feature/Console/ArticleCoverPropagationSmokeCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - git diff --check
       - git diff --cached --check
     scope_validation:
