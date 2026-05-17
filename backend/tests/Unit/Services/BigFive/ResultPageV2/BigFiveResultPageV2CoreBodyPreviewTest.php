@@ -320,6 +320,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_intel_drift_foundation_files(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/Collectors/CrawlerLogFoundationCollector.php',
+            'backend/app/Services/SeoIntel/Collectors/DriftFoundationCollector.php',
+            'backend/app/Services/SeoIntel/Drift/CrawlerLogLineParser.php',
+            'backend/app/Services/SeoIntel/Drift/CrawlerUserAgentClassifier.php',
+            'backend/app/Services/SeoIntel/Drift/HtmlSnapshotParser.php',
+            'backend/app/Services/SeoIntel/Drift/MetadataDriftComparator.php',
+            'backend/app/Services/SeoIntel/Drift/SitemapLlmsParityComparator.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1476,6 +1491,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelDriftFoundationFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -1878,6 +1897,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/Sources/BackendAuthorityUrlTruthSource.php',
             'backend/app/Services/SeoIntel/Sources/UrlTruthInventorySource.php',
             'backend/app/Services/SeoIntel/UrlTruthInventoryRecord.php',
+        ], true);
+    }
+
+    private function isSeoIntelDriftFoundationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/SeoIntel/Collectors/CrawlerLogFoundationCollector.php',
+            'backend/app/Services/SeoIntel/Collectors/DriftFoundationCollector.php',
+            'backend/app/Services/SeoIntel/Drift/CrawlerLogLineParser.php',
+            'backend/app/Services/SeoIntel/Drift/CrawlerUserAgentClassifier.php',
+            'backend/app/Services/SeoIntel/Drift/HtmlSnapshotParser.php',
+            'backend/app/Services/SeoIntel/Drift/MetadataDriftComparator.php',
+            'backend/app/Services/SeoIntel/Drift/SitemapLlmsParityComparator.php',
         ], true);
     }
 

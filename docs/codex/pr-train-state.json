@@ -2549,7 +2549,7 @@
       "branch": "fix/career-audit-db-context-export-producers",
       "title": "feat(api): add career audit db context exporters",
       "name": "Add read-only entity/index context export producers",
-      "status": "ci_fix_in_progress",
+      "status": "merged_reconciled",
       "depends_on": [
         "CTX-CONSUME-1"
       ],
@@ -3241,7 +3241,7 @@
       "branch": "fix/career-80-candidate-readiness-selector-1",
       "title": "fix(api): add career 80 candidate readiness selector",
       "name": "Add career 80 candidate readiness selector",
-      "status": "in_progress",
+      "status": "local_validation_passed",
       "depends_on": [
         "REPAIR-ENTITY-1",
         "SCAN-3"
@@ -8985,10 +8985,10 @@
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1436",
-      "commit_sha": "pending_post_push",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "30487e005284879cb4d988056e33d93b8faef3cc",
+      "merged_at": "2026-05-17T05:44:01Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "status": "resolved_by_current_ci_fix",
@@ -9030,9 +9030,128 @@
           "at": "2026-05-17T13:25:00+08:00",
           "status": "pr_open_github_checks_passed",
           "summary": "GitHub checks passed after the scoped CI fix. PR remains open for human review; auto-merge is disabled."
+        },
+        {
+          "at": "2026-05-17T14:04:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled SEO-DASH-02A after PR #1436 was merged; origin/main contains merge commit 30487e005284879cb4d988056e33d93b8faef3cc and the task branch was cleaned up."
         }
       ],
       "next_pr": "SEO-DASH-02B"
+    },
+    "SEO-DASH-02B": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-02b-drift-collector-crawler-log-foundation",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-02A"
+      ],
+      "status": "pr_open_github_checks_passed",
+      "train_scope": "search_intelligence_drift_collector_crawler_log_foundation",
+      "risk_level": "medium_disabled_collector",
+      "title": "feat(seo-intel): add drift collector and crawler log foundation",
+      "name": "Drift Collector and Crawler Log Foundation",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-02B with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-02A is merged into origin/main at merge commit 30487e005284879cb4d988056e33d93b8faef3cc."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "external_api_credentials_required": {
+          "status": "false"
+        },
+        "production_crawler_log_access_required": {
+          "status": "false"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to allowed seo_intel config, services, collector command integration through existing manager, focused SeoIntel tests, BigFive runtime freeze classifier scope test for current PR files, docs/generated artifact, and root docs/codex PR train metadata. No migrations, scheduler activation, queue worker, production crawl/log access, external API connector, deploy/env, CMS mutation, payment/order/report/email/recommendation/scoring, sitemap, or llms behavior files were changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel --no-ansi",
+          "evidence": "31 tests passed, 366 assertions."
+        },
+        "drift_foundation_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=drift_foundation --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, production_crawl_allowed=false, modifies_sitemap_llms=false, modifies_cms=false, and node2_local_laravel_data_source=false."
+        },
+        "crawler_log_foundation_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=crawler_log_foundation --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, reads_production_logs=false, parser_outputs_pii=false, and node2_local_laravel_data_source=false."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3307 files after formatting one current-scope file."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1438 GitHub checks passed on the pushed branch: hygiene, verify-mbti-v2, and verify-mbti-legacy."
+        },
+        "bigfive_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+          "evidence": "73 runtime_freeze_classifier tests passed, including explicit ignore coverage for SEO-DASH-02B drift/crawler foundation files."
+        },
+        "json_yaml": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -m json.tool backend/docs/seo/generated/seo-intel-drift-collector-foundation.v1.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\""
+        }
+      },
+      "failure_reason": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1438",
+      "commit_sha": "pending_post_push",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T13:54:00+08:00",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-02B and started disabled-by-default drift collector and crawler log foundation from origin/main."
+        },
+        {
+          "at": "2026-05-17T14:00:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Implemented disabled-by-default drift and crawler log foundation. SeoIntel tests, dry-run JSON commands, route list, full Pint, JSON/YAML validation, diff checks, and BigFive runtime freeze classifier tests passed."
+        },
+        {
+          "at": "2026-05-17T14:02:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1438 for human review; auto-merge is intentionally disabled because this PR adds new dry-run collector foundations."
+        },
+        {
+          "at": "2026-05-17T14:08:00+08:00",
+          "status": "pr_open_github_checks_passed",
+          "summary": "GitHub checks passed for PR #1438. PR remains open for human review; auto-merge is disabled."
+        }
+      ],
+      "next_pr": "SEO-DASH-03A"
     }
   }
 }

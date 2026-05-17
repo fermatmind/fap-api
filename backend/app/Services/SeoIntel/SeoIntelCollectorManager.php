@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel;
 
+use App\Services\SeoIntel\Collectors\CrawlerLogFoundationCollector;
+use App\Services\SeoIntel\Collectors\DriftFoundationCollector;
 use App\Services\SeoIntel\Collectors\NoopSeoIntelCollector;
 use App\Services\SeoIntel\Collectors\UrlTruthInventoryCollector;
+use App\Services\SeoIntel\Drift\CrawlerLogLineParser;
+use App\Services\SeoIntel\Drift\CrawlerUserAgentClassifier;
+use App\Services\SeoIntel\Drift\HtmlSnapshotParser;
+use App\Services\SeoIntel\Drift\MetadataDriftComparator;
+use App\Services\SeoIntel\Drift\SitemapLlmsParityComparator;
 use App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
 
 final class SeoIntelCollectorManager
@@ -45,6 +52,14 @@ final class SeoIntelCollectorManager
             $options['allow_external_api_calls'] = false;
         }
 
+        if (! $this->productionCrawlAllowed()) {
+            $options['allow_production_crawl'] = false;
+        }
+
+        if (! $this->productionLogReadAllowed()) {
+            $options['allow_production_log_read'] = false;
+        }
+
         $collectorsEnabled = (bool) config('seo_intel.collectors_enabled', false);
         $safeDryRunAllowed = $dryRun;
 
@@ -69,6 +84,21 @@ final class SeoIntelCollectorManager
             return new UrlTruthInventoryCollector(new BackendAuthorityUrlTruthSource);
         }
 
+        if ($collector === 'drift_foundation') {
+            return new DriftFoundationCollector(
+                new HtmlSnapshotParser,
+                new MetadataDriftComparator,
+                new SitemapLlmsParityComparator,
+            );
+        }
+
+        if ($collector === 'crawler_log_foundation') {
+            return new CrawlerLogFoundationCollector(
+                new CrawlerUserAgentClassifier,
+                new CrawlerLogLineParser(new CrawlerUserAgentClassifier),
+            );
+        }
+
         return new NoopSeoIntelCollector;
     }
 
@@ -83,6 +113,16 @@ final class SeoIntelCollectorManager
     private function externalApiCallsAllowed(): bool
     {
         return (bool) config('seo_intel.allow_external_api_calls', false);
+    }
+
+    private function productionCrawlAllowed(): bool
+    {
+        return (bool) config('seo_intel.allow_production_crawl', false);
+    }
+
+    private function productionLogReadAllowed(): bool
+    {
+        return (bool) config('seo_intel.allow_production_log_read', false);
     }
 
     private function blocked(string $collector, bool $dryRun, string $reason): SeoIntelCollectorResult
@@ -100,6 +140,8 @@ final class SeoIntelCollectorManager
                 'collectors_enabled' => (bool) config('seo_intel.collectors_enabled', false),
                 'write_enabled' => (bool) config('seo_intel.write_enabled', false),
                 'external_api_calls_allowed' => $this->externalApiCallsAllowed(),
+                'production_crawl_allowed' => $this->productionCrawlAllowed(),
+                'production_log_read_allowed' => $this->productionLogReadAllowed(),
             ],
         );
     }
