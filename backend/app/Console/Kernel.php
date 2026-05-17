@@ -56,6 +56,7 @@ use App\Console\Commands\CareerPlanCanonicalProgressiveReadinessSelection;
 use App\Console\Commands\CareerPlanCanonicalRolloutBatchTransition;
 use App\Console\Commands\CareerPlanCanonicalRuntimeArtifactRefresh;
 use App\Console\Commands\CareerPlanCanonicalRuntimeCandidatePrep;
+use App\Console\Commands\CareerPlanCnProxyVisibleDetailPolicyAuthority;
 use App\Console\Commands\CareerPrepareCanonicalRuntimeCandidates;
 use App\Console\Commands\CareerReleaseGateNoindexCleanup;
 use App\Console\Commands\CareerRemediateCanonicalIndexState;
@@ -231,6 +232,7 @@ class Kernel extends ConsoleKernel
         CareerPlanCanonicalRolloutBatchTransition::class,
         CareerPlanCanonicalRuntimeArtifactRefresh::class,
         CareerPlanCanonicalRuntimeCandidatePrep::class,
+        CareerPlanCnProxyVisibleDetailPolicyAuthority::class,
         CareerPrepareCanonicalRuntimeCandidates::class,
         CareerReleaseGateNoindexCleanup::class,
         CareerRemediateCanonicalIndexState::class,
