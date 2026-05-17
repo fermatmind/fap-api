@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "source_documents": [
+    "SEO-DASH-00B",
+    "SEO-DASH-01A",
+    "SEO-DASH-01B",
+    "SEO-DASH-03B",
+    "SEO-DASH-04A",
+    "BACKEND-RUNTIME-02D"
+  ],
+  "repo": "fap-api",
+  "collectors": [
+    "baidu_foundation",
+    "indexnow_foundation"
+  ],
+  "tables": [
+    "seo_baidu_push_logs",
+    "seo_baidu_landing_daily",
+    "seo_indexnow_submissions"
+  ],
+  "enabled_by_default": false,
+  "live_api_enabled_by_default": false,
+  "write_enabled_by_default": false,
+  "collectors_enabled_by_default": false,
+  "dry_run_default": true,
+  "external_api_calls_allowed": false,
+  "real_url_submission_allowed": false,
+  "source_engines": [
+    "baidu",
+    "bing_indexnow"
+  ],
+  "purchase_truth_source": "backend_orders_payment_benefits",
+  "search_channel_purchase_attribution_allowed": false,
+  "seo_truth_source": false,
+  "pii_forbidden": true,
+  "forbidden_columns": [
+    "email",
+    "order_no",
+    "attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "cookie",
+    "raw_payload",
+    "payment_payload",
+    "raw_email",
+    "raw_ip",
+    "raw_cookie",
+    "baidu_token",
+    "indexnow_key",
+    "api_key",
+    "secret"
+  ],
+  "draft_url_submission_allowed": false,
+  "private_flow_submission_allowed": false,
+  "baidu_push_equals_indexation": false,
+  "indexnow_submission_equals_indexing": false,
+  "credentials_required_for_dry_run": false,
+  "scheduler_enabled": false,
+  "queue_worker_enabled": false,
+  "node2_local_laravel_data_source": false,
+  "gsc_live_connector_changed": false,
+  "sitemap_llms_changed": false,
+  "production_submission_executed": false,
+  "production_migration_executed": false,
+  "production_db_created": false,
+  "next_task": "CHINA-SEARCH-03"
+}
