@@ -641,6 +641,58 @@ prs:
     pseo_generation: false
     scheduler_activation: false
     next_task: SEO-DASH-MVP-COMPLETE
+
+  - id: SEO-DASH-PROD-01A
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-PROD-00
+    branch: codex/seo-dash-prod-01a-seo-intel-db-migration-runbook
+    title: "docs(seo-intel): add production DB migration runbook"
+    name: "production seo_intel DB user migration runbook"
+    findings:
+      - "SEO-DASH-PROD-00 concluded the SEO-DASH MVP foundation is complete but production activation is blocked."
+      - "Production seo_intel DB existence, DB host/location, writer user, Metabase read-only user, backup/restore, and migration runbook are not confirmed."
+      - "This PR is a runbook/contract step only and must not execute production changes."
+    scope:
+      - Add production seo_intel DB placement policy, required users, least-privilege permissions, migration preflight, command templates, backup/restore, forward-fix rollback, post-migration validation, and no-go conditions.
+      - Add generated contract artifact proving no production DB, user, migration, env, deploy, collector, scheduler, Metabase, external API, or log access changes happen in this PR.
+      - Add focused SeoIntel contract test for the production activation runbook.
+      - Update docs/codex PR train metadata for SEO-DASH-PROD-01A.
+    allowed_paths:
+      - backend/docs/seo/production-seo-intel-db-migration-runbook.md
+      - backend/docs/seo/generated/production-seo-intel-db-migration-runbook.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelProductionActivationRunbookTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create production database or DB users.
+      - Run production migrations, connect to production DB, edit env, deploy, SSH, or touch Node2/Node3.
+      - Enable collectors, scheduler jobs, queue workers, Metabase, GSC, Baidu, IndexNow, domestic search adapters, or production log reads.
+      - Change runtime code, backend behavior, payment, order, report, email, recommendation, scoring, sitemap, or llms behavior.
+      - Modify fap-web runtime or use fap-api/fap-web as production frontend runtime.
+      - Store or expose secrets, emails, order numbers, attempt ids, payment ids, provider event ids, cookies, raw IPs, tokens, or keys.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelProductionActivationRunbook
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    production_db_creation: false
+    human_confirmation_required:
+      - production_db_location
+      - seo_intel_writer
+      - seo_intel_metabase_readonly
+      - migration_operator
+      - backup_restore
+      - change_window
+    scheduler_activation: false
+    next_task: SEO-DASH-PROD-01B
   - id: PR-MEDIA-01
     repo: fap-api
     depends_on:
