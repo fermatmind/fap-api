@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T19:18:00+08:00",
+  "updated_at": "2026-05-17T11:20:18.140166Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -9507,6 +9507,113 @@
         }
       ],
       "next_pr": "CHINA-SEARCH-03"
+    },
+    "CHINA-SEARCH-03": {
+      "repo": "fap-api",
+      "branch": "codex/china-search-03-360-sogou-shenma-adapters",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-04B"
+      ],
+      "status": "pr_open",
+      "train_scope": "china_search_domestic_adapter_contracts",
+      "risk_level": "medium_disabled_search_channel_schema",
+      "title": "feat(seo-intel): add 360 Sogou Shenma adapter contracts",
+      "name": "360 Sogou Shenma adapter contracts",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided CHINA-SEARCH-03 with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-04B is merged in fap-api PR #1443 and origin/main contains merge commit 40af10a702b23eaae4685161517517ccd2a0789c."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "domestic_search_credentials": {
+          "status": "human_confirm_required"
+        },
+        "external_api_credentials_required": {
+          "status": "human_confirm_required"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to allowed seo_intel config, domestic search migrations, SeoIntel domestic search collectors/validators/normalizers, focused SeoIntel tests, docs/generated artifact, and docs/codex PR train metadata. No fap-web runtime, payment/order/report/email/recommendation/scoring, deploy/env, scheduler, queue, external API, sitemap, llms, Node2/Node3 runtime, GSC/Baidu/IndexNow live connector, Metabase, or engine-specific page generation files changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "63 tests passed with 1111 assertions; no failures."
+        },
+        "so360_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=so360_foundation --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, credentials_required=false, so360_live_api_enabled=false, submissions_attempted=false, real_url_submission_allowed=false, engine_specific_page_generation_allowed=false, search_channel_purchase_attribution_allowed=false, and source_engine=so360."
+        },
+        "sogou_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=sogou_foundation --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, credentials_required=false, sogou_live_api_enabled=false, submissions_attempted=false, real_url_submission_allowed=false, engine_specific_page_generation_allowed=false, search_channel_purchase_attribution_allowed=false, and source_engine=sogou."
+        },
+        "shenma_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=shenma_foundation --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, credentials_required=false, shenma_live_api_enabled=false, submissions_attempted=false, real_url_submission_allowed=false, engine_specific_page_generation_allowed=false, search_channel_purchase_attribution_allowed=false, and source_engine=shenma."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3345 files."
+        },
+        "bigfive_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+          "evidence": "77 runtime_freeze_classifier tests passed with 82 assertions; no scope file changes were needed."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "github": "pending"
+      },
+      "failure_reason": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1444",
+      "commit_sha": "aa4ab10d",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T11:16:57.277842Z",
+          "status": "in_progress",
+          "summary": "Registered authorized CHINA-SEARCH-03 and started disabled-by-default 360/Sogou/Shenma adapter contract foundations from origin/main."
+        },
+        {
+          "at": "2026-05-17T11:18:57.443123Z",
+          "status": "local_validation_passed",
+          "summary": "Implemented disabled-by-default 360/Sogou/Shenma adapter contracts, domestic search schemas, dry-run collectors, eligibility validator, docs/generated artifact, and tests. SeoIntel tests, domestic dry-run JSON commands, route list, Pint, JSON/YAML validation, diff checks, and runtime freeze classifier spot-check passed."
+        },
+        {
+          "at": "2026-05-17T11:20:18.139926Z",
+          "status": "pr_open",
+          "summary": "Opened PR #1444 for CHINA-SEARCH-03; GitHub checks pending."
+        }
+      ],
+      "next_pr": "CHINA-SEARCH-04"
     }
   },
   "SEO-DASH-04B": {

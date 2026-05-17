@@ -428,6 +428,64 @@ prs:
     external_api_credentials_required: human_confirm_required
     scheduler_activation: false
     next_task: CHINA-SEARCH-03
+  - id: CHINA-SEARCH-03
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-04B
+    branch: codex/china-search-03-360-sogou-shenma-adapters
+    title: "feat(seo-intel): add 360 Sogou Shenma adapter contracts"
+    name: "360 Sogou Shenma adapter contracts"
+    findings:
+      - "SEO-DASH-04B merged disabled-by-default Baidu and IndexNow collector foundations."
+      - "Domestic search engines are channel adapters, not SEO truth or purchase truth."
+      - "Draft, private, noindex, and claim-unsafe URLs must never be submitted."
+    scope:
+      - Add 360/Sogou/Shenma adapter contracts and disabled dry-run foundation collectors.
+      - Add domestic search verification status, submission log, and index sample schemas.
+      - Add URL eligibility validator, submission status normalizer, generated artifact, and focused SeoIntel tests.
+      - Keep live APIs, credentials, writes, scheduler, queue workers, production submission, sitemap/llms changes, and engine-specific page generation disabled.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/database/migrations/*seo_search_engine*
+      - backend/database/migrations/*seo_360*
+      - backend/database/migrations/*seo_sogou*
+      - backend/database/migrations/*seo_shenma*
+      - backend/database/migrations/*seo_domestic*
+      - backend/app/Services/SeoIntel/**
+      - backend/app/Console/Commands/SeoIntelCollectCommand.php
+      - backend/tests/**/SeoIntel*Test.php
+      - backend/docs/seo/china-search-adapter-contracts.md
+      - backend/docs/seo/generated/china-search-adapter-contracts.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Connect live 360, Sogou, or Shenma APIs, add credentials, or submit real URLs.
+      - Run production migrations, create production seo_intel DB, deploy, SSH, edit env, or touch Node2/Node3.
+      - Enable scheduler jobs, create queue workers, run production submissions, or call external APIs.
+      - Generate search-engine-specific pages or change sitemap/llms behavior.
+      - Use domestic search channels, keywords, queries, or index status as purchase truth.
+      - Store PII, raw order numbers, raw attempt ids, payment ids, provider event ids, cookies, tokens, secrets, verification file contents, or payment payloads in seo_intel detail.
+      - Change payment, order, report, email, recommendation, scoring, sitemap, or llms behavior.
+      - Modify fap-web runtime or use fap-api/fap-web as production frontend runtime.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:collect --collector=so360_foundation --dry-run --json
+      - cd backend && php artisan seo-intel:collect --collector=sogou_foundation --dry-run --json
+      - cd backend && php artisan seo-intel:collect --collector=shenma_foundation --dry-run --json
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    domestic_search_credentials: human_confirm_required
+    external_api_credentials_required: human_confirm_required
+    scheduler_activation: false
+    next_task: CHINA-SEARCH-04
   - id: PR-MEDIA-01
     repo: fap-api
     depends_on:

@@ -382,6 +382,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_domestic_search_adapter_contract_files(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/Collectors/DomesticSearchFoundationCollector.php',
+            'backend/app/Services/SeoIntel/Collectors/ShenmaFoundationCollector.php',
+            'backend/app/Services/SeoIntel/Collectors/So360FoundationCollector.php',
+            'backend/app/Services/SeoIntel/Collectors/SogouFoundationCollector.php',
+            'backend/app/Services/SeoIntel/DomesticIndexSampleNormalizer.php',
+            'backend/app/Services/SeoIntel/DomesticSearchEngineAdapterContract.php',
+            'backend/app/Services/SeoIntel/DomesticSearchSubmissionStatusNormalizer.php',
+            'backend/app/Services/SeoIntel/DomesticSearchUrlEligibilityValidator.php',
+            'backend/database/migrations/2026_05_17_001300_create_seo_search_engine_verification_statuses_table.php',
+            'backend/database/migrations/2026_05_17_001400_create_seo_domestic_submission_logs_table.php',
+            'backend/database/migrations/2026_05_17_001500_create_seo_domestic_index_samples_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1568,6 +1587,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isDomesticSearchAdapterContractFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -2032,6 +2055,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/database/migrations/2026_05_17_001000_create_seo_baidu_push_logs_table.php',
             'backend/database/migrations/2026_05_17_001100_create_seo_baidu_landing_daily_table.php',
             'backend/database/migrations/2026_05_17_001200_create_seo_indexnow_submissions_table.php',
+        ], true);
+    }
+
+    private function isDomesticSearchAdapterContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/SeoIntel/Collectors/DomesticSearchFoundationCollector.php',
+            'backend/app/Services/SeoIntel/Collectors/ShenmaFoundationCollector.php',
+            'backend/app/Services/SeoIntel/Collectors/So360FoundationCollector.php',
+            'backend/app/Services/SeoIntel/Collectors/SogouFoundationCollector.php',
+            'backend/app/Services/SeoIntel/DomesticIndexSampleNormalizer.php',
+            'backend/app/Services/SeoIntel/DomesticSearchEngineAdapterContract.php',
+            'backend/app/Services/SeoIntel/DomesticSearchSubmissionStatusNormalizer.php',
+            'backend/app/Services/SeoIntel/DomesticSearchUrlEligibilityValidator.php',
+            'backend/database/migrations/2026_05_17_001300_create_seo_search_engine_verification_statuses_table.php',
+            'backend/database/migrations/2026_05_17_001400_create_seo_domestic_submission_logs_table.php',
+            'backend/database/migrations/2026_05_17_001500_create_seo_domestic_index_samples_table.php',
         ], true);
     }
 

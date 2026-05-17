@@ -28,6 +28,9 @@ final class SeoIntelCollectorSkeletonTest extends TestCase
             'gsc_foundation',
             'baidu_foundation',
             'indexnow_foundation',
+            'so360_foundation',
+            'sogou_foundation',
+            'shenma_foundation',
         ], config('seo_intel.allowed_collectors'));
         $this->assertSame('noop', config('seo_intel.default_collector'));
     }
