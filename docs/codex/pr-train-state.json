@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T14:08:00Z",
+  "updated_at": "2026-05-17T15:28:25Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10241,6 +10241,81 @@
           "at": "2026-05-17T14:02:00Z",
           "status": "github_checks_failed_current_scope_fixed",
           "summary": "GitHub verify-mbti-legacy and verify-mbti-v2 failed on runtime freeze classifier for the new read-only article cover smoke command and Kernel registration; added scoped classifier coverage and reran focused/full classifier tests locally."
+        }
+      ]
+    },
+    "STORAGE-RELEASE-ROOTS-AUDIT": {
+      "repo": "fap-api",
+      "branch": "codex/storage-release-roots-audit",
+      "base": "main",
+      "depends_on": [],
+      "status": "local_checks_passed",
+      "train_scope": "storage_runtime_hygiene",
+      "risk_level": "low",
+      "title": "chore(storage): add read-only release roots audit",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding docs/codex/pr-train.yaml and docs/codex/pr-train-state.json entries for storage-release-roots-audit."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "No manifest dependencies declared for STORAGE-RELEASE-ROOTS-AUDIT."
+        },
+        "implementation": {
+          "status": "pass",
+          "evidence": "Added read-only storage:release-roots:audit --format=json command, focused StorageReleaseRootsAuditTest coverage, SOP audit-first guidance, and train metadata."
+        },
+        "safety_boundary": {
+          "status": "pass",
+          "evidence": "Scope explicitly excludes cleanup, prune, move, delete, quarantine, DB mutation, retention changes, publish, rollback, rehydrate, and quarantine business logic."
+        },
+        "storage_release_roots_audit_test": {
+          "status": "pass",
+          "command": "php artisan test --filter=StorageReleaseRootsAuditTest --no-ansi",
+          "evidence": "6 tests passed with 62 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "ci_verify_mbti": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "MBTI CI master chain completed successfully."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to StorageReleaseRootsAudit command, focused storage test, local retention SOP, and docs/codex PR train metadata. No retention behavior, publish, rollback, rehydrate, quarantine business logic, cleanup, prune, move, delete, DB mutation, or plan writing was added."
+        },
+        "standalone_migrate": {
+          "status": "not_run",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-storage-release-roots-audit.sqlite php artisan migrate --force --no-ansi",
+          "evidence": "Not run because the user acceptance set omitted standalone migrate and this task explicitly requires no DB mutation beyond isolated test/CI harnesses."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T15:22:58Z",
+          "status": "in_progress",
+          "summary": "Started STORAGE-RELEASE-ROOTS-AUDIT after explicit manifest/state authorization; no cleanup, prune, move, delete, quarantine, DB mutation, or plan writing performed."
+        },
+        {
+          "at": "2026-05-17T15:28:25Z",
+          "status": "local_checks_passed",
+          "summary": "Implemented read-only release roots audit and completed focused test, route list, ci_verify_mbti, JSON validation, and diff checks; no cleanup, prune, move, delete, quarantine, DB mutation by the audit command, or plan writing performed."
         }
       ]
     }
