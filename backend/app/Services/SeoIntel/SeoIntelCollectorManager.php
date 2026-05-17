@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel;
 
+use App\Services\SeoIntel\Collectors\AttributionRevenueFoundationCollector;
 use App\Services\SeoIntel\Collectors\CrawlerLogFoundationCollector;
 use App\Services\SeoIntel\Collectors\DriftFoundationCollector;
 use App\Services\SeoIntel\Collectors\NoopSeoIntelCollector;
@@ -96,6 +97,20 @@ final class SeoIntelCollectorManager
             return new CrawlerLogFoundationCollector(
                 new CrawlerUserAgentClassifier,
                 new CrawlerLogLineParser(new CrawlerUserAgentClassifier),
+            );
+        }
+
+        if ($collector === 'attribution_revenue_foundation') {
+            return new AttributionRevenueFoundationCollector(
+                new AttributionDailyBuilder(
+                    new SourceEngineNormalizer,
+                    new ConsentStateNormalizer,
+                    new InternalTrafficFilter,
+                ),
+                new RevenueDailyBuilder(
+                    new SourceEngineNormalizer,
+                    new InternalTrafficFilter,
+                ),
             );
         }
 
