@@ -316,6 +316,61 @@ prs:
     external_api_credentials_required: false
     scheduler_activation: false
     next_task: SEO-DASH-04A
+  - id: SEO-DASH-04A
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-03B
+    branch: codex/seo-dash-04a-gsc-disabled-collector
+    title: "feat(seo-intel): add disabled GSC collector"
+    name: "GSC disabled collector"
+    findings:
+      - "SEO-DASH-03B merged disabled-by-default backend attribution and revenue builders."
+      - "BACKEND-RUNTIME-02D accepted Node2 as API edge gateway and Node3/fap-api-prod as backend authority candidate."
+      - "GSC is search feedback only, not purchase truth, and keyword-to-purchase attribution remains forbidden."
+    scope:
+      - Add seo_gsc_daily schema for Google Search Console daily search feedback aggregates.
+      - Add disabled-by-default gsc_foundation collector, row normalizer, and brand/non-brand query classifier.
+      - Keep live GSC API calls, credentials, writes, scheduler, queue workers, production backfill, Baidu, IndexNow, and Metabase disabled.
+      - Add docs/generated artifact and focused SeoIntel tests proving no live API calls, no credentials, no scheduler activation, and no purchase attribution.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/database/migrations/*seo_gsc_daily*
+      - backend/app/Services/SeoIntel/**
+      - backend/app/Console/Commands/SeoIntelCollectCommand.php
+      - backend/tests/**/SeoIntel*Test.php
+      - backend/tests/Feature/SeoIntel/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/seo-intel-gsc-collector.md
+      - backend/docs/seo/generated/seo-intel-gsc-collector.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Connect live GSC API or add credentials.
+      - Run production migrations, create production seo_intel DB, deploy, SSH, edit env, or touch Node2/Node3.
+      - Connect Baidu, IndexNow, or deploy Metabase.
+      - Enable scheduler jobs, create queue workers, run production backfills, or call external APIs.
+      - Use GSC, GA4, or Baidu as purchase truth.
+      - Directly attribute purchase to keyword/query.
+      - Store PII, raw order numbers, raw attempt ids, payment ids, provider event ids, cookies, or payment payloads in seo_intel detail.
+      - Change payment, order, report, email, recommendation, scoring, sitemap, or llms behavior.
+      - Modify fap-web runtime or use fap-api/fap-web as production frontend runtime.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:collect --collector=gsc_foundation --dry-run --json
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    gsc_credentials: human_confirm_required
+    external_api_credentials_required: human_confirm_required
+    scheduler_activation: false
+    next_task: SEO-DASH-04B
   - id: PR-MEDIA-01
     repo: fap-api
     depends_on:

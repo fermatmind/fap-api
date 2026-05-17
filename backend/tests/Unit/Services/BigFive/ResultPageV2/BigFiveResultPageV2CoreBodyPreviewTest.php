@@ -354,6 +354,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_intel_gsc_foundation_files(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/Collectors/GscCollector.php',
+            'backend/app/Services/SeoIntel/GscQueryClassifier.php',
+            'backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php',
+            'backend/database/migrations/2026_05_17_000900_create_seo_gsc_daily_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1532,6 +1544,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelGscFoundationFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -1972,6 +1988,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/database/migrations/2026_05_17_000600_create_seo_revenue_daily_table.php',
             'backend/database/migrations/2026_05_17_000700_create_seo_cluster_daily_table.php',
             'backend/database/migrations/2026_05_17_000800_create_seo_consent_daily_table.php',
+        ], true);
+    }
+
+    private function isSeoIntelGscFoundationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/SeoIntel/Collectors/GscCollector.php',
+            'backend/app/Services/SeoIntel/GscQueryClassifier.php',
+            'backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php',
+            'backend/database/migrations/2026_05_17_000900_create_seo_gsc_daily_table.php',
         ], true);
     }
 

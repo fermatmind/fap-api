@@ -25,6 +25,7 @@ final class SeoIntelCollectorSkeletonTest extends TestCase
             'drift_foundation',
             'crawler_log_foundation',
             'attribution_revenue_foundation',
+            'gsc_foundation',
         ], config('seo_intel.allowed_collectors'));
         $this->assertSame('noop', config('seo_intel.default_collector'));
     }
