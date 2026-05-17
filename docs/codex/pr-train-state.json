@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T12:47:00Z",
+  "updated_at": "2026-05-17T13:48:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -4360,7 +4360,7 @@
       "branch": "fix/career-index-state-minimum-remediation-gate",
       "title": "fix(api): add guarded career index state remediation command",
       "name": "Add guarded explicit-slug index_state remediation dry-run/apply planning",
-      "status": "in_progress",
+      "status": "local_checks_passed",
       "depends_on": [
         "RUN-1F",
         "REPAIR-INDEX-ENTITY-POLICY-2"
@@ -9834,6 +9834,82 @@
         }
       ],
       "next_pr": "SEO-DASH-06"
+    },
+    "PUBLISH-API-MEDIA-ORIGIN-READYNESS": {
+      "repo": "fap-api",
+      "branch": "codex/publish-api-media-origin-readyness",
+      "base": "main",
+      "depends_on": [],
+      "status": "in_progress",
+      "train_scope": "publishing_reliability",
+      "risk_level": "medium",
+      "title": "fix(cms-media): enforce public article media origin and variant readiness",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly requested sequential execution of PUBLISH-API-MEDIA-ORIGIN-READYNESS, PUBLISH-WEB-CONTENT-CACHE-PURGE, and PUBLISH-API-ARTICLE-COVER-SMOKE."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PUBLISH-API-MEDIA-ORIGIN-READYNESS has no manifest dependencies."
+        },
+        "implementation": {
+          "status": "pass",
+          "evidence": "Article cover media readiness guard and focused regression tests implemented."
+        },
+        "public_media_url_guard": {
+          "status": "pass",
+          "command": "php artisan test --filter=PublicMediaUrlGuard --no-ansi",
+          "evidence": "5 tests passed with PHP 8.5 file_get_contents warnings only."
+        },
+        "media_library": {
+          "status": "pass",
+          "command": "php artisan test --filter=MediaLibrary --no-ansi",
+          "evidence": "10 tests passed with PHP 8.5 file_get_contents warnings only."
+        },
+        "article_resource": {
+          "status": "pass",
+          "command": "php artisan test --filter=ArticleResource --no-ansi",
+          "evidence": "No matching tests found; ArticleResource behavior is covered by MediaLibraryPublicApiTest reflection regression."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test app/Support/PublicMediaUrlGuard.php app/Filament/Ops/Resources/ArticleResource.php tests/Unit/Support/PublicMediaUrlGuardTest.php tests/Feature/MediaLibrary",
+          "evidence": "Pint passed across 4 files."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to ArticleResource, PublicMediaUrlGuard, MediaLibrary/PublicMediaUrlGuard tests, and docs/codex PR train metadata. No public content, production media assets, deploy, rollback, unlock, process, DB mutation, or fap-web files changed."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T13:35:00Z",
+          "status": "in_progress",
+          "summary": "Started publishing reliability train item for CMS media origin and article cover variant readiness from origin/main; no production mutation, deploy, or media upload performed."
+        },
+        {
+          "at": "2026-05-17T13:48:00Z",
+          "status": "local_checks_passed",
+          "summary": "Implemented fail-closed article cover media readiness and verified focused PublicMediaUrlGuard, MediaLibrary, route list, Pint, YAML/JSON, and diff checks."
+        }
+      ]
     }
   },
   "SEO-DASH-04B": {

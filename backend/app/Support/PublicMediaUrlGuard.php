@@ -84,6 +84,10 @@ final class PublicMediaUrlGuard
 
     public static function canonicalMediaUrl(?string $disk, mixed $path, mixed $url): ?string
     {
+        if (self::isPrivateOrOpsDisk($disk)) {
+            return null;
+        }
+
         $fromPath = self::publicMediaUrlForPath($disk, $path);
         if ($fromPath !== null) {
             return $fromPath;
@@ -202,11 +206,16 @@ final class PublicMediaUrlGuard
             return '';
         }
 
+        $normalizedDisk = strtolower(trim((string) $disk));
+        if (self::isPrivateOrOpsDisk($disk)) {
+            return '';
+        }
+
         if (str_starts_with($trimmed, '/')) {
             return $trimmed;
         }
 
-        if (trim((string) $disk) === 'public') {
+        if (in_array($normalizedDisk, ['public', 'public_static'], true)) {
             $prefix = trim((string) config('fap.media.public_storage_prefix', '/storage'));
             $prefix = $prefix === '' ? '/storage' : '/'.trim($prefix, '/');
 
@@ -236,6 +245,11 @@ final class PublicMediaUrlGuard
     private static function normalizeHost(string $host): string
     {
         return strtolower(trim($host, "[] \t\n\r\0\x0B."));
+    }
+
+    private static function isPrivateOrOpsDisk(?string $disk): bool
+    {
+        return in_array(strtolower(trim((string) $disk)), ['local', 'private', 'ops'], true);
     }
 
     private static function isPrivateOrLocalHost(string $host): bool

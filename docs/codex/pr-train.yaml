@@ -5007,3 +5007,55 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+  - id: PUBLISH-API-MEDIA-ORIGIN-READYNESS
+    repo: fap-api
+    branch: codex/publish-api-media-origin-readyness
+    base: main
+    depends_on: []
+    title: "fix(cms-media): enforce public article media origin and variant readiness"
+    name: "Enforce public article media origin and variant readiness"
+    train_scope: publishing_reliability
+    risk_level: medium
+    findings:
+      - "Article cover uploads can produce CMS URLs that are not accepted by the frontend media allowlist."
+      - "Missing or unreachable media variants can make article list cards fall back to placeholders after publish."
+    scope:
+      - Enforce public, frontend-allowlisted article cover media origins in backend CMS media guards.
+      - Require article cover readiness for hero, card, og, thumbnail, and preload variants before cover binding is considered publish-ready.
+      - Fail closed when selected media assets are ops-only, CDN-unverified, missing variants, or rejected by PublicMediaUrlGuard.
+      - Add tests for allowed media origins, rejected private/ops-only media URLs, and article cover variant readiness.
+    allowed_paths:
+      - backend/app/Support/PublicMediaUrlGuard.php
+      - backend/app/Services/Cms/MediaVariantGenerator.php
+      - backend/app/Services/Cms/MediaAssetStorageSyncService.php
+      - backend/app/Filament/Ops/Resources/ArticleResource.php
+      - backend/tests/Unit/Support/PublicMediaUrlGuardTest.php
+      - backend/tests/Unit/Services/Cms/**
+      - backend/tests/Feature/MediaLibrary/**
+      - backend/tests/Feature/Ops/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Change public article content or publish/unpublish articles.
+      - Touch fap-web.
+      - Run production DB mutation, media migration, deploy, rollback, unlock, or process termination.
+      - Upload or replace live media assets.
+    validation:
+      - php artisan test --filter=PublicMediaUrlGuard --no-ansi
+      - php artisan test --filter=MediaLibrary --no-ansi
+      - php artisan test --filter=ArticleResource --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test app/Support/PublicMediaUrlGuard.php app/Services/Cms/MediaVariantGenerator.php app/Services/Cms/MediaAssetStorageSyncService.php app/Filament/Ops/Resources/ArticleResource.php tests/Unit/Support/PublicMediaUrlGuardTest.php tests/Feature/MediaLibrary tests/Feature/Ops
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by PUBLISH-API-MEDIA-ORIGIN-READYNESS
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
