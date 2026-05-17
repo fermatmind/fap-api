@@ -215,8 +215,18 @@ final class ArticleTranslationWorkflowService
 
     public function approveTranslation(Article $target): ArticleTranslationRevision
     {
-        return DB::transaction(function () use ($target): ArticleTranslationRevision {
-            $locked = $this->lockTarget($target);
+        return $this->approveHumanReviewRevision($target, null, true);
+    }
+
+    public function approveEditorialWorkingRevision(Article $target, ?int $adminUserId = null): ArticleTranslationRevision
+    {
+        return $this->approveHumanReviewRevision($target, $adminUserId, false);
+    }
+
+    private function approveHumanReviewRevision(Article $target, ?int $adminUserId, bool $markEditorialApproved): ArticleTranslationRevision
+    {
+        return DB::transaction(function () use ($target, $adminUserId, $markEditorialApproved): ArticleTranslationRevision {
+            $locked = $this->lockWorkingArticle($target);
             $revision = $this->workingRevisionOrFail($locked);
 
             if ($revision->revision_status !== ArticleTranslationRevision::STATUS_HUMAN_REVIEW) {
@@ -224,19 +234,36 @@ final class ArticleTranslationWorkflowService
                     'working revision is not human_review',
                 ]);
             }
-            $blockers = $this->preflight($locked)['blockers'];
+
+            $actorId = $adminUserId ?: $this->actorAdminId();
+            if ($actorId <= 0) {
+                throw new ArticleTranslationWorkflowException('Approval requires an authenticated admin actor.', [
+                    'approval actor missing',
+                ]);
+            }
+
+            $blockers = $locked->isSourceArticle()
+                ? $this->sourceEditorialApprovalBlockers($locked, $revision)
+                : $this->preflight($locked)['blockers'];
+
             if ($blockers !== []) {
                 throw new ArticleTranslationWorkflowException('Translation approval is blocked by preflight issues.', $blockers);
             }
 
+            $now = now();
             $revision->forceFill([
                 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
-                'approved_at' => $revision->approved_at ?? now(),
+                'reviewed_by' => $revision->reviewed_by ?: $actorId,
+                'reviewed_at' => $revision->reviewed_at ?? $now,
+                'approved_at' => $revision->approved_at ?? $now,
             ])->save();
             $locked->forceFill([
                 'translation_status' => Article::TRANSLATION_STATUS_APPROVED,
             ])->saveQuietly();
-            $this->markEditorialApproved($locked);
+
+            if ($markEditorialApproved) {
+                $this->markEditorialApproved($locked);
+            }
 
             $this->log('article_translation_approved', $locked, [
                 'revision_id' => (int) $revision->id,
@@ -512,18 +539,25 @@ final class ArticleTranslationWorkflowService
 
     private function lockTarget(Article $target): Article
     {
-        /** @var Article $locked */
-        $locked = Article::query()
-            ->withoutGlobalScopes()
-            ->with(['workingRevision', 'publishedRevision', 'sourceCanonical.workingRevision', 'seoMeta'])
-            ->lockForUpdate()
-            ->findOrFail($target->id);
+        $locked = $this->lockWorkingArticle($target);
 
         if ($locked->isSourceArticle()) {
             throw new ArticleTranslationWorkflowException('This action requires a target translation article.', [
                 'target article is source',
             ]);
         }
+
+        return $locked;
+    }
+
+    private function lockWorkingArticle(Article $target): Article
+    {
+        /** @var Article $locked */
+        $locked = Article::query()
+            ->withoutGlobalScopes()
+            ->with(['workingRevision', 'publishedRevision', 'sourceCanonical.workingRevision', 'seoMeta'])
+            ->lockForUpdate()
+            ->findOrFail($target->id);
 
         return $locked;
     }
@@ -577,6 +611,31 @@ final class ArticleTranslationWorkflowService
         }
 
         return array_values(array_unique($blockers));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function sourceEditorialApprovalBlockers(Article $source, ArticleTranslationRevision $revision): array
+    {
+        $blockers = [];
+
+        if (! $source->isSourceArticle()) {
+            $blockers[] = 'source article linkage invalid';
+        }
+        if ((int) $source->org_id !== self::PUBLIC_EDITORIAL_ORG_ID) {
+            $blockers[] = 'source article org mismatch';
+        }
+
+        $source->loadMissing(['seoMeta']);
+        if ($source->seoMeta instanceof ArticleSeoMeta && (int) $source->seoMeta->org_id !== (int) $source->org_id) {
+            $blockers[] = 'source seo_meta org mismatch';
+        }
+
+        return array_values(array_unique(array_merge(
+            $blockers,
+            $this->revisionOwnershipBlockers($source, $revision, 'source working revision'),
+        )));
     }
 
     /**
@@ -657,9 +716,7 @@ final class ArticleTranslationWorkflowService
 
     private function markEditorialApproved(Article $target): void
     {
-        $guard = (string) config('admin.guard', 'admin');
-        $actor = auth($guard)->user();
-        $actorId = is_object($actor) && is_numeric(data_get($actor, 'id')) ? (int) data_get($actor, 'id') : null;
+        $actorId = $this->actorAdminId() ?: null;
 
         EditorialReview::withoutGlobalScopes()->updateOrCreate(
             [
@@ -674,6 +731,14 @@ final class ArticleTranslationWorkflowService
                 'last_transition_at' => now(),
             ],
         );
+    }
+
+    private function actorAdminId(): int
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $actor = auth($guard)->user();
+
+        return is_object($actor) && is_numeric(data_get($actor, 'id')) ? (int) data_get($actor, 'id') : 0;
     }
 
     private function sourceHashFor(Article $source): string
