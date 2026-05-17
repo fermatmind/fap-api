@@ -3188,7 +3188,7 @@
       "branch": "fix/career-entity-remediation-plan-1",
       "title": "fix(api): add career occupation entity remediation planning",
       "name": "Add career occupation entity remediation planning",
-      "status": "in_progress",
+      "status": "local_validation_passed",
       "depends_on": [
         "REPAIR-INDEX-1",
         "SCAN-3"
@@ -8668,6 +8668,95 @@
         }
       ],
       "next_pr": "SCAN-2786-VISIBLE-DETAIL-GAP-AFTER-DIRECTORY-LIST-DETAIL-API-AUTHORITY-75-1"
+    },
+    "REPAIR-CN-PROXY-VISIBLE-DETAIL-POLICY-AUTHORITY-1": {
+      "repo": "fap-api",
+      "branch": "codex/repair-cn-proxy-visible-detail-policy-authority-1",
+      "base": "main",
+      "status": "in_progress",
+      "train_scope": "cn_proxy_visible_detail_policy_authority",
+      "risk_level": "medium_publication_authority",
+      "title": "fix(api): add CN proxy visible detail policy authority",
+      "name": "Add CN proxy visible detail policy authority",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for REPAIR-CN-PROXY-VISIBLE-DETAIL-POLICY-AUTHORITY-1, then implementing the PR."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are confined to read-only CN proxy visible detail policy authority command, command registration, focused console tests/docs, and authorized train metadata. No DB mutation, deploy, rollout, candidate prep, backfill, rollback, quarantine, or fap-web change was performed."
+        },
+        "cn_proxy_visible_detail_policy_authority": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerPlanCnProxyVisibleDetailPolicyAuthority --no-ansi",
+          "evidence": "5 tests passed, 39 assertions."
+        },
+        "cn_proxy_public_owner_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerValidateCnProxyPublicOwner --no-ansi",
+          "evidence": "5 tests passed, 79 assertions."
+        },
+        "command_registration": {
+          "status": "pass",
+          "command": "php backend/artisan list --no-ansi | grep career:plan-cn-proxy-visible-detail-policy-authority",
+          "evidence": "The new read-only policy authority planner is registered."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "sqlite_migrate": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-cn-proxy-visible-detail-policy-authority.sqlite php artisan migrate --force --no-ansi",
+          "evidence": "SQLite migration completed successfully in local testing database."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test app/Console/Commands/CareerPlanCnProxyVisibleDetailPolicyAuthority.php tests/Feature/Console/CareerPlanCnProxyVisibleDetailPolicyAuthorityCommandTest.php",
+          "evidence": "Scoped Pint check passed."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check",
+          "evidence": "Whitespace check passed."
+        },
+        "mbti_ci": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full CI master chain exited 0."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_mutation_allowed": {
+          "status": "false"
+        },
+        "fap_web_touched": {
+          "status": "false"
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T22:00:00+08:00",
+          "status": "in_progress",
+          "summary": "Registered authorized CN proxy visible detail policy authority PR and started implementation from clean origin/main worktree."
+        },
+        {
+          "at": "2026-05-17T22:35:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Added read-only CN proxy visible-detail policy authority planner, focused tests, docs, and train metadata. Focused Career tests, command registration, route list, SQLite migrate, scoped Pint, diff check, and full MBTI CI chain passed."
+        }
+      ],
+      "next_pr": "REPAIR-CN-PROXY-CN-FIRST-DISPLAY-ASSET-PIPELINE-1"
     },
     "SEO-DASH-01B": {
       "repo": "fap-api",

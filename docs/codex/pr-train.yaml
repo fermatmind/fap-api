@@ -4503,6 +4503,45 @@ prs:
       github_checks_required: true
       squash: true
 
+  - id: REPAIR-CN-PROXY-VISIBLE-DETAIL-POLICY-AUTHORITY-1
+    repo: fap-api
+    branch: codex/repair-cn-proxy-visible-detail-policy-authority-1
+    title: "fix(api): add CN proxy visible detail policy authority"
+    name: "Add CN proxy visible detail policy authority"
+    findings:
+      - "Product-visible 2786 claims require an explicit distinction between reviewed noindex CN proxy owner records and indexable visible detail pages."
+      - "The existing reviewed CN proxy public-owner evidence must not be treated as authorization for canonical visible detail publication."
+    scope:
+      - Add a read-only backend policy authority planner for CN proxy visible-detail publication.
+      - Require an explicit product policy decision before any CN proxy visible-detail train can proceed.
+      - Block visible-detail publication when only reviewed noindex public-owner evidence exists.
+      - Preserve partition-aware product claim semantics when the conservative decision is selected.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Console/Kernel.php
+      - backend/tests/Feature/Console/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Publish CN proxy rows as public_canonical_job.
+      - Mark CN proxy rows indexable.
+      - Add CN proxy URLs to sitemap, llms, or llms-full.
+      - Mutate DB, deploy, rollout, candidate prep, backfill, rollback, quarantine, or touch fap-web.
+    validation:
+      - php artisan test --filter=CareerPlanCnProxyVisibleDetailPolicyAuthority --no-ansi
+      - php artisan test --filter=CareerValidateCnProxyPublicOwner --no-ansi
+      - php artisan route:list --no-ansi
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-cn-proxy-visible-detail-policy-authority.sqlite php artisan migrate --force --no-ansi
+      - vendor/bin/pint --test app/Console/Commands/CareerPlanCnProxyVisibleDetailPolicyAuthority.php tests/Feature/Console/CareerPlanCnProxyVisibleDetailPolicyAuthorityCommandTest.php
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
   - id: REPAIR-DIRECTORY-DETAIL-PENDING-314-1
     repo: fap-api
     branch: codex/repair-directory-detail-pending-314-1
