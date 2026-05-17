@@ -35,4 +35,6 @@ The command refuses closeout when the live acceptance artifact is not `status=pa
 
 For `target_public_total=2786`, closeout also refuses partition-accounting-only evidence. The live acceptance artifact must prove the product-visible surface: directory `member_count=2786`, career jobs item count `2786`, detail-ready / `public_detail_indexable_count=2786`, and `5572` published locale rows. A final partition total of `2786` is not sufficient when public routes or detail pages remain disabled.
 
+Closeout records carry the visible publication gate summary under `acceptance_summary.full_visible_publication_gate.product_claim`. Operators must not translate `final_public_accounted_total=2786` into a product-visible claim unless `visible_detail_claim_allowed=true` and `safe_claim_scope=product_visible_detail_publication`.
+
 It does not run readiness, candidate preparation, rollout dry-run, rollout apply, live crawl, backfill, rollback, quarantine, deploy, or any database mutation.

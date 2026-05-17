@@ -19,6 +19,11 @@ For the final `2786` target, the command also enforces the product-visible publi
 
 CN proxy public-owner accounting and software manual-hold accounting may be recorded as context, but they are not accepted as evidence that 2786 public detail pages are visible.
 
+The final visible gate also emits `product_claim`. Downstream product copy and release notes must use `product_claim.safe_claim_scope` and `product_claim.claimable_counts`:
+
+- `product_visible_detail_publication` allows a visible/detail page claim for the target total.
+- `partition_accounted_not_visible_detail` allows only an accounted/resolved source-set claim. It explicitly blocks claims such as `2786_visible_directory_members`, `2786_visible_detail_pages`, and `2786_detail_indexable_pages`.
+
 Example:
 
 ```bash

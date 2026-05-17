@@ -33,6 +33,7 @@ final class CareerFullVisiblePublicationGate
             ]),
             'found_published_locale_rows' => $this->foundPublishedLocaleRows($liveAcceptance),
             'release_gate_pass_count' => $this->releaseGatePassCount($liveAcceptance),
+            'product_claim' => $this->productClaim($liveAcceptance, $targetPublicTotal, $expectedLocaleRows),
         ];
     }
 
@@ -213,6 +214,58 @@ final class CareerFullVisiblePublicationGate
             'release_gate.pass_count',
             'acceptance_summary.release_gate_pass_count',
         ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function productClaim(array $payload, int $targetPublicTotal, int $expectedLocaleRows): array
+    {
+        $directoryMemberCount = $this->directoryMemberCount($payload);
+        $careerJobsItemCount = $this->careerJobsItemCount($payload);
+        $detailReadyCount = $this->detailReadyCount($payload);
+        $publicDetailIndexableCount = $this->publicDetailIndexableCount($payload);
+        $foundPublishedLocaleRows = $this->foundPublishedLocaleRows($payload);
+        $releaseGatePassCount = $this->releaseGatePassCount($payload);
+        $partitionAccountingTotal = $this->intAtAny($payload, [
+            'partition_accounting.final_public_accounted_total',
+            'final_public_accounted_total',
+        ]);
+        $visibleDetailClaimAllowed = $this->appliesTo($targetPublicTotal)
+            && $directoryMemberCount === $targetPublicTotal
+            && $careerJobsItemCount === $targetPublicTotal
+            && $detailReadyCount === $targetPublicTotal
+            && $publicDetailIndexableCount === $targetPublicTotal
+            && $foundPublishedLocaleRows === $expectedLocaleRows
+            && $releaseGatePassCount === $expectedLocaleRows;
+
+        return [
+            'claim_policy_version' => 'career_product_visible_claim.v1',
+            'target_public_total' => $targetPublicTotal,
+            'expected_locale_rows' => $expectedLocaleRows,
+            'visible_detail_claim_allowed' => $visibleDetailClaimAllowed,
+            'partition_accounting_claim_allowed' => $partitionAccountingTotal === $targetPublicTotal,
+            'safe_claim_scope' => $visibleDetailClaimAllowed
+                ? 'product_visible_detail_publication'
+                : ($partitionAccountingTotal === $targetPublicTotal
+                    ? 'partition_accounted_not_visible_detail'
+                    : 'insufficient_product_evidence'),
+            'claimable_counts' => [
+                'directory_member_count' => $directoryMemberCount,
+                'career_jobs_item_count' => $careerJobsItemCount,
+                'detail_ready_count' => $detailReadyCount,
+                'public_detail_indexable_count' => $publicDetailIndexableCount,
+                'found_published_locale_rows' => $foundPublishedLocaleRows,
+                'release_gate_pass_count' => $releaseGatePassCount,
+                'partition_accounting_total' => $partitionAccountingTotal,
+            ],
+            'blocked_claims' => $visibleDetailClaimAllowed ? [] : [
+                '2786_visible_directory_members',
+                '2786_visible_detail_pages',
+                '2786_detail_indexable_pages',
+            ],
+        ];
     }
 
     /**
