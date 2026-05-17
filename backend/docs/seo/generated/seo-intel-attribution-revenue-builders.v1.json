@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "source_documents": [
+    "SEO-DASH-00B",
+    "SEO-DASH-01A",
+    "SEO-DASH-01B",
+    "SEO-DASH-03A",
+    "BACKEND-RUNTIME-02D"
+  ],
+  "repo": "fap-api",
+  "tables": [
+    "seo_event_funnel_daily",
+    "seo_landing_attribution_daily",
+    "seo_revenue_daily",
+    "seo_cluster_daily",
+    "seo_consent_daily"
+  ],
+  "collector": "attribution_revenue_foundation",
+  "enabled_by_default": false,
+  "write_enabled_by_default": false,
+  "dry_run_default": true,
+  "external_api_calls_allowed": false,
+  "scheduler_enabled": false,
+  "queue_worker_enabled": false,
+  "purchase_truth_source": "backend_orders_payment_benefits",
+  "ga4_purchase_truth": false,
+  "baidu_purchase_truth": false,
+  "api_track_role": "transport_only",
+  "keyword_purchase_attribution_allowed": false,
+  "pii_forbidden": true,
+  "forbidden_columns": [
+    "email",
+    "order_no",
+    "raw_order_no",
+    "attempt_id",
+    "raw_attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "cookie",
+    "raw_payload",
+    "payment_payload",
+    "provider_payload",
+    "raw_email",
+    "raw_ip",
+    "raw_cookie"
+  ],
+  "source_engine_values": [
+    "google",
+    "baidu",
+    "bing_indexnow",
+    "llms",
+    "direct",
+    "paid_google",
+    "paid_baidu",
+    "unknown"
+  ],
+  "consent_state_values": [
+    "granted",
+    "denied",
+    "unknown",
+    "not_applicable"
+  ],
+  "internal_qa_filtering_enabled": true,
+  "excluded_by_default": [
+    "internal",
+    "qa",
+    "bot",
+    "non_production"
+  ],
+  "node2_local_laravel_data_source": false,
+  "gsc_connected": false,
+  "baidu_connected": false,
+  "indexnow_connected": false,
+  "metabase_deployed": false,
+  "production_migration_executed": false,
+  "production_db_created": false,
+  "next_task": "SEO-DASH-04A"
+}

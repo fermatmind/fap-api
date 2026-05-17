@@ -335,6 +335,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_intel_attribution_revenue_foundation_files(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/AttributionDailyBuilder.php',
+            'backend/app/Services/SeoIntel/Collectors/AttributionRevenueFoundationCollector.php',
+            'backend/app/Services/SeoIntel/ConsentStateNormalizer.php',
+            'backend/app/Services/SeoIntel/InternalTrafficFilter.php',
+            'backend/app/Services/SeoIntel/RevenueDailyBuilder.php',
+            'backend/app/Services/SeoIntel/SourceEngineNormalizer.php',
+            'backend/database/migrations/2026_05_17_000400_create_seo_event_funnel_daily_table.php',
+            'backend/database/migrations/2026_05_17_000500_create_seo_landing_attribution_daily_table.php',
+            'backend/database/migrations/2026_05_17_000600_create_seo_revenue_daily_table.php',
+            'backend/database/migrations/2026_05_17_000700_create_seo_cluster_daily_table.php',
+            'backend/database/migrations/2026_05_17_000800_create_seo_consent_daily_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1495,6 +1514,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelAttributionRevenueFoundationFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -1910,6 +1933,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/Drift/HtmlSnapshotParser.php',
             'backend/app/Services/SeoIntel/Drift/MetadataDriftComparator.php',
             'backend/app/Services/SeoIntel/Drift/SitemapLlmsParityComparator.php',
+        ], true);
+    }
+
+    private function isSeoIntelAttributionRevenueFoundationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/SeoIntel/AttributionDailyBuilder.php',
+            'backend/app/Services/SeoIntel/Collectors/AttributionRevenueFoundationCollector.php',
+            'backend/app/Services/SeoIntel/ConsentStateNormalizer.php',
+            'backend/app/Services/SeoIntel/InternalTrafficFilter.php',
+            'backend/app/Services/SeoIntel/RevenueDailyBuilder.php',
+            'backend/app/Services/SeoIntel/SourceEngineNormalizer.php',
+            'backend/database/migrations/2026_05_17_000400_create_seo_event_funnel_daily_table.php',
+            'backend/database/migrations/2026_05_17_000500_create_seo_landing_attribution_daily_table.php',
+            'backend/database/migrations/2026_05_17_000600_create_seo_revenue_daily_table.php',
+            'backend/database/migrations/2026_05_17_000700_create_seo_cluster_daily_table.php',
+            'backend/database/migrations/2026_05_17_000800_create_seo_consent_daily_table.php',
         ], true);
     }
 

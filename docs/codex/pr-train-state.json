@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T13:32:00+08:00",
+  "updated_at": "2026-05-17T16:23:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -1597,7 +1597,7 @@
       "branch": "fix/career-surface-readiness-audit8",
       "title": "feat(api): add career surface readiness audit",
       "name": "Career Surface Readiness Audit",
-      "status": "pr_open_github_checks_passed",
+      "status": "merged",
       "depends_on": [
         "AUDIT-7"
       ],
@@ -2496,7 +2496,7 @@
       "branch": "fix/career-audit-entity-index-context-consumer",
       "title": "fix(api): add career audit entity index context inputs",
       "name": "Add entity and index context artifact inputs for 2786 audit",
-      "status": "local_validation_passed",
+      "status": "pr_open_github_checks_passed",
       "depends_on": [
         "REPAIR-RUN-CTX-1"
       ],
@@ -3516,7 +3516,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-05-content-registry-readiness",
       "title": "feat(riasec): add content registry readiness contract",
-      "status": "in_progress",
+      "status": "local_validation_passed",
       "depends_on": [
         "RIASEC-PERSONALIZATION-04"
       ],
@@ -3602,7 +3602,7 @@
         "docs/codex/pr-train-state.json"
       ],
       "commit_sha": "7740b1b09ce6dddb693ac5dbcf8a1d027b0db08b",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1440",
       "checks": {},
       "failure_reason": null,
       "merged_at": null,
@@ -4332,7 +4332,7 @@
         "no fap-web change",
         "no deploy"
       ],
-      "commit_sha": null,
+      "commit_sha": "pending_post_push",
       "pr_url": null,
       "checks": {
         "authorization": {
@@ -9124,10 +9124,10 @@
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1438",
-      "commit_sha": "pending_post_push",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "5bcfd0446bbaaf0325b8814d3b3a482ae2cb8666",
+      "merged_at": "2026-05-17T06:32:14Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -9149,9 +9149,135 @@
           "at": "2026-05-17T14:08:00+08:00",
           "status": "pr_open_github_checks_passed",
           "summary": "GitHub checks passed for PR #1438. PR remains open for human review; auto-merge is disabled."
+        },
+        {
+          "at": "2026-05-17T15:50:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled SEO-DASH-02B after PR #1438 was merged; origin/main contains merge commit 5bcfd0446bbaaf0325b8814d3b3a482ae2cb8666 and the task branch is absent locally/remotely in the current worktree."
         }
       ],
-      "next_pr": "SEO-DASH-03A"
+      "next_pr": "SEO-DASH-03B"
+    },
+    "SEO-DASH-03B": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-03b-backend-attribution-revenue-builders",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-03A"
+      ],
+      "status": "in_progress",
+      "train_scope": "search_intelligence_backend_attribution_revenue_builders",
+      "risk_level": "medium_disabled_aggregate_schema",
+      "title": "feat(seo-intel): add attribution and revenue builders",
+      "name": "backend attribution and revenue builders",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-03B with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-03A is merged in fap-web PR #832, and SEO-DASH-02B is merged into fap-api origin/main at merge commit 5bcfd0446bbaaf0325b8814d3b3a482ae2cb8666."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "external_api_credentials_required": {
+          "status": "false"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Staged files are confined to allowed seo_intel config, aggregate migrations, SeoIntel services/collector integration, focused SeoIntel tests, BigFive runtime freeze classifier allowlist test for current PR files, docs/generated artifact, and docs/codex PR train metadata. No fap-web runtime, payment/order/report/email/recommendation/scoring, deploy/env, scheduler, queue, external API, sitemap, llms, Node2/Node3 runtime, or Metabase files changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "41 warning-level tests passed with 597 assertions; no failures."
+        },
+        "attribution_revenue_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=attribution_revenue_foundation --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, scheduler_enabled=false, queue_worker_enabled=false, ga4_purchase_truth=false, baidu_purchase_truth=false, keyword_purchase_attribution_allowed=false, and node2_local_laravel_data_source=false."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3319 files after formatting one current-scope file."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "bigfive_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+          "evidence": "74 runtime_freeze_classifier tests passed after adding explicit ignore coverage for SEO-DASH-03B attribution/revenue builder and aggregate migration files."
+        },
+        "json_yaml": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -m json.tool backend/docs/seo/generated/seo-intel-attribution-revenue-builders.v1.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\""
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "After adding scoped runtime freeze classifier coverage, PR #1440 GitHub checks passed: hygiene, verify-mbti-v2, and verify-mbti-legacy."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T15:50:00+08:00",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-03B and started disabled-by-default backend attribution/revenue builder foundation from origin/main."
+        },
+        {
+          "at": "2026-05-17T16:02:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Implemented disabled-by-default attribution/revenue aggregate schema, builders, dry-run collector, docs, and tests. SeoIntel tests, dry-run JSON command, route list, Pint, JSON/YAML validation, diff checks, and runtime freeze classifier passed."
+        },
+        {
+          "at": "2026-05-17T16:04:00+08:00",
+          "status": "local_commit_created",
+          "summary": "Created local SEO-DASH-03B commit; final pushed head SHA will be recorded from GitHub after PR creation to avoid self-referential amend churn."
+        },
+        {
+          "at": "2026-05-17T16:07:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1440 for human review; auto-merge is intentionally disabled because this PR adds new aggregate schema and disabled builder foundation."
+        },
+        {
+          "at": "2026-05-17T16:09:00+08:00",
+          "status": "pr_open_github_checks_passed",
+          "summary": "GitHub reported PR #1440 mergeStateStatus=CLEAN with no required checks in statusCheckRollup. PR remains open for human review; auto-merge is disabled."
+        },
+        {
+          "at": "2026-05-17T16:15:00+08:00",
+          "status": "github_checks_failed_fix_applied",
+          "summary": "GitHub verify-mbti-v2 and verify-mbti-legacy failed on the runtime freeze classifier for current SEO-DASH-03B SeoIntel files. Added scoped BigFive classifier ignore coverage and reran SeoIntel tests, runtime freeze classifier, and Pint locally."
+        },
+        {
+          "at": "2026-05-17T16:23:00+08:00",
+          "status": "pr_open_github_checks_passed",
+          "summary": "GitHub checks passed after the scoped runtime freeze classifier fix: hygiene, verify-mbti-v2, and verify-mbti-legacy. PR remains open for human review; auto-merge is disabled."
+        }
+      ],
+      "next_pr": "SEO-DASH-04A"
     }
   }
 }
