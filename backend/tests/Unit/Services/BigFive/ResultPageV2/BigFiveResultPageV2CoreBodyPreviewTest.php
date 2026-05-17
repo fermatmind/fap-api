@@ -1015,6 +1015,27 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_cn_proxy_public_owner_surface_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerCnProxyPublicOwnerController.php',
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
+            'backend/app/Services/Career/Bundles/CareerCnProxyPublicOwnerSurfaceBuilder.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_5\\Career\\CareerCnProxyPublicOwnerController;',
+            "+    Route::get('/career/cn-proxy/{slug}', [CareerCnProxyPublicOwnerController::class, 'show']);",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_asset_backed_bundle_changes(): void
     {
         $changed = [
@@ -1522,6 +1543,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/routes/api.php'
+                && $this->routeDiffIsCareerCnProxyPublicOwnerSurfaceOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
                 && $this->routeDiffIsCareerPublicDistributionOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
                 continue;
@@ -1951,8 +1979,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerCnProxyPublicOwnerController.php',
             'backend/app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php',
             'backend/app/Services/Career/Bundles/CareerAliasResolutionBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerCnProxyPublicOwnerSurfaceBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerLocaleIntegrityGate.php',
             'backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php',
@@ -2483,6 +2513,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bArticlePublishControlled\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsCareerCnProxyPublicOwnerSurfaceOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_starts_with($line, '-')) {
+                return false;
+            }
+
+            if (preg_match('/CareerCnProxyPublicOwnerController|\\/career\\/cn-proxy\\/\\{slug\\}/u', $line) !== 1) {
                 return false;
             }
         }
