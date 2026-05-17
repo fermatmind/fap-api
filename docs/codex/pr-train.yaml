@@ -537,6 +537,55 @@ prs:
     production_log_access: human_confirm_required
     scheduler_activation: false
     next_task: SEO-DASH-05
+  - id: SEO-DASH-05
+    repo: fap-api
+    depends_on:
+      - CHINA-SEARCH-04
+    branch: codex/seo-dash-05-metabase-mvp-dashboard
+    title: "docs(seo-intel): add Metabase MVP dashboard spec"
+    name: "Metabase MVP dashboard spec and sanitized views"
+    findings:
+      - "CHINA-SEARCH-04 merged Chinese crawler log collector foundation."
+      - "Metabase may read only sanitized seo_intel aggregates and must not query business, CMS write, Node2 local, or raw detail data sources."
+      - "Purchase truth remains backend orders/payment/benefits aggregates; search channels and crawler logs are not truth sources."
+    scope:
+      - Define Metabase read-only policy and MVP dashboard groups.
+      - Define sanitized view contracts over seo_intel aggregates in generated artifact without deploying Metabase or creating production connections.
+      - Add deployment runbook, generated artifact, and static SeoIntel contract tests proving no PII/raw identifiers, credentials, scheduler, or deployment activation.
+      - Keep production DB, Metabase deployment, env, scheduler, queue, external APIs, runtime behavior, sitemap/llms, and fap-web unchanged.
+    allowed_paths:
+      - backend/database/migrations/*seo_intel_views*
+      - backend/app/Services/SeoIntel/**
+      - backend/tests/**/SeoIntel*Test.php
+      - backend/docs/seo/metabase-mvp-dashboard.md
+      - backend/docs/seo/generated/metabase-mvp-dashboard.v1.json
+      - backend/docs/seo/metabase-deployment-runbook.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy Metabase, add Metabase credentials, edit env, connect production DB, create production read-only users, or create production seo_intel DB.
+      - Run production migrations, enable scheduler jobs, create queue workers, SSH, or touch Node2/Node3.
+      - Query business DB, CMS write tables, raw orders, raw payments, raw email, raw event detail, or Node2 local DB.
+      - Store or expose raw emails, order numbers, attempt ids, payment ids, provider event ids, cookies, raw IPs, raw user agents, tokens, secrets, raw payloads, or payment payloads.
+      - Use GA4/Baidu/GSC/search channels/crawler logs as purchase truth or alternate SEO truth.
+      - Change payment, order, report, email, recommendation, scoring, sitemap, or llms behavior.
+      - Modify fap-web runtime or use fap-api/fap-web as production frontend runtime.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    metabase_deployment: human_confirm_required
+    read_only_db_user: human_confirm_required
+    scheduler_activation: false
+    next_task: SEO-DASH-06
   - id: PR-MEDIA-01
     repo: fap-api
     depends_on:

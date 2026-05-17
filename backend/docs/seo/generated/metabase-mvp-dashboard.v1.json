@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "source_documents": [
+    "SEO-DASH-00B",
+    "SEO-DASH-01A",
+    "SEO-DASH-03B",
+    "SEO-DASH-04A",
+    "SEO-DASH-04B",
+    "CHINA-SEARCH-04",
+    "BACKEND-RUNTIME-02D"
+  ],
+  "metabase_deployed": false,
+  "production_connection_created": false,
+  "read_only_policy_required": true,
+  "allowed_data_source": "seo_intel",
+  "forbidden_data_sources": [
+    "business_db",
+    "cms_write_tables",
+    "node2_local_db",
+    "raw_orders",
+    "raw_payments",
+    "raw_email",
+    "raw_events_detail"
+  ],
+  "read_only_policy": {
+    "metabase_reads_seo_intel_only": true,
+    "read_only_db_user_required": true,
+    "metabase_can_write": false,
+    "business_db_connection_allowed": false,
+    "cms_write_tables_allowed": false,
+    "node2_local_db_allowed": false,
+    "raw_business_tables_allowed": false,
+    "raw_pii_allowed": false
+  },
+  "dashboards": [
+    {
+      "name": "URL Truth & Drift",
+      "cards": [
+        "URL count by page_entity_type",
+        "Indexability state",
+        "Drift issue counts",
+        "Sitemap/llms parity warnings",
+        "Private/noindex exposure warnings"
+      ]
+    },
+    {
+      "name": "Search Channel Health",
+      "cards": [
+        "GSC rows/clicks/impressions/CTR/position",
+        "Baidu push dry-run/submission status",
+        "IndexNow submission status",
+        "360/Sogou/Shenma verification/submission status",
+        "Source engine breakdown"
+      ]
+    },
+    {
+      "name": "Landing Attribution",
+      "cards": [
+        "Landing events",
+        "Funnel event counts",
+        "Source engine",
+        "Consent state",
+        "Traffic quality"
+      ]
+    },
+    {
+      "name": "Revenue / Cluster",
+      "cards": [
+        "Revenue cents",
+        "Orders count",
+        "Purchase count",
+        "AOV",
+        "RPV proxy",
+        "Purchase rate",
+        "Cluster",
+        "Page entity type"
+      ]
+    },
+    {
+      "name": "Crawler Health",
+      "cards": [
+        "Bot family",
+        "Source engine",
+        "Crawl count",
+        "Status code",
+        "Response time bucket",
+        "Private flow hits",
+        "Noindex hits"
+      ]
+    },
+    {
+      "name": "Internal / QA Filtering",
+      "cards": [
+        "Internal traffic counts",
+        "QA traffic counts",
+        "Bot traffic counts",
+        "Non-production counts",
+        "Excluded traffic counts",
+        "Traffic quality breakdown"
+      ]
+    }
+  ],
+  "sanitized_views": [
+    {
+      "name": "seo_v_url_truth_overview",
+      "source_tables": [
+        "seo_urls"
+      ],
+      "exposed_fields": [
+        "locale",
+        "page_entity_type",
+        "cluster",
+        "source_authority",
+        "indexability_state",
+        "lastmod_source",
+        "is_private_flow",
+        "url_count",
+        "first_seen_at",
+        "last_seen_at"
+      ],
+      "definition": "select locale, page_entity_type, cluster, source_authority, indexability_state, lastmod_source, is_private_flow, count(*) as url_count, min(first_seen_at) as first_seen_at, max(last_seen_at) as last_seen_at from seo_urls group by locale, page_entity_type, cluster, source_authority, indexability_state, lastmod_source, is_private_flow"
+    },
+    {
+      "name": "seo_v_search_channel_health",
+      "source_tables": [
+        "seo_gsc_daily",
+        "seo_baidu_push_logs",
+        "seo_indexnow_submissions",
+        "seo_search_engine_verification_statuses",
+        "seo_domestic_submission_logs",
+        "seo_domestic_index_samples"
+      ],
+      "exposed_fields": [
+        "report_date",
+        "source_engine",
+        "status",
+        "clicks",
+        "impressions",
+        "ctr_ppm",
+        "average_position_milli",
+        "submission_count",
+        "verification_count",
+        "index_sample_count"
+      ],
+      "definition": "planned union aggregate over search channel daily tables exposing report_date, source_engine, status counts, clicks, impressions, ctr_ppm, average_position_milli, submission_count, verification_count, and index_sample_count"
+    },
+    {
+      "name": "seo_v_landing_attribution_daily",
+      "source_tables": [
+        "seo_landing_attribution_daily",
+        "seo_event_funnel_daily",
+        "seo_consent_daily"
+      ],
+      "exposed_fields": [
+        "report_date",
+        "canonical_url_hash",
+        "locale",
+        "source_engine",
+        "source_route_family",
+        "source_slug",
+        "content_id",
+        "test_slug",
+        "cta_id",
+        "entrypoint",
+        "consent_state",
+        "traffic_quality",
+        "landing_event_count",
+        "start_attempt_count",
+        "submit_attempt_count",
+        "view_result_count",
+        "click_unlock_count",
+        "create_order_count",
+        "purchase_success_count"
+      ],
+      "definition": "select report_date, canonical_url_hash, locale, source_engine, source_route_family, source_slug, content_id, test_slug, cta_id, entrypoint, first_touch_count, last_touch_count, cta_touch_count, landing_event_count, start_attempt_count, submit_attempt_count, purchase_success_count from seo_landing_attribution_daily"
+    },
+    {
+      "name": "seo_v_revenue_cluster_daily",
+      "source_tables": [
+        "seo_revenue_daily",
+        "seo_cluster_daily"
+      ],
+      "exposed_fields": [
+        "report_date",
+        "canonical_url_hash",
+        "locale",
+        "page_entity_type",
+        "cluster",
+        "source_engine",
+        "orders_count",
+        "purchase_count",
+        "revenue_cents",
+        "currency",
+        "aov_cents",
+        "rpv_proxy_cents",
+        "purchase_rate_ppm"
+      ],
+      "definition": "select report_date, canonical_url_hash, locale, page_entity_type, cluster, source_engine, orders_count, purchase_count, revenue_cents, currency, aov_cents, rpv_proxy_cents, purchase_rate_ppm from seo_revenue_daily"
+    },
+    {
+      "name": "seo_v_crawler_health_daily",
+      "source_tables": [
+        "seo_crawler_logs_daily"
+      ],
+      "exposed_fields": [
+        "report_date",
+        "canonical_url_hash",
+        "path_hash",
+        "path_display_masked",
+        "locale",
+        "page_entity_type",
+        "source_engine",
+        "bot_family",
+        "method",
+        "status_code",
+        "response_time_bucket",
+        "crawl_count",
+        "robots_allowed",
+        "blocked_by_robots",
+        "private_flow_hit",
+        "noindex_hit"
+      ],
+      "definition": "select report_date, canonical_url_hash, path_hash, path_display_masked, locale, page_entity_type, source_engine, bot_family, method, status_code, response_time_bucket, crawl_count, robots_allowed, blocked_by_robots, private_flow_hit, noindex_hit from seo_crawler_logs_daily"
+    },
+    {
+      "name": "seo_v_internal_traffic_filtering",
+      "source_tables": [
+        "seo_internal_traffic_rules",
+        "seo_event_funnel_daily"
+      ],
+      "exposed_fields": [
+        "rule_type",
+        "match_kind",
+        "pattern_display_masked",
+        "environment",
+        "is_active",
+        "traffic_quality",
+        "event_count"
+      ],
+      "definition": "planned aggregate over seo_internal_traffic_rules and seo_event_funnel_daily exposing masked rules, environment, active state, traffic_quality, and event_count"
+    }
+  ],
+  "forbidden_fields": [
+    "email",
+    "raw_email",
+    "order_no",
+    "raw_order_no",
+    "attempt_id",
+    "raw_attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "cookie",
+    "raw_cookie",
+    "raw_ip",
+    "ip_address",
+    "raw_user_agent",
+    "user_agent",
+    "raw_payload",
+    "payment_payload",
+    "provider_payload",
+    "token",
+    "api_key",
+    "secret"
+  ],
+  "purchase_truth_source": "backend_orders_payment_benefits_aggregates",
+  "ga4_purchase_truth": false,
+  "baidu_purchase_truth": false,
+  "search_channels_are_truth": false,
+  "crawler_logs_are_truth": false,
+  "metabase_credentials_added": false,
+  "production_db_user_created": false,
+  "scheduler_enabled": false,
+  "queue_worker_enabled": false,
+  "next_task": "SEO-DASH-06"
+}
