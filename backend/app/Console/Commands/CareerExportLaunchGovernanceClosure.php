@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Domain\Career\Publish\CareerLaunchGovernanceClosureProjectionService;
+use App\Support\SafeArtifactDirectory;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -28,11 +29,7 @@ final class CareerExportLaunchGovernanceClosure extends Command
             $timestamp = $this->normalizeTimestamp($this->option('timestamp') !== null ? (string) $this->option('timestamp') : null);
             $rootDir = storage_path('app/private/career_launch_governance_closure');
             $finalDir = $rootDir.DIRECTORY_SEPARATOR.$timestamp;
-            $tmpDir = $finalDir.'.tmp';
-
-            if (is_dir($finalDir) || is_dir($tmpDir)) {
-                throw new \RuntimeException('launch governance closure output dir already exists: '.$finalDir);
-            }
+            $tmpDir = SafeArtifactDirectory::createTemporaryDirectory($rootDir, $finalDir);
 
             $projected = $this->projectionService->build();
             $snapshot = (array) ($projected[CareerLaunchGovernanceClosureProjectionService::SNAPSHOT_FILENAME] ?? []);
@@ -40,7 +37,6 @@ final class CareerExportLaunchGovernanceClosure extends Command
                 throw new \RuntimeException('empty launch governance closure payload');
             }
 
-            File::ensureDirectoryExists($tmpDir);
             $path = $tmpDir.DIRECTORY_SEPARATOR.CareerLaunchGovernanceClosureProjectionService::SNAPSHOT_FILENAME;
             $encoded = json_encode($snapshot, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
             if (! is_string($encoded)) {
@@ -48,9 +44,7 @@ final class CareerExportLaunchGovernanceClosure extends Command
             }
             File::put($path, $encoded.PHP_EOL);
 
-            if (! @rename($tmpDir, $finalDir)) {
-                throw new \RuntimeException('failed to finalize launch governance closure output dir: '.$finalDir);
-            }
+            SafeArtifactDirectory::finalize($tmpDir, $finalDir);
 
             $payload = [
                 'status' => 'materialized',

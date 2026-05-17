@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Domain\Career\Publish\CareerCanonicalRuntimeTruthExporter;
+use App\Support\SafeArtifactDirectory;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -30,15 +31,10 @@ final class CareerExportCanonicalRuntimeTruth extends Command
             $timestamp = $this->normalizeTimestamp($this->option('timestamp') !== null ? (string) $this->option('timestamp') : null);
             $rootDir = storage_path('app/private/career_canonical_runtime_truth');
             $finalDir = $rootDir.DIRECTORY_SEPARATOR.$timestamp;
-            $tmpDir = $finalDir.'.tmp';
-
-            if (is_dir($finalDir) || is_dir($tmpDir)) {
-                throw new \RuntimeException('canonical runtime truth output dir already exists: '.$finalDir);
-            }
+            $tmpDir = SafeArtifactDirectory::createTemporaryDirectory($rootDir, $finalDir);
 
             $truth = $this->exporter->build($this->ledgerPathOption(), $this->projectionPathOption());
 
-            File::ensureDirectoryExists($tmpDir);
             $tmpPath = $tmpDir.DIRECTORY_SEPARATOR.CareerCanonicalRuntimeTruthExporter::TRUTH_FILENAME;
             $encoded = json_encode($truth, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
             if (! is_string($encoded)) {
@@ -46,9 +42,7 @@ final class CareerExportCanonicalRuntimeTruth extends Command
             }
             File::put($tmpPath, $encoded.PHP_EOL);
 
-            if (! @rename($tmpDir, $finalDir)) {
-                throw new \RuntimeException('failed to finalize canonical runtime truth output dir: '.$finalDir);
-            }
+            SafeArtifactDirectory::finalize($tmpDir, $finalDir);
 
             $path = $finalDir.DIRECTORY_SEPARATOR.CareerCanonicalRuntimeTruthExporter::TRUTH_FILENAME;
             $payload = [

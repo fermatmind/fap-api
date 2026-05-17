@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Domain\Career\Expansion\CanonicalExpansionManifestExporter;
 use App\Domain\Career\Expansion\CanonicalExpansionManifestValidator;
+use App\Support\SafeArtifactDirectory;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -35,11 +36,7 @@ final class CareerExportCanonicalExpansionManifest extends Command
             $timestamp = $this->normalizeTimestamp($this->option('timestamp') !== null ? (string) $this->option('timestamp') : null);
             $rootDir = storage_path('app/private/career_canonical_expansion_manifest');
             $finalDir = $rootDir.DIRECTORY_SEPARATOR.$timestamp;
-            $tmpDir = $finalDir.'.tmp';
-
-            if (is_dir($finalDir) || is_dir($tmpDir)) {
-                throw new \RuntimeException('canonical expansion manifest output dir already exists: '.$finalDir);
-            }
+            $tmpDir = SafeArtifactDirectory::createTemporaryDirectory($rootDir, $finalDir);
 
             $manifest = $this->exporter->build(
                 truthPath: $this->pathOption('truth'),
@@ -50,7 +47,6 @@ final class CareerExportCanonicalExpansionManifest extends Command
             );
             $validation = $this->validator->validate($manifest);
 
-            File::ensureDirectoryExists($tmpDir);
             $path = $tmpDir.DIRECTORY_SEPARATOR.CanonicalExpansionManifestExporter::MANIFEST_FILENAME;
             $encoded = json_encode($manifest, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
             if (! is_string($encoded)) {
@@ -58,9 +54,7 @@ final class CareerExportCanonicalExpansionManifest extends Command
             }
             File::put($path, $encoded.PHP_EOL);
 
-            if (! @rename($tmpDir, $finalDir)) {
-                throw new \RuntimeException('failed to finalize canonical expansion manifest output dir: '.$finalDir);
-            }
+            SafeArtifactDirectory::finalize($tmpDir, $finalDir);
 
             $payload = [
                 'status' => $validation['status'] === 'pass' ? 'materialized' : 'blocked',
