@@ -173,3 +173,43 @@ backend/storage/app/private/content_releases/backups/*/previous_pack
 These roots can participate in source evidence, exact manifests, rollback, rehydrate, and catalog/audit flows.
 
 A later manifest/catalog-aware audit should classify release roots before deleting `source_pack` or `previous_pack`.
+
+## Release root audit before cleanup
+
+Before any future local cleanup of `source_pack`, `previous_pack`, or newly accumulated `current_pack` roots, run the read-only audit command first:
+
+```bash
+cd /Users/rainie/Desktop/GitHub/fap-api/backend
+php artisan storage:release-roots:audit --format=json
+```
+
+The audit command is classification-only. It must not delete files, move files, create quarantine directories, run `storage:prune`, write prune plans, or mutate the database.
+
+Treat classifications conservatively:
+
+```text
+strong_keep
+dangling_ref_repair_required
+unreferenced_current_pack_low_risk_candidate
+unreferenced_previous_pack_review_required
+unreferenced_source_pack_review_required
+unknown_shape_review_required
+root_missing_no_action
+root_empty_no_action
+```
+
+`unreferenced_current_pack_low_risk_candidate` is still only a review candidate. `unreferenced_source_pack_review_required` and `unreferenced_previous_pack_review_required` are not safe-delete labels.
+
+## Safe ledger and Markdown writing
+
+When writing local ledgers, SOPs, or Markdown notes that contain code fences, variables, backticks, or shell command examples, use a quoted heredoc delimiter:
+
+```bash
+cat > /Users/rainie/fap-api-local-ledger.md <<'EOF'
+Markdown text can safely include code fences, variables, backticks, and command examples here.
+EOF
+```
+
+Do not use an unquoted `<<EOF` heredoc for that content. Unquoted heredocs allow shell expansion, so Markdown code fences and backticks can be interpreted by the shell instead of being written as text.
+
+Do not include directly executable whole-tree deletion examples in operational ledgers or cleanup notes.

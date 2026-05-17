@@ -5215,3 +5215,44 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+  - id: STORAGE-RELEASE-ROOTS-AUDIT
+    repo: fap-api
+    branch: codex/storage-release-roots-audit
+    base: main
+    depends_on: []
+    title: "chore(storage): add read-only release roots audit"
+    name: "Add read-only content release root audit"
+    train_scope: storage_runtime_hygiene
+    risk_level: low
+    findings:
+      - "Local content_releases runtime storage previously expanded to roughly 10G and later suffered a local-only runtime deletion incident."
+      - "Future source_pack, previous_pack, or current_pack cleanup needs a read-only root classification command before any destructive action is considered."
+    scope:
+      - Add a read-only artisan command storage:release-roots:audit --format=json.
+      - Audit backend/storage/app/private/content_releases without creating missing directories.
+      - Classify source_pack, previous_pack, current_pack, unknown shapes, DB references, dangling references, and conservative review candidates.
+      - Document audit-first cleanup and quoted heredoc ledger safety.
+    allowed_paths:
+      - backend/app/Console/Commands/StorageReleaseRootsAudit.php
+      - backend/tests/Feature/Storage/StorageReleaseRootsAuditTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/04-ops/storage-local-retention-sop.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Delete files, move files, create quarantine directories, run storage:prune, or write prune plans.
+      - Mutate DB or add execute/delete/move/quarantine/clean options.
+      - Change retention behavior.
+      - Change publish, rollback, rehydrate, or quarantine business logic.
+      - Use unquoted heredocs for Markdown or command-example writing.
+    validation:
+      - php artisan test --filter=StorageReleaseRootsAuditTest --no-ansi
+      - php artisan route:list --no-ansi
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-storage-release-roots-audit.sqlite php artisan migrate --force --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
