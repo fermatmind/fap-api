@@ -415,6 +415,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_issue_queue_foundation_files(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/Collectors/IssueQueueFoundationCollector.php',
+            'backend/app/Services/SeoIntel/SeoIssueQueueContract.php',
+            'backend/app/Services/SeoIntel/SeoIssueQueueProducer.php',
+            'backend/app/Services/SeoIntel/SeoIssueSanitizer.php',
+            'backend/app/Services/SeoIntel/SeoIssueSummaryService.php',
+            'backend/database/migrations/2026_05_17_001700_create_seo_issue_queue_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1609,6 +1623,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIssueQueueFoundationFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -2102,6 +2120,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/CrawlerLogLineParser.php',
             'backend/app/Services/SeoIntel/CrawlerLogPrivacySanitizer.php',
             'backend/database/migrations/2026_05_17_001600_create_seo_crawler_logs_daily_table.php',
+        ], true);
+    }
+
+    private function isSeoIssueQueueFoundationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/SeoIntel/Collectors/IssueQueueFoundationCollector.php',
+            'backend/app/Services/SeoIntel/SeoIssueQueueContract.php',
+            'backend/app/Services/SeoIntel/SeoIssueQueueProducer.php',
+            'backend/app/Services/SeoIntel/SeoIssueSanitizer.php',
+            'backend/app/Services/SeoIntel/SeoIssueSummaryService.php',
+            'backend/database/migrations/2026_05_17_001700_create_seo_issue_queue_table.php',
         ], true);
     }
 

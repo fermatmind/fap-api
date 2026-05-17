@@ -11,6 +11,7 @@ use App\Services\SeoIntel\Collectors\CrawlerLogFoundationCollector;
 use App\Services\SeoIntel\Collectors\DriftFoundationCollector;
 use App\Services\SeoIntel\Collectors\GscCollector;
 use App\Services\SeoIntel\Collectors\IndexNowFoundationCollector;
+use App\Services\SeoIntel\Collectors\IssueQueueFoundationCollector;
 use App\Services\SeoIntel\Collectors\NoopSeoIntelCollector;
 use App\Services\SeoIntel\Collectors\ShenmaFoundationCollector;
 use App\Services\SeoIntel\Collectors\So360FoundationCollector;
@@ -175,6 +176,21 @@ final class SeoIntelCollectorManager
                 new \App\Services\SeoIntel\CrawlerLogLineParser($classifier),
                 new CrawlerLogPrivacySanitizer,
                 new CrawlerLogDailyAggregator,
+            );
+        }
+
+        if ($collector === 'issue_queue_foundation') {
+            return new IssueQueueFoundationCollector(
+                new SeoIssueQueueProducer(
+                    new SeoIssueSanitizer(
+                        new SeoIssueQueueContract,
+                    ),
+                ),
+                new SeoIssueSummaryService(
+                    new SeoIssueSanitizer(
+                        new SeoIssueQueueContract,
+                    ),
+                ),
             );
         }
 

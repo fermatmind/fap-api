@@ -586,6 +586,61 @@ prs:
     read_only_db_user: human_confirm_required
     scheduler_activation: false
     next_task: SEO-DASH-06
+  - id: SEO-DASH-06
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-05
+    branch: codex/seo-dash-06-cms-issue-queue-summary
+    title: "feat(seo-intel): add CMS issue queue summary"
+    name: "CMS Issue Queue Summary"
+    findings:
+      - "SEO-DASH-05 merged Metabase MVP dashboard policy and sanitized view contracts."
+      - "CMS is content authority, not SEO BI; SEO Intelligence can provide issue summaries only."
+      - "Issue queue must not publish content, mutate CMS, generate pSEO pages, or expose raw PII."
+    scope:
+      - Add seo_issue_queue logical schema.
+      - Define issue type, severity, source, and lifecycle contracts.
+      - Add fixture/dry-run issue producer, sanitizer, summary service, and disabled collector command integration.
+      - Add docs/generated artifact and focused SeoIntel tests proving no PII, CMS mutation, auto publish, pSEO, scheduler, external API calls, sitemap/llms changes, or runtime activation.
+      - Add MBTI runtime freeze gate allowlist coverage for the SEO-DASH-06 foundation files required by CI.
+      - Reconcile SEO-DASH-05 train ledger as merged to unblock this dependency.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/database/migrations/*seo_issue_queue*
+      - backend/app/Services/SeoIntel/**
+      - backend/app/Http/Controllers/API/**/SeoIntel*Controller.php
+      - backend/routes/api.php
+      - backend/tests/**/SeoIntel*Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/cms-issue-queue-summary.md
+      - backend/docs/seo/generated/cms-issue-queue-summary.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy, run production migrations, create production seo_intel DB, create queue workers, enable scheduler jobs, SSH, touch Node2/Node3, deploy Metabase, or connect external APIs.
+      - Change payment, order, report, email, recommendation, scoring, sitemap, or llms behavior.
+      - Modify fap-web runtime or use fap-api/fap-web as production frontend runtime.
+      - Auto-publish CMS content, auto-edit CMS content, generate pSEO pages, or generate search-engine-specific pages.
+      - Store or expose raw emails, order numbers, attempt ids, payment ids, provider event ids, cookies, raw IPs, raw user agents, tokens, secrets, raw payloads, or payment payloads.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:collect --collector=issue_queue_foundation --dry-run --json
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    cms_mutation: false
+    auto_publish: false
+    pseo_generation: false
+    scheduler_activation: false
+    next_task: SEO-DASH-MVP-COMPLETE
   - id: PR-MEDIA-01
     repo: fap-api
     depends_on:

@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T13:52:00Z",
+  "updated_at": "2026-05-17T13:26:42Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -9737,7 +9737,7 @@
       "depends_on": [
         "CHINA-SEARCH-04"
       ],
-      "status": "in_progress",
+      "status": "merged",
       "train_scope": "metabase_mvp_dashboard_policy_sanitized_views",
       "risk_level": "low_docs_contract_no_deploy",
       "title": "docs(seo-intel): add Metabase MVP dashboard spec",
@@ -9801,10 +9801,10 @@
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1446",
-      "commit_sha": "7680be80d65e36f7fc4fa50764a930f1f2dcf077",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "f715949676f4ede0eaa9f9e51d570dd162476180",
+      "merged_at": "2026-05-17T12:43:41Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -9831,9 +9831,132 @@
           "at": "2026-05-17T12:47:00Z",
           "status": "github_checks_passed",
           "summary": "GitHub checks passed for PR #1446 and mergeStateStatus is CLEAN. PR remains open for human review; not merged."
+        },
+        {
+          "at": "2026-05-17T12:43:41Z",
+          "status": "merged",
+          "summary": "PR #1446 merged; origin/main contains merge commit f715949676f4ede0eaa9f9e51d570dd162476180 and local/remote branch cleanup completed before SEO-DASH-06."
         }
       ],
       "next_pr": "SEO-DASH-06"
+    },
+    "SEO-DASH-06": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-06-cms-issue-queue-summary",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-05"
+      ],
+      "status": "github_checks_passed",
+      "train_scope": "cms_issue_queue_summary_foundation",
+      "risk_level": "medium_disabled_issue_queue_schema",
+      "title": "feat(seo-intel): add CMS issue queue summary",
+      "name": "CMS Issue Queue Summary",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-06 with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-05 merged in fap-api PR #1446 and origin/main contains merge commit f715949676f4ede0eaa9f9e51d570dd162476180."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "cms_mutation": {
+          "status": "false"
+        },
+        "auto_publish": {
+          "status": "false"
+        },
+        "pseo_generation": {
+          "status": "false"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to seo_intel config, seo_issue_queue migration, SeoIntel issue queue services/collector, focused SeoIntel tests, CI runtime freeze gate allowlist coverage, docs/generated artifact, and docs/codex PR train metadata. No fap-web runtime, payment/order/report/email/recommendation/scoring, deploy/env, scheduler, queue, external API, sitemap, llms, OpenResty/Nginx/CDN/cloud, Node2/Node3 runtime, Metabase deployment, CMS publish/write mutation, or pSEO files changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "83 tests passed with 1609 assertions."
+        },
+        "issue_queue_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=issue_queue_foundation --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, cms_summary_read_only=true, cms_mutation_attempted=false, auto_publish_attempted=false, auto_pseo_attempted=false, and issue_count=3."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported. No SEO issue summary route was added in this PR."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3360 files."
+        },
+        "bigfive_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+          "evidence": "runtime_paths_have_no_uncommitted_diff and SEO issue queue foundation allowlist tests passed after adding current-scope CI freeze gate coverage."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "github": {
+          "status": "pass",
+          "evidence": "PR #1447 CI passed after current-scope freeze gate allowlist fix: hygiene, verify-mbti-legacy, and verify-mbti-v2 completed successfully before rebase; final rebased checks pending."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1447",
+      "commit_sha": "3eb6f16712f42b73f52d121e2a4b186ab14805d6",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T12:56:08Z",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-06 and started disabled/manual-safe CMS issue queue summary foundation from origin/main."
+        },
+        {
+          "at": "2026-05-17T13:00:10Z",
+          "status": "local_validation_passed",
+          "summary": "Implemented disabled/manual-safe SEO issue queue schema, issue contract, sanitizer, producer, summary service, dry-run collector, docs/generated artifact, tests, and SEO-DASH-05 ledger reconciliation. SeoIntel tests, issue queue dry-run JSON, route list, Pint, runtime freeze classifier, JSON/YAML validation, and diff checks passed."
+        },
+        {
+          "at": "2026-05-17T13:03:03Z",
+          "status": "pr_open",
+          "summary": "Opened PR #1447 for SEO-DASH-06; GitHub checks pending."
+        },
+        {
+          "at": "2026-05-17T13:10:46Z",
+          "status": "ci_fix_pushed",
+          "summary": "Addressed required CI freeze gate failure by adding SEO-DASH-06 foundation files to the MBTI runtime freeze classifier allowlist test; focused gate and SeoIntel tests pass locally."
+        },
+        {
+          "at": "2026-05-17T13:18:57Z",
+          "status": "github_checks_passed",
+          "summary": "GitHub checks passed for PR #1447 after CI fix and mergeStateStatus was CLEAN before the branch was rebased onto a newer main."
+        },
+        {
+          "at": "2026-05-17T13:26:42Z",
+          "status": "rebased",
+          "summary": "Rebased SEO-DASH-06 onto latest origin/main after PR #1447 became dirty due to a newer publishing reliability merge."
+        }
+      ],
+      "next_pr": "SEO-DASH-MVP-COMPLETE"
     },
     "PUBLISH-API-MEDIA-ORIGIN-READYNESS": {
       "repo": "fap-api",
