@@ -5236,6 +5236,7 @@ prs:
     allowed_paths:
       - backend/app/Console/Commands/StorageReleaseRootsAudit.php
       - backend/tests/Feature/Storage/StorageReleaseRootsAuditTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/04-ops/storage-local-retention-sop.md
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
