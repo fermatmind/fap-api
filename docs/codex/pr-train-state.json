@@ -4416,7 +4416,7 @@
       "branch": "fix/career-80-cohort-readiness-command",
       "title": "feat(api): add career 80 cohort readiness command",
       "name": "Add read-only Career 80 cohort readiness command",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "INDEX-STATE-MINIMUM-APPLY-1"
       ],
@@ -8229,11 +8229,11 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1448",
+      "commit_sha": "0a11c274ecc7b01d40998e2443e56aa7150a283a",
+      "merged_at": "2026-05-17T13:21:17Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -10036,6 +10036,52 @@
           "at": "2026-05-17T13:52:00Z",
           "status": "pr_open",
           "summary": "Opened PR #1448 for PUBLISH-API-MEDIA-ORIGIN-READYNESS after scoped local validation passed."
+        },
+        {
+          "at": "2026-05-17T13:43:00Z",
+          "status": "merged",
+          "summary": "Reconciled PR #1448 as merged with origin/main containing merge commit 0a11c274ecc7b01d40998e2443e56aa7150a283a; remote branch deleted and local isolated worktree cleanup executed."
+        }
+      ]
+    },
+    "PUBLISH-API-ARTICLE-COVER-SMOKE": {
+      "repo": "fap-api",
+      "branch": "codex/publish-api-article-cover-smoke",
+      "base": "main",
+      "depends_on": [
+        "PUBLISH-API-MEDIA-ORIGIN-READYNESS",
+        "PUBLISH-WEB-CONTENT-CACHE-PURGE:fap-web"
+      ],
+      "status": "in_progress",
+      "train_scope": "publishing_reliability",
+      "risk_level": "medium",
+      "title": "chore(cms): add article publish smoke for cover image propagation",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly requested sequential execution of PUBLISH-API-MEDIA-ORIGIN-READYNESS, PUBLISH-WEB-CONTENT-CACHE-PURGE, and PUBLISH-API-ARTICLE-COVER-SMOKE."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PUBLISH-API-MEDIA-ORIGIN-READYNESS merged as fap-api PR #1448 at 2026-05-17T13:21:17Z; PUBLISH-WEB-CONTENT-CACHE-PURGE merged as fap-web PR #835 at 2026-05-17T13:41:06Z."
+        },
+        "implementation": {
+          "status": "in_progress",
+          "evidence": "Adding a read-only article cover propagation smoke command and focused tests."
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T13:43:00Z",
+          "status": "in_progress",
+          "summary": "Started article cover propagation smoke item from origin/main in an isolated worktree; no publish, media upload, deploy, rollback, unlock, cache deletion, or process command performed."
         }
       ]
     }

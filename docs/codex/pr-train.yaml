@@ -5114,3 +5114,50 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+  - id: PUBLISH-API-ARTICLE-COVER-SMOKE
+    repo: fap-api
+    branch: codex/publish-api-article-cover-smoke
+    base: main
+    depends_on:
+      - PUBLISH-API-MEDIA-ORIGIN-READYNESS
+      - PUBLISH-WEB-CONTENT-CACHE-PURGE:fap-web
+    title: "chore(cms): add article publish smoke for cover image propagation"
+    name: "Add article cover propagation publish smoke"
+    train_scope: publishing_reliability
+    risk_level: medium
+    findings:
+      - "Article publish operators need a deterministic smoke proving cover image propagation after CMS media updates."
+      - "Article detail, list, SEO, JSON-LD, and cover variant readiness need one operator-friendly check."
+    scope:
+      - Add a read-only artisan smoke command for targeted article cover propagation verification.
+      - Validate public article detail API cover payload, public article list card payload, SEO Open Graph/Twitter image payload, JSON-LD image payload, and required cover variant readiness.
+      - Add focused tests covering a passing published article, missing required variant fail-closed behavior, and explicit target requirement.
+      - Register publishing reliability train metadata.
+    allowed_paths:
+      - backend/app/Console/Commands/ArticleCoverPropagationSmoke.php
+      - backend/app/Console/Kernel.php
+      - backend/tests/Feature/Console/ArticleCoverPropagationSmokeCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, unpublish, upload, replace, or mutate production article/media content.
+      - Change ArticleController public serialization behavior.
+      - Change CMS media origin/readiness policy already owned by PUBLISH-API-MEDIA-ORIGIN-READYNESS.
+      - Touch fap-web, deploy, rollback, unlock, kill processes, or run production cache deletion.
+    validation:
+      - php artisan test --filter=ArticleCoverPropagationSmoke --no-ansi
+      - php artisan test --filter=ArticlePublicApi --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test app/Console/Commands/ArticleCoverPropagationSmoke.php app/Console/Kernel.php tests/Feature/Console/ArticleCoverPropagationSmokeCommandTest.php
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by PUBLISH-API-ARTICLE-COVER-SMOKE
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
