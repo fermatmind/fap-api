@@ -68,6 +68,18 @@ final class PublicMediaUrlGuardTest extends TestCase
         );
     }
 
+    public function test_public_media_url_for_path_rejects_private_or_ops_only_disks(): void
+    {
+        config(['fap.media.asset_origin' => 'https://assets.fermatmind.com']);
+
+        foreach (['local', 'private', 'ops'] as $disk) {
+            $this->assertNull(
+                PublicMediaUrlGuard::publicMediaUrlForPath($disk, 'articles/internal-cover.png'),
+                $disk
+            );
+        }
+    }
+
     public function test_sanitize_array_fields_recursively_nulls_unsafe_media_fields(): void
     {
         $payload = PublicMediaUrlGuard::sanitizeArrayFields([

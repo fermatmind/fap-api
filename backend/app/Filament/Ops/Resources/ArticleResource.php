@@ -17,6 +17,7 @@ use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
 use App\Models\MediaAsset;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
+use App\Services\Cms\MediaVariantGenerator;
 use App\Support\PublicMediaUrlGuard;
 use Filament\Forms;
 use Filament\Forms\Components\BelongsToManyMultiSelect;
@@ -152,6 +153,18 @@ class ArticleResource extends Resource
                                     ->afterStateUpdated(function (mixed $state, Forms\Set $set): void {
                                         $asset = self::resolveMediaAsset($state);
                                         if (! $asset instanceof MediaAsset) {
+                                            return;
+                                        }
+
+                                        if (! self::isArticleCoverReady($asset)) {
+                                            self::clearArticleCoverFields($set);
+
+                                            Notification::make()
+                                                ->title('Cover media is not publish-ready')
+                                                ->body(implode('; ', self::articleCoverReadinessFailures($asset)))
+                                                ->danger()
+                                                ->send();
+
                                             return;
                                         }
 
@@ -680,7 +693,16 @@ class ArticleResource extends Resource
 
         return MediaAsset::query()
             ->withoutGlobalScopes()
+            ->with('variants')
             ->publishedPublic()
+            ->where('cdn_status', MediaAsset::CDN_VERIFIED)
+            ->tap(function (Builder $query): void {
+                foreach (MediaVariantGenerator::variantKeys() as $variantKey) {
+                    $query->whereHas('variants', fn (Builder $variantQuery): Builder => $variantQuery
+                        ->where('variant_key', $variantKey)
+                        ->where('cdn_status', MediaAsset::CDN_VERIFIED));
+                }
+            })
             ->when($search !== '', fn (Builder $query) => $query
                 ->where(function (Builder $nested) use ($search): void {
                     $nested->where('asset_key', 'like', '%'.$search.'%')
@@ -689,6 +711,7 @@ class ArticleResource extends Resource
             ->orderByDesc('updated_at')
             ->limit(50)
             ->get()
+            ->filter(fn (MediaAsset $asset): bool => self::isArticleCoverReady($asset))
             ->mapWithKeys(fn (MediaAsset $asset): array => [
                 (int) $asset->id => self::mediaAssetOptionLabel($asset),
             ])
@@ -733,6 +756,16 @@ class ArticleResource extends Resource
     private static function articleCoverPayload(MediaAsset $asset): array
     {
         $asset->loadMissing('variants');
+        if (! self::isArticleCoverReady($asset)) {
+            return [
+                'cover_image_url' => null,
+                'cover_image_alt' => $asset->alt,
+                'cover_image_width' => null,
+                'cover_image_height' => null,
+                'cover_image_variants' => [],
+            ];
+        }
+
         $variants = [];
 
         foreach ($asset->variants as $variant) {
@@ -765,6 +798,69 @@ class ArticleResource extends Resource
             'cover_image_height' => $asset->height,
             'cover_image_variants' => $variants,
         ];
+    }
+
+    private static function clearArticleCoverFields(Forms\Set $set): void
+    {
+        $set('cover_image_url', null);
+        $set('cover_image_alt', null);
+        $set('cover_image_width', null);
+        $set('cover_image_height', null);
+        $set('cover_image_variants', []);
+    }
+
+    private static function isArticleCoverReady(MediaAsset $asset): bool
+    {
+        return self::articleCoverReadinessFailures($asset) === [];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private static function articleCoverReadinessFailures(MediaAsset $asset): array
+    {
+        $asset->loadMissing('variants');
+        $failures = [];
+
+        if ((string) $asset->status !== MediaAsset::STATUS_PUBLISHED || ! (bool) $asset->is_public) {
+            $failures[] = 'asset is not published and public';
+        }
+
+        if ((string) $asset->cdn_status !== MediaAsset::CDN_VERIFIED) {
+            $failures[] = 'asset CDN is not verified';
+        }
+
+        if (PublicMediaUrlGuard::canonicalMediaUrl((string) $asset->disk, $asset->path, $asset->url) === null) {
+            $failures[] = 'asset URL is not public-safe';
+        }
+
+        $variants = $asset->variants->keyBy(fn ($variant): string => trim((string) $variant->variant_key));
+        foreach (MediaVariantGenerator::variantKeys() as $variantKey) {
+            $variant = $variants->get($variantKey);
+            if (! $variant) {
+                $failures[] = "missing {$variantKey} variant";
+
+                continue;
+            }
+
+            if ((string) $variant->cdn_status !== MediaAsset::CDN_VERIFIED) {
+                $failures[] = "{$variantKey} variant CDN is not verified";
+            }
+
+            if (PublicMediaUrlGuard::canonicalMediaUrl((string) $asset->disk, $variant->path, $variant->url) === null) {
+                $failures[] = "{$variantKey} variant URL is not public-safe";
+            }
+
+            if ((int) $variant->width <= 0 || (int) $variant->height <= 0) {
+                $failures[] = "{$variantKey} variant dimensions are missing";
+            }
+
+            if (! str_starts_with(strtolower((string) $variant->mime_type), 'image/')) {
+                $failures[] = "{$variantKey} variant MIME type is not an image";
+            }
+        }
+
+        return array_values(array_unique($failures));
     }
 
     public static function releaseRecord(Article $record, string $source = 'resource_table'): void
