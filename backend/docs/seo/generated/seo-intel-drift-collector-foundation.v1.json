@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "source_documents": [
+    "SEO-DASH-00B",
+    "SEO-DASH-01A",
+    "SEO-DASH-01B",
+    "SEO-DASH-02A",
+    "BACKEND-RUNTIME-02D"
+  ],
+  "repo": "fap-api",
+  "collectors": [
+    "drift_foundation",
+    "crawler_log_foundation"
+  ],
+  "enabled_by_default": false,
+  "write_enabled_by_default": false,
+  "collectors_enabled_by_default": false,
+  "dry_run_default": true,
+  "external_api_calls_allowed": false,
+  "production_crawl_allowed": false,
+  "production_log_read_allowed": false,
+  "fetches_public_html_by_default": false,
+  "performs_production_drift_detection": false,
+  "modifies_sitemap_llms": false,
+  "modifies_cms": false,
+  "scheduler_enabled": false,
+  "queue_worker_enabled": false,
+  "node2_local_laravel_data_source": false,
+  "parser_outputs_pii": false,
+  "raw_ip_output_allowed": false,
+  "raw_cookie_output_allowed": false,
+  "raw_html_body_output_allowed": false,
+  "gsc_connected": false,
+  "baidu_connected": false,
+  "indexnow_connected": false,
+  "metabase_deployed": false,
+  "supported_drift_fields": [
+    "canonical",
+    "title",
+    "description",
+    "robots",
+    "jsonld",
+    "hreflang"
+  ],
+  "supported_bot_families": [
+    "googlebot",
+    "bingbot",
+    "baiduspider",
+    "360spider",
+    "sogou",
+    "shenma_yisou",
+    "bytespider",
+    "ai_crawler",
+    "unknown_bot",
+    "human_or_unknown"
+  ],
+  "forbidden_data_sources": [
+    "node2_local_laravel",
+    "node2_local_db",
+    "node2_local_queue",
+    "frontend_fallback",
+    "static_llms_fallback_graph_truth",
+    "static_sitemap_fallback_graph_truth",
+    "ga4_purchase_truth",
+    "baidu_tongji_purchase_truth"
+  ],
+  "forbidden_actions": [
+    "production_crawl",
+    "production_log_read",
+    "cms_mutation",
+    "sitemap_llms_mutation",
+    "scheduler_activation",
+    "queue_worker_activation",
+    "external_search_api_connection"
+  ],
+  "next_task": "SEO-DASH-03A"
+}
