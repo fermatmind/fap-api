@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T11:05:12+08:00",
+  "updated_at": "2026-05-17T11:34:42+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -1876,7 +1876,7 @@
       "branch": "fix/career-expansion-manifest-train-audit11",
       "title": "feat(api): add career canonical expansion manifest train generator",
       "name": "Career Canonical Expansion Manifest Train Generator",
-      "status": "ci_fix_local_checks_passed",
+      "status": "ci_fix_local_checks_passed_pending_github_rerun",
       "depends_on": [
         "AUDIT-10"
       ],
@@ -2549,7 +2549,7 @@
       "branch": "fix/career-audit-db-context-export-producers",
       "title": "feat(api): add career audit db context exporters",
       "name": "Add read-only entity/index context export producers",
-      "status": "in_progress",
+      "status": "ci_fix_in_progress",
       "depends_on": [
         "CTX-CONSUME-1"
       ],
@@ -3088,7 +3088,7 @@
       "branch": "fix/career-index-remediation-plan-1",
       "title": "fix(api): add career index-state remediation planning",
       "name": "Add career index-state remediation planning",
-      "status": "in_progress",
+      "status": "ci_fix_local_checks_passed",
       "depends_on": [
         "REPAIR-RUNTIME-1",
         "SCAN-3"
@@ -8396,6 +8396,180 @@
         }
       ],
       "next_pr": "SCAN-2786-VISIBLE-DETAIL-GAP-AFTER-DIRECTORY-DETAIL-REPAIR-1"
+    },
+    "SEO-DASH-01A": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-01a-seo-intel-logical-db-foundation",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-00B",
+        "BACKEND-RUNTIME-02D"
+      ],
+      "status": "in_progress",
+      "train_scope": "search_intelligence_logical_db_foundation",
+      "risk_level": "high_schema_foundation",
+      "title": "feat(seo-intel): add logical DB foundation",
+      "name": "seo_intel logical DB foundation",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-01A with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata if present."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to allowed seo_intel config, migrations, focused tests, docs/generated artifact, and root docs/codex PR train metadata. No fap-web runtime, deploy, env, scheduler, collector, payment, order, report, email, recommendation, scoring, sitemap, or llms behavior files were changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "8 tests passed, 107 assertions."
+        },
+        "default_migrate_pretend": {
+          "status": "external_blocker",
+          "command": "php artisan migrate --pretend --no-ansi",
+          "evidence": "Blocked before schema execution by existing local MySQL root/no-password auth failure: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' against database fap_api."
+        },
+        "sqlite_migrate_pretend": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "evidence": "SQLite pretend generated SQL for seo_urls, seo_url_entities, and seo_internal_traffic_rules without touching production DB."
+        },
+        "sqlite_migrate_force": {
+          "status": "pass",
+          "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force --no-ansi",
+          "evidence": "SQLite testing migration completed successfully including 2026_05_17_000100_create_seo_urls_table, 2026_05_17_000200_create_seo_url_entities_table, and 2026_05_17_000300_create_seo_internal_traffic_rules_table."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test config/seo_intel.php config/database.php database/migrations/2026_05_17_000100_create_seo_urls_table.php database/migrations/2026_05_17_000200_create_seo_url_entities_table.php database/migrations/2026_05_17_000300_create_seo_internal_traffic_rules_table.php tests/Feature/SeoIntel/SeoIntelLogicalDbFoundationTest.php"
+        },
+        "json": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -m json.tool backend/docs/seo/generated/seo-intel-logical-db-foundation.v1.json >/dev/null"
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "production_db_creation": {
+          "status": "human_confirm_required"
+        },
+        "external_api_credentials_required": {
+          "status": "false"
+        },
+        "github_required_checks": {
+          "status": "pending_after_ci_fix_push",
+          "evidence": "PR https://github.com/fermatmind/fap-api/pull/1433 failed verify-mbti-v2 and verify-mbti-legacy. The current CI fix updates the BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier to ignore the three SEO-DASH-01A schema-only migration files; local CI fix validation passed and the branch is pending push/re-run."
+        },
+        "ci_fix_bigfive_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+          "evidence": "70 tests passed, 75 assertions."
+        },
+        "ci_fix_seo_intel_regression": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel --no-ansi",
+          "evidence": "8 tests passed, 107 assertions."
+        },
+        "ci_fix_mbti_full": {
+          "status": "pass",
+          "command": "bash backend/scripts/ci_verify_mbti.sh",
+          "evidence": "Full local MBTI CI completed with exit code 0 after the runtime freeze classifier fix."
+        },
+        "ci_fix_pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test config/seo_intel.php config/database.php database/migrations/2026_05_17_000100_create_seo_urls_table.php database/migrations/2026_05_17_000200_create_seo_url_entities_table.php database/migrations/2026_05_17_000300_create_seo_internal_traffic_rules_table.php tests/Feature/SeoIntel/SeoIntelLogicalDbFoundationTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+        },
+        "ci_fix_json": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -m json.tool backend/docs/seo/generated/seo-intel-logical-db-foundation.v1.json >/dev/null"
+        },
+        "ci_fix_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "failure_reason": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1433",
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "Local default MySQL credentials block php artisan migrate --pretend",
+          "repo": "fap-api",
+          "affected_command_or_check": "php artisan migrate --pretend --no-ansi",
+          "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO), database fap_api.",
+          "why_external_to_current_pr": "The command fails while checking the migrations table on the local default MySQL connection before any SEO-DASH-01A migration SQL executes. The new migration files pass the sqlite testing pretend and force migration paths.",
+          "owner": "unknown",
+          "follow_up_recommendation": "Fix local .env MySQL credentials or use the repo's documented sqlite testing validation path for local schema verification."
+        },
+        {
+          "title": "Big Five runtime freeze classifier blocks SEO-DASH-01A migrations",
+          "repo": "fap-api",
+          "affected_command_or_check": "GitHub CI verify-mbti-v2 and verify-mbti-legacy",
+          "evidence": "BigFiveResultPageV2CoreBodyPreviewTest failed asserting no runtime path changes; changed paths were backend/database/migrations/2026_05_17_000100_create_seo_urls_table.php, backend/database/migrations/2026_05_17_000200_create_seo_url_entities_table.php, and backend/database/migrations/2026_05_17_000300_create_seo_internal_traffic_rules_table.php.",
+          "why_external_to_current_pr": "The necessary classifier update is outside the SEO-DASH-01A allowed files unless explicitly authorized.",
+          "owner": "human_confirm_required",
+          "follow_up_recommendation": "Resolved in current CI fix by adding a narrow classifier allowlist for the three SEO-DASH-01A schema-only migrations and rerunning the local MBTI CI gate.",
+          "resolved_by_current_ci_fix": true
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-17T11:34:42+08:00",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-01A and started disabled-by-default seo_intel logical DB foundation from origin/main."
+        },
+        {
+          "at": "2026-05-17T11:46:00+08:00",
+          "status": "local_validation_passed_with_external_default_mysql_blocker",
+          "summary": "Implemented seo_intel config, connection, foundation migrations, docs/generated artifact, focused tests, and PR train metadata. SeoIntel tests, route list, scoped Pint, JSON checks, diff check, sqlite migrate pretend, and sqlite migrate force passed; default migrate pretend remains blocked by existing local MySQL credentials before schema execution."
+        },
+        {
+          "at": "2026-05-17T11:53:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1433 for human review; auto-merge is intentionally disabled because this PR introduces schema/migration files."
+        },
+        {
+          "at": "2026-05-17T11:58:00+08:00",
+          "status": "github_checks_passed_no_required_checks_reported",
+          "summary": "GitHub reported mergeStateStatus=CLEAN and no status checks in statusCheckRollup for PR #1433. PR remains open for human schema review; auto-merge not enabled."
+        },
+        {
+          "at": "2026-05-17T12:04:00+08:00",
+          "status": "github_checks_failed_scope_blocked",
+          "summary": "GitHub verify-mbti-v2 and verify-mbti-legacy failed because BigFiveResultPageV2CoreBodyPreviewTest flags the three SEO-DASH-01A migration files as runtime path drift. Fixing that classifier is outside the allowed file list unless user authorizes scope expansion."
+        },
+        {
+          "at": "2026-05-17T11:52:12+08:00",
+          "status": "ci_fix_in_progress",
+          "summary": "User authorized fixing the failed CI commit. Scope expanded narrowly to update the Big Five runtime freeze classifier for the three SEO-DASH-01A schema-only migrations."
+        },
+        {
+          "at": "2026-05-17T11:57:01+08:00",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "Updated BigFiveResultPageV2CoreBodyPreviewTest to classify the three SEO-DASH-01A schema-only migrations as non-runtime freeze changes. Targeted runtime freeze classifier tests, SeoIntel regression tests, scoped Pint, JSON validation, git diff check, and full local backend/scripts/ci_verify_mbti.sh all passed."
+        },
+        {
+          "at": "2026-05-17T11:58:00+08:00",
+          "status": "ci_fix_local_checks_passed_pending_github_rerun",
+          "summary": "Amended SEO-DASH-01A commit with the CI classifier fix and recorded the local validation pass. Branch is ready to push for GitHub check rerun."
+        }
+      ],
+      "next_pr": "SEO-DASH-01B"
     }
   }
 }
