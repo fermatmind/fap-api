@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T11:20:18.140166Z",
+  "updated_at": "2026-05-17T12:10:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -9515,7 +9515,7 @@
       "depends_on": [
         "SEO-DASH-04B"
       ],
-      "status": "pr_open",
+      "status": "merged",
       "train_scope": "china_search_domestic_adapter_contracts",
       "risk_level": "medium_disabled_search_channel_schema",
       "title": "feat(seo-intel): add 360 Sogou Shenma adapter contracts",
@@ -9587,14 +9587,17 @@
           "status": "pass",
           "command": "git diff --check && git diff --cached --check"
         },
-        "github": "pending"
+        "github": {
+          "status": "pass",
+          "evidence": "GitHub required checks passed for PR #1444 and mergeStateStatus was CLEAN before squash merge."
+        }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1444",
-      "commit_sha": "aa4ab10d",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "commit_sha": "d2c9da7aadc1a86cce5be70655497485f16b362e",
+      "merged_at": "2026-05-17T11:40:42Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -9611,9 +9614,113 @@
           "at": "2026-05-17T11:20:18.139926Z",
           "status": "pr_open",
           "summary": "Opened PR #1444 for CHINA-SEARCH-03; GitHub checks pending."
+        },
+        {
+          "at": "2026-05-17T11:40:42Z",
+          "status": "merged",
+          "summary": "PR #1444 merged; origin/main contains merge commit d2c9da7aadc1a86cce5be70655497485f16b362e and local/remote branch cleanup completed."
         }
       ],
       "next_pr": "CHINA-SEARCH-04"
+    },
+    "CHINA-SEARCH-04": {
+      "repo": "fap-api",
+      "branch": "codex/china-search-04-chinese-crawler-log-collector",
+      "base": "main",
+      "depends_on": [
+        "CHINA-SEARCH-03"
+      ],
+      "status": "pr_open",
+      "train_scope": "chinese_crawler_log_collector_foundation",
+      "risk_level": "medium_disabled_crawler_log_schema",
+      "title": "feat(seo-intel): add Chinese crawler log collector foundation",
+      "name": "Chinese crawler log collector",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided CHINA-SEARCH-04 with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "CHINA-SEARCH-03 merged in fap-api PR #1444 and origin/main contains merge commit d2c9da7aadc1a86cce5be70655497485f16b362e."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "production_log_access": {
+          "status": "human_confirm_required"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to seo_intel config, crawler log daily migration, SeoIntel crawler log collector/parser/classifier/sanitizer/aggregator, focused SeoIntel tests, BigFive freeze gate allowlist test required by CI, docs/generated artifact, and docs/codex PR train metadata. No fap-web runtime, payment/order/report/email/recommendation/scoring, deploy/env, scheduler, queue, external API, sitemap, llms, OpenResty/Nginx/CDN/cloud, Node2/Node3 runtime, Metabase, or search-engine-specific page generation files changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "70 tests passed with 1240 assertions; no failures."
+        },
+        "chinese_crawler_log_command_json": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=chinese_crawler_log_foundation --dry-run --json",
+          "evidence": "Command returned success JSON with dry_run=true, writes_attempted=false, writes_committed=false, external_calls_attempted=false, production_log_read_attempted=false, raw IP/cookie/user-agent storage disabled, private/noindex warnings enabled, crawler_hit_grants_indexability=false, and search_channel_purchase_attribution_allowed=false."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3352 files."
+        },
+        "bigfive_runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi",
+          "evidence": "79 runtime_freeze_classifier tests passed with 84 assertions after adding CHINA-SEARCH-04 crawler foundation allowlist coverage."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "github": "pending"
+      },
+      "failure_reason": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1445",
+      "commit_sha": "6370c74273a96ca8e639bd140c8bb139abe7d5af",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-17T11:45:00Z",
+          "status": "in_progress",
+          "summary": "Registered authorized CHINA-SEARCH-04 and started disabled-by-default Chinese crawler log collector foundation from origin/main."
+        },
+        {
+          "at": "2026-05-17T12:05:00Z",
+          "status": "local_validation_passed",
+          "summary": "Implemented disabled-by-default Chinese crawler log collector foundation, seo_crawler_logs_daily schema, safe parser/classifier/sanitizer/aggregator, docs/generated artifact, tests, and CI freeze gate allowlist. Local validation passed."
+        },
+        {
+          "at": "2026-05-17T12:07:00Z",
+          "status": "committed",
+          "summary": "Committed CHINA-SEARCH-04 local changes at 2f5a40ec6ed416d4635d2d680de87381c70f868b."
+        },
+        {
+          "at": "2026-05-17T12:10:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #1445 for CHINA-SEARCH-04; GitHub checks pending."
+        }
+      ],
+      "next_pr": "SEO-DASH-05"
     }
   },
   "SEO-DASH-04B": {

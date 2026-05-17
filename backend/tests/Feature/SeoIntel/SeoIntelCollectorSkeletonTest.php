@@ -31,6 +31,7 @@ final class SeoIntelCollectorSkeletonTest extends TestCase
             'so360_foundation',
             'sogou_foundation',
             'shenma_foundation',
+            'chinese_crawler_log_foundation',
         ], config('seo_intel.allowed_collectors'));
         $this->assertSame('noop', config('seo_intel.default_collector'));
     }
