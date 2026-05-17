@@ -12,8 +12,10 @@ use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\EditorialReviewChecklist;
 use App\Models\AdminUser;
 use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Support\OrgContext;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -161,6 +163,13 @@ class EditorialReviewPage extends Page
             throw new AuthorizationException(__('ops.custom_pages.common.errors.not_assigned_reviewer'));
         }
 
+        $workingRevision = $record instanceof Article ? $record->workingRevision : null;
+        if ($workingRevision instanceof ArticleTranslationRevision
+            && $workingRevision->revision_status === ArticleTranslationRevision::STATUS_HUMAN_REVIEW) {
+            app(ArticleTranslationWorkflowService::class)
+                ->approveEditorialWorkingRevision($record, $this->actorAdminId());
+        }
+
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, $type, $record);
 
         Notification::make()
@@ -236,6 +245,7 @@ class EditorialReviewPage extends Page
         $currentOrgIds = $this->currentOrgIds();
 
         $articles = Article::query()
+            ->withoutGlobalScopes()
             ->with('seoMeta')
             ->whereIn('org_id', $currentOrgIds)
             ->where('status', 'draft')
@@ -332,7 +342,7 @@ class EditorialReviewPage extends Page
     {
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
 
-        return $orgId > 0 ? [$orgId] : [];
+        return $orgId > 0 ? [0, $orgId] : [];
     }
 
     /**
@@ -500,7 +510,7 @@ class EditorialReviewPage extends Page
         }
 
         return match ($type) {
-            'article' => Article::query()->whereIn('org_id', $this->currentOrgIds())->findOrFail($id),
+            'article' => Article::query()->withoutGlobalScopes()->whereIn('org_id', $this->currentOrgIds())->findOrFail($id),
             'guide' => CareerGuide::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
             'job' => CareerJob::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
             default => throw new AuthorizationException(__('ops.custom_pages.common.errors.unsupported_review_type')),

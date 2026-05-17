@@ -736,6 +736,116 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertTrue($article->is_public);
     }
 
+    public function test_editorial_review_can_approve_public_system_article_working_revision(): void
+    {
+        $owner = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $reviewer = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+
+        $session = $this->opsSession((int) $owner->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+
+        $article = $this->seedArticle([
+            'org_id' => 0,
+            'slug' => 'system-review-article',
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'translation_group_id' => 'system-review-article-group',
+            'source_version_hash' => 'system-review-source-hash',
+            'title' => 'System Review Article',
+            'excerpt' => 'System review excerpt',
+            'content_md' => 'System review body',
+            'content_html' => '<p>System review body</p>',
+            'status' => 'draft',
+            'is_public' => false,
+            'published_at' => null,
+        ]);
+
+        ArticleSeoMeta::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'System Review Article SEO Title',
+            'seo_description' => 'System Review Article SEO Description',
+            'canonical_url' => 'https://example.test/articles/system-review-article',
+            'og_title' => 'System Review Article OG Title',
+            'og_description' => 'System Review Article OG Description',
+            'og_image_url' => 'https://example.test/images/system-review-article.png',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        $revision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => 'system-review-article-group',
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'source_version_hash' => 'system-review-source-hash',
+            'translated_from_version_hash' => 'system-review-source-hash',
+            'title' => 'System Review Article',
+            'excerpt' => 'System review excerpt',
+            'content_md' => 'System review body',
+            'seo_title' => 'System Review Article SEO Title',
+            'seo_description' => 'System Review Article SEO Description',
+        ]);
+        $article->forceFill(['working_revision_id' => (int) $revision->id])->save();
+
+        $this->setOpsContext($selectedOrgId, $owner, '/ops/editorial-review');
+        $reviewSurface = Livewire::test(EditorialReviewPage::class)
+            ->assertOk();
+        $this->assertTrue(
+            collect($reviewSurface->get('reviewItems'))
+                ->contains(fn (array $item): bool => (int) $item['id'] === (int) $article->id
+                    && $item['type'] === 'article'
+                    && $item['title'] === 'System Review Article')
+        );
+
+        $reviewSurface
+            ->set('ownerAssignments.article_'.$article->id, (string) $owner->id)
+            ->call('assignOwnerItem', 'article', (int) $article->id);
+
+        $this->setOpsContext($selectedOrgId, $reviewer, '/ops/editorial-review');
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->set('reviewerAssignments.article_'.$article->id, (string) $reviewer->id)
+            ->call('assignReviewerItem', 'article', (int) $article->id);
+
+        $this->setOpsContext($selectedOrgId, $owner, '/ops/editorial-review');
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->call('submitItem', 'article', (int) $article->id);
+
+        $this->setOpsContext($selectedOrgId, $reviewer, '/ops/editorial-review');
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->call('approveItem', 'article', (int) $article->id);
+
+        $revision->refresh();
+        $article->refresh();
+
+        $this->assertSame(ArticleTranslationRevision::STATUS_APPROVED, (string) $revision->revision_status);
+        $this->assertSame((int) $reviewer->id, (int) $revision->reviewed_by);
+        $this->assertNotNull($revision->reviewed_at);
+        $this->assertNotNull($revision->approved_at);
+        $this->assertSame(Article::TRANSLATION_STATUS_APPROVED, (string) $article->translation_status);
+
+        $workflow = EditorialReview::withoutGlobalScopes()
+            ->where('content_type', 'article')
+            ->where('content_id', (int) $article->id)
+            ->first();
+
+        $this->assertNotNull($workflow);
+        $this->assertSame(EditorialReview::STATE_APPROVED, (string) $workflow->workflow_state);
+    }
+
     public function test_reassigning_reviewer_invalidates_existing_approval_until_resubmitted(): void
     {
         $owner = $this->createAdminWithPermissions([
