@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T08:08:01+08:00",
+  "updated_at": "2026-05-17T08:16:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -8144,6 +8144,14 @@
           "status": "pass",
           "evidence": "cd backend && php artisan test tests/Unit/Support/SafeArtifactDirectoryTest.php --no-ansi passed: 2 tests / 10 assertions."
         },
+        "github_checks_initial": {
+          "status": "failed_current_scope_fix_applied",
+          "evidence": "PR #1429 verify-mbti-legacy failed because BigFiveResultPageV2CoreBodyPreviewTest classified backend/app/Support/SafeArtifactDirectory.php as runtime freeze drift. Added an explicit classifier guard and regression test for this safe tmp artifact helper."
+        },
+        "bigfive_runtime_freeze_test": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi passed after the CI fix: 80 tests / 427 assertions."
+        },
         "manifest_artifact_filter": {
           "status": "external_sidecar",
           "evidence": "cd backend && php artisan test --filter=Artifact --no-ansi failed with 3 failures in CareerFirstWaveReleaseArtifactProjectionServiceTest. Running that same failing file on origin/main 2bde3eb0a1075ea559ab4969fe6cf76828912731 produced the same failure class, so it is not introduced by this PR."
@@ -8158,7 +8166,7 @@
         },
         "scope_validation": {
           "status": "pass",
-          "evidence": "Changed files are limited to backend/app/Console/Commands/**, backend/app/Support/SafeArtifactDirectory.php, backend/tests/Unit/Support/SafeArtifactDirectoryTest.php, and docs/codex/pr-train-state.json, all within the approved PR scope."
+          "evidence": "Changed files are limited to backend/app/Console/Commands/**, backend/app/Support/SafeArtifactDirectory.php, backend/tests/Unit/Support/SafeArtifactDirectoryTest.php, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php, and docs/codex/pr-train-state.json, all within the approved PR scope."
         },
         "diff_check": {
           "status": "pass",
@@ -8190,6 +8198,11 @@
           "at": "2026-05-17T08:08:01+08:00",
           "status": "local_validated_with_sidecar",
           "summary": "Added safe random artifact staging helper, migrated console artifact exporters/finalizers, validated the focused helper test, route list, Pint, and diff check, and recorded the existing Artifact filter failures as sidecar."
+        },
+        {
+          "at": "2026-05-17T08:16:00+08:00",
+          "status": "github_checks_failed_scoped_fix_local_passed",
+          "summary": "Inspected PR #1429 verify-mbti-legacy failure, fixed the Big Five runtime freeze classifier for the safe tmp artifact helper, and validated the focused freeze suite, helper tests, route list, Pint, and diff check locally."
         }
       ]
     }

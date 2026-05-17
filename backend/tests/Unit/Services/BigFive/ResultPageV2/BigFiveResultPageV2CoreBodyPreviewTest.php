@@ -246,6 +246,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_safe_tmp_artifact_helper(): void
+    {
+        $changed = [
+            'backend/app/Support/SafeArtifactDirectory.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_public_recency_ordering_only(): void
     {
         $changed = [
@@ -1410,6 +1419,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSafeTmpArtifactSupportFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/app/Services/Attempts/AttemptSubmitService.php'
                 && $this->attemptSubmitServiceDiffIsIqResultSecrecyRedactionOnly(
@@ -1791,6 +1804,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Storage/QuarantinedRootRestoreService.php',
             'backend/app/Support/Xlsx/XlsxCellReference.php',
         ], true);
+    }
+
+    private function isSafeTmpArtifactSupportFile(string $file): bool
+    {
+        return $file === 'backend/app/Support/SafeArtifactDirectory.php';
     }
 
     private function isIqScoringContractFoundationFile(string $file): bool
