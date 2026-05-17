@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T13:48:00Z",
+  "updated_at": "2026-05-17T13:52:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -4360,7 +4360,7 @@
       "branch": "fix/career-index-state-minimum-remediation-gate",
       "title": "fix(api): add guarded career index state remediation command",
       "name": "Add guarded explicit-slug index_state remediation dry-run/apply planning",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "RUN-1F",
         "REPAIR-INDEX-ENTITY-POLICY-2"
@@ -8174,8 +8174,8 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1448",
+      "commit_sha": "517fcbc99a178665844bd80c1220477406013fa3",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -9908,6 +9908,11 @@
           "at": "2026-05-17T13:48:00Z",
           "status": "local_checks_passed",
           "summary": "Implemented fail-closed article cover media readiness and verified focused PublicMediaUrlGuard, MediaLibrary, route list, Pint, YAML/JSON, and diff checks."
+        },
+        {
+          "at": "2026-05-17T13:52:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #1448 for PUBLISH-API-MEDIA-ORIGIN-READYNESS after scoped local validation passed."
         }
       ]
     }
