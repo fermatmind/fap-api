@@ -1,0 +1,142 @@
+{
+  "version": "controlled-write-enablement-plan.v1",
+  "source_documents": [
+    "SEO-DASH-PROD-01B",
+    "SEO-DASH-PROD-02",
+    "SEO-DASH-00B",
+    "BACKEND-RUNTIME-02D"
+  ],
+  "production_schema_ready": true,
+  "collector_dry_run_passed": true,
+  "write_enabled_in_this_pr": false,
+  "scheduler_enabled_in_this_pr": false,
+  "metabase_deployed_in_this_pr": false,
+  "live_external_api_enabled_in_this_pr": false,
+  "production_crawler_log_read_enabled_in_this_pr": false,
+  "first_canary_collector": "url_truth_inventory",
+  "first_canary_status": "blocked_until_bounded_canary_support_confirmed",
+  "collector_tiers": {
+    "tier_0_dry_run_only_always_safe": [
+      "noop",
+      "all_collectors_with_dry_run_and_no_write"
+    ],
+    "tier_1_first_controlled_write_candidates": [
+      "url_truth_inventory",
+      "issue_queue_foundation_if_sanitized_fixture_or_governance_safe_only",
+      "attribution_revenue_foundation_if_approved_aggregate_builder_only"
+    ],
+    "tier_2_later_after_tier_1_success": [
+      "drift_foundation",
+      "crawler_log_foundation_fixture_or_non_production_sample_only",
+      "chinese_crawler_log_foundation_fixture_only"
+    ],
+    "tier_3_blocked_until_external_live_credentials_approved": [
+      "gsc_foundation",
+      "baidu_foundation",
+      "indexnow_foundation",
+      "so360_foundation",
+      "sogou_foundation",
+      "shenma_foundation"
+    ],
+    "tier_4_blocked_until_production_log_read_approval": [
+      "production_crawler_log_read",
+      "cdn_openresty_nginx_production_log_ingestion"
+    ]
+  },
+  "blocked_collectors": [
+    "gsc_foundation",
+    "baidu_foundation",
+    "indexnow_foundation",
+    "so360_foundation",
+    "sogou_foundation",
+    "shenma_foundation",
+    "production_crawler_log_read",
+    "cdn_openresty_nginx_production_log_ingestion"
+  ],
+  "required_env_posture": {
+    "temporary_command_session_only": true,
+    "permanent_production_env_edit_allowed": false,
+    "SEO_INTEL_ENABLED": "true",
+    "SEO_INTEL_COLLECTORS_ENABLED": "true",
+    "SEO_INTEL_WRITE_ENABLED": "true_only_for_approved_one_time_command_session",
+    "SEO_INTEL_DRY_RUN_DEFAULT": "false_only_for_approved_one_time_command_session",
+    "SEO_INTEL_GSC_ENABLED": "false",
+    "SEO_INTEL_BAIDU_ENABLED": "false",
+    "SEO_INTEL_INDEXNOW_ENABLED": "false",
+    "SEO_INTEL_SO360_ENABLED": "false",
+    "SEO_INTEL_SOGOU_ENABLED": "false",
+    "SEO_INTEL_SHENMA_ENABLED": "false",
+    "SEO_INTEL_CHINESE_CRAWLER_LOGS_ENABLED": "false",
+    "scheduler_enabled": false
+  },
+  "actual_write_command_template": "SEO_INTEL_ENABLED=true SEO_INTEL_COLLECTORS_ENABLED=true SEO_INTEL_WRITE_ENABLED=true SEO_INTEL_DRY_RUN_DEFAULT=false php artisan seo-intel:collect --collector=url_truth_inventory --json",
+  "forbidden_commands": [
+    "collector_without_explicit_collector_name",
+    "all_collectors_wildcard",
+    "scheduler_triggered_collector",
+    "live_gsc_baidu_indexnow_domestic_search_collectors",
+    "production_crawler_log_collectors"
+  ],
+  "forbidden_fields": [
+    "email",
+    "raw_email",
+    "order_no",
+    "raw_order_no",
+    "attempt_id",
+    "raw_attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "cookie",
+    "raw_cookie",
+    "raw_ip",
+    "raw_user_agent",
+    "raw_payload",
+    "payment_payload",
+    "provider_payload",
+    "token",
+    "api_key",
+    "secret"
+  ],
+  "forbidden_sources": [
+    "node2_local_db",
+    "business_db_raw_tables",
+    "raw_orders",
+    "raw_payments",
+    "raw_email",
+    "raw_events_detail"
+  ],
+  "validation_requirements": [
+    "row_counts_before_after",
+    "only_expected_tables_changed",
+    "no_business_db_tables_changed",
+    "no_forbidden_pii_columns_or_values",
+    "no_raw_email_order_no_attempt_id_payment_id_provider_event_id_cookie_raw_ip",
+    "no_external_api_calls",
+    "no_url_submissions",
+    "no_scheduler_state_change",
+    "no_metabase_deployment",
+    "canonical_url_locale_page_entity_type_shape_valid",
+    "private_flow_urls_not_indexable"
+  ],
+  "rollback_policy": {
+    "first_action": "set_SEO_INTEL_WRITE_ENABLED_false",
+    "scheduler_remains_disabled": true,
+    "schema_rollback_allowed": false,
+    "wrong_canary_rows_policy": "mark_ignore_or_forward_cleanup_with_separate_human_approval",
+    "destructive_delete_requires_separate_approval": true,
+    "restore_or_forward_fix_owner_required": true
+  },
+  "human_approval_gates": [
+    "first_write_canary",
+    "additional_collector_enablement",
+    "scheduler_enablement",
+    "live_external_api_enablement",
+    "production_crawler_log_read_enablement",
+    "metabase_deployment"
+  ],
+  "production_write_execution": false,
+  "scheduler_activation": false,
+  "external_api_live_activation": false,
+  "metabase_deployment": false,
+  "next_task": "SEO-DASH-PROD-03B"
+}

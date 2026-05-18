@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-17T16:10:03Z",
+  "updated_at": "2026-05-18T12:01:20Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10556,6 +10556,116 @@
           "summary": "Opened GitHub PR #1455 for DOCS-SHELL-SAFETY-GUARD after scoped local validation passed."
         }
       ]
+    },
+    "SEO-DASH-PROD-03A": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-prod-03a-controlled-write-enablement-plan",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-PROD-02"
+      ],
+      "status": "pr_opened_github_checks_pending",
+      "train_scope": "controlled_write_enablement_plan",
+      "risk_level": "low_docs_contract_no_execution",
+      "title": "docs(seo-intel): add controlled write enablement plan",
+      "name": "controlled write enablement plan",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-PROD-03A with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-PROD-02 production collector dry-run smoke passed: 13 collectors ran with --dry-run --no-write --json, writes_committed=false, external_calls_attempted=false, production_log_read_attempted=false, no URL submissions, and no collector-created rows."
+        },
+        "production_write_execution": {
+          "status": "false"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "external_api_live_activation": {
+          "status": "false"
+        },
+        "metabase_deployment": {
+          "status": "false"
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "production_crawler_log_read_allowed": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to controlled write enablement docs, generated artifact, focused SeoIntel test, and docs/codex PR train metadata. No runtime code, config, migrations, env, deploy, scheduler, Metabase, external API, production crawler log, payment/order/report/email/recommendation/scoring, sitemap/llms, cloud, credential, or fap-web files changed."
+        },
+        "controlled_write_plan_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntelControlledWriteEnablementPlan",
+          "evidence": "7 tests passed with 57 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "101 tests passed with 1805 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3370 files."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/controlled-write-enablement-plan.v1.json >/dev/null",
+          "evidence": "Generated controlled write enablement artifact decoded successfully."
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 - <<'PY' ... yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())",
+          "evidence": "PR train manifest decoded successfully after installing user-level PyYAML required by the validation command. No repository files were changed by the dependency install."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "github": {
+          "status": "pending"
+        }
+      },
+      "failure_reason": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1463",
+      "commit_sha": "5c71805cc0d79f3400da3150010c111ccf9d7939",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-18T11:57:22Z",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-PROD-03A and started controlled write enablement plan from origin/main. No production write enablement, scheduler, Metabase, external API, production log read, env edit, deploy, or migration performed."
+        },
+        {
+          "at": "2026-05-18T11:59:55Z",
+          "status": "local_validation_passed",
+          "summary": "Added controlled write enablement plan, generated artifact, focused contract test, and train metadata. Focused test, SeoIntel tests, route list, Pint, JSON/YAML validation, and diff checks passed. No production write enablement or runtime behavior change performed."
+        },
+        {
+          "at": "2026-05-18T12:01:20Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Pushed branch codex/seo-dash-prod-03a-controlled-write-enablement-plan and opened https://github.com/fermatmind/fap-api/pull/1463. GitHub checks pending. No production write enablement or runtime behavior change performed."
+        }
+      ],
+      "next_pr": "SEO-DASH-PROD-03B"
     }
   },
   "SEO-DASH-04B": {
