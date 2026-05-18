@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\HealthzController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Middleware\HealthzAccessControl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,19 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])
         \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
         \App\Http\Middleware\VerifyCsrfToken::class,
     ]);
+
+Route::middleware([HealthzAccessControl::class, 'throttle:api_public'])
+    ->get('/healthz', [HealthzController::class, 'show'])
+    ->withoutMiddleware([
+        \Illuminate\Cookie\Middleware\EncryptCookies::class,
+        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+        \App\Http\Middleware\VerifyCsrfToken::class,
+    ])
+    ->name('healthz.public');
 
 if (config('admin.panel_enabled')) {
     Route::permanentRedirect('/admin', '/ops');
