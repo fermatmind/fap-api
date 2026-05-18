@@ -5098,7 +5098,7 @@
       "branch": "fix/career-runtime-candidate-artifact-refresh-2",
       "title": "fix(api): add candidate-aware runtime artifact refresh",
       "name": "Add candidate-aware runtime artifact refresh after verified candidate prep apply",
-      "status": "in_progress",
+      "status": "pr_opened_github_checks_pending",
       "depends_on": [
         "RUNTIME-CANDIDATE-PREP-APPLY-1",
         "REPAIR-RUNTIME-ARTIFACT-REFRESH-1"
@@ -8738,8 +8738,8 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1458",
+      "commit_sha": "4be636472402e50b5fb6124882fb696ed374b4e7",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -10156,6 +10156,11 @@
           "at": "2026-05-18T02:15:34Z",
           "status": "committed",
           "summary": "Committed SEO-DASH-PROD-01C local changes at 45c51de1c2181987339f671e1d6a21abc05373aa."
+        },
+        {
+          "at": "2026-05-18T02:21:53Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Pushed branch codex/seo-dash-prod-01c-seo-intel-migration-isolation and opened https://github.com/fermatmind/fap-api/pull/1458. GitHub checks pending; no production execution performed."
         }
       ],
       "next_pr": "SEO-DASH-PROD-01B-STAGE1-RETRY"
