@@ -16,6 +16,7 @@ This file is a contract mirror of current runtime routes. It does not define fut
 
 ## Auth Labels
 - `Auth: Public` no token required.
+- `Auth: AllowlistOnly` no token required, but production access is restricted by trusted source IP policy.
 - `Auth: Sanctum` requires Laravel Sanctum session/token.
 - `Auth: AdminAuth` requires admin guard or `X-FAP-Admin-Token` path.
 - `Auth: FmTokenAuth` requires FM token middleware.
@@ -28,7 +29,7 @@ This file is a contract mirror of current runtime routes. It does not define fut
 ### Base (`2`)
 | Method | Path | Auth | Feature |
 |---|---|---|---|
-| `GET|HEAD` | `/api/healthz` | `Public` | `-` |
+| `GET|HEAD` | `/api/healthz` | `AllowlistOnly` | `-` |
 | `GET|HEAD` | `/api/user` | `Sanctum` | `-` |
 
 ### v0.3 (`82`)
