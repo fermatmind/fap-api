@@ -743,6 +743,61 @@ prs:
     env_edit_allowed: false
     scheduler_activation: false
     next_task: SEO-DASH-PROD-01B-STAGE1-RETRY
+
+  - id: SEO-DASH-PROD-03A
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-PROD-02
+    branch: codex/seo-dash-prod-03a-controlled-write-enablement-plan
+    title: "docs(seo-intel): add controlled write enablement plan"
+    name: "controlled write enablement plan"
+    findings:
+      - "SEO-DASH-PROD-01B actual migration completed successfully and created the production seo_intel schema."
+      - "SEO-DASH-PROD-02 production collector dry-run smoke passed for 13 collectors with --dry-run --no-write --json."
+      - "Production writes, scheduler, Metabase, live external APIs, and production crawler log reads remain disabled."
+    scope:
+      - Add a controlled production write enablement plan for SEO Intelligence.
+      - Define collector write tiers, first canary recommendation, required temporary env posture, verification requirements, rollback policy, and human approval gates.
+      - Add a generated contract artifact proving this PR does not enable writes, scheduler, Metabase, live external APIs, production crawler logs, or runtime behavior.
+      - Add a focused SeoIntel contract test for the controlled write enablement plan.
+      - Update docs/codex PR train metadata for SEO-DASH-PROD-03A.
+    allowed_paths:
+      - backend/docs/seo/controlled-write-enablement-plan.md
+      - backend/docs/seo/generated/controlled-write-enablement-plan.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelControlledWriteEnablementPlanTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Enable collector writes, scheduler jobs, queue workers, Metabase, GSC, Baidu, IndexNow, domestic search adapters, or production log reads.
+      - Run production collector write commands, migrations, deploys, SSH commands, env edits, external API calls, or URL submissions.
+      - Touch Tencent rds-fap-prod, Node2 local DB, business DB migrations, or default DB migrations.
+      - Change runtime code, backend behavior, config, migrations, payment, order, report, email, recommendation, scoring, sitemap, or llms behavior.
+      - Modify fap-web runtime or use fap-api/fap-web as production frontend runtime.
+      - Store or expose secrets, DB hosts, passwords, tokens, emails, order numbers, attempt ids, payment ids, provider event ids, cookies, or raw IPs.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelControlledWriteEnablementPlan
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/controlled-write-enablement-plan.v1.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    production_crawler_log_read_allowed: false
+    next_task: SEO-DASH-PROD-03B
   - id: PR-MEDIA-01
     repo: fap-api
     depends_on:
