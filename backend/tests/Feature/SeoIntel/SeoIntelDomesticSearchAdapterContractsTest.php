@@ -33,9 +33,9 @@ final class SeoIntelDomesticSearchAdapterContractsTest extends TestCase
     public function domestic_search_migrations_do_not_include_forbidden_columns(): void
     {
         $paths = [
-            ...glob(base_path('database/migrations/*seo_search_engine_verification_statuses*')),
-            ...glob(base_path('database/migrations/*seo_domestic_submission_logs*')),
-            ...glob(base_path('database/migrations/*seo_domestic_index_samples*')),
+            ...glob(base_path('database/migrations/seo_intel/*seo_search_engine_verification_statuses*')),
+            ...glob(base_path('database/migrations/seo_intel/*seo_domestic_submission_logs*')),
+            ...glob(base_path('database/migrations/seo_intel/*seo_domestic_index_samples*')),
         ];
 
         $this->assertCount(3, $paths);

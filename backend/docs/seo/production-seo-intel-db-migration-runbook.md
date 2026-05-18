@@ -95,19 +95,25 @@ All items must be confirmed before any production migration:
 
 These are templates only. Do not paste secrets into commands, shell history, tickets, logs, PR bodies, or chat.
 
+Production `seo_intel` migration commands must always include the dedicated migration path. Never run
+`php artisan migrate --database=seo_intel` without `--path=database/migrations/seo_intel`; the default Laravel
+migration directory contains normal app and CMS migrations that must not run against the `seo_intel` schema.
+
 ```bash
-php artisan migrate --database=seo_intel --pretend --no-ansi
+php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --pretend --no-ansi --force
 ```
 
 ```bash
-php artisan migrate --database=seo_intel --no-ansi
+php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --no-ansi --force
 ```
 
 ```bash
-php artisan migrate:status --database=seo_intel --no-ansi
+php artisan migrate:status --database=seo_intel --path=database/migrations/seo_intel --no-ansi
 ```
 
 Use the approved production execution channel and masked environment configuration. Do not run these commands from this PR.
+The migration target is `seo_intel` only; default business migrations must not run against `seo_intel`.
+Default business migrations must not run against seo_intel.
 
 ## H. Backup / Restore / Rollback
 
@@ -165,6 +171,6 @@ Stop before production migration if any condition is true:
 
 ## K. Next Task
 
-Next task: `SEO-DASH-PROD-01B` for human-approved production DB/user/migration execution.
+Next task: `SEO-DASH-PROD-01B-STAGE1-RETRY` for a human-approved production migration Stage 1 retry using the isolated `seo_intel` migration path.
 
 If production DB and migrations are complete under human approval, the next activation step may proceed to `SEO-DASH-PROD-02` collector dry-run smoke.

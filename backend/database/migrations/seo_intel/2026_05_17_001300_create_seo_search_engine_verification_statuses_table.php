@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    protected $connection = 'seo_intel';
+
     public function up(): void
     {
         if (Schema::hasTable('seo_search_engine_verification_statuses')) {

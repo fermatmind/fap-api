@@ -15,6 +15,12 @@
   "scheduler_enabled_in_this_pr": false,
   "metabase_deployed_in_this_pr": false,
   "external_search_api_connected_in_this_pr": false,
+  "migration_path": "database/migrations/seo_intel",
+  "default_migration_path_allowed_for_seo_intel": false,
+  "bare_database_migration_command_allowed": false,
+  "required_pretend_command": "php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --pretend --no-ansi --force",
+  "required_actual_migration_command": "php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --no-ansi --force",
+  "required_status_command": "php artisan migrate:status --database=seo_intel --path=database/migrations/seo_intel --no-ansi",
   "allowed_db_locations": [
     "managed_mysql_rds_dedicated_analytics",
     "approved_managed_mysql_separate_database_or_schema",
@@ -106,9 +112,9 @@
     "no_deploy_or_incident_in_progress"
   ],
   "command_templates": [
-    "php artisan migrate --database=seo_intel --pretend --no-ansi",
-    "php artisan migrate --database=seo_intel --no-ansi",
-    "php artisan migrate:status --database=seo_intel --no-ansi"
+    "php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --pretend --no-ansi --force",
+    "php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --no-ansi --force",
+    "php artisan migrate:status --database=seo_intel --path=database/migrations/seo_intel --no-ansi"
   ],
   "backup_restore_policy": {
     "migrations_are_forward_only": true,
@@ -182,5 +188,5 @@
     "change_window",
     "rollback_forward_fix_owner"
   ],
-  "next_task": "SEO-DASH-PROD-01B"
+  "next_task": "SEO-DASH-PROD-01B-STAGE1-RETRY"
 }

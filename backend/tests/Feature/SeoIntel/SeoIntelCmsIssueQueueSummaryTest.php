@@ -33,7 +33,7 @@ final class SeoIntelCmsIssueQueueSummaryTest extends TestCase
     #[Test]
     public function issue_queue_migration_does_not_include_forbidden_columns(): void
     {
-        $paths = glob(base_path('database/migrations/*seo_issue_queue*'));
+        $paths = glob(base_path('database/migrations/seo_intel/*seo_issue_queue*'));
 
         $this->assertCount(1, $paths);
 
