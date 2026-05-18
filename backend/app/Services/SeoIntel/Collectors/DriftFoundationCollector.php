@@ -7,16 +7,24 @@ namespace App\Services\SeoIntel\Collectors;
 use App\Services\SeoIntel\Drift\HtmlSnapshotParser;
 use App\Services\SeoIntel\Drift\MetadataDriftComparator;
 use App\Services\SeoIntel\Drift\SitemapLlmsParityComparator;
+use App\Services\SeoIntel\DriftIssueCandidate;
 use App\Services\SeoIntel\SeoIntelCollector;
 use App\Services\SeoIntel\SeoIntelCollectorResult;
+use App\Services\SeoIntel\UrlTruthDriftIssueCandidateSource;
+use Illuminate\Support\Facades\DB;
 
 final class DriftFoundationCollector implements SeoIntelCollector
 {
+    private readonly UrlTruthDriftIssueCandidateSource $candidateSource;
+
     public function __construct(
         private readonly HtmlSnapshotParser $htmlParser,
         private readonly MetadataDriftComparator $metadataComparator,
         private readonly SitemapLlmsParityComparator $parityComparator,
-    ) {}
+        ?UrlTruthDriftIssueCandidateSource $candidateSource = null,
+    ) {
+        $this->candidateSource = $candidateSource ?? new UrlTruthDriftIssueCandidateSource;
+    }
 
     public function name(): string
     {
@@ -30,8 +38,9 @@ final class DriftFoundationCollector implements SeoIntelCollector
     {
         $dryRun = (bool) ($options['dry_run'] ?? true);
         $writesAllowed = (bool) ($options['writes_allowed'] ?? false);
-        $allowExternalApiCalls = (bool) ($options['allow_external_api_calls'] ?? false);
-        $allowProductionCrawl = (bool) ($options['allow_production_crawl'] ?? false);
+        $canary = (bool) ($options['canary'] ?? false);
+        $limit = $this->boundedLimit($options['limit'] ?? null, $canary);
+        $boundProvided = $canary || (($options['limit'] ?? null) !== null && ($options['limit'] ?? '') !== '');
         $snapshot = $this->htmlParser->parse($this->fixtureHtml(), 200);
         $metadataComparison = $this->metadataComparator->compare($this->expectedMetadata(), $snapshot);
         $parity = $this->parityComparator->compare(
@@ -53,26 +62,152 @@ final class DriftFoundationCollector implements SeoIntelCollector
                 'https://fermatmind.com/zh/articles/drift-fixture' => 'cms_article',
             ],
         );
+        $candidateResult = $this->candidateSource->candidates($limit);
+        $candidates = $candidateResult['candidates'];
+        $issues = array_merge(
+            $this->warningsFrom($metadataComparison, $parity),
+            $candidateResult['issues'],
+        );
+
+        if (
+            $writesAllowed
+            && ! $dryRun
+            && (bool) config('seo_intel.drift_foundation.write_requires_bound', true)
+            && ! $boundProvided
+        ) {
+            $issues[] = 'drift_foundation_write_requires_bound';
+
+            return $this->result(
+                dryRun: $dryRun,
+                writesAllowed: $writesAllowed,
+                writesAttempted: false,
+                writesCommitted: false,
+                issues: $issues,
+                snapshot: $snapshot,
+                metadataComparison: $metadataComparison,
+                parity: $parity,
+                candidateResult: $candidateResult,
+                candidates: $candidates,
+                canary: $canary,
+                limit: $limit,
+                status: 'blocked',
+            );
+        }
+
+        if (
+            $writesAllowed
+            && ! $dryRun
+            && ! (bool) config('seo_intel.drift_foundation.issue_queue_target_enabled', false)
+        ) {
+            $issues[] = 'drift_issue_queue_target_disabled';
+
+            return $this->result(
+                dryRun: $dryRun,
+                writesAllowed: $writesAllowed,
+                writesAttempted: false,
+                writesCommitted: false,
+                issues: $issues,
+                snapshot: $snapshot,
+                metadataComparison: $metadataComparison,
+                parity: $parity,
+                candidateResult: $candidateResult,
+                candidates: $candidates,
+                canary: $canary,
+                limit: $limit,
+                status: 'blocked',
+            );
+        }
+
+        $writesAttempted = $writesAllowed && ! $dryRun && $candidates !== [];
+        $writesCommitted = false;
+
+        if ($writesAttempted) {
+            $this->writeIssueCandidates($candidates);
+            $writesCommitted = true;
+        }
+
+        return $this->result(
+            dryRun: $dryRun,
+            writesAllowed: $writesAllowed,
+            writesAttempted: $writesAttempted,
+            writesCommitted: $writesCommitted,
+            issues: $issues,
+            snapshot: $snapshot,
+            metadataComparison: $metadataComparison,
+            parity: $parity,
+            candidateResult: $candidateResult,
+            candidates: $candidates,
+            canary: $canary,
+            limit: $limit,
+        );
+    }
+
+    /**
+     * @param  list<string>  $issues
+     * @param  array<string, mixed>  $snapshot
+     * @param  list<array{status: string, issue_type: string, expected_hash: string|null, observed_hash: string|null}>  $metadataComparison
+     * @param  array<string, list<string>>  $parity
+     * @param  array{candidates: list<DriftIssueCandidate>, metadata: array<string, mixed>, issues: list<string>}  $candidateResult
+     * @param  list<DriftIssueCandidate>  $candidates
+     */
+    private function result(
+        bool $dryRun,
+        bool $writesAllowed,
+        bool $writesAttempted,
+        bool $writesCommitted,
+        array $issues,
+        array $snapshot,
+        array $metadataComparison,
+        array $parity,
+        array $candidateResult,
+        array $candidates,
+        bool $canary,
+        ?int $limit,
+        string $status = 'success',
+    ): SeoIntelCollectorResult {
+        $targetTables = ['seo_issue_queue'];
 
         return new SeoIntelCollectorResult(
             collector: $this->name(),
-            status: 'success',
+            status: $status,
             dryRun: $dryRun,
-            writesAttempted: false,
-            writesCommitted: false,
+            writesAttempted: $writesAttempted,
+            writesCommitted: $writesCommitted,
             externalCallsAttempted: false,
-            itemsSeen: 1,
-            issues: $this->warningsFrom($metadataComparison, $parity),
+            itemsSeen: (int) ($candidateResult['metadata']['url_rows_seen'] ?? 0),
+            issues: array_values(array_unique($issues)),
             metadata: [
                 'writes_allowed' => $writesAllowed,
-                'external_api_calls_allowed' => $allowExternalApiCalls,
-                'production_crawl_allowed' => $allowProductionCrawl,
+                'external_api_calls_allowed' => false,
+                'external_api_calls_attempted' => false,
+                'production_crawl_allowed' => false,
                 'production_log_read_allowed' => false,
+                'source_tables' => ['seo_urls', 'seo_url_entities'],
+                'target_tables' => $targetTables,
+                'candidate_count' => count($candidates),
+                'planned_issue_count' => count($candidates),
+                'written_issue_count' => $writesCommitted ? count($candidates) : 0,
+                'limit' => $limit,
+                'canary' => $canary,
+                'write_requires_bound' => (bool) config('seo_intel.drift_foundation.write_requires_bound', true),
+                'issue_queue_target_enabled' => (bool) config('seo_intel.drift_foundation.issue_queue_target_enabled', false),
+                'issue_type_breakdown' => $this->issueTypeBreakdown($candidates),
+                'pii_safe' => true,
+                'raw_evidence_included' => false,
+                'production_log_read_attempted' => false,
+                'public_html_crawl_attempted' => false,
+                'search_submission_attempted' => false,
+                'cms_mutation_attempted' => false,
+                'auto_publish_attempted' => false,
+                'auto_pseo_attempted' => false,
                 'fetches_public_html' => false,
                 'performs_drift_detection' => false,
                 'modifies_sitemap_llms' => false,
                 'modifies_cms' => false,
                 'node2_local_laravel_data_source' => false,
+                'node2_local_db_data_source' => false,
+                'business_db_raw_source_used' => false,
+                'source_authority_breakdown' => $candidateResult['metadata']['source_authority_breakdown'] ?? [],
                 'snapshot_summary' => [
                     'status_code' => $snapshot['status_code'],
                     'canonical_hash' => $snapshot['canonical'] === null ? null : hash('sha256', $snapshot['canonical']),
@@ -87,6 +222,42 @@ final class DriftFoundationCollector implements SeoIntelCollector
                 'sitemap_llms_parity' => $parity,
             ],
         );
+    }
+
+    /**
+     * @param  list<DriftIssueCandidate>  $candidates
+     */
+    private function writeIssueCandidates(array $candidates): void
+    {
+        $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
+        $now = now();
+
+        foreach ($candidates as $candidate) {
+            $connection->table('seo_issue_queue')->updateOrInsert(
+                ['issue_uid' => $candidate->issueUid()],
+                [
+                    'issue_type' => $candidate->issueType,
+                    'severity' => $candidate->severity,
+                    'source_system' => $this->name(),
+                    'source_engine' => null,
+                    'canonical_url_hash' => $candidate->canonicalUrlHash,
+                    'canonical_url' => null,
+                    'locale' => $candidate->locale,
+                    'page_entity_type' => $candidate->pageEntityType,
+                    'entity_id_or_slug' => $candidate->entityIdOrSlug,
+                    'cluster' => $candidate->cluster,
+                    'status' => 'open',
+                    'lifecycle_state' => 'open',
+                    'detected_at' => $now,
+                    'summary' => $candidate->summary,
+                    'recommendation' => $candidate->recommendation,
+                    'evidence_hash' => $candidate->evidenceHash(),
+                    'metadata_json' => json_encode($candidate->metadata, JSON_THROW_ON_ERROR),
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ],
+            );
+        }
     }
 
     private function fixtureHtml(): string
@@ -126,6 +297,40 @@ HTML;
                 ],
             ],
         ];
+    }
+
+    private function boundedLimit(mixed $rawLimit, bool $canary): ?int
+    {
+        $max = max(1, (int) config('seo_intel.drift_foundation.canary_max_limit', 50));
+
+        if ($rawLimit !== null && $rawLimit !== '') {
+            return min($max, max(1, (int) $rawLimit));
+        }
+
+        if ($canary) {
+            $default = max(1, (int) config('seo_intel.drift_foundation.canary_default_limit', 5));
+
+            return min($max, $default);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  list<DriftIssueCandidate>  $candidates
+     * @return array<string, int>
+     */
+    private function issueTypeBreakdown(array $candidates): array
+    {
+        $breakdown = [];
+
+        foreach ($candidates as $candidate) {
+            $breakdown[$candidate->issueType] = ($breakdown[$candidate->issueType] ?? 0) + 1;
+        }
+
+        ksort($breakdown);
+
+        return $breakdown;
     }
 
     /**

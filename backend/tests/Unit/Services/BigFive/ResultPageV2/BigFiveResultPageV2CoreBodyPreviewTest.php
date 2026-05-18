@@ -384,11 +384,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Services/SeoIntel/Collectors/CrawlerLogFoundationCollector.php',
             'backend/app/Services/SeoIntel/Collectors/DriftFoundationCollector.php',
+            'backend/app/Services/SeoIntel/DriftIssueCandidate.php',
             'backend/app/Services/SeoIntel/Drift/CrawlerLogLineParser.php',
             'backend/app/Services/SeoIntel/Drift/CrawlerUserAgentClassifier.php',
             'backend/app/Services/SeoIntel/Drift/HtmlSnapshotParser.php',
             'backend/app/Services/SeoIntel/Drift/MetadataDriftComparator.php',
             'backend/app/Services/SeoIntel/Drift/SitemapLlmsParityComparator.php',
+            'backend/app/Services/SeoIntel/UrlTruthDriftIssueCandidateSource.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -2156,11 +2158,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Services/SeoIntel/Collectors/CrawlerLogFoundationCollector.php',
             'backend/app/Services/SeoIntel/Collectors/DriftFoundationCollector.php',
+            'backend/app/Services/SeoIntel/DriftIssueCandidate.php',
             'backend/app/Services/SeoIntel/Drift/CrawlerLogLineParser.php',
             'backend/app/Services/SeoIntel/Drift/CrawlerUserAgentClassifier.php',
             'backend/app/Services/SeoIntel/Drift/HtmlSnapshotParser.php',
             'backend/app/Services/SeoIntel/Drift/MetadataDriftComparator.php',
             'backend/app/Services/SeoIntel/Drift/SitemapLlmsParityComparator.php',
+            'backend/app/Services/SeoIntel/UrlTruthDriftIssueCandidateSource.php',
         ], true);
     }
 

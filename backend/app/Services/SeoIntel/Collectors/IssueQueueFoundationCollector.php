@@ -27,6 +27,8 @@ final class IssueQueueFoundationCollector implements SeoIntelCollector
     public function collect(array $options = []): SeoIntelCollectorResult
     {
         $dryRun = (bool) ($options['dry_run'] ?? true);
+        $canary = (bool) ($options['canary'] ?? false);
+        $limit = $this->boundedLimit($options['limit'] ?? null, $canary);
         $produced = $this->producer->produce();
         $summary = $this->summaryService->summarize($produced['issues']);
 
@@ -49,6 +51,9 @@ final class IssueQueueFoundationCollector implements SeoIntelCollector
                 'issue_queue_enabled' => (bool) config('seo_intel.issue_queue_enabled', false),
                 'issue_summary_api_enabled' => (bool) config('seo_intel.issue_summary_api_enabled', false),
                 'writes_allowed' => (bool) ($options['writes_allowed'] ?? false),
+                'canary' => $canary,
+                'limit' => $limit,
+                'write_requires_bound' => true,
                 'scheduler_enabled' => false,
                 'queue_worker_enabled' => false,
                 'external_api_calls_allowed' => false,
@@ -66,5 +71,22 @@ final class IssueQueueFoundationCollector implements SeoIntelCollector
                 'node2_local_laravel_data_source' => false,
             ],
         );
+    }
+
+    private function boundedLimit(mixed $rawLimit, bool $canary): ?int
+    {
+        $max = max(1, (int) config('seo_intel.drift_foundation.canary_max_limit', 50));
+
+        if ($rawLimit !== null && $rawLimit !== '') {
+            return min($max, max(1, (int) $rawLimit));
+        }
+
+        if ($canary) {
+            $default = max(1, (int) config('seo_intel.drift_foundation.canary_default_limit', 5));
+
+            return min($max, $default);
+        }
+
+        return null;
     }
 }
