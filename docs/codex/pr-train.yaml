@@ -5458,3 +5458,48 @@ prs:
     external_api_live_activation: false
     metabase_deployment: false
     next_task: SEO-DASH-PROD-03B-PREFLIGHT-R2
+
+  - id: RIASEC-FULL-CONTENT-PACK-02A
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-01
+    branch: codex/riasec-full-content-pack-02a-backend-dimension-copy
+    base: main
+    title: "feat(riasec): import six dimension deep copy with medium reading"
+    name: "Backend six dimension deep copy import with medium reading support"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    scope:
+      - Import owner-approved RIASEC zh-CN six dimension deep copy into backend-authoritative content assets.
+      - Add medium_score_reading to the dimension deep copy backend schema and public projection content envelope.
+      - Preserve snapshot-bound report propagation through riasec_public_projection_v2.deep_content_slots_v1.
+      - Add focused registry, projection, and report flow tests.
+    allowed_paths:
+      - backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change RIASEC scoring math, Holland Code generation, or question/content pack semantics.
+      - Touch fap-web, frontend UI, frontend local interpretation copy, or renderer fallback behavior.
+      - Add pair blend, 140Q narrative, career matching, occupation ranking, job-fit, success prediction, hiring suitability, O*NET/SOC/source URL claims, feedback runtime, analytics runtime, or AI report generation.
+      - Claim 140Q is more accurate or compare 60Q/140Q raw score deltas.
+    validation:
+      - cd backend && php artisan test --filter=RiasecDeepCopySlotRegistryTest --no-ansi
+      - cd backend && php artisan test --filter=RiasecAssessmentFlowTest --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecContentRegistrySlotContract.php app/Services/Riasec/RiasecPublicProjectionService.php tests/Unit/Services/Riasec/RiasecDeepCopySlotRegistryTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - python3 -m json.tool backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true

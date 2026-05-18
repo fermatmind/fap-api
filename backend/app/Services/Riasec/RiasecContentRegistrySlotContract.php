@@ -425,7 +425,7 @@ final class RiasecContentRegistrySlotContract
      */
     private function allowedReviewStatuses(): array
     {
-        return ['fixture_only', 'draft', 'content_review', 'psychometric_review', 'approved_for_staging', 'deprecated'];
+        return ['fixture_only', 'draft', 'content_review', 'psychometric_review', 'approved_for_staging', 'approved_for_production', 'deprecated'];
     }
 
     /**

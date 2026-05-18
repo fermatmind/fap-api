@@ -491,6 +491,9 @@ final class RiasecAssessmentFlowTest extends TestCase
             $this->assertNotSame('', (string) data_get($slot, 'review_status'));
             $this->assertNotSame('', (string) data_get($slot, 'source_status'));
             $this->assertNotSame([], data_get($slot, 'content'));
+            if ((string) data_get($slot, 'slot_key') === 'dimension_deep_copy') {
+                $this->assertNotSame('', (string) data_get($slot, 'content.medium_score_reading'));
+            }
             $slotIds[] = (string) data_get($slot, 'slot_id');
         }
 
