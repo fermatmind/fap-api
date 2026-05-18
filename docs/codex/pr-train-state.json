@@ -5240,7 +5240,7 @@
       "repo": "fap-api",
       "branch": "fix/career-candidate-aware-audit-policy-1",
       "title": "fix(api): accept candidate-aware runtime states for delta planning",
-      "status": "in_progress",
+      "status": "github_checks_passed_human_review_pending",
       "depends_on": [
         "REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2"
       ],
@@ -10031,12 +10031,13 @@
           "command": "git diff --check && git diff --cached --check"
         },
         "github": {
-          "status": "pending"
+          "status": "pass",
+          "evidence": "GitHub CI checks passed after the scoped BigFive runtime-freeze allowlist fix: hygiene, verify-mbti-legacy, and verify-mbti-v2."
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1458",
+      "commit_sha": "947f7936873a1cf38a20cea0f4a78ac8eabee6cb",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -10171,6 +10172,11 @@
           "at": "2026-05-18T02:28:13Z",
           "status": "github_checks_fix_validated_locally",
           "summary": "GitHub MBTI checks failed because the runtime freeze classifier did not recognize backend/database/migrations/seo_intel paths. Added a narrow migration-isolation allowlist and validated BigFiveResultPageV2CoreBodyPreviewTest, SeoIntel tests, route list, Pint, and diff checks locally."
+        },
+        {
+          "at": "2026-05-18T02:34:40Z",
+          "status": "github_checks_passed_human_review_pending",
+          "summary": "GitHub checks passed for PR #1458 after the scoped runtime-freeze allowlist fix. PR remains unmerged for human review."
         }
       ],
       "next_pr": "SEO-DASH-PROD-01B-STAGE1-RETRY"
