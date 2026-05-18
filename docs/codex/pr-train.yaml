@@ -693,6 +693,56 @@ prs:
       - change_window
     scheduler_activation: false
     next_task: SEO-DASH-PROD-01B
+
+  - id: SEO-DASH-PROD-01C
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-PROD-01B-STAGE1-BLOCKED
+    branch: codex/seo-dash-prod-01c-seo-intel-migration-isolation
+    title: "fix(seo-intel): isolate seo_intel migrations"
+    name: "seo_intel migration isolation"
+    findings:
+      - "SEO-DASH-PROD-01B Stage 1 pretend was blocked because php artisan migrate --database=seo_intel uses the global Laravel migration directory."
+      - "The default migration directory contains unrelated CMS/app migrations that must not run against the seo_intel schema."
+      - "Production seo_intel migration must use a dedicated migration path and explicit seo_intel connection scoping."
+    scope:
+      - Move seo_intel analytics migrations into backend/database/migrations/seo_intel.
+      - Add explicit seo_intel connection scoping to every seo_intel migration.
+      - Update production runbook and generated artifact to require --path=database/migrations/seo_intel and forbid bare php artisan migrate --database=seo_intel.
+      - Add focused SeoIntel tests proving migration path isolation.
+      - Update docs/codex PR train metadata for SEO-DASH-PROD-01C.
+    allowed_paths:
+      - backend/database/migrations/seo_intel/**
+      - backend/database/migrations/*seo_*
+      - backend/docs/seo/production-seo-intel-db-migration-runbook.md
+      - backend/docs/seo/generated/production-seo-intel-db-migration-runbook.v1.json
+      - backend/tests/Feature/SeoIntel/*Migration*Test.php
+      - backend/tests/Feature/SeoIntel/SeoIntelProductionActivationRunbookTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run production migrations, deploy, SSH, edit env, or touch Aliyun/Tencent RDS.
+      - Enable collectors, scheduler jobs, queue workers, Metabase, GSC, Baidu, IndexNow, or production log reads.
+      - Change runtime code, backend behavior, payment, order, report, email, recommendation, scoring, sitemap, or llms behavior.
+      - Modify fap-web runtime or use fap-api/fap-web as production frontend runtime.
+      - Store or expose secrets, emails, order numbers, attempt ids, payment ids, provider event ids, cookies, raw IPs, tokens, or keys.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    production_db_creation: false
+    env_edit_allowed: false
+    scheduler_activation: false
+    next_task: SEO-DASH-PROD-01B-STAGE1-RETRY
   - id: PR-MEDIA-01
     repo: fap-api
     depends_on:

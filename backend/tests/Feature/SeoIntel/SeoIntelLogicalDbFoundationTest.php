@@ -148,7 +148,7 @@ final class SeoIntelLogicalDbFoundationTest extends TestCase
     public function internal_traffic_rules_store_only_masked_or_hashed_patterns(): void
     {
         $source = (string) file_get_contents(base_path(
-            'database/migrations/2026_05_17_000300_create_seo_internal_traffic_rules_table.php'
+            'database/migrations/seo_intel/2026_05_17_000300_create_seo_internal_traffic_rules_table.php'
         ));
 
         $this->assertStringContainsString("char('pattern_hash', 64)", $source);
@@ -207,9 +207,9 @@ final class SeoIntelLogicalDbFoundationTest extends TestCase
     private function seoIntelMigrationSources(): array
     {
         $files = [
-            base_path('database/migrations/2026_05_17_000100_create_seo_urls_table.php'),
-            base_path('database/migrations/2026_05_17_000200_create_seo_url_entities_table.php'),
-            base_path('database/migrations/2026_05_17_000300_create_seo_internal_traffic_rules_table.php'),
+            base_path('database/migrations/seo_intel/2026_05_17_000100_create_seo_urls_table.php'),
+            base_path('database/migrations/seo_intel/2026_05_17_000200_create_seo_url_entities_table.php'),
+            base_path('database/migrations/seo_intel/2026_05_17_000300_create_seo_internal_traffic_rules_table.php'),
         ];
 
         $sources = [];

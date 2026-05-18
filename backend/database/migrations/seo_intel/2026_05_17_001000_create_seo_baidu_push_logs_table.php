@@ -6,18 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    protected $connection = 'seo_intel';
+
     public function up(): void
     {
-        if (Schema::hasTable('seo_indexnow_submissions')) {
+        if (Schema::hasTable('seo_baidu_push_logs')) {
             return;
         }
 
-        Schema::create('seo_indexnow_submissions', function (Blueprint $table): void {
+        Schema::create('seo_baidu_push_logs', function (Blueprint $table): void {
             $table->id();
             $table->char('canonical_url_hash', 64);
             $table->text('canonical_url')->nullable();
-            $table->string('source_engine', 64)->default('bing_indexnow');
-            $table->string('submission_type', 64)->default('url_updated');
+            $table->string('locale', 16)->nullable();
+            $table->string('source_engine', 64)->default('baidu');
+            $table->string('submission_type', 64)->default('push');
             $table->string('submission_status', 64)->default('dry_run');
             $table->integer('response_code')->nullable();
             $table->char('response_body_hash', 64)->nullable();
@@ -27,10 +30,10 @@ return new class extends Migration
             $table->json('metadata_json')->nullable();
             $table->timestamps();
 
-            $table->index('canonical_url_hash', 'seo_indexnow_submissions_url_hash_idx');
-            $table->index('source_engine', 'seo_indexnow_submissions_source_engine_idx');
-            $table->index('submission_status', 'seo_indexnow_submissions_status_idx');
-            $table->index('submitted_at', 'seo_indexnow_submissions_submitted_at_idx');
+            $table->index('canonical_url_hash', 'seo_baidu_push_logs_url_hash_idx');
+            $table->index('source_engine', 'seo_baidu_push_logs_source_engine_idx');
+            $table->index('submission_status', 'seo_baidu_push_logs_status_idx');
+            $table->index('submitted_at', 'seo_baidu_push_logs_submitted_at_idx');
         });
     }
 

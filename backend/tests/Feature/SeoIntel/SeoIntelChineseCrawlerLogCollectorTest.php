@@ -32,7 +32,7 @@ final class SeoIntelChineseCrawlerLogCollectorTest extends TestCase
     #[Test]
     public function crawler_log_daily_migration_does_not_include_forbidden_columns(): void
     {
-        $paths = glob(base_path('database/migrations/*seo_crawler_logs_daily*'));
+        $paths = glob(base_path('database/migrations/seo_intel/*seo_crawler_logs_daily*'));
 
         $this->assertCount(1, $paths);
 

@@ -4669,7 +4669,7 @@
       "branch": "codex/repair-80-candidate-runtime-pool-1",
       "title": "feat(api): add career 80 runtime candidate pool planner",
       "name": "Add read-only Career 80 runtime candidate pool planner",
-      "status": "in_progress",
+      "status": "committed",
       "depends_on": [
         "80-READINESS-3"
       ],
@@ -5098,7 +5098,7 @@
       "branch": "fix/career-runtime-candidate-artifact-refresh-2",
       "title": "fix(api): add candidate-aware runtime artifact refresh",
       "name": "Add candidate-aware runtime artifact refresh after verified candidate prep apply",
-      "status": "in_progress",
+      "status": "pr_opened_github_checks_pending",
       "depends_on": [
         "RUNTIME-CANDIDATE-PREP-APPLY-1",
         "REPAIR-RUNTIME-ARTIFACT-REFRESH-1"
@@ -5128,7 +5128,7 @@
         "no deploy",
         "no fap-web change"
       ],
-      "commit_sha": null,
+      "commit_sha": "45c51de1c2181987339f671e1d6a21abc05373aa",
       "pr_url": null,
       "checks": {
         "authorization": {
@@ -5240,7 +5240,7 @@
       "repo": "fap-api",
       "branch": "fix/career-candidate-aware-audit-policy-1",
       "title": "fix(api): accept candidate-aware runtime states for delta planning",
-      "status": "in_progress",
+      "status": "github_checks_passed_human_review_pending",
       "depends_on": [
         "REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2"
       ],
@@ -8738,8 +8738,8 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1458",
+      "commit_sha": "4be636472402e50b5fb6124882fb696ed374b4e7",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -10031,12 +10031,13 @@
           "command": "git diff --check && git diff --cached --check"
         },
         "github": {
-          "status": "pending"
+          "status": "pass",
+          "evidence": "GitHub CI checks passed after the scoped BigFive runtime-freeze allowlist fix: hygiene, verify-mbti-legacy, and verify-mbti-v2."
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1458",
+      "commit_sha": "947f7936873a1cf38a20cea0f4a78ac8eabee6cb",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -10064,6 +10065,121 @@
         }
       ],
       "next_pr": "SEO-DASH-PROD-01B"
+    },
+    "SEO-DASH-PROD-01C": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-prod-01c-seo-intel-migration-isolation",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-PROD-01B-STAGE1-BLOCKED"
+      ],
+      "status": "in_progress",
+      "train_scope": "seo_intel_migration_isolation",
+      "risk_level": "medium_migration_scope_no_production_execution",
+      "title": "fix(seo-intel): isolate seo_intel migrations",
+      "name": "seo_intel migration isolation",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-PROD-01C with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-PROD-01B Stage 1 pretend migration was blocked because bare php artisan migrate --database=seo_intel would use the global migration directory."
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "production_db_creation": {
+          "status": "false"
+        },
+        "env_edit_allowed": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to seo_intel migration relocation, production migration runbook docs/generated artifact, focused SeoIntel tests, and docs/codex PR train metadata. No runtime app code, env, deploy, collector activation, scheduler activation, cloud files, payment/order/report/email/recommendation/scoring, sitemap, llms, or fap-web files changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "94 tests passed with 1748 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3369 files."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "php -r json_decode(...)",
+          "evidence": "Generated runbook artifact and docs/codex PR train state JSON decoded successfully."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "optional_local_pretend": {
+          "status": "not_run",
+          "evidence": "Skipped because local execution lacks a safe seo_intel test connection; no production or cloud DB command was run."
+        },
+        "bigfive_runtime_freeze": {
+          "status": "pass",
+          "command": "php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest",
+          "evidence": "Added narrow allowlist for the dedicated seo_intel migration isolation directory; 95 tests passed with 442 assertions."
+        },
+        "github": {
+          "status": "pending"
+        }
+      },
+      "failure_reason": null,
+      "pr_url": null,
+      "commit_sha": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-18T02:04:59Z",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-PROD-01C and started migration isolation from origin/main. No production execution performed."
+        },
+        {
+          "at": "2026-05-18T02:15:34Z",
+          "status": "local_validation_passed",
+          "summary": "Moved seo_intel analytics migrations into database/migrations/seo_intel, added explicit seo_intel connection scoping, updated runbook/artifact commands, and passed SeoIntel tests, route list, Pint, JSON validation, and diff checks."
+        },
+        {
+          "at": "2026-05-18T02:15:34Z",
+          "status": "committed",
+          "summary": "Committed SEO-DASH-PROD-01C local changes at 45c51de1c2181987339f671e1d6a21abc05373aa."
+        },
+        {
+          "at": "2026-05-18T02:21:53Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Pushed branch codex/seo-dash-prod-01c-seo-intel-migration-isolation and opened https://github.com/fermatmind/fap-api/pull/1458. GitHub checks pending; no production execution performed."
+        },
+        {
+          "at": "2026-05-18T02:28:13Z",
+          "status": "github_checks_fix_validated_locally",
+          "summary": "GitHub MBTI checks failed because the runtime freeze classifier did not recognize backend/database/migrations/seo_intel paths. Added a narrow migration-isolation allowlist and validated BigFiveResultPageV2CoreBodyPreviewTest, SeoIntel tests, route list, Pint, and diff checks locally."
+        },
+        {
+          "at": "2026-05-18T02:34:40Z",
+          "status": "github_checks_passed_human_review_pending",
+          "summary": "GitHub checks passed for PR #1458 after the scoped runtime-freeze allowlist fix. PR remains unmerged for human review."
+        }
+      ],
+      "next_pr": "SEO-DASH-PROD-01B-STAGE1-RETRY"
     },
     "PUBLISH-API-MEDIA-ORIGIN-READYNESS": {
       "repo": "fap-api",

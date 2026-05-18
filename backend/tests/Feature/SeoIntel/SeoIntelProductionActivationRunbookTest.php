@@ -23,7 +23,7 @@ final class SeoIntelProductionActivationRunbookTest extends TestCase
         $this->assertFalse((bool) ($artifact['deployment_executed_in_this_pr'] ?? true));
         $this->assertFalse((bool) ($artifact['collectors_enabled_in_this_pr'] ?? true));
         $this->assertFalse((bool) ($artifact['scheduler_enabled_in_this_pr'] ?? true));
-        $this->assertSame('SEO-DASH-PROD-01B', $artifact['next_task'] ?? null);
+        $this->assertSame('SEO-DASH-PROD-01B-STAGE1-RETRY', $artifact['next_task'] ?? null);
     }
 
     #[Test]
@@ -62,11 +62,26 @@ final class SeoIntelProductionActivationRunbookTest extends TestCase
     #[Test]
     public function command_templates_are_placeholders_without_secrets(): void
     {
-        $commands = $this->artifact()['command_templates'] ?? [];
+        $artifact = $this->artifact();
+        $commands = $artifact['command_templates'] ?? [];
 
-        $this->assertContains('php artisan migrate --database=seo_intel --pretend --no-ansi', $commands);
-        $this->assertContains('php artisan migrate --database=seo_intel --no-ansi', $commands);
-        $this->assertContains('php artisan migrate:status --database=seo_intel --no-ansi', $commands);
+        $this->assertSame('database/migrations/seo_intel', $artifact['migration_path'] ?? null);
+        $this->assertFalse((bool) ($artifact['default_migration_path_allowed_for_seo_intel'] ?? true));
+        $this->assertFalse((bool) ($artifact['bare_database_migration_command_allowed'] ?? true));
+        $this->assertContains(
+            'php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --pretend --no-ansi --force',
+            $commands
+        );
+        $this->assertContains(
+            'php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --no-ansi --force',
+            $commands
+        );
+        $this->assertContains(
+            'php artisan migrate:status --database=seo_intel --path=database/migrations/seo_intel --no-ansi',
+            $commands
+        );
+        $this->assertNotContains('php artisan migrate --database=seo_intel --pretend --no-ansi', $commands);
+        $this->assertNotContains('php artisan migrate --database=seo_intel --no-ansi', $commands);
 
         $encoded = strtolower(json_encode($commands, JSON_THROW_ON_ERROR));
 
@@ -117,7 +132,10 @@ final class SeoIntelProductionActivationRunbookTest extends TestCase
             'backup is confirmed',
             'restore procedure is known',
             'forward-fix',
-            'seo-dash-prod-01b',
+            '--path=database/migrations/seo_intel',
+            'never run',
+            'default business migrations must not run against seo_intel',
+            'seo-dash-prod-01b-stage1-retry',
         ] as $required) {
             $this->assertStringContainsString($required, $runbook);
         }

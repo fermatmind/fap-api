@@ -31,9 +31,9 @@ final class SeoIntelBaiduIndexNowCollectorsTest extends TestCase
     public function search_channel_migrations_do_not_include_forbidden_columns(): void
     {
         $paths = [
-            ...glob(base_path('database/migrations/*seo_baidu_push_logs*')),
-            ...glob(base_path('database/migrations/*seo_baidu_landing_daily*')),
-            ...glob(base_path('database/migrations/*seo_indexnow_submissions*')),
+            ...glob(base_path('database/migrations/seo_intel/*seo_baidu_push_logs*')),
+            ...glob(base_path('database/migrations/seo_intel/*seo_baidu_landing_daily*')),
+            ...glob(base_path('database/migrations/seo_intel/*seo_indexnow_submissions*')),
         ];
 
         $this->assertCount(3, $paths);
