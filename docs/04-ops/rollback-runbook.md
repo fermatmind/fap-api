@@ -121,7 +121,7 @@ php artisan migrate --force
 php artisan migrate:status --no-ansi
 ```
 
-## 5) 回滚后 Smoke（必须包含 v0.3 boot 与 /healthz）
+## 5) 回滚后 Smoke（必须包含 v0.3 boot 与 allowlisted/internal healthz）
 
 ```bash
 set -euo pipefail
@@ -129,8 +129,17 @@ BASE_URL="https://<domain>"
 
 curl -fsS "${BASE_URL}/api/v0.3/boot" | grep -q '"ok":true' && echo "v0.3 boot OK"
 
-curl -fsS "${BASE_URL}/healthz" | grep -q '"ok":true' && echo "healthz OK" \
-  || curl -fsS "${BASE_URL}/api/healthz" | grep -q '"ok":true' && echo "api/healthz OK"
+# Healthz is allowlist-only in production.
+# Do not require arbitrary public-origin /healthz or /api/healthz to return 200.
+# Success criteria:
+# 1) an allowlisted probe to /api/healthz or /healthz returns .ok==true, or
+# 2) an internal/local verification path confirms healthz.
+
+curl -fsS "${BASE_URL}/api/healthz" | grep -q '"ok":true' && echo "api/healthz OK (allowlisted)" \
+  || curl -fsS "${BASE_URL}/healthz" | grep -q '"ok":true' && echo "healthz OK (allowlisted)"
+
+cd /var/www/fap-api/current/backend
+php artisan ops:healthz-snapshot
 ```
 
 ## 6) 常见故障排障

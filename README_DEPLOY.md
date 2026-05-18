@@ -370,6 +370,10 @@ bash backend/scripts/ci_verify_mbti.sh
 ```
 
 通过标准：
+- healthz canonical probe path is `/api/healthz`
+- `/healthz` is a public alias, but production healthz remains allowlist-only
+- do not require arbitrary public-origin `/healthz` or `/api/healthz` to return `200`
+- deploy smoke may use localhost or another internal/allowlisted source for healthz verification
 - 路由与迁移命令成功。
 - 健康检查接口可达，且 `/api/v0.3/auth/guest` 合约通过。
 - MBTI CI 验收链路通过。

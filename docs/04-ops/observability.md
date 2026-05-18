@@ -1,7 +1,16 @@
 # PR8 Observability & Alerts
 
 ## Healthz Endpoint
-- Path: `GET /api/v0.3/healthz`
+- Canonical probe path: `GET /api/healthz`
+- Public alias: `GET /healthz`
+- Access policy:
+  - production healthz is allowlist-only
+  - requests from non-allowlisted public IPs may return `404` by design
+  - do not treat arbitrary public `curl` returning `404` as a deploy failure by itself
+- Verification modes:
+  - allowlisted external probe to `/api/healthz` or `/healthz`
+  - internal/local probe from the app host
+  - `php artisan ops:healthz-snapshot` for controlled runtime verification
 - 期望：
   - `.ok == true`
   - `.deps.db.ok == true`
@@ -25,7 +34,7 @@
 - Healthz `.deps.cache_dirs.ok==false`：P2
 
 ### Latency (API)
-- `/api/v0.3/healthz` p95 > 300ms 持续 5 分钟：P2
+- `/api/healthz` p95 > 300ms 持续 5 分钟：P2
 - `/api/v0.3/scales/MBTI/questions` p95 > 800ms 持续 5 分钟：P2
 
 ### Errors
