@@ -10783,7 +10783,7 @@
   },
   "SEO-DASH-PROD-03D-FIX": {
     "status": "pr_opened_github_checks_pending",
-    "commit_sha": "2fb00395eba17b5ef364224a447b81d5cd40b1c4",
+    "commit_sha": "831997f2a0d60c2566502ab47d479a1bb9ea09fb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1466",
     "branch": "codex/seo-dash-prod-03d-fix-bounded-drift-issue-canary",
     "checks": {
@@ -10831,6 +10831,11 @@
         "at": "2026-05-18T16:02:02Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Pushed branch codex/seo-dash-prod-03d-fix-bounded-drift-issue-canary and opened https://github.com/fermatmind/fap-api/pull/1466. GitHub checks pending. No production write or runtime activation performed."
+      },
+      {
+        "at": "2026-05-19T00:00:00Z",
+        "status": "ci_fix_pushed",
+        "summary": "Narrowly updated Big Five runtime-freeze allowlist for the two new SeoIntel drift issue canary service files after verify-mbti checks flagged them as unrelated runtime drift. Targeted freeze test, SeoIntel tests, dry-run commands, route list, scoped Pint, JSON/YAML validation, and diff checks passed."
       }
     ],
     "next_pr": "SEO-DASH-PROD-03D-PREFLIGHT-R2"
