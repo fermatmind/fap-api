@@ -13,7 +13,11 @@ final class SeoIntelCollectCommand extends Command
         {--collector=noop : Collector name to run}
         {--dry-run : Force dry-run mode}
         {--no-write : Prevent writes even when future collectors are enabled}
-        {--json : Output safe machine-readable JSON}';
+        {--json : Output safe machine-readable JSON}
+        {--limit= : Bound collectors that support deterministic canaries}
+        {--locale= : Filter collectors that support locale scoping}
+        {--page-type= : Filter collectors that support page entity type scoping}
+        {--canary : Use a deterministic bounded canary subset when supported}';
 
     protected $description = 'Run a disabled-by-default Search Intelligence collector skeleton.';
 
@@ -25,6 +29,10 @@ final class SeoIntelCollectCommand extends Command
         $result = $manager->collect($collector, [
             'dry_run' => $dryRun,
             'no_write' => (bool) $this->option('no-write'),
+            'limit' => $this->option('limit'),
+            'locale' => $this->option('locale'),
+            'page_type' => $this->option('page-type'),
+            'canary' => (bool) $this->option('canary'),
         ]);
 
         if ((bool) $this->option('json')) {

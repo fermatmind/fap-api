@@ -1,0 +1,91 @@
+{
+  "version": "url_truth_inventory.bounded_canary.v1",
+  "source_documents": [
+    "SEO-DASH-PROD-03A",
+    "SEO-DASH-PROD-03B-PREFLIGHT",
+    "SEO-DASH-PROD-03B no-op canary report",
+    "BACKEND-RUNTIME-02D"
+  ],
+  "collector": "url_truth_inventory",
+  "bounded_canary_supported": true,
+  "write_requires_bound": true,
+  "max_limit": 50,
+  "canary_default_limit": 10,
+  "approved_source_authorities": [
+    "backend_sitemap_source",
+    "cms_article",
+    "cms_topic",
+    "cms_personality",
+    "cms_career_job",
+    "cms_career_recommendation",
+    "scale_catalog",
+    "backend_public_surface"
+  ],
+  "forbidden_source_authorities": [
+    "node2_local_laravel",
+    "node2_local_db",
+    "frontend_fallback",
+    "static_llms_fallback",
+    "static_sitemap_fallback",
+    "ga4",
+    "baidu_tongji",
+    "synthetic_production_fixture"
+  ],
+  "allowed_page_entity_types": [
+    "home",
+    "test_hub",
+    "test_detail",
+    "article",
+    "topic",
+    "personality",
+    "career_job",
+    "career_recommendation",
+    "methodology",
+    "dataset",
+    "report_preview",
+    "landing_page"
+  ],
+  "forbidden_page_entity_types": [
+    "take",
+    "result",
+    "order",
+    "share",
+    "pay",
+    "checkout",
+    "report_private"
+  ],
+  "target_tables": [
+    "seo_urls",
+    "seo_url_entities"
+  ],
+  "pii_forbidden": true,
+  "forbidden_pii_fields": [
+    "email",
+    "raw_email",
+    "order_no",
+    "raw_order_no",
+    "attempt_id",
+    "raw_attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "cookie",
+    "raw_cookie",
+    "raw_ip",
+    "raw_user_agent",
+    "raw_payload",
+    "payment_payload",
+    "provider_payload",
+    "token",
+    "api_key",
+    "secret"
+  ],
+  "external_api_calls_allowed": false,
+  "node2_local_source_allowed": false,
+  "frontend_fallback_source_allowed": false,
+  "synthetic_production_fixture_allowed": false,
+  "scheduler_enabled_in_this_pr": false,
+  "metabase_deployed_in_this_pr": false,
+  "live_external_api_enabled_in_this_pr": false,
+  "production_write_executed_in_this_pr": false,
+  "next_task": "SEO-DASH-PROD-03B-PREFLIGHT-R2"
+}

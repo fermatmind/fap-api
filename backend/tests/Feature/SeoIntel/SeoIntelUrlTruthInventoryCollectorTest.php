@@ -29,10 +29,34 @@ final class SeoIntelUrlTruthInventoryCollectorTest extends TestCase
         $this->assertFalse($result->writesAttempted);
         $this->assertFalse($result->writesCommitted);
         $this->assertFalse($result->externalCallsAttempted);
-        $this->assertSame(0, $result->itemsSeen);
+        $this->assertGreaterThan(0, $result->itemsSeen);
+        $this->assertGreaterThan(0, $result->metadata['planned_url_count'] ?? 0);
+        $this->assertSame(['seo_urls', 'seo_url_entities'], $result->metadata['target_tables'] ?? null);
         $this->assertFalse((bool) ($result->metadata['fetches_public_html'] ?? true));
         $this->assertFalse((bool) ($result->metadata['performs_drift_detection'] ?? true));
         $this->assertFalse((bool) ($result->metadata['node2_local_laravel_data_source'] ?? true));
+        $this->assertFalse((bool) ($result->metadata['node2_local_db_data_source'] ?? true));
+    }
+
+    #[Test]
+    public function write_mode_for_url_truth_inventory_requires_canary_or_limit(): void
+    {
+        config([
+            'seo_intel.enabled' => true,
+            'seo_intel.collectors_enabled' => true,
+            'seo_intel.write_enabled' => true,
+            'seo_intel.dry_run_default' => false,
+        ]);
+
+        $result = (new SeoIntelCollectorManager)->collect('url_truth_inventory', [
+            'dry_run' => false,
+            'no_write' => false,
+        ]);
+
+        $this->assertSame('blocked', $result->status);
+        $this->assertContains('url_truth_inventory_write_requires_bound', $result->issues);
+        $this->assertFalse($result->writesAttempted);
+        $this->assertFalse($result->writesCommitted);
     }
 
     #[Test]
@@ -79,6 +103,20 @@ final class SeoIntelUrlTruthInventoryCollectorTest extends TestCase
                 sourceAuthority: 'backend_public_surface',
             ),
             new UrlTruthInventoryRecord(
+                canonicalUrl: 'https://fermatmind.com/zh/public/private-order',
+                locale: 'zh-CN',
+                pageEntityType: 'order',
+                entityIdOrSlug: 'forbidden-order-type',
+                sourceAuthority: 'backend_public_surface',
+            ),
+            new UrlTruthInventoryRecord(
+                canonicalUrl: 'https://fermatmind.com/zh/checkout/private',
+                locale: 'zh-CN',
+                pageEntityType: 'landing_page',
+                entityIdOrSlug: 'private-checkout',
+                sourceAuthority: 'backend_public_surface',
+            ),
+            new UrlTruthInventoryRecord(
                 canonicalUrl: 'https://fermatmind.com/zh/articles/local',
                 locale: 'zh-CN',
                 pageEntityType: 'article',
@@ -98,10 +136,10 @@ final class SeoIntelUrlTruthInventoryCollectorTest extends TestCase
         $result = $collector->collect(['dry_run' => true, 'writes_allowed' => false]);
 
         $this->assertSame('success', $result->status);
-        $this->assertSame(5, $result->itemsSeen);
+        $this->assertSame(7, $result->itemsSeen);
         $this->assertSame(1, $result->metadata['planned_url_count'] ?? null);
         $this->assertSame(1, $result->metadata['planned_entity_count'] ?? null);
-        $this->assertSame(1, $result->metadata['skipped_private_flows'] ?? null);
+        $this->assertSame(3, $result->metadata['skipped_private_flows'] ?? null);
         $this->assertSame(1, $result->metadata['skipped_forbidden_entity_types'] ?? null);
         $this->assertSame(1, $result->metadata['skipped_forbidden_source_authorities'] ?? null);
         $this->assertContains('skipped_private_flow', $result->issues);
@@ -111,10 +149,11 @@ final class SeoIntelUrlTruthInventoryCollectorTest extends TestCase
         $this->assertFalse($result->externalCallsAttempted);
         $this->assertFalse($result->writesAttempted);
         $this->assertNotEmpty($result->metadata['sample_hashes'] ?? []);
+        $this->assertSame(['cms_article' => 1], $result->metadata['source_authority_breakdown'] ?? null);
     }
 
     #[Test]
-    public function write_path_can_commit_to_test_seo_intel_connection_only_when_allowed(): void
+    public function write_path_can_commit_to_test_seo_intel_connection_only_when_allowed_and_is_idempotent(): void
     {
         $this->prepareSeoIntelSqliteConnection();
 
@@ -130,13 +169,70 @@ final class SeoIntelUrlTruthInventoryCollectorTest extends TestCase
             ),
         ]));
 
-        $result = $collector->collect(['dry_run' => false, 'writes_allowed' => true]);
+        $result = $collector->collect(['dry_run' => false, 'writes_allowed' => true, 'canary' => true]);
+        $second = $collector->collect(['dry_run' => false, 'writes_allowed' => true, 'limit' => 1]);
 
         $this->assertSame('success', $result->status);
         $this->assertTrue($result->writesAttempted);
         $this->assertTrue($result->writesCommitted);
+        $this->assertSame('success', $second->status);
+        $this->assertTrue($second->writesCommitted);
         $this->assertSame(1, DB::connection('seo_intel')->table('seo_urls')->count());
         $this->assertSame(1, DB::connection('seo_intel')->table('seo_url_entities')->count());
+    }
+
+    #[Test]
+    public function command_accepts_canary_and_limit_and_caps_large_limits(): void
+    {
+        config(['seo_intel.url_truth_inventory.canary_max_limit' => 5]);
+
+        $canaryExitCode = Artisan::call('seo-intel:collect', [
+            '--collector' => 'url_truth_inventory',
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--canary' => true,
+        ]);
+        $canaryOutput = json_decode(trim(Artisan::output()), true);
+
+        $limitExitCode = Artisan::call('seo-intel:collect', [
+            '--collector' => 'url_truth_inventory',
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--limit' => 500,
+        ]);
+        $limitOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $canaryExitCode);
+        $this->assertSame(0, $limitExitCode);
+        $this->assertTrue((bool) data_get($canaryOutput, 'metadata.canary'));
+        $this->assertGreaterThan(0, (int) data_get($canaryOutput, 'metadata.planned_url_count'));
+        $this->assertSame(5, data_get($limitOutput, 'metadata.limit'));
+        $this->assertLessThanOrEqual(5, (int) data_get($limitOutput, 'metadata.planned_url_count'));
+        $this->assertSame(['seo_urls', 'seo_url_entities'], data_get($canaryOutput, 'metadata.target_tables'));
+        $this->assertNotEmpty(data_get($canaryOutput, 'metadata.source_authority_breakdown'));
+    }
+
+    #[Test]
+    public function command_filters_locale_and_page_type_for_bounded_canary(): void
+    {
+        $exitCode = Artisan::call('seo-intel:collect', [
+            '--collector' => 'url_truth_inventory',
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--canary' => true,
+            '--locale' => 'en',
+            '--page-type' => 'test_detail',
+        ]);
+
+        $decoded = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame('en', data_get($decoded, 'metadata.locale_filter'));
+        $this->assertSame('test_detail', data_get($decoded, 'metadata.page_type_filter'));
+        $this->assertGreaterThan(0, (int) data_get($decoded, 'metadata.planned_url_count'));
     }
 
     #[Test]
@@ -159,10 +255,32 @@ final class SeoIntelUrlTruthInventoryCollectorTest extends TestCase
         $this->assertFalse((bool) ($decoded['writes_attempted'] ?? true));
         $this->assertFalse((bool) ($decoded['writes_committed'] ?? true));
         $this->assertFalse((bool) ($decoded['external_calls_attempted'] ?? true));
+        $this->assertFalse((bool) data_get($decoded, 'metadata.source.external_api_calls', true));
+        $this->assertFalse((bool) data_get($decoded, 'metadata.source.node2_local_laravel_data_source', true));
+        $this->assertFalse((bool) data_get($decoded, 'metadata.source.frontend_fallback_data_source', true));
 
         foreach (['email', 'order_no', 'attempt_id', 'payment_id', 'cookie', 'token'] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $output);
         }
+    }
+
+    #[Test]
+    public function bounded_canary_generated_artifact_locks_next_preflight_task(): void
+    {
+        $artifact = $this->boundedCanaryArtifact();
+
+        $this->assertSame('url_truth_inventory.bounded_canary.v1', $artifact['version'] ?? null);
+        $this->assertTrue((bool) ($artifact['bounded_canary_supported'] ?? false));
+        $this->assertTrue((bool) ($artifact['write_requires_bound'] ?? false));
+        $this->assertSame('url_truth_inventory', $artifact['collector'] ?? null);
+        $this->assertSame('SEO-DASH-PROD-03B-PREFLIGHT-R2', $artifact['next_task'] ?? null);
+        $this->assertFalse((bool) ($artifact['external_api_calls_allowed'] ?? true));
+        $this->assertFalse((bool) ($artifact['node2_local_source_allowed'] ?? true));
+        $this->assertFalse((bool) ($artifact['frontend_fallback_source_allowed'] ?? true));
+        $this->assertFalse((bool) ($artifact['synthetic_production_fixture_allowed'] ?? true));
+        $this->assertContains('node2_local_db', $artifact['forbidden_source_authorities'] ?? []);
+        $this->assertContains('checkout', $artifact['forbidden_page_entity_types'] ?? []);
+        $this->assertSame(['seo_urls', 'seo_url_entities'], $artifact['target_tables'] ?? null);
     }
 
     #[Test]
@@ -280,6 +398,22 @@ final class SeoIntelUrlTruthInventoryCollectorTest extends TestCase
     private function artifact(): array
     {
         $path = base_path('docs/seo/generated/seo-intel-url-truth-inventory.v1.json');
+
+        $this->assertFileExists($path);
+
+        $decoded = json_decode((string) file_get_contents($path), true);
+
+        $this->assertIsArray($decoded);
+
+        return $decoded;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function boundedCanaryArtifact(): array
+    {
+        $path = base_path('docs/seo/generated/url-truth-inventory-bounded-canary.v1.json');
 
         $this->assertFileExists($path);
 

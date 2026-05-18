@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-18T12:01:20Z",
+  "updated_at": "2026-05-18T12:45:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -3241,7 +3241,7 @@
       "branch": "fix/career-80-candidate-readiness-selector-1",
       "title": "fix(api): add career 80 candidate readiness selector",
       "name": "Add career 80 candidate readiness selector",
-      "status": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
       "depends_on": [
         "REPAIR-ENTITY-1",
         "SCAN-3"
@@ -5430,7 +5430,7 @@
       "repo": "fap-api",
       "branch": "fix/career-80-live-surface-authority-1",
       "title": "fix(api): align career 80 live surface with runtime authority",
-      "status": "in_progress",
+      "status": "local_validation_passed",
       "depends_on": [
         "REPAIR-POST-ROLLOUT-RUNTIME-PROJECTION-AUTHORITY-1"
       ],
@@ -10666,6 +10666,119 @@
         }
       ],
       "next_pr": "SEO-DASH-PROD-03B"
+    },
+    "SEO-DASH-PROD-03B-FIX": {
+      "repo": "fap-api",
+      "branch": "codex/seo-dash-prod-03b-fix-url-truth-bounded-canary",
+      "base": "main",
+      "depends_on": [
+        "SEO-DASH-PROD-03B-PREFLIGHT",
+        "SEO-DASH-PROD-03B no-op canary report"
+      ],
+      "status": "in_progress",
+      "train_scope": "seo_intel_controlled_write_canary_readiness",
+      "risk_level": "medium_runtime_guard_no_production_execution",
+      "title": "feat(seo-intel): add bounded URL truth inventory canary",
+      "name": "Bounded URL truth inventory canary",
+      "checks": {
+        "authorization": {
+          "status": "pass",
+          "evidence": "User explicitly provided SEO-DASH-PROD-03B-FIX with branch, title, allowed files, validation commands, and permission to update fap-api PR train metadata."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-PROD-03B-PREFLIGHT identified safe url_truth_inventory write boundaries but blocked nonzero canary readiness; the following human-approved no-op canary wrote zero rows and required a bounded nonzero source fix."
+        },
+        "production_write_execution": {
+          "status": "false"
+        },
+        "scheduler_activation": {
+          "status": "false"
+        },
+        "external_api_live_activation": {
+          "status": "false"
+        },
+        "metabase_deployment": {
+          "status": "false"
+        },
+        "production_deploy_allowed": {
+          "status": "false"
+        },
+        "production_migration_execution_allowed": {
+          "status": "false"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to allowed SeoIntel config/services/command/tests/docs/generated artifact and docs/codex PR train metadata. No production env, deploy, migration, scheduler, Metabase, external API, production crawler log, fap-web runtime, sitemap/llms behavior, payment/order/report/email/recommendation/scoring, Tencent, or Node2 files changed."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=SeoIntel",
+          "evidence": "105 tests passed with 1845 assertions."
+        },
+        "url_truth_canary_dry_run": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --canary",
+          "evidence": "Command exited 0 with candidate_count=7, planned_url_count=7, writes_committed=false, external_calls_attempted=false."
+        },
+        "url_truth_limit_dry_run": {
+          "status": "pass",
+          "command": "php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --limit=5",
+          "evidence": "Command exited 0 with candidate_count=7, planned_url_count=5, writes_committed=false, external_calls_attempted=false."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Full Pint check passed across 3370 files."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/url-truth-inventory-bounded-canary.v1.json >/dev/null",
+          "evidence": "Generated bounded canary artifact decoded successfully."
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 - <<'PY' ... yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())",
+          "evidence": "PR train manifest decoded successfully."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "github": {
+          "status": "pending"
+        }
+      },
+      "failure_reason": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1464",
+      "commit_sha": "47cf25fc290ecb661ad1459e3e4c0f571a776c1d",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-18T12:45:00Z",
+          "status": "in_progress",
+          "summary": "Registered authorized SEO-DASH-PROD-03B-FIX and started bounded URL truth inventory canary implementation. No production write, scheduler, deploy, Metabase, external API, production crawler log read, env edit, SSH, or migration performed."
+        },
+        {
+          "at": "2026-05-18T13:05:00Z",
+          "status": "local_validation_passed",
+          "summary": "Added bounded url_truth_inventory canary options, backend authority candidate source, bound-required write guard, private-flow/PII/source safeguards, docs, generated artifact, and tests. SeoIntel tests, dry-run canary/limit commands, route list, Pint, JSON/YAML validation, and diff checks passed. No production write or runtime activation performed."
+        },
+        {
+          "at": "2026-05-18T13:08:00Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Pushed branch codex/seo-dash-prod-03b-fix-url-truth-bounded-canary and opened https://github.com/fermatmind/fap-api/pull/1464. GitHub checks pending. No production write or runtime activation performed."
+        }
+      ],
+      "next_pr": "SEO-DASH-PROD-03B-PREFLIGHT-R2"
     }
   },
   "SEO-DASH-04B": {
