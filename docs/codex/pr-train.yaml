@@ -5403,3 +5403,58 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+  - id: SEO-DASH-PROD-03B-FIX
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-PROD-03B-PREFLIGHT
+      - SEO-DASH-PROD-03B no-op canary report
+    branch: codex/seo-dash-prod-03b-fix-url-truth-bounded-canary
+    base: main
+    title: "feat(seo-intel): add bounded URL truth inventory canary"
+    name: "Bounded URL truth inventory canary"
+    train_scope: seo_intel_controlled_write_canary_readiness
+    risk_level: medium_runtime_guard_no_production_execution
+    scope:
+      - Add bounded url_truth_inventory options for canary, limit, locale, and page type.
+      - Add approved backend authority candidate source support for deterministic nonzero dry-run canaries.
+      - Require bounded write mode for url_truth_inventory and keep writes disabled by default.
+      - Add private-flow, source-authority, PII, target-table, docs, generated artifact, and tests.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/app/Services/SeoIntel/**
+      - backend/app/Console/Commands/SeoIntelCollectCommand.php
+      - backend/tests/**/SeoIntel*Test.php
+      - backend/docs/seo/url-truth-inventory-bounded-canary.md
+      - backend/docs/seo/generated/url-truth-inventory-bounded-canary.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run production collector writes.
+      - Enable scheduler, deploy fap-api, deploy Metabase, or edit production env.
+      - Connect live GSC, Baidu, IndexNow, 360, Sogou, or Shenma APIs.
+      - Submit URLs to search engines or read production crawler logs.
+      - Touch Tencent rds-fap-prod, Node2 local DB, migrations, payment/order/report/email/recommendation/scoring behavior, fap-web runtime, sitemap, or llms behavior.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --canary
+      - cd backend && php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --limit=5
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/url-truth-inventory-bounded-canary.v1.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    next_task: SEO-DASH-PROD-03B-PREFLIGHT-R2

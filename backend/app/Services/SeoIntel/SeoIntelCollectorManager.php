@@ -76,9 +76,7 @@ final class SeoIntelCollectorManager
             return $this->blocked($collectorName, $dryRun, 'collectors_disabled');
         }
 
-        if (! $this->writesAllowed($dryRun, (bool) ($options['no_write'] ?? false))) {
-            $options['writes_allowed'] = false;
-        }
+        $options['writes_allowed'] = $this->writesAllowed($dryRun, (bool) ($options['no_write'] ?? false));
 
         return $this->resolve($collectorName)->collect($options + ['dry_run' => $dryRun]);
     }
