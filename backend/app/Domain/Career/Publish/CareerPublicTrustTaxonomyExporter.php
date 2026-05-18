@@ -21,10 +21,18 @@ final class CareerPublicTrustTaxonomyExporter
      */
     public function build(?int $limit = null): array
     {
+        $limit = $limit !== null && $limit > 0 ? $limit : null;
         $schema = $this->schemaAvailability();
         $occupations = $schema['tables']['occupations']['exists']
             ? $this->occupationRows($limit)
             : collect();
+        $limitedOccupationIds = $limit !== null
+            ? $occupations
+                ->map(static fn (object $occupation): string => (string) ($occupation->id ?? ''))
+                ->filter(static fn (string $id): bool => $id !== '')
+                ->values()
+                ->all()
+            : null;
         $displayAssetsBySlug = $schema['tables']['career_job_display_assets']['exists']
             ? $this->displayAssetsBySlug()
             : [];
@@ -32,7 +40,7 @@ final class CareerPublicTrustTaxonomyExporter
             ? $this->latestIndexStatesByOccupation()
             : [];
         $aliases = $schema['tables']['occupation_aliases']['exists']
-            ? $this->aliasRows()
+            ? $this->aliasRows($limitedOccupationIds)
             : collect();
         $aliasesByOccupation = $aliases
             ->filter(static fn (object $alias): bool => isset($alias->occupation_id) && (string) $alias->occupation_id !== '')
@@ -84,6 +92,7 @@ final class CareerPublicTrustTaxonomyExporter
             'recommendationExpansionAllowed' => false,
             'profileMemoryExpansionAllowed' => false,
             'exportStatus' => $this->exportStatus($schema),
+            'exportScope' => $this->exportScope($limit),
             'schema' => $schema,
             'counts' => $this->counts($items, $occupations, $aliases),
             'classificationBuckets' => $this->classificationBuckets($items),
@@ -159,6 +168,7 @@ final class CareerPublicTrustTaxonomyExporter
                 'metadata_json',
                 'updated_at',
             ])
+            ->orderByRaw("case when status in ('blocked', 'draft', 'archived') then 1 else 0 end asc")
             ->orderByDesc('updated_at')
             ->get();
 
@@ -207,9 +217,13 @@ final class CareerPublicTrustTaxonomyExporter
     /**
      * @return Collection<int, object>
      */
-    private function aliasRows(): Collection
+    /**
+     * @param  list<string>|null  $limitedOccupationIds
+     * @return Collection<int, object>
+     */
+    private function aliasRows(?array $limitedOccupationIds): Collection
     {
-        return DB::table('occupation_aliases')
+        $query = DB::table('occupation_aliases')
             ->leftJoin('occupations', 'occupation_aliases.occupation_id', '=', 'occupations.id')
             ->select([
                 'occupation_aliases.id',
@@ -225,8 +239,17 @@ final class CareerPublicTrustTaxonomyExporter
                 'occupation_aliases.confidence_score',
                 'occupations.canonical_slug as target_canonical_slug',
             ])
-            ->orderBy('occupation_aliases.normalized')
-            ->get();
+            ->orderBy('occupation_aliases.normalized');
+
+        if ($limitedOccupationIds !== null) {
+            if ($limitedOccupationIds === []) {
+                return collect();
+            }
+
+            $query->whereIn('occupation_aliases.occupation_id', $limitedOccupationIds);
+        }
+
+        return $query->get();
     }
 
     /**
@@ -459,6 +482,29 @@ final class CareerPublicTrustTaxonomyExporter
         }
 
         return 'complete';
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function exportScope(?int $limit): array
+    {
+        $limited = $limit !== null;
+
+        return [
+            'mode' => $limited ? 'limited' : 'full',
+            'limitApplied' => $limit,
+            'limitedExport' => $limited,
+            'suitableForFullCountReconciliation' => ! $limited,
+            'occupationSelectionStrategy' => $limited
+                ? 'ordered_by_canonical_slug_limited_occupation_rows'
+                : 'all_backend_occupation_rows_ordered_by_canonical_slug',
+            'aliasSelectionStrategy' => $limited
+                ? 'related_to_limited_occupation_rows_only'
+                : 'all_backend_alias_rows',
+            'displayAssetSelectionStrategy' => 'prefer_non_blocked_non_draft_non_archived_asset_then_latest_updated_at_per_canonical_slug',
+            'savedCareerUserDataPolicy' => 'schema_and_boundary_policy_only_no_user_rows',
+        ];
     }
 
     private function noindexReason(bool $hasDisplayAsset, ?object $indexState): string
