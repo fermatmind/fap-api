@@ -10782,8 +10782,8 @@
     }
   },
   "RIASEC-FULL-CONTENT-PACK-02A": {
-    "status": "in_progress",
-    "commit_sha": "f2d0a09e53db5c438c1eedf4516c02c8fa63e630",
+    "status": "github_checks_passed",
+    "commit_sha": "827fd3f2fd6114209320cd79fe244effc8cae05c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1465",
     "branch": "codex/riasec-full-content-pack-02a-backend-dimension-copy",
     "checks": {
@@ -10797,7 +10797,10 @@
         "git_diff_cached_check": "passed"
       },
       "github": {
-        "status": "pending"
+        "status": "passed",
+        "hygiene": "passed",
+        "verify-mbti-legacy": "passed",
+        "verify-mbti-v2": "passed"
       }
     },
     "failure_reason": null,
@@ -10820,6 +10823,11 @@
         "at": "2026-05-18T14:00:00Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Pushed branch codex/riasec-full-content-pack-02a-backend-dimension-copy and opened https://github.com/fermatmind/fap-api/pull/1465. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-18T14:10:00Z",
+        "status": "github_checks_passed",
+        "summary": "GitHub checks passed for PR #1465: hygiene, verify-mbti-legacy, and verify-mbti-v2."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-02B"
