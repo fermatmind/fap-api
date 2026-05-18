@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-18T12:45:00Z",
+  "updated_at": "2026-05-18T16:02:02Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10780,6 +10780,60 @@
       ],
       "next_pr": "SEO-DASH-PROD-03B-PREFLIGHT-R2"
     }
+  },
+  "SEO-DASH-PROD-03D-FIX": {
+    "status": "pr_opened_github_checks_pending",
+    "commit_sha": "2fb00395eba17b5ef364224a447b81d5cd40b1c4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1466",
+    "branch": "codex/seo-dash-prod-03d-fix-bounded-drift-issue-canary",
+    "checks": {
+      "local": {
+        "php_artisan_test_filter_seo_intel": "passed",
+        "drift_foundation_dry_run_canary": "passed",
+        "drift_foundation_dry_run_limit_5": "passed",
+        "issue_queue_foundation_dry_run_canary": "passed",
+        "php_artisan_route_list": "passed",
+        "pint_test": "passed",
+        "json_validation": "passed",
+        "yaml_validation": "passed",
+        "git_diff_check": "passed",
+        "git_diff_cached_check": "passed"
+      },
+      "github": {
+        "status": "pending"
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "metadata": {
+      "dependency": "SEO-DASH-PROD-03D-SCAN",
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "external_api_live_activation": false,
+      "metabase_deployment": false,
+      "next_task": "SEO-DASH-PROD-03D-PREFLIGHT-R2"
+    },
+    "history": [
+      {
+        "at": "2026-05-18T16:02:02Z",
+        "status": "in_progress",
+        "summary": "Registered authorized SEO-DASH-PROD-03D-FIX and started bounded drift issue canary implementation. Scope excludes production writes, scheduler, deploy, Metabase, external APIs, production crawler log reads, env edits, SSH, and migrations."
+      },
+      {
+        "at": "2026-05-18T16:02:02Z",
+        "status": "local_validation_passed",
+        "summary": "Added bounded drift issue canary support from seo_urls / seo_url_entities to seo_issue_queue with canary/limit bounds, sanitized deterministic issue candidates, docs, generated artifact, PR train metadata, and tests. SeoIntel tests, dry-run collector commands, route list, Pint, JSON/YAML validation, and diff checks passed. No production write or runtime activation performed."
+      },
+      {
+        "at": "2026-05-18T16:02:02Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Pushed branch codex/seo-dash-prod-03d-fix-bounded-drift-issue-canary and opened https://github.com/fermatmind/fap-api/pull/1466. GitHub checks pending. No production write or runtime activation performed."
+      }
+    ],
+    "next_pr": "SEO-DASH-PROD-03D-PREFLIGHT-R2"
   },
   "RIASEC-FULL-CONTENT-PACK-02A": {
     "status": "github_checks_passed",

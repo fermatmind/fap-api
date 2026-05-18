@@ -130,6 +130,13 @@ return [
     'drift_foundation' => [
         'allow_single_url_dry_run' => true,
         'max_url_dry_run_count' => 1,
+        'canary_default_limit' => 5,
+        'canary_max_limit' => 50,
+        'write_requires_bound' => true,
+        'issue_queue_target_enabled' => env('SEO_INTEL_DRIFT_ISSUE_QUEUE_TARGET_ENABLED', false),
+        'production_crawl_allowed' => false,
+        'production_log_read_allowed' => false,
+        'external_api_calls_allowed' => false,
         'extract_fields' => [
             'canonical',
             'title',

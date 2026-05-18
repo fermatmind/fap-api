@@ -5459,6 +5459,61 @@ prs:
     metabase_deployment: false
     next_task: SEO-DASH-PROD-03B-PREFLIGHT-R2
 
+  - id: SEO-DASH-PROD-03D-FIX
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-PROD-03D-SCAN
+    branch: codex/seo-dash-prod-03d-fix-bounded-drift-issue-canary
+    base: main
+    title: "feat(seo-intel): add bounded drift issue canary"
+    name: "Bounded drift issue canary"
+    train_scope: seo_intel_controlled_write_canary_readiness
+    risk_level: medium_runtime_guard_no_production_execution
+    scope:
+      - Add bounded drift_foundation canary and limit support from existing seo_urls / seo_url_entities only.
+      - Write only sanitized deterministic issue candidates into seo_issue_queue when explicitly bounded and write-enabled.
+      - Block unbounded write mode and keep scheduler, external APIs, production log reads, Metabase, and production writes disabled by default.
+      - Add PII/source-authority/raw-evidence guards, docs, generated artifact, and tests.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/app/Services/SeoIntel/**
+      - backend/app/Console/Commands/SeoIntelCollectCommand.php
+      - backend/tests/Feature/SeoIntel/**/*
+      - backend/docs/seo/bounded-drift-issue-canary.md
+      - backend/docs/seo/generated/bounded-drift-issue-canary.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Run production collector writes.
+      - Enable scheduler, deploy fap-api, deploy Metabase, or edit production env.
+      - Connect live GSC, Baidu, IndexNow, 360, Sogou, or Shenma APIs.
+      - Submit URLs to search engines, read production crawler logs, or perform public HTML broad crawls.
+      - Touch Tencent rds-fap-prod, Node2 local DB, migrations, payment/order/report/email/recommendation/scoring behavior, fap-web runtime, sitemap, or llms behavior.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:collect --collector=drift_foundation --dry-run --no-write --json --canary
+      - cd backend && php artisan seo-intel:collect --collector=drift_foundation --dry-run --no-write --json --limit=5
+      - cd backend && php artisan seo-intel:collect --collector=issue_queue_foundation --dry-run --no-write --json --canary
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/bounded-drift-issue-canary.v1.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    next_task: SEO-DASH-PROD-03D-PREFLIGHT-R2
+
   - id: RIASEC-FULL-CONTENT-PACK-02A
     repo: fap-api
     depends_on:
