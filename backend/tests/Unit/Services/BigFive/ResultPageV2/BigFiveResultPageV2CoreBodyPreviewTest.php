@@ -438,6 +438,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_intel_migration_isolation_files(): void
+    {
+        $changed = [
+            'backend/database/migrations/seo_intel/2026_05_17_000100_create_seo_urls_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_000200_create_seo_url_entities_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_001700_create_seo_issue_queue_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
     {
         $changed = [
@@ -1655,6 +1666,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelMigrationIsolationFile($file)) {
+                continue;
+            }
+
             if ($this->isControlledArticlePublishSopFile($file)) {
                 continue;
             }
@@ -2170,6 +2185,29 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/SeoIssueSanitizer.php',
             'backend/app/Services/SeoIntel/SeoIssueSummaryService.php',
             'backend/database/migrations/2026_05_17_001700_create_seo_issue_queue_table.php',
+        ], true);
+    }
+
+    private function isSeoIntelMigrationIsolationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/database/migrations/seo_intel/2026_05_17_000100_create_seo_urls_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_000200_create_seo_url_entities_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_000300_create_seo_internal_traffic_rules_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_000400_create_seo_event_funnel_daily_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_000500_create_seo_landing_attribution_daily_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_000600_create_seo_revenue_daily_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_000700_create_seo_cluster_daily_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_000800_create_seo_consent_daily_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_000900_create_seo_gsc_daily_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_001000_create_seo_baidu_push_logs_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_001100_create_seo_baidu_landing_daily_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_001200_create_seo_indexnow_submissions_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_001300_create_seo_search_engine_verification_statuses_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_001400_create_seo_domestic_submission_logs_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_001500_create_seo_domestic_index_samples_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_001600_create_seo_crawler_logs_daily_table.php',
+            'backend/database/migrations/seo_intel/2026_05_17_001700_create_seo_issue_queue_table.php',
         ], true);
     }
 

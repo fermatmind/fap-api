@@ -10130,6 +10130,11 @@
           "status": "not_run",
           "evidence": "Skipped because local execution lacks a safe seo_intel test connection; no production or cloud DB command was run."
         },
+        "bigfive_runtime_freeze": {
+          "status": "pass",
+          "command": "php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest",
+          "evidence": "Added narrow allowlist for the dedicated seo_intel migration isolation directory; 95 tests passed with 442 assertions."
+        },
         "github": {
           "status": "pending"
         }
@@ -10161,6 +10166,11 @@
           "at": "2026-05-18T02:21:53Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Pushed branch codex/seo-dash-prod-01c-seo-intel-migration-isolation and opened https://github.com/fermatmind/fap-api/pull/1458. GitHub checks pending; no production execution performed."
+        },
+        {
+          "at": "2026-05-18T02:28:13Z",
+          "status": "github_checks_fix_validated_locally",
+          "summary": "GitHub MBTI checks failed because the runtime freeze classifier did not recognize backend/database/migrations/seo_intel paths. Added a narrow migration-isolation allowlist and validated BigFiveResultPageV2CoreBodyPreviewTest, SeoIntel tests, route list, Pint, and diff checks locally."
         }
       ],
       "next_pr": "SEO-DASH-PROD-01B-STAGE1-RETRY"
