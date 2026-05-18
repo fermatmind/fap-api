@@ -391,6 +391,7 @@ final class RiasecPublicProjectionService
             'positive_value',
             'real_world_cost',
             'high_score_reading',
+            'medium_score_reading',
             'low_score_safe_reading',
             'work_activity_examples',
             'possible_drains',

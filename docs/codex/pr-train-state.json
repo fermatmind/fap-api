@@ -10781,6 +10781,49 @@
       "next_pr": "SEO-DASH-PROD-03B-PREFLIGHT-R2"
     }
   },
+  "RIASEC-FULL-CONTENT-PACK-02A": {
+    "status": "in_progress",
+    "commit_sha": "8ec93ceb9a02d59fdee05e73753f7c5e8c89e6a5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1465",
+    "branch": "codex/riasec-full-content-pack-02a-backend-dimension-copy",
+    "checks": {
+      "local": {
+        "php_artisan_test_filter_riasec_deep_copy_slot_registry": "passed",
+        "php_artisan_test_filter_riasec_assessment_flow": "passed",
+        "pint_test_scoped": "passed",
+        "json_yaml_validation": "passed",
+        "forbidden_claim_scan": "passed",
+        "git_diff_check": "passed",
+        "git_diff_cached_check": "passed"
+      },
+      "github": {
+        "status": "pending"
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-18T13:30:00Z",
+        "status": "in_progress",
+        "summary": "Registered authorized RIASEC-FULL-CONTENT-PACK-02A and started backend-only six dimension deep copy import with medium_score_reading support. Scope excludes fap-web, scoring, RIASEC question content packs, career matching, feedback runtime, analytics runtime, and AI report generation."
+      },
+      {
+        "at": "2026-05-18T13:55:00Z",
+        "status": "local_validation_passed",
+        "summary": "Imported normalized zh-CN r3 six-dimension deep copy into backend content assets, added medium_score_reading to the dimension slot contract and public deep_content_slots_v1 content envelope, and verified registry/projection/report snapshot flow with targeted PHPUnit, scoped Pint, JSON/YAML validation, forbidden-claim scan, and git diff check."
+      },
+      {
+        "at": "2026-05-18T14:00:00Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Pushed branch codex/riasec-full-content-pack-02a-backend-dimension-copy and opened https://github.com/fermatmind/fap-api/pull/1465. GitHub checks pending."
+      }
+    ],
+    "next_pr": "RIASEC-FULL-CONTENT-PACK-02B"
+  },
   "SEO-DASH-04B": {
     "status": "github_checks_passed",
     "commit_sha": "2727135d1d5c9b68b5d787cdc550d0d36b83e94b",

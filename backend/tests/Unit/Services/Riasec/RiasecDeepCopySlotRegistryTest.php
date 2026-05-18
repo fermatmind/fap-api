@@ -21,7 +21,7 @@ final class RiasecDeepCopySlotRegistryTest extends TestCase
             $this->assertSame([$dimension], $slot['applicable_dimensions']);
             $this->assertSame($dimension, $slot['dimension_code']);
             $this->assertSame('reviewed_content_copy', $slot['source_status']);
-            $this->assertSame('approved_for_staging', $slot['review_status']);
+            $this->assertSame('approved_for_production', $slot['review_status']);
             $this->assertSame('expert_reviewed', $slot['evidence_level']);
             $this->assertFalse($slot['frontend_fallback_allowed']);
 
@@ -29,6 +29,8 @@ final class RiasecDeepCopySlotRegistryTest extends TestCase
                 $this->assertArrayHasKey($requiredField, $slot);
                 $this->assertNotEmpty($slot[$requiredField]);
             }
+            $this->assertArrayHasKey('medium_score_reading', $slot);
+            $this->assertNotEmpty($slot['medium_score_reading']);
 
             $this->assertSame([], $registry->validateSlot($slot), 'Dimension '.$dimension.' slot should be contract-clean.');
         }
@@ -65,11 +67,12 @@ final class RiasecDeepCopySlotRegistryTest extends TestCase
     {
         $registry = new RiasecDeepCopySlotRegistry;
         $slot = $registry->resolveDimensionSlot('A');
-        unset($slot['core_drive'], $slot['work_activity_examples']);
+        unset($slot['core_drive'], $slot['medium_score_reading'], $slot['work_activity_examples']);
 
         $errors = $registry->validateSlot($slot);
 
         $this->assertContains('missing_core_drive', $errors);
+        $this->assertContains('missing_medium_score_reading', $errors);
         $this->assertContains('missing_work_activity_examples', $errors);
     }
 }
