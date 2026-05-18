@@ -16,13 +16,9 @@ class HealthzExposureTest extends TestCase
         $this->withServerVariables($server)
             ->getJson('/api/healthz')
             ->assertStatus(404);
-
-        $this->withServerVariables($server)
-            ->get('/healthz')
-            ->assertStatus(404);
     }
 
-    public function test_allowlist_ip_gets_minimal_healthz_payload(): void
+    public function test_allowlist_ip_gets_minimal_healthz_payload_only_on_canonical_api_route(): void
     {
         $this->forceEnvironment('production');
         config([
@@ -43,11 +39,9 @@ class HealthzExposureTest extends TestCase
         $response->assertJsonMissingPath('message');
         $this->assertSame(['ok', 'service', 'version', 'time'], array_keys($response->json()));
 
-        $rootResponse = $this->withServerVariables(['REMOTE_ADDR' => '127.0.0.1'])
-            ->get('/healthz');
-
-        $rootResponse->assertStatus(200);
-        $rootResponse->assertExactJson($response->json());
+        $this->withServerVariables(['REMOTE_ADDR' => '127.0.0.1'])
+            ->get('/healthz')
+            ->assertStatus(404);
     }
 
     private function forceEnvironment(string $env): void
