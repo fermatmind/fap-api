@@ -198,7 +198,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
-    public function test_runtime_freeze_classifier_ignores_public_healthz_alias_route_change(): void
+    public function test_runtime_freeze_classifier_ignores_public_healthz_alias_route_addition(): void
     {
         $changed = [
             'backend/routes/web.php',
@@ -218,6 +218,31 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '+        \\App\\Http\\Middleware\\VerifyCsrfToken::class,',
             '+    ])',
             '+    ->name(\'healthz.public\');',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', webRouteChangedLines: $webRouteChangedLines));
+    }
+
+    public function test_runtime_freeze_classifier_ignores_public_healthz_alias_route_removal(): void
+    {
+        $changed = [
+            'backend/routes/web.php',
+        ];
+        $webRouteChangedLines = [
+            '-use App\\Http\\Controllers\\HealthzController;',
+            '-use App\\Http\\Middleware\\HealthzAccessControl;',
+            '-Route::middleware([HealthzAccessControl::class, \'throttle:api_public\'])',
+            '-    ->get(\'/healthz\', [HealthzController::class, \'show\'])',
+            '-    ->withoutMiddleware([',
+            '-        \\Illuminate\\Cookie\\Middleware\\EncryptCookies::class,',
+            '-        \\App\\Http\\Middleware\\EncryptCookies::class,',
+            '-        \\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse::class,',
+            '-        \\Illuminate\\Session\\Middleware\\StartSession::class,',
+            '-        \\Illuminate\\View\\Middleware\\ShareErrorsFromSession::class,',
+            '-        \\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken::class,',
+            '-        \\App\\Http\\Middleware\\VerifyCsrfToken::class,',
+            '-    ])',
+            '-    ->name(\'healthz.public\');',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', webRouteChangedLines: $webRouteChangedLines));
@@ -3046,15 +3071,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         foreach ($changedLines as $line) {
-            if (str_starts_with($line, '-')) {
-                return false;
-            }
-
-            if (preg_match('/^\+\s*[\\[\\]{}(),;]*\s*$/u', $line) === 1) {
+            if (preg_match('/^[+-]\s*[\\[\\]{}(),;]*\s*$/u', $line) === 1) {
                 continue;
             }
 
-            if (preg_match('/HealthzController|HealthzAccessControl|throttle:api_public|\\/healthz|healthz\\.public|withoutMiddleware|EncryptCookies|AddQueuedCookiesToResponse|StartSession|ShareErrorsFromSession|VerifyCsrfToken/u', $line) !== 1) {
+            if (preg_match('/^[+-].*(HealthzController|HealthzAccessControl|throttle:api_public|\\/healthz|healthz\\.public|withoutMiddleware|EncryptCookies|AddQueuedCookiesToResponse|StartSession|ShareErrorsFromSession|VerifyCsrfToken)/u', $line) !== 1) {
                 return false;
             }
         }
