@@ -35,6 +35,7 @@ final class CareerExportPublicTrustTaxonomy extends Command
                 'status' => 'materialized',
                 'artifact' => $path,
                 'exportStatus' => $taxonomy['exportStatus'] ?? 'unknown',
+                'exportScope' => $taxonomy['exportScope'] ?? [],
                 'counts' => $taxonomy['counts'] ?? [],
             ];
 
