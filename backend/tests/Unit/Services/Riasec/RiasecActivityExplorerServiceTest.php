@@ -14,47 +14,35 @@ final class RiasecActivityExplorerServiceTest extends TestCase
         $payload = (new RiasecActivityExplorerService)->build('RIA', 'zh-CN');
 
         $this->assertSame('riasec.activity_explorer.v0.1', $payload['schema_version']);
-        $this->assertSame('career_activity_registry_v0.1', $payload['content_version']);
+        $this->assertSame('activity_task_examples_v1.zh-CN', $payload['content_version']);
         $this->assertSame('content_examples_only', $payload['status']);
         $this->assertSame('content_example_not_registry_match', $payload['source_status']);
         $this->assertFalse((bool) data_get($payload, 'boundary.registry_source_connected'));
         $this->assertFalse((bool) data_get($payload, 'boundary.fit_score_allowed'));
         $this->assertFalse((bool) data_get($payload, 'boundary.success_prediction_allowed'));
         $this->assertSame(['R', 'I', 'A'], array_column($payload['dimension_activity_families'], 'dimension'));
-        $this->assertSame('not_available_for_code_v0_1', data_get($payload, 'code_activity_pack.status'));
+        $this->assertSame('available', data_get($payload, 'code_activity_pack.status'));
+        $this->assertNotEmpty(data_get($payload, 'code_activity_pack.activities'));
         $this->assertSame([], data_get($payload, 'code_activity_pack.occupation_examples'));
     }
 
-    public function test_ias_pack_labels_every_occupation_example_as_content_example_not_registry_match(): void
+    public function test_ias_pack_uses_file_backed_activity_task_examples_without_occupation_import(): void
     {
         $payload = (new RiasecActivityExplorerService)->build('IAS', 'zh-CN');
 
         $this->assertSame('available', data_get($payload, 'code_activity_pack.status'));
         $this->assertSame('IAS', data_get($payload, 'code_activity_pack.code'));
+        $this->assertSame('FermatTest RIASEC Activity Task Examples v1', data_get($payload, 'code_activity_pack.source_name'));
         $activities = (array) data_get($payload, 'code_activity_pack.activities', []);
-        $this->assertCount(6, $activities);
+        $this->assertCount(9, $activities);
 
-        $occupationCount = 0;
         foreach ($activities as $activity) {
             $this->assertSame('content_example_not_registry_match', data_get($activity, 'source_status'));
             $this->assertNotEmpty(data_get($activity, 'task_examples'));
-
-            foreach ((array) data_get($activity, 'occupation_examples', []) as $example) {
-                $occupationCount++;
-                $this->assertSame('content_example_not_registry_match', data_get($example, 'source_status'));
-                $this->assertSame('内容示例，非职业数据库匹配', data_get($example, 'display_label'));
-                $this->assertTrue((bool) data_get($example, 'not_a_recommendation'));
-                $this->assertIsArray(data_get($example, 'common_tasks'));
-                $this->assertIsArray(data_get($example, 'skills_to_check'));
-                $this->assertArrayNotHasKey('source_url', (array) $example);
-                $this->assertArrayNotHasKey('onet_code', (array) $example);
-                $this->assertArrayNotHasKey('soc_code', (array) $example);
-                $this->assertArrayNotHasKey('fit_score', (array) $example);
-                $this->assertArrayNotHasKey('rank', (array) $example);
-            }
+            $this->assertSame('activity_task_examples_v1.zh-CN', data_get($activity, 'content_version'));
+            $this->assertSame('backend_authoritative_activity_task_asset', data_get($activity, 'evidence_level'));
+            $this->assertSame([], data_get($activity, 'occupation_examples'));
         }
-
-        $this->assertGreaterThan(0, $occupationCount);
     }
 
     public function test_expanded_code_pack_uses_examples_only_boundaries(): void
@@ -64,31 +52,19 @@ final class RiasecActivityExplorerServiceTest extends TestCase
         $this->assertSame('available', data_get($payload, 'code_activity_pack.status'));
         $this->assertSame('RCE', data_get($payload, 'code_activity_pack.code'));
         $this->assertSame(
-            ['operate_reliable_processes', 'improve_hands_on_workflow', 'coordinate_practical_delivery'],
-            data_get($payload, 'code_activity_pack.activity_chain'),
+            ['r_field_observe_1', 'r_proto_1', 'r_debug_1'],
+            array_slice((array) data_get($payload, 'code_activity_pack.activity_chain'), 0, 3),
         );
         $this->assertSame('content_example_not_registry_match', data_get($payload, 'code_activity_pack.source_status'));
         $this->assertFalse((bool) data_get($payload, 'boundary.registry_source_connected'));
 
         $activities = (array) data_get($payload, 'code_activity_pack.activities', []);
-        $this->assertCount(2, $activities);
+        $this->assertCount(9, $activities);
 
         foreach ($activities as $activity) {
             $this->assertSame('content_example_not_registry_match', data_get($activity, 'source_status'));
             $this->assertNotEmpty(data_get($activity, 'task_examples'));
-            $this->assertNotEmpty(data_get($activity, 'occupation_examples'));
-
-            foreach ((array) data_get($activity, 'occupation_examples', []) as $example) {
-                $this->assertSame('content_example_not_registry_match', data_get($example, 'source_status'));
-                $this->assertSame('内容示例，非职业数据库匹配', data_get($example, 'display_label'));
-                $this->assertTrue((bool) data_get($example, 'not_a_recommendation'));
-                $this->assertArrayNotHasKey('source_url', (array) $example);
-                $this->assertArrayNotHasKey('onet_code', (array) $example);
-                $this->assertArrayNotHasKey('soc_code', (array) $example);
-                $this->assertArrayNotHasKey('fit_score', (array) $example);
-                $this->assertArrayNotHasKey('rank', (array) $example);
-                $this->assertArrayNotHasKey('success_prediction', (array) $example);
-            }
+            $this->assertSame([], data_get($activity, 'occupation_examples'));
         }
     }
 
@@ -102,8 +78,8 @@ final class RiasecActivityExplorerServiceTest extends TestCase
             $this->assertSame($code, data_get($payload, 'code_activity_pack.code'));
             $this->assertSame('available', data_get($payload, 'code_activity_pack.status'));
             $this->assertSame('content_example_not_registry_match', data_get($payload, 'code_activity_pack.source_status'));
-            $this->assertCount(3, (array) data_get($payload, 'code_activity_pack.activity_chain'));
-            $this->assertGreaterThanOrEqual(2, count((array) data_get($payload, 'code_activity_pack.activities')));
+            $this->assertCount(9, (array) data_get($payload, 'code_activity_pack.activity_chain'));
+            $this->assertCount(9, (array) data_get($payload, 'code_activity_pack.activities'));
         }
     }
 
@@ -112,9 +88,8 @@ final class RiasecActivityExplorerServiceTest extends TestCase
         $payload = (new RiasecActivityExplorerService)->build('RES', 'zh-CN');
 
         $this->assertSame(['R', 'E', 'S'], array_column($payload['dimension_activity_families'], 'dimension'));
-        $this->assertSame('not_available_for_code_v0_1', data_get($payload, 'code_activity_pack.status'));
-        $this->assertSame('code_activity_pack_not_authored', data_get($payload, 'code_activity_pack.reason'));
-        $this->assertSame([], data_get($payload, 'code_activity_pack.activities'));
+        $this->assertSame('available', data_get($payload, 'code_activity_pack.status'));
+        $this->assertCount(9, (array) data_get($payload, 'code_activity_pack.activities'));
         $this->assertSame([], data_get($payload, 'code_activity_pack.occupation_examples'));
     }
 

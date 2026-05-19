@@ -139,7 +139,9 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.boundary.registry_source_connected', false);
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.boundary.fit_score_allowed', false);
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.dimension_activity_families.0.dimension', 'R');
-        $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.code_activity_pack.status', 'not_available_for_code_v0_1');
+        $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.code_activity_pack.status', 'available');
+        $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.code_activity_pack.activities.0.source_status', 'content_example_not_registry_match');
+        $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.code_activity_pack.activities.0.occupation_examples', []);
         $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.schema_version', 'riasec.exploration_feedback_overlay.v0.1');
         $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.status', 'overlay_contract_only');
         $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.feedback_stream_status', 'not_connected_v0_1');
