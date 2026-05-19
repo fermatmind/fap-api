@@ -13154,7 +13154,7 @@
     "merge_commit": "539c68f51feb112156c3840cc6ef013843272538"
   },
   "RIASEC-FULL-CONTENT-PACK-05-PREFLIGHT": {
-    "status": "pr_opened_github_checks_pending",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-05-preflight",
@@ -13210,12 +13210,17 @@
       "github_required_checks": {
         "status": "pending",
         "summary": "PR #1496 opened; GitHub required checks pending."
+      },
+      "ledger_reconciliation": {
+        "status": "pass",
+        "summary": "GitHub PR #1496 is merged and origin/main contains 70d503244b05a17fca026c60d3290b25104a1c27; reconciled before PACK-05 import.",
+        "source_of_truth": "GitHub PR + origin/main"
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-19T22:55:01Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "history": [
       {
@@ -13232,12 +13237,18 @@
         "at": "2026-05-19T22:43:57Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1496 for PACK-05-PREFLIGHT. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-19T22:55:01Z",
+        "status": "merged_reconciled",
+        "summary": "Reconciled PACK-05-PREFLIGHT before PACK-05: PR #1496 merged with squash commit 70d503244b05a17fca026c60d3290b25104a1c27; remote branch deleted and local cleanup completed."
       }
     ],
-    "next_pr": "RIASEC-FULL-CONTENT-PACK-05"
+    "next_pr": "RIASEC-FULL-CONTENT-PACK-05",
+    "merge_commit": "70d503244b05a17fca026c60d3290b25104a1c27"
   },
   "RIASEC-FULL-CONTENT-PACK-05": {
-    "status": "registered_pending_dependency",
+    "status": "local_validation_passed",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-05",
@@ -13248,7 +13259,45 @@
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency_gate": {
+        "status": "pass",
+        "summary": "PACK-05-PREFLIGHT merged with CONDITIONAL GO and was reconciled before PACK-05 implementation."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi",
+        "summary": "18 tests passed; ActivityExplorer now uses backend-authoritative activity/task asset and result/report/share/PDF/history regression path remains green."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecActivityExplorerService.php tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php"
+      },
+      "jsonl_validation": {
+        "status": "pass",
+        "summary": "backend/content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl parsed line by line with 360 records."
+      },
+      "forbidden_claim_scan": {
+        "status": "pass",
+        "summary": "Imported activity/task asset visible-field scan found forbidden_user_claim=0; test-only negative assertions contain allowed boundary terms."
+      },
+      "technical_key_exposure_scan": {
+        "status": "pass",
+        "summary": "Imported activity/task asset visible-field scan found technical_key_exposure=0."
+      },
+      "frontend_fallback_scan": {
+        "status": "pass",
+        "summary": "No frontend_fallback_allowed=true in imported asset or touched service/tests."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "summary": "Changed files are limited to PACK-05 activity/task asset import, ActivityExplorer loader/mapping, targeted tests, and authorized PR train metadata; no occupation examples imported."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -13259,6 +13308,11 @@
         "at": "2026-05-19T22:39:08Z",
         "status": "registered_pending_dependency",
         "summary": "Registered PACK-05 import; execution allowed only after PACK-05-PREFLIGHT returns GO or CONDITIONAL GO and merges cleanly."
+      },
+      {
+        "at": "2026-05-19T22:55:01Z",
+        "status": "local_validation_passed",
+        "summary": "Imported backend-authoritative activity/task JSONL asset into ActivityExplorer with deterministic file-backed task mapping, fail-closed loader, no occupation example import, and targeted checks green."
       }
     ]
   }

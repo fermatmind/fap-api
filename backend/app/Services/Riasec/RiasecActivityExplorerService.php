@@ -8,11 +8,18 @@ final class RiasecActivityExplorerService
 {
     private const SCHEMA_VERSION = 'riasec.activity_explorer.v0.1';
 
-    private const CONTENT_VERSION = 'career_activity_registry_v0.1';
+    private const CONTENT_VERSION = 'activity_task_examples_v1.zh-CN';
 
     private const SOURCE_STATUS = 'content_example_not_registry_match';
 
-    private const SOURCE_NAME = 'FermatTest Career Activity Registry v0.1';
+    private const SOURCE_NAME = 'FermatTest RIASEC Activity Task Examples v1';
+
+    private const ACTIVITY_TASK_ASSET_PATH = 'content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl';
+
+    private const ACTIVITY_TASK_SOURCE_STATUSES = [
+        'content_example_not_registry_match',
+        'commercial_expansion_candidate_not_runtime_imported',
+    ];
 
     /**
      * @var array<string,array{dimension:string,label:array{en:string,zh-CN:string},core_drive:array{en:string,zh-CN:string},activity_families:list<string>}>
@@ -194,21 +201,12 @@ final class RiasecActivityExplorerService
      */
     private function codeActivityPack(string $code, string $locale): array
     {
-        $authoredCodes = [
-            'IAS' => ['analyze_complex_problems', 'explain_complex_information', 'support_decision_making'],
-            'RCE' => ['operate_reliable_processes', 'improve_hands_on_workflow', 'coordinate_practical_delivery'],
-            'EAS' => ['present_and_mobilize_ideas', 'shape_audience_experience', 'support_people_through_expression'],
-            'CRI' => ['audit_tangible_systems', 'investigate_process_failures', 'organize_evidence_materials'],
-            'SIC' => ['clarify_people_needs_with_evidence', 'organize_support_resources', 'support_decision_making'],
-            'ERC' => ['coordinate_operational_delivery', 'negotiate_practical_constraints', 'quality_check_workflows'],
-            'AIR' => ['prototype_expressive_solutions', 'test_creative_materials', 'explain_complex_information'],
-            'CSE' => ['facilitate_structured_action', 'maintain_service_workflows', 'persuade_with_clear_process'],
-        ];
+        $activities = $this->fileBackedActivitiesForCode($code, $locale);
 
-        if (! array_key_exists($code, $authoredCodes)) {
+        if ($activities === []) {
             return [
-                'status' => 'not_available_for_code_v0_1',
-                'reason' => 'code_activity_pack_not_authored',
+                'status' => 'not_available_for_code_v1',
+                'reason' => 'activity_task_examples_not_available',
                 'activities' => [],
                 'occupation_examples' => [],
             ];
@@ -219,8 +217,153 @@ final class RiasecActivityExplorerService
             'code' => $code,
             'source_status' => self::SOURCE_STATUS,
             'source_name' => self::SOURCE_NAME,
-            'activity_chain' => $authoredCodes[$code],
-            'activities' => $this->codeActivities($code, $locale),
+            'activity_chain' => array_values(array_map(
+                static fn (array $activity): string => (string) ($activity['activity_key'] ?? ''),
+                $activities,
+            )),
+            'activities' => $activities,
+            'occupation_examples' => [],
+        ];
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function fileBackedActivitiesForCode(string $code, string $locale): array
+    {
+        $dimensions = $this->dimensionsForCode($code);
+        if ($dimensions === []) {
+            return [];
+        }
+
+        $rows = $this->loadActivityTaskAssetRows();
+        if ($rows === []) {
+            return [];
+        }
+
+        $selected = [];
+        $seen = [];
+        foreach ($dimensions as $dimension) {
+            $perDimension = 0;
+            foreach ($rows as $row) {
+                if ($perDimension >= 3) {
+                    break;
+                }
+
+                if (isset($seen[$row['activity_key']]) || ! in_array($dimension, $row['dimensions'], true)) {
+                    continue;
+                }
+
+                $seen[$row['activity_key']] = true;
+                $selected[] = $this->normalizeFileBackedActivity($row, $locale);
+                $perDimension++;
+            }
+        }
+
+        return $selected;
+    }
+
+    /**
+     * @return list<array{activity_key:string,dimensions:list<string>,activity_label:string,task_examples:list<string>,low_risk_validation:string,action_duration_options:array<string,string>}>
+     */
+    private function loadActivityTaskAssetRows(): array
+    {
+        static $cache = null;
+        if (is_array($cache)) {
+            return $cache;
+        }
+
+        $path = base_path(self::ACTIVITY_TASK_ASSET_PATH);
+        if (! is_file($path) || ! is_readable($path)) {
+            return $cache = [];
+        }
+
+        $rows = [];
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+            try {
+                $decoded = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            } catch (\JsonException) {
+                return $cache = [];
+            }
+
+            if (! is_array($decoded) || ! $this->isValidActivityTaskRow($decoded)) {
+                return $cache = [];
+            }
+
+            $rows[] = [
+                'activity_key' => (string) $decoded['activity_key'],
+                'dimensions' => array_values(array_map('strval', (array) $decoded['dimensions'])),
+                'activity_label' => (string) $decoded['activity_label'],
+                'task_examples' => array_values(array_map('strval', (array) $decoded['task_examples'])),
+                'low_risk_validation' => (string) $decoded['low_risk_validation'],
+                'action_duration_options' => array_map('strval', (array) $decoded['action_duration_options']),
+            ];
+        }
+
+        return $cache = $rows;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     */
+    private function isValidActivityTaskRow(array $row): bool
+    {
+        if (($row['schema_version'] ?? null) !== 'riasec.activity_task_example.v1') {
+            return false;
+        }
+
+        if (($row['asset_version'] ?? null) !== 'riasec_activity_task_examples_v1.zh-CN') {
+            return false;
+        }
+
+        if (($row['frontend_fallback_allowed'] ?? true) !== false || ($row['not_a_recommendation'] ?? false) !== true) {
+            return false;
+        }
+
+        if (! in_array(($row['source_status'] ?? null), self::ACTIVITY_TASK_SOURCE_STATUSES, true)) {
+            return false;
+        }
+
+        if (($row['activity_key'] ?? '') === '' || ! is_array($row['dimensions'] ?? null) || ! is_array($row['task_examples'] ?? null)) {
+            return false;
+        }
+
+        foreach ((array) $row['dimensions'] as $dimension) {
+            if (! isset(self::DIMENSION_ACTIVITY_FAMILIES[(string) $dimension])) {
+                return false;
+            }
+        }
+
+        return count((array) $row['task_examples']) >= 3
+            && is_string($row['activity_label'] ?? null)
+            && is_string($row['low_risk_validation'] ?? null)
+            && is_array($row['action_duration_options'] ?? null);
+    }
+
+    /**
+     * @param  array{activity_key:string,dimensions:list<string>,activity_label:string,task_examples:list<string>,low_risk_validation:string,action_duration_options:array<string,string>}  $row
+     * @return array<string,mixed>
+     */
+    private function normalizeFileBackedActivity(array $row, string $locale): array
+    {
+        $nextExperiments = array_values(array_filter([
+            $row['action_duration_options']['15min'] ?? null,
+            $row['action_duration_options']['30min'] ?? null,
+            $row['low_risk_validation'],
+        ]));
+
+        return [
+            'activity_key' => $row['activity_key'],
+            'riasec_dimensions' => $row['dimensions'],
+            'activity_label' => $locale === 'zh-CN' ? $row['activity_label'] : $row['activity_key'],
+            'activity_user_copy' => $row['low_risk_validation'],
+            'content_version' => self::CONTENT_VERSION,
+            'evidence_level' => 'backend_authoritative_activity_task_asset',
+            'source_status' => self::SOURCE_STATUS,
+            'source_name' => self::SOURCE_NAME,
+            'task_examples' => $row['task_examples'],
+            'occupation_examples' => [],
+            'next_experiments' => $nextExperiments,
         ];
     }
 
