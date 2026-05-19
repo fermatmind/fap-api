@@ -1,0 +1,141 @@
+{
+  "version": "seo-dash-mvp-online-summary.v1",
+  "task": "SEO-DASH-MVP-ONLINE-SUMMARY",
+  "generated_at": "2026-05-19T13:20:25Z",
+  "source_documents": [
+    "SEO-DASH-PROD-04C-METABASE-READONLY-DATASOURCE-CONNECTION",
+    "SEO-DASH-PROD-04D",
+    "SEO-DASH-PROD-04E"
+  ],
+  "purpose": "Freeze the minimally online SEO Dash MVP state after private Metabase dashboard and access/export/sharing verification.",
+  "current_production_state": {
+    "seo_urls": 7,
+    "seo_url_entities": 7,
+    "seo_issue_queue": 5,
+    "other_checked_collector_tables": 0
+  },
+  "metabase_state": {
+    "host_model": "private_aliyun_ecs",
+    "public_ipv4_present": false,
+    "localhost_only": true,
+    "listen_host": "127.0.0.1",
+    "listen_port": 3000,
+    "boot_enabled": false,
+    "application_database": "metabase_app",
+    "application_database_engine": "postgresql",
+    "datasource_count": 1,
+    "datasource_name": "seo_intel",
+    "datasource_engine": "mysql",
+    "datasource_account": "seo_intel_metabase_readonly",
+    "read_verification_passed": true,
+    "write_deny_verification_passed": true
+  },
+  "dashboard": {
+    "name": "SEO Intelligence MVP \u2014 URL Truth & Issue Queue",
+    "created": true,
+    "verified_cards_count": 10,
+    "cards": [
+      "URL Truth total count",
+      "URL entity mapping total count",
+      "Issue Queue total count",
+      "URL Truth by page_entity_type",
+      "URL Truth by locale",
+      "URL Truth by source_authority",
+      "URL Truth by indexability_state",
+      "Issue Queue by issue_type",
+      "Private-flow / forbidden authority safety count",
+      "Recent issue rows, sanitized"
+    ],
+    "allowed_source_tables": [
+      "seo_urls",
+      "seo_url_entities",
+      "seo_issue_queue"
+    ],
+    "private_flow_or_forbidden_authority_count": 0
+  },
+  "access_export_sharing": {
+    "verification_passed": true,
+    "public_sharing_enabled": false,
+    "embedding_enabled": false,
+    "anonymous_links_present": false,
+    "public_dashboard_or_card_tokens_present": false,
+    "admin_user_count": 1,
+    "normal_operator_user_count": 0,
+    "api_key_count": 0,
+    "exports_performed": false,
+    "normal_operator_raw_sql_enabled": false,
+    "future_operator_onboarding_requires_permissions_plan": true
+  },
+  "not_yet_enabled": [
+    "scheduler",
+    "collector_writes",
+    "external_search_live",
+    "gsc_live",
+    "baidu_live",
+    "indexnow_live",
+    "url_submission",
+    "production_crawler_log_read",
+    "research_publish",
+    "pseo_generation",
+    "public_metabase_access",
+    "metabase_business_db_access"
+  ],
+  "forbidden_sources": [
+    "business_db",
+    "tencent_rds_fap_prod",
+    "node2_local_db",
+    "cms_write_tables",
+    "raw_orders",
+    "raw_payments",
+    "raw_events_detail",
+    "raw_email",
+    "raw_reports",
+    "raw_crawler_logs",
+    "provider_payloads",
+    "payment_payloads"
+  ],
+  "forbidden_fields": [
+    "password",
+    "token",
+    "cookie",
+    "email",
+    "raw_email",
+    "order_no",
+    "raw_order_no",
+    "attempt_id",
+    "raw_attempt_id",
+    "payment_id",
+    "raw_ip",
+    "raw_user_agent",
+    "raw_payload",
+    "provider_payload",
+    "payment_payload",
+    "secret",
+    "api_key"
+  ],
+  "next_phase": [
+    "Research MVP",
+    "Search Channel live readiness",
+    "crawler log readiness"
+  ],
+  "research_boundaries": {
+    "publish_allowed_in_this_train": false,
+    "sitemap_or_llms_inclusion_allowed_before_contract_gates": false,
+    "search_channel_queue_insertion_allowed_before_contract_gates": false,
+    "cms_draft_gate_required": true
+  },
+  "production_operations_performed_in_this_pr": false,
+  "metabase_operation_performed_in_this_pr": false,
+  "runtime_code_changed_in_this_pr": false,
+  "migration_changed_in_this_pr": false,
+  "env_edit_in_this_pr": false,
+  "deploy_performed_in_this_pr": false,
+  "scheduler_enabled_in_this_pr": false,
+  "collector_write_performed_in_this_pr": false,
+  "external_api_live_activation": false,
+  "url_submission_performed": false,
+  "production_crawler_log_read": false,
+  "research_publish_in_this_pr": false,
+  "pseo_generation_in_this_pr": false,
+  "next_task": "METABASE-OPS-ACCESS-RUNBOOK-00"
+}
