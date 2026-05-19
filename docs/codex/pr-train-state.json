@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T01:44:44Z",
+  "updated_at": "2026-05-19T01:55:03Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11003,8 +11003,8 @@
     },
     "SEO-DASH-PROD-04B": {
       "repo": "fap-api",
-      "status": "pr_opened_github_checks_pending",
-      "state": "open",
+      "status": "merged",
+      "state": "merged",
       "title": "URL Truth MVP dashboard spec and sanitized views plan",
       "depends_on": [
         "SEO-DASH-PROD-04A"
@@ -11077,8 +11077,7 @@
           "command": "git diff --check"
         },
         "github": {
-          "status": "pending",
-          "pr_url": "https://github.com/fermatmind/fap-api/pull/1469"
+          "status": "passed"
         }
       },
       "sidecar_issues": [],
@@ -11102,17 +11101,28 @@
           "at": "2026-05-19T01:44:44Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1469 for SEO-DASH-PROD-04B. GitHub checks pending. No production operation performed."
+        },
+        {
+          "at": "2026-05-19T01:53:52Z",
+          "status": "merged",
+          "summary": "Reconciled SEO-DASH-PROD-04B as merged via PR #1469 with merge commit e5261b7eebad6243bf06266b15167009c47045cf. Remote branch absent and local main synced."
         }
       ],
       "branch": "codex/seo-dash-prod-04b-url-truth-mvp-dashboard-spec",
       "base": "main",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1469",
-      "commit_sha": "b7890990"
+      "commit_sha": "b7890990",
+      "final_status": "completed",
+      "merge_commit_sha": "e5261b7eebad6243bf06266b15167009c47045cf",
+      "merge_observed": true,
+      "merged_at": "2026-05-19T01:53:52Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-RESEARCH-00": {
       "repo": "fap-api",
-      "status": "planned",
-      "state": "planned",
+      "status": "local_validation_passed",
+      "state": "local_validation_passed",
       "title": "Research Asset readiness scan and contract",
       "depends_on": [
         "SEO-DASH-PROD-04B"
@@ -11135,6 +11145,54 @@
         "registration": {
           "status": "planned",
           "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-PROD-04B merged as PR #1469 and main contains merge commit e5261b7eebad6243bf06266b15167009c47045cf."
+        },
+        "scope": {
+          "status": "in_progress",
+          "evidence": "Implementing only Research Asset readiness doc, generated artifact, focused SeoIntel test, and PR train state metadata. No runtime route, CMS runtime code, fap-web code, sitemap/llms change, research publish, pSEO, or production operation executed."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Research Asset readiness doc, generated artifact, focused SeoIntel test, and docs/codex PR train state metadata. No runtime route, CMS runtime code, fap-web code, sitemap/llms change, research publish, pSEO, production operation, env, migration, scheduler, collector write, external API, or crawler log read was performed."
+        },
+        "research_asset_readiness_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelResearchAssetReadiness",
+          "evidence": "6 tests passed with 93 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "evidence": "126 tests passed with 2297 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Pint completed successfully; 3375 files checked."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/research-asset-readiness.v1.json >/dev/null"
+        },
+        "state_json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 - <<'PY' ... yaml.safe_load(docs/codex/pr-train.yaml)"
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
         }
       },
       "sidecar_issues": [],
@@ -11143,8 +11201,20 @@
           "at": "2026-05-19T01:02:33Z",
           "status": "planned",
           "summary": "Registered planned non-production PR train task PR-RESEARCH-00: Research Asset readiness scan and contract. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        },
+        {
+          "at": "2026-05-19T01:53:52Z",
+          "status": "in_progress",
+          "summary": "Started PR-RESEARCH-00 Research Asset readiness scan/contract on scoped branch. Scope excludes runtime routes, CMS runtime code, fap-web code, sitemap/llms behavior, research publish, pSEO, collector writes, scheduler, external APIs, crawler log reads, env edits, and production operations."
+        },
+        {
+          "at": "2026-05-19T01:55:03Z",
+          "status": "local_validation_passed",
+          "summary": "Added Research Asset readiness scan/spec, generated artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and git diff check passed. No runtime, publish, sitemap/llms, pSEO, or production operation performed."
         }
-      ]
+      ],
+      "branch": "codex/pr-research-00-readiness-scan-contract",
+      "base": "main"
     },
     "SEARCH-CHANNEL-QUEUE-00": {
       "repo": "fap-api",
