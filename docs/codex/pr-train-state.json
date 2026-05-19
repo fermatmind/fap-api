@@ -13341,7 +13341,7 @@
     "merge_commit": "70d503244b05a17fca026c60d3290b25104a1c27"
   },
   "RIASEC-FULL-CONTENT-PACK-05": {
-    "status": "pr_opened_github_checks_pending",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-05",
@@ -13350,7 +13350,7 @@
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-05-PREFLIGHT"
     ],
-    "commit_sha": "709ef7670fa6373633272168a4fcdaf555b0e5be",
+    "commit_sha": "d25635e3f3c6a5d1a3a954cfd5a9b2226dc853f2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1497",
     "checks": {
       "dependency_gate": {
@@ -13393,12 +13393,17 @@
       "github_required_checks": {
         "status": "pending",
         "summary": "PR #1497 opened; GitHub required checks pending."
+      },
+      "ledger_reconciliation": {
+        "status": "pass",
+        "summary": "GitHub PR #1497 is merged and origin/main contains d25635e3f3c6a5d1a3a954cfd5a9b2226dc853f2; reconciled before PACK-06-PREFLIGHT.",
+        "source_of_truth": "GitHub PR + origin/main"
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-19T23:15:17Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "history": [
       {
@@ -13415,6 +13420,122 @@
         "at": "2026-05-19T22:56:49Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1497 for PACK-05. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-19T23:15:17Z",
+        "status": "merged_reconciled",
+        "summary": "Reconciled PACK-05 stale ledger before PACK-06-PREFLIGHT: PR #1497 merged with squash commit d25635e3f3c6a5d1a3a954cfd5a9b2226dc853f2; GitHub and origin/main treated as source of truth."
+      }
+    ],
+    "merge_commit": "d25635e3f3c6a5d1a3a954cfd5a9b2226dc853f2"
+  },
+  "RIASEC-FULL-CONTENT-PACK-06-PREFLIGHT": {
+    "status": "pr_opened_github_checks_pending",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-06-preflight",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-06-PREFLIGHT: Occupation examples asset preflight",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-05"
+    ],
+    "commit_sha": "b4a3e45f1d1dd01a0ea75b168468d9a8b50556fc",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1499",
+    "checks": {
+      "pack_05_ledger_reconciliation": {
+        "status": "pass",
+        "summary": "PACK-05 reconciled to merged before PACK-06-PREFLIGHT registration."
+      },
+      "dependency_gate": {
+        "status": "pass",
+        "summary": "PACK-05 merged reconciliation completed before PACK-06-PREFLIGHT."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php --no-ansi",
+        "summary": "9 tests passed; V7.3 occupation fixture parsed, examples-only boundaries validated, no source invention, no forbidden user claims, no visible technical keys, and PACK-05 activity/task dependency is documented."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php"
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "summary": "pr-train-state.json parsed, pr-train.yaml parsed, and occupation_examples_boundary JSONL parsed with 360 records."
+      },
+      "forbidden_claim_scan": {
+        "status": "pass",
+        "summary": "Visible occupation example fields scan found forbidden_user_claim=0; boundary terms are confined to negated boundary copy or non-user-facing governance fields."
+      },
+      "technical_key_exposure_scan": {
+        "status": "pass",
+        "summary": "Visible occupation example fields scan found technical_key_exposure=0."
+      },
+      "preflight_decision": {
+        "status": "conditional_go",
+        "summary": "PACK-06 import can proceed after merge if it maps occupation examples through PACK-05 activity/task records by explicit backend mapping and does not introduce direct Code-to-occupation routing."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "summary": "Changed files are limited to PACK-05 ledger reconciliation, PACK-06 manifest/state registration, preflight fixture, preflight PHPUnit test, and preflight docs; no runtime import."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "summary": "PR #1499 opened; GitHub required checks pending."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-19T23:15:17Z",
+        "status": "registered",
+        "summary": "Registered PACK-06-PREFLIGHT for occupation examples boundary asset validation; no runtime import in this PR."
+      },
+      {
+        "at": "2026-05-19T23:16:56Z",
+        "status": "local_validation_passed",
+        "summary": "PACK-06-PREFLIGHT validated V7.3 occupation examples fixture and recorded CONDITIONAL GO for PACK-06 import; no runtime content import performed."
+      },
+      {
+        "at": "2026-05-19T23:17:55Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1499 for PACK-06-PREFLIGHT. GitHub checks pending."
+      }
+    ],
+    "next_pr": "RIASEC-FULL-CONTENT-PACK-06"
+  },
+  "RIASEC-FULL-CONTENT-PACK-06": {
+    "status": "registered_pending_dependency",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-06",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-06: Import backend-authoritative RIASEC occupation examples boundary asset",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-06-PREFLIGHT",
+      "RIASEC-FULL-CONTENT-PACK-05"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-19T23:15:17Z",
+        "status": "registered_pending_dependency",
+        "summary": "Registered PACK-06 import; execution allowed only after PACK-06-PREFLIGHT returns GO or CONDITIONAL GO and merges cleanly."
       }
     ]
   }
