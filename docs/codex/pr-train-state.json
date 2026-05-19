@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T14:09:09Z",
+  "updated_at": "2026-05-19T14:09:47Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11867,7 +11867,7 @@
       "next_pr": "PR-RESEARCH-01"
     },
     "PR-RESEARCH-01": {
-      "status": "commit_created",
+      "status": "pr_opened_github_checks_pending",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/pr-research-01",
@@ -11876,8 +11876,8 @@
       "depends_on": [
         "METABASE-OPS-ACCESS-RUNBOOK-00"
       ],
-      "commit_sha": "98d33ea1d601ba4a7446c9fce196dc37c101b53a",
-      "pr_url": null,
+      "commit_sha": "2a6c675c45f467aa3ef5a039ae5dae40a8c8e6f4",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1481",
       "checks": {
         "local": {
           "php_artisan_test_filter_research_asset_backend_mvp": "passed",
@@ -11911,6 +11911,11 @@
           "at": "2026-05-19T14:09:09Z",
           "status": "commit_created",
           "summary": "Created local commit 98d33ea1d601ba4a7446c9fce196dc37c101b53a."
+        },
+        {
+          "at": "2026-05-19T14:09:47Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1481. GitHub checks pending."
         }
       ],
       "next_pr": "PR-RESEARCH-02"
