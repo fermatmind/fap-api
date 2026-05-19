@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T04:02:03.272Z",
+  "updated_at": "2026-05-19T04:11:24.511Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11936,7 +11936,7 @@
     "next_pr": "OPS-CI-CODESCAN-WEB-01"
   },
   "OPS-RUNBOOK-HEALTHZ-01": {
-    "status": "in_progress",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/ops-runbook-healthz-01",
@@ -11955,12 +11955,18 @@
         "git_diff_check": "passed",
         "scope_validation": "passed"
       },
-      "github": {}
+      "github": {
+        "hygiene": "passed",
+        "semgrep_sarif": "passed",
+        "semgrep_oss": "passed",
+        "verify_mbti_legacy": "passed",
+        "verify_mbti_v2": "passed"
+      }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-19T04:08:06Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "history": [
       {
@@ -11982,8 +11988,65 @@
         "at": "2026-05-19T04:02:03.272Z",
         "status": "pr_opened",
         "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1477."
+      },
+      {
+        "at": "2026-05-19T04:10:16.588Z",
+        "status": "post_merge_cleanup_complete",
+        "summary": "PR #1477 merged at 29ec08275027a517993a7cea0fdc6c117bc85c87; origin/main synced; local and remote branches removed."
       }
     ],
-    "next_pr": "OPS-RELEASE-WORKFLOW-01"
+    "next_pr": "OPS-RELEASE-WORKFLOW-01",
+    "merge_commit": "29ec08275027a517993a7cea0fdc6c117bc85c87"
+  },
+  "OPS-RELEASE-WORKFLOW-01": {
+    "status": "in_progress",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/ops-release-workflow-01",
+    "base": "main",
+    "title": "docs(ops): codify release operator workflow and deploy incident governance",
+    "depends_on": [
+      "OPS-RUNBOOK-HEALTHZ-01"
+    ],
+    "commit_sha": "2084a3a5e9406a90508070a46814eec7c18fd087",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1478",
+    "checks": {
+      "local": {
+        "yaml_parse": "passed",
+        "json_parse": "passed",
+        "markdown_manual_review": "passed",
+        "git_diff_check": "passed",
+        "scope_validation": "passed"
+      },
+      "github": {}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-19T04:10:16.588Z",
+        "status": "in_progress",
+        "summary": "Started docs-only release operator workflow and deploy incident governance PR."
+      },
+      {
+        "at": "2026-05-19T04:10:40.653Z",
+        "status": "local_checks_passed",
+        "summary": "YAML/JSON parse, markdown manual review, git diff --check, and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-05-19T04:10:49.222Z",
+        "status": "committed",
+        "summary": "Committed 2084a3a5e9406a90508070a46814eec7c18fd087."
+      },
+      {
+        "at": "2026-05-19T04:11:24.511Z",
+        "status": "pr_opened",
+        "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1478."
+      }
+    ],
+    "next_pr": null
   }
 }
