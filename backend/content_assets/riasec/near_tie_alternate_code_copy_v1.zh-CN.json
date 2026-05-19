@@ -1,0 +1,63 @@
+{
+  "asset_id": "near_tie_alternate_code_copy_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-CN",
+  "scale_code": "RIASEC",
+  "review_status": "content_review_v7_3_final_preflight_candidate",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "states": [
+    {
+      "state": "top1_top2_near_tie",
+      "title": "前两维接近",
+      "copy": "主读当前 Code，同时参考前两维交换顺序后的活动链。你不是“另一个 Code”，而是两条兴趣入口接近。"
+    },
+    {
+      "state": "top2_top3_near_tie",
+      "title": "第二、第三维接近",
+      "copy": "第三维不是边缘装饰。它可能决定这条活动链最终面向材料、表达、真实人、目标还是秩序。"
+    },
+    {
+      "state": "multi_near_tie",
+      "title": "多维接近",
+      "copy": "请先看活动，而不是看字母。多维接近时，真正有用的是用小任务验证哪类活动更有能量。"
+    },
+    {
+      "state": "alternate_code_available",
+      "title": "可参考 alternate code",
+      "copy": "alternate code 是阅读辅助，不是第二个答案。它帮助你理解不同排序下活动链的重心变化。"
+    }
+  ],
+  "user_visible_boundary": "Alternate code 是并读参考，不是推翻结果，也不是新的身份标签。",
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module"
+}

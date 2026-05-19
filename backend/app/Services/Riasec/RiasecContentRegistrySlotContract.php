@@ -14,6 +14,7 @@ final class RiasecContentRegistrySlotContract
         'dimension_deep_copy',
         'pair_blend_copy',
         'quality_copy',
+        'interpretation_state_copy',
         'module_visibility_copy',
         '140q_layer_copy',
         'structural_difference_copy',
@@ -104,6 +105,18 @@ final class RiasecContentRegistrySlotContract
         'cautious_reading_copy' => [
             'slot_group' => 'quality_copy',
             'required_versions' => ['quality_rule_version'],
+        ],
+        'profile_shape_copy' => [
+            'slot_group' => 'interpretation_state_copy',
+            'required_versions' => ['interpretation_rule_version'],
+        ],
+        'top_code_confidence_copy' => [
+            'slot_group' => 'interpretation_state_copy',
+            'required_versions' => ['interpretation_rule_version'],
+        ],
+        'near_tie_alternate_code_copy' => [
+            'slot_group' => 'interpretation_state_copy',
+            'required_versions' => ['interpretation_rule_version'],
         ],
         'structural_difference_copy' => [
             'slot_group' => 'structural_difference_copy',

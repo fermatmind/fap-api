@@ -1,0 +1,68 @@
+{
+  "asset_id": "top_code_confidence_copy_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-CN",
+  "scale_code": "RIASEC",
+  "review_status": "content_review_v7_3_final_preflight_candidate",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "states": [
+    {
+      "state": "high_confidence",
+      "label": "主线索清楚",
+      "copy": "第一维与后续维度差距较明显，可以把三字码作为本次兴趣探索入口；仍需同时阅读第二、第三维，因为它们决定活动链如何展开。"
+    },
+    {
+      "state": "moderate_confidence",
+      "label": "可正常阅读",
+      "copy": "主线索可读，但不是单一结论。建议先看 Top2 组合，再看 Top3 活动链。"
+    },
+    {
+      "state": "near_tie",
+      "label": "近似并列",
+      "copy": "前两维或前三维接近时，不要急着固定一个字母顺序。把它读成几条活动线索的接近竞争，并用小实验验证。"
+    },
+    {
+      "state": "broad_profile",
+      "label": "兴趣较广",
+      "copy": "多个维度都较接近时，页面应少强调单一 Code，更多展示可验证活动与低风险选择。"
+    },
+    {
+      "state": "low_clarity",
+      "label": "谨慎阅读",
+      "copy": "本次结果更适合当作初步线索。建议先看六维分布，不输出强活动链。"
+    }
+  ],
+  "user_visible_boundary": "结果阅读力度只说明本次兴趣线索是否集中、接近或需要谨慎阅读；它不是准确率、职业前景或能力判断。",
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module"
+}

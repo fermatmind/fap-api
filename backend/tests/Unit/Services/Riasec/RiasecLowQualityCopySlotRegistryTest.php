@@ -40,6 +40,48 @@ final class RiasecLowQualityCopySlotRegistryTest extends TestCase
 
             $this->assertSame([], $registry->validateSlot($slot), $slotName.' should be contract-clean.');
         }
+
+        $this->assertSame('low_quality_cautious_reading_v1.zh-CN', $slots['top_notice']['content_version']);
+        $this->assertStringContainsString('谨慎阅读', $slots['top_notice']['summary']);
+    }
+
+    public function test_interpretation_state_assets_are_backend_authored_and_fail_closed(): void
+    {
+        $registry = new RiasecDeepCopySlotRegistry;
+        $slots = $registry->interpretationStateCopySlots();
+
+        foreach ([
+            'profile_shape_copy:near_tie',
+            'top_code_confidence_copy:near_tie',
+            'near_tie_alternate_code_copy:top1_top2_near_tie',
+            'near_tie_alternate_code_copy:alternate_code_available',
+        ] as $slotId) {
+            $slot = $slots[$slotId] ?? null;
+            $this->assertIsArray($slot, $slotId.' slot should exist.');
+            $this->assertSame('interpretation_state_copy', $slot['slot_group']);
+            $this->assertSame('authored', $slot['content_status']);
+            $this->assertFalse($slot['frontend_fallback_allowed']);
+            $this->assertSame([], $registry->validateSlot($slot), $slotId.' should be contract-clean.');
+        }
+
+        $this->assertSame(
+            'unavailable',
+            $registry->resolveInterpretationStateCopySlot('top_code_confidence_copy', 'unsupported')['content_status']
+        );
+    }
+
+    public function test_confidence_and_near_tie_copy_do_not_claim_probability_or_identity(): void
+    {
+        $registry = new RiasecDeepCopySlotRegistry;
+        $slots = $registry->interpretationStateCopySlots();
+
+        $confidence = $slots['top_code_confidence_copy:near_tie'];
+        $this->assertStringContainsString('不是准确率', $confidence['user_visible_boundary']);
+        $this->assertStringNotContainsString('成功概率', $confidence['summary']);
+
+        $nearTie = $slots['near_tie_alternate_code_copy:alternate_code_available'];
+        $this->assertStringContainsString('不是第二个答案', $nearTie['summary']);
+        $this->assertStringNotContainsString('你其实是另一个 Code', $nearTie['summary']);
     }
 
     public function test_low_quality_downgrade_policy_hides_strong_modules(): void

@@ -16,6 +16,14 @@ final class RiasecDeepCopySlotRegistry
 
     private const LAYER_140Q_ASSET_PATH = '/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl';
 
+    private const LOW_QUALITY_ASSET_PATH = '/content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json';
+
+    private const PROFILE_SHAPE_ASSET_PATH = '/content_assets/riasec/profile_shape_copy_v1.zh-CN.json';
+
+    private const TOP_CODE_CONFIDENCE_ASSET_PATH = '/content_assets/riasec/top_code_confidence_copy_v1.zh-CN.json';
+
+    private const NEAR_TIE_ASSET_PATH = '/content_assets/riasec/near_tie_alternate_code_copy_v1.zh-CN.json';
+
     /** @var array<string,array<string,mixed>>|null */
     private ?array $dimensionContentCache = null;
 
@@ -27,6 +35,18 @@ final class RiasecDeepCopySlotRegistry
 
     /** @var array<string,array<string,mixed>>|null */
     private ?array $layer140qContentCache = null;
+
+    /** @var array<string,mixed>|null */
+    private ?array $lowQualityAssetCache = null;
+
+    /** @var array<string,mixed>|null */
+    private ?array $profileShapeAssetCache = null;
+
+    /** @var array<string,mixed>|null */
+    private ?array $topCodeConfidenceAssetCache = null;
+
+    /** @var array<string,mixed>|null */
+    private ?array $nearTieAssetCache = null;
 
     /** @var list<string> */
     public const DIMENSIONS = ['R', 'I', 'A', 'S', 'E', 'C'];
@@ -81,6 +101,33 @@ final class RiasecDeepCopySlotRegistry
         'low_quality',
         'retake_recommended',
         'minimal_quality_boundary_60q',
+    ];
+
+    /** @var list<string> */
+    public const PROFILE_SHAPES = [
+        'clear_code',
+        'blended_code',
+        'broad_profile',
+        'near_tie',
+        'low_quality',
+        'low_clarity',
+    ];
+
+    /** @var list<string> */
+    public const TOP_CODE_CONFIDENCE_STATES = [
+        'high_confidence',
+        'moderate_confidence',
+        'near_tie',
+        'broad_profile',
+        'low_clarity',
+    ];
+
+    /** @var list<string> */
+    public const NEAR_TIE_COPY_STATES = [
+        'top1_top2_near_tie',
+        'top2_top3_near_tie',
+        'multi_near_tie',
+        'alternate_code_available',
     ];
 
     /** @var list<string> */
@@ -360,7 +407,7 @@ final class RiasecDeepCopySlotRegistry
      */
     public function lowQualitySlots(): array
     {
-        return [
+        $slots = [
             'top_notice' => $this->qualitySlot('low_quality_copy', 'top_notice', [
                 'title' => '这次结果适合谨慎阅读',
                 'summary' => '本次结果可以作为初步兴趣线索，但不适合用三字母代码做强结论。更稳妥的做法是先看六维概览，或稍后在状态更稳定时重测。',
@@ -407,6 +454,54 @@ final class RiasecDeepCopySlotRegistry
                 'quality_state' => 'minimal_quality_boundary_60q',
             ]),
         ];
+
+        foreach ($this->lowQualitySlotsFromAsset() as $slotName => $content) {
+            if (! array_key_exists($slotName, $slots)) {
+                continue;
+            }
+            $slotKey = (string) ($slots[$slotName]['slot_key'] ?? 'low_quality_copy');
+            $slots[$slotName] = $this->qualitySlot($slotKey, $slotName, array_merge($content, [
+                'quality_state' => (string) ($slots[$slotName]['quality_state'] ?? $content['quality_state'] ?? 'low_quality'),
+            ]));
+        }
+
+        return $slots;
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    public function interpretationStateCopySlots(): array
+    {
+        return array_filter(array_merge(
+            $this->profileShapeCopySlots(),
+            $this->topCodeConfidenceCopySlots(),
+            $this->nearTieAlternateCodeCopySlots()
+        ), fn (array $slot): bool => $this->validateSlot($slot) === []);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function resolveInterpretationStateCopySlot(string $slotKey, string $slotName): array
+    {
+        $slotName = trim($slotName);
+        $slotId = trim($slotKey).':'.$slotName;
+        $slot = $this->interpretationStateCopySlots()[$slotId] ?? null;
+
+        if ($slot === null) {
+            return [
+                'slot_key' => trim($slotKey),
+                'slot_name' => $slotName,
+                'content_status' => 'unavailable',
+                'module_state' => 'omitted',
+                'fallback_behavior' => 'omit_module',
+                'frontend_fallback_allowed' => false,
+                'reason' => 'unsupported_interpretation_state_copy_slot',
+            ];
+        }
+
+        return $slot;
     }
 
     /**
@@ -423,6 +518,103 @@ final class RiasecDeepCopySlotRegistry
             'measured_holland_code_mutation_allowed' => false,
             'frontend_fallback_allowed' => false,
         ];
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    private function profileShapeCopySlots(): array
+    {
+        $asset = $this->profileShapeAsset();
+        $slots = [];
+        foreach ((array) ($asset['profile_shapes'] ?? []) as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+            $shape = trim((string) ($row['shape'] ?? ''));
+            if (! in_array($shape, self::PROFILE_SHAPES, true)) {
+                continue;
+            }
+
+            $slot = $this->interpretationStateSlot('profile_shape_copy', $shape, [
+                'profile_shape' => $shape,
+                'title' => (string) ($row['title'] ?? ''),
+                'summary' => (string) ($row['summary'] ?? ''),
+                'body' => (string) ($row['summary'] ?? ''),
+                'module_policy' => (string) ($row['module_policy'] ?? ''),
+                'content_version' => (string) ($asset['asset_id'] ?? 'profile_shape_copy_v1.zh-CN'),
+                'user_visible_boundary' => 'Profile shape 只说明本次兴趣线索的阅读方式，不是人格身份、职业结论或能力判断。',
+                'source_review_status' => (string) ($asset['review_status'] ?? ''),
+            ]);
+            $slots[(string) $slot['slot_key'].':'.$shape] = $slot;
+        }
+
+        return $slots;
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    private function topCodeConfidenceCopySlots(): array
+    {
+        $asset = $this->topCodeConfidenceAsset();
+        $slots = [];
+        foreach ((array) ($asset['states'] ?? []) as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+            $state = trim((string) ($row['state'] ?? ''));
+            if (! in_array($state, self::TOP_CODE_CONFIDENCE_STATES, true)) {
+                continue;
+            }
+
+            $slot = $this->interpretationStateSlot('top_code_confidence_copy', $state, [
+                'confidence_state' => $state,
+                'title' => (string) ($row['label'] ?? ''),
+                'label' => (string) ($row['label'] ?? ''),
+                'summary' => (string) ($row['copy'] ?? ''),
+                'body' => (string) ($row['copy'] ?? ''),
+                'copy' => (string) ($row['copy'] ?? ''),
+                'content_version' => (string) ($asset['asset_id'] ?? 'top_code_confidence_copy_v1.zh-CN'),
+                'user_visible_boundary' => (string) ($asset['user_visible_boundary'] ?? '结果阅读力度只说明线索集中程度，不是准确率、职业前景或能力判断。'),
+                'source_review_status' => (string) ($asset['review_status'] ?? ''),
+            ]);
+            $slots[(string) $slot['slot_key'].':'.$state] = $slot;
+        }
+
+        return $slots;
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    private function nearTieAlternateCodeCopySlots(): array
+    {
+        $asset = $this->nearTieAsset();
+        $slots = [];
+        foreach ((array) ($asset['states'] ?? []) as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+            $state = trim((string) ($row['state'] ?? ''));
+            if (! in_array($state, self::NEAR_TIE_COPY_STATES, true)) {
+                continue;
+            }
+
+            $slot = $this->interpretationStateSlot('near_tie_alternate_code_copy', $state, [
+                'near_tie_copy_state' => $state,
+                'title' => (string) ($row['title'] ?? ''),
+                'summary' => (string) ($row['copy'] ?? ''),
+                'body' => (string) ($row['copy'] ?? ''),
+                'copy' => (string) ($row['copy'] ?? ''),
+                'content_version' => (string) ($asset['asset_id'] ?? 'near_tie_alternate_code_copy_v1.zh-CN'),
+                'user_visible_boundary' => (string) ($asset['user_visible_boundary'] ?? 'Alternate code 是并读参考，不是新的身份标签或测评分数变化。'),
+                'source_review_status' => (string) ($asset['review_status'] ?? ''),
+            ]);
+            $slots[(string) $slot['slot_key'].':'.$state] = $slot;
+        }
+
+        return $slots;
     }
 
     /**
@@ -1500,6 +1692,137 @@ final class RiasecDeepCopySlotRegistry
     }
 
     /**
+     * @return array<string,array<string,mixed>>
+     */
+    private function lowQualitySlotsFromAsset(): array
+    {
+        $asset = $this->lowQualityAsset();
+        $copyBySlot = [];
+        foreach ((array) ($asset['copy_slots'] ?? []) as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+            $slotName = match ((string) ($row['slot'] ?? '')) {
+                'top_notice' => 'top_notice',
+                'retake_guidance' => 'retake_guidance',
+                'module_downgrade' => 'hidden_modules_explanation',
+                'share_pdf_note' => 'share_pdf_boundary',
+                default => null,
+            };
+            if ($slotName === null) {
+                continue;
+            }
+            $copyBySlot[$slotName] = [
+                'title' => (string) ($this->lowQualitySlotTitle($slotName)),
+                'summary' => (string) ($row['text'] ?? ''),
+                'content_version' => (string) ($asset['asset_id'] ?? 'low_quality_cautious_reading_v1.zh-CN'),
+                'user_visible_boundary' => '质量状态只限制本次结果的阅读强度，不评价用户，也不改变分数或 Holland Code。',
+            ];
+        }
+
+        $states = [];
+        foreach ((array) ($asset['states'] ?? []) as $row) {
+            if (is_array($row) && isset($row['quality_state'])) {
+                $states[(string) $row['quality_state']] = (string) ($row['copy'] ?? '');
+            }
+        }
+        if (($states['caution'] ?? '') !== '') {
+            $copyBySlot['cautious_reading_notice'] = [
+                'title' => '轻量参考',
+                'summary' => $states['caution'],
+                'quality_state' => 'caution',
+                'content_version' => (string) ($asset['asset_id'] ?? 'low_quality_cautious_reading_v1.zh-CN'),
+                'user_visible_boundary' => '谨慎阅读只说明本次线索需要验证，不是结果无效，也不是能力判断。',
+            ];
+        }
+        if (($states['minimal_60q'] ?? '') !== '') {
+            $copyBySlot['minimal_quality_boundary_60q'] = [
+                'title' => '60Q 最小质量边界',
+                'summary' => $states['minimal_60q'],
+                'quality_state' => 'minimal_quality_boundary_60q',
+                'content_version' => (string) ($asset['asset_id'] ?? 'low_quality_cautious_reading_v1.zh-CN'),
+                'user_visible_boundary' => '60Q 的质量边界只限制阅读方式，不比较 60Q 和 140Q 的正确性。',
+            ];
+        }
+
+        return $copyBySlot;
+    }
+
+    private function lowQualitySlotTitle(string $slotName): string
+    {
+        return match ($slotName) {
+            'top_notice' => '这次结果需要谨慎阅读',
+            'retake_guidance' => '稍后重测建议',
+            'hidden_modules_explanation' => '页面会减少强解释',
+            'share_pdf_boundary' => '分享和 PDF 边界',
+            default => '谨慎阅读提示',
+        };
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function lowQualityAsset(): array
+    {
+        if ($this->lowQualityAssetCache !== null) {
+            return $this->lowQualityAssetCache;
+        }
+
+        return $this->lowQualityAssetCache = $this->jsonAsset(self::LOW_QUALITY_ASSET_PATH);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function profileShapeAsset(): array
+    {
+        if ($this->profileShapeAssetCache !== null) {
+            return $this->profileShapeAssetCache;
+        }
+
+        return $this->profileShapeAssetCache = $this->jsonAsset(self::PROFILE_SHAPE_ASSET_PATH);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function topCodeConfidenceAsset(): array
+    {
+        if ($this->topCodeConfidenceAssetCache !== null) {
+            return $this->topCodeConfidenceAssetCache;
+        }
+
+        return $this->topCodeConfidenceAssetCache = $this->jsonAsset(self::TOP_CODE_CONFIDENCE_ASSET_PATH);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function nearTieAsset(): array
+    {
+        if ($this->nearTieAssetCache !== null) {
+            return $this->nearTieAssetCache;
+        }
+
+        return $this->nearTieAssetCache = $this->jsonAsset(self::NEAR_TIE_ASSET_PATH);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function jsonAsset(string $relativePath): array
+    {
+        $path = dirname(__DIR__, 3).$relativePath;
+        if (! is_file($path)) {
+            return [];
+        }
+
+        $decoded = json_decode((string) file_get_contents($path), true);
+
+        return is_array($decoded) ? $decoded : [];
+    }
+
+    /**
      * @param  array<string,mixed>  $content
      * @return array<string,mixed>
      */
@@ -1565,6 +1888,43 @@ final class RiasecDeepCopySlotRegistry
             'evidence_level' => 'expert_reviewed',
             'source_status' => 'reviewed_content_copy',
             'review_status' => 'approved_for_staging',
+            'fallback_behavior' => 'omit_module',
+            'content_status' => 'authored',
+            'frontend_fallback_allowed' => false,
+        ], $content);
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return array<string,mixed>
+     */
+    private function interpretationStateSlot(string $slotKey, string $slotName, array $content): array
+    {
+        return array_merge([
+            'slot_key' => $slotKey,
+            'slot_group' => 'interpretation_state_copy',
+            'scale_code' => 'RIASEC',
+            'locale' => 'zh-CN',
+            'content_version' => 'riasec_interpretation_state_copy_v1.zh-CN',
+            'interpretation_rule_version' => 'riasec_interpretation_rule_spec_v2',
+            'applicable_form_codes' => ['riasec_60', 'riasec_140'],
+            'applicable_profile_shapes' => ['clear_code', 'blended_code', 'broad_profile', 'near_tie', 'low_quality', 'low_clarity'],
+            'applicable_quality_states' => ['normal', 'caution', 'low_quality'],
+            'applicable_codes' => [$slotName],
+            'slot_name' => $slotName,
+            'forbidden_claims' => [
+                'personality_identity',
+                'career_recommendation',
+                'job_fit',
+                'success_prediction',
+                'accuracy_probability',
+                'ability_or_skill_inference',
+            ],
+            'required_boundaries' => $this->requiredBoundaries(),
+            'user_visible_boundary' => '这些内容只说明结果阅读方式，不改变分数、Holland Code 或职业结论。',
+            'evidence_level' => 'expert_reviewed',
+            'source_status' => 'reviewed_content_copy',
+            'review_status' => 'content_review',
             'fallback_behavior' => 'omit_module',
             'content_status' => 'authored',
             'frontend_fallback_allowed' => false,

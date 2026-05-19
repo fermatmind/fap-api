@@ -12968,7 +12968,7 @@
     "merge_commit": "150acbda417bbfd56ab319620080cde392188b65"
   },
   "RIASEC-FULL-CONTENT-PACK-07": {
-    "status": "github_checks_passed_ready_to_merge",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-07",
@@ -12977,7 +12977,7 @@
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-04"
     ],
-    "commit_sha": "c5663e60fc6cc8ce04b4f445566a61575b692871",
+    "commit_sha": "6f83ae6c06875b71af1dd8950e3b5352567290b4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1493",
     "checks": {
       "dependency_gate": {
@@ -13018,13 +13018,13 @@
       },
       "github_required_checks": {
         "status": "pass",
-        "summary": "PR #1493 passed hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2 before merge review."
+        "summary": "PR #1493 passed hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2 before squash merge."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-19T21:11:58Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "history": [
       {
@@ -13051,12 +13051,18 @@
         "at": "2026-05-19T21:05:36Z",
         "status": "github_checks_passed_ready_to_merge",
         "summary": "GitHub required checks passed for PR #1493; ready for final merge-state review."
+      },
+      {
+        "at": "2026-05-19T21:21:15Z",
+        "status": "merged_reconciled",
+        "summary": "Reconciled PACK-07 before PACK-08: PR #1493 merged with squash commit 6f83ae6c06875b71af1dd8950e3b5352567290b4; origin/main contains the merge commit and remote/local branch cleanup completed."
       }
     ],
-    "next_pr": "RIASEC-FULL-CONTENT-PACK-08"
+    "next_pr": "RIASEC-FULL-CONTENT-PACK-08",
+    "merge_commit": "6f83ae6c06875b71af1dd8950e3b5352567290b4"
   },
   "RIASEC-FULL-CONTENT-PACK-08": {
-    "status": "registered",
+    "status": "github_checks_passed_ready_to_merge",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-08",
@@ -13065,9 +13071,48 @@
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-07"
     ],
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "commit_sha": "b864549f4e802e3e7b527cc7216e705ad190e5a9",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1494",
+    "checks": {
+      "dependency_gate": {
+        "status": "pass",
+        "summary": "PACK-07 was merged and reconciled before PACK-08 implementation continued."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Unit/Services/Riasec/RiasecInterpretationRuleContractTest.php tests/Unit/Services/Riasec/RiasecReportModuleSelectorTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi",
+        "summary": "28 tests passed; imported low-quality, confidence, profile-shape, and near-tie assets validate and projection/report regression coverage passed."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecPublicProjectionService.php app/Services/Riasec/RiasecContentRegistrySlotContract.php tests/Unit/Services/Riasec/RiasecLowQualityCopySlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Unit/Services/Riasec/RiasecInterpretationRuleContractTest.php tests/Unit/Services/Riasec/RiasecReportModuleSelectorTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php"
+      },
+      "json_validation": {
+        "status": "pass",
+        "command": "python3 JSON parse for low_quality, top_code_confidence, near_tie, and profile_shape RIASEC assets",
+        "summary": "4 JSON assets parsed successfully."
+      },
+      "forbidden_claim_scan": {
+        "status": "pass",
+        "summary": "Imported PACK-08 assets scan found 0 forbidden user claims; 1 allowed boundary hit for negated near-tie “推翻” boundary."
+      },
+      "frontend_fallback_scan": {
+        "status": "pass",
+        "summary": "No frontend_fallback_allowed=true hits in imported assets or touched RIASEC services/tests."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "summary": "Changed files are limited to PACK-08 RIASEC quality/interpretation assets, backend registry/projection/contract tests, and authorized PR train metadata; no scorer, quality math, question pack, frontend fallback, career matching, feedback mutation, analytics, or production data changes."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "summary": "PR #1494 passed hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2 before merge review."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -13078,6 +13123,21 @@
         "at": "2026-05-19T20:06:36Z",
         "status": "registered",
         "summary": "Registered RIASEC-FULL-CONTENT-PACK-08 for RIASEC Full Content Pack PHASE2 after user-authorized manifest/state update."
+      },
+      {
+        "at": "2026-05-19T21:21:15Z",
+        "status": "local_validation_passed",
+        "summary": "Imported low-quality, confidence, profile-shape, and near-tie assets; added backend interpretation-state slots and passed targeted PHPUnit, scoped Pint, JSON validation, forbidden-claim scan, fallback scan, and diff checks locally."
+      },
+      {
+        "at": "2026-05-19T21:22:41Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1494 for PACK-08. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-19T21:29:29Z",
+        "status": "github_checks_passed_ready_to_merge",
+        "summary": "GitHub required checks passed for PR #1494; ready for final merge-state review."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-05"
