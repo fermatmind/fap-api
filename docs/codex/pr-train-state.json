@@ -4494,8 +4494,8 @@
         "no fap-web change",
         "no 300/800/2786 expansion execution"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "28b9a411",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1486",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -12151,6 +12151,11 @@
           "at": "2026-05-19T20:12:00Z",
           "status": "local_checks_passed",
           "summary": "Focused Ops Portal SEO access architecture test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
+        },
+        {
+          "at": "2026-05-19T20:15:00Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1486. GitHub checks pending."
         }
       ],
       "next_pr": "OPS-PORTAL-SEO-02"
