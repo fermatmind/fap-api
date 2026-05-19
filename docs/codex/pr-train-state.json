@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T02:17:23Z",
+  "updated_at": "2026-05-19T02:28:20Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11357,8 +11357,8 @@
     },
     "CRAWLER-LOG-00": {
       "repo": "fap-api",
-      "status": "pr_opened_github_checks_pending",
-      "state": "open",
+      "status": "merged",
+      "state": "merged",
       "title": "Crawler log readiness contract",
       "depends_on": [
         "SEO-DASH-PROD-04B"
@@ -11431,8 +11431,7 @@
           "command": "git diff --check"
         },
         "github": {
-          "status": "pending",
-          "pr_url": "https://github.com/fermatmind/fap-api/pull/1472"
+          "status": "passed"
         }
       },
       "sidecar_issues": [],
@@ -11456,17 +11455,28 @@
           "at": "2026-05-19T02:17:23Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1472 for CRAWLER-LOG-00. GitHub checks pending. No production operation performed."
+        },
+        {
+          "at": "2026-05-19T02:26:15Z",
+          "status": "merged",
+          "summary": "Reconciled CRAWLER-LOG-00 as merged via PR #1472. Remote branch absent and local main synced."
         }
       ],
       "branch": "codex/crawler-log-00-readiness-contract",
       "base": "main",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1472",
-      "commit_sha": "56a56f73"
+      "commit_sha": "56a56f73",
+      "final_status": "completed",
+      "merge_commit_sha": "4f619c18",
+      "merge_observed": true,
+      "merged_at": "2026-05-19T02:26:15Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "CLAIM-LINT-00": {
       "repo": "fap-api",
-      "status": "planned",
-      "state": "planned",
+      "status": "pr_opened_github_checks_pending",
+      "state": "open",
       "title": "Chinese claim boundary linter spec and tests",
       "depends_on": [
         "PR-RESEARCH-00"
@@ -11489,6 +11499,58 @@
         "registration": {
           "status": "planned",
           "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR-RESEARCH-00 merged as PR #1470. Main contains required dependency."
+        },
+        "scope": {
+          "status": "in_progress",
+          "evidence": "Implementing only Chinese claim boundary linter contract doc, generated artifact, focused SeoIntel test, and PR train state metadata. No runtime activation, service code, frontend copy, publish behavior, sitemap/llms change, or production operation executed."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Chinese claim boundary linter contract doc, generated artifact, focused SeoIntel test, and docs/codex PR train state metadata. No runtime activation, service code, frontend copy, publish behavior, sitemap/llms change, scheduler, collector write, external API, or production operation was performed."
+        },
+        "chinese_claim_boundary_linter_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelChineseClaimBoundaryLinter",
+          "evidence": "6 tests passed with 73 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "evidence": "142 tests passed with 2558 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Pint completed successfully; 3378 files checked."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/chinese-claim-boundary-linter.v1.json >/dev/null"
+        },
+        "state_json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 - <<'PY' ... yaml.safe_load(docs/codex/pr-train.yaml)"
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1473"
         }
       },
       "sidecar_issues": [],
@@ -11497,8 +11559,27 @@
           "at": "2026-05-19T01:02:33Z",
           "status": "planned",
           "summary": "Registered planned non-production PR train task CLAIM-LINT-00: Chinese claim boundary linter spec and tests. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        },
+        {
+          "at": "2026-05-19T02:26:15Z",
+          "status": "in_progress",
+          "summary": "Started CLAIM-LINT-00 on scoped branch. Scope remains docs/spec/test only; no runtime activation, frontend copy change, publish behavior, sitemap/llms change, scheduler, external API, collector write, or production operation."
+        },
+        {
+          "at": "2026-05-19T02:27:35Z",
+          "status": "local_validation_passed",
+          "summary": "Added Chinese claim boundary linter contract, generated artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and git diff check passed. No runtime activation, content mutation, sitemap/llms change, or production operation performed."
+        },
+        {
+          "at": "2026-05-19T02:28:20Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1473 for CLAIM-LINT-00. GitHub checks pending. No production operation performed."
         }
-      ]
+      ],
+      "branch": "codex/claim-lint-00-chinese-claim-boundary",
+      "base": "main",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1473",
+      "commit_sha": "7e008bae"
     },
     "CONTENT-OPS-01": {
       "repo": "fap-api",
