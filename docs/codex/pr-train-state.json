@@ -13062,7 +13062,7 @@
     "merge_commit": "6f83ae6c06875b71af1dd8950e3b5352567290b4"
   },
   "RIASEC-FULL-CONTENT-PACK-08": {
-    "status": "local_validation_passed",
+    "status": "pr_open_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-08",
@@ -13071,8 +13071,8 @@
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-07"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "d8cad18f58f645ac449295a0a1fdb9b5fc18a371",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1494",
     "checks": {
       "dependency_gate": {
         "status": "pass",
@@ -13107,6 +13107,10 @@
       "scope_validation": {
         "status": "pass",
         "summary": "Changed files are limited to PACK-08 RIASEC quality/interpretation assets, backend registry/projection/contract tests, and authorized PR train metadata; no scorer, quality math, question pack, frontend fallback, career matching, feedback mutation, analytics, or production data changes."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "summary": "PR #1494 opened; GitHub required checks pending."
       }
     },
     "failure_reason": null,
@@ -13124,6 +13128,11 @@
         "at": "2026-05-19T21:21:15Z",
         "status": "local_validation_passed",
         "summary": "Imported low-quality, confidence, profile-shape, and near-tie assets; added backend interpretation-state slots and passed targeted PHPUnit, scoped Pint, JSON validation, forbidden-claim scan, fallback scan, and diff checks locally."
+      },
+      {
+        "at": "2026-05-19T21:22:41Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1494 for PACK-08. GitHub checks pending."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-05"
