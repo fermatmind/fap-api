@@ -1,0 +1,86 @@
+{
+  "version": "ops-portal-seo-private-metabase-access-bridge.v1",
+  "task": "OPS-PORTAL-SEO-04",
+  "generated_at": "2026-05-19T20:24:01Z",
+  "purpose": "Define future private Metabase access bridge options without implementing proxy or network changes.",
+  "approved_mvp_access_paths": [
+    "workbench",
+    "ssh_tunnel_through_approved_bastion",
+    "vpn_after_separate_approval",
+    "owner_controlled_private_channel"
+  ],
+  "not_mvp_access_paths": [
+    "raw_public_metabase",
+    "public_dns_to_metabase",
+    "public_cdn_path_to_metabase",
+    "iframe_embedding",
+    "reverse_proxy_through_ops_portal",
+    "public_sharing_links",
+    "anonymous_links",
+    "public_embeds",
+    "normal_operator_unrestricted_sql"
+  ],
+  "bridge_options": {
+    "workbench": {
+      "allowed_for_mvp": true,
+      "requires_dns_change": false,
+      "requires_public_port": false,
+      "requires_security_group_change": false,
+      "requires_rds_whitelist_change": false
+    },
+    "ssh_tunnel_or_bastion": {
+      "allowed_after_approval": true,
+      "requires_owner": true,
+      "requires_auditability": true,
+      "localhost_or_private_only": true,
+      "public_metabase_port_allowed": false
+    },
+    "vpn": {
+      "allowed_after_approval": true,
+      "requires_owner": true,
+      "requires_auditable_membership": true,
+      "requires_revoke_path": true,
+      "public_metabase_exposure_allowed": false
+    },
+    "reverse_proxy_behind_ops_auth": {
+      "allowed_in_this_pr": false,
+      "requires_production_preflight": true,
+      "requires_auth_session_csrf_cookie_review": true,
+      "requires_audit_logging_plan": true,
+      "requires_rate_limit_and_revoke_plan": true,
+      "requires_dns_openresty_nginx_review_if_routing_changes": true
+    }
+  },
+  "production_gates": [
+    "no_metabase_bind_0_0_0_0",
+    "no_public_ecs_port",
+    "no_ecs_public_ipv4_or_eip",
+    "no_security_group_broadening",
+    "no_rds_whitelist_broadening",
+    "no_wildcard_percent",
+    "no_0_0_0_0_0",
+    "no_broad_cidr",
+    "no_public_rds_endpoint",
+    "no_business_db_access",
+    "no_tencent_rds_access",
+    "no_node2_access",
+    "no_dns_cdn_openresty_nginx_change_without_production_approval"
+  ],
+  "production_operations_performed_in_this_pr": false,
+  "proxy_implemented_in_this_pr": false,
+  "metabase_operation_performed_in_this_pr": false,
+  "network_change_performed_in_this_pr": false,
+  "security_group_change_performed_in_this_pr": false,
+  "rds_whitelist_change_performed_in_this_pr": false,
+  "dns_cdn_openresty_nginx_changed_in_this_pr": false,
+  "env_edit_in_this_pr": false,
+  "deploy_performed_in_this_pr": false,
+  "scheduler_enabled_in_this_pr": false,
+  "collector_write_performed_in_this_pr": false,
+  "external_api_live_activation": false,
+  "url_submission_performed": false,
+  "production_crawler_log_read": false,
+  "research_publish_in_this_pr": false,
+  "pseo_generation_in_this_pr": false,
+  "next_task": "OPS-PORTAL-SEO-05"
+}
