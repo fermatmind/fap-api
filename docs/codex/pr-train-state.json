@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T15:17:24Z",
+  "updated_at": "2026-05-19T15:41:32Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11970,7 +11970,7 @@
       ]
     },
     "PR-RESEARCH-03": {
-      "status": "pr_opened_github_checks_pending",
+      "status": "merged",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/pr-research-03",
@@ -11987,7 +11987,7 @@
           "status": "merged"
         }
       },
-      "commit_sha": "de16dbc701404f0d4297d789e906627bb439b2a7",
+      "commit_sha": "9d0de1f4922ad7dcb958ab8cf0d716664ca44cd8",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1482",
       "checks": {
         "local": {
@@ -12002,14 +12002,22 @@
           "scope_validation": "passed"
         },
         "github": {
-          "status": "pending",
-          "mergeStateStatus": "UNSTABLE"
+          "hygiene": "passed",
+          "semgrep_sarif": "passed",
+          "semgrep_oss": "passed",
+          "verify_mbti_legacy": "passed",
+          "verify_mbti_v2": "passed",
+          "mergeStateStatus": "CLEAN"
+        },
+        "ledger_reconciliation": {
+          "status": "passed",
+          "evidence": "GitHub reports PR #1482 as MERGED with squash merge commit 9d0de1f4922ad7dcb958ab8cf0d716664ca44cd8; origin/main contains the merge commit; remote branch codex/pr-research-03 is absent; local cleanup script was executed from the local clone."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-19T15:37:13Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -12026,9 +12034,59 @@
           "at": "2026-05-19T15:17:24Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1482. GitHub checks pending."
+        },
+        {
+          "at": "2026-05-19T15:40:30Z",
+          "status": "merged",
+          "summary": "Reconciled PR-RESEARCH-03 as merged via PR #1482. GitHub checks passed, merge commit is present on origin/main, remote branch is absent, and local cleanup was executed before starting RESEARCH-PUBLISH-READINESS-00."
         }
       ],
       "next_pr": "RESEARCH-PUBLISH-READINESS-00"
+    },
+    "RESEARCH-PUBLISH-READINESS-00": {
+      "status": "local_checks_passed",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "branch": "codex/research-publish-readiness-00",
+      "base": "main",
+      "title": "docs(research): add first Research publish readiness checklist",
+      "depends_on": [
+        "PR-RESEARCH-03"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_seo_intel_research_publish_readiness": "passed",
+          "php_artisan_test_filter_seo_intel": "passed",
+          "php_artisan_route_list": "passed",
+          "pint_test": "passed",
+          "json_validation": "passed",
+          "yaml_validation": "passed",
+          "git_diff_check": "passed",
+          "git_diff_cached_check": "passed",
+          "scope_validation": "passed"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T15:40:30Z",
+          "status": "in_progress",
+          "summary": "Started first Research publish readiness checklist PR. Scope is docs/generated/test metadata only and excludes Research publish, sitemap/llms changes, Search Channel Queue insertion, URL submission, Digital PR, pSEO, live search APIs, collector writes, scheduler activation, Metabase operations, env edits, deploy, and production operations."
+        },
+        {
+          "at": "2026-05-19T15:41:32Z",
+          "status": "local_checks_passed",
+          "summary": "Focused Research publish readiness test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff checks, and allowed-path scope validation passed."
+        }
+      ],
+      "next_pr": null
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
@@ -12452,5 +12510,4 @@
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-04"
   }
-
 }

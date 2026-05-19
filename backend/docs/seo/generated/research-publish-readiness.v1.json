@@ -1,0 +1,142 @@
+{
+  "version": "research-publish-readiness.v1",
+  "task": "RESEARCH-PUBLISH-READINESS-00",
+  "title": "First Research publish readiness checklist",
+  "candidate": {
+    "name": "MBTI Salary & Turnover Report",
+    "status": "Research Candidate Frozen Draft",
+    "page_entity_type": "research_report",
+    "authority": "backend_cms_research_asset",
+    "public_route_family": "/research/{slug}",
+    "published_in_this_pr": false,
+    "indexable_in_this_pr": false,
+    "queued_in_this_pr": false,
+    "submitted_in_this_pr": false,
+    "digital_pr_started_in_this_pr": false
+  },
+  "publish_prerequisites": [
+    "research_backend_cms_mvp_merged",
+    "fap_web_runtime_mvp_merged",
+    "research_seo_geo_search_channel_contract_merged",
+    "url_truth_observation_supports_research_report",
+    "metabase_dashboard_visible_to_owner",
+    "claim_linter_passed",
+    "methodology_present",
+    "sample_disclaimer_present",
+    "references_present",
+    "author_present",
+    "reviewer_present",
+    "last_reviewed_at_present",
+    "downloadable_asset_decision_explicit",
+    "dataset_schema_decision_explicit",
+    "sitemap_eligibility_gate_passed_later",
+    "llms_eligibility_gate_passed_later",
+    "search_channel_queue_eligibility_gate_passed_later"
+  ],
+  "completed_prerequisite_evidence": {
+    "research_backend_cms_mvp": {
+      "task": "PR-RESEARCH-01",
+      "repo": "fap-api",
+      "status": "merged",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1481"
+    },
+    "fap_web_runtime_mvp": {
+      "task": "PR-RESEARCH-02",
+      "repo": "fap-web",
+      "status": "merged",
+      "pr_url": "https://github.com/fermatmind/fap-web/pull/848"
+    },
+    "research_seo_geo_search_channel_contract": {
+      "task": "PR-RESEARCH-03",
+      "repo": "fap-api",
+      "status": "merged",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1482"
+    },
+    "seo_dash_mvp": {
+      "status": "minimally_online",
+      "metabase_dashboard": "SEO Intelligence MVP — URL Truth & Issue Queue",
+      "metabase_public_exposure": false
+    }
+  },
+  "candidate_content_requirements": [
+    "executive_summary",
+    "methodology",
+    "sample_disclaimer",
+    "claim_boundary_statement",
+    "author",
+    "reviewer",
+    "references",
+    "last_reviewed_at",
+    "downloadable_asset_placeholder_or_versioned_asset_decision"
+  ],
+  "forbidden_candidate_fields": [
+    "raw_pii",
+    "raw_orders",
+    "raw_payments",
+    "raw_events",
+    "raw_email",
+    "raw_crawler_logs",
+    "cookies",
+    "raw_ips",
+    "provider_payloads",
+    "payment_payloads",
+    "user_specific_private_report_evidence"
+  ],
+  "forbidden_claim_classes": [
+    "diagnosis",
+    "treatment",
+    "cure",
+    "hiring_fit",
+    "job_competency",
+    "exact_iq",
+    "guaranteed_salary",
+    "guaranteed_turnover_prediction",
+    "guaranteed_career_outcome",
+    "ai_career_planning_authority",
+    "full_career_recommendation"
+  ],
+  "later_publication_gate": [
+    "cms_record_approved",
+    "cms_record_published",
+    "cms_record_public",
+    "cms_record_indexable",
+    "canonical_path_present",
+    "locale_explicit",
+    "fap_web_route_backend_payload_only",
+    "url_truth_records_research_url",
+    "seo_geo_search_channel_gates_satisfied",
+    "no_private_noindex_or_draft_exposure"
+  ],
+  "blocked_until_later_task": [
+    "research_publish",
+    "sitemap_inclusion",
+    "llms_inclusion",
+    "search_channel_queue_insertion",
+    "url_submission",
+    "digital_pr",
+    "dataset_schema_if_no_versioned_asset",
+    "pseo_generation"
+  ],
+  "research_publish_in_this_pr": false,
+  "research_content_imported_in_this_pr": false,
+  "sitemap_changed_in_this_pr": false,
+  "llms_changed_in_this_pr": false,
+  "search_channel_queue_inserted_in_this_pr": false,
+  "url_submission_performed": false,
+  "external_api_live_activation": false,
+  "scheduler_enabled_in_this_pr": false,
+  "collector_write_executed_in_this_pr": false,
+  "production_crawler_log_read": false,
+  "env_edit_in_this_pr": false,
+  "deployment_performed_in_this_pr": false,
+  "digital_pr_started_in_this_pr": false,
+  "dataset_schema_enabled_in_this_pr": false,
+  "pseo_generation_in_this_pr": false,
+  "frontend_fallback_authority_enabled": false,
+  "node2_source_used": false,
+  "metabase_operation_performed": false,
+  "business_db_connected": false,
+  "tencent_rds_connected": false,
+  "node2_db_connected": false,
+  "next_task": "SEO-DASH-MVP-ONLINE-SUMMARY closeout report / next Research publish operation planning"
+}
