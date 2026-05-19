@@ -6121,6 +6121,7 @@ prs:
       - backend/database/migrations/2026_05_19_000100_create_research_reports_table.php
       - backend/routes/api.php
       - backend/tests/Feature/Research/ResearchAssetBackendMvpTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/research-asset-backend-mvp.md
       - backend/docs/seo/generated/research-asset-backend-mvp.v1.json
       - docs/codex/pr-train.yaml
@@ -6132,6 +6133,7 @@ prs:
       - Connect Metabase to business DB, Tencent RDS, Node2 local DB, CMS write tables, or raw operational tables.
     validation:
       - cd backend && php artisan test --filter=ResearchAssetBackendMvp
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|research_backend_mvp' --no-ansi
       - cd backend && php artisan test --filter=SeoIntel
       - cd backend && php artisan route:list --no-ansi
       - cd backend && php artisan migrate --pretend

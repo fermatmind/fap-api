@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T14:14:16Z",
+  "updated_at": "2026-05-19T14:24:39Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11867,7 +11867,7 @@
       "next_pr": "PR-RESEARCH-01"
     },
     "PR-RESEARCH-01": {
-      "status": "github_checks_failed",
+      "status": "ci_fix_local_checks_passed",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/pr-research-01",
@@ -11888,7 +11888,8 @@
           "json_validation": "passed",
           "yaml_validation": "passed",
           "git_diff_check": "passed",
-          "scope_validation": "passed"
+          "scope_validation": "passed",
+          "bigfive_runtime_freeze_research_backend_mvp_allowlist": "passed"
         },
         "github": {
           "hygiene": "passed",
@@ -11899,7 +11900,7 @@
           "mergeStateStatus": "UNSTABLE"
         }
       },
-      "failure_reason": "GitHub verify-mbti-legacy and verify-mbti-v2 failed in Tests\\Unit\\Services\\BigFive\\ResultPageV2\\BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because PR-RESEARCH-01 intentionally changes backend/app ResearchReport files, backend/database Research migration, and backend/routes/api.php. Fix would require updating the Big Five runtime freeze classifier allowlist, which is outside the PR-RESEARCH-01 allowed files from the user prompt, so the train is stopped for explicit authorization.",
+      "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -11929,9 +11930,22 @@
           "at": "2026-05-19T14:14:16Z",
           "status": "github_checks_failed",
           "summary": "GitHub checks failed: verify-mbti-legacy and verify-mbti-v2. Failure is BigFive runtime freeze classifier detecting Research backend/CMS runtime files. No merge performed; train stopped before PR-RESEARCH-02."
+        },
+        {
+          "at": "2026-05-19T14:23:34Z",
+          "status": "ci_fix_in_progress",
+          "summary": "User authorized fixing PR #1481 CI. Updating the BigFive runtime freeze classifier with a narrow Research backend/CMS MVP allowlist and recording the test file in PR-RESEARCH-01 scope metadata."
+        },
+        {
+          "at": "2026-05-19T14:24:39Z",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "Added a narrow Research backend/CMS MVP allowlist to the BigFive runtime freeze classifier. Focused BigFive runtime freeze test, ResearchAssetBackendMvp test, SeoIntel filter, route list, sqlite testing migrate --pretend, Pint, JSON/YAML validation, and git diff --check passed."
         }
       ],
-      "next_pr": "PR-RESEARCH-02"
+      "next_pr": "PR-RESEARCH-02",
+      "allowed_paths": [
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      ]
     }
   },
   "SEO-DASH-PROD-03D-FIX": {

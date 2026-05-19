@@ -805,6 +805,26 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_research_backend_mvp_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Cms/ResearchReportController.php',
+            'backend/app/Models/ResearchReport.php',
+            'backend/database/migrations/2026_05_19_000100_create_research_reports_table.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\Http\Controllers\API\V0_5\Cms\ResearchReportController;',
+            '+    Route::get(\'/research\', [ResearchReportController::class, \'index\']);',
+            '+    Route::get(\'/research/{slug}\', [ResearchReportController::class, \'show\']);',
+            '+        Route::get(\'/internal/research-reports\', [ResearchReportController::class, \'internalIndex\']);',
+            '+        Route::get(\'/internal/research-reports/{slug}\', [ResearchReportController::class, \'internalShow\']);',
+            '+        Route::put(\'/internal/research-reports/{slug}\', [ResearchReportController::class, \'internalUpdate\']);',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', routeChangedLines: $routeChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_publishing_runtime_truth_gate_changes(): void
     {
         $changed = [
@@ -1646,6 +1666,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isResearchBackendMvpFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php'
                 && $this->articleControllerDiffIsPublicArticleRecencyOrderingOnly(
@@ -1843,6 +1867,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             if (
                 $file === 'backend/routes/web.php'
                 && $this->routeDiffIsPublicHealthzAliasOnly($webRouteChangedLines ?? $this->webRouteChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsResearchBackendMvpOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
                 continue;
             }
@@ -2078,6 +2109,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/ArticlePublishService.php',
             'backend/app/Services/Cms/ArticleService.php',
             'backend/database/migrations/2026_05_06_010000_add_org_scope_to_personality_profile_children.php',
+        ], true);
+    }
+
+    private function isResearchBackendMvpFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Cms/ResearchReportController.php',
+            'backend/app/Models/ResearchReport.php',
+            'backend/database/migrations/2026_05_19_000100_create_research_reports_table.php',
         ], true);
     }
 
@@ -3014,6 +3054,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bArticleCoverPropagationSmoke\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsResearchBackendMvpOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_starts_with($line, '-')) {
+                return false;
+            }
+
+            if (preg_match('/ResearchReportController|\/research|\/internal\/research-reports/u', $line) !== 1) {
                 return false;
             }
         }
