@@ -13062,7 +13062,7 @@
     "merge_commit": "6f83ae6c06875b71af1dd8950e3b5352567290b4"
   },
   "RIASEC-FULL-CONTENT-PACK-08": {
-    "status": "pr_open_github_checks_pending",
+    "status": "github_checks_passed_ready_to_merge",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-08",
@@ -13071,7 +13071,7 @@
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-07"
     ],
-    "commit_sha": "d8cad18f58f645ac449295a0a1fdb9b5fc18a371",
+    "commit_sha": "b864549f4e802e3e7b527cc7216e705ad190e5a9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1494",
     "checks": {
       "dependency_gate": {
@@ -13109,8 +13109,8 @@
         "summary": "Changed files are limited to PACK-08 RIASEC quality/interpretation assets, backend registry/projection/contract tests, and authorized PR train metadata; no scorer, quality math, question pack, frontend fallback, career matching, feedback mutation, analytics, or production data changes."
       },
       "github_required_checks": {
-        "status": "pending",
-        "summary": "PR #1494 opened; GitHub required checks pending."
+        "status": "pass",
+        "summary": "PR #1494 passed hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2 before merge review."
       }
     },
     "failure_reason": null,
@@ -13133,6 +13133,11 @@
         "at": "2026-05-19T21:22:41Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1494 for PACK-08. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-19T21:29:29Z",
+        "status": "github_checks_passed_ready_to_merge",
+        "summary": "GitHub required checks passed for PR #1494; ready for final merge-state review."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-05"
