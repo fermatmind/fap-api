@@ -6639,3 +6639,153 @@ prs:
       squash: true
       auto_merge: true
     next_task: RIASEC-FULL-CONTENT-PACK-04
+
+  - id: RIASEC-FULL-CONTENT-PACK-04
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-03
+    branch: codex/riasec-full-content-pack-04
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-04: Top3 code chain strategy asset import"
+    name: "Top3 code chain backend authoritative import"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend content asset import PR
+    scope:
+      - Add the V7.3 top3_code_chain_strategy_v1.zh-CN JSONL as a backend-authoritative content asset.
+      - Wire a deterministic backend selector / registry path for 20 unordered top3 activity-chain strategies.
+      - Preserve fail-closed behavior for missing, invalid, pending, unavailable, or fallback-enabled content.
+      - Add targeted registry, contract, projection/report-flow, JSONL, and forbidden-claim tests.
+      - Include minimal PACK-03 ledger reconciliation needed to unblock PHASE2.
+    allowed_paths:
+      - backend/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/tests/Unit/Services/Riasec/RiasecTop3ChainSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - backend/docs/riasec/deep-copy-slot-schema-contract.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scorer math, RIASEC question content packs, Holland Code generation, pair blend imported content except read-only dependency, fap-web UI or local fallback copy, career matching, occupation source rows, feedback runtime, analytics runtime, or production data.
+      - Add career recommendation, job fit, ranking, success prediction, hiring suitability, personality subtype, raw score delta, or 140Q more accurate claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecTop3ChainSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecContentRegistrySlotContract.php app/Services/Riasec/RiasecPublicProjectionService.php tests/Unit/Services/Riasec/RiasecTop3ChainSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - python3 - <<'PY'
+        import json, pathlib
+        path = pathlib.Path('backend/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl')
+        rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+        assert len(rows) == 20
+        PY
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    next_task: RIASEC-FULL-CONTENT-PACK-07
+
+  - id: RIASEC-FULL-CONTENT-PACK-07
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-04
+    branch: codex/riasec-full-content-pack-07
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-07: 140Q task/environment/role narrative asset import"
+    name: "140Q task environment role narrative backend authoritative import"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend content asset import PR
+    scope:
+      - Import V7.3 140Q task, environment, role, tension, unavailable, and 60Q-only narrative assets into backend authority.
+      - Validate 140Q content as contextual task/environment/role evidence, not a more-accurate or override claim.
+      - Preserve current scoring and 60Q/140Q compare policy.
+      - Add targeted registry, projection/report-flow, JSONL, and forbidden-claim tests.
+    allowed_paths:
+      - backend/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/tests/Unit/Services/Riasec/*140q*Test.php
+      - backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change 140Q scoring, 60Q/140Q compare policy, question pack semantics, fap-web fallback copy, career matching, feedback mutation, analytics runtime, or production data.
+      - Add 140Q more accurate, 60Q wrong, form override, raw score delta, job fit, organization fit, ability, skill, ranking, or success claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/*140q*Test.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    next_task: RIASEC-FULL-CONTENT-PACK-08
+
+  - id: RIASEC-FULL-CONTENT-PACK-08
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-07
+    branch: codex/riasec-full-content-pack-08
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-08: Low quality / confidence / near-tie copy asset import"
+    name: "Low quality confidence near-tie backend authoritative import"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend content asset import PR
+    scope:
+      - Import V7.3 low_quality cautious reading, top code confidence, and near_tie / alternate code copy assets into backend authority.
+      - Keep confidence as reading confidence, not probability, and near-tie as an interpretation boundary, not another identity.
+      - Preserve scoring, quality math, Holland Code generation, and feedback / aspiration non-mutation.
+      - Add targeted registry, selector/projection, JSON, and forbidden-claim tests.
+    allowed_paths:
+      - backend/content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json
+      - backend/content_assets/riasec/top_code_confidence_copy_v1.zh-CN.json
+      - backend/content_assets/riasec/near_tie_alternate_code_copy_v1.zh-CN.json
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/app/Services/Riasec/RiasecReportModuleSelector.php
+      - backend/tests/Unit/Services/Riasec/*Quality*Test.php
+      - backend/tests/Unit/Services/Riasec/*Confidence*Test.php
+      - backend/tests/Unit/Services/Riasec/*NearTie*Test.php
+      - backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scorer math, quality math, question packs, Holland Code generation, frontend fallback copy, career matching, feedback score/code mutation, analytics runtime, or production data.
+      - Add 140Q anxiety upsell, confidence probability, alternate-code identity, job fit, career match, ranking, success prediction, or hiring suitability claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/*Quality*Test.php tests/Unit/Services/Riasec/*Confidence*Test.php tests/Unit/Services/Riasec/*NearTie*Test.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    next_task: RIASEC-FULL-CONTENT-PACK-05

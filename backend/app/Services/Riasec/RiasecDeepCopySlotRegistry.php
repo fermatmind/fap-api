@@ -12,11 +12,16 @@ final class RiasecDeepCopySlotRegistry
 
     private const PAIR_BLEND_ASSET_PATH = '/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl';
 
+    private const TOP3_CHAIN_ASSET_PATH = '/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl';
+
     /** @var array<string,array<string,mixed>>|null */
     private ?array $dimensionContentCache = null;
 
     /** @var array<string,array<string,mixed>>|null */
     private ?array $pairBlendContentCache = null;
+
+    /** @var array<string,array<string,mixed>>|null */
+    private ?array $top3ChainContentCache = null;
 
     /** @var list<string> */
     public const DIMENSIONS = ['R', 'I', 'A', 'S', 'E', 'C'];
@@ -28,6 +33,20 @@ final class RiasecDeepCopySlotRegistry
         'A_S', 'A_E', 'A_C',
         'S_E', 'S_C',
         'E_C',
+    ];
+
+    /** @var list<string> */
+    public const TOP3_COMBOS = [
+        'R_I_A', 'R_I_S', 'R_I_E', 'R_I_C',
+        'R_A_S', 'R_A_E', 'R_A_C',
+        'R_S_E', 'R_S_C',
+        'R_E_C',
+        'I_A_S', 'I_A_E', 'I_A_C',
+        'I_S_E', 'I_S_C',
+        'I_E_C',
+        'A_S_E', 'A_S_C',
+        'A_E_C',
+        'S_E_C',
     ];
 
     /** @var list<string> */
@@ -147,6 +166,47 @@ final class RiasecDeepCopySlotRegistry
                 'fallback_behavior' => 'omit_module',
                 'frontend_fallback_allowed' => false,
                 'reason' => 'unsupported_pair_blend_slot',
+            ];
+        }
+
+        return $slot;
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    public function top3ChainSlots(): array
+    {
+        $slots = [];
+        foreach (self::TOP3_COMBOS as $top3Key) {
+            $slots[$top3Key] = $this->pendingTop3ChainSlot($top3Key);
+        }
+
+        foreach ($this->top3ChainContentFromAsset() as $top3Key => $content) {
+            $slots[$top3Key] = $this->authoredTop3ChainSlot($top3Key, $content);
+        }
+
+        return $slots;
+    }
+
+    /**
+     * @param  list<string>|string  $top3
+     * @return array<string,mixed>
+     */
+    public function resolveTop3ChainSlot(array|string $top3): array
+    {
+        $top3Key = $this->normalizeTop3Key($top3);
+        $slot = $this->top3ChainSlots()[$top3Key] ?? null;
+
+        if ($slot === null) {
+            return [
+                'slot_key' => 'triad_blend_copy',
+                'top3_key' => $top3Key,
+                'content_status' => 'unavailable',
+                'module_state' => 'omitted',
+                'fallback_behavior' => 'omit_module',
+                'frontend_fallback_allowed' => false,
+                'reason' => 'unsupported_top3_chain_slot',
             ];
         }
 
@@ -545,6 +605,24 @@ final class RiasecDeepCopySlotRegistry
             }
         }
 
+        if (($slot['slot_key'] ?? null) === 'triad_blend_copy') {
+            foreach ($this->top3ChainRequiredFields() as $field) {
+                if (! array_key_exists($field, $slot) || $this->isBlank($slot[$field])) {
+                    $errors[] = 'missing_'.$field;
+                }
+            }
+            if (! in_array((string) ($slot['top3_key'] ?? ''), self::TOP3_COMBOS, true)) {
+                $errors[] = 'unsupported_top3_key';
+            }
+            if (($slot['content_status'] ?? null) === 'authored') {
+                foreach ($this->authoredTop3ChainRequiredFields() as $field) {
+                    if (! array_key_exists($field, $slot) || $this->isBlank($slot[$field])) {
+                        $errors[] = 'missing_'.$field;
+                    }
+                }
+            }
+        }
+
         if (($slot['slot_group'] ?? null) === '140q_layer_copy') {
             foreach ($this->layer140qRequiredFields() as $field) {
                 if (! array_key_exists($field, $slot) || $this->isBlank($slot[$field])) {
@@ -655,6 +733,43 @@ final class RiasecDeepCopySlotRegistry
             'real_world_cost',
             'common_misread',
             'activities_to_validate',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function top3ChainRequiredFields(): array
+    {
+        return [
+            'top3_key',
+            'strategy_label',
+            'forbidden_claims',
+            'user_visible_boundary',
+            'content_version',
+            'evidence_level',
+            'content_status',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function authoredTop3ChainRequiredFields(): array
+    {
+        return [
+            'activity_chain',
+            'core_reading',
+            'positive_value',
+            'real_world_cost',
+            'first_experiment',
+            'primary_activity_chain',
+            'secondary_support_line',
+            'tertiary_stabilizer',
+            'likely_tension',
+            'activity_sequence',
+            'when_to_use_140q',
+            'when_not_to_overread',
         ];
     }
 
@@ -961,6 +1076,94 @@ final class RiasecDeepCopySlotRegistry
     }
 
     /**
+     * @return array<string,array<string,mixed>>
+     */
+    private function top3ChainContentFromAsset(): array
+    {
+        if ($this->top3ChainContentCache !== null) {
+            return $this->top3ChainContentCache;
+        }
+
+        $path = dirname(__DIR__, 3).self::TOP3_CHAIN_ASSET_PATH;
+        if (! is_file($path)) {
+            return $this->top3ChainContentCache = [];
+        }
+
+        $slots = [];
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+            $decoded = json_decode($line, true);
+            if (! is_array($decoded)) {
+                continue;
+            }
+
+            $top3Key = strtoupper(trim((string) ($decoded['unordered_top3_key'] ?? '')));
+            if (! in_array($top3Key, self::TOP3_COMBOS, true)) {
+                continue;
+            }
+
+            $content = $this->normalizeTop3ChainAssetRow($decoded);
+            $slot = $this->authoredTop3ChainSlot($top3Key, $content);
+            if ($this->validateSlot($slot) !== []) {
+                continue;
+            }
+
+            $slots[$top3Key] = $content;
+        }
+
+        return $this->top3ChainContentCache = $slots;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array<string,mixed>
+     */
+    private function normalizeTop3ChainAssetRow(array $row): array
+    {
+        $top3Key = strtoupper(trim((string) ($row['unordered_top3_key'] ?? '')));
+        $dimensions = $row['dimensions'] ?? explode('_', $top3Key);
+
+        return [
+            'content_version' => (string) ($row['asset_version'] ?? 'top3_code_chain_strategy_v1.zh-CN'),
+            'source_status' => 'reviewed_content_copy',
+            'review_status' => 'content_review',
+            'evidence_level' => 'expert_reviewed',
+            'content_status' => 'authored',
+            'applicable_form_codes' => $row['applicable_form_codes'] ?? ['riasec_60', 'riasec_140'],
+            'applicable_profile_shapes' => $row['applicable_profile_shapes'] ?? ['clear_code', 'blended_code', 'near_tie'],
+            'applicable_quality_states' => $row['applicable_quality_states'] ?? ['normal', 'caution'],
+            'applicable_dimensions' => is_array($dimensions) ? array_values($dimensions) : explode('_', $top3Key),
+            'strategy_label' => (string) ($row['strategy_label'] ?? ''),
+            'activity_chain' => (string) ($row['activity_chain'] ?? ''),
+            'core_reading' => (string) ($row['core_reading'] ?? ''),
+            'positive_value' => (string) ($row['positive_value'] ?? ''),
+            'real_world_cost' => (string) ($row['real_world_cost'] ?? ''),
+            'first_experiment' => (string) ($row['first_experiment'] ?? ''),
+            'ordered_code_handling' => (string) ($row['ordered_code_handling'] ?? ''),
+            'low_risk_validation' => (string) ($row['low_risk_validation'] ?? ''),
+            'primary_activity_chain' => (string) ($row['primary_activity_chain'] ?? ''),
+            'secondary_support_line' => (string) ($row['secondary_support_line'] ?? ''),
+            'tertiary_stabilizer' => (string) ($row['tertiary_stabilizer'] ?? ''),
+            'likely_tension' => (string) ($row['likely_tension'] ?? ''),
+            'activity_sequence' => $row['activity_sequence'] ?? [],
+            'when_to_use_140q' => (string) ($row['when_to_use_140q'] ?? ''),
+            'when_not_to_overread' => (string) ($row['when_not_to_overread'] ?? ''),
+            'free_page_teaser' => (string) ($row['free_page_teaser'] ?? ''),
+            'deep_report_extension' => (string) ($row['deep_report_extension'] ?? ''),
+            'forbidden_claims' => $row['forbidden_claims'] ?? [
+                'personality_identity',
+                'career_match',
+                'ability_proof',
+                'success_prediction',
+                'job_fit',
+            ],
+            'required_boundaries' => $row['required_boundaries'] ?? $this->requiredBoundaries(),
+            'user_visible_boundary' => (string) ($row['user_visible_boundary'] ?? '这是前三兴趣活动链解释，不是人格类型、职业结论或成功预测。'),
+            'fallback_behavior' => 'omit_module',
+            'frontend_fallback_allowed' => false,
+        ];
+    }
+
+    /**
      * @param  array<string,mixed>  $content
      * @return array<string,mixed>
      */
@@ -988,6 +1191,70 @@ final class RiasecDeepCopySlotRegistry
             'module_state' => 'omitted',
             'reason' => 'pair_blend_copy_not_approved_for_runtime',
         ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return array<string,mixed>
+     */
+    private function authoredTop3ChainSlot(string $top3Key, array $content): array
+    {
+        return array_merge($this->top3ChainSlotBase($top3Key), $content, [
+            'content_status' => 'authored',
+            'fallback_behavior' => 'omit_module',
+            'frontend_fallback_allowed' => false,
+        ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function pendingTop3ChainSlot(string $top3Key): array
+    {
+        return array_merge($this->top3ChainSlotBase($top3Key), [
+            'content_version' => 'riasec_top3_chain_pending_v1',
+            'strategy_label' => str_replace('_', '×', $top3Key),
+            'source_status' => 'docs_only_candidate',
+            'review_status' => 'content_review',
+            'evidence_level' => 'expert_review_required',
+            'content_status' => 'pending',
+            'module_state' => 'omitted',
+            'reason' => 'top3_code_chain_strategy_not_approved_for_runtime',
+        ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function top3ChainSlotBase(string $top3Key): array
+    {
+        $dimensions = explode('_', $top3Key);
+
+        return [
+            'slot_key' => 'triad_blend_copy',
+            'slot_group' => 'pair_blend_copy',
+            'scale_code' => 'RIASEC',
+            'locale' => 'zh-CN',
+            'interpretation_rule_version' => 'riasec_interpretation_rule_spec_v2',
+            'applicable_form_codes' => ['riasec_60', 'riasec_140'],
+            'applicable_profile_shapes' => ['clear_code', 'blended_code', 'near_tie'],
+            'applicable_quality_states' => ['normal', 'caution'],
+            'applicable_codes' => [$top3Key],
+            'applicable_dimensions' => $dimensions,
+            'top3_key' => $top3Key,
+            'unordered_top3_key' => $top3Key,
+            'forbidden_claims' => [
+                'personality_identity',
+                'career_match',
+                'ability_proof',
+                'success_prediction',
+                'job_fit',
+            ],
+            'required_boundaries' => $this->requiredBoundaries(),
+            'user_visible_boundary' => '这是前三兴趣活动链解释，不是人格类型、职业结论或成功预测。',
+            'fallback_behavior' => 'omit_module',
+            'frontend_fallback_allowed' => false,
+        ];
     }
 
     /**
@@ -1213,6 +1480,27 @@ final class RiasecDeepCopySlotRegistry
 
         if (count($parts) !== 2) {
             return strtoupper(trim(is_string($pair) ? $pair : implode('_', $parts)));
+        }
+
+        $order = array_flip(self::DIMENSIONS);
+        usort($parts, fn (string $a, string $b): int => ($order[$a] ?? 99) <=> ($order[$b] ?? 99));
+
+        return implode('_', $parts);
+    }
+
+    /**
+     * @param  list<string>|string  $top3
+     */
+    private function normalizeTop3Key(array|string $top3): string
+    {
+        $parts = is_array($top3) ? $top3 : preg_split('/[_×x-]/', $top3);
+        $parts = array_values(array_unique(array_filter(array_map(
+            fn (mixed $part): string => strtoupper(trim((string) $part)),
+            (array) $parts
+        ))));
+
+        if (count($parts) !== 3) {
+            return strtoupper(trim(is_string($top3) ? $top3 : implode('_', $parts)));
         }
 
         $order = array_flip(self::DIMENSIONS);

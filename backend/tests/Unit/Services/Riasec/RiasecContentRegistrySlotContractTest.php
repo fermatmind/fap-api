@@ -27,6 +27,7 @@ final class RiasecContentRegistrySlotContractTest extends TestCase
         $this->assertContains('dimension_deep_copy', $slotKeys);
         $this->assertContains('core_drive_cost_shadow_copy', $slotKeys);
         $this->assertContains('pair_blend_copy', $slotKeys);
+        $this->assertContains('triad_blend_copy', $slotKeys);
         $this->assertContains('140q_task_card_copy', $slotKeys);
         $this->assertContains('140q_environment_card_copy', $slotKeys);
         $this->assertContains('140q_role_card_copy', $slotKeys);
