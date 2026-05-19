@@ -5995,3 +5995,55 @@ prs:
     human_review_required: false
     production_approval_required: false
     next_task: null
+
+  - id: SEO-DASH-MVP-ONLINE-SUMMARY
+    repo: fap-api
+    depends_on:
+      - CONTENT-OPS-01
+    branch: codex/seo-dash-mvp-online-summary
+    base: main
+    title: "docs(seo-intel): add SEO Dash MVP online summary"
+    name: "SEO Dash MVP online summary"
+    train_scope: seo_dash_mvp_closeout_research_train
+    risk_level: low_docs_generated_tests_no_runtime_activation
+    type: docs/generated/test PR
+    scope:
+      - Freeze the current SEO Dash MVP online state in docs and a machine-readable artifact.
+      - Record current seo_intel counts, private Metabase localhost-only state, datasource boundary, dashboard verification, and access/export/sharing verification.
+      - Record scheduler, external search live, crawler log, Research publish, and pSEO as not enabled.
+      - Add a focused SeoIntel contract test.
+    allowed_paths:
+      - backend/docs/seo/seo-dash-mvp-online-summary.md
+      - backend/docs/seo/generated/seo-dash-mvp-online-summary.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelDashMvpOnlineSummaryTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy, edit env files, run collector writes, enable scheduler, connect live search APIs, submit URLs, read production crawler logs, change RDS/DB/users/whitelist, expose Metabase publicly, publish Research content, or create pSEO.
+      - Change runtime code, backend services/controllers/routes, migrations, deploy scripts, sitemap behavior, llms behavior, or Metabase configuration.
+      - Connect Metabase to business DB, Tencent RDS, Node2 local DB, CMS write tables, or raw operational tables.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelDashMvpOnlineSummary
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-dash-mvp-online-summary.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    metabase_operation: false
+    human_review_required: false
+    production_approval_required: false
+    next_task: METABASE-OPS-ACCESS-RUNBOOK-00

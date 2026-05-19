@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T04:11:24.511Z",
+  "updated_at": "2026-05-19T13:31:30Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11714,6 +11714,63 @@
       "merged_at": "2026-05-19T02:48:28Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true
+    },
+    "SEO-DASH-MVP-ONLINE-SUMMARY": {
+      "status": "local_checks_passed",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "branch": "codex/seo-dash-mvp-online-summary",
+      "base": "main",
+      "title": "docs(seo-intel): add SEO Dash MVP online summary",
+      "depends_on": [
+        "CONTENT-OPS-01"
+      ],
+      "commit_sha": "8df3f90b35cf311870d251f4f35dc886fcb8df56",
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_seo_intel_dash_mvp_online_summary": "passed",
+          "php_artisan_test_filter_seo_intel": "passed",
+          "php_artisan_route_list": "passed",
+          "pint_test": "passed",
+          "json_validation": "passed",
+          "yaml_validation": "passed",
+          "git_diff_check": "passed",
+          "scope_validation": "passed"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "OPS-RELEASE-WORKFLOW-01 ledger reconciliation",
+          "repo": "fap-api",
+          "introduced_by_current_pr": false,
+          "evidence": "GitHub reports PR #1478 merged and origin/main contains f04fe2048cab11f61fa18e1fbbde5023e5193bcf; state file still showed in_progress before this PR.",
+          "why_external_to_current_pr": "The stale OPS train item is not part of the SEO Dash MVP closeout train, but reconciling it removes an apparent pending PR conflict before starting this train."
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-19T13:20:25Z",
+          "status": "in_progress",
+          "summary": "Started docs/generated/test-only SEO Dash MVP online summary PR. Scope excludes runtime code, migrations, env, deploy, collector writes, scheduler activation, Metabase operation, external APIs, URL submission, crawler log reads, Research publish, and pSEO."
+        },
+        {
+          "at": "2026-05-19T13:29:00Z",
+          "status": "local_checks_passed",
+          "summary": "Focused SeoIntelDashMvpOnlineSummary test, full SeoIntel test filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
+        },
+        {
+          "at": "2026-05-19T13:31:30Z",
+          "status": "commit_created",
+          "summary": "Created local commit 8df3f90b35cf311870d251f4f35dc886fcb8df56."
+        }
+      ],
+      "next_pr": "METABASE-OPS-ACCESS-RUNBOOK-00"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
