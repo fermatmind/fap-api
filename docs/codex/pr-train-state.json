@@ -13337,7 +13337,7 @@
     "merge_commit": "d25635e3f3c6a5d1a3a954cfd5a9b2226dc853f2"
   },
   "RIASEC-FULL-CONTENT-PACK-06-PREFLIGHT": {
-    "status": "local_validation_passed",
+    "status": "pr_opened_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-06-preflight",
@@ -13346,8 +13346,8 @@
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-05"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "b4a3e45f1d1dd01a0ea75b168468d9a8b50556fc",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1499",
     "checks": {
       "pack_05_ledger_reconciliation": {
         "status": "pass",
@@ -13389,6 +13389,10 @@
       "scope_validation": {
         "status": "pass",
         "summary": "Changed files are limited to PACK-05 ledger reconciliation, PACK-06 manifest/state registration, preflight fixture, preflight PHPUnit test, and preflight docs; no runtime import."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "summary": "PR #1499 opened; GitHub required checks pending."
       }
     },
     "failure_reason": null,
@@ -13406,6 +13410,11 @@
         "at": "2026-05-19T23:16:56Z",
         "status": "local_validation_passed",
         "summary": "PACK-06-PREFLIGHT validated V7.3 occupation examples fixture and recorded CONDITIONAL GO for PACK-06 import; no runtime content import performed."
+      },
+      {
+        "at": "2026-05-19T23:17:55Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1499 for PACK-06-PREFLIGHT. GitHub checks pending."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-06"
