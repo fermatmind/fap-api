@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T02:06:23Z",
+  "updated_at": "2026-05-19T02:07:21Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11239,8 +11239,8 @@
     },
     "SEARCH-CHANNEL-QUEUE-00": {
       "repo": "fap-api",
-      "status": "local_validation_passed",
-      "state": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
+      "state": "open",
       "title": "Search Channel Queue design contract",
       "depends_on": [
         "SEO-DASH-PROD-04B"
@@ -11311,6 +11311,10 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1471"
         }
       },
       "sidecar_issues": [],
@@ -11329,10 +11333,17 @@
           "at": "2026-05-19T02:06:23Z",
           "status": "local_validation_passed",
           "summary": "Added Search Channel Queue contract, generated artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and git diff check passed. No live API, URL submission, scheduler, collector write, or production operation performed."
+        },
+        {
+          "at": "2026-05-19T02:07:21Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1471 for SEARCH-CHANNEL-QUEUE-00. GitHub checks pending. No production operation performed."
         }
       ],
       "branch": "codex/search-channel-queue-00-design-contract",
-      "base": "main"
+      "base": "main",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1471",
+      "commit_sha": "35c15972"
     },
     "CRAWLER-LOG-00": {
       "repo": "fap-api",
