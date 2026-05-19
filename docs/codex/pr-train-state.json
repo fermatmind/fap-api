@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T15:42:22Z",
+  "updated_at": "2026-05-19T23:07:40Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6303,7 +6303,7 @@
       "branch": "fix/career-runtime-projection-lookup-latest-selection-1",
       "title": "fix(api): select newest career runtime projection artifact",
       "name": "Fix latest materialized Career runtime projection lookup selection",
-      "status": "in_progress",
+      "status": "local_checks_passed",
       "depends_on": [
         "REPAIR-PROGRESSIVE-READINESS-CN-PROXY-EXCLUSION-1"
       ],
@@ -12402,6 +12402,94 @@
         }
       ],
       "next_pr": "OPS-PORTAL-SEO-PROD-01"
+    },
+    "OPS-PORTAL-SEO-PROD-03": {
+      "status": "verified",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "branch": null,
+      "base": "main",
+      "title": "/ops/seo production access verification",
+      "depends_on": [
+        "OPS-PORTAL-SEO-05"
+      ],
+      "commit_sha": "5e3e97bb14296f22f105a86f157b16a1208261aa",
+      "pr_url": null,
+      "checks": {
+        "production_verification": {
+          "ops_seo_route_available": "passed",
+          "unauthenticated_redirect_to_ops_login": "passed",
+          "authenticated_ops_admin_rendering": "passed",
+          "admin_redirect_to_ops": "passed",
+          "page_content_boundary": "passed",
+          "no_metabase_iframe": "passed",
+          "no_metabase_reverse_proxy": "passed",
+          "no_public_metabase_url": "passed",
+          "no_raw_db_credentials": "passed",
+          "public_metabase_port_check": "timeout_expected",
+          "public_api_home_sitemap_llms_smoke": "passed",
+          "production_mutation_performed": false
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": null,
+      "local_cleanup_executed": null,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T23:05:07Z",
+          "status": "verified",
+          "summary": "OPS-PORTAL-SEO-PROD-03 verified https://ops.fermatmind.com/ops/seo as an authenticated Ops Portal route with no Metabase iframe, reverse proxy, public Metabase URL, raw credentials, production mutation, or public port 3000 exposure."
+        }
+      ],
+      "next_pr": "SEO-DASH-MVP-ONLINE-FINAL-CLOSEOUT"
+    },
+    "SEO-DASH-MVP-ONLINE-FINAL-CLOSEOUT": {
+      "status": "in_progress",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "branch": "codex/seo-dash-mvp-online-final-closeout",
+      "base": "main",
+      "title": "docs(seo-intel): finalize SEO Dash MVP online closeout",
+      "depends_on": [
+        "OPS-PORTAL-SEO-05"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_seo_intel_dash_mvp_online_final_closeout": "passed",
+          "php_artisan_test_filter_seo_intel": "passed",
+          "php_artisan_route_list": "passed",
+          "pint_test": "passed",
+          "json_validation": "passed",
+          "yaml_validation": "passed",
+          "git_diff_check": "passed",
+          "scope_validation": "passed"
+        },
+        "github": {
+          "status": "not_started"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T23:05:07Z",
+          "status": "in_progress",
+          "summary": "Started scoped final closeout PR to record SEO Dash MVP and /ops/seo production access as verified. Scope is limited to docs, generated artifact, focused SeoIntel test, and PR-train metadata; no production operation, Metabase operation, runtime code, migration, env, network, scheduler, collector, search submission, crawler log, Research publish, or pSEO change is allowed."
+        },
+        {
+          "at": "2026-05-19T23:07:40Z",
+          "status": "local_checks_passed",
+          "summary": "Focused final closeout test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
+        }
+      ],
+      "next_pr": "RESEARCH-PUBLISH-01"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {

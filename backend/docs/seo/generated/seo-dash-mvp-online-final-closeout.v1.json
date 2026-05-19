@@ -1,0 +1,109 @@
+{
+  "schema_version": "seo-dash-mvp-online-final-closeout.v1",
+  "task": "SEO-DASH-MVP-ONLINE-FINAL-CLOSEOUT",
+  "generated_at": "2026-05-19T23:05:07Z",
+  "final_decision": "seo_dash_mvp_online_with_ops_entry_verified",
+  "current_counts": {
+    "seo_urls": 7,
+    "seo_url_entities": 7,
+    "seo_issue_queue": 5,
+    "dashboard_cards": 10
+  },
+  "metabase": {
+    "private_only": true,
+    "localhost_binding": "127.0.0.1:3000",
+    "application_database": "metabase_app",
+    "application_database_engine": "postgresql",
+    "datasource": "seo_intel",
+    "readonly_account": "seo_intel_metabase_readonly",
+    "read_verification_passed": true,
+    "write_deny_verification_passed": true,
+    "public_sharing_disabled": true,
+    "embedding_disabled_where_supported": true,
+    "anonymous_links_absent": true,
+    "public_exposure": false
+  },
+  "ops_portal": {
+    "ops_seo_route_verified": true,
+    "route": "/ops/seo",
+    "production_url": "https://ops.fermatmind.com/ops/seo",
+    "auth_required": true,
+    "unauthenticated_redirect": "/ops/login",
+    "admin_redirect": "/ops",
+    "metabase_exposed": false,
+    "iframe_present": false,
+    "reverse_proxy_present": false,
+    "raw_credentials_exposed": false
+  },
+  "dashboard": {
+    "name": "SEO Intelligence MVP - URL Truth & Issue Queue",
+    "cards_verified": 10,
+    "allowed_datasource": "seo_intel",
+    "allowed_tables": [
+      "seo_urls",
+      "seo_url_entities",
+      "seo_issue_queue"
+    ]
+  },
+  "completed_phases": [
+    "runtime_authority_backend_convergence_foundation",
+    "seo_dash_foundation",
+    "production_seo_intel_db_migration",
+    "production_collector_dry_run",
+    "url_truth_controlled_write_canaries",
+    "drift_issue_queue_controlled_write_canary",
+    "metabase_private_mvp",
+    "research_mvp_foundation",
+    "ops_portal_seo_access_layer_pr_train",
+    "ops_seo_production_access_verification"
+  ],
+  "not_completed": [
+    "scheduler",
+    "gsc_live",
+    "baidu_live",
+    "indexnow_live",
+    "sogou_360_shenma_live",
+    "live_search",
+    "production_crawler_log_read",
+    "crawler_log",
+    "search_channel_live_submission",
+    "research_publish",
+    "digital_pr_outreach",
+    "pseo",
+    "public_metabase_exposure",
+    "normal_operator_onboarding",
+    "unrestricted_sql_export"
+  ],
+  "next_phase": "RESEARCH-PUBLISH-01",
+  "hard_stops": [
+    "no public Metabase",
+    "no business DB in Metabase",
+    "no Node2 local DB",
+    "no Tencent RDS",
+    "no unrestricted SQL for operators",
+    "no Search submission outside Search Channel Queue",
+    "no production crawler log read without explicit approval",
+    "no Research publish outside CMS Draft Gate",
+    "no pSEO until after controlled operating loop",
+    "no claim expansion for RIASEC / Big Five / Career"
+  ],
+  "authority_boundary": {
+    "cms_backend_truth_owner": true,
+    "fap_web_deterministic_public_runtime": true,
+    "seo_dash_observation_layer_only": true,
+    "metabase_observation_layer_only": true,
+    "frontend_fallback_is_not_seo_truth": true
+  },
+  "runtime_operations_performed_in_this_pr": false,
+  "production_operations_performed_in_this_pr": false,
+  "metabase_operation_performed_in_this_pr": false,
+  "env_edit_in_this_pr": false,
+  "deploy_performed_in_this_pr": false,
+  "scheduler_enabled_in_this_pr": false,
+  "collector_write_performed_in_this_pr": false,
+  "external_api_live_activation": false,
+  "url_submission_performed": false,
+  "production_crawler_log_read_in_this_pr": false,
+  "research_publish_in_this_pr": false,
+  "pseo_generation_in_this_pr": false
+}

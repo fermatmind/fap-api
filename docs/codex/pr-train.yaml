@@ -6540,6 +6540,61 @@ prs:
     production_approval_required: false
     next_task: OPS-PORTAL-SEO-PROD-01
 
+  - id: SEO-DASH-MVP-ONLINE-FINAL-CLOSEOUT
+    repo: fap-api
+    depends_on:
+      - OPS-PORTAL-SEO-05
+    branch: codex/seo-dash-mvp-online-final-closeout
+    base: main
+    title: "docs(seo-intel): finalize SEO Dash MVP online closeout"
+    name: "SEO Dash MVP online final closeout"
+    train_scope: seo_dash_mvp_final_closeout
+    risk_level: low_docs_generated_tests_no_runtime_activation
+    type: docs/generated/test PR
+    scope:
+      - Record SEO Dash MVP and `/ops/seo` production access as verified.
+      - Freeze current counts, private Metabase read-only datasource boundary, dashboard verification, access policy, completed phases, deferred work, roadmap, and hard stops.
+      - Preserve CMS/backend truth, fap-web deterministic runtime, and SEO Dash/Metabase observation-layer boundaries.
+      - Add a focused SeoIntel contract test.
+    allowed_paths:
+      - backend/docs/seo/seo-dash-mvp-online-final-closeout.md
+      - backend/docs/seo/generated/seo-dash-mvp-online-final-closeout.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelDashMvpOnlineFinalCloseoutTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy, roll back, edit env files, change DNS/CDN/OpenResty/Nginx, open public ports, change ECS security groups, change RDS whitelists, expose Metabase publicly, bind Metabase to 0.0.0.0, add datasources, create dashboards, enable scheduler, run collector writes, connect live search APIs, submit URLs, read production crawler logs, publish Research, or create pSEO.
+      - Change runtime app/services/controllers/routes, migrations, config, deploy files, Metabase runtime files, fap-web runtime files, sitemap behavior, llms behavior, scheduler code, collector code, Research publish content, or pSEO content.
+      - Connect Metabase to business DB, Tencent RDS, Node2 local DB, CMS write tables, or raw operational tables.
+      - Expand RIASEC, Big Five, or Career claims into precise job recommendation, hiring suitability, AI career planning, or career success prediction claims.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelDashMvpOnlineFinalCloseout
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-dash-mvp-online-final-closeout.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    metabase_operation: false
+    network_operation: false
+    research_publish: false
+    human_review_required: false
+    production_approval_required: false
+    next_task: RESEARCH-PUBLISH-01
+
   - id: RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT
     repo: fap-api
     depends_on:
