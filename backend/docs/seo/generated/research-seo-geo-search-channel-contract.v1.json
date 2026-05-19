@@ -1,0 +1,196 @@
+{
+  "version": "research-seo-geo-search-channel-contract.v1",
+  "task": "PR-RESEARCH-03",
+  "title": "Research SEO GEO Search Channel contract",
+  "source_documents": [
+    "PR-RESEARCH-00",
+    "PR-RESEARCH-01",
+    "PR-RESEARCH-02",
+    "SEARCH-CHANNEL-QUEUE-00",
+    "CLAIM-LINT-00",
+    "SEO-DASH-MVP-ONLINE-SUMMARY"
+  ],
+  "page_entity_type": "research_report",
+  "authority_model": {
+    "research_authority": "backend_cms",
+    "runtime_authority": "fap_web_backend_payload_only",
+    "observation_authority": "seo_intel_url_truth",
+    "metabase_role": "read_only_observation_dashboard",
+    "node2_role": "non_authority"
+  },
+  "allowed_authority_inputs": [
+    "backend_cms_research_asset",
+    "backend_public_research_payload",
+    "fap_web_backend_payload_runtime",
+    "seo_intel_url_truth_observation",
+    "future_sanitized_seo_intel_aggregate_views"
+  ],
+  "forbidden_authority_inputs": [
+    "frontend_fallback",
+    "static_sitemap_fallback",
+    "static_llms_fallback",
+    "node2_local_db",
+    "node2_local_laravel",
+    "business_db_raw_tables",
+    "metabase_business_db_connection",
+    "production_crawler_logs",
+    "raw_orders",
+    "raw_payments",
+    "raw_events",
+    "raw_reports",
+    "raw_email",
+    "provider_payloads",
+    "payment_payloads",
+    "cookies",
+    "raw_ips",
+    "user_agents"
+  ],
+  "sitemap_eligibility_gates": [
+    "backend_cms_source_exists",
+    "page_entity_type_research_report",
+    "status_published",
+    "review_state_approved",
+    "is_public_true",
+    "is_indexable_true",
+    "canonical_path_present",
+    "locale_explicit",
+    "fap_web_route_backend_payload_only",
+    "url_truth_supports_research_report",
+    "claim_boundary_review_passed",
+    "methodology_present",
+    "sample_disclaimer_present",
+    "references_present",
+    "author_present",
+    "reviewer_present",
+    "last_reviewed_at_present",
+    "no_private_flow",
+    "no_raw_pii",
+    "no_raw_evidence",
+    "no_user_specific_report_data",
+    "no_noindex_state"
+  ],
+  "llms_eligibility_gates": [
+    "sitemap_eligibility_passed",
+    "public_indexable_content",
+    "sanitized_summary",
+    "claim_boundary_preserved",
+    "methodology_visible",
+    "sample_disclaimer_visible",
+    "references_present",
+    "no_raw_evidence",
+    "no_private_payload",
+    "no_pii",
+    "no_order_payment_attempt_email_cookie_raw_ip_or_provider_payload",
+    "no_frontend_or_static_fallback_enumeration"
+  ],
+  "search_channel_queue_eligibility_gates": [
+    "sitemap_eligibility_passed",
+    "url_truth_supports_research_report",
+    "source_authority_backend_cms",
+    "indexability_explicit_indexable",
+    "claim_boundary_review_passed",
+    "search_channel_queue_accepts_research_report",
+    "later_channel_credentials_quota_owner_and_live_operation_approval"
+  ],
+  "url_truth_support": {
+    "page_entity_type": "research_report",
+    "source_authority": "backend_cms",
+    "safe_observed_tables": [
+      "seo_urls",
+      "seo_url_entities",
+      "seo_issue_queue"
+    ],
+    "required_states": [
+      "canonical_present",
+      "locale_explicit",
+      "indexability_explicit",
+      "private_flow_absent",
+      "forbidden_authority_absent"
+    ],
+    "forbidden_truth_sources": [
+      "frontend_fallback",
+      "static_sitemap_fallback",
+      "static_llms_fallback",
+      "live_search_response",
+      "node2_local_source",
+      "production_crawler_logs"
+    ]
+  },
+  "claim_boundary": {
+    "forbidden_claim_classes": [
+      "diagnosis",
+      "treatment",
+      "cure",
+      "hiring_fit",
+      "job_competency",
+      "exact_iq",
+      "guaranteed_salary",
+      "guaranteed_turnover_prediction",
+      "guaranteed_career_outcome",
+      "ai_career_planning_authority",
+      "full_career_recommendation"
+    ],
+    "required_safe_elements": [
+      "methodology",
+      "sample_disclaimer",
+      "references",
+      "author",
+      "reviewer",
+      "last_reviewed_at",
+      "claim_boundary"
+    ],
+    "expanded_claim_surfaces_blocked": [
+      "riasec_full_career_recommendation",
+      "big_five_full_career_recommendation",
+      "career_decision_full_recommendation"
+    ]
+  },
+  "dataset_schema_policy": {
+    "enabled_in_this_pr": false,
+    "blocked_until": [
+      "versioned_downloadable_asset",
+      "stable_public_file",
+      "checksum_or_immutable_version",
+      "license_or_usage_note",
+      "methodology_attached",
+      "sample_disclaimer_attached",
+      "no_raw_pii_or_private_evidence",
+      "dataset_ready_backend_contract"
+    ]
+  },
+  "excluded_states": [
+    "draft",
+    "archived",
+    "private",
+    "unapproved",
+    "noindex",
+    "future_scheduled",
+    "unsupported_page_type",
+    "claim_unsafe",
+    "missing_methodology",
+    "missing_references",
+    "private_flow",
+    "raw_pii_present",
+    "dataset_asset_not_versioned"
+  ],
+  "research_publish_in_this_pr": false,
+  "sitemap_changed_in_this_pr": false,
+  "llms_changed_in_this_pr": false,
+  "search_channel_queue_inserted_in_this_pr": false,
+  "url_submission_performed": false,
+  "external_api_live_activation": false,
+  "scheduler_enabled_in_this_pr": false,
+  "collector_write_executed_in_this_pr": false,
+  "production_crawler_log_read": false,
+  "env_edit_in_this_pr": false,
+  "deployment_performed_in_this_pr": false,
+  "dataset_schema_enabled_in_this_pr": false,
+  "pseo_generation_in_this_pr": false,
+  "frontend_fallback_authority_enabled": false,
+  "node2_source_used": false,
+  "metabase_operation_performed": false,
+  "business_db_connected": false,
+  "tencent_rds_connected": false,
+  "node2_db_connected": false,
+  "next_task": "RESEARCH-PUBLISH-READINESS-00"
+}
