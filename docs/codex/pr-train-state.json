@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T01:56:00Z",
+  "updated_at": "2026-05-19T02:06:23Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11121,8 +11121,8 @@
     },
     "PR-RESEARCH-00": {
       "repo": "fap-api",
-      "status": "pr_opened_github_checks_pending",
-      "state": "open",
+      "status": "merged",
+      "state": "merged",
       "title": "Research Asset readiness scan and contract",
       "depends_on": [
         "SEO-DASH-PROD-04B"
@@ -11195,8 +11195,7 @@
           "command": "git diff --check"
         },
         "github": {
-          "status": "pending",
-          "pr_url": "https://github.com/fermatmind/fap-api/pull/1470"
+          "status": "passed"
         }
       },
       "sidecar_issues": [],
@@ -11220,17 +11219,28 @@
           "at": "2026-05-19T01:56:00Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1470 for PR-RESEARCH-00. GitHub checks pending. No production operation performed."
+        },
+        {
+          "at": "2026-05-19T02:04:49Z",
+          "status": "merged",
+          "summary": "Reconciled PR-RESEARCH-00 as merged via PR #1470 with merge commit 2ccc3204fd6ef040df15c6b2a8f2a50135ae3f44. Remote branch absent and local main synced."
         }
       ],
       "branch": "codex/pr-research-00-readiness-scan-contract",
       "base": "main",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1470",
-      "commit_sha": "d30d5e33"
+      "commit_sha": "d30d5e33",
+      "final_status": "completed",
+      "merge_commit_sha": "2ccc3204fd6ef040df15c6b2a8f2a50135ae3f44",
+      "merge_observed": true,
+      "merged_at": "2026-05-19T02:04:49Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "SEARCH-CHANNEL-QUEUE-00": {
       "repo": "fap-api",
-      "status": "planned",
-      "state": "planned",
+      "status": "local_validation_passed",
+      "state": "local_validation_passed",
       "title": "Search Channel Queue design contract",
       "depends_on": [
         "SEO-DASH-PROD-04B"
@@ -11253,6 +11263,54 @@
         "registration": {
           "status": "planned",
           "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-PROD-04B merged as PR #1469; PR-RESEARCH-00 also merged as PR #1470. Main contains the required dependency."
+        },
+        "scope": {
+          "status": "in_progress",
+          "evidence": "Implementing only Search Channel Queue contract doc, generated artifact, focused SeoIntel test, and PR train state metadata. No live API, URL submission, scheduler, collector write, env edit, sitemap/llms change, or production operation executed."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Search Channel Queue contract doc, generated artifact, focused SeoIntel test, and docs/codex PR train state metadata. No live API, URL submission, credentials/env edit, scheduler, collector write, sitemap/llms change, production crawler log read, or production operation was performed."
+        },
+        "search_channel_queue_contract_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelQueueContract",
+          "evidence": "5 tests passed with 96 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "evidence": "131 tests passed with 2393 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Pint completed successfully; 3376 files checked."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/search-channel-queue-contract.v1.json >/dev/null"
+        },
+        "state_json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 - <<'PY' ... yaml.safe_load(docs/codex/pr-train.yaml)"
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
         }
       },
       "sidecar_issues": [],
@@ -11261,8 +11319,20 @@
           "at": "2026-05-19T01:02:33Z",
           "status": "planned",
           "summary": "Registered planned non-production PR train task SEARCH-CHANNEL-QUEUE-00: Search Channel Queue design contract. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        },
+        {
+          "at": "2026-05-19T02:04:49Z",
+          "status": "in_progress",
+          "summary": "Started SEARCH-CHANNEL-QUEUE-00 on scoped branch. Scope excludes live GSC/Baidu/IndexNow/domestic adapter calls, URL submissions, credentials/env edits, scheduler, collector writes, crawler log reads, sitemap/llms behavior, and production operations."
+        },
+        {
+          "at": "2026-05-19T02:06:23Z",
+          "status": "local_validation_passed",
+          "summary": "Added Search Channel Queue contract, generated artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and git diff check passed. No live API, URL submission, scheduler, collector write, or production operation performed."
         }
-      ]
+      ],
+      "branch": "codex/search-channel-queue-00-design-contract",
+      "base": "main"
     },
     "CRAWLER-LOG-00": {
       "repo": "fap-api",
