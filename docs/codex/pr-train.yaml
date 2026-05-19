@@ -6273,6 +6273,272 @@ prs:
     production_approval_required: false
     next_task: SEO-DASH-MVP-ONLINE-SUMMARY closeout report / next Research publish operation planning
 
+  - id: OPS-PORTAL-SEO-01
+    repo: fap-api
+    depends_on:
+      - RESEARCH-PUBLISH-READINESS-00
+    branch: codex/ops-portal-seo-01
+    base: main
+    title: "docs(seo-intel): add Ops Portal SEO access architecture"
+    name: "Ops Portal SEO access architecture contract"
+    train_scope: ops_portal_seo_access_layer
+    risk_level: low_docs_generated_tests_no_runtime_activation
+    type: docs/generated/test PR
+    scope:
+      - Define `ops.fermatmind.com/ops/seo` as an authenticated Ops Portal entry owned by fap-api under the existing Filament Ops panel.
+      - Lock the safe MVP access model where the Ops page shows SEO Dash state, dashboard name, owner assignments, and private access instructions only.
+      - Keep Metabase private at `127.0.0.1:3000` with no iframe, reverse proxy, public sharing, anonymous links, or unrestricted SQL for normal operators.
+    allowed_paths:
+      - backend/docs/seo/ops-portal-seo-access-architecture.md
+      - backend/docs/seo/generated/ops-portal-seo-access-architecture.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsPortalSeoAccessArchitectureTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy, edit env files, change DNS/CDN/OpenResty/Nginx, open public ports, change ECS security groups, change RDS whitelists, expose Metabase publicly, bind Metabase to 0.0.0.0, add datasources, create dashboards, enable scheduler, run collector writes, connect live search APIs, submit URLs, read production crawler logs, publish Research, or create pSEO.
+      - Add runtime route code, Metabase iframe/proxy behavior, network changes, sitemap/llms behavior, or frontend changes.
+      - Connect Metabase to business DB, Tencent RDS, Node2 local DB, CMS write tables, or raw operational tables.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsPortalSeoAccessArchitecture
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/ops-portal-seo-access-architecture.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    metabase_operation: false
+    network_operation: false
+    research_publish: false
+    human_review_required: false
+    production_approval_required: false
+    next_task: OPS-PORTAL-SEO-02
+
+  - id: OPS-PORTAL-SEO-02
+    repo: fap-api
+    depends_on:
+      - OPS-PORTAL-SEO-01
+    branch: codex/ops-portal-seo-02
+    base: main
+    title: "docs(seo-intel): add Ops Portal SEO auth audit contract"
+    name: "Ops Portal auth audit permission contract"
+    train_scope: ops_portal_seo_access_layer
+    risk_level: low_docs_generated_tests_no_runtime_activation
+    type: docs/generated/test PR
+    scope:
+      - Define the auth, permission, owner, audit, revoke, and operator onboarding contract for `/ops/seo`.
+      - Require existing admin guard, Filament Ops auth, session, CSRF, TOTP, org context, and Ops access-control expectations.
+      - Keep normal operators blocked from unrestricted SQL, datasource management, and default exports.
+    allowed_paths:
+      - backend/docs/seo/ops-portal-seo-auth-audit-permission-contract.md
+      - backend/docs/seo/generated/ops-portal-seo-auth-audit-permission-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsPortalSeoAuthAuditPermissionContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy, edit env files, change DNS/CDN/OpenResty/Nginx, open public ports, change ECS security groups, change RDS whitelists, expose Metabase publicly, bind Metabase to 0.0.0.0, add datasources, create dashboards, enable scheduler, run collector writes, connect live search APIs, submit URLs, read production crawler logs, publish Research, or create pSEO.
+      - Add route shell code, runtime permission enforcement code, Metabase iframe/proxy behavior, network changes, sitemap/llms behavior, or frontend changes.
+      - Connect Metabase to business DB, Tencent RDS, Node2 local DB, CMS write tables, or raw operational tables.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsPortalSeoAuthAuditPermissionContract
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/ops-portal-seo-auth-audit-permission-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    metabase_operation: false
+    network_operation: false
+    research_publish: false
+    human_review_required: false
+    production_approval_required: false
+    next_task: OPS-PORTAL-SEO-03
+
+  - id: OPS-PORTAL-SEO-03
+    repo: fap-api
+    depends_on:
+      - OPS-PORTAL-SEO-02
+    branch: codex/ops-portal-seo-03
+    base: main
+    title: "feat(ops): add SEO dashboard access shell"
+    name: "/ops/seo route shell MVP"
+    train_scope: ops_portal_seo_access_layer
+    risk_level: ops_route_shell_no_metabase_proxy_no_network_change
+    type: Filament Ops page shell + tests PR
+    scope:
+      - Add an authenticated `/ops/seo` shell inside the existing Filament Ops panel if feasible under current panel patterns.
+      - Show SEO Dash MVP status, dashboard name, private-only Metabase location description, private access instructions, and safety warnings.
+      - Keep the page as status/runbook only with no iframe, reverse proxy, Metabase API calls, datasource changes, network changes, or live SEO DB reads.
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/**Seo**
+      - backend/resources/views/filament/ops/**seo**
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsPortalSeoRouteShellTest.php
+      - backend/docs/seo/ops-portal-seo-route-shell.md
+      - backend/docs/seo/generated/ops-portal-seo-route-shell.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy, edit env files, change DNS/CDN/OpenResty/Nginx, open public ports, change ECS security groups, change RDS whitelists, expose Metabase publicly, bind Metabase to 0.0.0.0, add datasources, create dashboards, enable scheduler, run collector writes, connect live search APIs, submit URLs, read production crawler logs, publish Research, or create pSEO.
+      - Edit backend routes/api.php, add Metabase proxy/iframe behavior, change fap-web, change sitemap/llms behavior, add scheduler/collector/search/crawler actions, or query production systems.
+      - Connect Metabase to business DB, Tencent RDS, Node2 local DB, CMS write tables, or raw operational tables.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsPortalSeoRouteShell
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/ops-portal-seo-route-shell.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    metabase_operation: false
+    network_operation: false
+    research_publish: false
+    human_review_required: true
+    production_approval_required: false
+    next_task: OPS-PORTAL-SEO-04
+
+  - id: OPS-PORTAL-SEO-04
+    repo: fap-api
+    depends_on:
+      - OPS-PORTAL-SEO-03
+    branch: codex/ops-portal-seo-04
+    base: main
+    title: "docs(seo-intel): add private Metabase access bridge contract"
+    name: "Private Metabase access bridge contract"
+    train_scope: ops_portal_seo_access_layer
+    risk_level: low_docs_generated_tests_no_network_activation
+    type: docs/generated/test PR
+    scope:
+      - Define future private access bridge options for Workbench, SSH tunnel or bastion, VPN, and reverse proxy behind Ops auth.
+      - Keep raw public Metabase forbidden and document why iframe/proxy is not the MVP.
+      - Lock production preflight gates for network, security group, RDS whitelist, DNS/CDN/OpenResty/Nginx, and public exposure changes.
+    allowed_paths:
+      - backend/docs/seo/ops-portal-seo-private-metabase-access-bridge.md
+      - backend/docs/seo/generated/ops-portal-seo-private-metabase-access-bridge.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsPortalSeoPrivateAccessBridgeTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy, edit env files, change DNS/CDN/OpenResty/Nginx, open public ports, change ECS security groups, change RDS whitelists, expose Metabase publicly, bind Metabase to 0.0.0.0, add datasources, create dashboards, enable scheduler, run collector writes, connect live search APIs, submit URLs, read production crawler logs, publish Research, or create pSEO.
+      - Implement a proxy, operate Metabase, change service config, create users, create exports, create public links, or open security groups.
+      - Connect Metabase to business DB, Tencent RDS, Node2 local DB, CMS write tables, or raw operational tables.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsPortalSeoPrivateAccessBridge
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/ops-portal-seo-private-metabase-access-bridge.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    metabase_operation: false
+    network_operation: false
+    research_publish: false
+    human_review_required: false
+    production_approval_required: false
+    next_task: OPS-PORTAL-SEO-05
+
+  - id: OPS-PORTAL-SEO-05
+    repo: fap-api
+    depends_on:
+      - OPS-PORTAL-SEO-04
+    branch: codex/ops-portal-seo-05
+    base: main
+    title: "docs(seo-intel): add Ops Portal SEO access verification contract"
+    name: "Access export sharing verification contract"
+    train_scope: ops_portal_seo_access_layer
+    risk_level: low_docs_generated_tests_no_runtime_activation
+    type: docs/generated/test PR
+    scope:
+      - Define the verification checklist for `/ops/seo` access, Metabase privacy, datasource boundary, public sharing, anonymous links, public embeds, exports, raw SQL, audit, owner, and revoke paths.
+      - Keep the next task as production access operation preflight only.
+      - Do not operate Metabase or change runtime/network state.
+    allowed_paths:
+      - backend/docs/seo/ops-portal-seo-access-export-sharing-verification.md
+      - backend/docs/seo/generated/ops-portal-seo-access-export-sharing-verification.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsPortalSeoAccessExportSharingVerificationTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy, edit env files, change DNS/CDN/OpenResty/Nginx, open public ports, change ECS security groups, change RDS whitelists, expose Metabase publicly, bind Metabase to 0.0.0.0, add datasources, create dashboards, enable scheduler, run collector writes, connect live search APIs, submit URLs, read production crawler logs, publish Research, or create pSEO.
+      - Add runtime proxy behavior, operate Metabase APIs, change network state, or edit sitemap/llms behavior.
+      - Connect Metabase to business DB, Tencent RDS, Node2 local DB, CMS write tables, or raw operational tables.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsPortalSeoAccessExportSharingVerification
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/ops-portal-seo-access-export-sharing-verification.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    metabase_operation: false
+    network_operation: false
+    research_publish: false
+    human_review_required: false
+    production_approval_required: false
+    next_task: OPS-PORTAL-SEO-PROD-01
 
   - id: RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT
     repo: fap-api

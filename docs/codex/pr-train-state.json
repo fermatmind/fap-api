@@ -4494,8 +4494,8 @@
         "no fap-web change",
         "no 300/800/2786 expansion execution"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "28b9a411",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1486",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -5981,7 +5981,7 @@
       "repo": "fap-api",
       "branch": "fix/career-progressive-live-verification-scaling-1",
       "title": "fix(api): add chunked career live verification scaling",
-      "status": "in_progress",
+      "status": "local_checks_passed",
       "depends_on": [
         "REPAIR-PROGRESSIVE-CLOSEOUT-1"
       ],
@@ -12095,6 +12095,70 @@
         }
       ],
       "next_pr": null
+    },
+    "OPS-PORTAL-SEO-01": {
+      "status": "in_progress",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "branch": "codex/ops-portal-seo-01",
+      "base": "main",
+      "title": "docs(seo-intel): add Ops Portal SEO access architecture",
+      "depends_on": [
+        "RESEARCH-PUBLISH-READINESS-00"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_seo_intel_ops_portal_seo_access_architecture": "passed",
+          "php_artisan_test_filter_seo_intel": "passed",
+          "php_artisan_route_list": "passed",
+          "pint_test": "passed",
+          "json_validation": "passed",
+          "yaml_validation": "passed",
+          "git_diff_check": "passed",
+          "scope_validation": "passed"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "RESEARCH-PUBLISH-READINESS-00 ledger stale",
+          "repo": "fap-api",
+          "introduced_by_current_pr": false,
+          "evidence": "The item is merged on GitHub and local main is synced, but the ledger still records pr_opened_github_checks_pending.",
+          "why_external_to_current_pr": "The stale ledger predates this Ops Portal SEO train and does not change the current task scope."
+        },
+        {
+          "title": "PR-RESEARCH-02 ledger stale",
+          "repo": "fap-web",
+          "introduced_by_current_pr": false,
+          "evidence": "fap-web main is synced at the merged PR-RESEARCH-02 commit, but its ledger may still record the item as pending.",
+          "why_external_to_current_pr": "Cross-repository ledger reconciliation belongs in fap-web and is not required for this fap-api architecture contract."
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-19T20:07:27Z",
+          "status": "in_progress",
+          "summary": "Started docs/generated/test-only Ops Portal SEO access architecture PR. Scope excludes runtime route code, Metabase iframe/proxy/public exposure, DNS/CDN/OpenResty/Nginx changes, env edits, deploy, network changes, datasource changes, dashboards, collector writes, scheduler activation, live search APIs, URL submission, crawler log reads, Research publish, and pSEO."
+        },
+        {
+          "at": "2026-05-19T20:12:00Z",
+          "status": "local_checks_passed",
+          "summary": "Focused Ops Portal SEO access architecture test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
+        },
+        {
+          "at": "2026-05-19T20:15:00Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1486. GitHub checks pending."
+        }
+      ],
+      "next_pr": "OPS-PORTAL-SEO-02"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
