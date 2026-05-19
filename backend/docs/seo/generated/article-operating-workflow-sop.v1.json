@@ -1,0 +1,93 @@
+{
+  "version": "article-operating-workflow-sop.v1",
+  "source_documents": [
+    "SEARCH-CHANNEL-QUEUE-00",
+    "CLAIM-LINT-00",
+    "CONTENT-OPS-01"
+  ],
+  "task": "CONTENT-OPS-01",
+  "workflow_stages": [
+    "editorial_package",
+    "cms_draft",
+    "gate_checks",
+    "controlled_publish",
+    "post_publish_observation"
+  ],
+  "editorial_package_fields": [
+    "title",
+    "slug_proposal",
+    "locale",
+    "summary",
+    "body_outline",
+    "seo_intent",
+    "claim_boundary_notes",
+    "internal_link_targets",
+    "media_requirements",
+    "publication_owner"
+  ],
+  "draft_exclusions": [
+    "sitemap",
+    "llms",
+    "baidu_push",
+    "indexnow",
+    "so360",
+    "sogou",
+    "shenma",
+    "url_truth_indexable"
+  ],
+  "gate_checks": [
+    "required_cms_fields",
+    "canonical_url_readiness",
+    "no_private_flow_links",
+    "claim_boundary_safety",
+    "internal_link_validity",
+    "media_ownership_and_alt_text",
+    "no_raw_pii_or_raw_operational_identifiers",
+    "no_unsupported_research_or_pseo_page_type_assumptions",
+    "search_channel_queue_eligibility_status"
+  ],
+  "forbidden_claim_classes": [
+    "diagnosis",
+    "treatment",
+    "cure",
+    "exact_iq",
+    "guaranteed_career_outcome",
+    "hiring_fit",
+    "job_competency",
+    "full_career_recommendation",
+    "ai_career_planning_authority"
+  ],
+  "allowed_safer_wording": [
+    "non_diagnostic",
+    "for_reference_only",
+    "online_estimate",
+    "confidence_interval",
+    "career_direction_reference",
+    "exploration_suggestion",
+    "interest_signal",
+    "work_style_tendency"
+  ],
+  "forbidden_internal_link_targets": [
+    "draft",
+    "private_flow",
+    "checkout",
+    "payment",
+    "user_report",
+    "share_flow",
+    "noindex"
+  ],
+  "runtime_content_changed_in_this_pr": false,
+  "cms_runtime_mutation_in_this_pr": false,
+  "article_published_in_this_pr": false,
+  "sitemap_changed_in_this_pr": false,
+  "llms_changed_in_this_pr": false,
+  "url_submission_performed": false,
+  "production_write_execution": false,
+  "scheduler_enabled_in_this_pr": false,
+  "external_api_live_activation": false,
+  "collector_write_executed_in_this_pr": false,
+  "env_edit_in_this_pr": false,
+  "metabase_deployed_in_this_pr": false,
+  "pseo_generation_in_this_pr": false,
+  "next_task": null
+}

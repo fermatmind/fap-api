@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T02:28:20Z",
+  "updated_at": "2026-05-19T02:40:46Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11475,8 +11475,8 @@
     },
     "CLAIM-LINT-00": {
       "repo": "fap-api",
-      "status": "pr_opened_github_checks_pending",
-      "state": "open",
+      "status": "merged",
+      "state": "merged",
       "title": "Chinese claim boundary linter spec and tests",
       "depends_on": [
         "PR-RESEARCH-00"
@@ -11549,8 +11549,7 @@
           "command": "git diff --check"
         },
         "github": {
-          "status": "pending",
-          "pr_url": "https://github.com/fermatmind/fap-api/pull/1473"
+          "status": "passed"
         }
       },
       "sidecar_issues": [],
@@ -11574,17 +11573,28 @@
           "at": "2026-05-19T02:28:20Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1473 for CLAIM-LINT-00. GitHub checks pending. No production operation performed."
+        },
+        {
+          "at": "2026-05-19T02:37:09Z",
+          "status": "merged",
+          "summary": "Reconciled CLAIM-LINT-00 as merged via PR #1473. Remote branch absent and local main synced."
         }
       ],
       "branch": "codex/claim-lint-00-chinese-claim-boundary",
       "base": "main",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1473",
-      "commit_sha": "7e008bae"
+      "commit_sha": "7e008bae",
+      "final_status": "completed",
+      "merge_commit_sha": "fb831889",
+      "merge_observed": true,
+      "merged_at": "2026-05-19T02:37:09Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "CONTENT-OPS-01": {
       "repo": "fap-api",
-      "status": "planned",
-      "state": "planned",
+      "status": "pr_opened_github_checks_pending",
+      "state": "open",
       "title": "CMS article operating workflow SOP",
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-00"
@@ -11607,6 +11617,58 @@
         "registration": {
           "status": "planned",
           "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEARCH-CHANNEL-QUEUE-00 merged as PR #1471; CLAIM-LINT-00 also merged as PR #1473."
+        },
+        "scope": {
+          "status": "in_progress",
+          "evidence": "Implementing only CMS article operating workflow SOP doc, generated artifact, focused SeoIntel test, and PR train state metadata. No runtime content changes, publish action, sitemap/llms change, search submission, CMS runtime mutation, scheduler, env edit, deploy, collector write, or production operation executed."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to CMS article operating workflow SOP doc, generated artifact, focused SeoIntel test, and docs/codex PR train state metadata. No runtime content changes, publish action, sitemap/llms change, URL submission, CMS runtime mutation, scheduler, env edit, deploy, collector write, or production operation was performed."
+        },
+        "article_operating_workflow_sop_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelArticleOperatingWorkflowSop",
+          "evidence": "6 tests passed with 68 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "evidence": "148 tests passed with 2626 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Pint completed successfully; 3379 files checked."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/article-operating-workflow-sop.v1.json >/dev/null"
+        },
+        "state_json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 - <<'PY' ... yaml.safe_load(docs/codex/pr-train.yaml)"
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1474"
         }
       },
       "sidecar_issues": [],
@@ -11615,8 +11677,27 @@
           "at": "2026-05-19T01:02:33Z",
           "status": "planned",
           "summary": "Registered planned non-production PR train task CONTENT-OPS-01: CMS article operating workflow SOP. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        },
+        {
+          "at": "2026-05-19T02:37:09Z",
+          "status": "in_progress",
+          "summary": "Started CONTENT-OPS-01 on scoped branch. Scope excludes runtime content changes, publishing, sitemap/llms behavior, URL submissions, CMS runtime mutation, scheduler, env edits, deploys, collector writes, and production operations."
+        },
+        {
+          "at": "2026-05-19T02:39:46Z",
+          "status": "local_validation_passed",
+          "summary": "Added CMS article operating workflow SOP, generated artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and git diff check passed. No runtime content change, publish action, URL submission, CMS mutation, or production operation performed."
+        },
+        {
+          "at": "2026-05-19T02:40:46Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1474 for CONTENT-OPS-01. GitHub checks pending. No production operation performed."
         }
-      ]
+      ],
+      "branch": "codex/content-ops-01-cms-article-operating-workflow",
+      "base": "main",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1474",
+      "commit_sha": "3990f57e"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
