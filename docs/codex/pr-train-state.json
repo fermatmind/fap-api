@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T02:27:35Z",
+  "updated_at": "2026-05-19T02:28:20Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11475,8 +11475,8 @@
     },
     "CLAIM-LINT-00": {
       "repo": "fap-api",
-      "status": "local_validation_passed",
-      "state": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
+      "state": "open",
       "title": "Chinese claim boundary linter spec and tests",
       "depends_on": [
         "PR-RESEARCH-00"
@@ -11547,6 +11547,10 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1473"
         }
       },
       "sidecar_issues": [],
@@ -11565,10 +11569,17 @@
           "at": "2026-05-19T02:27:35Z",
           "status": "local_validation_passed",
           "summary": "Added Chinese claim boundary linter contract, generated artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and git diff check passed. No runtime activation, content mutation, sitemap/llms change, or production operation performed."
+        },
+        {
+          "at": "2026-05-19T02:28:20Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1473 for CLAIM-LINT-00. GitHub checks pending. No production operation performed."
         }
       ],
       "branch": "codex/claim-lint-00-chinese-claim-boundary",
-      "base": "main"
+      "base": "main",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1473",
+      "commit_sha": "7e008bae"
     },
     "CONTENT-OPS-01": {
       "repo": "fap-api",
