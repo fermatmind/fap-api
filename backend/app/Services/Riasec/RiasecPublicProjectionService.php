@@ -206,6 +206,17 @@ final class RiasecPublicProjectionService
             $this->appendRenderableSlot($slots, $slot, 'six_dimension_map', $modulePolicy, $locale);
         }
 
+        $top3Key = $this->selectedTop3Key($topCode);
+        if ($top3Key !== null) {
+            $this->appendRenderableSlot(
+                $slots,
+                $this->deepCopySlots->resolveTop3ChainSlot($top3Key),
+                'hero_activity_chain',
+                $modulePolicy,
+                $locale
+            );
+        }
+
         foreach ($this->selectedPairKeys($topCode) as $pairKey) {
             $this->appendRenderableSlot(
                 $slots,
@@ -349,6 +360,20 @@ final class RiasecPublicProjectionService
         return $pairs;
     }
 
+    private function selectedTop3Key(string $topCode): ?string
+    {
+        $letters = array_values(array_unique(array_filter(str_split(strtoupper($topCode)), static fn (string $letter): bool => in_array($letter, RiasecDeepCopySlotRegistry::DIMENSIONS, true))));
+        if (count($letters) < 3) {
+            return null;
+        }
+
+        $order = array_flip(RiasecDeepCopySlotRegistry::DIMENSIONS);
+        $top3 = array_slice($letters, 0, 3);
+        usort($top3, fn (string $a, string $b): int => ($order[$a] ?? 99) <=> ($order[$b] ?? 99));
+
+        return implode('_', $top3);
+    }
+
     /**
      * @return list<string>
      */
@@ -401,6 +426,21 @@ final class RiasecPublicProjectionService
             'short_label',
             'chemistry',
             'activities_to_validate',
+            'strategy_label',
+            'activity_chain',
+            'core_reading',
+            'first_experiment',
+            'ordered_code_handling',
+            'low_risk_validation',
+            'primary_activity_chain',
+            'secondary_support_line',
+            'tertiary_stabilizer',
+            'likely_tension',
+            'activity_sequence',
+            'when_to_use_140q',
+            'when_not_to_overread',
+            'free_page_teaser',
+            'deep_report_extension',
             'question',
             'what_user_sees',
             'button_label',
@@ -437,6 +477,7 @@ final class RiasecPublicProjectionService
             'state' => array_filter([
                 'dimension_code' => $slot['dimension_code'] ?? null,
                 'pair_key' => $slot['pair_key'] ?? null,
+                'top3_key' => $slot['top3_key'] ?? null,
                 'slot_name' => $slot['slot_name'] ?? null,
                 'layer_state' => $slot['layer_state'] ?? null,
                 'quality_state' => $slot['quality_state'] ?? null,
@@ -458,7 +499,7 @@ final class RiasecPublicProjectionService
      */
     private function slotId(array $slot): string
     {
-        foreach (['dimension_code', 'pair_key', 'slot_name'] as $field) {
+        foreach (['dimension_code', 'pair_key', 'top3_key', 'slot_name'] as $field) {
             if (trim((string) ($slot[$field] ?? '')) !== '') {
                 return (string) ($slot['slot_key'] ?? '').':'.(string) $slot[$field];
             }

@@ -12505,8 +12505,8 @@
     "next_pr": "RIASEC-FULL-CONTENT-PACK-03"
   },
   "RIASEC-FULL-CONTENT-PACK-03": {
-    "status": "pr_open_github_checks_pending",
-    "commit_sha": "9b13611ab4fd1577d3f0789b94d25225941fda67",
+    "status": "merged",
+    "commit_sha": "2d16bb4934bc29b3a959de9e970237b10b0b5343",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1484",
     "branch": "codex/riasec-full-content-pack-03-pair-blend-import",
     "depends_on": [
@@ -12542,12 +12542,16 @@
       "git_diff_check": {
         "status": "pass",
         "command": "git diff --check"
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "summary": "GitHub PR #1484 is MERGED; origin/main contains merge commit 2d16bb4934bc29b3a959de9e970237b10b0b5343. Required checks passed: hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, verify-mbti-v2."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-19T15:41:57Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "history": [
       {
@@ -12564,8 +12568,135 @@
         "at": "2026-05-19T15:55:00Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1484 for RIASEC-FULL-CONTENT-PACK-03. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-19T20:06:36Z",
+        "status": "merged_reconciled",
+        "summary": "Minimal ledger reconciliation before PHASE2: GitHub PR #1484 is merged, origin/main contains merge commit 2d16bb4934bc29b3a959de9e970237b10b0b5343, remote branch deletion and local cleanup were verified as completed."
       }
     ],
-    "next_pr": "RIASEC-FULL-CONTENT-PACK-04"
+    "next_pr": "RIASEC-FULL-CONTENT-PACK-04",
+    "merge_commit": "2d16bb4934bc29b3a959de9e970237b10b0b5343"
+  },
+  "RIASEC-FULL-CONTENT-PACK-04": {
+    "status": "local_validation_passed",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-04",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-04: Top3 code chain strategy asset import",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-03"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency_gate": {
+        "status": "pass",
+        "summary": "PACK-03 was reconciled as merged; origin/main contains merge commit 2d16bb4934bc29b3a959de9e970237b10b0b5343 before PACK-04 started."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecTop3ChainSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi",
+        "summary": "17 tests passed; top3 registry emits 20/20 authored chain slots and RIASEC projection/report/share/history regression coverage passed."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecContentRegistrySlotContract.php app/Services/Riasec/RiasecPublicProjectionService.php tests/Unit/Services/Riasec/RiasecTop3ChainSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php"
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "command": "python3 YAML/JSON parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json"
+      },
+      "jsonl_validation": {
+        "status": "pass",
+        "command": "python3 JSONL parse for backend/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl",
+        "summary": "20 rows parsed with required unordered top3 keys."
+      },
+      "forbidden_claim_scan": {
+        "status": "pass",
+        "summary": "Imported top3 asset scan found 0 forbidden user claims."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "summary": "Changed files are limited to PACK-04 top3 asset, RIASEC registry/projection/tests, and authorized PR train metadata."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-19T20:06:36Z",
+        "status": "registered",
+        "summary": "Registered RIASEC-FULL-CONTENT-PACK-04 for RIASEC Full Content Pack PHASE2 after user-authorized manifest/state update."
+      },
+      {
+        "at": "2026-05-19T20:25:00Z",
+        "status": "local_validation_passed",
+        "summary": "Imported the 20-combo top3 file-backed asset, added deterministic backend selector/projection support, and passed targeted PHPUnit, scoped Pint, JSON/YAML, JSONL, forbidden-claim scan, and diff checks locally."
+      }
+    ],
+    "next_pr": "RIASEC-FULL-CONTENT-PACK-07"
+  },
+  "RIASEC-FULL-CONTENT-PACK-07": {
+    "status": "registered",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-07",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-07: 140Q task/environment/role narrative asset import",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-04"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-19T20:06:36Z",
+        "status": "registered",
+        "summary": "Registered RIASEC-FULL-CONTENT-PACK-07 for RIASEC Full Content Pack PHASE2 after user-authorized manifest/state update."
+      }
+    ],
+    "next_pr": "RIASEC-FULL-CONTENT-PACK-08"
+  },
+  "RIASEC-FULL-CONTENT-PACK-08": {
+    "status": "registered",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-08",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-08: Low quality / confidence / near-tie copy asset import",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-07"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-19T20:06:36Z",
+        "status": "registered",
+        "summary": "Registered RIASEC-FULL-CONTENT-PACK-08 for RIASEC Full Content Pack PHASE2 after user-authorized manifest/state update."
+      }
+    ],
+    "next_pr": "RIASEC-FULL-CONTENT-PACK-05"
   }
 }
