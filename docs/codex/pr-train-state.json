@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T14:09:47Z",
+  "updated_at": "2026-05-19T14:14:16Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11867,7 +11867,7 @@
       "next_pr": "PR-RESEARCH-01"
     },
     "PR-RESEARCH-01": {
-      "status": "pr_opened_github_checks_pending",
+      "status": "github_checks_failed",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/pr-research-01",
@@ -11876,7 +11876,7 @@
       "depends_on": [
         "METABASE-OPS-ACCESS-RUNBOOK-00"
       ],
-      "commit_sha": "2a6c675c45f467aa3ef5a039ae5dae40a8c8e6f4",
+      "commit_sha": "a0768d6bac3b94106b04dc22c667cd8cd6a3aabb",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1481",
       "checks": {
         "local": {
@@ -11889,9 +11889,17 @@
           "yaml_validation": "passed",
           "git_diff_check": "passed",
           "scope_validation": "passed"
+        },
+        "github": {
+          "hygiene": "passed",
+          "semgrep_sarif": "passed",
+          "semgrep_oss": "passed",
+          "verify_mbti_legacy": "failed",
+          "verify_mbti_v2": "failed",
+          "mergeStateStatus": "UNSTABLE"
         }
       },
-      "failure_reason": null,
+      "failure_reason": "GitHub verify-mbti-legacy and verify-mbti-v2 failed in Tests\\Unit\\Services\\BigFive\\ResultPageV2\\BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because PR-RESEARCH-01 intentionally changes backend/app ResearchReport files, backend/database Research migration, and backend/routes/api.php. Fix would require updating the Big Five runtime freeze classifier allowlist, which is outside the PR-RESEARCH-01 allowed files from the user prompt, so the train is stopped for explicit authorization.",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -11916,6 +11924,11 @@
           "at": "2026-05-19T14:09:47Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1481. GitHub checks pending."
+        },
+        {
+          "at": "2026-05-19T14:14:16Z",
+          "status": "github_checks_failed",
+          "summary": "GitHub checks failed: verify-mbti-legacy and verify-mbti-v2. Failure is BigFive runtime freeze classifier detecting Research backend/CMS runtime files. No merge performed; train stopped before PR-RESEARCH-02."
         }
       ],
       "next_pr": "PR-RESEARCH-02"
