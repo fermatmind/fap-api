@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T15:41:32Z",
+  "updated_at": "2026-05-19T15:42:22Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -12044,7 +12044,7 @@
       "next_pr": "RESEARCH-PUBLISH-READINESS-00"
     },
     "RESEARCH-PUBLISH-READINESS-00": {
-      "status": "local_checks_passed",
+      "status": "pr_opened_github_checks_pending",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/research-publish-readiness-00",
@@ -12053,8 +12053,8 @@
       "depends_on": [
         "PR-RESEARCH-03"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "4eae44f4",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1485",
       "checks": {
         "local": {
           "php_artisan_test_filter_seo_intel_research_publish_readiness": "passed",
@@ -12067,7 +12067,10 @@
           "git_diff_cached_check": "passed",
           "scope_validation": "passed"
         },
-        "github": {}
+        "github": {
+          "status": "pending",
+          "mergeStateStatus": "UNSTABLE"
+        }
       },
       "failure_reason": null,
       "merged_at": null,
@@ -12084,6 +12087,11 @@
           "at": "2026-05-19T15:41:32Z",
           "status": "local_checks_passed",
           "summary": "Focused Research publish readiness test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff checks, and allowed-path scope validation passed."
+        },
+        {
+          "at": "2026-05-19T15:42:22Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1485. GitHub checks pending."
         }
       ],
       "next_pr": null
