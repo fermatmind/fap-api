@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T13:44:00Z",
+  "updated_at": "2026-05-19T13:46:49Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11716,7 +11716,7 @@
       "local_cleanup_executed": true
     },
     "SEO-DASH-MVP-ONLINE-SUMMARY": {
-      "status": "github_checks_passed",
+      "status": "merged",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/seo-dash-mvp-online-summary",
@@ -11748,9 +11748,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-19T13:41:11Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "title": "OPS-RELEASE-WORKFLOW-01 ledger reconciliation",
@@ -11785,9 +11785,63 @@
           "at": "2026-05-19T13:44:00Z",
           "status": "github_checks_passed",
           "summary": "GitHub checks passed for PR #1479: hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2. mergeStateStatus=CLEAN."
+        },
+        {
+          "at": "2026-05-19T13:45:00Z",
+          "status": "post_merge_cleanup_complete",
+          "summary": "PR #1479 merged at e7c0814868304c448e1acfdd9ad52dc977ade5a4; origin/main synced; remote branch deleted; local branch cleanup completed by gh merge checkout to main."
         }
       ],
-      "next_pr": "METABASE-OPS-ACCESS-RUNBOOK-00"
+      "next_pr": "METABASE-OPS-ACCESS-RUNBOOK-00",
+      "merge_commit": "e7c0814868304c448e1acfdd9ad52dc977ade5a4"
+    },
+    "METABASE-OPS-ACCESS-RUNBOOK-00": {
+      "status": "commit_created",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "branch": "codex/metabase-ops-access-runbook-00",
+      "base": "main",
+      "title": "docs(seo-intel): add Metabase ops access runbook",
+      "depends_on": [
+        "SEO-DASH-MVP-ONLINE-SUMMARY"
+      ],
+      "commit_sha": "9e3be36f85170a962be719a73ab6b62294bf8cdc",
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_seo_intel_metabase_ops_access_runbook": "passed",
+          "php_artisan_test_filter_seo_intel": "passed",
+          "php_artisan_route_list": "passed",
+          "pint_test": "passed",
+          "json_validation": "passed",
+          "yaml_validation": "passed",
+          "git_diff_check": "passed",
+          "scope_validation": "passed"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T13:45:00Z",
+          "status": "in_progress",
+          "summary": "Started docs/generated/test-only Metabase ops access runbook PR. Scope excludes runtime code, migrations, env, deploy, Metabase operation, public exposure, datasource changes, collector writes, scheduler activation, external APIs, URL submission, crawler log reads, Research publish, and pSEO."
+        },
+        {
+          "at": "2026-05-19T13:46:32Z",
+          "status": "local_checks_passed",
+          "summary": "Focused SeoIntelMetabaseOpsAccessRunbook test, full SeoIntel test filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
+        },
+        {
+          "at": "2026-05-19T13:46:49Z",
+          "status": "commit_created",
+          "summary": "Created local commit 9e3be36f85170a962be719a73ab6b62294bf8cdc."
+        }
+      ],
+      "next_pr": "PR-RESEARCH-01"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
