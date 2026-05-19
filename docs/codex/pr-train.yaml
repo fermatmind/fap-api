@@ -6886,3 +6886,101 @@ prs:
       github_checks_required: true
       squash: true
       auto_merge: true
+
+  - id: RIASEC-FULL-CONTENT-PACK-06-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-05
+    branch: codex/riasec-full-content-pack-06-preflight
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-06-PREFLIGHT: Occupation examples asset preflight"
+    name: "Occupation examples boundary backend preflight"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend content asset preflight PR
+    scope:
+      - Validate V7.3 occupation_examples_boundary_v1.zh-CN before backend authoritative import.
+      - Document activity/task dependency, examples-only boundaries, source-status, technical-key, forbidden-claim, and fail-closed risks.
+      - Register PACK-06 import follow-up without importing runtime content.
+      - Reconcile PACK-05 ledger state as merged from GitHub and origin/main.
+    allowed_paths:
+      - backend/tests/Fixtures/Riasec/occupation_examples_boundary_v1.zh-CN.jsonl
+      - backend/tests/Unit/Services/Riasec/*Occupation*Preflight*.php
+      - backend/tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Import runtime occupation content.
+      - Touch scorer math, question packs, Holland Code generation, projection runtime behavior, report/share/PDF/history runtime behavior, fap-web, activity/task asset except read-only validation dependency, career registry source rows, feedback runtime, analytics runtime, or production data.
+      - Add career recommendation, job fit, occupation match, ranking, success prediction, ability proof, skill proof, raw score delta, 140Q more accurate, source_url, O*NET, or SOC claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecOccupationExamplesPreflightTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - python3 - <<'PY'
+        import json, pathlib
+        path = pathlib.Path('backend/tests/Fixtures/Riasec/occupation_examples_boundary_v1.zh-CN.jsonl')
+        assert sum(1 for line in path.open() if json.loads(line)) == 360
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    next_task: RIASEC-FULL-CONTENT-PACK-06
+
+  - id: RIASEC-FULL-CONTENT-PACK-06
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-06-PREFLIGHT
+      - RIASEC-FULL-CONTENT-PACK-05
+    branch: codex/riasec-full-content-pack-06
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-06: Import backend-authoritative RIASEC occupation examples boundary asset"
+    name: "Occupation examples boundary backend authoritative import"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend content asset import PR
+    scope:
+      - Import V7.3 occupation_examples_boundary_v1.zh-CN as backend-authoritative examples-only content.
+      - Add or update occupation example asset loader and validator.
+      - Wire ActivityExplorer to consume occupation examples through PACK-05 activity/task mapping.
+      - Keep occupation examples as work-scene examples, not matches, recommendations, rankings, or success predictions.
+    allowed_paths:
+      - backend/content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecActivityExplorerService.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Touch scorer math, question content packs, Holland Code generation, pair/top3/activity-task/140Q/quality imported assets except read-only dependency, fap-web fallback copy, real career registry source rows, O*NET/SOC/source_url claims, feedback runtime, analytics runtime, or production data.
+      - Add career match, job fit, occupation ranking, success prediction, ability proof, skill proof, raw score delta, or 140Q more accurate claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - python3 - <<'PY'
+        import json, pathlib
+        path = pathlib.Path('backend/content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl')
+        assert sum(1 for line in path.open() if json.loads(line)) == 360
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
