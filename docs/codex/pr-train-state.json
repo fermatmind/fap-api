@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T13:54:02Z",
+  "updated_at": "2026-05-19T14:09:09Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11796,7 +11796,7 @@
       "merge_commit": "e7c0814868304c448e1acfdd9ad52dc977ade5a4"
     },
     "METABASE-OPS-ACCESS-RUNBOOK-00": {
-      "status": "github_checks_passed",
+      "status": "merged",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/metabase-ops-access-runbook-00",
@@ -11805,7 +11805,7 @@
       "depends_on": [
         "SEO-DASH-MVP-ONLINE-SUMMARY"
       ],
-      "commit_sha": "f7069764c74b5f64d6bb48704ad431263a143d7b",
+      "commit_sha": "9be12b678bbfe40af75d5fd7e23d31f1aa31eb79",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1480",
       "checks": {
         "local": {
@@ -11828,8 +11828,8 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-19T14:00:03Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "sidecar_issues": [],
       "history": [
@@ -11857,9 +11857,63 @@
           "at": "2026-05-19T13:54:02Z",
           "status": "github_checks_passed",
           "summary": "GitHub checks passed for PR #1480: hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2. mergeStateStatus=CLEAN."
+        },
+        {
+          "at": "2026-05-19T14:05:25Z",
+          "status": "merged",
+          "summary": "Reconciled PR #1480 as merged with squash merge commit 9be12b678bbfe40af75d5fd7e23d31f1aa31eb79. Remote branch deleted; local cleanup pending script execution."
         }
       ],
       "next_pr": "PR-RESEARCH-01"
+    },
+    "PR-RESEARCH-01": {
+      "status": "commit_created",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "branch": "codex/pr-research-01",
+      "base": "main",
+      "title": "feat(cms): add Research Asset backend MVP",
+      "depends_on": [
+        "METABASE-OPS-ACCESS-RUNBOOK-00"
+      ],
+      "commit_sha": "98d33ea1d601ba4a7446c9fce196dc37c101b53a",
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_research_asset_backend_mvp": "passed",
+          "php_artisan_test_filter_seo_intel": "passed",
+          "php_artisan_route_list": "passed",
+          "php_artisan_migrate_pretend_sqlite_testing_path": "passed",
+          "pint_test": "passed",
+          "json_validation": "passed",
+          "yaml_validation": "passed",
+          "git_diff_check": "passed",
+          "scope_validation": "passed"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T14:05:25Z",
+          "status": "in_progress",
+          "summary": "Started Research backend/CMS MVP PR. Scope adds a ResearchReport backend/CMS authority foundation with draft/published gates and excludes Research publish, sitemap/llms/Search Channel exposure, frontend runtime exposure, collector writes, scheduler activation, external APIs, crawler log reads, env edits, deploy, and production operations."
+        },
+        {
+          "at": "2026-05-19T14:08:50Z",
+          "status": "local_checks_passed",
+          "summary": "Focused ResearchAssetBackendMvp test, full SeoIntel test filter, route list, sqlite testing migration pretend for the Research migration, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed. Default local MySQL migrate pretend was not used because the local root account rejected access; no production or external DB was touched."
+        },
+        {
+          "at": "2026-05-19T14:09:09Z",
+          "status": "commit_created",
+          "summary": "Created local commit 98d33ea1d601ba4a7446c9fce196dc37c101b53a."
+        }
+      ],
+      "next_pr": "PR-RESEARCH-02"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
