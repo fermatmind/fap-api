@@ -16,6 +16,12 @@ final class RiasecActivityExplorerService
 
     private const ACTIVITY_TASK_ASSET_PATH = 'content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl';
 
+    private const OCCUPATION_EXAMPLE_CONTENT_VERSION = 'occupation_examples_boundary_v1.zh-CN';
+
+    private const OCCUPATION_EXAMPLE_SOURCE_NAME = 'FermatTest RIASEC Occupation Examples Boundary v1';
+
+    private const OCCUPATION_EXAMPLE_ASSET_PATH = 'content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl';
+
     private const ACTIVITY_TASK_SOURCE_STATUSES = [
         'content_example_not_registry_match',
         'commercial_expansion_candidate_not_runtime_imported',
@@ -362,8 +368,141 @@ final class RiasecActivityExplorerService
             'source_status' => self::SOURCE_STATUS,
             'source_name' => self::SOURCE_NAME,
             'task_examples' => $row['task_examples'],
-            'occupation_examples' => [],
+            'occupation_examples' => $this->occupationExamplesForActivityDimensions($row['dimensions']),
             'next_experiments' => $nextExperiments,
+        ];
+    }
+
+    /**
+     * @param  list<string>  $dimensions
+     * @return list<array<string,mixed>>
+     */
+    private function occupationExamplesForActivityDimensions(array $dimensions): array
+    {
+        $rowsByDimension = $this->loadOccupationExampleRowsByDimension();
+        if ($rowsByDimension === []) {
+            return [];
+        }
+
+        $examples = [];
+        $seen = [];
+        foreach ($dimensions as $dimension) {
+            foreach (($rowsByDimension[$dimension] ?? []) as $row) {
+                if (count($examples) >= 2) {
+                    break 2;
+                }
+
+                if (isset($seen[$row['record_id']])) {
+                    continue;
+                }
+
+                $seen[$row['record_id']] = true;
+                $examples[] = $this->normalizeOccupationExample($row);
+            }
+        }
+
+        return $examples;
+    }
+
+    /**
+     * @return array<string,list<array<string,mixed>>>
+     */
+    private function loadOccupationExampleRowsByDimension(): array
+    {
+        static $cache = null;
+        if (is_array($cache)) {
+            return $cache;
+        }
+
+        $path = base_path(self::OCCUPATION_EXAMPLE_ASSET_PATH);
+        if (! is_file($path) || ! is_readable($path)) {
+            return $cache = [];
+        }
+
+        $rowsByDimension = [];
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+            try {
+                $decoded = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            } catch (\JsonException) {
+                return $cache = [];
+            }
+
+            if (! is_array($decoded) || ! $this->isValidOccupationExampleRow($decoded)) {
+                return $cache = [];
+            }
+
+            $dimension = (string) $decoded['primary_activity_dimension'];
+            $rowsByDimension[$dimension][] = $decoded;
+        }
+
+        return $cache = $rowsByDimension;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     */
+    private function isValidOccupationExampleRow(array $row): bool
+    {
+        if (($row['schema_version'] ?? null) !== 'riasec.occupation_example_boundary.v1') {
+            return false;
+        }
+
+        if (($row['asset_version'] ?? null) !== 'riasec_occupation_examples_boundary_v1.zh-CN') {
+            return false;
+        }
+
+        if (($row['source_status'] ?? null) !== self::SOURCE_STATUS) {
+            return false;
+        }
+
+        if (($row['frontend_fallback_allowed'] ?? true) !== false || ($row['not_a_recommendation'] ?? false) !== true) {
+            return false;
+        }
+
+        if (($row['source_url_allowed'] ?? true) !== false || ($row['fit_score_allowed'] ?? true) !== false) {
+            return false;
+        }
+
+        $dimension = (string) ($row['primary_activity_dimension'] ?? '');
+        if (! isset(self::DIMENSION_ACTIVITY_FAMILIES[$dimension])) {
+            return false;
+        }
+
+        foreach (['record_id', 'occupation_example', 'display_label', 'why_it_may_appear', 'education_boundary', 'skill_boundary', 'qualification_boundary', 'user_visible_boundary', 'reality_check'] as $field) {
+            if (! is_string($row[$field] ?? null) || $row[$field] === '') {
+                return false;
+            }
+        }
+
+        return is_array($row['common_tasks'] ?? null)
+            && count((array) $row['common_tasks']) >= 3
+            && is_array($row['task_examples'] ?? null)
+            && count((array) $row['task_examples']) >= 3
+            && ! isset($row['source_url'], $row['onet_code'], $row['soc_code'], $row['fit_score'], $row['rank'], $row['success_prediction']);
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array<string,mixed>
+     */
+    private function normalizeOccupationExample(array $row): array
+    {
+        return [
+            'occupation_example' => (string) $row['occupation_example'],
+            'source_status' => self::SOURCE_STATUS,
+            'source_name' => self::OCCUPATION_EXAMPLE_SOURCE_NAME,
+            'content_version' => self::OCCUPATION_EXAMPLE_CONTENT_VERSION,
+            'display_label' => (string) $row['display_label'],
+            'why_it_may_appear' => (string) $row['why_it_may_appear'],
+            'common_tasks' => array_values(array_map('strval', (array) $row['common_tasks'])),
+            'task_examples' => array_values(array_map('strval', (array) $row['task_examples'])),
+            'education_boundary' => (string) $row['education_boundary'],
+            'skill_boundary' => (string) $row['skill_boundary'],
+            'qualification_boundary' => (string) $row['qualification_boundary'],
+            'user_visible_boundary' => (string) $row['user_visible_boundary'],
+            'reality_check' => (string) $row['reality_check'],
+            'not_a_recommendation' => true,
+            'fit_score_allowed' => false,
         ];
     }
 
