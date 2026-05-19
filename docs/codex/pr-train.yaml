@@ -5558,3 +5558,315 @@ prs:
     merge_policy:
       github_checks_required: true
       squash: true
+
+  - id: SEO-DASH-PROD-04A
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-PROD-03D-R2
+    branch: codex/seo-dash-prod-04a-metabase-read-only-plan
+    base: main
+    title: "docs(seo-intel): add Metabase read-only connection plan"
+    name: "Metabase read-only connection plan"
+    train_scope: seo_intel_metabase_read_only_planning
+    risk_level: low_docs_contract_no_execution
+    type: docs/contract PR
+    scope:
+      - Define Metabase read-only connection boundaries for sanitized seo_intel access.
+      - Document least-privilege connection posture and forbidden business DB/raw table access.
+      - Add generated contract artifact and focused test for the non-production plan.
+    allowed_paths:
+      - backend/docs/seo/metabase-read-only-connection-plan.md
+      - backend/docs/seo/generated/metabase-read-only-connection-plan.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelMetabaseReadOnlyConnectionPlanTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Edit env files, deploy files, Metabase runtime/deploy connection files, backend runtime behavior, or migrations.
+      - Grant business DB access, run collector writes, enable scheduler, deploy Metabase, or connect external APIs.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelMetabaseReadOnlyConnectionPlan
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/metabase-read-only-connection-plan.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    production_approval_required: false
+    next_task: SEO-DASH-PROD-04B
+
+  - id: SEO-DASH-PROD-04B
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-PROD-04A
+    branch: codex/seo-dash-prod-04b-url-truth-mvp-dashboard-spec
+    base: main
+    title: "docs(seo-intel): add URL Truth MVP dashboard spec"
+    name: "URL Truth MVP dashboard spec and sanitized views plan"
+    train_scope: seo_intel_url_truth_dashboard_planning
+    risk_level: low_docs_generated_tests_no_execution
+    type: docs/generated/tests PR
+    scope:
+      - Define URL Truth MVP dashboard panels and sanitized read model boundaries.
+      - Plan sanitized views without deploying Metabase or granting business DB access.
+      - Add generated contract artifact and focused test.
+    allowed_paths:
+      - backend/docs/seo/url-truth-mvp-dashboard-spec.md
+      - backend/docs/seo/generated/url-truth-mvp-dashboard-spec.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelUrlTruthMvpDashboardSpecTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy Metabase, create business DB views, edit env files, modify runtime code, or add migrations unless explicitly approved later.
+      - Run collector writes, enable scheduler, submit URLs, or connect live external APIs.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelUrlTruthMvpDashboardSpec
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/url-truth-mvp-dashboard-spec.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    production_approval_required: false
+    next_task: PR-RESEARCH-00
+
+  - id: PR-RESEARCH-00
+    repo: fap-api
+    reference_repo:
+      - fap-web
+    depends_on:
+      - SEO-DASH-PROD-04B
+    branch: codex/pr-research-00-readiness-scan-contract
+    base: main
+    title: "docs(seo-intel): add Research Asset readiness contract"
+    name: "Research Asset readiness scan and contract"
+    train_scope: research_asset_readiness_planning
+    risk_level: low_scan_spec_no_publish
+    type: scan/spec PR
+    scope:
+      - Define Research Asset readiness gates after URL Truth and dashboard paths are stable.
+      - Preserve Research publishing, sitemap, llms, and runtime exposure as blocked until later approval.
+      - Add generated artifact and focused readiness test.
+    allowed_paths:
+      - backend/docs/seo/research-asset-readiness.md
+      - backend/docs/seo/generated/research-asset-readiness.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelResearchAssetReadinessTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add research runtime routes, CMS runtime code, fap-web route code, sitemap/llms behavior changes, or published research content.
+      - Expand RIASEC, Big Five, or career-decision claims into full recommendation claims.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelResearchAssetReadiness
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/research-asset-readiness.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    production_approval_required: false
+    next_task: SEARCH-CHANNEL-QUEUE-00
+
+  - id: SEARCH-CHANNEL-QUEUE-00
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-PROD-04B
+    branch: codex/search-channel-queue-00-design-contract
+    base: main
+    title: "docs(seo-intel): add Search Channel Queue contract"
+    name: "Search Channel Queue design contract"
+    train_scope: seo_intel_search_channel_queue_contract
+    risk_level: low_docs_contract_no_live_api
+    type: docs/contract PR
+    scope:
+      - Define Search Channel Queue boundaries for GSC, Baidu, IndexNow, and domestic adapters.
+      - Keep live credentials, URL submissions, scheduler activation, and collector writes blocked.
+      - Add generated contract artifact and focused test.
+    allowed_paths:
+      - backend/docs/seo/search-channel-queue-contract.md
+      - backend/docs/seo/generated/search-channel-queue-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelQueueContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Make live GSC, Baidu, IndexNow, 360, Sogou, or Shenma calls.
+      - Submit URLs, edit credential/env files, enable scheduler, or run collector writes.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelQueueContract
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/search-channel-queue-contract.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    production_approval_required: false
+    next_task: CRAWLER-LOG-00
+
+  - id: CRAWLER-LOG-00
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-PROD-04B
+    branch: codex/crawler-log-00-readiness-contract
+    base: main
+    title: "docs(seo-intel): add crawler log readiness contract"
+    name: "Crawler log readiness contract"
+    train_scope: seo_intel_crawler_log_readiness_contract
+    risk_level: low_docs_contract_no_log_read
+    type: docs/contract PR
+    scope:
+      - Define crawler log source approval, sanitization, and ingestion readiness gates.
+      - Keep production crawler log reads and CDN/Nginx/OpenResty changes blocked.
+      - Add generated contract artifact and focused test.
+    allowed_paths:
+      - backend/docs/seo/crawler-log-readiness-contract.md
+      - backend/docs/seo/generated/crawler-log-readiness-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogReadinessContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Read production logs, change CDN/Nginx/OpenResty config, store raw IP/cookie/user-agent data, or enable scheduler.
+      - Run collector writes, deploy, or edit env files.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelCrawlerLogReadinessContract
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/crawler-log-readiness-contract.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    production_approval_required: false
+    next_task: CLAIM-LINT-00
+
+  - id: CLAIM-LINT-00
+    repo: fap-api
+    depends_on:
+      - PR-RESEARCH-00
+    branch: codex/claim-lint-00-chinese-claim-boundary
+    base: main
+    title: "docs(seo-intel): add Chinese claim boundary linter contract"
+    name: "Chinese claim boundary linter spec and tests"
+    train_scope: seo_intel_chinese_claim_boundary_linter
+    risk_level: low_spec_test_no_runtime_activation
+    type: code/test or spec/test PR
+    scope:
+      - Define Chinese claim boundary rules for SEO/Research/content operations.
+      - Optionally add a pure inactive linter service scoped to SeoIntel if explicitly needed by the task.
+      - Add generated artifact and focused test.
+    allowed_paths:
+      - backend/docs/seo/chinese-claim-boundary-linter.md
+      - backend/docs/seo/generated/chinese-claim-boundary-linter.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelChineseClaimBoundaryLinterTest.php
+      - backend/app/Services/SeoIntel/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Expand RIASEC, Big Five, or career recommendation claims.
+      - Change frontend runtime copy, publish behavior, sitemap behavior, or llms behavior.
+      - Enable runtime activation without explicit approval.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelChineseClaimBoundaryLinter
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/chinese-claim-boundary-linter.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    production_approval_required: false
+    next_task: CONTENT-OPS-01
+
+  - id: CONTENT-OPS-01
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-QUEUE-00
+    branch: codex/content-ops-01-cms-article-operating-workflow
+    base: main
+    title: "docs(cms): add article operating workflow SOP"
+    name: "CMS article operating workflow SOP"
+    train_scope: cms_article_operating_workflow
+    risk_level: low_docs_contract_no_content_publish
+    type: docs/contract PR
+    scope:
+      - Define CMS article operating workflow for safe SEO/content operations.
+      - Keep runtime content, search submission, and CMS mutation out of this PR.
+      - Add generated SOP artifact and focused test.
+    allowed_paths:
+      - backend/docs/cms/article-operating-workflow-sop.md
+      - backend/docs/seo/generated/article-operating-workflow-sop.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelArticleOperatingWorkflowSopTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change runtime content, publish content, change sitemap/llms behavior, submit URLs, or mutate CMS runtime state.
+      - Enable scheduler, deploy, edit env files, or run collector writes.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelArticleOperatingWorkflowSop
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/article-operating-workflow-sop.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    production_approval_required: false
+    next_task: null
