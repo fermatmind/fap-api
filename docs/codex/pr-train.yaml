@@ -6047,3 +6047,54 @@ prs:
     human_review_required: false
     production_approval_required: false
     next_task: METABASE-OPS-ACCESS-RUNBOOK-00
+
+  - id: METABASE-OPS-ACCESS-RUNBOOK-00
+    repo: fap-api
+    depends_on:
+      - SEO-DASH-MVP-ONLINE-SUMMARY
+    branch: codex/metabase-ops-access-runbook-00
+    base: main
+    title: "docs(seo-intel): add Metabase ops access runbook"
+    name: "Metabase ops access runbook"
+    train_scope: seo_dash_mvp_closeout_research_train
+    risk_level: low_docs_generated_tests_no_runtime_activation
+    type: docs/generated/test PR
+    scope:
+      - Define localhost-only operational access for private Metabase.
+      - Document owner access, service start/stop/status, boot-disabled policy, emergency revoke, password rotation, export policy, and blocked operator onboarding.
+      - Add generated runbook artifact and focused SeoIntel contract test.
+    allowed_paths:
+      - backend/docs/seo/metabase-ops-access-runbook.md
+      - backend/docs/seo/generated/metabase-ops-access-runbook.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelMetabaseOpsAccessRunbookTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy, edit env files, run collector writes, enable scheduler, connect live search APIs, submit URLs, read production crawler logs, change RDS/DB/users/whitelist, expose Metabase publicly, publish Research content, or create pSEO.
+      - Operate Metabase, change service config, create users, create exports, create public links, open security groups, change DNS/CDN/OpenResty, or add datasources.
+      - Connect Metabase to business DB, Tencent RDS, Node2 local DB, CMS write tables, or raw operational tables.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelMetabaseOpsAccessRunbook
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/metabase-ops-access-runbook.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    metabase_operation: false
+    human_review_required: false
+    production_approval_required: false
+    next_task: PR-RESEARCH-01

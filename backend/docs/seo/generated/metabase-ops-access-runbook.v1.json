@@ -1,0 +1,160 @@
+{
+  "version": "metabase-ops-access-runbook.v1",
+  "task": "METABASE-OPS-ACCESS-RUNBOOK-00",
+  "generated_at": "2026-05-19T13:45:00Z",
+  "source_documents": [
+    "SEO-DASH-MVP-ONLINE-SUMMARY",
+    "SEO-DASH-PROD-04E"
+  ],
+  "purpose": "Define the operational access runbook for the private localhost-only SEO Dash Metabase instance.",
+  "access_model": {
+    "host_model": "approved_private_aliyun_ecs",
+    "localhost_only": true,
+    "listen_host": "127.0.0.1",
+    "listen_port": 3000,
+    "public_ipv4_allowed": false,
+    "public_security_group_ingress_allowed": false,
+    "public_dns_or_cdn_allowed": false,
+    "anonymous_links_allowed": false,
+    "public_sharing_allowed": false,
+    "public_embedding_allowed": false,
+    "safe_access_paths": [
+      "approved_console_session",
+      "workbench_local_forwarding",
+      "bastion_or_vpn_after_separate_approval"
+    ]
+  },
+  "service_policy": {
+    "service_name": "metabase",
+    "status_commands": [
+      "systemctl status metabase --no-pager",
+      "systemctl is-active metabase",
+      "systemctl is-enabled metabase",
+      "ss -lntp | grep ':3000' || true",
+      "curl -sS http://127.0.0.1:3000/api/health"
+    ],
+    "allowed_control_commands": [
+      "systemctl start metabase",
+      "systemctl stop metabase",
+      "systemctl restart metabase"
+    ],
+    "boot_enabled_policy": false,
+    "boot_policy_change_requires_separate_approval": true
+  },
+  "emergency_revoke": {
+    "triggers": [
+      "metabase_binds_0_0_0_0",
+      "ecs_public_ipv4_or_eip_present",
+      "public_security_group_ingress_present",
+      "public_sharing_enabled",
+      "embedding_enabled",
+      "unexpected_datasource_present",
+      "normal_operator_without_permissions_plan",
+      "business_or_raw_datasource_present"
+    ],
+    "steps": [
+      "systemctl stop metabase",
+      "systemctl disable metabase",
+      "confirm_no_public_or_port_3000_listener",
+      "remove_public_or_anonymous_links_if_safe",
+      "rotate_affected_admin_and_database_credentials_if_exposure_suspected",
+      "confirm_rds_public_endpoint_and_whitelist_remain_private"
+    ]
+  },
+  "password_rotation": {
+    "secrets_must_not_be_printed": true,
+    "metabase_admin_rotation_path": "localhost_only_admin_access",
+    "metabase_app_user_rotation_path": "approved_postgresql_rds_control_plane",
+    "seo_intel_metabase_readonly_rotation_path": "approved_mysql_rds_control_plane",
+    "forbidden_rotation_accounts": [
+      "seo_intel_writer",
+      "seo_intel_migrator",
+      "business_db_user",
+      "tencent_rds_user",
+      "node2_local_db_user"
+    ]
+  },
+  "export_policy": {
+    "exports_performed_in_this_pr": false,
+    "normal_operator_exports_allowed": false,
+    "owner_approval_required": true,
+    "allowed_export_scope": [
+      "sanitized_url_truth_aggregates",
+      "sanitized_issue_queue_summaries",
+      "safe_dashboard_screenshots_without_raw_pii"
+    ],
+    "forbidden_export_fields": [
+      "email",
+      "raw_email",
+      "order_no",
+      "raw_order_no",
+      "attempt_id",
+      "raw_attempt_id",
+      "payment_id",
+      "cookie",
+      "raw_ip",
+      "raw_user_agent",
+      "token",
+      "raw_payload",
+      "provider_payload",
+      "payment_payload",
+      "secret",
+      "api_key"
+    ]
+  },
+  "operator_onboarding": {
+    "blocked_until_permissions_plan": true,
+    "normal_operator_users_allowed_now": false,
+    "unrestricted_native_sql_allowed_for_normal_users": false,
+    "required_future_plan_items": [
+      "user_groups",
+      "collection_access",
+      "datasource_permissions",
+      "native_sql_policy",
+      "export_policy",
+      "emergency_revoke_owner",
+      "review_cadence"
+    ]
+  },
+  "datasource_boundary": {
+    "allowed_database": "seo_intel",
+    "allowed_datasource_user": "seo_intel_metabase_readonly",
+    "allowed_tables": [
+      "seo_urls",
+      "seo_url_entities",
+      "seo_issue_queue"
+    ],
+    "future_allowed_sources_require_approval": [
+      "sanitized_seo_intel_aggregate_tables",
+      "sanitized_seo_intel_aggregate_views"
+    ],
+    "forbidden_sources": [
+      "business_db",
+      "tencent_rds_fap_prod",
+      "node2_local_db",
+      "cms_write_tables",
+      "raw_orders",
+      "raw_payments",
+      "raw_events_detail",
+      "raw_email",
+      "raw_reports",
+      "raw_crawler_logs",
+      "provider_payloads",
+      "payment_payloads"
+    ]
+  },
+  "production_operations_performed_in_this_pr": false,
+  "metabase_operation_performed_in_this_pr": false,
+  "runtime_code_changed_in_this_pr": false,
+  "migration_changed_in_this_pr": false,
+  "env_edit_in_this_pr": false,
+  "deploy_performed_in_this_pr": false,
+  "scheduler_enabled_in_this_pr": false,
+  "collector_write_performed_in_this_pr": false,
+  "external_api_live_activation": false,
+  "url_submission_performed": false,
+  "production_crawler_log_read": false,
+  "research_publish_in_this_pr": false,
+  "pseo_generation_in_this_pr": false,
+  "next_task": "PR-RESEARCH-01"
+}
