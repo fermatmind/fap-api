@@ -6010,7 +6010,7 @@
         "no fap-web change"
       ],
       "commit_sha": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1491",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -12283,7 +12283,7 @@
       "next_pr": "OPS-PORTAL-SEO-04"
     },
     "OPS-PORTAL-SEO-04": {
-      "status": "in_progress",
+      "status": "merged",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/ops-portal-seo-04",
@@ -12292,11 +12292,68 @@
       "depends_on": [
         "OPS-PORTAL-SEO-03"
       ],
+      "commit_sha": "f37e028796907b29b42b696c8ca8e8c6f221243f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1490",
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_seo_intel_ops_portal_seo_private_access_bridge": "passed",
+          "php_artisan_test_filter_seo_intel": "passed",
+          "php_artisan_route_list": "passed",
+          "pint_test": "passed",
+          "json_validation": "passed",
+          "yaml_validation": "passed",
+          "git_diff_check": "passed",
+          "scope_validation": "passed"
+        },
+        "github": {
+          "status": "pass_no_required_checks_reported",
+          "mergeStateStatus": "CLEAN"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": "2026-05-19T20:27:28Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T20:24:01Z",
+          "status": "in_progress",
+          "summary": "Started docs/generated/test-only private Metabase access bridge contract PR. Scope excludes actual proxy, Metabase service changes, DNS/CDN/OpenResty/Nginx changes, env edits, deploy, network changes, security group changes, RDS whitelist changes, datasource changes, dashboards, collector writes, scheduler activation, live search APIs, URL submission, crawler log reads, Research publish, and pSEO."
+        },
+        {
+          "at": "2026-05-19T20:30:00Z",
+          "status": "local_checks_passed",
+          "summary": "Focused private Metabase access bridge contract test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
+        },
+        {
+          "at": "2026-05-19T20:33:00Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1490. GitHub checks pending."
+        },
+        {
+          "at": "2026-05-19T20:27:28Z",
+          "status": "merged",
+          "summary": "Merged PR #1490 with squash merge commit f37e028796907b29b42b696c8ca8e8c6f221243f. GitHub reported mergeStateStatus=CLEAN and no required checks; remote branch was deleted and local main synced."
+        }
+      ],
+      "next_pr": "OPS-PORTAL-SEO-05"
+    },
+    "OPS-PORTAL-SEO-05": {
+      "status": "in_progress",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "branch": "codex/ops-portal-seo-05",
+      "base": "main",
+      "title": "docs(seo-intel): add Ops Portal SEO access verification contract",
+      "depends_on": [
+        "OPS-PORTAL-SEO-04"
+      ],
       "commit_sha": null,
       "pr_url": null,
       "checks": {
         "local": {
-          "php_artisan_test_filter_seo_intel_ops_portal_seo_private_access_bridge": "passed",
+          "php_artisan_test_filter_seo_intel_ops_portal_seo_access_export_sharing_verification": "passed",
           "php_artisan_test_filter_seo_intel": "passed",
           "php_artisan_route_list": "passed",
           "pint_test": "passed",
@@ -12314,22 +12371,22 @@
       "sidecar_issues": [],
       "history": [
         {
-          "at": "2026-05-19T20:24:01Z",
+          "at": "2026-05-19T20:27:55Z",
           "status": "in_progress",
-          "summary": "Started docs/generated/test-only private Metabase access bridge contract PR. Scope excludes actual proxy, Metabase service changes, DNS/CDN/OpenResty/Nginx changes, env edits, deploy, network changes, security group changes, RDS whitelist changes, datasource changes, dashboards, collector writes, scheduler activation, live search APIs, URL submission, crawler log reads, Research publish, and pSEO."
+          "summary": "Started docs/generated/test-only Ops Portal SEO access export sharing verification contract PR. Scope excludes runtime proxy behavior, Metabase API operations, DNS/CDN/OpenResty/Nginx changes, env edits, deploy, network changes, security group changes, RDS whitelist changes, datasource changes, dashboards, collector writes, scheduler activation, live search APIs, URL submission, crawler log reads, Research publish, pSEO, sitemap changes, and llms changes."
         },
         {
-          "at": "2026-05-19T20:30:00Z",
+          "at": "2026-05-19T20:36:00Z",
           "status": "local_checks_passed",
-          "summary": "Focused private Metabase access bridge contract test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
+          "summary": "Focused access/export/sharing verification contract test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
         },
         {
-          "at": "2026-05-19T20:33:00Z",
+          "at": "2026-05-19T20:39:00Z",
           "status": "pr_opened_github_checks_pending",
-          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1490. GitHub checks pending."
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1491. GitHub checks pending."
         }
       ],
-      "next_pr": "OPS-PORTAL-SEO-05"
+      "next_pr": "OPS-PORTAL-SEO-PROD-01"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {

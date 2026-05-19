@@ -1,0 +1,111 @@
+{
+  "version": "ops-portal-seo-access-export-sharing-verification.v1",
+  "task": "OPS-PORTAL-SEO-05",
+  "generated_at": "2026-05-19T20:27:55Z",
+  "purpose": "Define future /ops/seo access, export, sharing, datasource, and revoke verification before production access operation preflight.",
+  "ops_route_verification": {
+    "path": "/ops/seo",
+    "requires_ops_admin_auth": true,
+    "public_metabase_url_exposed": false,
+    "metabase_iframe_present": false,
+    "metabase_reverse_proxy_present": false
+  },
+  "metabase_privacy_verification": {
+    "private_only": true,
+    "localhost_bound": true,
+    "public_ipv4_allowed": false,
+    "public_port_allowed": false,
+    "security_group_change_allowed": false,
+    "rds_whitelist_change_allowed": false
+  },
+  "sharing_verification": {
+    "public_sharing_enabled": false,
+    "anonymous_links_present": false,
+    "public_embeds_enabled": false,
+    "public_dashboard_or_card_tokens_present": false
+  },
+  "datasource_verification": {
+    "expected_datasource_count": 1,
+    "expected_datasource_name": "seo_intel",
+    "expected_datasource_account": "seo_intel_metabase_readonly",
+    "sample_database_allowed": false,
+    "forbidden_sources": [
+      "business_db",
+      "tencent_rds_fap_prod",
+      "node2_local_db",
+      "cms_write_tables",
+      "raw_orders",
+      "raw_payments",
+      "raw_events_detail",
+      "raw_email",
+      "raw_reports",
+      "raw_crawler_logs",
+      "provider_payloads",
+      "payment_payloads"
+    ]
+  },
+  "dashboard_verification": {
+    "dashboard_name": "SEO Intelligence MVP - URL Truth & Issue Queue",
+    "allowed_tables": [
+      "seo_urls",
+      "seo_url_entities",
+      "seo_issue_queue"
+    ],
+    "unsafe_fields_allowed": false
+  },
+  "export_policy": {
+    "normal_operator_exports_allowed_by_default": false,
+    "owner_approval_required": true,
+    "allowed_export_scope": [
+      "sanitized_url_truth_aggregates",
+      "sanitized_issue_queue_summaries",
+      "safe_dashboard_screenshots_without_raw_pii"
+    ],
+    "forbidden_export_fields": [
+      "password",
+      "token",
+      "cookie",
+      "email",
+      "order_id",
+      "payment_id",
+      "attempt_id",
+      "raw_ip",
+      "user_agent",
+      "raw_payload",
+      "provider_payload",
+      "payment_payload",
+      "raw_evidence",
+      "raw_crawler_logs",
+      "business_db_rows"
+    ]
+  },
+  "raw_sql_policy": {
+    "normal_operator_unrestricted_sql_allowed": false,
+    "admin_native_sql_remains_privileged": true,
+    "future_operator_onboarding_requires_permission_setup": true
+  },
+  "audit_owner_revoke_verification": {
+    "metabase_admin_owner_required": true,
+    "dashboard_owner_required": true,
+    "db_access_owner_required": true,
+    "export_policy_owner_required": true,
+    "emergency_revoke_owner_required": true,
+    "audit_path_required": true,
+    "revoke_path_required": true
+  },
+  "production_operations_performed_in_this_pr": false,
+  "metabase_api_operation_performed_in_this_pr": false,
+  "datasource_added_in_this_pr": false,
+  "dashboard_created_in_this_pr": false,
+  "network_change_performed_in_this_pr": false,
+  "env_edit_in_this_pr": false,
+  "deploy_performed_in_this_pr": false,
+  "scheduler_enabled_in_this_pr": false,
+  "collector_write_performed_in_this_pr": false,
+  "external_api_live_activation": false,
+  "url_submission_performed": false,
+  "production_crawler_log_read": false,
+  "research_publish_in_this_pr": false,
+  "pseo_generation_in_this_pr": false,
+  "next_task": "OPS-PORTAL-SEO-PROD-01"
+}
