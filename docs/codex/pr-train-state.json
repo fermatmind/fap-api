@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-18T16:02:02Z",
+  "updated_at": "2026-05-19T01:02:33Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10564,7 +10564,7 @@
       "depends_on": [
         "SEO-DASH-PROD-02"
       ],
-      "status": "pr_opened_github_checks_pending",
+      "status": "merged",
       "train_scope": "controlled_write_enablement_plan",
       "risk_level": "low_docs_contract_no_execution",
       "title": "docs(seo-intel): add controlled write enablement plan",
@@ -10639,14 +10639,18 @@
         },
         "github": {
           "status": "pending"
+        },
+        "ledger_reconciliation": {
+          "status": "pass",
+          "evidence": "GitHub reports https://github.com/fermatmind/fap-api/pull/1463 as MERGED with merge commit 11c68e408abd2b6c0102b0656c0598bc1dd0b677; origin/main contains the merge commit."
         }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1463",
       "commit_sha": "5c71805cc0d79f3400da3150010c111ccf9d7939",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-18T12:08:39Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -10663,9 +10667,20 @@
           "at": "2026-05-18T12:01:20Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Pushed branch codex/seo-dash-prod-03a-controlled-write-enablement-plan and opened https://github.com/fermatmind/fap-api/pull/1463. GitHub checks pending. No production write enablement or runtime behavior change performed."
+        },
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "ledger_reconciled_merged",
+          "summary": "Reconciled stale ledger status for SEO-DASH-PROD-03A: PR merged, GitHub checks passed, remote branch absent, and local main contains merge commit 11c68e408abd2b6c0102b0656c0598bc1dd0b677."
         }
       ],
-      "next_pr": "SEO-DASH-PROD-03B"
+      "next_pr": "SEO-DASH-PROD-03B",
+      "state": "merged",
+      "final_status": "completed",
+      "merge_commit_sha": "11c68e408abd2b6c0102b0656c0598bc1dd0b677",
+      "merge_observed": true,
+      "merge_observed_source": "GitHub gh pr view and local origin/main containment",
+      "github_checks": "passed"
     },
     "SEO-DASH-PROD-03B-FIX": {
       "repo": "fap-api",
@@ -10675,7 +10690,7 @@
         "SEO-DASH-PROD-03B-PREFLIGHT",
         "SEO-DASH-PROD-03B no-op canary report"
       ],
-      "status": "in_progress",
+      "status": "merged",
       "train_scope": "seo_intel_controlled_write_canary_readiness",
       "risk_level": "medium_runtime_guard_no_production_execution",
       "title": "feat(seo-intel): add bounded URL truth inventory canary",
@@ -10752,14 +10767,18 @@
         },
         "github": {
           "status": "pending"
+        },
+        "ledger_reconciliation": {
+          "status": "pass",
+          "evidence": "GitHub reports https://github.com/fermatmind/fap-api/pull/1464 as MERGED with merge commit ed5f1760d65fce23e576438c24c694981747cc99; origin/main contains the merge commit."
         }
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1464",
       "commit_sha": "47cf25fc290ecb661ad1459e3e4c0f571a776c1d",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-18T12:56:16Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -10776,13 +10795,364 @@
           "at": "2026-05-18T13:08:00Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Pushed branch codex/seo-dash-prod-03b-fix-url-truth-bounded-canary and opened https://github.com/fermatmind/fap-api/pull/1464. GitHub checks pending. No production write or runtime activation performed."
+        },
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "ledger_reconciled_merged",
+          "summary": "Reconciled stale ledger status for SEO-DASH-PROD-03B-FIX: PR merged, GitHub checks passed, remote branch absent, and local main contains merge commit ed5f1760d65fce23e576438c24c694981747cc99."
         }
       ],
-      "next_pr": "SEO-DASH-PROD-03B-PREFLIGHT-R2"
+      "next_pr": "SEO-DASH-PROD-03B-PREFLIGHT-R2",
+      "state": "merged",
+      "final_status": "completed",
+      "merge_commit_sha": "ed5f1760d65fce23e576438c24c694981747cc99",
+      "merge_observed": true,
+      "merge_observed_source": "GitHub gh pr view and local origin/main containment",
+      "github_checks": "passed"
+    },
+    "SEO-DASH-PROD-03B-R2": {
+      "repo": "production-operation",
+      "status": "completed",
+      "state": "completed",
+      "final_status": "completed",
+      "production_operation": true,
+      "production_write_execution": true,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "research_publish": false,
+      "pseo_generation": false,
+      "merge_observed": true,
+      "merge_observed_source": "previous production operation report",
+      "summary": "url_truth_inventory first effective write canary passed; seo_urls 0 -> 5 and seo_url_entities 0 -> 5.",
+      "next_pr": "SEO-DASH-PROD-03C",
+      "completed_at": "2026-05-19T01:02:33Z",
+      "history": [
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "completed",
+          "summary": "url_truth_inventory first effective write canary passed; seo_urls 0 -> 5 and seo_url_entities 0 -> 5."
+        }
+      ]
+    },
+    "SEO-DASH-PROD-03C": {
+      "repo": "production-operation",
+      "status": "completed",
+      "state": "completed",
+      "final_status": "completed",
+      "production_operation": true,
+      "production_write_execution": true,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "research_publish": false,
+      "pseo_generation": false,
+      "merge_observed": true,
+      "merge_observed_source": "previous production operation report",
+      "summary": "url_truth_inventory scale-up controlled write canary passed; seo_urls 5 -> 7 and seo_url_entities 5 -> 7.",
+      "next_pr": "SEO-DASH-PROD-03D-SCAN",
+      "completed_at": "2026-05-19T01:02:33Z",
+      "history": [
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "completed",
+          "summary": "url_truth_inventory scale-up controlled write canary passed; seo_urls 5 -> 7 and seo_url_entities 5 -> 7."
+        }
+      ]
+    },
+    "SEO-DASH-PROD-03D-R2": {
+      "repo": "production-operation",
+      "status": "completed",
+      "state": "completed",
+      "final_status": "completed",
+      "production_operation": true,
+      "production_write_execution": true,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "research_publish": false,
+      "pseo_generation": false,
+      "merge_observed": true,
+      "merge_observed_source": "previous production operation report",
+      "summary": "drift_foundation bounded issue canary passed with explicit issue queue target gate; seo_issue_queue 0 -> 5.",
+      "next_pr": "SEO-DASH-PROD-04A",
+      "completed_at": "2026-05-19T01:02:33Z",
+      "history": [
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "completed",
+          "summary": "drift_foundation bounded issue canary passed with explicit issue queue target gate; seo_issue_queue 0 -> 5."
+        }
+      ]
+    },
+    "SEO-DASH-PROD-04A": {
+      "repo": "fap-api",
+      "status": "planned",
+      "state": "planned",
+      "title": "Metabase read-only connection plan",
+      "depends_on": [
+        "SEO-DASH-PROD-03D-R2"
+      ],
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "research_publish": false,
+      "pseo_generation": false,
+      "human_review_required": true,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "failure_reason": null,
+      "next_pr": "SEO-DASH-PROD-04B",
+      "planned_at": "2026-05-19T01:02:33Z",
+      "checks": {
+        "registration": {
+          "status": "planned",
+          "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        }
+      },
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "planned",
+          "summary": "Registered planned non-production PR train task SEO-DASH-PROD-04A: Metabase read-only connection plan. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        }
+      ]
+    },
+    "SEO-DASH-PROD-04B": {
+      "repo": "fap-api",
+      "status": "planned",
+      "state": "planned",
+      "title": "URL Truth MVP dashboard spec and sanitized views plan",
+      "depends_on": [
+        "SEO-DASH-PROD-04A"
+      ],
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "research_publish": false,
+      "pseo_generation": false,
+      "human_review_required": true,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "failure_reason": null,
+      "next_pr": "PR-RESEARCH-00",
+      "planned_at": "2026-05-19T01:02:33Z",
+      "checks": {
+        "registration": {
+          "status": "planned",
+          "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        }
+      },
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "planned",
+          "summary": "Registered planned non-production PR train task SEO-DASH-PROD-04B: URL Truth MVP dashboard spec and sanitized views plan. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        }
+      ]
+    },
+    "PR-RESEARCH-00": {
+      "repo": "fap-api",
+      "status": "planned",
+      "state": "planned",
+      "title": "Research Asset readiness scan and contract",
+      "depends_on": [
+        "SEO-DASH-PROD-04B"
+      ],
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "research_publish": false,
+      "pseo_generation": false,
+      "human_review_required": true,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "failure_reason": null,
+      "next_pr": "SEARCH-CHANNEL-QUEUE-00",
+      "planned_at": "2026-05-19T01:02:33Z",
+      "checks": {
+        "registration": {
+          "status": "planned",
+          "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        }
+      },
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "planned",
+          "summary": "Registered planned non-production PR train task PR-RESEARCH-00: Research Asset readiness scan and contract. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        }
+      ]
+    },
+    "SEARCH-CHANNEL-QUEUE-00": {
+      "repo": "fap-api",
+      "status": "planned",
+      "state": "planned",
+      "title": "Search Channel Queue design contract",
+      "depends_on": [
+        "SEO-DASH-PROD-04B"
+      ],
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "research_publish": false,
+      "pseo_generation": false,
+      "human_review_required": true,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "failure_reason": null,
+      "next_pr": "CRAWLER-LOG-00",
+      "planned_at": "2026-05-19T01:02:33Z",
+      "checks": {
+        "registration": {
+          "status": "planned",
+          "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        }
+      },
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "planned",
+          "summary": "Registered planned non-production PR train task SEARCH-CHANNEL-QUEUE-00: Search Channel Queue design contract. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        }
+      ]
+    },
+    "CRAWLER-LOG-00": {
+      "repo": "fap-api",
+      "status": "planned",
+      "state": "planned",
+      "title": "Crawler log readiness contract",
+      "depends_on": [
+        "SEO-DASH-PROD-04B"
+      ],
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "research_publish": false,
+      "pseo_generation": false,
+      "human_review_required": true,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "failure_reason": null,
+      "next_pr": "CLAIM-LINT-00",
+      "planned_at": "2026-05-19T01:02:33Z",
+      "checks": {
+        "registration": {
+          "status": "planned",
+          "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        }
+      },
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "planned",
+          "summary": "Registered planned non-production PR train task CRAWLER-LOG-00: Crawler log readiness contract. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        }
+      ]
+    },
+    "CLAIM-LINT-00": {
+      "repo": "fap-api",
+      "status": "planned",
+      "state": "planned",
+      "title": "Chinese claim boundary linter spec and tests",
+      "depends_on": [
+        "PR-RESEARCH-00"
+      ],
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "research_publish": false,
+      "pseo_generation": false,
+      "human_review_required": true,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "failure_reason": null,
+      "next_pr": "CONTENT-OPS-01",
+      "planned_at": "2026-05-19T01:02:33Z",
+      "checks": {
+        "registration": {
+          "status": "planned",
+          "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        }
+      },
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "planned",
+          "summary": "Registered planned non-production PR train task CLAIM-LINT-00: Chinese claim boundary linter spec and tests. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        }
+      ]
+    },
+    "CONTENT-OPS-01": {
+      "repo": "fap-api",
+      "status": "planned",
+      "state": "planned",
+      "title": "CMS article operating workflow SOP",
+      "depends_on": [
+        "SEARCH-CHANNEL-QUEUE-00"
+      ],
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "research_publish": false,
+      "pseo_generation": false,
+      "human_review_required": true,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "failure_reason": null,
+      "next_pr": null,
+      "planned_at": "2026-05-19T01:02:33Z",
+      "checks": {
+        "registration": {
+          "status": "planned",
+          "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        }
+      },
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T01:02:33Z",
+          "status": "planned",
+          "summary": "Registered planned non-production PR train task CONTENT-OPS-01: CMS article operating workflow SOP. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        }
+      ]
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
-    "status": "pr_opened_github_checks_pending",
+    "status": "merged",
     "commit_sha": "831997f2a0d60c2566502ab47d479a1bb9ea09fb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1466",
     "branch": "codex/seo-dash-prod-03d-fix-bounded-drift-issue-canary",
@@ -10801,12 +11171,16 @@
       },
       "github": {
         "status": "pending"
+      },
+      "ledger_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub reports https://github.com/fermatmind/fap-api/pull/1466 as MERGED with merge commit e61d04b2f28e5a12d02fd70fc7f91dd2dcc81fa9; origin/main contains the merge commit."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-18T16:21:48Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "metadata": {
       "dependency": "SEO-DASH-PROD-03D-SCAN",
@@ -10836,9 +11210,21 @@
         "at": "2026-05-19T00:00:00Z",
         "status": "ci_fix_pushed",
         "summary": "Narrowly updated Big Five runtime-freeze allowlist for the two new SeoIntel drift issue canary service files after verify-mbti checks flagged them as unrelated runtime drift. Targeted freeze test, SeoIntel tests, dry-run commands, route list, scoped Pint, JSON/YAML validation, and diff checks passed."
+      },
+      {
+        "at": "2026-05-19T01:02:33Z",
+        "status": "ledger_reconciled_merged",
+        "summary": "Reconciled stale ledger status for SEO-DASH-PROD-03D-FIX: PR merged, GitHub checks passed, remote branch absent, and local main contains merge commit e61d04b2f28e5a12d02fd70fc7f91dd2dcc81fa9."
       }
     ],
-    "next_pr": "SEO-DASH-PROD-03D-PREFLIGHT-R2"
+    "next_pr": "SEO-DASH-PROD-03D-PREFLIGHT-R2",
+    "repo": "fap-api",
+    "state": "merged",
+    "final_status": "completed",
+    "merge_commit_sha": "e61d04b2f28e5a12d02fd70fc7f91dd2dcc81fa9",
+    "merge_observed": true,
+    "merge_observed_source": "GitHub gh pr view and local origin/main containment",
+    "github_checks": "passed"
   },
   "RIASEC-FULL-CONTENT-PACK-02A": {
     "status": "github_checks_passed",
@@ -10866,7 +11252,15 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+      {
+        "title": "Sidecar stale item unrelated to SEO post-03D train",
+        "repo": "fap-api",
+        "evidence": "GitHub reports PR #1465 merged, but this SEO ledger reconciliation does not alter the RIASEC train state beyond this note.",
+        "why_external_to_current_pr": "RIASEC-FULL-CONTENT-PACK-02A is not a dependency of the seven post-03D SEO tasks.",
+        "recorded_at": "2026-05-19T01:02:33Z"
+      }
+    ],
     "history": [
       {
         "at": "2026-05-18T13:30:00Z",
