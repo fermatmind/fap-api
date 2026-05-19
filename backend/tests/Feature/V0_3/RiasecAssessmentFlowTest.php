@@ -394,6 +394,9 @@ final class RiasecAssessmentFlowTest extends TestCase
             static fn (array $slot): string => (string) data_get($slot, 'slot_id'),
             (array) $readback->json('riasec_public_projection_v2.deep_content_slots_v1.slots')
         );
+        $this->assertContains('140q_task_card_copy:R_task_agreement', $slotIds);
+        $this->assertContains('140q_environment_card_copy:R_environment_agreement', $slotIds);
+        $this->assertContains('140q_role_card_copy:R_role_agreement', $slotIds);
         $this->assertContains('140q_task_card_copy:task_activity_card', $slotIds);
         $this->assertContains('140q_environment_card_copy:environment_card', $slotIds);
         $this->assertContains('140q_role_card_copy:role_responsibility_card', $slotIds);

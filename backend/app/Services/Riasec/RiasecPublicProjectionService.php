@@ -227,6 +227,16 @@ final class RiasecPublicProjectionService
             );
         }
 
+        foreach ($this->selected140qDimensionLayerSlots($topCode, $formCode, $qualityState) as $slot) {
+            $this->appendRenderableSlot(
+                $slots,
+                $slot,
+                '140q_context_cards',
+                $modulePolicy,
+                $locale
+            );
+        }
+
         foreach ($this->selected140qSlots($formCode, $qualityState) as $slotName) {
             $moduleKey = str_starts_with($slotName, '140q_') ? '140q_cta' : '140q_context_cards';
             $this->appendRenderableSlot(
@@ -360,6 +370,28 @@ final class RiasecPublicProjectionService
         return $pairs;
     }
 
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function selected140qDimensionLayerSlots(string $topCode, string $formCode, string $qualityState): array
+    {
+        if ($formCode !== 'riasec_140' || in_array($qualityState, ['low_quality', 'retake_recommended'], true)) {
+            return [];
+        }
+
+        $letters = array_values(array_unique(array_filter(str_split(strtoupper($topCode)), static fn (string $letter): bool => in_array($letter, RiasecDeepCopySlotRegistry::DIMENSIONS, true))));
+        $dimensionCode = $letters[0] ?? null;
+        if ($dimensionCode === null) {
+            return [];
+        }
+
+        return [
+            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'task', 'agreement'),
+            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'environment', 'agreement'),
+            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'role', 'agreement'),
+        ];
+    }
+
     private function selectedTop3Key(string $topCode): ?string
     {
         $letters = array_values(array_unique(array_filter(str_split(strtoupper($topCode)), static fn (string $letter): bool => in_array($letter, RiasecDeepCopySlotRegistry::DIMENSIONS, true))));
@@ -441,6 +473,10 @@ final class RiasecPublicProjectionService
             'when_not_to_overread',
             'free_page_teaser',
             'deep_report_extension',
+            'example_question',
+            'task_activity_card',
+            'environment_card',
+            'role_responsibility_card',
             'question',
             'what_user_sees',
             'button_label',
@@ -478,6 +514,8 @@ final class RiasecPublicProjectionService
                 'dimension_code' => $slot['dimension_code'] ?? null,
                 'pair_key' => $slot['pair_key'] ?? null,
                 'top3_key' => $slot['top3_key'] ?? null,
+                'layer_dimension' => $slot['layer_dimension'] ?? null,
+                'layer' => $slot['layer'] ?? null,
                 'slot_name' => $slot['slot_name'] ?? null,
                 'layer_state' => $slot['layer_state'] ?? null,
                 'quality_state' => $slot['quality_state'] ?? null,
