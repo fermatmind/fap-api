@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T01:02:33Z",
+  "updated_at": "2026-05-19T01:32:37Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10893,8 +10893,8 @@
     },
     "SEO-DASH-PROD-04A": {
       "repo": "fap-api",
-      "status": "planned",
-      "state": "planned",
+      "status": "pr_opened_github_checks_pending",
+      "state": "open",
       "title": "Metabase read-only connection plan",
       "depends_on": [
         "SEO-DASH-PROD-03D-R2"
@@ -10917,6 +10917,50 @@
         "registration": {
           "status": "planned",
           "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        },
+        "scope": {
+          "status": "in_progress",
+          "evidence": "Implementing only Metabase read-only connection plan doc, generated artifact, focused SeoIntel test, and PR train state metadata. No runtime code or production operation executed."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Metabase read-only connection plan doc, generated artifact, focused SeoIntel test, and docs/codex PR train state metadata. No runtime code, migrations, env, deploy, scheduler, collector writes, Metabase deployment, external APIs, crawler log reads, fap-web files, sitemap/llms behavior, production operations, or database changes were performed."
+        },
+        "metabase_read_only_connection_plan_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelMetabaseReadOnlyConnectionPlan",
+          "evidence": "5 tests passed with 97 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "evidence": "115 tests passed with 1998 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Pint completed successfully; 3373 files checked."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/metabase-read-only-connection-plan.v1.json >/dev/null"
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 - <<'PY' ... yaml.safe_load(docs/codex/pr-train.yaml)"
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1468"
         }
       },
       "sidecar_issues": [],
@@ -10925,8 +10969,27 @@
           "at": "2026-05-19T01:02:33Z",
           "status": "planned",
           "summary": "Registered planned non-production PR train task SEO-DASH-PROD-04A: Metabase read-only connection plan. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        },
+        {
+          "at": "2026-05-19T01:29:40Z",
+          "status": "in_progress",
+          "summary": "Started SEO-DASH-PROD-04A Metabase read-only connection plan on scoped branch. Scope excludes runtime code, migrations, env, deploy, collector writes, scheduler, Metabase deployment, external APIs, crawler log reads, and production operations."
+        },
+        {
+          "at": "2026-05-19T01:31:27Z",
+          "status": "local_validation_passed",
+          "summary": "Added Metabase read-only connection plan doc, generated contract artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, and git diff check passed. No production operation performed."
+        },
+        {
+          "at": "2026-05-19T01:32:37Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1468 for SEO-DASH-PROD-04A. GitHub checks pending. No production operation performed."
         }
-      ]
+      ],
+      "branch": "codex/seo-dash-prod-04a-metabase-read-only-plan",
+      "base": "main",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1468",
+      "commit_sha": "8c29a356"
     },
     "SEO-DASH-PROD-04B": {
       "repo": "fap-api",
