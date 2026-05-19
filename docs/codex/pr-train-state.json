@@ -12244,7 +12244,7 @@
     "merge_commit": "29ec08275027a517993a7cea0fdc6c117bc85c87"
   },
   "OPS-RELEASE-WORKFLOW-01": {
-    "status": "in_progress",
+    "status": "pr_open_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/ops-release-workflow-01",
@@ -12297,7 +12297,7 @@
   "RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT": {
     "status": "in_progress",
     "commit_sha": "3cf16f7594e58e4ea7e5a76eb5f3cc4586a0feb8",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1483",
     "branch": "codex/riasec-full-content-pack-03-preflight",
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-02A"
@@ -12350,6 +12350,11 @@
         "at": "2026-05-19T15:25:00Z",
         "status": "commit_created",
         "summary": "Created the local preflight commit for RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT; final head SHA is recorded by PR metadata after push."
+      },
+      {
+        "at": "2026-05-19T15:35:00Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1483 for RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT. GitHub checks pending."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-03"
