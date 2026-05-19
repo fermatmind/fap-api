@@ -1,0 +1,77 @@
+{
+  "version": "ops-portal-seo-route-shell.v1",
+  "task": "OPS-PORTAL-SEO-03",
+  "generated_at": "2026-05-19T20:18:53Z",
+  "purpose": "Add an authenticated fap-api Filament Ops /ops/seo status and runbook shell without exposing Metabase.",
+  "route": {
+    "path": "/ops/seo",
+    "owner_repo": "fap-api",
+    "surface": "Filament Ops panel",
+    "auth_required": true,
+    "allowed_permissions": [
+      "admin.owner",
+      "admin.ops.read"
+    ],
+    "route_shell_added": true,
+    "runtime_live_db_query_added": false,
+    "metabase_api_call_added": false
+  },
+  "displayed_static_status": {
+    "seo_urls": 7,
+    "seo_url_entities": 7,
+    "seo_issue_queue": 5,
+    "dashboard_name": "SEO Intelligence MVP - URL Truth & Issue Queue",
+    "verified_cards_count": 10,
+    "datasource_name": "seo_intel",
+    "datasource_account": "seo_intel_metabase_readonly"
+  },
+  "page_content": {
+    "shows_dashboard_name": true,
+    "shows_owner_confirmation_step": true,
+    "shows_private_access_channels": true,
+    "shows_forbidden_exposure_warnings": true,
+    "shows_forbidden_source_warnings": true,
+    "shows_operator_sql_warning": true
+  },
+  "metabase_boundary": {
+    "private_only": true,
+    "localhost_only": true,
+    "iframe_added": false,
+    "reverse_proxy_added": false,
+    "public_url_added": false,
+    "public_sharing_enabled": false,
+    "anonymous_links_created": false,
+    "public_embeds_enabled": false,
+    "public_port_opened": false,
+    "dns_cdn_openresty_nginx_changed": false
+  },
+  "forbidden_sources": [
+    "business_db",
+    "tencent_rds_fap_prod",
+    "node2_local_db",
+    "cms_write_tables",
+    "raw_orders",
+    "raw_payments",
+    "raw_events_detail",
+    "raw_email",
+    "raw_reports",
+    "raw_crawler_logs",
+    "provider_payloads",
+    "payment_payloads"
+  ],
+  "production_operations_performed_in_this_pr": false,
+  "metabase_operation_performed_in_this_pr": false,
+  "network_change_performed_in_this_pr": false,
+  "env_edit_in_this_pr": false,
+  "deploy_performed_in_this_pr": false,
+  "scheduler_enabled_in_this_pr": false,
+  "collector_write_performed_in_this_pr": false,
+  "external_api_live_activation": false,
+  "url_submission_performed": false,
+  "production_crawler_log_read": false,
+  "research_publish_in_this_pr": false,
+  "pseo_generation_in_this_pr": false,
+  "sitemap_changed_in_this_pr": false,
+  "llms_changed_in_this_pr": false,
+  "next_task": "OPS-PORTAL-SEO-04"
+}
