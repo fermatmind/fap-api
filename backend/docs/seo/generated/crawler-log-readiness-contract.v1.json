@@ -1,0 +1,88 @@
+{
+  "version": "crawler-log-readiness-contract.v1",
+  "source_documents": [
+    "SEO-DASH-PROD-04B",
+    "SEARCH-CHANNEL-QUEUE-00",
+    "CRAWLER-LOG-00",
+    "CHINA-SEARCH-04"
+  ],
+  "task": "CRAWLER-LOG-00",
+  "candidate_source_families": [
+    "cdn_access_logs",
+    "nginx_access_logs",
+    "openresty_access_logs"
+  ],
+  "source_approval_required_fields": [
+    "owner",
+    "path_or_export_mechanism",
+    "retention",
+    "masking_posture",
+    "access_control",
+    "rollback_owner"
+  ],
+  "allowed_stored_fields": [
+    "report_date",
+    "bot_family",
+    "source_engine",
+    "route_family",
+    "locale",
+    "page_entity_type",
+    "status_code_bucket",
+    "response_time_bucket",
+    "crawl_count",
+    "private_flow_count",
+    "noindex_count"
+  ],
+  "forbidden_stored_fields": [
+    "raw_ip",
+    "cookie",
+    "raw_cookie",
+    "raw_user_agent",
+    "full_raw_url_with_query_string",
+    "raw_payload",
+    "token",
+    "api_key",
+    "secret",
+    "raw_email",
+    "order_no",
+    "attempt_id",
+    "payment_id",
+    "provider_event_id"
+  ],
+  "allowed_bot_families": [
+    "googlebot",
+    "bingbot",
+    "baiduspider",
+    "bytespider",
+    "sogou",
+    "so360",
+    "shenma",
+    "yandex",
+    "other_bot",
+    "unknown"
+  ],
+  "approval_gates": [
+    "source_owner_approval",
+    "security_owner_masking_approval",
+    "backend_owner_schema_approval",
+    "seo_intelligence_owner_report_only_approval",
+    "explicit_human_production_operation_approval",
+    "dry_run_no_raw_fields_confirmation",
+    "scheduler_remains_disabled"
+  ],
+  "production_log_read_in_this_pr": false,
+  "cdn_config_changed_in_this_pr": false,
+  "nginx_config_changed_in_this_pr": false,
+  "openresty_config_changed_in_this_pr": false,
+  "collector_write_executed_in_this_pr": false,
+  "scheduler_enabled_in_this_pr": false,
+  "external_api_live_activation": false,
+  "url_submission_performed": false,
+  "env_edit_in_this_pr": false,
+  "metabase_deployed_in_this_pr": false,
+  "raw_user_agent_storage_allowed": false,
+  "raw_ip_storage_allowed": false,
+  "cookie_storage_allowed": false,
+  "crawler_logs_as_url_truth_allowed": false,
+  "next_task": "CLAIM-LINT-00"
+}
