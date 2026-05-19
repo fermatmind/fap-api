@@ -26,7 +26,7 @@ final class RiasecActivityExplorerServiceTest extends TestCase
         $this->assertSame([], data_get($payload, 'code_activity_pack.occupation_examples'));
     }
 
-    public function test_ias_pack_uses_file_backed_activity_task_examples_without_occupation_import(): void
+    public function test_ias_pack_uses_file_backed_activity_and_occupation_examples(): void
     {
         $payload = (new RiasecActivityExplorerService)->build('IAS', 'zh-CN');
 
@@ -41,7 +41,25 @@ final class RiasecActivityExplorerServiceTest extends TestCase
             $this->assertNotEmpty(data_get($activity, 'task_examples'));
             $this->assertSame('activity_task_examples_v1.zh-CN', data_get($activity, 'content_version'));
             $this->assertSame('backend_authoritative_activity_task_asset', data_get($activity, 'evidence_level'));
-            $this->assertSame([], data_get($activity, 'occupation_examples'));
+            $occupationExamples = (array) data_get($activity, 'occupation_examples');
+            $this->assertCount(2, $occupationExamples);
+
+            foreach ($occupationExamples as $example) {
+                $this->assertSame('content_example_not_registry_match', data_get($example, 'source_status'));
+                $this->assertSame('活动场景例子，不是结果答案', data_get($example, 'display_label'));
+                $this->assertSame('occupation_examples_boundary_v1.zh-CN', data_get($example, 'content_version'));
+                $this->assertTrue((bool) data_get($example, 'not_a_recommendation'));
+                $this->assertFalse((bool) data_get($example, 'fit_score_allowed'));
+                $this->assertNotEmpty(data_get($example, 'education_boundary'));
+                $this->assertNotEmpty(data_get($example, 'skill_boundary'));
+                $this->assertNotEmpty(data_get($example, 'qualification_boundary'));
+                $this->assertArrayNotHasKey('source_url', (array) $example);
+                $this->assertArrayNotHasKey('onet_code', (array) $example);
+                $this->assertArrayNotHasKey('soc_code', (array) $example);
+                $this->assertArrayNotHasKey('fit_score', (array) $example);
+                $this->assertArrayNotHasKey('rank', (array) $example);
+                $this->assertArrayNotHasKey('success_prediction', (array) $example);
+            }
         }
     }
 
@@ -64,7 +82,7 @@ final class RiasecActivityExplorerServiceTest extends TestCase
         foreach ($activities as $activity) {
             $this->assertSame('content_example_not_registry_match', data_get($activity, 'source_status'));
             $this->assertNotEmpty(data_get($activity, 'task_examples'));
-            $this->assertSame([], data_get($activity, 'occupation_examples'));
+            $this->assertNotEmpty(data_get($activity, 'occupation_examples'));
         }
     }
 
