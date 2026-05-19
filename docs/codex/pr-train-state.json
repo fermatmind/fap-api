@@ -13248,7 +13248,7 @@
     "merge_commit": "70d503244b05a17fca026c60d3290b25104a1c27"
   },
   "RIASEC-FULL-CONTENT-PACK-05": {
-    "status": "local_validation_passed",
+    "status": "pr_opened_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-05",
@@ -13257,8 +13257,8 @@
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-05-PREFLIGHT"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "709ef7670fa6373633272168a4fcdaf555b0e5be",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1497",
     "checks": {
       "dependency_gate": {
         "status": "pass",
@@ -13296,6 +13296,10 @@
       "git_diff_check": {
         "status": "pass",
         "command": "git diff --check && git diff --cached --check"
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "summary": "PR #1497 opened; GitHub required checks pending."
       }
     },
     "failure_reason": null,
@@ -13313,6 +13317,11 @@
         "at": "2026-05-19T22:55:01Z",
         "status": "local_validation_passed",
         "summary": "Imported backend-authoritative activity/task JSONL asset into ActivityExplorer with deterministic file-backed task mapping, fail-closed loader, no occupation example import, and targeted checks green."
+      },
+      {
+        "at": "2026-05-19T22:56:49Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1497 for PACK-05. GitHub checks pending."
       }
     ]
   }
