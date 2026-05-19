@@ -11875,7 +11875,7 @@
     "updated_at": "2026-05-17T10:36:34.999719Z"
   },
   "OPS-CI-CODESCAN-API-01": {
-    "status": "local_checks_passed",
+    "status": "pr_open_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/ops-ci-codescan-api-01",
@@ -11883,7 +11883,7 @@
     "title": "chore(ci): enable code scanning for fap-api",
     "depends_on": [],
     "commit_sha": "962be45f81044d1eec60088ef34235f8e020032e",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1476",
     "checks": {
       "local": {
         "yaml_validation": "passed",
@@ -11913,6 +11913,11 @@
         "at": "2026-05-19T03:38:21.593Z",
         "status": "commit_created",
         "summary": "Created local commit 962be45f81044d1eec60088ef34235f8e020032e."
+      },
+      {
+        "at": "2026-05-19T03:39:20.836Z",
+        "status": "pr_open_github_checks_pending",
+        "summary": "Opened PR #1476 for fap-api CodeQL code scanning enablement. GitHub checks pending."
       }
     ],
     "next_pr": "OPS-CI-CODESCAN-WEB-01"
