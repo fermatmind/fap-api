@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T01:43:32Z",
+  "updated_at": "2026-05-19T01:44:44Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11003,8 +11003,8 @@
     },
     "SEO-DASH-PROD-04B": {
       "repo": "fap-api",
-      "status": "local_validation_passed",
-      "state": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
+      "state": "open",
       "title": "URL Truth MVP dashboard spec and sanitized views plan",
       "depends_on": [
         "SEO-DASH-PROD-04A"
@@ -11075,6 +11075,10 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1469"
         }
       },
       "sidecar_issues": [],
@@ -11093,10 +11097,17 @@
           "at": "2026-05-19T01:43:32Z",
           "status": "local_validation_passed",
           "summary": "Added URL Truth MVP dashboard spec, generated contract artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and git diff check passed. No production operation performed."
+        },
+        {
+          "at": "2026-05-19T01:44:44Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1469 for SEO-DASH-PROD-04B. GitHub checks pending. No production operation performed."
         }
       ],
       "branch": "codex/seo-dash-prod-04b-url-truth-mvp-dashboard-spec",
-      "base": "main"
+      "base": "main",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1469",
+      "commit_sha": "b7890990"
     },
     "PR-RESEARCH-00": {
       "repo": "fap-api",
