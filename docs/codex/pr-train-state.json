@@ -13518,7 +13518,7 @@
     "next_pr": "RIASEC-FULL-CONTENT-PACK-06"
   },
   "RIASEC-FULL-CONTENT-PACK-06": {
-    "status": "local_validation_passed",
+    "status": "pr_opened_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-06",
@@ -13528,8 +13528,8 @@
       "RIASEC-FULL-CONTENT-PACK-06-PREFLIGHT",
       "RIASEC-FULL-CONTENT-PACK-05"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "41b9fc7a99e868628998bb1456739815641af9d8",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1500",
     "checks": {
       "dependency_gate": {
         "status": "pass",
@@ -13567,6 +13567,10 @@
       "scope_validation": {
         "status": "pass",
         "summary": "Changed files are limited to the PACK-06 occupation examples asset import, ActivityExplorer wiring, targeted tests, and PR train ledger reconciliation."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "summary": "PR #1500 opened; GitHub required checks pending."
       }
     },
     "failure_reason": null,
@@ -13584,6 +13588,11 @@
         "at": "2026-05-19T23:30:26Z",
         "status": "local_validation_passed",
         "summary": "Imported backend-authoritative occupation examples asset through PACK-05 activity/task mapping; local validation passed and no occupation matching/source invention/frontend fallback was introduced."
+      },
+      {
+        "at": "2026-05-19T23:33:39Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1500 for PACK-06 import. GitHub checks pending."
       }
     ]
   }
