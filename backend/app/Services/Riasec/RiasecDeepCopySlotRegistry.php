@@ -14,6 +14,8 @@ final class RiasecDeepCopySlotRegistry
 
     private const TOP3_CHAIN_ASSET_PATH = '/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl';
 
+    private const LAYER_140Q_ASSET_PATH = '/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl';
+
     /** @var array<string,array<string,mixed>>|null */
     private ?array $dimensionContentCache = null;
 
@@ -22,6 +24,9 @@ final class RiasecDeepCopySlotRegistry
 
     /** @var array<string,array<string,mixed>>|null */
     private ?array $top3ChainContentCache = null;
+
+    /** @var array<string,array<string,mixed>>|null */
+    private ?array $layer140qContentCache = null;
 
     /** @var list<string> */
     public const DIMENSIONS = ['R', 'I', 'A', 'S', 'E', 'C'];
@@ -56,6 +61,17 @@ final class RiasecDeepCopySlotRegistry
         'unavailable',
         'insufficient_quality',
         'not_applicable_60q_only',
+        'low_quality_hidden',
+        '60q_only_cta',
+        '140q_completed_state',
+    ];
+
+    /** @var list<string> */
+    public const LAYER_140Q_DIMENSION_LAYERS = [
+        'task',
+        'environment',
+        'role',
+        'commercial_state',
     ];
 
     /** @var list<string> */
@@ -286,6 +302,53 @@ final class RiasecDeepCopySlotRegistry
                 'fallback_behavior' => 'omit_module',
                 'frontend_fallback_allowed' => false,
                 'reason' => 'unsupported_140q_layer_slot',
+            ];
+        }
+
+        return $slot;
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    public function layer140qAssetSlots(): array
+    {
+        $slots = [];
+        foreach ($this->layer140qContentFromAsset() as $slotKey => $content) {
+            $slot = $this->authored140qAssetSlot($slotKey, $content);
+            if ($this->validateSlot($slot) !== []) {
+                continue;
+            }
+
+            $slots[$slotKey] = $slot;
+        }
+
+        return $slots;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function resolve140qDimensionLayerSlot(string $dimensionCode, string $layer, string $layerState): array
+    {
+        $dimensionCode = strtoupper(trim($dimensionCode));
+        $layer = strtolower(trim($layer));
+        $layerState = $this->normalize140qLayerState($layerState);
+        $slotName = $this->layer140qAssetSlotName($dimensionCode, $layer, $layerState);
+        $slot = $this->layer140qAssetSlots()[$slotName] ?? null;
+
+        if ($slot === null) {
+            return [
+                'slot_key' => $this->layer140qSlotKeyForLayer($layer),
+                'slot_name' => $slotName,
+                'layer_dimension' => $dimensionCode,
+                'layer' => $layer,
+                'layer_state' => $layerState,
+                'content_status' => 'unavailable',
+                'module_state' => 'omitted',
+                'fallback_behavior' => 'omit_module',
+                'frontend_fallback_allowed' => false,
+                'reason' => 'unsupported_140q_dimension_layer_slot',
             ];
         }
 
@@ -1164,6 +1227,152 @@ final class RiasecDeepCopySlotRegistry
     }
 
     /**
+     * @return array<string,array<string,mixed>>
+     */
+    private function layer140qContentFromAsset(): array
+    {
+        if ($this->layer140qContentCache !== null) {
+            return $this->layer140qContentCache;
+        }
+
+        $path = dirname(__DIR__, 3).self::LAYER_140Q_ASSET_PATH;
+        if (! is_file($path)) {
+            return $this->layer140qContentCache = [];
+        }
+
+        $slots = [];
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+            $decoded = json_decode($line, true);
+            if (! is_array($decoded)) {
+                continue;
+            }
+
+            $dimensionCode = strtoupper(trim((string) ($decoded['dimension'] ?? '')));
+            $layer = strtolower(trim((string) ($decoded['layer'] ?? '')));
+            $layerState = $this->normalize140qLayerState((string) ($decoded['layer_state'] ?? ''));
+
+            if (! in_array($dimensionCode, self::DIMENSIONS, true)) {
+                continue;
+            }
+            if (! in_array($layer, self::LAYER_140Q_DIMENSION_LAYERS, true)) {
+                continue;
+            }
+            if (! in_array($layerState, self::LAYER_140Q_STATES, true)) {
+                continue;
+            }
+
+            $slotName = $this->layer140qAssetSlotName($dimensionCode, $layer, $layerState);
+            $content = $this->normalize140qLayerAssetRow($decoded, $dimensionCode, $layer, $layerState, $slotName);
+            $slot = $this->authored140qAssetSlot($slotName, $content);
+            if ($this->validateSlot($slot) !== []) {
+                continue;
+            }
+
+            $slots[$slotName] = $content;
+        }
+
+        return $this->layer140qContentCache = $slots;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array<string,mixed>
+     */
+    private function normalize140qLayerAssetRow(array $row, string $dimensionCode, string $layer, string $layerState, string $slotName): array
+    {
+        return [
+            'slot_key' => $this->layer140qSlotKeyForLayer($layer),
+            'content_version' => (string) ($row['asset_version'] ?? 'riasec_140q_task_environment_role_v1.zh-CN'),
+            'source_status' => 'reviewed_content_copy',
+            'review_status' => 'content_review',
+            'evidence_level' => 'expert_reviewed',
+            'content_status' => 'authored',
+            'applicable_form_codes' => $layerState === 'not_applicable_60q_only' || $layerState === '60q_only_cta'
+                ? ['riasec_60']
+                : ['riasec_140'],
+            'applicable_profile_shapes' => ['clear_code', 'blended_code', 'broad_profile', 'near_tie', 'low_clarity'],
+            'applicable_quality_states' => $layerState === 'low_quality_hidden'
+                ? ['low_quality', 'retake_recommended']
+                : ['normal', 'caution'],
+            'applicable_codes' => [$dimensionCode.'_'.$layer.'_'.$layerState],
+            'applicable_dimensions' => [$dimensionCode],
+            'slot_name' => $slotName,
+            'layer_dimension' => $dimensionCode,
+            'layer' => $layer,
+            'layer_state' => $layerState,
+            'title' => (string) ($row['title'] ?? ''),
+            'summary' => (string) ($row['summary'] ?? ''),
+            'example_question' => (string) ($row['example_question'] ?? ''),
+            'task_activity_card' => (string) ($row['task_activity_card'] ?? ''),
+            'environment_card' => (string) ($row['environment_card'] ?? ''),
+            'role_responsibility_card' => (string) ($row['role_responsibility_card'] ?? ''),
+            'forbidden_claims' => $row['forbidden_claims'] ?? [
+                '140q_accuracy_claim',
+                '60q_override',
+                'raw_score_delta',
+                'job_fit',
+                'ability_or_skill_inference',
+            ],
+            'required_boundaries' => array_values(array_unique(array_merge(
+                $this->requiredBoundaries(),
+                array_values((array) ($row['required_boundaries'] ?? []))
+            ))),
+            'user_visible_boundary' => '140Q 是任务、环境和角色责任线索；它只让工作日常观察更具体，不改写 60Q，不比较原始分，也不输出岗位结论。',
+            'fallback_behavior' => 'omit_module',
+            'frontend_fallback_allowed' => false,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return array<string,mixed>
+     */
+    private function authored140qAssetSlot(string $slotName, array $content): array
+    {
+        return array_merge($this->layer140qAssetSlotBase($slotName, $content), $content, [
+            'content_status' => 'authored',
+            'fallback_behavior' => 'omit_module',
+            'frontend_fallback_allowed' => false,
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return array<string,mixed>
+     */
+    private function layer140qAssetSlotBase(string $slotName, array $content): array
+    {
+        return [
+            'slot_key' => (string) ($content['slot_key'] ?? '140q_layer_unavailable_copy'),
+            'slot_group' => '140q_layer_copy',
+            'scale_code' => 'RIASEC',
+            'locale' => 'zh-CN',
+            'content_version' => 'riasec_140q_task_environment_role_v1.zh-CN',
+            'interpretation_rule_version' => 'riasec_interpretation_rule_spec_v2',
+            'applicable_form_codes' => ['riasec_140'],
+            'applicable_profile_shapes' => ['clear_code', 'blended_code', 'broad_profile', 'near_tie', 'low_clarity'],
+            'applicable_quality_states' => ['normal', 'caution'],
+            'applicable_codes' => [$slotName],
+            'slot_name' => $slotName,
+            'forbidden_claims' => [
+                '140q_accuracy_claim',
+                '60q_override',
+                'raw_score_delta',
+                'job_fit',
+                'ability_or_skill_inference',
+            ],
+            'required_boundaries' => $this->requiredBoundaries(),
+            'user_visible_boundary' => '140Q 是任务、环境和角色责任线索；它只让工作日常观察更具体，不改写 60Q，不比较原始分，也不输出岗位结论。',
+            'evidence_level' => 'expert_reviewed',
+            'source_status' => 'reviewed_content_copy',
+            'review_status' => 'content_review',
+            'fallback_behavior' => 'omit_module',
+            'content_status' => 'authored',
+            'frontend_fallback_allowed' => false,
+        ];
+    }
+
+    /**
      * @param  array<string,mixed>  $content
      * @return array<string,mixed>
      */
@@ -1507,6 +1716,31 @@ final class RiasecDeepCopySlotRegistry
         usort($parts, fn (string $a, string $b): int => ($order[$a] ?? 99) <=> ($order[$b] ?? 99));
 
         return implode('_', $parts);
+    }
+
+    private function layer140qAssetSlotName(string $dimensionCode, string $layer, string $layerState): string
+    {
+        return $dimensionCode.'_'.$layer.'_'.$layerState;
+    }
+
+    private function layer140qSlotKeyForLayer(string $layer): string
+    {
+        return match ($layer) {
+            'task' => '140q_task_card_copy',
+            'environment' => '140q_environment_card_copy',
+            'role' => '140q_role_card_copy',
+            default => '140q_layer_unavailable_copy',
+        };
+    }
+
+    private function normalize140qLayerState(string $layerState): string
+    {
+        $layerState = trim($layerState);
+        if ($layerState === '60Q_only_CTA') {
+            return '60q_only_cta';
+        }
+
+        return strtolower($layerState);
     }
 
     /**
