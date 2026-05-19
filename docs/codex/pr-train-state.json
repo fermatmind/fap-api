@@ -11593,8 +11593,8 @@
     },
     "CONTENT-OPS-01": {
       "repo": "fap-api",
-      "status": "pr_opened_github_checks_pending",
-      "state": "open",
+      "status": "merged",
+      "state": "merged",
       "title": "CMS article operating workflow SOP",
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-00"
@@ -11667,8 +11667,13 @@
           "command": "git diff --check"
         },
         "github": {
-          "status": "pending",
-          "pr_url": "https://github.com/fermatmind/fap-api/pull/1474"
+          "status": "passed",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1474",
+          "evidence": "PR #1474 is MERGED with successful hygiene, verify-mbti-legacy, and verify-mbti-v2 checks."
+        },
+        "ledger_reconciliation": {
+          "status": "pass",
+          "evidence": "Reconciled CONTENT-OPS-01 as merged/completed only in docs/codex/pr-train-state.json. No runtime, production, env, scheduler, Metabase, external API, crawler log, search submission, Research publish, or pSEO operation was performed."
         }
       },
       "sidecar_issues": [],
@@ -11692,12 +11697,23 @@
           "at": "2026-05-19T02:40:46Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1474 for CONTENT-OPS-01. GitHub checks pending. No production operation performed."
+        },
+        {
+          "at": "2026-05-19T02:48:28Z",
+          "status": "merged",
+          "summary": "Reconciled CONTENT-OPS-01 as merged via PR #1474 with merge commit 2afd78c740d41d68ffb770e91c4fa3f0877028b0. Remote branch absent and local branch absent. No runtime, production, env, scheduler, Metabase, external API, crawler log, search submission, Research publish, or pSEO operation was performed."
         }
       ],
       "branch": "codex/content-ops-01-cms-article-operating-workflow",
       "base": "main",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1474",
-      "commit_sha": "3990f57e"
+      "commit_sha": "2afd78c740d41d68ffb770e91c4fa3f0877028b0",
+      "final_status": "completed",
+      "merge_commit_sha": "2afd78c740d41d68ffb770e91c4fa3f0877028b0",
+      "merge_observed": true,
+      "merged_at": "2026-05-19T02:48:28Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
