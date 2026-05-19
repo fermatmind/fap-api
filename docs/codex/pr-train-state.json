@@ -6010,7 +6010,7 @@
         "no fap-web change"
       ],
       "commit_sha": null,
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1491",
+      "pr_url": null,
       "checks": {
         "authorization": {
           "status": "pass",
@@ -12340,7 +12340,7 @@
       "next_pr": "OPS-PORTAL-SEO-05"
     },
     "OPS-PORTAL-SEO-05": {
-      "status": "in_progress",
+      "status": "merged",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/ops-portal-seo-05",
@@ -12349,8 +12349,8 @@
       "depends_on": [
         "OPS-PORTAL-SEO-04"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "a042099935e57e38dc8ea8c12531279ae1db2da8",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1491",
       "checks": {
         "local": {
           "php_artisan_test_filter_seo_intel_ops_portal_seo_access_export_sharing_verification": "passed",
@@ -12362,12 +12362,22 @@
           "git_diff_check": "passed",
           "scope_validation": "passed"
         },
-        "github": {}
+        "github": {
+          "status": "passed",
+          "mergeStateStatus": "CLEAN",
+          "checks": [
+            "hygiene",
+            "semgrep sarif",
+            "Semgrep OSS",
+            "verify-mbti-legacy",
+            "verify-mbti-v2"
+          ]
+        }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-19T20:39:19Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -12384,6 +12394,11 @@
           "at": "2026-05-19T20:39:00Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1491. GitHub checks pending."
+        },
+        {
+          "at": "2026-05-19T20:39:19Z",
+          "status": "merged",
+          "summary": "Merged PR #1491 with squash merge commit a042099935e57e38dc8ea8c12531279ae1db2da8 after GitHub checks passed and mergeStateStatus=CLEAN. Remote branch was deleted and local main synced."
         }
       ],
       "next_pr": "OPS-PORTAL-SEO-PROD-01"
