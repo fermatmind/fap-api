@@ -13062,7 +13062,7 @@
     "merge_commit": "6f83ae6c06875b71af1dd8950e3b5352567290b4"
   },
   "RIASEC-FULL-CONTENT-PACK-08": {
-    "status": "github_checks_passed_ready_to_merge",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-08",
@@ -13071,7 +13071,7 @@
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-07"
     ],
-    "commit_sha": "b864549f4e802e3e7b527cc7216e705ad190e5a9",
+    "commit_sha": "539c68f51feb112156c3840cc6ef013843272538",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1494",
     "checks": {
       "dependency_gate": {
@@ -13111,12 +13111,17 @@
       "github_required_checks": {
         "status": "pass",
         "summary": "PR #1494 passed hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2 before merge review."
+      },
+      "ledger_reconciliation": {
+        "status": "pass",
+        "summary": "GitHub PR #1494 is merged and origin/main contains 539c68f51feb112156c3840cc6ef013843272538; reconciled before PACK-05-PREFLIGHT.",
+        "source_of_truth": "GitHub PR + origin/main"
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-19T22:39:08Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "history": [
       {
@@ -13138,8 +13143,114 @@
         "at": "2026-05-19T21:29:29Z",
         "status": "github_checks_passed_ready_to_merge",
         "summary": "GitHub required checks passed for PR #1494; ready for final merge-state review."
+      },
+      {
+        "at": "2026-05-19T22:39:08Z",
+        "status": "merged_reconciled",
+        "summary": "Reconciled PACK-08 stale ledger before PACK-05-PREFLIGHT: PR #1494 merged with squash commit 539c68f51feb112156c3840cc6ef013843272538; GitHub and origin/main treated as source of truth."
+      }
+    ],
+    "next_pr": "RIASEC-FULL-CONTENT-PACK-05",
+    "merge_commit": "539c68f51feb112156c3840cc6ef013843272538"
+  },
+  "RIASEC-FULL-CONTENT-PACK-05-PREFLIGHT": {
+    "status": "local_validation_passed",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-05-preflight",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-05-PREFLIGHT: Activity/task examples asset preflight",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-08"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "pack_08_ledger_reconciliation": {
+        "status": "pass",
+        "summary": "PACK-08 reconciled to merged before PACK-05-PREFLIGHT registration."
+      },
+      "dependency_gate": {
+        "status": "pass",
+        "summary": "PACK-08 merged reconciliation completed before PACK-05-PREFLIGHT."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecActivityTaskExamplesPreflightTest.php tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php --no-ansi",
+        "summary": "9 tests passed; V7.3 activity/task fixture parsed, schema-compatible, no occupation import, no forbidden user claims, no visible technical keys, and current ActivityExplorer contract remains green."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecActivityTaskExamplesPreflightTest.php"
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "summary": "pr-train-state.json parsed, pr-train.yaml parsed, and activity_task_examples JSONL parsed with 360 records."
+      },
+      "forbidden_claim_scan": {
+        "status": "pass",
+        "summary": "Visible activity/task fields scan found forbidden_user_claim=0; boundary terms are confined to non-user-facing governance fields or negated boundary copy."
+      },
+      "technical_key_exposure_scan": {
+        "status": "pass",
+        "summary": "Visible activity/task fields scan found technical_key_exposure=0."
+      },
+      "preflight_decision": {
+        "status": "conditional_go",
+        "summary": "PACK-05 import can proceed after merge if it handles commercial_expansion_candidate_not_runtime_imported rows, preserves fail-closed behavior, and keeps occupation examples out of scope."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "summary": "Changed files are limited to PACK-08 ledger reconciliation, PACK-05 manifest/state registration, preflight fixture, preflight PHPUnit test, and preflight docs; no runtime import or occupation examples."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-19T22:39:08Z",
+        "status": "registered",
+        "summary": "Registered PACK-05-PREFLIGHT for activity/task examples asset validation; no runtime import in this PR."
+      },
+      {
+        "at": "2026-05-19T22:42:55Z",
+        "status": "local_validation_passed",
+        "summary": "PACK-05-PREFLIGHT validated V7.3 activity/task fixture and recorded CONDITIONAL GO for PACK-05 import; no runtime content import performed."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-05"
+  },
+  "RIASEC-FULL-CONTENT-PACK-05": {
+    "status": "registered_pending_dependency",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-05",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-05: Import backend-authoritative RIASEC activity/task examples asset",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-05-PREFLIGHT"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-19T22:39:08Z",
+        "status": "registered_pending_dependency",
+        "summary": "Registered PACK-05 import; execution allowed only after PACK-05-PREFLIGHT returns GO or CONDITIONAL GO and merges cleanly."
+      }
+    ]
   }
 }
