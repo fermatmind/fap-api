@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T02:16:34Z",
+  "updated_at": "2026-05-19T02:17:23Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11357,8 +11357,8 @@
     },
     "CRAWLER-LOG-00": {
       "repo": "fap-api",
-      "status": "local_validation_passed",
-      "state": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
+      "state": "open",
       "title": "Crawler log readiness contract",
       "depends_on": [
         "SEO-DASH-PROD-04B"
@@ -11429,6 +11429,10 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1472"
         }
       },
       "sidecar_issues": [],
@@ -11447,10 +11451,17 @@
           "at": "2026-05-19T02:16:34Z",
           "status": "local_validation_passed",
           "summary": "Added crawler log readiness contract, generated artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and git diff check passed. No production log read, config change, scheduler, collector write, or production operation performed."
+        },
+        {
+          "at": "2026-05-19T02:17:23Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1472 for CRAWLER-LOG-00. GitHub checks pending. No production operation performed."
         }
       ],
       "branch": "codex/crawler-log-00-readiness-contract",
-      "base": "main"
+      "base": "main",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1472",
+      "commit_sha": "56a56f73"
     },
     "CLAIM-LINT-00": {
       "repo": "fap-api",
