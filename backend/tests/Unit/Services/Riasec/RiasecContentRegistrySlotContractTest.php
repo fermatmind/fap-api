@@ -104,6 +104,31 @@ final class RiasecContentRegistrySlotContractTest extends TestCase
         $this->assertContains('forbidden_claim_phrase_140q_more_accurate', $result['errors']);
     }
 
+    public function test_validator_allows_negated_boundary_mentions_without_allowing_positive_claims(): void
+    {
+        $contract = new RiasecContentRegistrySlotContract;
+
+        $boundaryResult = $contract->validate($this->validSlot([
+            'slot_key' => 'pair_blend_copy',
+            'slot_group' => 'pair_blend_copy',
+            'applicable_codes' => ['R_E'],
+            'body' => '这不是岗位胜任依据，也不输出职业推荐、职业成功或更准确的结论。',
+        ]));
+
+        $this->assertTrue($boundaryResult['ok']);
+        $this->assertSame([], $boundaryResult['errors']);
+
+        $positiveResult = $contract->validate($this->validSlot([
+            'slot_key' => 'pair_blend_copy',
+            'slot_group' => 'pair_blend_copy',
+            'applicable_codes' => ['R_E'],
+            'body' => '系统判定你适合某职业，职业匹配很高，并且岗位胜任。',
+        ]));
+
+        $this->assertFalse($positiveResult['ok']);
+        $this->assertContains('forbidden_claim_phrase_non_ascii', $positiveResult['errors']);
+    }
+
     public function test_missing_content_behavior_fails_closed_without_frontend_copy(): void
     {
         $contract = new RiasecContentRegistrySlotContract;

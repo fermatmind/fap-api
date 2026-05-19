@@ -474,14 +474,58 @@ final class RiasecContentRegistrySlotContract
     private function forbiddenPhraseErrors(array $payload): array
     {
         $errors = [];
-        $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $strings = $this->payloadStrings($payload);
         foreach (self::FORBIDDEN_PHRASES as $phrase) {
-            if (str_contains($json, $phrase)) {
-                $errors[] = 'forbidden_claim_phrase_'.$this->errorToken($phrase);
+            foreach ($strings as $text) {
+                if (str_contains($text, $phrase) && ! $this->isBoundaryOrNegatedHit($text, $phrase)) {
+                    $errors[] = 'forbidden_claim_phrase_'.$this->errorToken($phrase);
+                    break;
+                }
             }
         }
 
         return $errors;
+    }
+
+    /**
+     * @param  array<mixed>  $payload
+     * @return list<string>
+     */
+    private function payloadStrings(array $payload): array
+    {
+        $strings = [];
+        foreach ($payload as $value) {
+            if (is_string($value)) {
+                $strings[] = $value;
+            } elseif (is_array($value)) {
+                array_push($strings, ...$this->payloadStrings($value));
+            }
+        }
+
+        return $strings;
+    }
+
+    private function isBoundaryOrNegatedHit(string $text, string $phrase): bool
+    {
+        $offset = 0;
+        while (($position = strpos($text, $phrase, $offset)) !== false) {
+            $context = substr($text, max(0, $position - 48), strlen($phrase) + 96);
+            $hasBoundaryMarker = false;
+            foreach (['不是', '不能', '不得', '不输出', '不允许', '禁止', '不作为', '不把', '不代表', '不会', '不用于', '不默认', '不要', 'not ', 'does not', 'do not', 'forbidden'] as $marker) {
+                if (str_contains($context, $marker)) {
+                    $hasBoundaryMarker = true;
+                    break;
+                }
+            }
+
+            if (! $hasBoundaryMarker) {
+                return false;
+            }
+
+            $offset = $position + strlen($phrase);
+        }
+
+        return true;
     }
 
     private function errorToken(string $phrase): string

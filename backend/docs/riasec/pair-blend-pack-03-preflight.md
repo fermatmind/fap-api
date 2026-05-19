@@ -39,6 +39,8 @@ PACK-03 must resolve this before import by either:
 
 This is why the decision is `CONDITIONAL GO`, not unconditional `GO`.
 
+PACK-03 resolution: the import PR makes the backend content slot validator boundary-aware for negated forbidden-phrase mentions while continuing to reject positive career/job/accuracy claims. The pair asset is imported as backend-authored content only after the normalized rows pass registry validation.
+
 ## Required Import Normalization For PACK-03
 
 The V7.3 editorial asset intentionally remains an editorial candidate. The import PR must normalize these values before runtime emission:

@@ -30,17 +30,18 @@ final class RiasecPairBlendSlotRegistryTest extends TestCase
         }
     }
 
-    public function test_ias_pair_blends_have_authored_runtime_copy(): void
+    public function test_all_pair_blends_have_authored_runtime_copy_from_file_backed_asset(): void
     {
         $registry = new RiasecDeepCopySlotRegistry;
 
-        foreach (['I_A', 'I_S', 'A_S'] as $pairKey) {
+        foreach (RiasecDeepCopySlotRegistry::PAIRS as $pairKey) {
             $slot = $registry->resolvePairBlendSlot($pairKey);
 
             $this->assertSame('authored', $slot['content_status']);
             $this->assertSame('reviewed_content_copy', $slot['source_status']);
-            $this->assertSame('approved_for_staging', $slot['review_status']);
+            $this->assertSame('content_review', $slot['review_status']);
             $this->assertSame('expert_reviewed', $slot['evidence_level']);
+            $this->assertSame('riasec_pair_blend_15_pairs_v1.zh-CN', $slot['content_version']);
 
             foreach ($registry->authoredPairRequiredFields() as $requiredField) {
                 $this->assertArrayHasKey($requiredField, $slot);
@@ -51,14 +52,14 @@ final class RiasecPairBlendSlotRegistryTest extends TestCase
         }
     }
 
-    public function test_non_authored_pairs_are_explicitly_pending_and_fail_closed(): void
+    public function test_formerly_pending_pairs_are_authored_from_asset(): void
     {
         $slot = (new RiasecDeepCopySlotRegistry)->resolvePairBlendSlot('R_E');
 
-        $this->assertSame('pending', $slot['content_status']);
-        $this->assertSame('omitted', $slot['module_state']);
+        $this->assertSame('authored', $slot['content_status']);
+        $this->assertSame('content_review', $slot['review_status']);
+        $this->assertSame('reviewed_content_copy', $slot['source_status']);
         $this->assertSame('omit_module', $slot['fallback_behavior']);
-        $this->assertSame('docs_only_candidate', $slot['source_status']);
         $this->assertFalse($slot['frontend_fallback_allowed']);
     }
 

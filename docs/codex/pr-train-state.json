@@ -12365,8 +12365,8 @@
     "next_pr": null
   },
   "RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT": {
-    "status": "in_progress",
-    "commit_sha": "3cf16f7594e58e4ea7e5a76eb5f3cc4586a0feb8",
+    "status": "merged",
+    "commit_sha": "21bf5b2bd7ec0621de3d97dd1a227a3b072e12d3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1483",
     "branch": "codex/riasec-full-content-pack-03-preflight",
     "depends_on": [
@@ -12398,12 +12398,16 @@
       "preflight_decision": {
         "status": "conditional_go",
         "summary": "PACK-03 may proceed after this PR merges, provided import resolves the documented boundary-aware validator gap and keeps missing/invalid content fail-closed."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "summary": "PR #1483 passed hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2 before squash merge."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-19T15:24:19Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "history": [
       {
@@ -12425,19 +12429,55 @@
         "at": "2026-05-19T15:35:00Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1483 for RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-19T15:24:19Z",
+        "status": "merged",
+        "summary": "PR #1483 merged with squash commit 21bf5b2bd7ec0621de3d97dd1a227a3b072e12d3 after GitHub checks passed. Remote branch deleted and local preflight worktree cleaned."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-03"
   },
   "RIASEC-FULL-CONTENT-PACK-03": {
-    "status": "pending_preflight_gate",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open_github_checks_pending",
+    "commit_sha": "9b13611ab4fd1577d3f0789b94d25225941fda67",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1484",
     "branch": "codex/riasec-full-content-pack-03-pair-blend-import",
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT"
     ],
-    "checks": {},
+    "checks": {
+      "preflight_gate": {
+        "status": "pass",
+        "summary": "03-PREFLIGHT recorded CONDITIONAL GO and merged into origin/main before PACK-03 started."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi",
+        "summary": "18 tests passed; pair registry emits 15/15 authored pair slots and RIASEC projection/report/share/history regression coverage passed."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecContentRegistrySlotContract.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php"
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "command": "python3 YAML/JSON parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json"
+      },
+      "jsonl_validation": {
+        "status": "pass",
+        "command": "python3 JSONL parse for backend/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl",
+        "summary": "15 rows parsed with required pair keys."
+      },
+      "forbidden_claim_scan": {
+        "status": "pass",
+        "summary": "Imported pair asset scan found 8 allowed boundary hits and 0 forbidden user claims."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -12448,6 +12488,16 @@
         "at": "2026-05-19T15:00:00Z",
         "status": "registered_pending_preflight_gate",
         "summary": "Registered RIASEC-FULL-CONTENT-PACK-03. Execution is blocked until 03-PREFLIGHT records GO or CONDITIONAL GO and required checks pass."
+      },
+      {
+        "at": "2026-05-19T15:45:00Z",
+        "status": "local_validation_passed",
+        "summary": "Imported the 15-pair file-backed asset, resolved the boundary-aware validator gap, and passed targeted PHPUnit, scoped Pint, JSON/YAML, JSONL, forbidden-claim scan, and diff checks locally."
+      },
+      {
+        "at": "2026-05-19T15:55:00Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1484 for RIASEC-FULL-CONTENT-PACK-03. GitHub checks pending."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-04"

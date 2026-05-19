@@ -500,7 +500,7 @@ final class RiasecAssessmentFlowTest extends TestCase
         $this->assertContains('dimension_deep_copy:R', $slotIds);
         $this->assertContains('dimension_deep_copy:I', $slotIds);
         $this->assertContains('pair_blend_copy:I_A', $slotIds);
-        $this->assertNotContains('pair_blend_copy:R_I', $slotIds, 'Pending pair slots must fail closed instead of becoming frontend-renderable copy.');
+        $this->assertContains('pair_blend_copy:R_I', $slotIds, 'PACK-03 imports 15/15 pair blend slots as backend-authored content.');
 
         $serialized = json_encode($envelope, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         foreach ([
