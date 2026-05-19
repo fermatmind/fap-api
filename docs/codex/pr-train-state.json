@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T02:39:46Z",
+  "updated_at": "2026-05-19T02:40:46Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11593,8 +11593,8 @@
     },
     "CONTENT-OPS-01": {
       "repo": "fap-api",
-      "status": "local_validation_passed",
-      "state": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
+      "state": "open",
       "title": "CMS article operating workflow SOP",
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-00"
@@ -11665,6 +11665,10 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1474"
         }
       },
       "sidecar_issues": [],
@@ -11683,10 +11687,17 @@
           "at": "2026-05-19T02:39:46Z",
           "status": "local_validation_passed",
           "summary": "Added CMS article operating workflow SOP, generated artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and git diff check passed. No runtime content change, publish action, URL submission, CMS mutation, or production operation performed."
+        },
+        {
+          "at": "2026-05-19T02:40:46Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1474 for CONTENT-OPS-01. GitHub checks pending. No production operation performed."
         }
       ],
       "branch": "codex/content-ops-01-cms-article-operating-workflow",
-      "base": "main"
+      "base": "main",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1474",
+      "commit_sha": "3990f57e"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
