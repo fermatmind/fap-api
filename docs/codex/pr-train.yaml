@@ -6161,3 +6161,104 @@ prs:
     human_review_required: true
     production_approval_required: false
     next_task: PR-RESEARCH-02
+
+
+  - id: RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-02A
+    branch: codex/riasec-full-content-pack-03-preflight
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT: Pair blend 15-pair asset preflight and train registration"
+    name: "Pair blend 15-pair asset preflight"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: scan/test PR
+    scope:
+      - Parse the V7.3 pair_blend_15_pairs_v1.zh-CN JSONL asset as a non-runtime test fixture.
+      - Validate 15/15 pair keys, required fields, backend slot normalization, forbidden-claim classification, and visible technical-key exposure.
+      - Document PACK-03 import schema gaps and GO / CONDITIONAL GO / NO-GO decision.
+      - Do not import pair blend content into runtime.
+    allowed_paths:
+      - backend/tests/Fixtures/Riasec/pair_blend_15_pairs_v7_3_preflight.jsonl
+      - backend/tests/Unit/Services/Riasec/RiasecPairBlendAssetPreflightTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change RiasecScorer, RIASEC question packs, Holland Code generation, 60Q/140Q compare policy, projection runtime behavior, report/share/PDF/history runtime, fap-web, career rows, feedback runtime, analytics runtime, or production data.
+      - Import runtime pair blend content, add frontend fallback copy, add career match/job fit/ranking/success prediction/hiring suitability claims, or claim 140Q is more accurate.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecPairBlendAssetPreflightTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecPairBlendAssetPreflightTest.php
+      - python3 - <<'PY'
+        import json, pathlib
+        path = pathlib.Path('backend/tests/Fixtures/Riasec/pair_blend_15_pairs_v7_3_preflight.jsonl')
+        rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+        assert len(rows) == 15
+        PY
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    next_task: RIASEC-FULL-CONTENT-PACK-03
+
+  - id: RIASEC-FULL-CONTENT-PACK-03
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-03-PREFLIGHT
+    branch: codex/riasec-full-content-pack-03-pair-blend-import
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-03: Import RIASEC pair blend 15-pair production content asset"
+    name: "Pair blend 15-pair backend authoritative import"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend content asset import PR
+    scope:
+      - Add backend-authoritative file-backed pair blend content asset from the V7.3 15-pair JSONL.
+      - Wire RiasecDeepCopySlotRegistry or an internal loader to emit 15 authored pair_blend_copy slots.
+      - Preserve fail-closed behavior for missing, invalid, pending, unavailable, or fallback-enabled content.
+      - Add targeted registry, contract, projection/report-flow, JSONL, and forbidden-claim tests.
+    allowed_paths:
+      - backend/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - backend/docs/riasec/deep-copy-slot-schema-contract.md
+      - backend/docs/riasec/pair-blend-pack-03-preflight.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scorer math, RIASEC question content packs, Holland Code generation, 60Q/140Q compare policy, fap-web UI, frontend local copy, unrelated report/share/PDF/history runtime, career matching, occupation source rows, feedback mutation runtime, analytics runtime, or production data.
+      - Add job fit, career match, ranking, success prediction, hiring suitability, raw score delta, or 140Q more accurate claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecDeepCopySlotRegistry.php app/Services/Riasec/RiasecContentRegistrySlotContract.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecContentRegistrySlotContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - python3 - <<'PY'
+        import json, pathlib
+        path = pathlib.Path('backend/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl')
+        rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+        assert len(rows) == 15
+        PY
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    next_task: RIASEC-FULL-CONTENT-PACK-04
