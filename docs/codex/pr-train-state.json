@@ -12968,7 +12968,7 @@
     "merge_commit": "150acbda417bbfd56ab319620080cde392188b65"
   },
   "RIASEC-FULL-CONTENT-PACK-07": {
-    "status": "local_validation_passed",
+    "status": "pr_open_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-07",
@@ -12977,8 +12977,8 @@
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-04"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "f51d9de4b2f72a84fcf520f4b162a7eba45bbe46",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1493",
     "checks": {
       "dependency_gate": {
         "status": "pass",
@@ -13015,6 +13015,10 @@
       "scope_validation": {
         "status": "pass",
         "summary": "Changed files are limited to PACK-07 140Q asset, RIASEC registry/projection/tests, and authorized PR train metadata; no scorer, question pack, frontend fallback, career matching, feedback mutation, analytics, or production data changes."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "summary": "PR #1493 opened; GitHub required checks pending."
       }
     },
     "failure_reason": null,
@@ -13037,6 +13041,11 @@
         "at": "2026-05-19T20:56:29Z",
         "status": "scope_validation_passed",
         "summary": "Validated PACK-07 scope and completed JSON/YAML plus git diff checks before commit."
+      },
+      {
+        "at": "2026-05-19T20:58:47Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1493 for PACK-07. GitHub checks pending."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-08"
