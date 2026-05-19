@@ -131,6 +131,7 @@ curl -fsS "${BASE_URL}/api/v0.3/boot" | grep -q '"ok":true' && echo "v0.3 boot O
 
 # Healthz is allowlist-only in production.
 # Do not require arbitrary public-origin /api/healthz to return 200.
+# Do not probe /healthz; /api/healthz is the only canonical path.
 # Success criteria:
 # 1) an allowlisted probe to /api/healthz returns .ok==true, or
 # 2) an internal/local verification path confirms healthz.

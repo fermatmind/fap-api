@@ -353,7 +353,17 @@ sudo systemctl is-active fap-queue.service
 - `systemctl is-active fap-queue.service` 返回非 `active`
 - 只保留 `supervisorctl status fap-queue-*` 里的 worker 作为正式 owner
 
-## 7. 发布后验收
+## 7. Release-only 发布入口
+生产发布必须从干净的 release-only 工作区执行，而不是从开发分支、PR worktree 或 GitHub Desktop 停车分支执行。
+
+发布前置要求：
+- 本地分支必须是 `main`
+- `git status --short` 必须为空
+- `HEAD` 必须等于 `origin/main`
+- 不允许使用 detached HEAD 作为发布入口
+- PR worktree、临时验证目录和开发目录不得复用为生产发布目录
+
+## 8. 发布后验收
 ```bash
 cd /opt/fap-api/backend
 php artisan route:list
@@ -370,7 +380,7 @@ bash backend/scripts/ci_verify_mbti.sh
 ```
 
 通过标准：
-- healthz canonical probe path is `/api/healthz`
+- healthz canonical probe path is only `/api/healthz`
 - production healthz remains allowlist-only
 - do not require arbitrary public-origin `/api/healthz` to return `200`
 - deploy smoke may use localhost or another internal/allowlisted source for healthz verification
@@ -378,7 +388,7 @@ bash backend/scripts/ci_verify_mbti.sh
 - 健康检查接口可达，且 `/api/v0.3/auth/guest` 合约通过。
 - MBTI CI 验收链路通过。
 
-## 8. 回滚流程
+## 9. 回滚流程
 1. 切换到上一个可用发布版本（代码/工件）。
 2. 执行依赖安装与缓存重建（同部署步骤）。
 3. 迁移策略：本仓库以 forward-only 迁移为主，回滚优先采用“新修复迁移”而非 destructive rollback。
