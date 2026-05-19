@@ -5870,3 +5870,41 @@ prs:
     human_review_required: true
     production_approval_required: false
     next_task: null
+
+  - id: OPS-CI-CODESCAN-API-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/ops-ci-codescan-api-01
+    base: main
+    title: "chore(ci): enable code scanning for fap-api"
+    name: "Enable GitHub code scanning for fap-api"
+    train_scope: ops_ci_codescan_api
+    risk_level: L2
+    type: ci/governance PR
+    scope:
+      - Add GitHub code scanning workflow for fap-api using SARIF upload.
+      - Produce analyzable GitHub code scanning results on pull requests and main.
+      - Keep application runtime behavior unchanged.
+    allowed_paths:
+      - .github/workflows/codeql.yml
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change backend runtime behavior, routes, migrations, deploy scripts, or tests.
+      - Deploy production, unlock deploys, kill processes, or mutate servers.
+    validation:
+      - ruby -e 'require "yaml"; YAML.load_file(".github/workflows/codeql.yml"); YAML.load_file("docs/codex/pr-train.yaml"); puts "yaml ok"'
+      - ruby -e 'require "json"; JSON.parse(File.read("docs/codex/pr-train-state.json")); puts "json ok"'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: false
+    production_approval_required: false
+    next_task: OPS-CI-CODESCAN-WEB-01

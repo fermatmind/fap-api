@@ -11873,5 +11873,66 @@
     },
     "failure_reason": null,
     "updated_at": "2026-05-17T10:36:34.999719Z"
+  },
+  "OPS-CI-CODESCAN-API-01": {
+    "status": "pr_open_github_checks_pending",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/ops-ci-codescan-api-01",
+    "base": "main",
+    "title": "chore(ci): enable code scanning for fap-api",
+    "depends_on": [],
+    "commit_sha": "962be45f81044d1eec60088ef34235f8e020032e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1476",
+    "checks": {
+      "local": {
+        "yaml_validation": "passed",
+        "json_validation": "passed",
+        "git_diff_check": "passed",
+        "scope_validation": "passed"
+      },
+      "github": {}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [
+      {
+        "title": "CodeQL PHP language unsupported by GitHub CodeQL action",
+        "introduced_by_current_pr": false,
+        "scope_impact": "The code scanning implementation uses Semgrep SARIF upload instead of CodeQL language analysis for PHP.",
+        "blocks_merge": false,
+        "evidence": "GitHub Actions log: Did not recognize the following languages: php."
+      }
+    ],
+    "history": [
+      {
+        "at": "2026-05-19T03:37:17.996Z",
+        "status": "in_progress",
+        "summary": "Started CodeQL code scanning enablement for fap-api. Scope is limited to CI workflow and PR train metadata; no runtime behavior changes."
+      },
+      {
+        "at": "2026-05-19T03:38:09.440Z",
+        "status": "local_checks_passed",
+        "summary": "Added fap-api CodeQL workflow and train metadata. YAML/JSON validation, git diff checks, and scope validation passed."
+      },
+      {
+        "at": "2026-05-19T03:38:21.593Z",
+        "status": "commit_created",
+        "summary": "Created local commit 962be45f81044d1eec60088ef34235f8e020032e."
+      },
+      {
+        "at": "2026-05-19T03:39:20.836Z",
+        "status": "pr_open_github_checks_pending",
+        "summary": "Opened PR #1476 for fap-api CodeQL code scanning enablement. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-19T03:41:59.660Z",
+        "status": "github_checks_failed_scoped_fix",
+        "summary": "CodeQL does not support PHP in this runner. Replaced the workflow with Semgrep SARIF upload to produce GitHub code scanning analysis for fap-api without runtime changes."
+      }
+    ],
+    "next_pr": "OPS-CI-CODESCAN-WEB-01"
   }
 }
