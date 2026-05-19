@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T01:32:37Z",
+  "updated_at": "2026-05-19T01:44:44Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10893,8 +10893,8 @@
     },
     "SEO-DASH-PROD-04A": {
       "repo": "fap-api",
-      "status": "pr_opened_github_checks_pending",
-      "state": "open",
+      "status": "merged",
+      "state": "merged",
       "title": "Metabase read-only connection plan",
       "depends_on": [
         "SEO-DASH-PROD-03D-R2"
@@ -10959,8 +10959,7 @@
           "command": "git diff --check"
         },
         "github": {
-          "status": "pending",
-          "pr_url": "https://github.com/fermatmind/fap-api/pull/1468"
+          "status": "passed"
         }
       },
       "sidecar_issues": [],
@@ -10984,17 +10983,28 @@
           "at": "2026-05-19T01:32:37Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1468 for SEO-DASH-PROD-04A. GitHub checks pending. No production operation performed."
+        },
+        {
+          "at": "2026-05-19T01:41:52Z",
+          "status": "merged",
+          "summary": "Reconciled SEO-DASH-PROD-04A as merged via PR #1468 with merge commit 50f249144792a3db8d954bd91676e547a2e448ca. Remote branch absent and local main synced."
         }
       ],
       "branch": "codex/seo-dash-prod-04a-metabase-read-only-plan",
       "base": "main",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1468",
-      "commit_sha": "8c29a356"
+      "commit_sha": "8c29a356",
+      "final_status": "completed",
+      "merge_commit_sha": "50f249144792a3db8d954bd91676e547a2e448ca",
+      "merge_observed": true,
+      "merged_at": "2026-05-19T01:41:52Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "SEO-DASH-PROD-04B": {
       "repo": "fap-api",
-      "status": "planned",
-      "state": "planned",
+      "status": "pr_opened_github_checks_pending",
+      "state": "open",
       "title": "URL Truth MVP dashboard spec and sanitized views plan",
       "depends_on": [
         "SEO-DASH-PROD-04A"
@@ -11017,6 +11027,58 @@
         "registration": {
           "status": "planned",
           "evidence": "Registered by SEO-TRAIN-POST03D-PR-TRAIN-01 metadata reconciliation PR; no runtime code or production operation executed."
+        },
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-DASH-PROD-04A merged as PR #1468 and main contains merge commit 50f249144792a3db8d954bd91676e547a2e448ca."
+        },
+        "scope": {
+          "status": "in_progress",
+          "evidence": "Implementing only URL Truth MVP dashboard spec doc, generated artifact, focused SeoIntel test, and PR train state metadata. No runtime code or production operation executed."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to URL Truth MVP dashboard spec doc, generated artifact, focused SeoIntel test, and docs/codex PR train state metadata. No runtime code, migrations, env, deploy, scheduler, collector writes, Metabase deployment, external APIs, crawler log reads, fap-web files, sitemap/llms behavior, research publish, pSEO, production operations, or database changes were performed."
+        },
+        "url_truth_mvp_dashboard_spec_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelUrlTruthMvpDashboardSpec",
+          "evidence": "5 tests passed with 206 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "evidence": "120 tests passed with 2204 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 198 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Pint completed successfully; 3374 files checked."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/url-truth-mvp-dashboard-spec.v1.json >/dev/null"
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 - <<'PY' ... yaml.safe_load(docs/codex/pr-train.yaml)"
+        },
+        "state_json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1469"
         }
       },
       "sidecar_issues": [],
@@ -11025,8 +11087,27 @@
           "at": "2026-05-19T01:02:33Z",
           "status": "planned",
           "summary": "Registered planned non-production PR train task SEO-DASH-PROD-04B: URL Truth MVP dashboard spec and sanitized views plan. Safety flags disable writes, scheduler, Metabase deployment, external APIs, crawler log reads, env edits, research publishing, and pSEO generation."
+        },
+        {
+          "at": "2026-05-19T01:41:52Z",
+          "status": "in_progress",
+          "summary": "Started SEO-DASH-PROD-04B URL Truth MVP dashboard spec on scoped branch. Scope excludes runtime code, migrations, env, deploy, collector writes, scheduler, Metabase deployment, external APIs, crawler log reads, research publish, pSEO, and production operations."
+        },
+        {
+          "at": "2026-05-19T01:43:32Z",
+          "status": "local_validation_passed",
+          "summary": "Added URL Truth MVP dashboard spec, generated contract artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and git diff check passed. No production operation performed."
+        },
+        {
+          "at": "2026-05-19T01:44:44Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1469 for SEO-DASH-PROD-04B. GitHub checks pending. No production operation performed."
         }
-      ]
+      ],
+      "branch": "codex/seo-dash-prod-04b-url-truth-mvp-dashboard-spec",
+      "base": "main",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1469",
+      "commit_sha": "b7890990"
     },
     "PR-RESEARCH-00": {
       "repo": "fap-api",
