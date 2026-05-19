@@ -6122,6 +6122,7 @@ prs:
       - backend/routes/api.php
       - backend/tests/Feature/Research/ResearchAssetBackendMvpTest.php
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/contracts/openapi.snapshot.json
       - backend/docs/seo/research-asset-backend-mvp.md
       - backend/docs/seo/generated/research-asset-backend-mvp.v1.json
       - docs/codex/pr-train.yaml
@@ -6136,6 +6137,7 @@ prs:
       - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|research_backend_mvp' --no-ansi
       - cd backend && php artisan test --filter=SeoIntel
       - cd backend && php artisan route:list --no-ansi
+      - cd backend && bash scripts/export_openapi.sh --check
       - cd backend && php artisan migrate --pretend
       - cd backend && vendor/bin/pint --test
       - python3 -m json.tool backend/docs/seo/generated/research-asset-backend-mvp.v1.json >/dev/null

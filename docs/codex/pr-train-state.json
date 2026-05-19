@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T14:24:39Z",
+  "updated_at": "2026-05-19T14:31:45Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11889,14 +11889,16 @@
           "yaml_validation": "passed",
           "git_diff_check": "passed",
           "scope_validation": "passed",
-          "bigfive_runtime_freeze_research_backend_mvp_allowlist": "passed"
+          "bigfive_runtime_freeze_research_backend_mvp_allowlist": "passed",
+          "openapi_snapshot_check": "passed",
+          "openapi_diff_test": "passed"
         },
         "github": {
           "hygiene": "passed",
           "semgrep_sarif": "passed",
           "semgrep_oss": "passed",
-          "verify_mbti_legacy": "failed",
-          "verify_mbti_v2": "failed",
+          "verify_mbti_legacy": "failed_openapi_snapshot_drift",
+          "verify_mbti_v2": "failed_openapi_snapshot_drift",
           "mergeStateStatus": "UNSTABLE"
         }
       },
@@ -11940,11 +11942,22 @@
           "at": "2026-05-19T14:24:39Z",
           "status": "ci_fix_local_checks_passed",
           "summary": "Added a narrow Research backend/CMS MVP allowlist to the BigFive runtime freeze classifier. Focused BigFive runtime freeze test, ResearchAssetBackendMvp test, SeoIntel filter, route list, sqlite testing migrate --pretend, Pint, JSON/YAML validation, and git diff --check passed."
+        },
+        {
+          "at": "2026-05-19T14:31:05Z",
+          "status": "ci_fix_in_progress",
+          "summary": "GitHub verify-mbti jobs now fail on OpenAPI snapshot drift from the scoped Research API routes. Exported the route contract snapshot and added backend/docs/contracts/openapi.snapshot.json to the PR scope metadata."
+        },
+        {
+          "at": "2026-05-19T14:31:45Z",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "Synced backend/docs/contracts/openapi.snapshot.json for the scoped Research routes. OpenApiDiffTest, export_openapi.sh --check, focused BigFive runtime freeze tests, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
         }
       ],
       "next_pr": "PR-RESEARCH-02",
       "allowed_paths": [
-        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "backend/docs/contracts/openapi.snapshot.json"
       ]
     }
   },

@@ -3557,6 +3557,76 @@
                 ]
             }
         },
+        "/api/v0.5/internal/research-reports": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_research_reports",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ResearchReportController@internalIndex",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:read"
+                ]
+            }
+        },
+        "/api/v0.5/internal/research-reports/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_research_reports_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ResearchReportController@internalShow",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:read"
+                ]
+            },
+            "put": {
+                "operationId": "put_api_v0_5_internal_research_reports_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ResearchReportController@internalUpdate",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                ]
+            }
+        },
         "/api/v0.5/internal/support-articles": {
             "get": {
                 "operationId": "get_api_v0_5_internal_support_articles",
@@ -3741,6 +3811,40 @@
                     }
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityController@seo",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/research": {
+            "get": {
+                "operationId": "get_api_v0_5_research",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ResearchReportController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/research/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_research_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ResearchReportController@show",
                 "x-laravel-middleware": [
                     "api"
                 ]
