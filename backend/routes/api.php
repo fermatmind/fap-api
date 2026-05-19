@@ -68,6 +68,7 @@ use App\Http\Controllers\API\V0_5\Cms\LandingSurfaceController;
 use App\Http\Controllers\API\V0_5\Cms\MediaLibraryController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityDesktopCloneController;
+use App\Http\Controllers\API\V0_5\Cms\ResearchReportController;
 use App\Http\Controllers\API\V0_5\Cms\SupportArticleController;
 use App\Http\Controllers\API\V0_5\Cms\TopicController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkOverrideController;
@@ -492,6 +493,8 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::get('/articles/{slug}', [ArticleController::class, 'show']);
     Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
+    Route::get('/research', [ResearchReportController::class, 'index']);
+    Route::get('/research/{slug}', [ResearchReportController::class, 'show']);
     Route::get('/support/articles', [SupportArticleController::class, 'index']);
     Route::get('/support/articles/{slug}', [SupportArticleController::class, 'show']);
     Route::get('/support/guides', [InterpretationGuideController::class, 'index']);
@@ -520,6 +523,8 @@ Route::prefix('v0.5')->group(function () {
         Route::get('/internal/content-pages', [ContentPageController::class, 'internalIndex']);
         Route::get('/internal/landing-surfaces', [LandingSurfaceController::class, 'internalIndex']);
         Route::get('/internal/media-assets', [MediaLibraryController::class, 'internalIndex']);
+        Route::get('/internal/research-reports', [ResearchReportController::class, 'internalIndex']);
+        Route::get('/internal/research-reports/{slug}', [ResearchReportController::class, 'internalShow']);
     });
 
     Route::middleware([
@@ -532,6 +537,7 @@ Route::prefix('v0.5')->group(function () {
         Route::put('/internal/landing-surfaces/{surfaceKey}', [LandingSurfaceController::class, 'internalUpdate']);
         Route::put('/internal/media-assets/{assetKey}', [MediaLibraryController::class, 'internalUpdate']);
         Route::post('/internal/media-assets/{assetKey}/upload', [MediaLibraryController::class, 'internalUpload']);
+        Route::put('/internal/research-reports/{slug}', [ResearchReportController::class, 'internalUpdate']);
     });
 
     Route::get('/landing-surfaces/{surfaceKey}', [LandingSurfaceController::class, 'show']);

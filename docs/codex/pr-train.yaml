@@ -6098,3 +6098,66 @@ prs:
     human_review_required: false
     production_approval_required: false
     next_task: PR-RESEARCH-01
+
+  - id: PR-RESEARCH-01
+    repo: fap-api
+    depends_on:
+      - METABASE-OPS-ACCESS-RUNBOOK-00
+    branch: codex/pr-research-01
+    base: main
+    title: "feat(cms): add Research Asset backend MVP"
+    name: "Research backend/CMS MVP"
+    train_scope: seo_dash_mvp_closeout_research_train
+    risk_level: backend_cms_foundation_no_publish_no_runtime_activation
+    type: backend/CMS code PR
+    scope:
+      - Add backend/CMS authority foundation for Research Asset records without importing or publishing content.
+      - Define the `research_report` page entity type contract and metadata fields for methodology, sample disclaimer, claim boundary, author/reviewer, references, last reviewed date, and downloadable asset placeholder.
+      - Gate public reads to published, approved, public, indexable Research records only.
+      - Keep Research blocked from sitemap, llms, Search Channel Queue, URL submission, Research publish, pSEO, collector writes, and scheduler activation.
+    allowed_paths:
+      - backend/app/Models/ResearchReport.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/ResearchReportController.php
+      - backend/database/migrations/2026_05_19_000100_create_research_reports_table.php
+      - backend/routes/api.php
+      - backend/tests/Feature/Research/ResearchAssetBackendMvpTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/docs/seo/research-asset-backend-mvp.md
+      - backend/docs/seo/generated/research-asset-backend-mvp.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy, edit env files, run collector writes, enable scheduler, connect live search APIs, submit URLs, read production crawler logs, change RDS/DB/users/whitelist, expose Metabase publicly, publish Research content, or create pSEO.
+      - Change existing article behavior unless explicitly gated by Research-specific code.
+      - Add Research sitemap entries, llms entries, Search Channel Queue eligibility, Dataset schema, frontend runtime exposure, static fallback content, or report content imports.
+      - Connect Metabase to business DB, Tencent RDS, Node2 local DB, CMS write tables, or raw operational tables.
+    validation:
+      - cd backend && php artisan test --filter=ResearchAssetBackendMvp
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|research_backend_mvp' --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && bash scripts/export_openapi.sh --check
+      - cd backend && php artisan migrate --pretend
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/research-asset-backend-mvp.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    metabase_operation: false
+    research_publish: false
+    human_review_required: true
+    production_approval_required: false
+    next_task: PR-RESEARCH-02

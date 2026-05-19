@@ -1,0 +1,90 @@
+{
+  "version": "research-asset-backend-mvp.v1",
+  "task_id": "PR-RESEARCH-01",
+  "repo": "fap-api",
+  "artifact_type": "backend_cms_contract",
+  "entity": {
+    "model": "ResearchReport",
+    "table": "research_reports",
+    "page_entity_type": "research_report",
+    "public_route_family": "/research/{slug}",
+    "api_routes": {
+      "public_index": "/api/v0.5/research",
+      "public_show": "/api/v0.5/research/{slug}",
+      "internal_index": "/api/v0.5/internal/research-reports",
+      "internal_show": "/api/v0.5/internal/research-reports/{slug}",
+      "internal_update": "/api/v0.5/internal/research-reports/{slug}"
+    }
+  },
+  "required_metadata_fields": [
+    "research_type",
+    "methodology",
+    "sample_disclaimer",
+    "claim_boundary",
+    "author_name",
+    "reviewer_name",
+    "references",
+    "last_reviewed_at",
+    "downloadable_asset_placeholder"
+  ],
+  "draft_publish_gate": {
+    "public_read_requires": {
+      "status": "published",
+      "review_state": "approved",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "null_or_not_future"
+    },
+    "draft_or_archived_public_indexable_allowed": false,
+    "published_requires_approved_review": true
+  },
+  "public_api_boundary": {
+    "exposes_only_published_indexable_records": true,
+    "draft_returns_404": true,
+    "future_scheduled_returns_404": true,
+    "forbidden_sources": [
+      "business_db",
+      "tencent_rds_fap_prod",
+      "node2_local_db",
+      "cms_write_tables",
+      "raw_orders",
+      "raw_payments",
+      "raw_events_detail",
+      "raw_email",
+      "raw_reports",
+      "raw_crawler_logs",
+      "provider_payloads",
+      "payment_payloads",
+      "raw_ip_cookies_user_agents"
+    ]
+  },
+  "seo_search_boundary": {
+    "sitemap_eligible_in_this_pr": false,
+    "llms_eligible_in_this_pr": false,
+    "search_channel_queue_eligible_in_this_pr": false,
+    "url_truth_support_added_in_this_pr": false,
+    "dataset_schema_allowed_in_this_pr": false,
+    "research_publish_in_this_pr": false,
+    "pseo_in_this_pr": false
+  },
+  "claim_boundary": {
+    "diagnosis_treatment_or_cure_claims_allowed": false,
+    "hiring_fit_or_job_competency_claims_allowed": false,
+    "exact_iq_or_guaranteed_outcome_claims_allowed": false,
+    "career_recommendation_claim_expansion_allowed": false
+  },
+  "operations_not_performed": {
+    "deploy": false,
+    "production_env_edit": false,
+    "collector_write": false,
+    "scheduler_enabled": false,
+    "live_search_api_connected": false,
+    "url_submission": false,
+    "production_crawler_log_read": false,
+    "metabase_operation": false,
+    "rds_db_user_or_whitelist_change": false,
+    "research_content_import": false,
+    "research_publish": false
+  },
+  "next_task": "PR-RESEARCH-02"
+}
