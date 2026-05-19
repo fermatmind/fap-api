@@ -4547,8 +4547,8 @@
         "no fap-web change",
         "no 300/800/2786 expansion execution"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "1c1f2d3b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1488",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -6058,7 +6058,7 @@
       "repo": "fap-api",
       "branch": "fix/career-progressive-readiness-selection-1",
       "title": "fix(api): add progressive career readiness selection",
-      "status": "in_progress",
+      "status": "local_checks_passed",
       "depends_on": [
         "REPAIR-PROGRESSIVE-LIVE-VERIFICATION-SCALING-1"
       ],
@@ -12097,7 +12097,7 @@
       "next_pr": null
     },
     "OPS-PORTAL-SEO-01": {
-      "status": "in_progress",
+      "status": "merged",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/ops-portal-seo-01",
@@ -12106,8 +12106,8 @@
       "depends_on": [
         "RESEARCH-PUBLISH-READINESS-00"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "50a0b9f4f31876b5d6974eed6b5516abab0fa947",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1486",
       "checks": {
         "local": {
           "php_artisan_test_filter_seo_intel_ops_portal_seo_access_architecture": "passed",
@@ -12119,12 +12119,15 @@
           "git_diff_check": "passed",
           "scope_validation": "passed"
         },
-        "github": {}
+        "github": {
+          "status": "pass_no_required_checks_reported",
+          "mergeStateStatus": "CLEAN"
+        }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-19T20:13:03Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "title": "RESEARCH-PUBLISH-READINESS-00 ledger stale",
@@ -12156,9 +12159,63 @@
           "at": "2026-05-19T20:15:00Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1486. GitHub checks pending."
+        },
+        {
+          "at": "2026-05-19T20:13:03Z",
+          "status": "merged",
+          "summary": "Merged PR #1486 with squash merge commit 50a0b9f4f31876b5d6974eed6b5516abab0fa947. GitHub reported mergeStateStatus=CLEAN and no required checks; remote branch was deleted and local main synced."
         }
       ],
       "next_pr": "OPS-PORTAL-SEO-02"
+    },
+    "OPS-PORTAL-SEO-02": {
+      "status": "in_progress",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "branch": "codex/ops-portal-seo-02",
+      "base": "main",
+      "title": "docs(seo-intel): add Ops Portal SEO auth audit contract",
+      "depends_on": [
+        "OPS-PORTAL-SEO-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_seo_intel_ops_portal_seo_auth_audit_permission_contract": "passed",
+          "php_artisan_test_filter_seo_intel": "passed",
+          "php_artisan_route_list": "passed",
+          "pint_test": "passed",
+          "json_validation": "passed",
+          "yaml_validation": "passed",
+          "git_diff_check": "passed",
+          "scope_validation": "passed"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T20:13:48Z",
+          "status": "in_progress",
+          "summary": "Started docs/generated/test-only Ops Portal SEO auth/audit/permission contract PR. Scope excludes route shell code, runtime permission enforcement code, Metabase iframe/proxy/public exposure, DNS/CDN/OpenResty/Nginx changes, env edits, deploy, network changes, datasource changes, dashboards, collector writes, scheduler activation, live search APIs, URL submission, crawler log reads, Research publish, and pSEO."
+        },
+        {
+          "at": "2026-05-19T20:18:30Z",
+          "status": "local_checks_passed",
+          "summary": "Focused Ops Portal SEO auth/audit/permission contract test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
+        },
+        {
+          "at": "2026-05-19T20:22:00Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1488. GitHub checks pending."
+        }
+      ],
+      "next_pr": "OPS-PORTAL-SEO-03"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {

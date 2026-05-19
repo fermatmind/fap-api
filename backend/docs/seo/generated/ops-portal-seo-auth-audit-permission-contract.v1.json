@@ -1,0 +1,117 @@
+{
+  "version": "ops-portal-seo-auth-audit-permission-contract.v1",
+  "task": "OPS-PORTAL-SEO-02",
+  "generated_at": "2026-05-19T20:13:48Z",
+  "purpose": "Define auth, permission, owner, audit, revoke, and operator onboarding requirements for /ops/seo.",
+  "auth_stack": {
+    "surface": "fap-api Filament Ops panel",
+    "public_route_outside_ops_panel_allowed": false,
+    "admin_guard_required": true,
+    "filament_ops_auth_required": true,
+    "session_required": true,
+    "csrf_required": true,
+    "totp_required_when_configured": true,
+    "org_context_required_when_panel_requires_it": true,
+    "ops_access_control_required": true,
+    "host_allowlist_respected": true,
+    "ip_allowlist_respected": true,
+    "fail_open_allowed": false
+  },
+  "permission_decision": {
+    "initial_allowed_permissions": [
+      "admin.owner",
+      "admin.ops.read"
+    ],
+    "future_narrow_permission": "admin.seo_intel.read",
+    "normal_operator_unrestricted_sql_allowed": false,
+    "normal_operator_datasource_management_allowed": false,
+    "normal_operator_export_allowed_by_default": false
+  },
+  "owners": [
+    "metabase_admin_owner",
+    "dashboard_owner",
+    "db_access_owner",
+    "export_policy_owner",
+    "emergency_revoke_owner"
+  ],
+  "audit_expectations": [
+    "ops_seo_page_access",
+    "permission_change",
+    "owner_assignment_change",
+    "export_approval_decision",
+    "emergency_revoke_action",
+    "future_bridge_or_proxy_access_event"
+  ],
+  "audit_forbidden_fields": [
+    "password",
+    "token",
+    "cookie",
+    "raw_ip_payload",
+    "order_id",
+    "payment_id",
+    "attempt_id",
+    "raw_email",
+    "provider_payload",
+    "payment_payload",
+    "secret",
+    "api_key"
+  ],
+  "operator_onboarding": {
+    "blocked_until_permissions_plan": true,
+    "normal_operator_users_allowed_now": false,
+    "unrestricted_native_sql_allowed": false,
+    "native_query_access_default": false,
+    "datasource_management_allowed": false,
+    "exports_allowed_by_default": false,
+    "public_sharing_allowed": false,
+    "public_embedding_allowed": false,
+    "anonymous_link_creation_allowed": false
+  },
+  "emergency_revoke_triggers": [
+    "metabase_binds_0_0_0_0",
+    "metabase_public_ipv4_or_eip_present",
+    "public_security_group_ingress_present",
+    "public_sharing_enabled",
+    "anonymous_links_created",
+    "public_embedding_enabled",
+    "unexpected_datasource_present",
+    "business_or_raw_datasource_present",
+    "normal_operator_unrestricted_sql_enabled"
+  ],
+  "emergency_revoke_steps": [
+    "stop_public_access",
+    "disable_unsafe_settings",
+    "confirm_localhost_only_metabase",
+    "review_datasource_inventory",
+    "record_owner_action"
+  ],
+  "forbidden_sources": [
+    "business_db",
+    "tencent_rds_fap_prod",
+    "node2_local_db",
+    "cms_write_tables",
+    "raw_orders",
+    "raw_payments",
+    "raw_events_detail",
+    "raw_email",
+    "raw_reports",
+    "raw_crawler_logs",
+    "provider_payloads",
+    "payment_payloads"
+  ],
+  "production_operations_performed_in_this_pr": false,
+  "runtime_permission_code_changed_in_this_pr": false,
+  "route_shell_added_in_this_pr": false,
+  "metabase_operation_performed_in_this_pr": false,
+  "network_change_performed_in_this_pr": false,
+  "env_edit_in_this_pr": false,
+  "deploy_performed_in_this_pr": false,
+  "scheduler_enabled_in_this_pr": false,
+  "collector_write_performed_in_this_pr": false,
+  "external_api_live_activation": false,
+  "url_submission_performed": false,
+  "production_crawler_log_read": false,
+  "research_publish_in_this_pr": false,
+  "pseo_generation_in_this_pr": false,
+  "next_task": "OPS-PORTAL-SEO-03"
+}
