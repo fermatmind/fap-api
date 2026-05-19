@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T01:55:03Z",
+  "updated_at": "2026-05-19T01:56:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11121,8 +11121,8 @@
     },
     "PR-RESEARCH-00": {
       "repo": "fap-api",
-      "status": "local_validation_passed",
-      "state": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
+      "state": "open",
       "title": "Research Asset readiness scan and contract",
       "depends_on": [
         "SEO-DASH-PROD-04B"
@@ -11193,6 +11193,10 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1470"
         }
       },
       "sidecar_issues": [],
@@ -11211,10 +11215,17 @@
           "at": "2026-05-19T01:55:03Z",
           "status": "local_validation_passed",
           "summary": "Added Research Asset readiness scan/spec, generated artifact, and focused SeoIntel test. Focused test, SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and git diff check passed. No runtime, publish, sitemap/llms, pSEO, or production operation performed."
+        },
+        {
+          "at": "2026-05-19T01:56:00Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1470 for PR-RESEARCH-00. GitHub checks pending. No production operation performed."
         }
       ],
       "branch": "codex/pr-research-00-readiness-scan-contract",
-      "base": "main"
+      "base": "main",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1470",
+      "commit_sha": "d30d5e33"
     },
     "SEARCH-CHANNEL-QUEUE-00": {
       "repo": "fap-api",
