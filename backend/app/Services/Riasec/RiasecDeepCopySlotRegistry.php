@@ -10,8 +10,13 @@ final class RiasecDeepCopySlotRegistry
 
     private const DIMENSION_ASSET_PATH = '/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json';
 
+    private const PAIR_BLEND_ASSET_PATH = '/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl';
+
     /** @var array<string,array<string,mixed>>|null */
     private ?array $dimensionContentCache = null;
+
+    /** @var array<string,array<string,mixed>>|null */
+    private ?array $pairBlendContentCache = null;
 
     /** @var list<string> */
     public const DIMENSIONS = ['R', 'I', 'A', 'S', 'E', 'C'];
@@ -117,7 +122,7 @@ final class RiasecDeepCopySlotRegistry
             $slots[$pairKey] = $this->pendingPairSlot($pairKey);
         }
 
-        foreach ($this->authoredPairContent() as $pairKey => $content) {
+        foreach ($this->pairBlendContentFromAsset() as $pairKey => $content) {
             $slots[$pairKey] = $this->authoredPairSlot($pairKey, $content);
         }
 
@@ -877,36 +882,81 @@ final class RiasecDeepCopySlotRegistry
     /**
      * @return array<string,array<string,mixed>>
      */
-    private function authoredPairContent(): array
+    private function pairBlendContentFromAsset(): array
     {
+        if ($this->pairBlendContentCache !== null) {
+            return $this->pairBlendContentCache;
+        }
+
+        $path = dirname(__DIR__, 3).self::PAIR_BLEND_ASSET_PATH;
+        if (! is_file($path)) {
+            return $this->pairBlendContentCache = [];
+        }
+
+        $slots = [];
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+            $decoded = json_decode($line, true);
+            if (! is_array($decoded)) {
+                continue;
+            }
+
+            $pairKey = strtoupper(trim((string) ($decoded['pair_key'] ?? '')));
+            if (! in_array($pairKey, self::PAIRS, true)) {
+                continue;
+            }
+
+            $content = $this->normalizePairBlendAssetRow($decoded);
+            $slot = $this->authoredPairSlot($pairKey, $content);
+            if ($this->validateSlot($slot) !== []) {
+                continue;
+            }
+
+            $slots[$pairKey] = $content;
+        }
+
+        return $this->pairBlendContentCache = $slots;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array<string,mixed>
+     */
+    private function normalizePairBlendAssetRow(array $row): array
+    {
+        $pairKey = strtoupper(trim((string) ($row['pair_key'] ?? '')));
+        $dimensions = $row['dimensions'] ?? explode('_', $pairKey);
+
         return [
-            'I_A' => [
-                'pair_label' => '理性的创造者',
-                'short_label' => '理解之后再表达',
-                'chemistry' => '你的创造力不是无根的灵感，而是建立在理解、证据和结构之上。你最享受的时刻，往往是把一个混乱、晦涩、难懂的系统，转化为一个优雅、清楚、别人能理解的模型、文字、图或方案。',
-                'positive_value' => '这组组合能让复杂问题变得可理解、可表达、可传播。你不只是想研究，也想让答案有形式、有质感。',
-                'real_world_cost' => '如果工作只要快速产出而不允许深入，你会觉得表达空洞；如果工作只允许研究而没有表达出口，你会觉得成果被困住。',
-                'common_misread' => '别人可能以为你只是创意型，或者只是研究型。其实你更像在用理解支撑表达。',
-                'activities_to_validate' => ['把一篇复杂文章或报告改写成 5 句话', '设计一个小图或结构标题'],
+            'content_version' => (string) ($row['asset_version'] ?? 'pair_blend_15_pairs_v1.zh-CN'),
+            'source_status' => 'reviewed_content_copy',
+            'review_status' => 'content_review',
+            'evidence_level' => 'expert_reviewed',
+            'content_status' => 'authored',
+            'applicable_form_codes' => $row['applicable_form_codes'] ?? ['riasec_60', 'riasec_140'],
+            'applicable_profile_shapes' => $row['applicable_profile_shapes'] ?? ['clear_code', 'blended_code', 'near_tie'],
+            'applicable_quality_states' => $row['applicable_quality_states'] ?? ['normal', 'caution'],
+            'applicable_dimensions' => is_array($dimensions) ? array_values($dimensions) : explode('_', $pairKey),
+            'pair_label' => (string) ($row['pair_label'] ?? ''),
+            'short_label' => (string) ($row['short_label'] ?? ''),
+            'chemistry' => (string) ($row['chemistry'] ?? ''),
+            'positive_value' => (string) ($row['positive_value'] ?? ''),
+            'real_world_cost' => (string) ($row['real_world_cost'] ?? ''),
+            'common_misread' => (string) ($row['common_misread'] ?? ''),
+            'activities_to_validate' => $row['activities_to_validate'] ?? [],
+            'micro_experiment' => (string) ($row['micro_experiment'] ?? ''),
+            'result_page_teaser' => (string) ($row['result_page_teaser'] ?? ''),
+            'deep_report_extension_hint' => (string) ($row['deep_report_extension_hint'] ?? ''),
+            'forbidden_claims' => $row['forbidden_claims'] ?? [
+                'personality_identity',
+                'career_match',
+                'ability_proof',
+                'success_prediction',
+                'job_fit',
             ],
-            'I_S' => [
-                'pair_label' => '深度的助人者',
-                'short_label' => '先理解根源，再支持别人',
-                'chemistry' => '你不太喜欢用空洞口号安慰人。真正想帮助别人时，你更倾向先研究问题的根源，再用结构化、可信的方式提供支持。你希望有用不是情绪热闹，而是让对方真的更清楚。',
-                'positive_value' => '这组组合能把助人建立在理解和证据之上。你可能擅长澄清问题，而不是只给泛泛建议。',
-                'real_world_cost' => '如果真实人的情绪和复杂需求过多，你可能被 S 消耗；如果帮助只停留在分析，没有真实反馈，S 又会得不到满足。',
-                'common_misread' => '别人可能以为你冷静到不关心人，其实你可能只是想先把问题看清楚再帮。',
-                'activities_to_validate' => ['找一个真实困扰', '写 5 个澄清问题，而不是直接给建议'],
-            ],
-            'A_S' => [
-                'pair_label' => '共情的表达者',
-                'short_label' => '让表达真正被人接住',
-                'chemistry' => '你的表达不是只为了好看。你更在意它能不能触动、解释、启发或支持别人。对你来说，一个作品、材料或方案如果没人因此被照亮，它就少了一层意义。',
-                'positive_value' => '这组组合能让表达更有人味，也让助人更有形式。你可能擅长把感受、知识或复杂体验翻译给真实的人。',
-                'real_world_cost' => '如果受众反馈混乱或情绪很重，你可能被消耗；如果工作只追求漂亮形式、没有真实对象，也会缺少意义。',
-                'common_misread' => '别人可能以为你只是情绪化或创意化，其实你可能非常在意表达能否产生真实帮助。',
-                'activities_to_validate' => ['做一段小讲解或一页材料', '给真实对象看，记录对方是否更清楚'],
-            ],
+            'required_boundaries' => $row['required_boundaries'] ?? $this->requiredBoundaries(),
+            'user_visible_boundary' => (string) ($row['user_visible_boundary'] ?? '这是兴趣组合解释，不是人格标签、能力证明或职业结论。'),
+            'fallback_behavior' => 'omit_module',
+            'frontend_fallback_allowed' => false,
         ];
     }
 
@@ -916,13 +966,11 @@ final class RiasecDeepCopySlotRegistry
      */
     private function authoredPairSlot(string $pairKey, array $content): array
     {
-        return array_merge($this->pairSlotBase($pairKey), [
-            'content_version' => 'riasec_pair_blend_copy_slots_v1',
-            'source_status' => 'reviewed_content_copy',
-            'review_status' => 'approved_for_staging',
-            'evidence_level' => 'expert_reviewed',
+        return array_merge($this->pairSlotBase($pairKey), $content, [
             'content_status' => 'authored',
-        ], $content);
+            'fallback_behavior' => 'omit_module',
+            'frontend_fallback_allowed' => false,
+        ]);
     }
 
     /**
