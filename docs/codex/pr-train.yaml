@@ -5908,3 +5908,47 @@ prs:
     human_review_required: false
     production_approval_required: false
     next_task: OPS-CI-CODESCAN-WEB-01
+
+  - id: OPS-RUNBOOK-HEALTHZ-01
+    repo: fap-api
+    depends_on:
+      - OPS-CI-CODESCAN-API-01
+    branch: codex/ops-runbook-healthz-01
+    base: main
+    title: "docs(ops): codify canonical healthz and release-only deploy policy"
+    name: "Canonical healthz and release-only deploy policy"
+    train_scope: ops_runbook_healthz
+    risk_level: L2
+    type: docs/ops PR
+    scope:
+      - Codify /api/healthz as the only canonical backend health probe path.
+      - Codify allowlist-only and internal healthz verification.
+      - Codify release-only deployment workspace requirements.
+      - Align deploy, observability, rollback, and triage docs.
+      - Keep runtime behavior unchanged.
+    allowed_paths:
+      - README_DEPLOY.md
+      - docs/04-ops/observability.md
+      - docs/04-ops/rollback-runbook.md
+      - docs/04-ops/runbook-triage.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change backend runtime behavior, routes, healthz access control, deploy scripts, or server configuration.
+      - Deploy production, unlock deploys, kill processes, or mutate servers.
+    validation:
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml"); puts "yaml ok"'
+      - ruby -e 'require "json"; JSON.parse(File.read("docs/codex/pr-train-state.json")); puts "json ok"'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: false
+    production_approval_required: false
+    next_task: OPS-RELEASE-WORKFLOW-01

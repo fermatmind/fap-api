@@ -2,6 +2,7 @@
 
 ## Healthz Endpoint
 - Canonical probe path: `GET /api/healthz`
+- There is no supported top-level `/healthz` production probe path.
 - Access policy:
   - production healthz is allowlist-only
   - requests from non-allowlisted public IPs may return `404` by design

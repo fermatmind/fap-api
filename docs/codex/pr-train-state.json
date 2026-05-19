@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T02:40:46Z",
+  "updated_at": "2026-05-19T04:02:03.272Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11934,5 +11934,56 @@
       }
     ],
     "next_pr": "OPS-CI-CODESCAN-WEB-01"
+  },
+  "OPS-RUNBOOK-HEALTHZ-01": {
+    "status": "in_progress",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/ops-runbook-healthz-01",
+    "base": "main",
+    "title": "docs(ops): codify canonical healthz and release-only deploy policy",
+    "depends_on": [
+      "OPS-CI-CODESCAN-API-01"
+    ],
+    "commit_sha": "818b49a891b30dc020921da3479cdc0550e6c62c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1477",
+    "checks": {
+      "local": {
+        "yaml_parse": "passed",
+        "json_parse": "passed",
+        "markdown_manual_review": "passed",
+        "git_diff_check": "passed",
+        "scope_validation": "passed"
+      },
+      "github": {}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-19T04:00:51.285Z",
+        "status": "in_progress",
+        "summary": "Started docs-only healthz and release-only deploy policy PR."
+      },
+      {
+        "at": "2026-05-19T04:01:15.170Z",
+        "status": "local_checks_passed",
+        "summary": "YAML/JSON parse, markdown manual review, git diff --check, and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-05-19T04:01:25.129Z",
+        "status": "committed",
+        "summary": "Committed 818b49a891b30dc020921da3479cdc0550e6c62c."
+      },
+      {
+        "at": "2026-05-19T04:02:03.272Z",
+        "status": "pr_opened",
+        "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1477."
+      }
+    ],
+    "next_pr": "OPS-RELEASE-WORKFLOW-01"
   }
 }

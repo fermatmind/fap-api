@@ -7,6 +7,8 @@
 3) Check deploy history (`v_deploy_events`) for recent changes.
 4) If needed, rollback or hotfix. Re-run healthz snapshot to confirm.
 
+Non-allowlisted public `404` on `/api/healthz` is expected and is not a healthz-red signal. The top-level `/healthz` path is not a supported production probe.
+
 ## Redis red: common causes
 
 - Missing PHP extension: phpredis not installed
