@@ -1,0 +1,74 @@
+{
+  "version": "chinese-claim-boundary-linter.v1",
+  "source_documents": [
+    "PR-RESEARCH-00",
+    "SEARCH-CHANNEL-QUEUE-00",
+    "CLAIM-LINT-00"
+  ],
+  "task": "CLAIM-LINT-00",
+  "forbidden_claim_classes": [
+    "诊断",
+    "确诊",
+    "治疗",
+    "治愈",
+    "真实智商",
+    "权威认证",
+    "精准推荐",
+    "最适合职业",
+    "岗位胜任力",
+    "招聘适配",
+    "职业成功率",
+    "AI 职业规划",
+    "心理疾病判断"
+  ],
+  "allowed_safer_wording": [
+    "自评筛查",
+    "非诊断",
+    "结果仅供参考",
+    "在线估测",
+    "置信区间",
+    "职业方向参考",
+    "探索建议",
+    "兴趣信号",
+    "工作方式倾向",
+    "snapshot-based support"
+  ],
+  "future_linter_classes": [
+    "blocked_claim",
+    "needs_review",
+    "allowed_safer_wording",
+    "neutral"
+  ],
+  "claim_boundaries": {
+    "riasec_full_recommendation_claims_allowed": false,
+    "big_five_full_recommendation_claims_allowed": false,
+    "career_decision_full_recommendation_claims_allowed": false,
+    "medical_diagnosis_claims_allowed": false,
+    "hiring_fit_claims_allowed": false,
+    "exact_iq_claims_allowed": false,
+    "guaranteed_career_outcome_claims_allowed": false
+  },
+  "blocked_page_eligibility_when_claim_unsafe": [
+    "sitemap",
+    "llms",
+    "search_channel_queue",
+    "baidu_push",
+    "indexnow",
+    "so360",
+    "sogou",
+    "shenma"
+  ],
+  "runtime_linter_activated_in_this_pr": false,
+  "frontend_runtime_copy_changed_in_this_pr": false,
+  "cms_content_mutated_in_this_pr": false,
+  "auto_publish_enabled_in_this_pr": false,
+  "sitemap_changed_in_this_pr": false,
+  "llms_changed_in_this_pr": false,
+  "url_submission_performed": false,
+  "production_write_execution": false,
+  "scheduler_enabled_in_this_pr": false,
+  "external_api_live_activation": false,
+  "env_edit_in_this_pr": false,
+  "metabase_deployed_in_this_pr": false,
+  "next_task": "CONTENT-OPS-01"
+}
