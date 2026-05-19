@@ -34,6 +34,9 @@ final class RiasecContentRegistrySlotContractTest extends TestCase
         $this->assertContains('140q_tension_copy', $slotKeys);
         $this->assertContains('low_quality_copy', $slotKeys);
         $this->assertContains('cautious_reading_copy', $slotKeys);
+        $this->assertContains('profile_shape_copy', $slotKeys);
+        $this->assertContains('top_code_confidence_copy', $slotKeys);
+        $this->assertContains('near_tie_alternate_code_copy', $slotKeys);
         $this->assertContains('structural_difference_copy', $slotKeys);
         $this->assertContains('aspirations_calibration_copy', $slotKeys);
         $this->assertContains('disagree_path_copy', $slotKeys);

@@ -1,0 +1,79 @@
+{
+  "asset_id": "profile_shape_copy_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-CN",
+  "scale_code": "RIASEC",
+  "review_status": "content_review_v7_3_final_preflight_candidate",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "profile_shapes": [
+    {
+      "shape": "clear_code",
+      "title": "主线索清楚",
+      "summary": "你可以先从三字母活动链进入结果，但不要把它读成固定身份。第二、第三维决定了这条活动链如何落地。",
+      "module_policy": "show_standard_chain_and_pair_blends"
+    },
+    {
+      "shape": "blended_code",
+      "title": "混合型结果",
+      "summary": "前两到三条兴趣线索都在参与结果。建议重点看 pair blend 和 Top3 chain，而不是只看第一个字母。",
+      "module_policy": "show_pair_blend_first"
+    },
+    {
+      "shape": "broad_profile",
+      "title": "广谱兴趣",
+      "summary": "多个维度接近时，系统不应强行给出单一路径。先用活动和小实验收窄：哪些任务让你更有能量，哪些只是看起来有吸引力。",
+      "module_policy": "hide_strong_code_claims"
+    },
+    {
+      "shape": "near_tie",
+      "title": "近似并列",
+      "summary": "字母顺序只是本次排序，不是身份高低。请同时阅读 alternate code 的组合解释，并用 1–2 个真实任务验证。",
+      "module_policy": "show_alternate_code_boundary"
+    },
+    {
+      "shape": "low_quality",
+      "title": "谨慎阅读",
+      "summary": "这次结果不适合输出强结论。页面应先保护用户：弱化三字码、隐藏职业例子、建议重测或仅看六维。",
+      "module_policy": "show_minimal_dimension_only"
+    },
+    {
+      "shape": "low_clarity",
+      "title": "低清晰度",
+      "summary": "结果并非无效，但主线不够清楚。更适合看候选活动，而不是马上形成方向判断。",
+      "module_policy": "show_candidate_activities"
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "v5_editorial_note": "Profile-shape copy reviewed for clear, blended, broad, near-tie, and low-quality reading without identity framing."
+}

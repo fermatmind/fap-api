@@ -255,6 +255,10 @@ final class RiasecPublicProjectionService
             }
         }
 
+        foreach ($this->selectedInterpretationStateCopySlots((array) ($projection['interpretation_state'] ?? []), $qualityState) as $slot) {
+            $this->appendRenderableSlot($slots, $slot, 'result_reading_boundary', $modulePolicy, $locale, 'collapsed');
+        }
+
         if ($formCode === 'riasec_140' && ! in_array($qualityState, ['low_quality', 'retake_recommended'], true)) {
             foreach ($this->deepCopySlots->structuralDifferenceSlots() as $slot) {
                 $this->appendRenderableSlot($slots, $slot, 'structural_difference', $modulePolicy, $locale, 'collapsed');
@@ -435,6 +439,64 @@ final class RiasecPublicProjectionService
     }
 
     /**
+     * @param  array<string,mixed>  $interpretationState
+     * @return list<array<string,mixed>>
+     */
+    private function selectedInterpretationStateCopySlots(array $interpretationState, string $qualityState): array
+    {
+        $slots = [];
+        $profileShape = (string) ($interpretationState['profile_shape'] ?? '');
+        if ($profileShape !== '') {
+            $slots[] = $this->deepCopySlots->resolveInterpretationStateCopySlot('profile_shape_copy', $profileShape);
+        }
+
+        $confidenceState = $this->confidenceCopyState($interpretationState, $qualityState);
+        if ($confidenceState !== null) {
+            $slots[] = $this->deepCopySlots->resolveInterpretationStateCopySlot('top_code_confidence_copy', $confidenceState);
+        }
+
+        $nearTieState = (string) data_get($interpretationState, 'near_tie_state.state', 'none');
+        if ($qualityState !== 'low_quality' && $nearTieState !== '' && $nearTieState !== 'none') {
+            $slots[] = $this->deepCopySlots->resolveInterpretationStateCopySlot('near_tie_alternate_code_copy', $nearTieState);
+            if ((bool) data_get($interpretationState, 'alternate_code.show', false)) {
+                $slots[] = $this->deepCopySlots->resolveInterpretationStateCopySlot('near_tie_alternate_code_copy', 'alternate_code_available');
+            }
+        }
+
+        return array_values(array_filter(
+            $slots,
+            static fn (array $slot): bool => ($slot['content_status'] ?? null) === 'authored'
+        ));
+    }
+
+    /**
+     * @param  array<string,mixed>  $interpretationState
+     */
+    private function confidenceCopyState(array $interpretationState, string $qualityState): ?string
+    {
+        $profileShape = (string) ($interpretationState['profile_shape'] ?? '');
+        if ($qualityState === 'low_quality' || in_array($profileShape, ['low_quality', 'low_clarity'], true)) {
+            return 'low_clarity';
+        }
+        if ($profileShape === 'near_tie') {
+            return 'near_tie';
+        }
+        if ($profileShape === 'broad_profile') {
+            return 'broad_profile';
+        }
+
+        $level = (string) data_get($interpretationState, 'top_code_confidence.level', '');
+        if (in_array($level, ['high', 'medium_high'], true)) {
+            return 'high_confidence';
+        }
+        if (in_array($level, ['medium', 'low'], true)) {
+            return 'moderate_confidence';
+        }
+
+        return null;
+    }
+
+    /**
      * @param  array<string,mixed>  $slot
      * @return array<string,mixed>
      */
@@ -473,6 +535,9 @@ final class RiasecPublicProjectionService
             'when_not_to_overread',
             'free_page_teaser',
             'deep_report_extension',
+            'label',
+            'copy',
+            'module_policy',
             'example_question',
             'task_activity_card',
             'environment_card',
@@ -519,6 +584,9 @@ final class RiasecPublicProjectionService
                 'slot_name' => $slot['slot_name'] ?? null,
                 'layer_state' => $slot['layer_state'] ?? null,
                 'quality_state' => $slot['quality_state'] ?? null,
+                'profile_shape' => $slot['profile_shape'] ?? null,
+                'confidence_state' => $slot['confidence_state'] ?? null,
+                'near_tie_copy_state' => $slot['near_tie_copy_state'] ?? null,
                 'structural_difference_state' => $slot['structural_difference_state'] ?? null,
                 'aspirations_state' => $slot['aspirations_state'] ?? null,
                 'disagree_state' => $slot['disagree_state'] ?? null,

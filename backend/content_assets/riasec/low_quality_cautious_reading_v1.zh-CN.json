@@ -1,0 +1,117 @@
+{
+  "asset_id": "low_quality_cautious_reading_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-CN",
+  "scale_code": "RIASEC",
+  "review_status": "content_review_v7_3_final_preflight_candidate",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "global_message": "这次结果请谨慎阅读。它可以作为六维兴趣草图，帮助你先观察哪些活动让你愿意靠近、哪些活动明显消耗；暂时不适合展开强组合解释、职业场景例子或深度承接。",
+  "states": [
+    {
+      "quality_state": "normal",
+      "visible_modules": [
+        "hero",
+        "dimension_map",
+        "pair_blend",
+        "activity_explorer",
+        "140q_cta"
+      ],
+      "copy": "本次结果可以作为职业兴趣探索入口。"
+    },
+    {
+      "quality_state": "caution",
+      "visible_modules": [
+        "hero",
+        "dimension_map",
+        "pair_blend_collapsed",
+        "activity_explorer_limited"
+      ],
+      "copy": "本次结果可读，但建议把强结论降级为“待验证线索”。"
+    },
+    {
+      "quality_state": "low_quality",
+      "visible_modules": [
+        "dimension_map_only",
+        "retake_guidance"
+      ],
+      "copy": "先暂缓强调三字母 Code，只看六维初步线索，并建议稍后重测。"
+    },
+    {
+      "quality_state": "minimal_60q",
+      "visible_modules": [
+        "dimension_map",
+        "method_boundary"
+      ],
+      "copy": "60Q 当前只在明确缺题或完成度不足时强降级；其他情况只做谨慎提示。"
+    },
+    {
+      "quality_state": "retake_recommended",
+      "visible_modules": [
+        "retake_card",
+        "safe_boundary"
+      ],
+      "copy": "重测建议是为了获得更稳定的兴趣线索，不是为了追求某个“好看结果”。"
+    }
+  ],
+  "copy_slots": [
+    {
+      "slot": "top_notice",
+      "text": "本次结果需要谨慎阅读。你可以先保留它作为初步兴趣线索。"
+    },
+    {
+      "slot": "retake_guidance",
+      "text": "如果你当时注意力分散、赶时间或对题目想象不清，可以稍后在状态稳定时重测。"
+    },
+    {
+      "slot": "module_downgrade",
+      "text": "页面会减少强解释和职业场景展示，避免把不稳定结果读成方向判断。"
+    },
+    {
+      "slot": "share_pdf_note",
+      "text": "谨慎阅读结果在分享和 PDF 中应默认展示边界提示，不展示强活动链。"
+    }
+  ],
+  "upsell_140q_allowed": false,
+  "user_blame_allowed": false,
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "commercial_operations_internal_notes": {
+    "trust_policy": "不责备用户，不推销 140Q，不输出强结论",
+    "recommended_next_step": "休息后重测，或只做一个低风险活动检查",
+    "hidden_or_collapsed_modules": [
+      "strong_pair_chain",
+      "occupation_examples",
+      "deep_report_cta"
+    ]
+  }
+}
