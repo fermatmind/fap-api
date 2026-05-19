@@ -1,0 +1,214 @@
+{
+  "version": "url-truth-mvp-dashboard-spec.v1",
+  "source_documents": [
+    "SEO-DASH-PROD-03B-R2",
+    "SEO-DASH-PROD-03C",
+    "SEO-DASH-PROD-03D-R2",
+    "SEO-DASH-PROD-04A",
+    "SEO-DASH-PROD-04B"
+  ],
+  "task": "SEO-DASH-PROD-04B",
+  "purpose": "Define the URL Truth MVP dashboard and sanitized view plan for current seo_intel canary state.",
+  "current_production_state": {
+    "seo_urls": 7,
+    "seo_url_entities": 7,
+    "seo_issue_queue": 5,
+    "seo_gsc_daily": 0,
+    "seo_baidu_push_logs": 0,
+    "seo_indexnow_submissions": 0,
+    "seo_domestic_submission_logs": 0,
+    "seo_crawler_logs_daily": 0,
+    "seo_event_funnel_daily": 0,
+    "seo_revenue_daily": 0,
+    "seo_cluster_daily": 0,
+    "seo_consent_daily": 0
+  },
+  "safe_source_authorities": [
+    "backend_public_surface",
+    "scale_catalog"
+  ],
+  "dashboard_groups": [
+    {
+      "name": "URL Truth Overview",
+      "cards": [
+        "total_url_count",
+        "total_url_entity_mapping_count",
+        "count_by_page_entity_type",
+        "count_by_locale",
+        "count_by_indexability_state",
+        "count_by_source_authority",
+        "first_seen_last_seen_range"
+      ]
+    },
+    {
+      "name": "Issue Queue Overview",
+      "cards": [
+        "issue_count_by_issue_type",
+        "issue_count_by_severity",
+        "issue_count_by_status",
+        "issue_count_by_source_table_family",
+        "newest_issue_observation_timestamp"
+      ]
+    },
+    {
+      "name": "Safety Checks",
+      "cards": [
+        "forbidden_source_authority_count",
+        "private_flow_count",
+        "private_flow_indexable_count",
+        "unsupported_page_entity_type_count",
+        "missing_url_entity_mapping_count",
+        "missing_or_unknown_indexability_state_count",
+        "missing_lastmod_for_indexable_url_count"
+      ]
+    },
+    {
+      "name": "Collector Empty States",
+      "cards": [
+        "seo_gsc_daily_rows",
+        "seo_baidu_push_log_rows",
+        "seo_indexnow_submission_rows",
+        "seo_domestic_submission_rows",
+        "seo_crawler_log_daily_rows",
+        "seo_event_funnel_rows",
+        "seo_revenue_rows",
+        "seo_cluster_rows",
+        "seo_consent_rows"
+      ]
+    }
+  ],
+  "sanitized_views": [
+    {
+      "name": "seo_v_url_truth_mvp_overview",
+      "source_tables": [
+        "seo_urls",
+        "seo_url_entities"
+      ],
+      "exposed_fields": [
+        "locale",
+        "page_entity_type",
+        "indexability_state",
+        "source_authority",
+        "url_count",
+        "entity_mapping_count",
+        "first_seen_at",
+        "last_seen_at"
+      ]
+    },
+    {
+      "name": "seo_v_url_truth_authority_distribution",
+      "source_tables": [
+        "seo_urls"
+      ],
+      "exposed_fields": [
+        "source_authority",
+        "page_entity_type",
+        "url_count"
+      ]
+    },
+    {
+      "name": "seo_v_url_truth_indexability_distribution",
+      "source_tables": [
+        "seo_urls"
+      ],
+      "exposed_fields": [
+        "indexability_state",
+        "page_entity_type",
+        "locale",
+        "url_count"
+      ]
+    },
+    {
+      "name": "seo_v_url_truth_private_flow_safety",
+      "source_tables": [
+        "seo_urls"
+      ],
+      "exposed_fields": [
+        "page_entity_type",
+        "indexability_state",
+        "private_flow_count",
+        "private_flow_indexable_count"
+      ]
+    },
+    {
+      "name": "seo_v_issue_queue_mvp_overview",
+      "source_tables": [
+        "seo_issue_queue"
+      ],
+      "exposed_fields": [
+        "issue_type",
+        "severity",
+        "status",
+        "source_table_family",
+        "issue_count",
+        "newest_observed_at"
+      ]
+    },
+    {
+      "name": "seo_v_collector_empty_state_status",
+      "source_tables": [
+        "seo_gsc_daily",
+        "seo_baidu_push_logs",
+        "seo_indexnow_submissions",
+        "seo_domestic_submission_logs",
+        "seo_crawler_logs_daily",
+        "seo_event_funnel_daily",
+        "seo_revenue_daily",
+        "seo_cluster_daily",
+        "seo_consent_daily"
+      ],
+      "exposed_fields": [
+        "collector_table",
+        "row_count",
+        "write_canary_status"
+      ]
+    }
+  ],
+  "forbidden_sources": [
+    "business_db",
+    "cms_write_tables",
+    "node2_local_db",
+    "node2_local_laravel",
+    "frontend_fallback",
+    "static_sitemap_fallback",
+    "static_llms_fallback",
+    "gsc_live",
+    "baidu_live",
+    "indexnow_live",
+    "production_crawler_logs"
+  ],
+  "forbidden_fields": [
+    "email",
+    "raw_email",
+    "order_no",
+    "raw_order_no",
+    "attempt_id",
+    "raw_attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "cookie",
+    "raw_cookie",
+    "raw_ip",
+    "raw_user_agent",
+    "raw_payload",
+    "payment_payload",
+    "provider_payload",
+    "token",
+    "api_key",
+    "secret"
+  ],
+  "metabase_deployed_in_this_pr": false,
+  "metabase_connection_created_in_this_pr": false,
+  "business_db_views_created_in_this_pr": false,
+  "sql_views_created_in_this_pr": false,
+  "credentials_added_in_this_pr": false,
+  "env_edit_in_this_pr": false,
+  "production_write_execution": false,
+  "scheduler_enabled_in_this_pr": false,
+  "external_api_live_activation": false,
+  "url_submission_performed": false,
+  "production_crawler_log_read": false,
+  "research_publish_in_this_pr": false,
+  "pseo_generation_in_this_pr": false,
+  "next_task": "PR-RESEARCH-00"
+}
