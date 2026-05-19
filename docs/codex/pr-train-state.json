@@ -13154,7 +13154,7 @@
     "merge_commit": "539c68f51feb112156c3840cc6ef013843272538"
   },
   "RIASEC-FULL-CONTENT-PACK-05-PREFLIGHT": {
-    "status": "local_validation_passed",
+    "status": "pr_opened_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-05-preflight",
@@ -13163,8 +13163,8 @@
     "depends_on": [
       "RIASEC-FULL-CONTENT-PACK-08"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "ab15193146f319d7cb9eba2adb37be65dc65eba4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1496",
     "checks": {
       "pack_08_ledger_reconciliation": {
         "status": "pass",
@@ -13206,6 +13206,10 @@
       "scope_validation": {
         "status": "pass",
         "summary": "Changed files are limited to PACK-08 ledger reconciliation, PACK-05 manifest/state registration, preflight fixture, preflight PHPUnit test, and preflight docs; no runtime import or occupation examples."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "summary": "PR #1496 opened; GitHub required checks pending."
       }
     },
     "failure_reason": null,
@@ -13223,6 +13227,11 @@
         "at": "2026-05-19T22:42:55Z",
         "status": "local_validation_passed",
         "summary": "PACK-05-PREFLIGHT validated V7.3 activity/task fixture and recorded CONDITIONAL GO for PACK-05 import; no runtime content import performed."
+      },
+      {
+        "at": "2026-05-19T22:43:57Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1496 for PACK-05-PREFLIGHT. GitHub checks pending."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-05"
