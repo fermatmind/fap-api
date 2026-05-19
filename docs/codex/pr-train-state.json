@@ -11897,7 +11897,15 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+      {
+        "title": "CodeQL PHP language unsupported by GitHub CodeQL action",
+        "introduced_by_current_pr": false,
+        "scope_impact": "The code scanning implementation uses Semgrep SARIF upload instead of CodeQL language analysis for PHP.",
+        "blocks_merge": false,
+        "evidence": "GitHub Actions log: Did not recognize the following languages: php."
+      }
+    ],
     "history": [
       {
         "at": "2026-05-19T03:37:17.996Z",
@@ -11918,6 +11926,11 @@
         "at": "2026-05-19T03:39:20.836Z",
         "status": "pr_open_github_checks_pending",
         "summary": "Opened PR #1476 for fap-api CodeQL code scanning enablement. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-19T03:41:59.660Z",
+        "status": "github_checks_failed_scoped_fix",
+        "summary": "CodeQL does not support PHP in this runner. Replaced the workflow with Semgrep SARIF upload to produce GitHub code scanning analysis for fap-api without runtime changes."
       }
     ],
     "next_pr": "OPS-CI-CODESCAN-WEB-01"

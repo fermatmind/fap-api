@@ -5877,12 +5877,12 @@ prs:
     branch: codex/ops-ci-codescan-api-01
     base: main
     title: "chore(ci): enable code scanning for fap-api"
-    name: "Enable CodeQL code scanning for fap-api"
+    name: "Enable GitHub code scanning for fap-api"
     train_scope: ops_ci_codescan_api
     risk_level: L2
     type: ci/governance PR
     scope:
-      - Add GitHub CodeQL code scanning workflow for fap-api.
+      - Add GitHub code scanning workflow for fap-api using SARIF upload.
       - Produce analyzable GitHub code scanning results on pull requests and main.
       - Keep application runtime behavior unchanged.
     allowed_paths:
