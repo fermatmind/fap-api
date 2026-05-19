@@ -13518,7 +13518,7 @@
     "next_pr": "RIASEC-FULL-CONTENT-PACK-06"
   },
   "RIASEC-FULL-CONTENT-PACK-06": {
-    "status": "pr_opened_github_checks_pending",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-06",
@@ -13528,7 +13528,7 @@
       "RIASEC-FULL-CONTENT-PACK-06-PREFLIGHT",
       "RIASEC-FULL-CONTENT-PACK-05"
     ],
-    "commit_sha": "41b9fc7a99e868628998bb1456739815641af9d8",
+    "commit_sha": "436a0ab4df55f3f9fbf57228d2b0bb63909bff89",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1500",
     "checks": {
       "dependency_gate": {
@@ -13569,14 +13569,14 @@
         "summary": "Changed files are limited to the PACK-06 occupation examples asset import, ActivityExplorer wiring, targeted tests, and PR train ledger reconciliation."
       },
       "github_required_checks": {
-        "status": "pending",
-        "summary": "PR #1500 opened; GitHub required checks pending."
+        "status": "pass",
+        "summary": "GitHub required checks passed before merge for PR #1500."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-19T23:40:38Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "history": [
       {
@@ -13593,6 +13593,113 @@
         "at": "2026-05-19T23:33:39Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1500 for PACK-06 import. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-19T23:55:28Z",
+        "status": "merged",
+        "summary": "Reconciled PACK-06 after GitHub PR #1500 merged and origin/main contained merge commit 436a0ab4df55f3f9fbf57228d2b0bb63909bff89."
+      }
+    ]
+  },
+  "RIASEC-FULL-CONTENT-PACK-09-PREFLIGHT": {
+    "status": "local_validation_passed",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-09-preflight",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-09-PREFLIGHT: Aspirations and disagree path asset preflight",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-08",
+      "RIASEC-FULL-CONTENT-PACK-06"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "pack_06_ledger_reconciliation": {
+        "status": "pass",
+        "summary": "PACK-06 reconciled to merged before PACK-09-PREFLIGHT registration."
+      },
+      "dependency_gate": {
+        "status": "pass",
+        "summary": "PACK-06 and PACK-08 merge commits are present in origin/main."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test tests/Unit/Services/Riasec/RiasecAspirationsDisagreeAssetPreflightTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php --no-ansi",
+        "summary": "7 tests passed; V7.3 aspirations/disagree fixtures parsed, non-mutation guards validated, visible forbidden claims and technical keys rejected, and overlay public-surface exclusion verified."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecAspirationsDisagreeAssetPreflightTest.php"
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "summary": "pr-train-state.json parsed, pr-train.yaml parsed, aspirations JSONL parsed with 70 records, and disagree JSONL parsed with 45 records."
+      },
+      "forbidden_claim_scan": {
+        "status": "pass",
+        "summary": "Visible aspirations/disagree fields scan found forbidden_user_claim=0; boundary terms are confined to negated boundary copy or non-user-facing governance fields."
+      },
+      "technical_key_exposure_scan": {
+        "status": "pass",
+        "summary": "Visible aspirations/disagree fields scan found technical_key_exposure=0."
+      },
+      "preflight_decision": {
+        "status": "conditional_go",
+        "summary": "PACK-09 import can proceed after merge if it normalizes V7.3 asset records into backend-owned slots/selectors and adds explicit public-surface false guards before runtime emission."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "summary": "Changed files are limited to PACK-06 ledger reconciliation, PACK-09 manifest/state registration, preflight fixtures, preflight PHPUnit test, and preflight docs; no runtime import."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-19T23:55:28Z",
+        "status": "registered",
+        "summary": "Registered PACK-09-PREFLIGHT for aspirations/disagree path asset validation; no runtime import in this PR."
+      },
+      {
+        "at": "2026-05-19T23:59:31Z",
+        "status": "local_validation_passed",
+        "summary": "PACK-09-PREFLIGHT validated V7.3 aspirations/disagree fixtures and recorded CONDITIONAL GO for PACK-09 import; no runtime content import performed."
+      }
+    ],
+    "next_pr": "RIASEC-FULL-CONTENT-PACK-09"
+  },
+  "RIASEC-FULL-CONTENT-PACK-09": {
+    "status": "registered_pending_dependency",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-09",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-09: Import backend-authoritative aspirations and disagree path assets",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-09-PREFLIGHT",
+      "RIASEC-FULL-CONTENT-PACK-08"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-19T23:55:28Z",
+        "status": "registered_pending_dependency",
+        "summary": "Registered PACK-09 import; execution allowed only after PACK-09-PREFLIGHT returns GO or CONDITIONAL GO and merges cleanly."
       }
     ]
   }
