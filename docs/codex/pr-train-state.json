@@ -5457,8 +5457,8 @@
         "do not weaken final live acceptance",
         "do not mark restricted runtime shells as human reviewed or strong-claim surfaces"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "510876e0",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1490",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -6172,7 +6172,7 @@
       "repo": "fap-api",
       "branch": "codex/repair-progressive-runtime-candidate-pool-selection-1",
       "title": "fix(api): consume progressive delta slugs in runtime candidate pool",
-      "status": "in_progress",
+      "status": "local_checks_passed",
       "depends_on": [
         "REPAIR-PROGRESSIVE-READINESS-OCCUPATION-AWARE-SELECTION-1"
       ],
@@ -12226,7 +12226,7 @@
       "next_pr": "OPS-PORTAL-SEO-03"
     },
     "OPS-PORTAL-SEO-03": {
-      "status": "in_progress",
+      "status": "merged",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/ops-portal-seo-03",
@@ -12235,11 +12235,68 @@
       "depends_on": [
         "OPS-PORTAL-SEO-02"
       ],
+      "commit_sha": "66df9a027ab399a1f0c2215407805030b9730119",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1489",
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_seo_intel_ops_portal_seo_route_shell": "passed",
+          "php_artisan_test_filter_seo_intel": "passed",
+          "php_artisan_route_list": "passed",
+          "pint_test": "passed",
+          "json_validation": "passed",
+          "yaml_validation": "passed",
+          "git_diff_check": "passed",
+          "scope_validation": "passed"
+        },
+        "github": {
+          "status": "pass_no_required_checks_reported",
+          "mergeStateStatus": "CLEAN"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": "2026-05-19T20:23:32Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-19T20:18:53Z",
+          "status": "in_progress",
+          "summary": "Started authenticated Filament Ops /ops/seo route shell PR. Scope excludes Metabase iframe/proxy/public exposure, live Metabase API calls, live seo_intel queries, DNS/CDN/OpenResty/Nginx changes, env edits, deploy, network changes, datasource changes, dashboards, collector writes, scheduler activation, live search APIs, URL submission, crawler log reads, Research publish, pSEO, sitemap changes, and llms changes."
+        },
+        {
+          "at": "2026-05-19T20:24:30Z",
+          "status": "local_checks_passed",
+          "summary": "Focused Ops Portal SEO route shell test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
+        },
+        {
+          "at": "2026-05-19T20:28:00Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1489. GitHub checks pending."
+        },
+        {
+          "at": "2026-05-19T20:23:32Z",
+          "status": "merged",
+          "summary": "Merged PR #1489 with squash merge commit 66df9a027ab399a1f0c2215407805030b9730119. GitHub reported mergeStateStatus=CLEAN and no required checks; remote branch was deleted and local main synced."
+        }
+      ],
+      "next_pr": "OPS-PORTAL-SEO-04"
+    },
+    "OPS-PORTAL-SEO-04": {
+      "status": "in_progress",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "branch": "codex/ops-portal-seo-04",
+      "base": "main",
+      "title": "docs(seo-intel): add private Metabase access bridge contract",
+      "depends_on": [
+        "OPS-PORTAL-SEO-03"
+      ],
       "commit_sha": null,
       "pr_url": null,
       "checks": {
         "local": {
-          "php_artisan_test_filter_seo_intel_ops_portal_seo_route_shell": "passed",
+          "php_artisan_test_filter_seo_intel_ops_portal_seo_private_access_bridge": "passed",
           "php_artisan_test_filter_seo_intel": "passed",
           "php_artisan_route_list": "passed",
           "pint_test": "passed",
@@ -12257,22 +12314,22 @@
       "sidecar_issues": [],
       "history": [
         {
-          "at": "2026-05-19T20:18:53Z",
+          "at": "2026-05-19T20:24:01Z",
           "status": "in_progress",
-          "summary": "Started authenticated Filament Ops /ops/seo route shell PR. Scope excludes Metabase iframe/proxy/public exposure, live Metabase API calls, live seo_intel queries, DNS/CDN/OpenResty/Nginx changes, env edits, deploy, network changes, datasource changes, dashboards, collector writes, scheduler activation, live search APIs, URL submission, crawler log reads, Research publish, pSEO, sitemap changes, and llms changes."
+          "summary": "Started docs/generated/test-only private Metabase access bridge contract PR. Scope excludes actual proxy, Metabase service changes, DNS/CDN/OpenResty/Nginx changes, env edits, deploy, network changes, security group changes, RDS whitelist changes, datasource changes, dashboards, collector writes, scheduler activation, live search APIs, URL submission, crawler log reads, Research publish, and pSEO."
         },
         {
-          "at": "2026-05-19T20:24:30Z",
+          "at": "2026-05-19T20:30:00Z",
           "status": "local_checks_passed",
-          "summary": "Focused Ops Portal SEO route shell test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
+          "summary": "Focused private Metabase access bridge contract test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff --check, and allowed-path scope validation passed."
         },
         {
-          "at": "2026-05-19T20:28:00Z",
+          "at": "2026-05-19T20:33:00Z",
           "status": "pr_opened_github_checks_pending",
-          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1489. GitHub checks pending."
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1490. GitHub checks pending."
         }
       ],
-      "next_pr": "OPS-PORTAL-SEO-04"
+      "next_pr": "OPS-PORTAL-SEO-05"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
