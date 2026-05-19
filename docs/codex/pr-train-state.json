@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T15:16:05Z",
+  "updated_at": "2026-05-19T15:17:24Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -11970,7 +11970,7 @@
       ]
     },
     "PR-RESEARCH-03": {
-      "status": "local_checks_passed",
+      "status": "pr_opened_github_checks_pending",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/pr-research-03",
@@ -11987,8 +11987,8 @@
           "status": "merged"
         }
       },
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "de16dbc701404f0d4297d789e906627bb439b2a7",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1482",
       "checks": {
         "local": {
           "php_artisan_test_filter_seo_intel_research_seo_geo_search_channel_contract": "passed",
@@ -12001,7 +12001,10 @@
           "git_diff_cached_check": "passed",
           "scope_validation": "passed"
         },
-        "github": {}
+        "github": {
+          "status": "pending",
+          "mergeStateStatus": "UNSTABLE"
+        }
       },
       "failure_reason": null,
       "merged_at": null,
@@ -12018,6 +12021,11 @@
           "at": "2026-05-19T15:16:05Z",
           "status": "local_checks_passed",
           "summary": "Focused Research SEO/GEO/Search Channel contract test, full SeoIntel filter, route list, Pint, JSON/YAML validation, git diff checks, and allowed-path scope validation passed."
+        },
+        {
+          "at": "2026-05-19T15:17:24Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1482. GitHub checks pending."
         }
       ],
       "next_pr": "RESEARCH-PUBLISH-READINESS-00"
