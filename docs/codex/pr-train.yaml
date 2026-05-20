@@ -7432,3 +7432,56 @@ prs:
       github_checks_required: true
       squash: true
       auto_merge: true
+
+  - id: SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00
+    repo: fap-api
+    depends_on:
+      - RESEARCH-PUBLISH-02-FIX
+    branch: codex/seo-intel-two-stage-url-truth-handoff-pr-00
+    base: main
+    title: "feat(seo-intel): add two-stage URL Truth handoff"
+    name: "Two-stage Research URL Truth handoff"
+    train_scope: seo_intel_research_publish_observation
+    risk_level: L2
+    type: backend code/docs/test PR
+    scope:
+      - Add a controlled Research URL Truth handoff command so Tencent fap-api-prod exports dry-run/no-write candidate JSON only.
+      - Add Aliyun runner-side JSON validation for research_report/backend_cms candidates before any bounded write.
+      - Allow explicit, SHA-confirmed bounded write only to seo_urls and seo_url_entities.
+      - Preserve no scheduler, no external search submission, no crawler log read, no business DB, no Node2, no Metabase mutation, and no cross-cloud private network change.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php
+      - backend/app/Services/SeoIntel/UrlTruthHandoffArtifact.php
+      - backend/app/Services/SeoIntel/UrlTruthInventoryRecordWriter.php
+      - backend/app/Services/SeoIntel/Collectors/UrlTruthInventoryCollector.php
+      - backend/tests/Feature/SeoIntel/SeoIntelTwoStageUrlTruthHandoffTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/seo-intel-two-stage-url-truth-handoff.md
+      - backend/docs/seo/generated/seo-intel-two-stage-url-truth-handoff.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run collector production writes from this PR task.
+      - Enable scheduler.
+      - Submit URLs to search engines.
+      - Connect live GSC, Baidu, IndexNow, 360, Sogou, or Shenma.
+      - Read production crawler logs.
+      - Change sitemap or llms behavior.
+      - Edit env, deploy, change DNS/CDN/OpenResty/Nginx, security groups, RDS users, grants, or whitelists.
+      - Connect business DB, Tencent RDS, Node2 local DB, or Metabase business datasource.
+      - Touch fap-web.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelTwoStageUrlTruthHandoff
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:url-truth-handoff --export=/tmp/research-url-truth-handoff.json --dry-run --json --limit=20 --page-type=research_report
+      - cd backend && php artisan seo-intel:url-truth-handoff --import=/tmp/research-url-truth-handoff.json --dry-run --json --limit=20
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-intel-two-stage-url-truth-handoff.v1.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true

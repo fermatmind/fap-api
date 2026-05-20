@@ -8,7 +8,7 @@ use App\Services\SeoIntel\SeoIntelCollector;
 use App\Services\SeoIntel\SeoIntelCollectorResult;
 use App\Services\SeoIntel\Sources\UrlTruthInventorySource;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
-use Illuminate\Support\Facades\DB;
+use App\Services\SeoIntel\UrlTruthInventoryRecordWriter;
 use Illuminate\Support\Str;
 
 final class UrlTruthInventoryCollector implements SeoIntelCollector
@@ -126,7 +126,7 @@ final class UrlTruthInventoryCollector implements SeoIntelCollector
         $writesCommitted = false;
 
         if ($writesAttempted) {
-            $this->writeRecords($validRecords);
+            (new UrlTruthInventoryRecordWriter)->write($validRecords);
             $writesCommitted = true;
         }
 
@@ -222,63 +222,6 @@ final class UrlTruthInventoryCollector implements SeoIntelCollector
     public function allowedSourceAuthorities(): array
     {
         return $this->stringList(config('seo_intel.url_truth_inventory.allowed_source_authorities', []));
-    }
-
-    /**
-     * @param  list<UrlTruthInventoryRecord>  $records
-     */
-    private function writeRecords(array $records): void
-    {
-        $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
-        $now = now();
-
-        foreach ($records as $record) {
-            $hash = $record->canonicalUrlHash();
-
-            $connection->table('seo_urls')->updateOrInsert(
-                [
-                    'canonical_url_hash' => $hash,
-                    'locale' => $record->locale,
-                ],
-                [
-                    'canonical_url' => $record->canonicalUrl,
-                    'page_entity_type' => $record->pageEntityType,
-                    'entity_id_or_slug' => $record->entityIdOrSlug,
-                    'cluster' => $record->cluster,
-                    'source_authority' => $record->sourceAuthority,
-                    'indexability_state' => $record->indexabilityState,
-                    'lastmod_at' => $record->lastmodAt,
-                    'lastmod_source' => $record->lastmodSource,
-                    'is_private_flow' => false,
-                    'first_seen_at' => $now,
-                    'last_seen_at' => $now,
-                    'metadata_json' => json_encode($record->metadata, JSON_THROW_ON_ERROR),
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ]
-            );
-
-            if ($record->entityIdOrSlug === null || $record->entityIdOrSlug === '') {
-                continue;
-            }
-
-            $connection->table('seo_url_entities')->updateOrInsert(
-                [
-                    'canonical_url_hash' => $hash,
-                    'locale' => $record->locale,
-                    'page_entity_type' => $record->pageEntityType,
-                    'entity_id_or_slug' => $record->entityIdOrSlug,
-                ],
-                [
-                    'entity_source' => $record->entitySource,
-                    'authority_status' => $record->authorityStatus,
-                    'source_updated_at' => $record->sourceUpdatedAt,
-                    'attributes_json' => json_encode($record->attributes, JSON_THROW_ON_ERROR),
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ]
-            );
-        }
     }
 
     /**

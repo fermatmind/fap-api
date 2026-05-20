@@ -1,0 +1,80 @@
+{
+  "schema_version": "seo-intel-two-stage-url-truth-handoff.v1",
+  "task": "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00",
+  "collector": "url_truth_inventory",
+  "handoff_artifact_schema": "seo-intel-url-truth-handoff.v1",
+  "source_environment": {
+    "role": "candidate_export_only",
+    "allowed_mode": "dry_run_no_write",
+    "writes_allowed": false,
+    "external_api_calls_allowed": false,
+    "search_submission_allowed": false,
+    "crawler_log_read_allowed": false
+  },
+  "runner_environment": {
+    "role": "validate_then_bounded_write_only",
+    "requires_artifact_sha256_confirmation": true,
+    "write_requires_explicit_flags": true,
+    "target_tables": [
+      "seo_urls",
+      "seo_url_entities"
+    ]
+  },
+  "allowed_candidates": {
+    "page_entity_type": "research_report",
+    "source_authority": "backend_cms",
+    "entity_source": "research_reports",
+    "authority_status": "published_approved",
+    "indexability_state": "indexable",
+    "route_families": [
+      "/en/research/{slug}",
+      "/zh/research/{slug}"
+    ],
+    "claim_safe_required": true,
+    "private_flow_allowed": false
+  },
+  "forbidden": {
+    "route_fragments": [
+      "/articles",
+      "/reports",
+      "turnover-rate-report"
+    ],
+    "candidate_states": [
+      "draft",
+      "private",
+      "noindex",
+      "claim_unsafe"
+    ],
+    "sources": [
+      "frontend_fallback",
+      "static_sitemap_fallback",
+      "static_llms_fallback",
+      "node2_local_laravel",
+      "node2_local_db"
+    ],
+    "tables": [
+      "seo_issue_queue",
+      "seo_gsc_daily",
+      "seo_baidu_push_logs",
+      "seo_indexnow_submissions",
+      "seo_domestic_submission_logs",
+      "seo_crawler_logs_daily",
+      "seo_event_funnel_daily",
+      "seo_revenue_daily",
+      "seo_cluster_daily",
+      "seo_consent_daily",
+      "orders",
+      "payment_events",
+      "attempts",
+      "results",
+      "users"
+    ]
+  },
+  "no_cross_cloud_private_networking_required": true,
+  "tencent_prod_direct_write_to_aliyun_rds_allowed": false,
+  "no_external_api": true,
+  "no_search_submission": true,
+  "no_crawler_log_read": true,
+  "no_scheduler": true,
+  "next_task": "RESEARCH-PUBLISH-02-RERUN"
+}
