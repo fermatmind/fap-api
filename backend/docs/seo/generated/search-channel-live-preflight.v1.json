@@ -1,0 +1,96 @@
+{
+  "version": "search-channel-live-preflight.v1",
+  "task": "SEARCH-CHANNEL-LIVE-01-PREFLIGHT",
+  "report_title": "SEARCH-CHANNEL-LIVE-READINESS-TRAIN Report",
+  "accepted_verified_current_state": {
+    "seo_urls": 9,
+    "seo_url_entities": 9,
+    "seo_issue_queue": 5,
+    "research_report_rows": 2,
+    "production_db_queried_by_this_preflight": false,
+    "production_crawler_logs_read": false
+  },
+  "contract_results": {
+    "gsc": {
+      "status": "passed_readiness_contract",
+      "live_request_made": false,
+      "indexing_request_made": false,
+      "credentials_required_for_future_live_operation": true
+    },
+    "baidu": {
+      "status": "passed_readiness_contract",
+      "live_push_made": false,
+      "token_required_for_future_live_operation": true
+    },
+    "indexnow": {
+      "status": "passed_readiness_contract",
+      "live_submission_made": false,
+      "key_required_for_future_live_operation": true
+    }
+  },
+  "url_eligibility": {
+    "research_urls_candidate_only_if": [
+      "backend_cms_source_authority",
+      "published_state",
+      "public_state",
+      "indexable_state",
+      "canonical_url_present",
+      "url_truth_supported_page_type",
+      "claim_boundary_safe"
+    ],
+    "excluded_url_classes": [
+      "test_take",
+      "test_result",
+      "order",
+      "share",
+      "pay",
+      "report_private",
+      "draft_research",
+      "stale_slug",
+      "noindex",
+      "private",
+      "unsupported_page_type",
+      "claim_unsafe",
+      "non_backend_authoritative"
+    ],
+    "forbidden_authority_inputs": [
+      "frontend_fallback",
+      "static_sitemap_fallback",
+      "static_llms_fallback",
+      "local_content_copies",
+      "production_crawler_logs",
+      "live_search_responses",
+      "node2_local_db",
+      "business_db_raw_tables"
+    ],
+    "eligible_url_exported_from_production": false,
+    "url_submission_performed": false
+  },
+  "search_channel_queue_readiness": {
+    "contract_exists": true,
+    "runtime_queue_exists": false,
+    "runtime_queue_tables_or_models_confirmed": false,
+    "runtime_canary_submitter_exists": false,
+    "controlled_approval_state_exists": false,
+    "blocking_reason": "Search Channel Queue contract exists, but controlled runtime queue implementation for live submission approval/execution/audit is missing."
+  },
+  "forbidden_operations": {
+    "google_url_submission": false,
+    "gsc_live_request": false,
+    "gsc_indexing_request": false,
+    "baidu_push": false,
+    "indexnow_post": false,
+    "scheduler_enabled": false,
+    "collector_write_executed": false,
+    "production_crawler_log_read": false,
+    "production_env_edited": false,
+    "dns_cdn_openresty_nginx_changed": false,
+    "sitemap_changed": false,
+    "llms_changed": false,
+    "research_published": false,
+    "pseo_created": false,
+    "secret_exposed": false
+  },
+  "final_decision": "blocked_search_channel_queue_runtime_missing",
+  "next_task": "SEARCH-CHANNEL-QUEUE-01 runtime MVP"
+}

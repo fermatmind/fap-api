@@ -6644,7 +6644,7 @@
       "branch": "codex/repair-2786-final-public-resolution-partition-1-202605160412",
       "title": "fix(api): partition final career 2786 public resolution",
       "name": "Partition final 2786 public-resolution assets before candidate prep",
-      "status": "local_validation_passed",
+      "status": "merged",
       "depends_on": [
         "800-CLOSEOUT-1"
       ],
@@ -6674,8 +6674,8 @@
         "do not weaken CN proxy or software-developers rollout rejection",
         "do not mark unresolved policy or occupation-missing rows as rollout candidates"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "84dac5c278ba531a3e156432f7419a67535df35f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1516",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -7900,7 +7900,7 @@
       "depends_on": [
         "AUDIT-API-CAREER-ARTIFACT-READINESS"
       ],
-      "status": "in_progress",
+      "status": "local_validation_passed",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): require editorial approval for controlled article publish",
@@ -14608,12 +14608,20 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "summary": "PR #1516 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
+        },
+        "merge": {
+          "status": "pass",
+          "summary": "Squash merged PR #1516 as 84dac5c278ba531a3e156432f7419a67535df35f."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-20T13:39:10Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "title": "IndexNow key may be unavailable",
@@ -14636,19 +14644,65 @@
           "at": "2026-05-20T21:37:00+08:00",
           "status": "local_validation_passed",
           "summary": "IndexNow readiness contract docs/generated/test passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. No IndexNow submission, key exposure, or live endpoint call occurred."
+        },
+        {
+          "at": "2026-05-20T21:39:10+08:00",
+          "status": "merged",
+          "summary": "GitHub checks passed, PR #1516 was squash merged as 84dac5c278ba531a3e156432f7419a67535df35f, the remote branch was deleted, and local post-merge cleanup executed."
         }
       ]
     },
     "SEARCH-CHANNEL-LIVE-01-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-01-preflight",
-      "status": "initialized",
+      "status": "in_progress",
       "depends_on": [
         "INDEXNOW-LIVE-00"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "summary": "INDEXNOW-LIVE-00 merged as 84dac5c278ba531a3e156432f7419a67535df35f and origin/main contains it."
+        },
+        "live_operation_guard": {
+          "status": "pass",
+          "summary": "No URL submission, GSC live request, Baidu push, IndexNow POST, scheduler enablement, collector write, production crawler log read, production env edit, sitemap change, or llms change performed."
+        },
+        "preflight_decision": {
+          "status": "blocked_search_channel_queue_runtime_missing",
+          "summary": "Search Channel Queue contract exists, but no controlled runtime queue implementation exists for live approval/execution/audit."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelLivePreflight",
+          "summary": "6 tests passed, 89 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "summary": "252 tests passed, 4210 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "summary": "Route list rendered successfully; 203 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "summary": "3414 files passed."
+        },
+        "json_yaml_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/search-channel-live-preflight.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -14665,6 +14719,16 @@
           "at": "2026-05-20T12:20:00+08:00",
           "status": "initialized",
           "summary": "Registered SEARCH-CHANNEL-LIVE-01-PREFLIGHT from explicit /goal scope for URL eligibility and no-submit preflight."
+        },
+        {
+          "at": "2026-05-20T21:41:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEARCH-CHANNEL-LIVE-01-PREFLIGHT after INDEXNOW-LIVE-00 merged. Scope is local report/docs/generated/test only; live search submission and production reads remain forbidden."
+        },
+        {
+          "at": "2026-05-20T21:48:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "No-submit preflight report passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. Final decision is blocked_search_channel_queue_runtime_missing; next task is SEARCH-CHANNEL-QUEUE-01 runtime MVP."
         }
       ]
     },
