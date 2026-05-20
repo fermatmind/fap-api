@@ -7354,6 +7354,7 @@ prs:
       - backend/app/Services/Riasec/RiasecPublicProjectionService.php
       - backend/tests/Unit/Services/Riasec/*Lifecycle*.php
       - backend/tests/Unit/Services/Riasec/*TechnicalNote*.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php
       - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
       - backend/docs/riasec/**
@@ -7364,8 +7365,8 @@ prs:
       - Mutate measured Holland Code, RIASEC scores, report snapshot, share/PDF/history measured payload, or expose raw feedback, internal snapshot identifiers, life-stage notes, or organization context publicly.
       - Add career recommendation, job fit, occupation match, ranking, success prediction, ability proof, skill proof, raw score delta, 140Q more accurate, or frontend fallback copy.
     validation:
-      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecLifecycleCopyService.php app/Services/Riasec/RiasecTechnicalNoteService.php app/Services/Riasec/RiasecPublicProjectionService.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecLifecycleCopyService.php app/Services/Riasec/RiasecTechnicalNoteService.php app/Services/Riasec/RiasecPublicProjectionService.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml")'
       - php -r 'foreach(["backend/content_assets/riasec/share_pdf_history_v1.zh-CN.json","backend/content_assets/riasec/faq_v1.zh-CN.json","backend/content_assets/riasec/technical_note_user_summary_v1.zh-CN.json","backend/content_assets/riasec/professional_method_boundary_v1.zh-CN.json"] as $file){json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);} if (trim((string) file_get_contents("backend/content_assets/riasec/faq_v1.zh-CN.md")) === "") { throw new RuntimeException("faq markdown asset is empty"); }'
