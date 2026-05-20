@@ -13906,7 +13906,7 @@
     "merge_commit": "b0ca2bba5397a95195f4ff12ceb3c26832f6653a"
   },
   "RIASEC-FULL-CONTENT-PACK-10-BE": {
-    "status": "pr_opened_github_checks_pending",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-10-be",
@@ -13960,12 +13960,21 @@
       "scope_validation": {
         "status": "pass",
         "summary": "Changed files are within PACK-10-BE allowed backend content/payload bridge scope; no fap-web, scorer, question pack, analytics, production data, or share/PDF/history mutation logic touched."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "summary": "GitHub required checks passed before merge for PR #1505."
+      },
+      "ledger_reconciliation": {
+        "status": "pass",
+        "summary": "GitHub PR #1505 is merged and origin/main contains 80f4ff1063a6538eb9614dad1b9a54010bba7eae; reconciled before PACK-11-BE-PREFLIGHT.",
+        "source_of_truth": "GitHub PR + origin/main"
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-20T01:09:56Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [
       {
         "type": "frontend_follow_up",
@@ -13987,6 +13996,94 @@
         "at": "2026-05-20T01:12:00Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1505 for PACK-10-BE. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-20T01:16:00Z",
+        "status": "merged",
+        "summary": "Reconciled after GitHub confirmed PR #1505 merged and origin/main contains merge commit 80f4ff1063a6538eb9614dad1b9a54010bba7eae."
+      }
+    ],
+    "merge_commit": "80f4ff1063a6538eb9614dad1b9a54010bba7eae"
+  },
+  "RIASEC-FULL-CONTENT-PACK-11-BE-PREFLIGHT": {
+    "status": "pr_opened_github_checks_pending",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-11-be-preflight",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-11-BE-PREFLIGHT: Share/PDF/History/FAQ/Technical Note lifecycle copy backend preflight",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-10-BE"
+    ],
+    "commit_sha": "2b04b21b550adb4cd612af8cedf0309f3744afe2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1507",
+    "checks": {
+      "pack_10_be_ledger_reconciliation": {
+        "status": "pass",
+        "summary": "PACK-10-BE reconciled to merged before PACK-11-BE-PREFLIGHT registration."
+      },
+      "dependency_gate": {
+        "status": "pass",
+        "summary": "PACK-10-BE merge commit is present in origin/main."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php --no-ansi",
+        "summary": "7 tests passed; lifecycle fixtures parsed, lifecycle boundaries validated, current technical-note/share-history snapshot guards verified, and PACK-11-BE remains preflight-only with CONDITIONAL GO."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php"
+      },
+      "json_markdown_validation": {
+        "status": "pass",
+        "summary": "pr-train-state.json parsed, pr-train.yaml parsed, lifecycle JSON fixtures parsed, and faq markdown fixture is present and non-empty."
+      },
+      "forbidden_claim_scan": {
+        "status": "pass",
+        "summary": "Visible lifecycle copy scan found forbidden_user_claim=0; boundary and question-prompt terms remain in negative or explanatory contexts only."
+      },
+      "technical_key_exposure_scan": {
+        "status": "pass",
+        "summary": "No unsafe event/state technical keys appear in visible lifecycle copy; governance-only validation labels are documented as import-time normalization terms."
+      },
+      "preflight_decision": {
+        "status": "conditional_go",
+        "summary": "PACK-11-BE can proceed after merge if lifecycle assets are bridged through backend-authoritative services without snapshot/measured-payload mutation or frontend fallback; PACK-11-FE remains deferred."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "summary": "Changed files are limited to PACK-10-BE ledger reconciliation, PACK-11-BE-PREFLIGHT manifest/state registration, lifecycle preflight fixtures, lifecycle preflight PHPUnit coverage, and preflight docs; no runtime import and no fap-web changes."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "summary": "PR #1507 opened; GitHub required checks pending."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-20T01:44:34Z",
+        "status": "in_progress",
+        "summary": "Registered PACK-11-BE-PREFLIGHT for lifecycle copy backend readiness validation; no runtime import in this PR."
+      },
+      {
+        "at": "2026-05-20T01:52:00Z",
+        "status": "local_validation_passed",
+        "summary": "PACK-11-BE-PREFLIGHT validated lifecycle fixtures and current backend safety contracts locally; decision is CONDITIONAL GO for PACK-11-BE and PACK-11-FE remains deferred."
+      },
+      {
+        "at": "2026-05-20T01:58:00Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1507 for PACK-11-BE-PREFLIGHT. GitHub checks pending."
       }
     ]
   }

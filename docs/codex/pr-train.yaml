@@ -7277,3 +7277,51 @@ prs:
       github_checks_required: true
       squash: true
       auto_merge: true
+
+  - id: RIASEC-FULL-CONTENT-PACK-11-BE-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-10-BE
+    branch: codex/riasec-full-content-pack-11-be-preflight
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-11-BE-PREFLIGHT: Share/PDF/History/FAQ/Technical Note lifecycle copy backend preflight"
+    name: "Lifecycle copy backend readiness scan"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend content asset preflight PR
+    scope:
+      - Validate V7.3 lifecycle copy assets for share/PDF/history, FAQ, technical note summary, and professional method boundary before any runtime import.
+      - Document whether PACK-11 needs backend copy import only, lifecycle adapter bridge, technical-note backend update, or later fap-web renderer work.
+      - Reconcile PACK-10-BE ledger state as merged from GitHub and origin/main.
+      - Stop after preflight; do not import runtime lifecycle content.
+    allowed_paths:
+      - backend/tests/Fixtures/Riasec/share_pdf_history_v1.zh-CN.json
+      - backend/tests/Fixtures/Riasec/faq_v1.zh-CN.json
+      - backend/tests/Fixtures/Riasec/faq_v1.zh-CN.md
+      - backend/tests/Fixtures/Riasec/technical_note_user_summary_v1.zh-CN.json
+      - backend/tests/Fixtures/Riasec/professional_method_boundary_v1.zh-CN.json
+      - backend/tests/Unit/Services/Riasec/*Lifecycle*Preflight*.php
+      - backend/tests/Unit/Services/Riasec/*TechnicalNote*Preflight*.php
+      - backend/tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php
+      - backend/tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Import runtime share_pdf_history, faq, technical_note_user_summary, or professional_method_boundary content.
+      - Start PACK-11-BE or PACK-11-FE.
+      - Touch scorer math, question packs, Holland Code generation, projection runtime behavior, report/share/PDF/history runtime behavior, RiasecTechnicalNoteService runtime behavior, fap-web, analytics runtime, production data, or career registry source rows.
+      - Mutate measured Holland Code, RIASEC scores, report snapshot, share/PDF/history measured payload, or expose raw feedback, internal snapshot identifiers, life-stage notes, or organization context publicly.
+      - Add career recommendation, job fit, occupation match, ranking, success prediction, ability proof, skill proof, raw score delta, 140Q more accurate, or frontend fallback copy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml")'
+      - php -r 'foreach(["backend/tests/Fixtures/Riasec/share_pdf_history_v1.zh-CN.json","backend/tests/Fixtures/Riasec/faq_v1.zh-CN.json","backend/tests/Fixtures/Riasec/technical_note_user_summary_v1.zh-CN.json","backend/tests/Fixtures/Riasec/professional_method_boundary_v1.zh-CN.json"] as $file){json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);} if (trim((string) file_get_contents("backend/tests/Fixtures/Riasec/faq_v1.zh-CN.md")) === "") { throw new RuntimeException("faq markdown fixture is empty"); }'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true

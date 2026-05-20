@@ -1,0 +1,66 @@
+{
+  "asset_id": "technical_note_user_summary_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-CN",
+  "scale_code": "RIASEC",
+  "review_status": "content_review_v7_3_final_preflight_candidate",
+  "summary_sections": [
+    {
+      "title": "这个测试测什么",
+      "copy": "RIASEC 测的是你对不同职业活动的兴趣强度，例如操作、分析、表达、支持、推动、整理。"
+    },
+    {
+      "title": "这个测试不测什么",
+      "copy": "它不测能力、人格身份、职业成功、收入、岗位表现或招聘风险。"
+    },
+    {
+      "title": "60Q 和 140Q 的关系",
+      "copy": "60Q 看基础兴趣结构；140Q 拆开任务、环境和角色责任。140Q 更具体，不是更准确，也不推翻 60Q。"
+    },
+    {
+      "title": "如何读分数",
+      "copy": "0–100 是本表单内兴趣强度换算，不是人群百分位，也不是能力分。"
+    },
+    {
+      "title": "如何读职业例子",
+      "copy": "职业例子只说明某些活动可能出现在哪些场景中；没有来源行时必须标注内容示例。"
+    },
+    {
+      "title": "反馈如何使用",
+      "copy": "收藏、排除、不认同和实验反馈只影响探索路径，不改测评分数、报告快照或分享内容。"
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "v5_editorial_note": "Technical note reviewed to separate measurement boundaries, quality state, form specificity, and feedback scope."
+}
