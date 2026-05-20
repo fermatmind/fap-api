@@ -30,6 +30,7 @@ return [
         'canary_default_limit' => 10,
         'canary_max_limit' => 50,
         'write_requires_bound' => true,
+        'research_report_candidate_limit' => 100,
         'source_authority' => 'backend_sitemap_source',
         'allowed_page_entity_types' => [
             'home',
@@ -43,6 +44,7 @@ return [
             'methodology',
             'dataset',
             'report_preview',
+            'research_report',
             'landing_page',
         ],
         'forbidden_page_entity_types' => [
@@ -61,6 +63,7 @@ return [
             'cms_personality',
             'cms_career_job',
             'cms_career_recommendation',
+            'backend_cms',
             'scale_catalog',
             'backend_public_surface',
         ],

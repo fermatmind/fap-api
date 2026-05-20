@@ -1,0 +1,62 @@
+{
+  "schema_version": "research-url-truth-observation.v1",
+  "task": "RESEARCH-PUBLISH-02-FIX",
+  "collector": "url_truth_inventory",
+  "page_entity_type": "research_report",
+  "source_authority_allowlist": [
+    "backend_cms"
+  ],
+  "eligible_states": [
+    "status_published",
+    "review_state_approved",
+    "is_public_true",
+    "is_indexable_true",
+    "published_at_now_or_past",
+    "canonical_research_route",
+    "methodology_present",
+    "sample_disclaimer_present",
+    "claim_boundary_present",
+    "references_present"
+  ],
+  "forbidden_states": [
+    "draft",
+    "unpublished",
+    "private",
+    "noindex",
+    "unapproved",
+    "claim_unsafe",
+    "missing_methodology",
+    "missing_sample_disclaimer",
+    "missing_claim_boundary",
+    "missing_references",
+    "stale_turnover_rate_slug",
+    "articles_route",
+    "reports_route",
+    "frontend_fallback",
+    "static_sitemap_fallback",
+    "static_llms_fallback",
+    "node2_local_source",
+    "node2_local_db",
+    "production_crawler_logs"
+  ],
+  "target_tables": [
+    "seo_urls",
+    "seo_url_entities"
+  ],
+  "no_external_api": true,
+  "no_search_submission": true,
+  "no_crawler_log_read": true,
+  "no_scheduler_activation": true,
+  "no_sitemap_change": true,
+  "no_llms_change": true,
+  "no_metabase_change": true,
+  "write_boundary": {
+    "dry_run_default": true,
+    "bounded_write_required": true,
+    "allowed_write_tables": [
+      "seo_urls",
+      "seo_url_entities"
+    ]
+  },
+  "next_task": "RESEARCH-PUBLISH-02-RERUN"
+}

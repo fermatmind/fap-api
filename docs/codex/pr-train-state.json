@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-19T23:08:58Z",
+  "updated_at": "2026-05-20T01:03:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6552,7 +6552,7 @@
       "branch": "codex/repair-explicit-rollout-batch-ledger-authority-1",
       "title": "fix(api): honor explicit rollout batch ledger authority",
       "name": "Repair explicit rollout batch ledger authority after 800 apply verification",
-      "status": "in_progress",
+      "status": "local_checks_passed",
       "depends_on": [
         "REPAIR-PROGRESSIVE-READINESS-SOFTWARE-MANUAL-HOLD-EXCLUSION-1"
       ],
@@ -12495,6 +12495,54 @@
         }
       ],
       "next_pr": "RESEARCH-PUBLISH-01"
+    },
+    "RESEARCH-PUBLISH-02-FIX": {
+      "status": "in_progress",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "branch": "codex/research-publish-02-fix-url-truth-research-report",
+      "base": "main",
+      "title": "feat(seo-intel): add Research report URL Truth observation",
+      "depends_on": [
+        "RESEARCH-PUBLISH-READINESS-00"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_seo_intel_research_url_truth_observation": "passed",
+          "php_artisan_test_filter_seo_intel": "passed",
+          "url_truth_inventory_dry_run_limit_20": "passed",
+          "url_truth_inventory_dry_run_research_report_filter": "passed_no_local_research_rows",
+          "php_artisan_route_list": "passed",
+          "pint_test": "passed",
+          "json_validation": "passed",
+          "yaml_validation": "passed",
+          "git_diff_check": "passed",
+          "scope_validation": "passed"
+        },
+        "github": {
+          "status": "pending"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "history": [
+        {
+          "at": "2026-05-20T00:40:00Z",
+          "status": "in_progress",
+          "summary": "Started scoped URL Truth observation fix so url_truth_inventory can emit published, approved, public, indexable, claim-safe backend/CMS Research report candidates. No Research publish, collector production write, scheduler, search submission, crawler log read, deploy, env edit, fap-web change, or Metabase change is allowed."
+        },
+        {
+          "at": "2026-05-20T01:03:00Z",
+          "status": "local_checks_passed",
+          "summary": "Focused Research URL Truth test, full SeoIntel filter, route list, Pint, JSON/YAML validation, dry-run collector commands, git diff checks, and allowed-path scope validation passed. The clean local worktree has no published Research DB rows, so the page-type dry-run returned zero locally while the fixture test proves nonzero behavior when eligible Research records exist."
+        }
+      ],
+      "next_pr": "RESEARCH-PUBLISH-02-RERUN"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
