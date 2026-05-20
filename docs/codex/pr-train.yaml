@@ -6273,6 +6273,61 @@ prs:
     production_approval_required: false
     next_task: SEO-DASH-MVP-ONLINE-SUMMARY closeout report / next Research publish operation planning
 
+  - id: RESEARCH-PUBLISH-02-FIX
+    repo: fap-api
+    depends_on:
+      - RESEARCH-PUBLISH-READINESS-00
+    branch: codex/research-publish-02-fix-url-truth-research-report
+    base: main
+    title: "feat(seo-intel): add Research report URL Truth observation"
+    name: "Research report URL Truth observation source"
+    train_scope: research_publish_observation_fix
+    risk_level: backend_observation_source_no_publish_no_write
+    type: backend code/docs/tests PR
+    scope:
+      - Add Research Report candidates to the disabled-by-default URL Truth inventory collector.
+      - Include only backend/CMS Research records that are published, approved, public, indexable, claim-safe, and canonical under `/research`.
+      - Keep target tables limited to `seo_urls` and `seo_url_entities`.
+      - Keep dry-run/no-write behavior as the default and preserve bounded write requirements.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/app/Services/SeoIntel/**
+      - backend/tests/Feature/SeoIntel/**Research*Test.php
+      - backend/tests/Feature/SeoIntel/**UrlTruth*Test.php
+      - backend/docs/seo/research-url-truth-observation.md
+      - backend/docs/seo/generated/research-url-truth-observation.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish Research content, create CMS records, change published Research records, run production collector writes, enable scheduler, submit URLs, connect live search APIs, read production crawler logs, deploy, edit env, or modify fap-web.
+      - Change sitemap or llms behavior.
+      - Use frontend fallback, static sitemap fallback, static llms fallback, Node2 local sources, business DB, Tencent RDS, or Metabase changes as URL Truth authority.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --limit=20
+      - cd backend && php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --limit=20 --page-type=research_report
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/research-url-truth-observation.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    research_publish: false
+    human_review_required: false
+    production_approval_required: false
+    next_task: RESEARCH-PUBLISH-02-RERUN
+
   - id: OPS-PORTAL-SEO-01
     repo: fap-api
     depends_on:

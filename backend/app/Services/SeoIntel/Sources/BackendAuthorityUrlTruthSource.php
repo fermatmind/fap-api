@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\Sources;
 
+use App\Models\ResearchReport;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use Illuminate\Support\Carbon;
@@ -16,18 +17,22 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
 
     private ?string $scaleCatalogUnavailableReason = null;
 
+    private bool $researchReportsAttempted = false;
+
+    private bool $researchReportsAvailable = false;
+
+    private ?string $researchReportsUnavailableReason = null;
+
     /**
      * @return list<UrlTruthInventoryRecord>
      */
     public function candidates(): array
     {
-        $records = $this->scaleCatalogCandidates();
-
-        if ($records !== []) {
-            return $records;
-        }
-
-        return $this->configuredBackendAuthorityCandidates();
+        return $this->uniqueRecords([
+            ...$this->scaleCatalogCandidates(),
+            ...$this->researchReportCandidates(),
+            ...$this->configuredBackendAuthorityCandidates(),
+        ]);
     }
 
     public function metadata(): array
@@ -39,6 +44,9 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             'scale_catalog_attempted' => $this->scaleCatalogAttempted,
             'scale_catalog_available' => $this->scaleCatalogAvailable,
             'scale_catalog_unavailable_reason' => $this->scaleCatalogUnavailableReason,
+            'research_reports_attempted' => $this->researchReportsAttempted,
+            'research_reports_available' => $this->researchReportsAvailable,
+            'research_reports_unavailable_reason' => $this->researchReportsUnavailableReason,
             'configured_backend_authority_canary_available' => $this->configuredBackendAuthorityCandidates() !== [],
             'fetches_public_html' => false,
             'external_api_calls' => false,
@@ -112,6 +120,73 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
     /**
      * @return list<UrlTruthInventoryRecord>
      */
+    private function researchReportCandidates(): array
+    {
+        $this->researchReportsAttempted = true;
+
+        try {
+            $reports = ResearchReport::query()
+                ->publiclyReadable()
+                ->orderBy('locale')
+                ->orderBy('slug')
+                ->limit(max(1, (int) config('seo_intel.url_truth_inventory.research_report_candidate_limit', 100)))
+                ->get();
+        } catch (\Throwable) {
+            $this->researchReportsUnavailableReason = 'research_reports_unavailable';
+
+            return [];
+        }
+
+        $records = [];
+        foreach ($reports as $report) {
+            if (! $report instanceof ResearchReport) {
+                continue;
+            }
+
+            $path = $this->researchCanonicalPath($report);
+            if ($path === null || ! $this->hasRequiredResearchSafetyFields($report)) {
+                continue;
+            }
+
+            $updatedAt = $report->updated_at instanceof Carbon ? $report->updated_at : null;
+
+            $records[] = new UrlTruthInventoryRecord(
+                canonicalUrl: $this->canonicalUrl($path),
+                locale: $report->locale,
+                pageEntityType: ResearchReport::PAGE_ENTITY_TYPE,
+                entityIdOrSlug: $report->slug,
+                sourceAuthority: 'backend_cms',
+                indexabilityState: 'indexable',
+                lastmodAt: $updatedAt,
+                lastmodSource: 'research_reports.updated_at',
+                cluster: 'research',
+                entitySource: 'research_reports',
+                authorityStatus: 'published_approved',
+                sourceUpdatedAt: $updatedAt,
+                metadata: [
+                    'source_table_hash' => hash('sha256', 'research_reports'),
+                    'canonical_path_hash' => hash('sha256', $path),
+                    'research_type_hash' => hash('sha256', (string) $report->research_type),
+                ],
+                attributes: [
+                    'source_authority' => 'backend_cms',
+                    'claim_safe' => true,
+                    'research_type_hash' => hash('sha256', (string) $report->research_type),
+                ],
+            );
+        }
+
+        $this->researchReportsAvailable = $records !== [];
+        if (! $this->researchReportsAvailable) {
+            $this->researchReportsUnavailableReason = 'research_reports_empty_or_ineligible';
+        }
+
+        return $records;
+    }
+
+    /**
+     * @return list<UrlTruthInventoryRecord>
+     */
     private function configuredBackendAuthorityCandidates(): array
     {
         $records = [];
@@ -156,6 +231,74 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         }
 
         return $records;
+    }
+
+    private function researchCanonicalPath(ResearchReport $report): ?string
+    {
+        $slug = trim((string) $report->slug);
+        if ($slug === '' || str_contains($slug, 'turnover-rate-report')) {
+            return null;
+        }
+
+        $canonicalPath = trim((string) $report->canonical_path);
+        if ($canonicalPath !== '') {
+            if (! $this->isSafeResearchRoutePath($canonicalPath, $slug)) {
+                return null;
+            }
+
+            return $canonicalPath;
+        }
+
+        $localeSegment = match ($report->locale) {
+            'zh-CN', 'zh' => 'zh',
+            'en' => 'en',
+            default => null,
+        };
+
+        if ($localeSegment === null) {
+            return null;
+        }
+
+        return '/'.$localeSegment.'/research/'.$slug;
+    }
+
+    private function isSafeResearchRoutePath(string $path, string $slug): bool
+    {
+        $normalized = '/'.ltrim($path, '/');
+
+        return (bool) preg_match('#^/(en|zh)/research/'.preg_quote($slug, '#').'$#', $normalized)
+            && ! str_contains($normalized, '/articles/')
+            && ! str_contains($normalized, '/reports/')
+            && ! str_contains($normalized, 'turnover-rate-report');
+    }
+
+    private function hasRequiredResearchSafetyFields(ResearchReport $report): bool
+    {
+        if (
+            trim((string) $report->methodology) === ''
+            || trim((string) $report->sample_disclaimer) === ''
+            || trim((string) $report->claim_boundary) === ''
+        ) {
+            return false;
+        }
+
+        return is_array($report->references) && $report->references !== [];
+    }
+
+    /**
+     * @param  list<UrlTruthInventoryRecord>  $records
+     * @return list<UrlTruthInventoryRecord>
+     */
+    private function uniqueRecords(array $records): array
+    {
+        $unique = [];
+
+        foreach ($records as $record) {
+            $key = $record->locale.'|'.$record->canonicalUrlHash();
+            $unique[$key] ??= $record;
+        }
+
+        return array_values($unique);
     }
 
     private function canonicalUrl(string $path): string
