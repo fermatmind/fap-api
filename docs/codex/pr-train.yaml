@@ -7228,3 +7228,52 @@ prs:
       github_checks_required: true
       squash: true
       auto_merge: true
+
+  - id: RIASEC-FULL-CONTENT-PACK-10-BE
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-10-PREFLIGHT
+      - RIASEC-FULL-CONTENT-PACK-09
+    branch: codex/riasec-full-content-pack-10-be
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-10-BE: Backend Feedback Action Lab and next exploration nodes safe payload bridge"
+    name: "Feedback Action Lab and next exploration nodes backend payload bridge"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend content asset import and safe payload bridge PR
+    scope:
+      - Import V7.3 feedback_action_lab_v1.zh-CN and next_exploration_nodes_v1.zh-CN as backend-authoritative safe exploration content assets.
+      - Add a safe static payload bridge through RiasecExplorationFeedbackOverlayService without a fake feedback read model.
+      - Preserve score, measured Holland Code, report snapshot, share/PDF/history measured payload, public raw-feedback, analytics, and frontend fallback boundaries.
+      - Record PACK-10-FE as required sidecar if visible frontend rendering is needed.
+    allowed_paths:
+      - backend/content_assets/riasec/feedback_action_lab_v1.zh-CN.jsonl
+      - backend/content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php
+      - backend/tests/Unit/Services/Riasec/*FeedbackActionLab*.php
+      - backend/tests/Unit/Services/Riasec/*NextExplorationNodes*.php
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Touch scorer math, question packs, Holland Code generation, 60Q/140Q compare policy, report snapshot mutation logic, share/PDF/history measured payload mutation, fap-web, frontend local copy, analytics runtime, production data, career registry source rows, source URLs, O*NET, or SOC records.
+      - Mutate measured Holland Code, RIASEC scores, report snapshot, share/PDF/history measured payload, or expose raw feedback publicly.
+      - Add career recommendation, job fit, occupation match, ranking, success prediction, ability proof, skill proof, raw score delta, 140Q more accurate, or frontend fallback copy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml")'
+      - php -r 'foreach(["backend/content_assets/riasec/feedback_action_lab_v1.zh-CN.jsonl"=>204,"backend/content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl"=>270] as $file=>$expected){$n=0; foreach(file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES) as $line){$n++; json_decode($line,true,512,JSON_THROW_ON_ERROR);} if($n!==$expected){throw new RuntimeException("$file expected $expected got $n");}}'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true

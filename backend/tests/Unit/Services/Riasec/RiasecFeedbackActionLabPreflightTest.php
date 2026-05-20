@@ -252,7 +252,7 @@ final class RiasecFeedbackActionLabPreflightTest extends TestCase
             true
         );
 
-        $this->assertSame('overlay_contract_only', $overlay['status']);
+        $this->assertSame('safe_static_content_bridge_v0_1', $overlay['status']);
         $this->assertSame('not_connected_v0_1', $overlay['feedback_stream_status']);
         $this->assertFalse((bool) data_get($overlay, 'measured_result_guard.scores_mutation_allowed'));
         $this->assertFalse((bool) data_get($overlay, 'measured_result_guard.holland_code_mutation_allowed'));
