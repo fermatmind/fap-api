@@ -2455,6 +2455,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_3/ScalesController.php',
+            'backend/app/Services/Riasec/RiasecLifecycleCopyService.php',
             'backend/app/Services/Riasec/RiasecTechnicalNoteService.php',
         ], true);
     }

@@ -46,5 +46,9 @@ final class RiasecTechnicalNoteBoundaryTest extends TestCase
         $this->assertContains('career_success_probability', (array) data_get($contract, 'technical_note_v1.data_status_summary.not_claimed', []));
         $this->assertContains('job_fit', (array) data_get($contract, 'technical_note_v1.data_status_summary.not_claimed', []));
         $this->assertContains('cross_form_raw_score_delta', (array) data_get($contract, 'technical_note_v1.data_status_summary.not_claimed', []));
+        $this->assertSame('riasec.lifecycle_copy.v1', data_get($contract, 'technical_note_v1.lifecycle_copy_v1.schema_version'));
+        $this->assertFalse((bool) data_get($contract, 'technical_note_v1.lifecycle_copy_v1.frontend_fallback_allowed'));
+        $this->assertFalse((bool) data_get($contract, 'technical_note_v1.lifecycle_copy_v1.raw_feedback_public_exposure_allowed'));
+        $this->assertCount(20, (array) data_get($contract, 'technical_note_v1.lifecycle_copy_v1.faq_items', []));
     }
 }

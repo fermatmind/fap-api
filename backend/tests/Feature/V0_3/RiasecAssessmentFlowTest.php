@@ -155,6 +155,11 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.measured_result_guard.holland_code_mutation_allowed', false);
         $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.surface_policy.raw_feedback_public_exposure_allowed', false);
         $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.read_model.raw_feedback_included', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.schema_version', 'riasec.lifecycle_copy.v1');
+        $readback->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.frontend_fallback_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.measured_payload_mutation_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.raw_feedback_public_exposure_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.0.surface', 'share_safe_card');
         $this->assertNull($readback->json('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.attempt_id'));
 
         $report = $this->withHeaders([
@@ -186,6 +191,9 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.snapshot_bound', true);
         $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.surface_policy.formal_report_mutation_allowed', false);
         $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.claim_boundary.feedback_changes_measured_holland_code', false);
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.snapshot_bound', true);
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.internal_snapshot_id_public_exposure_allowed', false);
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.faq_markdown_reference_available', true);
 
         $reportAccess = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -216,6 +224,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $this->assertIsArray($share->json('dimensions'));
         $this->assertNotEmpty($share->json('dimensions'));
         $this->assertNull($share->json('mbti_public_projection_v1'));
+        $share->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.raw_feedback_public_exposure_allowed', false);
+        $share->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.0.public_safe', true);
 
         $history = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -229,6 +239,7 @@ final class RiasecAssessmentFlowTest extends TestCase
         $history->assertJsonPath('items.0.riasec_form_v1.question_count', 60);
         $history->assertJsonPath('items.0.compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $history->assertJsonPath('items.0.compare_policy_v1.raw_score_delta_allowed', false);
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.measured_payload_mutation_allowed', false);
         $history->assertJsonPath('history_compare.current_compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
     }
 
@@ -316,6 +327,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $share->assertJsonPath('riasec_public_projection_v2.deep_content_slots_v1.source_policy.frontend_fallback_allowed', false);
         $share->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.read_model.raw_feedback_included', false);
         $share->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.surface_policy.share_pdf_exposure_allowed', false);
+        $share->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.snapshot_bound', true);
+        $share->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.raw_feedback_public_exposure_allowed', false);
 
         $history = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -330,6 +343,7 @@ final class RiasecAssessmentFlowTest extends TestCase
         $history->assertJsonPath('items.0.riasec_public_projection_v2.deep_content_slots_v1.slot_visibility_policy.frontend_inference_allowed', false);
         $history->assertJsonPath('items.0.riasec_public_projection_v2.exploration_feedback_overlay_v0_1.measured_result_guard.scores_mutation_allowed', false);
         $history->assertJsonPath('items.0.riasec_public_projection_v2.exploration_feedback_overlay_v0_1.claim_boundary.feedback_is_career_match', false);
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.internal_snapshot_id_public_exposure_allowed', false);
         $history->assertJsonPath('history_compare.current_top_code', 'RIA');
 
         $pdf = $this->withHeaders([

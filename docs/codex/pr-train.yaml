@@ -7325,3 +7325,54 @@ prs:
       github_checks_required: true
       squash: true
       auto_merge: true
+
+  - id: RIASEC-FULL-CONTENT-PACK-11-BE
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-11-BE-PREFLIGHT
+      - RIASEC-FULL-CONTENT-PACK-10-BE
+    branch: codex/riasec-full-content-pack-11-be
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-11-BE: Backend lifecycle copy import for Share/PDF/History/FAQ/Technical Note"
+    name: "Lifecycle copy backend import and safe bridge"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend lifecycle content asset import PR
+    scope:
+      - Import V7.3 share_pdf_history_v1.zh-CN, faq_v1.zh-CN, technical_note_user_summary_v1.zh-CN, and professional_method_boundary_v1.zh-CN as backend-authoritative lifecycle assets.
+      - Bridge lifecycle copy through backend-owned technical note and additive public projection payloads without mutating measured payloads or snapshot identity semantics.
+      - Preserve public-safe share, snapshot-bound PDF/history, forbidden-claim boundaries, and fail-closed behavior.
+      - Stop after backend import; do not start PACK-10-FE, PACK-11-FE, PACK-12, PACK-13-BE, PACK-13-FE, or PACK-14 from this PR alone.
+    allowed_paths:
+      - backend/content_assets/riasec/share_pdf_history_v1.zh-CN.json
+      - backend/content_assets/riasec/faq_v1.zh-CN.json
+      - backend/content_assets/riasec/faq_v1.zh-CN.md
+      - backend/content_assets/riasec/technical_note_user_summary_v1.zh-CN.json
+      - backend/content_assets/riasec/professional_method_boundary_v1.zh-CN.json
+      - backend/app/Services/Riasec/RiasecLifecycleCopyService.php
+      - backend/app/Services/Riasec/RiasecTechnicalNoteService.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/tests/Unit/Services/Riasec/*Lifecycle*.php
+      - backend/tests/Unit/Services/Riasec/*TechnicalNote*.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Touch scorer math, question packs, Holland Code generation, feedback mutation runtime, fap-web, frontend local copy, production data, analytics runtime, or career registry source rows.
+      - Mutate measured Holland Code, RIASEC scores, report snapshot, share/PDF/history measured payload, or expose raw feedback, internal snapshot identifiers, life-stage notes, or organization context publicly.
+      - Add career recommendation, job fit, occupation match, ranking, success prediction, ability proof, skill proof, raw score delta, 140Q more accurate, or frontend fallback copy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecLifecycleCopyService.php app/Services/Riasec/RiasecTechnicalNoteService.php app/Services/Riasec/RiasecPublicProjectionService.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml")'
+      - php -r 'foreach(["backend/content_assets/riasec/share_pdf_history_v1.zh-CN.json","backend/content_assets/riasec/faq_v1.zh-CN.json","backend/content_assets/riasec/technical_note_user_summary_v1.zh-CN.json","backend/content_assets/riasec/professional_method_boundary_v1.zh-CN.json"] as $file){json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);} if (trim((string) file_get_contents("backend/content_assets/riasec/faq_v1.zh-CN.md")) === "") { throw new RuntimeException("faq markdown asset is empty"); }'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true

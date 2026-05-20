@@ -204,6 +204,9 @@ final class RiasecLifecycleCopyPreflightTest extends TestCase
         $this->assertContains('feedback_overlay_boundary', array_column((array) data_get($contract, 'technical_note_v1.disclaimers', []), 'key'));
         $this->assertContains('cross_form_raw_score_delta', (array) data_get($contract, 'technical_note_v1.data_status_summary.not_claimed', []));
         $this->assertContains('job_fit', (array) data_get($contract, 'technical_note_v1.data_status_summary.not_claimed', []));
+        $this->assertSame('riasec.lifecycle_copy.v1', data_get($contract, 'technical_note_v1.lifecycle_copy_v1.schema_version'));
+        $this->assertFalse((bool) data_get($contract, 'technical_note_v1.lifecycle_copy_v1.internal_snapshot_id_public_exposure_allowed'));
+        $this->assertFalse((bool) data_get($contract, 'technical_note_v1.lifecycle_copy_v1.report_snapshot_mutation_allowed'));
 
         $overlay = (new RiasecExplorationFeedbackOverlayService)->build(
             new Result([

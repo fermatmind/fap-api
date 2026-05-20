@@ -1,0 +1,81 @@
+{
+  "asset_id": "professional_method_boundary_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-CN",
+  "content_version": "riasec_professional_method_boundary_v1.zh-CN",
+  "review_status": "content_review_v7_3_final_preflight_candidate",
+  "sections": [
+    {
+      "key": "measurement_object",
+      "title": "测量对象",
+      "body": "RIASEC 解释职业兴趣活动倾向，不测能力、人格身份、职业价值观、心理状态、收入潜力或职业成功概率。"
+    },
+    {
+      "key": "score_space",
+      "title": "分数空间",
+      "body": "0–100 是当前表单内兴趣强度换算，不是人群百分位，也不应跨 60Q / 140Q 直接比较 raw score delta。"
+    },
+    {
+      "key": "forms",
+      "title": "60Q 与 140Q",
+      "body": "60Q 看基础兴趣结构；140Q 看任务、环境、角色责任等情境化兴趣线索。140Q 更具体，不是更准确。"
+    },
+    {
+      "key": "examples",
+      "title": "职业例子边界",
+      "body": "职业例子必须经过活动和任务解释，只能叫内容示例，不得叫 Matches、推荐、排名、岗位适配。"
+    },
+    {
+      "key": "validation_status",
+      "title": "验证状态",
+      "body": "没有外部效度证据时，只能写 theory_based、under_validation 或 internally_pilot_required，不得写 externally_validated。"
+    },
+    {
+      "key": "feedback",
+      "title": "反馈边界",
+      "body": "用户收藏、排除、愿望、不认同等反馈只影响探索路径，不改 measured Holland Code、不改分数、不改报告快照。"
+    },
+    {
+      "key": "privacy",
+      "title": "隐私与使用",
+      "body": "分享和 PDF 默认不展示原始反馈、生活阶段、组织上下文或内部 snapshot_id。"
+    },
+    {
+      "key": "restricted_use",
+      "title": "禁止用途",
+      "body": "不得用于招聘筛选、录取、晋升、淘汰、资格判断、医疗或心理诊断。"
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "v5_editorial_note": "Professional boundary copy keeps prohibited terms only in negative constraint context."
+}
