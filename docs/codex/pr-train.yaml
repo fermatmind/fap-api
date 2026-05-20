@@ -7129,3 +7129,47 @@ prs:
       github_checks_required: true
       squash: true
       auto_merge: true
+
+  - id: RIASEC-FULL-CONTENT-PACK-10-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-09
+    branch: codex/riasec-full-content-pack-10-preflight
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-10-PREFLIGHT: Feedback Action Lab and next exploration nodes preflight"
+    name: "Feedback Action Lab and next exploration nodes readiness scan"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend content asset preflight PR
+    scope:
+      - Validate V7.3 feedback_action_lab_v1.zh-CN and next_exploration_nodes_v1.zh-CN before backend implementation.
+      - Document whether PACK-10 needs copy import, backend payload bridge, feedback read model, fap-web renderer, or analytics follow-up.
+      - Reconcile PACK-09 ledger state as merged from GitHub and origin/main.
+      - Stop after preflight; do not import runtime feedback action lab or next exploration nodes content.
+    allowed_paths:
+      - backend/tests/Fixtures/Riasec/feedback_action_lab_v1.zh-CN.jsonl
+      - backend/tests/Fixtures/Riasec/next_exploration_nodes_v1.zh-CN.jsonl
+      - backend/tests/Unit/Services/Riasec/*FeedbackActionLab*Preflight*.php
+      - backend/tests/Unit/Services/Riasec/*NextExplorationNodes*Preflight*.php
+      - backend/tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Import runtime feedback action lab or next exploration nodes content.
+      - Start PACK-10-BE or PACK-10-FE.
+      - Touch scorer math, question packs, Holland Code generation, projection runtime behavior, report/share/PDF/history runtime behavior, fap-web, analytics runtime, production data, or career registry source rows.
+      - Mutate measured Holland Code, RIASEC scores, report snapshot, share/PDF/history measured payload, or expose raw feedback publicly.
+      - Add career recommendation, job fit, occupation match, ranking, success prediction, ability proof, skill proof, raw score delta, 140Q more accurate, or frontend fallback copy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml")'
+      - php -r 'foreach(["backend/tests/Fixtures/Riasec/feedback_action_lab_v1.zh-CN.jsonl"=>204,"backend/tests/Fixtures/Riasec/next_exploration_nodes_v1.zh-CN.jsonl"=>270] as $file=>$expected){$n=0; foreach(file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES) as $line){$n++; json_decode($line,true,512,JSON_THROW_ON_ERROR);} if($n!==$expected){throw new RuntimeException("$file expected $expected got $n");}}'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true

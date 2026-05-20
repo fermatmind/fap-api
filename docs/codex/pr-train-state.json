@@ -13692,7 +13692,7 @@
     "merge_commit": "61f904bd173bac3921a6cda4d8591f2418f76de7"
   },
   "RIASEC-FULL-CONTENT-PACK-09": {
-    "status": "pr_opened_github_checks_pending",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-09",
@@ -13737,9 +13737,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-20T00:24:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "history": [
       {
@@ -13761,6 +13761,83 @@
         "at": "2026-05-20T00:27:00Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1502 for PACK-09. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-20T00:39:14Z",
+        "status": "merged",
+        "summary": "Reconciled after GitHub confirmed PR #1502 merged and origin/main contains merge commit 79ba22b7a06c51780b0c94b0fdd4108cab35cbb1."
+      }
+    ],
+    "merge_commit": "79ba22b7a06c51780b0c94b0fdd4108cab35cbb1"
+  },
+  "RIASEC-FULL-CONTENT-PACK-10-PREFLIGHT": {
+    "status": "local_validation_passed",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-10-preflight",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-10-PREFLIGHT: Feedback Action Lab and next exploration nodes preflight",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-09"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "pack_09_ledger_reconciliation": {
+        "status": "pass",
+        "summary": "PACK-09 reconciled to merged before PACK-10-PREFLIGHT registration."
+      },
+      "dependency_gate": {
+        "status": "pass",
+        "summary": "PACK-09 merge commit is present in origin/main."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php --no-ansi",
+        "summary": "6 tests passed; 13288 assertions."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php",
+        "summary": "1 file passed."
+      },
+      "fixture_jsonl_validation": {
+        "status": "pass",
+        "summary": "feedback_action_lab_v1.zh-CN.jsonl has 204 valid rows; next_exploration_nodes_v1.zh-CN.jsonl has 270 valid rows."
+      },
+      "manifest_state_validation": {
+        "status": "pass",
+        "summary": "pr-train-state JSON and pr-train YAML parse successfully."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "scope_isolation": {
+        "status": "pass",
+        "summary": "Unrelated SEO Intel dirty files observed and left unstaged; PACK-10-PREFLIGHT will use explicit path-limited staging only."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [
+      {
+        "type": "unrelated_dirty_worktree",
+        "summary": "Unrelated SEO Intel files were present during PACK-10-PREFLIGHT local validation and were intentionally left untouched/uncommitted."
+      }
+    ],
+    "history": [
+      {
+        "at": "2026-05-20T00:39:14Z",
+        "status": "in_progress",
+        "summary": "Registered PACK-10-PREFLIGHT after PACK-09 ledger reconciliation. This PR is preflight only and must stop before PACK-10-BE/FE."
+      },
+      {
+        "at": "2026-05-20T00:44:00Z",
+        "status": "local_validation_passed",
+        "summary": "Preflight fixtures/docs/tests validated locally. Decision is CONDITIONAL GO for PACK-10-BE; PACK-10-FE required after backend payload contract. No runtime import."
       }
     ]
   }
