@@ -24,6 +24,10 @@ final class RiasecDeepCopySlotRegistry
 
     private const NEAR_TIE_ASSET_PATH = '/content_assets/riasec/near_tie_alternate_code_copy_v1.zh-CN.json';
 
+    private const ASPIRATIONS_ASSET_PATH = '/content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl';
+
+    private const DISAGREE_PATH_ASSET_PATH = '/content_assets/riasec/disagree_path_v1.zh-CN.jsonl';
+
     /** @var array<string,array<string,mixed>>|null */
     private ?array $dimensionContentCache = null;
 
@@ -47,6 +51,12 @@ final class RiasecDeepCopySlotRegistry
 
     /** @var array<string,mixed>|null */
     private ?array $nearTieAssetCache = null;
+
+    /** @var list<array<string,mixed>>|null */
+    private ?array $aspirationsAssetRowsCache = null;
+
+    /** @var list<array<string,mixed>>|null */
+    private ?array $disagreePathAssetRowsCache = null;
 
     /** @var list<string> */
     public const DIMENSIONS = ['R', 'I', 'A', 'S', 'E', 'C'];
@@ -689,7 +699,7 @@ final class RiasecDeepCopySlotRegistry
      */
     public function aspirationsSlots(): array
     {
-        return [
+        return array_merge([
             'intro' => $this->aspirationSlot('intro', [
                 'title' => '把你原本想探索的方向放到旁边看',
                 'summary' => '你可以记录职业、专业、课程、项目或工作场景。它们只用于生成验证问题，不进入测评分数。',
@@ -730,7 +740,7 @@ final class RiasecDeepCopySlotRegistry
                 'summary' => '愿望不会覆盖 measured Holland Code，也不会改变 RIASEC 分数、报告快照、分享内容或 PDF 内容。',
                 'aspirations_state' => 'not_provided',
             ]),
-        ];
+        ], $this->aspirationAssetSlots());
     }
 
     /**
@@ -761,7 +771,7 @@ final class RiasecDeepCopySlotRegistry
      */
     public function disagreePathSlots(): array
     {
-        return [
+        return array_merge([
             'user_not_wrong_message' => $this->disagreePathSlot('user_not_wrong_message', [
                 'title' => '你可以不认同这个结果',
                 'summary' => '不认同结果本身是有效反馈。它会进入探索路径，帮助你检查作答状态、近似并列和活动验证方向。',
@@ -797,7 +807,7 @@ final class RiasecDeepCopySlotRegistry
                 'summary' => '先检查作答质量和 near-tie，再选择重测、保存偏好方向，或做一个小实验验证具体活动。',
                 'disagree_state' => 'save_feedback_only',
             ]),
-        ];
+        ], $this->disagreePathAssetSlots());
     }
 
     /**
@@ -821,6 +831,78 @@ final class RiasecDeepCopySlotRegistry
         }
 
         return $slot;
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    private function aspirationAssetSlots(): array
+    {
+        $slots = [];
+        foreach ($this->aspirationAssetRows() as $row) {
+            $slotName = (string) $row['domain_key'];
+            $questions = array_values(array_map('strval', (array) $row['reality_questions']));
+            $slot = $this->aspirationSlot($slotName, [
+                'title' => (string) $row['user_aspiration_label'],
+                'summary' => (string) $row['overlap_reading'],
+                'body' => (string) $row['next_low_risk_experiment'],
+                'example_question' => (string) ($questions[0] ?? ''),
+                'aspirations_state' => $this->aspirationStateFromAssetRow($row),
+                'content_version' => 'aspirations_calibration_v1.zh-CN',
+                'evidence_level' => 'expert_review_required',
+                'source_status' => 'reviewed_content_copy',
+                'review_status' => 'content_review',
+                'required_boundaries' => array_values(array_unique(array_merge(
+                    $this->requiredBoundaries(),
+                    array_map('strval', (array) $row['required_boundaries'])
+                ))),
+                'forbidden_claims' => array_values(array_map('strval', (array) $row['forbidden_claims'])),
+                'applicable_dimensions' => array_values(array_map('strval', (array) $row['likely_overlap_dimensions'])),
+            ]);
+
+            if ($this->validateSlot($slot) === []) {
+                $slots[$slotName] = $slot;
+            }
+        }
+
+        return $slots;
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    private function disagreePathAssetSlots(): array
+    {
+        $slots = [];
+        foreach ($this->disagreePathAssetRows() as $row) {
+            $slotName = (string) $row['state'];
+            $questions = array_values(array_map('strval', (array) $row['questions']));
+            $slot = $this->disagreePathSlot($slotName, [
+                'title' => (string) $row['title'],
+                'summary' => (string) $row['summary'],
+                'body' => (string) $row['recommended_next_action'],
+                'example_question' => (string) ($questions[0] ?? ''),
+                'disagree_state' => $this->disagreeStateFromAssetRow($row),
+                'content_version' => 'disagree_path_v1.zh-CN',
+                'evidence_level' => 'expert_review_required',
+                'source_status' => 'reviewed_content_copy',
+                'review_status' => 'content_review',
+                'required_boundaries' => array_values(array_unique(array_merge(
+                    $this->requiredBoundaries(),
+                    array_map('strval', (array) $row['required_boundaries'])
+                ))),
+                'forbidden_claims' => array_values(array_map('strval', (array) $row['forbidden_claims'])),
+                'report_snapshot_mutation_allowed' => false,
+                'share_pdf_payload_expansion_allowed' => false,
+                'raw_feedback_exposure_allowed' => false,
+            ]);
+
+            if ($this->validateSlot($slot) === []) {
+                $slots[$slotName] = $slot;
+            }
+        }
+
+        return $slots;
     }
 
     /**
@@ -1805,6 +1887,164 @@ final class RiasecDeepCopySlotRegistry
         }
 
         return $this->nearTieAssetCache = $this->jsonAsset(self::NEAR_TIE_ASSET_PATH);
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function aspirationAssetRows(): array
+    {
+        if ($this->aspirationsAssetRowsCache !== null) {
+            return $this->aspirationsAssetRowsCache;
+        }
+
+        $rows = [];
+        foreach ($this->jsonlAssetRows(self::ASPIRATIONS_ASSET_PATH) as $row) {
+            if ($this->isValidAspirationAssetRow($row)) {
+                $rows[] = $row;
+            }
+        }
+
+        return $this->aspirationsAssetRowsCache = $rows;
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function disagreePathAssetRows(): array
+    {
+        if ($this->disagreePathAssetRowsCache !== null) {
+            return $this->disagreePathAssetRowsCache;
+        }
+
+        $rows = [];
+        foreach ($this->jsonlAssetRows(self::DISAGREE_PATH_ASSET_PATH) as $row) {
+            if ($this->isValidDisagreePathAssetRow($row)) {
+                $rows[] = $row;
+            }
+        }
+
+        return $this->disagreePathAssetRowsCache = $rows;
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function jsonlAssetRows(string $relativePath): array
+    {
+        $path = dirname(__DIR__, 3).$relativePath;
+        if (! is_file($path)) {
+            return [];
+        }
+
+        $rows = [];
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+            $decoded = json_decode($line, true);
+            if (! is_array($decoded)) {
+                return [];
+            }
+            $rows[] = $decoded;
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     */
+    private function isValidAspirationAssetRow(array $row): bool
+    {
+        if (($row['schema_version'] ?? null) !== 'riasec.aspirations_calibration.v1') {
+            return false;
+        }
+        if (($row['asset_version'] ?? null) !== 'riasec_aspirations_calibration_v1.zh-CN') {
+            return false;
+        }
+        foreach (['domain_key', 'user_aspiration_label', 'overlap_reading', 'next_low_risk_experiment'] as $field) {
+            if (! is_string($row[$field] ?? null) || trim((string) $row[$field]) === '') {
+                return false;
+            }
+        }
+        if (($row['score_mutation_allowed'] ?? true) !== false || ($row['measured_holland_code_mutation_allowed'] ?? true) !== false) {
+            return false;
+        }
+        if (($row['not_a_recommendation'] ?? false) !== true || ($row['frontend_fallback_allowed'] ?? true) !== false) {
+            return false;
+        }
+        if (! is_array($row['likely_overlap_dimensions'] ?? null) || ! is_array($row['reality_questions'] ?? null)) {
+            return false;
+        }
+        foreach ((array) $row['likely_overlap_dimensions'] as $dimension) {
+            if (! in_array((string) $dimension, self::DIMENSIONS, true)) {
+                return false;
+            }
+        }
+
+        return count((array) $row['reality_questions']) >= 3;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     */
+    private function isValidDisagreePathAssetRow(array $row): bool
+    {
+        if (($row['schema_version'] ?? null) !== 'riasec.disagree_path.v1') {
+            return false;
+        }
+        if (($row['asset_version'] ?? null) !== 'riasec_disagree_path_v1.zh-CN') {
+            return false;
+        }
+        foreach (['state', 'title', 'summary', 'recommended_next_action'] as $field) {
+            if (! is_string($row[$field] ?? null) || trim((string) $row[$field]) === '') {
+                return false;
+            }
+        }
+        if (($row['score_mutation_allowed'] ?? true) !== false || ($row['measured_holland_code_mutation_allowed'] ?? true) !== false) {
+            return false;
+        }
+        if (($row['snapshot_mutation_allowed'] ?? true) !== false || ($row['share_pdf_exposure_allowed'] ?? true) !== false) {
+            return false;
+        }
+        if (($row['frontend_fallback_allowed'] ?? true) !== false) {
+            return false;
+        }
+        if (! is_array($row['questions'] ?? null)) {
+            return false;
+        }
+
+        return count((array) $row['questions']) >= 3;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     */
+    private function aspirationStateFromAssetRow(array $row): string
+    {
+        $domainKey = (string) ($row['domain_key'] ?? '');
+        if (str_contains($domainKey, '想排除') || str_contains($domainKey, '曾经受挫')) {
+            return 'tension';
+        }
+        if (str_contains($domainKey, '已有机会') || str_contains($domainKey, '正在考虑')) {
+            return 'needs_reality_check';
+        }
+
+        return 'overlap';
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     */
+    private function disagreeStateFromAssetRow(array $row): string
+    {
+        $state = (string) ($row['state'] ?? '');
+        if (str_contains($state, 'low_quality') || str_contains($state, 'retake')) {
+            return 'retake_recommended';
+        }
+        if (str_contains($state, 'near_tie') || str_contains($state, 'broad') || str_contains($state, '60Q_140Q')) {
+            return 'disagrees_quality_caution';
+        }
+
+        return 'disagrees_quality_normal';
     }
 
     /**
