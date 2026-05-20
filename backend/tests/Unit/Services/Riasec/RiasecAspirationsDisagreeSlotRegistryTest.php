@@ -89,6 +89,48 @@ final class RiasecAspirationsDisagreeSlotRegistryTest extends TestCase
         }
     }
 
+    public function test_file_backed_aspirations_and_disagree_assets_are_imported_as_non_mutating_slots(): void
+    {
+        $registry = new RiasecDeepCopySlotRegistry;
+        $aspirationSlots = array_filter(
+            $registry->aspirationsSlots(),
+            fn (array $slot): bool => ($slot['content_version'] ?? null) === 'aspirations_calibration_v1.zh-CN'
+        );
+        $disagreeSlots = array_filter(
+            $registry->disagreePathSlots(),
+            fn (array $slot): bool => ($slot['content_version'] ?? null) === 'disagree_path_v1.zh-CN'
+        );
+
+        $this->assertCount(70, $aspirationSlots);
+        $this->assertCount(45, $disagreeSlots);
+
+        $aspiration = $aspirationSlots['product_ux_想了解'] ?? null;
+        $this->assertIsArray($aspiration);
+        $this->assertSame('aspirations_copy', $aspiration['slot_group']);
+        $this->assertSame('overlap', $aspiration['aspirations_state']);
+        $this->assertSame('产品 / 用户研究｜想了解', $aspiration['title']);
+        $this->assertFalse($aspiration['affects_measured_code']);
+        $this->assertFalse($aspiration['affects_score']);
+        $this->assertFalse($aspiration['report_snapshot_mutation_allowed']);
+        $this->assertFalse($aspiration['share_pdf_payload_expansion_allowed']);
+        $this->assertFalse($aspiration['raw_feedback_exposure_allowed']);
+        $this->assertFalse($aspiration['frontend_fallback_allowed']);
+        $this->assertSame([], $registry->validateSlot($aspiration));
+
+        $disagree = $disagreeSlots['normal_disagree_学生'] ?? null;
+        $this->assertIsArray($disagree);
+        $this->assertSame('feedback_response_copy', $disagree['slot_group']);
+        $this->assertSame('disagrees_quality_normal', $disagree['disagree_state']);
+        $this->assertSame('如果你不认同结果｜学生', $disagree['title']);
+        $this->assertFalse($disagree['affects_measured_code']);
+        $this->assertFalse($disagree['affects_score']);
+        $this->assertFalse($disagree['report_snapshot_mutation_allowed']);
+        $this->assertFalse($disagree['share_pdf_payload_expansion_allowed']);
+        $this->assertFalse($disagree['raw_feedback_exposure_allowed']);
+        $this->assertFalse($disagree['frontend_fallback_allowed']);
+        $this->assertSame([], $registry->validateSlot($disagree));
+    }
+
     public function test_missing_aspirations_and_disagree_content_fails_closed(): void
     {
         $registry = new RiasecDeepCopySlotRegistry;
