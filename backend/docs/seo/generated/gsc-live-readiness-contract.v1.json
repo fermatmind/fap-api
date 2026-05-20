@@ -1,0 +1,78 @@
+{
+  "version": "gsc-live-readiness-contract.v1",
+  "task": "GSC-LIVE-00",
+  "type": "docs_generated_test_contract",
+  "channel": "gsc",
+  "authority_boundary": {
+    "gsc_is_feedback_readiness_source": true,
+    "gsc_is_content_authority": false,
+    "gsc_is_url_truth_authority": false,
+    "gsc_is_sitemap_authority": false,
+    "gsc_is_llms_authority": false,
+    "gsc_is_purchase_truth": false,
+    "gsc_creates_urls": false,
+    "gsc_overrides_cms_backend_url_truth": false
+  },
+  "ownership_requirements": [
+    "verified_search_console_property",
+    "documented_property_owner",
+    "documented_operator_responsibility",
+    "approved_service_account_or_oauth_access",
+    "safe_secret_channel_only"
+  ],
+  "read_only_data_window": {
+    "maximum_contract_window": "last_16_months_max",
+    "preferred_initial_windows": [
+      "last_28_days",
+      "last_90_days"
+    ],
+    "raw_sensitive_query_output_allowed": false
+  },
+  "url_inspection_readiness": {
+    "read_only_status_check_only": true,
+    "requires_explicit_future_approval": true,
+    "requires_safe_credentials": true,
+    "allowed_url_source": "cms_backend_url_truth_approved_canonical_urls",
+    "indexing_request_allowed": false,
+    "url_submission_allowed": false,
+    "queue_creation_by_gsc_allowed": false
+  },
+  "sitemap_authority_check": {
+    "compare_gsc_feedback_to_backend_expectations": true,
+    "changes_sitemap_generation": false,
+    "changes_llms_generation": false,
+    "changes_cms_publication_state": false,
+    "changes_url_truth_eligibility": false
+  },
+  "forbidden_url_classes": [
+    "draft",
+    "private",
+    "noindex",
+    "unsupported_page_type",
+    "stale_slug",
+    "claim_unsafe",
+    "non_backend_authoritative"
+  ],
+  "forbidden_sensitive_outputs": [
+    "token",
+    "api_key",
+    "cookie",
+    "session",
+    "email",
+    "order_id",
+    "attempt_id",
+    "payment_id",
+    "raw_ip"
+  ],
+  "live_api_call_in_this_pr": false,
+  "url_submission_performed": false,
+  "indexing_request_performed": false,
+  "scheduler_enabled": false,
+  "collector_write_executed": false,
+  "live_connector_activated": false,
+  "credentials_added_in_this_pr": false,
+  "production_env_edited": false,
+  "sitemap_changed_in_this_pr": false,
+  "llms_changed_in_this_pr": false,
+  "next_task": "BAIDU-LIVE-00"
+}
