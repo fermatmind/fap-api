@@ -13824,7 +13824,7 @@
     "merge_commit": "79ba22b7a06c51780b0c94b0fdd4108cab35cbb1"
   },
   "RIASEC-FULL-CONTENT-PACK-10-PREFLIGHT": {
-    "status": "pr_opened_github_checks_pending",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-10-preflight",
@@ -13872,9 +13872,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-20T00:49:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [
       {
         "type": "unrelated_dirty_worktree",
@@ -13896,6 +13896,92 @@
         "at": "2026-05-20T00:51:00Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1503 for PACK-10-PREFLIGHT. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-20T00:59:57Z",
+        "status": "merged",
+        "summary": "Reconciled after GitHub confirmed PR #1503 merged and origin/main contains merge commit b0ca2bba5397a95195f4ff12ceb3c26832f6653a."
+      }
+    ],
+    "merge_commit": "b0ca2bba5397a95195f4ff12ceb3c26832f6653a"
+  },
+  "RIASEC-FULL-CONTENT-PACK-10-BE": {
+    "status": "local_validation_passed",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-10-be",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-10-BE: Backend Feedback Action Lab and next exploration nodes safe payload bridge",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-10-PREFLIGHT",
+      "RIASEC-FULL-CONTENT-PACK-09"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "pack_10_preflight_ledger_reconciliation": {
+        "status": "pass",
+        "summary": "PACK-10-PREFLIGHT reconciled to merged before PACK-10-BE registration."
+      },
+      "dependency_gate": {
+        "status": "pass",
+        "summary": "PACK-10-PREFLIGHT and PACK-09 merge commits are present in origin/main."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi",
+        "summary": "14 tests passed; 14308 assertions."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecFeedbackActionLabPreflightTest.php",
+        "summary": "3 files passed."
+      },
+      "jsonl_validation": {
+        "status": "pass",
+        "summary": "feedback_action_lab_v1.zh-CN.jsonl has 204 valid rows; next_exploration_nodes_v1.zh-CN.jsonl has 270 valid rows."
+      },
+      "forbidden_claim_scan": {
+        "status": "pass",
+        "summary": "Imported asset visible fields have forbidden_user_claim=0; boundary terms remain in governance/negative constraints only."
+      },
+      "technical_key_exposure_scan": {
+        "status": "pass",
+        "summary": "Imported asset user-facing fields have visible technical key exposure=0."
+      },
+      "manifest_state_validation": {
+        "status": "pass",
+        "summary": "pr-train-state JSON and pr-train YAML parse successfully."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "summary": "Changed files are within PACK-10-BE allowed backend content/payload bridge scope; no fap-web, scorer, question pack, analytics, production data, or share/PDF/history mutation logic touched."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [
+      {
+        "type": "frontend_follow_up",
+        "summary": "PACK-10-FE is required after backend payload contract if Action Lab / Next Exploration Nodes should render as visible modules. No fap-web work in PACK-10-BE."
+      }
+    ],
+    "history": [
+      {
+        "at": "2026-05-20T00:59:57Z",
+        "status": "in_progress",
+        "summary": "Registered PACK-10-BE after PACK-10-PREFLIGHT reconciliation. Scope is backend safe payload bridge only; no PACK-10-FE or PACK-11."
+      },
+      {
+        "at": "2026-05-20T01:08:00Z",
+        "status": "local_validation_passed",
+        "summary": "Implemented backend safe static content bridge for Action Lab / Next Exploration Nodes. Local checks passed; PACK-10-FE remains sidecar if visible rendering is needed."
       }
     ]
   }

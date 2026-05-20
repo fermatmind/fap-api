@@ -145,8 +145,10 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.code_activity_pack.activities.0.occupation_examples.0.not_a_recommendation', true);
         $readback->assertJsonPath('riasec_public_projection_v2.activity_explorer_v0_1.code_activity_pack.activities.0.occupation_examples.0.fit_score_allowed', false);
         $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.schema_version', 'riasec.exploration_feedback_overlay.v0.1');
-        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.status', 'overlay_contract_only');
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.status', 'safe_static_content_bridge_v0_1');
         $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.feedback_stream_status', 'not_connected_v0_1');
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.action_lab_v1.public_raw_feedback_allowed', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.next_exploration_nodes_v1.affects_score', false);
         $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.snapshot_identity.measured_holland_code', 'RIA');
         $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.snapshot_identity.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $readback->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.measured_result_guard.scores_mutation_allowed', false);
