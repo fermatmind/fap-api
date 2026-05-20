@@ -3241,7 +3241,7 @@
       "branch": "fix/career-80-candidate-readiness-selector-1",
       "title": "fix(api): add career 80 candidate readiness selector",
       "name": "Add career 80 candidate readiness selector",
-      "status": "pr_opened_github_checks_pending",
+      "status": "merged",
       "depends_on": [
         "REPAIR-ENTITY-1",
         "SCAN-3"
@@ -6083,7 +6083,7 @@
         "no fap-web",
         "no live crawl"
       ],
-      "commit_sha": "6e603fa8",
+      "commit_sha": "4898eb6c3bc74c33ec6136f18f010c7a3d73fc54",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1513",
       "checks": {
         "authorization": {
@@ -6747,7 +6747,7 @@
       "branch": "codex/2786-cn-proxy-public-owner-pr-train-1",
       "title": "fix(api): gate reviewed CN proxy public owner plan",
       "name": "Gate reviewed CN proxy public owner plan for 2786",
-      "status": "in_progress",
+      "status": "local_validation_passed",
       "depends_on": [
         "REPAIR-2786-FINAL-PUBLIC-RESOLUTION-PARTITION-1",
         "CN-PROXY-AUTHORITY-POLICY-DECISION-1",
@@ -14343,14 +14343,18 @@
           "command": "git diff --cached --check"
         },
         "github_required_checks": {
-          "status": "pending",
-          "summary": "PR #1513 opened; GitHub checks pending."
+          "status": "pass",
+          "summary": "PR #1513 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
+        },
+        "merge": {
+          "status": "pass",
+          "summary": "Squash merged PR #1513 as 4898eb6c3bc74c33ec6136f18f010c7a3d73fc54."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-20T13:08:36Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "title": "Readiness scan uses accepted verified production counts without re-querying production DB",
@@ -14373,19 +14377,61 @@
           "at": "2026-05-20T12:34:00+08:00",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1513 for SEARCH-CHANNEL-LIVE-00. GitHub checks pending."
+        },
+        {
+          "at": "2026-05-20T21:08:36+08:00",
+          "status": "merged",
+          "summary": "GitHub checks passed, PR #1513 was squash merged as 4898eb6c3bc74c33ec6136f18f010c7a3d73fc54, the remote branch was deleted, and local post-merge cleanup executed."
         }
       ]
     },
     "GSC-LIVE-00": {
       "repo": "fap-api",
       "branch": "codex/gsc-live-00-readiness-contract",
-      "status": "initialized",
+      "status": "in_progress",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-00"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "summary": "SEARCH-CHANNEL-LIVE-00 merged as 4898eb6c3bc74c33ec6136f18f010c7a3d73fc54 and origin/main contains it."
+        },
+        "live_operation_guard": {
+          "status": "pass",
+          "summary": "No GSC live API call, URL submission, indexing request, scheduler enablement, collector write, production env edit, sitemap change, or llms change performed."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelGscLiveReadinessContract",
+          "summary": "6 tests passed, 71 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "summary": "233 tests passed, 3948 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "summary": "Route list rendered successfully; 203 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "summary": "3411 files passed."
+        },
+        "json_yaml_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/gsc-live-readiness-contract.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -14402,6 +14448,16 @@
           "at": "2026-05-20T12:20:00+08:00",
           "status": "initialized",
           "summary": "Registered GSC-LIVE-00 from explicit /goal scope for a no-live-call readiness contract."
+        },
+        {
+          "at": "2026-05-20T21:10:00+08:00",
+          "status": "in_progress",
+          "summary": "Started GSC-LIVE-00 after SEARCH-CHANNEL-LIVE-00 merged. Scope is docs/generated/test readiness contract only; no live GSC API call or indexing request is allowed."
+        },
+        {
+          "at": "2026-05-20T21:16:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "GSC readiness contract docs/generated/test passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. No live GSC call or URL indexing request occurred."
         }
       ]
     },
