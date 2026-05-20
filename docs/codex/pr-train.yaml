@@ -7039,3 +7039,93 @@ prs:
       github_checks_required: true
       squash: true
       auto_merge: true
+
+  - id: RIASEC-FULL-CONTENT-PACK-09-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-08
+      - RIASEC-FULL-CONTENT-PACK-06
+    branch: codex/riasec-full-content-pack-09-preflight
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-09-PREFLIGHT: Aspirations and disagree path asset preflight"
+    name: "Aspirations and disagree path backend preflight"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend content asset preflight PR
+    scope:
+      - Validate V7.3 aspirations_calibration_v1.zh-CN and disagree_path_v1.zh-CN before backend authoritative import.
+      - Document mutation guards, quality/near-tie dependency, public-surface exclusion, technical-key, forbidden-claim, and fail-closed risks.
+      - Register PACK-09 import follow-up without importing runtime content.
+      - Reconcile PACK-06 ledger state as merged from GitHub and origin/main.
+    allowed_paths:
+      - backend/tests/Fixtures/Riasec/aspirations_calibration_v1.zh-CN.jsonl
+      - backend/tests/Fixtures/Riasec/disagree_path_v1.zh-CN.jsonl
+      - backend/tests/Unit/Services/Riasec/*Aspirations*Preflight*.php
+      - backend/tests/Unit/Services/Riasec/*Disagree*Preflight*.php
+      - backend/tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Import runtime aspirations or disagree path content.
+      - Touch scorer math, question packs, Holland Code generation, projection runtime behavior, report/share/PDF/history runtime behavior, fap-web, feedback action lab, next exploration nodes, career registry source rows, analytics runtime, or production data.
+      - Add career recommendation, job fit, occupation match, ranking, success prediction, ability proof, skill proof, raw score delta, 140Q more accurate, result override, score mutation, or public raw-feedback exposure claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecAspirationsDisagreeAssetPreflightTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecAspirationsDisagreeAssetPreflightTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml")'
+      - php -r 'foreach(["backend/tests/Fixtures/Riasec/aspirations_calibration_v1.zh-CN.jsonl"=>70,"backend/tests/Fixtures/Riasec/disagree_path_v1.zh-CN.jsonl"=>45] as $file=>$expected){$n=0; foreach(file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES) as $line){$n++; json_decode($line,true,512,JSON_THROW_ON_ERROR);} if($n!==$expected){throw new RuntimeException("$file expected $expected got $n");}}'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    next_task: RIASEC-FULL-CONTENT-PACK-09
+
+  - id: RIASEC-FULL-CONTENT-PACK-09
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-09-PREFLIGHT
+      - RIASEC-FULL-CONTENT-PACK-08
+    branch: codex/riasec-full-content-pack-09
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-09: Import backend-authoritative aspirations and disagree path assets"
+    name: "Aspirations and disagree path backend authoritative import"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend content asset import PR
+    scope:
+      - Import V7.3 aspirations_calibration_v1.zh-CN and disagree_path_v1.zh-CN as backend-authoritative content assets.
+      - Add or update loader/validator for aspirations/disagree path content.
+      - Wire RIASEC deep content or overlay boundary layer to consume backend-authoritative assets.
+      - Keep aspirations and disagree content exploration-only and non-mutating.
+    allowed_paths:
+      - backend/content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl
+      - backend/content_assets/riasec/disagree_path_v1.zh-CN.jsonl
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php
+      - backend/app/Services/Riasec/RiasecContentRegistrySlotContract.php
+      - backend/tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Touch scorer math, question content packs, Holland Code generation, pair/top3/activity/occupation/140Q/quality imported assets except read-only dependency, fap-web fallback copy, real career registry source rows, feedback action lab, next nodes, analytics runtime, or production data.
+      - Mutate measured Holland Code, RIASEC scores, report snapshot, share/PDF/history measured payload, or expose raw feedback publicly.
+      - Add career match, job fit, occupation ranking, success prediction, ability proof, skill proof, raw score delta, or 140Q more accurate claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml")'
+      - php -r 'foreach(["backend/content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl"=>70,"backend/content_assets/riasec/disagree_path_v1.zh-CN.jsonl"=>45] as $file=>$expected){$n=0; foreach(file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES) as $line){$n++; json_decode($line,true,512,JSON_THROW_ON_ERROR);} if($n!==$expected){throw new RuntimeException("$file expected $expected got $n");}}'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
