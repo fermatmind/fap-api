@@ -5430,7 +5430,7 @@
       "repo": "fap-api",
       "branch": "fix/career-80-live-surface-authority-1",
       "title": "fix(api): align career 80 live surface with runtime authority",
-      "status": "local_validation_passed",
+      "status": "merged",
       "depends_on": [
         "REPAIR-POST-ROLLOUT-RUNTIME-PROJECTION-AUTHORITY-1"
       ],
@@ -6198,8 +6198,8 @@
         "no production DB query",
         "no live crawl"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "25449bd1dcd28f3e6cdb810af3030324db48d1dc",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1515",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -6943,7 +6943,7 @@
       "branch": "fix/career-2786-final-readiness-software-manual-hold-authority-1",
       "title": "fix(api): account software manual hold in 2786 readiness",
       "name": "Account software-developers manual-hold decision in final 2786 readiness",
-      "status": "in_progress",
+      "status": "local_validation_passed",
       "depends_on": [
         "SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1",
         "REPAIR-2786-FINAL-READINESS-PUBLIC-OWNER-PARTITION-AUTHORITY-1"
@@ -14519,12 +14519,20 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "summary": "PR #1515 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
+        },
+        "merge": {
+          "status": "pass",
+          "summary": "Squash merged PR #1515 as 25449bd1dcd28f3e6cdb810af3030324db48d1dc."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-20T13:29:33Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "title": "Baidu token/site ownership may be unavailable",
@@ -14547,19 +14555,61 @@
           "at": "2026-05-20T21:27:00+08:00",
           "status": "local_validation_passed",
           "summary": "Baidu readiness contract docs/generated/test passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. No Baidu push, token exposure, or live Baidu API call occurred."
+        },
+        {
+          "at": "2026-05-20T21:29:33+08:00",
+          "status": "merged",
+          "summary": "GitHub checks passed, PR #1515 was squash merged as 25449bd1dcd28f3e6cdb810af3030324db48d1dc, the remote branch was deleted, and local post-merge cleanup executed."
         }
       ]
     },
     "INDEXNOW-LIVE-00": {
       "repo": "fap-api",
       "branch": "codex/indexnow-live-00-readiness-contract",
-      "status": "initialized",
+      "status": "in_progress",
       "depends_on": [
         "BAIDU-LIVE-00"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "summary": "BAIDU-LIVE-00 merged as 25449bd1dcd28f3e6cdb810af3030324db48d1dc and origin/main contains it."
+        },
+        "live_operation_guard": {
+          "status": "pass",
+          "summary": "No IndexNow submission, live IndexNow endpoint call, key exposure, scheduler enablement, collector write, production env edit, sitemap change, or llms change performed."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelIndexNowLiveReadinessContract",
+          "summary": "7 tests passed, 90 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "summary": "246 tests passed, 4121 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "summary": "Route list rendered successfully; 203 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "summary": "3413 files passed."
+        },
+        "json_yaml_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/indexnow-live-readiness-contract.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -14576,6 +14626,16 @@
           "at": "2026-05-20T12:20:00+08:00",
           "status": "initialized",
           "summary": "Registered INDEXNOW-LIVE-00 from explicit /goal scope for a no-submit readiness contract."
+        },
+        {
+          "at": "2026-05-20T21:31:00+08:00",
+          "status": "in_progress",
+          "summary": "Started INDEXNOW-LIVE-00 after BAIDU-LIVE-00 merged. Scope is docs/generated/test readiness contract only; no IndexNow submission or live endpoint call is allowed."
+        },
+        {
+          "at": "2026-05-20T21:37:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "IndexNow readiness contract docs/generated/test passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. No IndexNow submission, key exposure, or live endpoint call occurred."
         }
       ]
     },

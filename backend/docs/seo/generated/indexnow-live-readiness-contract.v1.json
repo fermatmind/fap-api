@@ -1,0 +1,93 @@
+{
+  "version": "indexnow-live-readiness-contract.v1",
+  "task": "INDEXNOW-LIVE-00",
+  "type": "docs_generated_test_contract",
+  "channel": "indexnow",
+  "authority_boundary": {
+    "indexnow_is_url_update_signal_channel": true,
+    "indexnow_is_content_authority": false,
+    "indexnow_is_url_truth_authority": false,
+    "indexnow_is_sitemap_authority": false,
+    "indexnow_is_llms_authority": false,
+    "indexnow_is_indexing_or_ranking_proof": false,
+    "bypass_url_truth_allowed": false,
+    "bypass_search_channel_queue_allowed": false
+  },
+  "key_requirements": [
+    "documented_indexnow_key_owner",
+    "documented_key_rotation_and_revocation_owner",
+    "safe_secret_channel_only",
+    "approved_key_file_hosting",
+    "verified_key_file_content",
+    "verified_key_url",
+    "verified_allowed_hosts"
+  ],
+  "key_policy": {
+    "raw_key_in_docs_allowed": false,
+    "raw_key_in_logs_allowed": false,
+    "raw_key_in_generated_artifact_allowed": false,
+    "public_token_leakage_allowed": false,
+    "key_file_hosting_changed_in_this_pr": false
+  },
+  "allowed_host_policy": {
+    "allowed_hosts_must_be_explicit": true,
+    "initial_policy": "fermatmind_owned_canonical_public_hosts_only",
+    "unknown_hosts_allowed": false,
+    "localhost_allowed": false,
+    "private_network_hosts_allowed": false,
+    "third_party_hosts_allowed": false,
+    "canonical_host_mismatch_allowed": false
+  },
+  "submission_requires": [
+    "explicit_human_live_submission_approval",
+    "indexnow_key_verified",
+    "allowed_host_verified",
+    "search_channel_queue_approved",
+    "backend_cms_source_authority",
+    "canonical_url_present",
+    "published_state",
+    "indexable_state",
+    "url_truth_supported_page_type",
+    "claim_boundary_safe"
+  ],
+  "bulk_submission_contract": {
+    "bounded_batches_required": true,
+    "sanitized_logs_required": true,
+    "queue_records_required": true,
+    "raw_payload_storage_allowed": false
+  },
+  "excluded_url_classes": [
+    "draft",
+    "private",
+    "noindex",
+    "claim_unsafe",
+    "stale_slug",
+    "missing_canonical",
+    "unsupported_page_type",
+    "non_backend_authoritative"
+  ],
+  "forbidden_sensitive_outputs": [
+    "indexnow_key",
+    "token",
+    "api_key",
+    "cookie",
+    "session",
+    "email",
+    "order_id",
+    "attempt_id",
+    "payment_id",
+    "raw_ip",
+    "raw_payload"
+  ],
+  "live_submission_performed": false,
+  "live_api_call_in_this_pr": false,
+  "url_submission_performed": false,
+  "scheduler_enabled": false,
+  "collector_write_executed": false,
+  "live_connector_activated": false,
+  "credentials_added_in_this_pr": false,
+  "production_env_edited": false,
+  "sitemap_changed_in_this_pr": false,
+  "llms_changed_in_this_pr": false,
+  "next_task": "SEARCH-CHANNEL-LIVE-01-PREFLIGHT"
+}
