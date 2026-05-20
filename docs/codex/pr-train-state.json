@@ -14190,7 +14190,7 @@
     "merge_commit": "9a5bcdc43080d0d0420e1499e0ad0f8e2a1abc7f"
   },
   "RIASEC-FULL-CONTENT-PACK-13-BE": {
-    "status": "local_validation_passed",
+    "status": "pr_opened_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-13-be",
@@ -14207,8 +14207,8 @@
       "RIASEC-FULL-CONTENT-PACK-10-BE",
       "RIASEC-FULL-CONTENT-PACK-11-BE"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "471187ff",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1511",
     "checks": {
       "pack_11_be_ledger_reconciliation": {
         "status": "pass",
@@ -14251,6 +14251,10 @@
       "scope_validation": {
         "status": "pass",
         "summary": "Changed files are limited to PACK-11-BE ledger reconciliation, PACK-13-BE manifest/state registration, backend fixture-freeze docs, and backend RIASEC verification tests. No frontend, scorer, question-pack, analytics, or measured-payload mutation logic touched."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "summary": "PR #1511 opened; GitHub required checks pending."
       }
     },
     "failure_reason": null,
@@ -14268,6 +14272,11 @@
         "at": "2026-05-20T11:35:00+08:00",
         "status": "local_validation_passed",
         "summary": "Added backend full-content fixture matrix freeze coverage and documentation. Local checks passed; no runtime semantic change was required."
+      },
+      {
+        "at": "2026-05-20T11:42:00+08:00",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1511 for PACK-13-BE. GitHub required checks pending."
       }
     ]
   }
