@@ -379,6 +379,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_intel_two_stage_url_truth_handoff_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php',
+            'backend/app/Services/SeoIntel/UrlTruthHandoffArtifact.php',
+            'backend/app/Services/SeoIntel/UrlTruthInventoryRecordWriter.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_drift_foundation_files(): void
     {
         $changed = [
@@ -1715,6 +1726,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelTwoStageUrlTruthHandoffFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelDriftFoundationFile($file)) {
                 continue;
             }
@@ -2190,6 +2205,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/Sources/BackendAuthorityUrlTruthSource.php',
             'backend/app/Services/SeoIntel/Sources/UrlTruthInventorySource.php',
             'backend/app/Services/SeoIntel/UrlTruthInventoryRecord.php',
+        ], true);
+    }
+
+    private function isSeoIntelTwoStageUrlTruthHandoffFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php',
+            'backend/app/Services/SeoIntel/UrlTruthHandoffArtifact.php',
+            'backend/app/Services/SeoIntel/UrlTruthInventoryRecordWriter.php',
         ], true);
     }
 
