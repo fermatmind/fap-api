@@ -3516,7 +3516,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-05-content-registry-readiness",
       "title": "feat(riasec): add content registry readiness contract",
-      "status": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
       "depends_on": [
         "RIASEC-PERSONALIZATION-04"
       ],
@@ -6083,8 +6083,8 @@
         "no fap-web",
         "no live crawl"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "6e603fa8",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1513",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -14337,6 +14337,14 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "git_diff_cached_check": {
+          "status": "pass",
+          "command": "git diff --cached --check"
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "summary": "PR #1513 opened; GitHub checks pending."
         }
       },
       "failure_reason": null,
@@ -14360,6 +14368,11 @@
           "at": "2026-05-20T12:30:00+08:00",
           "status": "local_validation_passed",
           "summary": "Read-only scan docs/generated/test and train metadata validation passed. No live search API, URL submission, production crawler log read, scheduler, collector write, env edit, sitemap change, or llms change occurred."
+        },
+        {
+          "at": "2026-05-20T12:34:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1513 for SEARCH-CHANNEL-LIVE-00. GitHub checks pending."
         }
       ]
     },
