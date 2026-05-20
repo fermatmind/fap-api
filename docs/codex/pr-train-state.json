@@ -14006,7 +14006,7 @@
     "merge_commit": "80f4ff1063a6538eb9614dad1b9a54010bba7eae"
   },
   "RIASEC-FULL-CONTENT-PACK-11-BE-PREFLIGHT": {
-    "status": "pr_opened_github_checks_pending",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-11-be-preflight",
@@ -14060,14 +14060,19 @@
         "summary": "Changed files are limited to PACK-10-BE ledger reconciliation, PACK-11-BE-PREFLIGHT manifest/state registration, lifecycle preflight fixtures, lifecycle preflight PHPUnit coverage, and preflight docs; no runtime import and no fap-web changes."
       },
       "github_required_checks": {
-        "status": "pending",
-        "summary": "PR #1507 opened; GitHub required checks pending."
+        "status": "pass",
+        "summary": "GitHub required checks passed before merge for PR #1507."
+      },
+      "ledger_reconciliation": {
+        "status": "pass",
+        "summary": "GitHub PR #1507 is merged and origin/main contains 923d27cde622eaaa235830df1ba49098a793e8af; reconciled before PACK-11-BE.",
+        "source_of_truth": "GitHub PR + origin/main"
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-20T01:58:13Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "history": [
       {
@@ -14084,6 +14089,83 @@
         "at": "2026-05-20T01:58:00Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1507 for PACK-11-BE-PREFLIGHT. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-20T02:15:00Z",
+        "status": "merged",
+        "summary": "Reconciled after GitHub confirmed PR #1507 merged and origin/main contains merge commit 923d27cde622eaaa235830df1ba49098a793e8af."
+      }
+    ],
+    "merge_commit": "923d27cde622eaaa235830df1ba49098a793e8af"
+  },
+  "RIASEC-FULL-CONTENT-PACK-11-BE": {
+    "status": "in_progress",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-11-be",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-11-BE: Backend lifecycle copy import for Share/PDF/History/FAQ/Technical Note",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-11-BE-PREFLIGHT",
+      "RIASEC-FULL-CONTENT-PACK-10-BE"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "pack_11_be_preflight_ledger_reconciliation": {
+        "status": "pass",
+        "summary": "PACK-11-BE-PREFLIGHT reconciled to merged before PACK-11-BE registration."
+      },
+      "dependency_gate": {
+        "status": "pass",
+        "summary": "PACK-11-BE-PREFLIGHT and PACK-10-BE merge commits are present in origin/main."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi",
+        "summary": "12 tests passed; 1138 assertions. Laravel test wrapper emitted non-blocking file_get_contents warnings, while direct PHPUnit on the same files passed cleanly."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Services/Riasec/RiasecLifecycleCopyService.php app/Services/Riasec/RiasecTechnicalNoteService.php app/Services/Riasec/RiasecPublicProjectionService.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Unit/Services/Riasec/RiasecTechnicalNoteBoundaryTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php",
+        "summary": "7 files passed."
+      },
+      "json_markdown_validation": {
+        "status": "pass",
+        "summary": "pr-train-state JSON and pr-train YAML parsed successfully; lifecycle JSON assets parsed; FAQ markdown asset is present and non-empty."
+      },
+      "forbidden_claim_scan": {
+        "status": "pass",
+        "summary": "Imported lifecycle asset visible fields have forbidden_user_claim=0; boundary terms remain in negative or explanatory contexts only."
+      },
+      "technical_key_exposure_scan": {
+        "status": "pass",
+        "summary": "Imported lifecycle asset user-facing fields have visible technical key exposure=0."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "summary": "Changed files are limited to lifecycle assets, lifecycle backend bridge services, lifecycle/technical-note tests, lifecycle docs, and current PR manifest/state updates; no fap-web, scorer, question-pack, analytics, or measured-payload mutation logic touched."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-20T02:16:00Z",
+        "status": "in_progress",
+        "summary": "Registered PACK-11-BE after PACK-11-BE-PREFLIGHT reconciliation. Scope is backend lifecycle asset import and safe bridge only; no fap-web or later PACKs in this PR."
+      },
+      {
+        "at": "2026-05-20T02:35:00Z",
+        "status": "local_validation_passed",
+        "summary": "Implemented backend lifecycle asset import and safe additive bridge for technical note and public projection. Local checks passed; PACK-10-FE and PACK-11-FE remain conditional and are not started in this PR."
       }
     ]
   }

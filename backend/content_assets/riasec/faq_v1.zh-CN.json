@@ -1,0 +1,122 @@
+{
+  "asset_id": "faq_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-CN",
+  "scale_code": "RIASEC",
+  "review_status": "content_review_v7_3_final_preflight_candidate",
+  "questions": [
+    {
+      "q": "IAS 是什么意思？",
+      "a": "I、A、S 是你本次结果中较突出的三个兴趣维度。顺序表示本次排序，不是固定身份。"
+    },
+    {
+      "q": "这是不是告诉我该做什么职业？",
+      "a": "不是。它告诉你哪些工作活动值得先了解、先验证；真实选择还要看能力、经验、机会、价值观、门槛和市场条件。"
+    },
+    {
+      "q": "80 分是不是超过 80% 的人？",
+      "a": "不是。当前 0–100 是表单内兴趣强度换算，不是人群百分位，也不是能力分。"
+    },
+    {
+      "q": "低 E 是不是不能创业、销售或管理？",
+      "a": "不是。低 E 只表示强推动、高曝光、高竞争不一定是最自然的兴趣入口；是否能做还要看能力、经验和现实机会。"
+    },
+    {
+      "q": "低 R 是不是不能做技术或实操？",
+      "a": "不是。低 R 不代表手笨，也不代表不能学技术。它只说明工具、现场、实物操作不是当前最自然的兴趣入口。"
+    },
+    {
+      "q": "140Q 会不会更准？",
+      "a": "不能这样理解。140Q 更具体地观察任务、环境和角色责任，不推翻 60Q，也不比较不同表单原始分。"
+    },
+    {
+      "q": "如果我不认同结果怎么办？",
+      "a": "可以记录不认同点，检查作答状态、近似并列和活动想象，再用小实验或同表单重测验证。反馈不会改分数。"
+    },
+    {
+      "q": "职业例子为什么不直接展开成清单？",
+      "a": "因为职业名称很容易被误读成结论。费马测试先展示活动和任务，职业名称只作为场景例子，并标注来源状态。"
+    },
+    {
+      "q": "可以把报告给老师、咨询师或朋友看吗？",
+      "a": "可以优先分享安全版。完整报告涉及个人兴趣结构和反馈记录时，应由你决定是否展示。"
+    },
+    {
+      "q": "公司可以拿这个做筛选吗？",
+      "a": "不可以。本报告不能用于招聘、录取、晋升、淘汰或资格判断。"
+    },
+    {
+      "q": "为什么结果页会有 Action Lab？",
+      "a": "因为职业兴趣需要回到现实验证。Action Lab 只帮你做低风险小实验，不生成职业结论。"
+    },
+    {
+      "q": "复测结果不同怎么办？",
+      "a": "先看是否同表单、作答质量、near-tie 和当时状态。不要把不同 form 原始分画成涨跌。"
+    },
+    {
+      "q": "Holland Code 会不会随时间变化？",
+      "a": "兴趣结构通常有一定稳定性，但经历、机会和环境会影响表达方式。建议把复测当作变化线索，而不是输赢。"
+    },
+    {
+      "q": "这个测试和能力测试有什么区别？",
+      "a": "RIASEC 只看你对活动的兴趣，不判断你是否已经擅长；能力需要用其他证据验证。"
+    },
+    {
+      "q": "为什么不直接告诉我“最应该选什么”？",
+      "a": "直接给结论会让你忽略现实门槛。更稳妥的方式是先看活动、任务、环境和角色，再做小实验。"
+    },
+    {
+      "q": "如果我已经有目标职业，还要看 RIASEC 吗？",
+      "a": "可以把目标放在愿望校准里并读，看看其中哪些活动与当前兴趣线索重叠，哪些现实部分需要验证。"
+    },
+    {
+      "q": "PDF 可以给咨询师看吗？",
+      "a": "可以，但 PDF 一旦转发平台无法远程撤回。咨询讨论版应只在你授权后使用。"
+    },
+    {
+      "q": "结果页为什么不默认显示所有分数细节？",
+      "a": "默认展示等级和解释，避免用户把小数分当成假精确。展开后可以看更完整证据。"
+    },
+    {
+      "q": "分数很高是不是一定更好？",
+      "a": "不是。高兴趣只是更自然的能量入口，也可能带来现实成本；低兴趣也不是缺点。"
+    },
+    {
+      "q": "我可以用这份报告选专业吗？",
+      "a": "可以作为探索入口，但不能单独决定。选专业还要看课程内容、能力基础、作品、资源、地域和长期投入。"
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "v5_editorial_note": "FAQ reviewed for user misunderstanding paths and no score mutation claims."
+}

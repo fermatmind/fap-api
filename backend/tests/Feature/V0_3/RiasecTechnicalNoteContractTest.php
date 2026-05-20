@@ -32,6 +32,11 @@ final class RiasecTechnicalNoteContractTest extends TestCase
         $response->assertJsonPath('technical_note_v1.form_contracts.riasec_140.raw_score_delta_allowed', false);
         $response->assertJsonPath('technical_note_v1.method_boundaries.same_scale_not_same_score_space.evidence_level', 'measurement_contract');
         $response->assertJsonPath('technical_note_v1.method_boundaries.content_examples_not_registry_match.content_maturity', 'v0.1');
+        $response->assertJsonPath('technical_note_v1.lifecycle_copy_v1.schema_version', 'riasec.lifecycle_copy.v1');
+        $response->assertJsonPath('technical_note_v1.lifecycle_copy_v1.frontend_fallback_allowed', false);
+        $response->assertJsonPath('technical_note_v1.lifecycle_copy_v1.raw_feedback_public_exposure_allowed', false);
+        $response->assertJsonPath('technical_note_v1.lifecycle_copy_v1.surfaces.0.surface', 'share_safe_card');
+        $response->assertJsonPath('technical_note_v1.lifecycle_copy_v1.faq_items.0.q', 'IAS 是什么意思？');
 
         $sectionKeys = collect((array) $response->json('technical_note_v1.sections'))
             ->map(static fn (array $entry): string => (string) ($entry['section_key'] ?? ''))
