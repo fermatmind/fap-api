@@ -14854,12 +14854,12 @@
     "SEARCH-CHANNEL-QUEUE-01": {
       "repo": "fap-api",
       "branch": "codex/search-channel-queue-01-runtime-mvp",
-      "status": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-01-PREFLIGHT"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "46413dcee8f9ae2dce74a95422aa591a80a26110",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1518",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -14916,6 +14916,10 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github_checks": {
+          "status": "pending",
+          "summary": "GitHub CI is running for PR #1518."
         }
       },
       "failure_reason": null,
@@ -14944,6 +14948,11 @@
           "at": "2026-05-20T22:29:00+08:00",
           "status": "local_validation_passed",
           "summary": "Search Channel Queue runtime MVP passed focused and full SeoIntel tests, dry-run command modes, route list, Pint, JSON/YAML validation, diff check, and local/testing migration pretend. No live submission or external search API call occurred."
+        },
+        {
+          "at": "2026-05-20T22:34:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1518 for SEARCH-CHANNEL-QUEUE-01. GitHub checks pending. No live submission or production operation performed."
         }
       ]
     }
