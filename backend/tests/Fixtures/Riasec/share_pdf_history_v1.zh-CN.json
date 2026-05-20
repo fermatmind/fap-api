@@ -1,0 +1,91 @@
+{
+  "asset_id": "share_pdf_history_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-CN",
+  "scale_code": "RIASEC",
+  "review_status": "content_review_v7_3_final_preflight_candidate",
+  "surfaces": [
+    {
+      "surface": "share_safe_card",
+      "copy": "我的 RIASEC 结果显示：我更容易被若干工作活动线索吸引。分享版只展示安全摘要，不展示原始反馈或隐私上下文。",
+      "public_safe": true,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "share_detail_boundary",
+      "copy": "分享页不是完整报告，也不展示职业结论。它只说明本次结果的兴趣结构和方法边界。",
+      "public_safe": true,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "pdf_personal",
+      "copy": "个人留存版可保留完整结果、生成时间和方法边界。请注意 PDF 一旦转发，平台无法远程撤回。",
+      "public_safe": false,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "pdf_counselor_discussion",
+      "copy": "咨询讨论版可以在用户授权下展示更多探索摘要，但不得用于筛选、录取、晋升、淘汰或资格判断。",
+      "public_safe": false,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "history_same_form",
+      "copy": "历史记录优先展示同表单的 Top3 重叠、near-tie 和阅读力度，不画跨表原始分变化。",
+      "public_safe": false,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "history_cross_form",
+      "copy": "60Q 与 140Q 是不同分数空间。历史页只能解释两次结果强调的线索不同，不能画 raw score 涨跌。",
+      "public_safe": false,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "low_quality_share",
+      "copy": "谨慎阅读结果只允许安全分享摘要，默认不展示强活动链或职业场景例子。",
+      "public_safe": true,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "v5_editorial_note": "Share/PDF/history copy reviewed for public-safe, snapshot-bound summaries."
+}
