@@ -161,7 +161,7 @@ jobs:
 
       - name: Composer audit
         working-directory: backend
-        run: composer audit --no-interaction --ignore-unreachable
+        run: composer audit --locked --no-interaction --ignore-unreachable
 
       - name: Install backend dependencies
         working-directory: backend
