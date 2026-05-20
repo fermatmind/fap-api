@@ -14854,7 +14854,7 @@
     "SEARCH-CHANNEL-QUEUE-01": {
       "repo": "fap-api",
       "branch": "codex/search-channel-queue-01-runtime-mvp",
-      "status": "pr_opened_github_checks_pending",
+      "status": "ci_fix_local_validation_passed",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-01-PREFLIGHT"
       ],
@@ -14918,8 +14918,18 @@
           "command": "git diff --check"
         },
         "github_checks": {
-          "status": "pending",
-          "summary": "GitHub CI is running for PR #1518."
+          "status": "failed_then_fix_pushed_pending",
+          "summary": "GitHub verify-mbti legacy/v2 failed on BigFive runtime freeze false positive for scoped SeoIntel queue files. A narrow allowlist test update was added and locally validated."
+        },
+        "bigfive_runtime_freeze_fix": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "summary": "100 tests passed, 447 assertions."
+        },
+        "focused_phpunit_after_ci_fix": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelQueue",
+          "summary": "22 tests passed, 200 assertions."
         }
       },
       "failure_reason": null,
@@ -14953,6 +14963,11 @@
           "at": "2026-05-20T22:34:00+08:00",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1518 for SEARCH-CHANNEL-QUEUE-01. GitHub checks pending. No live submission or production operation performed."
+        },
+        {
+          "at": "2026-05-20T22:47:00+08:00",
+          "status": "ci_fix_local_validation_passed",
+          "summary": "Inspected GitHub check failure. It was the BigFive runtime freeze guard flagging scoped SeoIntel queue files. Added narrow allowlist coverage in the permitted BigFive freeze test and reran the queue tests plus the full BigFive freeze file locally."
         }
       ]
     }
