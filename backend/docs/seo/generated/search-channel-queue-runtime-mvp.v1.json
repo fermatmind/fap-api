@@ -1,0 +1,113 @@
+{
+  "schema_version": "search-channel-queue-runtime-mvp.v1",
+  "task": "SEARCH-CHANNEL-QUEUE-01",
+  "runtime": "search_channel_queue",
+  "allowed_channels": [
+    "google_sitemap",
+    "gsc_readiness",
+    "baidu_push",
+    "indexnow",
+    "so360_submit",
+    "sogou_submit",
+    "shenma_submit",
+    "llms_queue"
+  ],
+  "readiness_only_channels": [
+    "google_sitemap",
+    "gsc_readiness",
+    "llms_queue"
+  ],
+  "future_submission_channels": [
+    "baidu_push",
+    "indexnow",
+    "so360_submit",
+    "sogou_submit",
+    "shenma_submit"
+  ],
+  "allowed_page_entity_types": [
+    "research_report",
+    "home",
+    "test_hub",
+    "test_detail"
+  ],
+  "forbidden_page_entity_types": [
+    "take",
+    "result",
+    "order",
+    "checkout",
+    "pay",
+    "share",
+    "report_private",
+    "private_report",
+    "user_account",
+    "email_lookup",
+    "admin",
+    "ops"
+  ],
+  "approved_source_authorities": [
+    "backend_cms",
+    "backend_public_surface",
+    "scale_catalog"
+  ],
+  "forbidden_source_authorities": [
+    "frontend_fallback",
+    "static_sitemap_fallback",
+    "static_llms_fallback",
+    "node2_local_db",
+    "node2_local_laravel",
+    "crawler_log_source",
+    "production_crawler_logs",
+    "external_search_source",
+    "live_search_responses"
+  ],
+  "target_connection": "seo_intel",
+  "target_tables": [
+    "seo_search_channel_queue_items",
+    "seo_search_channel_queue_batches",
+    "seo_search_channel_queue_events"
+  ],
+  "protected_legacy_tables_not_written": [
+    "seo_baidu_push_logs",
+    "seo_indexnow_submissions",
+    "seo_domestic_submission_logs"
+  ],
+  "queue_item_states": {
+    "eligibility_state": [
+      "eligible",
+      "ineligible",
+      "blocked"
+    ],
+    "approval_state": [
+      "pending",
+      "approved",
+      "rejected"
+    ],
+    "execution_state": [
+      "queued",
+      "dry_run_ready",
+      "submitted",
+      "failed",
+      "retry_pending",
+      "blocked"
+    ]
+  },
+  "batch_statuses": [
+    "draft",
+    "dry_run",
+    "approved",
+    "blocked",
+    "submitted",
+    "failed"
+  ],
+  "no_live_submission": true,
+  "no_external_api": true,
+  "no_submit_mode": true,
+  "dry_run_required_before_write": true,
+  "write_gate_env": "SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED",
+  "persistent_env_write_enabled_by_default": false,
+  "scheduler_enabled": false,
+  "crawler_log_read_allowed": false,
+  "collector_production_write_allowed": false,
+  "sitemap_llms_behavior_change_allowed": false,
+  "next_task": "SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT"
+}

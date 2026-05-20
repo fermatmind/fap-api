@@ -5901,6 +5901,7 @@ prs:
       github_checks_required: true
       squash: true
       auto_merge: true
+
     production_write_execution: false
     scheduler_activation: false
     external_api_live_activation: false
@@ -7678,3 +7679,59 @@ prs:
       github_checks_required: true
       squash: true
       auto_merge: true
+
+  - id: SEARCH-CHANNEL-QUEUE-01
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-LIVE-01-PREFLIGHT
+    branch: codex/search-channel-queue-01-runtime-mvp
+    base: main
+    title: "feat(seo-intel): add Search Channel Queue runtime MVP"
+    name: "Search Channel Queue runtime MVP"
+    train_scope: search_channel_queue_runtime
+    risk_level: L2
+    type: scoped backend runtime PR
+    scope:
+      - Add controlled Search Channel Queue runtime MVP on the seo_intel connection.
+      - Plan queue candidates from verified URL Truth with strict eligibility and channel mapping.
+      - Add queue item, batch, event schema; dry-run/no-submit command; idempotent write service; and audit event logging.
+      - Keep all live URL submission, search API calls, scheduler activation, production collector writes, crawler log reads, env edits, deploys, and sitemap/llms behavior changes blocked.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/app/Console/Commands/SeoIntelSearchChannelQueueCommand.php
+      - backend/app/Services/SeoIntel/**
+      - backend/app/Models/SeoIntel/**
+      - backend/database/migrations/seo_intel/**
+      - backend/tests/Feature/SeoIntel/*SearchChannelQueue*Test.php
+      - backend/docs/seo/search-channel-queue-runtime-mvp.md
+      - backend/docs/seo/generated/search-channel-queue-runtime-mvp.v1.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Submit URLs, request indexing, call live GSC/Baidu/IndexNow/domestic search APIs, add tokens, expose credentials, enable scheduler, read production crawler logs, run production collector writes, edit env, deploy, or change sitemap/llms behavior.
+      - Write baidu_push_logs, indexnow_submissions, domestic submission logs, business DB tables, CMS publish tables, payment/order/report/user/email runtime, Metabase files, or fap-web files.
+      - Allow draft/private/noindex/claim-unsafe/stale/frontend-fallback/static-sitemap/static-llms/Node2/crawler-log/external-search URLs into the queue.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelQueue
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:search-channel-queue --dry-run --no-write --json --limit=20
+      - cd backend && php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=20
+      - cd backend && php artisan seo-intel:search-channel-queue --dry-run --no-write --json --page-type=research_report --limit=20
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && php artisan migrate --pretend --database=seo_intel --path=database/migrations/seo_intel --no-ansi
+      - python3 -m json.tool backend/docs/seo/generated/search-channel-queue-runtime-mvp.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT
