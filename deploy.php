@@ -94,6 +94,7 @@ set('required_public_scale_lookup_slugs', [
 ]);
 set('scale_lookup_healthcheck_host', 'api.fermatmind.com');
 set('scale_lookup_healthcheck_use_resolve', false);
+set('deploy_lock_metadata_path', '.dep/deploy.lock.meta.json');
 
 /**
  * ======================================================
@@ -1100,6 +1101,81 @@ task('fap:seed_shared_content_packages', function () {
 
 /**
  * ======================================================
+ * Deploy lock metadata / ownership-aware cleanup
+ * ======================================================
+ */
+task('fap:write-deploy-lock-metadata', function () {
+    $metadata = getenv('DEPLOY_LOCK_METADATA');
+
+    if (! is_string($metadata) || trim($metadata) === '') {
+        return;
+    }
+
+    json_decode($metadata, true, 512, JSON_THROW_ON_ERROR);
+
+    run('mkdir -p '.deployPlaceholderPathArg('{{deploy_path}}', '.dep'));
+    run('printf %s '.deployShellArg($metadata).' > '.deployPlaceholderPathArg('{{deploy_path}}', get('deploy_lock_metadata_path')));
+});
+
+task('fap:remove-deploy-lock-metadata', function () {
+    run('rm -f '.deployPlaceholderPathArg('{{deploy_path}}', get('deploy_lock_metadata_path')));
+});
+
+task('fap:deploy-unlock-owned', function () {
+    $runId = getenv('DEPLOY_LOCK_RUN_ID');
+    $runAttempt = getenv('DEPLOY_LOCK_RUN_ATTEMPT');
+
+    if (! is_string($runId) || trim($runId) === '' || ! is_string($runAttempt) || trim($runAttempt) === '') {
+        invoke('deploy:unlock');
+
+        return;
+    }
+
+    $metaPath = '{{deploy_path}}/'.get('deploy_lock_metadata_path');
+    $checkScript = <<<'PHP'
+$path = $argv[1] ?? '';
+$expectedRunId = getenv('DEPLOY_LOCK_RUN_ID') ?: '';
+$expectedRunAttempt = getenv('DEPLOY_LOCK_RUN_ATTEMPT') ?: '';
+
+if ($path === '' || ! is_file($path)) {
+    fwrite(STDERR, "deploy lock metadata is missing\n");
+    exit(2);
+}
+
+$payload = json_decode((string) file_get_contents($path), true);
+
+if (! is_array($payload)) {
+    fwrite(STDERR, "deploy lock metadata is invalid JSON\n");
+    exit(3);
+}
+
+if (
+    (string) ($payload['run_id'] ?? '') !== (string) $expectedRunId
+    || (string) ($payload['run_attempt'] ?? '') !== (string) $expectedRunAttempt
+) {
+    fwrite(STDERR, "deploy lock metadata is owned by another run\n");
+    exit(4);
+}
+
+echo "owned\n";
+PHP;
+
+    try {
+        $result = run('php -r '.deployShellArg($checkScript).' '.deployShellArg($metaPath));
+    } catch (\Throwable $e) {
+        writeln('<comment>Skipping deploy:unlock because lock ownership could not be verified.</comment>');
+        writeln('<comment>'.$e->getMessage().'</comment>');
+
+        return;
+    }
+
+    if (trim($result) === 'owned') {
+        invoke('deploy:unlock');
+    }
+});
+
+/**
+ * ======================================================
  * Hooks
  * ======================================================
  */
@@ -1108,6 +1184,9 @@ before('deploy', 'guard:forbid-destructive');
 before('rollback', 'guard:deploy-shell-config');
 before('deploy:prepare', 'ensure:phpredis');
 before('deploy:shared', 'fap:seed_shared_content_packages');
+
+after('deploy:lock', 'fap:write-deploy-lock-metadata');
+after('deploy:unlock', 'fap:remove-deploy-lock-metadata');
 
 after('deploy:vendors', 'bootstrap-cache:clear-release');
 
@@ -1147,4 +1226,4 @@ after('deploy:symlink', 'healthcheck:queue-smoke');
 after('rollback', 'bootstrap-cache:rebuild-current');
 after('bootstrap-cache:rebuild-current', 'rollback:healthcheck');
 
-after('deploy:failed', 'deploy:unlock');
+after('deploy:failed', 'fap:deploy-unlock-owned');

@@ -14,18 +14,17 @@ on:
           - staging
           - production
 
-concurrency:
-  group: deploy-${{ github.repository }}-${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
-  cancel-in-progress: ${{ github.event_name == 'push' }}  # push(main) 只跑最新一次 staging
-
 permissions:
   contents: read
 
 jobs:
-  deploy:
-    name: Deploy (${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }})
+  checks:
+    name: Deploy checks (${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    concurrency:
+      group: deploy-checks-${{ github.repository }}-${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+      cancel-in-progress: ${{ github.event_name == 'push' }}
 
     services:
       mysql:
@@ -49,10 +48,6 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=12
-
-    # 关键：绑定 GitHub Environment，使 secrets.SSH_PRIVATE_KEY 读取到对应环境的 Environment Secret
-    environment:
-      name: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
 
     env:
       TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
@@ -196,7 +191,115 @@ jobs:
           set -euo pipefail
           bash ./backend/scripts/ci_verify_mbti.sh
 
+  deploy:
+    name: Deploy (${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }})
+    needs: checks
+    if: needs.checks.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: deploy-${{ github.repository }}-${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+      cancel-in-progress: false
+
+    # 关键：绑定 GitHub Environment，使 secrets.SSH_PRIVATE_KEY 读取到对应环境的 Environment Secret
+    environment:
+      name: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+
+    env:
+      TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+      DEPLOYER_VERSION: "7.5.12"
+      DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
+
+      # ====== production ======
+      DEPLOY_USER_PROD: "ubuntu"
+      DEPLOY_PORT_PROD: "22"
+      DEPLOY_HOST_PROD: "122.152.221.126"
+      DEPLOY_PATH_PROD: "/var/www/fap-api"
+      HEALTHCHECK_URL_PROD: "https://fermatmind.com/api/healthz"
+      AUTH_GUEST_CHECK_URL_PROD: "https://fermatmind.com/api/v0.3/auth/guest"
+
+      # ====== staging ======
+      DEPLOY_USER_STG: "ubuntu"
+      DEPLOY_PORT_STG: "22"
+      DEPLOY_HOST_STG: "49.234.55.28"
+      DEPLOY_PATH_STG: "/var/www/fap-api-staging"
+      HEALTHCHECK_URL_STG: "https://staging.fermatmind.com/api/healthz"
+      AUTH_GUEST_CHECK_URL_STG: "https://staging.fermatmind.com/api/v0.3/auth/guest"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+
+      - name: Resolve target vars
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          case "$TARGET" in
+            production)
+              DEPLOY_HOST="$DEPLOY_HOST_PROD"
+              DEPLOY_USER="$DEPLOY_USER_PROD"
+              DEPLOY_PORT="$DEPLOY_PORT_PROD"
+              DEPLOY_PATH="$DEPLOY_PATH_PROD"
+              HEALTHCHECK_URL="$HEALTHCHECK_URL_PROD"
+              AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_PROD"
+              ;;
+            staging)
+              DEPLOY_HOST="$DEPLOY_HOST_STG"
+              DEPLOY_USER="$DEPLOY_USER_STG"
+              DEPLOY_PORT="$DEPLOY_PORT_STG"
+              DEPLOY_PATH="$DEPLOY_PATH_STG"
+              HEALTHCHECK_URL="$HEALTHCHECK_URL_STG"
+              AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_STG"
+              ;;
+            *)
+              echo "invalid TARGET=$TARGET"
+              exit 2
+              ;;
+          esac
+
+          {
+            echo "DEPLOY_HOST=$DEPLOY_HOST"
+            echo "DEPLOY_USER=$DEPLOY_USER"
+            echo "DEPLOY_PORT=$DEPLOY_PORT"
+            echo "DEPLOY_PATH=$DEPLOY_PATH"
+            echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
+            echo "AUTH_GUEST_CHECK_URL=$AUTH_GUEST_CHECK_URL"
+          } >> "$GITHUB_ENV"
+
+          echo "TARGET=$TARGET"
+          echo "SSH=$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PORT"
+          echo "DEPLOY_PATH=$DEPLOY_PATH"
+          echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
+          echo "AUTH_GUEST_CHECK_URL=$AUTH_GUEST_CHECK_URL"
+
+      - name: Skip stale staging deploy
+        id: stale_guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "skip_deploy=false" >> "$GITHUB_OUTPUT"
+
+          if [ "$TARGET" != "staging" ] || [ "$GITHUB_EVENT_NAME" != "push" ]; then
+            exit 0
+          fi
+
+          git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+          LATEST_MAIN_SHA="$(git rev-parse origin/main)"
+
+          if [ "$GITHUB_SHA" != "$LATEST_MAIN_SHA" ]; then
+            echo "Skip stale staging deploy: GITHUB_SHA=$GITHUB_SHA latest=$LATEST_MAIN_SHA"
+            echo "skip_deploy=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Install Deployer (pinned)
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -205,17 +308,20 @@ jobs:
           php /tmp/dep.phar --version
 
       - name: Set up SSH
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Debug SSH agent (fingerprints only)
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
           ssh-add -l
 
       - name: Install pinned SSH known_hosts
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
@@ -227,6 +333,7 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
 
       - name: SSH preflight (whoami)
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -240,17 +347,86 @@ jobs:
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
 
+      - name: Remote deploy lock guard
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "TARGET='$TARGET' DEPLOY_PATH='$DEPLOY_PATH' bash -s" <<'REMOTE'
+          set -euo pipefail
+
+          LOCK="$DEPLOY_PATH/.dep/deploy.lock"
+          META="$DEPLOY_PATH/.dep/deploy.lock.meta.json"
+
+          if [ ! -f "$LOCK" ]; then
+            echo "deploy lock guard: no existing lock"
+            exit 0
+          fi
+
+          OWNER="$(cat "$LOCK" 2>/dev/null || true)"
+          LOCK_MTIME="$(stat -c %Y "$LOCK")"
+          NOW="$(date +%s)"
+          AGE_SECONDS="$((NOW - LOCK_MTIME))"
+
+          echo "deploy lock guard: existing lock owner=${OWNER:-unknown} age_seconds=$AGE_SECONDS"
+          [ -f "$META" ] && sed -n '1,120p' "$META" || true
+
+          ACTIVE_PROCESSES="$(ps -eo pid,ppid,user,cmd \
+            | grep -E 'dep deploy|dep worker|deployer|composer install|artisan migrate|queue:reload-workers' \
+            | grep -v grep || true)"
+
+          if [ -n "$ACTIVE_PROCESSES" ]; then
+            echo "$ACTIVE_PROCESSES"
+            echo "deploy lock guard: active deploy-like process exists"
+            exit 1
+          fi
+
+          if [ "$TARGET" = "staging" ] && [ "$AGE_SECONDS" -ge 1800 ]; then
+            echo "deploy lock guard: removing stale staging lock"
+            rm -f "$LOCK" "$META"
+            exit 0
+          fi
+
+          echo "deploy lock guard: lock is not safe to remove automatically"
+          exit 1
+          REMOTE
+
       - name: Deploy (Deployer)
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         env:
           DEPLOYER_NO_INTERACTION: "1"
         run: |
           set -euo pipefail
+          DEPLOY_LOCK_METADATA="$(php -r '
+          $serverUrl = getenv("GITHUB_SERVER_URL") ?: "https://github.com";
+          $repository = getenv("GITHUB_REPOSITORY") ?: "";
+          $runId = getenv("GITHUB_RUN_ID") ?: "";
+
+          echo json_encode([
+              "env" => getenv("TARGET") ?: "",
+              "run_id" => $runId,
+              "run_attempt" => getenv("GITHUB_RUN_ATTEMPT") ?: "",
+              "sha" => getenv("GITHUB_SHA") ?: "",
+              "actor" => getenv("GITHUB_ACTOR") ?: "",
+              "workflow" => getenv("GITHUB_WORKFLOW") ?: "",
+              "repository" => $repository,
+              "workflow_url" => rtrim($serverUrl, "/")."/".$repository."/actions/runs/".$runId,
+              "deploy_path" => getenv("DEPLOY_PATH") ?: "",
+              "started_at" => gmdate("Y-m-d\TH:i:s\Z"),
+          ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+          ')"
+          export DEPLOY_LOCK_METADATA
+          export DEPLOY_LOCK_RUN_ID="$GITHUB_RUN_ID"
+          export DEPLOY_LOCK_RUN_ATTEMPT="$GITHUB_RUN_ATTEMPT"
           php /tmp/dep.phar deploy "$TARGET" -f deploy.php \
             -o release_name="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             -vvv --no-interaction
 
       - name: Restart queue workers (Supervisor)
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -259,6 +435,7 @@ jobs:
             "cd '$DEPLOY_PATH/current/backend' && php artisan queue:restart"
 
       - name: Healthcheck (post deploy)
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -276,6 +453,7 @@ jobs:
           exit 1
 
       - name: Contract check (auth/guest post deploy)
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -293,6 +471,7 @@ jobs:
           exit 1
 
       - name: Ops entry smoke (post deploy)
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -384,6 +563,7 @@ jobs:
           retry "Ops login 200" 5 assert_200 "$LOGIN_URL"
 
       - name: Ops asset smoke (post deploy)
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
