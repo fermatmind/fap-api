@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-20T03:53:00Z",
+  "updated_at": "2026-05-20T04:20:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6644,7 +6644,7 @@
       "branch": "codex/repair-2786-final-public-resolution-partition-1-202605160412",
       "title": "fix(api): partition final career 2786 public resolution",
       "name": "Partition final 2786 public-resolution assets before candidate prep",
-      "status": "in_progress",
+      "status": "local_validation_passed",
       "depends_on": [
         "800-CLOSEOUT-1"
       ],
@@ -12556,7 +12556,7 @@
       "next_pr": "RESEARCH-PUBLISH-02-RERUN"
     },
     "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00": {
-      "status": "ci_fix_local_validation_passed",
+      "status": "merged",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/seo-intel-two-stage-url-truth-handoff-pr-00",
@@ -12565,7 +12565,7 @@
       "depends_on": [
         "RESEARCH-PUBLISH-02-FIX"
       ],
-      "commit_sha": "1c0fdd6e9ab327c9886b74546d973c5f8c94d22b",
+      "commit_sha": "1cd5d3d0e2eeb14896ad9446ce53da5fb5c35e47",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1512",
       "checks": {
         "local": {
@@ -12583,18 +12583,26 @@
           "bigfive_runtime_freeze_scope_allowlist": "passed"
         },
         "github": {
-          "status": "failed_ci_fix_pending_push",
-          "failed_checks": [
+          "status": "passed",
+          "checks": [
+            "hygiene",
             "verify-mbti-legacy",
-            "verify-mbti-v2"
+            "verify-mbti-v2",
+            "semgrep sarif",
+            "Semgrep OSS"
           ],
-          "failure_summary": "BigFive runtime freeze flagged scoped SEO Intel handoff command/service files as MBTI-impacting runtime changes before a narrow allowlist was added."
+          "merge_state": "MERGED",
+          "merge_commit": "1cd5d3d0e2eeb14896ad9446ce53da5fb5c35e47"
+        },
+        "ledger_reconciliation": {
+          "status": "pass",
+          "summary": "GitHub PR #1512 is merged, origin/main contains merge commit 1cd5d3d0e2eeb14896ad9446ce53da5fb5c35e47, and the remote branch is deleted."
         }
       },
-      "failure_reason": "GitHub checks failed on BigFive runtime freeze false positive; scoped allowlist added for the three SEO Intel two-stage handoff files and focused BigFive runtime freeze test passed locally.",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "failure_reason": null,
+      "merged_at": "2026-05-20T04:00:03Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "history": [
         {
@@ -12631,6 +12639,11 @@
           "at": "2026-05-20T03:53:00Z",
           "status": "ci_fix_local_validation_passed",
           "summary": "Added a narrow BigFive runtime-freeze allowlist for exactly the SEO Intel two-stage handoff command/service files, updated manifest scope, and reran the focused BigFive freeze test successfully."
+        },
+        {
+          "at": "2026-05-20T12:24:00+08:00",
+          "status": "reconciled_merged",
+          "summary": "Reconciled GitHub PR #1512 as merged with green checks. origin/main contains merge commit 1cd5d3d0e2eeb14896ad9446ce53da5fb5c35e47 and the remote branch is deleted."
         }
       ],
       "next_pr": "RESEARCH-PUBLISH-02-RERUN"
@@ -14275,7 +14288,198 @@
     ],
     "merge_commit": "9a5bcdc43080d0d0420e1499e0ad0f8e2a1abc7f"
   },
-  "RIASEC-FULL-CONTENT-PACK-13-BE": {
+    "SEARCH-CHANNEL-LIVE-00": {
+      "repo": "fap-api",
+      "branch": "codex/search-channel-live-00-readiness-split-scan",
+      "status": "in_progress",
+      "depends_on": [
+        "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "scope_validation": {
+          "status": "pass",
+          "summary": "Changed files are limited to Search Channel live readiness split scan docs/generated/test, stale SEO handoff ledger reconciliation, and PR train metadata. Unrelated docs/audits/eq/ remains unstaged."
+        },
+        "dependency_reconciliation": {
+          "status": "pass",
+          "summary": "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00 is merged on GitHub, origin/main contains merge commit 1cd5d3d0e2eeb14896ad9446ce53da5fb5c35e47, and the remote branch is deleted."
+        },
+        "live_operation_guard": {
+          "status": "pass",
+          "summary": "No URL submission, live external search API call, production crawler log read, scheduler enablement, collector write, production env edit, sitemap change, or llms change performed."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelLiveReadinessScan",
+          "summary": "4 tests passed, 51 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "summary": "227 tests passed, 3877 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "summary": "Route list rendered successfully; 203 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "summary": "3410 files passed."
+        },
+        "json_yaml_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/search-channel-live-readiness-scan.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "Readiness scan uses accepted verified production counts without re-querying production DB",
+          "status": "recorded_avoided",
+          "summary": "The train forbids business DB / Tencent RDS / Node2 DB access. Counts are recorded from the user-provided verified SEO Dash MVP state and guarded by local contract tests."
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-20T12:20:00+08:00",
+          "status": "in_progress",
+          "summary": "Initialized SEARCH-CHANNEL-LIVE-00 after explicit /goal authorization. Added local read-only split scan docs/generated/test and registered the GSC, Baidu, IndexNow, and preflight follow-up tasks."
+        },
+        {
+          "at": "2026-05-20T12:30:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Read-only scan docs/generated/test and train metadata validation passed. No live search API, URL submission, production crawler log read, scheduler, collector write, env edit, sitemap change, or llms change occurred."
+        }
+      ]
+    },
+    "GSC-LIVE-00": {
+      "repo": "fap-api",
+      "branch": "codex/gsc-live-00-readiness-contract",
+      "status": "initialized",
+      "depends_on": [
+        "SEARCH-CHANNEL-LIVE-00"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "GSC credentials/property may be unavailable",
+          "status": "sidecar_not_blocking_docs_contract",
+          "summary": "No live GSC API call or credential validation is required for GSC-LIVE-00."
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-20T12:20:00+08:00",
+          "status": "initialized",
+          "summary": "Registered GSC-LIVE-00 from explicit /goal scope for a no-live-call readiness contract."
+        }
+      ]
+    },
+    "BAIDU-LIVE-00": {
+      "repo": "fap-api",
+      "branch": "codex/baidu-live-00-readiness-contract",
+      "status": "initialized",
+      "depends_on": [
+        "GSC-LIVE-00"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "Baidu token/site ownership may be unavailable",
+          "status": "sidecar_not_blocking_docs_contract",
+          "summary": "No Baidu push or token validation is required for BAIDU-LIVE-00."
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-20T12:20:00+08:00",
+          "status": "initialized",
+          "summary": "Registered BAIDU-LIVE-00 from explicit /goal scope for a no-push readiness contract."
+        }
+      ]
+    },
+    "INDEXNOW-LIVE-00": {
+      "repo": "fap-api",
+      "branch": "codex/indexnow-live-00-readiness-contract",
+      "status": "initialized",
+      "depends_on": [
+        "BAIDU-LIVE-00"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "IndexNow key may be unavailable",
+          "status": "sidecar_not_blocking_docs_contract",
+          "summary": "No IndexNow submission or key validation is required for INDEXNOW-LIVE-00."
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-20T12:20:00+08:00",
+          "status": "initialized",
+          "summary": "Registered INDEXNOW-LIVE-00 from explicit /goal scope for a no-submit readiness contract."
+        }
+      ]
+    },
+    "SEARCH-CHANNEL-LIVE-01-PREFLIGHT": {
+      "repo": "fap-api",
+      "branch": "codex/search-channel-live-01-preflight",
+      "status": "initialized",
+      "depends_on": [
+        "INDEXNOW-LIVE-00"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "Search Channel Queue runtime may be missing",
+          "status": "record_for_preflight",
+          "summary": "The preflight must decide between live canary approval readiness and SEARCH-CHANNEL-QUEUE-01 runtime MVP."
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-20T12:20:00+08:00",
+          "status": "initialized",
+          "summary": "Registered SEARCH-CHANNEL-LIVE-01-PREFLIGHT from explicit /goal scope for URL eligibility and no-submit preflight."
+        }
+      ]
+    },
+    "RIASEC-FULL-CONTENT-PACK-13-BE": {
     "status": "pr_opened_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",

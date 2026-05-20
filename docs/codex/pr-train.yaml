@@ -7485,3 +7485,196 @@ prs:
       github_checks_required: true
       squash: true
       auto_merge: true
+
+  - id: SEARCH-CHANNEL-LIVE-00
+    repo: fap-api
+    depends_on:
+      - SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00
+    branch: codex/search-channel-live-00-readiness-split-scan
+    base: main
+    title: "SEARCH-CHANNEL-LIVE-00｜Search Channel readiness split scan"
+    name: "Search Channel readiness split scan"
+    train_scope: search_channel_live_readiness
+    risk_level: L2
+    type: backend docs/generated/test metadata PR
+    scope:
+      - Confirm Research URL Truth, Search Channel Queue contract, exclusion rules, and no-live-operation boundaries before live readiness contracts.
+      - Register the explicitly authorized Search Channel live readiness train tasks.
+      - Preserve sitemap, llms, scheduler, crawler-log, collector-write, production env, and live search API boundaries.
+    allowed_paths:
+      - backend/docs/seo/search-channel-live-readiness-scan.md
+      - backend/docs/seo/generated/search-channel-live-readiness-scan.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelLiveReadinessScanTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Submit URLs or request indexing.
+      - Connect live GSC, Baidu, IndexNow, Bing, 360, Sogou, Shenma, or other search APIs.
+      - Read production crawler logs, run collector writes, enable scheduler, deploy, edit production env, change DNS/CDN/OpenResty/Nginx, or change sitemap/llms behavior.
+      - Use frontend fallback, static sitemap, static llms, production crawler logs, live search responses, Node2 local DB, or business DB tables as Search Channel URL authority.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelLiveReadinessScan
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/search-channel-live-readiness-scan.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+
+  - id: GSC-LIVE-00
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-LIVE-00
+    branch: codex/gsc-live-00-readiness-contract
+    base: main
+    title: "GSC-LIVE-00｜Google Search Console readiness contract"
+    name: "Google Search Console readiness contract"
+    train_scope: search_channel_live_readiness
+    risk_level: L2
+    type: backend docs/generated/test PR
+    scope:
+      - Define Google Search Console readiness without live calls, URL submission, indexing requests, scheduler enablement, or connector activation.
+      - Preserve CMS/backend URL Truth authority and make GSC feedback/readiness only.
+    allowed_paths:
+      - backend/docs/seo/gsc-live-readiness-contract.md
+      - backend/docs/seo/generated/gsc-live-readiness-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGscLiveReadinessContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Call live GSC APIs, request indexing, submit URLs, activate a live connector, enable scheduler, edit env, or change sitemap/llms behavior.
+      - Let GSC create URLs or override CMS/backend URL Truth.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGscLiveReadinessContract
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/gsc-live-readiness-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+
+  - id: BAIDU-LIVE-00
+    repo: fap-api
+    depends_on:
+      - GSC-LIVE-00
+    branch: codex/baidu-live-00-readiness-contract
+    base: main
+    title: "BAIDU-LIVE-00｜Baidu Resource Platform readiness contract"
+    name: "Baidu Resource Platform readiness contract"
+    train_scope: search_channel_live_readiness
+    risk_level: L2
+    type: backend docs/generated/test PR
+    scope:
+      - Define Baidu Resource Platform readiness without URL push, token exposure, alternate Baidu page truth, scheduler enablement, or live connector activation.
+      - Preserve Search Channel Queue, CMS/backend URL Truth, and Chinese claim boundary linter requirements.
+    allowed_paths:
+      - backend/docs/seo/baidu-live-readiness-contract.md
+      - backend/docs/seo/generated/baidu-live-readiness-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelBaiduLiveReadinessContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Push URLs to Baidu, expose tokens, call live Baidu APIs, enable scheduler, edit env, or change sitemap/llms behavior.
+      - Create a Baidu-only page set or separate Baidu authority layer.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelBaiduLiveReadinessContract
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/baidu-live-readiness-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+
+  - id: INDEXNOW-LIVE-00
+    repo: fap-api
+    depends_on:
+      - BAIDU-LIVE-00
+    branch: codex/indexnow-live-00-readiness-contract
+    base: main
+    title: "INDEXNOW-LIVE-00｜IndexNow readiness contract"
+    name: "IndexNow readiness contract"
+    train_scope: search_channel_live_readiness
+    risk_level: L2
+    type: backend docs/generated/test PR
+    scope:
+      - Define IndexNow readiness without live submission, public key/token leakage, scheduler enablement, or connector activation.
+      - Require key verification, allowed host controls, and Search Channel Queue approved URL eligibility before any future submission.
+    allowed_paths:
+      - backend/docs/seo/indexnow-live-readiness-contract.md
+      - backend/docs/seo/generated/indexnow-live-readiness-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelIndexNowLiveReadinessContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Submit URLs to IndexNow, expose keys, call live IndexNow endpoints, enable scheduler, edit env, or change sitemap/llms behavior.
+      - Bypass CMS/backend URL Truth or Search Channel Queue approval.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelIndexNowLiveReadinessContract
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/indexnow-live-readiness-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+
+  - id: SEARCH-CHANNEL-LIVE-01-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - INDEXNOW-LIVE-00
+    branch: codex/search-channel-live-01-preflight
+    base: main
+    title: "SEARCH-CHANNEL-LIVE-01-PREFLIGHT｜URL eligibility and no-submit preflight"
+    name: "URL eligibility and no-submit preflight"
+    train_scope: search_channel_live_readiness
+    risk_level: L2
+    type: backend docs/generated/test report PR
+    scope:
+      - Produce the consolidated no-submit Search Channel live readiness report from local contracts and accepted verified SEO state.
+      - Verify URL eligibility boundaries, channel readiness status, and Search Channel Queue runtime/contract readiness without live API calls or submissions.
+    allowed_paths:
+      - backend/docs/seo/search-channel-live-preflight.md
+      - backend/docs/seo/generated/search-channel-live-preflight.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelLivePreflightTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Submit URLs, call live GSC/Baidu/IndexNow APIs, enable scheduler, read production crawler logs, run collector writes, edit env, deploy, or change sitemap/llms behavior.
+      - Treat draft/private/noindex/claim-unsafe URLs as eligible.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelLivePreflight
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/search-channel-live-preflight.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true

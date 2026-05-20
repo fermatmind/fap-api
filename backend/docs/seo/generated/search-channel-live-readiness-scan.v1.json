@@ -1,0 +1,59 @@
+{
+  "version": "search-channel-live-readiness-scan.v1",
+  "task": "SEARCH-CHANNEL-LIVE-00",
+  "type": "read_only_split_scan",
+  "accepted_verified_current_state": {
+    "seo_urls": 9,
+    "seo_url_entities": 9,
+    "seo_issue_queue": 5,
+    "research_report_rows": 2,
+    "production_db_queried_by_this_scan": false
+  },
+  "contracts_confirmed": [
+    "research_url_truth_observation",
+    "research_seo_geo_search_channel_contract",
+    "search_channel_queue_contract",
+    "chinese_claim_boundary_linter"
+  ],
+  "research_url_truth": {
+    "page_entity_type": "research_report",
+    "source_authority": "backend_cms",
+    "requires_published_state": true,
+    "requires_indexable_state": true,
+    "requires_claim_boundary_safe": true,
+    "forbidden_states": [
+      "draft",
+      "private",
+      "noindex",
+      "unapproved",
+      "unsupported_route",
+      "claim_unsafe"
+    ]
+  },
+  "search_channel_queue_contract_exists": true,
+  "sitemap_changed_in_this_train": false,
+  "llms_changed_in_this_train": false,
+  "live_search_channel_operation_already_run_by_this_train": false,
+  "url_submission_performed": false,
+  "live_external_api_call_performed": false,
+  "production_crawler_log_read": false,
+  "scheduler_enabled": false,
+  "collector_write_executed": false,
+  "production_env_edited": false,
+  "forbidden_authority_inputs": [
+    "frontend_fallback",
+    "static_sitemap_fallback",
+    "static_llms_fallback",
+    "production_crawler_logs",
+    "live_search_engine_response_as_page_truth",
+    "node2_local_db",
+    "business_db_raw_tables"
+  ],
+  "next_tasks": [
+    "GSC-LIVE-00",
+    "BAIDU-LIVE-00",
+    "INDEXNOW-LIVE-00",
+    "SEARCH-CHANNEL-LIVE-01-PREFLIGHT"
+  ],
+  "final_decision": "ready_for_search_channel_readiness_pr_train"
+}
