@@ -501,6 +501,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_intel_search_channel_queue_runtime_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoIntelSearchChannelQueueCommand.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueAuditLogger.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueChannelMapper.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityEvaluator.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityResult.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueIdempotency.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueuePlanner.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueWriteService.php',
+            'backend/database/migrations/seo_intel/2026_05_20_220000_create_seo_search_channel_queue_tables.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_migration_isolation_files(): void
     {
         $changed = [
@@ -1758,6 +1775,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelSearchChannelQueueRuntimeFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelMigrationIsolationFile($file)) {
                 continue;
             }
@@ -2311,6 +2332,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/SeoIssueSanitizer.php',
             'backend/app/Services/SeoIntel/SeoIssueSummaryService.php',
             'backend/database/migrations/2026_05_17_001700_create_seo_issue_queue_table.php',
+        ], true);
+    }
+
+    private function isSeoIntelSearchChannelQueueRuntimeFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelSearchChannelQueueCommand.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueAuditLogger.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueChannelMapper.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityEvaluator.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityResult.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueIdempotency.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueuePlanner.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueWriteService.php',
+            'backend/database/migrations/seo_intel/2026_05_20_220000_create_seo_search_channel_queue_tables.php',
         ], true);
     }
 

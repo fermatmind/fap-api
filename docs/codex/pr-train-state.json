@@ -14288,451 +14288,451 @@
     ],
     "merge_commit": "9a5bcdc43080d0d0420e1499e0ad0f8e2a1abc7f"
   },
-    "SEARCH-CHANNEL-LIVE-00": {
-      "repo": "fap-api",
-      "branch": "codex/search-channel-live-00-readiness-split-scan",
-      "status": "in_progress",
-      "depends_on": [
-        "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00"
-      ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {
-        "scope_validation": {
-          "status": "pass",
-          "summary": "Changed files are limited to Search Channel live readiness split scan docs/generated/test, stale SEO handoff ledger reconciliation, and PR train metadata. Unrelated docs/audits/eq/ remains unstaged."
-        },
-        "dependency_reconciliation": {
-          "status": "pass",
-          "summary": "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00 is merged on GitHub, origin/main contains merge commit 1cd5d3d0e2eeb14896ad9446ce53da5fb5c35e47, and the remote branch is deleted."
-        },
-        "live_operation_guard": {
-          "status": "pass",
-          "summary": "No URL submission, live external search API call, production crawler log read, scheduler enablement, collector write, production env edit, sitemap change, or llms change performed."
-        },
-        "focused_phpunit": {
-          "status": "pass",
-          "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelLiveReadinessScan",
-          "summary": "4 tests passed, 51 assertions."
-        },
-        "seo_intel_phpunit": {
-          "status": "pass",
-          "command": "cd backend && php artisan test --filter=SeoIntel",
-          "summary": "227 tests passed, 3877 assertions."
-        },
-        "route_list": {
-          "status": "pass",
-          "command": "cd backend && php artisan route:list --no-ansi",
-          "summary": "Route list rendered successfully; 203 routes."
-        },
-        "pint": {
-          "status": "pass",
-          "command": "cd backend && vendor/bin/pint --test",
-          "summary": "3410 files passed."
-        },
-        "json_yaml_validation": {
-          "status": "pass",
-          "command": "python3 -m json.tool backend/docs/seo/generated/search-channel-live-readiness-scan.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
-        },
-        "git_diff_check": {
-          "status": "pass",
-          "command": "git diff --check"
-        },
-        "git_diff_cached_check": {
-          "status": "pass",
-          "command": "git diff --cached --check"
-        },
-        "github_required_checks": {
-          "status": "pass",
-          "summary": "PR #1513 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
-        },
-        "merge": {
-          "status": "pass",
-          "summary": "Squash merged PR #1513 as 4898eb6c3bc74c33ec6136f18f010c7a3d73fc54."
-        }
+  "SEARCH-CHANNEL-LIVE-00": {
+    "repo": "fap-api",
+    "branch": "codex/search-channel-live-00-readiness-split-scan",
+    "status": "in_progress",
+    "depends_on": [
+      "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "scope_validation": {
+        "status": "pass",
+        "summary": "Changed files are limited to Search Channel live readiness split scan docs/generated/test, stale SEO handoff ledger reconciliation, and PR train metadata. Unrelated docs/audits/eq/ remains unstaged."
       },
-      "failure_reason": null,
-      "merged_at": "2026-05-20T13:08:36Z",
-      "remote_branch_deleted": true,
-      "local_cleanup_executed": true,
-      "sidecar_issues": [
-        {
-          "title": "Readiness scan uses accepted verified production counts without re-querying production DB",
-          "status": "recorded_avoided",
-          "summary": "The train forbids business DB / Tencent RDS / Node2 DB access. Counts are recorded from the user-provided verified SEO Dash MVP state and guarded by local contract tests."
-        }
-      ],
-      "history": [
-        {
-          "at": "2026-05-20T12:20:00+08:00",
-          "status": "in_progress",
-          "summary": "Initialized SEARCH-CHANNEL-LIVE-00 after explicit /goal authorization. Added local read-only split scan docs/generated/test and registered the GSC, Baidu, IndexNow, and preflight follow-up tasks."
-        },
-        {
-          "at": "2026-05-20T12:30:00+08:00",
-          "status": "local_validation_passed",
-          "summary": "Read-only scan docs/generated/test and train metadata validation passed. No live search API, URL submission, production crawler log read, scheduler, collector write, env edit, sitemap change, or llms change occurred."
-        },
-        {
-          "at": "2026-05-20T12:34:00+08:00",
-          "status": "pr_opened_github_checks_pending",
-          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1513 for SEARCH-CHANNEL-LIVE-00. GitHub checks pending."
-        },
-        {
-          "at": "2026-05-20T21:08:36+08:00",
-          "status": "merged",
-          "summary": "GitHub checks passed, PR #1513 was squash merged as 4898eb6c3bc74c33ec6136f18f010c7a3d73fc54, the remote branch was deleted, and local post-merge cleanup executed."
-        }
-      ]
-    },
-    "GSC-LIVE-00": {
-      "repo": "fap-api",
-      "branch": "codex/gsc-live-00-readiness-contract",
-      "status": "in_progress",
-      "depends_on": [
-        "SEARCH-CHANNEL-LIVE-00"
-      ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {
-        "dependency": {
-          "status": "pass",
-          "summary": "SEARCH-CHANNEL-LIVE-00 merged as 4898eb6c3bc74c33ec6136f18f010c7a3d73fc54 and origin/main contains it."
-        },
-        "live_operation_guard": {
-          "status": "pass",
-          "summary": "No GSC live API call, URL submission, indexing request, scheduler enablement, collector write, production env edit, sitemap change, or llms change performed."
-        },
-        "focused_phpunit": {
-          "status": "pass",
-          "command": "cd backend && php artisan test --filter=SeoIntelGscLiveReadinessContract",
-          "summary": "6 tests passed, 71 assertions."
-        },
-        "seo_intel_phpunit": {
-          "status": "pass",
-          "command": "cd backend && php artisan test --filter=SeoIntel",
-          "summary": "233 tests passed, 3948 assertions."
-        },
-        "route_list": {
-          "status": "pass",
-          "command": "cd backend && php artisan route:list --no-ansi",
-          "summary": "Route list rendered successfully; 203 routes."
-        },
-        "pint": {
-          "status": "pass",
-          "command": "cd backend && vendor/bin/pint --test",
-          "summary": "3411 files passed."
-        },
-        "json_yaml_validation": {
-          "status": "pass",
-          "command": "python3 -m json.tool backend/docs/seo/generated/gsc-live-readiness-contract.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
-        },
-        "git_diff_check": {
-          "status": "pass",
-          "command": "git diff --check"
-        },
-        "github_required_checks": {
-          "status": "pass",
-          "summary": "PR #1514 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
-        },
-        "merge": {
-          "status": "pass",
-          "summary": "Squash merged PR #1514 as c95a25819d3c76f2298d87f3bd139557a1954b6e."
-        }
+      "dependency_reconciliation": {
+        "status": "pass",
+        "summary": "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00 is merged on GitHub, origin/main contains merge commit 1cd5d3d0e2eeb14896ad9446ce53da5fb5c35e47, and the remote branch is deleted."
       },
-      "failure_reason": null,
-      "merged_at": "2026-05-20T13:18:38Z",
-      "remote_branch_deleted": true,
-      "local_cleanup_executed": true,
-      "sidecar_issues": [
-        {
-          "title": "GSC credentials/property may be unavailable",
-          "status": "sidecar_not_blocking_docs_contract",
-          "summary": "No live GSC API call or credential validation is required for GSC-LIVE-00."
-        }
-      ],
-      "history": [
-        {
-          "at": "2026-05-20T12:20:00+08:00",
-          "status": "initialized",
-          "summary": "Registered GSC-LIVE-00 from explicit /goal scope for a no-live-call readiness contract."
-        },
-        {
-          "at": "2026-05-20T21:10:00+08:00",
-          "status": "in_progress",
-          "summary": "Started GSC-LIVE-00 after SEARCH-CHANNEL-LIVE-00 merged. Scope is docs/generated/test readiness contract only; no live GSC API call or indexing request is allowed."
-        },
-        {
-          "at": "2026-05-20T21:16:00+08:00",
-          "status": "local_validation_passed",
-          "summary": "GSC readiness contract docs/generated/test passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. No live GSC call or URL indexing request occurred."
-        },
-        {
-          "at": "2026-05-20T21:18:38+08:00",
-          "status": "merged",
-          "summary": "GitHub checks passed, PR #1514 was squash merged as c95a25819d3c76f2298d87f3bd139557a1954b6e, the remote branch was deleted, and local post-merge cleanup executed."
-        }
-      ]
-    },
-    "BAIDU-LIVE-00": {
-      "repo": "fap-api",
-      "branch": "codex/baidu-live-00-readiness-contract",
-      "status": "in_progress",
-      "depends_on": [
-        "GSC-LIVE-00"
-      ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {
-        "dependency": {
-          "status": "pass",
-          "summary": "GSC-LIVE-00 merged as c95a25819d3c76f2298d87f3bd139557a1954b6e and origin/main contains it."
-        },
-        "live_operation_guard": {
-          "status": "pass",
-          "summary": "No Baidu push, live Baidu API call, token exposure, scheduler enablement, collector write, production env edit, sitemap change, or llms change performed."
-        },
-        "focused_phpunit": {
-          "status": "pass",
-          "command": "cd backend && php artisan test --filter=SeoIntelBaiduLiveReadinessContract",
-          "summary": "6 tests passed, 83 assertions."
-        },
-        "seo_intel_phpunit": {
-          "status": "pass",
-          "command": "cd backend && php artisan test --filter=SeoIntel",
-          "summary": "239 tests passed, 4031 assertions."
-        },
-        "route_list": {
-          "status": "pass",
-          "command": "cd backend && php artisan route:list --no-ansi",
-          "summary": "Route list rendered successfully; 203 routes."
-        },
-        "pint": {
-          "status": "pass",
-          "command": "cd backend && vendor/bin/pint --test",
-          "summary": "3412 files passed."
-        },
-        "json_yaml_validation": {
-          "status": "pass",
-          "command": "python3 -m json.tool backend/docs/seo/generated/baidu-live-readiness-contract.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
-        },
-        "git_diff_check": {
-          "status": "pass",
-          "command": "git diff --check"
-        },
-        "github_required_checks": {
-          "status": "pass",
-          "summary": "PR #1515 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
-        },
-        "merge": {
-          "status": "pass",
-          "summary": "Squash merged PR #1515 as 25449bd1dcd28f3e6cdb810af3030324db48d1dc."
-        }
+      "live_operation_guard": {
+        "status": "pass",
+        "summary": "No URL submission, live external search API call, production crawler log read, scheduler enablement, collector write, production env edit, sitemap change, or llms change performed."
       },
-      "failure_reason": null,
-      "merged_at": "2026-05-20T13:29:33Z",
-      "remote_branch_deleted": true,
-      "local_cleanup_executed": true,
-      "sidecar_issues": [
-        {
-          "title": "Baidu token/site ownership may be unavailable",
-          "status": "sidecar_not_blocking_docs_contract",
-          "summary": "No Baidu push or token validation is required for BAIDU-LIVE-00."
-        }
-      ],
-      "history": [
-        {
-          "at": "2026-05-20T12:20:00+08:00",
-          "status": "initialized",
-          "summary": "Registered BAIDU-LIVE-00 from explicit /goal scope for a no-push readiness contract."
-        },
-        {
-          "at": "2026-05-20T21:20:00+08:00",
-          "status": "in_progress",
-          "summary": "Started BAIDU-LIVE-00 after GSC-LIVE-00 merged. Scope is docs/generated/test readiness contract only; no Baidu push or live Baidu API call is allowed."
-        },
-        {
-          "at": "2026-05-20T21:27:00+08:00",
-          "status": "local_validation_passed",
-          "summary": "Baidu readiness contract docs/generated/test passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. No Baidu push, token exposure, or live Baidu API call occurred."
-        },
-        {
-          "at": "2026-05-20T21:29:33+08:00",
-          "status": "merged",
-          "summary": "GitHub checks passed, PR #1515 was squash merged as 25449bd1dcd28f3e6cdb810af3030324db48d1dc, the remote branch was deleted, and local post-merge cleanup executed."
-        }
-      ]
-    },
-    "INDEXNOW-LIVE-00": {
-      "repo": "fap-api",
-      "branch": "codex/indexnow-live-00-readiness-contract",
-      "status": "in_progress",
-      "depends_on": [
-        "BAIDU-LIVE-00"
-      ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {
-        "dependency": {
-          "status": "pass",
-          "summary": "BAIDU-LIVE-00 merged as 25449bd1dcd28f3e6cdb810af3030324db48d1dc and origin/main contains it."
-        },
-        "live_operation_guard": {
-          "status": "pass",
-          "summary": "No IndexNow submission, live IndexNow endpoint call, key exposure, scheduler enablement, collector write, production env edit, sitemap change, or llms change performed."
-        },
-        "focused_phpunit": {
-          "status": "pass",
-          "command": "cd backend && php artisan test --filter=SeoIntelIndexNowLiveReadinessContract",
-          "summary": "7 tests passed, 90 assertions."
-        },
-        "seo_intel_phpunit": {
-          "status": "pass",
-          "command": "cd backend && php artisan test --filter=SeoIntel",
-          "summary": "246 tests passed, 4121 assertions."
-        },
-        "route_list": {
-          "status": "pass",
-          "command": "cd backend && php artisan route:list --no-ansi",
-          "summary": "Route list rendered successfully; 203 routes."
-        },
-        "pint": {
-          "status": "pass",
-          "command": "cd backend && vendor/bin/pint --test",
-          "summary": "3413 files passed."
-        },
-        "json_yaml_validation": {
-          "status": "pass",
-          "command": "python3 -m json.tool backend/docs/seo/generated/indexnow-live-readiness-contract.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
-        },
-        "git_diff_check": {
-          "status": "pass",
-          "command": "git diff --check"
-        },
-        "github_required_checks": {
-          "status": "pass",
-          "summary": "PR #1516 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
-        },
-        "merge": {
-          "status": "pass",
-          "summary": "Squash merged PR #1516 as 84dac5c278ba531a3e156432f7419a67535df35f."
-        }
+      "focused_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelLiveReadinessScan",
+        "summary": "4 tests passed, 51 assertions."
       },
-      "failure_reason": null,
-      "merged_at": "2026-05-20T13:39:10Z",
-      "remote_branch_deleted": true,
-      "local_cleanup_executed": true,
-      "sidecar_issues": [
-        {
-          "title": "IndexNow key may be unavailable",
-          "status": "sidecar_not_blocking_docs_contract",
-          "summary": "No IndexNow submission or key validation is required for INDEXNOW-LIVE-00."
-        }
-      ],
-      "history": [
-        {
-          "at": "2026-05-20T12:20:00+08:00",
-          "status": "initialized",
-          "summary": "Registered INDEXNOW-LIVE-00 from explicit /goal scope for a no-submit readiness contract."
-        },
-        {
-          "at": "2026-05-20T21:31:00+08:00",
-          "status": "in_progress",
-          "summary": "Started INDEXNOW-LIVE-00 after BAIDU-LIVE-00 merged. Scope is docs/generated/test readiness contract only; no IndexNow submission or live endpoint call is allowed."
-        },
-        {
-          "at": "2026-05-20T21:37:00+08:00",
-          "status": "local_validation_passed",
-          "summary": "IndexNow readiness contract docs/generated/test passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. No IndexNow submission, key exposure, or live endpoint call occurred."
-        },
-        {
-          "at": "2026-05-20T21:39:10+08:00",
-          "status": "merged",
-          "summary": "GitHub checks passed, PR #1516 was squash merged as 84dac5c278ba531a3e156432f7419a67535df35f, the remote branch was deleted, and local post-merge cleanup executed."
-        }
-      ]
-    },
-    "SEARCH-CHANNEL-LIVE-01-PREFLIGHT": {
-      "repo": "fap-api",
-      "branch": "codex/search-channel-live-01-preflight",
-      "status": "in_progress",
-      "depends_on": [
-        "INDEXNOW-LIVE-00"
-      ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {
-        "dependency": {
-          "status": "pass",
-          "summary": "INDEXNOW-LIVE-00 merged as 84dac5c278ba531a3e156432f7419a67535df35f and origin/main contains it."
-        },
-        "live_operation_guard": {
-          "status": "pass",
-          "summary": "No URL submission, GSC live request, Baidu push, IndexNow POST, scheduler enablement, collector write, production crawler log read, production env edit, sitemap change, or llms change performed."
-        },
-        "preflight_decision": {
-          "status": "blocked_search_channel_queue_runtime_missing",
-          "summary": "Search Channel Queue contract exists, but no controlled runtime queue implementation exists for live approval/execution/audit."
-        },
-        "focused_phpunit": {
-          "status": "pass",
-          "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelLivePreflight",
-          "summary": "6 tests passed, 89 assertions."
-        },
-        "seo_intel_phpunit": {
-          "status": "pass",
-          "command": "cd backend && php artisan test --filter=SeoIntel",
-          "summary": "252 tests passed, 4210 assertions."
-        },
-        "route_list": {
-          "status": "pass",
-          "command": "cd backend && php artisan route:list --no-ansi",
-          "summary": "Route list rendered successfully; 203 routes."
-        },
-        "pint": {
-          "status": "pass",
-          "command": "cd backend && vendor/bin/pint --test",
-          "summary": "3414 files passed."
-        },
-        "json_yaml_validation": {
-          "status": "pass",
-          "command": "python3 -m json.tool backend/docs/seo/generated/search-channel-live-preflight.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
-        },
-        "git_diff_check": {
-          "status": "pass",
-          "command": "git diff --check"
-        }
+      "seo_intel_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=SeoIntel",
+        "summary": "227 tests passed, 3877 assertions."
       },
-      "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
-      "sidecar_issues": [
-        {
-          "title": "Search Channel Queue runtime may be missing",
-          "status": "record_for_preflight",
-          "summary": "The preflight must decide between live canary approval readiness and SEARCH-CHANNEL-QUEUE-01 runtime MVP."
-        }
-      ],
-      "history": [
-        {
-          "at": "2026-05-20T12:20:00+08:00",
-          "status": "initialized",
-          "summary": "Registered SEARCH-CHANNEL-LIVE-01-PREFLIGHT from explicit /goal scope for URL eligibility and no-submit preflight."
-        },
-        {
-          "at": "2026-05-20T21:41:00+08:00",
-          "status": "in_progress",
-          "summary": "Started SEARCH-CHANNEL-LIVE-01-PREFLIGHT after INDEXNOW-LIVE-00 merged. Scope is local report/docs/generated/test only; live search submission and production reads remain forbidden."
-        },
-        {
-          "at": "2026-05-20T21:48:00+08:00",
-          "status": "local_validation_passed",
-          "summary": "No-submit preflight report passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. Final decision is blocked_search_channel_queue_runtime_missing; next task is SEARCH-CHANNEL-QUEUE-01 runtime MVP."
-        }
-      ]
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "summary": "Route list rendered successfully; 203 routes."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "summary": "3410 files passed."
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "command": "python3 -m json.tool backend/docs/seo/generated/search-channel-live-readiness-scan.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
+      },
+      "git_diff_cached_check": {
+        "status": "pass",
+        "command": "git diff --cached --check"
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "summary": "PR #1513 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
+      },
+      "merge": {
+        "status": "pass",
+        "summary": "Squash merged PR #1513 as 4898eb6c3bc74c33ec6136f18f010c7a3d73fc54."
+      }
     },
-    "RIASEC-FULL-CONTENT-PACK-13-BE": {
+    "failure_reason": null,
+    "merged_at": "2026-05-20T13:08:36Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "sidecar_issues": [
+      {
+        "title": "Readiness scan uses accepted verified production counts without re-querying production DB",
+        "status": "recorded_avoided",
+        "summary": "The train forbids business DB / Tencent RDS / Node2 DB access. Counts are recorded from the user-provided verified SEO Dash MVP state and guarded by local contract tests."
+      }
+    ],
+    "history": [
+      {
+        "at": "2026-05-20T12:20:00+08:00",
+        "status": "in_progress",
+        "summary": "Initialized SEARCH-CHANNEL-LIVE-00 after explicit /goal authorization. Added local read-only split scan docs/generated/test and registered the GSC, Baidu, IndexNow, and preflight follow-up tasks."
+      },
+      {
+        "at": "2026-05-20T12:30:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "Read-only scan docs/generated/test and train metadata validation passed. No live search API, URL submission, production crawler log read, scheduler, collector write, env edit, sitemap change, or llms change occurred."
+      },
+      {
+        "at": "2026-05-20T12:34:00+08:00",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1513 for SEARCH-CHANNEL-LIVE-00. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-20T21:08:36+08:00",
+        "status": "merged",
+        "summary": "GitHub checks passed, PR #1513 was squash merged as 4898eb6c3bc74c33ec6136f18f010c7a3d73fc54, the remote branch was deleted, and local post-merge cleanup executed."
+      }
+    ]
+  },
+  "GSC-LIVE-00": {
+    "repo": "fap-api",
+    "branch": "codex/gsc-live-00-readiness-contract",
+    "status": "in_progress",
+    "depends_on": [
+      "SEARCH-CHANNEL-LIVE-00"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "summary": "SEARCH-CHANNEL-LIVE-00 merged as 4898eb6c3bc74c33ec6136f18f010c7a3d73fc54 and origin/main contains it."
+      },
+      "live_operation_guard": {
+        "status": "pass",
+        "summary": "No GSC live API call, URL submission, indexing request, scheduler enablement, collector write, production env edit, sitemap change, or llms change performed."
+      },
+      "focused_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=SeoIntelGscLiveReadinessContract",
+        "summary": "6 tests passed, 71 assertions."
+      },
+      "seo_intel_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=SeoIntel",
+        "summary": "233 tests passed, 3948 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "summary": "Route list rendered successfully; 203 routes."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "summary": "3411 files passed."
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "command": "python3 -m json.tool backend/docs/seo/generated/gsc-live-readiness-contract.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "summary": "PR #1514 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
+      },
+      "merge": {
+        "status": "pass",
+        "summary": "Squash merged PR #1514 as c95a25819d3c76f2298d87f3bd139557a1954b6e."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": "2026-05-20T13:18:38Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "sidecar_issues": [
+      {
+        "title": "GSC credentials/property may be unavailable",
+        "status": "sidecar_not_blocking_docs_contract",
+        "summary": "No live GSC API call or credential validation is required for GSC-LIVE-00."
+      }
+    ],
+    "history": [
+      {
+        "at": "2026-05-20T12:20:00+08:00",
+        "status": "initialized",
+        "summary": "Registered GSC-LIVE-00 from explicit /goal scope for a no-live-call readiness contract."
+      },
+      {
+        "at": "2026-05-20T21:10:00+08:00",
+        "status": "in_progress",
+        "summary": "Started GSC-LIVE-00 after SEARCH-CHANNEL-LIVE-00 merged. Scope is docs/generated/test readiness contract only; no live GSC API call or indexing request is allowed."
+      },
+      {
+        "at": "2026-05-20T21:16:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "GSC readiness contract docs/generated/test passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. No live GSC call or URL indexing request occurred."
+      },
+      {
+        "at": "2026-05-20T21:18:38+08:00",
+        "status": "merged",
+        "summary": "GitHub checks passed, PR #1514 was squash merged as c95a25819d3c76f2298d87f3bd139557a1954b6e, the remote branch was deleted, and local post-merge cleanup executed."
+      }
+    ]
+  },
+  "BAIDU-LIVE-00": {
+    "repo": "fap-api",
+    "branch": "codex/baidu-live-00-readiness-contract",
+    "status": "in_progress",
+    "depends_on": [
+      "GSC-LIVE-00"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "summary": "GSC-LIVE-00 merged as c95a25819d3c76f2298d87f3bd139557a1954b6e and origin/main contains it."
+      },
+      "live_operation_guard": {
+        "status": "pass",
+        "summary": "No Baidu push, live Baidu API call, token exposure, scheduler enablement, collector write, production env edit, sitemap change, or llms change performed."
+      },
+      "focused_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=SeoIntelBaiduLiveReadinessContract",
+        "summary": "6 tests passed, 83 assertions."
+      },
+      "seo_intel_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=SeoIntel",
+        "summary": "239 tests passed, 4031 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "summary": "Route list rendered successfully; 203 routes."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "summary": "3412 files passed."
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "command": "python3 -m json.tool backend/docs/seo/generated/baidu-live-readiness-contract.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "summary": "PR #1515 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
+      },
+      "merge": {
+        "status": "pass",
+        "summary": "Squash merged PR #1515 as 25449bd1dcd28f3e6cdb810af3030324db48d1dc."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": "2026-05-20T13:29:33Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "sidecar_issues": [
+      {
+        "title": "Baidu token/site ownership may be unavailable",
+        "status": "sidecar_not_blocking_docs_contract",
+        "summary": "No Baidu push or token validation is required for BAIDU-LIVE-00."
+      }
+    ],
+    "history": [
+      {
+        "at": "2026-05-20T12:20:00+08:00",
+        "status": "initialized",
+        "summary": "Registered BAIDU-LIVE-00 from explicit /goal scope for a no-push readiness contract."
+      },
+      {
+        "at": "2026-05-20T21:20:00+08:00",
+        "status": "in_progress",
+        "summary": "Started BAIDU-LIVE-00 after GSC-LIVE-00 merged. Scope is docs/generated/test readiness contract only; no Baidu push or live Baidu API call is allowed."
+      },
+      {
+        "at": "2026-05-20T21:27:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "Baidu readiness contract docs/generated/test passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. No Baidu push, token exposure, or live Baidu API call occurred."
+      },
+      {
+        "at": "2026-05-20T21:29:33+08:00",
+        "status": "merged",
+        "summary": "GitHub checks passed, PR #1515 was squash merged as 25449bd1dcd28f3e6cdb810af3030324db48d1dc, the remote branch was deleted, and local post-merge cleanup executed."
+      }
+    ]
+  },
+  "INDEXNOW-LIVE-00": {
+    "repo": "fap-api",
+    "branch": "codex/indexnow-live-00-readiness-contract",
+    "status": "in_progress",
+    "depends_on": [
+      "BAIDU-LIVE-00"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "summary": "BAIDU-LIVE-00 merged as 25449bd1dcd28f3e6cdb810af3030324db48d1dc and origin/main contains it."
+      },
+      "live_operation_guard": {
+        "status": "pass",
+        "summary": "No IndexNow submission, live IndexNow endpoint call, key exposure, scheduler enablement, collector write, production env edit, sitemap change, or llms change performed."
+      },
+      "focused_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=SeoIntelIndexNowLiveReadinessContract",
+        "summary": "7 tests passed, 90 assertions."
+      },
+      "seo_intel_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=SeoIntel",
+        "summary": "246 tests passed, 4121 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "summary": "Route list rendered successfully; 203 routes."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "summary": "3413 files passed."
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "command": "python3 -m json.tool backend/docs/seo/generated/indexnow-live-readiness-contract.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "summary": "PR #1516 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
+      },
+      "merge": {
+        "status": "pass",
+        "summary": "Squash merged PR #1516 as 84dac5c278ba531a3e156432f7419a67535df35f."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": "2026-05-20T13:39:10Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "sidecar_issues": [
+      {
+        "title": "IndexNow key may be unavailable",
+        "status": "sidecar_not_blocking_docs_contract",
+        "summary": "No IndexNow submission or key validation is required for INDEXNOW-LIVE-00."
+      }
+    ],
+    "history": [
+      {
+        "at": "2026-05-20T12:20:00+08:00",
+        "status": "initialized",
+        "summary": "Registered INDEXNOW-LIVE-00 from explicit /goal scope for a no-submit readiness contract."
+      },
+      {
+        "at": "2026-05-20T21:31:00+08:00",
+        "status": "in_progress",
+        "summary": "Started INDEXNOW-LIVE-00 after BAIDU-LIVE-00 merged. Scope is docs/generated/test readiness contract only; no IndexNow submission or live endpoint call is allowed."
+      },
+      {
+        "at": "2026-05-20T21:37:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "IndexNow readiness contract docs/generated/test passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. No IndexNow submission, key exposure, or live endpoint call occurred."
+      },
+      {
+        "at": "2026-05-20T21:39:10+08:00",
+        "status": "merged",
+        "summary": "GitHub checks passed, PR #1516 was squash merged as 84dac5c278ba531a3e156432f7419a67535df35f, the remote branch was deleted, and local post-merge cleanup executed."
+      }
+    ]
+  },
+  "SEARCH-CHANNEL-LIVE-01-PREFLIGHT": {
+    "repo": "fap-api",
+    "branch": "codex/search-channel-live-01-preflight",
+    "status": "in_progress",
+    "depends_on": [
+      "INDEXNOW-LIVE-00"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "summary": "INDEXNOW-LIVE-00 merged as 84dac5c278ba531a3e156432f7419a67535df35f and origin/main contains it."
+      },
+      "live_operation_guard": {
+        "status": "pass",
+        "summary": "No URL submission, GSC live request, Baidu push, IndexNow POST, scheduler enablement, collector write, production crawler log read, production env edit, sitemap change, or llms change performed."
+      },
+      "preflight_decision": {
+        "status": "blocked_search_channel_queue_runtime_missing",
+        "summary": "Search Channel Queue contract exists, but no controlled runtime queue implementation exists for live approval/execution/audit."
+      },
+      "focused_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelLivePreflight",
+        "summary": "6 tests passed, 89 assertions."
+      },
+      "seo_intel_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=SeoIntel",
+        "summary": "252 tests passed, 4210 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "summary": "Route list rendered successfully; 203 routes."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "summary": "3414 files passed."
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "command": "python3 -m json.tool backend/docs/seo/generated/search-channel-live-preflight.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [
+      {
+        "title": "Search Channel Queue runtime may be missing",
+        "status": "record_for_preflight",
+        "summary": "The preflight must decide between live canary approval readiness and SEARCH-CHANNEL-QUEUE-01 runtime MVP."
+      }
+    ],
+    "history": [
+      {
+        "at": "2026-05-20T12:20:00+08:00",
+        "status": "initialized",
+        "summary": "Registered SEARCH-CHANNEL-LIVE-01-PREFLIGHT from explicit /goal scope for URL eligibility and no-submit preflight."
+      },
+      {
+        "at": "2026-05-20T21:41:00+08:00",
+        "status": "in_progress",
+        "summary": "Started SEARCH-CHANNEL-LIVE-01-PREFLIGHT after INDEXNOW-LIVE-00 merged. Scope is local report/docs/generated/test only; live search submission and production reads remain forbidden."
+      },
+      {
+        "at": "2026-05-20T21:48:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "No-submit preflight report passed focused and full SeoIntel validation, route list, Pint, JSON/YAML, and diff checks. Final decision is blocked_search_channel_queue_runtime_missing; next task is SEARCH-CHANNEL-QUEUE-01 runtime MVP."
+      }
+    ]
+  },
+  "RIASEC-FULL-CONTENT-PACK-13-BE": {
     "status": "pr_opened_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
@@ -14822,5 +14822,154 @@
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1511 for PACK-13-BE. GitHub required checks pending."
       }
     ]
+  },
+  "prs": {
+    "SEARCH-CHANNEL-LIVE-01-PREFLIGHT": {
+      "repo": "fap-api",
+      "branch": "codex/search-channel-live-01-preflight",
+      "status": "merged",
+      "depends_on": [
+        "INDEXNOW-LIVE-00"
+      ],
+      "commit_sha": "7029562ab28ace9bec639684510c0a1a0319a52a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1517",
+      "merged_at": "2026-05-20T13:49:34Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "checks": {
+        "github_merge_reconciliation": {
+          "status": "pass",
+          "summary": "GitHub PR #1517 is merged, origin/main contains merge commit 7029562ab28ace9bec639684510c0a1a0319a52a, and the remote branch is deleted."
+        }
+      },
+      "failure_reason": null,
+      "history": [
+        {
+          "at": "2026-05-20T22:16:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled SEARCH-CHANNEL-LIVE-01-PREFLIGHT as merged via PR #1517 before starting SEARCH-CHANNEL-QUEUE-01."
+        }
+      ]
+    },
+    "SEARCH-CHANNEL-QUEUE-01": {
+      "repo": "fap-api",
+      "branch": "codex/search-channel-queue-01-runtime-mvp",
+      "status": "ci_fix_local_validation_passed",
+      "depends_on": [
+        "SEARCH-CHANNEL-LIVE-01-PREFLIGHT"
+      ],
+      "commit_sha": "46413dcee8f9ae2dce74a95422aa591a80a26110",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1518",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "summary": "SEARCH-CHANNEL-LIVE-01-PREFLIGHT merged as 7029562ab28ace9bec639684510c0a1a0319a52a and origin/main contains it."
+        },
+        "live_operation_guard": {
+          "status": "pass",
+          "summary": "Implementation scope forbids URL submission, search API calls, scheduler activation, production collector writes, crawler log reads, env edits, deploys, credentials, Metabase exposure, and sitemap/llms behavior changes."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelQueue",
+          "summary": "22 tests passed, 200 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "summary": "269 tests passed, 4314 assertions."
+        },
+        "queue_command_dry_run": {
+          "status": "pass",
+          "command": "cd backend && php artisan seo-intel:search-channel-queue --dry-run --no-write --json --limit=20",
+          "summary": "Command exited 0 with no writes, no external calls, no search submission, and local seo_urls source unavailable because no local seo_intel DSN is configured."
+        },
+        "queue_command_channel_filter": {
+          "status": "pass",
+          "command": "cd backend && php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=20",
+          "summary": "Command exited 0 with no writes, no external calls, and no search submission."
+        },
+        "queue_command_page_type_filter": {
+          "status": "pass",
+          "command": "cd backend && php artisan seo-intel:search-channel-queue --dry-run --no-write --json --page-type=research_report --limit=20",
+          "summary": "Command exited 0 with no writes, no external calls, and no search submission."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "summary": "Route list rendered successfully; 203 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "summary": "3424 files passed."
+        },
+        "migration_pretend": {
+          "status": "pass",
+          "command": "cd backend && APP_CONFIG_CACHE=/tmp/fap-api-seo-intel-migrate-config.php php artisan migrate --pretend --database=seo_intel --path=database/migrations/seo_intel --no-ansi",
+          "summary": "Local/testing pretend migration passed against an ephemeral in-memory sqlite seo_intel config cache; temp config was deleted. Direct local seo_intel MySQL pretend is unavailable because .env has no SEO_INTEL_DB_* DSN."
+        },
+        "json_yaml_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/search-channel-queue-runtime-mvp.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "github_checks": {
+          "status": "failed_then_fix_pushed_pending",
+          "summary": "GitHub verify-mbti legacy/v2 failed on BigFive runtime freeze false positive for scoped SeoIntel queue files. A narrow allowlist test update was added and locally validated."
+        },
+        "bigfive_runtime_freeze_fix": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "summary": "100 tests passed, 447 assertions."
+        },
+        "focused_phpunit_after_ci_fix": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelQueue",
+          "summary": "22 tests passed, 200 assertions."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "Production migration not executed",
+          "status": "sidecar_expected",
+          "summary": "This PR may add seo_intel migrations but must not run production migrations; production preflight is deferred to SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT."
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-05-20T22:16:00+08:00",
+          "status": "initialized",
+          "summary": "Registered SEARCH-CHANNEL-QUEUE-01 from explicit /goal scope for a controlled no-submit Search Channel Queue runtime MVP."
+        },
+        {
+          "at": "2026-05-20T22:16:00+08:00",
+          "status": "in_progress",
+          "summary": "Started scoped backend runtime branch. No live submission, external search API, scheduler, production write, crawler log read, env edit, deploy, or sitemap/llms change is allowed."
+        },
+        {
+          "at": "2026-05-20T22:29:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Search Channel Queue runtime MVP passed focused and full SeoIntel tests, dry-run command modes, route list, Pint, JSON/YAML validation, diff check, and local/testing migration pretend. No live submission or external search API call occurred."
+        },
+        {
+          "at": "2026-05-20T22:34:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1518 for SEARCH-CHANNEL-QUEUE-01. GitHub checks pending. No live submission or production operation performed."
+        },
+        {
+          "at": "2026-05-20T22:47:00+08:00",
+          "status": "ci_fix_local_validation_passed",
+          "summary": "Inspected GitHub check failure. It was the BigFive runtime freeze guard flagging scoped SeoIntel queue files. Added narrow allowlist coverage in the permitted BigFive freeze test and reran the queue tests plus the full BigFive freeze file locally."
+        }
+      ]
+    }
   }
 }
