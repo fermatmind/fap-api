@@ -8,6 +8,10 @@
         "build:ops-theme": "node ./node_modules/tailwindcss-3/lib/cli.js --input ./resources/css/filament/ops/theme.css --output ./resources/css/filament/ops/theme.compiled.css --config ./resources/css/filament/ops/tailwind.config.js --minify",
         "dev": "vite"
     },
+    "engines": {
+        "node": ">=24 <25",
+        "npm": ">=11 <12"
+    },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.10",
         "@tailwindcss/typography": "^0.5.16",
