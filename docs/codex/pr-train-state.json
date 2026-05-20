@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-20T01:03:00Z",
+  "updated_at": "2026-05-20T01:06:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -12497,7 +12497,7 @@
       "next_pr": "RESEARCH-PUBLISH-01"
     },
     "RESEARCH-PUBLISH-02-FIX": {
-      "status": "in_progress",
+      "status": "pr_opened_github_checks_pending",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/research-publish-02-fix-url-truth-research-report",
@@ -12506,8 +12506,8 @@
       "depends_on": [
         "RESEARCH-PUBLISH-READINESS-00"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "85980e6304aa941f16b019474c7b669f717debf3",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1504",
       "checks": {
         "local": {
           "php_artisan_test_filter_seo_intel_research_url_truth_observation": "passed",
@@ -12540,6 +12540,11 @@
           "at": "2026-05-20T01:03:00Z",
           "status": "local_checks_passed",
           "summary": "Focused Research URL Truth test, full SeoIntel filter, route list, Pint, JSON/YAML validation, dry-run collector commands, git diff checks, and allowed-path scope validation passed. The clean local worktree has no published Research DB rows, so the page-type dry-run returned zero locally while the fixture test proves nonzero behavior when eligible Research records exist."
+        },
+        {
+          "at": "2026-05-20T01:06:00Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1504 for RESEARCH-PUBLISH-02-FIX. GitHub checks pending."
         }
       ],
       "next_pr": "RESEARCH-PUBLISH-02-RERUN"
