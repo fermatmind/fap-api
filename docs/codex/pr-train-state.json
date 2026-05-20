@@ -13602,7 +13602,7 @@
     ]
   },
   "RIASEC-FULL-CONTENT-PACK-09-PREFLIGHT": {
-    "status": "local_validation_passed",
+    "status": "pr_opened_github_checks_pending",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-09-preflight",
@@ -13612,8 +13612,8 @@
       "RIASEC-FULL-CONTENT-PACK-08",
       "RIASEC-FULL-CONTENT-PACK-06"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "c951cbc5892be3d1476e60727582ed0006f21423",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1501",
     "checks": {
       "pack_06_ledger_reconciliation": {
         "status": "pass",
@@ -13655,6 +13655,10 @@
       "scope_validation": {
         "status": "pass",
         "summary": "Changed files are limited to PACK-06 ledger reconciliation, PACK-09 manifest/state registration, preflight fixtures, preflight PHPUnit test, and preflight docs; no runtime import."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "summary": "PR #1501 opened; GitHub required checks pending."
       }
     },
     "failure_reason": null,
@@ -13672,6 +13676,11 @@
         "at": "2026-05-19T23:59:31Z",
         "status": "local_validation_passed",
         "summary": "PACK-09-PREFLIGHT validated V7.3 aspirations/disagree fixtures and recorded CONDITIONAL GO for PACK-09 import; no runtime content import performed."
+      },
+      {
+        "at": "2026-05-20T00:00:38Z",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1501 for PACK-09-PREFLIGHT. GitHub checks pending."
       }
     ],
     "next_pr": "RIASEC-FULL-CONTENT-PACK-09"
