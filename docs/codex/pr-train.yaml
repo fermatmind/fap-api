@@ -7376,3 +7376,59 @@ prs:
       github_checks_required: true
       squash: true
       auto_merge: true
+
+  - id: RIASEC-FULL-CONTENT-PACK-13-BE
+    repo: fap-api
+    depends_on:
+      - RIASEC-FULL-CONTENT-PACK-03
+      - RIASEC-FULL-CONTENT-PACK-04
+      - RIASEC-FULL-CONTENT-PACK-05
+      - RIASEC-FULL-CONTENT-PACK-06
+      - RIASEC-FULL-CONTENT-PACK-07
+      - RIASEC-FULL-CONTENT-PACK-08
+      - RIASEC-FULL-CONTENT-PACK-09
+      - RIASEC-FULL-CONTENT-PACK-10-BE
+      - RIASEC-FULL-CONTENT-PACK-11-BE
+    branch: codex/riasec-full-content-pack-13-be
+    base: main
+    title: "RIASEC-FULL-CONTENT-PACK-13-BE: Backend full content fixture matrix and forbidden claim freeze"
+    name: "Backend full content freeze and fixture matrix"
+    train_scope: riasec_full_content_pack
+    risk_level: L1
+    type: backend verification and fixture freeze PR
+    scope:
+      - Reconcile PACK-11-BE ledger state as merged from GitHub and origin/main before continuing the train.
+      - Freeze backend full-content coverage for pair blend, top3 chain, activity/task, occupation examples, 140Q, low quality, aspirations, disagree path, feedback overlay, and lifecycle payloads.
+      - Add backend fixture-matrix and forbidden-claim regression tests only, unless a tiny test-driven guard fix is required within existing RIASEC backend services.
+      - Preserve fail-closed behavior and public-safety boundaries; do not start PACK-13-FE or PACK-14 from this PR alone.
+    allowed_paths:
+      - backend/tests/Unit/Services/Riasec/*Fixture*Matrix*.php
+      - backend/tests/Unit/Services/Riasec/*Freeze*.php
+      - backend/tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - backend/docs/riasec/**
+      - backend/app/Services/Riasec/** # only if a tiny test-driven guard fix is required
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Touch scorer math, question packs, Holland Code generation, frontend fallback behavior, analytics runtime, production data, or career registry source rows.
+      - Introduce new runtime editorial copy, new public payload semantics, or lifecycle/share/PDF/history measured payload mutation.
+      - Expose raw feedback or internal snapshot identifiers publicly.
+      - Add career recommendation, job fit, occupation match, ranking, success prediction, ability proof, skill proof, raw score delta, 140Q more accurate, or AI-generated formal report runtime.
+      - Start PACK-13-FE or PACK-14.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml")'
+      - php -r 'foreach(["backend/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl"=>15,"backend/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl"=>20,"backend/content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl"=>360,"backend/content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl"=>360,"backend/content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl"=>70,"backend/content_assets/riasec/disagree_path_v1.zh-CN.jsonl"=>45,"backend/content_assets/riasec/feedback_action_lab_v1.zh-CN.jsonl"=>204,"backend/content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl"=>270] as $file=>$expected){$n=0; foreach(file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES) as $line){$n++; json_decode($line,true,512,JSON_THROW_ON_ERROR);} if($n!==$expected){throw new RuntimeException("$file expected $expected got $n");}} foreach(["backend/content_assets/riasec/share_pdf_history_v1.zh-CN.json","backend/content_assets/riasec/faq_v1.zh-CN.json","backend/content_assets/riasec/technical_note_user_summary_v1.zh-CN.json","backend/content_assets/riasec/professional_method_boundary_v1.zh-CN.json"] as $file){json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);} if (trim((string) file_get_contents("backend/content_assets/riasec/faq_v1.zh-CN.md")) === "") { throw new RuntimeException("faq markdown asset is empty"); }'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true

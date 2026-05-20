@@ -14099,7 +14099,7 @@
     "merge_commit": "923d27cde622eaaa235830df1ba49098a793e8af"
   },
   "RIASEC-FULL-CONTENT-PACK-11-BE": {
-    "status": "pr_opened_github_checks_pending",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/riasec-full-content-pack-11-be",
@@ -14151,14 +14151,19 @@
         "summary": "Changed files are limited to lifecycle assets, lifecycle backend bridge services, lifecycle/technical-note tests, lifecycle docs, and current PR manifest/state updates; no fap-web, scorer, question-pack, analytics, or measured-payload mutation logic touched."
       },
       "github_required_checks": {
-        "status": "pending",
-        "summary": "PR #1509 opened; GitHub required checks pending."
+        "status": "pass",
+        "summary": "GitHub required checks passed before merge for PR #1509."
+      },
+      "ledger_reconciliation": {
+        "status": "pass",
+        "summary": "GitHub PR #1509 is merged and origin/main contains 9a5bcdc43080d0d0420e1499e0ad0f8e2a1abc7f; reconciled before PACK-13-BE.",
+        "source_of_truth": "GitHub PR + origin/main"
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-20T02:44:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "history": [
       {
@@ -14175,6 +14180,103 @@
         "at": "2026-05-20T02:41:00Z",
         "status": "pr_opened_github_checks_pending",
         "summary": "Opened https://github.com/fermatmind/fap-api/pull/1509 for PACK-11-BE. GitHub checks pending."
+      },
+      {
+        "at": "2026-05-20T11:20:00+08:00",
+        "status": "merged",
+        "summary": "Reconciled after GitHub confirmed PR #1509 merged and origin/main contains merge commit 9a5bcdc43080d0d0420e1499e0ad0f8e2a1abc7f."
+      }
+    ],
+    "merge_commit": "9a5bcdc43080d0d0420e1499e0ad0f8e2a1abc7f"
+  },
+  "RIASEC-FULL-CONTENT-PACK-13-BE": {
+    "status": "pr_opened_github_checks_pending",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/riasec-full-content-pack-13-be",
+    "base": "main",
+    "title": "RIASEC-FULL-CONTENT-PACK-13-BE: Backend full content fixture matrix and forbidden claim freeze",
+    "depends_on": [
+      "RIASEC-FULL-CONTENT-PACK-03",
+      "RIASEC-FULL-CONTENT-PACK-04",
+      "RIASEC-FULL-CONTENT-PACK-05",
+      "RIASEC-FULL-CONTENT-PACK-06",
+      "RIASEC-FULL-CONTENT-PACK-07",
+      "RIASEC-FULL-CONTENT-PACK-08",
+      "RIASEC-FULL-CONTENT-PACK-09",
+      "RIASEC-FULL-CONTENT-PACK-10-BE",
+      "RIASEC-FULL-CONTENT-PACK-11-BE"
+    ],
+    "commit_sha": "471187ff",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1511",
+    "checks": {
+      "pack_11_be_ledger_reconciliation": {
+        "status": "pass",
+        "summary": "PACK-11-BE reconciled to merged before PACK-13-BE registration."
+      },
+      "dependency_gate": {
+        "status": "pass",
+        "summary": "PACK-03, PACK-04, PACK-05, PACK-06, PACK-07, PACK-08, PACK-09, PACK-10-BE, and PACK-11-BE merge commits are present in origin/main."
+      },
+      "targeted_phpunit": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php --no-ansi",
+        "summary": "14 test methods passed with 23 non-blocking file_get_contents warnings from existing Laravel wrappers; backend full-content fixture matrix, imported content boundaries, and assessment flow contracts remained green."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php tests/Unit/Services/Riasec/RiasecPairBlendSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecActivityExplorerServiceTest.php tests/Unit/Services/Riasec/RiasecAspirationsDisagreeSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecExplorationFeedbackOverlayServiceTest.php tests/Unit/Services/Riasec/RiasecLifecycleCopyPreflightTest.php tests/Feature/V0_3/RiasecAssessmentFlowTest.php",
+        "summary": "7 files passed."
+      },
+      "asset_validation": {
+        "status": "pass",
+        "summary": "Validated JSONL counts for pair/top3/activity/occupation/aspirations/disagree/feedback/next-node assets and parsed lifecycle JSON plus FAQ markdown presence."
+      },
+      "manifest_state_validation": {
+        "status": "pass",
+        "summary": "pr-train-state JSON and pr-train YAML parsed successfully."
+      },
+      "forbidden_claim_scan": {
+        "status": "pass",
+        "summary": "Backend full-content visible outputs keep forbidden phrases only in negative boundary contexts; no positive user-facing forbidden claims were introduced. Documentation and manifest contain allowed governance hits only."
+      },
+      "technical_key_exposure_scan": {
+        "status": "pass",
+        "summary": "No new user-facing technical key exposure was introduced by the backend fixture matrix freeze."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "summary": "Changed files are limited to PACK-11-BE ledger reconciliation, PACK-13-BE manifest/state registration, backend fixture-freeze docs, and backend RIASEC verification tests. No frontend, scorer, question-pack, analytics, or measured-payload mutation logic touched."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "summary": "PR #1511 opened; GitHub required checks pending."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-20T11:20:00+08:00",
+        "status": "in_progress",
+        "summary": "Registered PACK-13-BE after PACK-11-BE reconciliation. Scope is backend fixture matrix and forbidden-claim freeze only; no fap-web or PACK-14 work in this PR."
+      },
+      {
+        "at": "2026-05-20T11:35:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "Added backend full-content fixture matrix freeze coverage and documentation. Local checks passed; no runtime semantic change was required."
+      },
+      {
+        "at": "2026-05-20T11:42:00+08:00",
+        "status": "pr_opened_github_checks_pending",
+        "summary": "Opened https://github.com/fermatmind/fap-api/pull/1511 for PACK-13-BE. GitHub required checks pending."
       }
     ]
   }
