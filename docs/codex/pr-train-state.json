@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-20T04:20:00Z",
+  "updated_at": "2026-05-21T18:40:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -14854,11 +14854,11 @@
     "SEARCH-CHANNEL-QUEUE-01": {
       "repo": "fap-api",
       "branch": "codex/search-channel-queue-01-runtime-mvp",
-      "status": "ci_fix_local_validation_passed",
+      "status": "merged",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-01-PREFLIGHT"
       ],
-      "commit_sha": "46413dcee8f9ae2dce74a95422aa591a80a26110",
+      "commit_sha": "b340c18d4f7d1e86d879d34014c4337e505f2595",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1518",
       "checks": {
         "dependency": {
@@ -14930,11 +14930,15 @@
           "status": "pass",
           "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelQueue",
           "summary": "22 tests passed, 200 assertions."
+        },
+        "github_merge_reconciliation": {
+          "status": "pass",
+          "summary": "GitHub PR #1518 is merged, origin/main contains merge commit b340c18d4f7d1e86d879d34014c4337e505f2595, and the remote branch is absent."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-20T14:40:06Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "sidecar_issues": [
         {
@@ -14968,6 +14972,350 @@
           "at": "2026-05-20T22:47:00+08:00",
           "status": "ci_fix_local_validation_passed",
           "summary": "Inspected GitHub check failure. It was the BigFive runtime freeze guard flagging scoped SeoIntel queue files. Added narrow allowlist coverage in the permitted BigFive freeze test and reran the queue tests plus the full BigFive freeze file locally."
+        },
+        {
+          "at": "2026-05-21T18:20:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled SEARCH-CHANNEL-QUEUE-01 as merged before registering Aliyun production migration and deploy-target ledger tasks."
+        }
+      ]
+    },
+    "BACKEND-DEPLOY-TARGET-ALIYUN-01": {
+      "repo": "fap-api",
+      "branch": "codex/backend-deploy-target-aliyun-01",
+      "status": "pr_opened_github_checks_pending",
+      "depends_on": [
+        "SEARCH-CHANNEL-QUEUE-01"
+      ],
+      "commit_sha": "8dd8adc763f55522fb5bc596e719e5f6e33840c3",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1524",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "summary": "SEARCH-CHANNEL-QUEUE-01 merged as b340c18d4f7d1e86d879d34014c4337e505f2595 and origin/main contains it."
+        },
+        "deploy_target": {
+          "status": "pass",
+          "summary": "Production deploy defaults now target Aliyun ECS 139.224.130.204 and refuse retired Tencent Node3 122.152.221.126."
+        },
+        "host_bootstrap": {
+          "status": "pass",
+          "summary": "Aliyun host has /var/www/fap-api layout, current symlink to /opt/fap-api, shared .env/storage/content_packages seeded, and nginx/Supervisor/cron point to /var/www/fap-api/current/backend."
+        },
+        "runtime_smoke": {
+          "status": "pass",
+          "summary": "Aliyun local Host-forced API and Ops curls returned 200; frontend Node1 traffic reached Aliyun API and returned 200 after bootstrap."
+        },
+        "php_lint": {
+          "status": "pass",
+          "command": "php -l deploy.php",
+          "summary": "No syntax errors detected in deploy.php."
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('.github/workflows/deploy.yml').read_text()); yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
+          "summary": "Workflow YAML and PR train manifest parsed successfully."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+        },
+        "deploy_target_rg": {
+          "status": "pass",
+          "command": "rg -n \"122\\.152\\.221\\.126|139\\.224\\.130\\.204|DEPLOY_HOST_PROD|HEALTHCHECK_URL_PROD|AUTH_GUEST_CHECK_URL_PROD\" deploy.php .github/workflows/deploy.yml README_DEPLOY.md docs/04-ops/backend-deploy-target-aliyun-01.md",
+          "summary": "Verified Aliyun deploy target, Node3 refusal guard, and production smoke URLs."
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "github_pr": {
+          "status": "pending",
+          "summary": "Opened draft PR #1524; GitHub checks pending."
+        },
+        "ops_cert_renewal": {
+          "status": "pass",
+          "summary": "ops.fermatmind.com renewal was converted from manual DNS-01 to HTTP-01 webroot on Aliyun; certbot renew --dry-run succeeded and nginx reload hook is installed."
+        },
+        "node3_deploy_webhook_retired": {
+          "status": "pass",
+          "summary": "GitHub repository push webhook pointing to http://122.152.221.126:9000/hooks/deploy-fap-api was set inactive; Node3 webhook.service is stopped and disabled."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-21T18:20:00+08:00",
+          "status": "in_progress",
+          "summary": "Started Aliyun backend deploy target PR after production cutover. No GitHub Actions deploy was run from this branch."
+        },
+        {
+          "at": "2026-05-21T18:23:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Deploy-target config and PR-train ledger passed php lint, YAML/JSON validation, deploy-target grep check, and git diff whitespace check."
+        },
+        {
+          "at": "2026-05-21T18:26:00+08:00",
+          "status": "commit_created",
+          "summary": "Created local commit 725e5abe6edc53b1d603ec0726367aeeed91812b for Aliyun backend deploy target and migration ledger."
+        },
+        {
+          "at": "2026-05-21T18:29:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened draft PR https://github.com/fermatmind/fap-api/pull/1524 for BACKEND-DEPLOY-TARGET-ALIYUN-01. GitHub checks pending."
+        },
+        {
+          "at": "2026-05-21T18:40:00+08:00",
+          "status": "residual_ops_closed",
+          "summary": "Closed residual Aliyun ops certificate renewal and Node3 deploy webhook retirement items after production cutover."
+        }
+      ]
+    },
+    "OPS-DOMAIN-MIGRATION-01": {
+      "repo": "fap-api",
+      "branch": "codex/backend-deploy-target-aliyun-01",
+      "status": "completed_external_operation",
+      "depends_on": [
+        "BACKEND-DEPLOY-TARGET-ALIYUN-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "aliyun_tls": {
+          "status": "pass",
+          "summary": "Aliyun nginx serves api.fermatmind.com and ops.fermatmind.com with Let's Encrypt certificates valid until 2026-08-19."
+        },
+        "dnspod_dns": {
+          "status": "pass",
+          "summary": "DNSPod A record ops.fermatmind.com was changed from 122.152.221.126 to 139.224.130.204 after Tencent MFA."
+        },
+        "public_dns": {
+          "status": "pass",
+          "summary": "Cloudflare and Google public DNS returned 139.224.130.204 for api.fermatmind.com and ops.fermatmind.com."
+        },
+        "ops_http": {
+          "status": "pass",
+          "summary": "https://ops.fermatmind.com/ops/login returned HTTP 200 from Aliyun certificate/runtime."
+        },
+        "automated_cert_renewal": {
+          "status": "pass",
+          "summary": "ops.fermatmind.com renewal config now uses authenticator=webroot with webroot_path=/var/www/fap-api/current/backend/public; certbot timer is enabled/active and dry-run renewal succeeded."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-21T18:20:00+08:00",
+          "status": "completed_external_operation",
+          "summary": "Completed Ops domain migration to Aliyun and verified DNS/TLS/runtime."
+        },
+        {
+          "at": "2026-05-21T18:40:00+08:00",
+          "status": "cert_renewal_automated",
+          "summary": "Replaced the manual DNS-01 renewal path for ops.fermatmind.com with HTTP-01/webroot renewal and nginx deploy reload hook."
+        }
+      ]
+    },
+    "NODE3-RETIREMENT-PREFLIGHT": {
+      "repo": "fap-api",
+      "branch": "codex/backend-deploy-target-aliyun-01",
+      "status": "completed_external_operation",
+      "depends_on": [
+        "OPS-DOMAIN-MIGRATION-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "traffic_preflight": {
+          "status": "pass",
+          "summary": "api.fermatmind.com and ops.fermatmind.com public DNS resolve to Aliyun 139.224.130.204; recent Node3 access log traffic was before DNS cutover."
+        },
+        "queue_workers": {
+          "status": "pass",
+          "summary": "Stopped Node3 supervisor groups fap-queue-default-high:* and fap-queue-reports:*."
+        },
+        "scheduler": {
+          "status": "pass",
+          "summary": "Commented Node3 ubuntu and www-data Laravel scheduler cron lines with NODE3_RETIRED_20260521180344 and saved crontab backups under /home/ubuntu/node3-retirement-preflight/."
+        },
+        "nginx_tail": {
+          "status": "info",
+          "summary": "Node3 nginx was left running temporarily for stale DNS-cache tail traffic; Node3 was not powered off or deleted."
+        },
+        "deploy_webhook_retired": {
+          "status": "pass",
+          "summary": "GitHub hook id 598987512 for Node3 deploy endpoint is inactive; Node3 webhook.service is inactive/disabled and TCP/9000 is rejected on the host."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-21T18:20:00+08:00",
+          "status": "completed_external_operation",
+          "summary": "Completed controlled Node3 retirement preflight and stopped old queue/scheduler without shutting down the host."
+        },
+        {
+          "at": "2026-05-21T18:40:00+08:00",
+          "status": "deploy_webhook_retired",
+          "summary": "Disabled the old GitHub push deploy webhook and stopped/disabled Node3 webhook.service so production deployment no longer depends on Node3 port 9000."
+        }
+      ]
+    },
+    "SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT": {
+      "repo": "fap-api",
+      "branch": "codex/backend-deploy-target-aliyun-01",
+      "status": "completed_external_operation",
+      "depends_on": [
+        "SEARCH-CHANNEL-QUEUE-01",
+        "BACKEND-DEPLOY-TARGET-ALIYUN-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "rds_network": {
+          "status": "pass",
+          "summary": "Aliyun ECS private IP 172.19.243.190 was appended to RDS whitelist and TCP 3306 to rm-uf6u2498t7nk2faya.rwlb.rds.aliyuncs.com succeeded."
+        },
+        "migration_status": {
+          "status": "pass",
+          "summary": "migrate:status --database=seo_intel --path=database/migrations/seo_intel ran successfully."
+        },
+        "source_counts": {
+          "status": "pass",
+          "summary": "seo_urls=9, seo_url_entities=9, seo_issue_queue=5."
+        },
+        "dry_run_no_write": {
+          "status": "pass",
+          "summary": "seo-intel:search-channel-queue --dry-run --no-write --json --limit=3 succeeded with no writes, no external calls, and no search submission."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-21T18:20:00+08:00",
+          "status": "completed_external_operation",
+          "summary": "Completed Search Channel Queue production migration preflight on Aliyun backend."
+        }
+      ]
+    },
+    "SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION": {
+      "repo": "fap-api",
+      "branch": "codex/backend-deploy-target-aliyun-01",
+      "status": "completed_external_operation",
+      "depends_on": [
+        "SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "permission_gate": {
+          "status": "pass",
+          "summary": "User authorized changing seo_intel_writer to ReadWrite. GrantAccountPrivilege succeeded; SHOW GRANTS reported ALL PRIVILEGES on seo_intel.* as the RDS ReadWrite mapping."
+        },
+        "pretend": {
+          "status": "pass",
+          "summary": "Isolated --pretend output showed only seo_search_channel_queue_batches, seo_search_channel_queue_items, and seo_search_channel_queue_events table creation plus indexes."
+        },
+        "migration": {
+          "status": "pass",
+          "summary": "php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force completed 2026_05_20_220000_create_seo_search_channel_queue_tables."
+        },
+        "status": {
+          "status": "pass",
+          "summary": "migrate:status shows 2026_05_20_220000_create_seo_search_channel_queue_tables as batch [2] Ran."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-21T18:20:00+08:00",
+          "status": "completed_external_operation",
+          "summary": "Completed isolated seo_intel Search Channel Queue production schema migration."
+        }
+      ]
+    },
+    "SEARCH-CHANNEL-QUEUE-01-PROD-DRY-RUN": {
+      "repo": "fap-api",
+      "branch": "codex/backend-deploy-target-aliyun-01",
+      "status": "completed_external_operation",
+      "depends_on": [
+        "SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dry_run_limit_20": {
+          "status": "pass",
+          "summary": "candidate_count=9, eligible_count=9, planned_queue_count=72, writes_committed=false, external_calls_attempted=false, search_submission_attempted=false."
+        },
+        "dry_run_indexnow": {
+          "status": "pass",
+          "summary": "candidate_count=9, eligible_count=9, planned_queue_count=9 for channel indexnow with no writes or external calls."
+        },
+        "dry_run_research_report": {
+          "status": "pass",
+          "summary": "candidate_count=2, eligible_count=2, planned_queue_count=16 for research_report with no writes or external calls."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-21T18:20:00+08:00",
+          "status": "completed_external_operation",
+          "summary": "Completed production no-write Search Channel Queue dry-runs after schema migration."
+        }
+      ]
+    },
+    "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE": {
+      "repo": "fap-api",
+      "branch": "codex/backend-deploy-target-aliyun-01",
+      "status": "completed_external_operation",
+      "depends_on": [
+        "SEARCH-CHANNEL-QUEUE-01-PROD-DRY-RUN"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "pre_counts": {
+          "status": "pass",
+          "summary": "Queue tables started empty: batches=0, items=0, events=0."
+        },
+        "canary_enqueue": {
+          "status": "pass",
+          "summary": "One command-session write gate run for --channel=indexnow --limit=1 succeeded with writes_committed=true, written_items=1, external_calls_attempted=false, search_submission_attempted=false."
+        },
+        "post_counts": {
+          "status": "pass",
+          "summary": "Queue tables after canary: batches=1, items=1, events=2. Latest item id=1 channel=indexnow approval_state=pending execution_state=dry_run_ready canonical_url=https://fermatmind.com/en."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-21T18:20:00+08:00",
+          "status": "completed_external_operation",
+          "summary": "Completed minimal no-submit canary enqueue for Search Channel Queue."
         }
       ]
     }
