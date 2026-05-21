@@ -1820,6 +1820,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelOpsDashboardUiFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelMigrationIsolationFile($file)) {
                 continue;
             }
@@ -2414,6 +2418,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/OpsDashboard/SeoIssueQueueReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoSearchChannelQueueReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoUrlTruthReadService.php',
+        ], true);
+    }
+
+    private function isSeoIntelOpsDashboardUiFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Pages/SeoDashboardAccessPage.php',
         ], true);
     }
 
