@@ -8076,7 +8076,58 @@ prs:
     production_migration_execution_allowed: false
     external_api_credentials_required: true
     scheduler_activation: false
-    next_task: SEARCH-CHANNEL-LIVE-02
+    next_task: SEARCH-CHANNEL-LIVE-02-EXECUTOR
+
+  - id: SEARCH-CHANNEL-LIVE-02-EXECUTOR
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-LIVE-02-PREFLIGHT
+    branch: codex/search-channel-live-02-executor
+    base: main
+    title: "SEARCH-CHANNEL-LIVE-02-EXECUTOR｜Guarded Search Channel live submission executor"
+    name: "Guarded Search Channel live submission executor"
+    train_scope: search_channel_live_submission
+    risk_level: L2
+    type: runtime guardrail
+    scope:
+      - Add a guarded single-item Search Channel live submission executor.
+      - Require exact human approval phrase, explicit live gates, backend-authoritative queue state, and safe audit events.
+      - Keep live submission disabled by default and return to SEARCH-CHANNEL-LIVE-02-PREFLIGHT after merge.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoIntelSearchChannelSubmitCommand.php
+      - backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueLiveSubmissionExecutor.php
+      - backend/config/seo_intel.php
+      - backend/docs/seo/search-channel-live-02-executor.md
+      - backend/docs/seo/generated/search-channel-live-02-executor.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelLiveSubmissionExecutorTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute live submission or call live search APIs outside faked tests.
+      - Enable scheduler, bulk submission, persistent live gates, env edits, deploy, or DNS/runtime changes.
+      - Add, print, commit, or expose raw search-provider credentials.
+      - Change sitemap, llms.txt, URL authority, queue enqueue semantics, or frontend SEO authority.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelLiveSubmissionExecutor
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelQueueRuntime
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/search-channel-live-02-executor.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+    merge_policy:
+      github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    live_external_submission_allowed: false
+    next_task: SEARCH-CHANNEL-LIVE-02-PREFLIGHT
 
   - id: SEARCH-CHANNEL-LIVE-02
     repo: fap-api

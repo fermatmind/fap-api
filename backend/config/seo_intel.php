@@ -219,7 +219,7 @@ return [
     'baidu_enabled' => env('SEO_INTEL_BAIDU_ENABLED', false),
     'baidu_live_api_enabled' => false,
     'indexnow_enabled' => env('SEO_INTEL_INDEXNOW_ENABLED', false),
-    'indexnow_live_api_enabled' => false,
+    'indexnow_live_api_enabled' => env('SEO_INTEL_INDEXNOW_LIVE_API_ENABLED', false),
     'baidu_source_engine' => 'baidu',
     'indexnow_source_engine' => 'bing_indexnow',
     'baidu_foundation' => [
@@ -307,6 +307,22 @@ return [
             'seo_baidu_push_logs',
             'seo_indexnow_submissions',
             'seo_domestic_submission_logs',
+        ],
+        'live_submission' => [
+            'enabled' => env('SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED', false),
+            'external_api_calls_enabled' => env('SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED', false),
+            'allowed_channels' => [
+                'indexnow',
+            ],
+            'allowed_hosts' => [
+                'fermatmind.com',
+            ],
+            'indexnow' => [
+                'endpoint' => env('SEO_INTEL_INDEXNOW_ENDPOINT', 'https://api.indexnow.org/indexnow'),
+                'key' => env('SEO_INTEL_INDEXNOW_KEY'),
+                'key_location' => env('SEO_INTEL_INDEXNOW_KEY_LOCATION'),
+                'timeout_seconds' => env('SEO_INTEL_INDEXNOW_TIMEOUT_SECONDS', 10),
+            ],
         ],
     ],
     'so360_enabled' => env('SEO_INTEL_SO360_ENABLED', false),
