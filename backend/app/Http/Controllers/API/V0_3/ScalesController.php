@@ -488,7 +488,7 @@ class ScalesController extends Controller
                         'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
                         'locale_resolved' => $localeResolved,
                         'option_anchors' => is_array($doc['option_anchors'] ?? null) ? $doc['option_anchors'] : [],
-                        'dimension_codes' => is_array($doc['dimension_codes'] ?? null) ? $doc['dimension_codes'] : ['SA', 'ER', 'SE', 'RM'],
+                        'dimension_codes' => is_array($doc['dimension_codes'] ?? null) ? $doc['dimension_codes'] : ['SA', 'ER', 'EM', 'RM'],
                     ],
                 ] + $scaleCodeMeta);
             }

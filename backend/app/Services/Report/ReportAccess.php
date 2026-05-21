@@ -121,6 +121,39 @@ final class ReportAccess
     public const MODULE_RIASEC_FULL = 'riasec_full';
 
     /**
+     * @return list<string>
+     */
+    public static function eq60FreeSectionKeys(): array
+    {
+        return [
+            'disclaimer_top',
+            'quality_notice',
+            'global_overview',
+            'self_awareness',
+            'emotion_regulation',
+            'empathy',
+            'relationship_management',
+            'cross_quadrant_insight',
+            'action_plan_14d',
+            'methodology',
+            'disclaimer_bottom',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function eq60AllRuntimeModules(): array
+    {
+        return [
+            self::MODULE_EQ_CORE,
+            self::MODULE_EQ_FULL,
+            self::MODULE_EQ_CROSS_INSIGHTS,
+            self::MODULE_EQ_GROWTH_PLAN,
+        ];
+    }
+
+    /**
      * Growth/traits/stress_recovery are part of core_full by default.
      */
     public const SECTION_TO_MODULE = [

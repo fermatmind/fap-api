@@ -283,6 +283,7 @@ final class CiScalesRegistrySeeder extends Seeder
                     'enabled_in_prod' => true,
                     'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
                     'rollout_ratio' => 1.0,
+                    'paywall_mode' => 'free_only',
                 ], JSON_UNESCAPED_UNICODE),
                 'commercial_json' => json_encode([
                     'report_benefit_code' => 'EQ_60_FULL',

@@ -780,10 +780,11 @@ class AttemptReadController extends Controller
         }
 
         $isBigFive = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_BIG5_OCEAN;
+        $isEq60 = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_EQ_60;
         $isEnneagram = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_ENNEAGRAM;
         $isRiasec = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_RIASEC;
         $hasBigFiveFullAccess = $isBigFive && $resultExists && $this->hasBigFiveFullAccess($request, $orgId, (string) $attempt->id, $readUserId, $readAnonId);
-        if (($hasBigFiveFullAccess || $isEnneagram || $isRiasec) && $resultExists) {
+        if (($hasBigFiveFullAccess || $isEq60 || $isEnneagram || $isRiasec) && $resultExists) {
             $accessState = 'ready';
             $reportState = 'ready';
             $pdfState = 'ready';
@@ -791,6 +792,24 @@ class AttemptReadController extends Controller
             $payloadJson['variant'] = ReportAccess::VARIANT_FULL;
             $payloadJson['unlock_stage'] = ReportAccess::UNLOCK_STAGE_FULL;
             $payloadJson['unlock_source'] = ReportAccess::UNLOCK_SOURCE_NONE;
+            if ($isEq60) {
+                $payloadJson['access'] = [
+                    'all_results_free' => true,
+                    'locked' => false,
+                    'blur' => false,
+                    'paywall' => false,
+                ];
+                $payloadJson['locked'] = false;
+                $payloadJson['upgrade_sku'] = null;
+                $payloadJson['upgrade_sku_effective'] = null;
+                $payloadJson['offers'] = [];
+                $payloadJson['modules_allowed'] = ReportAccess::eq60AllRuntimeModules();
+                $payloadJson['modules_preview'] = [];
+                $payloadJson['view_policy'] = [
+                    'free_sections' => ReportAccess::eq60FreeSectionKeys(),
+                    'blur_others' => false,
+                ];
+            }
         }
 
         if ($repairFailed && $resultExists) {

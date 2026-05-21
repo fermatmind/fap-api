@@ -48,7 +48,9 @@ final class Eq60ReportComposer
         }
 
         $modulesAllowed = ReportAccess::normalizeModules(is_array($ctx['modules_allowed'] ?? null) ? $ctx['modules_allowed'] : []);
-        if ($modulesAllowed === []) {
+        if ($modulesAllowed === [] && $variant === ReportAccess::VARIANT_FULL) {
+            $modulesAllowed = ReportAccess::eq60AllRuntimeModules();
+        } elseif ($modulesAllowed === []) {
             $modulesAllowed = ReportAccess::defaultModulesAllowedForLocked(ReportAccess::SCALE_EQ_60);
         }
 
@@ -89,6 +91,7 @@ final class Eq60ReportComposer
 
             $source = strtolower(trim((string) ($sectionConfig['source'] ?? 'blocks')));
             $accessLevel = strtolower(trim((string) ($sectionConfig['access_level'] ?? 'free')));
+            $outputAccessLevel = $variant === ReportAccess::VARIANT_FULL ? 'free' : $accessLevel;
             $moduleCode = $this->normalizeModuleCode((string) ($sectionConfig['module_code'] ?? ReportAccess::MODULE_EQ_CORE));
             $maxBlocks = max(1, (int) ($sectionConfig['max_blocks'] ?? 1));
 
@@ -102,7 +105,7 @@ final class Eq60ReportComposer
             }
 
             if ($source === 'copy') {
-                $copySection = $this->composeCopySection($sectionKey, $locale, $accessLevel, $moduleCode);
+                $copySection = $this->composeCopySection($sectionKey, $locale, $outputAccessLevel, $moduleCode);
                 if (is_array($copySection)) {
                     $sections[] = $copySection;
                 }
@@ -122,36 +125,235 @@ final class Eq60ReportComposer
             $sections[] = [
                 'key' => $sectionKey,
                 'title' => $this->resolveSectionTitle($sectionKey, $locale, $layoutByKey),
-                'access_level' => $accessLevel,
+                'access_level' => $outputAccessLevel,
                 'module_code' => $moduleCode,
                 'blocks' => $sectionBlocks,
             ];
         }
 
         [$compatFree, $compatPaid] = $this->buildCompatBlocks($sections);
+        $v5Scores = $this->buildV5Scores($score, $locale);
+        $dimensionSummary = array_values((array) ($v5Scores['dimension_summary'] ?? []));
+        unset($v5Scores['dimension_summary']);
+        $quality = $this->buildV5Quality($score);
+        $interpretation = $this->buildV5Interpretation($v5Scores, $quality);
 
         return [
             'ok' => true,
             'report' => [
                 'schema_version' => 'eq_60.report.v2',
                 'scale_code' => 'EQ_60',
+                'eq_report_mode' => 'self_report',
+                'measurement_type' => 'self_report_trait_mixed_ei',
                 'variant' => $variant,
                 'locale' => $locale,
+                'access' => [
+                    'all_results_free' => true,
+                    'locked' => false,
+                    'blur' => false,
+                    'paywall' => false,
+                ],
                 'sections' => $sections,
                 'compat' => [
                     'free_blocks' => $compatFree,
                     'paid_blocks' => $compatPaid,
                 ],
-                'quality' => is_array($score['quality'] ?? null) ? $score['quality'] : [],
-                'scores' => is_array($score['scores'] ?? null) ? $score['scores'] : [],
+                'quality' => $quality,
+                'scores' => $v5Scores,
+                'dimension_summary' => $dimensionSummary,
+                'legacy_scores' => is_array($score['scores'] ?? null) ? $score['scores'] : [],
                 'report' => is_array($score['report'] ?? null) ? $score['report'] : [],
                 'report_tags' => array_values(array_filter(
                     array_map('strval', (array) ($score['report_tags'] ?? [])),
                     static fn (string $tag): bool => $tag !== ''
                 )),
+                'interpretation' => $interpretation,
+                'next_module' => [
+                    'available' => false,
+                    'module_code' => 'EQ_SJT_16',
+                    'status' => 'planned',
+                    'cta_asset_id' => 'eq.sjt_bridge.planned',
+                ],
+                'methodology' => [
+                    'norm_status' => strtolower(trim((string) data_get($score, 'norms.status', 'provisional'))) ?: 'provisional',
+                    'scoring_version' => (string) data_get($score, 'version_snapshot.engine_version', 'v1.0_normed_validity'),
+                    'report_version' => 'eq_report_v5_minimal',
+                    'content_version' => Eq60PackLoader::PACK_ID.'/'.$version,
+                ],
                 'generated_at' => now()->toISOString(),
             ],
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $score
+     * @return array<string,mixed>
+     */
+    private function buildV5Scores(array $score, string $locale): array
+    {
+        $global = $this->scoreNode((array) data_get($score, 'scores.global', []), $this->globalScoreLabel($locale));
+        $dimensions = [];
+        $summary = [];
+        foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
+            $label = $this->dimensionLabel($code, $locale);
+            $node = $this->scoreNode((array) data_get($score, 'scores.'.$code, []), $label, $label);
+            $dimensions[$code] = $node;
+            $summary[] = [
+                'code' => $code,
+                'label' => $label,
+                'standard_score' => $node['standard_score'],
+                'percentile' => $node['percentile'],
+                'band' => $node['band'],
+            ];
+        }
+
+        return [
+            'global' => $global,
+            'dimensions' => $dimensions,
+            'dimension_summary' => $summary,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $node
+     * @return array<string,mixed>
+     */
+    private function scoreNode(array $node, string $label, ?string $shortLabel = null): array
+    {
+        $level = strtolower(trim((string) ($node['level'] ?? $node['band'] ?? '')));
+        $band = $this->displayBand($level);
+
+        $payload = [
+            'raw_score' => $this->nullableNumber($node['raw_sum'] ?? $node['raw_score'] ?? null),
+            'standard_score' => $this->nullableNumber($node['std_score'] ?? $node['standard_score'] ?? null),
+            'percentile' => $this->nullableNumber($node['percentile'] ?? null),
+            'band' => $band,
+            'label' => $label,
+        ];
+        if ($shortLabel !== null) {
+            $payload['short_label'] = $shortLabel;
+        }
+        if ($level !== '' && $level !== $band) {
+            $payload['source_band'] = $level;
+        }
+
+        return $payload;
+    }
+
+    private function nullableNumber(mixed $value): int|float|null
+    {
+        if (! is_numeric($value)) {
+            return null;
+        }
+        $float = (float) $value;
+
+        return abs($float - round($float)) < 0.00001 ? (int) round($float) : $float;
+    }
+
+    private function displayBand(string $sourceBand): string
+    {
+        return match ($sourceBand) {
+            'baseline' => 'foundational',
+            'competent' => 'stable',
+            'exceptional' => 'integrated',
+            'developing', 'proficient', 'foundational', 'stable', 'integrated' => $sourceBand,
+            default => 'stable',
+        };
+    }
+
+    private function globalScoreLabel(string $locale): string
+    {
+        return $locale === 'zh-CN'
+            ? '情绪与关系综合指数'
+            : 'Emotional & Relational Functioning Index';
+    }
+
+    private function dimensionLabel(string $code, string $locale): string
+    {
+        $zh = [
+            'SA' => '自我觉察',
+            'ER' => '情绪调节',
+            'EM' => '共情理解',
+            'RM' => '关系管理',
+        ];
+        $en = [
+            'SA' => 'Self-Awareness',
+            'ER' => 'Emotion Regulation',
+            'EM' => 'Empathy',
+            'RM' => 'Relationship Management',
+        ];
+        $map = $locale === 'zh-CN' ? $zh : $en;
+
+        return $map[$code] ?? $code;
+    }
+
+    /**
+     * @param  array<string,mixed>  $score
+     * @return array<string,mixed>
+     */
+    private function buildV5Quality(array $score): array
+    {
+        $quality = is_array($score['quality'] ?? null) ? $score['quality'] : [];
+        $level = strtoupper(trim((string) ($quality['level'] ?? '')));
+        if ($level === '') {
+            $level = 'A';
+        }
+        $quality['level'] = $level;
+        $quality['flags'] = array_values(array_filter(array_map(
+            static fn ($flag): string => strtoupper(trim((string) $flag)),
+            (array) ($quality['flags'] ?? [])
+        )));
+        $quality['confidence_label'] = match ($level) {
+            'A' => 'high',
+            'B' => 'medium',
+            default => 'low',
+        };
+        $quality['explanation_asset_id'] = 'eq.quality.level.'.$level;
+
+        return $quality;
+    }
+
+    /**
+     * @param  array<string,mixed>  $scores
+     * @param  array<string,mixed>  $quality
+     * @return array<string,mixed>
+     */
+    private function buildV5Interpretation(array $scores, array $quality): array
+    {
+        $dimensionScores = is_array($scores['dimensions'] ?? null) ? $scores['dimensions'] : [];
+        $strongest = $this->rankDimension($dimensionScores, true);
+        $developmentLever = $this->rankDimension($dimensionScores, false);
+        $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? '')));
+
+        return [
+            'core_formulation_id' => in_array($qualityLevel, ['C', 'D'], true) ? 'low_confidence_result' : 'balanced_integrated',
+            'strongest_dimension' => $strongest,
+            'development_lever' => $developmentLever,
+            'primary_mechanism_ids' => [],
+            'primary_scene_ids' => [],
+            'career_environment_ids' => [],
+            'action_prescription_id' => null,
+        ];
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function rankDimension(array $dimensionScores, bool $highest): ?string
+    {
+        $ranked = [];
+        foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
+            $node = is_array($dimensionScores[$code] ?? null) ? $dimensionScores[$code] : [];
+            $ranked[$code] = $this->nullableNumber($node['percentile'] ?? null)
+                ?? $this->nullableNumber($node['standard_score'] ?? null)
+                ?? $this->nullableNumber($node['raw_score'] ?? null)
+                ?? 0;
+        }
+
+        $highest ? arsort($ranked) : asort($ranked);
+        $code = array_key_first($ranked);
+
+        return is_string($code) && $code !== '' ? $code : null;
     }
 
     /**
