@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-21T20:25:00+08:00",
+  "updated_at": "2026-05-21T20:30:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -15397,13 +15397,13 @@
     "SEARCH-CHANNEL-LIVE-02-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-preflight",
-      "status": "local_validation_passed_blocked",
+      "status": "pr_opened_blocked_preflight",
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE",
         "NODE3-RETIREMENT-FINAL-CHECK"
       ],
-      "commit_sha": "d20d309d610507de80efb3982ec9d891c9e3de66",
-      "pr_url": null,
+      "commit_sha": "d0b3c0712be802bd13e9620ca772567b02a8e504",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1530",
       "checks": {
         "dependencies": {
           "status": "pass",
@@ -15484,6 +15484,11 @@
           "at": "2026-05-21T20:25:00+08:00",
           "status": "commit_created",
           "summary": "Committed the blocked preflight rerun artifact and ledger update on codex/search-channel-live-02-preflight."
+        },
+        {
+          "at": "2026-05-21T20:30:00+08:00",
+          "status": "pr_opened_blocked_preflight",
+          "summary": "Opened PR #1530 for the blocked preflight rerun. This PR records that production deploy/read-only executor verification is required before live canary approval."
         }
       ],
       "sidecar_issues": [
