@@ -5834,6 +5834,57 @@ prs:
     production_approval_required: false
     next_task: CRAWLER-LOG-02
 
+  - id: CRAWLER-LOG-02
+    repo: fap-api
+    depends_on:
+      - CRAWLER-LOG-01
+    branch: codex/crawler-log-02-fixture-parser-mvp
+    base: main
+    title: "feat(seo-intel): add crawler log fixture parser MVP"
+    name: "Crawler log fixture parser MVP"
+    train_scope: seo_intel_crawler_log_fixture_parser_mvp
+    risk_level: low_fixture_only_no_log_read_no_write
+    type: service/test/docs PR
+    scope:
+      - Add a synthetic fixture-only crawler log parser/normalizer for CRAWLER-LOG-00 V1 fields.
+      - Add synthetic nginx-style fixture coverage for known public paths, private paths, unknown public paths, static assets, API host, Ops host, bot families, and query risk states.
+      - Return sanitized in-memory rows and no-write report fields only; do not add command activation, scheduler, migrations, collector writes, production log reads, external calls, Metabase exposure, URL submission, or URL Truth writes.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/CrawlerLog/**
+      - backend/tests/Fixtures/SeoIntel/crawler_logs/**
+      - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogFixtureParserMvpTest.php
+      - backend/docs/seo/crawler-log-fixture-parser-mvp.md
+      - backend/docs/seo/generated/crawler-log-fixture-parser-mvp.v1.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Read production crawler logs, add production source access, add crawler-log observe command activation, enable scheduler, run collector writes, run migrations, deploy, edit env, expose Metabase, call external search APIs, submit URLs, or access business DB / Tencent RDS / Node2.
+      - Persist raw IP, raw user-agent, raw request URI, query string, cookies, headers, tokens, emails, order IDs, attempt IDs, payment IDs, provider payloads, raw payloads, raw log lines, event_payload, metadata_json, or attributes_json.
+      - Treat crawler logs as URL Truth, Search Channel Queue, CMS authority, canonical truth, indexability truth, or issue auto-fix.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelCrawlerLogFixtureParserMvp
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff
+      - python3 -m json.tool backend/docs/seo/generated/crawler-log-fixture-parser-mvp.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    production_approval_required: false
+    next_task: CRAWLER-LOG-03
+
   - id: CLAIM-LINT-00
     repo: fap-api
     depends_on:

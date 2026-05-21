@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T04:28:00+08:00",
+  "updated_at": "2026-05-22T06:49:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -12715,13 +12715,13 @@
     "CRAWLER-LOG-01": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-01-readiness-scan",
-      "status": "pr_opened_github_checks_pending",
-      "state": "pr_opened_github_checks_pending",
+      "status": "merged",
+      "state": "merged",
       "title": "Crawler log readiness scan",
       "depends_on": [
         "CRAWLER-LOG-00"
       ],
-      "commit_sha": "f52df4f34412a90ac1ff3198c69ca0b8093b9a8e",
+      "commit_sha": "e97b8511705298741920dca09aab47e7e6eec716",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1542",
       "checks": {
         "dependency": {
@@ -12775,12 +12775,16 @@
         "github": {
           "status": "pending",
           "evidence": "Opened PR #1542; GitHub checks pending."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1542 was merged and origin/main contains merge commit e97b8511705298741920dca09aab47e7e6eec716."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-21T22:03:41Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "scheduler_activation": false,
       "metabase_deployment": false,
@@ -12814,6 +12818,115 @@
           "at": "2026-05-22T04:28:00+08:00",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1542 for CRAWLER-LOG-01. GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-22T06:25:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled CRAWLER-LOG-01 readiness scan as merged via PR #1542; origin/main contains e97b8511705298741920dca09aab47e7e6eec716 and local cleanup was completed before CRAWLER-LOG-02."
+        }
+      ],
+      "merge_commit_sha": "e97b8511705298741920dca09aab47e7e6eec716",
+      "merge_observed": true,
+      "final_status": "crawler_log_readiness_scan_merged_ready_for_fixture_parser_mvp"
+    },
+    "CRAWLER-LOG-02": {
+      "repo": "fap-api",
+      "branch": "codex/crawler-log-02-fixture-parser-mvp",
+      "status": "committed",
+      "state": "committed",
+      "title": "Crawler log fixture parser MVP",
+      "depends_on": [
+        "CRAWLER-LOG-01"
+      ],
+      "commit_sha": "1ff70ef12cb1acfc94c57bba756b28b795ac6b27",
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CRAWLER-LOG-01 is merged via PR #1542 and local main started from e97b8511705298741920dca09aab47e7e6eec716."
+        },
+        "scope": {
+          "status": "in_progress",
+          "evidence": "Implementing fixture-only parser service, synthetic fixture, docs/generated artifact, focused test, and PR train metadata. No production log read, command activation, scheduler, collector write, migration, deployment, env edit, external search API call, URL submission, Metabase exposure, business DB / Tencent RDS / Node2 access, or production operation executed."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to crawler log fixture parser service, synthetic fixture, focused test, docs/generated artifact, and docs/codex PR train metadata. No production log read, command activation, scheduler, collector write, migration, deployment, env edit, external search API call, URL submission, Metabase exposure, business DB / Tencent RDS / Node2 access, or production operation was performed."
+        },
+        "crawler_log_fixture_parser_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelCrawlerLogFixtureParserMvp",
+          "evidence": "7 tests passed with 118 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "evidence": "316 tests passed with 5036 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 203 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Pint completed successfully; 3444 files checked."
+        },
+        "bigfive_runtime_freeze_guard": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff",
+          "evidence": "1 test passed with 3 assertions; no allowlist change required."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/crawler-log-fixture-parser-mvp.v1.json >/dev/null"
+        },
+        "state_json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": true,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "next_pr": "CRAWLER-LOG-03",
+      "history": [
+        {
+          "at": "2026-05-22T06:25:00+08:00",
+          "status": "in_progress",
+          "summary": "Started CRAWLER-LOG-02 fixture parser MVP from latest main. Scope is synthetic fixture parser service, fixture, focused test, docs/generated artifact, and metadata only; production crawler log reads, command activation, scheduler, collector writes, migrations, deploys, env edits, external APIs, URL submissions, Metabase exposure, and unsafe data sources remain blocked."
+        },
+        {
+          "at": "2026-05-22T06:45:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Added fixture-only crawler log parser service, synthetic fixture, focused SeoIntel test, docs/generated artifact, and PR train metadata. Focused parser test, full SeoIntel suite, route list, Pint, BigFive runtime freeze guard, JSON/YAML validation, state JSON validation, and diff check passed. No production log read, command activation, scheduler, collector write, migration, deployment, env edit, external API call, URL submission, Metabase exposure, or production operation performed."
+        },
+        {
+          "at": "2026-05-22T06:49:00+08:00",
+          "status": "committed",
+          "summary": "Committed scoped fixture parser MVP implementation at 1ff70ef12cb1acfc94c57bba756b28b795ac6b27."
         }
       ]
     }
