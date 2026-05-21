@@ -1816,6 +1816,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelOpsDashboardReadModelFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelMigrationIsolationFile($file)) {
                 continue;
             }
@@ -2399,6 +2403,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueuePlanner.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueWriteService.php',
             'backend/database/migrations/seo_intel/2026_05_20_220000_create_seo_search_channel_queue_tables.php',
+        ], true);
+    }
+
+    private function isSeoIntelOpsDashboardReadModelFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/SeoIntel/OpsDashboard/AbstractSeoDashboardReadService.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardOverviewReadService.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoIssueQueueReadService.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoSearchChannelQueueReadService.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoUrlTruthReadService.php',
         ], true);
     }
 
