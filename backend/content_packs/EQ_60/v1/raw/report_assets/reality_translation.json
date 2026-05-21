@@ -1,0 +1,102 @@
+{
+  "schema": "eq60.report_assets.reality_translation.v1",
+  "pack_id": "EQ_60",
+  "scenes": {
+    "feedback": {
+      "zh-CN": {
+        "title": "反馈场景",
+        "typical_response": "收到评价或修改意见时，你可能先捕捉语气和关系信号，再处理信息本身。",
+        "strength": "能注意到反馈背后的真实意图和关系温度。",
+        "cost": "如果恢复不足，容易把反馈体验成否定。",
+        "better_move": "先拆分事实、情绪和下一步：对方说了什么，我有什么感受，我要确认什么。"
+      },
+      "en": {
+        "title": "Feedback",
+        "typical_response": "When receiving critique or edits, you may notice tone and relational cues before processing the information.",
+        "strength": "You can notice intent and relational temperature behind feedback.",
+        "cost": "When recovery is weak, feedback may feel like rejection.",
+        "better_move": "Separate facts, feeling, and next step: what was said, what I feel, what I need to clarify."
+      }
+    },
+    "conflict": {
+      "zh-CN": {
+        "title": "冲突场景",
+        "typical_response": "出现分歧时，你可能在维护关系和表达自己之间摇摆。",
+        "strength": "有机会同时看见双方需求。",
+        "cost": "如果没有暂停流程，容易过度解释、回避或急于修复。",
+        "better_move": "先确认共同目标，再只讨论一个具体问题。"
+      },
+      "en": {
+        "title": "Conflict",
+        "typical_response": "During disagreement, you may move between preserving the relationship and expressing yourself.",
+        "strength": "You can often see needs on both sides.",
+        "cost": "Without a pause process, you may over-explain, avoid, or rush repair.",
+        "better_move": "Name the shared goal first, then discuss one specific issue."
+      }
+    },
+    "relationship_boundary": {
+      "zh-CN": {
+        "title": "关系边界",
+        "typical_response": "当别人需要你支持时，你可能很快进入理解或承担。",
+        "strength": "容易让对方感到被接住。",
+        "cost": "支持和代替之间的边界可能变模糊。",
+        "better_move": "先问自己：我能支持到哪里，哪一部分仍然属于对方。"
+      },
+      "en": {
+        "title": "Relationship Boundaries",
+        "typical_response": "When someone needs support, you may quickly move into understanding or taking responsibility.",
+        "strength": "Others may feel received and understood.",
+        "cost": "The line between supporting and replacing can blur.",
+        "better_move": "Ask yourself: how far can I support, and which part remains theirs?"
+      }
+    },
+    "team_collaboration": {
+      "zh-CN": {
+        "title": "团队协作",
+        "typical_response": "在多人协作中，你可能同时追踪任务、关系和现场情绪。",
+        "strength": "能发现协作中的隐性阻力。",
+        "cost": "如果总是主动协调，容易承担过多情绪劳动。",
+        "better_move": "把观察转成具体协作请求，而不是默默补位。"
+      },
+      "en": {
+        "title": "Team Collaboration",
+        "typical_response": "In group work, you may track task, relationship, and emotional climate at the same time.",
+        "strength": "You can notice hidden friction in collaboration.",
+        "cost": "If you always coordinate, you may carry too much emotional labor.",
+        "better_move": "Turn observations into concrete collaboration requests instead of silently compensating."
+      }
+    },
+    "pressure_recovery": {
+      "zh-CN": {
+        "title": "压力恢复",
+        "typical_response": "高压后你可能仍在脑内回放对话、评价或细节。",
+        "strength": "复盘能力可以帮助你学习模式。",
+        "cost": "没有恢复边界时，复盘会变成反刍。",
+        "better_move": "给复盘设限：只写三个事实、一个感受、一个下次动作。"
+      },
+      "en": {
+        "title": "Pressure Recovery",
+        "typical_response": "After pressure, you may replay conversations, judgments, or details in your head.",
+        "strength": "Review can help you learn patterns.",
+        "cost": "Without recovery boundaries, review turns into rumination.",
+        "better_move": "Limit review to three facts, one feeling, and one next action."
+      }
+    },
+    "career_environment": {
+      "zh-CN": {
+        "title": "职业环境",
+        "typical_response": "你对岗位中的人际密度、情绪劳动和反馈强度会有不同消耗。",
+        "strength": "理解环境变量后，更容易选择适合自己的工作节奏。",
+        "cost": "只看职位名称，容易忽略真正消耗你的工作条件。",
+        "better_move": "评估岗位时优先询问互动频率、冲突频率和恢复空间。"
+      },
+      "en": {
+        "title": "Career Environment",
+        "typical_response": "Interpersonal density, emotional labor, and feedback intensity can drain you differently across roles.",
+        "strength": "Understanding environmental variables helps you choose a better work rhythm.",
+        "cost": "Job titles alone can hide the conditions that actually drain you.",
+        "better_move": "When evaluating roles, ask about interaction frequency, conflict frequency, and recovery space."
+      }
+    }
+  }
+}

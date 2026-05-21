@@ -180,7 +180,39 @@ final class Eq60GoldenCasesTest extends TestCase
                 $fullKeys,
                 'golden case full sections mismatch: '.$caseId
             );
+
+            $expectedFormulation = $this->expectedFormulationForCase($caseId);
+            if ($expectedFormulation !== null) {
+                $this->assertSame(
+                    $expectedFormulation,
+                    (string) data_get($fullReport, 'report.interpretation.core_formulation_id'),
+                    'golden case v5 formulation mismatch: '.$caseId
+                );
+                $this->assertSame(
+                    $expectedFormulation,
+                    (string) data_get($fullReport, 'report.assets.core_formulation.id'),
+                    'golden case v5 formulation asset mismatch: '.$caseId
+                );
+                $this->assertNotSame('', (string) data_get($fullReport, 'report.assets.core_formulation.title'));
+                $this->assertNotEmpty((array) data_get($fullReport, 'report.interpretation.primary_scene_ids'));
+                $this->assertNotSame('', (string) data_get($fullReport, 'report.interpretation.action_prescription_id'));
+            }
         }
+    }
+
+    private function expectedFormulationForCase(string $caseId): ?string
+    {
+        return match ($caseId) {
+            'EQ60_BALANCED_HIGH_ZH' => 'balanced_integrated',
+            'EQ60_OVERTHINKING_BURN_ZH' => 'aware_but_unregulated',
+            'EQ60_COMPASSION_OVERLOAD_ZH' => 'high_empathy_low_recovery',
+            'EQ60_SPEEDING_C_ZH',
+            'EQ60_LONGSTRING_C_ZH',
+            'EQ60_EXTREME_BIAS_C_ZH',
+            'EQ60_NEUTRAL_BIAS_C_ZH',
+            'EQ60_INCONSISTENT_D_ZH' => 'low_confidence_result',
+            default => null,
+        };
     }
 
     /**

@@ -1,0 +1,1736 @@
+{
+    "schema": "eq_60.report_assets.compiled.v1",
+    "pack_id": "EQ_60",
+    "pack_version": "v1",
+    "generated_at": "2026-05-21T07:42:44.098074Z",
+    "assets": {
+        "scientific_contract": {
+            "schema": "eq60.report_assets.scientific_contract.v1",
+            "pack_id": "EQ_60",
+            "assets": {
+                "eq.scientific_contract.default": {
+                    "zh-CN": {
+                        "test_definition": "这是一份基于 60 道自我报告题的情绪与关系模式报告，用于解释你如何感知、调节、回应和管理自己与他人的情绪。",
+                        "self_report_statement": "本报告反映你对自身情绪与关系模式的主观感知，不等同于客观能力测验。",
+                        "non_clinical_statement": "本报告不用于临床诊断、治疗建议或危机评估。",
+                        "non_hiring_statement": "本报告不用于招聘筛选、录用、晋升或其他高风险人事决策。",
+                        "non_ability_statement": "本报告不是认证能力测验，也不声称测量真实情商能力。",
+                        "norm_status_statement": "当前常模为阶段性常模，百分位和标准分用于解释相对位置，后续会随样本增长持续校准。",
+                        "quality_rules_statement": "系统会参考作答时长、长串作答、极端反应、中立反应和一致性信号，给出解释置信度。",
+                        "version_statement": "报告版本 eq_report_v5_assets，计分版本 v1.0_normed_validity，内容版本 EQ_60/v1。"
+                    },
+                    "en": {
+                        "test_definition": "This is an emotional and relational pattern report based on 60 self-report items. It explains how you notice, regulate, respond to, and manage emotions in yourself and others.",
+                        "self_report_statement": "This report reflects your subjective self-perception of emotional and relational patterns. It is not an objective ability test.",
+                        "non_clinical_statement": "This report is not for clinical diagnosis, treatment advice, or crisis evaluation.",
+                        "non_hiring_statement": "This report is not for hiring, selection, promotion, or other high-stakes employment decisions.",
+                        "non_ability_statement": "This report is not a certified ability assessment and does not claim to measure true emotional intelligence ability.",
+                        "norm_status_statement": "Current norms are provisional. Percentiles and standard scores explain relative position and will be recalibrated as samples grow.",
+                        "quality_rules_statement": "The system considers response time, long-string patterns, extreme responding, neutral responding, and consistency signals to estimate interpretation confidence.",
+                        "version_statement": "Report version eq_report_v5_assets, scoring version v1.0_normed_validity, content version EQ_60/v1."
+                    }
+                }
+            }
+        },
+        "score_system": {
+            "schema": "eq60.report_assets.score_system.v1",
+            "pack_id": "EQ_60",
+            "global_index": {
+                "zh-CN": {
+                    "label": "情绪与关系综合指数",
+                    "meaning": "综合四个维度的自我报告信号，描述当前情绪与关系功能的整体稳定度。"
+                },
+                "en": {
+                    "label": "Emotional & Relational Functioning Index",
+                    "meaning": "A combined self-report signal across four dimensions, describing the current stability of emotional and relational functioning."
+                }
+            },
+            "score_notes": {
+                "zh-CN": {
+                    "standard_score": "标准分以阶段性常模为参照，平均附近代表稳定可用。",
+                    "percentile": "百分位表示在当前参考样本中的相对位置，不代表能力认证。"
+                },
+                "en": {
+                    "standard_score": "Standard scores are interpreted against provisional norms. Scores near the mean indicate a stable usable range.",
+                    "percentile": "Percentiles indicate relative position in the current reference sample and are not ability certification."
+                }
+            },
+            "bands": {
+                "foundational": {
+                    "zh-CN": "基础发展中：当前信号提示该能力更需要外部结构、练习和复盘支持。",
+                    "en": "Foundational: the current signal suggests this area benefits from more structure, practice, and review."
+                },
+                "developing": {
+                    "zh-CN": "发展中：已经有可用基础，但在压力或复杂关系中可能不够稳定。",
+                    "en": "Developing: usable foundations are present, but the pattern may be less stable under pressure or relational complexity."
+                },
+                "stable": {
+                    "zh-CN": "稳定可用：多数日常场景中可以发挥作用，但仍需要看和其他维度的组合。",
+                    "en": "Stable: generally usable in everyday contexts, while interpretation still depends on how it combines with other dimensions."
+                },
+                "proficient": {
+                    "zh-CN": "熟练成熟：该维度通常是可依赖的优势信号，也可能带来相应消耗。",
+                    "en": "Proficient: this dimension is usually a reliable strength signal and may also carry related costs."
+                },
+                "integrated": {
+                    "zh-CN": "高度整合：该维度表现突出，重点是避免过度使用并保持情境灵活性。",
+                    "en": "Integrated: this dimension is prominent; the key is avoiding overuse and staying contextually flexible."
+                }
+            },
+            "dimensions": {
+                "SA": {
+                    "zh-CN": {
+                        "label": "自我觉察",
+                        "definition": "识别、命名和理解自身情绪线索的倾向。",
+                        "band_explanations": {
+                            "foundational": "自我觉察处于基础发展中，建议先练习用具体词语命名情绪。",
+                            "developing": "自我觉察已有基础，但在压力下可能较晚发现真实触发点。",
+                            "stable": "自我觉察稳定可用，通常能理解自己的主要情绪线索。",
+                            "proficient": "自我觉察较成熟，能较快捕捉情绪变化和背后需求。",
+                            "integrated": "自我觉察高度整合，重点是避免过度分析并转向行动。"
+                        }
+                    },
+                    "en": {
+                        "label": "Self-Awareness",
+                        "definition": "The tendency to notice, name, and understand emotional cues in yourself.",
+                        "band_explanations": {
+                            "foundational": "Self-awareness is foundational; start by naming emotions with specific words.",
+                            "developing": "Self-awareness has a base, but real triggers may be noticed late under pressure.",
+                            "stable": "Self-awareness is stable and usually helps you understand key emotional cues.",
+                            "proficient": "Self-awareness is mature enough to catch shifts and underlying needs quickly.",
+                            "integrated": "Self-awareness is highly integrated; the focus is avoiding over-analysis and moving to action."
+                        }
+                    }
+                },
+                "ER": {
+                    "zh-CN": {
+                        "label": "情绪调节",
+                        "definition": "在压力、反馈或冲突中恢复、暂停和选择回应方式的倾向。",
+                        "band_explanations": {
+                            "foundational": "情绪调节处于基础发展中，建议先建立暂停和恢复流程。",
+                            "developing": "情绪调节已有基础，但强反馈或冲突中仍可能不稳定。",
+                            "stable": "情绪调节稳定可用，多数日常压力下能找到恢复方式。",
+                            "proficient": "情绪调节较成熟，能在触发后较快回到可沟通状态。",
+                            "integrated": "情绪调节高度整合，重点是避免过度控制并保留真实感受。"
+                        }
+                    },
+                    "en": {
+                        "label": "Emotion Regulation",
+                        "definition": "The tendency to recover, pause, and choose responses during pressure, feedback, or conflict.",
+                        "band_explanations": {
+                            "foundational": "Emotion regulation is foundational; build a pause and recovery process first.",
+                            "developing": "Emotion regulation has a base, but strong feedback or conflict may still destabilize it.",
+                            "stable": "Emotion regulation is stable and usually supports recovery in everyday pressure.",
+                            "proficient": "Emotion regulation is mature enough to return to communication after being triggered.",
+                            "integrated": "Emotion regulation is highly integrated; avoid over-control and keep authentic feeling available."
+                        }
+                    }
+                },
+                "EM": {
+                    "zh-CN": {
+                        "label": "共情理解",
+                        "definition": "理解他人情绪、立场和关系线索的倾向。",
+                        "band_explanations": {
+                            "foundational": "共情理解处于基础发展中，建议先练习确认对方感受。",
+                            "developing": "共情理解已有基础，但可能错过隐性情绪或真实需求。",
+                            "stable": "共情理解稳定可用，多数场景能把握他人基本感受。",
+                            "proficient": "共情理解较成熟，能较细腻地捕捉关系和情绪线索。",
+                            "integrated": "共情理解高度整合，重点是避免过度承接他人情绪。"
+                        }
+                    },
+                    "en": {
+                        "label": "Empathy",
+                        "definition": "The tendency to understand other people's emotions, perspectives, and relational cues.",
+                        "band_explanations": {
+                            "foundational": "Empathy is foundational; start by confirming the other person's feeling.",
+                            "developing": "Empathy has a base, but hidden emotion or real needs may be missed.",
+                            "stable": "Empathy is stable and usually helps you grasp basic feelings in others.",
+                            "proficient": "Empathy is mature enough to notice relational and emotional cues with nuance.",
+                            "integrated": "Empathy is highly integrated; avoid over-carrying other people's emotions."
+                        }
+                    }
+                },
+                "RM": {
+                    "zh-CN": {
+                        "label": "关系管理",
+                        "definition": "在沟通、协作、修复和边界中采取建设性行动的倾向。",
+                        "band_explanations": {
+                            "foundational": "关系管理处于基础发展中，建议先学习低风险沟通脚本。",
+                            "developing": "关系管理已有基础，但在冲突、边界或修复中可能不稳定。",
+                            "stable": "关系管理稳定可用，多数协作场景中能采取建设性行动。",
+                            "proficient": "关系管理较成熟，能主动推进沟通、协调和修复。",
+                            "integrated": "关系管理高度整合，重点是避免承担过多协调责任。"
+                        }
+                    },
+                    "en": {
+                        "label": "Relationship Management",
+                        "definition": "The tendency to act constructively in communication, collaboration, repair, and boundaries.",
+                        "band_explanations": {
+                            "foundational": "Relationship management is foundational; start with low-risk communication scripts.",
+                            "developing": "Relationship management has a base, but conflict, boundaries, or repair may be unstable.",
+                            "stable": "Relationship management is stable and usually supports constructive action in collaboration.",
+                            "proficient": "Relationship management is mature enough to actively support communication, coordination, and repair.",
+                            "integrated": "Relationship management is highly integrated; avoid taking too much coordination responsibility."
+                        }
+                    }
+                }
+            }
+        },
+        "core_formulations": {
+            "schema": "eq60.report_assets.core_formulations.v1",
+            "pack_id": "EQ_60",
+            "formulations": {
+                "balanced_integrated": {
+                    "zh-CN": {
+                        "title": "均衡整合型",
+                        "one_liner": "你的情绪与关系信号比较均衡，优势在于稳定和可迁移。",
+                        "core_claim": "你通常能同时看见自己、理解他人，并在多数情境中维持可用的回应方式。",
+                        "evidence_basis": [
+                            "四维分数相对均衡",
+                            "无明显单一短板"
+                        ],
+                        "primary_strength": "稳定性和多场景适应能力。",
+                        "likely_cost": "容易低估特定高压情境对自己的消耗。",
+                        "development_lever": "选择一个真实场景做精细化复盘，而不是泛泛提升。",
+                        "do_not_overread": "这不代表你在任何情境中都不会被触发。"
+                    },
+                    "en": {
+                        "title": "Balanced Integration",
+                        "one_liner": "Your emotional and relational signals are relatively balanced; stability is the main strength.",
+                        "core_claim": "You usually notice yourself, understand others, and maintain usable responses across many contexts.",
+                        "evidence_basis": [
+                            "Four dimensions are relatively balanced",
+                            "No single severe gap stands out"
+                        ],
+                        "primary_strength": "Stability and transfer across contexts.",
+                        "likely_cost": "You may underestimate how specific high-pressure contexts drain you.",
+                        "development_lever": "Choose one real situation for precise review rather than trying to improve everything.",
+                        "do_not_overread": "This does not mean you will never be triggered."
+                    }
+                },
+                "high_empathy_low_recovery": {
+                    "zh-CN": {
+                        "title": "高共情，低恢复",
+                        "one_liner": "你容易理解他人感受，但恢复和边界是当前杠杆。",
+                        "core_claim": "你可能很快接住别人的情绪，却不一定能及时把对方状态和自己的状态分开。",
+                        "evidence_basis": [
+                            "EM 明显高于 ER",
+                            "共情信号强于恢复信号"
+                        ],
+                        "primary_strength": "对他人状态敏感，容易建立信任。",
+                        "likely_cost": "在冲突、求助或高情绪劳动场景中容易被卷入。",
+                        "development_lever": "共情之后建立边界和恢复动作。",
+                        "do_not_overread": "发展方向不是减少共情，而是让共情更有边界。"
+                    },
+                    "en": {
+                        "title": "High Empathy, Low Recovery",
+                        "one_liner": "You tend to understand others quickly, while recovery and boundaries are the current lever.",
+                        "core_claim": "You may absorb other people's emotions quickly without separating their state from your own soon enough.",
+                        "evidence_basis": [
+                            "EM is meaningfully higher than ER",
+                            "Empathy signal is stronger than recovery signal"
+                        ],
+                        "primary_strength": "Sensitivity to others and trust building.",
+                        "likely_cost": "Conflict, support, and high emotional-labor settings may pull you in too deeply.",
+                        "development_lever": "Build boundaries and recovery after empathy.",
+                        "do_not_overread": "The goal is not less empathy; it is empathy with clearer boundaries."
+                    }
+                },
+                "aware_but_unregulated": {
+                    "zh-CN": {
+                        "title": "高觉察，调节不足",
+                        "one_liner": "你能知道自己怎么了，但不一定能很快恢复。",
+                        "core_claim": "你可能很快觉察到被触发，却需要更稳定的暂停、命名和复位动作。",
+                        "evidence_basis": [
+                            "SA 高于 ER",
+                            "自我识别强于调节行动"
+                        ],
+                        "primary_strength": "能捕捉自己的情绪变化。",
+                        "likely_cost": "知道问题但仍被情绪带着走。",
+                        "development_lever": "把觉察转成具体调节步骤。",
+                        "do_not_overread": "觉察本身不是问题，问题在于缺少后续动作。"
+                    },
+                    "en": {
+                        "title": "Aware but Under-Regulated",
+                        "one_liner": "You may know what is happening inside, but recovery may lag.",
+                        "core_claim": "You may notice triggers quickly and still need steadier pause, labeling, and reset actions.",
+                        "evidence_basis": [
+                            "SA is higher than ER",
+                            "Self-recognition is stronger than regulation action"
+                        ],
+                        "primary_strength": "You can catch emotional shifts in yourself.",
+                        "likely_cost": "You may know the issue while still being carried by the emotion.",
+                        "development_lever": "Turn awareness into concrete regulation steps.",
+                        "do_not_overread": "Awareness is not the problem; the missing step is what follows."
+                    }
+                },
+                "calm_but_distant": {
+                    "zh-CN": {
+                        "title": "冷静稳定，但回应偏远",
+                        "one_liner": "你较能维持稳定，但可能不够读懂或回应他人情绪。",
+                        "core_claim": "你在压力下可能保持冷静，但关系中的温度和回应需要更多主动性。",
+                        "evidence_basis": [
+                            "ER 高于 EM",
+                            "稳定信号强于共情信号"
+                        ],
+                        "primary_strength": "不容易被情绪场带乱。",
+                        "likely_cost": "他人可能感到你不够理解或靠近。",
+                        "development_lever": "在稳定之外增加情绪确认。",
+                        "do_not_overread": "冷静不等于冷漠，但需要被他人感受到。"
+                    },
+                    "en": {
+                        "title": "Calm but Distant",
+                        "one_liner": "You may stay steady while reading or responding to others less actively.",
+                        "core_claim": "You may remain calm under pressure, but warmth and relational response need more intentional action.",
+                        "evidence_basis": [
+                            "ER is higher than EM",
+                            "Stability signal is stronger than empathy signal"
+                        ],
+                        "primary_strength": "You are less likely to be disrupted by the emotional field.",
+                        "likely_cost": "Others may feel less understood or less met.",
+                        "development_lever": "Add emotional acknowledgment to stability.",
+                        "do_not_overread": "Calm is not coldness, but it needs to be felt by others."
+                    }
+                },
+                "relationship_first_self_later": {
+                    "zh-CN": {
+                        "title": "关系优先，自我后置",
+                        "one_liner": "你能维护关系，但可能晚一步看见自己的真实感受。",
+                        "core_claim": "你倾向先让关系顺畅，再处理自己的边界、需求和消耗。",
+                        "evidence_basis": [
+                            "RM 高于 SA",
+                            "关系行动强于自我连接"
+                        ],
+                        "primary_strength": "能维持合作和关系稳定。",
+                        "likely_cost": "长期忽略自己的感受和界限。",
+                        "development_lever": "在回应别人前先确认自己的底线。",
+                        "do_not_overread": "重视关系不是问题，自我后置过久才是风险。"
+                    },
+                    "en": {
+                        "title": "Relationship First, Self Later",
+                        "one_liner": "You can maintain relationships, but may notice your own feelings too late.",
+                        "core_claim": "You tend to keep the relationship smooth before checking your own boundaries, needs, and cost.",
+                        "evidence_basis": [
+                            "RM is higher than SA",
+                            "Relational action is stronger than self-connection"
+                        ],
+                        "primary_strength": "You can preserve cooperation and relational stability.",
+                        "likely_cost": "You may overlook your feelings and limits over time.",
+                        "development_lever": "Check your bottom line before responding to others.",
+                        "do_not_overread": "Valuing relationships is not the issue; staying self-later for too long is the risk."
+                    }
+                },
+                "self_clear_repair_weak": {
+                    "zh-CN": {
+                        "title": "自我清楚，修复不足",
+                        "one_liner": "你知道自己的感受，但关系修复动作需要更清晰。",
+                        "core_claim": "你可能能表达立场，却不一定能把表达转成可继续合作的关系动作。",
+                        "evidence_basis": [
+                            "SA 高于 RM",
+                            "自我清楚强于关系修复"
+                        ],
+                        "primary_strength": "有清楚的自我感受和判断。",
+                        "likely_cost": "表达后关系可能停在紧张或防御状态。",
+                        "development_lever": "把表达、确认和修复连成一组动作。",
+                        "do_not_overread": "清楚表达不是攻击，关键是加上修复。"
+                    },
+                    "en": {
+                        "title": "Self-Clear, Repair Weaker",
+                        "one_liner": "You may know your feelings while needing clearer relational repair moves.",
+                        "core_claim": "You may state your position without always turning it into actions that keep collaboration possible.",
+                        "evidence_basis": [
+                            "SA is higher than RM",
+                            "Self-clarity is stronger than repair"
+                        ],
+                        "primary_strength": "Clear self-feeling and judgment.",
+                        "likely_cost": "After expression, the relationship may remain tense or defensive.",
+                        "development_lever": "Connect expression, acknowledgment, and repair as one sequence.",
+                        "do_not_overread": "Clear expression is not attack; the key is adding repair."
+                    }
+                },
+                "steady_collaborator": {
+                    "zh-CN": {
+                        "title": "稳定协作型",
+                        "one_liner": "你在压力下较能维持合作和修复。",
+                        "core_claim": "你通常能在情绪波动中保持可沟通，并把关系拉回可协作状态。",
+                        "evidence_basis": [
+                            "ER 与 RM 都较高",
+                            "压力恢复和关系行动同向"
+                        ],
+                        "primary_strength": "压力下仍能保持建设性。",
+                        "likely_cost": "可能承担过多协调责任。",
+                        "development_lever": "区分需要你修复的事和不该由你承担的事。",
+                        "do_not_overread": "稳定协作不意味着你必须负责所有人的情绪。"
+                    },
+                    "en": {
+                        "title": "Steady Collaborator",
+                        "one_liner": "You tend to maintain collaboration and repair under pressure.",
+                        "core_claim": "You can often stay communicative during emotional shifts and bring the relationship back to workable ground.",
+                        "evidence_basis": [
+                            "ER and RM are both relatively high",
+                            "Recovery and relational action move together"
+                        ],
+                        "primary_strength": "Constructive response under pressure.",
+                        "likely_cost": "You may take on too much coordination responsibility.",
+                        "development_lever": "Separate what is yours to repair from what is not yours to carry.",
+                        "do_not_overread": "Being steady does not make you responsible for everyone else's emotions."
+                    }
+                },
+                "sensitive_absorber": {
+                    "zh-CN": {
+                        "title": "高敏感，易吸收",
+                        "one_liner": "你很能感知自己和他人，但也更容易被情绪环境影响。",
+                        "core_claim": "你可能同时捕捉自己的细微信号和他人情绪，因此需要更强的区分与恢复。",
+                        "evidence_basis": [
+                            "SA 与 EM 较高",
+                            "ER 相对较低"
+                        ],
+                        "primary_strength": "情绪线索捕捉能力强。",
+                        "likely_cost": "容易过度加工或吸收环境情绪。",
+                        "development_lever": "区分我的感受、他人的感受和现场压力。",
+                        "do_not_overread": "敏感不是脆弱，它需要更好的过滤系统。"
+                    },
+                    "en": {
+                        "title": "Sensitive Absorber",
+                        "one_liner": "You notice yourself and others strongly, and may be more affected by the emotional field.",
+                        "core_claim": "You may catch subtle self-signals and other people's emotions at the same time, requiring stronger separation and recovery.",
+                        "evidence_basis": [
+                            "SA and EM are relatively high",
+                            "ER is relatively lower"
+                        ],
+                        "primary_strength": "Strong emotional cue detection.",
+                        "likely_cost": "You may over-process or absorb environmental emotion.",
+                        "development_lever": "Separate my feeling, their feeling, and situational pressure.",
+                        "do_not_overread": "Sensitivity is not weakness; it needs a better filtering system."
+                    }
+                },
+                "developing_foundation": {
+                    "zh-CN": {
+                        "title": "基础发展中",
+                        "one_liner": "多个情绪与关系信号仍在打基础，适合从一个小场景开始练。",
+                        "core_claim": "你的结果提示当前不宜追求复杂技巧，先建立命名、暂停和复盘的基础动作更重要。",
+                        "evidence_basis": [
+                            "多个维度处于基础或发展区间",
+                            "没有稳定优势维度足以独立支撑"
+                        ],
+                        "primary_strength": "可塑性强，适合从低风险场景开始。",
+                        "likely_cost": "同时处理太多关系任务会增加压力。",
+                        "development_lever": "先练一个最小闭环：识别、暂停、选择下一句。",
+                        "do_not_overread": "这不是能力定论，而是当前自我报告信号。"
+                    },
+                    "en": {
+                        "title": "Developing Foundation",
+                        "one_liner": "Several emotional and relational signals are still foundational; start with one small context.",
+                        "core_claim": "The result suggests starting with basic labeling, pausing, and review before complex techniques.",
+                        "evidence_basis": [
+                            "Multiple dimensions are foundational or developing",
+                            "No stable strength is strong enough to carry the pattern alone"
+                        ],
+                        "primary_strength": "High room for growth through low-risk practice.",
+                        "likely_cost": "Handling too many relational tasks at once can increase pressure.",
+                        "development_lever": "Practice one small loop: notice, pause, choose the next sentence.",
+                        "do_not_overread": "This is not a fixed ability judgment; it is the current self-report signal."
+                    }
+                },
+                "low_confidence_result": {
+                    "zh-CN": {
+                        "title": "本次结果置信度不足",
+                        "one_liner": "本次作答质量信号降低了解释置信度，建议先谨慎阅读。",
+                        "core_claim": "系统检测到会影响解释稳定性的作答模式，因此不应输出强人格判断。",
+                        "evidence_basis": [
+                            "质量等级为 C 或 D",
+                            "存在速度、长串、极端、中立或不一致信号"
+                        ],
+                        "primary_strength": "仍可作为反思线索。",
+                        "likely_cost": "具体维度和画像容易被误读。",
+                        "development_lever": "在状态稳定时复测，或只使用低风险建议。",
+                        "do_not_overread": "不要把这次结果作为稳定结论。"
+                    },
+                    "en": {
+                        "title": "Lower Confidence Result",
+                        "one_liner": "Response-quality signals reduce interpretation confidence; read this result cautiously.",
+                        "core_claim": "The system detected response patterns that can reduce interpretive stability, so strong personality claims should not be made.",
+                        "evidence_basis": [
+                            "Quality level is C or D",
+                            "Speed, long-string, extreme, neutral, or inconsistency signals are present"
+                        ],
+                        "primary_strength": "It can still serve as a reflection cue.",
+                        "likely_cost": "Specific dimensions and patterns may be overread.",
+                        "development_lever": "Retake when stable, or use only low-risk suggestions.",
+                        "do_not_overread": "Do not treat this result as a stable conclusion."
+                    }
+                }
+            }
+        },
+        "mechanism_map": {
+            "schema": "eq60.report_assets.mechanism_map.v1",
+            "pack_id": "EQ_60",
+            "states": [
+                "high_high",
+                "high_low",
+                "low_high",
+                "low_low"
+            ],
+            "pairs": {
+                "SA_ER": {
+                    "high_high": {
+                        "zh-CN": {
+                            "title": "知道自己，也能复位",
+                            "why_it_matters": "自我觉察只有接上调节动作，才会变成现实中的稳定回应。",
+                            "what_it_feels_like": "你通常能说清自己怎么了，并较快找到下一步。",
+                            "strength": "减少反复内耗，把情绪信息转成行动。",
+                            "cost": "可能过度依赖自我控制，忽略休息需求。",
+                            "development_lever": "让复位动作更轻量。",
+                            "micro_action": "用一句话命名情绪，再决定下一句怎么说。"
+                        },
+                        "en": {
+                            "title": "You notice yourself and can reset",
+                            "why_it_matters": "Self-awareness becomes real-world stability only when it connects to regulation.",
+                            "what_it_feels_like": "You can usually name what is happening and find the next step.",
+                            "strength": "Less rumination; more action from emotional information.",
+                            "cost": "You may over-rely on self-control and miss rest needs.",
+                            "development_lever": "Make reset actions lighter.",
+                            "micro_action": "Name the emotion in one sentence, then choose the next sentence."
+                        }
+                    },
+                    "high_low": {
+                        "zh-CN": {
+                            "title": "知道自己，但恢复跟不上",
+                            "why_it_matters": "觉察会放大感受，如果没有调节动作，反而更容易卡住。",
+                            "what_it_feels_like": "你知道自己被触发了，但身体和语气不一定跟得上。",
+                            "strength": "能早期识别风险信号。",
+                            "cost": "容易陷入反复解释或自责。",
+                            "development_lever": "把觉察后 30 秒变成固定流程。",
+                            "micro_action": "暂停、命名、喝水或离开屏幕 60 秒。"
+                        },
+                        "en": {
+                            "title": "You notice yourself, but recovery lags",
+                            "why_it_matters": "Awareness can intensify feelings when no regulation step follows.",
+                            "what_it_feels_like": "You know you are triggered, but your body or tone may not catch up.",
+                            "strength": "Early detection of risk signals.",
+                            "cost": "You may loop in explanation or self-blame.",
+                            "development_lever": "Turn the first 30 seconds after awareness into a routine.",
+                            "micro_action": "Pause, label, drink water, or step away from the screen for 60 seconds."
+                        }
+                    },
+                    "low_high": {
+                        "zh-CN": {
+                            "title": "能稳定，但不总知道原因",
+                            "why_it_matters": "调节有效，但如果不理解触发点，模式会重复出现。",
+                            "what_it_feels_like": "你能忍住或恢复，但事后未必知道自己为何被影响。",
+                            "strength": "压力下不易失控。",
+                            "cost": "复盘不足会让同类问题反复。",
+                            "development_lever": "补上事后命名。",
+                            "micro_action": "事后写下：刚才我真正介意的是什么。"
+                        },
+                        "en": {
+                            "title": "You can stabilize without always knowing why",
+                            "why_it_matters": "Regulation helps, but without understanding triggers the pattern repeats.",
+                            "what_it_feels_like": "You can hold or recover, but may not know what affected you.",
+                            "strength": "Less likely to lose control under pressure.",
+                            "cost": "Weak review lets similar problems recur.",
+                            "development_lever": "Add after-action labeling.",
+                            "micro_action": "Afterward, write: what did I actually care about?"
+                        }
+                    },
+                    "low_low": {
+                        "zh-CN": {
+                            "title": "识别和恢复都需要打底",
+                            "why_it_matters": "如果既难识别也难复位，复杂场景会迅速耗尽资源。",
+                            "what_it_feels_like": "你可能到事后才发现自己已经很累或很烦。",
+                            "strength": "适合从最小动作建立可预测性。",
+                            "cost": "高压沟通中容易被动应对。",
+                            "development_lever": "先练一个简单情绪词表。",
+                            "micro_action": "每天一次选择一个情绪词，并写下触发场景。"
+                        },
+                        "en": {
+                            "title": "Both recognition and recovery need foundations",
+                            "why_it_matters": "When both noticing and resetting are hard, complex situations drain resources quickly.",
+                            "what_it_feels_like": "You may realize only afterward that you were tired or irritated.",
+                            "strength": "Small actions can build predictability.",
+                            "cost": "High-pressure communication may become reactive.",
+                            "development_lever": "Start with a simple emotion vocabulary.",
+                            "micro_action": "Once a day, choose one emotion word and write the trigger."
+                        }
+                    }
+                },
+                "EM_ER": {
+                    "high_high": {
+                        "zh-CN": {
+                            "title": "能理解别人，也能保留自己",
+                            "why_it_matters": "共情和恢复并存时，理解他人不必以自我消耗为代价。",
+                            "what_it_feels_like": "你能靠近他人情绪，也能及时回到自己的节奏。",
+                            "strength": "支持他人而不容易被吞没。",
+                            "cost": "可能被期待持续承担情绪支持。",
+                            "development_lever": "明确支持边界。",
+                            "micro_action": "先确认对方需要倾听、建议还是具体帮助。"
+                        },
+                        "en": {
+                            "title": "You understand others and keep yourself",
+                            "why_it_matters": "When empathy and recovery coexist, understanding others does not require self-drain.",
+                            "what_it_feels_like": "You can approach others' emotions and return to your own rhythm.",
+                            "strength": "Support without being swallowed by the situation.",
+                            "cost": "Others may expect constant emotional support.",
+                            "development_lever": "Make support boundaries explicit.",
+                            "micro_action": "Ask whether they need listening, advice, or concrete help."
+                        }
+                    },
+                    "high_low": {
+                        "zh-CN": {
+                            "title": "共情强，边界和恢复偏弱",
+                            "why_it_matters": "你越能理解别人，越需要知道哪些情绪不是你要承担的。",
+                            "what_it_feels_like": "别人难受时，你可能很快进入帮助或自责状态。",
+                            "strength": "容易让人感到被看见。",
+                            "cost": "容易吸收过多情绪劳动。",
+                            "development_lever": "共情后加一句边界确认。",
+                            "micro_action": "在心里说：这是对方的感受，我可以支持，但不需要代替。"
+                        },
+                        "en": {
+                            "title": "Strong empathy, weaker boundaries and recovery",
+                            "why_it_matters": "The more you understand others, the more you need to know what is not yours to carry.",
+                            "what_it_feels_like": "When someone is distressed, you may quickly move into helping or self-blame.",
+                            "strength": "People often feel seen by you.",
+                            "cost": "You may absorb too much emotional labor.",
+                            "development_lever": "Add one boundary check after empathy.",
+                            "micro_action": "Say internally: this is their feeling; I can support without replacing them."
+                        }
+                    },
+                    "low_high": {
+                        "zh-CN": {
+                            "title": "稳定有余，情绪读人不足",
+                            "why_it_matters": "稳定能保护你，但关系需要对他人情绪的基本回应。",
+                            "what_it_feels_like": "你能保持冷静，却可能错过对方真正介意的点。",
+                            "strength": "不容易被外部情绪带乱。",
+                            "cost": "他人可能觉得你太理性或太远。",
+                            "development_lever": "先回应感受，再处理事实。",
+                            "micro_action": "说一句：我听到这件事让你很不舒服。"
+                        },
+                        "en": {
+                            "title": "Steady, but less emotionally attuned",
+                            "why_it_matters": "Stability protects you, but relationships need basic emotional acknowledgment.",
+                            "what_it_feels_like": "You stay calm but may miss what the other person really cares about.",
+                            "strength": "External emotion disrupts you less.",
+                            "cost": "Others may experience you as too rational or distant.",
+                            "development_lever": "Respond to feeling before facts.",
+                            "micro_action": "Say: I hear that this felt uncomfortable for you."
+                        }
+                    },
+                    "low_low": {
+                        "zh-CN": {
+                            "title": "理解他人与恢复都需降低难度",
+                            "why_it_matters": "当共情和恢复都弱时，先降低情境复杂度比追求技巧更有效。",
+                            "what_it_feels_like": "强情绪场景可能让你想躲开或快速结束。",
+                            "strength": "可从低风险互动开始建立经验。",
+                            "cost": "高情绪劳动场景消耗明显。",
+                            "development_lever": "用固定句式承接基础情绪。",
+                            "micro_action": "先说：我需要一点时间理解你说的。"
+                        },
+                        "en": {
+                            "title": "Lower complexity for empathy and recovery",
+                            "why_it_matters": "When both empathy and recovery are weaker, reducing complexity helps more than chasing advanced technique.",
+                            "what_it_feels_like": "High-emotion situations may make you want to avoid or end quickly.",
+                            "strength": "Low-risk interactions can build experience.",
+                            "cost": "High emotional-labor settings are draining.",
+                            "development_lever": "Use a stable sentence to receive basic emotion.",
+                            "micro_action": "Say: I need a little time to understand what you mean."
+                        }
+                    }
+                },
+                "EM_RM": {
+                    "high_high": {
+                        "zh-CN": {
+                            "title": "读懂别人，也能处理关系",
+                            "why_it_matters": "理解和行动结合时，共情更容易变成有效协作。",
+                            "what_it_feels_like": "你能读懂现场气氛，并推动关系回到可沟通状态。",
+                            "strength": "适合复杂协作和关系修复。",
+                            "cost": "可能过度承担协调者角色。",
+                            "development_lever": "把责任边界说清楚。",
+                            "micro_action": "问：这件事我能负责哪一部分？"
+                        },
+                        "en": {
+                            "title": "You read others and manage the relationship",
+                            "why_it_matters": "When understanding and action combine, empathy becomes workable collaboration.",
+                            "what_it_feels_like": "You can read the room and move the relationship back to communication.",
+                            "strength": "Useful for complex collaboration and repair.",
+                            "cost": "You may overtake the coordinator role.",
+                            "development_lever": "Clarify responsibility boundaries.",
+                            "micro_action": "Ask: which part of this is mine to own?"
+                        }
+                    },
+                    "high_low": {
+                        "zh-CN": {
+                            "title": "读懂别人，但关系动作不足",
+                            "why_it_matters": "看见对方感受后，还需要把理解转成一句话或一个动作。",
+                            "what_it_feels_like": "你知道对方在意什么，却不一定知道怎么回应。",
+                            "strength": "关系判断较细腻。",
+                            "cost": "理解停在心里，别人感受不到。",
+                            "development_lever": "把理解外化成确认句。",
+                            "micro_action": "说：我理解你在意的是 X，而不是只是在反对。"
+                        },
+                        "en": {
+                            "title": "You read others, but action is weaker",
+                            "why_it_matters": "After seeing someone's feeling, understanding needs to become a sentence or action.",
+                            "what_it_feels_like": "You know what matters to them but may not know how to respond.",
+                            "strength": "Nuanced relational judgment.",
+                            "cost": "Understanding stays inside and may not be felt.",
+                            "development_lever": "Externalize understanding as confirmation.",
+                            "micro_action": "Say: I understand that X matters to you, not just that you disagree."
+                        }
+                    },
+                    "low_high": {
+                        "zh-CN": {
+                            "title": "会行动，但可能没读准情绪",
+                            "why_it_matters": "关系动作如果没有情绪理解，容易变成流程化处理。",
+                            "what_it_feels_like": "你会推进解决，但对方可能觉得重点没被接住。",
+                            "strength": "能快速进入处理模式。",
+                            "cost": "修复动作可能不够贴合。",
+                            "development_lever": "行动前先做一次情绪校准。",
+                            "micro_action": "问：这件事里你最难受的是哪一部分？"
+                        },
+                        "en": {
+                            "title": "You act, but may miss the emotion",
+                            "why_it_matters": "Relational action without emotional understanding can become procedural.",
+                            "what_it_feels_like": "You move into solving while the other person may feel the point was missed.",
+                            "strength": "Fast entry into action mode.",
+                            "cost": "Repair may not fit the real concern.",
+                            "development_lever": "Calibrate emotion before action.",
+                            "micro_action": "Ask: which part of this felt hardest for you?"
+                        }
+                    },
+                    "low_low": {
+                        "zh-CN": {
+                            "title": "关系理解和行动都需要脚手架",
+                            "why_it_matters": "复杂关系不能只靠临场反应，需要可复用脚本。",
+                            "what_it_feels_like": "你可能不知道对方为何反应强，也不知道下一句怎么说。",
+                            "strength": "固定脚本能快速提升可用性。",
+                            "cost": "临场压力下容易沉默或回避。",
+                            "development_lever": "先学低风险确认句。",
+                            "micro_action": "说：我可能没完全理解，你能再说一次你的重点吗？"
+                        },
+                        "en": {
+                            "title": "Relational understanding and action need scaffolding",
+                            "why_it_matters": "Complex relationships need reusable scripts, not only improvisation.",
+                            "what_it_feels_like": "You may not know why they reacted strongly or what to say next.",
+                            "strength": "Stable scripts can improve usability quickly.",
+                            "cost": "Under pressure, silence or avoidance may appear.",
+                            "development_lever": "Start with low-risk confirmation lines.",
+                            "micro_action": "Say: I may not fully understand; can you restate your main point?"
+                        }
+                    }
+                },
+                "SA_RM": {
+                    "high_high": {
+                        "zh-CN": {
+                            "title": "能表达自己，也能维护关系",
+                            "why_it_matters": "自我清楚和关系行动结合时，边界更容易被听见。",
+                            "what_it_feels_like": "你能说出自己的感受，同时照顾沟通继续。",
+                            "strength": "适合边界、反馈和修复场景。",
+                            "cost": "可能被期待承担沟通示范。",
+                            "development_lever": "让表达更简洁。",
+                            "micro_action": "用我感到、我需要、我建议三句完成表达。"
+                        },
+                        "en": {
+                            "title": "You express yourself and maintain the relationship",
+                            "why_it_matters": "When self-clarity and relational action combine, boundaries are easier to hear.",
+                            "what_it_feels_like": "You can state your feeling while keeping communication possible.",
+                            "strength": "Useful in boundaries, feedback, and repair.",
+                            "cost": "You may be expected to model communication for others.",
+                            "development_lever": "Make expression more concise.",
+                            "micro_action": "Use: I feel, I need, I suggest."
+                        }
+                    },
+                    "high_low": {
+                        "zh-CN": {
+                            "title": "自我清楚，但关系承接不足",
+                            "why_it_matters": "表达自己之后，需要给关系一个继续对话的入口。",
+                            "what_it_feels_like": "你能说清立场，但对方可能进入防御。",
+                            "strength": "不容易丢失自我。",
+                            "cost": "表达可能被听成指责。",
+                            "development_lever": "表达后加一句共同目标。",
+                            "micro_action": "说：我讲这个是希望我们下次更好配合。"
+                        },
+                        "en": {
+                            "title": "Self-clear, but relational holding is weaker",
+                            "why_it_matters": "After expressing yourself, the relationship needs an entry point to continue.",
+                            "what_it_feels_like": "You can state your position, but the other person may become defensive.",
+                            "strength": "You are less likely to lose yourself.",
+                            "cost": "Expression may be heard as blame.",
+                            "development_lever": "Add a shared goal after expression.",
+                            "micro_action": "Say: I am raising this so we can work better next time."
+                        }
+                    },
+                    "low_high": {
+                        "zh-CN": {
+                            "title": "会维护关系，但自我容易后置",
+                            "why_it_matters": "如果只维护关系，不表达自我，长期会积累消耗。",
+                            "what_it_feels_like": "你能把场面圆回来，但之后才发现自己不舒服。",
+                            "strength": "关系稳定和协作维持能力强。",
+                            "cost": "自己的需求容易被延后。",
+                            "development_lever": "回应前先问自己底线。",
+                            "micro_action": "在答应前停三秒，确认我是否真的可以。"
+                        },
+                        "en": {
+                            "title": "You maintain relationships, but self may come later",
+                            "why_it_matters": "If you only preserve the relationship and do not express yourself, cost accumulates.",
+                            "what_it_feels_like": "You smooth the moment, then later notice discomfort.",
+                            "strength": "Strong relational stability and collaboration maintenance.",
+                            "cost": "Your needs may be delayed.",
+                            "development_lever": "Check your boundary before responding.",
+                            "micro_action": "Pause three seconds before agreeing and ask whether you truly can."
+                        }
+                    },
+                    "low_low": {
+                        "zh-CN": {
+                            "title": "自我表达和关系修复都需要练习",
+                            "why_it_matters": "当自我和关系动作都弱时，先从低风险表达开始。",
+                            "what_it_feels_like": "你可能既不想说破，也不知道怎么收场。",
+                            "strength": "可用结构化脚本降低难度。",
+                            "cost": "问题容易拖延或变成误会。",
+                            "development_lever": "练习一句低强度真实表达。",
+                            "micro_action": "说：这件事我还需要想一下，晚点回复你。"
+                        },
+                        "en": {
+                            "title": "Self-expression and repair both need practice",
+                            "why_it_matters": "When self and relational moves are both weaker, start with low-risk expression.",
+                            "what_it_feels_like": "You may not want to say it directly and may not know how to close the loop.",
+                            "strength": "Structured scripts can lower difficulty.",
+                            "cost": "Issues may be delayed or become misunderstandings.",
+                            "development_lever": "Practice one low-intensity truthful sentence.",
+                            "micro_action": "Say: I need to think about this and will reply later."
+                        }
+                    }
+                },
+                "ER_RM": {
+                    "high_high": {
+                        "zh-CN": {
+                            "title": "压力下仍能沟通和修复",
+                            "why_it_matters": "恢复能力和关系行动结合，是冲突后继续合作的关键。",
+                            "what_it_feels_like": "你能先稳住自己，再把对话拉回问题本身。",
+                            "strength": "冲突恢复和协作韧性强。",
+                            "cost": "可能成为默认救火者。",
+                            "development_lever": "把修复责任分给双方。",
+                            "micro_action": "问：我们各自下一步能做什么？"
+                        },
+                        "en": {
+                            "title": "You can communicate and repair under pressure",
+                            "why_it_matters": "Recovery plus relational action is key to collaboration after conflict.",
+                            "what_it_feels_like": "You can steady yourself and bring the conversation back to the issue.",
+                            "strength": "Strong conflict recovery and collaborative resilience.",
+                            "cost": "You may become the default fixer.",
+                            "development_lever": "Share repair responsibility.",
+                            "micro_action": "Ask: what can each of us do next?"
+                        }
+                    },
+                    "high_low": {
+                        "zh-CN": {
+                            "title": "自己能稳住，但关系未必修复",
+                            "why_it_matters": "你恢复了，不代表对话或关系已经恢复。",
+                            "what_it_feels_like": "你可能觉得事情过去了，但对方还停在情绪里。",
+                            "strength": "能减少个人失控。",
+                            "cost": "关系裂缝可能被低估。",
+                            "development_lever": "复位后做一次关系确认。",
+                            "micro_action": "说：刚才那段对话你现在感觉怎么样？"
+                        },
+                        "en": {
+                            "title": "You stabilize yourself, but repair may not happen",
+                            "why_it_matters": "Your recovery does not mean the conversation or relationship has recovered.",
+                            "what_it_feels_like": "You may feel it has passed while the other person is still in it.",
+                            "strength": "Less personal escalation.",
+                            "cost": "Relationship cracks may be underestimated.",
+                            "development_lever": "Check the relationship after reset.",
+                            "micro_action": "Say: how are you feeling about that conversation now?"
+                        }
+                    },
+                    "low_high": {
+                        "zh-CN": {
+                            "title": "想修复关系，但压力下难稳定",
+                            "why_it_matters": "关系意愿很重要，但压力未复位时动作容易变形。",
+                            "what_it_feels_like": "你想把事情讲好，却可能越讲越急。",
+                            "strength": "有合作和修复动机。",
+                            "cost": "调节不足会削弱修复效果。",
+                            "development_lever": "先复位，再修复。",
+                            "micro_action": "先暂停十分钟，再发出修复信息。"
+                        },
+                        "en": {
+                            "title": "You want repair, but pressure makes stability harder",
+                            "why_it_matters": "Repair motivation matters, but actions distort when you have not reset.",
+                            "what_it_feels_like": "You want to talk it through, but may become more urgent as you speak.",
+                            "strength": "Motivation for cooperation and repair.",
+                            "cost": "Weak regulation can reduce repair effectiveness.",
+                            "development_lever": "Reset before repair.",
+                            "micro_action": "Pause for ten minutes before sending the repair message."
+                        }
+                    },
+                    "low_low": {
+                        "zh-CN": {
+                            "title": "压力和关系修复都需要最小闭环",
+                            "why_it_matters": "高压关系场景中，需要简单、可重复的停顿和回到问题的动作。",
+                            "what_it_feels_like": "冲突中你可能沉默、爆发或想尽快结束。",
+                            "strength": "小流程能显著降低失控概率。",
+                            "cost": "没有流程时关系容易积累未修复问题。",
+                            "development_lever": "建立冲突暂停协议。",
+                            "micro_action": "说：我需要十分钟冷静，然后我们只谈下一步。"
+                        },
+                        "en": {
+                            "title": "Pressure and repair need a minimal loop",
+                            "why_it_matters": "High-pressure relational situations need simple repeatable pauses and return-to-issue moves.",
+                            "what_it_feels_like": "In conflict, you may go silent, escalate, or want to end quickly.",
+                            "strength": "A small process can reduce escalation risk.",
+                            "cost": "Without a process, unrepaired issues accumulate.",
+                            "development_lever": "Create a conflict pause protocol.",
+                            "micro_action": "Say: I need ten minutes to cool down, then let's discuss only the next step."
+                        }
+                    }
+                }
+            }
+        },
+        "reality_translation": {
+            "schema": "eq60.report_assets.reality_translation.v1",
+            "pack_id": "EQ_60",
+            "scenes": {
+                "feedback": {
+                    "zh-CN": {
+                        "title": "反馈场景",
+                        "typical_response": "收到评价或修改意见时，你可能先捕捉语气和关系信号，再处理信息本身。",
+                        "strength": "能注意到反馈背后的真实意图和关系温度。",
+                        "cost": "如果恢复不足，容易把反馈体验成否定。",
+                        "better_move": "先拆分事实、情绪和下一步：对方说了什么，我有什么感受，我要确认什么。"
+                    },
+                    "en": {
+                        "title": "Feedback",
+                        "typical_response": "When receiving critique or edits, you may notice tone and relational cues before processing the information.",
+                        "strength": "You can notice intent and relational temperature behind feedback.",
+                        "cost": "When recovery is weak, feedback may feel like rejection.",
+                        "better_move": "Separate facts, feeling, and next step: what was said, what I feel, what I need to clarify."
+                    }
+                },
+                "conflict": {
+                    "zh-CN": {
+                        "title": "冲突场景",
+                        "typical_response": "出现分歧时，你可能在维护关系和表达自己之间摇摆。",
+                        "strength": "有机会同时看见双方需求。",
+                        "cost": "如果没有暂停流程，容易过度解释、回避或急于修复。",
+                        "better_move": "先确认共同目标，再只讨论一个具体问题。"
+                    },
+                    "en": {
+                        "title": "Conflict",
+                        "typical_response": "During disagreement, you may move between preserving the relationship and expressing yourself.",
+                        "strength": "You can often see needs on both sides.",
+                        "cost": "Without a pause process, you may over-explain, avoid, or rush repair.",
+                        "better_move": "Name the shared goal first, then discuss one specific issue."
+                    }
+                },
+                "relationship_boundary": {
+                    "zh-CN": {
+                        "title": "关系边界",
+                        "typical_response": "当别人需要你支持时，你可能很快进入理解或承担。",
+                        "strength": "容易让对方感到被接住。",
+                        "cost": "支持和代替之间的边界可能变模糊。",
+                        "better_move": "先问自己：我能支持到哪里，哪一部分仍然属于对方。"
+                    },
+                    "en": {
+                        "title": "Relationship Boundaries",
+                        "typical_response": "When someone needs support, you may quickly move into understanding or taking responsibility.",
+                        "strength": "Others may feel received and understood.",
+                        "cost": "The line between supporting and replacing can blur.",
+                        "better_move": "Ask yourself: how far can I support, and which part remains theirs?"
+                    }
+                },
+                "team_collaboration": {
+                    "zh-CN": {
+                        "title": "团队协作",
+                        "typical_response": "在多人协作中，你可能同时追踪任务、关系和现场情绪。",
+                        "strength": "能发现协作中的隐性阻力。",
+                        "cost": "如果总是主动协调，容易承担过多情绪劳动。",
+                        "better_move": "把观察转成具体协作请求，而不是默默补位。"
+                    },
+                    "en": {
+                        "title": "Team Collaboration",
+                        "typical_response": "In group work, you may track task, relationship, and emotional climate at the same time.",
+                        "strength": "You can notice hidden friction in collaboration.",
+                        "cost": "If you always coordinate, you may carry too much emotional labor.",
+                        "better_move": "Turn observations into concrete collaboration requests instead of silently compensating."
+                    }
+                },
+                "pressure_recovery": {
+                    "zh-CN": {
+                        "title": "压力恢复",
+                        "typical_response": "高压后你可能仍在脑内回放对话、评价或细节。",
+                        "strength": "复盘能力可以帮助你学习模式。",
+                        "cost": "没有恢复边界时，复盘会变成反刍。",
+                        "better_move": "给复盘设限：只写三个事实、一个感受、一个下次动作。"
+                    },
+                    "en": {
+                        "title": "Pressure Recovery",
+                        "typical_response": "After pressure, you may replay conversations, judgments, or details in your head.",
+                        "strength": "Review can help you learn patterns.",
+                        "cost": "Without recovery boundaries, review turns into rumination.",
+                        "better_move": "Limit review to three facts, one feeling, and one next action."
+                    }
+                },
+                "career_environment": {
+                    "zh-CN": {
+                        "title": "职业环境",
+                        "typical_response": "你对岗位中的人际密度、情绪劳动和反馈强度会有不同消耗。",
+                        "strength": "理解环境变量后，更容易选择适合自己的工作节奏。",
+                        "cost": "只看职位名称，容易忽略真正消耗你的工作条件。",
+                        "better_move": "评估岗位时优先询问互动频率、冲突频率和恢复空间。"
+                    },
+                    "en": {
+                        "title": "Career Environment",
+                        "typical_response": "Interpersonal density, emotional labor, and feedback intensity can drain you differently across roles.",
+                        "strength": "Understanding environmental variables helps you choose a better work rhythm.",
+                        "cost": "Job titles alone can hide the conditions that actually drain you.",
+                        "better_move": "When evaluating roles, ask about interaction frequency, conflict frequency, and recovery space."
+                    }
+                }
+            }
+        },
+        "career_environment": {
+            "schema": "eq60.report_assets.career_environment.v1",
+            "pack_id": "EQ_60",
+            "variables": {
+                "interpersonal_density": {
+                    "low": {
+                        "zh-CN": {
+                            "label": "低人际密度",
+                            "meaning": "多数时间独立推进，互动频率较低。",
+                            "fit_signal": "适合需要恢复空间或深度专注的人。",
+                            "strain_signal": "可能减少练习关系动作的机会。",
+                            "what_to_verify": "确认岗位是否真的允许长时间独立工作。"
+                        },
+                        "en": {
+                            "label": "Low Interpersonal Density",
+                            "meaning": "Most work is independent with fewer interactions.",
+                            "fit_signal": "Can fit people who need recovery space or deep focus.",
+                            "strain_signal": "May reduce practice opportunities for relational action.",
+                            "what_to_verify": "Check whether the role truly allows long independent work blocks."
+                        }
+                    },
+                    "medium": {
+                        "zh-CN": {
+                            "label": "中等人际密度",
+                            "meaning": "日常有固定协作，但不是持续社交。",
+                            "fit_signal": "适合在协作和独立之间切换。",
+                            "strain_signal": "会议过多时仍会消耗。",
+                            "what_to_verify": "确认每周会议、同步和跨团队协作频率。"
+                        },
+                        "en": {
+                            "label": "Medium Interpersonal Density",
+                            "meaning": "Regular collaboration without constant social demand.",
+                            "fit_signal": "Fits switching between collaboration and independent work.",
+                            "strain_signal": "Too many meetings can still drain.",
+                            "what_to_verify": "Check weekly meetings, syncs, and cross-team collaboration frequency."
+                        }
+                    },
+                    "high": {
+                        "zh-CN": {
+                            "label": "高人际密度",
+                            "meaning": "大量沟通、协调和即时互动。",
+                            "fit_signal": "可发挥共情、协作和关系管理优势。",
+                            "strain_signal": "恢复不足时容易情绪过载。",
+                            "what_to_verify": "确认是否有可控的独处和恢复窗口。"
+                        },
+                        "en": {
+                            "label": "High Interpersonal Density",
+                            "meaning": "Frequent communication, coordination, and real-time interaction.",
+                            "fit_signal": "Can use empathy, collaboration, and relationship-management strengths.",
+                            "strain_signal": "Weak recovery can lead to overload.",
+                            "what_to_verify": "Check whether protected solo recovery windows exist."
+                        }
+                    }
+                },
+                "emotional_labor": {
+                    "low": {
+                        "zh-CN": {
+                            "label": "低情绪劳动",
+                            "meaning": "较少承接他人情绪或安抚关系。",
+                            "fit_signal": "适合需要降低情绪消耗的人。",
+                            "strain_signal": "可能缺少运用共情优势的空间。",
+                            "what_to_verify": "确认用户、客户或团队情绪压力是否较低。"
+                        },
+                        "en": {
+                            "label": "Low Emotional Labor",
+                            "meaning": "Less need to hold or soothe others' emotions.",
+                            "fit_signal": "Fits people who need lower emotional load.",
+                            "strain_signal": "May offer less space to use empathy strengths.",
+                            "what_to_verify": "Check whether user, client, or team emotional pressure is actually low."
+                        }
+                    },
+                    "medium": {
+                        "zh-CN": {
+                            "label": "中等情绪劳动",
+                            "meaning": "需要一定理解和安抚，但通常有边界。",
+                            "fit_signal": "适合练习共情与边界并存。",
+                            "strain_signal": "边界不清时会累积消耗。",
+                            "what_to_verify": "确认是否有升级、转介或交接机制。"
+                        },
+                        "en": {
+                            "label": "Medium Emotional Labor",
+                            "meaning": "Some understanding and soothing are needed, usually with boundaries.",
+                            "fit_signal": "Fits practicing empathy with boundaries.",
+                            "strain_signal": "Unclear boundaries accumulate cost.",
+                            "what_to_verify": "Check whether escalation, referral, or handoff mechanisms exist."
+                        }
+                    },
+                    "high": {
+                        "zh-CN": {
+                            "label": "高情绪劳动",
+                            "meaning": "经常承接焦虑、投诉、冲突或脆弱情绪。",
+                            "fit_signal": "高共情者能建立信任。",
+                            "strain_signal": "低恢复者容易被情绪场拖走。",
+                            "what_to_verify": "确认督导、复盘和休息制度是否真实存在。"
+                        },
+                        "en": {
+                            "label": "High Emotional Labor",
+                            "meaning": "Frequent exposure to anxiety, complaints, conflict, or vulnerability.",
+                            "fit_signal": "High-empathy people can build trust.",
+                            "strain_signal": "Low recovery can make the emotional field pull you in.",
+                            "what_to_verify": "Check whether supervision, review, and rest systems are real."
+                        }
+                    }
+                },
+                "conflict_frequency": {
+                    "low": {
+                        "zh-CN": {
+                            "label": "低冲突频率",
+                            "meaning": "较少谈判、投诉或强分歧。",
+                            "fit_signal": "降低情绪调节压力。",
+                            "strain_signal": "可能较少训练冲突修复。",
+                            "what_to_verify": "确认冲突是否只是被隐藏到异步沟通中。"
+                        },
+                        "en": {
+                            "label": "Low Conflict Frequency",
+                            "meaning": "Fewer negotiations, complaints, or strong disagreements.",
+                            "fit_signal": "Reduces regulation pressure.",
+                            "strain_signal": "May offer less practice in conflict repair.",
+                            "what_to_verify": "Check whether conflict is merely hidden in async communication."
+                        }
+                    },
+                    "medium": {
+                        "zh-CN": {
+                            "label": "中等冲突频率",
+                            "meaning": "有周期性分歧，但通常有流程。",
+                            "fit_signal": "适合练习稳定沟通。",
+                            "strain_signal": "流程不清时会放大关系压力。",
+                            "what_to_verify": "确认冲突如何升级、记录和收口。"
+                        },
+                        "en": {
+                            "label": "Medium Conflict Frequency",
+                            "meaning": "Periodic disagreement with some process.",
+                            "fit_signal": "Good for practicing steady communication.",
+                            "strain_signal": "Unclear process amplifies relational pressure.",
+                            "what_to_verify": "Check how conflict is escalated, recorded, and closed."
+                        }
+                    },
+                    "high": {
+                        "zh-CN": {
+                            "label": "高冲突频率",
+                            "meaning": "经常面对投诉、博弈、谈判或利益冲突。",
+                            "fit_signal": "高调节和高关系管理者可发挥优势。",
+                            "strain_signal": "ER 或 RM 低时消耗显著。",
+                            "what_to_verify": "确认是否有明确授权、边界和复盘支持。"
+                        },
+                        "en": {
+                            "label": "High Conflict Frequency",
+                            "meaning": "Frequent complaints, negotiation, bargaining, or interest conflict.",
+                            "fit_signal": "High ER and RM can become strengths.",
+                            "strain_signal": "Low ER or RM is costly here.",
+                            "what_to_verify": "Check whether authority, boundaries, and review support are clear."
+                        }
+                    }
+                },
+                "feedback_intensity": {
+                    "low": {
+                        "zh-CN": {
+                            "label": "低反馈强度",
+                            "meaning": "评价和修改频率较低。",
+                            "fit_signal": "适合对评价敏感且需要稳定节奏的人。",
+                            "strain_signal": "成长反馈可能不足。",
+                            "what_to_verify": "确认是否仍有清晰目标和周期复盘。"
+                        },
+                        "en": {
+                            "label": "Low Feedback Intensity",
+                            "meaning": "Evaluation and revision are less frequent.",
+                            "fit_signal": "Fits people sensitive to evaluation who need a steadier rhythm.",
+                            "strain_signal": "Growth feedback may be insufficient.",
+                            "what_to_verify": "Check whether clear goals and periodic review still exist."
+                        }
+                    },
+                    "medium": {
+                        "zh-CN": {
+                            "label": "中等反馈强度",
+                            "meaning": "定期复盘、修改和评价。",
+                            "fit_signal": "适合把反馈转成学习。",
+                            "strain_signal": "恢复不足时可能反复回想。",
+                            "what_to_verify": "确认反馈是否具体、可执行、不过度公开。"
+                        },
+                        "en": {
+                            "label": "Medium Feedback Intensity",
+                            "meaning": "Regular review, revision, and evaluation.",
+                            "fit_signal": "Fits turning feedback into learning.",
+                            "strain_signal": "Weak recovery may lead to replaying feedback.",
+                            "what_to_verify": "Check whether feedback is specific, actionable, and not overly public."
+                        }
+                    },
+                    "high": {
+                        "zh-CN": {
+                            "label": "高反馈强度",
+                            "meaning": "频繁被评价、迭代或公开比较。",
+                            "fit_signal": "高觉察和高调节者可快速迭代。",
+                            "strain_signal": "低调节者容易把反馈体验成否定。",
+                            "what_to_verify": "确认是否有安全反馈文化和恢复空间。"
+                        },
+                        "en": {
+                            "label": "High Feedback Intensity",
+                            "meaning": "Frequent evaluation, iteration, or public comparison.",
+                            "fit_signal": "High SA and ER can support fast iteration.",
+                            "strain_signal": "Low ER may make feedback feel like rejection.",
+                            "what_to_verify": "Check for a safe feedback culture and recovery space."
+                        }
+                    }
+                },
+                "autonomy_recovery": {
+                    "low": {
+                        "zh-CN": {
+                            "label": "低自主恢复空间",
+                            "meaning": "节奏常被外部打断，难以独处恢复。",
+                            "fit_signal": "适合恢复需求低且即时响应强的人。",
+                            "strain_signal": "高共情低恢复者风险较高。",
+                            "what_to_verify": "确认是否允许暂停、调班或离线恢复。"
+                        },
+                        "en": {
+                            "label": "Low Autonomy Recovery",
+                            "meaning": "Rhythm is often interrupted, with little solo recovery.",
+                            "fit_signal": "Fits people with low recovery needs and strong real-time response.",
+                            "strain_signal": "High empathy with low recovery is risky here.",
+                            "what_to_verify": "Check whether pauses, shift changes, or offline recovery are allowed."
+                        }
+                    },
+                    "medium": {
+                        "zh-CN": {
+                            "label": "中等自主恢复空间",
+                            "meaning": "有一定独立安排，但仍受团队节奏影响。",
+                            "fit_signal": "适合多数人维持稳定表现。",
+                            "strain_signal": "忙季或危机期可能被压缩。",
+                            "what_to_verify": "确认高峰期的恢复安排。"
+                        },
+                        "en": {
+                            "label": "Medium Autonomy Recovery",
+                            "meaning": "Some independent rhythm exists, though team rhythm still matters.",
+                            "fit_signal": "Helps most people sustain performance.",
+                            "strain_signal": "Busy or crisis periods may compress it.",
+                            "what_to_verify": "Check recovery arrangements during peak periods."
+                        }
+                    },
+                    "high": {
+                        "zh-CN": {
+                            "label": "高自主恢复空间",
+                            "meaning": "可以较多控制节奏、沟通窗口和深度工作时间。",
+                            "fit_signal": "有利于敏感、深度复盘或高恢复需求者。",
+                            "strain_signal": "也可能带来孤立或反馈不足。",
+                            "what_to_verify": "确认独立性不会变成缺少支持。"
+                        },
+                        "en": {
+                            "label": "High Autonomy Recovery",
+                            "meaning": "More control over rhythm, communication windows, and deep-work time.",
+                            "fit_signal": "Helpful for sensitive, reflective, or high-recovery-need people.",
+                            "strain_signal": "Can also create isolation or insufficient feedback.",
+                            "what_to_verify": "Check that autonomy does not mean lack of support."
+                        }
+                    }
+                },
+                "collaboration_complexity": {
+                    "low": {
+                        "zh-CN": {
+                            "label": "低协作复杂度",
+                            "meaning": "角色、接口和责任较清楚。",
+                            "fit_signal": "降低关系误解和协调成本。",
+                            "strain_signal": "可能较少发挥复杂协调优势。",
+                            "what_to_verify": "确认职责是否稳定且边界清楚。"
+                        },
+                        "en": {
+                            "label": "Low Collaboration Complexity",
+                            "meaning": "Roles, interfaces, and responsibilities are clear.",
+                            "fit_signal": "Lowers misunderstanding and coordination cost.",
+                            "strain_signal": "May offer less space for complex coordination strengths.",
+                            "what_to_verify": "Check whether responsibilities are stable and boundaries clear."
+                        }
+                    },
+                    "medium": {
+                        "zh-CN": {
+                            "label": "中等协作复杂度",
+                            "meaning": "需要跨角色协作，但仍有明确流程。",
+                            "fit_signal": "适合练习关系管理和反馈沟通。",
+                            "strain_signal": "流程缺失时容易消耗。",
+                            "what_to_verify": "确认决策权、优先级和冲突处理方式。"
+                        },
+                        "en": {
+                            "label": "Medium Collaboration Complexity",
+                            "meaning": "Cross-role collaboration is needed with some clear process.",
+                            "fit_signal": "Good for practicing relationship management and feedback communication.",
+                            "strain_signal": "Missing process can be draining.",
+                            "what_to_verify": "Check decision rights, priorities, and conflict-handling process."
+                        }
+                    },
+                    "high": {
+                        "zh-CN": {
+                            "label": "高协作复杂度",
+                            "meaning": "多方目标、利益和节奏需要持续协调。",
+                            "fit_signal": "高 RM 与稳定 ER 能发挥明显优势。",
+                            "strain_signal": "边界不清时容易长期过载。",
+                            "what_to_verify": "确认是否有正式协调机制和优先级裁决。"
+                        },
+                        "en": {
+                            "label": "High Collaboration Complexity",
+                            "meaning": "Multiple goals, interests, and rhythms require ongoing coordination.",
+                            "fit_signal": "High RM and stable ER can become clear strengths.",
+                            "strain_signal": "Unclear boundaries can cause chronic overload.",
+                            "what_to_verify": "Check formal coordination mechanisms and priority arbitration."
+                        }
+                    }
+                }
+            }
+        },
+        "action_prescriptions": {
+            "schema": "eq60.report_assets.action_prescriptions.v1",
+            "pack_id": "EQ_60",
+            "prescriptions": {
+                "emotion_labeling": {
+                    "zh-CN": {
+                        "title": "情绪命名处方",
+                        "why_this_matters": "先命名，才有可能选择回应。",
+                        "do_today": "今天选择一个具体情绪词，写下触发它的场景。",
+                        "script": "我现在感到的是 X，不代表我必须立刻做决定。",
+                        "seven_day_plan": [
+                            "第 1 天：记录一个情绪词。",
+                            "第 2 天：补充身体感受。",
+                            "第 3 天：写下触发场景。",
+                            "第 4 天：区分事实和解释。",
+                            "第 5 天：写一个可控动作。",
+                            "第 6 天：复盘一次沟通。",
+                            "第 7 天：选出最常见触发点。"
+                        ],
+                        "watch_out": "不要把情绪词变成自我评价。"
+                    },
+                    "en": {
+                        "title": "Emotion Labeling",
+                        "why_this_matters": "Naming comes before choosing a response.",
+                        "do_today": "Choose one specific emotion word today and write the triggering context.",
+                        "script": "What I feel now is X; it does not mean I must decide immediately.",
+                        "seven_day_plan": [
+                            "Day 1: record one emotion word.",
+                            "Day 2: add body sensations.",
+                            "Day 3: write the trigger.",
+                            "Day 4: separate fact and interpretation.",
+                            "Day 5: write one controllable action.",
+                            "Day 6: review one conversation.",
+                            "Day 7: identify the most common trigger."
+                        ],
+                        "watch_out": "Do not turn emotion words into self-judgment."
+                    }
+                },
+                "pause_recovery": {
+                    "zh-CN": {
+                        "title": "暂停与恢复处方",
+                        "why_this_matters": "调节不是压住情绪，而是给选择回应争取空间。",
+                        "do_today": "遇到触发时暂停 60 秒，再回复。",
+                        "script": "我需要一分钟整理一下，再继续说。",
+                        "seven_day_plan": [
+                            "第 1 天：练 60 秒暂停。",
+                            "第 2 天：加入一次深呼吸。",
+                            "第 3 天：离开屏幕一分钟。",
+                            "第 4 天：记录暂停前后的差异。",
+                            "第 5 天：在反馈场景使用。",
+                            "第 6 天：在冲突前使用。",
+                            "第 7 天：固定一个恢复动作。"
+                        ],
+                        "watch_out": "暂停不是逃避，暂停后要回到对话。"
+                    },
+                    "en": {
+                        "title": "Pause and Recovery",
+                        "why_this_matters": "Regulation is not suppressing emotion; it creates room for choice.",
+                        "do_today": "When triggered, pause for 60 seconds before replying.",
+                        "script": "I need a minute to organize my thoughts before continuing.",
+                        "seven_day_plan": [
+                            "Day 1: practice a 60-second pause.",
+                            "Day 2: add one deep breath.",
+                            "Day 3: step away from the screen for one minute.",
+                            "Day 4: note the before-and-after difference.",
+                            "Day 5: use it in feedback.",
+                            "Day 6: use it before conflict.",
+                            "Day 7: fix one recovery action."
+                        ],
+                        "watch_out": "Pausing is not avoidance; return to the conversation."
+                    }
+                },
+                "feedback_decompression": {
+                    "zh-CN": {
+                        "title": "反馈减压处方",
+                        "why_this_matters": "反馈容易混合事实、关系和自我评价，需要拆开处理。",
+                        "do_today": "把一次反馈拆成事实、感受、下一步三栏。",
+                        "script": "我先确认事实：你希望我调整的是 X，对吗？",
+                        "seven_day_plan": [
+                            "第 1 天：拆一次反馈。",
+                            "第 2 天：只问一个澄清问题。",
+                            "第 3 天：延迟自我评价。",
+                            "第 4 天：记录可行动项。",
+                            "第 5 天：复盘语气触发。",
+                            "第 6 天：向对方确认优先级。",
+                            "第 7 天：总结一个反馈模板。"
+                        ],
+                        "watch_out": "不要把所有反馈都理解成人身否定。"
+                    },
+                    "en": {
+                        "title": "Feedback Decompression",
+                        "why_this_matters": "Feedback mixes facts, relationship cues, and self-evaluation; separate them.",
+                        "do_today": "Split one feedback event into facts, feelings, and next step.",
+                        "script": "Let me confirm the fact: you want me to adjust X, correct?",
+                        "seven_day_plan": [
+                            "Day 1: split one feedback event.",
+                            "Day 2: ask only one clarifying question.",
+                            "Day 3: delay self-judgment.",
+                            "Day 4: record the action item.",
+                            "Day 5: review tone triggers.",
+                            "Day 6: confirm priority.",
+                            "Day 7: summarize a feedback template."
+                        ],
+                        "watch_out": "Do not treat all feedback as personal rejection."
+                    }
+                },
+                "empathy_boundary": {
+                    "zh-CN": {
+                        "title": "共情边界处方",
+                        "why_this_matters": "高共情需要边界，才能长期有效。",
+                        "do_today": "支持别人前先确认自己能支持到哪里。",
+                        "script": "我愿意听你说十分钟，然后我们一起看下一步。",
+                        "seven_day_plan": [
+                            "第 1 天：识别一次我在承担什么。",
+                            "第 2 天：练习时间边界。",
+                            "第 3 天：练习责任边界。",
+                            "第 4 天：支持后做恢复。",
+                            "第 5 天：区分理解和代替。",
+                            "第 6 天：复盘一次求助场景。",
+                            "第 7 天：写下自己的支持边界。"
+                        ],
+                        "watch_out": "不要用冷漠来替代边界。"
+                    },
+                    "en": {
+                        "title": "Empathy Boundary",
+                        "why_this_matters": "High empathy needs boundaries to remain sustainable.",
+                        "do_today": "Before supporting someone, decide how far you can support.",
+                        "script": "I can listen for ten minutes, then we can look at the next step together.",
+                        "seven_day_plan": [
+                            "Day 1: identify what you are carrying.",
+                            "Day 2: practice a time boundary.",
+                            "Day 3: practice a responsibility boundary.",
+                            "Day 4: recover after support.",
+                            "Day 5: separate understanding from replacing.",
+                            "Day 6: review one help-seeking situation.",
+                            "Day 7: write your support boundary."
+                        ],
+                        "watch_out": "Do not replace boundaries with coldness."
+                    }
+                },
+                "repair_after_conflict": {
+                    "zh-CN": {
+                        "title": "冲突后修复处方",
+                        "why_this_matters": "冲突后的修复决定关系能否继续合作。",
+                        "do_today": "选一个小冲突，发出一句修复确认。",
+                        "script": "刚才我语气急了，我想把重点重新说清楚。",
+                        "seven_day_plan": [
+                            "第 1 天：识别一次未完成冲突。",
+                            "第 2 天：写下自己的责任。",
+                            "第 3 天：写下对方可能在意的点。",
+                            "第 4 天：发出一句确认。",
+                            "第 5 天：只讨论下一步。",
+                            "第 6 天：复盘修复效果。",
+                            "第 7 天：形成自己的修复句式。"
+                        ],
+                        "watch_out": "修复不是全盘认错，也不是要求对方立刻原谅。"
+                    },
+                    "en": {
+                        "title": "Repair After Conflict",
+                        "why_this_matters": "Repair after conflict determines whether collaboration can continue.",
+                        "do_today": "Choose one small conflict and send one repair check.",
+                        "script": "My tone got sharp earlier; I want to restate the main point clearly.",
+                        "seven_day_plan": [
+                            "Day 1: identify one unfinished conflict.",
+                            "Day 2: write your responsibility.",
+                            "Day 3: write what may matter to the other person.",
+                            "Day 4: send one confirmation.",
+                            "Day 5: discuss only the next step.",
+                            "Day 6: review repair effect.",
+                            "Day 7: build your repair sentence."
+                        ],
+                        "watch_out": "Repair is not total blame-taking or demanding immediate forgiveness."
+                    }
+                },
+                "express_without_escalation": {
+                    "zh-CN": {
+                        "title": "不升级表达处方",
+                        "why_this_matters": "清楚表达需要让对方听得进去。",
+                        "do_today": "用我感到、我需要、我建议三句表达一次需求。",
+                        "script": "我感到有点被打断，我需要先说完，之后我也会听你的看法。",
+                        "seven_day_plan": [
+                            "第 1 天：写一句我感到。",
+                            "第 2 天：写一句我需要。",
+                            "第 3 天：写一句我建议。",
+                            "第 4 天：合并三句。",
+                            "第 5 天：降低指责词。",
+                            "第 6 天：加入共同目标。",
+                            "第 7 天：在低风险场景练习。"
+                        ],
+                        "watch_out": "不要用永远、总是这类绝对词。"
+                    },
+                    "en": {
+                        "title": "Express Without Escalation",
+                        "why_this_matters": "Clear expression needs to be hearable.",
+                        "do_today": "Use I feel, I need, I suggest to express one need.",
+                        "script": "I feel a bit interrupted. I need to finish this point, and then I will listen to your view.",
+                        "seven_day_plan": [
+                            "Day 1: write one I feel sentence.",
+                            "Day 2: write one I need sentence.",
+                            "Day 3: write one I suggest sentence.",
+                            "Day 4: combine the three.",
+                            "Day 5: reduce blaming words.",
+                            "Day 6: add a shared goal.",
+                            "Day 7: practice in a low-risk context."
+                        ],
+                        "watch_out": "Avoid absolute words like always or never."
+                    }
+                },
+                "support_without_rescuing": {
+                    "zh-CN": {
+                        "title": "支持但不拯救处方",
+                        "why_this_matters": "有效支持帮助对方恢复主体性，而不是替对方解决所有问题。",
+                        "do_today": "下次支持别人时，只问一个下一步问题。",
+                        "script": "我能陪你想，但这个决定需要你自己做。",
+                        "seven_day_plan": [
+                            "第 1 天：识别一次想替别人解决的冲动。",
+                            "第 2 天：只提供倾听。",
+                            "第 3 天：只问一个问题。",
+                            "第 4 天：明确你能做的部分。",
+                            "第 5 天：明确你不能做的部分。",
+                            "第 6 天：支持后恢复。",
+                            "第 7 天：复盘对方是否更有主体性。"
+                        ],
+                        "watch_out": "不要把对方的不舒服全部变成你的责任。"
+                    },
+                    "en": {
+                        "title": "Support Without Rescuing",
+                        "why_this_matters": "Effective support restores agency instead of solving everything for the other person.",
+                        "do_today": "Next time you support someone, ask only one next-step question.",
+                        "script": "I can think with you, but this decision needs to be yours.",
+                        "seven_day_plan": [
+                            "Day 1: notice one urge to solve for someone.",
+                            "Day 2: only listen.",
+                            "Day 3: ask only one question.",
+                            "Day 4: clarify what you can do.",
+                            "Day 5: clarify what you cannot do.",
+                            "Day 6: recover after support.",
+                            "Day 7: review whether their agency increased."
+                        ],
+                        "watch_out": "Do not make all of their discomfort your responsibility."
+                    }
+                },
+                "cold_to_warm_response": {
+                    "zh-CN": {
+                        "title": "从冷静到有温度处方",
+                        "why_this_matters": "稳定需要被他人感受到，才会变成关系中的安全感。",
+                        "do_today": "在给建议前先确认对方感受。",
+                        "script": "我能理解这件事让你不舒服，我们再一起看怎么处理。",
+                        "seven_day_plan": [
+                            "第 1 天：练一句情绪确认。",
+                            "第 2 天：先确认再建议。",
+                            "第 3 天：观察对方反应。",
+                            "第 4 天：减少过快解释。",
+                            "第 5 天：加入一句感谢。",
+                            "第 6 天：复盘一次低温回应。",
+                            "第 7 天：固定一个温暖开场。"
+                        ],
+                        "watch_out": "温暖不是放弃理性。"
+                    },
+                    "en": {
+                        "title": "Cold to Warm Response",
+                        "why_this_matters": "Stability becomes relational safety only when others can feel it.",
+                        "do_today": "Acknowledge the feeling before giving advice.",
+                        "script": "I can see this was uncomfortable for you; let's look at what to do next.",
+                        "seven_day_plan": [
+                            "Day 1: practice one emotional acknowledgment.",
+                            "Day 2: acknowledge before advising.",
+                            "Day 3: observe their response.",
+                            "Day 4: reduce fast explanation.",
+                            "Day 5: add one appreciation.",
+                            "Day 6: review one low-warmth response.",
+                            "Day 7: fix one warm opening."
+                        ],
+                        "watch_out": "Warmth does not mean giving up rationality."
+                    }
+                },
+                "relationship_energy_management": {
+                    "zh-CN": {
+                        "title": "关系能量管理处方",
+                        "why_this_matters": "关系投入需要节奏，否则优势会变成消耗。",
+                        "do_today": "给一个高消耗互动安排恢复窗口。",
+                        "script": "我现在可以聊二十分钟，之后需要休息一下。",
+                        "seven_day_plan": [
+                            "第 1 天：列出高消耗互动。",
+                            "第 2 天：标出恢复方式。",
+                            "第 3 天：设置时间边界。",
+                            "第 4 天：减少即时回复。",
+                            "第 5 天：安排独处窗口。",
+                            "第 6 天：复盘能量变化。",
+                            "第 7 天：保留一个固定恢复段。"
+                        ],
+                        "watch_out": "不要等到耗尽才开始恢复。"
+                    },
+                    "en": {
+                        "title": "Relationship Energy Management",
+                        "why_this_matters": "Relational investment needs rhythm; otherwise strength becomes drain.",
+                        "do_today": "Schedule recovery after one high-cost interaction.",
+                        "script": "I can talk for twenty minutes now, and then I need a break.",
+                        "seven_day_plan": [
+                            "Day 1: list high-cost interactions.",
+                            "Day 2: mark recovery methods.",
+                            "Day 3: set a time boundary.",
+                            "Day 4: reduce instant replies.",
+                            "Day 5: schedule solo time.",
+                            "Day 6: review energy changes.",
+                            "Day 7: keep one fixed recovery block."
+                        ],
+                        "watch_out": "Do not wait until depletion to recover."
+                    }
+                },
+                "conflict_deescalation": {
+                    "zh-CN": {
+                        "title": "冲突降温处方",
+                        "why_this_matters": "降温不是退让，而是让问题重新可谈。",
+                        "do_today": "下一次分歧时，只说共同目标和下一步。",
+                        "script": "我们先别扩大问题，我想先确认下一步怎么做。",
+                        "seven_day_plan": [
+                            "第 1 天：识别升级词。",
+                            "第 2 天：练习降温句。",
+                            "第 3 天：暂停十分钟。",
+                            "第 4 天：只谈一个问题。",
+                            "第 5 天：确认共同目标。",
+                            "第 6 天：复盘冲突过程。",
+                            "第 7 天：写下自己的降温协议。"
+                        ],
+                        "watch_out": "降温不等于压下真实问题。"
+                    },
+                    "en": {
+                        "title": "Conflict De-escalation",
+                        "why_this_matters": "De-escalation is not surrender; it makes the issue discussable again.",
+                        "do_today": "In the next disagreement, state only the shared goal and next step.",
+                        "script": "Let's not expand the issue. I want to confirm the next step first.",
+                        "seven_day_plan": [
+                            "Day 1: identify escalation words.",
+                            "Day 2: practice a cooling sentence.",
+                            "Day 3: pause ten minutes.",
+                            "Day 4: discuss one issue only.",
+                            "Day 5: confirm shared goal.",
+                            "Day 6: review the conflict process.",
+                            "Day 7: write your de-escalation protocol."
+                        ],
+                        "watch_out": "Cooling down does not mean suppressing the real issue."
+                    }
+                },
+                "self_connection": {
+                    "zh-CN": {
+                        "title": "自我连接处方",
+                        "why_this_matters": "关系顺畅不能替代对自己需求的确认。",
+                        "do_today": "答应别人前先写下我愿意和我不愿意。",
+                        "script": "我想先确认一下自己的安排，晚点回复你。",
+                        "seven_day_plan": [
+                            "第 1 天：记录一个自己的需求。",
+                            "第 2 天：记录一个不愿意。",
+                            "第 3 天：延迟答应。",
+                            "第 4 天：练习一个小拒绝。",
+                            "第 5 天：复盘拒绝后的关系。",
+                            "第 6 天：写下可接受条件。",
+                            "第 7 天：总结自己的边界句。"
+                        ],
+                        "watch_out": "不要把照顾自己理解成破坏关系。"
+                    },
+                    "en": {
+                        "title": "Self-Connection",
+                        "why_this_matters": "A smooth relationship cannot replace checking your own needs.",
+                        "do_today": "Before agreeing, write what you are willing and not willing to do.",
+                        "script": "I want to check my own schedule first and reply later.",
+                        "seven_day_plan": [
+                            "Day 1: record one personal need.",
+                            "Day 2: record one not-willing item.",
+                            "Day 3: delay agreement.",
+                            "Day 4: practice a small no.",
+                            "Day 5: review the relationship after saying no.",
+                            "Day 6: write acceptable conditions.",
+                            "Day 7: summarize your boundary sentence."
+                        ],
+                        "watch_out": "Do not treat caring for yourself as damaging the relationship."
+                    }
+                },
+                "retest_reflection": {
+                    "zh-CN": {
+                        "title": "复测与低风险反思处方",
+                        "why_this_matters": "低置信度结果不适合强解释，更适合作为复测提醒。",
+                        "do_today": "只记录一个你认可的线索，不做稳定结论。",
+                        "script": "这次结果我先当作提醒，等状态稳定后再复测。",
+                        "seven_day_plan": [
+                            "第 1 天：记录作答时状态。",
+                            "第 2 天：检查是否太快或太累。",
+                            "第 3 天：观察一个真实场景。",
+                            "第 4 天：不做标签化解释。",
+                            "第 5 天：选择复测时间。",
+                            "第 6 天：保证安静环境。",
+                            "第 7 天：重新完成测试。"
+                        ],
+                        "watch_out": "不要用低置信度结果做重大决定。"
+                    },
+                    "en": {
+                        "title": "Retest and Low-Risk Reflection",
+                        "why_this_matters": "Low-confidence results should not drive strong interpretation; they are better used as a retest cue.",
+                        "do_today": "Record only one cue that feels useful; do not form a stable conclusion.",
+                        "script": "I will treat this result as a reminder and retake when I am more settled.",
+                        "seven_day_plan": [
+                            "Day 1: record your state during response.",
+                            "Day 2: check if you were too fast or tired.",
+                            "Day 3: observe one real situation.",
+                            "Day 4: avoid labeling yourself.",
+                            "Day 5: choose a retest time.",
+                            "Day 6: ensure a quiet setting.",
+                            "Day 7: complete the test again."
+                        ],
+                        "watch_out": "Do not use a low-confidence result for major decisions."
+                    }
+                }
+            }
+        },
+        "sjt_bridge": {
+            "schema": "eq60.report_assets.sjt_bridge.v1",
+            "pack_id": "EQ_60",
+            "assets": {
+                "eq.sjt_bridge.planned": {
+                    "zh-CN": {
+                        "title": "未来将支持 16 道情境判断模块",
+                        "status": "planned",
+                        "description": "当前报告基于 EQ-60 自我报告。未来 EQ-SJT 16 会补充你在反馈、冲突、边界和压力情境中的选择方式。",
+                        "what_it_adds": "它用于补充 self-report，帮助比较自我感知与情境选择之间的一致和差距。",
+                        "what_it_is_not": "它不是 MSCEIT，不是认证能力测验，也不用于招聘筛选或临床判断。",
+                        "button_label": "情境判断模块规划中",
+                        "available": false
+                    },
+                    "en": {
+                        "title": "A 16-item scenario module is planned",
+                        "status": "planned",
+                        "description": "The current report is based on EQ-60 self-report. A future EQ-SJT 16 module will add how you choose responses in feedback, conflict, boundary, and pressure situations.",
+                        "what_it_adds": "It supplements self-report by comparing self-perception with scenario choices.",
+                        "what_it_is_not": "It is not MSCEIT, not a certified ability assessment, and not for hiring or clinical decisions.",
+                        "button_label": "Scenario module planned",
+                        "available": false
+                    }
+                }
+            }
+        }
+    }
+}

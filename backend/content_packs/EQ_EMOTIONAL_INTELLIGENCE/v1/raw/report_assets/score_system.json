@@ -1,0 +1,144 @@
+{
+  "schema": "eq60.report_assets.score_system.v1",
+  "pack_id": "EQ_60",
+  "global_index": {
+    "zh-CN": {
+      "label": "情绪与关系综合指数",
+      "meaning": "综合四个维度的自我报告信号，描述当前情绪与关系功能的整体稳定度。"
+    },
+    "en": {
+      "label": "Emotional & Relational Functioning Index",
+      "meaning": "A combined self-report signal across four dimensions, describing the current stability of emotional and relational functioning."
+    }
+  },
+  "score_notes": {
+    "zh-CN": {
+      "standard_score": "标准分以阶段性常模为参照，平均附近代表稳定可用。",
+      "percentile": "百分位表示在当前参考样本中的相对位置，不代表能力认证。"
+    },
+    "en": {
+      "standard_score": "Standard scores are interpreted against provisional norms. Scores near the mean indicate a stable usable range.",
+      "percentile": "Percentiles indicate relative position in the current reference sample and are not ability certification."
+    }
+  },
+  "bands": {
+    "foundational": {
+      "zh-CN": "基础发展中：当前信号提示该能力更需要外部结构、练习和复盘支持。",
+      "en": "Foundational: the current signal suggests this area benefits from more structure, practice, and review."
+    },
+    "developing": {
+      "zh-CN": "发展中：已经有可用基础，但在压力或复杂关系中可能不够稳定。",
+      "en": "Developing: usable foundations are present, but the pattern may be less stable under pressure or relational complexity."
+    },
+    "stable": {
+      "zh-CN": "稳定可用：多数日常场景中可以发挥作用，但仍需要看和其他维度的组合。",
+      "en": "Stable: generally usable in everyday contexts, while interpretation still depends on how it combines with other dimensions."
+    },
+    "proficient": {
+      "zh-CN": "熟练成熟：该维度通常是可依赖的优势信号，也可能带来相应消耗。",
+      "en": "Proficient: this dimension is usually a reliable strength signal and may also carry related costs."
+    },
+    "integrated": {
+      "zh-CN": "高度整合：该维度表现突出，重点是避免过度使用并保持情境灵活性。",
+      "en": "Integrated: this dimension is prominent; the key is avoiding overuse and staying contextually flexible."
+    }
+  },
+  "dimensions": {
+    "SA": {
+      "zh-CN": {
+        "label": "自我觉察",
+        "definition": "识别、命名和理解自身情绪线索的倾向。",
+        "band_explanations": {
+          "foundational": "自我觉察处于基础发展中，建议先练习用具体词语命名情绪。",
+          "developing": "自我觉察已有基础，但在压力下可能较晚发现真实触发点。",
+          "stable": "自我觉察稳定可用，通常能理解自己的主要情绪线索。",
+          "proficient": "自我觉察较成熟，能较快捕捉情绪变化和背后需求。",
+          "integrated": "自我觉察高度整合，重点是避免过度分析并转向行动。"
+        }
+      },
+      "en": {
+        "label": "Self-Awareness",
+        "definition": "The tendency to notice, name, and understand emotional cues in yourself.",
+        "band_explanations": {
+          "foundational": "Self-awareness is foundational; start by naming emotions with specific words.",
+          "developing": "Self-awareness has a base, but real triggers may be noticed late under pressure.",
+          "stable": "Self-awareness is stable and usually helps you understand key emotional cues.",
+          "proficient": "Self-awareness is mature enough to catch shifts and underlying needs quickly.",
+          "integrated": "Self-awareness is highly integrated; the focus is avoiding over-analysis and moving to action."
+        }
+      }
+    },
+    "ER": {
+      "zh-CN": {
+        "label": "情绪调节",
+        "definition": "在压力、反馈或冲突中恢复、暂停和选择回应方式的倾向。",
+        "band_explanations": {
+          "foundational": "情绪调节处于基础发展中，建议先建立暂停和恢复流程。",
+          "developing": "情绪调节已有基础，但强反馈或冲突中仍可能不稳定。",
+          "stable": "情绪调节稳定可用，多数日常压力下能找到恢复方式。",
+          "proficient": "情绪调节较成熟，能在触发后较快回到可沟通状态。",
+          "integrated": "情绪调节高度整合，重点是避免过度控制并保留真实感受。"
+        }
+      },
+      "en": {
+        "label": "Emotion Regulation",
+        "definition": "The tendency to recover, pause, and choose responses during pressure, feedback, or conflict.",
+        "band_explanations": {
+          "foundational": "Emotion regulation is foundational; build a pause and recovery process first.",
+          "developing": "Emotion regulation has a base, but strong feedback or conflict may still destabilize it.",
+          "stable": "Emotion regulation is stable and usually supports recovery in everyday pressure.",
+          "proficient": "Emotion regulation is mature enough to return to communication after being triggered.",
+          "integrated": "Emotion regulation is highly integrated; avoid over-control and keep authentic feeling available."
+        }
+      }
+    },
+    "EM": {
+      "zh-CN": {
+        "label": "共情理解",
+        "definition": "理解他人情绪、立场和关系线索的倾向。",
+        "band_explanations": {
+          "foundational": "共情理解处于基础发展中，建议先练习确认对方感受。",
+          "developing": "共情理解已有基础，但可能错过隐性情绪或真实需求。",
+          "stable": "共情理解稳定可用，多数场景能把握他人基本感受。",
+          "proficient": "共情理解较成熟，能较细腻地捕捉关系和情绪线索。",
+          "integrated": "共情理解高度整合，重点是避免过度承接他人情绪。"
+        }
+      },
+      "en": {
+        "label": "Empathy",
+        "definition": "The tendency to understand other people's emotions, perspectives, and relational cues.",
+        "band_explanations": {
+          "foundational": "Empathy is foundational; start by confirming the other person's feeling.",
+          "developing": "Empathy has a base, but hidden emotion or real needs may be missed.",
+          "stable": "Empathy is stable and usually helps you grasp basic feelings in others.",
+          "proficient": "Empathy is mature enough to notice relational and emotional cues with nuance.",
+          "integrated": "Empathy is highly integrated; avoid over-carrying other people's emotions."
+        }
+      }
+    },
+    "RM": {
+      "zh-CN": {
+        "label": "关系管理",
+        "definition": "在沟通、协作、修复和边界中采取建设性行动的倾向。",
+        "band_explanations": {
+          "foundational": "关系管理处于基础发展中，建议先学习低风险沟通脚本。",
+          "developing": "关系管理已有基础，但在冲突、边界或修复中可能不稳定。",
+          "stable": "关系管理稳定可用，多数协作场景中能采取建设性行动。",
+          "proficient": "关系管理较成熟，能主动推进沟通、协调和修复。",
+          "integrated": "关系管理高度整合，重点是避免承担过多协调责任。"
+        }
+      },
+      "en": {
+        "label": "Relationship Management",
+        "definition": "The tendency to act constructively in communication, collaboration, repair, and boundaries.",
+        "band_explanations": {
+          "foundational": "Relationship management is foundational; start with low-risk communication scripts.",
+          "developing": "Relationship management has a base, but conflict, boundaries, or repair may be unstable.",
+          "stable": "Relationship management is stable and usually supports constructive action in collaboration.",
+          "proficient": "Relationship management is mature enough to actively support communication, coordination, and repair.",
+          "integrated": "Relationship management is highly integrated; avoid taking too much coordination responsibility."
+        }
+      }
+    }
+  }
+}
