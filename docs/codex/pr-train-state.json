@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T04:24:00+08:00",
+  "updated_at": "2026-05-22T04:28:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -12715,14 +12715,14 @@
     "CRAWLER-LOG-01": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-01-readiness-scan",
-      "status": "committed",
-      "state": "committed",
+      "status": "pr_opened_github_checks_pending",
+      "state": "pr_opened_github_checks_pending",
       "title": "Crawler log readiness scan",
       "depends_on": [
         "CRAWLER-LOG-00"
       ],
-      "commit_sha": "073b43f467e067ae6da8344c0aaa660ec5ac23be",
-      "pr_url": null,
+      "commit_sha": "f52df4f34412a90ac1ff3198c69ca0b8093b9a8e",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1542",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -12771,6 +12771,10 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "evidence": "Opened PR #1542; GitHub checks pending."
         }
       },
       "failure_reason": null,
@@ -12805,6 +12809,11 @@
           "at": "2026-05-22T04:24:00+08:00",
           "status": "committed",
           "summary": "Committed scoped readiness scan implementation at 073b43f467e067ae6da8344c0aaa660ec5ac23be."
+        },
+        {
+          "at": "2026-05-22T04:28:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1542 for CRAWLER-LOG-01. GitHub checks are pending."
         }
       ]
     }
