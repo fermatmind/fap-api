@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T06:49:00+08:00",
+  "updated_at": "2026-05-22T06:50:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -12838,7 +12838,7 @@
       "depends_on": [
         "CRAWLER-LOG-01"
       ],
-      "commit_sha": "1ff70ef12cb1acfc94c57bba756b28b795ac6b27",
+      "commit_sha": "be6f641bd24f013dad4f3aea10d856597d112d04",
       "pr_url": null,
       "checks": {
         "dependency": {
@@ -12924,9 +12924,9 @@
           "summary": "Added fixture-only crawler log parser service, synthetic fixture, focused SeoIntel test, docs/generated artifact, and PR train metadata. Focused parser test, full SeoIntel suite, route list, Pint, BigFive runtime freeze guard, JSON/YAML validation, state JSON validation, and diff check passed. No production log read, command activation, scheduler, collector write, migration, deployment, env edit, external API call, URL submission, Metabase exposure, or production operation performed."
         },
         {
-          "at": "2026-05-22T06:49:00+08:00",
+          "at": "2026-05-22T06:50:00+08:00",
           "status": "committed",
-          "summary": "Committed scoped fixture parser MVP implementation at 1ff70ef12cb1acfc94c57bba756b28b795ac6b27."
+          "summary": "Committed scoped fixture parser MVP implementation at be6f641bd24f013dad4f3aea10d856597d112d04."
         }
       ]
     }
