@@ -90,6 +90,7 @@ final class Eq60ContentLintService
         $layout = $this->lintReportLayout($version, $errors);
         $allowlist = $this->lintVariablesAllowlist($version, $errors);
         $this->lintBlocks($version, $layout, $allowlist, $errors);
+        $this->lintReportAssets($version, $errors);
 
         $this->lintGoldenCases($version, $questionIndex, $errors);
 
@@ -787,6 +788,212 @@ final class Eq60ContentLintService
             $prefix = trim($prefix);
             if (! in_array($prefix, self::ALLOWED_TAG_PREFIXES, true)) {
                 $errors[] = $this->error($file, $line, 'tag prefix not allowed: '.$prefix);
+            }
+        }
+    }
+
+    /**
+     * @param  list<array{file:string,line:int,message:string}>  $errors
+     */
+    private function lintReportAssets(string $version, array &$errors): void
+    {
+        $requiredFiles = [
+            'scientific_contract',
+            'score_system',
+            'core_formulations',
+            'mechanism_map',
+            'reality_translation',
+            'career_environment',
+            'action_prescriptions',
+            'sjt_bridge',
+        ];
+
+        $docs = [];
+        foreach ($requiredFiles as $key) {
+            $file = $this->loader->rawPath('report_assets/'.$key.'.json', $version);
+            $doc = $this->loader->readJson($file);
+            if (! is_array($doc)) {
+                $errors[] = $this->error($file, 1, 'report asset json invalid or missing.');
+
+                continue;
+            }
+            if (trim((string) ($doc['schema'] ?? '')) === '') {
+                $errors[] = $this->error($file, 1, 'schema is required.');
+            }
+            if ((string) ($doc['pack_id'] ?? '') !== Eq60PackLoader::PACK_ID) {
+                $errors[] = $this->error($file, 1, 'pack_id must be EQ_60.');
+            }
+            $docs[$key] = $doc;
+        }
+
+        if (count($docs) !== count($requiredFiles)) {
+            return;
+        }
+
+        $scientificAssets = (array) data_get($docs, 'scientific_contract.assets', []);
+        $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/scientific_contract.json', $version), (array) ($scientificAssets['eq.scientific_contract.default'] ?? []), [
+            'test_definition',
+            'self_report_statement',
+            'non_clinical_statement',
+            'non_hiring_statement',
+            'non_ability_statement',
+            'norm_status_statement',
+            'quality_rules_statement',
+            'version_statement',
+        ], $errors);
+
+        foreach (['foundational', 'developing', 'stable', 'proficient', 'integrated'] as $band) {
+            $this->lintLocalizedScalar($this->loader->rawPath('report_assets/score_system.json', $version), data_get($docs, 'score_system.bands.'.$band), 'bands.'.$band, $errors);
+        }
+        foreach (self::REQUIRED_DIMENSIONS as $dimension) {
+            $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/score_system.json', $version), (array) data_get($docs, 'score_system.dimensions.'.$dimension), ['label', 'definition'], $errors);
+        }
+
+        $formulationIds = [
+            'balanced_integrated',
+            'high_empathy_low_recovery',
+            'aware_but_unregulated',
+            'calm_but_distant',
+            'relationship_first_self_later',
+            'self_clear_repair_weak',
+            'steady_collaborator',
+            'sensitive_absorber',
+            'developing_foundation',
+            'low_confidence_result',
+        ];
+        foreach ($formulationIds as $id) {
+            $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/core_formulations.json', $version), (array) data_get($docs, 'core_formulations.formulations.'.$id), [
+                'title',
+                'one_liner',
+                'core_claim',
+                'evidence_basis',
+                'primary_strength',
+                'likely_cost',
+                'development_lever',
+                'do_not_overread',
+            ], $errors);
+        }
+
+        foreach (['SA_ER', 'EM_ER', 'EM_RM', 'SA_RM', 'ER_RM'] as $pair) {
+            foreach (['high_high', 'high_low', 'low_high', 'low_low'] as $state) {
+                $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/mechanism_map.json', $version), (array) data_get($docs, 'mechanism_map.pairs.'.$pair.'.'.$state), [
+                    'title',
+                    'why_it_matters',
+                    'what_it_feels_like',
+                    'strength',
+                    'cost',
+                    'development_lever',
+                    'micro_action',
+                ], $errors);
+            }
+        }
+
+        foreach (['feedback', 'conflict', 'relationship_boundary', 'team_collaboration', 'pressure_recovery', 'career_environment'] as $scene) {
+            $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/reality_translation.json', $version), (array) data_get($docs, 'reality_translation.scenes.'.$scene), [
+                'title',
+                'typical_response',
+                'strength',
+                'cost',
+                'better_move',
+            ], $errors);
+        }
+
+        foreach (['interpersonal_density', 'emotional_labor', 'conflict_frequency', 'feedback_intensity', 'autonomy_recovery', 'collaboration_complexity'] as $variable) {
+            foreach (['low', 'medium', 'high'] as $level) {
+                $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/career_environment.json', $version), (array) data_get($docs, 'career_environment.variables.'.$variable.'.'.$level), [
+                    'label',
+                    'meaning',
+                    'fit_signal',
+                    'strain_signal',
+                    'what_to_verify',
+                ], $errors);
+            }
+        }
+
+        foreach ([
+            'emotion_labeling',
+            'pause_recovery',
+            'feedback_decompression',
+            'empathy_boundary',
+            'repair_after_conflict',
+            'express_without_escalation',
+            'support_without_rescuing',
+            'cold_to_warm_response',
+            'relationship_energy_management',
+            'conflict_deescalation',
+            'self_connection',
+            'retest_reflection',
+        ] as $prescription) {
+            $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/action_prescriptions.json', $version), (array) data_get($docs, 'action_prescriptions.prescriptions.'.$prescription), [
+                'title',
+                'why_this_matters',
+                'do_today',
+                'script',
+                'seven_day_plan',
+                'watch_out',
+            ], $errors);
+        }
+
+        $sjtAssets = (array) data_get($docs, 'sjt_bridge.assets', []);
+        $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/sjt_bridge.json', $version), (array) ($sjtAssets['eq.sjt_bridge.planned'] ?? []), [
+            'title',
+            'status',
+            'description',
+            'what_it_adds',
+            'what_it_is_not',
+            'button_label',
+            'available',
+        ], $errors);
+    }
+
+    /**
+     * @param  array<string,mixed>  $asset
+     * @param  list<string>  $fields
+     * @param  list<array{file:string,line:int,message:string}>  $errors
+     */
+    private function lintLocalizedAssetFields(string $file, array $asset, array $fields, array &$errors): void
+    {
+        foreach (['zh-CN', 'en'] as $locale) {
+            $node = is_array($asset[$locale] ?? null) ? $asset[$locale] : null;
+            if (! is_array($node)) {
+                $errors[] = $this->error($file, 1, 'localized asset missing for '.$locale.'.');
+
+                continue;
+            }
+
+            foreach ($fields as $field) {
+                $value = $node[$field] ?? null;
+                if (is_array($value)) {
+                    if ($value === []) {
+                        $errors[] = $this->error($file, 1, $locale.'.'.$field.' cannot be empty.');
+                    }
+
+                    continue;
+                }
+                if (is_bool($value)) {
+                    continue;
+                }
+                if (trim((string) $value) === '') {
+                    $errors[] = $this->error($file, 1, $locale.'.'.$field.' is required.');
+                }
+            }
+        }
+    }
+
+    /**
+     * @param  list<array{file:string,line:int,message:string}>  $errors
+     */
+    private function lintLocalizedScalar(string $file, mixed $node, string $path, array &$errors): void
+    {
+        if (! is_array($node)) {
+            $errors[] = $this->error($file, 1, $path.' must be localized object.');
+
+            return;
+        }
+
+        foreach (['zh-CN', 'en'] as $locale) {
+            if (trim((string) ($node[$locale] ?? '')) === '') {
+                $errors[] = $this->error($file, 1, $path.'.'.$locale.' is required.');
             }
         }
     }

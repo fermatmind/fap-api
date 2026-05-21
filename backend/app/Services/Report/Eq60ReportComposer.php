@@ -36,6 +36,7 @@ final class Eq60ReportComposer
                 'status' => 500,
             ];
         }
+        $reportAssets = $this->packLoader->loadReportAssets($version);
 
         $score = $this->extractScoreResult($result);
         if (! is_array($score)) {
@@ -137,6 +138,8 @@ final class Eq60ReportComposer
         unset($v5Scores['dimension_summary']);
         $quality = $this->buildV5Quality($score);
         $interpretation = $this->buildV5Interpretation($v5Scores, $quality);
+        $assetRefs = $this->buildV5AssetRefs($interpretation, $quality);
+        $resolvedAssets = $this->resolveV5Assets($reportAssets, $locale, $interpretation, $quality);
 
         return [
             'ok' => true,
@@ -168,6 +171,8 @@ final class Eq60ReportComposer
                     static fn (string $tag): bool => $tag !== ''
                 )),
                 'interpretation' => $interpretation,
+                'asset_refs' => $assetRefs,
+                'assets' => $resolvedAssets,
                 'next_module' => [
                     'available' => false,
                     'module_code' => 'EQ_SJT_16',
@@ -177,7 +182,7 @@ final class Eq60ReportComposer
                 'methodology' => [
                     'norm_status' => strtolower(trim((string) data_get($score, 'norms.status', 'provisional'))) ?: 'provisional',
                     'scoring_version' => (string) data_get($score, 'version_snapshot.engine_version', 'v1.0_normed_validity'),
-                    'report_version' => 'eq_report_v5_minimal',
+                    'report_version' => 'eq_report_v5_assets',
                     'content_version' => Eq60PackLoader::PACK_ID.'/'.$version,
                 ],
                 'generated_at' => now()->toISOString(),
@@ -324,16 +329,376 @@ final class Eq60ReportComposer
         $strongest = $this->rankDimension($dimensionScores, true);
         $developmentLever = $this->rankDimension($dimensionScores, false);
         $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? '')));
+        $formulationId = $this->selectCoreFormulation($dimensionScores, $qualityLevel);
 
         return [
-            'core_formulation_id' => in_array($qualityLevel, ['C', 'D'], true) ? 'low_confidence_result' : 'balanced_integrated',
+            'core_formulation_id' => $formulationId,
             'strongest_dimension' => $strongest,
             'development_lever' => $developmentLever,
-            'primary_mechanism_ids' => [],
-            'primary_scene_ids' => [],
-            'career_environment_ids' => [],
-            'action_prescription_id' => null,
+            'primary_mechanism_ids' => $this->selectMechanismIds($formulationId, $dimensionScores),
+            'primary_scene_ids' => $this->selectSceneIds($formulationId),
+            'career_environment_ids' => $this->selectCareerEnvironmentIds($formulationId),
+            'action_prescription_id' => $this->selectActionPrescriptionId($formulationId, $developmentLever),
         ];
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function selectCoreFormulation(array $dimensionScores, string $qualityLevel): string
+    {
+        if (in_array($qualityLevel, ['C', 'D'], true)) {
+            return 'low_confidence_result';
+        }
+
+        $high = [];
+        $low = [];
+        foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
+            $high[$code] = $this->isDimensionHigh($dimensionScores, $code);
+            $low[$code] = $this->isDimensionLow($dimensionScores, $code);
+        }
+
+        $lowCount = count(array_filter($low));
+        if ($lowCount >= 3) {
+            return 'developing_foundation';
+        }
+        if (count(array_filter($high)) >= 4) {
+            return 'balanced_integrated';
+        }
+
+        if ($high['EM'] && $low['ER']) {
+            return 'high_empathy_low_recovery';
+        }
+        if ($high['SA'] && $low['ER']) {
+            return 'aware_but_unregulated';
+        }
+        if ($high['SA'] && $high['EM'] && ! $high['ER']) {
+            return 'sensitive_absorber';
+        }
+        if ($high['ER'] && $low['EM']) {
+            return 'calm_but_distant';
+        }
+        if ($high['RM'] && $low['SA']) {
+            return 'relationship_first_self_later';
+        }
+        if ($high['SA'] && $low['RM']) {
+            return 'self_clear_repair_weak';
+        }
+        if ($high['ER'] && $high['RM']) {
+            return 'steady_collaborator';
+        }
+
+        return 'balanced_integrated';
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     * @return list<string>
+     */
+    private function selectMechanismIds(string $formulationId, array $dimensionScores): array
+    {
+        return match ($formulationId) {
+            'high_empathy_low_recovery' => ['EM_ER_high_low'],
+            'aware_but_unregulated' => ['SA_ER_high_low'],
+            'calm_but_distant' => ['EM_ER_low_high'],
+            'relationship_first_self_later' => ['SA_RM_low_high'],
+            'self_clear_repair_weak' => ['SA_RM_high_low'],
+            'steady_collaborator' => ['ER_RM_high_high'],
+            'sensitive_absorber' => ['EM_ER_high_low', 'SA_ER_high_low'],
+            'developing_foundation' => ['ER_RM_low_low'],
+            'low_confidence_result' => [],
+            default => [
+                $this->mechanismId('SA_ER', 'SA', 'ER', $dimensionScores),
+                $this->mechanismId('EM_RM', 'EM', 'RM', $dimensionScores),
+            ],
+        };
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function selectSceneIds(string $formulationId): array
+    {
+        return match ($formulationId) {
+            'high_empathy_low_recovery', 'sensitive_absorber' => ['feedback', 'conflict', 'relationship_boundary'],
+            'aware_but_unregulated' => ['feedback', 'pressure_recovery', 'conflict'],
+            'calm_but_distant' => ['feedback', 'team_collaboration', 'conflict'],
+            'relationship_first_self_later' => ['relationship_boundary', 'team_collaboration', 'career_environment'],
+            'self_clear_repair_weak' => ['conflict', 'feedback', 'relationship_boundary'],
+            'steady_collaborator' => ['team_collaboration', 'conflict', 'career_environment'],
+            'developing_foundation', 'low_confidence_result' => ['pressure_recovery', 'feedback', 'career_environment'],
+            default => ['feedback', 'team_collaboration', 'career_environment'],
+        };
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function selectCareerEnvironmentIds(string $formulationId): array
+    {
+        return match ($formulationId) {
+            'high_empathy_low_recovery', 'sensitive_absorber' => ['emotional_labor_high', 'autonomy_recovery_medium', 'interpersonal_density_medium'],
+            'aware_but_unregulated' => ['feedback_intensity_medium', 'autonomy_recovery_high', 'conflict_frequency_low'],
+            'calm_but_distant' => ['emotional_labor_low', 'conflict_frequency_medium', 'collaboration_complexity_medium'],
+            'relationship_first_self_later' => ['interpersonal_density_high', 'emotional_labor_medium', 'autonomy_recovery_medium'],
+            'self_clear_repair_weak' => ['conflict_frequency_medium', 'feedback_intensity_medium', 'collaboration_complexity_low'],
+            'steady_collaborator' => ['collaboration_complexity_high', 'conflict_frequency_medium', 'interpersonal_density_high'],
+            'developing_foundation', 'low_confidence_result' => ['feedback_intensity_low', 'conflict_frequency_low', 'autonomy_recovery_high'],
+            default => ['interpersonal_density_medium', 'feedback_intensity_medium', 'autonomy_recovery_medium'],
+        };
+    }
+
+    private function selectActionPrescriptionId(string $formulationId, ?string $developmentLever): string
+    {
+        if ($formulationId === 'low_confidence_result') {
+            return 'retest_reflection';
+        }
+
+        return match ($formulationId) {
+            'high_empathy_low_recovery', 'sensitive_absorber' => 'empathy_boundary',
+            'aware_but_unregulated' => 'pause_recovery',
+            'calm_but_distant' => 'cold_to_warm_response',
+            'relationship_first_self_later' => 'self_connection',
+            'self_clear_repair_weak' => 'express_without_escalation',
+            'steady_collaborator' => 'repair_after_conflict',
+            'developing_foundation' => 'emotion_labeling',
+            default => match ($developmentLever) {
+                'ER' => 'pause_recovery',
+                'EM' => 'cold_to_warm_response',
+                'RM' => 'repair_after_conflict',
+                'SA' => 'emotion_labeling',
+                default => 'feedback_decompression',
+            },
+        };
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function mechanismId(string $pair, string $left, string $right, array $dimensionScores): string
+    {
+        $leftState = $this->isDimensionHigh($dimensionScores, $left) ? 'high' : 'low';
+        $rightState = $this->isDimensionHigh($dimensionScores, $right) ? 'high' : 'low';
+
+        return $pair.'_'.$leftState.'_'.$rightState;
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function isDimensionHigh(array $dimensionScores, string $code): bool
+    {
+        $node = is_array($dimensionScores[$code] ?? null) ? $dimensionScores[$code] : [];
+        $band = strtolower(trim((string) ($node['band'] ?? '')));
+        if (in_array($band, ['proficient', 'integrated'], true)) {
+            return true;
+        }
+
+        $percentile = $this->nullableNumber($node['percentile'] ?? null);
+
+        return is_numeric($percentile) && (float) $percentile >= 65.0;
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function isDimensionLow(array $dimensionScores, string $code): bool
+    {
+        $node = is_array($dimensionScores[$code] ?? null) ? $dimensionScores[$code] : [];
+        $band = strtolower(trim((string) ($node['band'] ?? '')));
+        if (in_array($band, ['foundational', 'developing'], true)) {
+            return true;
+        }
+
+        $percentile = $this->nullableNumber($node['percentile'] ?? null);
+
+        return is_numeric($percentile) && (float) $percentile <= 25.0;
+    }
+
+    /**
+     * @param  array<string,mixed>  $interpretation
+     * @param  array<string,mixed>  $quality
+     * @return array<string,mixed>
+     */
+    private function buildV5AssetRefs(array $interpretation, array $quality): array
+    {
+        return [
+            'scientific_contract_id' => 'eq.scientific_contract.default',
+            'score_system_id' => 'eq.score_system.default',
+            'core_formulation_id' => (string) ($interpretation['core_formulation_id'] ?? ''),
+            'quality_explanation_asset_id' => (string) ($quality['explanation_asset_id'] ?? ''),
+            'mechanism_ids' => array_values(array_map('strval', (array) ($interpretation['primary_mechanism_ids'] ?? []))),
+            'scene_ids' => array_values(array_map('strval', (array) ($interpretation['primary_scene_ids'] ?? []))),
+            'career_environment_ids' => array_values(array_map('strval', (array) ($interpretation['career_environment_ids'] ?? []))),
+            'action_prescription_id' => (string) ($interpretation['action_prescription_id'] ?? ''),
+            'sjt_bridge_id' => 'eq.sjt_bridge.planned',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $assets
+     * @param  array<string,mixed>  $interpretation
+     * @param  array<string,mixed>  $quality
+     * @return array<string,mixed>
+     */
+    private function resolveV5Assets(array $assets, string $locale, array $interpretation, array $quality): array
+    {
+        $docs = is_array($assets['assets'] ?? null) ? $assets['assets'] : [];
+        $scientificAssets = (array) data_get($docs, 'scientific_contract.assets', []);
+        $sjtAssets = (array) data_get($docs, 'sjt_bridge.assets', []);
+        $formulationId = (string) ($interpretation['core_formulation_id'] ?? '');
+        $actionId = (string) ($interpretation['action_prescription_id'] ?? '');
+
+        $mechanisms = [];
+        foreach ((array) ($interpretation['primary_mechanism_ids'] ?? []) as $idRaw) {
+            $id = trim((string) $idRaw);
+            $asset = $this->resolveMechanismAsset((array) data_get($docs, 'mechanism_map.pairs', []), $id, $locale);
+            if ($asset !== null) {
+                $mechanisms[] = $asset;
+            }
+        }
+
+        $scenes = [];
+        foreach ((array) ($interpretation['primary_scene_ids'] ?? []) as $idRaw) {
+            $id = trim((string) $idRaw);
+            $node = data_get($docs, 'reality_translation.scenes.'.$id);
+            if (is_array($node)) {
+                $scenes[] = array_merge(['id' => $id], $this->localizedAsset($node, $locale));
+            }
+        }
+
+        $career = [];
+        foreach ((array) ($interpretation['career_environment_ids'] ?? []) as $idRaw) {
+            $id = trim((string) $idRaw);
+            $asset = $this->resolveCareerAsset((array) data_get($docs, 'career_environment.variables', []), $id, $locale);
+            if ($asset !== null) {
+                $career[] = $asset;
+            }
+        }
+
+        return [
+            'scientific_contract' => $this->localizedAsset((array) ($scientificAssets['eq.scientific_contract.default'] ?? []), $locale),
+            'score_system' => $this->localizedScoreSystem((array) ($docs['score_system'] ?? []), $locale),
+            'core_formulation' => array_merge(
+                ['id' => $formulationId],
+                $this->localizedAsset((array) data_get($docs, 'core_formulations.formulations.'.$formulationId, []), $locale)
+            ),
+            'mechanisms' => $mechanisms,
+            'reality_scenes' => $scenes,
+            'career_environment' => $career,
+            'action_prescription' => array_merge(
+                ['id' => $actionId],
+                $this->localizedAsset((array) data_get($docs, 'action_prescriptions.prescriptions.'.$actionId, []), $locale)
+            ),
+            'sjt_bridge' => array_merge(
+                ['id' => 'eq.sjt_bridge.planned', 'available' => false],
+                $this->localizedAsset((array) ($sjtAssets['eq.sjt_bridge.planned'] ?? []), $locale)
+            ),
+            'quality' => [
+                'explanation_asset_id' => (string) ($quality['explanation_asset_id'] ?? ''),
+                'confidence_label' => (string) ($quality['confidence_label'] ?? ''),
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $pairs
+     * @return array<string,mixed>|null
+     */
+    private function resolveMechanismAsset(array $pairs, string $id, string $locale): ?array
+    {
+        foreach (['high_high', 'high_low', 'low_high', 'low_low'] as $state) {
+            $suffix = '_'.$state;
+            if (! str_ends_with($id, $suffix)) {
+                continue;
+            }
+            $pair = substr($id, 0, -strlen($suffix));
+            $node = $pairs[$pair][$state] ?? null;
+            if (! is_array($node)) {
+                return null;
+            }
+
+            return array_merge(['id' => $id, 'pair' => $pair, 'state' => $state], $this->localizedAsset($node, $locale));
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $variables
+     * @return array<string,mixed>|null
+     */
+    private function resolveCareerAsset(array $variables, string $id, string $locale): ?array
+    {
+        foreach (['low', 'medium', 'high'] as $level) {
+            $suffix = '_'.$level;
+            if (! str_ends_with($id, $suffix)) {
+                continue;
+            }
+            $variable = substr($id, 0, -strlen($suffix));
+            $node = $variables[$variable][$level] ?? null;
+            if (! is_array($node)) {
+                return null;
+            }
+
+            return array_merge(['id' => $id, 'variable' => $variable, 'level' => $level], $this->localizedAsset($node, $locale));
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $asset
+     * @return array<string,mixed>
+     */
+    private function localizedAsset(array $asset, string $locale): array
+    {
+        $primary = $this->packLoader->normalizeLocale($locale);
+        $node = $asset[$primary] ?? ($asset[$primary === 'zh-CN' ? 'en' : 'zh-CN'] ?? []);
+
+        return is_array($node) ? $node : [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $scoreSystem
+     * @return array<string,mixed>
+     */
+    private function localizedScoreSystem(array $scoreSystem, string $locale): array
+    {
+        $out = [
+            'global_index' => $this->localizedAsset((array) ($scoreSystem['global_index'] ?? []), $locale),
+            'score_notes' => $this->localizedAsset((array) ($scoreSystem['score_notes'] ?? []), $locale),
+            'bands' => [],
+            'dimensions' => [],
+        ];
+
+        foreach ((array) ($scoreSystem['bands'] ?? []) as $band => $node) {
+            if (! is_array($node)) {
+                continue;
+            }
+            $localized = $this->localizedScalar($node, $locale);
+            if ($localized !== '') {
+                $out['bands'][(string) $band] = $localized;
+            }
+        }
+
+        foreach ((array) ($scoreSystem['dimensions'] ?? []) as $code => $node) {
+            if (is_array($node)) {
+                $out['dimensions'][(string) $code] = $this->localizedAsset($node, $locale);
+            }
+        }
+
+        return $out;
+    }
+
+    /**
+     * @param  array<string,mixed>  $node
+     */
+    private function localizedScalar(array $node, string $locale): string
+    {
+        $primary = $this->packLoader->normalizeLocale($locale);
+
+        return trim((string) ($node[$primary] ?? ($node[$primary === 'zh-CN' ? 'en' : 'zh-CN'] ?? '')));
     }
 
     /**

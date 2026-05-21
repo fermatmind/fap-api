@@ -277,6 +277,48 @@ final class Eq60PackLoader
         return [];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
+    public function loadReportAssets(?string $version = null): array
+    {
+        $compiled = $this->readCompiledJson('report_assets.compiled.json', $version);
+        if (is_array($compiled) && is_array($compiled['assets'] ?? null)) {
+            return $compiled;
+        }
+
+        $rawDir = $this->rawPath('report_assets', $version);
+        if (! is_dir($rawDir)) {
+            return [];
+        }
+
+        $assets = [];
+        foreach ([
+            'scientific_contract',
+            'score_system',
+            'core_formulations',
+            'mechanism_map',
+            'reality_translation',
+            'career_environment',
+            'action_prescriptions',
+            'sjt_bridge',
+        ] as $key) {
+            $doc = $this->readJson($rawDir.DIRECTORY_SEPARATOR.$key.'.json');
+            if (is_array($doc)) {
+                $assets[$key] = $doc;
+            }
+        }
+
+        return $assets === []
+            ? []
+            : [
+                'schema' => 'eq_60.report_assets.compiled.v1',
+                'pack_id' => self::PACK_ID,
+                'pack_version' => $this->normalizeVersion($version),
+                'assets' => $assets,
+            ];
+    }
+
     public function resolveManifestHash(?string $version = null): string
     {
         $manifest = $this->readCompiledJson('manifest.json', $version);

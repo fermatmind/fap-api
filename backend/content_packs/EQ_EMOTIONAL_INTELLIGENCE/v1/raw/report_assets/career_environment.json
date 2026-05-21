@@ -1,0 +1,90 @@
+{
+  "schema": "eq60.report_assets.career_environment.v1",
+  "pack_id": "EQ_60",
+  "variables": {
+    "interpersonal_density": {
+      "low": {
+        "zh-CN": {"label": "低人际密度", "meaning": "多数时间独立推进，互动频率较低。", "fit_signal": "适合需要恢复空间或深度专注的人。", "strain_signal": "可能减少练习关系动作的机会。", "what_to_verify": "确认岗位是否真的允许长时间独立工作。"},
+        "en": {"label": "Low Interpersonal Density", "meaning": "Most work is independent with fewer interactions.", "fit_signal": "Can fit people who need recovery space or deep focus.", "strain_signal": "May reduce practice opportunities for relational action.", "what_to_verify": "Check whether the role truly allows long independent work blocks."}
+      },
+      "medium": {
+        "zh-CN": {"label": "中等人际密度", "meaning": "日常有固定协作，但不是持续社交。", "fit_signal": "适合在协作和独立之间切换。", "strain_signal": "会议过多时仍会消耗。", "what_to_verify": "确认每周会议、同步和跨团队协作频率。"},
+        "en": {"label": "Medium Interpersonal Density", "meaning": "Regular collaboration without constant social demand.", "fit_signal": "Fits switching between collaboration and independent work.", "strain_signal": "Too many meetings can still drain.", "what_to_verify": "Check weekly meetings, syncs, and cross-team collaboration frequency."}
+      },
+      "high": {
+        "zh-CN": {"label": "高人际密度", "meaning": "大量沟通、协调和即时互动。", "fit_signal": "可发挥共情、协作和关系管理优势。", "strain_signal": "恢复不足时容易情绪过载。", "what_to_verify": "确认是否有可控的独处和恢复窗口。"},
+        "en": {"label": "High Interpersonal Density", "meaning": "Frequent communication, coordination, and real-time interaction.", "fit_signal": "Can use empathy, collaboration, and relationship-management strengths.", "strain_signal": "Weak recovery can lead to overload.", "what_to_verify": "Check whether protected solo recovery windows exist."}
+      }
+    },
+    "emotional_labor": {
+      "low": {
+        "zh-CN": {"label": "低情绪劳动", "meaning": "较少承接他人情绪或安抚关系。", "fit_signal": "适合需要降低情绪消耗的人。", "strain_signal": "可能缺少运用共情优势的空间。", "what_to_verify": "确认用户、客户或团队情绪压力是否较低。"},
+        "en": {"label": "Low Emotional Labor", "meaning": "Less need to hold or soothe others' emotions.", "fit_signal": "Fits people who need lower emotional load.", "strain_signal": "May offer less space to use empathy strengths.", "what_to_verify": "Check whether user, client, or team emotional pressure is actually low."}
+      },
+      "medium": {
+        "zh-CN": {"label": "中等情绪劳动", "meaning": "需要一定理解和安抚，但通常有边界。", "fit_signal": "适合练习共情与边界并存。", "strain_signal": "边界不清时会累积消耗。", "what_to_verify": "确认是否有升级、转介或交接机制。"},
+        "en": {"label": "Medium Emotional Labor", "meaning": "Some understanding and soothing are needed, usually with boundaries.", "fit_signal": "Fits practicing empathy with boundaries.", "strain_signal": "Unclear boundaries accumulate cost.", "what_to_verify": "Check whether escalation, referral, or handoff mechanisms exist."}
+      },
+      "high": {
+        "zh-CN": {"label": "高情绪劳动", "meaning": "经常承接焦虑、投诉、冲突或脆弱情绪。", "fit_signal": "高共情者能建立信任。", "strain_signal": "低恢复者容易被情绪场拖走。", "what_to_verify": "确认督导、复盘和休息制度是否真实存在。"},
+        "en": {"label": "High Emotional Labor", "meaning": "Frequent exposure to anxiety, complaints, conflict, or vulnerability.", "fit_signal": "High-empathy people can build trust.", "strain_signal": "Low recovery can make the emotional field pull you in.", "what_to_verify": "Check whether supervision, review, and rest systems are real."}
+      }
+    },
+    "conflict_frequency": {
+      "low": {
+        "zh-CN": {"label": "低冲突频率", "meaning": "较少谈判、投诉或强分歧。", "fit_signal": "降低情绪调节压力。", "strain_signal": "可能较少训练冲突修复。", "what_to_verify": "确认冲突是否只是被隐藏到异步沟通中。"},
+        "en": {"label": "Low Conflict Frequency", "meaning": "Fewer negotiations, complaints, or strong disagreements.", "fit_signal": "Reduces regulation pressure.", "strain_signal": "May offer less practice in conflict repair.", "what_to_verify": "Check whether conflict is merely hidden in async communication."}
+      },
+      "medium": {
+        "zh-CN": {"label": "中等冲突频率", "meaning": "有周期性分歧，但通常有流程。", "fit_signal": "适合练习稳定沟通。", "strain_signal": "流程不清时会放大关系压力。", "what_to_verify": "确认冲突如何升级、记录和收口。"},
+        "en": {"label": "Medium Conflict Frequency", "meaning": "Periodic disagreement with some process.", "fit_signal": "Good for practicing steady communication.", "strain_signal": "Unclear process amplifies relational pressure.", "what_to_verify": "Check how conflict is escalated, recorded, and closed."}
+      },
+      "high": {
+        "zh-CN": {"label": "高冲突频率", "meaning": "经常面对投诉、博弈、谈判或利益冲突。", "fit_signal": "高调节和高关系管理者可发挥优势。", "strain_signal": "ER 或 RM 低时消耗显著。", "what_to_verify": "确认是否有明确授权、边界和复盘支持。"},
+        "en": {"label": "High Conflict Frequency", "meaning": "Frequent complaints, negotiation, bargaining, or interest conflict.", "fit_signal": "High ER and RM can become strengths.", "strain_signal": "Low ER or RM is costly here.", "what_to_verify": "Check whether authority, boundaries, and review support are clear."}
+      }
+    },
+    "feedback_intensity": {
+      "low": {
+        "zh-CN": {"label": "低反馈强度", "meaning": "评价和修改频率较低。", "fit_signal": "适合对评价敏感且需要稳定节奏的人。", "strain_signal": "成长反馈可能不足。", "what_to_verify": "确认是否仍有清晰目标和周期复盘。"},
+        "en": {"label": "Low Feedback Intensity", "meaning": "Evaluation and revision are less frequent.", "fit_signal": "Fits people sensitive to evaluation who need a steadier rhythm.", "strain_signal": "Growth feedback may be insufficient.", "what_to_verify": "Check whether clear goals and periodic review still exist."}
+      },
+      "medium": {
+        "zh-CN": {"label": "中等反馈强度", "meaning": "定期复盘、修改和评价。", "fit_signal": "适合把反馈转成学习。", "strain_signal": "恢复不足时可能反复回想。", "what_to_verify": "确认反馈是否具体、可执行、不过度公开。"},
+        "en": {"label": "Medium Feedback Intensity", "meaning": "Regular review, revision, and evaluation.", "fit_signal": "Fits turning feedback into learning.", "strain_signal": "Weak recovery may lead to replaying feedback.", "what_to_verify": "Check whether feedback is specific, actionable, and not overly public."}
+      },
+      "high": {
+        "zh-CN": {"label": "高反馈强度", "meaning": "频繁被评价、迭代或公开比较。", "fit_signal": "高觉察和高调节者可快速迭代。", "strain_signal": "低调节者容易把反馈体验成否定。", "what_to_verify": "确认是否有安全反馈文化和恢复空间。"},
+        "en": {"label": "High Feedback Intensity", "meaning": "Frequent evaluation, iteration, or public comparison.", "fit_signal": "High SA and ER can support fast iteration.", "strain_signal": "Low ER may make feedback feel like rejection.", "what_to_verify": "Check for a safe feedback culture and recovery space."}
+      }
+    },
+    "autonomy_recovery": {
+      "low": {
+        "zh-CN": {"label": "低自主恢复空间", "meaning": "节奏常被外部打断，难以独处恢复。", "fit_signal": "适合恢复需求低且即时响应强的人。", "strain_signal": "高共情低恢复者风险较高。", "what_to_verify": "确认是否允许暂停、调班或离线恢复。"},
+        "en": {"label": "Low Autonomy Recovery", "meaning": "Rhythm is often interrupted, with little solo recovery.", "fit_signal": "Fits people with low recovery needs and strong real-time response.", "strain_signal": "High empathy with low recovery is risky here.", "what_to_verify": "Check whether pauses, shift changes, or offline recovery are allowed."}
+      },
+      "medium": {
+        "zh-CN": {"label": "中等自主恢复空间", "meaning": "有一定独立安排，但仍受团队节奏影响。", "fit_signal": "适合多数人维持稳定表现。", "strain_signal": "忙季或危机期可能被压缩。", "what_to_verify": "确认高峰期的恢复安排。"},
+        "en": {"label": "Medium Autonomy Recovery", "meaning": "Some independent rhythm exists, though team rhythm still matters.", "fit_signal": "Helps most people sustain performance.", "strain_signal": "Busy or crisis periods may compress it.", "what_to_verify": "Check recovery arrangements during peak periods."}
+      },
+      "high": {
+        "zh-CN": {"label": "高自主恢复空间", "meaning": "可以较多控制节奏、沟通窗口和深度工作时间。", "fit_signal": "有利于敏感、深度复盘或高恢复需求者。", "strain_signal": "也可能带来孤立或反馈不足。", "what_to_verify": "确认独立性不会变成缺少支持。"},
+        "en": {"label": "High Autonomy Recovery", "meaning": "More control over rhythm, communication windows, and deep-work time.", "fit_signal": "Helpful for sensitive, reflective, or high-recovery-need people.", "strain_signal": "Can also create isolation or insufficient feedback.", "what_to_verify": "Check that autonomy does not mean lack of support."}
+      }
+    },
+    "collaboration_complexity": {
+      "low": {
+        "zh-CN": {"label": "低协作复杂度", "meaning": "角色、接口和责任较清楚。", "fit_signal": "降低关系误解和协调成本。", "strain_signal": "可能较少发挥复杂协调优势。", "what_to_verify": "确认职责是否稳定且边界清楚。"},
+        "en": {"label": "Low Collaboration Complexity", "meaning": "Roles, interfaces, and responsibilities are clear.", "fit_signal": "Lowers misunderstanding and coordination cost.", "strain_signal": "May offer less space for complex coordination strengths.", "what_to_verify": "Check whether responsibilities are stable and boundaries clear."}
+      },
+      "medium": {
+        "zh-CN": {"label": "中等协作复杂度", "meaning": "需要跨角色协作，但仍有明确流程。", "fit_signal": "适合练习关系管理和反馈沟通。", "strain_signal": "流程缺失时容易消耗。", "what_to_verify": "确认决策权、优先级和冲突处理方式。"},
+        "en": {"label": "Medium Collaboration Complexity", "meaning": "Cross-role collaboration is needed with some clear process.", "fit_signal": "Good for practicing relationship management and feedback communication.", "strain_signal": "Missing process can be draining.", "what_to_verify": "Check decision rights, priorities, and conflict-handling process."}
+      },
+      "high": {
+        "zh-CN": {"label": "高协作复杂度", "meaning": "多方目标、利益和节奏需要持续协调。", "fit_signal": "高 RM 与稳定 ER 能发挥明显优势。", "strain_signal": "边界不清时容易长期过载。", "what_to_verify": "确认是否有正式协调机制和优先级裁决。"},
+        "en": {"label": "High Collaboration Complexity", "meaning": "Multiple goals, interests, and rhythms require ongoing coordination.", "fit_signal": "High RM and stable ER can become clear strengths.", "strain_signal": "Unclear boundaries can cause chronic overload.", "what_to_verify": "Check formal coordination mechanisms and priority arbitration."}
+      }
+    }
+  }
+}

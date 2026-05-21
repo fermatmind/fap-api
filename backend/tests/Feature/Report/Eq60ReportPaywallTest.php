@@ -76,7 +76,17 @@ final class Eq60ReportPaywallTest extends TestCase
         $this->assertSame('planned', (string) data_get($gate, 'report.next_module.status'));
         $this->assertFalse((bool) data_get($gate, 'report.next_module.available', true));
         $this->assertSame('provisional', (string) data_get($gate, 'report.methodology.norm_status'));
-        $this->assertSame('eq_report_v5_minimal', (string) data_get($gate, 'report.methodology.report_version'));
+        $this->assertSame('eq_report_v5_assets', (string) data_get($gate, 'report.methodology.report_version'));
+        $this->assertNotSame('', (string) data_get($gate, 'report.asset_refs.core_formulation_id'));
+        $this->assertNotSame('', (string) data_get($gate, 'report.asset_refs.action_prescription_id'));
+        $this->assertNotSame('', (string) data_get($gate, 'report.assets.scientific_contract.self_report_statement'));
+        $this->assertNotSame('', (string) data_get($gate, 'report.assets.score_system.global_index.label'));
+        $this->assertNotSame('', (string) data_get($gate, 'report.assets.core_formulation.title'));
+        $this->assertNotEmpty((array) data_get($gate, 'report.assets.reality_scenes'));
+        $this->assertNotEmpty((array) data_get($gate, 'report.assets.career_environment'));
+        $this->assertNotSame('', (string) data_get($gate, 'report.assets.action_prescription.title'));
+        $this->assertFalse((bool) data_get($gate, 'report.assets.sjt_bridge.available', true));
+        $this->assertStringContainsString('未来', (string) data_get($gate, 'report.assets.sjt_bridge.title'));
         $this->assertStringNotContainsString('SKU_EQ_60_FULL_299', json_encode($gate, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '');
     }
 

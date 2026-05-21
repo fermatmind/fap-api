@@ -42,6 +42,7 @@ final class Eq60ContentCompileService
             'policy.compiled.json',
             'landing.compiled.json',
             'report.compiled.json',
+            'report_assets.compiled.json',
             'golden_cases.compiled.json',
             'manifest.json',
         ] as $compiledFile) {
@@ -123,6 +124,7 @@ final class Eq60ContentCompileService
         $reportFreeBlocksRaw = $this->loader->readJson($this->loader->rawPath('blocks/free_blocks.json', $version)) ?? [];
         $reportPaidBlocksRaw = $this->loader->readJson($this->loader->rawPath('blocks/paid_blocks.json', $version)) ?? [];
         $reportVariablesRaw = $this->loader->readJson($this->loader->rawPath('variables_allowlist.json', $version)) ?? [];
+        $reportAssets = $this->compileReportAssets($version);
 
         $normalizedPolicy = $this->normalizePolicy($policyRaw);
         $normalizedLayout = $this->normalizeLayout($reportLayoutRaw);
@@ -183,6 +185,13 @@ final class Eq60ContentCompileService
                 'layout' => $normalizedLayout,
                 'blocks' => $normalizedBlocks,
                 'variables_allowlist' => $normalizedVariables,
+            ],
+            'report_assets.compiled.json' => [
+                'schema' => 'eq_60.report_assets.compiled.v1',
+                'pack_id' => Eq60PackLoader::PACK_ID,
+                'pack_version' => $version,
+                'generated_at' => now()->toISOString(),
+                'assets' => $reportAssets,
             ],
             'golden_cases.compiled.json' => [
                 'schema' => 'eq_60.golden_cases.compiled.v2',
@@ -701,6 +710,31 @@ final class Eq60ContentCompileService
         });
 
         return $all;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function compileReportAssets(string $version): array
+    {
+        $assets = [];
+        foreach ([
+            'scientific_contract',
+            'score_system',
+            'core_formulations',
+            'mechanism_map',
+            'reality_translation',
+            'career_environment',
+            'action_prescriptions',
+            'sjt_bridge',
+        ] as $key) {
+            $doc = $this->loader->readJson($this->loader->rawPath('report_assets/'.$key.'.json', $version));
+            if (is_array($doc)) {
+                $assets[$key] = $doc;
+            }
+        }
+
+        return $assets;
     }
 
     /**

@@ -1,0 +1,226 @@
+{
+  "schema": "eq60.report_assets.core_formulations.v1",
+  "pack_id": "EQ_60",
+  "formulations": {
+    "balanced_integrated": {
+      "zh-CN": {
+        "title": "均衡整合型",
+        "one_liner": "你的情绪与关系信号比较均衡，优势在于稳定和可迁移。",
+        "core_claim": "你通常能同时看见自己、理解他人，并在多数情境中维持可用的回应方式。",
+        "evidence_basis": ["四维分数相对均衡", "无明显单一短板"],
+        "primary_strength": "稳定性和多场景适应能力。",
+        "likely_cost": "容易低估特定高压情境对自己的消耗。",
+        "development_lever": "选择一个真实场景做精细化复盘，而不是泛泛提升。",
+        "do_not_overread": "这不代表你在任何情境中都不会被触发。"
+      },
+      "en": {
+        "title": "Balanced Integration",
+        "one_liner": "Your emotional and relational signals are relatively balanced; stability is the main strength.",
+        "core_claim": "You usually notice yourself, understand others, and maintain usable responses across many contexts.",
+        "evidence_basis": ["Four dimensions are relatively balanced", "No single severe gap stands out"],
+        "primary_strength": "Stability and transfer across contexts.",
+        "likely_cost": "You may underestimate how specific high-pressure contexts drain you.",
+        "development_lever": "Choose one real situation for precise review rather than trying to improve everything.",
+        "do_not_overread": "This does not mean you will never be triggered."
+      }
+    },
+    "high_empathy_low_recovery": {
+      "zh-CN": {
+        "title": "高共情，低恢复",
+        "one_liner": "你容易理解他人感受，但恢复和边界是当前杠杆。",
+        "core_claim": "你可能很快接住别人的情绪，却不一定能及时把对方状态和自己的状态分开。",
+        "evidence_basis": ["EM 明显高于 ER", "共情信号强于恢复信号"],
+        "primary_strength": "对他人状态敏感，容易建立信任。",
+        "likely_cost": "在冲突、求助或高情绪劳动场景中容易被卷入。",
+        "development_lever": "共情之后建立边界和恢复动作。",
+        "do_not_overread": "发展方向不是减少共情，而是让共情更有边界。"
+      },
+      "en": {
+        "title": "High Empathy, Low Recovery",
+        "one_liner": "You tend to understand others quickly, while recovery and boundaries are the current lever.",
+        "core_claim": "You may absorb other people's emotions quickly without separating their state from your own soon enough.",
+        "evidence_basis": ["EM is meaningfully higher than ER", "Empathy signal is stronger than recovery signal"],
+        "primary_strength": "Sensitivity to others and trust building.",
+        "likely_cost": "Conflict, support, and high emotional-labor settings may pull you in too deeply.",
+        "development_lever": "Build boundaries and recovery after empathy.",
+        "do_not_overread": "The goal is not less empathy; it is empathy with clearer boundaries."
+      }
+    },
+    "aware_but_unregulated": {
+      "zh-CN": {
+        "title": "高觉察，调节不足",
+        "one_liner": "你能知道自己怎么了，但不一定能很快恢复。",
+        "core_claim": "你可能很快觉察到被触发，却需要更稳定的暂停、命名和复位动作。",
+        "evidence_basis": ["SA 高于 ER", "自我识别强于调节行动"],
+        "primary_strength": "能捕捉自己的情绪变化。",
+        "likely_cost": "知道问题但仍被情绪带着走。",
+        "development_lever": "把觉察转成具体调节步骤。",
+        "do_not_overread": "觉察本身不是问题，问题在于缺少后续动作。"
+      },
+      "en": {
+        "title": "Aware but Under-Regulated",
+        "one_liner": "You may know what is happening inside, but recovery may lag.",
+        "core_claim": "You may notice triggers quickly and still need steadier pause, labeling, and reset actions.",
+        "evidence_basis": ["SA is higher than ER", "Self-recognition is stronger than regulation action"],
+        "primary_strength": "You can catch emotional shifts in yourself.",
+        "likely_cost": "You may know the issue while still being carried by the emotion.",
+        "development_lever": "Turn awareness into concrete regulation steps.",
+        "do_not_overread": "Awareness is not the problem; the missing step is what follows."
+      }
+    },
+    "calm_but_distant": {
+      "zh-CN": {
+        "title": "冷静稳定，但回应偏远",
+        "one_liner": "你较能维持稳定，但可能不够读懂或回应他人情绪。",
+        "core_claim": "你在压力下可能保持冷静，但关系中的温度和回应需要更多主动性。",
+        "evidence_basis": ["ER 高于 EM", "稳定信号强于共情信号"],
+        "primary_strength": "不容易被情绪场带乱。",
+        "likely_cost": "他人可能感到你不够理解或靠近。",
+        "development_lever": "在稳定之外增加情绪确认。",
+        "do_not_overread": "冷静不等于冷漠，但需要被他人感受到。"
+      },
+      "en": {
+        "title": "Calm but Distant",
+        "one_liner": "You may stay steady while reading or responding to others less actively.",
+        "core_claim": "You may remain calm under pressure, but warmth and relational response need more intentional action.",
+        "evidence_basis": ["ER is higher than EM", "Stability signal is stronger than empathy signal"],
+        "primary_strength": "You are less likely to be disrupted by the emotional field.",
+        "likely_cost": "Others may feel less understood or less met.",
+        "development_lever": "Add emotional acknowledgment to stability.",
+        "do_not_overread": "Calm is not coldness, but it needs to be felt by others."
+      }
+    },
+    "relationship_first_self_later": {
+      "zh-CN": {
+        "title": "关系优先，自我后置",
+        "one_liner": "你能维护关系，但可能晚一步看见自己的真实感受。",
+        "core_claim": "你倾向先让关系顺畅，再处理自己的边界、需求和消耗。",
+        "evidence_basis": ["RM 高于 SA", "关系行动强于自我连接"],
+        "primary_strength": "能维持合作和关系稳定。",
+        "likely_cost": "长期忽略自己的感受和界限。",
+        "development_lever": "在回应别人前先确认自己的底线。",
+        "do_not_overread": "重视关系不是问题，自我后置过久才是风险。"
+      },
+      "en": {
+        "title": "Relationship First, Self Later",
+        "one_liner": "You can maintain relationships, but may notice your own feelings too late.",
+        "core_claim": "You tend to keep the relationship smooth before checking your own boundaries, needs, and cost.",
+        "evidence_basis": ["RM is higher than SA", "Relational action is stronger than self-connection"],
+        "primary_strength": "You can preserve cooperation and relational stability.",
+        "likely_cost": "You may overlook your feelings and limits over time.",
+        "development_lever": "Check your bottom line before responding to others.",
+        "do_not_overread": "Valuing relationships is not the issue; staying self-later for too long is the risk."
+      }
+    },
+    "self_clear_repair_weak": {
+      "zh-CN": {
+        "title": "自我清楚，修复不足",
+        "one_liner": "你知道自己的感受，但关系修复动作需要更清晰。",
+        "core_claim": "你可能能表达立场，却不一定能把表达转成可继续合作的关系动作。",
+        "evidence_basis": ["SA 高于 RM", "自我清楚强于关系修复"],
+        "primary_strength": "有清楚的自我感受和判断。",
+        "likely_cost": "表达后关系可能停在紧张或防御状态。",
+        "development_lever": "把表达、确认和修复连成一组动作。",
+        "do_not_overread": "清楚表达不是攻击，关键是加上修复。"
+      },
+      "en": {
+        "title": "Self-Clear, Repair Weaker",
+        "one_liner": "You may know your feelings while needing clearer relational repair moves.",
+        "core_claim": "You may state your position without always turning it into actions that keep collaboration possible.",
+        "evidence_basis": ["SA is higher than RM", "Self-clarity is stronger than repair"],
+        "primary_strength": "Clear self-feeling and judgment.",
+        "likely_cost": "After expression, the relationship may remain tense or defensive.",
+        "development_lever": "Connect expression, acknowledgment, and repair as one sequence.",
+        "do_not_overread": "Clear expression is not attack; the key is adding repair."
+      }
+    },
+    "steady_collaborator": {
+      "zh-CN": {
+        "title": "稳定协作型",
+        "one_liner": "你在压力下较能维持合作和修复。",
+        "core_claim": "你通常能在情绪波动中保持可沟通，并把关系拉回可协作状态。",
+        "evidence_basis": ["ER 与 RM 都较高", "压力恢复和关系行动同向"],
+        "primary_strength": "压力下仍能保持建设性。",
+        "likely_cost": "可能承担过多协调责任。",
+        "development_lever": "区分需要你修复的事和不该由你承担的事。",
+        "do_not_overread": "稳定协作不意味着你必须负责所有人的情绪。"
+      },
+      "en": {
+        "title": "Steady Collaborator",
+        "one_liner": "You tend to maintain collaboration and repair under pressure.",
+        "core_claim": "You can often stay communicative during emotional shifts and bring the relationship back to workable ground.",
+        "evidence_basis": ["ER and RM are both relatively high", "Recovery and relational action move together"],
+        "primary_strength": "Constructive response under pressure.",
+        "likely_cost": "You may take on too much coordination responsibility.",
+        "development_lever": "Separate what is yours to repair from what is not yours to carry.",
+        "do_not_overread": "Being steady does not make you responsible for everyone else's emotions."
+      }
+    },
+    "sensitive_absorber": {
+      "zh-CN": {
+        "title": "高敏感，易吸收",
+        "one_liner": "你很能感知自己和他人，但也更容易被情绪环境影响。",
+        "core_claim": "你可能同时捕捉自己的细微信号和他人情绪，因此需要更强的区分与恢复。",
+        "evidence_basis": ["SA 与 EM 较高", "ER 相对较低"],
+        "primary_strength": "情绪线索捕捉能力强。",
+        "likely_cost": "容易过度加工或吸收环境情绪。",
+        "development_lever": "区分我的感受、他人的感受和现场压力。",
+        "do_not_overread": "敏感不是脆弱，它需要更好的过滤系统。"
+      },
+      "en": {
+        "title": "Sensitive Absorber",
+        "one_liner": "You notice yourself and others strongly, and may be more affected by the emotional field.",
+        "core_claim": "You may catch subtle self-signals and other people's emotions at the same time, requiring stronger separation and recovery.",
+        "evidence_basis": ["SA and EM are relatively high", "ER is relatively lower"],
+        "primary_strength": "Strong emotional cue detection.",
+        "likely_cost": "You may over-process or absorb environmental emotion.",
+        "development_lever": "Separate my feeling, their feeling, and situational pressure.",
+        "do_not_overread": "Sensitivity is not weakness; it needs a better filtering system."
+      }
+    },
+    "developing_foundation": {
+      "zh-CN": {
+        "title": "基础发展中",
+        "one_liner": "多个情绪与关系信号仍在打基础，适合从一个小场景开始练。",
+        "core_claim": "你的结果提示当前不宜追求复杂技巧，先建立命名、暂停和复盘的基础动作更重要。",
+        "evidence_basis": ["多个维度处于基础或发展区间", "没有稳定优势维度足以独立支撑"],
+        "primary_strength": "可塑性强，适合从低风险场景开始。",
+        "likely_cost": "同时处理太多关系任务会增加压力。",
+        "development_lever": "先练一个最小闭环：识别、暂停、选择下一句。",
+        "do_not_overread": "这不是能力定论，而是当前自我报告信号。"
+      },
+      "en": {
+        "title": "Developing Foundation",
+        "one_liner": "Several emotional and relational signals are still foundational; start with one small context.",
+        "core_claim": "The result suggests starting with basic labeling, pausing, and review before complex techniques.",
+        "evidence_basis": ["Multiple dimensions are foundational or developing", "No stable strength is strong enough to carry the pattern alone"],
+        "primary_strength": "High room for growth through low-risk practice.",
+        "likely_cost": "Handling too many relational tasks at once can increase pressure.",
+        "development_lever": "Practice one small loop: notice, pause, choose the next sentence.",
+        "do_not_overread": "This is not a fixed ability judgment; it is the current self-report signal."
+      }
+    },
+    "low_confidence_result": {
+      "zh-CN": {
+        "title": "本次结果置信度不足",
+        "one_liner": "本次作答质量信号降低了解释置信度，建议先谨慎阅读。",
+        "core_claim": "系统检测到会影响解释稳定性的作答模式，因此不应输出强人格判断。",
+        "evidence_basis": ["质量等级为 C 或 D", "存在速度、长串、极端、中立或不一致信号"],
+        "primary_strength": "仍可作为反思线索。",
+        "likely_cost": "具体维度和画像容易被误读。",
+        "development_lever": "在状态稳定时复测，或只使用低风险建议。",
+        "do_not_overread": "不要把这次结果作为稳定结论。"
+      },
+      "en": {
+        "title": "Lower Confidence Result",
+        "one_liner": "Response-quality signals reduce interpretation confidence; read this result cautiously.",
+        "core_claim": "The system detected response patterns that can reduce interpretive stability, so strong personality claims should not be made.",
+        "evidence_basis": ["Quality level is C or D", "Speed, long-string, extreme, neutral, or inconsistency signals are present"],
+        "primary_strength": "It can still serve as a reflection cue.",
+        "likely_cost": "Specific dimensions and patterns may be overread.",
+        "development_lever": "Retake when stable, or use only low-risk suggestions.",
+        "do_not_overread": "Do not treat this result as a stable conclusion."
+      }
+    }
+  }
+}

@@ -55,6 +55,91 @@ final class Eq60ContentGateTest extends TestCase
         $this->assertCount(102, (array) data_get($report, 'blocks', []));
         $this->assertNotEmpty((array) data_get($report, 'variables_allowlist.allowed', []));
 
+        $assets = $loader->readCompiledJson('report_assets.compiled.json', 'v1');
+        $this->assertIsArray($assets);
+        $this->assertSame('eq_60.report_assets.compiled.v1', (string) ($assets['schema'] ?? ''));
+        $this->assertSame([
+            'scientific_contract',
+            'score_system',
+            'core_formulations',
+            'mechanism_map',
+            'reality_translation',
+            'career_environment',
+            'action_prescriptions',
+            'sjt_bridge',
+        ], array_keys((array) data_get($assets, 'assets', [])));
+
+        foreach ([
+            'balanced_integrated',
+            'high_empathy_low_recovery',
+            'aware_but_unregulated',
+            'calm_but_distant',
+            'relationship_first_self_later',
+            'self_clear_repair_weak',
+            'steady_collaborator',
+            'sensitive_absorber',
+            'developing_foundation',
+            'low_confidence_result',
+        ] as $formulationId) {
+            foreach (['zh-CN', 'en'] as $locale) {
+                $this->assertNotSame('', (string) data_get($assets, 'assets.core_formulations.formulations.'.$formulationId.'.'.$locale.'.title'));
+                $this->assertNotSame('', (string) data_get($assets, 'assets.core_formulations.formulations.'.$formulationId.'.'.$locale.'.core_claim'));
+            }
+        }
+
+        foreach (['SA_ER', 'EM_ER', 'EM_RM', 'SA_RM', 'ER_RM'] as $pair) {
+            foreach (['high_high', 'high_low', 'low_high', 'low_low'] as $state) {
+                $this->assertNotSame('', (string) data_get($assets, 'assets.mechanism_map.pairs.'.$pair.'.'.$state.'.zh-CN.title'));
+                $this->assertNotSame('', (string) data_get($assets, 'assets.mechanism_map.pairs.'.$pair.'.'.$state.'.en.title'));
+            }
+        }
+
+        foreach (['feedback', 'conflict', 'relationship_boundary', 'team_collaboration', 'pressure_recovery', 'career_environment'] as $scene) {
+            $this->assertNotSame('', (string) data_get($assets, 'assets.reality_translation.scenes.'.$scene.'.zh-CN.better_move'));
+            $this->assertNotSame('', (string) data_get($assets, 'assets.reality_translation.scenes.'.$scene.'.en.better_move'));
+        }
+
+        foreach (['interpersonal_density', 'emotional_labor', 'conflict_frequency', 'feedback_intensity', 'autonomy_recovery', 'collaboration_complexity'] as $variable) {
+            foreach (['low', 'medium', 'high'] as $level) {
+                $this->assertNotSame('', (string) data_get($assets, 'assets.career_environment.variables.'.$variable.'.'.$level.'.zh-CN.what_to_verify'));
+                $this->assertNotSame('', (string) data_get($assets, 'assets.career_environment.variables.'.$variable.'.'.$level.'.en.what_to_verify'));
+            }
+        }
+
+        foreach ([
+            'emotion_labeling',
+            'pause_recovery',
+            'feedback_decompression',
+            'empathy_boundary',
+            'repair_after_conflict',
+            'express_without_escalation',
+            'support_without_rescuing',
+            'cold_to_warm_response',
+            'relationship_energy_management',
+            'conflict_deescalation',
+            'self_connection',
+            'retest_reflection',
+        ] as $prescriptionId) {
+            $this->assertNotEmpty((array) data_get($assets, 'assets.action_prescriptions.prescriptions.'.$prescriptionId.'.zh-CN.seven_day_plan'));
+            $this->assertNotEmpty((array) data_get($assets, 'assets.action_prescriptions.prescriptions.'.$prescriptionId.'.en.seven_day_plan'));
+        }
+
+        $sjtAssets = (array) data_get($assets, 'assets.sjt_bridge.assets', []);
+        $plannedSjt = is_array($sjtAssets['eq.sjt_bridge.planned'] ?? null) ? $sjtAssets['eq.sjt_bridge.planned'] : [];
+        $this->assertFalse((bool) data_get($plannedSjt, 'zh-CN.available', true));
+        $this->assertStringContainsString('not MSCEIT', (string) data_get($plannedSjt, 'en.what_it_is_not'));
+
+        foreach (glob(base_path('content_packs/EQ_60/v1/raw/report_assets/*.json')) ?: [] as $eq60AssetPath) {
+            $mirrorPath = str_replace('/EQ_60/', '/EQ_EMOTIONAL_INTELLIGENCE/', $eq60AssetPath);
+            $this->assertFileExists($mirrorPath);
+            $this->assertSame(
+                hash_file('sha256', $eq60AssetPath),
+                hash_file('sha256', $mirrorPath),
+                'EQ_EMOTIONAL_INTELLIGENCE mirror drift: '.basename($eq60AssetPath)
+            );
+        }
+        $this->assertFileExists(base_path('content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json'));
+
         (new ScaleRegistrySeeder)->run();
 
         $zh = $this->getJson('/api/v0.3/scales/EQ_60/questions?locale=zh-CN&region=CN_MAINLAND');

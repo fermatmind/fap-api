@@ -1,0 +1,417 @@
+{
+  "schema": "eq60.report_assets.mechanism_map.v1",
+  "pack_id": "EQ_60",
+  "states": ["high_high", "high_low", "low_high", "low_low"],
+  "pairs": {
+    "SA_ER": {
+      "high_high": {
+        "zh-CN": {
+          "title": "知道自己，也能复位",
+          "why_it_matters": "自我觉察只有接上调节动作，才会变成现实中的稳定回应。",
+          "what_it_feels_like": "你通常能说清自己怎么了，并较快找到下一步。",
+          "strength": "减少反复内耗，把情绪信息转成行动。",
+          "cost": "可能过度依赖自我控制，忽略休息需求。",
+          "development_lever": "让复位动作更轻量。",
+          "micro_action": "用一句话命名情绪，再决定下一句怎么说。"
+        },
+        "en": {
+          "title": "You notice yourself and can reset",
+          "why_it_matters": "Self-awareness becomes real-world stability only when it connects to regulation.",
+          "what_it_feels_like": "You can usually name what is happening and find the next step.",
+          "strength": "Less rumination; more action from emotional information.",
+          "cost": "You may over-rely on self-control and miss rest needs.",
+          "development_lever": "Make reset actions lighter.",
+          "micro_action": "Name the emotion in one sentence, then choose the next sentence."
+        }
+      },
+      "high_low": {
+        "zh-CN": {
+          "title": "知道自己，但恢复跟不上",
+          "why_it_matters": "觉察会放大感受，如果没有调节动作，反而更容易卡住。",
+          "what_it_feels_like": "你知道自己被触发了，但身体和语气不一定跟得上。",
+          "strength": "能早期识别风险信号。",
+          "cost": "容易陷入反复解释或自责。",
+          "development_lever": "把觉察后 30 秒变成固定流程。",
+          "micro_action": "暂停、命名、喝水或离开屏幕 60 秒。"
+        },
+        "en": {
+          "title": "You notice yourself, but recovery lags",
+          "why_it_matters": "Awareness can intensify feelings when no regulation step follows.",
+          "what_it_feels_like": "You know you are triggered, but your body or tone may not catch up.",
+          "strength": "Early detection of risk signals.",
+          "cost": "You may loop in explanation or self-blame.",
+          "development_lever": "Turn the first 30 seconds after awareness into a routine.",
+          "micro_action": "Pause, label, drink water, or step away from the screen for 60 seconds."
+        }
+      },
+      "low_high": {
+        "zh-CN": {
+          "title": "能稳定，但不总知道原因",
+          "why_it_matters": "调节有效，但如果不理解触发点，模式会重复出现。",
+          "what_it_feels_like": "你能忍住或恢复，但事后未必知道自己为何被影响。",
+          "strength": "压力下不易失控。",
+          "cost": "复盘不足会让同类问题反复。",
+          "development_lever": "补上事后命名。",
+          "micro_action": "事后写下：刚才我真正介意的是什么。"
+        },
+        "en": {
+          "title": "You can stabilize without always knowing why",
+          "why_it_matters": "Regulation helps, but without understanding triggers the pattern repeats.",
+          "what_it_feels_like": "You can hold or recover, but may not know what affected you.",
+          "strength": "Less likely to lose control under pressure.",
+          "cost": "Weak review lets similar problems recur.",
+          "development_lever": "Add after-action labeling.",
+          "micro_action": "Afterward, write: what did I actually care about?"
+        }
+      },
+      "low_low": {
+        "zh-CN": {
+          "title": "识别和恢复都需要打底",
+          "why_it_matters": "如果既难识别也难复位，复杂场景会迅速耗尽资源。",
+          "what_it_feels_like": "你可能到事后才发现自己已经很累或很烦。",
+          "strength": "适合从最小动作建立可预测性。",
+          "cost": "高压沟通中容易被动应对。",
+          "development_lever": "先练一个简单情绪词表。",
+          "micro_action": "每天一次选择一个情绪词，并写下触发场景。"
+        },
+        "en": {
+          "title": "Both recognition and recovery need foundations",
+          "why_it_matters": "When both noticing and resetting are hard, complex situations drain resources quickly.",
+          "what_it_feels_like": "You may realize only afterward that you were tired or irritated.",
+          "strength": "Small actions can build predictability.",
+          "cost": "High-pressure communication may become reactive.",
+          "development_lever": "Start with a simple emotion vocabulary.",
+          "micro_action": "Once a day, choose one emotion word and write the trigger."
+        }
+      }
+    },
+    "EM_ER": {
+      "high_high": {
+        "zh-CN": {
+          "title": "能理解别人，也能保留自己",
+          "why_it_matters": "共情和恢复并存时，理解他人不必以自我消耗为代价。",
+          "what_it_feels_like": "你能靠近他人情绪，也能及时回到自己的节奏。",
+          "strength": "支持他人而不容易被吞没。",
+          "cost": "可能被期待持续承担情绪支持。",
+          "development_lever": "明确支持边界。",
+          "micro_action": "先确认对方需要倾听、建议还是具体帮助。"
+        },
+        "en": {
+          "title": "You understand others and keep yourself",
+          "why_it_matters": "When empathy and recovery coexist, understanding others does not require self-drain.",
+          "what_it_feels_like": "You can approach others' emotions and return to your own rhythm.",
+          "strength": "Support without being swallowed by the situation.",
+          "cost": "Others may expect constant emotional support.",
+          "development_lever": "Make support boundaries explicit.",
+          "micro_action": "Ask whether they need listening, advice, or concrete help."
+        }
+      },
+      "high_low": {
+        "zh-CN": {
+          "title": "共情强，边界和恢复偏弱",
+          "why_it_matters": "你越能理解别人，越需要知道哪些情绪不是你要承担的。",
+          "what_it_feels_like": "别人难受时，你可能很快进入帮助或自责状态。",
+          "strength": "容易让人感到被看见。",
+          "cost": "容易吸收过多情绪劳动。",
+          "development_lever": "共情后加一句边界确认。",
+          "micro_action": "在心里说：这是对方的感受，我可以支持，但不需要代替。"
+        },
+        "en": {
+          "title": "Strong empathy, weaker boundaries and recovery",
+          "why_it_matters": "The more you understand others, the more you need to know what is not yours to carry.",
+          "what_it_feels_like": "When someone is distressed, you may quickly move into helping or self-blame.",
+          "strength": "People often feel seen by you.",
+          "cost": "You may absorb too much emotional labor.",
+          "development_lever": "Add one boundary check after empathy.",
+          "micro_action": "Say internally: this is their feeling; I can support without replacing them."
+        }
+      },
+      "low_high": {
+        "zh-CN": {
+          "title": "稳定有余，情绪读人不足",
+          "why_it_matters": "稳定能保护你，但关系需要对他人情绪的基本回应。",
+          "what_it_feels_like": "你能保持冷静，却可能错过对方真正介意的点。",
+          "strength": "不容易被外部情绪带乱。",
+          "cost": "他人可能觉得你太理性或太远。",
+          "development_lever": "先回应感受，再处理事实。",
+          "micro_action": "说一句：我听到这件事让你很不舒服。"
+        },
+        "en": {
+          "title": "Steady, but less emotionally attuned",
+          "why_it_matters": "Stability protects you, but relationships need basic emotional acknowledgment.",
+          "what_it_feels_like": "You stay calm but may miss what the other person really cares about.",
+          "strength": "External emotion disrupts you less.",
+          "cost": "Others may experience you as too rational or distant.",
+          "development_lever": "Respond to feeling before facts.",
+          "micro_action": "Say: I hear that this felt uncomfortable for you."
+        }
+      },
+      "low_low": {
+        "zh-CN": {
+          "title": "理解他人与恢复都需降低难度",
+          "why_it_matters": "当共情和恢复都弱时，先降低情境复杂度比追求技巧更有效。",
+          "what_it_feels_like": "强情绪场景可能让你想躲开或快速结束。",
+          "strength": "可从低风险互动开始建立经验。",
+          "cost": "高情绪劳动场景消耗明显。",
+          "development_lever": "用固定句式承接基础情绪。",
+          "micro_action": "先说：我需要一点时间理解你说的。"
+        },
+        "en": {
+          "title": "Lower complexity for empathy and recovery",
+          "why_it_matters": "When both empathy and recovery are weaker, reducing complexity helps more than chasing advanced technique.",
+          "what_it_feels_like": "High-emotion situations may make you want to avoid or end quickly.",
+          "strength": "Low-risk interactions can build experience.",
+          "cost": "High emotional-labor settings are draining.",
+          "development_lever": "Use a stable sentence to receive basic emotion.",
+          "micro_action": "Say: I need a little time to understand what you mean."
+        }
+      }
+    },
+    "EM_RM": {
+      "high_high": {
+        "zh-CN": {
+          "title": "读懂别人，也能处理关系",
+          "why_it_matters": "理解和行动结合时，共情更容易变成有效协作。",
+          "what_it_feels_like": "你能读懂现场气氛，并推动关系回到可沟通状态。",
+          "strength": "适合复杂协作和关系修复。",
+          "cost": "可能过度承担协调者角色。",
+          "development_lever": "把责任边界说清楚。",
+          "micro_action": "问：这件事我能负责哪一部分？"
+        },
+        "en": {
+          "title": "You read others and manage the relationship",
+          "why_it_matters": "When understanding and action combine, empathy becomes workable collaboration.",
+          "what_it_feels_like": "You can read the room and move the relationship back to communication.",
+          "strength": "Useful for complex collaboration and repair.",
+          "cost": "You may overtake the coordinator role.",
+          "development_lever": "Clarify responsibility boundaries.",
+          "micro_action": "Ask: which part of this is mine to own?"
+        }
+      },
+      "high_low": {
+        "zh-CN": {
+          "title": "读懂别人，但关系动作不足",
+          "why_it_matters": "看见对方感受后，还需要把理解转成一句话或一个动作。",
+          "what_it_feels_like": "你知道对方在意什么，却不一定知道怎么回应。",
+          "strength": "关系判断较细腻。",
+          "cost": "理解停在心里，别人感受不到。",
+          "development_lever": "把理解外化成确认句。",
+          "micro_action": "说：我理解你在意的是 X，而不是只是在反对。"
+        },
+        "en": {
+          "title": "You read others, but action is weaker",
+          "why_it_matters": "After seeing someone's feeling, understanding needs to become a sentence or action.",
+          "what_it_feels_like": "You know what matters to them but may not know how to respond.",
+          "strength": "Nuanced relational judgment.",
+          "cost": "Understanding stays inside and may not be felt.",
+          "development_lever": "Externalize understanding as confirmation.",
+          "micro_action": "Say: I understand that X matters to you, not just that you disagree."
+        }
+      },
+      "low_high": {
+        "zh-CN": {
+          "title": "会行动，但可能没读准情绪",
+          "why_it_matters": "关系动作如果没有情绪理解，容易变成流程化处理。",
+          "what_it_feels_like": "你会推进解决，但对方可能觉得重点没被接住。",
+          "strength": "能快速进入处理模式。",
+          "cost": "修复动作可能不够贴合。",
+          "development_lever": "行动前先做一次情绪校准。",
+          "micro_action": "问：这件事里你最难受的是哪一部分？"
+        },
+        "en": {
+          "title": "You act, but may miss the emotion",
+          "why_it_matters": "Relational action without emotional understanding can become procedural.",
+          "what_it_feels_like": "You move into solving while the other person may feel the point was missed.",
+          "strength": "Fast entry into action mode.",
+          "cost": "Repair may not fit the real concern.",
+          "development_lever": "Calibrate emotion before action.",
+          "micro_action": "Ask: which part of this felt hardest for you?"
+        }
+      },
+      "low_low": {
+        "zh-CN": {
+          "title": "关系理解和行动都需要脚手架",
+          "why_it_matters": "复杂关系不能只靠临场反应，需要可复用脚本。",
+          "what_it_feels_like": "你可能不知道对方为何反应强，也不知道下一句怎么说。",
+          "strength": "固定脚本能快速提升可用性。",
+          "cost": "临场压力下容易沉默或回避。",
+          "development_lever": "先学低风险确认句。",
+          "micro_action": "说：我可能没完全理解，你能再说一次你的重点吗？"
+        },
+        "en": {
+          "title": "Relational understanding and action need scaffolding",
+          "why_it_matters": "Complex relationships need reusable scripts, not only improvisation.",
+          "what_it_feels_like": "You may not know why they reacted strongly or what to say next.",
+          "strength": "Stable scripts can improve usability quickly.",
+          "cost": "Under pressure, silence or avoidance may appear.",
+          "development_lever": "Start with low-risk confirmation lines.",
+          "micro_action": "Say: I may not fully understand; can you restate your main point?"
+        }
+      }
+    },
+    "SA_RM": {
+      "high_high": {
+        "zh-CN": {
+          "title": "能表达自己，也能维护关系",
+          "why_it_matters": "自我清楚和关系行动结合时，边界更容易被听见。",
+          "what_it_feels_like": "你能说出自己的感受，同时照顾沟通继续。",
+          "strength": "适合边界、反馈和修复场景。",
+          "cost": "可能被期待承担沟通示范。",
+          "development_lever": "让表达更简洁。",
+          "micro_action": "用我感到、我需要、我建议三句完成表达。"
+        },
+        "en": {
+          "title": "You express yourself and maintain the relationship",
+          "why_it_matters": "When self-clarity and relational action combine, boundaries are easier to hear.",
+          "what_it_feels_like": "You can state your feeling while keeping communication possible.",
+          "strength": "Useful in boundaries, feedback, and repair.",
+          "cost": "You may be expected to model communication for others.",
+          "development_lever": "Make expression more concise.",
+          "micro_action": "Use: I feel, I need, I suggest."
+        }
+      },
+      "high_low": {
+        "zh-CN": {
+          "title": "自我清楚，但关系承接不足",
+          "why_it_matters": "表达自己之后，需要给关系一个继续对话的入口。",
+          "what_it_feels_like": "你能说清立场，但对方可能进入防御。",
+          "strength": "不容易丢失自我。",
+          "cost": "表达可能被听成指责。",
+          "development_lever": "表达后加一句共同目标。",
+          "micro_action": "说：我讲这个是希望我们下次更好配合。"
+        },
+        "en": {
+          "title": "Self-clear, but relational holding is weaker",
+          "why_it_matters": "After expressing yourself, the relationship needs an entry point to continue.",
+          "what_it_feels_like": "You can state your position, but the other person may become defensive.",
+          "strength": "You are less likely to lose yourself.",
+          "cost": "Expression may be heard as blame.",
+          "development_lever": "Add a shared goal after expression.",
+          "micro_action": "Say: I am raising this so we can work better next time."
+        }
+      },
+      "low_high": {
+        "zh-CN": {
+          "title": "会维护关系，但自我容易后置",
+          "why_it_matters": "如果只维护关系，不表达自我，长期会积累消耗。",
+          "what_it_feels_like": "你能把场面圆回来，但之后才发现自己不舒服。",
+          "strength": "关系稳定和协作维持能力强。",
+          "cost": "自己的需求容易被延后。",
+          "development_lever": "回应前先问自己底线。",
+          "micro_action": "在答应前停三秒，确认我是否真的可以。"
+        },
+        "en": {
+          "title": "You maintain relationships, but self may come later",
+          "why_it_matters": "If you only preserve the relationship and do not express yourself, cost accumulates.",
+          "what_it_feels_like": "You smooth the moment, then later notice discomfort.",
+          "strength": "Strong relational stability and collaboration maintenance.",
+          "cost": "Your needs may be delayed.",
+          "development_lever": "Check your boundary before responding.",
+          "micro_action": "Pause three seconds before agreeing and ask whether you truly can."
+        }
+      },
+      "low_low": {
+        "zh-CN": {
+          "title": "自我表达和关系修复都需要练习",
+          "why_it_matters": "当自我和关系动作都弱时，先从低风险表达开始。",
+          "what_it_feels_like": "你可能既不想说破，也不知道怎么收场。",
+          "strength": "可用结构化脚本降低难度。",
+          "cost": "问题容易拖延或变成误会。",
+          "development_lever": "练习一句低强度真实表达。",
+          "micro_action": "说：这件事我还需要想一下，晚点回复你。"
+        },
+        "en": {
+          "title": "Self-expression and repair both need practice",
+          "why_it_matters": "When self and relational moves are both weaker, start with low-risk expression.",
+          "what_it_feels_like": "You may not want to say it directly and may not know how to close the loop.",
+          "strength": "Structured scripts can lower difficulty.",
+          "cost": "Issues may be delayed or become misunderstandings.",
+          "development_lever": "Practice one low-intensity truthful sentence.",
+          "micro_action": "Say: I need to think about this and will reply later."
+        }
+      }
+    },
+    "ER_RM": {
+      "high_high": {
+        "zh-CN": {
+          "title": "压力下仍能沟通和修复",
+          "why_it_matters": "恢复能力和关系行动结合，是冲突后继续合作的关键。",
+          "what_it_feels_like": "你能先稳住自己，再把对话拉回问题本身。",
+          "strength": "冲突恢复和协作韧性强。",
+          "cost": "可能成为默认救火者。",
+          "development_lever": "把修复责任分给双方。",
+          "micro_action": "问：我们各自下一步能做什么？"
+        },
+        "en": {
+          "title": "You can communicate and repair under pressure",
+          "why_it_matters": "Recovery plus relational action is key to collaboration after conflict.",
+          "what_it_feels_like": "You can steady yourself and bring the conversation back to the issue.",
+          "strength": "Strong conflict recovery and collaborative resilience.",
+          "cost": "You may become the default fixer.",
+          "development_lever": "Share repair responsibility.",
+          "micro_action": "Ask: what can each of us do next?"
+        }
+      },
+      "high_low": {
+        "zh-CN": {
+          "title": "自己能稳住，但关系未必修复",
+          "why_it_matters": "你恢复了，不代表对话或关系已经恢复。",
+          "what_it_feels_like": "你可能觉得事情过去了，但对方还停在情绪里。",
+          "strength": "能减少个人失控。",
+          "cost": "关系裂缝可能被低估。",
+          "development_lever": "复位后做一次关系确认。",
+          "micro_action": "说：刚才那段对话你现在感觉怎么样？"
+        },
+        "en": {
+          "title": "You stabilize yourself, but repair may not happen",
+          "why_it_matters": "Your recovery does not mean the conversation or relationship has recovered.",
+          "what_it_feels_like": "You may feel it has passed while the other person is still in it.",
+          "strength": "Less personal escalation.",
+          "cost": "Relationship cracks may be underestimated.",
+          "development_lever": "Check the relationship after reset.",
+          "micro_action": "Say: how are you feeling about that conversation now?"
+        }
+      },
+      "low_high": {
+        "zh-CN": {
+          "title": "想修复关系，但压力下难稳定",
+          "why_it_matters": "关系意愿很重要，但压力未复位时动作容易变形。",
+          "what_it_feels_like": "你想把事情讲好，却可能越讲越急。",
+          "strength": "有合作和修复动机。",
+          "cost": "调节不足会削弱修复效果。",
+          "development_lever": "先复位，再修复。",
+          "micro_action": "先暂停十分钟，再发出修复信息。"
+        },
+        "en": {
+          "title": "You want repair, but pressure makes stability harder",
+          "why_it_matters": "Repair motivation matters, but actions distort when you have not reset.",
+          "what_it_feels_like": "You want to talk it through, but may become more urgent as you speak.",
+          "strength": "Motivation for cooperation and repair.",
+          "cost": "Weak regulation can reduce repair effectiveness.",
+          "development_lever": "Reset before repair.",
+          "micro_action": "Pause for ten minutes before sending the repair message."
+        }
+      },
+      "low_low": {
+        "zh-CN": {
+          "title": "压力和关系修复都需要最小闭环",
+          "why_it_matters": "高压关系场景中，需要简单、可重复的停顿和回到问题的动作。",
+          "what_it_feels_like": "冲突中你可能沉默、爆发或想尽快结束。",
+          "strength": "小流程能显著降低失控概率。",
+          "cost": "没有流程时关系容易积累未修复问题。",
+          "development_lever": "建立冲突暂停协议。",
+          "micro_action": "说：我需要十分钟冷静，然后我们只谈下一步。"
+        },
+        "en": {
+          "title": "Pressure and repair need a minimal loop",
+          "why_it_matters": "High-pressure relational situations need simple repeatable pauses and return-to-issue moves.",
+          "what_it_feels_like": "In conflict, you may go silent, escalate, or want to end quickly.",
+          "strength": "A small process can reduce escalation risk.",
+          "cost": "Without a process, unrepaired issues accumulate.",
+          "development_lever": "Create a conflict pause protocol.",
+          "micro_action": "Say: I need ten minutes to cool down, then let's discuss only the next step."
+        }
+      }
+    }
+  }
+}
