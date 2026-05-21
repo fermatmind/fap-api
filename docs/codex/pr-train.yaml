@@ -7735,3 +7735,260 @@ prs:
     external_api_credentials_required: false
     scheduler_activation: false
     next_task: SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT
+
+  - id: BACKEND-DEPLOY-TARGET-ALIYUN-01
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-QUEUE-01
+    branch: codex/backend-deploy-target-aliyun-01
+    base: main
+    title: "BACKEND-DEPLOY-TARGET-ALIYUN-01｜Point production backend deploy target at Aliyun ECS"
+    name: "Point production backend deploy target at Aliyun ECS"
+    train_scope: aliyun_backend_migration
+    risk_level: L2
+    type: backend deploy config / ops ledger PR
+    scope:
+      - Retarget production backend deploy defaults from retired Tencent Node3 to Aliyun ECS `139.224.130.204`.
+      - Keep production deploys fail-closed if `DEPLOY_HOST_PROD` is set to Node3 `122.152.221.126`.
+      - Document the Aliyun release layout bootstrap and linked production cutover evidence.
+      - Register the linked Node3 retirement, Ops DNS migration, and Search Channel production migration ledger tasks.
+    allowed_paths:
+      - .github/workflows/deploy.yml
+      - README_DEPLOY.md
+      - deploy.php
+      - docs/04-ops/backend-deploy-target-aliyun-01.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy from GitHub Actions, merge a release, rotate secrets, delete Node3 resources, stop Node3 nginx, or change fap-web runtime code in this PR.
+      - Enable live search submission, scheduler submission jobs, or external search API calls.
+    validation:
+      - php -l deploy.php
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('.github/workflows/deploy.yml').read_text()); yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - rg -n "122\\.152\\.221\\.126|139\\.224\\.130\\.204|DEPLOY_HOST_PROD|HEALTHCHECK_URL_PROD|AUTH_GUEST_CHECK_URL_PROD" deploy.php .github/workflows/deploy.yml README_DEPLOY.md docs/04-ops/backend-deploy-target-aliyun-01.md
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: NODE3-RETIREMENT-PREFLIGHT
+
+  - id: NODE3-RETIREMENT-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - BACKEND-DEPLOY-TARGET-ALIYUN-01
+    branch: codex/backend-deploy-target-aliyun-01
+    base: main
+    title: "NODE3-RETIREMENT-PREFLIGHT｜Confirm Node3 is safe to retire"
+    name: "Confirm Node3 is safe to retire"
+    train_scope: aliyun_backend_migration
+    risk_level: L2
+    type: production ops ledger
+    scope:
+      - Confirm public API/Ops traffic moved to Aliyun before stopping old Node3 queue and scheduler processes.
+      - Stop only Node3 Laravel scheduler and queue workers after DNS cutover verification.
+      - Leave Node3 nginx online temporarily for stale DNS-cache tail traffic.
+    allowed_paths:
+      - docs/04-ops/backend-deploy-target-aliyun-01.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Delete, power off, or reset Node3.
+      - Stop Node3 nginx, MySQL, Redis, SSH, or unknown webhook listeners without a separate approval.
+    validation:
+      - Node3 supervisor shows fap queue groups stopped.
+      - Node3 ubuntu and www-data Laravel scheduler cron lines are commented with `NODE3_RETIRED`.
+      - api.fermatmind.com and ops.fermatmind.com resolve to Aliyun `139.224.130.204`.
+    merge_policy:
+      github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: OPS-DOMAIN-MIGRATION-01
+
+  - id: OPS-DOMAIN-MIGRATION-01
+    repo: fap-api
+    depends_on:
+      - BACKEND-DEPLOY-TARGET-ALIYUN-01
+    branch: codex/backend-deploy-target-aliyun-01
+    base: main
+    title: "OPS-DOMAIN-MIGRATION-01｜Move ops.fermatmind.com to Aliyun backend"
+    name: "Move ops.fermatmind.com to Aliyun backend"
+    train_scope: aliyun_backend_migration
+    risk_level: L2
+    type: production ops ledger
+    scope:
+      - Install and verify the `ops.fermatmind.com` TLS runtime on Aliyun.
+      - Move DNSPod A record for `ops.fermatmind.com` from Node3 to Aliyun `139.224.130.204`.
+      - Verify public DNS, TLS SAN, and Ops login HTTP response after cutover.
+    allowed_paths:
+      - docs/04-ops/backend-deploy-target-aliyun-01.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change frontend runtime code, rotate admin credentials, or remove Node3 before DNS and runtime verification.
+    validation:
+      - DNSPod A record `ops.fermatmind.com` equals `139.224.130.204`.
+      - Public DNS resolvers return Aliyun `139.224.130.204`.
+      - "`ops.fermatmind.com` TLS certificate SAN includes `ops.fermatmind.com`."
+      - "`https://ops.fermatmind.com/ops/login` returns 200 from Aliyun runtime."
+    merge_policy:
+      github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT
+
+  - id: SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-QUEUE-01
+      - BACKEND-DEPLOY-TARGET-ALIYUN-01
+    branch: codex/backend-deploy-target-aliyun-01
+    base: main
+    title: "SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT｜Verify seo_intel production readiness"
+    name: "Verify seo_intel production readiness"
+    train_scope: search_channel_queue_runtime
+    risk_level: L2
+    type: production preflight ledger
+    scope:
+      - Verify Aliyun backend can reach `seo_intel` RDS.
+      - Verify `seo_urls`, `seo_url_entities`, and `seo_issue_queue` minimum production counts.
+      - Run no-write Search Channel Queue production dry-run before any schema/write operation.
+    allowed_paths:
+      - docs/04-ops/backend-deploy-target-aliyun-01.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run schema migration, enable write gate, or enqueue items in this preflight task.
+    validation:
+      - Aliyun ECS TCP connection to `rm-uf6u2498t7nk2faya.rwlb.rds.aliyuncs.com:3306` succeeds.
+      - "`migrate:status --database=seo_intel --path=database/migrations/seo_intel` runs."
+      - "`seo_urls >= 9`, `seo_url_entities >= 9`, and `seo_issue_queue >= 5`."
+      - "`seo-intel:search-channel-queue --dry-run --no-write --json --limit=3` succeeds with no writes and no external calls."
+    merge_policy:
+      github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION
+
+  - id: SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT
+    branch: codex/backend-deploy-target-aliyun-01
+    base: main
+    title: "SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION｜Run seo_intel queue schema migration"
+    name: "Run seo_intel queue schema migration"
+    train_scope: search_channel_queue_runtime
+    risk_level: L2
+    type: production migration ledger
+    scope:
+      - Run only the isolated `database/migrations/seo_intel` production migration path.
+      - Create Search Channel Queue batch, item, and event tables in `seo_intel`.
+      - Keep live search submission disabled.
+    allowed_paths:
+      - docs/04-ops/backend-deploy-target-aliyun-01.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run full default Laravel migrations or change business DB schema.
+      - Submit URLs or call external search APIs.
+    validation:
+      - "`migrate --pretend --database=seo_intel --path=database/migrations/seo_intel --force` shows only Search Channel Queue tables."
+      - "`migrate --database=seo_intel --path=database/migrations/seo_intel --force` succeeds."
+      - "`migrate:status --database=seo_intel --path=database/migrations/seo_intel` shows `2026_05_20_220000_create_seo_search_channel_queue_tables` as ran."
+    merge_policy:
+      github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: true
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: SEARCH-CHANNEL-QUEUE-01-PROD-DRY-RUN
+
+  - id: SEARCH-CHANNEL-QUEUE-01-PROD-DRY-RUN
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION
+    branch: codex/backend-deploy-target-aliyun-01
+    base: main
+    title: "SEARCH-CHANNEL-QUEUE-01-PROD-DRY-RUN｜Run production no-write queue dry-runs"
+    name: "Run production no-write queue dry-runs"
+    train_scope: search_channel_queue_runtime
+    risk_level: L2
+    type: production dry-run ledger
+    scope:
+      - Run Search Channel Queue production dry-runs after schema migration.
+      - Verify no writes occur with the write gate disabled and `--no-write` set.
+    allowed_paths:
+      - docs/04-ops/backend-deploy-target-aliyun-01.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Enable write gate or submit URLs.
+    validation:
+      - "`seo-intel:search-channel-queue --dry-run --no-write --json --limit=20` succeeds."
+      - "`seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=20` succeeds."
+      - "`seo-intel:search-channel-queue --dry-run --no-write --json --page-type=research_report --limit=20` succeeds."
+    merge_policy:
+      github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE
+
+  - id: SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-QUEUE-01-PROD-DRY-RUN
+    branch: codex/backend-deploy-target-aliyun-01
+    base: main
+    title: "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE｜Canary enqueue one no-submit queue item"
+    name: "Canary enqueue one no-submit queue item"
+    train_scope: search_channel_queue_runtime
+    risk_level: L2
+    type: production canary ledger
+    scope:
+      - Enable the Search Channel Queue write gate only for one command session.
+      - Canary enqueue one `indexnow` dry-run-ready queue item with no live submission.
+      - Verify queue batch, item, and event counts after the write.
+    allowed_paths:
+      - docs/04-ops/backend-deploy-target-aliyun-01.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Persist `SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED=true`.
+      - Submit URLs, call external search APIs, or enable scheduler.
+    validation:
+      - "`SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED=true php artisan seo-intel:search-channel-queue --json --channel=indexnow --limit=1` succeeds."
+      - Output reports `writes_committed=true`, `written_items=1`, `external_calls_attempted=false`, and `search_submission_attempted=false`.
+      - Queue tables contain one batch, one item, and two audit events after canary.
+    merge_policy:
+      github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false

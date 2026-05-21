@@ -234,11 +234,11 @@ $stagingIdentityFile = resolveDeployIdentityFile('DEPLOY_IDENTITY_FILE_STG', [
  */
 /** @var \Deployer\Host\Host $productionHost */
 $productionHost = host('production')
-    ->setHostname(getenv('DEPLOY_HOST_PROD') ?: '122.152.221.126')
+    ->setHostname(getenv('DEPLOY_HOST_PROD') ?: '139.224.130.204')
     ->setRemoteUser(getenv('DEPLOY_USER_PROD') ?: 'ubuntu')
     ->setPort((int) (getenv('DEPLOY_PORT_PROD') ?: 22))
     ->set('deploy_path', getenv('DEPLOY_PATH_PROD') ?: '/var/www/fap-api')
-    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_PROD') ?: 'fermatmind.com')
+    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_PROD') ?: 'api.fermatmind.com')
     ->set('static_media_healthcheck_host', getenv('STATIC_MEDIA_HEALTHCHECK_HOST_PROD') ?: 'api.fermatmind.com')
     ->set('scale_lookup_healthcheck_host', getenv('SCALE_LOOKUP_HEALTHCHECK_HOST_PROD') ?: 'api.fermatmind.com')
     ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_PROD') ?: 'ops.fermatmind.com')
