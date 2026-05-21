@@ -6747,7 +6747,7 @@
       "branch": "codex/2786-cn-proxy-public-owner-pr-train-1",
       "title": "fix(api): gate reviewed CN proxy public owner plan",
       "name": "Gate reviewed CN proxy public owner plan for 2786",
-      "status": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
       "depends_on": [
         "REPAIR-2786-FINAL-PUBLIC-RESOLUTION-PARTITION-1",
         "CN-PROXY-AUTHORITY-POLICY-DECISION-1",
@@ -6777,7 +6777,7 @@
         "do not mark CN proxy rows as canonical rollout candidates"
       ],
       "commit_sha": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1538",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -15957,6 +15957,11 @@
           "at": "2026-05-22T01:36:00+08:00",
           "status": "committed",
           "summary": "Committed scoped PR2 implementation at 4ef877dc690e3990a2f86939ef9ac2516508760b."
+        },
+        {
+          "at": "2026-05-22T01:40:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR #1538 for the Filament native dashboard UI. GitHub checks are pending."
         }
       ]
     },
