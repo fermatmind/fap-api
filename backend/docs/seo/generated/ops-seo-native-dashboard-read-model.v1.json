@@ -1,0 +1,74 @@
+{
+  "version": "ops-seo-native-dashboard-read-model.v1",
+  "task": "OPS-SEO-NATIVE-DASH-01",
+  "runtime": "ops_seo_native_dashboard",
+  "read_only": true,
+  "connection": "seo_intel",
+  "implementation_shape": "service_only_read_model",
+  "services": [
+    "SeoDashboardOverviewReadService",
+    "SeoUrlTruthReadService",
+    "SeoIssueQueueReadService",
+    "SeoSearchChannelQueueReadService"
+  ],
+  "allowed_tables": [
+    "seo_urls",
+    "seo_url_entities",
+    "seo_issue_queue",
+    "seo_search_channel_queue_items",
+    "seo_search_channel_queue_batches",
+    "seo_search_channel_queue_events"
+  ],
+  "allowed_outputs": {
+    "overview": [
+      "heartbeat_counts",
+      "safety_counts"
+    ],
+    "url_truth": [
+      "page_entity_type_distribution",
+      "locale_distribution",
+      "source_authority_distribution",
+      "indexability_state_distribution"
+    ],
+    "issue_queue": [
+      "issue_type_distribution",
+      "severity_distribution",
+      "status_distribution",
+      "recent_safe_rows"
+    ],
+    "search_channel_queue": [
+      "channel_distribution",
+      "approval_state_distribution",
+      "execution_state_distribution",
+      "event_type_summary",
+      "recent_safe_rows"
+    ]
+  },
+  "forbidden_fields": [
+    "metadata_json",
+    "attributes_json",
+    "event_payload",
+    "raw_evidence",
+    "raw_payload",
+    "raw_ip",
+    "raw_user_agent",
+    "cookie",
+    "token",
+    "email",
+    "order_id",
+    "payment_id",
+    "attempt_id",
+    "provider_payload"
+  ],
+  "forbidden_sources": [
+    "business_db",
+    "tencent_rds_fap_prod",
+    "node2_local_db",
+    "raw_crawler_logs",
+    "metabase"
+  ],
+  "no_writes": true,
+  "no_metabase": true,
+  "no_raw_sql_for_operators": true,
+  "next_task": "OPS-SEO-NATIVE-DASH-02"
+}

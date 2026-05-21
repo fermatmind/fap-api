@@ -15787,6 +15787,155 @@
           "summary": "Registered native Ops SEO dashboard foundation task; read-only dashboard foundation only, no live submission actions or frontend SEO authority changes."
         }
       ]
+    },
+    "OPS-SEO-NATIVE-DASH-01": {
+      "repo": "fap-api",
+      "branch": "codex/ops-seo-native-dash-01-read-model",
+      "status": "local_validation_passed",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_bootstrap": {
+          "status": "pass",
+          "summary": "User explicitly authorized adding scoped manifest/state entries before implementation."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "summary": "Changed files are confined to scoped Ops SEO dashboard read-model services, focused SeoIntel feature test, docs/generated artifact, and PR-train metadata."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboard",
+          "summary": "5 tests passed, 54 assertions."
+        },
+        "seo_intel_suite": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "summary": "280 tests passed, 4506 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "summary": "Route list rendered successfully."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/SeoIntel/OpsDashboard tests/Feature/SeoIntel/SeoIntelOpsSeoNativeDashboardReadModelTest.php",
+          "summary": "Scoped Pint check passed."
+        },
+        "bigfive_runtime_freeze_guard": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff",
+          "summary": "Runtime freeze guard passed without needing an allowlist update."
+        },
+        "json_yaml_diff": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/ops-seo-native-dashboard-read-model.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\" && git diff --check && git diff --cached --check",
+          "summary": "Generated JSON, PR-train state JSON, PR-train YAML, and whitespace diff checks passed."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-22T00:20:00+08:00",
+          "status": "registered",
+          "summary": "Registered backend read-model PR for native /ops/seo dashboard with read-only seo_intel aggregates and safe-field boundary."
+        },
+        {
+          "at": "2026-05-22T00:28:00+08:00",
+          "status": "in_progress",
+          "summary": "Created branch codex/ops-seo-native-dash-01-read-model and implemented read-only Ops SEO dashboard services, focused test coverage, and generated docs/artifact."
+        },
+        {
+          "at": "2026-05-22T00:40:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Scoped validations passed for focused SeoIntel dashboard tests, full SeoIntel suite, route list, Pint, BigFive runtime freeze guard, JSON/YAML checks, and git diff checks."
+        }
+      ]
+    },
+    "OPS-SEO-NATIVE-DASH-02": {
+      "repo": "fap-api",
+      "branch": "codex/ops-seo-native-dash-02-filament-ui",
+      "status": "registered",
+      "depends_on": [
+        "OPS-SEO-NATIVE-DASH-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pending",
+          "summary": "Cannot start until OPS-SEO-NATIVE-DASH-01 is merged."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-22T00:20:00+08:00",
+          "status": "registered",
+          "summary": "Registered Filament UI PR for native /ops/seo dashboard. Waiting for read-model merge."
+        }
+      ]
+    },
+    "OPS-SEO-NATIVE-DASH-03": {
+      "repo": "fap-api",
+      "branch": "codex/ops-seo-native-dash-03-detail-panels",
+      "status": "registered",
+      "depends_on": [
+        "OPS-SEO-NATIVE-DASH-02"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pending",
+          "summary": "Cannot start until OPS-SEO-NATIVE-DASH-02 is merged."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-22T00:20:00+08:00",
+          "status": "registered",
+          "summary": "Registered detail panel PR for native /ops/seo dashboard. Waiting for UI merge."
+        }
+      ]
+    },
+    "OPS-SEO-NATIVE-DASH-04": {
+      "repo": "fap-api",
+      "branch": "codex/ops-seo-native-dash-04-access-boundary",
+      "status": "registered",
+      "depends_on": [
+        "OPS-SEO-NATIVE-DASH-03"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pending",
+          "summary": "Cannot start until OPS-SEO-NATIVE-DASH-03 is merged."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-22T00:20:00+08:00",
+          "status": "registered",
+          "summary": "Registered access-boundary verification PR for native /ops/seo dashboard. Waiting for detail panel merge."
+        }
+      ]
     }
   }
 }

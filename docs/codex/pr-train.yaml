@@ -8258,3 +8258,184 @@ prs:
     production_migration_execution_allowed: false
     external_api_credentials_required: false
     scheduler_activation: false
+
+  - id: OPS-SEO-NATIVE-DASH-01
+    repo: fap-api
+    branch: codex/ops-seo-native-dash-01-read-model
+    base: main
+    title: "OPS-SEO-NATIVE-DASH-01｜backend read model"
+    name: "Ops SEO native dashboard backend read model"
+    train_scope: ops_seo_native_dashboard
+    risk_level: L2
+    type: backend read model
+    scope:
+      - Add read-only seo_intel dashboard read services under SeoIntel OpsDashboard.
+      - Add DTO/value-shape outputs for overview KPIs, safety counters, URL Truth distributions, Issue Queue aggregates, and Search Channel Queue aggregates.
+      - Add tests for seo_intel table boundary, safe field allowlist, and no-write read model behavior.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/OpsDashboard/**
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsSeoNativeDashboardReadModelTest.php
+      - backend/docs/seo/ops-seo-native-dashboard-read-model.md
+      - backend/docs/seo/generated/ops-seo-native-dashboard-read-model.v1.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify Filament page/view code in this PR.
+      - Add Eloquent models unless strictly necessary.
+      - Add write paths, scheduler controls, submission controls, or external API calls.
+      - Read business DB, Tencent RDS, Node2 local DB, raw crawler logs, or Metabase.
+      - Modify fap-web, migrations, env, deploy scripts, sitemap, or llms behavior.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboard
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/ops-seo-native-dashboard-read-model.v1.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: OPS-SEO-NATIVE-DASH-02
+
+  - id: OPS-SEO-NATIVE-DASH-02
+    repo: fap-api
+    depends_on:
+      - OPS-SEO-NATIVE-DASH-01
+    branch: codex/ops-seo-native-dash-02-filament-ui
+    base: main
+    title: "OPS-SEO-NATIVE-DASH-02｜Filament native dashboard UI"
+    name: "Ops SEO native dashboard Filament UI"
+    train_scope: ops_seo_native_dashboard
+    risk_level: L2
+    type: backend Filament UI
+    scope:
+      - Update SeoDashboardAccessPage and Blade view to render the native read-only dashboard from the read model.
+      - Replace hardcoded MVP counts with live seo_intel aggregates.
+      - Preserve the existing route/auth boundary and keep the page read-only.
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/SeoDashboardAccessPage.php
+      - backend/resources/views/filament/ops/pages/seo-dashboard-access.blade.php
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsSeoNativeDashboardUiTest.php
+      - backend/docs/seo/ops-seo-native-dashboard-ui.md
+      - backend/docs/seo/generated/ops-seo-native-dashboard-ui.v1.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add approve, retry, submit, scheduler, collector, or export controls.
+      - Add Metabase iframe, proxy, URL, or API coupling.
+      - Modify fap-web, env, deploy, migrations, sitemap, or llms behavior.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboard
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/ops-seo-native-dashboard-ui.v1.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: OPS-SEO-NATIVE-DASH-03
+
+  - id: OPS-SEO-NATIVE-DASH-03
+    repo: fap-api
+    depends_on:
+      - OPS-SEO-NATIVE-DASH-02
+    branch: codex/ops-seo-native-dash-03-detail-panels
+    base: main
+    title: "OPS-SEO-NATIVE-DASH-03｜Issue Queue and Search Channel detail panels"
+    name: "Ops SEO native dashboard detail panels"
+    train_scope: ops_seo_native_dashboard
+    risk_level: L2
+    type: backend detail panel
+    scope:
+      - Add recent safe Issue Queue and Search Channel Queue rows and read-only filters where feasible.
+      - Keep payload drilldown, mutation controls, and queue operations out of the UI.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/OpsDashboard/**
+      - backend/resources/views/filament/ops/pages/seo-dashboard-access.blade.php
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsSeoNativeDashboardPanelsTest.php
+      - backend/docs/seo/ops-seo-native-dashboard-panels.md
+      - backend/docs/seo/generated/ops-seo-native-dashboard-panels.v1.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add payload drilldown, raw JSON, approve/retry/submit buttons, scheduler controls, or collector controls.
+      - Modify fap-web, env, deploy, migrations, sitemap, llms, or Metabase exposure.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboard
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/ops-seo-native-dashboard-panels.v1.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: OPS-SEO-NATIVE-DASH-04
+
+  - id: OPS-SEO-NATIVE-DASH-04
+    repo: fap-api
+    depends_on:
+      - OPS-SEO-NATIVE-DASH-03
+    branch: codex/ops-seo-native-dash-04-access-boundary
+    base: main
+    title: "OPS-SEO-NATIVE-DASH-04｜permission audit and no-export verification"
+    name: "Ops SEO native dashboard access boundary"
+    train_scope: ops_seo_native_dashboard
+    risk_level: L2
+    type: verification contract
+    scope:
+      - Verify auth redirects, allowed permissions, denied unrelated roles, no public route, no export controls, and no unsafe operator actions.
+      - Update docs/generated artifact for access boundary, audit, and no-export/no-SQL expectations.
+    allowed_paths:
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsSeoNativeDashboardAccessBoundaryTest.php
+      - backend/docs/seo/ops-seo-native-dashboard-access-boundary.md
+      - backend/docs/seo/generated/ops-seo-native-dashboard-access-boundary.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime permissions or broaden operator access in this PR.
+      - Add exports, raw SQL, Metabase exposure, queue actions, scheduler controls, or submission controls.
+      - Modify fap-web, env, deploy, migrations, sitemap, llms, or production behavior.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboard
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/ops-seo-native-dashboard-access-boundary.v1.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: CRAWLER-LOG-OBSERVABILITY-TRAIN-01
