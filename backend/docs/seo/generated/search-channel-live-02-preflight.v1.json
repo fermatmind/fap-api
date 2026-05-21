@@ -1,7 +1,7 @@
 {
   "id": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT",
-  "status": "ready_for_human_approval",
-  "checked_at": "2026-05-21T22:40:00+08:00",
+  "status": "ready_for_human_approval_after_indexnow_config",
+  "checked_at": "2026-05-21T23:18:00+08:00",
   "live_submission_performed": false,
   "external_calls_attempted": false,
   "search_submission_attempted": false,
@@ -178,9 +178,10 @@
   "withheld_approval_phrase_reason": null,
   "required_rerun_commands": [],
   "next_allowed_action": {
-    "summary": "SEARCH-CHANNEL-LIVE-02 may proceed only after the user sends the exact approval phrase from this preflight. Do not enable scheduler or bulk submission.",
+    "summary": "SEARCH-CHANNEL-LIVE-02 may retry only after the user sends the exact approval phrase from this fresh preflight. Disable one-shot live gates immediately after the canary attempt.",
     "canary_task_after_passing_preflight": "SEARCH-CHANNEL-LIVE-02",
-    "approval_phrase_required": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en."
+    "approval_phrase_required": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en.",
+    "post_attempt_required_action": "disable_indexnow_live_gates_and_rebuild_config_cache"
   },
   "queue_dry_run": {
     "command": "php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=1",
@@ -231,6 +232,37 @@
         "sitemap_llms_behavior_changed": false,
         "secrets_required": false
       }
+    }
+  },
+  "indexnow_live_configuration": {
+    "status": "ready",
+    "configured_on_production": true,
+    "config_cache_rebuilt": true,
+    "live_submission_enabled": true,
+    "external_api_calls_enabled": true,
+    "indexnow_live_api_enabled": true,
+    "indexnow_key_present": true,
+    "indexnow_key_length": 32,
+    "indexnow_key_sha256": "e9a3eca3e7c107d6e0ac63c1fdba24068d970aecb4bdf18ed69735e8b77cf143",
+    "indexnow_key_location_host": "fermatmind.com",
+    "indexnow_key_location_public_bytes": 32,
+    "indexnow_key_location_public_sha256": "e9a3eca3e7c107d6e0ac63c1fdba24068d970aecb4bdf18ed69735e8b77cf143",
+    "frontend_pm2_reloaded_for_key_file": true
+  },
+  "live_gate_verification": {
+    "status": "pass",
+    "command": "php artisan seo-intel:search-channel-submit --queue-item-id=1 --json",
+    "expected_blocker": "approval_phrase_mismatch",
+    "result": {
+      "status": "blocked",
+      "issues": [
+        "approval_phrase_mismatch"
+      ],
+      "external_calls_attempted": false,
+      "search_submission_attempted": false,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "execution_state": "dry_run_ready"
     }
   }
 }

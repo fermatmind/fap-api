@@ -20,7 +20,7 @@ final class SeoIntelSearchChannelLive02PreflightTest extends TestCase
         $approvalPhrase = 'I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en.';
 
         $this->assertSame('SEARCH-CHANNEL-LIVE-02-PREFLIGHT', $artifact['id'] ?? null);
-        $this->assertSame('ready_for_human_approval', $artifact['status'] ?? null);
+        $this->assertSame('ready_for_human_approval_after_indexnow_config', $artifact['status'] ?? null);
         $this->assertFalse((bool) ($artifact['live_submission_performed'] ?? true));
         $this->assertFalse((bool) ($artifact['external_calls_attempted'] ?? true));
         $this->assertFalse((bool) ($artifact['search_submission_attempted'] ?? true));
@@ -58,7 +58,24 @@ final class SeoIntelSearchChannelLive02PreflightTest extends TestCase
         $this->assertSame(1, data_get($artifact, 'queue_dry_run.result.planned_queue_count'));
         $this->assertFalse((bool) data_get($artifact, 'queue_dry_run.result.external_calls_attempted', true));
         $this->assertFalse((bool) data_get($artifact, 'queue_dry_run.result.writes_committed', true));
+        $this->assertSame('ready', data_get($artifact, 'indexnow_live_configuration.status'));
+        $this->assertTrue((bool) data_get($artifact, 'indexnow_live_configuration.configured_on_production'));
+        $this->assertTrue((bool) data_get($artifact, 'indexnow_live_configuration.config_cache_rebuilt'));
+        $this->assertTrue((bool) data_get($artifact, 'indexnow_live_configuration.live_submission_enabled'));
+        $this->assertTrue((bool) data_get($artifact, 'indexnow_live_configuration.external_api_calls_enabled'));
+        $this->assertTrue((bool) data_get($artifact, 'indexnow_live_configuration.indexnow_live_api_enabled'));
+        $this->assertTrue((bool) data_get($artifact, 'indexnow_live_configuration.indexnow_key_present'));
+        $this->assertSame(32, data_get($artifact, 'indexnow_live_configuration.indexnow_key_length'));
+        $this->assertSame('fermatmind.com', data_get($artifact, 'indexnow_live_configuration.indexnow_key_location_host'));
+        $this->assertSame(32, data_get($artifact, 'indexnow_live_configuration.indexnow_key_location_public_bytes'));
+        $this->assertSame('pass', data_get($artifact, 'live_gate_verification.status'));
+        $this->assertSame(['approval_phrase_mismatch'], data_get($artifact, 'live_gate_verification.result.issues'));
+        $this->assertFalse((bool) data_get($artifact, 'live_gate_verification.result.external_calls_attempted', true));
+        $this->assertFalse((bool) data_get($artifact, 'live_gate_verification.result.search_submission_attempted', true));
+        $this->assertFalse((bool) data_get($artifact, 'live_gate_verification.result.writes_attempted', true));
+        $this->assertFalse((bool) data_get($artifact, 'live_gate_verification.result.writes_committed', true));
         $this->assertSame('SEARCH-CHANNEL-LIVE-02', data_get($artifact, 'next_allowed_action.canary_task_after_passing_preflight'));
         $this->assertSame($approvalPhrase, data_get($artifact, 'next_allowed_action.approval_phrase_required'));
+        $this->assertSame('disable_indexnow_live_gates_and_rebuild_config_cache', data_get($artifact, 'next_allowed_action.post_attempt_required_action'));
     }
 }

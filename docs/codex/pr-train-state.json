@@ -15397,13 +15397,13 @@
     "SEARCH-CHANNEL-LIVE-02-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-preflight",
-      "status": "pr_opened_ready_for_human_approval",
+      "status": "pr_opened_indexnow_config_ready",
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE",
         "NODE3-RETIREMENT-FINAL-CHECK"
       ],
-      "commit_sha": "e8c0efd9",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1533",
+      "commit_sha": "332a7d28",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1535",
       "checks": {
         "dependencies": {
           "status": "pass",
@@ -15427,8 +15427,8 @@
           "summary": "Queue item 1 remains the intended canary: indexnow https://fermatmind.com/en pending/dry_run_ready and was verified by production dry-run on Aliyun release 20260521220637."
         },
         "approval_phrase": {
-          "status": "ready_for_human_approval",
-          "summary": "Exact approval phrase produced for SEARCH-CHANNEL-LIVE-02; live canary remains blocked until the user sends that exact phrase.",
+          "status": "ready_for_human_approval_after_indexnow_config",
+          "summary": "Fresh exact approval phrase produced after IndexNow live configuration and production dry-run verification.",
           "phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en."
         },
         "no_live_submission": {
@@ -15438,7 +15438,7 @@
         "focused_phpunit": {
           "status": "pass",
           "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelLive02",
-          "summary": "1 test passed, 38 assertions; generated preflight artifact now records production dry-run success and exact approval phrase readiness."
+          "summary": "1 test passed, 55 assertions; preflight artifact confirms IndexNow config is ready and approval phrase remains the final gate."
         },
         "pint_targeted": {
           "status": "pass",
@@ -15454,6 +15454,15 @@
           "status": "pass",
           "command": "cd /var/www/fap-api/current/backend && php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=1",
           "summary": "Production queue dry-run/no-write returned status=success, candidate_count=1, eligible_count=1, blocked_count=0, planned_queue_count=1, writes_committed=false, external_calls_attempted=false, and scheduler_enabled=false."
+        },
+        "indexnow_live_configuration": {
+          "status": "pass",
+          "summary": "Production IndexNow key/keyLocation are configured, the public keyLocation on fermatmind.com returns the expected 32-byte key file, live submission gates are enabled in config cache, and frontend PM2 was reloaded to serve the key file."
+        },
+        "live_gate_verification": {
+          "status": "pass",
+          "command": "cd /var/www/fap-api/current/backend && php artisan seo-intel:search-channel-submit --queue-item-id=1 --json",
+          "summary": "Without the approval phrase, the guarded executor now blocks only with approval_phrase_mismatch; no external call or write was attempted."
         }
       },
       "failure_reason": null,
@@ -15505,6 +15514,16 @@
           "at": "2026-05-21T22:45:00+08:00",
           "status": "pr_opened_ready_for_human_approval",
           "summary": "Opened PR #1533 to record production dry-run success and the exact approval phrase for SEARCH-CHANNEL-LIVE-02. No live submission occurred."
+        },
+        {
+          "at": "2026-05-21T23:18:00+08:00",
+          "status": "preflight_passed_indexnow_config_ready",
+          "summary": "Configured IndexNow key/keyLocation and one-shot live gates, rebuilt production config cache, verified keyLocation, confirmed executor blocks only on missing approval phrase, and refreshed the exact live canary approval phrase. No live submission occurred."
+        },
+        {
+          "at": "2026-05-21T23:22:00+08:00",
+          "status": "pr_opened_indexnow_config_ready",
+          "summary": "Opened PR #1535 for the fresh preflight after IndexNow live configuration. No live submission occurred."
         }
       ],
       "sidecar_issues": [
@@ -15621,7 +15640,7 @@
     "SEARCH-CHANNEL-LIVE-02": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-canary-submission",
-      "status": "pr_opened_blocked_missing_indexnow_live_configuration",
+      "status": "blocked_waiting_for_exact_human_approval_phrase_after_indexnow_config",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-02-PREFLIGHT"
       ],
@@ -15633,8 +15652,8 @@
           "summary": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT merged via PR #1533 at 3426bfaff578f72980c6bd5e7a0ab182d14d227b and produced the exact approval phrase."
         },
         "human_approval": {
-          "status": "pass",
-          "summary": "Exact approval phrase was provided by the user.",
+          "status": "required",
+          "summary": "Live external submission is blocked until the user sends the fresh exact approval phrase.",
           "phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en."
         },
         "approved_scope": {
@@ -15653,9 +15672,13 @@
         "next_gate": {
           "status": "blocked",
           "summary": "A separately approved secure production configuration path is required for IndexNow credentials and one-shot live gates; after config cache rebuild, rerun SEARCH-CHANNEL-LIVE-02-PREFLIGHT before retrying live submission."
+        },
+        "preflight_after_indexnow_config": {
+          "status": "pass",
+          "summary": "Fresh SEARCH-CHANNEL-LIVE-02-PREFLIGHT passed after IndexNow live configuration and produced the exact approval phrase."
         }
       },
-      "failure_reason": "blocked_missing_indexnow_live_configuration: exact approval phrase was present, but production live gates are disabled and IndexNow key/keyLocation are missing; guarded executor blocked before writes or external calls.",
+      "failure_reason": "blocked_waiting_for_exact_human_approval_phrase_after_indexnow_config",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -15684,6 +15707,11 @@
           "at": "2026-05-21T22:56:00+08:00",
           "status": "pr_opened_blocked_missing_indexnow_live_configuration",
           "summary": "Opened PR #1534 to record the guarded canary attempt blocked before writes or external calls due to missing IndexNow live configuration."
+        },
+        {
+          "at": "2026-05-21T23:18:00+08:00",
+          "status": "blocked_waiting_for_exact_human_approval_phrase_after_indexnow_config",
+          "summary": "IndexNow live configuration is ready and preflight passed; live canary must wait for a fresh exact approval phrase."
         }
       ]
     },
