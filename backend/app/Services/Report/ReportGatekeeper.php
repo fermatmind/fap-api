@@ -234,7 +234,8 @@ class ReportGatekeeper
         $snapshotStrictMode = in_array($scaleCode, [ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true) ? false : $this->strictSnapshotModeEnabled();
         $shouldReadFromSnapshot = $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
             && ($snapshotStrictMode || $shouldUseSnapshot);
-        $allowLiveBuildFallbackForSnapshot = $scaleCode === ReportAccess::SCALE_ENNEAGRAM && ! $snapshotStrictMode;
+        $allowLiveBuildFallbackForSnapshot = $scaleCode === ReportAccess::SCALE_EQ_60
+            || ($scaleCode === ReportAccess::SCALE_ENNEAGRAM && ! $snapshotStrictMode);
         if ($requiresSnapshotBoundReport) {
             $snapshotResult = $this->snapshotStore->createSnapshotForAttempt([
                 'org_id' => $effectiveOrgId,
@@ -276,7 +277,7 @@ class ReportGatekeeper
                 ->where('attempt_id', $attemptId)
                 ->first();
 
-            if ($snapshotStrictMode && ($snapshotRow === null || $forceRefresh)) {
+            if ($snapshotStrictMode && ($snapshotRow === null || $forceRefresh) && ! $allowLiveBuildFallbackForSnapshot) {
                 $this->enqueueSnapshotBuild($effectiveOrgId, $attempt, $result);
 
                 return $this->responsePayload(
@@ -438,7 +439,7 @@ class ReportGatekeeper
             }
         }
 
-        if ($snapshotStrictMode && $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL) {
+        if ($snapshotStrictMode && ! $allowLiveBuildFallbackForSnapshot && $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL) {
             return $this->responsePayload(
                 $locked,
                 $reportAccessLevel,
