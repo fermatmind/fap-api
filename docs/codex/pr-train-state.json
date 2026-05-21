@@ -15640,12 +15640,12 @@
     "SEARCH-CHANNEL-LIVE-02": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-canary-submission",
-      "status": "completed_live_canary_submitted",
+      "status": "pr_opened_completed_live_canary_submitted",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-02-PREFLIGHT"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "381027d2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1536",
       "checks": {
         "dependency_preflight": {
           "status": "pass",
@@ -15712,6 +15712,11 @@
           "at": "2026-05-21T23:27:37+08:00",
           "status": "completed_live_canary_submitted",
           "summary": "Executed the exact approved live canary for queue item 1. IndexNow returned HTTP 202 accepted; queue item is submitted; one-shot live gates were disabled immediately after the attempt."
+        },
+        {
+          "at": "2026-05-21T23:31:00+08:00",
+          "status": "pr_opened_completed_live_canary_submitted",
+          "summary": "Opened PR #1536 to record the successful IndexNow canary submission and post-attempt live gate disablement."
         }
       ]
     },
