@@ -1,7 +1,7 @@
 {
   "id": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT",
-  "status": "blocked_production_executor_not_deployed",
-  "checked_at": "2026-05-21T20:15:00+08:00",
+  "status": "ready_for_human_approval",
+  "checked_at": "2026-05-21T22:40:00+08:00",
   "live_submission_performed": false,
   "external_calls_attempted": false,
   "search_submission_attempted": false,
@@ -25,7 +25,10 @@
     "deployment_scope_after_merge": "staging_only",
     "staging_deploy_run_id": 26224261797,
     "staging_deploy_completed_at": "2026-05-21T12:03:43Z",
-    "production_deploy_after_merge": false
+    "production_deploy_after_merge": true,
+    "production_deploy_release": "20260521220637",
+    "production_deploy_sha": "35d1f33b038df4eac330475d072f25fbbfd66364",
+    "production_deploy_contains_executor_merge": true
   },
   "production_runtime": {
     "target_host": "139.224.130.204",
@@ -34,13 +37,15 @@
     "last_successful_production_deploy_run_id": 26174360293,
     "last_successful_production_deploy_completed_at": "2026-05-20T16:17:20Z",
     "last_successful_production_deploy_sha": "effadd311f6c6bdfee137f8c9d10d9edb4ee23c4",
-    "production_executor_presence_verified": false,
-    "remote_read_only_command_verified": false,
+    "production_executor_presence_verified": true,
+    "remote_read_only_command_verified": true,
     "local_ssh_attempt": {
-      "target": "ubuntu@139.224.130.204",
-      "tcp_22_open": true,
-      "result": "failed_banner_timeout_after_tcp_22_open"
-    }
+      "target": "fap-api-prod",
+      "result": "success"
+    },
+    "current_release": "20260521220637",
+    "current_revision": "35d1f33b038df4eac330475d072f25fbbfd66364",
+    "current_revision_contains_required_deploy_sha": true
   },
   "queue_item": {
     "id": 1,
@@ -59,12 +64,80 @@
     "indexability_state": "indexable",
     "claim_boundary_state": "claim_safe",
     "private_flow": false,
-    "verification_state": "carried_forward_not_refreshed",
-    "verification_source": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT PR #1528; production DB state was not refreshed in this rerun because production is not verified at the executor SHA."
+    "verification_state": "fresh_production_dry_run_verified",
+    "verification_source": "Production read-only executor dry-run on Aliyun release 20260521220637 at SHA 35d1f33b038df4eac330475d072f25fbbfd66364."
   },
   "fresh_dry_run": {
-    "status": "not_run_on_production",
-    "reason": "Production runtime is not verified to contain seo-intel:search-channel-submit at the executor SHA.",
+    "status": "success",
+    "submit_executor": {
+      "runtime": "search_channel_live_submission",
+      "queue_item_id": 1,
+      "channel": "indexnow",
+      "canonical_url": "https://fermatmind.com/en",
+      "dry_run": true,
+      "approval_phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en.",
+      "external_calls_attempted": false,
+      "search_submission_attempted": false,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "submission_status": "not_attempted",
+      "execution_state": "dry_run_ready",
+      "safety_flags": {
+        "scheduler_enabled": false,
+        "bulk_submission": false,
+        "raw_secret_output": false,
+        "sitemap_llms_behavior_changed": false
+      },
+      "status": "success",
+      "issues": []
+    },
+    "queue_planner": {
+      "runtime": "search_channel_queue",
+      "status": "success",
+      "dry_run": true,
+      "no_write": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "search_submission_attempted": false,
+      "crawler_log_read_attempted": false,
+      "candidate_count": 1,
+      "eligible_count": 1,
+      "blocked_count": 0,
+      "planned_queue_count": 1,
+      "channel_breakdown": {
+        "indexnow": 1
+      },
+      "page_type_breakdown": {
+        "home": 1
+      },
+      "reason_code_breakdown": [],
+      "target_tables": [
+        "seo_search_channel_queue_items",
+        "seo_search_channel_queue_batches",
+        "seo_search_channel_queue_events"
+      ],
+      "protected_legacy_tables_not_written": [
+        "seo_baidu_push_logs",
+        "seo_indexnow_submissions",
+        "seo_domestic_submission_logs"
+      ],
+      "write_gate_env": "SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED",
+      "write_gate_enabled": false,
+      "batch_ids": [],
+      "written_items": 0,
+      "issues": [],
+      "safety_flags": {
+        "no_live_submission": true,
+        "no_external_api": true,
+        "no_submit_mode": true,
+        "scheduler_enabled": false,
+        "collector_write_attempted": false,
+        "production_crawler_log_read": false,
+        "sitemap_llms_behavior_changed": false,
+        "secrets_required": false
+      }
+    },
     "external_calls_attempted": false,
     "search_submission_attempted": false,
     "writes_attempted": false,
@@ -72,28 +145,92 @@
   },
   "executor_dry_run": {
     "command": "php artisan seo-intel:search-channel-submit --queue-item-id=1 --dry-run --json",
-    "status": "not_run_on_production",
-    "reason": "Production runtime requires backend deploy/read-only verification first.",
+    "status": "success",
+    "result": {
+      "runtime": "search_channel_live_submission",
+      "queue_item_id": 1,
+      "channel": "indexnow",
+      "canonical_url": "https://fermatmind.com/en",
+      "dry_run": true,
+      "approval_phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en.",
+      "external_calls_attempted": false,
+      "search_submission_attempted": false,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "submission_status": "not_attempted",
+      "execution_state": "dry_run_ready",
+      "safety_flags": {
+        "scheduler_enabled": false,
+        "bulk_submission": false,
+        "raw_secret_output": false,
+        "sitemap_llms_behavior_changed": false
+      },
+      "status": "success",
+      "issues": []
+    },
     "external_calls_attempted": false,
     "search_submission_attempted": false,
     "writes_attempted": false,
     "writes_committed": false
   },
-  "blocker": {
-    "code": "production_deploy_required",
-    "summary": "The guarded executor is merged to main but has not been confirmed on production; live canary approval phrase is withheld until production deploy readiness, production deploy, and a fresh production dry-run pass."
-  },
-  "approval_phrase": null,
-  "withheld_approval_phrase_reason": "Do not output a live approval phrase until the production runtime contains the executor and a fresh production dry-run confirms queue item 1 is still pending/dry_run_ready.",
-  "required_rerun_commands": [
-    "cd /var/www/fap-api/current/backend",
-    "php artisan seo-intel:search-channel-submit --queue-item-id=1 --dry-run --json",
-    "php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=1"
-  ],
+  "blocker": null,
+  "approval_phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en.",
+  "withheld_approval_phrase_reason": null,
+  "required_rerun_commands": [],
   "next_allowed_action": {
-    "summary": "Run backend production deploy readiness/deploy for the executor SHA, then rerun SEARCH-CHANNEL-LIVE-02-PREFLIGHT. Do not run the live canary yet.",
-    "task_after_backend_deploy": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT",
+    "summary": "SEARCH-CHANNEL-LIVE-02 may proceed only after the user sends the exact approval phrase from this preflight. Do not enable scheduler or bulk submission.",
     "canary_task_after_passing_preflight": "SEARCH-CHANNEL-LIVE-02",
-    "deployment_readiness_prompt": "Use $fermatmind-deploy-readiness to prepare production deployment. I explicitly allow read-only SSH verification. Do local readiness and read-only remote readiness, resolve backend/frontend SHAs and latest merged PRs, decide whether deploy is necessary, and output the exact confirmation phrases for any required deploy. Do not deploy yet."
+    "approval_phrase_required": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en."
+  },
+  "queue_dry_run": {
+    "command": "php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=1",
+    "status": "success",
+    "result": {
+      "runtime": "search_channel_queue",
+      "status": "success",
+      "dry_run": true,
+      "no_write": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "search_submission_attempted": false,
+      "crawler_log_read_attempted": false,
+      "candidate_count": 1,
+      "eligible_count": 1,
+      "blocked_count": 0,
+      "planned_queue_count": 1,
+      "channel_breakdown": {
+        "indexnow": 1
+      },
+      "page_type_breakdown": {
+        "home": 1
+      },
+      "reason_code_breakdown": [],
+      "target_tables": [
+        "seo_search_channel_queue_items",
+        "seo_search_channel_queue_batches",
+        "seo_search_channel_queue_events"
+      ],
+      "protected_legacy_tables_not_written": [
+        "seo_baidu_push_logs",
+        "seo_indexnow_submissions",
+        "seo_domestic_submission_logs"
+      ],
+      "write_gate_env": "SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED",
+      "write_gate_enabled": false,
+      "batch_ids": [],
+      "written_items": 0,
+      "issues": [],
+      "safety_flags": {
+        "no_live_submission": true,
+        "no_external_api": true,
+        "no_submit_mode": true,
+        "scheduler_enabled": false,
+        "collector_write_attempted": false,
+        "production_crawler_log_read": false,
+        "sitemap_llms_behavior_changed": false,
+        "secrets_required": false
+      }
+    }
   }
 }

@@ -15397,13 +15397,13 @@
     "SEARCH-CHANNEL-LIVE-02-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-preflight",
-      "status": "pr_opened_blocked_preflight",
+      "status": "pr_opened_ready_for_human_approval",
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE",
         "NODE3-RETIREMENT-FINAL-CHECK"
       ],
-      "commit_sha": "d0b3c0712be802bd13e9620ca772567b02a8e504",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1530",
+      "commit_sha": "e8c0efd9",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1533",
       "checks": {
         "dependencies": {
           "status": "pass",
@@ -15414,21 +15414,22 @@
           "summary": "SEARCH-CHANNEL-LIVE-02-EXECUTOR merged via PR #1529 at af8a050bfed88631cfc687775402548848ba87a1 with passing GitHub checks."
         },
         "production_deploy_scope": {
-          "status": "blocked",
-          "summary": "The push after PR #1529 deployed staging only. Latest confirmed production workflow_dispatch remains run 26174360293 at SHA effadd311f6c6bdfee137f8c9d10d9edb4ee23c4."
+          "status": "pass",
+          "summary": "Production release 20260521220637 is active at SHA 35d1f33b038df4eac330475d072f25fbbfd66364, which contains executor merge af8a050bfed88631cfc687775402548848ba87a1."
         },
         "production_read_only_executor_dry_run": {
-          "status": "blocked",
+          "status": "pass",
           "command": "cd /var/www/fap-api/current/backend && php artisan seo-intel:search-channel-submit --queue-item-id=1 --dry-run --json",
-          "summary": "Not run because production is not verified at the executor SHA; local SSH to ubuntu@139.224.130.204 reached TCP/22 but timed out during SSH banner exchange."
+          "summary": "Production dry-run returned status=success for queue item 1, channel indexnow, URL https://fermatmind.com/en, with external_calls_attempted=false, search_submission_attempted=false, writes_attempted=false, writes_committed=false, and execution_state=dry_run_ready."
         },
         "queue_item": {
-          "status": "carried_forward_not_refreshed",
-          "summary": "Prior canary item remains the intended candidate: id=1 indexnow https://fermatmind.com/en pending/dry_run_ready; production DB state was not refreshed in this rerun."
+          "status": "fresh_production_dry_run_verified",
+          "summary": "Queue item 1 remains the intended canary: indexnow https://fermatmind.com/en pending/dry_run_ready and was verified by production dry-run on Aliyun release 20260521220637."
         },
         "approval_phrase": {
-          "status": "withheld",
-          "summary": "No SEARCH-CHANNEL-LIVE-02 live approval phrase is output until production is deployed to the executor SHA and a fresh production executor dry-run passes."
+          "status": "ready_for_human_approval",
+          "summary": "Exact approval phrase produced for SEARCH-CHANNEL-LIVE-02; live canary remains blocked until the user sends that exact phrase.",
+          "phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en."
         },
         "no_live_submission": {
           "status": "pass",
@@ -15437,20 +15438,25 @@
         "focused_phpunit": {
           "status": "pass",
           "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelLive02",
-          "summary": "1 test passed, 25 assertions; generated preflight artifact remains blocked until production executor deploy/read-only verification."
+          "summary": "1 test passed, 38 assertions; generated preflight artifact now records production dry-run success and exact approval phrase readiness."
         },
         "pint_targeted": {
           "status": "pass",
           "command": "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/SeoIntelSearchChannelLive02PreflightTest.php",
-          "summary": "Targeted Pint check passed for the new preflight artifact guard test."
+          "summary": "Targeted Pint check passed for the updated preflight artifact guard test."
         },
         "json_yaml_diff": {
           "status": "pass",
           "command": "python3 -m json.tool backend/docs/seo/generated/search-channel-live-02-preflight.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\" && git diff --check",
           "summary": "Generated JSON, PR-train state JSON, PR-train YAML, and whitespace diff check passed."
+        },
+        "production_read_only_queue_dry_run": {
+          "status": "pass",
+          "command": "cd /var/www/fap-api/current/backend && php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=1",
+          "summary": "Production queue dry-run/no-write returned status=success, candidate_count=1, eligible_count=1, blocked_count=0, planned_queue_count=1, writes_committed=false, external_calls_attempted=false, and scheduler_enabled=false."
         }
       },
-      "failure_reason": "blocked_production_executor_not_deployed: executor is merged to main, but production has not been confirmed deployed to af8a050bfed88631cfc687775402548848ba87a1 and the production read-only executor dry-run could not be run.",
+      "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -15489,13 +15495,23 @@
           "at": "2026-05-21T20:30:00+08:00",
           "status": "pr_opened_blocked_preflight",
           "summary": "Opened PR #1530 for the blocked preflight rerun. This PR records that production deploy/read-only executor verification is required before live canary approval."
+        },
+        {
+          "at": "2026-05-21T22:40:00+08:00",
+          "status": "preflight_passed_approval_phrase_ready",
+          "summary": "Reran preflight after Aliyun production deploy. Production contains the guarded executor, executor dry-run and queue no-write dry-run passed for queue item 1, and the exact live canary approval phrase is now ready. No live submission occurred."
+        },
+        {
+          "at": "2026-05-21T22:45:00+08:00",
+          "status": "pr_opened_ready_for_human_approval",
+          "summary": "Opened PR #1533 to record production dry-run success and the exact approval phrase for SEARCH-CHANNEL-LIVE-02. No live submission occurred."
         }
       ],
       "sidecar_issues": [
         {
           "title": "Production executor deploy/read-only verification required",
-          "status": "blocking_live_canary",
-          "summary": "Executor exists on main but SEARCH-CHANNEL-LIVE-02 remains blocked until production deploy readiness/deploy and a fresh production dry-run confirm queue item 1 is still pending/dry_run_ready."
+          "status": "resolved_by_release_20260521220637",
+          "summary": "Production release 20260521220637 at SHA 35d1f33b038df4eac330475d072f25fbbfd66364 contains the executor merge and passed fresh production dry-run verification."
         },
         {
           "title": "Previous live executor missing blocker resolved",
@@ -15605,7 +15621,7 @@
     "SEARCH-CHANNEL-LIVE-02": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-canary-submission",
-      "status": "blocked_waiting_for_production_executor_preflight",
+      "status": "blocked_waiting_for_exact_human_approval_phrase",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-02-PREFLIGHT"
       ],
@@ -15614,14 +15630,15 @@
       "checks": {
         "human_approval": {
           "status": "required",
-          "summary": "Live external submission is blocked until the exact human approval phrase is present."
+          "summary": "Live external submission is blocked until the exact human approval phrase is present.",
+          "phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en."
         },
         "preflight": {
-          "status": "blocked",
-          "summary": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT has not produced an approval phrase because production is not verified at the executor SHA."
+          "status": "pass",
+          "summary": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT passed after production executor dry-run and produced the exact approval phrase."
         }
       },
-      "failure_reason": "blocked_waiting_for_production_executor_preflight",
+      "failure_reason": "blocked_waiting_for_exact_human_approval_phrase",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -15635,6 +15652,11 @@
           "at": "2026-05-21T20:15:00+08:00",
           "status": "blocked_waiting_for_production_executor_preflight",
           "summary": "Live canary remains blocked until backend production deploy/read-only preflight rerun outputs the exact approval phrase."
+        },
+        {
+          "at": "2026-05-21T22:40:00+08:00",
+          "status": "blocked_waiting_for_exact_human_approval_phrase",
+          "summary": "Preflight passed and produced the exact approval phrase; live canary still must not run until the user sends that exact phrase."
         }
       ]
     },
