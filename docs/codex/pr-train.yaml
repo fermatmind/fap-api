@@ -144,7 +144,6 @@ prs:
     production_migration_execution_allowed: false
     external_api_credentials_required: false
     scheduler_activation: false
-    next_task: SEO-DASH-02A
 
   - id: SEO-DASH-02A
     repo: fap-api
@@ -7986,6 +7985,221 @@ prs:
       - Queue tables contain one batch, one item, and two audit events after canary.
     merge_policy:
       github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: NODE3-RETIREMENT-FINAL-CHECK
+
+  - id: NODE3-RETIREMENT-FINAL-CHECK
+    repo: fap-api
+    depends_on:
+      - BACKEND-DEPLOY-TARGET-ALIYUN-01
+      - NODE3-RETIREMENT-PREFLIGHT
+      - OPS-DOMAIN-MIGRATION-01
+    branch: codex/node3-retirement-final-check
+    base: main
+    title: "NODE3-RETIREMENT-FINAL-CHECK｜Final read-only Node3 retirement verification"
+    name: "Final read-only Node3 retirement verification"
+    train_scope: aliyun_backend_migration
+    risk_level: L2
+    type: production ops ledger
+    scope:
+      - Run a final read-only check before Tencent Node3 expiry.
+      - Verify API/Ops DNS, production deploy target, GitHub deploy webhook, Node3 queue workers, Node3 scheduler, and Node3 port 9000 remain retired.
+      - Confirm no known production runtime path depends on Node3 before allowing the host to expire.
+    allowed_paths:
+      - docs/04-ops/backend-deploy-target-aliyun-01.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Power off, delete, reboot, reset, or renew Node3.
+      - Stop Node3 nginx, SSH, or any unrelated service without separate explicit approval.
+      - Change DNS, deploy, rotate secrets, or edit production env.
+    validation:
+      - api.fermatmind.com and ops.fermatmind.com resolve to Aliyun.
+      - GitHub fap-api deploy webhook for Node3 port 9000 is inactive or absent.
+      - Node3 webhook.service is inactive/disabled and Node3 TCP/9000 is not usable.
+      - Node3 queue workers and Laravel scheduler remain stopped/commented.
+      - fap-api production deploy target refuses retired Node3.
+    merge_policy:
+      github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: SEARCH-CHANNEL-LIVE-02-PREFLIGHT
+
+  - id: SEARCH-CHANNEL-LIVE-02-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE
+      - NODE3-RETIREMENT-FINAL-CHECK
+    branch: codex/search-channel-live-02-preflight
+    base: main
+    title: "SEARCH-CHANNEL-LIVE-02-PREFLIGHT｜Preflight approved small URL submission"
+    name: "Preflight approved small URL submission"
+    train_scope: search_channel_live_submission
+    risk_level: L2
+    type: production preflight ledger
+    scope:
+      - Verify the canary queue item and live submission gates before any search-channel submission.
+      - Confirm the exact URL set, channel, approval state, idempotency state, and no scheduler activation.
+      - Produce the exact human approval phrase required for the small live submission canary.
+    allowed_paths:
+      - backend/docs/seo/search-channel-live-02-preflight.md
+      - backend/docs/seo/generated/search-channel-live-02-preflight.v1.json
+      - backend/tests/Feature/SeoIntel/*SearchChannelLive02*Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Submit URLs or call live GSC, Baidu, IndexNow, Bing, 360, Sogou, Shenma, or other search APIs.
+      - Enable scheduler, persist write gates, edit env, rotate credentials, deploy, or change sitemap/llms behavior.
+      - Approve draft/private/noindex/claim-unsafe/stale/frontend-fallback/static-sitemap/static-llms URLs.
+    validation:
+      - Queue canary item exists with approval_state=pending and execution_state=dry_run_ready.
+      - Candidate URL set is small, explicit, canonical, backend-authoritative, indexable, and channel-eligible.
+      - Dry-run/no-write command succeeds immediately before live approval.
+      - Exact human approval phrase for SEARCH-CHANNEL-LIVE-02 is output.
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+    merge_policy:
+      github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: true
+    scheduler_activation: false
+    next_task: SEARCH-CHANNEL-LIVE-02
+
+  - id: SEARCH-CHANNEL-LIVE-02
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-LIVE-02-PREFLIGHT
+    branch: codex/search-channel-live-02-canary-submission
+    base: main
+    title: "SEARCH-CHANNEL-LIVE-02｜Human-approved small URL submission canary"
+    name: "Human-approved small URL submission canary"
+    train_scope: search_channel_live_submission
+    risk_level: L1
+    type: human-approved production canary ledger
+    scope:
+      - Perform only the explicitly approved small URL live submission canary.
+      - Use the Search Channel Queue approval/audit path and record submission outcome.
+      - Keep scheduler and bulk submission disabled.
+    allowed_paths:
+      - backend/docs/seo/search-channel-live-02-canary.md
+      - backend/docs/seo/generated/search-channel-live-02-canary.v1.json
+      - backend/tests/Feature/SeoIntel/*SearchChannelLive02*Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Submit more than the approved URL set.
+      - Submit without the exact human approval phrase from SEARCH-CHANNEL-LIVE-02-PREFLIGHT.
+      - Enable scheduler, bulk enqueue, recurring submission, persistent write gates, or external channels not explicitly approved.
+      - Change URL authority, sitemap, llms, DNS, deploy target, or production env.
+    validation:
+      - Exact human approval phrase is present before any live submission.
+      - Approved URL set and channel match SEARCH-CHANNEL-LIVE-02-PREFLIGHT.
+      - Submission command records audit events and idempotency state.
+      - No scheduler activation or bulk submission occurs.
+      - Post-submit status is recorded for 24h review.
+    merge_policy:
+      github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: true
+    scheduler_activation: false
+    live_external_submission_allowed: true
+    next_task: DIGITAL-PR-01E-24H-REVIEW
+
+  - id: DIGITAL-PR-01E-24H-REVIEW
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-LIVE-02
+    branch: codex/digital-pr-01e-24h-review
+    base: main
+    title: "DIGITAL-PR-01E-24H-REVIEW｜24h review after small URL submission canary"
+    name: "24h review after small URL submission canary"
+    train_scope: search_channel_live_submission
+    risk_level: L2
+    type: production review ledger
+    scope:
+      - Review the Search Channel live submission canary after roughly 24 hours.
+      - Compare queue audit status, provider response state, crawl/index signals when available, and public page health.
+      - Decide whether to hold, retry, expand, or keep live submission disabled.
+    allowed_paths:
+      - backend/docs/seo/digital-pr-01e-24h-review.md
+      - backend/docs/seo/generated/digital-pr-01e-24h-review.v1.json
+      - backend/tests/Feature/SeoIntel/*DigitalPr*Review*Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Submit additional URLs, enable scheduler, retry failed submissions, or expand channels without separate explicit approval.
+      - Treat missing 24h indexing signals as a reason to bypass approval gates.
+      - Change URL authority, sitemap, llms, DNS, deploy target, or production env.
+    validation:
+      - Canary submission audit record is present.
+      - Public submitted URL remains healthy and indexable.
+      - Provider response and any available crawl/index signals are recorded without exposing credentials.
+      - Next recommendation is explicitly one of hold, retry-with-approval, expand-with-approval, or stop.
+    merge_policy:
+      github_checks_required: false
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: true
+    scheduler_activation: false
+    next_task: OPS-SEO-NATIVE-DASH-00
+
+  - id: OPS-SEO-NATIVE-DASH-00
+    repo: fap-api
+    depends_on:
+      - DIGITAL-PR-01E-24H-REVIEW
+    branch: codex/ops-seo-native-dash-00
+    base: main
+    title: "OPS-SEO-NATIVE-DASH-00｜Native Ops SEO dashboard foundation"
+    name: "Native Ops SEO dashboard foundation"
+    train_scope: ops_seo_native_dashboard
+    risk_level: L2
+    type: backend Filament Ops dashboard PR
+    scope:
+      - Add a native Ops SEO dashboard foundation for Search Channel, URL Truth, queue status, and canary review visibility.
+      - Keep the dashboard read-only unless a later task explicitly adds guarded actions.
+      - Preserve backend/CMS URL authority and avoid Metabase, frontend fallback, or static content authority.
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/**
+      - backend/resources/views/filament/ops/pages/**
+      - backend/app/Services/Ops/**Seo**
+      - backend/app/Services/SeoIntel/**
+      - backend/tests/Feature/Filament/Ops/**Seo**
+      - backend/tests/Feature/SeoIntel/**Ops**
+      - backend/docs/seo/ops-seo-native-dash-00.md
+      - backend/docs/seo/generated/ops-seo-native-dash-00.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add live submission buttons, scheduler activation, credential display, Metabase iframe/proxy, or frontend-owned SEO authority.
+      - Change public SEO content, sitemap, llms, DNS, deploy target, production env, queue execution, or submission behavior.
+      - Add frontend fallback content for CMS/backend-backed SEO surfaces.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
       squash: true
       auto_merge: false
     production_deploy_allowed: false
