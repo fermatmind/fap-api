@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T03:07:00+08:00",
+  "updated_at": "2026-05-22T03:10:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -4333,7 +4333,7 @@
         "no deploy"
       ],
       "commit_sha": "pending_post_push",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1540",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -16156,6 +16156,11 @@
           "at": "2026-05-22T03:07:00+08:00",
           "status": "committed",
           "summary": "Committed scoped PR4 implementation at 66800c324532fff8eb20ebd0c5a5bfdf9098dd61."
+        },
+        {
+          "at": "2026-05-22T03:10:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR #1540 for permission, audit, and no-export verification. GitHub checks are pending."
         }
       ]
     }
