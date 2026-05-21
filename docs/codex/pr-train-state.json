@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-21T19:08:00+08:00",
+  "updated_at": "2026-05-21T19:12:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -15397,7 +15397,7 @@
     "SEARCH-CHANNEL-LIVE-02-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-preflight",
-      "status": "registered",
+      "status": "blocked_live_submission_executor_missing",
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE",
         "NODE3-RETIREMENT-FINAL-CHECK"
@@ -15405,12 +15405,36 @@
       "commit_sha": null,
       "pr_url": null,
       "checks": {
-        "approval_gate": {
-          "status": "required_before_next_task",
-          "summary": "Must output an exact human approval phrase before SEARCH-CHANNEL-LIVE-02 can perform any live submission."
+        "dependencies": {
+          "status": "pass",
+          "summary": "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE and NODE3-RETIREMENT-FINAL-CHECK are completed."
+        },
+        "queue_item": {
+          "status": "pass",
+          "summary": "Latest queue item id=1 is indexnow https://fermatmind.com/en with approval_state=pending and execution_state=dry_run_ready."
+        },
+        "url_health": {
+          "status": "pass",
+          "summary": "https://fermatmind.com/en returned HTTP 200."
+        },
+        "fresh_dry_run": {
+          "status": "pass",
+          "summary": "seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=1 returned candidate_count=1, eligible_count=1, planned_queue_count=1, writes_committed=false, external_calls_attempted=false, search_submission_attempted=false."
+        },
+        "write_gate": {
+          "status": "pass",
+          "summary": "Search Channel Queue write gate is disabled for normal runtime."
+        },
+        "live_executor": {
+          "status": "blocked",
+          "summary": "No guarded live submission executor exists. The current queue command explicitly reports search_submission_attempted=false and safety_flags.no_live_submission=true."
+        },
+        "approval_phrase": {
+          "status": "blocked",
+          "summary": "No SEARCH-CHANNEL-LIVE-02 approval phrase was produced because there is no live executor to approve."
         }
       },
-      "failure_reason": null,
+      "failure_reason": "blocked_live_submission_executor_missing: current backend can plan/enqueue queue items but cannot execute a live IndexNow/Search Channel URL submission.",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -15419,6 +15443,18 @@
           "at": "2026-05-21T19:05:00+08:00",
           "status": "registered",
           "summary": "Registered preflight for a small human-approved Search Channel live submission canary; no live submission is authorized in this preflight."
+        },
+        {
+          "at": "2026-05-21T19:12:00+08:00",
+          "status": "blocked_live_submission_executor_missing",
+          "summary": "Completed preflight checks and blocked SEARCH-CHANNEL-LIVE-02 because no live Search Channel submission executor exists. No approval phrase, live submission, external API call, scheduler activation, env edit, or deploy occurred."
+        }
+      ],
+      "sidecar_issues": [
+        {
+          "title": "Live submission executor missing",
+          "status": "blocking_next_task",
+          "summary": "SEARCH-CHANNEL-LIVE-02 cannot run until a separate scoped runtime task adds a guarded live submission executor with exact URL/channel approval, idempotency, response capture, and audit events."
         }
       ]
     },

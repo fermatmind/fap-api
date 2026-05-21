@@ -1,0 +1,58 @@
+{
+  "id": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT",
+  "status": "blocked_live_submission_executor_missing",
+  "checked_at": "2026-05-21T19:12:00+08:00",
+  "live_submission_performed": false,
+  "external_calls_attempted": false,
+  "search_submission_attempted": false,
+  "scheduler_activation": false,
+  "queue_item": {
+    "id": 1,
+    "batch_id": 1,
+    "channel": "indexnow",
+    "canonical_url": "https://fermatmind.com/en",
+    "locale": "en",
+    "page_entity_type": "home",
+    "entity_type": "home",
+    "entity_id": "home:en",
+    "source_authority": "backend_public_surface",
+    "source_table": "backend_authority_canary_contract",
+    "eligibility_state": "eligible",
+    "approval_state": "pending",
+    "execution_state": "dry_run_ready",
+    "indexability_state": "indexable",
+    "claim_boundary_state": "claim_safe",
+    "private_flow": false
+  },
+  "fresh_dry_run": {
+    "status": "success",
+    "dry_run": true,
+    "no_write": true,
+    "candidate_count": 1,
+    "eligible_count": 1,
+    "blocked_count": 0,
+    "planned_queue_count": 1,
+    "channel_breakdown": {
+      "indexnow": 1
+    },
+    "page_type_breakdown": {
+      "home": 1
+    },
+    "writes_attempted": false,
+    "writes_committed": false,
+    "external_calls_attempted": false,
+    "search_submission_attempted": false,
+    "write_gate_enabled": false
+  },
+  "public_url_smoke": {
+    "url": "https://fermatmind.com/en",
+    "http_status": 200
+  },
+  "blockers": [
+    "No live Search Channel submission executor exists in the current backend.",
+    "The current queue command explicitly keeps search_submission_attempted=false and safety_flags.no_live_submission=true.",
+    "Existing IndexNow/Baidu collector foundations block real URL submission."
+  ],
+  "approval_phrase": null,
+  "next_allowed_action": "Add a separate guarded live submission executor before SEARCH-CHANNEL-LIVE-02 can be approved."
+}
