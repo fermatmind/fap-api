@@ -15621,24 +15621,41 @@
     "SEARCH-CHANNEL-LIVE-02": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-canary-submission",
-      "status": "blocked_waiting_for_exact_human_approval_phrase",
+      "status": "blocked_missing_indexnow_live_configuration",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-02-PREFLIGHT"
       ],
       "commit_sha": null,
       "pr_url": null,
       "checks": {
+        "dependency_preflight": {
+          "status": "pass",
+          "summary": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT merged via PR #1533 at 3426bfaff578f72980c6bd5e7a0ab182d14d227b and produced the exact approval phrase."
+        },
         "human_approval": {
-          "status": "required",
-          "summary": "Live external submission is blocked until the exact human approval phrase is present.",
+          "status": "pass",
+          "summary": "Exact approval phrase was provided by the user.",
           "phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en."
         },
-        "preflight": {
+        "approved_scope": {
           "status": "pass",
-          "summary": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT passed after production executor dry-run and produced the exact approval phrase."
+          "summary": "Attempt was limited to queue item 1, channel indexnow, URL https://fermatmind.com/en."
+        },
+        "live_command": {
+          "status": "blocked",
+          "command": "cd /var/www/fap-api/current/backend && php artisan seo-intel:search-channel-submit --queue-item-id=1 --approval-phrase=<exact approved phrase> --actor=rainie-codex --json",
+          "summary": "The guarded executor returned status=blocked with issues live_submission_gate_disabled, external_api_gate_disabled, indexnow_live_api_disabled, indexnow_key_missing, and indexnow_key_location_missing."
+        },
+        "no_external_call_or_write": {
+          "status": "pass",
+          "summary": "external_calls_attempted=false, search_submission_attempted=false, writes_attempted=false, writes_committed=false, scheduler_enabled=false, and bulk_submission=false."
+        },
+        "next_gate": {
+          "status": "blocked",
+          "summary": "A separately approved secure production configuration path is required for IndexNow credentials and one-shot live gates; after config cache rebuild, rerun SEARCH-CHANNEL-LIVE-02-PREFLIGHT before retrying live submission."
         }
       },
-      "failure_reason": "blocked_waiting_for_exact_human_approval_phrase",
+      "failure_reason": "blocked_missing_indexnow_live_configuration: exact approval phrase was present, but production live gates are disabled and IndexNow key/keyLocation are missing; guarded executor blocked before writes or external calls.",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -15657,13 +15674,18 @@
           "at": "2026-05-21T22:40:00+08:00",
           "status": "blocked_waiting_for_exact_human_approval_phrase",
           "summary": "Preflight passed and produced the exact approval phrase; live canary still must not run until the user sends that exact phrase."
+        },
+        {
+          "at": "2026-05-21T22:54:00+08:00",
+          "status": "blocked_missing_indexnow_live_configuration",
+          "summary": "Executed the exact approved guarded live command for queue item 1. The executor blocked before writes or external calls because live gates are disabled and IndexNow key/keyLocation are missing."
         }
       ]
     },
     "DIGITAL-PR-01E-24H-REVIEW": {
       "repo": "fap-api",
       "branch": "codex/digital-pr-01e-24h-review",
-      "status": "registered",
+      "status": "blocked_waiting_for_successful_live_canary",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-02"
       ],
@@ -15673,9 +15695,13 @@
         "review_window": {
           "status": "pending",
           "summary": "Should run after roughly 24 hours of canary observation."
+        },
+        "dependency": {
+          "status": "blocked",
+          "summary": "SEARCH-CHANNEL-LIVE-02 did not submit because production IndexNow live configuration is missing."
         }
       },
-      "failure_reason": null,
+      "failure_reason": "blocked_waiting_for_successful_live_canary",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -15684,6 +15710,11 @@
           "at": "2026-05-21T19:05:00+08:00",
           "status": "registered",
           "summary": "Registered 24h review task after the small URL submission canary; no retry, expansion, or extra submission is authorized."
+        },
+        {
+          "at": "2026-05-21T22:54:00+08:00",
+          "status": "blocked_waiting_for_successful_live_canary",
+          "summary": "24h review cannot start because no live canary submission occurred."
         }
       ]
     },

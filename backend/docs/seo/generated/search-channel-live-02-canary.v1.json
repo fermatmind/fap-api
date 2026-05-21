@@ -1,0 +1,68 @@
+{
+  "id": "SEARCH-CHANNEL-LIVE-02",
+  "status": "blocked_missing_indexnow_live_configuration",
+  "checked_at": "2026-05-21T22:54:00+08:00",
+  "approval_phrase_present": true,
+  "approved_queue_item_id": 1,
+  "approved_channel": "indexnow",
+  "approved_url": "https://fermatmind.com/en",
+  "preflight_pr": "https://github.com/fermatmind/fap-api/pull/1533",
+  "preflight_merge_commit": "3426bfaff578f72980c6bd5e7a0ab182d14d227b",
+  "production_release": "20260521220637",
+  "production_revision": "35d1f33b038df4eac330475d072f25fbbfd66364",
+  "live_submission_performed": false,
+  "external_calls_attempted": false,
+  "search_submission_attempted": false,
+  "writes_attempted": false,
+  "writes_committed": false,
+  "scheduler_activation": false,
+  "bulk_submission": false,
+  "production_env_edit_performed": false,
+  "dns_change_performed": false,
+  "command": "php artisan seo-intel:search-channel-submit --queue-item-id=1 --approval-phrase=<exact approved phrase> --actor=rainie-codex --json",
+  "result": {
+    "runtime": "search_channel_live_submission",
+    "queue_item_id": 1,
+    "channel": "indexnow",
+    "canonical_url": "https://fermatmind.com/en",
+    "dry_run": false,
+    "approval_phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 1 channel indexnow URL https://fermatmind.com/en.",
+    "external_calls_attempted": false,
+    "search_submission_attempted": false,
+    "writes_attempted": false,
+    "writes_committed": false,
+    "submission_status": "not_attempted",
+    "execution_state": "dry_run_ready",
+    "safety_flags": {
+      "scheduler_enabled": false,
+      "bulk_submission": false,
+      "raw_secret_output": false,
+      "sitemap_llms_behavior_changed": false
+    },
+    "status": "blocked",
+    "issues": [
+      "live_submission_gate_disabled",
+      "external_api_gate_disabled",
+      "indexnow_live_api_disabled",
+      "indexnow_key_missing",
+      "indexnow_key_location_missing"
+    ]
+  },
+  "blocker": {
+    "code": "missing_indexnow_live_configuration",
+    "issues": [
+      "live_submission_gate_disabled",
+      "external_api_gate_disabled",
+      "indexnow_live_api_disabled",
+      "indexnow_key_missing",
+      "indexnow_key_location_missing"
+    ],
+    "summary": "The exact approval phrase was present, but production live gates are disabled and IndexNow key/keyLocation are not configured in the production runtime. The guarded executor blocked before writes or external calls."
+  },
+  "next_allowed_action": {
+    "summary": "Configure IndexNow credentials and one-shot live gates through an explicitly approved secure production configuration path, rebuild config cache, rerun SEARCH-CHANNEL-LIVE-02-PREFLIGHT, then request a fresh exact approval phrase before retrying live submission.",
+    "requires_secret_configuration": true,
+    "requires_fresh_preflight": true,
+    "do_not_retry_without_new_preflight": true
+  }
+}
