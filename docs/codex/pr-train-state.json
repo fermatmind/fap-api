@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T03:38:00+08:00",
+  "updated_at": "2026-05-22T03:42:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -4389,7 +4389,7 @@
         "no fap-web change"
       ],
       "commit_sha": "bb315e305714183e7c0130deacfbcf9159c95bd1",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1541",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -11508,6 +11508,11 @@
           "at": "2026-05-22T03:38:00+08:00",
           "status": "committed",
           "summary": "Committed scoped architecture contract implementation at 57927155de71a44b55f42cb1a6e0be5bfa172c04."
+        },
+        {
+          "at": "2026-05-22T03:42:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR #1541 for the crawler log architecture contract. GitHub checks are pending."
         }
       ],
       "branch": "codex/crawler-log-00-architecture-contract",
