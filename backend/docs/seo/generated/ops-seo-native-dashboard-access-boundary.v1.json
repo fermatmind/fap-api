@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "version": "ops-seo-native-dashboard-access-boundary.v1",
+  "task": "OPS-SEO-NATIVE-DASH-04",
+  "runtime": "ops_seo_native_dashboard",
+  "surface": "/ops/seo",
+  "implementation": "permission_audit_no_export_verification",
+  "read_only": true,
+  "allowed_permissions": [
+    "admin.owner",
+    "admin.ops.read"
+  ],
+  "denied_permissions": [
+    "admin.content.read",
+    "admin.content.write",
+    "admin.content.release"
+  ],
+  "unauthenticated_redirects_to_ops_login": true,
+  "admin_owner_allowed": true,
+  "admin_ops_read_allowed": true,
+  "unrelated_permission_denied": true,
+  "public_route_added": false,
+  "export_controls_added": false,
+  "raw_sql_controls_added": false,
+  "metabase_iframe_added": false,
+  "metabase_reverse_proxy_added": false,
+  "metabase_public_url_added": false,
+  "metabase_token_display_added": false,
+  "metabase_embed_secret_display_added": false,
+  "submission_controls_added": false,
+  "queue_mutation_controls_added": false,
+  "approve_retry_submit_controls_added": false,
+  "scheduler_controls_added": false,
+  "collector_controls_added": false,
+  "external_search_api_call_added": false,
+  "crawler_log_read_added": false,
+  "production_operation_performed": false,
+  "runtime_permission_code_changed_in_this_pr": false,
+  "route_added_in_this_pr": false,
+  "view_runtime_write_controls_added_in_this_pr": false,
+  "audit_expectations": [
+    "ops_seo_page_access",
+    "permission_change",
+    "export_approval_decision",
+    "emergency_revoke_action"
+  ],
+  "audit_forbidden_fields": [
+    "raw_ip",
+    "raw_user_agent",
+    "cookies",
+    "tokens",
+    "emails",
+    "order_ids",
+    "payment_ids",
+    "attempt_ids",
+    "provider_payloads",
+    "crawler_log_detail",
+    "metabase_tokens",
+    "metabase_urls",
+    "metabase_embed_secrets"
+  ],
+  "next_task": "CRAWLER-LOG-OBSERVABILITY-TRAIN-01"
+}
