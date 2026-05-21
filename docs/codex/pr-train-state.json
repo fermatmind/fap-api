@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T03:10:00+08:00",
+  "updated_at": "2026-05-22T03:35:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10960,6 +10960,39 @@
         },
         "github": {
           "status": "passed"
+        },
+        "crawler_log_architecture_contract_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelCrawlerLogArchitectureContract",
+          "evidence": "8 tests passed with 114 assertions."
+        },
+        "crawler_log_readiness_contract_phpunit_current": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelCrawlerLogReadinessContract",
+          "evidence": "5 tests passed with 92 assertions."
+        },
+        "seo_intel_phpunit_current": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "evidence": "301 tests passed with 4809 assertions."
+        },
+        "route_list_current": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 203 routes reported."
+        },
+        "pint_current": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Pint completed successfully; 3441 files checked."
+        },
+        "architecture_json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/crawler-log-architecture-contract.v1.json >/dev/null"
+        },
+        "current_yaml_state_diff_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null; python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"; git diff --check; git diff --cached --check"
         }
       },
       "sidecar_issues": [],
@@ -11357,9 +11390,9 @@
     },
     "CRAWLER-LOG-00": {
       "repo": "fap-api",
-      "status": "merged",
-      "state": "merged",
-      "title": "Crawler log readiness contract",
+      "status": "in_progress",
+      "state": "in_progress",
+      "title": "Crawler log architecture contract",
       "depends_on": [
         "SEO-DASH-PROD-04B"
       ],
@@ -11375,7 +11408,7 @@
       "sidecar_allowed": true,
       "stop_on_safety_violation": true,
       "failure_reason": null,
-      "next_pr": "CLAIM-LINT-00",
+      "next_pr": "CRAWLER-LOG-01",
       "planned_at": "2026-05-19T01:02:33Z",
       "checks": {
         "registration": {
@@ -11388,7 +11421,7 @@
         },
         "scope": {
           "status": "in_progress",
-          "evidence": "Implementing only crawler log readiness contract doc, generated artifact, focused SeoIntel test, and PR train state metadata. No production log read, CDN/Nginx/OpenResty change, raw storage, scheduler, env edit, deploy, collector write, or production operation executed."
+          "evidence": "Implementing only crawler log architecture contract doc, generated artifact, focused SeoIntel test, and PR train metadata. No production log read, runtime parser, scheduler, migration, collector write, deployment, env edit, external search API call, URL submission, Metabase exposure, business DB / Tencent RDS / Node2 access, or production operation executed."
         },
         "scope_validation": {
           "status": "pass",
@@ -11460,18 +11493,30 @@
           "at": "2026-05-19T02:26:15Z",
           "status": "merged",
           "summary": "Reconciled CRAWLER-LOG-00 as merged via PR #1472. Remote branch absent and local main synced."
+        },
+        {
+          "at": "2026-05-22T03:25:00+08:00",
+          "status": "in_progress",
+          "summary": "Started supplemental CRAWLER-LOG-00 architecture contract PR from latest main using the user-provided contract. Scope is docs/generated/test/metadata only and keeps production log reads, runtime parser, scheduler, migrations, collector writes, env edits, deployments, external search APIs, URL submissions, Metabase exposure, and raw persistence blocked."
+        },
+        {
+          "at": "2026-05-22T03:35:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Added crawler log architecture contract, generated artifact, and focused SeoIntel test. Focused architecture test, existing crawler log readiness test, full SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and diff checks passed. No production log read, runtime parser, scheduler, migration, collector write, env edit, deployment, external API call, URL submission, Metabase exposure, or production operation performed."
         }
       ],
-      "branch": "codex/crawler-log-00-readiness-contract",
+      "branch": "codex/crawler-log-00-architecture-contract",
       "base": "main",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1472",
-      "commit_sha": "56a56f73",
-      "final_status": "completed",
-      "merge_commit_sha": "4f619c18",
-      "merge_observed": true,
-      "merged_at": "2026-05-19T02:26:15Z",
-      "remote_branch_deleted": true,
-      "local_cleanup_executed": true
+      "pr_url": null,
+      "commit_sha": null,
+      "previous_pr_url": "https://github.com/fermatmind/fap-api/pull/1472",
+      "previous_merge_commit_sha": "4f619c18",
+      "final_status": null,
+      "merge_commit_sha": null,
+      "merge_observed": false,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     },
     "CLAIM-LINT-00": {
       "repo": "fap-api",

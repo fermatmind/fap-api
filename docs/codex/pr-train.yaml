@@ -779,10 +779,7 @@ prs:
       - cd backend && php artisan route:list --no-ansi
       - cd backend && vendor/bin/pint --test
       - python3 -m json.tool backend/docs/seo/generated/controlled-write-enablement-plan.v1.json >/dev/null
-      - python3 - <<'PY'
-        import yaml, pathlib
-        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
-        PY
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
       - git diff --check
       - git diff --cached --check
     merge_policy:
@@ -5740,32 +5737,42 @@ prs:
     repo: fap-api
     depends_on:
       - SEO-DASH-PROD-04B
-    branch: codex/crawler-log-00-readiness-contract
+    branch: codex/crawler-log-00-architecture-contract
     base: main
-    title: "docs(seo-intel): add crawler log readiness contract"
-    name: "Crawler log readiness contract"
-    train_scope: seo_intel_crawler_log_readiness_contract
+    title: "docs(seo-intel): add crawler log architecture contract"
+    name: "Crawler log architecture contract"
+    train_scope: seo_intel_crawler_log_architecture_contract
     risk_level: low_docs_contract_no_log_read
     type: docs/contract PR
     scope:
-      - Define crawler log source approval, sanitization, and ingestion readiness gates.
-      - Keep production crawler log reads and CDN/Nginx/OpenResty changes blocked.
-      - Add generated contract artifact and focused test.
+      - Define crawler log as aggregate-only bot observability, not URL Truth, Search Channel Queue, CMS authority, or issue auto-fix.
+      - Lock allowed and forbidden sources, aggregate schema fields, forbidden persistent raw fields, bot normalization, path privacy transform, private path denylist, URL Truth boundary, fixture plan, command contract, and production canary approval.
+      - Keep production crawler log reads, runtime parser, scheduler, migrations, collector writes, deployments, env edits, Metabase exposure, external search API calls, and URL submissions blocked.
+      - Add generated architecture contract artifact and focused test.
     allowed_paths:
+      - backend/docs/seo/crawler-log-architecture-contract.md
+      - backend/docs/seo/generated/crawler-log-architecture-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogArchitectureContractTest.php
       - backend/docs/seo/crawler-log-readiness-contract.md
       - backend/docs/seo/generated/crawler-log-readiness-contract.v1.json
       - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogReadinessContractTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
-      - Read production logs, change CDN/Nginx/OpenResty config, store raw IP/cookie/user-agent data, or enable scheduler.
-      - Run collector writes, deploy, or edit env files.
+      - Read production logs, add runtime parser, change CDN/Nginx/OpenResty config, store raw IP/cookie/user-agent/request URI/query/header data, or enable scheduler.
+      - Run collector writes, migrations, deployments, env edits, live search API calls, URL submissions, Metabase exposure, or business DB / Tencent RDS / Node2 access.
     validation:
+      - cd backend && php artisan test --filter=SeoIntelCrawlerLogArchitectureContract
       - cd backend && php artisan test --filter=SeoIntelCrawlerLogReadinessContract
       - cd backend && php artisan test --filter=SeoIntel
       - cd backend && php artisan route:list --no-ansi
       - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/crawler-log-architecture-contract.v1.json >/dev/null
       - python3 -m json.tool backend/docs/seo/generated/crawler-log-readiness-contract.v1.json >/dev/null
+      - python3 - <<'PY'
+        import yaml, pathlib
+        yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())
+        PY
       - git diff --check
       - git diff --cached --check
     merge_policy:
@@ -5778,7 +5785,7 @@ prs:
     metabase_deployment: false
     human_review_required: true
     production_approval_required: false
-    next_task: CLAIM-LINT-00
+    next_task: CRAWLER-LOG-01
 
   - id: CLAIM-LINT-00
     repo: fap-api
