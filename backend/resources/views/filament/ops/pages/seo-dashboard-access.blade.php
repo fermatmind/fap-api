@@ -71,7 +71,7 @@
 
         <x-filament-ops::ops-section
             title="Issue Queue overview"
-            description="Read-only issue aggregates and recent safe rows. Raw evidence, payloads, JSON, and PII stay hidden."
+            description="Issue Queue detail panel with read-only aggregates and recent safe rows. Aggregate buckets provide safe filter dimensions; raw evidence, payloads, JSON, and PII stay hidden."
         >
             <div class="ops-card-list">
                 @foreach ($this->issueQueueAggregateCards() as $card)
@@ -101,10 +101,14 @@
                 <x-slot name="head">
                     <tr>
                         <th>canonical path</th>
+                        <th>locale</th>
                         <th>page_entity_type</th>
                         <th>issue_type</th>
                         <th>severity</th>
+                        <th>source_system</th>
+                        <th>source_engine</th>
                         <th>status</th>
+                        <th>lifecycle_state</th>
                         <th>detected_at</th>
                         <th>updated_at</th>
                     </tr>
@@ -113,10 +117,14 @@
                 @foreach ($recentIssues as $issue)
                     <tr>
                         <td>{{ $issue['canonical_path'] ?? '-' }}</td>
+                        <td>{{ $issue['locale'] ?? '-' }}</td>
                         <td>{{ $issue['page_entity_type'] ?? '-' }}</td>
                         <td>{{ $issue['issue_type'] ?? '-' }}</td>
                         <td>{{ $issue['severity'] ?? '-' }}</td>
+                        <td>{{ $issue['source_system'] ?? '-' }}</td>
+                        <td>{{ $issue['source_engine'] ?? '-' }}</td>
                         <td>{{ $issue['status'] ?? '-' }}</td>
+                        <td>{{ $issue['lifecycle_state'] ?? '-' }}</td>
                         <td>{{ $issue['detected_at'] ?? '-' }}</td>
                         <td>{{ $issue['updated_at'] ?? '-' }}</td>
                     </tr>
@@ -126,7 +134,7 @@
 
         <x-filament-ops::ops-section
             title="Search Channel Queue overview"
-            description="Read-only channel state. This page has no approve, retry, submit, scheduler, collector, or live API controls."
+            description="Search Channel Queue detail panel with read-only channel state and safe filter dimensions. This page has no approve, retry, submit, scheduler, collector, or live API controls."
         >
             <div class="ops-card-list">
                 @foreach ($this->searchChannelQueueAggregateCards() as $card)
@@ -156,9 +164,16 @@
                 <x-slot name="head">
                     <tr>
                         <th>canonical path</th>
+                        <th>locale</th>
+                        <th>page_entity_type</th>
+                        <th>source_authority</th>
                         <th>channel</th>
+                        <th>eligibility_state</th>
                         <th>approval_state</th>
                         <th>execution_state</th>
+                        <th>indexability_state</th>
+                        <th>claim_boundary_state</th>
+                        <th>private_flow</th>
                         <th>created_at</th>
                         <th>updated_at</th>
                     </tr>
@@ -167,9 +182,16 @@
                 @foreach ($recentQueueRows as $row)
                     <tr>
                         <td>{{ $row['canonical_path'] ?? '-' }}</td>
+                        <td>{{ $row['locale'] ?? '-' }}</td>
+                        <td>{{ $row['page_entity_type'] ?? '-' }}</td>
+                        <td>{{ $row['source_authority'] ?? '-' }}</td>
                         <td>{{ $row['channel'] ?? '-' }}</td>
+                        <td>{{ $row['eligibility_state'] ?? '-' }}</td>
                         <td>{{ $row['approval_state'] ?? '-' }}</td>
                         <td>{{ $row['execution_state'] ?? '-' }}</td>
+                        <td>{{ $row['indexability_state'] ?? '-' }}</td>
+                        <td>{{ $row['claim_boundary_state'] ?? '-' }}</td>
+                        <td>{{ ($row['private_flow'] ?? false) ? 'true' : 'false' }}</td>
                         <td>{{ $row['created_at'] ?? '-' }}</td>
                         <td>{{ $row['updated_at'] ?? '-' }}</td>
                     </tr>
