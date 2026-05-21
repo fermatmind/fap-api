@@ -268,6 +268,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_eq_v5_report_asset_layer_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Content/Eq60ContentCompileService.php',
+            'backend/app/Services/Content/Eq60ContentLintService.php',
+            'backend/app/Services/Content/Eq60PackLoader.php',
+            'backend/content_packs/EQ_60/v1/compiled/golden_cases.compiled.json',
+            'backend/content_packs/EQ_60/v1/compiled/landing.compiled.json',
+            'backend/content_packs/EQ_60/v1/compiled/manifest.json',
+            'backend/content_packs/EQ_60/v1/compiled/options.compiled.json',
+            'backend/content_packs/EQ_60/v1/compiled/policy.compiled.json',
+            'backend/content_packs/EQ_60/v1/compiled/questions.compiled.json',
+            'backend/content_packs/EQ_60/v1/compiled/report.compiled.json',
+            'backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json',
+            'backend/content_packs/EQ_60/v1/raw/report_assets/core_formulations.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/core_formulations.json',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_public_content_release_guard_command_changes(): void
     {
         $changed = [
@@ -1977,6 +1999,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEq60V5ReportAssetLayerChange($file)) {
+                continue;
+            }
+
             if ($this->isEq60FreeReportContractChange($file, $repoRoot, $baseRef)) {
                 continue;
             }
@@ -2683,6 +2709,35 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             ],
             default => false,
         };
+    }
+
+    private function isEq60V5ReportAssetLayerChange(string $file): bool
+    {
+        if (in_array($file, [
+            'backend/app/Services/Content/Eq60ContentCompileService.php',
+            'backend/app/Services/Content/Eq60ContentLintService.php',
+            'backend/app/Services/Content/Eq60PackLoader.php',
+        ], true)) {
+            return true;
+        }
+
+        if (preg_match('#^backend/content_packs/(EQ_60|EQ_EMOTIONAL_INTELLIGENCE)/v1/raw/report_assets/[a-z_]+\.json$#', $file) === 1) {
+            return true;
+        }
+
+        if (preg_match('#^backend/content_packs/(EQ_60|EQ_EMOTIONAL_INTELLIGENCE)/v1/compiled/report_assets\.compiled\.json$#', $file) === 1) {
+            return true;
+        }
+
+        return in_array($file, [
+            'backend/content_packs/EQ_60/v1/compiled/golden_cases.compiled.json',
+            'backend/content_packs/EQ_60/v1/compiled/landing.compiled.json',
+            'backend/content_packs/EQ_60/v1/compiled/manifest.json',
+            'backend/content_packs/EQ_60/v1/compiled/options.compiled.json',
+            'backend/content_packs/EQ_60/v1/compiled/policy.compiled.json',
+            'backend/content_packs/EQ_60/v1/compiled/questions.compiled.json',
+            'backend/content_packs/EQ_60/v1/compiled/report.compiled.json',
+        ], true);
     }
 
     private function isCiAuthBypassHardeningFile(string $file): bool
