@@ -8061,6 +8061,7 @@ prs:
       - Enable scheduler, persist write gates, edit env, rotate credentials, deploy, or change sitemap/llms behavior.
       - Approve draft/private/noindex/claim-unsafe/stale/frontend-fallback/static-sitemap/static-llms URLs.
     validation:
+      - Production runtime is confirmed to contain the guarded live submission executor before any approval phrase is produced.
       - Queue canary item exists with approval_state=pending and execution_state=dry_run_ready.
       - Candidate URL set is small, explicit, canonical, backend-authoritative, indexable, and channel-eligible.
       - Dry-run/no-write command succeeds immediately before live approval.
@@ -8076,7 +8077,7 @@ prs:
     production_migration_execution_allowed: false
     external_api_credentials_required: true
     scheduler_activation: false
-    next_task: SEARCH-CHANNEL-LIVE-02-EXECUTOR
+    next_task: SEARCH-CHANNEL-LIVE-02
 
   - id: SEARCH-CHANNEL-LIVE-02-EXECUTOR
     repo: fap-api

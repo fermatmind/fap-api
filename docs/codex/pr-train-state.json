@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-21T19:55:00+08:00",
+  "updated_at": "2026-05-21T20:30:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -15397,51 +15397,63 @@
     "SEARCH-CHANNEL-LIVE-02-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-preflight",
-      "status": "merged",
+      "status": "pr_opened_blocked_preflight",
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE",
         "NODE3-RETIREMENT-FINAL-CHECK"
       ],
-      "commit_sha": "b70820f751ce5b7a26552145e9e49efc70d6b195",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1528",
+      "commit_sha": "d0b3c0712be802bd13e9620ca772567b02a8e504",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1530",
       "checks": {
         "dependencies": {
           "status": "pass",
-          "summary": "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE and NODE3-RETIREMENT-FINAL-CHECK are completed."
+          "summary": "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE and NODE3-RETIREMENT-FINAL-CHECK were already completed; executor sidecar PR #1529 is now merged."
+        },
+        "executor_merged": {
+          "status": "pass",
+          "summary": "SEARCH-CHANNEL-LIVE-02-EXECUTOR merged via PR #1529 at af8a050bfed88631cfc687775402548848ba87a1 with passing GitHub checks."
+        },
+        "production_deploy_scope": {
+          "status": "blocked",
+          "summary": "The push after PR #1529 deployed staging only. Latest confirmed production workflow_dispatch remains run 26174360293 at SHA effadd311f6c6bdfee137f8c9d10d9edb4ee23c4."
+        },
+        "production_read_only_executor_dry_run": {
+          "status": "blocked",
+          "command": "cd /var/www/fap-api/current/backend && php artisan seo-intel:search-channel-submit --queue-item-id=1 --dry-run --json",
+          "summary": "Not run because production is not verified at the executor SHA; local SSH to ubuntu@139.224.130.204 reached TCP/22 but timed out during SSH banner exchange."
         },
         "queue_item": {
-          "status": "pass",
-          "summary": "Latest queue item id=1 is indexnow https://fermatmind.com/en with approval_state=pending and execution_state=dry_run_ready."
-        },
-        "url_health": {
-          "status": "pass",
-          "summary": "https://fermatmind.com/en returned HTTP 200."
-        },
-        "fresh_dry_run": {
-          "status": "pass",
-          "summary": "seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=1 returned candidate_count=1, eligible_count=1, planned_queue_count=1, writes_committed=false, external_calls_attempted=false, search_submission_attempted=false."
-        },
-        "write_gate": {
-          "status": "pass",
-          "summary": "Search Channel Queue write gate is disabled for normal runtime."
-        },
-        "live_executor": {
-          "status": "blocked",
-          "summary": "No guarded live submission executor exists. The current queue command explicitly reports search_submission_attempted=false and safety_flags.no_live_submission=true."
+          "status": "carried_forward_not_refreshed",
+          "summary": "Prior canary item remains the intended candidate: id=1 indexnow https://fermatmind.com/en pending/dry_run_ready; production DB state was not refreshed in this rerun."
         },
         "approval_phrase": {
-          "status": "blocked",
-          "summary": "No SEARCH-CHANNEL-LIVE-02 approval phrase was produced because there is no live executor to approve."
+          "status": "withheld",
+          "summary": "No SEARCH-CHANNEL-LIVE-02 live approval phrase is output until production is deployed to the executor SHA and a fresh production executor dry-run passes."
         },
-        "github_merge_reconciliation": {
+        "no_live_submission": {
           "status": "pass",
-          "summary": "GitHub PR #1528 is MERGED and origin/main contains merge commit b70820f751ce5b7a26552145e9e49efc70d6b195; remote task branch is absent."
+          "summary": "No live submission, external API call, queue write, scheduler activation, env edit, DNS change, or production deploy occurred in this preflight rerun."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelSearchChannelLive02",
+          "summary": "1 test passed, 25 assertions; generated preflight artifact remains blocked until production executor deploy/read-only verification."
+        },
+        "pint_targeted": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/SeoIntelSearchChannelLive02PreflightTest.php",
+          "summary": "Targeted Pint check passed for the new preflight artifact guard test."
+        },
+        "json_yaml_diff": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/search-channel-live-02-preflight.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\" && git diff --check",
+          "summary": "Generated JSON, PR-train state JSON, PR-train YAML, and whitespace diff check passed."
         }
       },
-      "failure_reason": "blocked_live_submission_executor_missing: current backend can plan/enqueue queue items but cannot execute a live IndexNow/Search Channel URL submission.",
-      "merged_at": "2026-05-21T11:21:58Z",
-      "remote_branch_deleted": true,
-      "local_cleanup_executed": true,
+      "failure_reason": "blocked_production_executor_not_deployed: executor is merged to main, but production has not been confirmed deployed to af8a050bfed88631cfc687775402548848ba87a1 and the production read-only executor dry-run could not be run.",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
       "history": [
         {
           "at": "2026-05-21T19:05:00+08:00",
@@ -15457,24 +15469,49 @@
           "at": "2026-05-21T19:34:00+08:00",
           "status": "merged_blocked_live_submission_executor_missing",
           "summary": "Reconciled SEARCH-CHANNEL-LIVE-02-PREFLIGHT as merged via PR #1528 while preserving the executor-missing blocker; this unblocks the separate executor task only, not live submission."
+        },
+        {
+          "at": "2026-05-21T20:15:00+08:00",
+          "status": "blocked_production_executor_not_deployed",
+          "summary": "Reran preflight after executor merge. The executor is on main and staging, but production is not verified at the executor SHA, so the live approval phrase is withheld and SEARCH-CHANNEL-LIVE-02 remains blocked. No live submission or production operation occurred."
+        },
+        {
+          "at": "2026-05-21T20:20:00+08:00",
+          "status": "local_validation_passed_blocked",
+          "summary": "Local validation passed for the blocked preflight artifact and metadata. The live canary remains blocked until production deploy/read-only executor dry-run."
+        },
+        {
+          "at": "2026-05-21T20:25:00+08:00",
+          "status": "commit_created",
+          "summary": "Committed the blocked preflight rerun artifact and ledger update on codex/search-channel-live-02-preflight."
+        },
+        {
+          "at": "2026-05-21T20:30:00+08:00",
+          "status": "pr_opened_blocked_preflight",
+          "summary": "Opened PR #1530 for the blocked preflight rerun. This PR records that production deploy/read-only executor verification is required before live canary approval."
         }
       ],
       "sidecar_issues": [
         {
-          "title": "Live submission executor missing",
-          "status": "blocking_next_task",
-          "summary": "SEARCH-CHANNEL-LIVE-02 cannot run until a separate scoped runtime task adds a guarded live submission executor with exact URL/channel approval, idempotency, response capture, and audit events."
+          "title": "Production executor deploy/read-only verification required",
+          "status": "blocking_live_canary",
+          "summary": "Executor exists on main but SEARCH-CHANNEL-LIVE-02 remains blocked until production deploy readiness/deploy and a fresh production dry-run confirm queue item 1 is still pending/dry_run_ready."
+        },
+        {
+          "title": "Previous live executor missing blocker resolved",
+          "status": "resolved_by_pr_1529",
+          "summary": "The missing executor blocker from PR #1528 was resolved by SEARCH-CHANNEL-LIVE-02-EXECUTOR in PR #1529."
         }
       ]
     },
     "SEARCH-CHANNEL-LIVE-02-EXECUTOR": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-executor",
-      "status": "pr_opened_github_checks_pending",
+      "status": "merged",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-02-PREFLIGHT"
       ],
-      "commit_sha": "3151d3388972bf1e358bef547229c1665389e995",
+      "commit_sha": "af8a050bfed88631cfc687775402548848ba87a1",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1529",
       "checks": {
         "dependencies": {
@@ -15520,14 +15557,18 @@
           "summary": "Generated JSON, PR-train state JSON, PR-train YAML, and whitespace diff check passed."
         },
         "github_pr": {
-          "status": "pending",
-          "summary": "Opened PR #1529 for SEARCH-CHANNEL-LIVE-02-EXECUTOR; GitHub checks are pending."
+          "status": "merged_success",
+          "summary": "PR #1529 merged at af8a050bfed88631cfc687775402548848ba87a1 after all GitHub checks passed."
+        },
+        "github_merge_reconciliation": {
+          "status": "pass",
+          "summary": "GitHub PR #1529 is MERGED, origin/main contains merge commit af8a050bfed88631cfc687775402548848ba87a1, GitHub checks passed, and the remote task branch is deleted."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-21T11:53:15Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-21T19:34:00+08:00",
@@ -15553,13 +15594,18 @@
           "at": "2026-05-21T19:55:00+08:00",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1529 for the guarded live submission executor. No live submission or production operation occurred."
+        },
+        {
+          "at": "2026-05-21T20:15:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled SEARCH-CHANNEL-LIVE-02-EXECUTOR after PR #1529 merged. Main now contains the guarded live submission executor; no live submission occurred."
         }
       ]
     },
     "SEARCH-CHANNEL-LIVE-02": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-canary-submission",
-      "status": "registered",
+      "status": "blocked_waiting_for_production_executor_preflight",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-02-PREFLIGHT"
       ],
@@ -15569,9 +15615,13 @@
         "human_approval": {
           "status": "required",
           "summary": "Live external submission is blocked until the exact human approval phrase is present."
+        },
+        "preflight": {
+          "status": "blocked",
+          "summary": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT has not produced an approval phrase because production is not verified at the executor SHA."
         }
       },
-      "failure_reason": null,
+      "failure_reason": "blocked_waiting_for_production_executor_preflight",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -15580,6 +15630,11 @@
           "at": "2026-05-21T19:05:00+08:00",
           "status": "registered",
           "summary": "Registered human-approved small URL submission canary. This task may not execute without the exact approval phrase produced by SEARCH-CHANNEL-LIVE-02-PREFLIGHT."
+        },
+        {
+          "at": "2026-05-21T20:15:00+08:00",
+          "status": "blocked_waiting_for_production_executor_preflight",
+          "summary": "Live canary remains blocked until backend production deploy/read-only preflight rerun outputs the exact approval phrase."
         }
       ]
     },

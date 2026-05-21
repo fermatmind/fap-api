@@ -1,11 +1,47 @@
 {
   "id": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT",
-  "status": "blocked_live_submission_executor_missing",
-  "checked_at": "2026-05-21T19:12:00+08:00",
+  "status": "blocked_production_executor_not_deployed",
+  "checked_at": "2026-05-21T20:15:00+08:00",
   "live_submission_performed": false,
   "external_calls_attempted": false,
   "search_submission_attempted": false,
   "scheduler_activation": false,
+  "production_env_edit_performed": false,
+  "production_deploy_performed_in_this_task": false,
+  "dns_change_performed": false,
+  "executor": {
+    "task_id": "SEARCH-CHANNEL-LIVE-02-EXECUTOR",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1529",
+    "merged_at": "2026-05-21T11:53:15Z",
+    "merge_commit": "af8a050bfed88631cfc687775402548848ba87a1",
+    "github_checks": "success",
+    "command": "seo-intel:search-channel-submit",
+    "command_available_on_main": true,
+    "single_queue_item_required": true,
+    "exact_approval_phrase_required": true,
+    "atomic_claim_required": true,
+    "scheduler_registered": false,
+    "bulk_submission_supported": false,
+    "deployment_scope_after_merge": "staging_only",
+    "staging_deploy_run_id": 26224261797,
+    "staging_deploy_completed_at": "2026-05-21T12:03:43Z",
+    "production_deploy_after_merge": false
+  },
+  "production_runtime": {
+    "target_host": "139.224.130.204",
+    "target_path": "/var/www/fap-api/current/backend",
+    "required_deploy_sha": "af8a050bfed88631cfc687775402548848ba87a1",
+    "last_successful_production_deploy_run_id": 26174360293,
+    "last_successful_production_deploy_completed_at": "2026-05-20T16:17:20Z",
+    "last_successful_production_deploy_sha": "effadd311f6c6bdfee137f8c9d10d9edb4ee23c4",
+    "production_executor_presence_verified": false,
+    "remote_read_only_command_verified": false,
+    "local_ssh_attempt": {
+      "target": "ubuntu@139.224.130.204",
+      "tcp_22_open": true,
+      "result": "failed_banner_timeout_after_tcp_22_open"
+    }
+  },
   "queue_item": {
     "id": 1,
     "batch_id": 1,
@@ -22,37 +58,42 @@
     "execution_state": "dry_run_ready",
     "indexability_state": "indexable",
     "claim_boundary_state": "claim_safe",
-    "private_flow": false
+    "private_flow": false,
+    "verification_state": "carried_forward_not_refreshed",
+    "verification_source": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT PR #1528; production DB state was not refreshed in this rerun because production is not verified at the executor SHA."
   },
   "fresh_dry_run": {
-    "status": "success",
-    "dry_run": true,
-    "no_write": true,
-    "candidate_count": 1,
-    "eligible_count": 1,
-    "blocked_count": 0,
-    "planned_queue_count": 1,
-    "channel_breakdown": {
-      "indexnow": 1
-    },
-    "page_type_breakdown": {
-      "home": 1
-    },
-    "writes_attempted": false,
-    "writes_committed": false,
+    "status": "not_run_on_production",
+    "reason": "Production runtime is not verified to contain seo-intel:search-channel-submit at the executor SHA.",
     "external_calls_attempted": false,
     "search_submission_attempted": false,
-    "write_gate_enabled": false
+    "writes_attempted": false,
+    "writes_committed": false
   },
-  "public_url_smoke": {
-    "url": "https://fermatmind.com/en",
-    "http_status": 200
+  "executor_dry_run": {
+    "command": "php artisan seo-intel:search-channel-submit --queue-item-id=1 --dry-run --json",
+    "status": "not_run_on_production",
+    "reason": "Production runtime requires backend deploy/read-only verification first.",
+    "external_calls_attempted": false,
+    "search_submission_attempted": false,
+    "writes_attempted": false,
+    "writes_committed": false
   },
-  "blockers": [
-    "No live Search Channel submission executor exists in the current backend.",
-    "The current queue command explicitly keeps search_submission_attempted=false and safety_flags.no_live_submission=true.",
-    "Existing IndexNow/Baidu collector foundations block real URL submission."
-  ],
+  "blocker": {
+    "code": "production_deploy_required",
+    "summary": "The guarded executor is merged to main but has not been confirmed on production; live canary approval phrase is withheld until production deploy readiness, production deploy, and a fresh production dry-run pass."
+  },
   "approval_phrase": null,
-  "next_allowed_action": "Add a separate guarded live submission executor before SEARCH-CHANNEL-LIVE-02 can be approved."
+  "withheld_approval_phrase_reason": "Do not output a live approval phrase until the production runtime contains the executor and a fresh production dry-run confirms queue item 1 is still pending/dry_run_ready.",
+  "required_rerun_commands": [
+    "cd /var/www/fap-api/current/backend",
+    "php artisan seo-intel:search-channel-submit --queue-item-id=1 --dry-run --json",
+    "php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=1"
+  ],
+  "next_allowed_action": {
+    "summary": "Run backend production deploy readiness/deploy for the executor SHA, then rerun SEARCH-CHANNEL-LIVE-02-PREFLIGHT. Do not run the live canary yet.",
+    "task_after_backend_deploy": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT",
+    "canary_task_after_passing_preflight": "SEARCH-CHANNEL-LIVE-02",
+    "deployment_readiness_prompt": "Use $fermatmind-deploy-readiness to prepare production deployment. I explicitly allow read-only SSH verification. Do local readiness and read-only remote readiness, resolve backend/frontend SHAs and latest merged PRs, decide whether deploy is necessary, and output the exact confirmation phrases for any required deploy. Do not deploy yet."
+  }
 }
