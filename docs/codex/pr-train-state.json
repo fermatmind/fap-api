@@ -15791,9 +15791,9 @@
     "OPS-SEO-NATIVE-DASH-01": {
       "repo": "fap-api",
       "branch": "codex/ops-seo-native-dash-01-read-model",
-      "status": "local_validation_passed",
-      "commit_sha": null,
-      "pr_url": null,
+      "status": "pr_opened_github_checks_pending",
+      "commit_sha": "82f39109388e4ad83d033a8aeeb5bdf504f8e47f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1537",
       "checks": {
         "manifest_bootstrap": {
           "status": "pass",
@@ -15853,6 +15853,11 @@
           "at": "2026-05-22T00:40:00+08:00",
           "status": "local_validation_passed",
           "summary": "Scoped validations passed for focused SeoIntel dashboard tests, full SeoIntel suite, route list, Pint, BigFive runtime freeze guard, JSON/YAML checks, and git diff checks."
+        },
+        {
+          "at": "2026-05-22T00:50:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR #1537 for the backend read model. GitHub checks are pending and mergeStateStatus is UNSTABLE until checks complete."
         }
       ]
     },
