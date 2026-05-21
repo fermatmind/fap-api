@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-21T18:29:00+08:00",
+  "updated_at": "2026-05-21T18:40:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -15032,6 +15032,14 @@
         "github_pr": {
           "status": "pending",
           "summary": "Opened draft PR #1524; GitHub checks pending."
+        },
+        "ops_cert_renewal": {
+          "status": "pass",
+          "summary": "ops.fermatmind.com renewal was converted from manual DNS-01 to HTTP-01 webroot on Aliyun; certbot renew --dry-run succeeded and nginx reload hook is installed."
+        },
+        "node3_deploy_webhook_retired": {
+          "status": "pass",
+          "summary": "GitHub repository push webhook pointing to http://122.152.221.126:9000/hooks/deploy-fap-api was set inactive; Node3 webhook.service is stopped and disabled."
         }
       },
       "failure_reason": null,
@@ -15058,6 +15066,11 @@
           "at": "2026-05-21T18:29:00+08:00",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened draft PR https://github.com/fermatmind/fap-api/pull/1524 for BACKEND-DEPLOY-TARGET-ALIYUN-01. GitHub checks pending."
+        },
+        {
+          "at": "2026-05-21T18:40:00+08:00",
+          "status": "residual_ops_closed",
+          "summary": "Closed residual Aliyun ops certificate renewal and Node3 deploy webhook retirement items after production cutover."
         }
       ]
     },
@@ -15086,6 +15099,10 @@
         "ops_http": {
           "status": "pass",
           "summary": "https://ops.fermatmind.com/ops/login returned HTTP 200 from Aliyun certificate/runtime."
+        },
+        "automated_cert_renewal": {
+          "status": "pass",
+          "summary": "ops.fermatmind.com renewal config now uses authenticator=webroot with webroot_path=/var/www/fap-api/current/backend/public; certbot timer is enabled/active and dry-run renewal succeeded."
         }
       },
       "failure_reason": null,
@@ -15097,6 +15114,11 @@
           "at": "2026-05-21T18:20:00+08:00",
           "status": "completed_external_operation",
           "summary": "Completed Ops domain migration to Aliyun and verified DNS/TLS/runtime."
+        },
+        {
+          "at": "2026-05-21T18:40:00+08:00",
+          "status": "cert_renewal_automated",
+          "summary": "Replaced the manual DNS-01 renewal path for ops.fermatmind.com with HTTP-01/webroot renewal and nginx deploy reload hook."
         }
       ]
     },
@@ -15125,6 +15147,10 @@
         "nginx_tail": {
           "status": "info",
           "summary": "Node3 nginx was left running temporarily for stale DNS-cache tail traffic; Node3 was not powered off or deleted."
+        },
+        "deploy_webhook_retired": {
+          "status": "pass",
+          "summary": "GitHub hook id 598987512 for Node3 deploy endpoint is inactive; Node3 webhook.service is inactive/disabled and TCP/9000 is rejected on the host."
         }
       },
       "failure_reason": null,
@@ -15136,6 +15162,11 @@
           "at": "2026-05-21T18:20:00+08:00",
           "status": "completed_external_operation",
           "summary": "Completed controlled Node3 retirement preflight and stopped old queue/scheduler without shutting down the host."
+        },
+        {
+          "at": "2026-05-21T18:40:00+08:00",
+          "status": "deploy_webhook_retired",
+          "summary": "Disabled the old GitHub push deploy webhook and stopped/disabled Node3 webhook.service so production deployment no longer depends on Node3 port 9000."
         }
       ]
     },
