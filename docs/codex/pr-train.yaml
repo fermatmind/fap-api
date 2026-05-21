@@ -5787,6 +5787,53 @@ prs:
     production_approval_required: false
     next_task: CRAWLER-LOG-01
 
+  - id: CRAWLER-LOG-01
+    repo: fap-api
+    depends_on:
+      - CRAWLER-LOG-00
+    branch: codex/crawler-log-01-readiness-scan
+    base: main
+    title: "docs(seo-intel): add crawler log readiness scan"
+    name: "Crawler log readiness scan"
+    train_scope: seo_intel_crawler_log_readiness_scan
+    risk_level: low_docs_scan_no_log_read
+    type: docs/generated/test PR
+    scope:
+      - Perform a read-only repository readiness scan for crawler log fixture parser work.
+      - Confirm existing crawler log table, parser, collector, config, scheduler, source approval, privacy, and URL Truth boundaries.
+      - Record schema gaps and next PR scope without reading production logs, adding runtime parser code, enabling scheduler, running collector writes, running migrations, deploying, editing env, exposing Metabase, calling search APIs, or submitting URLs.
+    allowed_paths:
+      - backend/docs/seo/crawler-log-readiness-scan.md
+      - backend/docs/seo/generated/crawler-log-readiness-scan.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogReadinessScanTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Read production crawler logs, add runtime parser code, add fixture runtime files, add scheduler entries, run collector writes, run migrations, deploy, edit env, expose Metabase, call external search APIs, submit URLs, or access business DB / Tencent RDS / Node2.
+      - Store raw IP, raw user-agent, raw request URI, query string, cookies, headers, tokens, emails, order IDs, attempt IDs, payment IDs, provider payloads, raw payloads, or raw log lines.
+      - Treat crawler logs as URL Truth, Search Channel Queue, CMS authority, canonical truth, indexability truth, or issue auto-fix.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelCrawlerLogReadinessScan
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/crawler-log-readiness-scan.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    production_approval_required: false
+    next_task: CRAWLER-LOG-02
+
   - id: CLAIM-LINT-00
     repo: fap-api
     depends_on:
