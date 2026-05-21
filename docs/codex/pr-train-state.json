@@ -15397,13 +15397,13 @@
     "SEARCH-CHANNEL-LIVE-02-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-preflight",
-      "status": "preflight_passed_approval_phrase_ready",
+      "status": "pr_opened_ready_for_human_approval",
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE",
         "NODE3-RETIREMENT-FINAL-CHECK"
       ],
-      "commit_sha": "d0b3c0712be802bd13e9620ca772567b02a8e504",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1530",
+      "commit_sha": "e8c0efd9",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1533",
       "checks": {
         "dependencies": {
           "status": "pass",
@@ -15500,6 +15500,11 @@
           "at": "2026-05-21T22:40:00+08:00",
           "status": "preflight_passed_approval_phrase_ready",
           "summary": "Reran preflight after Aliyun production deploy. Production contains the guarded executor, executor dry-run and queue no-write dry-run passed for queue item 1, and the exact live canary approval phrase is now ready. No live submission occurred."
+        },
+        {
+          "at": "2026-05-21T22:45:00+08:00",
+          "status": "pr_opened_ready_for_human_approval",
+          "summary": "Opened PR #1533 to record production dry-run success and the exact approval phrase for SEARCH-CHANNEL-LIVE-02. No live submission occurred."
         }
       ],
       "sidecar_issues": [
