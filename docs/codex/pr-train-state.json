@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-21T19:52:00+08:00",
+  "updated_at": "2026-05-21T19:55:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -15470,12 +15470,12 @@
     "SEARCH-CHANNEL-LIVE-02-EXECUTOR": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-executor",
-      "status": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-02-PREFLIGHT"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "3151d3388972bf1e358bef547229c1665389e995",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1529",
       "checks": {
         "dependencies": {
           "status": "pass",
@@ -15518,6 +15518,10 @@
           "status": "pass",
           "command": "python3 -m json.tool backend/docs/seo/generated/search-channel-live-02-executor.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\" && git diff --check",
           "summary": "Generated JSON, PR-train state JSON, PR-train YAML, and whitespace diff check passed."
+        },
+        "github_pr": {
+          "status": "pending",
+          "summary": "Opened PR #1529 for SEARCH-CHANNEL-LIVE-02-EXECUTOR; GitHub checks are pending."
         }
       },
       "failure_reason": null,
@@ -15544,6 +15548,11 @@
           "at": "2026-05-21T19:50:00+08:00",
           "status": "idempotency_guard_added",
           "summary": "Tightened executor to atomically claim a pending/dry_run_ready queue item before any provider request and verified repeat execution does not send a second HTTP call."
+        },
+        {
+          "at": "2026-05-21T19:55:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1529 for the guarded live submission executor. No live submission or production operation occurred."
         }
       ]
     },
