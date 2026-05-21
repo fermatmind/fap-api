@@ -1,0 +1,726 @@
+{
+    "case_id": "EQ60_COMPASSION_OVERLOAD_ZH",
+    "fixture_schema": "eq60.v5.report_contract_fixture.v1",
+    "locale": "en",
+    "report": {
+        "access": {
+            "all_results_free": true,
+            "blur": false,
+            "locked": false,
+            "paywall": false
+        },
+        "asset_refs": {
+            "action_prescription_id": "empathy_boundary",
+            "career_environment_ids": [
+                "emotional_labor_high",
+                "autonomy_recovery_medium",
+                "interpersonal_density_medium"
+            ],
+            "core_formulation_id": "high_empathy_low_recovery",
+            "mechanism_ids": [
+                "EM_ER_high_low"
+            ],
+            "quality_explanation_asset_id": "eq.quality.level.A",
+            "scene_ids": [
+                "feedback",
+                "conflict",
+                "relationship_boundary"
+            ],
+            "scientific_contract_id": "eq.scientific_contract.default",
+            "score_system_id": "eq.score_system.default",
+            "sjt_bridge_id": "eq.sjt_bridge.planned"
+        },
+        "assets": {
+            "action_prescription": {
+                "do_today": "Before supporting someone, decide how far you can support.",
+                "id": "empathy_boundary",
+                "script": "I can listen for ten minutes, then we can look at the next step together.",
+                "seven_day_plan": [
+                    "Day 1: identify what you are carrying.",
+                    "Day 2: practice a time boundary.",
+                    "Day 3: practice a responsibility boundary.",
+                    "Day 4: recover after support.",
+                    "Day 5: separate understanding from replacing.",
+                    "Day 6: review one help-seeking situation.",
+                    "Day 7: write your support boundary."
+                ],
+                "title": "Empathy Boundary",
+                "watch_out": "Do not replace boundaries with coldness.",
+                "why_this_matters": "High empathy needs boundaries to remain sustainable."
+            },
+            "career_environment": [
+                {
+                    "fit_signal": "High-empathy people can build trust.",
+                    "id": "emotional_labor_high",
+                    "label": "High Emotional Labor",
+                    "level": "high",
+                    "meaning": "Frequent exposure to anxiety, complaints, conflict, or vulnerability.",
+                    "strain_signal": "Low recovery can make the emotional field pull you in.",
+                    "variable": "emotional_labor",
+                    "what_to_verify": "Check whether supervision, review, and rest systems are real."
+                },
+                {
+                    "fit_signal": "Helps most people sustain performance.",
+                    "id": "autonomy_recovery_medium",
+                    "label": "Medium Autonomy Recovery",
+                    "level": "medium",
+                    "meaning": "Some independent rhythm exists, though team rhythm still matters.",
+                    "strain_signal": "Busy or crisis periods may compress it.",
+                    "variable": "autonomy_recovery",
+                    "what_to_verify": "Check recovery arrangements during peak periods."
+                },
+                {
+                    "fit_signal": "Fits switching between collaboration and independent work.",
+                    "id": "interpersonal_density_medium",
+                    "label": "Medium Interpersonal Density",
+                    "level": "medium",
+                    "meaning": "Regular collaboration without constant social demand.",
+                    "strain_signal": "Too many meetings can still drain.",
+                    "variable": "interpersonal_density",
+                    "what_to_verify": "Check weekly meetings, syncs, and cross-team collaboration frequency."
+                }
+            ],
+            "core_formulation": {
+                "core_claim": "You may absorb other people's emotions quickly without separating their state from your own soon enough.",
+                "development_lever": "Build boundaries and recovery after empathy.",
+                "do_not_overread": "The goal is not less empathy; it is empathy with clearer boundaries.",
+                "evidence_basis": [
+                    "EM is meaningfully higher than ER",
+                    "Empathy signal is stronger than recovery signal"
+                ],
+                "id": "high_empathy_low_recovery",
+                "likely_cost": "Conflict, support, and high emotional-labor settings may pull you in too deeply.",
+                "one_liner": "You tend to understand others quickly, while recovery and boundaries are the current lever.",
+                "primary_strength": "Sensitivity to others and trust building.",
+                "title": "High Empathy, Low Recovery"
+            },
+            "mechanisms": [
+                {
+                    "cost": "You may absorb too much emotional labor.",
+                    "development_lever": "Add one boundary check after empathy.",
+                    "id": "EM_ER_high_low",
+                    "micro_action": "Say internally: this is their feeling; I can support without replacing them.",
+                    "pair": "EM_ER",
+                    "state": "high_low",
+                    "strength": "People often feel seen by you.",
+                    "title": "Strong empathy, weaker boundaries and recovery",
+                    "what_it_feels_like": "When someone is distressed, you may quickly move into helping or self-blame.",
+                    "why_it_matters": "The more you understand others, the more you need to know what is not yours to carry."
+                }
+            ],
+            "quality": {
+                "confidence_label": "high",
+                "explanation_asset_id": "eq.quality.level.A"
+            },
+            "reality_scenes": [
+                {
+                    "better_move": "Separate facts, feeling, and next step: what was said, what I feel, what I need to clarify.",
+                    "cost": "When recovery is weak, feedback may feel like rejection.",
+                    "id": "feedback",
+                    "strength": "You can notice intent and relational temperature behind feedback.",
+                    "title": "Feedback",
+                    "typical_response": "When receiving critique or edits, you may notice tone and relational cues before processing the information."
+                },
+                {
+                    "better_move": "Name the shared goal first, then discuss one specific issue.",
+                    "cost": "Without a pause process, you may over-explain, avoid, or rush repair.",
+                    "id": "conflict",
+                    "strength": "You can often see needs on both sides.",
+                    "title": "Conflict",
+                    "typical_response": "During disagreement, you may move between preserving the relationship and expressing yourself."
+                },
+                {
+                    "better_move": "Ask yourself: how far can I support, and which part remains theirs?",
+                    "cost": "The line between supporting and replacing can blur.",
+                    "id": "relationship_boundary",
+                    "strength": "Others may feel received and understood.",
+                    "title": "Relationship Boundaries",
+                    "typical_response": "When someone needs support, you may quickly move into understanding or taking responsibility."
+                }
+            ],
+            "scientific_contract": {
+                "non_ability_statement": "This report is not a certified ability assessment and does not claim to measure true emotional intelligence ability.",
+                "non_clinical_statement": "This report is not for clinical diagnosis, treatment advice, or crisis evaluation.",
+                "non_hiring_statement": "This report is not for hiring, selection, promotion, or other high-stakes employment decisions.",
+                "norm_status_statement": "Current norms are provisional. Percentiles and standard scores explain relative position and will be recalibrated as samples grow.",
+                "quality_rules_statement": "The system considers response time, long-string patterns, extreme responding, neutral responding, and consistency signals to estimate interpretation confidence.",
+                "self_report_statement": "This report reflects your subjective self-perception of emotional and relational patterns. It is not an objective ability test.",
+                "test_definition": "This is an emotional and relational pattern report based on 60 self-report items. It explains how you notice, regulate, respond to, and manage emotions in yourself and others.",
+                "version_statement": "Report version eq_report_v5_assets, scoring version v1.0_normed_validity, content version EQ_60/v1."
+            },
+            "score_system": {
+                "bands": {
+                    "developing": "Developing: usable foundations are present, but the pattern may be less stable under pressure or relational complexity.",
+                    "foundational": "Foundational: the current signal suggests this area benefits from more structure, practice, and review.",
+                    "integrated": "Integrated: this dimension is prominent; the key is avoiding overuse and staying contextually flexible.",
+                    "proficient": "Proficient: this dimension is usually a reliable strength signal and may also carry related costs.",
+                    "stable": "Stable: generally usable in everyday contexts, while interpretation still depends on how it combines with other dimensions."
+                },
+                "dimensions": {
+                    "EM": {
+                        "band_explanations": {
+                            "developing": "Empathy has a base, but hidden emotion or real needs may be missed.",
+                            "foundational": "Empathy is foundational; start by confirming the other person's feeling.",
+                            "integrated": "Empathy is highly integrated; avoid over-carrying other people's emotions.",
+                            "proficient": "Empathy is mature enough to notice relational and emotional cues with nuance.",
+                            "stable": "Empathy is stable and usually helps you grasp basic feelings in others."
+                        },
+                        "definition": "The tendency to understand other people's emotions, perspectives, and relational cues.",
+                        "label": "Empathy"
+                    },
+                    "ER": {
+                        "band_explanations": {
+                            "developing": "Emotion regulation has a base, but strong feedback or conflict may still destabilize it.",
+                            "foundational": "Emotion regulation is foundational; build a pause and recovery process first.",
+                            "integrated": "Emotion regulation is highly integrated; avoid over-control and keep authentic feeling available.",
+                            "proficient": "Emotion regulation is mature enough to return to communication after being triggered.",
+                            "stable": "Emotion regulation is stable and usually supports recovery in everyday pressure."
+                        },
+                        "definition": "The tendency to recover, pause, and choose responses during pressure, feedback, or conflict.",
+                        "label": "Emotion Regulation"
+                    },
+                    "RM": {
+                        "band_explanations": {
+                            "developing": "Relationship management has a base, but conflict, boundaries, or repair may be unstable.",
+                            "foundational": "Relationship management is foundational; start with low-risk communication scripts.",
+                            "integrated": "Relationship management is highly integrated; avoid taking too much coordination responsibility.",
+                            "proficient": "Relationship management is mature enough to actively support communication, coordination, and repair.",
+                            "stable": "Relationship management is stable and usually supports constructive action in collaboration."
+                        },
+                        "definition": "The tendency to act constructively in communication, collaboration, repair, and boundaries.",
+                        "label": "Relationship Management"
+                    },
+                    "SA": {
+                        "band_explanations": {
+                            "developing": "Self-awareness has a base, but real triggers may be noticed late under pressure.",
+                            "foundational": "Self-awareness is foundational; start by naming emotions with specific words.",
+                            "integrated": "Self-awareness is highly integrated; the focus is avoiding over-analysis and moving to action.",
+                            "proficient": "Self-awareness is mature enough to catch shifts and underlying needs quickly.",
+                            "stable": "Self-awareness is stable and usually helps you understand key emotional cues."
+                        },
+                        "definition": "The tendency to notice, name, and understand emotional cues in yourself.",
+                        "label": "Self-Awareness"
+                    }
+                },
+                "global_index": {
+                    "label": "Emotional & Relational Functioning Index",
+                    "meaning": "A combined self-report signal across four dimensions, describing the current stability of emotional and relational functioning."
+                },
+                "score_notes": {
+                    "percentile": "Percentiles indicate relative position in the current reference sample and are not ability certification.",
+                    "standard_score": "Standard scores are interpreted against provisional norms. Scores near the mean indicate a stable usable range."
+                }
+            },
+            "sjt_bridge": {
+                "available": false,
+                "button_label": "Scenario module planned",
+                "description": "The current report is based on EQ-60 self-report. A future EQ-SJT 16 module will add how you choose responses in feedback, conflict, boundary, and pressure situations.",
+                "id": "eq.sjt_bridge.planned",
+                "status": "planned",
+                "title": "A 16-item scenario module is planned",
+                "what_it_adds": "It supplements self-report by comparing self-perception with scenario choices.",
+                "what_it_is_not": "It is not MSCEIT, not a certified ability assessment, and not for hiring or clinical decisions."
+            }
+        },
+        "compat": {
+            "free_blocks": [
+                {
+                    "content": "This assessment is a self‑report questionnaire for self‑reflection and skill development. It is not a medical diagnosis or psychotherapy advice.\nResults depend on your current state, interpretation, and response quality.\nWhen distress persists or daily functioning is significantly impaired, professional support is recommended.",
+                    "id": "eq60_disclaimer_top_en",
+                    "section_key": "disclaimer_top",
+                    "title": "Important Notice"
+                },
+                {
+                    "content": "Response quality is **A**: consistency and pacing are stable; interpretability is high.",
+                    "id": "eq60_quality_level_A_en",
+                    "section_key": "quality_notice",
+                    "title": "Response Quality"
+                },
+                {
+                    "content": "Your overall EQ standard score is **99.5** (population mean 100, SD 15), at the **48.67** percentile.\n\nThis assessment covers four capabilities: Self‑Awareness (SA), Emotion Regulation (ER), Social Awareness & Empathy (EM), and Relationship Management (RM). Each section includes a standard score and a maturity band to locate strengths and training priorities.\n\nResponse quality: **A**.",
+                    "id": "eq60_global_overview_en",
+                    "section_key": "global_overview",
+                    "title": "Overview"
+                },
+                {
+                    "content": "**Dimension: Self‑Awareness**\n\nStandard score: **97** (42.07 percentile), band: **Competent**.\n\nYou usually identify emotions and connect them to triggers and needs. In many situations you can say things like “I’m tense,” “I need a moment,” or “I felt overlooked.” This reduces misunderstanding and rumination, keeping conversations closer to the real issue.\n\n**Practice**: Before a key conversation, write one sentence: “What matters most to me here?”",
+                    "id": "eq60_sa_competent_en",
+                    "section_key": "self_awareness",
+                    "title": "Self‑Awareness · Competent"
+                },
+                {
+                    "content": "**Dimension: Emotion Regulation**\n\nStandard score: **83** (12.85 percentile), band: **Baseline**.\n\nUnder pressure or triggers, emotions can take over the action system—impulses, rumination, sleep disruption, or prolonged tension. This is not a “willpower” label; it reflects a toolbox that isn’t automatic yet. Regulation aims to bring intensity and duration back into a manageable range, not to erase emotions.\n\n**90‑second reset**: Pause → slow exhale 6 times → feel your feet on the ground to create space before reacting.",
+                    "id": "eq60_er_baseline_en",
+                    "section_key": "emotion_regulation",
+                    "title": "Emotion Regulation · Baseline"
+                },
+                {
+                    "content": "**Dimension: Social Awareness & Empathy**\n\nStandard score: **119** (89.74 percentile), band: **Exceptional**.\n\nYour empathy is exceptionally strong. Even in noisy environments you read emotions and motives accurately and respond with warmth. This is a foundation of influence. Keep boundaries to prevent emotional overload.\n\n**Practice**: Use: “I see this is hard for you. I can stay with you for a bit,” while keeping your limits.",
+                    "id": "eq60_em_exceptional_en",
+                    "section_key": "empathy",
+                    "title": "Social Awareness & Empathy · Exceptional"
+                },
+                {
+                    "content": "**Dimension: Relationship Management**\n\nStandard score: **99** (47.34 percentile), band: **Competent**.\n\nYou communicate and collaborate well, maintain trust, and manage disagreements without breaking the relationship. You tend to balance authenticity with relationship care.\n\n**Practice**: In conflict, align on the shared goal first, then discuss options.",
+                    "id": "eq60_rm_competent_en",
+                    "section_key": "relationship_management",
+                    "title": "Relationship Management · Competent"
+                },
+                {
+                    "content": "**Primary profile: Compassion Overload (High Empathy + Low Regulation)**\n\nYour results show Empathy **119** very high and Emotion Regulation **83** lower. You feel others’ pain and stress strongly, and group climate can affect you quickly. The gift is warmth and attunement; the cost is overload and blurry boundaries.\n\n**Typical strengths**\n- High resonance: people open up to you easily.\n- Strong ‘room reading’: you sense shifts and hidden tension.\n- Care motive: a real drive to help.\n\n**Typical costs**\n- Emotional contagion: others’ feelings enter your body and drain sleep/energy.\n- Rescue reflex: urgency to fix, leading to over‑involvement.\n- Boundary loss: ‘empathy’ turns into ‘carrying,’ then burnout.\n\n**Key shift: bounded care**\nHigh empathy doesn’t require self‑sacrifice. Training focuses on three boundaries:\n1) **Emotional boundary**: “This is theirs” vs “this is mine.”\n2) **Time boundary**: define how long you can be available.\n3) **Action boundary**: move from ‘fixing’ to ‘helping them see choices.’\n\n**Support scripts**\n- “I hear this is hard. I can stay with you for 10 minutes to sort it out.”\n- “What I can offer is … The deeper choice is yours.”\n- “I care about you, and I also need to protect my energy.”\n\n**What premium adds**\n- Boundary training to turn empathy into a resource.\n- Regulation tools to prevent overload spillover.\n- 14‑day plan for sustainable helping.",
+                    "id": "eq60_profile_compassion_overload_en",
+                    "section_key": "cross_quadrant_insight",
+                    "title": "Compassion Overload"
+                },
+                {
+                    "content": "**14‑Day Plan: Boundaried Care (10–15 min/day)**\n\nGoal: keep your warmth and sensitivity while building emotional, time, and action boundaries to prevent overload.\n\n| Day | Theme | Practice |\n|---|---|---|\n| Day 1 | Mine vs yours | Note one contagion moment: whose emotion is it? what can I do? |\n| Day 2 | Emotional boundary | Practice: “I see it’s hard for you. This is your feeling. I’m here with you.” |\n| Day 3 | Time boundary | Set a time cap (10/20 min) and write an ending script. |\n| Day 4 | Action boundary | Shift from fixing to options: write 3 guiding questions. |\n| Day 5 | Back to body | 2‑minute tactile grounding (cup/table texture). |\n| Day 6 | Self‑compassion | Write 3 lines: this is hard; I’m not alone; I’ll be kind to myself. |\n| Day 7 | Support & referral | List 3 resources you can hand off to; don’t carry alone. |\n| Day 8 | Empathize without spiraling | Reflect feeling, then ask: listen or brainstorm? |\n| Day 9 | Energy return | After deep listening: 5 minutes walk/breath to reset. |\n| Day10 | State limits | Use: “I can stay up to here; then I need rest.” once. |\n| Day11 | Load monitoring | Rate emotional load 0–10; above 7, reduce inputs intentionally. |\n| Day12 | One smallest act | Keep helping action to 1 minimal step; avoid over‑involvement. |\n| Day13 | Relationship structure | Pick one draining relationship: what boundary makes it sustainable? |\n| Day14 | Consolidate | 3 boundary principles + 3 care scripts. |\n\nBoundaries aren’t coldness—they make care sustainable.",
+                    "id": "eq60_plan_boundary_en",
+                    "section_key": "action_plan_14d",
+                    "title": "Boundaried Care"
+                },
+                {
+                    "content": "**Scoring (Production v1.0)**\n\n1) 60 items use a 5‑point scale; reverse‑keyed items are flipped before aggregation (6 − response).\n2) Each quadrant has 15 items. Raw sums are mapped to standard scores (mean 100, SD 15).\n3) Response‑quality indicators are computed (time, long‑stringing, extreme/neutral bias, internal consistency). Only A/B quality enters the norm pool.\n4) Premium content adds cross‑quadrant insights and a 14‑day training plan to convert understanding into practice.",
+                    "id": "eq60_methodology_en",
+                    "section_key": "methodology",
+                    "title": "Methodology"
+                },
+                {
+                    "content": "**How to use this report**: Treat this as guidance for self‑reflection and skill training. A retake interval of at least 14 days improves stability.\nThis platform does not use a single test result for labeling decisions.",
+                    "id": "eq60_disclaimer_bottom_en",
+                    "section_key": "disclaimer_bottom",
+                    "title": "Closing Notes"
+                }
+            ],
+            "paid_blocks": []
+        },
+        "dimension_summary": [
+            {
+                "band": "stable",
+                "code": "SA",
+                "label": "Self-Awareness",
+                "percentile": 42.07,
+                "standard_score": 97
+            },
+            {
+                "band": "foundational",
+                "code": "ER",
+                "label": "Emotion Regulation",
+                "percentile": 12.85,
+                "standard_score": 83
+            },
+            {
+                "band": "integrated",
+                "code": "EM",
+                "label": "Empathy",
+                "percentile": 89.74,
+                "standard_score": 119
+            },
+            {
+                "band": "stable",
+                "code": "RM",
+                "label": "Relationship Management",
+                "percentile": 47.34,
+                "standard_score": 99
+            }
+        ],
+        "eq_report_mode": "self_report",
+        "generated_at": "2026-05-21T00:00:00.000000Z",
+        "interpretation": {
+            "action_prescription_id": "empathy_boundary",
+            "career_environment_ids": [
+                "emotional_labor_high",
+                "autonomy_recovery_medium",
+                "interpersonal_density_medium"
+            ],
+            "core_formulation_id": "high_empathy_low_recovery",
+            "development_lever": "ER",
+            "primary_mechanism_ids": [
+                "EM_ER_high_low"
+            ],
+            "primary_scene_ids": [
+                "feedback",
+                "conflict",
+                "relationship_boundary"
+            ],
+            "strongest_dimension": "EM"
+        },
+        "legacy_scores": {
+            "EM": {
+                "level": "exceptional",
+                "percentile": 89.74,
+                "pomp": 80,
+                "raw_mean": 4.2,
+                "raw_sum": 63,
+                "std_score": 119,
+                "z": 1.266667
+            },
+            "ER": {
+                "level": "baseline",
+                "percentile": 12.85,
+                "pomp": 50,
+                "raw_mean": 3,
+                "raw_sum": 45,
+                "std_score": 83,
+                "z": -1.133333
+            },
+            "RM": {
+                "level": "competent",
+                "percentile": 47.34,
+                "pomp": 63.33,
+                "raw_mean": 3.5333,
+                "raw_sum": 53,
+                "std_score": 99,
+                "z": -0.066667
+            },
+            "SA": {
+                "level": "competent",
+                "percentile": 42.07,
+                "pomp": 61.67,
+                "raw_mean": 3.4667,
+                "raw_sum": 52,
+                "std_score": 97,
+                "z": -0.2
+            },
+            "emotion_regulation": {
+                "level": "baseline",
+                "percentile": 12.85,
+                "pomp": 50,
+                "raw_mean": 3,
+                "raw_sum": 45,
+                "std_score": 83,
+                "z": -1.133333
+            },
+            "empathy": {
+                "level": "exceptional",
+                "percentile": 89.74,
+                "pomp": 80,
+                "raw_mean": 4.2,
+                "raw_sum": 63,
+                "std_score": 119,
+                "z": 1.266667
+            },
+            "global": {
+                "level": "competent",
+                "percentile": 48.67,
+                "pomp": 63.75,
+                "raw_mean": 3.55,
+                "raw_sum": 213,
+                "std_score": 99.5,
+                "z": -0.033333
+            },
+            "relationship_management": {
+                "level": "competent",
+                "percentile": 47.34,
+                "pomp": 63.33,
+                "raw_mean": 3.5333,
+                "raw_sum": 53,
+                "std_score": 99,
+                "z": -0.066667
+            },
+            "self_awareness": {
+                "level": "competent",
+                "percentile": 42.07,
+                "pomp": 61.67,
+                "raw_mean": 3.4667,
+                "raw_sum": 52,
+                "std_score": 97,
+                "z": -0.2
+            }
+        },
+        "locale": "en",
+        "measurement_type": "self_report_trait_mixed_ei",
+        "methodology": {
+            "content_version": "EQ_60/v1",
+            "norm_status": "provisional",
+            "report_version": "eq_report_v5_assets",
+            "scoring_version": "v1.0_normed_validity"
+        },
+        "next_module": {
+            "available": false,
+            "cta_asset_id": "eq.sjt_bridge.planned",
+            "module_code": "EQ_SJT_16",
+            "status": "planned"
+        },
+        "quality": {
+            "completion_time_seconds": 420,
+            "confidence_label": "high",
+            "explanation_asset_id": "eq.quality.level.A",
+            "extreme_rate": 0.05,
+            "flags": [],
+            "inconsistency_index": 10,
+            "level": "A",
+            "longstring_max": 15,
+            "metrics": {
+                "completion_time_seconds": 420,
+                "extreme_rate": 0.05,
+                "inconsistency_index": 10,
+                "longstring_max": 15,
+                "neutral_rate": 0.2667
+            },
+            "neutral_rate": 0.2667
+        },
+        "report": {
+            "primary_profile": "profile:compassion_overload",
+            "tags": [
+                "quality_level:A",
+                "profile:compassion_overload",
+                "focus:boundary_setting"
+            ]
+        },
+        "report_tags": [
+            "quality_level:A",
+            "profile:compassion_overload",
+            "focus:boundary_setting"
+        ],
+        "scale_code": "EQ_60",
+        "schema_version": "eq_60.report.v2",
+        "scores": {
+            "dimensions": {
+                "EM": {
+                    "band": "integrated",
+                    "label": "Empathy",
+                    "percentile": 89.74,
+                    "raw_score": 63,
+                    "short_label": "Empathy",
+                    "source_band": "exceptional",
+                    "standard_score": 119
+                },
+                "ER": {
+                    "band": "foundational",
+                    "label": "Emotion Regulation",
+                    "percentile": 12.85,
+                    "raw_score": 45,
+                    "short_label": "Emotion Regulation",
+                    "source_band": "baseline",
+                    "standard_score": 83
+                },
+                "RM": {
+                    "band": "stable",
+                    "label": "Relationship Management",
+                    "percentile": 47.34,
+                    "raw_score": 53,
+                    "short_label": "Relationship Management",
+                    "source_band": "competent",
+                    "standard_score": 99
+                },
+                "SA": {
+                    "band": "stable",
+                    "label": "Self-Awareness",
+                    "percentile": 42.07,
+                    "raw_score": 52,
+                    "short_label": "Self-Awareness",
+                    "source_band": "competent",
+                    "standard_score": 97
+                }
+            },
+            "global": {
+                "band": "stable",
+                "label": "Emotional & Relational Functioning Index",
+                "percentile": 48.67,
+                "raw_score": 213,
+                "source_band": "competent",
+                "standard_score": 99.5
+            }
+        },
+        "sections": [
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "This assessment is a self‑report questionnaire for self‑reflection and skill development. It is not a medical diagnosis or psychotherapy advice.\nResults depend on your current state, interpretation, and response quality.\nWhen distress persists or daily functioning is significantly impaired, professional support is recommended.",
+                        "id": "eq60_disclaimer_top_en",
+                        "title": "Important Notice",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "disclaimer_top",
+                "module_code": "eq_core",
+                "title": "Important Notice"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "Response quality is **A**: consistency and pacing are stable; interpretability is high.",
+                        "id": "eq60_quality_level_A_en",
+                        "title": "Response Quality",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "quality_notice",
+                "module_code": "eq_core",
+                "title": "Response Quality"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "Your overall EQ standard score is **99.5** (population mean 100, SD 15), at the **48.67** percentile.\n\nThis assessment covers four capabilities: Self‑Awareness (SA), Emotion Regulation (ER), Social Awareness & Empathy (EM), and Relationship Management (RM). Each section includes a standard score and a maturity band to locate strengths and training priorities.\n\nResponse quality: **A**.",
+                        "id": "eq60_global_overview_en",
+                        "title": "Overview",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "global_overview",
+                "module_code": "eq_core",
+                "title": "Overview"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**Dimension: Self‑Awareness**\n\nStandard score: **97** (42.07 percentile), band: **Competent**.\n\nYou usually identify emotions and connect them to triggers and needs. In many situations you can say things like “I’m tense,” “I need a moment,” or “I felt overlooked.” This reduces misunderstanding and rumination, keeping conversations closer to the real issue.\n\n**Practice**: Before a key conversation, write one sentence: “What matters most to me here?”",
+                        "id": "eq60_sa_competent_en",
+                        "title": "Self‑Awareness · Competent",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "self_awareness",
+                "module_code": "eq_core",
+                "title": "Self‑Awareness"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**Dimension: Emotion Regulation**\n\nStandard score: **83** (12.85 percentile), band: **Baseline**.\n\nUnder pressure or triggers, emotions can take over the action system—impulses, rumination, sleep disruption, or prolonged tension. This is not a “willpower” label; it reflects a toolbox that isn’t automatic yet. Regulation aims to bring intensity and duration back into a manageable range, not to erase emotions.\n\n**90‑second reset**: Pause → slow exhale 6 times → feel your feet on the ground to create space before reacting.",
+                        "id": "eq60_er_baseline_en",
+                        "title": "Emotion Regulation · Baseline",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "emotion_regulation",
+                "module_code": "eq_core",
+                "title": "Emotion Regulation"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**Dimension: Social Awareness & Empathy**\n\nStandard score: **119** (89.74 percentile), band: **Exceptional**.\n\nYour empathy is exceptionally strong. Even in noisy environments you read emotions and motives accurately and respond with warmth. This is a foundation of influence. Keep boundaries to prevent emotional overload.\n\n**Practice**: Use: “I see this is hard for you. I can stay with you for a bit,” while keeping your limits.",
+                        "id": "eq60_em_exceptional_en",
+                        "title": "Social Awareness & Empathy · Exceptional",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "empathy",
+                "module_code": "eq_core",
+                "title": "Social Awareness & Empathy"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**Dimension: Relationship Management**\n\nStandard score: **99** (47.34 percentile), band: **Competent**.\n\nYou communicate and collaborate well, maintain trust, and manage disagreements without breaking the relationship. You tend to balance authenticity with relationship care.\n\n**Practice**: In conflict, align on the shared goal first, then discuss options.",
+                        "id": "eq60_rm_competent_en",
+                        "title": "Relationship Management · Competent",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "relationship_management",
+                "module_code": "eq_core",
+                "title": "Relationship Management"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**Primary profile: Compassion Overload (High Empathy + Low Regulation)**\n\nYour results show Empathy **119** very high and Emotion Regulation **83** lower. You feel others’ pain and stress strongly, and group climate can affect you quickly. The gift is warmth and attunement; the cost is overload and blurry boundaries.\n\n**Typical strengths**\n- High resonance: people open up to you easily.\n- Strong ‘room reading’: you sense shifts and hidden tension.\n- Care motive: a real drive to help.\n\n**Typical costs**\n- Emotional contagion: others’ feelings enter your body and drain sleep/energy.\n- Rescue reflex: urgency to fix, leading to over‑involvement.\n- Boundary loss: ‘empathy’ turns into ‘carrying,’ then burnout.\n\n**Key shift: bounded care**\nHigh empathy doesn’t require self‑sacrifice. Training focuses on three boundaries:\n1) **Emotional boundary**: “This is theirs” vs “this is mine.”\n2) **Time boundary**: define how long you can be available.\n3) **Action boundary**: move from ‘fixing’ to ‘helping them see choices.’\n\n**Support scripts**\n- “I hear this is hard. I can stay with you for 10 minutes to sort it out.”\n- “What I can offer is … The deeper choice is yours.”\n- “I care about you, and I also need to protect my energy.”\n\n**What premium adds**\n- Boundary training to turn empathy into a resource.\n- Regulation tools to prevent overload spillover.\n- 14‑day plan for sustainable helping.",
+                        "id": "eq60_profile_compassion_overload_en",
+                        "title": "Compassion Overload",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "cross_quadrant_insight",
+                "module_code": "eq_cross_insights",
+                "title": "Cross‑Quadrant Insight"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**14‑Day Plan: Boundaried Care (10–15 min/day)**\n\nGoal: keep your warmth and sensitivity while building emotional, time, and action boundaries to prevent overload.\n\n| Day | Theme | Practice |\n|---|---|---|\n| Day 1 | Mine vs yours | Note one contagion moment: whose emotion is it? what can I do? |\n| Day 2 | Emotional boundary | Practice: “I see it’s hard for you. This is your feeling. I’m here with you.” |\n| Day 3 | Time boundary | Set a time cap (10/20 min) and write an ending script. |\n| Day 4 | Action boundary | Shift from fixing to options: write 3 guiding questions. |\n| Day 5 | Back to body | 2‑minute tactile grounding (cup/table texture). |\n| Day 6 | Self‑compassion | Write 3 lines: this is hard; I’m not alone; I’ll be kind to myself. |\n| Day 7 | Support & referral | List 3 resources you can hand off to; don’t carry alone. |\n| Day 8 | Empathize without spiraling | Reflect feeling, then ask: listen or brainstorm? |\n| Day 9 | Energy return | After deep listening: 5 minutes walk/breath to reset. |\n| Day10 | State limits | Use: “I can stay up to here; then I need rest.” once. |\n| Day11 | Load monitoring | Rate emotional load 0–10; above 7, reduce inputs intentionally. |\n| Day12 | One smallest act | Keep helping action to 1 minimal step; avoid over‑involvement. |\n| Day13 | Relationship structure | Pick one draining relationship: what boundary makes it sustainable? |\n| Day14 | Consolidate | 3 boundary principles + 3 care scripts. |\n\nBoundaries aren’t coldness—they make care sustainable.",
+                        "id": "eq60_plan_boundary_en",
+                        "title": "Boundaried Care",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "action_plan_14d",
+                "module_code": "eq_growth_plan",
+                "title": "14‑Day Plan"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**Scoring (Production v1.0)**\n\n1) 60 items use a 5‑point scale; reverse‑keyed items are flipped before aggregation (6 − response).\n2) Each quadrant has 15 items. Raw sums are mapped to standard scores (mean 100, SD 15).\n3) Response‑quality indicators are computed (time, long‑stringing, extreme/neutral bias, internal consistency). Only A/B quality enters the norm pool.\n4) Premium content adds cross‑quadrant insights and a 14‑day training plan to convert understanding into practice.",
+                        "id": "eq60_methodology_en",
+                        "title": "Methodology",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "methodology",
+                "module_code": "eq_core",
+                "title": "Methodology"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**How to use this report**: Treat this as guidance for self‑reflection and skill training. A retake interval of at least 14 days improves stability.\nThis platform does not use a single test result for labeling decisions.",
+                        "id": "eq60_disclaimer_bottom_en",
+                        "title": "Closing Notes",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "disclaimer_bottom",
+                "module_code": "eq_core",
+                "title": "Closing Notes"
+            }
+        ],
+        "variant": "full"
+    },
+    "report_access": {
+        "access_state": "ready",
+        "payload": {
+            "access": {
+                "all_results_free": true,
+                "blur": false,
+                "locked": false,
+                "paywall": false
+            },
+            "access_level": "full",
+            "locked": false,
+            "modules_allowed": [
+                "eq_core",
+                "eq_full",
+                "eq_cross_insights",
+                "eq_growth_plan"
+            ],
+            "modules_preview": [],
+            "offers": [],
+            "unlock_source": "none",
+            "unlock_stage": "full",
+            "upgrade_sku": null,
+            "upgrade_sku_effective": null,
+            "variant": "full",
+            "view_policy": {
+                "blur_others": false,
+                "free_sections": [
+                    "disclaimer_top",
+                    "quality_notice",
+                    "global_overview",
+                    "self_awareness",
+                    "emotion_regulation",
+                    "empathy",
+                    "relationship_management",
+                    "cross_quadrant_insight",
+                    "action_plan_14d",
+                    "methodology",
+                    "disclaimer_bottom"
+                ]
+            }
+        },
+        "report_state": "ready"
+    }
+}
