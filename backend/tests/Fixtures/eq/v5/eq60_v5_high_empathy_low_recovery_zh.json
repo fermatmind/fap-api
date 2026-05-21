@@ -1,0 +1,726 @@
+{
+    "case_id": "EQ60_COMPASSION_OVERLOAD_ZH",
+    "fixture_schema": "eq60.v5.report_contract_fixture.v1",
+    "locale": "zh-CN",
+    "report": {
+        "access": {
+            "all_results_free": true,
+            "blur": false,
+            "locked": false,
+            "paywall": false
+        },
+        "asset_refs": {
+            "action_prescription_id": "empathy_boundary",
+            "career_environment_ids": [
+                "emotional_labor_high",
+                "autonomy_recovery_medium",
+                "interpersonal_density_medium"
+            ],
+            "core_formulation_id": "high_empathy_low_recovery",
+            "mechanism_ids": [
+                "EM_ER_high_low"
+            ],
+            "quality_explanation_asset_id": "eq.quality.level.A",
+            "scene_ids": [
+                "feedback",
+                "conflict",
+                "relationship_boundary"
+            ],
+            "scientific_contract_id": "eq.scientific_contract.default",
+            "score_system_id": "eq.score_system.default",
+            "sjt_bridge_id": "eq.sjt_bridge.planned"
+        },
+        "assets": {
+            "action_prescription": {
+                "do_today": "支持别人前先确认自己能支持到哪里。",
+                "id": "empathy_boundary",
+                "script": "我愿意听你说十分钟，然后我们一起看下一步。",
+                "seven_day_plan": [
+                    "第 1 天：识别一次我在承担什么。",
+                    "第 2 天：练习时间边界。",
+                    "第 3 天：练习责任边界。",
+                    "第 4 天：支持后做恢复。",
+                    "第 5 天：区分理解和代替。",
+                    "第 6 天：复盘一次求助场景。",
+                    "第 7 天：写下自己的支持边界。"
+                ],
+                "title": "共情边界处方",
+                "watch_out": "不要用冷漠来替代边界。",
+                "why_this_matters": "高共情需要边界，才能长期有效。"
+            },
+            "career_environment": [
+                {
+                    "fit_signal": "高共情者能建立信任。",
+                    "id": "emotional_labor_high",
+                    "label": "高情绪劳动",
+                    "level": "high",
+                    "meaning": "经常承接焦虑、投诉、冲突或脆弱情绪。",
+                    "strain_signal": "低恢复者容易被情绪场拖走。",
+                    "variable": "emotional_labor",
+                    "what_to_verify": "确认督导、复盘和休息制度是否真实存在。"
+                },
+                {
+                    "fit_signal": "适合多数人维持稳定表现。",
+                    "id": "autonomy_recovery_medium",
+                    "label": "中等自主恢复空间",
+                    "level": "medium",
+                    "meaning": "有一定独立安排，但仍受团队节奏影响。",
+                    "strain_signal": "忙季或危机期可能被压缩。",
+                    "variable": "autonomy_recovery",
+                    "what_to_verify": "确认高峰期的恢复安排。"
+                },
+                {
+                    "fit_signal": "适合在协作和独立之间切换。",
+                    "id": "interpersonal_density_medium",
+                    "label": "中等人际密度",
+                    "level": "medium",
+                    "meaning": "日常有固定协作，但不是持续社交。",
+                    "strain_signal": "会议过多时仍会消耗。",
+                    "variable": "interpersonal_density",
+                    "what_to_verify": "确认每周会议、同步和跨团队协作频率。"
+                }
+            ],
+            "core_formulation": {
+                "core_claim": "你可能很快接住别人的情绪，却不一定能及时把对方状态和自己的状态分开。",
+                "development_lever": "共情之后建立边界和恢复动作。",
+                "do_not_overread": "发展方向不是减少共情，而是让共情更有边界。",
+                "evidence_basis": [
+                    "EM 明显高于 ER",
+                    "共情信号强于恢复信号"
+                ],
+                "id": "high_empathy_low_recovery",
+                "likely_cost": "在冲突、求助或高情绪劳动场景中容易被卷入。",
+                "one_liner": "你容易理解他人感受，但恢复和边界是当前杠杆。",
+                "primary_strength": "对他人状态敏感，容易建立信任。",
+                "title": "高共情，低恢复"
+            },
+            "mechanisms": [
+                {
+                    "cost": "容易吸收过多情绪劳动。",
+                    "development_lever": "共情后加一句边界确认。",
+                    "id": "EM_ER_high_low",
+                    "micro_action": "在心里说：这是对方的感受，我可以支持，但不需要代替。",
+                    "pair": "EM_ER",
+                    "state": "high_low",
+                    "strength": "容易让人感到被看见。",
+                    "title": "共情强，边界和恢复偏弱",
+                    "what_it_feels_like": "别人难受时，你可能很快进入帮助或自责状态。",
+                    "why_it_matters": "你越能理解别人，越需要知道哪些情绪不是你要承担的。"
+                }
+            ],
+            "quality": {
+                "confidence_label": "high",
+                "explanation_asset_id": "eq.quality.level.A"
+            },
+            "reality_scenes": [
+                {
+                    "better_move": "先拆分事实、情绪和下一步：对方说了什么，我有什么感受，我要确认什么。",
+                    "cost": "如果恢复不足，容易把反馈体验成否定。",
+                    "id": "feedback",
+                    "strength": "能注意到反馈背后的真实意图和关系温度。",
+                    "title": "反馈场景",
+                    "typical_response": "收到评价或修改意见时，你可能先捕捉语气和关系信号，再处理信息本身。"
+                },
+                {
+                    "better_move": "先确认共同目标，再只讨论一个具体问题。",
+                    "cost": "如果没有暂停流程，容易过度解释、回避或急于修复。",
+                    "id": "conflict",
+                    "strength": "有机会同时看见双方需求。",
+                    "title": "冲突场景",
+                    "typical_response": "出现分歧时，你可能在维护关系和表达自己之间摇摆。"
+                },
+                {
+                    "better_move": "先问自己：我能支持到哪里，哪一部分仍然属于对方。",
+                    "cost": "支持和代替之间的边界可能变模糊。",
+                    "id": "relationship_boundary",
+                    "strength": "容易让对方感到被接住。",
+                    "title": "关系边界",
+                    "typical_response": "当别人需要你支持时，你可能很快进入理解或承担。"
+                }
+            ],
+            "scientific_contract": {
+                "non_ability_statement": "本报告不是认证能力测验，也不声称测量真实情商能力。",
+                "non_clinical_statement": "本报告不用于临床诊断、治疗建议或危机评估。",
+                "non_hiring_statement": "本报告不用于招聘筛选、录用、晋升或其他高风险人事决策。",
+                "norm_status_statement": "当前常模为阶段性常模，百分位和标准分用于解释相对位置，后续会随样本增长持续校准。",
+                "quality_rules_statement": "系统会参考作答时长、长串作答、极端反应、中立反应和一致性信号，给出解释置信度。",
+                "self_report_statement": "本报告反映你对自身情绪与关系模式的主观感知，不等同于客观能力测验。",
+                "test_definition": "这是一份基于 60 道自我报告题的情绪与关系模式报告，用于解释你如何感知、调节、回应和管理自己与他人的情绪。",
+                "version_statement": "报告版本 eq_report_v5_assets，计分版本 v1.0_normed_validity，内容版本 EQ_60/v1。"
+            },
+            "score_system": {
+                "bands": {
+                    "developing": "发展中：已经有可用基础，但在压力或复杂关系中可能不够稳定。",
+                    "foundational": "基础发展中：当前信号提示该能力更需要外部结构、练习和复盘支持。",
+                    "integrated": "高度整合：该维度表现突出，重点是避免过度使用并保持情境灵活性。",
+                    "proficient": "熟练成熟：该维度通常是可依赖的优势信号，也可能带来相应消耗。",
+                    "stable": "稳定可用：多数日常场景中可以发挥作用，但仍需要看和其他维度的组合。"
+                },
+                "dimensions": {
+                    "EM": {
+                        "band_explanations": {
+                            "developing": "共情理解已有基础，但可能错过隐性情绪或真实需求。",
+                            "foundational": "共情理解处于基础发展中，建议先练习确认对方感受。",
+                            "integrated": "共情理解高度整合，重点是避免过度承接他人情绪。",
+                            "proficient": "共情理解较成熟，能较细腻地捕捉关系和情绪线索。",
+                            "stable": "共情理解稳定可用，多数场景能把握他人基本感受。"
+                        },
+                        "definition": "理解他人情绪、立场和关系线索的倾向。",
+                        "label": "共情理解"
+                    },
+                    "ER": {
+                        "band_explanations": {
+                            "developing": "情绪调节已有基础，但强反馈或冲突中仍可能不稳定。",
+                            "foundational": "情绪调节处于基础发展中，建议先建立暂停和恢复流程。",
+                            "integrated": "情绪调节高度整合，重点是避免过度控制并保留真实感受。",
+                            "proficient": "情绪调节较成熟，能在触发后较快回到可沟通状态。",
+                            "stable": "情绪调节稳定可用，多数日常压力下能找到恢复方式。"
+                        },
+                        "definition": "在压力、反馈或冲突中恢复、暂停和选择回应方式的倾向。",
+                        "label": "情绪调节"
+                    },
+                    "RM": {
+                        "band_explanations": {
+                            "developing": "关系管理已有基础，但在冲突、边界或修复中可能不稳定。",
+                            "foundational": "关系管理处于基础发展中，建议先学习低风险沟通脚本。",
+                            "integrated": "关系管理高度整合，重点是避免承担过多协调责任。",
+                            "proficient": "关系管理较成熟，能主动推进沟通、协调和修复。",
+                            "stable": "关系管理稳定可用，多数协作场景中能采取建设性行动。"
+                        },
+                        "definition": "在沟通、协作、修复和边界中采取建设性行动的倾向。",
+                        "label": "关系管理"
+                    },
+                    "SA": {
+                        "band_explanations": {
+                            "developing": "自我觉察已有基础，但在压力下可能较晚发现真实触发点。",
+                            "foundational": "自我觉察处于基础发展中，建议先练习用具体词语命名情绪。",
+                            "integrated": "自我觉察高度整合，重点是避免过度分析并转向行动。",
+                            "proficient": "自我觉察较成熟，能较快捕捉情绪变化和背后需求。",
+                            "stable": "自我觉察稳定可用，通常能理解自己的主要情绪线索。"
+                        },
+                        "definition": "识别、命名和理解自身情绪线索的倾向。",
+                        "label": "自我觉察"
+                    }
+                },
+                "global_index": {
+                    "label": "情绪与关系综合指数",
+                    "meaning": "综合四个维度的自我报告信号，描述当前情绪与关系功能的整体稳定度。"
+                },
+                "score_notes": {
+                    "percentile": "百分位表示在当前参考样本中的相对位置，不代表能力认证。",
+                    "standard_score": "标准分以阶段性常模为参照，平均附近代表稳定可用。"
+                }
+            },
+            "sjt_bridge": {
+                "available": false,
+                "button_label": "情境判断模块规划中",
+                "description": "当前报告基于 EQ-60 自我报告。未来 EQ-SJT 16 会补充你在反馈、冲突、边界和压力情境中的选择方式。",
+                "id": "eq.sjt_bridge.planned",
+                "status": "planned",
+                "title": "未来将支持 16 道情境判断模块",
+                "what_it_adds": "它用于补充 self-report，帮助比较自我感知与情境选择之间的一致和差距。",
+                "what_it_is_not": "它不是 MSCEIT，不是认证能力测验，也不用于招聘筛选或临床判断。"
+            }
+        },
+        "compat": {
+            "free_blocks": [
+                {
+                    "content": "本测评为自评问卷，用于自我探索与能力训练方向参考，不构成医疗诊断或心理治疗建议。\n结果受作答状态、理解方式与作答质量影响。\n当你出现持续的情绪困扰、睡眠显著受影响、工作/学习/关系功能受损时，建议寻求专业心理支持。",
+                    "id": "eq60_disclaimer_top_zh",
+                    "section_key": "disclaimer_top",
+                    "title": "重要声明"
+                },
+                {
+                    "content": "本次答卷质量等级为 **A**：一致性与作答节奏表现稳定，结果解释可靠度较高。",
+                    "id": "eq60_quality_level_A_zh",
+                    "section_key": "quality_notice",
+                    "title": "作答质量提示"
+                },
+                {
+                    "content": "你的综合 EQ 标准分为 **99.5**（人群平均 100，标准差 15），处于第 **48.67** 百分位。\n\n本测评基于四项能力：自我情绪认知（SA）、情绪调节（ER）、同理心与社会感知（EM）、社交管理（RM）。报告会给出各维度的标准分与发展阶段，用于定位优势与训练重点。\n\n本次作答质量等级：**A**。",
+                    "id": "eq60_global_overview_zh",
+                    "section_key": "global_overview",
+                    "title": "综合概览"
+                },
+                {
+                    "content": "**本维度：自我情绪认知（Self‑Awareness）**\n\n标准分：**97**（第 42.07 百分位），阶段：**稳定可用（Competent）**。\n\n你通常能识别情绪，并把情绪与触发点、需求联系起来。你能在大部分场景下清楚表达“我正在紧张/我需要时间/我被忽视了”。这种能力能明显降低误解与内耗，让沟通更聚焦问题本身，而不是被情绪噪音牵着走。\n\n**练习提示**：在关键对话前，用一句话写清“我在乎什么”，让表达更稳定。",
+                    "id": "eq60_sa_competent_zh",
+                    "section_key": "self_awareness",
+                    "title": "自我情绪认知 · 稳定可用（Competent）"
+                },
+                {
+                    "content": "**本维度：情绪调节与控制（Emotion Regulation）**\n\n标准分：**83**（第 12.85 百分位），阶段：**觉察盲区（Baseline）**。\n\n在高压或被触发时，情绪更容易接管行动系统，出现冲动反应、反复纠结、睡眠受影响或持续紧绷。这个分数不代表意志力不足，而是调节工具箱尚未形成稳定的自动化。调节的目标不是“把情绪消灭”，而是把强度与持续时间拉回可管理范围。\n\n**练习提示（90秒）**：停下→缓慢呼气 6 次→把注意力放回脚底触地感，给自己争取“反应前的空隙”。",
+                    "id": "eq60_er_baseline_zh",
+                    "section_key": "emotion_regulation",
+                    "title": "情绪调节与控制 · 觉察盲区（Baseline）"
+                },
+                {
+                    "content": "**本维度：同理心与社会感知（Social Awareness & Empathy）**\n\n标准分：**119**（第 89.74 百分位），阶段：**卓越稀缺（Exceptional）**。\n\n你的共情能力极强，能在高噪音环境里仍准确读到他人的情绪与动机，并用温和方式回应。这是影响力的重要底座。需要留意的点是：共情强度越高，越要建立边界，避免把别人的情绪带回自己的生活节奏里。\n\n**练习提示**：把“我也很难受”改成“我看见你很难受，我愿意陪你一会儿”，保留边界感。",
+                    "id": "eq60_em_exceptional_zh",
+                    "section_key": "empathy",
+                    "title": "同理心与社会感知 · 卓越稀缺（Exceptional）"
+                },
+                {
+                    "content": "**本维度：社交技能与人际管理（Relationship Management）**\n\n标准分：**99**（第 47.34 百分位），阶段：**稳定可用（Competent）**。\n\n你具备良好的沟通与协作能力，能建立稳定的人际网络与信任。你能在多数场景里表达观点、处理分歧、维持关系质量。你通常能在“真实表达”和“关系维护”之间找到平衡。\n\n**练习提示**：遇到分歧时先对齐共同目标，再讨论方案。",
+                    "id": "eq60_rm_competent_zh",
+                    "section_key": "relationship_management",
+                    "title": "社交技能与人际管理 · 稳定可用（Competent）"
+                },
+                {
+                    "content": "**你的主要画像：情绪海绵型（高同理心 + 低情绪调节）**\n\n本次测评显示：同理心与社会感知 **119** 很高，情绪调节 **83** 偏低。你对他人的痛苦与压力高度敏感，常常会“替别人难受”，也更容易被群体氛围影响。优势是真诚、温暖、能看见别人；代价是情绪过载与边界模糊。\n\n**你常见的优势**\n- 高共鸣：别人更愿意向你倾诉，信任建立更快。\n- 读空气能力强：能敏锐捕捉情绪变化与隐性冲突。\n- 关怀动机：有强烈的助人倾向与责任感。\n\n**常见代价**\n- 情绪感染：别人的情绪进入你的身体，影响睡眠与精力。\n- 救援反射：看到痛苦就想立刻解决，容易过度卷入。\n- 边界消失：把“同理”误用成“承担”，最后自己被掏空。\n\n**关键转折：把共情变成“有边界的关怀”**\n高共情不需要牺牲自我。训练重点是三层边界：\n1) **情绪边界**：区分“这是对方的感受”与“这是我的感受”。\n2) **时间边界**：明确陪伴时长与可用精力。\n3) **行动边界**：从“替你解决”转成“陪你一起看见选择”。\n\n**适合你的回应句式**\n- “我听见你很难受，我愿意陪你 10 分钟，先把事情捋清。”\n- “我能提供的是……更深入的部分需要你自己决定。”\n- “我很在乎你，我也需要先照顾好自己的精力。”\n\n**你会在付费报告里得到什么**\n- 边界训练：把共情从消耗变成资源。\n- 调节工具：让情绪不过载、不回流到生活里。\n- 14 天游程：建立可持续的助人方式。",
+                    "id": "eq60_profile_compassion_overload_zh",
+                    "section_key": "cross_quadrant_insight",
+                    "title": "情绪海绵型"
+                },
+                {
+                    "content": "**14 天游程：共情边界与可持续关怀（每天 10–15 分钟）**\n\n目标：保留你的温暖与敏锐，同时建立情绪、时间与行动边界，避免情绪过载。\n\n| 天数 | 主题 | 今日练习 |\n|---|---|---|\n| Day 1 | 区分“我的/你的” | 写下今天一次情绪感染：这是谁的情绪？我能做的是什么？ |\n| Day 2 | 情绪隔离 | 练习一句话：“我看见你很难受，这是你的感受，我在这里陪你。” |\n| Day 3 | 时间边界 | 设定陪伴时长（10/20 分钟），并写下结束句式。 |\n| Day 4 | 行动边界 | 把“替你解决”改成“我陪你看见选择”，写 3 个提问。 |\n| Day 5 | 身体回到自己 | 2 分钟触感练习：握杯子/触摸桌面，回到身体。 |\n| Day 6 | 自我慈悲 | 写 3 句：这很难；我并不孤单；我愿意善待自己。 |\n| Day 7 | 求助与转介 | 列出 3 个可转介资源（朋友/专业/工具），不独自承担。 |\n| Day 8 | 同理而不内卷 | 对话中先复述感受，再问“你想要倾听还是建议？” |\n| Day 9 | 关怀后回收 | 每次深度倾听后做 5 分钟走动/呼吸，回收能量。 |\n| Day10 | 说出限制 | 练习：“我能陪你到这里，之后我需要休息。”并使用 1 次。 |\n| Day11 | 负荷监测 | 今日给情绪负荷打分 0–10，超过 7 时主动减少输入。 |\n| Day12 | 只做一件事 | 把助人行动缩到 1 个最小动作，避免过度卷入。 |\n| Day13 | 关系结构 | 写下 1 段高消耗关系：我需要怎样的边界才能持续？ |\n| Day14 | 复盘与巩固 | 总结 3 条你的边界原则 + 3 句你的关怀脚本。 |\n\n**使用方式**：边界不是冷漠，是让你的关怀变得可持续。",
+                    "id": "eq60_plan_boundary_zh",
+                    "section_key": "action_plan_14d",
+                    "title": "共情边界"
+                },
+                {
+                    "content": "**计分方法（上线版 v1.0）**\n\n1) 60 题采用 5 点量表作答；反向题在计分前做翻转（6−选项值）。\n2) 每个维度 15 题，先得到原始分，再转为标准分：平均 100、标准差 15。\n3) 同时计算作答质量指标（耗时、直线作答、极端/中立偏好、内部一致性）。质量等级为 A/B 的数据进入常模库。\n4) 付费报告包含跨维度洞察与 14 天训练计划，目标是把“理解”转化为“可执行的行为改变”。",
+                    "id": "eq60_methodology_zh",
+                    "section_key": "methodology",
+                    "title": "方法说明"
+                },
+                {
+                    "content": "**使用建议**：本报告用于自我理解与训练方向参考。复测周期建议不少于 14 天，以减少短期情绪波动带来的噪音。\n本平台不会把单次测评结果用于任何“贴标签式”的决策。",
+                    "id": "eq60_disclaimer_bottom_zh",
+                    "section_key": "disclaimer_bottom",
+                    "title": "结尾提示"
+                }
+            ],
+            "paid_blocks": []
+        },
+        "dimension_summary": [
+            {
+                "band": "stable",
+                "code": "SA",
+                "label": "自我觉察",
+                "percentile": 42.07,
+                "standard_score": 97
+            },
+            {
+                "band": "foundational",
+                "code": "ER",
+                "label": "情绪调节",
+                "percentile": 12.85,
+                "standard_score": 83
+            },
+            {
+                "band": "integrated",
+                "code": "EM",
+                "label": "共情理解",
+                "percentile": 89.74,
+                "standard_score": 119
+            },
+            {
+                "band": "stable",
+                "code": "RM",
+                "label": "关系管理",
+                "percentile": 47.34,
+                "standard_score": 99
+            }
+        ],
+        "eq_report_mode": "self_report",
+        "generated_at": "2026-05-21T00:00:00.000000Z",
+        "interpretation": {
+            "action_prescription_id": "empathy_boundary",
+            "career_environment_ids": [
+                "emotional_labor_high",
+                "autonomy_recovery_medium",
+                "interpersonal_density_medium"
+            ],
+            "core_formulation_id": "high_empathy_low_recovery",
+            "development_lever": "ER",
+            "primary_mechanism_ids": [
+                "EM_ER_high_low"
+            ],
+            "primary_scene_ids": [
+                "feedback",
+                "conflict",
+                "relationship_boundary"
+            ],
+            "strongest_dimension": "EM"
+        },
+        "legacy_scores": {
+            "EM": {
+                "level": "exceptional",
+                "percentile": 89.74,
+                "pomp": 80,
+                "raw_mean": 4.2,
+                "raw_sum": 63,
+                "std_score": 119,
+                "z": 1.266667
+            },
+            "ER": {
+                "level": "baseline",
+                "percentile": 12.85,
+                "pomp": 50,
+                "raw_mean": 3,
+                "raw_sum": 45,
+                "std_score": 83,
+                "z": -1.133333
+            },
+            "RM": {
+                "level": "competent",
+                "percentile": 47.34,
+                "pomp": 63.33,
+                "raw_mean": 3.5333,
+                "raw_sum": 53,
+                "std_score": 99,
+                "z": -0.066667
+            },
+            "SA": {
+                "level": "competent",
+                "percentile": 42.07,
+                "pomp": 61.67,
+                "raw_mean": 3.4667,
+                "raw_sum": 52,
+                "std_score": 97,
+                "z": -0.2
+            },
+            "emotion_regulation": {
+                "level": "baseline",
+                "percentile": 12.85,
+                "pomp": 50,
+                "raw_mean": 3,
+                "raw_sum": 45,
+                "std_score": 83,
+                "z": -1.133333
+            },
+            "empathy": {
+                "level": "exceptional",
+                "percentile": 89.74,
+                "pomp": 80,
+                "raw_mean": 4.2,
+                "raw_sum": 63,
+                "std_score": 119,
+                "z": 1.266667
+            },
+            "global": {
+                "level": "competent",
+                "percentile": 48.67,
+                "pomp": 63.75,
+                "raw_mean": 3.55,
+                "raw_sum": 213,
+                "std_score": 99.5,
+                "z": -0.033333
+            },
+            "relationship_management": {
+                "level": "competent",
+                "percentile": 47.34,
+                "pomp": 63.33,
+                "raw_mean": 3.5333,
+                "raw_sum": 53,
+                "std_score": 99,
+                "z": -0.066667
+            },
+            "self_awareness": {
+                "level": "competent",
+                "percentile": 42.07,
+                "pomp": 61.67,
+                "raw_mean": 3.4667,
+                "raw_sum": 52,
+                "std_score": 97,
+                "z": -0.2
+            }
+        },
+        "locale": "zh-CN",
+        "measurement_type": "self_report_trait_mixed_ei",
+        "methodology": {
+            "content_version": "EQ_60/v1",
+            "norm_status": "provisional",
+            "report_version": "eq_report_v5_assets",
+            "scoring_version": "v1.0_normed_validity"
+        },
+        "next_module": {
+            "available": false,
+            "cta_asset_id": "eq.sjt_bridge.planned",
+            "module_code": "EQ_SJT_16",
+            "status": "planned"
+        },
+        "quality": {
+            "completion_time_seconds": 420,
+            "confidence_label": "high",
+            "explanation_asset_id": "eq.quality.level.A",
+            "extreme_rate": 0.05,
+            "flags": [],
+            "inconsistency_index": 10,
+            "level": "A",
+            "longstring_max": 15,
+            "metrics": {
+                "completion_time_seconds": 420,
+                "extreme_rate": 0.05,
+                "inconsistency_index": 10,
+                "longstring_max": 15,
+                "neutral_rate": 0.2667
+            },
+            "neutral_rate": 0.2667
+        },
+        "report": {
+            "primary_profile": "profile:compassion_overload",
+            "tags": [
+                "quality_level:A",
+                "profile:compassion_overload",
+                "focus:boundary_setting"
+            ]
+        },
+        "report_tags": [
+            "quality_level:A",
+            "profile:compassion_overload",
+            "focus:boundary_setting"
+        ],
+        "scale_code": "EQ_60",
+        "schema_version": "eq_60.report.v2",
+        "scores": {
+            "dimensions": {
+                "EM": {
+                    "band": "integrated",
+                    "label": "共情理解",
+                    "percentile": 89.74,
+                    "raw_score": 63,
+                    "short_label": "共情理解",
+                    "source_band": "exceptional",
+                    "standard_score": 119
+                },
+                "ER": {
+                    "band": "foundational",
+                    "label": "情绪调节",
+                    "percentile": 12.85,
+                    "raw_score": 45,
+                    "short_label": "情绪调节",
+                    "source_band": "baseline",
+                    "standard_score": 83
+                },
+                "RM": {
+                    "band": "stable",
+                    "label": "关系管理",
+                    "percentile": 47.34,
+                    "raw_score": 53,
+                    "short_label": "关系管理",
+                    "source_band": "competent",
+                    "standard_score": 99
+                },
+                "SA": {
+                    "band": "stable",
+                    "label": "自我觉察",
+                    "percentile": 42.07,
+                    "raw_score": 52,
+                    "short_label": "自我觉察",
+                    "source_band": "competent",
+                    "standard_score": 97
+                }
+            },
+            "global": {
+                "band": "stable",
+                "label": "情绪与关系综合指数",
+                "percentile": 48.67,
+                "raw_score": 213,
+                "source_band": "competent",
+                "standard_score": 99.5
+            }
+        },
+        "sections": [
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "本测评为自评问卷，用于自我探索与能力训练方向参考，不构成医疗诊断或心理治疗建议。\n结果受作答状态、理解方式与作答质量影响。\n当你出现持续的情绪困扰、睡眠显著受影响、工作/学习/关系功能受损时，建议寻求专业心理支持。",
+                        "id": "eq60_disclaimer_top_zh",
+                        "title": "重要声明",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "disclaimer_top",
+                "module_code": "eq_core",
+                "title": "重要声明"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "本次答卷质量等级为 **A**：一致性与作答节奏表现稳定，结果解释可靠度较高。",
+                        "id": "eq60_quality_level_A_zh",
+                        "title": "作答质量提示",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "quality_notice",
+                "module_code": "eq_core",
+                "title": "作答质量提示"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "你的综合 EQ 标准分为 **99.5**（人群平均 100，标准差 15），处于第 **48.67** 百分位。\n\n本测评基于四项能力：自我情绪认知（SA）、情绪调节（ER）、同理心与社会感知（EM）、社交管理（RM）。报告会给出各维度的标准分与发展阶段，用于定位优势与训练重点。\n\n本次作答质量等级：**A**。",
+                        "id": "eq60_global_overview_zh",
+                        "title": "综合概览",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "global_overview",
+                "module_code": "eq_core",
+                "title": "综合概览"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**本维度：自我情绪认知（Self‑Awareness）**\n\n标准分：**97**（第 42.07 百分位），阶段：**稳定可用（Competent）**。\n\n你通常能识别情绪，并把情绪与触发点、需求联系起来。你能在大部分场景下清楚表达“我正在紧张/我需要时间/我被忽视了”。这种能力能明显降低误解与内耗，让沟通更聚焦问题本身，而不是被情绪噪音牵着走。\n\n**练习提示**：在关键对话前，用一句话写清“我在乎什么”，让表达更稳定。",
+                        "id": "eq60_sa_competent_zh",
+                        "title": "自我情绪认知 · 稳定可用（Competent）",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "self_awareness",
+                "module_code": "eq_core",
+                "title": "自我情绪认知"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**本维度：情绪调节与控制（Emotion Regulation）**\n\n标准分：**83**（第 12.85 百分位），阶段：**觉察盲区（Baseline）**。\n\n在高压或被触发时，情绪更容易接管行动系统，出现冲动反应、反复纠结、睡眠受影响或持续紧绷。这个分数不代表意志力不足，而是调节工具箱尚未形成稳定的自动化。调节的目标不是“把情绪消灭”，而是把强度与持续时间拉回可管理范围。\n\n**练习提示（90秒）**：停下→缓慢呼气 6 次→把注意力放回脚底触地感，给自己争取“反应前的空隙”。",
+                        "id": "eq60_er_baseline_zh",
+                        "title": "情绪调节与控制 · 觉察盲区（Baseline）",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "emotion_regulation",
+                "module_code": "eq_core",
+                "title": "情绪调节与控制"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**本维度：同理心与社会感知（Social Awareness & Empathy）**\n\n标准分：**119**（第 89.74 百分位），阶段：**卓越稀缺（Exceptional）**。\n\n你的共情能力极强，能在高噪音环境里仍准确读到他人的情绪与动机，并用温和方式回应。这是影响力的重要底座。需要留意的点是：共情强度越高，越要建立边界，避免把别人的情绪带回自己的生活节奏里。\n\n**练习提示**：把“我也很难受”改成“我看见你很难受，我愿意陪你一会儿”，保留边界感。",
+                        "id": "eq60_em_exceptional_zh",
+                        "title": "同理心与社会感知 · 卓越稀缺（Exceptional）",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "empathy",
+                "module_code": "eq_core",
+                "title": "同理心与社会感知"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**本维度：社交技能与人际管理（Relationship Management）**\n\n标准分：**99**（第 47.34 百分位），阶段：**稳定可用（Competent）**。\n\n你具备良好的沟通与协作能力，能建立稳定的人际网络与信任。你能在多数场景里表达观点、处理分歧、维持关系质量。你通常能在“真实表达”和“关系维护”之间找到平衡。\n\n**练习提示**：遇到分歧时先对齐共同目标，再讨论方案。",
+                        "id": "eq60_rm_competent_zh",
+                        "title": "社交技能与人际管理 · 稳定可用（Competent）",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "relationship_management",
+                "module_code": "eq_core",
+                "title": "社交技能与人际管理"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**你的主要画像：情绪海绵型（高同理心 + 低情绪调节）**\n\n本次测评显示：同理心与社会感知 **119** 很高，情绪调节 **83** 偏低。你对他人的痛苦与压力高度敏感，常常会“替别人难受”，也更容易被群体氛围影响。优势是真诚、温暖、能看见别人；代价是情绪过载与边界模糊。\n\n**你常见的优势**\n- 高共鸣：别人更愿意向你倾诉，信任建立更快。\n- 读空气能力强：能敏锐捕捉情绪变化与隐性冲突。\n- 关怀动机：有强烈的助人倾向与责任感。\n\n**常见代价**\n- 情绪感染：别人的情绪进入你的身体，影响睡眠与精力。\n- 救援反射：看到痛苦就想立刻解决，容易过度卷入。\n- 边界消失：把“同理”误用成“承担”，最后自己被掏空。\n\n**关键转折：把共情变成“有边界的关怀”**\n高共情不需要牺牲自我。训练重点是三层边界：\n1) **情绪边界**：区分“这是对方的感受”与“这是我的感受”。\n2) **时间边界**：明确陪伴时长与可用精力。\n3) **行动边界**：从“替你解决”转成“陪你一起看见选择”。\n\n**适合你的回应句式**\n- “我听见你很难受，我愿意陪你 10 分钟，先把事情捋清。”\n- “我能提供的是……更深入的部分需要你自己决定。”\n- “我很在乎你，我也需要先照顾好自己的精力。”\n\n**你会在付费报告里得到什么**\n- 边界训练：把共情从消耗变成资源。\n- 调节工具：让情绪不过载、不回流到生活里。\n- 14 天游程：建立可持续的助人方式。",
+                        "id": "eq60_profile_compassion_overload_zh",
+                        "title": "情绪海绵型",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "cross_quadrant_insight",
+                "module_code": "eq_cross_insights",
+                "title": "交叉洞察长文"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**14 天游程：共情边界与可持续关怀（每天 10–15 分钟）**\n\n目标：保留你的温暖与敏锐，同时建立情绪、时间与行动边界，避免情绪过载。\n\n| 天数 | 主题 | 今日练习 |\n|---|---|---|\n| Day 1 | 区分“我的/你的” | 写下今天一次情绪感染：这是谁的情绪？我能做的是什么？ |\n| Day 2 | 情绪隔离 | 练习一句话：“我看见你很难受，这是你的感受，我在这里陪你。” |\n| Day 3 | 时间边界 | 设定陪伴时长（10/20 分钟），并写下结束句式。 |\n| Day 4 | 行动边界 | 把“替你解决”改成“我陪你看见选择”，写 3 个提问。 |\n| Day 5 | 身体回到自己 | 2 分钟触感练习：握杯子/触摸桌面，回到身体。 |\n| Day 6 | 自我慈悲 | 写 3 句：这很难；我并不孤单；我愿意善待自己。 |\n| Day 7 | 求助与转介 | 列出 3 个可转介资源（朋友/专业/工具），不独自承担。 |\n| Day 8 | 同理而不内卷 | 对话中先复述感受，再问“你想要倾听还是建议？” |\n| Day 9 | 关怀后回收 | 每次深度倾听后做 5 分钟走动/呼吸，回收能量。 |\n| Day10 | 说出限制 | 练习：“我能陪你到这里，之后我需要休息。”并使用 1 次。 |\n| Day11 | 负荷监测 | 今日给情绪负荷打分 0–10，超过 7 时主动减少输入。 |\n| Day12 | 只做一件事 | 把助人行动缩到 1 个最小动作，避免过度卷入。 |\n| Day13 | 关系结构 | 写下 1 段高消耗关系：我需要怎样的边界才能持续？ |\n| Day14 | 复盘与巩固 | 总结 3 条你的边界原则 + 3 句你的关怀脚本。 |\n\n**使用方式**：边界不是冷漠，是让你的关怀变得可持续。",
+                        "id": "eq60_plan_boundary_zh",
+                        "title": "共情边界",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "action_plan_14d",
+                "module_code": "eq_growth_plan",
+                "title": "14 天游程"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**计分方法（上线版 v1.0）**\n\n1) 60 题采用 5 点量表作答；反向题在计分前做翻转（6−选项值）。\n2) 每个维度 15 题，先得到原始分，再转为标准分：平均 100、标准差 15。\n3) 同时计算作答质量指标（耗时、直线作答、极端/中立偏好、内部一致性）。质量等级为 A/B 的数据进入常模库。\n4) 付费报告包含跨维度洞察与 14 天训练计划，目标是把“理解”转化为“可执行的行为改变”。",
+                        "id": "eq60_methodology_zh",
+                        "title": "方法说明",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "methodology",
+                "module_code": "eq_core",
+                "title": "方法说明"
+            },
+            {
+                "access_level": "free",
+                "blocks": [
+                    {
+                        "content": "**使用建议**：本报告用于自我理解与训练方向参考。复测周期建议不少于 14 天，以减少短期情绪波动带来的噪音。\n本平台不会把单次测评结果用于任何“贴标签式”的决策。",
+                        "id": "eq60_disclaimer_bottom_zh",
+                        "title": "结尾提示",
+                        "type": "markdown"
+                    }
+                ],
+                "key": "disclaimer_bottom",
+                "module_code": "eq_core",
+                "title": "结尾提示"
+            }
+        ],
+        "variant": "full"
+    },
+    "report_access": {
+        "access_state": "ready",
+        "payload": {
+            "access": {
+                "all_results_free": true,
+                "blur": false,
+                "locked": false,
+                "paywall": false
+            },
+            "access_level": "full",
+            "locked": false,
+            "modules_allowed": [
+                "eq_core",
+                "eq_full",
+                "eq_cross_insights",
+                "eq_growth_plan"
+            ],
+            "modules_preview": [],
+            "offers": [],
+            "unlock_source": "none",
+            "unlock_stage": "full",
+            "upgrade_sku": null,
+            "upgrade_sku_effective": null,
+            "variant": "full",
+            "view_policy": {
+                "blur_others": false,
+                "free_sections": [
+                    "disclaimer_top",
+                    "quality_notice",
+                    "global_overview",
+                    "self_awareness",
+                    "emotion_regulation",
+                    "empathy",
+                    "relationship_management",
+                    "cross_quadrant_insight",
+                    "action_plan_14d",
+                    "methodology",
+                    "disclaimer_bottom"
+                ]
+            }
+        },
+        "report_state": "ready"
+    }
+}
