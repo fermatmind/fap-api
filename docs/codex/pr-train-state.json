@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T06:50:00+08:00",
+  "updated_at": "2026-05-22T06:55:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -12832,14 +12832,14 @@
     "CRAWLER-LOG-02": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-02-fixture-parser-mvp",
-      "status": "committed",
-      "state": "committed",
+      "status": "pr_opened_github_checks_pending",
+      "state": "pr_opened_github_checks_pending",
       "title": "Crawler log fixture parser MVP",
       "depends_on": [
         "CRAWLER-LOG-01"
       ],
-      "commit_sha": "be6f641bd24f013dad4f3aea10d856597d112d04",
-      "pr_url": null,
+      "commit_sha": "9fedd2d111b037389b61451aefd9901bcfac2e1b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1543",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -12893,6 +12893,10 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "evidence": "Opened PR #1543; GitHub checks pending."
         }
       },
       "failure_reason": null,
@@ -12927,6 +12931,11 @@
           "at": "2026-05-22T06:50:00+08:00",
           "status": "committed",
           "summary": "Committed scoped fixture parser MVP implementation at be6f641bd24f013dad4f3aea10d856597d112d04."
+        },
+        {
+          "at": "2026-05-22T06:55:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1543 for CRAWLER-LOG-02. GitHub checks are pending."
         }
       ]
     }
