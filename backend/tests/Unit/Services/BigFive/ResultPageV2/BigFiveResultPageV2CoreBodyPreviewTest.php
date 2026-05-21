@@ -1977,6 +1977,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEq60FreeReportContractChange($file, $repoRoot, $baseRef)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php'
                 && $this->attributionControllerDiffIsSeoFunnelContractOnly(
@@ -2562,6 +2566,123 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Report/ReportSnapshotStore.php',
             'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
         ], true);
+    }
+
+    private function isEq60FreeReportContractChange(string $file, string $repoRoot, string $baseRef): bool
+    {
+        if ($file === 'backend/app/Services/Report/Eq60ReportComposer.php') {
+            return true;
+        }
+
+        if (! in_array($file, [
+            'backend/app/Services/Report/ReportAccess.php',
+            'backend/app/Services/Report/Resolvers/AccessResolver.php',
+            'backend/database/seeders/CiScalesRegistrySeeder.php',
+            'backend/database/seeders/ScaleRegistrySeeder.php',
+        ], true)) {
+            return false;
+        }
+
+        if ($repoRoot === '' || $baseRef === '') {
+            return false;
+        }
+
+        $changedLines = $this->changedLinesForFile($repoRoot, $baseRef, $file);
+
+        return match ($file) {
+            'backend/app/Services/Report/ReportAccess.php' => $changedLines === [
+                '+    /**',
+                '+     * @return list<string>',
+                '+     */',
+                '+    public static function eq60FreeSectionKeys(): array',
+                '+    {',
+                '+        return [',
+                "+            'disclaimer_top',",
+                "+            'quality_notice',",
+                "+            'global_overview',",
+                "+            'self_awareness',",
+                "+            'emotion_regulation',",
+                "+            'empathy',",
+                "+            'relationship_management',",
+                "+            'cross_quadrant_insight',",
+                "+            'action_plan_14d',",
+                "+            'methodology',",
+                "+            'disclaimer_bottom',",
+                '+        ];',
+                '+    }',
+                '+',
+                '+    /**',
+                '+     * @return list<string>',
+                '+     */',
+                '+    public static function eq60AllRuntimeModules(): array',
+                '+    {',
+                '+        return [',
+                '+            self::MODULE_EQ_CORE,',
+                '+            self::MODULE_EQ_FULL,',
+                '+            self::MODULE_EQ_CROSS_INSIGHTS,',
+                '+            self::MODULE_EQ_GROWTH_PLAN,',
+                '+        ];',
+                '+    }',
+                '+',
+            ],
+            'backend/app/Services/Report/Resolvers/AccessResolver.php' => $changedLines === [
+                '-        if ($forceFreeOnly && ! in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {',
+                '+        if ($forceFreeOnly && ! $this->isForceFreeFullAccessScale($scaleCode)) {',
+                '-        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {',
+                '+        if ($forceFreeOnly && $this->isForceFreeFullAccessScale($scaleCode)) {',
+                '-        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {',
+                '-            $modulesAllowed = ReportAccess::normalizeModules(array_merge(',
+                '-                ReportAccess::defaultModulesAllowedForLocked($scaleCode),',
+                '-                ReportAccess::allDefaultModulesOffered($scaleCode)',
+                '-            ));',
+                '+        if ($forceFreeOnly && $this->isForceFreeFullAccessScale($scaleCode)) {',
+                '+            $modulesAllowed = $scaleCode === ReportAccess::SCALE_EQ_60',
+                '+                ? ReportAccess::eq60AllRuntimeModules()',
+                '+                : ReportAccess::normalizeModules(array_merge(',
+                '+                    ReportAccess::defaultModulesAllowedForLocked($scaleCode),',
+                '+                    ReportAccess::allDefaultModulesOffered($scaleCode)',
+                '+                ));',
+                '+    private function isForceFreeFullAccessScale(string $scaleCode): bool',
+                '+    {',
+                '+        return in_array($scaleCode, [',
+                '+            ReportAccess::SCALE_BIG5_OCEAN,',
+                '+            ReportAccess::SCALE_EQ_60,',
+                '+            ReportAccess::SCALE_ENNEAGRAM,',
+                '+            ReportAccess::SCALE_RIASEC,',
+                '+        ], true);',
+                '+    }',
+                '+',
+            ],
+            'backend/database/seeders/CiScalesRegistrySeeder.php' => $changedLines === [
+                "+                    'paywall_mode' => 'free_only',",
+            ],
+            'backend/database/seeders/ScaleRegistrySeeder.php' => $changedLines === [
+                "+                'paywall_mode' => 'free_only',",
+                "-                'free_sections' => ['intro', 'summary'],",
+                "-                'blur_others' => true,",
+                "-                'teaser_percent' => 0.35,",
+                "-                'upgrade_sku' => 'SKU_EQ_60_FULL_299',",
+                "+                'free_sections' => [",
+                "+                    'disclaimer_top',",
+                "+                    'quality_notice',",
+                "+                    'global_overview',",
+                "+                    'self_awareness',",
+                "+                    'emotion_regulation',",
+                "+                    'empathy',",
+                "+                    'relationship_management',",
+                "+                    'cross_quadrant_insight',",
+                "+                    'action_plan_14d',",
+                "+                    'methodology',",
+                "+                    'disclaimer_bottom',",
+                '+                ],',
+                "+                'blur_others' => false,",
+                "+                'teaser_percent' => 0.0,",
+                "+                'upgrade_sku' => null,",
+                '-                questions: 50,',
+                '+                questions: 60,',
+            ],
+            default => false,
+        };
     }
 
     private function isCiAuthBypassHardeningFile(string $file): bool
