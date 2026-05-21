@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T03:35:00+08:00",
+  "updated_at": "2026-05-22T03:38:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6412,7 +6412,7 @@
         "do not weaken final live acceptance",
         "do not treat candidate-aware planning artifacts as final published authority"
       ],
-      "commit_sha": null,
+      "commit_sha": "57927155de71a44b55f42cb1a6e0be5bfa172c04",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1410",
       "checks": {
         "authorization": {
@@ -11503,6 +11503,11 @@
           "at": "2026-05-22T03:35:00+08:00",
           "status": "local_validation_passed",
           "summary": "Added crawler log architecture contract, generated artifact, and focused SeoIntel test. Focused architecture test, existing crawler log readiness test, full SeoIntel suite, route list, Pint, JSON/YAML validation, state JSON validation, and diff checks passed. No production log read, runtime parser, scheduler, migration, collector write, env edit, deployment, external API call, URL submission, Metabase exposure, or production operation performed."
+        },
+        {
+          "at": "2026-05-22T03:38:00+08:00",
+          "status": "committed",
+          "summary": "Committed scoped architecture contract implementation at 57927155de71a44b55f42cb1a6e0be5bfa172c04."
         }
       ],
       "branch": "codex/crawler-log-00-architecture-contract",
