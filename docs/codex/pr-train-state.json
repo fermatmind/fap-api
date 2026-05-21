@@ -15621,12 +15621,12 @@
     "SEARCH-CHANNEL-LIVE-02": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-canary-submission",
-      "status": "blocked_missing_indexnow_live_configuration",
+      "status": "pr_opened_blocked_missing_indexnow_live_configuration",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-02-PREFLIGHT"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "823c3600",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1534",
       "checks": {
         "dependency_preflight": {
           "status": "pass",
@@ -15679,6 +15679,11 @@
           "at": "2026-05-21T22:54:00+08:00",
           "status": "blocked_missing_indexnow_live_configuration",
           "summary": "Executed the exact approved guarded live command for queue item 1. The executor blocked before writes or external calls because live gates are disabled and IndexNow key/keyLocation are missing."
+        },
+        {
+          "at": "2026-05-21T22:56:00+08:00",
+          "status": "pr_opened_blocked_missing_indexnow_live_configuration",
+          "summary": "Opened PR #1534 to record the guarded canary attempt blocked before writes or external calls due to missing IndexNow live configuration."
         }
       ]
     },
