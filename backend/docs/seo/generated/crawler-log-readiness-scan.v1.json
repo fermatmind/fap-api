@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "version": "crawler-log-readiness-scan.v1",
+  "task": "CRAWLER-LOG-01",
+  "scan_type": "read_only_repository_readiness_scan",
+  "final_decision": "ready_for_crawler_log_fixture_parser_mvp",
+  "next_task": "CRAWLER-LOG-02",
+  "no_production_log_read": true,
+  "no_runtime_parser_added": true,
+  "no_scheduler": true,
+  "no_collector_write": true,
+  "no_production_migration": true,
+  "no_deploy": true,
+  "no_env_edit": true,
+  "no_external_search_api_call": true,
+  "no_search_submission": true,
+  "no_metabase_exposure": true,
+  "no_business_db_access": true,
+  "dependency": {
+    "task": "CRAWLER-LOG-00",
+    "status": "merged",
+    "merge_commit_sha": "316223c6e9ece53da47bbd7523bb648a2cfb3c85",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1541"
+  },
+  "existing_contracts": [
+    "backend/docs/seo/crawler-log-architecture-contract.md",
+    "backend/docs/seo/generated/crawler-log-architecture-contract.v1.json",
+    "backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogArchitectureContractTest.php",
+    "backend/docs/seo/crawler-log-readiness-contract.md",
+    "backend/docs/seo/generated/crawler-log-readiness-contract.v1.json",
+    "backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogReadinessContractTest.php"
+  ],
+  "existing_crawler_log_code": {
+    "collectors": [
+      "backend/app/Services/SeoIntel/Collectors/CrawlerLogFoundationCollector.php",
+      "backend/app/Services/SeoIntel/Collectors/ChineseCrawlerLogCollector.php"
+    ],
+    "parsers_and_helpers": [
+      "backend/app/Services/SeoIntel/Drift/CrawlerLogLineParser.php",
+      "backend/app/Services/SeoIntel/Drift/CrawlerUserAgentClassifier.php",
+      "backend/app/Services/SeoIntel/CrawlerLogLineParser.php",
+      "backend/app/Services/SeoIntel/CrawlerLogPrivacySanitizer.php",
+      "backend/app/Services/SeoIntel/CrawlerLogDailyAggregator.php",
+      "backend/app/Services/SeoIntel/ChineseCrawlerUserAgentClassifier.php"
+    ],
+    "manual_command": "php artisan seo-intel:collect",
+    "dedicated_v1_command_exists": false,
+    "dedicated_v1_command": "php artisan seo-intel:crawler-log-observe"
+  },
+  "source_approval_readiness": {
+    "approved_production_source_exists": false,
+    "allowed_future_source_families": [
+      "nginx_openresty_access_log",
+      "cdn_edge_access_log",
+      "alb_slb_access_log"
+    ],
+    "forbidden_sources": [
+      "node2_local_laravel_log",
+      "node2_local_db",
+      "business_db_log",
+      "payment_log",
+      "provider_webhook_log",
+      "application_debug_log",
+      "raw_request_payload_log",
+      "unapproved_production_raw_access_log"
+    ],
+    "required_approval_fields": [
+      "log_path",
+      "log_format",
+      "owner",
+      "retention",
+      "contains_cookie_header_or_query",
+      "contains_private_route",
+      "max_read_lines",
+      "read_time_window"
+    ]
+  },
+  "schema_readiness": {
+    "target_connection": "seo_intel",
+    "existing_table": "seo_crawler_logs_daily",
+    "existing_migration": "backend/database/migrations/seo_intel/2026_05_17_001600_create_seo_crawler_logs_daily_table.php",
+    "migration_has_seo_intel_connection": true,
+    "current_fields": [
+      "report_date",
+      "canonical_url_hash",
+      "path_hash",
+      "path_display_masked",
+      "locale",
+      "page_entity_type",
+      "source_engine",
+      "bot_family",
+      "user_agent_hash",
+      "method",
+      "status_code",
+      "response_time_bucket",
+      "crawl_count",
+      "robots_allowed",
+      "blocked_by_robots",
+      "private_flow_hit",
+      "noindex_hit",
+      "metadata_json"
+    ],
+    "v1_required_fields": [
+      "log_date",
+      "host",
+      "surface_family",
+      "bot_family",
+      "bot_variant",
+      "bot_verification_state",
+      "route_family",
+      "page_entity_type",
+      "canonical_path",
+      "path_hash",
+      "http_status",
+      "method_bucket",
+      "query_present",
+      "query_risk_state",
+      "private_path_blocked",
+      "hit_count",
+      "first_seen_at",
+      "last_seen_at",
+      "source_log_family",
+      "privacy_transform_version"
+    ],
+    "schema_gap": "existing_table_is_aggregate_but_not_v1_contract_shape",
+    "fields_requiring_v1_reconciliation_before_persistent_writes": [
+      "user_agent_hash",
+      "path_display_masked",
+      "metadata_json"
+    ],
+    "persistent_write_ready": false,
+    "fixture_no_write_ready": true
+  },
+  "parser_collector_readiness": {
+    "foundation_collectors_exist": true,
+    "foundation_collectors_fixture_only": true,
+    "production_log_read_attempted": false,
+    "current_gaps_for_v1": [
+      "host_surface_family_normalization",
+      "bot_variant",
+      "bot_verification_state",
+      "route_family_map",
+      "query_present",
+      "query_risk_state",
+      "complete_private_path_denylist",
+      "v1_bot_family_names",
+      "unknown_public_path_hash_only_semantics"
+    ]
+  },
+  "config_safety": {
+    "allow_production_log_read": false,
+    "chinese_crawler_live_log_read_enabled": false,
+    "allow_external_api_calls": false,
+    "allow_production_crawl": false,
+    "collectors_enabled_default": false,
+    "dry_run_default": true
+  },
+  "scheduler_scan": {
+    "crawler_log_scheduler_entry_found": false,
+    "seo_intel_collect_scheduled": false,
+    "crawler_log_foundation_scheduled": false,
+    "chinese_crawler_log_foundation_scheduled": false
+  },
+  "privacy_boundary": {
+    "forbidden_persistent_fields": [
+      "ip_address",
+      "remote_addr",
+      "raw_user_agent",
+      "raw_request_uri",
+      "raw_query_string",
+      "cookie",
+      "headers",
+      "authorization",
+      "session_id",
+      "token",
+      "api_key",
+      "email",
+      "order_no",
+      "attempt_id",
+      "payment_id",
+      "provider_event_id",
+      "raw_payload",
+      "raw_log_line",
+      "event_payload",
+      "metadata_json",
+      "attributes_json"
+    ],
+    "raw_persistence_allowed": false
+  },
+  "url_truth_boundary": {
+    "crawler_logs_are_url_truth": false,
+    "crawler_logs_create_seo_urls": false,
+    "crawler_logs_decide_canonical": false,
+    "crawler_logs_decide_indexability": false,
+    "crawler_logs_enqueue_search_channel": false,
+    "crawler_logs_auto_write_issue_queue": false,
+    "frontend_fallback_authority_allowed": false,
+    "static_sitemap_fallback_authority_allowed": false,
+    "static_llms_fallback_authority_allowed": false,
+    "node2_local_db_authority_allowed": false,
+    "external_search_source_authority_allowed": false
+  },
+  "recommended_next_pr_scope": [
+    "synthetic_fixture_file",
+    "v1_fixture_parser_normalizer",
+    "in_memory_aggregate_rows",
+    "bot_family_normalization",
+    "route_family_normalization",
+    "surface_family_normalization",
+    "query_risk_state",
+    "private_path_hash_only_behavior",
+    "no_database_writes",
+    "no_production_log_read"
+  ]
+}
