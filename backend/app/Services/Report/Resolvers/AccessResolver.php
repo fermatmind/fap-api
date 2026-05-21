@@ -27,10 +27,10 @@ class AccessResolver
             ? $this->entitlements->hasFullAccess($orgId, $userId, $anonId, $attemptId, $benefitCode)
             : false;
 
-        if ($forceFreeOnly && ! in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {
+        if ($forceFreeOnly && ! $this->isForceFreeFullAccessScale($scaleCode)) {
             $hasFullAccess = false;
         }
-        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {
+        if ($forceFreeOnly && $this->isForceFreeFullAccessScale($scaleCode)) {
             $hasFullAccess = true;
         }
 
@@ -54,11 +54,13 @@ class AccessResolver
         bool $allowAttemptScopedPaidModules = true
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
-        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {
-            $modulesAllowed = ReportAccess::normalizeModules(array_merge(
-                ReportAccess::defaultModulesAllowedForLocked($scaleCode),
-                ReportAccess::allDefaultModulesOffered($scaleCode)
-            ));
+        if ($forceFreeOnly && $this->isForceFreeFullAccessScale($scaleCode)) {
+            $modulesAllowed = $scaleCode === ReportAccess::SCALE_EQ_60
+                ? ReportAccess::eq60AllRuntimeModules()
+                : ReportAccess::normalizeModules(array_merge(
+                    ReportAccess::defaultModulesAllowedForLocked($scaleCode),
+                    ReportAccess::allDefaultModulesOffered($scaleCode)
+                ));
 
             return [
                 'modules_allowed' => $modulesAllowed,
@@ -115,6 +117,16 @@ class AccessResolver
         }
 
         return $benefitCode;
+    }
+
+    private function isForceFreeFullAccessScale(string $scaleCode): bool
+    {
+        return in_array($scaleCode, [
+            ReportAccess::SCALE_BIG5_OCEAN,
+            ReportAccess::SCALE_EQ_60,
+            ReportAccess::SCALE_ENNEAGRAM,
+            ReportAccess::SCALE_RIASEC,
+        ], true);
     }
 
     /**

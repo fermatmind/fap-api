@@ -143,6 +143,10 @@ class ReportGatekeeper
             $forceFreeOnly
         );
         $viewPolicy = $paywall['view_policy'] ?? $viewPolicy;
+        if ($scaleCode === ReportAccess::SCALE_EQ_60) {
+            $viewPolicy = $this->eq60AllFreeViewPolicy($viewPolicy);
+            $paywall = $this->eq60AllFreePaywall($paywall, $viewPolicy);
+        }
 
         $accessState = $this->accessResolver->resolveAccess(
             $scaleCode,
@@ -192,6 +196,15 @@ class ReportGatekeeper
         $modulesPreview = (array) ($crisisState['modules_preview'] ?? $modulesPreview);
         $hasFullAccess = (bool) ($crisisState['has_full_access'] ?? $hasFullAccess);
         $hasPaidModuleAccess = (bool) ($crisisState['has_paid_module_access'] ?? $hasPaidModuleAccess);
+        if ($scaleCode === ReportAccess::SCALE_EQ_60) {
+            $viewPolicy = $this->eq60AllFreeViewPolicy($viewPolicy);
+            $paywall = $this->eq60AllFreePaywall($paywall, $viewPolicy);
+            $modulesAllowed = ReportAccess::eq60AllRuntimeModules();
+            $modulesOffered = ReportAccess::allDefaultModulesOffered($scaleCode);
+            $modulesPreview = [];
+            $hasFullAccess = true;
+            $hasPaidModuleAccess = true;
+        }
         $unlockStage = $hasFullAccess
             ? ReportAccess::UNLOCK_STAGE_FULL
             : ($hasPaidModuleAccess ? ReportAccess::UNLOCK_STAGE_PARTIAL : ReportAccess::UNLOCK_STAGE_LOCKED);
@@ -569,7 +582,40 @@ class ReportGatekeeper
             return $freeByPaywallMode;
         }
 
-        return $scaleCode === ReportAccess::SCALE_RIASEC || $freeByPaywallMode;
+        if (in_array($scaleCode, [ReportAccess::SCALE_EQ_60, ReportAccess::SCALE_RIASEC], true)) {
+            return true;
+        }
+
+        return $freeByPaywallMode;
+    }
+
+    /**
+     * @param  array<string,mixed>  $viewPolicy
+     * @return array<string,mixed>
+     */
+    private function eq60AllFreeViewPolicy(array $viewPolicy): array
+    {
+        $viewPolicy['free_sections'] = ReportAccess::eq60FreeSectionKeys();
+        $viewPolicy['blur_others'] = false;
+        $viewPolicy['teaser_percent'] = 0.0;
+        $viewPolicy['upgrade_sku'] = null;
+
+        return $viewPolicy;
+    }
+
+    /**
+     * @param  array<string,mixed>  $paywall
+     * @param  array<string,mixed>  $viewPolicy
+     * @return array<string,mixed>
+     */
+    private function eq60AllFreePaywall(array $paywall, array $viewPolicy): array
+    {
+        $paywall['offers'] = [];
+        $paywall['upgrade_sku'] = null;
+        $paywall['upgrade_sku_effective'] = null;
+        $paywall['view_policy'] = $viewPolicy;
+
+        return $paywall;
     }
 
     private function canUseAttemptScopedPaidModules(?string $userId, ?string $anonId, ?string $role): bool
