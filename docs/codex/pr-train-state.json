@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-21T20:30:00+08:00",
+  "updated_at": "2026-05-22T02:22:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -5314,7 +5314,7 @@
         "no fap-web change",
         "do not weaken final live acceptance"
       ],
-      "commit_sha": null,
+      "commit_sha": "49d13b75eb122ad97af8cbafd7675bde294328be",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1392",
       "checks": {
         "authorization": {
@@ -15887,12 +15887,12 @@
     "OPS-SEO-NATIVE-DASH-02": {
       "repo": "fap-api",
       "branch": "codex/ops-seo-native-dash-02-filament-ui",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "OPS-SEO-NATIVE-DASH-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "c5db09a4786b71b020abd0fa2c3ed4600c810461",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1538",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -15946,10 +15946,10 @@
           "summary": "Applied the narrowest allowlist for backend/app/Filament/Ops/Pages/SeoDashboardAccessPage.php and revalidated the runtime freeze guard, focused dashboard tests, scoped Pint, and diff checks locally."
         }
       },
-      "failure_reason": "GitHub checks verify-mbti-legacy and verify-mbti-v2 initially failed on PR #1538 because the Big Five runtime freeze classifier needed a scoped allowlist entry for SeoDashboardAccessPage.php. A scoped fix was applied and validated locally.",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "failure_reason": null,
+      "merged_at": "2026-05-22T01:56:00+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-22T00:20:00+08:00",
@@ -15980,13 +15980,18 @@
           "at": "2026-05-22T01:52:00+08:00",
           "status": "github_checks_failed_scoped_fix_local_passed",
           "summary": "Inspected PR #1538 verify-mbti failures, added the narrowest Big Five runtime freeze allowlist for SeoDashboardAccessPage.php, and reran the freeze guard, focused dashboard tests, scoped Pint, and diff checks locally."
+        },
+        {
+          "at": "2026-05-22T01:56:00+08:00",
+          "status": "merged",
+          "summary": "PR #1538 checks passed, mergeStateStatus was CLEAN, squash merge produced c5db09a4786b71b020abd0fa2c3ed4600c810461, the remote branch was deleted, and local main was synced. post_merge_cleanup.sh was not present, so cleanup was verified manually."
         }
       ]
     },
     "OPS-SEO-NATIVE-DASH-03": {
       "repo": "fap-api",
       "branch": "codex/ops-seo-native-dash-03-detail-panels",
-      "status": "registered",
+      "status": "in_progress",
       "depends_on": [
         "OPS-SEO-NATIVE-DASH-02"
       ],
@@ -15994,8 +15999,47 @@
       "pr_url": null,
       "checks": {
         "dependency": {
-          "status": "pending",
-          "summary": "Cannot start until OPS-SEO-NATIVE-DASH-02 is merged."
+          "status": "pass",
+          "summary": "OPS-SEO-NATIVE-DASH-02 is merged into origin/main as c5db09a4786b71b020abd0fa2c3ed4600c810461."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "summary": "Changed files are confined to the scoped Blade detail panels, focused panel test, docs/generated artifact, and PR-train metadata."
+        },
+        "focused_phpunit_initial": {
+          "status": "fail_fixed",
+          "command": "cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboard",
+          "summary": "Initial panel test was too broad and treated the safety notice text 'no approve/retry/submit buttons' as a forbidden live control. The assertion was narrowed to actual button/action markers, then revalidated."
+        },
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboard",
+          "summary": "10 tests passed, 170 assertions."
+        },
+        "seo_intel_suite": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "summary": "285 tests passed, 4622 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "summary": "Route list rendered successfully with 203 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "summary": "Pint passed across 3439 files."
+        },
+        "bigfive_runtime_freeze_guard": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff",
+          "summary": "Runtime freeze guard passed; no PR3 allowlist update was required."
+        },
+        "json_yaml_diff": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/ops-seo-native-dashboard-panels.v1.json >/dev/null; python3 -m json.tool docs/codex/pr-train-state.json >/dev/null; python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"; git diff --check; git diff --cached --check",
+          "summary": "Generated JSON, PR-train state JSON, PR-train YAML, and whitespace diff checks passed."
         }
       },
       "failure_reason": null,
@@ -16007,6 +16051,21 @@
           "at": "2026-05-22T00:20:00+08:00",
           "status": "registered",
           "summary": "Registered detail panel PR for native /ops/seo dashboard. Waiting for UI merge."
+        },
+        {
+          "at": "2026-05-22T02:05:00+08:00",
+          "status": "in_progress",
+          "summary": "Started codex/ops-seo-native-dash-03-detail-panels from latest main after confirming the Filament UI PR dependency was merged and cleaned up."
+        },
+        {
+          "at": "2026-05-22T02:20:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Implemented read-only Issue Queue and Search Channel Queue detail panels with safe display columns, docs/generated artifact, focused panel tests, and passed focused dashboard tests, full SeoIntel suite, route list, Pint, BigFive runtime freeze guard, JSON/YAML, and diff checks."
+        },
+        {
+          "at": "2026-05-22T02:22:00+08:00",
+          "status": "committed",
+          "summary": "Committed scoped PR3 implementation at 49d13b75eb122ad97af8cbafd7675bde294328be."
         }
       ]
     },

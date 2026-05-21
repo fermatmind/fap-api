@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "version": "ops-seo-native-dashboard-panels.v1",
+  "task": "OPS-SEO-NATIVE-DASH-03",
+  "runtime": "ops_seo_native_dashboard",
+  "surface": "/ops/seo",
+  "implementation": "issue_queue_and_search_channel_detail_panels",
+  "read_only": true,
+  "read_only_filter_dimensions": {
+    "issue_queue": [
+      "issue_type",
+      "severity",
+      "status"
+    ],
+    "search_channel_queue": [
+      "channel",
+      "approval_state",
+      "execution_state"
+    ]
+  },
+  "issue_queue_detail_panel": {
+    "safe_columns": [
+      "canonical_path",
+      "locale",
+      "page_entity_type",
+      "issue_type",
+      "severity",
+      "source_system",
+      "source_engine",
+      "status",
+      "lifecycle_state",
+      "detected_at",
+      "updated_at"
+    ]
+  },
+  "search_channel_queue_detail_panel": {
+    "safe_columns": [
+      "canonical_path",
+      "locale",
+      "page_entity_type",
+      "source_authority",
+      "channel",
+      "eligibility_state",
+      "approval_state",
+      "execution_state",
+      "indexability_state",
+      "claim_boundary_state",
+      "private_flow",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "payload_drilldown_added": false,
+  "raw_json_displayed": false,
+  "event_payload_displayed": false,
+  "reason_codes_displayed": false,
+  "mutation_controls_added": false,
+  "approve_retry_submit_buttons_added": false,
+  "scheduler_controls_added": false,
+  "collector_controls_added": false,
+  "metabase_exposure_added": false,
+  "external_api_call_added": false,
+  "next_task": "OPS-SEO-NATIVE-DASH-04"
+}
