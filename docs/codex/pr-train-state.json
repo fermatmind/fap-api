@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T03:05:00+08:00",
+  "updated_at": "2026-05-22T03:07:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6325,7 +6325,7 @@
         "do not weaken final live acceptance",
         "do not treat candidate-aware planning artifacts as final published authority"
       ],
-      "commit_sha": null,
+      "commit_sha": "66800c324532fff8eb20ebd0c5a5bfdf9098dd61",
       "pr_url": null,
       "checks": {
         "authorization": {
@@ -16151,6 +16151,11 @@
           "at": "2026-05-22T03:05:00+08:00",
           "status": "local_validation_passed",
           "summary": "Added access-boundary verification test, docs/generated artifact, and passed focused dashboard tests, full SeoIntel suite, route list, Pint, JSON/YAML, and diff checks."
+        },
+        {
+          "at": "2026-05-22T03:07:00+08:00",
+          "status": "committed",
+          "summary": "Committed scoped PR4 implementation at 66800c324532fff8eb20ebd0c5a5bfdf9098dd61."
         }
       ]
     }
