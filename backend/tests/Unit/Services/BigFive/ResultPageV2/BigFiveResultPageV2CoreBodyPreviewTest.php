@@ -518,6 +518,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_crawler_log_fixture_parser_mvp_file(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogFixtureParser.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_issue_queue_foundation_files(): void
     {
         $changed = [
@@ -1808,6 +1817,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCrawlerLogFixtureParserMvpFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIssueQueueFoundationFile($file)) {
                 continue;
             }
@@ -2379,6 +2392,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/CrawlerLogPrivacySanitizer.php',
             'backend/database/migrations/2026_05_17_001600_create_seo_crawler_logs_daily_table.php',
         ], true);
+    }
+
+    private function isCrawlerLogFixtureParserMvpFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogFixtureParser.php';
     }
 
     private function isSeoIssueQueueFoundationFile(string $file): bool
