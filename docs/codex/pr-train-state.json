@@ -15397,13 +15397,13 @@
     "SEARCH-CHANNEL-LIVE-02-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-preflight",
-      "status": "preflight_passed_indexnow_config_ready",
+      "status": "pr_opened_indexnow_config_ready",
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE",
         "NODE3-RETIREMENT-FINAL-CHECK"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "332a7d28",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1535",
       "checks": {
         "dependencies": {
           "status": "pass",
@@ -15519,6 +15519,11 @@
           "at": "2026-05-21T23:18:00+08:00",
           "status": "preflight_passed_indexnow_config_ready",
           "summary": "Configured IndexNow key/keyLocation and one-shot live gates, rebuilt production config cache, verified keyLocation, confirmed executor blocks only on missing approval phrase, and refreshed the exact live canary approval phrase. No live submission occurred."
+        },
+        {
+          "at": "2026-05-21T23:22:00+08:00",
+          "status": "pr_opened_indexnow_config_ready",
+          "summary": "Opened PR #1535 for the fresh preflight after IndexNow live configuration. No live submission occurred."
         }
       ],
       "sidecar_issues": [
