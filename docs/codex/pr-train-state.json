@@ -6747,7 +6747,7 @@
       "branch": "codex/2786-cn-proxy-public-owner-pr-train-1",
       "title": "fix(api): gate reviewed CN proxy public owner plan",
       "name": "Gate reviewed CN proxy public owner plan for 2786",
-      "status": "pr_opened_github_checks_pending",
+      "status": "github_checks_failed_scoped_fix_local_passed",
       "depends_on": [
         "REPAIR-2786-FINAL-PUBLIC-RESOLUTION-PARTITION-1",
         "CN-PROXY-AUTHORITY-POLICY-DECISION-1",
@@ -15931,9 +15931,22 @@
           "status": "pass",
           "command": "python3 -m json.tool backend/docs/seo/generated/ops-seo-native-dashboard-ui.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\" && git diff --check && git diff --cached --check",
           "summary": "Generated JSON, PR-train state JSON, PR-train YAML, and whitespace diff checks passed."
+        },
+        "github_checks_initial": {
+          "status": "fail",
+          "summary": "PR #1538 failed verify-mbti-legacy and verify-mbti-v2 because the Big Five runtime freeze classifier did not yet allow the scoped SeoDashboardAccessPage.php UI owner file.",
+          "failed_checks": [
+            "verify-mbti-legacy",
+            "verify-mbti-v2"
+          ]
+        },
+        "github_checks_latest": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff && php artisan test --filter=SeoIntelOpsSeoNativeDashboard && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php app/Filament/Ops/Pages/SeoDashboardAccessPage.php tests/Feature/SeoIntel/SeoIntelOpsSeoNativeDashboardUiTest.php && git diff --check && git diff --cached --check",
+          "summary": "Applied the narrowest allowlist for backend/app/Filament/Ops/Pages/SeoDashboardAccessPage.php and revalidated the runtime freeze guard, focused dashboard tests, scoped Pint, and diff checks locally."
         }
       },
-      "failure_reason": null,
+      "failure_reason": "GitHub checks verify-mbti-legacy and verify-mbti-v2 initially failed on PR #1538 because the Big Five runtime freeze classifier needed a scoped allowlist entry for SeoDashboardAccessPage.php. A scoped fix was applied and validated locally.",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -15962,6 +15975,11 @@
           "at": "2026-05-22T01:40:00+08:00",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened PR #1538 for the Filament native dashboard UI. GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-22T01:52:00+08:00",
+          "status": "github_checks_failed_scoped_fix_local_passed",
+          "summary": "Inspected PR #1538 verify-mbti failures, added the narrowest Big Five runtime freeze allowlist for SeoDashboardAccessPage.php, and reran the freeze guard, focused dashboard tests, scoped Pint, and diff checks locally."
         }
       ]
     },
