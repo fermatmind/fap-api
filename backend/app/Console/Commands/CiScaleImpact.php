@@ -127,8 +127,8 @@ final class CiScaleImpact extends Command
      */
     private function writeGithubOutput(array $payload): void
     {
-        $target = trim((string) ($_SERVER['GITHUB_OUTPUT'] ?? $_ENV['GITHUB_OUTPUT'] ?? ''));
-        if ($target === '') {
+        $target = $this->resolveGithubOutputPath();
+        if ($target === null) {
             return;
         }
 
@@ -145,6 +145,31 @@ final class CiScaleImpact extends Command
             'reason='.(string) ($payload['reason'] ?? ''),
         ];
 
+        // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
+        // GITHUB_OUTPUT is accepted only after rejecting stream wrappers and non-local paths.
         file_put_contents($target, implode(PHP_EOL, $lines).PHP_EOL, FILE_APPEND);
+    }
+
+    private function resolveGithubOutputPath(): ?string
+    {
+        $target = trim((string) ($_SERVER['GITHUB_OUTPUT'] ?? $_ENV['GITHUB_OUTPUT'] ?? ''));
+        if ($target === '' || str_contains($target, "\0")) {
+            return null;
+        }
+
+        if (! str_starts_with($target, DIRECTORY_SEPARATOR) || parse_url($target, PHP_URL_SCHEME) !== null) {
+            return null;
+        }
+
+        $directory = dirname($target);
+        if (! is_dir($directory) || ! is_writable($directory)) {
+            return null;
+        }
+
+        if (file_exists($target) && (! is_file($target) || ! is_writable($target))) {
+            return null;
+        }
+
+        return $target;
     }
 }

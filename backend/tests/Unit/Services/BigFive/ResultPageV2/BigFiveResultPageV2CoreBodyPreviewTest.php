@@ -198,6 +198,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_ci_scale_impact_command_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/CiScaleImpact.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_public_healthz_alias_route_addition(): void
     {
         $changed = [
@@ -1678,6 +1687,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCiScaleImpactCommandFile($file)) {
+                continue;
+            }
+
             if ($this->isContentReleaseRevalidateAutomationFile($file)) {
                 continue;
             }
@@ -2096,6 +2109,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isStorageReleaseRootsAuditCommandFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/StorageReleaseRootsAudit.php';
+    }
+
+    private function isCiScaleImpactCommandFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/CiScaleImpact.php';
     }
 
     private function isContentReleaseRevalidateAutomationFile(string $file): bool
