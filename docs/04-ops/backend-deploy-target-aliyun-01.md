@@ -48,6 +48,21 @@ The old GitHub push webhook that targeted `http://122.152.221.126:9000/hooks/dep
 
 Production deployment should use the GitHub Actions/Deployer SSH path to Aliyun, not the old Node3 webhook.
 
+## Node3 Final Check
+
+`NODE3-RETIREMENT-FINAL-CHECK` completed on 2026-05-21:
+
+- Cloudflare and Google public DNS resolve `api.fermatmind.com` and `ops.fermatmind.com` to Aliyun `139.224.130.204`.
+- Aliyun Host-forced smoke checks returned 200 for the public API questions endpoint and Ops login.
+- The old GitHub deploy webhook for Node3 TCP/9000 is inactive.
+- Node3 `webhook.service` is inactive and disabled.
+- Node3 has no TCP/9000 listener, and Aliyun cannot connect to Node3 TCP/9000.
+- Node3 queue worker supervisor groups remain stopped.
+- Node3 ubuntu and www-data Laravel scheduler cron lines remain commented with `NODE3_RETIRED_20260521180344`.
+- Recent Node3 nginx access-log tail showed no API/Ops traffic after the earlier DNS-cutover tail.
+
+Conclusion: Node3 can expire without affecting the current production API/Ops/queue/scheduler/deploy path. Node2 and the still-Tencent DB/Redis path remain separate dependencies until their later migration.
+
 ## Acceptance Checks
 
 ```bash

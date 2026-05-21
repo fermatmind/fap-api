@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-21T19:05:00+08:00",
+  "updated_at": "2026-05-21T19:08:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -15331,7 +15331,7 @@
     "NODE3-RETIREMENT-FINAL-CHECK": {
       "repo": "fap-api",
       "branch": "codex/node3-retirement-final-check",
-      "status": "registered",
+      "status": "completed_external_operation",
       "depends_on": [
         "BACKEND-DEPLOY-TARGET-ALIYUN-01",
         "NODE3-RETIREMENT-PREFLIGHT",
@@ -15340,9 +15340,41 @@
       "commit_sha": null,
       "pr_url": null,
       "checks": {
-        "dependency_plan": {
-          "status": "pending",
-          "summary": "Requires merged Aliyun deploy target plus completed Node3 preflight and Ops domain migration evidence."
+        "dependencies": {
+          "status": "pass",
+          "summary": "BACKEND-DEPLOY-TARGET-ALIYUN-01 is merged; NODE3-RETIREMENT-PREFLIGHT and OPS-DOMAIN-MIGRATION-01 are completed external operations."
+        },
+        "public_dns": {
+          "status": "pass",
+          "summary": "Cloudflare and Google public DNS resolve api.fermatmind.com and ops.fermatmind.com to Aliyun 139.224.130.204."
+        },
+        "aliyun_runtime_smoke": {
+          "status": "pass",
+          "summary": "Aliyun Host-forced API questions endpoint and Ops login checks returned HTTP 200."
+        },
+        "github_deploy_webhook": {
+          "status": "pass",
+          "summary": "GitHub hook id 598987512 targeting http://122.152.221.126:9000/hooks/deploy-fap-api is inactive."
+        },
+        "node3_webhook": {
+          "status": "pass",
+          "summary": "Node3 webhook.service is inactive/disabled; Node3 has no TCP/9000 listener and Aliyun cannot connect to Node3 TCP/9000."
+        },
+        "node3_queue_workers": {
+          "status": "pass",
+          "summary": "Node3 fap-queue-default-high and fap-queue-reports supervisor groups remain STOPPED."
+        },
+        "node3_scheduler": {
+          "status": "pass",
+          "summary": "Node3 ubuntu and www-data Laravel scheduler cron entries remain commented with NODE3_RETIRED_20260521180344."
+        },
+        "node3_nginx_tail": {
+          "status": "pass",
+          "summary": "Recent Node3 nginx access-log tail showed only earlier DNS-cutover tail traffic and no API/Ops hits after the final check window."
+        },
+        "deploy_target_refusal": {
+          "status": "pass",
+          "summary": "Production deploy config defaults to Aliyun and workflow refuses retired Node3 as DEPLOY_HOST_PROD."
         }
       },
       "failure_reason": null,
@@ -15354,6 +15386,11 @@
           "at": "2026-05-21T19:05:00+08:00",
           "status": "registered",
           "summary": "Registered final read-only Node3 retirement verification before the Tencent Node3 expiry; no poweroff/delete/reboot/DNS/deploy action is authorized."
+        },
+        {
+          "at": "2026-05-21T19:08:00+08:00",
+          "status": "completed_external_operation",
+          "summary": "Completed final read-only Node3 retirement verification. Node3 can expire without affecting current API/Ops/queue/scheduler/deploy paths; Node2 and Tencent DB/Redis remain separate dependencies."
         }
       ]
     },
