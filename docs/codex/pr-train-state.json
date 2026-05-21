@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-21T20:20:00+08:00",
+  "updated_at": "2026-05-21T20:25:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -15397,12 +15397,12 @@
     "SEARCH-CHANNEL-LIVE-02-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-02-preflight",
-      "status": "blocked_production_executor_not_deployed",
+      "status": "local_validation_passed_blocked",
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-02-CANARY-ENQUEUE",
         "NODE3-RETIREMENT-FINAL-CHECK"
       ],
-      "commit_sha": null,
+      "commit_sha": "d20d309d610507de80efb3982ec9d891c9e3de66",
       "pr_url": null,
       "checks": {
         "dependencies": {
@@ -15479,6 +15479,11 @@
           "at": "2026-05-21T20:20:00+08:00",
           "status": "local_validation_passed_blocked",
           "summary": "Local validation passed for the blocked preflight artifact and metadata. The live canary remains blocked until production deploy/read-only executor dry-run."
+        },
+        {
+          "at": "2026-05-21T20:25:00+08:00",
+          "status": "commit_created",
+          "summary": "Committed the blocked preflight rerun artifact and ledger update on codex/search-channel-live-02-preflight."
         }
       ],
       "sidecar_issues": [
