@@ -1,0 +1,53 @@
+{
+  "schema_version": "search-channel-live-02-executor.v1",
+  "task_id": "SEARCH-CHANNEL-LIVE-02-EXECUTOR",
+  "runtime": "search_channel_live_submission",
+  "command": "seo-intel:search-channel-submit",
+  "next_task": "SEARCH-CHANNEL-LIVE-02-PREFLIGHT",
+  "live_submission_performed_in_this_task": false,
+  "default_live_submission_enabled": false,
+  "scheduler_registered": false,
+  "bulk_submission_supported": false,
+  "atomic_single_item_claim_required": true,
+  "raw_secret_output_allowed": false,
+  "sitemap_llms_behavior_changed": false,
+  "supported_live_channels": [
+    "indexnow"
+  ],
+  "allowed_hosts": [
+    "fermatmind.com"
+  ],
+  "required_env_gates": [
+    "SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED",
+    "SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED",
+    "SEO_INTEL_INDEXNOW_LIVE_API_ENABLED",
+    "SEO_INTEL_INDEXNOW_KEY",
+    "SEO_INTEL_INDEXNOW_KEY_LOCATION"
+  ],
+  "approval_phrase_template": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item <id> channel <channel> URL <canonical_url>.",
+  "required_queue_item_state": {
+    "eligibility_state": "eligible",
+    "approval_state": "pending",
+    "execution_state": "dry_run_ready",
+    "indexability_state": "indexable",
+    "claim_boundary_state": "claim_safe",
+    "private_flow": false
+  },
+  "target_tables": [
+    "seo_search_channel_queue_items",
+    "seo_search_channel_queue_events"
+  ],
+  "audit_events": [
+    "live_submission_approved",
+    "live_submission_response"
+  ],
+  "protected_boundaries": {
+    "no_scheduler_activation": true,
+    "no_bulk_submission": true,
+    "single_item_idempotency_guard": true,
+    "no_production_env_edit": true,
+    "no_deploy": true,
+    "no_raw_key_or_key_location_output": true,
+    "no_full_url_in_audit_event_payload": true
+  }
+}
