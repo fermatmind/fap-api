@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T16:12:46+08:00",
+  "updated_at": "2026-05-22T16:25:38+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -708,7 +708,18 @@
       ],
       "commit_sha": "32f35c17a0f29758f0f700010ac1b0c7492ffb6c",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1451",
-      "checks": {},
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_ops_readiness": "passed: php artisan test --filter=SeoIntelContentOpsClaimLinkOpsReadiness --no-ansi (6 tests, 70 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (454 tests, 7255 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_test": "passed: vendor/bin/pint --test (3480 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/content-ops-claim-link-ops-readiness.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
       "sidecar_issues": [],
       "failure_reason": null,
       "merged_at": null,
@@ -18230,12 +18241,12 @@
     "CLAIM-LINT-01B": {
       "repo": "fap-api",
       "branch": "codex/claim-lint-01b-chinese-claim-linter-runtime",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "CLAIM-LINT-01A",
         "CONTENT-OPS-02B"
       ],
-      "commit_sha": null,
+      "commit_sha": "1cba31a8e37b1d00d61fcee37777ef73fd39add9",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1567",
       "checks": {
         "local": {
@@ -18250,12 +18261,18 @@
           "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check"
+        },
+        "github": {
+          "pr_1567": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN"
+        },
+        "post_merge": {
+          "focused_runtime_test": "passed: php artisan test --filter=SeoIntelChineseClaimLinterRuntime --no-ansi"
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T08:18:58Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -18281,13 +18298,18 @@
           "at": "2026-05-22T16:12:46+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1567 for CLAIM-LINT-01B and pushed branch codex/claim-lint-01b-chinese-claim-linter-runtime."
+        },
+        {
+          "at": "2026-05-22T16:21:44+08:00",
+          "status": "merged",
+          "summary": "PR #1567 merged via squash at 1cba31a8e37b1d00d61fcee37777ef73fd39add9. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused runtime test passed."
         }
       ]
     },
     "CONTENT-OPS-CLAIM-LINK-OPS-READINESS": {
       "repo": "fap-api",
       "branch": "codex/content-ops-claim-link-ops-readiness",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "CONTENT-OPS-02B",
         "INTERNAL-LINK-01B",
@@ -18310,6 +18332,16 @@
           "at": "2026-05-22T14:37:34+08:00",
           "status": "pending",
           "summary": "Registered /ops/seo display readiness PR for content publish rehearsal, internal link graph, and claim lint summaries. Scope is read-only readiness docs/generated/test only."
+        },
+        {
+          "at": "2026-05-22T16:21:44+08:00",
+          "status": "in_progress",
+          "summary": "Started CONTENT-OPS-CLAIM-LINK-OPS-READINESS on codex/content-ops-claim-link-ops-readiness. Scope is docs/generated/test only plus train metadata; no Filament UI implementation, action buttons, write controls, migrations, production env changes, fap-web changes, Metabase exposure, scheduler controls, collector controls, or Search Channel controls."
+        },
+        {
+          "at": "2026-05-22T16:25:38+08:00",
+          "status": "local_validation_passed",
+          "summary": "CONTENT-OPS-CLAIM-LINK-OPS-READINESS local validation passed for focused readiness contract test, full SeoIntel filter, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Scope remains docs/generated/test plus train metadata only, with no UI implementation, write controls, production operations, fap-web changes, Metabase exposure, scheduler controls, collector controls, or Search Channel controls."
         }
       ]
     },
