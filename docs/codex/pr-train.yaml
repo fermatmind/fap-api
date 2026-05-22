@@ -8076,6 +8076,45 @@ prs:
     scheduler_activation: false
     next_task: OPS-DOMAIN-MIGRATION-01
 
+  - id: DEPLOY-NGINX-STATIC-ROUTE-01
+    repo: fap-api
+    depends_on:
+      - BACKEND-DEPLOY-TARGET-ALIYUN-01
+    branch: codex/deploy-nginx-static-route-01
+    base: main
+    title: "fix(deploy): keep nginx static route backups outside active config paths"
+    name: "Keep nginx static route backups outside active config paths"
+    train_scope: deploy_nginx_static_route_backup_safety
+    risk_level: L2
+    type: deploy safety PR
+    scope:
+      - Move the temporary backup files used by `ensure:nginx-public-static-media-route` out of `/etc/nginx/sites-enabled` and related active config paths.
+      - Preserve the existing nginx static media route injection and restore behavior while preventing `nginx -t` from reading backup files as live site configs.
+      - Record the scoped PR train state for this deploy safety fix only.
+    allowed_paths:
+      - deploy.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change deploy target hosts, healthcheck URLs, queue behavior, crawler runtime behavior, production env, GitHub Actions workflow logic, or live application code.
+      - Deploy from this PR or broaden the nginx static media route feature surface beyond backup placement safety.
+    validation:
+      - php -l deploy.php
+      - rg -n "mktemp /tmp/fap-api-nginx-site-backup|mktemp /tmp/fap-api-nginx-snippet-backup|sites-enabled.*bak\\.fap-static" deploy.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: false
+    scheduler_activation: false
+    next_task: CRAWLER-LOG-05
+
   - id: OPS-DOMAIN-MIGRATION-01
     repo: fap-api
     depends_on:
