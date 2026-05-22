@@ -822,8 +822,12 @@ function nginxIncludePaths(string $content): array
     foreach ($matches[1] as $includePath) {
         $includePath = trim((string) $includePath, " \t\n\r\0\x0B'\"");
 
-        if ($includePath === '' || $includePath[0] !== '/') {
+        if ($includePath === '') {
             continue;
+        }
+
+        if ($includePath[0] !== '/') {
+            $includePath = '/etc/nginx/'.ltrim($includePath, '/');
         }
 
         if (strpbrk($includePath, '*?[') !== false) {
