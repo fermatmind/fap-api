@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T15:31:12+08:00",
+  "updated_at": "2026-05-22T15:45:05+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18030,11 +18030,11 @@
     "INTERNAL-LINK-01A": {
       "repo": "fap-api",
       "branch": "codex/internal-link-01a-semantic-link-graph-contract",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "CONTENT-OPS-02A"
       ],
-      "commit_sha": null,
+      "commit_sha": "ec6a0c6659933e8a5af3bfc77c01de3283922cc7",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1564",
       "checks": {
         "local": {
@@ -18046,12 +18046,18 @@
           "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check"
+        },
+        "github": {
+          "pr_1564": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN"
+        },
+        "post_merge": {
+          "focused_contract_test": "passed: php artisan test --filter=SeoIntelSemanticInternalLinkGraphContract --no-ansi"
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T07:37:00Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -18082,20 +18088,38 @@
           "at": "2026-05-22T15:31:12+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1564 for INTERNAL-LINK-01A and pushed branch codex/internal-link-01a-semantic-link-graph-contract."
+        },
+        {
+          "at": "2026-05-22T15:43:19+08:00",
+          "status": "merged",
+          "summary": "PR #1564 merged via squash at ec6a0c66d1fb7c6db731e0b3fc46dd98f8102a57. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused contract test passed."
         }
       ]
     },
     "INTERNAL-LINK-01B": {
       "repo": "fap-api",
       "branch": "codex/internal-link-01b-graph-dry-run-read-model",
-      "status": "pending",
+      "status": "local_validation_passed",
       "depends_on": [
         "INTERNAL-LINK-01A",
         "CONTENT-OPS-02B"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_dry_run": "passed: php artisan test --filter=SeoIntelInternalLinkGraphDryRun --no-ansi (6 tests, 78 assertions)",
+          "bigfive_runtime_freeze": "passed: php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi (108 tests, 455 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (435 tests, 6949 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_test": "passed: vendor/bin/pint --test (3475 files)",
+          "command_help": "passed: php artisan seo-intel:internal-link-graph --dry-run --no-write --json --help || true",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/internal-link-graph-dry-run.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -18110,6 +18134,16 @@
           "at": "2026-05-22T14:37:34+08:00",
           "status": "pending",
           "summary": "Registered internal link graph dry-run/read-model PR. Scope allows read-only backend service/command/tests only; no CMS link writes, sitemap/crawler/search authority, or fap-web change."
+        },
+        {
+          "at": "2026-05-22T15:43:19+08:00",
+          "status": "in_progress",
+          "summary": "Started INTERNAL-LINK-01B on codex/internal-link-01b-graph-dry-run-read-model. Scope is read-only internal link graph dry-run service/command, docs/generated artifact, focused test, BigFive runtime freeze allowlist for the new SeoIntel dry-run files, and train metadata; no CMS mutation, link creation, fap-web change, crawler log authority, Search Channel enqueue, or migration."
+        },
+        {
+          "at": "2026-05-22T15:45:05+08:00",
+          "status": "local_validation_passed",
+          "summary": "INTERNAL-LINK-01B local validation passed for focused dry-run test, BigFive runtime freeze allowlist, full SeoIntel filter, route list, Pint, command help, JSON/YAML parsing, and diff whitespace checks. Runtime remains read-only/no-write with no CMS mutation, link creation, fap-web change, crawler log authority, sitemap truth, Search Channel enqueue, URL submission, or Observation Queue write."
         }
       ]
     },

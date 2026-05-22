@@ -9465,7 +9465,7 @@ prs:
       - CONTENT-OPS-02B
     branch: codex/internal-link-01b-graph-dry-run-read-model
     base: main
-    title: "feat(seo): add internal link graph dry-run read model"
+    title: "feat(seo-intel): add internal link graph dry-run read model"
     name: "Internal link graph dry-run read model"
     train_scope: content_ops_claim_link_runtime
     risk_level: medium_read_model_only
@@ -9478,6 +9478,7 @@ prs:
       - backend/app/Services/SeoIntel/InternalLink/**
       - backend/app/Console/Commands/SeoIntelInternalLinkGraphCommand.php
       - backend/tests/Feature/SeoIntel/SeoIntelInternalLinkGraphDryRunTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/internal-link-graph-dry-run.md
       - backend/docs/seo/generated/internal-link-graph-dry-run.v1.json
       - docs/codex/pr-train.yaml

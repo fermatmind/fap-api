@@ -1,0 +1,64 @@
+{
+  "version": "internal-link-graph-dry-run.v1",
+  "task": "INTERNAL-LINK-01B",
+  "service": "App\\Services\\SeoIntel\\InternalLink\\InternalLinkGraphDryRun",
+  "command": "seo-intel:internal-link-graph --dry-run --no-write --json",
+  "runtime": "internal_link_graph_dry_run",
+  "required_output_fields": [
+    "dry_run",
+    "writes_attempted",
+    "cms_mutation_attempted",
+    "link_mutation_attempted",
+    "source_inventory",
+    "graph_family_counts",
+    "missing_entity_key_count",
+    "legacy_unpaired_count",
+    "candidate_opportunity_count",
+    "unsafe_fallback_source_count",
+    "warnings"
+  ],
+  "required_graph_families": [
+    "article_to_test",
+    "article_to_topic",
+    "article_to_research",
+    "article_to_related_article",
+    "topic_to_test",
+    "topic_to_article",
+    "topic_to_personality_entity",
+    "research_to_topic_test_article",
+    "test_to_article_topic_research",
+    "career_guide_to_test_topic_article",
+    "career_job_to_career_guide_test_topic",
+    "personality_page_to_test_topic_article"
+  ],
+  "authority_policy": {
+    "truth_source": "backend_cms_entity_graph",
+    "fap_web": "deterministic_renderer_observation_signal_only",
+    "sitemap": "observation_signal_only_not_graph_truth",
+    "llms": "observation_signal_only_not_graph_truth",
+    "crawler_logs": "aggregate_observation_only_never_link_authority",
+    "gsc_ga4_referral": "opportunity_signal_only_never_auto_create_links"
+  },
+  "entity_key_policy": {
+    "preferred": "translation_group_uuid",
+    "transitional": "translation_group_id_where_already_supported",
+    "missing": "legacy_unpaired",
+    "title_slug_similarity": "migration_helper_only_not_authority"
+  },
+  "safety_flags": {
+    "dry_run_only": true,
+    "no_cms_mutation": true,
+    "no_link_mutation": true,
+    "no_fap_web_modification": true,
+    "no_crawler_log_read": true,
+    "no_crawler_derived_authority": true,
+    "no_sitemap_derived_truth": true,
+    "no_frontend_fallback_authority": true,
+    "no_auto_link_creation": true,
+    "no_search_channel_enqueue": true,
+    "no_search_submission": true,
+    "no_observation_queue_write": true
+  },
+  "final_decision": "internal_link_graph_dry_run_ready",
+  "next_task": "CLAIM-LINT-01A"
+}
