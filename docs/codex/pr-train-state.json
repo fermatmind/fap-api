@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T08:20:00+08:00",
+  "updated_at": "2026-05-22T08:24:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -12989,14 +12989,14 @@
     "CRAWLER-LOG-03": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-03-aggregate-dry-run",
-      "status": "local_validation_passed",
-      "state": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
+      "state": "pr_opened_github_checks_pending",
       "title": "Crawler log aggregate dry-run / no-write",
       "depends_on": [
         "CRAWLER-LOG-02"
       ],
       "commit_sha": "f7a2f41b",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1544",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -13051,6 +13051,10 @@
         "yaml_validation": {
           "status": "pass",
           "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        },
+        "github": {
+          "status": "pending",
+          "evidence": "Opened PR #1544; GitHub checks pending."
         }
       },
       "failure_reason": null,
@@ -13085,6 +13089,11 @@
           "at": "2026-05-22T08:20:00+08:00",
           "status": "committed",
           "summary": "Committed scoped aggregate dry-run/no-write implementation at f7a2f41b."
+        },
+        {
+          "at": "2026-05-22T08:24:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1544 for CRAWLER-LOG-03. GitHub checks are pending."
         }
       ]
     }
