@@ -13620,8 +13620,8 @@
       "depends_on": [
         "CRAWLER-LOG-08"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "8cb55f069e4d6e0f0c6bb269271f9c45e4fd83f2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1552",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -13677,6 +13677,11 @@
           "at": "2026-05-22T11:46:00+08:00",
           "status": "local_validation_passed",
           "summary": "Added a read-only crawler aggregate observation read service for /ops/seo. Local validation passed, including focused crawler observation read model, existing dashboard read model, full SeoIntel suite, BigFive runtime-freeze test, route list, Pint, JSON/YAML, and diff checks."
+        },
+        {
+          "at": "2026-05-22T11:51:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1552 for CRAWLER-LOG-09 with commit 8cb55f069e4d6e0f0c6bb269271f9c45e4fd83f2. Scope remains read-only Ops SEO crawler aggregate observation read model only."
         }
       ]
     }
