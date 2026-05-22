@@ -527,6 +527,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_crawler_log_aggregate_dry_run_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoIntelCrawlerLogObserveCommand.php',
+            'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogAggregateDryRun.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_issue_queue_foundation_files(): void
     {
         $changed = [
@@ -1821,6 +1831,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCrawlerLogAggregateDryRunFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIssueQueueFoundationFile($file)) {
                 continue;
             }
@@ -2397,6 +2411,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCrawlerLogFixtureParserMvpFile(string $file): bool
     {
         return $file === 'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogFixtureParser.php';
+    }
+
+    private function isCrawlerLogAggregateDryRunFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelCrawlerLogObserveCommand.php',
+            'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogAggregateDryRun.php',
+        ], true);
     }
 
     private function isSeoIssueQueueFoundationFile(string $file): bool
