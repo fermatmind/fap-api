@@ -9421,9 +9421,9 @@ prs:
     repo: fap-api
     depends_on:
       - CONTENT-OPS-02A
-    branch: codex/internal-link-01a-semantic-graph-contract
+    branch: codex/internal-link-01a-semantic-link-graph-contract
     base: main
-    title: "docs(seo): add semantic internal link graph contract"
+    title: "docs(seo-intel): add semantic internal link graph contract"
     name: "Semantic internal link graph contract"
     train_scope: content_ops_claim_link_runtime
     risk_level: low_contract_only
