@@ -1,0 +1,100 @@
+{
+  "version": "seo-ops-daily-runbook.v1",
+  "task": "SEO-OPS-SOP-01B",
+  "train": "SEO-OPS-SOP-PR-TRAIN-01",
+  "type": "docs_generated_test_only",
+  "daily_checklist": [
+    "open_ops_seo",
+    "review_overview_heartbeat",
+    "review_safety_heartbeat",
+    "check_url_truth_counts_and_forbidden_authority_counters",
+    "check_issue_queue_p0_p1_only",
+    "check_search_channel_queue_approval_execution_states",
+    "confirm_live_search_gates_closed_unless_explicitly_approved",
+    "check_crawler_aggregate_safety_counters_only",
+    "check_claim_lint_blocked_needs_review_counts",
+    "check_internal_link_missing_entity_key",
+    "check_internal_link_legacy_unpaired",
+    "check_internal_link_unsafe_fallback_sources",
+    "check_content_publish_rehearsal_blockers",
+    "check_digital_pr_hrzone_response_status",
+    "check_mbti_growth_loop_status_if_active",
+    "confirm_no_uncontrolled_scheduler_collector_write_or_search_submission"
+  ],
+  "p0_escalation_rules": [
+    "claim_unsafe_public_indexable_page",
+    "private_flow_leak_into_public_or_search_surface",
+    "non_canonical_private_draft_noindex_or_claim_unsafe_url_in_search_channel",
+    "scheduler_unexpectedly_enabled",
+    "metabase_public_exposure",
+    "raw_crawler_log_persistence",
+    "frontend_fallback_becomes_canonical_authority",
+    "business_db_data_leaks_into_seo_intel",
+    "search_channel_live_gate_left_open_after_canary"
+  ],
+  "p1_escalation_rules": [
+    "core_test_research_or_career_metadata_break",
+    "missing_canonical_on_core_page",
+    "locale_pair_missing_on_core_mbti_research_test_asset",
+    "sitemap_runtime_mismatch_on_core_public_asset",
+    "approved_search_channel_item_stuck_without_execution_result"
+  ],
+  "p2_backlog_rules": [
+    "content_publish_rehearsal_blocker_on_draft",
+    "internal_link_missing_entity_key_or_legacy_unpaired_gap",
+    "claim_lint_needs_review_on_non_public_or_draft_copy",
+    "crawler_aggregate_anomaly_without_public_leak",
+    "missing_social_metadata_or_lastmod_on_non_core_article"
+  ],
+  "p3_observation_rules": [
+    "long_tail_query_fluctuation",
+    "dormant_indexable_url",
+    "minor_metadata_drift",
+    "non_public_wording_drift",
+    "digital_pr_no_response"
+  ],
+  "daily_forbidden_actions": [
+    "cms_content_change_from_observation_dashboard",
+    "url_submission_from_daily_checklist",
+    "digital_pr_follow_up_without_exact_approval",
+    "raw_crawler_log_read",
+    "crawler_search_referral_backlink_or_mention_as_truth",
+    "metabase_exposure",
+    "scheduler_activation",
+    "collector_write",
+    "claim_auto_fix",
+    "internal_link_auto_creation",
+    "pseo_creation"
+  ],
+  "daily_output_fields": [
+    "date",
+    "operator",
+    "ops_seo_safety_status",
+    "p0_p1_issue_count_and_owner",
+    "search_channel_queue_status",
+    "crawler_aggregate_warning_count",
+    "claim_lint_blocked_needs_review_count",
+    "internal_link_gap_count",
+    "content_rehearsal_blocker_count",
+    "digital_pr_hrzone_response_status",
+    "mbti_growth_loop_status_if_active",
+    "approval_gates_confirmed_closed"
+  ],
+  "safety_flags": {
+    "runtime_services_added": false,
+    "migrations_added": false,
+    "production_env_changed": false,
+    "fap_web_modified": false,
+    "cms_mutation_enabled": false,
+    "search_channel_mutation_enabled": false,
+    "crawler_logs_read": false,
+    "scheduler_enabled": false,
+    "collector_writes_enabled": false,
+    "digital_pr_sent": false,
+    "metabase_exposed": false,
+    "auto_rewrite_enabled": false,
+    "internal_links_created": false,
+    "pseo_created": false
+  },
+  "next_task": "SEO-OPS-SOP-01C"
+}
