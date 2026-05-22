@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T08:42:00+08:00",
+  "updated_at": "2026-05-22T08:47:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -13114,7 +13114,7 @@
       "depends_on": [
         "CRAWLER-LOG-03"
       ],
-      "commit_sha": null,
+      "commit_sha": "e00c6830",
       "pr_url": null,
       "checks": {
         "dependency": {
@@ -13200,6 +13200,11 @@
           "at": "2026-05-22T08:42:00+08:00",
           "status": "local_validation_passed",
           "summary": "Added production canary preflight docs/generated artifact, focused test, and PR train metadata. Focused preflight test, full SeoIntel suite, fixture command dry-run, route list, Pint, JSON/YAML validation, state JSON validation, and diff check passed. No production log read, canary execution, scheduler, collector write, migration, deployment, env edit, external API call, URL submission, Metabase exposure, or production operation performed."
+        },
+        {
+          "at": "2026-05-22T08:47:00+08:00",
+          "status": "committed",
+          "summary": "Committed scoped production canary preflight at e00c6830."
         }
       ]
     }
