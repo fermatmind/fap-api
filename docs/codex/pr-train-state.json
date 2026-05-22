@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T22:00:00+08:00",
+  "updated_at": "2026-05-22T22:01:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -14792,12 +14792,12 @@
     "SEO-GROWTH-MBTI-05": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-05-funnel-revenue",
-      "status": "in_progress",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-04"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "eaeada30",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1586",
       "checks": {
         "local": {
           "focused_human_only_funnel_revenue_review_contract_test": "passed: php artisan test --filter=SeoIntelGrowthMbti05HumanOnlyFunnelRevenueReviewContract --no-ansi (7 tests, 80 assertions)",
@@ -14836,6 +14836,11 @@
           "at": "2026-05-22T22:00:00+08:00",
           "status": "local_checks_passed",
           "summary": "Local validation passed for SEO-GROWTH-MBTI-05: focused funnel revenue contract test, full SeoIntel suite, route list, Pint, JSON/YAML parsing, and diff checks."
+        },
+        {
+          "at": "2026-05-22T22:01:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1586 for SEO-GROWTH-MBTI-05 and pushed branch codex/seo-growth-mbti-05-funnel-revenue."
         }
       ]
     },
