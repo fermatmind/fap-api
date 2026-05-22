@@ -21,6 +21,7 @@ abstract class AbstractSeoDashboardReadService
         'seo_search_channel_queue_items',
         'seo_search_channel_queue_batches',
         'seo_search_channel_queue_events',
+        'seo_crawler_log_daily_aggregates',
     ];
 
     public function __construct(
