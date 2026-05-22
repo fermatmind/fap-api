@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T22:01:00+08:00",
+  "updated_at": "2026-05-22T22:12:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -14792,11 +14792,11 @@
     "SEO-GROWTH-MBTI-05": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-05-funnel-revenue",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "SEO-GROWTH-MBTI-04"
       ],
-      "commit_sha": "eaeada30",
+      "commit_sha": "2a3207e840f18a8e6a79ca62d6123ddd113db19e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1586",
       "checks": {
         "local": {
@@ -14810,11 +14810,16 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+          "pr_1586": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN; merged as 2a3207e840f18a8e6a79ca62d6123ddd113db19e"
+        },
+        "post_merge": {
+          "focused_human_only_funnel_revenue_review_contract_test": "passed: php artisan test --filter=SeoIntelGrowthMbti05HumanOnlyFunnelRevenueReviewContract --no-ansi (7 tests, 80 assertions)"
+        }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-22T14:06:00Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
@@ -14841,20 +14846,35 @@
           "at": "2026-05-22T22:01:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1586 for SEO-GROWTH-MBTI-05 and pushed branch codex/seo-growth-mbti-05-funnel-revenue."
+        },
+        {
+          "at": "2026-05-22T22:06:00+08:00",
+          "status": "merged",
+          "summary": "PR #1586 merged via squash at 2a3207e840f18a8e6a79ca62d6123ddd113db19e. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused funnel revenue contract test passed. Local cleanup script is unavailable in this clone."
         }
       ]
     },
     "SEO-GROWTH-MBTI-06": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-06-growth-review",
-      "status": "pending",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-05"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "7e7abbd9",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1587",
       "checks": {
-        "local": {},
+        "local": {
+          "focused_growth_review_plan_test": "passed: php artisan test --filter=SeoIntelGrowthMbti06GrowthReviewPlan --no-ansi (7 tests, 107 assertions)",
+          "seo_intel_suite": "passed: php artisan test --filter=SeoIntel --no-ansi (566 tests, 8890 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3496 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-06-7-14-28-day-growth-review-plan.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        },
         "github": {}
       },
       "failure_reason": null,
@@ -14871,6 +14891,21 @@
           "at": "2026-05-22T21:00:00+08:00",
           "status": "pending",
           "summary": "Registered SEO-GROWTH-MBTI-06 for SEO-GROWTH-MBTI-PR-TRAIN-01. Scope is docs/generated/test plus authorized train metadata only; no runtime, CMS, Search Channel, fap-web, Digital PR, production, crawler log, pSEO, claim rewrite, internal link creation, or business DB work."
+        },
+        {
+          "at": "2026-05-22T22:07:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-GROWTH-MBTI-06 on codex/seo-growth-mbti-06-growth-review from latest main. Scope is MBTI 7/14/28-day growth review plan docs/generated/test plus authorized train metadata only."
+        },
+        {
+          "at": "2026-05-22T22:11:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Local validation passed for SEO-GROWTH-MBTI-06: focused growth review plan test, full SeoIntel suite, route list, Pint, JSON/YAML parsing, and diff checks."
+        },
+        {
+          "at": "2026-05-22T22:12:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1587 for SEO-GROWTH-MBTI-06 and pushed branch codex/seo-growth-mbti-06-growth-review."
         }
       ]
     },
