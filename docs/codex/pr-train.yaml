@@ -6344,6 +6344,53 @@ prs:
     human_review_required: true
     next_task: CRAWLER-LOG-11
 
+  - id: CRAWLER-LOG-11
+    repo: fap-api
+    depends_on:
+      - CRAWLER-LOG-10
+    branch: codex/crawler-log-11-scheduler-readiness-scan
+    base: main
+    title: "docs(seo-intel): add crawler log scheduler readiness scan"
+    name: "Crawler log scheduler readiness scan"
+    train_scope: seo_intel_crawler_log_scheduler_readiness_scan
+    risk_level: low_docs_test_no_scheduler_activation
+    type: docs/generated/test PR
+    scope:
+      - Scan scheduler ownership and safety gates for future crawler aggregate scheduling.
+      - Confirm crawler-log observation remains unscheduled, dry-run/no-write capable, and aggregate-only.
+      - Define future scheduler gates without enabling scheduler, reading production logs, or writing aggregate rows.
+    allowed_paths:
+      - backend/docs/seo/crawler-log-scheduler-readiness-scan.md
+      - backend/docs/seo/generated/crawler-log-scheduler-readiness-scan.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogSchedulerReadinessScanTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Enable scheduler, add a schedule entry, or add scheduler runtime code.
+      - Read production crawler logs, run canary reads, run collector writes, write issue_queue, mutate URL Truth, enqueue Search Channel Queue, or submit URLs.
+      - Run production migrations, deploy, edit env, expose Metabase, call external search APIs, access business DB, access Tencent RDS, or access Node2.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelCrawlerLogSchedulerReadinessScan
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/crawler-log-scheduler-readiness-scan.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    production_log_read_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    next_task: SEO-OBSERVATION-QUEUE-00
+
   - id: CLAIM-LINT-00
     repo: fap-api
     depends_on:
