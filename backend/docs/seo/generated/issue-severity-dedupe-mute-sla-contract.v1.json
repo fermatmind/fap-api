@@ -1,0 +1,150 @@
+{
+  "version": "issue-severity-dedupe-mute-sla-contract.v1",
+  "task": "SEO-OBS-GOV-03",
+  "purpose": "seo_issue_queue_operational_governance_contract",
+  "severity_levels": [
+    {
+      "code": "P0",
+      "label": "critical"
+    },
+    {
+      "code": "P1",
+      "label": "high"
+    },
+    {
+      "code": "P2",
+      "label": "medium"
+    },
+    {
+      "code": "P3",
+      "label": "info"
+    }
+  ],
+  "backward_compatible_mapping": {
+    "critical": "P0",
+    "high": "P1",
+    "warning": "P2",
+    "info": "P3"
+  },
+  "required_future_fields": [
+    "dedupe_key",
+    "muted_until",
+    "mute_reason",
+    "muted_by",
+    "owner_team",
+    "sla_due_at",
+    "sla_policy",
+    "reopen_rule",
+    "reopened_at",
+    "last_seen_at",
+    "occurrence_count",
+    "closed_reason"
+  ],
+  "p0_issue_classes": [
+    "claim_unsafe_public_indexable_page",
+    "private_flow_leak_public_search_surface",
+    "search_channel_submitted_non_canonical_private_url",
+    "public_indexed_page_accidentally_noindex",
+    "wrong_canonical_on_core_public_surface"
+  ],
+  "dedupe_rule": {
+    "field": "dedupe_key",
+    "deterministic": true,
+    "allowed_inputs": [
+      "issue_type",
+      "source_system",
+      "source_engine",
+      "canonical_url_hash",
+      "entity_key",
+      "locale",
+      "page_entity_type",
+      "normalized_issue_target"
+    ],
+    "forbidden_inputs": [
+      "raw_payload",
+      "raw_crawler_log_fields",
+      "raw_request_data",
+      "query_string",
+      "email",
+      "token",
+      "cookie",
+      "order_id",
+      "payment_id",
+      "attempt_id"
+    ]
+  },
+  "mute_rule": {
+    "must_not_delete_history": true,
+    "muted_issues_remain_auditable": true,
+    "required_fields": [
+      "muted_until",
+      "mute_reason",
+      "muted_by"
+    ],
+    "p0_must_never_be_silently_muted": true
+  },
+  "sla_rule": {
+    "fields": [
+      "sla_due_at",
+      "sla_policy"
+    ],
+    "deterministic_inputs": [
+      "severity",
+      "page_family",
+      "claim_risk",
+      "source_system",
+      "owner_team"
+    ],
+    "triggers_auto_fix": false,
+    "triggers_auto_publish": false,
+    "triggers_auto_submit": false
+  },
+  "owner_team_values": [
+    "seo_ops",
+    "cms_ops",
+    "engineering",
+    "content_review",
+    "digital_pr",
+    "unknown"
+  ],
+  "reopen_rule": {
+    "must_be_explicit": true,
+    "allowed_when": [
+      "matching_dedupe_key_reappears_with_fresh_evidence",
+      "p0_class_observed_again_after_closure"
+    ],
+    "preserve_fields": [
+      "reopened_at",
+      "last_seen_at",
+      "occurrence_count"
+    ]
+  },
+  "forbidden_behaviors": [
+    "auto_fix",
+    "cms_publish",
+    "cms_unpublish",
+    "search_channel_submission",
+    "search_channel_retry",
+    "scheduler_activation",
+    "collector_writes",
+    "production_migration",
+    "raw_crawler_log_read",
+    "business_db_access",
+    "metabase_exposure"
+  ],
+  "safety_flags": {
+    "docs_only": true,
+    "generated_json_only": true,
+    "focused_tests_only": true,
+    "migration_added": false,
+    "issue_mutation_code_added": false,
+    "auto_fix_code_added": false,
+    "cms_publish_code_added": false,
+    "search_channel_mutation_added": false,
+    "scheduler_enabled": false,
+    "production_env_changed": false,
+    "fap_web_modified": false
+  },
+  "final_decision": "issue_severity_governance_contract_ready_without_migration",
+  "next_task": "SEO-OBS-GOV-04"
+}

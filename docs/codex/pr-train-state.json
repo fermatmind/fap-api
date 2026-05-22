@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T13:20:23+08:00",
+  "updated_at": "2026-05-22T13:31:58+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -13947,14 +13947,14 @@
     "SEO-OBS-GOV-02": {
       "repo": "fap-api",
       "branch": "codex/seo-obs-gov-02-observation-queue-schema-contract",
-      "status": "local_validation_passed",
-      "state": "local_validation_passed",
+      "status": "merged",
+      "state": "merged",
       "title": "docs(seo-intel): add observation queue schema contract",
       "depends_on": [
         "SEO-OBS-GOV-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "f9c7f6f3a0187211211577cdd2e7be32e24a8ec2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1557",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -13977,12 +13977,21 @@
         "scope_validation": {
           "status": "pass",
           "evidence": "Changed files are limited to PR2 observation queue schema contract docs, generated artifact, focused test, and train ledger. No real migration, writer service, scheduler, env change, production write, or fap-web change was added."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1557 merged after hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS succeeded; mergeStateStatus was CLEAN."
+        },
+        "post_merge_revalidation": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelObservationQueueSchemaContract --no-ansi",
+          "evidence": "6 tests passed, 118 assertions on merged main."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T05:28:16Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "production_log_read_execution": false,
       "production_migration_execution": false,
@@ -14004,21 +14013,49 @@
           "at": "2026-05-22T13:20:23+08:00",
           "status": "local_validation_passed",
           "summary": "Added observation queue schema contract docs, generated artifact, focused test, and ledger updates. No migration or runtime writer was added. Required local checks passed."
+        },
+        {
+          "at": "2026-05-22T13:31:58+08:00",
+          "status": "merged",
+          "summary": "PR #1557 was squash merged to main at f9c7f6f3a0187211211577cdd2e7be32e24a8ec2. Focused post-merge revalidation passed."
         }
       ]
     },
     "SEO-OBS-GOV-03": {
       "repo": "fap-api",
       "branch": "codex/seo-obs-gov-03-issue-severity-governance-contract",
-      "status": "pending",
-      "state": "pending",
+      "status": "local_validation_passed",
+      "state": "local_validation_passed",
       "title": "docs(seo-intel): add issue severity governance contract",
       "depends_on": [
         "SEO-OBS-GOV-02"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-OBS-GOV-02 merged as PR #1557 and origin/main contains f9c7f6f3a0187211211577cdd2e7be32e24a8ec2."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=SeoIntelIssueSeverityGovernanceContract --no-ansi",
+            "cd backend && php artisan test --filter=SeoIntel --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "python3 -m json.tool backend/docs/seo/generated/issue-severity-dedupe-mute-sla-contract.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
+            "git diff --check"
+          ],
+          "evidence": "All PR3 local validations passed. SeoIntel suite passed 390 tests / 6192 assertions; Pint passed 3464 files; route:list returned 203 routes."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to PR3 issue severity governance contract docs, generated artifact, focused test, and train ledger. No migrations, issue mutation code, auto-fix code, CMS publish code, Search Channel mutation, scheduler, production env, or fap-web change was added."
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -14039,7 +14076,13 @@
       "sidecar_allowed": true,
       "stop_on_safety_violation": true,
       "next_pr": "SEO-OBS-GOV-04",
-      "history": []
+      "history": [
+        {
+          "at": "2026-05-22T13:31:58+08:00",
+          "status": "local_validation_passed",
+          "summary": "Added issue severity/dedupe/mute/SLA contract docs, generated artifact, focused test, and ledger updates. No migration or issue mutation code was added. Required local checks passed."
+        }
+      ]
     },
     "SEO-OBS-GOV-04": {
       "repo": "fap-api",
