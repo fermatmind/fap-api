@@ -13703,8 +13703,8 @@
       "depends_on": [
         "CRAWLER-LOG-09"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "f7fcdd64c44a639e60457207567e3df3fd00632b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1553",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -13760,6 +13760,11 @@
           "at": "2026-05-22T12:03:00+08:00",
           "status": "local_validation_passed",
           "summary": "Added crawler aggregate cards, safety counters, and safe recent rows to /ops/seo. Local validation passed, including focused crawler UI, existing native dashboard UI, panels, full SeoIntel suite, route list, Pint, JSON/YAML, and diff checks."
+        },
+        {
+          "at": "2026-05-22T12:06:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1553 for CRAWLER-LOG-10 with commit f7fcdd64c44a639e60457207567e3df3fd00632b. Scope remains read-only /ops/seo crawler observation UI only."
         }
       ]
     }
