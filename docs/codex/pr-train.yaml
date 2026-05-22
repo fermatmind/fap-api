@@ -9508,9 +9508,9 @@ prs:
     repo: fap-api
     depends_on:
       - CONTENT-OPS-02A
-    branch: codex/claim-lint-01a-chinese-runtime-contract
+    branch: codex/claim-lint-01a-chinese-claim-linter-contract
     base: main
-    title: "docs(seo): add Chinese claim linter runtime contract"
+    title: "docs(seo-intel): add Chinese claim linter runtime contract"
     name: "Chinese claim linter runtime contract"
     train_scope: content_ops_claim_link_runtime
     risk_level: low_contract_only

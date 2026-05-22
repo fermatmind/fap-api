@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T15:46:17+08:00",
+  "updated_at": "2026-05-22T15:57:15+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18099,12 +18099,12 @@
     "INTERNAL-LINK-01B": {
       "repo": "fap-api",
       "branch": "codex/internal-link-01b-graph-dry-run-read-model",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "INTERNAL-LINK-01A",
         "CONTENT-OPS-02B"
       ],
-      "commit_sha": null,
+      "commit_sha": "a056c91041231c828f1133725343cbc6c146e296",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1565",
       "checks": {
         "local": {
@@ -18118,12 +18118,18 @@
           "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check"
+        },
+        "github": {
+          "pr_1565": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN"
+        },
+        "post_merge": {
+          "focused_dry_run_test": "passed: php artisan test --filter=SeoIntelInternalLinkGraphDryRun --no-ansi"
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T07:52:19Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -18149,19 +18155,35 @@
           "at": "2026-05-22T15:46:17+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1565 for INTERNAL-LINK-01B and pushed branch codex/internal-link-01b-graph-dry-run-read-model."
+        },
+        {
+          "at": "2026-05-22T15:55:54+08:00",
+          "status": "merged",
+          "summary": "PR #1565 merged via squash at a056c91041231c828f1133725343cbc6c146e296. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused dry-run test passed."
         }
       ]
     },
     "CLAIM-LINT-01A": {
       "repo": "fap-api",
-      "branch": "codex/claim-lint-01a-chinese-runtime-contract",
-      "status": "pending",
+      "branch": "codex/claim-lint-01a-chinese-claim-linter-contract",
+      "status": "local_validation_passed",
       "depends_on": [
         "CONTENT-OPS-02A"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_contract": "passed: php artisan test --filter=SeoIntelChineseClaimLinterRuntimeContract --no-ansi (6 tests, 114 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (441 tests, 7063 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_test": "passed: vendor/bin/pint --test (3476 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/chinese-claim-linter-runtime-contract.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -18176,6 +18198,16 @@
           "at": "2026-05-22T14:37:34+08:00",
           "status": "pending",
           "summary": "Registered Chinese claim linter runtime contract PR. Scope is docs/generated/test only and expands safe/needs_review/blocked plus P0-P3 severity mapping without runtime enforcement."
+        },
+        {
+          "at": "2026-05-22T15:55:54+08:00",
+          "status": "in_progress",
+          "summary": "Started CLAIM-LINT-01A on codex/claim-lint-01a-chinese-claim-linter-contract. Scope is docs/generated/test only plus train metadata; no runtime enforcement, CMS mutation, copy rewrite, publish action, production scan, fap-web change, sitemap/llms change, seo_intel write, Search Channel enqueue, or scheduler activation."
+        },
+        {
+          "at": "2026-05-22T15:57:15+08:00",
+          "status": "local_validation_passed",
+          "summary": "CLAIM-LINT-01A local validation passed for focused runtime contract test, full SeoIntel filter, route list, Pint, JSON/YAML parsing, and diff whitespace checks. Scope remains docs/generated/test plus train metadata with no runtime enforcement, CMS mutation, auto-rewrite, publish action, production scan, fap-web change, sitemap/llms change, seo_intel write, Search Channel enqueue, or scheduler activation."
         }
       ]
     },
