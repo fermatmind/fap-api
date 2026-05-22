@@ -39,12 +39,13 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
 
         $this->assertStringContainsString('static_route_action=install', $source);
         $this->assertStringContainsString('skip_existing_static_location', $source);
-        $this->assertStringContainsString('function currentNginxConfigHasStaticLocation(): bool', $source);
-        $this->assertStringContainsString("shell_exec('sudo -n nginx -T 2>/dev/null')", $source);
-        $this->assertStringContainsString('existing /static/ location found in current nginx config', $source);
+        $this->assertStringNotContainsString('function currentNginxConfigHasStaticLocation(): bool', $source);
+        $this->assertStringNotContainsString("shell_exec('sudo -n nginx -T 2>/dev/null')", $source);
+        $this->assertStringNotContainsString('existing /static/ location found in current nginx config', $source);
         $this->assertStringContainsString('function nginxIncludePaths(string $content): array', $source);
         $this->assertStringContainsString('glob($includePath, GLOB_NOSORT)', $source);
         $this->assertStringContainsString('readableIncludeHasStaticLocation(string $content, array $seen = [])', $source);
+        $this->assertStringContainsString('existing /static/ location found in nginx site', $source);
         $this->assertStringContainsString('existing /static/ location found in included nginx file', $source);
         $this->assertStringContainsString('existing /static/ route detected; skipping managed snippet install', $source);
         $this->assertStringContainsString('mktemp /tmp/fap-api-nginx-site-backup.XXXXXX.conf', $source);
