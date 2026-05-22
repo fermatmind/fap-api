@@ -1,0 +1,83 @@
+{
+  "version": "seo-ops-approval-gates-no-go-protocols.v1",
+  "task": "SEO-OPS-SOP-01D",
+  "train": "SEO-OPS-SOP-PR-TRAIN-01",
+  "type": "docs_generated_test_only",
+  "human_approval_required_for": [
+    "cms_publish",
+    "cms_content_mutation",
+    "search_channel_enqueue",
+    "search_channel_live_submission",
+    "gsc_baidu_indexnow_bing_360_sogou_shenma_calls",
+    "crawler_log_production_canary",
+    "scheduler_activation",
+    "production_migration",
+    "backend_deploy",
+    "public_metabase_exposure",
+    "digital_pr_send_or_follow_up",
+    "claim_override",
+    "internal_link_mutation",
+    "pseo_generation",
+    "bulk_content_generation",
+    "production_env_edit"
+  ],
+  "no_go_rules": [
+    "no_draft_private_noindex_or_claim_unsafe_url_submission",
+    "no_public_metabase_exposure",
+    "no_scheduler_without_approval",
+    "no_raw_production_crawler_log_read_without_exact_approval",
+    "no_crawler_log_as_url_truth",
+    "no_frontend_fallback_static_sitemap_static_llms_search_response_local_copy_or_digital_pr_mention_as_url_truth",
+    "no_auto_publish",
+    "no_auto_fix_cms_content",
+    "no_auto_rewrite_claims",
+    "no_auto_create_internal_links",
+    "no_bulk_digital_pr_outreach",
+    "no_paid_backlinks",
+    "no_riasec_big_five_career_graph_precise_recommender_claim",
+    "no_search_channel_retry_without_gate"
+  ],
+  "p0_triggers": [
+    "claim_unsafe_public_indexable_page",
+    "private_flow_leak_into_public_or_search_surface",
+    "submitted_private_noindex_non_canonical_draft_or_claim_unsafe_url",
+    "metabase_public_exposure",
+    "scheduler_unexpectedly_enabled",
+    "raw_crawler_logs_persisted",
+    "frontend_fallback_becomes_canonical_authority",
+    "business_db_leak_into_seo_intel",
+    "search_channel_live_gate_left_open_after_canary"
+  ],
+  "approval_phrase_templates": {
+    "search_channel_live_submission": "I approve this single Search Channel live submission for [channel] queue item [id] now.",
+    "crawler_log_production_canary": "I approve this read-only crawler log production canary for [source] with dry-run and no-write now.",
+    "backend_deploy": "I approve this backend deploy for release [sha] now.",
+    "digital_pr_send": "I approve sending the [target] canary email now.",
+    "cms_publish": "I approve publishing CMS item [type]/[id-or-slug] now.",
+    "production_migration": "I approve running production migration [migration-or-path] now.",
+    "scheduler_activation": "I approve enabling scheduler [job-name] now."
+  },
+  "gate_behavior": [
+    "approval_must_be_exact_scoped_current_and_human_provided",
+    "approval_must_name_target_channel_or_release_where_applicable",
+    "approval_must_not_be_inferred_from_prior_consent",
+    "approval_must_not_authorize_bulk_behavior_unless_explicitly_named_and_allowed",
+    "approval_does_not_bypass_claim_safety_url_truth_private_flow_canonical_robots_or_noindex_gates"
+  ],
+  "safety_flags": {
+    "gates_implemented": false,
+    "runtime_services_added": false,
+    "env_edited": false,
+    "deployment_changed": false,
+    "production_actions_performed": false,
+    "fap_web_modified": false,
+    "cms_mutation_enabled": false,
+    "search_channel_submission_enabled": false,
+    "scheduler_enabled": false,
+    "crawler_logs_read": false,
+    "digital_pr_sent": false,
+    "metabase_exposed": false,
+    "pseo_created": false
+  },
+  "next_task": "SEO-OPS-SOP-01E"
+}
