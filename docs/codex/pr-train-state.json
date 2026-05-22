@@ -13285,15 +13285,15 @@
     "CRAWLER-LOG-05": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-05-production-canary-report",
-      "status": "in_progress",
-      "state": "in_progress",
+      "status": "merged",
+      "state": "merged",
       "title": "Crawler log production canary report and observation follow-up",
       "depends_on": [
         "CRAWLER-LOG-04-CANARY",
         "DEPLOY-NGINX-STATIC-ROUTE-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "ee4b456c9dddcef324e798dcea4d850b1fa0c305",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1548",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -13315,12 +13315,16 @@
             "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
             "git diff --check"
           ]
+        },
+        "github": {
+          "status": "pass",
+          "evidence": "PR #1548 was merged and origin/main contains ee4b456c9dddcef324e798dcea4d850b1fa0c305."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T02:23:44Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "production_log_read_execution": false,
       "scheduler_activation": false,
@@ -13351,6 +13355,77 @@
           "at": "2026-05-22T10:30:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1548 for CRAWLER-LOG-05 with commit fdf8f1726762550284262a44734fbecc9c0d42a7. Scope remains report/generated/test/metadata only."
+        },
+        {
+          "at": "2026-05-22T10:32:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled CRAWLER-LOG-05 as merged via PR #1548; origin/main contains ee4b456c9dddcef324e798dcea4d850b1fa0c305 and local/remote branch cleanup was completed before CRAWLER-LOG-06."
+        }
+      ]
+    },
+    "CRAWLER-LOG-06": {
+      "repo": "fap-api",
+      "branch": "codex/crawler-log-06-aggregate-observation-design",
+      "status": "in_progress",
+      "state": "in_progress",
+      "title": "Crawler log aggregate observation design",
+      "depends_on": [
+        "CRAWLER-LOG-05"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CRAWLER-LOG-05 is merged via PR #1548 and origin/main contains ee4b456c9dddcef324e798dcea4d850b1fa0c305."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Adding only aggregate observation design docs, generated artifact, focused test, and PR-train metadata. No production log read, canary execution, runtime behavior change, migration, scheduler, write path, deployment, external API call, search submission, Metabase exposure, business DB access, Tencent RDS access, or Node2 access is being performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=SeoIntelCrawlerLogAggregateObservationDesign",
+            "cd backend && php artisan test --filter=SeoIntel",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "python3 -m json.tool backend/docs/seo/generated/crawler-log-aggregate-observation-design.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
+            "git diff --check"
+          ]
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_log_read_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": true,
+      "sidecar_allowed": false,
+      "stop_on_safety_violation": true,
+      "next_pr": "CRAWLER-LOG-07",
+      "history": [
+        {
+          "at": "2026-05-22T10:32:00+08:00",
+          "status": "in_progress",
+          "summary": "Started CRAWLER-LOG-06 after user authorization to add manifest/state entries. Scope is aggregate observation design only; no production log read, canary execution, writes, scheduler, search submission, or runtime change."
+        },
+        {
+          "at": "2026-05-22T10:42:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Local validation passed for the aggregate observation design artifact and contract test. No production log read, canary execution, deploy, migration, scheduler activation, write path, external search API call, or search submission was performed."
         }
       ]
     }
