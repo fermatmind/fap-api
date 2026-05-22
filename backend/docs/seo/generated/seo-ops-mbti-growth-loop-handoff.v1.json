@@ -1,0 +1,76 @@
+{
+  "version": "seo-ops-mbti-growth-loop-handoff.v1",
+  "task": "SEO-OPS-SOP-01E",
+  "train": "SEO-OPS-SOP-PR-TRAIN-01",
+  "type": "docs_generated_test_only",
+  "next_phase": "SEO-GROWTH-MBTI-00",
+  "first_governed_growth_loop": "MBTI",
+  "required_handoff_artifacts": [
+    "baseline_snapshot_requirements",
+    "telemetry_contract_requirements",
+    "entity_map_requirements",
+    "url_truth_review",
+    "content_internal_link_wave_1",
+    "claim_lint_gate",
+    "search_channel_canary_wave",
+    "digital_pr_wave",
+    "human_only_funnel_review",
+    "7_14_28_day_review",
+    "scale_decision"
+  ],
+  "growth_loop_core_path": [
+    "search",
+    "content",
+    "test",
+    "result",
+    "report",
+    "revenue",
+    "observation",
+    "repair",
+    "next_action"
+  ],
+  "telemetry_constraints": [
+    "frontend_observation_events_are_not_backend_truth",
+    "backend_payment_order_report_access_events_are_truth",
+    "bot_and_crawler_traffic_excluded_from_product_conversion_funnel",
+    "entity_key_independent_from_url_slug",
+    "brand_lift_proxy_tracks_unlinked_mentions_and_branded_query_lift_when_data_exists",
+    "digital_pr_mention_is_not_backlink_proof",
+    "crawler_and_search_data_are_observation_only"
+  ],
+  "mbti_first_experiment_scope": [
+    "mbti_test_page",
+    "mbti_topic_hub_if_available",
+    "mbti_research_page",
+    "sixteen_type_entity_pages_where_governed",
+    "mbti_result_report_paywall_path",
+    "digital_pr_hrzone_hrec_state",
+    "search_channel_canary_state",
+    "ops_seo_review_cadence"
+  ],
+  "scale_guards": [
+    "do_not_scale_to_big_five_riasec_or_career_until_mbti_loop_reviewed",
+    "do_not_overclaim_big_five_riasec_or_career_recommender_depth",
+    "do_not_generate_pseo",
+    "do_not_bulk_submit_urls",
+    "do_not_bulk_outreach",
+    "do_not_use_riasec_big_five_or_career_graph_as_precise_career_recommender_authority"
+  ],
+  "review_windows": [
+    "7_day_review",
+    "14_day_review",
+    "28_day_review"
+  ],
+  "safety_flags": {
+    "runtime_services_added": false,
+    "cms_content_mutated": false,
+    "fap_web_modified": false,
+    "search_channel_mutated": false,
+    "digital_pr_sent": false,
+    "pseo_created": false,
+    "deploy_performed": false,
+    "scaled_beyond_mbti": false,
+    "precise_recommender_overclaim_added": false
+  },
+  "next_task": "SEO-OPS-SOP-01F"
+}
