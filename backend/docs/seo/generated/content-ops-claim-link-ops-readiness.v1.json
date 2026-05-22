@@ -1,0 +1,63 @@
+{
+  "version": "content-ops-claim-link-ops-readiness.v1",
+  "task": "CONTENT-OPS-CLAIM-LINK-OPS-READINESS",
+  "type": "docs_generated_test_only",
+  "future_sections": [
+    "content_publish_rehearsal_summary",
+    "planned_observation_event_counts",
+    "draft_blocked_from_sitemap_llms_search_counters",
+    "internal_link_graph_coverage",
+    "missing_entity_key_count",
+    "legacy_unpaired_count",
+    "unsafe_fallback_link_source_count",
+    "claim_lint_safe_needs_review_blocked_counts",
+    "claim_issue_severity_p0_p1_p2_p3_summary",
+    "content_ops_sidecar_warnings"
+  ],
+  "allowed_read_only_inputs": [
+    "content_publish_rehearsal_dry_run_output",
+    "internal_link_graph_dry_run_output",
+    "chinese_claim_linter_fixture_or_candidate_package_output",
+    "observation_governance_planned_event_summary",
+    "entity_key_translation_group_coverage_summary"
+  ],
+  "hard_stops": [
+    "no_publish_button",
+    "no_rewrite_button",
+    "no_internal_link_creation_button",
+    "no_search_channel_enqueue_button",
+    "no_submit_url_button",
+    "no_scheduler_controls",
+    "no_collector_controls",
+    "no_raw_sql",
+    "no_metabase_iframe_or_proxy",
+    "no_raw_payload_display",
+    "no_raw_crawler_logs",
+    "no_cms_write_controls"
+  ],
+  "authority_boundary": {
+    "cms_backend": "content_metadata_publish_canonical_robots_claim_truth",
+    "internal_link_graph": "backend_cms_authoritative",
+    "fap_web": "deterministic_renderer_not_fallback_authority",
+    "ops_seo": "operational_view_only",
+    "metabase": "private_not_exposed"
+  },
+  "safety_flags": {
+    "filament_ui_implemented": false,
+    "action_buttons_added": false,
+    "write_controls_added": false,
+    "cms_mutation_enabled": false,
+    "internal_link_creation_enabled": false,
+    "auto_rewrite_enabled": false,
+    "search_channel_enqueue_enabled": false,
+    "url_submission_enabled": false,
+    "metabase_exposed": false,
+    "migration_added": false,
+    "scheduler_enabled": false,
+    "collector_enabled": false,
+    "fap_web_modified": false,
+    "deployment_performed": false
+  },
+  "final_decision": "content_ops_claim_link_ops_readiness_ready",
+  "next_task": "CONTENT-OPS-CLAIM-LINK-CLOSEOUT"
+}
