@@ -1,0 +1,116 @@
+{
+  "version": "content-ops-claim-link-runtime-closeout.v1",
+  "task": "CONTENT-OPS-CLAIM-LINK-CLOSEOUT",
+  "train": "CONTENT-OPS-CLAIM-LINK-RUNTIME-TRAIN-01",
+  "completed_prs": [
+    {
+      "id": "CONTENT-OPS-02A",
+      "title": "Content publish rehearsal contract",
+      "result": "completed_contract_only",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1562"
+    },
+    {
+      "id": "CONTENT-OPS-02B",
+      "title": "Content publish rehearsal dry-run validator",
+      "result": "completed_read_only_runtime",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1563"
+    },
+    {
+      "id": "INTERNAL-LINK-01A",
+      "title": "Semantic internal link graph contract",
+      "result": "completed_contract_only",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1564"
+    },
+    {
+      "id": "INTERNAL-LINK-01B",
+      "title": "Internal link graph dry-run read model",
+      "result": "completed_read_only_runtime",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1565"
+    },
+    {
+      "id": "CLAIM-LINT-01A",
+      "title": "Chinese claim linter runtime contract",
+      "result": "completed_contract_only",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1566"
+    },
+    {
+      "id": "CLAIM-LINT-01B",
+      "title": "Chinese claim linter runtime / CI",
+      "result": "completed_ci_readable_runtime",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1567"
+    },
+    {
+      "id": "CONTENT-OPS-CLAIM-LINK-OPS-READINESS",
+      "title": "/ops/seo display readiness",
+      "result": "completed_contract_only",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1568"
+    }
+  ],
+  "results": {
+    "content_publish_rehearsal": "Contract and dry-run validator completed. Rehearsal reports readiness, blockers, warnings, claim lint state, internal link readiness, Search Channel eligibility dry-run state, and planned observation events without publishing or writing.",
+    "internal_link_graph": "Backend/CMS authority contract and dry-run read model completed. It reports source inventory, graph family counts, entity-key gaps, legacy_unpaired count, candidate opportunities, unsafe fallback sources, and warnings without creating links.",
+    "chinese_claim_linter": "Contract and runtime completed. The linter classifies safe, needs_review, and blocked candidate copy, maps severity where context is available, supports bundled fixtures, and does not auto-rewrite or mutate CMS content.",
+    "ops_seo_readiness": "Future /ops/seo read-only sections and hard stops are defined without implementing UI, action buttons, write controls, raw data display, or Metabase exposure.",
+    "ledger": "PR7 merged state is reconciled and this closeout remains docs/generated/test/state only."
+  },
+  "safety_confirmation": {
+    "cms_content_mutated": false,
+    "article_published": false,
+    "production_migrations_executed": false,
+    "scheduler_enabled": false,
+    "search_channel_enqueue_or_submission": false,
+    "production_crawler_logs_read": false,
+    "fap_web_modified": false,
+    "metabase_exposed": false,
+    "auto_rewrite_performed": false,
+    "internal_links_created": false,
+    "production_deploy_performed": false,
+    "production_env_changed": false,
+    "collector_writes_enabled": false,
+    "search_engine_api_called": false,
+    "seo_intel_written": false,
+    "cms_write_controls_added": false,
+    "ops_ui_implemented": false,
+    "migrations_added": false
+  },
+  "validation_summary": {
+    "focused_contract_and_runtime_tests": "passed during each PR before merge",
+    "seo_intel_suite": "passed during each PR before merge",
+    "route_list": "passed during each PR before merge",
+    "pint": "passed during each PR before merge",
+    "json_validation": "passed",
+    "yaml_validation": "passed",
+    "diff_checks": "passed",
+    "github_required_checks": "passed before every merge",
+    "post_merge_revalidation": "passed after every merged PR"
+  },
+  "sidecar_issues": [
+    {
+      "title": "translation_group_uuid missing globally",
+      "status": "separate_implementation_required",
+      "reason": "translation_group_id remains partial and transitional until an approved entity-key implementation/backfill train."
+    },
+    {
+      "title": "Backend deploy public smoke blocker",
+      "status": "external_sidecar",
+      "reason": "Production deploy/readiness work is separate from this train."
+    },
+    {
+      "title": "fap-web fallback authority risk",
+      "status": "left_reference_only",
+      "reason": "fap-web was not modified; frontend fallback authority remains a sidecar for future frontend/backend authority cleanup."
+    },
+    {
+      "title": "Production ops/API TLS flakiness",
+      "status": "not_gating_this_train",
+      "reason": "No production operations were part of this train."
+    },
+    {
+      "title": "BigFive runtime freeze allowlist",
+      "status": "handled_in_scoped_prs",
+      "reason": "Allowlist extensions were required only to classify new read-only SeoIntel runtime files correctly."
+    }
+  ],
+  "final_decision": "content_ops_claim_link_runtime_train_completed_ready_for_seo_ops_sop",
+  "next_task": "SEO-OPS-SOP-01"
+}
