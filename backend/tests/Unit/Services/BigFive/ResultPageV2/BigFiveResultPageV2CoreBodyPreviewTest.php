@@ -590,6 +590,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_content_publish_rehearsal_dry_run_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoIntelContentPublishRehearsalCommand.php',
+            'backend/app/Services/SeoIntel/ContentOps/ContentPublishRehearsalDryRun.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_migration_isolation_files(): void
     {
         $changed = [
@@ -1867,6 +1877,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isContentPublishRehearsalDryRunFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelOpsDashboardReadModelFile($file)) {
                 continue;
             }
@@ -2481,6 +2495,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueuePlanner.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueWriteService.php',
             'backend/database/migrations/seo_intel/2026_05_20_220000_create_seo_search_channel_queue_tables.php',
+        ], true);
+    }
+
+    private function isContentPublishRehearsalDryRunFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelContentPublishRehearsalCommand.php',
+            'backend/app/Services/SeoIntel/ContentOps/ContentPublishRehearsalDryRun.php',
         ], true);
     }
 

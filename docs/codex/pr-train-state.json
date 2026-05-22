@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T15:09:36+08:00",
+  "updated_at": "2026-05-22T15:16:49+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17952,7 +17952,7 @@
     "CONTENT-OPS-02B": {
       "repo": "fap-api",
       "branch": "codex/content-ops-02b-publish-rehearsal-dry-run",
-      "status": "pr_open",
+      "status": "ci_fix_local_validation_passed",
       "depends_on": [
         "CONTENT-OPS-02A"
       ],
@@ -17968,7 +17968,17 @@
           "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/content-publish-rehearsal-dry-run.v1.json",
           "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
-          "git_diff_check": "passed: git diff --check"
+          "git_diff_check": "passed: git diff --check",
+          "bigfive_runtime_freeze_after_fix": "passed: php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi (107 tests, 454 assertions)",
+          "focused_dry_run_after_fix": "passed: php artisan test --filter=SeoIntelContentPublishRehearsalDryRun --no-ansi (6 tests, 77 assertions)",
+          "seo_intel_after_fix": "passed: php artisan test --filter=SeoIntel --no-ansi (424 tests, 6786 assertions)",
+          "route_list_after_fix": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_after_fix": "passed: vendor/bin/pint --test (3471 files)",
+          "json_yaml_after_fix": "passed: generated artifact/state JSON and manifest YAML parse",
+          "git_diff_check_after_fix": "passed: git diff --check"
+        },
+        "github": {
+          "pr_1563_initial": "failed: verify-mbti-legacy and verify-mbti-v2 failed because BigFiveResultPageV2CoreBodyPreview runtime freeze flagged new SeoIntel dry-run command/service paths."
         }
       },
       "failure_reason": null,
@@ -18000,6 +18010,11 @@
           "at": "2026-05-22T15:09:36+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1563 for CONTENT-OPS-02B and pushed branch codex/content-ops-02b-publish-rehearsal-dry-run."
+        },
+        {
+          "at": "2026-05-22T15:16:49+08:00",
+          "status": "ci_fix_local_validation_passed",
+          "summary": "GitHub CI initially failed on Big Five runtime freeze because CONTENT-OPS-02B intentionally added SeoIntel dry-run runtime files. Added a focused freeze classifier allowlist test for the content publish rehearsal command/service and updated manifest allowed paths. Focused dry-run, BigFive freeze, full SeoIntel, route list, Pint, JSON/YAML, and diff checks passed locally after the fix."
         }
       ]
     },
