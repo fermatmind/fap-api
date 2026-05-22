@@ -1,0 +1,140 @@
+{
+  "version": "seo-growth-mbti-01-entity-map-url-truth-review.v1",
+  "task": "SEO-GROWTH-MBTI-01",
+  "train": "SEO-GROWTH-MBTI-PR-TRAIN-01",
+  "type": "docs_generated_test_only",
+  "url_truth_candidate_matrix": [
+    {
+      "family": "mbti_test_en",
+      "url": "/en/tests/mbti-personality-test-16-personality-types",
+      "page_entity_type": "test_detail",
+      "source_authorities": [
+        "scale_catalog",
+        "backend_public_surface"
+      ],
+      "status": "candidate_requiring_backend_authoritative_dry_run_confirmation"
+    },
+    {
+      "family": "mbti_test_zh",
+      "url": "/zh/tests/mbti-personality-test-16-personality-types",
+      "page_entity_type": "test_detail",
+      "source_authorities": [
+        "scale_catalog",
+        "backend_public_surface"
+      ],
+      "status": "candidate_requiring_backend_authoritative_dry_run_confirmation"
+    },
+    {
+      "family": "mbti_research_en",
+      "url": "/en/research/mbti-personality-types-salary-turnover-report",
+      "page_entity_type": "research_report",
+      "source_authorities": [
+        "backend_cms",
+        "research_reports"
+      ],
+      "status": "candidate_requiring_claim_safe_verification"
+    },
+    {
+      "family": "mbti_research_zh",
+      "url": "/zh/research/mbti-personality-types-salary-turnover-report",
+      "page_entity_type": "research_report",
+      "source_authorities": [
+        "backend_cms",
+        "research_reports"
+      ],
+      "status": "candidate_requiring_claim_safe_verification"
+    },
+    {
+      "family": "mbti_topic",
+      "urls": [
+        "/en/topics/mbti",
+        "/zh/topics/mbti"
+      ],
+      "page_entity_type": "topic",
+      "status": "deferred_until_backend_cms_topic_authority_explicit"
+    },
+    {
+      "family": "mbti_personality_type_pages",
+      "url_patterns": [
+        "/en/personality/{type}",
+        "/zh/personality/{type}"
+      ],
+      "page_entity_type": "personality",
+      "status": "deferred_until_backend_personality_cms_authority_explicit"
+    },
+    {
+      "family": "mbti_articles",
+      "url_pattern": "backend_cms_article_urls",
+      "page_entity_type": "article",
+      "status": "deferred_until_backend_cms_article_rows_verified"
+    },
+    {
+      "family": "private_flows",
+      "paths": [
+        "take",
+        "result",
+        "report",
+        "paywall",
+        "order",
+        "pdf",
+        "history"
+      ],
+      "status": "private_noindex_excluded_from_url_truth_and_search_channel"
+    }
+  ],
+  "entity_families": [
+    "mbti_test",
+    "mbti_topic",
+    "mbti_research_salary_turnover",
+    "mbti_result_private",
+    "mbti_paid_report_private",
+    "mbti_type_intj",
+    "mbti_type_infp",
+    "mbti_type_entj",
+    "mbti_type_{lowercase_type_code}"
+  ],
+  "entity_key_rules": [
+    "entity_key_independent_from_url_slug",
+    "translation_group_uuid_preferred_when_available",
+    "translation_group_id_transitional_only",
+    "slug_title_similarity_migration_helper_only_not_authority",
+    "frontend_fallback_cannot_create_entity_key"
+  ],
+  "allowed_source_authorities": [
+    "scale_catalog",
+    "backend_public_surface",
+    "backend_cms",
+    "research_reports",
+    "backend_cms_topic",
+    "backend_personality_cms",
+    "backend_cms_article"
+  ],
+  "forbidden_authority_sources": [
+    "frontend_fallback",
+    "static_sitemap_fallback",
+    "static_llms_fallback",
+    "crawler_log_source",
+    "search_engine_response",
+    "digital_pr_mention",
+    "local_copy",
+    "node2_business_db_tencent_rds"
+  ],
+  "private_noindex_excluded": [
+    "take",
+    "result",
+    "report",
+    "paywall",
+    "order",
+    "pdf",
+    "history"
+  ],
+  "safety_flags": {
+    "url_truth_written": false,
+    "collector_writes_run": false,
+    "production_db_read": false,
+    "search_channel_mutated": false,
+    "fap_web_modified": false,
+    "frontend_fallback_used_as_authority": false
+  },
+  "next_task": "SEO-GROWTH-MBTI-02"
+}
