@@ -13108,13 +13108,13 @@
     "CRAWLER-LOG-04": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-04-production-canary-preflight",
-      "status": "pr_opened_github_checks_pending",
-      "state": "pr_opened_github_checks_pending",
+      "status": "merged",
+      "state": "merged",
       "title": "Crawler log production canary preflight",
       "depends_on": [
         "CRAWLER-LOG-03"
       ],
-      "commit_sha": "e00c6830",
+      "commit_sha": "000c4798",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1545",
       "checks": {
         "dependency": {
@@ -13171,14 +13171,14 @@
           "command": "git diff --check"
         },
         "github": {
-          "status": "pending",
-          "evidence": "Opened PR #1545; GitHub checks pending."
+          "status": "pass",
+          "evidence": "PR #1545 merged. origin/main contains merge commit 000c4798f34130d8ee4612c6008ed96e6a92730f."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T09:15:00+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "scheduler_activation": false,
       "metabase_deployment": false,
@@ -13214,6 +13214,62 @@
           "at": "2026-05-22T08:50:00+08:00",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1545 for CRAWLER-LOG-04. GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-22T09:15:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled CRAWLER-LOG-04 production canary preflight as merged via PR #1545; origin/main contains 000c4798f34130d8ee4612c6008ed96e6a92730f and local cleanup was completed before CRAWLER-LOG-04-CANARY."
+        }
+      ],
+      "merge_commit_sha": "000c4798f34130d8ee4612c6008ed96e6a92730f",
+      "merge_observed": true,
+      "final_status": "crawler_log_production_canary_preflight_merged_ready_for_exact_human_approval"
+    },
+    "CRAWLER-LOG-04-CANARY": {
+      "repo": "fap-api",
+      "branch": "codex/crawler-log-04-canary-runtime",
+      "status": "in_progress",
+      "state": "in_progress",
+      "title": "Crawler log human-approved production canary runtime",
+      "depends_on": [
+        "CRAWLER-LOG-04"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CRAWLER-LOG-04 is merged via PR #1545 and origin/main contains 000c4798f34130d8ee4612c6008ed96e6a92730f."
+        },
+        "scope": {
+          "status": "in_progress",
+          "evidence": "Implementing a fail-closed single-source crawler log canary runtime only. No scheduler, no write mode, no issue queue write, no URL Truth write, no Search Channel Queue write, no search submission, no deploy, no env edit, and no production execution are being performed in this PR."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": true,
+      "production_approval_required": true,
+      "sidecar_allowed": false,
+      "stop_on_safety_violation": true,
+      "next_pr": "deploy crawler-log canary runtime and execute the approved production canary",
+      "history": [
+        {
+          "at": "2026-05-22T10:05:00+08:00",
+          "status": "in_progress",
+          "summary": "Started CRAWLER-LOG-04-CANARY from latest main after explicit user authorization to add manifest/state entries. Scope is single-source human-approved crawler log canary runtime only; no scheduler, no writes, no issue queue mutation, no URL Truth mutation, no search submission, no deploy, and no production execution."
         }
       ]
     }

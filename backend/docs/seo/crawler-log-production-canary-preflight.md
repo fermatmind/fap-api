@@ -8,24 +8,25 @@ Crawler logs remain aggregate observability only. They are not URL Truth, not Se
 
 ## Current Runtime State
 
-The only available crawler-log observe command remains fixture-only:
+The crawler-log observe command now supports two safe modes:
 
 ```bash
 php artisan seo-intel:crawler-log-observe --fixture --dry-run --no-write --json --limit=20
+php artisan seo-intel:crawler-log-observe --source=/var/log/nginx/access.log --approval-phrase="I explicitly approve CRAWLER-LOG-04 production canary for source /var/log/nginx/access.log with max_lines=1000 and no raw persistence." --dry-run --no-write --json --limit=1000
 ```
 
 Current command posture:
 
-- synthetic fixture only
-- dry-run required
-- no-write required
-- no production mode
+- synthetic fixture mode
+- fail-closed single-source canary mode
+- dry-run required for source mode
+- no-write required for source mode
 - no tail mode
 - no schedule mode
 - no write mode
 - no submit mode
 
-CRAWLER-LOG-04 does not add production source access or a production log reader.
+CRAWLER-LOG-04 itself does not add production source access or a production log reader. The later CRAWLER-LOG-04-CANARY runtime adds a fail-closed single-source reader only after exact human approval.
 
 ## Canary Source Approval Requirements
 

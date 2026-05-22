@@ -19,14 +19,59 @@ final class CrawlerLogAggregateDryRun
         $limit = $this->boundedLimit($limit);
         $limitedLines = array_slice($lines, 0, $limit);
         $parseReport = (new CrawlerLogFixtureParser)->parseLines($limitedLines);
+
+        return $this->fromParsedReport(
+            $parseReport,
+            [
+                'runtime' => 'crawler_log_observe',
+                'status' => 'success',
+                'mode' => 'synthetic_fixture_aggregate_dry_run',
+                'fixture_only' => true,
+                'dry_run' => true,
+                'no_write' => true,
+                'writes_attempted' => false,
+                'writes_committed' => false,
+                'production_log_read_attempted' => false,
+                'external_calls_attempted' => false,
+                'search_submission_attempted' => false,
+                'scheduler_enabled' => false,
+                'collector_write_attempted' => false,
+                'raw_persistence' => false,
+                'target_table' => self::TARGET_TABLE,
+                'target_table_write_attempted' => false,
+                'target_table_write_committed' => false,
+                'safety_flags' => [
+                    'no_production_log_read' => true,
+                    'no_database_writes' => true,
+                    'no_collector_write' => true,
+                    'no_scheduler' => true,
+                    'no_external_search_api_call' => true,
+                    'no_search_submission' => true,
+                    'no_url_truth_creation' => true,
+                    'no_issue_queue_auto_write' => true,
+                    'no_search_channel_queue_creation' => true,
+                    'no_metabase_exposure' => true,
+                    'no_business_db_access' => true,
+                ],
+            ],
+        );
+    }
+
+    /**
+     * @param  array<string, mixed>  $parseReport
+     * @param  array<string, mixed>  $overrides
+     * @return array<string, mixed>
+     */
+    public function fromParsedReport(array $parseReport, array $overrides): array
+    {
         $sanitizedRows = $parseReport['sanitized_rows'];
         $aggregateRows = $this->aggregateRows($sanitizedRows);
 
-        return [
+        return array_replace([
             'runtime' => 'crawler_log_observe',
             'status' => 'success',
-            'mode' => 'synthetic_fixture_aggregate_dry_run',
-            'fixture_only' => true,
+            'mode' => 'aggregate_dry_run',
+            'fixture_only' => false,
             'dry_run' => true,
             'no_write' => true,
             'writes_attempted' => false,
@@ -57,20 +102,8 @@ final class CrawlerLogAggregateDryRun
             'target_table_write_committed' => false,
             'privacy_transform_version' => CrawlerLogFixtureParser::PRIVACY_TRANSFORM_VERSION,
             'aggregate_rows' => $aggregateRows,
-            'safety_flags' => [
-                'no_production_log_read' => true,
-                'no_database_writes' => true,
-                'no_collector_write' => true,
-                'no_scheduler' => true,
-                'no_external_search_api_call' => true,
-                'no_search_submission' => true,
-                'no_url_truth_creation' => true,
-                'no_issue_queue_auto_write' => true,
-                'no_search_channel_queue_creation' => true,
-                'no_metabase_exposure' => true,
-                'no_business_db_access' => true,
-            ],
-        ];
+            'safety_flags' => [],
+        ], $overrides);
     }
 
     /**

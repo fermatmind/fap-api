@@ -140,7 +140,7 @@ final class SeoIntelCrawlerLogProductionCanaryPreflightTest extends TestCase
     }
 
     #[Test]
-    public function current_crawler_log_command_remains_fixture_only_without_production_modes(): void
+    public function current_crawler_log_command_allows_only_fixture_or_single_source_canary_modes_without_live_execution_flags(): void
     {
         Artisan::call('seo-intel:crawler-log-observe --help');
         $help = Artisan::output();
@@ -157,6 +157,8 @@ final class SeoIntelCrawlerLogProductionCanaryPreflightTest extends TestCase
 
         foreach ([
             '--fixture',
+            '--source',
+            '--approval-phrase',
             '--dry-run',
             '--no-write',
             '--json',
@@ -175,7 +177,7 @@ final class SeoIntelCrawlerLogProductionCanaryPreflightTest extends TestCase
         foreach ([
             'not a production log read',
             'not a canary execution',
-            'no production mode',
+            'single-source canary mode',
             'max_lines <= 1000',
             'no raw persistence',
             'no scheduler',
