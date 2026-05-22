@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T16:40:28+08:00",
+  "updated_at": "2026-05-22T16:50:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -16779,8 +16779,8 @@
       "depends_on": [
         "BACKEND-DEPLOY-TARGET-ALIYUN-01"
       ],
-      "commit_sha": "a3ea1aceec6961bb511965c1d7667134702b2891",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1569",
+      "commit_sha": null,
+      "pr_url": null,
       "checks": {
         "aliyun_tls": {
           "status": "pass",
@@ -17775,7 +17775,7 @@
     "OPS-SEO-NATIVE-DASH-04": {
       "repo": "fap-api",
       "branch": "codex/ops-seo-native-dash-04-access-boundary",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "OPS-SEO-NATIVE-DASH-03"
       ],
@@ -18386,17 +18386,34 @@
     "CONTENT-OPS-CLAIM-LINK-CLOSEOUT": {
       "repo": "fap-api",
       "branch": "codex/content-ops-claim-link-closeout",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "CONTENT-OPS-CLAIM-LINK-OPS-READINESS"
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "commit_sha": "3dc1caad0e473a8bc5d9987ed6f9e0678dd25b62",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1569",
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_closeout": "passed: php artisan test --filter=SeoIntelContentOpsClaimLinkRuntimeCloseout --no-ansi (7 tests, 138 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (461 tests, 7393 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_test": "passed: vendor/bin/pint --test (3481 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/content-ops-claim-link-runtime-closeout.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        },
+        "github": {
+          "pr_1569": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN"
+        },
+        "post_merge": {
+          "focused_closeout_test": "passed: php artisan test --filter=SeoIntelContentOpsClaimLinkRuntimeCloseout --no-ansi"
+        }
+      },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T08:47:05Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -18422,6 +18439,16 @@
           "at": "2026-05-22T16:40:28+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1569 for CONTENT-OPS-CLAIM-LINK-CLOSEOUT and pushed branch codex/content-ops-claim-link-closeout."
+        },
+        {
+          "at": "2026-05-22T16:47:05+08:00",
+          "status": "merged",
+          "summary": "PR #1569 merged via squash at 3dc1caad0e473a8bc5d9987ed6f9e0678dd25b62. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused closeout test passed."
+        },
+        {
+          "at": "2026-05-22T16:50:00+08:00",
+          "status": "ledger_repair",
+          "summary": "Corrected a closeout ledger metadata patch so OPS-DOMAIN-MIGRATION-01 keeps its pre-existing null commit/pr_url values and CONTENT-OPS-CLAIM-LINK-CLOSEOUT records PR #1569 merge state."
         }
       ]
     }
