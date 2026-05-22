@@ -547,6 +547,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_crawler_log_aggregate_storage_gate_files(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogAggregateStorageWriter.php',
+            'backend/database/migrations/seo_intel/2026_05_22_111800_create_seo_crawler_log_daily_aggregates_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_issue_queue_foundation_files(): void
     {
         $changed = [
@@ -1845,6 +1855,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCrawlerLogAggregateStorageGateFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIssueQueueFoundationFile($file)) {
                 continue;
             }
@@ -2430,6 +2444,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogAggregateDryRun.php',
             'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogProductionCanaryDryRun.php',
             'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogSingleSourceReader.php',
+        ], true);
+    }
+
+    private function isCrawlerLogAggregateStorageGateFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogAggregateStorageWriter.php',
+            'backend/database/migrations/seo_intel/2026_05_22_111800_create_seo_crawler_log_daily_aggregates_table.php',
         ], true);
     }
 

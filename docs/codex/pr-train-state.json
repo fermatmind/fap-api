@@ -13547,9 +13547,11 @@
           "status": "pass_with_local_env_sidecar",
           "passed": [
             "cd backend && php artisan test --filter=SeoIntelCrawlerLogAggregateStorageGate",
+            "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest",
             "cd backend && php artisan test --filter=SeoIntel",
             "cd backend && php artisan route:list --no-ansi",
             "cd backend && vendor/bin/pint --test",
+            "cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
             "python3 -m json.tool backend/docs/seo/generated/crawler-log-aggregate-storage-gate.v1.json >/dev/null",
             "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
             "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
@@ -13560,6 +13562,10 @@
             "status": "blocked_local_seo_intel_env_missing",
             "evidence": "The local default seo_intel MySQL connection has no SEO_INTEL_DB_HOST/DB credentials configured, so the exact command cannot connect locally without editing env or using production credentials. A local-only runtime SQLite override of the seo_intel connection generated the migration SQL successfully, including create table seo_crawler_log_daily_aggregates and indexes. No production database was accessed."
           }
+        },
+        "github": {
+          "status": "failed_then_scoped_fix_pushed",
+          "evidence": "PR #1551 GitHub CI failed only on BigFiveResultPageV2CoreBodyPreviewTest runtime freeze, flagging backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogAggregateStorageWriter.php and backend/database/migrations/seo_intel/2026_05_22_111800_create_seo_crawler_log_daily_aggregates_table.php. A narrow CRAWLER-LOG-08 allowlist test was added to the BigFive freeze test; focused BigFive test now passes locally."
         }
       },
       "failure_reason": null,
@@ -13592,6 +13598,11 @@
           "at": "2026-05-22T11:50:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1551 for CRAWLER-LOG-08. Local validation passed except exact seo_intel MySQL migrate pretend is blocked by missing local env; local-only runtime SQLite pretend generated the migration SQL successfully."
+        },
+        {
+          "at": "2026-05-22T11:57:00+08:00",
+          "status": "github_checks_failed_scoped_fix",
+          "summary": "GitHub checks failed only on BigFive runtime freeze for the scoped CRAWLER-LOG aggregate storage writer and seo_intel migration. Added the narrowest allowlist entry and focused classifier coverage in BigFiveResultPageV2CoreBodyPreviewTest; no product runtime, scheduler, production log read, production migration, or search submission code was added."
         }
       ]
     }

@@ -6207,6 +6207,7 @@ prs:
       - backend/docs/seo/crawler-log-aggregate-storage-gate.md
       - backend/docs/seo/generated/crawler-log-aggregate-storage-gate.v1.json
       - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogAggregateStorageGateTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -6218,6 +6219,7 @@ prs:
       - cd backend && php artisan test --filter=SeoIntel
       - cd backend && php artisan route:list --no-ansi
       - cd backend && vendor/bin/pint --test
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest
       - cd backend && php artisan migrate --pretend --database=seo_intel --path=database/migrations/seo_intel --no-ansi
       - python3 -m json.tool backend/docs/seo/generated/crawler-log-aggregate-storage-gate.v1.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
