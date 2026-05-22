@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T18:08:30+08:00",
+  "updated_at": "2026-05-22T18:21:30+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18647,11 +18647,11 @@
     "SEO-OPS-SOP-01D": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-sop-01d-approval-gates",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "SEO-OPS-SOP-01C"
       ],
-      "commit_sha": "9e967559e5ed44ddfc43b1a24db59889783238bd",
+      "commit_sha": "0fd84b35688d893f75a08793ca03c0a6fdb832a3",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1574",
       "checks": {
         "local": {
@@ -18663,11 +18663,17 @@
           "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check"
+        },
+        "github": {
+          "pr_1574": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN"
+        },
+        "post_merge": {
+          "focused_approval_gates_test": "passed: php artisan test --filter=SeoIntelSeoOpsApprovalGatesNoGoProtocols --no-ansi"
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-22T10:12:00Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
@@ -18694,19 +18700,35 @@
           "at": "2026-05-22T18:08:30+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1574 for SEO-OPS-SOP-01D and pushed branch codex/seo-ops-sop-01d-approval-gates."
+        },
+        {
+          "at": "2026-05-22T18:12:00+08:00",
+          "status": "merged",
+          "summary": "PR #1574 merged via squash at 0fd84b35688d893f75a08793ca03c0a6fdb832a3. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused approval gates test passed. Local cleanup script was unavailable in this clone."
         }
       ]
     },
     "SEO-OPS-SOP-01E": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-sop-01e-mbti-growth-handoff",
-      "status": "pending",
+      "status": "pr_open",
       "depends_on": [
         "SEO-OPS-SOP-01D"
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "commit_sha": "df4716a444e3130a31df5e37eb202d904c461b4a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1575",
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_mbti_handoff": "passed: php artisan test --filter=SeoIntelSeoOpsMbtiGrowthLoopHandoff --no-ansi (8 tests, 79 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (495 tests, 7815 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_test": "passed: vendor/bin/pint --test (3486 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-ops-mbti-growth-loop-handoff.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -18721,6 +18743,21 @@
           "at": "2026-05-22T17:22:25+08:00",
           "status": "pending",
           "summary": "Registered MBTI Growth Loop handoff PR. Scope is docs/generated/test plus train metadata only; no runtime services, CMS mutation, fap-web changes, Search Channel mutation, Digital PR send, pSEO, or deploy."
+        },
+        {
+          "at": "2026-05-22T18:13:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-OPS-SOP-01E on codex/seo-ops-sop-01e-mbti-growth-handoff. Scope is docs/generated/test plus train metadata only; no runtime services, CMS mutation, fap-web changes, Search Channel mutation, Digital PR send, pSEO, or deploy."
+        },
+        {
+          "at": "2026-05-22T18:20:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "SEO-OPS-SOP-01E local validation passed for focused MBTI handoff test, full SeoIntel filter, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Scope remains docs/generated/test plus train metadata only."
+        },
+        {
+          "at": "2026-05-22T18:21:30+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1575 for SEO-OPS-SOP-01E and pushed branch codex/seo-ops-sop-01e-mbti-growth-handoff."
         }
       ]
     },
