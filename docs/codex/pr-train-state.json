@@ -14467,12 +14467,12 @@
     "SEO-GROWTH-MBTI-01": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-01-entity-url-truth",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-00"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "497ab62d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1581",
       "checks": {
         "local": {
           "focused_entity_url_truth_test": "passed: php artisan test --filter=SeoIntelGrowthMbti01EntityMapUrlTruthReview --no-ansi (6 tests, 79 assertions)",
@@ -14511,6 +14511,11 @@
           "at": "2026-05-22T21:16:00+08:00",
           "status": "local_validation_passed",
           "summary": "SEO-GROWTH-MBTI-01 local validation passed for focused entity URL Truth review test, full SeoIntel filter, route:list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-22T21:18:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1581 for SEO-GROWTH-MBTI-01 and pushed branch codex/seo-growth-mbti-01-entity-url-truth."
         }
       ]
     },
