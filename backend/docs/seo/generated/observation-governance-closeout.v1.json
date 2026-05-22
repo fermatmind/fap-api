@@ -1,0 +1,86 @@
+{
+  "version": "observation-governance-closeout.v1",
+  "task": "SEO-OBS-GOV-06",
+  "train": "SEO-OBSERVATION-GOVERNANCE-PR-TRAIN-01",
+  "completed_prs": [
+    {
+      "id": "SEO-OBS-GOV-01",
+      "title": "Observation governance architecture contract",
+      "result": "completed_contract_only",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1556"
+    },
+    {
+      "id": "SEO-OBS-GOV-02",
+      "title": "Observation queue schema contract",
+      "result": "completed_contract_only",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1557"
+    },
+    {
+      "id": "SEO-OBS-GOV-03",
+      "title": "Issue severity dedupe mute SLA contract",
+      "result": "completed_contract_only",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1558"
+    },
+    {
+      "id": "SEO-OBS-GOV-04",
+      "title": "Entity key translation group contract",
+      "result": "completed_contract_only",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1559"
+    },
+    {
+      "id": "SEO-OBS-GOV-05",
+      "title": "Ops SEO observation display readiness",
+      "result": "completed_contract_only",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1560"
+    }
+  ],
+  "governance_results": {
+    "architecture_contract": "Observation Queue is observation only and not URL Truth, Search Channel Queue, CMS writer, raw crawler log reader, or auto-fix engine.",
+    "observation_queue_schema_contract": "Future seo_observation_queue shape is defined without a real migration or writer.",
+    "issue_severity_contract": "P0/P1/P2/P3, deterministic dedupe, mute, owner, SLA, reopen, occurrence, and closeout rules are defined without issue mutation.",
+    "entity_key_contract": "translation_group_uuid is the future stable key; translation_group_id is transitional; legacy content without key is legacy_unpaired.",
+    "ops_seo_display_readiness": "Future /ops/seo panels are read-only and explicitly exclude write controls, raw data, and Metabase exposure."
+  },
+  "safety_confirmation": {
+    "runtime_writes_introduced": false,
+    "migrations_added": false,
+    "production_migrations_executed": false,
+    "production_operations_performed": false,
+    "production_env_changed": false,
+    "scheduler_activated": false,
+    "url_submission_performed": false,
+    "production_crawler_logs_read": false,
+    "cms_content_mutated": false,
+    "seo_intel_written": false,
+    "metabase_exposed": false,
+    "fap_web_modified": false,
+    "search_channel_queue_mutated": false,
+    "collector_writes_enabled": false
+  },
+  "validation_summary": {
+    "focused_contract_tests": "passed for PR1 through PR5 and closeout",
+    "seo_intel_suite": "passed during each PR before merge",
+    "route_list": "passed during each PR before merge",
+    "pint": "passed during each PR before merge",
+    "json_validation": "passed",
+    "yaml_validation": "passed",
+    "diff_checks": "passed",
+    "github_required_checks": "passed before every merge",
+    "post_merge_revalidation": "passed after every merged PR"
+  },
+  "sidecar_issues": [
+    {
+      "title": "Unrelated local branch from earlier PR1 attempt",
+      "branch": "codex/seo-obs-gov-01-observation-governance-contract",
+      "status": "left_untouched",
+      "reason": "Branch contains unrelated deploy/SRE changes outside this train scope."
+    },
+    {
+      "title": "Future implementation train",
+      "status": "separate_approval_required",
+      "reason": "Schema, writer, issue lifecycle, entity backfill, and dashboard implementation remain outside this contract train."
+    }
+  ],
+  "final_decision": "seo_observation_governance_contract_train_completed_ready_for_content_ops_claim_link_runtime",
+  "next_task": "CONTENT-OPS-CLAIM-LINK-RUNTIME-TRAIN-01"
+}
