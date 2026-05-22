@@ -6871,8 +6871,8 @@
         "do not enable CN proxy indexability, sitemap, llms, llms-full, or public route exposure",
         "do not weaken software-developers manual-hold rejection or final live acceptance"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "7c286f7a0464535fcf752cf9807206d2bfe76203",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1549",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -13426,6 +13426,11 @@
           "at": "2026-05-22T10:42:00+08:00",
           "status": "local_validation_passed",
           "summary": "Local validation passed for the aggregate observation design artifact and contract test. No production log read, canary execution, deploy, migration, scheduler activation, write path, external search API call, or search submission was performed."
+        },
+        {
+          "at": "2026-05-22T10:45:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1549 for CRAWLER-LOG-06 with commit 7c286f7a0464535fcf752cf9807206d2bfe76203. Scope remains docs/generated/test/metadata only."
         }
       ]
     }
