@@ -1,0 +1,79 @@
+{
+  "version": "seo-growth-mbti-03a-claim-lint-gate.v1",
+  "task": "SEO-GROWTH-MBTI-03A",
+  "train": "SEO-GROWTH-MBTI-PR-TRAIN-01",
+  "type": "docs_generated_test_only",
+  "required_before": [
+    "search_channel_planning",
+    "digital_pr_wave_2",
+    "content_internal_link_wave_1",
+    "growth_experiment_review"
+  ],
+  "surfaces": [
+    "mbti_research_salary_turnover_report",
+    "mbti_test_page_metadata_faq_jsonld",
+    "mbti_result_report_paywall_copy",
+    "mbti_topic_article_snippets",
+    "internal_link_anchor_text",
+    "digital_pr_pitch_copy_if_later_used",
+    "career_job_fit_adjacent_mbti_wording"
+  ],
+  "forbidden_claims": [
+    "MBTI决定收入",
+    "MBTI预测离职",
+    "薪资保证",
+    "个人离职预测",
+    "招聘适配",
+    "职业成功预测",
+    "精准职业推荐",
+    "最适合职业",
+    "AI 职业规划",
+    "岗位胜任力",
+    "诊断",
+    "确诊",
+    "治疗",
+    "治愈"
+  ],
+  "allowed_bounded_language": [
+    "模型化指数",
+    "聚合层面",
+    "方向性趋势",
+    "非诊断",
+    "结果仅供参考",
+    "职业方向参考",
+    "工作方式倾向",
+    "探索建议",
+    "discussion resource",
+    "modeled signal",
+    "aggregate trend",
+    "not hiring advice",
+    "not salary guarantee",
+    "not individual prediction"
+  ],
+  "states": [
+    "safe",
+    "needs_review",
+    "blocked"
+  ],
+  "severity_mapping": {
+    "P0": "claim_unsafe_public_indexable_page",
+    "P1": "high_risk_seo_metadata_faq_jsonld_llms_claim_risk",
+    "P2": "draft_article_body_needs_caution",
+    "P3": "non_public_wording_drift"
+  },
+  "gate_rules": [
+    "claim_lint_flags_or_blocks_must_not_auto_rewrite",
+    "claim_unsafe_urls_cannot_enter_search_channel_planning",
+    "claim_unsafe_pitch_copy_cannot_enter_digital_pr_wave_2",
+    "claim_unsafe_content_internal_link_candidates_cannot_enter_wave_1",
+    "no_precise_recommender_hiring_salary_or_career_success_overclaims_for_mbti_big_five_riasec_career_graph"
+  ],
+  "safety_flags": {
+    "production_content_scanned": false,
+    "auto_rewrite_enabled": false,
+    "cms_mutated": false,
+    "fap_web_modified": false,
+    "digital_pr_sent": false
+  },
+  "next_task": "SEO-GROWTH-MBTI-03B"
+}
