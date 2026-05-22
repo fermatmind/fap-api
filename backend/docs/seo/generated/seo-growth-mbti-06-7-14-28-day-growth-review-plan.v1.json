@@ -1,0 +1,73 @@
+{
+  "version": "seo-growth-mbti-06-7-14-28-day-growth-review-plan.v1",
+  "task": "SEO-GROWTH-MBTI-06",
+  "train": "SEO-GROWTH-MBTI-PR-TRAIN-01",
+  "type": "docs_generated_test_only",
+  "review_windows": {
+    "T+1": [
+      "public_url_status",
+      "url_truth_candidate_matrix",
+      "claim_lint_pass_fail",
+      "search_channel_dry_run_eligibility",
+      "funnel_event_contract_completeness",
+      "issue_queue_p0_p1_check"
+    ],
+    "T+7": [
+      "ops_seo_deltas",
+      "issue_queue_observations",
+      "crawler_aggregate_trends",
+      "search_channel_pending_approved_dry_run_states",
+      "digital_pr_human_send_status",
+      "early_internal_link_coverage"
+    ],
+    "T+14": [
+      "human_only_test_starts_results_unlocks_orders",
+      "claim_lint_regressions",
+      "internal_link_graph_coverage",
+      "referral_mention_observations",
+      "brand_lift_proxy_if_data_exists"
+    ],
+    "T+28": [
+      "revenue_and_report_access_deltas",
+      "entity_page_family_performance",
+      "repair_backlog_completion",
+      "scale_no_scale_decision",
+      "next_entity_candidate"
+    ]
+  },
+  "decision_outcomes": [
+    "scale",
+    "adjust",
+    "pause",
+    "rollback",
+    "replicate",
+    "insufficient_data"
+  ],
+  "required_safety_checks_before_scale": [
+    "no_claim_unsafe_public_pages",
+    "no_private_flow_leaks",
+    "no_forbidden_authority_url_truth",
+    "no_uncontrolled_search_channel_live_gates",
+    "no_bulk_outreach",
+    "no_pseo"
+  ],
+  "allowed_inputs": [
+    "ops_seo_read_only_view",
+    "url_truth",
+    "issue_queue",
+    "search_channel_queue_state",
+    "crawler_aggregate_observation",
+    "digital_pr_manual_tracking",
+    "human_only_funnel_telemetry",
+    "claim_lint",
+    "internal_link_graph_dry_run"
+  ],
+  "safety_flags": {
+    "live_review_executed": false,
+    "production_query_executed": false,
+    "search_channel_mutated": false,
+    "digital_pr_sent": false,
+    "cms_mutated": false
+  },
+  "next_task": "SEO-GROWTH-MBTI-07"
+}
