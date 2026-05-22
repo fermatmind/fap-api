@@ -1,0 +1,82 @@
+{
+  "version": "seo-growth-mbti-03b-search-channel-canary-wave-plan.v1",
+  "task": "SEO-GROWTH-MBTI-03B",
+  "train": "SEO-GROWTH-MBTI-PR-TRAIN-01",
+  "type": "docs_generated_test_only",
+  "candidate_urls_after_gates_pass": [
+    {
+      "path": "/en/tests/mbti-personality-test-16-personality-types",
+      "locale": "en",
+      "page_entity_type": "test_detail",
+      "required_gates": [
+        "url_truth_verified",
+        "claim_safe"
+      ]
+    },
+    {
+      "path": "/zh/tests/mbti-personality-test-16-personality-types",
+      "locale": "zh",
+      "page_entity_type": "test_detail",
+      "required_gates": [
+        "url_truth_verified",
+        "claim_safe"
+      ]
+    },
+    {
+      "path": "/en/research/mbti-personality-types-salary-turnover-report",
+      "locale": "en",
+      "page_entity_type": "research_report",
+      "required_gates": [
+        "url_truth_verified",
+        "claim_safe"
+      ]
+    },
+    {
+      "path": "/zh/research/mbti-personality-types-salary-turnover-report",
+      "locale": "zh",
+      "page_entity_type": "research_report",
+      "required_gates": [
+        "url_truth_verified",
+        "claim_safe"
+      ]
+    }
+  ],
+  "deferred_until_backend_authority_and_claim_gates_pass": [
+    "/en/topics/mbti",
+    "/zh/topics/mbti",
+    "mbti_personality_type_pages",
+    "mbti_article_pages"
+  ],
+  "preconditions": [
+    "url_truth_verified",
+    "allowed_source_authority",
+    "canonical",
+    "public",
+    "indexable",
+    "claim_safe",
+    "not_draft",
+    "not_noindex",
+    "not_private",
+    "dry_run_before_enqueue",
+    "human_approval_before_live_submit",
+    "one_item_canary",
+    "no_bulk_submit",
+    "live_gates_closed_after_any_approved_canary"
+  ],
+  "future_approval_template": "I approve SEO-GROWTH-MBTI-03B live Search Channel canary for exactly one URL: {url}. Keep live gates closed after this canary. No bulk submit.",
+  "authority_boundary": [
+    "search_channel_distributes_only_approved_url_truth",
+    "search_response_is_observation_not_url_truth",
+    "crawler_logs_are_observation_not_url_truth",
+    "frontend_fallback_static_sitemap_static_llms_digital_pr_mentions_and_local_copies_must_not_create_url_truth"
+  ],
+  "safety_flags": {
+    "search_channel_queue_mutated": false,
+    "live_submission_executed": false,
+    "live_gate_opened": false,
+    "external_search_api_called": false,
+    "environment_edited": false,
+    "production_operation_executed": false
+  },
+  "next_task": "SEO-GROWTH-MBTI-04"
+}
