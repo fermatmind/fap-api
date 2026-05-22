@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T08:50:00+08:00",
+  "updated_at": "2026-05-22T12:17:12+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -13697,8 +13697,8 @@
     "CRAWLER-LOG-10": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-10-ops-seo-ui",
-      "status": "in_progress",
-      "state": "in_progress",
+      "status": "merged",
+      "state": "merged",
       "title": "Ops SEO crawler observation UI",
       "depends_on": [
         "CRAWLER-LOG-09"
@@ -13731,9 +13731,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T04:08:05Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "production_log_read_execution": false,
       "production_migration_execution": false,
@@ -13765,6 +13765,84 @@
           "at": "2026-05-22T12:06:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1553 for CRAWLER-LOG-10 with commit f7fcdd64c44a639e60457207567e3df3fd00632b. Scope remains read-only /ops/seo crawler observation UI only."
+        },
+        {
+          "at": "2026-05-22T12:11:24+08:00",
+          "status": "merged",
+          "summary": "Ledger reconciled before CRAWLER-LOG-11. GitHub reports PR #1553 as MERGED with merge commit fb8216eb9a76921565dbef64df9f97692ba71e8c; origin/main contains the merge commit, and remote/local task branch cleanup was completed."
+        }
+      ]
+    },
+    "CRAWLER-LOG-11": {
+      "repo": "fap-api",
+      "branch": "codex/crawler-log-11-scheduler-readiness-scan",
+      "status": "in_progress",
+      "state": "in_progress",
+      "title": "Crawler log scheduler readiness scan",
+      "depends_on": [
+        "CRAWLER-LOG-10"
+      ],
+      "commit_sha": "fdbfd8533052640af9c4f0dfe460a7e7be9ec9f3",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1554",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CRAWLER-LOG-10 is merged via PR #1553 and origin/main contains fb8216eb9a76921565dbef64df9f97692ba71e8c."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are limited to CRAWLER-LOG-11 scheduler readiness docs, generated artifact, focused contract test, and PR-train metadata. No scheduler activation, production log read, writes, migration execution, deployment, external API call, search submission, Metabase exposure, business DB access, Tencent RDS access, or Node2 access was performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=SeoIntelCrawlerLogSchedulerReadinessScan",
+            "cd backend && php artisan test --filter=SeoIntel",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "python3 -m json.tool backend/docs/seo/generated/crawler-log-scheduler-readiness-scan.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
+            "git diff --check",
+            "git diff --cached --check"
+          ]
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_log_read_execution": false,
+      "production_migration_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": true,
+      "sidecar_allowed": false,
+      "stop_on_safety_violation": true,
+      "next_pr": "SEO-OBSERVATION-QUEUE-00",
+      "history": [
+        {
+          "at": "2026-05-22T12:11:24+08:00",
+          "status": "in_progress",
+          "summary": "Started CRAWLER-LOG-11 after reconciling CRAWLER-LOG-10. Scope is scheduler readiness scan only; no scheduler activation, production log read, writes, deployment, search submission, Metabase exposure, or external API call."
+        },
+        {
+          "at": "2026-05-22T12:15:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Added scheduler readiness scan docs, generated artifact, and focused test. Local validation passed, including focused scheduler scan test, full SeoIntel suite, route list, Pint, JSON/YAML, and diff checks."
+        },
+        {
+          "at": "2026-05-22T12:17:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1554 for CRAWLER-LOG-11 with commit fdbfd8533052640af9c4f0dfe460a7e7be9ec9f3. Scope remains scheduler readiness scan only with no scheduler activation, production log read, writes, deployment, or search submission."
         }
       ]
     }
