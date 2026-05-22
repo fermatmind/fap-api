@@ -13366,14 +13366,14 @@
     "CRAWLER-LOG-06": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-06-aggregate-observation-design",
-      "status": "in_progress",
-      "state": "in_progress",
+      "status": "merged",
+      "state": "merged",
       "title": "Crawler log aggregate observation design",
       "depends_on": [
         "CRAWLER-LOG-05"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "0e508636bad1ad5a1670e2f10a07f84162b16c2d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1549",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -13395,12 +13395,16 @@
             "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
             "git diff --check"
           ]
+        },
+        "github": {
+          "status": "pass",
+          "evidence": "PR #1549 was merged and origin/main contains 0e508636bad1ad5a1670e2f10a07f84162b16c2d."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T02:44:39Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "production_log_read_execution": false,
       "scheduler_activation": false,
@@ -13431,6 +13435,77 @@
           "at": "2026-05-22T10:45:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1549 for CRAWLER-LOG-06 with commit 7c286f7a0464535fcf752cf9807206d2bfe76203. Scope remains docs/generated/test/metadata only."
+        },
+        {
+          "at": "2026-05-22T11:05:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled CRAWLER-LOG-06 as merged via PR #1549; origin/main contains 0e508636bad1ad5a1670e2f10a07f84162b16c2d and local/remote branch cleanup was completed before CRAWLER-LOG-07."
+        }
+      ]
+    },
+    "CRAWLER-LOG-07": {
+      "repo": "fap-api",
+      "branch": "codex/crawler-log-07-aggregate-storage-contract",
+      "status": "in_progress",
+      "state": "in_progress",
+      "title": "Crawler log aggregate storage contract",
+      "depends_on": [
+        "CRAWLER-LOG-06"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CRAWLER-LOG-06 is merged via PR #1549 and origin/main contains 0e508636bad1ad5a1670e2f10a07f84162b16c2d."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Adding only aggregate storage contract docs, generated artifact, focused test, and PR-train metadata. No production log read, canary execution, runtime behavior change, migration, scheduler, write path, deployment, external API call, search submission, Metabase exposure, business DB access, Tencent RDS access, or Node2 access is being performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=SeoIntelCrawlerLogAggregateStorageContract",
+            "cd backend && php artisan test --filter=SeoIntel",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "python3 -m json.tool backend/docs/seo/generated/crawler-log-aggregate-storage-contract.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
+            "git diff --check"
+          ]
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_log_read_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": true,
+      "sidecar_allowed": false,
+      "stop_on_safety_violation": true,
+      "next_pr": "CRAWLER-LOG-08",
+      "history": [
+        {
+          "at": "2026-05-22T11:05:00+08:00",
+          "status": "in_progress",
+          "summary": "Started CRAWLER-LOG-07 after user authorization to continue the crawler-log train. Scope is aggregate storage contract only; no migration, production log read, canary execution, writes, scheduler, search submission, or runtime change."
+        },
+        {
+          "at": "2026-05-22T11:15:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Local validation passed for the aggregate storage contract artifact and contract test. No production log read, canary execution, deploy, migration, scheduler activation, write path, external search API call, or search submission was performed."
         }
       ]
     }
