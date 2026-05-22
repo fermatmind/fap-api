@@ -9971,3 +9971,390 @@ prs:
     production_migration_execution_allowed: false
     scheduler_activation: false
     next_task: SEO-GROWTH-MBTI-PR-TRAIN-01
+
+
+  - id: SEO-GROWTH-MBTI-00
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-00A
+    branch: codex/seo-growth-mbti-00-baseline-telemetry
+    base: main
+    title: "docs(seo-intel): add MBTI growth baseline telemetry contract"
+    name: "MBTI baseline snapshot and telemetry contract"
+    train_scope: seo_growth_mbti
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Keep this PR planning, contract, and readiness only; do not execute live growth actions.
+      - Preserve backend/CMS/catalog authority and forbid frontend fallback, static sitemap, static llms, crawler logs, search responses, Digital PR mentions, or local copies as URL Truth.
+      - Keep MBTI career and recommendation language bounded; do not describe MBTI, Big Five, RIASEC, or Career Graph as precise recommender, hiring suitability, salary prediction, or career-success prediction authority.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-00-baseline-snapshot-telemetry-contract.md
+      - backend/docs/seo/generated/seo-growth-mbti-00-baseline-snapshot-telemetry-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbti00BaselineSnapshotTelemetryContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, Search Channel Queue, crawler log readers, collectors, scheduler, Digital PR sends, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbti00BaselineSnapshotTelemetryContract --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-00-baseline-snapshot-telemetry-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-01
+
+
+  - id: SEO-GROWTH-MBTI-01
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-00
+    branch: codex/seo-growth-mbti-01-entity-url-truth
+    base: main
+    title: "docs(seo-intel): add MBTI entity map URL Truth review"
+    name: "MBTI entity map and URL Truth review"
+    train_scope: seo_growth_mbti
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Keep this PR planning, contract, and readiness only; do not execute live growth actions.
+      - Preserve backend/CMS/catalog authority and forbid frontend fallback, static sitemap, static llms, crawler logs, search responses, Digital PR mentions, or local copies as URL Truth.
+      - Keep MBTI career and recommendation language bounded; do not describe MBTI, Big Five, RIASEC, or Career Graph as precise recommender, hiring suitability, salary prediction, or career-success prediction authority.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-01-entity-map-url-truth-review.md
+      - backend/docs/seo/generated/seo-growth-mbti-01-entity-map-url-truth-review.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbti01EntityMapUrlTruthReviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, Search Channel Queue, crawler log readers, collectors, scheduler, Digital PR sends, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbti01EntityMapUrlTruthReview --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-01-entity-map-url-truth-review.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-02
+
+
+  - id: SEO-GROWTH-MBTI-02
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-01
+    branch: codex/seo-growth-mbti-02-content-links
+    base: main
+    title: "docs(seo-intel): add MBTI content internal link wave plan"
+    name: "MBTI content and internal link Wave 1 dry-run plan"
+    train_scope: seo_growth_mbti
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Keep this PR planning, contract, and readiness only; do not execute live growth actions.
+      - Preserve backend/CMS/catalog authority and forbid frontend fallback, static sitemap, static llms, crawler logs, search responses, Digital PR mentions, or local copies as URL Truth.
+      - Keep MBTI career and recommendation language bounded; do not describe MBTI, Big Five, RIASEC, or Career Graph as precise recommender, hiring suitability, salary prediction, or career-success prediction authority.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-02-content-internal-link-wave1-plan.md
+      - backend/docs/seo/generated/seo-growth-mbti-02-content-internal-link-wave1-plan.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbti02ContentInternalLinkWave1PlanTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, Search Channel Queue, crawler log readers, collectors, scheduler, Digital PR sends, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbti02ContentInternalLinkWave1Plan --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-02-content-internal-link-wave1-plan.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-03A
+
+
+  - id: SEO-GROWTH-MBTI-03A
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-02
+    branch: codex/seo-growth-mbti-03a-claim-lint
+    base: main
+    title: "docs(seo-intel): add MBTI claim lint gate"
+    name: "MBTI claim lint gate"
+    train_scope: seo_growth_mbti
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Keep this PR planning, contract, and readiness only; do not execute live growth actions.
+      - Preserve backend/CMS/catalog authority and forbid frontend fallback, static sitemap, static llms, crawler logs, search responses, Digital PR mentions, or local copies as URL Truth.
+      - Keep MBTI career and recommendation language bounded; do not describe MBTI, Big Five, RIASEC, or Career Graph as precise recommender, hiring suitability, salary prediction, or career-success prediction authority.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-03a-claim-lint-gate.md
+      - backend/docs/seo/generated/seo-growth-mbti-03a-claim-lint-gate.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbti03aClaimLintGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, Search Channel Queue, crawler log readers, collectors, scheduler, Digital PR sends, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbti03aClaimLintGate --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-03a-claim-lint-gate.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-03B
+
+
+  - id: SEO-GROWTH-MBTI-03B
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-03A
+    branch: codex/seo-growth-mbti-03b-search-channel
+    base: main
+    title: "docs(seo-intel): add MBTI Search Channel canary plan"
+    name: "MBTI Search Channel canary wave plan"
+    train_scope: seo_growth_mbti
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Keep this PR planning, contract, and readiness only; do not execute live growth actions.
+      - Preserve backend/CMS/catalog authority and forbid frontend fallback, static sitemap, static llms, crawler logs, search responses, Digital PR mentions, or local copies as URL Truth.
+      - Keep MBTI career and recommendation language bounded; do not describe MBTI, Big Five, RIASEC, or Career Graph as precise recommender, hiring suitability, salary prediction, or career-success prediction authority.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-03b-search-channel-canary-wave-plan.md
+      - backend/docs/seo/generated/seo-growth-mbti-03b-search-channel-canary-wave-plan.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbti03bSearchChannelCanaryWavePlanTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, Search Channel Queue, crawler log readers, collectors, scheduler, Digital PR sends, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbti03bSearchChannelCanaryWavePlan --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-03b-search-channel-canary-wave-plan.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-04
+
+
+  - id: SEO-GROWTH-MBTI-04
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-03B
+    branch: codex/seo-growth-mbti-04-digital-pr
+    base: main
+    title: "docs(seo-intel): add MBTI Digital PR wave two plan"
+    name: "MBTI Digital PR Wave 2 plan"
+    train_scope: seo_growth_mbti
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Keep this PR planning, contract, and readiness only; do not execute live growth actions.
+      - Preserve backend/CMS/catalog authority and forbid frontend fallback, static sitemap, static llms, crawler logs, search responses, Digital PR mentions, or local copies as URL Truth.
+      - Keep MBTI career and recommendation language bounded; do not describe MBTI, Big Five, RIASEC, or Career Graph as precise recommender, hiring suitability, salary prediction, or career-success prediction authority.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-04-digital-pr-wave2-plan.md
+      - backend/docs/seo/generated/seo-growth-mbti-04-digital-pr-wave2-plan.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbti04DigitalPrWave2PlanTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, Search Channel Queue, crawler log readers, collectors, scheduler, Digital PR sends, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbti04DigitalPrWave2Plan --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-04-digital-pr-wave2-plan.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-05
+
+
+  - id: SEO-GROWTH-MBTI-05
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-04
+    branch: codex/seo-growth-mbti-05-funnel-revenue
+    base: main
+    title: "docs(seo-intel): add MBTI human-only funnel review contract"
+    name: "MBTI human-only funnel and revenue review contract"
+    train_scope: seo_growth_mbti
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Keep this PR planning, contract, and readiness only; do not execute live growth actions.
+      - Preserve backend/CMS/catalog authority and forbid frontend fallback, static sitemap, static llms, crawler logs, search responses, Digital PR mentions, or local copies as URL Truth.
+      - Keep MBTI career and recommendation language bounded; do not describe MBTI, Big Five, RIASEC, or Career Graph as precise recommender, hiring suitability, salary prediction, or career-success prediction authority.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-05-human-only-funnel-revenue-review-contract.md
+      - backend/docs/seo/generated/seo-growth-mbti-05-human-only-funnel-revenue-review-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbti05HumanOnlyFunnelRevenueReviewContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, Search Channel Queue, crawler log readers, collectors, scheduler, Digital PR sends, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbti05HumanOnlyFunnelRevenueReviewContract --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-05-human-only-funnel-revenue-review-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-06
+
+
+  - id: SEO-GROWTH-MBTI-06
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-05
+    branch: codex/seo-growth-mbti-06-growth-review
+    base: main
+    title: "docs(seo-intel): add MBTI growth review plan"
+    name: "MBTI 7/14/28-day growth review plan"
+    train_scope: seo_growth_mbti
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Keep this PR planning, contract, and readiness only; do not execute live growth actions.
+      - Preserve backend/CMS/catalog authority and forbid frontend fallback, static sitemap, static llms, crawler logs, search responses, Digital PR mentions, or local copies as URL Truth.
+      - Keep MBTI career and recommendation language bounded; do not describe MBTI, Big Five, RIASEC, or Career Graph as precise recommender, hiring suitability, salary prediction, or career-success prediction authority.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-06-7-14-28-day-growth-review-plan.md
+      - backend/docs/seo/generated/seo-growth-mbti-06-7-14-28-day-growth-review-plan.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbti06GrowthReviewPlanTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, Search Channel Queue, crawler log readers, collectors, scheduler, Digital PR sends, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbti06GrowthReviewPlan --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-06-7-14-28-day-growth-review-plan.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-07
+
+
+  - id: SEO-GROWTH-MBTI-07
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-06
+    branch: codex/seo-growth-mbti-07-playbook-closeout
+    base: main
+    title: "docs(seo-intel): close MBTI growth playbook train"
+    name: "MBTI scale decision and entity playbook closeout"
+    train_scope: seo_growth_mbti
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Keep this PR planning, contract, and readiness only; do not execute live growth actions.
+      - Preserve backend/CMS/catalog authority and forbid frontend fallback, static sitemap, static llms, crawler logs, search responses, Digital PR mentions, or local copies as URL Truth.
+      - Keep MBTI career and recommendation language bounded; do not describe MBTI, Big Five, RIASEC, or Career Graph as precise recommender, hiring suitability, salary prediction, or career-success prediction authority.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-07-scale-decision-entity-playbook-closeout.md
+      - backend/docs/seo/generated/seo-growth-mbti-07-scale-decision-entity-playbook-closeout.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbti07ScaleDecisionEntityPlaybookCloseoutTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, Search Channel Queue, crawler log readers, collectors, scheduler, Digital PR sends, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbti07ScaleDecisionEntityPlaybookCloseout --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-07-scale-decision-entity-playbook-closeout.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-ACTION-01

@@ -14340,11 +14340,11 @@
     "SEO-GROWTH-MBTI-00A": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-00a-baseline-contract",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "SEO-OPS-SOP-01F"
       ],
-      "commit_sha": "e96dd297",
+      "commit_sha": "ae63f1374402f6bc9d3bfd00afd6e68cd2f6bc95",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1579",
       "checks": {
         "local": {
@@ -14358,17 +14358,19 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed before staging: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+          "pr_1579": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN; merged as ae63f1374402f6bc9d3bfd00afd6e68cd2f6bc95"
+        }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-22T12:42:00Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
       "scheduler_activation": false,
-      "next_pr": "SEO-GROWTH-MBTI-PR-TRAIN-01",
+      "next_pr": "SEO-GROWTH-MBTI-00",
       "history": [
         {
           "at": "2026-05-22T20:26:05+08:00",
@@ -14389,6 +14391,301 @@
           "at": "2026-05-22T20:38:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1579 for SEO-GROWTH-MBTI-00A and pushed branch codex/seo-growth-mbti-00a-baseline-contract."
+        },
+        {
+          "at": "2026-05-22T21:00:00+08:00",
+          "status": "reconciled_merged",
+          "summary": "Reconciled SEO-GROWTH-MBTI-00A before starting SEO-GROWTH-MBTI-PR-TRAIN-01: PR #1579 is merged, origin/main contains ae63f1374402f6bc9d3bfd00afd6e68cd2f6bc95, remote branch is deleted, and local cleanup script is unavailable in this clone."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-00": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-00-baseline-telemetry",
+      "status": "local_validation_passed",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-00A"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "focused_baseline_telemetry_test": "passed: php artisan test --filter=SeoIntelGrowthMbti00BaselineSnapshotTelemetryContract --no-ansi (8 tests, 123 assertions)",
+          "seo_intel_suite": "passed: php artisan test --filter=SeoIntel --no-ansi (517 tests, 8187 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3489 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-00-baseline-snapshot-telemetry-contract.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-01",
+      "history": [
+        {
+          "at": "2026-05-22T21:00:00+08:00",
+          "status": "pending",
+          "summary": "Registered SEO-GROWTH-MBTI-00 for SEO-GROWTH-MBTI-PR-TRAIN-01. Scope is docs/generated/test plus authorized train metadata only; no runtime, CMS, Search Channel, fap-web, Digital PR, production, crawler log, pSEO, claim rewrite, internal link creation, or business DB work."
+        },
+        {
+          "at": "2026-05-22T21:00:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-GROWTH-MBTI-00 on codex/seo-growth-mbti-00-baseline-telemetry from latest main. Scope is baseline telemetry docs/generated/test plus authorized train metadata only."
+        },
+        {
+          "at": "2026-05-22T21:08:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "SEO-GROWTH-MBTI-00 local validation passed for focused baseline telemetry contract test, full SeoIntel filter, route:list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-01": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-01-entity-url-truth",
+      "status": "pending",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-00"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {},
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-02",
+      "history": [
+        {
+          "at": "2026-05-22T21:00:00+08:00",
+          "status": "pending",
+          "summary": "Registered SEO-GROWTH-MBTI-01 for SEO-GROWTH-MBTI-PR-TRAIN-01. Scope is docs/generated/test plus authorized train metadata only; no runtime, CMS, Search Channel, fap-web, Digital PR, production, crawler log, pSEO, claim rewrite, internal link creation, or business DB work."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-02": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-02-content-links",
+      "status": "pending",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {},
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-03A",
+      "history": [
+        {
+          "at": "2026-05-22T21:00:00+08:00",
+          "status": "pending",
+          "summary": "Registered SEO-GROWTH-MBTI-02 for SEO-GROWTH-MBTI-PR-TRAIN-01. Scope is docs/generated/test plus authorized train metadata only; no runtime, CMS, Search Channel, fap-web, Digital PR, production, crawler log, pSEO, claim rewrite, internal link creation, or business DB work."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-03A": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-03a-claim-lint",
+      "status": "pending",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-02"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {},
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-03B",
+      "history": [
+        {
+          "at": "2026-05-22T21:00:00+08:00",
+          "status": "pending",
+          "summary": "Registered SEO-GROWTH-MBTI-03A for SEO-GROWTH-MBTI-PR-TRAIN-01. Scope is docs/generated/test plus authorized train metadata only; no runtime, CMS, Search Channel, fap-web, Digital PR, production, crawler log, pSEO, claim rewrite, internal link creation, or business DB work."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-03B": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-03b-search-channel",
+      "status": "pending",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-03A"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {},
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-04",
+      "history": [
+        {
+          "at": "2026-05-22T21:00:00+08:00",
+          "status": "pending",
+          "summary": "Registered SEO-GROWTH-MBTI-03B for SEO-GROWTH-MBTI-PR-TRAIN-01. Scope is docs/generated/test plus authorized train metadata only; no runtime, CMS, Search Channel, fap-web, Digital PR, production, crawler log, pSEO, claim rewrite, internal link creation, or business DB work."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-04": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-04-digital-pr",
+      "status": "pending",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-03B"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {},
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-05",
+      "history": [
+        {
+          "at": "2026-05-22T21:00:00+08:00",
+          "status": "pending",
+          "summary": "Registered SEO-GROWTH-MBTI-04 for SEO-GROWTH-MBTI-PR-TRAIN-01. Scope is docs/generated/test plus authorized train metadata only; no runtime, CMS, Search Channel, fap-web, Digital PR, production, crawler log, pSEO, claim rewrite, internal link creation, or business DB work."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-05": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-05-funnel-revenue",
+      "status": "pending",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-04"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {},
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-06",
+      "history": [
+        {
+          "at": "2026-05-22T21:00:00+08:00",
+          "status": "pending",
+          "summary": "Registered SEO-GROWTH-MBTI-05 for SEO-GROWTH-MBTI-PR-TRAIN-01. Scope is docs/generated/test plus authorized train metadata only; no runtime, CMS, Search Channel, fap-web, Digital PR, production, crawler log, pSEO, claim rewrite, internal link creation, or business DB work."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-06": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-06-growth-review",
+      "status": "pending",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-05"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {},
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-07",
+      "history": [
+        {
+          "at": "2026-05-22T21:00:00+08:00",
+          "status": "pending",
+          "summary": "Registered SEO-GROWTH-MBTI-06 for SEO-GROWTH-MBTI-PR-TRAIN-01. Scope is docs/generated/test plus authorized train metadata only; no runtime, CMS, Search Channel, fap-web, Digital PR, production, crawler log, pSEO, claim rewrite, internal link creation, or business DB work."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-07": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-07-playbook-closeout",
+      "status": "pending",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-06"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {},
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-01",
+      "history": [
+        {
+          "at": "2026-05-22T21:00:00+08:00",
+          "status": "pending",
+          "summary": "Registered SEO-GROWTH-MBTI-07 for SEO-GROWTH-MBTI-PR-TRAIN-01. Scope is docs/generated/test plus authorized train metadata only; no runtime, CMS, Search Channel, fap-web, Digital PR, production, crawler log, pSEO, claim rewrite, internal link creation, or business DB work."
         }
       ]
     }
