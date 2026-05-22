@@ -1,0 +1,77 @@
+{
+  "version": "chinese-claim-lint-cases.v1",
+  "cases": [
+    {
+      "id": "forbidden_career_recommendation_claim",
+      "surface": "career_recommendation",
+      "text": "这套 AI 职业规划可以提供精准职业推荐，直接告诉你最适合职业。",
+      "is_public": true,
+      "is_indexable": true,
+      "expected_lint_state": "blocked",
+      "expected_severity": "P0"
+    },
+    {
+      "id": "bounded_career_direction_reference",
+      "surface": "career_guide",
+      "text": "本页仅提供职业方向参考，结合兴趣信号和工作方式倾向作为探索建议。",
+      "is_public": false,
+      "is_indexable": false,
+      "expected_lint_state": "safe",
+      "expected_severity": "P3"
+    },
+    {
+      "id": "mbti_salary_guarantee_claim",
+      "surface": "research_report",
+      "text": "MBTI决定收入，并可给出薪资保证。",
+      "is_public": true,
+      "is_indexable": true,
+      "expected_lint_state": "blocked",
+      "expected_severity": "P0"
+    },
+    {
+      "id": "model_index_salary_turnover_bounded",
+      "surface": "research_report",
+      "text": "报告使用模型化指数展示聚合层面的薪资与离职方向性趋势，不作为个人预测。",
+      "is_public": false,
+      "is_indexable": false,
+      "expected_lint_state": "needs_review",
+      "expected_severity": "P2"
+    },
+    {
+      "id": "clinical_diagnosis_claim",
+      "surface": "test_detail",
+      "text": "本测试可用于临床诊断、确诊、治疗和治愈心理疾病判断。",
+      "is_public": true,
+      "is_indexable": true,
+      "expected_lint_state": "blocked",
+      "expected_severity": "P0"
+    },
+    {
+      "id": "non_diagnostic_safe_phrasing",
+      "surface": "test_detail",
+      "text": "结果仅供参考，属于自评筛查，非诊断。",
+      "is_public": false,
+      "is_indexable": false,
+      "expected_lint_state": "safe",
+      "expected_severity": "P3"
+    },
+    {
+      "id": "big_five_riasec_overclaim",
+      "surface": "career_graph",
+      "text": "Big Five职业精准匹配，并提供RIASEC推荐职业。",
+      "is_public": true,
+      "is_indexable": true,
+      "expected_lint_state": "blocked",
+      "expected_severity": "P0"
+    },
+    {
+      "id": "snapshot_based_support_phrasing",
+      "surface": "career_graph",
+      "text": "This is snapshot-based support and evidence-backed explanation for exploration only.",
+      "is_public": false,
+      "is_indexable": false,
+      "expected_lint_state": "safe",
+      "expected_severity": "P3"
+    }
+  ]
+}

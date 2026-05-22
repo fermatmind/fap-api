@@ -9551,9 +9551,9 @@ prs:
     depends_on:
       - CLAIM-LINT-01A
       - CONTENT-OPS-02B
-    branch: codex/claim-lint-01b-chinese-runtime-ci
+    branch: codex/claim-lint-01b-chinese-claim-linter-runtime
     base: main
-    title: "feat(seo): add Chinese claim linter runtime and CI command"
+    title: "feat(seo-intel): add Chinese claim linter runtime"
     name: "Chinese claim linter runtime CI"
     train_scope: content_ops_claim_link_runtime
     risk_level: medium_ci_guard
@@ -9567,6 +9567,7 @@ prs:
       - backend/app/Console/Commands/SeoIntelClaimLintCommand.php
       - backend/tests/Feature/SeoIntel/SeoIntelChineseClaimLinterRuntimeTest.php
       - backend/tests/Fixtures/SeoIntel/claim_lint/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/chinese-claim-linter-runtime.md
       - backend/docs/seo/generated/chinese-claim-linter-runtime.v1.json
       - docs/codex/pr-train.yaml

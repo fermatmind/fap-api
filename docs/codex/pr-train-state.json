@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T15:58:09+08:00",
+  "updated_at": "2026-05-22T16:12:46+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18166,11 +18166,11 @@
     "CLAIM-LINT-01A": {
       "repo": "fap-api",
       "branch": "codex/claim-lint-01a-chinese-claim-linter-contract",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "CONTENT-OPS-02A"
       ],
-      "commit_sha": null,
+      "commit_sha": "0327ae9c0b1f6ecc2bcff7d5c15589ac2a27318c",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1566",
       "checks": {
         "local": {
@@ -18182,12 +18182,18 @@
           "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check"
+        },
+        "github": {
+          "pr_1566": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN"
+        },
+        "post_merge": {
+          "focused_contract_test": "passed: php artisan test --filter=SeoIntelChineseClaimLinterRuntimeContract --no-ansi"
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T08:04:05Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -18213,20 +18219,39 @@
           "at": "2026-05-22T15:58:09+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1566 for CLAIM-LINT-01A and pushed branch codex/claim-lint-01a-chinese-claim-linter-contract."
+        },
+        {
+          "at": "2026-05-22T16:08:57+08:00",
+          "status": "merged",
+          "summary": "PR #1566 merged via squash at 0327ae9c0b1f6ecc2bcff7d5c15589ac2a27318c. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused contract test passed."
         }
       ]
     },
     "CLAIM-LINT-01B": {
       "repo": "fap-api",
-      "branch": "codex/claim-lint-01b-chinese-runtime-ci",
-      "status": "pending",
+      "branch": "codex/claim-lint-01b-chinese-claim-linter-runtime",
+      "status": "pr_open",
       "depends_on": [
         "CLAIM-LINT-01A",
         "CONTENT-OPS-02B"
       ],
       "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1567",
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_runtime": "passed: php artisan test --filter=SeoIntelChineseClaimLinterRuntime --no-ansi (13 tests, 236 assertions)",
+          "bigfive_runtime_freeze": "passed: php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi (109 tests, 456 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (448 tests, 7185 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_test": "passed: vendor/bin/pint --test (3479 files)",
+          "command_help": "passed: php artisan seo-intel:claim-lint --fixture --json --help || true",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/chinese-claim-linter-runtime.v1.json",
+          "json_fixture": "passed: python3 -m json.tool backend/tests/Fixtures/SeoIntel/claim_lint/chinese_claim_lint_cases.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -18241,6 +18266,21 @@
           "at": "2026-05-22T14:37:34+08:00",
           "status": "pending",
           "summary": "Registered Chinese claim linter runtime/CI PR. Scope allows backend linter service/command/tests only and forbids auto-rewrite, auto-publish, production scans, seo_intel writes, and fap-web changes."
+        },
+        {
+          "at": "2026-05-22T16:08:57+08:00",
+          "status": "in_progress",
+          "summary": "Started CLAIM-LINT-01B on codex/claim-lint-01b-chinese-claim-linter-runtime. Scope is Chinese claim linter service/command/fixtures/tests/docs/generated artifact, BigFive runtime freeze allowlist for the new SeoIntel runtime files, and train metadata; no CMS mutation, auto-rewrite, publish action, production scan, fap-web change, seo_intel write, Search Channel enqueue, URL submission, scheduler activation, env edit, or deploy."
+        },
+        {
+          "at": "2026-05-22T16:11:24+08:00",
+          "status": "local_validation_passed",
+          "summary": "CLAIM-LINT-01B local validation passed for focused runtime/contract tests, BigFive runtime freeze allowlist, full SeoIntel filter, route list, Pint, command help, JSON fixture/artifact/state parsing, YAML parsing, and diff whitespace checks. Runtime remains fixture/CI-readable with no CMS mutation, auto-rewrite, publish action, production scan, fap-web change, seo_intel write, Search Channel enqueue, URL submission, scheduler activation, env edit, or deploy."
+        },
+        {
+          "at": "2026-05-22T16:12:46+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1567 for CLAIM-LINT-01B and pushed branch codex/claim-lint-01b-chinese-claim-linter-runtime."
         }
       ]
     },

@@ -610,6 +610,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_chinese_claim_linter_runtime_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoIntelClaimLintCommand.php',
+            'backend/app/Services/SeoIntel/ClaimLint/ChineseClaimLinter.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_migration_isolation_files(): void
     {
         $changed = [
@@ -1895,6 +1905,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isChineseClaimLinterRuntimeFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelOpsDashboardReadModelFile($file)) {
                 continue;
             }
@@ -2525,6 +2539,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/SeoIntelInternalLinkGraphCommand.php',
             'backend/app/Services/SeoIntel/InternalLink/InternalLinkGraphDryRun.php',
+        ], true);
+    }
+
+    private function isChineseClaimLinterRuntimeFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelClaimLintCommand.php',
+            'backend/app/Services/SeoIntel/ClaimLint/ChineseClaimLinter.php',
         ], true);
     }
 
