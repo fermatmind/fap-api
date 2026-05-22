@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T17:32:00+08:00",
+  "updated_at": "2026-05-22T17:41:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18455,11 +18455,11 @@
     "SEO-OPS-SOP-01A": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-sop-01a-architecture-map",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "CONTENT-OPS-CLAIM-LINK-CLOSEOUT"
       ],
-      "commit_sha": "1115a89e37a650549298a91017f392a04466b0fa",
+      "commit_sha": "705ee466f5fa0d0a63f55fdd14835178f40af2c2",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1571",
       "checks": {
         "local": {
@@ -18471,11 +18471,17 @@
           "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check"
+        },
+        "github": {
+          "pr_1571": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN"
+        },
+        "post_merge": {
+          "focused_architecture_test": "passed: php artisan test --filter=SeoIntelSeoOpsSopArchitectureAuthorityMap --no-ansi"
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-22T09:34:00Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
@@ -18502,19 +18508,35 @@
           "at": "2026-05-22T17:32:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1571 for SEO-OPS-SOP-01A and pushed branch codex/seo-ops-sop-01a-architecture-map."
+        },
+        {
+          "at": "2026-05-22T17:34:00+08:00",
+          "status": "merged",
+          "summary": "PR #1571 merged via squash at 705ee466f5fa0d0a63f55fdd14835178f40af2c2. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused architecture test passed. Local cleanup script was unavailable in this clone."
         }
       ]
     },
     "SEO-OPS-SOP-01B": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-sop-01b-daily-runbook",
-      "status": "pending",
+      "status": "local_validation_passed",
       "depends_on": [
         "SEO-OPS-SOP-01A"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_daily_runbook": "passed: php artisan test --filter=SeoIntelSeoOpsDailyRunbook --no-ansi (6 tests, 80 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (473 tests, 7555 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_test": "passed: vendor/bin/pint --test (3483 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-ops-daily-runbook.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -18529,6 +18551,16 @@
           "at": "2026-05-22T17:22:25+08:00",
           "status": "pending",
           "summary": "Registered daily SEO Ops runbook PR. Scope is docs/generated/test plus train metadata only; no runtime services, migrations, production env changes, fap-web changes, CMS mutations, Search Channel mutations, crawler log reads, scheduler changes, or Digital PR sends."
+        },
+        {
+          "at": "2026-05-22T17:35:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-OPS-SOP-01B on codex/seo-ops-sop-01b-daily-runbook. Scope is docs/generated/test plus train metadata only; no runtime services, migrations, production env changes, fap-web changes, CMS mutations, Search Channel mutations, crawler log reads, scheduler changes, or Digital PR sends."
+        },
+        {
+          "at": "2026-05-22T17:41:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "SEO-OPS-SOP-01B local validation passed for focused daily runbook test, full SeoIntel filter, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Scope remains docs/generated/test plus train metadata only."
         }
       ]
     },
