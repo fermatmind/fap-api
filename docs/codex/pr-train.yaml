@@ -9329,3 +9329,348 @@ prs:
     production_migration_execution_allowed: false
     scheduler_activation: false
     next_task: CONTENT-OPS-CLAIM-LINK-RUNTIME-TRAIN-01
+
+  - id: CONTENT-OPS-02A
+    repo: fap-api
+    depends_on:
+      - SEO-OBS-GOV-06
+    branch: codex/content-ops-02a-publish-rehearsal-contract
+    base: main
+    title: "docs(content-ops): add content publish rehearsal contract"
+    name: "Content publish rehearsal contract"
+    train_scope: content_ops_claim_link_runtime
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define backend-owned content publish rehearsal rules for articles, Research, content pages, support, topics, personality, career, tests, and landing surfaces.
+      - Specify dry-run validation inputs for metadata, canonical, robots/indexability, references, methodology/disclaimer, claim lint, internal links, observation planning, and Search Channel eligibility.
+      - Confirm publish rehearsal does not publish, mutate CMS content, write seo_intel, enqueue Search Channel, submit URLs, or expose drafts to sitemap/llms.
+    allowed_paths:
+      - backend/docs/seo/content-publish-rehearsal-contract.md
+      - backend/docs/seo/generated/content-publish-rehearsal-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelContentPublishRehearsalContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add runtime publish services, migrations, CMS content mutation, Search Channel writes, observation queue writes, scheduler activation, production env changes, deploys, fap-web changes, sitemap changes, or llms changes.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelContentPublishRehearsalContract --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/content-publish-rehearsal-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: CONTENT-OPS-02B
+
+  - id: CONTENT-OPS-02B
+    repo: fap-api
+    depends_on:
+      - CONTENT-OPS-02A
+    branch: codex/content-ops-02b-publish-rehearsal-dry-run
+    base: main
+    title: "feat(content-ops): add content publish rehearsal dry-run validator"
+    name: "Content publish rehearsal dry-run validator"
+    train_scope: content_ops_claim_link_runtime
+    risk_level: medium_dry_run_runtime
+    type: service/command/tests
+    scope:
+      - Add a backend dry-run validator for content publish rehearsal, starting from article publish preflight extraction/reuse.
+      - Emit CI-readable rehearsal output for safe, needs_review, and blocked states without publishing or mutating content.
+      - Include planned observation and Search Channel eligibility summaries as dry-run output only.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/ContentOps/**
+      - backend/app/Console/Commands/SeoIntelContentPublishRehearsalCommand.php
+      - backend/tests/Feature/SeoIntel/SeoIntelContentPublishRehearsalDryRunTest.php
+      - backend/docs/seo/content-publish-rehearsal-dry-run.md
+      - backend/docs/seo/generated/content-publish-rehearsal-dry-run.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish articles, mutate CMS content, write seo_intel, write observation queue rows, enqueue Search Channel, submit URLs, run migrations, activate scheduler, edit env, deploy, modify fap-web, sitemap, or llms.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelContentPublishRehearsalDryRun --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/content-publish-rehearsal-dry-run.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: INTERNAL-LINK-01A
+
+  - id: INTERNAL-LINK-01A
+    repo: fap-api
+    depends_on:
+      - CONTENT-OPS-02A
+    branch: codex/internal-link-01a-semantic-graph-contract
+    base: main
+    title: "docs(seo): add semantic internal link graph contract"
+    name: "Semantic internal link graph contract"
+    train_scope: content_ops_claim_link_runtime
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define backend-authoritative semantic internal link graph rules across articles, topics, Research, tests, personality, career guides, career jobs, and content pages.
+      - Define source authority, entity_key and translation-group usage, safety levels, locale pairing, missing-link reporting, and no-auto-mutation policy.
+    allowed_paths:
+      - backend/docs/seo/semantic-internal-link-graph-contract.md
+      - backend/docs/seo/generated/semantic-internal-link-graph-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSemanticInternalLinkGraphContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate links, add frontend fallback links, use crawler logs or sitemap as link authority, run migrations, write CMS content, modify fap-web, or change public runtime.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSemanticInternalLinkGraphContract --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/semantic-internal-link-graph-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: INTERNAL-LINK-01B
+
+  - id: INTERNAL-LINK-01B
+    repo: fap-api
+    depends_on:
+      - INTERNAL-LINK-01A
+      - CONTENT-OPS-02B
+    branch: codex/internal-link-01b-graph-dry-run-read-model
+    base: main
+    title: "feat(seo): add internal link graph dry-run read model"
+    name: "Internal link graph dry-run read model"
+    train_scope: content_ops_claim_link_runtime
+    risk_level: medium_read_model_only
+    type: service/command/tests
+    scope:
+      - Add a backend read-only internal link graph dry-run service and optional command.
+      - Report current links, missing opportunities, unsafe fallback links, entity-key coverage, locale-pair coverage, and claim-sensitive link risks.
+      - Keep output read-only and CI-readable without writing links or CMS content.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/InternalLink/**
+      - backend/app/Console/Commands/SeoIntelInternalLinkGraphCommand.php
+      - backend/tests/Feature/SeoIntel/SeoIntelInternalLinkGraphDryRunTest.php
+      - backend/docs/seo/internal-link-graph-dry-run.md
+      - backend/docs/seo/generated/internal-link-graph-dry-run.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write CMS links, mutate ArticleTestEdge or career pivots, modify fap-web, use sitemap/crawler/search responses as authority, enqueue Search Channel, submit URLs, run migrations, activate scheduler, edit env, or deploy.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelInternalLinkGraphDryRun --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/internal-link-graph-dry-run.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: CLAIM-LINT-01A
+
+  - id: CLAIM-LINT-01A
+    repo: fap-api
+    depends_on:
+      - CONTENT-OPS-02A
+    branch: codex/claim-lint-01a-chinese-runtime-contract
+    base: main
+    title: "docs(seo): add Chinese claim linter runtime contract"
+    name: "Chinese claim linter runtime contract"
+    train_scope: content_ops_claim_link_runtime
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define reusable Chinese claim linter runtime and CI contract for public copy, metadata, FAQ, JSON-LD, llms, articles, Research, career, and test surfaces.
+      - Expand claim phrase classes for MBTI salary/turnover, career recommendation, hiring suitability, diagnosis, IQ, Big Five, and RIASEC risks.
+      - Define safe, needs_review, and blocked output states plus P0/P1/P2/P3 issue severity mapping.
+    allowed_paths:
+      - backend/docs/seo/chinese-claim-linter-runtime-contract.md
+      - backend/docs/seo/generated/chinese-claim-linter-runtime-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelChineseClaimLinterRuntimeContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Activate runtime enforcement, mutate CMS content, rewrite copy, publish content, change fap-web, change public runtime, modify sitemap/llms, write seo_intel, or run production scans.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelChineseClaimLinterRuntimeContract --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/chinese-claim-linter-runtime-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: CLAIM-LINT-01B
+
+  - id: CLAIM-LINT-01B
+    repo: fap-api
+    depends_on:
+      - CLAIM-LINT-01A
+      - CONTENT-OPS-02B
+    branch: codex/claim-lint-01b-chinese-runtime-ci
+    base: main
+    title: "feat(seo): add Chinese claim linter runtime and CI command"
+    name: "Chinese claim linter runtime CI"
+    train_scope: content_ops_claim_link_runtime
+    risk_level: medium_ci_guard
+    type: service/command/tests
+    scope:
+      - Add a reusable backend Chinese claim linter service and CI-readable command.
+      - Scan candidate public-copy inputs and classify safe, needs_review, or blocked with severity mapping.
+      - Integrate with publish rehearsal output as a dry-run gate without auto-rewriting or publishing.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/ClaimLint/**
+      - backend/app/Console/Commands/SeoIntelClaimLintCommand.php
+      - backend/tests/Feature/SeoIntel/SeoIntelChineseClaimLinterRuntimeTest.php
+      - backend/tests/Fixtures/SeoIntel/claim_lint/**
+      - backend/docs/seo/chinese-claim-linter-runtime.md
+      - backend/docs/seo/generated/chinese-claim-linter-runtime.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Auto-rewrite content, auto-publish, mutate CMS, scan private production data, write seo_intel, enqueue Search Channel, submit URLs, modify fap-web, activate scheduler, edit env, or deploy.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelChineseClaimLinterRuntime --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/chinese-claim-linter-runtime.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: CONTENT-OPS-CLAIM-LINK-OPS-READINESS
+
+  - id: CONTENT-OPS-CLAIM-LINK-OPS-READINESS
+    repo: fap-api
+    depends_on:
+      - CONTENT-OPS-02B
+      - INTERNAL-LINK-01B
+      - CLAIM-LINT-01B
+    branch: codex/content-ops-claim-link-ops-readiness
+    base: main
+    title: "docs(ops): add content ops claim link display readiness"
+    name: "Content Ops claim/link /ops/seo display readiness"
+    train_scope: content_ops_claim_link_runtime
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define future read-only /ops/seo panels for publish rehearsal, internal link graph, claim lint severity, entity-key coverage, and observation planning.
+      - Keep the page operational/read-only and forbid action buttons, write controls, submit controls, scheduler controls, collector controls, raw SQL, raw payloads, raw crawler logs, and Metabase exposure.
+    allowed_paths:
+      - backend/docs/seo/content-ops-claim-link-ops-readiness.md
+      - backend/docs/seo/generated/content-ops-claim-link-ops-readiness.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelContentOpsClaimLinkOpsReadinessTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Implement Filament UI, add action buttons, write services, migrations, production env changes, fap-web changes, Metabase exposure, scheduler controls, collector controls, or Search Channel controls.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelContentOpsClaimLinkOpsReadiness --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/content-ops-claim-link-ops-readiness.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: CONTENT-OPS-CLAIM-LINK-CLOSEOUT
+
+  - id: CONTENT-OPS-CLAIM-LINK-CLOSEOUT
+    repo: fap-api
+    depends_on:
+      - CONTENT-OPS-CLAIM-LINK-OPS-READINESS
+    branch: codex/content-ops-claim-link-closeout
+    base: main
+    title: "docs(content-ops): close content ops claim link runtime train"
+    name: "Content Ops claim/link runtime closeout"
+    train_scope: content_ops_claim_link_runtime
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Close the Content Ops / Claim Lint / Internal Link runtime train.
+      - Summarize publish rehearsal, internal link graph, Chinese claim linter, /ops/seo readiness, validation, deferred schema work, and next task recommendation.
+      - Confirm no production operations, CMS mutations, Search Channel writes, crawler log reads, scheduler activation, deploys, or fap-web changes occurred.
+    allowed_paths:
+      - backend/docs/seo/content-ops-claim-link-runtime-closeout.md
+      - backend/docs/seo/generated/content-ops-claim-link-runtime-closeout.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelContentOpsClaimLinkRuntimeCloseoutTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add runtime code, migrations, production operations, env edits, fap-web changes, CMS mutations, Search Channel mutations, collector writes, or scheduler activation.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelContentOpsClaimLinkRuntimeCloseout --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/content-ops-claim-link-runtime-closeout.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: CONTENT-OPS-CLAIM-LINK-RUNTIME-TRAIN-01-COMPLETE

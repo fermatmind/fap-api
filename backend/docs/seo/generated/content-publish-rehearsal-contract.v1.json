@@ -1,0 +1,140 @@
+{
+  "version": "content-publish-rehearsal-contract.v1",
+  "task": "CONTENT-OPS-02A",
+  "purpose": "content_publish_rehearsal_contract",
+  "mode": "dry_run_contract_only",
+  "authority_model": {
+    "cms_backend": "content_metadata_publish_canonical_indexability_claim_internal_link_truth",
+    "fap_web": "deterministic_public_runtime_renderer_only",
+    "seo_intel": "observation_only",
+    "observation_queue": "planned_events_only_in_this_pr",
+    "search_channel_queue": "eligibility_dry_run_only"
+  },
+  "candidate_surfaces": [
+    "articles",
+    "research_reports",
+    "content_pages",
+    "support_articles",
+    "interpretation_guides",
+    "topics",
+    "personality_pages",
+    "career_guides",
+    "career_jobs",
+    "test_landing_detail_pages",
+    "homepage_landing_surfaces"
+  ],
+  "required_rehearsal_checks": [
+    "status_review_state",
+    "is_public_is_indexable",
+    "canonical_path_or_url",
+    "seo_title",
+    "seo_description",
+    "robots_noindex_state",
+    "locale",
+    "slug",
+    "references",
+    "cta",
+    "faq",
+    "media_cover_readiness",
+    "claim_boundary",
+    "internal_link_readiness",
+    "search_channel_eligibility_dry_run",
+    "observation_queue_planned_event_dry_run"
+  ],
+  "rehearsal_states": [
+    "safe",
+    "needs_review",
+    "blocked"
+  ],
+  "draft_exclusions": [
+    "sitemap",
+    "llms",
+    "search_channel_queue",
+    "url_submission",
+    "indexable_url_truth_handoff"
+  ],
+  "planned_observation_event_types": [
+    "published",
+    "metadata_changed",
+    "canonical_changed",
+    "robots_changed",
+    "locale_link_changed",
+    "claim_boundary_changed",
+    "issue_detected"
+  ],
+  "required_gates": [
+    "claim_lint",
+    "internal_link_readiness",
+    "search_channel_eligibility_dry_run",
+    "observation_planning_dry_run"
+  ],
+  "forbidden_authority_sources": [
+    "frontend_fallback",
+    "static_sitemap",
+    "static_llms",
+    "crawler_logs",
+    "search_engine_responses",
+    "local_copies"
+  ],
+  "forbidden_behaviors": [
+    "cms_content_mutation",
+    "article_publish",
+    "production_write",
+    "production_migration",
+    "sitemap_mutation",
+    "llms_mutation",
+    "observation_queue_write",
+    "search_channel_queue_enqueue",
+    "url_submission",
+    "crawler_log_read",
+    "scheduler_activation",
+    "collector_write",
+    "metabase_exposure",
+    "fap_web_modification",
+    "claim_linter_auto_rewrite",
+    "internal_link_auto_creation",
+    "pseo_generation"
+  ],
+  "surface_readiness": {
+    "articles": "ready_for_reusable_rehearsal",
+    "research_reports": "needs_surface_mapping",
+    "content_pages": "needs_surface_mapping",
+    "support_articles": "needs_surface_mapping",
+    "interpretation_guides": "needs_surface_mapping",
+    "topics": "blocked_missing_universal_fields",
+    "personality_pages": "blocked_missing_universal_fields",
+    "career_guides": "needs_surface_mapping",
+    "career_jobs": "needs_surface_mapping",
+    "test_landing_detail_pages": "needs_contract_mapping",
+    "homepage_landing_surfaces": "needs_surface_mapping"
+  },
+  "sidecar_issues": [
+    "translation_group_uuid_missing_globally",
+    "translation_group_id_partial_transitional",
+    "surface_specific_field_mapping_required"
+  ],
+  "safety_flags": {
+    "docs_only": true,
+    "generated_json_only": true,
+    "focused_tests_only": true,
+    "runtime_service_added": false,
+    "migration_added": false,
+    "cms_content_mutation": false,
+    "article_published": false,
+    "production_write": false,
+    "production_migration_execution": false,
+    "sitemap_changed": false,
+    "llms_changed": false,
+    "observation_queue_write": false,
+    "search_channel_queue_enqueue": false,
+    "url_submission": false,
+    "crawler_log_read": false,
+    "scheduler_enabled": false,
+    "collector_write": false,
+    "metabase_exposure": false,
+    "fap_web_modified": false,
+    "pseo_generation": false
+  },
+  "final_decision": "content_publish_rehearsal_contract_ready",
+  "next_task": "CONTENT-OPS-02B"
+}

@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T14:08:12+08:00",
+  "updated_at": "2026-05-22T14:52:09+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -3561,7 +3561,7 @@
       "repo": "fap-web",
       "branch": "codex/riasec-personalization-06-frontend-fail-closed",
       "title": "feat(riasec): consume backend personalization state fail-closed",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "RIASEC-PERSONALIZATION-03",
         "RIASEC-PERSONALIZATION-04"
@@ -17877,6 +17877,257 @@
           "at": "2026-05-22T10:05:00+08:00",
           "status": "open",
           "summary": "Opened PR #1547 for the deploy.php nginx static route backup-placement fix after scoped local validation passed."
+        }
+      ]
+    },
+    "CONTENT-OPS-02A": {
+      "repo": "fap-api",
+      "branch": "codex/content-ops-02a-publish-rehearsal-contract",
+      "status": "pr_open",
+      "depends_on": [
+        "SEO-OBS-GOV-06"
+      ],
+      "commit_sha": "b1967c4e222c1688fb363157b8d77dcf99bfe0c0",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1562",
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_contract": "passed: php artisan test --filter=SeoIntelContentPublishRehearsalContract --no-ansi (7 tests, 114 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (418 tests, 6709 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi",
+          "pint_test": "passed: vendor/bin/pint --test",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/content-publish-rehearsal-contract.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "CONTENT-OPS-02B",
+      "history": [
+        {
+          "at": "2026-05-22T14:37:34+08:00",
+          "status": "pending",
+          "summary": "Registered content publish rehearsal contract PR after explicit user authorization to add CONTENT-OPS-CLAIM-LINK-RUNTIME-TRAIN-01 manifest/state entries. Scope is docs/generated/test only with no runtime writes."
+        },
+        {
+          "at": "2026-05-22T14:45:00+08:00",
+          "status": "in_progress",
+          "summary": "Started CONTENT-OPS-02A on codex/content-ops-02a-publish-rehearsal-contract. Scope is limited to the publish rehearsal contract doc, generated artifact, focused SeoIntel test, and train metadata alignment."
+        },
+        {
+          "at": "2026-05-22T14:50:34+08:00",
+          "status": "local_validation_passed",
+          "summary": "CONTENT-OPS-02A local validation passed for focused contract test, full SeoIntel filter, route list, Pint, JSON/YAML parsing, and diff whitespace checks. No runtime writes, migrations, CMS mutation, Search Channel enqueue, crawler log reads, or fap-web changes were introduced."
+        },
+        {
+          "at": "2026-05-22T14:51:20+08:00",
+          "status": "committed",
+          "summary": "Committed CONTENT-OPS-02A scoped contract changes at d226376a2f1bc12919d0871f6e5b5a7cb08ddc33."
+        },
+        {
+          "at": "2026-05-22T14:52:09+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1562 for CONTENT-OPS-02A and pushed branch codex/content-ops-02a-publish-rehearsal-contract."
+        }
+      ]
+    },
+    "CONTENT-OPS-02B": {
+      "repo": "fap-api",
+      "branch": "codex/content-ops-02b-publish-rehearsal-dry-run",
+      "status": "pending",
+      "depends_on": [
+        "CONTENT-OPS-02A"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "INTERNAL-LINK-01A",
+      "history": [
+        {
+          "at": "2026-05-22T14:37:34+08:00",
+          "status": "pending",
+          "summary": "Registered content publish rehearsal dry-run validator PR. Scope allows backend dry-run service/command/tests only; no CMS publish, seo_intel write, Search Channel mutation, scheduler, production operation, or fap-web change."
+        }
+      ]
+    },
+    "INTERNAL-LINK-01A": {
+      "repo": "fap-api",
+      "branch": "codex/internal-link-01a-semantic-graph-contract",
+      "status": "pending",
+      "depends_on": [
+        "CONTENT-OPS-02A"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "INTERNAL-LINK-01B",
+      "history": [
+        {
+          "at": "2026-05-22T14:37:34+08:00",
+          "status": "pending",
+          "summary": "Registered semantic internal link graph contract PR. Scope is backend contract docs/generated/test only and explicitly excludes link mutation and frontend fallback authority."
+        }
+      ]
+    },
+    "INTERNAL-LINK-01B": {
+      "repo": "fap-api",
+      "branch": "codex/internal-link-01b-graph-dry-run-read-model",
+      "status": "pending",
+      "depends_on": [
+        "INTERNAL-LINK-01A",
+        "CONTENT-OPS-02B"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "CLAIM-LINT-01A",
+      "history": [
+        {
+          "at": "2026-05-22T14:37:34+08:00",
+          "status": "pending",
+          "summary": "Registered internal link graph dry-run/read-model PR. Scope allows read-only backend service/command/tests only; no CMS link writes, sitemap/crawler/search authority, or fap-web change."
+        }
+      ]
+    },
+    "CLAIM-LINT-01A": {
+      "repo": "fap-api",
+      "branch": "codex/claim-lint-01a-chinese-runtime-contract",
+      "status": "pending",
+      "depends_on": [
+        "CONTENT-OPS-02A"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "CLAIM-LINT-01B",
+      "history": [
+        {
+          "at": "2026-05-22T14:37:34+08:00",
+          "status": "pending",
+          "summary": "Registered Chinese claim linter runtime contract PR. Scope is docs/generated/test only and expands safe/needs_review/blocked plus P0-P3 severity mapping without runtime enforcement."
+        }
+      ]
+    },
+    "CLAIM-LINT-01B": {
+      "repo": "fap-api",
+      "branch": "codex/claim-lint-01b-chinese-runtime-ci",
+      "status": "pending",
+      "depends_on": [
+        "CLAIM-LINT-01A",
+        "CONTENT-OPS-02B"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "CONTENT-OPS-CLAIM-LINK-OPS-READINESS",
+      "history": [
+        {
+          "at": "2026-05-22T14:37:34+08:00",
+          "status": "pending",
+          "summary": "Registered Chinese claim linter runtime/CI PR. Scope allows backend linter service/command/tests only and forbids auto-rewrite, auto-publish, production scans, seo_intel writes, and fap-web changes."
+        }
+      ]
+    },
+    "CONTENT-OPS-CLAIM-LINK-OPS-READINESS": {
+      "repo": "fap-api",
+      "branch": "codex/content-ops-claim-link-ops-readiness",
+      "status": "pending",
+      "depends_on": [
+        "CONTENT-OPS-02B",
+        "INTERNAL-LINK-01B",
+        "CLAIM-LINT-01B"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "CONTENT-OPS-CLAIM-LINK-CLOSEOUT",
+      "history": [
+        {
+          "at": "2026-05-22T14:37:34+08:00",
+          "status": "pending",
+          "summary": "Registered /ops/seo display readiness PR for content publish rehearsal, internal link graph, and claim lint summaries. Scope is read-only readiness docs/generated/test only."
+        }
+      ]
+    },
+    "CONTENT-OPS-CLAIM-LINK-CLOSEOUT": {
+      "repo": "fap-api",
+      "branch": "codex/content-ops-claim-link-closeout",
+      "status": "pending",
+      "depends_on": [
+        "CONTENT-OPS-CLAIM-LINK-OPS-READINESS"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": null,
+      "history": [
+        {
+          "at": "2026-05-22T14:37:34+08:00",
+          "status": "pending",
+          "summary": "Registered closeout/ledger finalization PR for the content ops claim/link runtime train. Scope is closeout docs/generated/test/state only with no runtime, migration, production, CMS, Search Channel, crawler, scheduler, or fap-web changes."
         }
       ]
     }
