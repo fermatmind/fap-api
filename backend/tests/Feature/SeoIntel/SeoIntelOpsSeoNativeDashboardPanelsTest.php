@@ -17,6 +17,7 @@ final class SeoIntelOpsSeoNativeDashboardPanelsTest extends TestCase
         foreach ([
             'issue queue detail panel',
             'search channel queue detail panel',
+            'crawler observation overview',
             'canonical path',
             'locale',
             'page_entity_type',
@@ -37,6 +38,14 @@ final class SeoIntelOpsSeoNativeDashboardPanelsTest extends TestCase
             'claim_boundary_state',
             'private_flow',
             'event_type summary',
+            'bot_family',
+            'surface_family',
+            'route_family',
+            'http_status',
+            'query_risk_state',
+            'private_path_blocked',
+            'hit_count',
+            'last_seen_at',
         ] as $required) {
             $this->assertStringContainsString($required, $view);
         }
@@ -46,6 +55,10 @@ final class SeoIntelOpsSeoNativeDashboardPanelsTest extends TestCase
             'attributes_json',
             'event_payload',
             'reason_codes',
+            'path_hash',
+            'idempotency_key',
+            'raw_user_agent',
+            'raw_request_uri',
             '<iframe',
             '<x-filament::button',
             '<button',
