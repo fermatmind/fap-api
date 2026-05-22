@@ -537,6 +537,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_crawler_log_production_canary_runtime_files(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogProductionCanaryDryRun.php',
+            'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogSingleSourceReader.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_issue_queue_foundation_files(): void
     {
         $changed = [
@@ -2418,6 +2428,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/SeoIntelCrawlerLogObserveCommand.php',
             'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogAggregateDryRun.php',
+            'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogProductionCanaryDryRun.php',
+            'backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogSingleSourceReader.php',
         ], true);
     }
 
