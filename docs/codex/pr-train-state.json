@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T08:12:00+08:00",
+  "updated_at": "2026-05-22T08:20:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -12995,7 +12995,7 @@
       "depends_on": [
         "CRAWLER-LOG-02"
       ],
-      "commit_sha": null,
+      "commit_sha": "f7a2f41b",
       "pr_url": null,
       "checks": {
         "dependency": {
@@ -13080,6 +13080,11 @@
           "at": "2026-05-22T08:12:00+08:00",
           "status": "local_validation_passed",
           "summary": "Added fixture-only aggregate dry-run service, crawler-log observe command, focused tests, docs/generated artifact, and PR train metadata. Focused aggregate test, full SeoIntel suite, fixture command dry-run, route list, Pint, BigFive runtime freeze guard, JSON/YAML validation, state JSON validation, and diff checks passed. No production log read, scheduler, collector write, migration, deployment, env edit, external API call, URL submission, Metabase exposure, or production operation performed."
+        },
+        {
+          "at": "2026-05-22T08:20:00+08:00",
+          "status": "committed",
+          "summary": "Committed scoped aggregate dry-run/no-write implementation at f7a2f41b."
         }
       ]
     }
