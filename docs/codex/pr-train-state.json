@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T14:51:20+08:00",
+  "updated_at": "2026-05-22T14:52:09+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17883,12 +17883,12 @@
     "CONTENT-OPS-02A": {
       "repo": "fap-api",
       "branch": "codex/content-ops-02a-publish-rehearsal-contract",
-      "status": "committed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-OBS-GOV-06"
       ],
-      "commit_sha": "d226376a2f1bc12919d0871f6e5b5a7cb08ddc33",
-      "pr_url": null,
+      "commit_sha": "b1967c4e222c1688fb363157b8d77dcf99bfe0c0",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1562",
       "checks": {
         "local": {
           "php_artisan_test_filter_contract": "passed: php artisan test --filter=SeoIntelContentPublishRehearsalContract --no-ansi (7 tests, 114 assertions)",
@@ -17930,6 +17930,11 @@
           "at": "2026-05-22T14:51:20+08:00",
           "status": "committed",
           "summary": "Committed CONTENT-OPS-02A scoped contract changes at d226376a2f1bc12919d0871f6e5b5a7cb08ddc33."
+        },
+        {
+          "at": "2026-05-22T14:52:09+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1562 for CONTENT-OPS-02A and pushed branch codex/content-ops-02a-publish-rehearsal-contract."
         }
       ]
     },
