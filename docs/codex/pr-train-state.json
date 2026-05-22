@@ -6578,8 +6578,8 @@
         "do not weaken final live acceptance",
         "do not weaken software-developers or CN proxy rollout rejection"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "fdf8f1726762550284262a44734fbecc9c0d42a7",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1548",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -13346,6 +13346,11 @@
           "at": "2026-05-22T10:25:00+08:00",
           "status": "local_validation_passed",
           "summary": "Local validation passed for the sanitized production canary report artifact and contract test. No production log read, canary execution, deploy, scheduler activation, write path, external search API call, or search submission was performed."
+        },
+        {
+          "at": "2026-05-22T10:30:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1548 for CRAWLER-LOG-05 with commit fdf8f1726762550284262a44734fbecc9c0d42a7. Scope remains report/generated/test/metadata only."
         }
       ]
     }
