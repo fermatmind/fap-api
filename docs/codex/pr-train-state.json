@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T15:16:49+08:00",
+  "updated_at": "2026-05-22T15:30:05+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17952,11 +17952,11 @@
     "CONTENT-OPS-02B": {
       "repo": "fap-api",
       "branch": "codex/content-ops-02b-publish-rehearsal-dry-run",
-      "status": "ci_fix_local_validation_passed",
+      "status": "merged",
       "depends_on": [
         "CONTENT-OPS-02A"
       ],
-      "commit_sha": "cbee441980261cd7c1d36fc41f640b5cd13d81a1",
+      "commit_sha": "af584594a658492572b8e1216c619b6373db2149",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1563",
       "checks": {
         "local": {
@@ -17978,13 +17978,17 @@
           "git_diff_check_after_fix": "passed: git diff --check"
         },
         "github": {
-          "pr_1563_initial": "failed: verify-mbti-legacy and verify-mbti-v2 failed because BigFiveResultPageV2CoreBodyPreview runtime freeze flagged new SeoIntel dry-run command/service paths."
+          "pr_1563_initial": "failed: verify-mbti-legacy and verify-mbti-v2 failed because BigFiveResultPageV2CoreBodyPreview runtime freeze flagged new SeoIntel dry-run command/service paths.",
+          "pr_1563_after_fix": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN"
+        },
+        "post_merge": {
+          "focused_dry_run_test": "passed: php artisan test --filter=SeoIntelContentPublishRehearsalDryRun --no-ansi"
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T07:23:10Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -18015,19 +18019,35 @@
           "at": "2026-05-22T15:16:49+08:00",
           "status": "ci_fix_local_validation_passed",
           "summary": "GitHub CI initially failed on Big Five runtime freeze because CONTENT-OPS-02B intentionally added SeoIntel dry-run runtime files. Added a focused freeze classifier allowlist test for the content publish rehearsal command/service and updated manifest allowed paths. Focused dry-run, BigFive freeze, full SeoIntel, route list, Pint, JSON/YAML, and diff checks passed locally after the fix."
+        },
+        {
+          "at": "2026-05-22T15:25:13+08:00",
+          "status": "merged",
+          "summary": "PR #1563 merged via squash at af584594a658492572b8e1216c619b6373db2149 after CI freeze guard fix. Remote branch was deleted, local main synced, and post-merge dry-run test passed."
         }
       ]
     },
     "INTERNAL-LINK-01A": {
       "repo": "fap-api",
-      "branch": "codex/internal-link-01a-semantic-graph-contract",
-      "status": "pending",
+      "branch": "codex/internal-link-01a-semantic-link-graph-contract",
+      "status": "committed",
       "depends_on": [
         "CONTENT-OPS-02A"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_contract": "passed: php artisan test --filter=SeoIntelSemanticInternalLinkGraphContract --no-ansi (5 tests, 85 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (429 tests, 6871 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_test": "passed: vendor/bin/pint --test (3472 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/semantic-internal-link-graph-contract.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -18042,6 +18062,21 @@
           "at": "2026-05-22T14:37:34+08:00",
           "status": "pending",
           "summary": "Registered semantic internal link graph contract PR. Scope is backend contract docs/generated/test only and explicitly excludes link mutation and frontend fallback authority."
+        },
+        {
+          "at": "2026-05-22T15:25:13+08:00",
+          "status": "in_progress",
+          "summary": "Started INTERNAL-LINK-01A on codex/internal-link-01a-semantic-link-graph-contract. Scope is docs/generated/test only plus train metadata; no link mutation, CMS mutation, fap-web change, or migration."
+        },
+        {
+          "at": "2026-05-22T15:28:57+08:00",
+          "status": "local_validation_passed",
+          "summary": "INTERNAL-LINK-01A local validation passed for focused semantic internal link graph contract test, full SeoIntel filter, route list, Pint, JSON/YAML parsing, and diff whitespace checks. Scope remains docs/generated/test plus train metadata with no link mutation, CMS mutation, fap-web change, migration, crawler-derived authority, Search Channel enqueue, or observation write."
+        },
+        {
+          "at": "2026-05-22T15:30:05+08:00",
+          "status": "committed",
+          "summary": "Committed INTERNAL-LINK-01A scoped contract changes. PR head SHA will be recorded after push/PR open; final merge SHA will be recorded after squash merge."
         }
       ]
     },

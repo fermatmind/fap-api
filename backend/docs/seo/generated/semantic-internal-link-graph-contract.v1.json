@@ -1,0 +1,91 @@
+{
+  "version": "semantic-internal-link-graph-contract.v1",
+  "task": "INTERNAL-LINK-01A",
+  "purpose": "semantic_internal_link_graph_contract",
+  "mode": "contract_only_no_link_mutation",
+  "authority_model": {
+    "backend_cms_entity_graph": "internal_link_truth",
+    "fap_web": "deterministic_renderer_observation_only",
+    "sitemap": "observation_signal_only",
+    "llms": "observation_signal_only",
+    "crawler_logs": "observation_signal_only",
+    "gsc_ga4_referral": "opportunity_signal_only_no_auto_link"
+  },
+  "entity_key_rule": {
+    "preferred": "translation_group_uuid",
+    "transitional": "translation_group_id_where_already_supported",
+    "missing": "legacy_unpaired",
+    "migration_helper_only": "title_slug_similarity"
+  },
+  "required_link_families": [
+    "article_to_test",
+    "article_to_topic",
+    "article_to_research",
+    "article_to_related_article",
+    "topic_to_test",
+    "topic_to_article",
+    "topic_to_personality_entity",
+    "research_to_topic_test_article",
+    "test_to_article_topic_research",
+    "career_guide_to_test_topic_article",
+    "career_job_to_career_guide_test_topic",
+    "personality_page_to_test_topic_article"
+  ],
+  "future_graph_fields": [
+    "source_entity_type",
+    "source_entity_key",
+    "target_entity_type",
+    "target_entity_key",
+    "link_role",
+    "locale",
+    "authority_source",
+    "visibility_state",
+    "safety_state",
+    "created_by_system",
+    "review_state"
+  ],
+  "states": [
+    "safe",
+    "needs_review",
+    "blocked"
+  ],
+  "forbidden_authority_sources": [
+    "frontend_fallback",
+    "static_sitemap",
+    "static_llms",
+    "crawler_logs",
+    "search_engine_responses",
+    "local_copies"
+  ],
+  "forbidden_behaviors": [
+    "runtime_link_write",
+    "cms_mutation",
+    "fap_web_modification",
+    "migration_creation",
+    "crawler_derived_link_authority",
+    "sitemap_derived_graph_truth",
+    "llms_derived_graph_truth",
+    "frontend_fallback_as_graph_authority",
+    "gsc_ga4_referral_auto_link_creation",
+    "title_slug_similarity_as_permanent_key",
+    "search_channel_enqueue",
+    "url_submission",
+    "observation_queue_write",
+    "pseo_generation"
+  ],
+  "safety_flags": {
+    "docs_only": true,
+    "generated_json_only": true,
+    "focused_tests_only": true,
+    "runtime_link_writer_added": false,
+    "cms_content_mutation": false,
+    "fap_web_modified": false,
+    "migration_added": false,
+    "crawler_authority_added": false,
+    "search_submission_added": false,
+    "observation_queue_write_added": false,
+    "pseo_generation": false
+  },
+  "final_decision": "semantic_internal_link_graph_contract_ready",
+  "next_task": "INTERNAL-LINK-01B"
+}
