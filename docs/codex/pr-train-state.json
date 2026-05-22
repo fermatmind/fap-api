@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T16:39:09+08:00",
+  "updated_at": "2026-05-22T16:40:28+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -8344,7 +8344,7 @@
       "depends_on": [
         "REPAIR-CN-PROXY-NOINDEX-PUBLIC-OWNER-SURFACE-1"
       ],
-      "status": "in_progress",
+      "status": "pr_open",
       "train_scope": "career_directory_detail_pending_authority",
       "risk_level": "medium",
       "title": "fix(api): promote display-backed directory draft jobs in list authority",
@@ -16779,8 +16779,8 @@
       "depends_on": [
         "BACKEND-DEPLOY-TARGET-ALIYUN-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "a3ea1aceec6961bb511965c1d7667134702b2891",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1569",
       "checks": {
         "aliyun_tls": {
           "status": "pass",
@@ -18417,6 +18417,11 @@
           "at": "2026-05-22T16:39:09+08:00",
           "status": "local_validation_passed",
           "summary": "CONTENT-OPS-CLAIM-LINK-CLOSEOUT local validation passed for focused closeout test, full SeoIntel filter, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Scope remains closeout docs/generated/test/state only; no runtime code, migrations, production operations, CMS mutation, Search Channel mutation, crawler log read, scheduler activation, Metabase exposure, or fap-web change."
+        },
+        {
+          "at": "2026-05-22T16:40:28+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1569 for CONTENT-OPS-CLAIM-LINK-CLOSEOUT and pushed branch codex/content-ops-claim-link-closeout."
         }
       ]
     }
