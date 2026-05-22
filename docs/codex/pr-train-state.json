@@ -6974,8 +6974,8 @@
         "do not enable software-developers public route, indexability, sitemap, llms, or llms-full exposure",
         "do not weaken final live acceptance"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "e7d401e611c58f982eb971f120e7fc778551f116",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1550",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -13506,6 +13506,11 @@
           "at": "2026-05-22T11:15:00+08:00",
           "status": "local_validation_passed",
           "summary": "Local validation passed for the aggregate storage contract artifact and contract test. No production log read, canary execution, deploy, migration, scheduler activation, write path, external search API call, or search submission was performed."
+        },
+        {
+          "at": "2026-05-22T11:18:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1550 for CRAWLER-LOG-07 with commit e7d401e611c58f982eb971f120e7fc778551f116. Scope remains docs/generated/test/metadata only."
         }
       ]
     }
