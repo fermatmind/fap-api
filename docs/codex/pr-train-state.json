@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T18:20:00+08:00",
+  "updated_at": "2026-05-22T18:21:30+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18711,12 +18711,12 @@
     "SEO-OPS-SOP-01E": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-sop-01e-mbti-growth-handoff",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-OPS-SOP-01D"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "df4716a444e3130a31df5e37eb202d904c461b4a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1575",
       "checks": {
         "local": {
           "php_artisan_test_filter_mbti_handoff": "passed: php artisan test --filter=SeoIntelSeoOpsMbtiGrowthLoopHandoff --no-ansi (8 tests, 79 assertions)",
@@ -18753,6 +18753,11 @@
           "at": "2026-05-22T18:20:00+08:00",
           "status": "local_validation_passed",
           "summary": "SEO-OPS-SOP-01E local validation passed for focused MBTI handoff test, full SeoIntel filter, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Scope remains docs/generated/test plus train metadata only."
+        },
+        {
+          "at": "2026-05-22T18:21:30+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1575 for SEO-OPS-SOP-01E and pushed branch codex/seo-ops-sop-01e-mbti-growth-handoff."
         }
       ]
     },
