@@ -809,26 +809,60 @@ function hasStaticLocation(string $content): bool
     return preg_match('/^\\s*location\\s+(?:\\^~|=|~\\*?|~)?\\s*\\/static(?:\\/|\\s|\\{)/m', $content) === 1;
 }
 
-function readableIncludeHasStaticLocation(string $content): bool
+function nginxIncludePaths(string $content): array
 {
     $includeCount = preg_match_all('/^\\s*include\\s+([^;]+);\\s*$/m', $content, $matches);
 
     if ($includeCount === false || $includeCount < 1) {
-        return false;
+        return [];
     }
+
+    $paths = [];
 
     foreach ($matches[1] as $includePath) {
         $includePath = trim((string) $includePath, " \t\n\r\0\x0B'\"");
 
-        if ($includePath === '' || $includePath[0] !== '/' || strpbrk($includePath, '*?[') !== false) {
+        if ($includePath === '' || $includePath[0] !== '/') {
             continue;
         }
 
+        if (strpbrk($includePath, '*?[') !== false) {
+            $expanded = glob($includePath, GLOB_NOSORT);
+
+            foreach (is_array($expanded) ? $expanded : [] as $path) {
+                if (is_string($path) && $path !== '') {
+                    $paths[] = $path;
+                }
+            }
+
+            continue;
+        }
+
+        $paths[] = $includePath;
+    }
+
+    return array_values(array_unique($paths));
+}
+
+function readableIncludeHasStaticLocation(string $content, array $seen = []): bool
+{
+    foreach (nginxIncludePaths($content) as $includePath) {
+        $realPath = realpath($includePath) ?: $includePath;
+
+        if (isset($seen[$realPath])) {
+            continue;
+        }
+
+        $seen[$realPath] = true;
         $included = shell_exec('sudo -n /usr/bin/cat ' . escapeshellarg($includePath));
 
         if (is_string($included) && hasStaticLocation($included)) {
             fwrite(STDERR, "existing /static/ location found in included nginx file: {$includePath}; skipping managed static snippet\n");
 
+            return true;
+        }
+
+        if (is_string($included) && readableIncludeHasStaticLocation($included, $seen)) {
             return true;
         }
     }
