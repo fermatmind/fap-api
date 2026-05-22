@@ -6185,6 +6185,58 @@ prs:
     human_review_required: true
     next_task: CRAWLER-LOG-08
 
+  - id: CRAWLER-LOG-08
+    repo: fap-api
+    depends_on:
+      - CRAWLER-LOG-07
+    branch: codex/crawler-log-08-aggregate-storage-gate
+    base: main
+    title: "feat(seo-intel): add crawler log aggregate storage gate"
+    name: "Crawler log aggregate storage migration and no-write writer gate"
+    train_scope: seo_intel_crawler_log_aggregate_storage_gate
+    risk_level: medium_schema_no_production_migration_no_default_write
+    type: migration/service/docs/test PR
+    scope:
+      - Add a seo_intel migration for the scoped CRAWLER-LOG V1 aggregate table.
+      - Add a writer gate service that is dry-run/no-write by default and requires SEO_INTEL_CRAWLER_LOG_AGGREGATE_WRITE_ENABLED=true before writes.
+      - Prove writes target only the aggregate table, preserve idempotency, and do not persist raw crawler-log fields.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/database/migrations/seo_intel/2026_05_22_111800_create_seo_crawler_log_daily_aggregates_table.php
+      - backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogAggregateStorageWriter.php
+      - backend/docs/seo/crawler-log-aggregate-storage-gate.md
+      - backend/docs/seo/generated/crawler-log-aggregate-storage-gate.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogAggregateStorageGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run production migration, read production crawler logs, run another canary, add scheduler, run collector writes, deploy, edit env, expose Metabase, call external search APIs, submit URLs, or access business DB / Tencent RDS / Node2.
+      - Add a command that reads production logs, add scheduler activation, write issue queue rows, mutate URL Truth, enqueue Search Channel Queue rows, or enable persistent write config by default.
+      - Store raw IP, raw user-agent, raw request URI, query strings, cookies, headers, tokens, emails, order IDs, attempt IDs, payment IDs, provider payloads, raw log lines, event_payload, metadata_json, or attributes_json.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelCrawlerLogAggregateStorageGate
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && php artisan migrate --pretend --database=seo_intel --path=database/migrations/seo_intel --no-ansi
+      - python3 -m json.tool backend/docs/seo/generated/crawler-log-aggregate-storage-gate.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    production_log_read_execution: false
+    production_migration_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    next_task: CRAWLER-LOG-09
+
   - id: CLAIM-LINT-00
     repo: fap-api
     depends_on:

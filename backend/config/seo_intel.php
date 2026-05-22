@@ -363,6 +363,15 @@ return [
     'chinese_crawler_logs_enabled' => env('SEO_INTEL_CHINESE_CRAWLER_LOGS_ENABLED', false),
     'chinese_crawler_live_log_read_enabled' => false,
     'crawler_log_source' => env('SEO_INTEL_CRAWLER_LOG_SOURCE', null),
+    'crawler_log_aggregate_storage' => [
+        'target_table' => 'seo_crawler_log_daily_aggregates',
+        'write_enabled' => env('SEO_INTEL_CRAWLER_LOG_AGGREGATE_WRITE_ENABLED', false),
+        'write_gate_env' => 'SEO_INTEL_CRAWLER_LOG_AGGREGATE_WRITE_ENABLED',
+        'dry_run_required_before_write' => true,
+        'raw_persistence_allowed' => false,
+        'production_log_read_allowed' => false,
+        'scheduler_enabled' => false,
+    ],
     'chinese_crawler_log_foundation' => [
         'source_engine_mapping' => [
             'googlebot' => 'google',
