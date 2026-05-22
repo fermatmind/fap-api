@@ -1,0 +1,64 @@
+{
+  "version": "seo-growth-mbti-02-content-internal-link-wave1-plan.v1",
+  "task": "SEO-GROWTH-MBTI-02",
+  "train": "SEO-GROWTH-MBTI-PR-TRAIN-01",
+  "type": "docs_generated_test_only",
+  "candidate_wave1_assets": [
+    "mbti_test_page",
+    "mbti_research_report",
+    "mbti_topic_hub_deferred_until_backend_topic_authority_explicit",
+    "two_to_three_mbti_explanatory_articles_only_if_backend_cms_rows_exist",
+    "selected_personality_type_pages_only_after_entity_authority_confirmed"
+  ],
+  "internal_link_families": [
+    "article_to_test",
+    "article_to_topic",
+    "article_to_research",
+    "article_to_related_article",
+    "topic_to_test",
+    "topic_to_article",
+    "topic_to_personality_entity",
+    "research_to_topic_test_article",
+    "test_to_article_topic_research",
+    "personality_page_to_test_topic_article"
+  ],
+  "authority_rules": [
+    "backend_cms_entity_graph_owns_link_truth",
+    "fap_web_static_links_observation_only",
+    "sitemap_derived_links_observation_only",
+    "crawler_logs_cannot_create_links",
+    "gsc_ga4_referral_suggest_only_cannot_create_links",
+    "title_slug_similarity_migration_helper_only",
+    "entity_key_preferred",
+    "translation_group_uuid_preferred_when_available"
+  ],
+  "dry_run_outputs": [
+    "source_inventory",
+    "link_family_counts",
+    "missing_entity_key_count",
+    "legacy_unpaired_count",
+    "candidate_opportunity_count",
+    "unsafe_fallback_source_count",
+    "warnings"
+  ],
+  "forbidden_actions": [
+    "cms_writes",
+    "link_creation",
+    "article_publish",
+    "fap_web_changes",
+    "crawler_derived_authority",
+    "search_response_authority",
+    "frontend_fallback_authority",
+    "pseo",
+    "auto_link_creation"
+  ],
+  "safety_flags": {
+    "cms_mutated": false,
+    "links_created": false,
+    "articles_published": false,
+    "fap_web_modified": false,
+    "crawler_authority_used": false,
+    "auto_links_created": false
+  },
+  "next_task": "SEO-GROWTH-MBTI-03A"
+}
