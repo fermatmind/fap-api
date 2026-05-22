@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T22:11:00+08:00",
+  "updated_at": "2026-05-22T22:12:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -14857,12 +14857,12 @@
     "SEO-GROWTH-MBTI-06": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-06-growth-review",
-      "status": "in_progress",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-05"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "7e7abbd9",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1587",
       "checks": {
         "local": {
           "focused_growth_review_plan_test": "passed: php artisan test --filter=SeoIntelGrowthMbti06GrowthReviewPlan --no-ansi (7 tests, 107 assertions)",
@@ -14901,6 +14901,11 @@
           "at": "2026-05-22T22:11:00+08:00",
           "status": "local_checks_passed",
           "summary": "Local validation passed for SEO-GROWTH-MBTI-06: focused growth review plan test, full SeoIntel suite, route list, Pint, JSON/YAML parsing, and diff checks."
+        },
+        {
+          "at": "2026-05-22T22:12:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1587 for SEO-GROWTH-MBTI-06 and pushed branch codex/seo-growth-mbti-06-growth-review."
         }
       ]
     },
