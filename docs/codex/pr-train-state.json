@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T12:17:12+08:00",
+  "updated_at": "2026-05-22T13:09:27+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -13776,13 +13776,13 @@
     "CRAWLER-LOG-11": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-11-scheduler-readiness-scan",
-      "status": "in_progress",
-      "state": "in_progress",
+      "status": "merged",
+      "state": "merged",
       "title": "Crawler log scheduler readiness scan",
       "depends_on": [
         "CRAWLER-LOG-10"
       ],
-      "commit_sha": "fdbfd8533052640af9c4f0dfe460a7e7be9ec9f3",
+      "commit_sha": "4790c1aca7f5ca8e233e54995d9b9220e8242d72",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1554",
       "checks": {
         "dependency": {
@@ -13806,12 +13806,20 @@
             "git diff --check",
             "git diff --cached --check"
           ]
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "GitHub PR #1554 is MERGED and required checks succeeded: hygiene, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, and semgrep sarif."
+        },
+        "reconciliation": {
+          "status": "pass",
+          "evidence": "PR #1554 merge commit 4790c1aca7f5ca8e233e54995d9b9220e8242d72 is origin/main; local and remote crawler-log-11 branches are absent."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T04:25:41Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "production_log_read_execution": false,
       "production_migration_execution": false,
@@ -13843,8 +13851,254 @@
           "at": "2026-05-22T12:17:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1554 for CRAWLER-LOG-11 with commit fdbfd8533052640af9c4f0dfe460a7e7be9ec9f3. Scope remains scheduler readiness scan only with no scheduler activation, production log read, writes, deployment, or search submission."
+        },
+        {
+          "at": "2026-05-22T13:07:24+08:00",
+          "status": "reconciled_merged",
+          "summary": "Reconciled stale CRAWLER-LOG-11 ledger during SEO-OBS-GOV-01. GitHub PR #1554 is merged, origin/main contains the merge commit, and no crawler-log-11 task branch remains locally or remotely."
         }
       ]
+    },
+    "SEO-OBS-GOV-01": {
+      "repo": "fap-api",
+      "branch": "codex/seo-obs-gov-01-observation-governance-contract-v2",
+      "status": "local_validation_passed",
+      "state": "local_validation_passed",
+      "title": "docs(seo-intel): add observation governance architecture contract",
+      "depends_on": [],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=SeoIntelObservationGovernanceArchitectureContract --no-ansi",
+            "cd backend && php artisan test --filter=SeoIntel --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "python3 -m json.tool backend/docs/seo/generated/observation-governance-architecture-contract.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
+            "git diff --check"
+          ],
+          "evidence": "All PR1 required local validations passed. SeoIntel suite passed 377 tests / 5978 assertions; Pint passed 3462 files; route:list returned 203 routes."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to PR1 docs/generated/test and PR train metadata. No migrations, runtime services, scheduler, production env, fap-web, CMS content, Search Channel submitters, crawler log readers, production writes, or external search calls were added."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_log_read_execution": false,
+      "production_migration_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": false,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "next_pr": "SEO-OBS-GOV-02",
+      "history": [
+        {
+          "at": "2026-05-22T13:07:24+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-OBS-GOV-01 from origin/main. Scope is docs/generated/test contract plus PR train ledger reconciliation only; no migrations, runtime services, production operations, writes, search submission, scheduler, crawler-log read, CMS mutation, Metabase exposure, or fap-web change."
+        },
+        {
+          "at": "2026-05-22T13:09:27+08:00",
+          "status": "local_validation_passed",
+          "summary": "Added observation governance architecture contract docs, generated artifact, focused test, train metadata, and CRAWLER-LOG-11 ledger reconciliation. All required PR1 local checks passed."
+        }
+      ],
+      "sidecar_issues": [
+        {
+          "title": "Unrelated local deploy branch preserved outside PR1",
+          "repo": "fap-api",
+          "evidence": "Local branch codex/seo-obs-gov-01-observation-governance-contract contains existing deploy.php / SRE test changes and was not used for this PR. PR1 uses codex/seo-obs-gov-01-observation-governance-contract-v2 from origin/main.",
+          "why_external_to_current_pr": "deploy.php and backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php are outside the allowed SEO-OBS-GOV-01 scope.",
+          "follow_up_recommendation": "Handle or delete the unrelated deploy branch separately after owner review."
+        }
+      ]
+    },
+    "SEO-OBS-GOV-02": {
+      "repo": "fap-api",
+      "branch": "codex/seo-obs-gov-02-observation-queue-schema-contract",
+      "status": "pending",
+      "state": "pending",
+      "title": "docs(seo-intel): add observation queue schema contract",
+      "depends_on": [
+        "SEO-OBS-GOV-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_log_read_execution": false,
+      "production_migration_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": false,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "next_pr": "SEO-OBS-GOV-03",
+      "history": []
+    },
+    "SEO-OBS-GOV-03": {
+      "repo": "fap-api",
+      "branch": "codex/seo-obs-gov-03-issue-severity-governance-contract",
+      "status": "pending",
+      "state": "pending",
+      "title": "docs(seo-intel): add issue severity governance contract",
+      "depends_on": [
+        "SEO-OBS-GOV-02"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_log_read_execution": false,
+      "production_migration_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": false,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "next_pr": "SEO-OBS-GOV-04",
+      "history": []
+    },
+    "SEO-OBS-GOV-04": {
+      "repo": "fap-api",
+      "branch": "codex/seo-obs-gov-04-entity-key-translation-group-contract",
+      "status": "pending",
+      "state": "pending",
+      "title": "docs(seo-intel): add entity key translation group contract",
+      "depends_on": [
+        "SEO-OBS-GOV-03"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_log_read_execution": false,
+      "production_migration_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": false,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "next_pr": "SEO-OBS-GOV-05",
+      "history": []
+    },
+    "SEO-OBS-GOV-05": {
+      "repo": "fap-api",
+      "branch": "codex/seo-obs-gov-05-ops-seo-display-readiness",
+      "status": "pending",
+      "state": "pending",
+      "title": "docs(seo-intel): add ops seo observation display readiness",
+      "depends_on": [
+        "SEO-OBS-GOV-04"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_log_read_execution": false,
+      "production_migration_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": false,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "next_pr": "SEO-OBS-GOV-06",
+      "history": []
+    },
+    "SEO-OBS-GOV-06": {
+      "repo": "fap-api",
+      "branch": "codex/seo-obs-gov-06-governance-closeout",
+      "status": "pending",
+      "state": "pending",
+      "title": "docs(seo-intel): close observation governance contract train",
+      "depends_on": [
+        "SEO-OBS-GOV-05"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_log_read_execution": false,
+      "production_migration_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": false,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "next_pr": "CONTENT-OPS-CLAIM-LINK-RUNTIME-TRAIN-01",
+      "history": []
     }
   },
   "SEO-DASH-PROD-03D-FIX": {

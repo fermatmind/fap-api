@@ -9089,3 +9089,243 @@ prs:
     external_api_credentials_required: false
     scheduler_activation: false
     next_task: CRAWLER-LOG-OBSERVABILITY-TRAIN-01
+
+  - id: SEO-OBS-GOV-01
+    repo: fap-api
+    branch: codex/seo-obs-gov-01-observation-governance-contract-v2
+    base: main
+    title: "docs(seo-intel): add observation governance architecture contract"
+    name: "Observation governance architecture contract"
+    train_scope: seo_observation_governance_contracts
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define observation governance authority, event sources, event types, states, and forbidden behavior.
+      - Reconcile stale CRAWLER-LOG-11 ledger state if GitHub shows it merged.
+      - Register the SEO-OBS-GOV contract train for sequential execution.
+    allowed_paths:
+      - backend/docs/seo/observation-governance-architecture-contract.md
+      - backend/docs/seo/generated/observation-governance-architecture-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelObservationGovernanceArchitectureContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add migrations, runtime services, scheduler activation, production env changes, fap-web changes, CMS content changes, Search Channel submitters, or crawler log readers.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelObservationGovernanceArchitectureContract --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/observation-governance-architecture-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-OBS-GOV-02
+
+  - id: SEO-OBS-GOV-02
+    repo: fap-api
+    depends_on:
+      - SEO-OBS-GOV-01
+    branch: codex/seo-obs-gov-02-observation-queue-schema-contract
+    base: main
+    title: "docs(seo-intel): add observation queue schema contract"
+    name: "Observation queue schema contract"
+    train_scope: seo_observation_governance_contracts
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define future seo_observation_queue table shape and constraints without adding a migration.
+    allowed_paths:
+      - backend/docs/seo/observation-queue-schema-contract.md
+      - backend/docs/seo/generated/observation-queue-schema-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelObservationQueueSchemaContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add real migration files, writer services, scheduler activation, production env changes, or fap-web changes.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelObservationQueueSchemaContract --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/observation-queue-schema-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-OBS-GOV-03
+
+  - id: SEO-OBS-GOV-03
+    repo: fap-api
+    depends_on:
+      - SEO-OBS-GOV-02
+    branch: codex/seo-obs-gov-03-issue-severity-governance-contract
+    base: main
+    title: "docs(seo-intel): add issue severity governance contract"
+    name: "Issue severity dedupe mute SLA contract"
+    train_scope: seo_observation_governance_contracts
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define severity mapping, dedupe, mute, SLA, owner, reopen, and occurrence tracking for seo_issue_queue.
+    allowed_paths:
+      - backend/docs/seo/issue-severity-dedupe-mute-sla-contract.md
+      - backend/docs/seo/generated/issue-severity-dedupe-mute-sla-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelIssueSeverityGovernanceContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add migrations, issue mutation code, auto-fix code, CMS publish code, Search Channel mutation, scheduler activation, production env changes, or fap-web changes.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelIssueSeverityGovernanceContract --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/issue-severity-dedupe-mute-sla-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-OBS-GOV-04
+
+  - id: SEO-OBS-GOV-04
+    repo: fap-api
+    depends_on:
+      - SEO-OBS-GOV-03
+    branch: codex/seo-obs-gov-04-entity-key-translation-group-contract
+    base: main
+    title: "docs(seo-intel): add entity key translation group contract"
+    name: "Entity key translation group contract"
+    train_scope: seo_observation_governance_contracts
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define stable entity_key and translation_group_uuid rules for locale pairing and observation.
+    allowed_paths:
+      - backend/docs/seo/entity-key-translation-group-contract.md
+      - backend/docs/seo/generated/entity-key-translation-group-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelEntityKeyTranslationGroupContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate CMS content, execute backfills, add real migrations, modify fap-web, use frontend fallback authority, or use title/slug similarity as a permanent key.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelEntityKeyTranslationGroupContract --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/entity-key-translation-group-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-OBS-GOV-05
+
+  - id: SEO-OBS-GOV-05
+    repo: fap-api
+    depends_on:
+      - SEO-OBS-GOV-04
+    branch: codex/seo-obs-gov-05-ops-seo-display-readiness
+    base: main
+    title: "docs(seo-intel): add ops seo observation display readiness"
+    name: "Ops SEO observation display readiness"
+    train_scope: seo_observation_governance_contracts
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define future read-only /ops/seo panels for observation governance without implementing UI.
+    allowed_paths:
+      - backend/docs/seo/ops-seo-observation-governance-display-readiness.md
+      - backend/docs/seo/generated/ops-seo-observation-governance-display-readiness.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsSeoObservationGovernanceDisplayReadinessTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Implement Filament UI, services, migrations, action buttons, write controls, production env changes, fap-web changes, or Metabase exposure.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsSeoObservationGovernanceDisplayReadiness --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/ops-seo-observation-governance-display-readiness.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-OBS-GOV-06
+
+  - id: SEO-OBS-GOV-06
+    repo: fap-api
+    depends_on:
+      - SEO-OBS-GOV-05
+    branch: codex/seo-obs-gov-06-governance-closeout
+    base: main
+    title: "docs(seo-intel): close observation governance contract train"
+    name: "Observation governance closeout"
+    train_scope: seo_observation_governance_contracts
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Close out PRs 1-5, confirm no runtime writes or production operations, and set the next task recommendation.
+    allowed_paths:
+      - backend/docs/seo/observation-governance-closeout.md
+      - backend/docs/seo/generated/observation-governance-closeout.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelObservationGovernanceCloseoutTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add runtime code, migrations, production operations, env edits, or fap-web changes.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelObservationGovernanceCloseout --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/observation-governance-closeout.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: CONTENT-OPS-CLAIM-LINK-RUNTIME-TRAIN-01
