@@ -9677,3 +9677,255 @@ prs:
     production_migration_execution_allowed: false
     scheduler_activation: false
     next_task: CONTENT-OPS-CLAIM-LINK-RUNTIME-TRAIN-01-COMPLETE
+
+  - id: SEO-OPS-SOP-01A
+    repo: fap-api
+    depends_on:
+      - CONTENT-OPS-CLAIM-LINK-CLOSEOUT
+    branch: codex/seo-ops-sop-01a-architecture-map
+    base: main
+    title: "docs(seo-intel): add SEO Ops SOP architecture map"
+    name: "SEO Ops SOP architecture and authority map"
+    train_scope: seo_ops_sop
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define the final SEO Ops architecture, authority map, and operator surface map.
+      - Separate truth, observation, distribution, repair, and forbidden routine operations.
+      - Lock hard boundaries for frontend fallback, static sitemap, static llms, crawler logs, search engine responses, Digital PR mentions, and local copies.
+    allowed_paths:
+      - backend/docs/seo/seo-ops-sop-architecture-authority-map.md
+      - backend/docs/seo/generated/seo-ops-sop-architecture-authority-map.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSeoOpsSopArchitectureAuthorityMapTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add runtime services, migrations, production files, fap-web changes, CMS content changes, deployment files, scheduler changes, or command behavior changes.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSeoOpsSopArchitectureAuthorityMap --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-ops-sop-architecture-authority-map.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-OPS-SOP-01B
+
+  - id: SEO-OPS-SOP-01B
+    repo: fap-api
+    depends_on:
+      - SEO-OPS-SOP-01A
+    branch: codex/seo-ops-sop-01b-daily-runbook
+    base: main
+    title: "docs(seo-intel): add daily SEO Ops runbook"
+    name: "Daily SEO Ops runbook"
+    train_scope: seo_ops_sop
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define the daily SEO Ops checklist and escalation rules.
+      - Cover /ops/seo, URL Truth, Issue Queue P0/P1, Search Channel Queue states, crawler aggregate counters, Claim Lint, Internal Link gaps, Content Publish Rehearsal blockers, Digital PR HRZone state, and MBTI Growth Loop status if active.
+      - Forbid daily checklist mutations, URL submissions, raw crawler log reads, Digital PR follow-up sends, and crawler/search/referral truth drift.
+    allowed_paths:
+      - backend/docs/seo/seo-ops-daily-runbook.md
+      - backend/docs/seo/generated/seo-ops-daily-runbook.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSeoOpsDailyRunbookTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add runtime services, migrations, production env changes, fap-web changes, CMS mutations, Search Channel mutations, crawler log reads, scheduler changes, or Digital PR sends.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSeoOpsDailyRunbook --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-ops-daily-runbook.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-OPS-SOP-01C
+
+  - id: SEO-OPS-SOP-01C
+    repo: fap-api
+    depends_on:
+      - SEO-OPS-SOP-01B
+    branch: codex/seo-ops-sop-01c-weekly-monthly
+    base: main
+    title: "docs(seo-intel): add weekly and monthly SEO Ops runbook"
+    name: "Weekly and monthly SEO Ops review runbook"
+    train_scope: seo_ops_sop
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define weekly Search Channel, crawler aggregate, content rehearsal, internal link, claim lint, Research URL, Digital PR, MBTI cluster, and repair backlog review.
+      - Define monthly entity cluster, content decay, internal link coverage, claim safety, Digital PR, Search Channel audit, crawler aggregate, funnel, MBTI Growth Loop, and next entity review.
+      - Separate escalations, backlog decisions, observation-only signals, and human approval gates.
+    allowed_paths:
+      - backend/docs/seo/seo-ops-weekly-monthly-review-runbook.md
+      - backend/docs/seo/generated/seo-ops-weekly-monthly-review-runbook.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSeoOpsWeeklyMonthlyReviewRunbookTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add runtime services, migrations, production operations, fap-web changes, CMS mutations, scheduler changes, queue writes, or crawler log reads.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSeoOpsWeeklyMonthlyReviewRunbook --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-ops-weekly-monthly-review-runbook.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-OPS-SOP-01D
+
+  - id: SEO-OPS-SOP-01D
+    repo: fap-api
+    depends_on:
+      - SEO-OPS-SOP-01C
+    branch: codex/seo-ops-sop-01d-approval-gates
+    base: main
+    title: "docs(seo-intel): add SEO Ops approval gates and no-go protocols"
+    name: "SEO Ops approval gates and no-go protocols"
+    train_scope: seo_ops_sop
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define human approval gates, no-go rules, P0 triggers, and exact approval boundaries.
+      - Cover CMS publish, CMS mutation, Search Channel enqueue/live submission, search API calls, crawler log canary, scheduler, migration, deploy, Metabase, Digital PR, claim override, internal link mutation, pSEO, bulk generation, and production env edits.
+      - Lock P0 triggers for claim-unsafe public/indexable pages, private-flow leaks, submitted invalid URLs, Metabase exposure, unexpected scheduler activation, raw crawler persistence, frontend fallback authority drift, business DB leakage, and Search Channel gate drift.
+    allowed_paths:
+      - backend/docs/seo/seo-ops-approval-gates-no-go-protocols.md
+      - backend/docs/seo/generated/seo-ops-approval-gates-no-go-protocols.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSeoOpsApprovalGatesNoGoProtocolsTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Implement gates, add runtime services, edit env, change deploy files, modify fap-web, or perform production actions.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSeoOpsApprovalGatesNoGoProtocols --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-ops-approval-gates-no-go-protocols.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-OPS-SOP-01E
+
+  - id: SEO-OPS-SOP-01E
+    repo: fap-api
+    depends_on:
+      - SEO-OPS-SOP-01D
+    branch: codex/seo-ops-sop-01e-mbti-growth-handoff
+    base: main
+    title: "docs(seo-intel): add MBTI growth loop handoff"
+    name: "MBTI Growth Loop handoff and first experiment readiness"
+    train_scope: seo_ops_sop
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define SEO-GROWTH-MBTI-00 as the next phase with baseline snapshot, telemetry contract, entity map, URL Truth review, content/internal link wave, claim lint gate, Search Channel canary wave, Digital PR wave, human-only funnel review, 7/14/28-day review, and scale decision.
+      - Lock telemetry constraints for backend truth events, bot/crawler exclusion, slug-independent entity_key, brand lift proxies, and observation-only crawler/search/Digital PR data.
+      - Keep MBTI as the first experiment and forbid scaling to Big Five/RIASEC/Career, pSEO, bulk URL submission, or bulk outreach before review.
+    allowed_paths:
+      - backend/docs/seo/seo-ops-mbti-growth-loop-handoff.md
+      - backend/docs/seo/generated/seo-ops-mbti-growth-loop-handoff.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSeoOpsMbtiGrowthLoopHandoffTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add runtime services, mutate CMS content, modify fap-web, mutate Search Channel, send Digital PR, create pSEO, or deploy.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSeoOpsMbtiGrowthLoopHandoff --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-ops-mbti-growth-loop-handoff.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-OPS-SOP-01F
+
+  - id: SEO-OPS-SOP-01F
+    repo: fap-api
+    depends_on:
+      - SEO-OPS-SOP-01E
+    branch: codex/seo-ops-sop-01f-final-closeout
+    base: main
+    title: "docs(seo-intel): close final SEO Ops SOP train"
+    name: "Final SEO Ops SOP closeout and ledger finalization"
+    train_scope: seo_ops_sop
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Close out the final SEO Ops SOP train and hand off to SEO-GROWTH-MBTI-00.
+      - Summarize SEO-OPS-SOP-01A through SEO-OPS-SOP-01E, sidecars, what was not done, final decision, and next task.
+      - Confirm no runtime implementation, deployment, env edit, migration, scheduler, search submission, crawler log read, CMS publish/mutation, fap-web modification, Digital PR send, Metabase exposure, pSEO generation, auto-fix, auto-rewrite, or auto-link creation.
+    allowed_paths:
+      - backend/docs/seo/seo-ops-sop-final-closeout.md
+      - backend/docs/seo/generated/seo-ops-sop-final-closeout.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSeoOpsSopFinalCloseoutTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add runtime code, migrations, production operations, fap-web changes, or CMS mutations.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSeoOpsSopFinalCloseout --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-ops-sop-final-closeout.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-00

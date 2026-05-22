@@ -1,0 +1,116 @@
+{
+  "version": "seo-ops-sop-architecture-authority-map.v1",
+  "task": "SEO-OPS-SOP-01A",
+  "train": "SEO-OPS-SOP-PR-TRAIN-01",
+  "type": "docs_generated_test_only",
+  "authority_model": {
+    "cms_backend": "truth_for_content_metadata_canonical_publish_state_claim_boundary_and_url_truth",
+    "fap_web": "deterministic_public_runtime_renderer_not_truth_source",
+    "seo_intel": "observation_only",
+    "ops_seo": "read_only_operational_view_not_truth_source",
+    "ops_seo_operations": "write_capable_cms_repair_surface_not_daily_observability",
+    "metabase": "private_read_only_not_public_surface",
+    "search_channel_queue": "distribution_of_approved_url_truth_only",
+    "crawler_log": "aggregate_observation_only_not_url_truth",
+    "observation_governance": "verification_state_tracking_only",
+    "content_publish_rehearsal": "dry_run_validation_only",
+    "internal_link_graph": "dry_run_readiness_and_opportunity_signal_only",
+    "chinese_claim_lint": "flag_or_block_only_no_auto_rewrite",
+    "digital_pr_tracking": "manual_observation_only"
+  },
+  "operator_surfaces": [
+    "/ops/seo",
+    "/ops/seo-operations",
+    "seo_intel_url_truth",
+    "seo_issue_queue",
+    "seo_search_channel_queue",
+    "seo_crawler_log_daily_aggregates",
+    "content_publish_rehearsal_dry_run",
+    "internal_link_graph_dry_run",
+    "chinese_claim_linter",
+    "digital_pr_tracking",
+    "seo_growth_mbti_00_handoff"
+  ],
+  "truth_sources": [
+    "cms_backend_content_state",
+    "cms_backend_seo_metadata",
+    "cms_backend_canonical_and_robots_state",
+    "backend_governed_url_truth",
+    "backend_payment_order_report_access_events"
+  ],
+  "observation_sources": [
+    "ops_seo_dashboard_counters",
+    "issue_queue_rows",
+    "search_channel_queue_states",
+    "crawler_aggregate_observations",
+    "approved_search_performance_feedback",
+    "digital_pr_response_referral_mention_status",
+    "claim_lint_output",
+    "internal_link_dry_run_output"
+  ],
+  "distribution_paths": [
+    "search_channel_queue_after_explicit_approval"
+  ],
+  "repair_paths": [
+    "approved_cms_backend_repair_workflows",
+    "ops_seo_operations_after_human_review"
+  ],
+  "forbidden_authority_sources": [
+    "frontend_fallback",
+    "static_sitemap",
+    "static_llms",
+    "crawler_log",
+    "search_engine_response",
+    "digital_pr_mention",
+    "local_copy"
+  ],
+  "routine_ops_forbidden": [
+    "runtime_implementation",
+    "migration",
+    "production_operation",
+    "env_edit",
+    "deployment",
+    "scheduler_activation",
+    "collector_write",
+    "crawler_log_read",
+    "search_channel_submission",
+    "cms_content_mutation",
+    "article_publish",
+    "metabase_exposure",
+    "fap_web_modification",
+    "digital_pr_send",
+    "auto_rewrite",
+    "auto_link_creation",
+    "pseo_generation",
+    "precise_recommender_overclaim"
+  ],
+  "mbti_growth_handoff": {
+    "next_phase": "SEO-GROWTH-MBTI-00",
+    "first_loop": "MBTI",
+    "do_not_scale_before_review": [
+      "Big Five",
+      "RIASEC",
+      "Career"
+    ]
+  },
+  "safety_flags": {
+    "runtime_services_added": false,
+    "migrations_added": false,
+    "production_operations_performed": false,
+    "env_edited": false,
+    "deploy_scripts_modified": false,
+    "scheduler_enabled": false,
+    "collector_writes_enabled": false,
+    "crawler_logs_read": false,
+    "search_channel_submitted": false,
+    "cms_content_mutated": false,
+    "article_published": false,
+    "metabase_exposed": false,
+    "fap_web_modified": false,
+    "digital_pr_sent": false,
+    "auto_rewrite_enabled": false,
+    "internal_links_created": false,
+    "pseo_created": false
+  },
+  "next_task": "SEO-OPS-SOP-01B"
+}
