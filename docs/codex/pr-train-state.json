@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T14:52:09+08:00",
+  "updated_at": "2026-05-22T15:08:35+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17883,11 +17883,11 @@
     "CONTENT-OPS-02A": {
       "repo": "fap-api",
       "branch": "codex/content-ops-02a-publish-rehearsal-contract",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "SEO-OBS-GOV-06"
       ],
-      "commit_sha": "b1967c4e222c1688fb363157b8d77dcf99bfe0c0",
+      "commit_sha": "cbcd8605ca4c76b67453ed4baca5e0aefe426172",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1562",
       "checks": {
         "local": {
@@ -17899,12 +17899,18 @@
           "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check"
+        },
+        "github": {
+          "pr_1562": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN"
+        },
+        "post_merge": {
+          "focused_contract_test": "passed: php artisan test --filter=SeoIntelContentPublishRehearsalContract --no-ansi"
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T06:58:23Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -17935,19 +17941,36 @@
           "at": "2026-05-22T14:52:09+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1562 for CONTENT-OPS-02A and pushed branch codex/content-ops-02a-publish-rehearsal-contract."
+        },
+        {
+          "at": "2026-05-22T15:06:42+08:00",
+          "status": "merged",
+          "summary": "PR #1562 merged via squash at cbcd8605ca4c76b67453ed4baca5e0aefe426172. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused contract test passed."
         }
       ]
     },
     "CONTENT-OPS-02B": {
       "repo": "fap-api",
       "branch": "codex/content-ops-02b-publish-rehearsal-dry-run",
-      "status": "pending",
+      "status": "local_validation_passed",
       "depends_on": [
         "CONTENT-OPS-02A"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_dry_run": "passed: php artisan test --filter=SeoIntelContentPublishRehearsalDryRun --no-ansi (6 tests, 77 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (424 tests, 6786 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_test": "passed: vendor/bin/pint --test (3471 files)",
+          "command_help": "passed: php artisan seo-intel:content-publish-rehearsal --dry-run --no-write --json --help || true",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/content-publish-rehearsal-dry-run.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -17962,6 +17985,16 @@
           "at": "2026-05-22T14:37:34+08:00",
           "status": "pending",
           "summary": "Registered content publish rehearsal dry-run validator PR. Scope allows backend dry-run service/command/tests only; no CMS publish, seo_intel write, Search Channel mutation, scheduler, production operation, or fap-web change."
+        },
+        {
+          "at": "2026-05-22T15:06:42+08:00",
+          "status": "in_progress",
+          "summary": "Started CONTENT-OPS-02B on codex/content-ops-02b-publish-rehearsal-dry-run. Scope is limited to dry-run ContentOps service/command, docs/generated artifact, focused test, and train metadata."
+        },
+        {
+          "at": "2026-05-22T15:08:35+08:00",
+          "status": "local_validation_passed",
+          "summary": "CONTENT-OPS-02B local validation passed for focused dry-run test, full SeoIntel filter, route list, Pint, command help, JSON/YAML parsing, and diff whitespace checks. Runtime remains dry-run/no-write with no publish, CMS mutation, Search Channel enqueue, observation write, sitemap/llms mutation, or fap-web change."
         }
       ]
     },
