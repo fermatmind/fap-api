@@ -1,0 +1,145 @@
+{
+  "version": "crawler-log-production-canary-report.v1",
+  "task": "CRAWLER-LOG-05",
+  "runtime": "crawler_log_observe",
+  "report_type": "production_canary_read_only_summary",
+  "source": {
+    "host": "139.224.130.204",
+    "shell": "/var/www/fap-api/current/backend",
+    "path": "/var/log/nginx/access.log",
+    "source_log_family": "nginx_access_log",
+    "single_source_only": true
+  },
+  "deployment": {
+    "runtime_deployed": true,
+    "release_sha": "84d48b2cfc15ac48a7999e2b0af56c1b4a3626bd",
+    "command_available": true
+  },
+  "approval": {
+    "approval_phrase_verified": true,
+    "approval_phrase_template": "I explicitly approve CRAWLER-LOG-04 production canary for source <log_path> with max_lines=1000 and no raw persistence.",
+    "approved_source_phrase": "I explicitly approve CRAWLER-LOG-04 production canary for source /var/log/nginx/access.log with max_lines=1000 and no raw persistence.",
+    "max_lines": 1000
+  },
+  "blocked_attempt": {
+    "status": "blocked",
+    "reason": "source_path_not_readable",
+    "production_log_read_attempted": false,
+    "source_line_count_read": 0,
+    "writes_attempted": false,
+    "writes_committed": false
+  },
+  "successful_canary": {
+    "status": "success",
+    "mode": "single_source_production_canary_dry_run",
+    "fixture_only": false,
+    "dry_run": true,
+    "no_write": true,
+    "writes_attempted": false,
+    "writes_committed": false,
+    "production_log_read_attempted": true,
+    "external_calls_attempted": false,
+    "search_submission_attempted": false,
+    "scheduler_enabled": false,
+    "collector_write_attempted": false,
+    "raw_persistence": false,
+    "parsed_line_count": 1000,
+    "sanitized_row_count": 1000,
+    "aggregate_row_count": 154,
+    "blocked_private_path_count": 956,
+    "unknown_bot_count": 1,
+    "safe_public_canonical_path_count": 0,
+    "target_table": "seo_crawler_logs_daily",
+    "target_table_write_attempted": false,
+    "target_table_write_committed": false,
+    "privacy_transform_version": "crawler_log_privacy_transform_v1"
+  },
+  "breakdowns": {
+    "bot_family": {
+      "non_bot": 999,
+      "unknown_bot": 1
+    },
+    "route_family": {
+      "blocked_private_path": 956,
+      "static_asset": 6,
+      "unknown_public_path": 38
+    },
+    "surface_family": {
+      "blocked_private": 956,
+      "static_asset": 6,
+      "unknown": 38
+    },
+    "http_status": {
+      "200": 786,
+      "202": 5,
+      "204": 2,
+      "400": 7,
+      "401": 127,
+      "404": 67,
+      "405": 1,
+      "422": 1,
+      "428": 4
+    },
+    "method_bucket": {
+      "GET": 889,
+      "HEAD": 3,
+      "OTHER": 108
+    },
+    "query_risk_state": {
+      "none": 176,
+      "unknown_query_present": 824
+    }
+  },
+  "privacy_boundary": {
+    "aggregate_only": true,
+    "no_raw_persistence": true,
+    "forbidden_report_fields": [
+      "ip_address",
+      "remote_addr",
+      "raw_user_agent",
+      "raw_request_uri",
+      "raw_query_string",
+      "cookie",
+      "headers",
+      "authorization",
+      "session_id",
+      "token",
+      "api_key",
+      "email",
+      "order_no",
+      "attempt_id",
+      "payment_id",
+      "provider_event_id",
+      "raw_payload",
+      "raw_log_line",
+      "event_payload",
+      "metadata_json",
+      "attributes_json"
+    ]
+  },
+  "authority_boundary": {
+    "crawler_logs_are_url_truth": false,
+    "crawler_logs_create_seo_urls": false,
+    "crawler_logs_decide_canonical": false,
+    "crawler_logs_decide_indexability": false,
+    "crawler_logs_override_cms_backend_truth": false,
+    "crawler_logs_enqueue_search_channel": false,
+    "crawler_logs_auto_write_issue_queue": false,
+    "crawler_logs_submit_urls": false
+  },
+  "follow_up_observation_contract": {
+    "do_not_expand_reading_scope": true,
+    "single_approved_source_until_separate_approval": true,
+    "bounded_max_lines_required": true,
+    "dry_run_no_write_until_separate_storage_approval": true,
+    "aggregate_only": true,
+    "no_scheduler": true,
+    "no_issue_queue_auto_write": true,
+    "no_url_truth_mutation": true,
+    "no_search_channel_queue_enqueue": true,
+    "no_search_submission": true,
+    "no_metabase_exposure": true
+  },
+  "final_decision": "crawler_log_production_canary_report_recorded_ready_for_aggregate_observation_design",
+  "next_task": "CRAWLER-LOG-06"
+}

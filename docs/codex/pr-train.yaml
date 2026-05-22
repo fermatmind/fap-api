@@ -6040,7 +6040,55 @@ prs:
     metabase_deployment: false
     human_review_required: true
     production_approval_required: true
-    next_task: deploy crawler-log canary runtime and execute the approved production canary
+    next_task: CRAWLER-LOG-05
+
+  - id: CRAWLER-LOG-05
+    repo: fap-api
+    depends_on:
+      - CRAWLER-LOG-04-CANARY
+      - DEPLOY-NGINX-STATIC-ROUTE-01
+    branch: codex/crawler-log-05-production-canary-report
+    base: main
+    title: "docs(seo-intel): add crawler log production canary report"
+    name: "Crawler log production canary report and observation follow-up"
+    train_scope: seo_intel_crawler_log_production_canary_report
+    risk_level: low_docs_generated_test_no_runtime_change
+    type: docs/generated/test PR
+    scope:
+      - Record the first human-approved production crawler log canary result as a sanitized read-only report.
+      - Preserve the aggregate-only privacy boundary and explicitly prevent raw log persistence, issue queue writes, URL Truth writes, Search Channel Queue enqueue, scheduler activation, and search submission.
+      - Define the next aggregate observation design task without expanding production log reading scope.
+    allowed_paths:
+      - backend/docs/seo/crawler-log-production-canary-report.md
+      - backend/docs/seo/generated/crawler-log-production-canary-report.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogProductionCanaryReportTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Read production crawler logs, run another canary, add runtime parser behavior, add scheduler, run collector writes, run migrations, deploy, edit env, expose Metabase, call external search APIs, submit URLs, or access business DB / Tencent RDS / Node2.
+      - Store or print raw IP, raw user-agent, raw request URI, query strings, cookies, headers, tokens, emails, order IDs, attempt IDs, payment IDs, provider payloads, or raw log lines.
+      - Treat crawler logs as URL Truth, canonical truth, indexability truth, CMS authority, Search Channel Queue authority, or issue auto-remediation authority.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelCrawlerLogProductionCanaryReport
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/crawler-log-production-canary-report.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    production_log_read_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    next_task: CRAWLER-LOG-06
 
   - id: CLAIM-LINT-00
     repo: fap-api
