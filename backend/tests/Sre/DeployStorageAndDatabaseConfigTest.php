@@ -32,6 +32,20 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/chmod\s+(?:0?777|a\+w|ugo\+rwX)/', $source);
     }
 
+    #[Test]
+    public function deploy_nginx_static_media_route_skips_when_static_location_already_exists(): void
+    {
+        $source = $this->readRepoFile('deploy.php');
+
+        $this->assertStringContainsString('static_route_action=install', $source);
+        $this->assertStringContainsString('skip_existing_static_location', $source);
+        $this->assertStringContainsString('existing /static/ location found in included nginx file', $source);
+        $this->assertStringContainsString('existing /static/ route detected; skipping managed snippet install', $source);
+        $this->assertStringContainsString('mktemp /tmp/fap-api-nginx-site-backup.XXXXXX.conf', $source);
+        $this->assertStringContainsString('sudo -n rm -f "$site_backup" "$snippet_backup"', $source);
+        $this->assertStringNotContainsString('mktemp /etc/nginx/sites-enabled', $source);
+    }
+
     private function readRepoFile(string $relativePath): string
     {
         $path = dirname(__DIR__, 3).'/'.$relativePath;

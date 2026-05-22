@@ -772,7 +772,8 @@ snippet_backup="$(mktemp /tmp/fap-api-nginx-snippet-backup.XXXXXX.conf)"
 site_path=__QUOTED_SITE__
 snippet_path=__QUOTED_SNIPPET__
 snippet_existed=0
-trap 'rm -f "$tmp_site" "$tmp_script" "$tmp_snippet" "$site_backup" "$snippet_backup"' EXIT
+static_route_action=install
+trap 'rm -f "$tmp_site" "$tmp_script" "$tmp_snippet"; sudo -n rm -f "$site_backup" "$snippet_backup" 2>/dev/null || true' EXIT
 
 printf %s __ENCODED_SNIPPET__ | base64 -d > "$tmp_snippet"
 sudo -n test -f "$site_path"
@@ -803,7 +804,51 @@ if (! is_string($content) || $content === '') {
     exit(1);
 }
 
+function hasStaticLocation(string $content): bool
+{
+    return preg_match('/^\\s*location\\s+(?:\\^~|=|~\\*?|~)?\\s*\\/static(?:\\/|\\s|\\{)/m', $content) === 1;
+}
+
+function readableIncludeHasStaticLocation(string $content): bool
+{
+    $includeCount = preg_match_all('/^\\s*include\\s+([^;]+);\\s*$/m', $content, $matches);
+
+    if ($includeCount === false || $includeCount < 1) {
+        return false;
+    }
+
+    foreach ($matches[1] as $includePath) {
+        $includePath = trim((string) $includePath, " \t\n\r\0\x0B'\"");
+
+        if ($includePath === '' || $includePath[0] !== '/' || strpbrk($includePath, '*?[') !== false) {
+            continue;
+        }
+
+        $included = shell_exec('sudo -n /usr/bin/cat ' . escapeshellarg($includePath));
+
+        if (is_string($included) && hasStaticLocation($included)) {
+            fwrite(STDERR, "existing /static/ location found in included nginx file: {$includePath}; skipping managed static snippet\n");
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
 $content = preg_replace('/^\\s*include\\s+\\/etc\\/nginx\\/snippets\\/fap-api-public-static-media-[^;]+;\\R/m', '', $content);
+
+if (is_string($content) && hasStaticLocation($content)) {
+    fwrite(STDERR, "existing /static/ location found in nginx site; skipping managed static snippet\n");
+    echo $content;
+    exit(2);
+}
+
+if (is_string($content) && readableIncludeHasStaticLocation($content)) {
+    echo $content;
+    exit(2);
+}
+
 $includeLine = '    include ' . $include . ';';
 $hostPattern = preg_quote($host, '/');
 $staticHostPattern = '/(^\\s*server_name\\s+[^;]*\\b' . $hostPattern . '\\b[^;]*;\\s*$)/m';
@@ -831,7 +876,16 @@ if ($count < 1 || ! is_string($next)) {
 echo $next;
 PHP
 
+set +e
 php "$tmp_script" "$site_path" "$snippet_path" __QUOTED_HOST__ __QUOTED_PRIMARY_HOST__ > "$tmp_site"
+php_status=$?
+set -e
+
+if [ "$php_status" = "2" ]; then
+    static_route_action=skip_existing_static_location
+elif [ "$php_status" != "0" ]; then
+    exit "$php_status"
+fi
 
 if sudo -n test -e "$snippet_path"; then
     snippet_existed=1
@@ -843,6 +897,25 @@ fi
 
 sudo -n cp -p "$site_path" "$site_backup"
 echo "nginx static media route: site backup created: $site_backup"
+
+if [ "$static_route_action" = "skip_existing_static_location" ]; then
+    echo "nginx static media route: existing /static/ route detected; skipping managed snippet install"
+    sudo -n cp "$tmp_site" "$site_path"
+
+    echo "nginx static media route: validating existing static route nginx config"
+    if sudo -n nginx -t; then
+        echo "nginx static media route: existing static route config valid; keeping update"
+    else
+        status=$?
+        echo "nginx static media route: existing static route config invalid; restoring previous files" >&2
+        restore_nginx_static_config
+        exit "$status"
+    fi
+
+    test -s __QUOTED_STATIC_ASSET__
+    echo "nginx static media route: final static asset path verified"
+    exit 0
+fi
 
 echo "nginx static media route: installing candidate snippet and site config"
 sudo -n cp "$tmp_snippet" "$snippet_path"
