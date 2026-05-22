@@ -9928,4 +9928,46 @@ prs:
     production_deploy_allowed: false
     production_migration_execution_allowed: false
     scheduler_activation: false
-    next_task: SEO-GROWTH-MBTI-00
+    next_task: SEO-GROWTH-MBTI-00A
+
+  - id: SEO-GROWTH-MBTI-00A
+    repo: fap-api
+    depends_on:
+      - SEO-OPS-SOP-01F
+    branch: codex/seo-growth-mbti-00a-baseline-contract
+    base: main
+    title: "docs(seo-intel): add MBTI growth baseline URL Truth contract"
+    name: "MBTI baseline asset inventory, URL Truth, and telemetry contract authorization"
+    train_scope: seo_growth_mbti
+    risk_level: low_contract_only
+    type: docs/generated/test
+    scope:
+      - Define and lock the MBTI baseline asset inventory, URL Truth candidate matrix, entity map contract, telemetry contract, private/noindex exclusion matrix, Search Channel preconditions, and claim-gate preconditions.
+      - Resolve the SEO-GROWTH-MBTI-SCAN-00 blocker `blocked_mbti_url_truth_unclear` without writing URL Truth, enqueueing Search Channel, submitting URLs, mutating CMS, running production operations, or modifying fap-web.
+      - Set the exact next task to SEO-GROWTH-MBTI-PR-TRAIN-01 when this blocker-resolution preface is merged.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-00a-baseline-url-truth-telemetry-contract.md
+      - backend/docs/seo/generated/seo-growth-mbti-00a-baseline-url-truth-telemetry-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbti00aBaselineContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, Search Channel Queue, crawler log readers, collectors, scheduler, Digital PR sends, pSEO, frontend fallback authority, static sitemap authority, static llms authority, or business DB / Tencent RDS / Node2 DB.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbti00aBaselineContract --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-00a-baseline-url-truth-telemetry-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-PR-TRAIN-01
