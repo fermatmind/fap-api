@@ -1,0 +1,100 @@
+{
+  "version": "entity-key-translation-group-contract.v1",
+  "task": "SEO-OBS-GOV-04",
+  "purpose": "stable_entity_key_translation_group_contract",
+  "required_future_key": "translation_group_uuid",
+  "allowed_transitional_key": "translation_group_id",
+  "entity_key_preference_order": [
+    "translation_group_uuid",
+    "translation_group_id_where_already_supported",
+    "legacy_unpaired"
+  ],
+  "entity_key_formats": {
+    "preferred": "translation_group_uuid:<uuid>",
+    "transitional": "translation_group_id:<source_table>:<translation_group_id>",
+    "legacy_unpaired": "legacy_unpaired:<surface>:<locale>:<stable_slug_or_id>"
+  },
+  "locale_pair_rules": [
+    "locale_compare_groups_by_entity_key",
+    "en_zh_pairs_require_same_translation_group_uuid",
+    "translation_group_id_is_transitional_paired_only",
+    "missing_locale_peer_is_observation_not_content_task",
+    "legacy_unpaired_requires_followup_review"
+  ],
+  "surface_coverage": [
+    "research_reports",
+    "articles",
+    "topics",
+    "personality_pages",
+    "career_guides",
+    "career_jobs",
+    "test_landing_detail_pages",
+    "content_support_pages"
+  ],
+  "surface_policy": {
+    "research_reports": {
+      "future_authority": "translation_group_uuid",
+      "current_slug_pairing": "migration_helper_only"
+    },
+    "articles": {
+      "current_translation_group_id": "transitional",
+      "future_authority": "translation_group_uuid"
+    },
+    "topics": {
+      "future_authority": "translation_group_uuid",
+      "slug_similarity": "migration_helper_only"
+    },
+    "personality_pages": {
+      "future_authority": "translation_group_uuid_or_backend_canonical_type_group",
+      "frontend_fallback_authority": false
+    },
+    "career_guides": {
+      "future_authority": "translation_group_uuid_or_backend_career_entity_group",
+      "crawler_derived_pairing": false
+    },
+    "career_jobs": {
+      "future_authority": "translation_group_uuid_or_backend_career_entity_group",
+      "crawler_derived_pairing": false
+    },
+    "test_landing_detail_pages": {
+      "future_authority": "backend_scale_catalog_identity_plus_translation_group_uuid_when_needed"
+    },
+    "content_support_pages": {
+      "current_translation_group_id": "transitional",
+      "future_authority": "translation_group_uuid"
+    }
+  },
+  "backfill_plan": [
+    "schema_after_human_approval",
+    "dry_run_mapping_by_surface",
+    "use_existing_translation_group_id_where_present",
+    "mark_unpaired_legacy_content_without_mutation",
+    "slug_title_similarity_candidate_suggestion_only",
+    "human_review_before_content_or_key_mutation"
+  ],
+  "forbidden_authority": [
+    "automatic_content_mutation",
+    "frontend_fallback_pairing",
+    "crawler_derived_pairing",
+    "title_slug_similarity_as_final_authority",
+    "search_engine_response_pairing",
+    "local_copy_authority",
+    "static_sitemap_llms_authority"
+  ],
+  "safety_flags": {
+    "docs_only": true,
+    "generated_json_only": true,
+    "focused_tests_only": true,
+    "cms_content_mutation": false,
+    "backfill_execution": false,
+    "migration_added": false,
+    "fap_web_modified": false,
+    "frontend_fallback_authority": false,
+    "title_slug_similarity_final_authority": false,
+    "crawler_derived_pairing": false,
+    "production_env_changed": false,
+    "deploy": false
+  },
+  "final_decision": "entity_key_translation_group_contract_ready_without_migration",
+  "next_task": "SEO-OBS-GOV-05"
+}

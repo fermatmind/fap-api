@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T13:31:58+08:00",
+  "updated_at": "2026-05-22T13:45:14+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -14024,14 +14024,14 @@
     "SEO-OBS-GOV-03": {
       "repo": "fap-api",
       "branch": "codex/seo-obs-gov-03-issue-severity-governance-contract",
-      "status": "local_validation_passed",
-      "state": "local_validation_passed",
+      "status": "merged",
+      "state": "merged",
       "title": "docs(seo-intel): add issue severity governance contract",
       "depends_on": [
         "SEO-OBS-GOV-02"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "cc7efe8ee340649e66650c70457526b12d616eb7",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1558",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -14054,12 +14054,21 @@
         "scope_validation": {
           "status": "pass",
           "evidence": "Changed files are limited to PR3 issue severity governance contract docs, generated artifact, focused test, and train ledger. No migrations, issue mutation code, auto-fix code, CMS publish code, Search Channel mutation, scheduler, production env, or fap-web change was added."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1558 merged after hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS succeeded; mergeStateStatus was CLEAN."
+        },
+        "post_merge_revalidation": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelIssueSeverityGovernanceContract --no-ansi",
+          "evidence": "Focused post-merge revalidation passed: 7 tests / 96 assertions."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T05:39:55Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "production_log_read_execution": false,
       "production_migration_execution": false,
@@ -14081,21 +14090,49 @@
           "at": "2026-05-22T13:31:58+08:00",
           "status": "local_validation_passed",
           "summary": "Added issue severity/dedupe/mute/SLA contract docs, generated artifact, focused test, and ledger updates. No migration or issue mutation code was added. Required local checks passed."
+        },
+        {
+          "at": "2026-05-22T13:45:14+08:00",
+          "status": "merged",
+          "summary": "PR #1558 was squash merged to main at cc7efe8ee340649e66650c70457526b12d616eb7. Remote branch was deleted and focused post-merge revalidation passed."
         }
       ]
     },
     "SEO-OBS-GOV-04": {
       "repo": "fap-api",
       "branch": "codex/seo-obs-gov-04-entity-key-translation-group-contract",
-      "status": "pending",
-      "state": "pending",
+      "status": "local_validation_passed",
+      "state": "local_validation_passed",
       "title": "docs(seo-intel): add entity key translation group contract",
       "depends_on": [
         "SEO-OBS-GOV-03"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-OBS-GOV-03 merged as PR #1558 and origin/main contains cc7efe8ee340649e66650c70457526b12d616eb7."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=SeoIntelEntityKeyTranslationGroupContract --no-ansi",
+            "cd backend && php artisan test --filter=SeoIntel --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "python3 -m json.tool backend/docs/seo/generated/entity-key-translation-group-contract.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
+            "git diff --check"
+          ],
+          "evidence": "All PR4 local validations passed. Focused contract test passed 7 tests / 133 assertions; SeoIntel suite passed 397 tests / 6325 assertions; Pint passed 3465 files; route:list returned 203 routes."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to PR4 entity key and translation group contract docs, generated artifact, focused test, and train ledger. No CMS content mutation, backfill execution, migration, fap-web modification, frontend fallback authority, production env edit, or deploy was added."
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -14116,7 +14153,13 @@
       "sidecar_allowed": true,
       "stop_on_safety_violation": true,
       "next_pr": "SEO-OBS-GOV-05",
-      "history": []
+      "history": [
+        {
+          "at": "2026-05-22T13:45:14+08:00",
+          "status": "local_validation_passed",
+          "summary": "Added entity key / translation_group_uuid contract docs, generated artifact, focused test, and ledger updates. No migration, CMS mutation, backfill, or fap-web change was added. Required local checks passed."
+        }
+      ]
     },
     "SEO-OBS-GOV-05": {
       "repo": "fap-api",
