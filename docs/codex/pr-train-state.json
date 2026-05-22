@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T21:38:00+08:00",
+  "updated_at": "2026-05-22T21:43:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -14597,11 +14597,11 @@
     "SEO-GROWTH-MBTI-03A": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-03a-claim-lint",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "SEO-GROWTH-MBTI-02"
       ],
-      "commit_sha": "53b83e10",
+      "commit_sha": "0952412206e7e8c8611145660d01d7dfa3836190",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1583",
       "checks": {
         "local": {
@@ -14615,11 +14615,16 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+          "pr_1583": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN; merged as 0952412206e7e8c8611145660d01d7dfa3836190"
+        },
+        "post_merge": {
+          "focused_claim_lint_gate_test": "passed: php artisan test --filter=SeoIntelGrowthMbti03aClaimLintGate --no-ansi (7 tests, 98 assertions)"
+        }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-22T13:36:00Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
@@ -14646,20 +14651,35 @@
           "at": "2026-05-22T21:38:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1583 for SEO-GROWTH-MBTI-03A and pushed branch codex/seo-growth-mbti-03a-claim-lint."
+        },
+        {
+          "at": "2026-05-22T21:36:00+08:00",
+          "status": "merged",
+          "summary": "PR #1583 merged via squash at 0952412206e7e8c8611145660d01d7dfa3836190. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused claim lint gate test passed. Local cleanup script is unavailable in this clone."
         }
       ]
     },
     "SEO-GROWTH-MBTI-03B": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-03b-search-channel",
-      "status": "pending",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-03A"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "96be1e8f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1584",
       "checks": {
-        "local": {},
+        "local": {
+          "focused_search_channel_canary_plan_test": "passed: php artisan test --filter=SeoIntelGrowthMbti03bSearchChannelCanaryWavePlan --no-ansi (8 tests, 105 assertions)",
+          "seo_intel_suite": "passed: php artisan test --filter=SeoIntel --no-ansi (545 tests, 8590 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3493 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-03b-search-channel-canary-wave-plan.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        },
         "github": {}
       },
       "failure_reason": null,
@@ -14676,6 +14696,21 @@
           "at": "2026-05-22T21:00:00+08:00",
           "status": "pending",
           "summary": "Registered SEO-GROWTH-MBTI-03B for SEO-GROWTH-MBTI-PR-TRAIN-01. Scope is docs/generated/test plus authorized train metadata only; no runtime, CMS, Search Channel, fap-web, Digital PR, production, crawler log, pSEO, claim rewrite, internal link creation, or business DB work."
+        },
+        {
+          "at": "2026-05-22T21:37:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-GROWTH-MBTI-03B on codex/seo-growth-mbti-03b-search-channel from latest main. Scope is MBTI Search Channel canary wave plan docs/generated/test plus authorized train metadata only."
+        },
+        {
+          "at": "2026-05-22T21:42:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Local validation passed for SEO-GROWTH-MBTI-03B: focused Search Channel canary plan test, full SeoIntel suite, route list, Pint, JSON/YAML parsing, and diff checks."
+        },
+        {
+          "at": "2026-05-22T21:43:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1584 for SEO-GROWTH-MBTI-03B and pushed branch codex/seo-growth-mbti-03b-search-channel."
         }
       ]
     },
