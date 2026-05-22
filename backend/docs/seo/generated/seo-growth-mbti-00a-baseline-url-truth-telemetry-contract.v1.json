@@ -1,0 +1,257 @@
+{
+  "version": "seo-growth-mbti-00a-baseline-url-truth-telemetry-contract.v1",
+  "task": "SEO-GROWTH-MBTI-00A",
+  "train": "SEO-GROWTH-MBTI-PR-TRAIN-01-PREFACE",
+  "type": "docs_generated_test_only",
+  "scan_blocker_resolved": "blocked_mbti_url_truth_unclear",
+  "baseline_asset_inventory": [
+    "mbti_test_page",
+    "mbti_research_report",
+    "mbti_topic_hub",
+    "mbti_personality_type_pages",
+    "mbti_articles",
+    "mbti_private_flows",
+    "mbti_telemetry_surfaces",
+    "mbti_search_channel_candidates",
+    "mbti_claim_sensitive_surfaces"
+  ],
+  "forbidden_authority_sources": [
+    "frontend_fallback",
+    "static_sitemap",
+    "static_llms",
+    "crawler_logs",
+    "search_engine_responses",
+    "digital_pr_mentions",
+    "local_copies"
+  ],
+  "url_truth_candidate_matrix": [
+    {
+      "family": "mbti_test_page",
+      "url": "/en/tests/mbti-personality-test-16-personality-types",
+      "locale": "en",
+      "expected_page_entity_type": "test_detail",
+      "expected_source_authorities": [
+        "scale_catalog",
+        "backend_public_surface"
+      ],
+      "status": "candidate_requiring_backend_authoritative_dry_run_confirmation"
+    },
+    {
+      "family": "mbti_test_page",
+      "url": "/zh/tests/mbti-personality-test-16-personality-types",
+      "locale": "zh",
+      "expected_page_entity_type": "test_detail",
+      "expected_source_authorities": [
+        "scale_catalog",
+        "backend_public_surface"
+      ],
+      "status": "candidate_requiring_backend_authoritative_dry_run_confirmation"
+    },
+    {
+      "family": "mbti_research_report",
+      "url": "/en/research/mbti-personality-types-salary-turnover-report",
+      "locale": "en",
+      "expected_page_entity_type": "research_report",
+      "expected_source_authorities": [
+        "backend_cms",
+        "research_reports"
+      ],
+      "status": "candidate_requiring_claim_safe_verification"
+    },
+    {
+      "family": "mbti_research_report",
+      "url": "/zh/research/mbti-personality-types-salary-turnover-report",
+      "locale": "zh",
+      "expected_page_entity_type": "research_report",
+      "expected_source_authorities": [
+        "backend_cms",
+        "research_reports"
+      ],
+      "status": "candidate_requiring_claim_safe_verification"
+    },
+    {
+      "family": "mbti_topic_hub",
+      "url": "/en/topics/mbti",
+      "locale": "en",
+      "expected_page_entity_type": "topic",
+      "expected_source_authorities": [
+        "backend_cms_topic"
+      ],
+      "status": "deferred_until_backend_cms_topic_authority_is_explicit"
+    },
+    {
+      "family": "mbti_topic_hub",
+      "url": "/zh/topics/mbti",
+      "locale": "zh",
+      "expected_page_entity_type": "topic",
+      "expected_source_authorities": [
+        "backend_cms_topic"
+      ],
+      "status": "deferred_until_backend_cms_topic_authority_is_explicit"
+    },
+    {
+      "family": "mbti_personality_type_pages",
+      "url_pattern": "/en/personality/{type}",
+      "locale": "en",
+      "expected_page_entity_type": "personality",
+      "expected_source_authorities": [
+        "backend_personality",
+        "backend_cms"
+      ],
+      "status": "deferred_until_backend_personality_cms_entity_authority_is_explicit"
+    },
+    {
+      "family": "mbti_personality_type_pages",
+      "url_pattern": "/zh/personality/{type}",
+      "locale": "zh",
+      "expected_page_entity_type": "personality",
+      "expected_source_authorities": [
+        "backend_personality",
+        "backend_cms"
+      ],
+      "status": "deferred_until_backend_personality_cms_entity_authority_is_explicit"
+    },
+    {
+      "family": "mbti_articles",
+      "url_pattern": "backend_cms_article_urls",
+      "expected_page_entity_type": "article",
+      "expected_source_authorities": [
+        "backend_cms_article"
+      ],
+      "status": "deferred_until_backend_cms_article_rows_are_verified"
+    },
+    {
+      "family": "mbti_private_flows",
+      "path_patterns": [
+        "take",
+        "result",
+        "report",
+        "paywall",
+        "order",
+        "pdf",
+        "history"
+      ],
+      "expected_status": "noindex_private_excluded_from_url_truth_and_search_channel"
+    }
+  ],
+  "entity_map_contract": {
+    "future_entity_keys": [
+      "mbti_test",
+      "mbti_topic",
+      "mbti_research_salary_turnover",
+      "mbti_result_private",
+      "mbti_paid_report_private",
+      "mbti_type_intj",
+      "mbti_type_infp",
+      "mbti_type_entj"
+    ],
+    "type_key_pattern": "mbti_type_{lowercase_type_code}",
+    "rules": [
+      "entity_key_independent_from_url_slug",
+      "translation_group_uuid_preferred_when_available",
+      "translation_group_id_transitional_only",
+      "slug_title_similarity_migration_helper_only_not_authority",
+      "frontend_fallback_cannot_create_entity_key",
+      "private_entities_not_public_url_truth_or_search_channel_candidates"
+    ]
+  },
+  "telemetry_contract": {
+    "frontend_observation_events": [
+      "landing_view",
+      "test_cta_click",
+      "test_start_click",
+      "report_preview_view",
+      "unlock_click",
+      "checkout_button_click",
+      "email_form_view"
+    ],
+    "backend_truth_events": [
+      "attempt_created",
+      "attempt_submitted",
+      "result_generated",
+      "email_captured",
+      "order_created",
+      "payment_success",
+      "benefit_granted",
+      "report_access_granted",
+      "pdf_generated"
+    ],
+    "rules": [
+      "frontend_observation_is_not_backend_truth",
+      "backend_payment_order_report_access_is_truth",
+      "bot_crawler_traffic_excluded_from_conversion_funnel_formulas",
+      "crawler_traffic_only_enters_crawler_aggregate_observation",
+      "email_not_in_public_html_search_analytics_payloads_urls_or_digital_pr_artifacts"
+    ]
+  },
+  "private_noindex_exclusion_matrix": [
+    "take_flow",
+    "result_page",
+    "report_page",
+    "paywall_checkout",
+    "order_payment_recovery",
+    "report_pdf",
+    "account_history",
+    "email_capture_recovery"
+  ],
+  "claim_gate": {
+    "required_before": [
+      "search_channel_planning",
+      "digital_pr_wave_2",
+      "content_internal_link_wave",
+      "growth_experiment_review"
+    ],
+    "forbidden_claims": [
+      "MBTI决定收入",
+      "MBTI预测离职",
+      "薪资保证",
+      "招聘适配",
+      "职业成功预测",
+      "精准职业推荐",
+      "最适合职业",
+      "诊断",
+      "确诊",
+      "治疗",
+      "治愈"
+    ],
+    "allowed_bounded_language": [
+      "模型化指数",
+      "聚合层面",
+      "方向性趋势",
+      "非诊断",
+      "结果仅供参考",
+      "职业方向参考",
+      "工作方式倾向",
+      "探索建议"
+    ],
+    "auto_rewrite_allowed": false
+  },
+  "search_channel_preconditions": [
+    "url_truth_verified",
+    "source_authority_allowed",
+    "canonical_indexable_public",
+    "claim_safe",
+    "not_private",
+    "not_draft",
+    "not_noindex",
+    "dry_run_before_enqueue",
+    "human_approval_before_live_submit",
+    "no_bulk_submit"
+  ],
+  "safety_flags": {
+    "url_truth_written": false,
+    "search_channel_enqueued": false,
+    "url_submitted": false,
+    "cms_mutated": false,
+    "seo_intel_written": false,
+    "production_operations_run": false,
+    "crawler_logs_read": false,
+    "fap_web_modified": false,
+    "digital_pr_sent": false,
+    "claims_auto_fixed": false,
+    "internal_links_auto_created": false,
+    "pseo_created": false,
+    "business_db_touched": false
+  },
+  "next_task": "SEO-GROWTH-MBTI-PR-TRAIN-01"
+}

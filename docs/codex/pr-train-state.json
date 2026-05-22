@@ -14336,6 +14336,56 @@
           "summary": "Added observation governance closeout docs, generated artifact, focused test, and ledger updates. No runtime code, migration, production operation, env edit, or fap-web change was added. Required local checks passed."
         }
       ]
+    },
+    "SEO-GROWTH-MBTI-00A": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-00a-baseline-contract",
+      "status": "committed",
+      "depends_on": [
+        "SEO-OPS-SOP-01F"
+      ],
+      "commit_sha": "4403a7bd",
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "focused_baseline_contract_test": "passed: php artisan test --filter=SeoIntelGrowthMbti00aBaselineContract --no-ansi (7 tests, 147 assertions)",
+          "seo_intel_suite": "passed: php artisan test --filter=SeoIntel --no-ansi (509 tests, 8064 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3488 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-00a-baseline-url-truth-telemetry-contract.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed before staging: git diff --cached --check"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-PR-TRAIN-01",
+      "history": [
+        {
+          "at": "2026-05-22T20:26:05+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-GROWTH-MBTI-00A on codex/seo-growth-mbti-00a-baseline-contract. Scope is docs/generated/test plus authorized train metadata only; no runtime services, migrations, production operations, fap-web changes, CMS mutations, Search Channel mutation, crawler log reads, Digital PR sends, pSEO, collector writes, scheduler activation, or business DB access."
+        },
+        {
+          "at": "2026-05-22T20:33:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "SEO-GROWTH-MBTI-00A local validation passed for focused baseline contract test, full SeoIntel filter, route:list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Scope remains docs/generated/test plus authorized train metadata only."
+        },
+        {
+          "at": "2026-05-22T20:34:00+08:00",
+          "status": "committed",
+          "summary": "Committed SEO-GROWTH-MBTI-00A baseline URL Truth and telemetry contract scope at 4403a7bd."
+        }
+      ]
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
