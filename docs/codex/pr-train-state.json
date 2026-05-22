@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T17:53:00+08:00",
+  "updated_at": "2026-05-22T17:54:30+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18583,12 +18583,12 @@
     "SEO-OPS-SOP-01C": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-sop-01c-weekly-monthly",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-OPS-SOP-01B"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "124e521f8c1b3d3587c3093b7d276f9a66c7d659",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1573",
       "checks": {
         "local": {
           "php_artisan_test_filter_weekly_monthly_runbook": "passed: php artisan test --filter=SeoIntelSeoOpsWeeklyMonthlyReviewRunbook --no-ansi (7 tests, 82 assertions)",
@@ -18625,6 +18625,11 @@
           "at": "2026-05-22T17:53:00+08:00",
           "status": "local_validation_passed",
           "summary": "SEO-OPS-SOP-01C local validation passed for focused weekly/monthly runbook test, full SeoIntel filter, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Scope remains docs/generated/test plus train metadata only."
+        },
+        {
+          "at": "2026-05-22T17:54:30+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1573 for SEO-OPS-SOP-01C and pushed branch codex/seo-ops-sop-01c-weekly-monthly."
         }
       ]
     },
