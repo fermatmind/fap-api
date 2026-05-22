@@ -809,6 +809,17 @@ function hasStaticLocation(string $content): bool
     return preg_match('/^\\s*location\\s+(?:\\^~|=|~\\*?|~)?\\s*\\/static(?:\\/|\\s|\\{)/m', $content) === 1;
 }
 
+function currentNginxConfigHasStaticLocation(): bool
+{
+    $currentConfig = shell_exec('sudo -n nginx -T 2>/dev/null');
+
+    if (! is_string($currentConfig) || $currentConfig === '') {
+        return false;
+    }
+
+    return hasStaticLocation($currentConfig);
+}
+
 function nginxIncludePaths(string $content): array
 {
     $includeCount = preg_match_all('/^\\s*include\\s+([^;]+);\\s*$/m', $content, $matches);
@@ -871,6 +882,12 @@ function readableIncludeHasStaticLocation(string $content, array $seen = []): bo
 }
 
 $content = preg_replace('/^\\s*include\\s+\\/etc\\/nginx\\/snippets\\/fap-api-public-static-media-[^;]+;\\R/m', '', $content);
+
+if (currentNginxConfigHasStaticLocation()) {
+    fwrite(STDERR, "existing /static/ location found in current nginx config; skipping managed static snippet\n");
+    echo $content;
+    exit(2);
+}
 
 if (is_string($content) && hasStaticLocation($content)) {
     fwrite(STDERR, "existing /static/ location found in nginx site; skipping managed static snippet\n");
