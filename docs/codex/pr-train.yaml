@@ -6090,6 +6090,53 @@ prs:
     human_review_required: true
     next_task: CRAWLER-LOG-06
 
+  - id: CRAWLER-LOG-06
+    repo: fap-api
+    depends_on:
+      - CRAWLER-LOG-05
+    branch: codex/crawler-log-06-aggregate-observation-design
+    base: main
+    title: "docs(seo-intel): add crawler log aggregate observation design"
+    name: "Crawler log aggregate observation design"
+    train_scope: seo_intel_crawler_log_aggregate_observation_design
+    risk_level: low_docs_generated_test_no_runtime_change
+    type: docs/generated/test PR
+    scope:
+      - Define the aggregate-only crawler log observation model after the first production canary report.
+      - Specify safe dimensions, metrics, warning counters, URL Truth boundaries, issue queue boundaries, storage boundaries, and follow-up PR split.
+      - Preserve the rule that crawler logs are observability only and cannot become URL Truth, Search Channel Queue authority, issue auto-remediation, or search submission input.
+    allowed_paths:
+      - backend/docs/seo/crawler-log-aggregate-observation-design.md
+      - backend/docs/seo/generated/crawler-log-aggregate-observation-design.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogAggregateObservationDesignTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Read production crawler logs, run another canary, add runtime parser behavior, add scheduler, run collector writes, run migrations, deploy, edit env, expose Metabase, call external search APIs, submit URLs, or access business DB / Tencent RDS / Node2.
+      - Store or print raw IP, raw user-agent, raw request URI, query strings, cookies, headers, tokens, emails, order IDs, attempt IDs, payment IDs, provider payloads, or raw log lines.
+      - Treat crawler logs as URL Truth, canonical truth, indexability truth, CMS authority, Search Channel Queue authority, or issue auto-remediation authority.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelCrawlerLogAggregateObservationDesign
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/crawler-log-aggregate-observation-design.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    production_log_read_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    next_task: CRAWLER-LOG-07
+
   - id: CLAIM-LINT-00
     repo: fap-api
     depends_on:
