@@ -2488,6 +2488,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Services/SeoIntel/OpsDashboard/AbstractSeoDashboardReadService.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoCrawlerLogObservationReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardOverviewReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoIssueQueueReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoSearchChannelQueueReadService.php',

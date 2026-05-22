@@ -6239,6 +6239,58 @@ prs:
     human_review_required: true
     next_task: CRAWLER-LOG-09
 
+  - id: CRAWLER-LOG-09
+    repo: fap-api
+    depends_on:
+      - CRAWLER-LOG-08
+    branch: codex/crawler-log-09-ops-seo-read-model
+    base: main
+    title: "feat(seo-intel): add crawler observation read model"
+    name: "Ops SEO crawler observation read model"
+    train_scope: seo_intel_ops_seo_crawler_observation_read_model
+    risk_level: low_read_only_no_raw_log_read
+    type: service/docs/test PR
+    scope:
+      - Add a read-only Ops SEO dashboard service for crawler aggregate observation.
+      - Read only the aggregate crawler table from the seo_intel connection.
+      - Prove safe fields, aggregate-only output, no writes, and no raw crawler log access.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/OpsDashboard/AbstractSeoDashboardReadService.php
+      - backend/app/Services/SeoIntel/OpsDashboard/SeoCrawlerLogObservationReadService.php
+      - backend/docs/seo/crawler-log-ops-observation-read-model.md
+      - backend/docs/seo/generated/crawler-log-ops-observation-read-model.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsSeoCrawlerObservationReadModelTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Read production crawler logs, persist raw crawler data, run production writes, run migrations, deploy, edit env, enable scheduler, expose Metabase, call external search APIs, submit URLs, or access business DB / Tencent RDS / Node2.
+      - Read raw crawler-log tables, raw log files, raw payloads, or Metabase internals.
+      - Write issue queue rows, create or mutate URL Truth, enqueue Search Channel Queue rows, or add UI action controls.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsSeoCrawlerObservationReadModel
+      - cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboardReadModel
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/crawler-log-ops-observation-read-model.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    production_log_read_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    next_task: CRAWLER-LOG-10
+
   - id: CLAIM-LINT-00
     repo: fap-api
     depends_on:
