@@ -1,0 +1,82 @@
+{
+  "version": "seo-growth-mbti-05-human-only-funnel-revenue-review-contract.v1",
+  "task": "SEO-GROWTH-MBTI-05",
+  "train": "SEO-GROWTH-MBTI-PR-TRAIN-01",
+  "type": "docs_generated_test_only",
+  "frontend_observation_events": [
+    "landing_view",
+    "test_cta_click",
+    "test_start_click",
+    "report_preview_view",
+    "unlock_click",
+    "checkout_button_click",
+    "email_form_view"
+  ],
+  "backend_truth_events": [
+    "attempt_created",
+    "attempt_submitted",
+    "result_generated",
+    "email_captured",
+    "order_created",
+    "payment_success",
+    "benefit_granted",
+    "report_access_granted",
+    "pdf_generated"
+  ],
+  "rules": [
+    "conversion_formulas_use_human_only_traffic",
+    "known_bot_suspected_bot_and_crawler_excluded",
+    "internal_and_qa_traffic_excluded_where_identifiable",
+    "crawler_traffic_only_enters_crawler_aggregate_observation",
+    "backend_payment_success_is_revenue_truth",
+    "backend_report_access_granted_is_access_truth",
+    "frontend_unlock_click_is_observation_only",
+    "email_is_pii_and_must_not_enter_public_html_search_analytics_url_or_digital_pr",
+    "revenue_review_must_not_query_business_db_in_this_pr"
+  ],
+  "funnel_metrics": [
+    "human_landing_views",
+    "human_test_starts",
+    "human_submitted_attempts",
+    "human_generated_results",
+    "human_report_previews",
+    "human_unlock_clicks_observation_only",
+    "human_orders_created",
+    "human_payment_successes",
+    "human_benefits_granted",
+    "human_report_access_grants",
+    "human_pdf_generations"
+  ],
+  "dedupe_concepts": [
+    "attempt_id",
+    "order_id",
+    "email_hash",
+    "report_id",
+    "session_id",
+    "date_grain"
+  ],
+  "source_of_truth_table_families_contract_only": [
+    "attempts",
+    "results",
+    "email_captures",
+    "orders",
+    "payments",
+    "benefits",
+    "report_access",
+    "pdf_generation"
+  ],
+  "gaps_and_sidecars": [
+    "bot_human_separation_partially_proven",
+    "gsc_ga4_referral_inputs_are_not_revenue_truth",
+    "frontend_events_remain_observation_until_backend_truth_joins_are_explicit"
+  ],
+  "safety_flags": {
+    "production_db_read": false,
+    "business_db_accessed": false,
+    "analytics_mutated": false,
+    "pii_exposed": false,
+    "fap_web_modified": false,
+    "runtime_implemented": false
+  },
+  "next_task": "SEO-GROWTH-MBTI-06"
+}
