@@ -1,0 +1,99 @@
+{
+  "version": "seo-growth-mbti-07-scale-decision-entity-playbook-closeout.v1",
+  "task": "SEO-GROWTH-MBTI-07",
+  "train": "SEO-GROWTH-MBTI-PR-TRAIN-01",
+  "type": "docs_generated_test_ledger_only",
+  "completed_train_items": [
+    "SEO-GROWTH-MBTI-00",
+    "SEO-GROWTH-MBTI-01",
+    "SEO-GROWTH-MBTI-02",
+    "SEO-GROWTH-MBTI-03A",
+    "SEO-GROWTH-MBTI-03B",
+    "SEO-GROWTH-MBTI-04",
+    "SEO-GROWTH-MBTI-05",
+    "SEO-GROWTH-MBTI-06"
+  ],
+  "entity_playbook_template": [
+    "entity_key_rules",
+    "url_truth_rules",
+    "content_internal_link_rules",
+    "claim_lint_rules",
+    "search_channel_rules",
+    "digital_pr_rules",
+    "funnel_telemetry_rules",
+    "bot_human_separation",
+    "brand_lift_proxy",
+    "ops_seo_review_cadence",
+    "repair_action_rules",
+    "replication_checklist"
+  ],
+  "scale_no_scale_criteria": [
+    "mbti_review_window_produces_clear_scale_decision",
+    "no_claim_unsafe_public_page",
+    "no_private_flow_leak",
+    "no_forbidden_authority_url_truth",
+    "no_uncontrolled_search_channel_live_gate",
+    "no_bulk_outreach",
+    "no_pseo",
+    "human_only_funnel_and_backend_revenue_truth_separated_from_frontend_observation"
+  ],
+  "replication_order": [
+    "MBTI",
+    "Big Five",
+    "Enneagram",
+    "RIASEC",
+    "Career Guides",
+    "Research Hub",
+    "Topic Clusters",
+    "Multi-language"
+  ],
+  "hard_boundaries": [
+    "do_not_replicate_until_mbti_review_window_produces_clear_scale_decision",
+    "do_not_overclaim_big_five_riasec_career_or_mbti_as_precise_recommender",
+    "do_not_describe_personality_or_career_systems_as_hiring_suitability_salary_prediction_or_career_success_prediction",
+    "do_not_bulk_submit_urls",
+    "do_not_bulk_outreach",
+    "do_not_generate_pseo",
+    "do_not_auto_publish",
+    "do_not_auto_link"
+  ],
+  "sidecar_issues": [
+    "translation_group_uuid_missing_globally",
+    "translation_group_id_transitional_partial",
+    "backend_deploy_public_smoke_local_tls_sidecar",
+    "fap_web_fallback_authority_risk",
+    "gsc_ga4_referral_data_not_fully_implemented_growth_inputs",
+    "bot_human_funnel_separation_partially_proven",
+    "public_runtime_source_ambiguity_for_some_topic_personality_article_rows",
+    "search_channel_live_gates_must_remain_closed_except_exact_approved_live_canary",
+    "claim_linter_has_fixtures_but_no_verified_production_mbti_surface_scan",
+    "ops_seo_operations_write_capable_outside_this_train",
+    "post_merge_cleanup_script_absent_manual_cleanup_used"
+  ],
+  "not_done": [
+    "live_growth_actions",
+    "content_publish",
+    "search_channel_enqueue",
+    "url_submission",
+    "digital_pr_send",
+    "cms_mutation",
+    "url_truth_write",
+    "internal_link_creation",
+    "production_db_query",
+    "pii_exposure",
+    "deployment",
+    "migration_execution",
+    "fap_web_modification"
+  ],
+  "safety_flags": {
+    "runtime_implemented": false,
+    "migration_executed": false,
+    "production_operation_executed": false,
+    "cms_mutated": false,
+    "fap_web_modified": false,
+    "search_channel_mutated": false,
+    "digital_pr_sent": false
+  },
+  "final_decision": "seo_growth_mbti_planning_completed_ready_for_first_human_approved_growth_action",
+  "next_task": "SEO-GROWTH-MBTI-ACTION-01"
+}
