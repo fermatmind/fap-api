@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T16:27:35+08:00",
+  "updated_at": "2026-05-22T16:40:28+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -734,7 +734,18 @@
       ],
       "commit_sha": "f8d8ff9433a97acfd0ce5a7d161fac20e0283f6d",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1356",
-      "checks": {},
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_closeout": "passed: php artisan test --filter=SeoIntelContentOpsClaimLinkRuntimeCloseout --no-ansi (7 tests, 138 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (461 tests, 7393 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_test": "passed: vendor/bin/pint --test (3481 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/content-ops-claim-link-runtime-closeout.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
       "sidecar_issues": [],
       "failure_reason": null,
       "merged_at": null,
@@ -8224,7 +8235,7 @@
       "depends_on": [
         "REPAIR-2786-FINAL-READINESS-SOFTWARE-MANUAL-HOLD-AUTHORITY-1"
       ],
-      "status": "in_progress",
+      "status": "merged",
       "train_scope": "career_product_claim_authority",
       "risk_level": "medium",
       "title": "fix(api): align career 2786 product claim authority",
@@ -8333,7 +8344,7 @@
       "depends_on": [
         "REPAIR-CN-PROXY-NOINDEX-PUBLIC-OWNER-SURFACE-1"
       ],
-      "status": "in_progress",
+      "status": "pr_open",
       "train_scope": "career_directory_detail_pending_authority",
       "risk_level": "medium",
       "title": "fix(api): promote display-backed directory draft jobs in list authority",
@@ -16768,8 +16779,8 @@
       "depends_on": [
         "BACKEND-DEPLOY-TARGET-ALIYUN-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "a3ea1aceec6961bb511965c1d7667134702b2891",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1569",
       "checks": {
         "aliyun_tls": {
           "status": "pass",
@@ -18315,13 +18326,30 @@
         "INTERNAL-LINK-01B",
         "CLAIM-LINT-01B"
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "commit_sha": "4143c1eba91f85a80c1d4b2c8d08ae18abd2f919",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1568",
+      "checks": {
+        "local": {
+          "php_artisan_test_filter_ops_readiness": "passed: php artisan test --filter=SeoIntelContentOpsClaimLinkOpsReadiness --no-ansi (6 tests, 70 assertions)",
+          "php_artisan_test_filter_seo_intel": "passed: php artisan test --filter=SeoIntel --no-ansi (454 tests, 7255 assertions)",
+          "php_artisan_route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint_test": "passed: vendor/bin/pint --test (3480 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/content-ops-claim-link-ops-readiness.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        },
+        "github": {
+          "pr_1568": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN"
+        },
+        "post_merge": {
+          "focused_readiness_test": "passed: php artisan test --filter=SeoIntelContentOpsClaimLinkOpsReadiness --no-ansi"
+        }
+      },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T08:33:52Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -18347,13 +18375,18 @@
           "at": "2026-05-22T16:27:35+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1568 for CONTENT-OPS-CLAIM-LINK-OPS-READINESS and pushed branch codex/content-ops-claim-link-ops-readiness."
+        },
+        {
+          "at": "2026-05-22T16:33:52+08:00",
+          "status": "merged",
+          "summary": "PR #1568 merged via squash at 4143c1eba91f85a80c1d4b2c8d08ae18abd2f919. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused readiness test passed."
         }
       ]
     },
     "CONTENT-OPS-CLAIM-LINK-CLOSEOUT": {
       "repo": "fap-api",
       "branch": "codex/content-ops-claim-link-closeout",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "CONTENT-OPS-CLAIM-LINK-OPS-READINESS"
       ],
@@ -18374,6 +18407,21 @@
           "at": "2026-05-22T14:37:34+08:00",
           "status": "pending",
           "summary": "Registered closeout/ledger finalization PR for the content ops claim/link runtime train. Scope is closeout docs/generated/test/state only with no runtime, migration, production, CMS, Search Channel, crawler, scheduler, or fap-web changes."
+        },
+        {
+          "at": "2026-05-22T16:38:00+08:00",
+          "status": "in_progress",
+          "summary": "Started CONTENT-OPS-CLAIM-LINK-CLOSEOUT on codex/content-ops-claim-link-closeout. Scope is closeout docs/generated/test/state only plus train ledger reconciliation; no runtime code, migrations, production operations, CMS mutation, Search Channel mutation, crawler log read, scheduler activation, Metabase exposure, or fap-web change."
+        },
+        {
+          "at": "2026-05-22T16:39:09+08:00",
+          "status": "local_validation_passed",
+          "summary": "CONTENT-OPS-CLAIM-LINK-CLOSEOUT local validation passed for focused closeout test, full SeoIntel filter, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Scope remains closeout docs/generated/test/state only; no runtime code, migrations, production operations, CMS mutation, Search Channel mutation, crawler log read, scheduler activation, Metabase exposure, or fap-web change."
+        },
+        {
+          "at": "2026-05-22T16:40:28+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1569 for CONTENT-OPS-CLAIM-LINK-CLOSEOUT and pushed branch codex/content-ops-claim-link-closeout."
         }
       ]
     }
