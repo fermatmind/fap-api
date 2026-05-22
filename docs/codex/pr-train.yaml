@@ -5987,6 +5987,61 @@ prs:
     production_approval_required: true
     next_task: CRAWLER-LOG-04-CANARY
 
+  - id: CRAWLER-LOG-04-CANARY
+    repo: fap-api
+    depends_on:
+      - CRAWLER-LOG-04
+    branch: codex/crawler-log-04-canary-runtime
+    base: main
+    title: "feat(seo-intel): add crawler log production canary runtime"
+    name: "Crawler log human-approved production canary runtime"
+    train_scope: seo_intel_crawler_log_production_canary_runtime
+    risk_level: medium_runtime_read_only_single_source_no_write
+    type: code/docs/test PR
+    scope:
+      - Add a fail-closed single-source crawler log canary runtime for a human-approved production read.
+      - Enforce max_lines <= 1000, dry-run/no-write only, exact approval phrase verification, and no raw persistence.
+      - Keep crawler log canary output aggregate-only with no scheduler, no issue queue write, no URL Truth write, and no search submission.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoIntelCrawlerLogObserveCommand.php
+      - backend/app/Services/SeoIntel/CrawlerLog/**
+      - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogAggregateDryRunTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogProductionCanaryPreflightTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelCrawlerLogProductionCanaryRuntimeTest.php
+      - backend/docs/seo/crawler-log-production-canary-preflight.md
+      - backend/docs/seo/generated/crawler-log-production-canary-preflight.v1.json
+      - backend/docs/seo/crawler-log-production-canary-runtime.md
+      - backend/docs/seo/generated/crawler-log-production-canary-runtime.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Enable scheduler, add any write mode, persist raw log data, write issue queue rows, mutate URL Truth, enqueue Search Channel Queue rows, submit URLs, call external search APIs, deploy, edit env, or expose Metabase.
+      - Add production tailing, background loops, multi-source reads, or any raw payload / token / cookie / header persistence.
+      - Treat crawler logs as URL Truth, canonical truth, indexability truth, or CMS authority.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelCrawlerLogProductionCanaryRuntime
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan seo-intel:crawler-log-observe --fixture --dry-run --no-write --json --limit=20
+      - cd backend && php artisan seo-intel:crawler-log-observe --source=$(pwd)/tests/Fixtures/SeoIntel/crawler_logs/nginx_access_sample.log --approval-phrase="I explicitly approve CRAWLER-LOG-04 production canary for source $(pwd)/tests/Fixtures/SeoIntel/crawler_logs/nginx_access_sample.log with max_lines=1000 and no raw persistence." --dry-run --no-write --json --limit=20
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/crawler-log-production-canary-runtime.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    production_approval_required: true
+    next_task: deploy crawler-log canary runtime and execute the approved production canary
+
   - id: CLAIM-LINT-00
     repo: fap-api
     depends_on:

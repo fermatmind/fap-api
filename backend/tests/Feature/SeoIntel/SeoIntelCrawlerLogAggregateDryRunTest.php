@@ -96,8 +96,8 @@ final class SeoIntelCrawlerLogAggregateDryRunTest extends TestCase
         $this->assertFalse($payload['external_calls_attempted']);
         $this->assertFalse($payload['search_submission_attempted']);
         $this->assertFalse($payload['raw_persistence']);
-        $this->assertContains('fixture_option_required', $payload['issues']);
-        $this->assertContains('production_log_read_not_available_in_v1', $payload['issues']);
+        $this->assertContains('fixture_or_source_required', $payload['issues']);
+        $this->assertContains('single_source_canary_requires_explicit_source', $payload['issues']);
     }
 
     #[Test]

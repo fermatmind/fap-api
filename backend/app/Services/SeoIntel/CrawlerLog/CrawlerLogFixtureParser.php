@@ -31,8 +31,11 @@ final class CrawlerLogFixtureParser
      *     sanitized_rows: list<array<string, mixed>>
      * }
      */
-    public function parseLines(array $lines, string $sourceLogFamily = 'nginx_openresty_access_log'): array
-    {
+    public function parseLines(
+        array $lines,
+        string $sourceLogFamily = 'nginx_openresty_access_log',
+        bool $productionLogReadAttempted = false,
+    ): array {
         $rows = [];
 
         foreach ($lines as $line) {
@@ -47,7 +50,7 @@ final class CrawlerLogFixtureParser
             'dry_run' => true,
             'writes_attempted' => false,
             'writes_committed' => false,
-            'production_log_read_attempted' => false,
+            'production_log_read_attempted' => $productionLogReadAttempted,
             'external_calls_attempted' => false,
             'search_submission_attempted' => false,
             'raw_persistence' => false,
