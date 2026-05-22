@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T07:05:00+08:00",
+  "updated_at": "2026-05-22T08:12:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -12832,13 +12832,13 @@
     "CRAWLER-LOG-02": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-02-fixture-parser-mvp",
-      "status": "github_checks_failed_scoped_fix_local_passed",
-      "state": "github_checks_failed_scoped_fix_local_passed",
+      "status": "merged",
+      "state": "merged",
       "title": "Crawler log fixture parser MVP",
       "depends_on": [
         "CRAWLER-LOG-01"
       ],
-      "commit_sha": "9fedd2d111b037389b61451aefd9901bcfac2e1b",
+      "commit_sha": "f5414d596b65f1b915f5f94097d10b0a39d5e434",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1543",
       "checks": {
         "dependency": {
@@ -12934,9 +12934,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T07:40:30+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "scheduler_activation": false,
       "metabase_deployment": false,
@@ -12975,6 +12975,111 @@
           "at": "2026-05-22T07:05:00+08:00",
           "status": "github_checks_failed_scoped_fix_local_passed",
           "summary": "Inspected PR #1543 verify-mbti failures and added a narrow BigFive runtime freeze allowlist/test only for backend/app/Services/SeoIntel/CrawlerLog/CrawlerLogFixtureParser.php. Reran the freeze guard, focused crawler log parser test, full SeoIntel suite, route list, Pint, JSON/YAML validation, and diff check locally."
+        },
+        {
+          "at": "2026-05-22T07:45:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled CRAWLER-LOG-02 fixture parser MVP as merged via PR #1543; origin/main contains f5414d596b65f1b915f5f94097d10b0a39d5e434 and local cleanup was completed before CRAWLER-LOG-03."
+        }
+      ],
+      "merge_commit_sha": "f5414d596b65f1b915f5f94097d10b0a39d5e434",
+      "merge_observed": true,
+      "final_status": "crawler_log_fixture_parser_mvp_merged_ready_for_aggregate_dry_run_no_write"
+    },
+    "CRAWLER-LOG-03": {
+      "repo": "fap-api",
+      "branch": "codex/crawler-log-03-aggregate-dry-run",
+      "status": "local_validation_passed",
+      "state": "local_validation_passed",
+      "title": "Crawler log aggregate dry-run / no-write",
+      "depends_on": [
+        "CRAWLER-LOG-02"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CRAWLER-LOG-02 is merged via PR #1543 and local main started from f5414d596b65f1b915f5f94097d10b0a39d5e434."
+        },
+        "scope": {
+          "status": "in_progress",
+          "evidence": "Implementing fixture-only aggregate dry-run/no-write service, crawler-log observe command, focused test, docs/generated artifact, and PR train metadata. No production log read, scheduler, collector write, migration, deployment, env edit, external search API call, URL submission, Metabase exposure, business DB / Tencent RDS / Node2 access, or production operation executed."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to fixture-only crawler log aggregate dry-run command/service, focused tests, docs/generated artifact, BigFive freeze guard narrow allowlist, and PR train metadata. No production log read, scheduler, collector write, migration, deployment, env edit, external search API call, URL submission, Metabase exposure, business DB / Tencent RDS / Node2 access, or production operation was performed."
+        },
+        "crawler_log_aggregate_dry_run_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelCrawlerLogAggregateDryRun",
+          "evidence": "6 tests passed with 99 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "evidence": "322 tests passed with 5135 assertions."
+        },
+        "crawler_log_observe_command": {
+          "status": "pass",
+          "command": "cd backend && php artisan seo-intel:crawler-log-observe --fixture --dry-run --no-write --json --limit=20",
+          "evidence": "Command returned status=success, dry_run=true, no_write=true, writes_attempted=false, writes_committed=false, production_log_read_attempted=false, external_calls_attempted=false, search_submission_attempted=false, raw_persistence=false, parsed_line_count=10, aggregate_row_count=10."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 203 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Pint completed successfully; 3447 files checked."
+        },
+        "bigfive_runtime_freeze_guard": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_paths_have_no_uncommitted_diff",
+          "evidence": "1 test passed with 3 assertions after adding a narrow allowlist for the CRAWLER-LOG-03 fixture-only command and aggregate service."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/crawler-log-aggregate-dry-run.v1.json >/dev/null"
+        },
+        "state_json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": true,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "next_pr": "CRAWLER-LOG-04",
+      "history": [
+        {
+          "at": "2026-05-22T08:06:00+08:00",
+          "status": "in_progress",
+          "summary": "Started CRAWLER-LOG-03 aggregate dry-run/no-write from latest main. Scope is synthetic fixture aggregate reporting, a fixture-only crawler-log observe command, focused tests, docs/generated artifact, and metadata only; production crawler log reads, scheduler, collector writes, migrations, deploys, env edits, external APIs, URL submissions, Metabase exposure, and unsafe data sources remain blocked."
+        },
+        {
+          "at": "2026-05-22T08:12:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Added fixture-only aggregate dry-run service, crawler-log observe command, focused tests, docs/generated artifact, and PR train metadata. Focused aggregate test, full SeoIntel suite, fixture command dry-run, route list, Pint, BigFive runtime freeze guard, JSON/YAML validation, state JSON validation, and diff checks passed. No production log read, scheduler, collector write, migration, deployment, env edit, external API call, URL submission, Metabase exposure, or production operation performed."
         }
       ]
     }
