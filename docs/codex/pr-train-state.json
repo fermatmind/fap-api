@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T18:21:30+08:00",
+  "updated_at": "2026-05-22T18:31:57+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18711,11 +18711,11 @@
     "SEO-OPS-SOP-01E": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-sop-01e-mbti-growth-handoff",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "SEO-OPS-SOP-01D"
       ],
-      "commit_sha": "df4716a444e3130a31df5e37eb202d904c461b4a",
+      "commit_sha": "ab3878d6817d8833098edc32d2c9e09a255d69a1",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1575",
       "checks": {
         "local": {
@@ -18727,11 +18727,17 @@
           "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check"
+        },
+        "github": {
+          "pr_1575": "passed: hygiene, Semgrep, verify-mbti-legacy, verify-mbti-v2; mergeStateStatus CLEAN"
+        },
+        "post_merge": {
+          "focused_mbti_handoff_test": "passed: php artisan test --filter=SeoIntelSeoOpsMbtiGrowthLoopHandoff --no-ansi"
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-22T10:24:00Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
@@ -18758,19 +18764,35 @@
           "at": "2026-05-22T18:21:30+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1575 for SEO-OPS-SOP-01E and pushed branch codex/seo-ops-sop-01e-mbti-growth-handoff."
+        },
+        {
+          "at": "2026-05-22T18:24:00+08:00",
+          "status": "merged",
+          "summary": "PR #1575 merged via squash at ab3878d6817d8833098edc32d2c9e09a255d69a1. Remote branch was deleted, local main synced to origin/main, local task branch absent, and post-merge focused MBTI handoff test passed. Local cleanup script was unavailable in this clone."
         }
       ]
     },
     "SEO-OPS-SOP-01F": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-sop-01f-final-closeout",
-      "status": "pending",
+      "status": "pr_open",
       "depends_on": [
         "SEO-OPS-SOP-01E"
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "commit_sha": "2345b2014f03cc3cd0727f9ac44516c3b15119f4",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1576",
+      "checks": {
+        "local": {
+          "focused_final_closeout_test": "passed: php artisan test --filter=SeoIntelSeoOpsSopFinalCloseout --no-ansi (7 tests, 102 assertions)",
+          "seo_intel_suite": "passed: php artisan test --filter=SeoIntel --no-ansi (502 tests, 7917 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3487 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-ops-sop-final-closeout.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -18785,6 +18807,28 @@
           "at": "2026-05-22T17:22:25+08:00",
           "status": "pending",
           "summary": "Registered final SEO Ops SOP closeout PR. Scope is closeout docs/generated/test/state only; no runtime code, migrations, production operations, fap-web changes, or CMS mutations."
+        },
+        {
+          "at": "2026-05-22T18:25:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-OPS-SOP-01F on codex/seo-ops-sop-01f-final-closeout. Scope is closeout docs/generated/test/state only; no runtime code, migrations, production operations, fap-web changes, or CMS mutations."
+        }
+      ],
+      "transitions": [
+        {
+          "at": "2026-05-22T18:30:24+08:00",
+          "status": "local_validation_passed",
+          "summary": "Created final SOP closeout docs, generated artifact, and contract test. Focused, SeoIntel suite, route:list, Pint, JSON/YAML, and git diff checks passed."
+        },
+        {
+          "at": "2026-05-22T18:31:04+08:00",
+          "status": "committed",
+          "summary": "Committed SEO-OPS-SOP-01F closeout scope at 532901be75d7035bcd077fdf425f71bab00309a1."
+        },
+        {
+          "at": "2026-05-22T18:31:57+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1576 for SEO-OPS-SOP-01F and pushed branch codex/seo-ops-sop-01f-final-closeout."
         }
       ]
     }
