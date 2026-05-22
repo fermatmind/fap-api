@@ -1,0 +1,56 @@
+{
+  "version": "chinese-claim-linter-runtime.v1",
+  "task": "CLAIM-LINT-01B",
+  "service": "App\\Services\\SeoIntel\\ClaimLint\\ChineseClaimLinter",
+  "command": "seo-intel:claim-lint --fixture --json",
+  "runtime": "chinese_claim_linter",
+  "states": [
+    "safe",
+    "needs_review",
+    "blocked"
+  ],
+  "severity_levels": [
+    "P0",
+    "P1",
+    "P2",
+    "P3"
+  ],
+  "required_output_fields": [
+    "status",
+    "lint_state",
+    "severity",
+    "matched_rules",
+    "bounded_context_detected",
+    "blocked_phrases",
+    "needs_review_phrases",
+    "allowed_bounded_phrases",
+    "auto_rewrite_attempted",
+    "cms_mutation_attempted",
+    "production_scan_attempted"
+  ],
+  "fixture_coverage": [
+    "forbidden_career_recommendation_claim",
+    "bounded_career_direction_reference",
+    "mbti_salary_guarantee_claim",
+    "model_index_salary_turnover_bounded_phrasing",
+    "clinical_diagnosis_claim",
+    "non_diagnostic_safe_phrasing",
+    "big_five_riasec_overclaim",
+    "snapshot_based_support_phrasing"
+  ],
+  "safety_flags": {
+    "auto_rewrite_enabled": false,
+    "auto_publish_enabled": false,
+    "cms_mutation_enabled": false,
+    "production_scan_enabled": false,
+    "fap_web_modified": false,
+    "seo_intel_write_enabled": false,
+    "search_channel_enqueue_enabled": false,
+    "url_submission_enabled": false,
+    "scheduler_enabled": false,
+    "env_edited": false,
+    "deployment_performed": false
+  },
+  "final_decision": "chinese_claim_linter_runtime_ready",
+  "next_task": "CONTENT-OPS-CLAIM-LINK-OPS-READINESS"
+}
