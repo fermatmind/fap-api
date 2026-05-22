@@ -14532,12 +14532,12 @@
     "SEO-GROWTH-MBTI-02": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-02-content-links",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "68bcc79e",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1582",
       "checks": {
         "local": {
           "focused_content_link_plan_test": "passed: php artisan test --filter=SeoIntelGrowthMbti02ContentInternalLinkWave1Plan --no-ansi (7 tests, 121 assertions)",
@@ -14576,6 +14576,11 @@
           "at": "2026-05-22T21:27:00+08:00",
           "status": "local_validation_passed",
           "summary": "SEO-GROWTH-MBTI-02 local validation passed for focused content/internal link Wave 1 plan test, full SeoIntel filter, route:list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-22T21:28:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1582 for SEO-GROWTH-MBTI-02 and pushed branch codex/seo-growth-mbti-02-content-links."
         }
       ]
     },
