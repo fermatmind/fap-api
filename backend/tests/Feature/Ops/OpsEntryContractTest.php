@@ -40,4 +40,36 @@ final class OpsEntryContractTest extends TestCase
         $this->get('http://www.example.test/')
             ->assertOk();
     }
+
+    public function test_api_host_root_returns_service_landing_without_opening_healthz(): void
+    {
+        config()->set('admin.panel_enabled', true);
+        config()->set('ops.allowed_host', '');
+        config()->set('admin.url', '');
+
+        $this->getJson('https://api.fermatmind.com/')
+            ->assertOk()
+            ->assertExactJson([
+                'ok' => true,
+                'service' => 'FermatMind API',
+                'message' => 'API root is online. Use versioned /api routes for application traffic.',
+                'healthz' => 'restricted',
+            ]);
+    }
+
+    public function test_staging_api_host_root_returns_service_landing_without_opening_healthz(): void
+    {
+        config()->set('admin.panel_enabled', true);
+        config()->set('ops.allowed_host', '');
+        config()->set('admin.url', '');
+
+        $this->getJson('https://staging-api.fermatmind.com/')
+            ->assertOk()
+            ->assertExactJson([
+                'ok' => true,
+                'service' => 'FermatMind API',
+                'message' => 'API root is online. Use versioned /api routes for application traffic.',
+                'healthz' => 'restricted',
+            ]);
+    }
 }

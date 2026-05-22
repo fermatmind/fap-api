@@ -19,6 +19,15 @@ Route::get('/', function () {
         return redirect('/ops');
     }
 
+    if ($requestHost === 'api.fermatmind.com' || $requestHost === 'staging-api.fermatmind.com') {
+        return response()->json([
+            'ok' => true,
+            'service' => 'FermatMind API',
+            'message' => 'API root is online. Use versioned /api routes for application traffic.',
+            'healthz' => 'restricted',
+        ]);
+    }
+
     return view('welcome');
 });
 

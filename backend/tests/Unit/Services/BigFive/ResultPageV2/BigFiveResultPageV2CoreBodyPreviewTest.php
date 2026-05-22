@@ -257,6 +257,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', webRouteChangedLines: $webRouteChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_api_root_service_landing_route_addition(): void
+    {
+        $changed = [
+            'backend/routes/web.php',
+        ];
+        $webRouteChangedLines = [
+            '+    if ($requestHost === \'api.fermatmind.com\' || $requestHost === \'staging-api.fermatmind.com\') {',
+            '+        return response()->json([',
+            '+            \'ok\' => true,',
+            '+            \'service\' => \'FermatMind API\',',
+            '+            \'message\' => \'API root is online. Use versioned /api routes for application traffic.\',',
+            '+            \'healthz\' => \'restricted\',',
+            '+        ]);',
+            '+    }',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', webRouteChangedLines: $webRouteChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_iq_report_foundation_changes(): void
     {
         $changed = [
@@ -2040,7 +2059,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/routes/web.php'
-                && $this->routeDiffIsPublicHealthzAliasOnly($webRouteChangedLines ?? $this->webRouteChangedLines($repoRoot, $baseRef))
+                && (
+                    $this->routeDiffIsPublicHealthzAliasOnly($webRouteChangedLines ?? $this->webRouteChangedLines($repoRoot, $baseRef))
+                    || $this->routeDiffIsApiRootServiceLandingOnly($webRouteChangedLines ?? $this->webRouteChangedLines($repoRoot, $baseRef))
+                )
             ) {
                 continue;
             }
@@ -3568,6 +3590,48 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/^[+-].*(HealthzController|HealthzAccessControl|throttle:api_public|\\/healthz|healthz\\.public|withoutMiddleware|EncryptCookies|AddQueuedCookiesToResponse|StartSession|ShareErrorsFromSession|VerifyCsrfToken)/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsApiRootServiceLandingOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowedLines = [
+            'if ($requestHost === \'api.fermatmind.com\' || $requestHost === \'staging-api.fermatmind.com\') {',
+            'return response()->json([',
+            '\'ok\' => true,',
+            '\'service\' => \'FermatMind API\',',
+            '\'message\' => \'API root is online. Use versioned /api routes for application traffic.\',',
+            '\'healthz\' => \'restricted\',',
+            ']);',
+            '}',
+        ];
+
+        foreach ($changedLines as $line) {
+            if (str_starts_with($line, '-')) {
+                return false;
+            }
+
+            if (! str_starts_with($line, '+')) {
+                return false;
+            }
+
+            $changedBody = trim(substr($line, 1));
+            if ($changedBody === '') {
+                continue;
+            }
+
+            if (! in_array($changedBody, $allowedLines, true)) {
                 return false;
             }
         }
