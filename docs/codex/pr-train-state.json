@@ -14402,12 +14402,12 @@
     "SEO-GROWTH-MBTI-00": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-00-baseline-telemetry",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-00A"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "c3fcf934",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1580",
       "checks": {
         "local": {
           "focused_baseline_telemetry_test": "passed: php artisan test --filter=SeoIntelGrowthMbti00BaselineSnapshotTelemetryContract --no-ansi (8 tests, 123 assertions)",
@@ -14446,6 +14446,11 @@
           "at": "2026-05-22T21:08:00+08:00",
           "status": "local_validation_passed",
           "summary": "SEO-GROWTH-MBTI-00 local validation passed for focused baseline telemetry contract test, full SeoIntel filter, route:list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-22T21:10:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1580 for SEO-GROWTH-MBTI-00 and pushed branch codex/seo-growth-mbti-00-baseline-telemetry."
         }
       ]
     },
