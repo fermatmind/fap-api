@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T15:08:35+08:00",
+  "updated_at": "2026-05-22T15:09:36+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17952,12 +17952,12 @@
     "CONTENT-OPS-02B": {
       "repo": "fap-api",
       "branch": "codex/content-ops-02b-publish-rehearsal-dry-run",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "CONTENT-OPS-02A"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "cbee441980261cd7c1d36fc41f640b5cd13d81a1",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1563",
       "checks": {
         "local": {
           "php_artisan_test_filter_dry_run": "passed: php artisan test --filter=SeoIntelContentPublishRehearsalDryRun --no-ansi (6 tests, 77 assertions)",
@@ -17995,6 +17995,11 @@
           "at": "2026-05-22T15:08:35+08:00",
           "status": "local_validation_passed",
           "summary": "CONTENT-OPS-02B local validation passed for focused dry-run test, full SeoIntel filter, route list, Pint, command help, JSON/YAML parsing, and diff whitespace checks. Runtime remains dry-run/no-write with no publish, CMS mutation, Search Channel enqueue, observation write, sitemap/llms mutation, or fap-web change."
+        },
+        {
+          "at": "2026-05-22T15:09:36+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1563 for CONTENT-OPS-02B and pushed branch codex/content-ops-02b-publish-rehearsal-dry-run."
         }
       ]
     },
