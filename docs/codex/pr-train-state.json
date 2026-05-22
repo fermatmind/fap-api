@@ -14340,12 +14340,12 @@
     "SEO-GROWTH-MBTI-00A": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-00a-baseline-contract",
-      "status": "committed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-OPS-SOP-01F"
       ],
-      "commit_sha": "4403a7bd",
-      "pr_url": null,
+      "commit_sha": "e96dd297",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1579",
       "checks": {
         "local": {
           "focused_baseline_contract_test": "passed: php artisan test --filter=SeoIntelGrowthMbti00aBaselineContract --no-ansi (7 tests, 147 assertions)",
@@ -14384,6 +14384,11 @@
           "at": "2026-05-22T20:34:00+08:00",
           "status": "committed",
           "summary": "Committed SEO-GROWTH-MBTI-00A baseline URL Truth and telemetry contract scope at 4403a7bd."
+        },
+        {
+          "at": "2026-05-22T20:38:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1579 for SEO-GROWTH-MBTI-00A and pushed branch codex/seo-growth-mbti-00a-baseline-contract."
         }
       ]
     }
