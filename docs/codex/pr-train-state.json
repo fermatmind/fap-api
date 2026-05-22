@@ -13228,28 +13228,32 @@
     "CRAWLER-LOG-04-CANARY": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-04-canary-runtime",
-      "status": "in_progress",
-      "state": "in_progress",
+      "status": "merged",
+      "state": "merged",
       "title": "Crawler log human-approved production canary runtime",
       "depends_on": [
         "CRAWLER-LOG-04"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "84d48b2cfc15ac48a7999e2b0af56c1b4a3626bd",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1546",
       "checks": {
         "dependency": {
           "status": "pass",
           "evidence": "CRAWLER-LOG-04 is merged via PR #1545 and origin/main contains 000c4798f34130d8ee4612c6008ed96e6a92730f."
         },
         "scope": {
-          "status": "in_progress",
+          "status": "pass",
           "evidence": "Implementing a fail-closed single-source crawler log canary runtime only. No scheduler, no write mode, no issue queue write, no URL Truth write, no Search Channel Queue write, no search submission, no deploy, no env edit, and no production execution are being performed in this PR."
+        },
+        "github": {
+          "status": "pass",
+          "evidence": "PR #1546 was merged and origin/main contains 84d48b2cfc15ac48a7999e2b0af56c1b4a3626bd."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T01:26:51Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "scheduler_activation": false,
       "metabase_deployment": false,
@@ -13264,12 +13268,84 @@
       "production_approval_required": true,
       "sidecar_allowed": false,
       "stop_on_safety_violation": true,
-      "next_pr": "deploy crawler-log canary runtime and execute the approved production canary",
+      "next_pr": "CRAWLER-LOG-05",
       "history": [
         {
           "at": "2026-05-22T10:05:00+08:00",
           "status": "in_progress",
           "summary": "Started CRAWLER-LOG-04-CANARY from latest main after explicit user authorization to add manifest/state entries. Scope is single-source human-approved crawler log canary runtime only; no scheduler, no writes, no issue queue mutation, no URL Truth mutation, no search submission, no deploy, and no production execution."
+        },
+        {
+          "at": "2026-05-22T10:05:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled CRAWLER-LOG-04-CANARY as merged via PR #1546; origin/main contains 84d48b2cfc15ac48a7999e2b0af56c1b4a3626bd and local cleanup had been completed before CRAWLER-LOG-05."
+        }
+      ]
+    },
+    "CRAWLER-LOG-05": {
+      "repo": "fap-api",
+      "branch": "codex/crawler-log-05-production-canary-report",
+      "status": "in_progress",
+      "state": "in_progress",
+      "title": "Crawler log production canary report and observation follow-up",
+      "depends_on": [
+        "CRAWLER-LOG-04-CANARY",
+        "DEPLOY-NGINX-STATIC-ROUTE-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CRAWLER-LOG-04-CANARY is merged via PR #1546 and DEPLOY-NGINX-STATIC-ROUTE-01 is merged via PR #1547."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Adding only sanitized production canary report docs, generated artifact, focused test, and PR-train metadata. No production log read, canary execution, runtime behavior change, scheduler, write path, deployment, external API call, search submission, Metabase exposure, business DB access, Tencent RDS access, or Node2 access is being performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=SeoIntelCrawlerLogProductionCanaryReport",
+            "cd backend && php artisan test --filter=SeoIntel",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "python3 -m json.tool backend/docs/seo/generated/crawler-log-production-canary-report.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
+            "git diff --check"
+          ]
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_log_read_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": true,
+      "sidecar_allowed": false,
+      "stop_on_safety_violation": true,
+      "next_pr": "CRAWLER-LOG-06",
+      "history": [
+        {
+          "at": "2026-05-22T10:05:00+08:00",
+          "status": "in_progress",
+          "summary": "Started CRAWLER-LOG-05 after user instruction. Scope is a sanitized read-only production canary report and aggregate observation follow-up contract only; no additional production crawler log read, no writes, no scheduler, no search submission, and no runtime change."
+        },
+        {
+          "at": "2026-05-22T10:25:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Local validation passed for the sanitized production canary report artifact and contract test. No production log read, canary execution, deploy, scheduler activation, write path, external search API call, or search submission was performed."
         }
       ]
     }
