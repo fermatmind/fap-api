@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T21:37:00+08:00",
+  "updated_at": "2026-05-22T21:38:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -14597,12 +14597,12 @@
     "SEO-GROWTH-MBTI-03A": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-03a-claim-lint",
-      "status": "in_progress",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-02"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "53b83e10",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1583",
       "checks": {
         "local": {
           "focused_claim_lint_gate_test": "passed: php artisan test --filter=SeoIntelGrowthMbti03aClaimLintGate --no-ansi (7 tests, 98 assertions)",
@@ -14641,6 +14641,11 @@
           "at": "2026-05-22T21:37:00+08:00",
           "status": "local_checks_passed",
           "summary": "Local validation passed for SEO-GROWTH-MBTI-03A: focused claim lint gate test, full SeoIntel suite, route list, Pint, JSON/YAML parsing, and diff checks."
+        },
+        {
+          "at": "2026-05-22T21:38:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1583 for SEO-GROWTH-MBTI-03A and pushed branch codex/seo-growth-mbti-03a-claim-lint."
         }
       ]
     },
