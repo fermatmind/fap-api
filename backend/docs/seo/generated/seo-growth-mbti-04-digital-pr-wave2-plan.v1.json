@@ -1,0 +1,63 @@
+{
+  "version": "seo-growth-mbti-04-digital-pr-wave2-plan.v1",
+  "task": "SEO-GROWTH-MBTI-04",
+  "train": "SEO-GROWTH-MBTI-PR-TRAIN-01",
+  "type": "docs_generated_test_only",
+  "current_state": {
+    "hrzone": "observing_after_first_canary_path_no_automated_follow_up_in_this_pr",
+    "hrec": "draft_status_reference_only_until_future_human_task_confirms_readiness"
+  },
+  "candidate_target_categories": [
+    "hr_and_people_analytics_publications",
+    "workplace_psychology_and_career_education_publications",
+    "research_newsletter_editors",
+    "university_career_or_employability_blogs_with_explicit_submission_paths",
+    "known_founder_or_editorial_relationships"
+  ],
+  "tracking_fields": [
+    "target_name",
+    "target_url",
+    "language",
+    "channel",
+    "sent_at",
+    "human_sender",
+    "response_status",
+    "follow_up_due_at",
+    "follow_up_sent_at",
+    "mention_url",
+    "mention_type",
+    "backlink_url",
+    "referral_source",
+    "referral_sessions",
+    "brand_lift_proxy",
+    "notes"
+  ],
+  "outreach_rules": [
+    "human_only_sends",
+    "no_bulk_outreach",
+    "no_private_email_scraping",
+    "no_paid_backlinks",
+    "no_transactional_backlink_request",
+    "one_follow_up_max_after_5_to_7_days",
+    "pitch_must_preserve_mbti_salary_turnover_claim_boundary"
+  ],
+  "observation_rules": [
+    "digital_pr_mention_is_observation_only",
+    "digital_pr_does_not_create_url_truth",
+    "referral_does_not_prove_backlink",
+    "unlinked_brand_mention_can_be_brand_lift_proxy_only",
+    "backlink_and_referral_fields_remain_observational_and_manually_reviewed"
+  ],
+  "safety_flags": {
+    "emails_sent": false,
+    "dms_sent": false,
+    "contact_info_scraped": false,
+    "links_purchased": false,
+    "transactional_backlink_requested": false,
+    "local_pr_tracking_files_edited": false,
+    "cms_mutated": false,
+    "fap_web_modified": false,
+    "search_channel_mutated": false
+  },
+  "next_task": "SEO-GROWTH-MBTI-05"
+}
