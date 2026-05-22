@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T17:30:30+08:00",
+  "updated_at": "2026-05-22T17:32:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18455,12 +18455,12 @@
     "SEO-OPS-SOP-01A": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-sop-01a-architecture-map",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "CONTENT-OPS-CLAIM-LINK-CLOSEOUT"
       ],
       "commit_sha": "1115a89e37a650549298a91017f392a04466b0fa",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1571",
       "checks": {
         "local": {
           "php_artisan_test_filter_architecture_authority_map": "passed: php artisan test --filter=SeoIntelSeoOpsSopArchitectureAuthorityMap --no-ansi (6 tests, 82 assertions)",
@@ -18497,6 +18497,11 @@
           "at": "2026-05-22T17:29:00+08:00",
           "status": "local_validation_passed",
           "summary": "SEO-OPS-SOP-01A local validation passed for focused architecture test, full SeoIntel filter, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Scope remains docs/generated/test plus train metadata only."
+        },
+        {
+          "at": "2026-05-22T17:32:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1571 for SEO-OPS-SOP-01A and pushed branch codex/seo-ops-sop-01a-architecture-map."
         }
       ]
     },
