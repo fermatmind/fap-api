@@ -85,12 +85,30 @@ final class SeoIntelOpsSeoNativeDashboardUiTest extends TestCase
             ->assertSee('submitted: 1')
             ->assertSee('event_type summary')
             ->assertSee('live_submission_response: 1')
+            ->assertSee('Crawler observation overview')
+            ->assertSee('Private paths blocked')
+            ->assertSee('Sensitive query risk')
+            ->assertSee('API/Ops surface hits')
+            ->assertSee('Unknown bot family')
+            ->assertSee('bot_family')
+            ->assertSee('googlebot: 1')
+            ->assertSee('baiduspider: 1')
+            ->assertSee('surface_family')
+            ->assertSee('public_web: 2')
+            ->assertSee('route_family')
+            ->assertSee('research: 1')
+            ->assertSee('http_status')
+            ->assertSee('200: 2')
+            ->assertSee('/en/research/hrzone-canary')
             ->assertSee('Access boundary')
             ->assertSee('No public Metabase')
             ->assertDontSee('<iframe', false)
             ->assertDontSee('metadata_json')
             ->assertDontSee('event_payload')
             ->assertDontSee('reason_codes')
+            ->assertDontSee('path_hash')
+            ->assertDontSee('idempotency_key')
+            ->assertDontSee('raw_user_agent')
             ->assertDontSee('raw_evidence_included');
     }
 
@@ -162,6 +180,9 @@ final class SeoIntelOpsSeoNativeDashboardUiTest extends TestCase
         $this->assertCount(5, $page->recentIssueRows());
         $this->assertCount(1, $page->recentQueueRows());
         $this->assertCount(4, $page->eventTypeSummary());
+        $this->assertCount(6, $page->crawlerObservationAggregateCards());
+        $this->assertCount(4, $page->crawlerSafetyCards());
+        $this->assertCount(2, $page->recentCrawlerRows());
     }
 
     #[Test]
@@ -180,6 +201,8 @@ final class SeoIntelOpsSeoNativeDashboardUiTest extends TestCase
             'url truth distribution',
             'issue queue overview',
             'search channel queue overview',
+            'crawler observation overview',
+            'seo_crawler_log_daily_aggregates',
             'no metabase iframe',
             'no reverse proxy',
             'no raw sql',
@@ -197,6 +220,9 @@ final class SeoIntelOpsSeoNativeDashboardUiTest extends TestCase
             'event_payload }}',
             'metadata_json }}',
             'reason_codes }}',
+            'path_hash }}',
+            'idempotency_key }}',
+            'raw_user_agent }}',
             'searchchannelsubmissionexecutor',
             'searchchannelqueuewriteservice',
         ] as $forbidden) {
@@ -320,6 +346,33 @@ final class SeoIntelOpsSeoNativeDashboardUiTest extends TestCase
             $table->json('event_payload')->nullable();
             $table->timestamp('created_at')->nullable();
         });
+
+        $schema->create('seo_crawler_log_daily_aggregates', function (Blueprint $table): void {
+            $table->id();
+            $table->date('log_date');
+            $table->string('host', 128);
+            $table->string('surface_family', 64);
+            $table->string('bot_family', 64);
+            $table->string('bot_variant', 64);
+            $table->string('bot_verification_state', 64);
+            $table->string('route_family', 96);
+            $table->string('page_entity_type', 64)->nullable();
+            $table->string('canonical_path', 1024)->nullable();
+            $table->string('path_hash', 64)->nullable();
+            $table->unsignedSmallInteger('http_status')->nullable();
+            $table->string('method_bucket', 16);
+            $table->boolean('query_present');
+            $table->string('query_risk_state', 64);
+            $table->boolean('private_path_blocked');
+            $table->unsignedInteger('hit_count');
+            $table->timestamp('first_seen_at')->nullable();
+            $table->timestamp('last_seen_at')->nullable();
+            $table->string('source_log_family', 64);
+            $table->string('privacy_transform_version', 64);
+            $table->string('idempotency_key', 64);
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
+        });
     }
 
     private function seedSeoIntelData(): void
@@ -421,6 +474,45 @@ final class SeoIntelOpsSeoNativeDashboardUiTest extends TestCase
                 'event_type' => $type,
                 'event_payload' => json_encode(['safe' => true], JSON_UNESCAPED_SLASHES),
                 'created_at' => $createdAt,
+            ]);
+        }
+
+        foreach ([
+            [
+                'bot_family' => 'googlebot',
+                'route_family' => 'research',
+                'page_entity_type' => 'research_report',
+                'canonical_path' => '/en/research/hrzone-canary',
+                'hit_count' => 6,
+                'last_seen_at' => '2026-05-21 23:20:00',
+            ],
+            [
+                'bot_family' => 'baiduspider',
+                'route_family' => 'test_detail',
+                'page_entity_type' => 'test_detail',
+                'canonical_path' => '/zh/tests/mbti-personality-test-16-personality-types',
+                'hit_count' => 5,
+                'last_seen_at' => '2026-05-21 23:18:00',
+            ],
+        ] as $index => $row) {
+            DB::connection('seo_intel')->table('seo_crawler_log_daily_aggregates')->insert($row + [
+                'log_date' => '2026-05-21',
+                'host' => 'fermatmind.com',
+                'surface_family' => 'public_web',
+                'bot_variant' => 'web',
+                'bot_verification_state' => 'ua_claim_only',
+                'path_hash' => null,
+                'http_status' => 200,
+                'method_bucket' => 'GET',
+                'query_present' => false,
+                'query_risk_state' => 'none',
+                'private_path_blocked' => false,
+                'first_seen_at' => '2026-05-21 23:00:00',
+                'source_log_family' => 'nginx_openresty_access_log',
+                'privacy_transform_version' => 'crawler_log_privacy_transform_v1',
+                'idempotency_key' => hash('sha256', 'crawler-log-ui-'.$index),
+                'created_at' => '2026-05-21 23:00:00',
+                'updated_at' => $row['last_seen_at'],
             ]);
         }
     }

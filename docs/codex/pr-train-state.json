@@ -13614,13 +13614,13 @@
     "CRAWLER-LOG-09": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-09-ops-seo-read-model",
-      "status": "in_progress",
-      "state": "in_progress",
+      "status": "merged",
+      "state": "merged",
       "title": "Ops SEO crawler observation read model",
       "depends_on": [
         "CRAWLER-LOG-08"
       ],
-      "commit_sha": "8cb55f069e4d6e0f0c6bb269271f9c45e4fd83f2",
+      "commit_sha": "143a17dab318c2b17d6d506bb36bf4e28cb167c6",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1552",
       "checks": {
         "dependency": {
@@ -13645,12 +13645,16 @@
             "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
             "git diff --check"
           ]
+        },
+        "github": {
+          "status": "pass",
+          "evidence": "PR #1552 GitHub checks passed, mergeStateStatus was CLEAN, and origin/main contains 143a17dab318c2b17d6d506bb36bf4e28cb167c6."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T03:51:41Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "production_log_read_execution": false,
       "production_migration_execution": false,
@@ -13682,6 +13686,80 @@
           "at": "2026-05-22T11:51:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1552 for CRAWLER-LOG-09 with commit 8cb55f069e4d6e0f0c6bb269271f9c45e4fd83f2. Scope remains read-only Ops SEO crawler aggregate observation read model only."
+        },
+        {
+          "at": "2026-05-22T11:51:41+08:00",
+          "status": "merged",
+          "summary": "Merged PR #1552 after GitHub checks passed and mergeStateStatus was CLEAN. origin/main contains 143a17dab318c2b17d6d506bb36bf4e28cb167c6; remote/local task branch cleanup was completed before CRAWLER-LOG-10."
+        }
+      ]
+    },
+    "CRAWLER-LOG-10": {
+      "repo": "fap-api",
+      "branch": "codex/crawler-log-10-ops-seo-ui",
+      "status": "in_progress",
+      "state": "in_progress",
+      "title": "Ops SEO crawler observation UI",
+      "depends_on": [
+        "CRAWLER-LOG-09"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CRAWLER-LOG-09 is merged via PR #1552 and origin/main contains 143a17dab318c2b17d6d506bb36bf4e28cb167c6."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Changed files are limited to read-only crawler aggregate observation UI on /ops/seo, UI tests, docs/generated artifact, and PR-train metadata. No production log read, raw log access, writes, migration execution, scheduler, deployment, external API call, search submission, Metabase exposure, business DB access, Tencent RDS access, or Node2 access was performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=SeoIntelOpsSeoCrawlerObservationUi",
+            "cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboardUi",
+            "cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboardPanels",
+            "cd backend && php artisan test --filter=SeoIntel",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "python3 -m json.tool backend/docs/seo/generated/crawler-log-ops-observation-ui.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"",
+            "git diff --check"
+          ]
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "production_log_read_execution": false,
+      "production_migration_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": true,
+      "sidecar_allowed": false,
+      "stop_on_safety_violation": true,
+      "next_pr": "CRAWLER-LOG-11",
+      "history": [
+        {
+          "at": "2026-05-22T11:53:00+08:00",
+          "status": "in_progress",
+          "summary": "Started CRAWLER-LOG-10 after CRAWLER-LOG-09 merge. Scope is read-only /ops/seo crawler observation UI only; no raw log read, writes, scheduler, deployment, search submission, Metabase exposure, or external API call."
+        },
+        {
+          "at": "2026-05-22T12:03:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Added crawler aggregate cards, safety counters, and safe recent rows to /ops/seo. Local validation passed, including focused crawler UI, existing native dashboard UI, panels, full SeoIntel suite, route list, Pint, JSON/YAML, and diff checks."
         }
       ]
     }

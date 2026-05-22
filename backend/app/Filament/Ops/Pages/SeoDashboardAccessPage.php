@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
+use App\Services\SeoIntel\OpsDashboard\SeoCrawlerLogObservationReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardOverviewReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoIssueQueueReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoSearchChannelQueueReadService;
@@ -186,6 +187,76 @@ class SeoDashboardAccessPage extends Page
     }
 
     /**
+     * @return list<array{title:string,rows:list<array{label:string,count:int}>}>
+     */
+    public function crawlerObservationAggregateCards(): array
+    {
+        $aggregates = (array) data_get($this->dashboardSnapshot(), 'crawler.aggregates', []);
+
+        return [
+            [
+                'title' => 'bot_family',
+                'rows' => $this->distributionRows($aggregates['bot_family'] ?? []),
+            ],
+            [
+                'title' => 'surface_family',
+                'rows' => $this->distributionRows($aggregates['surface_family'] ?? []),
+            ],
+            [
+                'title' => 'route_family',
+                'rows' => $this->distributionRows($aggregates['route_family'] ?? []),
+            ],
+            [
+                'title' => 'http_status',
+                'rows' => $this->distributionRows($aggregates['http_status'] ?? []),
+            ],
+            [
+                'title' => 'query_risk_state',
+                'rows' => $this->distributionRows($aggregates['query_risk_state'] ?? []),
+            ],
+            [
+                'title' => 'private_path_blocked',
+                'rows' => $this->distributionRows($aggregates['private_path_blocked'] ?? []),
+            ],
+        ];
+    }
+
+    /**
+     * @return list<array{label:string,value:string,hint:string,kind:string,state:string}>
+     */
+    public function crawlerSafetyCards(): array
+    {
+        $counts = (array) data_get($this->dashboardSnapshot(), 'crawler.safety_counts', []);
+
+        return collect([
+            ['key' => 'private_path_blocked_count', 'label' => 'Private paths blocked'],
+            ['key' => 'sensitive_query_count', 'label' => 'Sensitive query risk'],
+            ['key' => 'api_or_ops_surface_count', 'label' => 'API/Ops surface hits'],
+            ['key' => 'unknown_bot_count', 'label' => 'Unknown bot family'],
+        ])->map(function (array $card) use ($counts): array {
+            $value = (int) ($counts[$card['key']] ?? 0);
+
+            return [
+                'label' => (string) $card['label'],
+                'value' => (string) $value,
+                'hint' => $value > 0
+                    ? 'Non-zero crawler observation warning. Inspect aggregate context before expanding automation.'
+                    : 'Expected steady state is zero.',
+                'kind' => 'pill',
+                'state' => $value > 0 ? 'warning' : 'success',
+            ];
+        })->values()->all();
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function recentCrawlerRows(): array
+    {
+        return (array) data_get($this->dashboardSnapshot(), 'crawler.recent_rows', []);
+    }
+
+    /**
      * @return list<array<string, mixed>>
      */
     public function recentIssueRows(): array
@@ -318,6 +389,7 @@ class SeoDashboardAccessPage extends Page
                 'url_truth' => app(SeoUrlTruthReadService::class)->read(),
                 'issues' => app(SeoIssueQueueReadService::class)->read(5),
                 'queue' => app(SeoSearchChannelQueueReadService::class)->read(5),
+                'crawler' => app(SeoCrawlerLogObservationReadService::class)->read(5),
             ];
         } catch (Throwable) {
             $this->dashboardSnapshot = $this->emptyDashboardSnapshot();
@@ -351,6 +423,7 @@ class SeoDashboardAccessPage extends Page
             'url_truth' => ['distributions' => []],
             'issues' => ['aggregates' => [], 'recent_rows' => []],
             'queue' => ['aggregates' => ['event_type' => []], 'recent_rows' => []],
+            'crawler' => ['aggregates' => [], 'safety_counts' => [], 'recent_rows' => []],
         ];
     }
 

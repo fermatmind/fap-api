@@ -1,6 +1,7 @@
 @php
     $recentIssues = $this->recentIssueRows();
     $recentQueueRows = $this->recentQueueRows();
+    $recentCrawlerRows = $this->recentCrawlerRows();
     $eventTypeSummary = $this->eventTypeSummary();
 @endphp
 
@@ -214,6 +215,79 @@
                     @endif
                 </x-filament-ops::ops-result-card>
             </div>
+        </x-filament-ops::ops-section>
+
+        <x-filament-ops::ops-section
+            title="Crawler observation overview"
+            description="Aggregate-only crawler observation from seo_crawler_log_daily_aggregates. This panel reads no raw logs and offers no scheduler, collector, issue, URL Truth, queue, or search submission actions."
+        >
+            <x-filament-ops::ops-field-grid :fields="$this->crawlerSafetyCards()" />
+
+            <div class="ops-card-list mt-4">
+                @foreach ($this->crawlerObservationAggregateCards() as $card)
+                    <x-filament-ops::ops-result-card
+                        :title="$card['title']"
+                        :meta="count($card['rows']).' buckets'"
+                    >
+                        @if ($card['rows'] !== [])
+                            <ul class="ops-list">
+                                @foreach ($card['rows'] as $row)
+                                    <li>{{ $row['label'] }}: {{ $row['count'] }}</li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p class="ops-control-hint">No aggregate rows available.</p>
+                        @endif
+                    </x-filament-ops::ops-result-card>
+                @endforeach
+            </div>
+
+            <x-filament-ops::ops-table
+                class="mt-4"
+                :has-rows="$recentCrawlerRows !== []"
+                empty-title="No crawler aggregate rows"
+                empty-description="Crawler observation has no safe aggregate rows to display."
+            >
+                <x-slot name="head">
+                    <tr>
+                        <th>log_date</th>
+                        <th>host</th>
+                        <th>surface_family</th>
+                        <th>bot_family</th>
+                        <th>bot_variant</th>
+                        <th>route_family</th>
+                        <th>page_entity_type</th>
+                        <th>canonical_path</th>
+                        <th>http_status</th>
+                        <th>method_bucket</th>
+                        <th>query_present</th>
+                        <th>query_risk_state</th>
+                        <th>private_path_blocked</th>
+                        <th>hit_count</th>
+                        <th>last_seen_at</th>
+                    </tr>
+                </x-slot>
+
+                @foreach ($recentCrawlerRows as $row)
+                    <tr>
+                        <td>{{ $row['log_date'] ?? '-' }}</td>
+                        <td>{{ $row['host'] ?? '-' }}</td>
+                        <td>{{ $row['surface_family'] ?? '-' }}</td>
+                        <td>{{ $row['bot_family'] ?? '-' }}</td>
+                        <td>{{ $row['bot_variant'] ?? '-' }}</td>
+                        <td>{{ $row['route_family'] ?? '-' }}</td>
+                        <td>{{ $row['page_entity_type'] ?? '-' }}</td>
+                        <td>{{ $row['canonical_path'] ?? '-' }}</td>
+                        <td>{{ $row['http_status'] ?? '-' }}</td>
+                        <td>{{ $row['method_bucket'] ?? '-' }}</td>
+                        <td>{{ ($row['query_present'] ?? false) ? 'true' : 'false' }}</td>
+                        <td>{{ $row['query_risk_state'] ?? '-' }}</td>
+                        <td>{{ ($row['private_path_blocked'] ?? false) ? 'true' : 'false' }}</td>
+                        <td>{{ $row['hit_count'] ?? '0' }}</td>
+                        <td>{{ $row['last_seen_at'] ?? '-' }}</td>
+                    </tr>
+                @endforeach
+            </x-filament-ops::ops-table>
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section

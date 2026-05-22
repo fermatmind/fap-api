@@ -6291,6 +6291,59 @@ prs:
     human_review_required: true
     next_task: CRAWLER-LOG-10
 
+  - id: CRAWLER-LOG-10
+    repo: fap-api
+    depends_on:
+      - CRAWLER-LOG-09
+    branch: codex/crawler-log-10-ops-seo-ui
+    base: main
+    title: "feat(seo-intel): show crawler observation in ops seo"
+    name: "Ops SEO crawler observation UI"
+    train_scope: seo_intel_ops_seo_crawler_observation_ui
+    risk_level: low_read_only_ui_no_actions
+    type: Filament UI/docs/test PR
+    scope:
+      - Add crawler aggregate cards, safety counters, and recent safe rows to the native /ops/seo page.
+      - Use the read-only crawler observation service from CRAWLER-LOG-09.
+      - Prove no action buttons, raw fields, raw log reads, scheduler controls, or submission controls are exposed.
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/SeoDashboardAccessPage.php
+      - backend/resources/views/filament/ops/pages/seo-dashboard-access.blade.php
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsSeoCrawlerObservationUiTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsSeoNativeDashboardUiTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelOpsSeoNativeDashboardPanelsTest.php
+      - backend/docs/seo/crawler-log-ops-observation-ui.md
+      - backend/docs/seo/generated/crawler-log-ops-observation-ui.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add approve, retry, submit, scheduler, collector, issue-write, URL Truth write, Search Channel Queue write, or search submission controls.
+      - Read production crawler logs, raw log files, raw payload tables, business DB, Tencent RDS, Node2, or Metabase internals.
+      - Deploy, edit env, run migrations, enable scheduler, expose Metabase, call external search APIs, or submit URLs.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelOpsSeoCrawlerObservationUi
+      - cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboardUi
+      - cd backend && php artisan test --filter=SeoIntelOpsSeoNativeDashboardPanels
+      - cd backend && php artisan test --filter=SeoIntel
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/crawler-log-ops-observation-ui.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    production_log_read_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: true
+    next_task: CRAWLER-LOG-11
+
   - id: CLAIM-LINT-00
     repo: fap-api
     depends_on:
