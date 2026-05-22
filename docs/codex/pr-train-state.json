@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T15:30:05+08:00",
+  "updated_at": "2026-05-22T15:31:12+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18030,12 +18030,12 @@
     "INTERNAL-LINK-01A": {
       "repo": "fap-api",
       "branch": "codex/internal-link-01a-semantic-link-graph-contract",
-      "status": "committed",
+      "status": "pr_open",
       "depends_on": [
         "CONTENT-OPS-02A"
       ],
       "commit_sha": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1564",
       "checks": {
         "local": {
           "php_artisan_test_filter_contract": "passed: php artisan test --filter=SeoIntelSemanticInternalLinkGraphContract --no-ansi (5 tests, 85 assertions)",
@@ -18077,6 +18077,11 @@
           "at": "2026-05-22T15:30:05+08:00",
           "status": "committed",
           "summary": "Committed INTERNAL-LINK-01A scoped contract changes. PR head SHA will be recorded after push/PR open; final merge SHA will be recorded after squash merge."
+        },
+        {
+          "at": "2026-05-22T15:31:12+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1564 for INTERNAL-LINK-01A and pushed branch codex/internal-link-01a-semantic-link-graph-contract."
         }
       ]
     },
