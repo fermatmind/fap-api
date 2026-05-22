@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T18:31:04+08:00",
+  "updated_at": "2026-05-22T18:31:57+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18775,12 +18775,12 @@
     "SEO-OPS-SOP-01F": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-sop-01f-final-closeout",
-      "status": "committed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-OPS-SOP-01E"
       ],
-      "commit_sha": "532901be75d7035bcd077fdf425f71bab00309a1",
-      "pr_url": null,
+      "commit_sha": "2345b2014f03cc3cd0727f9ac44516c3b15119f4",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1576",
       "checks": {
         "local": {
           "focused_final_closeout_test": "passed: php artisan test --filter=SeoIntelSeoOpsSopFinalCloseout --no-ansi (7 tests, 102 assertions)",
@@ -18824,6 +18824,11 @@
           "at": "2026-05-22T18:31:04+08:00",
           "status": "committed",
           "summary": "Committed SEO-OPS-SOP-01F closeout scope at 532901be75d7035bcd077fdf425f71bab00309a1."
+        },
+        {
+          "at": "2026-05-22T18:31:57+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1576 for SEO-OPS-SOP-01F and pushed branch codex/seo-ops-sop-01f-final-closeout."
         }
       ]
     }
