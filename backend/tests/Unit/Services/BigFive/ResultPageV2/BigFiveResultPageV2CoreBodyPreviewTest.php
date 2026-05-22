@@ -600,6 +600,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_internal_link_graph_dry_run_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoIntelInternalLinkGraphCommand.php',
+            'backend/app/Services/SeoIntel/InternalLink/InternalLinkGraphDryRun.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_migration_isolation_files(): void
     {
         $changed = [
@@ -1881,6 +1891,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isInternalLinkGraphDryRunFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelOpsDashboardReadModelFile($file)) {
                 continue;
             }
@@ -2503,6 +2517,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/SeoIntelContentPublishRehearsalCommand.php',
             'backend/app/Services/SeoIntel/ContentOps/ContentPublishRehearsalDryRun.php',
+        ], true);
+    }
+
+    private function isInternalLinkGraphDryRunFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelInternalLinkGraphCommand.php',
+            'backend/app/Services/SeoIntel/InternalLink/InternalLinkGraphDryRun.php',
         ], true);
     }
 
