@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T16:25:38+08:00",
+  "updated_at": "2026-05-22T16:27:35+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -3572,7 +3572,7 @@
       "repo": "fap-web",
       "branch": "codex/riasec-personalization-06-frontend-fail-closed",
       "title": "feat(riasec): consume backend personalization state fail-closed",
-      "status": "in_progress",
+      "status": "pr_open",
       "depends_on": [
         "RIASEC-PERSONALIZATION-03",
         "RIASEC-PERSONALIZATION-04"
@@ -14272,8 +14272,8 @@
       "depends_on": [
         "SEO-OBS-GOV-05"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "a29be5717ab1b0ad77dfc432a1d142370196fba5",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1568",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -18342,6 +18342,11 @@
           "at": "2026-05-22T16:25:38+08:00",
           "status": "local_validation_passed",
           "summary": "CONTENT-OPS-CLAIM-LINK-OPS-READINESS local validation passed for focused readiness contract test, full SeoIntel filter, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Scope remains docs/generated/test plus train metadata only, with no UI implementation, write controls, production operations, fap-web changes, Metabase exposure, scheduler controls, collector controls, or Search Channel controls."
+        },
+        {
+          "at": "2026-05-22T16:27:35+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1568 for CONTENT-OPS-CLAIM-LINK-OPS-READINESS and pushed branch codex/content-ops-claim-link-ops-readiness."
         }
       ]
     },
