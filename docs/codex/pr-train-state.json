@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T08:24:00+08:00",
+  "updated_at": "2026-05-22T08:50:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -12989,13 +12989,13 @@
     "CRAWLER-LOG-03": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-03-aggregate-dry-run",
-      "status": "pr_opened_github_checks_pending",
-      "state": "pr_opened_github_checks_pending",
+      "status": "merged",
+      "state": "merged",
       "title": "Crawler log aggregate dry-run / no-write",
       "depends_on": [
         "CRAWLER-LOG-02"
       ],
-      "commit_sha": "f7a2f41b",
+      "commit_sha": "2ced7df51229aa553ff225ef8d66928a59038847",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1544",
       "checks": {
         "dependency": {
@@ -13058,9 +13058,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-22T08:17:57+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "scheduler_activation": false,
       "metabase_deployment": false,
@@ -13094,6 +13094,126 @@
           "at": "2026-05-22T08:24:00+08:00",
           "status": "pr_opened_github_checks_pending",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1544 for CRAWLER-LOG-03. GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-22T08:20:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled CRAWLER-LOG-03 aggregate dry-run/no-write as merged via PR #1544; origin/main contains 2ced7df51229aa553ff225ef8d66928a59038847 and local cleanup was completed before CRAWLER-LOG-04."
+        }
+      ],
+      "merge_commit_sha": "2ced7df51229aa553ff225ef8d66928a59038847",
+      "merge_observed": true,
+      "final_status": "crawler_log_aggregate_dry_run_merged_ready_for_production_canary_preflight"
+    },
+    "CRAWLER-LOG-04": {
+      "repo": "fap-api",
+      "branch": "codex/crawler-log-04-production-canary-preflight",
+      "status": "pr_opened_github_checks_pending",
+      "state": "pr_opened_github_checks_pending",
+      "title": "Crawler log production canary preflight",
+      "depends_on": [
+        "CRAWLER-LOG-03"
+      ],
+      "commit_sha": "e00c6830",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1545",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CRAWLER-LOG-03 is merged via PR #1544 and local main started from 2ced7df51229aa553ff225ef8d66928a59038847."
+        },
+        "scope": {
+          "status": "in_progress",
+          "evidence": "Implementing docs/generated/test production canary preflight gate only. No production log read, canary execution, scheduler, collector write, migration, deployment, env edit, external search API call, URL submission, Metabase exposure, business DB / Tencent RDS / Node2 access, or production operation executed."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to production canary preflight docs/generated artifact, focused test, and docs/codex PR train metadata. No production log read, canary execution, scheduler, collector write, migration, deployment, env edit, external search API call, URL submission, Metabase exposure, business DB / Tencent RDS / Node2 access, or production operation was performed."
+        },
+        "crawler_log_production_canary_preflight_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntelCrawlerLogProductionCanaryPreflight",
+          "evidence": "6 tests passed with 113 assertions."
+        },
+        "seo_intel_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=SeoIntel",
+          "evidence": "328 tests passed with 5248 assertions."
+        },
+        "crawler_log_observe_command": {
+          "status": "pass",
+          "command": "cd backend && php artisan seo-intel:crawler-log-observe --fixture --dry-run --no-write --json --limit=20",
+          "evidence": "Command returned status=success, fixture_only=true, dry_run=true, no_write=true, writes_attempted=false, writes_committed=false, production_log_read_attempted=false, external_calls_attempted=false, search_submission_attempted=false, raw_persistence=false."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully; 203 routes reported."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Pint completed successfully; 3448 files checked."
+        },
+        "json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/crawler-log-production-canary-preflight.v1.json >/dev/null"
+        },
+        "state_json_validation": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+        },
+        "yaml_validation": {
+          "status": "pass",
+          "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        },
+        "git_diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "evidence": "Opened PR #1545; GitHub checks pending."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "scheduler_activation": false,
+      "metabase_deployment": false,
+      "external_api_live_activation": false,
+      "crawler_log_read": false,
+      "canary_execution": false,
+      "env_edit": false,
+      "deploy": false,
+      "search_submission": false,
+      "business_db_access": false,
+      "human_review_required": true,
+      "production_approval_required": true,
+      "sidecar_allowed": true,
+      "stop_on_safety_violation": true,
+      "next_pr": "CRAWLER-LOG-04-CANARY",
+      "history": [
+        {
+          "at": "2026-05-22T08:35:00+08:00",
+          "status": "in_progress",
+          "summary": "Started CRAWLER-LOG-04 production canary preflight from latest main. Scope is docs/generated/test/metadata only; production crawler log reads, canary execution, scheduler, collector writes, migrations, deploys, env edits, external APIs, URL submissions, Metabase exposure, and unsafe data sources remain blocked."
+        },
+        {
+          "at": "2026-05-22T08:42:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Added production canary preflight docs/generated artifact, focused test, and PR train metadata. Focused preflight test, full SeoIntel suite, fixture command dry-run, route list, Pint, JSON/YAML validation, state JSON validation, and diff check passed. No production log read, canary execution, scheduler, collector write, migration, deployment, env edit, external API call, URL submission, Metabase exposure, or production operation performed."
+        },
+        {
+          "at": "2026-05-22T08:47:00+08:00",
+          "status": "committed",
+          "summary": "Committed scoped production canary preflight at e00c6830."
+        },
+        {
+          "at": "2026-05-22T08:50:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1545 for CRAWLER-LOG-04. GitHub checks are pending."
         }
       ]
     }
