@@ -767,13 +767,12 @@ set -euo pipefail
 tmp_site="$(mktemp)"
 tmp_script="$(mktemp)"
 tmp_snippet="$(mktemp)"
+site_backup="$(mktemp /tmp/fap-api-nginx-site-backup.XXXXXX.conf)"
+snippet_backup="$(mktemp /tmp/fap-api-nginx-snippet-backup.XXXXXX.conf)"
 site_path=__QUOTED_SITE__
 snippet_path=__QUOTED_SNIPPET__
-backup_suffix="$(date +%Y%m%d%H%M%S)"
-site_backup="$site_path.bak.fap-static.$backup_suffix"
-snippet_backup="$snippet_path.bak.fap-static.$backup_suffix"
 snippet_existed=0
-trap 'rm -f "$tmp_site" "$tmp_script" "$tmp_snippet"' EXIT
+trap 'rm -f "$tmp_site" "$tmp_script" "$tmp_snippet" "$site_backup" "$snippet_backup"' EXIT
 
 printf %s __ENCODED_SNIPPET__ | base64 -d > "$tmp_snippet"
 sudo -n test -f "$site_path"

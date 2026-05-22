@@ -16788,6 +16788,55 @@
           "summary": "Opened PR #1540 for permission, audit, and no-export verification. GitHub checks are pending."
         }
       ]
+    },
+    "DEPLOY-NGINX-STATIC-ROUTE-01": {
+      "repo": "fap-api",
+      "branch": "codex/deploy-nginx-static-route-01",
+      "status": "open",
+      "state": "open",
+      "title": "Keep nginx static route backups outside active config paths",
+      "depends_on": [
+        "BACKEND-DEPLOY-TARGET-ALIYUN-01"
+      ],
+      "commit_sha": "1479b24c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1547",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "BACKEND-DEPLOY-TARGET-ALIYUN-01 is already present in the train and the production deploy target is Aliyun ECS 139.224.130.204."
+        },
+        "scope": {
+          "status": "pass",
+          "evidence": "Scoping only the deploy.php nginx static media route backup-placement fix plus the matching PR-train manifest/state entry. No host, workflow, runtime, or live deployment behavior changes are included."
+        },
+        "local_validation": {
+          "status": "pass",
+          "evidence": "Passed `php -l deploy.php`, the scoped `rg` backup-path check, JSON/YAML parsing, `git diff --check`, and `git diff --cached --check` before opening PR #1547."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "deploy": false,
+      "env_edit": false,
+      "next_pr": "CRAWLER-LOG-05",
+      "history": [
+        {
+          "at": "2026-05-22T10:05:00+08:00",
+          "status": "in_progress",
+          "summary": "Started DEPLOY-NGINX-STATIC-ROUTE-01 after explicit user authorization to add manifest/state entries. Scope is limited to moving nginx static route temporary backups out of active nginx config directories and recording the scoped train metadata."
+        },
+        {
+          "at": "2026-05-22T10:05:00+08:00",
+          "status": "open",
+          "summary": "Opened PR #1547 for the deploy.php nginx static route backup-placement fix after scoped local validation passed."
+        }
+      ]
     }
   }
 }
