@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T08:47:00+08:00",
+  "updated_at": "2026-05-22T08:50:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -13108,14 +13108,14 @@
     "CRAWLER-LOG-04": {
       "repo": "fap-api",
       "branch": "codex/crawler-log-04-production-canary-preflight",
-      "status": "local_validation_passed",
-      "state": "local_validation_passed",
+      "status": "pr_opened_github_checks_pending",
+      "state": "pr_opened_github_checks_pending",
       "title": "Crawler log production canary preflight",
       "depends_on": [
         "CRAWLER-LOG-03"
       ],
       "commit_sha": "e00c6830",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1545",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -13169,6 +13169,10 @@
         "git_diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github": {
+          "status": "pending",
+          "evidence": "Opened PR #1545; GitHub checks pending."
         }
       },
       "failure_reason": null,
@@ -13205,6 +13209,11 @@
           "at": "2026-05-22T08:47:00+08:00",
           "status": "committed",
           "summary": "Committed scoped production canary preflight at e00c6830."
+        },
+        {
+          "at": "2026-05-22T08:50:00+08:00",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1545 for CRAWLER-LOG-04. GitHub checks are pending."
         }
       ]
     }
