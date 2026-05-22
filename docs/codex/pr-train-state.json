@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T15:45:05+08:00",
+  "updated_at": "2026-05-22T15:46:17+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18099,13 +18099,13 @@
     "INTERNAL-LINK-01B": {
       "repo": "fap-api",
       "branch": "codex/internal-link-01b-graph-dry-run-read-model",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "INTERNAL-LINK-01A",
         "CONTENT-OPS-02B"
       ],
       "commit_sha": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1565",
       "checks": {
         "local": {
           "php_artisan_test_filter_dry_run": "passed: php artisan test --filter=SeoIntelInternalLinkGraphDryRun --no-ansi (6 tests, 78 assertions)",
@@ -18144,6 +18144,11 @@
           "at": "2026-05-22T15:45:05+08:00",
           "status": "local_validation_passed",
           "summary": "INTERNAL-LINK-01B local validation passed for focused dry-run test, BigFive runtime freeze allowlist, full SeoIntel filter, route list, Pint, command help, JSON/YAML parsing, and diff whitespace checks. Runtime remains read-only/no-write with no CMS mutation, link creation, fap-web change, crawler log authority, sitemap truth, Search Channel enqueue, URL submission, or Observation Queue write."
+        },
+        {
+          "at": "2026-05-22T15:46:17+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1565 for INTERNAL-LINK-01B and pushed branch codex/internal-link-01b-graph-dry-run-read-model."
         }
       ]
     },
