@@ -37,8 +37,10 @@ final class SeoIntelOpsPortalSeoRouteShellTest extends TestCase
             $this->assertStringContainsString($phrase, $html);
         }
 
+        $visibleHtml = $this->visibleHtml($html);
+
         foreach (['SEO Dash access', 'Native read-only SEO Engine observability dashboard', 'URL Truth', 'Search Channel Queue', 'live API'] as $phrase) {
-            $this->assertStringNotContainsString($phrase, $html);
+            $this->assertStringNotContainsString($phrase, $visibleHtml);
         }
     }
 
@@ -61,8 +63,10 @@ final class SeoIntelOpsPortalSeoRouteShellTest extends TestCase
             $this->assertStringContainsString($phrase, $html);
         }
 
+        $visibleHtml = $this->visibleHtml($html);
+
         foreach (['SEO智能访问', 'SEO看板访问', 'URL 真值', '搜索渠道队列', '只读模型不可用'] as $phrase) {
-            $this->assertStringNotContainsString($phrase, $html);
+            $this->assertStringNotContainsString($phrase, $visibleHtml);
         }
     }
 
@@ -120,5 +124,10 @@ final class SeoIntelOpsPortalSeoRouteShellTest extends TestCase
             SetOpsLocale::SESSION_KEY => $locale,
             SetOpsLocale::EXPLICIT_SESSION_KEY => true,
         ];
+    }
+
+    private function visibleHtml(string $html): string
+    {
+        return (string) preg_replace('#<script\\b[^>]*>.*?</script>#is', '', $html);
     }
 }

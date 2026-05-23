@@ -104,4 +104,21 @@ final class OpsShellPolishTest extends TestCase
             (string) __('ops.widgets.no_funnel_events_7d'),
         );
     }
+
+    public function test_ops_theme_tokens_keep_industrial_radius_and_tracking_constraints(): void
+    {
+        $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
+
+        foreach (['--ops-radius-input: 8px;', '--ops-radius-button: 8px;', '--ops-radius-card: 8px;', '--ops-radius-overlay: 8px;'] as $token) {
+            $this->assertStringContainsString($token, $theme);
+        }
+
+        foreach (['--ops-bg-telemetry: #111827;', '--ops-state-success-signal: #00ff66;', '--ops-border-strong: #b8c0cc;'] as $token) {
+            $this->assertStringContainsString($token, $theme);
+        }
+
+        $this->assertDoesNotMatchRegularExpression('/letter-spacing:\\s*-/', $theme);
+        $this->assertDoesNotMatchRegularExpression('/border-radius:\\s*(1[0-9]|20)px;/', $theme);
+        $this->assertDoesNotMatchRegularExpression('/border-radius:\\s*calc\\(var\\(--ops-radius-card\\)\\s*\\+/', $theme);
+    }
 }
