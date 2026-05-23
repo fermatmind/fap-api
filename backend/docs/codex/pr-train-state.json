@@ -5869,10 +5869,10 @@
     "PR-API-SEC-09": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-09-docs-heredoc-guard",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "5f5a9217455d727907e46c8f1e28f1c4aa965840",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1624",
       "title": "fix(security): harden docs heredoc guard parsing",
       "checks": {
         "local": [
@@ -5903,9 +5903,24 @@
           {
             "command": "git diff --check",
             "status": "passed"
+          },
+          {
+            "command": "git diff --cached --check",
+            "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "Code Scanning / semgrep sarif",
+            "status": "pending",
+            "details": "GitHub check is in progress on PR #1624."
+          },
+          {
+            "name": "CI / hygiene",
+            "status": "pending",
+            "details": "GitHub push and pull_request hygiene checks are in progress on PR #1624."
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
@@ -5927,6 +5942,11 @@
           "at": "2026-05-23T23:58:00+08:00",
           "status": "local_checks_passed",
           "summary": "Hardened docs heredoc guard whitespace parsing and added focused ReleasePack guard coverage; JSON, Pint, SecurityGuardrails, route list, and diff checks passed."
+        },
+        {
+          "at": "2026-05-23T23:58:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1624 from codex/pr-api-sec-09-docs-heredoc-guard after push; initial GitHub checks are pending."
         }
       ]
     }
