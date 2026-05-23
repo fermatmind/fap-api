@@ -117,6 +117,9 @@ final class ContentSearchPageTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/content-search')
             ->assertOk()
+            ->assertSee('id="ops-content-search-form"', false)
+            ->assertSee('wire:submit.prevent="runSearch"', false)
+            ->assertSee('type="search"', false)
             ->assertSee('Content search')
             ->assertSee('Search by title / slug / excerpt / category / tag');
 
