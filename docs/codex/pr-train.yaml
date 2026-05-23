@@ -10536,6 +10536,48 @@ prs:
     scheduler_activation: false
     next_task: SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT
 
+  - id: SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-ACTION-01B-R2
+    branch: codex/seo-growth-mbti-action-01b-r2-gate-preflight
+    base: main
+    title: "docs(seo-intel): add MBTI Search Channel queue gate preflight"
+    name: "Preflight one-shot Search Channel queue write gate"
+    train_scope: seo_growth_mbti_action
+    risk_level: read_only_production_gate_preflight
+    type: docs_generated_test
+    scope:
+      - Record read-only production gate state for the exact EN MBTI indexnow enqueue target.
+      - Define the one-shot gate plan that temporarily opens only the Search Channel queue write gate while keeping all live submission and external API gates closed.
+      - Preserve no-enqueue, no-submission, no-env-edit, and no-production-write boundaries for this task.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-action-01b-r2-gate-preflight.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-01b-r2-gate-preflight.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bR2GatePreflightTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, URL Truth, seo_urls, seo_url_entities, crawler log readers, collectors, scheduler, Digital PR sends, Outlook drafts, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+      - Open the queue write gate, enqueue Search Channel items, submit URLs, call live IndexNow, call GSC/Baidu/Bing/360/Sogou/Shenma, or modify production env.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bR2GatePreflight --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-r2-gate-preflight.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-ACTION-01B-R3
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar

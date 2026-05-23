@@ -15199,6 +15199,63 @@
           "summary": "Opened PR #1596 for SEO-GROWTH-MBTI-ACTION-01B-R2 with the blocked gate report. Production preflight passed for the exact EN MBTI test URL, but no queue write was attempted because SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED remained false."
         }
       ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-r2-gate-preflight",
+      "status": "pr_open",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-R2"
+      ],
+      "commit_sha": "8a6b82b2e9a535792f7f76e39f894c82d61ff0b0",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1599",
+      "checks": {
+        "production_read_only": {
+          "release": "search-channel-single-url-20260523-d6a599a8",
+          "deployed_sha": "d6a599a8dad0e0cc8fb6aba0c2ac2a216f7ebddc",
+          "command_help": "passed: production command help exposes --canonical-url and --enqueue",
+          "dry_run": "passed: exact EN MBTI canonical URL selected once for indexnow with candidate_count=1 eligible_count=1 planned_queue_count=1 duplicate_detected=false and no writes or external calls",
+          "masked_env_presence": "passed: queue write gate env missing; live submission, external API, and IndexNow live API gate env entries present but masked",
+          "config_gates": "passed: queue_write_gate=false, live_submission_gate=false, external_api_gate=false, indexnow_live_api_gate=false",
+          "duplicate_check": "passed: active_duplicate_count=0"
+        },
+        "local": {
+          "focused_gate_preflight_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bR2GatePreflight --no-ansi (1 test, 16 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3502 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-r2-gate-preflight.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-01B-R3",
+      "history": [
+        {
+          "at": "2026-05-23T11:07:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT on codex/seo-growth-mbti-action-01b-r2-gate-preflight. Production read-only checks confirmed the exact EN MBTI URL remains eligible, no duplicate queue item exists, the queue write gate is closed, and all live/external submission gates are closed."
+        },
+        {
+          "at": "2026-05-23T11:13:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Local validation passed for SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT: focused test, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-23T11:34:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1599 for SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT. No production env edit, queue gate change, enqueue, live submission, or external API call was performed."
+        }
+      ]
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
