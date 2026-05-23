@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T11:10:30+08:00",
+  "updated_at": "2026-05-23T11:12:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -4464,7 +4464,7 @@
         "no fap-web change"
       ],
       "commit_sha": "0bc77e5ebcbd2ebb81789dfb9e25f1ecc1ea855b",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1597",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -19739,6 +19739,11 @@
           "at": "2026-05-23T11:10:30+08:00",
           "status": "committed",
           "summary": "Committed global table toolbar spacing and density change at 87c65e1375d291a8b1c257f0b20d84c12cf43ad7 after local validation passed."
+        },
+        {
+          "at": "2026-05-23T11:12:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1597 for OPS-ADMIN-UI-01 and pushed branch codex/ops-admin-ui-01-table-toolbar."
         }
       ]
     },
