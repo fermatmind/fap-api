@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T12:14:16+08:00",
+  "updated_at": "2026-05-23T12:32:05+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -20006,11 +20006,11 @@
     "OPS-ADMIN-UI-04": {
       "repo": "fap-api",
       "branch": "codex/ops-admin-ui-04-seo-ops-polish",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "OPS-ADMIN-UI-03"
       ],
-      "commit_sha": "8c5afb45c7355530e481279073dcfb5a8aea9a2c",
+      "commit_sha": "f3461573e1aa9424cc27f46981e7d8e69650545f",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1601",
       "checks": {
         "npm_run_build_ops_theme": "passed",
@@ -20024,9 +20024,9 @@
         "cached_diff_check": "passed"
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T04:21:03Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -20057,20 +20057,35 @@
           "at": "2026-05-23T12:14:16+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1601 for OPS-ADMIN-UI-04 and pushed branch codex/ops-admin-ui-04-seo-ops-polish."
+        },
+        {
+          "at": "2026-05-23T12:29:47+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled PR #1601 as merged with squash commit f3461573e1aa9424cc27f46981e7d8e69650545f; remote branch was deleted. Local continuation uses a clean origin/main worktree because the primary clone has unrelated Search Channel work on local main."
         }
       ]
     },
     "OPS-ADMIN-UI-05": {
       "repo": "fap-api",
       "branch": "codex/ops-admin-ui-05-theme-tokens",
-      "status": "pending",
+      "status": "pr_open",
       "depends_on": [
         "OPS-ADMIN-UI-04"
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
-      "failure_reason": null,
+      "commit_sha": "75f1348567eeb67432ec3e454f3212d8d78ae1a3",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1603",
+      "checks": {
+        "npm_run_build_ops_theme": "passed",
+        "focused_ops_theme_i18n_tests": "passed",
+        "feature_ops_full": "failed_external_sidecar",
+        "route_list": "passed",
+        "pint_targeted_ops_tests": "passed",
+        "json_ledger": "passed",
+        "yaml_manifest": "passed",
+        "diff_check": "passed",
+        "cached_diff_check": "passed"
+      },
+      "failure_reason": "Full tests/Feature/Ops still has 8 failures outside OPS-ADMIN-UI-05 scope: ArticleMachineTranslationProviderTest, ArticleTranslationContractTest, AttemptChainAuditCommandTest, CmsTranslationBackboneTest, CommerceOpsActionLinkageTest, OpsUiLocalizationResponseTest, SelectOrgFlowTest, and ViewOrderCommerceTimelineTest. Focused theme/i18n checks passed.",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -20084,6 +20099,16 @@
           "at": "2026-05-23T11:08:00+08:00",
           "status": "registered",
           "summary": "Registered theme token consolidation PR. Scope is ops theme tokens, radius, and color semantics only."
+        },
+        {
+          "at": "2026-05-23T12:29:47+08:00",
+          "status": "local_checks_passed_with_sidecar",
+          "summary": "Started OPS-ADMIN-UI-05 from origin/main in isolated worktree. Theme token build, focused theme/i18n tests, route list, targeted Pint, JSON/YAML validation, and diff checks passed. Full Ops suite failures are recorded as external sidecar blockers under the user-approved continuation protocol."
+        },
+        {
+          "at": "2026-05-23T12:32:05+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1603 for OPS-ADMIN-UI-05 and pushed branch codex/ops-admin-ui-05-theme-tokens after rebasing onto origin/main."
         }
       ]
     }

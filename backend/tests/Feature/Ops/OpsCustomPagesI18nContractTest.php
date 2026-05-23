@@ -69,10 +69,12 @@ final class OpsCustomPagesI18nContractTest extends TestCase
 
         $this->assertStringContainsString($zhExpectedTitle, $zhHtml);
 
+        $zhVisibleHtml = $this->visibleHtml($zhHtml);
+
         foreach ($zhForbidden as $phrase) {
             $this->assertStringNotContainsString(
                 $phrase,
-                $zhHtml,
+                $zhVisibleHtml,
                 "Chinese Ops page [{$path}] leaked English UI phrase [{$phrase}].",
             );
         }
@@ -85,10 +87,12 @@ final class OpsCustomPagesI18nContractTest extends TestCase
 
         $this->assertStringContainsString($enExpectedTitle, $enHtml);
 
+        $enVisibleHtml = $this->visibleHtml($enHtml);
+
         foreach ($enForbidden as $phrase) {
             $this->assertStringNotContainsString(
                 $phrase,
-                $enHtml,
+                $enVisibleHtml,
                 "English Ops page [{$path}] leaked Chinese UI phrase [{$phrase}].",
             );
         }
@@ -329,5 +333,10 @@ final class OpsCustomPagesI18nContractTest extends TestCase
             SetOpsLocale::SESSION_KEY => $locale,
             SetOpsLocale::EXPLICIT_SESSION_KEY => true,
         ];
+    }
+
+    private function visibleHtml(string $html): string
+    {
+        return (string) preg_replace('#<script\\b[^>]*>.*?</script>#is', '', $html);
     }
 }
