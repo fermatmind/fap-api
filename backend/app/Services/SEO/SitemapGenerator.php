@@ -360,6 +360,7 @@ class SitemapGenerator
 
         $rows = CareerJob::query()
             ->withoutGlobalScopes()
+            ->with('seoMeta')
             ->where('org_id', 0)
             ->where('status', CareerJob::STATUS_PUBLISHED)
             ->where('is_public', true)
@@ -369,7 +370,7 @@ class SitemapGenerator
                 $query->whereNull('published_at')
                     ->orWhere('published_at', '<=', now());
             })
-            ->select(['locale', 'updated_at', 'published_at'])
+            ->select(['id', 'slug', 'locale', 'title', 'is_indexable', 'updated_at', 'published_at'])
             ->orderBy('locale')
             ->get();
 
@@ -378,6 +379,10 @@ class SitemapGenerator
         foreach ($rows as $row) {
             $locale = trim((string) $row->locale);
             if ($locale === '') {
+                continue;
+            }
+
+            if (! $this->careerJobSitemapIndexable($row, $locale)) {
                 continue;
             }
 
@@ -433,6 +438,7 @@ class SitemapGenerator
     {
         $rows = CareerJob::query()
             ->withoutGlobalScopes()
+            ->with('seoMeta')
             ->where('org_id', 0)
             ->where('status', CareerJob::STATUS_PUBLISHED)
             ->where('is_public', true)
@@ -445,7 +451,7 @@ class SitemapGenerator
                 $query->whereNull('published_at')
                     ->orWhere('published_at', '<=', now());
             })
-            ->select(['slug', 'locale', 'updated_at', 'published_at'])
+            ->select(['id', 'slug', 'locale', 'title', 'is_indexable', 'updated_at', 'published_at'])
             ->orderBy('locale')
             ->orderBy('slug')
             ->get();
@@ -460,12 +466,23 @@ class SitemapGenerator
                 continue;
             }
 
+            $frontendDetailAvailable = $this->careerJobSeoService->isFrontendDetailAvailable($row, $locale);
+            if (! $this->careerJobSeoService->isPublicIndexable($row, $locale, $frontendDetailAvailable)) {
+                continue;
+            }
+
             $lastmod = $row->updated_at
                 ?? $row->published_at
                 ?? now();
+            $meta = $this->careerJobSeoService->buildMeta($row, $locale, $frontendDetailAvailable);
+            $canonical = trim((string) ($meta['canonical'] ?? ''));
+
+            if ($canonical === '') {
+                continue;
+            }
 
             $urls[] = [
-                'loc' => $this->careerJobSeoService->buildCanonicalUrl($row, $locale),
+                'loc' => $canonical,
                 'lastmod' => $lastmod->toAtomString(),
                 'slug' => 'career-jobs:'.$this->careerJobSeoService->mapBackendLocaleToFrontendSegment($locale).':'.$slug,
                 'updated_at' => $lastmod->toDateTimeString(),
@@ -473,6 +490,13 @@ class SitemapGenerator
         }
 
         return array_values(array_filter($urls, static fn (array $row): bool => ! empty($row['loc'])));
+    }
+
+    private function careerJobSitemapIndexable(CareerJob $job, string $locale): bool
+    {
+        $frontendDetailAvailable = $this->careerJobSeoService->isFrontendDetailAvailable($job, $locale);
+
+        return $this->careerJobSeoService->isPublicIndexable($job, $locale, $frontendDetailAvailable);
     }
 
     private function getDisplayAssetCareerJobDetailUrls(): array

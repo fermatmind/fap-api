@@ -278,6 +278,7 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('seo_surface_v1.indexability_state', 'noindex')
             ->assertJsonPath('seo_surface_v1.sitemap_state', 'excluded')
             ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'withhold')
+            ->assertJsonPath('landing_surface_v1.landing_scope', 'public_noindex_detail')
             ->assertJsonPath('landing_surface_v1.indexability_state', 'noindex')
             ->assertJsonPath('answer_surface_v1.indexability_state', 'noindex')
             ->assertJsonMissingPath('job.salary_json')
@@ -382,6 +383,7 @@ final class CareerJobPublicApiTest extends TestCase
                 ->assertJsonPath('seo_surface_v1.indexability_state', 'noindex')
                 ->assertJsonPath('seo_surface_v1.sitemap_state', 'excluded')
                 ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'withhold')
+                ->assertJsonPath('landing_surface_v1.landing_scope', 'public_noindex_detail')
                 ->assertJsonPath('landing_surface_v1.indexability_state', 'noindex')
                 ->assertJsonPath('answer_surface_v1.indexability_state', 'noindex');
 
@@ -425,6 +427,7 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('seo_surface_v1.indexability_state', 'indexable')
             ->assertJsonPath('seo_surface_v1.sitemap_state', 'included')
             ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'allow')
+            ->assertJsonPath('landing_surface_v1.landing_scope', 'public_indexable_detail')
             ->assertJsonPath('landing_surface_v1.indexability_state', 'indexable')
             ->assertJsonPath('answer_surface_v1.indexability_state', 'indexable');
 
