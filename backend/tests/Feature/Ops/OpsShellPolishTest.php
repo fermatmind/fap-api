@@ -134,4 +134,27 @@ final class OpsShellPolishTest extends TestCase
         $this->assertStringContainsString('text-overflow: ellipsis;', $theme);
         $this->assertStringContainsString('.ops-content-search-controls__filters .ops-input:is(select)', $theme);
     }
+
+    public function test_ops_shared_empty_state_uses_stable_centered_panel_spacing(): void
+    {
+        $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
+        $compiledTheme = (string) file_get_contents(resource_path('css/filament/ops/theme.compiled.css'));
+        $tailwindConfig = (string) file_get_contents(resource_path('css/filament/ops/tailwind.config.js'));
+        $emptyState = view('components.filament.ops.shared.empty-state', [
+            'description' => 'Use this shared empty state when a result panel has no records yet.',
+            'eyebrow' => 'Support',
+            'icon' => 'heroicon-o-magnifying-glass',
+            'title' => 'Start searching',
+        ])->render();
+
+        $this->assertStringContainsString('ops-empty-state', $emptyState);
+        $this->assertStringContainsString('ops-empty-state__icon', $emptyState);
+        $this->assertStringContainsString('width: 100%;', $theme);
+        $this->assertStringContainsString('min-height: 12rem;', $theme);
+        $this->assertStringContainsString('align-content: center;', $theme);
+        $this->assertStringContainsString('justify-items: center;', $theme);
+        $this->assertStringContainsString('border-radius: var(--ops-radius-card);', $theme);
+        $this->assertStringContainsString('./resources/views/components/filament/ops/**/*.blade.php', $tailwindConfig);
+        $this->assertStringContainsString('.ops-empty-state', $compiledTheme);
+    }
 }
