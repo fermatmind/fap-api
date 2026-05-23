@@ -109,17 +109,13 @@ class ResolveOrgContext
 
     private function resolveOrgId(Request $request): int
     {
-        $candidates = $this->isOpsPanelRequest($request)
+        $candidates = $this->isOpsPanelRequest($request) || $this->isInternalCmsApiRequest($request)
             ? [
                 $request->attributes->get('ops_org_id'),
                 $request->attributes->get('fm_org_id'),
                 $request->attributes->get('org_id'),
                 $request->hasSession() ? $request->session()->get('ops_org_id') : null,
                 $request->cookie('ops_org_id'),
-                $request->header('X-FM-Org-Id'),
-                $request->header('X-Org-Id'),
-                $request->query('org_id'),
-                $request->route('org_id'),
             ]
             : [
                 $request->header('X-FM-Org-Id'),
@@ -172,6 +168,11 @@ class ResolveOrgContext
         }
 
         return str_starts_with('/'.ltrim($request->path(), '/'), '/ops');
+    }
+
+    private function isInternalCmsApiRequest(Request $request): bool
+    {
+        return str_starts_with('/'.ltrim($request->path(), '/'), '/api/v0.5/internal/');
     }
 
     private function shouldForcePublicAttemptRealm(Request $request): bool

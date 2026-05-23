@@ -3354,3 +3354,277 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-API-SEC-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-api-sec-01-research-cms-trusted-org
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Backend-only Research CMS trusted org scope hardening. Ensure internal
+      research-report read and update endpoints use the trusted ops org context
+      established by CMS admin middleware, keep internal CMS org resolution on
+      trusted ops attributes/session, ignore attacker-supplied org_id in
+      query/body parameters, and add focused tenant-boundary regression tests.
+      Do not change public research exposure semantics, publication gates,
+      routes, migrations, fap-web, sitemap, llms, search-channel queueing,
+      article/support/content-page CMS behavior, or production data.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/ResearchReportController.php app/Http/Middleware/ResolveOrgContext.php tests/Feature/Research/ResearchAssetBackendMvpTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Research/ResearchAssetBackendMvpTest.php"
+      - "php artisan route:list --path=internal/research-reports --no-ansi"
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
+  - id: PR-API-SEC-02
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-api-sec-02-redact-prod-infra-docs
+    base: main
+    depends_on: ["PR-API-SEC-01"]
+    mode: execute
+    scope: >
+      Backend-only production infrastructure documentation redaction. Remove
+      exact production origins, SSH targets, IndexNow key locations, canary
+      infrastructure details, and generated artifacts that preserve those
+      details while keeping non-sensitive operational guidance and contracts.
+      Do not change runtime code, routes, migrations, deploy configuration,
+      public APIs, fap-web, or production infrastructure.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Unit/Security/SecurityGuardrailsTest.php"
+      - "php artisan route:list --no-ansi"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
+  - id: PR-API-SEC-03
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-api-sec-03-pin-semgrep-ci
+    base: main
+    depends_on: ["PR-API-SEC-02"]
+    mode: execute
+    scope: >
+      Backend CI-only Semgrep install hardening. Pin the privileged Semgrep
+      installation/execution path to an auditable version or action reference
+      and add focused workflow hygiene coverage. Do not change application
+      runtime, routes, migrations, docs unrelated to CI, fap-web, or deploy
+      behavior.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "php artisan test tests/Unit/Security/SecurityGuardrailsTest.php"
+      - "php artisan route:list --no-ansi"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
+  - id: PR-API-SEC-04
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-api-sec-04-translation-source-approval
+    base: main
+    depends_on: ["PR-API-SEC-03"]
+    mode: execute
+    scope: >
+      Backend-only Translation Ops source article approval guard. Require
+      trusted source article publication/approval state for translation
+      workflow actions and add focused Ops regression tests. Do not publish
+      content, alter article bodies, change public article APIs, change
+      fap-web, or touch unrelated CMS surfaces.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Ops app/Services/Cms tests/Feature/Ops docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Ops/ArticleTranslationOpsPageTest.php tests/Feature/Ops/ArticleTranslationRevisionContractTest.php"
+      - "php artisan route:list --no-ansi"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
+  - id: PR-API-SEC-05
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-api-sec-05-public-jobs-list-db-budget
+    base: main
+    depends_on: ["PR-API-SEC-04"]
+    mode: execute
+    scope: >
+      Backend-only public career jobs list query budget hardening. Remove or
+      bound per-directory-draft DB amplification in public jobs list builders
+      and add focused performance/regression tests. Do not change public route
+      shape, canonical career content, fap-web, sitemap, llms, migrations, or
+      production data.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Career/Bundles tests/Feature/Career tests/Unit/Services/Career docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php"
+      - "php artisan route:list --path=career --no-ansi"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
+  - id: PR-API-SEC-06
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-api-sec-06-cn-proxy-release-gate
+    base: main
+    depends_on: ["PR-API-SEC-05"]
+    mode: execute
+    scope: >
+      Backend-only CN proxy public-route release gate hardening. Ensure CN
+      proxy APIs honor public-route release eligibility before exposing or
+      accepting artifacts and add focused policy tests. Do not change fap-web,
+      publish content, widen public routes, change sitemap/llms, or alter
+      unrelated career/article workflows.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app tests/Feature docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/SeoIntel tests/Feature/Career"
+      - "php artisan route:list --no-ansi"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
+  - id: PR-API-SEC-07
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-api-sec-07-research-url-truth-paths
+    base: main
+    depends_on: ["PR-API-SEC-06"]
+    mode: execute
+    scope: >
+      Backend-only research URL truth tenant path validation. Ensure research
+      URL truth ingestion accepts only safe tenant CMS paths from trusted
+      sources and add focused URL truth artifact tests. Do not change public
+      research route behavior, fap-web, sitemap/llms enumeration, migrations,
+      or production data.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/SeoIntel app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php tests/Feature/SeoIntel docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/SeoIntel/SeoIntelResearchUrlTruthObservationTest.php tests/Feature/SeoIntel/SeoIntelTwoStageUrlTruthHandoffTest.php"
+      - "php artisan route:list --no-ansi"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
+  - id: PR-API-SEC-08
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-api-sec-08-issue-queue-pii-sanitizer
+    base: main
+    depends_on: ["PR-API-SEC-07"]
+    mode: execute
+    scope: >
+      Backend-only drift canary and issue queue PII sanitization hardening.
+      Redact private identifiers embedded in URL paths and issue queue payloads
+      before persistence/export and add focused sanitizer tests. Do not change
+      production queue processing semantics outside redaction, fap-web, public
+      APIs, routes, migrations, or SEO exposure.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/SeoIntel app/Console/Commands tests/Feature/SeoIntel docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/SeoIntel"
+      - "php artisan route:list --no-ansi"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
+  - id: PR-API-SEC-09
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-api-sec-09-docs-heredoc-guard
+    base: main
+    depends_on: ["PR-API-SEC-08"]
+    mode: execute
+    scope: >
+      Backend-only docs heredoc guard whitespace bypass fix. Harden the docs
+      heredoc guard/parser so whitespace variants cannot bypass protected
+      blocks and add focused parser/guard tests. Do not change runtime
+      application behavior, routes, migrations, fap-web, public APIs, or
+      production content.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app tests docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Unit/Security/SecurityGuardrailsTest.php"
+      - "php artisan route:list --no-ansi"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
