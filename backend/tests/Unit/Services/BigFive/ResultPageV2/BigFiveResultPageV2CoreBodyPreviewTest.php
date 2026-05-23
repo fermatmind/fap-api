@@ -1334,6 +1334,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_attempt_submission_reliability_hardening(): void
+    {
+        $changed = [
+            'backend/app/Services/Attempts/AttemptSubmissionService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_riasec_measurement_contract_compare_policy_changes(): void
     {
         $changed = [
@@ -2231,6 +2240,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isAttemptDataLifecycleErasureFile($file)) {
+                continue;
+            }
+
+            if ($this->isAttemptSubmissionReliabilityHardeningFile($file)) {
                 continue;
             }
 
@@ -3486,6 +3499,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isAttemptDataLifecycleErasureFile(string $file): bool
     {
         return $file === 'backend/app/Services/Attempts/AttemptDataLifecycleService.php';
+    }
+
+    private function isAttemptSubmissionReliabilityHardeningFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Attempts/AttemptSubmissionService.php';
     }
 
     private function isResultEmailLookupFile(string $file): bool
