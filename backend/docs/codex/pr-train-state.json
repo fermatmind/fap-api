@@ -5744,10 +5744,10 @@
     "PR-API-SEC-08": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_scope_validation_passed",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-08-issue-queue-pii-sanitizer",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "bd2c1f03e78b886958ba421dd01da7955906cd83",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1623",
       "title": "fix(security): redact identifiers in drift issue queues",
       "checks": {
         "local": [
@@ -5778,9 +5778,24 @@
           {
             "command": "git diff --check",
             "status": "passed"
+          },
+          {
+            "command": "git diff --cached --check",
+            "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "Code Scanning / semgrep sarif",
+            "status": "pending",
+            "details": "GitHub check is in progress on PR #1623."
+          },
+          {
+            "name": "CI / hygiene",
+            "status": "pending",
+            "details": "GitHub push and pull_request hygiene checks are in progress on PR #1623."
+          }
+        ]
       },
       "failure_reason": "",
       "sidecar_issues": [
@@ -5813,6 +5828,11 @@
           "at": "2026-05-23T23:56:00+08:00",
           "status": "local_scope_validation_passed",
           "summary": "Focused PR-API-SEC-08 sanitizer tests, Pint, route listing, JSON validation, and diff checks passed. Broad tests/Feature/SeoIntel has 6 existing/out-of-scope failures recorded as SIDE-PR-API-SEC-08-01 under the user-approved sidecar protocol."
+        },
+        {
+          "at": "2026-05-23T23:56:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1623 from codex/pr-api-sec-08-issue-queue-pii-sanitizer after push; initial GitHub checks are pending."
         }
       ]
     },
