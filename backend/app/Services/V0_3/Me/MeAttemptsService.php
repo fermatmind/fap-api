@@ -651,7 +651,6 @@ class MeAttemptsService
                 $payload['previous_attempt_id'] = $previousId;
                 $payload['previous_top_code'] = (string) ($previousScore['top_code'] ?? '');
                 $payload['previous_primary_type'] = (string) ($previousScore['primary_type'] ?? '');
-                $payload['top_code_changed'] = $payload['previous_top_code'] !== $payload['current_top_code'];
                 $payload['previous_compare_policy_v1'] = $this->riasecCompareGuardService->summarizeAttempt(
                     $previous,
                     $resultByAttemptId[$previousId] ?? null
@@ -662,6 +661,9 @@ class MeAttemptsService
                     $previous,
                     $resultByAttemptId[$previousId] ?? null
                 );
+                if ((bool) data_get($payload, 'compare_guard_v1.can_compare', false)) {
+                    $payload['top_code_changed'] = $payload['previous_top_code'] !== $payload['current_top_code'];
+                }
             }
         }
 

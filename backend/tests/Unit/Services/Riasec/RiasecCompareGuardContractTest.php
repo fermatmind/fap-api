@@ -49,6 +49,28 @@ final class RiasecCompareGuardContractTest extends TestCase
         $this->assertArrayNotHasKey('domains_delta', $guard);
     }
 
+    public function test_compare_guard_blocks_same_form_when_score_space_versions_differ(): void
+    {
+        $service = new RiasecCompareGuardService(new RiasecMeasurementContract);
+
+        $guard = $service->evaluate(
+            $this->attempt('attempt_a', 'riasec_60', 60),
+            $this->makeResult('attempt_a', 'riasec_60', 'riasec_60_likert5_activity_sum_space.v1'),
+            $this->attempt('attempt_b', 'riasec_60', 60),
+            $this->makeResult(
+                'attempt_b',
+                'riasec_60',
+                'riasec_60_legacy_or_untrusted_space.v0',
+                'RIASEC:riasec_60:riasec_60_likert5_activity_sum_space.v1'
+            )
+        );
+
+        $this->assertFalse($guard['can_compare']);
+        $this->assertSame('cross_form_score_space_mismatch', $guard['reason']);
+        $this->assertSame('riasec.compare.blocked_cross_form', $guard['copy_key']);
+        $this->assertFalse($guard['raw_score_delta_allowed']);
+    }
+
     public function test_measurement_contract_keeps_claim_boundary_and_140q_contextual_label(): void
     {
         $contract = (new RiasecMeasurementContract)->forFormCode('riasec_140', 140);
@@ -80,15 +102,23 @@ final class RiasecCompareGuardContractTest extends TestCase
         return $attempt;
     }
 
-    private function makeResult(string $attemptId, string $formCode, string $scoreSpaceVersion): Result
+    private function makeResult(string $attemptId, string $formCode, string $scoreSpaceVersion, ?string $compareGroup = null): Result
     {
         $result = new Result;
         $result->attempt_id = $attemptId;
         $result->scale_code = 'RIASEC';
+        $contract = (new RiasecMeasurementContract)->forFormCode($formCode);
+        data_set($contract, 'form.score_space_version', $scoreSpaceVersion);
+        data_set(
+            $contract,
+            'compare_policy.compare_compatibility_group',
+            $compareGroup ?? (new RiasecMeasurementContract)->compareCompatibilityGroup($formCode, $scoreSpaceVersion)
+        );
+
         $result->result_json = [
             'form_code' => $formCode,
             'top_code' => 'RIA',
-            'measurement_contract_v1' => (new RiasecMeasurementContract)->forFormCode($formCode),
+            'measurement_contract_v1' => $contract,
             'score_space_version' => $scoreSpaceVersion,
         ];
 
