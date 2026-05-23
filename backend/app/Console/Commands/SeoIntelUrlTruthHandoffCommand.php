@@ -61,6 +61,17 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
 
     private function export(UrlTruthHandoffArtifact $artifact, string $path, int $limit): int
     {
+        $pathSafetyIssue = $artifact->artifactPathSafetyIssue($path, forWrite: true);
+        if ($pathSafetyIssue !== null) {
+            return $this->finish([
+                'status' => 'blocked',
+                'mode' => 'export',
+                'issues' => [$pathSafetyIssue],
+                'dry_run' => true,
+                'writes_committed' => false,
+            ]);
+        }
+
         $source = new BackendAuthorityUrlTruthSource;
         $records = array_values(array_filter(
             $source->candidates(),
@@ -108,6 +119,18 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
 
     private function import(UrlTruthHandoffArtifact $artifact, string $path, int $limit, bool $dryRun, bool $write): int
     {
+        $pathSafetyIssue = $artifact->artifactPathSafetyIssue($path, forWrite: false);
+        if ($pathSafetyIssue !== null) {
+            return $this->finish([
+                'status' => 'blocked',
+                'mode' => 'import',
+                'issues' => [$pathSafetyIssue],
+                'dry_run' => true,
+                'writes_committed' => false,
+                'target_tables' => ['seo_urls', 'seo_url_entities'],
+            ]);
+        }
+
         if (! is_file($path)) {
             return $this->finish([
                 'status' => 'blocked',

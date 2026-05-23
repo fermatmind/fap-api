@@ -69,6 +69,70 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
     }
 
     #[Test]
+    public function export_rejects_unsafe_or_existing_artifact_paths(): void
+    {
+        $relativeExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--export' => '../research-url-truth-handoff.json',
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $relativeOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $relativeExitCode);
+        $this->assertSame('blocked', $relativeOutput['status'] ?? null);
+        $this->assertContains('artifact_path_must_be_absolute', $relativeOutput['issues'] ?? []);
+
+        $existingPath = sys_get_temp_dir().'/existing-research-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+        file_put_contents($existingPath, '{}');
+
+        $existingExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--export' => $existingPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $existingOutput = json_decode(trim(Artisan::output()), true);
+
+        @unlink($existingPath);
+
+        $this->assertSame(1, $existingExitCode);
+        $this->assertSame('blocked', $existingOutput['status'] ?? null);
+        $this->assertContains('artifact_path_already_exists', $existingOutput['issues'] ?? []);
+    }
+
+    #[Test]
+    public function import_rejects_non_json_or_missing_artifact_paths_before_reading(): void
+    {
+        $textPath = sys_get_temp_dir().'/research-url-truth-handoff-'.bin2hex(random_bytes(4)).'.txt';
+        file_put_contents($textPath, '{}');
+
+        $textExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $textPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $textOutput = json_decode(trim(Artisan::output()), true);
+
+        @unlink($textPath);
+
+        $this->assertSame(1, $textExitCode);
+        $this->assertSame('blocked', $textOutput['status'] ?? null);
+        $this->assertContains('artifact_path_must_be_json', $textOutput['issues'] ?? []);
+
+        $missingPath = sys_get_temp_dir().'/missing-research-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+
+        $missingExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $missingPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $missingOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $missingExitCode);
+        $this->assertSame('blocked', $missingOutput['status'] ?? null);
+        $this->assertContains('artifact_path_not_regular_file', $missingOutput['issues'] ?? []);
+    }
+
+    #[Test]
     public function import_validation_rejects_non_research_article_or_claim_unsafe_candidates(): void
     {
         $artifact = new UrlTruthHandoffArtifact;
@@ -198,6 +262,10 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
         $this->assertFalse((bool) ($artifact['tencent_prod_direct_write_to_aliyun_rds_allowed'] ?? true));
         $this->assertTrue((bool) ($artifact['no_cross_cloud_private_networking_required'] ?? false));
         $this->assertTrue((bool) ($artifact['no_search_submission'] ?? false));
+        $this->assertTrue((bool) data_get($artifact, 'artifact_path_safety.absolute_path_required'));
+        $this->assertTrue((bool) data_get($artifact, 'artifact_path_safety.json_extension_required'));
+        $this->assertFalse((bool) data_get($artifact, 'artifact_path_safety.stream_wrappers_allowed', true));
+        $this->assertFalse((bool) data_get($artifact, 'artifact_path_safety.export_overwrite_allowed', true));
         $this->assertContains('/articles', data_get($artifact, 'forbidden.route_fragments', []));
         $this->assertContains('seo_issue_queue', data_get($artifact, 'forbidden.tables', []));
         $this->assertSame('RESEARCH-PUBLISH-02-RERUN', $artifact['next_task'] ?? null);
