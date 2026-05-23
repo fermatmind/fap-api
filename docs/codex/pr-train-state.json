@@ -15268,12 +15268,12 @@
     "SEO-GROWTH-MBTI-ACTION-01B-R3": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-r3-enqueue",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "b7facfe25a0076fc34045c7fdde670f3e87e0cfe",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1602",
       "checks": {
         "production_operation": {
           "approval_phrase": "passed: exact one-shot queue gate open, enqueue, and gate close approval phrase present in the task prompt",
@@ -15322,6 +15322,11 @@
           "at": "2026-05-23T12:20:00+08:00",
           "status": "local_checks_passed",
           "summary": "Local validation passed for SEO-GROWTH-MBTI-ACTION-01B-R3: focused one-shot enqueue test, Search Channel Queue suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-23T12:24:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1602 for SEO-GROWTH-MBTI-ACTION-01B-R3 from codex/seo-growth-mbti-action-01b-r3-enqueue after moving the scoped local commit off main and onto the correct task branch before push. The production operation remained bounded to one queue item, the queue write gate was closed again, and no live submission or external API call occurred."
         }
       ]
     }
