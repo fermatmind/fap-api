@@ -34,7 +34,7 @@ final class CommerceRepairPostCommitFailed extends Command
     ];
 
     protected $signature = 'commerce:repair-post-commit-failed
-        {--org_id=0 : Organization id}
+        {--org_id=0 : Organization id; 0 repairs all organizations}
         {--older_than_minutes=5 : Ignore very fresh failures}
         {--limit=50 : Max events to queue}
         {--max_attempts=12 : Skip very old events after too many attempts}
@@ -114,22 +114,10 @@ final class CommerceRepairPostCommitFailed extends Command
         $cutoff = now()->subMinutes($olderThanMinutes);
         $semanticRejectCodes = self::REPAIRABLE_SEMANTIC_REJECT_CODES;
 
-        return DB::table('payment_events')
+        $query = DB::table('payment_events')
             ->leftJoin('orders', 'orders.order_no', '=', 'payment_events.order_no')
             ->select('payment_events.*')
             ->selectRaw('coalesce(nullif(payment_events.org_id, 0), orders.org_id, 0) as effective_org_id')
-            ->where(function ($orgScope) use ($orgId): void {
-                $orgScope
-                    ->where('payment_events.org_id', $orgId)
-                    ->orWhere(function ($scopedQuery) use ($orgId): void {
-                        $scopedQuery
-                            ->where(function ($orgQuery): void {
-                                $orgQuery->whereNull('payment_events.org_id')
-                                    ->orWhere('payment_events.org_id', 0);
-                            })
-                            ->where('orders.org_id', $orgId);
-                    });
-            })
             ->where('payment_events.updated_at', '<=', $cutoff)
             ->where('payment_events.attempts', '<', $maxAttempts)
             ->where(function ($statusQuery) use ($includeSemanticRejects, $semanticRejectCodes): void {
@@ -153,7 +141,24 @@ final class CommerceRepairPostCommitFailed extends Command
             ->where(function ($queueQuery): void {
                 $queueQuery->whereNull('payment_events.handle_status')
                     ->orWhere('payment_events.handle_status', '!=', 'queued');
-            })
+            });
+
+        if ($orgId > 0) {
+            $query->where(function ($orgScope) use ($orgId): void {
+                $orgScope
+                    ->where('payment_events.org_id', $orgId)
+                    ->orWhere(function ($scopedQuery) use ($orgId): void {
+                        $scopedQuery
+                            ->where(function ($orgQuery): void {
+                                $orgQuery->whereNull('payment_events.org_id')
+                                    ->orWhere('payment_events.org_id', 0);
+                            })
+                            ->where('orders.org_id', $orgId);
+                    });
+            });
+        }
+
+        return $query
             ->orderBy('payment_events.updated_at')
             ->limit($limit)
             ->get()

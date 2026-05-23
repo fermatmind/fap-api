@@ -180,6 +180,74 @@ final class PaymentRepairEngineTest extends TestCase
         $this->assertSame(1, DB::table('report_snapshots')->where('attempt_id', $attemptId)->count());
     }
 
+    public function test_commerce_repair_post_commit_failed_default_scope_repairs_tenant_failed_events(): void
+    {
+        config([
+            'queue.default' => 'sync',
+            'queue.connections.database.driver' => 'sync',
+        ]);
+
+        (new Pr19CommerceSeeder)->run();
+
+        $tenantOrgId = 42;
+        $attemptId = $this->insertAttempt('anon_tenant_post_commit', $tenantOrgId);
+        $orderNo = 'ord_repair_tenant_post_commit_1';
+        $this->insertReportUnlockOrder($orderNo, $attemptId, 'anon_tenant_post_commit', $tenantOrgId);
+
+        $realSnapshotStore = app(ReportSnapshotStore::class);
+        $snapshotStore = Mockery::mock(ReportSnapshotStore::class)->makePartial();
+        $seedCalls = 0;
+        $snapshotStore->shouldReceive('seedPendingSnapshot')
+            ->twice()
+            ->andReturnUsing(function (int $orgId, string $attemptIdArg, ?string $orderNoArg, array $meta) use (&$seedCalls, $realSnapshotStore): void {
+                $seedCalls++;
+                if ($seedCalls === 1) {
+                    throw new \RuntimeException('simulated_tenant_post_commit_failure');
+                }
+
+                $realSnapshotStore->seedPendingSnapshot($orgId, $attemptIdArg, $orderNoArg, $meta);
+            });
+        $this->app->instance(ReportSnapshotStore::class, $snapshotStore);
+
+        $providerEventId = 'evt_repair_tenant_post_commit_1';
+        $first = app(PaymentWebhookProcessor::class)->handle('billing', [
+            'provider_event_id' => $providerEventId,
+            'order_no' => $orderNo,
+            'external_trade_no' => 'trade_repair_tenant_post_commit_1',
+            'amount_cents' => 199,
+            'currency' => 'CNY',
+        ], $tenantOrgId, null, 'anon_tenant_post_commit', true);
+
+        $this->assertFalse((bool) ($first['ok'] ?? true));
+        $this->assertDatabaseHas('payment_events', [
+            'provider_event_id' => $providerEventId,
+            'org_id' => $tenantOrgId,
+            'status' => 'post_commit_failed',
+        ]);
+        $this->assertSame(0, DB::table('report_snapshots')->where('attempt_id', $attemptId)->count());
+
+        $exitCode = Artisan::call('commerce:repair-post-commit-failed', [
+            '--older_than_minutes' => 0,
+            '--limit' => 20,
+            '--json' => 1,
+        ]);
+        $this->assertSame(0, $exitCode);
+
+        $summary = json_decode(Artisan::output(), true);
+        $this->assertIsArray($summary);
+        $this->assertSame(1, (int) ($summary['candidate_count'] ?? -1));
+        $this->assertSame(1, (int) ($summary['queued_count'] ?? -1));
+        $this->assertSame($tenantOrgId, (int) ($summary['results'][0]['effective_org_id'] ?? 0));
+
+        $this->assertDatabaseHas('payment_events', [
+            'provider_event_id' => $providerEventId,
+            'org_id' => $tenantOrgId,
+            'status' => 'processed',
+            'handle_status' => 'reprocessed',
+        ]);
+        $this->assertSame(1, DB::table('report_snapshots')->where('attempt_id', $attemptId)->count());
+    }
+
     public function test_paid_order_repair_command_repairs_paid_order_without_event(): void
     {
         (new Pr19CommerceSeeder)->run();
@@ -850,13 +918,13 @@ final class PaymentRepairEngineTest extends TestCase
         }
     }
 
-    private function insertAttempt(string $anonId): string
+    private function insertAttempt(string $anonId, int $orgId = 0): string
     {
         $attemptId = (string) Str::uuid();
 
         DB::table('attempts')->insert([
             'id' => $attemptId,
-            'org_id' => 0,
+            'org_id' => $orgId,
             'anon_id' => $anonId,
             'user_id' => null,
             'scale_code' => 'MBTI',
@@ -879,17 +947,17 @@ final class PaymentRepairEngineTest extends TestCase
         return $attemptId;
     }
 
-    private function insertReportUnlockOrder(string $orderNo, string $attemptId, string $anonId): void
+    private function insertReportUnlockOrder(string $orderNo, string $attemptId, string $anonId, int $orgId = 0): void
     {
-        $this->insertOrder($orderNo, 'MBTI_REPORT_FULL', $attemptId, $anonId);
+        $this->insertOrder($orderNo, 'MBTI_REPORT_FULL', $attemptId, $anonId, $orgId);
     }
 
-    private function insertOrder(string $orderNo, string $sku, ?string $attemptId, string $anonId): void
+    private function insertOrder(string $orderNo, string $sku, ?string $attemptId, string $anonId, int $orgId = 0): void
     {
         DB::table('orders')->insert([
             'id' => (string) Str::uuid(),
             'order_no' => $orderNo,
-            'org_id' => 0,
+            'org_id' => $orgId,
             'user_id' => null,
             'anon_id' => $anonId,
             'sku' => $sku,
