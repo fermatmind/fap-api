@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Pages\DeliveryTools;
+use App\Filament\Ops\Pages\GlobalSearchPage;
 use App\Filament\Ops\Pages\SecureLink;
 use App\Models\AdminApproval;
 use App\Support\OrgContext;
@@ -120,6 +121,36 @@ final class OpsAccessBoundaryTest extends TestCase
         ])->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/select-org')
             ->assertForbidden();
+    }
+
+    public function test_global_search_uses_real_submit_form_and_returns_matches(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_GLOBAL_SEARCH,
+            PermissionNames::ADMIN_MENU_SUPPORT,
+        ]);
+        $selectedOrg = $this->createOrganization('Global Search Submit Org');
+        $chain = $this->seedCommerceOpsChain((int) $selectedOrg->id, 'ord_global_search_submit_001');
+
+        $session = $this->opsSession($admin, $selectedOrg);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/global-search')
+            ->assertOk()
+            ->assertSee('id="ops-global-search-form"', false)
+            ->assertSee('wire:submit.prevent="runSearch"', false)
+            ->assertSee('type="submit"', false);
+
+        session($session);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->bindOpsOrgContext((int) $selectedOrg->id);
+
+        Livewire::test(GlobalSearchPage::class)
+            ->set('query', $chain['order_no'])
+            ->call('runSearch')
+            ->assertSet('items.0.label', $chain['order_no'])
+            ->assertSet('items.0.type', 'order');
     }
 
     public function test_delivery_tools_request_requires_elevated_action_permission(): void
