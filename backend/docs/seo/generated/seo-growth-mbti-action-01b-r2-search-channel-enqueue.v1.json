@@ -1,0 +1,41 @@
+{
+  "schema_version": "v1",
+  "task": "SEO-GROWTH-MBTI-ACTION-01B-R2",
+  "final_decision": "mbti_action_01b_r2_blocked_write_gate_closed",
+  "approval_phrase_verified": true,
+  "production_release": "search-channel-single-url-20260523-d6a599a8",
+  "deployed_sha": "d6a599a8dad0e0cc8fb6aba0c2ac2a216f7ebddc",
+  "url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+  "channel": "indexnow",
+  "dry_run_passed": true,
+  "enqueue_attempted": false,
+  "enqueue_committed": false,
+  "queue_item_id": null,
+  "duplicate_detected": false,
+  "live_submission_attempted": false,
+  "external_api_call_attempted": false,
+  "search_submission_attempted": false,
+  "bulk_enqueue_attempted": false,
+  "cms_mutation_attempted": false,
+  "url_truth_write_attempted": false,
+  "sitemap_mutation_attempted": false,
+  "llms_mutation_attempted": false,
+  "deferred_urls": [
+    "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+    "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report"
+  ],
+  "post_enqueue_verification": {
+    "queue_item_created": false,
+    "queue_item_count_delta": 0,
+    "duplicate_detected": false,
+    "live_gates_closed": true,
+    "status": "blocked_before_write"
+  },
+  "sidecars": [
+    "write_gate_env=SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED",
+    "write_gate_enabled=false",
+    "api_public_health_endpoints_still_return_404_sidecar"
+  ],
+  "next_task": "SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT"
+}

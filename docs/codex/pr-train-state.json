@@ -15141,6 +15141,58 @@
           "summary": "Opened PR #1595 for SEO-GROWTH-MBTI-ACTION-01B-FIX-01 with the single-URL queue selector change and documented pre-existing /ops/seo UI sidecars from origin/main."
         }
       ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B-R2": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-r2-enqueue",
+      "status": "in_progress",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-FIX-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "production_preflight": {
+          "release": "search-channel-single-url-20260523-d6a599a8",
+          "deployed_sha": "d6a599a8dad0e0cc8fb6aba0c2ac2a216f7ebddc",
+          "command_help": "passed: production command help exposes --canonical-url and --enqueue",
+          "dry_run": "passed: exact EN MBTI canonical URL selected once for indexnow with candidate_count=1 eligible_count=1 planned_queue_count=1 duplicate_detected=false and no writes or external calls",
+          "write_gate": "blocked: write_gate_env=SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED write_gate_enabled=false",
+          "enqueue": "not_attempted: production write gate closed so no bounded enqueue command was executed"
+        },
+        "local": {
+          "focused_enqueue_report_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bR2SearchChannelEnqueue --no-ansi (1 test, 17 assertions)",
+          "search_channel_queue_suite": "passed: php artisan test --filter=SeoIntelSearchChannelQueue --no-ansi (22 tests, 200 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3501 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-r2-search-channel-enqueue.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        },
+        "github": {}
+      },
+      "failure_reason": "Blocked before production write because the official production Search Channel Queue write gate is closed.",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT",
+      "history": [
+        {
+          "at": "2026-05-23T10:44:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-GROWTH-MBTI-ACTION-01B-R2 on codex/seo-growth-mbti-action-01b-r2-enqueue after deploying PR #1595. Production preflight confirmed the exact EN MBTI test URL is still eligible for indexnow but the Search Channel queue write gate remains closed."
+        },
+        {
+          "at": "2026-05-23T10:50:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Local validation passed for SEO-GROWTH-MBTI-ACTION-01B-R2 blocked-operation report: focused test, Search Channel Queue suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. No production queue write was attempted because the write gate is closed."
+        }
+      ]
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
