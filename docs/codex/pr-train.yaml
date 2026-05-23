@@ -10621,6 +10621,49 @@ prs:
     scheduler_activation: false
     next_task: SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW
 
+  - id: SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-ACTION-01B-R3
+    branch: codex/seo-growth-mbti-action-01b-post-enqueue-review
+    base: main
+    title: "docs(seo-intel): record MBTI Search Channel post-enqueue review"
+    name: "Review EN MBTI Search Channel queue item after one-shot enqueue"
+    train_scope: seo_growth_mbti_action
+    risk_level: read_only_production_verification
+    type: docs_generated_test
+    scope:
+      - Verify the exact EN MBTI Search Channel queue item created by the one-shot enqueue remains present, unique, and unchanged in its queued state.
+      - Confirm queue, live submission, and external API gates remain closed after the one-shot enqueue.
+      - Record replay-protection dry-run evidence and sidecar any unverified authenticated /ops/seo visibility rather than inferring it.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-action-01b-post-enqueue-review.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-01b-post-enqueue-review.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bPostEnqueueReviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, deploy files, fap-web, CMS content, URL Truth, seo_urls, seo_url_entities, crawler log readers, collectors, scheduler, Digital PR sends, Outlook drafts, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+      - Open write gates, enqueue URLs, submit URLs, call external search APIs, mutate queue rows, infer /ops/seo state from unauthenticated access, or alter production env.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bPostEnqueueReview --no-ansi
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelQueue --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-post-enqueue-review.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEARCH-CHANNEL-LIVE-MBTI-01
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar
