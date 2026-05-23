@@ -9,14 +9,14 @@
             : __('ops.custom_pages.content_search.empty_initial_desc');
     @endphp
 
-    <div class="ops-shell-page">
+    <div class="ops-shell-page ops-shell-page--content-search">
         <x-filament-ops::ops-section
             :eyebrow="__('ops.custom_pages.content_search.eyebrow')"
             :title="__('ops.custom_pages.content_search.title')"
             :description="__('ops.custom_pages.content_search.description')"
         >
-            <x-filament-ops::ops-toolbar>
-                <div class="ops-control-stack">
+            <x-filament-ops::ops-toolbar class="ops-content-search-toolbar">
+                <div class="ops-control-stack ops-content-search-toolbar__query">
                     <label class="ops-control-label" for="ops-content-search-input">{{ __('ops.custom_pages.content_search.search_label') }}</label>
                     <input
                         id="ops-content-search-input"
@@ -29,47 +29,51 @@
                 </div>
 
                 <x-slot name="actions">
-                    <div class="ops-toolbar-inline">
-                        <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentMetricsPage::getUrl() }}">
-                            {{ __('ops.custom_pages.common.nav.metrics') }}
-                        </x-filament::button>
-                        <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\SeoOperationsPage::getUrl() }}">
-                            {{ __('ops.custom_pages.common.nav.seo_ops') }}
-                        </x-filament::button>
+                    <div class="ops-content-search-controls">
+                        <div class="ops-content-search-controls__nav">
+                            <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentMetricsPage::getUrl() }}">
+                                {{ __('ops.custom_pages.common.nav.metrics') }}
+                            </x-filament::button>
+                            <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\SeoOperationsPage::getUrl() }}">
+                                {{ __('ops.custom_pages.common.nav.seo_ops') }}
+                            </x-filament::button>
+                        </div>
 
-                        <label class="ops-control-stack" for="ops-content-search-type">
-                            <span class="ops-control-label">{{ __('ops.custom_pages.content_search.type') }}</span>
-                            <select id="ops-content-search-type" wire:model="typeFilter" class="ops-input">
-                                <option value="all">{{ __('ops.custom_pages.common.filters.all') }}</option>
-                                <option value="article">{{ __('ops.custom_pages.common.filters.article') }}</option>
-                                <option value="category">{{ __('ops.custom_pages.common.filters.category') }}</option>
-                                <option value="tag">{{ __('ops.custom_pages.common.filters.tag') }}</option>
-                                <option value="guide">{{ __('ops.custom_pages.common.filters.career_guide') }}</option>
-                                <option value="job">{{ __('ops.custom_pages.common.filters.career_job') }}</option>
-                            </select>
-                        </label>
+                        <div class="ops-content-search-controls__filters">
+                            <label class="ops-control-stack" for="ops-content-search-type">
+                                <span class="ops-control-label">{{ __('ops.custom_pages.content_search.type') }}</span>
+                                <select id="ops-content-search-type" wire:model="typeFilter" class="ops-input">
+                                    <option value="all">{{ __('ops.custom_pages.common.filters.all') }}</option>
+                                    <option value="article">{{ __('ops.custom_pages.common.filters.article') }}</option>
+                                    <option value="category">{{ __('ops.custom_pages.common.filters.category') }}</option>
+                                    <option value="tag">{{ __('ops.custom_pages.common.filters.tag') }}</option>
+                                    <option value="guide">{{ __('ops.custom_pages.common.filters.career_guide') }}</option>
+                                    <option value="job">{{ __('ops.custom_pages.common.filters.career_job') }}</option>
+                                </select>
+                            </label>
 
-                        <label class="ops-control-stack" for="ops-content-search-lifecycle">
-                            <span class="ops-control-label">{{ __('ops.custom_pages.content_search.lifecycle') }}</span>
-                            <select id="ops-content-search-lifecycle" wire:model="lifecycleFilter" class="ops-input">
-                                <option value="all">{{ __('ops.custom_pages.common.filters.all') }}</option>
-                                <option value="active">{{ __('ops.custom_pages.content_search.filters.active') }}</option>
-                                <option value="downranked">{{ __('ops.custom_pages.content_search.filters.downranked') }}</option>
-                                <option value="archived">{{ __('ops.custom_pages.content_search.filters.archived') }}</option>
-                                <option value="soft_deleted">{{ __('ops.custom_pages.content_search.filters.soft_deleted') }}</option>
-                            </select>
-                        </label>
+                            <label class="ops-control-stack" for="ops-content-search-lifecycle">
+                                <span class="ops-control-label">{{ __('ops.custom_pages.content_search.lifecycle') }}</span>
+                                <select id="ops-content-search-lifecycle" wire:model="lifecycleFilter" class="ops-input">
+                                    <option value="all">{{ __('ops.custom_pages.common.filters.all') }}</option>
+                                    <option value="active">{{ __('ops.custom_pages.content_search.filters.active') }}</option>
+                                    <option value="downranked">{{ __('ops.custom_pages.content_search.filters.downranked') }}</option>
+                                    <option value="archived">{{ __('ops.custom_pages.content_search.filters.archived') }}</option>
+                                    <option value="soft_deleted">{{ __('ops.custom_pages.content_search.filters.soft_deleted') }}</option>
+                                </select>
+                            </label>
 
-                        <label class="ops-control-stack" for="ops-content-search-stale">
-                            <span class="ops-control-label">{{ __('ops.custom_pages.content_search.freshness') }}</span>
-                            <select id="ops-content-search-stale" wire:model="staleFilter" class="ops-input">
-                                <option value="all">{{ __('ops.custom_pages.common.filters.all') }}</option>
-                                <option value="only_stale">{{ __('ops.custom_pages.content_search.filters.only_stale') }}</option>
-                                <option value="only_fresh">{{ __('ops.custom_pages.content_search.filters.only_fresh') }}</option>
-                            </select>
-                        </label>
+                            <label class="ops-control-stack" for="ops-content-search-stale">
+                                <span class="ops-control-label">{{ __('ops.custom_pages.content_search.freshness') }}</span>
+                                <select id="ops-content-search-stale" wire:model="staleFilter" class="ops-input">
+                                    <option value="all">{{ __('ops.custom_pages.common.filters.all') }}</option>
+                                    <option value="only_stale">{{ __('ops.custom_pages.content_search.filters.only_stale') }}</option>
+                                    <option value="only_fresh">{{ __('ops.custom_pages.content_search.filters.only_fresh') }}</option>
+                                </select>
+                            </label>
+                        </div>
 
-                        <x-filament::button color="primary" wire:click="runSearch">
+                        <x-filament::button color="primary" wire:click="runSearch" class="ops-content-search-controls__submit">
                             {{ __('ops.custom_pages.common.actions.search') }}
                         </x-filament::button>
                     </div>
@@ -82,7 +86,7 @@
             :description="__('ops.custom_pages.content_search.results_desc')"
         >
             <x-slot name="actions">
-                <div class="ops-toolbar-inline">
+                <div class="ops-content-search-results-actions">
                     <span class="ops-results-header__meta">{{ $elapsedMs }} ms</span>
                     @if (\App\Filament\Ops\Support\ContentAccess::canRelease())
                         <label class="ops-control-stack" for="ops-content-search-bulk-action">
