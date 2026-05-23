@@ -4877,7 +4877,7 @@
     "PR-API-SEC-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "pr_open_checks_pending",
       "branch": "codex/pr-api-sec-01-research-cms-trusted-org",
       "commit_sha": "206cf1bba7909c9b4785922338c630f24850cc0b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1616",
@@ -4911,7 +4911,13 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "in_progress",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333117866/job/77522355976"
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
@@ -4938,6 +4944,11 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "pr_open",
           "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1616 for PR-API-SEC-01 after local checks passed."
+        },
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "github_checks_pending",
+          "summary": "GitHub PR #1616 is open; hygiene check is in progress and mergeStateStatus is UNSTABLE while checks are pending."
         }
       ]
     },
