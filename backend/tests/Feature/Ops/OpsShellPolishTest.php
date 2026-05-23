@@ -70,14 +70,15 @@ final class OpsShellPolishTest extends TestCase
         $this->assertSame('Content', MediaAssetResource::getNavigationGroup());
         $this->assertSame('Content', ContentWorkspacePage::getNavigationGroup());
 
+        $this->assertSame('Psychometrics', QuestionAnalyticsPage::getNavigationGroup());
+
         $this->assertSame('Translation', ArticleTranslationOpsPage::getNavigationGroup());
 
-        $this->assertSame('Operations', ContentReleasePage::getNavigationGroup());
-        $this->assertSame('Operations', PostReleaseObservabilityPage::getNavigationGroup());
+        $this->assertSame('Publishing Ops', ContentReleasePage::getNavigationGroup());
+        $this->assertSame('Publishing Ops', PostReleaseObservabilityPage::getNavigationGroup());
 
-        $this->assertSame('Insights', QuestionAnalyticsPage::getNavigationGroup());
-        $this->assertSame('Insights', ArticlePublishingOpsPage::getNavigationGroup());
-        $this->assertSame('Insights', SeoOperationsPage::getNavigationGroup());
+        $this->assertSame('SEO & Growth', ArticlePublishingOpsPage::getNavigationGroup());
+        $this->assertSame('SEO & Growth', SeoOperationsPage::getNavigationGroup());
 
         $this->assertSame('Governance', AdminUserResource::getNavigationGroup());
         $this->assertSame('Governance', OrganizationResource::getNavigationGroup());
