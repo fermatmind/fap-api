@@ -10095,7 +10095,7 @@
       "depends_on": [
         "SEO-DASH-PROD-01B-STAGE1-BLOCKED"
       ],
-      "status": "in_progress",
+      "status": "pr_open",
       "train_scope": "seo_intel_migration_isolation",
       "risk_level": "medium_migration_scope_no_production_execution",
       "title": "fix(seo-intel): isolate seo_intel migrations",
@@ -15096,8 +15096,8 @@
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "4e15fdf38ac25eeada0b78a4f68f9bdaaf1950ac",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1595",
       "checks": {
         "local": {
           "focused_single_url_command_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommand --no-ansi (9 tests, 64 assertions)",
@@ -15134,6 +15134,11 @@
           "at": "2026-05-23T10:14:34+08:00",
           "status": "local_checks_sidecar_blocker_documented",
           "summary": "Scoped validation passed for the single-URL Search Channel command change, route list, Pint, JSON/YAML parsing, and dry-run help checks. Full SeoIntel suite still has 4 pre-existing /ops/seo UI assertion failures that reproduce on clean origin/main and are outside this PR scope."
+        },
+        {
+          "at": "2026-05-23T10:16:24+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1595 for SEO-GROWTH-MBTI-ACTION-01B-FIX-01 with the single-URL queue selector change and documented pre-existing /ops/seo UI sidecars from origin/main."
         }
       ]
     }
