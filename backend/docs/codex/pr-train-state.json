@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T22:05:00+08:00",
+  "updated_at": "2026-05-23T22:10:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5161,10 +5161,10 @@
     "PR-API-SEC-03": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-03-pin-semgrep-ci",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "41feebfb",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1618",
       "title": "ci(security): pin privileged Semgrep install",
       "checks": {
         "local": [
@@ -5195,7 +5195,13 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "github_checks",
+            "status": "pending",
+            "details": "PR #1618 opened; awaiting GitHub check completion."
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
@@ -5217,6 +5223,11 @@
           "at": "2026-05-23T22:05:00+08:00",
           "status": "local_checks_passed",
           "summary": "Pinned Code Scanning Semgrep install to an exact version and added guardrail coverage; SecurityGuardrailsTest, JSON, and route list checks passed."
+        },
+        {
+          "at": "2026-05-23T22:10:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1618 for PR-API-SEC-03 after local checks and scope validation passed."
         }
       ]
     },
