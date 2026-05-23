@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T02:40:27+08:00",
+  "updated_at": "2026-05-24T03:15:15+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -21075,6 +21075,184 @@
           "at": "2026-05-23T12:32:05+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1603 for OPS-ADMIN-UI-05 and pushed branch codex/ops-admin-ui-05-theme-tokens after rebasing onto origin/main."
+        }
+      ]
+    },
+    "OPS-SECURITY-STORAGE-PATH-SAFETY-01": {
+      "repo": "fap-api",
+      "branch": "codex/ops-security-storage-path-safety-01",
+      "status": "merged",
+      "commit_sha": "c5d45863c786b8825e1514db97a7db28fa2a9808",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1625",
+      "checks": {
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "GitHub PR is MERGED and required checks were green before merge."
+        },
+        "origin_main_contains_merge": {
+          "status": "pass",
+          "evidence": "origin/main contains merge commit c5d45863c786b8825e1514db97a7db28fa2a9808."
+        },
+        "remote_branch_deleted": {
+          "status": "pass",
+          "evidence": "git ls-remote --heads origin returned no matching branch."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": "2026-05-23T17:10:13Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": false,
+      "local_cleanup_note": "Local task branch absent; scripts/post_merge_cleanup.sh is not present in this repository, so scripted cleanup was not executed."
+    },
+    "OPS-SECURITY-MBTI-RELATIONSHIP-AUTH-01": {
+      "repo": "fap-api",
+      "branch": "codex/ops-security-mbti-relationship-auth-01",
+      "status": "merged",
+      "commit_sha": "da8754b659b2adfd596de0db014d841a58b591a7",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1626",
+      "checks": {
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "GitHub PR is MERGED and required checks were green before merge."
+        },
+        "origin_main_contains_merge": {
+          "status": "pass",
+          "evidence": "origin/main contains merge commit da8754b659b2adfd596de0db014d841a58b591a7."
+        },
+        "remote_branch_deleted": {
+          "status": "pass",
+          "evidence": "git ls-remote --heads origin returned no matching branch."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": "2026-05-23T17:42:47Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": false,
+      "local_cleanup_note": "Local task branch absent; scripts/post_merge_cleanup.sh is not present in this repository, so scripted cleanup was not executed."
+    },
+    "ATTEMPT-SUBMISSION-RELIABILITY-01": {
+      "repo": "fap-api",
+      "branch": "codex/attempt-submission-reliability-01",
+      "status": "merged",
+      "commit_sha": "85cda16f0e416c014eacc8e6f94a78affe84216f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1627",
+      "checks": {
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "GitHub PR is MERGED and required checks were green before merge."
+        },
+        "origin_main_contains_merge": {
+          "status": "pass",
+          "evidence": "origin/main contains merge commit 85cda16f0e416c014eacc8e6f94a78affe84216f."
+        },
+        "remote_branch_deleted": {
+          "status": "pass",
+          "evidence": "git ls-remote --heads origin returned no matching branch."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": "2026-05-23T18:17:31Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": false,
+      "local_cleanup_note": "Local task branch absent; scripts/post_merge_cleanup.sh is not present in this repository, so scripted cleanup was not executed."
+    },
+    "COMMERCE-TENANT-REPAIR-01": {
+      "repo": "fap-api",
+      "branch": "codex/commerce-tenant-repair-01",
+      "status": "merged",
+      "commit_sha": "fd0fb1f4c1109d2a806085cd0debcad98f38ab33",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1628",
+      "checks": {
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "GitHub PR is MERGED and required checks were green before merge."
+        },
+        "origin_main_contains_merge": {
+          "status": "pass",
+          "evidence": "origin/main contains merge commit fd0fb1f4c1109d2a806085cd0debcad98f38ab33."
+        },
+        "remote_branch_deleted": {
+          "status": "pass",
+          "evidence": "git ls-remote --heads origin returned no matching branch."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": "2026-05-23T18:54:35Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": false,
+      "local_cleanup_note": "Local task branch absent; scripts/post_merge_cleanup.sh is not present in this repository, so scripted cleanup was not executed."
+    },
+    "DB-MIGRATION-PORTABILITY-01": {
+      "repo": "fap-api",
+      "branch": "codex/db-migration-portability-01",
+      "status": "ci_fix_pushed_pending_checks",
+      "depends_on": [
+        "COMMERCE-TENANT-REPAIR-01"
+      ],
+      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1629",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "COMMERCE-TENANT-REPAIR-01 is merged as fd0fb1f4c1109d2a806085cd0debcad98f38ab33."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to SchemaIndex helper, portable index-guard migrations, focused SchemaIndex tests, and PR train state."
+        },
+        "schema_index_test": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter SchemaIndex --no-ansi",
+          "evidence": "6 tests passed, 12 assertions."
+        },
+        "sqlite_migrate_pretend": {
+          "status": "pass",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "evidence": "Command exited 0; output captured in /tmp/fap-api-db-migration-portability-pretend.log."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Support/Database/SchemaIndex.php config/database.php database/migrations tests",
+          "evidence": "1581 files passed after scoped migration formatting and BigFive freeze allowlist update."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "github_required_checks": {
+          "status": "failed_then_fixed_pending_rerun",
+          "evidence": "PR #1629 failed verify-mbti-legacy/v2 because BigFive runtime freeze classified SchemaIndex and DB migrations as runtime changes; added narrow DB migration portability allowlist test/fix in BigFiveResultPageV2CoreBodyPreviewTest.php."
+        },
+        "bigfive_freeze_classifier_targeted": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter db_migration_portability --no-ansi",
+          "evidence": "1 test passed, 1 assertion."
+        },
+        "bigfive_runtime_paths_targeted": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "1 test passed, 3 assertions."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-05-24T03:05:59+08:00",
+          "status": "committed",
+          "summary": "Committed scoped DB migration portability fix; final head SHA will be recorded after push/merge."
+        },
+        {
+          "at": "2026-05-24T03:07:44+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1629 for DB-MIGRATION-PORTABILITY-01."
+        },
+        {
+          "at": "2026-05-24T03:15:15+08:00",
+          "status": "ci_fix_pushed_pending_checks",
+          "summary": "Fixed verify-mbti failure with narrow DB migration portability allowlist; local targeted tests and pint pass."
         }
       ]
     }

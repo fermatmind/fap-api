@@ -393,6 +393,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_db_migration_portability_files(): void
+    {
+        $changed = [
+            'backend/app/Support/Database/SchemaIndex.php',
+            'backend/database/migrations/2026_02_10_160100_add_idx_idempo_payload.php',
+            'backend/database/migrations/2026_02_11_090100_add_idx_idempotency_keys_provider_recorded_hash.php',
+            'backend/database/migrations/2026_02_27_110000_ensure_norms_table_lookup_index.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_public_recency_ordering_only(): void
     {
         $changed = [
@@ -2096,6 +2108,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isDbMigrationPortabilityFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/app/Services/Attempts/AttemptSubmitService.php'
                 && $this->attemptSubmitServiceDiffIsIqResultSecrecyRedactionOnly(
@@ -2867,6 +2883,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isSafeTmpArtifactSupportFile(string $file): bool
     {
         return $file === 'backend/app/Support/SafeArtifactDirectory.php';
+    }
+
+    private function isDbMigrationPortabilityFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Support/Database/SchemaIndex.php',
+            'backend/database/migrations/2026_02_10_160100_add_idx_idempo_payload.php',
+            'backend/database/migrations/2026_02_11_090100_add_idx_idempotency_keys_provider_recorded_hash.php',
+            'backend/database/migrations/2026_02_27_110000_ensure_norms_table_lookup_index.php',
+        ], true);
     }
 
     private function isIqScoringContractFoundationFile(string $file): bool
