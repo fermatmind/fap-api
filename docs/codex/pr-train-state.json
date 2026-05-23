@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T05:11:00+08:00",
+  "updated_at": "2026-05-24T05:14:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -16246,7 +16246,7 @@
     "BIGFIVE-RUNTIME-GUARDS-01": {
       "repo": "fap-api",
       "branch": "codex/bigfive-runtime-guards-01",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "RIASEC-CONTRACT-QUALITY-01"
       ],
@@ -16255,8 +16255,8 @@
         35,
         36
       ],
-      "commit_sha": "e5c21649",
-      "pr_url": null,
+      "commit_sha": "3edb152d1d3b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1633",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -16301,6 +16301,11 @@
           "at": "2026-05-24T05:08:00+08:00",
           "status": "local_validation_passed",
           "summary": "Hardened Big Five norm capture against unsupported scale/form, case-insensitive excluded sources/quality flags, incomplete score vectors, and invalid score values; hardened projection routing against unsupported schema and invalid facet route signals. Focused tests, full BigFive filter, Pint, and diff check passed."
+        },
+        {
+          "at": "2026-05-24T05:14:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1633 after scoped local validation passed."
         }
       ]
     },
