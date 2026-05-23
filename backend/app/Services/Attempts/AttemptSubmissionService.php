@@ -170,7 +170,7 @@ final class AttemptSubmissionService
             }
         }
 
-        $durableAck = $this->latestForAttempt($ctx, $attemptId, $actorUserId, $actorAnonId);
+        $durableAck = $this->ackForSubmission($ctx, (string) $row->id, $attemptId, $actorUserId, $actorAnonId);
         if (! ($durableAck['ok'] ?? false)) {
             throw new ApiProblemException(
                 503,
@@ -305,7 +305,7 @@ final class AttemptSubmissionService
         } catch (ApiProblemException $e) {
             $this->markFailed($submissionId, $e->errorCode(), $e->getMessage());
         } catch (\Throwable $e) {
-            $this->markFailed($submissionId, 'SUBMISSION_JOB_FAILED', $e::class.': '.$e->getMessage());
+            $this->markRetryableFailure($submissionId, 'SUBMISSION_JOB_FAILED', $e::class.': '.$e->getMessage());
             throw $e;
         }
     }
@@ -373,32 +373,7 @@ final class AttemptSubmissionService
             ];
         }
 
-        $state = strtolower(trim((string) ($row->state ?? 'pending')));
-        $resultPayload = $this->decodeJsonArray($row->response_payload_json ?? null);
-        $errorCode = $this->nullableString($row->error_code ?? null);
-        $errorMessage = $this->nullableString($row->error_message ?? null);
-        if ($state === 'failed') {
-            $errorMessage = $this->publicSubmissionErrorMessage($errorCode, $errorMessage);
-            $resultPayload = $this->sanitizeSubmissionResultPayload($resultPayload, $errorCode);
-        }
-
-        return [
-            'ok' => true,
-            'attempt_id' => $attemptId,
-            'submission' => [
-                'id' => (string) ($row->id ?? ''),
-                'mode' => strtolower(trim((string) ($row->mode ?? ''))),
-                'state' => $state,
-                'error_code' => $errorCode,
-                'error_message' => $errorMessage,
-                'started_at' => $row->started_at !== null ? (string) $row->started_at : null,
-                'finished_at' => $row->finished_at !== null ? (string) $row->finished_at : null,
-                'updated_at' => $row->updated_at !== null ? (string) $row->updated_at : null,
-            ],
-            'result' => $resultPayload !== [] ? $resultPayload : null,
-            'generating' => in_array($state, ['pending', 'running'], true),
-            'http_status' => in_array($state, ['pending', 'running'], true) ? 202 : 200,
-        ];
+        return $this->formatSubmissionAck($attemptId, $row);
     }
 
     public function recordTerminalJobFailure(
@@ -496,6 +471,94 @@ final class AttemptSubmissionService
                 'finished_at' => now(),
                 'updated_at' => now(),
             ]);
+    }
+
+    private function markRetryableFailure(string $submissionId, string $errorCode, string $message): void
+    {
+        $errorCode = strtoupper(trim($errorCode));
+        if ($errorCode === '') {
+            $errorCode = 'SUBMISSION_FAILED';
+        }
+
+        DB::table('attempt_submissions')
+            ->where('id', $submissionId)
+            ->whereNotIn('state', ['succeeded', 'failed'])
+            ->update([
+                'state' => 'pending',
+                'error_code' => $errorCode,
+                'error_message' => $this->truncate($message, 255),
+                'finished_at' => null,
+                'updated_at' => now(),
+            ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function ackForSubmission(
+        OrgContext $ctx,
+        string $submissionId,
+        string $attemptId,
+        ?string $actorUserId,
+        ?string $actorAnonId
+    ): array {
+        if (! SchemaBaseline::hasTable('attempt_submissions')) {
+            return [
+                'ok' => false,
+                'error_code' => 'SUBMISSION_NOT_READY',
+                'message' => 'attempt submission table is not ready.',
+                'http_status' => 503,
+            ];
+        }
+
+        $submissionId = trim($submissionId);
+        $attemptId = trim($attemptId);
+        if ($submissionId === '' || $attemptId === '') {
+            return [
+                'ok' => false,
+                'error_code' => 'VALIDATION_FAILED',
+                'message' => 'submission_id and attempt_id are required.',
+                'http_status' => 400,
+            ];
+        }
+
+        $orgId = $ctx->scopedOrgId();
+        $actorUserId = $this->normalizeUserId($actorUserId);
+        $actorAnonId = $this->normalizeAnonId($actorAnonId);
+
+        $query = DB::table('attempt_submissions')
+            ->where('id', $submissionId)
+            ->where('org_id', $orgId)
+            ->where('attempt_id', $attemptId);
+
+        $role = (string) ($ctx->role() ?? '');
+        if ($actorUserId !== null) {
+            $query->where('actor_user_id', (int) $actorUserId);
+        } elseif (in_array($role, ['owner', 'admin'], true)) {
+            // Elevated org operators can inspect attempt submission state after the
+            // attempt itself has already been authorized.
+        } elseif ($actorAnonId !== null) {
+            $query->where('actor_anon_id', $actorAnonId);
+        } else {
+            return [
+                'ok' => false,
+                'error_code' => 'FORBIDDEN',
+                'message' => 'submission owner unresolved.',
+                'http_status' => 403,
+            ];
+        }
+
+        $row = $query->first();
+        if ($row === null) {
+            return [
+                'ok' => false,
+                'error_code' => 'SUBMISSION_NOT_FOUND',
+                'message' => 'submission not found.',
+                'http_status' => 404,
+            ];
+        }
+
+        return $this->formatSubmissionAck($attemptId, $row);
     }
 
     /**
@@ -748,6 +811,39 @@ final class AttemptSubmissionService
         $normalized = trim((string) $value);
 
         return $normalized === '' ? null : $normalized;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function formatSubmissionAck(string $attemptId, object $row): array
+    {
+        $state = strtolower(trim((string) ($row->state ?? 'pending')));
+        $resultPayload = $this->decodeJsonArray($row->response_payload_json ?? null);
+        $errorCode = $this->nullableString($row->error_code ?? null);
+        $errorMessage = $this->nullableString($row->error_message ?? null);
+        if ($state === 'failed') {
+            $errorMessage = $this->publicSubmissionErrorMessage($errorCode, $errorMessage);
+            $resultPayload = $this->sanitizeSubmissionResultPayload($resultPayload, $errorCode);
+        }
+
+        return [
+            'ok' => true,
+            'attempt_id' => $attemptId,
+            'submission' => [
+                'id' => (string) ($row->id ?? ''),
+                'mode' => strtolower(trim((string) ($row->mode ?? ''))),
+                'state' => $state,
+                'error_code' => $errorCode,
+                'error_message' => $errorMessage,
+                'started_at' => $row->started_at !== null ? (string) $row->started_at : null,
+                'finished_at' => $row->finished_at !== null ? (string) $row->finished_at : null,
+                'updated_at' => $row->updated_at !== null ? (string) $row->updated_at : null,
+            ],
+            'result' => $resultPayload !== [] ? $resultPayload : null,
+            'generating' => in_array($state, ['pending', 'running'], true),
+            'http_status' => in_array($state, ['pending', 'running'], true) ? 202 : 200,
+        ];
     }
 
     /**
