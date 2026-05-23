@@ -59,4 +59,50 @@ final class WarningMatrixTest extends CareerScoringTestCase
         $this->assertContains('ai_strategy', $warnings['blocked_claims']);
         $this->assertContains('transition_recommendation', $warnings['blocked_claims']);
     }
+
+    public function test_it_blocks_claims_when_trust_or_source_evidence_is_missing(): void
+    {
+        $warnings = app(WarningMatrix::class)->build(
+            $this->sampleContext([
+                'trust_manifest' => false,
+                'truth_manifest' => false,
+                'source_trace_evidence' => null,
+                'source_fields_used_count' => 0,
+            ]),
+            [
+                'fit_score' => new CareerScoreResult(80, IntegrityState::FULL, [], 88, 'fit', [], [], 1.0),
+                'strain_score' => new CareerScoreResult(32, IntegrityState::FULL, [], 88, 'strain', [], [], 1.0),
+                'ai_survival_score' => new CareerScoreResult(61, IntegrityState::FULL, [], 88, 'ai', [], [], 1.0),
+                'mobility_score' => new CareerScoreResult(66, IntegrityState::FULL, [], 88, 'mobility', [], [], 1.0),
+                'confidence_score' => new CareerScoreResult(77, IntegrityState::FULL, [], 88, 'confidence', [], [], 1.0),
+            ]
+        );
+
+        $this->assertContains('missing_trust_manifest', $warnings['red_flags']);
+        $this->assertContains('missing_source_trace_evidence', $warnings['red_flags']);
+        $this->assertContains('strong_claim', $warnings['blocked_claims']);
+        $this->assertContains('salary_comparison', $warnings['blocked_claims']);
+        $this->assertContains('ai_strategy', $warnings['blocked_claims']);
+        $this->assertContains('transition_recommendation', $warnings['blocked_claims']);
+    }
+
+    public function test_it_blocks_strong_and_transition_claims_when_crosswalk_confidence_is_low(): void
+    {
+        $warnings = app(WarningMatrix::class)->build(
+            $this->sampleContext([
+                'crosswalk_confidence' => 0.42,
+            ]),
+            [
+                'fit_score' => new CareerScoreResult(80, IntegrityState::FULL, [], 88, 'fit', [], [], 1.0),
+                'strain_score' => new CareerScoreResult(32, IntegrityState::FULL, [], 88, 'strain', [], [], 1.0),
+                'ai_survival_score' => new CareerScoreResult(61, IntegrityState::FULL, [], 88, 'ai', [], [], 1.0),
+                'mobility_score' => new CareerScoreResult(66, IntegrityState::FULL, [], 88, 'mobility', [], [], 1.0),
+                'confidence_score' => new CareerScoreResult(77, IntegrityState::FULL, [], 88, 'confidence', [], [], 1.0),
+            ]
+        );
+
+        $this->assertContains('low_crosswalk_confidence', $warnings['amber_flags']);
+        $this->assertContains('strong_claim', $warnings['blocked_claims']);
+        $this->assertContains('transition_recommendation', $warnings['blocked_claims']);
+    }
 }

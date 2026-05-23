@@ -322,7 +322,7 @@ final class CareerJobDisplaySurfaceBuilder
         $allowSalaryComparison = $salaryBasis === 'official';
         $allowMarketSignal = in_array($marketBasis, ['official', 'sample'], true);
         $allowLocalProxyWage = false;
-        $allowStrongClaim = in_array($crosswalkBasis, ['direct', 'trust_inheritance'], true);
+        $allowStrongClaim = $crosswalkBasis === 'direct';
 
         $blockedClaims = [];
         $warnings = [];
@@ -456,14 +456,6 @@ final class CareerJobDisplaySurfaceBuilder
         $occupation->loadMissing('crosswalks');
 
         $mode = strtolower((string) $occupation->crosswalk_mode);
-        if (in_array($mode, ['exact', 'direct', 'direct_match'], true)) {
-            return 'direct';
-        }
-
-        if ($mode === 'trust_inheritance') {
-            return 'trust_inheritance';
-        }
-
         if (in_array($mode, ['functional_equivalent', 'functional_proxy', 'local_heavy_interpretation', 'family_proxy', 'cn_boundary_only'], true)) {
             return 'proxy';
         }
@@ -479,11 +471,20 @@ final class CareerJobDisplaySurfaceBuilder
             $system = strtolower((string) $crosswalk->source_system);
             $mappingType = strtolower((string) $crosswalk->mapping_type);
             $isDirect = in_array($mappingType, ['exact', 'direct', 'direct_match'], true);
-            $hasUsSoc = $hasUsSoc || ($system === 'us_soc' && $isDirect);
-            $hasOnet = $hasOnet || ($system === 'onet_soc_2019' && $isDirect);
+            $hasTrustedConfidence = $crosswalk->confidence_score !== null && (float) $crosswalk->confidence_score >= 0.8;
+            $hasUsSoc = $hasUsSoc || ($system === 'us_soc' && $isDirect && $hasTrustedConfidence);
+            $hasOnet = $hasOnet || ($system === 'onet_soc_2019' && $isDirect && $hasTrustedConfidence);
         }
 
-        return $hasUsSoc && $hasOnet ? 'direct' : 'missing';
+        if ($hasUsSoc && $hasOnet && in_array($mode, ['exact', 'direct', 'direct_match'], true)) {
+            return 'direct';
+        }
+
+        if ($mode === 'trust_inheritance') {
+            return 'trust_inheritance';
+        }
+
+        return 'missing';
     }
 
     /**

@@ -16246,7 +16246,7 @@
     "BIGFIVE-RUNTIME-GUARDS-01": {
       "repo": "fap-api",
       "branch": "codex/bigfive-runtime-guards-01",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "RIASEC-CONTRACT-QUALITY-01"
       ],
@@ -16255,7 +16255,7 @@
         35,
         36
       ],
-      "commit_sha": "3edb152d1d3b",
+      "commit_sha": "bd4816a8253c1307f3cca47e1479e98959aec3a6",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1633",
       "checks": {
         "dependency": {
@@ -16284,13 +16284,17 @@
         "diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github": {
+          "status": "pass",
+          "evidence": "GitHub PR #1633 is MERGED and origin/main contains merge commit bd4816a8253c1307f3cca47e1479e98959aec3a6; remote task branch is absent."
         }
       },
       "sidecar_issues": [],
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T21:07:40Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "events": [
         {
           "at": "2026-05-24T04:46:00+08:00",
@@ -16306,13 +16310,18 @@
           "at": "2026-05-24T05:14:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1633 after scoped local validation passed."
+        },
+        {
+          "at": "2026-05-24T05:45:16+08:00",
+          "status": "merged",
+          "summary": "Reconciled PR #1633 as merged; remote branch absent and local task branch already cleaned."
         }
       ]
     },
     "CAREER-POLICY-CLAIM-GUARDS-01": {
       "repo": "fap-api",
       "branch": "codex/career-policy-claim-guards-01",
-      "status": "pending",
+      "status": "local_validation_passed_with_external_sidecar",
       "depends_on": [
         "BIGFIVE-RUNTIME-GUARDS-01"
       ],
@@ -16328,12 +16337,57 @@
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
-      "sidecar_issues": [],
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "BIGFIVE-RUNTIME-GUARDS-01 is merged into main as bd4816a8253c1307f3cca47e1479e98959aec3a6."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Career scoring guards, Career display-surface claim basis, related unit tests, and PR train state metadata."
+        },
+        "focused_career_policy_claim_guards": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/Career/ClaimPermissionsCompilerTest.php tests/Unit/Services/Career/WarningMatrixTest.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerRecommendationCompilerTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php --no-ansi",
+          "evidence": "52 tests passed, 1109 assertions."
+        },
+        "career_filter": {
+          "status": "external_failure_sidecar",
+          "command": "cd backend && php artisan test --filter Career --no-ansi",
+          "evidence": "Current branch: 47 failed, 1289 passed, 52229 assertions. origin/main baseline: 47 failed, 1283 passed, 52206 assertions. Failure family is pre-existing Career runtime projection/test-suite blockage, not introduced by this PR."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Console/Commands app/Services/Career app/Services/Cms/EditorialPackage app/Domain/Career tests",
+          "evidence": "1740 files passed Pint."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [
+        {
+          "id": "CAREER-RUNTIME-PROJECTION-TEST-SUITE-BASELINE-01",
+          "severity": "external_blocker",
+          "status": "open",
+          "evidence": "Both origin/main and codex/career-policy-claim-guards-01 fail cd backend && php artisan test --filter Career --no-ansi with 47 failures in Career runtime projection, family hub/search/readiness, and display asset public route expectations.",
+          "external_to_current_pr": true,
+          "current_pr_introduced": false,
+          "train_continuation_allowed": true
+        }
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-05-24T05:45:16+08:00",
+          "status": "local_validation_passed_with_external_sidecar",
+          "summary": "Scoped Career policy/claim guard tests, Pint, and diff check passed. Full Career filter remains red with the same 47-failure baseline on origin/main, recorded as external sidecar CAREER-RUNTIME-PROJECTION-TEST-SUITE-BASELINE-01."
+        }
+      ]
     },
     "CAREER-READINESS-AUDITORS-01": {
       "repo": "fap-api",
