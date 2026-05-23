@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T23:02:00+08:00",
+  "updated_at": "2026-05-23T23:15:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1070,7 +1070,7 @@
     "PR-B13": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/pr-b13-clean-environment-determinism",
       "commit_sha": "11a8af51a0c363ff7acb910bf0f65a28bf53eab2",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/853",
@@ -5421,7 +5421,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
       "branch": "codex/pr-api-sec-05-public-jobs-list-db-budget",
-      "commit_sha": "1b32dd2f768b392e2d0c2b3e540c9b61b216ff61",
+      "commit_sha": "9e22b229fe04972c4c18a9f9f190514fb24ac055",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1620",
       "title": "fix(career): bound public jobs list database work",
       "checks": {
@@ -5455,13 +5455,34 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "Code Scanning / semgrep sarif",
+            "status": "passed",
+            "details": "GitHub check completed successfully on PR #1620."
+          },
+          {
+            "name": "CI / hygiene",
+            "status": "passed",
+            "details": "GitHub push and pull_request hygiene checks completed successfully on PR #1620."
+          },
+          {
+            "name": "CI / verify-mbti-legacy",
+            "status": "passed",
+            "details": "GitHub push and pull_request verify-mbti-legacy checks completed successfully on PR #1620."
+          },
+          {
+            "name": "CI / verify-mbti-v2",
+            "status": "passed",
+            "details": "GitHub push and pull_request verify-mbti-v2 checks completed successfully on PR #1620."
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T22:33:04+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-23T00:00:00+08:00",
@@ -5482,22 +5503,81 @@
           "at": "2026-05-23T23:02:00+08:00",
           "status": "pr_open",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1620 from codex/pr-api-sec-05-public-jobs-list-db-budget after push."
+        },
+        {
+          "at": "2026-05-23T23:05:00+08:00",
+          "status": "github_checks_passed",
+          "summary": "GitHub Code Scanning and CI checks passed on PR #1620 for commit 99e2b93972710c3897afc3a0d93659678f16a8ff."
+        },
+        {
+          "at": "2026-05-23T23:05:00+08:00",
+          "status": "merged",
+          "summary": "Squash merged PR #1620; merge commit 9e22b229fe04972c4c18a9f9f190514fb24ac055. Remote branch was deleted and local post-merge cleanup executed."
+        },
+        {
+          "at": "2026-05-23T23:05:00+08:00",
+          "status": "post_merge_revalidated",
+          "summary": "Post-merge focused career display surface tests passed: 36 tests, 1035 assertions; CareerJobListApiTest passed: 8 tests, 121 assertions."
         }
       ]
     },
     "PR-API-SEC-06": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "planned",
+      "status": "local_scope_validation_passed",
       "branch": "codex/pr-api-sec-06-cn-proxy-release-gate",
       "commit_sha": "",
       "pr_url": "",
       "title": "fix(security): enforce CN proxy public-route release gate",
       "checks": {
-        "local": [],
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app tests/Feature docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed",
+            "details": "2700 files checked after formatting the scoped CN proxy feature test."
+          },
+          {
+            "command": "php artisan test tests/Feature/Career/CareerCnProxyPublicOwnerApiTest.php tests/Feature/Career/CareerJobDetailApiTest.php",
+            "status": "passed",
+            "details": "15 tests, 148 assertions."
+          },
+          {
+            "command": "php artisan test tests/Feature/SeoIntel tests/Feature/Career",
+            "status": "failed_external_sidecar",
+            "details": "24 failed, 707 passed. Failures are outside the PR-API-SEC-06 changed files and include SeoIntel artifact/UI copy baselines plus unrelated Career fixture baselines; recorded as SIDE-PR-API-SEC-06-01 per user override protocol."
+          },
+          {
+            "command": "php artisan route:list --no-ansi",
+            "status": "passed",
+            "details": "203 routes listed; no route shape changes."
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
         "github": []
       },
       "failure_reason": "",
+      "sidecar_issues": [
+        {
+          "id": "SIDE-PR-API-SEC-06-01",
+          "status": "open",
+          "type": "external_local_suite_baseline",
+          "command": "php artisan test tests/Feature/SeoIntel tests/Feature/Career",
+          "summary": "Broad manifest suite has existing/out-of-scope failures unrelated to CN proxy public-route release gate hardening.",
+          "evidence": [
+            "PR-API-SEC-06 changed files are limited to CareerCnProxyPublicOwnerSurfaceBuilder, CareerCnProxyPublicOwnerApiTest, and PR train state.",
+            "Focused CN proxy and career job detail tests passed: 15 tests, 148 assertions.",
+            "Broad suite failures include SeoIntel artifact/UI text baselines, IndexNow host redaction fixture, Career dataset/member fixture counts, family/first-wave/search fixture baselines, and first-wave publish-ready fixture baselines."
+          ],
+          "policy": "User-authorized /goal protocol allows continuing when the blocker is not introduced by the current PR and scope validation is green; external blockers are recorded as sidecar issues."
+        }
+      ],
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
@@ -5507,6 +5587,16 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "planned",
           "summary": "PR-API-SEC-06 planned after explicit user authorization for the first-wave security train."
+        },
+        {
+          "at": "2026-05-23T23:05:00+08:00",
+          "status": "in_progress",
+          "summary": "Started PR-API-SEC-06 from updated main after PR-API-SEC-05 merged; scope is limited to backend CN proxy public-route release gate hardening and focused policy tests."
+        },
+        {
+          "at": "2026-05-23T23:15:00+08:00",
+          "status": "local_scope_validation_passed",
+          "summary": "Enforced explicit CN proxy public-route release gate in the surface builder; focused CN proxy/job-detail tests, Pint, route list, JSON validation, and diff checks passed. Broad SeoIntel/Career manifest suite failures were recorded as external sidecar SIDE-PR-API-SEC-06-01."
         }
       ]
     },
