@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T15:01:00+08:00",
+  "updated_at": "2026-05-23T18:01:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -15536,12 +15536,12 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-fix-02",
-      "status": "local_checks_sidecar_blocker_documented",
+      "status": "pr_open",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-MBTI-02"
       ],
-      "commit_sha": "4cd92c44e38be9296318462f2456c396fcc3d453",
-      "pr_url": null,
+      "commit_sha": "b0fe3875ae2d1db4fe80a11c6333071d5ffbdf2d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1608",
       "checks": {
         "local": {
           "focused_url_truth_alignment_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02UrlTruthAlignment --no-ansi (1 test, 34 assertions)",
@@ -15577,6 +15577,11 @@
           "at": "2026-05-23T14:58:00+08:00",
           "status": "local_checks_sidecar_blocker_documented",
           "summary": "Scoped validation passed for URL Truth apex alignment, route list, Pint, JSON/YAML parsing, and no-write collector dry-runs. Full SeoIntel suite still has 4 pre-existing /ops/seo UI assertion failures that reproduce on clean origin/main and are outside this PR scope."
+        },
+        {
+          "at": "2026-05-23T18:01:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1608 for SEO-GROWTH-MBTI-ACTION-01B-FIX-02 from codex/seo-growth-mbti-action-01b-fix-02. The PR is limited to backend URL Truth host alignment, ZH MBTI test-detail emission, focused docs/generated/tests, and authorized PR-train metadata only."
         }
       ]
     }
