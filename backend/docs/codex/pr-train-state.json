@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T22:30:00+08:00",
+  "updated_at": "2026-05-23T22:33:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5302,10 +5302,10 @@
     "PR-API-SEC-04": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-04-translation-source-approval",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "9ad96647",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1619",
       "title": "fix(security): enforce source article approval in Translation Ops",
       "checks": {
         "local": [
@@ -5333,7 +5333,13 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "github_checks",
+            "status": "pending",
+            "details": "PR #1619 opened; awaiting GitHub check completion."
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
@@ -5355,6 +5361,11 @@
           "at": "2026-05-23T22:30:00+08:00",
           "status": "local_checks_passed",
           "summary": "Required source articles to retain current editorial approval before translation draft, resync, preflight, or publish actions; focused Ops tests, Pint, JSON, route list, and diff checks passed."
+        },
+        {
+          "at": "2026-05-23T22:33:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1619 for PR-API-SEC-04 after local checks and scope validation passed."
         }
       ]
     },
