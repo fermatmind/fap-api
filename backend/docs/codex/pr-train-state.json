@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T23:45:00+08:00",
+  "updated_at": "2026-05-23T23:56:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1402,7 +1402,7 @@
     "PR-B18": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/pr-b18-career-transition-path-taxonomy-typed-payload-hardening",
       "commit_sha": "ea7193830652f08805388e2c5bc782235e3462b5",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/860",
@@ -5646,7 +5646,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
       "branch": "codex/pr-api-sec-07-research-url-truth-paths",
-      "commit_sha": "9052b10aef8647f6ebf8264ecef4b223d4cce773",
+      "commit_sha": "ac50710ef7c5e4270bb2b0ad53bcca6d49c393dc",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1622",
       "title": "fix(security): validate research URL truth tenant paths",
       "checks": {
@@ -5675,13 +5675,34 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "Code Scanning / semgrep sarif",
+            "status": "passed",
+            "details": "GitHub check completed successfully on PR #1622."
+          },
+          {
+            "name": "CI / hygiene",
+            "status": "passed",
+            "details": "GitHub push and pull_request hygiene checks completed successfully on PR #1622."
+          },
+          {
+            "name": "CI / verify-mbti-legacy",
+            "status": "passed",
+            "details": "GitHub push and pull_request verify-mbti-legacy checks completed successfully on PR #1622."
+          },
+          {
+            "name": "CI / verify-mbti-v2",
+            "status": "passed",
+            "details": "GitHub push and pull_request verify-mbti-v2 checks completed successfully on PR #1622."
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T23:07:01+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-23T00:00:00+08:00",
@@ -5702,22 +5723,92 @@
           "at": "2026-05-23T23:45:00+08:00",
           "status": "pr_open",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1622 from codex/pr-api-sec-07-research-url-truth-paths after push."
+        },
+        {
+          "at": "2026-05-23T23:55:00+08:00",
+          "status": "github_checks_passed",
+          "summary": "GitHub Code Scanning and CI checks passed on PR #1622 for commit f0cce0eb889311c45281c2a4c7720fd0f0115369."
+        },
+        {
+          "at": "2026-05-23T23:55:00+08:00",
+          "status": "merged",
+          "summary": "Squash merged PR #1622; merge commit ac50710ef7c5e4270bb2b0ad53bcca6d49c393dc. Remote branch was deleted and local post-merge cleanup executed."
+        },
+        {
+          "at": "2026-05-23T23:55:00+08:00",
+          "status": "post_merge_revalidated",
+          "summary": "Post-merge focused research URL truth tests passed: 9 tests, 115 assertions."
         }
       ]
     },
     "PR-API-SEC-08": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "planned",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-08-issue-queue-pii-sanitizer",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "bd2c1f03e78b886958ba421dd01da7955906cd83",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1623",
       "title": "fix(security): redact identifiers in drift issue queues",
       "checks": {
-        "local": [],
-        "github": []
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/SeoIntel app/Console/Commands tests/Feature/SeoIntel docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed",
+            "details": "386 files passed style validation."
+          },
+          {
+            "command": "php artisan test tests/Feature/SeoIntel/SeoIntelCmsIssueQueueSummaryTest.php tests/Feature/SeoIntel/SeoIntelDriftCollectorFoundationTest.php",
+            "status": "passed",
+            "details": "25 tests, 369 assertions."
+          },
+          {
+            "command": "php artisan test tests/Feature/SeoIntel",
+            "status": "failed_external_sidecar",
+            "details": "6 failed, 599 passed, 9217 assertions. Failures are existing/out-of-scope SeoIntel artifact/UI baseline failures and are recorded as SIDE-PR-API-SEC-08-01."
+          },
+          {
+            "command": "php artisan route:list --no-ansi",
+            "status": "passed",
+            "details": "203 routes listed."
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "Code Scanning / semgrep sarif",
+            "status": "pending",
+            "details": "GitHub check is in progress on PR #1623."
+          },
+          {
+            "name": "CI / hygiene",
+            "status": "pending",
+            "details": "GitHub push and pull_request hygiene checks are in progress on PR #1623."
+          }
+        ]
       },
       "failure_reason": "",
+      "sidecar_issues": [
+        {
+          "id": "SIDE-PR-API-SEC-08-01",
+          "type": "external_local_suite_baseline",
+          "status": "open",
+          "command": "php artisan test tests/Feature/SeoIntel",
+          "summary": "Broad SeoIntel manifest suite has existing/out-of-scope artifact and UI baseline failures unrelated to drift/issue queue PII sanitizer hardening.",
+          "evidence": "Focused PR-API-SEC-08 sanitizer tests passed 25 tests and 369 assertions. The broad suite failures are in crawler log canary runtime docs, ops SEO dashboard UI text baselines, and IndexNow preflight redaction fixture, while changed files remain limited to SeoIssueSanitizer, UrlTruthDriftIssueCandidateSource, focused SeoIntel tests, and the PR train ledger.",
+          "created_at": "2026-05-23T23:56:00+08:00"
+        }
+      ],
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
@@ -5727,6 +5818,21 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "planned",
           "summary": "PR-API-SEC-08 planned after explicit user authorization for the first-wave security train."
+        },
+        {
+          "at": "2026-05-23T23:55:00+08:00",
+          "status": "in_progress",
+          "summary": "Started PR-API-SEC-08 from updated main after PR-API-SEC-07 merged; scope is limited to backend drift canary and issue queue PII sanitization hardening with focused sanitizer tests."
+        },
+        {
+          "at": "2026-05-23T23:56:00+08:00",
+          "status": "local_scope_validation_passed",
+          "summary": "Focused PR-API-SEC-08 sanitizer tests, Pint, route listing, JSON validation, and diff checks passed. Broad tests/Feature/SeoIntel has 6 existing/out-of-scope failures recorded as SIDE-PR-API-SEC-08-01 under the user-approved sidecar protocol."
+        },
+        {
+          "at": "2026-05-23T23:56:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1623 from codex/pr-api-sec-08-issue-queue-pii-sanitizer after push; initial GitHub checks are pending."
         }
       ]
     },

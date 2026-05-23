@@ -153,6 +153,34 @@ final class SeoIntelCmsIssueQueueSummaryTest extends TestCase
     }
 
     #[Test]
+    public function sanitizer_redacts_private_identifiers_embedded_in_paths(): void
+    {
+        $sanitized = (new SeoIssueSanitizer)->sanitize([
+            'issue_type' => 'crawler_private_hit',
+            'severity' => 'high',
+            'source_system' => 'fixture',
+            'canonical_url' => 'https://fermatmind.com/zh/result/ATTEMPTABC123456/report/ORDERABC123456?token=secret',
+            'summary' => 'Private path /zh/result/ATTEMPTABC123456/report/ORDERABC123456 should not persist.',
+            'recommendation' => 'Review /share/PROVIDERABC123456 manually.',
+            'metadata_json' => [
+                'path_display_masked' => '/zh/result/ATTEMPTABC123456/report/ORDERABC123456',
+                'nested' => [
+                    'share_path' => '/share/PROVIDERABC123456',
+                ],
+            ],
+        ]);
+
+        $encoded = json_encode($sanitized, JSON_THROW_ON_ERROR);
+
+        $this->assertSame('https://fermatmind.com/zh/result/:redacted/report/:redacted', $sanitized['canonical_url']);
+        $this->assertStringContainsString(':redacted', $encoded);
+
+        foreach (['ATTEMPTABC123456', 'ORDERABC123456', 'PROVIDERABC123456', 'token=secret'] as $forbiddenValue) {
+            $this->assertStringNotContainsString($forbiddenValue, $encoded);
+        }
+    }
+
+    #[Test]
     public function producer_and_summary_service_are_sanitized_and_do_not_mutate_cms(): void
     {
         $producer = new SeoIssueQueueProducer;
