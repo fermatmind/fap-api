@@ -1573,6 +1573,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_policy_claim_guard_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Scoring/ClaimPermissionsCompiler.php',
+            'backend/app/Domain/Career/Scoring/ClaimReasonCode.php',
+            'backend/app/Domain/Career/Scoring/WarningMatrix.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_runtime_projection_consumer_changes(): void
     {
         $changed = [
@@ -2135,6 +2146,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCareerDisplaySurfaceFile($file)) {
+                continue;
+            }
+
+            if ($this->isCareerPolicyClaimGuardFile($file)) {
                 continue;
             }
 
@@ -3196,6 +3211,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/Bundles/CareerFamilyHubBundleBuilder.php',
             'backend/app/Http/Resources/Career/CareerJobDetailResource.php',
             'backend/app/Services/Cms/CareerJobSeoService.php',
+        ], true);
+    }
+
+    private function isCareerPolicyClaimGuardFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Domain/Career/Scoring/ClaimPermissionsCompiler.php',
+            'backend/app/Domain/Career/Scoring/ClaimReasonCode.php',
+            'backend/app/Domain/Career/Scoring/WarningMatrix.php',
         ], true);
     }
 

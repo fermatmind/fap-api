@@ -30,6 +30,31 @@ final class WarningMatrix
         $indexState = (string) ($context['index_state'] ?? '');
         $indexEligible = (bool) ($context['index_eligible'] ?? false);
 
+        if (! $this->hasTrustManifest($context)) {
+            $redFlags[] = ClaimReasonCode::MISSING_TRUST_MANIFEST;
+            $blockedClaims[] = 'strong_claim';
+            $blockedClaims[] = 'salary_comparison';
+            $blockedClaims[] = 'ai_strategy';
+            $blockedClaims[] = 'transition_recommendation';
+            $blockedClaims[] = 'cross_market_pay_copy';
+        }
+
+        if (! $this->hasSourceTraceEvidence($context)) {
+            $redFlags[] = ClaimReasonCode::MISSING_SOURCE_TRACE_EVIDENCE;
+            $blockedClaims[] = 'strong_claim';
+            $blockedClaims[] = 'salary_comparison';
+            $blockedClaims[] = 'ai_strategy';
+            $blockedClaims[] = 'transition_recommendation';
+            $blockedClaims[] = 'cross_market_pay_copy';
+        }
+
+        $crosswalkConfidence = $context['crosswalk_confidence'] ?? null;
+        if (is_numeric($crosswalkConfidence) && (float) $crosswalkConfidence < 0.7) {
+            $amberFlags[] = ClaimReasonCode::LOW_CROSSWALK_CONFIDENCE;
+            $blockedClaims[] = 'strong_claim';
+            $blockedClaims[] = 'transition_recommendation';
+        }
+
         if (($context['median_pay_usd_annual'] ?? null) === null) {
             $redFlags[] = ClaimReasonCode::MISSING_MEDIAN_PAY;
             $blockedClaims[] = 'salary_comparison';
@@ -92,5 +117,39 @@ final class WarningMatrix
             'amber_flags' => array_values(array_unique($amberFlags)),
             'blocked_claims' => array_values(array_unique($blockedClaims)),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     */
+    private function hasSourceTraceEvidence(array $context): bool
+    {
+        if (! array_key_exists('source_trace_evidence', $context)
+            && ! array_key_exists('source_fields_used_count', $context)
+        ) {
+            return true;
+        }
+
+        $sourceTraceEvidence = $context['source_trace_evidence'] ?? null;
+        $sourceFieldsUsedCount = $context['source_fields_used_count'] ?? null;
+
+        return is_numeric($sourceTraceEvidence)
+            && (float) $sourceTraceEvidence >= 0.65
+            && is_numeric($sourceFieldsUsedCount)
+            && (int) $sourceFieldsUsedCount > 0;
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     */
+    private function hasTrustManifest(array $context): bool
+    {
+        if (! array_key_exists('trust_manifest', $context)
+            && ! array_key_exists('truth_manifest', $context)
+        ) {
+            return true;
+        }
+
+        return ($context['trust_manifest'] ?? $context['truth_manifest'] ?? false) === true;
     }
 }

@@ -29,4 +29,10 @@ final class ClaimReasonCode
     public const MISSING_MEDIAN_PAY = 'missing_median_pay';
 
     public const CROSS_MARKET_MISMATCH = 'cross_market_mismatch';
+
+    public const MISSING_TRUST_MANIFEST = 'missing_trust_manifest';
+
+    public const MISSING_SOURCE_TRACE_EVIDENCE = 'missing_source_trace_evidence';
+
+    public const LOW_CROSSWALK_CONFIDENCE = 'low_crosswalk_confidence';
 }

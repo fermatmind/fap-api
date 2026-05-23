@@ -457,6 +457,36 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertContains('strong_claim_crosswalk_not_direct', $surface['claim_permissions']['blocked_claims']);
     }
 
+    public function test_it_blocks_strong_claims_for_trust_inheritance_crosswalks(): void
+    {
+        $occupation = $this->createOccupation('actors');
+        $occupation->update(['crosswalk_mode' => 'trust_inheritance']);
+        $this->createDisplayAsset($occupation);
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertSame('provisional', $surface['claim_permissions']['integrity_state']);
+        $this->assertFalse($surface['claim_permissions']['allow_strong_claim']);
+        $this->assertSame('trust_inheritance', $surface['claim_permissions']['evidence_basis']['crosswalk']);
+        $this->assertContains('strong_claim_crosswalk_not_direct', $surface['claim_permissions']['blocked_claims']);
+    }
+
+    public function test_it_blocks_strong_claims_when_direct_mode_lacks_trusted_dual_crosswalks(): void
+    {
+        $occupation = $this->createOccupation('actors');
+        $occupation->crosswalks()
+            ->where('source_system', 'onet_soc_2019')
+            ->update(['confidence_score' => 0.5]);
+        $this->createDisplayAsset($occupation->refresh());
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertSame('provisional', $surface['claim_permissions']['integrity_state']);
+        $this->assertFalse($surface['claim_permissions']['allow_strong_claim']);
+        $this->assertSame('missing', $surface['claim_permissions']['evidence_basis']['crosswalk']);
+        $this->assertContains('strong_claim_crosswalk_not_direct', $surface['claim_permissions']['blocked_claims']);
+    }
+
     public function test_it_includes_sources_and_implementation_contract(): void
     {
         $occupation = $this->createOccupation('actors');

@@ -33,18 +33,21 @@ final class ClaimPermissionsCompiler
 
         $allowSalaryComparison = ! isset($blocked['salary_comparison'])
             && ! $indexBlocked
+            && $this->hasTrustedSourceEvidence($context)
             && ($context['median_pay_usd_annual'] ?? null) !== null
             && ! ((bool) ($context['cross_market_mismatch'] ?? false) && ! (bool) ($context['allow_pay_direct_inheritance'] ?? false));
 
         $allowAiStrategy = ! isset($blocked['ai_strategy'])
             && ! $indexBlocked
             && $aiScore instanceof CareerScoreResult
-            && $aiScore->integrityState !== IntegrityState::BLOCKED;
+            && $this->claimStateAllowsPublicGuidance($aiScore)
+            && $this->hasTrustedSourceEvidence($context);
 
         $allowTransitionRecommendation = ! isset($blocked['transition_recommendation'])
             && ! $indexBlocked
             && $mobilityScore instanceof CareerScoreResult
-            && $mobilityScore->integrityState !== IntegrityState::BLOCKED
+            && $this->claimStateAllowsPublicGuidance($mobilityScore)
+            && $this->crosswalkConfidenceAllowsTransition($context)
             && $mobilityScore->value >= 40;
 
         $allowCrossMarketPayCopy = ! isset($blocked['cross_market_pay_copy'])
@@ -80,5 +83,47 @@ final class ClaimPermissionsCompiler
             'allow_cross_market_pay_copy' => $allowCrossMarketPayCopy,
             'reason_codes' => array_values(array_unique($reasonCodes)),
         ];
+    }
+
+    private function claimStateAllowsPublicGuidance(CareerScoreResult $result): bool
+    {
+        return in_array($result->integrityState, [IntegrityState::FULL, IntegrityState::PROVISIONAL], true);
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     */
+    private function hasTrustedSourceEvidence(array $context): bool
+    {
+        if (! array_key_exists('trust_manifest', $context)
+            && ! array_key_exists('truth_manifest', $context)
+            && ! array_key_exists('source_trace_evidence', $context)
+            && ! array_key_exists('source_fields_used_count', $context)
+        ) {
+            return true;
+        }
+
+        $sourceTraceEvidence = $context['source_trace_evidence'] ?? null;
+        $sourceFieldsUsedCount = $context['source_fields_used_count'] ?? null;
+
+        return ($context['trust_manifest'] ?? $context['truth_manifest'] ?? false) === true
+            && is_numeric($sourceTraceEvidence)
+            && (float) $sourceTraceEvidence >= 0.65
+            && is_numeric($sourceFieldsUsedCount)
+            && (int) $sourceFieldsUsedCount > 0;
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     */
+    private function crosswalkConfidenceAllowsTransition(array $context): bool
+    {
+        if (! array_key_exists('crosswalk_confidence', $context) || $context['crosswalk_confidence'] === null) {
+            return true;
+        }
+
+        $crosswalkConfidence = $context['crosswalk_confidence'] ?? null;
+
+        return is_numeric($crosswalkConfidence) && (float) $crosswalkConfidence >= 0.7;
     }
 }
