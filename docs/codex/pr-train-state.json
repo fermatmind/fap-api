@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T11:25:45+08:00",
+  "updated_at": "2026-05-23T11:28:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10297,7 +10297,7 @@
         "PUBLISH-API-MEDIA-ORIGIN-READYNESS",
         "PUBLISH-WEB-CONTENT-CACHE-PURGE:fap-web"
       ],
-      "status": "in_progress",
+      "status": "merged",
       "train_scope": "publishing_reliability",
       "risk_level": "medium",
       "title": "chore(cms): add article publish smoke for cover image propagation",
@@ -17747,8 +17747,8 @@
       "depends_on": [
         "OPS-DOMAIN-MIGRATION-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "c2ba405882605c2f9f4992c63dd8bc3069d00cf0",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1597",
       "checks": {
         "traffic_preflight": {
           "status": "pass",
@@ -17772,9 +17772,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T03:19:17Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-21T18:20:00+08:00",
@@ -17796,8 +17796,8 @@
         "SEARCH-CHANNEL-QUEUE-01",
         "BACKEND-DEPLOY-TARGET-ALIYUN-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "4a418e66472c3ddae5a473bd5af2cee330e04c7e",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1598",
       "checks": {
         "rds_network": {
           "status": "pass",
@@ -19853,6 +19853,11 @@
           "at": "2026-05-23T11:25:45+08:00",
           "status": "committed",
           "summary": "Committed sidebar taxonomy regrouping at 4a418e66472c3ddae5a473bd5af2cee330e04c7e after local validation passed."
+        },
+        {
+          "at": "2026-05-23T11:28:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1598 for OPS-ADMIN-UI-02 and pushed branch codex/ops-admin-ui-02-sidebar-taxonomy."
         }
       ]
     },
