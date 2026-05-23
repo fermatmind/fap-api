@@ -338,6 +338,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_private_relationship_auth_hardening(): void
+    {
+        $changed = [
+            'backend/app/Services/V0_3/MbtiCompareInviteService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_content_release_revalidate_automation_files(): void
     {
         $changed = [
@@ -1879,6 +1888,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiPrivateRelationshipAuthHardeningFile($file)) {
+                continue;
+            }
+
             if ($this->isCiScaleImpactCommandFile($file)) {
                 continue;
             }
@@ -2378,6 +2391,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Storage/QuarantinedRootPurgeService.php',
             'backend/app/Services/Storage/ReportArtifactsArchiveService.php',
         ], true);
+    }
+
+    private function isMbtiPrivateRelationshipAuthHardeningFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/V0_3/MbtiCompareInviteService.php';
     }
 
     private function isCiScaleImpactCommandFile(string $file): bool

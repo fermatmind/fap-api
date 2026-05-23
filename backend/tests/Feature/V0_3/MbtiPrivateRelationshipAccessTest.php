@@ -363,6 +363,55 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
         $this->assertNotContains($outsiderInviteId, $itemIds);
     }
 
+    public function test_private_relationship_index_without_subject_identity_does_not_scan_all_relationships(): void
+    {
+        $this->seedScales();
+
+        [$inviterAttemptId, $inviterAnonId, $inviterToken] = $this->createOwnerContext('anon_private_index_leak_inviter', 'INTJ-A');
+        $shareId = $this->createShareViaApi($inviterAttemptId, $inviterAnonId, $inviterToken);
+        [$inviteeAttemptId, $inviteeAnonId] = $this->createOwnerContext('anon_private_index_leak_invitee', 'ENFP-T');
+
+        $inviteId = (string) $this->postJson("/api/v0.3/shares/{$shareId}/compare-invites", [
+            'anon_id' => 'scan_probe_no_subject',
+            'entrypoint' => 'share_page',
+            'compare_intent' => true,
+            'utm_source' => 'share',
+        ])->assertOk()->json('invite_id');
+
+        DB::table('mbti_compare_invites')
+            ->where('id', $inviteId)
+            ->update([
+                'invitee_attempt_id' => $inviteeAttemptId,
+                'invitee_anon_id' => $inviteeAnonId,
+                'status' => 'purchased',
+                'accepted_at' => now()->subMinutes(5),
+                'completed_at' => now()->subMinutes(4),
+                'purchased_at' => now()->subMinutes(3),
+            ]);
+
+        $identitylessToken = 'fm_'.(string) Str::uuid();
+        DB::table('fm_tokens')->insert([
+            'token' => $identitylessToken,
+            'token_hash' => hash('sha256', $identitylessToken),
+            'user_id' => null,
+            'anon_id' => 'placeholder_identity_removed_by_auth',
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer '.$identitylessToken,
+        ])->getJson('/api/v0.3/me/relationships/mbti')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('relationship_index_v1.relationship_index_version', 'relationship.index.v1')
+            ->assertJsonCount(0, 'relationship_index_v1.items')
+            ->assertJsonMissingPath('relationship_index_v1.items.0.invite_id');
+    }
+
     private function seedScales(): void
     {
         (new ScaleRegistrySeeder)->run();
