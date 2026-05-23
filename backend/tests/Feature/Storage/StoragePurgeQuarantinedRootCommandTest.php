@@ -149,6 +149,21 @@ final class StoragePurgeQuarantinedRootCommandTest extends TestCase
         $planPath = $this->extractOutputValue($output, 'plan');
         $this->assertFileExists($planPath);
         $this->assertDirectoryExists($fixture['item_root']);
+
+        $outsideRoot = storage_path('app/private/outside-purge-target');
+        File::ensureDirectoryExists($outsideRoot);
+        $traversalRoot = storage_path('app/private/quarantine/release_roots/../../outside-purge-target');
+
+        $this->assertSame(1, Artisan::call('storage:purge-quarantined-root', [
+            '--dry-run' => true,
+            '--disk' => 's3',
+            '--item-root' => $traversalRoot,
+        ]));
+
+        $traversalOutput = Artisan::output();
+        $this->assertStringContainsString('status=blocked', $traversalOutput);
+        $this->assertStringContainsString('purge item root must be under the quarantine root base.', $traversalOutput);
+        $this->assertDirectoryExists($outsideRoot);
     }
 
     public function test_command_fails_when_plan_is_tampered_or_item_root_mismatches(): void

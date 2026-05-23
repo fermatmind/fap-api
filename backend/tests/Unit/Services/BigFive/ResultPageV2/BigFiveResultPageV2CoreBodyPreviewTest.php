@@ -327,6 +327,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_storage_path_safety_hardening_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/StorageRehydrateExactRelease.php',
+            'backend/app/Services/Storage/QuarantinedRootPurgeService.php',
+            'backend/app/Services/Storage/ReportArtifactsArchiveService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_content_release_revalidate_automation_files(): void
     {
         $changed = [
@@ -1864,6 +1875,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isStoragePathSafetyHardeningFile($file)) {
+                continue;
+            }
+
             if ($this->isCiScaleImpactCommandFile($file)) {
                 continue;
             }
@@ -2354,6 +2369,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isStorageReleaseRootsAuditCommandFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/StorageReleaseRootsAudit.php';
+    }
+
+    private function isStoragePathSafetyHardeningFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/StorageRehydrateExactRelease.php',
+            'backend/app/Services/Storage/QuarantinedRootPurgeService.php',
+            'backend/app/Services/Storage/ReportArtifactsArchiveService.php',
+        ], true);
     }
 
     private function isCiScaleImpactCommandFile(string $file): bool

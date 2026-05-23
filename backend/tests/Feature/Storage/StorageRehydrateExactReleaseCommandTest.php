@@ -164,6 +164,16 @@ final class StorageRehydrateExactReleaseCommandTest extends TestCase
         $output = Artisan::output();
         $this->assertStringContainsString('unsafe target root for rehydrate runs', $output);
         $this->assertDirectoryDoesNotExist(storage_path('app/private/rehydrate_plans'));
+
+        $this->assertSame(1, Artisan::call('storage:rehydrate-exact-release', [
+            '--dry-run' => true,
+            '--exact-manifest-id' => (string) $fixture['exact_manifest_id'],
+            '--disk' => 's3',
+            '--target-root' => '../private/content_releases',
+        ]));
+
+        $traversalOutput = Artisan::output();
+        $this->assertStringContainsString('unsafe target root for rehydrate runs', $traversalOutput);
     }
 
     /**

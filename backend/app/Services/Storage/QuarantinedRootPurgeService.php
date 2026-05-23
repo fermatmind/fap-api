@@ -86,6 +86,11 @@ final class QuarantinedRootPurgeService
     {
         $resolvedPlan = $this->resolveExecutablePlan($plan, $expectedItemRoot);
         $itemRoot = $this->normalizeRoot((string) ($resolvedPlan['item_root'] ?? ''));
+        $canonicalItemRoot = $this->canonicalExistingDirectory($itemRoot);
+        if ($canonicalItemRoot === null || ! $this->isUnderPrefix($canonicalItemRoot, $this->quarantineRootBase())) {
+            throw new \RuntimeException('purge item root must be under the quarantine root base.');
+        }
+
         $runId = now()->format('Ymd_His').'_'.substr(bin2hex(random_bytes(4)), 0, 8);
         $runBase = $this->purgeRootBase().DIRECTORY_SEPARATOR.$runId;
         $itemReceiptDir = $runBase.DIRECTORY_SEPARATOR.'items'.DIRECTORY_SEPARATOR.hash('sha256', $itemRoot);
@@ -121,12 +126,12 @@ final class QuarantinedRootPurgeService
         );
 
         try {
-            if (! is_dir($itemRoot)) {
+            if (! is_dir($canonicalItemRoot)) {
                 throw new \RuntimeException('quarantine item root does not exist.');
             }
 
-            File::deleteDirectory($itemRoot);
-            if (is_dir($itemRoot)) {
+            File::deleteDirectory($canonicalItemRoot);
+            if (is_dir($canonicalItemRoot)) {
                 throw new \RuntimeException('failed to delete quarantine item root.');
             }
 
@@ -206,8 +211,10 @@ final class QuarantinedRootPurgeService
             throw new \RuntimeException('purge plan disk is required.');
         }
 
-        $planItemRoot = $this->normalizeRoot((string) ($plan['item_root'] ?? ''));
-        $requestedItemRoot = $expectedItemRoot !== null ? $this->normalizeRoot($expectedItemRoot) : $planItemRoot;
+        $planItemRootRaw = $this->normalizeRoot((string) ($plan['item_root'] ?? ''));
+        $planItemRoot = $this->canonicalExistingDirectory($planItemRootRaw) ?? $planItemRootRaw;
+        $requestedItemRootRaw = $expectedItemRoot !== null ? $this->normalizeRoot($expectedItemRoot) : $planItemRootRaw;
+        $requestedItemRoot = $this->canonicalExistingDirectory($requestedItemRootRaw) ?? $requestedItemRootRaw;
         if ($requestedItemRoot === '') {
             throw new \RuntimeException('purge item root is required.');
         }
@@ -222,7 +229,6 @@ final class QuarantinedRootPurgeService
         }
 
         $comparisons = [
-            'item_root',
             'exact_manifest_id',
             'exact_identity_hash',
             'source_kind',
@@ -233,7 +239,7 @@ final class QuarantinedRootPurgeService
         ];
         foreach ($comparisons as $field) {
             if (($plan[$field] ?? null) !== ($freshPlan[$field] ?? null)) {
-                throw new \RuntimeException('plan_candidate_mismatch');
+                throw new \RuntimeException('plan_candidate_mismatch: '.$field);
             }
         }
 
@@ -249,6 +255,7 @@ final class QuarantinedRootPurgeService
             throw new \RuntimeException('purge item root is required.');
         }
 
+        $itemRoot = $this->canonicalExistingDirectory($itemRoot) ?? $itemRoot;
         if (! $this->isUnderPrefix($itemRoot, $this->quarantineRootBase())) {
             throw new \RuntimeException('purge item root must be under the quarantine root base.');
         }
@@ -480,13 +487,28 @@ final class QuarantinedRootPurgeService
 
     private function isUnderPrefix(string $path, string $prefix): bool
     {
-        $path = $this->normalizeRoot($path);
-        $prefix = $this->normalizeRoot($prefix);
+        $path = $this->canonicalExistingDirectory($path) ?? $this->normalizeRoot($path);
+        $prefix = $this->canonicalExistingDirectory($prefix) ?? $this->normalizeRoot($prefix);
         if ($path === '' || $prefix === '') {
             return false;
         }
 
         return $path === $prefix || str_starts_with($path.'/', $prefix.'/');
+    }
+
+    private function canonicalExistingDirectory(string $path): ?string
+    {
+        $path = $this->normalizeRoot($path);
+        if ($path === '') {
+            return null;
+        }
+
+        $realPath = realpath($path);
+        if (! is_string($realPath) || $realPath === '' || ! is_dir($realPath)) {
+            return null;
+        }
+
+        return $this->normalizeRoot($realPath);
     }
 
     private function normalizeRoot(string $root): string

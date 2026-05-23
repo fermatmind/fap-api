@@ -139,10 +139,10 @@ final class StorageRehydrateExactRelease extends Command
         }
 
         if (str_starts_with($targetRootOption, DIRECTORY_SEPARATOR)) {
-            return $this->normalizePath($targetRootOption);
+            return $this->canonicalizeTargetRoot($targetRootOption);
         }
 
-        return $this->normalizePath(storage_path('app/private/'.ltrim($targetRootOption, '/\\')));
+        return $this->canonicalizeTargetRoot(storage_path('app/private/'.ltrim($targetRootOption, '/\\')));
     }
 
     private function ensureSafeTargetRoot(string $targetRoot): void
@@ -156,7 +156,7 @@ final class StorageRehydrateExactRelease extends Command
         ];
 
         foreach ($forbiddenRoots as $forbiddenRoot) {
-            $forbiddenRoot = $this->normalizePath($forbiddenRoot);
+            $forbiddenRoot = $this->canonicalizeTargetRoot($forbiddenRoot);
             if ($targetRoot === $forbiddenRoot || str_starts_with($targetRoot.'/', $forbiddenRoot.'/') || str_starts_with($forbiddenRoot.'/', $targetRoot.'/')) {
                 throw new \RuntimeException('unsafe target root for rehydrate runs: '.$targetRoot);
             }
@@ -252,5 +252,53 @@ final class StorageRehydrateExactRelease extends Command
     private function normalizePath(string $path): string
     {
         return str_replace('\\', '/', rtrim(trim($path), '/\\'));
+    }
+
+    private function canonicalizeTargetRoot(string $path): string
+    {
+        $path = $this->normalizePath($path);
+        if ($path === '') {
+            throw new \RuntimeException('rehydrate target root is required.');
+        }
+
+        if (preg_match('/^[A-Za-z]:[\/\\\\]/', $path) === 1) {
+            throw new \RuntimeException('windows drive roots are not supported for rehydrate target root.');
+        }
+
+        $segments = [];
+        foreach (explode('/', $path) as $segment) {
+            if ($segment === '' || $segment === '.') {
+                continue;
+            }
+
+            if ($segment === '..') {
+                array_pop($segments);
+
+                continue;
+            }
+
+            $segments[] = $segment;
+        }
+
+        $normalized = (str_starts_with($path, '/') ? '/' : '').implode('/', $segments);
+        if ($normalized === '') {
+            $normalized = '/';
+        }
+
+        $existing = $normalized;
+        $suffix = [];
+        while ($existing !== '' && $existing !== '/' && ! is_dir($existing)) {
+            array_unshift($suffix, basename($existing));
+            $existing = dirname($existing);
+        }
+
+        if (is_dir($existing)) {
+            $realExisting = realpath($existing);
+            if (is_string($realExisting) && $realExisting !== '') {
+                $normalized = $this->normalizePath($realExisting.(count($suffix) > 0 ? '/'.implode('/', $suffix) : ''));
+            }
+        }
+
+        return $normalized;
     }
 }

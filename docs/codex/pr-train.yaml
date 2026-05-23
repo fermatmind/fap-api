@@ -11051,3 +11051,227 @@ prs:
     production_migration_execution_allowed: false
     scheduler_activation: false
     next_task: null
+
+  - id: OPS-SECURITY-STORAGE-PATH-SAFETY-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/ops-security-storage-path-safety-01
+    base: main
+    title: "fix(storage): harden archive and restore path containment"
+    train_scope: codex_security_findings_20260523
+    risk_level: high_security_boundary
+    findings: [66, 68, 69]
+    scope:
+      - Harden storage archive, purge, and rehydrate path containment against traversal and unsafe roots.
+    allowed_paths:
+      - backend/app/Services/Storage/ReportArtifactsArchiveService.php
+      - backend/app/Console/Commands/StoragePurgeQuarantinedRoot.php
+      - backend/app/Services/Storage/QuarantinedRootPurgeService.php
+      - backend/app/Console/Commands/StorageRehydrateExactRelease.php
+      - backend/tests/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test tests/Feature/Storage --filter Storage --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Storage/ReportArtifactsArchiveService.php app/Console/Commands/StoragePurgeQuarantinedRoot.php app/Services/Storage/QuarantinedRootPurgeService.php app/Console/Commands/StorageRehydrateExactRelease.php tests
+      - cd backend && php artisan route:list --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: OPS-SECURITY-MBTI-RELATIONSHIP-AUTH-01
+    repo: fap-api
+    depends_on: [OPS-SECURITY-STORAGE-PATH-SAFETY-01]
+    branch: codex/ops-security-mbti-relationship-auth-01
+    base: main
+    title: "fix(mbti): require identity for private relationship listing"
+    train_scope: codex_security_findings_20260523
+    risk_level: high_auth_boundary
+    findings: [67]
+    allowed_paths: [backend/app/Services/V0_3/MbtiCompareInviteService.php, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter MbtiCompare --no-ansi, cd backend && vendor/bin/pint --test app/Services/V0_3/MbtiCompareInviteService.php tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: ATTEMPT-SUBMISSION-RELIABILITY-01
+    repo: fap-api
+    depends_on: [OPS-SECURITY-MBTI-RELATIONSHIP-AUTH-01]
+    branch: codex/attempt-submission-reliability-01
+    base: main
+    title: "fix(attempts): preserve retries and durable ack identity"
+    train_scope: codex_security_findings_20260523
+    risk_level: high_product_reliability
+    findings: [61, 62]
+    allowed_paths: [backend/app/Services/Attempts/AttemptSubmissionService.php, backend/app/Jobs/ProcessAttemptSubmissionJob.php, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter AttemptSubmission --no-ansi, cd backend && vendor/bin/pint --test app/Services/Attempts/AttemptSubmissionService.php app/Jobs/ProcessAttemptSubmissionJob.php tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: COMMERCE-TENANT-REPAIR-01
+    repo: fap-api
+    depends_on: [ATTEMPT-SUBMISSION-RELIABILITY-01]
+    branch: codex/commerce-tenant-repair-01
+    base: main
+    title: "fix(commerce): repair tenant-scoped post-commit failures"
+    train_scope: codex_security_findings_20260523
+    risk_level: high_revenue_reliability
+    findings: [63]
+    allowed_paths: [backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php, backend/app/Console/Commands/CommerceRepairPostCommitFailed.php, backend/app/Console/Kernel.php, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter CommerceRepairPostCommitFailed --no-ansi, cd backend && vendor/bin/pint --test app/Services/Commerce/Webhook/WebhookEntitlementService.php app/Console/Commands/CommerceRepairPostCommitFailed.php app/Console/Kernel.php tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: DB-MIGRATION-PORTABILITY-01
+    repo: fap-api
+    depends_on: [COMMERCE-TENANT-REPAIR-01]
+    branch: codex/db-migration-portability-01
+    base: main
+    title: "fix(db): make MariaDB migration index guards portable"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_deploy_reliability
+    findings: [54, 64, 65]
+    allowed_paths: [backend/app/Support/Database/SchemaIndex.php, backend/config/database.php, backend/database/migrations/**, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter SchemaIndex --no-ansi, "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force", cd backend && vendor/bin/pint --test app/Support/Database/SchemaIndex.php config/database.php database/migrations tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: SEO-OPS-SAFETY-ARTIFACTS-01
+    repo: fap-api
+    depends_on: [DB-MIGRATION-PORTABILITY-01]
+    branch: codex/seo-ops-safety-artifacts-01
+    base: main
+    title: "fix(seo-intel): align no-write and artifact safety contracts"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_ops_safety
+    findings: [1, 2, 3, 4]
+    allowed_paths: [backend/app/Console/Commands/SeoIntelSearchChannelQueueCommand.php, backend/app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php, backend/app/Services/SeoIntel/**, backend/docs/seo/**, backend/tests/Feature/SeoIntel/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test tests/Feature/SeoIntel --no-ansi, cd backend && vendor/bin/pint --test app/Console/Commands/SeoIntelSearchChannelQueueCommand.php app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php app/Services/SeoIntel tests/Feature/SeoIntel, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: SEO-INDEXABILITY-TRUTH-01
+    repo: fap-api
+    depends_on: [SEO-OPS-SAFETY-ARTIFACTS-01]
+    branch: codex/seo-indexability-truth-01
+    base: main
+    title: "fix(seo): enforce indexability truth across robots and sitemap"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_seo_correctness
+    findings: [6, 20, 25, 44, 49]
+    allowed_paths: [backend/app/Services/SEO/**, backend/app/Services/SeoIntel/**, backend/app/Domain/Career/Audit/**, backend/app/Services/Cms/CareerJobSeoService.php, backend/app/Http/Controllers/API/V0_5/Career/**, backend/app/Http/Controllers/API/V0_5/Cms/CareerJobController.php, backend/app/Console/Commands/CareerAuditCanonicalEligibility.php, backend/tests/**, backend/docs/career/audits/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter CareerSeo --no-ansi, cd backend && php artisan test --filter Sitemap --no-ansi, cd backend && vendor/bin/pint --test app tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: RIASEC-CONTRACT-QUALITY-01
+    repo: fap-api
+    depends_on: [SEO-INDEXABILITY-TRUTH-01]
+    branch: codex/riasec-contract-quality-01
+    base: main
+    title: "fix(riasec): enforce slot quality and compare contracts"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_contract_correctness
+    findings: [5, 17, 21, 26]
+    allowed_paths: [backend/app/Services/Riasec/**, backend/app/Services/V0_3/Me/MeAttemptsService.php, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter Riasec --no-ansi, cd backend && vendor/bin/pint --test app/Services/Riasec app/Services/V0_3/Me/MeAttemptsService.php tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: BIGFIVE-RUNTIME-GUARDS-01
+    repo: fap-api
+    depends_on: [RIASEC-CONTRACT-QUALITY-01]
+    branch: codex/bigfive-runtime-guards-01
+    base: main
+    title: "fix(big-five): harden norm capture and projection routing"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_result_correctness
+    findings: [34, 35, 36]
+    allowed_paths: [backend/app/Services/BigFive/**, backend/database/migrations/2026_05_06_132700_create_big_five_norm_observations_table.php, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter BigFive --no-ansi, cd backend && vendor/bin/pint --test app/Services/BigFive database/migrations/2026_05_06_132700_create_big_five_norm_observations_table.php tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: CAREER-POLICY-CLAIM-GUARDS-01
+    repo: fap-api
+    depends_on: [BIGFIVE-RUNTIME-GUARDS-01]
+    branch: codex/career-policy-claim-guards-01
+    base: main
+    title: "fix(career): tighten policy claim and trust guards"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_content_governance
+    findings: [8, 9, 13, 33, 41, 42, 43, 58]
+    allowed_paths: [backend/app/Console/Commands/Career*Policy*.php, backend/app/Console/Commands/CareerValidateDisplayBatch.php, backend/app/Services/Career/**, backend/app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php, backend/app/Domain/Career/Scoring/**, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter Career --no-ansi, cd backend && vendor/bin/pint --test app/Console/Commands app/Services/Career app/Services/Cms/EditorialPackage app/Domain/Career tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: CAREER-READINESS-AUDITORS-01
+    repo: fap-api
+    depends_on: [CAREER-POLICY-CLAIM-GUARDS-01]
+    branch: codex/career-readiness-auditors-01
+    base: main
+    title: "fix(career): make readiness auditors fail closed"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_release_correctness
+    findings: [7, 10, 11, 14, 18, 19, 23, 24, 27, 30]
+    allowed_paths: [backend/app/Domain/Career/Audit/**, backend/app/Domain/Career/Publish/**, backend/app/Console/Commands/StorageReleaseRootsAudit.php, backend/docs/career/audits/**, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter Career --no-ansi, cd backend && vendor/bin/pint --test app/Domain/Career app/Console/Commands/StorageReleaseRootsAudit.php tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: CAREER-RELEASE-GATES-01
+    repo: fap-api
+    depends_on: [CAREER-READINESS-AUDITORS-01]
+    branch: codex/career-release-gates-01
+    base: main
+    title: "fix(career): enforce release gates and blocked states"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_release_safety
+    findings: [12, 16, 22, 28, 31, 32]
+    allowed_paths: [backend/app/Domain/Career/**, backend/app/Console/Commands/Career*.php, backend/app/Console/Commands/ReleaseVerifyPublicContent.php, backend/tests/**, deploy.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter Career --no-ansi, cd backend && vendor/bin/pint --test app/Domain/Career app/Console/Commands tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: CAREER-ROLLOUT-MATERIALIZATION-01
+    repo: fap-api
+    depends_on: [CAREER-RELEASE-GATES-01]
+    branch: codex/career-rollout-materialization-01
+    base: main
+    title: "fix(career): preserve rollout governance during materialization"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_data_integrity
+    findings: [29, 55, 56, 57]
+    allowed_paths: [backend/app/Domain/Career/Publish/**, backend/app/Domain/Career/Expansion/**, backend/app/Services/Career/**, backend/routes/api.php, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter Career --no-ansi, cd backend && php artisan route:list --path=career --no-ansi, cd backend && vendor/bin/pint --test app/Domain/Career app/Services/Career routes/api.php tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: CAREER-EXPORT-CLI-ROBUSTNESS-01
+    repo: fap-api
+    depends_on: [CAREER-ROLLOUT-MATERIALIZATION-01]
+    branch: codex/career-export-cli-robustness-01
+    base: main
+    title: "fix(career): harden export and dry-run CLI contracts"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_ops_correctness
+    findings: [15, 37, 38, 39, 40, 50, 51, 52, 53]
+    allowed_paths: [backend/app/Console/Commands/Career*.php, backend/app/Services/Career/**, backend/tests/**, backend/docs/codex/pr-train-state.json, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter Career --no-ansi, cd backend && vendor/bin/pint --test app/Console/Commands app/Services/Career tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: CMS-ARTICLE-REPORT-CORRECTNESS-01
+    repo: fap-api
+    depends_on: [CAREER-EXPORT-CLI-ROBUSTNESS-01]
+    branch: codex/cms-article-report-correctness-01
+    base: main
+    title: "fix(cms): stabilize article SEO and report snapshot saves"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_ops_correctness
+    findings: [46, 47, 48]
+    allowed_paths: [backend/app/Filament/Ops/Resources/ArticleResource**, backend/app/Filament/Ops/Resources/ReportSnapshotResource**, backend/app/Models/Article.php, backend/app/Models/ReportSnapshot.php, backend/app/Models/Scopes/TenantScope.php, backend/database/migrations/2026_03_05_154121_create_article_seo_meta_table.php, backend/database/migrations/2026_04_23_040000_consolidate_article_translation_canonical_owners.php, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter Article --no-ansi, cd backend && php artisan test --filter ReportSnapshot --no-ansi, cd backend && vendor/bin/pint --test app/Filament/Ops/Resources/ArticleResource.php app/Filament/Ops/Resources/ArticleResource app/Filament/Ops/Resources/ReportSnapshotResource.php app/Filament/Ops/Resources/ReportSnapshotResource app/Models tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PERSONALITY-ENNEAGRAM-COMPAT-01
+    repo: fap-api
+    depends_on: [CMS-ARTICLE-REPORT-CORRECTNESS-01]
+    branch: codex/personality-enneagram-compat-01
+    base: main
+    title: "fix(personality): preserve clone slots and experiment compatibility"
+    train_scope: codex_security_findings_20260523
+    risk_level: medium_product_correctness
+    findings: [45, 59, 60, 70]
+    allowed_paths: [backend/app/Services/Enneagram/**, backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php, backend/app/Services/PublicSurface/AnswerSurfaceContractService.php, backend/app/PersonalityCms/**, backend/app/Services/Cms/PersonalityDesktopCloneContentService.php, backend/app/Services/Experiments/ExperimentAssigner.php, backend/database/migrations/**, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    validation: [cd backend && php artisan test --filter Personality --no-ansi, cd backend && php artisan test --filter Enneagram --no-ansi, cd backend && php artisan test --filter ExperimentAssigner --no-ansi, cd backend && vendor/bin/pint --test app/Services/Enneagram app/Http/Controllers/API/V0_5/Cms/PersonalityController.php app/Services/PublicSurface app/PersonalityCms app/Services/Cms/PersonalityDesktopCloneContentService.php app/Services/Experiments/ExperimentAssigner.php tests, git diff --check, git diff --cached --check]
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
