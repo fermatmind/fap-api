@@ -89,6 +89,26 @@ final class CiScaleImpactGithubOutputTest extends TestCase
         @unlink($targetFile);
     }
 
+    public function test_github_output_rejects_non_canonical_paths_that_escape_directory(): void
+    {
+        $tempDir = sys_get_temp_dir().DIRECTORY_SEPARATOR.'ci_scale_impact_'.bin2hex(random_bytes(4));
+        mkdir($tempDir, 0777, true);
+        mkdir($tempDir.DIRECTORY_SEPARATOR.'nested', 0777, true);
+
+        $targetFile = $tempDir.DIRECTORY_SEPARATOR.'nested'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'escaped_output.txt';
+
+        $_SERVER['GITHUB_OUTPUT'] = $targetFile;
+        unset($_ENV['GITHUB_OUTPUT']);
+
+        $this->writeGithubOutput([
+            'run_big5_ocean_gate' => true,
+            'scale_scope' => 'full_regression',
+            'reason' => 'reject_non_canonical_target',
+        ]);
+
+        $this->assertFileDoesNotExist($tempDir.DIRECTORY_SEPARATOR.'escaped_output.txt');
+    }
+
     /**
      * @param  array<string,mixed>  $payload
      */

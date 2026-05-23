@@ -15753,6 +15753,47 @@
     ],
     "next_pr": "OPS-CI-CODESCAN-WEB-01"
   },
+  "OPS-CI-CODESCAN-API-02": {
+    "status": "local_checks_passed",
+    "repo": "fap-api",
+    "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+    "branch": "codex/ops-ci-codescan-api-02",
+    "base": "main",
+    "title": "fix(ci): eliminate CiScaleImpact Semgrep findings",
+    "depends_on": [],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "local": {
+        "php_artisan_test_filter_ci_scale_impact_github_output": "passed",
+        "php_artisan_route_list": "passed",
+        "vendor_bin_pint_test": "passed",
+        "json_validation": "passed",
+        "yaml_validation": "passed",
+        "git_diff_check": "passed",
+        "git_diff_cached_check": "passed"
+      },
+      "github": {}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "history": [
+      {
+        "at": "2026-05-23T13:40:00+08:00",
+        "status": "in_progress",
+        "summary": "Started OPS-CI-CODESCAN-API-02 on codex/ops-ci-codescan-api-02 from latest main. Scope is limited to CiScaleImpact GitHub output path validation, its focused unit test, and PR train metadata so the repeated Semgrep tainted-filename findings can be eliminated without changing runtime behavior."
+      },
+      {
+        "at": "2026-05-23T13:46:00+08:00",
+        "status": "local_checks_passed",
+        "summary": "Local validation passed for OPS-CI-CODESCAN-API-02: CiScaleImpactGithubOutput unit test, route list, Pint, manifest/state parse checks, and git diff whitespace checks."
+      }
+    ],
+    "next_pr": null
+  },
   "OPS-RUNBOOK-HEALTHZ-01": {
     "status": "merged",
     "repo": "fap-api",
