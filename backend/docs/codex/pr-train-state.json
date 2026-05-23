@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T23:40:00+08:00",
+  "updated_at": "2026-05-23T23:45:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5644,10 +5644,10 @@
     "PR-API-SEC-07": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-07-research-url-truth-paths",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "9052b10aef8647f6ebf8264ecef4b223d4cce773",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1622",
       "title": "fix(security): validate research URL truth tenant paths",
       "checks": {
         "local": [
@@ -5697,6 +5697,11 @@
           "at": "2026-05-23T23:40:00+08:00",
           "status": "local_checks_passed",
           "summary": "Added URL truth handoff import validation for trusted tenant hosts, research path slug alignment, and canonical path hash consistency. PR7 Pint, focused tests, route list, JSON validation, and diff checks passed."
+        },
+        {
+          "at": "2026-05-23T23:45:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1622 from codex/pr-api-sec-07-research-url-truth-paths after push."
         }
       ]
     },
