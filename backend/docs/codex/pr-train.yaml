@@ -3362,6 +3362,7 @@ prs:
     base: main
     depends_on: []
     mode: execute
+    title: "fix(security): bind research CMS endpoints to trusted org context"
     scope: >
       Backend-only Research CMS trusted org scope hardening. Ensure internal
       research-report read and update endpoints use the trusted ops org context
@@ -3396,6 +3397,7 @@ prs:
     base: main
     depends_on: ["PR-API-SEC-01"]
     mode: execute
+    title: "docs(security): redact production infrastructure details"
     scope: >
       Backend-only production infrastructure documentation redaction. Remove
       exact production origins, SSH targets, IndexNow key locations, canary
@@ -3427,6 +3429,7 @@ prs:
     base: main
     depends_on: ["PR-API-SEC-02"]
     mode: execute
+    title: "ci(security): pin privileged Semgrep install"
     scope: >
       Backend CI-only Semgrep install hardening. Pin the privileged Semgrep
       installation/execution path to an auditable version or action reference
@@ -3456,6 +3459,7 @@ prs:
     base: main
     depends_on: ["PR-API-SEC-03"]
     mode: execute
+    title: "fix(security): enforce source article approval in Translation Ops"
     scope: >
       Backend-only Translation Ops source article approval guard. Require
       trusted source article publication/approval state for translation
@@ -3486,6 +3490,7 @@ prs:
     base: main
     depends_on: ["PR-API-SEC-04"]
     mode: execute
+    title: "fix(career): bound public jobs list database work"
     scope: >
       Backend-only public career jobs list query budget hardening. Remove or
       bound per-directory-draft DB amplification in public jobs list builders
@@ -3516,6 +3521,7 @@ prs:
     base: main
     depends_on: ["PR-API-SEC-05"]
     mode: execute
+    title: "fix(security): enforce CN proxy public-route release gate"
     scope: >
       Backend-only CN proxy public-route release gate hardening. Ensure CN
       proxy APIs honor public-route release eligibility before exposing or
@@ -3546,6 +3552,7 @@ prs:
     base: main
     depends_on: ["PR-API-SEC-06"]
     mode: execute
+    title: "fix(security): validate research URL truth tenant paths"
     scope: >
       Backend-only research URL truth tenant path validation. Ensure research
       URL truth ingestion accepts only safe tenant CMS paths from trusted
@@ -3576,6 +3583,7 @@ prs:
     base: main
     depends_on: ["PR-API-SEC-07"]
     mode: execute
+    title: "fix(security): redact identifiers in drift issue queues"
     scope: >
       Backend-only drift canary and issue queue PII sanitization hardening.
       Redact private identifiers embedded in URL paths and issue queue payloads
@@ -3606,6 +3614,7 @@ prs:
     base: main
     depends_on: ["PR-API-SEC-08"]
     mode: execute
+    title: "fix(security): harden docs heredoc guard parsing"
     scope: >
       Backend-only docs heredoc guard whitespace bypass fix. Harden the docs
       heredoc guard/parser so whitespace variants cannot bypass protected
