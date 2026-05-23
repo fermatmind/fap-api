@@ -169,6 +169,13 @@ class CareerFirstWaveRolloutBundleArtifactMaterializationService
             throw new \RuntimeException('bundle/list slug mismatch for blocked cohort');
         }
 
+        $this->validateCohortCounts((array) ($bundle['counts'] ?? []), [
+            'stable' => $bundleStable,
+            'candidate' => $bundleCandidate,
+            'hold' => $bundleHold,
+            'blocked' => $bundleBlocked,
+        ], (array) data_get($bundle, 'advisory.manual_review_needed', []));
+
         $allowedCohorts = ['stable', 'candidate', 'hold', 'blocked'];
         $memberRows = (array) ($bundle['members'] ?? []);
         $memberRolloutCohorts = collect($memberRows)
@@ -210,6 +217,25 @@ class CareerFirstWaveRolloutBundleArtifactMaterializationService
 
         if (array_key_exists('career-manual-review-needed.json', $payloads)) {
             throw new \RuntimeException('unexpected advisory standalone artifact detected');
+        }
+    }
+
+    /**
+     * @param  array<string, mixed>  $counts
+     * @param  array<string, list<string>>  $cohorts
+     * @param  list<mixed>  $manualReviewNeeded
+     */
+    private function validateCohortCounts(array $counts, array $cohorts, array $manualReviewNeeded): void
+    {
+        foreach (['stable', 'candidate', 'hold', 'blocked'] as $cohort) {
+            if ((int) ($counts[$cohort] ?? -1) !== count($cohorts[$cohort] ?? [])) {
+                throw new \RuntimeException('bundle count mismatch for '.$cohort.' cohort');
+            }
+        }
+
+        $manualReview = $this->normalizedSlugList($manualReviewNeeded, 'advisory.manual_review_needed');
+        if ((int) ($counts['manual_review_needed'] ?? -1) !== count($manualReview)) {
+            throw new \RuntimeException('bundle count mismatch for manual_review_needed advisory');
         }
     }
 
@@ -291,7 +317,7 @@ class CareerFirstWaveRolloutBundleArtifactMaterializationService
             $value = now('UTC')->format('Ymd\THis\Z');
         }
 
-        if (! preg_match('/^[A-Za-z0-9._-]+$/', $value)) {
+        if (! preg_match('/^[A-Za-z0-9_-]+$/', $value)) {
             throw new \RuntimeException('invalid timestamp segment for rollout bundle artifact export');
         }
 

@@ -110,17 +110,80 @@ class CareerFirstWaveRolloutWavePlanArtifactMaterializationService
             throw new \RuntimeException('invalid artifact_kind for rollout wave-plan artifact');
         }
 
-        $slugs = collect((array) ($decoded['members'] ?? []))
-            ->map(static fn (array $row): string => trim((string) ($row['canonical_slug'] ?? '')))
-            ->all();
+        $members = (array) ($decoded['members'] ?? []);
+        $counts = (array) ($decoded['counts'] ?? []);
+        $cohorts = (array) ($decoded['cohorts'] ?? []);
+        $allowedCohorts = ['stable', 'candidate', 'hold', 'blocked'];
+        $slugs = [];
+        $memberSlugsByCohort = [];
 
-        if (in_array('', $slugs, true)) {
-            throw new \RuntimeException('rollout wave-plan artifact contains empty canonical_slug');
+        foreach ($members as $member) {
+            if (! is_array($member)) {
+                throw new \RuntimeException('rollout wave-plan artifact contains invalid member row');
+            }
+
+            $slug = trim((string) ($member['canonical_slug'] ?? ''));
+            $cohort = trim((string) ($member['rollout_cohort'] ?? ''));
+
+            if ($slug === '') {
+                throw new \RuntimeException('rollout wave-plan artifact contains empty canonical_slug');
+            }
+            if (! in_array($cohort, $allowedCohorts, true)) {
+                throw new \RuntimeException('rollout wave-plan artifact contains invalid rollout_cohort');
+            }
+
+            $slugs[] = $slug;
+            $memberSlugsByCohort[$cohort][] = $slug;
         }
 
         if (count(array_unique($slugs)) !== count($slugs)) {
             throw new \RuntimeException('rollout wave-plan artifact contains duplicate canonical_slug values');
         }
+
+        foreach ($allowedCohorts as $cohort) {
+            $cohortSlugs = $this->normalizedSlugList((array) ($cohorts[$cohort] ?? []), 'cohorts.'.$cohort);
+            $memberSlugs = $this->normalizedSlugList((array) ($memberSlugsByCohort[$cohort] ?? []), 'members.'.$cohort);
+
+            $sortedCohortSlugs = $cohortSlugs;
+            $sortedMemberSlugs = $memberSlugs;
+            sort($sortedCohortSlugs);
+            sort($sortedMemberSlugs);
+
+            if ($sortedCohortSlugs !== $sortedMemberSlugs) {
+                throw new \RuntimeException('rollout wave-plan cohort/member slug mismatch for '.$cohort);
+            }
+
+            if ((int) ($counts[$cohort] ?? -1) !== count($cohortSlugs)) {
+                throw new \RuntimeException('rollout wave-plan count mismatch for '.$cohort);
+            }
+        }
+
+        $manualReview = $this->normalizedSlugList((array) data_get($decoded, 'advisory.manual_review_needed', []), 'advisory.manual_review_needed');
+        if ((int) ($counts['manual_review_needed'] ?? -1) !== count($manualReview)) {
+            throw new \RuntimeException('rollout wave-plan count mismatch for manual_review_needed');
+        }
+    }
+
+    /**
+     * @param  list<mixed>  $slugs
+     * @return list<string>
+     */
+    private function normalizedSlugList(array $slugs, string $label): array
+    {
+        $normalized = array_map(
+            static fn (mixed $slug): string => trim((string) $slug),
+            array_values($slugs),
+        );
+
+        if (in_array('', $normalized, true)) {
+            throw new \RuntimeException('empty canonical_slug found in '.$label);
+        }
+
+        if (count(array_unique($normalized)) !== count($normalized)) {
+            throw new \RuntimeException('duplicate canonical_slug found in '.$label);
+        }
+
+        return $normalized;
     }
 
     /**
@@ -143,7 +206,7 @@ class CareerFirstWaveRolloutWavePlanArtifactMaterializationService
             $value = now('UTC')->format('Ymd\THis\Z');
         }
 
-        if (! preg_match('/^[A-Za-z0-9._-]+$/', $value)) {
+        if (! preg_match('/^[A-Za-z0-9_-]+$/', $value)) {
             throw new \RuntimeException('invalid timestamp segment for rollout wave-plan artifact export');
         }
 

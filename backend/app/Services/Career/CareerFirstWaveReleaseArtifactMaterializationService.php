@@ -154,6 +154,8 @@ class CareerFirstWaveReleaseArtifactMaterializationService
             throw new \RuntimeException('launch/smoke member slug sets are inconsistent');
         }
 
+        $this->validateLaunchGovernance($launchDecoded);
+
         foreach ((array) ($launchDecoded['members'] ?? []) as $member) {
             if (! is_array($member)) {
                 continue;
@@ -185,6 +187,80 @@ class CareerFirstWaveReleaseArtifactMaterializationService
     }
 
     /**
+     * @param  array<string, mixed>  $launchDecoded
+     */
+    private function validateLaunchGovernance(array $launchDecoded): void
+    {
+        $members = (array) ($launchDecoded['members'] ?? []);
+        $groups = (array) ($launchDecoded['groups'] ?? []);
+        $counts = (array) ($launchDecoded['counts'] ?? []);
+        $allowedTiers = ['stable', 'candidate', 'hold', 'blocked'];
+
+        if ((int) ($counts['total'] ?? -1) !== count($members)) {
+            throw new \RuntimeException('launch manifest total count does not match members');
+        }
+
+        $memberSlugs = [];
+        foreach ($members as $member) {
+            if (! is_array($member)) {
+                throw new \RuntimeException('launch manifest contains invalid member row');
+            }
+
+            $tier = trim((string) ($member['launch_tier'] ?? ''));
+            $slug = trim((string) ($member['canonical_slug'] ?? ''));
+            if ($slug === '') {
+                throw new \RuntimeException('launch manifest contains empty canonical_slug');
+            }
+            if (! in_array($tier, $allowedTiers, true)) {
+                throw new \RuntimeException('launch manifest contains invalid launch_tier');
+            }
+
+            $memberSlugs[] = $slug;
+        }
+
+        $normalizedMemberSlugs = $this->normalizedSlugList($memberSlugs, 'launch.members');
+        $groupMemberSlugs = [];
+        foreach ($allowedTiers as $tier) {
+            $groupSlugs = $this->normalizedSlugList((array) ($groups[$tier] ?? []), 'launch.groups.'.$tier);
+            $groupMemberSlugs = array_merge($groupMemberSlugs, $groupSlugs);
+
+            if ((int) ($counts[$tier] ?? -1) !== count($groupSlugs)) {
+                throw new \RuntimeException('launch manifest count mismatch for '.$tier);
+            }
+        }
+
+        $normalizedGroupSlugs = $this->normalizedSlugList($groupMemberSlugs, 'launch.groups');
+        sort($normalizedMemberSlugs);
+        sort($normalizedGroupSlugs);
+
+        if ($normalizedGroupSlugs !== $normalizedMemberSlugs) {
+            throw new \RuntimeException('launch manifest groups do not partition member slugs');
+        }
+    }
+
+    /**
+     * @param  list<mixed>  $slugs
+     * @return list<string>
+     */
+    private function normalizedSlugList(array $slugs, string $label): array
+    {
+        $normalized = array_map(
+            static fn (mixed $slug): string => trim((string) $slug),
+            array_values($slugs),
+        );
+
+        if (in_array('', $normalized, true)) {
+            throw new \RuntimeException('empty canonical_slug found in '.$label);
+        }
+
+        if (count(array_unique($normalized)) !== count($normalized)) {
+            throw new \RuntimeException('duplicate canonical_slug found in '.$label);
+        }
+
+        return $normalized;
+    }
+
+    /**
      * @param  array<string, mixed>  $payload
      */
     private function writeJsonFile(string $path, array $payload): void
@@ -204,7 +280,7 @@ class CareerFirstWaveReleaseArtifactMaterializationService
             $value = now('UTC')->format('Ymd\THis\Z');
         }
 
-        if (! preg_match('/^[A-Za-z0-9._-]+$/', $value)) {
+        if (! preg_match('/^[A-Za-z0-9_-]+$/', $value)) {
             throw new \RuntimeException('invalid timestamp segment for release artifact export');
         }
 

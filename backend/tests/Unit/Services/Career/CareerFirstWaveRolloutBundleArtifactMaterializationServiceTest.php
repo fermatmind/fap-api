@@ -97,6 +97,20 @@ final class CareerFirstWaveRolloutBundleArtifactMaterializationServiceTest exten
         }
     }
 
+    public function test_it_rejects_dot_segment_timestamp_without_creating_output(): void
+    {
+        $service = app(CareerFirstWaveRolloutBundleArtifactMaterializationService::class);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('invalid timestamp segment');
+
+        try {
+            $service->materialize('..');
+        } finally {
+            $this->assertDirectoryDoesNotExist($this->rootDir);
+        }
+    }
+
     public function test_it_rejects_inconsistent_bundle_and_list_projection_without_finalizing(): void
     {
         $badService = new class(app(CareerFirstWaveRolloutBundleProjectionService::class)) extends CareerFirstWaveRolloutBundleArtifactMaterializationService
@@ -266,6 +280,91 @@ final class CareerFirstWaveRolloutBundleArtifactMaterializationServiceTest exten
         } finally {
             $this->assertDirectoryDoesNotExist($finalDir);
             $this->assertDirectoryDoesNotExist($tmpDir);
+        }
+    }
+
+    public function test_it_rejects_bundle_count_mismatch_without_finalizing(): void
+    {
+        $badService = new class(app(CareerFirstWaveRolloutBundleProjectionService::class)) extends CareerFirstWaveRolloutBundleArtifactMaterializationService
+        {
+            /**
+             * @return array<string, object>
+             */
+            protected function projectedArtifacts(): array
+            {
+                return [
+                    'career-rollout-bundle.json' => new CareerFirstWaveRolloutBundleArtifact(
+                        scope: 'career_first_wave_10',
+                        counts: [
+                            'stable' => 2,
+                            'candidate' => 0,
+                            'hold' => 0,
+                            'blocked' => 0,
+                            'manual_review_needed' => 0,
+                        ],
+                        cohorts: [
+                            'stable' => ['registered-nurses'],
+                            'candidate' => [],
+                            'hold' => [],
+                            'blocked' => [],
+                        ],
+                        advisory: [
+                            'manual_review_needed' => [],
+                        ],
+                        members: [
+                            [
+                                'canonical_slug' => 'registered-nurses',
+                                'rollout_cohort' => 'stable',
+                                'launch_tier' => 'stable',
+                                'readiness_status' => 'publish_ready',
+                                'lifecycle_state' => 'indexed',
+                                'public_index_state' => 'indexable',
+                                'supporting_routes' => [
+                                    'family_hub' => true,
+                                    'next_step_links_count' => 2,
+                                ],
+                                'trust_freshness' => [
+                                    'review_due_known' => true,
+                                    'review_staleness_state' => 'review_scheduled',
+                                ],
+                            ],
+                        ],
+                    ),
+                    'career-stable-whitelist.json' => new CareerFirstWaveRolloutCohortListArtifact(
+                        scope: 'career_first_wave_10',
+                        cohort: 'stable',
+                        members: ['registered-nurses'],
+                    ),
+                    'career-candidate-whitelist.json' => new CareerFirstWaveRolloutCohortListArtifact(
+                        scope: 'career_first_wave_10',
+                        cohort: 'candidate',
+                        members: [],
+                    ),
+                    'career-hold-list.json' => new CareerFirstWaveRolloutCohortListArtifact(
+                        scope: 'career_first_wave_10',
+                        cohort: 'hold',
+                        members: [],
+                    ),
+                    'career-blocked-list.json' => new CareerFirstWaveRolloutCohortListArtifact(
+                        scope: 'career_first_wave_10',
+                        cohort: 'blocked',
+                        members: [],
+                    ),
+                ];
+            }
+        };
+
+        $timestamp = '20260415T130400Z';
+        $finalDir = $this->rootDir.DIRECTORY_SEPARATOR.$timestamp;
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('bundle count mismatch for stable cohort');
+
+        try {
+            $badService->materialize($timestamp);
+        } finally {
+            $this->assertDirectoryDoesNotExist($finalDir);
+            $this->assertDirectoryDoesNotExist($finalDir.'.tmp');
         }
     }
 

@@ -4325,7 +4325,7 @@
       "branch": "fix/career-index-entity-policy-readiness-2",
       "title": "fix(api): classify career readiness policy blockers",
       "name": "Defer broad surface verification and classify index/entity/policy readiness",
-      "status": "github_checks_passed",
+      "status": "merged",
       "depends_on": [
         "RUN-1E",
         "CTX-SURFACE-EXPORT-1"
@@ -16524,7 +16524,7 @@
         31,
         32
       ],
-      "commit_sha": "704e33e0b892ed9feacc4d03a576137ba0b102a9",
+      "commit_sha": "f8ce27fbf4b32cbd3a603514c631c68a166f2681",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1636",
       "checks": {
         "dependency": {
@@ -16572,8 +16572,8 @@
         "CAREER-RUNTIME-PROJECTION-TEST-SUITE-BASELINE-01"
       ],
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-23T23:33:06Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "events": [
         {
@@ -16605,13 +16605,18 @@
           "at": "2026-05-24T07:25:53+08:00",
           "status": "github_checks_passed",
           "summary": "PR #1636 checks passed on head 704e33e0b892ed9feacc4d03a576137ba0b102a9."
+        },
+        {
+          "at": "2026-05-24T07:35:23+08:00",
+          "status": "merged",
+          "summary": "PR #1636 squash-merged into main as f8ce27fbf4b32cbd3a603514c631c68a166f2681; remote branch deleted. Local post-merge cleanup script is unavailable in this repo."
         }
       ]
     },
     "CAREER-ROLLOUT-MATERIALIZATION-01": {
       "repo": "fap-api",
       "branch": "codex/career-rollout-materialization-01",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "CAREER-RELEASE-GATES-01"
       ],
@@ -16623,12 +16628,63 @@
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
-      "sidecar_issues": [],
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CAREER-RELEASE-GATES-01 is merged into main as f8ce27fbf4b32cbd3a603514c631c68a166f2681."
+        },
+        "targeted_materialization_tests": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/Career/CareerFirstWaveReleaseArtifactMaterializationServiceTest.php tests/Unit/Services/Career/CareerFirstWaveRolloutBundleArtifactMaterializationServiceTest.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanArtifactMaterializationServiceTest.php --no-ansi",
+          "evidence": "17 passed, 118 assertions."
+        },
+        "career_filter": {
+          "status": "external_baseline_failed",
+          "command": "cd backend && php artisan test --filter Career --no-ansi",
+          "evidence": "48 failed, 1305 passed, 52279 assertions. Failures remain concentrated in the pre-existing Career runtime projection/public surface baseline; the current PR's materialization tests passed."
+        },
+        "career_routes": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --path=career --no-ansi",
+          "evidence": "43 career routes listed."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Domain/Career app/Services/Career routes/api.php tests",
+          "evidence": "PASS, 1528 files."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to allowed Career services/tests and docs/codex state."
+        }
+      },
+      "sidecar_issues": [
+        {
+          "id": "CAREER-RUNTIME-PROJECTION-TEST-SUITE-BASELINE-01",
+          "status": "external_pre_existing",
+          "evidence": "Full Career filter continues to fail outside the current rollout materialization scope. Targeted materialization tests pass; failures are in existing runtime projection/public surface baseline tests."
+        }
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-05-24T07:35:23+08:00",
+          "status": "in_progress",
+          "summary": "Started scoped rollout governance materialization fixes from latest main after dependency merge."
+        },
+        {
+          "at": "2026-05-24T08:29:00+08:00",
+          "status": "local_validated_with_external_sidecar",
+          "summary": "Added timestamp traversal and governance count guards for release, rollout bundle, and rollout wave-plan materialization; targeted tests, route list, pint, diff check, and scope validation passed."
+        }
+      ]
     },
     "CAREER-EXPORT-CLI-ROBUSTNESS-01": {
       "repo": "fap-api",
