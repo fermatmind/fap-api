@@ -15341,12 +15341,12 @@
     "SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-post-enqueue-review",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-R3"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "c6f5bd2bd3f0e9d204e24ef0d889653c4db3c32f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1604",
       "checks": {
         "production_read_only": {
           "queue_item_verification": "passed: queue_item_id=2 exists with batch_id=2 canonical_url=https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types channel=indexnow approval_state=pending execution_state=dry_run_ready locale=en page_entity_type=test_detail source_authority=scale_catalog",
@@ -15388,6 +15388,11 @@
           "at": "2026-05-23T12:37:00+08:00",
           "status": "local_checks_passed",
           "summary": "Local validation passed for SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW: focused post-enqueue review test, Search Channel Queue suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-23T12:39:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1604 for SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW from codex/seo-growth-mbti-action-01b-post-enqueue-review. The task remained read-only against production: no gate change, no enqueue, no submission, and no CMS mutation."
         }
       ]
     }
