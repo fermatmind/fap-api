@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T22:33:00+08:00",
+  "updated_at": "2026-05-23T22:52:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5302,9 +5302,9 @@
     "PR-API-SEC-04": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/pr-api-sec-04-translation-source-approval",
-      "commit_sha": "9ad96647",
+      "commit_sha": "5d4e0294c725d04a4c31b6d38e60babac1a241fa",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1619",
       "title": "fix(security): enforce source article approval in Translation Ops",
       "checks": {
@@ -5331,21 +5331,53 @@
           {
             "command": "git diff --check && git diff --cached --check",
             "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Ops/ArticleTranslationOpsPageTest.php tests/Feature/Ops/ArticleTranslationRevisionContractTest.php",
+            "status": "passed",
+            "details": "Post-merge revalidation passed: 35 tests, 337 assertions."
           }
         ],
         "github": [
           {
-            "name": "github_checks",
-            "status": "pending",
-            "details": "PR #1619 opened; awaiting GitHub check completion."
+            "name": "hygiene",
+            "status": "passed"
+          },
+          {
+            "name": "hygiene",
+            "status": "passed"
+          },
+          {
+            "name": "semgrep sarif",
+            "status": "passed"
+          },
+          {
+            "name": "Semgrep OSS",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "passed"
           }
         ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T14:15:38Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-23T00:00:00+08:00",
@@ -5366,19 +5398,63 @@
           "at": "2026-05-23T22:33:00+08:00",
           "status": "pr_open",
           "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1619 for PR-API-SEC-04 after local checks and scope validation passed."
+        },
+        {
+          "at": "2026-05-23T22:14:27+08:00",
+          "status": "github_checks_green",
+          "summary": "GitHub checks for PR #1619 completed successfully: hygiene, Semgrep OSS, semgrep sarif, verify-mbti-legacy, and verify-mbti-v2 all passed."
+        },
+        {
+          "at": "2026-05-23T22:15:38+08:00",
+          "status": "merged",
+          "summary": "PR #1619 squash-merged into main with merge commit 5d4e0294c725d04a4c31b6d38e60babac1a241fa; remote branch was deleted."
+        },
+        {
+          "at": "2026-05-23T22:17:00+08:00",
+          "status": "post_merge_revalidated",
+          "summary": "Ran post_merge_cleanup.sh for codex/pr-api-sec-04-translation-source-approval and revalidated focused Translation Ops tests on updated main."
         }
       ]
     },
     "PR-API-SEC-05": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "planned",
+      "status": "local_checks_passed",
       "branch": "codex/pr-api-sec-05-public-jobs-list-db-budget",
       "commit_sha": "",
       "pr_url": "",
       "title": "fix(career): bound public jobs list database work",
       "checks": {
-        "local": [],
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Bundles tests/Feature/Career tests/Unit/Services/Career docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed",
+            "details": "157 files checked."
+          },
+          {
+            "command": "php artisan test tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php",
+            "status": "passed",
+            "details": "36 tests, 1035 assertions."
+          },
+          {
+            "command": "php artisan test tests/Feature/Career/CareerJobListApiTest.php",
+            "status": "passed",
+            "details": "8 tests, 121 assertions; includes directory draft query-budget regression."
+          },
+          {
+            "command": "php artisan route:list --path=career --no-ansi",
+            "status": "passed",
+            "details": "43 career routes listed."
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
         "github": []
       },
       "failure_reason": "",
@@ -5391,6 +5467,16 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "planned",
           "summary": "PR-API-SEC-05 planned after explicit user authorization for the first-wave security train."
+        },
+        {
+          "at": "2026-05-23T22:52:00+08:00",
+          "status": "in_progress",
+          "summary": "Started PR-API-SEC-05 from updated main after PR-API-SEC-04 merged; scope is limited to public career jobs list DB budget hardening and focused regression tests."
+        },
+        {
+          "at": "2026-05-23T22:52:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Eager-loaded directory draft crosswalk/display asset data and reused preloaded display assets in surface validation to avoid per-draft query amplification; focused performance and display-surface checks passed."
         }
       ]
     },

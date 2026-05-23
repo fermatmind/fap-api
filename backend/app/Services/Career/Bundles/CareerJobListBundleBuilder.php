@@ -209,6 +209,7 @@ final class CareerJobListBundleBuilder
         $excluded = array_flip(array_filter($excludedSlugs));
 
         return Occupation::query()
+            ->with(['crosswalks', 'displayAssets'])
             ->where('crosswalk_mode', self::DIRECTORY_DRAFT_CROSSWALK_MODE)
             ->orderBy('canonical_title_en')
             ->orderBy('canonical_slug')
@@ -875,15 +876,24 @@ final class CareerJobListBundleBuilder
 
     private function validDisplayAssetBackedAsset(Occupation $occupation, string $subjectSlug): ?CareerJobDisplayAsset
     {
-        $assets = CareerJobDisplayAsset::query()
-            ->where('occupation_id', $occupation->id)
-            ->where('canonical_slug', $subjectSlug)
-            ->where('surface_version', self::DISPLAY_SURFACE_VERSION)
-            ->where('asset_version', self::DISPLAY_ASSET_VERSION)
-            ->where('template_version', self::DISPLAY_ASSET_VERSION)
-            ->where('status', self::DISPLAY_READY_STATUS)
-            ->where('asset_type', self::DISPLAY_ASSET_TYPE)
-            ->get();
+        $assets = $occupation->relationLoaded('displayAssets')
+            ? $occupation->displayAssets
+                ->where('canonical_slug', $subjectSlug)
+                ->where('surface_version', self::DISPLAY_SURFACE_VERSION)
+                ->where('asset_version', self::DISPLAY_ASSET_VERSION)
+                ->where('template_version', self::DISPLAY_ASSET_VERSION)
+                ->where('status', self::DISPLAY_READY_STATUS)
+                ->where('asset_type', self::DISPLAY_ASSET_TYPE)
+                ->values()
+            : CareerJobDisplayAsset::query()
+                ->where('occupation_id', $occupation->id)
+                ->where('canonical_slug', $subjectSlug)
+                ->where('surface_version', self::DISPLAY_SURFACE_VERSION)
+                ->where('asset_version', self::DISPLAY_ASSET_VERSION)
+                ->where('template_version', self::DISPLAY_ASSET_VERSION)
+                ->where('status', self::DISPLAY_READY_STATUS)
+                ->where('asset_type', self::DISPLAY_ASSET_TYPE)
+                ->get();
 
         if ($assets->count() !== 1) {
             return null;

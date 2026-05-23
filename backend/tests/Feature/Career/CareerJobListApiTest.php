@@ -14,6 +14,7 @@ use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
@@ -212,6 +213,46 @@ final class CareerJobListApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1');
     }
 
+    public function test_directory_draft_display_asset_list_work_stays_bounded(): void
+    {
+        $slugs = [];
+        for ($i = 1; $i <= 8; $i++) {
+            $slug = "bounded-directory-draft-{$i}";
+            $slugs[] = $slug;
+            $occupation = $this->createDirectoryDraftOccupation([
+                'canonical_slug' => $slug,
+                'canonical_title_en' => "Bounded Directory Draft {$i}",
+                'canonical_title_zh' => "有界目录草稿 {$i}",
+                'search_h1_zh' => "有界目录草稿 {$i}",
+                'truth_market' => 'US',
+                'display_market' => 'zh-CN',
+            ]);
+            $this->addDisplayAssetBackedCrosswalks($occupation, sprintf('29-%04d', 1200 + $i), sprintf('29-%04d.00', 1200 + $i));
+            $this->createDisplayAsset($occupation->refresh());
+        }
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(
+                detailRouteEnabled: array_fill_keys($slugs, true),
+                robotsIndexable: array_fill_keys($slugs, true),
+                releaseGatePass: array_fill_keys($slugs, true),
+            ),
+        );
+
+        DB::flushQueryLog();
+        DB::enableQueryLog();
+
+        $this->getJson('/api/v0.5/career/jobs')
+            ->assertOk()
+            ->assertJsonCount(8, 'items');
+
+        $queryCount = count(DB::getQueryLog());
+        DB::disableQueryLog();
+
+        $this->assertLessThanOrEqual(20, $queryCount, "Directory draft list should not query per draft; saw {$queryCount} queries.");
+    }
+
     public function test_directory_draft_with_runtime_published_detail_shell_is_listed_as_detail_ready(): void
     {
         $this->app->instance(
@@ -375,7 +416,7 @@ final class CareerJobListApiTest extends TestCase
     private function createDirectoryDraftOccupation(array $overrides = []): Occupation
     {
         $family = OccupationFamily::query()->create([
-            'canonical_slug' => 'directory-draft-family',
+            'canonical_slug' => 'directory-draft-family-'.($overrides['canonical_slug'] ?? 'default'),
             'title_en' => 'Directory Draft Family',
             'title_zh' => '目录草稿职业族',
         ]);
