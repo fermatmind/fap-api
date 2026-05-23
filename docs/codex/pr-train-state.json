@@ -16015,7 +16015,7 @@
     "SEO-OPS-SAFETY-ARTIFACTS-01": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-safety-artifacts-01",
-      "status": "local_checks_passed_with_external_sidecar",
+      "status": "pr_open",
       "depends_on": [
         "DB-MIGRATION-PORTABILITY-01"
       ],
@@ -16025,8 +16025,8 @@
         3,
         4
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "69700814",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1630",
       "checks": {
         "scope_validation": {
           "status": "pass",
@@ -16075,6 +16075,11 @@
           "at": "2026-05-24T03:35:00+08:00",
           "status": "local_checks_passed_with_external_sidecar",
           "summary": "Scoped Search Channel queue no-write/enqueue conflict tests, two-stage URL truth handoff artifact safety tests, Pint, and diff check passed. Full SeoIntel feature-suite failures were reproduced on origin/main and recorded as an external sidecar under the user-approved continuation protocol."
+        },
+        {
+          "at": "2026-05-24T03:40:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1630 for SEO-OPS-SAFETY-ARTIFACTS-01 after scoped local checks passed and the full SeoIntel Feature-suite failure was recorded as an external sidecar reproduced on origin/main."
         }
       ]
     },
