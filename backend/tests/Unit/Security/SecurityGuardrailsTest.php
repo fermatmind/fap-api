@@ -379,6 +379,55 @@ final class SecurityGuardrailsTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/[\'"]reason[\'"]\s*=>/', $source);
     }
 
+    public function test_security_docs_do_not_disclose_exact_production_infrastructure_details(): void
+    {
+        $repoRoot = dirname(base_path());
+        $paths = [
+            'README_DEPLOY.md',
+            'docs/04-ops/backend-deploy-target-aliyun-01.md',
+            'backend/docs/seo/crawler-log-production-canary-preflight.md',
+            'backend/docs/seo/crawler-log-production-canary-report.md',
+            'backend/docs/seo/crawler-log-production-canary-runtime.md',
+            'backend/docs/seo/search-channel-live-02-preflight.md',
+            'backend/docs/seo/search-channel-live-mbti-01-preflight.md',
+            'backend/docs/seo/generated/crawler-log-production-canary-preflight.v1.json',
+            'backend/docs/seo/generated/crawler-log-production-canary-report.v1.json',
+            'backend/docs/seo/generated/crawler-log-production-canary-runtime.v1.json',
+            'backend/docs/seo/generated/search-channel-live-02-preflight.v1.json',
+        ];
+
+        $patterns = [
+            'production_ip' => '/\b(?:139\.224\.130\.204|122\.152\.221\.126)\b/',
+            'production_webhook_url' => '/http:\/\/122\.152\.221\.126:9000\/hooks\/deploy-fap-api/',
+            'production_log_path' => '/\/var\/log\/nginx\/access\.log/',
+            'production_release_shell' => '/\/var\/www\/fap-api\/current\/backend/',
+            'indexnow_key_location_url' => '/https:\/\/fermatmind\.com\/[a-f0-9]{32}\.txt/',
+            'indexnow_key_hash' => '/indexnow_key_(?:location_public_)?sha256"\s*:\s*"[a-f0-9]{64}"/',
+            'rds_endpoint' => '/rm-uf6u2498t7nk2faya\.rwlb\.rds\.aliyuncs\.com/',
+        ];
+
+        $violations = [];
+
+        foreach ($paths as $relativePath) {
+            $source = file_get_contents($repoRoot.'/'.$relativePath);
+            $this->assertIsString($source, $relativePath);
+
+            foreach ($patterns as $label => $pattern) {
+                if (preg_match($pattern, $source) !== 1) {
+                    continue;
+                }
+
+                $violations[] = "{$relativePath}:{$label}";
+            }
+        }
+
+        $this->assertSame(
+            [],
+            $violations,
+            "Security docs must use placeholders for exact production infrastructure details.\n".implode("\n", $violations)
+        );
+    }
+
     public function test_v03_auth_guest_route_wiring_and_middleware_contract(): void
     {
         $source = file_get_contents(base_path('routes/api.php'));

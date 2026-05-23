@@ -4,18 +4,18 @@
 
 CRAWLER-LOG-05 records the first human-approved crawler log production canary result as a read-only observation artifact.
 
-The canary runtime was deployed to the production backend release at commit `84d48b2cfc15ac48a7999e2b0af56c1b4a3626bd`. The approved source was `/var/log/nginx/access.log` on `139.224.130.204`, executed from `/var/www/fap-api/current/backend`.
+The canary runtime was deployed to the production backend release at commit `84d48b2cfc15ac48a7999e2b0af56c1b4a3626bd`. The approved source, host, and execution shell are redacted from repository docs and recorded in approved ops inventory.
 
 This report does not expand crawler log collection. It does not add a scheduler, collector write, database write, issue queue write, URL Truth mutation, Search Channel Queue enqueue, or search submission.
 
 ## Deployment / Runtime Confirmation
 
-- Production runtime host: `139.224.130.204`
-- Runtime shell: `/var/www/fap-api/current/backend`
+- Production runtime host: redacted from repository docs
+- Runtime shell: redacted from repository docs
 - Runtime command: `seo-intel:crawler-log-observe`
 - Deployed release SHA: `84d48b2cfc15ac48a7999e2b0af56c1b4a3626bd`
 - Canary mode: `single_source_production_canary_dry_run`
-- Source: `/var/log/nginx/access.log`
+- Source: redacted from repository docs
 - Limit: `1000`
 - Required approval phrase verified: yes
 

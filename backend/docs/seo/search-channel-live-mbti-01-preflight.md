@@ -54,24 +54,24 @@ Production config contains IndexNow live submission metadata:
 - IndexNow key present
 - key length `32`
 - keyLocation present
-- keyLocation host `fermatmind.com`
+- keyLocation host redacted from repository docs
 
 Public keyLocation verification succeeded:
 
-- URL: `https://fermatmind.com/8d59565935303aad72c5eb0ec5bfa42e.txt`
+- URL: `<redacted-indexnow-key-location>`
 - HTTP `200`
 - content type `text/plain; charset=UTF-8`
 - body length `32`
 - public file SHA-256 matched the configured IndexNow key SHA-256
 
-The raw key value is intentionally not recorded here.
+The raw key value, full keyLocation, concrete host, and key hash are intentionally not recorded here.
 
 ## Submit dry-run verification
 
 Read-only submit dry-run command:
 
 ```bash
-cd /var/www/fap-api/current/backend
+cd <production-backend-release-dir>
 php artisan seo-intel:search-channel-submit --queue-item-id=2 --dry-run --json
 ```
 

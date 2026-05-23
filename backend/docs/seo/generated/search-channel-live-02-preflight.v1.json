@@ -31,8 +31,8 @@
     "production_deploy_contains_executor_merge": true
   },
   "production_runtime": {
-    "target_host": "139.224.130.204",
-    "target_path": "/var/www/fap-api/current/backend",
+    "target_host": "<redacted-approved-production-host>",
+    "target_path": "<redacted-production-release-shell>",
     "required_deploy_sha": "af8a050bfed88631cfc687775402548848ba87a1",
     "last_successful_production_deploy_run_id": 26174360293,
     "last_successful_production_deploy_completed_at": "2026-05-20T16:17:20Z",
@@ -40,7 +40,7 @@
     "production_executor_presence_verified": true,
     "remote_read_only_command_verified": true,
     "local_ssh_attempt": {
-      "target": "fap-api-prod",
+      "target": "<redacted-ssh-target>",
       "result": "success"
     },
     "current_release": "20260521220637",
@@ -65,7 +65,7 @@
     "claim_boundary_state": "claim_safe",
     "private_flow": false,
     "verification_state": "fresh_production_dry_run_verified",
-    "verification_source": "Production read-only executor dry-run on Aliyun release 20260521220637 at SHA 35d1f33b038df4eac330475d072f25fbbfd66364."
+    "verification_source": "Production read-only executor dry-run on the approved release; concrete host and release shell are redacted from repository docs."
   },
   "fresh_dry_run": {
     "status": "success",
@@ -243,11 +243,11 @@
     "indexnow_live_api_enabled": true,
     "indexnow_key_present": true,
     "indexnow_key_length": 32,
-    "indexnow_key_sha256": "e9a3eca3e7c107d6e0ac63c1fdba24068d970aecb4bdf18ed69735e8b77cf143",
-    "indexnow_key_location_host": "fermatmind.com",
+    "indexnow_key_sha256": "<redacted-indexnow-key-sha256>",
+    "indexnow_key_location_host": "<redacted-indexnow-key-location-host>",
     "indexnow_key_location_public_bytes": 32,
-    "indexnow_key_location_public_sha256": "e9a3eca3e7c107d6e0ac63c1fdba24068d970aecb4bdf18ed69735e8b77cf143",
-    "frontend_pm2_reloaded_for_key_file": true
+    "indexnow_key_location_public_sha256": "<redacted-indexnow-key-location-sha256>",
+    "frontend_pm2_reloaded_for_key_file": "<redacted-operational-detail>"
   },
   "live_gate_verification": {
     "status": "pass",

@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T21:20:46+08:00",
+  "updated_at": "2026-05-23T21:43:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3785,7 +3785,7 @@
             "result": "25 modifiers, 12 synergies, 30 facets, 23 precision rules, 40 action rules, 8 coverage profiles"
           },
           {
-            "command": "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|assertiveness|你天生注定|你永远都会|你只能这样活|你太玻璃心|你有问题|你不正常\" backend/content_assets/big5/v1/expanded || true",
+            "command": "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|assertiveness|\u4f60\u5929\u751f\u6ce8\u5b9a|\u4f60\u6c38\u8fdc\u90fd\u4f1a|\u4f60\u53ea\u80fd\u8fd9\u6837\u6d3b|\u4f60\u592a\u73bb\u7483\u5fc3|\u4f60\u6709\u95ee\u9898|\u4f60\u4e0d\u6b63\u5e38\" backend/content_assets/big5/v1/expanded || true",
             "status": "passed",
             "result": "no matches in expanded assets"
           },
@@ -4377,7 +4377,7 @@
             "status": "passed"
           },
           {
-            "command": "php artisan career:align-selected-authority-crosswalks --file=/Users/rainie/Desktop/第八版_d5a_8_repaired.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json",
+            "command": "php artisan career:align-selected-authority-crosswalks --file=/Users/rainie/Desktop/\u7b2c\u516b\u7248_d5a_8_repaired.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json",
             "status": "passed_local_db_unavailable_plan",
             "details": "Local authority DB is unavailable; dry-run completed read-only from the D5a repaired workbook, validated all 8 selected slugs, reported would_create_occupation_count=8 and would_create_crosswalk_count=16, and wrote no DB rows."
           },
@@ -4438,9 +4438,9 @@
             "status": "passed"
           },
           {
-            "command": "php artisan career:import-selected-display-assets --file=/Users/rainie/Desktop/第九版.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json",
+            "command": "php artisan career:import-selected-display-assets --file=/Users/rainie/Desktop/\u7b2c\u4e5d\u7248.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json",
             "status": "failed_workbook_contract_outside_scope",
-            "details": "Draft PR exception: unsupported slug error is gone; all 8 D5 slugs were requested, validated, and generated payload summaries, but 第九版.xlsx still fails workbook contract validation for CTA/source labels, CN job-posting sample terms, and biomedical Product substring. This PR is not mergeable until the workbook source passes or the manifest acceptance is updated."
+            "details": "Draft PR exception: unsupported slug error is gone; all 8 D5 slugs were requested, validated, and generated payload summaries, but \u7b2c\u4e5d\u7248.xlsx still fails workbook contract validation for CTA/source labels, CN job-posting sample terms, and biomedical Product substring. This PR is not mergeable until the workbook source passes or the manifest acceptance is updated."
           },
           {
             "command": "git diff --check && git diff --cached --check",
@@ -4476,17 +4476,17 @@
         {
           "at": "2026-05-03T18:33:57Z",
           "status": "failed_local_check",
-          "summary": "Updated D5c1 validation source to 第九版.xlsx. Scoped code checks passed and unsupported slug errors are gone, but real workbook dry-run fails due workbook contract blockers outside allowlist scope."
+          "summary": "Updated D5c1 validation source to \u7b2c\u4e5d\u7248.xlsx. Scoped code checks passed and unsupported slug errors are gone, but real workbook dry-run fails due workbook contract blockers outside allowlist scope."
         },
         {
           "at": "2026-05-03T18:36:47Z",
           "status": "draft_exception_ready",
-          "summary": "Review pass: scope limited to allowlist/tests/train metadata. Open draft PR under documented exception because 第九版 workbook dry-run fails only on data contract blockers outside this PR."
+          "summary": "Review pass: scope limited to allowlist/tests/train metadata. Open draft PR under documented exception because \u7b2c\u4e5d\u7248 workbook dry-run fails only on data contract blockers outside this PR."
         },
         {
           "at": "2026-05-03T18:38:31Z",
           "status": "draft_open_workbook_blocked",
-          "summary": "Opened draft PR #1114. GitHub checks are pending; mergeStateStatus is UNSTABLE because the PR is draft/pending and the real 第九版 workbook dry-run remains blocked by workbook contract data."
+          "summary": "Opened draft PR #1114. GitHub checks are pending; mergeStateStatus is UNSTABLE because the PR is draft/pending and the real \u7b2c\u4e5d\u7248 workbook dry-run remains blocked by workbook contract data."
         },
         {
           "at": "2026-05-03T18:40:10Z",
@@ -4674,12 +4674,12 @@
         {
           "at": "2026-05-04T05:20:00Z",
           "status": "in_progress",
-          "summary": "Initialized PR-D6 ledger entry for the read-only 第九版 full display workbook intake validator after D5e live validation passed."
+          "summary": "Initialized PR-D6 ledger entry for the read-only \u7b2c\u4e5d\u7248 full display workbook intake validator after D5e live validation passed."
         },
         {
           "at": "2026-05-04T05:45:00Z",
           "status": "scope_extended",
-          "summary": "Extended PR-D6 scope to include a read-only Strategic Architecture Gap Scan for protocol sections §1 through §5 without implementing architecture modules or changing release gates."
+          "summary": "Extended PR-D6 scope to include a read-only Strategic Architecture Gap Scan for protocol sections \u00a71 through \u00a75 without implementing architecture modules or changing release gates."
         },
         {
           "at": "2026-05-04T06:05:00Z",
@@ -4877,9 +4877,9 @@
     "PR-API-SEC-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "ci_fix_local_checks_passed",
+      "status": "merged",
       "branch": "codex/pr-api-sec-01-research-cms-trusted-org",
-      "commit_sha": "206cf1bba7909c9b4785922338c630f24850cc0b",
+      "commit_sha": "9456fdfda688623b621ca24fdcacee995ac33c59",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1616",
       "title": "fix(security): bind research CMS endpoints to trusted org context",
       "checks": {
@@ -4928,56 +4928,58 @@
           {
             "command": "vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/ResearchReportController.php app/Http/Middleware/ResolveOrgContext.php tests/Feature/Research/ResearchAssetBackendMvpTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
             "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Research/ResearchAssetBackendMvpTest.php",
+            "status": "passed",
+            "details": "Post-merge revalidation passed: 5 tests, 55 assertions."
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|research_cms_trusted_org_hardening'",
+            "status": "passed",
+            "details": "Post-merge revalidation passed: 2 tests, 5 assertions."
           }
         ],
         "github": [
           {
             "name": "hygiene",
-            "status": "passed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130980/job/77522390325"
+            "status": "passed"
           },
           {
             "name": "hygiene",
-            "status": "passed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130187/job/77522385973"
+            "status": "passed"
           },
           {
             "name": "semgrep sarif",
-            "status": "passed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130972/job/77522402720"
+            "status": "passed"
           },
           {
             "name": "Semgrep OSS",
-            "status": "passed",
-            "details_url": "https://github.com/fermatmind/fap-api/runs/77522460675"
+            "status": "passed"
           },
           {
             "name": "verify-mbti-legacy",
-            "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130980/job/77522420876"
+            "status": "failed_then_passed"
           },
           {
             "name": "verify-mbti-legacy",
-            "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130187/job/77522414773"
+            "status": "failed_then_passed"
           },
           {
             "name": "verify-mbti-v2",
-            "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130980/job/77522420878"
+            "status": "failed_then_passed"
           },
           {
             "name": "verify-mbti-v2",
-            "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130187/job/77522414779"
+            "status": "failed_then_passed"
           }
         ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T13:27:24Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-23T00:00:00+08:00",
@@ -5013,20 +5015,73 @@
           "at": "2026-05-23T21:20:46+08:00",
           "status": "ci_fix_local_checks_passed",
           "summary": "Diagnosed GitHub verify-mbti failures as current PR CI classifier coverage gap; added scoped Research CMS trusted-org hardening classifier test and full local ci_verify_mbti plus manifest checks passed."
+        },
+        {
+          "at": "2026-05-23T21:27:24+08:00",
+          "status": "github_checks_green",
+          "summary": "GitHub checks for PR #1616 reran green after the scoped CI classifier fix was pushed."
+        },
+        {
+          "at": "2026-05-23T21:27:24+08:00",
+          "status": "merged",
+          "summary": "PR #1616 merged into main with merge commit 9456fdfda688623b621ca24fdcacee995ac33c59; remote branch was deleted."
+        },
+        {
+          "at": "2026-05-23T21:31:00+08:00",
+          "status": "post_merge_revalidated",
+          "summary": "Ran post_merge_cleanup.sh for codex/pr-api-sec-01-research-cms-trusted-org and revalidated the focused Research CMS and freeze-classifier tests on updated main."
         }
       ]
     },
     "PR-API-SEC-02": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "planned",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-02-redact-prod-infra-docs",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "7b95b8a5",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1617",
       "title": "docs(security): redact production infrastructure details",
       "checks": {
-        "local": [],
-        "github": []
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Security/SecurityGuardrailsTest.php",
+            "status": "passed",
+            "details": "16 tests, 69 assertions; includes production infrastructure disclosure guardrail."
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/seo/generated/crawler-log-production-canary-preflight.v1.json >/dev/null && python3 -m json.tool backend/docs/seo/generated/crawler-log-production-canary-runtime.v1.json >/dev/null && python3 -m json.tool backend/docs/seo/generated/crawler-log-production-canary-report.v1.json >/dev/null && python3 -m json.tool backend/docs/seo/generated/search-channel-live-02-preflight.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "rg -n '139\\.224\\.130\\.204|122\\.152\\.221\\.126|/var/log/nginx/access\\.log|/var/www/fap-api/current/backend|https://fermatmind\\.com/[a-f0-9]{32}\\.txt|rm-uf6u2498t7nk2faya\\.rwlb\\.rds\\.aliyuncs\\.com' README_DEPLOY.md docs/04-ops/backend-deploy-target-aliyun-01.md backend/docs/seo/crawler-log-production-canary-preflight.md backend/docs/seo/crawler-log-production-canary-report.md backend/docs/seo/crawler-log-production-canary-runtime.md backend/docs/seo/search-channel-live-02-preflight.md backend/docs/seo/search-channel-live-mbti-01-preflight.md backend/docs/seo/generated/crawler-log-production-canary-preflight.v1.json backend/docs/seo/generated/crawler-log-production-canary-report.v1.json backend/docs/seo/generated/crawler-log-production-canary-runtime.v1.json backend/docs/seo/generated/search-channel-live-02-preflight.v1.json",
+            "status": "passed",
+            "details": "No scoped sensitive-production-infrastructure pattern matches remained in changed docs/generated artifacts."
+          },
+          {
+            "command": "vendor/bin/pint --test tests/Unit/Security/SecurityGuardrailsTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list --no-ansi",
+            "status": "passed",
+            "details": "203 routes listed; no route/runtime changes in scope."
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "github_checks",
+            "status": "pending",
+            "details": "PR #1617 opened; awaiting GitHub check completion."
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
@@ -5038,6 +5093,21 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "planned",
           "summary": "PR-API-SEC-02 planned after explicit user authorization for the first-wave security train."
+        },
+        {
+          "at": "2026-05-23T21:36:27+08:00",
+          "status": "in_progress",
+          "summary": "Started PR-API-SEC-02 from updated main after PR-API-SEC-01 merged; scope is limited to production infrastructure documentation redaction plus focused guardrail coverage."
+        },
+        {
+          "at": "2026-05-23T21:36:27+08:00",
+          "status": "local_checks_passed",
+          "summary": "Redacted exact production origins, SSH targets, IndexNow key locations, canary infrastructure details, and generated artifacts while preserving non-sensitive operational guidance; focused security guardrail, route list, JSON, Pint, and diff checks passed."
+        },
+        {
+          "at": "2026-05-23T21:43:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1617 for PR-API-SEC-02 after local checks and scope validation passed."
         }
       ]
     },
