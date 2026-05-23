@@ -1,46 +1,46 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
         <x-filament-ops::ops-section
-            eyebrow="CMS product layer"
-            title="Content overview"
-            description="Track the production CMS bootstrap boundary across org-scoped editorial, global career content, taxonomy, and the lightweight release surface."
+            :eyebrow="__('ops.custom_pages.content_overview.eyebrow')"
+            :title="__('ops.custom_pages.content_overview.title')"
+            :description="__('ops.custom_pages.content_overview.description')"
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-control-stack">
-                    <span class="ops-control-label">Workspace contract</span>
-                    <p class="ops-control-hint">This surface keeps content authoring, content data, and content release visible in one product layer instead of scattered resource lists.</p>
+                    <span class="ops-control-label">{{ __('ops.custom_pages.content_overview.contract_label') }}</span>
+                    <p class="ops-control-hint">{{ __('ops.custom_pages.content_overview.contract_hint') }}</p>
                 </div>
 
                 <x-slot name="actions">
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\EditorialOperationsPage::getUrl() }}">
-                        Editorial Ops
+                        {{ __('ops.custom_pages.common.nav.editorial_ops') }}
                     </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentMetricsPage::getUrl() }}">
-                        Content Metrics
+                        {{ __('ops.custom_pages.common.nav.content_metrics') }}
                     </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentGrowthAttributionPage::getUrl() }}">
-                        Growth Attribution
+                        {{ __('ops.custom_pages.common.nav.growth_attribution') }}
                     </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\SeoOperationsPage::getUrl() }}">
-                        SEO Operations
+                        {{ __('ops.custom_pages.common.nav.seo_operations') }}
                     </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentSearchPage::getUrl() }}">
-                        Content Search
+                        {{ __('ops.custom_pages.common.nav.content_search') }}
                     </x-filament::button>
                     @if (\App\Filament\Ops\Support\ContentAccess::canRelease())
                         <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\EditorialReviewPage::getUrl() }}">
-                            Editorial Review
+                            {{ __('ops.custom_pages.common.nav.editorial_review') }}
                         </x-filament::button>
                         <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\PostReleaseObservabilityPage::getUrl() }}">
-                            Release Observability
+                            {{ __('ops.custom_pages.common.nav.observability') }}
                         </x-filament::button>
                     @endif
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentWorkspacePage::getUrl() }}">
-                        Open Workspace
+                        {{ __('ops.custom_pages.common.nav.workspace') }}
                     </x-filament::button>
                     @if (\App\Filament\Ops\Support\ContentAccess::canRelease())
                         <x-filament::button color="primary" tag="a" href="{{ \App\Filament\Ops\Pages\ContentReleasePage::getUrl() }}">
-                            Open Release
+                            {{ __('ops.custom_pages.content_overview.release_action') }}
                         </x-filament::button>
                     @endif
                 </x-slot>
@@ -48,15 +48,15 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Workspace health"
-            description="A compact summary of the visible CMS modules that are actually part of the production workspace."
+            :title="__('ops.custom_pages.content_overview.health_title')"
+            :description="__('ops.custom_pages.content_overview.health_desc')"
         >
             <x-filament-ops::ops-field-grid :fields="$summaryFields" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Recent surfaces"
-            description="Use these shortcuts to jump into the last active part of the content system."
+            :title="__('ops.custom_pages.content_overview.recent_title')"
+            :description="__('ops.custom_pages.content_overview.recent_desc')"
         >
             <div class="ops-card-list">
                 @forelse ($recentItems as $item)
@@ -66,16 +66,16 @@
                     >
                         <x-slot name="actions">
                             <x-filament::button size="xs" color="gray" tag="a" href="{{ $item['url'] }}">
-                                Open
+                                {{ __('ops.custom_pages.common.actions.open') }}
                             </x-filament::button>
                         </x-slot>
                     </x-filament-ops::ops-result-card>
                 @empty
                     <x-filament-ops::ops-empty-state
-                        eyebrow="Content overview"
+                        :eyebrow="__('ops.custom_pages.content_overview.title')"
                         icon="heroicon-o-clipboard-document-list"
-                        title="No content records yet"
-                        description="Recent CMS activity will appear here once editorial or taxonomy records exist."
+                        :title="__('ops.custom_pages.content_overview.empty_title')"
+                        :description="__('ops.custom_pages.content_overview.empty_desc')"
                     />
                 @endforelse
             </div>

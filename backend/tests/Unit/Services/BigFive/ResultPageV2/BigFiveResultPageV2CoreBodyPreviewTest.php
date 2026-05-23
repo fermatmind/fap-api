@@ -649,6 +649,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_content_overview_ops_ui_file(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Pages/ContentOverviewPage.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_migration_isolation_files(): void
     {
         $changed = [
@@ -1950,6 +1959,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isContentOverviewOpsUiFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelMigrationIsolationFile($file)) {
                 continue;
             }
@@ -2611,6 +2624,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Pages/ContentGrowthAttributionPage.php',
             'backend/app/Services/Ops/ContentGrowthAttributionService.php',
         ], true);
+    }
+
+    private function isContentOverviewOpsUiFile(string $file): bool
+    {
+        return $file === 'backend/app/Filament/Ops/Pages/ContentOverviewPage.php';
     }
 
     private function isSeoIntelMigrationIsolationFile(string $file): bool
