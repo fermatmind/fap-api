@@ -6520,6 +6520,48 @@ prs:
     production_approval_required: false
     next_task: OPS-CI-CODESCAN-WEB-01
 
+  - id: OPS-CI-CODESCAN-API-02
+    repo: fap-api
+    depends_on: []
+    branch: codex/ops-ci-codescan-api-02
+    base: main
+    title: "fix(ci): eliminate CiScaleImpact Semgrep findings"
+    name: "Eliminate CiScaleImpact Semgrep findings"
+    train_scope: ops_ci_codescan_api
+    risk_level: L1
+    type: ci/runtime-safety PR
+    scope:
+      - Refactor CiScaleImpact GITHUB_OUTPUT target resolution so local canonical paths are enforced before write.
+      - Eliminate the repeated Semgrep tainted-filename findings on the validated local CI output path checks.
+      - Preserve command behavior for valid local GitHub Actions output files.
+    allowed_paths:
+      - backend/app/Console/Commands/CiScaleImpact.php
+      - backend/tests/Unit/Ci/CiScaleImpactGithubOutputTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change backend runtime routes, controllers, migrations, deploy scripts, production env, or non-CI command behavior beyond the validated local path guard.
+      - Deploy production, mutate servers, or alter unrelated security workflows.
+    validation:
+      - cd backend && php artisan test --filter=CiScaleImpactGithubOutput --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: false
+    production_approval_required: false
+    next_task: null
+
   - id: OPS-RUNBOOK-HEALTHZ-01
     repo: fap-api
     depends_on:

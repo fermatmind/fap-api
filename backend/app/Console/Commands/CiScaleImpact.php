@@ -161,15 +161,28 @@ final class CiScaleImpact extends Command
             return null;
         }
 
-        $directory = dirname($target);
+        $directory = realpath(dirname($target));
+        if (! is_string($directory) || $directory === '') {
+            return null;
+        }
+
+        $resolvedTarget = $directory.DIRECTORY_SEPARATOR.basename($target);
+        if ($resolvedTarget !== $target) {
+            return null;
+        }
+
+        // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
+        // The directory comes from realpath(dirname($target)) and the final target must round-trip exactly.
         if (! is_dir($directory) || ! is_writable($directory)) {
             return null;
         }
 
-        if (file_exists($target) && (! is_file($target) || ! is_writable($target))) {
+        // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
+        // $resolvedTarget is constrained to a local canonical directory plus basename(target), with no scheme.
+        if (file_exists($resolvedTarget) && (! is_file($resolvedTarget) || ! is_writable($resolvedTarget))) {
             return null;
         }
 
-        return $target;
+        return $resolvedTarget;
     }
 }
