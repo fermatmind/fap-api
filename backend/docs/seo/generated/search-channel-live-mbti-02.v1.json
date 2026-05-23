@@ -1,0 +1,36 @@
+{
+  "schema_version": "v1",
+  "task": "SEARCH-CHANNEL-LIVE-MBTI-02",
+  "final_decision": "search_channel_live_mbti_02_completed_ready_for_24h_review",
+  "approval_phrase_verified": true,
+  "queue_item_id": 2,
+  "url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+  "channel": "indexnow",
+  "live_submission_attempted": true,
+  "live_submission_committed": true,
+  "external_api_call_attempted": true,
+  "response_status": "accepted",
+  "response_code": 200,
+  "queue_item_state_after": {
+    "approval_state": "approved",
+    "execution_state": "submitted",
+    "approved_by": "codex"
+  },
+  "live_gates_opened": true,
+  "live_gates_closed": true,
+  "queue_write_gate_state": false,
+  "duplicate_detected": false,
+  "only_queue_item_2_submitted": true,
+  "no_bulk_submission": true,
+  "cms_mutation_attempted": false,
+  "url_truth_write_attempted": false,
+  "sitemap_mutation_attempted": false,
+  "llms_mutation_attempted": false,
+  "deferred_urls": [
+    "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+    "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report"
+  ],
+  "sidecars": [],
+  "next_task": "SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW"
+}
