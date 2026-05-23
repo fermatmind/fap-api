@@ -1,0 +1,100 @@
+{
+  "schema_version": "seo-growth-mbti-action-01b-search-channel-enqueue.v1",
+  "task": "SEO-GROWTH-MBTI-ACTION-01B",
+  "final_decision": "mbti_action_01b_blocked_no_supported_enqueue_command",
+  "approval_phrase_verified": true,
+  "approval_phrase": "I explicitly approve Search Channel enqueue for the EN MBTI test URL https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types via indexnow now. Do not perform live search submission.",
+  "url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+  "channel": "indexnow",
+  "enqueue_attempted": false,
+  "enqueue_committed": false,
+  "queue_item_id": null,
+  "duplicate_detected": false,
+  "live_submission_attempted": false,
+  "external_api_call_attempted": false,
+  "search_submission_attempted": false,
+  "bulk_enqueue_attempted": false,
+  "cms_mutation_attempted": false,
+  "url_truth_write_attempted": false,
+  "sitemap_mutation_attempted": false,
+  "llms_mutation_attempted": false,
+  "candidates_forbidden_or_deferred": [
+    {
+      "url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "channel": "indexnow",
+      "status": "not_enqueued",
+      "reason": "ZH MBTI test URL was outside this one-URL approval and was missing from exact production seo_urls evidence in the readiness scan."
+    },
+    {
+      "url": "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+      "channel": "indexnow",
+      "status": "not_enqueued",
+      "reason": "Research URLs were forbidden for this task and production URL Truth used www host while public canonical was apex."
+    },
+    {
+      "url": "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report",
+      "channel": "indexnow",
+      "status": "not_enqueued",
+      "reason": "Research URLs were forbidden for this task and production URL Truth used www host while public canonical was apex."
+    }
+  ],
+  "production_preflight_summary": {
+    "release_path": "/var/www/fap-api/releases/prod-20260523-2ad5fc44",
+    "command_available": true,
+    "help_options": [
+      "--dry-run",
+      "--no-write",
+      "--json",
+      "--channel",
+      "--page-type",
+      "--limit"
+    ],
+    "single_url_selector_supported": false,
+    "dry_run": {
+      "command": "php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=20",
+      "status": "success",
+      "candidate_count": 9,
+      "eligible_count": 9,
+      "blocked_count": 0,
+      "planned_queue_count": 9,
+      "issues": [],
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "search_submission_attempted": false,
+      "crawler_log_read_attempted": false
+    },
+    "exact_candidate": {
+      "planned_match_count": 1,
+      "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+      "locale": "en",
+      "page_entity_type": "test_detail",
+      "source_authority": "scale_catalog",
+      "indexability_state": "indexable",
+      "claim_boundary_state": "claim_safe",
+      "private_flow": false,
+      "reason_codes": [],
+      "existing_queue_items": 0
+    },
+    "live_gates": {
+      "queue_write_enabled": false,
+      "live_submission_enabled": false,
+      "external_api_calls_enabled": false
+    }
+  },
+  "post_enqueue_verification": {
+    "performed": false,
+    "reason": "No enqueue was attempted because the official command does not support bounded single-URL enqueue.",
+    "queue_item_count_for_url_channel": 0,
+    "no_duplicate_created": true,
+    "no_live_submission_occurred": true,
+    "no_external_call_occurred": true
+  },
+  "sidecars": [
+    "official_search_channel_queue_command_lacks_single_url_selector",
+    "zh_mbti_test_url_truth_missing_from_exact_production_seo_urls_scan",
+    "research_url_truth_www_host_differs_from_public_apex_canonical",
+    "primary_worktree_had_unrelated_dirty_ops_ui_branch_changes_so_task_used_isolated_worktree"
+  ],
+  "next_task": "SEO-GROWTH-MBTI-ACTION-01B-FIX-01｜Search Channel single-URL enqueue command support"
+}
