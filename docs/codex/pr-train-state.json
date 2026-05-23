@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T03:07:44+08:00",
+  "updated_at": "2026-05-24T03:15:15+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -21185,7 +21185,7 @@
     "DB-MIGRATION-PORTABILITY-01": {
       "repo": "fap-api",
       "branch": "codex/db-migration-portability-01",
-      "status": "pr_open",
+      "status": "ci_fix_pushed_pending_checks",
       "depends_on": [
         "COMMERCE-TENANT-REPAIR-01"
       ],
@@ -21213,11 +21213,25 @@
         "pint": {
           "status": "pass",
           "command": "cd backend && vendor/bin/pint --test app/Support/Database/SchemaIndex.php config/database.php database/migrations tests",
-          "evidence": "1581 files passed after scoped migration formatting."
+          "evidence": "1581 files passed after scoped migration formatting and BigFive freeze allowlist update."
         },
         "diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github_required_checks": {
+          "status": "failed_then_fixed_pending_rerun",
+          "evidence": "PR #1629 failed verify-mbti-legacy/v2 because BigFive runtime freeze classified SchemaIndex and DB migrations as runtime changes; added narrow DB migration portability allowlist test/fix in BigFiveResultPageV2CoreBodyPreviewTest.php."
+        },
+        "bigfive_freeze_classifier_targeted": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter db_migration_portability --no-ansi",
+          "evidence": "1 test passed, 1 assertion."
+        },
+        "bigfive_runtime_paths_targeted": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "1 test passed, 3 assertions."
         }
       },
       "failure_reason": null,
@@ -21234,6 +21248,11 @@
           "at": "2026-05-24T03:07:44+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1629 for DB-MIGRATION-PORTABILITY-01."
+        },
+        {
+          "at": "2026-05-24T03:15:15+08:00",
+          "status": "ci_fix_pushed_pending_checks",
+          "summary": "Fixed verify-mbti failure with narrow DB migration portability allowlist; local targeted tests and pint pass."
         }
       ]
     }
