@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-14T01:22:00+08:00",
+  "updated_at": "2026-05-23T21:20:46+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4873,6 +4873,348 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-API-SEC-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "ci_fix_local_checks_passed",
+      "branch": "codex/pr-api-sec-01-research-cms-trusted-org",
+      "commit_sha": "206cf1bba7909c9b4785922338c630f24850cc0b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1616",
+      "title": "fix(security): bind research CMS endpoints to trusted org context",
+      "checks": {
+        "local": [
+          {
+            "command": "php artisan test tests/Feature/Research/ResearchAssetBackendMvpTest.php",
+            "status": "failed_then_passed",
+            "details": "Initial regression test exposed ResolveOrgContext query org_id conflict on internal CMS API; fixed by binding internal CMS org resolution to trusted ops context. Final run passed: 5 tests, 55 assertions."
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/ResearchReportController.php app/Http/Middleware/ResolveOrgContext.php tests/Feature/Research/ResearchAssetBackendMvpTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list --path=internal/research-reports --no-ansi",
+            "status": "passed",
+            "details": "3 internal research-report routes listed."
+          },
+          {
+            "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          },
+          {
+            "command": "python3 /Users/rainie/.codex/skills/gh-fix-ci/scripts/inspect_pr_checks.py --repo . --pr 1616 --json",
+            "status": "failed_checks_found",
+            "details": "verify-mbti-legacy and verify-mbti-v2 failed in BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because ResolveOrgContext.php was classified as MBTI/BigFive-impacting runtime change."
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|research_cms_trusted_org_hardening'",
+            "status": "passed",
+            "details": "2 tests passed, 5 assertions."
+          },
+          {
+            "command": "bash backend/scripts/ci_verify_mbti.sh",
+            "status": "passed",
+            "details": "Full local verify_mbti CI entrypoint passed after adding the scoped Research CMS trusted-org hardening classifier coverage; BigFive section reported 783 tests, 61285 assertions before downstream gates also completed successfully."
+          },
+          {
+            "command": "vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/ResearchReportController.php app/Http/Middleware/ResolveOrgContext.php tests/Feature/Research/ResearchAssetBackendMvpTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "passed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130980/job/77522390325"
+          },
+          {
+            "name": "hygiene",
+            "status": "passed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130187/job/77522385973"
+          },
+          {
+            "name": "semgrep sarif",
+            "status": "passed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130972/job/77522402720"
+          },
+          {
+            "name": "Semgrep OSS",
+            "status": "passed",
+            "details_url": "https://github.com/fermatmind/fap-api/runs/77522460675"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130980/job/77522420876"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130187/job/77522414773"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130980/job/77522420878"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26333130187/job/77522414779"
+          }
+        ]
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "in_progress",
+          "summary": "PR-API-SEC-01 initialized after explicit user authorization for the first-wave security train."
+        },
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "PR-API-SEC-01 scoped implementation completed; focused research CMS test, JSON, Pint, route list, sqlite migrate pretend, and diff checks passed."
+        },
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "committed",
+          "summary": "Committed scoped PR-API-SEC-01 implementation at 206cf1bba7909c9b4785922338c630f24850cc0b."
+        },
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1616 for PR-API-SEC-01 after local checks passed."
+        },
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "github_checks_pending",
+          "summary": "GitHub PR #1616 is open; hygiene check is in progress and mergeStateStatus is UNSTABLE while checks are pending."
+        },
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "github_checks_failed",
+          "summary": "GitHub checks completed with hygiene/Semgrep passing and verify-mbti-legacy plus verify-mbti-v2 failing; stopping train progression until this PR is diagnosed/fixed or explicitly overridden under merge_policy."
+        },
+        {
+          "at": "2026-05-23T21:20:46+08:00",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "Diagnosed GitHub verify-mbti failures as current PR CI classifier coverage gap; added scoped Research CMS trusted-org hardening classifier test and full local ci_verify_mbti plus manifest checks passed."
+        }
+      ]
+    },
+    "PR-API-SEC-02": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/pr-api-sec-02-redact-prod-infra-docs",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "docs(security): redact production infrastructure details",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "planned",
+          "summary": "PR-API-SEC-02 planned after explicit user authorization for the first-wave security train."
+        }
+      ]
+    },
+    "PR-API-SEC-03": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/pr-api-sec-03-pin-semgrep-ci",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "ci(security): pin privileged Semgrep install",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "planned",
+          "summary": "PR-API-SEC-03 planned after explicit user authorization for the first-wave security train."
+        }
+      ]
+    },
+    "PR-API-SEC-04": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/pr-api-sec-04-translation-source-approval",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "fix(security): enforce source article approval in Translation Ops",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "planned",
+          "summary": "PR-API-SEC-04 planned after explicit user authorization for the first-wave security train."
+        }
+      ]
+    },
+    "PR-API-SEC-05": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/pr-api-sec-05-public-jobs-list-db-budget",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "fix(career): bound public jobs list database work",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "planned",
+          "summary": "PR-API-SEC-05 planned after explicit user authorization for the first-wave security train."
+        }
+      ]
+    },
+    "PR-API-SEC-06": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/pr-api-sec-06-cn-proxy-release-gate",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "fix(security): enforce CN proxy public-route release gate",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "planned",
+          "summary": "PR-API-SEC-06 planned after explicit user authorization for the first-wave security train."
+        }
+      ]
+    },
+    "PR-API-SEC-07": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/pr-api-sec-07-research-url-truth-paths",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "fix(security): validate research URL truth tenant paths",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "planned",
+          "summary": "PR-API-SEC-07 planned after explicit user authorization for the first-wave security train."
+        }
+      ]
+    },
+    "PR-API-SEC-08": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/pr-api-sec-08-issue-queue-pii-sanitizer",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "fix(security): redact identifiers in drift issue queues",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "planned",
+          "summary": "PR-API-SEC-08 planned after explicit user authorization for the first-wave security train."
+        }
+      ]
+    },
+    "PR-API-SEC-09": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/pr-api-sec-09-docs-heredoc-guard",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "fix(security): harden docs heredoc guard parsing",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "planned",
+          "summary": "PR-API-SEC-09 planned after explicit user authorization for the first-wave security train."
+        }
+      ]
     }
   },
   "prs": {
@@ -6205,5 +6547,7 @@
         }
       }
     }
-  }
+  },
+  "status": "initialized",
+  "phase": "security-first-wave"
 }

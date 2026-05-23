@@ -175,6 +175,59 @@ final class ResearchAssetBackendMvpTest extends TestCase
         ]);
     }
 
+    public function test_internal_cms_reads_and_updates_use_trusted_ops_org_context(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+
+        $this->createReport([
+            'org_id' => 41,
+            'slug' => 'trusted-org-report',
+            'title' => 'Trusted org report',
+        ]);
+        $this->createReport([
+            'org_id' => 99,
+            'slug' => 'victim-org-report',
+            'title' => 'Victim org report',
+        ]);
+
+        $indexResponse = $this->withSession(['ops_org_id' => 41])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson('/api/v0.5/internal/research-reports?locale=en&org_id=99');
+
+        $indexResponse->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.slug', 'trusted-org-report');
+        $this->assertStringNotContainsString('victim-org-report', (string) $indexResponse->getContent());
+
+        $this->withSession(['ops_org_id' => 41])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson('/api/v0.5/internal/research-reports/victim-org-report?locale=en&org_id=99')
+            ->assertNotFound();
+
+        $updateResponse = $this->withSession(['ops_org_id' => 41])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->putJson('/api/v0.5/internal/research-reports/trusted-write?locale=en', $this->researchUpdatePayload([
+                'title' => 'Trusted write',
+                'org_id' => 99,
+            ]));
+
+        $updateResponse->assertOk()
+            ->assertJsonPath('report.slug', 'trusted-write');
+
+        $this->assertDatabaseHas('research_reports', [
+            'org_id' => 41,
+            'slug' => 'trusted-write',
+            'title' => 'Trusted write',
+        ]);
+        $this->assertDatabaseMissing('research_reports', [
+            'org_id' => 99,
+            'slug' => 'trusted-write',
+        ]);
+    }
+
     public function test_research_artifact_records_no_publish_or_search_exposure_in_this_pr(): void
     {
         $artifact = json_decode((string) file_get_contents(base_path('docs/seo/generated/research-asset-backend-mvp.v1.json')), true);
@@ -217,6 +270,33 @@ final class ResearchAssetBackendMvpTest extends TestCase
             'is_indexable' => false,
             'canonical_path' => '/research/research-report',
         ], $overrides));
+    }
+
+    /**
+     * @param  array<string,mixed>  $overrides
+     * @return array<string,mixed>
+     */
+    private function researchUpdatePayload(array $overrides = []): array
+    {
+        return array_merge([
+            'title' => 'Approved research',
+            'executive_summary' => 'Summary.',
+            'body_md' => 'Body.',
+            'research_type' => 'salary_turnover',
+            'methodology' => 'Methods.',
+            'sample_disclaimer' => 'Aggregate-only sample disclaimer.',
+            'claim_boundary' => 'No diagnosis or hiring claims.',
+            'author_name' => 'Research Team',
+            'reviewer_name' => 'Claim Reviewer',
+            'references' => ['Reference A'],
+            'downloadable_asset_placeholder' => 'asset pending',
+            'locale' => 'en',
+            'status' => 'draft',
+            'review_state' => 'research_review',
+            'is_public' => false,
+            'is_indexable' => false,
+            'canonical_path' => '/research/trusted-write',
+        ], $overrides);
     }
 
     /**

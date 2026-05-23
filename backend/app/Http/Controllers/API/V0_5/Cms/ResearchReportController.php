@@ -67,7 +67,7 @@ final class ResearchReportController extends Controller
 
     public function internalIndex(Request $request): JsonResponse
     {
-        $validated = $this->validateReadQuery($request);
+        $validated = $this->validateInternalReadQuery($request);
         if ($validated instanceof JsonResponse) {
             return $validated;
         }
@@ -87,7 +87,7 @@ final class ResearchReportController extends Controller
 
     public function internalShow(Request $request, string $slug): JsonResponse
     {
-        $validated = $this->validateReadQuery($request);
+        $validated = $this->validateInternalReadQuery($request);
         if ($validated instanceof JsonResponse) {
             return $validated;
         }
@@ -148,7 +148,6 @@ final class ResearchReportController extends Controller
             'seo_title' => ['nullable', 'string', 'max:255'],
             'seo_description' => ['nullable', 'string', 'max:2000'],
             'canonical_path' => ['nullable', 'string', 'max:255'],
-            'org_id' => ['nullable', 'integer', 'min:0'],
         ]);
 
         if ($validator->fails()) {
@@ -181,7 +180,7 @@ final class ResearchReportController extends Controller
             ], 422);
         }
 
-        $orgId = (int) ($validated['org_id'] ?? 0);
+        $orgId = $this->trustedOrgId($request);
         $locale = (string) $validated['locale'];
         $normalizedSlug = $this->normalizeSlug($slug);
 
@@ -229,6 +228,31 @@ final class ResearchReportController extends Controller
     /**
      * @return array<string,mixed>|JsonResponse
      */
+    private function validateInternalReadQuery(Request $request): array|JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'locale' => ['nullable', 'string', Rule::in(['en', 'zh-CN'])],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'VALIDATION_FAILED',
+                'errors' => $validator->errors()->toArray(),
+            ], 422);
+        }
+
+        $validated = $validator->validated();
+
+        return [
+            'locale' => (string) ($validated['locale'] ?? 'en'),
+            'org_id' => $this->trustedOrgId($request),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>|JsonResponse
+     */
     private function validateReadQuery(Request $request): array|JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -250,6 +274,30 @@ final class ResearchReportController extends Controller
             'locale' => (string) ($validated['locale'] ?? 'en'),
             'org_id' => (int) ($validated['org_id'] ?? 0),
         ];
+    }
+
+    private function trustedOrgId(Request $request): int
+    {
+        $candidates = [
+            $request->attributes->get('fm_org_id'),
+            $request->attributes->get('org_id'),
+            $request->hasSession() ? $request->session()->get('ops_org_id') : null,
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (! is_int($candidate) && ! is_string($candidate) && ! is_numeric($candidate)) {
+                continue;
+            }
+
+            $raw = trim((string) $candidate);
+            if ($raw === '' || preg_match('/^\d+$/', $raw) !== 1) {
+                continue;
+            }
+
+            return max(0, (int) $raw);
+        }
+
+        return 0;
     }
 
     /**
