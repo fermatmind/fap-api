@@ -19,7 +19,10 @@ final class SeoIntelResearchUrlTruthObservationTest extends TestCase
     #[Test]
     public function published_claim_safe_research_report_emits_url_truth_candidate(): void
     {
-        config(['app.frontend_url' => 'https://www.fermatmind.com']);
+        config([
+            'app.frontend_url' => 'https://www.fermatmind.com',
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com',
+        ]);
 
         $this->createResearchReport([
             'slug' => 'mbti-personality-types-salary-turnover-report',
@@ -37,7 +40,7 @@ final class SeoIntelResearchUrlTruthObservationTest extends TestCase
 
         $record = $records[0];
 
-        $this->assertSame('https://www.fermatmind.com/en/research/mbti-personality-types-salary-turnover-report', $record->canonicalUrl);
+        $this->assertSame('https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report', $record->canonicalUrl);
         $this->assertSame('en', $record->locale);
         $this->assertSame('research_report', $record->pageEntityType);
         $this->assertSame('mbti-personality-types-salary-turnover-report', $record->entityIdOrSlug);
@@ -59,7 +62,10 @@ final class SeoIntelResearchUrlTruthObservationTest extends TestCase
     #[Test]
     public function research_url_truth_skips_draft_private_noindex_unapproved_and_unsafe_routes(): void
     {
-        config(['app.frontend_url' => 'https://www.fermatmind.com']);
+        config([
+            'app.frontend_url' => 'https://www.fermatmind.com',
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com',
+        ]);
 
         $this->createResearchReport([
             'slug' => 'valid-research-report',

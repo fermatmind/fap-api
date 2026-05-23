@@ -86,27 +86,29 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
 
             $updatedAt = $this->parseUpdatedAt($row['updated_at'] ?? null);
 
-            $records[] = new UrlTruthInventoryRecord(
-                canonicalUrl: $this->canonicalUrl('/en/tests/'.$slug),
-                locale: 'en',
-                pageEntityType: 'test_detail',
-                entityIdOrSlug: $slug,
-                sourceAuthority: 'scale_catalog',
-                indexabilityState: 'indexable',
-                lastmodAt: $updatedAt,
-                lastmodSource: 'scales_registry.updated_at',
-                cluster: 'tests',
-                entitySource: 'scales_registry',
-                authorityStatus: 'observed',
-                sourceUpdatedAt: $updatedAt,
-                metadata: [
-                    'source_table_hash' => hash('sha256', 'scales_registry'),
-                    'scale_code_hash' => hash('sha256', (string) ($row['code'] ?? $slug)),
-                ],
-                attributes: [
-                    'source_authority' => 'scale_catalog',
-                ],
-            );
+            foreach ($this->publicScaleCatalogLocales($row) as $locale) {
+                $records[] = new UrlTruthInventoryRecord(
+                    canonicalUrl: $this->canonicalUrl('/'.$this->publicLocaleSegment($locale).'/tests/'.$slug),
+                    locale: $locale,
+                    pageEntityType: 'test_detail',
+                    entityIdOrSlug: $slug,
+                    sourceAuthority: 'scale_catalog',
+                    indexabilityState: 'indexable',
+                    lastmodAt: $updatedAt,
+                    lastmodSource: 'scales_registry.updated_at',
+                    cluster: 'tests',
+                    entitySource: 'scales_registry',
+                    authorityStatus: 'observed',
+                    sourceUpdatedAt: $updatedAt,
+                    metadata: [
+                        'source_table_hash' => hash('sha256', 'scales_registry'),
+                        'scale_code_hash' => hash('sha256', (string) ($row['code'] ?? $slug)),
+                    ],
+                    attributes: [
+                        'source_authority' => 'scale_catalog',
+                    ],
+                );
+            }
         }
 
         $this->scaleCatalogAvailable = $records !== [];
@@ -303,12 +305,86 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
 
     private function canonicalUrl(string $path): string
     {
-        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', 'https://fermatmind.com')), '/');
+        $baseUrl = rtrim((string) config('seo_intel.public_canonical_host', 'https://fermatmind.com'), '/');
         if ($baseUrl === '') {
             $baseUrl = 'https://fermatmind.com';
         }
 
         return $baseUrl.'/'.ltrim($path, '/');
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function publicScaleCatalogLocales(array $row): array
+    {
+        $locales = [];
+
+        foreach (['en', 'zh-CN'] as $locale) {
+            if ($this->hasCatalogMetadata($row, $locale)) {
+                $locales[] = $locale;
+            }
+        }
+
+        return $locales;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     */
+    private function hasCatalogMetadata(array $row, string $locale): bool
+    {
+        $contentI18n = $this->toArray($row['content_i18n_json'] ?? null);
+        $language = $this->localeLanguage($locale);
+        $localizedCatalog = $this->toArray($this->toArray($contentI18n[$language] ?? null)['catalog'] ?? null);
+        $fallbackCatalog = $this->toArray($this->toArray($contentI18n['en'] ?? null)['catalog'] ?? null);
+
+        return $this->positiveInt($localizedCatalog['questions_count'] ?? $fallbackCatalog['questions_count'] ?? null) > 0
+            && $this->positiveInt($localizedCatalog['time_minutes'] ?? $fallbackCatalog['time_minutes'] ?? null) > 0;
+    }
+
+    private function publicLocaleSegment(string $locale): string
+    {
+        return $this->localeLanguage($locale) === 'zh' ? 'zh' : 'en';
+    }
+
+    private function localeLanguage(string $locale): string
+    {
+        $locale = strtolower(trim($locale));
+        if ($locale === '') {
+            return 'en';
+        }
+
+        $parts = explode('-', $locale);
+
+        return strtolower((string) ($parts[0] ?? 'en'));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function toArray(mixed $value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (is_string($value) && trim($value) !== '') {
+            $decoded = json_decode($value, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
+    }
+
+    private function positiveInt(mixed $value): int
+    {
+        $int = (int) $value;
+
+        return $int > 0 ? $int : 0;
     }
 
     private function parseUpdatedAt(mixed $value): ?Carbon
