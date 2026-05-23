@@ -162,6 +162,51 @@ final class SeoIntelDriftCollectorFoundationTest extends TestCase
     }
 
     #[Test]
+    public function drift_foundation_redacts_private_entity_identifiers_before_issue_queue_write(): void
+    {
+        $this->prepareSeoIntelSqliteConnection();
+        $now = now();
+        DB::connection('seo_intel')->table('seo_urls')->insert([
+            'canonical_url_hash' => hash('sha256', 'https://fermatmind.com/zh/result/ATTEMPTABC123456'),
+            'canonical_url' => 'https://fermatmind.com/zh/result/ATTEMPTABC123456',
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'result',
+            'entity_id_or_slug' => 'ATTEMPTABC123456',
+            'cluster' => 'private_flow',
+            'source_authority' => 'backend_public_surface',
+            'indexability_state' => 'indexable',
+            'lastmod_at' => null,
+            'lastmod_source' => null,
+            'is_private_flow' => true,
+            'first_seen_at' => $now,
+            'last_seen_at' => $now,
+            'metadata_json' => null,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+        config([
+            'seo_intel.enabled' => true,
+            'seo_intel.collectors_enabled' => true,
+            'seo_intel.write_enabled' => true,
+            'seo_intel.drift_foundation.issue_queue_target_enabled' => true,
+        ]);
+
+        $result = (new SeoIntelCollectorManager)->collect('drift_foundation', [
+            'dry_run' => false,
+            'no_write' => false,
+            'canary' => true,
+        ]);
+        $row = (array) DB::connection('seo_intel')->table('seo_issue_queue')->first();
+        $encoded = json_encode($row, JSON_THROW_ON_ERROR);
+
+        $this->assertSame('success', $result->status);
+        $this->assertTrue($result->writesCommitted);
+        $this->assertSame('[redacted]', $row['entity_id_or_slug'] ?? null);
+        $this->assertStringNotContainsString('ATTEMPTABC123456', $encoded);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/result/ATTEMPTABC123456', $encoded);
+    }
+
+    #[Test]
     public function drift_foundation_rejects_forbidden_source_authority_without_using_node2_source(): void
     {
         $this->prepareSeoIntelSqliteConnection();

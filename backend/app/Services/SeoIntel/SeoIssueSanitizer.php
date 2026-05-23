@@ -112,7 +112,7 @@ final class SeoIssueSanitizer
             return null;
         }
 
-        $path = $parts['path'] ?? '/';
+        $path = $this->maskSensitivePath((string) ($parts['path'] ?? '/'));
 
         return ($parts['scheme'] ?? 'https').'://'.($parts['host'] ?? '').$path;
     }
@@ -132,9 +132,35 @@ final class SeoIssueSanitizer
     {
         $text = preg_replace('/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i', '[redacted]', $text) ?? $text;
         $text = preg_replace('/\b(?:order|attempt|payment|provider)[-_ ]?[A-Z0-9]{6,}\b/i', '[redacted]', $text) ?? $text;
+        $text = preg_replace('#/(attempts?|results?|orders?|payments?|shares?|reports?)/[A-Za-z0-9_-]{6,}#i', '/$1/:redacted', $text) ?? $text;
+        $text = preg_replace('/\b[A-F0-9]{16,}\b/i', '[redacted]', $text) ?? $text;
         $text = preg_replace('/\b(?:token|secret|api[_-]?key)=?[^,\s]+/i', '[redacted]', $text) ?? $text;
 
         return $text;
+    }
+
+    private function maskSensitivePath(string $path): string
+    {
+        $segments = explode('/', $path);
+        $privateParents = ['attempt', 'attempts', 'result', 'results', 'order', 'orders', 'payment', 'payments', 'share', 'shares', 'report', 'reports'];
+
+        foreach ($segments as $index => $segment) {
+            $previous = strtolower($segments[$index - 1] ?? '');
+            if (
+                in_array($previous, $privateParents, true)
+                && preg_match('/^[A-Za-z0-9_-]{6,}$/', $segment) === 1
+            ) {
+                $segments[$index] = ':redacted';
+
+                continue;
+            }
+
+            if (preg_match('/^[A-F0-9]{16,}$/i', $segment) === 1) {
+                $segments[$index] = ':redacted';
+            }
+        }
+
+        return implode('/', $segments);
     }
 
     private function issueUid(string $issueType, array $issue, ?string $canonicalUrl): string

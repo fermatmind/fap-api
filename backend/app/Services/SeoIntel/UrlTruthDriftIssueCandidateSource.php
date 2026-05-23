@@ -98,7 +98,7 @@ final class UrlTruthDriftIssueCandidateSource
         $canonicalUrlHash = $this->stringOrNull($row->canonical_url_hash ?? null);
         $locale = $this->stringOrNull($row->locale ?? null);
         $pageEntityType = $this->stringOrNull($row->page_entity_type ?? null);
-        $entityIdOrSlug = $this->stringOrNull($row->entity_id_or_slug ?? null);
+        $entityIdOrSlug = $this->safeIdentifier($this->stringOrNull($row->entity_id_or_slug ?? null));
         $cluster = $this->stringOrNull($row->cluster ?? null);
         $sourceAuthority = (string) ($row->source_authority ?? '');
         $sourceAuthorityAllowed = in_array($sourceAuthority, $this->allowedSourceAuthorities(), true);
@@ -358,6 +358,19 @@ final class UrlTruthDriftIssueCandidateSource
         $normalized = trim((string) $value);
 
         return $normalized === '' ? null : $normalized;
+    }
+
+    private function safeIdentifier(?string $value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $masked = preg_replace('/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i', '[redacted]', $value) ?? $value;
+        $masked = preg_replace('/\b(?:order|attempt|payment|provider)[-_ ]?[A-Z0-9]{6,}\b/i', '[redacted]', $masked) ?? $masked;
+        $masked = preg_replace('/\b[A-F0-9]{16,}\b/i', '[redacted]', $masked) ?? $masked;
+
+        return $masked === '' ? null : $masked;
     }
 
     /**
