@@ -6,11 +6,13 @@ namespace Tests\Feature\Ops;
 
 use App\Contracts\Cms\ArticleMachineTranslationProvider;
 use App\Filament\Ops\Pages\ArticleTranslationOpsPage;
+use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
+use App\Models\EditorialReview;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
@@ -387,6 +389,34 @@ final class ArticleTranslationOpsPageTest extends TestCase
             ->count());
     }
 
+    public function test_translation_workflow_blocks_unapproved_source_before_machine_translation(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $provider = new FakeArticleMachineTranslationProvider;
+        $this->app->instance(ArticleMachineTranslationProvider::class, $provider);
+
+        $source = $this->createSourceOnlyGroup('unapproved-source-translation-fixture');
+        $this->setArticleReviewState($source, EditorialReviewAudit::STATE_IN_REVIEW);
+
+        try {
+            app(ArticleTranslationWorkflowService::class)->createMachineDraft($source->fresh(['workingRevision', 'publishedRevision']), 'en', (int) $admin->id);
+            $this->fail('Expected source approval guard to block the machine translation draft.');
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->assertContains('source article editorial approval missing', $exception->blockers);
+        }
+
+        $this->assertSame(0, $provider->calls);
+        $this->assertSame(0, Article::query()
+            ->withoutGlobalScopes()
+            ->where('translation_group_id', (string) $source->translation_group_id)
+            ->where('locale', 'en')
+            ->count());
+    }
+
     public function test_translation_ops_page_create_draft_action_uses_workflow_service(): void
     {
         $admin = $this->createAdminWithPermissions([
@@ -619,6 +649,33 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertNull($translation->published_revision_id);
     }
 
+    public function test_translation_preflight_blocks_target_when_source_approval_is_not_current(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $group = $this->createPublishedTranslationGroup('source-approval-preflight-fixture');
+        $this->setArticleReviewState($group['source'], EditorialReviewAudit::STATE_CHANGES_REQUESTED);
+
+        $preflight = app(ArticleTranslationWorkflowService::class)->preflight(
+            $group['translation']->fresh(['workingRevision', 'sourceCanonical.workingRevision'])
+        );
+
+        $this->assertFalse($preflight['ok']);
+        $this->assertContains('source article editorial approval missing', $preflight['blockers']);
+
+        try {
+            app(ArticleTranslationWorkflowService::class)->publishTranslation($group['translation']);
+            $this->fail('Expected publish preflight to block an unapproved source article.');
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->assertSame('Translation publish preflight failed.', $exception->getMessage());
+            $this->assertContains('source article editorial approval missing', $exception->blockers);
+        }
+    }
+
     public function test_translation_workflow_promotes_approves_and_publishes_with_guardrails(): void
     {
         $admin = $this->createAdminWithPermissions([
@@ -788,7 +845,26 @@ final class ArticleTranslationOpsPageTest extends TestCase
             'is_indexable' => true,
         ]);
 
+        $this->setArticleReviewState($source, EditorialReviewAudit::STATE_APPROVED);
+
         return $source->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+    }
+
+    private function setArticleReviewState(Article $article, string $state): void
+    {
+        EditorialReview::withoutGlobalScopes()->updateOrCreate(
+            [
+                'content_type' => 'article',
+                'content_id' => (int) $article->id,
+            ],
+            [
+                'org_id' => (int) $article->org_id,
+                'workflow_state' => $state,
+                'reviewed_by_admin_user_id' => null,
+                'reviewed_at' => $state === EditorialReviewAudit::STATE_APPROVED ? now() : null,
+                'last_transition_at' => now(),
+            ],
+        );
     }
 
     /**

@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T22:18:00+08:00",
+  "updated_at": "2026-05-23T22:30:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5161,9 +5161,9 @@
     "PR-API-SEC-03": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "ci_fix_local_checks_passed",
+      "status": "merged",
       "branch": "codex/pr-api-sec-03-pin-semgrep-ci",
-      "commit_sha": "41feebfb",
+      "commit_sha": "7c4f1081fde6aa8890625e21fe829c04d0f6a0d6",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1618",
       "title": "ci(security): pin privileged Semgrep install",
       "checks": {
@@ -5203,6 +5203,11 @@
             "command": "ruby -e 'require \"yaml\"; YAML.load_file(\".github/workflows/codeql.yml\")'",
             "status": "passed",
             "details": "CI fix rerun."
+          },
+          {
+            "command": "php artisan test tests/Unit/Security/SecurityGuardrailsTest.php && ruby -e 'require \"yaml\"; YAML.load_file(\".github/workflows/codeql.yml\")'",
+            "status": "passed",
+            "details": "Post-merge revalidation passed: SecurityGuardrailsTest 17 tests, 77 assertions; workflow YAML parsed."
           }
         ],
         "github": [
@@ -5216,24 +5221,36 @@
           },
           {
             "name": "semgrep sarif",
-            "status": "failed_then_fixed_pending_rerun",
-            "details": "Pinned Semgrep 1.136.0 installed, but latest setuptools 82 removed pkg_resources required by Semgrep/opentelemetry; CI failed during semgrep --version. Fix pins setuptools 80.9.0 alongside Semgrep."
+            "status": "failed_then_passed",
+            "details": "Initial pinned Semgrep run failed on setuptools 82/pkg_resources removal; rerun passed after pinning setuptools 80.9.0."
+          },
+          {
+            "name": "Semgrep OSS",
+            "status": "passed"
           },
           {
             "name": "verify-mbti-legacy",
-            "status": "pending"
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "passed"
           },
           {
             "name": "verify-mbti-v2",
-            "status": "pending"
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "passed"
           }
         ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T14:01:22Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-23T00:00:00+08:00",
@@ -5264,19 +5281,58 @@
           "at": "2026-05-23T22:18:00+08:00",
           "status": "ci_fix_local_checks_passed",
           "summary": "Pinned setuptools 80.9.0 alongside Semgrep 1.136.0 and extended workflow guardrail coverage; focused test, JSON, and workflow YAML parse checks passed locally."
+        },
+        {
+          "at": "2026-05-23T22:00:21+08:00",
+          "status": "github_checks_green",
+          "summary": "GitHub checks for PR #1618 completed successfully after the scoped Semgrep installer fix: hygiene, Semgrep OSS, semgrep sarif, verify-mbti-legacy, and verify-mbti-v2 all passed."
+        },
+        {
+          "at": "2026-05-23T22:01:22+08:00",
+          "status": "merged",
+          "summary": "PR #1618 squash-merged into main with merge commit 7c4f1081fde6aa8890625e21fe829c04d0f6a0d6; remote branch was deleted."
+        },
+        {
+          "at": "2026-05-23T22:03:00+08:00",
+          "status": "post_merge_revalidated",
+          "summary": "Ran post_merge_cleanup.sh for codex/pr-api-sec-03-pin-semgrep-ci and revalidated SecurityGuardrailsTest plus Code Scanning workflow YAML parse on updated main."
         }
       ]
     },
     "PR-API-SEC-04": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "planned",
+      "status": "local_checks_passed",
       "branch": "codex/pr-api-sec-04-translation-source-approval",
       "commit_sha": "",
       "pr_url": "",
       "title": "fix(security): enforce source article approval in Translation Ops",
       "checks": {
-        "local": [],
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Ops app/Services/Cms tests/Feature/Ops docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed",
+            "details": "147 files checked."
+          },
+          {
+            "command": "php artisan test tests/Feature/Ops/ArticleTranslationOpsPageTest.php tests/Feature/Ops/ArticleTranslationRevisionContractTest.php",
+            "status": "passed",
+            "details": "35 tests, 337 assertions."
+          },
+          {
+            "command": "php artisan route:list --no-ansi",
+            "status": "passed",
+            "details": "203 routes listed."
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
         "github": []
       },
       "failure_reason": "",
@@ -5289,6 +5345,16 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "planned",
           "summary": "PR-API-SEC-04 planned after explicit user authorization for the first-wave security train."
+        },
+        {
+          "at": "2026-05-23T22:30:00+08:00",
+          "status": "in_progress",
+          "summary": "Started PR-API-SEC-04 from updated main after PR-API-SEC-03 merged; scope is limited to Translation Ops source article approval guards and focused Ops regression tests."
+        },
+        {
+          "at": "2026-05-23T22:30:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Required source articles to retain current editorial approval before translation draft, resync, preflight, or publish actions; focused Ops tests, Pint, JSON, route list, and diff checks passed."
         }
       ]
     },

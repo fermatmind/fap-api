@@ -673,6 +673,9 @@ final class ArticleTranslationWorkflowService
         if ($source->published_at instanceof \DateTimeInterface && $source->published_at > now()) {
             $blockers[] = 'source article publish date is future';
         }
+        if (($this->sourceEditorialReviewState($source)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
+            $blockers[] = 'source article editorial approval missing';
+        }
 
         $publishedRevision = $source->publishedRevision;
         if (! $publishedRevision instanceof ArticleTranslationRevision) {
@@ -687,6 +690,14 @@ final class ArticleTranslationWorkflowService
         }
 
         return $blockers;
+    }
+
+    /**
+     * @return array{state:string,label:string,reviewed_at:string,owner_admin_user_id:int|null,owner_label:string,reviewer_admin_user_id:int|null,reviewer_label:string}|null
+     */
+    private function sourceEditorialReviewState(Article $source): ?array
+    {
+        return EditorialReviewAudit::latestState('article', $source);
     }
 
     private function referencesPreserved(Article $source, ArticleTranslationRevision $targetRevision): bool
