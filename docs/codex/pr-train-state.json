@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T11:38:00+08:00",
+  "updated_at": "2026-05-23T11:41:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17835,8 +17835,8 @@
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "9ce8045a0f41c9cf143901cbbe6665853d667131",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1598",
       "checks": {
         "permission_gate": {
           "status": "pass",
@@ -19820,13 +19820,14 @@
       "pr_url": null,
       "checks": {
         "local": {
-          "ops_shell_and_i18n": "passed: cd backend && php artisan test tests/Feature/Ops/OpsShellPolishTest.php tests/Feature/Ops/OpsCustomPagesI18nContractTest.php --no-ansi (21 tests, 251 assertions)",
+          "ops_shell_and_i18n": "passed: cd backend && php artisan test tests/Feature/Ops/OpsShellPolishTest.php tests/Feature/Ops/OpsCustomPagesI18nContractTest.php --no-ansi (21 tests, 246 assertions)",
           "route_list": "passed: cd backend && php artisan route:list --no-ansi (203 routes)",
           "pint": "passed: cd backend && vendor/bin/pint --test app/Providers/Filament/AdminPanelProvider.php app/Filament/Ops/Pages app/Filament/Ops/Resources tests/Feature/Ops/OpsShellPolishTest.php (160 files)",
           "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check",
-          "git_diff_cached_check": "passed: git diff --cached --check"
+          "git_diff_cached_check": "passed: git diff --cached --check",
+          "bigfive_runtime_freeze": "passed after scoped fix: cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi (110 tests, 457 assertions)"
         }
       },
       "failure_reason": null,
@@ -19863,6 +19864,11 @@
           "at": "2026-05-23T11:38:00+08:00",
           "status": "github_checks_failed_fixed_in_scope",
           "summary": "GitHub MBTI verification failed because the first implementation touched runtime-classified Filament app/provider files. Scoped fix removes those runtime file deltas and keeps PR2 to translations, shell IA test, and train metadata."
+        },
+        {
+          "at": "2026-05-23T11:41:00+08:00",
+          "status": "local_validation_passed_after_fix",
+          "summary": "After rebasing onto latest main and applying the scoped fix, branch diff contains only ops translations, OpsShellPolishTest, and train metadata. BigFive runtime freeze test passes locally."
         }
       ]
     },
