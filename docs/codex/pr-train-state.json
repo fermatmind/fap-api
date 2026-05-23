@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T11:58:00+08:00",
+  "updated_at": "2026-05-23T12:14:16+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -19932,14 +19932,24 @@
     },
     "OPS-ADMIN-UI-04": {
       "repo": "fap-api",
-      "branch": "codex/ops-admin-ui-04-seo-ops-i18n",
-      "status": "pending",
+      "branch": "codex/ops-admin-ui-04-seo-ops-polish",
+      "status": "pr_open",
       "depends_on": [
         "OPS-ADMIN-UI-03"
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "commit_sha": "8c5afb45c7355530e481279073dcfb5a8aea9a2c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1601",
+      "checks": {
+        "npm_run_build_ops_theme": "passed",
+        "ops_seo_i18n_tests": "passed",
+        "route_list": "passed",
+        "pint_ops": "passed",
+        "bigfive_runtime_freeze": "passed",
+        "json_ledger": "passed",
+        "yaml_manifest": "passed",
+        "diff_check": "passed",
+        "cached_diff_check": "passed"
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -19954,6 +19964,26 @@
           "at": "2026-05-23T11:08:00+08:00",
           "status": "registered",
           "summary": "Registered SEO Ops polish and i18n pass PR. Scope is SEO Ops pages, translations, and read-model unavailable states only."
+        },
+        {
+          "at": "2026-05-23T12:10:56+08:00",
+          "status": "in_progress",
+          "summary": "Started OPS-ADMIN-UI-04 on codex/ops-admin-ui-04-seo-ops-polish after aligning the local branch to the manifest branch. Scope is SEO Ops translations, read-only unavailable-state UI tests, and train metadata."
+        },
+        {
+          "at": "2026-05-23T12:12:11+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused local checks passed for SEO Ops i18n polish, route listing, Pint, BigFive runtime freeze, JSON/YAML validation, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-23T12:12:52+08:00",
+          "status": "committed",
+          "summary": "Committed SEO Ops polish and i18n state changes after focused local validation passed."
+        },
+        {
+          "at": "2026-05-23T12:14:16+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1601 for OPS-ADMIN-UI-04 and pushed branch codex/ops-admin-ui-04-seo-ops-polish."
         }
       ]
     },
