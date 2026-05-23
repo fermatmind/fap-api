@@ -207,6 +207,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_commerce_tenant_repair_command_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/CommerceRepairPostCommitFailed.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_public_healthz_alias_route_addition(): void
     {
         $changed = [
@@ -2247,6 +2256,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCommerceTenantRepairCommandFile($file)) {
+                continue;
+            }
+
             if ($this->isResultEmailLookupFile($file)) {
                 continue;
             }
@@ -3504,6 +3517,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isAttemptSubmissionReliabilityHardeningFile(string $file): bool
     {
         return $file === 'backend/app/Services/Attempts/AttemptSubmissionService.php';
+    }
+
+    private function isCommerceTenantRepairCommandFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/CommerceRepairPostCommitFailed.php';
     }
 
     private function isResultEmailLookupFile(string $file): bool
