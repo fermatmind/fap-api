@@ -15417,8 +15417,8 @@
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "00a07fde39603d234510ddec3e22c41fdcf9b4e4",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1637",
       "checks": {
         "production_read_only": {
           "queue_item_verification": "passed: queue_item_id=2 exists with batch_id=2 canonical_url=https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types channel=indexnow approval_state=pending execution_state=dry_run_ready source_authority=scale_catalog page_entity_type=test_detail indexability_state=indexable claim_boundary_state=claim_safe private_flow=false",
@@ -16683,6 +16683,11 @@
           "at": "2026-05-24T08:29:00+08:00",
           "status": "local_validated_with_external_sidecar",
           "summary": "Added timestamp traversal and governance count guards for release, rollout bundle, and rollout wave-plan materialization; targeted tests, route list, pint, diff check, and scope validation passed."
+        },
+        {
+          "at": "2026-05-24T08:35:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1637 for CAREER-ROLLOUT-MATERIALIZATION-01."
         }
       ]
     },
