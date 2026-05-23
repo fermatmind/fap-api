@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T11:12:00+08:00",
+  "updated_at": "2026-05-23T11:24:30+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10208,7 +10208,7 @@
       "branch": "codex/publish-api-media-origin-readyness",
       "base": "main",
       "depends_on": [],
-      "status": "in_progress",
+      "status": "merged",
       "train_scope": "publishing_reliability",
       "risk_level": "medium",
       "title": "fix(cms-media): enforce public article media origin and variant readiness",
@@ -17699,8 +17699,8 @@
       "depends_on": [
         "BACKEND-DEPLOY-TARGET-ALIYUN-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "c2ba405882605c2f9f4992c63dd8bc3069d00cf0",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1597",
       "checks": {
         "aliyun_tls": {
           "status": "pass",
@@ -17724,9 +17724,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T03:19:17Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-21T18:20:00+08:00",
@@ -19801,19 +19801,30 @@
           "at": "2026-05-23T11:12:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1597 for OPS-ADMIN-UI-01 and pushed branch codex/ops-admin-ui-01-table-toolbar."
+        },
+        {
+          "at": "2026-05-23T11:19:30+08:00",
+          "status": "merged",
+          "summary": "PR #1597 GitHub checks passed, merged via squash at c2ba405882605c2f9f4992c63dd8bc3069d00cf0, remote branch deleted, local main synced, local task branch absent, and post-merge OpsShellPolishTest passed."
         }
       ]
     },
     "OPS-ADMIN-UI-02": {
       "repo": "fap-api",
       "branch": "codex/ops-admin-ui-02-sidebar-taxonomy",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "OPS-ADMIN-UI-01"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "local": {
+          "ops_shell_and_i18n": "passed: cd backend && php artisan test tests/Feature/Ops/OpsShellPolishTest.php tests/Feature/Ops/OpsCustomPagesI18nContractTest.php --no-ansi (21 tests, 251 assertions)",
+          "route_list": "passed: cd backend && php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: cd backend && vendor/bin/pint --test app/Providers/Filament/AdminPanelProvider.php app/Filament/Ops/Pages app/Filament/Ops/Resources tests/Feature/Ops/OpsShellPolishTest.php (160 files)"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -19828,6 +19839,11 @@
           "at": "2026-05-23T11:08:00+08:00",
           "status": "registered",
           "summary": "Registered sidebar taxonomy regrouping PR. Scope is Filament resource/page navigation group labels, ordering, icons, and translations only."
+        },
+        {
+          "at": "2026-05-23T11:24:30+08:00",
+          "status": "in_progress",
+          "summary": "Started OPS-ADMIN-UI-02 on codex/ops-admin-ui-02-sidebar-taxonomy after OPS-ADMIN-UI-01 merged. Implemented Filament-native sidebar grouping for content, career graph, psychometrics, SEO growth, translation, publishing ops, commerce, support, runtime, and governance."
         }
       ]
     },

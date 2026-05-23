@@ -62,7 +62,7 @@ class CareerGuideResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.editorial');
+        return __('ops.group.career_graph');
     }
 
     public static function getNavigationLabel(): string

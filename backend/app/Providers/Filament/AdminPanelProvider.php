@@ -72,11 +72,21 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make()
                     ->label(fn (): string => (string) __('ops.group.content')),
                 NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.career_graph')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.psychometrics')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.content_overview')),
+                NavigationGroup::make()
                     ->label(fn (): string => (string) __('ops.group.translation')),
                 NavigationGroup::make()
-                    ->label(fn (): string => (string) __('ops.group.operations')),
+                    ->label(fn (): string => (string) __('ops.group.content_release')),
                 NavigationGroup::make()
-                    ->label(fn (): string => (string) __('ops.group.insights')),
+                    ->label(fn (): string => (string) __('ops.group.commerce')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.support')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.operations')),
                 NavigationGroup::make()
                     ->label(fn (): string => (string) __('ops.group.governance')),
             ])

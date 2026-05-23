@@ -159,7 +159,7 @@ class QuestionAnalyticsPage extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.insights');
+        return __('ops.group.psychometrics');
     }
 
     public static function getNavigationLabel(): string
