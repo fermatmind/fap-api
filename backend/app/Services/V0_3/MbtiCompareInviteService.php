@@ -216,6 +216,13 @@ final class MbtiCompareInviteService
         $normalizedAnonId = $this->nullableString($anonId);
         $normalizedNumericUserId = $this->normalizeUserId($normalizedUserId);
 
+        if ($normalizedNumericUserId === null && $normalizedAnonId === null) {
+            return [
+                'scale_code' => 'MBTI',
+                'relationship_index_v1' => $this->relationshipIndexContractService->buildIndex([]),
+            ];
+        }
+
         $attemptIds = Attempt::query()
             ->where(static function ($query) use ($normalizedNumericUserId, $normalizedAnonId): void {
                 $hasCondition = false;
@@ -234,13 +241,6 @@ final class MbtiCompareInviteService
             ->pluck('id')
             ->map(static fn (mixed $value): string => (string) $value)
             ->all();
-
-        if ($attemptIds === [] && $normalizedNumericUserId === null && $normalizedAnonId === null) {
-            return [
-                'scale_code' => 'MBTI',
-                'relationship_index_v1' => $this->relationshipIndexContractService->buildIndex([]),
-            ];
-        }
 
         $invites = MbtiCompareInvite::query()
             ->where(static function ($query) use ($attemptIds, $normalizedNumericUserId, $normalizedAnonId): void {
