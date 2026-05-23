@@ -2111,12 +2111,26 @@ return [
             ],
         ],
         'personality_profiles' => [
+            'label' => 'Personality Profile',
             'plural' => 'Personality Profiles',
             'list_subheading' => 'Global MBTI content workspace for structured personality profiles. Not tenant-specific.',
             'create_title' => 'Create Personality Profile',
             'create_subheading' => 'Build a structured MBTI profile in the main workspace, then finish publish and SEO cues in the side rail.',
             'edit_title' => 'Edit Personality Profile',
             'edit_subheading' => 'Maintain the structured MBTI profile without leaving the editorial workspace.',
+            'search_placeholder' => 'Search type, title, or slug',
+            'table' => [
+                'profile' => 'Profile',
+                'indexing' => 'Indexing',
+                'published' => 'Published',
+            ],
+            'filters' => [
+                'type' => 'Type',
+                'schema_version' => 'Schema version',
+            ],
+            'fields' => [
+                'planned_public_url' => 'Planned public URL',
+            ],
             'actions' => [
                 'create' => 'Create Personality Profile',
                 'all' => 'All Personality Profiles',

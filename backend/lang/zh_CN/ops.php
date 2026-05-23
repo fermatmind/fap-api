@@ -2111,12 +2111,26 @@ return [
             ],
         ],
         'personality_profiles' => [
+            'label' => '人格档案',
             'plural' => '人格档案',
             'list_subheading' => '结构化人格档案的全局 MBTI 内容工作区，不按租户隔离。',
             'create_title' => '创建人格档案',
             'create_subheading' => '在主工作区创建结构化 MBTI 人格档案，并在侧栏完成发布与 SEO 信息。',
             'edit_title' => '编辑人格档案',
             'edit_subheading' => '在编辑工作区维护结构化 MBTI 人格档案。',
+            'search_placeholder' => '搜索类型、标题或 slug',
+            'table' => [
+                'profile' => '人格档案',
+                'indexing' => '索引状态',
+                'published' => '发布时间',
+            ],
+            'filters' => [
+                'type' => '人格类型',
+                'schema_version' => '结构版本',
+            ],
+            'fields' => [
+                'planned_public_url' => '计划公开 URL',
+            ],
             'actions' => [
                 'create' => '创建人格档案',
                 'all' => '全部人格档案',

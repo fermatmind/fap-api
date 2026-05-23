@@ -10,12 +10,14 @@ use App\Filament\Ops\Resources\ArticleTagResource;
 use App\Filament\Ops\Resources\InterpretationGuideResource;
 use App\Filament\Ops\Resources\LandingSurfaceResource;
 use App\Filament\Ops\Resources\MediaAssetResource;
+use App\Filament\Ops\Resources\PersonalityProfileResource;
 use App\Filament\Ops\Resources\SupportArticleResource;
 use App\Http\Middleware\SetOpsLocale;
 use App\Models\AdminUser;
 use App\Models\LandingSurface;
 use App\Models\Organization;
 use App\Models\Permission;
+use App\Models\PersonalityProfile;
 use App\Models\Role;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -197,6 +199,49 @@ final class OpsCmsResourceI18nTest extends TestCase
             ['Approvals', 'Requested by', 'Approved by'],
             null,
         ];
+
+    }
+
+    public function test_personality_resource_list_uses_chinese_table_and_filter_copy(): void
+    {
+        app()->setLocale('zh_CN');
+
+        $this->assertSame('人格内容', PersonalityProfileResource::getNavigationLabel());
+        $this->assertSame('人格档案', PersonalityProfileResource::getModelLabel());
+        $this->assertSame('人格档案', PersonalityProfileResource::getPluralModelLabel());
+
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_OWNER,
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $org = $this->createOrganization();
+        PersonalityProfile::query()->create([
+            'org_id' => 0,
+            'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'zh-CN',
+            'title' => 'INTJ 建筑师',
+            'status' => 'draft',
+            'is_public' => true,
+            'is_indexable' => true,
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+
+        $html = $this->withSession($this->opsSession($admin, $org, 'zh_CN'))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/personality?locale=zh-CN')
+            ->assertOk()
+            ->content();
+
+        foreach (['人格档案', '搜索类型、标题或 slug', '可见性', '可索引', '未发布'] as $phrase) {
+            $this->assertStringContainsString($phrase, $html);
+        }
+
+        foreach (['Personality Profiles', 'Search type, title, or slug', 'Visibility', 'Indexable', 'Not published'] as $phrase) {
+            $this->assertStringNotContainsString($phrase, $html);
+        }
     }
 
     /**

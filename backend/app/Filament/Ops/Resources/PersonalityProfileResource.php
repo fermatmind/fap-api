@@ -66,6 +66,16 @@ class PersonalityProfileResource extends Resource
         return __('ops.nav.personality');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.resources.personality_profiles.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.resources.personality_profiles.plural');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -364,7 +374,7 @@ class PersonalityProfileResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->label('Profile')
+                    ->label(__('ops.resources.personality_profiles.table.profile'))
                     ->html()
                     ->searchable(['title', 'slug', 'type_code'])
                     ->sortable()
@@ -388,51 +398,54 @@ class PersonalityProfileResource extends Resource
                     ->description(fn (PersonalityProfile $record): string => PersonalityWorkspace::visibilityMeta($record))
                     ->color(fn (string $state): string => StatusBadge::color($state)),
                 Tables\Columns\TextColumn::make('is_public')
-                    ->label('Visibility')
+                    ->label(__('ops.table.visibility'))
                     ->badge()
-                    ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, 'Public', 'Private'))
+                    ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, __('ops.status.public'), __('ops.status.private')))
                     ->color(fn (bool|int|string|null $state): string => StatusBadge::booleanColor($state))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('is_indexable')
-                    ->label('Indexing')
+                    ->label(__('ops.resources.personality_profiles.table.indexing'))
                     ->badge()
-                    ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, 'Indexable', 'Noindex'))
+                    ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, __('ops.status.indexable'), __('ops.status.noindex')))
                     ->color(fn (bool|int|string|null $state): string => StatusBadge::booleanColor($state))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('published_at')
-                    ->label('Published')
+                    ->label(__('ops.resources.personality_profiles.table.published'))
                     ->dateTime()
                     ->sortable()
-                    ->placeholder('Not published'),
+                    ->placeholder(__('ops.status.not_published')),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Updated')
+                    ->label(__('ops.table.updated'))
                     ->since()
                     ->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type_code')
-                    ->label('Type')
+                    ->label(__('ops.resources.personality_profiles.filters.type'))
                     ->options(self::typeOptions()),
                 Tables\Filters\SelectFilter::make('locale')
+                    ->label(__('ops.table.locale'))
                     ->options(self::localeOptions()),
                 Tables\Filters\SelectFilter::make('status')
+                    ->label(__('ops.table.status'))
                     ->options(self::statusOptions()),
                 Tables\Filters\SelectFilter::make('schema_version')
+                    ->label(__('ops.resources.personality_profiles.filters.schema_version'))
                     ->options([
                         PersonalityProfile::SCHEMA_VERSION_V1 => PersonalityProfile::SCHEMA_VERSION_V1,
                         PersonalityProfile::SCHEMA_VERSION_V2 => PersonalityProfile::SCHEMA_VERSION_V2,
                     ]),
                 TernaryFilter::make('is_public')
-                    ->label('Public'),
+                    ->label(__('ops.table.public')),
                 TernaryFilter::make('is_indexable')
-                    ->label('Indexable'),
+                    ->label(__('ops.table.indexable')),
             ])
-            ->searchPlaceholder('Search type, title, or slug')
+            ->searchPlaceholder(__('ops.resources.personality_profiles.search_placeholder'))
             ->defaultSort('updated_at', 'desc')
             ->recordUrl(fn (PersonalityProfile $record): string => static::getUrl('edit', ['record' => $record]))
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->label('Edit')
+                    ->label(__('ops.resources.articles.actions.edit'))
                     ->icon('heroicon-o-pencil-square')
                     ->color('gray'),
             ])
@@ -462,8 +475,8 @@ class PersonalityProfileResource extends Resource
     private static function statusOptions(): array
     {
         return [
-            'draft' => 'draft',
-            'published' => 'published',
+            'draft' => __('ops.status.draft'),
+            'published' => __('ops.status.published'),
         ];
     }
 

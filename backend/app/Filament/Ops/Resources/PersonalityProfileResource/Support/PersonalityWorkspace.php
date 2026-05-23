@@ -519,19 +519,19 @@ final class PersonalityWorkspace
         return new HtmlString((string) view('filament.ops.personality.partials.editorial-cues', [
             'facts' => array_values(array_filter([
                 [
-                    'label' => 'Published',
+                    'label' => __('ops.resources.personality_profiles.table.published'),
                     'value' => self::formatTimestamp($get('published_at') ?? $record?->published_at),
                 ],
                 [
-                    'label' => 'Scheduled',
+                    'label' => __('ops.status.scheduled'),
                     'value' => self::formatTimestamp($get('scheduled_at') ?? $record?->scheduled_at),
                 ],
                 [
-                    'label' => 'Planned public URL',
+                    'label' => __('ops.resources.personality_profiles.fields.planned_public_url'),
                     'value' => $plannedUrl,
                 ],
                 [
-                    'label' => 'Revisions',
+                    'label' => __('ops.table.revision'),
                     'value' => $record instanceof PersonalityProfile ? (string) self::revisionCount($record) : null,
                 ],
             ], static fn (array $fact): bool => filled($fact['value'] ?? null))),
@@ -541,11 +541,11 @@ final class PersonalityWorkspace
                     'state' => $status,
                 ],
                 [
-                    'label' => $isPublic ? 'Public' : 'Private',
+                    'label' => $isPublic ? __('ops.status.public') : __('ops.status.private'),
                     'state' => $isPublic ? 'public' : 'inactive',
                 ],
                 [
-                    'label' => $isIndexable ? 'Indexable' : 'Noindex',
+                    'label' => $isIndexable ? __('ops.status.indexable') : __('ops.status.noindex'),
                     'state' => $isIndexable ? 'indexable' : 'noindex',
                 ],
             ],
@@ -594,8 +594,8 @@ final class PersonalityWorkspace
     public static function visibilityMeta(PersonalityProfile $record): string
     {
         return implode(' · ', [
-            StatusBadge::booleanLabel($record->is_public, 'Public', 'Private'),
-            StatusBadge::booleanLabel($record->is_indexable, 'Indexable', 'Noindex'),
+            StatusBadge::booleanLabel($record->is_public, __('ops.status.public'), __('ops.status.private')),
+            StatusBadge::booleanLabel($record->is_indexable, __('ops.status.indexable'), __('ops.status.noindex')),
         ]);
     }
 
