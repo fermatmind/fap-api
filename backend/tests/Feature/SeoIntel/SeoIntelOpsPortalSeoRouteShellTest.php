@@ -45,7 +45,7 @@ final class SeoIntelOpsPortalSeoRouteShellTest extends TestCase
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ])
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
-            ->get('/ops/seo')
+            ->get('/ops/seo?locale=en')
             ->assertOk()
             ->assertSee('SEO Intelligence Access')
             ->assertSee('SEO Dash access')
@@ -146,7 +146,8 @@ final class SeoIntelOpsPortalSeoRouteShellTest extends TestCase
         $doc = strtolower((string) file_get_contents(base_path('docs/seo/ops-portal-seo-route-shell.md')));
         $artifactJson = strtolower((string) file_get_contents(base_path('docs/seo/generated/ops-portal-seo-route-shell.v1.json')));
         $view = strtolower((string) file_get_contents(resource_path('views/filament/ops/pages/seo-dashboard-access.blade.php')));
-        $combined = $doc."\n".$artifactJson."\n".$view;
+        $lang = strtolower((string) file_get_contents(lang_path('en/ops.php')));
+        $combined = $doc."\n".$artifactJson."\n".$view."\n".$lang;
 
         foreach ([
             'ops-portal-seo-03',
