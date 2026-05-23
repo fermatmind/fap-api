@@ -216,7 +216,7 @@ return [
         'paid' => '支付成功',
         'unlocked' => '已解锁',
         'no_health_snapshot' => '尚未记录健康检查快照。',
-        'no_funnel_events_7d' => '过去 7 天尚未记录漏斗事件。',
+        'no_funnel_events_7d' => '人工漏斗合约：落地页 > 开始测评 > 提交 > 付费解锁。过去 7 天尚未记录漏斗事件。',
     ],
 
     'topbar' => [

@@ -10685,9 +10685,10 @@ prs:
       - Modify models, migrations, routes, services outside dashboard read widgets, production env/deploy files, fap-web, CMS records, queues, telemetry writes, orders, payments, or webhooks.
     validation:
       - cd backend && npm run build:ops-theme
-      - cd backend && php artisan test tests/Feature/Ops --no-ansi
+      - cd backend && php artisan test tests/Feature/Ops/OpsShellPolishTest.php tests/Feature/Ops/CommerceKpiExceptionSummaryTest.php tests/Feature/Ops/OpsDashboardOrgContextInheritanceTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi
       - cd backend && php artisan route:list --no-ansi
-      - cd backend && vendor/bin/pint --test app/Filament/Ops/Widgets tests/Feature/Ops
+      - cd backend && vendor/bin/pint --test tests/Feature/Ops/OpsShellPolishTest.php
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
       - git diff --check

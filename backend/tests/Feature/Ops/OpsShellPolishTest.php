@@ -83,4 +83,25 @@ final class OpsShellPolishTest extends TestCase
         $this->assertSame('Governance', AdminUserResource::getNavigationGroup());
         $this->assertSame('Governance', OrganizationResource::getNavigationGroup());
     }
+
+    public function test_ops_dashboard_stats_keep_severity_and_funnel_contract_visible(): void
+    {
+        $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
+
+        $this->assertStringContainsString('--ops-state-danger', $theme);
+        $this->assertStringContainsString('.fi-wi-stats-overview-stat:has(.fi-color-danger)', $theme);
+        $this->assertStringContainsString('border-inline-start-width: 4px', $theme);
+
+        app()->setLocale('en');
+        $this->assertStringContainsString(
+            'Landing > Test start > Submit > Paid unlock',
+            (string) __('ops.widgets.no_funnel_events_7d'),
+        );
+
+        app()->setLocale('zh_CN');
+        $this->assertStringContainsString(
+            '落地页 > 开始测评 > 提交 > 付费解锁',
+            (string) __('ops.widgets.no_funnel_events_7d'),
+        );
+    }
 }
