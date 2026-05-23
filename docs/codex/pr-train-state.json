@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T05:57:54+08:00",
+  "updated_at": "2026-05-24T06:04:26+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -21548,11 +21548,11 @@
       ]
     },
     "CAREER-POLICY-CLAIM-GUARDS-01": {
-      "status": "github_checks_failed_scoped_fix_local_passed",
+      "status": "github_checks_passed_ready_to_merge",
       "checks": {
         "github_required_checks": {
-          "status": "failed_scoped_fix_local_passed_pending_rerun",
-          "evidence": "PR #1634 verify-mbti-legacy and verify-mbti-v2 failed because BigFive runtime freeze classifier treated Career scoring claim guard files as MBTI-impacting runtime changes.",
+          "status": "pass",
+          "evidence": "PR #1634 checks passed after scoped BigFive runtime freeze classifier fix: hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2.",
           "failed_checks": [
             "verify-mbti-legacy",
             "verify-mbti-v2"
@@ -21571,6 +21571,11 @@
           "at": "2026-05-24T05:57:54+08:00",
           "status": "github_checks_failed_scoped_fix_local_passed",
           "summary": "GitHub verify-mbti checks failed on the BigFive runtime freeze classifier. Added a scoped tests-only classifier exemption for Career policy claim guard files; focused BigFive test, scoped Career tests, Pint, and diff check passed locally."
+        },
+        {
+          "at": "2026-05-24T06:04:26+08:00",
+          "status": "github_checks_passed_ready_to_merge",
+          "summary": "PR #1634 required GitHub checks passed after the scoped classifier fix."
         }
       ]
     }
