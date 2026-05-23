@@ -100,6 +100,41 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
     }
 
     #[Test]
+    public function import_validation_rejects_cross_tenant_or_mismatched_research_paths(): void
+    {
+        $artifact = new UrlTruthHandoffArtifact;
+        $payload = $artifact->fromRecords([
+            $this->validRecord(canonicalUrl: 'https://evil.example/en/research/mbti-personality-types-salary-turnover-report'),
+            $this->validRecord(
+                canonicalUrl: 'https://www.fermatmind.com/en/research/other-report',
+                entityIdOrSlug: 'mbti-personality-types-salary-turnover-report',
+            ),
+            $this->validRecord(metadata: [
+                'canonical_path_hash' => hash('sha256', '/en/articles/mbti-personality-types-salary-turnover-report'),
+                'source_table_hash' => hash('sha256', 'research_reports'),
+            ]),
+        ]);
+
+        $path = sys_get_temp_dir().'/tenant-research-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+        $artifact->writeJson($path, $payload);
+
+        $exitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 20,
+        ]);
+        $output = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $output['status'] ?? null);
+        $this->assertContains('candidate_untrusted_tenant_host:0', $output['issues'] ?? []);
+        $this->assertContains('candidate_research_path_slug_mismatch:1', $output['issues'] ?? []);
+        $this->assertContains('candidate_canonical_path_hash_mismatch:2', $output['issues'] ?? []);
+        $this->assertFalse((bool) ($output['writes_committed'] ?? true));
+    }
+
+    #[Test]
     public function bounded_import_write_requires_sha_confirmation_and_targets_only_url_truth_tables(): void
     {
         $this->prepareSeoIntelSqliteConnection();
@@ -168,13 +203,19 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
         $this->assertSame('RESEARCH-PUBLISH-02-RERUN', $artifact['next_task'] ?? null);
     }
 
-    private function validRecord(): UrlTruthInventoryRecord
-    {
+    /**
+     * @param  array<string, mixed>|null  $metadata
+     */
+    private function validRecord(
+        string $canonicalUrl = 'https://www.fermatmind.com/en/research/mbti-personality-types-salary-turnover-report',
+        string $entityIdOrSlug = 'mbti-personality-types-salary-turnover-report',
+        ?array $metadata = null,
+    ): UrlTruthInventoryRecord {
         return new UrlTruthInventoryRecord(
-            canonicalUrl: 'https://www.fermatmind.com/en/research/mbti-personality-types-salary-turnover-report',
+            canonicalUrl: $canonicalUrl,
             locale: 'en',
             pageEntityType: 'research_report',
-            entityIdOrSlug: 'mbti-personality-types-salary-turnover-report',
+            entityIdOrSlug: $entityIdOrSlug,
             sourceAuthority: 'backend_cms',
             indexabilityState: 'indexable',
             lastmodAt: now()->subHour(),
@@ -184,7 +225,7 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
             authorityStatus: 'published_approved',
             sourceUpdatedAt: now()->subHour(),
             isPrivateFlow: false,
-            metadata: [
+            metadata: $metadata ?? [
                 'canonical_path_hash' => hash('sha256', '/en/research/mbti-personality-types-salary-turnover-report'),
                 'source_table_hash' => hash('sha256', 'research_reports'),
             ],

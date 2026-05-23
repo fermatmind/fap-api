@@ -181,8 +181,11 @@ final class UrlTruthHandoffArtifact
     {
         $issues = [];
         $url = (string) ($candidate['canonical_url'] ?? '');
+        $scheme = Str::lower((string) parse_url($url, PHP_URL_SCHEME));
+        $host = Str::lower((string) parse_url($url, PHP_URL_HOST));
         $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
         $pathLocale = Str::before(Str::after($path, '/'), '/');
+        $pathSlug = Str::after($path, '/research/');
         $locale = (string) ($candidate['locale'] ?? '');
 
         if (($candidate['page_entity_type'] ?? null) !== self::PAGE_ENTITY_TYPE) {
@@ -217,6 +220,19 @@ final class UrlTruthHandoffArtifact
             $issues[] = 'candidate_route_not_research:'.$index;
         }
 
+        if ($scheme !== 'https' || ! in_array($host, $this->trustedTenantHosts(), true)) {
+            $issues[] = 'candidate_untrusted_tenant_host:'.$index;
+        }
+
+        if ($pathSlug === '' || ($candidate['entity_id_or_slug'] ?? null) !== $pathSlug) {
+            $issues[] = 'candidate_research_path_slug_mismatch:'.$index;
+        }
+
+        $canonicalPathHash = data_get($candidate, 'metadata.canonical_path_hash');
+        if ($canonicalPathHash !== null && $canonicalPathHash !== hash('sha256', $path)) {
+            $issues[] = 'candidate_canonical_path_hash_mismatch:'.$index;
+        }
+
         foreach (['/articles', '/reports', 'turnover-rate-report'] as $fragment) {
             if (str_contains($path, $fragment)) {
                 $issues[] = 'candidate_forbidden_route_fragment:'.$fragment.':'.$index;
@@ -248,6 +264,23 @@ final class UrlTruthHandoffArtifact
         }
 
         return $issues;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function trustedTenantHosts(): array
+    {
+        $hosts = ['fermatmind.com', 'www.fermatmind.com'];
+
+        foreach (['seo_intel.public_canonical_host', 'app.frontend_url'] as $configKey) {
+            $host = parse_url((string) config($configKey), PHP_URL_HOST);
+            if (is_string($host) && trim($host) !== '') {
+                $hosts[] = Str::lower(trim($host));
+            }
+        }
+
+        return array_values(array_unique($hosts));
     }
 
     /**
