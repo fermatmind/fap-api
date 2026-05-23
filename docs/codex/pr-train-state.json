@@ -6136,7 +6136,7 @@
       "repo": "fap-api",
       "branch": "codex/repair-progressive-readiness-occupation-aware-selection-1",
       "title": "fix(api): make progressive readiness selection occupation-aware",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "REPAIR-PROGRESSIVE-READINESS-SELECTION-1"
       ],
@@ -15040,8 +15040,8 @@
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01A"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "01bb56638674c358f8f42343f82a1347ce84d66d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1594",
       "checks": {
         "production_preflight": {
           "release_path": "/var/www/fap-api/releases/prod-20260523-2ad5fc44",
@@ -15081,6 +15081,11 @@
           "at": "2026-05-23T09:34:32+08:00",
           "status": "local_checks_passed",
           "summary": "Local validation passed for SEO-GROWTH-MBTI-ACTION-01B blocked-operation report: focused test, full SeoIntel suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Production enqueue remains blocked because the official command has no single-URL selector."
+        },
+        {
+          "at": "2026-05-23T09:40:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1594 for SEO-GROWTH-MBTI-ACTION-01B with blocked-operation report. No production queue row was created and no live submission occurred."
         }
       ]
     }
