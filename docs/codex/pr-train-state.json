@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T11:24:30+08:00",
+  "updated_at": "2026-05-23T11:25:45+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -7251,7 +7251,7 @@
         "no user attempts/results/reports/orders/payments/shares access",
         "no Tencent/COS or frontend static asset authority"
       ],
-      "commit_sha": null,
+      "commit_sha": "4a418e66472c3ddae5a473bd5af2cee330e04c7e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1418",
       "checks": {
         "authorization": {
@@ -19822,7 +19822,11 @@
         "local": {
           "ops_shell_and_i18n": "passed: cd backend && php artisan test tests/Feature/Ops/OpsShellPolishTest.php tests/Feature/Ops/OpsCustomPagesI18nContractTest.php --no-ansi (21 tests, 251 assertions)",
           "route_list": "passed: cd backend && php artisan route:list --no-ansi (203 routes)",
-          "pint": "passed: cd backend && vendor/bin/pint --test app/Providers/Filament/AdminPanelProvider.php app/Filament/Ops/Pages app/Filament/Ops/Resources tests/Feature/Ops/OpsShellPolishTest.php (160 files)"
+          "pint": "passed: cd backend && vendor/bin/pint --test app/Providers/Filament/AdminPanelProvider.php app/Filament/Ops/Pages app/Filament/Ops/Resources tests/Feature/Ops/OpsShellPolishTest.php (160 files)",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
         }
       },
       "failure_reason": null,
@@ -19844,6 +19848,11 @@
           "at": "2026-05-23T11:24:30+08:00",
           "status": "in_progress",
           "summary": "Started OPS-ADMIN-UI-02 on codex/ops-admin-ui-02-sidebar-taxonomy after OPS-ADMIN-UI-01 merged. Implemented Filament-native sidebar grouping for content, career graph, psychometrics, SEO growth, translation, publishing ops, commerce, support, runtime, and governance."
+        },
+        {
+          "at": "2026-05-23T11:25:45+08:00",
+          "status": "committed",
+          "summary": "Committed sidebar taxonomy regrouping at 4a418e66472c3ddae5a473bd5af2cee330e04c7e after local validation passed."
         }
       ]
     },
