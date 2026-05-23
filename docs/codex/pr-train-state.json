@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T11:55:00+08:00",
+  "updated_at": "2026-05-23T11:56:20+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -8400,7 +8400,7 @@
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1451",
-      "commit_sha": null,
+      "commit_sha": "531ac4b512b07895ae297b665c8762a3e7c93999",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -19917,6 +19917,11 @@
           "at": "2026-05-23T11:55:00+08:00",
           "status": "in_progress",
           "summary": "Started OPS-ADMIN-UI-03 on codex/ops-admin-ui-03-dashboard-telemetry after OPS-ADMIN-UI-02 merged. Runtime freeze prevents widget PHP changes in this PR, so implementation uses Ops theme severity styles, funnel empty-state copy, focused UI tests, and train metadata only."
+        },
+        {
+          "at": "2026-05-23T11:56:20+08:00",
+          "status": "committed",
+          "summary": "Committed dashboard telemetry hierarchy theme/copy change at 531ac4b512b07895ae297b665c8762a3e7c93999 after focused local validation passed."
         }
       ]
     },
