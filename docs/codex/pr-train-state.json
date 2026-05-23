@@ -6863,7 +6863,7 @@
       "branch": "codex/repair-2786-final-readiness-public-owner-partition-authority-1",
       "title": "fix(api): account reviewed public owner partition in 2786 readiness",
       "name": "Account reviewed CN proxy public-owner partition in final 2786 readiness",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "2786-CN-PROXY-PUBLIC-OWNER-PLAN-1"
       ],
@@ -10163,7 +10163,7 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1632",
       "commit_sha": "33c0faf7b9522f7df6b6e76efef86f5959039bbf",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -16226,6 +16226,11 @@
           "at": "2026-05-24T04:35:00+08:00",
           "status": "local_validation_passed",
           "summary": "Hardened RIASEC slot validation for nested forbidden fields and case-insensitive forbidden claims, enforced nested quality boolean signals, blocked same-form compare when score-space versions differ, and suppressed top_code_changed on non-comparable cross-form history. Focused RIASEC tests, Pint, and diff check passed."
+        },
+        {
+          "at": "2026-05-24T04:38:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1632 for RIASEC contract quality hardening after scoped local validation passed."
         }
       ]
     },
