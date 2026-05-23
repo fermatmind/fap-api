@@ -95,15 +95,7 @@ final class CareerJobDisplaySurfaceBuilder
             return null;
         }
 
-        $asset = $occupation->displayAssets()
-            ->where('canonical_slug', $canonicalSlug)
-            ->where('surface_version', self::SURFACE_VERSION)
-            ->where('asset_version', self::ASSET_VERSION)
-            ->where('template_version', self::TEMPLATE_VERSION)
-            ->where('status', self::READY_STATUS)
-            ->where('asset_type', self::ASSET_TYPE)
-            ->orderByDesc('updated_at')
-            ->first();
+        $asset = $this->readyDisplayAsset($occupation, $canonicalSlug);
 
         if (! $asset instanceof CareerJobDisplayAsset) {
             return null;
@@ -158,6 +150,33 @@ final class CareerJobDisplaySurfaceBuilder
             'structured_data_from_visible_content' => $structuredData,
             'implementation_contract' => $implementationContract,
         ];
+    }
+
+    private function readyDisplayAsset(Occupation $occupation, string $canonicalSlug): ?CareerJobDisplayAsset
+    {
+        if ($occupation->relationLoaded('displayAssets')) {
+            $asset = $occupation->displayAssets
+                ->filter(static fn (CareerJobDisplayAsset $candidate): bool => (string) $candidate->canonical_slug === $canonicalSlug
+                    && (string) $candidate->surface_version === self::SURFACE_VERSION
+                    && (string) $candidate->asset_version === self::ASSET_VERSION
+                    && (string) $candidate->template_version === self::TEMPLATE_VERSION
+                    && (string) $candidate->status === self::READY_STATUS
+                    && (string) $candidate->asset_type === self::ASSET_TYPE)
+                ->sortByDesc('updated_at')
+                ->first();
+
+            return $asset instanceof CareerJobDisplayAsset ? $asset : null;
+        }
+
+        return $occupation->displayAssets()
+            ->where('canonical_slug', $canonicalSlug)
+            ->where('surface_version', self::SURFACE_VERSION)
+            ->where('asset_version', self::ASSET_VERSION)
+            ->where('template_version', self::TEMPLATE_VERSION)
+            ->where('status', self::READY_STATUS)
+            ->where('asset_type', self::ASSET_TYPE)
+            ->orderByDesc('updated_at')
+            ->first();
     }
 
     private function isManualHoldSlug(string $slug): bool
