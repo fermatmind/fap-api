@@ -14977,12 +14977,12 @@
     "SEO-GROWTH-MBTI-ACTION-01A": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01a-preflight",
-      "status": "committed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-07"
       ],
-      "commit_sha": "23e176c9dba4ac718ac0370706b02399f9387bfc",
-      "pr_url": null,
+      "commit_sha": "bb7288ac984e567d0f39fa7e8365b3363203734c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1592",
       "checks": {
         "local": {
           "focused_preflight_package_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01aPreflightDryRunPackage --no-ansi (7 tests, 45 assertions)",
