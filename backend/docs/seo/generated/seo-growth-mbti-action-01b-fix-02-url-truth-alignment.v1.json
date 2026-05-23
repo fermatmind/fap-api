@@ -1,0 +1,33 @@
+{
+  "schema_version": "seo-growth-mbti-action-01b-fix-02-url-truth-alignment.v1",
+  "task": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02",
+  "final_decision": "mbti_action_01b_fix_02_merged_ready_for_backend_deploy_readiness",
+  "fixes": [
+    "align_backend_url_truth_public_canonical_host_to_apex",
+    "emit_zh_mbti_test_detail_candidate",
+    "emit_research_report_candidates_on_apex_host"
+  ],
+  "canonical_host": "https://fermatmind.com",
+  "zh_mbti_test_emission_enabled": true,
+  "research_apex_canonical_enabled": true,
+  "sitemap_authority_allowed": false,
+  "llms_authority_allowed": false,
+  "frontend_fallback_authority_allowed": false,
+  "production_write_performed": false,
+  "enqueue_performed": false,
+  "live_submission_performed": false,
+  "expected_candidates": [
+    "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+    "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+    "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report"
+  ],
+  "deferred_followups": [
+    "backend deploy/readiness",
+    "bounded production URL Truth dry-run",
+    "bounded production URL Truth write/preflight only with later approval",
+    "sitemap exposure policy review",
+    "later ZH/Search Channel enqueue after persisted rows verified"
+  ],
+  "next_task": "BACKEND-DEPLOY-READINESS"
+}

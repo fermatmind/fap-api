@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T12:32:05+08:00",
+  "updated_at": "2026-05-23T18:01:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -15530,6 +15530,58 @@
           "at": "2026-05-23T13:28:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1606 for SEARCH-CHANNEL-LIVE-MBTI-02 from codex/search-channel-live-mbti-02. The production operation stayed bounded to queue item 2 only; queue write remained disabled, and all three live gates were closed again immediately after submission."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B-FIX-02": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-fix-02",
+      "status": "pr_open",
+      "depends_on": [
+        "SEARCH-CHANNEL-LIVE-MBTI-02"
+      ],
+      "commit_sha": "b0fe3875ae2d1db4fe80a11c6333071d5ffbdf2d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1608",
+      "checks": {
+        "local": {
+          "focused_url_truth_alignment_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02UrlTruthAlignment --no-ansi (1 test, 34 assertions)",
+          "seo_intel_suite": "preexisting_main_blocker: php artisan test --filter=SeoIntel --no-ansi failed on 4 /ops/seo UI assertions that also fail on clean origin/main (SeoIntelOpsSeoCrawlerObservationUiTest, SeoIntelOpsSeoNativeDashboardAccessBoundaryTest x2, SeoIntelOpsSeoNativeDashboardPanelsTest).",
+          "url_truth_dry_run_test_detail": "passed_with_local_source_unavailable: php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --page-type=test_detail --limit=50 returned status=success planned_url_count=3 with no writes or external calls",
+          "url_truth_dry_run_research_report": "passed_with_local_source_unavailable: php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --page-type=research_report --limit=50 returned status=success planned_url_count=0 because local research source is unavailable",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3509 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-url-truth-alignment.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "BACKEND-DEPLOY-READINESS",
+      "history": [
+        {
+          "at": "2026-05-23T14:35:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-GROWTH-MBTI-ACTION-01B-FIX-02 on codex/seo-growth-mbti-action-01b-fix-02 from latest clean main. Scope is limited to backend URL Truth host alignment, ZH MBTI test-detail emission, focused docs/generated/tests, and authorized PR-train metadata only."
+        },
+        {
+          "at": "2026-05-23T14:58:00+08:00",
+          "status": "local_checks_sidecar_blocker_documented",
+          "summary": "Scoped validation passed for URL Truth apex alignment, route list, Pint, JSON/YAML parsing, and no-write collector dry-runs. Full SeoIntel suite still has 4 pre-existing /ops/seo UI assertion failures that reproduce on clean origin/main and are outside this PR scope."
+        },
+        {
+          "at": "2026-05-23T18:01:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1608 for SEO-GROWTH-MBTI-ACTION-01B-FIX-02 from codex/seo-growth-mbti-action-01b-fix-02. The PR is limited to backend URL Truth host alignment, ZH MBTI test-detail emission, focused docs/generated/tests, and authorized PR-train metadata only."
         }
       ]
     }

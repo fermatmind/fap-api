@@ -10792,6 +10792,54 @@ prs:
     scheduler_activation: false
     next_task: SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW
 
+  - id: SEO-GROWTH-MBTI-ACTION-01B-FIX-02
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-LIVE-MBTI-02
+    branch: codex/seo-growth-mbti-action-01b-fix-02
+    base: main
+    title: "fix(seo-intel): align MBTI URL Truth candidates to apex"
+    name: "ZH MBTI URL Truth and Research canonical alignment"
+    train_scope: seo_growth_mbti_action
+    risk_level: scoped_backend_url_truth_alignment
+    type: implementation_docs_generated_test
+    scope:
+      - Align backend URL Truth public canonical host generation to apex `https://fermatmind.com` for owned public FermatMind pages.
+      - Emit ZH MBTI `test_detail` URL Truth candidates with `/zh/` public path while preserving approved source authority, page type, and private-flow exclusions.
+      - Emit EN/ZH research report URL Truth candidates on apex host without changing sitemap, `llms.txt`, Search Channel enqueue, or production persisted rows.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/Sources/BackendAuthorityUrlTruthSource.php
+      - backend/config/seo_intel.php
+      - backend/docs/seo/seo-growth-mbti-action-01b-fix-02-url-truth-alignment.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-url-truth-alignment.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bFix02UrlTruthAlignmentTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelResearchUrlTruthObservationTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, migrations, production env/deploy files, CMS content, sitemap/llms generators, Search Channel enqueue/submit code, live executor behavior, crawler log readers, Digital PR files, or business DB / Tencent RDS / Node2 DB.
+      - Perform production URL Truth writes, Search Channel enqueue, live submission, external search API calls, scheduler activation, or CMS mutation.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02UrlTruthAlignment --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --page-type=test_detail --limit=50
+      - cd backend && php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --page-type=research_report --limit=50
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-url-truth-alignment.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: BACKEND-DEPLOY-READINESS
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar
