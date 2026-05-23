@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T00:00:00+08:00",
+  "updated_at": "2026-05-23T21:20:46+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4877,7 +4877,7 @@
     "PR-API-SEC-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "ci_fix_local_checks_passed",
       "branch": "codex/pr-api-sec-01-research-cms-trusted-org",
       "commit_sha": "206cf1bba7909c9b4785922338c630f24850cc0b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1616",
@@ -4908,6 +4908,25 @@
           },
           {
             "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          },
+          {
+            "command": "python3 /Users/rainie/.codex/skills/gh-fix-ci/scripts/inspect_pr_checks.py --repo . --pr 1616 --json",
+            "status": "failed_checks_found",
+            "details": "verify-mbti-legacy and verify-mbti-v2 failed in BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because ResolveOrgContext.php was classified as MBTI/BigFive-impacting runtime change."
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|research_cms_trusted_org_hardening'",
+            "status": "passed",
+            "details": "2 tests passed, 5 assertions."
+          },
+          {
+            "command": "bash backend/scripts/ci_verify_mbti.sh",
+            "status": "passed",
+            "details": "Full local verify_mbti CI entrypoint passed after adding the scoped Research CMS trusted-org hardening classifier coverage; BigFive section reported 783 tests, 61285 assertions before downstream gates also completed successfully."
+          },
+          {
+            "command": "vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/ResearchReportController.php app/Http/Middleware/ResolveOrgContext.php tests/Feature/Research/ResearchAssetBackendMvpTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
             "status": "passed"
           }
         ],
@@ -4954,7 +4973,7 @@
           }
         ]
       },
-      "failure_reason": "GitHub checks failed: verify-mbti-legacy and verify-mbti-v2 failed on PR #1616 as of 2026-05-23.",
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
@@ -4989,6 +5008,11 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "github_checks_failed",
           "summary": "GitHub checks completed with hygiene/Semgrep passing and verify-mbti-legacy plus verify-mbti-v2 failing; stopping train progression until this PR is diagnosed/fixed or explicitly overridden under merge_policy."
+        },
+        {
+          "at": "2026-05-23T21:20:46+08:00",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "Diagnosed GitHub verify-mbti failures as current PR CI classifier coverage gap; added scoped Research CMS trusted-org hardening classifier test and full local ci_verify_mbti plus manifest checks passed."
         }
       ]
     },

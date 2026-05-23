@@ -1003,6 +1003,41 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', routeChangedLines: $routeChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_research_cms_trusted_org_hardening(): void
+    {
+        $changed = [
+            'backend/app/Http/Middleware/ResolveOrgContext.php',
+        ];
+
+        $changedLines = [
+            '+        $candidates = $this->isOpsPanelRequest($request) || $this->isInternalCmsApiRequest($request)',
+            '-        $candidates = $this->isOpsPanelRequest($request)',
+            '-                $request->header(\'X-FM-Org-Id\'),',
+            '-                $request->header(\'X-Org-Id\'),',
+            '-                $request->query(\'org_id\'),',
+            '-                $request->route(\'org_id\'),',
+            '+    private function isInternalCmsApiRequest(Request $request): bool',
+            '+    {',
+            '+        return str_starts_with(\'/\'.ltrim($request->path(), \'/\'), \'/api/v0.5/internal/\');',
+            '+    }',
+            '+',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            resolveOrgContextChangedLines: $changedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_publishing_runtime_truth_gate_changes(): void
     {
         $changed = [
@@ -1812,6 +1847,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $attributionControllerChangedLines = null,
         ?array $attemptSubmitServiceChangedLines = null,
         ?array $webRouteChangedLines = null,
+        ?array $resolveOrgContextChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -1849,6 +1885,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isResearchBackendMvpFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Http/Middleware/ResolveOrgContext.php'
+                && $this->resolveOrgContextDiffIsResearchCmsTrustedOrgOnly(
+                    $resolveOrgContextChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
                 continue;
             }
 
@@ -2369,6 +2418,38 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Models/ResearchReport.php',
             'backend/database/migrations/2026_05_19_000100_create_research_reports_table.php',
         ], true);
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function resolveOrgContextDiffIsResearchCmsTrustedOrgOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowedLines = [
+            '+        $candidates = $this->isOpsPanelRequest($request) || $this->isInternalCmsApiRequest($request)',
+            '-        $candidates = $this->isOpsPanelRequest($request)',
+            '-                $request->header(\'X-FM-Org-Id\'),',
+            '-                $request->header(\'X-Org-Id\'),',
+            '-                $request->query(\'org_id\'),',
+            '-                $request->route(\'org_id\'),',
+            '+    private function isInternalCmsApiRequest(Request $request): bool',
+            '+    {',
+            '+        return str_starts_with(\'/\'.ltrim($request->path(), \'/\'), \'/api/v0.5/internal/\');',
+            '+    }',
+            '+',
+        ];
+
+        foreach ($changedLines as $line) {
+            if (! in_array($line, $allowedLines, true)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function isArticlePublishingRuntimeTruthGateFile(string $file): bool
