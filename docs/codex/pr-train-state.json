@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-22T22:23:00+08:00",
+  "updated_at": "2026-05-23T08:06:29+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6080,7 +6080,7 @@
       "repo": "fap-api",
       "branch": "fix/career-progressive-readiness-selection-1",
       "title": "fix(api): add progressive career readiness selection",
-      "status": "local_checks_passed",
+      "status": "committed",
       "depends_on": [
         "REPAIR-PROGRESSIVE-LIVE-VERIFICATION-SCALING-1"
       ],
@@ -6507,7 +6507,7 @@
         "no live crawl",
         "no weakening software-developers rollout rejection"
       ],
-      "commit_sha": null,
+      "commit_sha": "127cfd1636515bb84c1f3659c91d60aa563e5d1d",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1412",
       "checks": {
         "authorization": {
@@ -8606,7 +8606,7 @@
       "depends_on": [
         "REPAIR-DIRECTORY-DETAIL-PENDING-314-1"
       ],
-      "status": "in_progress",
+      "status": "local_checks_passed",
       "train_scope": "career_directory_list_detail_api_authority",
       "risk_level": "medium",
       "title": "fix(api): align directory list with runtime detail authority",
@@ -8695,7 +8695,7 @@
       "repo": "fap-api",
       "branch": "codex/repair-cn-proxy-visible-detail-policy-authority-1",
       "base": "main",
-      "status": "in_progress",
+      "status": "committed",
       "train_scope": "cn_proxy_visible_detail_policy_authority",
       "risk_level": "medium_publication_authority",
       "title": "fix(api): add CN proxy visible detail policy authority",
@@ -9511,7 +9511,7 @@
       },
       "failure_reason": null,
       "pr_url": null,
-      "commit_sha": null,
+      "commit_sha": "2ef32aa4ff65c1a58c360ab4f07123dca957f56e",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -14971,6 +14971,60 @@
           "at": "2026-05-22T22:23:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1588 for SEO-GROWTH-MBTI-07 and pushed branch codex/seo-growth-mbti-07-playbook-closeout."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01A": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01a-preflight",
+      "status": "pr_open",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-07"
+      ],
+      "commit_sha": "bb7288ac984e567d0f39fa7e8365b3363203734c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1592",
+      "checks": {
+        "local": {
+          "focused_preflight_package_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01aPreflightDryRunPackage --no-ansi (7 tests, 45 assertions)",
+          "seo_intel_suite": "passed: php artisan test --filter=SeoIntel --no-ansi (581 tests, 9081 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3498 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01a-preflight-dry-run-package.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-01B-FIX",
+      "history": [
+        {
+          "at": "2026-05-23T08:06:29+08:00",
+          "status": "pending",
+          "summary": "Registered SEO-GROWTH-MBTI-ACTION-01A with explicit user authorization. Scope is docs/generated/test plus train metadata only, using safe public checks and local no-write evidence. No Search Channel enqueue, URL submission, CMS mutation, internal link creation, Digital PR send, production operation, crawler log read, seo_intel write, fap-web modification, or pSEO."
+        },
+        {
+          "at": "2026-05-23T08:06:29+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-GROWTH-MBTI-ACTION-01A on codex/seo-growth-mbti-action-01a-preflight from latest main. Collected no-write evidence and public checks; Search Channel remains blocked by seo_urls_source_unavailable, and internal link dry-run is blocked by local DB access."
+        },
+        {
+          "at": "2026-05-23T08:20:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Local validation passed for SEO-GROWTH-MBTI-ACTION-01A: focused preflight package test, full SeoIntel suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-23T08:22:00+08:00",
+          "status": "committed",
+          "summary": "Committed SEO-GROWTH-MBTI-ACTION-01A preflight package scope at 23e176c9dba4ac718ac0370706b02399f9387bfc."
         }
       ]
     }

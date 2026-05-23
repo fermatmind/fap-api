@@ -10358,3 +10358,45 @@ prs:
     production_migration_execution_allowed: false
     scheduler_activation: false
     next_task: SEO-GROWTH-MBTI-ACTION-01
+
+  - id: SEO-GROWTH-MBTI-ACTION-01A
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-07
+    branch: codex/seo-growth-mbti-action-01a-preflight
+    base: main
+    title: "docs(seo-intel): add MBTI growth action preflight package"
+    name: "MBTI Growth Wave 1 preflight dry-run package"
+    train_scope: seo_growth_mbti_action
+    risk_level: low_no_write_preflight
+    type: docs/generated/test
+    scope:
+      - Create the MBTI Growth Wave 1 preflight / dry-run package from safe public checks and local no-write command evidence.
+      - Lock public URL status, URL Truth dry-run evidence, Search Channel queue no-write evidence, claim lint evidence, content rehearsal evidence, internal link blocker, Digital PR tracking state, action readiness, blockers, sidecars, and next task decision.
+      - Preserve backend/CMS/catalog authority and forbid frontend fallback, static sitemap, static llms, crawler logs, search responses, Digital PR mentions, or local copies as URL Truth.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-action-01a-preflight-dry-run-package.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-01a-preflight-dry-run-package.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01aPreflightDryRunPackageTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, Search Channel Queue, crawler log readers, collectors, scheduler, Digital PR sends, Outlook drafts, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01aPreflightDryRunPackage --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01a-preflight-dry-run-package.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-ACTION-01B-FIX
