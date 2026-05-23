@@ -15,25 +15,29 @@
             :title="__('ops.custom_pages.global_search.title')"
             :description="__('ops.custom_pages.global_search.description')"
         >
-            <x-filament-ops::ops-toolbar>
-                <div class="ops-control-stack">
-                    <label class="ops-control-label" for="ops-global-search-input">{{ __('ops.custom_pages.global_search.search_label') }}</label>
-                    <input
-                        id="ops-global-search-input"
-                        type="text"
-                        wire:model.defer="query"
-                        placeholder="{{ __('ops.custom_pages.global_search.placeholder') }}"
-                        class="ops-input"
-                    />
-                    <p class="ops-control-hint">{{ __('ops.custom_pages.global_search.hint') }}</p>
-                </div>
+            <form id="ops-global-search-form" wire:submit.prevent="runSearch" class="contents">
+                <x-filament-ops::ops-toolbar>
+                    <div class="ops-control-stack">
+                        <label class="ops-control-label" for="ops-global-search-input">{{ __('ops.custom_pages.global_search.search_label') }}</label>
+                        <input
+                            id="ops-global-search-input"
+                            name="query"
+                            type="text"
+                            wire:model="query"
+                            placeholder="{{ __('ops.custom_pages.global_search.placeholder') }}"
+                            class="ops-input"
+                            autocomplete="off"
+                        />
+                        <p class="ops-control-hint">{{ __('ops.custom_pages.global_search.hint') }}</p>
+                    </div>
 
-                <x-slot name="actions">
-                    <x-filament::button color="primary" wire:click="runSearch">
-                        {{ __('ops.custom_pages.common.actions.search') }}
-                    </x-filament::button>
-                </x-slot>
-            </x-filament-ops::ops-toolbar>
+                    <x-slot name="actions">
+                        <x-filament::button color="primary" type="submit" wire:target="runSearch">
+                            {{ __('ops.custom_pages.common.actions.search') }}
+                        </x-filament::button>
+                    </x-slot>
+                </x-filament-ops::ops-toolbar>
+            </form>
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
