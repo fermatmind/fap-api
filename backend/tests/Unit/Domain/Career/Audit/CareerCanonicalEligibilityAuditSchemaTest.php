@@ -240,13 +240,13 @@ JSON,
         );
     }
 
-    public function test_failed_check_state_requires_inspect_fix_loop_not_immediate_stop(): void
+    public function test_failed_check_state_requires_inspect_fix_loop_and_immediate_stop(): void
     {
         $this->assertSame(
             CareerCanonicalEligibilityCheckProtocol::ACTION_INSPECT_FAILURE,
             CareerCanonicalEligibilityCheckProtocol::actionForState(CareerCanonicalEligibilityCheckProtocol::STATE_FAILED)
         );
-        $this->assertFalse(CareerCanonicalEligibilityCheckProtocol::isImmediateStop(CareerCanonicalEligibilityCheckProtocol::STATE_FAILED));
+        $this->assertTrue(CareerCanonicalEligibilityCheckProtocol::isImmediateStop(CareerCanonicalEligibilityCheckProtocol::STATE_FAILED));
     }
 
     public function test_current_pr_introduced_failure_requires_may_continue_train_false(): void

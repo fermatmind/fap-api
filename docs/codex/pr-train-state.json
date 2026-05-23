@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T06:04:26+08:00",
+  "updated_at": "2026-05-24T06:21:29+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -16321,7 +16321,7 @@
     "CAREER-POLICY-CLAIM-GUARDS-01": {
       "repo": "fap-api",
       "branch": "codex/career-policy-claim-guards-01",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "BIGFIVE-RUNTIME-GUARDS-01"
       ],
@@ -16335,7 +16335,7 @@
         43,
         58
       ],
-      "commit_sha": "2b67c2fa",
+      "commit_sha": "f80d91e2cdaa03f2c11551a5958157438b4f65c1",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1634",
       "checks": {
         "dependency": {
@@ -16364,6 +16364,10 @@
         "diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1634 merged as f80d91e2cdaa03f2c11551a5958157438b4f65c1 after required checks passed. Remote branch deleted; local branch absent after merge checkout."
         }
       },
       "sidecar_issues": [
@@ -16378,9 +16382,9 @@
         }
       ],
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T22:10:30Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "events": [
         {
           "at": "2026-05-24T05:45:16+08:00",
@@ -16391,13 +16395,18 @@
           "at": "2026-05-24T05:50:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1634 after scoped validation passed and external Career full-filter baseline sidecar was recorded."
+        },
+        {
+          "at": "2026-05-24T06:21:29+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled PR #1634 merge into origin/main at f80d91e2cdaa03f2c11551a5958157438b4f65c1 and removed accidental duplicate prs ledger entry."
         }
       ]
     },
     "CAREER-READINESS-AUDITORS-01": {
       "repo": "fap-api",
       "branch": "codex/career-readiness-auditors-01",
-      "status": "pending",
+      "status": "local_validation_passed_with_external_sidecar",
       "depends_on": [
         "CAREER-POLICY-CLAIM-GUARDS-01"
       ],
@@ -16415,12 +16424,72 @@
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
-      "sidecar_issues": [],
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CAREER-POLICY-CLAIM-GUARDS-01 is merged into main as f80d91e2cdaa03f2c11551a5958157438b4f65c1."
+        },
+        "focused_tests": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Domain/Career/Audit/CareerCanonicalEligibilityAuditSchemaTest.php tests/Unit/Services/Career/CareerReadinessAuditorsFailClosedTest.php tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php --no-ansi",
+          "evidence": "33 passed, 195 assertions."
+        },
+        "career_filter": {
+          "status": "external_failure_sidecar",
+          "command": "cd backend && php artisan test --filter Career --no-ansi",
+          "evidence": "47 failed, 1296 passed, 52257 assertions; matches known origin/main Career runtime projection baseline and is not introduced by this scoped auditor fail-closed PR.",
+          "sidecar_issue": "CAREER-RUNTIME-PROJECTION-TEST-SUITE-BASELINE-01"
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Domain/Career app/Console/Commands/StorageReleaseRootsAudit.php tests",
+          "evidence": "PASS, 1472 files."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check",
+          "evidence": "No whitespace errors."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "command": "(git diff --name-only; git ls-files --others --exclude-standard) | sort",
+          "evidence": "Changed files are limited to Career audit/publish code, matching Career tests, and PR-train state metadata."
+        },
+        "cached_diff_check": {
+          "status": "pass",
+          "command": "git diff --cached --check",
+          "evidence": "No staged whitespace errors."
+        }
+      },
+      "sidecar_issues": [
+        "CAREER-RUNTIME-PROJECTION-TEST-SUITE-BASELINE-01"
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-05-24T06:21:29+08:00",
+          "status": "in_progress",
+          "summary": "Started scoped fail-closed fixes for career readiness auditors from latest main."
+        },
+        {
+          "at": "2026-05-24T06:32:40+08:00",
+          "status": "local_validation_passed_with_external_sidecar",
+          "summary": "Focused auditor tests and Pint passed; full Career filter remains on known 47-failure external baseline sidecar."
+        },
+        {
+          "at": "2026-05-24T06:33:23+08:00",
+          "status": "scope_validation_passed",
+          "summary": "Changed file list stays within CAREER-READINESS-AUDITORS-01 allowed paths."
+        },
+        {
+          "at": "2026-05-24T06:33:48+08:00",
+          "status": "local_checks_recorded",
+          "summary": "Recorded focused tests, external Career baseline sidecar, Pint, scope, and diff checks."
+        }
+      ]
     },
     "CAREER-RELEASE-GATES-01": {
       "repo": "fap-api",
@@ -21544,38 +21613,6 @@
           "at": "2026-05-24T03:15:15+08:00",
           "status": "ci_fix_pushed_pending_checks",
           "summary": "Fixed verify-mbti failure with narrow DB migration portability allowlist; local targeted tests and pint pass."
-        }
-      ]
-    },
-    "CAREER-POLICY-CLAIM-GUARDS-01": {
-      "status": "github_checks_passed_ready_to_merge",
-      "checks": {
-        "github_required_checks": {
-          "status": "pass",
-          "evidence": "PR #1634 checks passed after scoped BigFive runtime freeze classifier fix: hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2.",
-          "failed_checks": [
-            "verify-mbti-legacy",
-            "verify-mbti-v2"
-          ],
-          "scoped_fix": "Added BigFive runtime freeze classifier coverage for Career policy claim guard files under backend/tests/**.",
-          "local_validation": [
-            "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter \"runtime_freeze_classifier_ignores_career_policy_claim_guard_changes|runtime_paths_have_no_uncommitted_diff\" --no-ansi",
-            "cd backend && php artisan test tests/Unit/Services/Career/ClaimPermissionsCompilerTest.php tests/Unit/Services/Career/WarningMatrixTest.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerRecommendationCompilerTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php --no-ansi",
-            "cd backend && vendor/bin/pint --test app/Console/Commands app/Services/Career app/Services/Cms/EditorialPackage app/Domain/Career tests",
-            "git diff --check"
-          ]
-        }
-      },
-      "events": [
-        {
-          "at": "2026-05-24T05:57:54+08:00",
-          "status": "github_checks_failed_scoped_fix_local_passed",
-          "summary": "GitHub verify-mbti checks failed on the BigFive runtime freeze classifier. Added a scoped tests-only classifier exemption for Career policy claim guard files; focused BigFive test, scoped Career tests, Pint, and diff check passed locally."
-        },
-        {
-          "at": "2026-05-24T06:04:26+08:00",
-          "status": "github_checks_passed_ready_to_merge",
-          "summary": "PR #1634 required GitHub checks passed after the scoped classifier fix."
         }
       ]
     }

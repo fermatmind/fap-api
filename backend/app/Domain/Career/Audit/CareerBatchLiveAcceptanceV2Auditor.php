@@ -63,9 +63,9 @@ final class CareerBatchLiveAcceptanceV2Auditor
                     $surfaceStatus = CareerCanonicalEligibilityStatus::UNVERIFIED;
                     $rowIssues[] = $this->issue(CareerBatchLiveAcceptanceV2Issue::SURFACE_UNVERIFIED, $slug, $locale, [['surface' => 'live_html']]);
                 } elseif ($surfaceRow !== null && (
-                    ($surfaceRow['surface_match'] ?? true) !== true
-                    || ($surfaceRow['canonical_self'] ?? true) !== true
-                    || ($surfaceRow['robots_indexable'] ?? true) !== true
+                    ($surfaceRow['surface_match'] ?? null) !== true
+                    || ($surfaceRow['canonical_self'] ?? null) !== true
+                    || ($surfaceRow['robots_indexable'] ?? null) !== true
                 )) {
                     $surfaceStatus = CareerCanonicalEligibilityStatus::BLOCKED;
                     $rowIssues[] = $this->issue(CareerBatchLiveAcceptanceV2Issue::SURFACE_MISMATCH, $slug, $locale, [$surfaceRow]);
