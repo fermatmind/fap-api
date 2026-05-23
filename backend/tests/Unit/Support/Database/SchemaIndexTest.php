@@ -75,6 +75,26 @@ final class SchemaIndexTest extends TestCase
         $this->assertFalse(SchemaIndex::indexExists($this->tableName, $indexName));
     }
 
+    public function test_index_exists_on_columns_matches_exact_column_sequence(): void
+    {
+        $indexName = 'idx_schema_index_name_id';
+
+        Schema::table($this->tableName, function (Blueprint $table) use ($indexName): void {
+            $table->index(['name', 'id'], $indexName);
+        });
+
+        $this->assertTrue(SchemaIndex::indexExistsOnColumns($this->tableName, ['name', 'id']));
+        $this->assertFalse(SchemaIndex::indexExistsOnColumns($this->tableName, ['id', 'name']));
+        $this->assertFalse(SchemaIndex::indexExistsOnColumns($this->tableName, ['name']));
+    }
+
+    public function test_index_exists_on_columns_rejects_unsafe_identifiers(): void
+    {
+        $this->assertFalse(SchemaIndex::indexExistsOnColumns('schema_index_test_rows;drop', ['name']));
+        $this->assertFalse(SchemaIndex::indexExistsOnColumns($this->tableName, ['name;drop']));
+        $this->assertFalse(SchemaIndex::indexExistsOnColumns($this->tableName, []));
+    }
+
     public function test_is_duplicate_index_exception_returns_true_for_duplicate_create(): void
     {
         $indexName = 'idx_schema_index_duplicate';

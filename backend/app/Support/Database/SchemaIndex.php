@@ -33,12 +33,45 @@ final class SchemaIndex
             return self::indexExistsSqlite($conn, $table, $indexName);
         }
 
-        if ($driver === 'mysql') {
+        if (in_array($driver, ['mysql', 'mariadb'], true)) {
             return self::indexExistsMySql($conn, $table, $indexName);
         }
 
         if ($driver === 'pgsql') {
             return self::indexExistsPgSql($conn, $table, $indexName);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  list<string>  $columns
+     */
+    public static function indexExistsOnColumns(string $table, array $columns, ?string $connection = null): bool
+    {
+        if (! self::isSafeIdentifier($table) || $columns === []) {
+            return false;
+        }
+
+        foreach ($columns as $column) {
+            if (! is_string($column) || ! self::isSafeIdentifier($column)) {
+                return false;
+            }
+        }
+
+        $conn = self::connection($connection);
+        $driver = $conn->getDriverName();
+
+        if ($driver === 'sqlite') {
+            return self::indexExistsOnColumnsSqlite($conn, $table, $columns);
+        }
+
+        if (in_array($driver, ['mysql', 'mariadb'], true)) {
+            return self::indexExistsOnColumnsMySql($conn, $table, $columns);
+        }
+
+        if ($driver === 'pgsql') {
+            return self::indexExistsOnColumnsPgSql($conn, $table, $columns);
         }
 
         return false;
@@ -110,6 +143,36 @@ final class SchemaIndex
         return false;
     }
 
+    /**
+     * @param  list<string>  $columns
+     */
+    private static function indexExistsOnColumnsSqlite(ConnectionInterface $conn, string $table, array $columns): bool
+    {
+        $tableName = str_replace("'", "''", $table);
+        $rows = $conn->select("PRAGMA index_list('{$tableName}')");
+        $expected = self::normalizeColumnSequence($columns);
+
+        foreach ($rows as $row) {
+            $indexName = (string) ($row->name ?? '');
+            if ($indexName === '' || ! self::isSafeIdentifier($indexName)) {
+                continue;
+            }
+
+            $indexNameSql = str_replace("'", "''", $indexName);
+            $columnRows = $conn->select("PRAGMA index_info('{$indexNameSql}')");
+            $actual = [];
+            foreach ($columnRows as $columnRow) {
+                $actual[] = (string) ($columnRow->name ?? '');
+            }
+
+            if (self::normalizeColumnSequence($actual) === $expected) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private static function indexExistsMySql(ConnectionInterface $conn, string $table, string $indexName): bool
     {
         $database = (string) $conn->getDatabaseName();
@@ -130,6 +193,27 @@ final class SchemaIndex
         }
 
         return false;
+    }
+
+    /**
+     * @param  list<string>  $columns
+     */
+    private static function indexExistsOnColumnsMySql(ConnectionInterface $conn, string $table, array $columns): bool
+    {
+        $database = (string) $conn->getDatabaseName();
+        if ($database === '') {
+            return false;
+        }
+
+        $rows = $conn->select(
+            'SELECT index_name, column_name
+             FROM information_schema.statistics
+             WHERE table_schema = ? AND table_name = ?
+             ORDER BY index_name, seq_in_index',
+            [$database, $table]
+        );
+
+        return self::rowsContainColumnSequence($rows, $columns, 'index_name', 'column_name');
     }
 
     private static function indexExistsPgSql(ConnectionInterface $conn, string $table, string $indexName): bool
@@ -153,6 +237,73 @@ final class SchemaIndex
         }
 
         return false;
+    }
+
+    /**
+     * @param  list<string>  $columns
+     */
+    private static function indexExistsOnColumnsPgSql(ConnectionInterface $conn, string $table, array $columns): bool
+    {
+        $schema = (string) ($conn->getConfig('schema') ?? 'public');
+        $schema = trim(explode(',', $schema)[0]);
+        if ($schema === '') {
+            $schema = 'public';
+        }
+
+        $rows = $conn->select(
+            'SELECT i.relname AS index_name, a.attname AS column_name
+             FROM pg_class t
+             JOIN pg_namespace n ON n.oid = t.relnamespace
+             JOIN pg_index ix ON t.oid = ix.indrelid
+             JOIN pg_class i ON i.oid = ix.indexrelid
+             JOIN unnest(ix.indkey) WITH ORDINALITY AS indexed_column(attnum, ordinality) ON true
+             JOIN pg_attribute a ON a.attrelid = t.oid AND a.attnum = indexed_column.attnum
+             WHERE n.nspname = ? AND t.relname = ?
+             ORDER BY i.relname, indexed_column.ordinality',
+            [$schema, $table]
+        );
+
+        return self::rowsContainColumnSequence($rows, $columns, 'index_name', 'column_name');
+    }
+
+    /**
+     * @param  array<int, object>  $rows
+     * @param  list<string>  $columns
+     */
+    private static function rowsContainColumnSequence(array $rows, array $columns, string $indexKey, string $columnKey): bool
+    {
+        $expected = self::normalizeColumnSequence($columns);
+        $indexes = [];
+
+        foreach ($rows as $row) {
+            $indexName = (string) ($row->{$indexKey} ?? $row->{strtoupper($indexKey)} ?? '');
+            $columnName = (string) ($row->{$columnKey} ?? $row->{strtoupper($columnKey)} ?? '');
+            if ($indexName === '' || $columnName === '') {
+                continue;
+            }
+
+            $indexes[$indexName][] = $columnName;
+        }
+
+        foreach ($indexes as $indexColumns) {
+            if (self::normalizeColumnSequence($indexColumns) === $expected) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  list<string>  $columns
+     * @return list<string>
+     */
+    private static function normalizeColumnSequence(array $columns): array
+    {
+        return array_map(
+            static fn (string $column): string => mb_strtolower($column, 'UTF-8'),
+            array_values($columns)
+        );
     }
 
     private static function matchesException(Throwable $e, string $indexName, array $needles): bool
