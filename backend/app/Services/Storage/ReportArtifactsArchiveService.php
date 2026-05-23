@@ -419,6 +419,20 @@ final class ReportArtifactsArchiveService
             ];
         }
 
+        $resolvedSource = $this->resolveCandidateSource($sourcePath, $relativePath, $targetObjectKey);
+        if (isset($resolvedSource['error'])) {
+            return $baseResult + [
+                'status' => 'failed',
+                'reason' => $resolvedSource['error'],
+            ];
+        }
+
+        $absoluteSourcePath = $resolvedSource['absolute_source_path'];
+        $relativePath = $resolvedSource['relative_path'];
+        $targetObjectKey = $resolvedSource['target_object_key'];
+        $baseResult['relative_path'] = $relativePath;
+        $baseResult['target_object_key'] = $targetObjectKey;
+
         if (! is_file($absoluteSourcePath)) {
             return $baseResult + [
                 'status' => 'failed',
@@ -493,6 +507,84 @@ final class ReportArtifactsArchiveService
             'verified_at' => now()->toIso8601String(),
             'target_bytes' => $targetBytesAfterUpload,
         ];
+    }
+
+    /**
+     * @return array{absolute_source_path:string,relative_path:string,target_object_key:string}|array{error:string}
+     */
+    private function resolveCandidateSource(string $sourcePath, string $relativePath, string $targetObjectKey): array
+    {
+        try {
+            $relativePath = $this->normalizeCandidateRelativePath($relativePath);
+            $sourcePath = $this->normalizeCandidateRelativePath($sourcePath);
+            $targetObjectKey = $this->normalizeCandidateRelativePath($targetObjectKey);
+        } catch (\RuntimeException) {
+            return ['error' => 'CANDIDATE_PATH_INVALID'];
+        }
+
+        if ($this->canonicalContextForRelativePath($relativePath) === null) {
+            return ['error' => 'CANDIDATE_RELATIVE_PATH_NOT_CANONICAL'];
+        }
+
+        if ($sourcePath !== 'artifacts/'.$relativePath) {
+            return ['error' => 'CANDIDATE_SOURCE_PATH_MISMATCH'];
+        }
+
+        if ($targetObjectKey !== self::TARGET_PREFIX.'/'.$relativePath) {
+            return ['error' => 'CANDIDATE_TARGET_KEY_MISMATCH'];
+        }
+
+        $artifactsRoot = realpath(storage_path('app/private/artifacts'));
+        if (! is_string($artifactsRoot) || $artifactsRoot === '') {
+            return ['error' => 'ARTIFACTS_ROOT_MISSING_AT_EXECUTE'];
+        }
+
+        $artifactsRoot = str_replace('\\', '/', rtrim($artifactsRoot, '/'));
+        $absoluteSourcePath = storage_path('app/private/'.$sourcePath);
+        $realSourcePath = realpath($absoluteSourcePath);
+        if (is_string($realSourcePath) && $realSourcePath !== '') {
+            $realSourcePath = str_replace('\\', '/', rtrim($realSourcePath, '/'));
+            if (! $this->isPathUnderDirectory($realSourcePath, $artifactsRoot)) {
+                return ['error' => 'SOURCE_PATH_OUTSIDE_ARTIFACTS'];
+            }
+
+            $absoluteSourcePath = $realSourcePath;
+        }
+
+        return [
+            'absolute_source_path' => $absoluteSourcePath,
+            'relative_path' => $relativePath,
+            'target_object_key' => $targetObjectKey,
+        ];
+    }
+
+    private function normalizeCandidateRelativePath(string $path): string
+    {
+        $path = str_replace('\\', '/', trim($path));
+        if ($path === '' || str_starts_with($path, '/') || preg_match('/^[A-Za-z]:[\/\\\\]/', $path) === 1) {
+            throw new \RuntimeException('candidate path must be relative.');
+        }
+
+        $segments = array_values(array_filter(explode('/', $path), static fn (string $segment): bool => $segment !== ''));
+        if ($segments === []) {
+            throw new \RuntimeException('candidate path cannot be empty.');
+        }
+
+        foreach ($segments as $segment) {
+            if ($segment === '.' || $segment === '..') {
+                throw new \RuntimeException('candidate path contains traversal.');
+            }
+        }
+
+        return implode('/', $segments);
+    }
+
+    private function isPathUnderDirectory(string $path, string $directory): bool
+    {
+        $path = str_replace('\\', '/', rtrim($path, '/'));
+        $directory = str_replace('\\', '/', rtrim($directory, '/'));
+
+        return $path === $directory || str_starts_with($path.'/', $directory.'/');
     }
 
     private function sizeForDiskPath(string $disk, string $path): ?int

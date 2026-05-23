@@ -308,6 +308,56 @@ final class StorageArchiveReportArtifactsCommandTest extends TestCase
         $this->assertStringContainsString('requested_limit=', $output);
     }
 
+    public function test_command_execute_rejects_traversal_source_paths_from_plan(): void
+    {
+        File::put(storage_path('app/private/.env'), 'APP_KEY=leaked');
+
+        $planPath = storage_path('app/private/report_artifact_archive_plans/traversal-plan.json');
+        File::ensureDirectoryExists(dirname($planPath));
+        File::put($planPath, json_encode([
+            'schema' => 'storage_archive_report_artifacts_plan.v1',
+            'mode' => 'dry_run',
+            'status' => 'planned',
+            'generated_at' => now()->toIso8601String(),
+            'disk' => 's3',
+            'target_disk' => 's3',
+            'summary' => [
+                'candidate_count' => 1,
+                'candidate_bytes' => 14,
+                'kind_counts' => ['report_json' => 1],
+            ],
+            'candidates' => [[
+                'kind' => 'report_json',
+                'source_path' => '../.env',
+                'relative_path' => 'reports/MBTI/traversal/report.json',
+                'target_disk' => 's3',
+                'target_object_key' => 'report_artifacts_archive/reports/MBTI/traversal/report.json',
+                'bytes' => 14,
+                'sha256' => hash('sha256', 'APP_KEY=leaked'),
+                'scale_code' => 'MBTI',
+                'attempt_id' => 'traversal',
+            ]],
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT).PHP_EOL);
+
+        $this->assertSame(1, Artisan::call('storage:archive-report-artifacts', [
+            '--execute' => true,
+            '--disk' => 's3',
+            '--plan' => $planPath,
+        ]));
+
+        $output = Artisan::output();
+        $this->assertStringContainsString('status=partial_failure', $output);
+        $this->assertStringContainsString('failed_count=1', $output);
+        preg_match('/^run_path=(.+)$/m', $output, $matches);
+        $runPath = trim((string) ($matches[1] ?? ''));
+        $this->assertFileExists($runPath);
+
+        $run = json_decode((string) File::get($runPath), true);
+        $this->assertIsArray($run);
+        $this->assertSame('CANDIDATE_PATH_INVALID', data_get($run, 'results.0.reason'));
+        Storage::disk('s3')->assertMissing('report_artifacts_archive/reports/MBTI/traversal/report.json');
+    }
+
     public function test_command_execute_surfaces_scoped_plan_metadata_for_auditability(): void
     {
         $this->seedCanonicalReportArtifact('scoped-plan-attempt');
