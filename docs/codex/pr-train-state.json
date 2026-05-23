@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T03:05:59+08:00",
+  "updated_at": "2026-05-24T03:07:44+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -21185,12 +21185,12 @@
     "DB-MIGRATION-PORTABILITY-01": {
       "repo": "fap-api",
       "branch": "codex/db-migration-portability-01",
-      "status": "committed",
+      "status": "pr_open",
       "depends_on": [
         "COMMERCE-TENANT-REPAIR-01"
       ],
       "commit_sha": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1629",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -21229,6 +21229,11 @@
           "at": "2026-05-24T03:05:59+08:00",
           "status": "committed",
           "summary": "Committed scoped DB migration portability fix; final head SHA will be recorded after push/merge."
+        },
+        {
+          "at": "2026-05-24T03:07:44+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1629 for DB-MIGRATION-PORTABILITY-01."
         }
       ]
     }
