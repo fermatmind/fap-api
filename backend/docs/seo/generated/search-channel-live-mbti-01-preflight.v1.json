@@ -1,0 +1,56 @@
+{
+  "schema_version": "v1",
+  "task": "SEARCH-CHANNEL-LIVE-MBTI-01",
+  "final_decision": "ready_for_human_approved_live_submission",
+  "queue_item_id": 2,
+  "batch_id": 2,
+  "target_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+  "channel": "indexnow",
+  "approval_state": "pending",
+  "execution_state": "dry_run_ready",
+  "source_authority": "scale_catalog",
+  "page_entity_type": "test_detail",
+  "duplicate_active_queue_item": false,
+  "queue_write_gate_state": false,
+  "live_submission_gate_state": false,
+  "external_api_gate_state": false,
+  "indexnow_live_api_gate_state": false,
+  "indexnow_key_present": true,
+  "indexnow_key_location_present": true,
+  "indexnow_key_location_publicly_verified": true,
+  "submit_dry_run_passed": true,
+  "live_submission_attempted": false,
+  "external_api_call_attempted": false,
+  "search_submission_attempted": false,
+  "enqueue_attempted": false,
+  "cms_mutation_attempted": false,
+  "url_truth_write_attempted": false,
+  "exact_future_approval_phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 2 channel indexnow URL https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types.",
+  "required_gates_to_open": [
+    "SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED",
+    "SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED",
+    "SEO_INTEL_INDEXNOW_LIVE_API_ENABLED"
+  ],
+  "required_gates_to_close_after_submission": [
+    "SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED",
+    "SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED",
+    "SEO_INTEL_INDEXNOW_LIVE_API_ENABLED"
+  ],
+  "required_gates_to_remain_closed": [
+    "SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED"
+  ],
+  "no_go_conditions": [
+    "queue_item_missing",
+    "queue_item_field_mismatch",
+    "approval_state_not_pending",
+    "execution_state_not_dry_run_ready",
+    "duplicate_count_gt_1",
+    "live_gate_unexpectedly_open",
+    "indexnow_key_missing",
+    "indexnow_key_location_missing",
+    "indexnow_key_location_public_mismatch",
+    "submit_dry_run_failed",
+    "external_call_attempted_in_dry_run",
+    "item_not_indexable_or_not_claim_safe"
+  ]
+}
