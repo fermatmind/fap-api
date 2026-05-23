@@ -1,4 +1,31 @@
 <x-filament-panels::page>
+    @php
+        $typeFilterOptions = [
+            'all' => __('ops.custom_pages.seo_operations.filters.all_visible'),
+            'article' => __('ops.custom_pages.common.filters.articles'),
+            'guide' => __('ops.custom_pages.common.filters.career_guides'),
+            'job' => __('ops.custom_pages.common.filters.career_jobs'),
+        ];
+
+        $issueFilterOptions = [
+            'all' => __('ops.custom_pages.seo_operations.filters.all_issues'),
+            'metadata' => __('ops.custom_pages.seo_operations.filters.metadata'),
+            'canonical' => __('ops.custom_pages.seo_operations.filters.canonical'),
+            'robots' => __('ops.custom_pages.seo_operations.filters.robots'),
+            'indexability' => __('ops.custom_pages.seo_operations.filters.indexability'),
+            'social' => __('ops.custom_pages.seo_operations.filters.social'),
+            'growth' => __('ops.custom_pages.seo_operations.filters.growth'),
+        ];
+
+        $bulkActionOptions = [
+            'fill_metadata' => __('ops.custom_pages.seo_operations.filters.fill_metadata'),
+            'sync_canonical' => __('ops.custom_pages.seo_operations.filters.sync_canonical'),
+            'sync_robots' => __('ops.custom_pages.seo_operations.filters.sync_robots'),
+            'mark_indexable' => __('ops.custom_pages.seo_operations.filters.mark_indexable'),
+            'mark_noindex' => __('ops.custom_pages.seo_operations.filters.mark_noindex'),
+        ];
+    @endphp
+
     <div class="ops-shell-page">
         <x-filament-ops::ops-section
             :eyebrow="__('ops.custom_pages.seo_operations.eyebrow')"
@@ -7,39 +34,62 @@
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-toolbar-grid">
-                    <label class="ops-control-stack" for="ops-seo-type-filter">
-                        <span class="ops-control-label">{{ __('ops.custom_pages.seo_operations.content_type') }}</span>
-                        <select id="ops-seo-type-filter" wire:model.live="typeFilter" class="ops-input">
-                            <option value="all">{{ __('ops.custom_pages.seo_operations.filters.all_visible') }}</option>
-                            <option value="article">{{ __('ops.custom_pages.common.filters.articles') }}</option>
-                            <option value="guide">{{ __('ops.custom_pages.common.filters.career_guides') }}</option>
-                            <option value="job">{{ __('ops.custom_pages.common.filters.career_jobs') }}</option>
-                        </select>
-                    </label>
+                    <fieldset class="ops-control-stack ops-segmented-field" aria-labelledby="ops-seo-type-filter-label">
+                        <legend id="ops-seo-type-filter-label" class="ops-control-label">{{ __('ops.custom_pages.seo_operations.content_type') }}</legend>
+                        <div id="ops-seo-type-filter" class="ops-segmented-control" role="group" aria-labelledby="ops-seo-type-filter-label">
+                            @foreach ($typeFilterOptions as $value => $label)
+                                <button
+                                    type="button"
+                                    wire:click="$set('typeFilter', '{{ $value }}')"
+                                    @class([
+                                        'ops-segmented-control__item',
+                                        'ops-segmented-control__item--active' => $typeFilter === $value,
+                                    ])
+                                    aria-pressed="{{ $typeFilter === $value ? 'true' : 'false' }}"
+                                >
+                                    {{ $label }}
+                                </button>
+                            @endforeach
+                        </div>
+                    </fieldset>
 
-                    <label class="ops-control-stack" for="ops-seo-issue-filter">
-                        <span class="ops-control-label">{{ __('ops.custom_pages.seo_operations.issue_focus') }}</span>
-                        <select id="ops-seo-issue-filter" wire:model.live="issueFilter" class="ops-input">
-                            <option value="all">{{ __('ops.custom_pages.seo_operations.filters.all_issues') }}</option>
-                            <option value="metadata">{{ __('ops.custom_pages.seo_operations.filters.metadata') }}</option>
-                            <option value="canonical">{{ __('ops.custom_pages.seo_operations.filters.canonical') }}</option>
-                            <option value="robots">{{ __('ops.custom_pages.seo_operations.filters.robots') }}</option>
-                            <option value="indexability">{{ __('ops.custom_pages.seo_operations.filters.indexability') }}</option>
-                            <option value="social">{{ __('ops.custom_pages.seo_operations.filters.social') }}</option>
-                            <option value="growth">{{ __('ops.custom_pages.seo_operations.filters.growth') }}</option>
-                        </select>
-                    </label>
+                    <fieldset class="ops-control-stack ops-segmented-field ops-segmented-field--wide" aria-labelledby="ops-seo-issue-filter-label">
+                        <legend id="ops-seo-issue-filter-label" class="ops-control-label">{{ __('ops.custom_pages.seo_operations.issue_focus') }}</legend>
+                        <div id="ops-seo-issue-filter" class="ops-segmented-control" role="group" aria-labelledby="ops-seo-issue-filter-label">
+                            @foreach ($issueFilterOptions as $value => $label)
+                                <button
+                                    type="button"
+                                    wire:click="$set('issueFilter', '{{ $value }}')"
+                                    @class([
+                                        'ops-segmented-control__item',
+                                        'ops-segmented-control__item--active' => $issueFilter === $value,
+                                    ])
+                                    aria-pressed="{{ $issueFilter === $value ? 'true' : 'false' }}"
+                                >
+                                    {{ $label }}
+                                </button>
+                            @endforeach
+                        </div>
+                    </fieldset>
 
-                    <label class="ops-control-stack" for="ops-seo-bulk-action">
-                        <span class="ops-control-label">{{ __('ops.custom_pages.seo_operations.bulk_action') }}</span>
-                        <select id="ops-seo-bulk-action" wire:model="bulkAction" class="ops-input">
-                            <option value="fill_metadata">{{ __('ops.custom_pages.seo_operations.filters.fill_metadata') }}</option>
-                            <option value="sync_canonical">{{ __('ops.custom_pages.seo_operations.filters.sync_canonical') }}</option>
-                            <option value="sync_robots">{{ __('ops.custom_pages.seo_operations.filters.sync_robots') }}</option>
-                            <option value="mark_indexable">{{ __('ops.custom_pages.seo_operations.filters.mark_indexable') }}</option>
-                            <option value="mark_noindex">{{ __('ops.custom_pages.seo_operations.filters.mark_noindex') }}</option>
-                        </select>
-                    </label>
+                    <fieldset class="ops-control-stack ops-segmented-field ops-segmented-field--wide" aria-labelledby="ops-seo-bulk-action-label">
+                        <legend id="ops-seo-bulk-action-label" class="ops-control-label">{{ __('ops.custom_pages.seo_operations.bulk_action') }}</legend>
+                        <div id="ops-seo-bulk-action" class="ops-segmented-control" role="group" aria-labelledby="ops-seo-bulk-action-label">
+                            @foreach ($bulkActionOptions as $value => $label)
+                                <button
+                                    type="button"
+                                    wire:click="$set('bulkAction', '{{ $value }}')"
+                                    @class([
+                                        'ops-segmented-control__item',
+                                        'ops-segmented-control__item--active' => $bulkAction === $value,
+                                    ])
+                                    aria-pressed="{{ $bulkAction === $value ? 'true' : 'false' }}"
+                                >
+                                    {{ $label }}
+                                </button>
+                            @endforeach
+                        </div>
+                    </fieldset>
 
                     <div class="ops-control-stack">
                         <span class="ops-control-label">{{ __('ops.custom_pages.seo_operations.contract_label') }}</span>

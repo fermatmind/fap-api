@@ -1,4 +1,5 @@
 @php
+    $copy = 'ops.custom_pages.seo_intelligence';
     $recentIssues = $this->recentIssueRows();
     $recentQueueRows = $this->recentQueueRows();
     $recentCrawlerRows = $this->recentCrawlerRows();
@@ -8,53 +9,53 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
         <x-filament-ops::ops-section
-            eyebrow="SEO Intelligence"
-            title="SEO Dash access"
-            description="Native read-only SEO Engine observability dashboard. CMS/backend URL Truth remains the authority; this page does not embed, proxy, or call Metabase."
+            :eyebrow="__($copy.'.eyebrow')"
+            :title="__($copy.'.dash_access_title')"
+            :description="__($copy.'.dash_access_desc')"
         >
             <x-filament-ops::ops-toolbar :split="false">
                 <div class="ops-control-stack">
-                    <span class="ops-control-label">SEO Intelligence MVP - URL Truth &amp; Issue Queue</span>
-                    <p class="ops-control-hint">Verified cards are rendered from the seo_intel read model. No write controls, scheduler controls, or search submission controls are available here.</p>
+                    <span class="ops-control-label">{{ __($copy.'.mvp_label') }}</span>
+                    <p class="ops-control-hint">{{ __($copy.'.mvp_hint') }}</p>
                 </div>
             </x-filament-ops::ops-toolbar>
         </x-filament-ops::ops-section>
 
         @unless ($this->dashboardAvailable())
             <x-filament-ops::ops-section
-                title="seo_intel read status"
-                description="The dashboard shell is available, but the seo_intel read model could not be loaded in this environment."
+                :title="__($copy.'.read_status_title')"
+                :description="__($copy.'.read_status_desc')"
             >
                 <x-filament-ops::ops-result-card
-                    title="Read model unavailable"
-                    meta="Counts are shown as zero until the seo_intel connection and dashboard tables are readable."
+                    :title="__($copy.'.read_unavailable_title')"
+                    :meta="__($copy.'.read_unavailable_meta')"
                 />
             </x-filament-ops::ops-section>
         @endunless
 
         <x-filament-ops::ops-section
-            title="Overview heartbeat"
-            description="Live read-only counts from approved seo_intel tables. These replace the old static MVP closeout counts."
+            :title="__($copy.'.overview_title')"
+            :description="__($copy.'.overview_desc')"
         >
             <x-filament-ops::ops-field-grid :fields="$this->overviewCards()" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Safety heartbeat"
-            description="These counters should remain zero. A non-zero value means search distribution should stop for review."
+            :title="__($copy.'.safety_title')"
+            :description="__($copy.'.safety_desc')"
         >
             <x-filament-ops::ops-field-grid :fields="$this->safetyCards()" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="URL Truth distribution"
-            description="Aggregate view of URL Truth by allowed authority, locale, page type, and indexability fields."
+            :title="__($copy.'.url_truth_distribution_title')"
+            :description="__($copy.'.url_truth_distribution_desc')"
         >
             <div class="ops-card-list">
                 @foreach ($this->urlTruthDistributionCards() as $card)
                     <x-filament-ops::ops-result-card
                         :title="$card['title']"
-                        :meta="count($card['rows']).' buckets'"
+                        :meta="__($copy.'.bucket_count', ['count' => count($card['rows'])])"
                     >
                         @if ($card['rows'] !== [])
                             <ul class="ops-list">
@@ -63,7 +64,7 @@
                                 @endforeach
                             </ul>
                         @else
-                            <p class="ops-control-hint">No aggregate rows available.</p>
+                            <p class="ops-control-hint">{{ __($copy.'.no_aggregate_rows') }}</p>
                         @endif
                     </x-filament-ops::ops-result-card>
                 @endforeach
@@ -71,14 +72,14 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Issue Queue overview"
-            description="Issue Queue detail panel with read-only aggregates and recent safe rows. Aggregate buckets provide safe filter dimensions; raw evidence, payloads, JSON, and PII stay hidden."
+            :title="__($copy.'.issue_queue_overview_title')"
+            :description="__($copy.'.issue_queue_overview_desc')"
         >
             <div class="ops-card-list">
                 @foreach ($this->issueQueueAggregateCards() as $card)
                     <x-filament-ops::ops-result-card
                         :title="$card['title']"
-                        :meta="count($card['rows']).' buckets'"
+                        :meta="__($copy.'.bucket_count', ['count' => count($card['rows'])])"
                     >
                         @if ($card['rows'] !== [])
                             <ul class="ops-list">
@@ -87,7 +88,7 @@
                                 @endforeach
                             </ul>
                         @else
-                            <p class="ops-control-hint">No aggregate rows available.</p>
+                            <p class="ops-control-hint">{{ __($copy.'.no_aggregate_rows') }}</p>
                         @endif
                     </x-filament-ops::ops-result-card>
                 @endforeach
@@ -96,22 +97,22 @@
             <x-filament-ops::ops-table
                 class="mt-4"
                 :has-rows="$recentIssues !== []"
-                empty-title="No recent SEO issues"
-                empty-description="The issue queue has no safe rows to display."
+                :empty-title="__($copy.'.empty_recent_issues_title')"
+                :empty-description="__($copy.'.empty_recent_issues_desc')"
             >
                 <x-slot name="head">
                     <tr>
-                        <th>canonical path</th>
-                        <th>locale</th>
-                        <th>page_entity_type</th>
-                        <th>issue_type</th>
-                        <th>severity</th>
-                        <th>source_system</th>
-                        <th>source_engine</th>
-                        <th>status</th>
-                        <th>lifecycle_state</th>
-                        <th>detected_at</th>
-                        <th>updated_at</th>
+                        <th>{{ __($copy.'.table.canonical_path') }}</th>
+                        <th>{{ __($copy.'.table.locale') }}</th>
+                        <th>{{ __($copy.'.table.page_entity_type') }}</th>
+                        <th>{{ __($copy.'.table.issue_type') }}</th>
+                        <th>{{ __($copy.'.table.severity') }}</th>
+                        <th>{{ __($copy.'.table.source_system') }}</th>
+                        <th>{{ __($copy.'.table.source_engine') }}</th>
+                        <th>{{ __($copy.'.table.status') }}</th>
+                        <th>{{ __($copy.'.table.lifecycle_state') }}</th>
+                        <th>{{ __($copy.'.table.detected_at') }}</th>
+                        <th>{{ __($copy.'.table.updated_at') }}</th>
                     </tr>
                 </x-slot>
 
@@ -134,14 +135,14 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Search Channel Queue overview"
-            description="Search Channel Queue detail panel with read-only channel state and safe filter dimensions. This page has no approve, retry, submit, scheduler, collector, or live API controls."
+            :title="__($copy.'.search_channel_queue_title')"
+            :description="__($copy.'.search_channel_queue_desc')"
         >
             <div class="ops-card-list">
                 @foreach ($this->searchChannelQueueAggregateCards() as $card)
                     <x-filament-ops::ops-result-card
                         :title="$card['title']"
-                        :meta="count($card['rows']).' buckets'"
+                        :meta="__($copy.'.bucket_count', ['count' => count($card['rows'])])"
                     >
                         @if ($card['rows'] !== [])
                             <ul class="ops-list">
@@ -150,7 +151,7 @@
                                 @endforeach
                             </ul>
                         @else
-                            <p class="ops-control-hint">No aggregate rows available.</p>
+                            <p class="ops-control-hint">{{ __($copy.'.no_aggregate_rows') }}</p>
                         @endif
                     </x-filament-ops::ops-result-card>
                 @endforeach
@@ -159,24 +160,24 @@
             <x-filament-ops::ops-table
                 class="mt-4"
                 :has-rows="$recentQueueRows !== []"
-                empty-title="No recent queue rows"
-                empty-description="The Search Channel Queue has no safe rows to display."
+                :empty-title="__($copy.'.empty_recent_queue_title')"
+                :empty-description="__($copy.'.empty_recent_queue_desc')"
             >
                 <x-slot name="head">
                     <tr>
-                        <th>canonical path</th>
-                        <th>locale</th>
-                        <th>page_entity_type</th>
-                        <th>source_authority</th>
-                        <th>channel</th>
-                        <th>eligibility_state</th>
-                        <th>approval_state</th>
-                        <th>execution_state</th>
-                        <th>indexability_state</th>
-                        <th>claim_boundary_state</th>
-                        <th>private_flow</th>
-                        <th>created_at</th>
-                        <th>updated_at</th>
+                        <th>{{ __($copy.'.table.canonical_path') }}</th>
+                        <th>{{ __($copy.'.table.locale') }}</th>
+                        <th>{{ __($copy.'.table.page_entity_type') }}</th>
+                        <th>{{ __($copy.'.table.source_authority') }}</th>
+                        <th>{{ __($copy.'.table.channel') }}</th>
+                        <th>{{ __($copy.'.table.eligibility_state') }}</th>
+                        <th>{{ __($copy.'.table.approval_state') }}</th>
+                        <th>{{ __($copy.'.table.execution_state') }}</th>
+                        <th>{{ __($copy.'.table.indexability_state') }}</th>
+                        <th>{{ __($copy.'.table.claim_boundary_state') }}</th>
+                        <th>{{ __($copy.'.table.private_flow') }}</th>
+                        <th>{{ __($copy.'.table.created_at') }}</th>
+                        <th>{{ __($copy.'.table.updated_at') }}</th>
                     </tr>
                 </x-slot>
 
@@ -192,7 +193,7 @@
                         <td>{{ $row['execution_state'] ?? '-' }}</td>
                         <td>{{ $row['indexability_state'] ?? '-' }}</td>
                         <td>{{ $row['claim_boundary_state'] ?? '-' }}</td>
-                        <td>{{ ($row['private_flow'] ?? false) ? 'true' : 'false' }}</td>
+                        <td>{{ ($row['private_flow'] ?? false) ? __($copy.'.boolean.true') : __($copy.'.boolean.false') }}</td>
                         <td>{{ $row['created_at'] ?? '-' }}</td>
                         <td>{{ $row['updated_at'] ?? '-' }}</td>
                     </tr>
@@ -201,8 +202,8 @@
 
             <div class="ops-card-list mt-4">
                 <x-filament-ops::ops-result-card
-                    title="event_type summary"
-                    :meta="count($eventTypeSummary).' buckets'"
+                    :title="__($copy.'.event_type_summary_title')"
+                    :meta="__($copy.'.bucket_count', ['count' => count($eventTypeSummary)])"
                 >
                     @if ($eventTypeSummary !== [])
                         <ul class="ops-list">
@@ -211,15 +212,15 @@
                             @endforeach
                         </ul>
                     @else
-                        <p class="ops-control-hint">No event aggregate rows available.</p>
+                        <p class="ops-control-hint">{{ __($copy.'.no_event_aggregate_rows') }}</p>
                     @endif
                 </x-filament-ops::ops-result-card>
             </div>
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Crawler observation overview"
-            description="Aggregate-only crawler observation from seo_crawler_log_daily_aggregates. This panel reads no raw logs and offers no scheduler, collector, issue, URL Truth, queue, or search submission actions."
+            :title="__($copy.'.crawler_overview_title')"
+            :description="__($copy.'.crawler_overview_desc')"
         >
             <x-filament-ops::ops-field-grid :fields="$this->crawlerSafetyCards()" />
 
@@ -227,7 +228,7 @@
                 @foreach ($this->crawlerObservationAggregateCards() as $card)
                     <x-filament-ops::ops-result-card
                         :title="$card['title']"
-                        :meta="count($card['rows']).' buckets'"
+                        :meta="__($copy.'.bucket_count', ['count' => count($card['rows'])])"
                     >
                         @if ($card['rows'] !== [])
                             <ul class="ops-list">
@@ -236,7 +237,7 @@
                                 @endforeach
                             </ul>
                         @else
-                            <p class="ops-control-hint">No aggregate rows available.</p>
+                            <p class="ops-control-hint">{{ __($copy.'.no_aggregate_rows') }}</p>
                         @endif
                     </x-filament-ops::ops-result-card>
                 @endforeach
@@ -245,26 +246,26 @@
             <x-filament-ops::ops-table
                 class="mt-4"
                 :has-rows="$recentCrawlerRows !== []"
-                empty-title="No crawler aggregate rows"
-                empty-description="Crawler observation has no safe aggregate rows to display."
+                :empty-title="__($copy.'.empty_crawler_title')"
+                :empty-description="__($copy.'.empty_crawler_desc')"
             >
                 <x-slot name="head">
                     <tr>
-                        <th>log_date</th>
-                        <th>host</th>
-                        <th>surface_family</th>
-                        <th>bot_family</th>
-                        <th>bot_variant</th>
-                        <th>route_family</th>
-                        <th>page_entity_type</th>
-                        <th>canonical_path</th>
-                        <th>http_status</th>
-                        <th>method_bucket</th>
-                        <th>query_present</th>
-                        <th>query_risk_state</th>
-                        <th>private_path_blocked</th>
-                        <th>hit_count</th>
-                        <th>last_seen_at</th>
+                        <th>{{ __($copy.'.table.log_date') }}</th>
+                        <th>{{ __($copy.'.table.host') }}</th>
+                        <th>{{ __($copy.'.table.surface_family') }}</th>
+                        <th>{{ __($copy.'.table.bot_family') }}</th>
+                        <th>{{ __($copy.'.table.bot_variant') }}</th>
+                        <th>{{ __($copy.'.table.route_family') }}</th>
+                        <th>{{ __($copy.'.table.page_entity_type') }}</th>
+                        <th>{{ __($copy.'.table.canonical_path') }}</th>
+                        <th>{{ __($copy.'.table.http_status') }}</th>
+                        <th>{{ __($copy.'.table.method_bucket') }}</th>
+                        <th>{{ __($copy.'.table.query_present') }}</th>
+                        <th>{{ __($copy.'.table.query_risk_state') }}</th>
+                        <th>{{ __($copy.'.table.private_path_blocked') }}</th>
+                        <th>{{ __($copy.'.table.hit_count') }}</th>
+                        <th>{{ __($copy.'.table.last_seen_at') }}</th>
                     </tr>
                 </x-slot>
 
@@ -280,9 +281,9 @@
                         <td>{{ $row['canonical_path'] ?? '-' }}</td>
                         <td>{{ $row['http_status'] ?? '-' }}</td>
                         <td>{{ $row['method_bucket'] ?? '-' }}</td>
-                        <td>{{ ($row['query_present'] ?? false) ? 'true' : 'false' }}</td>
+                        <td>{{ ($row['query_present'] ?? false) ? __($copy.'.boolean.true') : __($copy.'.boolean.false') }}</td>
                         <td>{{ $row['query_risk_state'] ?? '-' }}</td>
-                        <td>{{ ($row['private_path_blocked'] ?? false) ? 'true' : 'false' }}</td>
+                        <td>{{ ($row['private_path_blocked'] ?? false) ? __($copy.'.boolean.true') : __($copy.'.boolean.false') }}</td>
                         <td>{{ $row['hit_count'] ?? '0' }}</td>
                         <td>{{ $row['last_seen_at'] ?? '-' }}</td>
                     </tr>
@@ -291,15 +292,15 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Access boundary"
-            description="Metabase remains private. This route is an authenticated Ops read surface, not a public dashboard endpoint."
+            :title="__($copy.'.access_boundary_title')"
+            :description="__($copy.'.access_boundary_desc')"
         >
             <x-filament-ops::ops-field-grid :fields="$this->boundaryCards()" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Private access runbook"
-            description="Use approved private access only. Do not create public links, anonymous links, public embeds, reverse proxies, or iframe exposure."
+            :title="__($copy.'.private_access_runbook_title')"
+            :description="__($copy.'.private_access_runbook_desc')"
         >
             <div class="ops-card-list">
                 @foreach ($this->accessSteps() as $step)
@@ -312,21 +313,21 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Hard stops"
-            description="Stop if any forbidden source, write path, live search operation, or public exposure appears."
+            :title="__($copy.'.hard_stops_title')"
+            :description="__($copy.'.hard_stops_desc')"
         >
             <div class="ops-card-list">
                 <x-filament-ops::ops-result-card
-                    title="Forbidden exposure"
-                    meta="No public Metabase, no iframe, no reverse proxy, no public URL, no 0.0.0.0 binding, no public port, no security group change, and no DNS/CDN/OpenResty/Nginx change."
+                    :title="__($copy.'.hard_stops.forbidden_exposure.title')"
+                    :meta="__($copy.'.hard_stops.forbidden_exposure.meta')"
                 />
                 <x-filament-ops::ops-result-card
-                    title="Forbidden sources"
-                    meta="No business DB, Tencent RDS, Node2 local DB, CMS write tables, raw orders, raw payments, raw events, raw email, raw reports, raw crawler logs, raw payloads, or raw JSON blobs."
+                    :title="__($copy.'.hard_stops.forbidden_sources.title')"
+                    :meta="__($copy.'.hard_stops.forbidden_sources.meta')"
                 />
                 <x-filament-ops::ops-result-card
-                    title="Forbidden operator access"
-                    meta="No unrestricted SQL, no datasource management, no default exports, no public sharing, no anonymous links, no public embeds, no approve/retry/submit buttons, and no scheduler or collector controls."
+                    :title="__($copy.'.hard_stops.forbidden_operator_access.title')"
+                    :meta="__($copy.'.hard_stops.forbidden_operator_access.meta')"
                 />
             </div>
         </x-filament-ops::ops-section>

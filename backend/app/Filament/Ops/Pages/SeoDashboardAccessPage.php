@@ -17,9 +17,9 @@ class SeoDashboardAccessPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar-square';
 
-    protected static ?string $navigationGroup = 'Content Overview';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'SEO Intelligence';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 6;
 
@@ -39,24 +39,24 @@ class SeoDashboardAccessPage extends Page
     {
         return [
             [
-                'label' => 'URL Truth rows',
+                'label' => __('ops.custom_pages.seo_intelligence.cards.url_truth_rows'),
                 'value' => '7',
-                'hint' => 'Verified `seo_urls` count from the SEO Dash MVP online closeout.',
+                'hint' => __('ops.custom_pages.seo_intelligence.cards.verified_url_truth_hint'),
             ],
             [
-                'label' => 'Entity mappings',
+                'label' => __('ops.custom_pages.seo_intelligence.cards.entity_mappings'),
                 'value' => '7',
-                'hint' => 'Verified `seo_url_entities` count from the SEO Dash MVP online closeout.',
+                'hint' => __('ops.custom_pages.seo_intelligence.cards.verified_entity_mappings_hint'),
             ],
             [
-                'label' => 'Issue queue rows',
+                'label' => __('ops.custom_pages.seo_intelligence.cards.issue_queue_rows'),
                 'value' => '5',
-                'hint' => 'Verified `seo_issue_queue` count from the SEO Dash MVP online closeout.',
+                'hint' => __('ops.custom_pages.seo_intelligence.cards.verified_issue_queue_hint'),
             ],
             [
-                'label' => 'Verified cards',
+                'label' => __('ops.custom_pages.seo_intelligence.cards.verified_cards'),
                 'value' => '10',
-                'hint' => 'Metabase dashboard card count verified before this route shell PR.',
+                'hint' => __('ops.custom_pages.seo_intelligence.cards.verified_cards_hint'),
             ],
         ];
     }
@@ -70,23 +70,26 @@ class SeoDashboardAccessPage extends Page
             ->map(function (array $card): array {
                 $key = (string) ($card['key'] ?? '');
                 $label = match ($key) {
-                    'url_truth_total' => 'URL Truth rows',
-                    'url_entity_mapping_total' => 'Entity mappings',
-                    'issue_queue_total' => 'Issue queue rows',
-                    default => (string) ($card['label'] ?? 'Metric'),
+                    'url_truth_total' => __('ops.custom_pages.seo_intelligence.cards.url_truth_rows'),
+                    'url_entity_mapping_total' => __('ops.custom_pages.seo_intelligence.cards.entity_mappings'),
+                    'issue_queue_total' => __('ops.custom_pages.seo_intelligence.cards.issue_queue_rows'),
+                    'search_channel_queue_item_total' => __('ops.custom_pages.seo_intelligence.cards.search_channel_queue_items'),
+                    'search_channel_queue_batch_total' => __('ops.custom_pages.seo_intelligence.cards.search_channel_queue_batches'),
+                    'search_channel_queue_event_total' => __('ops.custom_pages.seo_intelligence.cards.search_channel_events'),
+                    default => (string) ($card['label'] ?? __('ops.custom_pages.seo_intelligence.cards.metric')),
                 };
 
                 return [
                     'label' => $label,
                     'value' => (string) ((int) ($card['value'] ?? 0)),
                     'hint' => match ($key) {
-                        'url_truth_total' => 'Live count from seo_urls on the seo_intel connection.',
-                        'url_entity_mapping_total' => 'Live count from seo_url_entities on the seo_intel connection.',
-                        'issue_queue_total' => 'Live count from seo_issue_queue on the seo_intel connection.',
-                        'search_channel_queue_item_total' => 'Live count from seo_search_channel_queue_items.',
-                        'search_channel_queue_batch_total' => 'Live count from seo_search_channel_queue_batches.',
-                        'search_channel_queue_event_total' => 'Live count from seo_search_channel_queue_events.',
-                        default => 'Live read-only seo_intel metric.',
+                        'url_truth_total' => __('ops.custom_pages.seo_intelligence.cards.url_truth_rows_hint'),
+                        'url_entity_mapping_total' => __('ops.custom_pages.seo_intelligence.cards.entity_mappings_hint'),
+                        'issue_queue_total' => __('ops.custom_pages.seo_intelligence.cards.issue_queue_rows_hint'),
+                        'search_channel_queue_item_total' => __('ops.custom_pages.seo_intelligence.cards.search_channel_queue_items_hint'),
+                        'search_channel_queue_batch_total' => __('ops.custom_pages.seo_intelligence.cards.search_channel_queue_batches_hint'),
+                        'search_channel_queue_event_total' => __('ops.custom_pages.seo_intelligence.cards.search_channel_events_hint'),
+                        default => __('ops.custom_pages.seo_intelligence.cards.metric_hint'),
                     },
                 ];
             })
@@ -100,15 +103,24 @@ class SeoDashboardAccessPage extends Page
     public function safetyCards(): array
     {
         return collect(data_get($this->dashboardSnapshot(), 'overview.safety', []))
-            ->map(fn (array $card): array => [
-                'label' => (string) ($card['label'] ?? 'Safety counter'),
-                'value' => (string) ((int) ($card['value'] ?? 0)),
-                'hint' => ((bool) ($card['alert'] ?? false))
-                    ? 'Non-zero safety counter. Treat as an Ops warning before search distribution.'
-                    : 'Expected steady state is zero.',
-                'kind' => 'pill',
-                'state' => ((bool) ($card['alert'] ?? false)) ? 'danger' : 'success',
-            ])
+            ->map(function (array $card): array {
+                $key = (string) ($card['key'] ?? '');
+
+                return [
+                    'label' => match ($key) {
+                        'private_flow_count' => __('ops.custom_pages.seo_intelligence.cards.private_flow_leaks'),
+                        'forbidden_authority_count' => __('ops.custom_pages.seo_intelligence.cards.forbidden_authority'),
+                        'claim_unsafe_count' => __('ops.custom_pages.seo_intelligence.cards.claim_unsafe'),
+                        default => (string) ($card['label'] ?? __('ops.custom_pages.seo_intelligence.cards.safety_counter')),
+                    },
+                    'value' => (string) ((int) ($card['value'] ?? 0)),
+                    'hint' => ((bool) ($card['alert'] ?? false))
+                        ? __('ops.custom_pages.seo_intelligence.cards.non_zero_safety_hint')
+                        : __('ops.custom_pages.seo_intelligence.cards.expected_zero_hint'),
+                    'kind' => 'pill',
+                    'state' => ((bool) ($card['alert'] ?? false)) ? 'danger' : 'success',
+                ];
+            })
             ->values()
             ->all();
     }
@@ -122,19 +134,19 @@ class SeoDashboardAccessPage extends Page
 
         return [
             [
-                'title' => 'page_entity_type',
+                'title' => __('ops.custom_pages.seo_intelligence.table.page_entity_type'),
                 'rows' => $this->distributionRows($distributions['page_entity_type'] ?? []),
             ],
             [
-                'title' => 'locale',
+                'title' => __('ops.custom_pages.seo_intelligence.table.locale'),
                 'rows' => $this->distributionRows($distributions['locale'] ?? []),
             ],
             [
-                'title' => 'source_authority',
+                'title' => __('ops.custom_pages.seo_intelligence.table.source_authority'),
                 'rows' => $this->distributionRows($distributions['source_authority'] ?? []),
             ],
             [
-                'title' => 'indexability_state',
+                'title' => __('ops.custom_pages.seo_intelligence.table.indexability_state'),
                 'rows' => $this->distributionRows($distributions['indexability_state'] ?? []),
             ],
         ];
@@ -149,15 +161,15 @@ class SeoDashboardAccessPage extends Page
 
         return [
             [
-                'title' => 'issue_type',
+                'title' => __('ops.custom_pages.seo_intelligence.table.issue_type'),
                 'rows' => $this->distributionRows($aggregates['issue_type'] ?? []),
             ],
             [
-                'title' => 'severity',
+                'title' => __('ops.custom_pages.seo_intelligence.table.severity'),
                 'rows' => $this->distributionRows($aggregates['severity'] ?? []),
             ],
             [
-                'title' => 'status',
+                'title' => __('ops.custom_pages.seo_intelligence.table.status'),
                 'rows' => $this->distributionRows($aggregates['status'] ?? []),
             ],
         ];
@@ -172,15 +184,15 @@ class SeoDashboardAccessPage extends Page
 
         return [
             [
-                'title' => 'channel',
+                'title' => __('ops.custom_pages.seo_intelligence.table.channel'),
                 'rows' => $this->distributionRows($aggregates['channel'] ?? []),
             ],
             [
-                'title' => 'approval_state',
+                'title' => __('ops.custom_pages.seo_intelligence.table.approval_state'),
                 'rows' => $this->distributionRows($aggregates['approval_state'] ?? []),
             ],
             [
-                'title' => 'execution_state',
+                'title' => __('ops.custom_pages.seo_intelligence.table.execution_state'),
                 'rows' => $this->distributionRows($aggregates['execution_state'] ?? []),
             ],
         ];
@@ -195,27 +207,27 @@ class SeoDashboardAccessPage extends Page
 
         return [
             [
-                'title' => 'bot_family',
+                'title' => __('ops.custom_pages.seo_intelligence.table.bot_family'),
                 'rows' => $this->distributionRows($aggregates['bot_family'] ?? []),
             ],
             [
-                'title' => 'surface_family',
+                'title' => __('ops.custom_pages.seo_intelligence.table.surface_family'),
                 'rows' => $this->distributionRows($aggregates['surface_family'] ?? []),
             ],
             [
-                'title' => 'route_family',
+                'title' => __('ops.custom_pages.seo_intelligence.table.route_family'),
                 'rows' => $this->distributionRows($aggregates['route_family'] ?? []),
             ],
             [
-                'title' => 'http_status',
+                'title' => __('ops.custom_pages.seo_intelligence.table.http_status'),
                 'rows' => $this->distributionRows($aggregates['http_status'] ?? []),
             ],
             [
-                'title' => 'query_risk_state',
+                'title' => __('ops.custom_pages.seo_intelligence.table.query_risk_state'),
                 'rows' => $this->distributionRows($aggregates['query_risk_state'] ?? []),
             ],
             [
-                'title' => 'private_path_blocked',
+                'title' => __('ops.custom_pages.seo_intelligence.table.private_path_blocked'),
                 'rows' => $this->distributionRows($aggregates['private_path_blocked'] ?? []),
             ],
         ];
@@ -229,10 +241,10 @@ class SeoDashboardAccessPage extends Page
         $counts = (array) data_get($this->dashboardSnapshot(), 'crawler.safety_counts', []);
 
         return collect([
-            ['key' => 'private_path_blocked_count', 'label' => 'Private paths blocked'],
-            ['key' => 'sensitive_query_count', 'label' => 'Sensitive query risk'],
-            ['key' => 'api_or_ops_surface_count', 'label' => 'API/Ops surface hits'],
-            ['key' => 'unknown_bot_count', 'label' => 'Unknown bot family'],
+            ['key' => 'private_path_blocked_count', 'label' => __('ops.custom_pages.seo_intelligence.cards.private_paths_blocked')],
+            ['key' => 'sensitive_query_count', 'label' => __('ops.custom_pages.seo_intelligence.cards.sensitive_query_risk')],
+            ['key' => 'api_or_ops_surface_count', 'label' => __('ops.custom_pages.seo_intelligence.cards.api_ops_surface_hits')],
+            ['key' => 'unknown_bot_count', 'label' => __('ops.custom_pages.seo_intelligence.cards.unknown_bot_family')],
         ])->map(function (array $card) use ($counts): array {
             $value = (int) ($counts[$card['key']] ?? 0);
 
@@ -240,8 +252,8 @@ class SeoDashboardAccessPage extends Page
                 'label' => (string) $card['label'],
                 'value' => (string) $value,
                 'hint' => $value > 0
-                    ? 'Non-zero crawler observation warning. Inspect aggregate context before expanding automation.'
-                    : 'Expected steady state is zero.',
+                    ? __('ops.custom_pages.seo_intelligence.cards.non_zero_crawler_hint')
+                    : __('ops.custom_pages.seo_intelligence.cards.expected_zero_hint'),
                 'kind' => 'pill',
                 'state' => $value > 0 ? 'warning' : 'success',
             ];
@@ -292,24 +304,24 @@ class SeoDashboardAccessPage extends Page
     {
         return [
             [
-                'label' => 'Metabase exposure',
-                'value' => 'Private only',
-                'hint' => 'Metabase remains localhost-bound on the approved private ECS host.',
+                'label' => __('ops.custom_pages.seo_intelligence.boundary.metabase_exposure'),
+                'value' => __('ops.custom_pages.seo_intelligence.boundary.private_only'),
+                'hint' => __('ops.custom_pages.seo_intelligence.boundary.metabase_exposure_hint'),
             ],
             [
-                'label' => 'Datasource',
+                'label' => __('ops.custom_pages.seo_intelligence.boundary.datasource'),
                 'value' => 'seo_intel',
-                'hint' => 'The only approved Metabase datasource uses the readonly account.',
+                'hint' => __('ops.custom_pages.seo_intelligence.boundary.datasource_hint'),
             ],
             [
-                'label' => 'Sharing',
-                'value' => 'Disabled',
-                'hint' => 'Public sharing, anonymous links, and public embedding remain blocked.',
+                'label' => __('ops.custom_pages.seo_intelligence.boundary.sharing'),
+                'value' => __('ops.custom_pages.seo_intelligence.boundary.disabled'),
+                'hint' => __('ops.custom_pages.seo_intelligence.boundary.sharing_hint'),
             ],
             [
-                'label' => 'Operator SQL',
-                'value' => 'Blocked',
-                'hint' => 'Normal operators must not receive unrestricted native SQL access.',
+                'label' => __('ops.custom_pages.seo_intelligence.boundary.operator_sql'),
+                'value' => __('ops.custom_pages.seo_intelligence.boundary.blocked'),
+                'hint' => __('ops.custom_pages.seo_intelligence.boundary.operator_sql_hint'),
             ],
         ];
     }
@@ -321,27 +333,37 @@ class SeoDashboardAccessPage extends Page
     {
         return [
             [
-                'title' => 'Confirm owner approval',
-                'body' => 'Use this page as the Ops entry point and confirm the Metabase admin, dashboard, DB access, export policy, and emergency revoke owners before private access.',
+                'title' => __('ops.custom_pages.seo_intelligence.access_steps.confirm_owner.title'),
+                'body' => __('ops.custom_pages.seo_intelligence.access_steps.confirm_owner.body'),
             ],
             [
-                'title' => 'Use a private channel',
-                'body' => 'Access Metabase only through Workbench, bastion, VPN, or another approved owner-controlled private channel.',
+                'title' => __('ops.custom_pages.seo_intelligence.access_steps.private_channel.title'),
+                'body' => __('ops.custom_pages.seo_intelligence.access_steps.private_channel.body'),
             ],
             [
-                'title' => 'Keep Metabase private',
-                'body' => 'Do not iframe, reverse-proxy, publish, expose, or bind Metabase to a public interface from this page.',
+                'title' => __('ops.custom_pages.seo_intelligence.access_steps.keep_private.title'),
+                'body' => __('ops.custom_pages.seo_intelligence.access_steps.keep_private.body'),
             ],
             [
-                'title' => 'Verify datasource boundary',
-                'body' => 'The only approved datasource is `seo_intel` through `seo_intel_metabase_readonly`; business DB, Tencent RDS, Node2, and raw operational sources remain forbidden.',
+                'title' => __('ops.custom_pages.seo_intelligence.access_steps.datasource_boundary.title'),
+                'body' => __('ops.custom_pages.seo_intelligence.access_steps.datasource_boundary.body'),
             ],
         ];
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.content_overview');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.seo_intelligence');
+    }
+
     public function getTitle(): string
     {
-        return 'SEO Intelligence Access';
+        return __('ops.custom_pages.seo_intelligence.title');
     }
 
     public static function canAccess(): bool

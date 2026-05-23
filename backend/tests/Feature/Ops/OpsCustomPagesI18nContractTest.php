@@ -202,6 +202,14 @@ final class OpsCustomPagesI18nContractTest extends TestCase
             ['SEO运营', '问题焦点', '关注队列', '当前筛选下没有匹配的 SEO 问题。'],
         ];
 
+        yield 'seo intelligence' => [
+            '/ops/seo',
+            'SEO智能访问',
+            'SEO Intelligence Access',
+            ['SEO Dash access', 'Native read-only SEO Engine observability dashboard', 'Overview heartbeat', 'Read model unavailable', 'Access boundary', 'Hard stops'],
+            ['SEO智能访问', 'SEO看板访问', '总览心跳', '只读模型不可用', '访问边界', '硬性停止项'],
+        ];
+
         yield 'article publishing ops' => [
             '/ops/article-publishing-ops',
             '文章发布运营',

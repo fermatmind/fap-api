@@ -55,7 +55,7 @@ final class SeoIntelOpsSeoNativeDashboardUiTest extends TestCase
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ])
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
-            ->get('/ops/seo')
+            ->get('/ops/seo?locale=en')
             ->assertOk()
             ->assertSee('Native read-only SEO Engine observability dashboard')
             ->assertSee('Overview heartbeat')
@@ -191,7 +191,8 @@ final class SeoIntelOpsSeoNativeDashboardUiTest extends TestCase
         $doc = strtolower((string) file_get_contents(base_path('docs/seo/ops-seo-native-dashboard-ui.md')));
         $artifactJson = strtolower((string) file_get_contents(base_path('docs/seo/generated/ops-seo-native-dashboard-ui.v1.json')));
         $view = strtolower((string) file_get_contents(resource_path('views/filament/ops/pages/seo-dashboard-access.blade.php')));
-        $combined = $doc."\n".$artifactJson."\n".$view;
+        $lang = strtolower((string) file_get_contents(lang_path('en/ops.php')));
+        $combined = $doc."\n".$artifactJson."\n".$view."\n".$lang;
 
         foreach ([
             'ops-seo-native-dash-02',
