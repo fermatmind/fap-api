@@ -12,6 +12,25 @@ final class BigFiveNormObservationCaptureWriter
 {
     public const SCHEMA_VERSION = 'big5_norm_observation.v0.1';
 
+    private const SCALE_CODE = 'BIG5_OCEAN';
+
+    private const DOMAIN_SCORE_KEYS = ['O', 'C', 'E', 'A', 'N'];
+
+    private const FACET_SCORE_KEYS = [
+        'N1', 'E1', 'O1', 'A1', 'C1',
+        'N2', 'E2', 'O2', 'A2', 'C2',
+        'N3', 'E3', 'O3', 'A3', 'C3',
+        'N4', 'E4', 'O4', 'A4', 'C4',
+        'N5', 'E5', 'O5', 'A5', 'C5',
+        'N6', 'E6', 'O6', 'A6', 'C6',
+    ];
+
+    private const SUPPORTED_FORM_CODES = ['big5_120', 'big5_90'];
+
+    private const EXCLUDED_ATTEMPT_SOURCES = ['fixture', 'staging', 'internal'];
+
+    private const EXCLUDED_QUALITY_FLAGS = ['ATTENTION_CHECK_FAILED', 'SPEEDING', 'STRAIGHTLINING'];
+
     /**
      * @param  array<string,mixed>  $scoreResult
      * @param  array<string,mixed>  $context
@@ -64,11 +83,21 @@ final class BigFiveNormObservationCaptureWriter
             }
         }
 
+        if (strtoupper(trim((string) ($context['scale_code'] ?? self::SCALE_CODE))) !== self::SCALE_CODE) {
+            return BigFiveNormCaptureDecision::reject('unsupported_scale_code');
+        }
+
+        $formCode = strtolower(trim((string) ($context['form_code'] ?? '')));
+        if (! in_array($formCode, self::SUPPORTED_FORM_CODES, true)) {
+            return BigFiveNormCaptureDecision::reject('unsupported_form_code');
+        }
+
         if (($context['norm_eligibility_status'] ?? null) !== 'eligible' || ($context['norm_excluded'] ?? true) !== false) {
             return BigFiveNormCaptureDecision::reject('invalid_eligibility');
         }
 
-        if (in_array((string) ($context['attempt_source'] ?? 'real'), ['fixture', 'staging', 'internal'], true)) {
+        $attemptSource = strtolower(trim((string) ($context['attempt_source'] ?? 'real')));
+        if (in_array($attemptSource, self::EXCLUDED_ATTEMPT_SOURCES, true)) {
             return BigFiveNormCaptureDecision::reject('source_excluded');
         }
 
@@ -77,17 +106,22 @@ final class BigFiveNormObservationCaptureWriter
             return BigFiveNormCaptureDecision::reject('quality_level_excluded');
         }
 
-        $qualityFlags = $this->stringList((array) ($context['quality_flags'] ?? []));
-        if (array_intersect($qualityFlags, ['ATTENTION_CHECK_FAILED', 'SPEEDING', 'STRAIGHTLINING']) !== []) {
+        $qualityFlags = array_map(
+            static fn (string $flag): string => strtoupper($flag),
+            $this->stringList((array) ($context['quality_flags'] ?? []))
+        );
+        if (array_intersect($qualityFlags, self::EXCLUDED_QUALITY_FLAGS) !== []) {
             return BigFiveNormCaptureDecision::reject('quality_flags_excluded');
         }
 
-        if (! $this->hasScoreVector($scoreResult, 'raw_domain_scores')) {
-            return BigFiveNormCaptureDecision::reject('missing_raw_domain_scores');
+        $domainScoreError = $this->scoreVectorError($scoreResult, 'raw_domain_scores', self::DOMAIN_SCORE_KEYS);
+        if ($domainScoreError !== null) {
+            return BigFiveNormCaptureDecision::reject($domainScoreError);
         }
 
-        if (! $this->hasScoreVector($scoreResult, 'raw_facet_scores')) {
-            return BigFiveNormCaptureDecision::reject('missing_raw_facet_scores');
+        $facetScoreError = $this->scoreVectorError($scoreResult, 'raw_facet_scores', self::FACET_SCORE_KEYS);
+        if ($facetScoreError !== null) {
+            return BigFiveNormCaptureDecision::reject($facetScoreError);
         }
 
         return BigFiveNormCaptureDecision::allow();
@@ -110,8 +144,8 @@ final class BigFiveNormObservationCaptureWriter
             'observation_idempotency_key' => (string) $context['observation_idempotency_key'],
             'observation_source' => (string) ($context['observation_source'] ?? 'norm_capture_writer'),
             'environment' => $this->optionalString($context, 'environment'),
-            'scale_code' => (string) ($context['scale_code'] ?? 'BIG5_OCEAN'),
-            'form_code' => $this->optionalString($context, 'form_code'),
+            'scale_code' => self::SCALE_CODE,
+            'form_code' => strtolower((string) $context['form_code']),
             'content_version' => (string) $context['content_version'],
             'score_version' => (string) $context['score_version'],
             'norm_version_at_scoring' => $this->optionalString($context, 'norm_version_at_scoring'),
@@ -136,11 +170,38 @@ final class BigFiveNormObservationCaptureWriter
     /**
      * @param  array<string,mixed>  $scoreResult
      */
-    private function hasScoreVector(array $scoreResult, string $key): bool
+    /**
+     * @param  array<string,mixed>  $scoreResult
+     * @param  list<string>  $expectedKeys
+     */
+    private function scoreVectorError(array $scoreResult, string $key, array $expectedKeys): ?string
     {
         $value = $scoreResult[$key] ?? null;
+        if (! is_array($value) || $value === []) {
+            return 'missing_'.$key;
+        }
 
-        return is_array($value) && $value !== [];
+        $actualKeys = array_map('strval', array_keys($value));
+        sort($actualKeys);
+        $sortedExpectedKeys = $expectedKeys;
+        sort($sortedExpectedKeys);
+
+        if ($actualKeys !== $sortedExpectedKeys) {
+            return 'incomplete_'.$key;
+        }
+
+        foreach ($expectedKeys as $expectedKey) {
+            $score = $value[$expectedKey] ?? null;
+            if (! is_int($score) && ! is_float($score) && ! (is_string($score) && is_numeric($score))) {
+                return 'invalid_'.$key;
+            }
+
+            if (! is_finite((float) $score)) {
+                return 'invalid_'.$key;
+            }
+        }
+
+        return null;
     }
 
     /**

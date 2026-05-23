@@ -10,6 +10,17 @@ final class BigFiveV2ProjectionRouteInputAdapter
 {
     private const DOMAIN_ORDER = ['O', 'C', 'E', 'A', 'N'];
 
+    private const PROJECTION_SCHEMA_VERSION = 'big5.public_projection.v1';
+
+    private const FACET_ORDER = [
+        'N1', 'E1', 'O1', 'A1', 'C1',
+        'N2', 'E2', 'O2', 'A2', 'C2',
+        'N3', 'E3', 'O3', 'A3', 'C3',
+        'N4', 'E4', 'O4', 'A4', 'C4',
+        'N5', 'E5', 'O5', 'A5', 'C5',
+        'N6', 'E6', 'O6', 'A6', 'C6',
+    ];
+
     /**
      * @var list<string>
      */
@@ -32,9 +43,14 @@ final class BigFiveV2ProjectionRouteInputAdapter
             return null;
         }
 
+        $facetSignals = $this->facetSignalsFromPercentileMap((array) data_get($scoreResult, 'scores_0_100.facets_percentile', []));
+        if ($this->errors !== []) {
+            return null;
+        }
+
         return $this->buildRouteInput(
             $domainPercentiles,
-            $this->facetSignalsFromPercentileMap((array) data_get($scoreResult, 'scores_0_100.facets_percentile', [])),
+            $facetSignals,
             (array) ($scoreResult['quality'] ?? []),
             (array) ($scoreResult['norms'] ?? []),
         );
@@ -49,6 +65,13 @@ final class BigFiveV2ProjectionRouteInputAdapter
         $meta = (array) ($projection['_meta'] ?? []);
         if (($meta['redacted'] ?? false) === true || ($meta['locked'] ?? false) === true) {
             $this->errors[] = 'projection is locked or redacted';
+
+            return null;
+        }
+
+        $schemaVersion = (string) ($projection['schema_version'] ?? $meta['schema_version'] ?? '');
+        if ($schemaVersion !== self::PROJECTION_SCHEMA_VERSION) {
+            $this->errors[] = 'projection.schema_version unsupported';
 
             return null;
         }
@@ -77,9 +100,14 @@ final class BigFiveV2ProjectionRouteInputAdapter
             $domainPercentiles[$key] = $trait['percentile'];
         }
 
+        $facetSignals = $this->facetSignalsFromProjection((array) ($projection['facet_vector'] ?? []));
+        if ($facetSignals === null) {
+            return null;
+        }
+
         return $this->buildRouteInput(
             $domainPercentiles,
-            $this->facetSignalsFromProjection((array) ($projection['facet_vector'] ?? [])),
+            $facetSignals,
             (array) ($projection['quality'] ?? []),
             (array) ($projection['norms'] ?? []),
         );
@@ -175,9 +203,19 @@ final class BigFiveV2ProjectionRouteInputAdapter
             if ($facetKey === '') {
                 continue;
             }
+            if (! in_array($facetKey, self::FACET_ORDER, true)) {
+                $this->errors[] = "score_result.scores_0_100.facets_percentile.{$facetKey} unsupported";
+
+                return [];
+            }
+            if (! $this->validPercentile($percentile)) {
+                $this->errors[] = "score_result.scores_0_100.facets_percentile.{$facetKey} invalid";
+
+                return [];
+            }
             $signals[] = [
                 'key' => $facetKey,
-                'percentile' => is_numeric($percentile) ? (int) $percentile : null,
+                'percentile' => (int) $percentile,
             ];
         }
 
@@ -185,9 +223,9 @@ final class BigFiveV2ProjectionRouteInputAdapter
     }
 
     /**
-     * @return list<array<string,mixed>>
+     * @return list<array<string,mixed>>|null
      */
-    private function facetSignalsFromProjection(array $facetVector): array
+    private function facetSignalsFromProjection(array $facetVector): ?array
     {
         $signals = [];
         foreach ($facetVector as $facet) {
@@ -198,13 +236,34 @@ final class BigFiveV2ProjectionRouteInputAdapter
             if ($key === '') {
                 continue;
             }
+            if (! in_array($key, self::FACET_ORDER, true)) {
+                $this->errors[] = "projection.facet_vector.{$key} unsupported";
+
+                return null;
+            }
+            if (! array_key_exists('percentile', $facet) || ! $this->validPercentile($facet['percentile'])) {
+                $this->errors[] = "projection.facet_vector.{$key}.percentile invalid";
+
+                return null;
+            }
             $signals[] = [
                 'key' => $key,
-                'percentile' => array_key_exists('percentile', $facet) && is_numeric($facet['percentile']) ? (int) $facet['percentile'] : null,
+                'percentile' => (int) $facet['percentile'],
                 'bucket' => isset($facet['bucket']) ? (string) $facet['bucket'] : null,
             ];
         }
 
         return $signals;
+    }
+
+    private function validPercentile(mixed $percentile): bool
+    {
+        if (! is_int($percentile) && ! (is_float($percentile) && floor($percentile) === $percentile) && ! (is_string($percentile) && preg_match('/^\d+$/', $percentile) === 1)) {
+            return false;
+        }
+
+        $value = (int) $percentile;
+
+        return $value >= 0 && $value <= 100;
     }
 }

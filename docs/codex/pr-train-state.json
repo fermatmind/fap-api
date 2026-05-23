@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T03:15:15+08:00",
+  "updated_at": "2026-05-24T05:11:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -16175,7 +16175,7 @@
     "RIASEC-CONTRACT-QUALITY-01": {
       "repo": "fap-api",
       "branch": "codex/riasec-contract-quality-01",
-      "status": "local_validation_passed",
+      "status": "merged",
       "depends_on": [
         "SEO-INDEXABILITY-TRUTH-01"
       ],
@@ -16185,8 +16185,8 @@
         21,
         26
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "ceef6619d3b28276f76f8e0ce5194c03a2762df2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1632",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -16209,13 +16209,17 @@
         "diff_check": {
           "status": "pass",
           "command": "git diff --check"
+        },
+        "github": {
+          "status": "pass",
+          "evidence": "GitHub PR #1632 is MERGED and origin/main contains merge commit ceef6619d3b28276f76f8e0ce5194c03a2762df2."
         }
       },
       "sidecar_issues": [],
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T20:44:54Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "events": [
         {
           "at": "2026-05-24T04:24:00+08:00",
@@ -16231,13 +16235,18 @@
           "at": "2026-05-24T04:38:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1632 for RIASEC contract quality hardening after scoped local validation passed."
+        },
+        {
+          "at": "2026-05-24T05:08:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled ledger after PR #1632 was squash-merged; origin/main contains ceef6619d3b28276f76f8e0ce5194c03a2762df2 and remote branch is absent."
         }
       ]
     },
     "BIGFIVE-RUNTIME-GUARDS-01": {
       "repo": "fap-api",
       "branch": "codex/bigfive-runtime-guards-01",
-      "status": "pending",
+      "status": "local_validation_passed",
       "depends_on": [
         "RIASEC-CONTRACT-QUALITY-01"
       ],
@@ -16246,14 +16255,54 @@
         35,
         36
       ],
-      "commit_sha": null,
+      "commit_sha": "e5c21649",
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "RIASEC-CONTRACT-QUALITY-01 is merged into main as ceef6619d3b28276f76f8e0ce5194c03a2762df2."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to Big Five services, Big Five tests, and PR train state metadata; generated content pack test artifacts were removed from the worktree."
+        },
+        "focused_bigfive_runtime": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/NormCaptureTest.php tests/Unit/Services/BigFive/ResultPageV2/RoutingTest.php tests/Unit/Services/BigFive/BigFivePublicProjectionServiceTest.php --no-ansi",
+          "evidence": "20 tests passed, 138 assertions."
+        },
+        "bigfive": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter BigFive --no-ansi",
+          "evidence": "755 tests passed, 60849 assertions."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/BigFive database/migrations/2026_05_06_132700_create_big_five_norm_observations_table.php tests",
+          "evidence": "1349 files passed Pint."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
       "sidecar_issues": [],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-05-24T04:46:00+08:00",
+          "status": "in_progress",
+          "summary": "Started from latest main after RIASEC-CONTRACT-QUALITY-01 merged and created branch codex/bigfive-runtime-guards-01."
+        },
+        {
+          "at": "2026-05-24T05:08:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Hardened Big Five norm capture against unsupported scale/form, case-insensitive excluded sources/quality flags, incomplete score vectors, and invalid score values; hardened projection routing against unsupported schema and invalid facet route signals. Focused tests, full BigFive filter, Pint, and diff check passed."
+        }
+      ]
     },
     "CAREER-POLICY-CLAIM-GUARDS-01": {
       "repo": "fap-api",
