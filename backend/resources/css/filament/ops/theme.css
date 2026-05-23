@@ -383,7 +383,8 @@
     }
 
     .fi-body.fi-panel-ops .fi-ta-header-toolbar {
-        align-items: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
         gap: 1rem 1.25rem;
         padding: 1rem 1.5rem 1.1rem;
         border-top: 1px solid rgba(229, 231, 235, 0.88);
@@ -400,10 +401,25 @@
         gap: 1rem 1.1rem;
     }
 
+    .fi-body.fi-panel-ops .fi-ta-header-toolbar > .ms-auto {
+        align-items: center;
+        flex: 1 1 24rem;
+        justify-content: flex-end;
+        row-gap: 0.95rem;
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-header-toolbar > .ms-auto > :not(.fi-ta-search-field) {
+        margin-inline-start: 0.15rem;
+    }
+
     .fi-body.fi-panel-ops .fi-ta-search-field {
         flex: 1 1 19rem;
         min-width: min(100%, 19rem);
         max-width: 24rem;
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-header-toolbar > .ms-auto > .fi-ta-search-field {
+        margin-inline-end: 0.35rem;
     }
 
     .fi-body.fi-panel-ops .fi-ta-search-field .fi-input-wrp {
