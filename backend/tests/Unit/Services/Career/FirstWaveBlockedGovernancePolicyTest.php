@@ -46,4 +46,18 @@ final class FirstWaveBlockedGovernancePolicyTest extends TestCase
         $this->assertNull($ready['blocked_governance_status']);
         $this->assertNull($ready['blocker_type']);
     }
+
+    public function test_it_fails_closed_for_blocked_rows_missing_registry_governance(): void
+    {
+        $policy = app(FirstWaveBlockedGovernancePolicy::class);
+
+        $unknown = $policy->classify('unregistered-blocked-slug', 'blocked');
+
+        $this->assertSame('blocked_unregistered', $unknown['blocked_governance_status']);
+        $this->assertSame('blocked_registry_entry_missing', $unknown['blocker_type']);
+        $this->assertSame('manual_governance_required', $unknown['remediation_class']);
+        $this->assertTrue($unknown['review_required']);
+        $this->assertFalse($unknown['override_eligible']);
+        $this->assertContains('blocked_registry_entry_missing', $unknown['notes']);
+    }
 }

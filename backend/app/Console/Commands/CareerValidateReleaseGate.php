@@ -156,6 +156,10 @@ final class CareerValidateReleaseGate extends Command
             $reasons[] = 'software_developers_public_leakage';
         }
 
+        if ($this->isHardBlockedStatus($currentStatus) && $this->isPublicResolutionType($type)) {
+            $reasons[] = 'blocked_state_public_resolution_leakage';
+        }
+
         if (in_array($currentStatus, ['duplicate_identity_hold', 'CN_proxy_hold', 'broad_group_hold', 'manual_hold'], true)
             && $type === CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB) {
             $reasons[] = 'held_row_public_canonical_job_leakage';
@@ -180,6 +184,27 @@ final class CareerValidateReleaseGate extends Command
             'Release_Gate_Result' => $reasons === [] ? 'pass' : 'blocked',
             'Failure_Reason' => array_values(array_unique($reasons)),
         ];
+    }
+
+    private function isHardBlockedStatus(string $status): bool
+    {
+        return in_array($status, [
+            'manual_hold',
+            'blocked_until_governance_approval',
+            'blocked_not_safely_remediable',
+            'not_safely_remediable',
+        ], true);
+    }
+
+    private function isPublicResolutionType(string $type): bool
+    {
+        return in_array($type, [
+            CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+            CareerPublicResolutionTypeMatrix::PUBLIC_ALIAS_REDIRECT,
+            CareerPublicResolutionTypeMatrix::PUBLIC_FAMILY_HUB,
+            CareerPublicResolutionTypeMatrix::PUBLIC_CN_PROXY_PAGE,
+            CareerPublicResolutionTypeMatrix::PUBLIC_NONINDEX_REFERENCE,
+        ], true);
     }
 
     /**

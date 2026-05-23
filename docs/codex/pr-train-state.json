@@ -16406,7 +16406,7 @@
     "CAREER-READINESS-AUDITORS-01": {
       "repo": "fap-api",
       "branch": "codex/career-readiness-auditors-01",
-      "status": "pr_open_checks_pending",
+      "status": "merged",
       "depends_on": [
         "CAREER-POLICY-CLAIM-GUARDS-01"
       ],
@@ -16422,7 +16422,7 @@
         27,
         30
       ],
-      "commit_sha": "6093126accce779846b30e2e2a771960c4bc28af",
+      "commit_sha": "b5be34496bab28d5de39dd4ac91903dc10cc69f4",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1635",
       "checks": {
         "dependency": {
@@ -16461,16 +16461,20 @@
           "evidence": "No staged whitespace errors."
         },
         "github": {
-          "status": "pending",
-          "evidence": "PR #1635 opened; GitHub checks pending."
+          "status": "pass",
+          "evidence": "PR #1635 checks passed: hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, verify-mbti-v2."
+        },
+        "post_merge_cleanup": {
+          "status": "partial",
+          "evidence": "GitHub merge fast-forwarded local main and local branch no longer exists; scripts/post_merge_cleanup.sh is not present in fap-api, so cleanup script could not be executed."
         }
       },
       "sidecar_issues": [
         "CAREER-RUNTIME-PROJECTION-TEST-SUITE-BASELINE-01"
       ],
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-23T22:42:13Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "events": [
         {
@@ -16497,13 +16501,18 @@
           "at": "2026-05-24T06:35:20+08:00",
           "status": "pr_open_checks_pending",
           "summary": "Opened PR #1635 and started GitHub check polling."
+        },
+        {
+          "at": "2026-05-24T06:44:05+08:00",
+          "status": "merged",
+          "summary": "PR #1635 squash-merged into main as b5be34496bab28d5de39dd4ac91903dc10cc69f4; remote branch deleted."
         }
       ]
     },
     "CAREER-RELEASE-GATES-01": {
       "repo": "fap-api",
       "branch": "codex/career-release-gates-01",
-      "status": "pending",
+      "status": "local_validation_passed_with_external_sidecar",
       "depends_on": [
         "CAREER-READINESS-AUDITORS-01"
       ],
@@ -16517,12 +16526,67 @@
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
-      "sidecar_issues": [],
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CAREER-READINESS-AUDITORS-01 is merged into main as b5be34496bab28d5de39dd4ac91903dc10cc69f4."
+        },
+        "focused_tests": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/Career/FirstWaveBlockedGovernancePolicyTest.php tests/Unit/Domain/Career/Audit/CareerFullVisiblePublicationGateTest.php tests/Feature/Console/CareerValidateReleaseGateCommandTest.php tests/Feature/Console/CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest.php --no-ansi",
+          "evidence": "21 passed, 140 assertions."
+        },
+        "career_filter": {
+          "status": "external_failure_sidecar",
+          "command": "cd backend && php artisan test --filter Career --no-ansi",
+          "evidence": "47 failed, 1300 passed, 52274 assertions; matches known CAREER-RUNTIME-PROJECTION-TEST-SUITE-BASELINE-01 and is not introduced by this scoped release gate PR.",
+          "sidecar_issue": "CAREER-RUNTIME-PROJECTION-TEST-SUITE-BASELINE-01"
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Domain/Career app/Console/Commands tests",
+          "evidence": "PASS, 1685 files."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check",
+          "evidence": "No whitespace errors."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "command": "(git diff --name-only; git ls-files --others --exclude-standard) | sort",
+          "evidence": "Changed files are limited to Career release gate/public matrix code, matching tests, and PR-train state metadata."
+        },
+        "cached_diff_check": {
+          "status": "pass",
+          "command": "git diff --cached --check",
+          "evidence": "No staged whitespace errors."
+        }
+      },
+      "sidecar_issues": [
+        "CAREER-RUNTIME-PROJECTION-TEST-SUITE-BASELINE-01"
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-05-24T06:44:05+08:00",
+          "status": "in_progress",
+          "summary": "Started scoped release gate and blocked-state fixes from latest main."
+        },
+        {
+          "at": "2026-05-24T07:03:48+08:00",
+          "status": "local_validation_passed_with_external_sidecar",
+          "summary": "Focused release gate tests and Pint passed; full Career filter remains on known 47-failure external baseline sidecar."
+        },
+        {
+          "at": "2026-05-24T07:04:13+08:00",
+          "status": "local_checks_recorded",
+          "summary": "Recorded focused tests, external Career baseline sidecar, Pint, scope, and diff checks."
+        }
+      ]
     },
     "CAREER-ROLLOUT-MATERIALIZATION-01": {
       "repo": "fap-api",

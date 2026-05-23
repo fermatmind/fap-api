@@ -138,6 +138,7 @@ final class CareerValidateReleaseGateCommandTest extends TestCase
 
         $this->assertContains('held_row_public_canonical_job_leakage', (array) ($duplicate['Failure_Reason'] ?? []));
         $this->assertContains('software_developers_public_leakage', (array) ($software['Failure_Reason'] ?? []));
+        $this->assertContains('blocked_state_public_resolution_leakage', (array) ($software['Failure_Reason'] ?? []));
     }
 
     #[Test]
@@ -215,6 +216,51 @@ final class CareerValidateReleaseGateCommandTest extends TestCase
         $this->assertContains('public_cn_proxy_page_not_noindex_default', (array) ($cn['Failure_Reason'] ?? []));
         $this->assertContains('public_nonindex_reference_without_noindex', (array) ($reference['Failure_Reason'] ?? []));
         $this->assertContains('public_nonindex_reference_llms_eligible', (array) ($reference['Failure_Reason'] ?? []));
+    }
+
+    #[Test]
+    public function it_rejects_hard_blocked_statuses_for_all_public_resolution_types(): void
+    {
+        $ledgerPath = $this->writePublicResolutionLedger([
+            [
+                'source_slug' => 'manual-alias',
+                'current_status' => 'manual_hold',
+                'public_resolution_type' => 'public_alias_redirect',
+                'target_canonical_slug' => 'accountants-and-auditors',
+                'indexability' => 'no_independent_index',
+                'public_eligible' => true,
+                'sitemap_eligible' => false,
+                'llms_eligible' => false,
+                'llms_full_eligible' => false,
+            ],
+            [
+                'source_slug' => 'blocked-family',
+                'current_status' => 'blocked_until_governance_approval',
+                'public_resolution_type' => 'public_family_hub',
+                'family_hub_slug' => 'blocked-family',
+                'child_canonical_slugs' => ['accountants-and-auditors'],
+                'schema_policy' => 'family_hub_schema.v1',
+                'trust_manifest_required' => true,
+                'indexability' => 'indexable',
+                'public_eligible' => true,
+                'sitemap_eligible' => false,
+                'llms_eligible' => false,
+                'llms_full_eligible' => false,
+            ],
+        ]);
+
+        $exitCode = Artisan::call('career:validate-release-gate', [
+            '--public-resolution-ledger' => $ledgerPath,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('no_go', $report['decision']);
+
+        foreach ($report['items'] as $item) {
+            $this->assertContains('blocked_state_public_resolution_leakage', (array) ($item['Failure_Reason'] ?? []));
+        }
     }
 
     private function html(string $locale, string $slug, string $extra = ''): string
