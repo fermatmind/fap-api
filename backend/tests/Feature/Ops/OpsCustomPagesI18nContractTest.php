@@ -206,7 +206,7 @@ final class OpsCustomPagesI18nContractTest extends TestCase
             '/ops/seo',
             'SEO智能访问',
             'SEO Intelligence Access',
-            ['SEO Dash access', 'Native read-only SEO Engine observability dashboard', 'Overview heartbeat', 'Read model unavailable', 'Access boundary', 'Hard stops'],
+            ['SEO Dash access', 'Native read-only SEO Engine observability dashboard', 'Overview heartbeat', 'Read model unavailable', 'Access boundary', 'Hard stops', 'URL Truth', 'Search Channel Queue', 'live API'],
             ['SEO智能访问', 'SEO看板访问', '总览心跳', '只读模型不可用', '访问边界', '硬性停止项'],
         ];
 
