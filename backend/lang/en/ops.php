@@ -216,7 +216,7 @@ return [
         'paid' => 'Paid',
         'unlocked' => 'Unlocked',
         'no_health_snapshot' => 'No health snapshot has been recorded yet.',
-        'no_funnel_events_7d' => 'No funnel events were recorded in the last seven days.',
+        'no_funnel_events_7d' => 'Human-only funnel contract: Landing > Test start > Submit > Paid unlock. No events were recorded in the last seven days.',
     ],
 
     'topbar' => [

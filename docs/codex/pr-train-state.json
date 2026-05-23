@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T11:41:00+08:00",
+  "updated_at": "2026-05-23T11:58:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -5151,7 +5151,7 @@
         "no fap-web change"
       ],
       "commit_sha": "45c51de1c2181987339f671e1d6a21abc05373aa",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1600",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -8400,7 +8400,7 @@
       },
       "failure_reason": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1451",
-      "commit_sha": null,
+      "commit_sha": "531ac4b512b07895ae297b665c8762a3e7c93999",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -12532,7 +12532,7 @@
       "next_pr": "SEO-DASH-MVP-ONLINE-FINAL-CLOSEOUT"
     },
     "SEO-DASH-MVP-ONLINE-FINAL-CLOSEOUT": {
-      "status": "in_progress",
+      "status": "merged",
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "branch": "codex/seo-dash-mvp-online-final-closeout",
@@ -17835,7 +17835,7 @@
       "depends_on": [
         "SEARCH-CHANNEL-QUEUE-01-PROD-MIGRATION-PREFLIGHT"
       ],
-      "commit_sha": "9ce8045a0f41c9cf143901cbbe6665853d667131",
+      "commit_sha": "c2ad0b044e8245ef7a7dc75f9cae5ab513a75d8b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1598",
       "checks": {
         "permission_gate": {
@@ -17856,9 +17856,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T03:49:06Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-21T18:20:00+08:00",
@@ -19869,19 +19869,35 @@
           "at": "2026-05-23T11:41:00+08:00",
           "status": "local_validation_passed_after_fix",
           "summary": "After rebasing onto latest main and applying the scoped fix, branch diff contains only ops translations, OpsShellPolishTest, and train metadata. BigFive runtime freeze test passes locally."
+        },
+        {
+          "at": "2026-05-23T11:49:20+08:00",
+          "status": "merged",
+          "summary": "PR #1598 GitHub checks passed, merged via squash at c2ad0b044e8245ef7a7dc75f9cae5ab513a75d8b, remote branch deleted, local main synced, and post-merge OpsShellPolishTest passed."
         }
       ]
     },
     "OPS-ADMIN-UI-03": {
       "repo": "fap-api",
       "branch": "codex/ops-admin-ui-03-dashboard-telemetry",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "OPS-ADMIN-UI-02"
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "local": {
+          "ops_theme_build": "passed: cd backend && npm run build:ops-theme",
+          "focused_ops_dashboard_ui": "passed: cd backend && php artisan test tests/Feature/Ops/OpsShellPolishTest.php tests/Feature/Ops/CommerceKpiExceptionSummaryTest.php tests/Feature/Ops/OpsDashboardOrgContextInheritanceTest.php --no-ansi (12 tests, 84 assertions)",
+          "bigfive_runtime_freeze": "passed: cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi (110 tests, 457 assertions)",
+          "route_list": "passed: cd backend && php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: cd backend && vendor/bin/pint --test tests/Feature/Ops/OpsShellPolishTest.php (1 file)"
+        },
+        "sidecar": {
+          "full_ops_suite": "external failures: cd backend && php artisan test tests/Feature/Ops --no-ansi failed 8 existing tests outside current theme/translation scope; focused dashboard UI tests passed."
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -19896,6 +19912,21 @@
           "at": "2026-05-23T11:08:00+08:00",
           "status": "registered",
           "summary": "Registered dashboard telemetry hierarchy PR. Scope is Ops dashboard widgets and severity theme styles only."
+        },
+        {
+          "at": "2026-05-23T11:55:00+08:00",
+          "status": "in_progress",
+          "summary": "Started OPS-ADMIN-UI-03 on codex/ops-admin-ui-03-dashboard-telemetry after OPS-ADMIN-UI-02 merged. Runtime freeze prevents widget PHP changes in this PR, so implementation uses Ops theme severity styles, funnel empty-state copy, focused UI tests, and train metadata only."
+        },
+        {
+          "at": "2026-05-23T11:56:20+08:00",
+          "status": "committed",
+          "summary": "Committed dashboard telemetry hierarchy theme/copy change at 531ac4b512b07895ae297b665c8762a3e7c93999 after focused local validation passed."
+        },
+        {
+          "at": "2026-05-23T11:58:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1600 for OPS-ADMIN-UI-03 and pushed branch codex/ops-admin-ui-03-dashboard-telemetry."
         }
       ]
     },
