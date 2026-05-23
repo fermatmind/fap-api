@@ -15145,12 +15145,12 @@
     "SEO-GROWTH-MBTI-ACTION-01B-R2": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-r2-enqueue",
-      "status": "in_progress",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-FIX-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "da965d08d62bb46a61bc24c6a61cf2cde5334fdb",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1596",
       "checks": {
         "production_preflight": {
           "release": "search-channel-single-url-20260523-d6a599a8",
@@ -15191,6 +15191,11 @@
           "at": "2026-05-23T10:50:00+08:00",
           "status": "local_checks_passed",
           "summary": "Local validation passed for SEO-GROWTH-MBTI-ACTION-01B-R2 blocked-operation report: focused test, Search Channel Queue suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. No production queue write was attempted because the write gate is closed."
+        },
+        {
+          "at": "2026-05-23T10:57:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1596 for SEO-GROWTH-MBTI-ACTION-01B-R2 with the blocked gate report. Production preflight passed for the exact EN MBTI test URL, but no queue write was attempted because SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED remained false."
         }
       ]
     }
