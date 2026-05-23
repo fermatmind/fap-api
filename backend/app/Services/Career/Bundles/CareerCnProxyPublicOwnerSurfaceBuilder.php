@@ -120,10 +120,26 @@ final class CareerCnProxyPublicOwnerSurfaceBuilder
             && (int) ($plan['occupations_delta'] ?? 0) === 0
             && (int) ($plan['occupation_crosswalks_delta'] ?? 0) === 0
             && (int) ($plan['career_job_display_assets_delta'] ?? 0) === 0
+            && $this->planAllowsPublicRouteExposure($plan)
             && ($plan['CN_proxy_can_masquerade_as_US_canonical_job'] ?? true) === false
             && ($plan['US_canonical_job_schema_returned'] ?? true) === false
             && ($plan['noindex_default'] ?? null) === true
             && ($plan['blockers'] ?? []) === [];
+    }
+
+    /**
+     * @param  array<string, mixed>  $plan
+     */
+    private function planAllowsPublicRouteExposure(array $plan): bool
+    {
+        $publicRows = (int) ($plan['public_cn_proxy_page_rows'] ?? 0);
+
+        return $publicRows > 0
+            && ($plan['route_owner_enabled'] ?? null) === true
+            && ($plan['public_route_allowed'] ?? null) === true
+            && (int) ($plan['public_pages_exposed'] ?? -1) === $publicRows
+            && ($plan['release_gate_approved'] ?? null) === true
+            && ($plan['release_gate_approval_required'] ?? null) === false;
     }
 
     /**

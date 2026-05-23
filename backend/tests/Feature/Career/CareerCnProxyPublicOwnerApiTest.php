@@ -59,6 +59,19 @@ final class CareerCnProxyPublicOwnerApiTest extends TestCase
             ->assertNotFound();
     }
 
+    public function test_it_fails_closed_until_public_route_release_gate_is_approved(): void
+    {
+        [$planPath, $manifestPath] = $this->writeReviewedPublicOwnerArtifacts(publicRouteAllowed: false);
+        config()->set('fap.career.cn_proxy_public_owner_plan_path', $planPath);
+        config()->set('fap.career.cn_proxy_trust_manifest_path', $manifestPath);
+
+        $this->getJson('/api/v0.5/career/cn-proxy/cn-1-01-00-01')
+            ->assertNotFound();
+
+        $this->getJson('/api/v0.5/career/jobs/cn-1-01-00-01?locale=zh-CN')
+            ->assertNotFound();
+    }
+
     public function test_it_rejects_manifest_that_attempts_indexable_cn_proxy_publication(): void
     {
         [$planPath, $manifestPath] = $this->writeReviewedPublicOwnerArtifacts(indexable: true);
@@ -72,8 +85,11 @@ final class CareerCnProxyPublicOwnerApiTest extends TestCase
     /**
      * @return array{0: string, 1?: string}
      */
-    private function writeReviewedPublicOwnerArtifacts(bool $writeManifest = true, bool $indexable = false): array
-    {
+    private function writeReviewedPublicOwnerArtifacts(
+        bool $writeManifest = true,
+        bool $indexable = false,
+        bool $publicRouteAllowed = true,
+    ): array {
         $dir = storage_path('framework/testing/cn-proxy-public-owner');
         File::ensureDirectoryExists($dir);
 
@@ -135,6 +151,11 @@ final class CareerCnProxyPublicOwnerApiTest extends TestCase
             'reviewed_trust_manifest_rows' => 1663,
             'reviewed_trust_manifest_complete' => true,
             'public_owner_plan_ready' => true,
+            'route_owner_enabled' => $publicRouteAllowed,
+            'public_pages_exposed' => $publicRouteAllowed ? 1663 : 0,
+            'public_route_allowed' => $publicRouteAllowed,
+            'release_gate_approved' => $publicRouteAllowed,
+            'release_gate_approval_required' => ! $publicRouteAllowed,
             'guarded_public_owner_state' => 'reviewed_noindex_public_cn_proxy_page_ready_for_separate_owner_train',
             'public_cn_proxy_page_rows' => 1663,
             'indexable_CN_proxy_rows' => 0,
