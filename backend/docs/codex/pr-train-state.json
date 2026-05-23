@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T23:20:00+08:00",
+  "updated_at": "2026-05-23T23:45:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1164,7 +1164,7 @@
     "PR-B17": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/pr-b17-career-transition-preview-attribution-daily-extension",
       "commit_sha": "0025ed318a6b077b1d059b58d6fcce718605b60e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/859",
@@ -5526,7 +5526,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
       "branch": "codex/pr-api-sec-06-cn-proxy-release-gate",
-      "commit_sha": "b01b92d533f99c593bd24973222c405e23aaa950",
+      "commit_sha": "285e14f9041aabb8c2a56930ac23bc8a9c16a427",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1621",
       "title": "fix(security): enforce CN proxy public-route release gate",
       "checks": {
@@ -5560,7 +5560,28 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "Code Scanning / semgrep sarif",
+            "status": "passed",
+            "details": "GitHub check completed successfully on PR #1621."
+          },
+          {
+            "name": "CI / hygiene",
+            "status": "passed",
+            "details": "GitHub push and pull_request hygiene checks completed successfully on PR #1621."
+          },
+          {
+            "name": "CI / verify-mbti-legacy",
+            "status": "passed",
+            "details": "GitHub push and pull_request verify-mbti-legacy checks completed successfully on PR #1621."
+          },
+          {
+            "name": "CI / verify-mbti-v2",
+            "status": "passed",
+            "details": "GitHub push and pull_request verify-mbti-v2 checks completed successfully on PR #1621."
+          }
+        ]
       },
       "failure_reason": "",
       "sidecar_issues": [
@@ -5579,9 +5600,9 @@
         }
       ],
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T22:52:19+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-23T00:00:00+08:00",
@@ -5602,19 +5623,58 @@
           "at": "2026-05-23T23:20:00+08:00",
           "status": "pr_open",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1621 from codex/pr-api-sec-06-cn-proxy-release-gate after push."
+        },
+        {
+          "at": "2026-05-23T23:30:00+08:00",
+          "status": "github_checks_passed",
+          "summary": "GitHub Code Scanning and CI checks passed on PR #1621 for commit 746196d2dcc64a0f953fe8eac0d092c2ef03a0cd."
+        },
+        {
+          "at": "2026-05-23T23:30:00+08:00",
+          "status": "merged",
+          "summary": "Squash merged PR #1621; merge commit 285e14f9041aabb8c2a56930ac23bc8a9c16a427. Remote branch was deleted and local post-merge cleanup executed."
+        },
+        {
+          "at": "2026-05-23T23:30:00+08:00",
+          "status": "post_merge_revalidated",
+          "summary": "Post-merge focused CN proxy and career job detail tests passed: 15 tests, 148 assertions."
         }
       ]
     },
     "PR-API-SEC-07": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "planned",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-07-research-url-truth-paths",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "9052b10aef8647f6ebf8264ecef4b223d4cce773",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1622",
       "title": "fix(security): validate research URL truth tenant paths",
       "checks": {
-        "local": [],
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/SeoIntel app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php tests/Feature/SeoIntel docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed",
+            "details": "174 files checked."
+          },
+          {
+            "command": "php artisan test tests/Feature/SeoIntel/SeoIntelResearchUrlTruthObservationTest.php tests/Feature/SeoIntel/SeoIntelTwoStageUrlTruthHandoffTest.php",
+            "status": "passed",
+            "details": "9 tests, 115 assertions."
+          },
+          {
+            "command": "php artisan route:list --no-ansi",
+            "status": "passed",
+            "details": "203 routes listed; no route shape changes."
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
         "github": []
       },
       "failure_reason": "",
@@ -5627,6 +5687,21 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "planned",
           "summary": "PR-API-SEC-07 planned after explicit user authorization for the first-wave security train."
+        },
+        {
+          "at": "2026-05-23T23:30:00+08:00",
+          "status": "in_progress",
+          "summary": "Started PR-API-SEC-07 from updated main after PR-API-SEC-06 merged; scope is limited to backend research URL truth tenant path validation and focused URL truth artifact tests."
+        },
+        {
+          "at": "2026-05-23T23:40:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Added URL truth handoff import validation for trusted tenant hosts, research path slug alignment, and canonical path hash consistency. PR7 Pint, focused tests, route list, JSON validation, and diff checks passed."
+        },
+        {
+          "at": "2026-05-23T23:45:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1622 from codex/pr-api-sec-07-research-url-truth-paths after push."
         }
       ]
     },
