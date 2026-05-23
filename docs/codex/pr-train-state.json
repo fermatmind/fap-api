@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T05:14:00+08:00",
+  "updated_at": "2026-05-24T05:57:54+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -21544,6 +21544,33 @@
           "at": "2026-05-24T03:15:15+08:00",
           "status": "ci_fix_pushed_pending_checks",
           "summary": "Fixed verify-mbti failure with narrow DB migration portability allowlist; local targeted tests and pint pass."
+        }
+      ]
+    },
+    "CAREER-POLICY-CLAIM-GUARDS-01": {
+      "status": "github_checks_failed_scoped_fix_local_passed",
+      "checks": {
+        "github_required_checks": {
+          "status": "failed_scoped_fix_local_passed_pending_rerun",
+          "evidence": "PR #1634 verify-mbti-legacy and verify-mbti-v2 failed because BigFive runtime freeze classifier treated Career scoring claim guard files as MBTI-impacting runtime changes.",
+          "failed_checks": [
+            "verify-mbti-legacy",
+            "verify-mbti-v2"
+          ],
+          "scoped_fix": "Added BigFive runtime freeze classifier coverage for Career policy claim guard files under backend/tests/**.",
+          "local_validation": [
+            "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter \"runtime_freeze_classifier_ignores_career_policy_claim_guard_changes|runtime_paths_have_no_uncommitted_diff\" --no-ansi",
+            "cd backend && php artisan test tests/Unit/Services/Career/ClaimPermissionsCompilerTest.php tests/Unit/Services/Career/WarningMatrixTest.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerRecommendationCompilerTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php --no-ansi",
+            "cd backend && vendor/bin/pint --test app/Console/Commands app/Services/Career app/Services/Cms/EditorialPackage app/Domain/Career tests",
+            "git diff --check"
+          ]
+        }
+      },
+      "events": [
+        {
+          "at": "2026-05-24T05:57:54+08:00",
+          "status": "github_checks_failed_scoped_fix_local_passed",
+          "summary": "GitHub verify-mbti checks failed on the BigFive runtime freeze classifier. Added a scoped tests-only classifier exemption for Career policy claim guard files; focused BigFive test, scoped Career tests, Pint, and diff check passed locally."
         }
       ]
     }
