@@ -1256,6 +1256,12 @@
         gap: 0.55rem;
     }
 
+    .ops-toolbar-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
     .ops-control-stack--compact {
         min-width: 8rem;
     }
@@ -1271,6 +1277,58 @@
         color: var(--ops-text-secondary);
         font-size: 0.8125rem;
         line-height: 1.55;
+    }
+
+    .ops-segmented-field {
+        min-width: 0;
+        border: 0;
+        padding: 0;
+    }
+
+    .ops-segmented-control {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        min-width: 0;
+    }
+
+    .ops-segmented-control__item {
+        min-height: 2.35rem;
+        border-radius: 10px;
+        background: var(--ops-bg-surface);
+        padding: 0.5rem 0.75rem;
+        color: var(--ops-text-secondary);
+        font-size: var(--ops-font-meta);
+        font-weight: 700;
+        line-height: 1.1;
+        white-space: nowrap;
+        box-shadow: inset 0 0 0 1px var(--ops-border-default);
+        transition:
+            background-color 120ms ease,
+            box-shadow 120ms ease,
+            color 120ms ease;
+    }
+
+    .ops-segmented-control__item:hover {
+        background: rgba(var(--primary-50), 0.72);
+        color: var(--ops-text-primary);
+        box-shadow: inset 0 0 0 1px rgba(var(--primary-300), 0.72);
+    }
+
+    .ops-segmented-control__item:focus-visible {
+        outline: none;
+        box-shadow:
+            inset 0 0 0 1px rgb(var(--primary-500)),
+            0 0 0 4px rgba(var(--primary-100), 0.9);
+    }
+
+    .ops-segmented-control__item--active {
+        background: rgba(var(--primary-50), 0.96);
+        color: rgb(var(--primary-700));
+        box-shadow:
+            inset 0 0 0 1px rgba(var(--primary-500), 0.64),
+            0 1px 2px rgba(var(--primary-900), 0.04);
     }
 
     .ops-input {
@@ -1522,6 +1580,10 @@
 
     .ops-toolbar-grid--translation {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .ops-segmented-field--wide {
+        grid-column: 1 / -1;
     }
 
     .ops-coverage-matrix {
