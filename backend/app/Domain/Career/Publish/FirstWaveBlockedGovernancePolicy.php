@@ -47,13 +47,13 @@ final class FirstWaveBlockedGovernancePolicy
 
         if (! is_array($blockedEntry)) {
             return [
-                'blocker_type' => null,
+                'blocker_type' => 'blocked_registry_entry_missing',
                 'override_eligible' => false,
-                'remediation_class' => null,
-                'blocked_governance_status' => null,
+                'remediation_class' => 'manual_governance_required',
+                'blocked_governance_status' => 'blocked_unregistered',
                 'authority_override_supplied' => $overrideSupplied,
-                'review_required' => false,
-                'notes' => [],
+                'review_required' => true,
+                'notes' => ['blocked_registry_entry_missing'],
             ];
         }
 

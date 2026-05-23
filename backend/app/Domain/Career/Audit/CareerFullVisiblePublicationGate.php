@@ -187,8 +187,7 @@ final class CareerFullVisiblePublicationGate
             'collection_summary.public_detail_indexable_count',
             'api_collection_summary.public_detail_indexable_count',
             'public_detail_indexable_count',
-            'observed_detail_ready_count',
-        ]) ?? $this->detailReadyCount($payload);
+        ]);
     }
 
     /**
