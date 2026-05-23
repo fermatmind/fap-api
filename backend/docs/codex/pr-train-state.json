@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T21:36:27+08:00",
+  "updated_at": "2026-05-23T21:43:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5036,10 +5036,10 @@
     "PR-API-SEC-02": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-02-redact-prod-infra-docs",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "7b95b8a5",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1617",
       "title": "docs(security): redact production infrastructure details",
       "checks": {
         "local": [
@@ -5075,7 +5075,13 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "github_checks",
+            "status": "pending",
+            "details": "PR #1617 opened; awaiting GitHub check completion."
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
@@ -5097,6 +5103,11 @@
           "at": "2026-05-23T21:36:27+08:00",
           "status": "local_checks_passed",
           "summary": "Redacted exact production origins, SSH targets, IndexNow key locations, canary infrastructure details, and generated artifacts while preserving non-sensitive operational guidance; focused security guardrail, route list, JSON, Pint, and diff checks passed."
+        },
+        {
+          "at": "2026-05-23T21:43:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1617 for PR-API-SEC-02 after local checks and scope validation passed."
         }
       ]
     },
