@@ -5,6 +5,7 @@ namespace Tests\Feature\SEO;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Models\CareerJobSeoMeta;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
@@ -434,7 +435,7 @@ class SitemapGeneratorTest extends TestCase
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
 
-        $eligibleEn = $this->createCareerJob([
+        $frontendUnavailableEn = $this->createCareerJob([
             'job_code' => 'product-manager',
             'slug' => 'product-manager',
             'locale' => 'en',
@@ -444,6 +445,9 @@ class SitemapGeneratorTest extends TestCase
             'published_at' => Carbon::create(2026, 3, 8, 9, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 3, 8, 10, 0, 0, 'UTC'),
         ]);
+        $this->createCareerJobSeoMeta($frontendUnavailableEn, [
+            'robots' => 'index,follow',
+        ]);
 
         $eligibleZh = $this->createCareerJob([
             'job_code' => 'product-manager',
@@ -451,9 +455,41 @@ class SitemapGeneratorTest extends TestCase
             'locale' => 'zh-CN',
             'title' => '产品经理',
             'excerpt' => '了解产品经理的职责、薪资水平、发展路径和人格匹配。',
+            'market_demand_json' => [
+                'source_refs' => [
+                    ['url' => 'https://www.bls.gov/ooh/management/product-manager.htm'],
+                ],
+            ],
             'is_indexable' => true,
             'published_at' => Carbon::create(2026, 3, 8, 11, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 3, 8, 12, 0, 0, 'UTC'),
+        ]);
+        $this->createCareerJobSeoMeta($eligibleZh, [
+            'robots' => 'index,follow',
+            'jsonld_overrides_json' => [
+                'source_docx' => '01_产品经理_product-manager.docx',
+            ],
+        ]);
+
+        $robotsNoindexZh = $this->createCareerJob([
+            'job_code' => 'robots-noindex',
+            'slug' => 'robots-noindex',
+            'locale' => 'zh-CN',
+            'title' => '禁索引岗位',
+            'market_demand_json' => [
+                'source_refs' => [
+                    ['url' => 'https://www.bls.gov/ooh/management/robots-noindex.htm'],
+                ],
+            ],
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 3, 8, 12, 5, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 8, 12, 10, 0, 'UTC'),
+        ]);
+        $this->createCareerJobSeoMeta($robotsNoindexZh, [
+            'robots' => 'noindex,follow',
+            'jsonld_overrides_json' => [
+                'source_docx' => '02_禁索引岗位_robots-noindex.docx',
+            ],
         ]);
 
         $this->createCareerJob([
@@ -501,11 +537,12 @@ class SitemapGeneratorTest extends TestCase
         $payload = app(SitemapGenerator::class)->generate();
         $xml = (string) ($payload['xml'] ?? '');
 
-        $this->assertStringContainsString('https://staging.fermatmind.com/en/career/jobs', $xml);
         $this->assertStringContainsString('https://staging.fermatmind.com/zh/career/jobs', $xml);
-        $this->assertStringContainsString('https://staging.fermatmind.com/en/career/jobs/product-manager', $xml);
         $this->assertStringContainsString('https://staging.fermatmind.com/zh/career/jobs/product-manager', $xml);
 
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/product-manager', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/zh/career/jobs/robots-noindex', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/draft-role', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/private-role', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/noindex-role', $xml);
@@ -516,16 +553,13 @@ class SitemapGeneratorTest extends TestCase
 
         $seoService = app(CareerJobSeoService::class);
 
-        $this->assertSame(
-            data_get($seoService->buildMeta($eligibleEn, 'en'), 'canonical'),
-            data_get($seoService->buildJsonLd($eligibleEn, 'en'), 'mainEntityOfPage')
-        );
+        $this->assertSame('noindex,follow', data_get($seoService->buildMeta($frontendUnavailableEn, 'en'), 'robots'));
+        $this->assertStringNotContainsString(data_get($seoService->buildMeta($frontendUnavailableEn, 'en'), 'canonical'), $xml);
         $this->assertSame(
             data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'),
             data_get($seoService->buildJsonLd($eligibleZh, 'zh-CN'), 'mainEntityOfPage')
         );
-        $this->assertSame('Occupation', data_get($seoService->buildJsonLd($eligibleEn, 'en'), '@type'));
-        $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleEn, 'en'), 'canonical'), $xml);
+        $this->assertSame('Occupation', data_get($seoService->buildJsonLd($eligibleZh, 'zh-CN'), '@type'));
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'), $xml);
     }
 
@@ -819,6 +853,28 @@ class SitemapGeneratorTest extends TestCase
             'sort_order' => 0,
             'created_at' => Carbon::create(2026, 3, 8, 8, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 3, 8, 8, 0, 0, 'UTC'),
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createCareerJobSeoMeta(CareerJob $job, array $overrides = []): CareerJobSeoMeta
+    {
+        /** @var CareerJobSeoMeta */
+        return CareerJobSeoMeta::query()->create(array_merge([
+            'job_id' => (int) $job->id,
+            'seo_title' => null,
+            'seo_description' => null,
+            'canonical_url' => null,
+            'og_title' => null,
+            'og_description' => null,
+            'og_image_url' => null,
+            'twitter_title' => null,
+            'twitter_description' => null,
+            'twitter_image_url' => null,
+            'robots' => null,
+            'jsonld_overrides_json' => null,
         ], $overrides));
     }
 

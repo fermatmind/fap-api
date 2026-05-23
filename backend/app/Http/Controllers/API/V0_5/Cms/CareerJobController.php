@@ -184,7 +184,7 @@ final class CareerJobController extends Controller
         $personalitySlug = strtolower((string) ($personalityCodes[0] ?? ''));
 
         return $this->landingSurfaceContractService->build([
-            'landing_scope' => 'public_indexable_detail',
+            'landing_scope' => $publicIndexable ? 'public_indexable_detail' : 'public_noindex_detail',
             'entry_surface' => 'career_job_detail',
             'entry_type' => 'career_job',
             'summary_blocks' => [
