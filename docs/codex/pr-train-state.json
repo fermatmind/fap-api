@@ -16096,7 +16096,7 @@
     "SEO-INDEXABILITY-TRUTH-01": {
       "repo": "fap-api",
       "branch": "codex/seo-indexability-truth-01",
-      "status": "pr_open",
+      "status": "github_checks_failed_scoped_fix_local_passed",
       "depends_on": [
         "SEO-OPS-SAFETY-ARTIFACTS-01"
       ],
@@ -16107,7 +16107,7 @@
         44,
         49
       ],
-      "commit_sha": "72e75a69",
+      "commit_sha": "ccdd5e9b58353b238ea371220f3da92cd715aaf8",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1631",
       "checks": {
         "scope_validation": {
@@ -16128,6 +16128,11 @@
           "status": "pass",
           "command": "cd backend && php artisan test tests/Feature/V0_5/CareerJobPublicApiTest.php --no-ansi",
           "evidence": "12 tests passed, 173 assertions."
+        },
+        "runtime_freeze_classifier": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi",
+          "evidence": "119 tests passed, 466 assertions after narrowly classifying the CMS CareerJob public surface controller as Career display-surface scope."
         },
         "pint": {
           "status": "pass",
@@ -16154,6 +16159,11 @@
           "at": "2026-05-24T04:06:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1631 after scoped local checks passed for Career SEO indexability and sitemap truth."
+        },
+        {
+          "at": "2026-05-24T04:20:00+08:00",
+          "status": "github_checks_failed_scoped_fix_local_passed",
+          "summary": "GitHub verify-mbti-legacy and verify-mbti-v2 failed because the BigFive runtime-freeze classifier did not yet allow the CMS CareerJob public surface controller touched by this PR. Added a narrow classifier allowance and reran the full BigFiveResultPageV2CoreBodyPreviewTest file successfully."
         }
       ]
     },

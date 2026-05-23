@@ -1529,6 +1529,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_career_display_surface_builder_changes(): void
     {
         $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Cms/CareerJobController.php',
             'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
             'backend/app/Http/Resources/Career/CareerJobDetailResource.php',
             'backend/app/Services/Career/Bundles/CareerRuntimePublishedDisplaySurfaceBuilder.php',
@@ -3181,6 +3182,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerDisplaySurfaceFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Cms/CareerJobController.php',
             'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
             'backend/app/Http/Controllers/API/V0_5/Career/CareerCnProxyPublicOwnerController.php',
             'backend/app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php',
