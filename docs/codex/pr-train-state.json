@@ -3538,7 +3538,7 @@
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-05-content-registry-readiness",
       "title": "feat(riasec): add content registry readiness contract",
-      "status": "github_checks_failed_scoped_fix_local_passed",
+      "status": "merged",
       "depends_on": [
         "RIASEC-PERSONALIZATION-04"
       ],
@@ -6863,7 +6863,7 @@
       "branch": "codex/repair-2786-final-readiness-public-owner-partition-authority-1",
       "title": "fix(api): account reviewed public owner partition in 2786 readiness",
       "name": "Account reviewed CN proxy public-owner partition in final 2786 readiness",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "2786-CN-PROXY-PUBLIC-OWNER-PLAN-1"
       ],
@@ -10163,8 +10163,8 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1632",
+      "commit_sha": "33c0faf7b9522f7df6b6e76efef86f5959039bbf",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -16096,7 +16096,7 @@
     "SEO-INDEXABILITY-TRUTH-01": {
       "repo": "fap-api",
       "branch": "codex/seo-indexability-truth-01",
-      "status": "github_checks_failed_scoped_fix_local_passed",
+      "status": "merged",
       "depends_on": [
         "SEO-OPS-SAFETY-ARTIFACTS-01"
       ],
@@ -16107,7 +16107,7 @@
         44,
         49
       ],
-      "commit_sha": "ad923f24fb14c86cece0664ca90d28e26ed8ac6d",
+      "commit_sha": "d6f3e4ae4909196d17b2e441fe0188de274e84e7",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1631",
       "checks": {
         "scope_validation": {
@@ -16146,9 +16146,9 @@
       },
       "sidecar_issues": [],
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T20:23:03Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "events": [
         {
           "at": "2026-05-24T04:01:40+08:00",
@@ -16164,13 +16164,18 @@
           "at": "2026-05-24T04:20:00+08:00",
           "status": "github_checks_failed_scoped_fix_local_passed",
           "summary": "GitHub verify-mbti-legacy and verify-mbti-v2 failed because the BigFive runtime-freeze classifier did not yet allow the CMS CareerJob public surface controller touched by this PR. Added a narrow classifier allowance and reran the full BigFiveResultPageV2CoreBodyPreviewTest file successfully."
+        },
+        {
+          "at": "2026-05-24T04:23:03+08:00",
+          "status": "merged",
+          "summary": "PR #1631 required GitHub checks passed, then the PR was squash-merged into origin/main as d6f3e4ae4909196d17b2e441fe0188de274e84e7. Remote branch deletion and local cleanup were verified."
         }
       ]
     },
     "RIASEC-CONTRACT-QUALITY-01": {
       "repo": "fap-api",
       "branch": "codex/riasec-contract-quality-01",
-      "status": "pending",
+      "status": "local_validation_passed",
       "depends_on": [
         "SEO-INDEXABILITY-TRUTH-01"
       ],
@@ -16182,12 +16187,52 @@
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "SEO-INDEXABILITY-TRUTH-01 is merged into origin/main as d6f3e4ae4909196d17b2e441fe0188de274e84e7."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to RIASEC services, MeAttemptsService RIASEC history summary, RIASEC tests, and PR train state metadata."
+        },
+        "riasec": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter Riasec --no-ansi",
+          "evidence": "136 tests passed, 92689 assertions."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Riasec app/Services/V0_3/Me/MeAttemptsService.php tests",
+          "evidence": "1272 files passed Pint."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
       "sidecar_issues": [],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-05-24T04:24:00+08:00",
+          "status": "in_progress",
+          "summary": "Started from latest main after SEO-INDEXABILITY-TRUTH-01 merged and created branch codex/riasec-contract-quality-01."
+        },
+        {
+          "at": "2026-05-24T04:35:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Hardened RIASEC slot validation for nested forbidden fields and case-insensitive forbidden claims, enforced nested quality boolean signals, blocked same-form compare when score-space versions differ, and suppressed top_code_changed on non-comparable cross-form history. Focused RIASEC tests, Pint, and diff check passed."
+        },
+        {
+          "at": "2026-05-24T04:38:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1632 for RIASEC contract quality hardening after scoped local validation passed."
+        }
+      ]
     },
     "BIGFIVE-RUNTIME-GUARDS-01": {
       "repo": "fap-api",

@@ -478,6 +478,7 @@ final class RiasecAssessmentFlowTest extends TestCase
         $history->assertJsonPath('history_compare.compare_guard_v1.can_compare', false);
         $history->assertJsonPath('history_compare.compare_guard_v1.reason', 'cross_form_score_space_mismatch');
         $history->assertJsonPath('history_compare.compare_guard_v1.raw_score_delta_allowed', false);
+        $this->assertNull($history->json('history_compare.top_code_changed'));
         $history->assertJsonPath('history_compare.current_compare_policy_v1.score_space_version', 'riasec_140_likert5_activity_context_space.v1');
         $history->assertJsonPath('history_compare.previous_compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $this->assertNull($history->json('history_compare.raw_scores_delta'));

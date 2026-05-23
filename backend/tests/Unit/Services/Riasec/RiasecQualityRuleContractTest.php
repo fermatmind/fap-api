@@ -74,6 +74,22 @@ final class RiasecQualityRuleContractTest extends TestCase
         $this->assertNoForbiddenClaims($state);
     }
 
+    public function test_nested_quality_boolean_signals_are_respected(): void
+    {
+        $state = (new RiasecQualityRuleContract)->build([
+            'form_code' => 'riasec_140',
+            'answer_count' => 140,
+            'quality' => [
+                'too_fast' => true,
+            ],
+        ]);
+
+        $this->assertSame('caution', $state['quality_state']);
+        $this->assertTrue($state['too_fast']);
+        $this->assertSame('cautious_reading', $state['reading_strength']);
+        $this->assertNoForbiddenClaims($state);
+    }
+
     public function test_140q_two_attention_flags_route_to_low_quality_and_hide_140q_upsell(): void
     {
         $state = (new RiasecQualityRuleContract)->build([

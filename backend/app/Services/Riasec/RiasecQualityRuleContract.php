@@ -131,7 +131,7 @@ final class RiasecQualityRuleContract
      */
     private function boolSignal(array $payload, string $key): bool
     {
-        return filter_var($payload[$key] ?? false, FILTER_VALIDATE_BOOL);
+        return filter_var($payload[$key] ?? data_get($payload, 'quality.'.$key, false), FILTER_VALIDATE_BOOL);
     }
 
     /**

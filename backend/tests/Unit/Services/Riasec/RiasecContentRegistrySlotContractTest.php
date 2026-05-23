@@ -108,6 +108,47 @@ final class RiasecContentRegistrySlotContractTest extends TestCase
         $this->assertContains('forbidden_claim_phrase_140q_more_accurate', $result['errors']);
     }
 
+    public function test_validator_rejects_nested_forbidden_fields_and_invalid_applicability(): void
+    {
+        $slot = $this->validSlot([
+            'slot_key' => 'pair_blend_copy',
+            'slot_group' => 'pair_blend_copy',
+            'applicable_codes' => ['IA'],
+            'applicable_form_codes' => ['riasec_60', 'legacy_36'],
+            'applicable_profile_shapes' => ['clear_code', 'career_match_shape'],
+            'applicable_quality_states' => ['normal', 'excellent'],
+            'metadata' => [
+                'source_url' => 'https://example.test/unreviewed-source',
+                'scoring' => [
+                    'percentile' => 98,
+                ],
+            ],
+        ]);
+
+        $result = (new RiasecContentRegistrySlotContract)->validate($slot);
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('unsupported_applicable_form_codes_value', $result['errors']);
+        $this->assertContains('unsupported_applicable_profile_shapes_value', $result['errors']);
+        $this->assertContains('unsupported_applicable_quality_states_value', $result['errors']);
+        $this->assertContains('forbidden_field_source_url', $result['errors']);
+        $this->assertContains('forbidden_field_percentile', $result['errors']);
+    }
+
+    public function test_validator_rejects_forbidden_claim_phrases_case_insensitively(): void
+    {
+        $result = (new RiasecContentRegistrySlotContract)->validate($this->validSlot([
+            'slot_key' => 'pair_blend_copy',
+            'slot_group' => 'pair_blend_copy',
+            'applicable_codes' => ['IA'],
+            'body' => 'This says the result offers Career Match and SUCCESS PROBABILITY claims.',
+        ]));
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('forbidden_claim_phrase_career_match', $result['errors']);
+        $this->assertContains('forbidden_claim_phrase_success_probability', $result['errors']);
+    }
+
     public function test_validator_allows_negated_boundary_mentions_without_allowing_positive_claims(): void
     {
         $contract = new RiasecContentRegistrySlotContract;
@@ -173,10 +214,13 @@ final class RiasecContentRegistrySlotContractTest extends TestCase
             'forbidden_claims' => ['career_outcome_claims_forbidden'],
             'required_boundaries' => [
                 'interest_evidence_only',
+                'not_personality_identity',
                 'not_career_recommendation',
                 'not_job_fit',
                 'not_success_prediction',
                 'not_ability_or_skill_measure',
+                'examples_not_matches',
+                'not_hiring_or_screening_use',
                 'no_60q_140q_raw_delta',
                 '140q_contextual_not_more_accurate',
                 'feedback_does_not_mutate_measured_result',

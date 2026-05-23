@@ -39,8 +39,10 @@ final class RiasecCompareGuardService
         $groupB = (string) ($basisB['compare_compatibility_group'] ?? '');
         $formA = (string) ($basisA['form_code'] ?? '');
         $formB = (string) ($basisB['form_code'] ?? '');
+        $scoreSpaceA = (string) ($basisA['score_space_version'] ?? '');
+        $scoreSpaceB = (string) ($basisB['score_space_version'] ?? '');
 
-        if ($groupA !== '' && $groupA === $groupB && $formA !== '' && $formA === $formB) {
+        if ($groupA !== '' && $groupA === $groupB && $formA !== '' && $formA === $formB && $scoreSpaceA !== '' && $scoreSpaceA === $scoreSpaceB) {
             return $this->contract($basisA, $basisB, true, 'same_compare_compatibility_group', 'riasec.compare.allowed_same_form');
         }
 

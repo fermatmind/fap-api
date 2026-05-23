@@ -247,6 +247,15 @@ final class RiasecContentRegistrySlotContract
         '职业成功',
     ];
 
+    /** @var list<string> */
+    private const ALLOWED_FORM_CODES = ['riasec_60', 'riasec_140'];
+
+    /** @var list<string> */
+    private const ALLOWED_PROFILE_SHAPES = ['clear_code', 'blended_code', 'broad_profile', 'near_tie', 'low_clarity', 'low_quality'];
+
+    /** @var list<string> */
+    private const ALLOWED_QUALITY_STATES = ['normal', 'caution', 'low_quality', 'retake_recommended', 'minimal_quality_boundary_60q'];
+
     /**
      * @return array<string,mixed>
      */
@@ -325,6 +334,21 @@ final class RiasecContentRegistrySlotContract
                 $errors[] = $field.'_must_be_non_empty_array';
             }
         }
+        $errors = array_merge($errors, $this->unsupportedArrayValueErrors(
+            'applicable_form_codes',
+            $slot['applicable_form_codes'] ?? null,
+            self::ALLOWED_FORM_CODES,
+        ));
+        $errors = array_merge($errors, $this->unsupportedArrayValueErrors(
+            'applicable_profile_shapes',
+            $slot['applicable_profile_shapes'] ?? null,
+            self::ALLOWED_PROFILE_SHAPES,
+        ));
+        $errors = array_merge($errors, $this->unsupportedArrayValueErrors(
+            'applicable_quality_states',
+            $slot['applicable_quality_states'] ?? null,
+            self::ALLOWED_QUALITY_STATES,
+        ));
         if (! is_array($slot['applicable_codes'] ?? null) && ! is_array($slot['applicable_dimensions'] ?? null)) {
             $errors[] = 'missing_applicable_codes_or_dimensions';
         }
@@ -346,11 +370,7 @@ final class RiasecContentRegistrySlotContract
             }
         }
 
-        foreach (self::FORBIDDEN_FIELDS as $field) {
-            if (array_key_exists($field, $slot)) {
-                $errors[] = 'forbidden_field_'.$field;
-            }
-        }
+        $errors = array_merge($errors, $this->forbiddenFieldErrors($slot));
         $errors = array_merge($errors, $this->forbiddenPhraseErrors($slot));
 
         return [
@@ -465,6 +485,28 @@ final class RiasecContentRegistrySlotContract
         return ['omit_module', 'minimal_backend_empty_state', 'reject_payload'];
     }
 
+    /**
+     * @param  list<string>  $allowed
+     * @return list<string>
+     */
+    private function unsupportedArrayValueErrors(string $field, mixed $value, array $allowed): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $errors = [];
+        foreach ($value as $item) {
+            $normalized = trim((string) $item);
+            if ($normalized === '' || ! in_array($normalized, $allowed, true)) {
+                $errors[] = 'unsupported_'.$field.'_value';
+                break;
+            }
+        }
+
+        return $errors;
+    }
+
     private function isBlank(mixed $value): bool
     {
         if ($value === null) {
@@ -490,7 +532,7 @@ final class RiasecContentRegistrySlotContract
         $strings = $this->payloadStrings($payload);
         foreach (self::FORBIDDEN_PHRASES as $phrase) {
             foreach ($strings as $text) {
-                if (str_contains($text, $phrase) && ! $this->isBoundaryOrNegatedHit($text, $phrase)) {
+                if ($this->textContainsPhrase($text, $phrase) && ! $this->isBoundaryOrNegatedHit($text, $phrase)) {
                     $errors[] = 'forbidden_claim_phrase_'.$this->errorToken($phrase);
                     break;
                 }
@@ -518,11 +560,41 @@ final class RiasecContentRegistrySlotContract
         return $strings;
     }
 
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return list<string>
+     */
+    private function forbiddenFieldErrors(array $payload): array
+    {
+        $errors = [];
+        foreach ($payload as $key => $value) {
+            $field = (string) $key;
+            if (in_array($field, self::FORBIDDEN_FIELDS, true)) {
+                $errors[] = 'forbidden_field_'.$field;
+            }
+            if (is_array($value)) {
+                array_push($errors, ...$this->forbiddenFieldErrors($value));
+            }
+        }
+
+        return $errors;
+    }
+
+    private function textContainsPhrase(string $text, string $phrase): bool
+    {
+        if ($phrase === 'Matches') {
+            return preg_match('/\bmatches\b/i', $text) === 1;
+        }
+
+        return stripos($text, $phrase) !== false;
+    }
+
     private function isBoundaryOrNegatedHit(string $text, string $phrase): bool
     {
         $offset = 0;
-        while (($position = strpos($text, $phrase, $offset)) !== false) {
+        while (($position = stripos($text, $phrase, $offset)) !== false) {
             $context = substr($text, max(0, $position - 48), strlen($phrase) + 96);
+            $context = strtolower($context);
             $hasBoundaryMarker = false;
             foreach (['不是', '不能', '不得', '不输出', '不允许', '禁止', '不作为', '不把', '不代表', '不会', '不用于', '不默认', '不要', 'not ', 'does not', 'do not', 'forbidden'] as $marker) {
                 if (str_contains($context, $marker)) {
