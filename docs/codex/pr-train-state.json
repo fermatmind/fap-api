@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T12:29:47+08:00",
+  "updated_at": "2026-05-23T12:32:05+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -20068,12 +20068,12 @@
     "OPS-ADMIN-UI-05": {
       "repo": "fap-api",
       "branch": "codex/ops-admin-ui-05-theme-tokens",
-      "status": "local_checks_passed_with_sidecar",
+      "status": "pr_open",
       "depends_on": [
         "OPS-ADMIN-UI-04"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "75f1348567eeb67432ec3e454f3212d8d78ae1a3",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1603",
       "checks": {
         "npm_run_build_ops_theme": "passed",
         "focused_ops_theme_i18n_tests": "passed",
@@ -20104,6 +20104,11 @@
           "at": "2026-05-23T12:29:47+08:00",
           "status": "local_checks_passed_with_sidecar",
           "summary": "Started OPS-ADMIN-UI-05 from origin/main in isolated worktree. Theme token build, focused theme/i18n tests, route list, targeted Pint, JSON/YAML validation, and diff checks passed. Full Ops suite failures are recorded as external sidecar blockers under the user-approved continuation protocol."
+        },
+        {
+          "at": "2026-05-23T12:32:05+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1603 for OPS-ADMIN-UI-05 and pushed branch codex/ops-admin-ui-05-theme-tokens after rebasing onto origin/main."
         }
       ]
     }
