@@ -6325,7 +6325,7 @@
       "branch": "fix/career-runtime-projection-lookup-latest-selection-1",
       "title": "fix(api): select newest career runtime projection artifact",
       "name": "Fix latest materialized Career runtime projection lookup selection",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "REPAIR-PROGRESSIVE-READINESS-CN-PROXY-EXCLUSION-1"
       ],
@@ -9510,7 +9510,7 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1606",
       "commit_sha": "2ef32aa4ff65c1a58c360ab4f07123dca957f56e",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -14998,7 +14998,10 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+          "status": "pending",
+          "pr": "pending: PR #1606 opened for SEARCH-CHANNEL-LIVE-MBTI-02 and awaiting required GitHub checks"
+        }
       },
       "failure_reason": null,
       "merged_at": "2026-05-23T00:21:01Z",
@@ -15522,6 +15525,11 @@
           "at": "2026-05-23T13:24:00+08:00",
           "status": "local_checks_passed",
           "summary": "Local validation passed for SEARCH-CHANNEL-LIVE-MBTI-02: focused live submission test, Search Channel Queue suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-23T13:28:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1606 for SEARCH-CHANNEL-LIVE-MBTI-02 from codex/search-channel-live-mbti-02. The production operation stayed bounded to queue item 2 only; queue write remained disabled, and all three live gates were closed again immediately after submission."
         }
       ]
     }
