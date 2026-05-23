@@ -6194,7 +6194,7 @@
       "repo": "fap-api",
       "branch": "codex/repair-progressive-runtime-candidate-pool-selection-1",
       "title": "fix(api): consume progressive delta slugs in runtime candidate pool",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "REPAIR-PROGRESSIVE-READINESS-OCCUPATION-AWARE-SELECTION-1"
       ],
@@ -6348,7 +6348,7 @@
         "do not treat candidate-aware planning artifacts as final published authority"
       ],
       "commit_sha": "66800c324532fff8eb20ebd0c5a5bfdf9098dd61",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1605",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -14940,7 +14940,10 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+          "status": "pending",
+          "pr": "pending: PR #1605 opened for SEARCH-CHANNEL-LIVE-MBTI-01 and awaiting required GitHub checks"
+        }
       },
       "failure_reason": null,
       "merged_at": null,
@@ -15037,7 +15040,7 @@
     "SEO-GROWTH-MBTI-ACTION-01B": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-enqueue",
-      "status": "in_progress",
+      "status": "local_checks_passed",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01A"
       ],
@@ -15341,11 +15344,11 @@
     "SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-post-enqueue-review",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-R3"
       ],
-      "commit_sha": "c6f5bd2bd3f0e9d204e24ef0d889653c4db3c32f",
+      "commit_sha": "25a43e669cfe12f0a72ec5db64fb739a46a185a6",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1604",
       "checks": {
         "production_read_only": {
@@ -15367,12 +15370,15 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+          "status": "passed",
+          "pr": "passed: PR #1604 merged after hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS succeeded"
+        }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T04:45:59Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -15393,6 +15399,69 @@
           "at": "2026-05-23T12:39:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1604 for SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW from codex/seo-growth-mbti-action-01b-post-enqueue-review. The task remained read-only against production: no gate change, no enqueue, no submission, and no CMS mutation."
+        },
+        {
+          "at": "2026-05-23T12:45:59+08:00",
+          "status": "merged",
+          "summary": "Merged PR #1604 for SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW with merge commit 25a43e669cfe12f0a72ec5db64fb739a46a185a6. origin/main contains the merge commit, the remote branch was deleted, local main was synced, and focused revalidation passed."
+        }
+      ]
+    },
+    "SEARCH-CHANNEL-LIVE-MBTI-01": {
+      "repo": "fap-api",
+      "branch": "codex/search-channel-live-mbti-01-preflight",
+      "status": "in_progress",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "production_read_only": {
+          "queue_item_verification": "passed: queue_item_id=2 exists with batch_id=2 canonical_url=https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types channel=indexnow approval_state=pending execution_state=dry_run_ready source_authority=scale_catalog page_entity_type=test_detail indexability_state=indexable claim_boundary_state=claim_safe private_flow=false",
+          "duplicate_verification": "passed: duplicate_count=1 and the only matching idempotency-key row is queue_item_id=2",
+          "batch_verification": "passed: batch_id=2 exists with channel=indexnow status=dry_run item_count=1 created_by=seo-intel:search-channel-queue",
+          "gate_verification": "passed: queue_write_gate=false, live_submission_gate=false, external_api_gate=false, indexnow_live_api_gate=false",
+          "indexnow_key_verification": "passed: key present, key length 32, keyLocation present, public keyLocation returned 200 text/plain and matched the configured key SHA-256 without exposing the raw key",
+          "submit_dry_run": "passed: php artisan seo-intel:search-channel-submit --queue-item-id=2 --dry-run --json returned success with no external calls, no search submission, and no writes"
+        },
+        "local": {
+          "focused_live_preflight_test": "passed: php artisan test --filter=SeoIntelSearchChannelLiveMbti01Preflight --no-ansi (1 test, 25 assertions)",
+          "search_channel_queue_suite": "passed: php artisan test --filter=SeoIntelSearchChannelQueue --no-ansi (22 tests, 200 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3507 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/search-channel-live-mbti-01-preflight.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "human_approved_live_submission_for_queue_item_2",
+      "history": [
+        {
+          "at": "2026-05-23T12:50:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEARCH-CHANNEL-LIVE-MBTI-01 on codex/search-channel-live-mbti-01-preflight from latest main. Production read-only checks confirmed queue item 2 is still the intended EN MBTI indexnow candidate, all live gates remain closed, the submit dry-run passes without external calls, and the public keyLocation matches the configured IndexNow key."
+        },
+        {
+          "at": "2026-05-23T13:05:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Local validation passed for SEARCH-CHANNEL-LIVE-MBTI-01: focused live preflight test, Search Channel Queue suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-23T13:10:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1605 for SEARCH-CHANNEL-LIVE-MBTI-01 from codex/search-channel-live-mbti-01-preflight. The task remains production read-only: no live gate changes, no live submission, no enqueue, no CMS mutation, and no external search API call."
         }
       ]
     }

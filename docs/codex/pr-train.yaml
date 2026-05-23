@@ -10664,6 +10664,49 @@ prs:
     scheduler_activation: false
     next_task: SEARCH-CHANNEL-LIVE-MBTI-01
 
+  - id: SEARCH-CHANNEL-LIVE-MBTI-01
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW
+    branch: codex/search-channel-live-mbti-01-preflight
+    base: main
+    title: "docs(seo-intel): record MBTI live submission preflight"
+    name: "Live submission preflight for queue item 2"
+    train_scope: seo_growth_mbti_action
+    risk_level: read_only_production_live_preflight
+    type: docs_generated_test
+    scope:
+      - Verify queue item 2 remains the exact approved EN MBTI indexnow candidate and stays in pending dry_run_ready state.
+      - Confirm queue write, live submission, external API, and IndexNow live API gates are closed before any human-approved live submission.
+      - Verify IndexNow key metadata is present and the public keyLocation matches the configured key without performing a live submission.
+    allowed_paths:
+      - backend/docs/seo/search-channel-live-mbti-01-preflight.md
+      - backend/docs/seo/generated/search-channel-live-mbti-01-preflight.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelLiveMbti01PreflightTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, deploy files, fap-web, CMS content, URL Truth, seo_urls, seo_url_entities, crawler log readers, collectors, scheduler, Digital PR sends, Outlook drafts, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+      - Open any live gate, submit any URL, call IndexNow or any external search API, enqueue any item, mutate production env, or infer runtime truth from frontend fallback, static sitemap, static llms, crawler logs, or search engine responses.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelLiveMbti01Preflight --no-ansi
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelQueue --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/search-channel-live-mbti-01-preflight.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: human_approved_live_submission_for_queue_item_2
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar
