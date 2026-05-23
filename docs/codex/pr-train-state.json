@@ -16512,7 +16512,7 @@
     "CAREER-RELEASE-GATES-01": {
       "repo": "fap-api",
       "branch": "codex/career-release-gates-01",
-      "status": "ci_failure_fixed_local_validation_passed",
+      "status": "github_checks_passed",
       "depends_on": [
         "CAREER-READINESS-AUDITORS-01"
       ],
@@ -16524,7 +16524,7 @@
         31,
         32
       ],
-      "commit_sha": "a8735306c54aa8991812f4b5089e4455e8301f51",
+      "commit_sha": "704e33e0b892ed9feacc4d03a576137ba0b102a9",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1636",
       "checks": {
         "dependency": {
@@ -16563,9 +16563,9 @@
           "evidence": "No staged whitespace errors."
         },
         "github_checks": {
-          "status": "failed_fixed_locally_pending_rerun",
+          "status": "pass",
           "command": "gh pr checks 1636 --watch --interval 30",
-          "evidence": "Initial PR #1636 checks failed in verify-mbti-legacy and verify-mbti-v2 because the runtime-freeze classifier flagged backend/app/Domain/Career/Publish/FirstWaveBlockedGovernancePolicy.php. The classifier was updated within tests scope and the local failing test now passes; GitHub rerun pending after push."
+          "evidence": "PR #1636 checks passed on head 704e33e0b892ed9feacc4d03a576137ba0b102a9: hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2."
         }
       },
       "sidecar_issues": [
@@ -16600,6 +16600,11 @@
           "at": "2026-05-24T07:19:30+08:00",
           "status": "ci_failure_fixed_local_validation_passed",
           "summary": "GitHub verify-mbti-legacy/v2 failed on runtime-freeze classification for FirstWaveBlockedGovernancePolicy.php; added explicit Career publish governance allowlist coverage, reran local focused MBTI/Career tests, full Career baseline, Pint, and diff checks."
+        },
+        {
+          "at": "2026-05-24T07:25:53+08:00",
+          "status": "github_checks_passed",
+          "summary": "PR #1636 checks passed on head 704e33e0b892ed9feacc4d03a576137ba0b102a9."
         }
       ]
     },
