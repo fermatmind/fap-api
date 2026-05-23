@@ -2135,7 +2135,7 @@
       "branch": "fix/career-2786-full-audit-report-audit13",
       "title": "feat(api): add career 2786 full audit artifact report",
       "name": "Career 2786 Full Audit Artifact Report",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "AUDIT-12"
       ],
@@ -6136,7 +6136,7 @@
       "repo": "fap-api",
       "branch": "codex/repair-progressive-readiness-occupation-aware-selection-1",
       "title": "fix(api): make progressive readiness selection occupation-aware",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "REPAIR-PROGRESSIVE-READINESS-SELECTION-1"
       ],
@@ -9992,7 +9992,7 @@
       "depends_on": [
         "SEO-DASH-PROD-00"
       ],
-      "status": "in_progress",
+      "status": "local_checks_passed",
       "train_scope": "production_seo_intel_db_user_migration_runbook",
       "risk_level": "low_docs_contract_no_execution",
       "title": "docs(seo-intel): add production DB migration runbook",
@@ -14981,7 +14981,7 @@
       "depends_on": [
         "SEO-GROWTH-MBTI-07"
       ],
-      "commit_sha": "bb7288ac984e567d0f39fa7e8365b3363203734c",
+      "commit_sha": "2ad5fc44989848896e1aa79abf6d0fd224865385",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1592",
       "checks": {
         "local": {
@@ -14997,9 +14997,9 @@
         "github": {}
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T00:21:01Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -15025,6 +15025,67 @@
           "at": "2026-05-23T08:22:00+08:00",
           "status": "committed",
           "summary": "Committed SEO-GROWTH-MBTI-ACTION-01A preflight package scope at 23e176c9dba4ac718ac0370706b02399f9387bfc."
+        },
+        {
+          "at": "2026-05-23T09:25:47+08:00",
+          "status": "merged",
+          "summary": "Reconciled SEO-GROWTH-MBTI-ACTION-01A ledger: GitHub PR #1592 is merged and origin/main contains merge commit 2ad5fc44989848896e1aa79abf6d0fd224865385."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-enqueue",
+      "status": "in_progress",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01A"
+      ],
+      "commit_sha": "01bb56638674c358f8f42343f82a1347ce84d66d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1594",
+      "checks": {
+        "production_preflight": {
+          "release_path": "/var/www/fap-api/releases/prod-20260523-2ad5fc44",
+          "search_channel_queue_help": "passed: official command exists but supports only --dry-run, --no-write, --json, --channel, --page-type, and --limit",
+          "search_channel_queue_dry_run": "passed: candidate_count=9, eligible_count=9, planned_queue_count=9, issues=[]",
+          "exact_candidate_read_only": "passed: exact EN MBTI test URL planned once for indexnow, no existing queue item, live gates closed",
+          "enqueue": "not_attempted: official command lacks bounded single-URL selector"
+        },
+        "local": {
+          "focused_enqueue_report_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bSearchChannelEnqueue --no-ansi (5 tests, 31 assertions)",
+          "seo_intel_suite": "passed: php artisan test --filter=SeoIntel --no-ansi (586 tests, 9112 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3499 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-search-channel-enqueue.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        },
+        "github": {}
+      },
+      "failure_reason": "Blocked before production write because the official Search Channel Queue command does not support bounded single-URL enqueue.",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-01B-FIX-01",
+      "history": [
+        {
+          "at": "2026-05-23T09:25:47+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-GROWTH-MBTI-ACTION-01B in an isolated worktree because the primary worktree had unrelated dirty ops UI branch changes. Production read-only preflight passed and exact EN MBTI test URL was eligible, but no enqueue was attempted because the official command has no single-URL selector."
+        },
+        {
+          "at": "2026-05-23T09:34:32+08:00",
+          "status": "local_checks_passed",
+          "summary": "Local validation passed for SEO-GROWTH-MBTI-ACTION-01B blocked-operation report: focused test, full SeoIntel suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks. Production enqueue remains blocked because the official command has no single-URL selector."
+        },
+        {
+          "at": "2026-05-23T09:40:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1594 for SEO-GROWTH-MBTI-ACTION-01B with blocked-operation report. No production queue row was created and no live submission occurred."
         }
       ]
     }

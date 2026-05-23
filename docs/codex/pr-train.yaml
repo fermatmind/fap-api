@@ -10400,3 +10400,46 @@ prs:
     production_migration_execution_allowed: false
     scheduler_activation: false
     next_task: SEO-GROWTH-MBTI-ACTION-01B-FIX
+
+  - id: SEO-GROWTH-MBTI-ACTION-01B
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-ACTION-01A
+    branch: codex/seo-growth-mbti-action-01b-enqueue
+    base: main
+    title: "docs(seo-intel): record MBTI Search Channel enqueue"
+    name: "Human-approved MBTI Search Channel enqueue"
+    train_scope: seo_growth_mbti_action
+    risk_level: bounded_production_operation_report
+    type: production_operation_report_docs_generated_test
+    scope:
+      - Perform only the human-approved bounded Search Channel Queue enqueue for the EN MBTI test URL and indexnow channel if the official command supports single-URL enqueue.
+      - If the official command does not support bounded single-URL enqueue, do not write production and record the blocked result in docs/generated/test.
+      - Preserve backend/CMS/catalog authority and forbid frontend fallback, static sitemap, static llms, crawler logs, search responses, Digital PR mentions, or local copies as URL Truth.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-action-01b-search-channel-enqueue.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-01b-search-channel-enqueue.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bSearchChannelEnqueueTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime services, migrations, production env/deploy files, fap-web, CMS content, URL Truth, seo_urls, seo_url_entities, crawler log readers, collectors, scheduler, Digital PR sends, Outlook drafts, pSEO, frontend fallback authority, static sitemap authority, static llms authority, claim auto-rewrite, internal link auto-creation, or business DB / Tencent RDS / Node2 DB.
+      - Submit URLs, call live IndexNow, call GSC/Baidu/Bing/360/Sogou/Shenma, or enqueue any ZH MBTI or Research URL.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bSearchChannelEnqueue --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-search-channel-enqueue.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-ACTION-01B-FIX-01
