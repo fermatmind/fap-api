@@ -295,6 +295,19 @@ final class SecurityGuardrailsTest extends TestCase
         );
     }
 
+    public function test_code_scanning_uses_pinned_semgrep_install(): void
+    {
+        $repoRoot = dirname(base_path());
+        $workflow = file_get_contents($repoRoot.'/.github/workflows/codeql.yml');
+        $this->assertIsString($workflow);
+
+        $this->assertMatchesRegularExpression('/SEMGREP_VERSION:\s*"[0-9]+\.[0-9]+\.[0-9]+"/', $workflow);
+        $this->assertStringContainsString('"semgrep==${SEMGREP_VERSION}"', $workflow);
+        $this->assertStringContainsString('semgrep --version | grep -Fx "${SEMGREP_VERSION}"', $workflow);
+        $this->assertDoesNotMatchRegularExpression('/pip install[^\n]*--upgrade[^\n]*semgrep/', $workflow);
+        $this->assertDoesNotMatchRegularExpression('/pip install[^\n]*\bsemgrep\b(?!==)/', $workflow);
+    }
+
     public function test_compose_defaults_do_not_publish_open_unauthenticated_datastores(): void
     {
         $repoRoot = dirname(base_path());

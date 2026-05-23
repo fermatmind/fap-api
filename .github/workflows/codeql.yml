@@ -23,6 +23,8 @@ jobs:
     name: semgrep sarif
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      SEMGREP_VERSION: "1.136.0"
 
     steps:
       - name: Checkout
@@ -34,7 +36,9 @@ jobs:
           python-version: "3.12"
 
       - name: Install Semgrep
-        run: python -m pip install --upgrade semgrep
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir "semgrep==${SEMGREP_VERSION}"
+          semgrep --version | grep -Fx "${SEMGREP_VERSION}"
 
       - name: Run Semgrep SARIF scan
         run: |
