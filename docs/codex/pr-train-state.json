@@ -16321,7 +16321,7 @@
     "CAREER-POLICY-CLAIM-GUARDS-01": {
       "repo": "fap-api",
       "branch": "codex/career-policy-claim-guards-01",
-      "status": "local_validation_passed_with_external_sidecar",
+      "status": "pr_open",
       "depends_on": [
         "BIGFIVE-RUNTIME-GUARDS-01"
       ],
@@ -16335,8 +16335,8 @@
         43,
         58
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "2b67c2fa",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1634",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -16386,6 +16386,11 @@
           "at": "2026-05-24T05:45:16+08:00",
           "status": "local_validation_passed_with_external_sidecar",
           "summary": "Scoped Career policy/claim guard tests, Pint, and diff check passed. Full Career filter remains red with the same 47-failure baseline on origin/main, recorded as external sidecar CAREER-RUNTIME-PROJECTION-TEST-SUITE-BASELINE-01."
+        },
+        {
+          "at": "2026-05-24T05:50:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1634 after scoped validation passed and external Career full-filter baseline sidecar was recorded."
         }
       ]
     },
