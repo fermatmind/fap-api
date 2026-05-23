@@ -16512,7 +16512,7 @@
     "CAREER-RELEASE-GATES-01": {
       "repo": "fap-api",
       "branch": "codex/career-release-gates-01",
-      "status": "local_validation_passed_with_external_sidecar",
+      "status": "pr_open_checks_pending",
       "depends_on": [
         "CAREER-READINESS-AUDITORS-01"
       ],
@@ -16524,8 +16524,8 @@
         31,
         32
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "a8735306c54aa8991812f4b5089e4455e8301f51",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1636",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -16561,6 +16561,11 @@
           "status": "pass",
           "command": "git diff --cached --check",
           "evidence": "No staged whitespace errors."
+        },
+        "github_checks": {
+          "status": "pending",
+          "command": "gh pr checks 1636 --watch --interval 30",
+          "evidence": "PR #1636 opened; GitHub checks pending."
         }
       },
       "sidecar_issues": [
@@ -16585,6 +16590,11 @@
           "at": "2026-05-24T07:04:13+08:00",
           "status": "local_checks_recorded",
           "summary": "Recorded focused tests, external Career baseline sidecar, Pint, scope, and diff checks."
+        },
+        {
+          "at": "2026-05-24T07:07:53+08:00",
+          "status": "pr_open_checks_pending",
+          "summary": "Opened PR #1636 for CAREER-RELEASE-GATES-01 at a8735306c54aa8991812f4b5089e4455e8301f51; GitHub checks pending."
         }
       ]
     },
