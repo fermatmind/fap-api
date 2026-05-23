@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T22:52:00+08:00",
+  "updated_at": "2026-05-23T23:02:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5419,10 +5419,10 @@
     "PR-API-SEC-05": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-05-public-jobs-list-db-budget",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "1b32dd2f768b392e2d0c2b3e540c9b61b216ff61",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1620",
       "title": "fix(career): bound public jobs list database work",
       "checks": {
         "local": [
@@ -5477,6 +5477,11 @@
           "at": "2026-05-23T22:52:00+08:00",
           "status": "local_checks_passed",
           "summary": "Eager-loaded directory draft crosswalk/display asset data and reused preloaded display assets in surface validation to avoid per-draft query amplification; focused performance and display-surface checks passed."
+        },
+        {
+          "at": "2026-05-23T23:02:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1620 from codex/pr-api-sec-05-public-jobs-list-db-budget after push."
         }
       ]
     },
