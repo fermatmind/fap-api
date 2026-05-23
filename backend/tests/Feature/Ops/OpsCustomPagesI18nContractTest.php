@@ -270,6 +270,14 @@ final class OpsCustomPagesI18nContractTest extends TestCase
             ['内容工作台', '权限边界', '访问模型', '内容读取', '条记录'],
         ];
 
+        yield 'content overview' => [
+            '/ops/content-overview',
+            '内容总览',
+            'Content overview',
+            ['Content overview', 'CMS product layer', 'Workspace contract', 'Current org editorial', 'Latest article', 'Updated'],
+            ['内容总览', 'CMS 产品层', '工作区约定', '当前组织编辑内容', '最新文章', '更新于'],
+        ];
+
         yield 'go live gate' => [
             '/ops/go-live-gate',
             '上线门禁',

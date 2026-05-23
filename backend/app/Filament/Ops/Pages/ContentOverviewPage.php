@@ -63,39 +63,44 @@ class ContentOverviewPage extends Page
 
         $this->summaryFields = [
             [
-                'label' => 'Current org editorial',
+                'label' => __('ops.custom_pages.content_overview.fields.current_org_editorial'),
                 'value' => (string) $articleCount,
-                'hint' => 'Article records bound to the currently selected Ops organization.',
+                'hint' => __('ops.custom_pages.content_overview.fields.current_org_editorial_hint'),
             ],
             [
-                'label' => 'Current org taxonomy',
+                'label' => __('ops.custom_pages.content_overview.fields.current_org_taxonomy'),
                 'value' => (string) ($categoryCount + $tagCount),
-                'hint' => 'Categories and tags available to the currently selected organization.',
+                'hint' => __('ops.custom_pages.content_overview.fields.current_org_taxonomy_hint'),
             ],
             [
-                'label' => 'Global career content',
+                'label' => __('ops.custom_pages.content_overview.fields.global_career_content'),
                 'value' => (string) ($guideCount + $jobCount),
-                'hint' => 'Career guides and jobs remain global content objects with org_id=0 authoring semantics.',
+                'hint' => __('ops.custom_pages.content_overview.fields.global_career_content_hint'),
             ],
             [
-                'label' => 'Draft release queue',
+                'label' => __('ops.custom_pages.content_overview.fields.draft_release_queue'),
                 'value' => (string) $draftEditorialCount,
-                'hint' => 'Draft editorial records visible to the lightweight content release workspace.',
+                'hint' => __('ops.custom_pages.content_overview.fields.draft_release_queue_hint'),
             ],
             [
-                'label' => 'Published editorial',
+                'label' => __('ops.custom_pages.content_overview.fields.published_editorial'),
                 'value' => (string) $publishedEditorialCount,
-                'hint' => 'Published article, guide, and job records managed through the CMS workspace.',
+                'hint' => __('ops.custom_pages.content_overview.fields.published_editorial_hint'),
             ],
         ];
 
         $this->recentItems = array_values(array_filter([
-            $this->latestItem('Latest article', Article::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'title', ArticleResource::getUrl()),
-            $this->latestItem('Latest category', ArticleCategory::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'name', ArticleCategoryResource::getUrl()),
-            $this->latestItem('Latest tag', ArticleTag::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'name', ArticleTagResource::getUrl()),
-            $this->latestItem('Latest career guide', CareerGuide::query()->where('org_id', 0)->latest('updated_at')->first(), 'title', CareerGuideResource::getUrl()),
-            $this->latestItem('Latest career job', CareerJob::query()->where('org_id', 0)->latest('updated_at')->first(), 'title', CareerJobResource::getUrl()),
+            $this->latestItem(__('ops.custom_pages.content_overview.recent.latest_article'), Article::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'title', ArticleResource::getUrl()),
+            $this->latestItem(__('ops.custom_pages.content_overview.recent.latest_category'), ArticleCategory::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'name', ArticleCategoryResource::getUrl()),
+            $this->latestItem(__('ops.custom_pages.content_overview.recent.latest_tag'), ArticleTag::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'name', ArticleTagResource::getUrl()),
+            $this->latestItem(__('ops.custom_pages.content_overview.recent.latest_career_guide'), CareerGuide::query()->where('org_id', 0)->latest('updated_at')->first(), 'title', CareerGuideResource::getUrl()),
+            $this->latestItem(__('ops.custom_pages.content_overview.recent.latest_career_job'), CareerJob::query()->where('org_id', 0)->latest('updated_at')->first(), 'title', CareerJobResource::getUrl()),
         ]));
+    }
+
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.content_overview.title');
     }
 
     public static function getNavigationGroup(): ?string
@@ -137,8 +142,10 @@ class ContentOverviewPage extends Page
 
         return [
             'label' => $label,
-            'title' => $title !== '' ? $title : 'Untitled',
-            'meta' => $updatedAt !== '' ? 'Updated '.$updatedAt : 'Recently updated',
+            'title' => $title !== '' ? $title : __('ops.custom_pages.common.values.untitled'),
+            'meta' => $updatedAt !== ''
+                ? __('ops.custom_pages.content_overview.recent.updated', ['timestamp' => $updatedAt])
+                : __('ops.custom_pages.content_overview.recent.recently_updated'),
             'url' => $indexUrl,
         ];
     }
