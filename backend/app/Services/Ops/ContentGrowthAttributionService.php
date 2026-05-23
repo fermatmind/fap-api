@@ -111,10 +111,16 @@ final class ContentGrowthAttributionService
                 $lastTouch = $this->latestTouchAt($matchingEvents, $matchingOrders);
                 $canonicalReady = $surface['canonical_ready'];
                 $indexable = $surface['indexable'];
-                $growthState = $paidOrders > 0 ? 'Converting' : ($signalCount > 0 ? 'Discovery' : 'Dormant');
+                $growthState = $paidOrders > 0
+                    ? __('ops.custom_pages.content_growth_attribution.states.converting')
+                    : ($signalCount > 0
+                        ? __('ops.custom_pages.content_growth_attribution.states.discovery')
+                        : __('ops.custom_pages.content_growth_attribution.states.dormant'));
                 $growthStateLabel = $indexable
-                    ? ($canonicalReady ? 'Indexable' : 'Canonical gap')
-                    : 'Noindex';
+                    ? ($canonicalReady
+                        ? __('ops.custom_pages.content_growth_attribution.states.indexable')
+                        : __('ops.custom_pages.content_growth_attribution.states.canonical_gap'))
+                    : __('ops.custom_pages.content_growth_attribution.states.noindex');
 
                 return [
                     'title' => $surface['title'],
@@ -131,12 +137,14 @@ final class ContentGrowthAttributionService
                     'share_assisted_orders' => $shareAssistedOrders,
                     'paid_orders' => $paidOrders,
                     'revenue_cents' => $includeCommerceMetrics ? $revenueCents : null,
-                    'revenue_label' => $includeCommerceMetrics ? $this->formatCurrencyCents($revenueCents) : 'Restricted',
+                    'revenue_label' => $includeCommerceMetrics ? $this->formatCurrencyCents($revenueCents) : __('ops.custom_pages.content_growth_attribution.restricted'),
                     'growth_state' => $growthState,
                     'growth_state_label' => $growthState.' | '.$growthStateLabel,
                     'last_touch_at' => $lastTouch,
-                    'last_touch_label' => $lastTouch?->toDateTimeString() ?? 'No recent touch',
+                    'last_touch_label' => $lastTouch?->toDateTimeString() ?? __('ops.custom_pages.content_growth_attribution.no_recent_touch'),
                     'published_at' => $surface['published_at'],
+                    'canonical_ready' => $canonicalReady,
+                    'indexable' => $indexable,
                     'sort_weight' => ($paidOrders * 100000) + ($signalCount * 100) + $shareAssistedOrders,
                     'converting_without_indexability' => $paidOrders > 0 && ! $indexable,
                     'converting_without_canonical' => $paidOrders > 0 && ! $canonicalReady,
@@ -148,61 +156,63 @@ final class ContentGrowthAttributionService
 
         $headlineFields = [
             [
-                'label' => 'Indexable public surfaces',
-                'value' => (string) $matrixRows->where('seo_label', 'Indexable')->count(),
-                'hint' => 'Visible public content records that are both indexable and canonical-ready.',
+                'label' => __('ops.custom_pages.content_growth_attribution.fields.indexable_public_surfaces'),
+                'value' => (string) $matrixRows
+                    ->filter(fn (array $row): bool => (bool) ($row['indexable'] ?? false) && (bool) ($row['canonical_ready'] ?? false))
+                    ->count(),
+                'hint' => __('ops.custom_pages.content_growth_attribution.fields.indexable_public_surfaces_hint'),
             ],
             [
-                'label' => 'Attributed surfaces (30d)',
+                'label' => __('ops.custom_pages.content_growth_attribution.fields.attributed_surfaces'),
                 'value' => (string) $matrixRows
                     ->filter(fn (array $row): bool => $row['signals'] > 0 || $row['paid_orders'] > 0)
                     ->count(),
-                'hint' => 'Content surfaces with at least one entry signal or paid order in the last 30 days.',
+                'hint' => __('ops.custom_pages.content_growth_attribution.fields.attributed_surfaces_hint'),
             ],
             [
-                'label' => 'Tracked share touchpoints',
+                'label' => __('ops.custom_pages.content_growth_attribution.fields.tracked_share_touchpoints'),
                 'value' => (string) $matrixRows->sum('share_touchpoints'),
-                'hint' => 'Distinct share_id or share_click_id touchpoints attributed back to visible content surfaces.',
+                'hint' => __('ops.custom_pages.content_growth_attribution.fields.tracked_share_touchpoints_hint'),
             ],
         ];
 
         if ($includeCommerceMetrics) {
             $headlineFields[] = [
-                'label' => 'Paid conversions (30d)',
+                'label' => __('ops.custom_pages.content_growth_attribution.fields.paid_conversions'),
                 'value' => (string) $matrixRows->sum('paid_orders'),
-                'hint' => 'Paid or fulfilled orders carrying attribution that resolves back to visible content paths.',
+                'hint' => __('ops.custom_pages.content_growth_attribution.fields.paid_conversions_hint'),
             ];
             $headlineFields[] = [
-                'label' => 'Attributed revenue (30d)',
+                'label' => __('ops.custom_pages.content_growth_attribution.fields.attributed_revenue'),
                 'value' => $this->formatCurrencyCents((int) $matrixRows->sum('revenue_cents')),
-                'hint' => 'Revenue from paid orders attributed to visible content paths in the current org boundary.',
+                'hint' => __('ops.custom_pages.content_growth_attribution.fields.attributed_revenue_hint'),
             ];
         }
 
         $diagnosticCards = [
             $this->diagnosticCard(
-                'Converting but noindex',
-                'Published content with attributed paid conversions but still not marked indexable.',
+                __('ops.custom_pages.content_growth_attribution.diagnostics.converting_noindex.title'),
+                __('ops.custom_pages.content_growth_attribution.diagnostics.converting_noindex.description'),
                 $matrixRows->where('converting_without_indexability', true),
-                'SEO and growth mismatch'
+                __('ops.custom_pages.content_growth_attribution.diagnostics.converting_noindex.meta')
             ),
             $this->diagnosticCard(
-                'Converting with canonical gaps',
-                'Content already producing paid orders while canonical coverage is still incomplete.',
+                __('ops.custom_pages.content_growth_attribution.diagnostics.canonical_gaps.title'),
+                __('ops.custom_pages.content_growth_attribution.diagnostics.canonical_gaps.description'),
                 $matrixRows->where('converting_without_canonical', true),
-                'SEO cleanup needed'
+                __('ops.custom_pages.content_growth_attribution.diagnostics.canonical_gaps.meta')
             ),
             $this->diagnosticCard(
-                'Share-assisted winners',
-                'Content surfaces with the strongest share-assisted order signal in the last 30 days.',
+                __('ops.custom_pages.content_growth_attribution.diagnostics.share_winners.title'),
+                __('ops.custom_pages.content_growth_attribution.diagnostics.share_winners.description'),
                 $matrixRows->filter(fn (array $row): bool => $row['share_assisted_orders'] > 0),
-                'Share propagation'
+                __('ops.custom_pages.content_growth_attribution.diagnostics.share_winners.meta')
             ),
             $this->diagnosticCard(
-                'Indexable but dormant',
-                'Indexable public content that still has no attributed signals or paid conversions.',
+                __('ops.custom_pages.content_growth_attribution.diagnostics.indexable_dormant.title'),
+                __('ops.custom_pages.content_growth_attribution.diagnostics.indexable_dormant.description'),
                 $matrixRows->where('indexable_without_signals', true),
-                'Discovery gap'
+                __('ops.custom_pages.content_growth_attribution.diagnostics.indexable_dormant.meta')
             ),
         ];
 
@@ -227,7 +237,7 @@ final class ContentGrowthAttributionService
             ->latest('updated_at')
             ->limit(self::MAX_SURFACES_PER_TYPE)
             ->get()
-            ->map(fn (Article $article): array => $this->surfaceRecord('article', $article, 'Current org'));
+            ->map(fn (Article $article): array => $this->surfaceRecord('article', $article, __('ops.custom_pages.content_growth_attribution.scopes.current_org')));
 
         $guides = CareerGuide::query()
             ->withoutGlobalScopes()
@@ -238,7 +248,7 @@ final class ContentGrowthAttributionService
             ->latest('updated_at')
             ->limit(self::MAX_SURFACES_PER_TYPE)
             ->get()
-            ->map(fn (CareerGuide $guide): array => $this->surfaceRecord('guide', $guide, 'Global content'));
+            ->map(fn (CareerGuide $guide): array => $this->surfaceRecord('guide', $guide, __('ops.custom_pages.content_growth_attribution.scopes.global_content')));
 
         $jobs = CareerJob::query()
             ->withoutGlobalScopes()
@@ -249,7 +259,7 @@ final class ContentGrowthAttributionService
             ->latest('updated_at')
             ->limit(self::MAX_SURFACES_PER_TYPE)
             ->get()
-            ->map(fn (CareerJob $job): array => $this->surfaceRecord('job', $job, 'Global content'));
+            ->map(fn (CareerJob $job): array => $this->surfaceRecord('job', $job, __('ops.custom_pages.content_growth_attribution.scopes.global_content')));
 
         return collect()
             ->concat($articles)
@@ -269,15 +279,15 @@ final class ContentGrowthAttributionService
 
         return [
             'type' => match ($type) {
-                'article' => 'Article',
-                'guide' => 'Career Guide',
-                'job' => 'Career Job',
-                default => 'Content',
+                'article' => __('ops.custom_pages.content_growth_attribution.types.article'),
+                'guide' => __('ops.custom_pages.content_growth_attribution.types.career_guide'),
+                'job' => __('ops.custom_pages.content_growth_attribution.types.career_job'),
+                default => __('ops.custom_pages.content_growth_attribution.types.content'),
             },
             'scope' => $scope,
             'locale' => trim((string) data_get($record, 'locale', 'en')),
             'slug' => trim((string) data_get($record, 'slug', '')),
-            'title' => trim((string) data_get($record, 'title', 'Untitled')),
+            'title' => trim((string) data_get($record, 'title', __('ops.custom_pages.content_growth_attribution.untitled'))),
             'public_path' => $publicPath,
             'public_url' => $publicUrl,
             'canonical_ready' => $canonical !== '' && $this->urlsMatch($canonical, $publicUrl),
@@ -409,11 +419,15 @@ final class ContentGrowthAttributionService
         return [
             'title' => $title,
             'description' => $description,
-            'meta' => $meta.' | '.(string) $rows->count().' surfaces',
+            'meta' => $meta.' | '.__('ops.custom_pages.content_growth_attribution.surfaces_count', ['count' => (string) $rows->count()]),
             'value' => (string) $rows->count(),
-            'status' => $rows->isNotEmpty() ? 'Needs action' : 'Healthy',
+            'status' => $rows->isNotEmpty()
+                ? __('ops.custom_pages.content_growth_attribution.status.needs_action')
+                : __('ops.custom_pages.content_growth_attribution.status.healthy'),
             'status_state' => $rows->isNotEmpty() ? 'warning' : 'success',
-            'latest_title' => is_array($latest) ? (string) ($latest['title'] ?? 'No recent record') : 'No recent record',
+            'latest_title' => is_array($latest)
+                ? (string) ($latest['title'] ?? __('ops.custom_pages.content_growth_attribution.no_recent_record'))
+                : __('ops.custom_pages.content_growth_attribution.no_recent_record'),
         ];
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Pages\ContentGrowthAttributionPage;
+use App\Http\Middleware\SetOpsLocale;
 use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
@@ -590,13 +591,15 @@ final class ContentGrowthAttributionPageTest extends TestCase
     }
 
     /**
-     * @return array{ops_org_id:int,ops_admin_totp_verified_user_id:int}
+     * @return array{ops_org_id:int,ops_admin_totp_verified_user_id:int,ops_locale:string,ops_locale_explicit:bool}
      */
     private function opsSession(AdminUser $admin, Organization $selectedOrg): array
     {
         return [
             'ops_org_id' => (int) $selectedOrg->id,
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
+            SetOpsLocale::SESSION_KEY => 'en',
+            SetOpsLocale::EXPLICIT_SESSION_KEY => true,
         ];
     }
 }

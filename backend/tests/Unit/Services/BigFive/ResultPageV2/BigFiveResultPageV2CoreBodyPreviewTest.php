@@ -639,6 +639,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_content_growth_attribution_ops_ui_files(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Pages/ContentGrowthAttributionPage.php',
+            'backend/app/Services/Ops/ContentGrowthAttributionService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_migration_isolation_files(): void
     {
         $changed = [
@@ -1936,6 +1946,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isContentGrowthAttributionOpsUiFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelMigrationIsolationFile($file)) {
                 continue;
             }
@@ -2588,6 +2602,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Filament/Ops/Pages/SeoDashboardAccessPage.php',
+        ], true);
+    }
+
+    private function isContentGrowthAttributionOpsUiFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Pages/ContentGrowthAttributionPage.php',
+            'backend/app/Services/Ops/ContentGrowthAttributionService.php',
         ], true);
     }
 

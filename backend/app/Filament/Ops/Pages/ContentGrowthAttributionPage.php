@@ -55,6 +55,11 @@ final class ContentGrowthAttributionPage extends Page
         return __('ops.nav.content_growth_attribution');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.content_growth_attribution.title');
+    }
+
     public static function canAccess(): bool
     {
         return ContentAccess::canRead();
