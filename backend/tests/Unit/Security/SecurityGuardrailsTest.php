@@ -302,6 +302,8 @@ final class SecurityGuardrailsTest extends TestCase
         $this->assertIsString($workflow);
 
         $this->assertMatchesRegularExpression('/SEMGREP_VERSION:\s*"[0-9]+\.[0-9]+\.[0-9]+"/', $workflow);
+        $this->assertMatchesRegularExpression('/SEMGREP_SETUPTOOLS_VERSION:\s*"[0-9]+\.[0-9]+\.[0-9]+"/', $workflow);
+        $this->assertStringContainsString('"setuptools==${SEMGREP_SETUPTOOLS_VERSION}"', $workflow);
         $this->assertStringContainsString('"semgrep==${SEMGREP_VERSION}"', $workflow);
         $this->assertStringContainsString('semgrep --version | grep -Fx "${SEMGREP_VERSION}"', $workflow);
         $this->assertDoesNotMatchRegularExpression('/pip install[^\n]*--upgrade[^\n]*semgrep/', $workflow);
