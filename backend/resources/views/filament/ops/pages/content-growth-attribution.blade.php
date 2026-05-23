@@ -1,43 +1,43 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
         <x-filament-ops::ops-section
-            eyebrow="Growth attribution"
-            title="Content growth attribution"
-            description="Tie public content SEO posture to share propagation, attributed entry signals, and paid conversion outcomes inside the selected org boundary."
+            :eyebrow="__('ops.custom_pages.content_growth_attribution.eyebrow')"
+            :title="__('ops.custom_pages.content_growth_attribution.title')"
+            :description="__('ops.custom_pages.content_growth_attribution.description')"
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-control-stack">
-                    <span class="ops-control-label">Attribution contract</span>
-                    <p class="ops-control-hint">This surface matches visible CMS content against attributed landing paths, share touchpoints, and paid orders. It does not rewrite checkout or payment data models.</p>
+                    <span class="ops-control-label">{{ __('ops.custom_pages.content_growth_attribution.contract_label') }}</span>
+                    <p class="ops-control-hint">{{ __('ops.custom_pages.content_growth_attribution.contract_hint') }}</p>
                 </div>
 
                 <x-slot name="actions">
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">
-                        Overview
+                        {{ __('ops.custom_pages.common.nav.overview') }}
                     </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentMetricsPage::getUrl() }}">
-                        Content Metrics
+                        {{ __('ops.custom_pages.common.nav.metrics') }}
                     </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\SeoOperationsPage::getUrl() }}">
-                        SEO Operations
+                        {{ __('ops.custom_pages.common.nav.seo_ops') }}
                     </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentSearchPage::getUrl() }}">
-                        Content Search
+                        {{ __('ops.custom_pages.common.nav.content_search') }}
                     </x-filament::button>
                 </x-slot>
             </x-filament-ops::ops-toolbar>
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Growth dashboard"
-            description="Headline attribution signals across public CMS content in the last 30 days."
+            :title="__('ops.custom_pages.content_growth_attribution.dashboard_title')"
+            :description="__('ops.custom_pages.content_growth_attribution.dashboard_desc')"
         >
             <x-filament-ops::ops-field-grid :fields="$headlineFields" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Growth diagnostics"
-            description="Use these queues to spot SEO-to-growth mismatches and the content surfaces already proving conversion value."
+            :title="__('ops.custom_pages.content_growth_attribution.diagnostics_title')"
+            :description="__('ops.custom_pages.content_growth_attribution.diagnostics_desc')"
         >
             <div class="ops-card-list">
                 @foreach ($diagnosticCards as $card)
@@ -46,7 +46,7 @@
                         :meta="$card['meta']"
                     >
                         <p class="ops-control-hint">{{ $card['description'] }}</p>
-                        <p class="ops-control-hint">Latest surface: {{ $card['latest_title'] }}</p>
+                        <p class="ops-control-hint">{{ __('ops.custom_pages.content_growth_attribution.latest_surface', ['title' => $card['latest_title']]) }}</p>
                         <x-slot name="actions">
                             <x-filament.ops.shared.status-pill
                                 :state="$card['status_state']"
@@ -59,27 +59,27 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Attribution matrix"
-            description="Public content surfaces ranked by paid conversions, discovery signals, and share-assisted outcomes."
+            :title="__('ops.custom_pages.content_growth_attribution.matrix_title')"
+            :description="__('ops.custom_pages.content_growth_attribution.matrix_desc')"
         >
             <x-filament-ops::ops-table
                 :has-rows="$matrixRows !== []"
-                empty-eyebrow="Growth attribution"
+                :empty-eyebrow="__('ops.custom_pages.content_growth_attribution.eyebrow')"
                 empty-icon="heroicon-o-presentation-chart-line"
-                empty-title="No attributed content signals yet"
-                empty-description="Once public content starts receiving attributed traffic or orders, the matrix will appear here."
+                :empty-title="__('ops.custom_pages.content_growth_attribution.empty_title')"
+                :empty-description="__('ops.custom_pages.content_growth_attribution.empty_desc')"
             >
                 <x-slot name="head">
                     <tr>
-                        <th>Surface</th>
-                        <th>SEO</th>
-                        <th>Signals</th>
-                        <th>Share</th>
+                        <th>{{ __('ops.custom_pages.content_growth_attribution.table.surface') }}</th>
+                        <th>{{ __('ops.custom_pages.content_growth_attribution.table.seo') }}</th>
+                        <th>{{ __('ops.custom_pages.content_growth_attribution.table.signals') }}</th>
+                        <th>{{ __('ops.custom_pages.content_growth_attribution.table.share') }}</th>
                         @if ($showCommerceMetrics)
-                            <th>Paid</th>
-                            <th>Revenue</th>
+                            <th>{{ __('ops.custom_pages.content_growth_attribution.table.paid') }}</th>
+                            <th>{{ __('ops.custom_pages.content_growth_attribution.table.revenue') }}</th>
                         @endif
-                        <th>Latest touch</th>
+                        <th>{{ __('ops.custom_pages.content_growth_attribution.table.latest_touch') }}</th>
                     </tr>
                 </x-slot>
 
@@ -101,9 +101,9 @@
                         <td>{{ $row['signals'] }}</td>
                         <td>
                             <div class="ops-control-stack">
-                                <span>{{ $row['share_touchpoints'] }} touchpoints</span>
+                                <span>{{ __('ops.custom_pages.content_growth_attribution.touchpoints', ['count' => $row['share_touchpoints']]) }}</span>
                                 @if ($showCommerceMetrics)
-                                    <span class="ops-control-hint">{{ $row['share_assisted_orders'] }} assisted orders</span>
+                                    <span class="ops-control-hint">{{ __('ops.custom_pages.content_growth_attribution.assisted_orders', ['count' => $row['share_assisted_orders']]) }}</span>
                                 @endif
                             </div>
                         </td>
@@ -115,7 +115,7 @@
                             <div class="ops-control-stack">
                                 <span>{{ $row['last_touch_label'] }}</span>
                                 <x-filament::button size="xs" color="gray" tag="a" href="{{ $row['public_url'] }}" target="_blank">
-                                    View Public
+                                    {{ __('ops.custom_pages.content_growth_attribution.view_public') }}
                                 </x-filament::button>
                             </div>
                         </td>

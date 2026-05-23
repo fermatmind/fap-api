@@ -198,6 +198,14 @@ final class OpsCustomPagesI18nContractTest extends TestCase
             ['内容指标', '指标契约', '新鲜度与压力', '最新记录'],
         ];
 
+        yield 'content growth attribution' => [
+            '/ops/content-growth-attribution',
+            '内容增长归因',
+            'Content growth attribution',
+            ['Content Growth Attribution Page', 'Content growth attribution', 'Growth dashboard', 'Indexable public surfaces', 'Attribution matrix'],
+            ['内容增长归因', '增长看板', '可索引公开界面', '归因矩阵'],
+        ];
+
         yield 'seo operations' => [
             '/ops/seo-operations',
             'SEO运营',
