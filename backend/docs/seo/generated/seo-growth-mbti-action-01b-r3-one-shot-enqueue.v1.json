@@ -1,0 +1,50 @@
+{
+  "schema_version": "v1",
+  "task": "SEO-GROWTH-MBTI-ACTION-01B-R3",
+  "final_decision": "mbti_action_01b_r3_enqueue_completed_ready_for_post_enqueue_review",
+  "approval_phrase_verified": true,
+  "target_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+  "channel": "indexnow",
+  "queue_write_gate_opened": true,
+  "queue_write_gate_closed": true,
+  "enqueue_attempted": true,
+  "enqueue_committed": true,
+  "queue_item_id": 2,
+  "duplicate_detected": false,
+  "live_submission_attempted": false,
+  "external_api_call_attempted": false,
+  "search_submission_attempted": false,
+  "bulk_enqueue_attempted": false,
+  "cms_mutation_attempted": false,
+  "url_truth_write_attempted": false,
+  "sitemap_mutation_attempted": false,
+  "llms_mutation_attempted": false,
+  "deferred_urls": [
+    "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+    "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report"
+  ],
+  "post_enqueue_verification": {
+    "production_release": "search-channel-single-url-20260523-d6a599a8",
+    "deployed_sha": "d6a599a8dad0e0cc8fb6aba0c2ac2a216f7ebddc",
+    "queue_item_count": 1,
+    "queue_item_id": 2,
+    "batch_id": 2,
+    "approval_state": "pending",
+    "execution_state": "dry_run_ready",
+    "batch_status": "dry_run",
+    "live_submission_gate_closed": true,
+    "external_api_gate_closed": true,
+    "indexnow_live_api_gate_closed": true,
+    "no_live_submission_occurred": true,
+    "no_external_api_call_occurred": true
+  },
+  "sidecars": [
+    {
+      "key": "config_cache_gate_resolution",
+      "status": "observed",
+      "summary": "Gate verification succeeded through cached Laravel config after editing /var/www/fap-api/shared/backend/.env; runtime getenv remained absent, so operational verification should rely on config values."
+    }
+  ],
+  "next_task": "SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW"
+}

@@ -15203,11 +15203,11 @@
     "SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-r2-gate-preflight",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-R2"
       ],
-      "commit_sha": "8a6b82b2e9a535792f7f76e39f894c82d61ff0b0",
+      "commit_sha": "25d3833b53cb6e54b71bac226f1797ead11d1ff9",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1599",
       "checks": {
         "production_read_only": {
@@ -15228,12 +15228,15 @@
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check"
         },
-        "github": {}
+        "github": {
+          "status": "passed",
+          "pr": "passed: PR #1599 merged after hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep sarif, and Semgrep OSS succeeded"
+        }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T03:38:43Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -15254,6 +15257,76 @@
           "at": "2026-05-23T11:34:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1599 for SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT. No production env edit, queue gate change, enqueue, live submission, or external API call was performed."
+        },
+        {
+          "at": "2026-05-23T11:38:43+08:00",
+          "status": "merged",
+          "summary": "Merged PR #1599 for SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT with merge commit 25d3833b53cb6e54b71bac226f1797ead11d1ff9. origin/main contains the merge commit, the remote branch was deleted, and local main was synced with focused revalidation passing."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B-R3": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-r3-enqueue",
+      "status": "pr_open",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT"
+      ],
+      "commit_sha": "b7facfe25a0076fc34045c7fdde670f3e87e0cfe",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1602",
+      "checks": {
+        "production_operation": {
+          "approval_phrase": "passed: exact one-shot queue gate open, enqueue, and gate close approval phrase present in the task prompt",
+          "pre_action_gates": "passed: queue_write_gate=false, live_submission_gate=false, external_api_gate=false, indexnow_live_api_gate=false",
+          "dry_run": "passed: exact EN MBTI canonical URL selected once for indexnow with candidate_count=1 eligible_count=1 planned_queue_count=1 duplicate_detected=false and no writes or external calls",
+          "pre_duplicate_check": "passed: active_duplicate_count=0 and no existing queue item before write",
+          "gate_open": "passed: SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED temporarily enabled through /var/www/fap-api/shared/backend/.env and applied with php artisan config:cache while live and external API gates remained closed",
+          "enqueue": "passed: one queue item written for the exact EN MBTI test URL with batch_id=2 queue_item_id=2 channel=indexnow approval_state=pending execution_state=dry_run_ready",
+          "gate_close": "passed: SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED restored to false and php artisan config:cache rerun immediately after enqueue",
+          "post_enqueue_verification": "passed: queue_item_count=1, batch_status=dry_run, no duplicate active item, no live submission, and no external API call"
+        },
+        "local": {
+          "focused_r3_enqueue_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bR3OneShotEnqueue --no-ansi (1 test, 19 assertions)",
+          "search_channel_queue_suite": "passed: php artisan test --filter=SeoIntelSearchChannelQueue --no-ansi (22 tests, 200 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3503 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-r3-one-shot-enqueue.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-01B-POST-ENQUEUE-REVIEW",
+      "history": [
+        {
+          "at": "2026-05-23T12:17:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEO-GROWTH-MBTI-ACTION-01B-R3 on codex/seo-growth-mbti-action-01b-r3-enqueue from latest main after reconciling that SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT had already merged on GitHub."
+        },
+        {
+          "at": "2026-05-23T12:18:36+08:00",
+          "status": "production_operation_completed",
+          "summary": "Completed the one-shot production operation for SEO-GROWTH-MBTI-ACTION-01B-R3: opened only the Search Channel queue write gate, enqueued the exact EN MBTI test URL via indexnow with queue_item_id=2 and batch_id=2, then immediately closed the gate while all live submission and external API gates remained false."
+        },
+        {
+          "at": "2026-05-23T12:20:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Local validation passed for SEO-GROWTH-MBTI-ACTION-01B-R3: focused one-shot enqueue test, Search Channel Queue suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-23T12:24:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1602 for SEO-GROWTH-MBTI-ACTION-01B-R3 from codex/seo-growth-mbti-action-01b-r3-enqueue after moving the scoped local commit off main and onto the correct task branch before push. The production operation remained bounded to one queue item, the queue write gate was closed again, and no live submission or external API call occurred."
         }
       ]
     }
