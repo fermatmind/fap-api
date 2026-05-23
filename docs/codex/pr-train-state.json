@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T11:28:00+08:00",
+  "updated_at": "2026-05-23T11:38:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -19858,6 +19858,11 @@
           "at": "2026-05-23T11:28:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1598 for OPS-ADMIN-UI-02 and pushed branch codex/ops-admin-ui-02-sidebar-taxonomy."
+        },
+        {
+          "at": "2026-05-23T11:38:00+08:00",
+          "status": "github_checks_failed_fixed_in_scope",
+          "summary": "GitHub MBTI verification failed because the first implementation touched runtime-classified Filament app/provider files. Scoped fix removes those runtime file deltas and keeps PR2 to translations, shell IA test, and train metadata."
         }
       ]
     },

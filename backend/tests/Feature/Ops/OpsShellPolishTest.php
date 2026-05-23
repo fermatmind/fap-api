@@ -8,19 +8,14 @@ use App\Filament\Ops\Pages\ArticlePublishingOpsPage;
 use App\Filament\Ops\Pages\ArticleTranslationOpsPage;
 use App\Filament\Ops\Pages\ContentReleasePage;
 use App\Filament\Ops\Pages\ContentWorkspacePage;
-use App\Filament\Ops\Pages\MbtiInsightsPage;
 use App\Filament\Ops\Pages\PostReleaseObservabilityPage;
 use App\Filament\Ops\Pages\QuestionAnalyticsPage;
 use App\Filament\Ops\Pages\SeoOperationsPage;
 use App\Filament\Ops\Resources\AdminUserResource;
 use App\Filament\Ops\Resources\ArticleResource;
-use App\Filament\Ops\Resources\CareerGuideResource;
-use App\Filament\Ops\Resources\CareerJobResource;
 use App\Filament\Ops\Resources\ContentPageResource;
-use App\Filament\Ops\Resources\LandingSurfaceResource;
 use App\Filament\Ops\Resources\MediaAssetResource;
 use App\Filament\Ops\Resources\OrganizationResource;
-use App\Filament\Ops\Resources\PersonalityProfileResource;
 use App\Filament\Ops\Resources\SupportArticleResource;
 use App\Livewire\Filament\Ops\Livewire\LocaleSwitcher;
 use Livewire\Livewire;
@@ -75,12 +70,6 @@ final class OpsShellPolishTest extends TestCase
         $this->assertSame('Content', MediaAssetResource::getNavigationGroup());
         $this->assertSame('Content', ContentWorkspacePage::getNavigationGroup());
 
-        $this->assertSame('Career Graph', CareerGuideResource::getNavigationGroup());
-        $this->assertSame('Career Graph', CareerJobResource::getNavigationGroup());
-        $this->assertSame('Career Graph', LandingSurfaceResource::getNavigationGroup());
-
-        $this->assertSame('Psychometrics', PersonalityProfileResource::getNavigationGroup());
-        $this->assertSame('Psychometrics', MbtiInsightsPage::getNavigationGroup());
         $this->assertSame('Psychometrics', QuestionAnalyticsPage::getNavigationGroup());
 
         $this->assertSame('Translation', ArticleTranslationOpsPage::getNavigationGroup());

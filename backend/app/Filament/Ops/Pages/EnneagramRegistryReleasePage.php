@@ -46,7 +46,7 @@ class EnneagramRegistryReleasePage extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.psychometrics');
+        return __('ops.group.content_control_plane');
     }
 
     public static function getNavigationLabel(): string

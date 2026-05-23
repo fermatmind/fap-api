@@ -58,7 +58,7 @@ class PersonalityProfileResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.psychometrics');
+        return __('ops.group.content');
     }
 
     public static function getNavigationLabel(): string

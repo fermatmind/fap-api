@@ -136,7 +136,7 @@ class MbtiInsightsPage extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.psychometrics');
+        return __('ops.group.insights');
     }
 
     public static function getNavigationLabel(): string
