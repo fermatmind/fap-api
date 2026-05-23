@@ -15096,7 +15096,7 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-01": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-fix-01",
-      "status": "in_progress",
+      "status": "local_checks_passed",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B"
       ],
@@ -15462,6 +15462,66 @@
           "at": "2026-05-23T13:10:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1605 for SEARCH-CHANNEL-LIVE-MBTI-01 from codex/search-channel-live-mbti-01-preflight. The task remains production read-only: no live gate changes, no live submission, no enqueue, no CMS mutation, and no external search API call."
+        }
+      ]
+    },
+    "SEARCH-CHANNEL-LIVE-MBTI-02": {
+      "repo": "fap-api",
+      "branch": "codex/search-channel-live-mbti-02",
+      "status": "in_progress",
+      "depends_on": [
+        "SEARCH-CHANNEL-LIVE-MBTI-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "production_operation": {
+          "approval_phrase": "passed: exact SEARCH-CHANNEL-LIVE-02 approval phrase present before any live gate change",
+          "pre_submit_verification": "passed: queue_item_id=2 still matched the EN MBTI indexnow candidate with approval_state=pending execution_state=dry_run_ready source_authority=scale_catalog page_entity_type=test_detail eligibility_state=eligible indexability_state=indexable claim_boundary_state=claim_safe private_flow=false",
+          "duplicate_verification": "passed: duplicate_count=1 and the only matching idempotency-key row was queue_item_id=2",
+          "dry_run_verification": "passed: php artisan seo-intel:search-channel-submit --queue-item-id=2 --dry-run --json returned success with no external call and no writes",
+          "gate_open": "passed: SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED, SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED, and SEO_INTEL_INDEXNOW_LIVE_API_ENABLED were temporarily enabled while SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED remained false",
+          "live_submission": "passed: php artisan seo-intel:search-channel-submit --queue-item-id=2 --approval-phrase=<exact phrase> --actor=codex --json returned status=success submission_status=accepted http_status=200 execution_state=submitted",
+          "gate_close": "passed: all three live gates were restored to false immediately after submission and queue write remained false",
+          "post_submit_verification": "passed: queue item 2 moved to approval_state=approved execution_state=submitted, item2 live event count increased from 0 to 2, other queue-item live event count remained unchanged at 2, and only queue item 2 was submitted"
+        },
+        "local": {
+          "focused_live_submission_test": "passed: php artisan test --filter=SeoIntelSearchChannelLiveMbti02 --no-ansi (1 test, 14 assertions)",
+          "search_channel_queue_suite": "passed: php artisan test --filter=SeoIntelSearchChannelQueue --no-ansi (22 tests, 200 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3508 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/search-channel-live-mbti-02.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": true,
+      "scheduler_activation": false,
+      "next_pr": "SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW",
+      "history": [
+        {
+          "at": "2026-05-23T13:15:00+08:00",
+          "status": "in_progress",
+          "summary": "Started SEARCH-CHANNEL-LIVE-MBTI-02 on codex/search-channel-live-mbti-02 from latest main. Production pre-submit verification confirmed queue item 2 remained the approved EN MBTI indexnow candidate, no duplicate active item existed, and the official dry-run submit command still passed with no external call."
+        },
+        {
+          "at": "2026-05-23T13:18:45+08:00",
+          "status": "production_operation_completed",
+          "summary": "Completed the one-shot live submission for SEARCH-CHANNEL-LIVE-MBTI-02: opened only the three approved live submission gates, kept queue write disabled, submitted queue item 2 through the official command, received IndexNow HTTP 200 accepted, and immediately closed all live gates again."
+        },
+        {
+          "at": "2026-05-23T13:24:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Local validation passed for SEARCH-CHANNEL-LIVE-MBTI-02: focused live submission test, Search Channel Queue suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
         }
       ]
     }
