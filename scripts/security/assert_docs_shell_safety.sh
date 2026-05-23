@@ -61,7 +61,7 @@ check_line() {
   local printable
   printable="$(rel "$file")"
 
-  if [[ "$line" =~ (^|[^\<])\<\<-?EOF([^A-Za-z0-9_]|$) ]]; then
+  if [[ "$line" =~ (^|[^\<])\<\<-?[[:space:]]*EOF([^A-Za-z0-9_]|$) ]]; then
     fail "$printable" "$line_no" "unquoted_heredoc_eof"
   fi
 
