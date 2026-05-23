@@ -121,4 +121,17 @@ final class OpsShellPolishTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/border-radius:\\s*(1[0-9]|20)px;/', $theme);
         $this->assertDoesNotMatchRegularExpression('/border-radius:\\s*calc\\(var\\(--ops-radius-card\\)\\s*\\+/', $theme);
     }
+
+    public function test_ops_custom_selects_reserve_space_for_single_chevron(): void
+    {
+        $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
+
+        $this->assertStringContainsString('.ops-input:is(select)', $theme);
+        $this->assertStringContainsString('-webkit-appearance: none;', $theme);
+        $this->assertStringContainsString('-moz-appearance: none;', $theme);
+        $this->assertStringContainsString('background-image: url("data:image/svg+xml', $theme);
+        $this->assertStringContainsString('padding-inline-end: 2.65rem;', $theme);
+        $this->assertStringContainsString('text-overflow: ellipsis;', $theme);
+        $this->assertStringContainsString('.ops-content-search-controls__filters .ops-input:is(select)', $theme);
+    }
 }
