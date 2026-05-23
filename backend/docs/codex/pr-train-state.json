@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T23:15:00+08:00",
+  "updated_at": "2026-05-23T23:20:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5524,10 +5524,10 @@
     "PR-API-SEC-06": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_scope_validation_passed",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-06-cn-proxy-release-gate",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "b01b92d533f99c593bd24973222c405e23aaa950",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1621",
       "title": "fix(security): enforce CN proxy public-route release gate",
       "checks": {
         "local": [
@@ -5597,6 +5597,11 @@
           "at": "2026-05-23T23:15:00+08:00",
           "status": "local_scope_validation_passed",
           "summary": "Enforced explicit CN proxy public-route release gate in the surface builder; focused CN proxy/job-detail tests, Pint, route list, JSON validation, and diff checks passed. Broad SeoIntel/Career manifest suite failures were recorded as external sidecar SIDE-PR-API-SEC-06-01."
+        },
+        {
+          "at": "2026-05-23T23:20:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened https://github.com/fermatmind/fap-api/pull/1621 from codex/pr-api-sec-06-cn-proxy-release-gate after push."
         }
       ]
     },
