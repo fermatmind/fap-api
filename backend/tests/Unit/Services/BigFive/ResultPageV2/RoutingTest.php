@@ -109,9 +109,7 @@ final class RoutingTest extends TestCase
     public function test_full_projection_percentiles_can_build_route_input_without_trait_bands(): void
     {
         $routeInput = (new BigFiveV2ProjectionRouteInputAdapter)->fromProjection([
-            '_meta' => [
-                'schema_version' => 'big5.public_projection.v1',
-            ],
+            'schema_version' => 'big5.public_projection.v1',
             'trait_bands' => [
                 'O' => 'mid',
                 'C' => 'low',
@@ -136,6 +134,58 @@ final class RoutingTest extends TestCase
         $this->assertNotNull($routeInput);
         $this->assertSame('O3_C2_E2_A3_N4', $routeInput->combinationKey);
         $this->assertSame([['key' => 'N1', 'percentile' => 82, 'bucket' => 'high']], $routeInput->facetRouteSignals);
+    }
+
+    public function test_projection_with_unsupported_schema_fails_closed(): void
+    {
+        $adapter = new BigFiveV2ProjectionRouteInputAdapter;
+
+        $this->assertNull($adapter->fromProjection(array_replace($this->projection(), [
+            'schema_version' => 'legacy.public_projection.v1',
+        ])));
+        $this->assertContains('projection.schema_version unsupported', $adapter->errors());
+    }
+
+    public function test_projection_with_invalid_facet_signal_fails_closed(): void
+    {
+        $adapter = new BigFiveV2ProjectionRouteInputAdapter;
+
+        $this->assertNull($adapter->fromProjection(array_replace($this->projection(), [
+            'facet_vector' => [
+                ['key' => 'X1', 'percentile' => 82, 'bucket' => 'high'],
+            ],
+        ])));
+        $this->assertContains('projection.facet_vector.X1 unsupported', $adapter->errors());
+
+        $adapter = new BigFiveV2ProjectionRouteInputAdapter;
+
+        $this->assertNull($adapter->fromProjection(array_replace($this->projection(), [
+            'facet_vector' => [
+                ['key' => 'N1', 'percentile' => 101, 'bucket' => 'high'],
+            ],
+        ])));
+        $this->assertContains('projection.facet_vector.N1.percentile invalid', $adapter->errors());
+    }
+
+    public function test_score_result_with_invalid_facet_signal_fails_closed(): void
+    {
+        $adapter = new BigFiveV2ProjectionRouteInputAdapter;
+
+        $this->assertNull($adapter->fromScoreResult(array_replace_recursive($this->scoreResult([
+            'O' => 59,
+            'C' => 32,
+            'E' => 20,
+            'A' => 55,
+            'N' => 68,
+        ]), [
+            'scores_0_100' => [
+                'facets_percentile' => [
+                    'N1' => 82,
+                    'C1' => 101,
+                ],
+            ],
+        ])));
+        $this->assertContains('score_result.scores_0_100.facets_percentile.C1 invalid', $adapter->errors());
     }
 
     public function test_degraded_quality_and_missing_norms_carry_suppression_hints(): void
@@ -205,6 +255,28 @@ final class RoutingTest extends TestCase
             ],
             'quality' => $quality,
             'norms' => $norms,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function projection(): array
+    {
+        return [
+            'schema_version' => 'big5.public_projection.v1',
+            'trait_vector' => [
+                ['key' => 'O', 'percentile' => 59, 'band' => 'mid'],
+                ['key' => 'C', 'percentile' => 32, 'band' => 'low'],
+                ['key' => 'E', 'percentile' => 20, 'band' => 'low'],
+                ['key' => 'A', 'percentile' => 55, 'band' => 'mid'],
+                ['key' => 'N', 'percentile' => 68, 'band' => 'high'],
+            ],
+            'facet_vector' => [
+                ['key' => 'N1', 'percentile' => 82, 'bucket' => 'high'],
+            ],
+            'quality' => ['level' => 'A'],
+            'norms' => ['status' => 'CALIBRATED'],
         ];
     }
 }

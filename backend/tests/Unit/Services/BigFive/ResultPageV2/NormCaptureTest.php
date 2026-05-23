@@ -47,7 +47,7 @@ final class NormCaptureTest extends TestCase
         $writer = $this->writer();
         $first = $writer->capture($this->scoreResult(), $this->context());
         $second = $writer->capture($this->scoreResult([
-            'raw_domain_scores' => ['O' => 1],
+            'raw_domain_scores' => ['O' => 1, 'C' => 2, 'E' => 3, 'A' => 4, 'N' => 5],
         ]), $this->context());
 
         $this->assertTrue($first->captured);
@@ -66,10 +66,18 @@ final class NormCaptureTest extends TestCase
             'missing_score_version' => [$this->scoreResult(), ['score_version' => '']],
             'invalid_eligibility' => [$this->scoreResult(), ['norm_eligibility_status' => 'excluded']],
             'source_excluded' => [$this->scoreResult(), ['attempt_source' => 'fixture']],
+            'source_excluded_case_insensitive' => [$this->scoreResult(), ['attempt_source' => 'Staging']],
             'low_quality' => [$this->scoreResult(), ['quality_level' => 'C']],
             'quality_flag_excluded' => [$this->scoreResult(), ['quality_flags' => ['SPEEDING']]],
+            'quality_flag_excluded_case_insensitive' => [$this->scoreResult(), ['quality_flags' => ['attention_check_failed']]],
+            'unsupported_scale_code' => [$this->scoreResult(), ['scale_code' => 'RIASEC']],
+            'unsupported_form_code' => [$this->scoreResult(), ['form_code' => 'big5_legacy']],
             'missing_raw_domain_scores' => [$this->scoreResult(['raw_domain_scores' => []]), []],
             'missing_raw_facet_scores' => [$this->scoreResult(['raw_facet_scores' => []]), []],
+            'incomplete_raw_domain_scores' => [$this->scoreResult(['raw_domain_scores' => ['O' => 71, 'C' => 64, 'E' => 58, 'A' => 69]]), []],
+            'incomplete_raw_facet_scores' => [$this->scoreResult(['raw_facet_scores' => ['O1' => 15]]), []],
+            'invalid_raw_domain_scores' => [$this->scoreResult(['raw_domain_scores' => ['O' => 71, 'C' => 64, 'E' => 58, 'A' => 69, 'N' => 'NaN']]), []],
+            'invalid_raw_facet_scores' => [$this->scoreResult(['raw_facet_scores' => array_replace($this->facetScores(), ['C6' => null])]), []],
         ];
 
         foreach ($cases as $case => [$scoreResult, $overrides]) {
@@ -110,8 +118,23 @@ final class NormCaptureTest extends TestCase
     {
         return array_replace([
             'raw_domain_scores' => ['O' => 71, 'C' => 64, 'E' => 58, 'A' => 69, 'N' => 31],
-            'raw_facet_scores' => ['O1' => 15, 'C1' => 13, 'E1' => 12, 'A1' => 14, 'N1' => 7],
+            'raw_facet_scores' => $this->facetScores(),
         ], $overrides);
+    }
+
+    /**
+     * @return array<string,int>
+     */
+    private function facetScores(): array
+    {
+        return [
+            'N1' => 7, 'E1' => 12, 'O1' => 15, 'A1' => 14, 'C1' => 13,
+            'N2' => 8, 'E2' => 11, 'O2' => 16, 'A2' => 13, 'C2' => 14,
+            'N3' => 9, 'E3' => 10, 'O3' => 17, 'A3' => 12, 'C3' => 15,
+            'N4' => 10, 'E4' => 9, 'O4' => 18, 'A4' => 11, 'C4' => 16,
+            'N5' => 11, 'E5' => 8, 'O5' => 19, 'A5' => 10, 'C5' => 17,
+            'N6' => 12, 'E6' => 7, 'O6' => 20, 'A6' => 9, 'C6' => 18,
+        ];
     }
 
     /**
