@@ -12,7 +12,7 @@ The crawler-log observe command now supports two safe modes:
 
 ```bash
 php artisan seo-intel:crawler-log-observe --fixture --dry-run --no-write --json --limit=20
-php artisan seo-intel:crawler-log-observe --source=/var/log/nginx/access.log --approval-phrase="I explicitly approve CRAWLER-LOG-04 production canary for source /var/log/nginx/access.log with max_lines=1000 and no raw persistence." --dry-run --no-write --json --limit=1000
+php artisan seo-intel:crawler-log-observe --source=<approved-log-path> --approval-phrase="I explicitly approve CRAWLER-LOG-04 production canary for source <approved-log-path> with max_lines=1000 and no raw persistence." --dry-run --no-write --json --limit=1000
 ```
 
 Current command posture:

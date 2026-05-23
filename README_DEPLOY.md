@@ -50,10 +50,10 @@ Truth Source: `backend/composer.json` / `backend/package.json` / `backend/config
 以 `backend/.env.example` 为模板，生产必须由密钥系统注入。
 
 Deployer SSH 约定：
-- 默认 production 走阿里云 ECS `DEPLOY_HOST_PROD=139.224.130.204`、`DEPLOY_USER_PROD=ubuntu`
-- `122.152.221.126` 是退役中的腾讯云 Node3，不允许作为 production deploy target
-- GitHub Actions production deploy 使用 release layout：`DEPLOY_PATH_PROD=/var/www/fap-api`
-- 阿里云 host bootstrap 后，nginx / Supervisor / cron 应指向 `/var/www/fap-api/current/backend`；迁移期可让 `current` 临时指向手工 runtime，首次标准 Deployer release 会替换该 symlink
+- 默认 production 使用受控 `DEPLOY_HOST_PROD` 和 `DEPLOY_USER_PROD`，具体主机和账号只保存在部署配置/密钥系统中。
+- 退役腾讯云 Node3 不允许作为 production deploy target；具体地址不写入仓库文档。
+- GitHub Actions production deploy 使用受控 release layout；具体 release root 以部署配置为准。
+- host bootstrap 后，nginx / Supervisor / cron 应指向受控 current release backend；首次标准 Deployer release 会替换临时 symlink。
 - 若本机存在 `~/.ssh/fap_prod` 或 `~/.ssh/fap_api_gha`，`deploy.php` 会自动将其作为 production `IdentityFile`
 - staging 若本机存在 `~/.ssh/fap_actions_staging`，会自动作为 staging `IdentityFile`
 - 如需显式覆盖，使用：

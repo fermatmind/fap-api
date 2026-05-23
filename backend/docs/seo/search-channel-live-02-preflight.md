@@ -7,7 +7,7 @@ Date: 2026-05-21
 
 This rerun returns to the small human-approved Search Channel live submission canary after `SEARCH-CHANNEL-LIVE-02-EXECUTOR` added the guarded single-item executor, production was deployed to a release that contains that executor, and the IndexNow live configuration was added to production.
 
-No live search API call, URL submission, scheduler activation, DNS change, or additional queue write was performed in this preflight task. The production env/config cache was updated only to add the IndexNow key/keyLocation and one-shot live gates needed for the next approved canary attempt.
+No live search API call, URL submission, scheduler activation, DNS change, or additional queue write was performed in this preflight task. The production config cache was updated only for the approved one-shot live gates; concrete IndexNow key and keyLocation details are kept outside repository docs.
 
 ## Executor Evidence
 
@@ -38,7 +38,7 @@ The production dry-run confirmed the intended canary candidate:
 The guarded live submission executor was run in dry-run mode only:
 
 ```bash
-cd /var/www/fap-api/current/backend
+cd <production-backend-release-dir>
 php artisan seo-intel:search-channel-submit --queue-item-id=1 --dry-run --json
 ```
 
@@ -59,7 +59,7 @@ Result:
 The queue planner was also run in no-write dry-run mode:
 
 ```bash
-cd /var/www/fap-api/current/backend
+cd <production-backend-release-dir>
 php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=1
 ```
 
@@ -88,14 +88,14 @@ Production now has the live submission gates and IndexNow key metadata in Larave
 - `SEO_INTEL_INDEXNOW_KEY` present
 - `SEO_INTEL_INDEXNOW_KEY_LOCATION` present
 - Laravel config cache rebuilt
-- public keyLocation host `fermatmind.com` returned the expected 32-byte key file
+- public keyLocation on the approved host returned the expected 32-byte key file
 
-The key value and full keyLocation are intentionally not written to this artifact.
+The key value, full keyLocation, key hash, and concrete host are intentionally not written to this artifact.
 
 The guarded executor was also checked without the approval phrase:
 
 ```bash
-cd /var/www/fap-api/current/backend
+cd <production-backend-release-dir>
 php artisan seo-intel:search-channel-submit --queue-item-id=1 --json
 ```
 

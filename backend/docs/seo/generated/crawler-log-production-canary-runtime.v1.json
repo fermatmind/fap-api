@@ -4,7 +4,7 @@
   "runtime": "crawler_log_observe",
   "mode": "single_source_production_canary_dry_run",
   "single_source_only": true,
-  "command": "php artisan seo-intel:crawler-log-observe --source=/var/log/nginx/access.log --approval-phrase=\"I explicitly approve CRAWLER-LOG-04 production canary for source /var/log/nginx/access.log with max_lines=1000 and no raw persistence.\" --dry-run --no-write --json --limit=1000",
+  "command": "php artisan seo-intel:crawler-log-observe --source=<approved-log-path> --approval-phrase=\"I explicitly approve CRAWLER-LOG-04 production canary for source <approved-log-path> with max_lines=1000 and no raw persistence.\" --dry-run --no-write --json --limit=1000",
   "required_flags": [
     "--source",
     "--approval-phrase",
@@ -23,9 +23,9 @@
   "max_line_limit": 1000,
   "approval_phrase_template": "I explicitly approve CRAWLER-LOG-04 production canary for source <log_path> with max_lines=1000 and no raw persistence.",
   "source_execution_surface": {
-    "host": "139.224.130.204",
-    "release_shell": "/var/www/fap-api/current/backend",
-    "approved_source": "/var/log/nginx/access.log"
+    "host": "<redacted-approved-production-host>",
+    "release_shell": "<redacted-production-release-shell>",
+    "approved_source": "<redacted-approved-log-path>"
   },
   "output_fields": [
     "runtime",

@@ -4,9 +4,9 @@
   "runtime": "crawler_log_observe",
   "report_type": "production_canary_read_only_summary",
   "source": {
-    "host": "139.224.130.204",
-    "shell": "/var/www/fap-api/current/backend",
-    "path": "/var/log/nginx/access.log",
+    "host": "<redacted-approved-production-host>",
+    "shell": "<redacted-production-release-shell>",
+    "path": "<redacted-approved-log-path>",
     "source_log_family": "nginx_access_log",
     "single_source_only": true
   },
@@ -18,7 +18,7 @@
   "approval": {
     "approval_phrase_verified": true,
     "approval_phrase_template": "I explicitly approve CRAWLER-LOG-04 production canary for source <log_path> with max_lines=1000 and no raw persistence.",
-    "approved_source_phrase": "I explicitly approve CRAWLER-LOG-04 production canary for source /var/log/nginx/access.log with max_lines=1000 and no raw persistence.",
+    "approved_source_phrase": "I explicitly approve CRAWLER-LOG-04 production canary for source <approved-log-path> with max_lines=1000 and no raw persistence.",
     "max_lines": 1000
   },
   "blocked_attempt": {

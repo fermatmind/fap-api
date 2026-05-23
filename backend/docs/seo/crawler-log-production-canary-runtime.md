@@ -22,8 +22,8 @@ Crawler log canary output remains observability-only. It is not URL Truth, not S
 ```bash
 cd backend
 php artisan seo-intel:crawler-log-observe \
-  --source=/var/log/nginx/access.log \
-  --approval-phrase="I explicitly approve CRAWLER-LOG-04 production canary for source /var/log/nginx/access.log with max_lines=1000 and no raw persistence." \
+  --source=<approved-log-path> \
+  --approval-phrase="I explicitly approve CRAWLER-LOG-04 production canary for source <approved-log-path> with max_lines=1000 and no raw persistence." \
   --dry-run \
   --no-write \
   --json \
@@ -86,8 +86,8 @@ The absolute source path is used transiently for approval verification and file 
 
 Current approved production execution context observed during preflight:
 
-- host: `139.224.130.204`
-- release shell: `/var/www/fap-api/current/backend`
-- source: `/var/log/nginx/access.log`
+- host: redacted from repository docs; recorded in approved ops inventory
+- release shell: redacted from repository docs; recorded in approved ops inventory
+- source: redacted from repository docs; recorded in approved ops inventory
 
 This document defines runtime only. It does not deploy the runtime and does not perform a production log read by itself.
