@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-23T08:06:29+08:00",
+  "updated_at": "2026-05-23T11:12:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -3583,7 +3583,7 @@
       "repo": "fap-web",
       "branch": "codex/riasec-personalization-06-frontend-fail-closed",
       "title": "feat(riasec): consume backend personalization state fail-closed",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "RIASEC-PERSONALIZATION-03",
         "RIASEC-PERSONALIZATION-04"
@@ -3599,8 +3599,8 @@
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1423",
       "checks": {},
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-22T10:38:13Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "sidecar_issues": []
     },
@@ -4464,7 +4464,7 @@
         "no fap-web change"
       ],
       "commit_sha": "0bc77e5ebcbd2ebb81789dfb9e25f1ecc1ea855b",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1597",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -6798,7 +6798,7 @@
         "do not enable CN proxy indexability, sitemap, llms, llms-full, or public route exposure",
         "do not mark CN proxy rows as canonical rollout candidates"
       ],
-      "commit_sha": null,
+      "commit_sha": "87c65e1375d291a8b1c257f0b20d84c12cf43ad7",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1538",
       "checks": {
         "authorization": {
@@ -14992,7 +14992,8 @@
           "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01a-preflight-dry-run-package.v1.json",
           "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
-          "git_diff_check": "passed: git diff --check"
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
         },
         "github": {}
       },
@@ -19691,6 +19692,166 @@
           "at": "2026-05-22T18:31:57+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1576 for SEO-OPS-SOP-01F and pushed branch codex/seo-ops-sop-01f-final-closeout."
+        },
+        {
+          "at": "2026-05-23T11:08:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled GitHub state: PR #1576 is MERGED at b423d9fd8bbdc0739e13711384999c80588f5ab1, origin/main contains the merge, and the remote branch is deleted."
+        }
+      ]
+    },
+    "OPS-ADMIN-UI-01": {
+      "repo": "fap-api",
+      "branch": "codex/ops-admin-ui-01-table-toolbar",
+      "status": "in_progress",
+      "depends_on": [],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "ops_theme_build": "passed: cd backend && npm run build:ops-theme",
+          "ops_shell_polish": "passed: cd backend && php artisan test tests/Feature/Ops/OpsShellPolishTest.php --no-ansi (4 tests, 25 assertions)",
+          "route_list": "passed: cd backend && php artisan route:list --no-ansi (203 routes)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "OPS-ADMIN-UI-02",
+      "history": [
+        {
+          "at": "2026-05-23T11:08:00+08:00",
+          "status": "registered",
+          "summary": "Registered OPS admin UI PR train from user-provided ids and scopes. OPS-ADMIN-UI-01 scope is global Filament table toolbar spacing and density via ops theme CSS plus compiled theme artifact and train metadata only."
+        },
+        {
+          "at": "2026-05-23T11:08:00+08:00",
+          "status": "in_progress",
+          "summary": "Started OPS-ADMIN-UI-01 on codex/ops-admin-ui-01-table-toolbar after syncing main. Scope remains theme CSS, compiled CSS, and PR-train metadata."
+        },
+        {
+          "at": "2026-05-23T11:10:30+08:00",
+          "status": "committed",
+          "summary": "Committed global table toolbar spacing and density change at 87c65e1375d291a8b1c257f0b20d84c12cf43ad7 after local validation passed."
+        },
+        {
+          "at": "2026-05-23T11:12:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1597 for OPS-ADMIN-UI-01 and pushed branch codex/ops-admin-ui-01-table-toolbar."
+        }
+      ]
+    },
+    "OPS-ADMIN-UI-02": {
+      "repo": "fap-api",
+      "branch": "codex/ops-admin-ui-02-sidebar-taxonomy",
+      "status": "pending",
+      "depends_on": [
+        "OPS-ADMIN-UI-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "OPS-ADMIN-UI-03",
+      "history": [
+        {
+          "at": "2026-05-23T11:08:00+08:00",
+          "status": "registered",
+          "summary": "Registered sidebar taxonomy regrouping PR. Scope is Filament resource/page navigation group labels, ordering, icons, and translations only."
+        }
+      ]
+    },
+    "OPS-ADMIN-UI-03": {
+      "repo": "fap-api",
+      "branch": "codex/ops-admin-ui-03-dashboard-telemetry",
+      "status": "pending",
+      "depends_on": [
+        "OPS-ADMIN-UI-02"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "OPS-ADMIN-UI-04",
+      "history": [
+        {
+          "at": "2026-05-23T11:08:00+08:00",
+          "status": "registered",
+          "summary": "Registered dashboard telemetry hierarchy PR. Scope is Ops dashboard widgets and severity theme styles only."
+        }
+      ]
+    },
+    "OPS-ADMIN-UI-04": {
+      "repo": "fap-api",
+      "branch": "codex/ops-admin-ui-04-seo-ops-i18n",
+      "status": "pending",
+      "depends_on": [
+        "OPS-ADMIN-UI-03"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "OPS-ADMIN-UI-05",
+      "history": [
+        {
+          "at": "2026-05-23T11:08:00+08:00",
+          "status": "registered",
+          "summary": "Registered SEO Ops polish and i18n pass PR. Scope is SEO Ops pages, translations, and read-model unavailable states only."
+        }
+      ]
+    },
+    "OPS-ADMIN-UI-05": {
+      "repo": "fap-api",
+      "branch": "codex/ops-admin-ui-05-theme-tokens",
+      "status": "pending",
+      "depends_on": [
+        "OPS-ADMIN-UI-04"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": null,
+      "history": [
+        {
+          "at": "2026-05-23T11:08:00+08:00",
+          "status": "registered",
+          "summary": "Registered theme token consolidation PR. Scope is ops theme tokens, radius, and color semantics only."
         }
       ]
     }

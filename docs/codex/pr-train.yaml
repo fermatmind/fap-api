@@ -10535,3 +10535,213 @@ prs:
     production_migration_execution_allowed: false
     scheduler_activation: false
     next_task: SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT
+
+  - id: OPS-ADMIN-UI-01
+    repo: fap-api
+    branch: codex/ops-admin-ui-01-table-toolbar
+    base: main
+    title: "style(ops): improve global table toolbar spacing"
+    name: "Global Filament table toolbar spacing and density"
+    train_scope: ops_admin_ui
+    risk_level: low_ui_only
+    type: ui_theme
+    scope:
+      - Improve global Ops Filament table toolbar spacing and density so search, filters, and column toggle controls no longer visually crowd each other.
+      - Keep the change UI-only and scoped to Ops Filament theme styles.
+      - Preserve all resource, model, query, telemetry, queue, CMS, payment, and production runtime behavior.
+    allowed_paths:
+      - backend/resources/css/filament/ops/theme.css
+      - backend/resources/css/filament/ops/theme.compiled.css
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify Filament resources, pages, widgets, models, migrations, routes, services, production env/deploy files, fap-web, CMS records, queues, telemetry, orders, payments, or webhooks.
+    validation:
+      - cd backend && npm run build:ops-theme
+      - cd backend && php artisan test tests/Feature/Ops/OpsShellPolishTest.php --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: OPS-ADMIN-UI-02
+
+  - id: OPS-ADMIN-UI-02
+    repo: fap-api
+    depends_on:
+      - OPS-ADMIN-UI-01
+    branch: codex/ops-admin-ui-02-sidebar-taxonomy
+    base: main
+    title: "refactor(ops): regroup sidebar navigation taxonomy"
+    name: "Ops sidebar taxonomy regrouping"
+    train_scope: ops_admin_ui
+    risk_level: medium_ui_navigation
+    type: ui_navigation_i18n
+    scope:
+      - Regroup Ops Filament sidebar navigation into clearer operator domains using Filament-native navigation groups, labels, sorting, and translations.
+      - Preserve resource routes, permissions, model behavior, data access, and CMS authority.
+    allowed_paths:
+      - backend/app/Providers/Filament/AdminPanelProvider.php
+      - backend/app/Filament/Ops/Pages/**
+      - backend/app/Filament/Ops/Resources/**
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify models, migrations, routes, services, widgets, production env/deploy files, fap-web, CMS records, queues, telemetry, orders, payments, or webhooks.
+    validation:
+      - cd backend && php artisan test tests/Feature/Ops/OpsShellPolishTest.php tests/Feature/Ops/OpsCustomPagesI18nContractTest.php --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test app/Providers/Filament/AdminPanelProvider.php app/Filament/Ops/Pages app/Filament/Ops/Resources
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: OPS-ADMIN-UI-03
+
+  - id: OPS-ADMIN-UI-03
+    repo: fap-api
+    depends_on:
+      - OPS-ADMIN-UI-02
+    branch: codex/ops-admin-ui-03-dashboard-telemetry
+    base: main
+    title: "feat(ops): strengthen dashboard telemetry hierarchy"
+    name: "Ops dashboard telemetry hierarchy"
+    train_scope: ops_admin_ui
+    risk_level: medium_ui_widgets
+    type: ui_widget_theme
+    scope:
+      - Improve Ops dashboard telemetry hierarchy for commerce, funnel, webhook, queue, and health widgets.
+      - Make warning and critical states easier to scan while preserving read-only telemetry behavior.
+      - Improve funnel empty state to keep the operational funnel contract visible when rows are zero.
+    allowed_paths:
+      - backend/app/Filament/Ops/Widgets/**
+      - backend/resources/css/filament/ops/theme.css
+      - backend/resources/css/filament/ops/theme.compiled.css
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/tests/Feature/Ops/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify models, migrations, routes, services outside dashboard read widgets, production env/deploy files, fap-web, CMS records, queues, telemetry writes, orders, payments, or webhooks.
+    validation:
+      - cd backend && npm run build:ops-theme
+      - cd backend && php artisan test tests/Feature/Ops --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test app/Filament/Ops/Widgets tests/Feature/Ops
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: OPS-ADMIN-UI-04
+
+  - id: OPS-ADMIN-UI-04
+    repo: fap-api
+    depends_on:
+      - OPS-ADMIN-UI-03
+    branch: codex/ops-admin-ui-04-seo-ops-polish
+    base: main
+    title: "feat(ops): polish SEO Ops pages and i18n states"
+    name: "SEO Ops page polish and i18n pass"
+    train_scope: ops_admin_ui
+    risk_level: low_medium_ui_i18n
+    type: ui_i18n_seo_ops
+    scope:
+      - Polish `/ops/seo` and `/ops/seo-operations` layout, copy, read-model unavailable states, and bilingual behavior.
+      - Preserve SEO read/write gates, Search Channel boundaries, queue behavior, and production data safety.
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/SeoDashboardAccessPage.php
+      - backend/app/Filament/Ops/Pages/SeoOperationsPage.php
+      - backend/resources/views/filament/ops/pages/seo-dashboard-access.blade.php
+      - backend/resources/views/filament/ops/pages/seo-operations.blade.php
+      - backend/resources/views/filament/ops/components/**
+      - backend/resources/css/filament/ops/theme.css
+      - backend/resources/css/filament/ops/theme.compiled.css
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/tests/Feature/Ops/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify migrations, routes, SEO collectors, Search Channel live submission, scheduler, queue workers, production env/deploy files, fap-web, CMS records, orders, payments, or webhooks.
+    validation:
+      - cd backend && npm run build:ops-theme
+      - cd backend && php artisan test tests/Feature/Ops/OpsCustomPagesI18nContractTest.php tests/Feature/Ops/SeoOperationsPageTest.php tests/Feature/Ops/SeoIntelOpsPortalSeoRouteShellTest.php tests/Feature/Ops/SeoIntelOpsSeoNativeDashboardUiTest.php --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test app/Filament/Ops/Pages/SeoDashboardAccessPage.php app/Filament/Ops/Pages/SeoOperationsPage.php tests/Feature/Ops
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: OPS-ADMIN-UI-05
+
+  - id: OPS-ADMIN-UI-05
+    repo: fap-api
+    depends_on:
+      - OPS-ADMIN-UI-04
+    branch: codex/ops-admin-ui-05-theme-tokens
+    base: main
+    title: "style(ops): consolidate industrial theme tokens"
+    name: "Ops theme token consolidation"
+    train_scope: ops_admin_ui
+    risk_level: medium_ui_theme
+    type: ui_theme_tokens
+    scope:
+      - Consolidate Ops theme tokens for background, surface, border, typography, state colors, and radius semantics.
+      - Keep the theme restrained and accessible; do not force a full dark command center unless supported by existing surfaces.
+      - Preserve all runtime behavior and data authority.
+    allowed_paths:
+      - backend/resources/css/filament/ops/theme.css
+      - backend/resources/css/filament/ops/theme.compiled.css
+      - backend/resources/css/filament/ops/tailwind.config.js
+      - backend/tests/Feature/Ops/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify Filament resources/pages/widgets behavior, models, migrations, routes, services, production env/deploy files, fap-web, CMS records, queues, telemetry, orders, payments, or webhooks.
+    validation:
+      - cd backend && npm run build:ops-theme
+      - cd backend && php artisan test tests/Feature/Ops --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: null
