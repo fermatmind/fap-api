@@ -1,0 +1,33 @@
+{
+  "schema_version": "v1",
+  "task": "SEO-GROWTH-MBTI-ACTION-01B-R2-GATE-PREFLIGHT",
+  "final_decision": "mbti_action_01b_r2_gate_preflight_ready_for_one_shot_enqueue_approval",
+  "target_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+  "channel": "indexnow",
+  "queue_write_gate_env": "SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED",
+  "queue_write_gate_current_state": false,
+  "live_submission_gate_current_state": false,
+  "external_api_gate_current_state": false,
+  "indexnow_live_api_gate_current_state": false,
+  "dry_run_passed": true,
+  "duplicate_detected": false,
+  "allowed_gate_change": [
+    {
+      "env": "SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED",
+      "temporary_value": true,
+      "scope": "one enqueue only"
+    }
+  ],
+  "forbidden_gate_changes": [
+    "SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED",
+    "SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED",
+    "SEO_INTEL_INDEXNOW_LIVE_API_ENABLED"
+  ],
+  "exact_future_approval_phrase": "I explicitly approve opening Search Channel queue write gate for one enqueue of https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types via indexnow, then immediately closing the queue write gate. Do not perform live submission.",
+  "no_gate_change_performed": true,
+  "no_enqueue": true,
+  "no_submission": true,
+  "no_external_api_call": true,
+  "no_cms_mutation": true,
+  "next_task": "SEO-GROWTH-MBTI-ACTION-01B-R3"
+}
