@@ -167,6 +167,50 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
     }
 
     #[Test]
+    public function no_write_overrides_explicit_enqueue_even_when_write_gate_is_enabled(): void
+    {
+        config(['seo_intel.search_channel_queue.write_enabled' => true]);
+        $this->seedSeoUrl();
+
+        $exitCode = Artisan::call('seo-intel:search-channel-queue', [
+            '--enqueue' => true,
+            '--no-write' => true,
+            '--json' => true,
+        ]);
+        $output = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $output['status'] ?? null);
+        $this->assertContains('enqueue_conflicts_with_dry_run_or_no_write', $output['issues'] ?? []);
+        $this->assertFalse((bool) ($output['writes_committed'] ?? true));
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_batches')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_events')->count());
+    }
+
+    #[Test]
+    public function dry_run_overrides_explicit_enqueue_even_when_write_gate_is_enabled(): void
+    {
+        config(['seo_intel.search_channel_queue.write_enabled' => true]);
+        $this->seedSeoUrl();
+
+        $exitCode = Artisan::call('seo-intel:search-channel-queue', [
+            '--enqueue' => true,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $output = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $output['status'] ?? null);
+        $this->assertContains('enqueue_conflicts_with_dry_run_or_no_write', $output['issues'] ?? []);
+        $this->assertFalse((bool) ($output['writes_committed'] ?? true));
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_batches')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_events')->count());
+    }
+
+    #[Test]
     public function enqueue_requires_explicit_env_gate(): void
     {
         $this->seedSeoUrl();

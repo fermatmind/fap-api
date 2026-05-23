@@ -15891,14 +15891,14 @@
     "COMMERCE-TENANT-REPAIR-01": {
       "repo": "fap-api",
       "branch": "codex/commerce-tenant-repair-01",
-      "status": "github_checks_failed_scoped_fix_local_passed",
+      "status": "merged",
       "depends_on": [
         "ATTEMPT-SUBMISSION-RELIABILITY-01"
       ],
       "findings": [
         63
       ],
-      "commit_sha": "43269b5cd9d6ba9a6c038d9bf6d4bac66feef750",
+      "commit_sha": "fd0fb1f4c1109d2a806085cd0debcad98f38ab33",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1628",
       "checks": {
         "dependency_reconciliation": {
@@ -15942,12 +15942,16 @@
           "status": "pass",
           "command": "bash backend/scripts/ci_verify_mbti.sh",
           "evidence": "Local MBTI verification completed successfully after the scoped runtime freeze allowlist. Generated BigFive compiled artifacts were restored before staging."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "GitHub PR #1628 is MERGED at fd0fb1f4c1109d2a806085cd0debcad98f38ab33; remote branch is absent."
         }
       },
       "sidecar_issues": [],
-      "failure_reason": "Initial GitHub verify-mbti jobs failed on scoped CommerceRepairPostCommitFailed.php runtime freeze classification; local scoped fix and backend/scripts/ci_verify_mbti.sh now pass, pending amended push and GitHub rerun.",
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "failure_reason": null,
+      "merged_at": "2026-05-23T18:54:35Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "updated_at": "2026-05-24T02:40:27+08:00",
       "events": [
@@ -15965,13 +15969,19 @@
           "at": "2026-05-24T02:40:27+08:00",
           "status": "github_checks_failed_scoped_fix_local_passed",
           "summary": "Added a narrow runtime freeze classifier regression/allowlist for CommerceRepairPostCommitFailed.php, reran targeted freeze tests and backend/scripts/ci_verify_mbti.sh successfully, and restored generated BigFive compiled files before staging."
+        },
+        {
+          "at": "2026-05-24T03:35:00+08:00",
+          "status": "ledger_reconciled_merged",
+          "summary": "Reconciled PR #1628 as merged; origin/main contains fd0fb1f4c1109d2a806085cd0debcad98f38ab33 and the remote branch is absent."
         }
-      ]
+      ],
+      "local_cleanup_note": "Reconciled from GitHub while preparing SEO-OPS-SAFETY-ARTIFACTS-01; no scripts/post_merge_cleanup.sh exists in this clone, and local task branch was absent."
     },
     "DB-MIGRATION-PORTABILITY-01": {
       "repo": "fap-api",
       "branch": "codex/db-migration-portability-01",
-      "status": "pending",
+      "status": "merged",
       "depends_on": [
         "COMMERCE-TENANT-REPAIR-01"
       ],
@@ -15980,19 +15990,32 @@
         64,
         65
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "commit_sha": "47f18f4f4806f734f08f8677f8d15a36da6c3198",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1629",
+      "checks": {
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "GitHub PR #1629 is MERGED at 47f18f4f4806f734f08f8677f8d15a36da6c3198; remote branch is absent."
+        }
+      },
       "sidecar_issues": [],
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-23T19:21:05Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-05-24T03:35:00+08:00",
+          "status": "ledger_reconciled_merged",
+          "summary": "Reconciled PR #1629 as merged; origin/main contains 47f18f4f4806f734f08f8677f8d15a36da6c3198 and the remote branch is absent."
+        }
+      ],
+      "local_cleanup_note": "Reconciled from GitHub while preparing SEO-OPS-SAFETY-ARTIFACTS-01; no scripts/post_merge_cleanup.sh exists in this clone, and local task branch was absent."
     },
     "SEO-OPS-SAFETY-ARTIFACTS-01": {
       "repo": "fap-api",
       "branch": "codex/seo-ops-safety-artifacts-01",
-      "status": "pending",
+      "status": "pr_open",
       "depends_on": [
         "DB-MIGRATION-PORTABILITY-01"
       ],
@@ -16002,14 +16025,63 @@
         3,
         4
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
-      "sidecar_issues": [],
+      "commit_sha": "69700814",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1630",
+      "checks": {
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to SEO search-channel queue safety, two-stage URL truth handoff artifact safety, SEO docs/generated artifact, focused SeoIntel tests, and PR train state metadata."
+        },
+        "search_channel_queue_runtime": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Feature/SeoIntel/SeoIntelSearchChannelQueueRuntimeTest.php --no-ansi",
+          "evidence": "19 tests passed, 118 assertions."
+        },
+        "two_stage_url_truth_handoff": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Feature/SeoIntel/SeoIntelTwoStageUrlTruthHandoffTest.php --no-ansi",
+          "evidence": "7 tests passed, 71 assertions."
+        },
+        "seo_intel_feature_suite": {
+          "status": "failed_external_sidecar_reproduced_on_main",
+          "command": "cd backend && php artisan test tests/Feature/SeoIntel --no-ansi",
+          "evidence": "Current branch full SeoIntel feature suite failed in existing crawler log/UI/live02 preflight assertions; the representative failures reproduced on origin/main detached worktree at 47f18f4f, so they are not introduced by this scoped PR."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Console/Commands/SeoIntelSearchChannelQueueCommand.php app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php app/Services/SeoIntel tests/Feature/SeoIntel",
+          "evidence": "173 files passed Pint."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "sidecar_issues": [
+        {
+          "id": "SEO-INTEL-FEATURE-SUITE-BASELINE-20260524",
+          "status": "external_blocker_reproduced_on_main",
+          "summary": "Full tests/Feature/SeoIntel currently fails on origin/main in crawler log artifact text, SEO Ops crawler observation UI text, native dashboard Chinese/English assertion drift, issue queue detail panel text, and IndexNow keyLocation host redaction. These failures are outside SEO-OPS-SAFETY-ARTIFACTS-01 scope and were reproduced on origin/main before PR creation.",
+          "reproduced_on": "origin/main@47f18f4f4806f734f08f8677f8d15a36da6c3198",
+          "reproduced_at": "2026-05-24T03:35:00+08:00"
+        }
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-05-24T03:35:00+08:00",
+          "status": "local_checks_passed_with_external_sidecar",
+          "summary": "Scoped Search Channel queue no-write/enqueue conflict tests, two-stage URL truth handoff artifact safety tests, Pint, and diff check passed. Full SeoIntel feature-suite failures were reproduced on origin/main and recorded as an external sidecar under the user-approved continuation protocol."
+        },
+        {
+          "at": "2026-05-24T03:40:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1630 for SEO-OPS-SAFETY-ARTIFACTS-01 after scoped local checks passed and the full SeoIntel Feature-suite failure was recorded as an external sidecar reproduced on origin/main."
+        }
+      ]
     },
     "SEO-INDEXABILITY-TRUTH-01": {
       "repo": "fap-api",

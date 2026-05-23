@@ -29,6 +29,8 @@ php artisan seo-intel:url-truth-handoff \
 
 The export is candidate-only. It does not write to `seo_intel`, does not call external search APIs, does not read crawler logs, and does not submit URLs.
 
+The artifact path must be an absolute `.json` path in an existing non-symlink directory. Export refuses to overwrite an existing file or symlink.
+
 ## Runner-side Validation
 
 The Aliyun runner validates the artifact with:
@@ -53,6 +55,8 @@ Validation is fail-closed. The artifact is accepted only when every candidate is
 - routed under `/en/research/{slug}` or `/zh/research/{slug}`
 
 Validation rejects `/articles`, `/reports`, stale `turnover-rate-report` slugs, draft/private/noindex/claim-unsafe candidates, and sensitive metadata keys.
+
+Import validates artifact path safety before reading. It accepts only regular `.json` files under an existing non-symlink directory and rejects stream wrappers, relative paths, missing files, symlinks, and oversized artifacts.
 
 ## Runner-side Bounded Write
 

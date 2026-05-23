@@ -35,7 +35,7 @@ final class SeoIntelSearchChannelQueueCommand extends Command
         $plan = $planner->plan($channel, $pageType, $limit, $canonicalUrl);
         $plannedItems = $plan['planned_items'];
         $writeGateEnabled = (bool) config('seo_intel.search_channel_queue.write_enabled', false);
-        $writeRequested = $enqueue || (! $dryRun && ! $noWrite);
+        $writeRequested = ! $dryRun && ! $noWrite;
         $writesAttempted = false;
         $writesCommitted = false;
         $enqueueAttempted = false;
@@ -60,6 +60,12 @@ final class SeoIntelSearchChannelQueueCommand extends Command
             $issues[] = 'existing_active_queue_item';
         }
 
+        $enqueueConflictBlocked = $enqueue && ($dryRun || $noWrite);
+
+        if ($enqueueConflictBlocked) {
+            $issues[] = 'enqueue_conflicts_with_dry_run_or_no_write';
+        }
+
         $canonicalFilterBlocked = $canonicalUrl !== null
             && $plan['source_unavailable_reason'] === null
             && $issues !== [];
@@ -72,7 +78,7 @@ final class SeoIntelSearchChannelQueueCommand extends Command
             $issues[] = 'channel_not_allowed';
         }
 
-        if ($canonicalFilterBlocked) {
+        if ($canonicalFilterBlocked || $enqueueConflictBlocked) {
             $status = 'blocked';
         }
 

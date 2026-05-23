@@ -6,6 +6,7 @@ namespace App\Services\SeoIntel;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 final class UrlTruthHandoffArtifact
 {
@@ -121,9 +122,9 @@ final class UrlTruthHandoffArtifact
 
     public function writeJson(string $path, array $artifact): void
     {
-        $directory = dirname($path);
-        if (! is_dir($directory)) {
-            mkdir($directory, 0755, true);
+        $issue = $this->artifactPathSafetyIssue($path, forWrite: true);
+        if ($issue !== null) {
+            throw new InvalidArgumentException($issue);
         }
 
         file_put_contents($path, json_encode($artifact, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR).PHP_EOL);
@@ -134,6 +135,11 @@ final class UrlTruthHandoffArtifact
      */
     public function readJson(string $path): array
     {
+        $issue = $this->artifactPathSafetyIssue($path, forWrite: false);
+        if ($issue !== null) {
+            throw new InvalidArgumentException($issue);
+        }
+
         $decoded = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
 
         return is_array($decoded) ? $decoded : [];
@@ -141,7 +147,69 @@ final class UrlTruthHandoffArtifact
 
     public function sha256(string $path): string
     {
+        $issue = $this->artifactPathSafetyIssue($path, forWrite: false);
+        if ($issue !== null) {
+            throw new InvalidArgumentException($issue);
+        }
+
         return hash_file('sha256', $path) ?: '';
+    }
+
+    public function artifactPathSafetyIssue(string $path, bool $forWrite): ?string
+    {
+        $path = trim($path);
+
+        if ($path === '') {
+            return 'artifact_path_empty';
+        }
+
+        if (str_contains($path, "\0")) {
+            return 'artifact_path_invalid';
+        }
+
+        if (parse_url($path, PHP_URL_SCHEME) !== null) {
+            return 'artifact_path_stream_wrapper_forbidden';
+        }
+
+        if (! str_starts_with($path, DIRECTORY_SEPARATOR)) {
+            return 'artifact_path_must_be_absolute';
+        }
+
+        if (Str::lower(pathinfo($path, PATHINFO_EXTENSION)) !== 'json') {
+            return 'artifact_path_must_be_json';
+        }
+
+        $basename = basename($path);
+        if ($basename === '' || $basename === '.' || $basename === '..') {
+            return 'artifact_path_invalid';
+        }
+
+        $directory = dirname($path);
+        if (! is_dir($directory)) {
+            return 'artifact_directory_missing';
+        }
+
+        if (is_link($directory)) {
+            return 'artifact_directory_symlink_forbidden';
+        }
+
+        if ($forWrite) {
+            if (file_exists($path) || is_link($path)) {
+                return 'artifact_path_already_exists';
+            }
+
+            return null;
+        }
+
+        if (! is_file($path) || is_link($path)) {
+            return 'artifact_path_not_regular_file';
+        }
+
+        if (filesize($path) > 1024 * 1024) {
+            return 'artifact_file_too_large';
+        }
+
+        return null;
     }
 
     /**

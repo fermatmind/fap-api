@@ -20,6 +20,16 @@
       "seo_url_entities"
     ]
   },
+  "artifact_path_safety": {
+    "absolute_path_required": true,
+    "json_extension_required": true,
+    "stream_wrappers_allowed": false,
+    "directory_must_exist": true,
+    "directory_symlink_allowed": false,
+    "export_overwrite_allowed": false,
+    "import_regular_file_required": true,
+    "max_import_bytes": 1048576
+  },
   "allowed_candidates": {
     "page_entity_type": "research_report",
     "source_authority": "backend_cms",
