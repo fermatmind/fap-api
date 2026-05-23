@@ -119,6 +119,23 @@ final class ReleasePackScriptContractTest extends TestCase
         $this->assertStringContainsString('unquoted_heredoc_eof', $output);
     }
 
+    public function test_docs_shell_safety_guard_rejects_unquoted_heredoc_with_whitespace(): void
+    {
+        [$exitCode, $output] = $this->runDocsShellSafetyGuard(
+            "```bash\n".
+            "cat > /tmp/ledger.md << EOF\n".
+            "Markdown with backticks can be expanded by the shell.\n".
+            "EOF\n".
+            "cat > /tmp/indented.md <<- EOF\n".
+            "Indented heredoc bodies can still expand variables.\n".
+            "EOF\n".
+            "```\n"
+        );
+
+        $this->assertNotSame(0, $exitCode, $output);
+        $this->assertStringContainsString('unquoted_heredoc_eof', $output);
+    }
+
     public function test_docs_shell_safety_guard_rejects_content_releases_tree_delete_example(): void
     {
         [$exitCode, $output] = $this->runDocsShellSafetyGuard(

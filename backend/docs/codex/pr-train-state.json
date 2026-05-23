@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T23:56:00+08:00",
+  "updated_at": "2026-05-23T23:58:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5744,9 +5744,9 @@
     "PR-API-SEC-08": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/pr-api-sec-08-issue-queue-pii-sanitizer",
-      "commit_sha": "bd2c1f03e78b886958ba421dd01da7955906cd83",
+      "commit_sha": "052980ee164d440e77a138c207386678b4e9c675",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1623",
       "title": "fix(security): redact identifiers in drift issue queues",
       "checks": {
@@ -5787,13 +5787,28 @@
         "github": [
           {
             "name": "Code Scanning / semgrep sarif",
-            "status": "pending",
-            "details": "GitHub check is in progress on PR #1623."
+            "status": "passed",
+            "details": "GitHub check completed successfully on PR #1623."
           },
           {
             "name": "CI / hygiene",
-            "status": "pending",
-            "details": "GitHub push and pull_request hygiene checks are in progress on PR #1623."
+            "status": "passed",
+            "details": "GitHub push and pull_request hygiene checks completed successfully on PR #1623."
+          },
+          {
+            "name": "CI / verify-mbti-legacy",
+            "status": "passed",
+            "details": "GitHub push and pull_request verify-mbti-legacy checks completed successfully on PR #1623."
+          },
+          {
+            "name": "CI / verify-mbti-v2",
+            "status": "passed",
+            "details": "GitHub push and pull_request verify-mbti-v2 checks completed successfully on PR #1623."
+          },
+          {
+            "name": "Semgrep OSS",
+            "status": "passed",
+            "details": "GitHub Semgrep OSS check completed successfully on PR #1623."
           }
         ]
       },
@@ -5810,9 +5825,9 @@
         }
       ],
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T23:24:04+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-23T00:00:00+08:00",
@@ -5833,19 +5848,63 @@
           "at": "2026-05-23T23:56:00+08:00",
           "status": "pr_open",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1623 from codex/pr-api-sec-08-issue-queue-pii-sanitizer after push; initial GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-23T23:57:00+08:00",
+          "status": "github_checks_passed",
+          "summary": "GitHub Code Scanning and CI checks passed on PR #1623 for commit 72939234d06fc752da72a3e37e94e7f98de967e3."
+        },
+        {
+          "at": "2026-05-23T23:57:00+08:00",
+          "status": "merged",
+          "summary": "Squash merged PR #1623; merge commit 052980ee164d440e77a138c207386678b4e9c675. Remote branch was deleted and local post-merge cleanup executed."
+        },
+        {
+          "at": "2026-05-23T23:57:00+08:00",
+          "status": "post_merge_revalidated",
+          "summary": "Post-merge focused issue queue sanitizer tests passed: 25 tests, 369 assertions."
         }
       ]
     },
     "PR-API-SEC-09": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "planned",
+      "status": "local_checks_passed",
       "branch": "codex/pr-api-sec-09-docs-heredoc-guard",
       "commit_sha": "",
       "pr_url": "",
       "title": "fix(security): harden docs heredoc guard parsing",
       "checks": {
-        "local": [],
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app tests docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed",
+            "details": "3118 files passed style validation."
+          },
+          {
+            "command": "php artisan test tests/Feature/ReleasePackScriptContractTest.php tests/Unit/Security/SecurityGuardrailsTest.php",
+            "status": "passed",
+            "details": "26 tests, 105 assertions."
+          },
+          {
+            "command": "php artisan test tests/Unit/Security/SecurityGuardrailsTest.php",
+            "status": "passed",
+            "details": "17 tests, 77 assertions."
+          },
+          {
+            "command": "php artisan route:list --no-ansi",
+            "status": "passed",
+            "details": "203 routes listed."
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
         "github": []
       },
       "failure_reason": "",
@@ -5858,6 +5917,16 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "planned",
           "summary": "PR-API-SEC-09 planned after explicit user authorization for the first-wave security train."
+        },
+        {
+          "at": "2026-05-23T23:57:00+08:00",
+          "status": "in_progress",
+          "summary": "Started PR-API-SEC-09 from updated main after PR-API-SEC-08 merged; scope is limited to backend docs heredoc guard whitespace bypass hardening and focused parser/guard tests."
+        },
+        {
+          "at": "2026-05-23T23:58:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Hardened docs heredoc guard whitespace parsing and added focused ReleasePack guard coverage; JSON, Pint, SecurityGuardrails, route list, and diff checks passed."
         }
       ]
     }
