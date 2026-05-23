@@ -4877,10 +4877,10 @@
     "PR-API-SEC-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "committed",
+      "status": "pr_open",
       "branch": "codex/pr-api-sec-01-research-cms-trusted-org",
       "commit_sha": "206cf1bba7909c9b4785922338c630f24850cc0b",
-      "pr_url": "",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1616",
       "title": "fix(security): bind research CMS endpoints to trusted org context",
       "checks": {
         "local": [
@@ -4933,6 +4933,11 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "committed",
           "summary": "Committed scoped PR-API-SEC-01 implementation at 206cf1bba7909c9b4785922338c630f24850cc0b."
+        },
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1616 for PR-API-SEC-01 after local checks passed."
         }
       ]
     },
