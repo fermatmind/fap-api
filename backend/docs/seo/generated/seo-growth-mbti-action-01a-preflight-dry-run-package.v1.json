@@ -1,0 +1,250 @@
+{
+  "schema_version": "seo-growth-mbti-action-01a-preflight-dry-run-package.v1",
+  "version": "seo-growth-mbti-action-01a-preflight-dry-run-package.v1",
+  "task": "SEO-GROWTH-MBTI-ACTION-01A",
+  "final_decision": "mbti_action_01a_completed_blocked_search_channel_source",
+  "candidate_urls": [
+    {
+      "url": "/en/tests/mbti-personality-test-16-personality-types",
+      "absolute_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+      "locale": "en",
+      "surface": "mbti_test",
+      "action_status": "preflight_candidate_only"
+    },
+    {
+      "url": "/zh/tests/mbti-personality-test-16-personality-types",
+      "absolute_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "locale": "zh",
+      "surface": "mbti_test",
+      "action_status": "preflight_candidate_only"
+    },
+    {
+      "url": "/en/research/mbti-personality-types-salary-turnover-report",
+      "absolute_url": "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+      "locale": "en",
+      "surface": "mbti_research_report",
+      "action_status": "preflight_candidate_only"
+    },
+    {
+      "url": "/zh/research/mbti-personality-types-salary-turnover-report",
+      "absolute_url": "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report",
+      "locale": "zh",
+      "surface": "mbti_research_report",
+      "action_status": "preflight_candidate_only"
+    }
+  ],
+  "public_url_checks": [
+    {
+      "url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "canonical": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+      "canonical_matches": true,
+      "dataset_json_ld_present": false,
+      "stale_turnover_rate_slug_present": false,
+      "forbidden_claim_hits": [],
+      "diagnosis_hit_context": "none",
+      "sitemap_included": false,
+      "llms_included": true
+    },
+    {
+      "url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "canonical": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "canonical_matches": true,
+      "dataset_json_ld_present": false,
+      "stale_turnover_rate_slug_present": false,
+      "forbidden_claim_hits": [],
+      "diagnosis_hit_context": "bounded_non_diagnostic_faq",
+      "sitemap_included": false,
+      "llms_included": true
+    },
+    {
+      "url": "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "canonical": "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+      "canonical_matches": true,
+      "dataset_json_ld_present": false,
+      "stale_turnover_rate_slug_present": false,
+      "forbidden_claim_hits": [],
+      "diagnosis_hit_context": "none",
+      "sitemap_included": false,
+      "llms_included": false
+    },
+    {
+      "url": "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "canonical": "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report",
+      "canonical_matches": true,
+      "dataset_json_ld_present": false,
+      "stale_turnover_rate_slug_present": false,
+      "forbidden_claim_hits": [],
+      "diagnosis_hit_context": "non_clinical_technical_system_diagnosis_context",
+      "sitemap_included": false,
+      "llms_included": false
+    }
+  ],
+  "url_truth_dry_run_result": {
+    "command": "php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --limit=20",
+    "exit_code": 0,
+    "status": "success",
+    "dry_run": true,
+    "writes_attempted": false,
+    "writes_committed": false,
+    "external_calls_attempted": false,
+    "items_seen": 7,
+    "candidate_count": 7,
+    "planned_url_count": 7,
+    "source_authority_breakdown": {
+      "backend_public_surface": 4,
+      "scale_catalog": 3
+    },
+    "source_notes": {
+      "backend_sitemap_source_available": true,
+      "scale_catalog_available": false,
+      "scale_catalog_unavailable_reason": "scale_catalog_unavailable",
+      "research_reports_available": false,
+      "research_reports_unavailable_reason": "research_reports_unavailable"
+    }
+  },
+  "search_channel_dry_run_result": {
+    "command": "php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --limit=20",
+    "exit_code": 0,
+    "status": "success",
+    "dry_run": true,
+    "no_write": true,
+    "writes_attempted": false,
+    "writes_committed": false,
+    "external_calls_attempted": false,
+    "search_submission_attempted": false,
+    "candidate_count": 0,
+    "eligible_count": 0,
+    "planned_queue_count": 0,
+    "write_gate_enabled": false,
+    "issues": [
+      "seo_urls_source_unavailable"
+    ]
+  },
+  "claim_lint_result": {
+    "command": "php artisan seo-intel:claim-lint --fixture --json",
+    "exit_code": 1,
+    "status": "blocked",
+    "lint_state": "blocked",
+    "fixture_mode": true,
+    "candidate_count": 8,
+    "expected_fixture_blockers_present": true,
+    "production_scan_attempted": false,
+    "auto_rewrite_attempted": false,
+    "cms_mutation_attempted": false,
+    "search_channel_enqueue_attempted": false,
+    "search_submission_attempted": false,
+    "public_candidate_claim_boundary": {
+      "status": "passed_with_bounded_context_notes",
+      "forbidden_positive_claim_hits": [],
+      "diagnosis_contexts": [
+        "zh_test_non_diagnostic_faq",
+        "zh_research_technical_system_diagnosis_not_clinical"
+      ]
+    }
+  },
+  "content_rehearsal_dry_run_result": {
+    "command": "php artisan seo-intel:content-publish-rehearsal --dry-run --no-write --json",
+    "exit_code": 0,
+    "status": "success",
+    "rehearsal_state": "needs_review",
+    "dry_run": true,
+    "no_write": true,
+    "writes_attempted": false,
+    "cms_mutation_attempted": false,
+    "article_publish_attempted": false,
+    "search_channel_enqueue_attempted": false,
+    "search_submission_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "candidate_count": 0,
+    "warnings": [
+      "no_candidates_provided"
+    ],
+    "search_channel_eligibility_state": "dry_run_not_eligible"
+  },
+  "internal_link_dry_run_result": {
+    "command": "php artisan seo-intel:internal-link-graph --dry-run --no-write --json",
+    "exit_code": 1,
+    "status": "blocked",
+    "dry_run": true,
+    "no_write": true,
+    "writes_attempted": false,
+    "cms_mutation_attempted": false,
+    "link_mutation_attempted": false,
+    "blocker": "local_mysql_access_denied_for_internal_link_read_model",
+    "production_db_fallback_used": false
+  },
+  "digital_pr_tracking_state": {
+    "source_folder": "/Users/rainie/Desktop/FermatMind_Digital_PR",
+    "tracking_files_present": true,
+    "hrzone": {
+      "status": "sent_no_response_yet",
+      "sent_at": "2026-05-20T22:51:40+08:00",
+      "do_not_follow_up_before": "2026-05-25",
+      "follow_up_due": "2026-05-26",
+      "backlink_observed": "no",
+      "referral_observed": "no",
+      "mention_observed": "no"
+    },
+    "hrec": {
+      "status": "draft_not_sent",
+      "requires_future_human_approval": true
+    },
+    "outreach_sent_in_this_pr": false,
+    "outlook_edited_in_this_pr": false
+  },
+  "action_01b_readiness": {
+    "action": "SEO-GROWTH-MBTI-ACTION-01B",
+    "status": "blocked",
+    "reason": "Search Channel no-write dry-run produced zero candidates and issue seo_urls_source_unavailable.",
+    "candidate_enqueue_count": 0,
+    "requires_human_approval": true,
+    "no_enqueue_in_this_pr": true,
+    "no_live_submit_in_this_pr": true
+  },
+  "action_01c_readiness": {
+    "action": "SEO-GROWTH-MBTI-ACTION-01C",
+    "status": "deferred",
+    "reason": "HRZone follow-up window has not arrived and HREC remains draft requiring separate human approval.",
+    "send_auto_ready": false,
+    "requires_human_approval": true
+  },
+  "action_01d_readiness": {
+    "action": "SEO-GROWTH-MBTI-ACTION-01D",
+    "status": "blocked",
+    "reason": "Internal link graph dry-run is blocked by local DB access; CMS/internal link repair package is not ready.",
+    "repair_auto_ready": false,
+    "requires_human_approval": true
+  },
+  "blockers": [
+    "search_channel_url_truth_source_unavailable",
+    "search_channel_candidate_count_zero",
+    "candidate_urls_absent_from_sitemap",
+    "internal_link_graph_local_db_unavailable"
+  ],
+  "sidecars": [
+    "fap_api_main_ahead_of_last_observed_backend_deploy",
+    "research_reports_source_unavailable_in_local_url_truth_dry_run",
+    "scale_catalog_source_unavailable_in_local_url_truth_dry_run",
+    "action_01b_01c_01d_not_executed"
+  ],
+  "no_write": true,
+  "no_enqueue": true,
+  "no_submission": true,
+  "no_cms_mutation": true,
+  "no_digital_pr_send": true,
+  "no_deploy": true,
+  "no_migration": true,
+  "no_scheduler": true,
+  "no_collector_write": true,
+  "no_fap_web_modification": true,
+  "next_task": "SEO-GROWTH-MBTI-ACTION-01B-FIX｜Resolve MBTI Search Channel URL Truth source readiness"
+}
