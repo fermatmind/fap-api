@@ -6194,7 +6194,7 @@
       "repo": "fap-api",
       "branch": "codex/repair-progressive-runtime-candidate-pool-selection-1",
       "title": "fix(api): consume progressive delta slugs in runtime candidate pool",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "REPAIR-PROGRESSIVE-READINESS-OCCUPATION-AWARE-SELECTION-1"
       ],
@@ -6348,7 +6348,7 @@
         "do not treat candidate-aware planning artifacts as final published authority"
       ],
       "commit_sha": "66800c324532fff8eb20ebd0c5a5bfdf9098dd61",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1605",
       "checks": {
         "authorization": {
           "status": "pass",
@@ -14940,7 +14940,10 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+          "status": "pending",
+          "pr": "pending: PR #1605 opened for SEARCH-CHANNEL-LIVE-MBTI-01 and awaiting required GitHub checks"
+        }
       },
       "failure_reason": null,
       "merged_at": null,
@@ -15454,6 +15457,11 @@
           "at": "2026-05-23T13:05:00+08:00",
           "status": "local_checks_passed",
           "summary": "Local validation passed for SEARCH-CHANNEL-LIVE-MBTI-01: focused live preflight test, Search Channel Queue suite, route list, Pint, generated JSON/state parsing, YAML parsing, and diff whitespace checks."
+        },
+        {
+          "at": "2026-05-23T13:10:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1605 for SEARCH-CHANNEL-LIVE-MBTI-01 from codex/search-channel-live-mbti-01-preflight. The task remains production read-only: no live gate changes, no live submission, no enqueue, no CMS mutation, and no external search API call."
         }
       ]
     }
