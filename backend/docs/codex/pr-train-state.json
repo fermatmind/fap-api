@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T21:43:00+08:00",
+  "updated_at": "2026-05-23T22:18:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5036,9 +5036,9 @@
     "PR-API-SEC-02": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/pr-api-sec-02-redact-prod-infra-docs",
-      "commit_sha": "7b95b8a5",
+      "commit_sha": "86c46c5305cdad8e384b6eb32d2e9ad24977c32a",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1617",
       "title": "docs(security): redact production infrastructure details",
       "checks": {
@@ -5073,21 +5073,53 @@
           {
             "command": "git diff --check && git diff --cached --check",
             "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Security/SecurityGuardrailsTest.php",
+            "status": "passed",
+            "details": "Post-merge revalidation passed: 16 tests, 69 assertions."
           }
         ],
         "github": [
           {
-            "name": "github_checks",
-            "status": "pending",
-            "details": "PR #1617 opened; awaiting GitHub check completion."
+            "name": "hygiene",
+            "status": "passed"
+          },
+          {
+            "name": "hygiene",
+            "status": "passed"
+          },
+          {
+            "name": "semgrep sarif",
+            "status": "passed"
+          },
+          {
+            "name": "Semgrep OSS",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "passed"
           }
         ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-23T13:46:04Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-23T00:00:00+08:00",
@@ -5108,20 +5140,94 @@
           "at": "2026-05-23T21:43:00+08:00",
           "status": "pr_open",
           "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1617 for PR-API-SEC-02 after local checks and scope validation passed."
+        },
+        {
+          "at": "2026-05-23T21:44:52+08:00",
+          "status": "github_checks_green",
+          "summary": "GitHub checks for PR #1617 completed successfully: hygiene, Semgrep OSS, semgrep sarif, verify-mbti-legacy, and verify-mbti-v2 all passed."
+        },
+        {
+          "at": "2026-05-23T21:46:04+08:00",
+          "status": "merged",
+          "summary": "PR #1617 squash-merged into main with merge commit 86c46c5305cdad8e384b6eb32d2e9ad24977c32a; remote branch was deleted."
+        },
+        {
+          "at": "2026-05-23T21:48:00+08:00",
+          "status": "post_merge_revalidated",
+          "summary": "Ran post_merge_cleanup.sh for codex/pr-api-sec-02-redact-prod-infra-docs and revalidated SecurityGuardrailsTest on updated main."
         }
       ]
     },
     "PR-API-SEC-03": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "planned",
+      "status": "ci_fix_local_checks_passed",
       "branch": "codex/pr-api-sec-03-pin-semgrep-ci",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "41feebfb",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1618",
       "title": "ci(security): pin privileged Semgrep install",
       "checks": {
-        "local": [],
-        "github": []
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Security/SecurityGuardrailsTest.php",
+            "status": "passed",
+            "details": "17 tests, 75 assertions; includes pinned Semgrep workflow guardrail."
+          },
+          {
+            "command": "php artisan route:list --no-ansi",
+            "status": "passed",
+            "details": "203 routes listed; no route/runtime changes in scope."
+          },
+          {
+            "command": "vendor/bin/pint --test tests/Unit/Security/SecurityGuardrailsTest.php docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "ruby -e 'require \"yaml\"; YAML.load_file(\".github/workflows/codeql.yml\")'",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Security/SecurityGuardrailsTest.php",
+            "status": "passed",
+            "details": "CI fix rerun passed: 17 tests, 77 assertions."
+          },
+          {
+            "command": "ruby -e 'require \"yaml\"; YAML.load_file(\".github/workflows/codeql.yml\")'",
+            "status": "passed",
+            "details": "CI fix rerun."
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "passed"
+          },
+          {
+            "name": "hygiene",
+            "status": "passed"
+          },
+          {
+            "name": "semgrep sarif",
+            "status": "failed_then_fixed_pending_rerun",
+            "details": "Pinned Semgrep 1.136.0 installed, but latest setuptools 82 removed pkg_resources required by Semgrep/opentelemetry; CI failed during semgrep --version. Fix pins setuptools 80.9.0 alongside Semgrep."
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "pending"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "pending"
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
@@ -5133,6 +5239,31 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "planned",
           "summary": "PR-API-SEC-03 planned after explicit user authorization for the first-wave security train."
+        },
+        {
+          "at": "2026-05-23T22:05:00+08:00",
+          "status": "in_progress",
+          "summary": "Started PR-API-SEC-03 from updated main after PR-API-SEC-02 merged; scope is limited to Code Scanning Semgrep pinning plus focused workflow hygiene coverage."
+        },
+        {
+          "at": "2026-05-23T22:05:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Pinned Code Scanning Semgrep install to an exact version and added guardrail coverage; SecurityGuardrailsTest, JSON, and route list checks passed."
+        },
+        {
+          "at": "2026-05-23T22:10:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/1618 for PR-API-SEC-03 after local checks and scope validation passed."
+        },
+        {
+          "at": "2026-05-23T21:51:50+08:00",
+          "status": "github_checks_failed",
+          "summary": "GitHub semgrep sarif failed in the PR3 workflow install step after Semgrep 1.136.0 pulled setuptools 82.0.1, which no longer provides pkg_resources required by Semgrep/opentelemetry."
+        },
+        {
+          "at": "2026-05-23T22:18:00+08:00",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "Pinned setuptools 80.9.0 alongside Semgrep 1.136.0 and extended workflow guardrail coverage; focused test, JSON, and workflow YAML parse checks passed locally."
         }
       ]
     },
