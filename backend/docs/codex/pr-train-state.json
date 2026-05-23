@@ -4877,9 +4877,9 @@
     "PR-API-SEC-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "committed",
       "branch": "codex/pr-api-sec-01-research-cms-trusted-org",
-      "commit_sha": "",
+      "commit_sha": "206cf1bba7909c9b4785922338c630f24850cc0b",
       "pr_url": "",
       "title": "fix(security): bind research CMS endpoints to trusted org context",
       "checks": {
@@ -4928,6 +4928,11 @@
           "at": "2026-05-23T00:00:00+08:00",
           "status": "local_checks_passed",
           "summary": "PR-API-SEC-01 scoped implementation completed; focused research CMS test, JSON, Pint, route list, sqlite migrate pretend, and diff checks passed."
+        },
+        {
+          "at": "2026-05-23T00:00:00+08:00",
+          "status": "committed",
+          "summary": "Committed scoped PR-API-SEC-01 implementation at 206cf1bba7909c9b4785922338c630f24850cc0b."
         }
       ]
     },
