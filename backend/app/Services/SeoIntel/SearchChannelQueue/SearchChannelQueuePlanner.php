@@ -18,7 +18,7 @@ final class SearchChannelQueuePlanner
     /**
      * @return array<string, mixed>
      */
-    public function plan(?string $channel = null, ?string $pageType = null, int $limit = 20): array
+    public function plan(?string $channel = null, ?string $pageType = null, int $limit = 20, ?string $canonicalUrl = null): array
     {
         $sourceUnavailableReason = null;
         $rows = [];
@@ -40,6 +40,10 @@ final class SearchChannelQueuePlanner
                     $query->where('page_entity_type', $pageType);
                 }
 
+                if ($canonicalUrl !== null && $canonicalUrl !== '') {
+                    $query->where('canonical_url', $canonicalUrl);
+                }
+
                 $rows = $query->get()
                     ->map(fn (object $row): array => (array) $row)
                     ->all();
@@ -55,6 +59,8 @@ final class SearchChannelQueuePlanner
         $pageTypeBreakdown = [];
         $reasonCodeBreakdown = [];
         $selectedChannels = $this->channels->channels($channel);
+        $matchedCandidates = [];
+        $duplicateDetected = false;
 
         if ($selectedChannels === [] && $channel !== null && $channel !== '') {
             $reasonCodeBreakdown['channel_not_allowed'] = 1;
@@ -64,6 +70,7 @@ final class SearchChannelQueuePlanner
             $result = $this->eligibility->evaluate($row);
             $pageEntityType = (string) ($row['page_entity_type'] ?? 'unknown');
             $pageTypeBreakdown[$pageEntityType] = ($pageTypeBreakdown[$pageEntityType] ?? 0) + 1;
+            $matchedCandidates[] = $this->matchedCandidate($row, $result);
 
             if (! $result->eligible) {
                 $blocked[] = [
@@ -84,6 +91,30 @@ final class SearchChannelQueuePlanner
             $eligibleUrlCount++;
 
             foreach ($selectedChannels as $selectedChannel) {
+                $duplicate = $this->idempotency->existingQueueItem(
+                    canonicalUrl: (string) ($row['canonical_url'] ?? ''),
+                    locale: (string) ($row['locale'] ?? ''),
+                    channel: $selectedChannel,
+                );
+
+                if ($duplicate !== null) {
+                    $duplicateDetected = true;
+                    $blocked[] = [
+                        'canonical_url_hash' => hash('sha256', (string) ($row['canonical_url'] ?? '')),
+                        'locale' => (string) ($row['locale'] ?? ''),
+                        'page_entity_type' => $pageEntityType,
+                        'channel' => $selectedChannel,
+                        'eligibility_state' => 'blocked',
+                        'reason_codes' => ['existing_active_queue_item'],
+                        'duplicate_queue_item_id' => $duplicate['id'],
+                        'duplicate_approval_state' => $duplicate['approval_state'],
+                        'duplicate_execution_state' => $duplicate['execution_state'],
+                    ];
+                    $reasonCodeBreakdown['existing_active_queue_item'] = ($reasonCodeBreakdown['existing_active_queue_item'] ?? 0) + 1;
+
+                    continue;
+                }
+
                 $channelBreakdown[$selectedChannel] = ($channelBreakdown[$selectedChannel] ?? 0) + 1;
                 $planned[] = $this->plannedItem($row, $result, $selectedChannel);
             }
@@ -104,6 +135,9 @@ final class SearchChannelQueuePlanner
             'channel_breakdown' => $channelBreakdown,
             'page_type_breakdown' => $pageTypeBreakdown,
             'reason_code_breakdown' => $reasonCodeBreakdown,
+            'selected_channels' => $selectedChannels,
+            'duplicate_detected' => $duplicateDetected,
+            'selected_candidate' => count($matchedCandidates) === 1 ? $matchedCandidates[0] : null,
         ];
     }
 
@@ -170,5 +204,24 @@ final class SearchChannelQueuePlanner
         }
 
         return str_contains($source, '.') ? explode('.', $source, 2)[0] : $source;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return array<string, mixed>
+     */
+    private function matchedCandidate(array $row, SearchChannelQueueEligibilityResult $result): array
+    {
+        return [
+            'canonical_url' => (string) ($row['canonical_url'] ?? ''),
+            'locale' => (string) ($row['locale'] ?? ''),
+            'page_entity_type' => (string) ($row['page_entity_type'] ?? ''),
+            'source_authority' => (string) ($row['source_authority'] ?? ''),
+            'indexability_state' => (string) ($row['indexability_state'] ?? ''),
+            'claim_boundary_state' => $result->claimBoundaryState,
+            'private_flow' => (bool) ($row['is_private_flow'] ?? false),
+            'eligibility_state' => $result->eligibilityState,
+            'reason_codes' => $result->reasonCodes,
+        ];
     }
 }

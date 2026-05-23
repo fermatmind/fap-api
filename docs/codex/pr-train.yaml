@@ -10443,3 +10443,52 @@ prs:
     production_migration_execution_allowed: false
     scheduler_activation: false
     next_task: SEO-GROWTH-MBTI-ACTION-01B-FIX-01
+
+  - id: SEO-GROWTH-MBTI-ACTION-01B-FIX-01
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-ACTION-01B
+    branch: codex/seo-growth-mbti-action-01b-fix-01
+    base: main
+    title: "feat(seo-intel): add single URL Search Channel enqueue support"
+    name: "Search Channel single-URL enqueue command support"
+    train_scope: seo_growth_mbti_action
+    risk_level: scoped_runtime_command
+    type: implementation_docs_generated_test
+    scope:
+      - Add official `--canonical-url` filtering support to `seo-intel:search-channel-queue` against persisted `seo_urls` rows only.
+      - Preserve existing eligibility gates, write gate, idempotency, and no-live-submission boundary.
+      - Add focused tests and docs for single-URL dry-run and bounded enqueue support without performing any production enqueue.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoIntelSearchChannelQueueCommand.php
+      - backend/app/Services/SeoIntel/SearchChannelQueue/**
+      - backend/config/seo_intel.php
+      - backend/docs/seo/seo-growth-mbti-action-01b-fix-01-single-url-enqueue-command.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-01-single-url-enqueue-command.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, migrations, production env/deploy files, CMS content, sitemap/llms generation, live submit executor behavior, URL Truth collectors, crawler log readers, Digital PR files, manual DB scripts, or business DB / Tencent RDS / Node2 DB.
+      - Perform production enqueue, live submission, external search API calls, collector writes, scheduler activation, or CMS mutation.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommand --no-ansi
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelQueue --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && php artisan seo-intel:search-channel-queue --help
+      - cd backend && php artisan seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow --canonical-url=https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types --limit=20
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-01-single-url-enqueue-command.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: BACKEND-DEPLOY-READINESS
