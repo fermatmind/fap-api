@@ -196,9 +196,20 @@ final class CareerSurfaceReadinessAuditor
      */
     private function surfaceLayerStatus(array $issues, array $evidence, bool $unverified): CareerCanonicalEligibilityLayerStatus
     {
+        $hardIssues = array_filter(
+            $issues,
+            static fn (CareerSurfaceReadinessIssue $issue): bool => ! in_array($issue->reason, [
+                CareerSurfaceReadinessIssue::SURFACE_VERIFIER_MISSING,
+                CareerSurfaceReadinessIssue::VALIDATOR_CONTEXT_MISSING,
+            ], true)
+        );
+        $unverifiedOnly = $unverified && $issues !== [] && $hardIssues === [];
+
         return new CareerCanonicalEligibilityLayerStatus(
             layer: CareerCanonicalEligibilityLayer::SURFACE,
-            status: $issues === [] ? CareerCanonicalEligibilityStatus::PASS : ($unverified ? CareerCanonicalEligibilityStatus::UNVERIFIED : CareerCanonicalEligibilityStatus::BLOCKED),
+            status: $issues === []
+                ? CareerCanonicalEligibilityStatus::PASS
+                : ($unverifiedOnly ? CareerCanonicalEligibilityStatus::UNVERIFIED : CareerCanonicalEligibilityStatus::BLOCKED),
             reasons: array_values(array_unique(array_map(
                 static fn (CareerSurfaceReadinessIssue $issue): string => $issue->reason,
                 $issues

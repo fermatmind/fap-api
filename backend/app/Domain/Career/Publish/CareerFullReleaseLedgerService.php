@@ -194,23 +194,22 @@ final class CareerFullReleaseLedgerService
             );
         }
 
+        $additionalTrackedSlugs = [];
         if ($trustedRolloutAuthority && $additionalSlugs !== []) {
-            $additionalIndexStates = $this->loadIndexStateBySlug($additionalSlugs);
+            $additionalTrackedSlugs = array_values(array_diff(array_keys($explicitBatchSlugs), array_keys($trackedMembers)));
+            $additionalIndexStates = $this->loadIndexStateBySlug($additionalTrackedSlugs);
 
-            foreach ($additionalSlugs as $slug) {
-                if (isset($trackedMembers[$slug])) {
-                    continue;
-                }
-
+            foreach ($additionalTrackedSlugs as $slug) {
                 $indexRow = $additionalIndexStates[$slug] ?? null;
                 $hasIndexState = $indexRow !== null;
-                $indexEligible = $hasIndexState ? (bool) ($indexRow['index_eligible'] ?? false) : true;
+                $indexEligible = $hasIndexState ? (bool) ($indexRow['index_eligible'] ?? false) : false;
                 $publicIndexState = $hasIndexState
                     ? $this->normalizePublicIndexState((string) ($indexRow['public_index_state'] ?? ''), $indexEligible)
-                    : IndexStateValue::INDEXABLE;
+                    : IndexStateValue::NOINDEX;
                 $releaseCohort = in_array($publicIndexState, [IndexStateValue::INDEXABLE, 'indexable'], true)
                     ? 'public_detail_indexable'
                     : 'public_detail_conservative';
+                $blockerReasons = $hasIndexState ? [] : ['explicit_batch_index_state_missing'];
 
                 $releaseCounts[$releaseCohort]++;
 
@@ -224,9 +223,10 @@ final class CareerFullReleaseLedgerService
                     publicIndexState: $publicIndexState,
                     indexEligible: $indexEligible,
                     releaseCohort: $releaseCohort,
-                    blockerReasons: [],
+                    blockerReasons: $blockerReasons,
                     evidenceRefs: [
                         'tracking_source' => ['kind' => 'canonical_rollout_batch_executor', 'scope' => self::SCOPE],
+                        'index_state' => ['present' => $hasIndexState],
                     ],
                 );
             }
@@ -238,7 +238,7 @@ final class CareerFullReleaseLedgerService
         ));
 
         $expectedTotal = (int) data_get($batchMembers, 'coverage.expected_total_occupations', 0);
-        $trackedTotal = count($trackedMembers) + count($additionalSlugs);
+        $trackedTotal = count($trackedMembers) + count($additionalTrackedSlugs);
         $missing = $expectedTotal > 0 ? max(0, $expectedTotal - $trackedTotal) : 0;
 
         return new CareerFullReleaseLedger(

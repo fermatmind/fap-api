@@ -141,6 +141,45 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
         $this->assertArrayNotHasKey('explicit_rollout_batch', (array) ($member['evidence_refs'] ?? []));
     }
 
+    public function test_trusted_rollout_batch_does_not_double_count_existing_tracked_slugs(): void
+    {
+        $service = app(CareerFullReleaseLedgerService::class);
+        $baseLedger = $service->build()->toArray();
+        $baseMember = collect((array) ($baseLedger['members'] ?? []))->first();
+
+        $this->assertIsArray($baseMember);
+        $slug = (string) $baseMember['canonical_slug'];
+
+        $ledger = $service->build([$slug, $slug], trustedRolloutAuthority: true)->toArray();
+
+        $this->assertSame(
+            (int) data_get($baseLedger, 'counts.tracking_counts.tracked_total_occupations'),
+            (int) data_get($ledger, 'counts.tracking_counts.tracked_total_occupations')
+        );
+        $this->assertCount(1, array_values(array_filter(
+            (array) ($ledger['members'] ?? []),
+            static fn (array $member): bool => ($member['canonical_slug'] ?? null) === $slug,
+        )));
+    }
+
+    public function test_trusted_rollout_batch_additional_slug_without_index_state_fails_closed(): void
+    {
+        $ledger = app(CareerFullReleaseLedgerService::class)
+            ->build(['codex-untracked-career'], trustedRolloutAuthority: true)
+            ->toArray();
+
+        $member = collect((array) ($ledger['members'] ?? []))->firstWhere('canonical_slug', 'codex-untracked-career');
+
+        $this->assertIsArray($member);
+        $this->assertSame('career_rollout_batch_additional', $member['member_kind'] ?? null);
+        $this->assertSame('noindex', $member['current_index_state'] ?? null);
+        $this->assertSame('noindex', $member['public_index_state'] ?? null);
+        $this->assertFalse((bool) ($member['index_eligible'] ?? true));
+        $this->assertSame('public_detail_conservative', $member['release_cohort'] ?? null);
+        $this->assertContains('explicit_batch_index_state_missing', $member['blocker_reasons'] ?? []);
+        $this->assertFalse((bool) data_get($member, 'evidence_refs.index_state.present', true));
+    }
+
     public function test_explicit_rollout_batch_candidate_state_projects_as_conservative_candidate_for_tracked_members(): void
     {
         $service = app(CareerFullReleaseLedgerService::class);

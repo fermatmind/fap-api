@@ -47,9 +47,7 @@ final class CareerCanonicalEligibilityCheckProtocol
 
     public static function isImmediateStop(string $state): bool
     {
-        self::assertValidState($state);
-
-        return false;
+        return self::assertValidState($state) === self::STATE_FAILED;
     }
 
     public static function trainContinueForState(string $state): string
