@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
+use App\Services\Career\CareerCliArtifactPathGuard;
 use App\Services\Career\Import\CareerSelectedDisplayAssetMapper;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
@@ -714,10 +715,7 @@ final class CareerImportSelectedDisplayAssets extends Command
         }
 
         $outputReport = $this->outputReport($report);
-        $outputPath = trim((string) ($this->option('output') ?? ''));
-        if ($outputPath !== '') {
-            file_put_contents($outputPath, json_encode($outputReport, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
-        }
+        CareerCliArtifactPathGuard::writeJsonOutput($this->option('output'), $outputReport);
 
         if ((bool) $this->option('json')) {
             $this->line(json_encode($outputReport, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));

@@ -45,6 +45,33 @@ final class CareerValidateAssetImportCommandTest extends TestCase
     }
 
     #[Test]
+    public function it_rejects_symlinked_report_output_paths(): void
+    {
+        $dir = $this->tempDir();
+        $workbook = $dir.'/career_assets.xlsx';
+        $target = $dir.'/target-report.json';
+        $link = $dir.'/linked-report.json';
+        $this->writeWorkbook($workbook, CareerAssetImportValidator::expectedHeaders(), [
+            CareerAssetImportValidatorTest::actorsRow(),
+        ]);
+        file_put_contents($target, '{}');
+
+        if (! @symlink($target, $link)) {
+            $this->markTestSkipped('Symlink creation is not available in this environment.');
+        }
+
+        $exitCode = Artisan::call('career:validate-asset-import', [
+            '--file' => $workbook,
+            '--json' => true,
+            '--output' => $link,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('--output must not point to a symlink.', Artisan::output());
+        $this->assertSame('{}', file_get_contents($target));
+    }
+
+    #[Test]
     public function it_exits_non_zero_for_header_mismatch(): void
     {
         $dir = $this->tempDir();
