@@ -6574,7 +6574,7 @@
       "branch": "codex/repair-explicit-rollout-batch-ledger-authority-1",
       "title": "fix(api): honor explicit rollout batch ledger authority",
       "name": "Repair explicit rollout batch ledger authority after 800 apply verification",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "REPAIR-PROGRESSIVE-READINESS-SOFTWARE-MANUAL-HOLD-EXCLUSION-1"
       ],
@@ -15654,6 +15654,69 @@
           "at": "2026-05-23T18:01:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1608 for SEO-GROWTH-MBTI-ACTION-01B-FIX-02 from codex/seo-growth-mbti-action-01b-fix-02. The PR is limited to backend URL Truth host alignment, ZH MBTI test-detail emission, focused docs/generated/tests, and authorized PR-train metadata only."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-PREFLIGHT": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-fix-02-prod-preflight",
+      "status": "local_checks_passed",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-FIX-02"
+      ],
+      "commit_sha": "20ce10e9459696c23770db0528f538e4793c7f9f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1647",
+      "checks": {
+        "production_read_only": {
+          "deployment_verification": "passed: deployed backend SHA 0338122739bbe4fd9645943d4f08372a3881f560 contains FIX-02 merge commit dcc557ce959a2d282d9199ee37da0e70f1102ef0",
+          "test_detail_dry_run": "passed: production seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --page-type=test_detail returned status=success, writes_attempted=false, writes_committed=false, planned_url_count=16, and emitted the ZH MBTI apex candidate from scale_catalog",
+          "research_report_dry_run": "passed: production seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --page-type=research_report returned status=success, writes_attempted=false, writes_committed=false, planned_url_count=2, and emitted EN/ZH Research apex candidates from backend_cms",
+          "persisted_state": "blocking_conflict: ZH MBTI apex and EN/ZH Research apex rows are absent, while old EN/ZH Research www rows remain active indexable URL Truth rows with entity rows",
+          "search_channel_dry_run": "passed_no_write: production seo-intel:search-channel-queue --dry-run --no-write --json --channel=indexnow returned no writes, no enqueue, no submission, and target apex URL filters are not currently eligible because canonical_url_not_found",
+          "public_runtime": "passed_runtime_only: target apex URLs returned HTTP 200 with exact apex canonical and index, follow; stale turnover-rate-report URLs returned 404; runtime was not used as URL Truth",
+          "final_decision": "mbti_action_01b_fix_02_prod_preflight_blocked_www_conflict_requires_cleanup_plan"
+        },
+        "local": {
+          "focused_prod_preflight_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02ProdPreflight --no-ansi (5 tests, 29 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3519 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-prod-preflight.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        },
+        "github": {}
+      },
+      "failure_reason": "Production preflight report found active old www Research URL Truth rows. A full three-URL bounded apex write would create duplicate Research canonical clusters because URL Truth upsert keys use canonical_url_hash + locale.",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-PLAN",
+      "history": [
+        {
+          "at": "2026-05-24T17:05:26+08:00",
+          "status": "in_progress",
+          "summary": "Started production read-only preflight on codex/seo-growth-mbti-action-01b-fix-02-prod-preflight from latest main. Scope is limited to production no-write evidence, docs/generated report, focused test, and authorized PR-train metadata."
+        },
+        {
+          "at": "2026-05-24T17:05:26+08:00",
+          "status": "production_read_only_evidence_collected",
+          "summary": "Read-only SSH, collector dry-runs, persisted URL Truth SELECTs, Search Channel dry-run/no-write, and safe public runtime checks completed without production writes, enqueue, submission, CMS mutation, external search API call, or sitemap/llms authority use."
+        },
+        {
+          "at": "2026-05-24T17:12:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused generated artifact test, route list, Pint, JSON/YAML parsing, and diff checks exited 0 for the scoped production preflight report PR."
+        },
+        {
+          "at": "2026-05-24T17:16:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1647 for SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-PREFLIGHT from codex/seo-growth-mbti-action-01b-fix-02-prod-preflight."
         }
       ]
     },
