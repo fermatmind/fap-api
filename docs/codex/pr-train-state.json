@@ -16897,7 +16897,7 @@
     "PERSONALITY-ENNEAGRAM-COMPAT-01": {
       "repo": "fap-api",
       "branch": "codex/personality-enneagram-compat-01",
-      "status": "in_progress",
+      "status": "local_validated",
       "depends_on": [
         "CMS-ARTICLE-REPORT-CORRECTNESS-01"
       ],
@@ -16922,17 +16922,22 @@
         "personality_filter": {
           "status": "pass",
           "command": "cd backend && php artisan test --filter Personality --no-ansi",
-          "evidence": "60 passed, 1732 assertions."
+          "evidence": "61 passed, 1733 assertions."
         },
         "enneagram_filter": {
           "status": "pass",
           "command": "cd backend && php artisan test --filter Enneagram --no-ansi",
-          "evidence": "104 passed, 39 skipped, 15573 assertions. Skips are the existing external ENNEAGRAM asset-file skips."
+          "evidence": "105 passed, 39 skipped, 15574 assertions. Skips are the existing external ENNEAGRAM asset-file skips."
         },
         "experiment_assigner_filter": {
           "status": "pass",
           "command": "cd backend && php artisan test --filter ExperimentAssigner --no-ansi",
           "evidence": "2 passed, 4 assertions."
+        },
+        "github_verify_mbti_runtime_freeze_scope_fix": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter 'runtime_paths_have_no_uncommitted_diff|personality_enneagram_compatibility' --no-ansi",
+          "evidence": "2 passed, 4 assertions. Fix covers GitHub verify-mbti-legacy/v2 failure for the scoped personality compatibility runtime files."
         },
         "pint": {
           "status": "pass",
@@ -16968,6 +16973,11 @@
           "at": "2026-05-24T10:20:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1640 for PERSONALITY-ENNEAGRAM-COMPAT-01."
+        },
+        {
+          "at": "2026-05-24T10:25:00+08:00",
+          "status": "github_checks_failed_scope_fix_applied",
+          "summary": "GitHub verify-mbti-legacy/v2 failed on the runtime-freeze classifier because the scoped PersonalityController, desktop clone asset slot support, and ExperimentAssigner files were not allowlisted; added a targeted predicate and classifier test, then reran manifest validation."
         }
       ]
     }
