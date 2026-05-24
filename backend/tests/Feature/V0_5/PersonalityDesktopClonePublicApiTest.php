@@ -206,6 +206,74 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.tags.0', 'relationships');
     }
 
+    public function test_sparse_or_duplicate_asset_slots_are_normalized_to_stable_public_schema(): void
+    {
+        $profile = $this->createProfile([
+            'type_code' => 'INFJ',
+            'slug' => 'infj',
+            'locale' => 'zh-CN',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $variant = $this->createVariant($profile, [
+            'canonical_type_code' => 'INFJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INFJ-A',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $this->createCloneContent(
+            $variant,
+            'infj-a',
+            PersonalityProfileVariantCloneContent::STATUS_PUBLISHED,
+            [
+                [
+                    'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION,
+                    'label' => 'Traits placeholder',
+                    'aspect_ratio' => '636:148',
+                    'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                    'asset_ref' => null,
+                    'alt' => null,
+                    'meta' => null,
+                ],
+                [
+                    'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION,
+                    'label' => 'Traits ready',
+                    'aspect_ratio' => '636:148',
+                    'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_READY,
+                    'asset_ref' => [
+                        'provider' => PersonalityDesktopCloneAssetSlotSupport::ASSET_PROVIDER_CDN,
+                        'path' => 'mbti/desktop/traits/infj-a/canonical.webp',
+                        'url' => null,
+                        'version' => 'v2',
+                        'checksum' => 'sha256:def456',
+                    ],
+                    'alt' => 'Canonical traits illustration',
+                    'meta' => ['source' => 'cms'],
+                ],
+            ],
+        );
+
+        $response = $this->getJson('/api/v0.5/personality/infj-a/desktop-clone?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('asset_slots.0.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION)
+            ->assertJsonPath('asset_slots.0.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER)
+            ->assertJsonPath('asset_slots.1.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION)
+            ->assertJsonPath('asset_slots.1.label', 'Traits ready')
+            ->assertJsonPath('asset_slots.1.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_READY)
+            ->assertJsonPath('asset_slots.1.asset_ref.path', 'mbti/desktop/traits/infj-a/canonical.webp');
+
+        $assetSlots = $response->json('asset_slots');
+        $this->assertIsArray($assetSlots);
+        $this->assertCount(7, $assetSlots);
+        $this->assertSame(
+            PersonalityDesktopCloneAssetSlotSupport::allowedSlotIds(),
+            array_column($assetSlots, 'slot_id'),
+        );
+    }
+
     public function test_imported_baseline_public_api_keeps_compatibility_fields_for_sample_full_codes(): void
     {
         $this->seedZhVariantsForAllMbtiBaseTypes();
@@ -379,6 +447,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
         PersonalityProfileVariant $variant,
         string $tag,
         string $status,
+        ?array $assetSlots = null,
     ): PersonalityProfileVariantCloneContent {
         /** @var PersonalityProfileVariantCloneContent */
         return PersonalityProfileVariantCloneContent::query()->create([
@@ -387,7 +456,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             'status' => $status,
             'schema_version' => 'v1',
             'content_json' => $this->validContent($tag),
-            'asset_slots_json' => $this->validAssetSlots(),
+            'asset_slots_json' => $assetSlots ?? $this->validAssetSlots(),
             'meta_json' => ['seed' => true],
             'published_at' => $status === PersonalityProfileVariantCloneContent::STATUS_PUBLISHED ? now()->subMinute() : null,
         ]);

@@ -100,15 +100,15 @@ class PersonalityController extends Controller
         );
         $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
         $sections = $this->publicSectionPayloads($profile, $variant);
-        $seoSurface = $this->buildSeoSurface($meta, $jsonLd, 'mbti_personality_public_detail');
+        $seoSurface = $this->buildSeoSurface($meta, $jsonLd, $this->personalitySeoSurfaceType($profile));
         $landingSurface = $this->buildDetailLandingSurface($profile, $variant, $projection, $validated['locale']);
 
-        return response()->json([
+        $payload = [
             'ok' => true,
             'profile' => $this->profileDetailPayload($profile, $variant),
             'sections' => $sections,
             'seo_meta' => $this->seoMetaPayload($profile, $variant),
-            'mbti_public_projection_v1' => $projection,
+            'personality_public_projection_v1' => $projection,
             'seo_surface_v1' => $seoSurface,
             'landing_surface_v1' => $landingSurface,
             'answer_surface_v1' => $this->buildDetailAnswerSurface(
@@ -120,7 +120,13 @@ class PersonalityController extends Controller
                 $landingSurface,
                 $validated['locale'],
             ),
-        ]);
+        ];
+
+        if ($this->isMbtiProfile($profile)) {
+            $payload['mbti_public_projection_v1'] = $projection;
+        }
+
+        return response()->json($payload);
     }
 
     public function seo(Request $request, string $type): JsonResponse
@@ -153,7 +159,7 @@ class PersonalityController extends Controller
         return response()->json([
             'meta' => $meta,
             'jsonld' => $jsonLd,
-            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'mbti_personality_public_detail'),
+            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, $this->personalitySeoSurfaceType($profile)),
         ]);
     }
 
@@ -189,9 +195,10 @@ class PersonalityController extends Controller
     ): array {
         $segment = $this->frontendLocaleSegment($locale);
         $routeSlug = $this->resolveRouteSlug($profile, $variant);
-        $careerPath = '/'.$segment.'/career/recommendations/mbti/'.$routeSlug;
-        $topicPath = '/'.$segment.'/topics/mbti';
-        $startTestPath = '/'.$segment.'/tests/mbti-personality-test-16-personality-types';
+        $isMbtiScale = $this->isMbtiProfile($profile);
+        $careerPath = $isMbtiScale ? '/'.$segment.'/career/recommendations/mbti/'.$routeSlug : null;
+        $topicPath = '/'.$segment.'/topics/'.$this->personalityTopicSlug($profile);
+        $startTestPath = $this->personalityStartTestPath($profile, $segment);
 
         return $this->landingSurfaceContractService->build([
             'landing_scope' => 'public_indexable_detail',
@@ -205,50 +212,54 @@ class PersonalityController extends Controller
                     'kind' => 'answer_first',
                 ],
             ],
-            'discoverability_keys' => [
+            'discoverability_keys' => array_values(array_filter([
                 'personality_detail',
                 'topic_cluster',
-                'career_recommendation',
+                $isMbtiScale ? 'career_recommendation' : null,
                 'start_test',
-            ],
-            'continue_reading_keys' => [
-                'career_recommendation',
+            ])),
+            'continue_reading_keys' => array_values(array_filter([
+                $isMbtiScale ? 'career_recommendation' : null,
                 'topic_cluster',
                 'related_content',
-            ],
+            ])),
             'start_test_target' => $startTestPath,
             'result_resume_target' => null,
-            'content_continue_target' => $careerPath,
-            'cta_bundle' => [
+            'content_continue_target' => $careerPath ?? $topicPath,
+            'cta_bundle' => array_values(array_filter([
                 [
                     'key' => 'start_test',
                     'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
                     'href' => $startTestPath,
                     'kind' => 'start_test',
                 ],
-                [
+                $isMbtiScale ? [
                     'key' => 'career_recommendation',
                     'label' => $locale === 'zh-CN' ? '查看职业推荐' : 'View career recommendations',
-                    'href' => $careerPath,
+                    'href' => (string) $careerPath,
                     'kind' => 'content_continue',
-                ],
+                ] : null,
                 [
                     'key' => 'topic_cluster',
                     'label' => $locale === 'zh-CN' ? '查看主题聚合' : 'Browse topic hub',
                     'href' => $topicPath,
                     'kind' => 'discover',
                 ],
-            ],
+            ])),
             'indexability_state' => $profile->is_indexable ? 'indexable' : 'noindex',
             'attribution_scope' => 'public_personality_landing',
             'seo_surface_ref' => (string) ($profile->slug ?? ''),
             'surface_family' => 'personality',
             'primary_content_ref' => (string) ($variant?->runtime_type_code ?? $profile->type_code ?? $profile->slug ?? ''),
-            'related_surface_keys' => ['career_recommendation', 'topic_cluster'],
+            'related_surface_keys' => array_values(array_filter([
+                $isMbtiScale ? 'career_recommendation' : null,
+                'topic_cluster',
+            ])),
             'fingerprint_seed' => [
                 'slug' => (string) ($profile->slug ?? ''),
                 'runtime_type_code' => (string) ($variant?->runtime_type_code ?? ''),
                 'locale' => $locale,
+                'scale_code' => $this->normalizedProfileScaleCode($profile),
             ],
         ]);
     }
@@ -276,28 +287,29 @@ class PersonalityController extends Controller
             2
         );
         $routeSlug = $this->resolveRouteSlug($profile, $variant);
-        $isMbtiScale = strtoupper((string) ($profile->scale_code ?? '')) === 'MBTI';
+        $isMbtiScale = $this->isMbtiProfile($profile);
         $sceneSummaryBlocks = $isMbtiScale ? $this->buildMbtiSceneSummaryBlocks($locale, $routeSlug) : [];
+        $summaryBlocks = array_values(array_filter([
+            [
+                'key' => 'type_summary',
+                'title' => (string) ($profile->title ?? ''),
+                'body' => $summary,
+                'kind' => 'answer_first',
+            ],
+            $subtitle !== ''
+                ? [
+                    'key' => 'type_context',
+                    'title' => (string) (($variant?->runtime_type_code ?? $profile->type_code ?? '')),
+                    'body' => $subtitle,
+                    'kind' => 'context',
+                ]
+                : null,
+        ]));
 
         return $this->answerSurfaceContractService->build([
             'answer_scope' => ($profile->is_indexable ?? false) ? 'public_indexable_detail' : 'public_noindex_detail',
             'surface_type' => 'personality_public_detail',
-            'summary_blocks' => array_values(array_filter([
-                [
-                    'key' => 'type_summary',
-                    'title' => (string) ($profile->title ?? ''),
-                    'body' => $summary,
-                    'kind' => 'answer_first',
-                ],
-                $subtitle !== ''
-                    ? [
-                        'key' => 'type_context',
-                        'title' => (string) (($variant?->runtime_type_code ?? $profile->type_code ?? '')),
-                        'body' => $subtitle,
-                        'kind' => 'context',
-                    ]
-                    : null,
-            ])),
+            'summary_blocks' => $summaryBlocks,
             'faq_blocks' => $this->answerSurfaceContractService->extractFaqBlocksFromSectionPayloads($sections),
             'compare_blocks' => $compareBlocks,
             'scene_summary_blocks' => $sceneSummaryBlocks,
@@ -306,13 +318,14 @@ class PersonalityController extends Controller
                 3
             ),
             'answer_bundle' => [
-                ['key' => 'summary', 'title' => 'summary', 'count' => 2],
+                ['key' => 'summary', 'title' => 'summary', 'count' => count($summaryBlocks)],
                 ['key' => 'compare', 'title' => 'compare', 'count' => count($compareBlocks)],
             ],
             'evidence_refs' => array_values(array_filter([
                 (string) ($seoSurface['metadata_fingerprint'] ?? ''),
                 (string) ($landingSurface['landing_fingerprint'] ?? ''),
-                'mbti_public_projection_v1',
+                'personality_public_projection_v1',
+                $isMbtiScale ? 'mbti_public_projection_v1' : '',
                 count($compareBlocks) > 0 ? 'projection_dimensions' : '',
                 count($sections) > 0 ? 'personality_sections' : '',
                 $sceneSummaryBlocks !== [] ? 'scene_summary_blocks' : '',
@@ -323,11 +336,16 @@ class PersonalityController extends Controller
             'seo_surface_ref' => (string) ($seoSurface['metadata_fingerprint'] ?? ''),
             'landing_surface_ref' => (string) ($landingSurface['landing_fingerprint'] ?? ''),
             'primary_content_ref' => (string) ($variant?->runtime_type_code ?? $profile->type_code ?? $profile->slug ?? ''),
-            'related_surface_keys' => ['career_recommendation', 'topic_cluster', 'start_test'],
+            'related_surface_keys' => array_values(array_filter([
+                $isMbtiScale ? 'career_recommendation' : null,
+                'topic_cluster',
+                'start_test',
+            ])),
             'fingerprint_seed' => [
                 'slug' => (string) ($profile->slug ?? ''),
                 'locale' => $locale,
                 'runtime_type_code' => (string) ($variant?->runtime_type_code ?? ''),
+                'scale_code' => $this->normalizedProfileScaleCode($profile),
             ],
         ]);
     }
@@ -452,6 +470,45 @@ class PersonalityController extends Controller
     private function frontendLocaleSegment(string $locale): string
     {
         return $locale === 'zh-CN' ? 'zh' : 'en';
+    }
+
+    private function normalizedProfileScaleCode(PersonalityProfile $profile): string
+    {
+        $scaleCode = strtoupper(trim((string) ($profile->scale_code ?? '')));
+
+        return $scaleCode !== '' ? $scaleCode : PersonalityProfile::SCALE_CODE_MBTI;
+    }
+
+    private function isMbtiProfile(PersonalityProfile $profile): bool
+    {
+        return $this->normalizedProfileScaleCode($profile) === PersonalityProfile::SCALE_CODE_MBTI;
+    }
+
+    private function personalitySeoSurfaceType(PersonalityProfile $profile): string
+    {
+        return match ($this->normalizedProfileScaleCode($profile)) {
+            PersonalityProfile::SCALE_CODE_MBTI => 'mbti_personality_public_detail',
+            'ENNEAGRAM' => 'enneagram_personality_public_detail',
+            default => 'personality_public_detail',
+        };
+    }
+
+    private function personalityTopicSlug(PersonalityProfile $profile): string
+    {
+        return match ($this->normalizedProfileScaleCode($profile)) {
+            PersonalityProfile::SCALE_CODE_MBTI => 'mbti',
+            'ENNEAGRAM' => 'enneagram',
+            default => strtolower($this->normalizedProfileScaleCode($profile)),
+        };
+    }
+
+    private function personalityStartTestPath(PersonalityProfile $profile, string $segment): string
+    {
+        return match ($this->normalizedProfileScaleCode($profile)) {
+            PersonalityProfile::SCALE_CODE_MBTI => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+            'ENNEAGRAM' => '/'.$segment.'/tests/enneagram-personality-test-nine-types',
+            default => '/'.$segment.'/tests',
+        };
     }
 
     /**

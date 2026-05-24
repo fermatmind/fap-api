@@ -82,9 +82,7 @@ class ExperimentAssigner
             $existing = $this->findExisting($experimentKey, $orgId, $userId, $anonId);
             if ($existing) {
                 if ($userId !== null && empty($existing->user_id)) {
-                    $existing->user_id = $userId;
-                    $existing->updated_at = now();
-                    $existing->save();
+                    $this->attachUserIdToExistingAssignment($existing, $userId);
                 }
 
                 $variant = trim((string) ($existing->variant ?? ''));
@@ -152,6 +150,9 @@ class ExperimentAssigner
             if ($experimentKey === '') {
                 continue;
             }
+            if (array_key_exists($experimentKey, $active)) {
+                continue;
+            }
 
             $variants = $this->normalizeVariantWeights($row->variants_json ?? null);
             if ($variants === []) {
@@ -164,6 +165,22 @@ class ExperimentAssigner
         }
 
         return $active;
+    }
+
+    private function attachUserIdToExistingAssignment(object $existing, int $userId): void
+    {
+        $id = (int) ($existing->id ?? 0);
+        if ($id <= 0) {
+            return;
+        }
+
+        DB::table('experiment_assignments')
+            ->where('id', $id)
+            ->whereNull('user_id')
+            ->update([
+                'user_id' => $userId,
+                'updated_at' => now(),
+            ]);
     }
 
     private function activeExperimentsFromConfig(): array
