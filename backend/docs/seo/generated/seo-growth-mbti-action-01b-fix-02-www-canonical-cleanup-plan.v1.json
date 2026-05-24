@@ -1,0 +1,155 @@
+{
+  "schema_version": "seo-growth-mbti-action-01b-fix-02-www-canonical-cleanup-plan.v1",
+  "task": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-PLAN",
+  "final_decision": "mbti_action_01b_fix_02_www_cleanup_plan_merged_ready_for_cleanup_runtime",
+  "stale_www_urls": [
+    "https://www.fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+    "https://www.fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report"
+  ],
+  "replacement_apex_urls": [
+    "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+    "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report"
+  ],
+  "additional_safe_write_candidates": [
+    "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types"
+  ],
+  "already_submitted_urls_excluded": [
+    {
+      "url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+      "queue_item_id": 2,
+      "channel": "indexnow",
+      "state": "approved/submitted",
+      "must_not_modify": true
+    }
+  ],
+  "cleanup_strategy": {
+    "selected_option": "C",
+    "name": "future_scoped_cleanup_runtime_command",
+    "manual_db_update_rejected": true,
+    "manual_db_delete_rejected": true,
+    "blind_apex_insert_rejected": true,
+    "leave_www_active_while_adding_apex_rejected": true,
+    "search_channel_enqueue_rejected": true
+  },
+  "cleanup_strategy_reason": "Existing schema can express Search Channel exclusion and entity mapping demotion, but no existing official bounded runtime performs exact stale-row validation, apex candidate validation, old-row retirement, apex write, entity remap, and audit artifact emission atomically. A runtime command is required before production write execution.",
+  "entity_mapping_plan": {
+    "old_www_rows": {
+      "action": "mark seo_url_entities authority_status as superseded_canonical",
+      "preserve_old_canonical_url_hash": true,
+      "preserve_locale_page_type_entity_slug": true,
+      "metadata_json_not_retirement_truth": true
+    },
+    "replacement_research_apex_rows": {
+      "entity_source": "research_reports",
+      "authority_status": "published_approved",
+      "entity_id_or_slug": "mbti-personality-types-salary-turnover-report"
+    },
+    "zh_mbti_apex_row": {
+      "entity_source": "scales_registry",
+      "authority_status": "observed",
+      "entity_id_or_slug": "mbti-personality-test-16-personality-types"
+    }
+  },
+  "search_channel_exclusion_plan": {
+    "mechanism": "set old www seo_urls.indexability_state to a reserved non-indexable state such as superseded_canonical",
+    "current_eligibility_rule": "SearchChannelQueueEligibilityEvaluator blocks any row where indexability_state is not indexable",
+    "required_post_cleanup_dry_run_checks": [
+      "old EN Research www URL blocked",
+      "old ZH Research www URL blocked",
+      "EN Research apex URL present and eligible",
+      "ZH Research apex URL present and eligible",
+      "ZH MBTI apex URL present and eligible",
+      "no Research www URL planned for IndexNow",
+      "EN MBTI queue item 2 remains untouched"
+    ]
+  },
+  "duplicate_cluster_prevention": {
+    "canonical_url_hash_identity_preserved": true,
+    "apex_and_www_hashes_must_not_be_active_together": true,
+    "fail_if_old_www_active_and_apex_exists": true,
+    "fail_if_unexpected_research_row_exists_for_same_entity_family": true,
+    "write_order": [
+      "validate exact old rows",
+      "validate replacement apex candidates",
+      "retire old www rows",
+      "write apex rows",
+      "verify Search Channel exclusion and apex eligibility"
+    ]
+  },
+  "idempotency_plan": {
+    "exact_url_bounded": true,
+    "already_superseded_old_rows_are_verified_not_rewritten": true,
+    "already_present_matching_apex_rows_are_verified_not_duplicated": true,
+    "conflicting_apex_rows_fail_closed": true,
+    "en_mbti_already_submitted_url_excluded": true
+  },
+  "rollback_plan": {
+    "transaction_required": true,
+    "manual_db_rollback_rejected": true,
+    "partial_failure_rolls_back": true,
+    "post_commit_recovery_requires_separate_human_approved_forward_fix": true
+  },
+  "audit_trail_plan": {
+    "runtime_must_emit_audit_artifact": true,
+    "include_old_hashes": true,
+    "include_replacement_hashes": true,
+    "include_entity_mapping_before_after": true,
+    "include_no_enqueue_no_submission_flags": true,
+    "include_operator_approval_phrase": true
+  },
+  "existing_schema_support": {
+    "seo_urls_columns": [
+      "canonical_url_hash",
+      "canonical_url",
+      "locale",
+      "page_entity_type",
+      "entity_id_or_slug",
+      "cluster",
+      "source_authority",
+      "indexability_state",
+      "lastmod_at",
+      "lastmod_source",
+      "is_private_flow",
+      "first_seen_at",
+      "last_seen_at",
+      "metadata_json"
+    ],
+    "seo_url_entities_columns": [
+      "canonical_url_hash",
+      "locale",
+      "page_entity_type",
+      "entity_id_or_slug",
+      "entity_source",
+      "authority_status",
+      "source_updated_at",
+      "attributes_json"
+    ],
+    "supports_search_channel_exclusion_without_migration": true,
+    "supports_entity_mapping_demotion_without_migration": true,
+    "supports_atomic_cleanup_without_new_runtime": false,
+    "metadata_json_must_not_be_only_retirement_truth": true
+  },
+  "runtime_command_required": true,
+  "schema_change_required": false,
+  "production_write_performed": false,
+  "collector_write_performed": false,
+  "enqueue_performed": false,
+  "live_submission_performed": false,
+  "external_api_call_performed": false,
+  "cms_mutation_performed": false,
+  "sitemap_llms_authority_used": false,
+  "frontend_fallback_authority_used": false,
+  "future_human_approval_phrase": "I explicitly approve bounded URL Truth cleanup/write for MBTI FIX-02: retire old Research www rows, write Research apex rows, and write ZH MBTI apex row. Do not enqueue Search Channel items. Do not submit URLs.",
+  "no_go_conditions": [
+    "old Research www row is missing or does not match expected active state",
+    "replacement apex candidate is missing from backend-authoritative dry-run",
+    "apex row already exists but conflicts with expected authority fields",
+    "Search Channel has active old Research www queue items",
+    "EN MBTI already-submitted URL is included in the write set",
+    "write gate would enqueue Search Channel items",
+    "live submission gate is enabled",
+    "runtime command would use sitemap/llms/frontend/crawler/search response as URL Truth",
+    "production state cannot be read clearly"
+  ],
+  "next_task": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-RUNTIME"
+}
