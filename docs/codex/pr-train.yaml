@@ -6531,6 +6531,7 @@ prs:
     allowed_paths:
       - backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php
       - backend/tests/Feature/Commerce/PaymentWebhookIdempotencyTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     scope:
@@ -6542,6 +6543,7 @@ prs:
       - cd backend && php artisan test --filter=PaymentWebhook
       - cd backend && php artisan test --filter=CommerceWebhookIdempotencyTest
       - cd backend && php artisan test --filter=PaymentWebhookIdempotencyTest
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|payment_webhook_digest_idempotency'
       - cd backend && composer validate --strict
       - cd backend && composer audit --locked --no-interaction --ignore-unreachable
       - cd backend && bash scripts/ci_verify_mbti.sh

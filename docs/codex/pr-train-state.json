@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T07:56:22.289Z",
+  "updated_at": "2026-05-24T08:09:06.779Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17069,21 +17069,24 @@
     "PR-AUDIT-BE-02": {
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-02-webhook-digest",
-      "status": "pr_open",
+      "status": "ci_fix_local_checks_passed_pending_github_rerun",
       "depends_on": [
         "PR-AUDIT-BE-01"
       ],
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1645",
       "checks": {
         "local": {
-          "status": "passed_with_sidecar",
+          "status": "passed_with_sidecar_and_runtime_freeze_fix",
           "passed": [
             "cd backend && php artisan test --filter=PaymentWebhookIdempotencyTest",
             "cd backend && php artisan test --filter=CommerceWebhookIdempotencyTest",
             "cd backend && composer validate --strict",
             "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
             "cd backend && bash scripts/ci_verify_mbti.sh",
-            "git diff --check"
+            "git diff --check",
+            "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|payment_webhook_digest_idempotency'",
+            "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\"); puts \"yaml ok\"'",
+            "ruby -e 'require \"json\"; JSON.parse(File.read(\"docs/codex/pr-train-state.json\")); puts \"json ok\"'"
           ],
           "failed": [
             {
@@ -17093,9 +17096,31 @@
           ]
         },
         "github_required_checks": {
-          "status": "pending",
-          "passed": [],
-          "failed": []
+          "status": "failed_ci_fix_applied_pending_rerun",
+          "passed": [
+            "hygiene",
+            "supply-chain",
+            "Semgrep blocking secrets",
+            "semgrep sarif non-blocking upload",
+            "Semgrep OSS"
+          ],
+          "failed": [
+            {
+              "name": "verify-mbti-legacy",
+              "evidence": "Required GitHub check failed because BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff reported backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php as runtime path diff."
+            },
+            {
+              "name": "verify-mbti-v2",
+              "evidence": "Required GitHub check failed for the same runtime-freeze classifier reason as verify-mbti-legacy."
+            }
+          ],
+          "remediation": "Added a narrow runtime-freeze classifier evidence test for PR-AUDIT-BE-02 payment webhook digest idempotency and included WebhookEntitlementService.php in the commerce payment action classifier allowlist.",
+          "rerun_status": "pending push"
+        },
+        "runtime_freeze_ci_fix": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|payment_webhook_digest_idempotency'",
+          "evidence": "2 tests passed, 4 assertions; runtime paths gate accepts the BE-02 webhook digest idempotency service change."
         }
       },
       "failure_reason": null,
@@ -17151,9 +17176,14 @@
           "at": "2026-05-24T07:56:22.289Z",
           "status": "pr_open",
           "summary": "Opened PR #1645 for PR-AUDIT-BE-02."
+        },
+        {
+          "at": "2026-05-24T08:09:06.779Z",
+          "status": "github_required_checks_failed_ci_fix_applied",
+          "summary": "GitHub required checks verify-mbti-legacy and verify-mbti-v2 failed on runtime-freeze classification of WebhookEntitlementService.php. User authorized touching runtime-freeze scope helper; added narrow BE-02 classifier evidence and local ci_verify_mbti passed. Pending push and GitHub rerun."
         }
       ],
-      "updated_at": "2026-05-24T07:56:22.289Z"
+      "updated_at": "2026-05-24T08:09:06.779Z"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
