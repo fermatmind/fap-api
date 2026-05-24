@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T18:32:00+08:00",
+  "updated_at": "2026-05-24T10:54:08.907Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17517,7 +17517,7 @@
     "PR-AUDIT-BE-03": {
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-03-migration-evidence",
-      "status": "pr_opened_github_checks_pending",
+      "status": "merged",
       "depends_on": [
         "PR-AUDIT-BE-02"
       ],
@@ -17559,12 +17559,27 @@
           ],
           "failed": [],
           "evidence": "GitHub required checks passed on PR #1648 after adding the scoped runtime-freeze classifier evidence for the attempt_quality retirement migration."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "head_sha": "ac79f977b060252b0f4c0bde711643b2069c7380",
+          "passed": [
+            "hygiene",
+            "supply-chain",
+            "Semgrep blocking secrets",
+            "semgrep sarif non-blocking upload",
+            "Semgrep OSS",
+            "verify-mbti-legacy",
+            "verify-mbti-v2"
+          ],
+          "failed": [],
+          "evidence": "GitHub PR #1648 is MERGED and origin/main contains merge commit d18c0cc36a84ce50b823c995e4226b188551b0d0."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-24T09:57:44Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "events": [
         {
@@ -17591,10 +17606,111 @@
           "at": "2026-05-24T09:50:38Z",
           "status": "github_checks_passed_pending_merge",
           "summary": "GitHub required checks passed for PR #1648 on head 4aa43fd17a91dfca4f4b4035e3c77f9862f211dc. Merge state is CLEAN."
+        },
+        {
+          "at": "2026-05-24T10:46:53.618Z",
+          "status": "reconciled_merged",
+          "summary": "Reconciled ledger before PR-AUDIT-BE-04: GitHub PR #1648 is MERGED, origin/main contains merge commit d18c0cc36a84ce50b823c995e4226b188551b0d0, remote branch is deleted, and local cleanup was previously executed."
         }
       ],
-      "updated_at": "2026-05-24T09:50:38Z",
-      "commit_sha": "4aa43fd17a91dfca4f4b4035e3c77f9862f211dc"
+      "updated_at": "2026-05-24T10:46:53.618Z",
+      "commit_sha": "4aa43fd17a91dfca4f4b4035e3c77f9862f211dc",
+      "merge_commit": "d18c0cc36a84ce50b823c995e4226b188551b0d0"
+    },
+    "PR-AUDIT-BE-04": {
+      "repo": "fap-api",
+      "branch": "codex/pr-audit-be-04-queue-jitter",
+      "status": "pr_opened_github_checks_pending",
+      "depends_on": [
+        "PR-AUDIT-BE-03"
+      ],
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1651",
+      "commit_sha": "30d553f6adf3217c31355b62139992bab0ca440b",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR-AUDIT-BE-03 merged as PR #1648 with merge commit d18c0cc36a84ce50b823c995e4226b188551b0d0 and origin/main contains it."
+        },
+        "local": {
+          "status": "passed_with_sidecar",
+          "passed": [
+            "cd backend && php artisan test --filter=ProcessAttemptSubmissionJob",
+            "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|attempt_submission_queue_jitter'",
+            "cd backend && php artisan test --filter=ReprocessPaymentEventJob (No tests found, exit 0)",
+            "cd backend && php artisan test --filter=GenerateReportPdfJob (No tests found, exit 0)",
+            "cd backend && vendor/bin/pint --test app/Jobs/ProcessAttemptSubmissionJob.php tests/Unit/Jobs/ProcessAttemptSubmissionJobTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && bash scripts/ci_verify_mbti.sh",
+            "ruby -e YAML parse docs/codex/pr-train.yaml",
+            "ruby -e JSON parse docs/codex/pr-train-state.json",
+            "git diff --check"
+          ],
+          "failed_sidecar": [
+            {
+              "command": "cd backend && php artisan test --filter=Queue",
+              "summary": "Sidecar only: CareerFirstWaveLaunchTierApiTest and SeoIntelOpsSeoNativeDashboardPanelsTest fail on clean origin/main ea12f9d0a5ff9927487eca9cb4abb0134f1f3b47 with the same unrelated Career/SeoIntel assertions."
+            }
+          ]
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to ProcessAttemptSubmissionJob jitter logic, deterministic job test, scoped Big Five runtime-freeze classifier evidence, and PR train manifest/state metadata."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR #1651 opened; GitHub checks pending."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "source_pr": "PR-AUDIT-BE-04",
+          "repo": "fap-api",
+          "branch": "codex/pr-audit-be-04-queue-jitter",
+          "command_or_check": "php artisan test --filter=Queue",
+          "failing_tests": [
+            "Tests\\Feature\\Career\\CareerFirstWaveLaunchTierApiTest::it exposes a machine readable first wave launch tier summary",
+            "Tests\\Feature\\Career\\CareerFirstWaveLaunchTierApiTest::it exposes candidate rows without turning them into rollout queue actions",
+            "Tests\\Feature\\SeoIntel\\SeoIntelOpsSeoNativeDashboardPanelsTest::blade renders issue and queue detail panels with safe columns only"
+          ],
+          "evidence": "Current branch broad Queue filter: 2 failed, 126 passed. Clean origin/main exact baseline: 3 failed, 1 passed with the same Career count assertions and missing issue queue detail panel string.",
+          "baseline_verification": "Exact failing test files also fail on clean origin/main",
+          "baseline_commit": "ea12f9d0a5ff9927487eca9cb4abb0134f1f3b47",
+          "why_external_to_current_pr": "BE-04 diff only touches ProcessAttemptSubmissionJob retry backoff jitter, deterministic unit tests, runtime-freeze classifier evidence, and train metadata; failures are in Career first-wave launch-tier API fixtures and SeoIntel Ops dashboard Blade panel text.",
+          "impact_on_current_pr": "Targeted ProcessAttemptSubmissionJob backoff tests, runtime-freeze evidence, route list, Pint, and ci_verify_mbti pass. Broad Queue filter has unrelated legacy Career/SeoIntel failures.",
+          "owner": "backend/career and backend/seo-intel",
+          "follow_up_recommendation": "Create sidecar PRs/issues to repair Career first-wave launch tier fixture/count expectations and SeoIntel native dashboard panel contract text.",
+          "required_checks_status": "pending until PR checks complete",
+          "scope_validation_status": "pending until final scope validation",
+          "continue_train_decision": "allowed only if GitHub required checks are green"
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-05-24T10:46:53.618Z",
+          "status": "in_progress",
+          "summary": "Initialized PR-AUDIT-BE-04 for bounded jitter on ProcessAttemptSubmissionJob retry backoff from latest main."
+        },
+        {
+          "at": "2026-05-24T10:52:55.533Z",
+          "status": "local_checks_passed_with_queue_sidecar",
+          "summary": "Targeted BE-04 checks, route list, Pint, ci_verify_mbti, YAML/JSON parse, and git diff check passed. Broad Queue filter has unrelated Career/SeoIntel failures reproduced on clean origin/main and recorded as sidecar."
+        },
+        {
+          "at": "2026-05-24T10:53:12.300Z",
+          "status": "scope_validation_passed",
+          "summary": "Final uncommitted diff is limited to BE-04 allowed files."
+        },
+        {
+          "at": "2026-05-24T10:54:08.907Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR #1651 for PR-AUDIT-BE-04. GitHub checks are pending."
+        }
+      ],
+      "updated_at": "2026-05-24T10:54:08.907Z"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {

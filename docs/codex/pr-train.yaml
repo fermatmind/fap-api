@@ -6602,6 +6602,45 @@ prs:
     human_review_required: false
     production_approval_required: false
 
+  - id: PR-AUDIT-BE-04
+    repo: fap-api
+    depends_on: [PR-AUDIT-BE-03]
+    branch: codex/pr-audit-be-04-queue-jitter
+    base: main
+    title: "PR-AUDIT-BE-04 queue retry backoff jitter"
+    train_scope: prr_audit_remediation
+    risk_level: medium_queue_resilience
+    findings: [M-BE-QUEUE-01]
+    allowed_paths:
+      - backend/app/Jobs/ProcessAttemptSubmissionJob.php
+      - backend/tests/Unit/Jobs/ProcessAttemptSubmissionJobTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add bounded jitter to ProcessAttemptSubmissionJob retry backoff.
+      - Keep tries, timeout, retry_after, queue names, and worker semantics unchanged.
+      - Add deterministic tests for jitter bounds and variability without relying on real randomness.
+      - Do not create new queue workers, change scheduler/supervisor, or alter payment/report state machines.
+    validation:
+      - cd backend && php artisan test --filter=Queue
+      - cd backend && php artisan test --filter=ProcessAttemptSubmissionJob
+      - cd backend && php artisan test --filter=ReprocessPaymentEventJob
+      - cd backend && php artisan test --filter=GenerateReportPdfJob
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|attempt_submission_queue_jitter'
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml"); puts "yaml ok"'
+      - ruby -e 'require "json"; JSON.parse(File.read("docs/codex/pr-train-state.json")); puts "json ok"'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: false
+    production_approval_required: false
+
   - id: OPS-CI-CODESCAN-API-02
     repo: fap-api
     depends_on: []
