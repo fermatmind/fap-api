@@ -1040,6 +1040,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_destructive_migration_retirement_evidence(): void
+    {
+        $changed = [
+            'backend/database/migrations/2026_03_26_120000_drop_attempt_quality_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_order_tenant_ownership_boundary_changes(): void
     {
         $changed = [
@@ -2181,6 +2190,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isDestructiveMigrationRetirementEvidenceFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/app/Services/Attempts/AttemptSubmitService.php'
                 && $this->attemptSubmitServiceDiffIsIqResultSecrecyRedactionOnly(
@@ -2991,6 +3004,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/database/migrations/2026_02_11_090100_add_idx_idempotency_keys_provider_recorded_hash.php',
             'backend/database/migrations/2026_02_27_110000_ensure_norms_table_lookup_index.php',
         ], true);
+    }
+
+    private function isDestructiveMigrationRetirementEvidenceFile(string $file): bool
+    {
+        return $file === 'backend/database/migrations/2026_03_26_120000_drop_attempt_quality_table.php';
     }
 
     private function isIqScoringContractFoundationFile(string $file): bool
