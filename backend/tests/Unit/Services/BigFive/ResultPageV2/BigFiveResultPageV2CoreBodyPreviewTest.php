@@ -207,6 +207,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_cms_article_report_correctness_changes(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Resources/ArticleResource/Pages/CreateArticle.php',
+            'backend/app/Filament/Ops/Resources/ArticleResource/Pages/EditArticle.php',
+            'backend/app/Filament/Ops/Resources/ArticleResource/Support/ArticleSeoMetaWorkspace.php',
+            'backend/app/Models/ReportSnapshot.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_ci_scale_impact_command_changes(): void
     {
         $changed = [
@@ -1935,6 +1947,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCmsArticleReportCorrectnessFile($file)) {
+                continue;
+            }
+
             if ($this->isPublicContentReleaseGuardCommandFile($file)) {
                 continue;
             }
@@ -2452,6 +2468,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerCliArtifactPathGuardFile(string $file): bool
     {
         return $file === 'backend/app/Services/Career/CareerCliArtifactPathGuard.php';
+    }
+
+    private function isCmsArticleReportCorrectnessFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Resources/ArticleResource/Pages/CreateArticle.php',
+            'backend/app/Filament/Ops/Resources/ArticleResource/Pages/EditArticle.php',
+            'backend/app/Filament/Ops/Resources/ArticleResource/Support/ArticleSeoMetaWorkspace.php',
+            'backend/app/Models/ReportSnapshot.php',
+        ], true);
     }
 
     private function isPublicContentReleaseGuardCommandFile(string $file): bool

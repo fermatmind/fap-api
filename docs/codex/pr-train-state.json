@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T09:30:00+08:00",
+  "updated_at": "2026-05-24T09:40:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -16842,6 +16842,11 @@
           "command": "cd backend && vendor/bin/pint --test app/Filament/Ops/Resources/ArticleResource.php app/Filament/Ops/Resources/ArticleResource app/Filament/Ops/Resources/ReportSnapshotResource.php app/Filament/Ops/Resources/ReportSnapshotResource app/Models tests",
           "evidence": "PASS, 1404 files."
         },
+        "mbti_freeze_targeted": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter 'runtime_paths_have_no_uncommitted_diff|cms_article_report_correctness_changes' --no-ansi && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "evidence": "2 passed, 4 assertions; Pint passed for the classifier test file after adding the scoped allowlist predicate."
+        },
         "diff_check": {
           "status": "pass",
           "command": "git diff --check && git diff --cached --check"
@@ -16872,6 +16877,11 @@
           "at": "2026-05-24T09:30:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1639 for CMS-ARTICLE-REPORT-CORRECTNESS-01."
+        },
+        {
+          "at": "2026-05-24T09:40:00+08:00",
+          "status": "github_checks_failed_scope_fix_applied",
+          "summary": "GitHub verify-mbti-legacy/v2 failed on the runtime-freeze classifier because the scoped CMS Article/ReportSnapshot runtime files were not allowlisted; added a targeted predicate and classifier test, then verified the targeted test plus Pint."
         }
       ]
     },
