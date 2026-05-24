@@ -11371,6 +11371,50 @@ prs:
     scheduler_activation: false
     next_task: SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT
 
+  - id: SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW
+    branch: codex/seo-growth-mbti-action-zh-mbti-queue-preflight
+    base: main
+    title: "docs(seo-intel): add ZH MBTI Search Channel enqueue preflight"
+    name: "ZH MBTI Search Channel enqueue preflight"
+    train_scope: seo_growth_mbti_action
+    risk_level: production_read_only_report
+    type: docs_generated_test
+    scope:
+      - Verify the exact ZH MBTI test URL Truth row and entity mapping are backend-authoritative, indexable, public, apex-hosted, and not private.
+      - Verify public runtime observation, claim boundary state, duplicate queue state, queue item 2 preservation, closed Search Channel gates, and staging/Baidu sidecar state.
+      - Run bounded Search Channel dry-run/no-write for exactly the ZH MBTI test URL via IndexNow, then record the report in docs/generated/test scope.
+      - Determine whether ZH MBTI is ready for a future human-approved one-item Search Channel enqueue while Research remains deferred.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-action-zh-mbti-queue-preflight.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-zh-mbti-queue-preflight.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiActionZhMbtiQueuePreflightTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, runtime services, migrations, production env/deploy files, CMS content, articles, internal links, sitemap, llms, crawler log readers, scheduler, Search Channel submitter code, Digital PR files, or business DB / Tencent RDS / Node2 DB.
+      - Perform production writes, collector writes, Search Channel enqueue, live submission, external search API calls, scheduler activation, CMS mutation, Digital PR sends, pSEO generation, raw Nginx access log reads, manual DB update/delete, or broad URL Truth writes.
+      - Treat frontend fallback, static sitemap, static llms, crawler logs, search engine responses, Digital PR mentions, public runtime, or local copies as authority.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiActionZhMbtiQueuePreflight --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-zh-mbti-queue-preflight.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar

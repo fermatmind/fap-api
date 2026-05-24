@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T15:45:00.000Z",
+  "updated_at": "2026-05-24T17:06:00.000Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17962,11 +17962,11 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-fix-02-post-write-review",
-      "status": "pr_open_github_checks_pending",
+      "status": "merged",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE"
       ],
-      "commit_sha": "ecf60562448aa8247163eb2342f5a37689078f62",
+      "commit_sha": "4ab7fdcea588734b5c0c2bc80bde74fac557c21b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1656",
       "checks": {
         "production_read_only": {
@@ -17990,8 +17990,8 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-24T14:46:08Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
@@ -18023,6 +18023,77 @@
           "at": "2026-05-24T23:45:00+08:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1656 for the post-write URL Truth and Search Channel dry-run review report. GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-25T00:55:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Verified PR #1656 is merged, origin/main contains merge commit 4ab7fdcea588734b5c0c2bc80bde74fac557c21b, and the remote branch is deleted; reconciled state to unblock the ZH MBTI queue preflight."
+        }
+      ],
+      "local_cleanup_note": "Reconciled while starting SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT; origin/main contains merge commit 4ab7fdcea588734b5c0c2bc80bde74fac557c21b. Local task branch was already absent in this clone."
+    },
+    "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-zh-mbti-queue-preflight",
+      "status": "local_checks_passed",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "Dependency SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW is merged as 4ab7fdcea588734b5c0c2bc80bde74fac557c21b on origin/main."
+        },
+        "production_read_only": {
+          "deployed_sha": "passed: production REVISION is 4ab7fdcea588734b5c0c2bc80bde74fac557c21b.",
+          "command_availability": "passed: seo-intel:search-channel-queue exists and supports --canonical-url, --dry-run, --no-write, --json, and --channel.",
+          "url_truth_state": "passed: exact ZH MBTI seo_urls row exists with locale=zh-CN, page_entity_type=test_detail, source_authority=scale_catalog, indexability_state=indexable, private_flow=false, apex host, and no staging/www host.",
+          "entity_mapping_state": "passed: exact ZH MBTI seo_url_entities mapping exists with entity_source=scales_registry and authority_status=observed; no frontend fallback or sitemap/llms authority used.",
+          "public_runtime": "passed: target URL returned HTTP 200, exact apex canonical, HTML robots index/follow, no noindex, no staging/www/stale slug markers; public runtime used only as observation.",
+          "claim_boundary": "passed: Search Channel dry-run reported claim_boundary_state=claim_safe and public-copy observation found no scoped forbidden MBTI claim markers.",
+          "duplicate_queue_state": "passed: no existing active/submitted queue item for the ZH MBTI target; dry-run reported duplicate_detected=false and planned_queue_count=1.",
+          "queue_item_2": "passed: queue item 2 remains approved/submitted for EN MBTI IndexNow and is not part of this target.",
+          "search_channel_dry_run": "passed: bounded dry-run/no-write returned candidate_count=1, eligible_count=1, planned_queue_count=1, no writes, no enqueue, no live submission, no external calls, issues=[].",
+          "gate_state": "passed: queue write, live submission, external API call, and IndexNow live API gates remain closed.",
+          "staging_sidecar": "passed: staging noindex containment remains active; known Baidu stale result remains a sidecar and staging was not used as URL Truth."
+        },
+        "local": {
+          "focused_queue_preflight_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiActionZhMbtiQueuePreflight --no-ansi (9 tests, 90 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi",
+          "pint": "passed: vendor/bin/pint --test (3530 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-zh-mbti-queue-preflight.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE",
+      "history": [
+        {
+          "at": "2026-05-25T00:55:00+08:00",
+          "status": "in_progress",
+          "summary": "Started ZH MBTI Search Channel enqueue preflight from latest clean main. Scope is limited to production read-only URL Truth, entity mapping, public runtime observation, Search Channel dry-run/no-write, docs/generated report, focused test, and authorized PR-train metadata."
+        },
+        {
+          "at": "2026-05-25T00:58:00+08:00",
+          "status": "production_read_only_checks_passed",
+          "summary": "Verified ZH MBTI URL Truth and entity mapping are backend-authoritative and indexable, public runtime is apex/indexable, claim boundary is safe, no duplicate queue item exists, queue item 2 remains unchanged, the bounded Search Channel dry-run plans exactly one no-write IndexNow queue item, gates remain closed, and staging remains a sidecar."
+        },
+        {
+          "at": "2026-05-25T01:06:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused generated artifact test, route list, Pint, JSON/YAML parsing, and diff checks passed."
         }
       ]
     }
