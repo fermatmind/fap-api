@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T07:55:47.051Z",
+  "updated_at": "2026-05-24T07:56:22.289Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17069,11 +17069,11 @@
     "PR-AUDIT-BE-02": {
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-02-webhook-digest",
-      "status": "committed",
+      "status": "pr_open",
       "depends_on": [
         "PR-AUDIT-BE-01"
       ],
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1645",
       "checks": {
         "local": {
           "status": "passed_with_sidecar",
@@ -17146,9 +17146,14 @@
           "at": "2026-05-24T07:55:47.051Z",
           "status": "committed",
           "summary": "Committed scoped PR-AUDIT-BE-02 implementation as undefined."
+        },
+        {
+          "at": "2026-05-24T07:56:22.289Z",
+          "status": "pr_open",
+          "summary": "Opened PR #1645 for PR-AUDIT-BE-02."
         }
       ],
-      "updated_at": "2026-05-24T07:55:47.051Z"
+      "updated_at": "2026-05-24T07:56:22.289Z"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
