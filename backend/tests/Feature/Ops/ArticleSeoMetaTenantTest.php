@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Filament\Ops\Resources\ArticleResource\Support\ArticleSeoMetaWorkspace;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Support\OrgContext;
@@ -53,5 +54,45 @@ final class ArticleSeoMetaTenantTest extends TestCase
             'locale' => 'zh-CN',
             'canonical_url' => '/articles/childhood-dream-job-still-shapes-career-choice',
         ]);
+    }
+
+    public function test_article_seo_meta_workspace_preserves_robots_when_payload_omits_it(): void
+    {
+        $article = Article::query()->create([
+            'org_id' => 2,
+            'slug' => 'robots-preserved-article',
+            'locale' => 'en',
+            'title' => 'Robots preserved article',
+            'excerpt' => 'Existing robots directives should survive normal article edits.',
+            'content_md' => '# Draft',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+
+        ArticleSeoMeta::query()->create([
+            'article_id' => (int) $article->id,
+            'org_id' => 2,
+            'locale' => 'en',
+            'seo_title' => 'Old SEO title',
+            'seo_description' => 'Old SEO description',
+            'canonical_url' => '/articles/robots-preserved-article',
+            'robots' => 'noindex,noarchive',
+            'is_indexable' => true,
+        ]);
+
+        app(ArticleSeoMetaWorkspace::class)->save($article, [
+            'seo_title' => 'Updated SEO title',
+            'seo_description' => 'Updated SEO description',
+            'canonical_url' => '/articles/robots-preserved-article',
+            'og_title' => null,
+            'og_description' => null,
+            'og_image_url' => null,
+        ]);
+
+        $article->refresh();
+
+        $this->assertSame('Updated SEO title', (string) $article->seoMeta?->seo_title);
+        $this->assertSame('noindex,noarchive', (string) $article->seoMeta?->robots);
     }
 }
