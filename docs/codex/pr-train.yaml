@@ -11054,6 +11054,54 @@ prs:
     scheduler_activation: false
     next_task: SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-RUNTIME
 
+  - id: SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-RUNTIME
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-PLAN
+    branch: codex/seo-growth-mbti-action-01b-fix-02-www-cleanup-runtime
+    base: main
+    title: "feat(seo-intel): add MBTI URL Truth canonical cleanup command"
+    name: "Runtime command for safe Research www retirement and apex URL Truth write"
+    train_scope: seo_growth_mbti_action
+    risk_level: scoped_backend_runtime_no_production_write
+    type: implementation_docs_generated_test
+    scope:
+      - Add a bounded `seo-intel:mbti-url-truth-cleanup` command for the exact MBTI FIX-02 Research www retirement and apex URL Truth write preset.
+      - Default the command to dry-run/no-write and require explicit `--execute` for future writes.
+      - Keep the runtime command from enqueueing Search Channel items, submitting URLs, calling external APIs, mutating CMS content, or using sitemap/llms/frontend fallback as authority.
+      - Add focused tests, docs, generated JSON, and authorized PR-train metadata only.
+    allowed_paths:
+      - backend/app/Console/Commands/*
+      - backend/app/Services/SeoIntel/**
+      - backend/docs/seo/seo-growth-mbti-action-01b-fix-02-www-canonical-cleanup-runtime.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-www-canonical-cleanup-runtime.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bFix02WwwCanonicalCleanupRuntimeTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, migrations, production env/deploy files, CMS content, sitemap/llms generator files, Search Channel submitter live executor code, crawler log readers, Digital PR files, manual DB scripts, or business DB / Tencent RDS / Node2 DB.
+      - Run production migrations, production collector writes, production cleanup execution, Search Channel enqueue, live submission, external search API calls, scheduler activation, CMS mutation, Digital PR sends, or pSEO generation.
+      - Treat frontend fallback, static sitemap, static llms, crawler logs, search engine responses, Digital PR mentions, or local copies as URL Truth.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02WwwCanonicalCleanupRuntime --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && php artisan seo-intel:mbti-url-truth-cleanup --preset=mbti-fix-02-www-research-apex --dry-run --no-write --json
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-www-canonical-cleanup-runtime.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: BACKEND-DEPLOY-READINESS
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar
