@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T10:54:08.907Z",
+  "updated_at": "2026-05-24T12:12:00.000Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17711,6 +17711,61 @@
         }
       ],
       "updated_at": "2026-05-24T10:54:08.907Z"
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE-PREFLIGHT": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-fix-02-prod-write-preflight",
+      "status": "production_read_only_evidence_collected_blocked_queue_item_2_risk",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-RUNTIME"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "production_read_only": {
+          "deployment_verification": "passed: deployed backend SHA 6bd384e7b1ff5e448db7d82419805e192620b566 contains the MBTI URL Truth cleanup runtime from PR #1650.",
+          "command_exists": "passed: production artisan list exposes seo-intel:mbti-url-truth-cleanup.",
+          "dry_run_no_write": "blocked_queue_item_2_risk: command exited 0 with dry_run=true, no_write=true, writes_committed=false, no enqueue, no live submission, and no external API calls, but emitted queue_item_2_untouched=false.",
+          "planned_changes": "passed: dry-run target set contains both old Research www rows, both Research apex replacement rows, and the ZH MBTI apex row.",
+          "persisted_state_after_dry_run": "passed_no_write: old Research www rows remain indexable, Research apex rows are absent, ZH MBTI apex row is absent, and queue item 2 still points to the submitted EN MBTI IndexNow item.",
+          "final_decision": "blocked_queue_item_2_risk"
+        },
+        "local": {
+          "focused_prod_write_preflight_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02ProdWritePreflight --no-ansi (6 tests, 44 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3525 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-prod-write-preflight.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check"
+        }
+      },
+      "failure_reason": "Production dry-run/no-write output did not prove queue item 2 untouched because queue_item_2_untouched=false, even though read-only persisted state after dry-run shows queue item 2 still submitted for EN MBTI. A runtime/reporting safety fix is required before bounded production write approval.",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-QUEUE-ITEM-2-DRY-RUN-SAFETY-FIX",
+      "history": [
+        {
+          "at": "2026-05-24T20:05:00+08:00",
+          "status": "in_progress",
+          "summary": "Started production write preflight report PR from latest clean main. Scope is limited to production dry-run/no-write evidence, docs/generated report, focused test, and authorized PR-train metadata."
+        },
+        {
+          "at": "2026-05-24T20:05:00+08:00",
+          "status": "production_read_only_evidence_collected_blocked_queue_item_2_risk",
+          "summary": "Production cleanup command dry-run/no-write emitted the expected bounded target set and no-write flags, but queue_item_2_untouched=false. Persisted queue item 2 remained submitted for EN MBTI after dry-run."
+        },
+        {
+          "at": "2026-05-24T20:12:00+08:00",
+          "status": "local_checks_passed_blocked_preflight_decision",
+          "summary": "Focused generated artifact test, route list, Pint, JSON/YAML parsing, and diff check passed. The report remains blocked_queue_item_2_risk based on production dry-run output."
+        }
+      ]
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
