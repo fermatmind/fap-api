@@ -19,8 +19,37 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  semgrep-blocking:
+    name: Semgrep blocking secrets
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SEMGREP_VERSION: "1.136.0"
+      SEMGREP_SETUPTOOLS_VERSION: "80.9.0"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install Semgrep
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir "setuptools==${SEMGREP_SETUPTOOLS_VERSION}" "semgrep==${SEMGREP_VERSION}"
+          semgrep --version | grep -Fx "${SEMGREP_VERSION}"
+
+      - name: Run blocking Semgrep secrets scan
+        run: |
+          semgrep scan \
+            --config p/secrets \
+            --error \
+            --metrics=off
+
   semgrep:
-    name: semgrep sarif
+    name: semgrep sarif non-blocking upload
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:

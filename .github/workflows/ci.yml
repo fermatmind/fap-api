@@ -27,9 +27,48 @@ jobs:
       - name: CAE gate (config + artifact safety)
         run: bash backend/scripts/cae_gate.sh
 
+  supply-chain:
+    name: supply-chain
+    needs: hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: >
+            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
+
+      - name: Prepare Laravel cache dirs
+        working-directory: backend
+        run: |
+          mkdir -p storage/framework/cache/data
+          mkdir -p storage/framework/views
+          mkdir -p storage/framework/sessions
+          mkdir -p storage/logs
+          mkdir -p storage/app/private/packs_v2_materialized
+          mkdir -p bootstrap/cache
+          chmod -R ug+rwX storage bootstrap/cache || true
+
+      - name: Composer validate (strict)
+        working-directory: backend
+        run: composer validate --strict
+
+      - name: Composer audit
+        working-directory: backend
+        run: composer audit --locked --no-interaction --ignore-unreachable
+
   verify-mbti:
     name: verify-mbti-${{ matrix.mode }}
-    needs: hygiene
+    needs:
+      - hygiene
+      - supply-chain
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:

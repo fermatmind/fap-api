@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T09:40:00+08:00",
+  "updated_at": "2026-05-24T07:29:17.131Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -16989,6 +16989,76 @@
           "summary": "PR #1640 GitHub checks passed after the scoped runtime-freeze classifier fix."
         }
       ]
+    },
+    "PR-AUDIT-BE-01": {
+      "repo": "fap-api",
+      "branch": "codex/pr-audit-be-01-ci-supply-chain",
+      "status": "github_checks_passed",
+      "depends_on": [],
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1644",
+      "checks": {
+        "local": {
+          "status": "passed",
+          "passed": [
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "cd backend && composer check-platform-reqs",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan migrate --pretend --no-ansi --force",
+            "cd backend && bash scripts/ci_verify_mbti.sh",
+            "ruby -e YAML workflow/manifest parse",
+            "ruby -e JSON state parse",
+            "git diff --check"
+          ],
+          "failed": []
+        },
+        "github_required_checks": {
+          "status": "passed",
+          "passed": [
+            "hygiene",
+            "supply-chain",
+            "verify-mbti-legacy",
+            "verify-mbti-v2",
+            "Semgrep blocking secrets",
+            "semgrep sarif non-blocking upload",
+            "Semgrep OSS"
+          ],
+          "failed": []
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "events": [
+        {
+          "at": "2026-05-24T07:16:21.665+00:00",
+          "status": "in_progress",
+          "summary": "Initialized PR-AUDIT-BE-01 from authorized PRR audit remediation train. Scope is backend CI supply-chain parity, Composer PHP 8.4 requirement alignment, and Code Scanning blocking/non-blocking clarity."
+        },
+        {
+          "at": "2026-05-24T07:21:21.514Z",
+          "status": "local_checks_passed",
+          "summary": "Local PR-AUDIT-BE-01 validation passed: composer validate/audit/check-platform, route:list, sqlite migrate pretend, ci_verify_mbti, YAML/JSON parse, and git diff --check."
+        },
+        {
+          "at": "2026-05-24T07:21:58.633Z",
+          "status": "committed",
+          "summary": "Committed scoped PR-AUDIT-BE-01 implementation as 680f373df029540fcea10f2816fabe5d499e72c6."
+        },
+        {
+          "at": "2026-05-24T07:22:36.939Z",
+          "status": "pr_open",
+          "summary": "Opened PR #1644 for PR-AUDIT-BE-01."
+        },
+        {
+          "at": "2026-05-24T07:29:17.131Z",
+          "status": "github_checks_passed",
+          "summary": "GitHub checks passed for PR #1644: hygiene, supply-chain, verify-mbti legacy/v2, blocking Semgrep secrets, SARIF upload, and Semgrep OSS."
+        }
+      ],
+      "updated_at": "2026-05-24T07:29:17.131Z"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {

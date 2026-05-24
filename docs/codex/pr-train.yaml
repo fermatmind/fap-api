@@ -11234,7 +11234,7 @@ prs:
     risk_level: medium_data_integrity
     findings: [29, 55, 56, 57]
     allowed_paths: [backend/app/Domain/Career/Publish/**, backend/app/Domain/Career/Expansion/**, backend/app/Services/Career/**, backend/routes/api.php, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
-    validation: [cd backend && php artisan test --filter Career --no-ansi, cd backend && php artisan route:list --path=career --no-ansi, cd backend && vendor/bin/pint --test app/Domain/Career app/Services/Career routes/api.php tests, git diff --check, git diff --cached --check]
+    validation: ["cd backend && php artisan test --filter Career --no-ansi", "cd backend && php artisan route:list --path=career --no-ansi", "cd backend && vendor/bin/pint --test app/Domain/Career app/Services/Career routes/api.php tests", "git diff --check", "git diff --cached --check"]
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
 
   - id: CAREER-EXPORT-CLI-ROBUSTNESS-01
@@ -11275,3 +11275,43 @@ prs:
     allowed_paths: [backend/app/Services/Enneagram/**, backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php, backend/app/Services/PublicSurface/AnswerSurfaceContractService.php, backend/app/PersonalityCms/**, backend/app/Services/Cms/PersonalityDesktopCloneContentService.php, backend/app/Services/Experiments/ExperimentAssigner.php, backend/database/migrations/**, backend/tests/**, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
     validation: [cd backend && php artisan test --filter Personality --no-ansi, cd backend && php artisan test --filter Enneagram --no-ansi, cd backend && php artisan test --filter ExperimentAssigner --no-ansi, cd backend && vendor/bin/pint --test app/Services/Enneagram app/Http/Controllers/API/V0_5/Cms/PersonalityController.php app/Services/PublicSurface app/PersonalityCms app/Services/Cms/PersonalityDesktopCloneContentService.php app/Services/Experiments/ExperimentAssigner.php tests, git diff --check, git diff --cached --check]
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PR-AUDIT-BE-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/pr-audit-be-01-ci-supply-chain
+    base: main
+    title: "PR-AUDIT-BE-01 backend CI supply-chain and PHP parity"
+    train_scope: prr_audit_remediation
+    risk_level: high_ci_supply_chain
+    findings: [H-BE-CI-01, M-BE-CI-02, M-BE-PHP-01]
+    allowed_paths:
+      - .github/workflows/ci.yml
+      - .github/workflows/codeql.yml
+      - backend/composer.json
+      - backend/composer.lock
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add backend CI hard-fail gates for composer validate --strict and composer audit --locked --no-interaction --ignore-unreachable.
+      - Keep CI, Composer platform, deploy workflow, and Composer PHP requirement aligned to the PHP 8.4 production口径.
+      - Make core Semgrep secrets scanning blocking while explicitly naming SARIF upload/report-only scanning as non-blocking.
+      - Do not change backend runtime routes, migrations, payment, tenant, attempt, report, or deploy behavior.
+    validation:
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - cd backend && composer check-platform-reqs
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e 'require "yaml"; YAML.load_file(".github/workflows/ci.yml"); YAML.load_file(".github/workflows/codeql.yml"); YAML.load_file("docs/codex/pr-train.yaml"); puts "yaml ok"'
+      - ruby -e 'require "json"; JSON.parse(File.read("docs/codex/pr-train-state.json")); puts "json ok"'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: false
+    production_approval_required: false
