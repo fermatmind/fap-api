@@ -198,6 +198,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_cli_artifact_path_guard_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Career/CareerCliArtifactPathGuard.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_ci_scale_impact_command_changes(): void
     {
         $changed = [
@@ -1922,6 +1931,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerCliArtifactPathGuardFile($file)) {
+                continue;
+            }
+
             if ($this->isPublicContentReleaseGuardCommandFile($file)) {
                 continue;
             }
@@ -2434,6 +2447,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerConsoleCommandFile(string $file): bool
     {
         return preg_match('#^backend/app/Console/Commands/Career[A-Za-z0-9_]*\.php$#', $file) === 1;
+    }
+
+    private function isCareerCliArtifactPathGuardFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Career/CareerCliArtifactPathGuard.php';
     }
 
     private function isPublicContentReleaseGuardCommandFile(string $file): bool
