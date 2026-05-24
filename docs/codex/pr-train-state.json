@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T09:25:00+08:00",
+  "updated_at": "2026-05-24T09:30:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10260,7 +10260,7 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1639",
       "commit_sha": "5a609e81aaeaaecf0577f7b68fec99f28588f0f8",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -16867,6 +16867,11 @@
           "at": "2026-05-24T09:25:00+08:00",
           "status": "local_validated_with_external_sidecar",
           "summary": "Persisted Article SEO title/description through the Ops compatibility save path, guarded ReportSnapshot identity fields after creation, and recorded the unrelated broad Article filter baseline failures as a sidecar."
+        },
+        {
+          "at": "2026-05-24T09:30:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1639 for CMS-ARTICLE-REPORT-CORRECTNESS-01."
         }
       ]
     },
