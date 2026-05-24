@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T09:26:29.265Z",
+  "updated_at": "2026-05-24T09:33:23Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17332,11 +17332,11 @@
     "PR-AUDIT-BE-03": {
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-03-migration-evidence",
-      "status": "in_progress",
+      "status": "pr_opened_github_checks_pending",
       "depends_on": [
         "PR-AUDIT-BE-02"
       ],
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1648",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -17356,6 +17356,10 @@
             "json_parse_pr_train_state": "passed",
             "git_diff_check": "passed"
           }
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1648"
         }
       },
       "failure_reason": null,
@@ -17373,9 +17377,15 @@
           "at": "2026-05-24T09:31:46Z",
           "status": "local_checks_passed",
           "summary": "Added repository-level destructive migration retirement evidence for attempt_quality, forward-only runbook documentation, and migration safety tests. Targeted migration gates, route list, sqlite migrate pretend, ci_verify_mbti, YAML/JSON validation, and git diff check passed."
+        },
+        {
+          "at": "2026-05-24T09:33:23Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Pushed scoped PR-AUDIT-BE-03 branch and opened https://github.com/fermatmind/fap-api/pull/1648. GitHub checks are pending."
         }
       ],
-      "updated_at": "2026-05-24T09:31:46Z"
+      "updated_at": "2026-05-24T09:33:23Z",
+      "commit_sha": "0b53b4820a50a498d8947670ea25e4f17c9399cb"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
