@@ -15471,12 +15471,12 @@
     "SEARCH-CHANNEL-LIVE-MBTI-02": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-mbti-02",
-      "status": "local_validated",
+      "status": "merged",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-MBTI-01"
       ],
-      "commit_sha": "98fbb92997bf72fc1c7983b275220c3bbcd8212b",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1637",
+      "commit_sha": "2106b8146d3193c38c90bd68bb7dd67cd3e10147",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1606",
       "checks": {
         "production_operation": {
           "approval_phrase": "passed: exact SEARCH-CHANNEL-LIVE-02 approval phrase present before any live gate change",
@@ -15502,7 +15502,7 @@
         "github": {}
       },
       "failure_reason": null,
-      "merged_at": "2026-05-24T00:09:01Z",
+      "merged_at": "2026-05-23T05:28:44Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_deploy_allowed": false,
@@ -15530,6 +15530,78 @@
           "at": "2026-05-23T13:28:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1606 for SEARCH-CHANNEL-LIVE-MBTI-02 from codex/search-channel-live-mbti-02. The production operation stayed bounded to queue item 2 only; queue write remained disabled, and all three live gates were closed again immediately after submission."
+        },
+        {
+          "at": "2026-05-24T15:57:41+08:00",
+          "status": "ledger_reconciled",
+          "summary": "Reconciled light ledger pollution: SEARCH-CHANNEL-LIVE-MBTI-02 belongs to PR #1606 merged at 2026-05-23T05:28:44Z with merge commit 2106b8146d3193c38c90bd68bb7dd67cd3e10147, not unrelated PR #1637."
+        }
+      ]
+    },
+    "SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW": {
+      "repo": "fap-api",
+      "branch": "codex/search-channel-live-mbti-02-24h-review",
+      "status": "pr_open",
+      "depends_on": [
+        "SEARCH-CHANNEL-LIVE-MBTI-02"
+      ],
+      "commit_sha": "e445c06d9d1479f63461f1c5a778a28eb82a7484",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1646",
+      "checks": {
+        "production_read_only": {
+          "time_gate": "passed: review started at 2026-05-24T15:57:41+08:00 after required 2026-05-24T13:20:00+08:00 gate",
+          "queue_item_state": "passed: queue_item_id=2 exists with exact EN MBTI URL, channel=indexnow, approval_state=approved, execution_state=submitted, source_authority=scale_catalog, page_entity_type=test_detail, private_flow=false, claim_boundary_state=claim_safe",
+          "event_state": "passed: queue_item_planned=1, live_submission_approved=1, live_submission_response=1 with endpoint_host=api.indexnow.org http_status=200 submission_status=accepted",
+          "duplicate_retry_check": "passed: duplicate URL/channel rows only include queue_item_id=2; no bulk/retry events since live submission; no retry storm detected",
+          "gate_state": "passed: queue write, live submission, external API, and IndexNow live API gates are all false",
+          "public_url_runtime": "passed: public URL returned HTTP 200 with exact canonical and robots index, follow; no noindex or private-flow marker detected",
+          "issue_queue": "passed: no high/critical or private/forbidden/claim/duplicate issue rows tied to the target URL",
+          "ops_seo_visibility": "sidecar: authenticated /ops/seo browser verification was not performed; direct read-only DB queue evidence was available",
+          "crawler_aggregate": "sidecar: seo_crawler_log_daily_aggregates unavailable; no raw logs read and no indexing inference made",
+          "external_search_visibility": "not_checked_by_scope: no external search engines or IndexNow live endpoint called"
+        },
+        "local": {
+          "focused_twenty_four_hour_review_test": "passed_with_warnings: php artisan test --filter=SeoIntelSearchChannelLiveMbti02TwentyFourHourReview --no-ansi exited 0 with 1 warning and 14 assertions",
+          "search_channel_queue_suite": "passed_with_warnings: php artisan test --filter=SeoIntelSearchChannelQueue --no-ansi exited 0 with 24 warnings and 214 assertions",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3518 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/search-channel-live-mbti-02-24h-review.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-PREFLIGHT",
+      "history": [
+        {
+          "at": "2026-05-24T15:53:16+08:00",
+          "status": "time_gate_passed",
+          "summary": "Current time was after the required 2026-05-24T13:20:00+08:00 review window, so the 24h read-only review could start."
+        },
+        {
+          "at": "2026-05-24T15:57:41+08:00",
+          "status": "in_progress",
+          "summary": "Production read-only checks confirmed queue item 2 remains approved/submitted, expected events are present, gates are closed, the public URL is indexable with exact canonical, and no target URL issue queue regression was found."
+        },
+        {
+          "at": "2026-05-24T16:06:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused 24h review artifact test, Search Channel Queue suite, route list, Pint, JSON/YAML parsing, and diff checks exited 0. PHPUnit emitted warnings in the focused and queue suites, but assertions passed and no current-scope failure was observed."
+        },
+        {
+          "at": "2026-05-24T16:09:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1646 for SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW from codex/search-channel-live-mbti-02-24h-review."
         }
       ]
     },
