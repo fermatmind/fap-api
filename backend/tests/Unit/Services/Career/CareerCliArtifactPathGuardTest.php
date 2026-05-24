@@ -62,6 +62,23 @@ final class CareerCliArtifactPathGuardTest extends TestCase
         CareerCliArtifactPathGuard::outputPath($link);
     }
 
+    public function test_output_path_rejects_symlink_targets_with_trailing_separator(): void
+    {
+        $dir = $this->tempDir();
+        $target = $dir.'/target.json';
+        $link = $dir.'/link.json';
+        File::put($target, '{}');
+
+        if (! @symlink($target, $link)) {
+            $this->markTestSkipped('Symlink creation is not available in this environment.');
+        }
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('must not point to a symlink');
+
+        CareerCliArtifactPathGuard::outputPath($link.'/');
+    }
+
     public function test_output_path_rejects_symlink_parent_directories(): void
     {
         $dir = $this->tempDir();
