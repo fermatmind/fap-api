@@ -28,6 +28,8 @@ final class MbtiUrlTruthCleanupService
 
     private const EN_MBTI_SUBMITTED = 'https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types';
 
+    private const EN_MBTI_SUBMITTED_QUEUE_ITEM_ID = 2;
+
     /**
      * @return array<string, mixed>
      */
@@ -39,6 +41,7 @@ final class MbtiUrlTruthCleanupService
         $connection = DB::connection($connectionName);
         $queueItem2Before = null;
         $queueItem2After = null;
+        $queueItem2SafetyIssues = [];
 
         $result = $this->baseResult($dryRun, $noWrite, $execute);
 
@@ -100,6 +103,10 @@ final class MbtiUrlTruthCleanupService
 
             if ($queueTableExists) {
                 $queueItem2Before = $this->queueItem2();
+                $queueItem2SafetyIssues = $this->queueItem2SafetyIssues($queueItem2Before);
+                $issues = array_merge($issues, $queueItem2SafetyIssues);
+            } else {
+                $issues[] = 'search_channel_queue_table_missing';
             }
         }
 
@@ -137,13 +144,20 @@ final class MbtiUrlTruthCleanupService
                 $writesCommitted = true;
             });
 
-            if ($queueTableExists) {
-                $queueItem2After = $this->queueItem2();
-            }
+        }
+
+        if ($queueTableExists) {
+            $queueItem2After = $this->queueItem2();
         }
 
         $result['writes_committed'] = $writesCommitted;
-        $result['queue_item_2_untouched'] = $this->queueItemUnchanged($queueItem2Before, $queueItem2After);
+        $result['queue_item_2_untouched'] = $queueItem2SafetyIssues === []
+            && $this->queueItemUnchanged($queueItem2Before, $queueItem2After);
+
+        if (! $result['queue_item_2_untouched']) {
+            $issues[] = 'queue_item_2_changed_or_unverified';
+        }
+
         $result['duplicate_cluster_prevented'] = $this->duplicateClusterPrevented($writeRequested);
 
         return $this->finish(
@@ -182,7 +196,7 @@ final class MbtiUrlTruthCleanupService
             'duplicate_cluster_prevented' => false,
             'idempotency_key' => hash('sha256', self::PRESET.'|'.implode('|', $this->expectedUrls())),
             'issues' => [],
-            'next_task' => 'BACKEND-DEPLOY-READINESS｜Deploy MBTI URL Truth cleanup runtime',
+            'next_task' => 'BACKEND-DEPLOY-READINESS｜Deploy MBTI cleanup queue-item safety fix',
             'targets' => [
                 'stale_www_urls' => [self::EN_RESEARCH_WWW, self::ZH_RESEARCH_WWW],
                 'replacement_apex_urls' => [self::EN_RESEARCH_APEX, self::ZH_RESEARCH_APEX],
@@ -355,10 +369,45 @@ final class MbtiUrlTruthCleanupService
     {
         $row = DB::connection((string) config('seo_intel.connection', 'seo_intel'))
             ->table('seo_search_channel_queue_items')
-            ->where('id', 2)
+            ->where('id', self::EN_MBTI_SUBMITTED_QUEUE_ITEM_ID)
             ->first();
 
         return $row === null ? null : (array) $row;
+    }
+
+    /**
+     * @param  array<string, mixed>|null  $queueItem
+     * @return list<string>
+     */
+    private function queueItem2SafetyIssues(?array $queueItem): array
+    {
+        if ($queueItem === null) {
+            return ['queue_item_2_missing'];
+        }
+
+        $issues = [];
+
+        if ((string) ($queueItem['canonical_url'] ?? '') !== self::EN_MBTI_SUBMITTED) {
+            $issues[] = 'queue_item_2_url_mismatch';
+        }
+
+        if ((string) ($queueItem['channel'] ?? '') !== 'indexnow') {
+            $issues[] = 'queue_item_2_channel_mismatch';
+        }
+
+        if ((string) ($queueItem['approval_state'] ?? '') !== 'approved') {
+            $issues[] = 'queue_item_2_approval_state_mismatch';
+        }
+
+        if ((string) ($queueItem['execution_state'] ?? '') !== 'submitted') {
+            $issues[] = 'queue_item_2_execution_state_mismatch';
+        }
+
+        if (in_array((string) ($queueItem['canonical_url'] ?? ''), $this->expectedUrls(), true)) {
+            $issues[] = 'queue_item_2_in_cleanup_target_set';
+        }
+
+        return $issues;
     }
 
     /**
@@ -367,8 +416,8 @@ final class MbtiUrlTruthCleanupService
      */
     private function queueItemUnchanged(?array $before, ?array $after): bool
     {
-        if ($before === null && $after === null) {
-            return true;
+        if ($before === null || $after === null) {
+            return false;
         }
 
         return $before === $after;

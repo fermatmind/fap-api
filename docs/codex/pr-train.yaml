@@ -11187,6 +11187,55 @@ prs:
     scheduler_activation: false
     next_task: SEO-GROWTH-MBTI-ACTION-01B-FIX-02-QUEUE-ITEM-2-DRY-RUN-SAFETY-FIX
 
+  - id: SEO-GROWTH-MBTI-ACTION-01B-FIX-02-QUEUE-ITEM-2-DRY-RUN-SAFETY-FIX
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE-PREFLIGHT
+    branch: codex/seo-growth-mbti-action-01b-fix-02-queue-item-2-safety
+    base: main
+    title: "fix(seo-intel): verify MBTI cleanup leaves submitted queue item untouched"
+    name: "Fix MBTI URL Truth cleanup dry-run safety assertion for submitted queue item 2"
+    train_scope: seo_growth_mbti_action
+    risk_level: bounded_runtime_safety_fix
+    type: backend_runtime_test_docs
+    scope:
+      - Fix the MBTI URL Truth cleanup command/reporting so dry-run and execute-mode safety checks positively verify that submitted queue item 2 remains untouched.
+      - Block or report false when queue item 2 is missing, points to the wrong URL, uses the wrong channel, is not approved/submitted, is part of the cleanup target set, or cannot be verified unchanged.
+      - Preserve no production write, no Search Channel enqueue, no live submission, no external API calls, no sitemap/llms authority, and no frontend fallback authority.
+      - Add docs, generated JSON, focused tests, and authorized train metadata only.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoIntelMbtiUrlTruthCleanupCommand.php
+      - backend/app/Services/SeoIntel/MbtiUrlTruthCleanupService.php
+      - backend/docs/seo/seo-growth-mbti-action-01b-fix-02-queue-item-2-dry-run-safety-fix.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-queue-item-2-dry-run-safety-fix.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bFix02QueueItem2DryRunSafetyFixTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bFix02WwwCanonicalCleanupRuntimeTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, migrations, production env/deploy files, CMS content, articles, internal links, sitemap/llms generators, Search Channel live submitter changes, crawler log readers, scheduler, Digital PR files, manual DB scripts, or business DB / Tencent RDS / Node2 DB.
+      - Perform production cleanup/write, production collector writes, Search Channel enqueue, live submission, external search API calls, scheduler activation, CMS mutation, Digital PR sends, pSEO generation, or raw Nginx access log reads.
+      - Treat frontend fallback, static sitemap, static llms, crawler logs, search engine responses, Digital PR mentions, or local copies as authority.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02QueueItem2DryRunSafetyFix --no-ansi
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02WwwCanonicalCleanupRuntime --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && php artisan seo-intel:mbti-url-truth-cleanup --preset=mbti-fix-02-www-research-apex --dry-run --no-write --json
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-queue-item-2-dry-run-safety-fix.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: BACKEND-DEPLOY-READINESS
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar

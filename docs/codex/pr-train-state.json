@@ -17771,6 +17771,56 @@
           "summary": "Opened PR #1652 for the production write preflight report. The report documents blocked_queue_item_2_risk and does not authorize a production write."
         }
       ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-QUEUE-ITEM-2-DRY-RUN-SAFETY-FIX": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-fix-02-queue-item-2-safety",
+      "status": "pr_open_github_checks_pending",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE-PREFLIGHT"
+      ],
+      "commit_sha": "63b0a0b1",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1653",
+      "checks": {
+        "local": {
+          "focused_queue_item_2_safety_fix_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02QueueItem2DryRunSafetyFix --no-ansi (6 tests, 47 assertions)",
+          "focused_cleanup_runtime_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02WwwCanonicalCleanupRuntime --no-ansi (5 tests, 78 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi",
+          "pint": "passed: vendor/bin/pint --test (3526 files)",
+          "command_dry_run_no_write": "passed: php artisan seo-intel:mbti-url-truth-cleanup --preset=mbti-fix-02-www-research-apex --dry-run --no-write --json exited 0 locally with no writes; local environment lacks seo_intel tables and reports blocked as expected.",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-queue-item-2-dry-run-safety-fix.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "BACKEND-DEPLOY-READINESS",
+      "history": [
+        {
+          "at": "2026-05-24T20:36:00+08:00",
+          "status": "in_progress",
+          "summary": "Started scoped runtime safety fix from latest clean main. Scope is limited to queue item 2 dry-run safety assertion/reporting, docs/generated artifact, focused tests, and authorized PR-train metadata."
+        },
+        {
+          "at": "2026-05-24T20:48:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused queue item 2 safety test, existing cleanup runtime test, route list, Pint, local dry-run/no-write command, JSON/YAML parse, and diff checks passed."
+        },
+        {
+          "at": "2026-05-24T20:54:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1653 for the queue item 2 dry-run safety fix. GitHub checks are pending."
+        }
+      ]
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
