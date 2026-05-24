@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T09:33:23Z",
+  "updated_at": "2026-05-24T09:43:24Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17352,6 +17352,8 @@
             "php_artisan_migrate_pretend_sqlite_memory": "passed",
             "php_artisan_route_list_no_ansi": "passed",
             "bash_scripts_ci_verify_mbti": "passed",
+            "bigfive_runtime_freeze_current_diff": "passed",
+            "bigfive_runtime_freeze_destructive_retirement_evidence": "passed",
             "yaml_parse_pr_train": "passed",
             "json_parse_pr_train_state": "passed",
             "git_diff_check": "passed"
@@ -17382,10 +17384,15 @@
           "at": "2026-05-24T09:33:23Z",
           "status": "pr_opened_github_checks_pending",
           "summary": "Pushed scoped PR-AUDIT-BE-03 branch and opened https://github.com/fermatmind/fap-api/pull/1648. GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-24T09:43:24Z",
+          "status": "ci_fix_pushed",
+          "summary": "Added a narrow Big Five runtime-freeze classifier evidence case for the already scoped attempt_quality destructive retirement migration after GitHub verify-mbti flagged the migration path as runtime-impacting. Targeted classifier tests, migration safety tests, ci_verify_mbti, YAML validation, and git diff check passed locally."
         }
       ],
-      "updated_at": "2026-05-24T09:33:23Z",
-      "commit_sha": "0b53b4820a50a498d8947670ea25e4f17c9399cb"
+      "updated_at": "2026-05-24T09:43:24Z",
+      "commit_sha": "922ae4d1d311ae047b448011d10fcc655abfa87d"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
