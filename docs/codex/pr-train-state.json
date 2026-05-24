@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T07:55:33.131Z",
+  "updated_at": "2026-05-24T07:55:47.051Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17069,11 +17069,10 @@
     "PR-AUDIT-BE-02": {
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-02-webhook-digest",
-      "status": "local_checks_passed_with_sidecar",
+      "status": "committed",
       "depends_on": [
         "PR-AUDIT-BE-01"
       ],
-      "commit_sha": null,
       "pr_url": null,
       "checks": {
         "local": {
@@ -17142,9 +17141,14 @@
           "at": "2026-05-24T07:55:33.131Z",
           "status": "local_checks_passed_with_sidecar",
           "summary": "BE-02 blocking acceptance passed: targeted digest/idempotency tests, Composer validate/audit, ci_verify_mbti, and git diff --check. Broad PaymentWebhook filter failure is sidecar verified against clean origin/main."
+        },
+        {
+          "at": "2026-05-24T07:55:47.051Z",
+          "status": "committed",
+          "summary": "Committed scoped PR-AUDIT-BE-02 implementation as undefined."
         }
       ],
-      "updated_at": "2026-05-24T07:55:33.131Z"
+      "updated_at": "2026-05-24T07:55:47.051Z"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
