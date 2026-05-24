@@ -8,6 +8,7 @@ use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
+use App\Services\Career\CareerCliArtifactPathGuard;
 use App\Services\Career\Import\CareerSelectedDisplayAssetMapper;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
@@ -948,10 +949,7 @@ final class CareerAlignCareerAuthorityBatch extends Command
             $report['writes_database'] = $success && $writeCount > 0;
         }
 
-        $outputPath = trim((string) ($this->option('output') ?? ''));
-        if ($outputPath !== '') {
-            file_put_contents($outputPath, json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
-        }
+        CareerCliArtifactPathGuard::writeJsonOutput($this->option('output'), $report);
 
         if ((bool) $this->option('json')) {
             $this->line(json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));

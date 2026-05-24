@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Domain\Career\IndexStateValue;
 use App\Models\IndexState;
 use App\Models\Occupation;
+use App\Services\Career\CareerCliArtifactPathGuard;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -837,10 +838,7 @@ final class CareerPrepareCanonicalRuntimeCandidates extends Command
             return self::FAILURE;
         }
 
-        $outputPath = trim((string) ($this->option('output') ?? ''));
-        if ($outputPath !== '') {
-            file_put_contents($outputPath, $encoded.PHP_EOL);
-        }
+        CareerCliArtifactPathGuard::writeTextOutput($this->option('output'), $encoded.PHP_EOL);
 
         if ((bool) $this->option('json')) {
             $this->line($encoded);

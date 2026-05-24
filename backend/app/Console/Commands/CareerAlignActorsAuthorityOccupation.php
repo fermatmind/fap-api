@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
+use App\Services\Career\CareerCliArtifactPathGuard;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
@@ -327,10 +328,7 @@ final class CareerAlignActorsAuthorityOccupation extends Command
     {
         $report['decision'] = $success ? ($report['decision'] === 'fail' ? 'pass' : $report['decision']) : 'fail';
 
-        $outputPath = trim((string) ($this->option('output') ?? ''));
-        if ($outputPath !== '') {
-            file_put_contents($outputPath, json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
-        }
+        CareerCliArtifactPathGuard::writeJsonOutput($this->option('output'), $report);
 
         if ((bool) $this->option('json')) {
             $this->line(json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));

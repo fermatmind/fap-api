@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Career\CareerCliArtifactPathGuard;
 use App\Services\Career\Import\CareerAssetImportValidator;
 use App\Support\Xlsx\XlsxCellReference;
 use DOMDocument;
@@ -37,13 +38,7 @@ final class CareerValidateAssetImport extends Command
                 throw new RuntimeException('Unable to encode validation report.');
             }
 
-            $output = trim((string) ($this->option('output') ?? ''));
-            if ($output !== '') {
-                $written = file_put_contents($output, $json.PHP_EOL);
-                if ($written === false) {
-                    throw new RuntimeException('Unable to write report output: '.$output);
-                }
-            }
+            CareerCliArtifactPathGuard::writeTextOutput($this->option('output'), $json.PHP_EOL);
 
             if ((bool) $this->option('json')) {
                 $this->line($json);

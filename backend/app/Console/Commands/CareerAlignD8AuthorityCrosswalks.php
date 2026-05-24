@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
+use App\Services\Career\CareerCliArtifactPathGuard;
 use App\Support\Xlsx\XlsxCellReference;
 use DOMDocument;
 use DOMElement;
@@ -634,10 +635,7 @@ final class CareerAlignD8AuthorityCrosswalks extends Command
             $report['writes_database'] = $success && (($report['created_occupation_count'] ?? 0) + ($report['created_crosswalk_count'] ?? 0)) > 0;
         }
 
-        $outputPath = trim((string) ($this->option('output') ?? ''));
-        if ($outputPath !== '') {
-            file_put_contents($outputPath, json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
-        }
+        CareerCliArtifactPathGuard::writeJsonOutput($this->option('output'), $report);
 
         if ((bool) $this->option('json')) {
             $this->line(json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));

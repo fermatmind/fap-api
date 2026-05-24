@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Career\CareerCliArtifactPathGuard;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
@@ -526,13 +527,7 @@ final class CareerValidateReleaseGate extends Command
             throw new RuntimeException('Unable to encode validation report.');
         }
 
-        $output = trim((string) ($this->option('output') ?? ''));
-        if ($output !== '') {
-            $written = file_put_contents($output, $json.PHP_EOL);
-            if ($written === false) {
-                throw new RuntimeException('Unable to write report output: '.$output);
-            }
-        }
+        CareerCliArtifactPathGuard::writeTextOutput($this->option('output'), $json.PHP_EOL);
 
         if ((bool) $this->option('json')) {
             $this->output->write($json.PHP_EOL, false, OutputInterface::OUTPUT_RAW);
