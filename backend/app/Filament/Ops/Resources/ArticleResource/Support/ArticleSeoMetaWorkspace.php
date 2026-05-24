@@ -48,8 +48,9 @@ final class ArticleSeoMetaWorkspace
             'og_image_url',
             'robots',
         ])
+            ->filter(static fn (string $field): bool => array_key_exists($field, $payload))
             ->mapWithKeys(function (string $field) use ($payload): array {
-                $value = $payload[$field] ?? null;
+                $value = $payload[$field];
                 if (is_string($value)) {
                     $value = trim($value);
                 }
