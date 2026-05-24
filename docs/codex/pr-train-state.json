@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T18:25:00+08:00",
+  "updated_at": "2026-05-24T18:26:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -15784,12 +15784,12 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-RUNTIME": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-fix-02-www-cleanup-runtime",
-      "status": "committed",
+      "status": "pr_open",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-PLAN"
       ],
-      "commit_sha": "6142573f75a8d7395297300ac49ccd4b5dd136ba",
-      "pr_url": null,
+      "commit_sha": "3ad0ba19e9ea6f1db22f0f83b429310830c0e404",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1650",
       "checks": {
         "local": {
           "main_sync": {
@@ -15867,6 +15867,11 @@
           "at": "2026-05-24T18:24:00+08:00",
           "status": "committed",
           "summary": "Created scoped runtime command commit 6142573f75a8d7395297300ac49ccd4b5dd136ba."
+        },
+        {
+          "at": "2026-05-24T18:26:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1650 for the scoped MBTI URL Truth cleanup runtime command."
         }
       ],
       "sidecars": [
