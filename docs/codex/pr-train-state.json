@@ -16907,8 +16907,8 @@
         60,
         70
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "2bd6bcf22cd81cc064e5e2f914585cae0b53cb1d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1640",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -16963,6 +16963,11 @@
           "at": "2026-05-24T10:10:00+08:00",
           "status": "local_validated",
           "summary": "Normalized sparse/duplicate desktop clone asset slots, repaired existing experiment assignment user binding without calling save() on query rows, preserved the newest active registry version per key, and added the generic personality public projection response key while keeping MBTI compatibility."
+        },
+        {
+          "at": "2026-05-24T10:20:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1640 for PERSONALITY-ENNEAGRAM-COMPAT-01."
         }
       ]
     }
