@@ -8606,7 +8606,7 @@
       "depends_on": [
         "REPAIR-DIRECTORY-DETAIL-PENDING-314-1"
       ],
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "train_scope": "career_directory_list_detail_api_authority",
       "risk_level": "medium",
       "title": "fix(api): align directory list with runtime detail authority",
@@ -15717,6 +15717,67 @@
           "at": "2026-05-24T17:16:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1647 for SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-PREFLIGHT from codex/seo-growth-mbti-action-01b-fix-02-prod-preflight."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-PLAN": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-fix-02-www-cleanup-plan",
+      "status": "local_checks_passed",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-PREFLIGHT"
+      ],
+      "commit_sha": "14749d9e98a613425adcfed2f49c7e7cf86a9388",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1649",
+      "checks": {
+        "local_investigation": {
+          "seo_urls_schema": "seo_urls has canonical_url_hash, canonical_url, locale, page_entity_type, entity_id_or_slug, cluster, source_authority, indexability_state, is_private_flow, metadata_json, and timestamps; no explicit lifecycle/status column exists.",
+          "seo_url_entities_schema": "seo_url_entities has canonical_url_hash, locale, page_entity_type, entity_id_or_slug, entity_source, authority_status, source_updated_at, and attributes_json.",
+          "search_channel_exclusion": "SearchChannelQueueEligibilityEvaluator blocks any row whose indexability_state is not indexable, so stale www rows can be made Search Channel-ineligible without schema change.",
+          "runtime_gap": "Existing UrlTruthInventoryRecordWriter only upserts backend-authoritative records by canonical_url_hash + locale and does not retire stale www rows; a scoped cleanup runtime command is required.",
+          "selected_strategy": "Option C: future scoped cleanup runtime command; schema change not required for the immediate cleanup plan."
+        },
+        "local": {
+          "focused_www_cleanup_plan_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02WwwCanonicalCleanupPlan --no-ansi (4 tests, 30 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi (203 routes)",
+          "pint": "passed: vendor/bin/pint --test (3520 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-www-canonical-cleanup-plan.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        },
+        "github": {}
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-RUNTIME",
+      "history": [
+        {
+          "at": "2026-05-24T17:45:00+08:00",
+          "status": "in_progress",
+          "summary": "Started WWW canonical cleanup planning from latest origin/main in an isolated worktree because the primary worktree had unrelated dirty PR-AUDIT-BE-03 changes overlapping docs/codex files."
+        },
+        {
+          "at": "2026-05-24T17:45:00+08:00",
+          "status": "local_investigation_completed",
+          "summary": "Local schema and Search Channel inspection found existing fields can express non-eligibility and entity demotion, but current runtime lacks an official exact retire-and-replace cleanup command."
+        },
+        {
+          "at": "2026-05-24T17:55:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused cleanup plan artifact test, route list, Pint, JSON/YAML parsing, and diff checks exited 0 for the scoped docs/generated/tests PR."
+        },
+        {
+          "at": "2026-05-24T17:59:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1649 for SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-PLAN from codex/seo-growth-mbti-action-01b-fix-02-www-cleanup-plan."
         }
       ]
     },
