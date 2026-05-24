@@ -97,6 +97,20 @@ final class CareerFirstWaveReleaseArtifactMaterializationServiceTest extends Tes
         }
     }
 
+    public function test_it_rejects_dot_segment_timestamp_without_creating_output(): void
+    {
+        $service = app(CareerFirstWaveReleaseArtifactMaterializationService::class);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('invalid timestamp segment');
+
+        try {
+            $service->materialize('..');
+        } finally {
+            $this->assertDirectoryDoesNotExist($this->rootDir);
+        }
+    }
+
     public function test_it_rejects_projection_validation_failure_and_does_not_finalize(): void
     {
         $badService = new class(app(CareerFirstWaveReleaseArtifactProjectionService::class)) extends CareerFirstWaveReleaseArtifactMaterializationService
@@ -232,6 +246,63 @@ final class CareerFirstWaveReleaseArtifactMaterializationServiceTest extends Tes
         $this->assertDirectoryExists($finalDir);
         $this->assertFileExists($finalDir.DIRECTORY_SEPARATOR.'career-launch-manifest.json');
         $this->assertFileExists($finalDir.DIRECTORY_SEPARATOR.'career-smoke-matrix.json');
+    }
+
+    public function test_it_rejects_launch_governance_count_mismatch_without_finalizing(): void
+    {
+        $badService = new class(app(CareerFirstWaveReleaseArtifactProjectionService::class)) extends CareerFirstWaveReleaseArtifactMaterializationService
+        {
+            /**
+             * @return array<string, object>
+             */
+            protected function projectedArtifacts(): array
+            {
+                return [
+                    'career-launch-manifest.json' => new CareerFirstWaveLaunchManifestArtifact(
+                        scope: 'career_first_wave_10',
+                        counts: ['total' => 1, 'stable' => 2, 'candidate' => 0, 'hold' => 0, 'blocked' => 0],
+                        groups: ['stable' => ['registered-nurses'], 'candidate' => [], 'hold' => [], 'blocked' => []],
+                        members: [[
+                            'canonical_slug' => 'registered-nurses',
+                            'launch_tier' => 'stable',
+                            'readiness_status' => 'publish_ready',
+                            'lifecycle_state' => 'indexed',
+                            'public_index_state' => 'indexable',
+                            'supporting_routes' => ['family_hub' => true, 'next_step_links_count' => 1],
+                            'trust_freshness' => ['review_due_known' => false, 'review_staleness_state' => 'unknown_due_date'],
+                        ]],
+                    ),
+                    'career-smoke-matrix.json' => new CareerFirstWaveSmokeMatrixArtifact(
+                        scope: 'career_first_wave_10',
+                        members: [[
+                            'canonical_slug' => 'registered-nurses',
+                            'smoke_matrix' => [
+                                'job_detail_route_known' => true,
+                                'discoverable_route_known' => true,
+                                'seo_contract_present' => true,
+                                'structured_data_authority_present' => true,
+                                'trust_freshness_present' => true,
+                                'family_support_route_present' => true,
+                                'next_step_support_present' => true,
+                            ],
+                        ]],
+                    ),
+                ];
+            }
+        };
+
+        $timestamp = '20260415T090400Z';
+        $finalDir = $this->rootDir.DIRECTORY_SEPARATOR.$timestamp;
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('launch manifest count mismatch for stable');
+
+        try {
+            $badService->materialize($timestamp);
+        } finally {
+            $this->assertDirectoryDoesNotExist($finalDir);
+            $this->assertDirectoryDoesNotExist($finalDir.'.tmp');
+        }
     }
 
     private function materializeCurrentFirstWaveFixture(): void

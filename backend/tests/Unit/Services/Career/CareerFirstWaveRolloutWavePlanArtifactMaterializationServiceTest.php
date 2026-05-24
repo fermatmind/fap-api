@@ -82,6 +82,22 @@ final class CareerFirstWaveRolloutWavePlanArtifactMaterializationServiceTest ext
         }
     }
 
+    public function test_it_rejects_dot_segment_timestamp_without_creating_output(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+
+        $service = app(CareerFirstWaveRolloutWavePlanArtifactMaterializationService::class);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('invalid timestamp segment');
+
+        try {
+            $service->materialize('..');
+        } finally {
+            $this->assertDirectoryDoesNotExist($this->rootDir);
+        }
+    }
+
     public function test_it_rejects_invalid_projection_without_finalizing_directory(): void
     {
         $badService = new class(app(CareerFirstWaveRolloutWavePlanArtifactProjectionService::class)) extends CareerFirstWaveRolloutWavePlanArtifactMaterializationService
@@ -121,6 +137,54 @@ final class CareerFirstWaveRolloutWavePlanArtifactMaterializationServiceTest ext
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('contains empty canonical_slug');
+
+        try {
+            $badService->materialize($timestamp);
+        } finally {
+            $this->assertDirectoryDoesNotExist($finalDir);
+            $this->assertDirectoryDoesNotExist($tmpDir);
+        }
+    }
+
+    public function test_it_rejects_rollout_cohort_count_mismatch_without_finalizing_directory(): void
+    {
+        $badService = new class(app(CareerFirstWaveRolloutWavePlanArtifactProjectionService::class)) extends CareerFirstWaveRolloutWavePlanArtifactMaterializationService
+        {
+            protected function projectedArtifact(): object
+            {
+                return new CareerFirstWaveRolloutWavePlanArtifact(
+                    scope: 'career_first_wave_10',
+                    counts: ['stable' => 2, 'candidate' => 0, 'hold' => 0, 'blocked' => 0, 'manual_review_needed' => 0],
+                    cohorts: ['stable' => ['registered-nurses'], 'candidate' => [], 'hold' => [], 'blocked' => []],
+                    advisory: ['manual_review_needed' => []],
+                    members: [
+                        [
+                            'canonical_slug' => 'registered-nurses',
+                            'rollout_cohort' => 'stable',
+                            'launch_tier' => 'stable',
+                            'readiness_status' => 'publish_ready',
+                            'lifecycle_state' => 'indexed',
+                            'public_index_state' => 'indexable',
+                            'supporting_routes' => [
+                                'family_hub' => true,
+                                'next_step_links_count' => 1,
+                            ],
+                            'trust_freshness' => [
+                                'review_due_known' => false,
+                                'review_staleness_state' => 'unknown_due_date',
+                            ],
+                        ],
+                    ],
+                );
+            }
+        };
+
+        $timestamp = '20260415T110300Z';
+        $finalDir = $this->rootDir.DIRECTORY_SEPARATOR.$timestamp;
+        $tmpDir = $finalDir.'.tmp';
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('rollout wave-plan count mismatch for stable');
 
         try {
             $badService->materialize($timestamp);

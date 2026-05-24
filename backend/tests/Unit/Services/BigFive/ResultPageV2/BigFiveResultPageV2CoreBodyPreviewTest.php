@@ -751,6 +751,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthValidator.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionService.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
+            'backend/app/Services/Career/CareerFirstWaveReleaseArtifactMaterializationService.php',
+            'backend/app/Services/Career/CareerFirstWaveRolloutBundleArtifactMaterializationService.php',
+            'backend/app/Services/Career/CareerFirstWaveRolloutWavePlanArtifactMaterializationService.php',
             'backend/app/Domain/Career/Expansion/CanonicalBatchCloseoutResultDTO.php',
             'backend/app/Domain/Career/Expansion/CanonicalPostPromotionReleaseGateService.php',
             'backend/app/Domain/Career/Expansion/CanonicalPostPromotionReleaseGateValidator.php',
@@ -3276,6 +3279,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Publish/CareerCanonicalRuntimeTruthValidator.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionService.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
+            'backend/app/Services/Career/CareerFirstWaveReleaseArtifactMaterializationService.php',
+            'backend/app/Services/Career/CareerFirstWaveRolloutBundleArtifactMaterializationService.php',
+            'backend/app/Services/Career/CareerFirstWaveRolloutWavePlanArtifactMaterializationService.php',
         ], true);
     }
 
