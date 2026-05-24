@@ -16653,6 +16653,11 @@
           "command": "cd backend && vendor/bin/pint --test app/Domain/Career app/Services/Career routes/api.php tests",
           "evidence": "PASS, 1528 files."
         },
+        "mbti_freeze_targeted": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter 'runtime_paths_have_no_uncommitted_diff|career_runtime_publish_projection_owner_changes' --no-ansi",
+          "evidence": "2 passed, 4 assertions after adding the scoped Career materialization services to the existing Career runtime publish projection allowlist."
+        },
         "diff_check": {
           "status": "pass",
           "command": "git diff --check"
@@ -16688,6 +16693,11 @@
           "at": "2026-05-24T08:35:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1637 for CAREER-ROLLOUT-MATERIALIZATION-01."
+        },
+        {
+          "at": "2026-05-24T08:59:00+08:00",
+          "status": "github_checks_failed_scope_fix_applied",
+          "summary": "GitHub verify-mbti-legacy/v2 failed on the existing runtime-freeze classifier because the scoped Career materialization service files were not allowlisted; added the files to the Career runtime publish projection allowlist and verified the targeted classifier tests plus Pint."
         }
       ]
     },
