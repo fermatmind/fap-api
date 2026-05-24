@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T07:21:21.514Z",
+  "updated_at": "2026-05-24T07:21:58.633Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -16993,9 +16993,9 @@
     "PR-AUDIT-BE-01": {
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-01-ci-supply-chain",
-      "status": "local_checks_passed",
+      "status": "committed",
       "depends_on": [],
-      "commit_sha": null,
+      "commit_sha": "680f373df029540fcea10f2816fabe5d499e72c6",
       "pr_url": null,
       "checks": {
         "local": {
@@ -17034,9 +17034,14 @@
           "at": "2026-05-24T07:21:21.514Z",
           "status": "local_checks_passed",
           "summary": "Local PR-AUDIT-BE-01 validation passed: composer validate/audit/check-platform, route:list, sqlite migrate pretend, ci_verify_mbti, YAML/JSON parse, and git diff --check."
+        },
+        {
+          "at": "2026-05-24T07:21:58.633Z",
+          "status": "committed",
+          "summary": "Committed scoped PR-AUDIT-BE-01 implementation as 680f373df029540fcea10f2816fabe5d499e72c6."
         }
       ],
-      "updated_at": "2026-05-24T07:21:21.514Z"
+      "updated_at": "2026-05-24T07:21:58.633Z"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
