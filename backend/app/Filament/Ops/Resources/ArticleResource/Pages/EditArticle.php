@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources\ArticleResource\Pages;
 
 use App\Filament\Ops\Resources\ArticleResource;
+use App\Filament\Ops\Resources\ArticleResource\Support\ArticleSeoMetaWorkspace;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Models\Article;
-use App\Models\ArticleSeoMeta;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
@@ -95,6 +95,8 @@ class EditArticle extends EditRecord
         $revisionState = app(ArticleTranslationRevisionWorkspace::class)->revisionFormState($record);
 
         return array_merge($data, $revisionState, [
+            'seo_title' => $record->seoMeta?->seo_title ?? $revisionState['seo_title'] ?? null,
+            'seo_description' => $record->seoMeta?->seo_description ?? $revisionState['seo_description'] ?? null,
             'canonical_url' => $record->seoMeta?->canonical_url,
             'og_title' => $record->seoMeta?->og_title,
             'og_description' => $record->seoMeta?->og_description,
@@ -120,6 +122,8 @@ class EditArticle extends EditRecord
             'working_revision_status' => $data['working_revision_status'] ?? null,
         ];
         $this->seoCompatibilityPayload = [
+            'seo_title' => $data['seo_title'] ?? null,
+            'seo_description' => $data['seo_description'] ?? null,
             'canonical_url' => $data['canonical_url'] ?? null,
             'og_title' => $data['og_title'] ?? null,
             'og_description' => $data['og_description'] ?? null,
@@ -164,21 +168,7 @@ class EditArticle extends EditRecord
 
     private function saveSeoCompatibilityFields(Article $record): void
     {
-        $hasCompatibilityValues = array_filter($this->seoCompatibilityPayload, static fn (mixed $value): bool => filled($value)) !== [];
-        if (! $hasCompatibilityValues && ! $record->seoMeta instanceof ArticleSeoMeta) {
-            return;
-        }
-
-        ArticleSeoMeta::query()->updateOrCreate(
-            [
-                'org_id' => (int) $record->org_id,
-                'article_id' => (int) $record->id,
-                'locale' => (string) $record->locale,
-            ],
-            array_merge($this->seoCompatibilityPayload, [
-                'is_indexable' => (bool) $record->is_indexable,
-            ])
-        );
+        app(ArticleSeoMetaWorkspace::class)->save($record, $this->seoCompatibilityPayload);
     }
 
     protected function getRedirectUrl(): string

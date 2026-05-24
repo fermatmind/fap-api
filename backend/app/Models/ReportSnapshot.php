@@ -47,6 +47,19 @@ class ReportSnapshot extends Model
         'updated_at' => 'datetime',
     ];
 
+    protected static function booted(): void
+    {
+        static::saving(static function (self $snapshot): void {
+            if (! $snapshot->exists) {
+                return;
+            }
+
+            if ($snapshot->isDirty('attempt_id') || $snapshot->isDirty('org_id')) {
+                throw new \LogicException('Report snapshot identity fields are immutable after creation.');
+            }
+        });
+    }
+
     public static function publicContextOrgId(): ?int
     {
         return self::resolvedPublicContextOrgId();

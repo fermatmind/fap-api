@@ -582,7 +582,8 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $this->assertSame('https://example.test/articles/canonical-editor-title', $article->seoMeta?->canonical_url);
         $this->assertSame('Compatibility OG title', $article->seoMeta?->og_title);
         $this->assertSame(0, (int) $article->seoMeta?->org_id);
-        $this->assertNull($article->seoMeta?->seo_title);
+        $this->assertSame('Editor revision SEO title', $article->seoMeta?->seo_title);
+        $this->assertSame('Editor revision SEO description', $article->seoMeta?->seo_description);
     }
 
     public function test_working_revision_edit_invalidates_review_and_cannot_self_publish(): void
