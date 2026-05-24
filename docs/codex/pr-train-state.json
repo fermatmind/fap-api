@@ -16725,7 +16725,7 @@
         53
       ],
       "commit_sha": "d01c58ad97841b20511f90b1c248e4c0609481f6",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1638",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -16776,6 +16776,11 @@
           "at": "2026-05-24T09:05:00+08:00",
           "status": "local_validated_with_external_sidecar",
           "summary": "Added shared Career CLI artifact path guard and routed scoped --output writes through it; targeted path guard and validate-asset-import tests passed, Pint and diff checks passed, Career baseline failures recorded as external sidecar."
+        },
+        {
+          "at": "2026-05-24T09:10:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1638 for CAREER-EXPORT-CLI-ROBUSTNESS-01."
         }
       ]
     },
