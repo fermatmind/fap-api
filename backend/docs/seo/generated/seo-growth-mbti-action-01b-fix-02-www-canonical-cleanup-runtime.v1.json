@@ -1,0 +1,43 @@
+{
+  "schema_version": "seo-growth-mbti-action-01b-fix-02-www-canonical-cleanup-runtime.v1",
+  "task": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-RUNTIME",
+  "final_decision": "mbti_action_01b_fix_02_www_cleanup_runtime_merged_ready_for_backend_deploy_readiness",
+  "command": "php artisan seo-intel:mbti-url-truth-cleanup --preset=mbti-fix-02-www-research-apex --dry-run --no-write --json",
+  "dry_run_supported": true,
+  "no_write_supported": true,
+  "execute_supported": true,
+  "production_write_performed": false,
+  "enqueue_performed": false,
+  "live_submission_performed": false,
+  "external_api_call_performed": false,
+  "cms_mutation_performed": false,
+  "sitemap_llms_authority_used": false,
+  "frontend_fallback_authority_used": false,
+  "stale_www_urls": [
+    "https://www.fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+    "https://www.fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report"
+  ],
+  "replacement_apex_urls": [
+    "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+    "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report"
+  ],
+  "zh_mbti_apex_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+  "already_submitted_urls_excluded": [
+    {
+      "url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+      "queue_item_id": 2,
+      "channel": "indexnow",
+      "state": "approved/submitted",
+      "must_remain_untouched": true
+    }
+  ],
+  "runtime_write_gate_required": [
+    "--preset=mbti-fix-02-www-research-apex",
+    "--execute",
+    "not --dry-run",
+    "not --no-write",
+    "future exact human approval"
+  ],
+  "future_approval_phrase": "I explicitly approve bounded URL Truth cleanup/write for MBTI FIX-02: retire old Research www rows, write Research apex rows, and write ZH MBTI apex row. Do not enqueue Search Channel items. Do not submit URLs.",
+  "next_task": "BACKEND-DEPLOY-READINESS｜Deploy MBTI URL Truth cleanup runtime"
+}

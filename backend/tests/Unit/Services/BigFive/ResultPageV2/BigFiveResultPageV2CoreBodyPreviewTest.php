@@ -682,6 +682,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_intel_mbti_url_truth_cleanup_runtime_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoIntelMbtiUrlTruthCleanupCommand.php',
+            'backend/app/Services/SeoIntel/MbtiUrlTruthCleanupService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_content_publish_rehearsal_dry_run_files(): void
     {
         $changed = [
@@ -2130,6 +2140,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoIntelMbtiUrlTruthCleanupRuntimeFile($file)) {
+                continue;
+            }
+
             if ($this->isContentPublishRehearsalDryRunFile($file)) {
                 continue;
             }
@@ -2862,6 +2876,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueuePlanner.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueWriteService.php',
             'backend/database/migrations/seo_intel/2026_05_20_220000_create_seo_search_channel_queue_tables.php',
+        ], true);
+    }
+
+    private function isSeoIntelMbtiUrlTruthCleanupRuntimeFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelMbtiUrlTruthCleanupCommand.php',
+            'backend/app/Services/SeoIntel/MbtiUrlTruthCleanupService.php',
         ], true);
     }
 

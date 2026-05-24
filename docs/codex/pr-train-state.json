@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T09:50:38Z",
+  "updated_at": "2026-05-24T18:32:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -15778,6 +15778,130 @@
           "at": "2026-05-24T17:59:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1649 for SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-PLAN from codex/seo-growth-mbti-action-01b-fix-02-www-cleanup-plan."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-RUNTIME": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-fix-02-www-cleanup-runtime",
+      "status": "ci_fix_local_checks_passed",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-PLAN"
+      ],
+      "commit_sha": "3ad0ba19e9ea6f1db22f0f83b429310830c0e404",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1650",
+      "checks": {
+        "local": {
+          "main_sync": {
+            "status": "pass",
+            "evidence": "Primary fap-api main and isolated runtime branch both matched origin/main at d18c0cc36a84ce50b823c995e4226b188551b0d0 before commit."
+          },
+          "focused_runtime_test": {
+            "status": "pass",
+            "command": "cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02WwwCanonicalCleanupRuntime --no-ansi",
+            "evidence": "5 tests passed, 78 assertions."
+          },
+          "local_no_write_command": {
+            "status": "pass",
+            "command": "cd backend && php artisan seo-intel:mbti-url-truth-cleanup --preset=mbti-fix-02-www-research-apex --dry-run --no-write --json",
+            "evidence": "Exited 0 and emitted fail-closed JSON with no writes, no enqueue, no submission, and no external API calls in the empty local environment."
+          },
+          "route_list": {
+            "status": "pass",
+            "command": "cd backend && php artisan route:list --no-ansi",
+            "evidence": "Exited 0 and listed 203 routes."
+          },
+          "pint": {
+            "status": "pass",
+            "command": "cd backend && vendor/bin/pint --test",
+            "evidence": "3524 files passed Pint."
+          },
+          "json_yaml_diff_checks": {
+            "status": "pass",
+            "command": "python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-www-canonical-cleanup-runtime.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 - <<'PY'\nimport yaml, pathlib\nyaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\nPY\ngit diff --check\ngit diff --cached --check",
+            "evidence": "JSON/YAML parsing and diff whitespace checks exited 0."
+          },
+          "seo_intel_baseline_sidecar": {
+            "status": "sidecar_reproduced_on_origin_main",
+            "command": "cd /private/tmp/fap-api-seointel-baseline-runtime-61871/backend && php artisan test --filter=SeoIntel --no-ansi",
+            "evidence": "Clean origin/main reproduced the same 6 unrelated baseline failures: crawler log production canary doc text, ops SEO crawler observation/native dashboard UI text, and Search Channel live 02 redacted host assertion. Runtime branch full SeoIntel run had the same failures plus the new focused runtime tests passing."
+          },
+          "scope_validation": {
+            "status": "pass",
+            "evidence": "Changed files are confined to the approved command, SeoIntel service, docs/generated artifact, focused test, and docs/codex train ledger/manifest files."
+          },
+          "bigfive_runtime_freeze": {
+            "status": "pass",
+            "command": "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi",
+            "evidence": "126 tests passed, 473 assertions after adding a precise SeoIntel MBTI cleanup runtime classifier exception."
+          },
+          "post_ci_fix_validation": {
+            "status": "pass",
+            "evidence": "Focused runtime test, command dry-run/no-write, route:list, Pint, JSON/YAML parse, and diff checks passed after the CI freeze classifier fix."
+          }
+        },
+        "github": {
+          "verify_mbti_legacy_initial": {
+            "status": "fail_fixed_in_scope",
+            "evidence": "Initial PR check failed because BigFive runtime-freeze test flagged the new SeoIntel cleanup command/service paths; fixed by adding a precise classifier exception test."
+          },
+          "verify_mbti_v2_initial": {
+            "status": "fail_fixed_in_scope",
+            "evidence": "Initial PR check failed for the same BigFive runtime-freeze path classification; fixed in current scope."
+          }
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "BACKEND-DEPLOY-READINESS",
+      "history": [
+        {
+          "at": "2026-05-24T18:20:00+08:00",
+          "status": "in_progress",
+          "summary": "Started scoped runtime command PR from latest origin/main in an isolated worktree because the primary worktree had unrelated dirty PR-AUDIT-BE-03 changes overlapping docs/codex files."
+        },
+        {
+          "at": "2026-05-24T18:21:00+08:00",
+          "status": "blocked_tests_failed",
+          "summary": "Focused runtime test and local no-write command passed, but required SeoIntel suite failed on unrelated existing crawler/ops/search-channel assertions; stopped before commit, push, or PR creation."
+        },
+        {
+          "at": "2026-05-24T18:22:00+08:00",
+          "status": "baseline_sidecar_recorded",
+          "summary": "Reproduced the 6 full SeoIntel failures on clean origin/main, confirming they are baseline sidecars outside this runtime command PR scope."
+        },
+        {
+          "at": "2026-05-24T18:23:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused runtime test, command dry-run/no-write, route list, Pint, JSON/YAML parsing, diff checks, and scope validation passed; continuing with PR creation under sidecar policy."
+        },
+        {
+          "at": "2026-05-24T18:24:00+08:00",
+          "status": "committed",
+          "summary": "Created scoped runtime command commit 6142573f75a8d7395297300ac49ccd4b5dd136ba."
+        },
+        {
+          "at": "2026-05-24T18:26:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1650 for the scoped MBTI URL Truth cleanup runtime command."
+        },
+        {
+          "at": "2026-05-24T18:32:00+08:00",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "GitHub verify-mbti checks failed on BigFive runtime-freeze classification for the new SeoIntel cleanup command/service; added a precise classifier exception and reran focused runtime, command dry-run/no-write, BigFive freeze, route list, Pint, JSON/YAML, and diff checks successfully."
+        }
+      ],
+      "sidecars": [
+        {
+          "id": "seo_intel_baseline_failures_on_origin_main",
+          "status": "reproduced_on_clean_origin_main",
+          "summary": "Full php artisan test --filter=SeoIntel currently has 6 unrelated baseline failures on clean origin/main; this PR does not edit those crawler/ops/search-channel doc/UI artifacts."
         }
       ]
     },
