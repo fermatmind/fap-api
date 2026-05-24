@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T07:29:17.131Z",
+  "updated_at": "2026-05-24T07:55:33.131Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -16993,7 +16993,7 @@
     "PR-AUDIT-BE-01": {
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-01-ci-supply-chain",
-      "status": "github_checks_passed",
+      "status": "merged",
       "depends_on": [],
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1644",
       "checks": {
@@ -17027,8 +17027,8 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-24T07:37:28Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "sidecar_issues": [],
       "events": [
@@ -17056,9 +17056,95 @@
           "at": "2026-05-24T07:29:17.131Z",
           "status": "github_checks_passed",
           "summary": "GitHub checks passed for PR #1644: hygiene, supply-chain, verify-mbti legacy/v2, blocking Semgrep secrets, SARIF upload, and Semgrep OSS."
+        },
+        {
+          "at": "2026-05-24T07:40:49.781Z",
+          "status": "merged_reconciled",
+          "summary": "Reconciled PR-AUDIT-BE-01 as merged via PR #1644 at c87d9bc11f4e1cf90e60c06660b472e8afeb10a0. Remote branch is deleted; scripts/post_merge_cleanup.sh is absent in this repo, so local cleanup script was not executed."
         }
       ],
-      "updated_at": "2026-05-24T07:29:17.131Z"
+      "updated_at": "2026-05-24T07:40:49.781Z",
+      "commit_sha": "c87d9bc11f4e1cf90e60c06660b472e8afeb10a0"
+    },
+    "PR-AUDIT-BE-02": {
+      "repo": "fap-api",
+      "branch": "codex/pr-audit-be-02-webhook-digest",
+      "status": "local_checks_passed_with_sidecar",
+      "depends_on": [
+        "PR-AUDIT-BE-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "status": "passed_with_sidecar",
+          "passed": [
+            "cd backend && php artisan test --filter=PaymentWebhookIdempotencyTest",
+            "cd backend && php artisan test --filter=CommerceWebhookIdempotencyTest",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "cd backend && bash scripts/ci_verify_mbti.sh",
+            "git diff --check"
+          ],
+          "failed": [
+            {
+              "command": "cd backend && php artisan test --filter=PaymentWebhook",
+              "summary": "Sidecar only: Tests\\Feature\\V0_3\\PaymentWebhookCnCallbackTest::test_wechatpay_valid_callback_calls_processor_and_returns_success_ack fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / 签名异常: 微信签名为空 error."
+            }
+          ]
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "passed": [],
+          "failed": []
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "source_pr": "PR-AUDIT-BE-02",
+          "repo": "fap-api",
+          "branch": "codex/pr-audit-be-02-webhook-digest",
+          "command_or_check": "php artisan test --filter=PaymentWebhook",
+          "failing_test": "Tests\\Feature\\V0_3\\PaymentWebhookCnCallbackTest::test_wechatpay_valid_callback_calls_processor_and_returns_success_ack",
+          "evidence": "400 instead of 200; 签名异常: 微信签名为空",
+          "baseline_verification": "Exact test also fails on clean origin/main",
+          "baseline_commit": "c87d9bc11f4e1cf90e60c06660b472e8afeb10a0",
+          "why_external_to_current_pr": "BE-02 diff only touches payload digest idempotency service/test and ledger; failure is in WeChatPay CN callback signature chain.",
+          "impact_on_current_pr": "BE-02 targeted digest/idempotency tests pass; broad PaymentWebhook filter has unrelated legacy/provider signature failure.",
+          "owner": "backend/payment",
+          "follow_up_recommendation": "Create sidecar PR or issue to repair WeChatPay CN callback fixture/header/signature test harness.",
+          "required_checks_status": "pending until PR checks complete",
+          "scope_validation_status": "green for uncommitted working tree; final committed diff pending",
+          "continue_train_decision": "allowed only if GitHub required checks are green"
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-05-24T07:40:49.781Z",
+          "status": "in_progress",
+          "summary": "Initialized PR-AUDIT-BE-02 after PR-AUDIT-BE-01 merged. Scope is payment webhook payload digest mismatch idempotency."
+        },
+        {
+          "at": "2026-05-24T07:42:09.004Z",
+          "status": "local_check_failed",
+          "summary": "Local manifest check php artisan test --filter=PaymentWebhook failed in PaymentWebhookCnCallbackTest WeChatPay valid callback. Failure is outside current digest mismatch diff, but fap-api AGENTS blocks push/open PR after failed local checks."
+        },
+        {
+          "at": "2026-05-24T07:51:12.597Z",
+          "status": "sidecar_verified",
+          "summary": "Verified WeChatPay CN callback exact failing test also fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / 签名异常: 微信签名为空 error. Treating broad PaymentWebhook filter failure as sidecar per user authorization."
+        },
+        {
+          "at": "2026-05-24T07:55:33.131Z",
+          "status": "local_checks_passed_with_sidecar",
+          "summary": "BE-02 blocking acceptance passed: targeted digest/idempotency tests, Composer validate/audit, ci_verify_mbti, and git diff --check. Broad PaymentWebhook filter failure is sidecar verified against clean origin/main."
+        }
+      ],
+      "updated_at": "2026-05-24T07:55:33.131Z"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
