@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T10:53:12.300Z",
+  "updated_at": "2026-05-24T10:54:08.907Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17620,12 +17620,12 @@
     "PR-AUDIT-BE-04": {
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-04-queue-jitter",
-      "status": "local_checks_passed_with_queue_sidecar",
+      "status": "pr_opened_github_checks_pending",
       "depends_on": [
         "PR-AUDIT-BE-03"
       ],
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1651",
+      "commit_sha": "30d553f6adf3217c31355b62139992bab0ca440b",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -17655,6 +17655,10 @@
         "scope_validation": {
           "status": "pass",
           "evidence": "Changed files are confined to ProcessAttemptSubmissionJob jitter logic, deterministic job test, scoped Big Five runtime-freeze classifier evidence, and PR train manifest/state metadata."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR #1651 opened; GitHub checks pending."
         }
       },
       "failure_reason": null,
@@ -17699,9 +17703,14 @@
           "at": "2026-05-24T10:53:12.300Z",
           "status": "scope_validation_passed",
           "summary": "Final uncommitted diff is limited to BE-04 allowed files."
+        },
+        {
+          "at": "2026-05-24T10:54:08.907Z",
+          "status": "pr_opened_github_checks_pending",
+          "summary": "Opened PR #1651 for PR-AUDIT-BE-04. GitHub checks are pending."
         }
       ],
-      "updated_at": "2026-05-24T10:53:12.300Z"
+      "updated_at": "2026-05-24T10:54:08.907Z"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
