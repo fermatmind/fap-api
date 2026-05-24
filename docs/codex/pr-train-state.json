@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T17:08:00.000Z",
+  "updated_at": "2026-05-24T17:11:00.000Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18035,12 +18035,12 @@
     "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-zh-mbti-queue-preflight",
-      "status": "commit_created",
+      "status": "pr_open_github_checks_pending",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW"
       ],
-      "commit_sha": "ad65792f0e4b5f7b7898cc4434fe4497536b9f60",
-      "pr_url": null,
+      "commit_sha": "1bb1350d8a25e634e73fb09fe81e5120f298b071",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1657",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -18099,6 +18099,11 @@
           "at": "2026-05-25T01:08:00+08:00",
           "status": "commit_created",
           "summary": "Created scoped commit ad65792f for the ZH MBTI Search Channel enqueue preflight report."
+        },
+        {
+          "at": "2026-05-25T01:11:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1657 for the ZH MBTI Search Channel enqueue preflight report. GitHub checks are pending."
         }
       ]
     }
