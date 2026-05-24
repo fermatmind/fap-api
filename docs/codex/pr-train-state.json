@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T17:11:00.000Z",
+  "updated_at": "2026-05-24T18:19:00.000Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18035,11 +18035,11 @@
     "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-zh-mbti-queue-preflight",
-      "status": "pr_open_github_checks_pending",
+      "status": "merged",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW"
       ],
-      "commit_sha": "1bb1350d8a25e634e73fb09fe81e5120f298b071",
+      "commit_sha": "394f418fb991443089476437cffe72216abb6d18",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1657",
       "checks": {
         "dependency": {
@@ -18071,8 +18071,8 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-24T17:58:25Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
@@ -18104,6 +18104,88 @@
           "at": "2026-05-25T01:11:00+08:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1657 for the ZH MBTI Search Channel enqueue preflight report. GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-25T02:10:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Verified PR #1657 is merged, origin/main contains merge commit 394f418fb991443089476437cffe72216abb6d18, and the remote branch is deleted; reconciled state to unblock the ZH MBTI queue enqueue."
+        }
+      ],
+      "local_cleanup_note": "Reconciled while starting SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE; origin/main contains merge commit 394f418fb991443089476437cffe72216abb6d18. scripts/post_merge_cleanup.sh is absent in this clone."
+    },
+    "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-zh-mbti-queue",
+      "status": "local_checks_passed",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "Dependency SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT is merged as 394f418fb991443089476437cffe72216abb6d18 on origin/main."
+        },
+        "production_bounded_write": {
+          "approval_phrase": "passed: exact human approval phrase was present in the task prompt.",
+          "deployed_backend": "passed: production REVISION is 4ab7fdcea588734b5c0c2bc80bde74fac557c21b and seo-intel:search-channel-queue supports --canonical-url and --enqueue.",
+          "gate_state_before": "passed: persistent queue write, live submission, external API call, and IndexNow live API gates were closed before enqueue.",
+          "pre_enqueue_dry_run": "passed: dry-run/no-write found exactly one eligible ZH MBTI candidate, planned one queue item, duplicate_detected=false, writes_committed=false, live_submission_attempted=false, external_calls_attempted=false, issues=[].",
+          "initial_gate_attempt": "sidecar: process-scoped SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED=true was blocked by production Laravel config cache with write_gate_disabled; no write occurred.",
+          "enqueue": "passed: official command enqueued exactly one ZH MBTI item using process-scoped APP_CONFIG_CACHE uncached path and only queue write gate enabled; written_items=1, batch_ids=[3], no live submission, no external API call, no CMS mutation.",
+          "queue_item": "passed: queue item id=3 exists for the target URL/channel with approval_state=pending and execution_state=dry_run_ready.",
+          "batch": "passed: batch id=3 exists with status=dry_run and item_count=1.",
+          "gate_state_after": "passed: persistent queue write, live submission, external API call, and IndexNow live API gates are closed after enqueue.",
+          "queue_item_2": "passed: EN MBTI queue item 2 remains approved/submitted and unchanged.",
+          "duplicate_protection": "passed: post-enqueue dry-run/no-write now blocks on existing_active_queue_item for the same target URL.",
+          "research_deferred": "passed: no Research URL was enqueued."
+        },
+        "local": {
+          "focused_queue_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiActionZhMbtiQueue --no-ansi (17 tests, 177 assertions; filter also matched preflight contract test)",
+          "route_list": "passed: php artisan route:list --no-ansi",
+          "pint": "passed: vendor/bin/pint --test (3531 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-zh-mbti-queue.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW",
+      "history": [
+        {
+          "at": "2026-05-25T02:04:00+08:00",
+          "status": "in_progress",
+          "summary": "Started human-approved ZH MBTI Search Channel enqueue from latest clean main. Scope is limited to exactly one queue item for the ZH MBTI URL via IndexNow plus docs/generated/test report and authorized PR-train metadata."
+        },
+        {
+          "at": "2026-05-25T02:07:00+08:00",
+          "status": "pre_enqueue_dry_run_passed",
+          "summary": "Production dry-run/no-write found exactly one eligible ZH MBTI candidate and planned exactly one queue item with no duplicate, no write, no live submission, and no external API call."
+        },
+        {
+          "at": "2026-05-25T02:08:00+08:00",
+          "status": "production_enqueue_completed",
+          "summary": "Official Search Channel Queue command enqueued one ZH MBTI IndexNow queue item: queue_item_id=3, batch_id=3. The queue write gate was enabled only for the single Artisan process through an uncached config path; live/external gates stayed closed."
+        },
+        {
+          "at": "2026-05-25T02:10:00+08:00",
+          "status": "post_enqueue_verification_passed",
+          "summary": "Verified queue item 3 is pending/dry_run_ready, batch 3 is dry_run, persistent gates are closed, queue item 2 is unchanged, no live submission/external API event exists for ZH MBTI, and duplicate protection blocks a second dry-run plan."
+        },
+        {
+          "at": "2026-05-25T02:19:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused generated artifact tests, route list, Pint, JSON/YAML parsing, and diff checks passed."
         }
       ]
     }
