@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T12:12:00.000Z",
+  "updated_at": "2026-05-24T12:18:00.000Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17715,12 +17715,12 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-fix-02-prod-write-preflight",
-      "status": "production_read_only_evidence_collected_blocked_queue_item_2_risk",
+      "status": "pr_open_blocked_queue_item_2_risk",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-RUNTIME"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "b0e1bf8f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1652",
       "checks": {
         "production_read_only": {
           "deployment_verification": "passed: deployed backend SHA 6bd384e7b1ff5e448db7d82419805e192620b566 contains the MBTI URL Truth cleanup runtime from PR #1650.",
@@ -17764,6 +17764,11 @@
           "at": "2026-05-24T20:12:00+08:00",
           "status": "local_checks_passed_blocked_preflight_decision",
           "summary": "Focused generated artifact test, route list, Pint, JSON/YAML parsing, and diff check passed. The report remains blocked_queue_item_2_risk based on production dry-run output."
+        },
+        {
+          "at": "2026-05-24T20:18:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1652 for the production write preflight report. The report documents blocked_queue_item_2_risk and does not authorize a production write."
         }
       ]
     }
