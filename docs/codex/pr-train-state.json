@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T08:17:08.119Z",
+  "updated_at": "2026-05-24T09:26:29.265Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17204,7 +17204,7 @@
     "PR-AUDIT-BE-02": {
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-02-webhook-digest",
-      "status": "github_checks_passed_pending_merge",
+      "status": "merged",
       "depends_on": [
         "PR-AUDIT-BE-01"
       ],
@@ -17232,7 +17232,7 @@
         },
         "github_required_checks": {
           "status": "pass",
-          "head_sha": "ae06dddbe19f3d72d71ecc78ab3349062426c500",
+          "head_sha": "1051d5a87f12f518eb0a6cff7270ebb7be5dbcc2",
           "passed": [
             "hygiene",
             "supply-chain",
@@ -17243,7 +17243,7 @@
             "verify-mbti-v2"
           ],
           "failed": [],
-          "evidence": "GitHub required checks passed on PR #1645 after BE-02 runtime-freeze classifier evidence fix; verify-mbti-legacy and verify-mbti-v2 both passed on rerun."
+          "evidence": "PR #1645 passed required GitHub checks and was squash-merged as 0338122739bbe4fd9645943d4f08372a3881f560."
         },
         "runtime_freeze_ci_fix": {
           "status": "pass",
@@ -17256,9 +17256,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-24T08:24:19Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "source_pr": "PR-AUDIT-BE-02",
@@ -17318,10 +17318,64 @@
           "at": "2026-05-24T08:17:08.119Z",
           "status": "github_checks_passed_pending_merge",
           "summary": "GitHub required checks passed after runtime-freeze classifier evidence fix. PR #1645 is pending merge policy execution."
+        },
+        {
+          "at": "2026-05-24T09:26:29.265Z",
+          "status": "reconciled_merged",
+          "summary": "Reconciled ledger: GitHub PR #1645 is MERGED, origin/main contains merge commit 0338122739bbe4fd9645943d4f08372a3881f560, remote branch is deleted, and local post-merge cleanup was executed."
         }
       ],
-      "updated_at": "2026-05-24T08:17:08.119Z",
-      "commit_sha": "ae06dddbe19f3d72d71ecc78ab3349062426c500"
+      "updated_at": "2026-05-24T09:26:29.265Z",
+      "commit_sha": "1051d5a87f12f518eb0a6cff7270ebb7be5dbcc2",
+      "merge_commit": "0338122739bbe4fd9645943d4f08372a3881f560"
+    },
+    "PR-AUDIT-BE-03": {
+      "repo": "fap-api",
+      "branch": "codex/pr-audit-be-03-migration-evidence",
+      "status": "in_progress",
+      "depends_on": [
+        "PR-AUDIT-BE-02"
+      ],
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "PR-AUDIT-BE-02 merged as PR #1645 with merge commit 0338122739bbe4fd9645943d4f08372a3881f560 and origin/main contains it."
+        },
+        "local": {
+          "status": "pass",
+          "commands": {
+            "php_artisan_test_filter_migration_destructive_retirement_evidence": "passed",
+            "php_artisan_test_filter_migration_no_silent_catch": "passed",
+            "php_artisan_test_filter_migration_protected_tables_no_drop": "passed",
+            "php_artisan_test_filter_migration_safety": "passed",
+            "php_artisan_migrate_pretend_sqlite_memory": "passed",
+            "php_artisan_route_list_no_ansi": "passed",
+            "bash_scripts_ci_verify_mbti": "passed",
+            "yaml_parse_pr_train": "passed",
+            "json_parse_pr_train_state": "passed",
+            "git_diff_check": "passed"
+          }
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "events": [
+        {
+          "at": "2026-05-24T09:26:29.265Z",
+          "status": "in_progress",
+          "summary": "Initialized PR-AUDIT-BE-03 for destructive migration retirement evidence and safety tests from latest main."
+        },
+        {
+          "at": "2026-05-24T09:31:46Z",
+          "status": "local_checks_passed",
+          "summary": "Added repository-level destructive migration retirement evidence for attempt_quality, forward-only runbook documentation, and migration safety tests. Targeted migration gates, route list, sqlite migrate pretend, ci_verify_mbti, YAML/JSON validation, and git diff check passed."
+        }
+      ],
+      "updated_at": "2026-05-24T09:31:46Z"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {

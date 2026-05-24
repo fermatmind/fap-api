@@ -1,0 +1,18 @@
+{
+  "schema_version": "migration_destructive_retirements.v1",
+  "entries": [
+    {
+      "id": "attempt_quality_retirement_2026_03_26",
+      "migration": "database/migrations/2026_03_26_120000_drop_attempt_quality_table.php",
+      "operation": "drop_table",
+      "table": "attempt_quality",
+      "repository_evidence_status": "retirement_evidence_recorded",
+      "production_archive_status": "not_asserted_by_repository",
+      "runbook": "docs/migrations/attempt-quality-retirement-runbook.md",
+      "rollback_strategy": "forward_only_restore_from_verified_backup_or_archive",
+      "operator_checklist_required": true,
+      "production_execution_allowed_by_repository": false,
+      "tested_by": "Tests\\Unit\\Migrations\\MigrationDestructiveRetirementEvidenceTest"
+    }
+  ]
+}

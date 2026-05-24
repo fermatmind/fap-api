@@ -6560,6 +6560,47 @@ prs:
     production_approval_required: false
     next_task: OPS-CI-CODESCAN-WEB-01
 
+  - id: PR-AUDIT-BE-03
+    repo: fap-api
+    depends_on: [PR-AUDIT-BE-02]
+    branch: codex/pr-audit-be-03-migration-evidence
+    base: main
+    title: "PR-AUDIT-BE-03 migration destructive retirement evidence and safety tests"
+    train_scope: prr_audit_remediation
+    risk_level: medium_migration_safety
+    findings: [M-BE-MIG-01]
+    allowed_paths:
+      - backend/database/migrations/2026_03_26_120000_drop_attempt_quality_table.php
+      - backend/docs/migrations/destructive-retirements.json
+      - backend/docs/migrations/attempt-quality-retirement-runbook.md
+      - backend/tests/Unit/Migrations/MigrationDestructiveRetirementEvidenceTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add repository-level retirement evidence for the destructive attempt_quality migration.
+      - Add a structured evidence registry and operator runbook bound to the migration path and evidence id.
+      - Add migration safety tests proving destructive migrations without bound evidence fail the scanner.
+      - Preserve existing migration no-silent-catch and non-destructive down() rollback safety gates.
+      - Do not claim production data is archived without repository-verifiable production evidence.
+      - Do not execute production migration or connect to production databases.
+    validation:
+      - cd backend && php artisan test --filter=MigrationDestructiveRetirementEvidenceTest
+      - cd backend && php artisan test --filter=MigrationNoSilentCatchTest
+      - cd backend && php artisan test --filter=MigrationProtectedTablesNoDropTest
+      - cd backend && php artisan test --filter=MigrationSafetyTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml"); puts "yaml ok"'
+      - ruby -e 'require "json"; JSON.parse(File.read("docs/codex/pr-train-state.json")); puts "json ok"'
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: false
+    production_approval_required: false
+
   - id: OPS-CI-CODESCAN-API-02
     repo: fap-api
     depends_on: []
