@@ -24,6 +24,8 @@ final class CareerCliArtifactPathGuard
             throw new RuntimeException($option.' must be a local filesystem path.');
         }
 
+        $path = self::trimTrailingSeparators($path);
+
         $basename = basename($path);
         if ($basename === '' || $basename === '.' || $basename === '..') {
             throw new RuntimeException($option.' must include a file name.');
@@ -48,6 +50,11 @@ final class CareerCliArtifactPathGuard
         }
 
         return $parentRealPath.DIRECTORY_SEPARATOR.$basename;
+    }
+
+    private static function trimTrailingSeparators(string $path): string
+    {
+        return rtrim($path, '\\/');
     }
 
     /**
