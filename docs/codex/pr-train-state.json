@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T09:05:00+08:00",
+  "updated_at": "2026-05-24T09:40:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -10260,8 +10260,8 @@
         }
       },
       "failure_reason": null,
-      "pr_url": null,
-      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1639",
+      "commit_sha": "5a609e81aaeaaecf0577f7b68fec99f28588f0f8",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -16709,7 +16709,7 @@
     "CAREER-EXPORT-CLI-ROBUSTNESS-01": {
       "repo": "fap-api",
       "branch": "codex/career-export-cli-robustness-01",
-      "status": "local_validated_with_external_sidecar",
+      "status": "merged",
       "depends_on": [
         "CAREER-ROLLOUT-MATERIALIZATION-01"
       ],
@@ -16724,7 +16724,7 @@
         52,
         53
       ],
-      "commit_sha": "d01c58ad97841b20511f90b1c248e4c0609481f6",
+      "commit_sha": "dd53decda21b13a9f3848cf333f3a2ff90dadcbb",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1638",
       "checks": {
         "dependency": {
@@ -16763,6 +16763,10 @@
         "scope_validation": {
           "status": "pass",
           "evidence": "Changed files are limited to allowed Career console commands, app/Services/Career, tests, and docs/codex state."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "GitHub checks passed for PR #1638 before squash merge: hygiene, Semgrep OSS Scan, semgrep sarif, verify-mbti-legacy, and verify-mbti-v2."
         }
       },
       "sidecar_issues": [
@@ -16773,8 +16777,8 @@
         }
       ],
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-24T00:50:45Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "events": [
         {
@@ -16791,13 +16795,18 @@
           "at": "2026-05-24T09:20:00+08:00",
           "status": "github_checks_failed_scope_fix_applied",
           "summary": "GitHub verify-mbti-legacy/v2 failed on the runtime-freeze classifier because the scoped Career CLI artifact path guard service was not allowlisted; added the allowlist predicate and verified the targeted classifier tests plus Pint."
+        },
+        {
+          "at": "2026-05-24T09:25:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled GitHub merge for PR #1638; origin/main contains squash commit dd53decda21b13a9f3848cf333f3a2ff90dadcbb and the remote branch is deleted. Local cleanup script is not present in this clone."
         }
       ]
     },
     "CMS-ARTICLE-REPORT-CORRECTNESS-01": {
       "repo": "fap-api",
       "branch": "codex/cms-article-report-correctness-01",
-      "status": "pending",
+      "status": "local_validated_with_external_sidecar",
       "depends_on": [
         "CAREER-EXPORT-CLI-ROBUSTNESS-01"
       ],
@@ -16808,12 +16817,73 @@
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
-      "sidecar_issues": [],
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CAREER-EXPORT-CLI-ROBUSTNESS-01 is merged into main as dd53decda21b13a9f3848cf333f3a2ff90dadcbb."
+        },
+        "targeted_article_seo_report_snapshot_tests": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Feature/Ops/ArticleTranslationRevisionContractTest.php --filter filament_article_editor --no-ansi && php artisan test tests/Feature/Ops/ReportSnapshotModelTest.php --no-ansi",
+          "evidence": "3 passed, 22 assertions."
+        },
+        "article_filter": {
+          "status": "external_baseline_failed",
+          "command": "cd backend && php artisan test --filter Article --no-ansi",
+          "evidence": "157 passed, 3 failed. The failures reproduce individually in CareerDatasetPublicApiTest, ArticleMachineTranslationProviderTest, and ArticleTranslationContractTest; they are outside this PR's scoped Article SEO compatibility and ReportSnapshot save changes."
+        },
+        "report_snapshot_filter": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter ReportSnapshot --no-ansi",
+          "evidence": "17 passed, 141 assertions."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Filament/Ops/Resources/ArticleResource.php app/Filament/Ops/Resources/ArticleResource app/Filament/Ops/Resources/ReportSnapshotResource.php app/Filament/Ops/Resources/ReportSnapshotResource app/Models tests",
+          "evidence": "PASS, 1404 files."
+        },
+        "mbti_freeze_targeted": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter 'runtime_paths_have_no_uncommitted_diff|cms_article_report_correctness_changes' --no-ansi && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "evidence": "2 passed, 4 assertions; Pint passed for the classifier test file after adding the scoped allowlist predicate."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to allowed ArticleResource support/pages, ReportSnapshot model, Ops tests, and docs/codex state."
+        }
+      },
+      "sidecar_issues": [
+        {
+          "id": "ARTICLE-FILTER-BASELINE-01",
+          "status": "external_pre_existing",
+          "evidence": "The broad Article filter currently includes unrelated failures in CareerDatasetPublicApiTest, ArticleMachineTranslationProviderTest, and ArticleTranslationContractTest; each failing test also fails when run individually."
+        }
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-05-24T09:25:00+08:00",
+          "status": "local_validated_with_external_sidecar",
+          "summary": "Persisted Article SEO title/description through the Ops compatibility save path, guarded ReportSnapshot identity fields after creation, and recorded the unrelated broad Article filter baseline failures as a sidecar."
+        },
+        {
+          "at": "2026-05-24T09:30:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1639 for CMS-ARTICLE-REPORT-CORRECTNESS-01."
+        },
+        {
+          "at": "2026-05-24T09:40:00+08:00",
+          "status": "github_checks_failed_scope_fix_applied",
+          "summary": "GitHub verify-mbti-legacy/v2 failed on the runtime-freeze classifier because the scoped CMS Article/ReportSnapshot runtime files were not allowlisted; added a targeted predicate and classifier test, then verified the targeted test plus Pint."
+        }
+      ]
     },
     "PERSONALITY-ENNEAGRAM-COMPAT-01": {
       "repo": "fap-api",
