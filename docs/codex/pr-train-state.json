@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T12:18:00.000Z",
+  "updated_at": "2026-05-24T15:45:00.000Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17896,11 +17896,11 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-fix-02-prod-write",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE-PREFLIGHT-R2"
       ],
-      "commit_sha": null,
+      "commit_sha": "954e275983d0a289007e5c69d51bdfe37152518d",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1655",
       "checks": {
         "production_bounded_write": {
@@ -17923,9 +17923,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-24T14:17:39Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -17951,6 +17951,78 @@
           "at": "2026-05-24T23:06:00+08:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1655 for the bounded production URL Truth cleanup/write report. GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-24T23:35:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled PR #1655 as merged with merge commit 954e275983d0a289007e5c69d51bdfe37152518d. Remote branch is deleted and local main contains the merge commit."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-fix-02-post-write-review",
+      "status": "pr_open_github_checks_pending",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE"
+      ],
+      "commit_sha": "ecf60562448aa8247163eb2342f5a37689078f62",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1656",
+      "checks": {
+        "production_read_only": {
+          "persisted_url_truth_state": "passed: old Research www rows are superseded_canonical and not Search Channel eligible; EN/ZH Research apex rows and ZH MBTI apex row exist and are indexable.",
+          "seo_url_entities_state": "passed: old Research www mappings are superseded_canonical; apex Research mappings are published_approved; ZH MBTI mapping exists from scales_registry.",
+          "queue_item_2": "passed: queue item 2 remains approved/submitted for EN MBTI IndexNow with no duplicate EN MBTI queue item detected.",
+          "cleanup_idempotency_dry_run": "passed: cleanup command dry-run/no-write reported queue_item_2_untouched=true, duplicate_cluster_prevented=true, writes_committed=false, and issues=[].",
+          "search_channel_dry_run": "passed: ZH MBTI apex, EN Research apex, and ZH Research apex are eligible in dry-run; old Research www rows are blocked as noindex; no enqueue/submission/API call occurred.",
+          "public_runtime": "passed: ZH MBTI apex and EN/ZH Research apex returned HTTP 200 with exact apex canonical, index/follow, and no noindex; public runtime was used only as observation.",
+          "ops_seo_visibility": "sidecar: optional authenticated /ops/seo UI visibility was not checked."
+        },
+        "local": {
+          "focused_post_write_review_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02PostWriteSearchChannelReview --no-ansi (7 tests, 77 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi",
+          "pint": "passed: vendor/bin/pint --test (3529 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-post-write-search-channel-review.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT",
+      "history": [
+        {
+          "at": "2026-05-24T23:35:00+08:00",
+          "status": "in_progress",
+          "summary": "Started post-write production read-only review from latest clean main. Scope is limited to read-only URL Truth, Search Channel dry-run, public runtime observation, docs/generated report, focused test, and authorized PR-train metadata."
+        },
+        {
+          "at": "2026-05-24T23:35:00+08:00",
+          "status": "production_read_only_checks_passed",
+          "summary": "Verified old Research www rows are superseded/non-eligible, apex Research and ZH MBTI rows are indexable, queue item 2 remains unchanged, cleanup command dry-run is idempotent, Search Channel dry-run has clean apex candidates, and public runtime canonical remains apex."
+        },
+        {
+          "at": "2026-05-24T23:40:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused generated artifact test, route list, Pint, JSON/YAML parsing, and diff checks passed."
+        },
+        {
+          "at": "2026-05-24T23:42:00+08:00",
+          "status": "commit_created",
+          "summary": "Created scoped commit b0b88701 for the post-write Search Channel review report."
+        },
+        {
+          "at": "2026-05-24T23:45:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1656 for the post-write URL Truth and Search Channel dry-run review report. GitHub checks are pending."
         }
       ]
     }
