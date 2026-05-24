@@ -10923,6 +10923,51 @@ prs:
     scheduler_activation: false
     next_task: BACKEND-DEPLOY-READINESS
 
+  - id: SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-PREFLIGHT
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-ACTION-01B-FIX-02
+    branch: codex/seo-growth-mbti-action-01b-fix-02-prod-preflight
+    base: main
+    title: "docs(seo-intel): add MBTI URL Truth production preflight"
+    name: "Production URL Truth dry-run and bounded write preflight for ZH MBTI and Research apex alignment"
+    train_scope: seo_growth_mbti_action
+    risk_level: production_read_only_preflight
+    type: docs_generated_test
+    scope:
+      - Verify production deployment includes FIX-02 using read-only SSH evidence.
+      - Run production URL Truth collector dry-runs with --dry-run --no-write for test_detail and research_report.
+      - Verify persisted production URL Truth state for ZH MBTI apex, EN/ZH Research apex, and old EN/ZH Research www rows using read-only queries.
+      - Run Search Channel dry-run/no-write evidence and public runtime checks without treating runtime, sitemap, llms, crawler logs, or search responses as URL Truth.
+      - Record whether a later bounded production URL Truth write is safe.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-action-01b-fix-02-prod-preflight.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-prod-preflight.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bFix02ProdPreflightTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, runtime services, migrations, production env/deploy files, CMS content, articles, internal links, sitemap, llms, crawler log readers, scheduler, collector write behavior, Search Channel write behavior, Digital PR files, or business DB / Tencent RDS / Node2 DB.
+      - Perform production URL Truth writes, Search Channel enqueue, live submission, external search API calls, scheduler activation, CMS mutation, Digital PR sends, pSEO generation, or raw Nginx access log reads.
+      - Treat frontend fallback, static sitemap, static llms, crawler logs, search engine responses, Digital PR mentions, or local copies as URL Truth.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02ProdPreflight --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-prod-preflight.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-ACTION-01B-FIX-02-WWW-CANONICAL-CLEANUP-PLAN
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar
