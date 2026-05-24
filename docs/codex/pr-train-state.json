@@ -6574,7 +6574,7 @@
       "branch": "codex/repair-explicit-rollout-batch-ledger-authority-1",
       "title": "fix(api): honor explicit rollout batch ledger authority",
       "name": "Repair explicit rollout batch ledger authority after 800 apply verification",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "REPAIR-PROGRESSIVE-READINESS-SOFTWARE-MANUAL-HOLD-EXCLUSION-1"
       ],
@@ -15664,8 +15664,8 @@
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-FIX-02"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "20ce10e9459696c23770db0528f538e4793c7f9f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1647",
       "checks": {
         "production_read_only": {
           "deployment_verification": "passed: deployed backend SHA 0338122739bbe4fd9645943d4f08372a3881f560 contains FIX-02 merge commit dcc557ce959a2d282d9199ee37da0e70f1102ef0",
@@ -15712,6 +15712,11 @@
           "at": "2026-05-24T17:12:00+08:00",
           "status": "local_checks_passed",
           "summary": "Focused generated artifact test, route list, Pint, JSON/YAML parsing, and diff checks exited 0 for the scoped production preflight report PR."
+        },
+        {
+          "at": "2026-05-24T17:16:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1647 for SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-PREFLIGHT from codex/seo-growth-mbti-action-01b-fix-02-prod-preflight."
         }
       ]
     },
