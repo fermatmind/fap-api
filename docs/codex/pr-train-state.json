@@ -2387,7 +2387,7 @@
       "branch": "codex/riasec-ah-04-activity-explorer-coverage",
       "title": "feat(api): expand RIASEC Activity Explorer examples-only coverage",
       "name": "RIASEC Activity Explorer v0.1 Coverage Expansion",
-      "status": "local_validated",
+      "status": "github_checks_passed",
       "depends_on": [
         "RIASEC-TRAIN-07"
       ],
@@ -16907,7 +16907,7 @@
         60,
         70
       ],
-      "commit_sha": "2bd6bcf22cd81cc064e5e2f914585cae0b53cb1d",
+      "commit_sha": "bc00a0678dafa449a7e41a39bf176da3419793a7",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1640",
       "checks": {
         "dependency": {
@@ -16951,6 +16951,10 @@
         "scope_validation": {
           "status": "pass",
           "evidence": "Changed files are limited to allowed personality controller, PersonalityCms desktop clone support, ExperimentAssigner, tests, and docs/codex state."
+        },
+        "github_checks": {
+          "status": "pass",
+          "evidence": "PR #1640 checks passed for Semgrep OSS, hygiene, semgrep sarif, verify-mbti-legacy, and verify-mbti-v2 at head bc00a0678dafa449a7e41a39bf176da3419793a7."
         }
       },
       "sidecar_issues": [],
@@ -16978,6 +16982,11 @@
           "at": "2026-05-24T10:25:00+08:00",
           "status": "github_checks_failed_scope_fix_applied",
           "summary": "GitHub verify-mbti-legacy/v2 failed on the runtime-freeze classifier because the scoped PersonalityController, desktop clone asset slot support, and ExperimentAssigner files were not allowlisted; added a targeted predicate and classifier test, then reran manifest validation."
+        },
+        {
+          "at": "2026-05-24T10:35:00+08:00",
+          "status": "github_checks_passed",
+          "summary": "PR #1640 GitHub checks passed after the scoped runtime-freeze classifier fix."
         }
       ]
     }
