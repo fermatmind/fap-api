@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T07:22:36.939Z",
+  "updated_at": "2026-05-24T07:29:17.131Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -16993,7 +16993,7 @@
     "PR-AUDIT-BE-01": {
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-01-ci-supply-chain",
-      "status": "pr_open",
+      "status": "github_checks_passed",
       "depends_on": [],
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1644",
       "checks": {
@@ -17013,8 +17013,16 @@
           "failed": []
         },
         "github_required_checks": {
-          "status": "pending",
-          "passed": [],
+          "status": "passed",
+          "passed": [
+            "hygiene",
+            "supply-chain",
+            "verify-mbti-legacy",
+            "verify-mbti-v2",
+            "Semgrep blocking secrets",
+            "semgrep sarif non-blocking upload",
+            "Semgrep OSS"
+          ],
           "failed": []
         }
       },
@@ -17043,9 +17051,14 @@
           "at": "2026-05-24T07:22:36.939Z",
           "status": "pr_open",
           "summary": "Opened PR #1644 for PR-AUDIT-BE-01."
+        },
+        {
+          "at": "2026-05-24T07:29:17.131Z",
+          "status": "github_checks_passed",
+          "summary": "GitHub checks passed for PR #1644: hygiene, supply-chain, verify-mbti legacy/v2, blocking Semgrep secrets, SARIF upload, and Semgrep OSS."
         }
       ],
-      "updated_at": "2026-05-24T07:22:36.939Z"
+      "updated_at": "2026-05-24T07:29:17.131Z"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
