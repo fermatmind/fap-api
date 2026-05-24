@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T15:42:00.000Z",
+  "updated_at": "2026-05-24T15:45:00.000Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17962,12 +17962,12 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-fix-02-post-write-review",
-      "status": "local_checks_passed",
+      "status": "pr_open_github_checks_pending",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE"
       ],
-      "commit_sha": "b0b88701ea87f8f71a916c945d6bbec3e0339b19",
-      "pr_url": null,
+      "commit_sha": "ecf60562448aa8247163eb2342f5a37689078f62",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1656",
       "checks": {
         "production_read_only": {
           "persisted_url_truth_state": "passed: old Research www rows are superseded_canonical and not Search Channel eligible; EN/ZH Research apex rows and ZH MBTI apex row exist and are indexable.",
@@ -18018,6 +18018,11 @@
           "at": "2026-05-24T23:42:00+08:00",
           "status": "commit_created",
           "summary": "Created scoped commit b0b88701 for the post-write Search Channel review report."
+        },
+        {
+          "at": "2026-05-24T23:45:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1656 for the post-write URL Truth and Search Channel dry-run review report. GitHub checks are pending."
         }
       ]
     }
