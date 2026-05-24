@@ -1,0 +1,81 @@
+{
+  "schema_version": "seo-growth-mbti-action-01b-fix-02-prod-write-preflight.v1",
+  "task": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE-PREFLIGHT",
+  "final_decision": "blocked_queue_item_2_risk",
+  "deployed_sha": "6bd384e7b1ff5e448db7d82419805e192620b566",
+  "command": "php artisan seo-intel:mbti-url-truth-cleanup --preset=mbti-fix-02-www-research-apex --dry-run --no-write --json",
+  "dry_run_result": {
+    "status": "dry_run_ready",
+    "dry_run": true,
+    "no_write": true,
+    "execute_attempted": false,
+    "writes_committed": false,
+    "old_www_rows_found": 2,
+    "old_www_rows_retired": 0,
+    "apex_research_candidates_found": true,
+    "apex_research_rows_written": 0,
+    "zh_mbti_candidate_found": true,
+    "zh_mbti_row_written": false,
+    "seo_url_entities_updated": 0,
+    "queue_item_2_untouched": false,
+    "search_channel_enqueue_attempted": false,
+    "live_submission_attempted": false,
+    "external_api_call_attempted": false,
+    "sitemap_llms_authority_used": false,
+    "frontend_fallback_authority_used": false,
+    "duplicate_cluster_prevented": true,
+    "issues": []
+  },
+  "planned_retire_www_rows": [
+    "https://www.fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+    "https://www.fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report"
+  ],
+  "planned_write_apex_rows": [
+    "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+    "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report"
+  ],
+  "planned_write_zh_mbti_row": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+  "already_submitted_urls_excluded": [
+    {
+      "url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+      "queue_item_id": 2,
+      "channel": "indexnow",
+      "approval_state": "approved",
+      "execution_state": "submitted"
+    }
+  ],
+  "queue_item_2_untouched": false,
+  "queue_item_2_persisted_unchanged_after_dry_run": true,
+  "queue_item_2_persisted_state_after_dry_run": {
+    "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+    "locale": "en",
+    "page_entity_type": "test_detail",
+    "channel": "indexnow",
+    "approval_state": "approved",
+    "execution_state": "submitted",
+    "indexability_state": "indexable",
+    "claim_boundary_state": "claim_safe"
+  },
+  "persisted_state_after_dry_run": {
+    "old_www_rows_still_present": true,
+    "old_www_rows_indexable": true,
+    "research_apex_rows_absent": true,
+    "zh_mbti_apex_row_absent": true,
+    "en_mbti_submitted_row_present": true,
+    "state_unchanged_by_dry_run": true
+  },
+  "no_write_performed": true,
+  "production_write_performed": false,
+  "collector_write_performed": false,
+  "enqueue_performed": false,
+  "live_submission_performed": false,
+  "external_api_call_performed": false,
+  "cms_mutation_performed": false,
+  "sitemap_mutation_performed": false,
+  "llms_mutation_performed": false,
+  "fap_web_mutation_performed": false,
+  "frontend_fallback_authority_used": false,
+  "sitemap_llms_authority_used": false,
+  "future_human_approval_phrase": "I explicitly approve bounded URL Truth cleanup/write for MBTI FIX-02: retire old Research www rows, write Research apex rows, and write ZH MBTI apex row. Do not enqueue Search Channel items. Do not submit URLs.",
+  "next_task": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-QUEUE-ITEM-2-DRY-RUN-SAFETY-FIX"
+}
