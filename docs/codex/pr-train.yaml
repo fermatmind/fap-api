@@ -11076,6 +11076,7 @@ prs:
       - backend/docs/seo/seo-growth-mbti-action-01b-fix-02-www-canonical-cleanup-runtime.md
       - backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-www-canonical-cleanup-runtime.v1.json
       - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bFix02WwwCanonicalCleanupRuntimeTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -11084,7 +11085,7 @@ prs:
       - Treat frontend fallback, static sitemap, static llms, crawler logs, search engine responses, Digital PR mentions, or local copies as URL Truth.
     validation:
       - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02WwwCanonicalCleanupRuntime --no-ansi
-      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi
       - cd backend && php artisan route:list --no-ansi
       - cd backend && vendor/bin/pint --test
       - cd backend && php artisan seo-intel:mbti-url-truth-cleanup --preset=mbti-fix-02-www-research-apex --dry-run --no-write --json
