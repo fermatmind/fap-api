@@ -822,6 +822,10 @@ final class AttemptSubmissionService
         $resultPayload = $this->decodeJsonArray($row->response_payload_json ?? null);
         $errorCode = $this->nullableString($row->error_code ?? null);
         $errorMessage = $this->nullableString($row->error_message ?? null);
+        if ($errorMessage !== null && in_array($state, ['pending', 'running'], true)) {
+            $errorMessage = $this->publicRetryableSubmissionErrorMessage($errorCode);
+        }
+
         if ($state === 'failed') {
             $errorMessage = $this->publicSubmissionErrorMessage($errorCode, $errorMessage);
             $resultPayload = $this->sanitizeSubmissionResultPayload($resultPayload, $errorCode);
@@ -898,6 +902,16 @@ final class AttemptSubmissionService
             'SUBMISSION_JOB_RETRY_EXHAUSTED',
             'SUBMISSION_JOB_TERMINAL_FAILURE' => 'submission job terminal failure.',
             default => 'submission failed.',
+        };
+    }
+
+    private function publicRetryableSubmissionErrorMessage(?string $errorCode): string
+    {
+        $code = strtoupper(trim((string) $errorCode));
+
+        return match ($code) {
+            'SUBMISSION_QUEUE_DISPATCH_FAILED' => 'submission dispatch is being retried.',
+            default => 'submission processing is being retried.',
         };
     }
 

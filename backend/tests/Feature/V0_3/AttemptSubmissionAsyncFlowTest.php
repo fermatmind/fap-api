@@ -409,6 +409,64 @@ class AttemptSubmissionAsyncFlowTest extends TestCase
         $this->assertNotNull($done->response_payload_json ?? null);
     }
 
+    public function test_submission_status_sanitizes_retryable_pending_error_message(): void
+    {
+        config()->set('fap.features.submit_async_v2', true);
+        $this->seedScales();
+
+        $anonId = 'anon_async_retry_public_sanitized';
+        $token = $this->issueAnonToken($anonId);
+
+        $start = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'SIMPLE_SCORE_DEMO',
+            'anon_id' => $anonId,
+        ]);
+        $start->assertStatus(200);
+        $attemptId = (string) $start->json('attempt_id');
+
+        Queue::fake();
+
+        $submit = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $this->demoAnswers(),
+            'duration_ms' => 120000,
+        ]);
+
+        $submit->assertStatus(202);
+        $submissionId = (string) $submit->json('submission_id');
+
+        DB::table('attempt_submissions')
+            ->where('id', $submissionId)
+            ->update([
+                'state' => 'pending',
+                'error_code' => 'SUBMISSION_JOB_FAILED',
+                'error_message' => 'PDOException: SQLSTATE[HY000] using /srv/app/.env secret=internal',
+                'updated_at' => now(),
+            ]);
+
+        $status = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/submission');
+
+        $status->assertStatus(202);
+        $status->assertJsonPath('generating', true);
+        $status->assertJsonPath('submission.id', $submissionId);
+        $status->assertJsonPath('submission.state', 'pending');
+        $status->assertJsonPath('submission.error_code', 'SUBMISSION_JOB_FAILED');
+        $status->assertJsonPath('submission.error_message', 'submission processing is being retried.');
+
+        $content = (string) $status->getContent();
+        $this->assertStringNotContainsString('PDOException', $content);
+        $this->assertStringNotContainsString('SQLSTATE', $content);
+        $this->assertStringNotContainsString('/srv/app/.env', $content);
+        $this->assertStringNotContainsString('secret=internal', $content);
+    }
+
     public function test_submit_async_replays_stored_result_when_submission_already_succeeded(): void
     {
         config()->set('fap.features.submit_async_v2', true);
