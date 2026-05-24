@@ -6518,6 +6518,46 @@ prs:
     metabase_deployment: false
     human_review_required: false
     production_approval_required: false
+
+  - id: PR-AUDIT-BE-02
+    repo: fap-api
+    depends_on: [PR-AUDIT-BE-01]
+    branch: codex/pr-audit-be-02-webhook-digest
+    base: main
+    title: "PR-AUDIT-BE-02 payment webhook payload digest mismatch idempotency"
+    train_scope: prr_audit_remediation
+    risk_level: medium_payment_idempotency
+    findings: [M-BE-PAY-01]
+    allowed_paths:
+      - backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php
+      - backend/tests/Feature/Commerce/PaymentWebhookIdempotencyTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Reject duplicate provider plus provider_event_id webhook deliveries when the incoming payload_sha256 differs from the stored payload_sha256.
+      - Keep matching duplicate payloads idempotent without regranting benefits or reprocessing orders.
+      - Log safe digest mismatch metadata without recording full webhook payloads.
+      - Do not change checkout, provider SDK, frontend payment flow, tenant, attempt, report, or unrelated order state-machine behavior.
+    validation:
+      - cd backend && php artisan test --filter=PaymentWebhook
+      - cd backend && php artisan test --filter=CommerceWebhookIdempotencyTest
+      - cd backend && php artisan test --filter=PaymentWebhookIdempotencyTest
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|payment_webhook_digest_idempotency'
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e 'require "yaml"; YAML.load_file("docs/codex/pr-train.yaml"); puts "yaml ok"'
+      - ruby -e 'require "json"; JSON.parse(File.read("docs/codex/pr-train-state.json")); puts "json ok"'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: false
+    production_approval_required: false
     next_task: OPS-CI-CODESCAN-WEB-01
 
   - id: OPS-CI-CODESCAN-API-02

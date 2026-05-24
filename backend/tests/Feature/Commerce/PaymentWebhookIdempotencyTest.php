@@ -7,6 +7,7 @@ use App\Models\Result;
 use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
@@ -85,11 +86,8 @@ class PaymentWebhookIdempotencyTest extends TestCase
         return $attemptId;
     }
 
-    public function test_duplicate_event_idempotent(): void
+    private function insertCreditOrder(string $orderNo, int $amountCents = 4990, string $currency = 'USD'): void
     {
-        $this->seedCommerce();
-
-        $orderNo = 'ord_dup_1';
         DB::table('orders')->insert([
             'id' => (string) Str::uuid(),
             'order_no' => $orderNo,
@@ -99,15 +97,15 @@ class PaymentWebhookIdempotencyTest extends TestCase
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
             'target_attempt_id' => null,
-            'amount_cents' => 4990,
-            'currency' => 'USD',
+            'amount_cents' => $amountCents,
+            'currency' => $currency,
             'status' => 'created',
             'provider' => 'billing',
             'external_trade_no' => null,
             'paid_at' => null,
             'created_at' => now(),
             'updated_at' => now(),
-            'amount_total' => 4990,
+            'amount_total' => $amountCents,
             'amount_refunded' => 0,
             'item_sku' => 'MBTI_CREDIT',
             'provider_order_id' => null,
@@ -117,6 +115,85 @@ class PaymentWebhookIdempotencyTest extends TestCase
             'fulfilled_at' => null,
             'refunded_at' => null,
         ]);
+    }
+
+    private function payloadDigest(array $payload): string
+    {
+        $raw = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        self::assertIsString($raw);
+
+        return hash('sha256', $raw);
+    }
+
+    private function assertDuplicateDigestMismatchIsRejected(array $mutatedFields): void
+    {
+        $this->seedCommerce();
+
+        $orderNo = 'ord_digest_mismatch_1';
+        $providerEventId = 'evt_digest_mismatch_1';
+        $this->insertCreditOrder($orderNo);
+
+        $payload = [
+            'provider_event_id' => $providerEventId,
+            'order_no' => $orderNo,
+            'external_trade_no' => 'trade_digest_mismatch_1',
+            'amount_cents' => 4990,
+            'currency' => 'USD',
+        ];
+        $firstDigest = $this->payloadDigest($payload);
+
+        $first = $this->postSignedBillingWebhook($payload, [
+            'X-Org-Id' => '0',
+        ]);
+        $first->assertStatus(200);
+        $first->assertJson(['ok' => true]);
+
+        $this->assertSame(1, DB::table('benefit_wallet_ledgers')->where('reason', 'topup')->count());
+        $this->assertSame($firstDigest, (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', $providerEventId)
+            ->value('payload_sha256'));
+
+        Log::spy();
+
+        $mutatedPayload = array_merge($payload, $mutatedFields);
+        $mutatedDigest = $this->payloadDigest($mutatedPayload);
+        $this->assertNotSame($firstDigest, $mutatedDigest);
+
+        $second = $this->postSignedBillingWebhook($mutatedPayload, [
+            'X-Org-Id' => '0',
+        ]);
+        $second->assertStatus(400);
+        $second->assertJsonPath('error_code', 'PAYLOAD_DIGEST_MISMATCH');
+
+        $this->assertSame(1, DB::table('payment_events')->where('provider_event_id', $providerEventId)->count());
+        $this->assertSame(1, DB::table('benefit_wallet_ledgers')->where('reason', 'topup')->count());
+        $this->assertSame('fulfilled', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
+        $this->assertSame($firstDigest, (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', $providerEventId)
+            ->value('payload_sha256'));
+
+        Log::shouldHaveReceived('warning')->once()->withArgs(
+            static function (string $message, array $context) use ($providerEventId, $orderNo, $firstDigest, $mutatedDigest): bool {
+                return $message === 'PAYMENT_EVENT_PAYLOAD_DIGEST_MISMATCH'
+                    && (string) ($context['provider'] ?? '') === 'billing'
+                    && (string) ($context['provider_event_id'] ?? '') === $providerEventId
+                    && (string) ($context['order_no'] ?? '') === $orderNo
+                    && (string) ($context['old_digest'] ?? '') === $firstDigest
+                    && (string) ($context['new_digest'] ?? '') === $mutatedDigest
+                    && ! array_key_exists('payload', $context)
+                    && ! array_key_exists('payload_json', $context);
+            }
+        );
+    }
+
+    public function test_duplicate_event_idempotent(): void
+    {
+        $this->seedCommerce();
+
+        $orderNo = 'ord_dup_1';
+        $this->insertCreditOrder($orderNo);
 
         $payload = [
             'provider_event_id' => 'evt_dup_1',
@@ -143,6 +220,27 @@ class PaymentWebhookIdempotencyTest extends TestCase
 
         $this->assertSame(1, DB::table('payment_events')->count());
         $this->assertSame(1, DB::table('benefit_wallet_ledgers')->where('reason', 'topup')->count());
+    }
+
+    public function test_duplicate_event_id_with_different_amount_is_rejected_without_regranting(): void
+    {
+        $this->assertDuplicateDigestMismatchIsRejected([
+            'amount_cents' => 5990,
+        ]);
+    }
+
+    public function test_duplicate_event_id_with_different_currency_is_rejected_without_regranting(): void
+    {
+        $this->assertDuplicateDigestMismatchIsRejected([
+            'currency' => 'CNY',
+        ]);
+    }
+
+    public function test_duplicate_event_id_with_different_order_no_is_rejected_without_regranting(): void
+    {
+        $this->assertDuplicateDigestMismatchIsRejected([
+            'order_no' => 'ord_digest_mismatch_other',
+        ]);
     }
 
     public function test_orphan_event_retries_after_order_created(): void

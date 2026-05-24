@@ -1031,6 +1031,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_payment_webhook_digest_idempotency_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_order_tenant_ownership_boundary_changes(): void
     {
         $changed = [
@@ -2565,6 +2574,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Internal/Commerce/PaymentWebhookHandlerCore.php',
             'backend/app/Services/Commerce/Checkout/AlipayCheckoutService.php',
             'backend/app/Services/Commerce/OrderManager.php',
+            'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
         ], true);
     }
 

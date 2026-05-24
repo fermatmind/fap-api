@@ -154,6 +154,28 @@ class WebhookEntitlementService
                         return $this->core->serverError('EVENT_INIT_FAILED', 'payment event init failed.');
                     }
 
+                    $existingPayloadSha256 = trim((string) ($eventRow->payload_sha256 ?? ''));
+                    $incomingPayloadSha256 = trim((string) ($resolvedPayloadMeta['sha256'] ?? ''));
+                    if (
+                        $inserted === 0
+                        && $existingPayloadSha256 !== ''
+                        && $incomingPayloadSha256 !== ''
+                        && ! hash_equals($existingPayloadSha256, $incomingPayloadSha256)
+                    ) {
+                        Log::warning('PAYMENT_EVENT_PAYLOAD_DIGEST_MISMATCH', [
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
+                            'order_id' => $eventRow->order_id ?? null,
+                            'order_no' => $eventRow->order_no ?? null,
+                            'incoming_order_no' => $orderNo,
+                            'old_digest' => $existingPayloadSha256,
+                            'new_digest' => $incomingPayloadSha256,
+                            'event_type' => $eventType,
+                        ]);
+
+                        return $this->core->badRequest('PAYLOAD_DIGEST_MISMATCH', 'payment event payload digest mismatch.');
+                    }
+
                     if ($inserted === 0 && $this->core->isEventProcessed($eventRow)) {
                         Log::info('PAYMENT_EVENT_ALREADY_PROCESSED', [
                             'provider' => $provider,
