@@ -91,17 +91,35 @@ final class PersonalityDesktopCloneAssetSlotSupport
      */
     public static function normalizeAssetSlots(array $assetSlots): array
     {
-        $normalized = [];
+        $normalizedBySlotId = [];
+        $invalid = [];
 
         foreach ($assetSlots as $slot) {
             if (! is_array($slot)) {
                 continue;
             }
 
-            $normalized[] = self::normalizeAssetSlot($slot);
+            $normalized = self::normalizeAssetSlot($slot);
+            $slotId = (string) ($normalized['slot_id'] ?? '');
+            if (! self::isAllowedSlotId($slotId)) {
+                $invalid[] = $normalized;
+
+                continue;
+            }
+
+            if (! isset($normalizedBySlotId[$slotId])
+                || self::slotQualityScore($normalized) > self::slotQualityScore($normalizedBySlotId[$slotId])) {
+                $normalizedBySlotId[$slotId] = $normalized;
+            }
         }
 
-        return self::sortAssetSlotsBySchemaOrder($normalized);
+        foreach (self::allowedSlotIds() as $slotId) {
+            if (! isset($normalizedBySlotId[$slotId])) {
+                $normalizedBySlotId[$slotId] = self::placeholderAssetSlot($slotId);
+            }
+        }
+
+        return self::sortAssetSlotsBySchemaOrder(array_merge(array_values($normalizedBySlotId), $invalid));
     }
 
     /**
@@ -221,5 +239,61 @@ final class PersonalityDesktopCloneAssetSlotSupport
         $normalized = trim((string) $value);
 
         return $normalized !== '' ? $normalized : null;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private static function placeholderAssetSlot(string $slotId): array
+    {
+        return [
+            'slot_id' => $slotId,
+            'label' => self::defaultSlotLabel($slotId),
+            'aspect_ratio' => self::defaultAspectRatio($slotId),
+            'status' => self::STATUS_PLACEHOLDER,
+            'asset_ref' => null,
+            'alt' => null,
+            'meta' => null,
+        ];
+    }
+
+    private static function defaultSlotLabel(string $slotId): string
+    {
+        return match ($slotId) {
+            self::SLOT_ID_HERO_ILLUSTRATION => 'Hero illustration',
+            self::SLOT_ID_TRAITS_ILLUSTRATION => 'Traits illustration',
+            self::SLOT_ID_TRAITS_SUMMARY_ILLUSTRATION => 'Traits summary illustration',
+            self::SLOT_ID_CAREER_ILLUSTRATION => 'Career illustration',
+            self::SLOT_ID_GROWTH_ILLUSTRATION => 'Growth illustration',
+            self::SLOT_ID_RELATIONSHIPS_ILLUSTRATION => 'Relationships illustration',
+            self::SLOT_ID_FINAL_OFFER_ILLUSTRATION => 'Final offer illustration',
+            default => $slotId,
+        };
+    }
+
+    private static function defaultAspectRatio(string $slotId): string
+    {
+        return match ($slotId) {
+            self::SLOT_ID_HERO_ILLUSTRATION => '236:160',
+            self::SLOT_ID_TRAITS_SUMMARY_ILLUSTRATION => '240:118',
+            self::SLOT_ID_FINAL_OFFER_ILLUSTRATION => '252:220',
+            default => '636:148',
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $slot
+     */
+    private static function slotQualityScore(array $slot): int
+    {
+        $status = (string) ($slot['status'] ?? '');
+        $hasAssetRef = is_array($slot['asset_ref'] ?? null);
+
+        return match ($status) {
+            self::STATUS_READY => $hasAssetRef ? 30 : 20,
+            self::STATUS_PLACEHOLDER => 10,
+            self::STATUS_DISABLED => 0,
+            default => -10,
+        };
     }
 }

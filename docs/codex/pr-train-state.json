@@ -15471,7 +15471,7 @@
     "SEARCH-CHANNEL-LIVE-MBTI-02": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-mbti-02",
-      "status": "in_progress",
+      "status": "local_validated",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-MBTI-01"
       ],
@@ -16806,7 +16806,7 @@
     "CMS-ARTICLE-REPORT-CORRECTNESS-01": {
       "repo": "fap-api",
       "branch": "codex/cms-article-report-correctness-01",
-      "status": "local_validated_with_external_sidecar",
+      "status": "merged",
       "depends_on": [
         "CAREER-EXPORT-CLI-ROBUSTNESS-01"
       ],
@@ -16815,8 +16815,8 @@
         47,
         48
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "e5f0ad42f178ac239fd6ce84d2d1ce80f2cd637d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1639",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -16854,6 +16854,10 @@
         "scope_validation": {
           "status": "pass",
           "evidence": "Changed files are limited to allowed ArticleResource support/pages, ReportSnapshot model, Ops tests, and docs/codex state."
+        },
+        "github": {
+          "status": "pass",
+          "evidence": "GitHub required checks passed for PR #1639 before squash merge."
         }
       },
       "sidecar_issues": [
@@ -16864,8 +16868,8 @@
         }
       ],
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-24T01:22:28Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "events": [
         {
@@ -16882,13 +16886,18 @@
           "at": "2026-05-24T09:40:00+08:00",
           "status": "github_checks_failed_scope_fix_applied",
           "summary": "GitHub verify-mbti-legacy/v2 failed on the runtime-freeze classifier because the scoped CMS Article/ReportSnapshot runtime files were not allowlisted; added a targeted predicate and classifier test, then verified the targeted test plus Pint."
+        },
+        {
+          "at": "2026-05-24T09:50:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled GitHub PR #1639 merged state: squash commit e5f0ad42f178ac239fd6ce84d2d1ce80f2cd637d is on origin/main; remote branch was deleted; local cleanup script was absent."
         }
       ]
     },
     "PERSONALITY-ENNEAGRAM-COMPAT-01": {
       "repo": "fap-api",
       "branch": "codex/personality-enneagram-compat-01",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": [
         "CMS-ARTICLE-REPORT-CORRECTNESS-01"
       ],
@@ -16900,12 +16909,62 @@
       ],
       "commit_sha": null,
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "CMS-ARTICLE-REPORT-CORRECTNESS-01 is merged into main as e5f0ad42f178ac239fd6ce84d2d1ce80f2cd637d."
+        },
+        "targeted_compatibility_tests": {
+          "status": "pass",
+          "command": "cd backend && php artisan test tests/Feature/V0_3/ExperimentRegistryActiveWindowTest.php --no-ansi && php artisan test tests/Feature/V0_5/PersonalityDesktopClonePublicApiTest.php --filter sparse_or_duplicate --no-ansi && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter detail_returns_profile_sections --no-ansi",
+          "evidence": "ExperimentRegistryActiveWindowTest: 2 passed, 5 assertions; sparse clone asset slot API test: 1 passed, 10 assertions; Personality detail API test: 1 passed, 40 assertions."
+        },
+        "personality_filter": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter Personality --no-ansi",
+          "evidence": "60 passed, 1732 assertions."
+        },
+        "enneagram_filter": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter Enneagram --no-ansi",
+          "evidence": "104 passed, 39 skipped, 15573 assertions. Skips are the existing external ENNEAGRAM asset-file skips."
+        },
+        "experiment_assigner_filter": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter ExperimentAssigner --no-ansi",
+          "evidence": "2 passed, 4 assertions."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Enneagram app/Http/Controllers/API/V0_5/Cms/PersonalityController.php app/Services/PublicSurface app/PersonalityCms app/Services/Cms/PersonalityDesktopCloneContentService.php app/Services/Experiments/ExperimentAssigner.php tests",
+          "evidence": "PASS, 1298 files."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are limited to allowed personality controller, PersonalityCms desktop clone support, ExperimentAssigner, tests, and docs/codex state."
+        }
+      },
       "sidecar_issues": [],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-05-24T09:55:00+08:00",
+          "status": "in_progress",
+          "summary": "Started scoped compatibility fixes for clone asset slots, experiment assignment persistence, and personality public projection surface keys."
+        },
+        {
+          "at": "2026-05-24T10:10:00+08:00",
+          "status": "local_validated",
+          "summary": "Normalized sparse/duplicate desktop clone asset slots, repaired existing experiment assignment user binding without calling save() on query rows, preserved the newest active registry version per key, and added the generic personality public projection response key while keeping MBTI compatibility."
+        }
+      ]
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
