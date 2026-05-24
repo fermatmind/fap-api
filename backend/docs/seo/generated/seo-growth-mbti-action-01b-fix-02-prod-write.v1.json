@@ -1,0 +1,161 @@
+{
+  "schema_version": "seo-growth-mbti-action-01b-fix-02-prod-write.v1",
+  "task": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE",
+  "final_decision": "mbti_action_01b_fix_02_prod_write_completed_ready_for_search_channel_rerun",
+  "approval_phrase_verified": true,
+  "deployed_sha": "2c1732a887cd32fc3773de73c150e097850cd592",
+  "command": "php artisan seo-intel:mbti-url-truth-cleanup --preset=mbti-fix-02-www-research-apex --execute --json",
+  "pre_write_dry_run": {
+    "status": "dry_run_ready",
+    "dry_run": true,
+    "no_write": true,
+    "writes_committed": false,
+    "queue_item_2_untouched": true,
+    "search_channel_enqueue_attempted": false,
+    "live_submission_attempted": false,
+    "external_api_call_attempted": false,
+    "issues": []
+  },
+  "execute_result": {
+    "status": "success",
+    "dry_run": false,
+    "no_write": false,
+    "execute_attempted": true,
+    "writes_committed": true,
+    "old_www_rows_found": 2,
+    "old_www_rows_retired": 2,
+    "apex_research_candidates_found": true,
+    "apex_research_rows_written": 2,
+    "zh_mbti_candidate_found": true,
+    "zh_mbti_row_written": true,
+    "seo_url_entities_updated": 5,
+    "queue_item_2_untouched": true,
+    "search_channel_enqueue_attempted": false,
+    "live_submission_attempted": false,
+    "external_api_call_attempted": false,
+    "sitemap_llms_authority_used": false,
+    "frontend_fallback_authority_used": false,
+    "duplicate_cluster_prevented": true,
+    "issues": []
+  },
+  "retired_www_rows": [
+    {
+      "canonical_url": "https://www.fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+      "locale": "en",
+      "page_entity_type": "research_report",
+      "indexability_state": "superseded_canonical",
+      "entity_authority_status": "superseded_canonical"
+    },
+    {
+      "canonical_url": "https://www.fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report",
+      "locale": "zh-CN",
+      "page_entity_type": "research_report",
+      "indexability_state": "superseded_canonical",
+      "entity_authority_status": "superseded_canonical"
+    }
+  ],
+  "written_apex_research_rows": [
+    {
+      "canonical_url": "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+      "locale": "en",
+      "page_entity_type": "research_report",
+      "indexability_state": "indexable",
+      "source_authority": "backend_cms",
+      "entity_authority_status": "published_approved"
+    },
+    {
+      "canonical_url": "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report",
+      "locale": "zh-CN",
+      "page_entity_type": "research_report",
+      "indexability_state": "indexable",
+      "source_authority": "backend_cms",
+      "entity_authority_status": "published_approved"
+    }
+  ],
+  "written_zh_mbti_row": {
+    "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "locale": "zh-CN",
+    "page_entity_type": "test_detail",
+    "indexability_state": "indexable",
+    "source_authority": "scale_catalog",
+    "entity_authority_status": "observed"
+  },
+  "seo_url_entities_updated": 5,
+  "queue_item_2_untouched": true,
+  "queue_item_2_state": {
+    "id": 2,
+    "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+    "channel": "indexnow",
+    "approval_state": "approved",
+    "execution_state": "submitted",
+    "updated_at": "2026-05-23 05:18:45"
+  },
+  "enqueue_performed": false,
+  "live_submission_performed": false,
+  "external_api_call_performed": false,
+  "cms_mutation_performed": false,
+  "sitemap_mutation_performed": false,
+  "llms_mutation_performed": false,
+  "post_write_verification": {
+    "old_www_rows_retired": true,
+    "apex_research_rows_exist": true,
+    "zh_mbti_apex_row_exists": true,
+    "seo_url_entities_updated": true,
+    "queue_item_2_unchanged": true,
+    "duplicate_cluster_prevented": true,
+    "post_write_dry_run_status": "dry_run_ready",
+    "post_write_dry_run_issues": []
+  },
+  "search_channel_dry_run_after_write": {
+    "summary": {
+      "dry_run": true,
+      "no_write": true,
+      "enqueue_attempted": false,
+      "enqueue_committed": false,
+      "external_calls_attempted": false,
+      "live_submission_attempted": false,
+      "candidate_count": 12,
+      "eligible_count": 10,
+      "planned_queue_count": 8,
+      "written_items": 0,
+      "write_gate_enabled": false
+    },
+    "url_results": [
+      {
+        "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+        "status": "eligible",
+        "planned_queue_count": 1,
+        "reason_codes": []
+      },
+      {
+        "canonical_url": "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+        "status": "eligible",
+        "planned_queue_count": 1,
+        "reason_codes": []
+      },
+      {
+        "canonical_url": "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report",
+        "status": "eligible",
+        "planned_queue_count": 1,
+        "reason_codes": []
+      },
+      {
+        "canonical_url": "https://www.fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+        "status": "blocked",
+        "planned_queue_count": 0,
+        "reason_codes": [
+          "noindex"
+        ]
+      },
+      {
+        "canonical_url": "https://www.fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report",
+        "status": "blocked",
+        "planned_queue_count": 0,
+        "reason_codes": [
+          "noindex"
+        ]
+      }
+    ]
+  },
+  "next_task": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW"
+}

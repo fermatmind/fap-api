@@ -17830,11 +17830,11 @@
     "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE-PREFLIGHT-R2": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01b-fix-02-prod-write-preflight-r2",
-      "status": "in_progress",
+      "status": "merged",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-QUEUE-ITEM-2-DRY-RUN-SAFETY-FIX"
       ],
-      "commit_sha": null,
+      "commit_sha": "f75cba2772c3c28b49bf94f3ee347f668121d364",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1654",
       "checks": {
         "production_read_only": {
@@ -17857,9 +17857,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-24T13:54:44Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
       "external_api_credentials_required": false,
@@ -17885,6 +17885,72 @@
           "at": "2026-05-24T22:14:00+08:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1654 for the production write preflight R2 report. GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-24T22:54:44+08:00",
+          "status": "merged",
+          "summary": "Reconciled PR #1654 as merged with merge commit f75cba2772c3c28b49bf94f3ee347f668121d364. Remote branch is deleted and local main contains the merge commit."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01b-fix-02-prod-write",
+      "status": "in_progress",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE-PREFLIGHT-R2"
+      ],
+      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1655",
+      "checks": {
+        "production_bounded_write": {
+          "approval_phrase_verified": "passed: exact bounded URL Truth cleanup/write approval phrase was present.",
+          "pre_write_dry_run": "passed: dry-run/no-write reported queue_item_2_untouched=true, expected target set, no enqueue, no live submission, no external API call, and issues=[].",
+          "execute": "passed: official command committed the bounded write with old_www_rows_retired=2, apex_research_rows_written=2, zh_mbti_row_written=true, seo_url_entities_updated=5, queue_item_2_untouched=true, and no enqueue/submission/API call.",
+          "post_write_verification": "passed: old Research www rows are superseded_canonical; Research apex rows and ZH MBTI apex row exist; entity mappings are updated; queue item 2 remains submitted.",
+          "post_write_dry_run": "passed: cleanup dry-run/no-write remains dry_run_ready with duplicate_cluster_prevented=true and issues=[].",
+          "search_channel_dry_run": "passed: ZH MBTI apex, EN Research apex, and ZH Research apex are eligible; old Research www rows are blocked as noindex; no queue rows were written."
+        },
+        "local": {
+          "focused_prod_write_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02ProdWrite --no-ansi (19 tests, 141 assertions; includes earlier ProdWrite preflight artifact tests matched by filter)",
+          "route_list": "passed: php artisan route:list --no-ansi",
+          "pint": "passed: vendor/bin/pint --test (3528 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-prod-write.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW",
+      "history": [
+        {
+          "at": "2026-05-24T22:58:00+08:00",
+          "status": "in_progress",
+          "summary": "Started human-approved bounded production URL Truth cleanup/write from latest clean main. Scope is limited to the official MBTI cleanup command, verification dry-runs, docs/generated report, focused test, and authorized PR-train metadata."
+        },
+        {
+          "at": "2026-05-24T22:58:00+08:00",
+          "status": "production_bounded_write_completed",
+          "summary": "Executed the official cleanup command with preset mbti-fix-02-www-research-apex. It retired two old Research www rows, wrote two Research apex rows, wrote the ZH MBTI apex row, updated five entity mappings, preserved queue item 2, and performed no Search Channel enqueue or live submission."
+        },
+        {
+          "at": "2026-05-24T23:04:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused generated artifact test, route list, Pint, JSON/YAML parsing, and diff checks passed."
+        },
+        {
+          "at": "2026-05-24T23:06:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1655 for the bounded production URL Truth cleanup/write report. GitHub checks are pending."
         }
       ]
     }
