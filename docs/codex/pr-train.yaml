@@ -11326,6 +11326,51 @@ prs:
     scheduler_activation: false
     next_task: SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW
 
+  - id: SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-WRITE
+    branch: codex/seo-growth-mbti-action-01b-fix-02-post-write-review
+    base: main
+    title: "docs(seo-intel): add MBTI URL Truth post-write Search Channel review"
+    name: "Post-write URL Truth and Search Channel dry-run review"
+    train_scope: seo_growth_mbti_action
+    risk_level: production_read_only_report
+    type: docs_generated_test
+    scope:
+      - Verify old Research www URL Truth rows are superseded, non-indexable, and not Search Channel eligible after the bounded cleanup/write.
+      - Verify EN/ZH Research apex URL Truth rows and the ZH MBTI test apex URL Truth row exist, are indexable, and have entity mappings.
+      - Verify queue item 2 remains unchanged and no accidental Search Channel enqueue, live submission, external API call, CMS mutation, sitemap/llms mutation, or fap-web mutation occurred.
+      - Run cleanup command dry-run/no-write and Search Channel dry-run/no-write only, then record the report in docs/generated/test scope.
+      - Record that ZH MBTI can proceed to human-approved queue preflight while Research remains deferred to a separate claim-sensitive enqueue preflight.
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-action-01b-fix-02-post-write-search-channel-review.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-post-write-search-channel-review.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01bFix02PostWriteSearchChannelReviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, runtime services, migrations, production env/deploy files, CMS content, articles, internal links, sitemap, llms, crawler log readers, scheduler, Search Channel submitter code, Digital PR files, or business DB / Tencent RDS / Node2 DB.
+      - Perform production writes, collector writes, Search Channel enqueue, live submission, external search API calls, scheduler activation, CMS mutation, Digital PR sends, pSEO generation, raw Nginx access log reads, or manual DB update/delete.
+      - Treat frontend fallback, static sitemap, static llms, crawler logs, search engine responses, Digital PR mentions, public runtime, or local copies as authority.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01bFix02PostWriteSearchChannelReview --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01b-fix-02-post-write-search-channel-review.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar
