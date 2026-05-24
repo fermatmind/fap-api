@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T08:09:06.779Z",
+  "updated_at": "2026-05-24T08:17:08.119Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -17069,7 +17069,7 @@
     "PR-AUDIT-BE-02": {
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-02-webhook-digest",
-      "status": "ci_fix_local_checks_passed_pending_github_rerun",
+      "status": "github_checks_passed_pending_merge",
       "depends_on": [
         "PR-AUDIT-BE-01"
       ],
@@ -17096,31 +17096,28 @@
           ]
         },
         "github_required_checks": {
-          "status": "failed_ci_fix_applied_pending_rerun",
+          "status": "pass",
+          "head_sha": "ae06dddbe19f3d72d71ecc78ab3349062426c500",
           "passed": [
             "hygiene",
             "supply-chain",
             "Semgrep blocking secrets",
             "semgrep sarif non-blocking upload",
-            "Semgrep OSS"
+            "Semgrep OSS",
+            "verify-mbti-legacy",
+            "verify-mbti-v2"
           ],
-          "failed": [
-            {
-              "name": "verify-mbti-legacy",
-              "evidence": "Required GitHub check failed because BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff reported backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php as runtime path diff."
-            },
-            {
-              "name": "verify-mbti-v2",
-              "evidence": "Required GitHub check failed for the same runtime-freeze classifier reason as verify-mbti-legacy."
-            }
-          ],
-          "remediation": "Added a narrow runtime-freeze classifier evidence test for PR-AUDIT-BE-02 payment webhook digest idempotency and included WebhookEntitlementService.php in the commerce payment action classifier allowlist.",
-          "rerun_status": "pending push"
+          "failed": [],
+          "evidence": "GitHub required checks passed on PR #1645 after BE-02 runtime-freeze classifier evidence fix; verify-mbti-legacy and verify-mbti-v2 both passed on rerun."
         },
         "runtime_freeze_ci_fix": {
           "status": "pass",
           "command": "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|payment_webhook_digest_idempotency'",
           "evidence": "2 tests passed, 4 assertions; runtime paths gate accepts the BE-02 webhook digest idempotency service change."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "evidence": "Changed files are confined to BE-02 webhook digest idempotency service/test, user-authorized runtime-freeze scope evidence, and PR train manifest/state."
         }
       },
       "failure_reason": null,
@@ -17181,9 +17178,15 @@
           "at": "2026-05-24T08:09:06.779Z",
           "status": "github_required_checks_failed_ci_fix_applied",
           "summary": "GitHub required checks verify-mbti-legacy and verify-mbti-v2 failed on runtime-freeze classification of WebhookEntitlementService.php. User authorized touching runtime-freeze scope helper; added narrow BE-02 classifier evidence and local ci_verify_mbti passed. Pending push and GitHub rerun."
+        },
+        {
+          "at": "2026-05-24T08:17:08.119Z",
+          "status": "github_checks_passed_pending_merge",
+          "summary": "GitHub required checks passed after runtime-freeze classifier evidence fix. PR #1645 is pending merge policy execution."
         }
       ],
-      "updated_at": "2026-05-24T08:09:06.779Z"
+      "updated_at": "2026-05-24T08:17:08.119Z",
+      "commit_sha": "ae06dddbe19f3d72d71ecc78ab3349062426c500"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
