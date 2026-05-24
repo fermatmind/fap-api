@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T17:06:00.000Z",
+  "updated_at": "2026-05-24T17:08:00.000Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18035,11 +18035,11 @@
     "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-zh-mbti-queue-preflight",
-      "status": "local_checks_passed",
+      "status": "commit_created",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-POST-WRITE-SEARCH-CHANNEL-REVIEW"
       ],
-      "commit_sha": null,
+      "commit_sha": "ad65792f0e4b5f7b7898cc4434fe4497536b9f60",
       "pr_url": null,
       "checks": {
         "dependency": {
@@ -18094,6 +18094,11 @@
           "at": "2026-05-25T01:06:00+08:00",
           "status": "local_checks_passed",
           "summary": "Focused generated artifact test, route list, Pint, JSON/YAML parsing, and diff checks passed."
+        },
+        {
+          "at": "2026-05-25T01:08:00+08:00",
+          "status": "commit_created",
+          "summary": "Created scoped commit ad65792f for the ZH MBTI Search Channel enqueue preflight report."
         }
       ]
     }
