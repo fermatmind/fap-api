@@ -15541,12 +15541,12 @@
     "SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-mbti-02-24h-review",
-      "status": "local_validated",
+      "status": "pr_open",
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-MBTI-02"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "e445c06d9d1479f63461f1c5a778a28eb82a7484",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1646",
       "checks": {
         "production_read_only": {
           "time_gate": "passed: review started at 2026-05-24T15:57:41+08:00 after required 2026-05-24T13:20:00+08:00 gate",
@@ -15597,6 +15597,11 @@
           "at": "2026-05-24T16:06:00+08:00",
           "status": "local_checks_passed",
           "summary": "Focused 24h review artifact test, Search Channel Queue suite, route list, Pint, JSON/YAML parsing, and diff checks exited 0. PHPUnit emitted warnings in the focused and queue suites, but assertions passed and no current-scope failure was observed."
+        },
+        {
+          "at": "2026-05-24T16:09:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1646 for SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW from codex/search-channel-live-mbti-02-24h-review."
         }
       ]
     },
