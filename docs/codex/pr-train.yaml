@@ -10792,6 +10792,49 @@ prs:
     scheduler_activation: false
     next_task: SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW
 
+  - id: SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-LIVE-MBTI-02
+    branch: codex/search-channel-live-mbti-02-24h-review
+    base: main
+    title: "docs(seo-intel): add MBTI IndexNow 24h review"
+    name: "24h review for EN MBTI IndexNow live submission"
+    train_scope: search_channel_live_mbti
+    risk_level: read_only_production_verification
+    type: docs_generated_test
+    scope:
+      - Perform a read-only 24h technical review of queue item 2 after the EN MBTI IndexNow live canary.
+      - Verify queue item state, event state, duplicate/retry state, gates, public URL canonical/robots, and issue queue safety.
+      - Record crawler aggregate and /ops/seo visibility only when safely available; make no indexing or ranking claim.
+    allowed_paths:
+      - backend/docs/seo/search-channel-live-mbti-02-24h-review.md
+      - backend/docs/seo/generated/search-channel-live-mbti-02-24h-review.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelLiveMbti02TwentyFourHourReviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, deploy files, production env, migrations, scheduler, collectors, CMS content, articles, internal links, URL Truth, seo_urls, seo_url_entities, sitemap, llms, Metabase, emails, DMs, Digital PR outreach, Outlook drafts, pSEO, business DB / Tencent RDS / Node2 DB, or frontend fallback authority.
+      - Enqueue Search Channel items, submit URLs, call IndexNow live endpoint, call GSC/Baidu/Bing/360/Sogou/Shenma, read raw Nginx access logs, mutate production data, or claim IndexNow acceptance as indexing/ranking proof.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelLiveMbti02TwentyFourHourReview --no-ansi
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelQueue --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/search-channel-live-mbti-02-24h-review.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-PREFLIGHT
+
   - id: SEO-GROWTH-MBTI-ACTION-01B-FIX-02
     repo: fap-api
     depends_on:

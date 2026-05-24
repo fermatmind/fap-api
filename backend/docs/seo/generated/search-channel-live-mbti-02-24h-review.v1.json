@@ -1,0 +1,124 @@
+{
+  "schema_version": "v1",
+  "task": "SEARCH-CHANNEL-LIVE-MBTI-02-24H-REVIEW",
+  "final_decision": "search_channel_live_mbti_02_24h_review_completed_stable_ready_for_fix_02_prod_preflight",
+  "review_window_started_at": "2026-05-24T15:57:41+08:00",
+  "live_submission_time": "2026-05-23T13:18:45+08:00",
+  "elapsed_hours": 26.65,
+  "queue_item_id": 2,
+  "target_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+  "channel": "indexnow",
+  "queue_item_state": {
+    "exists": true,
+    "id": 2,
+    "batch_id": 2,
+    "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+    "locale": "en",
+    "channel": "indexnow",
+    "approval_state": "approved",
+    "execution_state": "submitted",
+    "source_authority": "scale_catalog",
+    "page_entity_type": "test_detail",
+    "entity_type": "test_detail",
+    "entity_id": "mbti-personality-test-16-personality-types",
+    "eligibility_state": "eligible",
+    "indexability_state": "indexable",
+    "claim_boundary_state": "claim_safe",
+    "private_flow": false,
+    "approved_by": "codex",
+    "approved_at": "2026-05-23T13:18:44+08:00",
+    "updated_at": "2026-05-23T13:18:45+08:00"
+  },
+  "event_state": {
+    "required_events_present": true,
+    "event_counts": {
+      "queue_item_planned": 1,
+      "live_submission_approved": 1,
+      "live_submission_response": 1
+    },
+    "live_submission_response": {
+      "endpoint_host": "api.indexnow.org",
+      "http_status": 200,
+      "submission_status": "accepted",
+      "exception_class": null
+    }
+  },
+  "duplicate_detected": false,
+  "retry_anomaly_detected": false,
+  "gate_state": {
+    "SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED": false,
+    "SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED": false,
+    "SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED": false,
+    "SEO_INTEL_INDEXNOW_LIVE_API_ENABLED": false
+  },
+  "public_url_status": {
+    "head_status": 200,
+    "get_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "target_url_returned_without_redirect": true,
+    "private_flow_leak_detected": false,
+    "target_slug_stale": false
+  },
+  "canonical_status": {
+    "canonical_href": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+    "matches_target_url": true
+  },
+  "robots_status": {
+    "robots_content": "index, follow",
+    "index_follow_safe": true,
+    "noindex_detected": false
+  },
+  "issue_queue_summary": {
+    "table_available": true,
+    "high_or_critical_count_for_url_since_live": 0,
+    "specific_risk_count_for_url": 0,
+    "private_flow_leak_issue_detected": false,
+    "forbidden_authority_issue_detected": false,
+    "claim_unsafe_issue_detected": false,
+    "duplicate_search_channel_issue_detected": false
+  },
+  "ops_seo_visibility": {
+    "checked": false,
+    "status": "sidecar_not_blocking",
+    "reason": "Authenticated browser /ops/seo read-model inspection was not performed in this PR; production DB read-only queue evidence was available and sufficient for the technical review."
+  },
+  "crawler_aggregate_summary": {
+    "checked": true,
+    "aggregate_table_available": false,
+    "bot_family_signal_present": false,
+    "rows": [],
+    "indexing_inference_made": false
+  },
+  "external_search_visibility_observation": {
+    "checked": false,
+    "status": "not_checked_by_scope",
+    "observation_only": true
+  },
+  "indexing_claim_made": false,
+  "ranking_claim_made": false,
+  "live_submission_attempted": false,
+  "external_api_call_attempted": false,
+  "enqueue_attempted": false,
+  "cms_mutation_attempted": false,
+  "url_truth_write_attempted": false,
+  "sitemap_mutation_attempted": false,
+  "llms_mutation_attempted": false,
+  "sidecars": [
+    {
+      "id": "ops_seo_visibility_not_checked",
+      "severity": "info",
+      "summary": "Authenticated /ops/seo browser verification was not performed; do not block the 24h review because read-only DB evidence confirmed the queue state."
+    },
+    {
+      "id": "crawler_aggregate_table_unavailable",
+      "severity": "info",
+      "summary": "seo_crawler_log_daily_aggregates was not available in production at review time, so crawler observation remains unavailable and no indexing inference was made."
+    },
+    {
+      "id": "related_article_slug_observation",
+      "severity": "info",
+      "summary": "The public HTML contains a related article link with mbti-personality-test-science-vs-pseudoscience, but the target URL itself returned 200 with the exact expected canonical."
+    }
+  ],
+  "next_task": "SEO-GROWTH-MBTI-ACTION-01B-FIX-02-PROD-PREFLIGHT"
+}
