@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T12:40:00Z",
+  "updated_at": "2026-05-26T00:00:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -19780,6 +19780,65 @@
           "at": "2026-05-25T12:40:00Z",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened fap-api PR #1681 and linked fap-web PR #903; waiting for GitHub checks."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-CONTENT-AUTHORITY-PUBLISH-READINESS-01": {
+      "id": "GLOBAL-EN-ZH-CONTENT-AUTHORITY-PUBLISH-READINESS-01",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-content-authority-publish-readiness-01",
+      "base": "main",
+      "status": "local_validation_passed",
+      "depends_on": [
+        "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_state_parse": "passed",
+        "focused_test": "passed",
+        "route_list": "passed",
+        "pint": "passed",
+        "composer_validate": "passed",
+        "composer_audit": "passed",
+        "json_parse": "passed",
+        "yaml_parse": "passed",
+        "diff_check": "passed",
+        "cached_diff_check": "passed",
+        "github_required_checks": "pending"
+      },
+      "scope": {
+        "allowed_files": [
+          "backend/docs/seo/global-en-zh-content-authority-publish-readiness-01.md",
+          "backend/docs/seo/generated/global-en-zh-content-authority-publish-readiness-01.v1.json",
+          "backend/docs/seo/import-packages/global-en-zh-content-authority-publish-readiness-01.import.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhContentAuthorityPublishReadiness01Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "fap_web_modified": false,
+        "frontend_fallback_authority": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": "GLOBAL-EN-ZH-CONTENT-AUTHORITY-HUMAN-REVIEW-IMPORT-01",
+      "events": [
+        {
+          "at": "2026-05-26T00:00:00+08:00",
+          "event": "initialized_current_task_state_from_user_authorization",
+          "details": "Added current task only; no future human-review, publish, footer, search, or deploy entries were added."
+        },
+        {
+          "at": "2026-05-26T00:00:00+08:00",
+          "event": "local_validation_passed",
+          "details": "Focused test, route:list, pint, composer validate, composer audit, JSON/YAML parse, git diff --check, and git diff --cached --check passed. fap-web reference status was clean."
         }
       ]
     }
