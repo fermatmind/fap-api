@@ -18288,12 +18288,12 @@
     "SEARCH-CHANNEL-LIVE-ZH-MBTI-01": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-zh-mbti-01-preflight",
-      "status": "production_preflight_blocked_report_in_progress",
+      "status": "pr_open_github_checks_pending",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW"
       ],
-      "commit_sha": "ee2789474008b288be660ea360b35ca4c0635beb",
-      "pr_url": null,
+      "commit_sha": "ede7c8a4fe72a89926a08d3dc04f0163999db36a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1660",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -18350,6 +18350,11 @@
           "at": "2026-05-25T09:57:00+08:00",
           "status": "commit_created",
           "summary": "Created scoped commit ee278947 for the ZH MBTI live submission preflight report."
+        },
+        {
+          "at": "2026-05-25T10:00:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1660 for the ZH MBTI live submission preflight report. GitHub checks are pending."
         }
       ]
     }
