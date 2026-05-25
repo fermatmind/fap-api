@@ -1,0 +1,988 @@
+{
+    "schema_version": "result-en-parity-01-asset-catalog-gate.v1",
+    "task": "RESULT-EN-PARITY-01",
+    "gate": {
+        "name": "assessment_result_report_locale_parity_gate",
+        "mode": "fail_closed_for_missing_english_interpretation_assets",
+        "production_mutation": false,
+        "cms_mutation": false,
+        "search_channel_action": false,
+        "fap_web_authority": false
+    },
+    "covered_families": [
+        "MBTI",
+        "BIG5_OCEAN",
+        "ENNEAGRAM",
+        "EQ_60",
+        "RIASEC",
+        "SDS_20",
+        "CLINICAL_COMBO_68",
+        "IQ_INTELLIGENCE_QUOTIENT"
+    ],
+    "families": {
+        "MBTI": {
+            "authority_sources": [
+                "backend/app/Services/Report/ReportComposer.php",
+                "backend/app/Services/Report/ReportPayloadAssembler.php",
+                "backend/app/Services/Mbti/MbtiPublicProjectionService.php",
+                "backend/app/Internal/Legacy/Mbti/Report/LegacyMbtiReportPayloadBuilderV2Core.php"
+            ],
+            "sensitive_claim_boundary": "career wording must remain exploratory and non-deterministic",
+            "assets": [
+                {
+                    "key": "mbti.external_content_package_export",
+                    "has_zh": false,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_missing_backend_export"
+                },
+                {
+                    "key": "mbti.legacy_generated_fallback_copy",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_legacy_zh_fallback_risk"
+                },
+                {
+                    "key": "mbti.frontend_clone_content_reference",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "frontend_non_authoritative_reference_only"
+                },
+                {
+                    "key": "mbti.result_type_label",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": true,
+                    "interpretation_copy": false,
+                    "copy_kind": "presentation_label",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                }
+            ]
+        },
+        "BIG5_OCEAN": {
+            "authority_sources": [
+                "backend/app/Services/Report/BigFiveReportComposer.php",
+                "backend/app/Services/BigFive/BigFivePackLoader.php",
+                "backend/app/Services/BigFive/ResultPageV2/*",
+                "backend/content_assets/big5/*"
+            ],
+            "sensitive_claim_boundary": "trait-vector and workstyle explanation only; no career recommendation authority",
+            "assets": [
+                {
+                    "key": "big5.v1.copy.compiled",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                },
+                {
+                    "key": "big5.v1.blocks.compiled",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                },
+                {
+                    "key": "big5.result_page_v2.route_matrix",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_v2_en_missing"
+                },
+                {
+                    "key": "big5.result_page_v2.coupling_assets",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_v2_en_missing"
+                },
+                {
+                    "key": "big5.result_page_v2.scenario_action_assets",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_v2_en_missing"
+                },
+                {
+                    "key": "big5.result_page_v2.facet_assets",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_v2_en_missing"
+                },
+                {
+                    "key": "big5.result_page_v2.canonical_profiles",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_v2_en_missing"
+                },
+                {
+                    "key": "big5.trait_chart_labels",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": true,
+                    "interpretation_copy": false,
+                    "copy_kind": "presentation_label",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                }
+            ]
+        },
+        "ENNEAGRAM": {
+            "authority_sources": [
+                "backend/app/Services/Report/EnneagramReportComposer.php",
+                "backend/app/Services/Enneagram/EnneagramPublicProjectionService.php",
+                "backend/content_packs/ENNEAGRAM/v2/registry/*"
+            ],
+            "sensitive_claim_boundary": "self-knowledge language only; no clinical or hiring suitability claims",
+            "assets": [
+                {
+                    "key": "enneagram.type_registry",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_registry_en_missing"
+                },
+                {
+                    "key": "enneagram.pair_registry",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_registry_en_missing"
+                },
+                {
+                    "key": "enneagram.group_registry",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_registry_en_missing"
+                },
+                {
+                    "key": "enneagram.technical_note_registry",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_registry_en_missing"
+                },
+                {
+                    "key": "enneagram.ui_copy_registry",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_registry_en_missing"
+                },
+                {
+                    "key": "enneagram.type_badge_label",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": true,
+                    "interpretation_copy": false,
+                    "copy_kind": "presentation_label",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                }
+            ]
+        },
+        "EQ_60": {
+            "authority_sources": [
+                "backend/app/Services/Report/Eq60ReportComposer.php",
+                "backend/app/Services/Eq60/Eq60PackLoader.php",
+                "backend/content_packs/EQ_60/v1/compiled/*"
+            ],
+            "sensitive_claim_boundary": "emotional skill self-reflection only; no clinical or hiring suitability claims",
+            "assets": [
+                {
+                    "key": "eq60.report.blocks_by_locale",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                },
+                {
+                    "key": "eq60.report_assets.localized_maps",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                },
+                {
+                    "key": "eq60.dimension_labels",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": true,
+                    "interpretation_copy": false,
+                    "copy_kind": "presentation_label",
+                    "sensitive_claim_boundary": false,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                }
+            ]
+        },
+        "RIASEC": {
+            "authority_sources": [
+                "backend/app/Services/Report/RiasecReportComposer.php",
+                "backend/app/Services/Riasec/RiasecLifecycleCopyService.php",
+                "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+                "backend/content_assets/riasec/*"
+            ],
+            "sensitive_claim_boundary": "interest signal and exploratory guidance only; no active career recommendation authority",
+            "assets": [
+                {
+                    "key": "riasec.lifecycle_copy.share_pdf_history",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_riasec_en_missing"
+                },
+                {
+                    "key": "riasec.lifecycle_copy.faq",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_riasec_en_missing"
+                },
+                {
+                    "key": "riasec.lifecycle_copy.technical_note_user_summary",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_riasec_en_missing"
+                },
+                {
+                    "key": "riasec.lifecycle_copy.professional_method_boundary",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_riasec_en_missing"
+                },
+                {
+                    "key": "riasec.result_dimension_labels",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": true,
+                    "interpretation_copy": false,
+                    "copy_kind": "presentation_label",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                }
+            ]
+        },
+        "SDS_20": {
+            "authority_sources": [
+                "backend/app/Services/Report/Sds20ReportComposer.php",
+                "backend/app/Services/Sds20/Sds20PackLoader.php",
+                "backend/content_packs/SDS_20/v1/compiled/report.compiled.json",
+                "backend/content_packs/DEPRESSION_SCREENING_STANDARD/v1/compiled/report.compiled.json"
+            ],
+            "sensitive_claim_boundary": "self-assessment only; non-diagnostic and professional-help bounded",
+            "assets": [
+                {
+                    "key": "sds20.report.blocks_by_locale",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                },
+                {
+                    "key": "depression_screening_standard.report.blocks_by_locale",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                },
+                {
+                    "key": "sds20.factor_labels",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": true,
+                    "interpretation_copy": false,
+                    "copy_kind": "presentation_label",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                }
+            ]
+        },
+        "CLINICAL_COMBO_68": {
+            "authority_sources": [
+                "backend/app/Services/Report/ClinicalCombo68ReportComposer.php",
+                "backend/app/Services/ClinicalCombo/ClinicalComboPackLoader.php",
+                "backend/app/Services/ClinicalCombo/ClinicalComboBlockSelector.php",
+                "backend/content_packs/CLINICAL_COMBO_68/v1/compiled/report.compiled.json"
+            ],
+            "sensitive_claim_boundary": "self-assessment only; non-diagnostic, not treatment, professional-help bounded",
+            "assets": [
+                {
+                    "key": "clinical_combo_68.free_blocks_by_locale",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                },
+                {
+                    "key": "clinical_combo_68.paid_action_anxiety_14d",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_clinical_paid_en_missing"
+                },
+                {
+                    "key": "clinical_combo_68.paid_action_burnout",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_clinical_paid_en_missing"
+                },
+                {
+                    "key": "clinical_combo_68.paid_action_depression_14d",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_clinical_paid_en_missing"
+                },
+                {
+                    "key": "clinical_combo_68.paid_action_ocd_erp_start",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_clinical_paid_en_missing"
+                },
+                {
+                    "key": "clinical_combo_68.paid_action_perfectionism_14d",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_clinical_paid_en_missing"
+                },
+                {
+                    "key": "clinical_combo_68.paid_perf_cm_mistakes",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_clinical_paid_en_missing"
+                },
+                {
+                    "key": "clinical_combo_68.paid_perf_da_doubts",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_clinical_paid_en_missing"
+                },
+                {
+                    "key": "clinical_combo_68.paid_perf_org_order",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_clinical_paid_en_missing"
+                },
+                {
+                    "key": "clinical_combo_68.paid_perf_pe_parental",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_clinical_paid_en_missing"
+                },
+                {
+                    "key": "clinical_combo_68.paid_perf_ps_standards",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_clinical_paid_en_missing"
+                },
+                {
+                    "key": "clinical_combo_68.severity_labels",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": true,
+                    "interpretation_copy": false,
+                    "copy_kind": "presentation_label",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                }
+            ]
+        },
+        "IQ_INTELLIGENCE_QUOTIENT": {
+            "authority_sources": [
+                "backend/app/Services/Report/IqReportBuilder.php",
+                "backend/app/Services/Iq/IqResultPayloadRedactor.php"
+            ],
+            "sensitive_claim_boundary": "online estimate and confidence-bound wording only; no clinical IQ authority",
+            "assets": [
+                {
+                    "key": "iq.dimensions.visual_spatial_insight",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_iq_label_en_missing"
+                },
+                {
+                    "key": "iq.dimensions.visual_spatial_pattern_reasoning",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_iq_label_en_missing"
+                },
+                {
+                    "key": "iq.dimensions.numeric_pattern_reasoning",
+                    "has_zh": true,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": true,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "blocking_iq_label_en_missing"
+                },
+                {
+                    "key": "iq_pro.pdf_payload",
+                    "has_zh": false,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "contract_defined_not_implemented"
+                },
+                {
+                    "key": "iq_pro.certificate_payload",
+                    "has_zh": false,
+                    "has_en": false,
+                    "missing_en": true,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": false,
+                    "interpretation_copy": true,
+                    "copy_kind": "interpretation_copy",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": true,
+                    "deferred_reason": "contract_defined_not_implemented"
+                },
+                {
+                    "key": "iq.score_band_labels",
+                    "has_zh": true,
+                    "has_en": true,
+                    "missing_en": false,
+                    "fallback_to_zh_detected": false,
+                    "presentation_label_only": true,
+                    "interpretation_copy": false,
+                    "copy_kind": "presentation_label",
+                    "sensitive_claim_boundary": true,
+                    "fail_closed_for_en": false,
+                    "deferred_reason": null
+                }
+            ]
+        }
+    },
+    "blocking_issues": [
+        {
+            "family": "MBTI",
+            "asset_key": "mbti.external_content_package_export",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": false,
+            "deferred_reason": "blocking_missing_backend_export"
+        },
+        {
+            "family": "MBTI",
+            "asset_key": "mbti.legacy_generated_fallback_copy",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_legacy_zh_fallback_risk"
+        },
+        {
+            "family": "MBTI",
+            "asset_key": "mbti.frontend_clone_content_reference",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "frontend_non_authoritative_reference_only"
+        },
+        {
+            "family": "BIG5_OCEAN",
+            "asset_key": "big5.result_page_v2.route_matrix",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_v2_en_missing"
+        },
+        {
+            "family": "BIG5_OCEAN",
+            "asset_key": "big5.result_page_v2.coupling_assets",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_v2_en_missing"
+        },
+        {
+            "family": "BIG5_OCEAN",
+            "asset_key": "big5.result_page_v2.scenario_action_assets",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_v2_en_missing"
+        },
+        {
+            "family": "BIG5_OCEAN",
+            "asset_key": "big5.result_page_v2.facet_assets",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_v2_en_missing"
+        },
+        {
+            "family": "BIG5_OCEAN",
+            "asset_key": "big5.result_page_v2.canonical_profiles",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_v2_en_missing"
+        },
+        {
+            "family": "ENNEAGRAM",
+            "asset_key": "enneagram.type_registry",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_registry_en_missing"
+        },
+        {
+            "family": "ENNEAGRAM",
+            "asset_key": "enneagram.pair_registry",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_registry_en_missing"
+        },
+        {
+            "family": "ENNEAGRAM",
+            "asset_key": "enneagram.group_registry",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_registry_en_missing"
+        },
+        {
+            "family": "ENNEAGRAM",
+            "asset_key": "enneagram.technical_note_registry",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_registry_en_missing"
+        },
+        {
+            "family": "ENNEAGRAM",
+            "asset_key": "enneagram.ui_copy_registry",
+            "severity": "p1_result_report_copy",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_registry_en_missing"
+        },
+        {
+            "family": "RIASEC",
+            "asset_key": "riasec.lifecycle_copy.share_pdf_history",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_riasec_en_missing"
+        },
+        {
+            "family": "RIASEC",
+            "asset_key": "riasec.lifecycle_copy.faq",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_riasec_en_missing"
+        },
+        {
+            "family": "RIASEC",
+            "asset_key": "riasec.lifecycle_copy.technical_note_user_summary",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_riasec_en_missing"
+        },
+        {
+            "family": "RIASEC",
+            "asset_key": "riasec.lifecycle_copy.professional_method_boundary",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_riasec_en_missing"
+        },
+        {
+            "family": "CLINICAL_COMBO_68",
+            "asset_key": "clinical_combo_68.paid_action_anxiety_14d",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_clinical_paid_en_missing"
+        },
+        {
+            "family": "CLINICAL_COMBO_68",
+            "asset_key": "clinical_combo_68.paid_action_burnout",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_clinical_paid_en_missing"
+        },
+        {
+            "family": "CLINICAL_COMBO_68",
+            "asset_key": "clinical_combo_68.paid_action_depression_14d",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_clinical_paid_en_missing"
+        },
+        {
+            "family": "CLINICAL_COMBO_68",
+            "asset_key": "clinical_combo_68.paid_action_ocd_erp_start",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_clinical_paid_en_missing"
+        },
+        {
+            "family": "CLINICAL_COMBO_68",
+            "asset_key": "clinical_combo_68.paid_action_perfectionism_14d",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_clinical_paid_en_missing"
+        },
+        {
+            "family": "CLINICAL_COMBO_68",
+            "asset_key": "clinical_combo_68.paid_perf_cm_mistakes",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_clinical_paid_en_missing"
+        },
+        {
+            "family": "CLINICAL_COMBO_68",
+            "asset_key": "clinical_combo_68.paid_perf_da_doubts",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_clinical_paid_en_missing"
+        },
+        {
+            "family": "CLINICAL_COMBO_68",
+            "asset_key": "clinical_combo_68.paid_perf_org_order",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_clinical_paid_en_missing"
+        },
+        {
+            "family": "CLINICAL_COMBO_68",
+            "asset_key": "clinical_combo_68.paid_perf_pe_parental",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_clinical_paid_en_missing"
+        },
+        {
+            "family": "CLINICAL_COMBO_68",
+            "asset_key": "clinical_combo_68.paid_perf_ps_standards",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_clinical_paid_en_missing"
+        },
+        {
+            "family": "IQ_INTELLIGENCE_QUOTIENT",
+            "asset_key": "iq.dimensions.visual_spatial_insight",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_iq_label_en_missing"
+        },
+        {
+            "family": "IQ_INTELLIGENCE_QUOTIENT",
+            "asset_key": "iq.dimensions.visual_spatial_pattern_reasoning",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_iq_label_en_missing"
+        },
+        {
+            "family": "IQ_INTELLIGENCE_QUOTIENT",
+            "asset_key": "iq.dimensions.numeric_pattern_reasoning",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": true,
+            "deferred_reason": "blocking_iq_label_en_missing"
+        },
+        {
+            "family": "IQ_INTELLIGENCE_QUOTIENT",
+            "asset_key": "iq_pro.pdf_payload",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": false,
+            "deferred_reason": "contract_defined_not_implemented"
+        },
+        {
+            "family": "IQ_INTELLIGENCE_QUOTIENT",
+            "asset_key": "iq_pro.certificate_payload",
+            "severity": "p0_sensitive_or_claim_safe",
+            "reason": "missing_english_interpretation_asset_must_not_render_zh_cn",
+            "fallback_to_zh_detected": false,
+            "deferred_reason": "contract_defined_not_implemented"
+        }
+    ],
+    "summary": {
+        "family_count": 8,
+        "asset_count": 47,
+        "missing_en_count": 32,
+        "fallback_to_zh_detected_count": 29,
+        "presentation_label_only_count": 8,
+        "interpretation_copy_count": 39,
+        "sensitive_claim_boundary_count": 26,
+        "fail_closed_count": 32
+    },
+    "generated_at": "2026-05-25T16:30:00+08:00"
+}

@@ -5727,6 +5727,51 @@ prs:
     fap_web_commit_allowed: false
     next_task: RESULT-EN-PARITY-01
 
+  - id: RESULT-EN-PARITY-01
+    repo: fap-api
+    depends_on: [RESULT-EN-PARITY-00]
+    branch: codex/result-en-parity-01-asset-catalog-gate
+    base: main
+    title: "RESULT-EN-PARITY-01 result/report asset catalog export and locale parity gate"
+    train_scope: result_report_asset_catalog_export_fail_closed_locale_parity_gate
+    risk_level: backend_catalog_gate_no_runtime_rendering_change
+    allowed_paths:
+      - backend/app/Services/SeoIntel/**
+      - backend/docs/seo/result-en-parity-01-asset-catalog-gate.md
+      - backend/docs/seo/generated/result-en-parity-01-asset-catalog-gate.v1.json
+      - backend/tests/Feature/SeoIntel/ResultEnParity01AssetCatalogGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Export authoritative backend result/report asset keys by test family.
+      - Identify zh/en availability and missing English interpretation assets per covered family.
+      - Distinguish presentation labels from result/report interpretation copy.
+      - Add a fail-closed catalog gate so English result/report interpretation assets cannot silently fall back to zh-CN.
+      - Produce generated inventory/gate artifact and focused tests without rewriting all content.
+    do_not:
+      - Translate full report content or mass-generate English report prose.
+      - Modify scoring, result renderers, fap-web, CMS content, production data, production secrets, sitemap, llms, Search Channel, or URL submission state.
+      - Mutate production CMS, access protected user data, run production migrations, deploy, or submit URLs.
+      - Treat frontend fallback or frontend interpretation copy as report authority.
+    validation:
+      - cd backend && php artisan test --filter=ResultEnParity01AssetCatalogGate --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/result-en-parity-01-asset-catalog-gate.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+      - git diff --name-only origin/main...HEAD
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    next_task: RESULT-EN-PARITY-02
+
   - id: SEO-DASH-PROD-04B
     repo: fap-api
     depends_on:
