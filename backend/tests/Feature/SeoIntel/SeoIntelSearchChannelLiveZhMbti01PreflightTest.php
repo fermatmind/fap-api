@@ -90,7 +90,7 @@ final class SeoIntelSearchChannelLiveZhMbti01PreflightTest extends TestCase
     }
 
     #[Test]
-    public function indexnow_key_readiness_blocker_is_recorded_without_exposing_key(): void
+    public function indexnow_key_readiness_is_verified_without_exposing_key(): void
     {
         $readiness = $this->artifact()['indexnow_key_readiness'] ?? [];
 
@@ -100,9 +100,10 @@ final class SeoIntelSearchChannelLiveZhMbti01PreflightTest extends TestCase
             'https://fermatmind.com/8d59565935303aad72c5eb0ec5bfa42e.txt',
             $readiness['key_location'] ?? null
         );
-        $this->assertSame(404, $readiness['public_key_location_status'] ?? null);
-        $this->assertFalse($readiness['public_key_location_matches_configured_key'] ?? true);
-        $this->assertFalse($readiness['ready'] ?? true);
+        $this->assertSame(200, $readiness['public_key_location_status'] ?? null);
+        $this->assertSame(32, $readiness['body_length'] ?? null);
+        $this->assertTrue($readiness['public_key_location_matches_configured_key'] ?? false);
+        $this->assertTrue($readiness['ready'] ?? false);
         $this->assertFalse($readiness['raw_key_exposed'] ?? true);
     }
 
@@ -112,15 +113,18 @@ final class SeoIntelSearchChannelLiveZhMbti01PreflightTest extends TestCase
         $artifact = $this->artifact();
 
         $this->assertSame(
-            'I explicitly approve SEARCH-CHANNEL-LIVE-ZH-MBTI-02 live submission for queue item 3 channel indexnow URL https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types.',
+            'I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 3 channel indexnow URL https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types.',
             $artifact['future_approval_phrase'] ?? null
         );
         $this->assertFalse($artifact['live_submission_performed'] ?? true);
         $this->assertFalse($artifact['external_api_call_performed'] ?? true);
         $this->assertFalse($artifact['enqueue_performed'] ?? true);
         $this->assertTrue($artifact['research_deferred'] ?? false);
-        $this->assertSame('blocked_indexnow_key_missing', $artifact['final_decision'] ?? null);
-        $this->assertSame('SEARCH-CHANNEL-LIVE-ZH-MBTI-01A-INDEXNOW-KEYLOCATION-FIX', $artifact['next_task'] ?? null);
+        $this->assertSame('ready_for_human_approved_zh_mbti_live_submission', $artifact['final_decision'] ?? null);
+        $this->assertSame(
+            'SEARCH-CHANNEL-LIVE-ZH-MBTI-02｜Human-approved live submission for queue item 3',
+            $artifact['next_task'] ?? null
+        );
     }
 
     /** @return array<string, mixed> */

@@ -2,9 +2,9 @@
 
 ## Executive Summary
 
-This preflight reviewed production state for queue item 3 before any ZH MBTI IndexNow live submission.
+This rerun preflight reviewed production state for queue item 3 before any ZH MBTI IndexNow live submission, after the frontend IndexNow keyLocation fix was deployed.
 
-The queue item, duplicate protection, closed gate state, submit dry-run, public runtime, and protected EN queue item 2 are stable. The preflight is blocked because the configured IndexNow `keyLocation` currently returns HTTP 404 on the public apex host, so the key file cannot be verified without exposing the raw key.
+The queue item, duplicate protection, closed gate state, submit dry-run, IndexNow keyLocation readiness, public runtime, and protected EN queue item 2 are stable. The configured IndexNow `keyLocation` now returns HTTP 200 on the public apex host, with a 32-byte text body whose SHA-256 hash matches the configured key hash. The raw key was not printed.
 
 No live submission was performed. No external search API was called. No queue item was enqueued. No CMS, sitemap, llms, or fap-web mutation was performed.
 
@@ -55,7 +55,7 @@ The IndexNow key is configured, and the configured `keyLocation` is:
 
 `https://fermatmind.com/8d59565935303aad72c5eb0ec5bfa42e.txt`
 
-Public read-only verification returned HTTP 404. The raw key was not printed. Because the public key file cannot be verified at the configured location, live submission is blocked until the keyLocation returns HTTP 200 and the public body hash matches the configured key.
+Public read-only verification returned HTTP 200. The response is `text/plain`, 32 bytes, and its SHA-256 hash matches the configured key hash. The raw key was not printed. IndexNow keyLocation readiness is now satisfied.
 
 ## Submit Dry-run
 
@@ -95,14 +95,16 @@ Known Baidu stale staging result remains a sidecar and was not mutated.
 
 ## Future Approval Phrase
 
-Not actionable until IndexNow keyLocation readiness is fixed:
+Runtime dry-run returned the exact approval phrase required by the current live submission command:
 
-`I explicitly approve SEARCH-CHANNEL-LIVE-ZH-MBTI-02 live submission for queue item 3 channel indexnow URL https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types.`
+`I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 3 channel indexnow URL https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types.`
+
+The next task remains the scoped ZH MBTI live submission task. The runtime approval phrase uses the generic `SEARCH-CHANNEL-LIVE-02` label from the deployed command and must be used exactly unless the command is changed before execution.
 
 ## Final Decision
 
-`blocked_indexnow_key_missing`
+`ready_for_human_approved_zh_mbti_live_submission`
 
 ## Next Task
 
-`SEARCH-CHANNEL-LIVE-ZH-MBTI-01A-INDEXNOW-KEYLOCATION-FIX`
+`SEARCH-CHANNEL-LIVE-ZH-MBTI-02｜Human-approved live submission for queue item 3`
