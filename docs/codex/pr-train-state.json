@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T18:40:00.000Z",
+  "updated_at": "2026-05-24T18:41:00.000Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18208,11 +18208,11 @@
     "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-zh-mbti-post-enqueue-review",
-      "status": "local_checks_passed",
+      "status": "commit_created",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE"
       ],
-      "commit_sha": null,
+      "commit_sha": "dfce93dd5276d26d223e1f0ae85de63aa5e04542",
       "pr_url": null,
       "checks": {
         "dependency": {
@@ -18265,6 +18265,11 @@
           "at": "2026-05-25T02:40:00+08:00",
           "status": "local_checks_passed",
           "summary": "Focused generated artifact test, route list, Pint, JSON/YAML parsing, and diff checks passed."
+        },
+        {
+          "at": "2026-05-25T02:41:00+08:00",
+          "status": "commit_created",
+          "summary": "Created scoped commit dfce93dd for the ZH MBTI post-enqueue review report."
         }
       ]
     }
