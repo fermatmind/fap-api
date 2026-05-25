@@ -24793,7 +24793,7 @@
       ]
     },
     "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01": {
-      "status": "local_validation_passed",
+      "status": "pr_open_github_checks_pending",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-content-asset-batch-01",
       "base": "main",
@@ -24802,8 +24802,8 @@
         "GLOBAL-EN-ZH-PARITY-FOOTER-NAV-PARITY-01"
       ],
       "title": "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01 content help policy import package",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "dd822c2b8997ed78b1dcc8bbd0f2e59e6c68012d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1683",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -24858,6 +24858,11 @@
           "at": "2026-05-25T21:16:59+08:00",
           "status": "local_validation_passed",
           "summary": "Current content/help/policy asset batch passed local validation and scope checks."
+        },
+        {
+          "at": "2026-05-25T21:17:47+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened fap-api PR #1683; waiting for GitHub checks."
         }
       ]
     },
