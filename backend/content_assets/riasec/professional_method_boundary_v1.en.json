@@ -1,0 +1,82 @@
+{
+  "asset_id": "professional_method_boundary_v1.en",
+  "asset_status": "draft_authority_candidate_human_review_required",
+  "locale": "en",
+  "content_version": "riasec_professional_method_boundary_v1.en",
+  "review_status": "draft_human_review_required",
+  "sections": [
+    {
+      "key": "measurement_object",
+      "title": "Measurement object",
+      "body": "RIASEC explains tendencies in work-activity interests. It does not measure ability, personality identity, career values, mental state, income potential, or probability of career success."
+    },
+    {
+      "key": "score_space",
+      "title": "Score space",
+      "body": "0-100 is a within-form interest-strength conversion. It is not a population percentile and should not be used to compare raw score movement across 60Q and 140Q."
+    },
+    {
+      "key": "forms",
+      "title": "60Q and 140Q",
+      "body": "60Q describes the basic interest structure. 140Q describes more contextual clues from tasks, environments, and role responsibilities. 140Q is more specific, not more accurate."
+    },
+    {
+      "key": "examples",
+      "title": "Occupation example boundary",
+      "body": "Occupation examples must be mediated by activity and task explanations. They are content examples, not matches, recommendations, rankings, or job-fit decisions."
+    },
+    {
+      "key": "validation_status",
+      "title": "Validation status",
+      "body": "When external validity evidence is not attached, use theory_based, under_validation, or internally_pilot_required. Do not claim externally_validated status."
+    },
+    {
+      "key": "feedback",
+      "title": "Feedback boundary",
+      "body": "Saved, excluded, aspiration, and disagreement feedback only affects exploration paths. It does not change the measured Holland Code, scores, or report snapshot."
+    },
+    {
+      "key": "privacy",
+      "title": "Privacy and use",
+      "body": "Share and PDF surfaces do not expose raw feedback, life stage, organization context, or internal snapshot_id by default."
+    },
+    {
+      "key": "restricted_use",
+      "title": "Restricted use",
+      "body": "This report must not be used for recruiting screening, admission, promotion, elimination, qualification decisions, medical diagnosis, or psychological diagnosis."
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "v5_editorial_note": "English professional boundary draft keeps prohibited terms only in negative constraint contexts."
+}

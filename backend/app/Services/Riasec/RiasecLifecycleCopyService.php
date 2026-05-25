@@ -6,34 +6,41 @@ namespace App\Services\Riasec;
 
 final class RiasecLifecycleCopyService
 {
-    private const SHARE_PDF_HISTORY_ASSET_PATH = 'content_assets/riasec/share_pdf_history_v1.zh-CN.json';
+    private const DEFAULT_LOCALE = 'zh-CN';
 
-    private const FAQ_JSON_ASSET_PATH = 'content_assets/riasec/faq_v1.zh-CN.json';
+    private const SUPPORTED_LOCALES = [
+        'en',
+        'zh-CN',
+    ];
 
-    private const FAQ_MARKDOWN_ASSET_PATH = 'content_assets/riasec/faq_v1.zh-CN.md';
+    private const SHARE_PDF_HISTORY_ASSET_PATH_TEMPLATE = 'content_assets/riasec/share_pdf_history_v1.%s.json';
 
-    private const TECHNICAL_NOTE_SUMMARY_ASSET_PATH = 'content_assets/riasec/technical_note_user_summary_v1.zh-CN.json';
+    private const FAQ_JSON_ASSET_PATH_TEMPLATE = 'content_assets/riasec/faq_v1.%s.json';
 
-    private const PROFESSIONAL_METHOD_BOUNDARY_ASSET_PATH = 'content_assets/riasec/professional_method_boundary_v1.zh-CN.json';
+    private const FAQ_MARKDOWN_ASSET_PATH_TEMPLATE = 'content_assets/riasec/faq_v1.%s.md';
 
-    /** @var array<string,mixed>|null */
-    private ?array $sharePdfHistoryCache = null;
+    private const TECHNICAL_NOTE_SUMMARY_ASSET_PATH_TEMPLATE = 'content_assets/riasec/technical_note_user_summary_v1.%s.json';
 
-    /** @var array<string,mixed>|null */
-    private ?array $faqJsonCache = null;
+    private const PROFESSIONAL_METHOD_BOUNDARY_ASSET_PATH_TEMPLATE = 'content_assets/riasec/professional_method_boundary_v1.%s.json';
 
-    /** @var array<string,mixed>|null */
-    private ?array $technicalNoteSummaryCache = null;
+    /** @var array<string,array<string,mixed>> */
+    private array $sharePdfHistoryCache = [];
 
-    /** @var array<string,mixed>|null */
-    private ?array $professionalMethodBoundaryCache = null;
+    /** @var array<string,array<string,mixed>> */
+    private array $faqJsonCache = [];
+
+    /** @var array<string,array<string,mixed>> */
+    private array $technicalNoteSummaryCache = [];
+
+    /** @var array<string,array<string,mixed>> */
+    private array $professionalMethodBoundaryCache = [];
 
     /**
      * @return list<array{title:string,copy:string}>
      */
-    public function technicalNoteSummarySections(): array
+    public function technicalNoteSummarySections(string $locale = self::DEFAULT_LOCALE): array
     {
-        $asset = $this->technicalNoteSummaryAsset();
+        $asset = $this->technicalNoteSummaryAsset($this->normalizeLocale($locale));
         $rows = is_array($asset['summary_sections'] ?? null) ? $asset['summary_sections'] : [];
         $sections = [];
 
@@ -60,9 +67,9 @@ final class RiasecLifecycleCopyService
     /**
      * @return list<array{key:string,title:string,body:string}>
      */
-    public function professionalMethodBoundarySections(): array
+    public function professionalMethodBoundarySections(string $locale = self::DEFAULT_LOCALE): array
     {
-        $asset = $this->professionalMethodBoundaryAsset();
+        $asset = $this->professionalMethodBoundaryAsset($this->normalizeLocale($locale));
         $rows = is_array($asset['sections'] ?? null) ? $asset['sections'] : [];
         $sections = [];
 
@@ -91,23 +98,27 @@ final class RiasecLifecycleCopyService
     /**
      * @return array<string,mixed>
      */
-    public function lifecycleCopyContract(bool $snapshotBound = false): array
+    public function lifecycleCopyContract(bool $snapshotBound = false, string $locale = self::DEFAULT_LOCALE): array
     {
-        $shareAsset = $this->sharePdfHistoryAsset();
-        $faqAsset = $this->faqAsset();
+        $normalizedLocale = $this->normalizeLocale($locale);
+        $shareAsset = $this->sharePdfHistoryAsset($normalizedLocale);
+        $faqAsset = $this->faqAsset($normalizedLocale);
+        $technicalNoteSummaryAsset = $this->technicalNoteSummaryAsset($normalizedLocale);
+        $professionalMethodBoundaryAsset = $this->professionalMethodBoundaryAsset($normalizedLocale);
 
         return [
             'schema_version' => 'riasec.lifecycle_copy.v1',
             'content_authority' => 'backend_riasec_lifecycle_assets',
-            'status' => $shareAsset !== [] && $faqAsset !== [] ? 'available' : 'unavailable',
+            'locale' => $normalizedLocale,
+            'status' => $shareAsset !== [] && $faqAsset !== [] && $technicalNoteSummaryAsset !== [] && $professionalMethodBoundaryAsset !== [] ? 'available' : 'unavailable',
             'snapshot_bound' => $snapshotBound,
             'share_pdf_history_asset_id' => (string) ($shareAsset['asset_id'] ?? ''),
             'faq_asset_id' => (string) ($faqAsset['asset_id'] ?? ''),
-            'technical_note_summary_asset_id' => (string) ($this->technicalNoteSummaryAsset()['asset_id'] ?? ''),
-            'professional_method_boundary_asset_id' => (string) ($this->professionalMethodBoundaryAsset()['asset_id'] ?? ''),
+            'technical_note_summary_asset_id' => (string) ($technicalNoteSummaryAsset['asset_id'] ?? ''),
+            'professional_method_boundary_asset_id' => (string) ($professionalMethodBoundaryAsset['asset_id'] ?? ''),
             'surfaces' => $this->normalizedShareSurfaces($shareAsset),
             'faq_items' => $this->normalizedFaqItems($faqAsset),
-            'faq_markdown_reference_available' => $this->faqMarkdownAvailable(),
+            'faq_markdown_reference_available' => $this->faqMarkdownAvailable($normalizedLocale),
             'public_safe_default_surface_keys' => [
                 'share_safe_card',
                 'share_detail_boundary',
@@ -127,49 +138,49 @@ final class RiasecLifecycleCopyService
     /**
      * @return array<string,mixed>
      */
-    private function sharePdfHistoryAsset(): array
+    private function sharePdfHistoryAsset(string $locale): array
     {
-        if ($this->sharePdfHistoryCache !== null) {
-            return $this->sharePdfHistoryCache;
+        if (array_key_exists($locale, $this->sharePdfHistoryCache)) {
+            return $this->sharePdfHistoryCache[$locale];
         }
 
-        return $this->sharePdfHistoryCache = $this->loadJsonAsset(self::SHARE_PDF_HISTORY_ASSET_PATH);
+        return $this->sharePdfHistoryCache[$locale] = $this->loadJsonAsset($this->assetPath(self::SHARE_PDF_HISTORY_ASSET_PATH_TEMPLATE, $locale));
     }
 
     /**
      * @return array<string,mixed>
      */
-    private function faqAsset(): array
+    private function faqAsset(string $locale): array
     {
-        if ($this->faqJsonCache !== null) {
-            return $this->faqJsonCache;
+        if (array_key_exists($locale, $this->faqJsonCache)) {
+            return $this->faqJsonCache[$locale];
         }
 
-        return $this->faqJsonCache = $this->loadJsonAsset(self::FAQ_JSON_ASSET_PATH);
+        return $this->faqJsonCache[$locale] = $this->loadJsonAsset($this->assetPath(self::FAQ_JSON_ASSET_PATH_TEMPLATE, $locale));
     }
 
     /**
      * @return array<string,mixed>
      */
-    private function technicalNoteSummaryAsset(): array
+    private function technicalNoteSummaryAsset(string $locale): array
     {
-        if ($this->technicalNoteSummaryCache !== null) {
-            return $this->technicalNoteSummaryCache;
+        if (array_key_exists($locale, $this->technicalNoteSummaryCache)) {
+            return $this->technicalNoteSummaryCache[$locale];
         }
 
-        return $this->technicalNoteSummaryCache = $this->loadJsonAsset(self::TECHNICAL_NOTE_SUMMARY_ASSET_PATH);
+        return $this->technicalNoteSummaryCache[$locale] = $this->loadJsonAsset($this->assetPath(self::TECHNICAL_NOTE_SUMMARY_ASSET_PATH_TEMPLATE, $locale));
     }
 
     /**
      * @return array<string,mixed>
      */
-    private function professionalMethodBoundaryAsset(): array
+    private function professionalMethodBoundaryAsset(string $locale): array
     {
-        if ($this->professionalMethodBoundaryCache !== null) {
-            return $this->professionalMethodBoundaryCache;
+        if (array_key_exists($locale, $this->professionalMethodBoundaryCache)) {
+            return $this->professionalMethodBoundaryCache[$locale];
         }
 
-        return $this->professionalMethodBoundaryCache = $this->loadJsonAsset(self::PROFESSIONAL_METHOD_BOUNDARY_ASSET_PATH);
+        return $this->professionalMethodBoundaryCache[$locale] = $this->loadJsonAsset($this->assetPath(self::PROFESSIONAL_METHOD_BOUNDARY_ASSET_PATH_TEMPLATE, $locale));
     }
 
     /**
@@ -233,11 +244,31 @@ final class RiasecLifecycleCopyService
         return $items;
     }
 
-    private function faqMarkdownAvailable(): bool
+    private function faqMarkdownAvailable(string $locale): bool
     {
-        $path = base_path(self::FAQ_MARKDOWN_ASSET_PATH);
+        $path = base_path($this->assetPath(self::FAQ_MARKDOWN_ASSET_PATH_TEMPLATE, $locale));
 
         return is_file($path) && trim((string) file_get_contents($path)) !== '';
+    }
+
+    private function assetPath(string $template, string $locale): string
+    {
+        return sprintf($template, $locale);
+    }
+
+    private function normalizeLocale(string $locale): string
+    {
+        $normalized = trim($locale);
+
+        if (str_starts_with(strtolower($normalized), 'en')) {
+            return 'en';
+        }
+
+        if ($normalized === 'zh' || $normalized === 'zh_CN' || $normalized === 'zh-CN') {
+            return 'zh-CN';
+        }
+
+        return in_array($normalized, self::SUPPORTED_LOCALES, true) ? $normalized : self::DEFAULT_LOCALE;
     }
 
     /**

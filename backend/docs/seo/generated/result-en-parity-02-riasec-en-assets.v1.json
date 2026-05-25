@@ -1,0 +1,178 @@
+{
+  "pr_id": "RESULT-EN-PARITY-02",
+  "title": "RIASEC result/report English asset catalog",
+  "family": "riasec",
+  "generated_at": "2026-05-25T00:00:00Z",
+  "authority": {
+    "backend_result_asset_catalog_is_authority": true,
+    "frontend_fallback_is_authority": false,
+    "production_cms_mutation": false,
+    "production_user_data_access": false,
+    "deployment": false,
+    "search_submission": false
+  },
+  "english_runtime_policy": "fail_closed_no_zh_fallback",
+  "implemented_runtime_surface": {
+    "service": "App\\Services\\Riasec\\RiasecLifecycleCopyService",
+    "default_locale_preserved": "zh-CN",
+    "explicit_english_locale": "en",
+    "missing_english_behavior": "unavailable_empty_assets_no_zh_fallback",
+    "frontend_fallback_allowed": false,
+    "fallback_behavior": "omit_module_fail_closed"
+  },
+  "prepared_english_assets": [
+    "share_pdf_history_v1.en",
+    "faq_v1.en",
+    "faq_v1.en.md",
+    "technical_note_user_summary_v1.en",
+    "professional_method_boundary_v1.en"
+  ],
+  "prepared_asset_files": [
+    "backend/content_assets/riasec/share_pdf_history_v1.en.json",
+    "backend/content_assets/riasec/faq_v1.en.json",
+    "backend/content_assets/riasec/faq_v1.en.md",
+    "backend/content_assets/riasec/technical_note_user_summary_v1.en.json",
+    "backend/content_assets/riasec/professional_method_boundary_v1.en.json"
+  ],
+  "prepared_asset_status": "draft_authority_candidate_human_review_required",
+  "asset_matrix": [
+    {
+      "asset_key": "share_pdf_history_v1",
+      "surfaces": ["share", "pdf", "history"],
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "claim_boundary": "interest-signal, not career recommendation"
+    },
+    {
+      "asset_key": "faq_v1",
+      "surfaces": ["faq", "result", "report"],
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "claim_boundary": "interest-signal, not career recommendation"
+    },
+    {
+      "asset_key": "technical_note_user_summary_v1",
+      "surfaces": ["result", "report", "method_boundary"],
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "claim_boundary": "measurement boundary, not ability or success prediction"
+    },
+    {
+      "asset_key": "professional_method_boundary_v1",
+      "surfaces": ["report", "professional_boundary"],
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "claim_boundary": "restricted use, not screening, diagnosis, or career-success prediction"
+    }
+  ],
+  "deferred_assets": [
+    {
+      "asset_key": "140q_task_environment_role_v1",
+      "zh_file": "backend/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl",
+      "reason": "large 140Q task/environment/role prose requires batch translation and human review"
+    },
+    {
+      "asset_key": "activity_task_examples_v1",
+      "zh_file": "backend/content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl",
+      "reason": "occupation/activity examples require source and claim-boundary review"
+    },
+    {
+      "asset_key": "aspirations_calibration_v1",
+      "zh_file": "backend/content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl",
+      "reason": "aspiration guidance is substantial user-facing prose"
+    },
+    {
+      "asset_key": "dimension_deep_copy_v1",
+      "zh_file": "backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json",
+      "reason": "deep dimension interpretation requires reviewed English content batch"
+    },
+    {
+      "asset_key": "disagree_path_v1",
+      "zh_file": "backend/content_assets/riasec/disagree_path_v1.zh-CN.jsonl",
+      "reason": "disagreement-path guidance requires reviewed English content batch"
+    },
+    {
+      "asset_key": "feedback_action_lab_v1",
+      "zh_file": "backend/content_assets/riasec/feedback_action_lab_v1.zh-CN.jsonl",
+      "reason": "Action Lab copy must remain exploratory and needs human review"
+    },
+    {
+      "asset_key": "low_quality_cautious_reading_v1",
+      "zh_file": "backend/content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json",
+      "reason": "low-quality result guidance affects interpretation and should be reviewed"
+    },
+    {
+      "asset_key": "near_tie_alternate_code_copy_v1",
+      "zh_file": "backend/content_assets/riasec/near_tie_alternate_code_copy_v1.zh-CN.json",
+      "reason": "near-tie interpretation requires reviewed English content batch"
+    },
+    {
+      "asset_key": "next_exploration_nodes_v1",
+      "zh_file": "backend/content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl",
+      "reason": "next-step exploration copy should be reviewed before activation"
+    },
+    {
+      "asset_key": "occupation_examples_boundary_v1",
+      "zh_file": "backend/content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl",
+      "reason": "occupation examples need source and no-match language review"
+    },
+    {
+      "asset_key": "pair_blend_15_pairs_v1",
+      "zh_file": "backend/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl",
+      "reason": "pair-blend interpretation is substantial prose"
+    },
+    {
+      "asset_key": "profile_shape_copy_v1",
+      "zh_file": "backend/content_assets/riasec/profile_shape_copy_v1.zh-CN.json",
+      "reason": "profile-shape interpretation requires reviewed English counterpart"
+    },
+    {
+      "asset_key": "top3_code_chain_strategy_v1",
+      "zh_file": "backend/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl",
+      "reason": "Top 3 code-chain interpretation is large report prose"
+    },
+    {
+      "asset_key": "top_code_confidence_copy_v1",
+      "zh_file": "backend/content_assets/riasec/top_code_confidence_copy_v1.zh-CN.json",
+      "reason": "confidence copy affects result interpretation and should be reviewed"
+    }
+  ],
+  "claim_boundary": {
+    "allowed": [
+      "interest signal",
+      "work-activity tendency",
+      "exploratory guidance",
+      "low-risk validation step",
+      "not an ability score",
+      "not a career recommendation"
+    ],
+    "forbidden": [
+      "precise career recommendation",
+      "best career for you",
+      "hiring suitability",
+      "job fit guarantee",
+      "career success prediction",
+      "salary prediction",
+      "diagnosis",
+      "treatment",
+      "cure"
+    ]
+  },
+  "validation_targets": [
+    "php artisan test --filter=ResultEnParity02RiasecEnAssets --no-ansi",
+    "php artisan route:list --no-ansi",
+    "vendor/bin/pint --test",
+    "composer validate --strict",
+    "composer audit --locked --no-interaction --ignore-unreachable",
+    "python3 -m json.tool backend/docs/seo/generated/result-en-parity-02-riasec-en-assets.v1.json"
+  ],
+  "decision": "riasec_lifecycle_en_assets_prepared_fail_closed_with_deferred_deep_assets"
+}
