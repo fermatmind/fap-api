@@ -18618,11 +18618,11 @@
     "EN-PARITY-01": {
       "repo": "fap-api",
       "branch": "codex/en-parity-01-url-truth-canonical",
-      "status": "in_progress",
+      "status": "local_validation_passed",
       "depends_on": [
         "EN-PARITY-00"
       ],
-      "commit_sha": null,
+      "commit_sha": "fd3395819741b33ee3a3c551d272151f03ddb3f2",
       "pr_url": null,
       "checks": {
         "dependency_en_parity_00": {
@@ -18677,6 +18677,11 @@
           "at": "2026-05-25T12:42:00+08:00",
           "status": "local_validation_passed_with_external_sidecar",
           "summary": "Focused EN-PARITY-01 validation and common backend checks passed. Broad SeoIntel filter failures were reproduced on clean origin/main and recorded as external sidecar."
+        },
+        {
+          "at": "2026-05-25T12:47:00+08:00",
+          "status": "committed",
+          "summary": "Committed EN-PARITY-01 scoped authority baseline changes at fd3395819741b33ee3a3c551d272151f03ddb3f2."
         }
       ]
     }
