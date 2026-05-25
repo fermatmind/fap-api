@@ -8039,7 +8039,7 @@
       "depends_on": [
         "AUDIT-API-ARTICLE-PUBLISH-GATE"
       ],
-      "status": "local_validation_passed",
+      "status": "pr_open_github_checks_pending",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): scope ops release failure audits by org",
@@ -19270,8 +19270,8 @@
       "depends_on": [
         "EN-PARITY-04"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "baebe089",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1676",
       "checks": {
         "dependency_en_parity_04": {
           "status": "pass",
@@ -19324,6 +19324,11 @@
           "at": "2026-05-25T07:36:00Z",
           "status": "local_validation_passed",
           "summary": "EN-PARITY-05 focused test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, and diff checks passed locally."
+        },
+        {
+          "at": "2026-05-25T07:40:00Z",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1676 for EN-PARITY-05 and pushed branch codex/en-parity-05-career-guides; waiting for GitHub checks."
         }
       ]
     },
