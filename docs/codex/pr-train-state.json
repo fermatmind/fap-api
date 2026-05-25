@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T00:20:00+08:00",
+  "updated_at": "2026-05-26T01:05:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -19845,10 +19845,14 @@
     "GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00": {
       "repo": "fap-api",
       "branch": "codex/global-en-zh-full-content-authority-translation-matrix-00",
-      "status": "local_validation_passed",
-      "commit_sha": null,
-      "pr_url": null,
+      "status": "merged",
+      "commit_sha": "4374e8ae4fd79540c68f5b6f49eac999ed9bca92",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1690",
       "checks": {
+        "github_merge_reconciliation": {
+          "status": "pass",
+          "evidence": "GitHub PR #1690 is merged, origin/main contains merge commit 4374e8ae4fd79540c68f5b6f49eac999ed9bca92, the remote branch is deleted, and the local task branch/worktree were cleaned up."
+        },
         "scope_boundary": {
           "status": "pass",
           "evidence": "Changed files are limited to the current task report, generated JSON/batch plan, focused SeoIntel test, and authorized train manifest/state metadata."
@@ -19877,9 +19881,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T16:53:34Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "events": [
         {
@@ -19891,6 +19895,423 @@
           "at": "2026-05-26T00:20:00+08:00",
           "status": "local_validation_passed",
           "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff check, cached diff check, and fap-web reference status passed in the isolated worktree."
+        },
+        {
+          "at": "2026-05-26T01:05:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled PR #1690 as merged before registering translation batch train items."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-CONTENT-PAGES-TRANSLATION-BATCH-01": {
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-content-pages-translation-batch-01",
+      "base": "main",
+      "status": "manifest_registered",
+      "depends_on": [
+        "GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00"
+      ],
+      "title": "GLOBAL-EN-ZH-CONTENT-PAGES-TRANSLATION-BATCH-01 human-reviewed content/help/policy English translation batch",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        }
+      },
+      "scope": {
+        "allowed_files": [
+          "content_baselines/content_pages/**",
+          "backend/docs/seo/global-en-zh-content-pages-translation-batch-01.md",
+          "backend/docs/seo/generated/global-en-zh-content-pages-translation-batch-01.v1.json",
+          "backend/docs/seo/import-packages/global-en-zh-content-pages-translation-batch-01.import.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesTranslationBatch01Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "pseo_generation": false,
+        "draft_translation_only": true,
+        "human_review_required": true,
+        "frontend_fallback_authority": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "next_task": "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02",
+      "events": [
+        {
+          "at": "2026-05-26T01:05:00+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered content/help/policy translation batch as draft/import-only, human-review-required, no-publish/no-CMS-mutation scope."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02": {
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-article-translation-batch-02",
+      "base": "main",
+      "status": "manifest_registered",
+      "depends_on": [
+        "GLOBAL-EN-ZH-CONTENT-PAGES-TRANSLATION-BATCH-01"
+      ],
+      "title": "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02 human-reviewed article counterpart translation batch",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        }
+      },
+      "scope": {
+        "allowed_files": [
+          "content_baselines/articles/**",
+          "backend/docs/seo/global-en-zh-article-translation-batch-02.md",
+          "backend/docs/seo/generated/global-en-zh-article-translation-batch-02.v1.json",
+          "backend/docs/seo/import-packages/global-en-zh-article-translation-batch-02.import.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhArticleTranslationBatch02Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "pseo_generation": false,
+        "draft_translation_only": true,
+        "human_review_required": true,
+        "frontend_fallback_authority": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "next_task": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03",
+      "events": [
+        {
+          "at": "2026-05-26T01:05:00+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered article translation batch as draft/import-only, human-review-required, no-publish/no-CMS-mutation scope."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03": {
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-topic-test-landing-batch-03",
+      "base": "main",
+      "status": "manifest_registered",
+      "depends_on": [
+        "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02"
+      ],
+      "title": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03 topic and test landing authority translation/readiness batch",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        }
+      },
+      "scope": {
+        "allowed_files": [
+          "content_baselines/topics/**",
+          "content_baselines/landing_surfaces/**",
+          "backend/database/seeders/ScaleRegistrySeeder.php",
+          "backend/docs/seo/global-en-zh-topic-test-landing-batch-03.md",
+          "backend/docs/seo/generated/global-en-zh-topic-test-landing-batch-03.v1.json",
+          "backend/docs/seo/import-packages/global-en-zh-topic-test-landing-batch-03.import.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhTopicTestLandingBatch03Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "pseo_generation": false,
+        "draft_translation_only": true,
+        "human_review_required": true,
+        "frontend_fallback_authority": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "next_task": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04",
+      "events": [
+        {
+          "at": "2026-05-26T01:05:00+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered topic/test landing translation-readiness batch with backend authority and no frontend fallback scope."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04": {
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-research-claim-review-batch-04",
+      "base": "main",
+      "status": "manifest_registered",
+      "depends_on": [
+        "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03"
+      ],
+      "title": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04 research report translation and claim-boundary review package",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        }
+      },
+      "scope": {
+        "allowed_files": [
+          "backend/docs/seo/global-en-zh-research-claim-review-batch-04.md",
+          "backend/docs/seo/generated/global-en-zh-research-claim-review-batch-04.v1.json",
+          "backend/docs/seo/import-packages/global-en-zh-research-claim-review-batch-04.import.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhResearchClaimReviewBatch04Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "pseo_generation": false,
+        "draft_translation_only": true,
+        "human_review_required": true,
+        "frontend_fallback_authority": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "next_task": "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05",
+      "events": [
+        {
+          "at": "2026-05-26T01:05:00+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered research translation/claim review batch with salary, turnover, Dataset/Article schema, and no-publish boundaries."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05": {
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-career-content-batch-05",
+      "base": "main",
+      "status": "manifest_registered",
+      "depends_on": [
+        "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04"
+      ],
+      "title": "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05 career guides/jobs translation group and import-readiness batch",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        }
+      },
+      "scope": {
+        "allowed_files": [
+          "content_baselines/career_guides/**",
+          "content_baselines/career_jobs/**",
+          "backend/docs/seo/global-en-zh-career-content-batch-05.md",
+          "backend/docs/seo/generated/global-en-zh-career-content-batch-05.v1.json",
+          "backend/docs/seo/import-packages/global-en-zh-career-content-batch-05.import.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhCareerContentBatch05Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "pseo_generation": false,
+        "draft_translation_only": true,
+        "human_review_required": true,
+        "frontend_fallback_authority": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "next_task": "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06",
+      "events": [
+        {
+          "at": "2026-05-26T01:05:00+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered career content translation group/import-readiness batch with career claim-boundary and no sitemap/llms exposure requirements."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06": {
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-result-report-asset-batch-06",
+      "base": "main",
+      "status": "manifest_registered",
+      "depends_on": [
+        "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05"
+      ],
+      "title": "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06 result/report English asset translation and no-zh-fallback batch",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        }
+      },
+      "scope": {
+        "allowed_files": [
+          "backend/content_assets/**",
+          "backend/content_packs/**",
+          "backend/docs/seo/global-en-zh-result-report-asset-batch-06.md",
+          "backend/docs/seo/generated/global-en-zh-result-report-asset-batch-06.v1.json",
+          "backend/docs/seo/import-packages/global-en-zh-result-report-asset-batch-06.import.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhResultReportAssetBatch06Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "pseo_generation": false,
+        "draft_translation_only": true,
+        "human_review_required": true,
+        "frontend_fallback_authority": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "next_task": "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07",
+      "events": [
+        {
+          "at": "2026-05-26T01:05:00+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered result/report asset translation batch with no-zh-fallback, private-result safety, and no-publish boundaries."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07": {
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-media-alt-visual-review-batch-07",
+      "base": "main",
+      "status": "manifest_registered",
+      "depends_on": [
+        "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06"
+      ],
+      "title": "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07 media alt/OG visual OCR and locale variant batch",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        }
+      },
+      "scope": {
+        "allowed_files": [
+          "content_baselines/media_assets/**",
+          "backend/docs/seo/global-en-zh-media-alt-visual-review-batch-07.md",
+          "backend/docs/seo/generated/global-en-zh-media-alt-visual-review-batch-07.v1.json",
+          "backend/docs/seo/import-packages/global-en-zh-media-alt-visual-review-batch-07.import.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhMediaAltVisualReviewBatch07Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "pseo_generation": false,
+        "draft_translation_only": true,
+        "human_review_required": true,
+        "frontend_fallback_authority": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "next_task": "GLOBAL-EN-ZH-GLOBAL-UI-I18N-BATCH-08",
+      "events": [
+        {
+          "at": "2026-05-26T01:05:00+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered media alt/OG visual review batch with OCR/human-review and no frontend public asset publication boundaries."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-GLOBAL-UI-I18N-BATCH-08": {
+      "repo": "fap-web",
+      "branch": "codex/global-en-zh-global-ui-i18n-batch-08",
+      "base": "main",
+      "status": "manifest_registered",
+      "depends_on": [
+        "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07"
+      ],
+      "title": "GLOBAL-EN-ZH-GLOBAL-UI-I18N-BATCH-08 global UI i18n parity review and frontend consumer follow-up",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        }
+      },
+      "scope": {
+        "allowed_files": [
+          "lib/i18n/dict/**",
+          "lib/i18n/locales/**",
+          "lib/navigation/headerDropdownMenus.ts",
+          "components/layout/SiteFooter.tsx",
+          "tests/contracts/**",
+          "tests/e2e/**",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "pseo_generation": false,
+        "draft_translation_only": false,
+        "human_review_required": true,
+        "frontend_fallback_authority": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "next_task": "GLOBAL-EN-ZH-FULL-PARITY-VERIFY-POST-BATCH",
+      "events": [
+        {
+          "at": "2026-05-26T01:05:00+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered fap-web global UI i18n parity batch; backend/CMS/content authority remains source of truth and frontend fallback authority is forbidden."
         }
       ]
     }
