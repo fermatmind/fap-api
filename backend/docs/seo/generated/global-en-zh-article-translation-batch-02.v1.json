@@ -1,0 +1,142 @@
+{
+  "schema_version": "global-en-zh-article-translation-batch-02.v1",
+  "task": "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02",
+  "generated_at": "2026-05-26T01:44:40+08:00",
+  "final_decision": "article_translation_batch_completed_ready_for_human_review",
+  "source_matrix_task": "GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00",
+  "missing_en_article_count": 6,
+  "draft_article_count": 6,
+  "deferred_count": 0,
+  "blocked_count": 0,
+  "human_review_required_count": 6,
+  "claim_review_required_count": 6,
+  "reference_review_required_count": 6,
+  "sitemap_eligible_count": 0,
+  "llms_eligible_count": 0,
+  "footer_or_nav_eligible_count": 0,
+  "search_channel_eligible_count": 0,
+  "draft_article_slugs": [
+    "are-infj-men-rare-or-socially-silenced",
+    "best-valentines-date-by-personality-and-relationship-science",
+    "childhood-dream-job-still-shapes-career-choice",
+    "how-16-personality-types-talk-to-an-ai-coach",
+    "how-personality-shapes-attitude-toward-ai",
+    "which-love-script-fits-you-best"
+  ],
+  "missing_en_counterparts": [
+    {
+      "asset_key": "are-infj-men-rare-or-socially-silenced",
+      "source_zh_slug": "are-infj-men-rare-or-socially-silenced",
+      "proposed_en_slug": "are-infj-men-rare-or-socially-silenced",
+      "required_action": "translate_draft_needed",
+      "draft_status": "created_for_human_review"
+    },
+    {
+      "asset_key": "best-valentines-date-by-personality-and-relationship-science",
+      "source_zh_slug": "best-valentines-date-by-personality-and-relationship-science",
+      "proposed_en_slug": "best-valentines-date-by-personality-and-relationship-science",
+      "required_action": "translate_draft_needed",
+      "draft_status": "created_for_human_review"
+    },
+    {
+      "asset_key": "childhood-dream-job-still-shapes-career-choice",
+      "source_zh_slug": "childhood-dream-job-still-shapes-career-choice",
+      "proposed_en_slug": "childhood-dream-job-still-shapes-career-choice",
+      "required_action": "translate_draft_needed",
+      "draft_status": "created_for_human_review"
+    },
+    {
+      "asset_key": "how-16-personality-types-talk-to-an-ai-coach",
+      "source_zh_slug": "how-16-personality-types-talk-to-an-ai-coach",
+      "proposed_en_slug": "how-16-personality-types-talk-to-an-ai-coach",
+      "required_action": "translate_draft_needed",
+      "draft_status": "created_for_human_review"
+    },
+    {
+      "asset_key": "how-personality-shapes-attitude-toward-ai",
+      "source_zh_slug": "how-personality-shapes-attitude-toward-ai",
+      "proposed_en_slug": "how-personality-shapes-attitude-toward-ai",
+      "required_action": "translate_draft_needed",
+      "draft_status": "created_for_human_review"
+    },
+    {
+      "asset_key": "which-love-script-fits-you-best",
+      "source_zh_slug": "which-love-script-fits-you-best",
+      "proposed_en_slug": "which-love-script-fits-you-best",
+      "required_action": "translate_draft_needed",
+      "draft_status": "created_for_human_review"
+    }
+  ],
+  "claim_boundary_findings": [
+    {
+      "asset_key": "are-infj-men-rare-or-socially-silenced",
+      "claim_boundary_state": "claim_review_required_personality_and_gender_norms",
+      "claim_review_required": true,
+      "notes": [
+        "Do not present INFJ male rarity as a verified population statistic.",
+        "Keep the framing about visibility, social norms, and expression cost rather than diagnostic or deterministic claims."
+      ],
+      "unsupported_claims_added": false
+    },
+    {
+      "asset_key": "best-valentines-date-by-personality-and-relationship-science",
+      "claim_boundary_state": "claim_review_required_relationship_science",
+      "claim_review_required": true,
+      "notes": [
+        "Do not promise relationship success or compatibility outcomes.",
+        "Keep date suggestions framed as exploratory design guidance, not prescriptions."
+      ],
+      "unsupported_claims_added": false
+    },
+    {
+      "asset_key": "childhood-dream-job-still-shapes-career-choice",
+      "claim_boundary_state": "claim_review_required_career_direction_boundary",
+      "claim_review_required": true,
+      "notes": [
+        "Do not claim childhood aspirations predict job success or best-fit careers.",
+        "Use career-direction and person-environment-fit framing only."
+      ],
+      "unsupported_claims_added": false
+    },
+    {
+      "asset_key": "how-16-personality-types-talk-to-an-ai-coach",
+      "claim_boundary_state": "claim_review_required_ai_advice_boundary",
+      "claim_review_required": true,
+      "notes": [
+        "Do not present AI coaching as therapy, diagnosis, treatment, or a substitute for human responsibility.",
+        "Keep 16-type statements as tendencies, not deterministic instructions."
+      ],
+      "unsupported_claims_added": false
+    },
+    {
+      "asset_key": "how-personality-shapes-attitude-toward-ai",
+      "claim_boundary_state": "claim_review_required_ai_and_personality_boundary",
+      "claim_review_required": true,
+      "notes": [
+        "Do not claim personality determines whether someone should use AI.",
+        "Do not present AI as a replacement for professional, legal, clinical, or career judgment."
+      ],
+      "unsupported_claims_added": false
+    },
+    {
+      "asset_key": "which-love-script-fits-you-best",
+      "claim_boundary_state": "claim_review_required_relationship_matching_boundary",
+      "claim_review_required": true,
+      "notes": [
+        "Do not promise perfect matching or relationship outcomes.",
+        "Keep 16-type references as exploratory entry points, not compatibility rules."
+      ],
+      "unsupported_claims_added": false
+    }
+  ],
+  "import_package_path": "backend/docs/seo/import-packages/global-en-zh-article-translation-batch-02.import.v1.json",
+  "generated_markdown_report_path": "backend/docs/seo/global-en-zh-article-translation-batch-02.md",
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_pseo_generation": true,
+  "no_frontend_fallback_authority": true,
+  "next_task": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03"
+}

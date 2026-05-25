@@ -19907,13 +19907,13 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-content-pages-translation-batch-01",
       "base": "main",
-      "status": "local_validation_passed",
+      "status": "merged",
       "depends_on": [
         "GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00"
       ],
       "title": "GLOBAL-EN-ZH-CONTENT-PAGES-TRANSLATION-BATCH-01 human-reviewed content/help/policy English translation batch",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "9f239b8df69878664de145e6d60122efaeda93f2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1692",
       "checks": {
         "manifest_registration": {
           "status": "pass",
@@ -19951,6 +19951,10 @@
             "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3564 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed."
+        },
+        "github_checks": {
+          "status": "pass",
+          "evidence": "PR #1692 merged after required GitHub checks succeeded and mergeStateStatus was CLEAN; origin/main contains merge commit 9f239b8df69878664de145e6d60122efaeda93f2."
         }
       },
       "scope": {
@@ -19974,9 +19978,9 @@
         "frontend_fallback_authority": false
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T17:35:54Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "next_task": "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02",
       "events": [
@@ -19994,6 +19998,11 @@
           "at": "2026-05-26T01:50:00+08:00",
           "status": "local_validation_passed",
           "summary": "Batch-01 focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff checks, and fap-web reference status passed."
+        },
+        {
+          "at": "2026-05-26T01:44:40+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled Batch-01 after PR #1692 merge; remote branch deleted and local task branch cleanup completed before Batch-02 continued."
         }
       ]
     },
@@ -20001,17 +20010,51 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-article-translation-batch-02",
       "base": "main",
-      "status": "manifest_registered",
+      "status": "local_validation_passed",
       "depends_on": [
         "GLOBAL-EN-ZH-CONTENT-PAGES-TRANSLATION-BATCH-01"
       ],
-      "title": "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02 human-reviewed article counterpart translation batch",
+      "title": "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02 article English counterpart draft package",
       "commit_sha": null,
       "pr_url": null,
       "checks": {
         "manifest_registration": {
           "status": "pass",
           "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        },
+        "scope_boundary": {
+          "status": "pending_validation",
+          "changed_files": [
+            "backend/docs/seo/global-en-zh-article-translation-batch-02.md",
+            "backend/docs/seo/generated/global-en-zh-article-translation-batch-02.v1.json",
+            "backend/docs/seo/import-packages/global-en-zh-article-translation-batch-02.import.v1.json",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhArticleTranslationBatch02Test.php",
+            "docs/codex/pr-train.yaml",
+            "docs/codex/pr-train-state.json"
+          ],
+          "evidence": "Generated Batch-02 report, generated summary, draft/import package, focused SeoIntel test, and current task state ledger only."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No CMS mutation, publish, deploy, Search Channel action, URL submission, pSEO generation, fap-web mutation, env/DNS/nginx edit, production migration, raw log read, or production user data access performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=GlobalEnZhArticleTranslationBatch02 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-article-translation-batch-02.v1.json >/dev/null",
+            "python3 -m json.tool backend/docs/seo/import-packages/global-en-zh-article-translation-batch-02.import.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check",
+            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          ],
+          "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3565 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed."
         }
       },
       "scope": {
@@ -20045,6 +20088,16 @@
           "at": "2026-05-26T01:05:00+08:00",
           "status": "manifest_registered",
           "summary": "Registered article translation batch as draft/import-only, human-review-required, no-publish/no-CMS-mutation scope."
+        },
+        {
+          "at": "2026-05-26T01:44:40+08:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Generated Batch-02 article draft/import package, generated summary, Markdown report, focused test, and Batch-01 merge reconciliation."
+        },
+        {
+          "at": "2026-05-26T01:45:52+08:00",
+          "status": "local_validation_passed",
+          "summary": "Batch-02 focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff checks, and fap-web reference status passed."
         }
       ]
     },
