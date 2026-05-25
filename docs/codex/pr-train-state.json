@@ -24867,7 +24867,7 @@
       ]
     },
     "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01": {
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-article-counterpart-batch-01",
       "base": "main",
@@ -24875,8 +24875,8 @@
         "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01"
       ],
       "title": "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01 article counterpart controlled batch",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "15abe18b480a48e3c449ea828ae7d170d16f86b2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1685",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -24917,7 +24917,8 @@
           "evidence": "All local validation commands passed before staging."
         },
         "github_required_checks": {
-          "status": "pending"
+          "status": "pending",
+          "evidence": "PR #1685 opened; GitHub checks pending."
         }
       },
       "history": [
@@ -24935,6 +24936,11 @@
           "at": "2026-05-25T21:45:48+08:00",
           "status": "local_validation_passed",
           "summary": "Article counterpart batch report, generated JSON, and focused test passed local validation; no publishing or CMS mutation performed."
+        },
+        {
+          "at": "2026-05-25T21:47:06+08:00",
+          "status": "pr_open",
+          "summary": "Opened fap-api PR #1685 for article counterpart controlled batch."
         }
       ]
     },
