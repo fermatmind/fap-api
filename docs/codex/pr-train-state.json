@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T07:58:00+00:00",
+  "updated_at": "2026-05-25T08:30:00+00:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -6965,7 +6965,7 @@
       "branch": "fix/career-2786-final-readiness-software-manual-hold-authority-1",
       "title": "fix(api): account software manual hold in 2786 readiness",
       "name": "Account software-developers manual-hold decision in final 2786 readiness",
-      "status": "pr_open_github_checks_pending",
+      "status": "merged",
       "depends_on": [
         "SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1",
         "REPAIR-2786-FINAL-READINESS-PUBLIC-OWNER-PARTITION-AUTHORITY-1"
@@ -18458,7 +18458,7 @@
       "branch": "codex/seo-growth-mbti-action-01d-scan-00",
       "status": "merged",
       "depends_on": [],
-      "commit_sha": null,
+      "commit_sha": "a645027083018ad49442bd0b95e718f1ee1fa135",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1661",
       "checks": {
         "scope_boundary": {
@@ -18697,7 +18697,7 @@
       "depends_on": [
         "EN-PARITY-00"
       ],
-      "commit_sha": "4a7c701dd232a6778801a2f386222fe7a564bb01",
+      "commit_sha": "a93345e5a24f1f579495bcfd78f30b4c5984bd1a",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1666",
       "checks": {
         "dependency_en_parity_00": {
@@ -18728,14 +18728,14 @@
           "evidence": "Focused test passed with 1 test and 151 assertions. route:list exited 0 with 203 routes. Pint passed 3537 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON, manifest/state parsing, and git diff --check passed."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": "PR #1666 is open; GitHub checks are pending."
+          "status": "pass",
+          "evidence": "PR #1666 is MERGED and origin/main contains merge commit a93345e5a24f1f579495bcfd78f30b4c5984bd1a."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T04:52:08Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "title": "Private result runtime pages not accessed",
@@ -18763,6 +18763,68 @@
           "at": "2026-05-25T07:58:00+00:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1666 for RESULT-EN-PARITY-00 result/report content inventory; waiting for GitHub checks. No production mutation, CMS mutation, deploy, URL submission, or fap-web commit performed."
+        },
+        {
+          "at": "2026-05-25T08:30:00+00:00",
+          "status": "ledger_reconciled_merged",
+          "summary": "Reconciled RESULT-EN-PARITY-00 before RESULT-EN-PARITY-01: GitHub reports PR #1666 merged and origin/main contains merge commit a93345e5a24f1f579495bcfd78f30b4c5984bd1a."
+        }
+      ]
+    },
+    "RESULT-EN-PARITY-01": {
+      "repo": "fap-api",
+      "branch": "codex/result-en-parity-01-asset-catalog-gate",
+      "status": "local_validation_passed",
+      "depends_on": [
+        "RESULT-EN-PARITY-00"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency_result_en_parity_00": {
+          "status": "pass",
+          "evidence": "PR #1666 is MERGED and origin/main contains merge commit a93345e5a24f1f579495bcfd78f30b4c5984bd1a."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Planned files are limited to SeoIntel result parity gate service, generated artifact, report, focused test, and PR-train manifest/state."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No production mutation, CMS mutation, deploy, production migration, URL submission, production user data access, or fap-web commit."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=ResultEnParity01AssetCatalogGate --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/result-en-parity-01-asset-catalog-gate.v1.json >/dev/null",
+            "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
+            "git diff --check",
+            "git diff --cached --check",
+            "git diff --name-only origin/main...HEAD"
+          ],
+          "evidence": "Focused test passed with 3 tests and 601 assertions. route:list exited 0 with 203 routes. Pint passed 3540 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, manifest/state parse, and git diff --check passed. fap-web reference status was inspected and only unrelated .playwright-mcp/ was untracked."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "events": [
+        {
+          "at": "2026-05-25T08:30:00+00:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Generated RESULT-EN-PARITY-01 backend asset catalog gate service, generated JSON, report, focused test, and authorized manifest/state entry. No translation, runtime rendering change, scoring change, CMS mutation, production mutation, deploy, URL submission, or fap-web commit performed."
+        },
+        {
+          "at": "2026-05-25T08:45:00+00:00",
+          "status": "local_validation_passed",
+          "summary": "RESULT-EN-PARITY-01 focused test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, fap-web reference status, and diff check passed locally."
         }
       ]
     }
