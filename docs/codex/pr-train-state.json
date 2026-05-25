@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T07:52:14+08:00",
+  "updated_at": "2026-05-26T07:53:17+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -20469,13 +20469,13 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-result-report-asset-batch-06",
       "base": "main",
-      "status": "local_validation_passed",
+      "status": "pr_opened",
       "depends_on": [
         "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05"
       ],
       "title": "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06 result report English asset draft package",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "bf69fddc5cac4bb9eb148d2b510370da1fc4e514",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1697",
       "checks": {
         "manifest_registration": {
           "status": "pass",
@@ -20502,6 +20502,10 @@
             "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "All Batch-06 local validation commands passed; focused test reported 1 warning in isolated env but 343 assertions completed with no failures."
+        },
+        "pull_request": {
+          "status": "pass",
+          "evidence": "Opened PR #1697 after Batch-06 local validation passed."
         }
       },
       "scope": {
@@ -20546,6 +20550,11 @@
           "at": "2026-05-26T07:52:14+08:00",
           "status": "local_validation_passed",
           "summary": "Batch-06 focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff checks, and fap-web reference status passed."
+        },
+        {
+          "at": "2026-05-26T07:53:17+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1697 for Batch-06 after local validation passed."
         }
       ]
     },
