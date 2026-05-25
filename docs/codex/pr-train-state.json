@@ -7922,7 +7922,7 @@
       "depends_on": [
         "AUDIT-API-CAREER-ARTIFACT-READINESS"
       ],
-      "status": "pr_open_github_checks_pending",
+      "status": "merged",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): require editorial approval for controlled article publish",
@@ -8039,7 +8039,7 @@
       "depends_on": [
         "AUDIT-API-ARTICLE-PUBLISH-GATE"
       ],
-      "status": "local_validation_passed",
+      "status": "pr_open_github_checks_pending",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): scope ops release failure audits by org",
@@ -19195,7 +19195,7 @@
       "depends_on": [
         "EN-PARITY-03"
       ],
-      "commit_sha": "042f5f45",
+      "commit_sha": "bff0c6a41d7fb5f95f8f006019f20c9f5782f161",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1674",
       "checks": {
         "dependency_en_parity_03": {
@@ -19231,13 +19231,13 @@
           "evidence": "Focused php artisan test --filter=EnParity04 --no-ansi passed; php artisan test --filter=ArticleBaselineImportTest --no-ansi passed; php artisan route:list --no-ansi passed; vendor/bin/pint --test passed; composer validate --strict passed; composer audit --locked --no-interaction --ignore-unreachable passed; generated JSON parsed; PR-train YAML/state JSON parsed; git diff --check and git diff --cached --check passed."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": "PR #1674 passed hygiene, supply-chain, Semgrep blocking secrets, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2; GitHub mergeStateStatus was CLEAN and PR #1674 was squash-merged as bff0c6a41d7fb5f95f8f006019f20c9f5782f161."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-25T07:18:00Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "sidecar_issues": [],
       "events": [
@@ -19255,6 +19255,80 @@
           "at": "2026-05-25T07:24:00Z",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1674 for EN-PARITY-04 and pushed branch codex/en-parity-04-articles; waiting for GitHub checks."
+        },
+        {
+          "at": "2026-05-25T07:18:00Z",
+          "status": "merged",
+          "summary": "PR #1674 was squash-merged into main as bff0c6a41d7fb5f95f8f006019f20c9f5782f161 and the remote branch was deleted. No post-merge cleanup script exists in this repository."
+        }
+      ]
+    },
+    "EN-PARITY-05": {
+      "repo": "fap-api",
+      "branch": "codex/en-parity-05-career-guides",
+      "status": "local_validation_passed",
+      "depends_on": [
+        "EN-PARITY-04"
+      ],
+      "commit_sha": "baebe089",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1676",
+      "checks": {
+        "dependency_en_parity_04": {
+          "status": "pass",
+          "evidence": "PR #1674 is MERGED and origin/main contains merge commit bff0c6a41d7fb5f95f8f006019f20c9f5782f161."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Changed files are limited to EN-PARITY-05 report/generated JSON/focused test and current PR-train manifest/state."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No production CMS mutation, production migration, deploy, URL submission, Search Channel action, secrets access, or fap-web commit."
+        },
+        "content_generation_boundary": {
+          "status": "pass",
+          "evidence": "EN-PARITY-05 lands an import-readiness package and metadata gate only. Repo baseline already has complete EN/ZH career guide guide_code parity; production exposure remains controlled/deferred."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=EnParity05 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/en-parity-05-career-guide-detail-import-package.v1.json >/dev/null",
+            "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "evidence": "Focused php artisan test --filter=EnParity05 --no-ansi passed; php artisan route:list --no-ansi passed; vendor/bin/pint --test passed; composer validate --strict passed; composer audit --locked --no-interaction --ignore-unreachable passed; generated JSON parsed; PR-train YAML/state JSON parsed; git diff --check and git diff --cached --check passed."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": null
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "events": [
+        {
+          "at": "2026-05-25T07:30:00Z",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Started EN-PARITY-05 after EN-PARITY-04 merged. Added career guide detail import-readiness package, focused test, and current manifest/state entry. No production or fap-web mutation performed."
+        },
+        {
+          "at": "2026-05-25T07:36:00Z",
+          "status": "local_validation_passed",
+          "summary": "EN-PARITY-05 focused test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, and diff checks passed locally."
+        },
+        {
+          "at": "2026-05-25T07:40:00Z",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1676 for EN-PARITY-05 and pushed branch codex/en-parity-05-career-guides; waiting for GitHub checks."
         }
       ]
     },

@@ -5829,6 +5829,50 @@ prs:
     content_generation_allowed: false
     next_task: EN-PARITY-05
 
+  - id: EN-PARITY-05
+    repo: fap-api
+    depends_on: [EN-PARITY-04]
+    branch: codex/en-parity-05-career-guides
+    base: main
+    title: "EN-PARITY-05 career guides English detail completion"
+    train_scope: en_parity_career_guide_detail_import_package
+    risk_level: p0_career_guide_authority_parity
+    allowed_paths:
+      - backend/docs/seo/en-parity-05-career-guide-detail-import-package.md
+      - backend/docs/seo/generated/en-parity-05-career-guide-detail-import-package.v1.json
+      - backend/tests/Feature/SeoIntel/EnParity05CareerGuideDetailImportPackageTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Land a repository-backed CareerGuide EN/ZH detail import-readiness package and generated artifact.
+      - Prove committed career guide baselines have complete EN/ZH guide_code parity without relying on frontend fallback.
+      - Keep production import/exposure verification deferred to controlled backend/CMS workflow.
+      - Do not generate substantial English career guide prose or auto-publish content.
+    do_not:
+      - Generate all missing English career guide detail pages or substantial English prose.
+      - Auto-publish, mutate production CMS, run production migration, deploy, or submit URLs.
+      - Modify fap-web or treat frontend fallback as CareerGuide authority.
+      - Modify articles, content pages, media assets, sitemap generator, llms generator, JSON-LD, FAQ, or Search Channel.
+      - Expose draft/import candidates in sitemap, llms, hreflang, URL Truth, or public runtime.
+    validation:
+      - cd backend && php artisan test --filter=EnParity05 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/en-parity-05-career-guide-detail-import-package.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    next_task: EN-PARITY-06
+
   - id: RESULT-EN-PARITY-00
     repo: fap-api
     depends_on: [EN-PARITY-00]
