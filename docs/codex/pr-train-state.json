@@ -18361,10 +18361,10 @@
     "SEO-GROWTH-MBTI-ACTION-01D-SCAN-00": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01d-scan-00",
-      "status": "local_validation_passed",
+      "status": "pr_open_github_checks_pending",
       "depends_on": [],
       "commit_sha": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1661",
       "checks": {
         "scope_boundary": {
           "status": "pass",
@@ -18388,7 +18388,8 @@
           "evidence": "Passed: php artisan test --filter=SeoIntelGrowthMbtiAction01dScan00PublicPageBilingualParity --no-ansi; php artisan route:list --no-ansi; vendor/bin/pint --test; generated JSON parse; PR-train JSON/YAML parse; git diff --check. fap-web reference-only validation passed: pnpm lint, pnpm test:contract, NEXT_PUBLIC_API_URL=https://api.fermatmind.com pnpm build."
         },
         "github_required_checks": {
-          "status": "pending"
+          "status": "pending",
+          "evidence": "PR #1661 is open; required GitHub checks are pending."
         }
       },
       "failure_reason": null,
@@ -18423,6 +18424,11 @@
           "at": "2026-05-25T10:59:53+08:00",
           "status": "local_validation_passed",
           "summary": "Backend focused report test, route list, Pint, generated JSON, train metadata parsing, diff check, and fap-web reference lint/contract/build validation passed. Scope remains docs/generated/test/state only in fap-api."
+        },
+        {
+          "at": "2026-05-25T11:03:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1661 for the read-only MBTI bilingual parity scan; waiting for GitHub required checks."
         }
       ]
     }
