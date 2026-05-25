@@ -20238,13 +20238,13 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-research-claim-review-batch-04",
       "base": "main",
-      "status": "local_validation_passed",
+      "status": "pr_opened",
       "depends_on": [
         "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03"
       ],
       "title": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04 research English translation and claim review package",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "95512d875511c627be830fa5c39b588a54bea5ee",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1695",
       "checks": {
         "manifest_registration": {
           "status": "pass",
@@ -20283,6 +20283,10 @@
             "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
           ],
           "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3567 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed."
+        },
+        "pr_opened": {
+          "status": "pass",
+          "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1695 from codex/global-en-zh-research-claim-review-batch-04 after local validation passed."
         }
       },
       "scope": {
@@ -20325,6 +20329,11 @@
           "at": "2026-05-26T02:12:05+08:00",
           "status": "local_validation_passed",
           "summary": "Batch-04 focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff checks, and fap-web reference status passed."
+        },
+        {
+          "at": "2026-05-26T02:13:11+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1695 for Batch-04 after local validation passed."
         }
       ]
     },
