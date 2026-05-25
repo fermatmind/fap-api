@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T04:09:12.192416+00:00",
+  "updated_at": "2026-05-25T07:35:00+00:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -9992,7 +9992,7 @@
       "depends_on": [
         "SEO-DASH-PROD-00"
       ],
-      "status": "pr_open_github_checks_pending",
+      "status": "merged",
       "train_scope": "production_seo_intel_db_user_migration_runbook",
       "risk_level": "low_docs_contract_no_execution",
       "title": "docs(seo-intel): add production DB migration runbook",
@@ -18687,6 +18687,73 @@
           "at": "2026-05-25T12:51:00+08:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1665 for EN-PARITY-01 and pushed branch codex/en-parity-01-url-truth-canonical."
+        }
+      ]
+    },
+    "RESULT-EN-PARITY-00": {
+      "repo": "fap-api",
+      "branch": "codex/result-en-parity-00-assessment-result-content-inventory",
+      "status": "local_validation_passed",
+      "depends_on": [
+        "EN-PARITY-00"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency_en_parity_00": {
+          "status": "pass",
+          "evidence": "PR #1663 is MERGED and origin/main contains merge commit a95de5c9ff047851336ee1f7c35b2255ac8ba683."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Planned files are limited to RESULT-EN-PARITY-00 report, generated JSON, focused test, and PR-train manifest/state."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "Inventory is read-only. No production mutation, CMS mutation, deploy, production migration, URL submission, production user data access, or fap-web commit."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=ResultEnParity00AssessmentResultContentInventoryTest --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/result-en-parity-00-assessment-result-content-inventory.v1.json >/dev/null",
+            "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
+            "git diff --check",
+            "git diff --name-only origin/main...HEAD"
+          ],
+          "evidence": "Focused test passed with 1 test and 151 assertions. route:list exited 0 with 203 routes. Pint passed 3537 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON, manifest/state parsing, and git diff --check passed."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "Private result runtime pages not accessed",
+          "evidence": "Chrome read-only observation was limited to the public homepage and navigation because result/report/My Results pages require private attempt or account state.",
+          "impact_on_current_pr": "No impact on repo-visible inventory; protected runtime observation remains out of scope without explicit test data."
+        },
+        {
+          "title": "MBTI authoritative content package not repo-visible",
+          "evidence": "MBTI composer roots include external content package locations that are not materialized in this repository snapshot.",
+          "impact_on_current_pr": "Inventory records MBTI backend export as a required follow-up before English parity can be certified."
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-05-25T07:35:00+00:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Generated RESULT-EN-PARITY-00 read-only result/report content inventory report, generated JSON, focused test, and authorized manifest/state entry. No translation, runtime logic change, CMS mutation, production mutation, deploy, URL submission, or fap-web commit performed."
+        },
+        {
+          "at": "2026-05-25T07:45:00+00:00",
+          "status": "local_validation_passed",
+          "summary": "RESULT-EN-PARITY-00 focused test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, and diff check passed locally."
         }
       ]
     }

@@ -5685,6 +5685,48 @@ prs:
     deploy_allowed: false
     next_task: EN-PARITY-02
 
+  - id: RESULT-EN-PARITY-00
+    repo: fap-api
+    depends_on: [EN-PARITY-00]
+    branch: codex/result-en-parity-00-assessment-result-content-inventory
+    base: main
+    title: "docs(seo-intel): add RESULT-EN-PARITY-00 assessment result inventory"
+    train_scope: assessment_result_report_content_asset_bilingual_inventory
+    risk_level: scan_only_private_result_asset_inventory
+    allowed_paths:
+      - backend/docs/seo/result-en-parity-00-assessment-result-content-inventory.md
+      - backend/docs/seo/generated/result-en-parity-00-assessment-result-content-inventory.v1.json
+      - backend/tests/Feature/SeoIntel/ResultEnParity00AssessmentResultContentInventoryTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Scan assessment result, report, My Results, PDF, email, and share content asset parity for MBTI, Big Five, Enneagram, EQ, RIASEC, depression screening, depression plus anxiety, and IQ.
+      - Classify backend scoring/result/report catalog authority separately from fap-web presentation labels and fallback content.
+      - Land a generated inventory report, generated JSON artifact, and focused validation test only.
+      - Record missing English asset keys, Chinese leakage risks, PDF/email/share/My Results coverage, claim-boundary coverage, and recommended follow-up PRs.
+    do_not:
+      - Translate result/report content.
+      - Modify result logic, scoring, serializers, renderers, fap-web runtime, CMS content, production data, production secrets, sitemap, llms, Search Channel, or URL submission state.
+      - Mutate production CMS, access protected user data, run production migrations, deploy, or submit URLs.
+      - Commit fap-web changes or treat frontend fallback content as authority.
+    validation:
+      - cd backend && php artisan test --filter=ResultEnParity00AssessmentResultContentInventoryTest --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/result-en-parity-00-assessment-result-content-inventory.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --name-only origin/main...HEAD
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    next_task: RESULT-EN-PARITY-01
+
   - id: SEO-DASH-PROD-04B
     repo: fap-api
     depends_on:
