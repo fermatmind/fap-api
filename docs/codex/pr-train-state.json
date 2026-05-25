@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T12:35:00Z",
+  "updated_at": "2026-05-25T12:40:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -19711,12 +19711,12 @@
     "GLOBAL-EN-ZH-PARITY-P0-01": {
       "repo": "fap-api",
       "branch": "codex/global-en-zh-parity-p0-01-content-help-policy-discoverability",
-      "status": "local_validation_passed",
+      "status": "pr_open_github_checks_pending",
       "depends_on": [
         "GLOBAL-EN-ZH-PARITY-SCAN-00"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "942ce417813a0632be17fab8b8822d743c6c35d7",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1681",
       "checks": {
         "dependency_global_en_zh_parity_scan_00": {
           "status": "pass",
@@ -19749,6 +19749,10 @@
         "github_required_checks": {
           "status": "pending",
           "evidence": null
+        },
+        "github_pr_opened": {
+          "status": "pass",
+          "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1681 linked to fap-web PR https://github.com/fermatmind/fap-web/pull/903."
         }
       },
       "failure_reason": null,
@@ -19771,6 +19775,11 @@
           "at": "2026-05-25T12:35:00Z",
           "status": "scope_validation_passed",
           "summary": "fap-api changed files remain limited to current P0-01 evidence/report/test and current manifest/state reconciliation."
+        },
+        {
+          "at": "2026-05-25T12:40:00Z",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened fap-api PR #1681 and linked fap-web PR #903; waiting for GitHub checks."
         }
       ]
     }
