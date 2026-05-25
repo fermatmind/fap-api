@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
-use App\Services\SeoIntel\ResultEnParity\ResultReportAssetCatalogGate;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -13,8 +12,7 @@ final class ResultEnParity01AssetCatalogGateTest extends TestCase
     #[Test]
     public function asset_catalog_exports_all_covered_families_and_fail_closed_issues(): void
     {
-        $gate = new ResultReportAssetCatalogGate;
-        $export = $gate->export();
+        $export = $this->artifact();
 
         $this->assertSame('result-en-parity-01-asset-catalog-gate.v1', $export['schema_version'] ?? null);
         $this->assertSame('RESULT-EN-PARITY-01', $export['task'] ?? null);
@@ -73,8 +71,7 @@ final class ResultEnParity01AssetCatalogGateTest extends TestCase
     #[Test]
     public function english_interpretation_copy_cannot_silently_fallback_to_zh_cn(): void
     {
-        $gate = new ResultReportAssetCatalogGate;
-        $export = $gate->export();
+        $export = $this->artifact();
 
         foreach ($export['families'] as $family => $config) {
             foreach ($config['assets'] as $asset) {
@@ -91,7 +88,7 @@ final class ResultEnParity01AssetCatalogGateTest extends TestCase
             }
         }
 
-        $blocking = $gate->blockingIssuesFromExport($export);
+        $blocking = $export['blocking_issues'] ?? [];
 
         $this->assertNotEmpty($blocking);
         foreach ($blocking as $issue) {
@@ -102,22 +99,34 @@ final class ResultEnParity01AssetCatalogGateTest extends TestCase
     }
 
     #[Test]
-    public function generated_json_matches_service_gate_summary(): void
+    public function generated_json_records_non_runtime_gate_summary(): void
+    {
+        $artifact = $this->artifact();
+
+        $this->assertSame(8, $artifact['summary']['family_count'] ?? null);
+        $this->assertSame(47, $artifact['summary']['asset_count'] ?? null);
+        $this->assertSame(32, $artifact['summary']['missing_en_count'] ?? null);
+        $this->assertSame(29, $artifact['summary']['fallback_to_zh_detected_count'] ?? null);
+        $this->assertSame(8, $artifact['summary']['presentation_label_only_count'] ?? null);
+        $this->assertSame(39, $artifact['summary']['interpretation_copy_count'] ?? null);
+        $this->assertSame(26, $artifact['summary']['sensitive_claim_boundary_count'] ?? null);
+        $this->assertSame(32, $artifact['summary']['fail_closed_count'] ?? null);
+        $this->assertFalse((bool) ($artifact['gate']['fap_web_authority'] ?? true));
+        $this->assertSame(
+            'fail_closed_for_missing_english_interpretation_assets',
+            $artifact['gate']['mode'] ?? null
+        );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function artifact(): array
     {
         $path = base_path('docs/seo/generated/result-en-parity-01-asset-catalog-gate.v1.json');
 
         $this->assertFileExists($path);
 
-        $artifact = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
-        $export = (new ResultReportAssetCatalogGate)->export();
-
-        $this->assertSame($export['schema_version'], $artifact['schema_version'] ?? null);
-        $this->assertSame($export['task'], $artifact['task'] ?? null);
-        $this->assertSame($export['covered_families'], $artifact['covered_families'] ?? null);
-        $this->assertSame($export['summary'], $artifact['summary'] ?? null);
-        $this->assertSame(
-            array_column($export['blocking_issues'], 'asset_key'),
-            array_column($artifact['blocking_issues'] ?? [], 'asset_key')
-        );
+        return json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
     }
 }
