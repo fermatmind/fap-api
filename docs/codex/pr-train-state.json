@@ -20238,12 +20238,12 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-research-claim-review-batch-04",
       "base": "main",
-      "status": "pr_opened",
+      "status": "merged",
       "depends_on": [
         "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03"
       ],
       "title": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04 research English translation and claim review package",
-      "commit_sha": "95512d875511c627be830fa5c39b588a54bea5ee",
+      "commit_sha": "c61e3806e2c83a3f525b0a2c1a9ebb296ab23ea3",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1695",
       "checks": {
         "manifest_registration": {
@@ -20287,6 +20287,10 @@
         "pr_opened": {
           "status": "pass",
           "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1695 from codex/global-en-zh-research-claim-review-batch-04 after local validation passed."
+        },
+        "github_checks": {
+          "status": "pass",
+          "evidence": "PR #1695 merged after required GitHub checks succeeded and mergeStateStatus was CLEAN; origin/main contains merge commit c61e3806e2c83a3f525b0a2c1a9ebb296ab23ea3."
         }
       },
       "scope": {
@@ -20309,9 +20313,9 @@
         "frontend_fallback_authority": false
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T18:21:07Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "next_task": "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05",
       "events": [
@@ -20334,6 +20338,11 @@
           "at": "2026-05-26T02:13:11+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1695 for Batch-04 after local validation passed."
+        },
+        {
+          "at": "2026-05-26T02:25:22+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled Batch-04 after PR #1695 merge; remote branch deleted and local task branch cleanup completed before Batch-05 continued."
         }
       ]
     },
@@ -20341,17 +20350,51 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-career-content-batch-05",
       "base": "main",
-      "status": "manifest_registered",
+      "status": "local_validation_passed",
       "depends_on": [
         "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04"
       ],
-      "title": "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05 career guides/jobs translation group and import-readiness batch",
+      "title": "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05 career content English draft package",
       "commit_sha": null,
       "pr_url": null,
       "checks": {
         "manifest_registration": {
           "status": "pass",
           "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        },
+        "scope_boundary": {
+          "status": "pending_validation",
+          "changed_files": [
+            "backend/docs/seo/global-en-zh-career-content-batch-05.md",
+            "backend/docs/seo/generated/global-en-zh-career-content-batch-05.v1.json",
+            "backend/docs/seo/import-packages/global-en-zh-career-content-batch-05.import.v1.json",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhCareerContentBatch05Test.php",
+            "docs/codex/pr-train.yaml",
+            "docs/codex/pr-train-state.json"
+          ],
+          "evidence": "Generated Batch-05 report, generated summary, career readiness import package, focused SeoIntel test, and current task state ledger only."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No CMS mutation, publish, deploy, Search Channel action, URL submission, pSEO generation, fap-web mutation, env/DNS/nginx edit, production migration, raw log read, or production user data access performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=GlobalEnZhCareerContentBatch05 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-career-content-batch-05.v1.json >/dev/null",
+            "python3 -m json.tool backend/docs/seo/import-packages/global-en-zh-career-content-batch-05.import.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check",
+            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          ],
+          "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3568 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed."
         }
       },
       "scope": {
@@ -20386,6 +20429,16 @@
           "at": "2026-05-26T01:05:00+08:00",
           "status": "manifest_registered",
           "summary": "Registered career content translation group/import-readiness batch with career claim-boundary and no sitemap/llms exposure requirements."
+        },
+        {
+          "at": "2026-05-26T02:25:22+08:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Generated Batch-05 career content package, generated summary, Markdown report, focused test, and Batch-04 merge reconciliation."
+        },
+        {
+          "at": "2026-05-26T02:26:20+08:00",
+          "status": "local_validation_passed",
+          "summary": "Batch-05 focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff checks, and fap-web reference status passed."
         }
       ]
     },
