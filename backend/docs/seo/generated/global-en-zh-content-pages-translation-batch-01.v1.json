@@ -1,0 +1,138 @@
+{
+  "schema_version": "global-en-zh-content-pages-translation-batch-01.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-TRANSLATION-BATCH-01",
+  "generated_at": "2026-05-26T01:30:00+08:00",
+  "final_decision": "content_pages_translation_batch_completed_with_deferred_support",
+  "source_matrix_task": "GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00",
+  "total_items": 14,
+  "translated_draft_count": 5,
+  "existing_counterpart_review_count": 8,
+  "deferred_count": 1,
+  "human_review_required_count": 14,
+  "draft_import_only_count": 13,
+  "sitemap_eligible_count": 0,
+  "llms_eligible_count": 0,
+  "footer_eligible_count": 0,
+  "translated_asset_keys": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies"
+  ],
+  "deferred_items": [
+    {
+      "asset_key": "support",
+      "reason": "No dedicated support content_pages authority source exists in the baseline inventory; help-contact and help-faq exist but must not be substituted as a standalone support page without authority approval."
+    }
+  ],
+  "claim_boundary_findings": [
+    {
+      "asset_key": "brand",
+      "claim_boundary_state": "needs_human_review_company_legal_policy_boundary",
+      "prohibited_claims": [
+        "unsupported company facts",
+        "unsupported legal commitments",
+        "clinical diagnosis",
+        "hiring fit",
+        "career success prediction",
+        "salary guarantee"
+      ]
+    },
+    {
+      "asset_key": "charter",
+      "claim_boundary_state": "needs_human_review_company_legal_policy_boundary",
+      "prohibited_claims": [
+        "unsupported company facts",
+        "unsupported legal commitments",
+        "clinical diagnosis",
+        "hiring fit",
+        "career success prediction",
+        "salary guarantee"
+      ]
+    },
+    {
+      "asset_key": "foundation",
+      "claim_boundary_state": "needs_human_review_company_legal_policy_boundary",
+      "prohibited_claims": [
+        "unsupported company facts",
+        "unsupported legal commitments",
+        "clinical diagnosis",
+        "hiring fit",
+        "career success prediction",
+        "salary guarantee"
+      ]
+    },
+    {
+      "asset_key": "careers",
+      "claim_boundary_state": "needs_human_review_company_legal_policy_boundary",
+      "prohibited_claims": [
+        "unsupported company facts",
+        "unsupported legal commitments",
+        "clinical diagnosis",
+        "hiring fit",
+        "career success prediction",
+        "salary guarantee"
+      ]
+    },
+    {
+      "asset_key": "policies",
+      "claim_boundary_state": "needs_human_review_company_legal_policy_boundary",
+      "prohibited_claims": [
+        "unsupported company facts",
+        "unsupported legal commitments",
+        "clinical diagnosis",
+        "hiring fit",
+        "career success prediction",
+        "salary guarantee"
+      ]
+    },
+    {
+      "asset_key": "support",
+      "claim_boundary_state": "blocked_missing_authority",
+      "prohibited_claims": [
+        "unsupported support commitments",
+        "unsupported legal commitments"
+      ]
+    },
+    {
+      "asset_key": "method-boundaries",
+      "claim_boundary_state": "existing_counterpart_review_required",
+      "prohibited_claims": [
+        "unsupported legal commitments",
+        "clinical diagnosis",
+        "hiring fit",
+        "career success prediction"
+      ]
+    },
+    {
+      "asset_key": "privacy",
+      "claim_boundary_state": "existing_counterpart_review_required",
+      "prohibited_claims": [
+        "unsupported legal commitments",
+        "clinical diagnosis",
+        "hiring fit",
+        "career success prediction"
+      ]
+    },
+    {
+      "asset_key": "terms",
+      "claim_boundary_state": "existing_counterpart_review_required",
+      "prohibited_claims": [
+        "unsupported legal commitments",
+        "clinical diagnosis",
+        "hiring fit",
+        "career success prediction"
+      ]
+    }
+  ],
+  "import_package_path": "backend/docs/seo/import-packages/global-en-zh-content-pages-translation-batch-01.import.v1.json",
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_pseo_generation": true,
+  "no_frontend_fallback_authority": true,
+  "next_task": "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02"
+}
