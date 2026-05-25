@@ -1,0 +1,106 @@
+{
+  "schema_version": "seo-growth-mbti-action-zh-mbti-post-enqueue-review.v1",
+  "task": "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW",
+  "final_decision": "zh_mbti_post_enqueue_review_completed_ready_for_live_preflight",
+  "queue_item_id": 3,
+  "batch_id": 3,
+  "target_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+  "channel": "indexnow",
+  "queue_item_state": {
+    "exists": true,
+    "id": 3,
+    "batch_id": 3,
+    "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "locale": "zh-CN",
+    "page_entity_type": "test_detail",
+    "entity_type": "test_detail",
+    "entity_id": "mbti-personality-test-16-personality-types",
+    "source_authority": "scale_catalog",
+    "source_table": "scales_registry",
+    "channel": "indexnow",
+    "eligibility_state": "eligible",
+    "approval_state": "pending",
+    "execution_state": "dry_run_ready",
+    "indexability_state": "indexable",
+    "claim_boundary_state": "claim_safe",
+    "private_flow": false,
+    "reason_codes": []
+  },
+  "batch_state": {
+    "exists": true,
+    "id": 3,
+    "channel": "indexnow",
+    "status": "dry_run",
+    "item_count": 1,
+    "created_by": "seo-intel:search-channel-queue",
+    "external_calls_attempted": false
+  },
+  "event_state": {
+    "queue_item_planned_event_exists": true,
+    "event_types": [
+      "queue_item_planned"
+    ],
+    "live_submission_approved_event_exists": false,
+    "live_submission_response_event_exists": false,
+    "submitted_event_exists": false,
+    "external_api_call_event_exists": false,
+    "submission_status_accepted_exists": false
+  },
+  "duplicate_check": {
+    "target_queue_count": 1,
+    "extra_active_queue_item_for_target": false,
+    "duplicate_dry_run_status": "blocked",
+    "duplicate_detected": true,
+    "blocked_reason": "existing_active_queue_item",
+    "planned_queue_count_after_enqueue": 0,
+    "no_extra_duplicate": true
+  },
+  "queue_item_2_state": {
+    "id": 2,
+    "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+    "channel": "indexnow",
+    "approval_state": "approved",
+    "execution_state": "submitted",
+    "unchanged": true,
+    "duplicate_en_queue_item_detected": false
+  },
+  "gate_state": {
+    "queue_write_enabled": false,
+    "live_submission_enabled": false,
+    "external_api_calls_enabled": false,
+    "indexnow_live_api_enabled": false,
+    "gates_closed": true
+  },
+  "public_runtime_state": {
+    "url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "http_status": 200,
+    "final_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "canonical": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "meta_robots": "index, follow",
+    "x_robots_tag": null,
+    "has_noindex": false,
+    "has_staging_canonical": false,
+    "public_runtime_authority_used": false
+  },
+  "ops_seo_visibility": {
+    "checked": false,
+    "sidecar": "Optional authenticated /ops/seo UI visibility was not checked; backend read-only queue, batch, event, duplicate, gate, and runtime checks are sufficient for this review."
+  },
+  "staging_sidecar_state": {
+    "checked": true,
+    "staging_noindex_active": true,
+    "staging_x_robots_tag": "noindex, nofollow, noarchive",
+    "staging_meta_robots": "noindex, nofollow, noarchive, nocache",
+    "staging_canonical_points_to_production_apex": true,
+    "baidu_stale_result_known_sidecar": true,
+    "baidu_removal_performed": false
+  },
+  "accidental_live_submission_detected": false,
+  "external_api_call_detected": false,
+  "enqueue_performed": false,
+  "live_submission_performed": false,
+  "cms_mutation_performed": false,
+  "fap_web_mutation_performed": false,
+  "research_deferred": true,
+  "next_task": "SEARCH-CHANNEL-LIVE-ZH-MBTI-01"
+}
