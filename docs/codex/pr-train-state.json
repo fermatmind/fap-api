@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T13:32:00+08:00",
+  "updated_at": "2026-05-25T13:34:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18920,11 +18920,11 @@
     "EN-PARITY-02": {
       "repo": "fap-api",
       "branch": "codex/en-parity-02-translation-groups",
-      "status": "pr_open_github_checks_pending",
+      "status": "pr_open_rebased_github_checks_pending",
       "depends_on": [
         "EN-PARITY-01"
       ],
-      "commit_sha": "e9690fa4bd54ebc6f3f6519547671cef55a43127",
+      "commit_sha": "5a37feb01672bdb2bc2e4b8c8f9e525817d4cc22",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1667",
       "checks": {
         "dependency_en_parity_01": {
@@ -18932,8 +18932,8 @@
           "evidence": "PR #1665 is MERGED and origin/main contains merge commit d938a2a27cb0184222b87a21035daf274e3ce107."
         },
         "scope_boundary": {
-          "status": "pass_pending_commit",
-          "evidence": "Changed files are limited to translation parity read model, EN-PARITY-02 docs/generated/test, and PR-train manifest/state."
+          "status": "pass",
+          "evidence": "Changed files are limited to translation parity read model, EN-PARITY-02 docs/generated/test, runtime-freeze allowlist evidence, and PR-train manifest/state."
         },
         "production_safety": {
           "status": "pass",
@@ -18961,8 +18961,8 @@
           "evidence": "Focused EN-PARITY-02 test passed with 4 tests and 42 assertions. SQLite pretend migration, route:list, Pint, composer validate, composer audit, ci_verify_mbti, generated JSON parse, manifest/state parse, and diff checks passed."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": "PR #1667 is open; GitHub checks pending."
+          "status": "pending_after_rebase",
+          "evidence": "PR #1667 was rebased onto origin/main after resolving docs/codex/pr-train-state.json conflict; GitHub checks must rerun on the rebased head."
         }
       },
       "failure_reason": null,
@@ -18990,6 +18990,11 @@
           "at": "2026-05-25T13:32:00+08:00",
           "status": "ledger_rebase_conflict_resolved",
           "summary": "Resolved docs/codex/pr-train-state.json against origin/main by preserving RESULT-EN-PARITY-01 merged state and adding EN-PARITY-02 state without overwriting unrelated train entries."
+        },
+        {
+          "at": "2026-05-25T13:34:00+08:00",
+          "status": "rebased_conflict_resolved_pending_push",
+          "summary": "Rebased EN-PARITY-02 onto origin/main after PR #1668 merged. Resolved pr-train-state ledger by preserving EN-PARITY-01, RESULT-EN-PARITY-00, RESULT-EN-PARITY-01 merged states and EN-PARITY-02 current PR state."
         }
       ]
     }
