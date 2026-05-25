@@ -1,0 +1,84 @@
+{
+  "schema_version": "v1",
+  "task": "SEARCH-CHANNEL-LIVE-ZH-MBTI-02",
+  "final_decision": "search_channel_live_zh_mbti_02_completed_ready_for_24h_review",
+  "approval_phrase_verified": true,
+  "queue_item_id": 3,
+  "target_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+  "channel": "indexnow",
+  "pre_submit_state": {
+    "approval_state": "pending",
+    "execution_state": "dry_run_ready",
+    "eligibility_state": "eligible",
+    "claim_boundary_state": "claim_safe",
+    "private_flow": false,
+    "duplicate_target_queue_count": 1
+  },
+  "keylocation_verified": {
+    "http_status": 200,
+    "body_length": 32,
+    "body_hash_matches_config_expected": true,
+    "raw_key_printed": false
+  },
+  "final_dry_run": {
+    "status": "success",
+    "external_calls_attempted": false,
+    "search_submission_attempted": false,
+    "writes_attempted": false,
+    "writes_committed": false,
+    "submission_status": "not_attempted",
+    "issues": []
+  },
+  "live_submission_result": {
+    "status": "success",
+    "external_calls_attempted": true,
+    "search_submission_attempted": true,
+    "writes_attempted": true,
+    "writes_committed": true,
+    "execution_state": "submitted"
+  },
+  "http_status": 200,
+  "submission_status": "accepted",
+  "queue_item_3_post_state": {
+    "approval_state": "approved",
+    "execution_state": "submitted",
+    "approved_by": "codex",
+    "events": [
+      "queue_item_planned",
+      "live_submission_approved",
+      "live_submission_response"
+    ],
+    "endpoint_host": "api.indexnow.org"
+  },
+  "queue_item_2_state": {
+    "queue_item_id": 2,
+    "target_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+    "channel": "indexnow",
+    "approval_state": "approved",
+    "execution_state": "submitted",
+    "unchanged": true
+  },
+  "gates_closed_after_submission": true,
+  "gate_state_after_submission": {
+    "queue_write": false,
+    "live_submission": false,
+    "external_api": false,
+    "indexnow_live_api": false
+  },
+  "duplicate_check": {
+    "zh_mbti_queue_count": 1,
+    "research_queue_count": 0,
+    "no_retry_storm_detected": true
+  },
+  "research_deferred": true,
+  "enqueue_performed": false,
+  "live_submission_performed": true,
+  "external_api_call_performed": true,
+  "cms_mutation_performed": false,
+  "fap_web_mutation_performed": false,
+  "url_truth_write_performed": false,
+  "collector_write_performed": false,
+  "scheduler_enabled": false,
+  "bulk_submission_performed": false,
+  "next_task": "SEARCH-CHANNEL-LIVE-ZH-MBTI-02-24H-REVIEW"
+}
