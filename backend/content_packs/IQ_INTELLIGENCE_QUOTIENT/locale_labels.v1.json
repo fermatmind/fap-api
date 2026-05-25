@@ -1,0 +1,69 @@
+{
+  "schema_version": "iq.locale_labels.v1",
+  "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+  "asset_status": "backend_authority_locale_label_catalog",
+  "default_locale": "zh-CN",
+  "fallback_policy": {
+    "en": "missing_label_returns_null_no_zh_fallback",
+    "zh-CN": "backend_catalog_authority"
+  },
+  "dimensions": {
+    "visual_spatial_insight": {
+      "dimension_code": "VSI",
+      "labels": {
+        "zh-CN": "视觉空间洞察",
+        "en": "Visual-spatial insight"
+      }
+    },
+    "visual_spatial_pattern_reasoning": {
+      "dimension_code": "VSPR",
+      "labels": {
+        "zh-CN": "视觉空间模式推理",
+        "en": "Visual-spatial pattern reasoning"
+      }
+    },
+    "numerical_pattern_reasoning": {
+      "dimension_code": "NPR",
+      "aliases": [
+        "numeric_pattern_reasoning"
+      ],
+      "labels": {
+        "zh-CN": "数字规律推理",
+        "en": "Numeric pattern reasoning"
+      }
+    }
+  },
+  "iq_pro": {
+    "pdf_payload": {
+      "labels": {
+        "zh-CN": "IQ 报告 PDF",
+        "en": "IQ report PDF"
+      },
+      "description": {
+        "zh-CN": "在线 IQ 估测报告 PDF；当前仅定义合同，尚未生成正式文件。",
+        "en": "Online IQ estimate report PDF; contract-defined only until formal file generation is implemented."
+      }
+    },
+    "certificate_payload": {
+      "labels": {
+        "zh-CN": "IQ 结果凭证",
+        "en": "IQ result certificate"
+      },
+      "description": {
+        "zh-CN": "在线 IQ 估测结果凭证；当前仅定义合同，尚未生成正式文件。",
+        "en": "Online IQ estimate result certificate; contract-defined only until formal file generation is implemented."
+      }
+    }
+  },
+  "claim_boundary": {
+    "measurement": "online_estimate_confidence_bound_not_clinical_iq_diagnosis",
+    "forbidden_claims": [
+      "clinical_iq_diagnosis",
+      "definitive_intelligence_measurement",
+      "certified_iq",
+      "global_most_accurate",
+      "treatment",
+      "medical_diagnosis"
+    ]
+  }
+}

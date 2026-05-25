@@ -18850,11 +18850,11 @@
     "RESULT-EN-PARITY-02": {
       "repo": "fap-api",
       "branch": "codex/result-en-parity-02-riasec-en-assets",
-      "status": "local_files_generated_pending_validation",
+      "status": "merged",
       "depends_on": [
         "RESULT-EN-PARITY-01"
       ],
-      "commit_sha": null,
+      "commit_sha": "a803ccbb5ebf405d0e7f2de332e7bfd2a92d1085",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1669",
       "checks": {
         "dependency_result_en_parity_00": {
@@ -18890,14 +18890,14 @@
           "evidence": "Focused ResultEnParity02RiasecEnAssets test passed with 5 tests and 41 assertions. Existing RiasecFullContentFixtureMatrixTest passed with 3 tests and 354 assertions. route:list exited 0 with 203 routes. Pint passed 3540 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, manifest/state parse, git diff --check, git diff --cached --check, and Big Five runtime freeze focused check passed. fap-web reference status was inspected and only unrelated .playwright-mcp/ was untracked."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": "PR #1669 is open; GitHub checks are pending."
+          "status": "pass",
+          "evidence": "PR #1669 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep, and supply-chain checks; mergeStateStatus was CLEAN before squash merge."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T05:42:59Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "events": [
         {
@@ -18914,6 +18914,81 @@
           "at": "2026-05-25T06:30:00Z",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1669 for RESULT-EN-PARITY-02 RIASEC English asset catalog; waiting for GitHub checks."
+        },
+        {
+          "at": "2026-05-25T05:42:59Z",
+          "status": "merged",
+          "summary": "PR #1669 was squash merged as a803ccbb5ebf405d0e7f2de332e7bfd2a92d1085; remote branch deleted; isolated worktree main synchronized and focused post-merge test passed."
+        }
+      ]
+    },
+    "RESULT-EN-PARITY-03": {
+      "repo": "fap-api",
+      "branch": "codex/result-en-parity-03-iq-locale-safe-labels",
+      "status": "local_files_generated_pending_validation",
+      "depends_on": [
+        "RESULT-EN-PARITY-02"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency_result_en_parity_00": {
+          "status": "pass",
+          "evidence": "PR #1666 is MERGED and origin/main contains merge commit a93345e5a24f1f579495bcfd78f30b4c5984bd1a."
+        },
+        "dependency_result_en_parity_01": {
+          "status": "pass",
+          "evidence": "PR #1668 is MERGED and origin/main contains merge commit 3fb430f1b1592127cb8c42857e15fd42b0a11feb."
+        },
+        "dependency_result_en_parity_02": {
+          "status": "pass",
+          "evidence": "PR #1669 is MERGED and origin/main contains merge commit a803ccbb5ebf405d0e7f2de332e7bfd2a92d1085."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Planned files are limited to IQ backend label catalog, IqReportBuilder locale-safe label consumption, generated report/artifact, focused SeoIntel test, and PR-train metadata."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No production mutation, CMS mutation, deploy, production migration, URL submission, production user data access, scoring change, or fap-web commit."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=ResultEnParity03IqLocaleSafeLabels --no-ansi",
+            "cd backend && php artisan test --filter=IqReportBuilder --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/result-en-parity-03-iq-locale-safe-labels.v1.json >/dev/null",
+            "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
+            "git diff --check",
+            "git diff --cached --check",
+            "git diff --name-only origin/main...HEAD"
+          ],
+          "evidence": "Focused ResultEnParity03IqLocaleSafeLabels test passed with 4 tests and 29 assertions. Existing IqReportBuilder test passed with 2 tests and 23 assertions. route:list exited 0 with 203 routes. Pint passed 3541 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, manifest/state parse, git diff --check, git diff --cached --check, and Big Five runtime freeze focused check passed. fap-web reference status was inspected and only unrelated .playwright-mcp/ was untracked."
+        },
+        "github_required_checks": {
+          "status": "not_started",
+          "evidence": "PR not opened yet."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "events": [
+        {
+          "at": "2026-05-25T06:50:00Z",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Added IQ backend locale label catalog, made IqReportBuilder consume locale labels with no EN zh fallback, added generated artifact/report, focused test, and manifest/state entry. Scoring logic is unchanged."
+        },
+        {
+          "at": "2026-05-25T07:05:00Z",
+          "status": "local_validation_passed",
+          "summary": "RESULT-EN-PARITY-03 focused test, existing IQ builder test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, diff checks, fap-web reference status, and focused Big Five runtime freeze check passed locally."
         }
       ]
     }
