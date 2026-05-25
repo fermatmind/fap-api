@@ -18530,7 +18530,7 @@
     "EN-PARITY-00": {
       "repo": "fap-api",
       "branch": "codex/en-parity-00-full-site-inventory",
-      "status": "pr_open_github_checks_pending",
+      "status": "merged",
       "depends_on": [],
       "commit_sha": "a95de5c9ff047851336ee1f7c35b2255ac8ba683",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1663",
@@ -18778,7 +18778,7 @@
       "depends_on": [
         "RESULT-EN-PARITY-00"
       ],
-      "commit_sha": null,
+      "commit_sha": "3fb430f1b1592127cb8c42857e15fd42b0a11feb",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1668",
       "checks": {
         "dependency_result_en_parity_00": {
@@ -18810,14 +18810,14 @@
           "evidence": "Focused test passed with 3 tests and 601 assertions. route:list exited 0 with 203 routes. Pint passed 3540 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, manifest/state parse, and git diff --check passed. fap-web reference status was inspected and only unrelated .playwright-mcp/ was untracked."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": "PR #1668 is open; GitHub checks are pending."
+          "status": "pass",
+          "evidence": "PR #1668 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep, and supply-chain checks; mergeStateStatus was CLEAN before squash merge."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T05:24:17Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "events": [
         {
@@ -18839,6 +18839,81 @@
           "at": "2026-05-25T09:15:00+00:00",
           "status": "ci_fix_pushed",
           "summary": "Removed runtime app service draft after Big Five runtime freeze flagged backend/app path drift; kept non-runtime generated artifact plus focused test and updated PR body."
+        },
+        {
+          "at": "2026-05-25T05:24:17Z",
+          "status": "merged",
+          "summary": "PR #1668 was squash merged as 3fb430f1b1592127cb8c42857e15fd42b0a11feb; remote branch deleted; isolated worktree main synchronized and focused post-merge test passed."
+        }
+      ]
+    },
+    "RESULT-EN-PARITY-02": {
+      "repo": "fap-api",
+      "branch": "codex/result-en-parity-02-riasec-en-assets",
+      "status": "local_files_generated_pending_validation",
+      "depends_on": [
+        "RESULT-EN-PARITY-01"
+      ],
+      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1669",
+      "checks": {
+        "dependency_result_en_parity_00": {
+          "status": "pass",
+          "evidence": "PR #1666 is MERGED and origin/main contains merge commit a93345e5a24f1f579495bcfd78f30b4c5984bd1a."
+        },
+        "dependency_result_en_parity_01": {
+          "status": "pass",
+          "evidence": "PR #1668 is MERGED and origin/main contains merge commit 3fb430f1b1592127cb8c42857e15fd42b0a11feb."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Planned files are limited to RIASEC lifecycle content assets, RiasecLifecycleCopyService locale-safe lookup, generated report/artifact, focused SeoIntel test, and PR-train metadata."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No production mutation, CMS mutation, deploy, production migration, URL submission, production user data access, or fap-web commit."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=ResultEnParity02RiasecEnAssets --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/result-en-parity-02-riasec-en-assets.v1.json >/dev/null",
+            "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
+            "git diff --check",
+            "git diff --cached --check",
+            "git diff --name-only origin/main...HEAD"
+          ],
+          "evidence": "Focused ResultEnParity02RiasecEnAssets test passed with 5 tests and 41 assertions. Existing RiasecFullContentFixtureMatrixTest passed with 3 tests and 354 assertions. route:list exited 0 with 203 routes. Pint passed 3540 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, manifest/state parse, git diff --check, git diff --cached --check, and Big Five runtime freeze focused check passed. fap-web reference status was inspected and only unrelated .playwright-mcp/ was untracked."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR #1669 is open; GitHub checks are pending."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "events": [
+        {
+          "at": "2026-05-25T06:10:00Z",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Prepared RIASEC English lifecycle assets for share/PDF/history/FAQ/method-boundary, added locale-aware fail-closed service lookup, generated inventory artifact/report, focused test, and manifest/state entry. Deep RIASEC interpretation assets remain deferred for human-reviewed batches."
+        },
+        {
+          "at": "2026-05-25T06:25:00Z",
+          "status": "local_validation_passed",
+          "summary": "RESULT-EN-PARITY-02 focused test, existing RIASEC fixture test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, diff checks, fap-web reference status, and focused Big Five runtime freeze check passed locally."
+        },
+        {
+          "at": "2026-05-25T06:30:00Z",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1669 for RESULT-EN-PARITY-02 RIASEC English asset catalog; waiting for GitHub checks."
         }
       ]
     }

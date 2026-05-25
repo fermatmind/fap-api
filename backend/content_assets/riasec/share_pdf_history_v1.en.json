@@ -1,0 +1,91 @@
+{
+  "asset_id": "share_pdf_history_v1.en",
+  "asset_status": "draft_authority_candidate_human_review_required",
+  "locale": "en",
+  "scale_code": "RIASEC",
+  "review_status": "draft_human_review_required",
+  "surfaces": [
+    {
+      "surface": "share_safe_card",
+      "copy": "My RIASEC result points to work activities that may be worth exploring first. The share version shows only a safe summary and does not expose raw feedback or private context.",
+      "public_safe": true,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "share_detail_boundary",
+      "copy": "The share page is not a full report and does not state a career conclusion. It summarizes the interest pattern and the method boundaries for this result.",
+      "public_safe": true,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "pdf_personal",
+      "copy": "A personal PDF can preserve the full result, generation time, and method boundaries. Once a PDF is forwarded, the platform cannot remotely recall it.",
+      "public_safe": false,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "pdf_counselor_discussion",
+      "copy": "A counselor discussion version may show more exploration summary with user permission. It must not be used for screening, admission, promotion, elimination, or qualification decisions.",
+      "public_safe": false,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "history_same_form",
+      "copy": "History for the same form should emphasize Top 3 overlap, near ties, and reading strength. It should not draw cross-form raw score movement.",
+      "public_safe": false,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "history_cross_form",
+      "copy": "60Q and 140Q use different score spaces. History can explain which interest clues were emphasized in each result, but it must not chart raw score gains or drops across forms.",
+      "public_safe": false,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    },
+    {
+      "surface": "low_quality_share",
+      "copy": "A cautious-reading result allows only a safe share summary by default and does not show a strong activity chain or occupation-context examples.",
+      "public_safe": true,
+      "raw_scores_allowed": false,
+      "raw_feedback_allowed": false
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "v5_editorial_note": "English share/PDF/history lifecycle draft keeps RIASEC as an interest-signal assessment and requires human review before broad content expansion."
+}

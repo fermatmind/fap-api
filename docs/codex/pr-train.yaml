@@ -5772,6 +5772,54 @@ prs:
     fap_web_commit_allowed: false
     next_task: RESULT-EN-PARITY-02
 
+  - id: RESULT-EN-PARITY-02
+    repo: fap-api
+    depends_on: [RESULT-EN-PARITY-01]
+    branch: codex/result-en-parity-02-riasec-en-assets
+    base: main
+    title: "RESULT-EN-PARITY-02 RIASEC result/report English asset catalog"
+    train_scope: riasec_result_report_english_asset_catalog
+    risk_level: backend_riasec_lifecycle_assets_locale_safe_fail_closed
+    allowed_paths:
+      - backend/content_assets/riasec/**
+      - backend/content_packs/RIASEC/**
+      - backend/app/Services/Riasec/**
+      - backend/docs/seo/result-en-parity-02-riasec-en-assets.md
+      - backend/docs/seo/generated/result-en-parity-02-riasec-en-assets.v1.json
+      - backend/tests/Feature/SeoIntel/ResultEnParity02RiasecEnAssetsTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare backend-owned English counterparts for RIASEC lifecycle, share, PDF, history, FAQ, and method-boundary assets.
+      - Make RIASEC lifecycle copy locale-aware while preserving zh-CN default behavior.
+      - Ensure explicit English RIASEC lifecycle output does not silently fall back to zh-CN.
+      - Mark deeper RIASEC interpretation assets as deferred instead of mass-generating unsupported English report prose.
+      - Keep RIASEC language bounded as interest signal and exploratory guidance, not active career recommendation authority.
+    do_not:
+      - Claim active RIASEC-to-career recommendation, precise career matching, hiring fit, success prediction, salary prediction, diagnosis, treatment, or cure.
+      - Mutate CMS, production user data, production secrets, sitemap, llms, Search Channel, or URL submission state.
+      - Run production migrations, deploy, submit URLs, or access protected result data.
+      - Modify fap-web or treat frontend fallback content as authority.
+      - Change scoring algorithms.
+    validation:
+      - cd backend && php artisan test --filter=ResultEnParity02RiasecEnAssets --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/result-en-parity-02-riasec-en-assets.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+      - git diff --name-only origin/main...HEAD
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    next_task: RESULT-EN-PARITY-03
+
   - id: SEO-DASH-PROD-04B
     repo: fap-api
     depends_on:
