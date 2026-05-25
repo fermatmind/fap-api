@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T01:05:00+08:00",
+  "updated_at": "2026-05-26T01:50:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -19907,7 +19907,7 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-content-pages-translation-batch-01",
       "base": "main",
-      "status": "manifest_registered",
+      "status": "local_validation_passed",
       "depends_on": [
         "GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00"
       ],
@@ -19918,6 +19918,39 @@
         "manifest_registration": {
           "status": "pass",
           "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "changed_files": [
+            "backend/docs/seo/global-en-zh-content-pages-translation-batch-01.md",
+            "backend/docs/seo/generated/global-en-zh-content-pages-translation-batch-01.v1.json",
+            "backend/docs/seo/import-packages/global-en-zh-content-pages-translation-batch-01.import.v1.json",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesTranslationBatch01Test.php",
+            "docs/codex/pr-train-state.json"
+          ],
+          "evidence": "Changed files are limited to Batch-01 report, generated summary, draft/import package, focused SeoIntel test, and current task state ledger."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No CMS mutation, publish, deploy, Search Channel action, URL submission, pSEO generation, fap-web mutation, env/DNS/nginx edit, production migration, raw log read, or production user data access performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=GlobalEnZhContentPagesTranslationBatch01 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-translation-batch-01.v1.json >/dev/null",
+            "python3 -m json.tool backend/docs/seo/import-packages/global-en-zh-content-pages-translation-batch-01.import.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check",
+            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          ],
+          "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3564 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed."
         }
       },
       "scope": {
@@ -19951,6 +19984,16 @@
           "at": "2026-05-26T01:05:00+08:00",
           "status": "manifest_registered",
           "summary": "Registered content/help/policy translation batch as draft/import-only, human-review-required, no-publish/no-CMS-mutation scope."
+        },
+        {
+          "at": "2026-05-26T01:35:00+08:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Generated Batch-01 draft/import package, generated summary, Markdown report, focused test, and current PR state update."
+        },
+        {
+          "at": "2026-05-26T01:50:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Batch-01 focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff checks, and fap-web reference status passed."
         }
       ]
     },
