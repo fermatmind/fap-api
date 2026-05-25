@@ -15,6 +15,7 @@ use App\Services\Cms\ArticleService;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use RuntimeException;
 
@@ -241,13 +242,7 @@ final class ArticleImportLocalBaseline extends Command
             }
         }
 
-        usort(
-            $rows,
-            static fn (array $left, array $right): int => [$left['locale'], $left['slug']]
-                <=> [$right['locale'], $right['slug']],
-        );
-
-        return $rows;
+        return $this->withTranslationMetadata($rows);
     }
 
     /**
@@ -336,6 +331,9 @@ final class ArticleImportLocalBaseline extends Command
             'related_test_slug' => $this->normalizeNullableSlug($row['related_test_slug'] ?? null),
             'voice' => $this->normalizeNullableString($row['voice'] ?? null),
             'voice_order' => $this->normalizeNullablePositiveInteger($row['voice_order'] ?? null, $file, $slug, 'voice_order'),
+            'translation_group_id' => $this->normalizeNullableString($row['translation_group_id'] ?? null),
+            'source_locale' => $this->normalizeNullableString($row['source_locale'] ?? null),
+            'translation_status' => $this->normalizeNullableString($row['translation_status'] ?? null),
             'category' => $this->normalizeNullableString($row['category'] ?? null),
             'tags' => $this->normalizeStringList($row['tags'] ?? []),
             'status' => $this->normalizeStatus($row['status'] ?? 'published', $file, $slug),
@@ -343,6 +341,65 @@ final class ArticleImportLocalBaseline extends Command
             'is_indexable' => (bool) ($row['is_indexable'] ?? true),
             'published_at' => $publishedAt,
         ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     * @return list<array<string, mixed>>
+     */
+    private function withTranslationMetadata(array $rows): array
+    {
+        /** @var Collection<string, Collection<int, array<string, mixed>>> $groups */
+        $groups = collect($rows)->groupBy(
+            static fn (array $row): string => (string) ($row['translation_group_id'] ?: 'article:'.$row['slug'])
+        );
+
+        $normalized = [];
+        foreach ($groups as $translationGroupId => $groupRows) {
+            $locales = $groupRows
+                ->pluck('locale')
+                ->map(static fn (mixed $locale): string => (string) $locale)
+                ->unique()
+                ->values()
+                ->all();
+            $sourceLocale = in_array('zh-CN', $locales, true) ? 'zh-CN' : (string) ($locales[0] ?? 'en');
+
+            foreach ($groupRows as $row) {
+                $locale = (string) $row['locale'];
+                $row['translation_group_id'] = (string) ($row['translation_group_id'] ?: $translationGroupId);
+                $row['source_locale'] = (string) ($row['source_locale'] ?: $sourceLocale);
+                $row['translation_status'] = (string) ($row['translation_status'] ?: $this->defaultTranslationStatus($locale, $sourceLocale, (string) $row['status']));
+                $normalized[] = $row;
+            }
+        }
+
+        usort(
+            $normalized,
+            static fn (array $left, array $right): int => [
+                $left['translation_group_id'],
+                (string) $left['locale'] === (string) $left['source_locale'] ? 0 : 1,
+                $left['locale'],
+                $left['slug'],
+            ] <=> [
+                $right['translation_group_id'],
+                (string) $right['locale'] === (string) $right['source_locale'] ? 0 : 1,
+                $right['locale'],
+                $right['slug'],
+            ],
+        );
+
+        return array_values($normalized);
+    }
+
+    private function defaultTranslationStatus(string $locale, string $sourceLocale, string $status): string
+    {
+        if ($locale === $sourceLocale) {
+            return Article::TRANSLATION_STATUS_SOURCE;
+        }
+
+        return $status === 'published'
+            ? Article::TRANSLATION_STATUS_PUBLISHED
+            : Article::TRANSLATION_STATUS_HUMAN_REVIEW;
     }
 
     /**
@@ -460,6 +517,7 @@ final class ArticleImportLocalBaseline extends Command
                 'voice_order' => $desired['voice_order'],
                 'is_indexable' => (bool) $desired['is_indexable'],
             ], $tagIds);
+            $article = $this->syncTranslationAuthority($article, $desired);
 
             $article = $this->syncSeoAuthority(
                 $article,
@@ -518,6 +576,9 @@ final class ArticleImportLocalBaseline extends Command
             'related_test_slug' => $row['related_test_slug'],
             'voice' => $row['voice'],
             'voice_order' => $row['voice_order'],
+            'translation_group_id' => $row['translation_group_id'],
+            'source_locale' => $row['source_locale'],
+            'translation_status' => $row['translation_status'],
             'category' => $row['category'],
             'tags' => $row['tags'],
             'status' => $status,
@@ -580,6 +641,15 @@ final class ArticleImportLocalBaseline extends Command
             return false;
         }
         if (($article->voice_order !== null ? (int) $article->voice_order : null) !== ($desired['voice_order'] ?? null)) {
+            return false;
+        }
+        if ((string) ($article->translation_group_id ?? '') !== (string) ($desired['translation_group_id'] ?? '')) {
+            return false;
+        }
+        if ((string) ($article->source_locale ?? '') !== (string) ($desired['source_locale'] ?? '')) {
+            return false;
+        }
+        if ((string) ($article->translation_status ?? '') !== (string) ($desired['translation_status'] ?? '')) {
             return false;
         }
         if ($this->currentCategoryName($article) !== ($desired['category'] ?? null)) {
@@ -661,6 +731,38 @@ final class ArticleImportLocalBaseline extends Command
     /**
      * @param  array<string, mixed>  $desired
      */
+    private function syncTranslationAuthority(Article $article, array $desired): Article
+    {
+        $translationGroupId = (string) $desired['translation_group_id'];
+        $sourceLocale = (string) $desired['source_locale'];
+        $locale = (string) $desired['locale'];
+        $sourceArticle = $locale === $sourceLocale
+            ? null
+            : Article::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', (int) $article->org_id)
+                ->where('translation_group_id', $translationGroupId)
+                ->where('locale', $sourceLocale)
+                ->first();
+        $sourceVersionHash = $sourceArticle instanceof Article
+            ? (string) $sourceArticle->source_version_hash
+            : null;
+
+        $article->forceFill([
+            'translation_group_id' => $translationGroupId,
+            'source_locale' => $sourceLocale,
+            'translation_status' => (string) $desired['translation_status'],
+            'translated_from_article_id' => $sourceArticle instanceof Article ? (int) $sourceArticle->id : null,
+            'source_article_id' => $sourceArticle instanceof Article ? (int) $sourceArticle->id : null,
+            'translated_from_version_hash' => $sourceVersionHash,
+        ])->save();
+
+        return $article->fresh(['seoMeta', 'publishedRevision', 'workingRevision']) ?? $article;
+    }
+
+    /**
+     * @param  array<string, mixed>  $desired
+     */
     private function syncSeoAuthority(
         Article $article,
         array $desired,
@@ -671,6 +773,10 @@ final class ArticleImportLocalBaseline extends Command
         $seoDescription = $this->normalizeNullableString($desired['seo_description'] ?? null);
         $canonicalUrl = $articleSeoService->buildCanonicalUrl((string) $desired['slug'], (string) $desired['locale']);
         $robots = (bool) ($desired['is_indexable'] ?? true) ? 'index,follow' : 'noindex,nofollow';
+        $sourceArticleId = $article->source_article_id !== null ? (int) $article->source_article_id : (int) $article->id;
+        $sourceVersionHash = $article->source_article_id !== null
+            ? (string) (Article::query()->withoutGlobalScopes()->whereKey((int) $article->source_article_id)->value('source_version_hash') ?? '')
+            : null;
 
         ArticleSeoMeta::query()
             ->withoutGlobalScopes()
@@ -712,13 +818,13 @@ final class ArticleImportLocalBaseline extends Command
         $revision->forceFill([
             'org_id' => (int) $article->org_id,
             'article_id' => (int) $article->id,
-            'source_article_id' => (int) $article->id,
+            'source_article_id' => $sourceArticleId,
             'translation_group_id' => (string) $article->translation_group_id,
             'locale' => (string) $desired['locale'],
-            'source_locale' => (string) $desired['locale'],
-            'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
+            'source_locale' => (string) $desired['source_locale'],
+            'revision_status' => (string) $desired['translation_status'],
             'source_version_hash' => $revisionHash,
-            'translated_from_version_hash' => $revisionHash,
+            'translated_from_version_hash' => $sourceVersionHash ?: $revisionHash,
             'title' => (string) $desired['title'],
             'excerpt' => (string) $desired['excerpt'],
             'content_md' => (string) $desired['content_md'],
