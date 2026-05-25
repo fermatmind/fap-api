@@ -11504,6 +11504,49 @@ prs:
     scheduler_activation: false
     next_task: SEARCH-CHANNEL-LIVE-ZH-MBTI-01
 
+  - id: SEARCH-CHANNEL-LIVE-ZH-MBTI-01
+    repo: fap-api
+    depends_on:
+      - SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW
+    branch: codex/search-channel-live-zh-mbti-01-preflight
+    base: main
+    title: "docs(seo-intel): add ZH MBTI IndexNow live preflight"
+    name: "Live submission preflight for queue item 3"
+    train_scope: seo_growth_mbti_action
+    risk_level: production_read_only_report
+    type: docs_generated_test
+    scope:
+      - Verify queue item 3, duplicate/event state, protected queue item 2, closed gates, IndexNow key readiness, submit dry-run, public runtime, and staging/Baidu sidecar before any live submission.
+      - Record the exact future human approval phrase and gate plan only if safe, without opening gates or calling external search APIs.
+      - Record any blocker in docs/generated/test scope.
+    allowed_paths:
+      - backend/docs/seo/search-channel-live-zh-mbti-01-preflight.md
+      - backend/docs/seo/generated/search-channel-live-zh-mbti-01-preflight.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelLiveZhMbti01PreflightTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, runtime services, migrations, production env/deploy files, CMS content, articles, internal links, sitemap, llms, crawler log readers, scheduler, Search Channel enqueue/live submitter code, Digital PR files, or business DB / Tencent RDS / Node2 DB.
+      - Perform production writes, collector writes, Search Channel enqueue, live submission, external search API calls, scheduler activation, CMS mutation, Digital PR sends, pSEO generation, raw Nginx access log reads, manual DB update/delete, or broad URL Truth writes.
+      - Treat frontend fallback, static sitemap, static llms, crawler logs, search engine responses, Digital PR mentions, public runtime, or local copies as authority.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelLiveZhMbti01Preflight --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/search-channel-live-zh-mbti-01-preflight.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    next_task: SEARCH-CHANNEL-LIVE-ZH-MBTI-01A-INDEXNOW-KEYLOCATION-FIX
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar
