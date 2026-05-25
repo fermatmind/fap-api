@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T06:52:00Z",
+  "updated_at": "2026-05-25T07:05:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -24192,5 +24192,106 @@
         }
       ]
     }
+  },
+  "RESULT-EN-PARITY-04": {
+    "repo": "fap-api",
+    "branch": "codex/result-en-parity-04-clinical-combo-en-paid",
+    "status": "merged",
+    "depends_on": [
+      "RESULT-EN-PARITY-03"
+    ],
+    "commit_sha": "e63038c74c3e65812ea05ce16209f539794724fe",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1671",
+    "failure_reason": null,
+    "merged_at": "2026-05-25T06:47:24Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "checks": {
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "PR #1671 is MERGED and origin/main contains squash merge e63038c74c3e65812ea05ce16209f539794724fe."
+      },
+      "post_merge_cleanup": {
+        "status": "pass",
+        "evidence": "origin/main synced to e63038c74c3e65812ea05ce16209f539794724fe, local main matched origin/main, task branch cleanup completed, and focused post-merge ResultEnParity04ClinicalComboEnPaid test passed."
+      }
+    },
+    "events": [
+      {
+        "at": "2026-05-25T06:55:00Z",
+        "status": "merged_reconciled_before_result_en_parity_05",
+        "summary": "Reconciled PR #1671 as merged with origin/main containing e63038c74c3e65812ea05ce16209f539794724fe; remote branch deleted and local cleanup executed before RESULT-EN-PARITY-05."
+      }
+    ]
+  },
+  "RESULT-EN-PARITY-05": {
+    "repo": "fap-api",
+    "branch": "codex/result-en-parity-05-mbti-content-export",
+    "status": "pr_open_github_checks_pending",
+    "depends_on": [
+      "RESULT-EN-PARITY-04"
+    ],
+    "commit_sha": "27a1fb50302d2eb9e517a8739628a365861c030d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1673",
+    "checks": {
+      "dependency_result_en_parity_00": {
+        "status": "pass",
+        "evidence": "PR #1666 is MERGED and origin/main contains merge commit a93345e5a24f1f579495bcfd78f30b4c5984bd1a."
+      },
+      "dependency_result_en_parity_04": {
+        "status": "pass",
+        "evidence": "PR #1671 is MERGED and origin/main contains merge commit e63038c74c3e65812ea05ce16209f539794724fe."
+      },
+      "scope_boundary": {
+        "status": "pass",
+        "evidence": "Changed files are limited to MBTI generated inventory/report, focused SeoIntel test, and PR-train state reconciliation. fap-web was inspected reference-only and not modified."
+      },
+      "production_safety": {
+        "status": "pass",
+        "evidence": "No production mutation, CMS mutation, deploy, production migration, URL submission, production user data access, scoring change, or fap-web commit."
+      },
+      "local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=ResultEnParity05MbtiContentExport --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool backend/docs/seo/generated/result-en-parity-05-mbti-content-export.v1.json >/dev/null",
+          "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
+          "git diff --check",
+          "git diff --cached --check",
+          "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+        ],
+        "evidence": "Focused ResultEnParity05MbtiContentExport test passed with 5 tests and 79 assertions. route:list exited 0 with 203 routes. Pint passed 3545 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, manifest/state parse, git diff checks, and fap-web reference status passed; fap-web only has pre-existing untracked .playwright-mcp/."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #1673 opened for RESULT-EN-PARITY-05; waiting for required GitHub checks."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "events": [
+      {
+        "at": "2026-05-25T06:55:00Z",
+        "status": "local_files_generated_pending_validation",
+        "summary": "Added MBTI backend-owned generated inventory/report classifying fap-web clone interpretation content as non-authoritative migration-only, listing backend authority sources, canonical section keys, missing English keys, fail-closed policy, and deferred reviewed asset batch work."
+      },
+      {
+        "at": "2026-05-25T07:00:00Z",
+        "status": "local_validation_passed",
+        "summary": "RESULT-EN-PARITY-05 focused test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, diff checks, and fap-web reference status passed locally."
+      },
+      {
+        "at": "2026-05-25T07:05:00Z",
+        "status": "pr_open_github_checks_pending",
+        "summary": "Opened PR #1673 for RESULT-EN-PARITY-05 MBTI backend content package export and frontend interpretation de-authoring; waiting for GitHub checks."
+      }
+    ]
   }
 }
