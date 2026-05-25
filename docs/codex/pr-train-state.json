@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T11:55:00+08:00",
+  "updated_at": "2026-05-25T11:56:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18288,12 +18288,12 @@
     "SEARCH-CHANNEL-LIVE-ZH-MBTI-01": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-zh-mbti-01-preflight",
-      "status": "local_checks_passed_rerun_ready_for_pr",
+      "status": "pr_open_github_checks_pending_rerun",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW"
       ],
       "commit_sha": "467b4caf1e7e4885b95c1215bc3c38292c628c6a",
-      "pr_url": "https://github.com/fermatmind/fap-api/pull/1660",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1662",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -18370,6 +18370,11 @@
           "at": "2026-05-25T11:55:00+08:00",
           "status": "commit_created_rerun",
           "summary": "Created scoped rerun commit 467b4caf1e7e4885b95c1215bc3c38292c628c6a with keyLocation-ready live preflight report updates."
+        },
+        {
+          "at": "2026-05-25T11:56:00+08:00",
+          "status": "pr_open_github_checks_pending_rerun",
+          "summary": "Opened rerun PR #1662 for the ZH MBTI live preflight report after keyLocation readiness passed."
         }
       ]
     },
