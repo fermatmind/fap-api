@@ -47,6 +47,7 @@ return [
             'report_preview',
             'research_report',
             'landing_page',
+            'content_page',
         ],
         'forbidden_page_entity_types' => [
             'take',
@@ -88,7 +89,7 @@ return [
                 'source_authority' => 'backend_public_surface',
             ],
             [
-                'path' => '/zh',
+                'path' => '/',
                 'locale' => 'zh-CN',
                 'page_entity_type' => 'home',
                 'entity_id_or_slug' => 'home:zh',

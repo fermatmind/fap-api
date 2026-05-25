@@ -5638,7 +5638,52 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     next_task: EN-PARITY-01
-    next_task: SEO-DASH-PROD-04B
+
+  - id: EN-PARITY-01
+    repo: fap-api
+    depends_on: [EN-PARITY-00]
+    branch: codex/en-parity-01-url-truth-canonical
+    base: main
+    title: "EN-PARITY-01 URL Truth hard/soft 404 and canonical baseline"
+    train_scope: en_parity_url_truth_canonical_baseline
+    risk_level: p0_seo_authority_baseline
+    allowed_paths:
+      - backend/app/Services/SeoIntel/Sources/BackendAuthorityUrlTruthSource.php
+      - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/config/seo_intel.php
+      - backend/docs/seo/en-parity-01-url-truth-canonical-baseline.md
+      - backend/docs/seo/generated/en-parity-01-url-truth-canonical-baseline.v1.json
+      - backend/tests/Feature/SeoIntel/EnParity01UrlTruthCanonicalBaselineTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Establish backend URL Truth baseline for EN-PARITY-00 hard/soft broken public URL findings.
+      - Add CMS content_pages as backend authority candidates only when published, public, indexable, non-empty, and locale-safe.
+      - Add content_pages to backend sitemap generator under the same authority eligibility rules.
+      - Make homepage canonical policy explicit by using root / as zh-CN home canonical and /en as English home canonical.
+      - Keep fap-web fallback, production CMS, Search Channel, deploy, URL submission, and production migration unchanged.
+    do_not:
+      - Modify fap-web runtime or frontend fallback content.
+      - Create full content page, article, career guide, or media body assets.
+      - Mutate production CMS or production URL Truth tables.
+      - Submit URLs to search engines, deploy, run production migrations, or read production env/secrets.
+    validation:
+      - cd backend && php artisan test --filter=EnParity01UrlTruthCanonicalBaselineTest --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/en-parity-01-url-truth-canonical-baseline.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    next_task: EN-PARITY-02
 
   - id: SEO-DASH-PROD-04B
     repo: fap-api

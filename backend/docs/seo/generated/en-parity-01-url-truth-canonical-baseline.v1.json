@@ -1,0 +1,140 @@
+{
+  "schema_version": "en-parity-01-url-truth-canonical-baseline.v1",
+  "task": "EN-PARITY-01",
+  "basis": "EN-PARITY-00 full-site bilingual parity inventory",
+  "final_decision": "en_parity_01_authority_baseline_ready_for_translation_group_read_model",
+  "authority_layer": "backend_cms_url_truth",
+  "no_cms_mutation_performed": true,
+  "deploy_performed": false,
+  "production_migration_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "frontend_fallback_authority_used": false,
+  "homepage_canonical_policy": {
+    "zh_home_canonical": "https://fermatmind.com/",
+    "en_home_canonical": "https://fermatmind.com/en",
+    "zh_path_policy": "/zh is not a competing canonical; it should redirect or remain excluded from URL Truth canonical exposure.",
+    "x_default_policy": "Root resolves to the zh-CN home surface unless a frontend renderer explicitly emits a different valid policy."
+  },
+  "url_truth_source_changes": {
+    "content_pages": {
+      "status": "added_to_backend_authority_source",
+      "required_fields": [
+        "published status",
+        "is_public=true",
+        "is_indexable=true",
+        "locale in en/zh-CN",
+        "non-empty title",
+        "non-empty content_md or content_html",
+        "safe locale-matched canonical path"
+      ],
+      "page_entity_type": "content_page",
+      "source_authority": "backend_cms",
+      "entity_source": "content_pages"
+    },
+    "sitemap_source": {
+      "status": "content_page_urls_added",
+      "rule": "Backend sitemap generator emits content_pages only when the same authority requirements pass."
+    }
+  },
+  "en_parity_00_p0_baseline_decisions": [
+    {
+      "url": "https://fermatmind.com/en/about",
+      "en_parity_00_status": "hard_404",
+      "decision": "should_exist_when_content_page_authority_exists",
+      "authority_action": "backend URL Truth and sitemap can now expose only published/indexable content_pages authority rows."
+    },
+    {
+      "url": "https://fermatmind.com/en/support",
+      "en_parity_00_status": "hard_404",
+      "decision": "should_exist_when support authority surface exists",
+      "authority_action": "Backend URL Truth can represent support as a content_page only if CMS/content_pages authority exists; frontend gateway-only support remains outside backend content authority."
+    },
+    {
+      "url": "https://fermatmind.com/en/help/about",
+      "en_parity_00_status": "soft_404",
+      "decision": "remove_or_keep_404_until_authority_exists",
+      "authority_action": "No content_page URL Truth record is emitted without an explicit published help-about content page."
+    },
+    {
+      "url": "https://fermatmind.com/en/help/for-business-and-research",
+      "en_parity_00_status": "soft_404",
+      "decision": "should_exist_when_content_page_authority_exists",
+      "authority_action": "Eligible only through published/indexable help content_page authority."
+    },
+    {
+      "url": "https://fermatmind.com/en/method-boundaries",
+      "en_parity_00_status": "soft_404",
+      "decision": "should_exist_when_content_page_authority_exists",
+      "authority_action": "Eligible only through published/indexable content_page authority."
+    },
+    {
+      "url": "https://fermatmind.com/zh/about",
+      "en_parity_00_status": "soft_404",
+      "decision": "should_exist_when_content_page_authority_exists",
+      "authority_action": "Eligible only through published/indexable content_page authority."
+    },
+    {
+      "url": "https://fermatmind.com/zh/careers",
+      "en_parity_00_status": "soft_404",
+      "decision": "should_exist_when_content_page_authority_exists",
+      "authority_action": "Eligible only through published/indexable content_page authority."
+    },
+    {
+      "url": "https://fermatmind.com/zh/help/contact",
+      "en_parity_00_status": "soft_404",
+      "decision": "should_exist_when_content_page_authority_exists",
+      "authority_action": "Eligible only through published/indexable help content_page authority."
+    },
+    {
+      "url": "https://fermatmind.com/zh/support",
+      "en_parity_00_status": "soft_404",
+      "decision": "should_exist_when support authority surface exists",
+      "authority_action": "Backend URL Truth can represent support as a content_page only if CMS/content_pages authority exists; frontend gateway-only support remains outside backend content authority."
+    },
+    {
+      "url": "https://fermatmind.com/en/research/mbti-personality-types-salary-turnover-report",
+      "en_parity_00_status": "mbti_research_404_carryover",
+      "decision": "should_exist_when_research_report_authority_exists",
+      "authority_action": "Existing research_reports URL Truth source continues to emit this URL only when safe published research authority fields exist."
+    },
+    {
+      "url": "https://fermatmind.com/zh/research/mbti-personality-types-salary-turnover-report",
+      "en_parity_00_status": "mbti_research_404_carryover",
+      "decision": "should_exist_when_research_report_authority_exists",
+      "authority_action": "Existing research_reports URL Truth source continues to emit this URL only when safe published research authority fields exist."
+    }
+  ],
+  "exposure_guards": {
+    "no_soft_404_from_backend_authority": true,
+    "empty_content_page_excluded": true,
+    "draft_content_page_excluded": true,
+    "locale_mismatched_canonical_excluded": true,
+    "missing_help_about_excluded_until_authority_exists": true,
+    "www_host_canonical_excluded": true
+  },
+  "tests": [
+    "EnParity01UrlTruthCanonicalBaselineTest::url_truth_uses_root_as_zh_home_canonical_and_en_home_as_english_canonical",
+    "EnParity01UrlTruthCanonicalBaselineTest::content_pages_enter_url_truth_only_when_authority_backed_and_indexable",
+    "EnParity01UrlTruthCanonicalBaselineTest::sitemap_source_exposes_only_content_pages_with_published_authority",
+    "EnParity01UrlTruthCanonicalBaselineTest::mbti_research_apex_remains_authority_backed_when_safe_research_rows_exist"
+  ],
+  "remaining_deferred_items": [
+    {
+      "id": "frontend_runtime_soft404_rendering",
+      "owner": "fap-web",
+      "reason": "Actual public HTTP status, notFound rendering, redirect behavior, and metadata emission are generated by fap-web routes and must be verified or fixed in a linked frontend PR if backend authority is present but runtime remains divergent."
+    },
+    {
+      "id": "content_body_completion",
+      "owner": "EN-PARITY-03",
+      "reason": "This PR does not create full content page bodies; it only ensures backend authority rows are represented safely when they exist."
+    },
+    {
+      "id": "full_translation_group_matrix",
+      "owner": "EN-PARITY-02",
+      "reason": "Counterpart matching beyond content_pages URL exposure remains a dedicated translation group/read-model task."
+    }
+  ],
+  "next_task": "EN-PARITY-02 translation group schema / read model"
+}

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\Sources;
 
+use App\Models\ContentPage;
 use App\Models\ResearchReport;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
@@ -23,6 +24,12 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
 
     private ?string $researchReportsUnavailableReason = null;
 
+    private bool $contentPagesAttempted = false;
+
+    private bool $contentPagesAvailable = false;
+
+    private ?string $contentPagesUnavailableReason = null;
+
     /**
      * @return list<UrlTruthInventoryRecord>
      */
@@ -31,6 +38,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         return $this->uniqueRecords([
             ...$this->scaleCatalogCandidates(),
             ...$this->researchReportCandidates(),
+            ...$this->contentPageCandidates(),
             ...$this->configuredBackendAuthorityCandidates(),
         ]);
     }
@@ -47,6 +55,9 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             'research_reports_attempted' => $this->researchReportsAttempted,
             'research_reports_available' => $this->researchReportsAvailable,
             'research_reports_unavailable_reason' => $this->researchReportsUnavailableReason,
+            'content_pages_attempted' => $this->contentPagesAttempted,
+            'content_pages_available' => $this->contentPagesAvailable,
+            'content_pages_unavailable_reason' => $this->contentPagesUnavailableReason,
             'configured_backend_authority_canary_available' => $this->configuredBackendAuthorityCandidates() !== [],
             'fetches_public_html' => false,
             'external_api_calls' => false,
@@ -56,6 +67,84 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             'static_llms_fallback_graph_truth' => false,
             'synthetic_production_fixture' => false,
         ];
+    }
+
+    /**
+     * @return list<UrlTruthInventoryRecord>
+     */
+    private function contentPageCandidates(): array
+    {
+        $this->contentPagesAttempted = true;
+
+        try {
+            $pages = ContentPage::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->where('status', ContentPage::STATUS_PUBLISHED)
+                ->where('is_public', true)
+                ->where('is_indexable', true)
+                ->whereIn('locale', ['en', 'zh-CN'])
+                ->where(static function ($query): void {
+                    $query->whereNull('published_at')
+                        ->orWhere('published_at', '<=', now());
+                })
+                ->orderBy('locale')
+                ->orderBy('slug')
+                ->get();
+        } catch (\Throwable) {
+            $this->contentPagesUnavailableReason = 'content_pages_unavailable';
+
+            return [];
+        }
+
+        $records = [];
+        foreach ($pages as $page) {
+            if (! $page instanceof ContentPage || ! $this->hasRequiredContentPageFields($page)) {
+                continue;
+            }
+
+            $path = $this->contentPageCanonicalPath($page);
+            if ($path === null) {
+                continue;
+            }
+
+            $updatedAt = $page->updated_at instanceof Carbon ? $page->updated_at : null;
+            $lastmodAt = $updatedAt
+                ?? ($page->published_at instanceof Carbon ? $page->published_at : null)
+                ?? ($page->source_updated_at instanceof Carbon ? $page->source_updated_at : null);
+
+            $records[] = new UrlTruthInventoryRecord(
+                canonicalUrl: $this->canonicalUrl($path),
+                locale: (string) $page->locale,
+                pageEntityType: 'content_page',
+                entityIdOrSlug: (string) $page->slug,
+                sourceAuthority: 'backend_cms',
+                indexabilityState: 'indexable',
+                lastmodAt: $lastmodAt,
+                lastmodSource: 'content_pages.updated_at',
+                cluster: 'content_pages',
+                entitySource: 'content_pages',
+                authorityStatus: 'published',
+                sourceUpdatedAt: $updatedAt,
+                metadata: [
+                    'source_table_hash' => hash('sha256', 'content_pages'),
+                    'canonical_path_hash' => hash('sha256', $path),
+                    'kind_hash' => hash('sha256', (string) $page->kind),
+                    'page_type_hash' => hash('sha256', (string) ($page->page_type ?? '')),
+                ],
+                attributes: [
+                    'source_authority' => 'backend_cms',
+                    'translation_group_hash' => hash('sha256', (string) ($page->translation_group_id ?? '')),
+                ],
+            );
+        }
+
+        $this->contentPagesAvailable = $records !== [];
+        if (! $this->contentPagesAvailable) {
+            $this->contentPagesUnavailableReason = 'content_pages_empty_or_ineligible';
+        }
+
+        return $records;
     }
 
     /**
@@ -285,6 +374,55 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         }
 
         return is_array($report->references) && $report->references !== [];
+    }
+
+    private function contentPageCanonicalPath(ContentPage $page): ?string
+    {
+        $localeSegment = match ($page->locale) {
+            'zh-CN', 'zh' => 'zh',
+            'en' => 'en',
+            default => null,
+        };
+
+        if ($localeSegment === null) {
+            return null;
+        }
+
+        $path = trim((string) ($page->canonical_path ?: $page->path));
+        if ($path === '') {
+            $slug = trim((string) $page->slug);
+            if ($slug === '') {
+                return null;
+            }
+
+            $path = str_starts_with($slug, 'help-') && (string) $page->kind === ContentPage::KIND_HELP
+                ? '/help/'.substr($slug, 5)
+                : '/'.$slug;
+        }
+
+        $path = '/'.ltrim($path, '/');
+
+        if (preg_match('#^/(en|zh)(?:/|$)#', $path) === 1) {
+            return str_starts_with($path, '/'.$localeSegment.'/') || $path === '/'.$localeSegment
+                ? $path
+                : null;
+        }
+
+        if ($path === '/') {
+            return $localeSegment === 'zh' ? '/' : '/en';
+        }
+
+        return '/'.$localeSegment.$path;
+    }
+
+    private function hasRequiredContentPageFields(ContentPage $page): bool
+    {
+        if (trim((string) $page->slug) === '' || trim((string) $page->title) === '') {
+            return false;
+        }
+
+        return trim((string) $page->content_md) !== ''
+            || trim((string) $page->content_html) !== '';
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
+use App\Models\ContentPage;
 use App\Models\PersonalityProfileVariant;
 use App\Models\TopicProfile;
 use App\Services\Career\Dataset\CareerDatasetPublicationMetadataService;
@@ -99,7 +100,8 @@ class SitemapGenerator
             $this->getCareerGuideUrls(),
             $this->getCareerDatasetUrls(),
             $this->getPersonalityUrls(),
-            $this->getTopicUrls()
+            $this->getTopicUrls(),
+            $this->getContentPageUrls()
         );
 
         $urls = collect($urls)
@@ -729,6 +731,108 @@ class SitemapGenerator
         }
 
         return $urls;
+    }
+
+    private function getContentPageUrls(): array
+    {
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        if ($baseUrl === '') {
+            return [];
+        }
+
+        $rows = ContentPage::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('status', ContentPage::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->whereIn('locale', ['en', 'zh-CN'])
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->orderBy('locale')
+            ->orderBy('slug')
+            ->get();
+
+        $urls = [];
+        foreach ($rows as $row) {
+            if (! $row instanceof ContentPage || ! $this->hasRequiredContentPageFields($row)) {
+                continue;
+            }
+
+            $path = $this->contentPageCanonicalPath($row);
+            if ($path === null) {
+                continue;
+            }
+
+            $lastmod = $row->updated_at
+                ?? $row->published_at
+                ?? $row->source_updated_at
+                ?? now();
+
+            $urls[] = [
+                'loc' => $baseUrl.$path,
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'content-pages:'.$this->contentPageLocaleSegment((string) $row->locale).':'.(string) $row->slug,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+        }
+
+        return $urls;
+    }
+
+    private function contentPageCanonicalPath(ContentPage $page): ?string
+    {
+        $localeSegment = $this->contentPageLocaleSegment((string) $page->locale);
+        if ($localeSegment === '') {
+            return null;
+        }
+
+        $path = trim((string) ($page->canonical_path ?: $page->path));
+        if ($path === '') {
+            $slug = trim((string) $page->slug);
+            if ($slug === '') {
+                return null;
+            }
+
+            $path = str_starts_with($slug, 'help-') && (string) $page->kind === ContentPage::KIND_HELP
+                ? '/help/'.substr($slug, 5)
+                : '/'.$slug;
+        }
+
+        $path = '/'.ltrim($path, '/');
+
+        if (preg_match('#^/(en|zh)(?:/|$)#', $path) === 1) {
+            return str_starts_with($path, '/'.$localeSegment.'/') || $path === '/'.$localeSegment
+                ? $path
+                : null;
+        }
+
+        if ($path === '/') {
+            return $localeSegment === 'zh' ? '/' : '/en';
+        }
+
+        return '/'.$localeSegment.$path;
+    }
+
+    private function contentPageLocaleSegment(string $locale): string
+    {
+        return match ($locale) {
+            'zh-CN', 'zh' => 'zh',
+            'en' => 'en',
+            default => '',
+        };
+    }
+
+    private function hasRequiredContentPageFields(ContentPage $page): bool
+    {
+        if (trim((string) $page->slug) === '' || trim((string) $page->title) === '') {
+            return false;
+        }
+
+        return trim((string) $page->content_md) !== ''
+            || trim((string) $page->content_html) !== '';
     }
 
     private function collectSlugs($primarySlug, $slugsJson): array
