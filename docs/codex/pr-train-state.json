@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T01:50:00+08:00",
+  "updated_at": "2026-05-26T07:52:14+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -1005,7 +1005,7 @@
       "sidecar_issues": [
         {
           "sidecar_id": "IQ-SIDECAR-COMMERCE-DEFERRED-001",
-          "title": "defer(iq): commerce unlock ¥1.99 / ¥5 implementation",
+          "title": "defer(iq): commerce unlock \u00a51.99 / \u00a55 implementation",
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
@@ -1024,7 +1024,7 @@
             "api/v0.3/webhooks/payment/*"
           ],
           "evidence": [
-            "User intentionally deferred the ¥1.99 / ¥5 commerce PR.",
+            "User intentionally deferred the \u00a51.99 / \u00a55 commerce PR.",
             "Paid unlock is not required for identity/scoring/report/SVG provenance foundation.",
             "The train can continue without checkout/SKU/webhook changes."
           ],
@@ -4239,7 +4239,7 @@
         },
         "forbidden_runtime_claim_grep": {
           "status": "pass",
-          "command": "rg -n \"Matches|career recommendation|job fit|success prediction|success probability|hiring suitability|140Q more accurate|raw score delta|更准确|更准|岗位匹配|职业推荐|职业成功\" backend/app/Services/Riasec/RiasecPublicProjectionService.php backend/app/Services/Report/RiasecReportComposer.php || true",
+          "command": "rg -n \"Matches|career recommendation|job fit|success prediction|success probability|hiring suitability|140Q more accurate|raw score delta|\u66f4\u51c6\u786e|\u66f4\u51c6|\u5c97\u4f4d\u5339\u914d|\u804c\u4e1a\u63a8\u8350|\u804c\u4e1a\u6210\u529f\" backend/app/Services/Riasec/RiasecPublicProjectionService.php backend/app/Services/Report/RiasecReportComposer.php || true",
           "evidence": "No runtime service hits."
         },
         "diff_check": {
@@ -5176,7 +5176,7 @@
     "PR-CMS-04": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-04-controlled-codex-publish-sop",
-      "title": "PR-CMS-04｜Controlled Codex-Assisted CMS Publish SOP",
+      "title": "PR-CMS-04\uff5cControlled Codex-Assisted CMS Publish SOP",
       "status": "pr_open",
       "depends_on": [
         "PR-CMS-01",
@@ -7048,7 +7048,7 @@
     "PR-CMS-FIX-MASTER": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-fix-master-semantic-content-gate",
-      "title": "PR-CMS-FIX-MASTER｜Scalable Semantic Content Gate Architecture",
+      "title": "PR-CMS-FIX-MASTER\uff5cScalable Semantic Content Gate Architecture",
       "status": "pr_open",
       "depends_on": [
         "PR-CMS-01"
@@ -7136,7 +7136,7 @@
     "PR-GRAPH-01": {
       "repo": "fap-api",
       "branch": "codex/pr-graph-01-multi-test-edges",
-      "title": "PR-GRAPH-01｜Article Multi-Test Graph Edges",
+      "title": "PR-GRAPH-01\uff5cArticle Multi-Test Graph Edges",
       "status": "ci_fix_local_checks_passed",
       "depends_on": [
         "PR-CMS-01",
@@ -7236,7 +7236,7 @@
     "PR-MEDIA-01": {
       "repo": "fap-api",
       "branch": "codex/pr-media-01-oss-cdn",
-      "title": "PR-MEDIA-01｜CMS Media Library OSS/CDN Upload Automation",
+      "title": "PR-MEDIA-01\uff5cCMS Media Library OSS/CDN Upload Automation",
       "status": "pr_open",
       "depends_on": [
         "PR-CMS-01",
@@ -17411,7 +17411,7 @@
           "failed": [
             {
               "command": "cd backend && php artisan test --filter=PaymentWebhook",
-              "summary": "Sidecar only: Tests\\Feature\\V0_3\\PaymentWebhookCnCallbackTest::test_wechatpay_valid_callback_calls_processor_and_returns_success_ack fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / 签名异常: 微信签名为空 error."
+              "summary": "Sidecar only: Tests\\Feature\\V0_3\\PaymentWebhookCnCallbackTest::test_wechatpay_valid_callback_calls_processor_and_returns_success_ack fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / \u7b7e\u540d\u5f02\u5e38: \u5fae\u4fe1\u7b7e\u540d\u4e3a\u7a7a error."
             }
           ]
         },
@@ -17451,7 +17451,7 @@
           "branch": "codex/pr-audit-be-02-webhook-digest",
           "command_or_check": "php artisan test --filter=PaymentWebhook",
           "failing_test": "Tests\\Feature\\V0_3\\PaymentWebhookCnCallbackTest::test_wechatpay_valid_callback_calls_processor_and_returns_success_ack",
-          "evidence": "400 instead of 200; 签名异常: 微信签名为空",
+          "evidence": "400 instead of 200; \u7b7e\u540d\u5f02\u5e38: \u5fae\u4fe1\u7b7e\u540d\u4e3a\u7a7a",
           "baseline_verification": "Exact test also fails on clean origin/main",
           "baseline_commit": "c87d9bc11f4e1cf90e60c06660b472e8afeb10a0",
           "why_external_to_current_pr": "BE-02 diff only touches payload digest idempotency service/test and ledger; failure is in WeChatPay CN callback signature chain.",
@@ -17477,7 +17477,7 @@
         {
           "at": "2026-05-24T07:51:12.597Z",
           "status": "sidecar_verified",
-          "summary": "Verified WeChatPay CN callback exact failing test also fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / 签名异常: 微信签名为空 error. Treating broad PaymentWebhook filter failure as sidecar per user authorization."
+          "summary": "Verified WeChatPay CN callback exact failing test also fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / \u7b7e\u540d\u5f02\u5e38: \u5fae\u4fe1\u7b7e\u540d\u4e3a\u7a7a error. Treating broad PaymentWebhook filter failure as sidecar per user authorization."
         },
         {
           "at": "2026-05-24T07:55:33.131Z",
@@ -20350,12 +20350,12 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-career-content-batch-05",
       "base": "main",
-      "status": "pr_opened",
+      "status": "merged",
       "depends_on": [
         "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04"
       ],
       "title": "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05 career content English draft package",
-      "commit_sha": "fc7b24abe22155779b054cedef3b1afa6a3ae91b",
+      "commit_sha": "6b30a33531e4e4d0a6e91a7349a0f169c9ed531a",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1696",
       "checks": {
         "manifest_registration": {
@@ -20399,6 +20399,15 @@
         "pr_opened": {
           "status": "pass",
           "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1696 from codex/global-en-zh-career-content-batch-05 after local validation passed."
+        },
+        "github_checks": {
+          "status": "pass",
+          "evidence": "PR #1696 checks green and mergeStateStatus CLEAN before squash merge."
+        },
+        "post_merge_focused_test": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhCareerContentBatch05 --no-ansi",
+          "evidence": "1 test passed with 4857 assertions on synced main."
         }
       },
       "scope": {
@@ -20423,9 +20432,9 @@
         "frontend_fallback_authority": false
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T18:36:38Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "next_task": "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06",
       "events": [
@@ -20448,6 +20457,11 @@
           "at": "2026-05-26T02:27:25+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1696 for Batch-05 after local validation passed."
+        },
+        {
+          "at": "2026-05-26T07:50:21+08:00",
+          "status": "merged",
+          "summary": "PR #1696 merged, remote branch deleted, local branch cleaned up, and post-merge focused test passed."
         }
       ]
     },
@@ -20455,17 +20469,39 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-result-report-asset-batch-06",
       "base": "main",
-      "status": "manifest_registered",
+      "status": "local_validation_passed",
       "depends_on": [
         "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05"
       ],
-      "title": "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06 result/report English asset translation and no-zh-fallback batch",
+      "title": "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06 result report English asset draft package",
       "commit_sha": null,
       "pr_url": null,
       "checks": {
         "manifest_registration": {
           "status": "pass",
           "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        },
+        "artifact_generation": {
+          "status": "pass",
+          "evidence": "Generated result/report draft package for 23 items; 8 draft/import-only, 3 deferred, 12 existing-review/no-action."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=GlobalEnZhResultReportAssetBatch06 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-result-report-asset-batch-06.v1.json >/dev/null",
+            "python3 -m json.tool backend/docs/seo/import-packages/global-en-zh-result-report-asset-batch-06.import.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check",
+            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          ],
+          "evidence": "All Batch-06 local validation commands passed; focused test reported 1 warning in isolated env but 343 assertions completed with no failures."
         }
       },
       "scope": {
@@ -20500,6 +20536,16 @@
           "at": "2026-05-26T01:05:00+08:00",
           "status": "manifest_registered",
           "summary": "Registered result/report asset translation batch with no-zh-fallback, private-result safety, and no-publish boundaries."
+        },
+        {
+          "at": "2026-05-26T07:50:21+08:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Generated Batch-06 result/report asset import package, generated summary, Markdown report, focused test placeholder, and Batch-05 merge reconciliation."
+        },
+        {
+          "at": "2026-05-26T07:52:14+08:00",
+          "status": "local_validation_passed",
+          "summary": "Batch-06 focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff checks, and fap-web reference status passed."
         }
       ]
     },
@@ -21346,7 +21392,7 @@
       },
       "forbidden_claim_scan": {
         "status": "pass",
-        "summary": "Imported PACK-08 assets scan found 0 forbidden user claims; 1 allowed boundary hit for negated near-tie “推翻” boundary."
+        "summary": "Imported PACK-08 assets scan found 0 forbidden user claims; 1 allowed boundary hit for negated near-tie \u201c\u63a8\u7ffb\u201d boundary."
       },
       "frontend_fallback_scan": {
         "status": "pass",
