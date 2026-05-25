@@ -13222,3 +13222,45 @@ prs:
     fap_web_commit_allowed: false
     content_generation_allowed: false
     next_task: DEPLOY-READINESS
+
+  - id: GLOBAL-EN-ZH-CONTENT-AUTHORITY-PUBLISH-READINESS-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01
+    branch: codex/global-en-zh-content-authority-publish-readiness-01
+    base: main
+    title: "GLOBAL-EN-ZH-CONTENT-AUTHORITY-PUBLISH-READINESS-01 content authority publish readiness"
+    train_scope: global_en_zh_content_authority_publish_readiness
+    risk_level: p1_content_authority_readiness_non_runtime
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-content-authority-publish-readiness-01.md
+      - backend/docs/seo/generated/global-en-zh-content-authority-publish-readiness-01.v1.json
+      - backend/docs/seo/import-packages/global-en-zh-content-authority-publish-readiness-01.import.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentAuthorityPublishReadiness01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare a non-runtime authority readiness matrix for brand, charter, foundation, careers, and policies.
+      - Record draft/import-only boundaries and future human review/import requirements.
+      - Keep footer, sitemap, and llms eligibility closed until a future authority-backed publish task.
+    do_not:
+      - Publish content, mutate CMS, deploy, modify fap-web footer, submit URLs, enqueue Search Channel, or use frontend fallback as authority.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhContentAuthorityPublishReadiness01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-authority-publish-readiness-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    next_task: GLOBAL-EN-ZH-CONTENT-AUTHORITY-HUMAN-REVIEW-IMPORT-01

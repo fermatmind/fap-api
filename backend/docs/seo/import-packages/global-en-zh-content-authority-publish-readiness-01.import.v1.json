@@ -1,0 +1,77 @@
+{
+  "schema_version": "global-en-zh-content-authority-publish-readiness-01.import.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-AUTHORITY-PUBLISH-READINESS-01",
+  "non_runtime": true,
+  "publish_state": "draft_review_only",
+  "runtime_exposure_allowed": false,
+  "sitemap_llms_exposure_allowed": false,
+  "footer_exposure_allowed": false,
+  "cms_mutation_performed": false,
+  "pages": [
+    {
+      "page_key": "brand",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_slug": "brand",
+      "target_slug": "brand",
+      "translation_group_id": "content-page-brand",
+      "source_baseline_path": "content_baselines/content_pages/content_pages.zh-CN.json",
+      "source_doc": "05_品牌与使用规范.docx",
+      "status": "ready_for_human_review",
+      "required_fields_to_supply": ["title", "description", "h1", "summary", "body_blocks", "seo_metadata", "review_notes"],
+      "prohibited_claims": ["unsupported brand rights", "unsupported company facts", "unsupported legal commitments"]
+    },
+    {
+      "page_key": "charter",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_slug": "charter",
+      "target_slug": "charter",
+      "translation_group_id": "content-page-charter",
+      "source_baseline_path": "content_baselines/content_pages/content_pages.zh-CN.json",
+      "source_doc": "02_费马测试宪章.docx",
+      "status": "ready_for_human_review",
+      "required_fields_to_supply": ["title", "description", "h1", "summary", "body_blocks", "seo_metadata", "review_notes"],
+      "prohibited_claims": ["unsupported governance commitments", "unsupported legal commitments", "clinical or diagnostic claims"]
+    },
+    {
+      "page_key": "foundation",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_slug": "foundation",
+      "target_slug": "foundation",
+      "translation_group_id": "content-page-foundation",
+      "source_baseline_path": "content_baselines/content_pages/content_pages.zh-CN.json",
+      "source_doc": "03_费马基金会计划.docx",
+      "status": "ready_for_human_review",
+      "required_fields_to_supply": ["title", "description", "h1", "summary", "body_blocks", "seo_metadata", "review_notes"],
+      "prohibited_claims": ["unsupported foundation status", "unsupported public-benefit claims", "unsupported governance facts"]
+    },
+    {
+      "page_key": "careers",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_slug": "careers",
+      "target_slug": "careers",
+      "translation_group_id": "content-page-careers",
+      "source_baseline_path": "content_baselines/content_pages/content_pages.zh-CN.json",
+      "source_doc": "04_加入费马测试.docx",
+      "status": "ready_for_human_review",
+      "required_fields_to_supply": ["title", "description", "h1", "summary", "body_blocks", "seo_metadata", "review_notes"],
+      "prohibited_claims": ["hiring guarantees", "career success promises", "salary claims", "unsupported open role facts"]
+    },
+    {
+      "page_key": "policies",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_slug": "policies",
+      "target_slug": "policies",
+      "translation_group_id": "content-page-policies",
+      "source_baseline_path": "content_baselines/content_pages/content_pages.zh-CN.json",
+      "source_doc": "08_其他政策.docx",
+      "status": "ready_for_human_review",
+      "required_fields_to_supply": ["title", "description", "h1", "summary", "body_blocks", "seo_metadata", "review_notes"],
+      "prohibited_claims": ["unsupported policy commitments", "unsupported legal commitments", "privacy or security claims not present in authority"]
+    }
+  ]
+}
