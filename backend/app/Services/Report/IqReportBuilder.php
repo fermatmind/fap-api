@@ -11,13 +11,77 @@ final class IqReportBuilder
 {
     private const CANONICAL_SCALE_CODE = 'IQ_INTELLIGENCE_QUOTIENT';
 
+    private const DEFAULT_LOCALE = 'zh-CN';
+
     /**
-     * @var array<string,array{key:string,name:string}>
+     * @var array<string,array{key:string}>
      */
     private const DIMENSIONS = [
-        'VSI' => ['key' => 'visual_spatial_insight', 'name' => '视觉空间洞察'],
-        'VSPR' => ['key' => 'visual_spatial_pattern_reasoning', 'name' => '视觉空间模式推理'],
-        'NPR' => ['key' => 'numerical_pattern_reasoning', 'name' => '数字规律推理'],
+        'VSI' => ['key' => 'visual_spatial_insight'],
+        'VSPR' => ['key' => 'visual_spatial_pattern_reasoning'],
+        'NPR' => ['key' => 'numerical_pattern_reasoning'],
+    ];
+
+    /**
+     * @var array<string,mixed>
+     */
+    private const LABEL_CATALOG = [
+        'schema_version' => 'iq.locale_labels.v1',
+        'scale_code' => self::CANONICAL_SCALE_CODE,
+        'asset_status' => 'backend_report_builder_label_catalog',
+        'default_locale' => self::DEFAULT_LOCALE,
+        'fallback_policy' => [
+            'en' => 'missing_label_returns_null_no_zh_fallback',
+            'zh-CN' => 'backend_catalog_authority',
+        ],
+        'dimensions' => [
+            'visual_spatial_insight' => [
+                'dimension_code' => 'VSI',
+                'labels' => [
+                    'zh-CN' => '视觉空间洞察',
+                    'en' => 'Visual-spatial insight',
+                ],
+            ],
+            'visual_spatial_pattern_reasoning' => [
+                'dimension_code' => 'VSPR',
+                'labels' => [
+                    'zh-CN' => '视觉空间模式推理',
+                    'en' => 'Visual-spatial pattern reasoning',
+                ],
+            ],
+            'numerical_pattern_reasoning' => [
+                'dimension_code' => 'NPR',
+                'aliases' => [
+                    'numeric_pattern_reasoning',
+                ],
+                'labels' => [
+                    'zh-CN' => '数字规律推理',
+                    'en' => 'Numeric pattern reasoning',
+                ],
+            ],
+        ],
+        'iq_pro' => [
+            'pdf_payload' => [
+                'labels' => [
+                    'zh-CN' => 'IQ 报告 PDF',
+                    'en' => 'IQ report PDF',
+                ],
+                'description' => [
+                    'zh-CN' => '在线 IQ 估测报告 PDF；当前仅定义合同，尚未生成正式文件。',
+                    'en' => 'Online IQ estimate report PDF; contract-defined only until formal file generation is implemented.',
+                ],
+            ],
+            'certificate_payload' => [
+                'labels' => [
+                    'zh-CN' => 'IQ 结果凭证',
+                    'en' => 'IQ result certificate',
+                ],
+                'description' => [
+                    'zh-CN' => '在线 IQ 估测结果凭证；当前仅定义合同，尚未生成正式文件。',
+                    'en' => 'Online IQ estimate result certificate; contract-defined only until formal file generation is implemented.',
+                ],
+            ],
+        ],
     ];
 
     /**
@@ -41,8 +105,9 @@ final class IqReportBuilder
         $score = $this->extractScoreResult($result);
         $status = strtolower(trim((string) ($score['status'] ?? 'blocked_unscored')));
         $reasonCode = $this->stringOrNull($score['reason_code'] ?? null);
+        $locale = $this->normalizeLocale((string) ($ctx['locale'] ?? $attempt->locale ?? self::DEFAULT_LOCALE));
         $summary = $this->buildSummary($status, $score);
-        $dimensions = $this->buildDimensions($score);
+        $dimensions = $this->buildDimensions($score, $locale);
         $quality = $this->buildQuality($score);
         $stability = $this->buildStability($score, $status, $reasonCode);
         $reportAccessLevel = ReportAccess::normalizeReportAccessLevel((string) ($ctx['report_access_level'] ?? ReportAccess::REPORT_ACCESS_FULL));
@@ -63,6 +128,13 @@ final class IqReportBuilder
             'scale_code' => self::CANONICAL_SCALE_CODE,
             'scale_code_legacy' => $legacyScaleCode !== '' ? $legacyScaleCode : 'IQ_RAVEN',
             'attempt_id' => (string) ($attempt->id ?? ''),
+            'locale' => $locale,
+            'label_catalog' => [
+                'schema_version' => (string) (self::LABEL_CATALOG['schema_version'] ?? ''),
+                'fallback_policy' => $locale === 'en'
+                    ? 'missing_label_returns_null_no_zh_fallback'
+                    : 'backend_catalog_authority',
+            ],
             'summary' => $summary,
             'dimensions' => $dimensions,
             'quality' => $quality,
@@ -83,11 +155,15 @@ final class IqReportBuilder
             'iq_pro' => [
                 'pdf_payload' => [
                     'status' => 'contract_defined_not_implemented',
+                    'label' => $this->iqProLabel('pdf_payload', $locale),
+                    'description' => $this->iqProDescription('pdf_payload', $locale),
                     'scale_code' => self::CANONICAL_SCALE_CODE,
                     'attempt_id' => (string) ($attempt->id ?? ''),
                 ],
                 'certificate_payload' => [
                     'status' => 'contract_defined_not_implemented',
+                    'label' => $this->iqProLabel('certificate_payload', $locale),
+                    'description' => $this->iqProDescription('certificate_payload', $locale),
                     'scale_code' => self::CANONICAL_SCALE_CODE,
                     'attempt_id' => (string) ($attempt->id ?? ''),
                 ],
@@ -205,7 +281,7 @@ final class IqReportBuilder
      * @param  array<string,mixed>  $score
      * @return array<string,array<string,mixed>>
      */
-    private function buildDimensions(array $score): array
+    private function buildDimensions(array $score, string $locale): array
     {
         $rawDimensions = is_array($score['dimension_scores'] ?? null) ? $score['dimension_scores'] : [];
         $dimensions = [];
@@ -214,7 +290,7 @@ final class IqReportBuilder
             $row = is_array($rawDimensions[$code] ?? null) ? $rawDimensions[$code] : [];
             $dimensions[$meta['key']] = [
                 'dimension_code' => $code,
-                'dimension_name' => $meta['name'],
+                'dimension_name' => $this->dimensionLabel($meta['key'], $locale),
                 'raw_score' => $this->floatOrNull($row['raw_score'] ?? null),
                 'percent_correct' => $this->floatOrNull($row['percent_correct'] ?? null),
                 'item_count' => $this->intOrNull($row['item_count'] ?? null),
@@ -224,6 +300,36 @@ final class IqReportBuilder
         }
 
         return $dimensions;
+    }
+
+    private function dimensionLabel(string $dimensionKey, string $locale): ?string
+    {
+        return $this->localizedLabel("dimensions.{$dimensionKey}.labels", $locale);
+    }
+
+    private function iqProLabel(string $payloadKey, string $locale): ?string
+    {
+        return $this->localizedLabel("iq_pro.{$payloadKey}.labels", $locale);
+    }
+
+    private function iqProDescription(string $payloadKey, string $locale): ?string
+    {
+        return $this->localizedLabel("iq_pro.{$payloadKey}.description", $locale);
+    }
+
+    private function localizedLabel(string $basePath, string $locale): ?string
+    {
+        $labels = data_get(self::LABEL_CATALOG, $basePath);
+        if (! is_array($labels)) {
+            return null;
+        }
+
+        $value = $labels[$locale] ?? null;
+        if (! is_string($value) || trim($value) === '') {
+            return null;
+        }
+
+        return trim($value);
     }
 
     /**
@@ -295,5 +401,20 @@ final class IqReportBuilder
         $normalized = trim($value);
 
         return $normalized === '' ? null : $normalized;
+    }
+
+    private function normalizeLocale(string $locale): string
+    {
+        $normalized = trim($locale);
+
+        if (str_starts_with(strtolower($normalized), 'en')) {
+            return 'en';
+        }
+
+        if ($normalized === 'zh' || $normalized === 'zh_CN' || $normalized === 'zh-CN') {
+            return 'zh-CN';
+        }
+
+        return self::DEFAULT_LOCALE;
     }
 }

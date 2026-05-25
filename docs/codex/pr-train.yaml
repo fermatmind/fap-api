@@ -5820,6 +5820,53 @@ prs:
     fap_web_commit_allowed: false
     next_task: RESULT-EN-PARITY-03
 
+  - id: RESULT-EN-PARITY-03
+    repo: fap-api
+    depends_on: [RESULT-EN-PARITY-02]
+    branch: codex/result-en-parity-03-iq-locale-safe-labels
+    base: main
+    title: "RESULT-EN-PARITY-03 IQ locale-safe report builder labels"
+    train_scope: iq_locale_safe_report_builder_labels
+    risk_level: backend_iq_label_catalog_no_scoring_change
+    allowed_paths:
+      - backend/app/Services/Iq/**
+      - backend/app/Services/Report/**
+      - backend/content_packs/IQ*/**
+      - backend/docs/seo/result-en-parity-03-iq-locale-safe-labels.md
+      - backend/docs/seo/generated/result-en-parity-03-iq-locale-safe-labels.v1.json
+      - backend/tests/Feature/SeoIntel/ResultEnParity03IqLocaleSafeLabelsTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Move IQ dimensions/report labels into a locale-aware backend catalog.
+      - Add EN/ZH tests for IQ dimension labels and IQ Pro PDF/certificate labels.
+      - Ensure explicit EN IQ report payloads do not render Chinese labels.
+      - Keep IQ wording bounded as online estimate and confidence-bound, not clinical IQ authority.
+    do_not:
+      - Claim real clinical IQ diagnosis, definitive intelligence measurement, certified IQ authority, or globally most accurate IQ result.
+      - Change IQ scoring algorithm, answer key handling, redaction, payment, unlock, CMS, production data, production secrets, sitemap, llms, Search Channel, or URL submission state.
+      - Run production migrations, deploy, submit URLs, or access protected result data.
+      - Modify fap-web.
+    validation:
+      - cd backend && php artisan test --filter=ResultEnParity03IqLocaleSafeLabels --no-ansi
+      - cd backend && php artisan test --filter=IqReportBuilder --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/result-en-parity-03-iq-locale-safe-labels.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+      - git diff --name-only origin/main...HEAD
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    next_task: RESULT-EN-PARITY-04
+
   - id: SEO-DASH-PROD-04B
     repo: fap-api
     depends_on:

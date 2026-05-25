@@ -1,0 +1,99 @@
+{
+  "pr_id": "RESULT-EN-PARITY-03",
+  "title": "IQ locale-safe report builder labels",
+  "family": "iq",
+  "generated_at": "2026-05-25T00:00:00Z",
+  "authority": {
+    "backend_label_catalog_is_authority": true,
+    "frontend_fallback_is_authority": false,
+    "scoring_change": false,
+    "production_cms_mutation": false,
+    "production_user_data_access": false,
+    "deployment": false,
+    "search_submission": false
+  },
+  "label_catalog": {
+    "path": "backend/app/Services/Report/IqReportBuilder.php::LABEL_CATALOG",
+    "schema_version": "iq.locale_labels.v1",
+    "default_locale": "zh-CN",
+    "english_missing_behavior": "missing_label_returns_null_no_zh_fallback"
+  },
+  "english_runtime_policy": "fail_closed_no_zh_label_fallback",
+  "fixed_keys": [
+    "iq.dimensions.visual_spatial_insight.en",
+    "iq.dimensions.visual_spatial_pattern_reasoning.en",
+    "iq.dimensions.numeric_pattern_reasoning.en",
+    "iq.dimensions.numerical_pattern_reasoning.en",
+    "iq_pro.pdf_payload.en",
+    "iq_pro.certificate_payload.en"
+  ],
+  "asset_matrix": [
+    {
+      "asset_key": "iq.dimensions.visual_spatial_insight",
+      "dimension_code": "VSI",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false
+    },
+    {
+      "asset_key": "iq.dimensions.visual_spatial_pattern_reasoning",
+      "dimension_code": "VSPR",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false
+    },
+    {
+      "asset_key": "iq.dimensions.numeric_pattern_reasoning",
+      "canonical_runtime_key": "numerical_pattern_reasoning",
+      "dimension_code": "NPR",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false
+    },
+    {
+      "asset_key": "iq_pro.pdf_payload",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "status": "contract_defined_not_implemented"
+    },
+    {
+      "asset_key": "iq_pro.certificate_payload",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "status": "contract_defined_not_implemented"
+    }
+  ],
+  "claim_boundary": {
+    "allowed": [
+      "online IQ estimate",
+      "confidence-bound result",
+      "contract-defined PDF/certificate payload",
+      "not a clinical diagnosis"
+    ],
+    "forbidden": [
+      "clinical IQ diagnosis",
+      "definitive intelligence measurement",
+      "certified IQ",
+      "globally most accurate",
+      "treatment",
+      "medical diagnosis"
+    ]
+  },
+  "validation_targets": [
+    "php artisan test --filter=ResultEnParity03IqLocaleSafeLabels --no-ansi",
+    "php artisan test --filter=IqReportBuilder --no-ansi",
+    "php artisan route:list --no-ansi",
+    "vendor/bin/pint --test",
+    "composer validate --strict",
+    "composer audit --locked --no-interaction --ignore-unreachable",
+    "python3 -m json.tool backend/docs/seo/generated/result-en-parity-03-iq-locale-safe-labels.v1.json"
+  ],
+  "decision": "iq_locale_safe_labels_backend_catalog_ready"
+}
