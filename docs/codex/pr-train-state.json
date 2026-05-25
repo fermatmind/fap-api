@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T18:44:00.000Z",
+  "updated_at": "2026-05-25T02:53:27.628310Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18355,6 +18355,80 @@
           "at": "2026-05-25T10:00:00+08:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1660 for the ZH MBTI live submission preflight report. GitHub checks are pending."
+        }
+      ]
+    },
+    "SEO-GROWTH-MBTI-ACTION-01D-SCAN-00": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-01d-scan-00",
+      "status": "pr_open_github_checks_pending",
+      "depends_on": [],
+      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1661",
+      "checks": {
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Changed files are limited to the generated SEO scan report/artifact/test plus docs/codex PR-train metadata."
+        },
+        "public_runtime_scan": {
+          "status": "pass",
+          "evidence": "Bounded public runtime scan completed for 35 URLs with Playwright headless Chromium visual checks; no CMS/Search Channel/deploy mutations performed."
+        },
+        "backend_url_truth_dry_run": {
+          "status": "pass",
+          "command": "cd backend && php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --json",
+          "evidence": "Dry-run returned success with writes_attempted=false and external_calls_attempted=false."
+        },
+        "fap_web_reference_state": {
+          "status": "sidecar_observed",
+          "evidence": "fap-web was reference-only on codex/search-channel-live-zh-mbti-01a-indexnow-keylocation-fix with untracked .playwright-mcp/; no fap-web changes were staged or committed. Build-generated public/sitemap.xml was restored after reference validation."
+        },
+        "validation": {
+          "status": "pass",
+          "evidence": "Passed: php artisan test --filter=SeoIntelGrowthMbtiAction01dScan00PublicPageBilingualParity --no-ansi; php artisan route:list --no-ansi; vendor/bin/pint --test; generated JSON parse; PR-train JSON/YAML parse; git diff --check. fap-web reference-only validation passed: pnpm lint, pnpm test:contract, NEXT_PUBLIC_API_URL=https://api.fermatmind.com pnpm build."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR #1661 is open; required GitHub checks are pending."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "Public api.fermatmind.com sitemap-source check failed from local curl",
+          "repo": "fap-api",
+          "affected_command_or_check": "curl https://api.fermatmind.com/api/v0.5/seo/sitemap-source",
+          "evidence": "LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to api.fermatmind.com:443",
+          "why_external_to_current_pr": "This scan does not modify API TLS, gateway, DNS, or backend runtime; production public page checks still completed through fermatmind.com.",
+          "follow_up_recommendation": "Verify API gateway TLS reachability separately if backend sitemap-source must be included in future live scans."
+        },
+        {
+          "title": "fap-web reference worktree is not clean main",
+          "repo": "fap-web",
+          "affected_command_or_check": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+          "evidence": "branch codex/search-channel-live-zh-mbti-01a-indexnow-keylocation-fix with untracked .playwright-mcp/",
+          "why_external_to_current_pr": "fap-web is reference-only for this fap-api report PR and no files are staged or committed there.",
+          "follow_up_recommendation": "Run fap-web reference validation from clean main before implementation PRs that touch frontend runtime."
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-05-25T02:53:27.627612+00:00",
+          "status": "scan_report_generated",
+          "summary": "Generated read-only MBTI bilingual parity scan artifact and report from bounded public runtime checks, local URL Truth dry-run metadata, and fap-web source inspection."
+        },
+        {
+          "at": "2026-05-25T10:59:53+08:00",
+          "status": "local_validation_passed",
+          "summary": "Backend focused report test, route list, Pint, generated JSON, train metadata parsing, diff check, and fap-web reference lint/contract/build validation passed. Scope remains docs/generated/test/state only in fap-api."
+        },
+        {
+          "at": "2026-05-25T11:03:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1661 for the read-only MBTI bilingual parity scan; waiting for GitHub required checks."
         }
       ]
     }

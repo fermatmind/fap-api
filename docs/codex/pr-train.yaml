@@ -6519,6 +6519,53 @@ prs:
     human_review_required: false
     production_approval_required: false
 
+  - id: SEO-GROWTH-MBTI-ACTION-01D-SCAN-00
+    repo: fap-api
+    depends_on: []
+    branch: codex/seo-growth-mbti-action-01d-scan-00
+    base: main
+    title: "docs(seo-intel): add full-stack MBTI bilingual parity scan"
+    train_scope: seo_growth_mbti_action_01d_scan
+    risk_level: scan_only_public_runtime_observation
+    allowed_paths:
+      - backend/docs/seo/seo-growth-mbti-action-01d-scan-00-public-page-bilingual-parity.md
+      - backend/docs/seo/generated/seo-growth-mbti-action-01d-scan-00-public-page-bilingual-parity.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelGrowthMbtiAction01dScan00PublicPageBilingualParityTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add a read-only full-stack MBTI bilingual parity, SEO authority, visual overflow, and internal-link readiness scan report.
+      - Use fap-api as the report and test owner while treating fap-web as reference-only.
+      - Record bounded public runtime observations, backend URL Truth dry-run metadata, and Playwright visual scan results.
+      - Do not mutate CMS, Search Channel, URL Truth, fap-web runtime code, production env, DNS/nginx, or deploy state.
+    do_not:
+      - Implement fixes or change runtime behavior.
+      - Modify fap-web.
+      - Mutate CMS, Search Channel, seo_urls, seo_url_entities, sitemap, llms, or internal links.
+      - Submit URLs or call IndexNow, GSC, Baidu, Bing, 360, Sogou, or Shenma.
+      - Read raw Nginx access logs, production secrets, or production env.
+      - Deploy, SSH, edit DNS/nginx/env, or run production migrations.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelGrowthMbtiAction01dScan00PublicPageBilingualParity --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-01d-scan-00-public-page-bilingual-parity.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c 'import yaml, pathlib; yaml.safe_load(pathlib.Path("docs/codex/pr-train.yaml").read_text())'
+      - git diff --check
+      - git diff --cached --check
+    reference_validation:
+      - cd /Users/rainie/Desktop/GitHub/fap-web && git status --short
+      - cd /Users/rainie/Desktop/GitHub/fap-web && pnpm lint
+      - cd /Users/rainie/Desktop/GitHub/fap-web && pnpm test:contract
+      - cd /Users/rainie/Desktop/GitHub/fap-web && NEXT_PUBLIC_API_URL=https://api.fermatmind.com pnpm build
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    next_task: SEO-GROWTH-MBTI-ACTION-01D-P0-VISUAL-PARITY-FIX-01
+
   - id: PR-AUDIT-BE-02
     repo: fap-api
     depends_on: [PR-AUDIT-BE-01]
