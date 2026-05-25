@@ -2,7 +2,7 @@
     "schema": "clinical_combo_68.blocks.compiled.v1",
     "pack_id": "CLINICAL_COMBO_68",
     "pack_version": "v1",
-    "generated_at": "2026-03-22T16:33:55.196851Z",
+    "generated_at": "2026-05-25T06:12:00.145432Z",
     "blocks_by_locale": {
         "zh-CN": [
             {
@@ -1340,6 +1340,101 @@
                 "conditions": []
             },
             {
+                "block_id": "paid_perf_pe_parental_en",
+                "section": "paid_deep_dive",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 220,
+                "exclusive_group": "perf_dominant",
+                "conditions": [
+                    {
+                        "path": "report_tags",
+                        "op": "contains",
+                        "value": "trait:parental_expectation_dominant"
+                    }
+                ],
+                "title": "Your perfectionism pattern is more externally driven",
+                "body_md": "This self-report pattern suggests your self-evaluation may be more sensitive to external approval or expectations. A safer next step is to track controllable process indicators before judging outcomes, while seeking professional support if distress or impairment feels significant.",
+                "id": "paid_perf_pe_parental_en",
+                "body": "This self-report pattern suggests your self-evaluation may be more sensitive to external approval or expectations. A safer next step is to track controllable process indicators before judging outcomes, while seeking professional support if distress or impairment feels significant."
+            },
+            {
+                "block_id": "paid_perf_org_order_en",
+                "section": "paid_deep_dive",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 220,
+                "exclusive_group": "perf_dominant",
+                "conditions": [
+                    {
+                        "path": "report_tags",
+                        "op": "contains",
+                        "value": "trait:orderliness_dominant"
+                    }
+                ],
+                "title": "Your perfectionism pattern is more order-driven",
+                "body_md": "This pattern suggests you may feel steadier when tasks have clear structure and order. Consider separating high-standard work from lower-risk tasks where an 80% delivery standard is acceptable.",
+                "id": "paid_perf_org_order_en",
+                "body": "This pattern suggests you may feel steadier when tasks have clear structure and order. Consider separating high-standard work from lower-risk tasks where an 80% delivery standard is acceptable."
+            },
+            {
+                "block_id": "paid_perf_ps_standards_en",
+                "section": "paid_deep_dive",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 220,
+                "exclusive_group": "perf_dominant",
+                "conditions": [
+                    {
+                        "path": "report_tags",
+                        "op": "contains",
+                        "value": "trait:high_standards_dominant"
+                    }
+                ],
+                "title": "Your perfectionism pattern is more self-standard driven",
+                "body_md": "High standards can be useful, but they become harder to carry when performance is tied to personal worth. Try reviewing whether the strategy worked instead of judging what the outcome says about you as a person.",
+                "id": "paid_perf_ps_standards_en",
+                "body": "High standards can be useful, but they become harder to carry when performance is tied to personal worth. Try reviewing whether the strategy worked instead of judging what the outcome says about you as a person."
+            },
+            {
+                "block_id": "paid_perf_cm_mistakes_en",
+                "section": "paid_deep_dive",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 220,
+                "exclusive_group": "perf_dominant",
+                "conditions": [
+                    {
+                        "path": "report_tags",
+                        "op": "contains",
+                        "value": "trait:mistake_concern_dominant"
+                    }
+                ],
+                "title": "Your perfectionism pattern is more mistake-sensitive",
+                "body_md": "This pattern suggests mistakes may feel unusually costly, which can lead to over-preparation or delay. A bounded next step is to practice low-risk experiments where small errors are expected and reviewed without self-judgment.",
+                "id": "paid_perf_cm_mistakes_en",
+                "body": "This pattern suggests mistakes may feel unusually costly, which can lead to over-preparation or delay. A bounded next step is to practice low-risk experiments where small errors are expected and reviewed without self-judgment."
+            },
+            {
+                "block_id": "paid_perf_da_doubts_en",
+                "section": "paid_deep_dive",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 220,
+                "exclusive_group": "perf_dominant",
+                "conditions": [
+                    {
+                        "path": "report_tags",
+                        "op": "contains",
+                        "value": "trait:doubt_checking_dominant"
+                    }
+                ],
+                "title": "Your perfectionism pattern is more doubt-checking driven",
+                "body_md": "This pattern suggests uncertainty may trigger repeated checking or reassurance seeking. Try setting a clear checking rule in advance, then delaying extra checks long enough to observe whether the urge changes.",
+                "id": "paid_perf_da_doubts_en",
+                "body": "This pattern suggests uncertainty may trigger repeated checking or reassurance seeking. Try setting a clear checking rule in advance, then delaying extra checks long enough to observe whether the urge changes."
+            },
+            {
                 "block_id": "paid_perf_generic_en",
                 "section": "paid_deep_dive",
                 "locale": "en",
@@ -1373,6 +1468,124 @@
                 "body_md": "You retain stronger recovery under pressure. Preserve this advantage with explicit recovery routines and boundaries.",
                 "id": "paid_resilience_praise_en",
                 "body": "You retain stronger recovery under pressure. Preserve this advantage with explicit recovery routines and boundaries."
+            },
+            {
+                "block_id": "paid_action_depression_14d_en",
+                "section": "action_plan",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 200,
+                "exclusive_group": "action_depression",
+                "conditions": [
+                    {
+                        "path": "scores.depression.level",
+                        "op": "in",
+                        "value": [
+                            "moderate",
+                            "severe"
+                        ]
+                    }
+                ],
+                "title": "14-day activation self-observation plan",
+                "body_md": "Use very small, observable actions and record completion without judging yourself. This is not a diagnosis or clinical care guidance; if symptoms are persistent, intense, or impair daily life, consider contacting a qualified professional.",
+                "id": "paid_action_depression_14d_en",
+                "body": "Use very small, observable actions and record completion without judging yourself. This is not a diagnosis or clinical care guidance; if symptoms are persistent, intense, or impair daily life, consider contacting a qualified professional."
+            },
+            {
+                "block_id": "paid_action_anxiety_14d_en",
+                "section": "action_plan",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 190,
+                "exclusive_group": "action_anxiety",
+                "conditions": [
+                    {
+                        "path": "scores.anxiety.level",
+                        "op": "in",
+                        "value": [
+                            "moderate",
+                            "severe"
+                        ]
+                    }
+                ],
+                "title": "14-day anxiety self-observation plan",
+                "body_md": "Schedule a short worry window, separate controllable from uncontrollable concerns, and add one low-intensity body-based reset each day. This is self-assessment guidance, not medical advice.",
+                "id": "paid_action_anxiety_14d_en",
+                "body": "Schedule a short worry window, separate controllable from uncontrollable concerns, and add one low-intensity body-based reset each day. This is self-assessment guidance, not medical advice."
+            },
+            {
+                "block_id": "paid_action_ocd_erp_start_en",
+                "section": "action_plan",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 180,
+                "exclusive_group": "action_ocd",
+                "conditions": [
+                    {
+                        "path": "scores.ocd.level",
+                        "op": "in",
+                        "value": [
+                            "moderate",
+                            "severe"
+                        ]
+                    }
+                ],
+                "title": "ERP-informed discussion note",
+                "body_md": "If intrusive thoughts or compulsive checking feel relevant, consider asking a qualified clinician about evidence-informed options such as ERP. Do not treat this self-assessment as instructions to start clinical exposure work on your own.",
+                "id": "paid_action_ocd_erp_start_en",
+                "body": "If intrusive thoughts or compulsive checking feel relevant, consider asking a qualified clinician about evidence-informed options such as ERP. Do not treat this self-assessment as instructions to start clinical exposure work on your own."
+            },
+            {
+                "block_id": "paid_action_perfectionism_14d_en",
+                "section": "action_plan",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 170,
+                "exclusive_group": "action_perfectionism",
+                "conditions": [
+                    {
+                        "path": "scores.perfectionism.level",
+                        "op": "in",
+                        "value": [
+                            "perfectionist",
+                            "rigid"
+                        ]
+                    }
+                ],
+                "title": "14-day perfectionism flexibility plan",
+                "body_md": "Choose one low-risk task each day where an 80% delivery standard is enough. Separate minimum acceptable criteria from optional improvement criteria, then review facts instead of making global self-judgments.",
+                "id": "paid_action_perfectionism_14d_en",
+                "body": "Choose one low-risk task each day where an 80% delivery standard is enough. Separate minimum acceptable criteria from optional improvement criteria, then review facts instead of making global self-judgments."
+            },
+            {
+                "block_id": "paid_action_burnout_en",
+                "section": "action_plan",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 160,
+                "exclusive_group": "action_burnout",
+                "conditions": [
+                    {
+                        "path": "scores.stress.level",
+                        "op": "in",
+                        "value": [
+                            "high",
+                            "extreme"
+                        ]
+                    },
+                    {
+                        "path": "scores.resilience.level",
+                        "op": "in",
+                        "value": [
+                            "fragile",
+                            "low"
+                        ]
+                    }
+                ],
+                "title": "Burnout risk self-observation plan",
+                "body_md": "Sort tasks into must-do, can-delay, and can-drop groups. Protect sleep and recovery first, then rebuild workload gradually; seek professional support if functioning continues to decline.",
+                "id": "paid_action_burnout_en",
+                "body": "Sort tasks into must-do, can-delay, and can-drop groups. Protect sleep and recovery first, then rebuild workload gradually; seek professional support if functioning continues to decline."
             },
             {
                 "block_id": "paid_action_safety_core_en",

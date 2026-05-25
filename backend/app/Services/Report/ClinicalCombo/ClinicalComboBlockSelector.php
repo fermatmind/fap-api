@@ -353,7 +353,7 @@ final class ClinicalComboBlockSelector
             return ['zh-CN'];
         }
 
-        return [$resolved, 'zh-CN'];
+        return [$resolved];
     }
 
     private function normalizeLocale(string $locale): string
