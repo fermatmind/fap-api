@@ -712,6 +712,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_translation_parity_read_model_files(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/TranslationParity/TranslationParityMatrixReadModel.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_chinese_claim_linter_runtime_files(): void
     {
         $changed = [
@@ -2161,6 +2170,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isTranslationParityReadModelFile($file)) {
+                continue;
+            }
+
             if ($this->isChineseClaimLinterRuntimeFile($file)) {
                 continue;
             }
@@ -2914,6 +2927,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/SeoIntelInternalLinkGraphCommand.php',
             'backend/app/Services/SeoIntel/InternalLink/InternalLinkGraphDryRun.php',
         ], true);
+    }
+
+    private function isTranslationParityReadModelFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/SeoIntel/TranslationParity/TranslationParityMatrixReadModel.php';
     }
 
     private function isChineseClaimLinterRuntimeFile(string $file): bool
