@@ -1,0 +1,173 @@
+{
+    "schema": "fap.big5.result_page_v2.en_parity_draft.v1",
+    "draft_id": "big5_result_page_v2_en_parity_draft_2026_05_25",
+    "scale_code": "BIG5_OCEAN",
+    "locale": "en",
+    "source_registry": "backend/content_packs/BIG5_OCEAN/v2/registry",
+    "runtime_use": "draft_review_only",
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "production_use_allowed": false,
+    "mass_content_generation": false,
+    "claim_boundary": {
+        "allowed": [
+            "trait tendency",
+            "workstyle pattern",
+            "behavioral explanation",
+            "contextual self-reflection",
+            "snapshot-based support"
+        ],
+        "forbidden": [
+            "precise career matching",
+            "hiring fit",
+            "career success prediction",
+            "salary prediction",
+            "turnover prediction",
+            "clinical diagnosis",
+            "treatment advice"
+        ],
+        "boundary_note_en": "Big Five results describe trait tendencies and workstyle patterns. They are not a hiring decision, clinical diagnosis, treatment plan, or career-success prediction."
+    },
+    "draft_asset_groups": {
+        "route_matrix": {
+            "status": "draft_skeleton",
+            "ready_for_runtime": false,
+            "keys": [
+                "big5.result_page_v2.route_matrix.en"
+            ],
+            "labels": {
+                "low": "Lower range",
+                "mid": "Middle range",
+                "high": "Higher range"
+            },
+            "deferred": [
+                "full route-row copy for every selected OCEAN band combination"
+            ]
+        },
+        "coupling_assets": {
+            "status": "draft_skeleton",
+            "ready_for_runtime": false,
+            "keys": [
+                "big5.result_page_v2.coupling_assets.en"
+            ],
+            "labels": {
+                "synergy": "Combined trait pattern",
+                "tension": "Trait tension",
+                "modifier": "Context modifier"
+            },
+            "deferred": [
+                "reviewed English synergy and modifier prose for all selector outputs"
+            ]
+        },
+        "scenario_action_assets": {
+            "status": "draft_skeleton",
+            "ready_for_runtime": false,
+            "keys": [
+                "big5.result_page_v2.scenario_action_assets.en"
+            ],
+            "scenario_labels": {
+                "workplace": "Workplace",
+                "relationships": "Relationships",
+                "stress_recovery": "Stress and recovery",
+                "personal_growth": "Personal growth"
+            },
+            "deferred": [
+                "reviewed scenario actions for all rule buckets"
+            ]
+        },
+        "facet_assets": {
+            "status": "draft_skeleton",
+            "ready_for_runtime": false,
+            "keys": [
+                "big5.result_page_v2.facet_assets.en"
+            ],
+            "facet_label_seed": {
+                "O1": "Imagination",
+                "O2": "Aesthetic sensitivity",
+                "O3": "Emotional awareness",
+                "O4": "Openness to action",
+                "O5": "Intellectual exploration",
+                "O6": "Value flexibility",
+                "C1": "Competence",
+                "C2": "Order",
+                "C3": "Dutifulness",
+                "C4": "Achievement striving",
+                "C5": "Self-discipline",
+                "C6": "Deliberation",
+                "E1": "Warmth",
+                "E2": "Sociability",
+                "E3": "Assertiveness",
+                "E4": "Activity level",
+                "E5": "Excitement seeking",
+                "E6": "Positive emotion",
+                "A1": "Trust",
+                "A2": "Straightforwardness",
+                "A3": "Altruism",
+                "A4": "Compliance",
+                "A5": "Modesty",
+                "A6": "Tender-mindedness",
+                "N1": "Anxiety sensitivity",
+                "N2": "Irritability",
+                "N3": "Emotional volatility",
+                "N4": "Self-consciousness",
+                "N5": "Impulse pressure",
+                "N6": "Stress vulnerability"
+            },
+            "deferred": [
+                "reviewed glossary, daily meaning, and why-it-matters prose for all 30 facets"
+            ]
+        },
+        "canonical_profiles": {
+            "status": "draft_skeleton",
+            "ready_for_runtime": false,
+            "keys": [
+                "big5.result_page_v2.canonical_profiles.en"
+            ],
+            "trait_label_seed": {
+                "O": "Openness to Experience",
+                "C": "Conscientiousness",
+                "E": "Extraversion",
+                "A": "Agreeableness",
+                "N": "Neuroticism"
+            },
+            "deferred": [
+                "reviewed profile signatures and full portrait copy for canonical profile combinations"
+            ]
+        },
+        "core_body": {
+            "status": "draft_skeleton",
+            "ready_for_runtime": false,
+            "keys": [
+                "big5.result_page_v2.core_body.en"
+            ],
+            "section_headlines": {
+                "hero_summary": "Big Five report summary",
+                "domains_overview": "Five-domain overview",
+                "domain_deep_dive": "Domain deep dive",
+                "facet_details": "Facet-level signals",
+                "core_portrait": "Core portrait",
+                "norms_comparison": "Norm comparison",
+                "action_plan": "Action plan",
+                "methodology_and_access": "Method and access"
+            },
+            "deferred": [
+                "reviewed English body, bullets, tables, actions, and CTA copy for each module"
+            ]
+        },
+        "selector_ready_assets": {
+            "status": "draft_skeleton",
+            "ready_for_runtime": false,
+            "keys": [
+                "big5.result_page_v2.selector_ready_assets.en"
+            ],
+            "selector_policy": "English selector output must not select zh-CN interpretation copy. Missing reviewed English content must fail closed or omit the unavailable module.",
+            "deferred": [
+                "asset checksums",
+                "selector fixture coverage",
+                "human-reviewed production release manifest"
+            ]
+        }
+    },
+    "human_review_required": true,
+    "next_batch_policy": "Convert one asset group at a time from draft_skeleton to reviewed_import_package after editorial review; do not flip ready_for_runtime in this draft file."
+}

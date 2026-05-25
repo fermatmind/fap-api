@@ -1776,6 +1776,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_bigfive_v2_en_parity_draft_catalog(): void
+    {
+        $changed = [
+            'backend/content_packs/BIG5_OCEAN/v2/drafts/en_parity/result_page_v2_en_asset_catalog_draft.v1.json',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_allows_bigfive_norm_foundation_data_scope_only(): void
     {
         $allowed = [
@@ -2397,6 +2406,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isBigFiveV2PilotSupportFile($file)) {
+                continue;
+            }
+
+            if ($this->isBigFiveV2EnParityDraftCatalogFile($file)) {
                 continue;
             }
 
@@ -3692,6 +3705,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php'
             || $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveV2PilotRuntimeObservability.php'
             || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer|Access|Routing|Pdf|Share|History|Compare|Rollout|Observability)/[A-Za-z0-9_]+\.php$#', $file) === 1;
+    }
+
+    private function isBigFiveV2EnParityDraftCatalogFile(string $file): bool
+    {
+        return $file === 'backend/content_packs/BIG5_OCEAN/v2/drafts/en_parity/result_page_v2_en_asset_catalog_draft.v1.json';
     }
 
     private function isBigFiveNormFoundationSchemaFile(string $file): bool
