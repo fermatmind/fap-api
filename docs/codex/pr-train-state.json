@@ -25119,7 +25119,7 @@
       "merge_commit": "757535c7934e43580c951485f9a6867946a1c2c0"
     },
     "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01": {
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-final-verify-01",
       "base": "main",
@@ -25127,8 +25127,8 @@
         "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01"
       ],
       "title": "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01 full site parity verification",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "149d4cc80aa07485ee0aa513b8990af0211d8f59",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1688",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -25169,7 +25169,8 @@
           "evidence": "All local validation commands passed before staging."
         },
         "github_required_checks": {
-          "status": "pending"
+          "status": "pending",
+          "evidence": "PR #1688 opened; GitHub checks pending."
         }
       },
       "history": [
@@ -25187,6 +25188,11 @@
           "at": "2026-05-25T22:25:50+08:00",
           "status": "local_validation_passed",
           "summary": "Final verification report, generated JSON, and focused test passed local validation; full parity remains NO-GO pending human review/import and post-deploy smoke."
+        },
+        {
+          "at": "2026-05-25T22:26:47+08:00",
+          "status": "pr_open",
+          "summary": "Opened fap-api PR #1688 for final full-site EN/ZH parity verification."
         }
       ]
     }
