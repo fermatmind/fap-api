@@ -9992,7 +9992,7 @@
       "depends_on": [
         "SEO-DASH-PROD-00"
       ],
-      "status": "commit_created",
+      "status": "pr_open_github_checks_pending",
       "train_scope": "production_seo_intel_db_user_migration_runbook",
       "risk_level": "low_docs_contract_no_execution",
       "title": "docs(seo-intel): add production DB migration runbook",
@@ -18385,8 +18385,8 @@
       "depends_on": [
         "SEARCH-CHANNEL-LIVE-ZH-MBTI-01"
       ],
-      "commit_sha": "f40071d7",
-      "pr_url": null,
+      "commit_sha": "c663feca",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1664",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -18444,7 +18444,12 @@
         {
           "at": "2026-05-25T12:24:00+08:00",
           "status": "commit_created",
-          "summary": "Created scoped commit f40071d7 for the ZH MBTI live submission report."
+          "summary": "Created scoped commit c663feca for the ZH MBTI live submission report."
+        },
+        {
+          "at": "2026-05-25T12:31:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1664 for the ZH MBTI live submission report. GitHub checks are pending."
         }
       ]
     },
