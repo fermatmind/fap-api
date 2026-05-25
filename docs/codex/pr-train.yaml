@@ -5733,6 +5733,55 @@ prs:
     content_generation_allowed: false
     next_task: EN-PARITY-03
 
+  - id: EN-PARITY-03
+    repo: fap-api
+    depends_on: [EN-PARITY-02]
+    branch: codex/en-parity-03-content-pages
+    base: main
+    title: "EN-PARITY-03 content pages EN/ZH parity"
+    train_scope: en_parity_content_pages_import_package
+    risk_level: p0_content_authority_parity
+    allowed_paths:
+      - backend/app/Console/Commands/ContentPagesImportLocalBaseline.php
+      - backend/docs/seo/en-parity-03-content-pages-parity-import-package.md
+      - backend/docs/seo/generated/en-parity-03-content-pages-parity-import-package.v1.json
+      - backend/tests/Feature/SeoIntel/EnParity03ContentPagesParityImportPackageTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Land a repository-backed content_pages EN/ZH parity import package and generated parity artifact.
+      - Strengthen content-pages:import-local-baseline so local/operator imports preserve translation_group_id, source_locale, translation_status, page_type, review_state, seo_description, and canonical_path metadata.
+      - Prove existing EN/ZH content page baseline pairs are authority-backed and missing English counterparts remain explicit.
+      - Keep missing English company/policy pages deferred until human-reviewed content authority exists.
+      - Prevent draft, placeholder, fallback-only, 404, soft-404, noindex/private, or missing-authority pages from entering sitemap/llms.
+    do_not:
+      - Generate substantial English prose for missing content pages.
+      - Auto-publish, mutate production CMS, run production migration, deploy, or submit URLs.
+      - Modify fap-web or treat frontend fallback as content authority.
+      - Modify articles, career guides, media assets, sitemap generator, llms generator, JSON-LD, FAQ, or Search Channel.
+      - Expose draft/import candidates in sitemap, llms, hreflang, URL Truth, or public runtime.
+    validation:
+      - cd backend && php artisan test --filter=EnParity03 --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_content_pages_local_baseline_import_package_changes --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/en-parity-03-content-pages-parity-import-package.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    next_task: EN-PARITY-04
+
   - id: RESULT-EN-PARITY-00
     repo: fap-api
     depends_on: [EN-PARITY-00]

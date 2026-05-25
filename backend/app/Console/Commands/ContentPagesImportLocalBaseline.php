@@ -156,18 +156,29 @@ final class ContentPagesImportLocalBaseline extends Command
             'slug' => $slug,
             'path' => trim((string) ($row['path'] ?? '')) ?: '/'.$slug,
             'kind' => $this->normalizeKind($row['kind'] ?? null),
+            'page_type' => $this->normalizePageType($row['pageType'] ?? $row['page_type'] ?? $slug),
             'title' => trim((string) $row['title']),
             'kicker' => $this->nullableString($row['kicker'] ?? null),
             'summary' => $this->nullableString($row['summary'] ?? null),
             'template' => $this->normalizeTemplate($row['template'] ?? null),
             'animation_profile' => $this->normalizeAnimationProfile($row['animationProfile'] ?? $row['animation_profile'] ?? null),
             'locale' => $locale,
+            'translation_group_id' => $this->nullableString($row['translationGroupId'] ?? $row['translation_group_id'] ?? null)
+                ?? $this->defaultTranslationGroupId($slug),
+            'source_locale' => $this->nullableString($row['sourceLocale'] ?? $row['source_locale'] ?? null)
+                ?? 'zh-CN',
+            'translation_status' => $this->normalizeTranslationStatus(
+                $row['translationStatus'] ?? $row['translation_status'] ?? null,
+                $locale,
+                $status,
+            ),
             'published_at' => $this->nullableString($row['publishedAt'] ?? $row['published_at'] ?? null),
             'source_updated_at' => $this->nullableString($row['updatedAt'] ?? $row['updated_at'] ?? null),
             'effective_at' => $this->nullableString($row['effectiveAt'] ?? $row['effective_at'] ?? null),
             'source_doc' => $this->nullableString($row['sourceDoc'] ?? $row['source_doc'] ?? null),
             'is_public' => (bool) ($row['isPublic'] ?? $row['is_public'] ?? true),
             'is_indexable' => (bool) ($row['isIndexable'] ?? $row['is_indexable'] ?? true),
+            'review_state' => $this->normalizeReviewState($row['reviewState'] ?? $row['review_state'] ?? null, $status),
             'headings_json' => array_values(array_filter(array_map(
                 static fn (mixed $heading): string => trim((string) $heading),
                 is_array($row['headings'] ?? null) ? $row['headings'] : $this->extractHeadings($contentMd),
@@ -176,6 +187,8 @@ final class ContentPagesImportLocalBaseline extends Command
             'content_html' => $contentHtml,
             'seo_title' => $this->nullableString($row['seoTitle'] ?? $row['seo_title'] ?? $row['title'] ?? null),
             'meta_description' => $this->nullableString($row['metaDescription'] ?? $row['meta_description'] ?? $row['summary'] ?? null),
+            'seo_description' => $this->nullableString($row['seoDescription'] ?? $row['seo_description'] ?? $row['metaDescription'] ?? $row['meta_description'] ?? $row['summary'] ?? null),
+            'canonical_path' => $this->nullableString($row['canonicalPath'] ?? $row['canonical_path'] ?? null),
             'status' => $status,
         ];
     }
@@ -203,6 +216,73 @@ final class ContentPagesImportLocalBaseline extends Command
         return in_array($normalized, ['company', 'charter', 'foundation', 'careers', 'brand', 'policy', 'help'], true)
             ? $normalized
             : 'company';
+    }
+
+    private function normalizePageType(mixed $value): string
+    {
+        $normalized = strtolower(str_replace(['_', ' '], '-', trim((string) $value)));
+        $aliases = [
+            'method-boundaries' => 'boundary',
+            'methodology-boundaries' => 'boundary',
+            'careers' => 'company',
+            'brand' => 'company',
+            'charter' => 'company',
+            'foundation' => 'company',
+            'policies' => 'policy',
+            'faq' => 'support_static',
+            'help-faq' => 'support_static',
+            'help-about' => 'about',
+            'help-contact' => 'support_static',
+            'help-team' => 'company',
+            'help-used-and-mentioned' => 'company',
+            'help-for-business-and-research' => 'company',
+        ];
+
+        $normalized = $aliases[$normalized] ?? $normalized;
+
+        return in_array($normalized, ContentPage::PAGE_TYPES, true)
+            ? $normalized
+            : ContentPage::PAGE_TYPES[7];
+    }
+
+    private function normalizeTranslationStatus(mixed $value, string $locale, string $status): string
+    {
+        $normalized = strtolower(trim((string) $value));
+        if (in_array($normalized, [
+            ContentPage::TRANSLATION_STATUS_SOURCE,
+            ContentPage::TRANSLATION_STATUS_DRAFT,
+            ContentPage::TRANSLATION_STATUS_MACHINE_DRAFT,
+            ContentPage::TRANSLATION_STATUS_HUMAN_REVIEW,
+            ContentPage::TRANSLATION_STATUS_APPROVED,
+            ContentPage::TRANSLATION_STATUS_PUBLISHED,
+            ContentPage::TRANSLATION_STATUS_STALE,
+            ContentPage::TRANSLATION_STATUS_ARCHIVED,
+        ], true)) {
+            return $normalized;
+        }
+
+        if ($locale === 'zh-CN') {
+            return ContentPage::TRANSLATION_STATUS_SOURCE;
+        }
+
+        return $status === ContentPage::STATUS_PUBLISHED
+            ? ContentPage::TRANSLATION_STATUS_PUBLISHED
+            : ContentPage::TRANSLATION_STATUS_DRAFT;
+    }
+
+    private function normalizeReviewState(mixed $value, string $status): string
+    {
+        $normalized = strtolower(trim((string) $value));
+        if (in_array($normalized, ContentPage::REVIEW_STATES, true)) {
+            return $normalized;
+        }
+
+        return $status === ContentPage::STATUS_PUBLISHED ? 'approved' : 'draft';
+    }
+
+    private function defaultTranslationGroupId(string $slug): string
+    {
+        return 'content-page-'.preg_replace('/[^a-z0-9]+/', '-', $slug);
     }
 
     private function normalizeAnimationProfile(mixed $value): string
