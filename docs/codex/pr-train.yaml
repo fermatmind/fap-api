@@ -5782,6 +5782,53 @@ prs:
     content_generation_allowed: false
     next_task: EN-PARITY-04
 
+  - id: EN-PARITY-04
+    repo: fap-api
+    depends_on: [EN-PARITY-03]
+    branch: codex/en-parity-04-articles
+    base: main
+    title: "EN-PARITY-04 article English counterpart completion"
+    train_scope: en_parity_article_counterpart_import_package
+    risk_level: p0_article_authority_parity
+    allowed_paths:
+      - backend/app/Console/Commands/ArticleImportLocalBaseline.php
+      - backend/docs/seo/en-parity-04-article-counterpart-import-package.md
+      - backend/docs/seo/generated/en-parity-04-article-counterpart-import-package.v1.json
+      - backend/tests/Feature/SeoIntel/EnParity04ArticleCounterpartImportPackageTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Land a repository-backed Article EN/ZH counterpart import-readiness package and generated artifact.
+      - Strengthen articles:import-local-baseline so local/operator imports preserve stable translation_group_id, source_locale, translation_status, and source_article_id metadata.
+      - Prove the EN-PARITY-00 target 10 English article counterparts are already present in repo-backed Article baseline authority.
+      - Keep remaining long-form/editorial missing English counterparts explicit and deferred for separately reviewed draft/import packages.
+      - Prevent frontend fallback from satisfying Article counterpart authority.
+    do_not:
+      - Generate all missing English articles or substantial English prose.
+      - Auto-publish, mutate production CMS, run production migration, deploy, or submit URLs.
+      - Modify fap-web or treat frontend fallback as Article authority.
+      - Modify career guides, content pages, media assets, sitemap generator, llms generator, JSON-LD, FAQ, or Search Channel.
+      - Expose draft/import candidates in sitemap, llms, hreflang, URL Truth, or public runtime.
+    validation:
+      - cd backend && php artisan test --filter=EnParity04 --no-ansi
+      - cd backend && php artisan test --filter=ArticleBaselineImportTest --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/en-parity-04-article-counterpart-import-package.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    next_task: EN-PARITY-05
+
   - id: RESULT-EN-PARITY-00
     repo: fap-api
     depends_on: [EN-PARITY-00]

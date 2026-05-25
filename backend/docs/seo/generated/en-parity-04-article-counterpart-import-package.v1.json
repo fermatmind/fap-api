@@ -1,0 +1,106 @@
+{
+  "schema_version": "en-parity-04-article-counterpart-import-package.v1",
+  "task": "EN-PARITY-04",
+  "source_authority": "backend_cms_article_baseline",
+  "frontend_fallback_authority_used": false,
+  "cms_mutation_performed": false,
+  "production_migration_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "auto_publish_performed": false,
+  "mass_english_generation_performed": false,
+  "substantial_english_prose_generated": false,
+  "fap_web_modified": false,
+  "baseline_sources": [
+    "content_baselines/articles/articles.en.json",
+    "content_baselines/articles/articles.zh-CN.json"
+  ],
+  "current_baseline_summary": {
+    "articles_en_count": 20,
+    "articles_zh_count": 25,
+    "target_counterpart_count": 10,
+    "target_counterparts_present_in_repo_baseline": 10,
+    "missing_english_counterparts_count": 6,
+    "counterpart_lookup_uses_slug_guessing_only": false
+  },
+  "target_counterparts_ready_for_review": [
+    "big-five-growth-guide",
+    "big-five-narrative-portrait",
+    "big-five-tool-guide",
+    "eq-test-tool-guide",
+    "iq-test-growth-guide",
+    "iq-test-narrative-portrait",
+    "iq-test-tool-guide",
+    "mbti-basics",
+    "mbti-growth-guide",
+    "mbti-narrative-portrait"
+  ],
+  "deferred_missing_english_counterparts": [
+    {
+      "slug": "are-infj-men-rare-or-socially-silenced",
+      "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+      "target_publication_state": "deferred_draft_required",
+      "sitemap_llms_exposure_allowed": false
+    },
+    {
+      "slug": "best-valentines-date-by-personality-and-relationship-science",
+      "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+      "target_publication_state": "deferred_draft_required",
+      "sitemap_llms_exposure_allowed": false
+    },
+    {
+      "slug": "childhood-dream-job-still-shapes-career-choice",
+      "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+      "target_publication_state": "deferred_draft_required",
+      "sitemap_llms_exposure_allowed": false
+    },
+    {
+      "slug": "how-16-personality-types-talk-to-an-ai-coach",
+      "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+      "target_publication_state": "deferred_draft_required",
+      "sitemap_llms_exposure_allowed": false
+    },
+    {
+      "slug": "how-personality-shapes-attitude-toward-ai",
+      "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+      "target_publication_state": "deferred_draft_required",
+      "sitemap_llms_exposure_allowed": false
+    },
+    {
+      "slug": "which-love-script-fits-you-best",
+      "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+      "target_publication_state": "deferred_draft_required",
+      "sitemap_llms_exposure_allowed": false
+    }
+  ],
+  "import_controls": {
+    "controlled_import_command": "articles:import-local-baseline",
+    "production_import_executed": false,
+    "production_publish_executed": false,
+    "requires_operator_review": true,
+    "requires_controlled_publish_workflow": true,
+    "draft_exposure_allowed_in_sitemap_llms": false
+  },
+  "translation_authority_contract": {
+    "entity_type": "article",
+    "source_of_truth": "articles",
+    "translation_group_id_pattern": "article:<stable-slug> unless explicitly provided",
+    "source_locale_preference": "zh-CN when a zh-CN source row exists in the same group",
+    "frontend_fallback_can_satisfy_counterpart": false
+  },
+  "recommended_next_tasks": [
+    {
+      "id": "EN-PARITY-04A",
+      "title": "Article English draft package for six deferred editorial counterparts",
+      "scope": "Create human-reviewed draft package only; do not auto-publish or expose in sitemap/llms."
+    },
+    {
+      "id": "EN-PARITY-07",
+      "title": "Sitemap llms JSON-LD FAQ grounding parity gate",
+      "scope": "Verify Article URLs only enter public SEO surfaces when backend Article authority is published and indexable."
+    }
+  ],
+  "final_decision": "en_parity_04_import_package_landed_target_articles_ready_deferred_longform_copy",
+  "next_task": "EN-PARITY-05 career guides English detail completion"
+}
