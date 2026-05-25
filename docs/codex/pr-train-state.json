@@ -19620,9 +19620,9 @@
     "GLOBAL-EN-ZH-PARITY-SCAN-00": {
       "repo": "fap-api",
       "branch": "codex/global-en-zh-parity-scan-00",
-      "status": "pr_open_github_checks_pending",
+      "status": "merged",
       "depends_on": [],
-      "commit_sha": "8a521be11f00fbf85d6c7b6d8c30ce626477f4ce",
+      "commit_sha": "87345d16c4b7b22a23ead480925bb1f4c58d2721",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1679",
       "checks": {
         "scope_boundary": {
@@ -19651,8 +19651,8 @@
           "evidence": "Focused GlobalEnZhParityScan00 test exited 0 with 23 assertions and a PHPUnit warning; php artisan route:list exited 0 with 203 routes; vendor/bin/pint --test passed 3552 files; composer validate --strict passed; composer audit --locked --no-interaction --ignore-unreachable reported no advisories; generated JSON parsed; pr-train state JSON parsed; pr-train YAML parsed; git diff --check and git diff --cached --check passed; fap-web reference git status --short was clean."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": "PR #1679 is MERGED and origin/main contains merge commit 87345d16c4b7b22a23ead480925bb1f4c58d2721."
         },
         "github_pr_opened": {
           "status": "pass",
@@ -19660,9 +19660,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T11:51:00Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "source_pr": "GLOBAL-EN-ZH-PARITY-SCAN-00",
@@ -19675,9 +19675,9 @@
           "impact_on_current_pr": "Scan remains valid and records the visual evidence gap explicitly.",
           "owner": "frontend/seo",
           "follow_up_recommendation": "Run dedicated long-tail Playwright visual/performance pass after GLOBAL-EN-ZH-PARITY-P0-FIX-TRAIN-01.",
-          "required_checks_status": "pending until PR checks complete",
-          "scope_validation_status": "pending until final scope validation",
-          "continue_train_decision": "allowed only if GitHub required checks and scope validation are green"
+          "required_checks_status": "passed after PR #1679 merge",
+          "scope_validation_status": "passed before PR #1679 merge",
+          "continue_train_decision": "allowed; scan PR merged and P0 follow-up train may proceed"
         }
       ],
       "events": [
@@ -19700,6 +19700,86 @@
           "at": "2026-05-25T11:43:41.226250+00:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1679 for GLOBAL-EN-ZH-PARITY-SCAN-00 and pushed branch codex/global-en-zh-parity-scan-00; waiting for GitHub checks."
+        },
+        {
+          "at": "2026-05-25T12:10:55.823326+00:00",
+          "status": "ledger_reconciled_merged",
+          "summary": "Reconciled GLOBAL-EN-ZH-PARITY-SCAN-00 after PR #1679 merged at commit 87345d16c4b7b22a23ead480925bb1f4c58d2721; this bookkeeping unblocks GLOBAL-EN-ZH-PARITY-P0-01."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-PARITY-P0-01": {
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-parity-p0-01-content-help-policy-discoverability",
+      "status": "pr_open_github_checks_pending",
+      "depends_on": [
+        "GLOBAL-EN-ZH-PARITY-SCAN-00"
+      ],
+      "commit_sha": "942ce417813a0632be17fab8b8822d743c6c35d7",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1681",
+      "checks": {
+        "dependency_global_en_zh_parity_scan_00": {
+          "status": "pass",
+          "evidence": "PR #1679 is MERGED and origin/main contains merge commit 87345d16c4b7b22a23ead480925bb1f4c58d2721."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Changed files are limited to backend/docs/seo/global-en-zh-parity-p0-01-content-help-policy-discoverability.md, backend/docs/seo/generated/global-en-zh-parity-p0-01-content-help-policy-discoverability.v1.json, backend/tests/Feature/SeoIntel/GlobalEnZhParityP001ContentHelpPolicyDiscoverabilityTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No deploy, CMS mutation, production migration, Search Channel action, URL submission, external search API call, env/DNS/nginx edit, production data write, or content generation is permitted or performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=GlobalEnZhParityP001 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-parity-p0-01-content-help-policy-discoverability.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 yaml parse for docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "evidence": "Focused P0-01 SeoIntel test passed with 35 assertions; route:list passed with 203 routes; pint passed 3553 files; composer validate and audit passed; generated JSON and pr-train state parsed; pr-train YAML parsed; diff checks passed."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": null
+        },
+        "github_pr_opened": {
+          "status": "pass",
+          "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1681 linked to fap-web PR https://github.com/fermatmind/fap-web/pull/903."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "events": [
+        {
+          "at": "2026-05-25T12:10:55.823326+00:00",
+          "status": "started_manifest_state_initialized",
+          "summary": "Initialized GLOBAL-EN-ZH-PARITY-P0-01 manifest/state entry with explicit user authorization; scope is content/help/policy sitemap/llms hard-404 cleanup only."
+        },
+        {
+          "at": "2026-05-25T12:32:00Z",
+          "status": "local_validation_passed",
+          "summary": "fap-api evidence/ledger/backend guard validation passed for linked GLOBAL-EN-ZH-PARITY-P0-01 PR."
+        },
+        {
+          "at": "2026-05-25T12:35:00Z",
+          "status": "scope_validation_passed",
+          "summary": "fap-api changed files remain limited to current P0-01 evidence/report/test and current manifest/state reconciliation."
+        },
+        {
+          "at": "2026-05-25T12:40:00Z",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened fap-api PR #1681 and linked fap-web PR #903; waiting for GitHub checks."
         }
       ]
     }
