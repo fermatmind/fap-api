@@ -1,0 +1,157 @@
+{
+  "schema_version": "en-parity-07-sitemap-llms-jsonld-faq-grounding-gate.v1",
+  "task": "EN-PARITY-07",
+  "source_authority": "backend_cms_url_truth_translation_media_authority",
+  "frontend_fallback_authority_used": false,
+  "cms_mutation_performed": false,
+  "production_migration_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "fap_web_modified": false,
+  "sitemap_mutation_performed": false,
+  "llms_mutation_performed": false,
+  "jsonld_runtime_mutation_performed": false,
+  "faq_runtime_mutation_performed": false,
+  "gate_inputs": [
+    "backend/docs/seo/generated/en-parity-00-full-site-bilingual-inventory.v1.json",
+    "backend/docs/seo/generated/en-parity-01-url-truth-canonical-baseline.v1.json",
+    "backend/docs/seo/generated/en-parity-02-translation-group-read-model.v1.json",
+    "backend/docs/seo/generated/en-parity-03-content-pages-parity-import-package.v1.json",
+    "backend/docs/seo/generated/en-parity-04-article-counterpart-import-package.v1.json",
+    "backend/docs/seo/generated/en-parity-05-career-guide-detail-import-package.v1.json",
+    "backend/docs/seo/generated/en-parity-06-media-assets-parity-inventory.v1.json"
+  ],
+  "surface_gate_rules": {
+    "sitemap": {
+      "exclude_404": true,
+      "exclude_soft_404": true,
+      "exclude_noindex": true,
+      "exclude_private": true,
+      "exclude_frontend_fallback_only": true,
+      "exclude_draft_placeholder_or_missing_authority": true,
+      "authority_required": "backend_url_truth_published_indexable"
+    },
+    "llms": {
+      "exclude_404": true,
+      "exclude_soft_404": true,
+      "exclude_noindex": true,
+      "exclude_private": true,
+      "exclude_frontend_fallback_only": true,
+      "exclude_draft_placeholder_or_missing_authority": true,
+      "authority_required": "backend_url_truth_published_indexable"
+    },
+    "canonical_hreflang": {
+      "hreflang_targets_must_be_200_canonical_counterparts": true,
+      "counterpart_lookup_uses_translation_group_or_authority_key": true,
+      "slug_guessing_only_allowed": false,
+      "www_host_canonical_allowed": false,
+      "staging_host_canonical_allowed": false
+    },
+    "json_ld": {
+      "type_must_match_page_family": true,
+      "article_schema_requires_article_authority": true,
+      "dataset_schema_requires_research_asset_authority": true,
+      "faq_schema_requires_visible_or_authority_backed_faq": true,
+      "image_requires_authority_backed_media_metadata": true
+    },
+    "faq_grounding": {
+      "sr_only_faq_as_sole_grounding_allowed": false,
+      "frontend_fallback_faq_allowed": false,
+      "questions_answers_must_be_visible_or_backend_authority_backed": true
+    }
+  },
+  "invalid_url_classes_blocked": [
+    "404",
+    "soft_404",
+    "noindex",
+    "private",
+    "draft",
+    "placeholder",
+    "fallback_only",
+    "missing_authority",
+    "stale_slug",
+    "staging_host",
+    "www_host_canonical",
+    "unsupported_claim_boundary"
+  ],
+  "en_zh_surface_parity_summary": {
+    "url_truth_baseline_established": true,
+    "translation_group_read_model_established": true,
+    "content_page_import_package_landed": true,
+    "article_counterpart_import_package_landed": true,
+    "career_guide_import_package_landed": true,
+    "media_parity_inventory_landed": true,
+    "runtime_public_surface_reverified_in_this_pr": false,
+    "frontend_rendering_changed_in_this_pr": false
+  },
+  "current_known_exposure_controls": {
+    "en_parity_00_hard_404_runtime_findings": [
+      "/en/about",
+      "/en/support"
+    ],
+    "en_parity_00_soft_404_runtime_findings": [
+      "/en/help/about",
+      "/en/help/for-business-and-research",
+      "/en/method-boundaries",
+      "/zh/about",
+      "/zh/careers",
+      "/zh/help/contact",
+      "/zh/support"
+    ],
+    "authority_action_from_en_parity_01": "Backend URL Truth and sitemap source exclude missing-authority content pages and research apex URLs unless published/indexable authority exists.",
+    "runtime_recheck_deferred": true
+  },
+  "jsonld_faq_grounding_contract": {
+    "Article": {
+      "requires": [
+        "published Article authority row",
+        "visible title/description/body or authority-backed equivalent",
+        "authority-backed cover image metadata when image is emitted"
+      ]
+    },
+    "FAQPage": {
+      "requires": [
+        "visible FAQ block or backend authority FAQ content",
+        "question/answer text grounded in same page content",
+        "no frontend fallback-only FAQ"
+      ]
+    },
+    "Dataset": {
+      "requires": [
+        "published ResearchReport authority row",
+        "approved research asset or explicit dataset decision",
+        "no placeholder-only dataset schema"
+      ]
+    },
+    "BreadcrumbList": {
+      "requires": [
+        "canonical public URL",
+        "no private/noindex path",
+        "locale-compatible URL path"
+      ]
+    }
+  },
+  "deferred_items": [
+    {
+      "id": "en_parity_07_frontend_runtime_contract",
+      "reason": "fap-web emits final HTML metadata, JSON-LD, and llms/sitemap surfaces in production; this backend PR records authority rules but does not modify fap-web runtime."
+    },
+    {
+      "id": "en_parity_07_live_surface_recheck",
+      "reason": "No production deploy, no URL submission, and no live re-crawl mutation occurred in this PR. Runtime recheck belongs after authority/API and fap-web consumer changes are deployed."
+    },
+    {
+      "id": "en_parity_07_media_visual_review_dependency",
+      "reason": "EN-PARITY-06 sidecar visual review remains required for shared article covers and default social images."
+    }
+  ],
+  "required_follow_up_checks": [
+    "fap-web contract: sitemap/llms exclude draft, placeholder, missing-authority, private, noindex, 404, and soft-404 URLs",
+    "fap-web contract: JSON-LD Article/Dataset/FAQPage only emitted from backend/CMS authority",
+    "fap-web contract: hreflang targets only valid canonical reciprocal counterparts",
+    "public runtime recheck after deployment"
+  ],
+  "final_decision": "en_parity_07_authority_gate_landed_frontend_runtime_contract_deferred",
+  "next_task": "EN-PARITY-08 Chrome Playwright bilingual visual parity pass"
+}

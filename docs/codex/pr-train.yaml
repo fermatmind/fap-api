@@ -5919,6 +5919,49 @@ prs:
     content_generation_allowed: false
     next_task: EN-PARITY-07
 
+  - id: EN-PARITY-07
+    repo: fap-api
+    depends_on: [EN-PARITY-06]
+    branch: codex/en-parity-07-sitemap-llms-jsonld
+    base: main
+    title: "EN-PARITY-07 sitemap llms JSON-LD FAQ grounding parity gate"
+    train_scope: en_parity_sitemap_llms_jsonld_faq_grounding_gate
+    risk_level: p1_seo_surface_authority_gate
+    allowed_paths:
+      - backend/docs/seo/en-parity-07-sitemap-llms-jsonld-faq-grounding-gate.md
+      - backend/docs/seo/generated/en-parity-07-sitemap-llms-jsonld-faq-grounding-gate.v1.json
+      - backend/tests/Feature/SeoIntel/EnParity07SitemapLlmsJsonldFaqGroundingGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Land backend authority gate rules for sitemap, llms.txt, llms-full.txt, canonical, hreflang, JSON-LD, and FAQPage grounding.
+      - Prove invalid public surface classes are fail-closed in the generated gate contract.
+      - Keep fap-web runtime metadata/JSON-LD rendering contract as explicit deferred linked frontend work.
+      - Do not mutate production, submit URLs, publish content, or change fap-web.
+    do_not:
+      - Submit URLs, deploy, mutate production CMS, run production migration, or touch production secrets.
+      - Modify fap-web, frontend fallback, sitemap generator runtime, llms generator runtime, public content bodies, media assets, or Search Channel.
+      - Hide broken URLs by making them noindex while leaving them in sitemap/llms.
+      - Weaken JSON-LD or FAQ grounding rules.
+    validation:
+      - cd backend && php artisan test --filter=EnParity07 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/en-parity-07-sitemap-llms-jsonld-faq-grounding-gate.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    next_task: EN-PARITY-08
+
   - id: RESULT-EN-PARITY-00
     repo: fap-api
     depends_on: [EN-PARITY-00]

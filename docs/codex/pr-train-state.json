@@ -19345,11 +19345,11 @@
     "EN-PARITY-06": {
       "repo": "fap-api",
       "branch": "codex/en-parity-06-media-assets",
-      "status": "pr_open_github_checks_pending",
+      "status": "merged",
       "depends_on": [
         "EN-PARITY-05"
       ],
-      "commit_sha": "2edad950a985c66531082cd28f63341a8f1e47cb",
+      "commit_sha": "b337c7907b8ee998ea1a1719c21a2f63cd2a8c52",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1677",
       "checks": {
         "dependency_en_parity_05": {
@@ -19384,13 +19384,13 @@
           "evidence": "Focused php artisan test --filter=EnParity06 --no-ansi passed; php artisan route:list --no-ansi passed; vendor/bin/pint --test passed; composer validate --strict passed; composer audit --locked --no-interaction --ignore-unreachable passed; generated JSON parsed; PR-train YAML/state JSON parsed; git diff --check passed."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": "PR #1677 passed hygiene, supply-chain, Semgrep blocking secrets, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2; GitHub mergeStateStatus was CLEAN and PR #1677 was squash-merged as b337c7907b8ee998ea1a1719c21a2f63cd2a8c52."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-25T07:47:48Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "sidecar_issues": [
         {
@@ -19424,6 +19424,101 @@
           "at": "2026-05-25T07:39:00Z",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1677 for EN-PARITY-06 and pushed branch codex/en-parity-06-media-assets; waiting for GitHub checks."
+        },
+        {
+          "at": "2026-05-25T07:47:48Z",
+          "status": "merged",
+          "summary": "PR #1677 was squash-merged into main as b337c7907b8ee998ea1a1719c21a2f63cd2a8c52 and the remote branch was deleted. No post-merge cleanup script exists in this repository."
+        },
+        {
+          "at": "2026-05-25T07:49:00Z",
+          "status": "post_merge_revalidate_passed",
+          "summary": "Post-merge EN-PARITY-06 focused test, generated JSON parse, manifest/state parse, and clean worktree check passed before starting EN-PARITY-07."
+        }
+      ]
+    },
+    "EN-PARITY-07": {
+      "repo": "fap-api",
+      "branch": "codex/en-parity-07-sitemap-llms-jsonld",
+      "status": "pr_open_github_checks_pending",
+      "depends_on": [
+        "EN-PARITY-06"
+      ],
+      "commit_sha": "f081f7dc9a290163efef69dc311ca8259e0c5c37",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1678",
+      "checks": {
+        "dependency_en_parity_06": {
+          "status": "pass",
+          "evidence": "PR #1677 is MERGED and origin/main contains merge commit b337c7907b8ee998ea1a1719c21a2f63cd2a8c52."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Changed files are limited to EN-PARITY-07 sitemap/llms/JSON-LD/FAQ gate report/generated JSON/focused test and current PR-train manifest/state."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No production CMS mutation, production migration, deploy, URL submission, Search Channel action, secrets access, or fap-web commit."
+        },
+        "frontend_runtime_boundary": {
+          "status": "pass",
+          "evidence": "EN-PARITY-07 records backend authority gate rules only. fap-web runtime metadata/JSON-LD rendering remains a deferred linked frontend contract."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=EnParity07 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/en-parity-07-sitemap-llms-jsonld-faq-grounding-gate.v1.json >/dev/null",
+            "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "evidence": "Focused php artisan test --filter=EnParity07 --no-ansi passed; php artisan route:list --no-ansi passed; vendor/bin/pint --test passed; composer validate --strict passed; composer audit --locked --no-interaction --ignore-unreachable passed; generated JSON parsed; PR-train YAML/state JSON parsed; git diff --check passed."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": null
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "source_pr": "EN-PARITY-07",
+          "repo": "fap-api",
+          "branch": "codex/en-parity-07-sitemap-llms-jsonld",
+          "command_or_check": "fap-web runtime sitemap/llms/JSON-LD/FAQ contract",
+          "evidence": "Generated gate records backend authority rules but does not modify fap-web runtime HTML, metadata, sitemap, llms, or JSON-LD emission.",
+          "failure_summary": "Runtime surface parity must still be verified in fap-web or post-deploy public checks.",
+          "why_external_to_current_pr": "EN-PARITY-07 fap-api scope forbids fap-web changes and production deploy.",
+          "impact_on_current_pr": "No impact on backend authority gate; frontend runtime enforcement remains linked/deferred.",
+          "owner": "frontend-seo",
+          "follow_up_recommendation": "Add fap-web contract tests for sitemap/llms exclusions, JSON-LD authority, FAQ grounding, and reciprocal hreflang after backend authority gates are in place.",
+          "required_checks_status": "pending until PR checks complete",
+          "scope_validation_status": "pending until final scope validation",
+          "continue_train_decision": "allowed if local validation, GitHub required checks, and scope validation are green"
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-05-25T07:50:00Z",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Started EN-PARITY-07 after EN-PARITY-06 merged. Added sitemap/llms/JSON-LD/FAQ grounding gate report, generated artifact, focused test, and current manifest/state entry. No production, CMS, Search Channel, URL submission, deploy, or fap-web mutation performed."
+        },
+        {
+          "at": "2026-05-25T07:53:00Z",
+          "status": "local_validation_passed",
+          "summary": "EN-PARITY-07 focused test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, and diff check passed locally."
+        },
+        {
+          "at": "2026-05-25T07:55:00Z",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1678 for EN-PARITY-07 and pushed branch codex/en-parity-07-sitemap-llms-jsonld; waiting for GitHub checks."
         }
       ]
     },
