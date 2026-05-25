@@ -12845,3 +12845,40 @@ prs:
     metabase_deployment: false
     human_review_required: false
     production_approval_required: false
+
+  - id: MARKETINGSKILLS-FERMATMIND-FIT-SCAN-00
+    repo: fap-api
+    depends_on: []
+    branch: codex/marketingskills-fermatmind-fit-scan-00
+    base: main
+    title: "MARKETINGSKILLS-FERMATMIND-FIT-SCAN-00 evaluate marketingskills for FermatMind SEO/GEO/CRO operations"
+    train_scope: read_only_external_repo_local_repo_fit_scan
+    risk_level: low_docs_observation_only
+    allowed_paths:
+      - backend/docs/seo/marketingskills-fermatmind-fit-scan-00.md
+      - backend/docs/seo/generated/marketingskills-fermatmind-fit-scan-00.v1.json
+      - backend/tests/Feature/SeoIntel/MarketingSkillsFermatmindFitScan00Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Clone/read coreyhaines31/marketingskills only under /private/tmp and inspect relevant marketing skills.
+      - Evaluate fit against FermatMind SEO, GEO, CMS ops, CRO, Search Channel, result/report conversion, and pSEO governance.
+      - Add docs/generated artifact and focused SeoIntel test only; do not install skills, modify runtime code, mutate CMS, deploy, submit URLs, or change fap-web.
+    validation:
+      - cd backend && php artisan test --filter=MarketingSkillsFermatmindFitScan00 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/marketingskills-fermatmind-fit-scan-00.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - "python3 - <<'PY'\nimport yaml, pathlib\nyaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\nprint('yaml ok')\nPY"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: false
+    production_approval_required: false

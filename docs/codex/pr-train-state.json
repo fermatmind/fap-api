@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T11:43:41Z",
+  "updated_at": "2026-05-25T12:40:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -24893,6 +24893,77 @@
         "at": "2026-05-25T07:45:00Z",
         "status": "pr_opened",
         "summary": "Opened PR #1675 for RESULT-EN-PARITY-06 Big Five ResultPageV2 EN asset catalog parity."
+      }
+    ]
+  },
+  "MARKETINGSKILLS-FERMATMIND-FIT-SCAN-00": {
+    "repo": "fap-api",
+    "branch": "codex/marketingskills-fermatmind-fit-scan-00",
+    "status": "pr_opened",
+    "depends_on": [],
+    "commit_sha": "2d08bb46555389226adf6dbce80dcc9111e2b82a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1680",
+    "checks": {
+      "scope_boundary": {
+        "status": "pass",
+        "evidence": "Changed files are limited to fap-api SEO report, generated fit-scan JSON, focused SeoIntel test, and current task PR-train metadata."
+      },
+      "external_repo_scan": {
+        "status": "pass",
+        "evidence": "coreyhaines31/marketingskills was cloned under /private/tmp/marketingskills-scan and inspected read-only; no install command was executed in FermatMind repos."
+      },
+      "production_safety": {
+        "status": "pass",
+        "evidence": "No production mutation, CMS mutation, deploy, production migration, URL submission, Search Channel enqueue, production user data access, raw log read, pSEO generation, content asset generation, or fap-web commit."
+      },
+      "local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=MarketingSkillsFermatmindFitScan00 --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool backend/docs/seo/generated/marketingskills-fermatmind-fit-scan-00.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 yaml parse for docs/codex/pr-train.yaml",
+          "git diff --check",
+          "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short --branch"
+        ],
+        "evidence": "Focused test passed with 1 test and 22 assertions. route:list exited 0 with 203 routes. Pint passed 3553 files. composer validate --strict passed. composer audit reported no security advisories. Generated JSON, state JSON, manifest YAML parse, and diff check passed. fap-web remained reference-only with pre-existing unrelated GLOBAL parity branch modifications."
+      },
+      "github_pr_opened": {
+        "status": "pass",
+        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1680 from codex/marketingskills-fermatmind-fit-scan-00."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [
+      {
+        "title": "fap-web reference repo has active unrelated GLOBAL parity branch changes",
+        "repo": "fap-web",
+        "evidence": "git status shows codex/global-en-zh-parity-p0-01-content-help-policy-discoverability with existing modified files; this scan inspected fap-web reference-only and did not modify it.",
+        "why_external_to_current_pr": "Current PR writes fap-api docs/generated/test/state only."
+      }
+    ],
+    "events": [
+      {
+        "at": "2026-05-25T12:00:00Z",
+        "status": "local_files_generated_pending_validation",
+        "summary": "Added read-only marketingskills fit scan report, generated JSON, focused SeoIntel test, and current task PR train metadata."
+      },
+      {
+        "at": "2026-05-25T12:35:00Z",
+        "status": "local_validation_passed",
+        "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff check, and fap-web reference status passed."
+      },
+      {
+        "at": "2026-05-25T12:40:00Z",
+        "status": "pr_opened",
+        "summary": "Opened PR #1680 for MARKETINGSKILLS-FERMATMIND-FIT-SCAN-00."
       }
     ]
   }
