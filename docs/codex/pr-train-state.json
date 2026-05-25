@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T07:45:00Z",
+  "updated_at": "2026-05-25T11:42:26Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -19614,6 +19614,83 @@
           "at": "2026-05-25T06:58:00Z",
           "status": "rebased_conflict_resolved_pending_push",
           "summary": "Rebased RESULT-EN-PARITY-04 onto origin/main after EN-PARITY-02 merged. Resolved pr-train-state ledger by preserving current main entries, including EN-PARITY-02, and keeping RESULT-EN-PARITY-03/04 current states."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-PARITY-SCAN-00": {
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-parity-scan-00",
+      "status": "committed_pending_push",
+      "depends_on": [],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Changed files are limited to backend/docs/seo/global-en-zh-parity-scan-00.md, backend/docs/seo/generated/global-en-zh-parity-scan-00.v1.json, backend/tests/Feature/SeoIntel/GlobalEnZhParityScan00Test.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "Read-only scan only. No CMS mutation, production mutation, deploy, URL submission, Search Channel action, external search API call, production migration, production user data access, raw log read, or fap-web commit performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=GlobalEnZhParityScan00 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-parity-scan-00.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 yaml parse for docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check",
+            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          ],
+          "evidence": "Focused GlobalEnZhParityScan00 test exited 0 with 23 assertions and a PHPUnit warning; php artisan route:list exited 0 with 203 routes; vendor/bin/pint --test passed 3552 files; composer validate --strict passed; composer audit --locked --no-interaction --ignore-unreachable reported no advisories; generated JSON parsed; pr-train state JSON parsed; pr-train YAML parsed; git diff --check and git diff --cached --check passed; fap-web reference git status --short was clean."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": null
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "source_pr": "GLOBAL-EN-ZH-PARITY-SCAN-00",
+          "repo": "fap-api",
+          "branch": "codex/global-en-zh-parity-scan-00",
+          "command_or_check": "Playwright representative visual scan",
+          "evidence": "Two broader representative Playwright passes timed out; reduced core H1 overflow check completed with h1_issue_count=0. RIASEC pages returned 200 by curl in about 15 seconds but exceeded reduced 5s browser navigation window.",
+          "failure_summary": "Long-tail visual coverage is partial and should be repeated after P0 sitemap/URL cleanup.",
+          "why_external_to_current_pr": "This PR is a read-only scan/report and does not implement performance or frontend fixes.",
+          "impact_on_current_pr": "Scan remains valid and records the visual evidence gap explicitly.",
+          "owner": "frontend/seo",
+          "follow_up_recommendation": "Run dedicated long-tail Playwright visual/performance pass after GLOBAL-EN-ZH-PARITY-P0-FIX-TRAIN-01.",
+          "required_checks_status": "pending until PR checks complete",
+          "scope_validation_status": "pending until final scope validation",
+          "continue_train_decision": "allowed only if GitHub required checks and scope validation are green"
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-05-25T11:36:50.288480+00:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Generated GLOBAL-EN-ZH-PARITY-SCAN-00 master scan report, JSON artifact, focused test, and current manifest/state entry. No implementation fix or production mutation performed."
+        },
+        {
+          "at": "2026-05-25T11:41:47.937372+00:00",
+          "status": "local_validation_passed",
+          "summary": "GLOBAL-EN-ZH-PARITY-SCAN-00 focused test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, diff checks, and fap-web reference status passed locally."
+        },
+        {
+          "at": "2026-05-25T11:42:26.719617+00:00",
+          "status": "committed_pending_push",
+          "summary": "Committed GLOBAL-EN-ZH-PARITY-SCAN-00 as None; pending push and PR creation."
         }
       ]
     }
