@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T13:53:01+08:00",
+  "updated_at": "2026-05-25T06:52:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18925,12 +18925,12 @@
     "RESULT-EN-PARITY-03": {
       "repo": "fap-api",
       "branch": "codex/result-en-parity-03-iq-locale-safe-labels",
-      "status": "local_files_generated_pending_validation",
+      "status": "merged",
       "depends_on": [
         "RESULT-EN-PARITY-02"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "e3469213abfe02b38a57b959f9394dfe4fcd53f4",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1670",
       "checks": {
         "dependency_result_en_parity_00": {
           "status": "pass",
@@ -18970,14 +18970,14 @@
           "evidence": "Focused ResultEnParity03IqLocaleSafeLabels test passed with 4 tests and 29 assertions. Existing IqReportBuilder test passed with 2 tests and 23 assertions. route:list exited 0 with 203 routes. Pint passed 3541 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, manifest/state parse, git diff --check, git diff --cached --check, and Big Five runtime freeze focused check passed. fap-web reference status was inspected and only unrelated .playwright-mcp/ was untracked."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": "PR #1670 is open; GitHub checks are pending."
+          "status": "pass",
+          "evidence": "PR #1670 passed hygiene, verify-mbti-legacy, verify-mbti-v2, semgrep, and supply-chain checks; mergeStateStatus was CLEAN before squash merge."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T06:02:20Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "events": [
         {
@@ -18994,6 +18994,11 @@
           "at": "2026-05-25T07:10:00Z",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1670 for RESULT-EN-PARITY-03 IQ locale-safe report builder labels; waiting for GitHub checks."
+        },
+        {
+          "at": "2026-05-25T06:02:20Z",
+          "status": "merged",
+          "summary": "PR #1670 was squash merged as e3469213abfe02b38a57b959f9394dfe4fcd53f4; remote branch deleted; isolated worktree main synchronized and focused post-merge test passed."
         }
       ]
     },
@@ -19080,6 +19085,101 @@
           "at": "2026-05-25T13:53:01+08:00",
           "status": "rebased_conflict_resolved_pending_push",
           "summary": "Rebased EN-PARITY-02 onto origin/main after PR #1669 merged. Resolved pr-train-state ledger by preserving current main entries, including RESULT-EN-PARITY-02, and keeping EN-PARITY-02 current PR state."
+        }
+      ]
+    },
+    "RESULT-EN-PARITY-04": {
+      "repo": "fap-api",
+      "branch": "codex/result-en-parity-04-clinical-combo-en-paid",
+      "status": "pr_open_rebased_github_checks_pending",
+      "depends_on": [
+        "RESULT-EN-PARITY-03"
+      ],
+      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1671",
+      "checks": {
+        "dependency_result_en_parity_00": {
+          "status": "pass",
+          "evidence": "PR #1666 is MERGED and origin/main contains merge commit a93345e5a24f1f579495bcfd78f30b4c5984bd1a."
+        },
+        "dependency_result_en_parity_01": {
+          "status": "pass",
+          "evidence": "PR #1668 is MERGED and origin/main contains merge commit 3fb430f1b1592127cb8c42857e15fd42b0a11feb."
+        },
+        "dependency_result_en_parity_02": {
+          "status": "pass",
+          "evidence": "PR #1669 is MERGED and origin/main contains merge commit a803ccbb5ebf405d0e7f2de332e7bfd2a92d1085."
+        },
+        "dependency_result_en_parity_03": {
+          "status": "pass",
+          "evidence": "PR #1670 is MERGED and origin/main contains merge commit e3469213abfe02b38a57b959f9394dfe4fcd53f4."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Changed files are limited to clinical combo content pack paid blocks, ClinicalCombo report selector fail-closed behavior, generated report/artifact, focused SeoIntel test, minimum Big Five runtime-freeze classifier update for this clinical-combo-only scope, and PR-train metadata."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No production mutation, CMS mutation, deploy, production migration, URL submission, production user data access, scoring change, or fap-web commit."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=ResultEnParity04ClinicalComboEnPaid --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/result-en-parity-04-clinical-combo-en-paid.v1.json >/dev/null",
+            "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
+            "git diff --check",
+            "git diff --cached --check",
+            "git diff --name-only origin/main...HEAD",
+            "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_freeze_classifier_ignores_clinical_combo_en_paid_parity_changes --no-ansi",
+            "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_paths_have_no_uncommitted_diff --no-ansi"
+          ],
+          "evidence": "Focused ResultEnParity04ClinicalComboEnPaid test passed with 4 tests and 33 assertions. route:list exited 0 with 203 routes. Pint passed 3542 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, manifest/state parse, git diff checks, fap-web reference status, focused Big Five runtime freeze classifier test, and runtime_paths_have_no_uncommitted_diff passed locally."
+        },
+        "github_required_checks": {
+          "status": "pending_after_rebase",
+          "evidence": "PR #1671 required checks passed before rebase, but branch was DIRTY after origin/main advanced. Rebase is in progress; GitHub checks must rerun on the rebased head."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "events": [
+        {
+          "at": "2026-05-25T06:15:00Z",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Added clinical combo English paid block first batch, removed selector-level EN-to-zh paid block fallback, regenerated clinical combo compiled content pack artifacts, added generated artifact/report, focused test, and manifest/state entries for remaining RESULT-EN-PARITY train items."
+        },
+        {
+          "at": "2026-05-25T06:25:00Z",
+          "status": "local_validation_passed",
+          "summary": "RESULT-EN-PARITY-04 focused test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, diff checks, fap-web reference status, and focused Big Five runtime freeze check passed locally."
+        },
+        {
+          "at": "2026-05-25T06:32:00Z",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1671 for RESULT-EN-PARITY-04 clinical combo paid section EN parity; waiting for GitHub checks."
+        },
+        {
+          "at": "2026-05-25T06:45:00Z",
+          "status": "github_checks_failed_current_pr_fix_in_progress",
+          "summary": "GitHub verify-mbti-legacy and verify-mbti-v2 failed on the Big Five runtime freeze diff classifier for current PR clinical combo files; added minimum classifier coverage within PR4."
+        },
+        {
+          "at": "2026-05-25T06:52:00Z",
+          "status": "ci_fix_pushed_pending_checks",
+          "summary": "Added minimum Big Five runtime freeze classifier for RESULT-EN-PARITY-04 clinical combo EN paid parity files; focused PR4 test, classifier test, runtime_paths_have_no_uncommitted_diff, Pint, manifest/state parse, and diff checks passed locally."
+        },
+        {
+          "at": "2026-05-25T06:58:00Z",
+          "status": "rebased_conflict_resolved_pending_push",
+          "summary": "Rebased RESULT-EN-PARITY-04 onto origin/main after EN-PARITY-02 merged. Resolved pr-train-state ledger by preserving current main entries, including EN-PARITY-02, and keeping RESULT-EN-PARITY-03/04 current states."
         }
       ]
     }

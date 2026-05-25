@@ -5915,6 +5915,147 @@ prs:
     fap_web_commit_allowed: false
     next_task: RESULT-EN-PARITY-04
 
+  - id: RESULT-EN-PARITY-04
+    repo: fap-api
+    depends_on: [RESULT-EN-PARITY-03]
+    branch: codex/result-en-parity-04-clinical-combo-en-paid
+    base: main
+    title: "RESULT-EN-PARITY-04 clinical combo paid section EN parity"
+    train_scope: clinical_combo_paid_section_en_parity
+    risk_level: backend_clinical_content_pack_small_first_batch_fail_closed
+    allowed_paths:
+      - backend/content_packs/CLINICAL*/**
+      - backend/app/Services/Clinical/**
+      - backend/app/Services/Report/**
+      - backend/docs/seo/result-en-parity-04-clinical-combo-en-paid.md
+      - backend/docs/seo/generated/result-en-parity-04-clinical-combo-en-paid.v1.json
+      - backend/tests/Feature/SeoIntel/ResultEnParity04ClinicalComboEnPaidTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add a small backend-owned English first batch for missing clinical combo paid action and performance blocks.
+      - Ensure explicit EN clinical paid reports do not silently select zh-CN paid interpretation blocks.
+      - Keep all clinical wording self-assessment, non-diagnostic, non-treatment, and professional-help bounded.
+      - Add the minimum Big Five runtime-freeze classifier case for this clinical-combo-only parity scope.
+      - Produce generated artifact/report and focused tests.
+    do_not:
+      - Diagnose, recommend treatment as medical advice, claim cure, or add emergency protocol claims beyond approved crisis resources.
+      - Change scoring, payment, unlock, CMS, production data, production secrets, sitemap, llms, Search Channel, or URL submission state.
+      - Run production migrations, deploy, submit URLs, or access protected result data.
+      - Modify fap-web.
+    validation:
+      - cd backend && php artisan test --filter=ResultEnParity04ClinicalComboEnPaid --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/result-en-parity-04-clinical-combo-en-paid.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+      - git diff --name-only origin/main...HEAD
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    next_task: RESULT-EN-PARITY-05
+
+  - id: RESULT-EN-PARITY-05
+    repo: fap-api
+    depends_on: [RESULT-EN-PARITY-04]
+    branch: codex/result-en-parity-05-mbti-content-export
+    base: main
+    title: "RESULT-EN-PARITY-05 MBTI backend content package export and frontend interpretation de-authoring"
+    train_scope: mbti_backend_content_package_export_frontend_interpretation_de_authoring
+    risk_level: backend_mbti_authority_inventory_no_frontend_commit
+    allowed_paths:
+      - backend/app/Services/Mbti/**
+      - backend/app/Services/Report/**
+      - backend/docs/seo/result-en-parity-05-mbti-content-export.md
+      - backend/docs/seo/generated/result-en-parity-05-mbti-content-export.v1.json
+      - backend/tests/Feature/SeoIntel/ResultEnParity05MbtiContentExportTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Materialize or export authoritative MBTI result/report content package keys.
+      - Classify fap-web MBTI clone interpretation content as non-authoritative or migration-only.
+      - Add backend-owned MBTI asset key inventory and tests preventing frontend clone interpretation copy from becoming authority.
+      - Keep missing English keys explicit without mass-generating MBTI interpretation prose.
+    do_not:
+      - Mass-generate all MBTI English interpretation prose.
+      - Use frontend clone copy as source of truth.
+      - Mutate CMS, production user data, production secrets, sitemap, llms, Search Channel, or URL submission state.
+      - Run production migrations, deploy, submit URLs, or access protected result data.
+      - Modify fap-web without an explicitly authorized linked PR.
+      - Change MBTI scoring.
+    validation:
+      - cd backend && php artisan test --filter=ResultEnParity05MbtiContentExport --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/result-en-parity-05-mbti-content-export.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+      - git diff --name-only origin/main...HEAD
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    next_task: RESULT-EN-PARITY-06
+
+  - id: RESULT-EN-PARITY-06
+    repo: fap-api
+    depends_on: [RESULT-EN-PARITY-05]
+    branch: codex/result-en-parity-06-bigfive-v2-en-assets
+    base: main
+    title: "RESULT-EN-PARITY-06 Big Five ResultPageV2 EN asset catalog parity"
+    train_scope: bigfive_result_page_v2_en_asset_catalog_parity
+    risk_level: backend_bigfive_v2_asset_catalog_parity_no_scoring_change
+    allowed_paths:
+      - backend/app/Services/BigFive/**
+      - backend/content_packs/BIG5_OCEAN/**
+      - backend/docs/seo/result-en-parity-06-bigfive-v2-en-assets.md
+      - backend/docs/seo/generated/result-en-parity-06-bigfive-v2-en-assets.v1.json
+      - backend/tests/Feature/SeoIntel/ResultEnParity06BigFiveV2EnAssetsTest.php
+      - backend/tests/Unit/Services/BigFive/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add or draft English counterparts for Big Five ResultPageV2 route matrix, coupling, scenario action, facet, canonical profile, core body, and selector-ready assets.
+      - Ensure explicit EN Big Five V2 output cannot silently fall back to zh-CN interpretation copy.
+      - Preserve Big Five as trait-vector, workstyle, and behavioral explanation, not career recommendation authority.
+      - Produce generated artifact/report and focused tests.
+    do_not:
+      - Claim Big Five precise career matching, hiring fit, career success prediction, diagnosis, treatment, or cure.
+      - Change scoring, V2 import/selector gates, payment, unlock, CMS, production data, production secrets, sitemap, llms, Search Channel, or URL submission state.
+      - Run production migrations, deploy, submit URLs, or access protected result data.
+      - Modify fap-web.
+    validation:
+      - cd backend && php artisan test --filter=ResultEnParity06BigFiveV2EnAssets --no-ansi
+      - cd backend && php artisan test --filter=BigFive --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/result-en-parity-06-bigfive-v2-en-assets.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+      - git diff --name-only origin/main...HEAD
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+
   - id: SEO-DASH-PROD-04B
     repo: fap-api
     depends_on:

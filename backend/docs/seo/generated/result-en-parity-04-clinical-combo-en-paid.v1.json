@@ -1,0 +1,177 @@
+{
+  "pr_id": "RESULT-EN-PARITY-04",
+  "title": "clinical combo paid section EN parity",
+  "family": "clinical_combo_68",
+  "generated_at": "2026-05-25T00:00:00Z",
+  "authority": {
+    "backend_content_pack_is_authority": true,
+    "frontend_fallback_is_authority": false,
+    "scoring_change": false,
+    "production_cms_mutation": false,
+    "production_user_data_access": false,
+    "deployment": false,
+    "search_submission": false
+  },
+  "content_pack": {
+    "raw_path": "backend/content_packs/CLINICAL_COMBO_68/v1/raw/blocks/paid_blocks.json",
+    "compiled_path": "backend/content_packs/CLINICAL_COMBO_68/v1/compiled/blocks.compiled.json",
+    "pack_id": "CLINICAL_COMBO_68",
+    "pack_version": "v1"
+  },
+  "english_runtime_policy": "fail_closed_no_zh_paid_block_fallback",
+  "fixed_keys": [
+    "paid_action_anxiety_14d.en",
+    "paid_action_burnout.en",
+    "paid_action_depression_14d.en",
+    "paid_action_ocd_erp_start.en",
+    "paid_action_perfectionism_14d.en",
+    "paid_perf_cm_mistakes.en",
+    "paid_perf_da_doubts.en",
+    "paid_perf_org_order.en",
+    "paid_perf_pe_parental.en",
+    "paid_perf_ps_standards.en"
+  ],
+  "asset_matrix": [
+    {
+      "asset_key": "paid_action_anxiety_14d",
+      "zh_block_id": "paid_action_anxiety_14d_zh",
+      "en_block_id": "paid_action_anxiety_14d_en",
+      "section": "action_plan",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "sensitive_claim_boundary": true
+    },
+    {
+      "asset_key": "paid_action_burnout",
+      "zh_block_id": "paid_action_burnout_zh",
+      "en_block_id": "paid_action_burnout_en",
+      "section": "action_plan",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "sensitive_claim_boundary": true
+    },
+    {
+      "asset_key": "paid_action_depression_14d",
+      "zh_block_id": "paid_action_depression_14d_zh",
+      "en_block_id": "paid_action_depression_14d_en",
+      "section": "action_plan",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "sensitive_claim_boundary": true
+    },
+    {
+      "asset_key": "paid_action_ocd_erp_start",
+      "zh_block_id": "paid_action_ocd_erp_start_zh",
+      "en_block_id": "paid_action_ocd_erp_start_en",
+      "section": "action_plan",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "sensitive_claim_boundary": true
+    },
+    {
+      "asset_key": "paid_action_perfectionism_14d",
+      "zh_block_id": "paid_action_perfectionism_14d_zh",
+      "en_block_id": "paid_action_perfectionism_14d_en",
+      "section": "action_plan",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "sensitive_claim_boundary": true
+    },
+    {
+      "asset_key": "paid_perf_cm_mistakes",
+      "zh_block_id": "paid_perf_cm_mistakes_zh",
+      "en_block_id": "paid_perf_cm_mistakes_en",
+      "section": "paid_deep_dive",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "sensitive_claim_boundary": true
+    },
+    {
+      "asset_key": "paid_perf_da_doubts",
+      "zh_block_id": "paid_perf_da_doubts_zh",
+      "en_block_id": "paid_perf_da_doubts_en",
+      "section": "paid_deep_dive",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "sensitive_claim_boundary": true
+    },
+    {
+      "asset_key": "paid_perf_org_order",
+      "zh_block_id": "paid_perf_org_order_zh",
+      "en_block_id": "paid_perf_org_order_en",
+      "section": "paid_deep_dive",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "sensitive_claim_boundary": true
+    },
+    {
+      "asset_key": "paid_perf_pe_parental",
+      "zh_block_id": "paid_perf_pe_parental_zh",
+      "en_block_id": "paid_perf_pe_parental_en",
+      "section": "paid_deep_dive",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "sensitive_claim_boundary": true
+    },
+    {
+      "asset_key": "paid_perf_ps_standards",
+      "zh_block_id": "paid_perf_ps_standards_zh",
+      "en_block_id": "paid_perf_ps_standards_en",
+      "section": "paid_deep_dive",
+      "has_zh": true,
+      "has_en": true,
+      "missing_en": false,
+      "fallback_to_zh_allowed": false,
+      "sensitive_claim_boundary": true
+    }
+  ],
+  "claim_boundary": {
+    "allowed": [
+      "self-assessment guidance",
+      "self-observation",
+      "not a diagnosis",
+      "not medical advice",
+      "qualified professional support when distress or impairment is significant"
+    ],
+    "forbidden": [
+      "diagnosis",
+      "treatment plan",
+      "cure",
+      "guarantee",
+      "clinical diagnosis authority",
+      "emergency protocol beyond approved crisis resources"
+    ]
+  },
+  "review_control": {
+    "content_generation_mode": "small_first_batch",
+    "mass_translation": false,
+    "human_review_recommended_before_broad_promotion": true
+  },
+  "validation_targets": [
+    "php artisan test --filter=ResultEnParity04ClinicalComboEnPaid --no-ansi",
+    "php artisan route:list --no-ansi",
+    "vendor/bin/pint --test",
+    "composer validate --strict",
+    "composer audit --locked --no-interaction --ignore-unreachable",
+    "python3 -m json.tool backend/docs/seo/generated/result-en-parity-04-clinical-combo-en-paid.v1.json"
+  ],
+  "decision": "clinical_combo_en_paid_first_batch_locale_safe"
+}

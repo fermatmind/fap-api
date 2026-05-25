@@ -66,23 +66,108 @@
       "title": "你的完美主义更像“反复确认驱动”",
       "body_md": "你对不确定性的耐受阈值偏低，容易反复确认。建议设置明确确认规则，并用延迟技术削弱“必须马上确认”的冲动。"
     },
-    {
-      "block_id": "paid_resilience_praise_zh",
-      "section": "paid_deep_dive",
-      "locale": "zh-CN",
+        {
+            "block_id": "paid_resilience_praise_zh",
+            "section": "paid_deep_dive",
+            "locale": "zh-CN",
       "access_level": "paid",
       "priority": 180,
       "exclusive_group": "resilience_bonus",
       "conditions": [
         { "path": "scores.resilience.level", "op": "in", "value": ["strong_band"] }
       ],
-      "title": "你的韧性是稀缺优势资产",
-      "body_md": "你在压力下仍能保持恢复与推进能力。建议把恢复仪式、支持网络与节律管理固定化，防止高韧性人群的隐性透支。"
-    },
-    {
-      "block_id": "paid_perf_generic_en",
-      "section": "paid_deep_dive",
-      "locale": "en",
+            "title": "你的韧性是稀缺优势资产",
+            "body_md": "你在压力下仍能保持恢复与推进能力。建议把恢复仪式、支持网络与节律管理固定化，防止高韧性人群的隐性透支。"
+        },
+        {
+            "block_id": "paid_perf_pe_parental_en",
+            "section": "paid_deep_dive",
+            "locale": "en",
+            "access_level": "paid",
+            "priority": 220,
+            "exclusive_group": "perf_dominant",
+            "conditions": [
+                {
+                    "path": "report_tags",
+                    "op": "contains",
+                    "value": "trait:parental_expectation_dominant"
+                }
+            ],
+            "title": "Your perfectionism pattern is more externally driven",
+            "body_md": "This self-report pattern suggests your self-evaluation may be more sensitive to external approval or expectations. A safer next step is to track controllable process indicators before judging outcomes, while seeking professional support if distress or impairment feels significant."
+        },
+        {
+            "block_id": "paid_perf_org_order_en",
+            "section": "paid_deep_dive",
+            "locale": "en",
+            "access_level": "paid",
+            "priority": 220,
+            "exclusive_group": "perf_dominant",
+            "conditions": [
+                {
+                    "path": "report_tags",
+                    "op": "contains",
+                    "value": "trait:orderliness_dominant"
+                }
+            ],
+            "title": "Your perfectionism pattern is more order-driven",
+            "body_md": "This pattern suggests you may feel steadier when tasks have clear structure and order. Consider separating high-standard work from lower-risk tasks where an 80% delivery standard is acceptable."
+        },
+        {
+            "block_id": "paid_perf_ps_standards_en",
+            "section": "paid_deep_dive",
+            "locale": "en",
+            "access_level": "paid",
+            "priority": 220,
+            "exclusive_group": "perf_dominant",
+            "conditions": [
+                {
+                    "path": "report_tags",
+                    "op": "contains",
+                    "value": "trait:high_standards_dominant"
+                }
+            ],
+            "title": "Your perfectionism pattern is more self-standard driven",
+            "body_md": "High standards can be useful, but they become harder to carry when performance is tied to personal worth. Try reviewing whether the strategy worked instead of judging what the outcome says about you as a person."
+        },
+        {
+            "block_id": "paid_perf_cm_mistakes_en",
+            "section": "paid_deep_dive",
+            "locale": "en",
+            "access_level": "paid",
+            "priority": 220,
+            "exclusive_group": "perf_dominant",
+            "conditions": [
+                {
+                    "path": "report_tags",
+                    "op": "contains",
+                    "value": "trait:mistake_concern_dominant"
+                }
+            ],
+            "title": "Your perfectionism pattern is more mistake-sensitive",
+            "body_md": "This pattern suggests mistakes may feel unusually costly, which can lead to over-preparation or delay. A bounded next step is to practice low-risk experiments where small errors are expected and reviewed without self-judgment."
+        },
+        {
+            "block_id": "paid_perf_da_doubts_en",
+            "section": "paid_deep_dive",
+            "locale": "en",
+            "access_level": "paid",
+            "priority": 220,
+            "exclusive_group": "perf_dominant",
+            "conditions": [
+                {
+                    "path": "report_tags",
+                    "op": "contains",
+                    "value": "trait:doubt_checking_dominant"
+                }
+            ],
+            "title": "Your perfectionism pattern is more doubt-checking driven",
+            "body_md": "This pattern suggests uncertainty may trigger repeated checking or reassurance seeking. Try setting a clear checking rule in advance, then delaying extra checks long enough to observe whether the urge changes."
+        },
+        {
+            "block_id": "paid_perf_generic_en",
+            "section": "paid_deep_dive",
+            "locale": "en",
       "access_level": "paid",
       "priority": 120,
       "exclusive_group": "perf_dominant",
@@ -155,10 +240,10 @@
       "title": "把完美主义从折磨变成能力",
       "body_md": "每天选择 1 件任务做 80 分交付；区分最低可交付标准与优化标准；使用事实陈述替代人格审判。"
     },
-    {
-      "block_id": "paid_action_burnout_zh",
-      "section": "action_plan",
-      "locale": "zh-CN",
+        {
+            "block_id": "paid_action_burnout_zh",
+            "section": "action_plan",
+            "locale": "zh-CN",
       "access_level": "paid",
       "priority": 160,
       "exclusive_group": "action_burnout",
@@ -166,12 +251,120 @@
         { "path": "scores.stress.level", "op": "in", "value": ["high", "extreme"] },
         { "path": "scores.resilience.level", "op": "in", "value": ["fragile", "low"] }
       ],
-      "title": "倦怠风险：先止损再重建",
-      "body_md": "对任务做必须/可延后/可放弃分层，建立硬边界，优先恢复睡眠与身体，再逐步重建执行能力。"
-    },
-    {
-      "block_id": "paid_action_safety_core_en",
-      "section": "action_plan",
+            "title": "倦怠风险：先止损再重建",
+            "body_md": "对任务做必须/可延后/可放弃分层，建立硬边界，优先恢复睡眠与身体，再逐步重建执行能力。"
+        },
+        {
+            "block_id": "paid_action_depression_14d_en",
+            "section": "action_plan",
+            "locale": "en",
+            "access_level": "paid",
+            "priority": 200,
+            "exclusive_group": "action_depression",
+            "conditions": [
+                {
+                    "path": "scores.depression.level",
+                    "op": "in",
+                    "value": [
+                        "moderate",
+                        "severe"
+                    ]
+                }
+            ],
+            "title": "14-day activation self-observation plan",
+            "body_md": "Use very small, observable actions and record completion without judging yourself. This is not a diagnosis or clinical care guidance; if symptoms are persistent, intense, or impair daily life, consider contacting a qualified professional."
+        },
+        {
+            "block_id": "paid_action_anxiety_14d_en",
+            "section": "action_plan",
+            "locale": "en",
+            "access_level": "paid",
+            "priority": 190,
+            "exclusive_group": "action_anxiety",
+            "conditions": [
+                {
+                    "path": "scores.anxiety.level",
+                    "op": "in",
+                    "value": [
+                        "moderate",
+                        "severe"
+                    ]
+                }
+            ],
+            "title": "14-day anxiety self-observation plan",
+            "body_md": "Schedule a short worry window, separate controllable from uncontrollable concerns, and add one low-intensity body-based reset each day. This is self-assessment guidance, not medical advice."
+        },
+        {
+            "block_id": "paid_action_ocd_erp_start_en",
+            "section": "action_plan",
+            "locale": "en",
+            "access_level": "paid",
+            "priority": 180,
+            "exclusive_group": "action_ocd",
+            "conditions": [
+                {
+                    "path": "scores.ocd.level",
+                    "op": "in",
+                    "value": [
+                        "moderate",
+                        "severe"
+                    ]
+                }
+            ],
+            "title": "ERP-informed discussion note",
+            "body_md": "If intrusive thoughts or compulsive checking feel relevant, consider asking a qualified clinician about evidence-informed options such as ERP. Do not treat this self-assessment as instructions to start clinical exposure work on your own."
+        },
+        {
+            "block_id": "paid_action_perfectionism_14d_en",
+            "section": "action_plan",
+            "locale": "en",
+            "access_level": "paid",
+            "priority": 170,
+            "exclusive_group": "action_perfectionism",
+            "conditions": [
+                {
+                    "path": "scores.perfectionism.level",
+                    "op": "in",
+                    "value": [
+                        "perfectionist",
+                        "rigid"
+                    ]
+                }
+            ],
+            "title": "14-day perfectionism flexibility plan",
+            "body_md": "Choose one low-risk task each day where an 80% delivery standard is enough. Separate minimum acceptable criteria from optional improvement criteria, then review facts instead of making global self-judgments."
+        },
+        {
+            "block_id": "paid_action_burnout_en",
+            "section": "action_plan",
+            "locale": "en",
+            "access_level": "paid",
+            "priority": 160,
+            "exclusive_group": "action_burnout",
+            "conditions": [
+                {
+                    "path": "scores.stress.level",
+                    "op": "in",
+                    "value": [
+                        "high",
+                        "extreme"
+                    ]
+                },
+                {
+                    "path": "scores.resilience.level",
+                    "op": "in",
+                    "value": [
+                        "fragile",
+                        "low"
+                    ]
+                }
+            ],
+            "title": "Burnout risk self-observation plan",
+            "body_md": "Sort tasks into must-do, can-delay, and can-drop groups. Protect sleep and recovery first, then rebuild workload gradually; seek professional support if functioning continues to decline."
+        },
+        {
+            "block_id": "paid_action_safety_core_en",
+            "section": "action_plan",
       "locale": "en",
       "access_level": "paid",
       "priority": 100,
