@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T11:56:00+08:00",
+  "updated_at": "2026-05-25T04:07:48.672896+00:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18449,6 +18449,83 @@
           "at": "2026-05-25T11:03:00+08:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1661 for the read-only MBTI bilingual parity scan; waiting for GitHub required checks."
+        }
+      ]
+    },
+    "EN-PARITY-00": {
+      "repo": "fap-api",
+      "branch": "codex/en-parity-00-full-site-inventory",
+      "status": "local_validation_passed",
+      "depends_on": [],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Changed files are limited to EN-PARITY-00 report, generated JSON, focused test, and PR-train manifest/state."
+        },
+        "generated_json": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/en-parity-00-full-site-bilingual-inventory.v1.json >/dev/null"
+        },
+        "focused_test": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=EnParity00FullSiteBilingualInventoryTest --no-ansi",
+          "evidence": "1 test passed, 33 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Command exited 0; output captured in /tmp/en-parity-00-route-list.txt."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "3535 files passed."
+        },
+        "manifest_state_parse": {
+          "status": "pass",
+          "command": "python3 -c yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json"
+        },
+        "github_required_checks": {
+          "status": "pending"
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "title": "Chrome batch visual audit not completed",
+          "evidence": "Chrome/Computer Use confirmed fermatmind.com/en structure, but Chrome-backed batch screenshot automation was unavailable/occupied during the source scan.",
+          "impact_on_current_pr": "No impact on landing the read-only inventory; visual parity remains deferred to EN-PARITY-08."
+        },
+        {
+          "title": "Backend URL Truth dry-run covers only 7 items",
+          "evidence": "url_truth_inventory dry-run succeeded with items_seen=7 while public runtime discovery found 180 URLs.",
+          "impact_on_current_pr": "No impact on inventory landing; this is the authority coverage gap EN-PARITY-01/02 must address."
+        },
+        {
+          "title": "Internal-link graph dry-run blocked by local MySQL credentials",
+          "evidence": "seo-intel:internal-link-graph --dry-run --no-write --json failed locally with SQLSTATE[HY000] [1045] Access denied for root@localhost.",
+          "impact_on_current_pr": "No impact on inventory landing; internal-link authority evidence remains incomplete."
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-05-25T04:07:01.632393+00:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Generated EN-PARITY-00 read-only inventory report, generated JSON, focused test, and authorized manifest/state entry. No runtime fix or CMS/fap-web mutation performed."
+        },
+        {
+          "at": "2026-05-25T04:07:48.672247+00:00",
+          "status": "local_validation_passed",
+          "summary": "EN-PARITY-00 focused test, route list, Pint, generated JSON parse, manifest/state parse, and diff check passed locally."
         }
       ]
     }
