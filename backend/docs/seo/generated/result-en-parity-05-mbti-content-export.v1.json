@@ -1,0 +1,377 @@
+{
+    "schema_version": "result-en-parity-05-mbti-content-export.v1",
+    "pr_id": "RESULT-EN-PARITY-05",
+    "family": "MBTI",
+    "decision": "mbti_backend_content_package_export_manifest_ready_frontend_clone_deauthorized",
+    "generated_from": [
+        "RESULT-EN-PARITY-00 inventory",
+        "RESULT-EN-PARITY-01 asset catalog gate",
+        "backend/app/Support/Mbti/MbtiCanonicalSectionRegistry.php",
+        "backend/app/Services/Legacy/Mbti/Content/LegacyMbtiPackRepository.php",
+        "backend/app/Services/Legacy/Mbti/Report/LegacyMbtiReportAssetRepository.php",
+        "backend/app/Services/Legacy/Mbti/Report/LegacyMbtiReportPayloadBuilder.php",
+        "backend/app/Services/Mbti/Adapters/MbtiReportAuthoritySourceAdapter.php",
+        "backend/app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php",
+        "reference-only:/Users/rainie/Desktop/GitHub/fap-web/components/result/mbti/clone/content/index.ts"
+    ],
+    "authority": {
+        "backend_scoring_cms_result_asset_catalog_is_authority": true,
+        "frontend_fallback_is_authority": false,
+        "frontend_interpretation_copy_authority_allowed": false,
+        "fap_web_modified": false,
+        "scoring_change": false,
+        "production_mutation": false,
+        "cms_mutation": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "production_user_data_access": false
+    },
+    "architecture_finding": {
+        "result_content_architecture": "mixed_structured_codes_plus_backend_external_content_package_plus_legacy_generated_fallback_plus_frontend_clone_seed",
+        "backend_export_status": "repo_visible_manifest_export_only",
+        "full_authoritative_content_package_status": "not_materialized_in_repo",
+        "english_runtime_policy": "fail_closed_missing_authoritative_en_no_frontend_clone_fallback",
+        "frontend_clone_policy": "non_authoritative_migration_only_historical_seed_source",
+        "mass_content_generation": false
+    },
+    "backend_authority_sources": [
+        {
+            "path": "backend/app/Services/Assessment/Drivers/MbtiDriver.php",
+            "role": "assessment_driver_and_scoring_entry",
+            "authority_status": "backend_scoring_authority"
+        },
+        {
+            "path": "backend/app/Services/Legacy/Mbti/Content/LegacyMbtiPackRepository.php",
+            "role": "external_content_package_loader",
+            "authority_status": "backend_content_package_read_path"
+        },
+        {
+            "path": "backend/app/Services/Legacy/Mbti/Report/LegacyMbtiReportAssetRepository.php",
+            "role": "legacy_report_asset_loader_and_schema_finalizer",
+            "authority_status": "backend_report_asset_read_path"
+        },
+        {
+            "path": "backend/app/Services/Legacy/Mbti/Report/LegacyMbtiReportPayloadBuilder.php",
+            "role": "legacy_report_payload_compatibility_builder",
+            "authority_status": "backend_compatibility_path_not_current_v0_3_runtime_chain"
+        },
+        {
+            "path": "backend/app/Services/Mbti/Adapters/MbtiReportAuthoritySourceAdapter.php",
+            "role": "report_payload_to_public_result_authority_adapter",
+            "authority_status": "backend_public_result_authority_adapter"
+        },
+        {
+            "path": "backend/app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php",
+            "role": "cms_personality_profile_and_variant_authority_adapter",
+            "authority_status": "backend_cms_authority_adapter"
+        },
+        {
+            "path": "backend/app/Services/Mbti/MbtiPublicProjectionService.php",
+            "role": "public_projection_builder",
+            "authority_status": "backend_public_projection_authority"
+        }
+    ],
+    "canonical_section_export": {
+        "registry_path": "backend/app/Support/Mbti/MbtiCanonicalSectionRegistry.php",
+        "section_key_count": 33,
+        "section_keys": [
+            "letters_intro",
+            "overview",
+            "trait_overview",
+            "traits.why_this_type",
+            "traits.close_call_axes",
+            "traits.adjacent_type_contrast",
+            "traits.decision_style",
+            "career.summary",
+            "career.collaboration_fit",
+            "career.work_environment",
+            "career.work_experiments",
+            "career.advantages",
+            "career.weaknesses",
+            "career.preferred_roles",
+            "career.next_step",
+            "career.upgrade_suggestions",
+            "growth.summary",
+            "growth.stability_confidence",
+            "growth.next_actions",
+            "growth.weekly_experiments",
+            "growth.strengths",
+            "growth.weaknesses",
+            "growth.stress_recovery",
+            "growth.watchouts",
+            "growth.motivators",
+            "growth.drainers",
+            "relationships.summary",
+            "relationships.strengths",
+            "relationships.weaknesses",
+            "relationships.communication_style",
+            "relationships.try_this_week",
+            "relationships.rel_advantages",
+            "relationships.rel_risks"
+        ],
+        "render_variants": [
+            "letters_intro",
+            "rich_text",
+            "trait_dimension_grid",
+            "bullets",
+            "preferred_role_list",
+            "premium_teaser"
+        ],
+        "premium_teaser_keys": [
+            "growth.motivators",
+            "growth.drainers",
+            "relationships.rel_advantages",
+            "relationships.rel_risks"
+        ]
+    },
+    "asset_key_inventory": [
+        {
+            "key": "mbti.result.structured_type_code",
+            "surface": "result",
+            "asset_kind": "structured_result_code",
+            "has_zh": true,
+            "has_en": true,
+            "missing_en": false,
+            "presentation_label_only": false,
+            "interpretation_copy": false,
+            "authority_status": "backend_scoring_authority",
+            "fallback_to_zh_detected": false,
+            "fail_closed_for_en": false
+        },
+        {
+            "key": "mbti.result.trait_axis_scores",
+            "surface": "result",
+            "asset_kind": "structured_score_signal",
+            "has_zh": true,
+            "has_en": true,
+            "missing_en": false,
+            "presentation_label_only": false,
+            "interpretation_copy": false,
+            "authority_status": "backend_scoring_authority",
+            "fallback_to_zh_detected": false,
+            "fail_closed_for_en": false
+        },
+        {
+            "key": "mbti.report.canonical_section_registry",
+            "surface": "report",
+            "asset_kind": "backend_section_key_export",
+            "has_zh": true,
+            "has_en": true,
+            "missing_en": false,
+            "presentation_label_only": true,
+            "interpretation_copy": false,
+            "authority_status": "backend_registry_authority",
+            "fallback_to_zh_detected": false,
+            "fail_closed_for_en": false
+        },
+        {
+            "key": "mbti.report.external_content_package",
+            "surface": "report",
+            "asset_kind": "interpretation_copy_catalog",
+            "has_zh": "not_repo_visible",
+            "has_en": "not_repo_visible",
+            "missing_en": true,
+            "presentation_label_only": false,
+            "interpretation_copy": true,
+            "authority_status": "backend_export_required",
+            "fallback_to_zh_detected": false,
+            "fail_closed_for_en": true,
+            "deferred_reason": "authoritative_backend_content_package_not_materialized_in_repo"
+        },
+        {
+            "key": "mbti.report.legacy_generated_fallback_copy",
+            "surface": "report",
+            "asset_kind": "legacy_interpretation_copy",
+            "has_zh": true,
+            "has_en": false,
+            "missing_en": true,
+            "presentation_label_only": false,
+            "interpretation_copy": true,
+            "authority_status": "legacy_backend_fallback_must_not_be_en_authority",
+            "fallback_to_zh_detected": true,
+            "fail_closed_for_en": true,
+            "deferred_reason": "legacy_zh_fallback_risk"
+        },
+        {
+            "key": "mbti.frontend_clone_content_base",
+            "surface": "result_desktop_clone",
+            "asset_kind": "frontend_clone_interpretation_copy",
+            "has_zh": true,
+            "has_en": false,
+            "missing_en": true,
+            "presentation_label_only": false,
+            "interpretation_copy": true,
+            "authority_status": "non_authoritative_migration_only",
+            "fallback_to_zh_detected": true,
+            "fail_closed_for_en": true,
+            "deferred_reason": "fap_web_clone_content_is_historical_seed_not_report_authority"
+        },
+        {
+            "key": "mbti.frontend_clone_content_variants",
+            "surface": "result_desktop_clone",
+            "asset_kind": "frontend_clone_variant_patch_copy",
+            "has_zh": true,
+            "has_en": false,
+            "missing_en": true,
+            "presentation_label_only": false,
+            "interpretation_copy": true,
+            "authority_status": "non_authoritative_migration_only",
+            "fallback_to_zh_detected": true,
+            "fail_closed_for_en": true,
+            "deferred_reason": "fap_web_clone_variant_patches_are_historical_seed_not_report_authority"
+        },
+        {
+            "key": "mbti.share.public_projection_summary",
+            "surface": "share",
+            "asset_kind": "backend_public_projection_summary",
+            "has_zh": true,
+            "has_en": "requires_backend_payload",
+            "missing_en": true,
+            "presentation_label_only": false,
+            "interpretation_copy": true,
+            "authority_status": "backend_public_projection_authority",
+            "fallback_to_zh_detected": "not_certified",
+            "fail_closed_for_en": true,
+            "deferred_reason": "share_summary_english_prose_requires_authoritative_backend_payload_export"
+        },
+        {
+            "key": "mbti.pdf.report_payload",
+            "surface": "pdf",
+            "asset_kind": "report_export_payload",
+            "has_zh": "not_repo_visible",
+            "has_en": "not_repo_visible",
+            "missing_en": true,
+            "presentation_label_only": false,
+            "interpretation_copy": true,
+            "authority_status": "backend_report_export_required",
+            "fallback_to_zh_detected": "not_certified",
+            "fail_closed_for_en": true,
+            "deferred_reason": "localized_pdf_report_prose_export_not_materialized"
+        },
+        {
+            "key": "mbti.email.result_report_summary",
+            "surface": "email",
+            "asset_kind": "email_result_report_copy",
+            "has_zh": "shared_template_only",
+            "has_en": "shared_template_only",
+            "missing_en": true,
+            "presentation_label_only": false,
+            "interpretation_copy": true,
+            "authority_status": "backend_email_asset_export_required",
+            "fallback_to_zh_detected": "not_certified",
+            "fail_closed_for_en": true,
+            "deferred_reason": "mbti_specific_email_result_prose_catalog_not_repo_visible"
+        },
+        {
+            "key": "mbti.my_results.card_summary",
+            "surface": "my_results",
+            "asset_kind": "history_card_summary",
+            "has_zh": true,
+            "has_en": "requires_backend_payload",
+            "missing_en": true,
+            "presentation_label_only": false,
+            "interpretation_copy": true,
+            "authority_status": "backend_saved_result_authority",
+            "fallback_to_zh_detected": "not_certified",
+            "fail_closed_for_en": true,
+            "deferred_reason": "my_results_summary_english_prose_requires_authoritative_backend_payload_export"
+        }
+    ],
+    "missing_en_asset_keys": [
+        "backend_external_content_package_export_required",
+        "legacy_mbti_generated_fallback_copy.en",
+        "frontend_mbti_clone_content_base.en",
+        "frontend_mbti_clone_content_variants.en",
+        "mbti.share.public_projection_summary.en",
+        "mbti.pdf.report_payload.en",
+        "mbti.email.result_report_summary.en",
+        "mbti.my_results.card_summary.en"
+    ],
+    "frontend_clone_classification": {
+        "repo": "fap-web",
+        "modified_in_this_pr": false,
+        "authority_status": "non_authoritative_migration_only",
+        "base_content_file_count": 16,
+        "variant_patch_file_count": 32,
+        "total_clone_content_file_count": 48,
+        "reference_paths": [
+            "components/result/mbti/clone/content/index.ts",
+            "components/result/mbti/clone/content/*.zh.ts",
+            "components/result/mbti/clone/content/variants/*.zh.ts",
+            "components/result/mbti/clone/mbtiDesktopClone.resolve.ts",
+            "lib/cms/personality-desktop-clone.ts"
+        ],
+        "evidence": [
+            "components/result/mbti/clone/content/index.ts imports 16 base zh files and 32 variant zh patches.",
+            "components/result/mbti/clone/content/index.ts declares the registry as a migration artifact only.",
+            "frontend clone interpretation copy must not be used as backend authority or English fallback."
+        ]
+    },
+    "claim_boundary": {
+        "career_language": "exploratory_workstyle_signal_only",
+        "forbidden_claims": [
+            "precise career recommendation",
+            "best career for you",
+            "hiring suitability",
+            "job fit guarantee",
+            "career success prediction",
+            "salary prediction",
+            "turnover prediction"
+        ],
+        "allowed_language": [
+            "workstyle tendency",
+            "career direction reference",
+            "exploratory guidance",
+            "snapshot-based support",
+            "evidence-backed explanation"
+        ]
+    },
+    "deferred_assets": [
+        {
+            "key": "mbti.report.external_content_package.en",
+            "reason": "requires reviewed authoritative MBTI English interpretation package; not generated in this PR"
+        },
+        {
+            "key": "mbti.report.legacy_generated_fallback_copy.en",
+            "reason": "legacy zh fallback must be replaced or gated, not translated ad hoc in this PR"
+        },
+        {
+            "key": "mbti.share.public_projection_summary.en",
+            "reason": "requires backend payload export and share-safe summary review"
+        },
+        {
+            "key": "mbti.pdf.report_payload.en",
+            "reason": "requires reviewed report export copy package"
+        },
+        {
+            "key": "mbti.email.result_report_summary.en",
+            "reason": "requires reviewed lifecycle/email copy package"
+        },
+        {
+            "key": "mbti.my_results.card_summary.en",
+            "reason": "requires backend saved-result summary catalog"
+        }
+    ],
+    "next_pr_recommendations": [
+        {
+            "id": "RESULT-EN-PARITY-MBTI-ASSET-BATCH-01",
+            "title": "MBTI reviewed English report content package first batch",
+            "scope": "Create backend-owned reviewed EN import package for a small MBTI type subset, with fail-closed missing-key behavior.",
+            "requires_human_review": true
+        },
+        {
+            "id": "RESULT-EN-PARITY-MBTI-FE-DEAUTH-01",
+            "title": "fap-web MBTI clone runtime de-authoring follow-up",
+            "scope": "If runtime still consumes clone interpretation content, replace it with backend authority reads or explicit migration-only empty states.",
+            "requires_linked_fap_web_pr": true
+        }
+    ],
+    "validation_contract": {
+        "generated_json_parses": true,
+        "backend_asset_key_export_exists": true,
+        "frontend_clone_content_classified_non_authoritative": true,
+        "missing_english_keys_explicit": true,
+        "english_must_not_fallback_to_zh_interpretation_copy": true,
+        "no_scoring_change": true
+    }
+}
