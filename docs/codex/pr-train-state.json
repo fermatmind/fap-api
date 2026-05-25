@@ -24951,7 +24951,7 @@
       "merge_commit": "0ad3827b7e8771a0de84253854e7cbbe55fcc636"
     },
     "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01": {
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-career-asset-batch-01",
       "base": "main",
@@ -24959,8 +24959,8 @@
         "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01"
       ],
       "title": "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01 career guides jobs parity batch",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "796fd1523b566a30dbd769e6a2d46b93e6df0e5b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1686",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -25001,7 +25001,8 @@
           "evidence": "All local validation commands passed before staging."
         },
         "github_required_checks": {
-          "status": "pending"
+          "status": "pending",
+          "evidence": "PR #1686 opened; GitHub checks pending."
         }
       },
       "history": [
@@ -25019,6 +25020,11 @@
           "at": "2026-05-25T21:59:49+08:00",
           "status": "local_validation_passed",
           "summary": "Career asset batch report, generated JSON, and focused test passed local validation; career job counterpart mapping remains deferred."
+        },
+        {
+          "at": "2026-05-25T22:01:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened fap-api PR #1686 for career guides/jobs parity batch."
         }
       ]
     },
