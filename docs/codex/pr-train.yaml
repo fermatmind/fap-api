@@ -12929,3 +12929,50 @@ prs:
     metabase_deployment: false
     human_review_required: false
     production_approval_required: false
+
+  - id: FERMAT-MARKETING-SKILLS-ADAPTATION-01
+    repo: fap-api
+    depends_on:
+      - MARKETINGSKILLS-FERMATMIND-FIT-SCAN-00
+    branch: codex/fermat-marketing-skills-adaptation-01
+    base: main
+    title: "docs(seo-intel): add Fermat marketing skill draft guardrails"
+    train_scope: marketing_skills_docs_prompt_adaptation_only
+    risk_level: low_docs_prompt_only
+    allowed_paths:
+      - backend/docs/seo/fermat-marketing-skills-adaptation-01.md
+      - backend/docs/seo/generated/fermat-marketing-skills-adaptation-01.v1.json
+      - backend/docs/seo/skills/fermat-product-marketing-context.md
+      - backend/docs/seo/skills/fermat-seo-ops.md
+      - backend/docs/seo/skills/fermat-claim-boundary.md
+      - backend/tests/Feature/SeoIntel/FermatMarketingSkillsAdaptation01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Create Fermat-specific internal marketing skill drafts for product marketing context, SEO Ops, and claim boundary.
+      - Adapt upstream marketingskills reference material to FermatMind backend/CMS authority, URL Truth, Search Channel, pSEO no-go, and claim safety rules.
+      - Add summary report, generated JSON artifact, focused SeoIntel test, and current task train metadata only.
+    do_not:
+      - Install upstream marketingskills or create .agents/skills runtime integration.
+      - Modify AGENTS.md, package/composer/pnpm files, runtime code, or fap-web.
+      - Generate marketing content assets, articles, career pages, or pSEO pages.
+      - Mutate CMS, submit URLs, enqueue Search Channel items, call external search APIs, deploy, read raw logs, or access production user data.
+      - Add future marketing skills adaptation task entries.
+    validation:
+      - cd backend && php artisan test --filter=FermatMarketingSkillsAdaptation01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/fermat-marketing-skills-adaptation-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - "python3 - <<'PY'\nimport yaml, pathlib\nyaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\nprint('yaml ok')\nPY"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    metabase_deployment: false
+    human_review_required: false
+    production_approval_required: false

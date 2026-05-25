@@ -25046,5 +25046,83 @@
         "summary": "Opened PR #1680 for MARKETINGSKILLS-FERMATMIND-FIT-SCAN-00."
       }
     ]
+  },
+  "FERMAT-MARKETING-SKILLS-ADAPTATION-01": {
+    "repo": "fap-api",
+    "branch": "codex/fermat-marketing-skills-adaptation-01",
+    "status": "pr_opened",
+    "depends_on": [
+      "MARKETINGSKILLS-FERMATMIND-FIT-SCAN-00"
+    ],
+    "commit_sha": "2b9608e72d5f9b6c197256b37955d89338c40543",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1682",
+    "checks": {
+      "dependency_marketingskills_fit_scan_00": {
+        "status": "pass",
+        "evidence": "PR #1680 is merged and origin/main contains merge commit 295abacb8ab6e3ec46bd78a697a460d1881d43c0."
+      },
+      "scope_boundary": {
+        "status": "pass",
+        "evidence": "Changed files are limited to FERMAT-MARKETING-SKILLS-ADAPTATION-01 docs, generated JSON, focused SeoIntel test, and current task train metadata."
+      },
+      "external_repo_reference": {
+        "status": "pass",
+        "evidence": "coreyhaines31/marketingskills was referenced from /private/tmp/marketingskills-scan only; no upstream install was performed."
+      },
+      "production_safety": {
+        "status": "pass",
+        "evidence": "No production mutation, CMS mutation, deploy, production migration, URL submission, Search Channel enqueue, production user data access, raw log read, pSEO generation, content asset generation, runtime code change, or fap-web commit."
+      },
+      "local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=FermatMarketingSkillsAdaptation01 --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool backend/docs/seo/generated/fermat-marketing-skills-adaptation-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 yaml parse for docs/codex/pr-train.yaml",
+          "git diff --check",
+          "git diff --cached --check",
+          "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+        ],
+        "evidence": "Focused FermatMarketingSkillsAdaptation01 test passed with 1 test and 22 assertions. route:list exited 0 with 203 routes. Pint passed 3555 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, state JSON, manifest YAML parse, diff check, and fap-web reference status passed. Isolated worktree used local ignored vendor/.env only for validation."
+      },
+      "github_pr_opened": {
+        "status": "pass",
+        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1682 from codex/fermat-marketing-skills-adaptation-01."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [
+      {
+        "title": "fap-web reference repo has active unrelated changes",
+        "repo": "fap-web",
+        "evidence": "Reference-only status shows active unrelated fap-web branch changes; this task does not modify or commit fap-web.",
+        "why_external_to_current_pr": "Current PR writes fap-api docs/generated/test/state only."
+      }
+    ],
+    "events": [
+      {
+        "at": "2026-05-25T20:55:00+08:00",
+        "status": "local_files_generated_pending_validation",
+        "summary": "Added Fermat-specific product marketing context, SEO Ops, and claim boundary draft docs plus summary report, generated JSON, focused test, and current task train metadata."
+      },
+      {
+        "at": "2026-05-25T21:20:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff check, and fap-web reference status passed."
+      },
+      {
+        "at": "2026-05-25T21:25:00+08:00",
+        "status": "pr_opened",
+        "summary": "Opened PR #1682 for FERMAT-MARKETING-SKILLS-ADAPTATION-01."
+      }
+    ]
   }
 }
