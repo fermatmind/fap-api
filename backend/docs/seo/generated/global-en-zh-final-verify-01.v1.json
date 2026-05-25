@@ -1,0 +1,123 @@
+{
+  "schema_version": "global-en-zh-final-verify-01.v1",
+  "task": "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01",
+  "scanned_at": "2026-05-25T14:22:56Z",
+  "verification_mode": "repo_artifact_and_scope_verification_no_production_mutation",
+  "no_mutation_performed": true,
+  "cms_mutation_performed": false,
+  "production_migration_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "production_user_data_accessed": false,
+  "fap_web_modified": false,
+  "source_artifacts": [
+    "global-en-zh-parity-scan-00.v1.json",
+    "global-en-zh-content-asset-batch-01.v1.json",
+    "global-en-zh-article-counterpart-batch-01.v1.json",
+    "global-en-zh-career-asset-batch-01.v1.json",
+    "global-en-zh-result-media-asset-batch-01.v1.json",
+    "en-parity-06-media-assets-parity-inventory.v1.json"
+  ],
+  "p0_findings_remaining": [],
+  "p1_findings_remaining": [
+    {
+      "id": "p1_content_help_policy_review_import_remaining",
+      "summary": "Content/help/policy pages still include draft-review-only or deferred items that require controlled import/human review before full production parity.",
+      "state": "explicitly_classified"
+    },
+    {
+      "id": "p1_article_human_review_remaining",
+      "summary": "Article parity has 10 import-ready review-required candidates and 6 deferred article counterparts; not auto-published.",
+      "state": "explicitly_classified"
+    },
+    {
+      "id": "p1_career_job_translation_group_remaining",
+      "summary": "Career jobs have EN 36 generic role profiles and ZH 342 BLS/DOCX occupation rows with no shared job_code counterparts; translation group design is deferred.",
+      "state": "explicitly_classified"
+    },
+    {
+      "id": "p1_result_report_review_assets_remaining",
+      "summary": "RIASEC, MBTI, and Big Five V2 result/report assets still include deferred or draft-review-only English assets.",
+      "state": "explicitly_classified"
+    },
+    {
+      "id": "p1_media_visual_review_remaining",
+      "summary": "Shared article covers, career guide OG images, and MBTI share visuals require OCR/human visual review before claiming media parity complete.",
+      "state": "explicitly_classified"
+    }
+  ],
+  "p2_findings_remaining": [
+    {
+      "id": "p2_post_deploy_runtime_visual_longtail",
+      "summary": "A post-deploy long-tail Chrome/Playwright pass is still recommended for lower-priority article/career/content page rhythm."
+    }
+  ],
+  "sitemap_llms_clean": {
+    "repo_gate_state": "p0_invalid_exposure_cleaned_or_gated_by_prior_train",
+    "production_post_deploy_smoke_required": true,
+    "private_or_draft_exposure_detected_in_current_batch": false
+  },
+  "footer_nav_parity_state": {
+    "state": "implemented_in_fap_web_pr_904",
+    "remaining": "post_deploy_visual_spot_check_only"
+  },
+  "content_asset_state": {
+    "import_ready_or_draft_package_landed": true,
+    "auto_publish_performed": false,
+    "remaining_human_review": true
+  },
+  "article_asset_state": {
+    "import_ready_review_required_count": 10,
+    "deferred_human_review_count": 6,
+    "auto_publish_performed": false
+  },
+  "career_asset_state": {
+    "career_guides_guide_code_parity": true,
+    "career_job_shared_counterparts_count": 0,
+    "career_job_translation_group_deferred": true,
+    "placeholder_pages_created": false
+  },
+  "result_report_asset_state": {
+    "fail_closed_no_zh_fallback_preserved": true,
+    "draft_assets_runtime_activated": false,
+    "riasec_deferred_assets": 14,
+    "mbti_missing_en_asset_keys": 8,
+    "bigfive_unreviewed_en_asset_keys": 7
+  },
+  "media_asset_state": {
+    "article_en_missing_cover_alt_count": 0,
+    "career_guides_missing_og_image_count": 72,
+    "sidecar_media_review_count": 3,
+    "visual_ocr_or_human_review_required": true
+  },
+  "claim_boundary_state": {
+    "unsafe_claim_hits_in_current_batch": 0,
+    "forbidden_claims_blocked": true,
+    "career_recommendation_boundary_preserved": true,
+    "clinical_diagnostic_boundary_preserved": true
+  },
+  "visual_parity_state": {
+    "core_h1_overflow_fix_deployed_previously": true,
+    "longtail_visual_scan_required_after_next_deploy": true
+  },
+  "deployment_requirement": {
+    "deploy_required_for_runtime_effects": true,
+    "reason": "This train added repo-backed reports/tests and relies on prior discoverability/code fixes; production runtime parity must be re-smoked after deployment."
+  },
+  "final_go_no_go": "NO_GO_for_claiming_full_english_chinese_parity_until_human_review_imports_and_post_deploy_smoke_complete",
+  "recommended_next_tasks": [
+    {
+      "id": "DEPLOY-READINESS",
+      "title": "Deploy GLOBAL EN/ZH remaining parity fixes",
+      "scope": "Prepare deployment and run post-deploy sitemap/llms/runtime smoke."
+    },
+    {
+      "id": "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-BATCH-01",
+      "title": "Human-reviewed import batch for remaining content/article/result/media assets",
+      "scope": "Import reviewed assets through backend authority without frontend fallback."
+    }
+  ],
+  "final_decision": "global_en_zh_remaining_train_completed_with_deferred_human_review_assets",
+  "next_task": "DEPLOY-READINESS｜Deploy GLOBAL EN/ZH remaining parity fixes"
+}

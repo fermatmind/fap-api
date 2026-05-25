@@ -25035,7 +25035,7 @@
       "merge_commit": "e54c5eec171e302fa635aae8bdcafa8497263568"
     },
     "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01": {
-      "status": "pr_open",
+      "status": "merged",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-result-media-asset-batch-01",
       "base": "main",
@@ -25043,12 +25043,12 @@
         "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01"
       ],
       "title": "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01 result report media parity batch",
-      "commit_sha": "333381d0154dfcd166f201a9b00cf154631a6287",
+      "commit_sha": "3c154bd7f9049dfe506fe31e10d15ab1cd215825",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1687",
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T14:21:07Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "checks": {
         "dependency": {
           "status": "passed",
@@ -25085,8 +25085,8 @@
           "evidence": "All local validation commands passed before staging."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": "PR #1687 opened; GitHub checks pending."
+          "status": "passed",
+          "evidence": "GitHub PR #1687 merged with all required checks green and mergeStateStatus CLEAN."
         }
       },
       "history": [
@@ -25109,11 +25109,17 @@
           "at": "2026-05-25T22:14:33+08:00",
           "status": "pr_open",
           "summary": "Opened fap-api PR #1687 for result/report and media parity batch."
+        },
+        {
+          "at": "2026-05-25T22:24:18+08:00",
+          "status": "merged",
+          "summary": "Reconciled PR #1687 merged state while starting final verify PR."
         }
-      ]
+      ],
+      "merge_commit": "757535c7934e43580c951485f9a6867946a1c2c0"
     },
     "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01": {
-      "status": "planned",
+      "status": "local_validation_passed",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-final-verify-01",
       "base": "main",
@@ -25127,12 +25133,60 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "checks": {},
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "evidence": "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01 merged as PR #1687 with merge commit 757535c7934e43580c951485f9a6867946a1c2c0."
+        },
+        "scope_boundary": {
+          "status": "passed",
+          "changed_files": [
+            "backend/docs/seo/global-en-zh-final-verify-01.md",
+            "backend/docs/seo/generated/global-en-zh-final-verify-01.v1.json",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhFinalVerify01Test.php",
+            "docs/codex/pr-train-state.json"
+          ],
+          "evidence": "Scope is limited to final verification report, generated JSON, focused test, and current/reconciled ledger state."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No deploy, CMS mutation, Search Channel action, URL submission, production migration, fap-web edit, or production user data access performed."
+        },
+        "local_validation": {
+          "status": "passed",
+          "commands": [
+            "php artisan test --filter=GlobalEnZhFinalVerify01 --no-ansi",
+            "php artisan route:list --no-ansi",
+            "vendor/bin/pint --test",
+            "composer validate --strict",
+            "composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-final-verify-01.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "evidence": "All local validation commands passed before staging."
+        },
+        "github_required_checks": {
+          "status": "pending"
+        }
+      },
       "history": [
         {
           "at": "2026-05-25T21:15:38+08:00",
           "status": "planned",
           "summary": "Planned manifest/state entry only; no implementation in current PR."
+        },
+        {
+          "at": "2026-05-25T22:24:18+08:00",
+          "status": "in_progress",
+          "summary": "Started final full-site EN/ZH parity verification report; no implementation fixes."
+        },
+        {
+          "at": "2026-05-25T22:25:50+08:00",
+          "status": "local_validation_passed",
+          "summary": "Final verification report, generated JSON, and focused test passed local validation; full parity remains NO-GO pending human review/import and post-deploy smoke."
         }
       ]
     }
