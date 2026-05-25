@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T18:41:00.000Z",
+  "updated_at": "2026-05-24T18:44:00.000Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18208,12 +18208,12 @@
     "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-zh-mbti-post-enqueue-review",
-      "status": "commit_created",
+      "status": "pr_open_github_checks_pending",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE"
       ],
-      "commit_sha": "dfce93dd5276d26d223e1f0ae85de63aa5e04542",
-      "pr_url": null,
+      "commit_sha": "9d06a5c77a975e7b4f155b5229c8f57fb99e9ddc",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1659",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -18270,6 +18270,11 @@
           "at": "2026-05-25T02:41:00+08:00",
           "status": "commit_created",
           "summary": "Created scoped commit dfce93dd for the ZH MBTI post-enqueue review report."
+        },
+        {
+          "at": "2026-05-25T02:44:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1659 for the ZH MBTI post-enqueue review report. GitHub checks are pending."
         }
       ]
     }
