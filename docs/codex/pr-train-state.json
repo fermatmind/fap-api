@@ -25035,7 +25035,7 @@
       "merge_commit": "e54c5eec171e302fa635aae8bdcafa8497263568"
     },
     "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01": {
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-result-media-asset-batch-01",
       "base": "main",
@@ -25043,8 +25043,8 @@
         "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01"
       ],
       "title": "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01 result report media parity batch",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "333381d0154dfcd166f201a9b00cf154631a6287",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1687",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -25085,7 +25085,8 @@
           "evidence": "All local validation commands passed before staging."
         },
         "github_required_checks": {
-          "status": "pending"
+          "status": "pending",
+          "evidence": "PR #1687 opened; GitHub checks pending."
         }
       },
       "history": [
@@ -25103,6 +25104,11 @@
           "at": "2026-05-25T22:13:33+08:00",
           "status": "local_validation_passed",
           "summary": "Result/media asset batch report, generated JSON, and focused test passed local validation; draft assets remain inactive."
+        },
+        {
+          "at": "2026-05-25T22:14:33+08:00",
+          "status": "pr_open",
+          "summary": "Opened fap-api PR #1687 for result/report and media parity batch."
         }
       ]
     },
