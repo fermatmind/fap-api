@@ -18208,11 +18208,12 @@
     "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-zh-mbti-post-enqueue-review",
-      "status": "pr_open_github_checks_pending",
+      "status": "merged",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE"
       ],
       "commit_sha": "9d06a5c77a975e7b4f155b5229c8f57fb99e9ddc",
+      "merge_commit_sha": "35507328c25df3565679abdc8708fda96578c5d6",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1659",
       "checks": {
         "dependency": {
@@ -18242,8 +18243,8 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-25T01:39:58Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
@@ -18275,6 +18276,85 @@
           "at": "2026-05-25T02:44:00+08:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1659 for the ZH MBTI post-enqueue review report. GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-25T09:51:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Verified PR #1659 is merged, origin/main contains merge commit 35507328c25df3565679abdc8708fda96578c5d6, and the remote branch is deleted; reconciled state to unblock SEARCH-CHANNEL-LIVE-ZH-MBTI-01."
+        }
+      ],
+      "local_cleanup_note": "Reconciled while starting SEARCH-CHANNEL-LIVE-ZH-MBTI-01; origin/main contains merge commit 35507328c25df3565679abdc8708fda96578c5d6. scripts/post_merge_cleanup.sh is absent in this clone."
+    },
+    "SEARCH-CHANNEL-LIVE-ZH-MBTI-01": {
+      "repo": "fap-api",
+      "branch": "codex/search-channel-live-zh-mbti-01-preflight",
+      "status": "pr_open_github_checks_pending",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW"
+      ],
+      "commit_sha": "ede7c8a4fe72a89926a08d3dc04f0163999db36a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1660",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "Dependency SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW is merged as 35507328c25df3565679abdc8708fda96578c5d6 on origin/main."
+        },
+        "production_read_only": {
+          "queue_item_3": "passed: queue item 3 exists for the exact ZH MBTI URL/channel with locale=zh-CN, page_entity_type=test_detail, source_authority=scale_catalog, approval_state=pending, execution_state=dry_run_ready, eligibility_state=eligible, claim_boundary_state=claim_safe, private_flow=false.",
+          "duplicate_event_check": "passed: exactly one target queue item exists; no live_submission_approved, live_submission_response, accepted submission, retry storm, or bulk submit event exists. Duplicate dry-run blocks with existing_active_queue_item.",
+          "queue_item_2": "passed: EN MBTI queue item 2 remains approved/submitted and unchanged; no duplicate EN queue item detected.",
+          "gate_state": "passed: queue write, live submission, external API call, and IndexNow live API gates remain closed.",
+          "indexnow_key_readiness": "blocked: key is configured and raw key was not exposed, but configured keyLocation https://fermatmind.com/8d59565935303aad72c5eb0ec5bfa42e.txt returned HTTP 404 and could not be verified.",
+          "submit_dry_run": "passed: php artisan seo-intel:search-channel-submit --queue-item-id=3 --dry-run --json returned status=success, external_calls_attempted=false, search_submission_attempted=false, writes_attempted=false, writes_committed=false, submission_status=not_attempted, issues=[].",
+          "public_runtime": "passed: ZH MBTI public URL returned HTTP 200, exact apex canonical, robots index/follow, no noindex, and no staging canonical.",
+          "staging_sidecar": "passed: staging noindex containment remains active; known Baidu stale result remains a sidecar.",
+          "ops_seo_visibility": "sidecar: optional authenticated /ops/seo UI visibility was not checked."
+        },
+        "local": {
+          "focused_live_zh_mbti_preflight_test": "passed: php artisan test --filter=SeoIntelSearchChannelLiveZhMbti01Preflight --no-ansi (7 tests, 61 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi",
+          "pint": "passed: vendor/bin/pint --test (3533 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/search-channel-live-zh-mbti-01-preflight.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        }
+      },
+      "failure_reason": "blocked_indexnow_key_missing: configured IndexNow keyLocation returned HTTP 404, so live submission is not ready.",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": true,
+      "scheduler_activation": false,
+      "next_pr": "SEARCH-CHANNEL-LIVE-ZH-MBTI-01A-INDEXNOW-KEYLOCATION-FIX",
+      "history": [
+        {
+          "at": "2026-05-25T09:51:00+08:00",
+          "status": "in_progress",
+          "summary": "Started live submission preflight from latest clean main. Scope is limited to production read-only queue, duplicate/event, gate, keyLocation, submit dry-run, public runtime, staging sidecar checks, docs/generated report, focused test, and authorized PR-train metadata."
+        },
+        {
+          "at": "2026-05-25T09:51:00+08:00",
+          "status": "production_read_only_preflight_blocked",
+          "summary": "Queue item 3, duplicate/event state, queue item 2, gates, submit dry-run, public runtime, and staging sidecar were stable, but configured IndexNow keyLocation returned HTTP 404; live submission remains blocked."
+        },
+        {
+          "at": "2026-05-25T09:56:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused generated artifact test, route list, Pint, JSON/YAML parsing, and diff checks passed for the blocked live preflight report."
+        },
+        {
+          "at": "2026-05-25T09:57:00+08:00",
+          "status": "commit_created",
+          "summary": "Created scoped commit ee278947 for the ZH MBTI live submission preflight report."
+        },
+        {
+          "at": "2026-05-25T10:00:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1660 for the ZH MBTI live submission preflight report. GitHub checks are pending."
         }
       ]
     }
