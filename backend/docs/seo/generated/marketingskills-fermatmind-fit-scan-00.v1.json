@@ -1,0 +1,320 @@
+{
+  "schema_version": "marketingskills-fermatmind-fit-scan-00.v1",
+  "task": "MARKETINGSKILLS-FERMATMIND-FIT-SCAN-00",
+  "final_decision": "marketingskills_fit_scan_completed_ready_for_internal_skill_adaptation",
+  "external_repo": {
+    "url": "https://github.com/coreyhaines31/marketingskills",
+    "temporary_checkout": "/private/tmp/marketingskills-scan",
+    "read_only_scan": true
+  },
+  "external_repo_license": {
+    "license": "MIT",
+    "compatibility": "compatible_for_reference_and_fork_adaptation_with_notice_retention"
+  },
+  "external_repo_skills_scanned": [
+    "product-marketing",
+    "seo-audit",
+    "ai-seo",
+    "schema",
+    "programmatic-seo",
+    "site-architecture",
+    "content-strategy",
+    "cro",
+    "paywalls",
+    "analytics",
+    "emails",
+    "directory-submissions",
+    "competitors",
+    "competitor-profiling",
+    "copywriting",
+    "customer-research",
+    "free-tools"
+  ],
+  "directly_useful_skills": [
+    {
+      "skill": "seo-audit",
+      "fit": "directly_useful",
+      "fermat_use": "URL Truth, sitemap/llms, canonical, hreflang, indexability, and technical SEO review prompts",
+      "required_constraints": ["backend_url_truth_is_authority", "no_runtime_mutation", "no_search_submission"]
+    },
+    {
+      "skill": "ai-seo",
+      "fit": "directly_useful",
+      "fermat_use": "GEO, llms surfaces, Research Hub extractability, and citation-oriented evidence containers",
+      "required_constraints": ["no_ai_bait_content", "visible_content_grounding", "claim_boundary_required"]
+    },
+    {
+      "skill": "schema",
+      "fit": "directly_useful",
+      "fermat_use": "JSON-LD and FAQ grounding gates",
+      "required_constraints": ["schema_matches_visible_content", "cms_backend_authority_only"]
+    },
+    {
+      "skill": "site-architecture",
+      "fit": "directly_useful",
+      "fermat_use": "internal link graph, topic hub, research hub, and page type portfolio planning",
+      "required_constraints": ["no_sitemap_derived_graph_truth", "backend_cms_graph_authority"]
+    },
+    {
+      "skill": "analytics",
+      "fit": "directly_useful",
+      "fermat_use": "CTA attribution, funnel event taxonomy, Search Intelligence, and privacy-safe measurement",
+      "required_constraints": ["no_pii_in_analytics", "backend_revenue_truth"]
+    },
+    {
+      "skill": "cro",
+      "fit": "directly_useful",
+      "fermat_use": "result page, paid report preview, unlock CTA, and My Results conversion review",
+      "required_constraints": ["backend_result_assets_are_authority", "no_frontend_interpretation_authority"]
+    },
+    {
+      "skill": "paywalls",
+      "fit": "directly_useful",
+      "fermat_use": "free result to paid report boundaries and upgrade screen review",
+      "required_constraints": ["no_dark_patterns", "claim_safe_paid_report_copy"]
+    },
+    {
+      "skill": "emails",
+      "fit": "directly_useful",
+      "fermat_use": "result/report recovery and lifecycle email planning",
+      "required_constraints": ["no_pii_leakage", "unsubscribe_required", "no_cms_mutation_in_scan"]
+    }
+  ],
+  "useful_after_adaptation_skills": [
+    {
+      "skill": "product-marketing",
+      "reason": "Useful as the base for Fermat-specific product context, but upstream path and generic SaaS framing must be adapted."
+    },
+    {
+      "skill": "content-strategy",
+      "reason": "Useful for content batches and Research Hub planning after CMS authority and claim gates."
+    },
+    {
+      "skill": "directory-submissions",
+      "reason": "Useful for Digital PR planning only with human-only outreach and tracking."
+    },
+    {
+      "skill": "competitors",
+      "reason": "Useful for comparison strategy and competitor-informed gaps, not auto-generated comparison pages."
+    },
+    {
+      "skill": "competitor-profiling",
+      "reason": "Useful for structured competitor dossiers against 123test, Truity, 16Personalities, CareerExplorer, and Chinese competitors."
+    },
+    {
+      "skill": "copywriting",
+      "reason": "Useful for claim-safe draft review prompts, not direct publishable copy generation."
+    },
+    {
+      "skill": "customer-research",
+      "reason": "Useful for VOC and search-intent research, but personas require real source evidence."
+    },
+    {
+      "skill": "free-tools",
+      "reason": "Useful for product-led SEO and linkable tool thinking; Fermat tests already fit this model."
+    }
+  ],
+  "risky_skills": [
+    {
+      "skill": "programmatic-seo",
+      "risk": "Can encourage scaled page creation before P0 discoverability cleanup, URL Truth, internal link, and claim gates are clean."
+    },
+    {
+      "skill": "directory-submissions",
+      "risk": "Can encourage broad submission before destination pages, tracking, claim review, and human approval are ready."
+    },
+    {
+      "skill": "copywriting",
+      "risk": "Can generate unsupported clinical, career, hiring, salary, treatment, or diagnostic claims if used directly."
+    },
+    {
+      "skill": "competitors",
+      "risk": "Can lead to thin or aggressive competitor pages without verified data and claim review."
+    },
+    {
+      "skill": "ai-seo",
+      "risk": "Can over-prioritize AI files or AI citation tactics over visible helpful content and current P0 cleanup."
+    },
+    {
+      "skill": "schema",
+      "risk": "Can over-markup invisible or non-authoritative content if not constrained by Fermat JSON-LD grounding gates."
+    }
+  ],
+  "not_relevant_now_skills": [
+    "aso",
+    "sms",
+    "ad-creative",
+    "ads",
+    "launch",
+    "referrals",
+    "sales-enablement",
+    "revops",
+    "community-marketing",
+    "co-marketing",
+    "video",
+    "image",
+    "popups",
+    "signup",
+    "onboarding",
+    "pricing",
+    "churn-prevention"
+  ],
+  "fermat_internal_skill_recommendations": [
+    {
+      "skill": "fermat-product-marketing-context",
+      "priority": "P0",
+      "purpose": "Centralize Fermat positioning, audiences, product loops, claim boundaries, and no-go rules."
+    },
+    {
+      "skill": "fermat-seo-ops",
+      "priority": "P0",
+      "purpose": "Wrap SEO audit workflows around URL Truth, Search Channel Queue, CMS authority, and P0 cleanup."
+    },
+    {
+      "skill": "fermat-ai-seo-geo",
+      "priority": "P1",
+      "purpose": "Guide llms/GEO/Research Hub work while forbidding AI-bait and schema stuffing."
+    },
+    {
+      "skill": "fermat-schema-jsonld",
+      "priority": "P1",
+      "purpose": "Ground JSON-LD and FAQ in visible backend/CMS content."
+    },
+    {
+      "skill": "fermat-content-asset-batch",
+      "priority": "P1",
+      "purpose": "Control article, content page, career guide, and result/report content batches through import packages."
+    },
+    {
+      "skill": "fermat-pseo-guard",
+      "priority": "P0",
+      "purpose": "Prevent pSEO until URL Truth, discoverability, content quality, and claim gates pass."
+    },
+    {
+      "skill": "fermat-cro-result-report",
+      "priority": "P1",
+      "purpose": "Improve result/report conversion without frontend interpretation authority."
+    },
+    {
+      "skill": "fermat-digital-pr",
+      "priority": "P1",
+      "purpose": "Run human-only Digital PR with tracking, claim review, and no bulk outreach."
+    },
+    {
+      "skill": "fermat-analytics-attribution",
+      "priority": "P1",
+      "purpose": "Keep funnel attribution privacy-safe and backend revenue authoritative."
+    },
+    {
+      "skill": "fermat-claim-boundary",
+      "priority": "P0",
+      "purpose": "Enforce career, clinical, IQ, RIASEC, Big Five, MBTI, and Research claim boundaries."
+    }
+  ],
+  "pseo_guardrail_recommendations": [
+    "Do not adopt programmatic-seo directly now.",
+    "Block pSEO until sitemap/llms hard-404 exposure and career job discoverability leakage are fixed.",
+    "Require backend entity data, stable entity keys, visible content, FAQ grounding, JSON-LD grounding, and internal links.",
+    "Require claim lint for every generated page class.",
+    "Keep Search Channel Queue human-approved and dry-run-first."
+  ],
+  "seo_ops_recommendations": [
+    "Adapt seo-audit into fermat-seo-ops with URL Truth as authority.",
+    "Use ai-seo only after P0 discoverability cleanup and Research authority grounding.",
+    "Use schema skill principles only through Fermat JSON-LD/FAQ grounding gates.",
+    "Use site-architecture for internal link planning, not automatic CMS link writes."
+  ],
+  "cro_result_report_recommendations": [
+    "Adapt cro and paywalls for result page clarity, paid report preview, unlock CTA, My Results card, and report recovery.",
+    "Keep backend result/report asset catalogs authoritative.",
+    "Fail closed when English interpretation assets are missing.",
+    "Do not use frontend fallback interpretation copy as authority."
+  ],
+  "digital_pr_recommendations": [
+    "Use directory-submissions as a planning reference only.",
+    "Require destination page readiness, claim review, UTM/referral tracking, and manual sender approval.",
+    "No paid backlinks, no bulk outreach, no private email scraping, no transactional backlink asks.",
+    "Treat backlinks and referrals as observation signals, not URL Truth."
+  ],
+  "content_batch_recommendations": [
+    "Use content-strategy for batch planning only after CMS authority is established.",
+    "Use copywriting for review prompts and variants, not direct publishable content.",
+    "Use customer-research only with source-backed evidence and confidence levels.",
+    "Prefer import packages and human review over direct CMS mutation."
+  ],
+  "risk_findings": [
+    {
+      "id": "risk_mass_pseo_generation",
+      "severity": "P0",
+      "finding": "Upstream programmatic-seo can encourage scaled pages before Fermat's P0 discoverability cleanup is complete."
+    },
+    {
+      "id": "risk_unreviewed_copywriting",
+      "severity": "P0",
+      "finding": "Generic copywriting workflows can produce unsupported clinical, career, hiring, salary, treatment, or diagnostic claims."
+    },
+    {
+      "id": "risk_schema_not_grounded",
+      "severity": "P1",
+      "finding": "Schema guidance must be constrained so JSON-LD never marks up invisible or non-authoritative content."
+    },
+    {
+      "id": "risk_frontend_fallback_authority",
+      "severity": "P1",
+      "finding": "Upstream skills do not account for Fermat's rule that fap-web fallback is not authority."
+    },
+    {
+      "id": "risk_search_channel_bypass",
+      "severity": "P0",
+      "finding": "Directory, SEO, and GEO workflows must not enqueue or submit URLs outside Search Channel Queue approval."
+    },
+    {
+      "id": "risk_directory_without_tracking",
+      "severity": "P2",
+      "finding": "Directory submissions without destination readiness and tracking would create vanity backlinks rather than measurable authority."
+    }
+  ],
+  "adoption_phases": [
+    {
+      "phase": 0,
+      "name": "read_only_reference_only",
+      "action": "Keep external repo in /private/tmp or as reference documentation only."
+    },
+    {
+      "phase": 1,
+      "name": "product_marketing_context_draft",
+      "action": "Create Fermat-specific product marketing context from existing Fermat docs and claim boundaries."
+    },
+    {
+      "phase": 2,
+      "name": "fork_adapt_selected_skills",
+      "action": "Adapt selected upstream patterns into Fermat-specific internal skills with authority and no-go rules."
+    },
+    {
+      "phase": 3,
+      "name": "prompt_template_library",
+      "action": "Add Codex prompt templates for SEO Ops, CRO, content batches, and Digital PR review."
+    },
+    {
+      "phase": 4,
+      "name": "pr_train_integration",
+      "action": "Use internal skills only through PR train entries, focused tests, and human approval gates."
+    }
+  ],
+  "do_not_adopt_now": [
+    "Direct installation into .agents/skills",
+    "npx skills install in Fermat repositories",
+    "programmatic-seo direct use",
+    "bulk directory submissions",
+    "auto-generated competitor pages",
+    "unreviewed copywriting for clinical or career pages",
+    "schema changes without visible content grounding",
+    "Search Channel submission or queueing from marketing skills"
+  ],
+  "no_install_performed": true,
+  "no_runtime_code_modified": true,
+  "no_content_generated": true,
+  "no_search_channel_action_performed": true,
+  "no_deploy_performed": true,
+  "recommended_next_task": "FERMAT-MARKETING-SKILLS-ADAPTATION-01"
+}
