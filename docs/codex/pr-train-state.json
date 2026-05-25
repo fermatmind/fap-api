@@ -19266,11 +19266,11 @@
     "EN-PARITY-05": {
       "repo": "fap-api",
       "branch": "codex/en-parity-05-career-guides",
-      "status": "local_validation_passed",
+      "status": "merged",
       "depends_on": [
         "EN-PARITY-04"
       ],
-      "commit_sha": "baebe089",
+      "commit_sha": "51deb80befd82d2138de1f7725b0ae73f5af4a8e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1676",
       "checks": {
         "dependency_en_parity_04": {
@@ -19305,13 +19305,13 @@
           "evidence": "Focused php artisan test --filter=EnParity05 --no-ansi passed; php artisan route:list --no-ansi passed; vendor/bin/pint --test passed; composer validate --strict passed; composer audit --locked --no-interaction --ignore-unreachable passed; generated JSON parsed; PR-train YAML/state JSON parsed; git diff --check and git diff --cached --check passed."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": "PR #1676 passed hygiene, supply-chain, Semgrep blocking secrets, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2; GitHub mergeStateStatus was CLEAN and PR #1676 was squash-merged as 51deb80befd82d2138de1f7725b0ae73f5af4a8e."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-25T07:30:44Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "sidecar_issues": [],
       "events": [
@@ -19329,6 +19329,96 @@
           "at": "2026-05-25T07:40:00Z",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1676 for EN-PARITY-05 and pushed branch codex/en-parity-05-career-guides; waiting for GitHub checks."
+        },
+        {
+          "at": "2026-05-25T07:30:44Z",
+          "status": "merged",
+          "summary": "PR #1676 was squash-merged into main as 51deb80befd82d2138de1f7725b0ae73f5af4a8e and the remote branch was deleted. No post-merge cleanup script exists in this repository."
+        },
+        {
+          "at": "2026-05-25T07:34:00Z",
+          "status": "post_merge_revalidate_passed",
+          "summary": "Post-merge EN-PARITY-05 focused test, generated JSON parse, manifest/state parse, and clean worktree check passed before starting EN-PARITY-06."
+        }
+      ]
+    },
+    "EN-PARITY-06": {
+      "repo": "fap-api",
+      "branch": "codex/en-parity-06-media-assets",
+      "status": "local_validation_passed",
+      "depends_on": [
+        "EN-PARITY-05"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency_en_parity_05": {
+          "status": "pass",
+          "evidence": "PR #1676 is MERGED and origin/main contains merge commit 51deb80befd82d2138de1f7725b0ae73f5af4a8e."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Changed files are limited to EN-PARITY-06 media inventory report/generated JSON/focused test and current PR-train manifest/state."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No production CMS mutation, media upload, image generation, production migration, deploy, URL submission, Search Channel action, secrets access, or fap-web commit."
+        },
+        "media_generation_boundary": {
+          "status": "pass",
+          "evidence": "EN-PARITY-06 lands a media parity inventory and sidecar review list only. Shared covers and CareerGuide social image gaps stay explicit for human/OCR review."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=EnParity06 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/en-parity-06-media-assets-parity-inventory.v1.json >/dev/null",
+            "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "evidence": "Focused php artisan test --filter=EnParity06 --no-ansi passed; php artisan route:list --no-ansi passed; vendor/bin/pint --test passed; composer validate --strict passed; composer audit --locked --no-interaction --ignore-unreachable passed; generated JSON parsed; PR-train YAML/state JSON parsed; git diff --check passed."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": null
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [
+        {
+          "source_pr": "EN-PARITY-06",
+          "repo": "fap-api",
+          "branch": "codex/en-parity-06-media-assets",
+          "command_or_check": "media embedded-text visual review",
+          "evidence": "Generated inventory records 19 shared EN/ZH article cover URLs and no OCR/human visual-review evidence in repo.",
+          "failure_summary": "Embedded Chinese text cannot be ruled out by metadata alone.",
+          "why_external_to_current_pr": "EN-PARITY-06 is inventory/report/test scope and explicitly forbids image generation, upload, or production media mutation.",
+          "impact_on_current_pr": "No impact on repository media authority inventory; visual proof is deferred to a design/OCR review task.",
+          "owner": "content-design",
+          "follow_up_recommendation": "Run OCR/human visual review and prepare locale-specific media variants only if embedded text is detected.",
+          "required_checks_status": "pending until PR checks complete",
+          "scope_validation_status": "pending until final scope validation",
+          "continue_train_decision": "allowed if local validation, GitHub required checks, and scope validation are green"
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-05-25T07:34:00Z",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Started EN-PARITY-06 after EN-PARITY-05 merged. Added media parity inventory report, generated artifact, focused test, and current manifest/state entry. No production, media upload, image generation, CMS, Search Channel, or fap-web mutation performed."
+        },
+        {
+          "at": "2026-05-25T07:36:00Z",
+          "status": "local_validation_passed",
+          "summary": "EN-PARITY-06 focused test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, and diff check passed locally."
         }
       ]
     },
