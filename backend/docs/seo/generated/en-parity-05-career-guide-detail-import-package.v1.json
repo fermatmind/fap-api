@@ -1,0 +1,103 @@
+{
+  "schema_version": "en-parity-05-career-guide-detail-import-package.v1",
+  "task": "EN-PARITY-05",
+  "source_authority": "backend_cms_career_guide_baseline",
+  "frontend_fallback_authority_used": false,
+  "cms_mutation_performed": false,
+  "production_migration_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "auto_publish_performed": false,
+  "mass_english_generation_performed": false,
+  "substantial_english_prose_generated": false,
+  "fap_web_modified": false,
+  "baseline_sources": [
+    "content_baselines/career_guides/career_guides.en.json",
+    "content_baselines/career_guides/career_guides.zh-CN.json"
+  ],
+  "current_baseline_summary": {
+    "career_guides_en_count": 36,
+    "career_guides_zh_count": 36,
+    "missing_english_counterparts_count": 0,
+    "missing_chinese_counterparts_count": 0,
+    "counterpart_key": "guide_code",
+    "counterpart_lookup_uses_slug_guessing_only": false
+  },
+  "guide_codes_ready_for_controlled_review": [
+    "annual-career-review-system",
+    "big5-for-career-decisions",
+    "build-five-year-career-roadmap",
+    "build-portfolio-for-career-switch",
+    "career-growth-with-manager",
+    "career-risk-management",
+    "career-transition-playbook",
+    "cross-industry-move-strategy",
+    "enfj-career-playbook",
+    "enfp-career-playbook",
+    "entj-career-playbook",
+    "entp-career-playbook",
+    "esfj-career-playbook",
+    "esfp-career-playbook",
+    "estj-career-playbook",
+    "estp-career-playbook",
+    "first-90-days-in-new-role",
+    "from-mbti-to-job-fit",
+    "how-to-choose-college-major",
+    "how-to-find-right-career-direction",
+    "improve-workplace-competitiveness",
+    "infj-career-playbook",
+    "infp-career-playbook",
+    "interview-strategy-by-role",
+    "intj-career-playbook",
+    "intp-career-playbook",
+    "iq-eq-balance-at-work",
+    "isfj-career-playbook",
+    "isfp-career-playbook",
+    "istj-career-playbook",
+    "istp-career-playbook",
+    "leader-track-vs-expert-track",
+    "networking-that-actually-works",
+    "personal-brand-for-professionals",
+    "prevent-burnout-while-growing",
+    "salary-negotiation-framework"
+  ],
+  "import_controls": {
+    "controlled_import_command": "career-guides:import-local-baseline",
+    "production_import_executed": false,
+    "production_publish_executed": false,
+    "requires_operator_review": true,
+    "requires_controlled_publish_workflow": true,
+    "draft_exposure_allowed_in_sitemap_llms": false
+  },
+  "translation_authority_contract": {
+    "entity_type": "career_guide",
+    "source_of_truth": "career_guides",
+    "counterpart_key": "guide_code",
+    "frontend_fallback_can_satisfy_counterpart": false
+  },
+  "deferred_items": [
+    {
+      "id": "en_parity_05_production_import_exposure_verification",
+      "reason": "Runtime observation gaps require controlled backend/CMS import and URL-surface verification outside this no-production-mutation PR."
+    },
+    {
+      "id": "en_parity_07_career_guide_sitemap_llms_gate",
+      "reason": "Career guide URLs must only enter public SEO surfaces after backend/CMS authority is published and indexable."
+    }
+  ],
+  "recommended_next_tasks": [
+    {
+      "id": "EN-PARITY-06",
+      "title": "Media assets alt og image and locale variant parity",
+      "scope": "Inventory media authority and sidecar human design work; do not upload or mutate production media."
+    },
+    {
+      "id": "EN-PARITY-07",
+      "title": "Sitemap llms JSON-LD FAQ grounding parity gate",
+      "scope": "Verify career guide URLs only enter public SEO surfaces when backend authority is published and indexable."
+    }
+  ],
+  "final_decision": "en_parity_05_import_package_landed_career_guides_ready_deferred_production_exposure",
+  "next_task": "EN-PARITY-06 media assets alt og image and locale variant parity"
+}
