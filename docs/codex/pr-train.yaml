@@ -13264,3 +13264,50 @@ prs:
     fap_web_commit_allowed: false
     content_generation_allowed: false
     next_task: GLOBAL-EN-ZH-CONTENT-AUTHORITY-HUMAN-REVIEW-IMPORT-01
+
+  - id: GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00
+    repo: fap-api
+    branch: codex/global-en-zh-full-content-authority-translation-matrix-00
+    base: main
+    title: "GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 full Chinese-to-English content authority translation matrix"
+    train_scope: global_en_zh_full_content_authority_translation_matrix
+    risk_level: read_only_inventory_translation_batch_planning
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-full-content-authority-translation-matrix-00.md
+      - backend/docs/seo/generated/global-en-zh-full-content-authority-translation-matrix-00.v1.json
+      - backend/docs/seo/generated/global-en-zh-full-content-translation-batches.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhFullContentAuthorityTranslationMatrix00Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Build a repo-backed Chinese-source to English-counterpart matrix for content/help/policy pages, articles, topics, test landing pages, research pages, career content, result/report assets, media assets, and global UI i18n.
+      - Classify source authority, runtime/discoverability eligibility, claim-boundary status, missing counterparts, draft/import requirements, human-review requirements, blocked items, and recommended translation batches.
+      - Use fap-web as reference-only for UI/i18n/footer/nav observations; do not treat frontend fallback as content authority.
+      - Add one Markdown report, generated JSON artifact, optional batch plan artifact, focused SeoIntel test, and current task train metadata only.
+    do_not:
+      - Publish, mutate production CMS, deploy, submit URLs, enqueue Search Channel, call external search APIs, generate pSEO, or create placeholder pages.
+      - Generate full publishable English prose or mark generated English as approved.
+      - Add future implementation task entries beyond the current task.
+      - Modify fap-web or runtime application code.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhFullContentAuthorityTranslationMatrix00 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-full-content-authority-translation-matrix-00.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - "python3 - <<'PY'\nimport yaml, pathlib\nyaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\nprint('yaml ok')\nPY"
+      - git diff --check
+      - git diff --cached --check
+      - cd /Users/rainie/Desktop/GitHub/fap-web && git status --short
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    pseo_generation_allowed: false
+    next_task: GLOBAL-EN-ZH-CONTENT-PAGES-TRANSLATION-BATCH-01

@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T00:00:00+08:00",
+  "updated_at": "2026-05-26T00:20:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -19839,6 +19839,58 @@
           "at": "2026-05-26T00:00:00+08:00",
           "event": "local_validation_passed",
           "details": "Focused test, route:list, pint, composer validate, composer audit, JSON/YAML parse, git diff --check, and git diff --cached --check passed. fap-web reference status was clean."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00": {
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-full-content-authority-translation-matrix-00",
+      "status": "local_validation_passed",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Changed files are limited to the current task report, generated JSON/batch plan, focused SeoIntel test, and authorized train manifest/state metadata."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No CMS mutation, publish, deploy, Search Channel action, URL submission, external search API call, pSEO generation, fap-web mutation, or runtime code change performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=GlobalEnZhFullContentAuthorityTranslationMatrix00 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-full-content-authority-translation-matrix-00.v1.json >/dev/null",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-full-content-translation-batches.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 yaml parse for docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check",
+            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          ],
+          "evidence": "Focused test passed: 1 test, 18 assertions. route:list exited 0 with 203 routes. Pint passed 3562 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, batch plan JSON, state JSON, manifest YAML parse, git diff --check, git diff --cached --check, and fap-web reference status passed."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "events": [
+        {
+          "at": "2026-05-26T00:00:00+08:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Added read-only full Chinese-to-English content authority translation matrix report, generated JSON, batch plan, focused test, and current task train metadata only."
+        },
+        {
+          "at": "2026-05-26T00:20:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff check, cached diff check, and fap-web reference status passed in the isolated worktree."
         }
       ]
     }
