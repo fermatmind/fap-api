@@ -1,0 +1,77 @@
+{
+  "schema_version": "global-en-zh-parity-p0-01-content-help-policy-discoverability.v1",
+  "task": "GLOBAL-EN-ZH-PARITY-P0-01",
+  "generated_at": "2026-05-25T12:20:00Z",
+  "final_decision": "p0_01_content_help_policy_cleanup_ready_for_linked_frontend_pr",
+  "repos": [
+    "fap-api",
+    "fap-web"
+  ],
+  "basis": {
+    "source_scan": "GLOBAL-EN-ZH-PARITY-SCAN-00",
+    "source_scan_pr": "https://github.com/fermatmind/fap-api/pull/1679",
+    "source_scan_merge_commit": "87345d16c4b7b22a23ead480925bb1f4c58d2721"
+  },
+  "invalid_sitemap_paths": [
+    "/en/help/about",
+    "/en/help/contact",
+    "/en/help/faq",
+    "/en/help/for-business-and-research",
+    "/en/help/team",
+    "/en/help/used-and-mentioned",
+    "/zh/help/contact",
+    "/zh/help/faq",
+    "/zh/help/for-business-and-research",
+    "/en/method-boundaries",
+    "/zh/method-boundaries",
+    "/zh/policies",
+    "/en/privacy",
+    "/zh/privacy",
+    "/en/support",
+    "/zh/support",
+    "/en/terms",
+    "/zh/terms"
+  ],
+  "invalid_llms_paths": [
+    "/en/support",
+    "/zh/support"
+  ],
+  "classification": {
+    "content_help_policy_paths": "missing_or_unverified_runtime_authority_exclude_from_discoverability_until_backend_cms_authority_and_runtime_route_are_valid",
+    "support_paths": "missing_authority_exclude_from_llms_until_valid_200_authority_exists",
+    "career_job_paths": "deferred_to_GLOBAL-EN-ZH-PARITY-P0-02"
+  },
+  "root_cause": {
+    "backend_authority": "SitemapGenerator emits content_pages only when rows are published, public, indexable, and have non-empty content.",
+    "frontend_discoverability": "fap-web static sitemap authority adapter listed help/support/policy paths and llms routes hardcoded support canonical URLs even when runtime authority was missing."
+  },
+  "fix_plan": {
+    "fap_api": "Record ledger, report, and backend authority guard evidence.",
+    "fap_web": "Remove missing-authority content/help/policy URLs from static sitemap generation and llms primary/next-step exposure without adding frontend fallback content."
+  },
+  "backend_guard": {
+    "content_pages_require_authority": true,
+    "published_required": true,
+    "public_required": true,
+    "indexable_required": true,
+    "body_required": true,
+    "frontend_fallback_authority_used": false
+  },
+  "acceptance": {
+    "no_placeholder_content_created": true,
+    "no_draft_exposure": true,
+    "no_cms_mutation_performed": true,
+    "deploy_performed": false,
+    "search_channel_action_performed": false,
+    "url_submission_performed": false,
+    "external_search_api_call_performed": false,
+    "production_migration_performed": false
+  },
+  "remaining_deferred": [
+    {
+      "task": "GLOBAL-EN-ZH-PARITY-P0-02",
+      "summary": "Investigate and fix career job detail sitemap exposure separately."
+    }
+  ],
+  "next_task": "GLOBAL-EN-ZH-PARITY-P0-02"
+}

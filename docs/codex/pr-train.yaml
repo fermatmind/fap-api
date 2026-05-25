@@ -7248,6 +7248,53 @@ prs:
     external_api_live_activation: false
     production_approval_required: false
 
+  - id: GLOBAL-EN-ZH-PARITY-P0-01
+    repo: fap-api
+    depends_on: [GLOBAL-EN-ZH-PARITY-SCAN-00]
+    branch: codex/global-en-zh-parity-p0-01-content-help-policy-discoverability
+    base: main
+    title: "GLOBAL-EN-ZH-PARITY-P0-01 content help policy discoverability cleanup"
+    train_scope: global_en_zh_parity_p0_fix_train
+    risk_level: p0_discoverability_cleanup
+    scope:
+      - Identify the source of sitemap/llms exposure for content, help, policy, and support URLs that currently return hard 404.
+      - Classify invalid content/help/policy URLs by authority status and remove them from sitemap/llms exposure when no valid backend/CMS authority exists.
+      - Add a focused SeoIntel regression test and generated evidence artifact for current P0 content/help/policy discoverability cleanup.
+      - Reconcile GLOBAL-EN-ZH-PARITY-SCAN-00 ledger state because PR #1679 has already merged.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/**
+      - backend/docs/seo/global-en-zh-parity-p0-01-content-help-policy-discoverability.md
+      - backend/docs/seo/generated/global-en-zh-parity-p0-01-content-help-policy-discoverability.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhParityP001ContentHelpPolicyDiscoverabilityTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Do not create placeholder content/help/policy pages.
+      - Do not mutate CMS or production data.
+      - Do not deploy.
+      - Do not submit URLs or call external search APIs.
+      - Do not enqueue Search Channel.
+      - Do not run production migrations or edit env/DNS/nginx.
+      - Do not use frontend fallback as authority.
+      - Do not implement GLOBAL-EN-ZH-PARITY-P0-02 or future PR scopes.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhParityP001 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-parity-p0-01-content-help-policy-discoverability.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 yaml parse for docs/codex/pr-train.yaml
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    next_task: GLOBAL-EN-ZH-PARITY-P0-02
+
   - id: SEO-GROWTH-MBTI-ACTION-01D-SCAN-00
     repo: fap-api
     depends_on: []
