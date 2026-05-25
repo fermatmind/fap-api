@@ -5930,12 +5930,14 @@ prs:
       - backend/docs/seo/result-en-parity-04-clinical-combo-en-paid.md
       - backend/docs/seo/generated/result-en-parity-04-clinical-combo-en-paid.v1.json
       - backend/tests/Feature/SeoIntel/ResultEnParity04ClinicalComboEnPaidTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     scope:
       - Add a small backend-owned English first batch for missing clinical combo paid action and performance blocks.
       - Ensure explicit EN clinical paid reports do not silently select zh-CN paid interpretation blocks.
       - Keep all clinical wording self-assessment, non-diagnostic, non-treatment, and professional-help bounded.
+      - Add the minimum Big Five runtime-freeze classifier case for this clinical-combo-only parity scope.
       - Produce generated artifact/report and focused tests.
     do_not:
       - Diagnose, recommend treatment as medical advice, claim cure, or add emergency protocol claims beyond approved crisis resources.

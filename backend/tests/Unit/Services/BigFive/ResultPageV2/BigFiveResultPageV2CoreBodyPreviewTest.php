@@ -328,6 +328,27 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_clinical_combo_en_paid_parity_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Report/ClinicalCombo/ClinicalComboBlockSelector.php',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/compiled/blocks.compiled.json',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/compiled/consent.compiled.json',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/compiled/crisis_resources.compiled.json',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/compiled/golden_cases.compiled.json',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/compiled/landing.compiled.json',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/compiled/layout.compiled.json',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/compiled/manifest.json',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/compiled/options_sets.compiled.json',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/compiled/policy.compiled.json',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/compiled/privacy_addendum.compiled.json',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/compiled/questions.compiled.json',
+            'backend/content_packs/CLINICAL_COMBO_68/v1/raw/blocks/paid_blocks.json',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_eq_v5_report_asset_layer_changes(): void
     {
         $changed = [
@@ -2483,6 +2504,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isClinicalComboEnPaidParityFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsCiAuthBypassHardeningOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
@@ -3191,6 +3216,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Report/ReportSnapshotStore.php',
             'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
         ], true);
+    }
+
+    private function isClinicalComboEnPaidParityFile(string $file): bool
+    {
+        if ($file === 'backend/app/Services/Report/ClinicalCombo/ClinicalComboBlockSelector.php') {
+            return true;
+        }
+
+        if ($file === 'backend/content_packs/CLINICAL_COMBO_68/v1/raw/blocks/paid_blocks.json') {
+            return true;
+        }
+
+        return preg_match('#^backend/content_packs/CLINICAL_COMBO_68/v1/compiled/[a-z_]+(?:\\.compiled)?\\.json$#', $file) === 1;
     }
 
     private function isEq60FreeReportContractChange(string $file, string $repoRoot, string $baseRef): bool
