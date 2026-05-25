@@ -6965,7 +6965,7 @@
       "branch": "fix/career-2786-final-readiness-software-manual-hold-authority-1",
       "title": "fix(api): account software manual hold in 2786 readiness",
       "name": "Account software-developers manual-hold decision in final 2786 readiness",
-      "status": "local_validation_passed",
+      "status": "pr_open_github_checks_pending",
       "depends_on": [
         "SOFTWARE_MANUAL_HOLD_FINAL_POLICY_DECISION_1",
         "REPAIR-2786-FINAL-READINESS-PUBLIC-OWNER-PARTITION-AUTHORITY-1"
@@ -18622,8 +18622,8 @@
       "depends_on": [
         "EN-PARITY-00"
       ],
-      "commit_sha": "fd3395819741b33ee3a3c551d272151f03ddb3f2",
-      "pr_url": null,
+      "commit_sha": "956d6646f0b539d0bfb7e471d3908f35bb17023a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1665",
       "checks": {
         "dependency_en_parity_00": {
           "status": "pass",
@@ -18682,6 +18682,11 @@
           "at": "2026-05-25T12:47:00+08:00",
           "status": "committed",
           "summary": "Committed EN-PARITY-01 scoped authority baseline changes at fd3395819741b33ee3a3c551d272151f03ddb3f2."
+        },
+        {
+          "at": "2026-05-25T12:51:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1665 for EN-PARITY-01 and pushed branch codex/en-parity-01-url-truth-canonical."
         }
       ]
     }
