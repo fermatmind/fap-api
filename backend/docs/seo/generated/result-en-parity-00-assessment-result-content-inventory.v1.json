@@ -1,0 +1,681 @@
+{
+  "schema_version": "result-en-parity-00-assessment-result-content-inventory.v1",
+  "task": "RESULT-EN-PARITY-00",
+  "scanned_at": "2026-05-25T15:20:00+08:00",
+  "live_target": "https://fermatmind.com",
+  "final_decision": "result_en_parity_inventory_completed_ready_for_asset_catalog_fix",
+  "no_mutation_performed": true,
+  "cms_mutation_performed": false,
+  "search_channel_action_performed": false,
+  "deploy_performed": false,
+  "production_migration_performed": false,
+  "url_submission_performed": false,
+  "fap_web_commit_performed": false,
+  "production_user_data_accessed": false,
+  "production_runtime_observation": {
+    "status": "homepage_only_read_only",
+    "tooling": "Chrome via Computer Use / Chrome plugin",
+    "observed_url": "https://fermatmind.com",
+    "observed_title": "FermatMind / fee-ma ce-shi",
+    "observed_surfaces": [
+      "home page",
+      "public zh test links",
+      "public en locale link",
+      "results lookup link"
+    ],
+    "private_result_pages_observed": false,
+    "reason_private_result_pages_not_observed": "Result/report/My Results pages are dynamic private or noindex surfaces and were not accessed without credentials or attempt identifiers."
+  },
+  "authority_rule": {
+    "result_asset_authority": "backend scoring, CMS, and result/report asset catalogs",
+    "frontend_fallback_authority": false,
+    "frontend_presentation_labels": "record_only",
+    "frontend_interpretation_copy": "flag_authority_violation_risk_unless_backend_catalog_owned"
+  },
+  "scan_scope": {
+    "fap_api_paths": [
+      "backend/app/Services/Assessment",
+      "backend/app/Services/Report",
+      "backend/app/Services/Results",
+      "backend/app/Services/Email",
+      "backend/app/Http/Controllers/Api/V03",
+      "backend/content_packs",
+      "backend/content_assets",
+      "backend/resources/views/emails",
+      "backend/tests"
+    ],
+    "fap_web_paths_reference_only": [
+      "app",
+      "components",
+      "lib",
+      "messages",
+      "tests",
+      "public"
+    ],
+    "test_families_covered": [
+      "MBTI",
+      "BIG5_OCEAN",
+      "ENNEAGRAM",
+      "EQ_60",
+      "RIASEC",
+      "SDS_20",
+      "CLINICAL_COMBO_68",
+      "IQ_INTELLIGENCE_QUOTIENT"
+    ]
+  },
+  "api_inventory": {
+    "attempt_start": "POST /api/v0.3/attempts/start",
+    "attempt_submit": "POST /api/v0.3/attempts/submit",
+    "attempt_email_bind": "POST /api/v0.3/attempts/{id}/email-bind",
+    "attempt_show": "GET /api/v0.3/attempts/{id}",
+    "attempt_result": "GET /api/v0.3/attempts/{id}/result",
+    "attempt_report": "GET /api/v0.3/attempts/{id}/report",
+    "attempt_report_access": "GET /api/v0.3/attempts/{id}/report-access",
+    "attempt_report_pdf": "GET /api/v0.3/attempts/{id}/report.pdf",
+    "attempt_share_create": "POST /api/v0.3/attempts/{id}/share",
+    "attempt_share_show": "GET /api/v0.3/attempts/{id}/share",
+    "public_share_show": "GET /api/v0.3/shares/{id}",
+    "result_lookup": "POST /api/v0.3/results/lookup-by-email"
+  },
+  "route_inventory": {
+    "fap_web_result": "app/(localized)/[locale]/(app)/result/[id]/page.tsx",
+    "fap_web_attempt_report": "app/(localized)/[locale]/attempts/[attemptId]/report/page.tsx",
+    "fap_web_results_lookup": "app/(localized)/[locale]/results/lookup/page.tsx",
+    "fap_web_share": "app/(localized)/[locale]/share/[id]/page.tsx",
+    "fap_web_og_share": "app/og/share/[id]/route.tsx",
+    "fap_web_history_mbti": "app/(localized)/[locale]/(app)/history/mbti/page.tsx",
+    "fap_web_history_big5": "app/(localized)/[locale]/(app)/history/big5/page.tsx",
+    "fap_web_history_big5_compare": "app/(localized)/[locale]/(app)/history/big5/compare/page.tsx",
+    "fap_web_history_enneagram": "app/(localized)/[locale]/(app)/history/enneagram/page.tsx",
+    "fap_web_history_riasec": "app/(localized)/[locale]/(app)/history/riasec/page.tsx"
+  },
+  "frontend_renderer_inventory": [
+    "components/result/RichResultReport.tsx",
+    "components/result/ResultClient.tsx",
+    "components/result/mbti/MbtiResultShell.tsx",
+    "components/result/big5/Big5ResultShell.tsx",
+    "components/result/big5/Big5ResultPageV2Shell.tsx",
+    "components/result/enneagram/EnneagramResultShell.tsx",
+    "components/result/eq/EQResultV5.tsx",
+    "components/result/riasec/RiasecResultShell.tsx",
+    "components/result/iq/IqResultShell.tsx",
+    "components/result/iq/IqReportModule.tsx",
+    "components/clinical/report/ClinicalReportClient.tsx",
+    "components/clinical/report/ReportSectionRenderer.tsx",
+    "components/share/MbtiShareSummaryCard.tsx",
+    "components/share/EnneagramShareSummaryCard.tsx",
+    "components/big5/pdf/PdfDownloadButton.tsx",
+    "components/commerce/AttemptPdfDownloadButton.tsx",
+    "components/support/ResultEmailLookupForm.tsx"
+  ],
+  "backend_common_sources": {
+    "report_composer_registry": "backend/app/Services/Report/ReportComposerRegistry.php",
+    "attempt_read_controller": "backend/app/Http/Controllers/Api/V03/AttemptReadController.php",
+    "result_lookup_service": "backend/app/Services/Results/ResultEmailLookupService.php",
+    "share_service": "backend/app/Services/Share/ShareService.php",
+    "generic_pdf_service": "backend/app/Services/Report/Pdf/ReportPdfDocumentService.php",
+    "big_five_pdf_service": "backend/app/Services/Report/Pdf/BigFivePdfDocumentService.php",
+    "email_templates_en": "backend/resources/views/emails/en",
+    "email_templates_zh": "backend/resources/views/emails/zh"
+  },
+  "test_families": [
+    {
+      "test_code": "MBTI",
+      "result_routes": [
+        "GET /api/v0.3/attempts/{id}/result",
+        "/[locale]/result/[id]",
+        "/[locale]/history/mbti"
+      ],
+      "report_routes": [
+        "GET /api/v0.3/attempts/{id}/report",
+        "GET /api/v0.3/attempts/{id}/report.pdf"
+      ],
+      "backend_scoring_source": [
+        "backend/app/Services/Assessment/Drivers/MbtiDriver.php",
+        "backend/app/Services/Score/MbtiAttemptScorer.php"
+      ],
+      "backend_result_serializer": [
+        "backend/app/Services/Report/ReportComposer.php",
+        "backend/app/Services/Report/ReportPayloadAssembler.php",
+        "backend/app/Services/Mbti/MbtiPublicProjectionService.php",
+        "backend/app/Services/Mbti/MbtiCanonicalPublicResultPayloadBuilder.php",
+        "backend/app/Services/Mbti/MbtiPublicSummaryV1Builder.php",
+        "backend/app/Internal/Legacy/Mbti/Report/LegacyMbtiReportPayloadBuilderV2Core.php"
+      ],
+      "frontend_renderer": [
+        "components/result/mbti/MbtiResultShell.tsx",
+        "components/result/RichResultReport.tsx",
+        "components/share/MbtiShareSummaryCard.tsx"
+      ],
+      "report_section_keys": [
+        "profile",
+        "summary",
+        "strengths",
+        "risks",
+        "career",
+        "relationships",
+        "growth",
+        "locked_report_sections"
+      ],
+      "zh_asset_count": 0,
+      "en_asset_count": 0,
+      "repo_visible_frontend_zh_clone_asset_count": 48,
+      "missing_en_asset_keys": [
+        "backend_external_content_package_export_required",
+        "legacy_mbti_generated_fallback_copy.en",
+        "frontend_mbti_clone_content_base.en",
+        "frontend_mbti_clone_content_variants.en"
+      ],
+      "chinese_leakage_risk": "high",
+      "pdf_email_share_coverage": {
+        "pdf": "generic metadata PDF only; full localized prose export not verified",
+        "email": "shared bilingual email templates exist, but MBTI-specific result prose email asset catalog not repo-visible",
+        "share": "MBTI share summary renderer exists in fap-web; backend ShareService public projection is authority"
+      },
+      "my_results_card_coverage": "history route exists; backend email lookup private helper supports MBTI but public lookup currently requires verification",
+      "claim_boundary_coverage": "partial; paid report and career copy must remain evidence-backed and not career-success prediction",
+      "locale_behavior_tests": [
+        "backend tests cover MBTI scoring/report compatibility, but repo-visible exported MBTI content package parity test was not found in this scan"
+      ],
+      "result_content_architecture": "mixed: structured result codes plus external content packages, legacy backend fallbacks, and frontend clone content. Backend export is required before English parity can be certified.",
+      "notes": "The repo does not materialize the authoritative MBTI content package catalog scanned by ReportPayloadAssembler roots. Frontend clone content contains large Chinese interpretation copy and must not be treated as authority."
+    },
+    {
+      "test_code": "BIG5_OCEAN",
+      "result_routes": [
+        "GET /api/v0.3/attempts/{id}/result",
+        "/[locale]/result/[id]",
+        "/[locale]/history/big5",
+        "/[locale]/history/big5/compare"
+      ],
+      "report_routes": [
+        "GET /api/v0.3/attempts/{id}/report",
+        "GET /api/v0.3/attempts/{id}/report.pdf"
+      ],
+      "backend_scoring_source": [
+        "backend/app/Services/Assessment/Drivers/BigFiveOceanDriver.php",
+        "backend/app/Services/Assessment/Scoring/BigFiveScorerV3.php"
+      ],
+      "backend_result_serializer": [
+        "backend/app/Services/Report/BigFiveReportComposer.php",
+        "backend/app/Services/BigFive/BigFivePublicProjectionService.php",
+        "backend/app/Services/BigFive/BigFivePackLoader.php",
+        "backend/app/Services/BigFive/ResultPageV2/*"
+      ],
+      "frontend_renderer": [
+        "components/result/big5/Big5ResultShell.tsx",
+        "components/result/big5/Big5ResultPageV2Shell.tsx",
+        "components/big5/pdf/PdfDownloadButton.tsx"
+      ],
+      "report_section_keys": [
+        "copy.compiled",
+        "blocks.compiled",
+        "landing.compiled",
+        "result_page_v2.route_matrix",
+        "result_page_v2.coupling_assets",
+        "result_page_v2.scenario_action_assets",
+        "result_page_v2.facet_assets",
+        "result_page_v2.canonical_profiles"
+      ],
+      "zh_asset_count": 436,
+      "en_asset_count": 436,
+      "repo_visible_result_page_v2_asset_file_count": 419,
+      "repo_visible_result_page_v2_en_counterpart_count": 0,
+      "missing_en_asset_keys": [
+        "result_page_v2.route_matrix.en",
+        "result_page_v2.coupling_assets.en",
+        "result_page_v2.scenario_action_assets.en",
+        "result_page_v2.facet_assets.en",
+        "result_page_v2.canonical_profiles.en",
+        "result_page_v2.core_body.en",
+        "result_page_v2.selector_ready_assets.en"
+      ],
+      "chinese_leakage_risk": "high_for_result_page_v2_medium_for_v1",
+      "pdf_email_share_coverage": {
+        "pdf": "BigFivePdfDocumentService exists, but full EN v2 prose parity depends on backend content assets",
+        "email": "shared bilingual email templates exist; Big Five result-specific email prose asset not separately verified",
+        "share": "backend projection exists; frontend share-specific Big Five route not found"
+      },
+      "my_results_card_coverage": "history and compare routes exist; backend email lookup helper supports BIG5_OCEAN but public lookup currently requires verification",
+      "claim_boundary_coverage": "partial; Big Five must stay trait/workstyle explanation, not career recommender",
+      "locale_behavior_tests": [
+        "Big Five fixture and renderer tests exist for result payloads",
+        "No focused no-zh-fallback parity gate found for ResultPageV2 assets"
+      ],
+      "result_content_architecture": "mixed: v1 compiled localized rows have parity, but v2 content assets are Chinese-heavy repo-visible catalogs. BigFiveReportComposer fallback order can fall through to zh-CN for missing English rows.",
+      "notes": "The v1 compiled copy/block counts are balanced, but the newer result-page-v2 asset system needs explicit EN catalog counterparts before EN reports can be certified."
+    },
+    {
+      "test_code": "ENNEAGRAM",
+      "result_routes": [
+        "GET /api/v0.3/attempts/{id}/result",
+        "/[locale]/result/[id]",
+        "/[locale]/history/enneagram"
+      ],
+      "report_routes": [
+        "GET /api/v0.3/attempts/{id}/report",
+        "GET /api/v0.3/attempts/{id}/report.pdf"
+      ],
+      "backend_scoring_source": [
+        "backend/app/Services/Assessment/Drivers/EnneagramDriver.php",
+        "backend/app/Services/Assessment/Scoring/EnneagramForcedChoice144Scorer.php",
+        "backend/app/Services/Assessment/Scoring/EnneagramLikert105Scorer.php"
+      ],
+      "backend_result_serializer": [
+        "backend/app/Services/Report/EnneagramReportComposer.php",
+        "backend/app/Services/Enneagram/EnneagramPublicProjectionService.php",
+        "backend/content_packs/ENNEAGRAM/v2/registry/*"
+      ],
+      "frontend_renderer": [
+        "components/result/enneagram/EnneagramResultShell.tsx",
+        "components/result/enneagram/EnneagramTechnicalNotePage.tsx",
+        "components/share/EnneagramShareSummaryCard.tsx"
+      ],
+      "report_section_keys": [
+        "type_registry",
+        "pair_registry",
+        "group_registry",
+        "observation_registry",
+        "technical_note_registry",
+        "method_registry",
+        "sample_report_registry",
+        "state_registry",
+        "scenario_registry",
+        "theory_hint_registry",
+        "ui_copy_registry"
+      ],
+      "zh_asset_count": 9,
+      "en_asset_count": 0,
+      "missing_en_asset_keys": [
+        "type_registry.en",
+        "pair_registry.en",
+        "group_registry.en",
+        "observation_registry.en",
+        "technical_note_registry.en",
+        "method_registry.en",
+        "sample_report_registry.en",
+        "state_registry.en",
+        "scenario_registry.en",
+        "ui_copy_registry.en"
+      ],
+      "chinese_leakage_risk": "high",
+      "pdf_email_share_coverage": {
+        "pdf": "generic metadata PDF only",
+        "email": "shared bilingual email templates exist; Enneagram-specific result prose email asset not separately verified",
+        "share": "backend ShareService and EnneagramShareSummaryCard exist"
+      },
+      "my_results_card_coverage": "history route exists; backend email lookup helper supports ENNEAGRAM but public lookup currently requires verification",
+      "claim_boundary_coverage": "partial; self-knowledge language is safer than clinical or hiring claims",
+      "locale_behavior_tests": [
+        "Enneagram scoring and report tests exist, but no generated registry EN counterpart gate was found"
+      ],
+      "result_content_architecture": "mixed: composer has bilingual structural labels, while registry catalogs are repo-visible zh-CN only.",
+      "notes": "English result rendering can only be certified after registry-level EN assets are added or exported."
+    },
+    {
+      "test_code": "EQ_60",
+      "result_routes": [
+        "GET /api/v0.3/attempts/{id}/result",
+        "/[locale]/result/[id]"
+      ],
+      "report_routes": [
+        "GET /api/v0.3/attempts/{id}/report",
+        "GET /api/v0.3/attempts/{id}/report.pdf"
+      ],
+      "backend_scoring_source": [
+        "backend/app/Services/Assessment/Drivers/Eq60Driver.php",
+        "backend/app/Services/Assessment/Scoring/Eq60ScorerV1NormedValidity.php"
+      ],
+      "backend_result_serializer": [
+        "backend/app/Services/Report/Eq60ReportComposer.php",
+        "backend/app/Services/Eq60/Eq60PackLoader.php",
+        "backend/content_packs/EQ_60/v1/compiled/*"
+      ],
+      "frontend_renderer": [
+        "components/result/eq/EQResultV5.tsx",
+        "components/result/RichResultReport.tsx"
+      ],
+      "report_section_keys": [
+        "report.compiled.blocks_by_locale",
+        "report_assets.compiled.localized_maps"
+      ],
+      "zh_asset_count": 130,
+      "en_asset_count": 130,
+      "missing_en_asset_keys": [],
+      "chinese_leakage_risk": "low_current_assets_medium_future_fallback",
+      "pdf_email_share_coverage": {
+        "pdf": "generic metadata PDF only",
+        "email": "shared bilingual email templates exist",
+        "share": "generic backend ShareService path exists; EQ-specific share UI not found"
+      },
+      "my_results_card_coverage": "backend email lookup helper supports EQ_60 but public lookup currently requires verification",
+      "claim_boundary_coverage": "partial; avoid clinical or employment suitability claims",
+      "locale_behavior_tests": [
+        "backend/tests/Fixtures/eq/v5 include _en and _zh fixtures"
+      ],
+      "result_content_architecture": "localized compiled report packs with balanced zh-CN and en rows. Composer fallback can still fall through to zh-CN if future EN rows are missing.",
+      "notes": "EQ is the closest repo-visible result/report asset parity baseline among the scanned non-MBTI tests."
+    },
+    {
+      "test_code": "RIASEC",
+      "result_routes": [
+        "GET /api/v0.3/attempts/{id}/result",
+        "/[locale]/result/[id]",
+        "/[locale]/history/riasec"
+      ],
+      "report_routes": [
+        "GET /api/v0.3/attempts/{id}/report",
+        "GET /api/v0.3/attempts/{id}/report.pdf"
+      ],
+      "backend_scoring_source": [
+        "backend/app/Services/Assessment/Drivers/RiasecDriver.php",
+        "backend/app/Services/Assessment/Scoring/RiasecScorer.php"
+      ],
+      "backend_result_serializer": [
+        "backend/app/Services/Report/RiasecReportComposer.php",
+        "backend/app/Services/Riasec/RiasecPublicProjectionService.php",
+        "backend/app/Services/Riasec/RiasecLifecycleCopyService.php",
+        "backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php",
+        "backend/content_assets/riasec/*"
+      ],
+      "frontend_renderer": [
+        "components/result/riasec/RiasecResultShell.tsx",
+        "components/result/RichResultReport.tsx"
+      ],
+      "report_section_keys": [
+        "activity_task_examples",
+        "occupation_examples_boundary",
+        "next_exploration_nodes",
+        "feedback_action_lab",
+        "top3_code_chain_strategy",
+        "professional_method_boundary",
+        "share_pdf_history",
+        "faq",
+        "technical_note_user_summary"
+      ],
+      "zh_asset_count": 19,
+      "en_asset_count": 0,
+      "missing_en_asset_keys": [
+        "content_assets/riasec/*.en.json",
+        "riasec.lifecycle_copy.share_pdf_history_v1.en",
+        "riasec.lifecycle_copy.faq_v1.en",
+        "riasec.lifecycle_copy.technical_note_user_summary_v1.en",
+        "riasec.lifecycle_copy.professional_method_boundary_v1.en"
+      ],
+      "chinese_leakage_risk": "high",
+      "pdf_email_share_coverage": {
+        "pdf": "generic metadata PDF only; lifecycle PDF/share/history copy points to zh-CN assets",
+        "email": "shared bilingual email templates exist; RIASEC result-specific email copy not verified",
+        "share": "lifecycle share/pdf/history assets are zh-CN only in repo-visible catalog"
+      },
+      "my_results_card_coverage": "history route exists; backend email lookup helper supports RIASEC but public lookup currently requires verification",
+      "claim_boundary_coverage": "strong_rule_needed; RIASEC is interest signal and exploration support, not active career recommendation",
+      "locale_behavior_tests": [
+        "RiasecContentRegistrySlotContract forbids frontend fallback",
+        "No EN lifecycle copy counterpart gate found"
+      ],
+      "result_content_architecture": "mixed: report composer has English hardcoded summary scaffolding, but lifecycle/content asset catalogs are zh-CN only and authority-owned by backend.",
+      "notes": "RIASEC is the highest-priority asset-catalog fix because it is commercially important and claim-sensitive."
+    },
+    {
+      "test_code": "SDS_20",
+      "result_routes": [
+        "GET /api/v0.3/attempts/{id}/result",
+        "/[locale]/result/[id]",
+        "/[locale]/attempts/[attemptId]/report"
+      ],
+      "report_routes": [
+        "GET /api/v0.3/attempts/{id}/report",
+        "GET /api/v0.3/attempts/{id}/report.pdf"
+      ],
+      "backend_scoring_source": [
+        "backend/app/Services/Assessment/Drivers/Sds20Driver.php",
+        "backend/app/Services/Assessment/Scoring/Sds20ScorerV2FactorLogic.php"
+      ],
+      "backend_result_serializer": [
+        "backend/app/Services/Report/Sds20ReportComposer.php",
+        "backend/app/Services/Sds20/Sds20PackLoader.php",
+        "backend/content_packs/SDS_20/v1/compiled/report.compiled.json",
+        "backend/content_packs/DEPRESSION_SCREENING_STANDARD/v1/compiled/report.compiled.json"
+      ],
+      "frontend_renderer": [
+        "components/clinical/report/ClinicalReportClient.tsx",
+        "components/clinical/report/ReportSectionRenderer.tsx",
+        "components/clinical/report/CrisisOverlay.tsx",
+        "components/clinical/report/SdsFactorPanel.tsx"
+      ],
+      "report_section_keys": [
+        "sds_20.report.blocks_by_locale",
+        "depression_screening_standard.report.blocks_by_locale",
+        "landing.localized_map"
+      ],
+      "zh_asset_count": 5,
+      "en_asset_count": 5,
+      "missing_en_asset_keys": [],
+      "chinese_leakage_risk": "medium_due_sensitive_fallback",
+      "pdf_email_share_coverage": {
+        "pdf": "generic metadata PDF only",
+        "email": "shared bilingual email templates exist; sensitive-result email copy not verified",
+        "share": "generic ShareService path exists; sensitive sharing should remain constrained"
+      },
+      "my_results_card_coverage": "backend result lookup excludes SDS_20 in current private helper; public lookup requires verification",
+      "claim_boundary_coverage": "required; non-diagnosis and professional-help boundaries are critical",
+      "locale_behavior_tests": [
+        "SDS pack tests exist, but no explicit fail-closed missing-EN gate found"
+      ],
+      "result_content_architecture": "localized compiled report packs with current zh-CN/en parity. Loader can fall back to zh-CN when requested locale rows are missing.",
+      "notes": "Current repo-visible assets are balanced, but any fallback to Chinese on EN sensitive pages should fail closed instead of silently passing."
+    },
+    {
+      "test_code": "CLINICAL_COMBO_68",
+      "result_routes": [
+        "GET /api/v0.3/attempts/{id}/result",
+        "/[locale]/result/[id]",
+        "/[locale]/attempts/[attemptId]/report"
+      ],
+      "report_routes": [
+        "GET /api/v0.3/attempts/{id}/report",
+        "GET /api/v0.3/attempts/{id}/report.pdf"
+      ],
+      "backend_scoring_source": [
+        "backend/app/Services/Assessment/Drivers/ClinicalCombo68Driver.php",
+        "backend/app/Services/Assessment/Scoring/ClinicalCombo68ScorerV1.php"
+      ],
+      "backend_result_serializer": [
+        "backend/app/Services/Report/ClinicalCombo68ReportComposer.php",
+        "backend/app/Services/ClinicalCombo/ClinicalComboPackLoader.php",
+        "backend/app/Services/ClinicalCombo/ClinicalComboBlockSelector.php",
+        "backend/content_packs/CLINICAL_COMBO_68/v1/compiled/report.compiled.json",
+        "backend/content_packs/CLINICAL_DEPRESSION_ANXIETY_PRO/v1/compiled/report.compiled.json"
+      ],
+      "frontend_renderer": [
+        "components/clinical/report/ClinicalReportClient.tsx",
+        "components/clinical/report/ReportSectionRenderer.tsx",
+        "components/clinical/report/CrisisOverlay.tsx"
+      ],
+      "report_section_keys": [
+        "clinical_combo_68.report.blocks_by_locale",
+        "clinical_depression_anxiety_pro.report.blocks_by_locale",
+        "paid_action_*",
+        "paid_perf_*",
+        "landing.localized_map"
+      ],
+      "zh_asset_count": 46,
+      "en_asset_count": 38,
+      "missing_en_asset_keys": [
+        "clinical_combo_68.paid_action_anxiety_14d.en",
+        "clinical_combo_68.paid_action_burnout.en",
+        "clinical_combo_68.paid_action_depression_14d.en",
+        "clinical_combo_68.paid_action_ocd_erp_start.en",
+        "clinical_combo_68.paid_action_perfectionism_14d.en",
+        "clinical_combo_68.paid_perf_cm_mistakes.en",
+        "clinical_combo_68.paid_perf_da_doubts.en",
+        "clinical_combo_68.paid_perf_org_order.en",
+        "clinical_combo_68.paid_perf_pe_parental.en",
+        "clinical_combo_68.paid_perf_ps_standards.en"
+      ],
+      "chinese_leakage_risk": "high_for_paid_sections_medium_for_free_sections",
+      "pdf_email_share_coverage": {
+        "pdf": "generic metadata PDF only",
+        "email": "shared bilingual email templates exist; sensitive paid-section email copy not verified",
+        "share": "generic ShareService path exists; sensitive sharing should remain constrained"
+      },
+      "my_results_card_coverage": "backend result lookup excludes CLINICAL_COMBO_68 in current private helper; public lookup requires verification",
+      "claim_boundary_coverage": "required; self-assessment, non-diagnosis, crisis and professional-help boundaries must be visible",
+      "locale_behavior_tests": [
+        "Clinical combo pack tests exist",
+        "No explicit missing paid EN block fail-closed gate found"
+      ],
+      "result_content_architecture": "localized compiled report packs with incomplete paid-section EN rows. Loader can fall back to zh-CN when localized rows are missing.",
+      "notes": "Clinical paid action/performance blocks are the clearest concrete missing-EN backend assets in this scan."
+    },
+    {
+      "test_code": "IQ_INTELLIGENCE_QUOTIENT",
+      "result_routes": [
+        "GET /api/v0.3/attempts/{id}/result",
+        "/[locale]/result/[id]"
+      ],
+      "report_routes": [
+        "GET /api/v0.3/attempts/{id}/report",
+        "GET /api/v0.3/attempts/{id}/report.pdf"
+      ],
+      "backend_scoring_source": [
+        "backend/app/Services/Assessment/Drivers/IqTestDriver.php"
+      ],
+      "backend_result_serializer": [
+        "backend/app/Services/Report/IqReportBuilder.php",
+        "backend/app/Services/Iq/IqResultPayloadRedactor.php"
+      ],
+      "frontend_renderer": [
+        "components/result/iq/IqResultShell.tsx",
+        "components/result/iq/IqReportModule.tsx",
+        "lib/iq/result.ts"
+      ],
+      "report_section_keys": [
+        "iq.dimensions.visual_spatial_insight",
+        "iq.dimensions.visual_spatial_pattern_reasoning",
+        "iq.dimensions.numeric_pattern_reasoning",
+        "iq_pro.pdf_payload",
+        "iq_pro.certificate_payload"
+      ],
+      "zh_asset_count": 3,
+      "en_asset_count": 0,
+      "missing_en_asset_keys": [
+        "iq.dimensions.visual_spatial_insight.en",
+        "iq.dimensions.visual_spatial_pattern_reasoning.en",
+        "iq.dimensions.numeric_pattern_reasoning.en",
+        "iq_pro.pdf_payload.en",
+        "iq_pro.certificate_payload.en"
+      ],
+      "chinese_leakage_risk": "high",
+      "pdf_email_share_coverage": {
+        "pdf": "contract-defined IQ pro PDF/certificate payload not implemented; generic metadata PDF only",
+        "email": "shared bilingual email templates exist; IQ result-specific email copy not verified",
+        "share": "generic ShareService path exists; IQ-specific share copy not verified"
+      },
+      "my_results_card_coverage": "backend email lookup helper supports IQ_RAVEN but public lookup currently requires verification",
+      "claim_boundary_coverage": "required; online estimate and confidence interval language must avoid real IQ or clinical authority claims",
+      "locale_behavior_tests": [
+        "IQ report contract tests exist, but no localized dimension-label parity gate found"
+      ],
+      "result_content_architecture": "backend-generated report sections include Chinese dimension labels without an obvious locale parameter. English rendering is at high leakage risk.",
+      "notes": "IQ should be a small but urgent locale-safe backend builder fix before English paid/report surfaces are expanded."
+    }
+  ],
+  "architecture_findings": [
+    {
+      "id": "backend_authority_mixed_by_family",
+      "severity": "high",
+      "summary": "Result/report content architecture is not uniform across scales. Some families use compiled localized packs, some use backend hardcoded scaffolds, some use repo-visible zh-only content_assets, and MBTI relies on external packages plus legacy fallbacks."
+    },
+    {
+      "id": "zh_fallback_can_silently_pass",
+      "severity": "high",
+      "summary": "Several loaders/composers allow fallback to zh-CN when requested English content is missing. That is acceptable for controlled internal preview only, but unsafe for public EN result/report parity."
+    },
+    {
+      "id": "frontend_interpretation_copy_authority_risk",
+      "severity": "high",
+      "summary": "fap-web contains large Chinese interpretation-copy islands, especially MBTI clone content and Big Five fixtures/assets. Presentation labels can remain frontend, but report interpretation copy should be backend/CMS asset authority."
+    },
+    {
+      "id": "my_results_public_lookup_not_live_inventory",
+      "severity": "medium",
+      "summary": "ResultEmailLookupService public lookup currently returns email_verification_required with an empty list. Private lookup helpers support only non-sensitive scales and exclude SDS/clinical combo."
+    },
+    {
+      "id": "pdf_export_is_metadata_not_report_parity",
+      "severity": "medium",
+      "summary": "Generic and Big Five PDF services exist, but the scan found metadata-style PDF output rather than full bilingual report prose export parity across all families."
+    }
+  ],
+  "frontend_authority_risks": [
+    {
+      "id": "mbti_frontend_clone_content",
+      "severity": "high",
+      "paths": [
+        "lib/mbti/mbtiTypeContentPacks.generated.ts",
+        "components/result/mbti/clone/content/*.zh.ts",
+        "components/result/mbti/clone/variants/*.zh.ts"
+      ],
+      "finding": "Large Chinese interpretation copy exists in fap-web with no matching .en.ts clone content counterpart in the scan."
+    },
+    {
+      "id": "big5_result_page_v2_frontend_payload_dependence",
+      "severity": "high",
+      "paths": [
+        "components/result/big5/Big5ResultPageV2Shell.tsx",
+        "lib/big5/microcopy.ts"
+      ],
+      "finding": "Renderer can display localized key variants but depends on backend payload parity. Unsuffixed or zh-only payload bodies can leak Chinese into EN."
+    },
+    {
+      "id": "iq_frontend_labels",
+      "severity": "medium",
+      "paths": [
+        "lib/iq/result.ts",
+        "components/result/iq/IqResultShell.tsx",
+        "components/result/iq/IqReportModule.tsx"
+      ],
+      "finding": "Frontend contains IQ labels and modules that must remain presentation-only; backend IqReportBuilder still needs locale-safe section labels."
+    }
+  ],
+  "recommended_next_prs": [
+    {
+      "id": "RESULT-EN-PARITY-01",
+      "title": "Result/report asset catalog export and fail-closed locale parity gate",
+      "scope": "Add backend-generated inventory command/test that exports authoritative result/report asset keys by family and fails when public EN depends on zh-CN fallback.",
+      "dependency_assumption": "RESULT-EN-PARITY-00 merged"
+    },
+    {
+      "id": "RESULT-EN-PARITY-02",
+      "title": "RIASEC result/report English asset catalog",
+      "scope": "Add English backend content_assets counterparts for RIASEC lifecycle/share/pdf/history/FAQ/method-boundary assets without changing scoring.",
+      "dependency_assumption": "RESULT-EN-PARITY-01 catalog gate available"
+    },
+    {
+      "id": "RESULT-EN-PARITY-03",
+      "title": "IQ locale-safe report builder labels",
+      "scope": "Move IQ dimension labels into locale-aware backend catalog and add EN/ZH tests for result/report payloads.",
+      "dependency_assumption": "RESULT-EN-PARITY-01 catalog gate available"
+    },
+    {
+      "id": "RESULT-EN-PARITY-04",
+      "title": "Clinical combo paid section EN parity",
+      "scope": "Add missing English paid_action and paid_perf blocks and fail if sensitive EN reports fall back to zh-CN.",
+      "dependency_assumption": "RESULT-EN-PARITY-01 catalog gate available"
+    },
+    {
+      "id": "RESULT-EN-PARITY-05",
+      "title": "MBTI backend content package export and frontend interpretation de-authoring",
+      "scope": "Materialize or export authoritative MBTI result/report content packages and mark frontend clone content as non-authoritative or migration-only.",
+      "dependency_assumption": "RESULT-EN-PARITY-01 catalog gate available"
+    },
+    {
+      "id": "RESULT-EN-PARITY-06",
+      "title": "Big Five ResultPageV2 EN asset catalog parity",
+      "scope": "Add English counterparts for Big Five v2 route matrix, coupling, scenario action, facets, and canonical profiles.",
+      "dependency_assumption": "RESULT-EN-PARITY-01 catalog gate available"
+    }
+  ]
+}
