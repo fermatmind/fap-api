@@ -12976,3 +12976,202 @@ prs:
     metabase_deployment: false
     human_review_required: false
     production_approval_required: false
+
+  - id: GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-PARITY-P0-01
+      - GLOBAL-EN-ZH-PARITY-FOOTER-NAV-PARITY-01
+    branch: codex/global-en-zh-content-asset-batch-01
+    base: main
+    title: "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01 content help policy import package"
+    train_scope: global_en_zh_remaining_parity_train
+    risk_level: p1_content_asset_batch
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-content-asset-batch-01.md
+      - backend/docs/seo/generated/global-en-zh-content-asset-batch-01.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentAssetBatch01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare controlled content/help/policy parity package for about, support, brand, charter, foundation, careers, privacy, terms, policies, help/contact, help/faq, and help/about.
+      - Classify each item as authority-backed/import-ready, draft-review-only, or deferred missing authority.
+      - Prove no draft, placeholder, fallback-only, or missing-authority page is exposed through sitemap/llms by this PR.
+      - Keep missing counterparts explicit without generating substantial English prose.
+    do_not:
+      - Mutate production CMS, auto-publish, deploy, submit URLs, or enqueue Search Channel.
+      - Generate unsupported company, legal, hiring, diagnostic, salary, or career-success claims.
+      - Modify fap-web, frontend fallback content, runtime routes, sitemap generator, or llms generator.
+      - Implement future article, career, result/media, or final verification PR scopes.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhContentAssetBatch01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-asset-batch-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c 'import yaml, pathlib; yaml.safe_load(pathlib.Path("docs/codex/pr-train.yaml").read_text()); print("yaml ok")'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    next_task: GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01
+
+  - id: GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01
+    branch: codex/global-en-zh-article-counterpart-batch-01
+    base: main
+    title: "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01 article counterpart controlled batch"
+    train_scope: global_en_zh_remaining_parity_train
+    risk_level: p1_article_counterpart_batch
+    allowed_paths:
+      - backend/docs/seo/**
+      - backend/tests/Feature/SeoIntel/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Build a controlled English article counterpart draft/import batch for missing ZH articles.
+      - Keep draft/import-only articles out of sitemap/llms and public runtime exposure.
+      - Preserve explicit claim boundaries and counterpart mapping.
+    do_not:
+      - Publish all missing articles, mutate production CMS, submit URLs, deploy, or use fap-web hardcoded articles as authority.
+      - Create unsupported studies, statistics, citations, diagnosis, treatment, salary, hiring-fit, or career-success claims.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhArticleCounterpartBatch01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    next_task: GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01
+
+  - id: GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01
+    branch: codex/global-en-zh-career-asset-batch-01
+    base: main
+    title: "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01 career guides jobs parity batch"
+    train_scope: global_en_zh_remaining_parity_train
+    risk_level: p1_career_asset_batch
+    allowed_paths:
+      - backend/docs/seo/**
+      - backend/tests/Feature/SeoIntel/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Build authority-backed inventory for career guide index/detail, career job detail, and career recommendation pages.
+      - Classify published/indexable, import-ready, draft-review-only, deferred, and excluded-from-sitemap states.
+      - Prevent draft/fallback/404 career URLs from sitemap/llms.
+    do_not:
+      - Create placeholder job pages, publish unreviewed guides, mutate CMS, expose frontend fallback career pages, or claim precise career recommendation.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhCareerAssetBatch01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    next_task: GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01
+
+  - id: GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01
+    branch: codex/global-en-zh-result-media-asset-batch-01
+    base: main
+    title: "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01 result report media parity batch"
+    train_scope: global_en_zh_remaining_parity_train
+    risk_level: p1_result_media_asset_batch
+    allowed_paths:
+      - backend/docs/seo/**
+      - backend/tests/Feature/SeoIntel/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Combine remaining RESULT-EN-PARITY deferred assets and media parity gaps into a controlled batch report.
+      - Preserve fail-closed no-zh-fallback behavior.
+      - Classify production-active, draft-review-only, import-ready, deferred-human-review, and blocked-claim-boundary items.
+    do_not:
+      - Mass-generate report prose, expose sensitive or clinical overclaims, mutate CMS, deploy, or edit fap-web.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhResultMediaAssetBatch01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    next_task: GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01
+
+  - id: GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01
+    branch: codex/global-en-zh-final-verify-01
+    base: main
+    title: "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01 full site parity verification"
+    train_scope: global_en_zh_remaining_parity_train
+    risk_level: final_verification
+    allowed_paths:
+      - backend/docs/seo/**
+      - backend/tests/Feature/SeoIntel/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Re-run bounded full-site parity verification after previous PRs.
+      - Verify P0 sitemap/llms exposure stays closed and remaining content/article/career/result/media gaps are explicit.
+      - Produce final GO/NO-GO report.
+    do_not:
+      - Mutate CMS, deploy, submit URLs, publish content, or perform implementation fixes beyond report/test corrections.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhFinalVerify01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    next_task: DEPLOY-READINESS
