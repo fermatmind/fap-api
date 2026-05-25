@@ -9992,7 +9992,7 @@
       "depends_on": [
         "SEO-DASH-PROD-00"
       ],
-      "status": "local_checks_passed",
+      "status": "pr_open_github_checks_pending",
       "train_scope": "production_seo_intel_db_user_migration_runbook",
       "risk_level": "low_docs_contract_no_execution",
       "title": "docs(seo-intel): add production DB migration runbook",
@@ -18375,6 +18375,81 @@
           "at": "2026-05-25T11:56:00+08:00",
           "status": "pr_open_github_checks_pending_rerun",
           "summary": "Opened rerun PR #1662 for the ZH MBTI live preflight report after keyLocation readiness passed."
+        }
+      ]
+    },
+    "SEARCH-CHANNEL-LIVE-ZH-MBTI-02": {
+      "repo": "fap-api",
+      "branch": "codex/search-channel-live-zh-mbti-02",
+      "status": "local_checks_passed",
+      "depends_on": [
+        "SEARCH-CHANNEL-LIVE-ZH-MBTI-01"
+      ],
+      "commit_sha": "c663feca",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1664",
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "Dependency SEARCH-CHANNEL-LIVE-ZH-MBTI-01 is merged via PR #1662 and produced the exact runtime approval phrase after keyLocation readiness passed."
+        },
+        "human_approval": {
+          "status": "pass",
+          "evidence": "Exact approval phrase was provided for queue item 3, channel indexnow, URL https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types."
+        },
+        "production_operation": {
+          "status": "pass",
+          "command": "cd /var/www/fap-api/current/backend && php artisan seo-intel:search-channel-submit --queue-item-id=3 --approval-phrase=<exact approved phrase> --actor=codex --json",
+          "evidence": "Official one-shot live submit returned status=success, http_status=200, submission_status=accepted, external_calls_attempted=true, search_submission_attempted=true, writes_committed=true, and execution_state=submitted."
+        },
+        "post_submit_verification": {
+          "status": "pass",
+          "evidence": "Queue item 3 is approved/submitted with live_submission_approved and live_submission_response events; endpoint_host=api.indexnow.org; queue item 2 remains approved/submitted; ZH target queue count is 1; Research queue count is 0; queue write, live submission, external API, and IndexNow live API gates are false after submission."
+        },
+        "local": {
+          "focused_live_zh_mbti_02_test": "passed: php artisan test --filter=SeoIntelSearchChannelLiveZhMbti02 --no-ansi (1 test, 20 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi",
+          "pint": "passed: vendor/bin/pint --test (3535 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/search-channel-live-zh-mbti-02.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": true,
+      "scheduler_activation": false,
+      "next_pr": "SEARCH-CHANNEL-LIVE-ZH-MBTI-02-24H-REVIEW",
+      "history": [
+        {
+          "at": "2026-05-25T12:09:00+08:00",
+          "status": "production_live_submission_completed",
+          "summary": "Executed the exact human-approved one-shot IndexNow live submission for queue item 3 only. The executor returned status=success, HTTP 200, submission_status=accepted, and execution_state=submitted."
+        },
+        {
+          "at": "2026-05-25T12:12:00+08:00",
+          "status": "post_submit_verification_passed",
+          "summary": "Verified queue item 3 is approved/submitted with live submission audit events, queue item 2 remains unchanged, all live/external gates are closed, there is no duplicate ZH queue item, and no Research queue item was submitted."
+        },
+        {
+          "at": "2026-05-25T12:23:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused generated artifact test, route list, Pint, generated JSON/state parse, manifest parse, and diff checks passed for the ZH MBTI live submission report."
+        },
+        {
+          "at": "2026-05-25T12:24:00+08:00",
+          "status": "commit_created",
+          "summary": "Created scoped commit c663feca for the ZH MBTI live submission report."
+        },
+        {
+          "at": "2026-05-25T12:31:00+08:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1664 for the ZH MBTI live submission report. GitHub checks are pending."
         }
       ]
     },

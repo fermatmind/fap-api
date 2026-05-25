@@ -11635,6 +11635,53 @@ prs:
     scheduler_activation: false
     next_task: SEARCH-CHANNEL-LIVE-ZH-MBTI-02
 
+  - id: SEARCH-CHANNEL-LIVE-ZH-MBTI-02
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-LIVE-ZH-MBTI-01
+    branch: codex/search-channel-live-zh-mbti-02
+    base: main
+    title: "docs(seo-intel): record ZH MBTI IndexNow live submission"
+    name: "Human-approved ZH MBTI IndexNow live submission"
+    train_scope: seo_intel_search_channel_live_submission
+    risk_level: L1
+    type: human-approved production operation ledger
+    scope:
+      - Perform exactly one human-approved IndexNow live submission for queue item 3.
+      - Record the bounded live submission result, post-submit queue state, gate closure, and deferred URL boundary.
+      - Keep queue write gate closed and avoid any enqueue, bulk submission, scheduler, CMS, URL Truth, fap-web, sitemap, or llms mutation.
+    allowed_paths:
+      - backend/docs/seo/search-channel-live-zh-mbti-02.md
+      - backend/docs/seo/generated/search-channel-live-zh-mbti-02.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelLiveZhMbti02Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Submit any URL except queue item 3.
+      - Enqueue Search Channel items.
+      - Call GSC, Baidu, Bing, 360, Sogou, or Shenma.
+      - Persistently edit production env, deploy, run migrations, mutate CMS, create internal links, create pSEO, or modify fap-web.
+      - Use frontend fallback, static sitemap, static llms, crawler logs, search engine responses, Digital PR mentions, or local copies as authority.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelLiveZhMbti02 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool backend/docs/seo/generated/search-channel-live-zh-mbti-02.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    external_api_credentials_required: true
+    scheduler_activation: false
+    live_external_submission_allowed: true
+    next_task: SEARCH-CHANNEL-LIVE-ZH-MBTI-02-24H-REVIEW
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar
