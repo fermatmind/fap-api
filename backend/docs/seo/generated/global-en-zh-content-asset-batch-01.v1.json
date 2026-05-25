@@ -1,0 +1,218 @@
+{
+  "schema_version": "global-en-zh-content-asset-batch-01.v1",
+  "task": "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01",
+  "source_authority": "backend_content_pages_repo_backed_import_package",
+  "based_on": [
+    "EN-PARITY-03 content_pages import package",
+    "GLOBAL-EN-ZH-PARITY-SCAN-00",
+    "GLOBAL-EN-ZH-PARITY-P0-01 sitemap/llms hard-404 cleanup"
+  ],
+  "no_mutation_performed": true,
+  "cms_mutation_performed": false,
+  "production_migration_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "auto_publish_performed": false,
+  "frontend_fallback_authority_used": false,
+  "substantial_english_prose_generated": false,
+  "draft_pages_exposed_in_sitemap_llms": false,
+  "content_generation_policy": {
+    "mode": "controlled_import_package_only",
+    "auto_publish_allowed": false,
+    "mass_english_generation_allowed": false,
+    "human_review_required_for_new_prose": true,
+    "draft_exposure_allowed_in_sitemap_llms": false,
+    "unsupported_company_legal_or_claim_facts_allowed": false
+  },
+  "target_summary": {
+    "targeted_content_help_policy_items": 12,
+    "authority_backed_pair_or_import_ready": 5,
+    "draft_review_only": 5,
+    "deferred_missing_authority": 2,
+    "published_by_this_pr": 0,
+    "sitemap_llms_exposure_added_by_this_pr": 0
+  },
+  "content_items": [
+    {
+      "entity_key": "about",
+      "family": "company",
+      "zh_path": "/zh/about",
+      "en_path": "/en/about",
+      "state": "authority_backed_pair_or_import_ready",
+      "source": "content_baselines/content_pages",
+      "counterpart_relation": "content-page-about",
+      "sitemap_llms_exposure_eligible": "only_after_runtime_authority_gate",
+      "claim_boundary": "non_diagnostic_company_information_only"
+    },
+    {
+      "entity_key": "support",
+      "family": "support",
+      "zh_path": "/zh/support",
+      "en_path": "/en/support",
+      "state": "deferred_missing_authority",
+      "source": null,
+      "counterpart_relation": null,
+      "sitemap_llms_exposure_eligible": false,
+      "claim_boundary": "requires_human_reviewed_support_authority"
+    },
+    {
+      "entity_key": "brand",
+      "family": "company",
+      "zh_path": "/zh/brand",
+      "en_path": "/en/brand",
+      "state": "draft_review_only",
+      "source": "zh_baseline_only",
+      "counterpart_relation": "content-page-brand",
+      "sitemap_llms_exposure_eligible": false,
+      "claim_boundary": "do_not_invent_brand_claims"
+    },
+    {
+      "entity_key": "charter",
+      "family": "company",
+      "zh_path": "/zh/charter",
+      "en_path": "/en/charter",
+      "state": "draft_review_only",
+      "source": "zh_baseline_only",
+      "counterpart_relation": "content-page-charter",
+      "sitemap_llms_exposure_eligible": false,
+      "claim_boundary": "do_not_invent_legal_or_governance_commitments"
+    },
+    {
+      "entity_key": "foundation",
+      "family": "company",
+      "zh_path": "/zh/foundation",
+      "en_path": "/en/foundation",
+      "state": "draft_review_only",
+      "source": "zh_baseline_only",
+      "counterpart_relation": "content-page-foundation",
+      "sitemap_llms_exposure_eligible": false,
+      "claim_boundary": "do_not_invent_institutional_facts"
+    },
+    {
+      "entity_key": "careers",
+      "family": "company",
+      "zh_path": "/zh/careers",
+      "en_path": "/en/careers",
+      "state": "draft_review_only",
+      "source": "zh_baseline_only",
+      "counterpart_relation": "content-page-careers",
+      "sitemap_llms_exposure_eligible": false,
+      "claim_boundary": "do_not_invent_hiring_or_role_claims"
+    },
+    {
+      "entity_key": "privacy",
+      "family": "policy",
+      "zh_path": "/zh/privacy",
+      "en_path": "/en/privacy",
+      "state": "authority_backed_pair_or_import_ready",
+      "source": "content_baselines/content_pages",
+      "counterpart_relation": "content-page-privacy",
+      "sitemap_llms_exposure_eligible": "only_after_runtime_authority_gate",
+      "claim_boundary": "legal_copy_requires_owner_review_before_public_exposure"
+    },
+    {
+      "entity_key": "terms",
+      "family": "policy",
+      "zh_path": "/zh/terms",
+      "en_path": "/en/terms",
+      "state": "authority_backed_pair_or_import_ready",
+      "source": "content_baselines/content_pages",
+      "counterpart_relation": "content-page-terms",
+      "sitemap_llms_exposure_eligible": "only_after_runtime_authority_gate",
+      "claim_boundary": "legal_copy_requires_owner_review_before_public_exposure"
+    },
+    {
+      "entity_key": "policies",
+      "family": "policy",
+      "zh_path": "/zh/policies",
+      "en_path": "/en/policies",
+      "state": "draft_review_only",
+      "source": "zh_baseline_only",
+      "counterpart_relation": "content-page-policies",
+      "sitemap_llms_exposure_eligible": false,
+      "claim_boundary": "do_not_invent_policy_commitments"
+    },
+    {
+      "entity_key": "help-contact",
+      "family": "help",
+      "zh_path": "/zh/help/contact",
+      "en_path": "/en/help/contact",
+      "state": "authority_backed_pair_or_import_ready",
+      "source": "content_baselines/content_pages",
+      "counterpart_relation": "content-page-help-contact",
+      "sitemap_llms_exposure_eligible": "only_after_runtime_authority_gate",
+      "claim_boundary": "support_instructions_only"
+    },
+    {
+      "entity_key": "help-faq",
+      "family": "help",
+      "zh_path": "/zh/help/faq",
+      "en_path": "/en/help/faq",
+      "state": "authority_backed_pair_or_import_ready",
+      "source": "content_baselines/content_pages",
+      "counterpart_relation": "content-page-help-faq",
+      "sitemap_llms_exposure_eligible": "only_after_runtime_authority_gate",
+      "claim_boundary": "faq_must_be_visible_or_authority_backed"
+    },
+    {
+      "entity_key": "help-about",
+      "family": "help",
+      "zh_path": "/zh/help/about",
+      "en_path": "/en/help/about",
+      "state": "authority_backed_pair_or_import_ready",
+      "source": "content_baselines/content_pages",
+      "counterpart_relation": "content-page-help-about",
+      "sitemap_llms_exposure_eligible": "only_after_runtime_authority_gate",
+      "claim_boundary": "help_explanation_only"
+    }
+  ],
+  "exposure_guard": {
+    "draft_review_only_must_not_enter_sitemap": true,
+    "draft_review_only_must_not_enter_llms": true,
+    "deferred_missing_authority_must_not_enter_sitemap": true,
+    "deferred_missing_authority_must_not_enter_llms": true,
+    "frontend_fallback_must_not_be_counterpart": true,
+    "known_p0_hard_404_exposure_must_stay_closed": true
+  },
+  "forbidden_claim_hits": [],
+  "remaining_gaps": [
+    {
+      "gap": "human_reviewed_english_company_policy_copy",
+      "items": [
+        "brand",
+        "careers",
+        "charter",
+        "foundation",
+        "policies"
+      ],
+      "next_action": "owner-reviewed import package or small review batch"
+    },
+    {
+      "gap": "support_content_authority",
+      "items": [
+        "support"
+      ],
+      "next_action": "create explicit content_page authority or keep retired"
+    },
+    {
+      "gap": "runtime_exposure_gate",
+      "items": [
+        "about",
+        "privacy",
+        "terms",
+        "help-about",
+        "help-contact",
+        "help-faq"
+      ],
+      "next_action": "only expose after runtime 200/canonical/hreflang eligibility is proven"
+    }
+  ],
+  "recommended_next_tasks": [
+    "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01",
+    "Human review for brand/careers/charter/foundation/policies English drafts",
+    "Keep sitemap/llms P0 hard-404 exclusions closed until authority and runtime gates pass"
+  ],
+  "final_decision": "content_asset_batch_import_package_ready_with_human_review_deferred_assets",
+  "next_task": "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01"
+}

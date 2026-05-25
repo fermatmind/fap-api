@@ -24791,6 +24791,171 @@
           "summary": "Fixed verify-mbti failure with narrow DB migration portability allowlist; local targeted tests and pint pass."
         }
       ]
+    },
+    "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01": {
+      "status": "local_validation_passed",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-content-asset-batch-01",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-PARITY-P0-01",
+        "GLOBAL-EN-ZH-PARITY-FOOTER-NAV-PARITY-01"
+      ],
+      "title": "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01 content help policy import package",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "evidence": "GLOBAL-EN-ZH-PARITY-P0-01 is merged in fap-api main; GLOBAL-EN-ZH-PARITY-FOOTER-NAV-PARITY-01 merged in fap-web PR #904 with merge commit f99aa4cf33ccfad763225d86116b7305de4ebce7."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "changed_files": [
+            "backend/docs/seo/generated/global-en-zh-content-asset-batch-01.v1.json",
+            "backend/docs/seo/global-en-zh-content-asset-batch-01.md",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhContentAssetBatch01Test.php",
+            "docs/codex/pr-train-state.json",
+            "docs/codex/pr-train.yaml"
+          ],
+          "evidence": "Changed files are limited to current content asset batch report, generated JSON, focused SeoIntel test, and authorized manifest/state entries."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No deploy, CMS mutation, Search Channel action, URL submission, production migration, fap-web edit, or content publication performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "php artisan test --filter=GlobalEnZhContentAssetBatch01 --no-ansi",
+            "php artisan route:list --no-ansi",
+            "vendor/bin/pint --test",
+            "composer validate --strict",
+            "composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-asset-batch-01.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 yaml parse for docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "evidence": "Focused SeoIntel test passed 3 tests / 46 assertions; route:list passed; Pint passed 3555 files; composer validate/audit passed; JSON/YAML parse and diff checks passed."
+        },
+        "github_required_checks": {
+          "status": "pending"
+        }
+      },
+      "history": [
+        {
+          "at": "2026-05-25T21:15:38+08:00",
+          "status": "in_progress",
+          "summary": "Initialized current content/help/policy asset batch PR and added authorized remaining train manifest/state entries without implementing future PR scopes."
+        },
+        {
+          "at": "2026-05-25T21:16:59+08:00",
+          "status": "local_validation_passed",
+          "summary": "Current content/help/policy asset batch passed local validation and scope checks."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01": {
+      "status": "planned",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-article-counterpart-batch-01",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01"
+      ],
+      "title": "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01 article counterpart controlled batch",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {},
+      "history": [
+        {
+          "at": "2026-05-25T21:15:38+08:00",
+          "status": "planned",
+          "summary": "Planned manifest/state entry only; no implementation in current PR."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01": {
+      "status": "planned",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-career-asset-batch-01",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01"
+      ],
+      "title": "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01 career guides jobs parity batch",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {},
+      "history": [
+        {
+          "at": "2026-05-25T21:15:38+08:00",
+          "status": "planned",
+          "summary": "Planned manifest/state entry only; no implementation in current PR."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01": {
+      "status": "planned",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-result-media-asset-batch-01",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01"
+      ],
+      "title": "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01 result report media parity batch",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {},
+      "history": [
+        {
+          "at": "2026-05-25T21:15:38+08:00",
+          "status": "planned",
+          "summary": "Planned manifest/state entry only; no implementation in current PR."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01": {
+      "status": "planned",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-final-verify-01",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01"
+      ],
+      "title": "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01 full site parity verification",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {},
+      "history": [
+        {
+          "at": "2026-05-25T21:15:38+08:00",
+          "status": "planned",
+          "summary": "Planned manifest/state entry only; no implementation in current PR."
+        }
+      ]
     }
   },
   "RESULT-EN-PARITY-04": {
