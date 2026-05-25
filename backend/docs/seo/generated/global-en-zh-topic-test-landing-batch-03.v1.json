@@ -1,0 +1,319 @@
+{
+  "schema_version": "global-en-zh-topic-test-landing-batch-03.v1",
+  "task": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03",
+  "generated_at": "2026-05-26T01:58:23+08:00",
+  "final_decision": "topic_test_landing_translation_readiness_completed_with_deferred_authority_gaps",
+  "source_matrix_task": "GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00",
+  "total_items": 21,
+  "topic_items_count": 10,
+  "test_landing_items_count": 11,
+  "existing_authority_review_count": 15,
+  "deferred_missing_authority_count": 6,
+  "generated_draft_copy_count": 0,
+  "human_review_required_count": 21,
+  "claim_review_required_count": 6,
+  "draft_package_sitemap_eligible_count": 0,
+  "draft_package_llms_eligible_count": 0,
+  "draft_package_footer_or_nav_eligible_count": 0,
+  "draft_package_jsonld_eligible_count": 0,
+  "covered_keys": [
+    "mbti",
+    "big-five",
+    "iq-eq",
+    "riasec",
+    "iq",
+    "eq",
+    "clinical-screening",
+    "career",
+    "personality",
+    "mbti-personality-test-16-personality-types",
+    "big-five-personality-test-ocean-model",
+    "holland-career-interest-test-riasec",
+    "iq-test-intelligence-quotient-assessment",
+    "eq-test-emotional-intelligence-assessment",
+    "depression-screening-test-standard-edition",
+    "clinical-depression-anxiety-assessment-professional-edition",
+    "enneagram-personality-test-nine-types",
+    "landing_surface:career_home",
+    "landing_surface:tests",
+    "landing_surface:tests_category_career",
+    "landing_surface:tests_category_personality"
+  ],
+  "deferred_items": [
+    {
+      "topic_or_test_key": "riasec",
+      "asset_family": "topics",
+      "reason": "No backend topic authority exists for this key in the matrix; do not generate placeholder pages, FAQ, CTA, method-boundary copy, JSON-LD, or OG/alt assets until authority source is created and reviewed."
+    },
+    {
+      "topic_or_test_key": "iq",
+      "asset_family": "topics",
+      "reason": "No backend topic authority exists for this key in the matrix; do not generate placeholder pages, FAQ, CTA, method-boundary copy, JSON-LD, or OG/alt assets until authority source is created and reviewed."
+    },
+    {
+      "topic_or_test_key": "eq",
+      "asset_family": "topics",
+      "reason": "No backend topic authority exists for this key in the matrix; do not generate placeholder pages, FAQ, CTA, method-boundary copy, JSON-LD, or OG/alt assets until authority source is created and reviewed."
+    },
+    {
+      "topic_or_test_key": "clinical-screening",
+      "asset_family": "topics",
+      "reason": "No backend topic authority exists for this key in the matrix; do not generate placeholder pages, FAQ, CTA, method-boundary copy, JSON-LD, or OG/alt assets until authority source is created and reviewed."
+    },
+    {
+      "topic_or_test_key": "career",
+      "asset_family": "topics",
+      "reason": "No backend topic authority exists for this key in the matrix; do not generate placeholder pages, FAQ, CTA, method-boundary copy, JSON-LD, or OG/alt assets until authority source is created and reviewed."
+    },
+    {
+      "topic_or_test_key": "personality",
+      "asset_family": "topics",
+      "reason": "No backend topic authority exists for this key in the matrix; do not generate placeholder pages, FAQ, CTA, method-boundary copy, JSON-LD, or OG/alt assets until authority source is created and reviewed."
+    }
+  ],
+  "jsonld_grounding_findings": [
+    {
+      "topic_or_test_key": "mbti",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "big-five",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "iq-eq",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "riasec",
+      "current_runtime_jsonld_eligible": false,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Not eligible until backend authority exists and visible content is reviewed."
+    },
+    {
+      "topic_or_test_key": "iq",
+      "current_runtime_jsonld_eligible": false,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Not eligible until backend authority exists and visible content is reviewed."
+    },
+    {
+      "topic_or_test_key": "eq",
+      "current_runtime_jsonld_eligible": false,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Not eligible until backend authority exists and visible content is reviewed."
+    },
+    {
+      "topic_or_test_key": "clinical-screening",
+      "current_runtime_jsonld_eligible": false,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Not eligible until backend authority exists and visible content is reviewed."
+    },
+    {
+      "topic_or_test_key": "career",
+      "current_runtime_jsonld_eligible": false,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Not eligible until backend authority exists and visible content is reviewed."
+    },
+    {
+      "topic_or_test_key": "personality",
+      "current_runtime_jsonld_eligible": false,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Not eligible until backend authority exists and visible content is reviewed."
+    },
+    {
+      "topic_or_test_key": "mbti-personality-test-16-personality-types",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "big-five-personality-test-ocean-model",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "holland-career-interest-test-riasec",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "iq-test-intelligence-quotient-assessment",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "eq-test-emotional-intelligence-assessment",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "depression-screening-test-standard-edition",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "clinical-depression-anxiety-assessment-professional-edition",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "enneagram-personality-test-nine-types",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "landing_surface:career_home",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "landing_surface:tests",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "landing_surface:tests_category_career",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    },
+    {
+      "topic_or_test_key": "landing_surface:tests_category_personality",
+      "current_runtime_jsonld_eligible": true,
+      "draft_package_jsonld_eligible": false,
+      "notes": "Eligible only if visible content and backend authority remain aligned; this package activates no new JSON-LD."
+    }
+  ],
+  "claim_boundary_findings": [
+    {
+      "topic_or_test_key": "mbti",
+      "claim_boundary_state": "pass_claim_boundary_preserved",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "big-five",
+      "claim_boundary_state": "pass_claim_boundary_preserved",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "iq-eq",
+      "claim_boundary_state": "pass_claim_boundary_preserved",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "riasec",
+      "claim_boundary_state": "needs_claim_boundary_review",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "iq",
+      "claim_boundary_state": "pass_claim_boundary_preserved",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "eq",
+      "claim_boundary_state": "pass_claim_boundary_preserved",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "clinical-screening",
+      "claim_boundary_state": "needs_claim_boundary_review",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "career",
+      "claim_boundary_state": "needs_claim_boundary_review",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "personality",
+      "claim_boundary_state": "pass_claim_boundary_preserved",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "mbti-personality-test-16-personality-types",
+      "claim_boundary_state": "pass_with_boundary: personality type interpretation; decision support only",
+      "notes": "Personality type interpretation only; do not frame type as destiny, diagnosis, or a hiring signal."
+    },
+    {
+      "topic_or_test_key": "big-five-personality-test-ocean-model",
+      "claim_boundary_state": "pass_with_boundary: trait-vector workstyle explanation only",
+      "notes": "Trait-vector and workstyle explanation only; do not claim job performance prediction."
+    },
+    {
+      "topic_or_test_key": "holland-career-interest-test-riasec",
+      "claim_boundary_state": "pass_with_boundary: interest signal; not precise career recommendation",
+      "notes": "Career-interest signal and exploratory direction only; no precise career recommendation or best-career ranking."
+    },
+    {
+      "topic_or_test_key": "iq-test-intelligence-quotient-assessment",
+      "claim_boundary_state": "pass_with_boundary: online estimate; not clinical IQ diagnosis",
+      "notes": "Online reasoning estimate only; not a clinical IQ diagnosis or official intelligence certification."
+    },
+    {
+      "topic_or_test_key": "eq-test-emotional-intelligence-assessment",
+      "claim_boundary_state": "pass_with_boundary: self-assessment; not diagnosis or guaranteed outcome",
+      "notes": "Self-assessment and reflection only; no diagnosis or guaranteed outcome."
+    },
+    {
+      "topic_or_test_key": "depression-screening-test-standard-edition",
+      "claim_boundary_state": "pass_with_boundary: screening; non-diagnostic",
+      "notes": "Screening and self-observation only; non-diagnostic and not treatment guidance."
+    },
+    {
+      "topic_or_test_key": "clinical-depression-anxiety-assessment-professional-edition",
+      "claim_boundary_state": "pass_with_boundary: screening; non-diagnostic and professional-help bounded",
+      "notes": "Screening only with professional-help boundaries; no diagnosis, treatment, or cure claims."
+    },
+    {
+      "topic_or_test_key": "enneagram-personality-test-nine-types",
+      "claim_boundary_state": "pass_with_boundary: personality interpretation; no deterministic claims",
+      "notes": "Personality interpretation only; no deterministic type claims."
+    },
+    {
+      "topic_or_test_key": "landing_surface:career_home",
+      "claim_boundary_state": "pass_claim_boundary_preserved",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "landing_surface:tests",
+      "claim_boundary_state": "pass_claim_boundary_preserved",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "landing_surface:tests_category_career",
+      "claim_boundary_state": "pass_claim_boundary_preserved",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    },
+    {
+      "topic_or_test_key": "landing_surface:tests_category_personality",
+      "claim_boundary_state": "pass_claim_boundary_preserved",
+      "notes": "Preserve existing claim boundaries; do not add unsupported FAQ, CTA, schema, or marketing copy."
+    }
+  ],
+  "import_package_path": "backend/docs/seo/import-packages/global-en-zh-topic-test-landing-batch-03.import.v1.json",
+  "generated_markdown_report_path": "backend/docs/seo/global-en-zh-topic-test-landing-batch-03.md",
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_pseo_generation": true,
+  "no_frontend_fallback_authority": true,
+  "next_task": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04"
+}
