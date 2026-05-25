@@ -1,0 +1,151 @@
+{
+  "schema_version": "global-en-zh-article-counterpart-batch-01.v1",
+  "task": "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01",
+  "source_authority": "backend_cms_article_baseline",
+  "based_on": [
+    "EN-PARITY-04 article counterpart import package",
+    "GLOBAL-EN-ZH-PARITY-SCAN-00",
+    "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01"
+  ],
+  "no_mutation_performed": true,
+  "cms_mutation_performed": false,
+  "production_migration_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "auto_publish_performed": false,
+  "frontend_fallback_authority_used": false,
+  "mass_english_generation_performed": false,
+  "substantial_english_prose_generated": false,
+  "draft_articles_exposed_in_sitemap_llms": false,
+  "batch_policy": {
+    "mode": "controlled_import_package_and_deferred_list",
+    "max_publish_count_by_this_pr": 0,
+    "human_review_required_for_new_prose": true,
+    "draft_exposure_allowed_in_sitemap_llms": false,
+    "unsupported_research_or_stat_claims_allowed": false
+  },
+  "article_summary": {
+    "repo_baseline_en_articles": 20,
+    "repo_baseline_zh_articles": 25,
+    "en_parity_target_counterparts_ready_for_review": 10,
+    "deferred_missing_english_counterparts": 6,
+    "published_by_this_pr": 0,
+    "sitemap_llms_exposure_added_by_this_pr": 0
+  },
+  "import_ready_counterparts": [
+    {
+      "source_zh_slug": "big-five-growth-guide",
+      "proposed_en_slug": "big-five-growth-guide",
+      "counterpart_key": "article:big-five-growth-guide",
+      "status": "import_ready_review_required",
+      "claim_boundary": "non_diagnostic_growth_guidance",
+      "sitemap_llms_exposure_eligible": "only_after_backend_published_indexable_authority"
+    },
+    {
+      "source_zh_slug": "big-five-narrative-portrait",
+      "proposed_en_slug": "big-five-narrative-portrait",
+      "counterpart_key": "article:big-five-narrative-portrait",
+      "status": "import_ready_review_required",
+      "claim_boundary": "non_diagnostic_trait_description",
+      "sitemap_llms_exposure_eligible": "only_after_backend_published_indexable_authority"
+    },
+    {
+      "source_zh_slug": "big-five-tool-guide",
+      "proposed_en_slug": "big-five-tool-guide",
+      "counterpart_key": "article:big-five-tool-guide",
+      "status": "import_ready_review_required",
+      "claim_boundary": "tool_explanation_not_diagnosis_or_career_prediction",
+      "sitemap_llms_exposure_eligible": "only_after_backend_published_indexable_authority"
+    },
+    {
+      "source_zh_slug": "eq-test-tool-guide",
+      "proposed_en_slug": "eq-test-tool-guide",
+      "counterpart_key": "article:eq-test-tool-guide",
+      "status": "import_ready_review_required",
+      "claim_boundary": "self_reflection_not_clinical_assessment",
+      "sitemap_llms_exposure_eligible": "only_after_backend_published_indexable_authority"
+    },
+    {
+      "source_zh_slug": "iq-test-growth-guide",
+      "proposed_en_slug": "iq-test-growth-guide",
+      "counterpart_key": "article:iq-test-growth-guide",
+      "status": "import_ready_review_required",
+      "claim_boundary": "educational_growth_framing_no_fixed_intelligence_claim",
+      "sitemap_llms_exposure_eligible": "only_after_backend_published_indexable_authority"
+    },
+    {
+      "source_zh_slug": "iq-test-narrative-portrait",
+      "proposed_en_slug": "iq-test-narrative-portrait",
+      "counterpart_key": "article:iq-test-narrative-portrait",
+      "status": "import_ready_review_required",
+      "claim_boundary": "non_diagnostic_ability_narrative",
+      "sitemap_llms_exposure_eligible": "only_after_backend_published_indexable_authority"
+    },
+    {
+      "source_zh_slug": "iq-test-tool-guide",
+      "proposed_en_slug": "iq-test-tool-guide",
+      "counterpart_key": "article:iq-test-tool-guide",
+      "status": "import_ready_review_required",
+      "claim_boundary": "tool_guide_no_clinical_or_hiring_claim",
+      "sitemap_llms_exposure_eligible": "only_after_backend_published_indexable_authority"
+    },
+    {
+      "source_zh_slug": "mbti-basics",
+      "proposed_en_slug": "mbti-basics",
+      "counterpart_key": "article:mbti-basics",
+      "status": "import_ready_review_required",
+      "claim_boundary": "personality_framework_intro_not_diagnosis",
+      "sitemap_llms_exposure_eligible": "only_after_backend_published_indexable_authority"
+    },
+    {
+      "source_zh_slug": "mbti-growth-guide",
+      "proposed_en_slug": "mbti-growth-guide",
+      "counterpart_key": "article:mbti-growth-guide",
+      "status": "import_ready_review_required",
+      "claim_boundary": "growth_guidance_not_prediction",
+      "sitemap_llms_exposure_eligible": "only_after_backend_published_indexable_authority"
+    },
+    {
+      "source_zh_slug": "mbti-narrative-portrait",
+      "proposed_en_slug": "mbti-narrative-portrait",
+      "counterpart_key": "article:mbti-narrative-portrait",
+      "status": "import_ready_review_required",
+      "claim_boundary": "narrative_portrait_not_diagnosis_or_fate",
+      "sitemap_llms_exposure_eligible": "only_after_backend_published_indexable_authority"
+    }
+  ],
+  "deferred_missing_english_counterparts": [
+    "are-infj-men-rare-or-socially-silenced",
+    "best-valentines-date-by-personality-and-relationship-science",
+    "childhood-dream-job-still-shapes-career-choice",
+    "how-16-personality-types-talk-to-an-ai-coach",
+    "how-personality-shapes-attitude-toward-ai",
+    "which-love-script-fits-you-best"
+  ],
+  "exposure_guard": {
+    "draft_articles_must_not_enter_sitemap": true,
+    "draft_articles_must_not_enter_llms": true,
+    "frontend_fallback_must_not_be_article_authority": true,
+    "missing_counterparts_must_remain_explicit": true,
+    "published_indexable_authority_required_before_public_exposure": true
+  },
+  "forbidden_claim_hits": [],
+  "remaining_gaps": [
+    {
+      "gap": "six_editorial_articles_need_human_reviewed_english_drafts",
+      "status": "deferred_human_review"
+    },
+    {
+      "gap": "public_exposure_requires_backend_published_indexable_authority",
+      "status": "not_changed_by_this_pr"
+    }
+  ],
+  "recommended_next_tasks": [
+    "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01",
+    "Human-reviewed English draft package for six deferred editorial article counterparts",
+    "Keep draft/import-only article URLs out of sitemap/llms until backend Article authority is published and indexable"
+  ],
+  "final_decision": "article_counterpart_batch_ready_with_deferred_human_review_assets",
+  "next_task": "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01"
+}

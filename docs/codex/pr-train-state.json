@@ -24867,7 +24867,7 @@
       ]
     },
     "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01": {
-      "status": "planned",
+      "status": "pr_open",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-article-counterpart-batch-01",
       "base": "main",
@@ -24875,18 +24875,72 @@
         "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01"
       ],
       "title": "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01 article counterpart controlled batch",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "15abe18b480a48e3c449ea828ae7d170d16f86b2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1685",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "checks": {},
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "evidence": "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01 merged as fap-api PR #1683 with merge commit ff9b062d72aa3076289c2f8a2d223e9254d85839."
+        },
+        "scope_boundary": {
+          "status": "passed",
+          "changed_files": [
+            "backend/docs/seo/global-en-zh-article-counterpart-batch-01.md",
+            "backend/docs/seo/generated/global-en-zh-article-counterpart-batch-01.v1.json",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhArticleCounterpartBatch01Test.php",
+            "docs/codex/pr-train-state.json"
+          ],
+          "evidence": "Scope is limited to article counterpart controlled batch report, generated JSON, focused test, and current PR ledger state."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No deploy, CMS mutation, Search Channel action, URL submission, production migration, fap-web edit, or article publication performed."
+        },
+        "local_validation": {
+          "status": "passed",
+          "commands": [
+            "php artisan test --filter=GlobalEnZhArticleCounterpartBatch01 --no-ansi",
+            "php artisan route:list --no-ansi",
+            "vendor/bin/pint --test",
+            "composer validate --strict",
+            "composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-article-counterpart-batch-01.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "evidence": "All local validation commands passed before staging."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR #1685 opened; GitHub checks pending."
+        }
+      },
       "history": [
         {
           "at": "2026-05-25T21:15:38+08:00",
           "status": "planned",
           "summary": "Planned manifest/state entry only; no implementation in current PR."
+        },
+        {
+          "at": "2026-05-25T21:39:34+08:00",
+          "status": "in_progress",
+          "summary": "Started controlled article counterpart batch; no article publishing or prose generation."
+        },
+        {
+          "at": "2026-05-25T21:45:48+08:00",
+          "status": "local_validation_passed",
+          "summary": "Article counterpart batch report, generated JSON, and focused test passed local validation; no publishing or CMS mutation performed."
+        },
+        {
+          "at": "2026-05-25T21:47:06+08:00",
+          "status": "pr_open",
+          "summary": "Opened fap-api PR #1685 for article counterpart controlled batch."
         }
       ]
     },
