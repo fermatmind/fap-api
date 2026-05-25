@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T04:07:48.672896+00:00",
+  "updated_at": "2026-05-25T04:09:12.192416+00:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18455,10 +18455,10 @@
     "EN-PARITY-00": {
       "repo": "fap-api",
       "branch": "codex/en-parity-00-full-site-inventory",
-      "status": "local_validation_passed",
+      "status": "pr_open_github_checks_pending",
       "depends_on": [],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "8c170e79fe435d660b8cd69a5d200d3aa8dbf888",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1663",
       "checks": {
         "scope_boundary": {
           "status": "pass",
@@ -18488,7 +18488,8 @@
           "command": "python3 -c yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json"
         },
         "github_required_checks": {
-          "status": "pending"
+          "status": "pending",
+          "evidence": "PR #1663 is open; GitHub checks are pending."
         },
         "diff_check": {
           "status": "pass",
@@ -18526,6 +18527,11 @@
           "at": "2026-05-25T04:07:48.672247+00:00",
           "status": "local_validation_passed",
           "summary": "EN-PARITY-00 focused test, route list, Pint, generated JSON parse, manifest/state parse, and diff check passed locally."
+        },
+        {
+          "at": "2026-05-25T04:09:12.192169+00:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1663 for EN-PARITY-00 full-site bilingual inventory; waiting for GitHub checks."
         }
       ]
     }
