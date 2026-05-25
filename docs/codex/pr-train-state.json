@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T13:34:00+08:00",
+  "updated_at": "2026-05-25T13:53:01+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18924,7 +18924,7 @@
       "depends_on": [
         "EN-PARITY-01"
       ],
-      "commit_sha": "5a37feb01672bdb2bc2e4b8c8f9e525817d4cc22",
+      "commit_sha": "00ea3405",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1667",
       "checks": {
         "dependency_en_parity_01": {
@@ -18962,7 +18962,7 @@
         },
         "github_required_checks": {
           "status": "pending_after_rebase",
-          "evidence": "PR #1667 was rebased onto origin/main after resolving docs/codex/pr-train-state.json conflict; GitHub checks must rerun on the rebased head."
+          "evidence": "PR #1667 was rebased onto origin/main after PR #1669 merged; GitHub checks must rerun on the rebased head."
         }
       },
       "failure_reason": null,
@@ -18995,6 +18995,11 @@
           "at": "2026-05-25T13:34:00+08:00",
           "status": "rebased_conflict_resolved_pending_push",
           "summary": "Rebased EN-PARITY-02 onto origin/main after PR #1668 merged. Resolved pr-train-state ledger by preserving EN-PARITY-01, RESULT-EN-PARITY-00, RESULT-EN-PARITY-01 merged states and EN-PARITY-02 current PR state."
+        },
+        {
+          "at": "2026-05-25T13:53:01+08:00",
+          "status": "rebased_conflict_resolved_pending_push",
+          "summary": "Rebased EN-PARITY-02 onto origin/main after PR #1669 merged. Resolved pr-train-state ledger by preserving current main entries, including RESULT-EN-PARITY-02, and keeping EN-PARITY-02 current PR state."
         }
       ]
     }
