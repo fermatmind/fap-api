@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T11:54:00+08:00",
+  "updated_at": "2026-05-25T11:55:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18288,11 +18288,11 @@
     "SEARCH-CHANNEL-LIVE-ZH-MBTI-01": {
       "repo": "fap-api",
       "branch": "codex/search-channel-live-zh-mbti-01-preflight",
-      "status": "in_progress_rerun_after_keylocation_fix",
+      "status": "local_checks_passed_rerun_ready_for_pr",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW"
       ],
-      "commit_sha": "ede7c8a4fe72a89926a08d3dc04f0163999db36a",
+      "commit_sha": "467b4caf1e7e4885b95c1215bc3c38292c628c6a",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1660",
       "checks": {
         "dependency": {
@@ -18365,6 +18365,11 @@
           "at": "2026-05-25T11:54:00+08:00",
           "status": "local_checks_passed_rerun",
           "summary": "Focused preflight test, route list, Pint, generated JSON/state parse, manifest parse, and diff checks passed for the rerun-ready report."
+        },
+        {
+          "at": "2026-05-25T11:55:00+08:00",
+          "status": "commit_created_rerun",
+          "summary": "Created scoped rerun commit 467b4caf1e7e4885b95c1215bc3c38292c628c6a with keyLocation-ready live preflight report updates."
         }
       ]
     },
