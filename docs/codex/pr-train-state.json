@@ -20010,12 +20010,12 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-article-translation-batch-02",
       "base": "main",
-      "status": "pr_opened",
+      "status": "merged",
       "depends_on": [
         "GLOBAL-EN-ZH-CONTENT-PAGES-TRANSLATION-BATCH-01"
       ],
       "title": "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02 article English counterpart draft package",
-      "commit_sha": "955a08a1e4722211c5f192de699b027980b59d01",
+      "commit_sha": "c5e335ae37f969991ad8be0200a0da0d4b3938ec",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1693",
       "checks": {
         "manifest_registration": {
@@ -20059,6 +20059,10 @@
         "pr_opened": {
           "status": "pass",
           "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1693 from codex/global-en-zh-article-translation-batch-02 after local validation passed."
+        },
+        "github_checks": {
+          "status": "pass",
+          "evidence": "PR #1693 merged after required GitHub checks succeeded and mergeStateStatus was CLEAN; origin/main contains merge commit c5e335ae37f969991ad8be0200a0da0d4b3938ec."
         }
       },
       "scope": {
@@ -20082,9 +20086,9 @@
         "frontend_fallback_authority": false
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T17:53:52Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "next_task": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03",
       "events": [
@@ -20107,6 +20111,11 @@
           "at": "2026-05-26T01:47:36+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1693 for Batch-02 after local validation passed."
+        },
+        {
+          "at": "2026-05-26T01:58:23+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled Batch-02 after PR #1693 merge; remote branch deleted and local task branch cleanup completed before Batch-03 continued."
         }
       ]
     },
@@ -20114,17 +20123,55 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-topic-test-landing-batch-03",
       "base": "main",
-      "status": "manifest_registered",
+      "status": "pr_opened",
       "depends_on": [
         "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02"
       ],
-      "title": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03 topic and test landing authority translation/readiness batch",
-      "commit_sha": null,
-      "pr_url": null,
+      "title": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03 topic test landing English parity draft package",
+      "commit_sha": "24d5b4d7f122c1c25c133f0caaa698d1dea5b754",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1694",
       "checks": {
         "manifest_registration": {
           "status": "pass",
           "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        },
+        "scope_boundary": {
+          "status": "pending_validation",
+          "changed_files": [
+            "backend/docs/seo/global-en-zh-topic-test-landing-batch-03.md",
+            "backend/docs/seo/generated/global-en-zh-topic-test-landing-batch-03.v1.json",
+            "backend/docs/seo/import-packages/global-en-zh-topic-test-landing-batch-03.import.v1.json",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhTopicTestLandingBatch03Test.php",
+            "docs/codex/pr-train.yaml",
+            "docs/codex/pr-train-state.json"
+          ],
+          "evidence": "Generated Batch-03 report, generated summary, readiness import package, focused SeoIntel test, and current task state ledger only."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No CMS mutation, publish, deploy, Search Channel action, URL submission, pSEO generation, fap-web mutation, env/DNS/nginx edit, production migration, raw log read, or production user data access performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=GlobalEnZhTopicTestLandingBatch03 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-topic-test-landing-batch-03.v1.json >/dev/null",
+            "python3 -m json.tool backend/docs/seo/import-packages/global-en-zh-topic-test-landing-batch-03.import.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check",
+            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          ],
+          "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3566 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed."
+        },
+        "pr_opened": {
+          "status": "pass",
+          "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1694 from codex/global-en-zh-topic-test-landing-batch-03 after local validation passed."
         }
       },
       "scope": {
@@ -20160,6 +20207,21 @@
           "at": "2026-05-26T01:05:00+08:00",
           "status": "manifest_registered",
           "summary": "Registered topic/test landing translation-readiness batch with backend authority and no frontend fallback scope."
+        },
+        {
+          "at": "2026-05-26T01:58:23+08:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Generated Batch-03 topic/test landing readiness package, generated summary, Markdown report, focused test, and Batch-02 merge reconciliation."
+        },
+        {
+          "at": "2026-05-26T01:59:25+08:00",
+          "status": "local_validation_passed",
+          "summary": "Batch-03 focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff checks, and fap-web reference status passed."
+        },
+        {
+          "at": "2026-05-26T02:00:39+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1694 for Batch-03 after local validation passed."
         }
       ]
     },
