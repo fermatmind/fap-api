@@ -7205,6 +7205,49 @@ prs:
     human_review_required: false
     production_approval_required: false
 
+  - id: GLOBAL-EN-ZH-PARITY-SCAN-00
+    repo: fap-api
+    depends_on: []
+    branch: codex/global-en-zh-parity-scan-00
+    base: main
+    title: "docs(seo-intel): add global EN/ZH parity master scan"
+    train_scope: global_en_zh_parity_scan
+    risk_level: read_only_scan
+    scope:
+      - Land the read-only full-site EN/ZH parity master scan report.
+      - Land the generated scan JSON artifact.
+      - Add a focused SeoIntel test for the generated artifact contract.
+      - Record only this scan task in the PR-train state ledger.
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-parity-scan-00.md
+      - backend/docs/seo/generated/global-en-zh-parity-scan-00.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhParityScan00Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Do not implement fixes.
+      - Do not mutate CMS or production data.
+      - Do not deploy.
+      - Do not submit URLs or call external search APIs.
+      - Do not commit fap-web changes.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhParityScan00 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-parity-scan-00.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 yaml parse for docs/codex/pr-train.yaml
+      - git diff --check
+      - git diff --cached --check
+      - cd /Users/rainie/Desktop/GitHub/fap-web && git status --short
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    scheduler_activation: false
+    external_api_live_activation: false
+    production_approval_required: false
+
   - id: SEO-GROWTH-MBTI-ACTION-01D-SCAN-00
     repo: fap-api
     depends_on: []

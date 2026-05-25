@@ -1,0 +1,1673 @@
+{
+  "schema_version": "global-en-zh-parity-scan-00.v1",
+  "task": "GLOBAL-EN-ZH-PARITY-SCAN-00",
+  "scanned_at": "2026-05-25T11:35:51.542211+00:00",
+  "final_decision": "global_en_zh_parity_scan_completed_ready_for_p0_fix_train",
+  "backend_deployed_sha": "04a100f10b95023e160d362de29a297c7c937908",
+  "frontend_deployed_sha": "b14e1b038f838ffbcafd02ee1935291b213d6948",
+  "api_repo_sha": "04a100f10b95023e160d362de29a297c7c937908",
+  "web_repo_sha": "b14e1b038f838ffbcafd02ee1935291b213d6948",
+  "live_target": "https://fermatmind.com",
+  "scan_lanes": [
+    "A inventory",
+    "B backend authority",
+    "C frontend runtime/source reference",
+    "D production HTTP/runtime",
+    "E Playwright visual partial",
+    "F content assets",
+    "G result/report assets",
+    "H career/recommendation boundary",
+    "I discoverability/GEO",
+    "J staging/search sidecar"
+  ],
+  "scanned_url_count": 160,
+  "public_indexable_url_count": 73,
+  "private_noindex_url_count": 20,
+  "page_family_counts": {
+    "home": 3,
+    "test_detail": 16,
+    "topic": 8,
+    "article": 26,
+    "career_guide": 22,
+    "career_job": 45,
+    "career_recommendation": 2,
+    "personality": 2,
+    "sitemap/llms": 4,
+    "content/help/policy": 26,
+    "unknown": 2,
+    "test_hub": 4
+  },
+  "inventory_sources": [
+    "production runtime bounded HTTP scan",
+    "production sitemap.xml observation",
+    "production llms.txt and llms-full.txt observation",
+    "fap-api EN-PARITY generated artifacts",
+    "fap-api RESULT-EN-PARITY generated artifacts",
+    "fap-web route/source reference grep",
+    "Playwright core H1 overflow scan",
+    "post-deploy parity smoke evidence"
+  ],
+  "public_page_parity_summary": {
+    "runtime_locale_counts": {
+      "zh": 116,
+      "en": 40,
+      "unknown": 4
+    },
+    "runtime_status_counts": {
+      "200": 75,
+      "0": 67,
+      "404": 18
+    },
+    "core_rows": [
+      {
+        "path": "/",
+        "status": 200,
+        "canonical": "https://fermatmind.com",
+        "robots": "index, follow",
+        "title": "FermatMind / 费马测试",
+        "description": "费马测试提供清晰、可继续使用的测评结果，帮助你看清人格、能力与职业方向。",
+        "h1": "看清自己，走好每一步",
+        "htmlLang": "zh",
+        "ogUrl": "https://fermatmind.com",
+        "jsonldTypes": [
+          "WebPage",
+          "ItemList",
+          "Organization"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/en",
+        "status": 200,
+        "canonical": "https://fermatmind.com/en",
+        "robots": "index, follow",
+        "title": "FermatMind",
+        "description": "FermatMind provides clear, reusable assessment results for personality, ability, and career direction.",
+        "h1": "Understand yourself before the next step.",
+        "htmlLang": "en",
+        "ogUrl": "https://fermatmind.com/en",
+        "jsonldTypes": [
+          "WebPage",
+          "ItemList",
+          "Organization"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/zh",
+        "status": 200,
+        "canonical": "https://fermatmind.com",
+        "robots": "index, follow",
+        "title": "FermatMind / 费马测试",
+        "description": "费马测试提供清晰、可继续使用的测评结果，帮助你看清人格、能力与职业方向。",
+        "h1": "看清自己，走好每一步",
+        "htmlLang": "zh",
+        "ogUrl": "https://fermatmind.com",
+        "jsonldTypes": [
+          "WebPage",
+          "ItemList",
+          "Organization"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/en/tests/mbti-personality-test-16-personality-types",
+        "status": 200,
+        "canonical": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+        "robots": "index, follow",
+        "title": "MBTI Personality Test (16 Personality Types) | FermatMind",
+        "description": "Discover your MBTI profile across 16 personality types with a structured assessment.",
+        "h1": "MBTI Personality Test 【16 Personality Types】",
+        "htmlLang": "en",
+        "ogUrl": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+        "jsonldTypes": [
+          "WebPage",
+          "BreadcrumbList",
+          "SoftwareApplication",
+          "FAQPage"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/zh/tests/mbti-personality-test-16-personality-types",
+        "status": 200,
+        "canonical": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+        "robots": "index, follow",
+        "title": "MBTI 性格测试（16型人格测试） | FermatMind",
+        "description": "通过结构化测评了解你的 MBTI 类型、偏好强度与沟通协作方式。",
+        "h1": "MBTI 性格测试【16型人格】",
+        "htmlLang": "zh",
+        "ogUrl": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+        "jsonldTypes": [
+          "WebPage",
+          "BreadcrumbList",
+          "SoftwareApplication",
+          "FAQPage"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/en/tests/holland-career-interest-test-riasec",
+        "status": 200,
+        "canonical": "https://fermatmind.com/en/tests/holland-career-interest-test-riasec",
+        "robots": "index, follow",
+        "title": "Holland Career Interest Test (RIASEC) | FermatMind",
+        "description": "Discover your Holland Code across Realistic, Investigative, Artistic, Social, Enterprising, and Conventional interests.",
+        "h1": "Holland Career Interest Test 【RIASEC】",
+        "htmlLang": "en",
+        "ogUrl": "https://fermatmind.com/en/tests/holland-career-interest-test-riasec",
+        "jsonldTypes": [
+          "WebPage",
+          "BreadcrumbList",
+          "SoftwareApplication",
+          "FAQPage"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/zh/tests/holland-career-interest-test-riasec",
+        "status": 200,
+        "canonical": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+        "robots": "index, follow",
+        "title": "霍兰德职业兴趣测试（RIASEC） | FermatMind",
+        "description": "通过结构化测评了解你的现实型、研究型、艺术型、社会型、企业型与常规型兴趣排序。",
+        "h1": "霍兰德职业兴趣测试【RIASEC】",
+        "htmlLang": "zh",
+        "ogUrl": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+        "jsonldTypes": [
+          "WebPage",
+          "BreadcrumbList",
+          "SoftwareApplication",
+          "FAQPage"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/en/topics/mbti",
+        "status": 200,
+        "canonical": "https://fermatmind.com/en/topics/mbti",
+        "robots": "index, follow",
+        "title": "MBTI topic hub | FermatMind",
+        "description": "Connect MBTI articles, career guides, and recommendation profiles in one internal-linking hub.",
+        "h1": "MBTI Topic Cluster",
+        "htmlLang": "en",
+        "ogUrl": "https://fermatmind.com/en/topics/mbti",
+        "jsonldTypes": [
+          "CollectionPage",
+          "WebPage",
+          "BreadcrumbList"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/zh/topics/mbti",
+        "status": 200,
+        "canonical": "https://fermatmind.com/zh/topics/mbti",
+        "robots": "index, follow",
+        "title": "MBTI 主题中心 | FermatMind",
+        "description": "把 MBTI 文章、职业发展内容与推荐画像聚合到一个内部链接中心。",
+        "h1": "MBTI 主题内容聚合",
+        "htmlLang": "zh",
+        "ogUrl": "https://fermatmind.com/zh/topics/mbti",
+        "jsonldTypes": [
+          "CollectionPage",
+          "WebPage",
+          "BreadcrumbList"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      }
+    ],
+    "missing_pair_count": 81,
+    "missing_pair_counts_by_family": {
+      "other": 4,
+      "content_help_policy": 4,
+      "article": 10,
+      "career_guide": 20,
+      "career_job": 43
+    },
+    "hard_404_sitemap_paths": [
+      "/en/help/about",
+      "/en/help/contact",
+      "/en/help/faq",
+      "/en/help/for-business-and-research",
+      "/en/help/team",
+      "/en/help/used-and-mentioned",
+      "/zh/help/contact",
+      "/zh/help/faq",
+      "/zh/help/for-business-and-research",
+      "/en/method-boundaries",
+      "/zh/method-boundaries",
+      "/zh/policies",
+      "/en/privacy",
+      "/zh/privacy",
+      "/en/support",
+      "/zh/support",
+      "/en/terms",
+      "/zh/terms"
+    ],
+    "hard_404_llms_paths": [
+      "/en/support",
+      "/zh/support"
+    ],
+    "status0_sitemap_paths_count": 64,
+    "sitemap_url_count": 261,
+    "sitemap_family_counts": {
+      "other": 90,
+      "content_help_policy": 18,
+      "test_detail": 16,
+      "topic_detail": 6,
+      "article_detail": 24,
+      "career_guide_detail": 20,
+      "career_job_detail": 87
+    }
+  },
+  "result_report_parity_summary": {
+    "result_en_parity_01_summary": {
+      "family_count": 8,
+      "asset_count": 47,
+      "missing_en_count": 32,
+      "fallback_to_zh_detected_count": 29,
+      "presentation_label_only_count": 8,
+      "interpretation_copy_count": 39,
+      "sensitive_claim_boundary_count": 26,
+      "fail_closed_count": 32
+    },
+    "riasec_decision": "riasec_lifecycle_en_assets_prepared_fail_closed_with_deferred_deep_assets",
+    "riasec_deferred_assets": 14,
+    "iq_decision": "iq_locale_safe_labels_backend_catalog_ready",
+    "clinical_combo_decision": "clinical_combo_en_paid_first_batch_locale_safe",
+    "mbti_decision": "mbti_backend_content_package_export_manifest_ready_frontend_clone_deauthorized",
+    "mbti_missing_en_asset_keys": [
+      "backend_external_content_package_export_required",
+      "legacy_mbti_generated_fallback_copy.en",
+      "frontend_mbti_clone_content_base.en",
+      "frontend_mbti_clone_content_variants.en",
+      "mbti.share.public_projection_summary.en",
+      "mbti.pdf.report_payload.en",
+      "mbti.email.result_report_summary.en",
+      "mbti.my_results.card_summary.en"
+    ],
+    "bigfive_decision": "bigfive_result_page_v2_en_parity_draft_ready_for_human_review",
+    "bigfive_remaining_unreviewed_en_asset_keys": [
+      "big5.result_page_v2.route_matrix.en",
+      "big5.result_page_v2.coupling_assets.en",
+      "big5.result_page_v2.scenario_action_assets.en",
+      "big5.result_page_v2.facet_assets.en",
+      "big5.result_page_v2.canonical_profiles.en",
+      "big5.result_page_v2.core_body.en",
+      "big5.result_page_v2.selector_ready_assets.en"
+    ]
+  },
+  "content_asset_parity_summary": {
+    "content_pages": {
+      "content_pages_en_count": 4,
+      "content_pages_zh_count": 9,
+      "help_pages_en_count": 6,
+      "help_pages_zh_count": 6,
+      "total_rows": 25,
+      "existing_authority_pairs": [
+        "about",
+        "help-about",
+        "help-contact",
+        "help-faq",
+        "help-for-business-and-research",
+        "help-team",
+        "help-used-and-mentioned",
+        "method-boundaries",
+        "privacy",
+        "terms"
+      ],
+      "missing_english_counterparts": [
+        "brand",
+        "careers",
+        "charter",
+        "foundation",
+        "policies"
+      ],
+      "missing_chinese_counterparts": []
+    },
+    "articles": {
+      "articles_en_count": 20,
+      "articles_zh_count": 25,
+      "target_counterpart_count": 10,
+      "target_counterparts_present_in_repo_baseline": 10,
+      "missing_english_counterparts_count": 6,
+      "counterpart_lookup_uses_slug_guessing_only": false
+    },
+    "career_guides": {
+      "career_guides_en_count": 36,
+      "career_guides_zh_count": 36,
+      "missing_english_counterparts_count": 0,
+      "missing_chinese_counterparts_count": 0,
+      "counterpart_key": "guide_code",
+      "counterpart_lookup_uses_slug_guessing_only": false
+    },
+    "deferred_content_pages": [
+      {
+        "entity_type": "content_page",
+        "source_locale": "zh-CN",
+        "target_locale": "en",
+        "source_slug": "brand",
+        "translation_group_id": "content-page-brand",
+        "target_publication_state": "draft_import_candidate",
+        "body_status": "requires_human_translation",
+        "sitemap_llms_exposure_allowed": false,
+        "claim_boundary_required": true
+      },
+      {
+        "entity_type": "content_page",
+        "source_locale": "zh-CN",
+        "target_locale": "en",
+        "source_slug": "careers",
+        "translation_group_id": "content-page-careers",
+        "target_publication_state": "draft_import_candidate",
+        "body_status": "requires_human_translation",
+        "sitemap_llms_exposure_allowed": false,
+        "claim_boundary_required": true
+      },
+      {
+        "entity_type": "content_page",
+        "source_locale": "zh-CN",
+        "target_locale": "en",
+        "source_slug": "charter",
+        "translation_group_id": "content-page-charter",
+        "target_publication_state": "draft_import_candidate",
+        "body_status": "requires_human_translation",
+        "sitemap_llms_exposure_allowed": false,
+        "claim_boundary_required": true
+      },
+      {
+        "entity_type": "content_page",
+        "source_locale": "zh-CN",
+        "target_locale": "en",
+        "source_slug": "foundation",
+        "translation_group_id": "content-page-foundation",
+        "target_publication_state": "draft_import_candidate",
+        "body_status": "requires_human_translation",
+        "sitemap_llms_exposure_allowed": false,
+        "claim_boundary_required": true
+      },
+      {
+        "entity_type": "content_page",
+        "source_locale": "zh-CN",
+        "target_locale": "en",
+        "source_slug": "policies",
+        "translation_group_id": "content-page-policies",
+        "target_publication_state": "draft_import_candidate",
+        "body_status": "requires_human_translation",
+        "sitemap_llms_exposure_allowed": false,
+        "claim_boundary_required": true
+      }
+    ],
+    "deferred_article_counterparts": [
+      {
+        "slug": "are-infj-men-rare-or-socially-silenced",
+        "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+        "target_publication_state": "deferred_draft_required",
+        "sitemap_llms_exposure_allowed": false
+      },
+      {
+        "slug": "best-valentines-date-by-personality-and-relationship-science",
+        "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+        "target_publication_state": "deferred_draft_required",
+        "sitemap_llms_exposure_allowed": false
+      },
+      {
+        "slug": "childhood-dream-job-still-shapes-career-choice",
+        "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+        "target_publication_state": "deferred_draft_required",
+        "sitemap_llms_exposure_allowed": false
+      },
+      {
+        "slug": "how-16-personality-types-talk-to-an-ai-coach",
+        "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+        "target_publication_state": "deferred_draft_required",
+        "sitemap_llms_exposure_allowed": false
+      },
+      {
+        "slug": "how-personality-shapes-attitude-toward-ai",
+        "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+        "target_publication_state": "deferred_draft_required",
+        "sitemap_llms_exposure_allowed": false
+      },
+      {
+        "slug": "which-love-script-fits-you-best",
+        "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+        "target_publication_state": "deferred_draft_required",
+        "sitemap_llms_exposure_allowed": false
+      }
+    ]
+  },
+  "career_asset_parity_summary": {
+    "career_guide_repo_baseline": {
+      "career_guides_en_count": 36,
+      "career_guides_zh_count": 36,
+      "missing_english_counterparts_count": 0,
+      "missing_chinese_counterparts_count": 0,
+      "counterpart_key": "guide_code",
+      "counterpart_lookup_uses_slug_guessing_only": false
+    },
+    "career_job_sitemap_url_count": 87,
+    "career_job_404_samples": [
+      "/zh/career/jobs/accountants-and-auditors",
+      "/en/career/jobs/accountants-and-auditors",
+      "/zh/career/jobs/actors",
+      "/zh/career/jobs/actuaries",
+      "/zh/career/jobs/computer-support-specialists"
+    ],
+    "boundary": "Career Graph/job pages must stay decision-support and workstyle/interest signal only; sampled runtime claim scan found no forbidden terms."
+  },
+  "media_asset_parity_summary": {
+    "summary": {
+      "media_library_assets_count": 3,
+      "media_library_assets_with_alt_count": 3,
+      "media_library_assets_with_caption_count": 3,
+      "media_library_variants_count": 9,
+      "article_en_count": 20,
+      "article_zh_count": 25,
+      "article_en_cover_url_count": 20,
+      "article_zh_cover_url_count": 25,
+      "article_en_cover_alt_count": 20,
+      "article_zh_cover_alt_count": 25,
+      "article_en_cover_variant_count": 20,
+      "article_zh_cover_variant_count": 25,
+      "article_shared_cover_pair_count": 19,
+      "article_en_missing_cover_alt_count": 0,
+      "article_en_alt_contains_chinese_count": 0,
+      "article_zh_cover_prompt_count": 6,
+      "career_guides_en_count": 36,
+      "career_guides_zh_count": 36,
+      "career_guides_en_og_image_count": 0,
+      "career_guides_zh_og_image_count": 0,
+      "career_guides_missing_og_image_count": 72,
+      "content_pages_media_fields_count": 0,
+      "topic_mbti_cover_image_url_count": 0,
+      "personality_mbti_profile_hero_image_url_count": 0
+    },
+    "sidecar_media_review_items": [
+      {
+        "id": "en_parity_06_shared_article_cover_visual_text_review",
+        "asset_scope": "19 EN/ZH shared article cover URLs",
+        "usage_pages": "article detail/index cards for shared EN/ZH article slugs",
+        "reason": "Metadata confirms English alt text and shared URLs, but this PR did not run OCR or human design review to prove images contain no embedded Chinese text.",
+        "owner": "content-design",
+        "follow_up_recommendation": "Run OCR/human visual review and add locale-specific variants if embedded text is detected."
+      },
+      {
+        "id": "en_parity_06_career_guide_social_images",
+        "asset_scope": "36 EN and 36 zh-CN career guide detail rows",
+        "usage_pages": "/en/career/guides/* and /zh/career/guides/* when published",
+        "reason": "Career guide baselines have no og_image_url or twitter_image_url authority yet.",
+        "owner": "content-design",
+        "follow_up_recommendation": "Prepare human-reviewed career guide OG image variant package before public SEO exposure."
+      },
+      {
+        "id": "en_parity_06_mbti_default_share_visual_review",
+        "asset_scope": "share.mbti.default",
+        "usage_pages": "MBTI share/social default placements",
+        "reason": "Default media asset is authority-backed with alt/caption but no OCR/human embedded-text review evidence is recorded.",
+        "owner": "content-design",
+        "follow_up_recommendation": "Add visual-review evidence or locale-specific share variants if text-bearing art is introduced."
+      }
+    ]
+  },
+  "bilingual_pair_summary": {
+    "checked_pair_count": 156,
+    "missing_counterpart_count": 81,
+    "missing_counterpart_counts_by_family": {
+      "other": 4,
+      "content_help_policy": 4,
+      "article": 10,
+      "career_guide": 20,
+      "career_job": 43
+    },
+    "sample_missing_counterparts": [
+      {
+        "path": "/zh/brand",
+        "locale": "zh",
+        "counterpart": "/en/brand",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/careers",
+        "locale": "zh",
+        "counterpart": "/en/careers",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/charter",
+        "locale": "zh",
+        "counterpart": "/en/charter",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/foundation",
+        "locale": "zh",
+        "counterpart": "/en/foundation",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/en/help/about",
+        "locale": "en",
+        "counterpart": "/zh/help/about",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/en/help/team",
+        "locale": "en",
+        "counterpart": "/zh/help/team",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/en/help/used-and-mentioned",
+        "locale": "en",
+        "counterpart": "/zh/help/used-and-mentioned",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/policies",
+        "locale": "zh",
+        "counterpart": "/en/policies",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/articles/mbti-narrative-portrait",
+        "locale": "zh",
+        "counterpart": "/en/articles/mbti-narrative-portrait",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/articles/mbti-growth-guide",
+        "locale": "zh",
+        "counterpart": "/en/articles/mbti-growth-guide",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/articles/mbti-basics",
+        "locale": "zh",
+        "counterpart": "/en/articles/mbti-basics",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/articles/iq-test-tool-guide",
+        "locale": "zh",
+        "counterpart": "/en/articles/iq-test-tool-guide",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/articles/iq-test-narrative-portrait",
+        "locale": "zh",
+        "counterpart": "/en/articles/iq-test-narrative-portrait",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/articles/iq-test-growth-guide",
+        "locale": "zh",
+        "counterpart": "/en/articles/iq-test-growth-guide",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/articles/eq-test-tool-guide",
+        "locale": "zh",
+        "counterpart": "/en/articles/eq-test-tool-guide",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/articles/big-five-tool-guide",
+        "locale": "zh",
+        "counterpart": "/en/articles/big-five-tool-guide",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/articles/big-five-narrative-portrait",
+        "locale": "zh",
+        "counterpart": "/en/articles/big-five-narrative-portrait",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/articles/big-five-growth-guide",
+        "locale": "zh",
+        "counterpart": "/en/articles/big-five-growth-guide",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/annual-career-review-system",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/annual-career-review-system",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/big5-for-career-decisions",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/big5-for-career-decisions",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/build-five-year-career-roadmap",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/build-five-year-career-roadmap",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/build-portfolio-for-career-switch",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/build-portfolio-for-career-switch",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/career-growth-with-manager",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/career-growth-with-manager",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/career-risk-management",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/career-risk-management",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/career-transition-playbook",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/career-transition-playbook",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/cross-industry-move-strategy",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/cross-industry-move-strategy",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/first-90-days-in-new-role",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/first-90-days-in-new-role",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/from-mbti-to-job-fit",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/from-mbti-to-job-fit",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/how-to-choose-college-major",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/how-to-choose-college-major",
+        "counterpartSeen": false
+      },
+      {
+        "path": "/zh/career/guides/how-to-find-right-career-direction",
+        "locale": "zh",
+        "counterpart": "/en/career/guides/how-to-find-right-career-direction",
+        "counterpartSeen": false
+      }
+    ]
+  },
+  "canonical_hreflang_findings": {
+    "core_pages_status": "core home/MBTI/RIASEC/topic pages returned 200 with self/root canonical policy and hreflang values present",
+    "core_rows": [
+      {
+        "path": "/",
+        "status": 200,
+        "canonical": "https://fermatmind.com",
+        "robots": "index, follow",
+        "title": "FermatMind / 费马测试",
+        "description": "费马测试提供清晰、可继续使用的测评结果，帮助你看清人格、能力与职业方向。",
+        "h1": "看清自己，走好每一步",
+        "htmlLang": "zh",
+        "ogUrl": "https://fermatmind.com",
+        "jsonldTypes": [
+          "WebPage",
+          "ItemList",
+          "Organization"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/en",
+        "status": 200,
+        "canonical": "https://fermatmind.com/en",
+        "robots": "index, follow",
+        "title": "FermatMind",
+        "description": "FermatMind provides clear, reusable assessment results for personality, ability, and career direction.",
+        "h1": "Understand yourself before the next step.",
+        "htmlLang": "en",
+        "ogUrl": "https://fermatmind.com/en",
+        "jsonldTypes": [
+          "WebPage",
+          "ItemList",
+          "Organization"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/zh",
+        "status": 200,
+        "canonical": "https://fermatmind.com",
+        "robots": "index, follow",
+        "title": "FermatMind / 费马测试",
+        "description": "费马测试提供清晰、可继续使用的测评结果，帮助你看清人格、能力与职业方向。",
+        "h1": "看清自己，走好每一步",
+        "htmlLang": "zh",
+        "ogUrl": "https://fermatmind.com",
+        "jsonldTypes": [
+          "WebPage",
+          "ItemList",
+          "Organization"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/en/tests/mbti-personality-test-16-personality-types",
+        "status": 200,
+        "canonical": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+        "robots": "index, follow",
+        "title": "MBTI Personality Test (16 Personality Types) | FermatMind",
+        "description": "Discover your MBTI profile across 16 personality types with a structured assessment.",
+        "h1": "MBTI Personality Test 【16 Personality Types】",
+        "htmlLang": "en",
+        "ogUrl": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+        "jsonldTypes": [
+          "WebPage",
+          "BreadcrumbList",
+          "SoftwareApplication",
+          "FAQPage"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/zh/tests/mbti-personality-test-16-personality-types",
+        "status": 200,
+        "canonical": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+        "robots": "index, follow",
+        "title": "MBTI 性格测试（16型人格测试） | FermatMind",
+        "description": "通过结构化测评了解你的 MBTI 类型、偏好强度与沟通协作方式。",
+        "h1": "MBTI 性格测试【16型人格】",
+        "htmlLang": "zh",
+        "ogUrl": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+        "jsonldTypes": [
+          "WebPage",
+          "BreadcrumbList",
+          "SoftwareApplication",
+          "FAQPage"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/en/tests/holland-career-interest-test-riasec",
+        "status": 200,
+        "canonical": "https://fermatmind.com/en/tests/holland-career-interest-test-riasec",
+        "robots": "index, follow",
+        "title": "Holland Career Interest Test (RIASEC) | FermatMind",
+        "description": "Discover your Holland Code across Realistic, Investigative, Artistic, Social, Enterprising, and Conventional interests.",
+        "h1": "Holland Career Interest Test 【RIASEC】",
+        "htmlLang": "en",
+        "ogUrl": "https://fermatmind.com/en/tests/holland-career-interest-test-riasec",
+        "jsonldTypes": [
+          "WebPage",
+          "BreadcrumbList",
+          "SoftwareApplication",
+          "FAQPage"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/zh/tests/holland-career-interest-test-riasec",
+        "status": 200,
+        "canonical": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+        "robots": "index, follow",
+        "title": "霍兰德职业兴趣测试（RIASEC） | FermatMind",
+        "description": "通过结构化测评了解你的现实型、研究型、艺术型、社会型、企业型与常规型兴趣排序。",
+        "h1": "霍兰德职业兴趣测试【RIASEC】",
+        "htmlLang": "zh",
+        "ogUrl": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+        "jsonldTypes": [
+          "WebPage",
+          "BreadcrumbList",
+          "SoftwareApplication",
+          "FAQPage"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/en/topics/mbti",
+        "status": 200,
+        "canonical": "https://fermatmind.com/en/topics/mbti",
+        "robots": "index, follow",
+        "title": "MBTI topic hub | FermatMind",
+        "description": "Connect MBTI articles, career guides, and recommendation profiles in one internal-linking hub.",
+        "h1": "MBTI Topic Cluster",
+        "htmlLang": "en",
+        "ogUrl": "https://fermatmind.com/en/topics/mbti",
+        "jsonldTypes": [
+          "CollectionPage",
+          "WebPage",
+          "BreadcrumbList"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      },
+      {
+        "path": "/zh/topics/mbti",
+        "status": 200,
+        "canonical": "https://fermatmind.com/zh/topics/mbti",
+        "robots": "index, follow",
+        "title": "MBTI 主题中心 | FermatMind",
+        "description": "把 MBTI 文章、职业发展内容与推荐画像聚合到一个内部链接中心。",
+        "h1": "MBTI 主题内容聚合",
+        "htmlLang": "zh",
+        "ogUrl": "https://fermatmind.com/zh/topics/mbti",
+        "jsonldTypes": [
+          "CollectionPage",
+          "WebPage",
+          "BreadcrumbList"
+        ],
+        "hreflang": [
+          "en",
+          "zh-CN",
+          "x-default"
+        ],
+        "sitemapInclusion": true,
+        "llmsInclusion": true
+      }
+    ],
+    "findings": []
+  },
+  "visual_overflow_findings": {
+    "mode": "playwright-headless-core-h1-overflow-partial",
+    "target_count": 4,
+    "h1_issue_count": 0,
+    "horizontal_scroll_count": 0,
+    "error_count": 6,
+    "core_h1_results": [
+      {
+        "path": "/en",
+        "viewport": "desktop",
+        "status": 200,
+        "title": "FermatMind",
+        "h1": {
+          "text": "Understand yourself before the next step.",
+          "scrollWidth": 960,
+          "clientWidth": 960,
+          "rectLeft": 240,
+          "rectRight": 1200,
+          "viewportWidth": 1440,
+          "whiteSpace": "normal",
+          "textOverflow": "clip",
+          "overflow": false
+        },
+        "horizontalScroll": false
+      },
+      {
+        "path": "/en",
+        "viewport": "laptop",
+        "status": 200,
+        "title": "FermatMind",
+        "h1": {
+          "text": "Understand yourself before the next step.",
+          "scrollWidth": 960,
+          "clientWidth": 960,
+          "rectLeft": 160,
+          "rectRight": 1120,
+          "viewportWidth": 1280,
+          "whiteSpace": "normal",
+          "textOverflow": "clip",
+          "overflow": false
+        },
+        "horizontalScroll": false
+      },
+      {
+        "path": "/en",
+        "viewport": "mobile",
+        "status": 200,
+        "title": "FermatMind",
+        "h1": {
+          "text": "Understand yourself before the next step.",
+          "scrollWidth": 342,
+          "clientWidth": 342,
+          "rectLeft": 24,
+          "rectRight": 366,
+          "viewportWidth": 390,
+          "whiteSpace": "normal",
+          "textOverflow": "clip",
+          "overflow": false
+        },
+        "horizontalScroll": false
+      },
+      {
+        "path": "/zh/tests/mbti-personality-test-16-personality-types",
+        "viewport": "desktop",
+        "status": 200,
+        "title": "MBTI 性格测试（16型人格测试） | FermatMind",
+        "h1": {
+          "text": "MBTI 性格测试【16型人格】",
+          "scrollWidth": 450,
+          "clientWidth": 450,
+          "rectLeft": 201,
+          "rectRight": 651,
+          "viewportWidth": 1440,
+          "whiteSpace": "normal",
+          "textOverflow": "clip",
+          "overflow": false
+        },
+        "horizontalScroll": false
+      },
+      {
+        "path": "/zh/tests/mbti-personality-test-16-personality-types",
+        "viewport": "laptop",
+        "status": 200,
+        "title": "MBTI 性格测试（16型人格测试） | FermatMind",
+        "h1": {
+          "text": "MBTI 性格测试【16型人格】",
+          "scrollWidth": 450,
+          "clientWidth": 450,
+          "rectLeft": 121,
+          "rectRight": 571,
+          "viewportWidth": 1280,
+          "whiteSpace": "normal",
+          "textOverflow": "clip",
+          "overflow": false
+        },
+        "horizontalScroll": false
+      },
+      {
+        "path": "/zh/tests/mbti-personality-test-16-personality-types",
+        "viewport": "mobile",
+        "status": 200,
+        "title": "MBTI 性格测试（16型人格测试） | FermatMind",
+        "h1": {
+          "text": "MBTI 性格测试【16型人格】",
+          "scrollWidth": 308,
+          "clientWidth": 308,
+          "rectLeft": 41,
+          "rectRight": 349,
+          "viewportWidth": 390,
+          "whiteSpace": "normal",
+          "textOverflow": "clip",
+          "overflow": false
+        },
+        "horizontalScroll": false
+      },
+      {
+        "path": "/en/tests/holland-career-interest-test-riasec",
+        "viewport": "desktop",
+        "error": "page.goto: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://fermatmind.com/en/tests/holland-career-interest-test-riasec\", waiting until \"commit\"\u001b[22m\n"
+      },
+      {
+        "path": "/en/tests/holland-career-interest-test-riasec",
+        "viewport": "laptop",
+        "error": "page.goto: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://fermatmind.com/en/tests/holland-career-interest-test-riasec\", waiting until \"commit\"\u001b[22m\n"
+      },
+      {
+        "path": "/en/tests/holland-career-interest-test-riasec",
+        "viewport": "mobile",
+        "error": "page.goto: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://fermatmind.com/en/tests/holland-career-interest-test-riasec\", waiting until \"commit\"\u001b[22m\n"
+      },
+      {
+        "path": "/zh/tests/holland-career-interest-test-riasec",
+        "viewport": "desktop",
+        "error": "page.goto: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://fermatmind.com/zh/tests/holland-career-interest-test-riasec\", waiting until \"commit\"\u001b[22m\n"
+      },
+      {
+        "path": "/zh/tests/holland-career-interest-test-riasec",
+        "viewport": "laptop",
+        "error": "page.goto: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://fermatmind.com/zh/tests/holland-career-interest-test-riasec\", waiting until \"commit\"\u001b[22m\n"
+      },
+      {
+        "path": "/zh/tests/holland-career-interest-test-riasec",
+        "viewport": "mobile",
+        "error": "page.goto: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://fermatmind.com/zh/tests/holland-career-interest-test-riasec\", waiting until \"commit\"\u001b[22m\n"
+      }
+    ],
+    "note": "Broader representative scan was attempted twice but timed out; core deployed H1 checks completed here and post-deploy smoke is used as additional evidence."
+  },
+  "claim_boundary_findings": {
+    "runtime_claim_hit_count": 0,
+    "claim_hits": [],
+    "forbidden_claim_policy": "No precise career recommendation, hiring fit, salary/career success prediction, diagnosis/treatment/cure language may be introduced."
+  },
+  "geo_jsonld_faq_findings": {
+    "core_jsonld_types_by_url": {
+      "/": [
+        "WebPage",
+        "ItemList",
+        "Organization"
+      ],
+      "/en": [
+        "WebPage",
+        "ItemList",
+        "Organization"
+      ],
+      "/zh": [
+        "WebPage",
+        "ItemList",
+        "Organization"
+      ],
+      "/en/tests/mbti-personality-test-16-personality-types": [
+        "WebPage",
+        "BreadcrumbList",
+        "SoftwareApplication",
+        "FAQPage"
+      ],
+      "/zh/tests/mbti-personality-test-16-personality-types": [
+        "WebPage",
+        "BreadcrumbList",
+        "SoftwareApplication",
+        "FAQPage"
+      ],
+      "/en/tests/holland-career-interest-test-riasec": [
+        "WebPage",
+        "BreadcrumbList",
+        "SoftwareApplication",
+        "FAQPage"
+      ],
+      "/zh/tests/holland-career-interest-test-riasec": [
+        "WebPage",
+        "BreadcrumbList",
+        "SoftwareApplication",
+        "FAQPage"
+      ],
+      "/en/topics/mbti": [
+        "CollectionPage",
+        "WebPage",
+        "BreadcrumbList"
+      ],
+      "/zh/topics/mbti": [
+        "CollectionPage",
+        "WebPage",
+        "BreadcrumbList"
+      ]
+    },
+    "faq_grounding_gate": "EN-PARITY-07 backend authority gate exists; frontend/runtime grounding still requires ongoing contract coverage."
+  },
+  "sitemap_llms_findings": {
+    "sitemap_status": 200,
+    "sitemap_length": 36900,
+    "llms_status": 200,
+    "llms_length": 6975,
+    "llms_full_status": 200,
+    "llms_full_length": 54724,
+    "content_404_sitemap_paths": [
+      "/en/help/about",
+      "/en/help/contact",
+      "/en/help/faq",
+      "/en/help/for-business-and-research",
+      "/en/help/team",
+      "/en/help/used-and-mentioned",
+      "/zh/help/contact",
+      "/zh/help/faq",
+      "/zh/help/for-business-and-research",
+      "/en/method-boundaries",
+      "/zh/method-boundaries",
+      "/zh/policies",
+      "/en/privacy",
+      "/zh/privacy",
+      "/en/support",
+      "/zh/support",
+      "/en/terms",
+      "/zh/terms"
+    ],
+    "content_404_llms_paths": [
+      "/en/support",
+      "/zh/support"
+    ],
+    "career_job_sitemap_url_count": 87,
+    "staging_contamination": false,
+    "private_flow_contamination": false,
+    "old_mbti_research_url_contamination": false
+  },
+  "staging_sidecar_state": {
+    "checks": [
+      {
+        "path": "/",
+        "status": 200,
+        "xRobots": "noindex, nofollow, noarchive",
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical": "https://fermatmind.com",
+        "location": ""
+      },
+      {
+        "path": "/robots.txt",
+        "status": 200,
+        "xRobots": "noindex, nofollow, noarchive",
+        "robots": "",
+        "canonical": "",
+        "location": ""
+      },
+      {
+        "path": "/sitemap.xml",
+        "status": 410,
+        "xRobots": "noindex, nofollow, noarchive",
+        "robots": "",
+        "canonical": "",
+        "location": ""
+      },
+      {
+        "path": "/llms.txt",
+        "status": 410,
+        "xRobots": "noindex, nofollow, noarchive",
+        "robots": "",
+        "canonical": "",
+        "location": ""
+      },
+      {
+        "path": "/llms-full.txt",
+        "status": 410,
+        "xRobots": "noindex, nofollow, noarchive",
+        "robots": "",
+        "canonical": "",
+        "location": ""
+      }
+    ],
+    "baidu_stale_staging_result": "sidecar_only_no_search_platform_action_performed"
+  },
+  "frontend_fallback_risks": [
+    {
+      "id": "mbti_clone_migration_content_non_authoritative",
+      "source": "fap-web reference grep and RESULT-EN-PARITY-05",
+      "status": "risk_controlled_but_must_keep_en_fail_closed",
+      "evidence": "components/result/mbti/clone/content/index.ts states runtime desktop clone content owner moved to fap-api; RESULT-EN-PARITY-05 deauthorizes frontend clone interpretation copy."
+    },
+    {
+      "id": "llms_topic_compatibility_fallback",
+      "source": "fap-web reference grep",
+      "status": "contract_governed_compatibility_fixture",
+      "evidence": "llms topic fallback governance tests exist; fallback must not be treated as CMS authority."
+    }
+  ],
+  "authority_drift_risks": [
+    {
+      "id": "runtime_sitemap_stale_after_deploy",
+      "risk": "sitemap still exposes 404 content/help/policy and career job URLs despite backend authority gates",
+      "priority": "P0"
+    },
+    {
+      "id": "draft_import_packages_not_production_authority",
+      "risk": "EN content/page/article/career/media drafts must not be counted as published production content until controlled import/review completes",
+      "priority": "P1"
+    }
+  ],
+  "internal_link_readiness": {
+    "observed_core_hubs": [
+      "/en/topics/mbti",
+      "/zh/topics/mbti",
+      "/en/career/recommendations",
+      "/zh/career/recommendations"
+    ],
+    "readiness": "partial",
+    "gap": "Do not add links until sitemap/URL Truth P0 exposure is clean; career job/detail missing counterparts and 404s make some edges invalid."
+  },
+  "p0_findings": [
+    {
+      "id": "p0_sitemap_exposes_content_help_policy_404_urls",
+      "priority": "P0",
+      "summary": "sitemap exposes content/help/policy URLs that return hard 404",
+      "url_count": 18,
+      "urls": [
+        "/en/help/about",
+        "/en/help/contact",
+        "/en/help/faq",
+        "/en/help/for-business-and-research",
+        "/en/help/team",
+        "/en/help/used-and-mentioned",
+        "/zh/help/contact",
+        "/zh/help/faq",
+        "/zh/help/for-business-and-research",
+        "/en/method-boundaries",
+        "/zh/method-boundaries",
+        "/zh/policies",
+        "/en/privacy",
+        "/zh/privacy",
+        "/en/support",
+        "/zh/support",
+        "/en/terms",
+        "/zh/terms"
+      ],
+      "llms_overlap": [
+        "/en/support",
+        "/zh/support"
+      ],
+      "evidence": "Bounded runtime HTTP checks returned 404 Page Not Found; /tmp/global-check-sitemap.xml contains these paths; llms surfaces contain /en/support and /zh/support.",
+      "recommended_owner": "fap-api/fap-web SEO surface owners",
+      "recommended_fix": "Remove missing-authority 404 URLs from sitemap/llms or restore authority-backed routes; do not use frontend fallback as authority."
+    },
+    {
+      "id": "p0_sitemap_exposes_career_job_detail_404_urls",
+      "priority": "P0",
+      "summary": "sitemap exposes career job detail URLs while sampled runtime detail pages return hard 404 after slow responses",
+      "url_count": 87,
+      "sample_urls": [
+        "/zh/career/jobs/accountants-and-auditors",
+        "/zh/career/jobs/actors",
+        "/zh/career/jobs/actuaries",
+        "/zh/career/jobs/administrative-services-managers",
+        "/zh/career/jobs/adult-literacy-and-ged-teachers",
+        "/zh/career/jobs/advertising-promotions-and-marketing-managers",
+        "/zh/career/jobs/advertising-sales-agents",
+        "/zh/career/jobs/aerospace-engineering-and-operations-technicians",
+        "/zh/career/jobs/agricultural-and-food-science-technicians",
+        "/zh/career/jobs/agricultural-engineers"
+      ],
+      "sample_runtime_evidence": [
+        "/zh/career/jobs/accountants-and-auditors -> 404 in 15.16s",
+        "/en/career/jobs/accountants-and-auditors -> 404 in 15.23s",
+        "/zh/career/jobs/actors -> 404 in 15.30s",
+        "/zh/career/jobs/actuaries -> 404 in 15.30s",
+        "/zh/career/jobs/computer-support-specialists -> 404 in 15.15s"
+      ],
+      "recommended_owner": "Career URL Truth / sitemap source owners",
+      "recommended_fix": "Gate career job detail sitemap exposure on real 200 canonical authority, or restore route/API authority for the exposed job detail URLs."
+    }
+  ],
+  "p1_findings": [
+    {
+      "id": "p1_runtime_scan_timeout_or_abort_on_indexable_sitemap_urls",
+      "priority": "P1",
+      "summary": "bounded runtime scanner hit AbortError/timeout on sitemap-included URLs, mainly career jobs and some content/topic/article pages",
+      "count": 64,
+      "sample": [
+        "/zh/career/jobs",
+        "/en/topics/big-five",
+        "/zh/topics/big-five",
+        "/en/topics/iq-eq",
+        "/zh/topics/iq-eq",
+        "/en/tests/big-five-personality-test-ocean-model",
+        "/zh/articles/how-personality-shapes-attitude-toward-ai",
+        "/zh/articles/how-16-personality-types-talk-to-an-ai-coach",
+        "/zh/articles/childhood-dream-job-still-shapes-career-choice",
+        "/zh/articles/best-valentines-date-by-personality-and-relationship-science",
+        "/zh/articles/are-infj-men-rare-or-socially-silenced",
+        "/zh/articles/holland-career-interest-test-can-and-cannot-tell-you",
+        "/zh/articles/mbti-narrative-portrait",
+        "/zh/articles/big-five-growth-guide",
+        "/zh/career/guides/annual-career-review-system",
+        "/zh/career/guides/big5-for-career-decisions",
+        "/zh/career/guides/build-five-year-career-roadmap",
+        "/zh/career/guides/build-portfolio-for-career-switch",
+        "/zh/career/guides/career-growth-with-manager",
+        "/zh/career/guides/career-risk-management"
+      ],
+      "note": "Longer curl sampling showed career job details return 404 slowly; remaining status0 rows require follow-up after P0 URL-surface cleanup."
+    },
+    {
+      "id": "p1_content_page_import_package_not_fully_production_active",
+      "priority": "P1",
+      "summary": "EN-PARITY-03 landed content_page import package only; missing EN foundational pages remain human-review/import work",
+      "missing_english_counterparts": [
+        "brand",
+        "careers",
+        "charter",
+        "foundation",
+        "policies"
+      ],
+      "deferred_count": 5
+    },
+    {
+      "id": "p1_article_counterpart_runtime_and_draft_gap",
+      "priority": "P1",
+      "summary": "EN-PARITY-04 prepared target article counterparts but still records deferred long-form English article work and runtime pair gaps",
+      "target_counterparts_ready_for_review": 10,
+      "deferred_missing_english_counterparts": 6,
+      "runtime_missing_article_pairs": 10
+    },
+    {
+      "id": "p1_career_guide_runtime_exposure_gap",
+      "priority": "P1",
+      "summary": "EN-PARITY-05 repo baseline has guide_code parity, but production exposure/runtime counterpart observation remains incomplete",
+      "repo_ready_guide_codes": 36,
+      "runtime_missing_career_guide_pairs": 20,
+      "deferred_items": [
+        {
+          "id": "en_parity_05_production_import_exposure_verification",
+          "reason": "Runtime observation gaps require controlled backend/CMS import and URL-surface verification outside this no-production-mutation PR."
+        },
+        {
+          "id": "en_parity_07_career_guide_sitemap_llms_gate",
+          "reason": "Career guide URLs must only enter public SEO surfaces after backend/CMS authority is published and indexable."
+        }
+      ]
+    },
+    {
+      "id": "p1_media_visual_and_og_review_gap",
+      "priority": "P1",
+      "summary": "EN-PARITY-06 media metadata/alt inventory landed, but shared cover visual/OCR and career guide OG images remain sidecar work",
+      "sidecar_count": 3,
+      "career_guides_missing_og_image_count": 72
+    },
+    {
+      "id": "p1_result_report_deferred_english_assets",
+      "priority": "P1",
+      "summary": "RESULT-EN-PARITY artifacts enforce fail-closed behavior but some result/report English assets remain deferred or draft-review only",
+      "riasec_deferred_assets": 14,
+      "mbti_missing_en_asset_keys": 8,
+      "bigfive_unreviewed_en_asset_keys": 7
+    },
+    {
+      "id": "p1_visual_scan_partial_ria_sec_timeout",
+      "priority": "P1",
+      "summary": "Playwright core H1 overflow pass succeeded for EN homepage and ZH MBTI, but RIASEC pages timed out under 5s browser navigation; curl returned 200 in about 15s",
+      "visual_mode": "playwright-headless-core-h1-overflow-partial",
+      "visual_error_count": 6,
+      "h1_issue_count": 0
+    }
+  ],
+  "p2_findings": [
+    {
+      "id": "p2_broader_nav_footer_visual_coverage_partial",
+      "priority": "P2",
+      "summary": "Broader representative Playwright pass timed out twice and was reduced to core H1 checks; nav/footer/card overflow on long-tail pages needs a later dedicated pass."
+    },
+    {
+      "id": "p2_staging_baidu_stale_result_sidecar",
+      "priority": "P2",
+      "summary": "Staging containment is active, but any stale Baidu result remains a search-engine-side sidecar; no removal/submission action was performed."
+    },
+    {
+      "id": "p2_frontend_migration_clone_content_remains_non_authoritative",
+      "priority": "P2",
+      "summary": "fap-web still contains MBTI clone zh migration content, explicitly classified by RESULT-EN-PARITY-05 as non-authoritative; continue ensuring it cannot satisfy EN authority."
+    }
+  ],
+  "deferred_human_review_assets": [
+    {
+      "id": "content_pages_missing_en_review",
+      "assets": [
+        "brand",
+        "careers",
+        "charter",
+        "foundation",
+        "policies"
+      ]
+    },
+    {
+      "id": "article_deferred_english_counterparts",
+      "assets": [
+        {
+          "slug": "are-infj-men-rare-or-socially-silenced",
+          "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+          "target_publication_state": "deferred_draft_required",
+          "sitemap_llms_exposure_allowed": false
+        },
+        {
+          "slug": "best-valentines-date-by-personality-and-relationship-science",
+          "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+          "target_publication_state": "deferred_draft_required",
+          "sitemap_llms_exposure_allowed": false
+        },
+        {
+          "slug": "childhood-dream-job-still-shapes-career-choice",
+          "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+          "target_publication_state": "deferred_draft_required",
+          "sitemap_llms_exposure_allowed": false
+        },
+        {
+          "slug": "how-16-personality-types-talk-to-an-ai-coach",
+          "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+          "target_publication_state": "deferred_draft_required",
+          "sitemap_llms_exposure_allowed": false
+        },
+        {
+          "slug": "how-personality-shapes-attitude-toward-ai",
+          "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+          "target_publication_state": "deferred_draft_required",
+          "sitemap_llms_exposure_allowed": false
+        },
+        {
+          "slug": "which-love-script-fits-you-best",
+          "reason": "Requires separately reviewed English draft; no mass generation or auto-publish in EN-PARITY-04.",
+          "target_publication_state": "deferred_draft_required",
+          "sitemap_llms_exposure_allowed": false
+        }
+      ]
+    },
+    {
+      "id": "media_visual_ocr_review",
+      "assets": [
+        {
+          "id": "en_parity_06_shared_article_cover_visual_text_review",
+          "asset_scope": "19 EN/ZH shared article cover URLs",
+          "usage_pages": "article detail/index cards for shared EN/ZH article slugs",
+          "reason": "Metadata confirms English alt text and shared URLs, but this PR did not run OCR or human design review to prove images contain no embedded Chinese text.",
+          "owner": "content-design",
+          "follow_up_recommendation": "Run OCR/human visual review and add locale-specific variants if embedded text is detected."
+        },
+        {
+          "id": "en_parity_06_career_guide_social_images",
+          "asset_scope": "36 EN and 36 zh-CN career guide detail rows",
+          "usage_pages": "/en/career/guides/* and /zh/career/guides/* when published",
+          "reason": "Career guide baselines have no og_image_url or twitter_image_url authority yet.",
+          "owner": "content-design",
+          "follow_up_recommendation": "Prepare human-reviewed career guide OG image variant package before public SEO exposure."
+        },
+        {
+          "id": "en_parity_06_mbti_default_share_visual_review",
+          "asset_scope": "share.mbti.default",
+          "usage_pages": "MBTI share/social default placements",
+          "reason": "Default media asset is authority-backed with alt/caption but no OCR/human embedded-text review evidence is recorded.",
+          "owner": "content-design",
+          "follow_up_recommendation": "Add visual-review evidence or locale-specific share variants if text-bearing art is introduced."
+        }
+      ]
+    },
+    {
+      "id": "riasec_deep_assets",
+      "assets": [
+        {
+          "asset_key": "140q_task_environment_role_v1",
+          "zh_file": "backend/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl",
+          "reason": "large 140Q task/environment/role prose requires batch translation and human review"
+        },
+        {
+          "asset_key": "activity_task_examples_v1",
+          "zh_file": "backend/content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl",
+          "reason": "occupation/activity examples require source and claim-boundary review"
+        },
+        {
+          "asset_key": "aspirations_calibration_v1",
+          "zh_file": "backend/content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl",
+          "reason": "aspiration guidance is substantial user-facing prose"
+        },
+        {
+          "asset_key": "dimension_deep_copy_v1",
+          "zh_file": "backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json",
+          "reason": "deep dimension interpretation requires reviewed English content batch"
+        },
+        {
+          "asset_key": "disagree_path_v1",
+          "zh_file": "backend/content_assets/riasec/disagree_path_v1.zh-CN.jsonl",
+          "reason": "disagreement-path guidance requires reviewed English content batch"
+        },
+        {
+          "asset_key": "feedback_action_lab_v1",
+          "zh_file": "backend/content_assets/riasec/feedback_action_lab_v1.zh-CN.jsonl",
+          "reason": "Action Lab copy must remain exploratory and needs human review"
+        },
+        {
+          "asset_key": "low_quality_cautious_reading_v1",
+          "zh_file": "backend/content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json",
+          "reason": "low-quality result guidance affects interpretation and should be reviewed"
+        },
+        {
+          "asset_key": "near_tie_alternate_code_copy_v1",
+          "zh_file": "backend/content_assets/riasec/near_tie_alternate_code_copy_v1.zh-CN.json",
+          "reason": "near-tie interpretation requires reviewed English content batch"
+        },
+        {
+          "asset_key": "next_exploration_nodes_v1",
+          "zh_file": "backend/content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl",
+          "reason": "next-step exploration copy should be reviewed before activation"
+        },
+        {
+          "asset_key": "occupation_examples_boundary_v1",
+          "zh_file": "backend/content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl",
+          "reason": "occupation examples need source and no-match language review"
+        },
+        {
+          "asset_key": "pair_blend_15_pairs_v1",
+          "zh_file": "backend/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl",
+          "reason": "pair-blend interpretation is substantial prose"
+        },
+        {
+          "asset_key": "profile_shape_copy_v1",
+          "zh_file": "backend/content_assets/riasec/profile_shape_copy_v1.zh-CN.json",
+          "reason": "profile-shape interpretation requires reviewed English counterpart"
+        },
+        {
+          "asset_key": "top3_code_chain_strategy_v1",
+          "zh_file": "backend/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl",
+          "reason": "Top 3 code-chain interpretation is large report prose"
+        },
+        {
+          "asset_key": "top_code_confidence_copy_v1",
+          "zh_file": "backend/content_assets/riasec/top_code_confidence_copy_v1.zh-CN.json",
+          "reason": "confidence copy affects result interpretation and should be reviewed"
+        }
+      ]
+    },
+    {
+      "id": "bigfive_v2_unreviewed_en_assets",
+      "assets": [
+        "big5.result_page_v2.route_matrix.en",
+        "big5.result_page_v2.coupling_assets.en",
+        "big5.result_page_v2.scenario_action_assets.en",
+        "big5.result_page_v2.facet_assets.en",
+        "big5.result_page_v2.canonical_profiles.en",
+        "big5.result_page_v2.core_body.en",
+        "big5.result_page_v2.selector_ready_assets.en"
+      ]
+    }
+  ],
+  "recommended_next_tasks": [
+    {
+      "id": "GLOBAL-EN-ZH-PARITY-P0-FIX-TRAIN-01",
+      "title": "Clean sitemap/llms exposure for 404 content/help/policy and career job detail URLs",
+      "repo": "fap-api/fap-web as authority discovery requires",
+      "priority": "P0"
+    },
+    {
+      "id": "GLOBAL-EN-ZH-PARITY-P1-CONTENT-ASSET-BATCH-01",
+      "title": "Controlled human-reviewed content/article/career guide import/exposure batches",
+      "priority": "P1"
+    },
+    {
+      "id": "GLOBAL-EN-ZH-PARITY-P1-RESULT-ASSET-BATCH-01",
+      "title": "Reviewed RESULT English asset batches for MBTI/RIASEC/Big Five remaining deferred assets",
+      "priority": "P1"
+    },
+    {
+      "id": "GLOBAL-EN-ZH-PARITY-VISUAL-LONGTAIL-01",
+      "title": "Dedicated Playwright long-tail visual/performance pass after P0 URL cleanup",
+      "priority": "P2"
+    }
+  ],
+  "no_mutation_performed": true,
+  "cms_mutation_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "external_search_api_call_performed": false,
+  "production_user_data_accessed": false,
+  "next_task": "GLOBAL-EN-ZH-PARITY-P0-FIX-TRAIN-01"
+}
