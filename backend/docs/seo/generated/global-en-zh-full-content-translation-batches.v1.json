@@ -1,0 +1,178 @@
+{
+  "schema_version": "global-en-zh-full-content-translation-batches.v1",
+  "task": "GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00",
+  "generated_at": "2026-05-26T00:00:00+08:00",
+  "policy": {
+    "human_review_required": true,
+    "no_publish": true,
+    "no_cms_mutation": true,
+    "no_search_channel_action": true,
+    "no_url_submission": true,
+    "no_pseo_generation": true,
+    "no_frontend_fallback_authority": true
+  },
+  "batches": [
+    {
+      "id": "GLOBAL-EN-ZH-CONTENT-PAGES-TRANSLATION-BATCH-01",
+      "title": "Human-reviewed content/help/policy English translation batch",
+      "scope": "brand, careers, charter, foundation, policies, support authority decision, and content/help policy parity gates",
+      "files_likely_touched": [
+        "content_baselines/content_pages/**",
+        "backend docs/generated import package",
+        "focused SeoIntel tests"
+      ],
+      "required_local_checks": [
+        "focused SeoIntel test",
+        "route:list",
+        "pint --test",
+        "composer validate/audit",
+        "JSON/YAML parse",
+        "diff checks"
+      ],
+      "dependency_assumptions": [
+        "This matrix PR merged",
+        "human company/legal facts reviewed"
+      ],
+      "manifest_state_authorization_required": true
+    },
+    {
+      "id": "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02",
+      "title": "Human-reviewed article counterpart translation batch",
+      "scope": "six deferred ZH editorial article counterparts plus cover alt/claim review",
+      "files_likely_touched": [
+        "content_baselines/articles/**",
+        "backend docs/generated import package",
+        "focused SeoIntel tests"
+      ],
+      "required_local_checks": [
+        "article import package focused test",
+        "claim boundary focused test",
+        "JSON/YAML parse",
+        "diff checks"
+      ],
+      "dependency_assumptions": [
+        "Content page batch does not expose draft URLs",
+        "article editorial owner review complete"
+      ],
+      "manifest_state_authorization_required": true
+    },
+    {
+      "id": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03",
+      "title": "Topic and test landing authority translation/readiness batch",
+      "scope": "RIASEC/IQ/EQ/clinical/career/personality topic gaps, FAQ/CTA/schema grounding, and test landing parity review",
+      "files_likely_touched": [
+        "content_baselines/topics/**",
+        "content_baselines/landing_surfaces/**",
+        "backend docs/generated gate",
+        "focused SeoIntel tests"
+      ],
+      "required_local_checks": [
+        "focused topic/test landing SeoIntel test",
+        "route:list",
+        "pint --test",
+        "JSON/YAML parse"
+      ],
+      "dependency_assumptions": [
+        "Scale registry bilingual contracts remain source authority"
+      ],
+      "manifest_state_authorization_required": true
+    },
+    {
+      "id": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04",
+      "title": "Research report translation and claim-boundary review package",
+      "scope": "MBTI salary/turnover report candidate, methodology/sample/references/author/reviewer, Dataset schema decision",
+      "files_likely_touched": [
+        "backend/docs/seo/**",
+        "backend/tests/Feature/SeoIntel/**"
+      ],
+      "required_local_checks": [
+        "research readiness focused tests",
+        "claim lint focused tests",
+        "route:list",
+        "JSON/YAML parse"
+      ],
+      "dependency_assumptions": [
+        "Research report remains draft/unpublished until explicit publish approval"
+      ],
+      "manifest_state_authorization_required": true
+    },
+    {
+      "id": "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05",
+      "title": "Career guides/jobs translation group and import-readiness batch",
+      "scope": "36 guide-code pairs, 342 zh job rows, 36 en generic jobs, explicit job_code translation group design",
+      "files_likely_touched": [
+        "content_baselines/career_guides/**",
+        "content_baselines/career_jobs/**",
+        "backend docs/generated gate",
+        "focused SeoIntel tests"
+      ],
+      "required_local_checks": [
+        "career asset focused test",
+        "career claim boundary test",
+        "JSON/YAML parse",
+        "diff checks"
+      ],
+      "dependency_assumptions": [
+        "No career job detail URLs enter sitemap/llms until authority/runtime 200 proven"
+      ],
+      "manifest_state_authorization_required": true
+    },
+    {
+      "id": "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06",
+      "title": "Result/report English asset translation and no-zh-fallback batch",
+      "scope": "MBTI/RIASEC/Big Five/SDS/My Results/PDF/email/share/paywall report assets",
+      "files_likely_touched": [
+        "backend/content_assets/**",
+        "backend/docs/seo/**",
+        "backend/tests/**/ResultEnParity*"
+      ],
+      "required_local_checks": [
+        "RESULT-EN-PARITY focused tests",
+        "report asset selector tests",
+        "pint --test",
+        "JSON/YAML parse"
+      ],
+      "dependency_assumptions": [
+        "No EN result/report fallback to zh-CN interpretation copy"
+      ],
+      "manifest_state_authorization_required": true
+    },
+    {
+      "id": "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07",
+      "title": "Media alt/OG visual OCR and locale variant batch",
+      "scope": "shared article covers, career guide social images, MBTI share visual, alt/caption/embedded Chinese review",
+      "files_likely_touched": [
+        "content_baselines/media_assets/**",
+        "backend/docs/seo/**",
+        "focused SeoIntel tests"
+      ],
+      "required_local_checks": [
+        "media parity focused test",
+        "JSON/YAML parse",
+        "diff checks"
+      ],
+      "dependency_assumptions": [
+        "Human/OCR visual review completed before claiming parity"
+      ],
+      "manifest_state_authorization_required": true
+    },
+    {
+      "id": "GLOBAL-EN-ZH-GLOBAL-UI-I18N-BATCH-08",
+      "title": "Global UI i18n parity review and frontend consumer follow-up",
+      "scope": "header/nav/footer/language switch/buttons/forms/paywall/checkout/My Results/email capture UI labels",
+      "files_likely_touched": [
+        "fap-web i18n/nav/footer files in a future fap-web PR",
+        "backend docs generated linkage if needed"
+      ],
+      "required_local_checks": [
+        "fap-web typecheck/test/build when implementation authorized",
+        "visual parity tests"
+      ],
+      "dependency_assumptions": [
+        "Backend content page authority exists for footer/nav company/legal destinations"
+      ],
+      "manifest_state_authorization_required": true
+    }
+  ],
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-TRANSLATION-BATCH-01"
+}
