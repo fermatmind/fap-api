@@ -7922,7 +7922,7 @@
       "depends_on": [
         "AUDIT-API-CAREER-ARTIFACT-READINESS"
       ],
-      "status": "local_validation_passed",
+      "status": "pr_open_github_checks_pending",
       "train_scope": "security_audit_remediation",
       "risk_level": "medium",
       "title": "fix(security): require editorial approval for controlled article publish",
@@ -19195,8 +19195,8 @@
       "depends_on": [
         "EN-PARITY-03"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "042f5f45",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1674",
       "checks": {
         "dependency_en_parity_03": {
           "status": "pass",
@@ -19250,6 +19250,11 @@
           "at": "2026-05-25T07:20:00Z",
           "status": "local_validation_passed",
           "summary": "EN-PARITY-04 focused test, ArticleBaselineImportTest, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, and diff checks passed locally."
+        },
+        {
+          "at": "2026-05-25T07:24:00Z",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1674 for EN-PARITY-04 and pushed branch codex/en-parity-04-articles; waiting for GitHub checks."
         }
       ]
     },
