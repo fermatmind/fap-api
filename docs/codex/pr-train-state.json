@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T07:05:00Z",
+  "updated_at": "2026-05-25T07:45:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -24322,11 +24322,11 @@
   "RESULT-EN-PARITY-05": {
     "repo": "fap-api",
     "branch": "codex/result-en-parity-05-mbti-content-export",
-    "status": "pr_open_github_checks_pending",
+    "status": "merged",
     "depends_on": [
       "RESULT-EN-PARITY-04"
     ],
-    "commit_sha": "27a1fb50302d2eb9e517a8739628a365861c030d",
+    "commit_sha": "c572ca6a9a63b9921efcbd87033caf94d0decf0b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1673",
     "checks": {
       "dependency_result_en_parity_00": {
@@ -24362,14 +24362,18 @@
         "evidence": "Focused ResultEnParity05MbtiContentExport test passed with 5 tests and 79 assertions. route:list exited 0 with 203 routes. Pint passed 3545 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, manifest/state parse, git diff checks, and fap-web reference status passed; fap-web only has pre-existing untracked .playwright-mcp/."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #1673 opened for RESULT-EN-PARITY-05; waiting for required GitHub checks."
+        "status": "pass",
+        "evidence": "PR #1673 is MERGED and origin/main contains squash merge c572ca6a9a63b9921efcbd87033caf94d0decf0b; hygiene, supply-chain, Semgrep blocking secrets, verify-mbti-legacy, and verify-mbti-v2 passed."
+      },
+      "post_merge_cleanup": {
+        "status": "pass",
+        "evidence": "origin/main synced to c572ca6a9a63b9921efcbd87033caf94d0decf0b, local main matched origin/main, task branch cleanup completed, and focused post-merge ResultEnParity05MbtiContentExport test passed."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-25T07:03:57Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "events": [
       {
@@ -24386,6 +24390,84 @@
         "at": "2026-05-25T07:05:00Z",
         "status": "pr_open_github_checks_pending",
         "summary": "Opened PR #1673 for RESULT-EN-PARITY-05 MBTI backend content package export and frontend interpretation de-authoring; waiting for GitHub checks."
+      },
+      {
+        "at": "2026-05-25T07:20:00Z",
+        "status": "merged_reconciled_before_result_en_parity_06",
+        "summary": "Reconciled PR #1673 as merged with required GitHub checks passing, origin/main containing c572ca6a9a63b9921efcbd87033caf94d0decf0b, remote branch deleted, and local cleanup executed before RESULT-EN-PARITY-06."
+      }
+    ]
+  },
+  "RESULT-EN-PARITY-06": {
+    "repo": "fap-api",
+    "branch": "codex/result-en-parity-06-bigfive-v2-en-assets",
+    "status": "pr_opened",
+    "depends_on": [
+      "RESULT-EN-PARITY-05"
+    ],
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1675",
+    "checks": {
+      "dependency_result_en_parity_00": {
+        "status": "pass",
+        "evidence": "PR #1666 is MERGED and origin/main contains merge commit a93345e5a24f1f579495bcfd78f30b4c5984bd1a."
+      },
+      "dependency_result_en_parity_05": {
+        "status": "pass",
+        "evidence": "PR #1673 is MERGED and origin/main contains merge commit c572ca6a9a63b9921efcbd87033caf94d0decf0b."
+      },
+      "scope_boundary": {
+        "status": "pass",
+        "evidence": "Changed files are limited to Big Five V2 EN draft content pack catalog, generated report/artifact, focused SeoIntel test, minimum Big Five runtime-freeze classifier coverage for the draft catalog, and PR-train metadata."
+      },
+      "production_safety": {
+        "status": "pass",
+        "evidence": "No production mutation, CMS mutation, deploy, production migration, URL submission, production user data access, scoring change, selector change, or fap-web commit."
+      },
+      "local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=ResultEnParity06BigFiveV2EnAssets --no-ansi",
+          "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter bigfive_v2_en_parity_draft_catalog --no-ansi",
+          "cd backend && php artisan test --filter=BigFive --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool backend/docs/seo/generated/result-en-parity-06-bigfive-v2-en-assets.v1.json >/dev/null",
+          "python3 -m json.tool backend/content_packs/BIG5_OCEAN/v2/drafts/en_parity/result_page_v2_en_asset_catalog_draft.v1.json >/dev/null",
+          "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
+          "git diff --check",
+          "git diff --cached --check",
+          "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+        ],
+        "evidence": "Focused ResultEnParity06BigFiveV2EnAssets test passed with 5 tests and 93 assertions. Focused Big Five runtime-freeze classifier test passed. php artisan test --filter=BigFive passed with 772 tests and 60954 assertions. route:list exited 0 with 203 routes. Pint passed 3547 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON parse, draft catalog JSON parse, manifest/state parse, diff checks, and fap-web reference status passed; fap-web only has pre-existing untracked .playwright-mcp/."
+      },
+      "github_pr_opened": {
+        "status": "pass",
+        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1675 from codex/result-en-parity-06-bigfive-v2-en-assets."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "events": [
+      {
+        "at": "2026-05-25T07:20:00Z",
+        "status": "local_files_generated_pending_validation",
+        "summary": "Added Big Five ResultPageV2 non-runtime EN parity draft catalog, generated artifact/report, focused test, and runtime-freeze classifier coverage for the draft catalog path."
+      },
+      {
+        "at": "2026-05-25T07:35:00Z",
+        "status": "local_validation_passed",
+        "summary": "RESULT-EN-PARITY-06 focused test, Big Five sweep, route list, Pint, composer validate, composer audit, JSON parses, manifest/state parse, diff checks, and fap-web reference status passed locally."
+      },
+      {
+        "at": "2026-05-25T07:45:00Z",
+        "status": "pr_opened",
+        "summary": "Opened PR #1675 for RESULT-EN-PARITY-06 Big Five ResultPageV2 EN asset catalog parity."
       }
     ]
   }

@@ -1,0 +1,183 @@
+{
+    "schema_version": "result-en-parity-06-bigfive-v2-en-assets.v1",
+    "pr_id": "RESULT-EN-PARITY-06",
+    "family": "BIG5_OCEAN",
+    "decision": "bigfive_result_page_v2_en_parity_draft_ready_for_human_review",
+    "source": {
+        "zh_runtime_registry": "backend/content_packs/BIG5_OCEAN/v2/registry",
+        "en_draft_catalog": "backend/content_packs/BIG5_OCEAN/v2/drafts/en_parity/result_page_v2_en_asset_catalog_draft.v1.json",
+        "result_page_v2_services": "backend/app/Services/BigFive/ResultPageV2",
+        "previous_gate": "backend/docs/seo/generated/result-en-parity-01-asset-catalog-gate.v1.json"
+    },
+    "authority": {
+        "backend_content_pack_is_authority": true,
+        "frontend_fallback_is_authority": false,
+        "scoring_change": false,
+        "selector_change": false,
+        "production_mutation": false,
+        "cms_mutation": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "production_user_data_access": false
+    },
+    "runtime_policy": {
+        "english_runtime_behavior": "fail_closed_no_zh_interpretation_fallback",
+        "draft_runtime_use": "draft_review_only",
+        "draft_ready_for_runtime": false,
+        "draft_ready_for_production": false,
+        "production_use_allowed": false,
+        "missing_reviewed_en_behavior": "omit_or_unavailable_state_not_zh_fallback"
+    },
+    "asset_groups": [
+        {
+            "key": "big5.result_page_v2.route_matrix.en",
+            "surface": "route_matrix",
+            "status": "draft_skeleton",
+            "has_zh": true,
+            "has_en": true,
+            "missing_en": false,
+            "interpretation_copy": true,
+            "fail_closed_for_unreviewed_en": true,
+            "ready_for_runtime": false
+        },
+        {
+            "key": "big5.result_page_v2.coupling_assets.en",
+            "surface": "coupling_assets",
+            "status": "draft_skeleton",
+            "has_zh": true,
+            "has_en": true,
+            "missing_en": false,
+            "interpretation_copy": true,
+            "fail_closed_for_unreviewed_en": true,
+            "ready_for_runtime": false
+        },
+        {
+            "key": "big5.result_page_v2.scenario_action_assets.en",
+            "surface": "scenario_action_assets",
+            "status": "draft_skeleton",
+            "has_zh": true,
+            "has_en": true,
+            "missing_en": false,
+            "interpretation_copy": true,
+            "fail_closed_for_unreviewed_en": true,
+            "ready_for_runtime": false
+        },
+        {
+            "key": "big5.result_page_v2.facet_assets.en",
+            "surface": "facet_assets",
+            "status": "draft_skeleton",
+            "has_zh": true,
+            "has_en": true,
+            "missing_en": false,
+            "interpretation_copy": true,
+            "fail_closed_for_unreviewed_en": true,
+            "ready_for_runtime": false
+        },
+        {
+            "key": "big5.result_page_v2.canonical_profiles.en",
+            "surface": "canonical_profiles",
+            "status": "draft_skeleton",
+            "has_zh": true,
+            "has_en": true,
+            "missing_en": false,
+            "interpretation_copy": true,
+            "fail_closed_for_unreviewed_en": true,
+            "ready_for_runtime": false
+        },
+        {
+            "key": "big5.result_page_v2.core_body.en",
+            "surface": "core_body",
+            "status": "draft_skeleton",
+            "has_zh": true,
+            "has_en": true,
+            "missing_en": false,
+            "interpretation_copy": true,
+            "fail_closed_for_unreviewed_en": true,
+            "ready_for_runtime": false
+        },
+        {
+            "key": "big5.result_page_v2.selector_ready_assets.en",
+            "surface": "selector_ready_assets",
+            "status": "draft_skeleton",
+            "has_zh": true,
+            "has_en": true,
+            "missing_en": false,
+            "interpretation_copy": true,
+            "fail_closed_for_unreviewed_en": true,
+            "ready_for_runtime": false
+        }
+    ],
+    "draft_seed_coverage": {
+        "trait_labels": [
+            "O",
+            "C",
+            "E",
+            "A",
+            "N"
+        ],
+        "facet_labels": 30,
+        "section_headlines": [
+            "hero_summary",
+            "domains_overview",
+            "domain_deep_dive",
+            "facet_details",
+            "core_portrait",
+            "norms_comparison",
+            "action_plan",
+            "methodology_and_access"
+        ],
+        "scenario_labels": [
+            "workplace",
+            "relationships",
+            "stress_recovery",
+            "personal_growth"
+        ]
+    },
+    "claim_boundary": {
+        "semantics": "trait_vector_workstyle_behavioral_explanation_only",
+        "allowed": [
+            "trait tendency",
+            "workstyle pattern",
+            "behavioral explanation",
+            "contextual self-reflection",
+            "snapshot-based support"
+        ],
+        "forbidden": [
+            "precise career matching",
+            "hiring fit",
+            "career success prediction",
+            "salary prediction",
+            "turnover prediction",
+            "clinical diagnosis",
+            "treatment advice"
+        ]
+    },
+    "deferred_assets": [
+        "reviewed full English route-row copy for selected OCEAN band combinations",
+        "reviewed English synergy and modifier prose for all selector outputs",
+        "reviewed English scenario actions for all rule buckets",
+        "reviewed English facet glossary, daily meaning, and why-it-matters prose for all 30 facets",
+        "reviewed English profile signatures and core portrait copy for canonical profile combinations",
+        "reviewed English body, bullets, tables, actions, and CTA copy for each ResultPageV2 module",
+        "selector fixture coverage and checksums before any runtime release"
+    ],
+    "remaining_missing_en_asset_keys": [],
+    "remaining_unreviewed_en_asset_keys": [
+        "big5.result_page_v2.route_matrix.en",
+        "big5.result_page_v2.coupling_assets.en",
+        "big5.result_page_v2.scenario_action_assets.en",
+        "big5.result_page_v2.facet_assets.en",
+        "big5.result_page_v2.canonical_profiles.en",
+        "big5.result_page_v2.core_body.en",
+        "big5.result_page_v2.selector_ready_assets.en"
+    ],
+    "validation_contract": {
+        "generated_json_parses": true,
+        "draft_catalog_parses": true,
+        "all_required_v2_groups_accounted_for": true,
+        "no_zh_fallback_policy_recorded": true,
+        "selector_source_authority_unchanged": true,
+        "trait_vector_semantics_preserved": true,
+        "no_scoring_change": true
+    }
+}
