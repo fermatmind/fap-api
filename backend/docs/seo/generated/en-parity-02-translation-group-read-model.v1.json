@@ -1,0 +1,131 @@
+{
+  "schema_version": "en-parity-02-translation-group-read-model.v1",
+  "task": "EN-PARITY-02",
+  "source_authority": "backend_cms_url_truth",
+  "frontend_fallback_authority_used": false,
+  "cms_mutation_performed": false,
+  "production_migration_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "content_generation_performed": false,
+  "target_locales": [
+    "en",
+    "zh-CN"
+  ],
+  "read_model": {
+    "service": "App\\Services\\SeoIntel\\TranslationParity\\TranslationParityMatrixReadModel",
+    "output_schema": {
+      "entity_type": "string",
+      "entity_key": "stable backend authority key, not frontend fallback",
+      "translation_group_id": "translation group id or stable equivalent",
+      "locale": "en | zh-CN",
+      "slug": "backend/CMS slug or stable public key",
+      "canonical_url": "public canonical URL when available",
+      "publication_state": "published_indexable | draft | archived | unknown | explicit state",
+      "source_of_truth": "backend table/config field that owns the row",
+      "counterpart_locale": "opposite target locale",
+      "counterpart_canonical_url": "counterpart canonical URL or null",
+      "counterpart_status": "counterpart publication state or missing"
+    },
+    "counterpart_lookup_uses_slug_guessing_only": false,
+    "pairing_preference_order": [
+      "translation_group_id",
+      "entity_key",
+      "stable business key such as guide_code/topic_code/surface_key/type_code",
+      "slug only as a last-resort transitional signal"
+    ]
+  },
+  "covered_entity_families": {
+    "content_pages": {
+      "entity_type": "content_page",
+      "authority_key": "translation_group_id",
+      "next_content_task": "EN-PARITY-03"
+    },
+    "articles": {
+      "entity_type": "article",
+      "authority_key": "translation_group_id",
+      "next_content_task": "EN-PARITY-04"
+    },
+    "career_guides": {
+      "entity_type": "career_guide",
+      "authority_key": "guide_code",
+      "next_content_task": "EN-PARITY-05"
+    },
+    "research_reports": {
+      "entity_type": "research_report",
+      "authority_key": "research_type + slug"
+    },
+    "topics": {
+      "entity_type": "topic",
+      "authority_key": "topic_code"
+    },
+    "personality": {
+      "entity_type": "personality",
+      "authority_key": "scale_code + canonical_type_code"
+    },
+    "tests": {
+      "entity_type": "test_detail",
+      "authority_key": "scale_catalog primary slug"
+    },
+    "landing_surfaces_page_blocks": {
+      "entity_type": "landing_surface",
+      "authority_key": "surface_key"
+    },
+    "media_assets": {
+      "entity_type": "media_asset",
+      "authority_key": "asset_key + payload.locale_variant_group_id",
+      "next_content_task": "EN-PARITY-06"
+    }
+  },
+  "content_generation_policy": {
+    "auto_publish_allowed": false,
+    "mass_english_generation_allowed": false,
+    "content_pages": "contract/import package first unless page authority already exists",
+    "articles": "inventory/draft package or first small batch only",
+    "career_guides": "inventory/template/import package or first small batch only",
+    "draft_exposure_allowed_in_sitemap_llms": false
+  },
+  "acceptance_contract": {
+    "missing_counterparts_are_explicit": true,
+    "slug_mismatch_can_pair_when_translation_group_exists": true,
+    "frontend_fallback_can_never_satisfy_counterpart": true,
+    "production_migration_required": false,
+    "production_cms_mutation_required": false
+  },
+  "sample_matrix_expectations": [
+    {
+      "entity_type": "content_page",
+      "source_of_truth": "content_pages",
+      "pairing_key": "translation_group_id",
+      "slug_mismatch_expected_to_pair": true
+    },
+    {
+      "entity_type": "article",
+      "source_of_truth": "articles",
+      "pairing_key": "translation_group_id",
+      "slug_mismatch_expected_to_pair": true
+    },
+    {
+      "entity_type": "career_guide",
+      "source_of_truth": "career_guides.guide_code",
+      "pairing_key": "guide_code",
+      "slug_mismatch_expected_to_pair": true
+    }
+  ],
+  "deferred_items": [
+    {
+      "id": "en_parity_03_content_import_package",
+      "reason": "Substantial English prose must be handled as authority-backed import package, small reviewed batch, or explicit deferral."
+    },
+    {
+      "id": "en_parity_04_article_draft_batch_control",
+      "reason": "Missing English article counterparts must not be mass-generated or auto-published in one PR."
+    },
+    {
+      "id": "en_parity_05_career_guide_draft_batch_control",
+      "reason": "Missing English career guide details must not be mass-generated or auto-published in one PR."
+    }
+  ],
+  "next_task": "EN-PARITY-03 content pages EN/ZH parity"
+}
