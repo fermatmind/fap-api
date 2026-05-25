@@ -5685,6 +5685,54 @@ prs:
     deploy_allowed: false
     next_task: EN-PARITY-02
 
+  - id: EN-PARITY-02
+    repo: fap-api
+    depends_on: [EN-PARITY-01]
+    branch: codex/en-parity-02-translation-groups
+    base: main
+    title: "EN-PARITY-02 translation group schema and read model"
+    train_scope: en_parity_translation_group_read_model
+    risk_level: p0_seo_authority_read_model
+    allowed_paths:
+      - backend/app/Services/SeoIntel/TranslationParity/TranslationParityMatrixReadModel.php
+      - backend/docs/seo/en-parity-02-translation-group-read-model.md
+      - backend/docs/seo/generated/en-parity-02-translation-group-read-model.v1.json
+      - backend/tests/Feature/SeoIntel/EnParity02TranslationGroupReadModelTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add a backend-owned EN/ZH translation parity read model that emits entity_type, entity_key, translation_group_id or stable equivalent, locale, slug, canonical_url, publication_state, source_of_truth, and counterpart fields.
+      - Cover content_pages, articles, career_guides, research_reports, topics, personality, tests, landing_surfaces/page_blocks, and media_assets.
+      - Prove counterpart lookup can pair slug-mismatched rows through translation_group_id or stable backend business keys instead of frontend fallback or slug-only guessing.
+      - Keep missing counterparts explicit and do not force missing EN/ZH counterparts to public 200 pages.
+      - Record the content-generation control boundary for EN-PARITY-03/04/05.
+    do_not:
+      - Create full English article, content page, or career guide body content.
+      - Mass-generate or auto-publish English counterparts.
+      - Mutate production CMS, production URL Truth, sitemap, llms, Search Channel, production env, or production migrations.
+      - Modify fap-web or treat frontend fallback as content/counterpart authority.
+      - Expose drafts, placeholders, fallback-only pages, noindex/private pages, 404s, soft 404s, or missing-authority pages in sitemap/llms.
+    validation:
+      - cd backend && php artisan test --filter=EnParity02 --no-ansi
+      - cd backend && php artisan test --filter=SeoIntel --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/en-parity-02-translation-group-read-model.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    next_task: EN-PARITY-03
+
   - id: RESULT-EN-PARITY-00
     repo: fap-api
     depends_on: [EN-PARITY-00]
