@@ -5873,6 +5873,52 @@ prs:
     content_generation_allowed: false
     next_task: EN-PARITY-06
 
+  - id: EN-PARITY-06
+    repo: fap-api
+    depends_on: [EN-PARITY-05]
+    branch: codex/en-parity-06-media-assets
+    base: main
+    title: "EN-PARITY-06 media assets alt og image and locale variant parity"
+    train_scope: en_parity_media_assets_parity_inventory
+    risk_level: p1_media_authority_parity
+    allowed_paths:
+      - backend/docs/seo/en-parity-06-media-assets-parity-inventory.md
+      - backend/docs/seo/generated/en-parity-06-media-assets-parity-inventory.v1.json
+      - backend/tests/Feature/SeoIntel/EnParity06MediaAssetsParityInventoryTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Land a repository-backed media parity inventory for Article, CareerGuide, default Media Library, topic/personality, landing surface, and content page surfaces.
+      - Prove existing EN article cover metadata has alt text and no Chinese characters in EN alt fields without relying on frontend fallback.
+      - Keep shared article covers, default MBTI share image, and missing CareerGuide social images explicit as human/OCR design-review sidecars.
+      - Do not upload, generate, replace, publish, or mutate production media assets.
+    do_not:
+      - Generate production images, upload to CDN/media library, mutate production CMS, run production migration, deploy, or submit URLs.
+      - Modify fap-web or treat frontend fallback as media authority.
+      - Modify articles, career guide bodies, content pages, sitemap generator, llms generator, JSON-LD, FAQ, or Search Channel.
+      - Claim embedded-text visual review is complete without OCR or human review evidence.
+      - Remove images or social metadata to make tests pass.
+    validation:
+      - cd backend && php artisan test --filter=EnParity06 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/en-parity-06-media-assets-parity-inventory.v1.json >/dev/null
+      - python3 -c 'import yaml, json; yaml.safe_load(open("docs/codex/pr-train.yaml")); json.load(open("docs/codex/pr-train-state.json")); print("manifest/state parse ok")'
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    search_channel_action: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    media_upload_allowed: false
+    image_generation_allowed: false
+    content_generation_allowed: false
+    next_task: EN-PARITY-07
+
   - id: RESULT-EN-PARITY-00
     repo: fap-api
     depends_on: [EN-PARITY-00]

@@ -1,0 +1,183 @@
+{
+  "schema_version": "en-parity-06-media-assets-parity-inventory.v1",
+  "task": "EN-PARITY-06",
+  "source_authority": "backend_cms_media_and_content_baselines",
+  "frontend_fallback_authority_used": false,
+  "cms_mutation_performed": false,
+  "production_migration_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "auto_publish_performed": false,
+  "media_upload_performed": false,
+  "image_generation_performed": false,
+  "fap_web_modified": false,
+  "visual_ocr_performed": false,
+  "baseline_sources": [
+    "content_baselines/media_assets/default_media_assets.json",
+    "content_baselines/articles/articles.en.json",
+    "content_baselines/articles/articles.zh-CN.json",
+    "content_baselines/career_guides/career_guides.en.json",
+    "content_baselines/career_guides/career_guides.zh-CN.json",
+    "content_baselines/content_pages/content_pages.en.json",
+    "content_baselines/content_pages/content_pages.zh-CN.json",
+    "content_baselines/topics/*.json",
+    "content_baselines/personality/mbti.*.json",
+    "content_baselines/landing_surfaces/*.json"
+  ],
+  "current_baseline_summary": {
+    "media_library_assets_count": 3,
+    "media_library_assets_with_alt_count": 3,
+    "media_library_assets_with_caption_count": 3,
+    "media_library_variants_count": 9,
+    "article_en_count": 20,
+    "article_zh_count": 25,
+    "article_en_cover_url_count": 20,
+    "article_zh_cover_url_count": 25,
+    "article_en_cover_alt_count": 20,
+    "article_zh_cover_alt_count": 25,
+    "article_en_cover_variant_count": 20,
+    "article_zh_cover_variant_count": 25,
+    "article_shared_cover_pair_count": 19,
+    "article_en_missing_cover_alt_count": 0,
+    "article_en_alt_contains_chinese_count": 0,
+    "article_zh_cover_prompt_count": 6,
+    "career_guides_en_count": 36,
+    "career_guides_zh_count": 36,
+    "career_guides_en_og_image_count": 0,
+    "career_guides_zh_og_image_count": 0,
+    "career_guides_missing_og_image_count": 72,
+    "content_pages_media_fields_count": 0,
+    "topic_mbti_cover_image_url_count": 0,
+    "personality_mbti_profile_hero_image_url_count": 0
+  },
+  "authority_contract": {
+    "media_assets_source_of_truth": "Media Library metadata or backend CMS/repo-backed baseline import package",
+    "article_cover_source_of_truth": "Article cover_image_* metadata",
+    "career_guide_social_image_source_of_truth": "CareerGuide seo_meta og_image_url/twitter_image_url",
+    "frontend_fallback_can_satisfy_media_authority": false,
+    "draft_or_placeholder_media_exposure_allowed_in_sitemap_llms": false,
+    "production_media_upload_allowed_in_this_pr": false
+  },
+  "article_cover_parity": {
+    "existing_en_article_covers_have_alt": true,
+    "existing_en_article_alt_text_is_english_metadata": true,
+    "shared_cover_urls_require_visual_text_review": true,
+    "shared_cover_pair_slugs": [
+      "big-five-growth-guide",
+      "big-five-narrative-portrait",
+      "big-five-tool-guide",
+      "clinical-depression-anxiety-pro-growth-guide",
+      "clinical-depression-anxiety-pro-narrative-portrait",
+      "clinical-depression-anxiety-pro-tool-guide",
+      "depression-screening-standard-growth-guide",
+      "depression-screening-standard-narrative-portrait",
+      "depression-screening-standard-tool-guide",
+      "enneagram-test-tool-guide",
+      "eq-test-growth-guide",
+      "eq-test-narrative-portrait",
+      "eq-test-tool-guide",
+      "iq-test-growth-guide",
+      "iq-test-narrative-portrait",
+      "iq-test-tool-guide",
+      "mbti-basics",
+      "mbti-growth-guide",
+      "mbti-narrative-portrait"
+    ],
+    "zh_only_editorial_cover_slugs_deferred_with_articles": [
+      "are-infj-men-rare-or-socially-silenced",
+      "best-valentines-date-by-personality-and-relationship-science",
+      "childhood-dream-job-still-shapes-career-choice",
+      "how-16-personality-types-talk-to-an-ai-coach",
+      "how-personality-shapes-attitude-toward-ai",
+      "which-love-script-fits-you-best"
+    ]
+  },
+  "career_guide_media_parity": {
+    "en_zh_guide_code_parity_ready": true,
+    "og_image_authority_present": false,
+    "twitter_image_authority_present": false,
+    "missing_social_image_policy": "defer_to_human_reviewed_media_variant_package_before_public_exposure",
+    "sitemap_llms_exposure_requires_authority_backed_og_jsonld_image": true
+  },
+  "media_library_inventory": [
+    {
+      "asset_key": "share.mbti.default",
+      "locale_variant_relationship": "shared_default",
+      "has_alt": true,
+      "has_caption": true,
+      "variant_count": 5,
+      "visual_embedded_text_review_status": "pending_human_or_ocr_review"
+    },
+    {
+      "asset_key": "social.wechat.official_qr",
+      "locale_variant_relationship": "zh_social_channel_specific",
+      "has_alt": true,
+      "has_caption": true,
+      "variant_count": 2,
+      "visual_embedded_text_review_status": "channel_specific_not_en_counterpart"
+    },
+    {
+      "asset_key": "social.wechat.qr",
+      "locale_variant_relationship": "legacy_zh_social_channel_specific",
+      "has_alt": true,
+      "has_caption": true,
+      "variant_count": 2,
+      "visual_embedded_text_review_status": "channel_specific_not_en_counterpart"
+    }
+  ],
+  "sidecar_media_review_items": [
+    {
+      "id": "en_parity_06_shared_article_cover_visual_text_review",
+      "asset_scope": "19 EN/ZH shared article cover URLs",
+      "usage_pages": "article detail/index cards for shared EN/ZH article slugs",
+      "reason": "Metadata confirms English alt text and shared URLs, but this PR did not run OCR or human design review to prove images contain no embedded Chinese text.",
+      "owner": "content-design",
+      "follow_up_recommendation": "Run OCR/human visual review and add locale-specific variants if embedded text is detected."
+    },
+    {
+      "id": "en_parity_06_career_guide_social_images",
+      "asset_scope": "36 EN and 36 zh-CN career guide detail rows",
+      "usage_pages": "/en/career/guides/* and /zh/career/guides/* when published",
+      "reason": "Career guide baselines have no og_image_url or twitter_image_url authority yet.",
+      "owner": "content-design",
+      "follow_up_recommendation": "Prepare human-reviewed career guide OG image variant package before public SEO exposure."
+    },
+    {
+      "id": "en_parity_06_mbti_default_share_visual_review",
+      "asset_scope": "share.mbti.default",
+      "usage_pages": "MBTI share/social default placements",
+      "reason": "Default media asset is authority-backed with alt/caption but no OCR/human embedded-text review evidence is recorded.",
+      "owner": "content-design",
+      "follow_up_recommendation": "Add visual-review evidence or locale-specific share variants if text-bearing art is introduced."
+    }
+  ],
+  "deferred_items": [
+    {
+      "id": "en_parity_06_visual_ocr_batch",
+      "reason": "No production media files were downloaded, OCR-scanned, altered, uploaded, or regenerated in this PR."
+    },
+    {
+      "id": "en_parity_06_media_library_importer",
+      "reason": "This PR records inventory and authority contract only. A controlled media metadata importer can follow after human design review."
+    },
+    {
+      "id": "en_parity_07_social_image_surface_gate",
+      "reason": "Sitemap/llms/JSON-LD gates must prevent URLs from exposing draft, placeholder, fallback-only, or missing-authority image metadata."
+    }
+  ],
+  "recommended_next_tasks": [
+    {
+      "id": "EN-PARITY-07",
+      "title": "Sitemap llms JSON-LD FAQ grounding parity gate",
+      "scope": "Use this inventory to ensure public SEO surfaces expose only authority-backed image and content metadata."
+    },
+    {
+      "id": "EN-PARITY-MEDIA-VISUAL-REVIEW-01",
+      "title": "Human or OCR review for shared article and default social covers",
+      "scope": "Inspect shared article/default cover images for embedded Chinese text and prepare locale variants when needed."
+    }
+  ],
+  "final_decision": "en_parity_06_media_inventory_landed_sidecar_visual_review_required",
+  "next_task": "EN-PARITY-07 sitemap llms JSON-LD FAQ grounding parity gate"
+}
