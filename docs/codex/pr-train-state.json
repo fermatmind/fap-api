@@ -18618,11 +18618,11 @@
     "EN-PARITY-01": {
       "repo": "fap-api",
       "branch": "codex/en-parity-01-url-truth-canonical",
-      "status": "local_validation_passed",
+      "status": "merged",
       "depends_on": [
         "EN-PARITY-00"
       ],
-      "commit_sha": "956d6646f0b539d0bfb7e471d3908f35bb17023a",
+      "commit_sha": "d938a2a27cb0184222b87a21035daf274e3ce107",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1665",
       "checks": {
         "dependency_en_parity_00": {
@@ -18634,7 +18634,8 @@
           "evidence": "EN-PARITY-01 focused test, route list, Pint, composer validate, composer audit, JSON/YAML parse, and diff checks passed. Broad php artisan test --filter=SeoIntel has six unrelated failures that reproduce on clean origin/main."
         },
         "github_required_checks": {
-          "status": "pending"
+          "status": "pass",
+          "evidence": "PR 1665 is MERGED and origin/main contains merge commit d938a2a27cb0184222b87a21035daf274e3ce107."
         },
         "scope_boundary": {
           "status": "pass",
@@ -18642,9 +18643,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T04:40:38Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [
         {
           "title": "fap-web runtime rendering may still need linked frontend cleanup",
@@ -18687,6 +18688,11 @@
           "at": "2026-05-25T12:51:00+08:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1665 for EN-PARITY-01 and pushed branch codex/en-parity-01-url-truth-canonical."
+        },
+        {
+          "at": "2026-05-25T06:15:55Z",
+          "status": "ledger_reconciled_merged",
+          "summary": "Reconciled ledger before EN-PARITY-03: GitHub reports https://github.com/fermatmind/fap-api/pull/1665 merged and origin/main contains merge commit d938a2a27cb0184222b87a21035daf274e3ce107."
         }
       ]
     },
@@ -19005,11 +19011,11 @@
     "EN-PARITY-02": {
       "repo": "fap-api",
       "branch": "codex/en-parity-02-translation-groups",
-      "status": "pr_open_rebased_github_checks_pending",
+      "status": "merged",
       "depends_on": [
         "EN-PARITY-01"
       ],
-      "commit_sha": "00ea3405",
+      "commit_sha": "45cb2da4ce62bea6528049eb3860053d2a55fce9",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1667",
       "checks": {
         "dependency_en_parity_01": {
@@ -19046,14 +19052,14 @@
           "evidence": "Focused EN-PARITY-02 test passed with 4 tests and 42 assertions. SQLite pretend migration, route:list, Pint, composer validate, composer audit, ci_verify_mbti, generated JSON parse, manifest/state parse, and diff checks passed."
         },
         "github_required_checks": {
-          "status": "pending_after_rebase",
-          "evidence": "PR #1667 was rebased onto origin/main after PR #1669 merged; GitHub checks must rerun on the rebased head."
+          "status": "pass",
+          "evidence": "PR 1667 is MERGED and origin/main contains merge commit 45cb2da4ce62bea6528049eb3860053d2a55fce9."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T06:05:12Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "events": [
         {
@@ -19085,6 +19091,95 @@
           "at": "2026-05-25T13:53:01+08:00",
           "status": "rebased_conflict_resolved_pending_push",
           "summary": "Rebased EN-PARITY-02 onto origin/main after PR #1669 merged. Resolved pr-train-state ledger by preserving current main entries, including RESULT-EN-PARITY-02, and keeping EN-PARITY-02 current PR state."
+        },
+        {
+          "at": "2026-05-25T06:15:55Z",
+          "status": "ledger_reconciled_merged",
+          "summary": "Reconciled ledger before EN-PARITY-03: GitHub reports https://github.com/fermatmind/fap-api/pull/1667 merged and origin/main contains merge commit 45cb2da4ce62bea6528049eb3860053d2a55fce9."
+        }
+      ]
+    },
+    "EN-PARITY-03": {
+      "repo": "fap-api",
+      "branch": "codex/en-parity-03-content-pages",
+      "status": "github_checks_passed_ready_to_merge",
+      "depends_on": [
+        "EN-PARITY-02"
+      ],
+      "commit_sha": "8b0e5b4cf7a6f80429c6f70284369a39cae6a4fc",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1672",
+      "checks": {
+        "dependency_en_parity_02": {
+          "status": "pass",
+          "evidence": "PR #1667 is MERGED and origin/main contains merge commit 45cb2da4ce62bea6528049eb3860053d2a55fce9."
+        },
+        "scope_boundary": {
+          "status": "pass",
+          "evidence": "Changed files are limited to content_pages local baseline importer metadata support, EN-PARITY-03 report/generated JSON/focused test, Big Five runtime-freeze allowlist evidence for the importer command, and PR-train manifest/state."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No production CMS mutation, production migration, deploy, URL submission, Search Channel action, secrets access, or fap-web commit."
+        },
+        "content_generation_boundary": {
+          "status": "pass",
+          "evidence": "EN-PARITY-03 lands an import package and metadata gate only. Missing English company/policy content is explicit deferred human-review work; no substantial English prose is generated and nothing is auto-published."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=EnParity03 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/en-parity-03-content-pages-parity-import-package.v1.json >/dev/null",
+            "python3 yaml/json parse for docs/codex/pr-train.yaml and docs/codex/pr-train-state.json",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "evidence": "Focused php artisan test --filter=EnParity03 --no-ansi passed; BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff passed; BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_content_pages_local_baseline_import_package_changes passed; php artisan route:list --no-ansi passed; vendor/bin/pint --test passed; composer validate --strict passed; composer audit --locked --no-interaction --ignore-unreachable passed; APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force passed; bash scripts/ci_verify_mbti.sh passed before the runtime-freeze allowlist evidence fix; the exact failing runtime-freeze branch-diff PHPUnit gates passed after the fix; generated JSON parsed; PR-train YAML/state JSON parsed; git diff --check and git diff --cached --check passed."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1672 second run passed hygiene, supply-chain, Semgrep blocking secrets, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2. GitHub mergeStateStatus is CLEAN at head 8b0e5b4cf7a6f80429c6f70284369a39cae6a4fc."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "sidecar_issues": [],
+      "events": [
+        {
+          "at": "2026-05-25T06:15:55Z",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Started EN-PARITY-03 from latest fap-api main after verifying EN-PARITY-02 landed. Added content_pages import package, metadata-preserving importer support, focused test, and current manifest/state entry. No production or fap-web mutation performed."
+        },
+        {
+          "at": "2026-05-25T06:29:40Z",
+          "status": "local_validation_passed",
+          "summary": "EN-PARITY-03 focused validation, backend common checks, SQLite pretend migration, ci_verify_mbti, generated JSON parse, manifest/state parse, and diff checks passed locally."
+        },
+        {
+          "at": "2026-05-25T06:31:18Z",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1672 for EN-PARITY-03 and pushed branch codex/en-parity-03-content-pages; waiting for GitHub checks."
+        },
+        {
+          "at": "2026-05-25T06:37:38Z",
+          "status": "github_checks_failed_current_scope_fixing",
+          "summary": "GitHub verify-mbti-legacy/v2 failed on runtime-freeze branch-diff gate for ContentPagesImportLocalBaseline.php; adding scoped allowlist evidence test without modifying runtime behavior."
+        },
+        {
+          "at": "2026-05-25T06:38:44Z",
+          "status": "local_validation_passed_after_ci_fix",
+          "summary": "Added scoped Big Five runtime-freeze allowlist evidence for ContentPagesImportLocalBaseline.php. Exact failing runtime-freeze tests, EN-PARITY-03 focused test, Pint, parse checks, and diff checks passed locally."
+        },
+        {
+          "at": "2026-05-25T06:45:46Z",
+          "status": "github_checks_passed_ready_to_merge",
+          "summary": "GitHub checks passed on PR #1672 after adding scoped runtime-freeze allowlist evidence; mergeStateStatus CLEAN."
         }
       ]
     },

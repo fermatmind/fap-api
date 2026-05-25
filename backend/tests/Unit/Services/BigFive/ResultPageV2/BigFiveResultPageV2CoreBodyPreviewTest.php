@@ -742,6 +742,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_content_pages_local_baseline_import_package_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ContentPagesImportLocalBaseline.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_chinese_claim_linter_runtime_files(): void
     {
         $changed = [
@@ -2195,6 +2204,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isContentPagesLocalBaselineImportPackageFile($file)) {
+                continue;
+            }
+
             if ($this->isChineseClaimLinterRuntimeFile($file)) {
                 continue;
             }
@@ -2957,6 +2970,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isTranslationParityReadModelFile(string $file): bool
     {
         return $file === 'backend/app/Services/SeoIntel/TranslationParity/TranslationParityMatrixReadModel.php';
+    }
+
+    private function isContentPagesLocalBaselineImportPackageFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/ContentPagesImportLocalBaseline.php';
     }
 
     private function isChineseClaimLinterRuntimeFile(string $file): bool

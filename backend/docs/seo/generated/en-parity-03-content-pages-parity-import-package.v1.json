@@ -1,0 +1,171 @@
+{
+  "schema_version": "en-parity-03-content-pages-parity-import-package.v1",
+  "task": "EN-PARITY-03",
+  "source_authority": "backend_content_pages_import_package",
+  "frontend_fallback_authority_used": false,
+  "cms_mutation_performed": false,
+  "production_migration_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "auto_publish_performed": false,
+  "substantial_english_prose_generated": false,
+  "fap_web_modified": false,
+  "target_locales": [
+    "en",
+    "zh-CN"
+  ],
+  "baseline_sources": [
+    "content_baselines/content_pages/content_pages.en.json",
+    "content_baselines/content_pages/content_pages.zh-CN.json",
+    "content_baselines/content_pages/help_pages.en.json",
+    "content_baselines/content_pages/help_pages.zh-CN.json"
+  ],
+  "importer_contract": {
+    "command": "content-pages:import-local-baseline",
+    "dry_run_supported": true,
+    "upsert_supported": true,
+    "preserved_or_derived_fields": [
+      "translation_group_id",
+      "source_locale",
+      "translation_status",
+      "page_type",
+      "review_state",
+      "seo_description",
+      "canonical_path"
+    ],
+    "runtime_authority": "content_pages",
+    "baseline_runtime_authority": false
+  },
+  "content_generation_policy": {
+    "auto_publish_allowed": false,
+    "mass_english_generation_allowed": false,
+    "draft_exposure_allowed_in_sitemap_llms": false,
+    "missing_counterpart_handling": "explicit_deferred_until_human_reviewed_authority_exists",
+    "english_copy_creation_mode": "import_package_metadata_only"
+  },
+  "current_baseline_summary": {
+    "content_pages_en_count": 4,
+    "content_pages_zh_count": 9,
+    "help_pages_en_count": 6,
+    "help_pages_zh_count": 6,
+    "total_rows": 25,
+    "existing_authority_pairs": [
+      "about",
+      "help-about",
+      "help-contact",
+      "help-faq",
+      "help-for-business-and-research",
+      "help-team",
+      "help-used-and-mentioned",
+      "method-boundaries",
+      "privacy",
+      "terms"
+    ],
+    "missing_english_counterparts": [
+      "brand",
+      "careers",
+      "charter",
+      "foundation",
+      "policies"
+    ],
+    "missing_chinese_counterparts": []
+  },
+  "deferred_import_candidates": [
+    {
+      "entity_type": "content_page",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_slug": "brand",
+      "translation_group_id": "content-page-brand",
+      "target_publication_state": "draft_import_candidate",
+      "body_status": "requires_human_translation",
+      "sitemap_llms_exposure_allowed": false,
+      "claim_boundary_required": true
+    },
+    {
+      "entity_type": "content_page",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_slug": "careers",
+      "translation_group_id": "content-page-careers",
+      "target_publication_state": "draft_import_candidate",
+      "body_status": "requires_human_translation",
+      "sitemap_llms_exposure_allowed": false,
+      "claim_boundary_required": true
+    },
+    {
+      "entity_type": "content_page",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_slug": "charter",
+      "translation_group_id": "content-page-charter",
+      "target_publication_state": "draft_import_candidate",
+      "body_status": "requires_human_translation",
+      "sitemap_llms_exposure_allowed": false,
+      "claim_boundary_required": true
+    },
+    {
+      "entity_type": "content_page",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_slug": "foundation",
+      "translation_group_id": "content-page-foundation",
+      "target_publication_state": "draft_import_candidate",
+      "body_status": "requires_human_translation",
+      "sitemap_llms_exposure_allowed": false,
+      "claim_boundary_required": true
+    },
+    {
+      "entity_type": "content_page",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_slug": "policies",
+      "translation_group_id": "content-page-policies",
+      "target_publication_state": "draft_import_candidate",
+      "body_status": "requires_human_translation",
+      "sitemap_llms_exposure_allowed": false,
+      "claim_boundary_required": true
+    }
+  ],
+  "route_decisions": [
+    {
+      "url": "https://fermatmind.com/en/about",
+      "classification": "authority_exists_in_import_package",
+      "source": "content_baselines/content_pages/content_pages.en.json",
+      "follow_up": "frontend/runtime route restoration remains outside backend import package"
+    },
+    {
+      "url": "https://fermatmind.com/zh/about",
+      "classification": "authority_exists_in_import_package",
+      "source": "content_baselines/content_pages/content_pages.zh-CN.json",
+      "follow_up": "frontend/runtime route restoration remains outside backend import package"
+    },
+    {
+      "url": "https://fermatmind.com/en/support",
+      "classification": "missing_content_page_authority",
+      "source": null,
+      "follow_up": "create human-reviewed support content_page authority or keep route retired"
+    },
+    {
+      "url": "https://fermatmind.com/zh/support",
+      "classification": "missing_content_page_authority",
+      "source": null,
+      "follow_up": "create human-reviewed support content_page authority or keep route retired"
+    }
+  ],
+  "exposure_guards": {
+    "draft_candidates_must_not_enter_sitemap": true,
+    "draft_candidates_must_not_enter_llms": true,
+    "frontend_fallback_must_not_be_counterpart": true,
+    "missing_authority_must_remain_explicit": true,
+    "claim_unsafe_copy_must_not_be_created": true
+  },
+  "recommended_next_tasks": [
+    "Human-reviewed EN content_page draft package for brand/careers/charter/foundation/policies",
+    "Route/runtime restoration for content pages whose backend authority exists",
+    "EN-PARITY-07 sitemap/llms/schema parity gate"
+  ],
+  "final_decision": "en_parity_03_import_package_landed_missing_copy_deferred",
+  "next_task": "EN-PARITY-04 articles English counterpart completion"
+}
