@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T07:35:00+00:00",
+  "updated_at": "2026-05-25T07:58:00+00:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18693,12 +18693,12 @@
     "RESULT-EN-PARITY-00": {
       "repo": "fap-api",
       "branch": "codex/result-en-parity-00-assessment-result-content-inventory",
-      "status": "local_validation_passed",
+      "status": "pr_open_github_checks_pending",
       "depends_on": [
         "EN-PARITY-00"
       ],
-      "commit_sha": "bca04819ad8e42c65217cb8f5c51598a47baae18",
-      "pr_url": null,
+      "commit_sha": "4a7c701dd232a6778801a2f386222fe7a564bb01",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1666",
       "checks": {
         "dependency_en_parity_00": {
           "status": "pass",
@@ -18726,6 +18726,10 @@
             "git diff --name-only origin/main...HEAD"
           ],
           "evidence": "Focused test passed with 1 test and 151 assertions. route:list exited 0 with 203 routes. Pint passed 3537 files. composer validate --strict passed. composer audit --locked --no-interaction --ignore-unreachable reported no advisories. Generated JSON, manifest/state parsing, and git diff --check passed."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR #1666 is open; GitHub checks are pending."
         }
       },
       "failure_reason": null,
@@ -18754,6 +18758,11 @@
           "at": "2026-05-25T07:45:00+00:00",
           "status": "local_validation_passed",
           "summary": "RESULT-EN-PARITY-00 focused test, route list, Pint, composer validate, composer audit, generated JSON parse, manifest/state parse, and diff check passed locally."
+        },
+        {
+          "at": "2026-05-25T07:58:00+00:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1666 for RESULT-EN-PARITY-00 result/report content inventory; waiting for GitHub checks. No production mutation, CMS mutation, deploy, URL submission, or fap-web commit performed."
         }
       ]
     }
