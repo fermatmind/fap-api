@@ -31,9 +31,9 @@ Not covered:
 
 ## Architecture Finding
 
-Before this PR, `IqReportBuilder` hardcoded Chinese labels in `DIMENSIONS`, which meant an English IQ report could still expose Chinese labels even when the report payload itself was otherwise locale-specific. The builder now reads labels from:
+Before this PR, `IqReportBuilder` hardcoded Chinese labels in `DIMENSIONS`, which meant an English IQ report could still expose Chinese labels even when the report payload itself was otherwise locale-specific. The builder now reads labels from its backend-owned `LABEL_CATALOG` constant:
 
-`backend/content_packs/IQ_INTELLIGENCE_QUOTIENT/locale_labels.v1.json`
+`backend/app/Services/Report/IqReportBuilder.php::LABEL_CATALOG`
 
 English behavior:
 

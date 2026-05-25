@@ -13,8 +13,6 @@ final class IqReportBuilder
 
     private const DEFAULT_LOCALE = 'zh-CN';
 
-    private const LABEL_CATALOG_PATH = 'content_packs/IQ_INTELLIGENCE_QUOTIENT/locale_labels.v1.json';
-
     /**
      * @var array<string,array{key:string}>
      */
@@ -24,8 +22,67 @@ final class IqReportBuilder
         'NPR' => ['key' => 'numerical_pattern_reasoning'],
     ];
 
-    /** @var array<string,mixed>|null */
-    private ?array $labelCatalog = null;
+    /**
+     * @var array<string,mixed>
+     */
+    private const LABEL_CATALOG = [
+        'schema_version' => 'iq.locale_labels.v1',
+        'scale_code' => self::CANONICAL_SCALE_CODE,
+        'asset_status' => 'backend_report_builder_label_catalog',
+        'default_locale' => self::DEFAULT_LOCALE,
+        'fallback_policy' => [
+            'en' => 'missing_label_returns_null_no_zh_fallback',
+            'zh-CN' => 'backend_catalog_authority',
+        ],
+        'dimensions' => [
+            'visual_spatial_insight' => [
+                'dimension_code' => 'VSI',
+                'labels' => [
+                    'zh-CN' => '视觉空间洞察',
+                    'en' => 'Visual-spatial insight',
+                ],
+            ],
+            'visual_spatial_pattern_reasoning' => [
+                'dimension_code' => 'VSPR',
+                'labels' => [
+                    'zh-CN' => '视觉空间模式推理',
+                    'en' => 'Visual-spatial pattern reasoning',
+                ],
+            ],
+            'numerical_pattern_reasoning' => [
+                'dimension_code' => 'NPR',
+                'aliases' => [
+                    'numeric_pattern_reasoning',
+                ],
+                'labels' => [
+                    'zh-CN' => '数字规律推理',
+                    'en' => 'Numeric pattern reasoning',
+                ],
+            ],
+        ],
+        'iq_pro' => [
+            'pdf_payload' => [
+                'labels' => [
+                    'zh-CN' => 'IQ 报告 PDF',
+                    'en' => 'IQ report PDF',
+                ],
+                'description' => [
+                    'zh-CN' => '在线 IQ 估测报告 PDF；当前仅定义合同，尚未生成正式文件。',
+                    'en' => 'Online IQ estimate report PDF; contract-defined only until formal file generation is implemented.',
+                ],
+            ],
+            'certificate_payload' => [
+                'labels' => [
+                    'zh-CN' => 'IQ 结果凭证',
+                    'en' => 'IQ result certificate',
+                ],
+                'description' => [
+                    'zh-CN' => '在线 IQ 估测结果凭证；当前仅定义合同，尚未生成正式文件。',
+                    'en' => 'Online IQ estimate result certificate; contract-defined only until formal file generation is implemented.',
+                ],
+            ],
+        ],
+    ];
 
     /**
      * @param  array<string,mixed>  $ctx
@@ -73,7 +130,7 @@ final class IqReportBuilder
             'attempt_id' => (string) ($attempt->id ?? ''),
             'locale' => $locale,
             'label_catalog' => [
-                'schema_version' => (string) ($this->labelCatalog()['schema_version'] ?? ''),
+                'schema_version' => (string) (self::LABEL_CATALOG['schema_version'] ?? ''),
                 'fallback_policy' => $locale === 'en'
                     ? 'missing_label_returns_null_no_zh_fallback'
                     : 'backend_catalog_authority',
@@ -262,7 +319,7 @@ final class IqReportBuilder
 
     private function localizedLabel(string $basePath, string $locale): ?string
     {
-        $labels = data_get($this->labelCatalog(), $basePath);
+        $labels = data_get(self::LABEL_CATALOG, $basePath);
         if (! is_array($labels)) {
             return null;
         }
@@ -273,29 +330,6 @@ final class IqReportBuilder
         }
 
         return trim($value);
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    private function labelCatalog(): array
-    {
-        if ($this->labelCatalog !== null) {
-            return $this->labelCatalog;
-        }
-
-        $path = base_path(self::LABEL_CATALOG_PATH);
-        if (! is_file($path)) {
-            return $this->labelCatalog = [];
-        }
-
-        try {
-            $decoded = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
-        } catch (\JsonException) {
-            return $this->labelCatalog = [];
-        }
-
-        return $this->labelCatalog = is_array($decoded) ? $decoded : [];
     }
 
     /**

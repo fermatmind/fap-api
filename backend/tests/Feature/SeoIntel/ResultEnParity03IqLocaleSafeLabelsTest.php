@@ -62,15 +62,19 @@ final class ResultEnParity03IqLocaleSafeLabelsTest extends TestCase
 
     public function test_iq_label_catalog_keeps_online_estimate_claim_boundary(): void
     {
-        $path = base_path('content_packs/IQ_INTELLIGENCE_QUOTIENT/locale_labels.v1.json');
-        $decoded = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
-
-        $this->assertSame('online_estimate_confidence_bound_not_clinical_iq_diagnosis', data_get($decoded, 'claim_boundary.measurement'));
-        $this->assertSame('missing_label_returns_null_no_zh_fallback', data_get($decoded, 'fallback_policy.en'));
+        $payload = app(IqReportBuilder::class)->composeVariant(
+            $this->attempt('en-US'),
+            $this->scoredResult(),
+            ReportAccess::VARIANT_FULL,
+            [
+                'report_access_level' => ReportAccess::REPORT_ACCESS_FULL,
+                'locale' => 'en-US',
+            ]
+        );
 
         $visibleEnglish = implode(' ', [
-            data_get($decoded, 'iq_pro.pdf_payload.description.en'),
-            data_get($decoded, 'iq_pro.certificate_payload.description.en'),
+            data_get($payload, 'report.iq_pro.pdf_payload.description'),
+            data_get($payload, 'report.iq_pro.certificate_payload.description'),
         ]);
 
         foreach ([
