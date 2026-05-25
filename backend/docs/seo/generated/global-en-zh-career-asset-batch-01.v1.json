@@ -1,0 +1,156 @@
+{
+  "schema_version": "global-en-zh-career-asset-batch-01.v1",
+  "task": "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01",
+  "scanned_at": "2026-05-25T13:57:14Z",
+  "source_authority": "backend_cms_career_baselines_and_previous_global_scan_artifacts",
+  "frontend_fallback_authority_used": false,
+  "cms_mutation_performed": false,
+  "production_migration_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "auto_publish_performed": false,
+  "mass_english_generation_performed": false,
+  "substantial_english_prose_generated": false,
+  "fap_web_modified": false,
+  "draft_or_fallback_career_urls_exposed_in_sitemap_llms": false,
+  "baseline_sources": [
+    "content_baselines/career_guides/career_guides.en.json",
+    "content_baselines/career_guides/career_guides.zh-CN.json",
+    "content_baselines/career_jobs/career_jobs.en.json",
+    "content_baselines/career_jobs/career_jobs.zh-CN.json",
+    "backend/docs/seo/generated/en-parity-05-career-guide-detail-import-package.v1.json",
+    "backend/docs/seo/generated/global-en-zh-parity-scan-00.v1.json"
+  ],
+  "career_guide_inventory": {
+    "entity_family": "career_guides",
+    "counterpart_key": "guide_code",
+    "english_authority_count": 36,
+    "chinese_authority_count": 36,
+    "missing_english_counterparts_count": 0,
+    "missing_chinese_counterparts_count": 0,
+    "publication_state": "repo_backed_import_ready_requires_operator_review",
+    "sitemap_llms_exposure_eligibility": "eligible_only_after_backend_cms_import_and_public_indexable_runtime_verification",
+    "frontend_fallback_can_satisfy_counterpart": false
+  },
+  "career_job_inventory": {
+    "entity_family": "career_jobs",
+    "counterpart_key": "job_code",
+    "english_authority_count": 36,
+    "chinese_authority_count": 342,
+    "shared_job_code_counterparts_count": 0,
+    "missing_english_counterparts_count": 342,
+    "missing_chinese_counterparts_count": 36,
+    "english_baseline_scope": "generic_role_profiles",
+    "chinese_baseline_scope": "docx_bls_occupation_batch",
+    "publication_state": "mismatched_authority_sets_require_translation_group_or_import_review",
+    "sitemap_llms_exposure_eligibility": "excluded_until_authority_and_runtime_eligibility_are_proven",
+    "frontend_fallback_can_satisfy_counterpart": false,
+    "previous_sitemap_exposure_url_count": 87,
+    "previous_404_samples": [
+      "/zh/career/jobs/accountants-and-auditors",
+      "/en/career/jobs/accountants-and-auditors",
+      "/zh/career/jobs/actors",
+      "/zh/career/jobs/actuaries",
+      "/zh/career/jobs/computer-support-specialists"
+    ],
+    "missing_english_sample_job_codes": [
+      "accountants-and-auditors",
+      "actors",
+      "actuaries",
+      "administrative-services-managers",
+      "adult-literacy-and-ged-teachers",
+      "advertising-promotions-and-marketing-managers",
+      "advertising-sales-agents",
+      "aerospace-engineering-and-operations-technicians",
+      "aerospace-engineers",
+      "agricultural-and-food-science-technicians",
+      "agricultural-and-food-scientists",
+      "agricultural-engineers"
+    ],
+    "missing_chinese_sample_job_codes": [
+      "backend-engineer",
+      "brand-manager",
+      "business-analyst",
+      "cloud-architect",
+      "content-strategist",
+      "cybersecurity-analyst",
+      "data-analyst",
+      "data-scientist",
+      "digital-marketing-manager",
+      "event-experience-producer",
+      "field-service-engineer",
+      "financial-planner"
+    ]
+  },
+  "career_recommendation_inventory": {
+    "entity_family": "career_recommendations",
+    "publication_state": "decision_support_runtime_snapshots_only",
+    "sitemap_llms_exposure_eligibility": "no_personalized_or_private_recommendation_pages_in_public_sitemap_llms",
+    "claim_boundary": "snapshot-based decision support; not precise recommendation, hiring fit, success prediction, salary guarantee, or diagnosis"
+  },
+  "exposure_gate": {
+    "career_detail_url_must_have_backend_authority": true,
+    "career_detail_url_must_have_public_indexable_status": true,
+    "career_detail_url_must_have_runtime_200_verification": true,
+    "career_detail_url_must_not_be_frontend_fallback_only": true,
+    "career_detail_url_must_not_be_draft_review_only": true,
+    "career_detail_url_must_not_be_placeholder": true,
+    "career_detail_url_must_not_return_404_or_soft_404": true,
+    "draft_exposure_allowed_in_sitemap_llms": false
+  },
+  "claim_boundary": {
+    "forbidden_terms_absent_from_batch_artifact": true,
+    "forbidden_claims": [
+      "precise career recommendation",
+      "best job for you",
+      "hiring fit",
+      "job suitability guarantee",
+      "career success prediction",
+      "salary guarantee",
+      "MBTI determines career",
+      "RIASEC ranks your best career",
+      "Big Five predicts job performance"
+    ],
+    "allowed_framing": [
+      "occupation information",
+      "workstyle tendency",
+      "interest signal",
+      "exploratory guidance",
+      "decision support",
+      "snapshot-based explanation",
+      "non-diagnostic"
+    ]
+  },
+  "deferred_items": [
+    {
+      "id": "career_job_translation_group_review",
+      "status": "deferred_human_review",
+      "reason": "EN 36 generic role profiles and ZH 342 DOCX/BLS occupation rows do not share job_code keys; counterpart mapping must be explicitly designed before public parity exposure."
+    },
+    {
+      "id": "career_job_runtime_exposure_recheck_after_p0_cleanup",
+      "status": "deferred_verification",
+      "reason": "Previously exposed career job detail URLs returned slow hard 404 samples; job detail URLs must remain excluded from sitemap/llms until authority and runtime 200 eligibility are proven."
+    },
+    {
+      "id": "career_guide_operator_import_and_exposure",
+      "status": "import_ready_requires_operator_review",
+      "reason": "Career guide baseline has complete guide_code parity, but production exposure must use controlled backend/CMS import and public indexability verification."
+    }
+  ],
+  "recommended_next_tasks": [
+    {
+      "id": "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01",
+      "title": "Result report media parity batch",
+      "scope": "Batch remaining result/report and media parity assets without activating draft content."
+    },
+    {
+      "id": "CAREER-JOB-TRANSLATION-GROUP-DESIGN-01",
+      "title": "Design career job EN/ZH translation group mapping",
+      "scope": "Map generic EN roles and ZH BLS occupation rows through backend authority, then decide import/publish batches."
+    }
+  ],
+  "final_decision": "career_asset_batch_ready_with_job_counterpart_mapping_deferred",
+  "next_task": "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01"
+}

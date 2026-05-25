@@ -24867,7 +24867,7 @@
       ]
     },
     "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01": {
-      "status": "pr_open",
+      "status": "merged",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-article-counterpart-batch-01",
       "base": "main",
@@ -24875,12 +24875,12 @@
         "GLOBAL-EN-ZH-PARITY-CONTENT-ASSET-BATCH-01"
       ],
       "title": "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01 article counterpart controlled batch",
-      "commit_sha": "15abe18b480a48e3c449ea828ae7d170d16f86b2",
+      "commit_sha": "630ed5b3a5318d77219d36170f4c382609c9f7e5",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1685",
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T13:54:04Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "checks": {
         "dependency": {
           "status": "passed",
@@ -24917,8 +24917,8 @@
           "evidence": "All local validation commands passed before staging."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": "PR #1685 opened; GitHub checks pending."
+          "status": "passed",
+          "evidence": "GitHub PR #1685 merged with all required checks green and mergeStateStatus CLEAN."
         }
       },
       "history": [
@@ -24941,11 +24941,17 @@
           "at": "2026-05-25T21:47:06+08:00",
           "status": "pr_open",
           "summary": "Opened fap-api PR #1685 for article counterpart controlled batch."
+        },
+        {
+          "at": "2026-05-25T21:58:51+08:00",
+          "status": "merged",
+          "summary": "Reconciled PR #1685 merged state while starting career asset batch PR."
         }
-      ]
+      ],
+      "merge_commit": "0ad3827b7e8771a0de84253854e7cbbe55fcc636"
     },
     "GLOBAL-EN-ZH-PARITY-CAREER-ASSET-BATCH-01": {
-      "status": "planned",
+      "status": "local_validation_passed",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-career-asset-batch-01",
       "base": "main",
@@ -24959,12 +24965,60 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "checks": {},
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "evidence": "GLOBAL-EN-ZH-PARITY-ARTICLE-COUNTERPART-BATCH-01 merged as PR #1685 with merge commit 0ad3827b7e8771a0de84253854e7cbbe55fcc636."
+        },
+        "scope_boundary": {
+          "status": "passed",
+          "changed_files": [
+            "backend/docs/seo/global-en-zh-career-asset-batch-01.md",
+            "backend/docs/seo/generated/global-en-zh-career-asset-batch-01.v1.json",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhCareerAssetBatch01Test.php",
+            "docs/codex/pr-train-state.json"
+          ],
+          "evidence": "Scope is limited to career asset batch report, generated JSON, focused test, and current/reconciled ledger state."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No deploy, CMS mutation, Search Channel action, URL submission, production migration, fap-web edit, placeholder career pages, or career publication performed."
+        },
+        "local_validation": {
+          "status": "passed",
+          "commands": [
+            "php artisan test --filter=GlobalEnZhCareerAssetBatch01 --no-ansi",
+            "php artisan route:list --no-ansi",
+            "vendor/bin/pint --test",
+            "composer validate --strict",
+            "composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-career-asset-batch-01.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "evidence": "All local validation commands passed before staging."
+        },
+        "github_required_checks": {
+          "status": "pending"
+        }
+      },
       "history": [
         {
           "at": "2026-05-25T21:15:38+08:00",
           "status": "planned",
           "summary": "Planned manifest/state entry only; no implementation in current PR."
+        },
+        {
+          "at": "2026-05-25T21:58:51+08:00",
+          "status": "in_progress",
+          "summary": "Started career guide/job parity batch report and gate; no career content publication or placeholder page creation."
+        },
+        {
+          "at": "2026-05-25T21:59:49+08:00",
+          "status": "local_validation_passed",
+          "summary": "Career asset batch report, generated JSON, and focused test passed local validation; career job counterpart mapping remains deferred."
         }
       ]
     },
