@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-24T18:22:00.000Z",
+  "updated_at": "2026-05-24T18:40:00.000Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -18116,11 +18116,11 @@
     "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE": {
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-zh-mbti-queue",
-      "status": "pr_open_github_checks_pending",
+      "status": "merged",
       "depends_on": [
         "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE-PREFLIGHT"
       ],
-      "commit_sha": "b6b6995fa98e66c9409fb4ba126753b65c2ae174",
+      "commit_sha": "4225631bdb8abe426036cc4cfc899d95d720e688",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1658",
       "checks": {
         "dependency": {
@@ -18153,8 +18153,8 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-24T18:21:09Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "production_deploy_allowed": false,
       "production_migration_execution_allowed": false,
@@ -18196,6 +18196,75 @@
           "at": "2026-05-25T02:22:00+08:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1658 for the ZH MBTI Search Channel enqueue report. GitHub checks are pending."
+        },
+        {
+          "at": "2026-05-25T02:32:00+08:00",
+          "status": "merged_reconciled",
+          "summary": "Verified PR #1658 is merged, origin/main contains merge commit 4225631bdb8abe426036cc4cfc899d95d720e688, and the remote branch is deleted; reconciled state to unblock the post-enqueue review."
+        }
+      ],
+      "local_cleanup_note": "Reconciled while starting SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW; origin/main contains merge commit 4225631bdb8abe426036cc4cfc899d95d720e688. scripts/post_merge_cleanup.sh is absent in this clone."
+    },
+    "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-POST-ENQUEUE-REVIEW": {
+      "repo": "fap-api",
+      "branch": "codex/seo-growth-mbti-action-zh-mbti-post-enqueue-review",
+      "status": "local_checks_passed",
+      "depends_on": [
+        "SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "pass",
+          "evidence": "Dependency SEO-GROWTH-MBTI-ACTION-ZH-MBTI-QUEUE is merged as 4225631bdb8abe426036cc4cfc899d95d720e688 on origin/main."
+        },
+        "production_read_only": {
+          "queue_item_3": "passed: queue item 3 exists for the exact ZH MBTI URL/channel with locale=zh-CN, page_entity_type=test_detail, source_authority=scale_catalog, approval_state=pending, execution_state=dry_run_ready, claim_boundary_state=claim_safe, private_flow=false.",
+          "batch_3": "passed: batch 3 exists with channel=indexnow, status=dry_run, item_count=1.",
+          "event_trail": "passed: queue item 3 has queue_item_planned event only; no live_submission_approved, live_submission_response, submitted, external_api_call, or accepted submission event exists.",
+          "duplicate_check": "passed: exactly one queue item exists for the ZH target URL/channel; post-enqueue dry-run/no-write blocks with existing_active_queue_item and planned_queue_count=0.",
+          "queue_item_2": "passed: EN MBTI queue item 2 remains approved/submitted and unchanged; no duplicate EN queue item detected.",
+          "gate_state": "passed: persistent queue write, live submission, external API call, and IndexNow live API gates remain closed.",
+          "public_runtime": "passed: ZH MBTI public URL returned HTTP 200, exact apex canonical, robots index/follow, no noindex, and no staging canonical.",
+          "staging_sidecar": "passed: staging noindex containment remains active; known Baidu stale result remains a sidecar.",
+          "ops_seo_visibility": "sidecar: optional authenticated /ops/seo UI visibility was not checked."
+        },
+        "local": {
+          "focused_post_enqueue_review_test": "passed: php artisan test --filter=SeoIntelGrowthMbtiActionZhMbtiPostEnqueueReview --no-ansi (8 tests, 76 assertions)",
+          "route_list": "passed: php artisan route:list --no-ansi",
+          "pint": "passed: vendor/bin/pint --test (3532 files)",
+          "json_artifact": "passed: python3 -m json.tool backend/docs/seo/generated/seo-growth-mbti-action-zh-mbti-post-enqueue-review.v1.json",
+          "json_state": "passed: python3 -m json.tool docs/codex/pr-train-state.json",
+          "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
+          "git_diff_check": "passed: git diff --check",
+          "git_diff_cached_check": "passed: git diff --cached --check"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_deploy_allowed": false,
+      "production_migration_execution_allowed": false,
+      "external_api_credentials_required": false,
+      "scheduler_activation": false,
+      "next_pr": "SEARCH-CHANNEL-LIVE-ZH-MBTI-01",
+      "history": [
+        {
+          "at": "2026-05-25T02:32:00+08:00",
+          "status": "in_progress",
+          "summary": "Started post-enqueue review from latest clean main. Scope is limited to production read-only queue, batch, event, duplicate, gate, public runtime, staging sidecar checks, docs/generated report, focused test, and authorized PR-train metadata."
+        },
+        {
+          "at": "2026-05-25T02:34:00+08:00",
+          "status": "production_read_only_checks_passed",
+          "summary": "Verified queue item 3, batch 3, planned-only event trail, duplicate protection, queue item 2 preservation, closed gates, no accidental live submission or external API call, public runtime indexability, and staging sidecar containment."
+        },
+        {
+          "at": "2026-05-25T02:40:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused generated artifact test, route list, Pint, JSON/YAML parsing, and diff checks passed."
         }
       ]
     }
