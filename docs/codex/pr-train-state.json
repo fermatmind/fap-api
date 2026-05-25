@@ -18458,7 +18458,7 @@
       "branch": "codex/seo-growth-mbti-action-01d-scan-00",
       "status": "merged",
       "depends_on": [],
-      "commit_sha": "01790b62ce7e561bc83b7aa7d83b4c76fb38c8b1",
+      "commit_sha": "8208e69422a7487d272df57107a5b5e1cacf6b68",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1661",
       "checks": {
         "scope_boundary": {
@@ -18834,6 +18834,11 @@
           "at": "2026-05-25T08:55:00+00:00",
           "status": "pr_open_github_checks_pending",
           "summary": "Opened PR #1668 for RESULT-EN-PARITY-01 asset catalog gate; waiting for GitHub checks."
+        },
+        {
+          "at": "2026-05-25T09:15:00+00:00",
+          "status": "ci_fix_pushed",
+          "summary": "Removed runtime app service draft after Big Five runtime freeze flagged backend/app path drift; kept non-runtime generated artifact plus focused test and updated PR body."
         }
       ]
     }
