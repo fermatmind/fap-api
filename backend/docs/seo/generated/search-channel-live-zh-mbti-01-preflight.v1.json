@@ -1,7 +1,7 @@
 {
   "schema_version": "search-channel-live-zh-mbti-01-preflight.v1",
   "task": "SEARCH-CHANNEL-LIVE-ZH-MBTI-01",
-  "final_decision": "blocked_indexnow_key_missing",
+  "final_decision": "ready_for_human_approved_zh_mbti_live_submission",
   "queue_item_id": 3,
   "target_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
   "channel": "indexnow",
@@ -61,11 +61,13 @@
     "configured_key_length": 32,
     "key_location_configured": true,
     "key_location": "https://fermatmind.com/8d59565935303aad72c5eb0ec5bfa42e.txt",
-    "public_key_location_status": 404,
-    "public_key_location_body_sha256": "e186ca91fd68bf566fce5b033aa5f404f5fcddf6f9fc09a5bd1ef6d6c53a00af",
-    "public_key_location_matches_configured_key": false,
-    "ready": false,
-    "blocker": "configured IndexNow keyLocation returned HTTP 404, so the public key file cannot be verified"
+    "public_key_location_status": 200,
+    "public_key_location_body_sha256": "e9a3eca3e7c107d6e0ac63c1fdba24068d970aecb4bdf18ed69735e8b77cf143",
+    "public_key_location_matches_configured_key": true,
+    "ready": true,
+    "blocker": null,
+    "content_type": "text/plain; charset=UTF-8",
+    "body_length": 32
   },
   "submit_dry_run": {
     "command": "php artisan seo-intel:search-channel-submit --queue-item-id=3 --dry-run --json",
@@ -83,7 +85,9 @@
     "execution_state": "dry_run_ready",
     "bulk_submission": false,
     "raw_secret_output": false,
-    "issues": []
+    "issues": [],
+    "approval_phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 3 channel indexnow URL https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types.",
+    "runtime_approval_phrase_matches_future_task_label": false
   },
   "public_runtime_state": {
     "url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
@@ -105,7 +109,7 @@
     "baidu_stale_result_sidecar": true,
     "baidu_mutation_performed": false
   },
-  "future_approval_phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-ZH-MBTI-02 live submission for queue item 3 channel indexnow URL https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types.",
+  "future_approval_phrase": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item 3 channel indexnow URL https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types.",
   "future_gate_plan": {
     "open_only": [
       "SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED=true",
@@ -116,7 +120,7 @@
       "SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED=false"
     ],
     "after_live_submission": "close all live/external/indexnow gates again",
-    "not_actionable_until": "IndexNow keyLocation returns HTTP 200 and matches the configured key hash"
+    "not_actionable_until": "Human-approved SEARCH-CHANNEL-LIVE-ZH-MBTI-02 task with runtime approval phrase and live/external/IndexNow gates opened only for the bounded queue item 3 submission."
   },
   "live_submission_performed": false,
   "external_api_call_performed": false,
@@ -124,5 +128,6 @@
   "cms_mutation_performed": false,
   "fap_web_mutation_performed": false,
   "research_deferred": true,
-  "next_task": "SEARCH-CHANNEL-LIVE-ZH-MBTI-01A-INDEXNOW-KEYLOCATION-FIX"
+  "next_task": "SEARCH-CHANNEL-LIVE-ZH-MBTI-02｜Human-approved live submission for queue item 3",
+  "future_task_label": "SEARCH-CHANNEL-LIVE-ZH-MBTI-02｜Human-approved live submission for queue item 3"
 }
