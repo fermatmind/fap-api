@@ -20123,12 +20123,12 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-topic-test-landing-batch-03",
       "base": "main",
-      "status": "pr_opened",
+      "status": "merged",
       "depends_on": [
         "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02"
       ],
       "title": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03 topic test landing English parity draft package",
-      "commit_sha": "24d5b4d7f122c1c25c133f0caaa698d1dea5b754",
+      "commit_sha": "749a4709d69644d2fc4ab05088fad13a7969bfdd",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1694",
       "checks": {
         "manifest_registration": {
@@ -20172,6 +20172,10 @@
         "pr_opened": {
           "status": "pass",
           "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1694 from codex/global-en-zh-topic-test-landing-batch-03 after local validation passed."
+        },
+        "github_checks": {
+          "status": "pass",
+          "evidence": "PR #1694 merged after required GitHub checks succeeded and mergeStateStatus was CLEAN; origin/main contains merge commit 749a4709d69644d2fc4ab05088fad13a7969bfdd."
         }
       },
       "scope": {
@@ -20197,9 +20201,9 @@
         "frontend_fallback_authority": false
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-25T18:07:37Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "next_task": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04",
       "events": [
@@ -20222,6 +20226,11 @@
           "at": "2026-05-26T02:00:39+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1694 for Batch-03 after local validation passed."
+        },
+        {
+          "at": "2026-05-26T02:10:45+08:00",
+          "status": "merged_reconciled",
+          "summary": "Reconciled Batch-03 after PR #1694 merge; remote branch deleted and local task branch cleanup completed before Batch-04 continued."
         }
       ]
     },
@@ -20229,17 +20238,51 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-research-claim-review-batch-04",
       "base": "main",
-      "status": "manifest_registered",
+      "status": "local_validation_passed",
       "depends_on": [
         "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03"
       ],
-      "title": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04 research report translation and claim-boundary review package",
+      "title": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04 research English translation and claim review package",
       "commit_sha": null,
       "pr_url": null,
       "checks": {
         "manifest_registration": {
           "status": "pass",
           "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        },
+        "scope_boundary": {
+          "status": "pending_validation",
+          "changed_files": [
+            "backend/docs/seo/global-en-zh-research-claim-review-batch-04.md",
+            "backend/docs/seo/generated/global-en-zh-research-claim-review-batch-04.v1.json",
+            "backend/docs/seo/import-packages/global-en-zh-research-claim-review-batch-04.import.v1.json",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhResearchClaimReviewBatch04Test.php",
+            "docs/codex/pr-train.yaml",
+            "docs/codex/pr-train-state.json"
+          ],
+          "evidence": "Generated Batch-04 report, generated summary, claim-review import package, focused SeoIntel test, and current task state ledger only."
+        },
+        "production_safety": {
+          "status": "pass",
+          "evidence": "No CMS mutation, publish, deploy, Search Channel action, URL submission, Digital PR, pSEO generation, fap-web mutation, env/DNS/nginx edit, production migration, raw log read, or production user data access performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=GlobalEnZhResearchClaimReviewBatch04 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-research-claim-review-batch-04.v1.json >/dev/null",
+            "python3 -m json.tool backend/docs/seo/import-packages/global-en-zh-research-claim-review-batch-04.import.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check",
+            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          ],
+          "evidence": "Focused test exited 0 with 1 warning from missing isolated backend/.env; no env file was created or edited. route:list exited 0 with 203 routes. Pint passed 3567 files. composer validate --strict passed. composer audit reported no advisories. Generated JSON, import package JSON, state JSON, manifest YAML, diff checks, and fap-web reference status passed."
         }
       },
       "scope": {
@@ -20272,6 +20315,16 @@
           "at": "2026-05-26T01:05:00+08:00",
           "status": "manifest_registered",
           "summary": "Registered research translation/claim review batch with salary, turnover, Dataset/Article schema, and no-publish boundaries."
+        },
+        {
+          "at": "2026-05-26T02:10:45+08:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Generated Batch-04 research claim-review package, generated summary, Markdown report, focused test, and Batch-03 merge reconciliation."
+        },
+        {
+          "at": "2026-05-26T02:12:05+08:00",
+          "status": "local_validation_passed",
+          "summary": "Batch-04 focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff checks, and fap-web reference status passed."
         }
       ]
     },

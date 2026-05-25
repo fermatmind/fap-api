@@ -1,0 +1,77 @@
+{
+  "schema_version": "global-en-zh-research-claim-review-batch-04.v1",
+  "task": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04",
+  "generated_at": "2026-05-26T02:10:45+08:00",
+  "final_decision": "research_claim_review_package_completed_with_claim_blockers",
+  "source_matrix_task": "GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00",
+  "total_research_items": 2,
+  "deferred_claim_review_count": 1,
+  "deferred_missing_authority_count": 1,
+  "human_review_required_count": 2,
+  "claim_review_required_count": 2,
+  "dataset_schema_eligible_count": 0,
+  "article_schema_eligible_count": 0,
+  "sitemap_eligible_count": 0,
+  "llms_eligible_count": 0,
+  "search_channel_eligible_count": 0,
+  "digital_pr_eligible_count": 0,
+  "pseo_eligible_count": 0,
+  "blocked_items": [
+    {
+      "source_key": "mbti-salary-turnover-report",
+      "publish_state": "deferred_claim_review",
+      "reason": "Candidate remains blocked until methodology, sample disclaimer, references, author/reviewer, last_reviewed_at, dataset decision, and claim review pass."
+    },
+    {
+      "source_key": "research-report-catalog",
+      "publish_state": "deferred_missing_authority",
+      "reason": "No backend research report authority source exists for this catalog surface; do not create placeholder research pages or schema."
+    }
+  ],
+  "claim_boundary_findings": [
+    {
+      "source_key": "mbti-salary-turnover-report",
+      "claim_boundary_assessment": "blocked_until_methodology_sample_disclaimer_references_author_reviewer_and_claim_review_pass",
+      "forbidden_claim_risks": [
+        "MBTI predicts individual salary",
+        "MBTI predicts individual turnover",
+        "individual-level hiring or retention prediction",
+        "salary guarantee",
+        "turnover guarantee",
+        "job suitability guarantee",
+        "career success prediction",
+        "diagnosis",
+        "treatment",
+        "cure"
+      ],
+      "required_disclaimer_caveat": "Research findings, if later approved, must be presented as aggregate-level, modeled, directional, and for reference only. They must not be used for individual hiring, retention, salary prediction, diagnosis, treatment, or career-success decisions."
+    },
+    {
+      "source_key": "research-report-catalog",
+      "claim_boundary_assessment": "blocked_until_methodology_sample_disclaimer_references_author_reviewer_and_claim_review_pass",
+      "forbidden_claim_risks": [
+        "MBTI predicts individual salary",
+        "MBTI predicts individual turnover",
+        "individual-level hiring or retention prediction",
+        "salary guarantee",
+        "turnover guarantee",
+        "job suitability guarantee",
+        "career success prediction",
+        "diagnosis",
+        "treatment",
+        "cure"
+      ],
+      "required_disclaimer_caveat": "Research findings, if later approved, must be presented as aggregate-level, modeled, directional, and for reference only. They must not be used for individual hiring, retention, salary prediction, diagnosis, treatment, or career-success decisions."
+    }
+  ],
+  "import_package_path": "backend/docs/seo/import-packages/global-en-zh-research-claim-review-batch-04.import.v1.json",
+  "generated_markdown_report_path": "backend/docs/seo/global-en-zh-research-claim-review-batch-04.md",
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_pseo_generation": true,
+  "no_frontend_fallback_authority": true,
+  "next_task": "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05"
+}
