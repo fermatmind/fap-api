@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-25T11:42:26Z",
+  "updated_at": "2026-05-25T11:43:41Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -19620,10 +19620,10 @@
     "GLOBAL-EN-ZH-PARITY-SCAN-00": {
       "repo": "fap-api",
       "branch": "codex/global-en-zh-parity-scan-00",
-      "status": "committed_pending_push",
+      "status": "pr_open_github_checks_pending",
       "depends_on": [],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "8a521be11f00fbf85d6c7b6d8c30ce626477f4ce",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1679",
       "checks": {
         "scope_boundary": {
           "status": "pass",
@@ -19653,6 +19653,10 @@
         "github_required_checks": {
           "status": "pending",
           "evidence": null
+        },
+        "github_pr_opened": {
+          "status": "pass",
+          "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1679 from codex/global-en-zh-parity-scan-00."
         }
       },
       "failure_reason": null,
@@ -19691,6 +19695,11 @@
           "at": "2026-05-25T11:42:26.719617+00:00",
           "status": "committed_pending_push",
           "summary": "Committed GLOBAL-EN-ZH-PARITY-SCAN-00 as None; pending push and PR creation."
+        },
+        {
+          "at": "2026-05-25T11:43:41.226250+00:00",
+          "status": "pr_open_github_checks_pending",
+          "summary": "Opened PR #1679 for GLOBAL-EN-ZH-PARITY-SCAN-00 and pushed branch codex/global-en-zh-parity-scan-00; waiting for GitHub checks."
         }
       ]
     }
