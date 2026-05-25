@@ -1,0 +1,149 @@
+{
+  "schema_version": "global-en-zh-result-media-asset-batch-01.v1",
+  "task": "GLOBAL-EN-ZH-PARITY-RESULT-MEDIA-ASSET-BATCH-01",
+  "scanned_at": "2026-05-25T14:11:03Z",
+  "source_authority": "backend_result_asset_catalogs_and_media_parity_artifacts",
+  "frontend_fallback_authority_used": false,
+  "cms_mutation_performed": false,
+  "production_migration_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "auto_publish_performed": false,
+  "mass_report_prose_generated": false,
+  "substantial_english_prose_generated": false,
+  "fap_web_modified": false,
+  "zh_fallback_relaxed": false,
+  "draft_assets_runtime_activated": false,
+  "production_user_data_accessed": false,
+  "baseline_sources": [
+    "backend/docs/seo/generated/result-en-parity-00-assessment-result-content-inventory.v1.json",
+    "backend/docs/seo/generated/result-en-parity-01-asset-catalog-gate.v1.json",
+    "backend/docs/seo/generated/result-en-parity-02-riasec-en-assets.v1.json",
+    "backend/docs/seo/generated/result-en-parity-03-iq-locale-safe-labels.v1.json",
+    "backend/docs/seo/generated/result-en-parity-04-clinical-combo-en-paid.v1.json",
+    "backend/docs/seo/generated/result-en-parity-05-mbti-content-export.v1.json",
+    "backend/docs/seo/generated/result-en-parity-06-bigfive-v2-en-assets.v1.json",
+    "backend/docs/seo/generated/en-parity-06-media-assets-parity-inventory.v1.json"
+  ],
+  "result_report_asset_state": {
+    "asset_catalog_gate": {
+      "family_count": 8,
+      "asset_count": 47,
+      "original_missing_en_count": 32,
+      "fail_closed_count": 32
+    },
+    "riasec": {
+      "production_active_en_assets": 0,
+      "draft_review_only_assets": 5,
+      "deferred_human_review_assets": 14,
+      "fail_closed_no_zh_fallback": true,
+      "claim_boundary": "interest signal and exploratory guidance only; not a career recommendation"
+    },
+    "iq": {
+      "locale_safe_label_keys_fixed": true,
+      "claim_boundary": "online estimate and confidence-bound result only; not clinical diagnosis"
+    },
+    "clinical_combo": {
+      "paid_block_en_assets_fixed": true,
+      "claim_boundary": "self-assessment guidance only; not diagnosis, treatment, cure, or emergency protocol"
+    },
+    "mbti": {
+      "missing_en_asset_keys_count": 8,
+      "deferred_assets_count": 6,
+      "fail_closed_no_zh_fallback": true,
+      "frontend_clone_content_is_authority": false,
+      "claim_boundary": "workstyle tendency and exploratory career direction reference only"
+    },
+    "bigfive_v2": {
+      "remaining_missing_en_asset_keys_count": 0,
+      "remaining_unreviewed_en_asset_keys_count": 7,
+      "draft_review_only": true,
+      "fail_closed_no_zh_fallback": true,
+      "claim_boundary": "trait-vector workstyle explanation only"
+    }
+  },
+  "media_asset_state": {
+    "media_library_assets_count": 3,
+    "media_library_assets_with_alt_count": 3,
+    "media_library_assets_with_caption_count": 3,
+    "article_en_missing_cover_alt_count": 0,
+    "article_en_alt_contains_chinese_count": 0,
+    "article_shared_cover_pair_count": 19,
+    "career_guides_missing_og_image_count": 72,
+    "sidecar_media_review_count": 3,
+    "visual_ocr_performed": false,
+    "media_upload_performed": false,
+    "image_generation_performed": false
+  },
+  "deferred_human_review_assets": [
+    {
+      "family": "riasec",
+      "count": 14,
+      "status": "deferred_human_review",
+      "reason": "Deep RIASEC interpretation, examples, near-tie, and action-lab copy require reviewed English content before runtime activation."
+    },
+    {
+      "family": "mbti",
+      "count": 8,
+      "status": "deferred_human_review",
+      "reason": "MBTI external package, generated fallback replacement, share, PDF, email, and My Results summaries require reviewed backend-owned English package."
+    },
+    {
+      "family": "bigfive_v2",
+      "count": 7,
+      "status": "draft_review_only",
+      "reason": "Big Five V2 English route-row, coupling, scenario, facet, profile, body, and selector assets remain review-only."
+    },
+    {
+      "family": "media",
+      "count": 3,
+      "status": "deferred_human_review",
+      "reason": "Shared article covers, career guide social images, and MBTI default share visual require OCR or human design review."
+    }
+  ],
+  "fail_closed_controls": {
+    "no_zh_fallback_relaxation": true,
+    "frontend_clone_content_not_authority": true,
+    "draft_assets_not_runtime_active": true,
+    "private_result_report_data_not_accessed": true,
+    "public_sitemap_llms_not_modified": true
+  },
+  "claim_boundary": {
+    "forbidden_terms_absent_from_batch_artifact": true,
+    "forbidden_claims": [
+      "precise career recommendation",
+      "best career for you",
+      "hiring fit",
+      "career success prediction",
+      "salary prediction",
+      "turnover prediction",
+      "clinical diagnosis",
+      "treatment",
+      "cure"
+    ],
+    "allowed_framing": [
+      "interest signal",
+      "workstyle tendency",
+      "trait tendency",
+      "exploratory guidance",
+      "snapshot-based support",
+      "self-assessment guidance",
+      "non-diagnostic"
+    ]
+  },
+  "recommended_next_tasks": [
+    {
+      "id": "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01",
+      "title": "Full site parity verification",
+      "scope": "Verify remaining P0/P1/P2 state after controlled batch artifacts; do not mutate production."
+    },
+    {
+      "id": "RESULT-ASSET-HUMAN-REVIEW-BATCH-01",
+      "title": "Human-review result/report English assets",
+      "scope": "Review and import selected RIASEC, MBTI, and Big Five English assets through backend authority gates."
+    }
+  ],
+  "final_decision": "result_media_asset_batch_landed_with_deferred_human_review_assets",
+  "next_task": "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01"
+}
