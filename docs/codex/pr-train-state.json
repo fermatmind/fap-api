@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T07:53:17+08:00",
+  "updated_at": "2026-05-26T09:57:13+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -20469,12 +20469,12 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-result-report-asset-batch-06",
       "base": "main",
-      "status": "pr_opened",
+      "status": "merged",
       "depends_on": [
         "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05"
       ],
       "title": "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06 result report English asset draft package",
-      "commit_sha": "bf69fddc5cac4bb9eb148d2b510370da1fc4e514",
+      "commit_sha": "0a23daaa89d0b7466885d02d68813049a8ff3272",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1697",
       "checks": {
         "manifest_registration": {
@@ -20506,6 +20506,15 @@
         "pull_request": {
           "status": "pass",
           "evidence": "Opened PR #1697 after Batch-06 local validation passed."
+        },
+        "github_checks": {
+          "status": "pass",
+          "evidence": "PR #1697 checks green and mergeStateStatus CLEAN before squash merge."
+        },
+        "post_merge_focused_test": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhResultReportAssetBatch06 --no-ansi",
+          "evidence": "1 test passed with 343 assertions on synced main."
         }
       },
       "scope": {
@@ -20530,9 +20539,9 @@
         "frontend_fallback_authority": false
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-26T00:00:16Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "sidecar_issues": [],
       "next_task": "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07",
       "events": [
@@ -20555,6 +20564,11 @@
           "at": "2026-05-26T07:53:17+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1697 for Batch-06 after local validation passed."
+        },
+        {
+          "at": "2026-05-26T09:53:46+08:00",
+          "status": "merged",
+          "summary": "PR #1697 merged, remote branch deleted, local branch cleaned up, and post-merge focused test passed."
         }
       ]
     },
@@ -20562,17 +20576,43 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-media-alt-visual-review-batch-07",
       "base": "main",
-      "status": "manifest_registered",
+      "status": "pr_opened",
       "depends_on": [
         "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06"
       ],
-      "title": "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07 media alt/OG visual OCR and locale variant batch",
-      "commit_sha": null,
-      "pr_url": null,
+      "title": "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07 media alt and visual review package",
+      "commit_sha": "806cc30892f4d914791ab12a5f64400cdf945a93",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1698",
       "checks": {
         "manifest_registration": {
           "status": "pass",
           "evidence": "Registered from GLOBAL-EN-ZH-FULL-CONTENT-AUTHORITY-TRANSLATION-MATRIX-00 recommended PR train; implementation not started."
+        },
+        "artifact_generation": {
+          "status": "pass",
+          "evidence": "Generated media visual review package for 30 items; 6 missing EN alt drafts; 72 career social image rows; no uploads/replacements/OCR performed."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=GlobalEnZhMediaAltVisualReviewBatch07 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-en-zh-media-alt-visual-review-batch-07.v1.json >/dev/null",
+            "python3 -m json.tool backend/docs/seo/import-packages/global-en-zh-media-alt-visual-review-batch-07.import.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check",
+            "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short"
+          ],
+          "evidence": "All Batch-07 local validation commands passed; focused test reported 1 isolated-env warning but 793 assertions completed with no failures."
+        },
+        "pull_request": {
+          "status": "pass",
+          "evidence": "Opened PR #1698 after Batch-07 local validation passed."
         }
       },
       "scope": {
@@ -20606,6 +20646,21 @@
           "at": "2026-05-26T01:05:00+08:00",
           "status": "manifest_registered",
           "summary": "Registered media alt/OG visual review batch with OCR/human-review and no frontend public asset publication boundaries."
+        },
+        {
+          "at": "2026-05-26T09:53:46+08:00",
+          "status": "local_files_generated_pending_validation",
+          "summary": "Generated Batch-07 media alt/OG visual review package, generated summary, Markdown report, focused test placeholder, and Batch-06 merge reconciliation."
+        },
+        {
+          "at": "2026-05-26T09:55:56+08:00",
+          "status": "local_validation_passed",
+          "summary": "Batch-07 focused test, route list, Pint, composer validate/audit, JSON/YAML parses, diff checks, and fap-web reference status passed."
+        },
+        {
+          "at": "2026-05-26T09:57:13+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1698 for Batch-07 after local validation passed."
         }
       ]
     },

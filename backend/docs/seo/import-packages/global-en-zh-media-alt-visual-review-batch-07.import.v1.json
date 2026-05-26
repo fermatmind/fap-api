@@ -1,0 +1,2420 @@
+{
+  "schema_version": "global-en-zh-media-alt-visual-review-batch-07.import.v1",
+  "task": "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07",
+  "title": "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07 media alt and visual review package",
+  "package_type": "media_alt_visual_review_only",
+  "generated_at": "2026-05-26T09:53:46+08:00",
+  "source_matrix": "backend/docs/seo/generated/global-en-zh-full-content-authority-translation-matrix-00.v1.json",
+  "authority": {
+    "backend_media_library_and_cms_metadata_are_authority": true,
+    "fap_web_fallback_is_not_authority": true,
+    "no_media_upload": true,
+    "no_media_generation": true,
+    "no_media_replacement": true,
+    "ocr_not_performed": true,
+    "human_visual_review_required": true,
+    "draft_review_only": true
+  },
+  "items": [
+    {
+      "media_key": "share.mbti.default",
+      "asset_key": "media_library:share.mbti.default",
+      "media_type": "media_library_asset",
+      "usage_pages": [
+        "share surfaces"
+      ],
+      "zh_usage": "shared zh-CN media baseline asset",
+      "en_usage": "shared EN media baseline asset pending visual text review",
+      "image_url_or_asset_ref": {
+        "asset_ref": "share.mbti.default",
+        "url": "https://api.fermatmind.com/static/share/mbti_cover_source.png",
+        "variants": [
+          {
+            "variant_key": "source",
+            "path": "/static/share/mbti_cover_source.png",
+            "url": "https://api.fermatmind.com/static/share/mbti_cover_source.png",
+            "mime_type": "image/jpeg",
+            "width": 1536,
+            "height": 1024
+          },
+          {
+            "variant_key": "card",
+            "path": "/static/share/mbti_square_600x600.png",
+            "url": "https://api.fermatmind.com/static/share/mbti_square_600x600.png",
+            "mime_type": "image/jpeg",
+            "width": 1536,
+            "height": 1024
+          },
+          {
+            "variant_key": "thumbnail",
+            "path": "/static/share/mbti_square_600x600.png",
+            "url": "https://api.fermatmind.com/static/share/mbti_square_600x600.png",
+            "mime_type": "image/jpeg",
+            "width": 1536,
+            "height": 1024
+          },
+          {
+            "variant_key": "og",
+            "path": "/static/share/mbti_wide_1200x630.png",
+            "url": "https://api.fermatmind.com/static/share/mbti_wide_1200x630.png",
+            "mime_type": "image/jpeg",
+            "width": 1536,
+            "height": 1024
+          },
+          {
+            "variant_key": "preload",
+            "path": "/static/share/mbti_wide_1200x630.png",
+            "url": "https://api.fermatmind.com/static/share/mbti_wide_1200x630.png",
+            "mime_type": "image/jpeg",
+            "width": 1536,
+            "height": 1024
+          }
+        ]
+      },
+      "alt_zh": "FermatMind MBTI personality test social cover",
+      "alt_en_draft": "FermatMind MBTI personality test social cover",
+      "caption_en_draft": "Default MBTI personality test sharing image.",
+      "og_image_status": "metadata_present_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "media_assets/media_variants backend baseline",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "alt_and_caption_present_but_visual_ocr_pending",
+      "content_risk_level": "medium",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Alt/caption metadata exists. Do not claim visual parity until embedded text and QR locale suitability are reviewed."
+    },
+    {
+      "media_key": "social.wechat.official_qr",
+      "asset_key": "media_library:social.wechat.official_qr",
+      "media_type": "media_library_asset",
+      "usage_pages": [
+        "footer social surfaces",
+        "social contact surfaces"
+      ],
+      "zh_usage": "shared zh-CN media baseline asset",
+      "en_usage": "shared EN media baseline asset pending visual text review",
+      "image_url_or_asset_ref": {
+        "asset_ref": "social.wechat.official_qr",
+        "url": "https://api.fermatmind.com/static/social/wechat-qr-official-258.jpg",
+        "variants": [
+          {
+            "variant_key": "original",
+            "path": "/static/social/wechat-qr-official-258.jpg",
+            "url": "https://api.fermatmind.com/static/social/wechat-qr-official-258.jpg",
+            "mime_type": "image/jpeg",
+            "width": 258,
+            "height": 258
+          },
+          {
+            "variant_key": "thumbnail",
+            "path": "/static/social/wechat-qr-official-258.jpg",
+            "url": "https://api.fermatmind.com/static/social/wechat-qr-official-258.jpg",
+            "mime_type": "image/jpeg",
+            "width": 258,
+            "height": 258
+          }
+        ]
+      },
+      "alt_zh": "FermatMind official WeChat QR code",
+      "alt_en_draft": "FermatMind official WeChat QR code",
+      "caption_en_draft": "Official WeChat QR code used in footer and social surfaces.",
+      "og_image_status": "metadata_present_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "media_assets/media_variants backend baseline",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "alt_and_caption_present_but_visual_ocr_pending",
+      "content_risk_level": "medium",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Alt/caption metadata exists. Do not claim visual parity until embedded text and QR locale suitability are reviewed."
+    },
+    {
+      "media_key": "social.wechat.qr",
+      "asset_key": "media_library:social.wechat.qr",
+      "media_type": "media_library_asset",
+      "usage_pages": [
+        "footer social surfaces",
+        "social contact surfaces"
+      ],
+      "zh_usage": "shared zh-CN media baseline asset",
+      "en_usage": "shared EN media baseline asset pending visual text review",
+      "image_url_or_asset_ref": {
+        "asset_ref": "social.wechat.qr",
+        "url": "https://api.fermatmind.com/static/social/wechat-qr.jpg",
+        "variants": [
+          {
+            "variant_key": "original",
+            "path": "/static/social/wechat-qr.jpg",
+            "url": "https://api.fermatmind.com/static/social/wechat-qr.jpg",
+            "mime_type": "image/jpeg",
+            "width": 258,
+            "height": 258
+          },
+          {
+            "variant_key": "thumbnail",
+            "path": "/static/social/wechat-qr.jpg",
+            "url": "https://api.fermatmind.com/static/social/wechat-qr.jpg",
+            "mime_type": "image/jpeg",
+            "width": 258,
+            "height": 258
+          }
+        ]
+      },
+      "alt_zh": "FermatMind WeChat QR code",
+      "alt_en_draft": "FermatMind WeChat QR code",
+      "caption_en_draft": "General WeChat QR code used by legacy social placements.",
+      "og_image_status": "metadata_present_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "media_assets/media_variants backend baseline",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "alt_and_caption_present_but_visual_ocr_pending",
+      "content_risk_level": "medium",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Alt/caption metadata exists. Do not claim visual parity until embedded text and QR locale suitability are reviewed."
+    },
+    {
+      "media_key": "article_cover:are-infj-men-rare-or-socially-silenced",
+      "asset_key": "article_cover:are-infj-men-rare-or-socially-silenced",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/are-infj-men-rare-or-socially-silenced",
+        "/en/articles/are-infj-men-rare-or-socially-silenced"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "draft EN article counterpart media metadata pending import and visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/are-infj-men-rare-or-socially-silenced.svg",
+        "variants": {
+          "hero": "https://api.fermatmind.com/static/articles/covers/are-infj-men-rare-or-socially-silenced.svg",
+          "card": "https://api.fermatmind.com/static/articles/covers/are-infj-men-rare-or-socially-silenced.svg",
+          "thumbnail": "https://api.fermatmind.com/static/articles/covers/are-infj-men-rare-or-socially-silenced.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/are-infj-men-rare-or-socially-silenced.svg",
+          "preload": "https://api.fermatmind.com/static/articles/covers/are-infj-men-rare-or-socially-silenced.svg"
+        }
+      },
+      "alt_zh": "\u534a\u900f\u660e\u7537\u6027\u8f6e\u5ed3\u4e0e\u88ab\u538b\u4f4e\u7684\u58f0\u6ce2\u7ebf\u6761\uff0c\u8c61\u5f81\u9ad8\u654f\u611f\u7537\u6027\u7684\u81ea\u6211\u6c89\u9ed8",
+      "alt_en_draft": "A translucent male silhouette with lowered sound-wave lines, suggesting self-silencing among highly sensitive men.",
+      "caption_en_draft": "Cover image for Are INFJ Men Rare, or Have Highly Sensitive Men Learned to Stay Silent?.",
+      "og_image_status": "draft_alt_prepared_og_variant_pending_visual_review",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": false,
+      "media_alt_status": "missing_en_cover_alt_until_article_counterpart_exists",
+      "content_risk_level": "medium",
+      "required_action": "translate_draft_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:best-valentines-date-by-personality-and-relationship-science",
+      "asset_key": "article_cover:best-valentines-date-by-personality-and-relationship-science",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/best-valentines-date-by-personality-and-relationship-science",
+        "/en/articles/best-valentines-date-by-personality-and-relationship-science"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "draft EN article counterpart media metadata pending import and visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/best-valentines-date-by-personality-and-relationship-science.svg",
+        "variants": {
+          "hero": "https://api.fermatmind.com/static/articles/covers/best-valentines-date-by-personality-and-relationship-science.svg",
+          "card": "https://api.fermatmind.com/static/articles/covers/best-valentines-date-by-personality-and-relationship-science.svg",
+          "thumbnail": "https://api.fermatmind.com/static/articles/covers/best-valentines-date-by-personality-and-relationship-science.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/best-valentines-date-by-personality-and-relationship-science.svg",
+          "preload": "https://api.fermatmind.com/static/articles/covers/best-valentines-date-by-personality-and-relationship-science.svg"
+        }
+      },
+      "alt_zh": "\u62bd\u8c61\u8def\u5f84\u5730\u56fe\u8fde\u63a5\u4e24\u4e2a\u5173\u7cfb\u8282\u70b9\uff0c\u8868\u73b0\u4f4e\u6469\u64e6\u7ea6\u4f1a\u8bbe\u8ba1",
+      "alt_en_draft": "An abstract route map connecting two relationship nodes, representing lower-friction date design.",
+      "caption_en_draft": "Cover image for Stop Chasing Romance Alone: Design a Lower-Friction Valentine Date With Personality and Relationship Science.",
+      "og_image_status": "draft_alt_prepared_og_variant_pending_visual_review",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": false,
+      "media_alt_status": "missing_en_cover_alt_until_article_counterpart_exists",
+      "content_risk_level": "medium",
+      "required_action": "translate_draft_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:big-five-growth-guide",
+      "asset_key": "article_cover:big-five-growth-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/big-five-growth-guide",
+        "/en/articles/big-five-growth-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/big-five-growth-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/big-five-growth-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/big-five-growth-guide.svg"
+        }
+      },
+      "alt_zh": "\u300a\u5927\u4e94\u4eba\u683c\u6d4b\u8bd5\uff08OCEAN \u6a21\u578b\uff09\uff5c\u6210\u957f\u5f15\u5bfc\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "Big Five Personality Test (OCEAN) | Growth Guide cover image",
+      "caption_en_draft": "Cover image for Big Five Personality Test (OCEAN) | Growth Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:big-five-narrative-portrait",
+      "asset_key": "article_cover:big-five-narrative-portrait",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/big-five-narrative-portrait",
+        "/en/articles/big-five-narrative-portrait"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/big-five-narrative-portrait.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/big-five-narrative-portrait.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/big-five-narrative-portrait.svg"
+        }
+      },
+      "alt_zh": "\u300a\u5927\u4e94\u4eba\u683c\u6d4b\u8bd5\uff08OCEAN \u6a21\u578b\uff09\uff5c\u53d9\u4e8b\u753b\u50cf\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "Big Five Personality Test (OCEAN) | Narrative Portrait cover image",
+      "caption_en_draft": "Cover image for Big Five Personality Test (OCEAN) | Narrative Portrait.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:big-five-tool-guide",
+      "asset_key": "article_cover:big-five-tool-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/big-five-tool-guide",
+        "/en/articles/big-five-tool-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg"
+        }
+      },
+      "alt_zh": "\u300a\u5927\u4e94\u4eba\u683c\u6d4b\u8bd5\uff08OCEAN \u6a21\u578b\uff09\uff5c\u5de5\u5177\u8bf4\u660e\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "Big Five Personality Test (OCEAN) | Tool Guide cover image",
+      "caption_en_draft": "Cover image for Big Five Personality Test (OCEAN) | Tool Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:childhood-dream-job-still-shapes-career-choice",
+      "asset_key": "article_cover:childhood-dream-job-still-shapes-career-choice",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/childhood-dream-job-still-shapes-career-choice",
+        "/en/articles/childhood-dream-job-still-shapes-career-choice"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "draft EN article counterpart media metadata pending import and visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/childhood-dream-job-still-shapes-career-choice.svg",
+        "variants": {
+          "hero": "https://api.fermatmind.com/static/articles/covers/childhood-dream-job-still-shapes-career-choice.svg",
+          "card": "https://api.fermatmind.com/static/articles/covers/childhood-dream-job-still-shapes-career-choice.svg",
+          "thumbnail": "https://api.fermatmind.com/static/articles/covers/childhood-dream-job-still-shapes-career-choice.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/childhood-dream-job-still-shapes-career-choice.svg",
+          "preload": "https://api.fermatmind.com/static/articles/covers/childhood-dream-job-still-shapes-career-choice.svg"
+        }
+      },
+      "alt_zh": "\u62bd\u8c61\u8f68\u8ff9\u4ece\u7ae5\u5e74\u804c\u4e1a\u56fe\u6807\u5ef6\u4f38\u5230\u6210\u5e74\u804c\u4e1a\u8def\u5f84",
+      "alt_en_draft": "An abstract path extending from childhood career icons into an adult career route.",
+      "caption_en_draft": "Cover image for Why Your Childhood Dream Job Still Shapes Your Career Judgment.",
+      "og_image_status": "draft_alt_prepared_og_variant_pending_visual_review",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": false,
+      "media_alt_status": "missing_en_cover_alt_until_article_counterpart_exists",
+      "content_risk_level": "medium",
+      "required_action": "translate_draft_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:clinical-depression-anxiety-pro-growth-guide",
+      "asset_key": "article_cover:clinical-depression-anxiety-pro-growth-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/clinical-depression-anxiety-pro-growth-guide",
+        "/en/articles/clinical-depression-anxiety-pro-growth-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/clinical-depression-anxiety-pro-growth-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/clinical-depression-anxiety-pro-growth-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/clinical-depression-anxiety-pro-growth-guide.svg"
+        }
+      },
+      "alt_zh": "\u300a\u6291\u90c1\u7126\u8651\u7efc\u5408\u68c0\u6d4b\u3010\u5b66\u672f\u4e13\u4e1a\u7248\u3011\uff5c\u6210\u957f\u5f15\u5bfc\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "Depression & Anxiety Combined Assessment (Professional) | Growth Guide cover image",
+      "caption_en_draft": "Cover image for Depression & Anxiety Combined Assessment (Professional) | Growth Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:clinical-depression-anxiety-pro-narrative-portrait",
+      "asset_key": "article_cover:clinical-depression-anxiety-pro-narrative-portrait",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/clinical-depression-anxiety-pro-narrative-portrait",
+        "/en/articles/clinical-depression-anxiety-pro-narrative-portrait"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/clinical-depression-anxiety-pro-narrative-portrait.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/clinical-depression-anxiety-pro-narrative-portrait.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/clinical-depression-anxiety-pro-narrative-portrait.svg"
+        }
+      },
+      "alt_zh": "\u300a\u6291\u90c1\u7126\u8651\u7efc\u5408\u68c0\u6d4b\u3010\u5b66\u672f\u4e13\u4e1a\u7248\u3011\uff5c\u53d9\u4e8b\u753b\u50cf\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "Depression & Anxiety Combined Assessment (Professional) | Narrative Portrait cover image",
+      "caption_en_draft": "Cover image for Depression & Anxiety Combined Assessment (Professional) | Narrative Portrait.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:clinical-depression-anxiety-pro-tool-guide",
+      "asset_key": "article_cover:clinical-depression-anxiety-pro-tool-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/clinical-depression-anxiety-pro-tool-guide",
+        "/en/articles/clinical-depression-anxiety-pro-tool-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/clinical-depression-anxiety-pro-tool-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/clinical-depression-anxiety-pro-tool-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/clinical-depression-anxiety-pro-tool-guide.svg"
+        }
+      },
+      "alt_zh": "\u300a\u6291\u90c1\u7126\u8651\u7efc\u5408\u68c0\u6d4b\u3010\u5b66\u672f\u4e13\u4e1a\u7248\u3011\uff5c\u5de5\u5177\u8bf4\u660e\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "Depression & Anxiety Combined Assessment (Professional) | Tool Guide cover image",
+      "caption_en_draft": "Cover image for Depression & Anxiety Combined Assessment (Professional) | Tool Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:depression-screening-standard-growth-guide",
+      "asset_key": "article_cover:depression-screening-standard-growth-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/depression-screening-standard-growth-guide",
+        "/en/articles/depression-screening-standard-growth-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-growth-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-growth-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-growth-guide.svg"
+        }
+      },
+      "alt_zh": "\u300a\u6291\u90c1\u6d4b\u8bc4\u3010\u6807\u51c6\u7248\u3011\uff5c\u6210\u957f\u5f15\u5bfc\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "Depression Screening (Standard) | Growth Guide cover image",
+      "caption_en_draft": "Cover image for Depression Screening (Standard) | Growth Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:depression-screening-standard-narrative-portrait",
+      "asset_key": "article_cover:depression-screening-standard-narrative-portrait",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/depression-screening-standard-narrative-portrait",
+        "/en/articles/depression-screening-standard-narrative-portrait"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-narrative-portrait.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-narrative-portrait.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-narrative-portrait.svg"
+        }
+      },
+      "alt_zh": "\u300a\u6291\u90c1\u6d4b\u8bc4\u3010\u6807\u51c6\u7248\u3011\uff5c\u53d9\u4e8b\u753b\u50cf\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "Depression Screening (Standard) | Narrative Portrait cover image",
+      "caption_en_draft": "Cover image for Depression Screening (Standard) | Narrative Portrait.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:depression-screening-standard-tool-guide",
+      "asset_key": "article_cover:depression-screening-standard-tool-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/depression-screening-standard-tool-guide",
+        "/en/articles/depression-screening-standard-tool-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg"
+        }
+      },
+      "alt_zh": "\u300a\u6291\u90c1\u6d4b\u8bc4\u3010\u6807\u51c6\u7248\u3011\uff5c\u5de5\u5177\u8bf4\u660e\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "Depression Screening (Standard) | Tool Guide cover image",
+      "caption_en_draft": "Cover image for Depression Screening (Standard) | Tool Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:enneagram-growth-guide",
+      "asset_key": "article_cover:enneagram-growth-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/enneagram-growth-guide",
+        "/en/articles/enneagram-growth-guide"
+      ],
+      "zh_usage": "ZH article cover metadata missing or not authoritative",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/enneagram-growth-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/enneagram-growth-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/enneagram-growth-guide.svg"
+        }
+      },
+      "alt_zh": null,
+      "alt_en_draft": "Enneagram Personality Test | Growth Guide cover image",
+      "caption_en_draft": "Cover image for Enneagram Personality Test | Growth Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": false,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:enneagram-test-tool-guide",
+      "asset_key": "article_cover:enneagram-test-tool-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/enneagram-test-tool-guide",
+        "/en/articles/enneagram-test-tool-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg"
+        }
+      },
+      "alt_zh": "\u300a\u4e5d\u578b\u4eba\u683c\u6d4b\u8bd5\uff08Enneagram\uff09\uff5c\u5de5\u5177\u8bf4\u660e\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "Enneagram Personality Test | Tool Guide cover image",
+      "caption_en_draft": "Cover image for Enneagram Personality Test | Tool Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:eq-test-growth-guide",
+      "asset_key": "article_cover:eq-test-growth-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/eq-test-growth-guide",
+        "/en/articles/eq-test-growth-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/eq-test-growth-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/eq-test-growth-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/eq-test-growth-guide.svg"
+        }
+      },
+      "alt_zh": "\u300a\u60c5\u5546\uff08EQ\uff09\u6d4b\u8bd5\uff5c\u6210\u957f\u5f15\u5bfc\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "EQ Test | Growth Guide cover image",
+      "caption_en_draft": "Cover image for EQ Test | Growth Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:eq-test-narrative-portrait",
+      "asset_key": "article_cover:eq-test-narrative-portrait",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/eq-test-narrative-portrait",
+        "/en/articles/eq-test-narrative-portrait"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/eq-test-narrative-portrait.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/eq-test-narrative-portrait.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/eq-test-narrative-portrait.svg"
+        }
+      },
+      "alt_zh": "\u300a\u60c5\u5546\uff08EQ\uff09\u6d4b\u8bd5\uff5c\u53d9\u4e8b\u753b\u50cf\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "EQ Test | Narrative Portrait cover image",
+      "caption_en_draft": "Cover image for EQ Test | Narrative Portrait.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:eq-test-tool-guide",
+      "asset_key": "article_cover:eq-test-tool-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/eq-test-tool-guide",
+        "/en/articles/eq-test-tool-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg"
+        }
+      },
+      "alt_zh": "\u300a\u60c5\u5546\uff08EQ\uff09\u6d4b\u8bd5\uff5c\u5de5\u5177\u8bf4\u660e\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "EQ Test | Tool Guide cover image",
+      "caption_en_draft": "Cover image for EQ Test | Tool Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:how-16-personality-types-talk-to-an-ai-coach",
+      "asset_key": "article_cover:how-16-personality-types-talk-to-an-ai-coach",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/how-16-personality-types-talk-to-an-ai-coach",
+        "/en/articles/how-16-personality-types-talk-to-an-ai-coach"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "draft EN article counterpart media metadata pending import and visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/how-16-personality-types-talk-to-an-ai-coach.svg",
+        "variants": {
+          "hero": "https://api.fermatmind.com/static/articles/covers/how-16-personality-types-talk-to-an-ai-coach.svg",
+          "card": "https://api.fermatmind.com/static/articles/covers/how-16-personality-types-talk-to-an-ai-coach.svg",
+          "thumbnail": "https://api.fermatmind.com/static/articles/covers/how-16-personality-types-talk-to-an-ai-coach.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/how-16-personality-types-talk-to-an-ai-coach.svg",
+          "preload": "https://api.fermatmind.com/static/articles/covers/how-16-personality-types-talk-to-an-ai-coach.svg"
+        }
+      },
+      "alt_zh": "\u62bd\u8c61\u5bf9\u8bdd\u6c14\u6ce1\u4e0e\u955c\u9762\u7ed3\u6784\u8868\u73b0\u4eba\u683c\u4e0e AI \u6559\u7ec3\u7684\u4e92\u52a8",
+      "alt_en_draft": "Abstract dialogue bubbles and a mirror-like structure showing interaction between personality and an AI coach.",
+      "caption_en_draft": "Cover image for When the 16 Personality Types Talk to an AI Coach: Who Uses It as a Mirror, a Tool, or an Easy Yes.",
+      "og_image_status": "draft_alt_prepared_og_variant_pending_visual_review",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": false,
+      "media_alt_status": "missing_en_cover_alt_until_article_counterpart_exists",
+      "content_risk_level": "medium",
+      "required_action": "translate_draft_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:how-personality-shapes-attitude-toward-ai",
+      "asset_key": "article_cover:how-personality-shapes-attitude-toward-ai",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/how-personality-shapes-attitude-toward-ai",
+        "/en/articles/how-personality-shapes-attitude-toward-ai"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "draft EN article counterpart media metadata pending import and visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/how-personality-shapes-attitude-toward-ai.svg",
+        "variants": {
+          "hero": "https://api.fermatmind.com/static/articles/covers/how-personality-shapes-attitude-toward-ai.svg",
+          "card": "https://api.fermatmind.com/static/articles/covers/how-personality-shapes-attitude-toward-ai.svg",
+          "thumbnail": "https://api.fermatmind.com/static/articles/covers/how-personality-shapes-attitude-toward-ai.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/how-personality-shapes-attitude-toward-ai.svg",
+          "preload": "https://api.fermatmind.com/static/articles/covers/how-personality-shapes-attitude-toward-ai.svg"
+        }
+      },
+      "alt_zh": "\u62bd\u8c61\u4eba\u8138\u8f6e\u5ed3\u4e0e AI \u8282\u70b9\u7f51\u7edc\u4ea4\u7ec7\uff0c\u8868\u73b0\u4eba\u683c\u5dee\u5f02\u5982\u4f55\u5f71\u54cd\u7b97\u6cd5\u4fe1\u4efb",
+      "alt_en_draft": "An abstract face outline woven with AI network nodes, showing how personality differences can affect algorithm trust.",
+      "caption_en_draft": "Cover image for How Personality Shapes Your Attitude Toward AI: From Curiosity and Anxiety to Algorithm Trust.",
+      "og_image_status": "draft_alt_prepared_og_variant_pending_visual_review",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": false,
+      "media_alt_status": "missing_en_cover_alt_until_article_counterpart_exists",
+      "content_risk_level": "medium",
+      "required_action": "translate_draft_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:iq-test-growth-guide",
+      "asset_key": "article_cover:iq-test-growth-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/iq-test-growth-guide",
+        "/en/articles/iq-test-growth-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/iq-test-growth-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/iq-test-growth-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/iq-test-growth-guide.svg"
+        }
+      },
+      "alt_zh": "\u300a\u667a\u5546\uff08IQ\uff09\u6d4b\u8bd5\uff5c\u6210\u957f\u5f15\u5bfc\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "IQ Test | Growth Guide cover image",
+      "caption_en_draft": "Cover image for IQ Test | Growth Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:iq-test-narrative-portrait",
+      "asset_key": "article_cover:iq-test-narrative-portrait",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/iq-test-narrative-portrait",
+        "/en/articles/iq-test-narrative-portrait"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/iq-test-narrative-portrait.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/iq-test-narrative-portrait.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/iq-test-narrative-portrait.svg"
+        }
+      },
+      "alt_zh": "\u300a\u667a\u5546\uff08IQ\uff09\u6d4b\u8bd5\uff5c\u53d9\u4e8b\u753b\u50cf\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "IQ Test | Narrative Portrait cover image",
+      "caption_en_draft": "Cover image for IQ Test | Narrative Portrait.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:iq-test-tool-guide",
+      "asset_key": "article_cover:iq-test-tool-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/iq-test-tool-guide",
+        "/en/articles/iq-test-tool-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg"
+        }
+      },
+      "alt_zh": "\u300a\u667a\u5546\uff08IQ\uff09\u6d4b\u8bd5\uff5c\u5de5\u5177\u8bf4\u660e\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "IQ Test | Tool Guide cover image",
+      "caption_en_draft": "Cover image for IQ Test | Tool Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:mbti-basics",
+      "asset_key": "article_cover:mbti-basics",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/mbti-basics",
+        "/en/articles/mbti-basics"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg"
+        }
+      },
+      "alt_zh": "\u300aMBTI \u6027\u683c\u6d4b\u8bd5\uff0816\u578b\u4eba\u683c\uff09\uff5c\u5de5\u5177\u8bf4\u660e\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "MBTI Personality Test (16 Types) | Tool Guide cover image",
+      "caption_en_draft": "Cover image for MBTI Personality Test (16 Types) | Tool Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:mbti-growth-guide",
+      "asset_key": "article_cover:mbti-growth-guide",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/mbti-growth-guide",
+        "/en/articles/mbti-growth-guide"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/mbti-growth-guide.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/mbti-growth-guide.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/mbti-growth-guide.svg"
+        }
+      },
+      "alt_zh": "\u300aMBTI \u6027\u683c\u6d4b\u8bd5\uff0816\u578b\u4eba\u683c\uff09\uff5c\u6210\u957f\u5f15\u5bfc\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "MBTI Personality Test (16 Types) | Growth Guide cover image",
+      "caption_en_draft": "Cover image for MBTI Personality Test (16 Types) | Growth Guide.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:mbti-narrative-portrait",
+      "asset_key": "article_cover:mbti-narrative-portrait",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/mbti-narrative-portrait",
+        "/en/articles/mbti-narrative-portrait"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "existing EN article cover metadata pending shared visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/mbti-narrative-portrait.svg",
+        "variants": {
+          "source": "https://api.fermatmind.com/static/articles/covers/mbti-narrative-portrait.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/mbti-narrative-portrait.svg"
+        }
+      },
+      "alt_zh": "\u300aMBTI \u6027\u683c\u6d4b\u8bd5\uff0816\u578b\u4eba\u683c\uff09\uff5c\u53d9\u4e8b\u753b\u50cf\u7248\u300b\u5c01\u9762\u56fe",
+      "alt_en_draft": "MBTI Personality Test (16 Types) | Narrative Portrait cover image",
+      "caption_en_draft": "Cover image for MBTI Personality Test (16 Types) | Narrative Portrait.",
+      "og_image_status": "en_alt_present_shared_visual_ocr_pending",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "en_alt_present_for_existing_en_but_shared_visual_review_pending",
+      "content_risk_level": "low",
+      "required_action": "human_review_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "article_cover:which-love-script-fits-you-best",
+      "asset_key": "article_cover:which-love-script-fits-you-best",
+      "media_type": "article_cover",
+      "usage_pages": [
+        "/articles/which-love-script-fits-you-best",
+        "/en/articles/which-love-script-fits-you-best"
+      ],
+      "zh_usage": "ZH article cover metadata present",
+      "en_usage": "draft EN article counterpart media metadata pending import and visual review",
+      "image_url_or_asset_ref": {
+        "url": "https://api.fermatmind.com/static/articles/covers/which-love-script-fits-you-best.svg",
+        "variants": {
+          "hero": "https://api.fermatmind.com/static/articles/covers/which-love-script-fits-you-best.svg",
+          "card": "https://api.fermatmind.com/static/articles/covers/which-love-script-fits-you-best.svg",
+          "thumbnail": "https://api.fermatmind.com/static/articles/covers/which-love-script-fits-you-best.svg",
+          "og": "https://api.fermatmind.com/static/articles/covers/which-love-script-fits-you-best.svg",
+          "preload": "https://api.fermatmind.com/static/articles/covers/which-love-script-fits-you-best.svg"
+        }
+      },
+      "alt_zh": "\u62bd\u8c61\u5173\u7cfb\u7f51\u7edc\u4e2d\u5448\u73b0\u4e03\u79cd\u7231\u60c5\u811a\u672c\u7684\u51e0\u4f55\u8def\u5f84",
+      "alt_en_draft": "An abstract relationship network showing geometric paths for seven love scripts.",
+      "caption_en_draft": "Cover image for Which Relationship Script Fits You Best? A More Scientific Match Through Seven Love Styles.",
+      "og_image_status": "draft_alt_prepared_og_variant_pending_visual_review",
+      "embedded_text_review_required": true,
+      "ocr_required": true,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "pending_ocr_and_human_visual_review",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "Article cover image metadata and Media Library variants",
+      "zh_source_exists": true,
+      "en_counterpart_exists": false,
+      "media_alt_status": "missing_en_cover_alt_until_article_counterpart_exists",
+      "content_risk_level": "medium",
+      "required_action": "translate_draft_needed",
+      "subitems": [],
+      "notes": "Article cover alt/caption review package only. Shared SVG/visual text must be reviewed before claiming EN visual parity."
+    },
+    {
+      "media_key": "career_guides:og_and_twitter_images",
+      "asset_key": "career_guides:og_and_twitter_images",
+      "media_type": "career_guide_social_images",
+      "usage_pages": [
+        "/career-guides/*",
+        "/en/career-guides/*"
+      ],
+      "zh_usage": "36 zh-CN career guide rows have missing OG/Twitter image authority references",
+      "en_usage": "36 EN career guide rows have missing OG/Twitter image authority references",
+      "image_url_or_asset_ref": {
+        "missing_authority_image_rows": 72,
+        "image_upload_performed": false
+      },
+      "alt_zh": null,
+      "alt_en_draft": null,
+      "caption_en_draft": null,
+      "og_image_status": "72_missing_authority_social_image_rows",
+      "embedded_text_review_required": false,
+      "ocr_required": false,
+      "ocr_completed": false,
+      "human_visual_review_required": true,
+      "human_review_required": true,
+      "replacement_required": false,
+      "replacement_decision": "image_assignment_required_before_ocr_or_replacement_decision",
+      "replacement_performed": false,
+      "media_upload_performed": false,
+      "media_generation_performed": false,
+      "media_replacement_performed": false,
+      "locale_specific_variant_required": true,
+      "publish_state": "draft_review_only",
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "search_channel_eligible": false,
+      "source_authority": "CareerGuide seo_meta og_image_url/twitter_image_url",
+      "zh_source_exists": true,
+      "en_counterpart_exists": true,
+      "media_alt_status": "72_missing_career_guide_social_images",
+      "content_risk_level": "medium",
+      "required_action": "import_package_needed",
+      "subitems": [
+        {
+          "guide_slug": "annual-career-review-system",
+          "locale": "en",
+          "title": "Annual Career Review System",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Annual Career Review System.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "annual-career-review-system",
+          "locale": "zh-CN",
+          "title": "\u5e74\u5ea6\u804c\u4e1a\u590d\u76d8\u7cfb\u7edf",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Annual Career Review System.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "big5-for-career-decisions",
+          "locale": "en",
+          "title": "Using Big Five for Career Decisions",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Using Big Five for Career Decisions.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "big5-for-career-decisions",
+          "locale": "zh-CN",
+          "title": "\u5982\u4f55\u7528\u5927\u4e94\u4eba\u683c\u505a\u804c\u4e1a\u51b3\u7b56",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Using Big Five for Career Decisions.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "build-five-year-career-roadmap",
+          "locale": "en",
+          "title": "Build a Five-Year Career Roadmap",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Build a Five-Year Career Roadmap.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "build-five-year-career-roadmap",
+          "locale": "zh-CN",
+          "title": "\u5982\u4f55\u5236\u5b9a\u4e94\u5e74\u804c\u4e1a\u8def\u7ebf\u56fe",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Build a Five-Year Career Roadmap.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "build-portfolio-for-career-switch",
+          "locale": "en",
+          "title": "Build a Portfolio for Career Switching",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Build a Portfolio for Career Switching.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "build-portfolio-for-career-switch",
+          "locale": "zh-CN",
+          "title": "\u8f6c\u5c97\u65f6\u5982\u4f55\u6784\u5efa\u9ad8\u8d28\u91cf\u4f5c\u54c1\u96c6",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Build a Portfolio for Career Switching.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "career-growth-with-manager",
+          "locale": "en",
+          "title": "Career Growth with Your Manager",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Career Growth with Your Manager.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "career-growth-with-manager",
+          "locale": "zh-CN",
+          "title": "\u5982\u4f55\u4e0e\u4e0a\u7ea7\u5171\u5efa\u804c\u4e1a\u6210\u957f\u8def\u5f84",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Career Growth with Your Manager.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "career-risk-management",
+          "locale": "en",
+          "title": "Career Risk Management",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Career Risk Management.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "career-risk-management",
+          "locale": "zh-CN",
+          "title": "\u804c\u4e1a\u98ce\u9669\u7ba1\u7406\u6307\u5357",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Career Risk Management.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "career-transition-playbook",
+          "locale": "en",
+          "title": "Career Transition Playbook",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Career Transition Playbook.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "career-transition-playbook",
+          "locale": "zh-CN",
+          "title": "\u804c\u4e1a\u8f6c\u578b\u884c\u52a8\u624b\u518c",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Career Transition Playbook.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "cross-industry-move-strategy",
+          "locale": "en",
+          "title": "Cross-Industry Move Strategy",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Cross-Industry Move Strategy.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "cross-industry-move-strategy",
+          "locale": "zh-CN",
+          "title": "\u8de8\u884c\u4e1a\u8f6c\u578b\u7b56\u7565",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Cross-Industry Move Strategy.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "enfj-career-playbook",
+          "locale": "en",
+          "title": "ENFJ Career Playbook: Lead People Without Carrying Everyone",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ENFJ Career Playbook: Lead People Without Carrying Everyone.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "enfj-career-playbook",
+          "locale": "zh-CN",
+          "title": "ENFJ \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u5e26\u56e2\u961f\uff0c\u4e0d\u7b49\u4e8e\u66ff\u6240\u6709\u4eba\u625b\u60c5\u7eea",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ENFJ Career Playbook: Lead People Without Carrying Everyone.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "enfp-career-playbook",
+          "locale": "en",
+          "title": "ENFP Career Playbook: Keep Freedom While Protecting Delivery",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ENFP Career Playbook: Keep Freedom While Protecting Delivery.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "enfp-career-playbook",
+          "locale": "zh-CN",
+          "title": "ENFP \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u4fdd\u7559\u81ea\u7531\u5ea6\uff0c\u4e5f\u8981\u5b88\u4f4f\u95ed\u73af\u7387",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ENFP Career Playbook: Keep Freedom While Protecting Delivery.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "entj-career-playbook",
+          "locale": "en",
+          "title": "ENTJ Career Playbook: Scale Leadership Beyond Personal Output",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ENTJ Career Playbook: Scale Leadership Beyond Personal Output.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "entj-career-playbook",
+          "locale": "zh-CN",
+          "title": "ENTJ \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u628a\u9886\u5bfc\u529b\u4ece\u4eb2\u529b\u4eb2\u4e3a\u5347\u7ea7\u6210\u7cfb\u7edf\u653e\u5927",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ENTJ Career Playbook: Scale Leadership Beyond Personal Output.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "entp-career-playbook",
+          "locale": "en",
+          "title": "ENTP Career Playbook: Turn Idea Density Into Shippable Momentum",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ENTP Career Playbook: Turn Idea Density Into Shippable Momentum.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "entp-career-playbook",
+          "locale": "zh-CN",
+          "title": "ENTP \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u628a\u70b9\u5b50\u5bc6\u5ea6\u53d8\u6210\u53ef\u4ea4\u4ed8\u7ed3\u679c",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ENTP Career Playbook: Turn Idea Density Into Shippable Momentum.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "esfj-career-playbook",
+          "locale": "en",
+          "title": "ESFJ Career Playbook: Turn Care Into Professional Influence",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ESFJ Career Playbook: Turn Care Into Professional Influence.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "esfj-career-playbook",
+          "locale": "zh-CN",
+          "title": "ESFJ \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u8ba9\u7167\u987e\u529b\u6210\u4e3a\u4e13\u4e1a\u5f71\u54cd\u529b\uff0c\u800c\u4e0d\u662f\u60c5\u7eea\u8d1f\u62c5",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ESFJ Career Playbook: Turn Care Into Professional Influence.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "esfp-career-playbook",
+          "locale": "en",
+          "title": "ESFP Career Playbook: Keep Energy High While Building Lasting Skill",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ESFP Career Playbook: Keep Energy High While Building Lasting Skill.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "esfp-career-playbook",
+          "locale": "zh-CN",
+          "title": "ESFP \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u4fdd\u7559\u73b0\u573a\u611f\u67d3\u529b\uff0c\u4e5f\u8981\u6c89\u6dc0\u957f\u671f\u80fd\u529b",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ESFP Career Playbook: Keep Energy High While Building Lasting Skill.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "estj-career-playbook",
+          "locale": "en",
+          "title": "ESTJ Career Playbook: Upgrade Strong Execution Into Durable Leadership",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ESTJ Career Playbook: Upgrade Strong Execution Into Durable Leadership.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "estj-career-playbook",
+          "locale": "zh-CN",
+          "title": "ESTJ \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u628a\u5f3a\u6267\u884c\u5347\u7ea7\u6210\u53ef\u6301\u7eed\u9886\u5bfc\u529b",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ESTJ Career Playbook: Upgrade Strong Execution Into Durable Leadership.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "estp-career-playbook",
+          "locale": "en",
+          "title": "ESTP Career Playbook: Pair Fast Action With Better Risk Framing",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ESTP Career Playbook: Pair Fast Action With Better Risk Framing.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "estp-career-playbook",
+          "locale": "zh-CN",
+          "title": "ESTP \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u628a\u884c\u52a8\u529b\u53d8\u6210\u66f4\u7a33\u7684\u5224\u65ad\u529b",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ESTP Career Playbook: Pair Fast Action With Better Risk Framing.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "first-90-days-in-new-role",
+          "locale": "en",
+          "title": "First 90 Days in a New Role",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for First 90 Days in a New Role.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "first-90-days-in-new-role",
+          "locale": "zh-CN",
+          "title": "\u65b0\u5c97\u4f4d\u524d 90 \u5929\u884c\u52a8\u6307\u5357",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for First 90 Days in a New Role.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "from-mbti-to-job-fit",
+          "locale": "en",
+          "title": "From MBTI to Job Fit",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for From MBTI to Job Fit.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "from-mbti-to-job-fit",
+          "locale": "zh-CN",
+          "title": "\u5982\u4f55\u5c06 MBTI \u7528\u4e8e\u804c\u4e1a\u5339\u914d",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for From MBTI to Job Fit.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "how-to-choose-college-major",
+          "locale": "en",
+          "title": "How to Choose a College Major",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for How to Choose a College Major.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "how-to-choose-college-major",
+          "locale": "zh-CN",
+          "title": "\u5982\u4f55\u9009\u62e9\u5927\u5b66\u4e13\u4e1a",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for How to Choose a College Major.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "how-to-find-right-career-direction",
+          "locale": "en",
+          "title": "How to Find the Right Career Direction",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for How to Find the Right Career Direction.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "how-to-find-right-career-direction",
+          "locale": "zh-CN",
+          "title": "\u5982\u4f55\u627e\u5230\u9002\u5408\u81ea\u5df1\u7684\u804c\u4e1a\u65b9\u5411",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for How to Find the Right Career Direction.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "improve-workplace-competitiveness",
+          "locale": "en",
+          "title": "Improve Workplace Competitiveness",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Improve Workplace Competitiveness.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "improve-workplace-competitiveness",
+          "locale": "zh-CN",
+          "title": "\u5982\u4f55\u63d0\u5347\u804c\u573a\u7ade\u4e89\u529b",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Improve Workplace Competitiveness.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "infj-career-playbook",
+          "locale": "en",
+          "title": "INFJ Career Playbook: Protect Meaning While Building Real Influence",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for INFJ Career Playbook: Protect Meaning While Building Real Influence.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "infj-career-playbook",
+          "locale": "zh-CN",
+          "title": "INFJ \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u5b88\u4f4f\u610f\u4e49\u611f\uff0c\u4e5f\u8981\u5efa\u7acb\u73b0\u5b9e\u5f71\u54cd\u529b",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for INFJ Career Playbook: Protect Meaning While Building Real Influence.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "infp-career-playbook",
+          "locale": "en",
+          "title": "INFP Career Playbook: Keep Values and Craft on the Same Side",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for INFP Career Playbook: Keep Values and Craft on the Same Side.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "infp-career-playbook",
+          "locale": "zh-CN",
+          "title": "INFP \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u8ba9\u4ef7\u503c\u611f\u548c\u4f5c\u54c1\u611f\u540c\u65f6\u6210\u7acb",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for INFP Career Playbook: Keep Values and Craft on the Same Side.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "interview-strategy-by-role",
+          "locale": "en",
+          "title": "Interview Strategy by Role",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Interview Strategy by Role.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "interview-strategy-by-role",
+          "locale": "zh-CN",
+          "title": "\u6309\u5c97\u4f4d\u5b9a\u5236\u9762\u8bd5\u7b56\u7565",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Interview Strategy by Role.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "intj-career-playbook",
+          "locale": "en",
+          "title": "INTJ Career Playbook: Turn Strategic Judgment Into Trusted Influence",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for INTJ Career Playbook: Turn Strategic Judgment Into Trusted Influence.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "intj-career-playbook",
+          "locale": "zh-CN",
+          "title": "INTJ \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u628a\u5224\u65ad\u529b\u53d8\u6210\u53ef\u88ab\u4fe1\u4efb\u7684\u5f71\u54cd\u529b",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for INTJ Career Playbook: Turn Strategic Judgment Into Trusted Influence.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "intp-career-playbook",
+          "locale": "en",
+          "title": "INTP Career Playbook: Let Depth Travel All the Way to Execution",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for INTP Career Playbook: Let Depth Travel All the Way to Execution.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "intp-career-playbook",
+          "locale": "zh-CN",
+          "title": "INTP \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u8ba9\u6df1\u5ea6\u601d\u8003\u8d70\u5230\u843d\u5730",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for INTP Career Playbook: Let Depth Travel All the Way to Execution.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "iq-eq-balance-at-work",
+          "locale": "en",
+          "title": "Balancing IQ and EQ at Work",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Balancing IQ and EQ at Work.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "iq-eq-balance-at-work",
+          "locale": "zh-CN",
+          "title": "IQ \u4e0e EQ \u5982\u4f55\u534f\u540c\u5f71\u54cd\u804c\u4e1a\u8868\u73b0",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Balancing IQ and EQ at Work.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "isfj-career-playbook",
+          "locale": "en",
+          "title": "ISFJ Career Playbook: Protect Care With Better Boundaries",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ISFJ Career Playbook: Protect Care With Better Boundaries.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "isfj-career-playbook",
+          "locale": "zh-CN",
+          "title": "ISFJ \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u7167\u987e\u522b\u4eba\u4e4b\u524d\uff0c\u5148\u4fdd\u4f4f\u81ea\u5df1\u7684\u8fb9\u754c",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ISFJ Career Playbook: Protect Care With Better Boundaries.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "isfp-career-playbook",
+          "locale": "en",
+          "title": "ISFP Career Playbook: Let Your Work Be Seen Without Losing Your Tone",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ISFP Career Playbook: Let Your Work Be Seen Without Losing Your Tone.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "isfp-career-playbook",
+          "locale": "zh-CN",
+          "title": "ISFP \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u4f5c\u54c1\u4f1a\u8bf4\u8bdd\uff0c\u4f46\u4f60\u4e5f\u8981\u5e2e\u5b83\u88ab\u770b\u5230",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ISFP Career Playbook: Let Your Work Be Seen Without Losing Your Tone.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "istj-career-playbook",
+          "locale": "en",
+          "title": "ISTJ Career Playbook: Stay Reliable Without Getting Stuck",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ISTJ Career Playbook: Stay Reliable Without Getting Stuck.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "istj-career-playbook",
+          "locale": "zh-CN",
+          "title": "ISTJ \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u5728\u53ef\u9760\u4e4b\u5916\uff0c\u589e\u52a0\u4e00\u70b9\u8868\u8fbe\u548c\u5f39\u6027",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ISTJ Career Playbook: Stay Reliable Without Getting Stuck.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "istp-career-playbook",
+          "locale": "en",
+          "title": "ISTP Career Playbook: Make Technical Strength More Visible and Durable",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ISTP Career Playbook: Make Technical Strength More Visible and Durable.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "istp-career-playbook",
+          "locale": "zh-CN",
+          "title": "ISTP \u804c\u4e1a\u884c\u52a8\u6307\u5357\uff1a\u628a\u6280\u672f\u529b\u53d8\u6210\u53ef\u89c1\u7684\u957f\u671f\u7b79\u7801",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for ISTP Career Playbook: Make Technical Strength More Visible and Durable.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "leader-track-vs-expert-track",
+          "locale": "en",
+          "title": "Leader Track vs Expert Track",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Leader Track vs Expert Track.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "leader-track-vs-expert-track",
+          "locale": "zh-CN",
+          "title": "\u7ba1\u7406\u8def\u5f84\u4e0e\u4e13\u5bb6\u8def\u5f84\u5982\u4f55\u9009\u62e9",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Leader Track vs Expert Track.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "networking-that-actually-works",
+          "locale": "en",
+          "title": "Networking That Actually Works",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Networking That Actually Works.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "networking-that-actually-works",
+          "locale": "zh-CN",
+          "title": "\u9ad8\u8d28\u91cf\u804c\u4e1a\u4eba\u8109\u642d\u5efa\u65b9\u6cd5",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Networking That Actually Works.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "personal-brand-for-professionals",
+          "locale": "en",
+          "title": "Personal Brand for Professionals",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Personal Brand for Professionals.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "personal-brand-for-professionals",
+          "locale": "zh-CN",
+          "title": "\u4e13\u4e1a\u4eba\u58eb\u4e2a\u4eba\u54c1\u724c\u5efa\u8bbe",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Personal Brand for Professionals.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "prevent-burnout-while-growing",
+          "locale": "en",
+          "title": "Prevent Burnout While Growing",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Prevent Burnout While Growing.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "prevent-burnout-while-growing",
+          "locale": "zh-CN",
+          "title": "\u6210\u957f\u9636\u6bb5\u5982\u4f55\u9884\u9632\u804c\u4e1a\u5026\u6020",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Prevent Burnout While Growing.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "salary-negotiation-framework",
+          "locale": "en",
+          "title": "Salary Negotiation Framework",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Salary Negotiation Framework.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        },
+        {
+          "guide_slug": "salary-negotiation-framework",
+          "locale": "zh-CN",
+          "title": "\u85aa\u8d44\u8c08\u5224\u5b9e\u6218\u6846\u67b6",
+          "missing_slots": [
+            "og_image_url",
+            "twitter_image_url"
+          ],
+          "required_action": "authority_image_reference_needed",
+          "alt_en_draft": "Social preview image for Salary Negotiation Framework.",
+          "human_visual_review_required": true,
+          "ocr_required_after_image_assignment": true
+        }
+      ],
+      "notes": "This package records missing career guide OG/Twitter authority image rows only. It does not upload, generate, replace, or select images."
+    }
+  ]
+}
