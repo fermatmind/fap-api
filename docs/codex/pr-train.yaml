@@ -12417,6 +12417,51 @@ prs:
     live_external_submission_allowed: true
     next_task: SEARCH-CHANNEL-LIVE-ZH-MBTI-02-24H-REVIEW
 
+  - id: SEARCH-CHANNEL-LIVE-ZH-MBTI-02-24H-REVIEW
+    repo: fap-api
+    depends_on:
+      - SEARCH-CHANNEL-LIVE-ZH-MBTI-02
+    branch: codex/search-channel-live-zh-mbti-02-24h-review
+    base: main
+    title: "docs(seo-intel): add ZH MBTI IndexNow 24h review"
+    name: "24h review for ZH MBTI IndexNow live submission"
+    train_scope: seo_intel_search_channel_live_submission
+    risk_level: read_only_production_verification
+    type: docs_generated_test
+    scope:
+      - Perform a read-only T+24h technical review of queue item 3 after the ZH MBTI IndexNow live submission.
+      - Verify queue item state, event/response state, duplicate/retry safety, gate closure, queue item 2 protection, public runtime, issue queue, crawler aggregate availability, staging sidecar, and claim boundaries.
+      - Make no indexing, ranking, or crawler-visit claim unless aggregate evidence exists.
+    allowed_paths:
+      - backend/docs/seo/search-channel-live-zh-mbti-02-24h-review.md
+      - backend/docs/seo/generated/search-channel-live-zh-mbti-02-24h-review.v1.json
+      - backend/tests/Feature/SeoIntel/SeoIntelSearchChannelLiveZhMbti02TwentyFourHourReviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, deploy files, production env, DNS, nginx, migrations, scheduler, collectors, CMS content, articles, internal links, URL Truth, seo_urls, seo_url_entities, sitemap, llms, Metabase, emails, DMs, Digital PR outreach, pSEO, business DB / Tencent RDS / Node2 DB, or frontend fallback authority.
+      - Enqueue Search Channel items, submit URLs, call IndexNow live endpoint, call GSC/Baidu/Bing/360/Sogou/Shenma, read raw Nginx access logs, mutate production data, or claim IndexNow acceptance as indexing/ranking proof.
+    validation:
+      - cd backend && php artisan test --filter=SeoIntelSearchChannelLiveZhMbti02TwentyFourHourReview --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/search-channel-live-zh-mbti-02-24h-review.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_deploy_allowed: false
+    production_migration_execution_allowed: false
+    scheduler_activation: false
+    live_external_submission_allowed: false
+    next_task: SEO-OPS-MBTI-FIRST-7D-RUN-01
+
   - id: OPS-ADMIN-UI-01
     repo: fap-api
     branch: codex/ops-admin-ui-01-table-toolbar
