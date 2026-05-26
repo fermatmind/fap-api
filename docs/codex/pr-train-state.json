@@ -26555,7 +26555,7 @@
       "merge_commit_sha": "2071cc060295a2b62d700a77bf41460ca9b601d0"
     },
     "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03": {
-      "status": "github_checks_failed_external_blocker",
+      "status": "pr_opened_rerun_after_supply_chain_remediation",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-topic-test-landing-human-review-import-03",
       "base": "main",
@@ -26565,7 +26565,7 @@
       "title": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03 topic test landing review decisions",
       "commit_sha": "da3cfe4b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1703",
-      "failure_reason": "GitHub required supply-chain check failed on composer audit for symfony/polyfill-intl-idn CVE-2026-46644 (PKSA-dwsq-ppd2-mb1x), affected >=1.17.1,<1.38.1. Locked version is v1.37.0. This blocker was disclosed 2026-05-26 and is not introduced by this PR scope, but required checks are not green, so train must stop until dependency remediation is authorized.",
+      "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -26581,17 +26581,17 @@
         "focused_test": {
           "status": "passed",
           "command": "cd backend && php artisan test --filter=GlobalEnZhTopicTestLandingHumanReviewImport03 --no-ansi",
-          "evidence": "1 test passed, 337 assertions."
+          "evidence": "1 test passed, 337 assertions after rebase."
         },
         "route_list": {
           "status": "passed",
           "command": "cd backend && php artisan route:list --no-ansi",
-          "evidence": "203 routes listed."
+          "evidence": "203 routes listed after rebase."
         },
         "pint": {
           "status": "passed",
           "command": "cd backend && vendor/bin/pint --test",
-          "evidence": "3574 files passed."
+          "evidence": "3575 files passed after rebase."
         },
         "composer_validate": {
           "status": "passed",
@@ -26631,9 +26631,15 @@
           "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26452487510/job/77877106624"
         },
         "local_composer_audit_recheck": {
-          "status": "failed_external_blocker",
+          "status": "passed",
           "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
-          "evidence": "Same CVE-2026-46644 advisory reproduced locally after GitHub failure."
+          "evidence": "No security vulnerability advisories found after rebasing PR #1703 onto origin/main containing PR #1704."
+        },
+        "supply_chain_remediation": {
+          "status": "passed",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1704",
+          "merge_commit_sha": "73d27d05452dfa2d255101bfb5d54345c7853138",
+          "evidence": "symfony/polyfill-intl-idn upgraded to v1.38.1 on main; composer audit now reports no security vulnerability advisories."
         }
       },
       "history": [
@@ -26661,6 +26667,11 @@
           "at": "2026-05-26T21:58:15+08:00",
           "status": "github_checks_failed_external_blocker",
           "summary": "Stopped train because required supply-chain check fails on newly disclosed symfony/polyfill-intl-idn CVE-2026-46644. Current PR scope did not introduce dependency change, but required checks are not green."
+        },
+        {
+          "at": "2026-05-26T22:25:37+08:00",
+          "status": "pr_opened_rerun_after_supply_chain_remediation",
+          "summary": "PR #1703 rebased onto origin/main after supply-chain remediation PR #1704 merged; local composer audit and PR4 validations pass; rerunning GitHub checks."
         }
       ]
     },
