@@ -26245,7 +26245,7 @@
       "merge_commit_sha": "acf26cb4c155d6ec387acea81db2f9a4f366f3c9"
     },
     "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01": {
-      "status": "local_checks_passed",
+      "status": "pr_opened",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-content-pages-human-review-import-01",
       "base": "main",
@@ -26253,8 +26253,8 @@
         "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00"
       ],
       "title": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01 content page review decisions",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "886dc8be",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1700",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -26335,6 +26335,11 @@
           "at": "2026-05-26T21:23:35+08:00",
           "status": "scope_validation_passed",
           "summary": "Changed files are within the content page decision packet scope; JSON/YAML parse and diff checks passed."
+        },
+        {
+          "at": "2026-05-26T21:24:26+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1700 after local validation; waiting for GitHub required checks."
         }
       ]
     },
