@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T09:57:13+08:00",
+  "updated_at": "2026-05-26T11:15:21+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -1005,7 +1005,7 @@
       "sidecar_issues": [
         {
           "sidecar_id": "IQ-SIDECAR-COMMERCE-DEFERRED-001",
-          "title": "defer(iq): commerce unlock \u00a51.99 / \u00a55 implementation",
+          "title": "defer(iq): commerce unlock ¥1.99 / ¥5 implementation",
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
@@ -1024,7 +1024,7 @@
             "api/v0.3/webhooks/payment/*"
           ],
           "evidence": [
-            "User intentionally deferred the \u00a51.99 / \u00a55 commerce PR.",
+            "User intentionally deferred the ¥1.99 / ¥5 commerce PR.",
             "Paid unlock is not required for identity/scoring/report/SVG provenance foundation.",
             "The train can continue without checkout/SKU/webhook changes."
           ],
@@ -4239,7 +4239,7 @@
         },
         "forbidden_runtime_claim_grep": {
           "status": "pass",
-          "command": "rg -n \"Matches|career recommendation|job fit|success prediction|success probability|hiring suitability|140Q more accurate|raw score delta|\u66f4\u51c6\u786e|\u66f4\u51c6|\u5c97\u4f4d\u5339\u914d|\u804c\u4e1a\u63a8\u8350|\u804c\u4e1a\u6210\u529f\" backend/app/Services/Riasec/RiasecPublicProjectionService.php backend/app/Services/Report/RiasecReportComposer.php || true",
+          "command": "rg -n \"Matches|career recommendation|job fit|success prediction|success probability|hiring suitability|140Q more accurate|raw score delta|更准确|更准|岗位匹配|职业推荐|职业成功\" backend/app/Services/Riasec/RiasecPublicProjectionService.php backend/app/Services/Report/RiasecReportComposer.php || true",
           "evidence": "No runtime service hits."
         },
         "diff_check": {
@@ -5176,7 +5176,7 @@
     "PR-CMS-04": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-04-controlled-codex-publish-sop",
-      "title": "PR-CMS-04\uff5cControlled Codex-Assisted CMS Publish SOP",
+      "title": "PR-CMS-04｜Controlled Codex-Assisted CMS Publish SOP",
       "status": "pr_open",
       "depends_on": [
         "PR-CMS-01",
@@ -7048,7 +7048,7 @@
     "PR-CMS-FIX-MASTER": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-fix-master-semantic-content-gate",
-      "title": "PR-CMS-FIX-MASTER\uff5cScalable Semantic Content Gate Architecture",
+      "title": "PR-CMS-FIX-MASTER｜Scalable Semantic Content Gate Architecture",
       "status": "pr_open",
       "depends_on": [
         "PR-CMS-01"
@@ -7136,7 +7136,7 @@
     "PR-GRAPH-01": {
       "repo": "fap-api",
       "branch": "codex/pr-graph-01-multi-test-edges",
-      "title": "PR-GRAPH-01\uff5cArticle Multi-Test Graph Edges",
+      "title": "PR-GRAPH-01｜Article Multi-Test Graph Edges",
       "status": "ci_fix_local_checks_passed",
       "depends_on": [
         "PR-CMS-01",
@@ -7236,7 +7236,7 @@
     "PR-MEDIA-01": {
       "repo": "fap-api",
       "branch": "codex/pr-media-01-oss-cdn",
-      "title": "PR-MEDIA-01\uff5cCMS Media Library OSS/CDN Upload Automation",
+      "title": "PR-MEDIA-01｜CMS Media Library OSS/CDN Upload Automation",
       "status": "pr_open",
       "depends_on": [
         "PR-CMS-01",
@@ -17411,7 +17411,7 @@
           "failed": [
             {
               "command": "cd backend && php artisan test --filter=PaymentWebhook",
-              "summary": "Sidecar only: Tests\\Feature\\V0_3\\PaymentWebhookCnCallbackTest::test_wechatpay_valid_callback_calls_processor_and_returns_success_ack fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / \u7b7e\u540d\u5f02\u5e38: \u5fae\u4fe1\u7b7e\u540d\u4e3a\u7a7a error."
+              "summary": "Sidecar only: Tests\\Feature\\V0_3\\PaymentWebhookCnCallbackTest::test_wechatpay_valid_callback_calls_processor_and_returns_success_ack fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / 签名异常: 微信签名为空 error."
             }
           ]
         },
@@ -17451,7 +17451,7 @@
           "branch": "codex/pr-audit-be-02-webhook-digest",
           "command_or_check": "php artisan test --filter=PaymentWebhook",
           "failing_test": "Tests\\Feature\\V0_3\\PaymentWebhookCnCallbackTest::test_wechatpay_valid_callback_calls_processor_and_returns_success_ack",
-          "evidence": "400 instead of 200; \u7b7e\u540d\u5f02\u5e38: \u5fae\u4fe1\u7b7e\u540d\u4e3a\u7a7a",
+          "evidence": "400 instead of 200; 签名异常: 微信签名为空",
           "baseline_verification": "Exact test also fails on clean origin/main",
           "baseline_commit": "c87d9bc11f4e1cf90e60c06660b472e8afeb10a0",
           "why_external_to_current_pr": "BE-02 diff only touches payload digest idempotency service/test and ledger; failure is in WeChatPay CN callback signature chain.",
@@ -17477,7 +17477,7 @@
         {
           "at": "2026-05-24T07:51:12.597Z",
           "status": "sidecar_verified",
-          "summary": "Verified WeChatPay CN callback exact failing test also fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / \u7b7e\u540d\u5f02\u5e38: \u5fae\u4fe1\u7b7e\u540d\u4e3a\u7a7a error. Treating broad PaymentWebhook filter failure as sidecar per user authorization."
+          "summary": "Verified WeChatPay CN callback exact failing test also fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / 签名异常: 微信签名为空 error. Treating broad PaymentWebhook filter failure as sidecar per user authorization."
         },
         {
           "at": "2026-05-24T07:55:33.131Z",
@@ -21456,7 +21456,7 @@
       },
       "forbidden_claim_scan": {
         "status": "pass",
-        "summary": "Imported PACK-08 assets scan found 0 forbidden user claims; 1 allowed boundary hit for negated near-tie \u201c\u63a8\u7ffb\u201d boundary."
+        "summary": "Imported PACK-08 assets scan found 0 forbidden user claims; 1 allowed boundary hit for negated near-tie “推翻” boundary."
       },
       "frontend_fallback_scan": {
         "status": "pass",
@@ -26126,6 +26126,273 @@
           "at": "2026-05-25T22:26:47+08:00",
           "status": "pr_open",
           "summary": "Opened fap-api PR #1688 for final full-site EN/ZH parity verification."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00": {
+      "status": "github_checks_passed",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-human-review-import-queue-00",
+      "base": "main",
+      "depends_on": [],
+      "title": "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00 consolidated review queue",
+      "commit_sha": "a6553854eba257ea1d5fd8d1cd6a03b2e7ed540c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1699",
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {
+        "browser_read_only_evidence": {
+          "status": "passed",
+          "evidence": "Visited public runtime pages and safe aggregate /zh/ops/content-pages page; no CMS mutation, no user data access, no write actions."
+        },
+        "focused_test": {
+          "status": "passed",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhHumanReviewImportQueue00 --no-ansi",
+          "evidence": "1 test passed, 3641 assertions."
+        },
+        "route_list": {
+          "status": "passed",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "203 routes listed."
+        },
+        "pint": {
+          "status": "passed",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "3571 files passed."
+        },
+        "composer_validate": {
+          "status": "passed",
+          "command": "cd backend && composer validate --strict"
+        },
+        "composer_audit": {
+          "status": "passed",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "passed",
+          "evidence": "Generated JSON files, pr-train-state.json, and pr-train.yaml parse successfully."
+        },
+        "scope_validation": {
+          "status": "passed",
+          "changed_files": [
+            "backend/docs/seo/global-en-zh-human-review-import-queue-00.md",
+            "backend/docs/seo/generated/global-en-zh-human-review-import-queue-00.v1.json",
+            "backend/docs/seo/generated/global-en-zh-human-review-queue.v1.json",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhHumanReviewImportQueue00Test.php",
+            "docs/codex/pr-train.yaml",
+            "docs/codex/pr-train-state.json"
+          ]
+        },
+        "diff_check": {
+          "status": "passed",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "fap_web_reference_check": {
+          "status": "passed",
+          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "evidence": "No fap-web changes."
+        },
+        "github_required_checks": {
+          "status": "passed",
+          "evidence": "PR #1699 checks green and mergeStateStatus CLEAN before final state commit."
+        }
+      },
+      "history": [
+        {
+          "at": "2026-05-26T11:02:25+08:00",
+          "status": "planned",
+          "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        },
+        {
+          "at": "2026-05-26T11:02:25+08:00",
+          "status": "in_progress",
+          "summary": "Started consolidated review queue PR with public/CMS read-only evidence and repo-backed translation batch packages."
+        },
+        {
+          "at": "2026-05-26T11:06:38+08:00",
+          "status": "local_checks_passed",
+          "summary": "Browser read-only evidence, focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, fap-web reference check, and scope validation passed."
+        },
+        {
+          "at": "2026-05-26T11:07:52+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1699 after local validation; waiting for GitHub required checks."
+        },
+        {
+          "at": "2026-05-26T11:15:21+08:00",
+          "status": "github_checks_passed",
+          "summary": "GitHub checks passed and mergeStateStatus was CLEAN before final ledger state update."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01": {
+      "status": "planned",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-content-pages-human-review-import-01",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00"
+      ],
+      "title": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01 content page review decisions",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {},
+      "history": [
+        {
+          "at": "2026-05-26T11:02:25+08:00",
+          "status": "planned",
+          "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02": {
+      "status": "planned",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-article-human-review-import-02",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01"
+      ],
+      "title": "GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02 article review decisions",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {},
+      "history": [
+        {
+          "at": "2026-05-26T11:02:25+08:00",
+          "status": "planned",
+          "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03": {
+      "status": "planned",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-topic-test-landing-human-review-import-03",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02"
+      ],
+      "title": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03 topic test landing review decisions",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {},
+      "history": [
+        {
+          "at": "2026-05-26T11:02:25+08:00",
+          "status": "planned",
+          "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-RESEARCH-CLAIM-HUMAN-REVIEW-04": {
+      "status": "planned",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-research-claim-human-review-04",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03"
+      ],
+      "title": "GLOBAL-EN-ZH-RESEARCH-CLAIM-HUMAN-REVIEW-04 research claim review decisions",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {},
+      "history": [
+        {
+          "at": "2026-05-26T11:02:25+08:00",
+          "status": "planned",
+          "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05": {
+      "status": "planned",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-career-human-review-import-05",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-RESEARCH-CLAIM-HUMAN-REVIEW-04"
+      ],
+      "title": "GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05 career content review decisions",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {},
+      "history": [
+        {
+          "at": "2026-05-26T11:02:25+08:00",
+          "status": "planned",
+          "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06": {
+      "status": "planned",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-result-report-human-review-import-06",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05"
+      ],
+      "title": "GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06 result report review decisions",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {},
+      "history": [
+        {
+          "at": "2026-05-26T11:02:25+08:00",
+          "status": "planned",
+          "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-MEDIA-HUMAN-VISUAL-REVIEW-07": {
+      "status": "planned",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-media-human-visual-review-07",
+      "base": "main",
+      "depends_on": [
+        "GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06"
+      ],
+      "title": "GLOBAL-EN-ZH-MEDIA-HUMAN-VISUAL-REVIEW-07 media visual review decisions",
+      "commit_sha": null,
+      "pr_url": null,
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "checks": {},
+      "history": [
+        {
+          "at": "2026-05-26T11:02:25+08:00",
+          "status": "planned",
+          "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
         }
       ]
     }
