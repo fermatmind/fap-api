@@ -26364,7 +26364,7 @@
       "merge_commit_sha": "40cb182fbbe8ff521eb78b698c17c2ef67e9798b"
     },
     "GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02": {
-      "status": "local_checks_passed",
+      "status": "pr_opened",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-article-human-review-import-02",
       "base": "main",
@@ -26372,8 +26372,8 @@
         "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01"
       ],
       "title": "GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02 article review decisions",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "33ed329f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1701",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -26449,6 +26449,11 @@
           "at": "2026-05-26T21:36:52+08:00",
           "status": "local_checks_passed",
           "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, fap-web reference check, and scope validation passed."
+        },
+        {
+          "at": "2026-05-26T21:37:37+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1701 after local validation; waiting for GitHub required checks."
         }
       ]
     },
