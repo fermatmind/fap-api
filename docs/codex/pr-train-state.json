@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T23:24:53+08:00",
+  "updated_at": "2026-05-26T23:25:45+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -27026,7 +27026,7 @@
       "merge_commit_sha": "1b1229d3aa0dd94ba2d7c3b3215461e3a9dc1dd1"
     },
     "GLOBAL-EN-ZH-MEDIA-HUMAN-VISUAL-REVIEW-07": {
-      "status": "local_checks_passed",
+      "status": "pr_opened",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-media-human-visual-review-07",
       "base": "main",
@@ -27034,8 +27034,8 @@
         "GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06"
       ],
       "title": "GLOBAL-EN-ZH-MEDIA-HUMAN-VISUAL-REVIEW-07 media visual review decisions",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "344a593bc88edcfe19fda61219ffc3faa33f9cf6",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1708",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -27108,6 +27108,11 @@
           "at": "2026-05-26T23:24:53+08:00",
           "status": "local_checks_passed",
           "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, fap-web reference check, and scope validation passed."
+        },
+        {
+          "at": "2026-05-26T23:25:45+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1708 after local validation; waiting for GitHub required checks."
         }
       ]
     }
