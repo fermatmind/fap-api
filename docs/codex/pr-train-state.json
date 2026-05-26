@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T11:07:52+08:00",
+  "updated_at": "2026-05-26T11:15:21+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -26130,13 +26130,13 @@
       ]
     },
     "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00": {
-      "status": "pr_opened",
+      "status": "github_checks_passed",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-human-review-import-queue-00",
       "base": "main",
       "depends_on": [],
       "title": "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00 consolidated review queue",
-      "commit_sha": "748c6cb71c42053bcca949e49072e5742cd70809",
+      "commit_sha": "a6553854eba257ea1d5fd8d1cd6a03b2e7ed540c",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1699",
       "failure_reason": null,
       "merged_at": null,
@@ -26194,6 +26194,10 @@
           "status": "passed",
           "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes."
+        },
+        "github_required_checks": {
+          "status": "passed",
+          "evidence": "PR #1699 checks green and mergeStateStatus CLEAN before final state commit."
         }
       },
       "history": [
@@ -26216,6 +26220,11 @@
           "at": "2026-05-26T11:07:52+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1699 after local validation; waiting for GitHub required checks."
+        },
+        {
+          "at": "2026-05-26T11:15:21+08:00",
+          "status": "github_checks_passed",
+          "summary": "GitHub checks passed and mergeStateStatus was CLEAN before final ledger state update."
         }
       ]
     },
