@@ -26555,7 +26555,7 @@
       "merge_commit_sha": "2071cc060295a2b62d700a77bf41460ca9b601d0"
     },
     "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03": {
-      "status": "pr_opened",
+      "status": "github_checks_failed_external_blocker",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-topic-test-landing-human-review-import-03",
       "base": "main",
@@ -26563,9 +26563,9 @@
         "GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02"
       ],
       "title": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03 topic test landing review decisions",
-      "commit_sha": "703b30c0",
+      "commit_sha": "da3cfe4b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1703",
-      "failure_reason": null,
+      "failure_reason": "GitHub required supply-chain check failed on composer audit for symfony/polyfill-intl-idn CVE-2026-46644 (PKSA-dwsq-ppd2-mb1x), affected >=1.17.1,<1.38.1. Locked version is v1.37.0. This blocker was disclosed 2026-05-26 and is not introduced by this PR scope, but required checks are not green, so train must stop until dependency remediation is authorized.",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -26623,6 +26623,17 @@
           "status": "passed",
           "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes."
+        },
+        "github_required_checks": {
+          "status": "failed_external_blocker",
+          "failed_check": "supply-chain",
+          "evidence": "composer audit --locked --no-interaction --ignore-unreachable reports CVE-2026-46644 for symfony/polyfill-intl-idn v1.37.0; affected >=1.17.1,<1.38.1.",
+          "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26452487510/job/77877106624"
+        },
+        "local_composer_audit_recheck": {
+          "status": "failed_external_blocker",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "Same CVE-2026-46644 advisory reproduced locally after GitHub failure."
         }
       },
       "history": [
@@ -26645,6 +26656,11 @@
           "at": "2026-05-26T21:54:16+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1703 after local validation; waiting for GitHub required checks."
+        },
+        {
+          "at": "2026-05-26T21:58:15+08:00",
+          "status": "github_checks_failed_external_blocker",
+          "summary": "Stopped train because required supply-chain check fails on newly disclosed symfony/polyfill-intl-idn CVE-2026-46644. Current PR scope did not introduce dependency change, but required checks are not green."
         }
       ]
     },
