@@ -26800,7 +26800,7 @@
       "merge_commit_sha": "57071e324c60f243b9d3359c55962f7f1689eb48"
     },
     "GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05": {
-      "status": "local_checks_passed",
+      "status": "pr_opened",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-career-human-review-import-05",
       "base": "main",
@@ -26808,8 +26808,8 @@
         "GLOBAL-EN-ZH-RESEARCH-CLAIM-HUMAN-REVIEW-04"
       ],
       "title": "GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05 career content review decisions",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "1685c238",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1706",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -26881,6 +26881,11 @@
           "at": "2026-05-26T22:54:25+08:00",
           "status": "local_checks_passed",
           "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, fap-web reference check, and scope validation passed."
+        },
+        {
+          "at": "2026-05-26T22:55:19+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1706 after local validation; waiting for GitHub required checks."
         }
       ]
     },
