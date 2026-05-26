@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T23:12:45+08:00",
+  "updated_at": "2026-05-26T23:13:42+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -26910,7 +26910,7 @@
       "merge_commit_sha": "9cbfeca0f7ee27e33cc90b01c8779a8f48c352c9"
     },
     "GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06": {
-      "status": "committed",
+      "status": "pr_opened",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-result-report-human-review-import-06",
       "base": "main",
@@ -26918,8 +26918,8 @@
         "GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05"
       ],
       "title": "GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06 result report review decisions",
-      "commit_sha": "da38c0319465147713fae6dd2a68f69678bf692c",
-      "pr_url": null,
+      "commit_sha": "7a269df924cdeede8e07929087d9119bd911c525",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1707",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -26997,6 +26997,11 @@
           "at": "2026-05-26T23:12:45+08:00",
           "status": "committed",
           "summary": "Committed local PR scope as da38c031 after validation."
+        },
+        {
+          "at": "2026-05-26T23:13:42+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1707 after local validation; waiting for GitHub required checks."
         }
       ]
     },
