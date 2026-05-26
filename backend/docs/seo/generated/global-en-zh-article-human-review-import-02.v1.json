@@ -1,0 +1,435 @@
+{
+  "schema_version": "global-en-zh-article-human-review-import-02.v1",
+  "task": "GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02",
+  "generated_at": "2026-05-26T21:35:53+08:00",
+  "final_decision": "article_review_decision_packet_created_ready_for_human_review",
+  "source_import_package": "backend/docs/seo/import-packages/global-en-zh-article-translation-batch-02.import.v1.json",
+  "source_review_queue": "backend/docs/seo/generated/global-en-zh-human-review-import-queue-00.v1.json",
+  "browser_cms_read_only_evidence": {
+    "public_site_observations": [
+      {
+        "url": "https://fermatmind.com/en/articles",
+        "status": "observed_read_only",
+        "summary": "EN article index rendered with public article cards; runtime observation only."
+      }
+    ],
+    "cms_ops_observations": [
+      {
+        "url": "CMS article records",
+        "status": "not_opened_for_write",
+        "summary": "No CMS article edit/save/publish/import action was performed."
+      }
+    ],
+    "cms_mutation_performed": false,
+    "browser_write_actions_performed": false,
+    "private_user_data_accessed": false
+  },
+  "summary": {
+    "total_articles": 6,
+    "go_human_review": 6,
+    "claim_review_required": 6,
+    "factual_citation_review_required": 6,
+    "media_visual_review_required": 6,
+    "publish_ready": 0,
+    "blocked": 0
+  },
+  "review_decisions": [
+    {
+      "asset_family": "articles",
+      "asset_key": "are-infj-men-rare-or-socially-silenced",
+      "source_zh_article": "are-infj-men-rare-or-socially-silenced",
+      "en_draft_package_key": "are-infj-men-rare-or-socially-silenced",
+      "proposed_en_slug": "are-infj-men-rare-or-socially-silenced",
+      "translation_group_key": "article:are-infj-men-rare-or-socially-silenced",
+      "translation_group_exists": false,
+      "cms_current_state": "article_records_not_mutated_read_only_review_packet",
+      "public_runtime_state": "public runtime spot check: /en/articles returned Articles page with article cards and Page 1 of 1.",
+      "draft_exists": true,
+      "title_en_draft": "Are INFJ Men Rare, or Have Highly Sensitive Men Learned to Stay Silent?",
+      "claim_risk": "medium",
+      "claim_boundary_state": "claim_review_required_personality_and_gender_norms",
+      "claim_review_required": true,
+      "factual_citation_risk": "review_required",
+      "reference_review_required": true,
+      "media_alt_risk": "visual_review_required",
+      "media_alt_draft": "A translucent male silhouette with lowered sound-wave lines, suggesting self-silencing among highly sensitive men.",
+      "internal_link_intent": {
+        "related_test_slug": null,
+        "tags_zh": [
+          "INFJ",
+          "高敏感",
+          "男性规范",
+          "自我沉默",
+          "情绪表达"
+        ],
+        "linking_notes": "Preserve article-to-topic/test intent only when backend authority can resolve the linked destination; do not expose draft URLs."
+      },
+      "internal_link_review_required": true,
+      "publish_readiness_after_human_review": "controlled_import_candidate_after_claim_fact_media_link_review",
+      "sitemap_llms_eligibility_only_after_publish": true,
+      "human_review_required": true,
+      "import_ready": true,
+      "publish_ready": false,
+      "blocked": false,
+      "deferred": false,
+      "required_review_risks": [
+        "claim_boundary_review",
+        "factual_citation_review",
+        "media_alt_visual_review"
+      ],
+      "required_reviewer_roles": [
+        "SEO_GEO_review",
+        "claim_boundary_review",
+        "technical_import_review",
+        "visual_media_review"
+      ],
+      "recommended_import_wave": "wave_2_articles_after_content_pages",
+      "sitemap_eligible_after_import": false,
+      "llms_eligible_after_import": false,
+      "footer_eligible_after_import": false,
+      "search_channel_eligible_after_import": false,
+      "notes": [
+        "No invented studies/statistics/citations may be added during review.",
+        "Sitemap/llms eligibility only after CMS publish and runtime verification."
+      ]
+    },
+    {
+      "asset_family": "articles",
+      "asset_key": "best-valentines-date-by-personality-and-relationship-science",
+      "source_zh_article": "best-valentines-date-by-personality-and-relationship-science",
+      "en_draft_package_key": "best-valentines-date-by-personality-and-relationship-science",
+      "proposed_en_slug": "best-valentines-date-by-personality-and-relationship-science",
+      "translation_group_key": "article:best-valentines-date-by-personality-and-relationship-science",
+      "translation_group_exists": false,
+      "cms_current_state": "article_records_not_mutated_read_only_review_packet",
+      "public_runtime_state": "public runtime spot check: /en/articles returned Articles page with article cards and Page 1 of 1.",
+      "draft_exists": true,
+      "title_en_draft": "Stop Chasing Romance Alone: Design a Lower-Friction Valentine Date With Personality and Relationship Science",
+      "claim_risk": "high",
+      "claim_boundary_state": "claim_review_required_relationship_science",
+      "claim_review_required": true,
+      "factual_citation_risk": "review_required",
+      "reference_review_required": true,
+      "media_alt_risk": "visual_review_required",
+      "media_alt_draft": "An abstract route map connecting two relationship nodes, representing lower-friction date design.",
+      "internal_link_intent": {
+        "related_test_slug": null,
+        "tags_zh": [
+          "约会设计",
+          "情人节",
+          "人格心理学",
+          "亲密关系",
+          "关系科学"
+        ],
+        "linking_notes": "Preserve article-to-topic/test intent only when backend authority can resolve the linked destination; do not expose draft URLs."
+      },
+      "internal_link_review_required": true,
+      "publish_readiness_after_human_review": "controlled_import_candidate_after_claim_fact_media_link_review",
+      "sitemap_llms_eligibility_only_after_publish": true,
+      "human_review_required": true,
+      "import_ready": true,
+      "publish_ready": false,
+      "blocked": false,
+      "deferred": false,
+      "required_review_risks": [
+        "claim_boundary_review",
+        "factual_citation_review",
+        "media_alt_visual_review",
+        "relationship_claim_review"
+      ],
+      "required_reviewer_roles": [
+        "SEO_GEO_review",
+        "claim_boundary_review",
+        "technical_import_review",
+        "visual_media_review"
+      ],
+      "recommended_import_wave": "wave_2_articles_after_content_pages",
+      "sitemap_eligible_after_import": false,
+      "llms_eligible_after_import": false,
+      "footer_eligible_after_import": false,
+      "search_channel_eligible_after_import": false,
+      "notes": [
+        "No invented studies/statistics/citations may be added during review.",
+        "Sitemap/llms eligibility only after CMS publish and runtime verification."
+      ]
+    },
+    {
+      "asset_family": "articles",
+      "asset_key": "childhood-dream-job-still-shapes-career-choice",
+      "source_zh_article": "childhood-dream-job-still-shapes-career-choice",
+      "en_draft_package_key": "childhood-dream-job-still-shapes-career-choice",
+      "proposed_en_slug": "childhood-dream-job-still-shapes-career-choice",
+      "translation_group_key": "article:childhood-dream-job-still-shapes-career-choice",
+      "translation_group_exists": false,
+      "cms_current_state": "article_records_not_mutated_read_only_review_packet",
+      "public_runtime_state": "public runtime spot check: /en/articles returned Articles page with article cards and Page 1 of 1.",
+      "draft_exists": true,
+      "title_en_draft": "Why Your Childhood Dream Job Still Shapes Your Career Judgment",
+      "claim_risk": "high",
+      "claim_boundary_state": "claim_review_required_career_direction_boundary",
+      "claim_review_required": true,
+      "factual_citation_risk": "review_required",
+      "reference_review_required": true,
+      "media_alt_risk": "visual_review_required",
+      "media_alt_draft": "An abstract path extending from childhood career icons into an adult career route.",
+      "internal_link_intent": {
+        "related_test_slug": null,
+        "tags_zh": [
+          "童年职业",
+          "职业兴趣",
+          "职业判断",
+          "RIASEC",
+          "人职匹配"
+        ],
+        "linking_notes": "Preserve article-to-topic/test intent only when backend authority can resolve the linked destination; do not expose draft URLs."
+      },
+      "internal_link_review_required": true,
+      "publish_readiness_after_human_review": "controlled_import_candidate_after_claim_fact_media_link_review",
+      "sitemap_llms_eligibility_only_after_publish": true,
+      "human_review_required": true,
+      "import_ready": true,
+      "publish_ready": false,
+      "blocked": false,
+      "deferred": false,
+      "required_review_risks": [
+        "career_claim_review",
+        "claim_boundary_review",
+        "factual_citation_review",
+        "media_alt_visual_review"
+      ],
+      "required_reviewer_roles": [
+        "SEO_GEO_review",
+        "career_claim_review",
+        "claim_boundary_review",
+        "technical_import_review",
+        "visual_media_review"
+      ],
+      "recommended_import_wave": "wave_2_articles_after_content_pages",
+      "sitemap_eligible_after_import": false,
+      "llms_eligible_after_import": false,
+      "footer_eligible_after_import": false,
+      "search_channel_eligible_after_import": false,
+      "notes": [
+        "No invented studies/statistics/citations may be added during review.",
+        "Sitemap/llms eligibility only after CMS publish and runtime verification."
+      ]
+    },
+    {
+      "asset_family": "articles",
+      "asset_key": "how-16-personality-types-talk-to-an-ai-coach",
+      "source_zh_article": "how-16-personality-types-talk-to-an-ai-coach",
+      "en_draft_package_key": "how-16-personality-types-talk-to-an-ai-coach",
+      "proposed_en_slug": "how-16-personality-types-talk-to-an-ai-coach",
+      "translation_group_key": "article:how-16-personality-types-talk-to-an-ai-coach",
+      "translation_group_exists": false,
+      "cms_current_state": "article_records_not_mutated_read_only_review_packet",
+      "public_runtime_state": "public runtime spot check: /en/articles returned Articles page with article cards and Page 1 of 1.",
+      "draft_exists": true,
+      "title_en_draft": "When the 16 Personality Types Talk to an AI Coach: Who Uses It as a Mirror, a Tool, or an Easy Yes",
+      "claim_risk": "high",
+      "claim_boundary_state": "claim_review_required_ai_advice_boundary",
+      "claim_review_required": true,
+      "factual_citation_risk": "review_required",
+      "reference_review_required": true,
+      "media_alt_risk": "visual_review_required",
+      "media_alt_draft": "Abstract dialogue bubbles and a mirror-like structure showing interaction between personality and an AI coach.",
+      "internal_link_intent": {
+        "related_test_slug": null,
+        "tags_zh": [
+          "AI 教练",
+          "16 型人格",
+          "人机交互",
+          "算法建议",
+          "MBTI"
+        ],
+        "linking_notes": "Preserve article-to-topic/test intent only when backend authority can resolve the linked destination; do not expose draft URLs."
+      },
+      "internal_link_review_required": true,
+      "publish_readiness_after_human_review": "controlled_import_candidate_after_claim_fact_media_link_review",
+      "sitemap_llms_eligibility_only_after_publish": true,
+      "human_review_required": true,
+      "import_ready": true,
+      "publish_ready": false,
+      "blocked": false,
+      "deferred": false,
+      "required_review_risks": [
+        "ai_advice_boundary_review",
+        "claim_boundary_review",
+        "factual_citation_review",
+        "media_alt_visual_review"
+      ],
+      "required_reviewer_roles": [
+        "SEO_GEO_review",
+        "claim_boundary_review",
+        "technical_import_review",
+        "visual_media_review"
+      ],
+      "recommended_import_wave": "wave_2_articles_after_content_pages",
+      "sitemap_eligible_after_import": false,
+      "llms_eligible_after_import": false,
+      "footer_eligible_after_import": false,
+      "search_channel_eligible_after_import": false,
+      "notes": [
+        "No invented studies/statistics/citations may be added during review.",
+        "Sitemap/llms eligibility only after CMS publish and runtime verification."
+      ]
+    },
+    {
+      "asset_family": "articles",
+      "asset_key": "how-personality-shapes-attitude-toward-ai",
+      "source_zh_article": "how-personality-shapes-attitude-toward-ai",
+      "en_draft_package_key": "how-personality-shapes-attitude-toward-ai",
+      "proposed_en_slug": "how-personality-shapes-attitude-toward-ai",
+      "translation_group_key": "article:how-personality-shapes-attitude-toward-ai",
+      "translation_group_exists": false,
+      "cms_current_state": "article_records_not_mutated_read_only_review_packet",
+      "public_runtime_state": "public runtime spot check: /en/articles returned Articles page with article cards and Page 1 of 1.",
+      "draft_exists": true,
+      "title_en_draft": "How Personality Shapes Your Attitude Toward AI: From Curiosity and Anxiety to Algorithm Trust",
+      "claim_risk": "high",
+      "claim_boundary_state": "claim_review_required_ai_and_personality_boundary",
+      "claim_review_required": true,
+      "factual_citation_risk": "review_required",
+      "reference_review_required": true,
+      "media_alt_risk": "visual_review_required",
+      "media_alt_draft": "An abstract face outline woven with AI network nodes, showing how personality differences can affect algorithm trust.",
+      "internal_link_intent": {
+        "related_test_slug": null,
+        "tags_zh": [
+          "人格心理学",
+          "AI",
+          "算法信任",
+          "人机交互",
+          "MBTI"
+        ],
+        "linking_notes": "Preserve article-to-topic/test intent only when backend authority can resolve the linked destination; do not expose draft URLs."
+      },
+      "internal_link_review_required": true,
+      "publish_readiness_after_human_review": "controlled_import_candidate_after_claim_fact_media_link_review",
+      "sitemap_llms_eligibility_only_after_publish": true,
+      "human_review_required": true,
+      "import_ready": true,
+      "publish_ready": false,
+      "blocked": false,
+      "deferred": false,
+      "required_review_risks": [
+        "ai_advice_boundary_review",
+        "claim_boundary_review",
+        "factual_citation_review",
+        "media_alt_visual_review"
+      ],
+      "required_reviewer_roles": [
+        "SEO_GEO_review",
+        "claim_boundary_review",
+        "technical_import_review",
+        "visual_media_review"
+      ],
+      "recommended_import_wave": "wave_2_articles_after_content_pages",
+      "sitemap_eligible_after_import": false,
+      "llms_eligible_after_import": false,
+      "footer_eligible_after_import": false,
+      "search_channel_eligible_after_import": false,
+      "notes": [
+        "No invented studies/statistics/citations may be added during review.",
+        "Sitemap/llms eligibility only after CMS publish and runtime verification."
+      ]
+    },
+    {
+      "asset_family": "articles",
+      "asset_key": "which-love-script-fits-you-best",
+      "source_zh_article": "which-love-script-fits-you-best",
+      "en_draft_package_key": "which-love-script-fits-you-best",
+      "proposed_en_slug": "which-love-script-fits-you-best",
+      "translation_group_key": "article:which-love-script-fits-you-best",
+      "translation_group_exists": false,
+      "cms_current_state": "article_records_not_mutated_read_only_review_packet",
+      "public_runtime_state": "public runtime spot check: /en/articles returned Articles page with article cards and Page 1 of 1.",
+      "draft_exists": true,
+      "title_en_draft": "Which Relationship Script Fits You Best? A More Scientific Match Through Seven Love Styles",
+      "claim_risk": "high",
+      "claim_boundary_state": "claim_review_required_relationship_matching_boundary",
+      "claim_review_required": true,
+      "factual_citation_risk": "review_required",
+      "reference_review_required": true,
+      "media_alt_risk": "visual_review_required",
+      "media_alt_draft": "An abstract relationship network showing geometric paths for seven love scripts.",
+      "internal_link_intent": {
+        "related_test_slug": null,
+        "tags_zh": [
+          "爱情风格",
+          "亲密关系",
+          "关系科学",
+          "MBTI",
+          "依恋与亲密"
+        ],
+        "linking_notes": "Preserve article-to-topic/test intent only when backend authority can resolve the linked destination; do not expose draft URLs."
+      },
+      "internal_link_review_required": true,
+      "publish_readiness_after_human_review": "controlled_import_candidate_after_claim_fact_media_link_review",
+      "sitemap_llms_eligibility_only_after_publish": true,
+      "human_review_required": true,
+      "import_ready": true,
+      "publish_ready": false,
+      "blocked": false,
+      "deferred": false,
+      "required_review_risks": [
+        "claim_boundary_review",
+        "factual_citation_review",
+        "media_alt_visual_review",
+        "relationship_claim_review"
+      ],
+      "required_reviewer_roles": [
+        "SEO_GEO_review",
+        "claim_boundary_review",
+        "technical_import_review",
+        "visual_media_review"
+      ],
+      "recommended_import_wave": "wave_2_articles_after_content_pages",
+      "sitemap_eligible_after_import": false,
+      "llms_eligible_after_import": false,
+      "footer_eligible_after_import": false,
+      "search_channel_eligible_after_import": false,
+      "notes": [
+        "No invented studies/statistics/citations may be added during review.",
+        "Sitemap/llms eligibility only after CMS publish and runtime verification."
+      ]
+    }
+  ],
+  "claim_boundary_items": [
+    "are-infj-men-rare-or-socially-silenced",
+    "best-valentines-date-by-personality-and-relationship-science",
+    "childhood-dream-job-still-shapes-career-choice",
+    "how-16-personality-types-talk-to-an-ai-coach",
+    "how-personality-shapes-attitude-toward-ai",
+    "which-love-script-fits-you-best"
+  ],
+  "factual_citation_review_items": [
+    "are-infj-men-rare-or-socially-silenced",
+    "best-valentines-date-by-personality-and-relationship-science",
+    "childhood-dream-job-still-shapes-career-choice",
+    "how-16-personality-types-talk-to-an-ai-coach",
+    "how-personality-shapes-attitude-toward-ai",
+    "which-love-script-fits-you-best"
+  ],
+  "media_review_items": [
+    "are-infj-men-rare-or-socially-silenced",
+    "best-valentines-date-by-personality-and-relationship-science",
+    "childhood-dream-job-still-shapes-career-choice",
+    "how-16-personality-types-talk-to-an-ai-coach",
+    "how-personality-shapes-attitude-toward-ai",
+    "which-love-script-fits-you-best"
+  ],
+  "not_done": [
+    "No CMS mutation/import/publish.",
+    "No sitemap/llms/Search Channel exposure.",
+    "No article auto approval and no invented citations or studies."
+  ],
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_pseo_generation": true,
+  "no_frontend_fallback_authority": true,
+  "next_task": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03"
+}
