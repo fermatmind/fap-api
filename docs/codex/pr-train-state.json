@@ -26441,7 +26441,7 @@
       "merge_commit_sha": "40cb182fbbe8ff521eb78b698c17c2ef67e9798b"
     },
     "GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02": {
-      "status": "pr_opened",
+      "status": "merged",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-article-human-review-import-02",
       "base": "main",
@@ -26449,12 +26449,12 @@
         "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01"
       ],
       "title": "GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02 article review decisions",
-      "commit_sha": "33ed329f",
+      "commit_sha": "bbc585de",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1701",
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-26T13:49:30Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "checks": {
         "preflight": {
           "status": "passed",
@@ -26509,6 +26509,15 @@
           "status": "passed",
           "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes."
+        },
+        "github_required_checks": {
+          "status": "passed",
+          "evidence": "PR #1701 checks green and mergeStateStatus CLEAN before squash merge."
+        },
+        "post_merge_focused_test": {
+          "status": "passed",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhArticleHumanReviewImport02 --no-ansi",
+          "evidence": "1 test passed, 128 assertions after PR #1701 merge."
         }
       },
       "history": [
@@ -26531,11 +26540,22 @@
           "at": "2026-05-26T21:37:37+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1701 after local validation; waiting for GitHub required checks."
+        },
+        {
+          "at": "2026-05-26T21:51:36+08:00",
+          "status": "merged",
+          "summary": "PR #1701 squash-merged; merge commit 2071cc060295a2b62d700a77bf41460ca9b601d0 verified on origin/main."
+        },
+        {
+          "at": "2026-05-26T21:51:36+08:00",
+          "status": "post_merge_cleanup_done",
+          "summary": "Remote task branch deleted by merge; local task branch deleted; post-merge focused test passed."
         }
-      ]
+      ],
+      "merge_commit_sha": "2071cc060295a2b62d700a77bf41460ca9b601d0"
     },
     "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03": {
-      "status": "planned",
+      "status": "local_checks_passed",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-topic-test-landing-human-review-import-03",
       "base": "main",
@@ -26549,12 +26569,77 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "checks": {},
+      "checks": {
+        "preflight": {
+          "status": "passed",
+          "evidence": "Started from origin/main at 2071cc060295a2b62d700a77bf41460ca9b601d0 in isolated worktree; dependency PR #1701 merged."
+        },
+        "browser_read_only_evidence": {
+          "status": "passed",
+          "evidence": "Representative public MBTI test landing page observed read-only; no CMS topic/landing write action."
+        },
+        "focused_test": {
+          "status": "passed",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhTopicTestLandingHumanReviewImport03 --no-ansi",
+          "evidence": "1 test passed, 337 assertions."
+        },
+        "route_list": {
+          "status": "passed",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "203 routes listed."
+        },
+        "pint": {
+          "status": "passed",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "3574 files passed."
+        },
+        "composer_validate": {
+          "status": "passed",
+          "command": "cd backend && composer validate --strict"
+        },
+        "composer_audit": {
+          "status": "passed",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "passed",
+          "evidence": "Generated JSON, pr-train-state.json, and pr-train.yaml parse successfully."
+        },
+        "scope_validation": {
+          "status": "passed",
+          "changed_files": [
+            "backend/docs/seo/generated/global-en-zh-topic-test-landing-human-review-import-03.v1.json",
+            "backend/docs/seo/global-en-zh-topic-test-landing-human-review-import-03.md",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhTopicTestLandingHumanReviewImport03Test.php",
+            "docs/codex/pr-train-state.json"
+          ]
+        },
+        "diff_check": {
+          "status": "passed",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "fap_web_reference_check": {
+          "status": "passed",
+          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "evidence": "No fap-web changes."
+        }
+      },
       "history": [
         {
           "at": "2026-05-26T11:02:25+08:00",
           "status": "planned",
           "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        },
+        {
+          "at": "2026-05-26T21:51:36+08:00",
+          "status": "in_progress",
+          "summary": "Started topic/test landing human-review decision packet from Batch-03 import package and read-only landing page evidence."
+        },
+        {
+          "at": "2026-05-26T21:53:06+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, fap-web reference check, and scope validation passed."
         }
       ]
     },
