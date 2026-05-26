@@ -26555,7 +26555,7 @@
       "merge_commit_sha": "2071cc060295a2b62d700a77bf41460ca9b601d0"
     },
     "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03": {
-      "status": "pr_opened_rerun_after_supply_chain_remediation",
+      "status": "merged",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-topic-test-landing-human-review-import-03",
       "base": "main",
@@ -26563,12 +26563,12 @@
         "GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02"
       ],
       "title": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03 topic test landing review decisions",
-      "commit_sha": "da3cfe4b",
+      "commit_sha": "2789b9b8",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1703",
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-26T14:33:58Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "checks": {
         "preflight": {
           "status": "passed",
@@ -26625,10 +26625,8 @@
           "evidence": "No fap-web changes."
         },
         "github_required_checks": {
-          "status": "failed_external_blocker",
-          "failed_check": "supply-chain",
-          "evidence": "composer audit --locked --no-interaction --ignore-unreachable reports CVE-2026-46644 for symfony/polyfill-intl-idn v1.37.0; affected >=1.17.1,<1.38.1.",
-          "details_url": "https://github.com/fermatmind/fap-api/actions/runs/26452487510/job/77877106624"
+          "status": "passed",
+          "evidence": "PR #1703 checks green and mergeStateStatus CLEAN after supply-chain remediation PR #1704."
         },
         "local_composer_audit_recheck": {
           "status": "passed",
@@ -26640,6 +26638,11 @@
           "pr_url": "https://github.com/fermatmind/fap-api/pull/1704",
           "merge_commit_sha": "73d27d05452dfa2d255101bfb5d54345c7853138",
           "evidence": "symfony/polyfill-intl-idn upgraded to v1.38.1 on main; composer audit now reports no security vulnerability advisories."
+        },
+        "post_merge_focused_test": {
+          "status": "passed",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhTopicTestLandingHumanReviewImport03 --no-ansi",
+          "evidence": "1 test passed, 337 assertions after PR #1703 merge."
         }
       },
       "history": [
@@ -26672,11 +26675,22 @@
           "at": "2026-05-26T22:25:37+08:00",
           "status": "pr_opened_rerun_after_supply_chain_remediation",
           "summary": "PR #1703 rebased onto origin/main after supply-chain remediation PR #1704 merged; local composer audit and PR4 validations pass; rerunning GitHub checks."
+        },
+        {
+          "at": "2026-05-26T22:35:47+08:00",
+          "status": "merged",
+          "summary": "PR #1703 squash-merged after #1704 supply-chain remediation; merge commit 137096cb47ee8adfe6056f22d0aba62b2cfbb248 verified on origin/main."
+        },
+        {
+          "at": "2026-05-26T22:35:47+08:00",
+          "status": "post_merge_cleanup_done",
+          "summary": "Remote task branch deleted by merge; local task branch deleted; post-merge focused test passed."
         }
-      ]
+      ],
+      "merge_commit_sha": "137096cb47ee8adfe6056f22d0aba62b2cfbb248"
     },
     "GLOBAL-EN-ZH-RESEARCH-CLAIM-HUMAN-REVIEW-04": {
-      "status": "planned",
+      "status": "local_checks_passed",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-research-claim-human-review-04",
       "base": "main",
@@ -26690,12 +26704,73 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "checks": {},
+      "checks": {
+        "preflight": {
+          "status": "passed",
+          "evidence": "Started from origin/main at 137096cb47ee8adfe6056f22d0aba62b2cfbb248 in isolated worktree; dependency PR #1703 merged."
+        },
+        "focused_test": {
+          "status": "passed",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhResearchClaimHumanReview04 --no-ansi",
+          "evidence": "1 test passed, 49 assertions."
+        },
+        "route_list": {
+          "status": "passed",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "203 routes listed."
+        },
+        "pint": {
+          "status": "passed",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "3576 files passed."
+        },
+        "composer_validate": {
+          "status": "passed",
+          "command": "cd backend && composer validate --strict"
+        },
+        "composer_audit": {
+          "status": "passed",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "passed",
+          "evidence": "Generated JSON, pr-train-state.json, and pr-train.yaml parse successfully."
+        },
+        "scope_validation": {
+          "status": "passed",
+          "changed_files": [
+            "backend/docs/seo/generated/global-en-zh-research-claim-human-review-04.v1.json",
+            "backend/docs/seo/global-en-zh-research-claim-human-review-04.md",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhResearchClaimHumanReview04Test.php",
+            "docs/codex/pr-train-state.json"
+          ]
+        },
+        "diff_check": {
+          "status": "passed",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "fap_web_reference_check": {
+          "status": "passed",
+          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "evidence": "No fap-web changes."
+        }
+      },
       "history": [
         {
           "at": "2026-05-26T11:02:25+08:00",
           "status": "planned",
           "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        },
+        {
+          "at": "2026-05-26T22:35:47+08:00",
+          "status": "in_progress",
+          "summary": "Started research claim human-review decision packet from Batch-04 research claim review package."
+        },
+        {
+          "at": "2026-05-26T22:36:57+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, fap-web reference check, and scope validation passed."
         }
       ]
     },
