@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T11:06:38+08:00",
+  "updated_at": "2026-05-26T11:07:52+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -26130,14 +26130,14 @@
       ]
     },
     "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00": {
-      "status": "local_checks_passed",
+      "status": "pr_opened",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-human-review-import-queue-00",
       "base": "main",
       "depends_on": [],
       "title": "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00 consolidated review queue",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "748c6cb71c42053bcca949e49072e5742cd70809",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1699",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -26211,6 +26211,11 @@
           "at": "2026-05-26T11:06:38+08:00",
           "status": "local_checks_passed",
           "summary": "Browser read-only evidence, focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, fap-web reference check, and scope validation passed."
+        },
+        {
+          "at": "2026-05-26T11:07:52+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1699 after local validation; waiting for GitHub required checks."
         }
       ]
     },
