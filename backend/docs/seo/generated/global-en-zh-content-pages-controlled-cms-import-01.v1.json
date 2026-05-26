@@ -1,0 +1,361 @@
+{
+  "schema_version": "global-en-zh-content-pages-controlled-cms-import-01.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-CMS-IMPORT-01",
+  "final_decision": "content_pages_controlled_cms_import_completed_with_sidecars",
+  "approval_phrase_verified": true,
+  "mode": "controlled_cms_import_dry_run_first",
+  "production_context": {
+    "backend_sha": "f21280b1d22045d97a1ea360fe08d5859a81e35f",
+    "frontend_node1_sha": "55ba93638d9a1818117898b2cf2632ef95406d5e"
+  },
+  "input_artifacts": [
+    "backend/docs/seo/import-packages/global-en-zh-content-pages-translation-batch-01.import.v1.json",
+    "backend/docs/seo/generated/global-en-zh-human-review-import-queue-00.v1.json",
+    "backend/docs/seo/generated/global-en-zh-content-pages-human-review-import-01.v1.json"
+  ],
+  "allowed_target_pages": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies",
+    "about",
+    "help-about",
+    "help-contact",
+    "help-faq",
+    "help-for-business-and-research",
+    "method-boundaries",
+    "support"
+  ],
+  "import_attempted_pages": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies",
+    "about",
+    "help-about",
+    "help-contact",
+    "help-faq",
+    "help-for-business-and-research",
+    "method-boundaries"
+  ],
+  "excluded_items": [
+    {
+      "asset_key": "support",
+      "reason": "blocked/deferred in source package: deferred_missing_authority"
+    },
+    {
+      "asset_key": "privacy",
+      "reason": "out of current Wave 1 allowed target list"
+    },
+    {
+      "asset_key": "terms",
+      "reason": "out of current Wave 1 allowed target list"
+    }
+  ],
+  "preflight": {
+    "package_exists_and_parses": true,
+    "review_packet_exists_and_parses": true,
+    "every_import_target_in_allowed_scope": true,
+    "blocked_or_deferred_items_excluded": true,
+    "publish_will_not_occur": true,
+    "sitemap_eligible_true_count": 0,
+    "llms_eligible_true_count": 0,
+    "footer_eligible_true_count": 0,
+    "search_channel_action_planned": false,
+    "out_of_scope_cms_write_planned": false,
+    "official_import_runtime": "content-pages:import-local-baseline",
+    "official_import_runtime_supports_dry_run": true,
+    "upsert_disabled_to_protect_existing_published_records": true
+  },
+  "dry_run": {
+    "passed": true,
+    "command": "php artisan content-pages:import-local-baseline --dry-run --status=draft --source-dir=<scoped-temp-dir>",
+    "output": [
+      "baseline_source_dir=/tmp/fap-content-pages-controlled-cms-import-01-20260527074715",
+      "dry_run=1",
+      "upsert=0",
+      "status_mode=draft",
+      "files_found=1",
+      "pages_found=11",
+      "will_create=5",
+      "will_update=0",
+      "will_skip=6",
+      "dry-run complete"
+    ],
+    "summary": {
+      "files_found": 1,
+      "pages_found": 11,
+      "will_create": 5,
+      "will_update": 0,
+      "will_skip": 6
+    }
+  },
+  "controlled_import": {
+    "performed": true,
+    "command": "php artisan content-pages:import-local-baseline --status=draft --source-dir=<scoped-temp-dir>",
+    "output": [
+      "baseline_source_dir=/tmp/fap-content-pages-controlled-cms-import-01-20260527074715",
+      "dry_run=0",
+      "upsert=0",
+      "status_mode=draft",
+      "files_found=1",
+      "pages_found=11",
+      "will_create=5",
+      "will_update=0",
+      "will_skip=6",
+      "import complete"
+    ],
+    "summary": {
+      "files_found": 1,
+      "pages_found": 11,
+      "will_create": 5,
+      "will_update": 0,
+      "will_skip": 6
+    }
+  },
+  "created_draft_records": [
+    "brand",
+    "careers",
+    "charter",
+    "foundation",
+    "policies"
+  ],
+  "skipped_existing_records": [
+    "about",
+    "help-about",
+    "help-contact",
+    "help-faq",
+    "help-for-business-and-research",
+    "method-boundaries"
+  ],
+  "post_import_records": [
+    {
+      "slug": "about",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "translation_status": "published",
+      "review_state": "approved",
+      "path": "/about"
+    },
+    {
+      "slug": "brand",
+      "locale": "en",
+      "status": "draft",
+      "is_public": false,
+      "is_indexable": false,
+      "translation_status": "draft",
+      "review_state": "draft",
+      "path": "/brand"
+    },
+    {
+      "slug": "careers",
+      "locale": "en",
+      "status": "draft",
+      "is_public": false,
+      "is_indexable": false,
+      "translation_status": "draft",
+      "review_state": "draft",
+      "path": "/careers"
+    },
+    {
+      "slug": "charter",
+      "locale": "en",
+      "status": "draft",
+      "is_public": false,
+      "is_indexable": false,
+      "translation_status": "draft",
+      "review_state": "draft",
+      "path": "/charter"
+    },
+    {
+      "slug": "foundation",
+      "locale": "en",
+      "status": "draft",
+      "is_public": false,
+      "is_indexable": false,
+      "translation_status": "draft",
+      "review_state": "draft",
+      "path": "/foundation"
+    },
+    {
+      "slug": "help-about",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "translation_status": "published",
+      "review_state": "approved",
+      "path": "/help/about"
+    },
+    {
+      "slug": "help-contact",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "translation_status": "published",
+      "review_state": "approved",
+      "path": "/help/contact"
+    },
+    {
+      "slug": "help-faq",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "translation_status": "published",
+      "review_state": "approved",
+      "path": "/help/faq"
+    },
+    {
+      "slug": "help-for-business-and-research",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "translation_status": "published",
+      "review_state": "approved",
+      "path": "/help/for-business-and-research"
+    },
+    {
+      "slug": "method-boundaries",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "translation_status": "published",
+      "review_state": "approved",
+      "path": "/method-boundaries"
+    },
+    {
+      "slug": "policies",
+      "locale": "en",
+      "status": "draft",
+      "is_public": false,
+      "is_indexable": false,
+      "translation_status": "draft",
+      "review_state": "draft",
+      "path": "/policies"
+    }
+  ],
+  "post_import_verification": {
+    "created_records_exist": true,
+    "created_records_not_published": true,
+    "created_records_not_public": true,
+    "created_records_not_indexable": true,
+    "created_records_translation_status_draft": true,
+    "created_records_review_state_draft": true,
+    "existing_published_records_not_mutated_by_upsert": true,
+    "public_runtime_new_draft_paths": [
+      {
+        "path": "/en/brand",
+        "http_status": 404
+      },
+      {
+        "path": "/en/charter",
+        "http_status": 404
+      },
+      {
+        "path": "/en/foundation",
+        "http_status": 404
+      },
+      {
+        "path": "/en/careers",
+        "http_status": 404
+      },
+      {
+        "path": "/en/policies",
+        "http_status": 404
+      }
+    ],
+    "new_draft_public_runtime_not_200": true,
+    "sitemap_eligible_false_for_created": true,
+    "llms_eligible_false_for_created": true,
+    "footer_eligible_false_for_created": true,
+    "search_channel_unchanged": true,
+    "gates_closed": true
+  },
+  "sidecars": [
+    {
+      "type": "existing_published_records_skipped",
+      "asset_keys": [
+        "about",
+        "help-about",
+        "help-contact",
+        "help-faq",
+        "help-for-business-and-research",
+        "method-boundaries"
+      ],
+      "reason": "Existing English CMS records were already published before this task; import ran with upsert disabled and did not mutate them."
+    },
+    {
+      "type": "blocked_deferred_item_not_imported",
+      "asset_keys": [
+        "support"
+      ],
+      "reason": "Source package marks support deferred_missing_authority."
+    },
+    {
+      "type": "out_of_scope_items_not_imported",
+      "asset_keys": [
+        "privacy",
+        "terms"
+      ],
+      "reason": "Not in current approval target list."
+    }
+  ],
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_sitemap_llms_footer_exposure": true,
+  "no_pseo_generation": true,
+  "no_production_user_data_access": true,
+  "no_frontend_fallback_authority": true,
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-IMPORT-VERIFY-01",
+  "generated_at": "2026-05-27T07:50:00+08:00",
+  "validation": {
+    "focused_test": {
+      "status": "passed",
+      "command": "cd backend && php artisan test --filter=GlobalEnZhContentPagesControlledCmsImport01 --no-ansi",
+      "evidence": "1 test passed, 69 assertions."
+    },
+    "route_list": {
+      "status": "passed",
+      "command": "cd backend && php artisan route:list --no-ansi",
+      "evidence": "203 routes listed."
+    },
+    "pint": {
+      "status": "passed",
+      "command": "cd backend && vendor/bin/pint --test",
+      "evidence": "3580 files passed."
+    },
+    "composer_validate": {
+      "status": "passed",
+      "command": "cd backend && composer validate --strict",
+      "evidence": "composer.json is valid."
+    },
+    "composer_audit": {
+      "status": "passed",
+      "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+      "evidence": "No security vulnerability advisories found."
+    },
+    "json_yaml_parse": {
+      "status": "passed",
+      "evidence": "Generated JSON, pr-train-state.json, and pr-train.yaml parse successfully."
+    },
+    "diff_check": {
+      "status": "passed",
+      "command": "git diff --check && git diff --cached --check"
+    },
+    "fap_web_reference_check": {
+      "status": "passed",
+      "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+      "evidence": "No fap-web changes."
+    }
+  }
+}
