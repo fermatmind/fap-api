@@ -1,0 +1,122 @@
+{
+  "schema_version": "v1",
+  "task": "SEARCH-CHANNEL-LIVE-ZH-MBTI-02-24H-REVIEW",
+  "final_decision": "search_channel_live_zh_mbti_02_24h_review_completed_stable_ready_for_seo_ops",
+  "queue_item_id": 3,
+  "target_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+  "channel": "indexnow",
+  "review_window": {
+    "required_elapsed_hours": 24,
+    "earliest_valid_review_time": "2026-05-26T04:09:44Z"
+  },
+  "live_submission_time": "2026-05-25T04:09:44Z",
+  "review_started_at": "2026-05-26T13:28:30Z",
+  "elapsed_hours": 33.31,
+  "elapsed_window_passed": true,
+  "queue_item_state": {
+    "exists": true,
+    "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "channel": "indexnow",
+    "locale": "zh-CN",
+    "page_entity_type": "test_detail",
+    "source_authority": "scale_catalog",
+    "approval_state": "approved",
+    "execution_state": "submitted",
+    "eligibility_state": "eligible",
+    "claim_boundary_state": "claim_safe",
+    "private_flow": false
+  },
+  "event_counts": {
+    "queue_item_planned": 1,
+    "live_submission_approved": 1,
+    "live_submission_response": 1
+  },
+  "live_response_state": {
+    "event_present": true,
+    "endpoint_host": "api.indexnow.org",
+    "http_status": 200,
+    "submission_status": "accepted",
+    "exception_class": null
+  },
+  "queue_item_2_state": {
+    "queue_item_id": 2,
+    "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+    "channel": "indexnow",
+    "approval_state": "approved",
+    "execution_state": "submitted",
+    "unchanged": true
+  },
+  "duplicate_check": {
+    "target_url_channel_count": 1,
+    "duplicate_active_queue_item_detected": false,
+    "research_submitted_count": 0,
+    "bulk_submit_event_count_since_submission": 0
+  },
+  "retry_check": {
+    "live_submission_response_count": 1,
+    "retry_storm_detected": false
+  },
+  "gate_state": {
+    "SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED": false,
+    "SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED": false,
+    "SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED": false,
+    "SEO_INTEL_INDEXNOW_LIVE_API_ENABLED": false
+  },
+  "public_runtime_check": {
+    "url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "http_status": 200,
+    "final_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "canonical": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+    "robots_meta": "index, follow",
+    "noindex_detected": false,
+    "staging_canonical_detected": false,
+    "private_flow_marker_detected": false,
+    "stale_slug_marker_detected": false,
+    "used_as_url_truth": false
+  },
+  "issue_queue_check": {
+    "available": true,
+    "table": "seo_issue_queue",
+    "target_issue_count": 0,
+    "private_flow_leak_detected": false,
+    "forbidden_authority_detected": false,
+    "claim_unsafe_detected": false,
+    "duplicate_search_channel_issue_detected": false
+  },
+  "crawler_aggregate_observation": {
+    "available": false,
+    "tables_checked": [
+      "seo_crawler_log_daily_aggregates",
+      "seo_crawler_daily_aggregates"
+    ],
+    "raw_nginx_logs_read": false,
+    "crawler_visit_claimed": false,
+    "sidecar": "crawler aggregate table not detected"
+  },
+  "external_search_visibility_observation": {
+    "checked": false,
+    "external_search_api_called": false,
+    "serp_observation_performed": false,
+    "indexing_claimed": false,
+    "ranking_claimed": false,
+    "sidecar": "not checked by scope"
+  },
+  "staging_sidecar": {
+    "checked": true,
+    "url": "https://staging.fermatmind.com/",
+    "http_status": 200,
+    "x_robots_tag": "noindex, nofollow, noarchive",
+    "robots_meta": "noindex, nofollow, noarchive, nocache",
+    "canonical": "https://fermatmind.com",
+    "baidu_stale_result_sidecar": true,
+    "blocks_zh_mbti_review": false
+  },
+  "no_indexing_claim": true,
+  "no_ranking_claim": true,
+  "no_live_submission_performed": true,
+  "no_external_search_api_call": true,
+  "no_search_channel_enqueue": true,
+  "no_cms_mutation": true,
+  "no_deploy": true,
+  "next_task": "SEO-OPS-MBTI-FIRST-7D-RUN-01"
+}
