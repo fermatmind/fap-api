@@ -13693,3 +13693,347 @@ prs:
     pseo_generation_allowed: false
     frontend_fallback_authority: false
     next_task: GLOBAL-EN-ZH-FULL-PARITY-VERIFY-POST-BATCH
+
+  - id: GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00
+    repo: fap-api
+    depends_on: []
+    branch: codex/global-en-zh-human-review-import-queue-00
+    base: main
+    title: "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00 consolidated review queue"
+    train_scope: global_en_zh_browser_assisted_human_review_train
+    risk_level: p1_human_review_decision_packet
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-human-review-import-queue-00.md
+      - backend/docs/seo/generated/global-en-zh-human-review-import-queue-00.v1.json
+      - backend/docs/seo/generated/global-en-zh-human-review-queue.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhHumanReviewImportQueue00Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare browser-assisted, repo-backed human-review decision artifacts only.
+      - Use public/CMS read-only evidence without CMS mutation, publish, deploy, URL submission, or Search Channel action.
+      - Keep all generated English assets human_review_required until later controlled import approval.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhHumanReviewImportQueue00 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-human-review-import-queue-00.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    human_review_decision_only: true
+    pseo_generation_allowed: false
+    frontend_fallback_authority: false
+
+  - id: GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00
+    branch: codex/global-en-zh-content-pages-human-review-import-01
+    base: main
+    title: "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01 content page review decisions"
+    train_scope: global_en_zh_browser_assisted_human_review_train
+    risk_level: p1_human_review_decision_packet
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-content-pages-human-review-import-01.md
+      - backend/docs/seo/generated/global-en-zh-content-pages-human-review-import-01.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesHumanReviewImport01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare browser-assisted, repo-backed human-review decision artifacts only.
+      - Use public/CMS read-only evidence without CMS mutation, publish, deploy, URL submission, or Search Channel action.
+      - Keep all generated English assets human_review_required until later controlled import approval.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhContentPagesHumanReviewImport01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-human-review-import-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    human_review_decision_only: true
+    pseo_generation_allowed: false
+    frontend_fallback_authority: false
+
+  - id: GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01
+    branch: codex/global-en-zh-article-human-review-import-02
+    base: main
+    title: "GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02 article review decisions"
+    train_scope: global_en_zh_browser_assisted_human_review_train
+    risk_level: p1_human_review_decision_packet
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-article-human-review-import-02.md
+      - backend/docs/seo/generated/global-en-zh-article-human-review-import-02.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhArticleHumanReviewImport02Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare browser-assisted, repo-backed human-review decision artifacts only.
+      - Use public/CMS read-only evidence without CMS mutation, publish, deploy, URL submission, or Search Channel action.
+      - Keep all generated English assets human_review_required until later controlled import approval.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhArticleHumanReviewImport02 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-article-human-review-import-02.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    human_review_decision_only: true
+    pseo_generation_allowed: false
+    frontend_fallback_authority: false
+
+  - id: GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-ARTICLE-HUMAN-REVIEW-IMPORT-02
+    branch: codex/global-en-zh-topic-test-landing-human-review-import-03
+    base: main
+    title: "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03 topic test landing review decisions"
+    train_scope: global_en_zh_browser_assisted_human_review_train
+    risk_level: p1_human_review_decision_packet
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-topic-test-landing-human-review-import-03.md
+      - backend/docs/seo/generated/global-en-zh-topic-test-landing-human-review-import-03.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhTopicTestLandingHumanReviewImport03Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare browser-assisted, repo-backed human-review decision artifacts only.
+      - Use public/CMS read-only evidence without CMS mutation, publish, deploy, URL submission, or Search Channel action.
+      - Keep all generated English assets human_review_required until later controlled import approval.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhTopicTestLandingHumanReviewImport03 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-topic-test-landing-human-review-import-03.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    human_review_decision_only: true
+    pseo_generation_allowed: false
+    frontend_fallback_authority: false
+
+  - id: GLOBAL-EN-ZH-RESEARCH-CLAIM-HUMAN-REVIEW-04
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03
+    branch: codex/global-en-zh-research-claim-human-review-04
+    base: main
+    title: "GLOBAL-EN-ZH-RESEARCH-CLAIM-HUMAN-REVIEW-04 research claim review decisions"
+    train_scope: global_en_zh_browser_assisted_human_review_train
+    risk_level: p1_human_review_decision_packet
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-research-claim-human-review-04.md
+      - backend/docs/seo/generated/global-en-zh-research-claim-human-review-04.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhResearchClaimHumanReview04Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare browser-assisted, repo-backed human-review decision artifacts only.
+      - Use public/CMS read-only evidence without CMS mutation, publish, deploy, URL submission, or Search Channel action.
+      - Keep all generated English assets human_review_required until later controlled import approval.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhResearchClaimHumanReview04 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-research-claim-human-review-04.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    human_review_decision_only: true
+    pseo_generation_allowed: false
+    frontend_fallback_authority: false
+
+  - id: GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-RESEARCH-CLAIM-HUMAN-REVIEW-04
+    branch: codex/global-en-zh-career-human-review-import-05
+    base: main
+    title: "GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05 career content review decisions"
+    train_scope: global_en_zh_browser_assisted_human_review_train
+    risk_level: p1_human_review_decision_packet
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-career-human-review-import-05.md
+      - backend/docs/seo/generated/global-en-zh-career-human-review-import-05.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhCareerHumanReviewImport05Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare browser-assisted, repo-backed human-review decision artifacts only.
+      - Use public/CMS read-only evidence without CMS mutation, publish, deploy, URL submission, or Search Channel action.
+      - Keep all generated English assets human_review_required until later controlled import approval.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhCareerHumanReviewImport05 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-career-human-review-import-05.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    human_review_decision_only: true
+    pseo_generation_allowed: false
+    frontend_fallback_authority: false
+
+  - id: GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05
+    branch: codex/global-en-zh-result-report-human-review-import-06
+    base: main
+    title: "GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06 result report review decisions"
+    train_scope: global_en_zh_browser_assisted_human_review_train
+    risk_level: p1_human_review_decision_packet
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-result-report-human-review-import-06.md
+      - backend/docs/seo/generated/global-en-zh-result-report-human-review-import-06.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhResultReportHumanReviewImport06Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare browser-assisted, repo-backed human-review decision artifacts only.
+      - Use public/CMS read-only evidence without CMS mutation, publish, deploy, URL submission, or Search Channel action.
+      - Keep all generated English assets human_review_required until later controlled import approval.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhResultReportHumanReviewImport06 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-result-report-human-review-import-06.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    human_review_decision_only: true
+    pseo_generation_allowed: false
+    frontend_fallback_authority: false
+
+  - id: GLOBAL-EN-ZH-MEDIA-HUMAN-VISUAL-REVIEW-07
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06
+    branch: codex/global-en-zh-media-human-visual-review-07
+    base: main
+    title: "GLOBAL-EN-ZH-MEDIA-HUMAN-VISUAL-REVIEW-07 media visual review decisions"
+    train_scope: global_en_zh_browser_assisted_human_review_train
+    risk_level: p1_human_review_decision_packet
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-media-human-visual-review-07.md
+      - backend/docs/seo/generated/global-en-zh-media-human-visual-review-07.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhMediaHumanVisualReview07Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare browser-assisted, repo-backed human-review decision artifacts only.
+      - Use public/CMS read-only evidence without CMS mutation, publish, deploy, URL submission, or Search Channel action.
+      - Keep all generated English assets human_review_required until later controlled import approval.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhMediaHumanVisualReview07 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-media-human-visual-review-07.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    human_review_decision_only: true
+    pseo_generation_allowed: false
+    frontend_fallback_authority: false
