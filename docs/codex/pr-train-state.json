@@ -26690,7 +26690,7 @@
       "merge_commit_sha": "137096cb47ee8adfe6056f22d0aba62b2cfbb248"
     },
     "GLOBAL-EN-ZH-RESEARCH-CLAIM-HUMAN-REVIEW-04": {
-      "status": "pr_opened",
+      "status": "merged",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-research-claim-human-review-04",
       "base": "main",
@@ -26698,12 +26698,12 @@
         "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03"
       ],
       "title": "GLOBAL-EN-ZH-RESEARCH-CLAIM-HUMAN-REVIEW-04 research claim review decisions",
-      "commit_sha": "278e3d9e",
+      "commit_sha": "8761b58b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1705",
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-26T14:50:40Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "checks": {
         "preflight": {
           "status": "passed",
@@ -26754,6 +26754,15 @@
           "status": "passed",
           "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes."
+        },
+        "github_required_checks": {
+          "status": "passed",
+          "evidence": "PR #1705 checks green and mergeStateStatus CLEAN before squash merge."
+        },
+        "post_merge_focused_test": {
+          "status": "passed",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhResearchClaimHumanReview04 --no-ansi",
+          "evidence": "1 test passed, 49 assertions after PR #1705 merge."
         }
       },
       "history": [
@@ -26776,11 +26785,22 @@
           "at": "2026-05-26T22:38:04+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1705 after local validation; waiting for GitHub required checks."
+        },
+        {
+          "at": "2026-05-26T22:53:08+08:00",
+          "status": "merged",
+          "summary": "PR #1705 squash-merged; merge commit 57071e324c60f243b9d3359c55962f7f1689eb48 verified on origin/main."
+        },
+        {
+          "at": "2026-05-26T22:53:08+08:00",
+          "status": "post_merge_cleanup_done",
+          "summary": "Remote task branch deleted by merge; local task branch deleted; post-merge focused test passed."
         }
-      ]
+      ],
+      "merge_commit_sha": "57071e324c60f243b9d3359c55962f7f1689eb48"
     },
     "GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05": {
-      "status": "planned",
+      "status": "pr_opened",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-career-human-review-import-05",
       "base": "main",
@@ -26788,18 +26808,84 @@
         "GLOBAL-EN-ZH-RESEARCH-CLAIM-HUMAN-REVIEW-04"
       ],
       "title": "GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05 career content review decisions",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "1685c238",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1706",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "checks": {},
+      "checks": {
+        "preflight": {
+          "status": "passed",
+          "evidence": "Started from origin/main at 57071e324c60f243b9d3359c55962f7f1689eb48 in isolated worktree; dependency PR #1705 merged."
+        },
+        "focused_test": {
+          "status": "passed",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhCareerHumanReviewImport05 --no-ansi",
+          "evidence": "1 test passed, 3760 assertions."
+        },
+        "route_list": {
+          "status": "passed",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "203 routes listed."
+        },
+        "pint": {
+          "status": "passed",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "3577 files passed."
+        },
+        "composer_validate": {
+          "status": "passed",
+          "command": "cd backend && composer validate --strict"
+        },
+        "composer_audit": {
+          "status": "passed",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "passed",
+          "evidence": "Generated JSON, pr-train-state.json, and pr-train.yaml parse successfully."
+        },
+        "scope_validation": {
+          "status": "passed",
+          "changed_files": [
+            "backend/docs/seo/generated/global-en-zh-career-human-review-import-05.v1.json",
+            "backend/docs/seo/global-en-zh-career-human-review-import-05.md",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhCareerHumanReviewImport05Test.php",
+            "docs/codex/pr-train-state.json"
+          ]
+        },
+        "diff_check": {
+          "status": "passed",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "fap_web_reference_check": {
+          "status": "passed",
+          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "evidence": "No fap-web changes."
+        }
+      },
       "history": [
         {
           "at": "2026-05-26T11:02:25+08:00",
           "status": "planned",
           "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        },
+        {
+          "at": "2026-05-26T22:53:08+08:00",
+          "status": "in_progress",
+          "summary": "Started career human-review decision packet from Batch-05 career content package."
+        },
+        {
+          "at": "2026-05-26T22:54:25+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, fap-web reference check, and scope validation passed."
+        },
+        {
+          "at": "2026-05-26T22:55:19+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1706 after local validation; waiting for GitHub required checks."
         }
       ]
     },
