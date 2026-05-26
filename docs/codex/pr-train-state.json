@@ -26130,18 +26130,18 @@
       ]
     },
     "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00": {
-      "status": "github_checks_passed",
+      "status": "merged",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-human-review-import-queue-00",
       "base": "main",
       "depends_on": [],
       "title": "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00 consolidated review queue",
-      "commit_sha": "a6553854eba257ea1d5fd8d1cd6a03b2e7ed540c",
+      "commit_sha": "e934e8a5617ec669f6f326e1177e0c6044f9cb22",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1699",
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-26T03:32:35Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "checks": {
         "browser_read_only_evidence": {
           "status": "passed",
@@ -26198,6 +26198,11 @@
         "github_required_checks": {
           "status": "passed",
           "evidence": "PR #1699 checks green and mergeStateStatus CLEAN before final state commit."
+        },
+        "post_merge_focused_test": {
+          "status": "passed",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhHumanReviewImportQueue00 --no-ansi",
+          "evidence": "1 test passed, 3641 assertions after PR #1699 merge."
         }
       },
       "history": [
@@ -26225,11 +26230,22 @@
           "at": "2026-05-26T11:15:21+08:00",
           "status": "github_checks_passed",
           "summary": "GitHub checks passed and mergeStateStatus was CLEAN before final ledger state update."
+        },
+        {
+          "at": "2026-05-26T11:36:29+08:00",
+          "status": "merged",
+          "summary": "PR #1699 squash-merged; merge commit acf26cb4c155d6ec387acea81db2f9a4f366f3c9 verified on origin/main."
+        },
+        {
+          "at": "2026-05-26T11:36:29+08:00",
+          "status": "post_merge_cleanup_done",
+          "summary": "Remote task branch was deleted by merge; local task branch deleted; post-merge focused test passed."
         }
-      ]
+      ],
+      "merge_commit_sha": "acf26cb4c155d6ec387acea81db2f9a4f366f3c9"
     },
     "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01": {
-      "status": "planned",
+      "status": "local_checks_passed",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-content-pages-human-review-import-01",
       "base": "main",
@@ -26243,12 +26259,82 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "checks": {},
+      "checks": {
+        "preflight": {
+          "status": "passed",
+          "evidence": "Started from origin/main at acf26cb4c155d6ec387acea81db2f9a4f366f3c9 in isolated worktree; dependency PR #1699 merged."
+        },
+        "browser_read_only_evidence": {
+          "status": "passed",
+          "evidence": "Used prior read-only public/CMS observations from PR #1699: public runtime pages rendered and /zh/ops/content-pages aggregate showed zero content page records; no write action."
+        },
+        "focused_test": {
+          "status": "passed",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhContentPagesHumanReviewImport01 --no-ansi",
+          "evidence": "1 test passed, 330 assertions."
+        },
+        "route_list": {
+          "status": "passed",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "203 routes listed."
+        },
+        "pint": {
+          "status": "passed",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "3572 files passed."
+        },
+        "composer_validate": {
+          "status": "passed",
+          "command": "cd backend && composer validate --strict"
+        },
+        "composer_audit": {
+          "status": "passed",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "passed",
+          "evidence": "Generated JSON, pr-train-state.json, and pr-train.yaml parse successfully."
+        },
+        "scope_validation": {
+          "status": "passed",
+          "changed_files": [
+            "backend/docs/seo/generated/global-en-zh-content-pages-human-review-import-01.v1.json",
+            "backend/docs/seo/global-en-zh-content-pages-human-review-import-01.md",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesHumanReviewImport01Test.php",
+            "docs/codex/pr-train-state.json"
+          ]
+        },
+        "diff_check": {
+          "status": "passed",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "fap_web_reference_check": {
+          "status": "passed",
+          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "evidence": "No fap-web changes."
+        }
+      },
       "history": [
         {
           "at": "2026-05-26T11:02:25+08:00",
           "status": "planned",
           "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        },
+        {
+          "at": "2026-05-26T11:36:29+08:00",
+          "status": "in_progress",
+          "summary": "Started content page human-review decision packet from Batch-01 import package and consolidated queue read-only evidence."
+        },
+        {
+          "at": "2026-05-26T11:37:28+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused test, route list, Pint, composer validate/audit, and fap-web reference check passed; JSON/YAML parse, diff check, and scope validation pending after state update."
+        },
+        {
+          "at": "2026-05-26T21:23:35+08:00",
+          "status": "scope_validation_passed",
+          "summary": "Changed files are within the content page decision packet scope; JSON/YAML parse and diff checks passed."
         }
       ]
     },
