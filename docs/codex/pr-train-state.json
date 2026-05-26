@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-26T23:13:42+08:00",
+  "updated_at": "2026-05-26T23:25:45+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -26910,7 +26910,7 @@
       "merge_commit_sha": "9cbfeca0f7ee27e33cc90b01c8779a8f48c352c9"
     },
     "GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06": {
-      "status": "pr_opened",
+      "status": "merged",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-result-report-human-review-import-06",
       "base": "main",
@@ -26918,12 +26918,12 @@
         "GLOBAL-EN-ZH-CAREER-HUMAN-REVIEW-IMPORT-05"
       ],
       "title": "GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06 result report review decisions",
-      "commit_sha": "7a269df924cdeede8e07929087d9119bd911c525",
+      "commit_sha": "5643db116b952b519f65d5bea28147d5bd6616bf",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1707",
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-26T15:20:23Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "checks": {
         "preflight": {
           "status": "passed",
@@ -26975,6 +26975,15 @@
           "status": "passed",
           "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
           "evidence": "No fap-web changes after removing local browser snapshot artifacts."
+        },
+        "github_checks": {
+          "status": "passed",
+          "evidence": "GitHub required checks passed; PR #1707 merged with merge commit 1b1229d3aa0dd94ba2d7c3b3215461e3a9dc1dd1."
+        },
+        "post_merge_focused_test": {
+          "status": "passed",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhResultReportHumanReviewImport06 --no-ansi",
+          "evidence": "1 test passed, 238 assertions."
         }
       },
       "history": [
@@ -27002,11 +27011,22 @@
           "at": "2026-05-26T23:13:42+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1707 after local validation; waiting for GitHub required checks."
+        },
+        {
+          "at": "2026-05-26T23:20:23+08:00",
+          "status": "merged",
+          "summary": "PR #1707 merged after GitHub checks passed and mergeStateStatus was CLEAN."
+        },
+        {
+          "at": "2026-05-26T23:23:34+08:00",
+          "status": "post_merge_cleanup_done",
+          "summary": "Confirmed origin/main contains merge commit, remote branch absent, local task branch deleted, and post-merge focused test passed."
         }
-      ]
+      ],
+      "merge_commit_sha": "1b1229d3aa0dd94ba2d7c3b3215461e3a9dc1dd1"
     },
     "GLOBAL-EN-ZH-MEDIA-HUMAN-VISUAL-REVIEW-07": {
-      "status": "planned",
+      "status": "pr_opened",
       "repo": "fap-api",
       "branch": "codex/global-en-zh-media-human-visual-review-07",
       "base": "main",
@@ -27014,18 +27034,85 @@
         "GLOBAL-EN-ZH-RESULT-REPORT-HUMAN-REVIEW-IMPORT-06"
       ],
       "title": "GLOBAL-EN-ZH-MEDIA-HUMAN-VISUAL-REVIEW-07 media visual review decisions",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "344a593bc88edcfe19fda61219ffc3faa33f9cf6",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1708",
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "checks": {},
+      "checks": {
+        "preflight": {
+          "status": "passed",
+          "evidence": "Started from origin/main at 1b1229d3aa0dd94ba2d7c3b3215461e3a9dc1dd1 in isolated worktree; dependency PR #1707 merged."
+        },
+        "focused_test": {
+          "status": "passed",
+          "command": "cd backend && php artisan test --filter=GlobalEnZhMediaHumanVisualReview07 --no-ansi",
+          "evidence": "1 test passed, 426 assertions."
+        },
+        "route_list": {
+          "status": "passed",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "203 routes listed."
+        },
+        "pint": {
+          "status": "passed",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "3579 files passed."
+        },
+        "composer_validate": {
+          "status": "passed",
+          "command": "cd backend && composer validate --strict",
+          "evidence": "composer.json is valid."
+        },
+        "composer_audit": {
+          "status": "passed",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "passed",
+          "evidence": "Generated JSON, pr-train-state.json, and pr-train.yaml parse successfully."
+        },
+        "scope_validation": {
+          "status": "passed",
+          "changed_files": [
+            "backend/docs/seo/generated/global-en-zh-media-human-visual-review-07.v1.json",
+            "backend/docs/seo/global-en-zh-media-human-visual-review-07.md",
+            "backend/tests/Feature/SeoIntel/GlobalEnZhMediaHumanVisualReview07Test.php",
+            "docs/codex/pr-train-state.json"
+          ]
+        },
+        "diff_check": {
+          "status": "passed",
+          "command": "git diff --check && git diff --cached --check"
+        },
+        "fap_web_reference_check": {
+          "status": "passed",
+          "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+          "evidence": "No fap-web changes after removing local browser snapshot artifacts."
+        }
+      },
       "history": [
         {
           "at": "2026-05-26T11:02:25+08:00",
           "status": "planned",
           "summary": "Authorized browser-assisted human review train entry; no CMS mutation, publish, deploy, URL submission, Search Channel action, or pSEO generation."
+        },
+        {
+          "at": "2026-05-26T23:23:34+08:00",
+          "status": "in_progress",
+          "summary": "Started media visual review decision packet from Batch-07 media/OG/alt package; representative public article/media surfaces observed read-only."
+        },
+        {
+          "at": "2026-05-26T23:24:53+08:00",
+          "status": "local_checks_passed",
+          "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, fap-web reference check, and scope validation passed."
+        },
+        {
+          "at": "2026-05-26T23:25:45+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1708 after local validation; waiting for GitHub required checks."
         }
       ]
     }
