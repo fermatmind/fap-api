@@ -15,8 +15,9 @@ final class CareerGenerateCanonicalDeltaRolloutManifest extends Command
     protected $signature = 'career:generate-canonical-delta-rollout-manifest
         {--target-delta= : Required Career 80 target delta JSON artifact}
         {--candidate-prep-plan= : Optional runtime candidate prep plan JSON artifact}
-        {--target-public-total=80 : Target public total after delta rollout}
-        {--expect-delta-count=51 : Expected delta promotion slug count}
+        {--target= : Optional rollout target key; supports detail_ready_1048}
+        {--target-public-total= : Target public total after delta rollout}
+        {--expect-delta-count= : Expected delta promotion slug count}
         {--batch-id= : Optional batch id; defaults to career_80_delta_canonical_001}
         {--locales=en,zh : Comma-separated locale list}
         {--json : Emit JSON output}
@@ -29,10 +30,12 @@ final class CareerGenerateCanonicalDeltaRolloutManifest extends Command
         try {
             $targetDeltaPath = $this->requiredOption('target-delta');
             $candidatePrepPlanPath = $this->pathOption('candidate-prep-plan');
-            $targetPublicTotal = $this->positiveIntOption('target-public-total', 80);
-            $expectedDeltaCount = $this->positiveIntOption('expect-delta-count', 51);
+            $targetDelta = $this->readJson($targetDeltaPath, 'target_delta');
+            $target = $this->target($targetDelta);
+            $targetPublicTotal = $this->positiveIntOption('target-public-total', $this->defaultTargetPublicTotal($target));
+            $expectedDeltaCount = $this->positiveIntOption('expect-delta-count', $this->defaultExpectedDeltaCount($target));
             $payload = app(CareerDeltaRolloutManifestPlanner::class)->plan(
-                targetDeltaPlan: $this->readJson($targetDeltaPath, 'target_delta'),
+                targetDeltaPlan: $targetDelta,
                 candidatePrepPlan: $candidatePrepPlanPath === null ? null : $this->readJson($candidatePrepPlanPath, 'candidate_prep_plan'),
                 targetPublicTotal: $targetPublicTotal,
                 expectedDeltaCount: $expectedDeltaCount,
@@ -40,6 +43,7 @@ final class CareerGenerateCanonicalDeltaRolloutManifest extends Command
                 batchId: $this->batchId($targetPublicTotal),
                 targetDeltaPath: $targetDeltaPath,
                 candidatePrepPlanPath: $candidatePrepPlanPath,
+                target: $target,
             )->toArray();
 
             return $this->finish($payload, ($payload['status'] ?? null) === 'pass' ? self::SUCCESS : self::FAILURE);
@@ -126,6 +130,31 @@ final class CareerGenerateCanonicalDeltaRolloutManifest extends Command
         }
 
         return $targetPublicTotal === 80 ? 'career_80_delta_canonical_001' : 'career_'.$targetPublicTotal.'_delta_canonical_001';
+    }
+
+    /**
+     * @param  array<string, mixed>  $targetDelta
+     */
+    private function target(array $targetDelta): ?string
+    {
+        $target = trim((string) ($this->option('target') ?? ''));
+        if ($target !== '') {
+            return $target;
+        }
+
+        $candidate = $targetDelta['target_key'] ?? $targetDelta['target'] ?? null;
+
+        return is_string($candidate) && trim($candidate) !== '' ? $candidate : null;
+    }
+
+    private function defaultTargetPublicTotal(?string $target): int
+    {
+        return $target === 'detail_ready_1048' ? 1048 : 80;
+    }
+
+    private function defaultExpectedDeltaCount(?string $target): int
+    {
+        return $target === 'detail_ready_1048' ? 1018 : 51;
     }
 
     /**

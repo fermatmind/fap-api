@@ -14,8 +14,9 @@ final class CareerPlanCanonicalDeltaRolloutGate extends Command
 {
     protected $signature = 'career:plan-canonical-delta-rollout-gate
         {--manifest= : Required Career 51-delta rollout manifest JSON artifact}
-        {--target-public-total=80 : Target public total after delta rollout}
-        {--expect-delta-count=51 : Expected delta promotion slug count}
+        {--target= : Optional rollout target key; supports detail_ready_1048}
+        {--target-public-total= : Target public total after delta rollout}
+        {--expect-delta-count= : Expected delta promotion slug count}
         {--json : Emit JSON output}
         {--output= : Optional output path for delta rollout gate JSON}';
 
@@ -25,11 +26,14 @@ final class CareerPlanCanonicalDeltaRolloutGate extends Command
     {
         try {
             $manifestPath = $this->requiredOption('manifest');
+            $manifest = $this->readJson($manifestPath);
+            $target = $this->target($manifest);
             $payload = app(CareerDeltaRolloutGatePlanner::class)->plan(
-                manifest: $this->readJson($manifestPath),
-                targetPublicTotal: $this->positiveIntOption('target-public-total', 80),
-                expectedDeltaCount: $this->positiveIntOption('expect-delta-count', 51),
+                manifest: $manifest,
+                targetPublicTotal: $this->positiveIntOption('target-public-total', $this->defaultTargetPublicTotal($target)),
+                expectedDeltaCount: $this->positiveIntOption('expect-delta-count', $this->defaultExpectedDeltaCount($target)),
                 manifestPath: $manifestPath,
+                target: $target,
             )->toArray();
 
             return $this->finish($payload, ($payload['status'] ?? null) === 'pass' ? self::SUCCESS : self::FAILURE);
@@ -76,6 +80,31 @@ final class CareerPlanCanonicalDeltaRolloutGate extends Command
         }
 
         return $value;
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     */
+    private function target(array $manifest): ?string
+    {
+        $target = trim((string) ($this->option('target') ?? ''));
+        if ($target !== '') {
+            return $target;
+        }
+
+        $candidate = $manifest['target_key'] ?? $manifest['target'] ?? null;
+
+        return is_string($candidate) && trim($candidate) !== '' ? $candidate : null;
+    }
+
+    private function defaultTargetPublicTotal(?string $target): int
+    {
+        return $target === 'detail_ready_1048' ? 1048 : 80;
+    }
+
+    private function defaultExpectedDeltaCount(?string $target): int
+    {
+        return $target === 'detail_ready_1048' ? 1018 : 51;
     }
 
     /**

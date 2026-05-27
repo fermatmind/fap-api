@@ -1,6 +1,6 @@
 # Career 51 Delta Rollout Manifest
 
-`career:generate-canonical-delta-rollout-manifest` creates the read-only manifest for the Career 80 delta rollout path.
+`career:generate-canonical-delta-rollout-manifest` creates the read-only manifest for the Career 80 delta rollout path and can also emit the `detail_ready_1048` rollout manifest.
 
 The manifest is intentionally delta-only:
 
@@ -22,6 +22,23 @@ php artisan career:generate-canonical-delta-rollout-manifest \
 ```
 
 `--candidate-prep-plan` is optional for structural manifest generation, but supplying it lets the planner catch a delta-count mismatch before the later dry-run.
+
+For the detail-ready 1048 target:
+
+```bash
+php artisan career:generate-canonical-delta-rollout-manifest \
+  --target-delta=/tmp/career_detail_ready_1048_publication_scan.json \
+  --candidate-prep-plan=/tmp/career_detail_ready_1048_runtime_candidate_prep_plan.json \
+  --target=detail_ready_1048 \
+  --target-public-total=1048 \
+  --expect-delta-count=1018 \
+  --batch-id=career_detail_ready_1048_canonical_001 \
+  --locales=en,zh \
+  --json \
+  --output=/tmp/career_detail_ready_1048_rollout_manifest.json
+```
+
+This remains planner-only. It does not run candidate prep apply, rollout dry-run, rollout apply, export, deploy, or CMS mutation.
 
 ## Output Shape
 
@@ -50,6 +67,8 @@ php artisan career:generate-canonical-delta-rollout-manifest \
 
 `rollback_group` is always the explicit 51-slug delta list. It must not be a batch id, and it must not include any of the 29 already-published baseline slugs.
 
+For `detail_ready_1048`, `rollback_group` is the explicit 1018-slug ready-not-public delta list. The planner blocks manual-hold, CN proxy, review-needed, family-handoff, or blocked slugs if they appear in the delta evidence.
+
 ## Non-goals
 
 - No rollout dry-run execution.
@@ -58,6 +77,7 @@ php artisan career:generate-canonical-delta-rollout-manifest \
 - No DB mutation.
 - No publication expansion.
 - No fap-web change.
+- No publication of 2289 excluded/raw assets or all 2786 occupations.
 
 ## Follow-up
 

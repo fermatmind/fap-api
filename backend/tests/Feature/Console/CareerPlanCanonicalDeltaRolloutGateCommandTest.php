@@ -114,6 +114,41 @@ final class CareerPlanCanonicalDeltaRolloutGateCommandTest extends TestCase
         $this->assertSame('career:execute-canonical-rollout-batch', $payload['future_rollout_dry_run']['command']);
     }
 
+    public function test_outputs_detail_ready_1048_rollout_gate_with_dynamic_defaults(): void
+    {
+        $output = $this->tempPath('detail-ready-gate');
+        $exitCode = $this->callCommand([
+            '--manifest' => $this->writeDetailReadyManifest($this->slugs('public', 30), $this->slugs('ready', 1018)),
+            '--output' => $output,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('detail_ready_1048', $payload['target']);
+        $this->assertSame(1048, $payload['target_public_total']);
+        $this->assertSame(30, $payload['published_baseline_count']);
+        $this->assertSame(1018, $payload['delta_slug_count']);
+        $this->assertSame(2036, $payload['expected_delta_locale_rows']);
+        $this->assertSame('detail_ready_1048', $payload['target_authority']['target_key']);
+        $this->assertSame('DETAIL_READY_1048_ROLLOUT_DRY_RUN', $payload['next_required_action']);
+        $this->assertFileExists($output);
+    }
+
+    public function test_detail_ready_1048_blocks_manual_hold_before_rollout_dry_run(): void
+    {
+        $delta = $this->slugs('ready', 1017);
+        $delta[] = 'software-developers';
+
+        $exitCode = $this->callCommand([
+            '--manifest' => $this->writeDetailReadyManifest($this->slugs('public', 30), $delta),
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('detail_ready_1048_delta_contains_manual_hold_policy_slugs', array_column($payload['blockers'], 'reason'));
+        $this->assertFalse($payload['future_rollout_dry_run']['allowed']);
+    }
+
     /**
      * @param  array<string, mixed>  $options
      */
@@ -145,6 +180,20 @@ final class CareerPlanCanonicalDeltaRolloutGateCommandTest extends TestCase
     /**
      * @param  list<string>  $baseline
      * @param  list<string>  $delta
+     */
+    private function writeDetailReadyManifest(array $baseline, array $delta): string
+    {
+        $manifest = $this->manifest($baseline, $delta, 1048);
+        $manifest['target'] = 'detail_ready_1048';
+        $manifest['target_key'] = 'detail_ready_1048';
+        $manifest['batch_id'] = 'career_detail_ready_1048_canonical_001';
+
+        return $this->writeJson('detail-ready-manifest', $manifest);
+    }
+
+    /**
+     * @param  list<string>  $baseline
+     * @param  list<string>  $delta
      * @return array<string, mixed>
      */
     private function manifest(array $baseline, array $delta, int $target): array
@@ -171,6 +220,19 @@ final class CareerPlanCanonicalDeltaRolloutGateCommandTest extends TestCase
             'dry_run_allowed' => true,
             'apply_allowed' => false,
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function slugs(string $prefix, int $count): array
+    {
+        $slugs = [];
+        for ($i = 1; $i <= $count; $i++) {
+            $slugs[] = sprintf('%s-%03d', $prefix, $i);
+        }
+
+        return $slugs;
     }
 
     /**
