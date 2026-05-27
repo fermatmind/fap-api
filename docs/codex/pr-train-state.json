@@ -29657,13 +29657,13 @@
     "repo": "fap-api",
     "branch": "codex/mbti-en-questions-pack-projection-01",
     "base": "main",
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "depends_on": [
       "TAKE-EN-QUESTION-LOCALE-SCAN-00"
     ],
     "title": "MBTI-EN-QUESTIONS-PACK-PROJECTION-01 MBTI English question locale projection",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "0ba35fb9851b52b7a7346505e22fd82972d3912c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1733",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -29723,6 +29723,10 @@
           "git diff --cached --check"
         ],
         "evidence": "Focused tests, MBTI compatibility tests, route list, Pint, composer validate/audit, JSON/YAML parse, and diff checks passed locally."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1733"
       }
     },
     "scope": {
@@ -29760,6 +29764,11 @@
         "at": "2026-05-27T23:48:00+08:00",
         "status": "scope_validation_passed",
         "summary": "Scope is limited to MBTI projection code, MBTI English sidecar pack data, focused test, and ledger metadata."
+      },
+      {
+        "at": "2026-05-27T23:52:00+08:00",
+        "status": "pr_opened",
+        "summary": "Opened PR #1733 for MBTI English question locale projection."
       }
     ]
   }
