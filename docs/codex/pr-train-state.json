@@ -21014,7 +21014,7 @@
     "next_pr": "OPS-CI-CODESCAN-WEB-01"
   },
   "OPS-CI-CODESCAN-API-02": {
-    "status": "pr_open",
+    "status": "github_checks_passed",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/ops-ci-codescan-api-02",
@@ -28239,6 +28239,10 @@
       "fap_web_reference_check": {
         "status": "passed_with_sidecar",
         "evidence": "Reference-only fap-web working tree had pre-existing tracked and untracked changes; no fap-web files were modified by this task."
+      },
+      "github_checks": {
+        "status": "passed",
+        "evidence": "PR #1716 checks passed and mergeStateStatus was CLEAN."
       }
     },
     "history": [
@@ -28266,6 +28270,11 @@
         "at": "2026-05-27T11:01:39+08:00",
         "status": "pr_open",
         "summary": "Opened PR #1716 for the scoped CMS draft update report."
+      },
+      {
+        "at": "2026-05-27T11:09:10+08:00",
+        "status": "github_checks_passed",
+        "summary": "GitHub checks passed for PR #1716 and merge state was CLEAN."
       }
     ]
   }
