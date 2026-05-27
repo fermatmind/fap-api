@@ -110,6 +110,70 @@ final class CareerDeltaRolloutGatePlannerTest extends TestCase
         $this->assertFalse($result['rollout_apply_allowed']);
     }
 
+    public function test_accepts_detail_ready_1048_manifest_with_explicit_rollback_group(): void
+    {
+        $manifest = $this->manifest(
+            baseline: $this->slugs('public', 30),
+            delta: $this->slugs('ready', 1018),
+            target: 1048,
+        );
+        $manifest['target'] = 'detail_ready_1048';
+        $manifest['target_key'] = 'detail_ready_1048';
+        $manifest['batch_id'] = 'career_detail_ready_1048_canonical_001';
+
+        $result = (new CareerDeltaRolloutGatePlanner)->plan(
+            $manifest,
+            targetPublicTotal: 1048,
+            expectedDeltaCount: 1018,
+        )->toArray();
+
+        $this->assertSame('pass', $result['status']);
+        $this->assertSame('detail_ready_1048', $result['target']);
+        $this->assertSame(30, $result['published_baseline_count']);
+        $this->assertSame(1018, $result['delta_slug_count']);
+        $this->assertSame(2036, $result['expected_delta_locale_rows']);
+        $this->assertSame('detail_ready_1048', $result['target_authority']['target_key']);
+        $this->assertSame('DETAIL_READY_1048_ROLLOUT_DRY_RUN', $result['next_required_action']);
+        $this->assertFalse($result['rollout_apply_allowed']);
+    }
+
+    public function test_detail_ready_1048_rejects_manual_hold_cn_proxy_and_unready_members(): void
+    {
+        $delta = $this->slugs('ready', 1016);
+        $delta[] = 'software-developers';
+        $delta[] = 'cn-proxy-sample';
+        sort($delta);
+
+        $manifest = $this->manifest(
+            baseline: $this->slugs('public', 30),
+            delta: $delta,
+            target: 1048,
+        );
+        $manifest['target'] = 'detail_ready_1048';
+        $manifest['target_key'] = 'detail_ready_1048';
+        $manifest['batches'] = [[
+            'members' => [
+                ['slug' => 'ready-001', 'source_ready' => false, 'reasons' => ['review_needed']],
+                ['slug' => 'cn-proxy-sample', 'public_resolution_type' => 'public_cn_proxy_page'],
+            ],
+        ]];
+
+        $result = (new CareerDeltaRolloutGatePlanner)->plan(
+            $manifest,
+            targetPublicTotal: 1048,
+            expectedDeltaCount: 1018,
+        )->toArray();
+
+        $reasons = array_column($result['blockers'], 'reason');
+
+        $this->assertSame('blocked', $result['status']);
+        $this->assertContains('detail_ready_1048_delta_contains_manual_hold_policy_slugs', $reasons);
+        $this->assertContains('detail_ready_1048_rollback_group_contains_manual_hold_policy_slugs', $reasons);
+        $this->assertContains('detail_ready_1048_unready_manifest_member', $reasons);
+        $this->assertContains('detail_ready_1048_cn_proxy_manifest_member_forbidden', $reasons);
+        $this->assertFalse($result['future_rollout_dry_run']['allowed']);
+    }
+
     public function test_rejects_total_public_target_mismatch(): void
     {
         $result = (new CareerDeltaRolloutGatePlanner)->plan(

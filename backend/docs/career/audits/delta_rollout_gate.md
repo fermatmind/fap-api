@@ -1,6 +1,6 @@
 # Career Delta Rollout Gate
 
-`career:plan-canonical-delta-rollout-gate` validates the read-only gate semantics for the 51-delta Career rollout path.
+`career:plan-canonical-delta-rollout-gate` validates the read-only gate semantics for the 51-delta Career rollout path and the `detail_ready_1048` rollout gate.
 
 The gate does not run rollout. It converts a passed delta rollout manifest into a checked dry-run plan:
 
@@ -8,6 +8,20 @@ The gate does not run rollout. It converts a passed delta rollout manifest into 
 - 51 delta slugs are the only rollout candidates.
 - The total public target remains 80.
 - `rollback_group` must be the explicit 51-slug delta list.
+
+For `detail_ready_1048`, the same command validates the 30-current-public plus 1018-ready-not-public accounting without publishing anything:
+
+```bash
+php artisan career:plan-canonical-delta-rollout-gate \
+  --manifest=/tmp/career_detail_ready_1048_rollout_manifest.json \
+  --target=detail_ready_1048 \
+  --target-public-total=1048 \
+  --expect-delta-count=1018 \
+  --json \
+  --output=/tmp/career_detail_ready_1048_rollout_gate.json
+```
+
+The detail-ready gate requires `rollback_group` to be the explicit 1018-slug delta list and keeps `rollout_apply_allowed=false`.
 
 ## Command
 
@@ -61,6 +75,9 @@ The gate blocks if:
 - `expected_delta_locale_rows` does not equal delta slugs times locales
 - the manifest does not allow dry-run planning
 - `apply_allowed` is anything other than `false`
+- for `detail_ready_1048`, the baseline count is not 30 or the delta count is not 1018
+- for `detail_ready_1048`, the delta or rollback group contains a manual-hold policy slug such as `software-developers`
+- for `detail_ready_1048`, manifest members include CN proxy rows or unready member evidence
 
 ## Non-goals
 
@@ -70,6 +87,7 @@ The gate blocks if:
 - No candidate preparation apply.
 - No export execution.
 - No fap-web change.
+- No publication of 2289 excluded/raw assets or all 2786 occupations.
 
 ## Follow-up
 

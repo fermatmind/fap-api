@@ -33,6 +33,7 @@ final class CareerDeltaRolloutGatePlanner
         $rollbackGroup = $this->slugList($manifest, 'rollback_group', required: true);
         $locales = $this->stringList($manifest['locales'] ?? [], 'locale');
         $batchId = trim((string) ($manifest['batch_id'] ?? ''));
+        $target = $this->target($target, $manifest, $targetPublicTotal);
         $expectedRows = count($deltaSlugs) * count($locales);
         $blockers = $this->blockers(
             manifest: $manifest,
@@ -44,14 +45,16 @@ final class CareerDeltaRolloutGatePlanner
             locales: $locales,
             batchId: $batchId,
             expectedRows: $expectedRows,
+            target: $target,
         );
         $pass = $blockers === [];
-        $target = $this->target($target, $manifest, $targetPublicTotal);
+        $targetAuthority = $this->targetAuthority($target, $locales);
 
         return new CareerDeltaRolloutGateResult([
             'schema_version' => self::SCHEMA_VERSION,
             'status' => $pass ? 'pass' : 'blocked',
             'target' => $target,
+            'target_key' => $target,
             'read_only' => true,
             'writes_database' => false,
             'target_public_total' => $targetPublicTotal,
@@ -70,6 +73,7 @@ final class CareerDeltaRolloutGatePlanner
                 'dry_run_allowed' => $manifest['dry_run_allowed'] ?? null,
                 'apply_allowed' => $manifest['apply_allowed'] ?? null,
             ],
+            'target_authority' => $targetAuthority,
             'validation' => [
                 'target_accounting_count' => count($baselineSlugs) + count($deltaSlugs),
                 'baseline_delta_overlap_count' => count(array_intersect($baselineSlugs, $deltaSlugs)),
@@ -110,7 +114,7 @@ final class CareerDeltaRolloutGatePlanner
      */
     private function target(?string $target, array $manifest, int $targetPublicTotal): string
     {
-        $candidate = trim((string) ($target ?? ($manifest['target'] ?? '')));
+        $candidate = trim((string) ($target ?? ($manifest['target_key'] ?? ($manifest['target'] ?? ''))));
         if ($candidate === '') {
             $candidate = $targetPublicTotal === 80 ? 'career_80_delta' : 'career_'.$targetPublicTotal.'_delta';
         }
@@ -122,9 +126,11 @@ final class CareerDeltaRolloutGatePlanner
 
     private function nextRequiredAction(string $target): string
     {
-        return $target === 'career_80_delta'
-            ? 'DELTA_ROLLOUT_DRY_RUN_51'
-            : 'PROGRESSIVE_ROLLOUT_DRY_RUN';
+        return match ($target) {
+            'career_80_delta' => 'DELTA_ROLLOUT_DRY_RUN_51',
+            CareerDetailReadyTargetAuthority::TARGET_KEY => 'DETAIL_READY_1048_ROLLOUT_DRY_RUN',
+            default => 'PROGRESSIVE_ROLLOUT_DRY_RUN',
+        };
     }
 
     /**
@@ -145,6 +151,7 @@ final class CareerDeltaRolloutGatePlanner
         array $locales,
         string $batchId,
         int $expectedRows,
+        string $target,
     ): array {
         $blockers = [];
 
@@ -225,6 +232,13 @@ final class CareerDeltaRolloutGatePlanner
             ]);
         }
 
+        if ($target === CareerDetailReadyTargetAuthority::TARGET_KEY) {
+            array_push(
+                $blockers,
+                ...$this->detailReady1048Blockers($manifest, $targetPublicTotal, $expectedDeltaCount, $baselineSlugs, $deltaSlugs, $rollbackGroup, $locales)
+            );
+        }
+
         return $blockers;
     }
 
@@ -285,6 +299,191 @@ final class CareerDeltaRolloutGatePlanner
         return [
             'reason' => $reason,
             'context' => $context,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     * @param  list<string>  $baselineSlugs
+     * @param  list<string>  $deltaSlugs
+     * @param  list<string>  $rollbackGroup
+     * @param  list<string>  $locales
+     * @return list<array<string, mixed>>
+     */
+    private function detailReady1048Blockers(
+        array $manifest,
+        int $targetPublicTotal,
+        int $expectedDeltaCount,
+        array $baselineSlugs,
+        array $deltaSlugs,
+        array $rollbackGroup,
+        array $locales,
+    ): array {
+        $blockers = [];
+
+        if (($manifest['target_key'] ?? $manifest['target'] ?? null) !== CareerDetailReadyTargetAuthority::TARGET_KEY) {
+            $blockers[] = $this->blocker('detail_ready_1048_manifest_target_mismatch', [
+                'target_key' => $manifest['target_key'] ?? null,
+                'target' => $manifest['target'] ?? null,
+            ]);
+        }
+
+        if ($targetPublicTotal !== CareerDetailReadyTargetAuthority::TARGET_PUBLIC_TOTAL) {
+            $blockers[] = $this->blocker('detail_ready_1048_target_public_total_mismatch', [
+                'expected' => CareerDetailReadyTargetAuthority::TARGET_PUBLIC_TOTAL,
+                'actual' => $targetPublicTotal,
+            ]);
+        }
+
+        if ($expectedDeltaCount !== CareerDetailReadyTargetAuthority::READY_NOT_PUBLIC_DELTA) {
+            $blockers[] = $this->blocker('detail_ready_1048_expected_delta_count_mismatch', [
+                'expected' => CareerDetailReadyTargetAuthority::READY_NOT_PUBLIC_DELTA,
+                'actual' => $expectedDeltaCount,
+            ]);
+        }
+
+        if (count($baselineSlugs) !== CareerDetailReadyTargetAuthority::CURRENT_PUBLIC_DETAIL_TOTAL) {
+            $blockers[] = $this->blocker('detail_ready_1048_current_public_baseline_mismatch', [
+                'expected' => CareerDetailReadyTargetAuthority::CURRENT_PUBLIC_DETAIL_TOTAL,
+                'actual' => count($baselineSlugs),
+            ]);
+        }
+
+        $manualHoldIntersect = array_values(array_intersect($deltaSlugs, CareerDetailReadyTargetAuthority::MANUAL_HOLD_SLUGS));
+        if ($manualHoldIntersect !== []) {
+            $blockers[] = $this->blocker('detail_ready_1048_delta_contains_manual_hold_policy_slugs', [
+                'count' => count($manualHoldIntersect),
+                'sample_slugs' => array_slice($manualHoldIntersect, 0, 20),
+            ]);
+        }
+
+        $rollbackManualHoldIntersect = array_values(array_intersect($rollbackGroup, CareerDetailReadyTargetAuthority::MANUAL_HOLD_SLUGS));
+        if ($rollbackManualHoldIntersect !== []) {
+            $blockers[] = $this->blocker('detail_ready_1048_rollback_group_contains_manual_hold_policy_slugs', [
+                'count' => count($rollbackManualHoldIntersect),
+                'sample_slugs' => array_slice($rollbackManualHoldIntersect, 0, 20),
+            ]);
+        }
+
+        foreach ($this->manifestMembers($manifest) as $index => $row) {
+            $slug = $row['slug'] ?? null;
+            if (! is_string($slug)) {
+                continue;
+            }
+
+            $reasons = $this->nonEmptyList($row['reasons'] ?? []);
+            $sidecars = $this->nonEmptyList($row['sidecars'] ?? []);
+            if (($row['source_ready'] ?? true) !== true || $reasons !== [] || $sidecars !== []) {
+                $blockers[] = $this->blocker('detail_ready_1048_unready_manifest_member', [
+                    'row_index' => $index,
+                    'slug' => $slug,
+                    'source_ready' => $row['source_ready'] ?? null,
+                    'reasons' => $reasons,
+                    'sidecars' => $sidecars,
+                ]);
+            }
+
+            if ($this->isCnProxyRow($row)) {
+                $blockers[] = $this->blocker('detail_ready_1048_cn_proxy_manifest_member_forbidden', [
+                    'row_index' => $index,
+                    'slug' => $slug,
+                    'public_resolution_type' => $row['public_resolution_type'] ?? null,
+                    'canonical_public_type' => $row['canonical_public_type'] ?? null,
+                    'current_status' => $row['current_status'] ?? null,
+                ]);
+            }
+        }
+
+        $candidatePrep = $manifest['source_candidate_prep_plan'] ?? null;
+        if (is_array($candidatePrep) && ! array_is_list($candidatePrep)) {
+            if (($candidatePrep['status'] ?? null) !== 'planned') {
+                $blockers[] = $this->blocker('detail_ready_1048_candidate_prep_not_planned', [
+                    'status' => $candidatePrep['status'] ?? null,
+                ]);
+            }
+
+            if (($candidatePrep['delta_slug_count'] ?? null) !== null && (int) $candidatePrep['delta_slug_count'] !== count($deltaSlugs)) {
+                $blockers[] = $this->blocker('detail_ready_1048_candidate_prep_delta_count_mismatch', [
+                    'expected' => count($deltaSlugs),
+                    'actual' => $candidatePrep['delta_slug_count'] ?? null,
+                ]);
+            }
+        }
+
+        $expectedLocaleRows = CareerDetailReadyTargetAuthority::READY_NOT_PUBLIC_DELTA * count($locales);
+        if ($expectedRows = (int) ($manifest['expected_delta_locale_rows'] ?? 0)) {
+            if ($expectedRows !== $expectedLocaleRows) {
+                $blockers[] = $this->blocker('detail_ready_1048_expected_locale_rows_mismatch', [
+                    'expected' => $expectedLocaleRows,
+                    'actual' => $expectedRows,
+                ]);
+            }
+        }
+
+        return $blockers;
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     * @return list<array<string, mixed>>
+     */
+    private function manifestMembers(array $manifest): array
+    {
+        $members = data_get($manifest, 'batches.0.members', []);
+        if (! is_array($members) || ! array_is_list($members)) {
+            return [];
+        }
+
+        return array_values(array_filter($members, static fn (mixed $row): bool => is_array($row) && ! array_is_list($row)));
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     */
+    private function isCnProxyRow(array $row): bool
+    {
+        $slug = strtolower(trim((string) ($row['slug'] ?? '')));
+        if (str_starts_with($slug, 'cn-')) {
+            return true;
+        }
+
+        foreach (['public_resolution_type', 'canonical_public_type', 'current_status', 'source'] as $key) {
+            $value = strtolower((string) ($row[$key] ?? ''));
+            if (str_contains($value, 'cn_proxy') || str_contains($value, 'public_cn_proxy_page')) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return list<mixed>
+     */
+    private function nonEmptyList(mixed $value): array
+    {
+        if (! is_array($value) || ! array_is_list($value)) {
+            return [];
+        }
+
+        return array_values(array_filter($value, static fn (mixed $item): bool => $item !== null && $item !== '' && $item !== []));
+    }
+
+    /**
+     * @param  list<string>  $locales
+     * @return array<string, mixed>
+     */
+    private function targetAuthority(string $target, array $locales): array
+    {
+        if ($target === CareerDetailReadyTargetAuthority::TARGET_KEY) {
+            return (new CareerDetailReadyTargetAuthority)->target($locales);
+        }
+
+        return [
+            'target_key' => $target,
+            'candidate_prep_apply_allowed' => false,
+            'rollout_apply_allowed' => false,
+            'production_deploy_allowed' => false,
         ];
     }
 }

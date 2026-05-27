@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T17:18:30+08:00",
+  "updated_at": "2026-05-27T20:34:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -29145,7 +29145,7 @@
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1": {
-    "status": "pr_open",
+    "status": "merged",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-runtime-artifact-refresh-1",
     "base": "main",
@@ -29153,11 +29153,11 @@
       "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1"
     ],
     "title": "fix(api): refresh career detail-ready 1048 artifacts",
-    "commit_sha": "2a4e987c0d66fb2a4103b4d3a186891de4359311",
+    "commit_sha": "147fab4ebc1179693107bc7da8dc4abe3e12879c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1728",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-05-27T12:15:24Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "checks": {
       "local": {
@@ -29189,6 +29189,20 @@
           "git diff --check",
           "git diff --cached --check"
         ]
+      },
+      "github": {
+        "status": "passed",
+        "head_sha": "8233ea67f2d11be8b0bdb796cafcf8658c310def",
+        "merge_state": "CLEAN",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "Semgrep blocking secrets",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "failure_reason": null,
+        "merge_blocked": false
       }
     },
     "history": [
@@ -29216,6 +29230,11 @@
         "at": "2026-05-27T19:44:37+08:00",
         "status": "pr_open",
         "summary": "Opened PR #1728 for detail_ready_1048 runtime artifact refresh planning."
+      },
+      {
+        "at": "2026-05-27T20:15:24+08:00",
+        "status": "merged",
+        "summary": "PR #1728 merged with squash commit 147fab4ebc1179693107bc7da8dc4abe3e12879c after GitHub required checks passed; remote branch deleted and fap-api has no scripts/post_merge_cleanup.sh local cleanup hook."
       }
     ]
   },
@@ -29305,7 +29324,7 @@
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-ROLLOUT-GATE-1": {
-    "status": "planned",
+    "status": "local_commit_created",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-rollout-gate-1",
     "base": "main",
@@ -29313,14 +29332,74 @@
       "REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1"
     ],
     "title": "fix(api): gate career detail-ready 1048 rollout",
-    "commit_sha": null,
+    "commit_sha": "2ff39fd7a7301b985163de368081a4d36775a8a0",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "checks": {},
-    "history": []
+    "checks": {
+      "local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter=CareerDetailReady --no-ansi",
+          "cd backend && php artisan test --filter=CareerDeltaRollout --no-ansi",
+          "cd backend && php artisan test tests/Feature/Console/CareerPlanCanonicalDeltaRolloutGateCommandTest.php tests/Feature/Console/CareerGenerateCanonicalDeltaRolloutManifestCommandTest.php --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "cd backend && vendor/bin/pint --test",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "git diff --check",
+          "git diff --cached --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        ],
+        "notes": "Detail-ready and CareerDeltaRollout tests passed. backend/scripts/ci_verify_mbti.sh passed and regenerated BIG5_OCEAN compiled artifacts as a local side effect; those generated diffs were restored because they are outside this PR scope."
+      },
+      "scope": {
+        "status": "passed",
+        "changed_files": [
+          "backend/app/Console/Commands/CareerGenerateCanonicalDeltaRolloutManifest.php",
+          "backend/app/Console/Commands/CareerPlanCanonicalDeltaRolloutGate.php",
+          "backend/app/Domain/Career/Audit/CareerDeltaRolloutGatePlanner.php",
+          "backend/app/Domain/Career/Audit/CareerDeltaRolloutManifestPlanner.php",
+          "backend/docs/career/audits/51_delta_rollout_manifest.md",
+          "backend/docs/career/audits/delta_rollout_gate.md",
+          "backend/tests/Feature/Console/CareerGenerateCanonicalDeltaRolloutManifestCommandTest.php",
+          "backend/tests/Feature/Console/CareerPlanCanonicalDeltaRolloutGateCommandTest.php",
+          "backend/tests/Unit/Domain/Career/Audit/CareerDeltaRolloutGatePlannerTest.php",
+          "backend/tests/Unit/Domain/Career/Audit/CareerDeltaRolloutManifestPlannerTest.php",
+          "docs/codex/pr-train-state.json"
+        ],
+        "outside_scope": [],
+        "diff_checks": [
+          "git diff --check",
+          "git diff --cached --check"
+        ]
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T20:16:30+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Started detail_ready_1048 rollout manifest and gate dry-run support from latest main after runtime artifact refresh merge."
+      },
+      {
+        "at": "2026-05-27T20:33:10+08:00",
+        "status": "local_checks_passed",
+        "summary": "CareerDetailReady, CareerDeltaRollout, focused rollout command tests, route list, migrate pretend, Pint, backend MBTI CI, diff check, and JSON/YAML parse passed locally."
+      },
+      {
+        "at": "2026-05-27T20:33:10+08:00",
+        "status": "scope_validation_passed",
+        "summary": "Changed files are within rollout gate PR allowed paths; generated BIG5_OCEAN compiled artifacts were restored as out-of-scope CI side effects."
+      },
+      {
+        "at": "2026-05-27T20:34:00+08:00",
+        "status": "local_commit_created",
+        "summary": "Created local commit 2ff39fd7a7301b985163de368081a4d36775a8a0 for detail-ready 1048 rollout gate dry-run support."
+      }
+    ]
   },
   "REPAIR-CAREER-DETAIL-READY-LIVE-ACCEPTANCE-CLOSEOUT-1": {
     "status": "planned",

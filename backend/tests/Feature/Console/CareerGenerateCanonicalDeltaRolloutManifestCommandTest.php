@@ -171,6 +171,29 @@ final class CareerGenerateCanonicalDeltaRolloutManifestCommandTest extends TestC
         $this->assertContains('candidate_prep_delta_count_mismatch', array_column($payload['blockers'], 'reason'));
     }
 
+    public function test_generates_detail_ready_1048_manifest_with_dynamic_defaults(): void
+    {
+        $output = $this->tempPath('detail-ready-manifest');
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeDetailReadyTargetDelta($this->slugs('public', 30), $this->slugs('ready', 1018)),
+            '--candidate-prep-plan' => $this->writeCandidatePrepPlan(deltaCount: 1018, target: 'detail_ready_1048', expectedLocaleRows: 2036),
+            '--output' => $output,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('detail_ready_1048', $payload['target']);
+        $this->assertSame('detail_ready_1048', $payload['target_key']);
+        $this->assertSame(1048, $payload['target_public_total']);
+        $this->assertSame(30, $payload['published_baseline_count']);
+        $this->assertSame(1018, $payload['delta_slug_count']);
+        $this->assertSame(2036, $payload['expected_delta_locale_rows']);
+        $this->assertSame($payload['slugs'], $payload['rollback_group']);
+        $this->assertSame('detail_ready_1048', $payload['target_authority']['target_key']);
+        $this->assertSame('DETAIL_READY_1048_ROLLOUT_GATE_DRY_RUN', $payload['next_required_action']);
+        $this->assertFileExists($output);
+    }
+
     /**
      * @param  array<string, mixed>  $options
      */
@@ -220,13 +243,58 @@ final class CareerGenerateCanonicalDeltaRolloutManifestCommandTest extends TestC
         ], $extra));
     }
 
-    private function writeCandidatePrepPlan(int $deltaCount): string
+    private function writeCandidatePrepPlan(int $deltaCount, ?string $target = null, ?int $expectedLocaleRows = null): string
     {
-        return $this->writeJson('candidate-prep', [
+        return $this->writeJson('candidate-prep', array_filter([
             'schema_version' => 'career_runtime_candidate_prep_plan.v1',
             'status' => 'planned',
             'delta_slug_count' => $deltaCount,
+            'target' => $target,
+            'expected_delta_locale_rows' => $expectedLocaleRows,
+        ], static fn (mixed $value): bool => $value !== null));
+    }
+
+    /**
+     * @param  list<string>  $baseline
+     * @param  list<string>  $delta
+     */
+    private function writeDetailReadyTargetDelta(array $baseline, array $delta): string
+    {
+        sort($baseline);
+        sort($delta);
+
+        return $this->writeJson('detail-ready-target-delta', [
+            'schema_version' => 'career_detail_ready_publication_candidates.v1',
+            'status' => 'pass',
+            'target_key' => 'detail_ready_1048',
+            'current_public_total' => count($baseline),
+            'target_public_total' => 1048,
+            'published_baseline_slugs' => $baseline,
+            'ready_not_public_1018' => [
+                'count' => count($delta),
+                'slugs' => $delta,
+            ],
+            'manual_hold' => [
+                'ready_slugs' => [],
+            ],
+            'rollout' => [
+                'delta_manifest_allowed' => true,
+                'apply_allowed' => false,
+            ],
         ]);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function slugs(string $prefix, int $count): array
+    {
+        $slugs = [];
+        for ($i = 1; $i <= $count; $i++) {
+            $slugs[] = sprintf('%s-%03d', $prefix, $i);
+        }
+
+        return $slugs;
     }
 
     /**
