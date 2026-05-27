@@ -28483,7 +28483,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01": {
-    "status": "committed",
+    "status": "pr_open",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-controlled-publish-runtime-01",
     "base": "main",
@@ -28492,7 +28492,7 @@
     ],
     "title": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01 content pages controlled publish runtime",
     "commit_sha": "c4daaa7f275971e734f782564999266cd0772c4e",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1719",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -28526,6 +28526,14 @@
         "status": "created",
         "sha": "c4daaa7f275971e734f782564999266cd0772c4e",
         "message": "feat(content-pages): add controlled publish runtime"
+      },
+      "push": {
+        "status": "pushed",
+        "branch": "codex/global-en-zh-content-pages-controlled-publish-runtime-01"
+      },
+      "pull_request": {
+        "status": "open",
+        "url": "https://github.com/fermatmind/fap-api/pull/1719"
       }
     },
     "history": [
@@ -28548,6 +28556,11 @@
         "at": "2026-05-27T13:06:07+08:00",
         "status": "ledger_commit_sha_reconciled",
         "summary": "Recorded implementation commit c4daaa7f before push."
+      },
+      {
+        "at": "2026-05-27T13:07:00+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1719 for the controlled publish runtime."
       }
     ]
   }
