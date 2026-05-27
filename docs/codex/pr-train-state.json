@@ -29022,7 +29022,7 @@
     "local_cleanup_note": "scripts/post_merge_cleanup.sh not present in fap-api; local main fast-forwarded to origin/main and task branch was not present locally after merge."
   },
   "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1": {
-    "status": "github_checks_failed",
+    "status": "github_checks_green",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-candidate-prep-1",
     "base": "main",
@@ -29030,9 +29030,9 @@
       "REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1"
     ],
     "title": "fix(api): plan career detail-ready 1018 candidate prep",
-    "commit_sha": "7e2685f1b5786a8c33d2c41b83ad930375487610",
+    "commit_sha": "b7ddae6de5feb950b46ec89bae64e7029e26fbd2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1726",
-    "failure_reason": "Required GitHub CI supply-chain check failed on composer audit due to newly reported Symfony advisories: symfony/html-sanitizer CVE-2026-48761 and CVE-2026-48760, symfony/http-foundation CVE-2026-48736, symfony/routing CVE-2026-48784. This is outside the current Career candidate-prep scope, but required checks are not green, so train progression is blocked.",
+    "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -29066,19 +29066,20 @@
         "outside_scope": []
       },
       "github": {
-        "status": "failed",
-        "head_sha": "7e2685f1b5786a8c33d2c41b83ad930375487610",
-        "failed_checks": [
-          "supply-chain"
+        "status": "passed",
+        "head_sha": "b7ddae6de5feb950b46ec89bae64e7029e26fbd2",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "Semgrep blocking secrets",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
         ],
-        "failed_jobs": [
-          "https://github.com/fermatmind/fap-api/actions/runs/26503477496/job/78049796376",
-          "https://github.com/fermatmind/fap-api/actions/runs/26503474750/job/78049773809"
-        ],
-        "failure_reason": "composer audit found 4 advisories affecting 3 Symfony packages: symfony/html-sanitizer, symfony/http-foundation, symfony/routing.",
-        "external_to_current_pr_scope": true,
-        "merge_blocked": true,
-        "train_progression_blocked": true
+        "merge_state": "CLEAN",
+        "failure_reason": null,
+        "external_blocker_resolved_by": "https://github.com/fermatmind/fap-api/pull/1727",
+        "merge_blocked": false,
+        "train_progression_blocked": false
       }
     },
     "history": [
@@ -29111,6 +29112,16 @@
         "at": "2026-05-27T17:43:47+08:00",
         "status": "github_checks_failed",
         "summary": "Required GitHub supply-chain check failed on Composer audit advisories external to this Career planner PR scope; stopping train before merge or next PR."
+      },
+      {
+        "at": "2026-05-27T18:21:24+08:00",
+        "status": "external_blocker_resolved",
+        "summary": "Merged sidecar PR #1727 to clear the required Symfony Composer audit blocker."
+      },
+      {
+        "at": "2026-05-27T18:29:06+08:00",
+        "status": "github_checks_green",
+        "summary": "After rebasing onto origin/main with PR #1727, PR #1726 required GitHub checks passed and merge state is CLEAN."
       }
     ],
     "sidecar_blockers": [
