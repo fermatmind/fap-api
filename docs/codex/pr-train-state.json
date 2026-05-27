@@ -29407,7 +29407,7 @@
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-LIVE-ACCEPTANCE-CLOSEOUT-1": {
-    "status": "local_checks_passed",
+    "status": "local_commit_created",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-live-acceptance-closeout-1",
     "base": "main",
@@ -29415,7 +29415,7 @@
       "REPAIR-CAREER-DETAIL-READY-ROLLOUT-GATE-1"
     ],
     "title": "fix(api): accept career detail-ready 1048 closeout",
-    "commit_sha": null,
+    "commit_sha": "02411442575c3a403dce12a31779d60507cc3dd1",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -29476,6 +29476,11 @@
         "at": "2026-05-27T21:12:05+08:00",
         "status": "scope_validation_passed",
         "summary": "Changed files are within live acceptance closeout PR allowed paths; generated BIG5_OCEAN compiled artifacts were restored as out-of-scope CI side effects."
+      },
+      {
+        "at": "2026-05-27T21:12:57+08:00",
+        "status": "local_commit_created",
+        "summary": "Created local commit 02411442575c3a403dce12a31779d60507cc3dd1 for detail-ready 1048 live acceptance and closeout read-only support."
       }
     ]
   }
