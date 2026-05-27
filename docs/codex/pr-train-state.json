@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T10:32:30+08:00",
+  "updated_at": "2026-05-27T10:55:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -21014,7 +21014,7 @@
     "next_pr": "OPS-CI-CODESCAN-WEB-01"
   },
   "OPS-CI-CODESCAN-API-02": {
-    "status": "pr_open",
+    "status": "github_checks_passed",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/ops-ci-codescan-api-02",
@@ -28156,6 +28156,125 @@
         "at": "2026-05-27T10:32:30+08:00",
         "status": "pr_opened",
         "summary": "Opened PR #1715 after local validation; waiting for GitHub required checks."
+      }
+    ]
+  },
+  "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01": {
+    "status": "pr_open",
+    "repo": "fap-api",
+    "branch": "codex/global-en-zh-content-pages-cms-draft-update-01",
+    "base": "main",
+    "depends_on": [
+      "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01",
+      "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01A-FOUNDATION-GOVERNANCE-FACT-RECONCILE"
+    ],
+    "title": "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01 update Wave 1 English CMS draft records",
+    "commit_sha": "8be84d8e670132d3c87c8c009df655dfec2308ea",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1716",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "approval_phrase": {
+        "status": "passed",
+        "evidence": "Exact approval phrase was present in the task prompt."
+      },
+      "preflight": {
+        "status": "passed",
+        "evidence": "Five target English CMS draft records existed and were draft/non-public/non-indexable with published_at=null."
+      },
+      "official_runtime": {
+        "status": "passed",
+        "evidence": "Used content-pages:import-local-baseline with --dry-run, --upsert, --status=draft, and scoped source-dir."
+      },
+      "dry_run": {
+        "status": "passed",
+        "evidence": "Dry-run reported pages_found=5, will_update=5, will_create=0, will_skip=0."
+      },
+      "controlled_update": {
+        "status": "passed",
+        "evidence": "Controlled update reported pages_found=5, will_update=5, will_create=0, will_skip=0; all five remained draft/non-public/non-indexable."
+      },
+      "public_exposure": {
+        "status": "passed",
+        "evidence": "Public runtime returned 404 for all five target /en paths; sitemap, llms, llms-full, and homepage did not include target paths."
+      },
+      "search_channel": {
+        "status": "passed_with_sidecar",
+        "evidence": "No Search Channel command was run and checked gates read false; seo_search_channel_queue_* tables were unavailable on the checked production connection, so queue item 2/3 unchanged verification was recorded as sidecar."
+      },
+      "focused_test": {
+        "status": "passed",
+        "command": "php artisan test --filter=GlobalEnZhContentPagesCmsDraftUpdate01 --no-ansi",
+        "evidence": "1 passed, 15 assertions."
+      },
+      "route_list": {
+        "status": "passed",
+        "command": "php artisan route:list --no-ansi"
+      },
+      "pint": {
+        "status": "passed",
+        "command": "vendor/bin/pint --test",
+        "evidence": "3586 files passed."
+      },
+      "composer_validate": {
+        "status": "passed",
+        "command": "composer validate --strict",
+        "evidence": "composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "passed",
+        "command": "composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "No security vulnerability advisories found."
+      },
+      "json_yaml_parse": {
+        "status": "passed",
+        "evidence": "Generated JSON, pr-train-state JSON, and pr-train YAML parsed successfully."
+      },
+      "diff_check": {
+        "status": "passed",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "fap_web_reference_check": {
+        "status": "passed_with_sidecar",
+        "evidence": "Reference-only fap-web working tree had pre-existing tracked and untracked changes; no fap-web files were modified by this task."
+      },
+      "github_checks": {
+        "status": "passed",
+        "evidence": "PR #1716 checks passed and mergeStateStatus was CLEAN."
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T10:55:00+08:00",
+        "status": "planned",
+        "summary": "Authorized current CMS draft update task entry only; no future publish/deploy/Search Channel tasks added."
+      },
+      {
+        "at": "2026-05-27T10:55:00+08:00",
+        "status": "controlled_update_completed",
+        "summary": "Dry-run passed and existing English CMS draft records were updated draft-only using merged revision packages."
+      },
+      {
+        "at": "2026-05-27T10:59:58+08:00",
+        "status": "local_checks_passed",
+        "summary": "Focused test, route list, pint, composer validate/audit, JSON/YAML parsing, and diff checks passed."
+      },
+      {
+        "at": "2026-05-27T11:00:51+08:00",
+        "status": "committed",
+        "summary": "Committed CMS draft update report artifacts and focused test."
+      },
+      {
+        "at": "2026-05-27T11:01:39+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1716 for the scoped CMS draft update report."
+      },
+      {
+        "at": "2026-05-27T11:09:10+08:00",
+        "status": "github_checks_passed",
+        "summary": "GitHub checks passed for PR #1716 and merge state was CLEAN."
       }
     ]
   }
