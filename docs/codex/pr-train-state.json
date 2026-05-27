@@ -22675,7 +22675,7 @@
     "depends_on": [
       "GSC-LIVE-00"
     ],
-    "commit_sha": null,
+    "commit_sha": "b7833e07220c885ab9af12696323000c253a7a0b",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -29104,6 +29104,11 @@
         "at": "2026-05-27T18:08:22+08:00",
         "status": "scope_validation_passed",
         "summary": "Changed files are limited to backend/composer.lock and train metadata; generated BIG5_OCEAN compiled artifacts were restored as out-of-scope CI side effects."
+      },
+      {
+        "at": "2026-05-27T18:08:22+08:00",
+        "status": "local_commit_created",
+        "summary": "Created local commit b7833e07220c885ab9af12696323000c253a7a0b for the Symfony Composer audit sidecar unblocker."
       }
     ]
   },
