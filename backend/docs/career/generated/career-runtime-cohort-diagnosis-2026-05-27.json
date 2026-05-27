@@ -1,0 +1,76 @@
+{
+  "task_id": "GLOBAL-CAREER-RUNTIME-COHORT-AND-DETAIL-REPAIR-01",
+  "generated_at": "2026-05-27",
+  "mode": "backend_first_runtime_diagnosis_and_scoped_repair",
+  "production_observations": {
+    "base_url": "https://fermatmind.com",
+    "dataset_endpoint": {
+      "url": "/api/v0.5/career/datasets/occupations?locale=zh-CN",
+      "status": 200,
+      "member_count": 30,
+      "included_count": 30,
+      "excluded_count": 2289,
+      "public_detail_indexable_count": 30,
+      "public_detail_conservative_count": 0,
+      "manifest_version": "career.dataset_authority.runtime_projection_plus_legacy_342.v2",
+      "selection_policy_version": "career_full_release_ledger",
+      "tracking_counts": {
+        "expected_total_occupations": 30,
+        "tracked_total_occupations": 30,
+        "missing_occupations": 0
+      }
+    },
+    "jobs_endpoint": {
+      "url": "/api/v0.5/career/jobs?locale=zh-CN",
+      "status": 504,
+      "gateway": "openresty",
+      "observed_timeout_seconds": 30
+    },
+    "detail_endpoints": [
+      {
+        "url": "/api/v0.5/career/jobs/accountants-and-auditors?locale=zh-CN",
+        "status": 504,
+        "expected_after_repair": "fast 404 unless this slug enters runtime publish projection"
+      },
+      {
+        "url": "/api/v0.5/career/jobs/software-developers?locale=zh-CN",
+        "status": 504,
+        "expected_after_repair": "fast 404 because software-developers is a manual hold"
+      },
+      {
+        "url": "/api/v0.5/career/jobs/actuaries?locale=zh-CN",
+        "status": "not rechecked in this artifact",
+        "expected_after_repair": "200 if cached dataset hub remains authoritative and backend content/display shell requirements pass"
+      }
+    ]
+  },
+  "cohort_meanings": {
+    "30": "Current runtime-published public detail/indexable cohort exposed by the cached dataset hub response.",
+    "342": "Legacy B71X/DOCX career_all_342 coverage baseline: 30 batch_2 + 80 batch_3 + 222 batch_4 + 10 excluded first-wave slugs.",
+    "2289": "Runtime-excluded occupation records/candidates seen by the authority builder but not in the current public runtime dataset; they must not be published by this repair."
+  },
+  "root_cause_assessment": {
+    "primary": "CareerRuntimePublishProjectionLookup could synchronously rebuild the full runtime projection authority when no materialized projection artifact was available, causing public jobs/detail requests to exceed the 30s gateway budget.",
+    "secondary": "CareerJobListBundleBuilder scanned broad compiled, DOCX, and directory-draft sources before narrowing to runtime projection slugs, so public list work could scale toward legacy/raw cohorts instead of the active public release cohort.",
+    "frontend_404_chain": "fap-web fetchCareerJobBundle returns null for API failures, and app/(localized)/[locale]/career/jobs/[slug]/page.tsx calls notFound() when no bundle is returned."
+  },
+  "implemented_repair": {
+    "projection_lookup": "Use materialized projection first, then materialized release ledger, then cached dataset hub fallback. Public request path no longer invokes CareerRuntimePublishProjectionExporter as a synchronous fallback.",
+    "job_list": "When runtime detail authority exists, constrain compiled, DOCX, directory-draft, and runtime projection list sources to the release-gate slug set.",
+    "cms_mutation": false,
+    "frontend_fallback_authority_added": false,
+    "pseo_generation": false,
+    "sitemap_or_llms_exposure_added": false
+  },
+  "focused_tests": [
+    "Tests\\Unit\\Services\\Career\\CareerRuntimePublishProjectionLookupTest::test_it_falls_back_to_cached_dataset_hub_without_rebuilding_projection",
+    "Tests\\Feature\\Career\\CareerJobListApiTest::test_runtime_projection_limits_public_job_index_to_release_gate_slugs"
+  ],
+  "decision": "career_runtime_cohort_repair_completed_ready_for_deploy_readiness",
+  "pending_verification": [
+    "After deployment, verify /api/v0.5/career/jobs?locale=zh-CN returns 200 within gateway budget.",
+    "After deployment, verify current 30 runtime cohort detail pages return 200 where content/display authority passes.",
+    "After deployment, verify non-cohort slugs such as accountants-and-auditors and software-developers return fast 404, not 504.",
+    "Product/SEO must confirm when, if ever, the 342 legacy cohort should be promoted beyond the current runtime projection."
+  ]
+}

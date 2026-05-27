@@ -6,6 +6,8 @@ namespace Tests\Unit\Services\Career;
 
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -112,6 +114,44 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->assertTrue($lookup->searchVisible('architectural-and-civil-drafters'));
         $this->assertTrue($lookup->robotsIndexable('architectural-and-civil-drafters'));
         $this->assertTrue($lookup->releaseGatePass('architectural-and-civil-drafters'));
+    }
+
+    public function test_it_falls_back_to_cached_dataset_hub_without_rebuilding_projection(): void
+    {
+        Cache::put(PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY, [
+            'members' => [
+                [
+                    'canonical_slug' => 'actuaries',
+                    'release_cohort' => 'public_detail_indexable',
+                    'public_index_state' => 'indexable',
+                    'strong_index_decision' => 'strong_index_ready',
+                    'included_in_public_dataset' => true,
+                ],
+                [
+                    'canonical_slug' => 'accountants-and-auditors',
+                    'release_cohort' => 'review_needed',
+                    'public_index_state' => 'noindex',
+                    'strong_index_decision' => 'review_needed',
+                    'included_in_public_dataset' => false,
+                ],
+            ],
+        ]);
+
+        $lookup = app(CareerRuntimePublishProjectionLookup::class);
+
+        $this->assertTrue($lookup->detailRouteEnabled('actuaries'));
+        $this->assertTrue($lookup->datasetVisible('actuaries'));
+        $this->assertTrue($lookup->searchVisible('actuaries'));
+        $this->assertTrue($lookup->robotsIndexable('actuaries'));
+        $this->assertTrue($lookup->releaseGatePass('actuaries'));
+        $this->assertSame(['actuaries'], array_column($lookup->publicDatasetItems(), 'slug'));
+        $this->assertSame(['actuaries'], array_column($lookup->publicDetailItems(), 'slug'));
+
+        $this->assertFalse($lookup->detailRouteEnabled('accountants-and-auditors'));
+        $this->assertFalse($lookup->datasetVisible('accountants-and-auditors'));
+        $this->assertFalse($lookup->searchVisible('accountants-and-auditors'));
+        $this->assertFalse($lookup->robotsIndexable('accountants-and-auditors'));
+        $this->assertFalse($lookup->releaseGatePass('accountants-and-auditors'));
     }
 
     protected function tearDown(): void

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Domain\Career\Publish;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
-use Illuminate\Contracts\Container\Container;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
+use Illuminate\Support\Facades\Cache;
 
 final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublishProjectionVisibility
 {
@@ -20,7 +21,6 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
     private ?array $itemsBySlug = null;
 
     public function __construct(
-        private readonly Container $container,
         private readonly CareerRuntimePublishProjectionService $projectionService,
     ) {}
 
@@ -159,13 +159,7 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
         }
 
         if ($projection === null) {
-            try {
-                $projection = $this->container
-                    ->make(CareerRuntimePublishProjectionExporter::class)
-                    ->build();
-            } catch (\Throwable) {
-                return;
-            }
+            $projection = $this->projectionFromCachedDatasetHub();
         }
 
         if ($projection === []) {
@@ -191,6 +185,81 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
             $this->itemsBySlugLocale[$slug.'|'.$locale] = $item;
             $this->itemsBySlug[$slug] ??= $item;
         }
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private function projectionFromCachedDatasetHub(): ?array
+    {
+        $payload = Cache::get(PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY);
+        if (! is_array($payload)) {
+            return null;
+        }
+
+        $members = array_values(array_filter(
+            (array) ($payload['members'] ?? []),
+            static fn (mixed $member): bool => is_array($member)
+        ));
+
+        if ($members === []) {
+            return null;
+        }
+
+        $items = [];
+        foreach ($members as $member) {
+            $slug = $this->normalizeSlug((string) ($member['canonical_slug'] ?? ''));
+            if ($slug === null) {
+                continue;
+            }
+
+            $included = ($member['included_in_public_dataset'] ?? false) === true;
+            $releaseCohort = strtolower(trim((string) ($member['release_cohort'] ?? '')));
+            $publicIndexState = strtolower(trim((string) ($member['public_index_state'] ?? '')));
+            $strongIndexDecision = strtolower(trim((string) ($member['strong_index_decision'] ?? '')));
+            $published = $included
+                && $releaseCohort === 'public_detail_indexable'
+                && in_array($publicIndexState, ['indexable', 'index'], true)
+                && in_array($strongIndexDecision, ['strong_index_ready', 'runtime_publish_projection_visible'], true);
+
+            foreach (CareerRuntimePublishProjectionService::LOCALES as $locale) {
+                $items[] = [
+                    'slug' => $slug,
+                    'locale' => $locale,
+                    'public_resolution_type' => $published
+                        ? CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB
+                        : CareerPublicResolutionTypeMatrix::KEEP_NON_PUBLIC_WITH_POLICY,
+                    'runtime_publish_state' => $published
+                        ? CareerRuntimePublishProjectionService::STATE_PUBLISHED
+                        : CareerRuntimePublishProjectionService::STATE_BLOCKED,
+                    'detail_route_enabled' => $published,
+                    'dataset_visible' => $published,
+                    'search_visible' => $published,
+                    'sitemap_live' => $published,
+                    'llms_live' => $published,
+                    'llms_full_live' => $published,
+                    'canonical_url' => $published
+                        ? 'https://fermatmind.com/'.$locale.'/career/jobs/'.$slug
+                        : null,
+                    'canonical_self' => $published,
+                    'robots_indexable' => $published,
+                    'release_gate_pass' => $published,
+                    'blockers' => $published ? [] : ['dataset_cache_projection_not_public_indexable'],
+                    'projection_source' => 'cached_dataset_hub_fallback',
+                ];
+            }
+        }
+
+        if ($items === []) {
+            return null;
+        }
+
+        return [
+            'projection_kind' => CareerRuntimePublishProjectionService::PROJECTION_KIND,
+            'projection_version' => CareerRuntimePublishProjectionService::PROJECTION_VERSION,
+            'source_authority' => 'cached_dataset_hub',
+            'items' => $items,
+        ];
     }
 
     private function normalizeSlug(string $slug): ?string
