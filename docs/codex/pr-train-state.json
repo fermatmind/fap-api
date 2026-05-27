@@ -28704,7 +28704,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2": {
-    "status": "committed",
+    "status": "pr_open",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-human-revision-r2",
     "base": "main",
@@ -28713,7 +28713,7 @@
     ],
     "title": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2 remove foundation forbidden exact phrases",
     "commit_sha": "d62ad4eeefb58b42d660fc04db6d953943ac2baf",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1721",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -28746,6 +28746,10 @@
       "reference_only_fap_web": {
         "status": "passed",
         "evidence": "git status --short in /Users/rainie/Desktop/GitHub/fap-web returned clean; no fap-web files were committed."
+      },
+      "pull_request": {
+        "status": "open",
+        "url": "https://github.com/fermatmind/fap-api/pull/1721"
       }
     },
     "history": [
@@ -28763,6 +28767,11 @@
         "at": "2026-05-27T14:45:50+08:00",
         "status": "committed",
         "summary": "Created scoped R2 revision commit d62ad4ee."
+      },
+      {
+        "at": "2026-05-27T14:47:23+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1721 for the foundation wording R2 revision package."
       }
     ]
   }
