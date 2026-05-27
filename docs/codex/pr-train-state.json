@@ -29557,11 +29557,11 @@
     "repo": "fap-api",
     "branch": "codex/take-en-question-locale-scan-00",
     "base": "main",
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "depends_on": [],
     "title": "TAKE-EN-QUESTION-LOCALE-SCAN-00 take flow EN/ZH question locale scan",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "75b26a54aa2e66cb892d58e88b526f7848d6ac4c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1732",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -29605,6 +29605,10 @@
           "git diff --cached --check"
         ],
         "evidence": "Focused test, route list, Pint, composer validate, composer audit, JSON/YAML parse, and diff checks passed locally."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1732"
       }
     },
     "scope": {
@@ -29640,6 +29644,11 @@
         "at": "2026-05-27T23:18:00+08:00",
         "status": "scope_validation_passed",
         "summary": "Scope is limited to scan artifacts, focused test, and manifest/state; no API runtime, content pack, CMS, publish, deploy, Search Channel, URL submission, or fap-web runtime change."
+      },
+      {
+        "at": "2026-05-27T23:22:00+08:00",
+        "status": "pr_opened",
+        "summary": "Opened PR #1732 for the read-only take EN/ZH question locale scan."
       }
     ]
   }
