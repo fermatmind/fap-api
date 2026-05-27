@@ -29022,7 +29022,7 @@
     "local_cleanup_note": "scripts/post_merge_cleanup.sh not present in fap-api; local main fast-forwarded to origin/main and task branch was not present locally after merge."
   },
   "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1": {
-    "status": "local_commit_created",
+    "status": "pr_open",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-candidate-prep-1",
     "base": "main",
@@ -29030,8 +29030,8 @@
       "REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1"
     ],
     "title": "fix(api): plan career detail-ready 1018 candidate prep",
-    "commit_sha": "bd3b804222d5dc58be809e3c3faed518f6e7298f",
-    "pr_url": null,
+    "commit_sha": "7aeddd1f722382e54fcb2f804417154459670be2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1726",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -29086,6 +29086,11 @@
         "at": "2026-05-27T17:38:41+08:00",
         "status": "local_commit_created",
         "summary": "Created local commit bd3b804222d5dc58be809e3c3faed518f6e7298f for detail-ready 1018 runtime candidate prep planning."
+      },
+      {
+        "at": "2026-05-27T17:40:09+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1726 for detail_ready_1048 runtime candidate preparation planning."
       }
     ]
   },
