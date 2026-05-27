@@ -28160,7 +28160,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01": {
-    "status": "local_checks_passed",
+    "status": "committed",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-cms-draft-update-01",
     "base": "main",
@@ -28169,7 +28169,7 @@
       "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01A-FOUNDATION-GOVERNANCE-FACT-RECONCILE"
     ],
     "title": "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01 update Wave 1 English CMS draft records",
-    "commit_sha": null,
+    "commit_sha": "8be84d8e670132d3c87c8c009df655dfec2308ea",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -28256,6 +28256,11 @@
         "at": "2026-05-27T10:59:58+08:00",
         "status": "local_checks_passed",
         "summary": "Focused test, route list, pint, composer validate/audit, JSON/YAML parsing, and diff checks passed."
+      },
+      {
+        "at": "2026-05-27T11:00:51+08:00",
+        "status": "committed",
+        "summary": "Committed CMS draft update report artifacts and focused test."
       }
     ]
   }
