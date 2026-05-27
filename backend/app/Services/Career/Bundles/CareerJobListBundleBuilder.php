@@ -58,6 +58,9 @@ final class CareerJobListBundleBuilder
     public function build(bool $includeNonIndexable = false): array
     {
         $compileRunId = $this->latestCompletedJobListCompileRunId();
+        $runtimeDetailItems = $this->runtimePublishProjection->publicDetailItems();
+        $runtimeDetailSlugs = $this->runtimeProjectionSlugSet($runtimeDetailItems);
+        $hasRuntimeDetailAuthority = $runtimeDetailSlugs !== [];
 
         $snapshotQuery = RecommendationSnapshot::query()
             ->with([
@@ -87,6 +90,12 @@ final class CareerJobListBundleBuilder
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
             ->limit(self::MAX_PUBLIC_COMPILED_ROWS);
+
+        if ($hasRuntimeDetailAuthority) {
+            $snapshotQuery->whereHas('occupation', static function ($query) use ($runtimeDetailSlugs): void {
+                $query->whereIn('canonical_slug', array_keys($runtimeDetailSlugs));
+            });
+        }
 
         if ($compileRunId !== null) {
             $snapshotQuery->where('compile_run_id', $compileRunId);
@@ -137,7 +146,10 @@ final class CareerJobListBundleBuilder
             ->filter()
             ->all();
 
-        $docxItems = $this->buildPublishedDocxCareerJobItems($compiledSlugs);
+        $docxItems = $this->buildPublishedDocxCareerJobItems(
+            $compiledSlugs,
+            $hasRuntimeDetailAuthority ? $runtimeDetailSlugs : null,
+        );
         if ($docxItems !== []) {
             $items = $items->concat($docxItems)->values();
         }
@@ -146,7 +158,10 @@ final class CareerJobListBundleBuilder
             ->map(static fn (CareerJobListItemBundle $item): string => (string) ($item->identity['canonical_slug'] ?? ''))
             ->filter()
             ->all();
-        $directoryDraftItems = $this->buildDirectoryDraftCareerJobItems($visibleSlugs);
+        $directoryDraftItems = $this->buildDirectoryDraftCareerJobItems(
+            $visibleSlugs,
+            $hasRuntimeDetailAuthority ? $runtimeDetailSlugs : null,
+        );
         if ($directoryDraftItems !== []) {
             $items = $items->concat($directoryDraftItems)->values();
         }
@@ -155,7 +170,11 @@ final class CareerJobListBundleBuilder
             ->map(static fn (CareerJobListItemBundle $item): string => (string) ($item->identity['canonical_slug'] ?? ''))
             ->filter()
             ->all();
-        $runtimeProjectionItems = $this->buildRuntimeProjectionCareerJobItems($visibleSlugs, $includeNonIndexable);
+        $runtimeProjectionItems = $this->buildRuntimeProjectionCareerJobItems(
+            $visibleSlugs,
+            $includeNonIndexable,
+            $runtimeDetailItems,
+        );
         if ($runtimeProjectionItems !== []) {
             $items = $items->concat($runtimeProjectionItems)->values();
         }
@@ -171,13 +190,14 @@ final class CareerJobListBundleBuilder
 
     /**
      * @param  list<string>  $excludedSlugs
+     * @param  array<string, true>|null  $allowedSlugs
      * @return list<CareerJobListItemBundle>
      */
-    private function buildPublishedDocxCareerJobItems(array $excludedSlugs): array
+    private function buildPublishedDocxCareerJobItems(array $excludedSlugs, ?array $allowedSlugs = null): array
     {
         $excluded = array_flip(array_filter($excludedSlugs));
 
-        return CareerJob::query()
+        $query = CareerJob::query()
             ->withoutGlobalScope(TenantScope::class)
             ->with('seoMeta')
             ->where('org_id', 0)
@@ -190,8 +210,13 @@ final class CareerJobListBundleBuilder
             })
             ->orderBy('subtitle')
             ->orderBy('slug')
-            ->limit(self::MAX_PUBLIC_DOCX_ROWS)
-            ->get()
+            ->limit(self::MAX_PUBLIC_DOCX_ROWS);
+
+        if ($allowedSlugs !== null) {
+            $query->whereIn('slug', array_keys($allowedSlugs));
+        }
+
+        return $query->get()
             ->filter(fn (CareerJob $job): bool => ! isset($excluded[(string) $job->slug])
                 && $this->isDocxCareerJob($job)
                 && $this->runtimePublishProjection->datasetVisible((string) $job->slug))
@@ -202,19 +227,25 @@ final class CareerJobListBundleBuilder
 
     /**
      * @param  list<string>  $excludedSlugs
+     * @param  array<string, true>|null  $allowedSlugs
      * @return list<CareerJobListItemBundle>
      */
-    private function buildDirectoryDraftCareerJobItems(array $excludedSlugs): array
+    private function buildDirectoryDraftCareerJobItems(array $excludedSlugs, ?array $allowedSlugs = null): array
     {
         $excluded = array_flip(array_filter($excludedSlugs));
 
-        return Occupation::query()
+        $query = Occupation::query()
             ->with(['crosswalks', 'displayAssets'])
             ->where('crosswalk_mode', self::DIRECTORY_DRAFT_CROSSWALK_MODE)
             ->orderBy('canonical_title_en')
             ->orderBy('canonical_slug')
-            ->limit(self::MAX_PUBLIC_DIRECTORY_DRAFT_ROWS)
-            ->get()
+            ->limit(self::MAX_PUBLIC_DIRECTORY_DRAFT_ROWS);
+
+        if ($allowedSlugs !== null) {
+            $query->whereIn('canonical_slug', array_keys($allowedSlugs));
+        }
+
+        return $query->get()
             ->filter(fn (Occupation $occupation): bool => ! isset($excluded[(string) $occupation->canonical_slug])
                 && $this->runtimePublishProjection->datasetVisible((string) $occupation->canonical_slug))
             ->values()
@@ -224,14 +255,18 @@ final class CareerJobListBundleBuilder
 
     /**
      * @param  list<string>  $excludedSlugs
+     * @param  list<array<string, mixed>>|null  $runtimeDetailItems
      * @return list<CareerJobListItemBundle>
      */
-    private function buildRuntimeProjectionCareerJobItems(array $excludedSlugs, bool $includeNonIndexable): array
-    {
+    private function buildRuntimeProjectionCareerJobItems(
+        array $excludedSlugs,
+        bool $includeNonIndexable,
+        ?array $runtimeDetailItems = null
+    ): array {
         $excluded = array_flip(array_filter($excludedSlugs));
         $projectionItemsBySlug = [];
 
-        foreach ($this->runtimePublishProjection->publicDetailItems() as $item) {
+        foreach (($runtimeDetailItems ?? $this->runtimePublishProjection->publicDetailItems()) as $item) {
             $slug = trim((string) ($item['slug'] ?? ''));
             if ($slug === '' || isset($excluded[$slug])) {
                 continue;
@@ -259,6 +294,24 @@ final class CareerJobListBundleBuilder
                 $projectionItemsBySlug[(string) $occupation->canonical_slug] ?? [],
             ))
             ->all();
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     * @return array<string, true>
+     */
+    private function runtimeProjectionSlugSet(array $items): array
+    {
+        $slugs = [];
+
+        foreach ($items as $item) {
+            $slug = strtolower(trim((string) ($item['slug'] ?? '')));
+            if ($slug !== '') {
+                $slugs[$slug] = true;
+            }
+        }
+
+        return $slugs;
     }
 
     private function compareSnapshots(RecommendationSnapshot $left, RecommendationSnapshot $right, bool $includeNonIndexable): int

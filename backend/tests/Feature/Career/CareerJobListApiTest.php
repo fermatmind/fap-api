@@ -301,6 +301,48 @@ final class CareerJobListApiTest extends TestCase
         $this->assertContains('runtime_published_navigation_shell', $response->json('items.0.seo_contract.reason_codes'));
     }
 
+    public function test_runtime_projection_limits_public_job_index_to_release_gate_slugs(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(items: [
+                'actuaries' => [
+                    'slug' => 'actuaries',
+                    'runtime_publish_state' => 'published',
+                    'dataset_visible' => true,
+                    'detail_route_enabled' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                    'canonical_path' => '/career/jobs/actuaries',
+                    'reason_codes' => ['cached_dataset_hub_fallback'],
+                ],
+            ]),
+        );
+
+        $this->createDirectoryDraftOccupation([
+            'canonical_slug' => 'actuaries',
+            'canonical_title_en' => 'Actuaries',
+            'canonical_title_zh' => '精算师',
+            'search_h1_zh' => '精算师',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+        ]);
+        $this->createDirectoryDraftOccupation([
+            'canonical_slug' => 'accountants-and-auditors',
+            'canonical_title_en' => 'Accountants and Auditors',
+            'canonical_title_zh' => '会计师和审计师',
+            'search_h1_zh' => '会计师和审计师',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+        ]);
+
+        $this->getJson('/api/v0.5/career/jobs')
+            ->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.canonical_slug', 'actuaries')
+            ->assertJsonMissing(['canonical_slug' => 'accountants-and-auditors']);
+    }
+
     public function test_directory_draft_runtime_projection_requires_published_state_before_list_upgrade(): void
     {
         $this->app->instance(
