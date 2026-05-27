@@ -11,6 +11,7 @@ use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -18,7 +19,7 @@ final class ResultEmailLookupTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_lookup_by_email_requires_verification_before_listing_saved_results(): void
+    public function test_lookup_by_email_lists_only_results_bound_to_current_anonymous_actor(): void
     {
         $email = 'Owner@Example.Test';
         $firstAttemptId = $this->seedAttemptWithResult('anon_lookup_a', 'MBTI', 'INTJ-A', now()->subMinutes(5));
@@ -26,14 +27,46 @@ final class ResultEmailLookupTest extends TestCase
         $this->seedBinding($firstAttemptId, $email, 'anon_lookup_a');
         $this->seedBinding($secondAttemptId, $email, 'anon_lookup_b');
 
-        $response = $this->postJson('/api/v0.3/results/lookup-by-email', [
-            'email' => ' owner@example.test ',
-            'locale' => 'zh-CN',
-        ]);
+        $response = $this->withHeader('X-Anon-Id', 'anon_lookup_a')
+            ->postJson('/api/v0.3/results/lookup-by-email', [
+                'email' => ' owner@example.test ',
+                'locale' => 'zh-CN',
+            ]);
 
         $response->assertOk();
         $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('email_verification_required', true);
+        $response->assertJsonPath('email_verification_required', false);
+        $response->assertJsonCount(1, 'items');
+        $response->assertJsonPath('items.0.attempt_id', $firstAttemptId);
+        $response->assertJsonStructure([
+            'items' => [
+                [
+                    'result_access_token',
+                    'result_access_token_expires_at',
+                ],
+            ],
+        ]);
+        $this->assertStringContainsString('/zh/result/'.$firstAttemptId.'?access_token=', (string) $response->json('items.0.result_url'));
+        $this->assertStringNotContainsString($secondAttemptId, $response->getContent());
+    }
+
+    public function test_lookup_by_email_does_not_list_results_for_other_anonymous_actor(): void
+    {
+        $email = 'Owner@Example.Test';
+        $firstAttemptId = $this->seedAttemptWithResult('anon_lookup_a', 'MBTI', 'INTJ-A', now()->subMinutes(5));
+        $secondAttemptId = $this->seedAttemptWithResult('anon_lookup_b', 'BIG5_OCEAN', 'OCEAN-HIGH', now()->subMinute());
+        $this->seedBinding($firstAttemptId, $email, 'anon_lookup_a');
+        $this->seedBinding($secondAttemptId, $email, 'anon_lookup_b');
+
+        $response = $this->withHeader('X-Anon-Id', 'anon_lookup_other')
+            ->postJson('/api/v0.3/results/lookup-by-email', [
+                'email' => ' owner@example.test ',
+                'locale' => 'zh-CN',
+            ]);
+
+        $response->assertOk();
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('email_verification_required', false);
         $response->assertJsonCount(0, 'items');
         $response->assertJsonMissingPath('items.0.result_access_token');
         $this->assertStringNotContainsString($firstAttemptId, $response->getContent());
@@ -53,7 +86,7 @@ final class ResultEmailLookupTest extends TestCase
         $response->assertJsonCount(0, 'items');
     }
 
-    public function test_lookup_ignores_inactive_and_sensitive_bindings(): void
+    public function test_lookup_ignores_inactive_and_sensitive_bindings_for_current_actor(): void
     {
         $email = 'owner@example.test';
         $activeAttemptId = $this->seedAttemptWithResult('anon_lookup_active', 'MBTI', 'ENFP-A', now()->subMinutes(3));
@@ -63,15 +96,16 @@ final class ResultEmailLookupTest extends TestCase
         $this->seedBinding($inactiveAttemptId, $email, 'anon_lookup_inactive', 'pending');
         $this->seedBinding($sensitiveAttemptId, $email, 'anon_lookup_sds');
 
-        $response = $this->postJson('/api/v0.3/results/lookup-by-email', [
-            'email' => $email,
-            'locale' => 'en',
-        ]);
+        $response = $this->withHeader('X-Anon-Id', 'anon_lookup_active')
+            ->postJson('/api/v0.3/results/lookup-by-email', [
+                'email' => $email,
+                'locale' => 'en',
+            ]);
 
         $response->assertOk();
-        $response->assertJsonPath('email_verification_required', true);
-        $response->assertJsonCount(0, 'items');
-        $this->assertStringNotContainsString($activeAttemptId, $response->getContent());
+        $response->assertJsonPath('email_verification_required', false);
+        $response->assertJsonCount(1, 'items');
+        $response->assertJsonPath('items.0.attempt_id', $activeAttemptId);
         $this->assertStringNotContainsString($inactiveAttemptId, $response->getContent());
         $this->assertStringNotContainsString($sensitiveAttemptId, $response->getContent());
     }
@@ -81,16 +115,23 @@ final class ResultEmailLookupTest extends TestCase
         Cache::flush();
         config([
             'fap.rate_limits.bypass_in_test_env' => false,
+            'fap.rate_limits.api_public_per_minute' => 120,
             'fap.rate_limits.api_result_lookup_per_minute' => 1,
         ]);
 
         $email = 'ratelimit_'.Str::lower(Str::random(12)).'@example.test';
+        $server = ['REMOTE_ADDR' => '198.51.100.77'];
+        foreach (['127.0.0.1', '198.51.100.77'] as $ip) {
+            RateLimiter::clear('ip:'.$ip);
+            RateLimiter::clear('api_result_lookup|ip:'.$ip.'|org:0|route:api/v0.3/results/lookup-by-email');
+            RateLimiter::clear('api_result_lookup|ip:'.$ip.'|org:0|route:v0.3/results/lookup-by-email');
+        }
 
-        $this->postJson('/api/v0.3/results/lookup-by-email', [
+        $this->withServerVariables($server)->postJson('/api/v0.3/results/lookup-by-email', [
             'email' => $email,
         ])->assertOk();
 
-        $this->postJson('/api/v0.3/results/lookup-by-email', [
+        $this->withServerVariables($server)->postJson('/api/v0.3/results/lookup-by-email', [
             'email' => $email,
         ])
             ->assertStatus(429)

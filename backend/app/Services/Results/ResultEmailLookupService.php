@@ -35,7 +35,69 @@ final class ResultEmailLookupService
     /**
      * @return array{ok:bool,items:list<array<string,mixed>>,email_verification_required:bool,message:string}
      */
-    public function lookup(string $email, int $orgId, ?string $locale = null): array
+    public function lookup(
+        string $email,
+        int $orgId,
+        ?string $locale = null,
+        ?int $userId = null,
+        mixed $tokenAnonId = null,
+        mixed $clientAnonId = null
+    ): array {
+        $emailHash = $this->emailHash($email);
+        $ownerUserId = $userId !== null && $userId > 0 ? (string) $userId : null;
+        $ownerAnonIds = $this->ownerAnonIds($tokenAnonId, $clientAnonId);
+
+        if ($emailHash === null || ($ownerUserId === null && $ownerAnonIds === [])) {
+            return $this->verificationRequiredResponse();
+        }
+
+        $bindings = AttemptEmailBinding::query()
+            ->where('org_id', max(0, $orgId))
+            ->where('email_hash', $emailHash)
+            ->where('status', AttemptEmailBinding::STATUS_ACTIVE)
+            ->where(function ($query) use ($ownerUserId, $ownerAnonIds): void {
+                if ($ownerUserId !== null) {
+                    $query->orWhere('bound_user_id', $ownerUserId);
+                }
+
+                foreach ($ownerAnonIds as $anonId) {
+                    $query->orWhere('bound_anon_id', $anonId);
+                }
+            })
+            ->orderByDesc('updated_at')
+            ->orderByDesc('created_at')
+            ->limit(25)
+            ->get();
+
+        $items = [];
+        foreach ($bindings as $binding) {
+            if (! $binding instanceof AttemptEmailBinding) {
+                continue;
+            }
+
+            $item = $this->lookupItemForBinding($binding, $locale);
+            if ($item === null) {
+                continue;
+            }
+
+            $items[] = $item;
+            if (count($items) >= 10) {
+                break;
+            }
+        }
+
+        return [
+            'ok' => true,
+            'items' => $items,
+            'email_verification_required' => false,
+            'message' => 'Saved results are listed only when the email and current session match an active binding.',
+        ];
+    }
+
+    /**
+     * @return array{ok:bool,items:list<array<string,mixed>>,email_verification_required:bool,message:string}
+     */
+    private function verificationRequiredResponse(): array
     {
         return [
             'ok' => true,
@@ -148,5 +210,42 @@ final class ResultEmailLookupService
         $separator = str_contains($base, '?') ? '&' : '?';
 
         return $base.$separator.'access_token='.rawurlencode($token).$fragment;
+    }
+
+    private function emailHash(string $email): ?string
+    {
+        $normalized = $this->piiCipher->normalizeEmail($email);
+        if ($normalized === '') {
+            return null;
+        }
+
+        return $this->piiCipher->emailHash($normalized);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function ownerAnonIds(mixed ...$values): array
+    {
+        $normalized = [];
+        foreach ($values as $value) {
+            $owner = $this->normalizeOwnerString($value);
+            if ($owner !== null) {
+                $normalized[$owner] = true;
+            }
+        }
+
+        return array_keys($normalized);
+    }
+
+    private function normalizeOwnerString(mixed $value): ?string
+    {
+        if (! is_string($value) && ! is_numeric($value)) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+
+        return $normalized !== '' ? $normalized : null;
     }
 }
