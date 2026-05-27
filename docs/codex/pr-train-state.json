@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T23:11:18+08:00",
+  "updated_at": "2026-05-27T23:38:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -20804,11 +20804,11 @@
       ],
       "commit_sha": null,
       "pr_url": null,
-        "checks": {
-          "focused_test": "passed",
-          "mbti_runtime_freeze_guard": "passed",
-          "migrate_pretend": "passed",
-          "route_list": "passed",
+      "checks": {
+        "focused_test": "passed",
+        "mbti_runtime_freeze_guard": "passed",
+        "migrate_pretend": "passed",
+        "route_list": "passed",
         "pint": "passed",
         "composer_validate": "passed",
         "composer_audit": "passed",
@@ -29649,6 +29649,143 @@
         "at": "2026-05-27T23:22:00+08:00",
         "status": "pr_opened",
         "summary": "Opened PR #1732 for the read-only take EN/ZH question locale scan."
+      }
+    ]
+  },
+  "MBTI-EN-QUESTIONS-PACK-PROJECTION-01": {
+    "id": "MBTI-EN-QUESTIONS-PACK-PROJECTION-01",
+    "repo": "fap-api",
+    "branch": "codex/mbti-en-questions-pack-projection-01",
+    "base": "main",
+    "status": "local_validation_passed",
+    "depends_on": [
+      "TAKE-EN-QUESTION-LOCALE-SCAN-00"
+    ],
+    "title": "MBTI-EN-QUESTIONS-PACK-PROJECTION-01 MBTI English question locale projection",
+    "commit_sha": "956221fe825ce36dd27ca933e047780ad441cf26",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1733",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User requested the three backend content-pack fixes after TAKE-EN-QUESTION-LOCALE-SCAN-00; only the current MBTI item was added."
+      },
+      "focused_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=MbtiQuestionLocaleProjection --no-ansi",
+        "evidence": "3 tests passed, 1444 assertions."
+      },
+      "compatibility_tests": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter='MbtiResponseCache|MbtiPrewarmCommand|MbtiFormVersionFlow' --no-ansi",
+        "evidence": "9 tests passed, 79 assertions."
+      },
+      "scope": {
+        "status": "pass",
+        "allowed_files": [
+          "backend/app/Http/Controllers/API/V0_3/ScalesController.php",
+          "backend/tests/Feature/V0_3/MbtiQuestionLocaleProjectionTest.php",
+          "content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/questions_i18n.en.json",
+          "content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3-form-93/questions_i18n.en.json",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "changed_files": [
+          "backend/app/Http/Controllers/API/V0_3/ScalesController.php",
+          "backend/tests/Feature/V0_3/MbtiQuestionLocaleProjectionTest.php",
+          "content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3-form-93/questions_i18n.en.json",
+          "content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/questions_i18n.en.json",
+          "docs/codex/pr-train-state.json",
+          "docs/codex/pr-train.yaml"
+        ],
+        "outside_scope": [],
+        "evidence": "Final branch diff is confined to MBTI controller projection, MBTI English sidecar pack data, focused test, and PR train metadata; shared QuestionsService is no longer in the branch diff."
+      },
+      "local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=MbtiQuestionLocaleProjection --no-ansi",
+          "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+          "cd backend && php artisan test --filter='MbtiResponseCache|MbtiPrewarmCommand|MbtiFormVersionFlow' --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/questions_i18n.en.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3-form-93/questions_i18n.en.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 - <<'PY'\nimport yaml, pathlib\nyaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\nprint('yaml ok')\nPY",
+          "git diff --check",
+          "git diff --cached --check"
+        ],
+        "evidence": "After the CI fix, MBTI focused tests passed, the Big Five runtime freeze test passed, MBTI compatibility tests passed, and route list, Pint, composer validate/audit, JSON/YAML parse, and diff checks passed locally."
+      },
+      "github_required_checks": {
+        "status": "pending_rerun",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1733",
+        "previous_failed_checks": [
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "fix_evidence": "Local BigFiveResultPageV2CoreBodyPreviewTest now passes and final branch diff no longer includes QuestionsService.php."
+      },
+      "ci_fix_scope": {
+        "status": "pass",
+        "evidence": "Projection remains MBTI-scoped in ScalesController; backend/app/Services/Content/QuestionsService.php was removed from the final branch diff."
+      }
+    },
+    "scope": {
+      "allowed_files": [
+        "backend/app/Http/Controllers/API/V0_3/ScalesController.php",
+        "backend/tests/Feature/V0_3/MbtiQuestionLocaleProjectionTest.php",
+        "content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/questions_i18n.en.json",
+        "content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3-form-93/questions_i18n.en.json",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "api_runtime_change": true,
+      "content_pack_mutation": true,
+      "cms_mutation": false,
+      "publish": false,
+      "deploy": false,
+      "search_channel_action": false,
+      "url_submission": false,
+      "fap_web_modified": false,
+      "frontend_fallback_authority": false
+    },
+    "history": [
+      {
+        "at": "2026-05-27T23:38:00+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Started MBTI English question projection fix after TAKE-EN-QUESTION-LOCALE-SCAN-00 merged; scope is MBTI only."
+      },
+      {
+        "at": "2026-05-27T23:48:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "MBTI English sidecar projection and tests passed focused validation, compatibility validation, route list, Pint, composer validate/audit, JSON/YAML parse, and diff checks."
+      },
+      {
+        "at": "2026-05-27T23:48:00+08:00",
+        "status": "scope_validation_passed",
+        "summary": "Scope is limited to MBTI projection code, MBTI English sidecar pack data, focused test, and ledger metadata."
+      },
+      {
+        "at": "2026-05-27T23:52:00+08:00",
+        "status": "pr_opened",
+        "summary": "Opened PR #1733 for MBTI English question locale projection."
+      },
+      {
+        "at": "2026-05-28T00:16:00+08:00",
+        "status": "ci_fix_in_progress",
+        "summary": "Inspect GitHub check failure and narrowed the fix so the final branch diff no longer changes the shared QuestionsService runtime path guarded by Big Five freeze tests."
+      },
+      {
+        "at": "2026-05-28T00:23:00+08:00",
+        "status": "local_validation_passed_after_ci_fix",
+        "summary": "Committed MBTI-scoped CI fix, removed QuestionsService.php from the final diff, and reran MBTI focused tests, Big Five runtime freeze test, compatibility tests, route list, Pint, composer validate/audit, JSON/YAML parse, and diff checks successfully."
       }
     ]
   }

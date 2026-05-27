@@ -15009,3 +15009,48 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: MBTI-EN-QUESTIONS-PACK-PROJECTION-01
+
+  - id: MBTI-EN-QUESTIONS-PACK-PROJECTION-01
+    repo: fap-api
+    depends_on:
+      - TAKE-EN-QUESTION-LOCALE-SCAN-00
+    branch: codex/mbti-en-questions-pack-projection-01
+    base: main
+    title: "MBTI-EN-QUESTIONS-PACK-PROJECTION-01 MBTI English question locale projection"
+    train_scope: take_question_locale_parity
+    risk_level: p1_content_pack_display_projection
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/ScalesController.php
+      - backend/app/Services/Content/QuestionsService.php
+      - backend/tests/Feature/V0_3/MbtiQuestionLocaleProjectionTest.php
+      - content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/questions_i18n.en.json
+      - content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3-form-93/questions_i18n.en.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add MBTI English question sidecar projection data for mbti_93 and mbti_144.
+      - Project displayed question and option text to English for locale=en while preserving Chinese locale behavior, scoring, option codes, and form counts.
+      - Do not change RIASEC, Enneagram, Big Five, IQ, EQ, Clinical Combo, SDS, fap-web runtime, CMS, publish state, deploy state, Search Channel, sitemap, llms, footer, or nav.
+    validation:
+      - cd backend && php artisan test --filter=MbtiQuestionLocaleProjection --no-ansi
+      - cd backend && php artisan test --filter='MbtiResponseCache|MbtiPrewarmCommand|MbtiFormVersionFlow' --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/questions_i18n.en.json >/dev/null
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3-form-93/questions_i18n.en.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02
