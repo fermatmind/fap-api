@@ -29022,7 +29022,7 @@
     "local_cleanup_note": "scripts/post_merge_cleanup.sh not present in fap-api; local main fast-forwarded to origin/main and task branch was not present locally after merge."
   },
   "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1": {
-    "status": "pr_open",
+    "status": "github_checks_failed",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-candidate-prep-1",
     "base": "main",
@@ -29030,9 +29030,9 @@
       "REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1"
     ],
     "title": "fix(api): plan career detail-ready 1018 candidate prep",
-    "commit_sha": "7aeddd1f722382e54fcb2f804417154459670be2",
+    "commit_sha": "7e2685f1b5786a8c33d2c41b83ad930375487610",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1726",
-    "failure_reason": null,
+    "failure_reason": "Required GitHub CI supply-chain check failed on composer audit due to newly reported Symfony advisories: symfony/html-sanitizer CVE-2026-48761 and CVE-2026-48760, symfony/http-foundation CVE-2026-48736, symfony/routing CVE-2026-48784. This is outside the current Career candidate-prep scope, but required checks are not green, so train progression is blocked.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -29064,6 +29064,21 @@
           "docs/codex/pr-train-state.json"
         ],
         "outside_scope": []
+      },
+      "github": {
+        "status": "failed",
+        "head_sha": "7e2685f1b5786a8c33d2c41b83ad930375487610",
+        "failed_checks": [
+          "supply-chain"
+        ],
+        "failed_jobs": [
+          "https://github.com/fermatmind/fap-api/actions/runs/26503477496/job/78049796376",
+          "https://github.com/fermatmind/fap-api/actions/runs/26503474750/job/78049773809"
+        ],
+        "failure_reason": "composer audit found 4 advisories affecting 3 Symfony packages: symfony/html-sanitizer, symfony/http-foundation, symfony/routing.",
+        "external_to_current_pr_scope": true,
+        "merge_blocked": true,
+        "train_progression_blocked": true
       }
     },
     "history": [
@@ -29091,6 +29106,25 @@
         "at": "2026-05-27T17:40:09+08:00",
         "status": "pr_open",
         "summary": "Opened PR #1726 for detail_ready_1048 runtime candidate preparation planning."
+      },
+      {
+        "at": "2026-05-27T17:43:47+08:00",
+        "status": "github_checks_failed",
+        "summary": "Required GitHub supply-chain check failed on Composer audit advisories external to this Career planner PR scope; stopping train before merge or next PR."
+      }
+    ],
+    "sidecar_blockers": [
+      {
+        "at": "2026-05-27T17:43:47+08:00",
+        "kind": "required_github_check_failure_external_to_scope",
+        "check": "supply-chain",
+        "summary": "Composer audit fails on Symfony advisories reported 2026-05-26; resolving requires dependency/security scope, not Career candidate-prep planner scope.",
+        "advisories": [
+          "CVE-2026-48761",
+          "CVE-2026-48760",
+          "CVE-2026-48736",
+          "CVE-2026-48784"
+        ]
       }
     ]
   },
