@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T17:08:20+08:00",
+  "updated_at": "2026-05-27T17:18:30+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -28963,10 +28963,21 @@
           "backend/app/Domain/Career/Audit/CareerDetailReadyTargetAuthority.php",
           "backend/docs/career/audits/detail_ready_1048_target_authority.md",
           "backend/tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
           "backend/tests/Unit/Domain/Career/Audit/CareerDetailReadyTargetAuthorityTest.php",
+          "docs/codex/pr-train.yaml",
           "docs/codex/pr-train-state.json"
         ],
         "outside_scope": []
+      },
+      "github": {
+        "status": "failed_then_scoped_fix_applied",
+        "failed_checks": [
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "failure_reason": "BigFive runtime freeze classifier did not yet classify backend/app/Domain/Career/Audit/CareerDetailReadyTargetAuthority.php as Career detail-ready 1048 audit/authority scope.",
+        "fix": "Extended the existing Career detail-ready 1048 audit classifier and focused guard test to include CareerDetailReadyTargetAuthority.php; updated PR manifest allowed paths and validation command."
       }
     },
     "history": [
@@ -28994,6 +29005,11 @@
         "at": "2026-05-27T17:08:20+08:00",
         "status": "pr_open",
         "summary": "Opened PR #1725 for detail_ready_1048 target authority semantics."
+      },
+      {
+        "at": "2026-05-27T17:18:30+08:00",
+        "status": "github_checks_failed_scoped_fix_applied",
+        "summary": "GitHub MBTI checks failed because the new CareerDetailReadyTargetAuthority.php file was not classified by the Big Five runtime freeze guard. Added a scoped guard-test classifier update and reran focused tests, route list, targeted Pint, and backend MBTI CI locally."
       }
     ]
   },

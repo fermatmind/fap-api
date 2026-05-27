@@ -5283,6 +5283,7 @@ prs:
       - backend/app/Domain/Career/**
       - backend/tests/Feature/Console/**
       - backend/tests/Unit/Domain/Career/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/career/audits/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -5292,6 +5293,7 @@ prs:
       - Weaken CN proxy or software-developers manual hold policy.
     validation:
       - php artisan test --filter=CareerDetailReady --no-ansi
+      - php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_career_detail_ready_1048_audit_scanner_changes --no-ansi
       - php artisan route:list --no-ansi
       - vendor/bin/pint --test
       - bash backend/scripts/ci_verify_mbti.sh
