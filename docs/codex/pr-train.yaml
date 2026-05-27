@@ -14184,6 +14184,50 @@ prs:
     frontend_fallback_authority: false
     next_task: GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01
 
+  - id: GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2
+    branch: codex/global-en-zh-content-pages-controlled-publish-01
+    base: main
+    title: "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01 controlled publish for Wave 1 English content pages"
+    train_scope: global_en_zh_controlled_cms_publish
+    risk_level: p0_controlled_cms_publish
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-content-pages-controlled-publish-01.md
+      - backend/docs/seo/generated/global-en-zh-content-pages-controlled-publish-01.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublish01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Dry-run first and publish only the existing English CMS draft records for brand, charter, foundation, careers, and policies if an official bounded content-pages publish runtime exists.
+      - Stop fail-closed if the official publish runtime is missing, a target draft record is missing, dry-run fails, foundation boundaries are overclaimed, or sitemap/llms/footer/Search Channel exposure changes unexpectedly.
+      - Do not deploy, submit URLs, enqueue Search Channel, call external search APIs, enable sitemap/llms/footer/nav exposure, edit fap-web, run production migrations, read raw logs, access production user data, or write out-of-scope CMS records.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhContentPagesControlledPublish01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-controlled-publish-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    cms_mutation: controlled_publish_existing_records_only
+    publish_allowed: true
+    search_channel_action: false
+    url_submission: false
+    sitemap_llms_footer_exposure_allowed: false
+    deploy_allowed: false
+    pseo_generation_allowed: false
+    production_user_data_access_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01
+
   - id: GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03
     repo: fap-api
     depends_on:

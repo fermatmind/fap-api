@@ -1,0 +1,103 @@
+{
+  "schema_version": "global-en-zh-content-pages-controlled-publish-01.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01",
+  "final_decision": "blocked_missing_official_publish_runtime",
+  "approval_phrase_verified": true,
+  "target_pages": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies"
+  ],
+  "preflight_result": {
+    "status": "blocked",
+    "dependency_readiness_source": "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2",
+    "dependency_final_decision": "content_pages_publish_readiness_r2_completed_ready_for_controlled_publish",
+    "target_scope_from_r2": "all_five_pages",
+    "runtime_discovery": {
+      "official_content_pages_publish_runtime_found": false,
+      "content_pages_import_runtime_found": "content-pages:import-local-baseline",
+      "content_pages_import_runtime_rejected_for_publish": true,
+      "article_publish_runtime_found": "articles:publish-controlled",
+      "article_publish_runtime_applicable": false,
+      "content_publish_rehearsal_runtime_found": "seo-intel:content-publish-rehearsal",
+      "content_publish_rehearsal_runtime_applicable": false,
+      "reason": "No official bounded runtime exists to dry-run and publish only existing content_pages draft records while failing closed on missing targets."
+    },
+    "cms_mutation_attempted": false,
+    "publish_attempted": false
+  },
+  "dry_run_result": {
+    "performed": false,
+    "blocked_reason": "missing_official_content_pages_publish_runtime",
+    "target_count": 5,
+    "would_publish_count": null,
+    "would_update_count": null,
+    "would_skip_count": null,
+    "blocked_count": 1,
+    "target_keys": [
+      "brand",
+      "charter",
+      "foundation",
+      "careers",
+      "policies"
+    ],
+    "before_status": "not_rechecked_in_this_blocked_task",
+    "after_status": "not_applicable",
+    "sitemap_eligible_after_publish": "not_applicable",
+    "llms_eligible_after_publish": "not_applicable",
+    "footer_eligible_after_publish": "not_applicable",
+    "search_channel_action_attempted": false,
+    "deploy_attempted": false
+  },
+  "publish_result": {
+    "performed": false,
+    "published_pages": [],
+    "blocked_reason": "missing_official_content_pages_publish_runtime"
+  },
+  "post_publish_verification": {
+    "performed": false,
+    "reason": "No publish was performed."
+  },
+  "foundation_fact_state": "planned_public_benefit_shareholding",
+  "foundation_governance_language_used": [
+    "Public-Benefit Mission and Governance",
+    "planned public-benefit shareholding arrangement",
+    "public-benefit governance path"
+  ],
+  "forbidden_foundation_claims_absent": true,
+  "cms_records_published": [],
+  "public_runtime_check": {
+    "performed_after_publish": false,
+    "reason": "No publish was performed.",
+    "r2_prior_state": "target pages were non-public before this task"
+  },
+  "sitemap_exposure_check": {
+    "sitemap_exposure_enabled": false,
+    "unexpected_exposure_detected": false
+  },
+  "llms_exposure_check": {
+    "llms_exposure_enabled": false,
+    "unexpected_exposure_detected": false
+  },
+  "footer_nav_exposure_check": {
+    "footer_nav_exposure_enabled": false,
+    "unexpected_exposure_detected": false
+  },
+  "search_channel_check": {
+    "search_channel_command_run": false,
+    "queue_item_created": false,
+    "url_submitted": false
+  },
+  "gate_state": {
+    "not_modified": true,
+    "search_channel_gates_opened": false
+  },
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_out_of_scope_cms_write": true,
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01"
+}

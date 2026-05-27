@@ -28390,5 +28390,91 @@
         "summary": "GitHub checks passed for PR #1717 and merge state was CLEAN."
       }
     ]
+  },
+  "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01": {
+    "status": "local_checks_passed_blocked_missing_official_publish_runtime",
+    "repo": "fap-api",
+    "branch": "codex/global-en-zh-content-pages-controlled-publish-01",
+    "base": "main",
+    "depends_on": [
+      "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2"
+    ],
+    "title": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01 controlled publish for Wave 1 English content pages",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": "No official bounded controlled publish runtime exists for content_pages; content-pages:import-local-baseline is an import/upsert runtime and can create missing records, so it was rejected for this publish-only scope.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "approval_phrase": {
+        "status": "passed",
+        "evidence": "Exact approval phrase was present in the user request."
+      },
+      "dependency_verification": {
+        "status": "passed",
+        "evidence": "GitHub shows PR #1717 merged at 2026-05-27T04:17:22Z with merge commit 56c5db23283412a9791b79ac6cf91305dea4709a. Merged R2 readiness package on main reports content_pages_publish_readiness_r2_completed_ready_for_controlled_publish and all_five_pages scope."
+      },
+      "official_publish_runtime": {
+        "status": "blocked",
+        "evidence": "Repository runtime inspection and php artisan list found articles:publish-controlled for articles and content-pages:import-local-baseline for imports, but no content-pages controlled publish runtime with dry-run and existing-record-only fail-closed behavior."
+      },
+      "cms_publish": {
+        "status": "not_performed",
+        "evidence": "No CMS mutation was performed because the official content-pages publish runtime is missing."
+      },
+      "search_channel": {
+        "status": "not_performed",
+        "evidence": "No Search Channel command was run."
+      },
+      "focused_test": {
+        "status": "passed",
+        "command": "php artisan test --filter=GlobalEnZhContentPagesControlledPublish01 --no-ansi",
+        "evidence": "1 passed, 14 assertions."
+      },
+      "route_list": {
+        "status": "passed",
+        "command": "php artisan route:list --no-ansi"
+      },
+      "pint": {
+        "status": "passed",
+        "command": "vendor/bin/pint --test",
+        "evidence": "3588 files passed."
+      },
+      "composer_validate": {
+        "status": "passed",
+        "command": "composer validate --strict",
+        "evidence": "composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "passed",
+        "command": "composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "No security vulnerability advisories found."
+      },
+      "json_yaml_parse": {
+        "status": "passed",
+        "evidence": "Generated JSON, pr-train-state JSON, and pr-train YAML parsed successfully."
+      },
+      "diff_check": {
+        "status": "passed",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "fap_web_reference_check": {
+        "status": "passed_with_sidecar",
+        "evidence": "Reference-only fap-web working tree has pre-existing untracked files; no fap-web files were modified by this task."
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T12:45:00+08:00",
+        "status": "blocked_missing_official_publish_runtime",
+        "summary": "Stopped before CMS publish because no official bounded content_pages publish runtime exists."
+      },
+      {
+        "at": "2026-05-27T12:58:00+08:00",
+        "status": "local_checks_passed",
+        "summary": "Focused test, route list, pint, composer validate/audit, JSON/YAML parsing, and diff checks passed."
+      }
+    ]
   }
 }
