@@ -103,6 +103,10 @@ final class CareerAuditDetailReady1048CandidatesCommandTest extends TestCase
         $this->assertFalse($payload['apply_allowed']);
         $this->assertFalse($payload['rollout_allowed']);
         $this->assertFalse($payload['deploy_allowed']);
+        $this->assertSame('detail_ready_1048', $payload['target_authority']['target_key']);
+        $this->assertSame(1048, $payload['target_authority']['target_public_total']);
+        $this->assertFalse($payload['target_authority']['partition_boundary']['is_2786_partition_accounting']);
+        $this->assertTrue($payload['target_authority']['manual_hold_policy']['must_not_force_enable']);
         $this->assertTrue($payload['product_visible_claim_boundary']['not_a_2786_partition_accounting_claim']);
         $this->assertSame(1, $payload['counts']['current_public_detail']);
         $this->assertSame(3, $payload['counts']['docx_ready']);

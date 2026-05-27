@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T16:43:56+08:00",
+  "updated_at": "2026-05-27T17:18:30+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -28850,7 +28850,7 @@
     ]
   },
   "AUDIT-CAREER-DETAIL-READY-1048-SCAN-1": {
-    "status": "pr_open",
+    "status": "merged",
     "repo": "fap-api",
     "branch": "codex/audit-career-detail-ready-1048-scan-1",
     "base": "main",
@@ -28858,8 +28858,8 @@
     "commit_sha": "9d7f67d2dab71ae981dcad290a49a7ee9de527b3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1724",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-05-27T16:45:00+08:00",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "checks": {
       "scope": {
@@ -28920,11 +28920,16 @@
         "at": "2026-05-27T16:43:56+08:00",
         "status": "github_checks_passed",
         "summary": "GitHub checks passed for PR #1724 after the scoped runtime-freeze classifier fix."
+      },
+      {
+        "at": "2026-05-27T16:55:03+08:00",
+        "status": "merged",
+        "summary": "PR #1724 was squash merged into main at 6e576fcf; remote branch was deleted. Repository has no scripts/post_merge_cleanup.sh, so scripted local cleanup was not executed."
       }
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1": {
-    "status": "planned",
+    "status": "pr_open",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-target-authority-1",
     "base": "main",
@@ -28932,14 +28937,81 @@
       "AUDIT-CAREER-DETAIL-READY-1048-SCAN-1"
     ],
     "title": "fix(api): define career detail-ready 1048 authority",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "2207629e257c9544a6d1ab240025747771065e04",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1725",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "checks": {},
-    "history": []
+    "checks": {
+      "local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter=CareerDetailReady --no-ansi",
+          "cd backend && php artisan test tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && bash scripts/ci_verify_mbti.sh"
+        ],
+        "notes": "The MBTI CI chain regenerated BIG5_OCEAN compiled artifacts as a local side effect; those generated diffs were restored because they are outside this PR scope."
+      },
+      "scope": {
+        "status": "passed",
+        "changed_files": [
+          "backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php",
+          "backend/app/Domain/Career/Audit/CareerDetailReadyTargetAuthority.php",
+          "backend/docs/career/audits/detail_ready_1048_target_authority.md",
+          "backend/tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "backend/tests/Unit/Domain/Career/Audit/CareerDetailReadyTargetAuthorityTest.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "outside_scope": []
+      },
+      "github": {
+        "status": "failed_then_scoped_fix_applied",
+        "failed_checks": [
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "failure_reason": "BigFive runtime freeze classifier did not yet classify backend/app/Domain/Career/Audit/CareerDetailReadyTargetAuthority.php as Career detail-ready 1048 audit/authority scope.",
+        "fix": "Extended the existing Career detail-ready 1048 audit classifier and focused guard test to include CareerDetailReadyTargetAuthority.php; updated PR manifest allowed paths and validation command."
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T16:55:03+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Started backend authority semantics PR for detail_ready_1048 after AUDIT PR merge."
+      },
+      {
+        "at": "2026-05-27T17:04:43+08:00",
+        "status": "local_checks_passed",
+        "summary": "CareerDetailReady tests, scanner feature test, route list, testing sqlite migrate pretend, full Pint, and backend MBTI CI master chain passed locally."
+      },
+      {
+        "at": "2026-05-27T17:04:43+08:00",
+        "status": "scope_validation_passed",
+        "summary": "Changed files are within the target-authority PR allowed paths."
+      },
+      {
+        "at": "2026-05-27T17:04:43+08:00",
+        "status": "local_commit_created",
+        "summary": "Created local commit 2207629e257c9544a6d1ab240025747771065e04 for target authority PR."
+      },
+      {
+        "at": "2026-05-27T17:08:20+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1725 for detail_ready_1048 target authority semantics."
+      },
+      {
+        "at": "2026-05-27T17:18:30+08:00",
+        "status": "github_checks_failed_scoped_fix_applied",
+        "summary": "GitHub MBTI checks failed because the new CareerDetailReadyTargetAuthority.php file was not classified by the Big Five runtime freeze guard. Added a scoped guard-test classifier update and reran focused tests, route list, targeted Pint, and backend MBTI CI locally."
+      }
+    ]
   },
   "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1": {
     "status": "planned",

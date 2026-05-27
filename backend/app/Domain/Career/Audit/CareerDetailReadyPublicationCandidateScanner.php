@@ -38,6 +38,7 @@ final class CareerDetailReadyPublicationCandidateScanner
     public function __construct(
         private readonly CareerRuntimePublishProjectionVisibility $runtimeProjection,
         private readonly CareerFullReleaseLedgerProjectionService $fullReleaseLedgerProjectionService,
+        private readonly CareerDetailReadyTargetAuthority $targetAuthority,
     ) {}
 
     /**
@@ -68,6 +69,7 @@ final class CareerDetailReadyPublicationCandidateScanner
             'deploy_allowed' => false,
             'cms_mutation_allowed' => false,
             'fap_web_fallback_authority_allowed' => false,
+            'target_authority' => $this->targetAuthority->target(),
             'product_visible_claim_boundary' => [
                 'target' => 'all currently backend-authoritative detail-ready Career jobs',
                 'not_a_2786_partition_accounting_claim' => true,

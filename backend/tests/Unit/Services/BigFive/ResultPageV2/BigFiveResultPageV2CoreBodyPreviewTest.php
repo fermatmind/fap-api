@@ -211,6 +211,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php',
+            'backend/app/Domain/Career/Audit/CareerDetailReadyTargetAuthority.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -3737,7 +3738,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isCareerDetailReady1048AuditFile(string $file): bool
     {
-        return $file === 'backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php';
+        return in_array($file, [
+            'backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php',
+            'backend/app/Domain/Career/Audit/CareerDetailReadyTargetAuthority.php',
+        ], true);
     }
 
     private function isBigFiveV2PilotSupportFile(string $file): bool
