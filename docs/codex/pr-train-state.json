@@ -29324,7 +29324,7 @@
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-ROLLOUT-GATE-1": {
-    "status": "local_commit_created",
+    "status": "merged",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-rollout-gate-1",
     "base": "main",
@@ -29332,12 +29332,12 @@
       "REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1"
     ],
     "title": "fix(api): gate career detail-ready 1048 rollout",
-    "commit_sha": "2ff39fd7a7301b985163de368081a4d36775a8a0",
-    "pr_url": null,
+    "commit_sha": "69216f556cecf0b504632f52443cc7dafda13b39",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1729",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-27T12:51:43Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "local": {
         "status": "passed",
@@ -29398,11 +29398,16 @@
         "at": "2026-05-27T20:34:00+08:00",
         "status": "local_commit_created",
         "summary": "Created local commit 2ff39fd7a7301b985163de368081a4d36775a8a0 for detail-ready 1048 rollout gate dry-run support."
+      },
+      {
+        "at": "2026-05-27T21:02:38+08:00",
+        "status": "merged_reconciled",
+        "summary": "Reconciled PR #1729 after squash merge commit 69216f556cecf0b504632f52443cc7dafda13b39; remote branch deleted and local task branch cleaned up."
       }
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-LIVE-ACCEPTANCE-CLOSEOUT-1": {
-    "status": "planned",
+    "status": "local_checks_passed",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-live-acceptance-closeout-1",
     "base": "main",
@@ -29416,7 +29421,62 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "checks": {},
-    "history": []
+    "checks": {
+      "local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter=CareerDetailReady --no-ansi",
+          "cd backend && php artisan test --filter=CareerLiveAcceptance --no-ansi",
+          "cd backend && php artisan test tests/Unit/Domain/Career/Audit/Career80TotalLiveAcceptancePlannerTest.php tests/Feature/Console/CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest.php tests/Unit/Domain/Career/Audit/CareerProgressiveCohortCloseoutPlannerTest.php tests/Feature/Console/CareerCloseoutCanonicalProgressiveCohortCommandTest.php tests/Unit/Domain/Career/Audit/CareerFullVisiblePublicationGateTest.php --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "git diff --check",
+          "git diff --cached --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+        ],
+        "notes": "DetailReady, CareerLiveAcceptance, focused live acceptance/closeout tests, route list, Pint, backend MBTI CI, diff checks, and JSON validation passed locally. backend/scripts/ci_verify_mbti.sh regenerated BIG5_OCEAN compiled artifacts as a local side effect; those generated diffs were restored because they are outside this PR scope."
+      },
+      "scope": {
+        "status": "passed",
+        "changed_files": [
+          "backend/app/Domain/Career/Audit/Career80TotalLiveAcceptancePlanner.php",
+          "backend/app/Domain/Career/Audit/CareerFullVisiblePublicationGate.php",
+          "backend/app/Domain/Career/Audit/CareerProgressiveCohortCloseoutPlanner.php",
+          "backend/docs/career/audits/product_visible_claim_authority.md",
+          "backend/docs/career/audits/progressive_closeout.md",
+          "backend/docs/career/audits/progressive_live_acceptance.md",
+          "backend/tests/Feature/Console/CareerCloseoutCanonicalProgressiveCohortCommandTest.php",
+          "backend/tests/Feature/Console/CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest.php",
+          "backend/tests/Unit/Domain/Career/Audit/Career80TotalLiveAcceptancePlannerTest.php",
+          "backend/tests/Unit/Domain/Career/Audit/CareerFullVisiblePublicationGateTest.php",
+          "backend/tests/Unit/Domain/Career/Audit/CareerLiveAcceptance1048CloseoutPlannerTest.php",
+          "backend/tests/Unit/Domain/Career/Audit/CareerProgressiveCohortCloseoutPlannerTest.php",
+          "docs/codex/pr-train-state.json"
+        ],
+        "outside_scope": [],
+        "diff_checks": [
+          "git diff --check",
+          "git diff --cached --check"
+        ]
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T21:02:38+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Started detail_ready_1048 live acceptance and closeout read-only support from latest main; no live crawl, deploy, rollout apply, production mutation, or CMS mutation."
+      },
+      {
+        "at": "2026-05-27T21:12:05+08:00",
+        "status": "local_checks_passed",
+        "summary": "CareerDetailReady, CareerLiveAcceptance, focused 1048 live acceptance/closeout tests, route list, Pint, backend MBTI CI, diff checks, and JSON validation passed locally."
+      },
+      {
+        "at": "2026-05-27T21:12:05+08:00",
+        "status": "scope_validation_passed",
+        "summary": "Changed files are within live acceptance closeout PR allowed paths; generated BIG5_OCEAN compiled artifacts were restored as out-of-scope CI side effects."
+      }
+    ]
   }
 }

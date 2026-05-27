@@ -56,4 +56,59 @@ final class CareerFullVisiblePublicationGateTest extends TestCase
         $this->assertSame(2786, $summary['public_detail_indexable_count']);
         $this->assertTrue($summary['product_claim']['visible_detail_claim_allowed']);
     }
+
+    public function test_1048_gate_requires_product_visible_detail_counts(): void
+    {
+        $gate = new CareerFullVisiblePublicationGate;
+        $liveAcceptance = [
+            'product_surface' => [
+                'directory_member_count' => 1048,
+                'career_jobs_item_count' => 1048,
+                'detail_ready_count' => 1048,
+                'public_detail_indexable_count' => 1048,
+                'canonical_public_slug_count' => 1048,
+            ],
+            'found_published' => 2096,
+            'release_gate' => [
+                'pass_count' => 2096,
+            ],
+        ];
+
+        $summary = $gate->summary($liveAcceptance, 1048, 2);
+
+        $this->assertSame([], $gate->blockers($liveAcceptance, 1048, 2));
+        $this->assertTrue($summary['required']);
+        $this->assertSame(1048, $summary['directory_member_count']);
+        $this->assertTrue($summary['product_claim']['visible_detail_claim_allowed']);
+        $this->assertSame('product_visible_detail_publication', $summary['product_claim']['safe_claim_scope']);
+    }
+
+    public function test_1048_gate_blocks_sitemap_and_llms_forbidden_url_exposure(): void
+    {
+        $gate = new CareerFullVisiblePublicationGate;
+        $liveAcceptance = [
+            'product_surface' => [
+                'directory_member_count' => 1048,
+                'career_jobs_item_count' => 1048,
+                'detail_ready_count' => 1048,
+                'public_detail_indexable_count' => 1048,
+                'canonical_public_slug_count' => 1048,
+                'sitemap_noindex_url_count' => 1,
+                'llms_404_url_count' => 2,
+                'llms_full_redirect_source_url_count' => 3,
+            ],
+            'found_published' => 2096,
+            'release_gate' => [
+                'pass_count' => 2096,
+            ],
+        ];
+
+        $summary = $gate->summary($liveAcceptance, 1048, 2);
+        $reasons = array_column($gate->blockers($liveAcceptance, 1048, 2), 'reason');
+
+        $this->assertSame(1, $summary['forbidden_exposure_counts']['sitemap_noindex_urls']);
+        $this->assertContains('product_forbidden_sitemap_noindex_urls_present', $reasons);
+        $this->assertContains('product_forbidden_llms_404_urls_present', $reasons);
+        $this->assertContains('product_forbidden_llms_full_redirect_source_urls_present', $reasons);
+    }
 }

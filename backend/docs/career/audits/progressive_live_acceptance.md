@@ -6,16 +6,20 @@ Supported target totals:
 
 - 300: 600 locale rows for `en,zh`
 - 800: 1600 locale rows for `en,zh`
+- 1048 / `detail_ready_1048`: 2096 locale rows for `en,zh`
 - 2786: 5572 locale rows for `en,zh`
 
 The command consumes a progressive target-delta artifact and optional rollout manifest and live acceptance artifact. It validates that the current public cohort plus the explicit delta cohort equals the target total and that any supplied live acceptance artifact reports the expected locale row count.
 
-For the final `2786` target, the command also enforces the product-visible publication gate. A supplied live acceptance artifact cannot pass by partition accounting alone. It must prove:
+For `detail_ready_1048` and the final `2786` target, the command also enforces the product-visible publication gate. A supplied live acceptance artifact cannot pass by partition accounting alone. It must prove:
 
-- public career directory `member_count=2786`
-- career jobs index item count `2786`
-- detail-ready / `public_detail_indexable_count=2786`
-- published locale rows and release-gate pass count `5572`
+- public career directory `member_count` equals the target total
+- career jobs index item count equals the target total
+- detail-ready / `public_detail_indexable_count` equals the target total
+- published locale rows and release-gate pass count equal `target_public_total * locale_count`
+- sitemap, `llms`, and `llms-full` have zero noindex, 404, or redirect-source URLs
+
+For `detail_ready_1048`, the expected product-visible evidence is `member_count=1048`, career jobs item count `1048`, detail-ready / `public_detail_indexable_count=1048`, and `2096` published locale rows for `en,zh`.
 
 CN proxy public-owner accounting and software manual-hold accounting may be recorded as context, but they are not accepted as evidence that 2786 public detail pages are visible.
 

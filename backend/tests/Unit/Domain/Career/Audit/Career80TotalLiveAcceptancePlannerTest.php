@@ -85,6 +85,23 @@ final class Career80TotalLiveAcceptancePlannerTest extends TestCase
         $this->assertSame(5572, $result['expected_locale_rows']);
     }
 
+    public function test_plans_detail_ready_1048_live_acceptance_rows(): void
+    {
+        $result = (new Career80TotalLiveAcceptancePlanner)->plan(
+            targetDelta: $this->progressiveTargetDelta(current: 30, target: 1048, delta: 1018, targetKey: 'detail_ready_1048'),
+            targetPublicTotal: 1048,
+            target: 'detail_ready_1048',
+        )->toArray();
+
+        $this->assertSame('detail_ready_1048', $result['target']);
+        $this->assertSame(30, $result['baseline_count']);
+        $this->assertSame(1018, $result['delta_count']);
+        $this->assertSame(1048, $result['total_slug_count']);
+        $this->assertSame(2096, $result['expected_locale_rows']);
+        $this->assertTrue(data_get($result, 'validation.full_visible_publication_gate.required'));
+        $this->assertSame('RUN_DETAIL_READY_1048_LIVE_ACCEPTANCE_READ_ONLY', $result['next_required_action']);
+    }
+
     public function test_passes_progressive_acceptance_when_artifact_is_accepted(): void
     {
         $result = (new Career80TotalLiveAcceptancePlanner)->plan(
@@ -96,6 +113,22 @@ final class Career80TotalLiveAcceptancePlannerTest extends TestCase
         $this->assertSame('pass', $result['status']);
         $this->assertTrue($result['accepted']);
         $this->assertSame('PROGRESSIVE_LIVE_ACCEPTANCE_COMPLETE', $result['next_required_action']);
+    }
+
+    public function test_detail_ready_1048_acceptance_requires_product_visible_counts(): void
+    {
+        $result = (new Career80TotalLiveAcceptancePlanner)->plan(
+            targetDelta: $this->progressiveTargetDelta(current: 30, target: 1048, delta: 1018, targetKey: 'detail_ready_1048'),
+            liveAcceptance: $this->fullVisible1048Acceptance(),
+            targetPublicTotal: 1048,
+            target: 'detail_ready_1048',
+        )->toArray();
+
+        $this->assertSame('pass', $result['status']);
+        $this->assertTrue($result['accepted']);
+        $this->assertSame('DETAIL_READY_1048_LIVE_ACCEPTANCE_COMPLETE', $result['next_required_action']);
+        $this->assertSame(1048, data_get($result, 'validation.full_visible_publication_gate.career_jobs_item_count'));
+        $this->assertTrue(data_get($result, 'validation.full_visible_publication_gate.product_claim.visible_detail_claim_allowed'));
     }
 
     public function test_blocks_when_target_total_does_not_match_combined_slugs(): void
@@ -159,6 +192,25 @@ final class Career80TotalLiveAcceptancePlannerTest extends TestCase
         $this->assertContains('live_acceptance_expected_rows_mismatch', array_column($result['blockers'], 'reason'));
     }
 
+    public function test_detail_ready_1048_blocks_forbidden_sitemap_and_llms_exposure(): void
+    {
+        $artifact = $this->fullVisible1048Acceptance();
+        $artifact['product_surface']['sitemap_redirect_source_url_count'] = 1;
+        $artifact['product_surface']['llms_noindex_url_count'] = 1;
+
+        $result = (new Career80TotalLiveAcceptancePlanner)->plan(
+            targetDelta: $this->progressiveTargetDelta(current: 30, target: 1048, delta: 1018, targetKey: 'detail_ready_1048'),
+            liveAcceptance: $artifact,
+            targetPublicTotal: 1048,
+            target: 'detail_ready_1048',
+        )->toArray();
+        $reasons = array_column($result['blockers'], 'reason');
+
+        $this->assertSame('blocked', $result['status']);
+        $this->assertContains('product_forbidden_sitemap_redirect_source_urls_present', $reasons);
+        $this->assertContains('product_forbidden_llms_noindex_urls_present', $reasons);
+    }
+
     /**
      * @return list<string>
      */
@@ -199,7 +251,7 @@ final class Career80TotalLiveAcceptancePlannerTest extends TestCase
     /**
      * @return array<string, mixed>
      */
-    private function progressiveTargetDelta(int $current, int $target, int $delta): array
+    private function progressiveTargetDelta(int $current, int $target, int $delta, ?string $targetKey = null): array
     {
         $currentSlugs = $this->slugs('current', $current);
         $deltaSlugs = $this->slugs('delta', $delta);
@@ -207,6 +259,7 @@ final class Career80TotalLiveAcceptancePlannerTest extends TestCase
         return [
             'schema_version' => 'career_progressive_cohort_delta_plan.v1',
             'status' => 'pass',
+            'target' => $targetKey,
             'read_only' => true,
             'writes_database' => false,
             'current_public_total' => $current,
@@ -252,6 +305,33 @@ final class Career80TotalLiveAcceptancePlannerTest extends TestCase
             'expected_rows' => $expectedRows,
             'read_only' => true,
             'writes_database' => false,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function fullVisible1048Acceptance(): array
+    {
+        return [
+            'status' => 'pass',
+            'accepted' => true,
+            'expected_rows' => 2096,
+            'target_public_total' => 1048,
+            'read_only' => true,
+            'writes_database' => false,
+            'product_surface' => [
+                'directory_member_count' => 1048,
+                'career_jobs_item_count' => 1048,
+                'detail_ready_count' => 1048,
+                'public_detail_indexable_count' => 1048,
+                'canonical_public_slug_count' => 1048,
+            ],
+            'found_published' => 2096,
+            'release_gate' => [
+                'pass_count' => 2096,
+                'blocked_count' => 0,
+            ],
         ];
     }
 }

@@ -128,16 +128,20 @@ final class Career80TotalLiveAcceptancePlanner
 
     private function completeAction(string $target): string
     {
-        return $target === 'career_80_total'
-            ? '80_TOTAL_LIVE_ACCEPTANCE_COMPLETE'
-            : 'PROGRESSIVE_LIVE_ACCEPTANCE_COMPLETE';
+        return match ($target) {
+            'career_80_total' => '80_TOTAL_LIVE_ACCEPTANCE_COMPLETE',
+            'detail_ready_1048' => 'DETAIL_READY_1048_LIVE_ACCEPTANCE_COMPLETE',
+            default => 'PROGRESSIVE_LIVE_ACCEPTANCE_COMPLETE',
+        };
     }
 
     private function runAction(string $target): string
     {
-        return $target === 'career_80_total'
-            ? 'RUN_80_TOTAL_LIVE_ACCEPTANCE_READ_ONLY'
-            : 'RUN_PROGRESSIVE_LIVE_ACCEPTANCE_READ_ONLY';
+        return match ($target) {
+            'career_80_total' => 'RUN_80_TOTAL_LIVE_ACCEPTANCE_READ_ONLY',
+            'detail_ready_1048' => 'RUN_DETAIL_READY_1048_LIVE_ACCEPTANCE_READ_ONLY',
+            default => 'RUN_PROGRESSIVE_LIVE_ACCEPTANCE_READ_ONLY',
+        };
     }
 
     /**

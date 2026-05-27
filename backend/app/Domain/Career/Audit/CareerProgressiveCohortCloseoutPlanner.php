@@ -55,7 +55,7 @@ final class CareerProgressiveCohortCloseoutPlanner
             'apply_allowed' => false,
             'rollout_allowed' => false,
             'live_crawl_executed' => false,
-            'target' => $this->target($targetPublicTotal),
+            'target' => $this->target($targetPublicTotal, $liveAcceptance),
             'target_public_total' => $targetPublicTotal,
             'baseline_count' => $baselineCount,
             'delta_count' => $deltaCount,
@@ -185,8 +185,16 @@ final class CareerProgressiveCohortCloseoutPlanner
         return array_values(array_filter($sidecars, static fn (mixed $sidecar): bool => is_array($sidecar)));
     }
 
-    private function target(int $targetPublicTotal): string
+    /**
+     * @param  array<string, mixed>  $liveAcceptance
+     */
+    private function target(int $targetPublicTotal, array $liveAcceptance): string
     {
+        $target = trim((string) ($liveAcceptance['target'] ?? ''));
+        if ($targetPublicTotal === 1048 && $target === 'detail_ready_1048') {
+            return 'detail_ready_1048';
+        }
+
         return 'career_'.$targetPublicTotal.'_total';
     }
 
@@ -196,6 +204,7 @@ final class CareerProgressiveCohortCloseoutPlanner
             80 => '300_READINESS_1',
             300 => '800_READINESS_1',
             800 => '2786_READINESS_1',
+            1048 => 'CAREER_DETAIL_READY_1048_CLOSEOUT_COMPLETE',
             2786 => 'CAREER_2786_FINAL_CLOSEOUT_COMPLETE',
             default => 'NEXT_PROGRESSIVE_READINESS',
         };

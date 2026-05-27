@@ -2,6 +2,8 @@
 
 Career public-resolution accounting and product-visible publication are separate claims.
 
+For the `detail_ready_1048` program, detail-ready candidate accounting may prove that 1048 slugs are eligible for publication planning. It does not prove that all 1048 are visible in the public career directory, jobs API, sitemap, `llms`, or detail pages.
+
 For the final `2786` Career program, partition accounting may prove that every source row has a governed resolution. It does not prove that every source row is visible in the public career directory or has a viewable detail page.
 
 ## Claim scopes
@@ -18,8 +20,9 @@ For the final `2786` Career program, partition accounting may prove that every s
 - career jobs index item count equals the target total;
 - detail-ready and `public_detail_indexable_count` equal the target total;
 - published locale rows and release-gate pass rows equal `target_public_total * locale_count`.
+- sitemap, `llms`, and `llms-full` have zero noindex, 404, or redirect-source URLs.
 
-Only `product_visible_detail_publication` may support a product claim that 2786 occupations are visible with detail pages.
+Only `product_visible_detail_publication` may support a product claim that the target occupations are visible with detail pages.
 
 ## Runtime artifact field
 

@@ -66,6 +66,22 @@ final class CareerProgressiveCohortCloseoutPlannerTest extends TestCase
         $this->assertSame('product_visible_detail_publication', data_get($result, 'acceptance_summary.full_visible_publication_gate.product_claim.safe_claim_scope'));
     }
 
+    public function test_closes_out_detail_ready_1048_cohort(): void
+    {
+        $result = (new CareerProgressiveCohortCloseoutPlanner)->closeout(
+            liveAcceptance: $this->liveAcceptance(target: 1048, baseline: 30, delta: 1018),
+            totalSlugsPath: '/tmp/career_detail_ready_1048_total_slugs.txt',
+        )->toArray();
+
+        $this->assertSame('detail_ready_1048', $result['target']);
+        $this->assertSame(1048, $result['target_public_total']);
+        $this->assertSame(30, $result['baseline_count']);
+        $this->assertSame(1018, $result['delta_count']);
+        $this->assertSame(2096, $result['expected_locale_rows']);
+        $this->assertSame('CAREER_DETAIL_READY_1048_CLOSEOUT_COMPLETE', $result['next_required_action']);
+        $this->assertTrue(data_get($result, 'acceptance_summary.full_visible_publication_gate.product_claim.visible_detail_claim_allowed'));
+    }
+
     public function test_refuses_closeout_when_acceptance_failed(): void
     {
         $artifact = $this->liveAcceptance(target: 300, baseline: 80, delta: 220);
@@ -157,6 +173,19 @@ final class CareerProgressiveCohortCloseoutPlannerTest extends TestCase
             'failures' => [],
             'sidecars' => [],
         ];
+
+        if ($target === 1048) {
+            $artifact['target'] = 'detail_ready_1048';
+            $artifact['product_surface'] = [
+                'directory_member_count' => 1048,
+                'career_jobs_item_count' => 1048,
+                'detail_ready_count' => 1048,
+                'public_detail_indexable_count' => 1048,
+                'canonical_public_slug_count' => 1048,
+            ];
+            $artifact['found_published'] = 2096;
+            $artifact['release_gate']['pass_count'] = 2096;
+        }
 
         if ($target === 2786) {
             $artifact['product_surface'] = [
