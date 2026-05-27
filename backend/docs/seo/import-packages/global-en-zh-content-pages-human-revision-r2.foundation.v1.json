@@ -1,0 +1,62 @@
+{
+  "schema_version": "global-en-zh-content-pages-human-revision-r2.foundation.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2",
+  "package_type": "foundation_revision_only",
+  "source_blocker_task": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02",
+  "source_revision_packages": [
+    "backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-01.revision.v1.json",
+    "backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-01a-foundation-governance.addendum.v1.json"
+  ],
+  "page_key": "foundation",
+  "revised_title_en": "Public-Benefit Mission and Governance",
+  "revised_description_en": "FermatMind's public-benefit mission and governance path describes youth-first assessment boundaries, clear data responsibilities, and a planned public-benefit shareholding arrangement without presenting the direction as already legally completed.",
+  "revised_h1_en": "Public-Benefit Mission and Governance",
+  "revised_body_blocks_en": [
+    {
+      "heading": "Public benefit as governance, not promotion",
+      "markdown": "FermatMind treats public-benefit work as part of long-term trust. The direction is youth-first: assessment results should not become permanent labels, hiring shortcuts, or deterministic judgments. Data boundaries should remain clear, consent-aware, and consistent with published privacy and product notices."
+    },
+    {
+      "heading": "Planned public-benefit shareholding arrangement",
+      "markdown": "FermatMind is building a planned public-benefit shareholding arrangement as part of its governance path. The purpose is to keep youth interests, clear data boundaries, and responsible assessment use inside the company's long-term operating principles. Specific implementation details require founder and legal confirmation before public statements go beyond this planned direction."
+    },
+    {
+      "heading": "Youth-first assessment boundaries",
+      "markdown": "The governance direction supports a simple product rule: assessment content should help people explore work styles, strengths, risks, and next-step questions without turning a result into a fixed identity or a single life outcome. Public-benefit language should strengthen responsible use rather than increase pressure on users."
+    },
+    {
+      "heading": "How to read this page",
+      "markdown": "This page describes a planned governance direction. It does not present that direction as already legally completed, and it should be read together with FermatMind's Terms and Privacy Policy."
+    }
+  ],
+  "removed_phrases": [
+    "registered foundation",
+    "nonprofit legal status",
+    "charity registration",
+    "donation program",
+    "grant program",
+    "formal board governance",
+    "legal fiduciary duty",
+    "exact ownership percentage",
+    "completed equity transfer",
+    "completed foundation holding"
+  ],
+  "replacement_strategy": "Removed enumerated negative disclaimers and replaced them with generalized legally-completed boundary language that does not contain exact guarded phrases or close guarded variants.",
+  "foundation_fact_state": "planned_public_benefit_shareholding",
+  "remaining_review_requirements": [
+    "founder_review",
+    "legal_review",
+    "cms_draft_update_r2"
+  ],
+  "cms_update_required": true,
+  "publish_state": "draft_revision_only",
+  "sitemap_eligible": false,
+  "llms_eligible": false,
+  "footer_eligible": false,
+  "search_channel_eligible": false,
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true
+}
