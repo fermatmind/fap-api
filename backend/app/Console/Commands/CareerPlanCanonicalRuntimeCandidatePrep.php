@@ -21,6 +21,7 @@ final class CareerPlanCanonicalRuntimeCandidatePrep extends Command
         {--truth= : Optional runtime truth JSON artifact}
         {--ledger= : Optional full release ledger JSON artifact}
         {--locales=en,zh : Comma-separated locales to prepare}
+        {--chunk-size=250 : Maximum slugs per embedded explicit slug artifact}
         {--json : Emit JSON output}
         {--output= : Optional output path for runtime candidate preparation plan JSON}';
 
@@ -38,6 +39,7 @@ final class CareerPlanCanonicalRuntimeCandidatePrep extends Command
                 locales: $this->localesOption(),
                 targetPublicTotal: $this->nullablePositiveIntOption('target-total'),
                 cohort: $this->nullableStringOption('cohort'),
+                chunkSize: $this->positiveIntOption('chunk-size', CareerRuntimeCandidatePrepPlanner::DEFAULT_CHUNK_SIZE),
             )->toArray();
 
             return $this->finish($payload, ($payload['status'] ?? null) === 'planned' ? self::SUCCESS : self::FAILURE);
@@ -83,6 +85,21 @@ final class CareerPlanCanonicalRuntimeCandidatePrep extends Command
         $raw = $this->option($name);
         if ($raw === null || trim((string) $raw) === '') {
             return null;
+        }
+
+        $value = filter_var($raw, FILTER_VALIDATE_INT);
+        if (! is_int($value) || $value < 1) {
+            throw new RuntimeException(str_replace('-', '_', $name).'_invalid');
+        }
+
+        return $value;
+    }
+
+    private function positiveIntOption(string $name, int $default): int
+    {
+        $raw = $this->option($name);
+        if ($raw === null || trim((string) $raw) === '') {
+            return $default;
         }
 
         $value = filter_var($raw, FILTER_VALIDATE_INT);

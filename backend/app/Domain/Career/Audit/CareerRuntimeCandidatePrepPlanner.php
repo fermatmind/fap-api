@@ -10,6 +10,8 @@ final class CareerRuntimeCandidatePrepPlanner
 {
     public const SCHEMA_VERSION = 'career_runtime_candidate_prep_plan.v1';
 
+    public const DEFAULT_CHUNK_SIZE = 250;
+
     /**
      * @param  array<string, mixed>  $targetDeltaPlan
      * @param  array<string, mixed>|null  $projection
@@ -25,13 +27,16 @@ final class CareerRuntimeCandidatePrepPlanner
         array $locales = ['en', 'zh'],
         ?int $targetPublicTotal = null,
         ?string $cohort = null,
+        int $chunkSize = self::DEFAULT_CHUNK_SIZE,
     ): CareerRuntimeCandidatePrepResult {
         $deltaSlugs = $this->deltaSlugs($targetDeltaPlan);
         $locales = CareerRuntimeArtifactRefreshPlanner::normalizeLocaleList($locales, 'locale');
+        $chunkSize = $this->chunkSize($chunkSize);
         $artifactTargetPublicTotal = $this->artifactTargetPublicTotal($targetDeltaPlan);
         $currentPublicTotal = $this->artifactCurrentPublicTotal($targetDeltaPlan);
         $targetPublicTotal ??= $artifactTargetPublicTotal ?? 80;
         $cohort = $this->cohortValue($cohort, $targetPublicTotal, $currentPublicTotal);
+        $targetAuthority = $this->targetAuthority($targetDeltaPlan);
 
         $projectionBySlugLocale = $this->rowsBySlugLocale($this->artifactRows($projection, ['items', 'rows']));
         $truthBySlugLocale = $this->rowsBySlugLocale($this->artifactRows($truth, ['items', 'rows']));
@@ -115,8 +120,9 @@ final class CareerRuntimeCandidatePrepPlanner
             $slugRows[] = $slugEvidence;
         }
 
-        $blockers = $this->blockers($targetDeltaPlan, $deltaSlugs, $targetPublicTotal, $artifactTargetPublicTotal);
+        $blockers = $this->blockers($targetDeltaPlan, $deltaSlugs, $targetPublicTotal, $artifactTargetPublicTotal, $targetAuthority);
         $status = $blockers === [] ? 'planned' : 'blocked';
+        $chunkedSlugArtifacts = $this->chunkedSlugArtifacts($deltaSlugs, $locales, $cohort, $targetPublicTotal, $chunkSize);
 
         return new CareerRuntimeCandidatePrepResult([
             'schema_version' => self::SCHEMA_VERSION,
@@ -132,6 +138,8 @@ final class CareerRuntimeCandidatePrepPlanner
             'expected_delta_locale_rows' => count($deltaSlugs) * count($locales),
             'planned_candidate_rows_count' => count($plannedRows),
             'planned_candidate_rows' => $plannedRows,
+            'target_authority' => $targetAuthority,
+            'chunked_slug_artifacts' => $chunkedSlugArtifacts,
             'slug_rows' => $slugRows,
             'context_summary' => [
                 'ledger_member_missing_count' => count(array_unique($missingLedger)),
@@ -164,6 +172,7 @@ final class CareerRuntimeCandidatePrepPlanner
     {
         $slugs = $targetDeltaPlan['recommended_rollout_delta_slugs']
             ?? $targetDeltaPlan['delta_promotion_slugs']
+            ?? data_get($targetDeltaPlan, 'ready_not_public_1018.slugs')
             ?? $targetDeltaPlan['slugs']
             ?? null;
 
@@ -341,10 +350,75 @@ final class CareerRuntimeCandidatePrepPlanner
 
     /**
      * @param  array<string, mixed>  $targetDeltaPlan
+     * @return array<string, mixed>
+     */
+    private function targetAuthority(array $targetDeltaPlan): array
+    {
+        $embedded = data_get($targetDeltaPlan, 'target_authority');
+        if (is_array($embedded) && ! array_is_list($embedded)) {
+            return $embedded;
+        }
+
+        if (($targetDeltaPlan['target_key'] ?? null) === CareerDetailReadyTargetAuthority::TARGET_KEY) {
+            return (new CareerDetailReadyTargetAuthority)->target();
+        }
+
+        return [
+            'target_key' => $targetDeltaPlan['target_key'] ?? null,
+            'candidate_prep_apply_allowed' => false,
+        ];
+    }
+
+    /**
+     * @param  list<string>  $deltaSlugs
+     * @param  list<string>  $locales
+     * @return list<array<string, mixed>>
+     */
+    private function chunkedSlugArtifacts(array $deltaSlugs, array $locales, string $cohort, int $targetPublicTotal, int $chunkSize): array
+    {
+        $chunks = array_chunk($deltaSlugs, $chunkSize);
+        $artifacts = [];
+
+        foreach ($chunks as $index => $chunk) {
+            $payload = [
+                'schema_version' => 'career_runtime_candidate_prep_slug_chunk.v1',
+                'target' => $cohort,
+                'target_public_total' => $targetPublicTotal,
+                'chunk_index' => $index + 1,
+                'chunk_count' => count($chunks),
+                'slug_count' => count($chunk),
+                'locales' => $locales,
+                'expected_locale_rows' => count($chunk) * count($locales),
+                'slugs' => array_values($chunk),
+                'writes_database' => false,
+                'apply_allowed' => false,
+            ];
+
+            $encoded = json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            $artifacts[] = [
+                ...$payload,
+                'sha256' => hash('sha256', $encoded),
+            ];
+        }
+
+        return $artifacts;
+    }
+
+    private function chunkSize(int $chunkSize): int
+    {
+        if ($chunkSize < 1) {
+            throw new RuntimeException('chunk_size_invalid');
+        }
+
+        return $chunkSize;
+    }
+
+    /**
+     * @param  array<string, mixed>  $targetDeltaPlan
      * @param  list<string>  $deltaSlugs
      * @return list<array<string, mixed>>
      */
-    private function blockers(array $targetDeltaPlan, array $deltaSlugs, int $targetPublicTotal, ?int $artifactTargetPublicTotal): array
+    private function blockers(array $targetDeltaPlan, array $deltaSlugs, int $targetPublicTotal, ?int $artifactTargetPublicTotal, array $targetAuthority): array
     {
         $blockers = [];
         if (($targetDeltaPlan['status'] ?? null) !== 'pass') {
@@ -377,6 +451,106 @@ final class CareerRuntimeCandidatePrepPlanner
             ];
         }
 
+        if (($targetDeltaPlan['target_key'] ?? data_get($targetAuthority, 'target_key')) === CareerDetailReadyTargetAuthority::TARGET_KEY) {
+            if ($targetPublicTotal !== CareerDetailReadyTargetAuthority::TARGET_PUBLIC_TOTAL) {
+                $blockers[] = [
+                    'reason' => 'detail_ready_1048_target_public_total_mismatch',
+                    'message' => 'detail_ready_1048 candidate preparation must target exactly 1048 public detail pages.',
+                    'evidence' => [
+                        'requested' => $targetPublicTotal,
+                        'expected' => CareerDetailReadyTargetAuthority::TARGET_PUBLIC_TOTAL,
+                    ],
+                ];
+            }
+
+            if (count($deltaSlugs) !== CareerDetailReadyTargetAuthority::READY_NOT_PUBLIC_DELTA) {
+                $blockers[] = [
+                    'reason' => 'detail_ready_1048_delta_count_mismatch',
+                    'message' => 'detail_ready_1048 candidate preparation must preserve the 1018 ready-not-public delta.',
+                    'evidence' => [
+                        'actual' => count($deltaSlugs),
+                        'expected' => CareerDetailReadyTargetAuthority::READY_NOT_PUBLIC_DELTA,
+                    ],
+                ];
+            }
+        }
+
+        $blockedSets = [
+            'manual_hold' => $this->slugSetAtAny($targetDeltaPlan, [
+                'manual_hold.ready_slugs',
+                'manual_hold.slugs',
+            ]),
+            'review_needed' => $this->slugSetAtAny($targetDeltaPlan, [
+                'review_needed.slugs',
+                'review_needed.ready_slugs',
+            ]),
+            'family_handoff' => $this->slugSetAtAny($targetDeltaPlan, [
+                'family_handoff.slugs',
+                'family_handoff.ready_slugs',
+            ]),
+            'blocked' => $this->slugSetAtAny($targetDeltaPlan, [
+                'blocked.slugs',
+                'blocked.ready_slugs',
+            ]),
+            'cn_proxy' => $this->slugSetAtAny($targetDeltaPlan, [
+                'cn_proxy.slugs',
+                'cn_proxy.ready_slugs',
+                'cn_proxy_policy_asset.slugs',
+            ]),
+        ];
+
+        foreach ($blockedSets as $reason => $slugs) {
+            $intersect = array_values(array_intersect($deltaSlugs, $slugs));
+            if ($intersect === []) {
+                continue;
+            }
+
+            $blockers[] = [
+                'reason' => 'delta_contains_'.$reason.'_slugs',
+                'message' => 'Runtime candidate preparation cannot include gated '.$reason.' slugs.',
+                'evidence' => [
+                    'count' => count($intersect),
+                    'sample_slugs' => array_slice($intersect, 0, 20),
+                ],
+            ];
+        }
+
+        $manualHoldPolicySlugs = data_get($targetAuthority, 'manual_hold_policy.slugs');
+        if (is_array($manualHoldPolicySlugs) && array_is_list($manualHoldPolicySlugs)) {
+            $manualHoldIntersect = array_values(array_intersect(
+                $deltaSlugs,
+                $this->normalizedUniqueStrings($manualHoldPolicySlugs, 'manual_hold_policy_slug', allowEmpty: true)
+            ));
+
+            if ($manualHoldIntersect !== []) {
+                $blockers[] = [
+                    'reason' => 'delta_contains_manual_hold_policy_slugs',
+                    'message' => 'Runtime candidate preparation cannot include manual-hold policy slugs without an explicit release decision.',
+                    'evidence' => [
+                        'count' => count($manualHoldIntersect),
+                        'sample_slugs' => array_slice($manualHoldIntersect, 0, 20),
+                    ],
+                ];
+            }
+        }
+
         return $blockers;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @param  list<string>  $paths
+     * @return list<string>
+     */
+    private function slugSetAtAny(array $payload, array $paths): array
+    {
+        foreach ($paths as $path) {
+            $value = data_get($payload, $path);
+            if (is_array($value) && array_is_list($value)) {
+                return $this->normalizedUniqueStrings($value, str_replace('.', '_', $path), allowEmpty: true);
+            }
+        }
+
+        return [];
     }
 }

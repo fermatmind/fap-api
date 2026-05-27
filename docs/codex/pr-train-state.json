@@ -28929,7 +28929,7 @@
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1": {
-    "status": "pr_open",
+    "status": "merged",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-target-authority-1",
     "base": "main",
@@ -28937,11 +28937,11 @@
       "AUDIT-CAREER-DETAIL-READY-1048-SCAN-1"
     ],
     "title": "fix(api): define career detail-ready 1048 authority",
-    "commit_sha": "2207629e257c9544a6d1ab240025747771065e04",
+    "commit_sha": "b55c3668fc4419c8502ca4b7abcfe93acb71d885",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1725",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-05-27T17:32:30+08:00",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "checks": {
       "local": {
@@ -28971,13 +28971,15 @@
         "outside_scope": []
       },
       "github": {
-        "status": "failed_then_scoped_fix_applied",
+        "status": "passed",
         "failed_checks": [
           "verify-mbti-legacy",
           "verify-mbti-v2"
         ],
         "failure_reason": "BigFive runtime freeze classifier did not yet classify backend/app/Domain/Career/Audit/CareerDetailReadyTargetAuthority.php as Career detail-ready 1048 audit/authority scope.",
-        "fix": "Extended the existing Career detail-ready 1048 audit classifier and focused guard test to include CareerDetailReadyTargetAuthority.php; updated PR manifest allowed paths and validation command."
+        "fix": "Extended the existing Career detail-ready 1048 audit classifier and focused guard test to include CareerDetailReadyTargetAuthority.php; updated PR manifest allowed paths and validation command.",
+        "head_sha": "f8286724ed7ce409121199c99d78361ff445a9bd",
+        "merge_state": "CLEAN"
       }
     },
     "history": [
@@ -29010,11 +29012,17 @@
         "at": "2026-05-27T17:18:30+08:00",
         "status": "github_checks_failed_scoped_fix_applied",
         "summary": "GitHub MBTI checks failed because the new CareerDetailReadyTargetAuthority.php file was not classified by the Big Five runtime freeze guard. Added a scoped guard-test classifier update and reran focused tests, route list, targeted Pint, and backend MBTI CI locally."
+      },
+      {
+        "at": "2026-05-27T17:32:30+08:00",
+        "status": "merged",
+        "summary": "PR #1725 squash-merged; origin/main contains b55c3668fc4419c8502ca4b7abcfe93acb71d885; remote task branch deleted; no post_merge_cleanup.sh exists in fap-api."
       }
-    ]
+    ],
+    "local_cleanup_note": "scripts/post_merge_cleanup.sh not present in fap-api; local main fast-forwarded to origin/main and task branch was not present locally after merge."
   },
   "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1": {
-    "status": "planned",
+    "status": "github_checks_green",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-candidate-prep-1",
     "base": "main",
@@ -29022,14 +29030,114 @@
       "REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1"
     ],
     "title": "fix(api): plan career detail-ready 1018 candidate prep",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "b7ddae6de5feb950b46ec89bae64e7029e26fbd2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1726",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "checks": {},
-    "history": []
+    "checks": {
+      "local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter=CareerDetailReady --no-ansi",
+          "cd backend && php artisan test --filter=CareerRuntimeCandidate --no-ansi",
+          "cd backend && php artisan test tests/Feature/Console/CareerPlanCanonicalRuntimeCandidatePrepCommandTest.php --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "cd backend && vendor/bin/pint --test",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        ],
+        "notes": "The MBTI CI chain regenerated BIG5_OCEAN compiled artifacts as a local side effect; those generated diffs were restored because they are outside this PR scope."
+      },
+      "scope": {
+        "status": "passed",
+        "changed_files": [
+          "backend/app/Console/Commands/CareerPlanCanonicalRuntimeCandidatePrep.php",
+          "backend/app/Domain/Career/Audit/CareerRuntimeCandidatePrepPlanner.php",
+          "backend/docs/career/audits/runtime_candidate_prep.md",
+          "backend/tests/Feature/Console/CareerPlanCanonicalRuntimeCandidatePrepCommandTest.php",
+          "backend/tests/Unit/Domain/Career/Audit/CareerRuntimeCandidatePrepPlannerTest.php",
+          "docs/codex/pr-train-state.json"
+        ],
+        "outside_scope": []
+      },
+      "github": {
+        "status": "passed",
+        "head_sha": "b7ddae6de5feb950b46ec89bae64e7029e26fbd2",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "Semgrep blocking secrets",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "CLEAN",
+        "failure_reason": null,
+        "external_blocker_resolved_by": "https://github.com/fermatmind/fap-api/pull/1727",
+        "merge_blocked": false,
+        "train_progression_blocked": false
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T17:32:30+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Started detail_ready_1048 runtime candidate preparation planning PR from latest main after target authority merge."
+      },
+      {
+        "at": "2026-05-27T17:38:11+08:00",
+        "status": "local_checks_passed",
+        "summary": "CareerDetailReady, CareerRuntimeCandidate, focused command tests, route list, migrate pretend, full Pint, backend MBTI CI, diff check, and JSON/YAML parse passed locally."
+      },
+      {
+        "at": "2026-05-27T17:38:11+08:00",
+        "status": "scope_validation_passed",
+        "summary": "Changed files are within the candidate-prep PR allowed paths; generated BIG5_OCEAN compiled artifacts were restored as out-of-scope CI side effects."
+      },
+      {
+        "at": "2026-05-27T17:38:41+08:00",
+        "status": "local_commit_created",
+        "summary": "Created local commit bd3b804222d5dc58be809e3c3faed518f6e7298f for detail-ready 1018 runtime candidate prep planning."
+      },
+      {
+        "at": "2026-05-27T17:40:09+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1726 for detail_ready_1048 runtime candidate preparation planning."
+      },
+      {
+        "at": "2026-05-27T17:43:47+08:00",
+        "status": "github_checks_failed",
+        "summary": "Required GitHub supply-chain check failed on Composer audit advisories external to this Career planner PR scope; stopping train before merge or next PR."
+      },
+      {
+        "at": "2026-05-27T18:21:24+08:00",
+        "status": "external_blocker_resolved",
+        "summary": "Merged sidecar PR #1727 to clear the required Symfony Composer audit blocker."
+      },
+      {
+        "at": "2026-05-27T18:29:06+08:00",
+        "status": "github_checks_green",
+        "summary": "After rebasing onto origin/main with PR #1727, PR #1726 required GitHub checks passed and merge state is CLEAN."
+      }
+    ],
+    "sidecar_blockers": [
+      {
+        "at": "2026-05-27T17:43:47+08:00",
+        "kind": "required_github_check_failure_external_to_scope",
+        "check": "supply-chain",
+        "summary": "Composer audit fails on Symfony advisories reported 2026-05-26; resolving requires dependency/security scope, not Career candidate-prep planner scope.",
+        "advisories": [
+          "CVE-2026-48761",
+          "CVE-2026-48760",
+          "CVE-2026-48736",
+          "CVE-2026-48784"
+        ]
+      }
+    ]
   },
   "REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1": {
     "status": "planned",

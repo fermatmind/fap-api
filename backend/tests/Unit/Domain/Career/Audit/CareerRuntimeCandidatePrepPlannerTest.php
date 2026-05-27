@@ -71,6 +71,89 @@ final class CareerRuntimeCandidatePrepPlannerTest extends TestCase
         $this->assertSame(3972, $full['expected_delta_locale_rows']);
     }
 
+    public function test_plans_detail_ready_1048_delta_from_publication_scan_with_chunks(): void
+    {
+        $slugs = $this->slugs('ready', 1018);
+
+        $payload = (new CareerRuntimeCandidatePrepPlanner)->plan(
+            targetDeltaPlan: [
+                'schema_version' => 'career_detail_ready_publication_candidates.v1',
+                'status' => 'pass',
+                'target_key' => 'detail_ready_1048',
+                'current_public_total' => 30,
+                'target_public_total' => 1048,
+                'ready_not_public_1018' => [
+                    'count' => 1018,
+                    'slugs' => $slugs,
+                ],
+                'manual_hold' => [
+                    'ready_slugs' => [],
+                ],
+            ],
+            targetPublicTotal: 1048,
+            cohort: 'detail_ready_1048',
+            chunkSize: 400,
+        )->toArray();
+
+        $this->assertSame('planned', $payload['status']);
+        $this->assertSame('detail_ready_1048', $payload['target']);
+        $this->assertSame(30, $payload['current_public_total']);
+        $this->assertSame(1048, $payload['target_public_total']);
+        $this->assertSame(1018, $payload['delta_slug_count']);
+        $this->assertSame(2036, $payload['expected_delta_locale_rows']);
+        $this->assertSame('detail_ready_1048', $payload['target_authority']['target_key']);
+        $this->assertCount(3, $payload['chunked_slug_artifacts']);
+        $this->assertSame([400, 400, 218], array_column($payload['chunked_slug_artifacts'], 'slug_count'));
+        $this->assertFalse($payload['chunked_slug_artifacts'][0]['writes_database']);
+        $this->assertFalse($payload['chunked_slug_artifacts'][0]['apply_allowed']);
+    }
+
+    public function test_detail_ready_1048_blocks_gated_slugs(): void
+    {
+        $slugs = $this->slugs('ready', 1017);
+        $slugs[] = 'software-developers';
+
+        $payload = (new CareerRuntimeCandidatePrepPlanner)->plan(
+            targetDeltaPlan: [
+                'schema_version' => 'career_detail_ready_publication_candidates.v1',
+                'status' => 'pass',
+                'target_key' => 'detail_ready_1048',
+                'current_public_total' => 30,
+                'target_public_total' => 1048,
+                'ready_not_public_1018' => [
+                    'count' => 1018,
+                    'slugs' => $slugs,
+                ],
+                'manual_hold' => [
+                    'ready_slugs' => ['software-developers'],
+                ],
+                'review_needed' => [
+                    'slugs' => ['ready-001'],
+                ],
+                'family_handoff' => [
+                    'slugs' => ['ready-002'],
+                ],
+                'blocked' => [
+                    'slugs' => ['ready-003'],
+                ],
+                'cn_proxy' => [
+                    'slugs' => ['ready-004'],
+                ],
+            ],
+            targetPublicTotal: 1048,
+            cohort: 'detail_ready_1048',
+        )->toArray();
+
+        $this->assertSame('blocked', $payload['status']);
+        $reasons = array_column($payload['blockers'], 'reason');
+        $this->assertContains('delta_contains_manual_hold_slugs', $reasons);
+        $this->assertContains('delta_contains_manual_hold_policy_slugs', $reasons);
+        $this->assertContains('delta_contains_review_needed_slugs', $reasons);
+        $this->assertContains('delta_contains_family_handoff_slugs', $reasons);
+        $this->assertContains('delta_contains_blocked_slugs', $reasons);
+        $this->assertContains('delta_contains_cn_proxy_slugs', $reasons);
+    }
+
     public function test_blocks_target_delta_plan_that_did_not_pass(): void
     {
         $payload = (new CareerRuntimeCandidatePrepPlanner)->plan(
@@ -151,6 +234,8 @@ final class CareerRuntimeCandidatePrepPlannerTest extends TestCase
             'expected_delta_locale_rows',
             'planned_candidate_rows_count',
             'planned_candidate_rows',
+            'target_authority',
+            'chunked_slug_artifacts',
             'slug_rows',
             'context_summary',
             'context_slug_sets',

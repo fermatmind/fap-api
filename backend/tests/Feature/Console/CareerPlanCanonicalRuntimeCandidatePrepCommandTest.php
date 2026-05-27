@@ -88,6 +88,45 @@ final class CareerPlanCanonicalRuntimeCandidatePrepCommandTest extends TestCase
         $this->assertSame(440, $payload['planned_candidate_rows_count']);
     }
 
+    public function test_generates_detail_ready_1048_prep_plan_from_publication_scan_with_chunk_guard(): void
+    {
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeDetailReadyScan($this->slugs('ready', 1018)),
+            '--target-total' => 1048,
+            '--cohort' => 'detail_ready_1048',
+            '--chunk-size' => 500,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('planned', $payload['status']);
+        $this->assertSame('detail_ready_1048', $payload['target']);
+        $this->assertSame(30, $payload['current_public_total']);
+        $this->assertSame(1048, $payload['target_public_total']);
+        $this->assertSame(1018, $payload['delta_slug_count']);
+        $this->assertSame(2036, $payload['expected_locale_rows']);
+        $this->assertSame([500, 500, 18], array_column($payload['chunked_slug_artifacts'], 'slug_count'));
+        $this->assertFalse($payload['chunked_slug_artifacts'][0]['apply_allowed']);
+    }
+
+    public function test_detail_ready_1048_blocks_manual_hold_slug(): void
+    {
+        $slugs = $this->slugs('ready', 1017);
+        $slugs[] = 'software-developers';
+
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeDetailReadyScan($slugs, manualHoldSlugs: ['software-developers']),
+            '--target-total' => 1048,
+            '--cohort' => 'detail_ready_1048',
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertContains('delta_contains_manual_hold_slugs', array_column($payload['blockers'], 'reason'));
+        $this->assertFalse($payload['apply_allowed']);
+    }
+
     public function test_blocks_progressive_target_total_mismatch(): void
     {
         $exitCode = $this->callCommand([
@@ -198,6 +237,28 @@ final class CareerPlanCanonicalRuntimeCandidatePrepCommandTest extends TestCase
             'delta_promotion_count' => count($slugs),
             'delta_slug_count' => count($slugs),
             'recommended_rollout_delta_slugs' => $slugs,
+        ]);
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @param  list<string>  $manualHoldSlugs
+     */
+    private function writeDetailReadyScan(array $slugs, array $manualHoldSlugs = []): string
+    {
+        return $this->writeJson('detail-ready-scan', [
+            'schema_version' => 'career_detail_ready_publication_candidates.v1',
+            'status' => 'pass',
+            'target_key' => 'detail_ready_1048',
+            'current_public_total' => 30,
+            'target_public_total' => 1048,
+            'ready_not_public_1018' => [
+                'count' => count($slugs),
+                'slugs' => $slugs,
+            ],
+            'manual_hold' => [
+                'ready_slugs' => $manualHoldSlugs,
+            ],
         ]);
     }
 
