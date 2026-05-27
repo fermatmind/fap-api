@@ -134,15 +134,23 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $this->assertNotSame('', trim((string) data_get($entjTContent, 'content_json.chapters.growth.what_energizes.title')));
         $this->assertNotSame('', trim((string) data_get($istpAContent, 'content_json.chapters.relationships.superpowers.title')));
 
-        $first = PersonalityProfileVariantCloneContent::query()->orderBy('id')->firstOrFail();
-        $slotIds = array_column((array) $first->asset_slots_json, 'slot_id');
+        $intjAClone = $this->cloneContentModelByRuntimeType('INTJ-A');
+        $slotIds = array_column((array) $intjAClone->asset_slots_json, 'slot_id');
 
         $this->assertSame(PersonalityDesktopCloneAssetSlotSupport::allowedSlotIds(), $slotIds);
         $this->assertSame(
-            0,
-            collect((array) $first->asset_slots_json)
+            7,
+            collect((array) $intjAClone->asset_slots_json)
                 ->where('status', PersonalityDesktopCloneAssetSlotSupport::STATUS_READY)
                 ->count(),
+        );
+        $this->assertSame(
+            'mbti.desktop_clone.intj-a.hero-illustration',
+            data_get($intjAClone->asset_slots_json, '0.meta.media_library_asset_key'),
+        );
+        $this->assertSame(
+            'https://assets.fermatmind.com/static/mbti/desktop-clone/intj-a/hero-illustration.svg',
+            data_get($intjAClone->asset_slots_json, '0.asset_ref.url'),
         );
 
         $this->artisan('personality:import-desktop-clone-baseline', [

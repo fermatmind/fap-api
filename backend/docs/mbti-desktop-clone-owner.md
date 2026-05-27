@@ -116,6 +116,15 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - `relationships-illustration`
 - `final-offer-illustration`
 
+当前 `zh-CN` 基线已将 32 个 fullCode × 7 个 slot 全部绑定为 `ready`：
+
+- Media Library baseline：`content_baselines/media_assets/mbti_desktop_clone_assets.v1.json`
+- Committed static assets：`backend/public/static/mbti/desktop-clone/{fullCode}/{slotId}.svg`
+- Desktop clone baseline：`content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json`
+- Public asset origin：`https://assets.fermatmind.com/static/mbti/desktop-clone/{fullCode}/{slotId}.svg`
+
+这些资产是 repo-backed system visuals，不是用户结果数据，也不是 frontend fallback。生产启用路径仍需要正常的 backend deploy / Media Library import / CDN sync 与 smoke 验证。
+
 ## 5. 继续属于 Runtime 的字段
 以下仍由结果 runtime/projection 提供，不进入 clone content owner：
 
@@ -177,7 +186,7 @@ compatibility 字段契约（当前阶段）：
 
 ## 8. 当前未覆盖
 - `en` locale backfill
-- 真实 AI 资产生成/上传与批处理
+- 人工美术级替换图与品牌视觉复审
 - runtime personalization（`selection_fingerprint` / `evidence` / `adaptive` / `memory`）
 
 ## 9. 后续 hard convergence 前置条件

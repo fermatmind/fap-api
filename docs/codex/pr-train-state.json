@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T23:38:00+08:00",
+  "updated_at": "2026-05-28T00:23:36+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -20853,6 +20853,101 @@
           "at": "2026-05-27T00:00:00+08:00",
           "event": "ci_failure_fixed_locally",
           "details": "GitHub verify-mbti-legacy and verify-mbti-v2 failed because the Big Five runtime freeze guard flagged the scoped article metadata backfill migration. Added a narrow classifier allowlist and regression test for this migration; BigFiveResultPageV2CoreBodyPreviewTest now passes locally."
+        }
+      ]
+    },
+    "MBTI-DESKTOP-CLONE-MEDIA-ASSETS-01": {
+      "id": "MBTI-DESKTOP-CLONE-MEDIA-ASSETS-01",
+      "repo": "fap-api",
+      "branch": "codex/mbti-desktop-clone-media-assets-01",
+      "base": "main",
+      "status": "local_validation_passed",
+      "title": "MBTI-DESKTOP-CLONE-MEDIA-ASSETS-01 MBTI desktop clone media asset baseline",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User explicitly authorized MBTI-DESKTOP-CLONE-MEDIA-ASSETS-01 manifest/state updates for the current PR only."
+        },
+        "asset_baseline": {
+          "status": "pass",
+          "evidence": "Generated 224 static SVG assets and 224 Media Library baseline rows for 32 MBTI fullCode variants x 7 desktop clone asset slots."
+        },
+        "focused_tests": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=PersonalityDesktopCloneBaselineImportTest --no-ansi",
+            "cd backend && php artisan test --filter=PersonalityDesktopCloneMediaAssetBaselineTest --no-ansi",
+            "cd backend && php artisan test --filter=MediaLibraryPublicApiTest --no-ansi",
+            "cd backend && php artisan test --filter=PersonalityDesktopClonePublicApiTest --no-ansi",
+            "cd backend && php artisan test --filter=PersonalityDesktopCloneAssetSlotSupportTest --no-ansi"
+          ],
+          "evidence": "All focused tests exited 0. PHPUnit reported warning-marked output in the isolated environment, but no failures occurred."
+        },
+        "common_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json >/dev/null",
+            "python3 -m json.tool content_baselines/media_assets/mbti_desktop_clone_assets.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "evidence": "route:list, Pint, composer validate/audit, JSON/YAML parse, and diff checks passed locally."
+        },
+        "scope": {
+          "status": "pass",
+          "allowed_files": [
+            "backend/docs/mbti-desktop-clone-owner.md",
+            "backend/public/static/mbti/desktop-clone/**",
+            "backend/tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php",
+            "backend/tests/Feature/PersonalityCms/PersonalityDesktopCloneBaselineImportTest.php",
+            "backend/tests/Feature/PersonalityCms/PersonalityDesktopCloneMediaAssetBaselineTest.php",
+            "content_baselines/media_assets/mbti_desktop_clone_assets.v1.json",
+            "content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json",
+            "docs/codex/pr-train.yaml",
+            "docs/codex/pr-train-state.json"
+          ],
+          "evidence": "Changes are confined to MBTI desktop clone media baselines, static repo-backed assets, focused tests, owner documentation, and current PR ledger metadata."
+        },
+        "github_required_checks": {
+          "status": "pending",
+          "evidence": "PR not opened yet."
+        }
+      },
+      "scope": {
+        "cms_mutation": false,
+        "media_upload": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "fap_web_modified": false,
+        "frontend_fallback_authority": false,
+        "paid_content_gate_change": false,
+        "repo_backed_media_baseline_only": true
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": "DEPLOY-READINESS",
+      "events": [
+        {
+          "at": "2026-05-28T00:23:36+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered current MBTI desktop clone media asset baseline PR after explicit user authorization."
+        },
+        {
+          "at": "2026-05-28T00:23:36+08:00",
+          "status": "local_validation_passed",
+          "summary": "Generated CDN-ready repo-backed Media Library baseline and static SVG assets for 224 MBTI desktop clone slots; focused tests and common validation passed locally."
         }
       ]
     }
