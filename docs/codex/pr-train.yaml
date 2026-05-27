@@ -5216,6 +5216,263 @@ prs:
       github_checks_required: true
       squash: true
 
+  - id: AUDIT-CAREER-DETAIL-READY-1048-SCAN-1
+    repo: fap-api
+    branch: codex/audit-career-detail-ready-1048-scan-1
+    base: main
+    title: "fix(api): audit career detail-ready 1048 candidates"
+    name: "Audit all currently detail-ready Career publication candidates"
+    train_scope: career_detail_ready_1048_publication
+    scope:
+      - Add a read-only scanner and JSON artifact contract for current detail-ready Career publication candidates.
+      - Classify current_public_30, ready_not_public_1018, docx_ready, display_asset_ready, compiled_ready, manual_hold, blocked, review_needed, and family_handoff evidence.
+      - Keep the scan separate from candidate preparation, rollout, deploy, CMS mutation, and fap-web fallback authority.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerAuditDetailReady1048Candidates.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Domain/Career/Audit/**
+      - backend/tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish 2289 excluded/raw assets.
+      - Publish all 2786 occupations.
+      - Generate pSEO pages.
+      - Add fap-web fallback authority.
+      - Mutate production DB or CMS.
+      - Run candidate prep apply, rollout apply, deploy, backfill, rollback, or quarantine.
+      - Force-enable software-developers.
+    validation:
+      - php artisan test tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test app/Console/Commands/CareerAuditDetailReady1048Candidates.php app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by AUDIT-CAREER-DETAIL-READY-1048-SCAN-1
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+  - id: REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1
+    repo: fap-api
+    depends_on:
+      - AUDIT-CAREER-DETAIL-READY-1048-SCAN-1
+    branch: codex/repair-career-detail-ready-target-authority-1
+    base: main
+    title: "fix(api): define career detail-ready 1048 authority"
+    name: "Define detail-ready 1048 product-visible publication authority"
+    train_scope: career_detail_ready_1048_publication
+    scope:
+      - Add backend authority semantics for target detail_ready_1048.
+      - Keep detail_ready_1048 separate from 2786 partition accounting.
+      - Preserve manual hold and CN proxy policies.
+      - Add product-visible claim guardrails for 1048 detail pages.
+    allowed_paths:
+      - backend/app/Console/Commands/Career*
+      - backend/app/Domain/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run production mutation, candidate prep apply, rollout apply, deploy, backfill, rollback, or quarantine.
+      - Touch fap-web or generate pSEO pages.
+      - Weaken CN proxy or software-developers manual hold policy.
+    validation:
+      - php artisan test --filter=CareerDetailReady --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+  - id: REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1
+    branch: codex/repair-career-detail-ready-candidate-prep-1
+    base: main
+    title: "fix(api): plan career detail-ready 1018 candidate prep"
+    name: "Plan runtime candidate preparation for the detail-ready 1018 delta"
+    train_scope: career_detail_ready_1048_publication
+    scope:
+      - Extend runtime candidate preparation planning for the 1018 detail-ready delta.
+      - Support chunked explicit slug artifacts when needed.
+      - Preserve review, family, blocked, CN proxy, and manual-hold gates.
+      - Keep implementation planner/dry-run only.
+    allowed_paths:
+      - backend/app/Console/Commands/Career*
+      - backend/app/Domain/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run production candidate prep apply.
+      - Run rollout apply, deploy, backfill, rollback, quarantine, CMS mutation, or fap-web changes.
+    validation:
+      - php artisan test --filter=CareerDetailReady --no-ansi
+      - php artisan test --filter=CareerRuntimeCandidate --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+  - id: REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1
+    branch: codex/repair-career-detail-ready-runtime-artifact-refresh-1
+    base: main
+    title: "fix(api): refresh career detail-ready 1048 artifacts"
+    name: "Support candidate-aware runtime artifacts for detail-ready 1048"
+    train_scope: career_detail_ready_1048_publication
+    scope:
+      - Extend candidate-aware projection, truth, and ledger refresh for detail_ready_1048.
+      - Ensure dataset, jobs API, detail route, sitemap, llms, and llms-full consume one authority.
+      - Keep implementation read-only/planner-only without production export or apply.
+    allowed_paths:
+      - backend/app/Console/Commands/Career*
+      - backend/app/Domain/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run production artifact export/apply, rollout apply, deploy, CMS mutation, or fap-web changes.
+    validation:
+      - php artisan test --filter=CareerDetailReady --no-ansi
+      - php artisan test --filter=CareerRuntimeArtifactRefresh --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+  - id: REPAIR-CAREER-DETAIL-READY-ROLLOUT-GATE-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1
+    branch: codex/repair-career-detail-ready-rollout-gate-1
+    base: main
+    title: "fix(api): gate career detail-ready 1048 rollout"
+    name: "Add rollout manifest gate for the detail-ready 1018 delta"
+    train_scope: career_detail_ready_1048_publication
+    scope:
+      - Add rollout manifest and rollback-group support for the 1018 detail-ready delta.
+      - Reject partial promotion, unready slugs, CN proxy rows, manual holds, and stale artifacts.
+      - Keep implementation dry-run/gate-only without rollout apply.
+    allowed_paths:
+      - backend/app/Console/Commands/Career*
+      - backend/app/Domain/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run rollout apply, candidate prep apply, production mutation, deploy, CMS mutation, or fap-web changes.
+    validation:
+      - php artisan test --filter=CareerDetailReady --no-ansi
+      - php artisan test --filter=CareerDeltaRollout --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by REPAIR-CAREER-DETAIL-READY-ROLLOUT-GATE-1
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
+  - id: REPAIR-CAREER-DETAIL-READY-LIVE-ACCEPTANCE-CLOSEOUT-1
+    repo: fap-api
+    depends_on:
+      - REPAIR-CAREER-DETAIL-READY-ROLLOUT-GATE-1
+    branch: codex/repair-career-detail-ready-live-acceptance-closeout-1
+    base: main
+    title: "fix(api): accept career detail-ready 1048 closeout"
+    name: "Add live acceptance and closeout support for detail-ready 1048"
+    train_scope: career_detail_ready_1048_publication
+    scope:
+      - Add live acceptance and closeout support for target total 1048.
+      - Verify product-visible counts rather than partition accounting.
+      - Require dataset member_count, jobs item count, detail-ready count, locale-row count, sitemap, llms, and noindex/404/redirect-source consistency.
+      - Keep live crawl disabled unless separately approved.
+    allowed_paths:
+      - backend/app/Console/Commands/Career*
+      - backend/app/Domain/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Unit/Domain/Career/**
+      - backend/docs/career/audits/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run live crawl without explicit approval.
+      - Run production mutation, rollout apply, deploy, CMS mutation, Search Channel action, URL submission, or fap-web changes.
+    validation:
+      - php artisan test --filter=CareerDetailReady --no-ansi
+      - php artisan test --filter=CareerLiveAcceptance --no-ansi
+      - php artisan route:list --no-ansi
+      - vendor/bin/pint --test
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+    scope_validation:
+      continue_train_when_external_blocker:
+        - blocker is not introduced by REPAIR-CAREER-DETAIL-READY-LIVE-ACCEPTANCE-CLOSEOUT-1
+        - GitHub required checks are green
+        - scoped validation is green
+      record_external_blocker_as_sidecar: true
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
   - id: PUBLISH-API-MEDIA-ORIGIN-READYNESS
     repo: fap-api
     branch: codex/publish-api-media-origin-readyness
