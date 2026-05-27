@@ -1636,6 +1636,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_forced_choice_question_pack_translation_changes(): void
+    {
+        $changed = [
+            'backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/questions.compiled.json',
+            'backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/manifest.json',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -2583,6 +2593,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEnneagramForcedChoiceQuestionPackTranslationFile($file)) {
+                continue;
+            }
+
             if ($this->isIqReportFoundationFile($file)) {
                 continue;
             }
@@ -3312,6 +3326,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isRiasecQuestionPackTranslationFile(string $file): bool
     {
         return preg_match('#^backend/content_packs/RIASEC/v1-(?:standard-60|enhanced-140)/compiled/(?:questions\\.compiled|manifest)\\.json$#', $file) === 1;
+    }
+
+    private function isEnneagramForcedChoiceQuestionPackTranslationFile(string $file): bool
+    {
+        return preg_match('#^backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/(?:questions\\.compiled|manifest)\\.json$#', $file) === 1;
     }
 
     private function isIqReportFoundationFile(string $file): bool
