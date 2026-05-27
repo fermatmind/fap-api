@@ -28481,5 +28481,69 @@
         "summary": "Opened PR #1718 for the scoped blocked-runtime report."
       }
     ]
+  },
+  "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01": {
+    "status": "committed",
+    "repo": "fap-api",
+    "branch": "codex/global-en-zh-content-pages-controlled-publish-runtime-01",
+    "base": "main",
+    "depends_on": [
+      "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01"
+    ],
+    "title": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01 content pages controlled publish runtime",
+    "commit_sha": "4781e433fa93140a30d6af55d8cf9d787d055afb",
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "dependency_verification": {
+        "status": "passed",
+        "evidence": "Current main contains PR #1718 merge commit 1a46d72c24814c1d4ccafe26dc556fb390d585fb and the controlled publish task ended blocked_missing_official_publish_runtime."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Changed files are limited to the bounded runtime command/service, report artifacts, focused test, and current task PR-train metadata."
+      },
+      "local_validation": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter=GlobalEnZhContentPagesControlledPublishRuntime01 --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && php artisan list --no-ansi | grep -E \"content-pages:publish-controlled|content-pages\"",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-controlled-publish-runtime-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 - <<'PY' ... yaml.safe_load(...) ... PY",
+          "git diff --check",
+          "git diff --cached --check"
+        ]
+      },
+      "commit": {
+        "status": "created",
+        "sha": "4781e433fa93140a30d6af55d8cf9d787d055afb",
+        "message": "feat(content-pages): add controlled publish runtime"
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T13:16:00+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Started scoped runtime implementation from latest main in isolated worktree."
+      },
+      {
+        "at": "2026-05-27T13:04:26+08:00",
+        "status": "local_checks_passed",
+        "summary": "Implemented bounded controlled publish runtime and passed required local validations."
+      },
+      {
+        "at": "2026-05-27T13:05:44+08:00",
+        "status": "committed",
+        "summary": "Created scoped implementation commit 4781e433."
+      }
+    ]
   }
 }
