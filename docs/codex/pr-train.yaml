@@ -14968,3 +14968,44 @@ prs:
     content_generation_allowed: false
     frontend_fallback_authority: false
     next_task: DEPLOY-READINESS
+
+  - id: TAKE-EN-QUESTION-LOCALE-SCAN-00
+    repo: fap-api
+    branch: codex/take-en-question-locale-scan-00
+    base: main
+    title: "TAKE-EN-QUESTION-LOCALE-SCAN-00 take flow EN/ZH question locale scan"
+    train_scope: take_question_locale_parity
+    risk_level: p1_read_only_inventory
+    allowed_paths:
+      - backend/docs/seo/take-en-question-locale-scan-00.md
+      - backend/docs/seo/generated/take-en-question-locale-scan-00.v1.json
+      - backend/tests/Feature/SeoIntel/TakeEnQuestionLocaleScan00Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Record a read-only EN/ZH take-question locale inventory for MBTI, Big Five, RIASEC, Enneagram, IQ, EQ, Clinical Combo, and SDS.
+      - Identify backend/content-pack authority failures and affected forms without changing APIs, content packs, CMS, publish state, deploy state, Search Channel, sitemap, llms, footer, or nav.
+      - Produce the follow-up backend content-pack PR plan for MBTI, RIASEC, and Enneagram forced-choice fixes.
+    validation:
+      - cd backend && php artisan test --filter=TakeEnQuestionLocaleScan00 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/take-en-question-locale-scan-00.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    content_pack_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: MBTI-EN-QUESTIONS-PACK-PROJECTION-01

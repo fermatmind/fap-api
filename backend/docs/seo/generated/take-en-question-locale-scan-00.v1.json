@@ -1,0 +1,400 @@
+{
+  "schema_version": "take-en-question-locale-scan-00.v1",
+  "task": "TAKE-EN-QUESTION-LOCALE-SCAN-00",
+  "final_decision": "question_locale_scan_completed_ready_for_content_pack_fixes",
+  "scan_mode": "read_only_public_api_and_repo_contract_inventory",
+  "observed_at": "2026-05-27T23:11:18+08:00",
+  "no_api_mutation": true,
+  "no_cms_mutation": true,
+  "no_content_pack_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "scanned_surfaces": [
+    "public /api/v0.3/scales/{scale_code}/questions?locale=en",
+    "public /api/v0.3/scales/lookup?locale=en",
+    "backend ScalesController questions locale branches",
+    "backend content pack loaders",
+    "fap-web take clients and question normalizers"
+  ],
+  "summary": {
+    "total_cases_scanned": 12,
+    "visible_english_locale_failures": 5,
+    "visible_english_locale_passes": 7,
+    "affected_scale_codes": [
+      "MBTI",
+      "RIASEC",
+      "ENNEAGRAM"
+    ],
+    "unaffected_scale_codes": [
+      "BIG5_OCEAN",
+      "IQ_RAVEN",
+      "EQ_60",
+      "CLINICAL_COMBO_68",
+      "SDS_20"
+    ]
+  },
+  "question_locale_matrix": [
+    {
+      "scale_code": "MBTI",
+      "form_code": "mbti_93",
+      "public_slug": "mbti-personality-test-16-personality-types",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 93,
+      "visible_en_status": "fail_displayed_chinese_question_and_options",
+      "sample_displayed_text": "你经常结交新朋友。",
+      "sample_displayed_options": [
+        "非常认同",
+        "认同",
+        "不确定",
+        "不认同",
+        "非常不认同"
+      ],
+      "displayed_cjk_item_count": 93,
+      "displayed_cjk_option_count": 465,
+      "frontend_client": "QuizTakeClient",
+      "backend_authority": "QuestionsService::loadByPack via ScalesController MBTI branch",
+      "root_cause": "MBTI questions endpoint accepts locale but returns raw pack fields without locale projection; fap-web generic take client also does not pass locale for MBTI today.",
+      "required_action": "backend_mbti_locale_projection_and_fap_web_locale_contract_guard",
+      "recommended_pr": "MBTI-EN-QUESTIONS-PACK-PROJECTION-01",
+      "severity": "high"
+    },
+    {
+      "scale_code": "MBTI",
+      "form_code": "mbti_144",
+      "public_slug": "mbti-personality-test-16-personality-types",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 144,
+      "visible_en_status": "fail_displayed_chinese_question_and_options",
+      "sample_displayed_text": "你经常结交新朋友。",
+      "sample_displayed_options": [
+        "非常认同",
+        "认同",
+        "不确定",
+        "不认同",
+        "非常不认同"
+      ],
+      "displayed_cjk_item_count": 144,
+      "displayed_cjk_option_count": 720,
+      "frontend_client": "QuizTakeClient",
+      "backend_authority": "QuestionsService::loadByPack via ScalesController MBTI branch",
+      "root_cause": "MBTI questions endpoint accepts locale but returns raw pack fields without locale projection; fap-web generic take client also does not pass locale for MBTI today.",
+      "required_action": "backend_mbti_locale_projection_and_fap_web_locale_contract_guard",
+      "recommended_pr": "MBTI-EN-QUESTIONS-PACK-PROJECTION-01",
+      "severity": "high"
+    },
+    {
+      "scale_code": "BIG5_OCEAN",
+      "form_code": "big5_90",
+      "public_slug": "big-five-personality-test-ocean-model",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 90,
+      "visible_en_status": "pass_displayed_english",
+      "sample_displayed_text": "I tend to worry a lot.",
+      "sample_displayed_options": [
+        "Strongly Disagree",
+        "Disagree",
+        "Neutral",
+        "Agree",
+        "Strongly Agree"
+      ],
+      "displayed_cjk_item_count": 0,
+      "displayed_cjk_option_count": 0,
+      "frontend_client": "Big5TakeClient",
+      "backend_authority": "BigFivePackLoader locale projection",
+      "root_cause": null,
+      "required_action": "no_action",
+      "recommended_pr": null,
+      "severity": "none"
+    },
+    {
+      "scale_code": "BIG5_OCEAN",
+      "form_code": "big5_120",
+      "public_slug": "big-five-personality-test-ocean-model",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 120,
+      "visible_en_status": "pass_displayed_english",
+      "sample_displayed_text": "I tend to worry a lot.",
+      "sample_displayed_options": [
+        "Strongly Disagree",
+        "Disagree",
+        "Neutral",
+        "Agree",
+        "Strongly Agree"
+      ],
+      "displayed_cjk_item_count": 0,
+      "displayed_cjk_option_count": 0,
+      "frontend_client": "Big5TakeClient",
+      "backend_authority": "BigFivePackLoader locale projection",
+      "root_cause": null,
+      "required_action": "no_action",
+      "recommended_pr": null,
+      "severity": "none"
+    },
+    {
+      "scale_code": "RIASEC",
+      "form_code": "riasec_60",
+      "public_slug": "holland-career-interest-test-riasec",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 60,
+      "visible_en_status": "fail_displayed_chinese_question_text",
+      "sample_displayed_text": "我喜欢动手搭建、修理或改装东西。",
+      "sample_displayed_options": [
+        "Strongly dislike",
+        "Dislike",
+        "Neutral",
+        "Like",
+        "Strongly like"
+      ],
+      "displayed_cjk_item_count": 60,
+      "displayed_cjk_option_count": 0,
+      "frontend_client": "QuizTakeClient or RiasecTakeClient",
+      "backend_authority": "RiasecPackLoader questions_doc_by_locale.en",
+      "root_cause": "RIASEC English questions document exists but text_en/text display values are Chinese.",
+      "required_action": "backend_riasec_english_question_pack_translation",
+      "recommended_pr": "RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02",
+      "severity": "high"
+    },
+    {
+      "scale_code": "RIASEC",
+      "form_code": "riasec_140",
+      "public_slug": "holland-career-interest-test-riasec",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 140,
+      "visible_en_status": "fail_displayed_chinese_question_text",
+      "sample_displayed_text": "我喜欢动手搭建、修理或改装东西。",
+      "sample_displayed_options": [
+        "Strongly dislike",
+        "Dislike",
+        "Neutral",
+        "Like",
+        "Strongly like"
+      ],
+      "displayed_cjk_item_count": 140,
+      "displayed_cjk_option_count": 0,
+      "frontend_client": "QuizTakeClient or RiasecTakeClient",
+      "backend_authority": "RiasecPackLoader questions_doc_by_locale.en",
+      "root_cause": "RIASEC English questions document exists but text_en/text display values are Chinese.",
+      "required_action": "backend_riasec_english_question_pack_translation",
+      "recommended_pr": "RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02",
+      "severity": "high"
+    },
+    {
+      "scale_code": "ENNEAGRAM",
+      "form_code": "enneagram_likert_105",
+      "public_slug": "enneagram-personality-test-nine-types",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 105,
+      "visible_en_status": "pass_displayed_english",
+      "sample_displayed_text": "I usually strive to do things as perfectly as possible.",
+      "sample_displayed_options": [
+        "Strongly disagree",
+        "Disagree",
+        "Neutral",
+        "Agree",
+        "Strongly agree"
+      ],
+      "displayed_cjk_item_count": 0,
+      "displayed_cjk_option_count": 0,
+      "frontend_client": "EnneagramTakeClient",
+      "backend_authority": "EnneagramPackLoader questions_doc_by_locale.en",
+      "root_cause": null,
+      "required_action": "no_action",
+      "recommended_pr": null,
+      "severity": "none"
+    },
+    {
+      "scale_code": "ENNEAGRAM",
+      "form_code": "enneagram_forced_choice_144",
+      "public_slug": "enneagram-personality-test-nine-types",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 144,
+      "visible_en_status": "fail_displayed_chinese_forced_choice_options",
+      "sample_displayed_text": null,
+      "sample_displayed_options": [
+        "我会留意哪里还能再改进。",
+        "我会主动照顾别人的需要。"
+      ],
+      "displayed_cjk_item_count": 0,
+      "displayed_cjk_option_count": 288,
+      "frontend_client": "EnneagramTakeClient",
+      "backend_authority": "EnneagramPackLoader questions_doc_by_locale.en",
+      "root_cause": "Enneagram forced-choice English questions document exists but choice text_en/display values are Chinese.",
+      "required_action": "backend_enneagram_forced_choice_english_pack_translation",
+      "recommended_pr": "ENNEAGRAM-FC144-EN-QUESTIONS-PACK-03",
+      "severity": "medium"
+    },
+    {
+      "scale_code": "IQ_RAVEN",
+      "form_code": null,
+      "public_slug": "iq-test-intelligence-quotient-assessment",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 30,
+      "visible_en_status": "pass_displayed_english_with_zh_fallback_fields_present",
+      "sample_displayed_text": "Which option fits?",
+      "sample_displayed_options": [],
+      "displayed_cjk_item_count": 0,
+      "displayed_cjk_option_count": 0,
+      "frontend_client": "QuizTakeClient IQ normalization",
+      "backend_authority": "IQ_RAVEN questions payload with prompt_en/prompt_zh",
+      "root_cause": null,
+      "required_action": "no_action",
+      "recommended_pr": null,
+      "severity": "none"
+    },
+    {
+      "scale_code": "EQ_60",
+      "form_code": null,
+      "public_slug": "eq-test-emotional-intelligence-assessment",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 60,
+      "visible_en_status": "pass_displayed_english",
+      "sample_displayed_text": "I am very good at identifying the emotions I am feeling.",
+      "sample_displayed_options": [
+        "Strongly disagree",
+        "Disagree",
+        "Neutral",
+        "Agree",
+        "Strongly agree"
+      ],
+      "displayed_cjk_item_count": 0,
+      "displayed_cjk_option_count": 0,
+      "frontend_client": "QuizTakeClient",
+      "backend_authority": "Eq60PackLoader questions_doc_by_locale.en",
+      "root_cause": null,
+      "required_action": "no_action",
+      "recommended_pr": null,
+      "severity": "none"
+    },
+    {
+      "scale_code": "CLINICAL_COMBO_68",
+      "form_code": null,
+      "public_slug": "clinical-depression-anxiety-assessment-professional-edition",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 68,
+      "visible_en_status": "pass_displayed_english",
+      "sample_displayed_text": "Over the past two weeks, you felt unmotivated and had little interest in doing things.",
+      "sample_displayed_options": [
+        "Not at all",
+        "Several days",
+        "More than half the days",
+        "Nearly every day"
+      ],
+      "displayed_cjk_item_count": 0,
+      "displayed_cjk_option_count": 0,
+      "frontend_client": "ClinicalTakeClient",
+      "backend_authority": "ClinicalComboPackLoader questions_doc_by_locale.en",
+      "root_cause": null,
+      "required_action": "no_action",
+      "recommended_pr": null,
+      "severity": "none"
+    },
+    {
+      "scale_code": "SDS_20",
+      "form_code": null,
+      "public_slug": "sds-20",
+      "locale_requested": "en",
+      "locale_resolved": "en",
+      "question_count": 20,
+      "visible_en_status": "pass_displayed_english",
+      "sample_displayed_text": "I feel down-hearted and blue.",
+      "sample_displayed_options": [
+        "A little of the time",
+        "Some of the time",
+        "Good part of the time",
+        "Most of the time"
+      ],
+      "displayed_cjk_item_count": 0,
+      "displayed_cjk_option_count": 0,
+      "frontend_client": "ClinicalTakeClient",
+      "backend_authority": "Sds20PackLoader questions_doc_by_locale.en",
+      "root_cause": null,
+      "required_action": "no_action",
+      "recommended_pr": null,
+      "severity": "none"
+    }
+  ],
+  "frontend_contract_findings": [
+    {
+      "repo": "fap-web",
+      "file": "app/(localized)/[locale]/tests/[slug]/take/QuizTakeClient.tsx",
+      "finding": "fetchScaleQuestions currently passes locale only for RIASEC in the generic take client path.",
+      "impact": "MBTI can request the default backend locale from the frontend even after backend projection exists unless a contract guard is added.",
+      "required_action": "Add a small fap-web follow-up after backend pack fixes to pass locale for all generic scale questions requests and assert no English take page displays CJK in rendered question text."
+    }
+  ],
+  "recommended_pr_train": [
+    {
+      "id": "MBTI-EN-QUESTIONS-PACK-PROJECTION-01",
+      "repo": "fap-api",
+      "title": "MBTI English question locale projection",
+      "scope": "Fix MBTI mbti_93 and mbti_144 English question and option display fields from backend/content-pack authority.",
+      "likely_files": [
+        "backend/app/Http/Controllers/API/V0_3/ScalesController.php",
+        "backend/app/Services/Content/QuestionsService.php",
+        "content_packages/**/mbti*/**",
+        "backend/tests/**/Mbti*Question*Locale*Test.php"
+      ],
+      "required_checks": [
+        "cd backend && php artisan test --filter=MbtiQuestionLocale --no-ansi",
+        "cd backend && php artisan route:list --no-ansi",
+        "cd backend && vendor/bin/pint --test",
+        "git diff --check"
+      ]
+    },
+    {
+      "id": "RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02",
+      "repo": "fap-api",
+      "title": "RIASEC English question pack translation",
+      "scope": "Fix RIASEC riasec_60 and riasec_140 English question stems in backend/content-pack authority.",
+      "likely_files": [
+        "content_packages/**/riasec*/**",
+        "backend/app/Services/Content/RiasecPackLoader.php",
+        "backend/tests/**/Riasec*Question*Locale*Test.php"
+      ],
+      "required_checks": [
+        "cd backend && php artisan test --filter=RiasecQuestionLocale --no-ansi",
+        "cd backend && php artisan route:list --no-ansi",
+        "cd backend && vendor/bin/pint --test",
+        "git diff --check"
+      ]
+    },
+    {
+      "id": "ENNEAGRAM-FC144-EN-QUESTIONS-PACK-03",
+      "repo": "fap-api",
+      "title": "Enneagram forced-choice English question pack translation",
+      "scope": "Fix Enneagram forced-choice 144 English option texts while preserving likert_105 behavior.",
+      "likely_files": [
+        "content_packages/**/enneagram*/**",
+        "backend/app/Services/Content/EnneagramPackLoader.php",
+        "backend/tests/**/Enneagram*Question*Locale*Test.php"
+      ],
+      "required_checks": [
+        "cd backend && php artisan test --filter=EnneagramQuestionLocale --no-ansi",
+        "cd backend && php artisan route:list --no-ansi",
+        "cd backend && vendor/bin/pint --test",
+        "git diff --check"
+      ]
+    }
+  ],
+  "future_frontend_follow_up": {
+    "id": "TAKE-FRONTEND-LOCALE-CONTRACT-04",
+    "repo": "fap-web",
+    "title": "Take flow locale contract guard",
+    "scope": "Pass locale to generic scale question fetches and add frontend contract coverage; do not add frontend translation fallback content.",
+    "dependency": "Run after backend/content-pack authority fixes are merged."
+  },
+  "next_task": "MBTI-EN-QUESTIONS-PACK-PROJECTION-01"
+}
