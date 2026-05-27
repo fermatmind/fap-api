@@ -15070,6 +15070,7 @@ prs:
       - backend/content_packs/RIASEC/v1-enhanced-140/compiled/questions.compiled.json
       - backend/content_packs/RIASEC/v1-enhanced-140/compiled/manifest.json
       - backend/tests/Feature/V0_3/RiasecQuestionLocaleTranslationTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     scope:
@@ -15079,6 +15080,7 @@ prs:
     validation:
       - cd backend && php artisan test --filter=RiasecQuestionLocaleTranslation --no-ansi
       - cd backend && php artisan test --filter=RiasecAssessmentFlow --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi
       - cd backend && php artisan route:list --no-ansi
       - cd backend && vendor/bin/pint --test
       - cd backend && composer validate --strict
