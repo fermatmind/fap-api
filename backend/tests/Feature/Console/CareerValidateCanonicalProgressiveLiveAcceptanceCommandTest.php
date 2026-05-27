@@ -91,6 +91,23 @@ final class CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest extends 
         $this->assertSame(5572, $payload['expected_locale_rows']);
     }
 
+    public function test_detail_ready_1048_target_expected_rows_are_computed(): void
+    {
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeJson('target-delta', $this->progressiveTargetDelta(30, 1048, 1018, 'detail_ready_1048')),
+            '--target' => 'detail_ready_1048',
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('planned', $payload['status']);
+        $this->assertSame('detail_ready_1048', $payload['target']);
+        $this->assertSame(1048, $payload['target_public_total']);
+        $this->assertSame(2096, $payload['expected_locale_rows']);
+        $this->assertTrue(data_get($payload, 'validation.full_visible_publication_gate.required'));
+        $this->assertSame('RUN_DETAIL_READY_1048_LIVE_ACCEPTANCE_READ_ONLY', $payload['next_required_action']);
+    }
+
     public function test_passes_when_accepted_live_acceptance_artifact_is_supplied(): void
     {
         $exitCode = $this->callCommand([
@@ -209,6 +226,43 @@ final class CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest extends 
         $this->assertSame([], data_get($payload, 'validation.full_visible_publication_gate.product_claim.blocked_claims'));
     }
 
+    public function test_detail_ready_1048_live_acceptance_passes_only_with_product_visible_counts(): void
+    {
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeJson('target-delta', $this->progressiveTargetDelta(30, 1048, 1018, 'detail_ready_1048')),
+            '--target' => 'detail_ready_1048',
+            '--live-acceptance' => $this->writeJson('live-acceptance', $this->fullVisible1048Acceptance()),
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('pass', $payload['status']);
+        $this->assertTrue($payload['accepted']);
+        $this->assertSame('DETAIL_READY_1048_LIVE_ACCEPTANCE_COMPLETE', $payload['next_required_action']);
+        $this->assertSame(1048, data_get($payload, 'validation.full_visible_publication_gate.directory_member_count'));
+        $this->assertSame(2096, data_get($payload, 'validation.full_visible_publication_gate.found_published_locale_rows'));
+    }
+
+    public function test_detail_ready_1048_live_acceptance_blocks_forbidden_sitemap_llms_urls(): void
+    {
+        $artifact = $this->fullVisible1048Acceptance();
+        $artifact['product_surface']['sitemap_noindex_url_count'] = 1;
+        $artifact['product_surface']['llms_full_redirect_source_url_count'] = 1;
+
+        $exitCode = $this->callCommand([
+            '--target-delta' => $this->writeJson('target-delta', $this->progressiveTargetDelta(30, 1048, 1018, 'detail_ready_1048')),
+            '--target' => 'detail_ready_1048',
+            '--live-acceptance' => $this->writeJson('live-acceptance', $artifact),
+        ]);
+        $payload = $this->payload();
+        $reasons = array_column($payload['blockers'], 'reason');
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status']);
+        $this->assertContains('product_forbidden_sitemap_noindex_urls_present', $reasons);
+        $this->assertContains('product_forbidden_llms_full_redirect_source_urls_present', $reasons);
+    }
+
     /**
      * @param  array<string, mixed>  $options
      */
@@ -244,7 +298,7 @@ final class CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest extends 
     /**
      * @return array<string, mixed>
      */
-    private function progressiveTargetDelta(int $current, int $target, int $delta): array
+    private function progressiveTargetDelta(int $current, int $target, int $delta, ?string $targetKey = null): array
     {
         $currentSlugs = $this->slugs('current', $current);
         $deltaSlugs = $this->slugs('delta', $delta);
@@ -252,6 +306,7 @@ final class CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest extends 
         return [
             'schema_version' => 'career_progressive_cohort_delta_plan.v1',
             'status' => 'pass',
+            'target' => $targetKey,
             'read_only' => true,
             'writes_database' => false,
             'current_public_total' => $current,
@@ -319,6 +374,33 @@ final class CareerValidateCanonicalProgressiveLiveAcceptanceCommandTest extends 
             'found_published' => 5572,
             'release_gate' => [
                 'pass_count' => 5572,
+                'blocked_count' => 0,
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function fullVisible1048Acceptance(): array
+    {
+        return [
+            'status' => 'pass',
+            'accepted' => true,
+            'expected_rows' => 2096,
+            'target_public_total' => 1048,
+            'read_only' => true,
+            'writes_database' => false,
+            'product_surface' => [
+                'directory_member_count' => 1048,
+                'career_jobs_item_count' => 1048,
+                'detail_ready_count' => 1048,
+                'public_detail_indexable_count' => 1048,
+                'canonical_public_slug_count' => 1048,
+            ],
+            'found_published' => 2096,
+            'release_gate' => [
+                'pass_count' => 2096,
                 'blocked_count' => 0,
             ],
         ];

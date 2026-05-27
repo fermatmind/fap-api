@@ -63,6 +63,26 @@ final class CareerCloseoutCanonicalProgressiveCohortCommandTest extends TestCase
         $this->assertFileExists($output);
     }
 
+    public function test_writes_detail_ready_1048_closeout_artifact(): void
+    {
+        $output = $this->tempPath('closeout-1048');
+        $exitCode = $this->callCommand([
+            '--live-acceptance' => $this->writeJson('live-acceptance', $this->liveAcceptance(1048, 30, 1018)),
+            '--baseline-slugs' => '/tmp/career_current_public_30_slugs.txt',
+            '--delta-slugs' => '/tmp/career_detail_ready_1048_delta_slugs.txt',
+            '--total-slugs' => '/tmp/career_detail_ready_1048_total_slugs.txt',
+            '--output' => $output,
+        ]);
+        $payload = $this->payload();
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('detail_ready_1048', $payload['target']);
+        $this->assertSame(1048, $payload['target_public_total']);
+        $this->assertSame(2096, $payload['expected_locale_rows']);
+        $this->assertSame('CAREER_DETAIL_READY_1048_CLOSEOUT_COMPLETE', $payload['next_required_action']);
+        $this->assertFileExists($output);
+    }
+
     public function test_failed_acceptance_artifact_blocks(): void
     {
         $artifact = $this->liveAcceptance(300, 80, 220);
@@ -104,7 +124,7 @@ final class CareerCloseoutCanonicalProgressiveCohortCommandTest extends TestCase
      */
     private function liveAcceptance(int $target, int $baseline, int $delta): array
     {
-        return [
+        $payload = [
             'status' => 'pass',
             'accepted' => true,
             'read_only' => true,
@@ -125,6 +145,21 @@ final class CareerCloseoutCanonicalProgressiveCohortCommandTest extends TestCase
             'failures' => [],
             'sidecars' => [],
         ];
+
+        if ($target === 1048) {
+            $payload['target'] = 'detail_ready_1048';
+            $payload['product_surface'] = [
+                'directory_member_count' => 1048,
+                'career_jobs_item_count' => 1048,
+                'detail_ready_count' => 1048,
+                'public_detail_indexable_count' => 1048,
+                'canonical_public_slug_count' => 1048,
+            ];
+            $payload['found_published'] = 2096;
+            $payload['release_gate']['pass_count'] = 2096;
+        }
+
+        return $payload;
     }
 
     /**
