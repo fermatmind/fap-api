@@ -1,0 +1,137 @@
+{
+  "schema_version": "global-en-zh-content-pages-human-revision-01a-foundation-governance.addendum.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01A-FOUNDATION-GOVERNANCE-FACT-RECONCILE",
+  "package_type": "revision_addendum_only",
+  "source_revision_package": "backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-01.revision.v1.json",
+  "cms_mutation_performed": false,
+  "publish_performed": false,
+  "runtime_exposure_allowed": false,
+  "items": [
+    {
+      "page_key": "foundation",
+      "revised_title_en": "Public-Benefit Mission and Governance",
+      "revised_description_en": "FermatMind's public-benefit mission and governance path describes youth-first assessment boundaries, clear data responsibilities, and a planned public-benefit shareholding arrangement without claiming completed legal status.",
+      "revised_h1_en": "Public-Benefit Mission and Governance",
+      "patch_blocks_en": [
+        {
+          "operation": "replace_page_direction",
+          "target": "Public-Benefit Direction",
+          "replacement": "Public-Benefit Mission and Governance"
+        },
+        {
+          "heading": "Public benefit as governance, not promotion",
+          "markdown": "FermatMind treats public-benefit work as part of long-term trust. The direction is youth-first: assessment results should not become permanent labels, hiring shortcuts, or deterministic judgments. Data boundaries should remain clear, consent-aware, and consistent with published privacy and product notices."
+        },
+        {
+          "heading": "Planned public-benefit shareholding arrangement",
+          "markdown": "FermatMind is pursuing a planned public-benefit shareholding arrangement as part of its governance path. Until formal founder and legal review confirms implementation details, this page should not claim a registered foundation, nonprofit legal status, charity registration, formal board governance, exact ownership percentage, completed equity transfer, donation program, or grant program."
+        },
+        {
+          "heading": "What this page does and does not claim",
+          "markdown": "This page may describe the public-benefit mission, youth-first boundaries, data-boundary principles, and governance direction. It does not claim charitable registration, donation handling, grant activity, public fundraising eligibility, tax-deductible donation status, legal fiduciary duty, or completed foundation holding unless those facts are supported by formal documents."
+        }
+      ],
+      "foundation_governance_language": "Use planned public-benefit shareholding arrangement until founder/legal documents confirm completed implementation. Do not erase the foundation/shareholding direction; bound it as a governance path.",
+      "fact_state": "planned_public_benefit_shareholding",
+      "evidence_needed_before_publish": [
+        "founder confirmation of exact public-benefit shareholding status",
+        "legal/equity document confirming whether any transfer or holding vehicle is completed",
+        "review of whether foundation, nonprofit, charity, donation, grant, board, or fiduciary wording is legally allowed",
+        "confirmation of whether ownership percentage or governance terms can be stated publicly"
+      ],
+      "remaining_review_requirements": [
+        "founder_review",
+        "legal_review"
+      ],
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "footer_eligible": false,
+      "search_channel_eligible": false
+    },
+    {
+      "page_key": "charter",
+      "revised_title_en": "FermatMind Editorial Charter",
+      "revised_description_en": "A plain-language statement of FermatMind editorial principles for assessment content, interpretation boundaries, data-aware wording, and responsible use.",
+      "revised_h1_en": "FermatMind Editorial Charter",
+      "patch_blocks_en": [
+        {
+          "operation": "add_governance_alignment_note",
+          "markdown": "Editorial, data, and claim-boundary principles should align with FermatMind's public-benefit governance path, while the page remains non-legal and should not be described as a board charter or fiduciary commitment unless formal documents prove that status."
+        }
+      ],
+      "foundation_governance_language": "Connect assessment-boundary discipline to public-benefit governance principles without creating legal governance claims.",
+      "fact_state": "planned_public_benefit_shareholding",
+      "evidence_needed_before_publish": [
+        "founder/legal confirmation that governance alignment language is acceptable",
+        "confirmation that no legal charter or board-charter implication is introduced"
+      ],
+      "remaining_review_requirements": [
+        "founder_review",
+        "legal_review"
+      ],
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "footer_eligible": false,
+      "search_channel_eligible": false
+    },
+    {
+      "page_key": "policies",
+      "revised_title_en": "Policy Overview",
+      "revised_description_en": "A navigation-oriented overview that helps users find FermatMind policy information without replacing Terms, Privacy Policy, order pages, or product notices.",
+      "revised_h1_en": "Policy Overview",
+      "patch_blocks_en": [
+        {
+          "operation": "add_governance_alignment_note",
+          "markdown": "Privacy, consent, and data-boundary choices may be described as aligned with FermatMind's public-benefit governance principles, but the page must not create new legal commitments beyond the Terms, Privacy Policy, product notices, order terms, or signed agreements."
+        }
+      ],
+      "foundation_governance_language": "Policies can reference governance principles only as alignment, not as new legal duties or completed public-benefit entity status.",
+      "fact_state": "planned_public_benefit_shareholding",
+      "evidence_needed_before_publish": [
+        "legal review that policy overview language does not create new commitments",
+        "confirmation that Terms/Privacy remain the controlling authorities"
+      ],
+      "remaining_review_requirements": [
+        "founder_review",
+        "legal_review"
+      ],
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "footer_eligible": false,
+      "search_channel_eligible": false
+    },
+    {
+      "page_key": "brand",
+      "revised_title_en": "Brand and Usage Guidelines",
+      "revised_description_en": "A practical guide for referring to FermatMind accurately, using public brand references responsibly, and avoiding misleading endorsement or affiliation claims.",
+      "revised_h1_en": "Brand and Usage Guidelines",
+      "patch_blocks_en": [
+        {
+          "operation": "optional_brand_trust_note",
+          "markdown": "Brand trust may be connected to youth-first boundaries, clear data boundaries, and public-benefit governance principles, without implying certification, partnership, charity status, third-party endorsement, or market leadership."
+        }
+      ],
+      "foundation_governance_language": "Brand language can acknowledge public-benefit governance as a trust principle while avoiding unsupported external status claims.",
+      "fact_state": "planned_public_benefit_shareholding",
+      "evidence_needed_before_publish": [
+        "founder/brand owner confirmation that public-benefit governance language belongs on brand guidance",
+        "legal check that no charity, partnership, endorsement, or certification implication is introduced"
+      ],
+      "remaining_review_requirements": [
+        "founder_review",
+        "brand_owner_review",
+        "legal_review_if_public_benefit_language_is_added"
+      ],
+      "sitemap_eligible": false,
+      "llms_eligible": false,
+      "footer_eligible": false,
+      "search_channel_eligible": false
+    }
+  ],
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01"
+}
