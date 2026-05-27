@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T15:56:09+08:00",
+  "updated_at": "2026-05-27T16:43:56+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -22586,8 +22586,8 @@
     "depends_on": [
       "SEARCH-CHANNEL-LIVE-00"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "6fe4c4a4c94601eac1f8327e91a70d7652b6af02",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1724",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -28848,5 +28848,169 @@
         "summary": "Opened PR #1723 for the post-publish smoke report."
       }
     ]
+  },
+  "AUDIT-CAREER-DETAIL-READY-1048-SCAN-1": {
+    "status": "pr_open",
+    "repo": "fap-api",
+    "branch": "codex/audit-career-detail-ready-1048-scan-1",
+    "base": "main",
+    "title": "fix(api): audit career detail-ready 1048 candidates",
+    "commit_sha": "9d7f67d2dab71ae981dcad290a49a7ee9de527b3",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1724",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "scope": {
+        "status": "passed",
+        "evidence": "Changed files are limited to the read-only career detail-ready scanner, command registration, focused test, audit doc, Big Five runtime-freeze classifier test guard, and PR train metadata."
+      },
+      "local_validation": {
+        "status": "passed",
+        "commands": [
+          "php -l backend/app/Console/Commands/CareerAuditDetailReady1048Candidates.php",
+          "php -l backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php",
+          "php -l backend/tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php",
+          "cd backend && php artisan test tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php --no-ansi",
+          "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_career_detail_ready_1048_audit_scanner_changes --no-ansi",
+          "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/CareerAuditDetailReady1048Candidates.php app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 - <<'PY' ... yaml.safe_load(open('docs/codex/pr-train.yaml')) ... PY",
+          "git diff --check",
+          "cd backend && bash scripts/ci_verify_mbti.sh"
+        ]
+      },
+      "github_checks": {
+        "status": "passed",
+        "initial_failure": "verify-mbti legacy/v2 failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze guard flagged backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php.",
+        "fix": "Added an explicit Career detail-ready 1048 audit scanner classifier case to the runtime freeze guard test.",
+        "evidence": "PR #1724 checks passed after scoped fix: hygiene, supply-chain, Semgrep, verify-mbti-legacy, and verify-mbti-v2."
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T16:11:06+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Initialized read-only detail-ready 1048 candidate scan PR and added the six-item PR train entries from the user-provided goal."
+      },
+      {
+        "at": "2026-05-27T16:19:16+08:00",
+        "status": "local_checks_passed",
+        "summary": "Focused scanner test, route list, Pint, JSON/YAML parsing, diff check, and backend CI master chain passed."
+      },
+      {
+        "at": "2026-05-27T16:21:24+08:00",
+        "status": "committed",
+        "summary": "Created scoped audit scanner commit 6fe4c4a4."
+      },
+      {
+        "at": "2026-05-27T16:23:16+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1724 for the read-only detail-ready 1048 candidate scanner."
+      },
+      {
+        "at": "2026-05-27T16:36:19+08:00",
+        "status": "github_checks_fix_ready",
+        "summary": "Fixed current-scope CI failure by classifying the read-only Career 1048 audit scanner as non-MBTI-impacting in the runtime freeze guard; focused guard test, full guard test, scanner test, route list, Pint, JSON/YAML, diff check, and backend CI master chain passed locally."
+      },
+      {
+        "at": "2026-05-27T16:43:56+08:00",
+        "status": "github_checks_passed",
+        "summary": "GitHub checks passed for PR #1724 after the scoped runtime-freeze classifier fix."
+      }
+    ]
+  },
+  "REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1": {
+    "status": "planned",
+    "repo": "fap-api",
+    "branch": "codex/repair-career-detail-ready-target-authority-1",
+    "base": "main",
+    "depends_on": [
+      "AUDIT-CAREER-DETAIL-READY-1048-SCAN-1"
+    ],
+    "title": "fix(api): define career detail-ready 1048 authority",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {},
+    "history": []
+  },
+  "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1": {
+    "status": "planned",
+    "repo": "fap-api",
+    "branch": "codex/repair-career-detail-ready-candidate-prep-1",
+    "base": "main",
+    "depends_on": [
+      "REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1"
+    ],
+    "title": "fix(api): plan career detail-ready 1018 candidate prep",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {},
+    "history": []
+  },
+  "REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1": {
+    "status": "planned",
+    "repo": "fap-api",
+    "branch": "codex/repair-career-detail-ready-runtime-artifact-refresh-1",
+    "base": "main",
+    "depends_on": [
+      "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1"
+    ],
+    "title": "fix(api): refresh career detail-ready 1048 artifacts",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {},
+    "history": []
+  },
+  "REPAIR-CAREER-DETAIL-READY-ROLLOUT-GATE-1": {
+    "status": "planned",
+    "repo": "fap-api",
+    "branch": "codex/repair-career-detail-ready-rollout-gate-1",
+    "base": "main",
+    "depends_on": [
+      "REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1"
+    ],
+    "title": "fix(api): gate career detail-ready 1048 rollout",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {},
+    "history": []
+  },
+  "REPAIR-CAREER-DETAIL-READY-LIVE-ACCEPTANCE-CLOSEOUT-1": {
+    "status": "planned",
+    "repo": "fap-api",
+    "branch": "codex/repair-career-detail-ready-live-acceptance-closeout-1",
+    "base": "main",
+    "depends_on": [
+      "REPAIR-CAREER-DETAIL-READY-ROLLOUT-GATE-1"
+    ],
+    "title": "fix(api): accept career detail-ready 1048 closeout",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {},
+    "history": []
   }
 }

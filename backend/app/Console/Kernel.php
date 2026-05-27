@@ -18,6 +18,7 @@ use App\Console\Commands\CareerAlignSelectedAuthorityCrosswalks;
 use App\Console\Commands\CareerAlignSelectedOnetCrosswalks;
 use App\Console\Commands\CareerApplyOccupationDirectoryReviewDecisions;
 use App\Console\Commands\CareerAuditCanonicalEligibility;
+use App\Console\Commands\CareerAuditDetailReady1048Candidates;
 use App\Console\Commands\CareerCloseoutCanonicalProgressiveCohort;
 use App\Console\Commands\CareerCompileAuthorityWave;
 use App\Console\Commands\CareerCompileRecommendationSubjects;
@@ -211,6 +212,7 @@ class Kernel extends ConsoleKernel
         CommerceRepairPostCommitFailed::class,
         CareerApplyOccupationDirectoryReviewDecisions::class,
         CareerAuditCanonicalEligibility::class,
+        CareerAuditDetailReady1048Candidates::class,
         CareerCloseoutCanonicalProgressiveCohort::class,
         CareerAlignActorsAuthorityOccupation::class,
         CareerAlignCareerAuthorityBatch::class,
