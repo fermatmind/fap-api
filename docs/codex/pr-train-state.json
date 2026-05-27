@@ -29657,17 +29657,17 @@
     "repo": "fap-api",
     "branch": "codex/mbti-en-questions-pack-projection-01",
     "base": "main",
-    "status": "local_validation_passed",
+    "status": "merged",
     "depends_on": [
       "TAKE-EN-QUESTION-LOCALE-SCAN-00"
     ],
     "title": "MBTI-EN-QUESTIONS-PACK-PROJECTION-01 MBTI English question locale projection",
-    "commit_sha": "956221fe825ce36dd27ca933e047780ad441cf26",
+    "commit_sha": "a6a271c86aa86b2c6ae89bd51c3e4d6d096e687d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1733",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-27T23:57:05Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -29724,17 +29724,18 @@
         "evidence": "After the CI fix, MBTI focused tests passed, the Big Five runtime freeze test passed, MBTI compatibility tests passed, and route list, Pint, composer validate/audit, JSON/YAML parse, and diff checks passed locally."
       },
       "github_required_checks": {
-        "status": "pending_rerun",
+        "status": "pass",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1733",
-        "previous_failed_checks": [
-          "verify-mbti-legacy",
-          "verify-mbti-v2"
-        ],
-        "fix_evidence": "Local BigFiveResultPageV2CoreBodyPreviewTest now passes and final branch diff no longer includes QuestionsService.php."
+        "evidence": "GitHub check rollup passed for hygiene, supply-chain, Semgrep, verify-mbti-legacy, and verify-mbti-v2; mergeStateStatus was CLEAN before squash merge."
       },
       "ci_fix_scope": {
         "status": "pass",
         "evidence": "Projection remains MBTI-scoped in ScalesController; backend/app/Services/Content/QuestionsService.php was removed from the final branch diff."
+      },
+      "post_merge_focused_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=MbtiQuestionLocaleProjection --no-ansi",
+        "evidence": "3 tests passed, 1444 assertions after main fast-forwarded to merge commit a6a271c86aa86b2c6ae89bd51c3e4d6d096e687d."
       }
     },
     "scope": {
@@ -29786,6 +29787,151 @@
         "at": "2026-05-28T00:23:00+08:00",
         "status": "local_validation_passed_after_ci_fix",
         "summary": "Committed MBTI-scoped CI fix, removed QuestionsService.php from the final diff, and reran MBTI focused tests, Big Five runtime freeze test, compatibility tests, route list, Pint, composer validate/audit, JSON/YAML parse, and diff checks successfully."
+      },
+      {
+        "at": "2026-05-28T00:34:00+08:00",
+        "status": "merged_reconciled",
+        "summary": "Reconciled PR #1733 as merged with squash commit a6a271c86aa86b2c6ae89bd51c3e4d6d096e687d; origin/main contains the merge commit, local main is synced, branch cleanup is complete, and post-merge focused test passed."
+      }
+    ]
+  },
+  "RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02": {
+    "id": "RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02",
+    "repo": "fap-api",
+    "branch": "codex/riasec-en-questions-pack-translation-02",
+    "base": "main",
+    "status": "local_validation_passed",
+    "depends_on": [
+      "MBTI-EN-QUESTIONS-PACK-PROJECTION-01"
+    ],
+    "title": "RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02 RIASEC English question pack translation",
+    "commit_sha": "17bbb89e6ac290115c0811ceacf724c64caf9376",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1734",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "TAKE-EN-QUESTION-LOCALE-SCAN-00 recommended RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02 and the user instructed the three backend content-pack fixes to proceed sequentially."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "MBTI-EN-QUESTIONS-PACK-PROJECTION-01 merged as PR #1733 with merge commit a6a271c86aa86b2c6ae89bd51c3e4d6d096e687d."
+      },
+      "scope": {
+        "status": "pass",
+        "allowed_files": [
+          "backend/content_packs/RIASEC/v1-standard-60/compiled/questions.compiled.json",
+          "backend/content_packs/RIASEC/v1-standard-60/compiled/manifest.json",
+          "backend/content_packs/RIASEC/v1-enhanced-140/compiled/questions.compiled.json",
+          "backend/content_packs/RIASEC/v1-enhanced-140/compiled/manifest.json",
+          "backend/tests/Feature/V0_3/RiasecQuestionLocaleTranslationTest.php",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "outside_scope": [],
+        "changed_files": [
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "docs/codex/pr-train-state.json",
+          "docs/codex/pr-train.yaml"
+        ],
+        "evidence": "Changed files are confined to RIASEC compiled question packs/manifests, focused RIASEC locale test, Big Five freeze classifier test-only allowance for the RIASEC pack files, and authorized PR-train metadata."
+      },
+      "focused_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=RiasecQuestionLocaleTranslation --no-ansi",
+        "evidence": "3 tests passed, 1226 assertions."
+      },
+      "riasec_flow_regression": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=RiasecAssessmentFlow --no-ansi",
+        "evidence": "5 tests passed, 820 assertions."
+      },
+      "local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+          "cd backend && php artisan test --filter=RiasecQuestionLocaleTranslation --no-ansi",
+          "cd backend && php artisan test --filter=RiasecAssessmentFlow --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool backend/content_packs/RIASEC/v1-standard-60/compiled/questions.compiled.json >/dev/null",
+          "python3 -m json.tool backend/content_packs/RIASEC/v1-standard-60/compiled/manifest.json >/dev/null",
+          "python3 -m json.tool backend/content_packs/RIASEC/v1-enhanced-140/compiled/questions.compiled.json >/dev/null",
+          "python3 -m json.tool backend/content_packs/RIASEC/v1-enhanced-140/compiled/manifest.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 - <<'PY'\nimport yaml, pathlib\nyaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\nprint('yaml ok')\nPY",
+          "git diff --check",
+          "git diff --cached --check",
+          "git -C /Users/rainie/Desktop/GitHub/fap-web status --short"
+        ],
+        "evidence": "After CI fix, Big Five freeze classifier test passed, RIASEC focused and flow tests passed, and route list, Pint, composer validate/audit, JSON/YAML parse, diff checks, and fap-web reference status passed locally."
+      },
+      "github_required_checks": {
+        "status": "pending_rerun",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1734",
+        "previous_failed_checks": [
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "fix_evidence": "Local BigFiveResultPageV2CoreBodyPreviewTest now passes with the RIASEC question-pack-only allowance."
+      },
+      "ci_fix_scope": {
+        "status": "pass",
+        "evidence": "Added a focused test-only freeze classifier allowance for backend/content_packs/RIASEC v1-standard-60 and v1-enhanced-140 compiled questions/manifests; no runtime code changed."
+      }
+    },
+    "scope": {
+      "allowed_files": [
+        "backend/content_packs/RIASEC/v1-standard-60/compiled/questions.compiled.json",
+        "backend/content_packs/RIASEC/v1-standard-60/compiled/manifest.json",
+        "backend/content_packs/RIASEC/v1-enhanced-140/compiled/questions.compiled.json",
+        "backend/content_packs/RIASEC/v1-enhanced-140/compiled/manifest.json",
+        "backend/tests/Feature/V0_3/RiasecQuestionLocaleTranslationTest.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "api_runtime_change": false,
+      "content_pack_mutation": true,
+      "cms_mutation": false,
+      "publish": false,
+      "deploy": false,
+      "search_channel_action": false,
+      "url_submission": false,
+      "fap_web_modified": false,
+      "frontend_fallback_authority": false
+    },
+    "history": [
+      {
+        "at": "2026-05-28T00:35:00+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Started RIASEC English question pack translation after MBTI PR merge; scope is RIASEC compiled question packs, manifest hashes, focused test, and train metadata only."
+      },
+      {
+        "at": "2026-05-28T00:45:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "Translated RIASEC 60/140 English question stems in backend content packs, updated manifest hashes, added focused locale test, and passed local validation."
+      },
+      {
+        "at": "2026-05-28T00:48:00+08:00",
+        "status": "pr_opened",
+        "summary": "Opened PR #1734 for RIASEC English question pack translation; GitHub checks pending."
+      },
+      {
+        "at": "2026-05-28T00:56:00+08:00",
+        "status": "ci_fix_in_progress",
+        "summary": "GitHub required checks failed on the Big Five runtime freeze classifier; adding a focused test-only allowance for RIASEC question-pack translation files within current PR scope."
+      },
+      {
+        "at": "2026-05-28T01:03:00+08:00",
+        "status": "local_validation_passed_after_ci_fix",
+        "summary": "Added focused Big Five freeze classifier allowance for RIASEC question-pack translation files and reran Big Five freeze, RIASEC focused/flow, route list, Pint, composer validate/audit, JSON/YAML parse, and diff checks successfully."
       }
     ]
   }
