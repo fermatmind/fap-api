@@ -497,6 +497,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_homepage_recommended_article_metadata_backfill(): void
+    {
+        $changed = [
+            'backend/database/migrations/2026_05_27_000100_backfill_homepage_recommended_en_article_media_taxonomy.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_logical_db_foundation_migrations(): void
     {
         $changed = [
@@ -2157,6 +2166,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isHomepageRecommendedArticleMetadataBackfillFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelLogicalDbFoundationMigrationFile($file)) {
                 continue;
             }
@@ -3111,6 +3124,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/ArticleCoverPropagationSmoke.php',
             'backend/tests/Feature/Console/ArticleCoverPropagationSmokeCommandTest.php',
         ], true);
+    }
+
+    private function isHomepageRecommendedArticleMetadataBackfillFile(string $file): bool
+    {
+        return $file === 'backend/database/migrations/2026_05_27_000100_backfill_homepage_recommended_en_article_media_taxonomy.php';
     }
 
     private function isPrivacyLogsDsarKeyRotationFile(string $file): bool

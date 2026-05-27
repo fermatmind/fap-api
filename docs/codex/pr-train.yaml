@@ -14925,3 +14925,46 @@ prs:
     human_review_decision_only: true
     pseo_generation_allowed: false
     frontend_fallback_authority: false
+
+  - id: GLOBAL-EN-ZH-HOMEPAGE-RECOMMENDED-ARTICLES-PARITY-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-CONTENT-AUTHORITY-PUBLISH-READINESS-01
+    branch: codex/global-en-zh-homepage-recommended-articles-parity-01
+    base: main
+    title: "GLOBAL-EN-ZH-HOMEPAGE-RECOMMENDED-ARTICLES-PARITY-01 homepage recommended articles parity"
+    train_scope: global_en_zh_homepage_recommended_articles_parity
+    risk_level: p1_homepage_public_content_authority
+    allowed_paths:
+      - backend/database/migrations/2026_05_27_000100_backfill_homepage_recommended_en_article_media_taxonomy.php
+      - backend/tests/Feature/LandingSurfaces/HomepageRecommendedArticlesParityTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Backfill authority-owned media and taxonomy metadata for three published EN homepage recommended articles.
+      - Add a backend API regression test proving EN/ZH homepage recommended article blocks each expose six render-eligible items.
+      - Do not add frontend fallback content or publish new articles.
+    validation:
+      - cd backend && php artisan test --filter=HomepageRecommendedArticlesParity --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    content_generation_allowed: false
+    frontend_fallback_authority: false
+    next_task: DEPLOY-READINESS
