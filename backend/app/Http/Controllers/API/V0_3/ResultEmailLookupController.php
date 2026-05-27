@@ -29,6 +29,44 @@ final class ResultEmailLookupController extends Controller
             (string) $payload['email'],
             (int) $this->orgContext->orgId(),
             $payload['locale'] ?? null,
+            $this->orgContext->userId(),
+            $this->orgContext->anonId(),
+            $this->resolveClientAnonId($request),
         ));
+    }
+
+    private function resolveClientAnonId(ResultEmailLookupRequest $request): ?string
+    {
+        $candidates = [
+            $request->attributes->get('client_anon_id'),
+            $request->header('X-Anon-Id'),
+            $request->cookie('fap_anonymous_id_v1'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (! is_string($candidate) && ! is_numeric($candidate)) {
+                continue;
+            }
+
+            $normalized = trim((string) $candidate);
+            if ($normalized === '' || strlen($normalized) > 128) {
+                continue;
+            }
+
+            $lower = mb_strtolower($normalized, 'UTF-8');
+            $isPlaceholder = false;
+            foreach (['todo', 'placeholder', 'fixme', 'tbd', '填这里'] as $bad) {
+                if (mb_strpos($lower, $bad) !== false) {
+                    $isPlaceholder = true;
+                    break;
+                }
+            }
+
+            if (! $isPlaceholder) {
+                return $normalized;
+            }
+        }
+
+        return null;
     }
 }
