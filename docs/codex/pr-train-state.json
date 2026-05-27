@@ -28279,7 +28279,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2": {
-    "status": "pr_open",
+    "status": "github_checks_passed",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-publish-readiness-r2",
     "base": "main",
@@ -28750,6 +28750,10 @@
       "pull_request": {
         "status": "open",
         "url": "https://github.com/fermatmind/fap-api/pull/1721"
+      },
+      "github_checks": {
+        "status": "passed",
+        "evidence": "PR #1721 checks passed and mergeStateStatus was CLEAN before recording this ledger transition."
       }
     },
     "history": [
@@ -28772,6 +28776,11 @@
         "at": "2026-05-27T14:47:23+08:00",
         "status": "pr_open",
         "summary": "Opened PR #1721 for the foundation wording R2 revision package."
+      },
+      {
+        "at": "2026-05-27T14:54:36+08:00",
+        "status": "github_checks_passed",
+        "summary": "GitHub checks passed for PR #1721 and mergeStateStatus was CLEAN."
       }
     ]
   }
