@@ -28160,7 +28160,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01": {
-    "status": "pr_open",
+    "status": "github_checks_passed",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-cms-draft-update-01",
     "base": "main",
@@ -28357,6 +28357,10 @@
       "fap_web_reference_check": {
         "status": "passed_with_sidecar",
         "evidence": "Reference-only fap-web working tree had pre-existing tracked and untracked changes; no fap-web files were modified by this task."
+      },
+      "github_checks": {
+        "status": "passed",
+        "evidence": "PR #1717 checks passed and mergeStateStatus was CLEAN."
       }
     },
     "history": [
@@ -28379,6 +28383,11 @@
         "at": "2026-05-27T12:02:33+08:00",
         "status": "pr_open",
         "summary": "Opened PR #1717 for the scoped publish readiness R2 report."
+      },
+      {
+        "at": "2026-05-27T12:09:07+08:00",
+        "status": "github_checks_passed",
+        "summary": "GitHub checks passed for PR #1717 and merge state was CLEAN."
       }
     ]
   }
