@@ -28279,7 +28279,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2": {
-    "status": "local_checks_passed",
+    "status": "committed",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-publish-readiness-r2",
     "base": "main",
@@ -28287,7 +28287,7 @@
       "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01"
     ],
     "title": "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2 publish readiness recheck for Wave 1 English content pages",
-    "commit_sha": null,
+    "commit_sha": "3422f4d8c4995cbce259df22c427787368c95796",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -28369,6 +28369,11 @@
         "at": "2026-05-27T12:01:05+08:00",
         "status": "local_checks_passed",
         "summary": "Focused test, route list, pint, composer validate/audit, JSON/YAML parsing, and diff checks passed."
+      },
+      {
+        "at": "2026-05-27T12:01:48+08:00",
+        "status": "committed",
+        "summary": "Committed publish readiness R2 report artifacts and focused test."
       }
     ]
   }
