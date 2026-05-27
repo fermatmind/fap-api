@@ -28392,7 +28392,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01": {
-    "status": "local_checks_passed_blocked_missing_official_publish_runtime",
+    "status": "pr_open_blocked_missing_official_publish_runtime",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-controlled-publish-01",
     "base": "main",
@@ -28400,8 +28400,8 @@
       "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2"
     ],
     "title": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01 controlled publish for Wave 1 English content pages",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "6b2fb19c68364c918537552c0d9ca08fc5752b89",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1718",
     "failure_reason": "No official bounded controlled publish runtime exists for content_pages; content-pages:import-local-baseline is an import/upsert runtime and can create missing records, so it was rejected for this publish-only scope.",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -28474,6 +28474,11 @@
         "at": "2026-05-27T12:58:00+08:00",
         "status": "local_checks_passed",
         "summary": "Focused test, route list, pint, composer validate/audit, JSON/YAML parsing, and diff checks passed."
+      },
+      {
+        "at": "2026-05-27T13:02:00+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1718 for the scoped blocked-runtime report."
       }
     ]
   }
