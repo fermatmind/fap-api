@@ -1,0 +1,255 @@
+{
+  "schema_version": "global-en-zh-content-pages-cms-draft-update-01.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01",
+  "final_decision": "content_pages_cms_draft_update_completed_with_sidecars",
+  "approval_phrase_verified": true,
+  "target_pages": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies"
+  ],
+  "preflight_result": {
+    "passed": true,
+    "official_cms_draft_update_runtime": "content-pages:import-local-baseline",
+    "official_runtime_supports_dry_run": true,
+    "official_runtime_supports_upsert": true,
+    "target_draft_records_found": 5,
+    "all_targets_locale_en": true,
+    "all_targets_draft_non_public_non_indexable": true,
+    "all_targets_published_at_null": true,
+    "revision_package_parsed": true,
+    "foundation_governance_addendum_parsed": true,
+    "foundation_addendum_superseded_prior_foundation_framing": true,
+    "no_target_publish_planned": true,
+    "no_target_indexable_planned": true,
+    "no_sitemap_llms_footer_exposure_planned": true,
+    "no_search_channel_action_planned": true,
+    "no_deploy_planned": true,
+    "protected_published_records_excluded": [
+      "about",
+      "help-about",
+      "help-contact",
+      "help-faq",
+      "help-for-business-and-research",
+      "method-boundaries",
+      "privacy",
+      "terms"
+    ]
+  },
+  "dry_run_result": {
+    "passed": true,
+    "command": "php artisan content-pages:import-local-baseline --dry-run --upsert --status=draft --source-dir=/tmp/fap-content-pages-cms-draft-update-01-source",
+    "target_count": 5,
+    "would_update_count": 5,
+    "would_create_count": 0,
+    "would_skip_count": 0,
+    "blocked_count": 0,
+    "target_keys": [
+      "brand",
+      "charter",
+      "foundation",
+      "careers",
+      "policies"
+    ],
+    "before_status": {
+      "brand": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null
+      },
+      "charter": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null
+      },
+      "foundation": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null
+      },
+      "careers": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null
+      },
+      "policies": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null
+      }
+    },
+    "after_status": {
+      "brand": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null
+      },
+      "charter": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null
+      },
+      "foundation": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null
+      },
+      "careers": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null
+      },
+      "policies": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null
+      }
+    },
+    "no_publish": true,
+    "no_indexable": true,
+    "no_sitemap_llms_footer_exposure": true,
+    "no_search_channel_action": true,
+    "raw_output": [
+      "baseline_source_dir=/tmp/fap-content-pages-cms-draft-update-01-source",
+      "dry_run=1",
+      "upsert=1",
+      "status_mode=draft",
+      "files_found=1",
+      "pages_found=5",
+      "will_create=0",
+      "will_update=5",
+      "will_skip=0",
+      "dry-run complete"
+    ]
+  },
+  "update_result": {
+    "performed": true,
+    "command": "php artisan content-pages:import-local-baseline --upsert --status=draft --source-dir=/tmp/fap-content-pages-cms-draft-update-01-source",
+    "target_count": 5,
+    "updated_count": 5,
+    "created_count": 0,
+    "skipped_count": 0,
+    "raw_output": [
+      "baseline_source_dir=/tmp/fap-content-pages-cms-draft-update-01-source",
+      "dry_run=0",
+      "upsert=1",
+      "status_mode=draft",
+      "files_found=1",
+      "pages_found=5",
+      "will_create=0",
+      "will_update=5",
+      "will_skip=0",
+      "import complete"
+    ],
+    "temporary_source_removed": true
+  },
+  "post_update_verification": {
+    "records": [
+      {
+        "slug": "brand",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "title": "Brand and Usage Guidelines"
+      },
+      {
+        "slug": "careers",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "title": "Work With FermatMind"
+      },
+      {
+        "slug": "charter",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "title": "FermatMind Editorial Charter"
+      },
+      {
+        "slug": "foundation",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "title": "Public-Benefit Mission and Governance"
+      },
+      {
+        "slug": "policies",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "title": "Policy Overview"
+      }
+    ],
+    "all_five_updated": true,
+    "all_remain_draft_non_public_non_indexable": true,
+    "public_runtime": {
+      "/en/brand": {
+        "status": 404,
+        "non_public": true
+      },
+      "/en/charter": {
+        "status": 404,
+        "non_public": true
+      },
+      "/en/foundation": {
+        "status": 404,
+        "non_public": true
+      },
+      "/en/careers": {
+        "status": 404,
+        "non_public": true
+      },
+      "/en/policies": {
+        "status": 404,
+        "non_public": true
+      }
+    },
+    "sitemap_contains_targets": false,
+    "llms_txt_contains_targets": false,
+    "llms_full_txt_contains_targets": false,
+    "footer_nav_homepage_contains_targets": false,
+    "protected_published_records_not_targeted": true,
+    "search_channel_tables_available_on_checked_connection": false,
+    "search_channel_sidecar": "seo_search_channel_queue_* tables were not detected on the checked production default/seo_intel connection, so queue item 2/3 state could not be re-read in this task. No Search Channel command was run, all live/queue gates read as false, and no content_page queue items could be detected on this connection."
+  },
+  "foundation_fact_state": "planned_public_benefit_shareholding",
+  "foundation_governance_language_used": "Public-Benefit Mission and Governance; planned public-benefit shareholding arrangement",
+  "forbidden_foundation_claims_absent": true,
+  "forbidden_foundation_claims_absent_scope": "No affirmative claims of registered foundation, nonprofit legal status, charity registration, donation/grant program, formal board governance, legal fiduciary duty, exact ownership percentage, completed equity transfer, or completed foundation holding were introduced. The draft uses denial/boundary language where those terms appear.",
+  "cms_records_updated": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies"
+  ],
+  "sidecar_issues": [
+    "Search Channel queue tables were unavailable on the checked production connection; queue item 2/3 unchanged verification could not be completed from that connection. No Search Channel action was performed."
+  ],
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_sitemap_llms_exposure": true,
+  "no_footer_nav_exposure": true,
+  "no_public_runtime_exposure": true,
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2"
+}
