@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T08:34:00+08:00",
+  "updated_at": "2026-05-27T09:11:46+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -27787,6 +27787,135 @@
       },
       {
         "at": "2026-05-27T08:34:00+08:00",
+        "status": "github_checks_passed",
+        "summary": "GitHub required checks passed and mergeStateStatus was CLEAN before final ledger update."
+      }
+    ]
+  },
+  "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-01": {
+    "status": "github_checks_passed",
+    "repo": "fap-api",
+    "branch": "codex/global-en-zh-content-pages-publish-readiness-01",
+    "base": "main",
+    "depends_on": [
+      "GLOBAL-EN-ZH-CONTENT-PAGES-IMPORT-VERIFY-01"
+    ],
+    "title": "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-01 publish readiness for Wave 1 English content pages",
+    "commit_sha": "5376cc9c31bc2e339cbba4c4b894172f127875df",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1713",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "preflight": {
+        "status": "passed",
+        "evidence": "Started from origin/main at 53418b539748afeebdb075f9f59c14888fe9fabf in isolated worktree; dependency PR #1710 merged."
+      },
+      "read_only_cms_review": {
+        "status": "passed",
+        "evidence": "Reviewed target content page drafts and ZH counterparts without CMS mutation."
+      },
+      "content_quality": {
+        "status": "passed",
+        "evidence": "All five pages have title, description, H1, body, SEO metadata, ZH counterpart, and translation group; no placeholder body detected."
+      },
+      "legal_company_fact_review": {
+        "status": "blocked_non_runtime",
+        "evidence": "foundation, careers, and policies require human/legal/company revision before controlled publish."
+      },
+      "runtime_discoverability": {
+        "status": "passed",
+        "evidence": "Target pages remain 404/non-public and absent from sitemap, llms, and footer/nav."
+      },
+      "search_channel": {
+        "status": "passed",
+        "evidence": "No queue items for target pages; Search Channel gates remain closed."
+      },
+      "local_validation": {
+        "status": "pending"
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "PR #1713 required GitHub checks passed and mergeStateStatus was CLEAN for commit 5376cc9c31bc2e339cbba4c4b894172f127875df."
+      },
+      "composer_install": {
+        "status": "passed",
+        "command": "cd backend && composer install --no-interaction --no-progress",
+        "evidence": "Installed dependencies in isolated worktree only; ignored vendor/public/cache artifacts were not staged."
+      },
+      "focused_test": {
+        "status": "passed",
+        "command": "cd backend && php artisan test --filter=GlobalEnZhContentPagesPublishReadiness01 --no-ansi",
+        "evidence": "1 test passed, 17 assertions."
+      },
+      "route_list": {
+        "status": "passed",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "203 routes listed."
+      },
+      "pint": {
+        "status": "passed",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "3583 files passed."
+      },
+      "composer_validate": {
+        "status": "passed",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "passed",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "No security vulnerability advisories found."
+      },
+      "json_yaml_parse": {
+        "status": "passed",
+        "evidence": "Generated JSON, pr-train-state.json, and pr-train.yaml parse successfully."
+      },
+      "scope_validation": {
+        "status": "passed",
+        "changed_files": [
+          "backend/docs/seo/global-en-zh-content-pages-publish-readiness-01.md",
+          "backend/docs/seo/generated/global-en-zh-content-pages-publish-readiness-01.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesPublishReadiness01Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ]
+      },
+      "diff_check": {
+        "status": "passed",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "fap_web_reference_check": {
+        "status": "passed_with_preexisting_untracked_files",
+        "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+        "evidence": "Observed pre-existing untracked .playwright-mcp/ and article-image-smoke.png; no fap-web changes were made or committed by this task."
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T08:50:00+08:00",
+        "status": "planned",
+        "summary": "Authorized current publish readiness task entry only; no publish, CMS mutation, deploy, Search Channel action, URL submission, or fap-web modification."
+      },
+      {
+        "at": "2026-05-27T08:50:00+08:00",
+        "status": "in_progress",
+        "summary": "Completed read-only CMS/content/runtime/discoverability/Search Channel readiness review; local validation pending."
+      },
+      {
+        "at": "2026-05-27T09:00:00+08:00",
+        "status": "local_checks_passed",
+        "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, fap-web reference check, and scope validation passed."
+      },
+      {
+        "at": "2026-05-27T09:03:00+08:00",
+        "status": "pr_opened",
+        "summary": "Opened PR #1713 after local validation; waiting for GitHub required checks."
+      },
+      {
+        "at": "2026-05-27T09:11:46+08:00",
         "status": "github_checks_passed",
         "summary": "GitHub required checks passed and mergeStateStatus was CLEAN before final ledger update."
       }

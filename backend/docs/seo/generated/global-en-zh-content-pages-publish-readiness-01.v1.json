@@ -1,0 +1,780 @@
+{
+  "schema_version": "global-en-zh-content-pages-publish-readiness-01.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-01",
+  "final_decision": "content_pages_publish_readiness_completed_with_review_blockers",
+  "target_pages": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies"
+  ],
+  "per_page_publish_readiness": [
+    {
+      "asset_key": "brand",
+      "classification": "publish_ready_with_human_approval",
+      "ready_for_publish_without_additional_review": false,
+      "ready_for_controlled_publish_after_human_approval": true,
+      "blockers": [],
+      "required_reviews": [
+        "founder_review"
+      ],
+      "notes": [
+        "No unsupported market position, certification, award, or third-party endorsement found as affirmative claims. Chinese official name appears intentionally as brand reference, not leakage. Human approval still required for brand permission language."
+      ]
+    },
+    {
+      "asset_key": "charter",
+      "classification": "publish_ready_with_human_approval",
+      "ready_for_publish_without_additional_review": false,
+      "ready_for_controlled_publish_after_human_approval": true,
+      "blockers": [],
+      "required_reviews": [
+        "founder_review",
+        "legal_review"
+      ],
+      "notes": [
+        "Charter language is bounded but creates governance/principle expectations. Founder/legal approval required before publish."
+      ]
+    },
+    {
+      "asset_key": "foundation",
+      "classification": "blocked_legal_fact_review",
+      "ready_for_publish_without_additional_review": false,
+      "ready_for_controlled_publish_after_human_approval": false,
+      "blockers": [
+        "blocked_legal_fact_review"
+      ],
+      "required_reviews": [
+        "founder_review",
+        "legal_review"
+      ],
+      "notes": [
+        "Uses Foundation Initiative/public-benefit/nonprofit-collaboration framing. No nonprofit/entity/governance/donation claims were verified, so legal/founder review blocks publish."
+      ]
+    },
+    {
+      "asset_key": "careers",
+      "classification": "blocked_company_fact_review",
+      "ready_for_publish_without_additional_review": false,
+      "ready_for_controlled_publish_after_human_approval": false,
+      "blockers": [
+        "blocked_company_fact_review"
+      ],
+      "required_reviews": [
+        "founder_review",
+        "company_fact_review"
+      ],
+      "notes": [
+        "Careers page says the organization is looking for people and discusses hiring/application process. Current hiring authority was not verified, so company fact review blocks publish."
+      ]
+    },
+    {
+      "asset_key": "policies",
+      "classification": "blocked_legal_fact_review",
+      "ready_for_publish_without_additional_review": false,
+      "ready_for_controlled_publish_after_human_approval": false,
+      "blockers": [
+        "blocked_legal_fact_review"
+      ],
+      "required_reviews": [
+        "founder_review",
+        "legal_review"
+      ],
+      "notes": [
+        "Policy hub contains refund, minors, complaints, enterprise/research use, and high-risk use language. Legal review blocks publish and it must not replace Terms/Privacy."
+      ]
+    }
+  ],
+  "cms_draft_state": {
+    "checked_at": "2026-05-27T00:54:18.031456Z",
+    "records": [
+      {
+        "slug": "brand",
+        "locale": "en",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "translation_group_id": "content-page-brand",
+        "source_locale": "zh-CN",
+        "translation_status": "draft",
+        "review_state": "draft",
+        "source_doc": "global-en-zh-content-pages-translation-batch-01.import.v1.json",
+        "created_at": "2026-05-26T23:47:28.000000Z",
+        "updated_at": "2026-05-26T23:47:28.000000Z"
+      },
+      {
+        "slug": "charter",
+        "locale": "en",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "translation_group_id": "content-page-charter",
+        "source_locale": "zh-CN",
+        "translation_status": "draft",
+        "review_state": "draft",
+        "source_doc": "global-en-zh-content-pages-translation-batch-01.import.v1.json",
+        "created_at": "2026-05-26T23:47:28.000000Z",
+        "updated_at": "2026-05-26T23:47:28.000000Z"
+      },
+      {
+        "slug": "foundation",
+        "locale": "en",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "translation_group_id": "content-page-foundation",
+        "source_locale": "zh-CN",
+        "translation_status": "draft",
+        "review_state": "draft",
+        "source_doc": "global-en-zh-content-pages-translation-batch-01.import.v1.json",
+        "created_at": "2026-05-26T23:47:28.000000Z",
+        "updated_at": "2026-05-26T23:47:28.000000Z"
+      },
+      {
+        "slug": "careers",
+        "locale": "en",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "translation_group_id": "content-page-careers",
+        "source_locale": "zh-CN",
+        "translation_status": "draft",
+        "review_state": "draft",
+        "source_doc": "global-en-zh-content-pages-translation-batch-01.import.v1.json",
+        "created_at": "2026-05-26T23:47:28.000000Z",
+        "updated_at": "2026-05-26T23:47:28.000000Z"
+      },
+      {
+        "slug": "policies",
+        "locale": "en",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "translation_group_id": "content-page-policies",
+        "source_locale": "zh-CN",
+        "translation_status": "draft",
+        "review_state": "draft",
+        "source_doc": "global-en-zh-content-pages-translation-batch-01.import.v1.json",
+        "created_at": "2026-05-26T23:47:28.000000Z",
+        "updated_at": "2026-05-26T23:47:28.000000Z"
+      }
+    ],
+    "all_exist": true,
+    "all_draft_non_public_non_indexable": true
+  },
+  "content_quality_check": {
+    "items": [
+      {
+        "asset_key": "brand",
+        "title_exists": true,
+        "description_exists": true,
+        "h1_exists": true,
+        "body_exists": true,
+        "body_block_count": 8,
+        "seo_metadata_exists": true,
+        "zh_counterpart_exists": true,
+        "translation_group_exists": true,
+        "placeholder_markers": [],
+        "chinese_leakage": false,
+        "chinese_chars_seen": [
+          "测",
+          "试",
+          "费",
+          "马"
+        ],
+        "machine_translation_artifact_blocker": false,
+        "forbidden_claim_hits": []
+      },
+      {
+        "asset_key": "charter",
+        "title_exists": true,
+        "description_exists": true,
+        "h1_exists": true,
+        "body_exists": true,
+        "body_block_count": 10,
+        "seo_metadata_exists": true,
+        "zh_counterpart_exists": true,
+        "translation_group_exists": true,
+        "placeholder_markers": [],
+        "chinese_leakage": false,
+        "chinese_chars_seen": [],
+        "machine_translation_artifact_blocker": false,
+        "forbidden_claim_hits": [
+          "cure"
+        ]
+      },
+      {
+        "asset_key": "foundation",
+        "title_exists": true,
+        "description_exists": true,
+        "h1_exists": true,
+        "body_exists": true,
+        "body_block_count": 7,
+        "seo_metadata_exists": true,
+        "zh_counterpart_exists": true,
+        "translation_group_exists": true,
+        "placeholder_markers": [],
+        "chinese_leakage": false,
+        "chinese_chars_seen": [],
+        "machine_translation_artifact_blocker": false,
+        "forbidden_claim_hits": []
+      },
+      {
+        "asset_key": "careers",
+        "title_exists": true,
+        "description_exists": true,
+        "h1_exists": true,
+        "body_exists": true,
+        "body_block_count": 7,
+        "seo_metadata_exists": true,
+        "zh_counterpart_exists": true,
+        "translation_group_exists": true,
+        "placeholder_markers": [],
+        "chinese_leakage": false,
+        "chinese_chars_seen": [],
+        "machine_translation_artifact_blocker": false,
+        "forbidden_claim_hits": []
+      },
+      {
+        "asset_key": "policies",
+        "title_exists": true,
+        "description_exists": true,
+        "h1_exists": true,
+        "body_exists": true,
+        "body_block_count": 8,
+        "seo_metadata_exists": true,
+        "zh_counterpart_exists": true,
+        "translation_group_exists": true,
+        "placeholder_markers": [],
+        "chinese_leakage": false,
+        "chinese_chars_seen": [],
+        "machine_translation_artifact_blocker": false,
+        "forbidden_claim_hits": [
+          "diagnosis"
+        ]
+      }
+    ],
+    "all_required_content_present": true,
+    "blocking_content_quality_issue": false
+  },
+  "claim_boundary_check": {
+    "items": [
+      {
+        "asset_key": "brand",
+        "claim_boundary_safe": true,
+        "forbidden_claim_hits": [],
+        "notes": [
+          "No unsupported market position, certification, award, or third-party endorsement found as affirmative claims. Chinese official name appears intentionally as brand reference, not leakage. Human approval still required for brand permission language."
+        ]
+      },
+      {
+        "asset_key": "charter",
+        "claim_boundary_safe": false,
+        "forbidden_claim_hits": [
+          "cure"
+        ],
+        "notes": [
+          "Charter language is bounded but creates governance/principle expectations. Founder/legal approval required before publish."
+        ]
+      },
+      {
+        "asset_key": "foundation",
+        "claim_boundary_safe": true,
+        "forbidden_claim_hits": [],
+        "notes": [
+          "Uses Foundation Initiative/public-benefit/nonprofit-collaboration framing. No nonprofit/entity/governance/donation claims were verified, so legal/founder review blocks publish."
+        ]
+      },
+      {
+        "asset_key": "careers",
+        "claim_boundary_safe": true,
+        "forbidden_claim_hits": [],
+        "notes": [
+          "Careers page says the organization is looking for people and discusses hiring/application process. Current hiring authority was not verified, so company fact review blocks publish."
+        ]
+      },
+      {
+        "asset_key": "policies",
+        "claim_boundary_safe": false,
+        "forbidden_claim_hits": [
+          "diagnosis"
+        ],
+        "notes": [
+          "Policy hub contains refund, minors, complaints, enterprise/research use, and high-risk use language. Legal review blocks publish and it must not replace Terms/Privacy."
+        ]
+      }
+    ],
+    "blocking_claim_boundary_issue": false
+  },
+  "legal_company_fact_review": {
+    "items": [
+      {
+        "asset_key": "brand",
+        "unsupported_company_facts": false,
+        "unsupported_legal_or_governance_commitments": false,
+        "unsupported_foundation_public_benefit_claims": false,
+        "unsupported_hiring_career_promises": false,
+        "unsupported_privacy_security_commitments": false,
+        "founder_review_required": true,
+        "legal_review_required": false,
+        "company_fact_review_required": false,
+        "notes": [
+          "No unsupported market position, certification, award, or third-party endorsement found as affirmative claims. Chinese official name appears intentionally as brand reference, not leakage. Human approval still required for brand permission language."
+        ]
+      },
+      {
+        "asset_key": "charter",
+        "unsupported_company_facts": false,
+        "unsupported_legal_or_governance_commitments": true,
+        "unsupported_foundation_public_benefit_claims": false,
+        "unsupported_hiring_career_promises": false,
+        "unsupported_privacy_security_commitments": true,
+        "founder_review_required": true,
+        "legal_review_required": true,
+        "company_fact_review_required": false,
+        "notes": [
+          "Charter language is bounded but creates governance/principle expectations. Founder/legal approval required before publish."
+        ]
+      },
+      {
+        "asset_key": "foundation",
+        "unsupported_company_facts": false,
+        "unsupported_legal_or_governance_commitments": false,
+        "unsupported_foundation_public_benefit_claims": true,
+        "unsupported_hiring_career_promises": false,
+        "unsupported_privacy_security_commitments": false,
+        "founder_review_required": true,
+        "legal_review_required": true,
+        "company_fact_review_required": false,
+        "notes": [
+          "Uses Foundation Initiative/public-benefit/nonprofit-collaboration framing. No nonprofit/entity/governance/donation claims were verified, so legal/founder review blocks publish."
+        ]
+      },
+      {
+        "asset_key": "careers",
+        "unsupported_company_facts": true,
+        "unsupported_legal_or_governance_commitments": false,
+        "unsupported_foundation_public_benefit_claims": false,
+        "unsupported_hiring_career_promises": true,
+        "unsupported_privacy_security_commitments": false,
+        "founder_review_required": true,
+        "legal_review_required": false,
+        "company_fact_review_required": true,
+        "notes": [
+          "Careers page says the organization is looking for people and discusses hiring/application process. Current hiring authority was not verified, so company fact review blocks publish."
+        ]
+      },
+      {
+        "asset_key": "policies",
+        "unsupported_company_facts": false,
+        "unsupported_legal_or_governance_commitments": true,
+        "unsupported_foundation_public_benefit_claims": false,
+        "unsupported_hiring_career_promises": false,
+        "unsupported_privacy_security_commitments": true,
+        "founder_review_required": true,
+        "legal_review_required": true,
+        "company_fact_review_required": false,
+        "notes": [
+          "Policy hub contains refund, minors, complaints, enterprise/research use, and high-risk use language. Legal review blocks publish and it must not replace Terms/Privacy."
+        ]
+      }
+    ],
+    "blocking_review_required": true,
+    "blocking_pages": [
+      "foundation",
+      "careers",
+      "policies"
+    ],
+    "human_approval_pages": [
+      "brand",
+      "charter"
+    ]
+  },
+  "existing_published_records_check": {
+    "checked_at": "2026-05-27T00:54:18.031456Z",
+    "records": [
+      {
+        "slug": "about",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "published_at": "2026-04-21T00:00:00.000000Z",
+        "source_doc": "content_pages.en.baseline",
+        "updated_at": "2026-05-25T09:29:44.000000Z"
+      },
+      {
+        "slug": "help-about",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "published_at": "2026-04-19T00:00:00.000000Z",
+        "source_doc": "helpCenterContent.ts",
+        "updated_at": "2026-05-25T09:29:45.000000Z"
+      },
+      {
+        "slug": "help-contact",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "published_at": "2026-04-19T00:00:00.000000Z",
+        "source_doc": "helpCenterContent.ts",
+        "updated_at": "2026-05-25T09:29:45.000000Z"
+      },
+      {
+        "slug": "help-faq",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "published_at": "2026-04-19T00:00:00.000000Z",
+        "source_doc": "helpCenterContent.ts",
+        "updated_at": "2026-05-25T09:29:45.000000Z"
+      },
+      {
+        "slug": "help-for-business-and-research",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "published_at": "2026-04-19T00:00:00.000000Z",
+        "source_doc": "helpCenterContent.ts",
+        "updated_at": "2026-05-25T09:29:45.000000Z"
+      },
+      {
+        "slug": "method-boundaries",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "published_at": "2026-05-08T00:00:00.000000Z",
+        "source_doc": "content_pages.en.method_boundaries.baseline",
+        "updated_at": "2026-05-25T09:29:44.000000Z"
+      }
+    ],
+    "all_still_published_public_indexable": true,
+    "mutation_detected": false
+  },
+  "public_runtime_check": {
+    "checked_at": "2026-05-27T00:55:40Z",
+    "checks": [
+      {
+        "path": "/en/brand",
+        "status": 404,
+        "not_public_200": true,
+        "robots_noindex_seen": true
+      },
+      {
+        "path": "/en/charter",
+        "status": 404,
+        "not_public_200": true,
+        "robots_noindex_seen": true
+      },
+      {
+        "path": "/en/foundation",
+        "status": 404,
+        "not_public_200": true,
+        "robots_noindex_seen": true
+      },
+      {
+        "path": "/en/careers",
+        "status": 404,
+        "not_public_200": true,
+        "robots_noindex_seen": true
+      },
+      {
+        "path": "/en/policies",
+        "status": 404,
+        "not_public_200": true,
+        "robots_noindex_seen": true
+      }
+    ],
+    "all_target_pages_not_public_200": true
+  },
+  "future_footer_eligibility": {
+    "brand": {
+      "eligible_after_publish": true,
+      "requires_runtime_200": true,
+      "requires_human_approval": true
+    },
+    "charter": {
+      "eligible_after_publish": true,
+      "requires_runtime_200": true,
+      "requires_human_approval": true
+    },
+    "foundation": {
+      "eligible_after_publish": false,
+      "requires_runtime_200": true,
+      "requires_human_approval": true
+    },
+    "careers": {
+      "eligible_after_publish": false,
+      "requires_runtime_200": true,
+      "requires_human_approval": true
+    },
+    "policies": {
+      "eligible_after_publish": false,
+      "requires_runtime_200": true,
+      "requires_human_approval": true
+    }
+  },
+  "future_sitemap_eligibility": {
+    "brand": {
+      "eligible_after_publish": true,
+      "requires_status_published_public_indexable": true
+    },
+    "charter": {
+      "eligible_after_publish": true,
+      "requires_status_published_public_indexable": true
+    },
+    "foundation": {
+      "eligible_after_publish": false,
+      "requires_status_published_public_indexable": true
+    },
+    "careers": {
+      "eligible_after_publish": false,
+      "requires_status_published_public_indexable": true
+    },
+    "policies": {
+      "eligible_after_publish": false,
+      "requires_status_published_public_indexable": true
+    }
+  },
+  "future_llms_eligibility": {
+    "brand": {
+      "eligible_after_publish": true,
+      "requires_authority_backed_public_runtime": true
+    },
+    "charter": {
+      "eligible_after_publish": true,
+      "requires_authority_backed_public_runtime": true
+    },
+    "foundation": {
+      "eligible_after_publish": false,
+      "requires_authority_backed_public_runtime": true
+    },
+    "careers": {
+      "eligible_after_publish": false,
+      "requires_authority_backed_public_runtime": true
+    },
+    "policies": {
+      "eligible_after_publish": false,
+      "requires_authority_backed_public_runtime": true
+    }
+  },
+  "future_search_channel_eligibility": {
+    "brand": {
+      "eligible_after_publish": true,
+      "requires_search_channel_approval": true,
+      "must_not_enqueue_before_publish": true
+    },
+    "charter": {
+      "eligible_after_publish": true,
+      "requires_search_channel_approval": true,
+      "must_not_enqueue_before_publish": true
+    },
+    "foundation": {
+      "eligible_after_publish": false,
+      "requires_search_channel_approval": true,
+      "must_not_enqueue_before_publish": true
+    },
+    "careers": {
+      "eligible_after_publish": false,
+      "requires_search_channel_approval": true,
+      "must_not_enqueue_before_publish": true
+    },
+    "policies": {
+      "eligible_after_publish": false,
+      "requires_search_channel_approval": true,
+      "must_not_enqueue_before_publish": true
+    }
+  },
+  "sitemap_llms_current_check": {
+    "draft_paths_absent": true,
+    "exposure": {
+      "/sitemap.xml": {
+        "/en/brand": false,
+        "/en/charter": false,
+        "/en/foundation": false,
+        "/en/careers": false,
+        "/en/policies": false
+      },
+      "/llms.txt": {
+        "/en/brand": false,
+        "/en/charter": false,
+        "/en/foundation": false,
+        "/en/careers": false,
+        "/en/policies": false
+      },
+      "/llms-full.txt": {
+        "/en/brand": false,
+        "/en/charter": false,
+        "/en/foundation": false,
+        "/en/careers": false,
+        "/en/policies": false
+      }
+    }
+  },
+  "footer_nav_current_check": {
+    "draft_links_absent": true,
+    "items": {
+      "/en/brand": {
+        "label": "Brand",
+        "href_present": false,
+        "label_present": false
+      },
+      "/en/charter": {
+        "label": "Charter",
+        "href_present": false,
+        "label_present": false
+      },
+      "/en/foundation": {
+        "label": "Foundation",
+        "href_present": false,
+        "label_present": false
+      },
+      "/en/careers": {
+        "label": "Careers",
+        "href_present": false,
+        "label_present": false
+      },
+      "/en/policies": {
+        "label": "Policies",
+        "href_present": false,
+        "label_present": false
+      }
+    }
+  },
+  "search_channel_check": {
+    "checked_at": "2026-05-27T00:54:18.031456Z",
+    "counts": {
+      "seo_search_channel_queue_items": 3,
+      "seo_search_channel_queue_batches": 3,
+      "seo_search_channel_queue_events": 12,
+      "seo_indexnow_submissions": 0,
+      "seo_domestic_submission_logs": 0
+    },
+    "draft_page_queue_items": [],
+    "queue_items_2_3": [
+      {
+        "id": 2,
+        "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+        "locale": "en",
+        "page_entity_type": "test_detail",
+        "source_authority": "scale_catalog",
+        "channel": "indexnow",
+        "approval_state": "approved",
+        "execution_state": "submitted",
+        "indexability_state": "indexable",
+        "updated_at": "2026-05-23 05:18:45"
+      },
+      {
+        "id": 3,
+        "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+        "locale": "zh-CN",
+        "page_entity_type": "test_detail",
+        "source_authority": "scale_catalog",
+        "channel": "indexnow",
+        "approval_state": "approved",
+        "execution_state": "submitted",
+        "indexability_state": "indexable",
+        "updated_at": "2026-05-25 04:09:44"
+      }
+    ],
+    "config_gates": {
+      "indexnow_enabled": false,
+      "indexnow_live_api_enabled": false,
+      "search_channel_queue_no_live_submission": true,
+      "real_url_submission_allowed": false,
+      "draft_url_submission_allowed": false
+    },
+    "no_queue_items_for_targets": true,
+    "gates_closed": true
+  },
+  "gate_state": {
+    "publish_gate_closed": true,
+    "cms_mutation_gate_closed": true,
+    "deploy_gate_closed": true,
+    "search_channel_gate_closed": true,
+    "url_submission_gate_closed": true,
+    "sitemap_llms_gate_closed": true,
+    "footer_nav_gate_closed": true
+  },
+  "approval_phrase_for_future_publish": "Not issued yet: controlled publish is blocked until GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01 resolves legal/company/foundation review blockers and a new readiness pass approves the final draft set.",
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_sitemap_llms_exposure": true,
+  "no_footer_nav_exposure": true,
+  "sidecar_issues": [
+    {
+      "key": "support",
+      "status": "deferred_missing_authority"
+    },
+    {
+      "key": "privacy_terms",
+      "status": "separate_legal_policy_scope_required"
+    },
+    {
+      "key": "existing_published_records",
+      "status": "separate_update_scope_required"
+    }
+  ],
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01",
+  "generated_at": "2026-05-27T08:50:00+08:00",
+  "validation": {
+    "composer_install": {
+      "status": "passed",
+      "command": "cd backend && composer install --no-interaction --no-progress",
+      "evidence": "Installed dependencies in isolated worktree only; ignored vendor/public/cache artifacts were not staged."
+    },
+    "focused_test": {
+      "status": "passed",
+      "command": "cd backend && php artisan test --filter=GlobalEnZhContentPagesPublishReadiness01 --no-ansi",
+      "evidence": "1 test passed, 17 assertions."
+    },
+    "route_list": {
+      "status": "passed",
+      "command": "cd backend && php artisan route:list --no-ansi",
+      "evidence": "203 routes listed."
+    },
+    "pint": {
+      "status": "passed",
+      "command": "cd backend && vendor/bin/pint --test",
+      "evidence": "3583 files passed."
+    },
+    "composer_validate": {
+      "status": "passed",
+      "command": "cd backend && composer validate --strict",
+      "evidence": "composer.json is valid."
+    },
+    "composer_audit": {
+      "status": "passed",
+      "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+      "evidence": "No security vulnerability advisories found."
+    },
+    "json_yaml_parse": {
+      "status": "passed",
+      "evidence": "Generated JSON, pr-train-state.json, and pr-train.yaml parse successfully."
+    },
+    "diff_check": {
+      "status": "passed",
+      "command": "git diff --check && git diff --cached --check"
+    },
+    "fap_web_reference_check": {
+      "status": "passed_with_preexisting_untracked_files",
+      "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+      "evidence": "Observed pre-existing untracked .playwright-mcp/ and article-image-smoke.png; no fap-web changes were made or committed by this task."
+    }
+  }
+}
