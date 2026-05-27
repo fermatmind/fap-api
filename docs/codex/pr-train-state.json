@@ -29049,6 +29049,74 @@
     "checks": {},
     "history": []
   },
+  "SUPPLY-CHAIN-SYMFONY-AUDIT-UNBLOCK-20260527": {
+    "status": "implementation_in_progress",
+    "repo": "fap-api",
+    "branch": "codex/supply-chain-symfony-audit-unblock-20260527",
+    "base": "main",
+    "unblocks": [
+      "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1"
+    ],
+    "title": "fix(deps): unblock Symfony Composer audit",
+    "commit_sha": "b7833e07220c885ab9af12696323000c253a7a0b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1727",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "cd backend && vendor/bin/pint --test",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+        ],
+        "notes": "Composer audit reports no advisories after updating the affected Symfony lock entries. The backend MBTI CI chain regenerated BIG5_OCEAN compiled artifacts as a local side effect; those generated diffs were restored because they are outside this supply-chain sidecar scope."
+      },
+      "scope": {
+        "status": "passed",
+        "changed_files": [
+          "backend/composer.lock",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "outside_scope": []
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T18:02:53+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Started sidecar supply-chain unblocker from latest main to clear required Composer audit advisories blocking PR #1726."
+      },
+      {
+        "at": "2026-05-27T18:08:22+08:00",
+        "status": "local_checks_passed",
+        "summary": "Composer audit, route list, migrate pretend, Pint, backend MBTI CI, diff check, JSON parse, and YAML parse passed locally."
+      },
+      {
+        "at": "2026-05-27T18:08:22+08:00",
+        "status": "scope_validation_passed",
+        "summary": "Changed files are limited to backend/composer.lock and train metadata; generated BIG5_OCEAN compiled artifacts were restored as out-of-scope CI side effects."
+      },
+      {
+        "at": "2026-05-27T18:08:22+08:00",
+        "status": "local_commit_created",
+        "summary": "Created local commit b7833e07220c885ab9af12696323000c253a7a0b for the Symfony Composer audit sidecar unblocker."
+      },
+      {
+        "at": "2026-05-27T18:12:27+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1727 for the Symfony Composer audit sidecar unblocker."
+      }
+    ]
+  },
   "REPAIR-CAREER-DETAIL-READY-ROLLOUT-GATE-1": {
     "status": "planned",
     "repo": "fap-api",

@@ -5393,6 +5393,41 @@ prs:
       github_checks_required: true
       squash: true
 
+  - id: SUPPLY-CHAIN-SYMFONY-AUDIT-UNBLOCK-20260527
+    repo: fap-api
+    branch: codex/supply-chain-symfony-audit-unblock-20260527
+    base: main
+    title: "fix(deps): unblock Symfony Composer audit"
+    name: "Unblock required supply-chain Composer audit"
+    train_scope: supply_chain_unblocker
+    unblocks:
+      - REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1
+    scope:
+      - Update backend Composer lock dependencies only as needed to clear current Symfony Composer audit advisories.
+      - Keep this sidecar PR separate from the Career detail-ready 1048 candidate-prep scope.
+      - Do not change backend runtime behavior, Career authority semantics, CMS data, production DB, or deployment state.
+    allowed_paths:
+      - backend/composer.lock
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify Career runtime code, candidate prep code, routes, migrations, controllers, services, CMS content, or fap-web.
+      - Run production migration, production deploy, production DB mutation, CMS mutation, rollout apply, or candidate prep apply.
+      - Broaden Composer updates beyond the packages Composer requires to clear the active audit advisories.
+    validation:
+      - composer audit --locked --no-interaction --ignore-unreachable
+      - php artisan route:list --no-ansi
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - vendor/bin/pint --test
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())"
+    merge_policy:
+      github_checks_required: true
+      squash: true
+
   - id: REPAIR-CAREER-DETAIL-READY-ROLLOUT-GATE-1
     repo: fap-api
     depends_on:
