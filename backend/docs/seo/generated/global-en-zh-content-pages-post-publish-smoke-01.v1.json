@@ -1,0 +1,375 @@
+{
+  "schema_version": "global-en-zh-content-pages-post-publish-smoke-01.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-POST-PUBLISH-SMOKE-01",
+  "final_decision": "content_pages_post_publish_smoke_completed_with_api_base_blocker",
+  "target_pages": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies"
+  ],
+  "cms_record_state": {
+    "brand": {
+      "id": 26,
+      "slug": "brand",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": false,
+      "published_at": "2026-05-27T00:00:00.000000Z",
+      "canonical_path": "/en/brand",
+      "source_doc": "global-en-zh-content-pages-cms-draft-update-01 from human revision packages",
+      "working_revision_id": 24,
+      "published_revision_id": 24,
+      "foundation_guarded_hits": [],
+      "contains_planned_public_benefit_shareholding": null,
+      "contains_public_benefit_mission_and_governance": null
+    },
+    "careers": {
+      "id": 29,
+      "slug": "careers",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": false,
+      "published_at": "2026-05-27T00:00:00.000000Z",
+      "canonical_path": "/en/careers",
+      "source_doc": "global-en-zh-content-pages-cms-draft-update-01 from human revision packages",
+      "working_revision_id": 27,
+      "published_revision_id": 27,
+      "foundation_guarded_hits": [],
+      "contains_planned_public_benefit_shareholding": null,
+      "contains_public_benefit_mission_and_governance": null
+    },
+    "charter": {
+      "id": 27,
+      "slug": "charter",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": false,
+      "published_at": "2026-05-27T00:00:00.000000Z",
+      "canonical_path": "/en/charter",
+      "source_doc": "global-en-zh-content-pages-cms-draft-update-01 from human revision packages",
+      "working_revision_id": 25,
+      "published_revision_id": 25,
+      "foundation_guarded_hits": [],
+      "contains_planned_public_benefit_shareholding": null,
+      "contains_public_benefit_mission_and_governance": null
+    },
+    "foundation": {
+      "id": 28,
+      "slug": "foundation",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": false,
+      "published_at": "2026-05-27T00:00:00.000000Z",
+      "canonical_path": "/en/foundation",
+      "source_doc": "global-en-zh-content-pages-cms-draft-update-01 from human revision packages; r2 foundation guarded-phrase patch applied",
+      "working_revision_id": 26,
+      "published_revision_id": 26,
+      "foundation_guarded_hits": [],
+      "contains_planned_public_benefit_shareholding": true,
+      "contains_public_benefit_mission_and_governance": true
+    },
+    "policies": {
+      "id": 30,
+      "slug": "policies",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": false,
+      "published_at": "2026-05-27T00:00:00.000000Z",
+      "canonical_path": "/en/policies",
+      "source_doc": "global-en-zh-content-pages-cms-draft-update-01 from human revision packages",
+      "working_revision_id": 28,
+      "published_revision_id": 28,
+      "foundation_guarded_hits": [],
+      "contains_planned_public_benefit_shareholding": null,
+      "contains_public_benefit_mission_and_governance": null
+    }
+  },
+  "api_check": {
+    "apex_same_origin_api": {
+      "brand": {
+        "status": 200,
+        "final_url": "https://fermatmind.com/api/v0.5/content-pages/brand?locale=en&org_id=0",
+        "content_type": "application/json",
+        "error": null,
+        "ok": true,
+        "page_status": "published",
+        "is_public": true,
+        "is_indexable": false,
+        "published_at_present": true,
+        "canonical_path": "/en/brand",
+        "title": "Brand and Usage Guidelines",
+        "h1": "Brand and Usage Guidelines"
+      },
+      "charter": {
+        "status": 200,
+        "final_url": "https://fermatmind.com/api/v0.5/content-pages/charter?locale=en&org_id=0",
+        "content_type": "application/json",
+        "error": null,
+        "ok": true,
+        "page_status": "published",
+        "is_public": true,
+        "is_indexable": false,
+        "published_at_present": true,
+        "canonical_path": "/en/charter",
+        "title": "FermatMind Editorial Charter",
+        "h1": "FermatMind Editorial Charter"
+      },
+      "foundation": {
+        "status": 200,
+        "final_url": "https://fermatmind.com/api/v0.5/content-pages/foundation?locale=en&org_id=0",
+        "content_type": "application/json",
+        "error": null,
+        "ok": true,
+        "page_status": "published",
+        "is_public": true,
+        "is_indexable": false,
+        "published_at_present": true,
+        "canonical_path": "/en/foundation",
+        "title": "Public-Benefit Mission and Governance",
+        "h1": "Public-Benefit Mission and Governance",
+        "foundation_forbidden_hits": [],
+        "contains_planned_public_benefit_shareholding": true,
+        "contains_public_benefit_mission_and_governance": true
+      },
+      "careers": {
+        "status": 200,
+        "final_url": "https://fermatmind.com/api/v0.5/content-pages/careers?locale=en&org_id=0",
+        "content_type": "application/json",
+        "error": null,
+        "ok": true,
+        "page_status": "published",
+        "is_public": true,
+        "is_indexable": false,
+        "published_at_present": true,
+        "canonical_path": "/en/careers",
+        "title": "Work With FermatMind",
+        "h1": "Work With FermatMind"
+      },
+      "policies": {
+        "status": 200,
+        "final_url": "https://fermatmind.com/api/v0.5/content-pages/policies?locale=en&org_id=0",
+        "content_type": "application/json",
+        "error": null,
+        "ok": true,
+        "page_status": "published",
+        "is_public": true,
+        "is_indexable": false,
+        "published_at_present": true,
+        "canonical_path": "/en/policies",
+        "title": "Policy Overview",
+        "h1": "Policy Overview"
+      }
+    },
+    "backend_api_host_observation": {
+      "brand": {
+        "status": null,
+        "final_url": null,
+        "content_type": null,
+        "error": "URLError: <urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>"
+      },
+      "charter": {
+        "status": null,
+        "final_url": null,
+        "content_type": null,
+        "error": "URLError: <urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>"
+      },
+      "foundation": {
+        "status": null,
+        "final_url": null,
+        "content_type": null,
+        "error": "URLError: <urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>"
+      },
+      "careers": {
+        "status": null,
+        "final_url": null,
+        "content_type": null,
+        "error": "URLError: <urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>"
+      },
+      "policies": {
+        "status": null,
+        "final_url": null,
+        "content_type": null,
+        "error": "URLError: <urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>"
+      }
+    },
+    "summary": "Apex same-origin API path returned 200 for all five pages; api.fermatmind.com returned TLS EOF errors from the smoke environment."
+  },
+  "public_frontend_runtime_check": {
+    "brand": {
+      "url": "https://fermatmind.com/en/brand",
+      "http_status": 200,
+      "final_url": "https://fermatmind.com/en/brand",
+      "title": "Page Not Found | FermatMind",
+      "h1": "Brand and Usage Guidelines",
+      "canonical": null,
+      "robots": "noindex, follow",
+      "has_noindex": true,
+      "has_staging_canonical": false,
+      "has_private_flow_marker": false
+    },
+    "charter": {
+      "url": "https://fermatmind.com/en/charter",
+      "http_status": 200,
+      "final_url": "https://fermatmind.com/en/charter",
+      "title": "Page Not Found | FermatMind",
+      "h1": "FermatMind Editorial Charter",
+      "canonical": null,
+      "robots": "noindex, follow",
+      "has_noindex": true,
+      "has_staging_canonical": false,
+      "has_private_flow_marker": false
+    },
+    "foundation": {
+      "url": "https://fermatmind.com/en/foundation",
+      "http_status": 404,
+      "final_url": "https://fermatmind.com/en/foundation",
+      "title": "Page Not Found | FermatMind",
+      "h1": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "has_noindex": true,
+      "has_staging_canonical": false,
+      "has_private_flow_marker": false
+    },
+    "careers": {
+      "url": "https://fermatmind.com/en/careers",
+      "http_status": 404,
+      "final_url": "https://fermatmind.com/en/careers",
+      "title": "Page Not Found | FermatMind",
+      "h1": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "has_noindex": true,
+      "has_staging_canonical": false,
+      "has_private_flow_marker": false
+    },
+    "policies": {
+      "url": "https://fermatmind.com/en/policies",
+      "http_status": 404,
+      "final_url": "https://fermatmind.com/en/policies",
+      "title": "Page Not Found | FermatMind",
+      "h1": null,
+      "canonical": null,
+      "robots": "noindex, follow",
+      "has_noindex": true,
+      "has_staging_canonical": false,
+      "has_private_flow_marker": false
+    }
+  },
+  "canonical_robots_check": {
+    "brand": {
+      "canonical_expected": "https://fermatmind.com/en/brand",
+      "canonical_actual": null,
+      "canonical_ok": false,
+      "robots_actual": "noindex, follow",
+      "robots_expected_nonindexable_safe": "noindex",
+      "robots_safe_for_nonindexable_publish": true
+    },
+    "charter": {
+      "canonical_expected": "https://fermatmind.com/en/charter",
+      "canonical_actual": null,
+      "canonical_ok": false,
+      "robots_actual": "noindex, follow",
+      "robots_expected_nonindexable_safe": "noindex",
+      "robots_safe_for_nonindexable_publish": true
+    },
+    "foundation": {
+      "canonical_expected": "https://fermatmind.com/en/foundation",
+      "canonical_actual": null,
+      "canonical_ok": false,
+      "robots_actual": "noindex, follow",
+      "robots_expected_nonindexable_safe": "noindex",
+      "robots_safe_for_nonindexable_publish": true
+    },
+    "careers": {
+      "canonical_expected": "https://fermatmind.com/en/careers",
+      "canonical_actual": null,
+      "canonical_ok": false,
+      "robots_actual": "noindex, follow",
+      "robots_expected_nonindexable_safe": "noindex",
+      "robots_safe_for_nonindexable_publish": true
+    },
+    "policies": {
+      "canonical_expected": "https://fermatmind.com/en/policies",
+      "canonical_actual": null,
+      "canonical_ok": false,
+      "robots_actual": "noindex, follow",
+      "robots_expected_nonindexable_safe": "noindex",
+      "robots_safe_for_nonindexable_publish": true
+    }
+  },
+  "foundation_fact_state": "planned_public_benefit_shareholding",
+  "forbidden_foundation_claims_absent": true,
+  "sitemap_exposure_check": {
+    "status": 200,
+    "target_page_hits": [],
+    "exposed": false
+  },
+  "llms_exposure_check": {
+    "llms_txt_status": 200,
+    "llms_full_txt_status": null,
+    "target_page_hits": [],
+    "exposed": false
+  },
+  "footer_nav_exposure_check": {
+    "checked_url": "https://fermatmind.com/en",
+    "status": 200,
+    "target_page_hits": [],
+    "exposed": false
+  },
+  "search_channel_check": {
+    "content_page_queue_items": [],
+    "content_page_queue_item_count": 0,
+    "queue_item_2_state": null,
+    "queue_item_3_state": null,
+    "live_submission_detected_for_targets": false,
+    "queue_item_created_for_targets": false
+  },
+  "gate_state": {
+    "queue_write": false,
+    "live_submission": null,
+    "external_api": null,
+    "indexnow_live": null
+  },
+  "suspected_blocker": "api_host_tls_or_base_url_issue",
+  "runtime_blocker_diagnosis": {
+    "classification": "api_host_tls_or_base_url_issue",
+    "details": [
+      "Public apex API /api/v0.5/content-pages/{slug}?locale=en returns 200 for all five published CMS pages.",
+      "Direct https://api.fermatmind.com/api/v0.5/content-pages/{slug}?locale=en checks return TLS EOF from the smoke environment.",
+      "Node1 PM2 env observation shows NEXT_PUBLIC_API_URL is empty, so fap-web server-side buildApiUrl falls back to https://api.fermatmind.com.",
+      "Public frontend routes are partially unstable: requests may return 404 or render content with stale Page Not Found metadata and missing canonical."
+    ],
+    "node1_runtime_env_observation": {
+      "returncode": 0,
+      "lines": [
+        "VM-4-7-ubuntu",
+        "PORT: 3000",
+        "NODE_ENV: production",
+        "NEXT_PUBLIC_API_URL: ",
+        "NEXT_PUBLIC_SITE_URL: https://fermatmind.com"
+      ]
+    },
+    "code_observation": {
+      "fap_web_server_default_api_origin": "lib/api-base.ts defaults server-side API origin to https://api.fermatmind.com when NEXT_PUBLIC_API_URL is empty.",
+      "content_page_route": "app/(localized)/[locale]/contentPageRoute.tsx calls getContentPage(); null result returns notFound().",
+      "content_page_fetcher": "lib/cms/content-pages.ts fetches /v0.5/content-pages/{slug} and only returns page when page.isPublic is true."
+    }
+  },
+  "recommended_next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-FRONTEND-RUNTIME-REPAIR-01",
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_fap_web_mutation": true,
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-FRONTEND-RUNTIME-REPAIR-01"
+}
