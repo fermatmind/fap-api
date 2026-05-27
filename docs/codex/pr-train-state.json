@@ -29901,17 +29901,17 @@
     "repo": "fap-api",
     "branch": "codex/riasec-en-questions-pack-translation-02",
     "base": "main",
-    "status": "local_validation_passed",
+    "status": "merged",
     "depends_on": [
       "MBTI-EN-QUESTIONS-PACK-PROJECTION-01"
     ],
     "title": "RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02 RIASEC English question pack translation",
-    "commit_sha": "17bbb89e6ac290115c0811ceacf724c64caf9376",
+    "commit_sha": "eb3876451408231a542c3e96bd20d0d9a7f7728e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1734",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-27T16:22:48Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -29974,17 +29974,18 @@
         "evidence": "After CI fix, Big Five freeze classifier test passed, RIASEC focused and flow tests passed, and route list, Pint, composer validate/audit, JSON/YAML parse, diff checks, and fap-web reference status passed locally."
       },
       "github_required_checks": {
-        "status": "pending_rerun",
+        "status": "pass",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1734",
-        "previous_failed_checks": [
-          "verify-mbti-legacy",
-          "verify-mbti-v2"
-        ],
-        "fix_evidence": "Local BigFiveResultPageV2CoreBodyPreviewTest now passes with the RIASEC question-pack-only allowance."
+        "evidence": "GitHub required checks passed after CI scope fix; PR #1734 was squash-merged as eb3876451408231a542c3e96bd20d0d9a7f7728e."
       },
       "ci_fix_scope": {
         "status": "pass",
         "evidence": "Added a focused test-only freeze classifier allowance for backend/content_packs/RIASEC v1-standard-60 and v1-enhanced-140 compiled questions/manifests; no runtime code changed."
+      },
+      "post_merge_focused_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=RiasecQuestionLocaleTranslation --no-ansi",
+        "evidence": "3 tests passed, 1226 assertions after syncing main."
       }
     },
     "scope": {
@@ -30033,6 +30034,125 @@
         "at": "2026-05-28T01:03:00+08:00",
         "status": "local_validation_passed_after_ci_fix",
         "summary": "Added focused Big Five freeze classifier allowance for RIASEC question-pack translation files and reran Big Five freeze, RIASEC focused/flow, route list, Pint, composer validate/audit, JSON/YAML parse, and diff checks successfully."
+      },
+      {
+        "at": "2026-05-28T00:22:48+08:00",
+        "status": "merged_reconciled",
+        "summary": "Reconciled PR #1734 as merged with squash commit eb3876451408231a542c3e96bd20d0d9a7f7728e; origin/main contains the merge commit, branch cleanup is complete, and post-merge focused test passed."
+      }
+    ]
+  },
+  "ENNEAGRAM-FC144-EN-QUESTIONS-PACK-03": {
+    "id": "ENNEAGRAM-FC144-EN-QUESTIONS-PACK-03",
+    "repo": "fap-api",
+    "branch": "codex/enneagram-fc144-en-questions-pack-03",
+    "base": "main",
+    "status": "local_validation_passed",
+    "depends_on": [
+      "RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02"
+    ],
+    "title": "ENNEAGRAM-FC144-EN-QUESTIONS-PACK-03 Enneagram forced-choice English question pack",
+    "commit_sha": "2e57614d36f83133c61bb71ef1c8b87abcaa4381",
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "TAKE-EN-QUESTION-LOCALE-SCAN-00 recommended ENNEAGRAM-FC144-EN-QUESTIONS-PACK-03 and the user instructed the three backend content-pack fixes to proceed sequentially."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02 merged as PR #1734 with merge commit eb3876451408231a542c3e96bd20d0d9a7f7728e."
+      },
+      "scope": {
+        "status": "pass",
+        "allowed_files": [
+          "backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/questions.compiled.json",
+          "backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/manifest.json",
+          "backend/tests/Feature/V0_3/EnneagramQuestionLocaleTranslationTest.php",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "outside_scope": [],
+        "changed_files": [
+          "backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/manifest.json",
+          "backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/questions.compiled.json",
+          "backend/tests/Feature/V0_3/EnneagramQuestionLocaleTranslationTest.php",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "docs/codex/pr-train-state.json",
+          "docs/codex/pr-train.yaml"
+        ],
+        "evidence": "Changed files are confined to Enneagram forced-choice compiled question pack/manifest, focused Enneagram locale test, Big Five freeze classifier test-only allowance for the Enneagram pack files, and authorized PR-train metadata."
+      },
+      "focused_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramQuestionLocaleTranslation --no-ansi",
+        "evidence": "3 tests passed, 944 assertions."
+      },
+      "enneagram_flow_regression": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=EnneagramAssessmentFlow --no-ansi",
+        "evidence": "3 tests passed, 66 assertions."
+      },
+      "local_validation": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=EnneagramQuestionLocaleTranslation --no-ansi",
+          "cd backend && php artisan test --filter=EnneagramAssessmentFlow --no-ansi",
+          "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/questions.compiled.json >/dev/null",
+          "python3 -m json.tool backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/manifest.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 - <<'PY'\nimport yaml, pathlib\nyaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\nprint('yaml ok')\nPY",
+          "git diff --check",
+          "git diff --cached --check",
+          "git -C /Users/rainie/Desktop/GitHub/fap-web status --short"
+        ],
+        "evidence": "Focused Enneagram locale test, Enneagram flow regression, Big Five freeze classifier, route list, Pint, composer validate/audit, JSON/YAML parse, diff checks, and fap-web reference status passed locally."
+      }
+    },
+    "scope": {
+      "allowed_files": [
+        "backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/questions.compiled.json",
+        "backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/manifest.json",
+        "backend/tests/Feature/V0_3/EnneagramQuestionLocaleTranslationTest.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+        "docs/codex/pr-train.yaml",
+        "docs/codex/pr-train-state.json"
+      ],
+      "api_runtime_change": false,
+      "content_pack_mutation": true,
+      "cms_mutation": false,
+      "publish": false,
+      "deploy": false,
+      "search_channel_action": false,
+      "url_submission": false,
+      "fap_web_modified": false,
+      "frontend_fallback_authority": false
+    },
+    "history": [
+      {
+        "at": "2026-05-28T00:29:47+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Started Enneagram forced-choice 144 English question pack translation after RIASEC PR merge; scope is Enneagram forced-choice compiled question pack, manifest hash, focused test, freeze classifier allowance, and train metadata only."
+      },
+      {
+        "at": "2026-05-28T00:38:00+08:00",
+        "status": "local_validation_passed",
+        "summary": "Translated Enneagram forced-choice 144 English option text in backend content pack, updated manifest hash, added focused locale test and Big Five freeze classifier allowance, and passed local validation."
+      },
+      {
+        "at": "2026-05-28T00:41:00+08:00",
+        "status": "committed",
+        "summary": "Committed local Enneagram forced-choice English question pack fix as 2e57614d36f83133c61bb71ef1c8b87abcaa4381."
       }
     ]
   }

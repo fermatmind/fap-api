@@ -15106,6 +15106,53 @@ prs:
     frontend_fallback_authority: false
     next_task: ENNEAGRAM-FC144-EN-QUESTIONS-PACK-03
 
+  - id: ENNEAGRAM-FC144-EN-QUESTIONS-PACK-03
+    repo: fap-api
+    depends_on:
+      - RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02
+    branch: codex/enneagram-fc144-en-questions-pack-03
+    base: main
+    title: "ENNEAGRAM-FC144-EN-QUESTIONS-PACK-03 Enneagram forced-choice English question pack"
+    train_scope: take_question_locale_parity
+    risk_level: p1_content_pack_translation
+    allowed_paths:
+      - backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/questions.compiled.json
+      - backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/manifest.json
+      - backend/tests/Feature/V0_3/EnneagramQuestionLocaleTranslationTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Translate Enneagram enneagram_forced_choice_144 English displayed forced-choice options in backend content pack authority.
+      - Preserve zh-CN displayed option text, option codes, type codes, pair routing, question count, scoring semantics, and Enneagram likert 105 behavior.
+      - Do not change MBTI, RIASEC, Big Five, IQ, EQ, Clinical Combo, SDS, fap-web runtime, CMS, publish state, deploy state, Search Channel, sitemap, llms, footer, or nav.
+    validation:
+      - cd backend && php artisan test --filter=EnneagramQuestionLocaleTranslation --no-ansi
+      - cd backend && php artisan test --filter=EnneagramAssessmentFlow --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/questions.compiled.json >/dev/null
+      - python3 -m json.tool backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/manifest.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    content_pack_mutation: true
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: null
+
   - id: MBTI-DESKTOP-CLONE-MEDIA-ASSETS-01
     repo: fap-api
     branch: codex/mbti-desktop-clone-media-assets-01
