@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-28T00:23:36+08:00",
+  "updated_at": "2026-05-28T00:31:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -20861,10 +20861,10 @@
       "repo": "fap-api",
       "branch": "codex/mbti-desktop-clone-media-assets-01",
       "base": "main",
-      "status": "local_validation_passed",
+      "status": "pr_opened",
       "title": "MBTI-DESKTOP-CLONE-MEDIA-ASSETS-01 MBTI desktop clone media asset baseline",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "eeeb271d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1735",
       "checks": {
         "manifest_registration": {
           "status": "pass",
@@ -20918,7 +20918,8 @@
         },
         "github_required_checks": {
           "status": "pending",
-          "evidence": "PR not opened yet."
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1735",
+          "evidence": "PR opened; checks pending."
         }
       },
       "scope": {
@@ -20948,6 +20949,11 @@
           "at": "2026-05-28T00:23:36+08:00",
           "status": "local_validation_passed",
           "summary": "Generated CDN-ready repo-backed Media Library baseline and static SVG assets for 224 MBTI desktop clone slots; focused tests and common validation passed locally."
+        },
+        {
+          "at": "2026-05-28T00:31:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1735 after local validation passed."
         }
       ]
     }
