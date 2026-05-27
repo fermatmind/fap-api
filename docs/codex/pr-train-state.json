@@ -28160,7 +28160,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01": {
-    "status": "pr_open",
+    "status": "github_checks_passed",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-cms-draft-update-01",
     "base": "main",
@@ -28275,6 +28275,119 @@
         "at": "2026-05-27T11:09:10+08:00",
         "status": "github_checks_passed",
         "summary": "GitHub checks passed for PR #1716 and merge state was CLEAN."
+      }
+    ]
+  },
+  "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2": {
+    "status": "pr_open",
+    "repo": "fap-api",
+    "branch": "codex/global-en-zh-content-pages-publish-readiness-r2",
+    "base": "main",
+    "depends_on": [
+      "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01"
+    ],
+    "title": "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2 publish readiness recheck for Wave 1 English content pages",
+    "commit_sha": "3422f4d8c4995cbce259df22c427787368c95796",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1717",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "dependency_verification": {
+        "status": "passed",
+        "evidence": "GitHub showed PR #1716 merged at 2026-05-27T03:16:01Z with merge commit 0a57dbf2ef7f0354f85cd0a894491ff09faf2882; local main and origin/main match that commit."
+      },
+      "cms_draft_state": {
+        "status": "passed",
+        "evidence": "Production read-only Laravel query confirmed brand, charter, foundation, careers, and policies exist as en draft records with is_public=false, is_indexable=false, and published_at=null."
+      },
+      "content_completeness": {
+        "status": "passed",
+        "evidence": "All five target records include title, summary/description, H1/body headings, content_md, SEO title, meta description, canonical path, translation group, and zh-CN counterpart."
+      },
+      "claim_boundary": {
+        "status": "passed",
+        "evidence": "No affirmative unsupported diagnosis, treatment, salary, career guarantee, MBTI income/turnover, hiring-fit, legal, foundation, donation, grant, board, or completed shareholding claims were found."
+      },
+      "public_runtime": {
+        "status": "passed",
+        "evidence": "Public runtime returned 404 for /en/brand, /en/charter, /en/foundation, /en/careers, and /en/policies."
+      },
+      "sitemap_llms_footer": {
+        "status": "passed",
+        "evidence": "sitemap.xml, llms.txt, llms-full.txt, and /en homepage did not contain target page paths."
+      },
+      "search_channel": {
+        "status": "passed",
+        "evidence": "Production seo_intel connection exposed Search Channel queue tables; only MBTI queue items 2 and 3 matched checked URLs, and no content page queue item was present. Gates read closed."
+      },
+      "focused_test": {
+        "status": "passed",
+        "command": "php artisan test --filter=GlobalEnZhContentPagesPublishReadinessR2 --no-ansi",
+        "evidence": "1 passed, 23 assertions."
+      },
+      "route_list": {
+        "status": "passed",
+        "command": "php artisan route:list --no-ansi"
+      },
+      "pint": {
+        "status": "passed",
+        "command": "vendor/bin/pint --test",
+        "evidence": "3587 files passed."
+      },
+      "composer_validate": {
+        "status": "passed",
+        "command": "composer validate --strict",
+        "evidence": "composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "passed",
+        "command": "composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "No security vulnerability advisories found."
+      },
+      "json_yaml_parse": {
+        "status": "passed",
+        "evidence": "Generated JSON, pr-train-state JSON, and pr-train YAML parsed successfully."
+      },
+      "diff_check": {
+        "status": "passed",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "fap_web_reference_check": {
+        "status": "passed_with_sidecar",
+        "evidence": "Reference-only fap-web working tree had pre-existing tracked and untracked changes; no fap-web files were modified by this task."
+      },
+      "github_checks": {
+        "status": "passed",
+        "evidence": "PR #1717 checks passed and mergeStateStatus was CLEAN."
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T11:54:41+08:00",
+        "status": "read_only_checks_completed",
+        "summary": "Completed production read-only publish readiness recheck for Wave 1 English content page drafts."
+      },
+      {
+        "at": "2026-05-27T12:01:05+08:00",
+        "status": "local_checks_passed",
+        "summary": "Focused test, route list, pint, composer validate/audit, JSON/YAML parsing, and diff checks passed."
+      },
+      {
+        "at": "2026-05-27T12:01:48+08:00",
+        "status": "committed",
+        "summary": "Committed publish readiness R2 report artifacts and focused test."
+      },
+      {
+        "at": "2026-05-27T12:02:33+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1717 for the scoped publish readiness R2 report."
+      },
+      {
+        "at": "2026-05-27T12:09:07+08:00",
+        "status": "github_checks_passed",
+        "summary": "GitHub checks passed for PR #1717 and merge state was CLEAN."
       }
     ]
   }

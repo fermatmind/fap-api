@@ -1,0 +1,220 @@
+{
+  "schema_version": "global-en-zh-content-pages-publish-readiness-r2.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2",
+  "final_decision": "content_pages_publish_readiness_r2_completed_ready_for_controlled_publish",
+  "target_pages": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies"
+  ],
+  "per_page_publish_readiness": {
+    "brand": {
+      "classification": "publish_ready_with_founder_approval",
+      "reason": "Brand usage copy is complete, bounded, and avoids unsupported certification, partnership, endorsement, market-position, and legal-status claims."
+    },
+    "charter": {
+      "classification": "publish_ready_with_legal_approval",
+      "reason": "Editorial charter copy is complete and explicitly states it is not a legal governance document, board charter, fiduciary commitment, or Terms/Privacy substitute."
+    },
+    "foundation": {
+      "classification": "publish_ready_with_legal_approval",
+      "reason": "Foundation copy uses planned public-benefit shareholding language only and avoids affirmative completed legal, nonprofit, charity, donation, grant, board, fiduciary, ownership-percentage, or completed-transfer claims."
+    },
+    "careers": {
+      "classification": "publish_ready_with_company_fact_approval",
+      "reason": "Careers copy is complete and avoids current opening, hiring timeline, employment term, equal opportunity, or active recruiting claims; company/founder approval is still required before publish."
+    },
+    "policies": {
+      "classification": "publish_ready_with_legal_approval",
+      "reason": "Policy overview copy is complete and states it does not replace Terms, Privacy Policy, product notices, order terms, or signed agreements."
+    }
+  },
+  "cms_draft_state": {
+    "checked_at": "2026-05-27T11:52:00+08:00",
+    "source": "production Laravel read-only query",
+    "all_targets_exist": true,
+    "all_locale_en": true,
+    "all_status_draft": true,
+    "all_non_public": true,
+    "all_non_indexable": true,
+    "all_published_at_null": true,
+    "all_source_doc": "global-en-zh-content-pages-cms-draft-update-01 from human revision packages",
+    "target_titles": {
+      "brand": "Brand and Usage Guidelines",
+      "charter": "FermatMind Editorial Charter",
+      "foundation": "Public-Benefit Mission and Governance",
+      "careers": "Work With FermatMind",
+      "policies": "Policy Overview"
+    }
+  },
+  "content_completeness_check": {
+    "all_titles_present": true,
+    "all_descriptions_present": true,
+    "all_h1_present": true,
+    "all_body_blocks_present": true,
+    "all_seo_metadata_present": true,
+    "all_zh_counterparts_present": true,
+    "all_translation_groups_present": true,
+    "placeholder_content_detected": false,
+    "obvious_machine_translation_blocker_detected": false,
+    "obvious_chinese_leakage_detected": false,
+    "notes": [
+      "The brand page includes the Chinese product name as an intentional bilingual naming reference, not leaked untranslated body copy."
+    ]
+  },
+  "claim_boundary_check": {
+    "global_forbidden_claims_detected": false,
+    "diagnosis_treatment_cure_claim_detected": false,
+    "salary_or_career_success_guarantee_detected": false,
+    "hiring_fit_guarantee_detected": false,
+    "precise_career_recommendation_claim_detected": false,
+    "mbti_income_or_turnover_prediction_claim_detected": false,
+    "unsupported_privacy_security_legal_commitment_detected": false,
+    "unsupported_company_foundation_fact_detected": false,
+    "negative_boundary_mentions_are_not_affirmative_claims": true
+  },
+  "legal_company_fact_check": {
+    "brand": {
+      "unsupported_awards_certifications_endorsements_partnerships_market_position_or_legal_status": false,
+      "remaining_approval": "founder_approval"
+    },
+    "charter": {
+      "legal_charter_or_board_charter_claim": false,
+      "terms_privacy_substitute_claim": false,
+      "legal_fiduciary_language": false,
+      "remaining_approval": "legal_approval"
+    },
+    "foundation": {
+      "registered_foundation_claim": false,
+      "nonprofit_legal_status_claim": false,
+      "charity_registration_claim": false,
+      "donation_or_grant_program_claim": false,
+      "formal_board_governance_claim": false,
+      "legal_fiduciary_duty_claim": false,
+      "exact_ownership_percentage_claim": false,
+      "completed_equity_transfer_or_foundation_holding_claim": false,
+      "remaining_approval": "legal_approval"
+    },
+    "careers": {
+      "current_hiring_claim": false,
+      "open_roles_claim": false,
+      "hiring_timeline_or_process_claim": false,
+      "employment_terms_or_equal_opportunity_policy_claim": false,
+      "remaining_approval": "company_fact_approval"
+    },
+    "policies": {
+      "terms_or_privacy_replacement_claim": false,
+      "new_refund_dispute_privacy_retention_security_minors_compliance_or_legal_obligation_claim": false,
+      "remaining_approval": "legal_approval"
+    }
+  },
+  "foundation_fact_state": "planned_public_benefit_shareholding",
+  "foundation_governance_language": {
+    "title": "Public-Benefit Mission and Governance",
+    "required_phrase_present": "planned public-benefit shareholding arrangement",
+    "completed_status_not_claimed": true,
+    "legal_review_required_before_publish": true
+  },
+  "existing_published_records_check": {
+    "source": "production Laravel read-only query plus public runtime GET checks",
+    "records_checked": [
+      "about",
+      "help-about",
+      "help-contact",
+      "help-faq",
+      "help-for-business-and-research",
+      "method-boundaries",
+      "privacy",
+      "terms"
+    ],
+    "all_status_published": true,
+    "all_public": true,
+    "all_indexable": true,
+    "public_runtime_200": true
+  },
+  "public_runtime_check": {
+    "target_pages_currently_public": false,
+    "target_paths": {
+      "https://fermatmind.com/en/brand": 404,
+      "https://fermatmind.com/en/charter": 404,
+      "https://fermatmind.com/en/foundation": 404,
+      "https://fermatmind.com/en/careers": 404,
+      "https://fermatmind.com/en/policies": 404
+    },
+    "indexable_public_runtime_exposure_detected": false
+  },
+  "future_footer_eligibility": {
+    "brand": false,
+    "charter": false,
+    "foundation": false,
+    "careers": false,
+    "policies": false,
+    "reason": "Footer/nav placement remains a separate IA decision and must not be enabled by publish readiness alone."
+  },
+  "future_sitemap_eligibility": {
+    "brand": "eligible_after_controlled_publish_and_runtime_200",
+    "charter": "eligible_after_controlled_publish_and_runtime_200",
+    "foundation": "eligible_after_controlled_publish_and_runtime_200",
+    "careers": "eligible_after_controlled_publish_and_runtime_200",
+    "policies": "eligible_after_controlled_publish_and_runtime_200"
+  },
+  "future_llms_eligibility": {
+    "brand": "eligible_after_controlled_publish_and_runtime_200",
+    "charter": "eligible_after_controlled_publish_and_runtime_200",
+    "foundation": "eligible_after_controlled_publish_and_runtime_200",
+    "careers": "eligible_after_controlled_publish_and_runtime_200",
+    "policies": "eligible_after_controlled_publish_and_runtime_200"
+  },
+  "future_search_channel_eligibility": {
+    "brand": false,
+    "charter": false,
+    "foundation": false,
+    "careers": false,
+    "policies": false,
+    "reason": "Current Search Channel allowed page_entity_type set does not include content_page; Search Channel remains out of scope for these pages."
+  },
+  "search_channel_safety_check": {
+    "source": "production seo_intel Laravel connection, read-only",
+    "queue_tables_visible": true,
+    "content_page_queue_items_found": 0,
+    "content_page_live_submissions_found": 0,
+    "queue_item_2_state": {
+      "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+      "channel": "indexnow",
+      "approval_state": "approved",
+      "execution_state": "submitted"
+    },
+    "queue_item_3_state": {
+      "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "channel": "indexnow",
+      "approval_state": "approved",
+      "execution_state": "submitted"
+    },
+    "no_search_channel_action_performed": true
+  },
+  "gate_state": {
+    "SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED": false,
+    "SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED": false,
+    "SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED": false,
+    "SEO_INTEL_INDEXNOW_LIVE_API_ENABLED": false
+  },
+  "staging_discoverability_check": {
+    "checked": true,
+    "staging_home_x_robots_tag": "noindex, nofollow, noarchive",
+    "staging_sitemap_status": 410,
+    "staging_llms_status": 410,
+    "draft_leakage_detected": false
+  },
+  "publish_scope_recommendation": "all_five_pages",
+  "approval_phrase_for_future_publish": "I explicitly approve GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01 to publish the existing English CMS draft records for brand, charter, foundation, careers, and policies after founder/legal/company fact approval. Do not deploy. Do not enqueue Search Channel. Do not submit URLs. Do not change footer or navigation.",
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_sitemap_llms_exposure": true,
+  "no_footer_nav_exposure": true,
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01"
+}
