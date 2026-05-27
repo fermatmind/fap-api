@@ -1,0 +1,101 @@
+{
+  "schema_version": "global-en-zh-content-pages-controlled-publish-runtime-01.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01",
+  "final_decision": "content_pages_controlled_publish_runtime_completed_ready_for_backend_deploy_readiness",
+  "command_name": "content-pages:publish-controlled",
+  "dry_run_default": true,
+  "execute_requires_explicit_flag": true,
+  "target_scope": {
+    "locale": "en",
+    "keys": [
+      "brand",
+      "charter",
+      "foundation",
+      "careers",
+      "policies"
+    ]
+  },
+  "allowed_keys": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies"
+  ],
+  "forbidden_keys": [
+    "about",
+    "help-about",
+    "help-contact",
+    "help-faq",
+    "help-for-business-and-research",
+    "method-boundaries",
+    "privacy",
+    "terms"
+  ],
+  "preflight_rules": [
+    "locale must be en",
+    "keys must exactly match the five approved Wave 1 English content page keys",
+    "records must exist in content_pages",
+    "records must be existing draft/non-public/unpublished/non-indexable targets or already-published idempotency matches",
+    "records must include the GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01 source marker",
+    "R2 readiness artifact must approve all_five_pages",
+    "foundation must retain planned public-benefit shareholding language",
+    "foundation forbidden legal/foundation overclaims must be absent",
+    "no record creation, upsert, out-of-scope CMS write, Search Channel action, URL submission, external search API call, deploy, sitemap/llms/footer/nav enablement is allowed"
+  ],
+  "dry_run_contract": {
+    "dry_run": true,
+    "writes_committed": false,
+    "target_count": 5,
+    "would_create_count": 0,
+    "emits_before_state": true,
+    "emits_after_state_preview": true,
+    "search_channel_action_attempted": false,
+    "url_submission_attempted": false,
+    "external_search_api_call_attempted": false,
+    "deploy_attempted": false,
+    "sitemap_llms_footer_explicit_enablement": false
+  },
+  "execute_contract": {
+    "requires_execute_flag": true,
+    "re_runs_preflight": true,
+    "transaction_wrapped": true,
+    "publishes_existing_records_only": true,
+    "creates_records": false,
+    "upserts_missing_records": false,
+    "touches_protected_existing_published_records": false,
+    "touches_non_content_page_surfaces": false,
+    "idempotent_second_run": true
+  },
+  "transactionality": "execute mode wraps publish writes in a single database transaction",
+  "idempotency": "already-published target records are skipped without record creation, upsert, duplicate publish, or out-of-scope writes",
+  "no_record_creation": true,
+  "no_upsert_missing": true,
+  "no_out_of_scope_cms_write": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "foundation_fact_state_required": "planned_public_benefit_shareholding",
+  "forbidden_foundation_claims": [
+    "registered foundation",
+    "nonprofit legal status",
+    "charity registration",
+    "donation program",
+    "grant program",
+    "formal board governance",
+    "legal fiduciary duty",
+    "exact ownership percentage",
+    "completed equity transfer",
+    "completed foundation holding"
+  ],
+  "discoverability_coupling_policy": {
+    "publish_sets_public": true,
+    "publish_does_not_set_indexable": true,
+    "runtime_requires_targets_non_indexable": true,
+    "discoverability_coupled": false,
+    "allow_coupled_discoverability_flag_added": false,
+    "reason": "Existing sitemap inclusion for content_pages requires published, public, and is_indexable=true. The runtime preserves is_indexable=false and blocks pre-indexable targets so sitemap/llms exposure remains a separate task."
+  },
+  "next_task": "BACKEND-DEPLOY-READINESS｜Deploy content pages controlled publish runtime"
+}
