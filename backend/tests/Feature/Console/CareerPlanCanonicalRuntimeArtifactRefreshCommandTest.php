@@ -294,6 +294,52 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
         $this->assertSame(1986, $full['ledger']['overlay_members']);
     }
 
+    public function test_candidate_aware_mode_supports_detail_ready_1048_overlay_without_runtime_exposure(): void
+    {
+        $projectionOutput = $this->tempPath('detail-ready-1048-projection');
+        $truthOutput = $this->tempPath('detail-ready-1048-truth');
+        $ledgerOutput = $this->tempPath('detail-ready-1048-ledger');
+        $slugs = $this->slugs(1018, 'ready');
+
+        $exitCode = $this->callCommand([
+            '--target' => 'detail_ready_1048',
+            '--candidate-aware' => true,
+            '--candidate-prep-apply' => $this->writeJson('prep-apply', $this->candidatePrepApplyForSlugs($slugs)),
+            '--projection' => $this->writeJson('projection', ['items' => []]),
+            '--truth' => $this->writeJson('truth', ['items' => []]),
+            '--ledger' => $this->writeJson('ledger', ['members' => []]),
+            '--projection-output' => $projectionOutput,
+            '--truth-output' => $truthOutput,
+            '--ledger-output' => $ledgerOutput,
+        ]);
+        $payload = $this->payload();
+        $projection = json_decode((string) file_get_contents($projectionOutput), true, flags: JSON_THROW_ON_ERROR);
+        $truth = json_decode((string) file_get_contents($truthOutput), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('detail_ready_1048', $payload['target']);
+        $this->assertSame(1018, $payload['delta_slug_count']);
+        $this->assertSame(2036, $payload['expected_delta_locale_rows']);
+        $this->assertSame('detail_ready_1048', $payload['target_authority']['target_key']);
+        $this->assertSame('DETAIL_READY_1048_ROLLOUT_GATE_DRY_RUN', $payload['next_required_action']);
+        $this->assertSame([
+            'dataset_hub',
+            'career_jobs_api',
+            'career_job_detail_api',
+            'sitemap',
+            'llms',
+            'llms_full',
+        ], $payload['runtime_authority_contract']['consumers']);
+        $this->assertSame(0, $projection['counts']['dataset_visible']);
+        $this->assertSame(0, $projection['counts']['detail_route_enabled']);
+        $this->assertSame(0, $projection['counts']['sitemap_live']);
+        $this->assertSame(0, $projection['counts']['llms_live']);
+        $this->assertSame(0, $projection['counts']['llms_full_live']);
+        $this->assertSame(2036, $truth['counts']['candidate_pre_route_expected_count']);
+        $this->assertSame(0, $truth['counts']['candidate_unexpected_route_exposure_count']);
+        $this->assertSame(0, $truth['counts']['candidate_unexpected_sitemap_exposure_count']);
+    }
+
     public function test_candidate_aware_artifacts_pass_runtime_candidate_pool_synthetic_integration(): void
     {
         $slugs = ['alpha-career', 'beta-career'];
@@ -341,10 +387,14 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
             'target',
             'phase',
             'delta_slug_count',
+            'target_public_total',
+            'expected_locale_rows',
             'candidate_prep_required',
             'candidate_prep_apply_required',
             'writes_database',
             'read_only',
+            'target_authority',
+            'runtime_authority_contract',
             'required_inputs',
             'required_outputs',
             'commands',
@@ -374,6 +424,8 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
             'delta_slug_count',
             'expected_delta_locale_rows',
             'locales',
+            'target_authority',
+            'runtime_authority_contract',
             'projection',
             'truth',
             'ledger',
@@ -644,11 +696,11 @@ final class CareerPlanCanonicalRuntimeArtifactRefreshCommandTest extends TestCas
     /**
      * @return list<string>
      */
-    private function slugs(int $count = 51): array
+    private function slugs(int $count = 51, string $prefix = 'delta'): array
     {
         $slugs = [];
         for ($i = 1; $i <= $count; $i++) {
-            $slugs[] = sprintf('delta-%03d', $i);
+            $slugs[] = sprintf('%s-%04d', $prefix, $i);
         }
 
         return $slugs;

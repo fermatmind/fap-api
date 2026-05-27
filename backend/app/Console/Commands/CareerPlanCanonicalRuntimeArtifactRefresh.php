@@ -25,7 +25,7 @@ final class CareerPlanCanonicalRuntimeArtifactRefresh extends Command
         {--projection-output=/tmp/career_80_delta_runtime_projection_candidate_aware.json : Candidate-aware projection output path}
         {--truth-output=/tmp/career_80_delta_runtime_truth_candidate_aware.json : Candidate-aware truth output path}
         {--ledger-output=/tmp/career_80_delta_full_release_ledger_candidate_aware.json : Candidate-aware ledger output path}
-        {--expect-slug-count=51 : Expected verified candidate prep apply slug count in candidate-aware mode}
+        {--expect-slug-count= : Expected verified candidate prep apply slug count in candidate-aware mode}
         {--json : Emit JSON output}
         {--output= : Optional output path for runtime artifact refresh plan JSON}';
 
@@ -80,8 +80,8 @@ final class CareerPlanCanonicalRuntimeArtifactRefresh extends Command
         $projectionOutputPath = $this->requiredPathOption('projection-output');
         $truthOutputPath = $this->requiredPathOption('truth-output');
         $ledgerOutputPath = $this->requiredPathOption('ledger-output');
-        $expectedSlugCount = $this->positiveIntOption('expect-slug-count', 51);
         $target = trim((string) ($this->option('target') ?? 'career_80_delta')) ?: 'career_80_delta';
+        $expectedSlugCount = $this->positiveIntOption('expect-slug-count', $this->defaultExpectedSlugCount($target));
 
         try {
             $result = app(CareerRuntimeCandidateAwareArtifactRefresh::class)->build(
@@ -210,6 +210,16 @@ final class CareerPlanCanonicalRuntimeArtifactRefresh extends Command
         }
 
         return $value;
+    }
+
+    private function defaultExpectedSlugCount(string $target): int
+    {
+        $normalized = strtolower(trim($target));
+        $key = preg_replace('/[^a-z0-9]+/', '_', $normalized) ?? $normalized;
+
+        return trim($key, '_') === CareerRuntimeArtifactRefreshPlanner::TARGET_DETAIL_READY_1048
+            ? 1018
+            : 51;
     }
 
     /**
