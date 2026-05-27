@@ -207,6 +207,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_detail_ready_1048_audit_scanner_changes(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_cms_article_report_correctness_changes(): void
     {
         $changed = [
@@ -2384,6 +2393,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerDetailReady1048AuditFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerRuntimeProjectionConsumerFile($file)) {
                 continue;
             }
@@ -3720,6 +3733,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Audit/Career2786FullAuditArtifact.php',
             'backend/app/Domain/Career/Audit/Career2786FullAuditArtifactBuilder.php',
         ], true);
+    }
+
+    private function isCareerDetailReady1048AuditFile(string $file): bool
+    {
+        return $file === 'backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php';
     }
 
     private function isBigFiveV2PilotSupportFile(string $file): bool

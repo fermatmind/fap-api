@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T16:23:16+08:00",
+  "updated_at": "2026-05-27T16:36:19+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -28850,13 +28850,13 @@
     ]
   },
   "AUDIT-CAREER-DETAIL-READY-1048-SCAN-1": {
-    "status": "implementation_in_progress",
+    "status": "pr_open",
     "repo": "fap-api",
     "branch": "codex/audit-career-detail-ready-1048-scan-1",
     "base": "main",
     "title": "fix(api): audit career detail-ready 1048 candidates",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "e4c6f26b06711fccd88fcdc817c956282d403447",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1724",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -28864,7 +28864,7 @@
     "checks": {
       "scope": {
         "status": "passed",
-        "evidence": "Changed files are limited to the read-only career detail-ready scanner, command registration, focused test, audit doc, and PR train metadata."
+        "evidence": "Changed files are limited to the read-only career detail-ready scanner, command registration, focused test, audit doc, Big Five runtime-freeze classifier test guard, and PR train metadata."
       },
       "local_validation": {
         "status": "passed",
@@ -28873,13 +28873,20 @@
           "php -l backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php",
           "php -l backend/tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php",
           "cd backend && php artisan test tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php --no-ansi",
+          "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_career_detail_ready_1048_audit_scanner_changes --no-ansi",
+          "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi",
           "cd backend && php artisan route:list --no-ansi",
-          "cd backend && vendor/bin/pint --test app/Console/Commands/CareerAuditDetailReady1048Candidates.php app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/CareerAuditDetailReady1048Candidates.php app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php tests/Feature/Console/CareerAuditDetailReady1048CandidatesCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "python3 - <<'PY' ... yaml.safe_load(open('docs/codex/pr-train.yaml')) ... PY",
           "git diff --check",
           "cd backend && bash scripts/ci_verify_mbti.sh"
         ]
+      },
+      "github_checks": {
+        "status": "rerun_pending_after_scoped_fix",
+        "initial_failure": "verify-mbti legacy/v2 failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze guard flagged backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php.",
+        "fix": "Added an explicit Career detail-ready 1048 audit scanner classifier case to the runtime freeze guard test."
       }
     },
     "history": [
@@ -28902,6 +28909,11 @@
         "at": "2026-05-27T16:23:16+08:00",
         "status": "pr_open",
         "summary": "Opened PR #1724 for the read-only detail-ready 1048 candidate scanner."
+      },
+      {
+        "at": "2026-05-27T16:36:19+08:00",
+        "status": "github_checks_fix_ready",
+        "summary": "Fixed current-scope CI failure by classifying the read-only Career 1048 audit scanner as non-MBTI-impacting in the runtime freeze guard; focused guard test, full guard test, scanner test, route list, Pint, JSON/YAML, diff check, and backend CI master chain passed locally."
       }
     ]
   },
