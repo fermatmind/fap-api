@@ -29407,7 +29407,7 @@
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-LIVE-ACCEPTANCE-CLOSEOUT-1": {
-    "status": "local_commit_created",
+    "status": "pr_open",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-live-acceptance-closeout-1",
     "base": "main",
@@ -29416,7 +29416,7 @@
     ],
     "title": "fix(api): accept career detail-ready 1048 closeout",
     "commit_sha": "02411442575c3a403dce12a31779d60507cc3dd1",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1730",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -29481,6 +29481,11 @@
         "at": "2026-05-27T21:12:57+08:00",
         "status": "local_commit_created",
         "summary": "Created local commit 02411442575c3a403dce12a31779d60507cc3dd1 for detail-ready 1048 live acceptance and closeout read-only support."
+      },
+      {
+        "at": "2026-05-27T21:14:11+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1730 for detail-ready 1048 live acceptance and closeout read-only support."
       }
     ]
   }
