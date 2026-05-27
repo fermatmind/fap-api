@@ -29800,13 +29800,13 @@
     "repo": "fap-api",
     "branch": "codex/riasec-en-questions-pack-translation-02",
     "base": "main",
-    "status": "local_validation_passed",
+    "status": "pr_opened",
     "depends_on": [
       "MBTI-EN-QUESTIONS-PACK-PROJECTION-01"
     ],
     "title": "RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02 RIASEC English question pack translation",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "17bbb89e6ac290115c0811ceacf724c64caf9376",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1734",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -29876,7 +29876,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "pr_url": null
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1734"
       }
     },
     "scope": {
@@ -29909,6 +29909,11 @@
         "at": "2026-05-28T00:45:00+08:00",
         "status": "local_validation_passed",
         "summary": "Translated RIASEC 60/140 English question stems in backend content packs, updated manifest hashes, added focused locale test, and passed local validation."
+      },
+      {
+        "at": "2026-05-28T00:48:00+08:00",
+        "status": "pr_opened",
+        "summary": "Opened PR #1734 for RIASEC English question pack translation; GitHub checks pending."
       }
     ]
   }
