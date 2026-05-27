@@ -1,0 +1,62 @@
+{
+  "schema_version": "commerce.order_grant_projection_readonly.v1",
+  "task": "ORDER-GRANT-PROJECTION-READONLY-ORD-1093B7E6",
+  "final_decision": "order_grant_projection_readonly_completed_payment_pending_no_grant",
+  "order_no": "ord_1093b7e6-073a-4d93-b26d-4a68a819fa23",
+  "production_readonly_verification": true,
+  "no_write_performed": true,
+  "no_env_edit": true,
+  "no_migration": true,
+  "no_grant_created": true,
+  "no_projection_write": true,
+  "no_repair_command_run": true,
+  "public_order_endpoint_invoked": false,
+  "builder_repair_invoked": false,
+  "order_state": {
+    "status": "pending",
+    "payment_state": "pending",
+    "grant_state": "not_started",
+    "provider": "alipay",
+    "target_attempt_id_present": true,
+    "paid_at_present": false,
+    "fulfilled_at_present": false,
+    "last_reconciled_at_present": false
+  },
+  "payment_attempts": {
+    "count": 1,
+    "latest_state": "client_presented",
+    "external_trade_no_present": false,
+    "provider_trade_no_present": false,
+    "latest_payment_event_id_present": false,
+    "callback_received_at_present": false,
+    "verified_at_present": false,
+    "finalized_at_present": false,
+    "last_error_code": null
+  },
+  "payment_events": {
+    "count": 0
+  },
+  "benefit_grants": {
+    "count": 0,
+    "active_count": 0
+  },
+  "unified_access_projection": {
+    "exists": false
+  },
+  "exact_result_entry_readonly_inference": {
+    "result_exists": true,
+    "access_state": "locked",
+    "report_state": "ready",
+    "pdf_state": "missing",
+    "reason_code": "projection_missing_result_ready",
+    "ready_to_enter": false,
+    "builder_repair_not_invoked": true
+  },
+  "sidecars": [
+    {
+      "id": "payment_attempt_schema_retry",
+      "summary": "The first read-only payment_attempts query used a non-existent status column and was retried with the production schema's state column."
+    }
+  ],
+  "next_task": "PAYMENT-ALIPAY-RETURN-VERIFY-01"
+}
