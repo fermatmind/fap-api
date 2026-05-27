@@ -20,8 +20,7 @@ final class QuestionsService
     public function loadByPack(
         string $packId,
         string $dirVersion,
-        ?string $assetsBaseUrlOverride = null,
-        ?string $locale = null
+        ?string $assetsBaseUrlOverride = null
     ): array {
         $found = $this->index->find($packId, $dirVersion);
         if (! ($found['ok'] ?? false)) {
@@ -81,7 +80,6 @@ final class QuestionsService
             $dirVersion,
             $assetsBaseUrl
         );
-        $mapped = $this->projectDisplayLocale($mapped, $manifestPath, $locale);
 
         return [
             'ok' => true,
@@ -89,102 +87,6 @@ final class QuestionsService
             'content_package_version' => $contentPackageVersion,
             'manifest' => $manifestData,
         ];
-    }
-
-    /**
-     * @param  array<string, mixed>  $questionsDoc
-     * @return array<string, mixed>
-     */
-    private function projectDisplayLocale(array $questionsDoc, string $manifestPath, ?string $locale): array
-    {
-        if ($this->normalizeLocale($locale) !== 'en') {
-            return $questionsDoc;
-        }
-
-        $i18nPath = dirname($manifestPath).DIRECTORY_SEPARATOR.'questions_i18n.en.json';
-        if (! File::exists($i18nPath) || ! File::isFile($i18nPath)) {
-            return $questionsDoc;
-        }
-
-        $i18n = $this->readJsonFile($i18nPath);
-        if (! ($i18n['ok'] ?? false) || ! is_array($i18n['data'] ?? null)) {
-            return $questionsDoc;
-        }
-
-        $data = $i18n['data'];
-        $items = is_array($data['items'] ?? null) ? $data['items'] : [];
-        $optionText = is_array($data['option_text'] ?? null) ? $data['option_text'] : [];
-        if ($items === []) {
-            return $questionsDoc;
-        }
-
-        foreach (['items', 'questions', 'data'] as $key) {
-            if (isset($questionsDoc[$key]) && is_array($questionsDoc[$key])) {
-                $questionsDoc[$key] = $this->projectQuestionListToEnglish($questionsDoc[$key], $items, $optionText);
-
-                return $questionsDoc;
-            }
-        }
-
-        if ($this->isList($questionsDoc)) {
-            return $this->projectQuestionListToEnglish($questionsDoc, $items, $optionText);
-        }
-
-        return $questionsDoc;
-    }
-
-    /**
-     * @param  array<int|string, mixed>  $questions
-     * @param  array<string, mixed>  $items
-     * @param  array<string, mixed>  $optionText
-     * @return array<int|string, mixed>
-     */
-    private function projectQuestionListToEnglish(array $questions, array $items, array $optionText): array
-    {
-        foreach ($questions as $index => $question) {
-            if (! is_array($question)) {
-                continue;
-            }
-
-            $questionId = trim((string) ($question['question_id'] ?? $question['id'] ?? ''));
-            $textEn = trim((string) ($items[$questionId] ?? ''));
-            if ($questionId !== '' && $textEn !== '') {
-                $question['text_zh'] = (string) ($question['text_zh'] ?? $question['text'] ?? '');
-                $question['text_en'] = $textEn;
-                $question['text'] = $textEn;
-            }
-
-            if (isset($question['options']) && is_array($question['options'])) {
-                foreach ($question['options'] as $optionIndex => $option) {
-                    if (! is_array($option)) {
-                        continue;
-                    }
-
-                    $code = trim((string) ($option['code'] ?? ''));
-                    $optionEn = trim((string) ($optionText[$code] ?? ''));
-                    if ($code !== '' && $optionEn !== '') {
-                        $option['text_zh'] = (string) ($option['text_zh'] ?? $option['text'] ?? '');
-                        $option['text_en'] = $optionEn;
-                        $option['text'] = $optionEn;
-                    }
-                    $question['options'][$optionIndex] = $option;
-                }
-            }
-
-            $questions[$index] = $question;
-        }
-
-        return $this->isList($questions) ? array_values($questions) : $questions;
-    }
-
-    private function normalizeLocale(?string $locale): string
-    {
-        return str_starts_with(strtolower(trim((string) $locale)), 'zh') ? 'zh-CN' : 'en';
-    }
-
-    private function isList(array $items): bool
-    {
-        return $items === [] || array_keys($items) === range(0, count($items) - 1);
     }
 
     private function readJsonFile(string $path): array

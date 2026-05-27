@@ -20804,11 +20804,11 @@
       ],
       "commit_sha": null,
       "pr_url": null,
-        "checks": {
-          "focused_test": "passed",
-          "mbti_runtime_freeze_guard": "passed",
-          "migrate_pretend": "passed",
-          "route_list": "passed",
+      "checks": {
+        "focused_test": "passed",
+        "mbti_runtime_freeze_guard": "passed",
+        "migrate_pretend": "passed",
+        "route_list": "passed",
         "pint": "passed",
         "composer_validate": "passed",
         "composer_audit": "passed",
@@ -29657,14 +29657,14 @@
     "repo": "fap-api",
     "branch": "codex/mbti-en-questions-pack-projection-01",
     "base": "main",
-    "status": "pr_opened",
+    "status": "ci_fix_in_progress",
     "depends_on": [
       "TAKE-EN-QUESTION-LOCALE-SCAN-00"
     ],
     "title": "MBTI-EN-QUESTIONS-PACK-PROJECTION-01 MBTI English question locale projection",
     "commit_sha": "0ba35fb9851b52b7a7346505e22fd82972d3912c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1733",
-    "failure_reason": null,
+    "failure_reason": "GitHub verify-mbti-legacy and verify-mbti-v2 failed because the first implementation touched backend/app/Services/Content/QuestionsService.php, which is guarded by the Big Five runtime freeze test. Fix narrows projection back to the MBTI controller path.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -29725,8 +29725,17 @@
         "evidence": "Focused tests, MBTI compatibility tests, route list, Pint, composer validate/audit, JSON/YAML parse, and diff checks passed locally."
       },
       "github_required_checks": {
-        "status": "pending",
-        "pr_url": "https://github.com/fermatmind/fap-api/pull/1733"
+        "status": "failed_fix_in_progress",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1733",
+        "failed_checks": [
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "evidence": "Both failed on Tests\\Unit\\Services\\BigFive\\ResultPageV2\\BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because branch diff included backend/app/Services/Content/QuestionsService.php."
+      },
+      "ci_fix_scope": {
+        "status": "in_progress",
+        "evidence": "Move locale projection out of the shared QuestionsService runtime path and keep it MBTI-scoped in ScalesController."
       }
     },
     "scope": {
@@ -29769,6 +29778,11 @@
         "at": "2026-05-27T23:52:00+08:00",
         "status": "pr_opened",
         "summary": "Opened PR #1733 for MBTI English question locale projection."
+      },
+      {
+        "at": "2026-05-28T00:16:00+08:00",
+        "status": "ci_fix_in_progress",
+        "summary": "Inspect GitHub check failure and narrowed the fix so the final branch diff no longer changes the shared QuestionsService runtime path guarded by Big Five freeze tests."
       }
     ]
   }

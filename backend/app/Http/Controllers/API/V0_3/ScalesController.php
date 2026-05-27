@@ -27,6 +27,7 @@ use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
@@ -523,7 +524,7 @@ class ScalesController extends Controller
                 }
             }
 
-            $loaded = $questionsService->loadByPack($packId, $dirVersion, $assetsBaseUrlOverride, $locale);
+            $loaded = $questionsService->loadByPack($packId, $dirVersion, $assetsBaseUrlOverride);
             if (! ($loaded['ok'] ?? false)) {
                 $error = (string) ($loaded['error_code'] ?? $loaded['error'] ?? 'READ_FAILED');
                 $status = $error === 'NOT_FOUND' ? 404 : 503;
@@ -544,7 +545,9 @@ class ScalesController extends Controller
                 'dir_version' => $dirVersion,
                 'content_package_version' => (string) ($loaded['content_package_version'] ?? ''),
                 'form_code' => $resolvedFormCode,
-                'questions' => $loaded['questions'],
+                'questions' => $resolvedScaleCode === 'MBTI'
+                    ? $this->projectMbtiQuestionsForLocale((array) ($loaded['questions'] ?? []), $dirVersion, $locale)
+                    : $loaded['questions'],
             ] + $scaleCodeMeta;
 
             if ($cacheKey !== null) {
@@ -578,6 +581,96 @@ class ScalesController extends Controller
     private function normalizeBigFiveLocale(string $locale): string
     {
         return str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
+    }
+
+    /**
+     * @param  array<string, mixed>  $questionsDoc
+     * @return array<string, mixed>
+     */
+    private function projectMbtiQuestionsForLocale(array $questionsDoc, string $dirVersion, string $locale): array
+    {
+        if (str_starts_with(strtolower(trim($locale)), 'zh')) {
+            return $questionsDoc;
+        }
+
+        $i18nPath = base_path('../content_packages/default/CN_MAINLAND/zh-CN/'.$dirVersion.'/questions_i18n.en.json');
+        if (! File::exists($i18nPath) || ! File::isFile($i18nPath)) {
+            return $questionsDoc;
+        }
+
+        $decoded = json_decode(File::get($i18nPath), true);
+        if (! is_array($decoded)) {
+            return $questionsDoc;
+        }
+
+        $items = is_array($decoded['items'] ?? null) ? $decoded['items'] : [];
+        $optionText = is_array($decoded['option_text'] ?? null) ? $decoded['option_text'] : [];
+        if ($items === []) {
+            return $questionsDoc;
+        }
+
+        foreach (['items', 'questions', 'data'] as $key) {
+            if (isset($questionsDoc[$key]) && is_array($questionsDoc[$key])) {
+                $questionsDoc[$key] = $this->projectMbtiQuestionListToEnglish($questionsDoc[$key], $items, $optionText);
+
+                return $questionsDoc;
+            }
+        }
+
+        if ($this->isList($questionsDoc)) {
+            return $this->projectMbtiQuestionListToEnglish($questionsDoc, $items, $optionText);
+        }
+
+        return $questionsDoc;
+    }
+
+    /**
+     * @param  array<int|string, mixed>  $questions
+     * @param  array<string, mixed>  $items
+     * @param  array<string, mixed>  $optionText
+     * @return array<int|string, mixed>
+     */
+    private function projectMbtiQuestionListToEnglish(array $questions, array $items, array $optionText): array
+    {
+        foreach ($questions as $index => $question) {
+            if (! is_array($question)) {
+                continue;
+            }
+
+            $questionId = trim((string) ($question['question_id'] ?? $question['id'] ?? ''));
+            $textEn = trim((string) ($items[$questionId] ?? ''));
+            if ($questionId !== '' && $textEn !== '') {
+                $question['text_zh'] = (string) ($question['text_zh'] ?? $question['text'] ?? '');
+                $question['text_en'] = $textEn;
+                $question['text'] = $textEn;
+            }
+
+            if (isset($question['options']) && is_array($question['options'])) {
+                foreach ($question['options'] as $optionIndex => $option) {
+                    if (! is_array($option)) {
+                        continue;
+                    }
+
+                    $code = trim((string) ($option['code'] ?? ''));
+                    $optionEn = trim((string) ($optionText[$code] ?? ''));
+                    if ($code !== '' && $optionEn !== '') {
+                        $option['text_zh'] = (string) ($option['text_zh'] ?? $option['text'] ?? '');
+                        $option['text_en'] = $optionEn;
+                        $option['text'] = $optionEn;
+                    }
+                    $question['options'][$optionIndex] = $option;
+                }
+            }
+
+            $questions[$index] = $question;
+        }
+
+        return $this->isList($questions) ? array_values($questions) : $questions;
+    }
+
+    private function isList(array $items): bool
+    {
+        return $items === [] || array_keys($items) === range(0, count($items) - 1);
     }
 
     private function requestedFormCode(Request $request): ?string
