@@ -13868,6 +13868,52 @@ prs:
     pseo_generation_allowed: false
     frontend_fallback_authority: false
 
+  - id: GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-CMS-IMPORT-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVIEW-IMPORT-01
+    branch: codex/global-en-zh-content-pages-controlled-cms-import-01
+    base: main
+    title: "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-CMS-IMPORT-01 controlled CMS import for Wave 1 content pages"
+    train_scope: global_en_zh_controlled_cms_import
+    risk_level: p0_scoped_cms_write_dry_run_first
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-content-pages-controlled-cms-import-01.md
+      - backend/docs/seo/generated/global-en-zh-content-pages-controlled-cms-import-01.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledCmsImport01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Perform dry-run first using the official content page import runtime.
+      - Import only Wave 1 content/help/policy pages that are in scope, unblocked, and approved by the human-review packet.
+      - Keep all imported records draft-only, non-public, non-indexable, and excluded from sitemap, llms, footer, Search Channel, and URL submission.
+      - Do not publish, deploy, create pSEO pages, access production user data, or mutate out-of-scope CMS assets.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhContentPagesControlledCmsImport01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-controlled-cms-import-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    production_write_scope: content_pages_wave_1_draft_import_only
+    cms_mutation: scoped_draft_import_only
+    dry_run_required: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    sitemap_llms_footer_exposure_allowed: false
+    deploy_allowed: false
+    pseo_generation_allowed: false
+    production_user_data_access_allowed: false
+    frontend_fallback_authority: false
+    next_task: GLOBAL-EN-ZH-CONTENT-PAGES-IMPORT-VERIFY-01
+
   - id: GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03
     repo: fap-api
     depends_on:
