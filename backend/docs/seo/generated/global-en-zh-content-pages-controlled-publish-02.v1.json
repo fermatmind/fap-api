@@ -1,0 +1,197 @@
+{
+  "schema_version": "global-en-zh-content-pages-controlled-publish-02.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02",
+  "final_decision": "blocked_foundation_fact_overclaim",
+  "approval_phrase_verified": true,
+  "backend_revision_verified": {
+    "verified": true,
+    "expected_sha": "76a326807b38b43c807d6fb6348c2684ea5e8aae",
+    "actual_sha": "76a326807b38b43c807d6fb6348c2684ea5e8aae",
+    "release": "prod-20260527-76a32680"
+  },
+  "command_verified": true,
+  "target_pages": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies"
+  ],
+  "preflight_result": {
+    "status": "passed_until_dry_run_claim_guard",
+    "production_runtime": "content-pages:publish-controlled",
+    "command_help_checked": true,
+    "target_records_exist": true,
+    "target_records_before_state": {
+      "brand": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "source_doc": "global-en-zh-content-pages-cms-draft-update-01 from human revision packages"
+      },
+      "charter": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "source_doc": "global-en-zh-content-pages-cms-draft-update-01 from human revision packages"
+      },
+      "foundation": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "source_doc": "global-en-zh-content-pages-cms-draft-update-01 from human revision packages"
+      },
+      "careers": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "source_doc": "global-en-zh-content-pages-cms-draft-update-01 from human revision packages"
+      },
+      "policies": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_at": null,
+        "source_doc": "global-en-zh-content-pages-cms-draft-update-01 from human revision packages"
+      }
+    },
+    "r2_readiness_artifact_required": true,
+    "no_search_channel_command_planned": true,
+    "no_deploy_planned": true,
+    "no_out_of_scope_cms_record_planned": true
+  },
+  "dry_run_result": {
+    "performed": true,
+    "ok": false,
+    "dry_run": true,
+    "writes_committed": false,
+    "target_count": 5,
+    "would_publish_count": 0,
+    "would_update_count": 0,
+    "would_create_count": 0,
+    "blocked_count": 1,
+    "target_keys": [
+      "brand",
+      "charter",
+      "foundation",
+      "careers",
+      "policies"
+    ],
+    "error_codes": [
+      "foundation_overclaim_detected"
+    ],
+    "foundation_fact_state": "planned_public_benefit_shareholding",
+    "forbidden_foundation_claims_absent": false,
+    "search_channel_action_attempted": false,
+    "url_submission_attempted": false,
+    "external_search_api_call_attempted": false,
+    "deploy_attempted": false,
+    "sitemap_llms_footer_explicit_enablement": false,
+    "no_record_creation": true,
+    "no_upsert_missing": true,
+    "no_out_of_scope_cms_write": true
+  },
+  "publish_result": {
+    "performed": false,
+    "reason": "Production dry-run failed fail-closed with foundation_overclaim_detected.",
+    "published_pages": [],
+    "writes_committed": false,
+    "cms_records_published": []
+  },
+  "post_publish_verification": {
+    "performed": false,
+    "reason": "No publish was performed because dry-run blocked on foundation_overclaim_detected.",
+    "draft_records_still_draft": true,
+    "public_runtime_still_non_public": true
+  },
+  "foundation_fact_state": "planned_public_benefit_shareholding",
+  "forbidden_foundation_claims_absent": false,
+  "foundation_claim_guard_observation": {
+    "runtime_error_code": "foundation_overclaim_detected",
+    "matched_negative_boundary_text": [
+      "formal board governance",
+      "completed equity transfer"
+    ],
+    "classification": "dry_run_claim_guard_blocked_publish",
+    "note": "The matched phrases appeared inside a negative boundary sentence describing claims the page does not make. The deployed runtime still treats those exact phrases as forbidden and blocks publish."
+  },
+  "cms_records_published": [],
+  "public_runtime_check": {
+    "performed": true,
+    "results": {
+      "https://fermatmind.com/en/brand": {
+        "http_status": 404,
+        "robots": "noindex"
+      },
+      "https://fermatmind.com/en/charter": {
+        "http_status": 404,
+        "robots": "noindex"
+      },
+      "https://fermatmind.com/en/foundation": {
+        "http_status": 404,
+        "robots": "noindex"
+      },
+      "https://fermatmind.com/en/careers": {
+        "http_status": 404,
+        "robots": "noindex"
+      },
+      "https://fermatmind.com/en/policies": {
+        "http_status": 404,
+        "robots": "noindex"
+      }
+    }
+  },
+  "sitemap_exposure_check": {
+    "performed": true,
+    "sitemap_status": 200,
+    "target_page_hits": []
+  },
+  "llms_exposure_check": {
+    "performed": true,
+    "llms_txt_status": 200,
+    "llms_full_txt_status": 200,
+    "target_page_hits": []
+  },
+  "footer_nav_exposure_check": {
+    "performed": true,
+    "checked_public_home_locales": [
+      "/en",
+      "/zh"
+    ],
+    "target_page_hits": []
+  },
+  "search_channel_check": {
+    "performed": true,
+    "content_page_queue_count": 0,
+    "queue_item_2_state": {
+      "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+      "channel": "indexnow",
+      "approval_state": "approved",
+      "execution_state": "submitted"
+    },
+    "queue_item_3_state": {
+      "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "channel": "indexnow",
+      "approval_state": "approved",
+      "execution_state": "submitted"
+    },
+    "queue_item_created": false,
+    "live_submission_performed": false
+  },
+  "gate_state": {
+    "SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED": false,
+    "SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED": false,
+    "SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED": false,
+    "SEO_INTEL_INDEXNOW_LIVE_API_ENABLED": false
+  },
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_out_of_scope_cms_write": true,
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2"
+}

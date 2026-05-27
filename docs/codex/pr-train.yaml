@@ -14279,6 +14279,50 @@ prs:
     frontend_fallback_authority: false
     next_task: BACKEND-DEPLOY-READINESS｜Deploy content pages controlled publish runtime
 
+  - id: GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01
+    branch: codex/global-en-zh-content-pages-controlled-publish-02
+    base: main
+    title: "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02 execute controlled publish for Wave 1 English content pages"
+    train_scope: global_en_zh_controlled_cms_publish_execution
+    risk_level: p0_production_cms_publish_bounded
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-content-pages-controlled-publish-02.md
+      - backend/docs/seo/generated/global-en-zh-content-pages-controlled-publish-02.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublish02Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Run the deployed content-pages:publish-controlled runtime for the exact five English content_pages records brand, charter, foundation, careers, and policies.
+      - Dry-run first; execute only if dry-run passes; record the outcome in docs/generated/test artifacts.
+      - Avoid deploy, Search Channel enqueue, URL submission, external search APIs, sitemap/llms/footer/nav enablement, raw logs, production user data, fap-web changes, and out-of-scope CMS writes.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhContentPagesControlledPublish02 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-controlled-publish-02.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    cms_mutation: true
+    publish_allowed: true
+    search_channel_action: false
+    url_submission: false
+    sitemap_llms_footer_exposure_allowed: false
+    deploy_allowed: false
+    pseo_generation_allowed: false
+    production_user_data_access_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: GLOBAL-EN-ZH-CONTENT-PAGES-POST-PUBLISH-SMOKE-01
+
   - id: GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03
     repo: fap-api
     depends_on:
