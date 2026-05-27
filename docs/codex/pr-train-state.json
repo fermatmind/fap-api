@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T09:11:46+08:00",
+  "updated_at": "2026-05-27T09:46:10+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -27916,6 +27916,128 @@
       },
       {
         "at": "2026-05-27T09:11:46+08:00",
+        "status": "github_checks_passed",
+        "summary": "GitHub required checks passed and mergeStateStatus was CLEAN before final ledger update."
+      }
+    ]
+  },
+  "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01": {
+    "status": "github_checks_passed",
+    "repo": "fap-api",
+    "branch": "codex/global-en-zh-content-pages-human-revision-01",
+    "base": "main",
+    "depends_on": [
+      "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-01"
+    ],
+    "title": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01 revise Wave 1 English content page drafts",
+    "commit_sha": "12c9e34db8e720d66276684e4270cacd7a06a276",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1714",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "preflight": {
+        "status": "passed",
+        "evidence": "Started from origin/main at b820f2b74e26c09961a159e9d8fcc56830908d46 in isolated worktree; dependency PR #1713 merged."
+      },
+      "revision_package": {
+        "status": "passed",
+        "evidence": "Created draft-only human revision package for brand, charter, foundation, careers, and policies."
+      },
+      "claim_boundary": {
+        "status": "passed",
+        "evidence": "Revised copy avoids forbidden diagnosis, treatment, cure, salary guarantee, career guarantee, hiring fit, precise career recommendation, MBTI income/turnover prediction, and unsupported legal/privacy/security claims."
+      },
+      "legal_company_fact_review": {
+        "status": "passed_for_draft_update",
+        "evidence": "Foundation, careers, and policies blockers were converted into bounded draft copy; human review remains required before publish."
+      },
+      "local_validation": {
+        "status": "passed"
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "PR #1714 required GitHub checks passed and mergeStateStatus was CLEAN for commit 12c9e34db8e720d66276684e4270cacd7a06a276."
+      },
+      "composer_install": {
+        "status": "passed",
+        "command": "cd backend && composer install --no-interaction --no-progress",
+        "evidence": "Installed dependencies in isolated worktree only; ignored vendor/public/cache artifacts were not staged."
+      },
+      "focused_test": {
+        "status": "passed",
+        "command": "cd backend && php artisan test --filter=GlobalEnZhContentPagesHumanRevision01 --no-ansi",
+        "evidence": "1 test passed, 22 assertions."
+      },
+      "route_list": {
+        "status": "passed",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "203 routes listed."
+      },
+      "pint": {
+        "status": "passed",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "3584 files passed."
+      },
+      "composer_validate": {
+        "status": "passed",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "passed",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "No security vulnerability advisories found."
+      },
+      "json_yaml_parse": {
+        "status": "passed",
+        "evidence": "Generated JSON, revision package JSON, pr-train-state.json, and pr-train.yaml parse successfully."
+      },
+      "scope_validation": {
+        "status": "passed",
+        "changed_files": [
+          "backend/docs/seo/global-en-zh-content-pages-human-revision-01.md",
+          "backend/docs/seo/generated/global-en-zh-content-pages-human-revision-01.v1.json",
+          "backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-01.revision.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesHumanRevision01Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ]
+      },
+      "diff_check": {
+        "status": "passed",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "fap_web_reference_check": {
+        "status": "passed_with_preexisting_untracked_files",
+        "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+        "evidence": "Observed pre-existing untracked .playwright-mcp/ and article-image-smoke.png; no fap-web changes were made or committed by this task."
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T09:33:37+08:00",
+        "status": "planned",
+        "summary": "Authorized current human revision task entry only; no CMS mutation, publish, deploy, Search Channel action, URL submission, or fap-web modification."
+      },
+      {
+        "at": "2026-05-27T09:33:37+08:00",
+        "status": "in_progress",
+        "summary": "Generated draft-only human revision package; local validation pending."
+      },
+      {
+        "at": "2026-05-27T09:38:01+08:00",
+        "status": "local_checks_passed",
+        "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, fap-web reference check, and scope validation passed."
+      },
+      {
+        "at": "2026-05-27T09:39:09+08:00",
+        "status": "pr_opened",
+        "summary": "Opened PR #1714 after local validation; waiting for GitHub required checks."
+      },
+      {
+        "at": "2026-05-27T09:46:10+08:00",
         "status": "github_checks_passed",
         "summary": "GitHub required checks passed and mergeStateStatus was CLEAN before final ledger update."
       }
