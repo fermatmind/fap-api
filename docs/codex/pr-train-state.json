@@ -22675,7 +22675,7 @@
     "depends_on": [
       "GSC-LIVE-00"
     ],
-    "commit_sha": "b7833e07220c885ab9af12696323000c253a7a0b",
+    "commit_sha": null,
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -29058,8 +29058,8 @@
       "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1"
     ],
     "title": "fix(deps): unblock Symfony Composer audit",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "b7833e07220c885ab9af12696323000c253a7a0b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1727",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -29109,6 +29109,11 @@
         "at": "2026-05-27T18:08:22+08:00",
         "status": "local_commit_created",
         "summary": "Created local commit b7833e07220c885ab9af12696323000c253a7a0b for the Symfony Composer audit sidecar unblocker."
+      },
+      {
+        "at": "2026-05-27T18:12:27+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1727 for the Symfony Composer audit sidecar unblocker."
       }
     ]
   },
