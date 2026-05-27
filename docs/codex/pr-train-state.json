@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T17:04:43+08:00",
+  "updated_at": "2026-05-27T17:08:20+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -28929,7 +28929,7 @@
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1": {
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-target-authority-1",
     "base": "main",
@@ -28938,7 +28938,7 @@
     ],
     "title": "fix(api): define career detail-ready 1048 authority",
     "commit_sha": "2207629e257c9544a6d1ab240025747771065e04",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1725",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -28989,6 +28989,11 @@
         "at": "2026-05-27T17:04:43+08:00",
         "status": "local_commit_created",
         "summary": "Created local commit 2207629e257c9544a6d1ab240025747771065e04 for target authority PR."
+      },
+      {
+        "at": "2026-05-27T17:08:20+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1725 for detail_ready_1048 target authority semantics."
       }
     ]
   },
