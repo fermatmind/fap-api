@@ -22489,8 +22489,8 @@
     "depends_on": [
       "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "401099d481c71c1afaf77a9e5458b7c6dad3f462",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1720",
     "checks": {
       "scope_validation": {
         "status": "pass",
@@ -28483,7 +28483,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01": {
-    "status": "local_checks_passed_after_ci_fix",
+    "status": "merged",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-controlled-publish-runtime-01",
     "base": "main",
@@ -28491,11 +28491,11 @@
       "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01"
     ],
     "title": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01 content pages controlled publish runtime",
-    "commit_sha": "c4daaa7f275971e734f782564999266cd0772c4e",
+    "commit_sha": "76a326807b38b43c807d6fb6348c2684ea5e8aae",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1719",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-05-27T05:22:00Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "checks": {
       "dependency_verification": {
@@ -28532,7 +28532,7 @@
         "branch": "codex/global-en-zh-content-pages-controlled-publish-runtime-01"
       },
       "pull_request": {
-        "status": "open",
+        "status": "merged",
         "url": "https://github.com/fermatmind/fap-api/pull/1719"
       },
       "github_checks": {
@@ -28559,6 +28559,19 @@
           "git diff --check",
           "git diff --cached --check"
         ]
+      },
+      "commit": {
+        "status": "created",
+        "sha": "401099d481c71c1afaf77a9e5458b7c6dad3f462",
+        "message": "docs(content-pages): record controlled publish block"
+      },
+      "push": {
+        "status": "pushed",
+        "branch": "codex/global-en-zh-content-pages-controlled-publish-02"
+      },
+      "pull_request": {
+        "status": "open",
+        "url": "https://github.com/fermatmind/fap-api/pull/1720"
       }
     },
     "history": [
@@ -28596,6 +28609,92 @@
         "at": "2026-05-27T13:14:11+08:00",
         "status": "local_checks_passed_after_ci_fix",
         "summary": "CI freeze-boundary fix validated locally with runtime and BigFive freeze classifier suites."
+      },
+      {
+        "at": "2026-05-27T14:09:57+08:00",
+        "status": "merged",
+        "summary": "Reconciled ledger: GitHub PR #1719 is merged, origin/main contains merge commit 76a326807b38b43c807d6fb6348c2684ea5e8aae, and the remote branch is deleted."
+      }
+    ]
+  },
+  "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02": {
+    "status": "blocked_foundation_fact_overclaim",
+    "repo": "fap-api",
+    "branch": "codex/global-en-zh-content-pages-controlled-publish-02",
+    "base": "main",
+    "depends_on": [
+      "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01"
+    ],
+    "title": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02 execute controlled publish for Wave 1 English content pages",
+    "commit_sha": null,
+    "pr_url": null,
+    "failure_reason": "Production dry-run failed fail-closed with foundation_overclaim_detected; no execute command was run.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "approval_verification": {
+        "status": "passed",
+        "evidence": "Exact approval phrase was present."
+      },
+      "runtime_revision_verification": {
+        "status": "passed",
+        "evidence": "Production backend REVISION matched 76a326807b38b43c807d6fb6348c2684ea5e8aae and content-pages:publish-controlled --help succeeded."
+      },
+      "production_dry_run": {
+        "status": "failed_closed",
+        "command": "php artisan content-pages:publish-controlled --locale=en --keys=brand,charter,foundation,careers,policies --dry-run --json",
+        "evidence": "Dry-run returned ok=false, writes_committed=false, blocked_count=1, error code foundation_overclaim_detected."
+      },
+      "execute": {
+        "status": "skipped",
+        "evidence": "Execute was not run because dry-run failed."
+      },
+      "safety_verification": {
+        "status": "passed",
+        "evidence": "Target records remain draft/non-public/non-indexable; public runtime remains 404/noindex; sitemap/llms/footer show no target page hits; Search Channel gates are closed and no content-page queue items exist."
+      },
+      "local_validation": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter=GlobalEnZhContentPagesControlledPublish02 --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-controlled-publish-02.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 - <<'PY' ... yaml.safe_load(...) ... PY",
+          "git diff --check",
+          "git diff --cached --check"
+        ]
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T14:09:57+08:00",
+        "status": "production_dry_run_failed_closed",
+        "summary": "Ran official production dry-run; runtime blocked foundation with foundation_overclaim_detected."
+      },
+      {
+        "at": "2026-05-27T14:09:57+08:00",
+        "status": "execute_skipped",
+        "summary": "Did not run --execute because dry-run failed."
+      },
+      {
+        "at": "2026-05-27T14:09:57+08:00",
+        "status": "local_checks_passed",
+        "summary": "Generated blocked publish report and passed required local validation."
+      },
+      {
+        "at": "2026-05-27T14:09:57+08:00",
+        "status": "committed",
+        "summary": "Created scoped report commit 401099d4."
+      },
+      {
+        "at": "2026-05-27T14:09:57+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1720 for the blocked controlled-publish dry-run report."
       }
     ]
   }
