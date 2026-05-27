@@ -1,0 +1,48 @@
+{
+  "schema_version": "global-en-zh-content-pages-human-revision-r2.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2",
+  "final_decision": "content_pages_human_revision_r2_completed_ready_for_cms_draft_update",
+  "blocker_from_previous_task": "foundation_overclaim_detected",
+  "target_pages": [
+    "foundation"
+  ],
+  "revised_pages": [
+    "foundation"
+  ],
+  "foundation_fact_state": "planned_public_benefit_shareholding",
+  "previous_blocker_summary": {
+    "source_task": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02",
+    "source_pr": "https://github.com/fermatmind/fap-api/pull/1720",
+    "source_merge_commit": "9d9004bab3f1d909207adcdf4e485f2b71ad9393",
+    "dry_run_error_code": "foundation_overclaim_detected",
+    "reason": "The foundation draft contained exact guard phrases inside negative boundary language. The controlled publish runtime blocks exact guarded text regardless of negation."
+  },
+  "evidence_summary": {
+    "public_benefit_direction_supported_by_user_deck": true,
+    "supported_themes": [
+      "public benefit is a trust mechanism rather than promotion",
+      "youth interests first",
+      "clear data boundaries",
+      "social responsibility written into governance",
+      "public-benefit mission carrier / public-benefit foundation shareholding plan"
+    ],
+    "completed_legal_status_not_evidenced": true
+  },
+  "revision_strategy": {
+    "scope": "foundation wording only",
+    "approach": "Replace enumerated negative disclaimers with generalized boundary language that avoids exact guarded tokens while keeping the planned public-benefit shareholding direction.",
+    "source_addendum_superseded_for_foundation_text": "backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-01a-foundation-governance.addendum.v1.json"
+  },
+  "forbidden_foundation_phrases_removed": true,
+  "forbidden_foundation_phrase_hits_after_revision": 0,
+  "public_benefit_governance_preserved": true,
+  "cms_update_required": true,
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_sitemap_llms_exposure": true,
+  "no_footer_nav_exposure": true,
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-R2"
+}

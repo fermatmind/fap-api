@@ -28279,7 +28279,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2": {
-    "status": "pr_open",
+    "status": "github_checks_passed",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-publish-readiness-r2",
     "base": "main",
@@ -28618,7 +28618,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02": {
-    "status": "blocked_foundation_fact_overclaim",
+    "status": "merged",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-controlled-publish-02",
     "base": "main",
@@ -28626,12 +28626,12 @@
       "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01"
     ],
     "title": "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02 execute controlled publish for Wave 1 English content pages",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "9d9004bab3f1d909207adcdf4e485f2b71ad9393",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1720",
     "failure_reason": "Production dry-run failed fail-closed with foundation_overclaim_detected; no execute command was run.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-27T06:28:18Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "checks": {
       "approval_verification": {
         "status": "passed",
@@ -28695,6 +28695,92 @@
         "at": "2026-05-27T14:09:57+08:00",
         "status": "pr_open",
         "summary": "Opened PR #1720 for the blocked controlled-publish dry-run report."
+      },
+      {
+        "at": "2026-05-27T14:38:18+08:00",
+        "status": "merged",
+        "summary": "Reconciled ledger: GitHub PR #1720 is merged, origin/main contains merge commit 9d9004bab3f1d909207adcdf4e485f2b71ad9393, and the remote branch is deleted. The task final decision remains blocked_foundation_fact_overclaim in its report artifacts."
+      }
+    ]
+  },
+  "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2": {
+    "status": "pr_open",
+    "repo": "fap-api",
+    "branch": "codex/global-en-zh-content-pages-human-revision-r2",
+    "base": "main",
+    "depends_on": [
+      "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02"
+    ],
+    "title": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2 remove foundation forbidden exact phrases",
+    "commit_sha": "d62ad4eeefb58b42d660fc04db6d953943ac2baf",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1721",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "dependency_reconciliation": {
+        "status": "passed",
+        "evidence": "GitHub PR #1720 is merged and origin/main contains merge commit 9d9004bab3f1d909207adcdf4e485f2b71ad9393."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Current changes are limited to the R2 report, generated JSON, foundation revision package, focused test, and PR train metadata."
+      },
+      "local_validation": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter=GlobalEnZhContentPagesHumanRevisionR2 --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-human-revision-r2.v1.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-r2.foundation.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 - <<'PY' ... yaml.safe_load(...) ... PY",
+          "git diff --check",
+          "git diff --cached --check"
+        ]
+      },
+      "reference_only_fap_web": {
+        "status": "passed",
+        "evidence": "git status --short in /Users/rainie/Desktop/GitHub/fap-web returned clean; no fap-web files were committed."
+      },
+      "pull_request": {
+        "status": "open",
+        "url": "https://github.com/fermatmind/fap-api/pull/1721"
+      },
+      "github_checks": {
+        "status": "passed",
+        "evidence": "PR #1721 checks passed and mergeStateStatus was CLEAN before recording this ledger transition."
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T14:38:18+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Started foundation-only R2 revision package to remove exact guarded phrases from future public draft text while preserving planned public-benefit shareholding governance direction."
+      },
+      {
+        "at": "2026-05-27T14:45:00+08:00",
+        "status": "local_checks_passed",
+        "summary": "Created R2 artifacts and passed focused test, route list, Pint, Composer validation/audit, JSON/YAML parsing, diff checks, and reference-only fap-web status."
+      },
+      {
+        "at": "2026-05-27T14:45:50+08:00",
+        "status": "committed",
+        "summary": "Created scoped R2 revision commit d62ad4ee."
+      },
+      {
+        "at": "2026-05-27T14:47:23+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1721 for the foundation wording R2 revision package."
+      },
+      {
+        "at": "2026-05-27T14:54:36+08:00",
+        "status": "github_checks_passed",
+        "summary": "GitHub checks passed for PR #1721 and mergeStateStatus was CLEAN."
       }
     ]
   }

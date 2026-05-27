@@ -14323,6 +14323,53 @@ prs:
     frontend_fallback_authority: false
     next_task: GLOBAL-EN-ZH-CONTENT-PAGES-POST-PUBLISH-SMOKE-01
 
+  - id: GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02
+    branch: codex/global-en-zh-content-pages-human-revision-r2
+    base: main
+    title: "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2 remove foundation forbidden exact phrases"
+    train_scope: global_en_zh_content_pages_foundation_revision_r2
+    risk_level: p1_revision_package_only
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-content-pages-human-revision-r2.md
+      - backend/docs/seo/generated/global-en-zh-content-pages-human-revision-r2.v1.json
+      - backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-r2.foundation.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesHumanRevisionR2Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Create a foundation-only R2 revision package after controlled publish dry-run blocked on exact guarded phrases.
+      - Preserve planned_public_benefit_shareholding, Public-Benefit Mission and Governance, youth-first boundaries, clear data boundaries, responsible assessment use, and long-term governance design.
+      - Remove exact guarded foundation phrases from the future public draft body while keeping the same claim boundary through generalized wording.
+      - Record the revision package, report, generated artifact, focused test, and PR train state only.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhContentPagesHumanRevisionR2 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-human-revision-r2.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-r2.foundation.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    sitemap_llms_footer_exposure_allowed: false
+    deploy_allowed: false
+    pseo_generation_allowed: false
+    production_user_data_access_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-R2
+
   - id: GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03
     repo: fap-api
     depends_on:
