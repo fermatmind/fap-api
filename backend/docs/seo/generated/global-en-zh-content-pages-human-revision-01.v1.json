@@ -1,0 +1,160 @@
+{
+  "schema_version": "global-en-zh-content-pages-human-revision-01.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01",
+  "final_decision": "content_pages_human_revision_completed_ready_for_cms_draft_update",
+  "target_pages": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies"
+  ],
+  "per_page_revision_status": [
+    {
+      "page_key": "brand",
+      "original_status_from_publish_readiness": "publish_ready_with_human_approval",
+      "recommended_publish_readiness_after_revision": "publish_ready_with_human_approval",
+      "human_review_required": true,
+      "cms_update_required": true,
+      "remaining_review_requirements": [
+        "founder_review",
+        "brand_owner_review"
+      ]
+    },
+    {
+      "page_key": "charter",
+      "original_status_from_publish_readiness": "publish_ready_with_human_approval",
+      "recommended_publish_readiness_after_revision": "publish_ready_with_human_approval",
+      "human_review_required": true,
+      "cms_update_required": true,
+      "remaining_review_requirements": [
+        "founder_review",
+        "legal_review"
+      ]
+    },
+    {
+      "page_key": "foundation",
+      "original_status_from_publish_readiness": "blocked_legal_fact_review",
+      "recommended_publish_readiness_after_revision": "publish_ready_with_human_approval",
+      "human_review_required": true,
+      "cms_update_required": true,
+      "remaining_review_requirements": [
+        "founder_review",
+        "legal_review"
+      ]
+    },
+    {
+      "page_key": "careers",
+      "original_status_from_publish_readiness": "blocked_company_fact_review",
+      "recommended_publish_readiness_after_revision": "publish_ready_with_human_approval",
+      "human_review_required": true,
+      "cms_update_required": true,
+      "remaining_review_requirements": [
+        "founder_review",
+        "company_fact_review"
+      ]
+    },
+    {
+      "page_key": "policies",
+      "original_status_from_publish_readiness": "blocked_legal_fact_review",
+      "recommended_publish_readiness_after_revision": "publish_ready_with_human_approval",
+      "human_review_required": true,
+      "cms_update_required": true,
+      "remaining_review_requirements": [
+        "founder_review",
+        "legal_review"
+      ]
+    }
+  ],
+  "revised_pages": [
+    {
+      "page_key": "brand",
+      "revised_title_en": "Brand and Usage Guidelines",
+      "revised_description_en": "A practical guide for referring to FermatMind accurately, using public brand references responsibly, and avoiding misleading endorsement or affiliation claims.",
+      "revised_h1_en": "Brand and Usage Guidelines",
+      "body_block_count": 6,
+      "recommended_publish_readiness_after_revision": "publish_ready_with_human_approval"
+    },
+    {
+      "page_key": "charter",
+      "revised_title_en": "FermatMind Editorial Charter",
+      "revised_description_en": "A plain-language statement of FermatMind editorial principles for assessment content, interpretation boundaries, privacy-aware wording, and responsible use.",
+      "revised_h1_en": "FermatMind Editorial Charter",
+      "body_block_count": 6,
+      "recommended_publish_readiness_after_revision": "publish_ready_with_human_approval"
+    },
+    {
+      "page_key": "foundation",
+      "revised_title_en": "Public-Benefit Direction",
+      "revised_description_en": "FermatMind’s public-benefit direction describes educational and research-oriented aspirations around assessment literacy, career exploration, and responsible self-understanding tools.",
+      "revised_h1_en": "Public-Benefit Direction",
+      "body_block_count": 6,
+      "recommended_publish_readiness_after_revision": "publish_ready_with_human_approval"
+    },
+    {
+      "page_key": "careers",
+      "revised_title_en": "Work With FermatMind",
+      "revised_description_en": "A cautious overview of the kinds of work FermatMind may need over time, without announcing current openings, hiring timelines, employment terms, or an active recruiting process.",
+      "revised_h1_en": "Work With FermatMind",
+      "body_block_count": 5,
+      "recommended_publish_readiness_after_revision": "publish_ready_with_human_approval"
+    },
+    {
+      "page_key": "policies",
+      "revised_title_en": "Policy Overview",
+      "revised_description_en": "A navigation-oriented overview that helps users find FermatMind policy information without replacing the Terms, Privacy Policy, order pages, or product notices.",
+      "revised_h1_en": "Policy Overview",
+      "body_block_count": 6,
+      "recommended_publish_readiness_after_revision": "publish_ready_with_human_approval"
+    }
+  ],
+  "remaining_blockers": [],
+  "remaining_review_requirements": {
+    "brand": [
+      "founder_review",
+      "brand_owner_review"
+    ],
+    "charter": [
+      "founder_review",
+      "legal_review"
+    ],
+    "foundation": [
+      "founder_review",
+      "legal_review"
+    ],
+    "careers": [
+      "founder_review",
+      "company_fact_review"
+    ],
+    "policies": [
+      "founder_review",
+      "legal_review"
+    ]
+  },
+  "claim_boundary_check": {
+    "blocking_claim_boundary_issue": false,
+    "notes": [
+      "Revised copy avoids diagnosis, treatment, cure, salary guarantee, career success guarantee, hiring fit, precise career recommendation, MBTI income/turnover prediction, and unsupported privacy/security/legal commitments.",
+      "High-risk use statements remain boundary statements and do not activate new procedures or legal commitments."
+    ]
+  },
+  "legal_company_fact_check": {
+    "blocking_legal_company_fact_risk_after_revision": false,
+    "notes": [
+      "Foundation copy now states it is not a separate legal foundation, nonprofit, donation program, grant program, board, or legal entity claim.",
+      "Careers copy now states it does not announce current openings, hiring, employment terms, or an active recruiting process.",
+      "Policies copy now states it is a policy overview and does not replace Terms, Privacy Policy, order terms, product notices, or specific agreements."
+    ]
+  },
+  "cms_update_required": true,
+  "future_cms_draft_update_required": true,
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_sitemap_llms_exposure": true,
+  "no_footer_nav_exposure": true,
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01",
+  "generated_at": "2026-05-27T09:33:37+08:00"
+}

@@ -14003,6 +14003,52 @@ prs:
     frontend_fallback_authority: false
     next_task: GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01
 
+  - id: GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-01
+    branch: codex/global-en-zh-content-pages-human-revision-01
+    base: main
+    title: "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01 revise Wave 1 English content page drafts"
+    train_scope: global_en_zh_controlled_cms_import
+    risk_level: p0_draft_revision_package_only
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-content-pages-human-revision-01.md
+      - backend/docs/seo/generated/global-en-zh-content-pages-human-revision-01.v1.json
+      - backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-01.revision.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesHumanRevision01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Create a human revision package for Wave 1 English content/help/policy draft pages.
+      - Revise brand, charter, foundation, careers, and policies copy to remove or soften unsupported company, legal, foundation, hiring, privacy, security, and policy claims.
+      - Keep all generated content draft-only for a later controlled CMS draft update; do not publish, mutate production CMS, deploy, expose in sitemap/llms/footer/nav, submit URLs, trigger Search Channel, access production user data, or modify fap-web.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhContentPagesHumanRevision01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-human-revision-01.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-01.revision.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    sitemap_llms_footer_exposure_allowed: false
+    deploy_allowed: false
+    pseo_generation_allowed: false
+    production_user_data_access_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01
+
   - id: GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03
     repo: fap-api
     depends_on:
