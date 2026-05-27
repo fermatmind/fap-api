@@ -15105,3 +15105,54 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: ENNEAGRAM-FC144-EN-QUESTIONS-PACK-03
+
+  - id: MBTI-DESKTOP-CLONE-MEDIA-ASSETS-01
+    repo: fap-api
+    branch: codex/mbti-desktop-clone-media-assets-01
+    base: main
+    title: "MBTI-DESKTOP-CLONE-MEDIA-ASSETS-01 MBTI desktop clone media asset baseline"
+    train_scope: mbti_result_desktop_clone_media_assets
+    risk_level: p1_media_library_baseline
+    allowed_paths:
+      - backend/docs/mbti-desktop-clone-owner.md
+      - backend/public/static/mbti/desktop-clone/**
+      - backend/tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php
+      - backend/tests/Feature/PersonalityCms/PersonalityDesktopCloneBaselineImportTest.php
+      - backend/tests/Feature/PersonalityCms/PersonalityDesktopCloneMediaAssetBaselineTest.php
+      - content_baselines/media_assets/mbti_desktop_clone_assets.v1.json
+      - content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Upgrade MBTI desktop clone 32 fullCode x 7 visual asset slots from placeholder metadata to Media Library/CDN-ready baseline references.
+      - Add repo-backed static SVG asset files and Media Library baseline rows for each desktop clone slot without mutating production CMS or uploading assets.
+      - Add focused tests proving all 224 desktop clone asset slots are ready, checksummed, alt-backed, and linked to Media Library asset keys.
+      - Do not change fap-web runtime, result unlock behavior, paid content gates, Search Channel, sitemap, llms, deploy state, or production CMS.
+    validation:
+      - cd backend && php artisan test --filter=PersonalityDesktopCloneBaselineImportTest --no-ansi
+      - cd backend && php artisan test --filter=PersonalityDesktopCloneMediaAssetBaselineTest --no-ansi
+      - cd backend && php artisan test --filter=MediaLibraryPublicApiTest --no-ansi
+      - cd backend && php artisan test --filter=PersonalityDesktopClonePublicApiTest --no-ansi
+      - cd backend && php artisan test --filter=PersonalityDesktopCloneAssetSlotSupportTest --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json >/dev/null
+      - python3 -m json.tool content_baselines/media_assets/mbti_desktop_clone_assets.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    media_upload: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    paid_content_gate_change: false
+    next_task: DEPLOY-READINESS
