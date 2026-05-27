@@ -28483,7 +28483,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01": {
-    "status": "pr_open",
+    "status": "local_checks_passed_after_ci_fix",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-controlled-publish-runtime-01",
     "base": "main",
@@ -28534,6 +28534,31 @@
       "pull_request": {
         "status": "open",
         "url": "https://github.com/fermatmind/fap-api/pull/1719"
+      },
+      "github_checks": {
+        "status": "failed_scope_fix_in_progress",
+        "evidence": "PR #1719 verify-mbti-legacy and verify-mbti-v2 failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classified the new bounded content-pages command/service as runtime-impacting."
+      },
+      "ci_scope_fix": {
+        "status": "passed",
+        "evidence": "Added exact runtime-freeze classifier allowlist coverage for ContentPagesPublishControlledCommand and ContentPagesControlledPublishService."
+      },
+      "local_validation_after_ci_fix": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter=GlobalEnZhContentPagesControlledPublishRuntime01 --no-ansi",
+          "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && php artisan list --no-ansi | grep -E \"content-pages:publish-controlled|content-pages\"",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-controlled-publish-runtime-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 - <<'PY' ... yaml.safe_load(...) ... PY",
+          "git diff --check",
+          "git diff --cached --check"
+        ]
       }
     },
     "history": [
@@ -28561,6 +28586,16 @@
         "at": "2026-05-27T13:07:00+08:00",
         "status": "pr_open",
         "summary": "Opened PR #1719 for the controlled publish runtime."
+      },
+      {
+        "at": "2026-05-27T13:12:47+08:00",
+        "status": "ci_fix_in_progress",
+        "summary": "Scoped CI fix: classify the new bounded content-pages publish runtime as non-MBTI/non-Big-Five runtime-impacting."
+      },
+      {
+        "at": "2026-05-27T13:14:11+08:00",
+        "status": "local_checks_passed_after_ci_fix",
+        "summary": "CI freeze-boundary fix validated locally with runtime and BigFive freeze classifier suites."
       }
     ]
   }
