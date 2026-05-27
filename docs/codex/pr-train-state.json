@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T09:46:10+08:00",
+  "updated_at": "2026-05-27T10:23:33+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -28040,6 +28040,112 @@
         "at": "2026-05-27T09:46:10+08:00",
         "status": "github_checks_passed",
         "summary": "GitHub required checks passed and mergeStateStatus was CLEAN before final ledger update."
+      }
+    ]
+  },
+  "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01A-FOUNDATION-GOVERNANCE-FACT-RECONCILE": {
+    "status": "local_checks_passed",
+    "repo": "fap-api",
+    "branch": "codex/global-en-zh-content-pages-human-revision-01a-foundation-governance",
+    "base": "main",
+    "depends_on": [
+      "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01"
+    ],
+    "title": "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01A-FOUNDATION-GOVERNANCE-FACT-RECONCILE reconcile foundation governance facts",
+    "commit_sha": "79402718e95bb4c360f9a72d6acf27440eb639ea",
+    "pr_url": null,
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "preflight": {
+        "status": "passed",
+        "evidence": "Started from latest origin/main at 3255e661b659b8ea018a8b6d2cd85c3ba7090262 in isolated worktree; user authorized only current task manifest/state entry."
+      },
+      "evidence_review": {
+        "status": "passed",
+        "evidence": "Reviewed prior revision/readiness artifacts and local deck evidence. Classified foundation fact state as planned_public_benefit_shareholding because deck supports a foundation shareholding plan but no formal legal/equity completion document was available."
+      },
+      "scope_boundary": {
+        "status": "passed",
+        "evidence": "Revision addendum only; no CMS mutation, publish, deploy, Search Channel action, URL submission, sitemap/llms/footer/nav exposure, or fap-web modification."
+      },
+      "composer_install": {
+        "status": "passed",
+        "command": "cd backend && composer install --no-interaction --no-progress --prefer-dist",
+        "evidence": "Installed dependencies in isolated worktree only; ignored vendor/public/cache artifacts were not staged."
+      },
+      "focused_test": {
+        "status": "passed",
+        "command": "cd backend && php artisan test --filter=GlobalEnZhContentPagesHumanRevision01aFoundationGovernance --no-ansi",
+        "evidence": "1 test passed, 21 assertions."
+      },
+      "route_list": {
+        "status": "passed",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "203 routes listed."
+      },
+      "pint": {
+        "status": "passed",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "3585 files passed."
+      },
+      "composer_validate": {
+        "status": "passed",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "passed",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "No security vulnerability advisories found."
+      },
+      "json_yaml_parse": {
+        "status": "passed",
+        "evidence": "Generated JSON, addendum package JSON, pr-train-state.json, and pr-train.yaml parse successfully."
+      },
+      "scope_validation": {
+        "status": "passed",
+        "changed_files": [
+          "backend/docs/seo/global-en-zh-content-pages-human-revision-01a-foundation-governance.md",
+          "backend/docs/seo/generated/global-en-zh-content-pages-human-revision-01a-foundation-governance.v1.json",
+          "backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-01a-foundation-governance.addendum.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesHumanRevision01aFoundationGovernanceTest.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ]
+      },
+      "diff_check": {
+        "status": "passed",
+        "command": "git diff --check && git diff --cached --check"
+      },
+      "fap_web_reference_check": {
+        "status": "passed_with_preexisting_untracked_files",
+        "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+        "evidence": "Observed pre-existing untracked fap-web files; no fap-web changes were made or committed by this task."
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T10:23:33+08:00",
+        "status": "planned",
+        "summary": "Authorized current foundation governance fact reconcile task entry only."
+      },
+      {
+        "at": "2026-05-27T10:23:33+08:00",
+        "status": "in_progress",
+        "summary": "Created draft-only addendum artifacts and focused test; local validation pending."
+      },
+      {
+        "at": "2026-05-27T10:23:33+08:00",
+        "status": "local_checks_passed",
+        "summary": "Focused test, route list, Pint, composer validate/audit, JSON/YAML parse, fap-web reference check, and diff checks passed."
+      },
+      {
+        "at": "2026-05-27T10:23:33+08:00",
+        "status": "committed",
+        "summary": "Committed scoped revision addendum artifacts for foundation governance fact reconciliation."
       }
     ]
   }

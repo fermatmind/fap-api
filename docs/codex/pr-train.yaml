@@ -14049,6 +14049,52 @@ prs:
     frontend_fallback_authority: false
     next_task: GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01
 
+  - id: GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01A-FOUNDATION-GOVERNANCE-FACT-RECONCILE
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01
+    branch: codex/global-en-zh-content-pages-human-revision-01a-foundation-governance
+    base: main
+    title: "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01A-FOUNDATION-GOVERNANCE-FACT-RECONCILE reconcile foundation governance facts"
+    train_scope: global_en_zh_controlled_cms_import
+    risk_level: p0_revision_addendum_only
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-content-pages-human-revision-01a-foundation-governance.md
+      - backend/docs/seo/generated/global-en-zh-content-pages-human-revision-01a-foundation-governance.v1.json
+      - backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-01a-foundation-governance.addendum.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesHumanRevision01aFoundationGovernanceTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Create a revision addendum that reconciles foundation/shareholding governance facts before any CMS draft update.
+      - Classify foundation/shareholding evidence state and preserve public-benefit governance direction without claiming registered foundation, nonprofit status, donation/grant program, formal board governance, legal fiduciary duty, exact ownership percentage, or completed equity transfer unless formal documents prove them.
+      - Keep the addendum draft-only with no CMS mutation, publish, deploy, sitemap/llms/footer/nav exposure, Search Channel action, URL submission, production migration, production user data access, or fap-web modification.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhContentPagesHumanRevision01aFoundationGovernance --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-human-revision-01a-foundation-governance.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/import-packages/global-en-zh-content-pages-human-revision-01a-foundation-governance.addendum.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    sitemap_llms_footer_exposure_allowed: false
+    deploy_allowed: false
+    pseo_generation_allowed: false
+    production_user_data_access_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01
+
   - id: GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03
     repo: fap-api
     depends_on:
