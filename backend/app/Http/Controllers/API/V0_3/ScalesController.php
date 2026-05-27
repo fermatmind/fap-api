@@ -523,7 +523,7 @@ class ScalesController extends Controller
                 }
             }
 
-            $loaded = $questionsService->loadByPack($packId, $dirVersion, $assetsBaseUrlOverride);
+            $loaded = $questionsService->loadByPack($packId, $dirVersion, $assetsBaseUrlOverride, $locale);
             if (! ($loaded['ok'] ?? false)) {
                 $error = (string) ($loaded['error_code'] ?? $loaded['error'] ?? 'READ_FAILED');
                 $status = $error === 'NOT_FOUND' ? 404 : 503;
