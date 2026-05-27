@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T16:36:19+08:00",
+  "updated_at": "2026-05-27T16:43:56+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -28855,7 +28855,7 @@
     "branch": "codex/audit-career-detail-ready-1048-scan-1",
     "base": "main",
     "title": "fix(api): audit career detail-ready 1048 candidates",
-    "commit_sha": "e4c6f26b06711fccd88fcdc817c956282d403447",
+    "commit_sha": "9d7f67d2dab71ae981dcad290a49a7ee9de527b3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1724",
     "failure_reason": null,
     "merged_at": null,
@@ -28884,9 +28884,10 @@
         ]
       },
       "github_checks": {
-        "status": "rerun_pending_after_scoped_fix",
+        "status": "passed",
         "initial_failure": "verify-mbti legacy/v2 failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze guard flagged backend/app/Domain/Career/Audit/CareerDetailReadyPublicationCandidateScanner.php.",
-        "fix": "Added an explicit Career detail-ready 1048 audit scanner classifier case to the runtime freeze guard test."
+        "fix": "Added an explicit Career detail-ready 1048 audit scanner classifier case to the runtime freeze guard test.",
+        "evidence": "PR #1724 checks passed after scoped fix: hygiene, supply-chain, Semgrep, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "history": [
@@ -28914,6 +28915,11 @@
         "at": "2026-05-27T16:36:19+08:00",
         "status": "github_checks_fix_ready",
         "summary": "Fixed current-scope CI failure by classifying the read-only Career 1048 audit scanner as non-MBTI-impacting in the runtime freeze guard; focused guard test, full guard test, scanner test, route list, Pint, JSON/YAML, diff check, and backend CI master chain passed locally."
+      },
+      {
+        "at": "2026-05-27T16:43:56+08:00",
+        "status": "github_checks_passed",
+        "summary": "GitHub checks passed for PR #1724 after the scoped runtime-freeze classifier fix."
       }
     ]
   },
