@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T20:33:10+08:00",
+  "updated_at": "2026-05-27T20:34:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -29324,7 +29324,7 @@
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-ROLLOUT-GATE-1": {
-    "status": "local_checks_passed",
+    "status": "local_commit_created",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-rollout-gate-1",
     "base": "main",
@@ -29332,7 +29332,7 @@
       "REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1"
     ],
     "title": "fix(api): gate career detail-ready 1048 rollout",
-    "commit_sha": null,
+    "commit_sha": "2ff39fd7a7301b985163de368081a4d36775a8a0",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -29393,6 +29393,11 @@
         "at": "2026-05-27T20:33:10+08:00",
         "status": "scope_validation_passed",
         "summary": "Changed files are within rollout gate PR allowed paths; generated BIG5_OCEAN compiled artifacts were restored as out-of-scope CI side effects."
+      },
+      {
+        "at": "2026-05-27T20:34:00+08:00",
+        "status": "local_commit_created",
+        "summary": "Created local commit 2ff39fd7a7301b985163de368081a4d36775a8a0 for detail-ready 1048 rollout gate dry-run support."
       }
     ]
   },
