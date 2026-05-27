@@ -14370,6 +14370,51 @@ prs:
     frontend_fallback_authority: false
     next_task: GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-R2
 
+  - id: GLOBAL-EN-ZH-CONTENT-PAGES-POST-PUBLISH-SMOKE-01
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02
+      - GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2
+    branch: codex/global-en-zh-content-pages-post-publish-smoke-01
+    base: main
+    title: "GLOBAL-EN-ZH-CONTENT-PAGES-POST-PUBLISH-SMOKE-01 post-publish runtime smoke"
+    train_scope: global_en_zh_content_pages_post_publish_smoke
+    risk_level: p1_read_only_production_smoke
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-content-pages-post-publish-smoke-01.md
+      - backend/docs/seo/generated/global-en-zh-content-pages-post-publish-smoke-01.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesPostPublishSmoke01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Verify the production CMS/API/frontend runtime state after controlled publish of the five Wave 1 English content pages.
+      - Record whether public frontend routes, canonical metadata, robots, sitemap, llms, footer/nav, and Search Channel boundaries are safe.
+      - Keep the task strictly read-only; do not mutate CMS, publish, deploy, enqueue Search Channel, submit URLs, call external search APIs, edit env/DNS/nginx, or modify fap-web.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhContentPagesPostPublishSmoke01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-post-publish-smoke-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    sitemap_llms_footer_exposure_allowed: false
+    deploy_allowed: false
+    pseo_generation_allowed: false
+    production_user_data_access_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: GLOBAL-EN-ZH-CONTENT-PAGES-FRONTEND-RUNTIME-REPAIR-01
+
   - id: GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03
     repo: fap-api
     depends_on:

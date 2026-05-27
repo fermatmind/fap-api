@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T10:55:00+08:00",
+  "updated_at": "2026-05-27T15:56:09+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -28524,16 +28524,16 @@
       },
       "commit": {
         "status": "created",
-        "sha": "c4daaa7f275971e734f782564999266cd0772c4e",
-        "message": "feat(content-pages): add controlled publish runtime"
+        "sha": "401099d481c71c1afaf77a9e5458b7c6dad3f462",
+        "message": "docs(content-pages): record controlled publish block"
       },
       "push": {
         "status": "pushed",
-        "branch": "codex/global-en-zh-content-pages-controlled-publish-runtime-01"
+        "branch": "codex/global-en-zh-content-pages-controlled-publish-02"
       },
       "pull_request": {
-        "status": "merged",
-        "url": "https://github.com/fermatmind/fap-api/pull/1719"
+        "status": "open",
+        "url": "https://github.com/fermatmind/fap-api/pull/1720"
       },
       "github_checks": {
         "status": "failed_scope_fix_in_progress",
@@ -28559,19 +28559,6 @@
           "git diff --check",
           "git diff --cached --check"
         ]
-      },
-      "commit": {
-        "status": "created",
-        "sha": "401099d481c71c1afaf77a9e5458b7c6dad3f462",
-        "message": "docs(content-pages): record controlled publish block"
-      },
-      "push": {
-        "status": "pushed",
-        "branch": "codex/global-en-zh-content-pages-controlled-publish-02"
-      },
-      "pull_request": {
-        "status": "open",
-        "url": "https://github.com/fermatmind/fap-api/pull/1720"
       }
     },
     "history": [
@@ -28781,6 +28768,84 @@
         "at": "2026-05-27T14:54:36+08:00",
         "status": "github_checks_passed",
         "summary": "GitHub checks passed for PR #1721 and mergeStateStatus was CLEAN."
+      }
+    ]
+  },
+  "GLOBAL-EN-ZH-CONTENT-PAGES-POST-PUBLISH-SMOKE-01": {
+    "status": "pr_open",
+    "repo": "fap-api",
+    "branch": "codex/global-en-zh-content-pages-post-publish-smoke-01",
+    "base": "main",
+    "depends_on": [
+      "GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-02",
+      "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2"
+    ],
+    "title": "GLOBAL-EN-ZH-CONTENT-PAGES-POST-PUBLISH-SMOKE-01 post-publish runtime smoke",
+    "commit_sha": "ec1960bc10bae0faccabf78f78569a780907fae9",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1723",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "checks": {
+      "production_read_only_smoke": {
+        "status": "completed_with_blocker",
+        "evidence": "CMS/API published state verified; public frontend runtime remains unstable because apex API works while api.fermatmind.com returns TLS EOF and Node1 NEXT_PUBLIC_API_URL is empty.",
+        "final_decision": "content_pages_post_publish_smoke_completed_with_api_base_blocker"
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Changes limited to post-publish smoke report, generated JSON, focused test, and PR train metadata."
+      },
+      "local_validation": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter=GlobalEnZhContentPagesPostPublishSmoke01 --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && vendor/bin/pint --test",
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-post-publish-smoke-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 - <<'PY' ... yaml.safe_load(...) ... PY",
+          "git diff --check",
+          "git diff --cached --check"
+        ]
+      },
+      "reference_only_fap_web": {
+        "status": "passed",
+        "evidence": "git status --short in /Users/rainie/Desktop/GitHub/fap-web returned clean; no fap-web files were changed."
+      },
+      "pull_request": {
+        "status": "open",
+        "url": "https://github.com/fermatmind/fap-api/pull/1723"
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T15:48:37+08:00",
+        "status": "production_smoke_completed",
+        "summary": "Read-only smoke verified CMS/API state and found frontend API-base/runtime blocker without CMS mutation, publish, deploy, Search Channel action, URL submission, external API call, or fap-web mutation."
+      },
+      {
+        "at": "2026-05-27T15:48:37+08:00",
+        "status": "report_generated",
+        "summary": "Generated post-publish smoke report artifacts and focused test."
+      },
+      {
+        "at": "2026-05-27T15:53:46+08:00",
+        "status": "local_checks_passed",
+        "summary": "Focused test, route list, Pint, Composer validation/audit, JSON/YAML parsing, and diff checks passed."
+      },
+      {
+        "at": "2026-05-27T15:55:12+08:00",
+        "status": "committed",
+        "summary": "Created scoped post-publish smoke report commit 792845b4."
+      },
+      {
+        "at": "2026-05-27T15:56:09+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1723 for the post-publish smoke report."
       }
     ]
   }
