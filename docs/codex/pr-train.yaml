@@ -14140,6 +14140,50 @@ prs:
     frontend_fallback_authority: false
     next_task: GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2
 
+  - id: GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2
+    repo: fap-api
+    depends_on:
+      - GLOBAL-EN-ZH-CONTENT-PAGES-CMS-DRAFT-UPDATE-01
+    branch: codex/global-en-zh-content-pages-publish-readiness-r2
+    base: main
+    title: "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-R2 publish readiness recheck for Wave 1 English content pages"
+    train_scope: global_en_zh_controlled_cms_import
+    risk_level: p0_read_only_publish_readiness
+    allowed_paths:
+      - backend/docs/seo/global-en-zh-content-pages-publish-readiness-r2.md
+      - backend/docs/seo/generated/global-en-zh-content-pages-publish-readiness-r2.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesPublishReadinessR2Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Re-run publish readiness after the controlled CMS draft update for brand, charter, foundation, careers, and policies.
+      - Verify CMS draft state, content completeness, claim boundaries, legal/company/foundation review needs, runtime non-exposure, future discoverability eligibility, and Search Channel safety.
+      - Keep verification strictly read-only with no publish, CMS mutation, deploy, URL submission, Search Channel action, external search API call, production migration, raw log read, production user data access, or fap-web modification.
+    validation:
+      - cd backend && php artisan test --filter=GlobalEnZhContentPagesPublishReadinessR2 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-en-zh-content-pages-publish-readiness-r2.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    sitemap_llms_footer_exposure_allowed: false
+    deploy_allowed: false
+    pseo_generation_allowed: false
+    production_user_data_access_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: GLOBAL-EN-ZH-CONTENT-PAGES-CONTROLLED-PUBLISH-01
+
   - id: GLOBAL-EN-ZH-TOPIC-TEST-LANDING-HUMAN-REVIEW-IMPORT-03
     repo: fap-api
     depends_on:
