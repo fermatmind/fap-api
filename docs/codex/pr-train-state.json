@@ -29022,7 +29022,7 @@
     "local_cleanup_note": "scripts/post_merge_cleanup.sh not present in fap-api; local main fast-forwarded to origin/main and task branch was not present locally after merge."
   },
   "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1": {
-    "status": "github_checks_green",
+    "status": "merged",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-candidate-prep-1",
     "base": "main",
@@ -29030,11 +29030,11 @@
       "REPAIR-CAREER-DETAIL-READY-TARGET-AUTHORITY-1"
     ],
     "title": "fix(api): plan career detail-ready 1018 candidate prep",
-    "commit_sha": "b7ddae6de5feb950b46ec89bae64e7029e26fbd2",
+    "commit_sha": "cbbbbb850434d79a6e042c5fbfd946fd3deb2a5f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1726",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-05-27T10:37:37Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "checks": {
       "local": {
@@ -29122,6 +29122,11 @@
         "at": "2026-05-27T18:29:06+08:00",
         "status": "github_checks_green",
         "summary": "After rebasing onto origin/main with PR #1727, PR #1726 required GitHub checks passed and merge state is CLEAN."
+      },
+      {
+        "at": "2026-05-27T19:42:09+08:00",
+        "status": "ledger_reconciled_merged",
+        "summary": "Reconciled PR #1726 as merged into origin/main with merge commit cbbbbb850434d79a6e042c5fbfd946fd3deb2a5f; fap-api has no scripts/post_merge_cleanup.sh local cleanup hook."
       }
     ],
     "sidecar_blockers": [
@@ -29140,7 +29145,7 @@
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1": {
-    "status": "planned",
+    "status": "pr_open",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-runtime-artifact-refresh-1",
     "base": "main",
@@ -29148,17 +29153,74 @@
       "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1"
     ],
     "title": "fix(api): refresh career detail-ready 1048 artifacts",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "2a4e987c0d66fb2a4103b4d3a186891de4359311",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1728",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "checks": {},
-    "history": []
+    "checks": {
+      "local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter=CareerDetailReady --no-ansi",
+          "cd backend && php artisan test --filter=CareerRuntimeArtifactRefresh --no-ansi",
+          "cd backend && php artisan test tests/Feature/Console/CareerPlanCanonicalRuntimeArtifactRefreshCommandTest.php --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+          "cd backend && vendor/bin/pint --test",
+          "bash backend/scripts/ci_verify_mbti.sh"
+        ],
+        "notes": "Career runtime artifact refresh and detail-ready focused tests passed. backend/scripts/ci_verify_mbti.sh passed and regenerated BIG5_OCEAN compiled artifacts as a local side effect; those generated diffs were restored because they are outside this PR scope."
+      },
+      "scope": {
+        "status": "passed",
+        "changed_files": [
+          "backend/app/Console/Commands/CareerPlanCanonicalRuntimeArtifactRefresh.php",
+          "backend/app/Domain/Career/Audit/CareerRuntimeArtifactRefreshPlanner.php",
+          "backend/app/Domain/Career/Audit/CareerRuntimeCandidateAwareArtifactRefresh.php",
+          "backend/docs/career/audits/runtime_artifact_refresh.md",
+          "backend/tests/Feature/Console/CareerPlanCanonicalRuntimeArtifactRefreshCommandTest.php",
+          "backend/tests/Unit/Domain/Career/Audit/CareerRuntimeArtifactRefreshPlannerTest.php",
+          "docs/codex/pr-train-state.json"
+        ],
+        "outside_scope": [],
+        "diff_checks": [
+          "git diff --check",
+          "git diff --cached --check"
+        ]
+      }
+    },
+    "history": [
+      {
+        "at": "2026-05-27T19:42:09+08:00",
+        "status": "implementation_in_progress",
+        "summary": "Started detail_ready_1048 runtime artifact refresh planner/read-only PR from latest main after PR #1726 merged."
+      },
+      {
+        "at": "2026-05-27T19:42:09+08:00",
+        "status": "local_checks_passed",
+        "summary": "CareerDetailReady, CareerRuntimeArtifactRefresh, focused command tests, route list, migrate pretend, Pint, and backend MBTI CI passed locally."
+      },
+      {
+        "at": "2026-05-27T19:42:47+08:00",
+        "status": "scope_validation_passed",
+        "summary": "Changed files are within runtime artifact refresh PR allowed paths; generated BIG5_OCEAN compiled artifacts were restored as out-of-scope CI side effects."
+      },
+      {
+        "at": "2026-05-27T19:43:24+08:00",
+        "status": "local_commit_created",
+        "summary": "Created local commit 2a4e987c0d66fb2a4103b4d3a186891de4359311 for detail-ready 1048 runtime artifact refresh planning."
+      },
+      {
+        "at": "2026-05-27T19:44:37+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1728 for detail_ready_1048 runtime artifact refresh planning."
+      }
+    ]
   },
   "SUPPLY-CHAIN-SYMFONY-AUDIT-UNBLOCK-20260527": {
-    "status": "implementation_in_progress",
+    "status": "merged",
     "repo": "fap-api",
     "branch": "codex/supply-chain-symfony-audit-unblock-20260527",
     "base": "main",
@@ -29166,11 +29228,11 @@
       "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1"
     ],
     "title": "fix(deps): unblock Symfony Composer audit",
-    "commit_sha": "b7833e07220c885ab9af12696323000c253a7a0b",
+    "commit_sha": "c1b708fc0d70e9f3e7124f564152b07bcdd4b797",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1727",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-05-27T10:21:24Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "checks": {
       "local": {
@@ -29195,6 +29257,18 @@
           "docs/codex/pr-train-state.json"
         ],
         "outside_scope": []
+      },
+      "github": {
+        "status": "passed",
+        "merge_state": "CLEAN",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "Semgrep blocking secrets",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "failure_reason": null
       }
     },
     "history": [
@@ -29222,6 +29296,11 @@
         "at": "2026-05-27T18:12:27+08:00",
         "status": "pr_open",
         "summary": "Opened PR #1727 for the Symfony Composer audit sidecar unblocker."
+      },
+      {
+        "at": "2026-05-27T19:42:09+08:00",
+        "status": "ledger_reconciled_merged",
+        "summary": "Reconciled sidecar PR #1727 as merged into origin/main with merge commit c1b708fc0d70e9f3e7124f564152b07bcdd4b797; remote branch is deleted and fap-api has no scripts/post_merge_cleanup.sh local cleanup hook."
       }
     ]
   },

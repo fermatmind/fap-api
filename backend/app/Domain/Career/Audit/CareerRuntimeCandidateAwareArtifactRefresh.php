@@ -12,7 +12,7 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
 
     public const OVERLAY_SOURCE = 'candidate_prep_apply_overlay';
 
-    private const DEFAULT_TARGET = 'career_80_delta';
+    private const DEFAULT_TARGET = CareerRuntimeArtifactRefreshPlanner::TARGET_CAREER_80_DELTA;
 
     private const RUNTIME_STATE = 'published_candidate';
 
@@ -41,13 +41,14 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
         int $expectedSlugCount = 51,
         string $target = self::DEFAULT_TARGET,
     ): array {
+        $target = $this->target($target);
         $source = $this->verifiedSource($candidatePrepApply, $candidatePrepApplyPath, $candidatePrepApplyFileSha256, $expectedSlugCount);
         $slugs = $source['slugs'];
         $locales = $source['locales'];
 
-        $projectionArtifact = $this->projectionArtifact($projection, $slugs, $locales, $source, $projectionPath);
-        $truthArtifact = $this->truthArtifact($truth, $slugs, $locales, $source, $truthPath);
-        $ledgerArtifact = $this->ledgerArtifact($ledger, $slugs, $source, $ledgerPath);
+        $projectionArtifact = $this->projectionArtifact($projection, $slugs, $locales, $source, $projectionPath, $target);
+        $truthArtifact = $this->truthArtifact($truth, $slugs, $locales, $source, $truthPath, $target);
+        $ledgerArtifact = $this->ledgerArtifact($ledger, $slugs, $source, $ledgerPath, $target);
 
         return [
             'summary' => [
@@ -62,10 +63,12 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
                     'artifact_sha256' => $source['artifact_sha256'],
                     'file_sha256' => $candidatePrepApplyFileSha256,
                 ],
-                'target' => $this->target($target),
+                'target' => $target,
                 'delta_slug_count' => count($slugs),
                 'expected_delta_locale_rows' => count($slugs) * count($locales),
                 'locales' => $locales,
+                'target_authority' => $this->targetAuthority($target),
+                'runtime_authority_contract' => $this->runtimeAuthorityContract($target),
                 'projection' => [
                     'source_path' => $projectionPath,
                     'output_path' => $projectionOutputPath,
@@ -112,9 +115,11 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
     {
         $target = $this->target($target);
 
-        return $target === self::DEFAULT_TARGET
-            ? '51_DELTA_ROLLOUT_DRY_RUN'
-            : 'PROGRESSIVE_ROLLOUT_DRY_RUN';
+        return match ($target) {
+            self::DEFAULT_TARGET => '51_DELTA_ROLLOUT_DRY_RUN',
+            CareerRuntimeArtifactRefreshPlanner::TARGET_DETAIL_READY_1048 => 'DETAIL_READY_1048_ROLLOUT_GATE_DRY_RUN',
+            default => 'PROGRESSIVE_ROLLOUT_DRY_RUN',
+        };
     }
 
     /**
@@ -221,7 +226,7 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
      * @param  array{artifact_sha256: string|null, slugs: list<string>, locales: list<string>}  $source
      * @return array<string, mixed>
      */
-    private function projectionArtifact(array $projection, array $slugs, array $locales, array $source, string $sourcePath): array
+    private function projectionArtifact(array $projection, array $slugs, array $locales, array $source, string $sourcePath, string $target): array
     {
         $rows = [
             ...$this->nonOverlayRows($this->artifactRows($projection, ['items', 'rows']), $slugs),
@@ -236,6 +241,7 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
             'source_path' => $sourcePath,
             'canonical_ledger_authority_claimed' => false,
         ];
+        $projection['runtime_authority_contract'] = $this->runtimeAuthorityContract($target);
         $projection['candidate_aware_overlay'] = $this->overlaySummary($slugs, $locales, $source);
         $projection['items'] = $rows;
         unset($projection['rows']);
@@ -251,7 +257,7 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
      * @param  array{artifact_sha256: string|null, slugs: list<string>, locales: list<string>}  $source
      * @return array<string, mixed>
      */
-    private function truthArtifact(array $truth, array $slugs, array $locales, array $source, string $sourcePath): array
+    private function truthArtifact(array $truth, array $slugs, array $locales, array $source, string $sourcePath, string $target): array
     {
         $rows = [
             ...$this->nonOverlayRows($this->artifactRows($truth, ['items', 'rows']), $slugs),
@@ -266,6 +272,7 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
             'source_path' => $sourcePath,
             'canonical_ledger_authority_claimed' => false,
         ];
+        $truth['runtime_authority_contract'] = $this->runtimeAuthorityContract($target);
         $truth['candidate_aware_overlay'] = $this->overlaySummary($slugs, $locales, $source);
         $truth['items'] = $rows;
         unset($truth['rows']);
@@ -280,7 +287,7 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
      * @param  array{artifact_sha256: string|null, slugs: list<string>, locales: list<string>}  $source
      * @return array<string, mixed>
      */
-    private function ledgerArtifact(array $ledger, array $slugs, array $source, string $sourcePath): array
+    private function ledgerArtifact(array $ledger, array $slugs, array $source, string $sourcePath, string $target): array
     {
         $members = [
             ...$this->nonOverlayMembers($this->artifactRows($ledger, ['members', 'items', 'rows']), $slugs),
@@ -295,6 +302,7 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
             'source_path' => $sourcePath,
             'canonical_ledger_authority_claimed' => false,
         ];
+        $ledger['runtime_authority_contract'] = $this->runtimeAuthorityContract($target);
         $ledger['candidate_aware_overlay'] = $this->overlaySummary($slugs, [], $source);
         $ledger['members'] = $members;
         unset($ledger['items'], $ledger['rows']);
@@ -569,5 +577,46 @@ final class CareerRuntimeCandidateAwareArtifactRefresh
     private function countRows(array $rows, string $key, string $value): int
     {
         return count(array_filter($rows, static fn (array $row): bool => ($row[$key] ?? null) === $value));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function targetAuthority(string $target): array
+    {
+        if ($target === CareerRuntimeArtifactRefreshPlanner::TARGET_DETAIL_READY_1048) {
+            return (new CareerDetailReadyTargetAuthority)->target(self::DEFAULT_LOCALES);
+        }
+
+        return [
+            'target_key' => $target,
+            'candidate_prep_apply_allowed' => false,
+            'rollout_apply_allowed' => false,
+            'production_deploy_allowed' => false,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function runtimeAuthorityContract(string $target): array
+    {
+        return [
+            'contract_version' => 'career_runtime_artifact_shared_authority.v1',
+            'target' => $target,
+            'single_runtime_authority' => true,
+            'authority_source' => 'candidate_aware_runtime_projection_truth_ledger_artifacts',
+            'consumers' => [
+                'dataset_hub',
+                'career_jobs_api',
+                'career_job_detail_api',
+                'sitemap',
+                'llms',
+                'llms_full',
+            ],
+            'candidate_rows_remain_hidden_until_rollout' => true,
+            'must_not_publish_from_raw_assets' => true,
+            'must_not_use_fap_web_fallback_authority' => true,
+        ];
     }
 }
