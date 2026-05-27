@@ -1,0 +1,562 @@
+{
+  "schema_version": "global-en-zh-content-pages-import-verify-01.v1",
+  "task": "GLOBAL-EN-ZH-CONTENT-PAGES-IMPORT-VERIFY-01",
+  "final_decision": "content_pages_import_verify_completed_ready_for_publish_readiness",
+  "import_pr": {
+    "url": "https://github.com/fermatmind/fap-api/pull/1709",
+    "merge_commit": "a0895313fc16f0aa000916e4da29c1cb07fe0a9c",
+    "final_decision": "content_pages_controlled_cms_import_completed_with_sidecars"
+  },
+  "imported_records": [
+    "brand",
+    "charter",
+    "foundation",
+    "careers",
+    "policies"
+  ],
+  "cms_record_state": {
+    "checked_at": "2026-05-27T00:17:10.929135Z",
+    "records": [
+      {
+        "slug": "brand",
+        "locale": "en",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "translation_status": "draft",
+        "review_state": "draft",
+        "published_at": null,
+        "source_doc": "global-en-zh-content-pages-translation-batch-01.import.v1.json",
+        "path": "/brand",
+        "created_at": "2026-05-26T23:47:28.000000Z",
+        "updated_at": "2026-05-26T23:47:28.000000Z"
+      },
+      {
+        "slug": "charter",
+        "locale": "en",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "translation_status": "draft",
+        "review_state": "draft",
+        "published_at": null,
+        "source_doc": "global-en-zh-content-pages-translation-batch-01.import.v1.json",
+        "path": "/charter",
+        "created_at": "2026-05-26T23:47:28.000000Z",
+        "updated_at": "2026-05-26T23:47:28.000000Z"
+      },
+      {
+        "slug": "foundation",
+        "locale": "en",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "translation_status": "draft",
+        "review_state": "draft",
+        "published_at": null,
+        "source_doc": "global-en-zh-content-pages-translation-batch-01.import.v1.json",
+        "path": "/foundation",
+        "created_at": "2026-05-26T23:47:28.000000Z",
+        "updated_at": "2026-05-26T23:47:28.000000Z"
+      },
+      {
+        "slug": "careers",
+        "locale": "en",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "translation_status": "draft",
+        "review_state": "draft",
+        "published_at": null,
+        "source_doc": "global-en-zh-content-pages-translation-batch-01.import.v1.json",
+        "path": "/careers",
+        "created_at": "2026-05-26T23:47:28.000000Z",
+        "updated_at": "2026-05-26T23:47:28.000000Z"
+      },
+      {
+        "slug": "policies",
+        "locale": "en",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "translation_status": "draft",
+        "review_state": "draft",
+        "published_at": null,
+        "source_doc": "global-en-zh-content-pages-translation-batch-01.import.v1.json",
+        "path": "/policies",
+        "created_at": "2026-05-26T23:47:28.000000Z",
+        "updated_at": "2026-05-26T23:47:28.000000Z"
+      }
+    ],
+    "all_exist": true,
+    "all_draft_only": true,
+    "all_non_public": true,
+    "all_non_indexable": true,
+    "all_published_at_null": true,
+    "all_import_marker_present": true
+  },
+  "existing_published_records_check": {
+    "records": [
+      {
+        "slug": "about",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "translation_status": "published",
+        "review_state": "approved",
+        "published_at": "2026-04-21T00:00:00.000000Z",
+        "source_doc": "content_pages.en.baseline",
+        "path": "/about",
+        "created_at": "2026-04-21T05:43:25.000000Z",
+        "updated_at": "2026-05-25T09:29:44.000000Z"
+      },
+      {
+        "slug": "help-about",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "translation_status": "published",
+        "review_state": "approved",
+        "published_at": "2026-04-19T00:00:00.000000Z",
+        "source_doc": "helpCenterContent.ts",
+        "path": "/help/about",
+        "created_at": "2026-04-20T03:36:10.000000Z",
+        "updated_at": "2026-05-25T09:29:45.000000Z"
+      },
+      {
+        "slug": "help-contact",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "translation_status": "published",
+        "review_state": "approved",
+        "published_at": "2026-04-19T00:00:00.000000Z",
+        "source_doc": "helpCenterContent.ts",
+        "path": "/help/contact",
+        "created_at": "2026-04-20T03:36:10.000000Z",
+        "updated_at": "2026-05-25T09:29:45.000000Z"
+      },
+      {
+        "slug": "help-faq",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "translation_status": "published",
+        "review_state": "approved",
+        "published_at": "2026-04-19T00:00:00.000000Z",
+        "source_doc": "helpCenterContent.ts",
+        "path": "/help/faq",
+        "created_at": "2026-04-20T03:36:10.000000Z",
+        "updated_at": "2026-05-25T09:29:45.000000Z"
+      },
+      {
+        "slug": "help-for-business-and-research",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "translation_status": "published",
+        "review_state": "approved",
+        "published_at": "2026-04-19T00:00:00.000000Z",
+        "source_doc": "helpCenterContent.ts",
+        "path": "/help/for-business-and-research",
+        "created_at": "2026-04-20T03:36:10.000000Z",
+        "updated_at": "2026-05-25T09:29:45.000000Z"
+      },
+      {
+        "slug": "method-boundaries",
+        "locale": "en",
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "translation_status": "published",
+        "review_state": "approved",
+        "published_at": "2026-05-08T00:00:00.000000Z",
+        "source_doc": "content_pages.en.method_boundaries.baseline",
+        "path": "/method-boundaries",
+        "created_at": "2026-05-08T08:40:03.000000Z",
+        "updated_at": "2026-05-25T09:29:44.000000Z"
+      }
+    ],
+    "all_exist": true,
+    "all_still_published_public_indexable": true,
+    "import_marker_absent_from_existing_records": true,
+    "mutation_detected": false,
+    "notes": "Existing records retain published/public/indexable states and non-import source_doc markers; no upsert mutation was detected by this read-only check."
+  },
+  "public_runtime_check": {
+    "checked_at": "2026-05-27T00:18:04Z",
+    "checks": [
+      {
+        "path": "/en/brand",
+        "status": 404,
+        "not_public_200": true,
+        "robots_noindex_seen": true
+      },
+      {
+        "path": "/en/charter",
+        "status": 404,
+        "not_public_200": true,
+        "robots_noindex_seen": true
+      },
+      {
+        "path": "/en/foundation",
+        "status": 404,
+        "not_public_200": true,
+        "robots_noindex_seen": true
+      },
+      {
+        "path": "/en/careers",
+        "status": 404,
+        "not_public_200": true,
+        "robots_noindex_seen": true
+      },
+      {
+        "path": "/en/policies",
+        "status": 404,
+        "not_public_200": true,
+        "robots_noindex_seen": true
+      },
+      {
+        "path": "/en/about",
+        "status": 200,
+        "live_200": true
+      },
+      {
+        "path": "/en/privacy",
+        "status": 200,
+        "live_200": true
+      },
+      {
+        "path": "/en/terms",
+        "status": 200,
+        "live_200": true
+      }
+    ],
+    "surface_status": {
+      "/en/brand": {
+        "status": 404,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 19627
+      },
+      "/en/charter": {
+        "status": 404,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 19631
+      },
+      "/en/foundation": {
+        "status": 404,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 19637
+      },
+      "/en/careers": {
+        "status": 404,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 19631
+      },
+      "/en/policies": {
+        "status": 404,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 19633
+      },
+      "/en/about": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 65850
+      },
+      "/en/privacy": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 65066
+      },
+      "/en/terms": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 64738
+      },
+      "/sitemap.xml": {
+        "status": 200,
+        "content_type": "application/xml",
+        "bytes": 13368
+      },
+      "/llms.txt": {
+        "status": 200,
+        "content_type": "text/plain; charset=utf-8",
+        "bytes": 6903
+      },
+      "/llms-full.txt": {
+        "status": 200,
+        "content_type": "text/plain; charset=utf-8",
+        "bytes": 61037
+      },
+      "/en": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 108778
+      }
+    },
+    "all_draft_paths_not_200": true,
+    "all_known_live_pages_200": true
+  },
+  "sitemap_check": {
+    "source": "https://fermatmind.com/sitemap.xml",
+    "status": 200,
+    "draft_paths_absent": true,
+    "exposure": {
+      "/en/brand": false,
+      "/en/charter": false,
+      "/en/foundation": false,
+      "/en/careers": false,
+      "/en/policies": false
+    }
+  },
+  "llms_check": {
+    "llms_txt": {
+      "source": "https://fermatmind.com/llms.txt",
+      "status": 200,
+      "draft_paths_absent": true,
+      "exposure": {
+        "/en/brand": false,
+        "/en/charter": false,
+        "/en/foundation": false,
+        "/en/careers": false,
+        "/en/policies": false
+      }
+    },
+    "llms_full_txt": {
+      "source": "https://fermatmind.com/llms-full.txt",
+      "status": 200,
+      "draft_paths_absent": true,
+      "exposure": {
+        "/en/brand": false,
+        "/en/charter": false,
+        "/en/foundation": false,
+        "/en/careers": false,
+        "/en/policies": false
+      }
+    }
+  },
+  "footer_nav_check": {
+    "source": "https://fermatmind.com/en",
+    "status": 200,
+    "draft_links_absent": true,
+    "items": {
+      "/en/brand": {
+        "label": "Brand",
+        "href_present": false,
+        "label_present": false
+      },
+      "/en/charter": {
+        "label": "Charter",
+        "href_present": false,
+        "label_present": false
+      },
+      "/en/foundation": {
+        "label": "Foundation",
+        "href_present": false,
+        "label_present": false
+      },
+      "/en/careers": {
+        "label": "Careers",
+        "href_present": false,
+        "label_present": false
+      },
+      "/en/policies": {
+        "label": "Policies",
+        "href_present": false,
+        "label_present": false
+      }
+    }
+  },
+  "search_channel_check": {
+    "checked_at": "2026-05-27T00:17:10.929135Z",
+    "counts": {
+      "seo_search_channel_queue_items": 3,
+      "seo_search_channel_queue_batches": 3,
+      "seo_search_channel_queue_events": 12,
+      "seo_indexnow_submissions": 0,
+      "seo_domestic_submission_logs": 0
+    },
+    "draft_page_queue_items": [],
+    "queue_items_2_3": [
+      {
+        "id": 2,
+        "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+        "locale": "en",
+        "page_entity_type": "test_detail",
+        "source_authority": "scale_catalog",
+        "channel": "indexnow",
+        "approval_state": "approved",
+        "execution_state": "submitted",
+        "indexability_state": "indexable",
+        "updated_at": "2026-05-23 05:18:45"
+      },
+      {
+        "id": 3,
+        "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+        "locale": "zh-CN",
+        "page_entity_type": "test_detail",
+        "source_authority": "scale_catalog",
+        "channel": "indexnow",
+        "approval_state": "approved",
+        "execution_state": "submitted",
+        "indexability_state": "indexable",
+        "updated_at": "2026-05-25 04:09:44"
+      }
+    ],
+    "live_submission_events_recent": [
+      {
+        "id": 12,
+        "queue_item_id": 3,
+        "batch_id": 3,
+        "event_type": "live_submission_response",
+        "created_at": "2026-05-25 04:09:44"
+      },
+      {
+        "id": 11,
+        "queue_item_id": 3,
+        "batch_id": 3,
+        "event_type": "live_submission_approved",
+        "created_at": "2026-05-25 04:09:42"
+      },
+      {
+        "id": 8,
+        "queue_item_id": 2,
+        "batch_id": 2,
+        "event_type": "live_submission_response",
+        "created_at": "2026-05-23 05:18:45"
+      },
+      {
+        "id": 7,
+        "queue_item_id": 2,
+        "batch_id": 2,
+        "event_type": "live_submission_approved",
+        "created_at": "2026-05-23 05:18:44"
+      },
+      {
+        "id": 4,
+        "queue_item_id": 1,
+        "batch_id": 1,
+        "event_type": "live_submission_response",
+        "created_at": "2026-05-21 15:27:37"
+      },
+      {
+        "id": 3,
+        "queue_item_id": 1,
+        "batch_id": 1,
+        "event_type": "live_submission_approved",
+        "created_at": "2026-05-21 15:27:36"
+      }
+    ],
+    "config_gates": {
+      "indexnow_enabled": false,
+      "indexnow_live_api_enabled": false,
+      "search_channel_queue_no_live_submission": true,
+      "real_url_submission_allowed": false,
+      "draft_url_submission_allowed": false
+    },
+    "no_queue_items_for_imported_drafts": true,
+    "no_live_submission_tables": true,
+    "queue_item_2_en_mbti_present": true,
+    "queue_item_3_zh_mbti_present": true,
+    "gates_closed": true
+  },
+  "gate_state": {
+    "cms_import_gate_closed": true,
+    "publish_gate_closed": true,
+    "sitemap_gate_closed": true,
+    "llms_gate_closed": true,
+    "footer_nav_gate_closed": true,
+    "search_channel_gate_closed": true,
+    "url_submission_gate_closed": true,
+    "deploy_gate_closed": true
+  },
+  "sidecar_issues": [
+    {
+      "type": "inherited_non_blocking",
+      "key": "support",
+      "status": "deferred_missing_authority",
+      "notes": "Standalone support page was not imported because authority source remains missing."
+    },
+    {
+      "type": "inherited_non_blocking",
+      "key": "existing_published_records_skipped",
+      "status": "requires_separate_update_scope",
+      "asset_keys": [
+        "about",
+        "help-about",
+        "help-contact",
+        "help-faq",
+        "help-for-business-and-research",
+        "method-boundaries"
+      ]
+    },
+    {
+      "type": "inherited_non_blocking",
+      "key": "privacy_terms_out_of_scope",
+      "status": "requires_legal_policy_scope",
+      "asset_keys": [
+        "privacy",
+        "terms"
+      ]
+    }
+  ],
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_sitemap_llms_exposure": true,
+  "no_footer_nav_exposure": true,
+  "next_task": "GLOBAL-EN-ZH-CONTENT-PAGES-PUBLISH-READINESS-01",
+  "generated_at": "2026-05-27T08:20:00+08:00",
+  "validation": {
+    "composer_install": {
+      "status": "passed",
+      "command": "cd backend && composer install --no-interaction --no-progress",
+      "evidence": "Installed dependencies in isolated worktree only; ignored generated vendor/public/cache artifacts were not staged."
+    },
+    "focused_test": {
+      "status": "passed",
+      "command": "cd backend && php artisan test --filter=GlobalEnZhContentPagesImportVerify01 --no-ansi",
+      "evidence": "1 test passed, 28 assertions."
+    },
+    "route_list": {
+      "status": "passed",
+      "command": "cd backend && php artisan route:list --no-ansi",
+      "evidence": "203 routes listed."
+    },
+    "pint": {
+      "status": "passed",
+      "command": "cd backend && vendor/bin/pint --test",
+      "evidence": "3581 files passed."
+    },
+    "composer_validate": {
+      "status": "passed",
+      "command": "cd backend && composer validate --strict",
+      "evidence": "composer.json is valid."
+    },
+    "composer_audit": {
+      "status": "passed",
+      "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+      "evidence": "No security vulnerability advisories found."
+    },
+    "json_yaml_parse": {
+      "status": "passed",
+      "evidence": "Generated JSON, pr-train-state.json, and pr-train.yaml parse successfully."
+    },
+    "diff_check": {
+      "status": "passed",
+      "command": "git diff --check && git diff --cached --check"
+    },
+    "fap_web_reference_check": {
+      "status": "passed",
+      "command": "git -C /Users/rainie/Desktop/GitHub/fap-web status --short",
+      "evidence": "No fap-web changes."
+    }
+  }
+}
