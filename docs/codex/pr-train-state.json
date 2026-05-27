@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T20:34:00+08:00",
+  "updated_at": "2026-05-27T00:00:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -20790,6 +20790,69 @@
           "at": "2026-05-26T01:05:00+08:00",
           "status": "manifest_registered",
           "summary": "Registered fap-web global UI i18n parity batch; backend/CMS/content authority remains source of truth and frontend fallback authority is forbidden."
+        }
+      ]
+    },
+    "GLOBAL-EN-ZH-HOMEPAGE-RECOMMENDED-ARTICLES-PARITY-01": {
+      "id": "GLOBAL-EN-ZH-HOMEPAGE-RECOMMENDED-ARTICLES-PARITY-01",
+      "repo": "fap-api",
+      "branch": "codex/global-en-zh-homepage-recommended-articles-parity-01",
+      "base": "main",
+      "status": "local_validation_passed",
+      "depends_on": [
+        "GLOBAL-EN-ZH-CONTENT-AUTHORITY-PUBLISH-READINESS-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+        "checks": {
+          "focused_test": "passed",
+          "mbti_runtime_freeze_guard": "passed",
+          "migrate_pretend": "passed",
+          "route_list": "passed",
+        "pint": "passed",
+        "composer_validate": "passed",
+        "composer_audit": "passed",
+        "manifest_state_parse": "passed",
+        "diff_check": "passed",
+        "cached_diff_check": "passed",
+        "github_required_checks": "pending"
+      },
+      "scope": {
+        "allowed_files": [
+          "backend/database/migrations/2026_05_27_000100_backfill_homepage_recommended_en_article_media_taxonomy.php",
+          "backend/tests/Feature/LandingSurfaces/HomepageRecommendedArticlesParityTest.php",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "fap_web_modified": false,
+        "frontend_fallback_authority": false,
+        "new_articles_published": false,
+        "cms_mutation_now": false,
+        "deploy_now": false,
+        "search_channel_action": false,
+        "url_submission": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": "DEPLOY-READINESS",
+      "events": [
+        {
+          "at": "2026-05-27T00:00:00+08:00",
+          "event": "initialized_current_task_state_from_user_authorization",
+          "details": "User authorized current PR manifest/state update only."
+        },
+        {
+          "at": "2026-05-27T00:00:00+08:00",
+          "event": "local_validation_passed",
+          "details": "Focused test, sqlite migrate --pretend, route:list, pint --test, composer validate/audit, manifest/state parse, and diff checks passed. Plain local MySQL migrate pretend was unavailable due root/no-password local env."
+        },
+        {
+          "at": "2026-05-27T00:00:00+08:00",
+          "event": "ci_failure_fixed_locally",
+          "details": "GitHub verify-mbti-legacy and verify-mbti-v2 failed because the Big Five runtime freeze guard flagged the scoped article metadata backfill migration. Added a narrow classifier allowlist and regression test for this migration; BigFiveResultPageV2CoreBodyPreviewTest now passes locally."
         }
       ]
     }
