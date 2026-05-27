@@ -30047,12 +30047,12 @@
     "repo": "fap-api",
     "branch": "codex/enneagram-fc144-en-questions-pack-03",
     "base": "main",
-    "status": "pr_opened",
+    "status": "github_checks_passed",
     "depends_on": [
       "RIASEC-EN-QUESTIONS-PACK-TRANSLATION-02"
     ],
     "title": "ENNEAGRAM-FC144-EN-QUESTIONS-PACK-03 Enneagram forced-choice English question pack",
-    "commit_sha": "953174e38e683e889081366034618a9b04f26e31",
+    "commit_sha": "0b23d1c7b112542c7686facabab8faa6f37a182f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1736",
     "failure_reason": null,
     "merged_at": null,
@@ -30119,8 +30119,13 @@
         "evidence": "Focused Enneagram locale test, Enneagram flow regression, Big Five freeze classifier, route list, Pint, composer validate/audit, JSON/YAML parse, diff checks, and fap-web reference status passed locally."
       },
       "github_required_checks": {
-        "status": "pending",
-        "pr_url": "https://github.com/fermatmind/fap-api/pull/1736"
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1736",
+        "evidence": "GitHub required checks passed after rebase onto origin/main; mergeStateStatus is CLEAN."
+      },
+      "rebase": {
+        "status": "pass",
+        "evidence": "Rebased onto origin/main after PR #1735 landed; resolved manifest/state ordering conflict by preserving MBTI-DESKTOP-CLONE-MEDIA-ASSETS-01 and the current Enneagram entry."
       }
     },
     "scope": {
@@ -30167,6 +30172,11 @@
         "at": "2026-05-28T00:45:00+08:00",
         "status": "pr_opened",
         "summary": "Opened PR #1736 for Enneagram forced-choice 144 English question pack; GitHub checks pending."
+      },
+      {
+        "at": "2026-05-28T00:58:00+08:00",
+        "status": "github_checks_passed",
+        "summary": "After rebase onto latest origin/main, GitHub required checks passed and mergeStateStatus is CLEAN for PR #1736."
       }
     ]
   }
