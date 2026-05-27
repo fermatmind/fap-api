@@ -29145,7 +29145,7 @@
     ]
   },
   "REPAIR-CAREER-DETAIL-READY-RUNTIME-ARTIFACT-REFRESH-1": {
-    "status": "local_checks_passed",
+    "status": "local_commit_created",
     "repo": "fap-api",
     "branch": "codex/repair-career-detail-ready-runtime-artifact-refresh-1",
     "base": "main",
@@ -29153,7 +29153,7 @@
       "REPAIR-CAREER-DETAIL-READY-CANDIDATE-PREP-1"
     ],
     "title": "fix(api): refresh career detail-ready 1048 artifacts",
-    "commit_sha": null,
+    "commit_sha": "2a4e987c0d66fb2a4103b4d3a186891de4359311",
     "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
@@ -29206,6 +29206,11 @@
         "at": "2026-05-27T19:42:47+08:00",
         "status": "scope_validation_passed",
         "summary": "Changed files are within runtime artifact refresh PR allowed paths; generated BIG5_OCEAN compiled artifacts were restored as out-of-scope CI side effects."
+      },
+      {
+        "at": "2026-05-27T19:43:24+08:00",
+        "status": "local_commit_created",
+        "summary": "Created local commit 2a4e987c0d66fb2a4103b4d3a186891de4359311 for detail-ready 1048 runtime artifact refresh planning."
       }
     ]
   },
