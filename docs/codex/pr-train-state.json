@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-27T16:21:24+08:00",
+  "updated_at": "2026-05-27T16:23:16+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -22586,8 +22586,8 @@
     "depends_on": [
       "SEARCH-CHANNEL-LIVE-00"
     ],
-    "commit_sha": "d823de28682fe718fa9382b1d1bf14204956bef6",
-    "pr_url": null,
+    "commit_sha": "6fe4c4a4c94601eac1f8327e91a70d7652b6af02",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1724",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -28896,7 +28896,12 @@
       {
         "at": "2026-05-27T16:21:24+08:00",
         "status": "committed",
-        "summary": "Created scoped audit scanner commit d823de28."
+        "summary": "Created scoped audit scanner commit 6fe4c4a4."
+      },
+      {
+        "at": "2026-05-27T16:23:16+08:00",
+        "status": "pr_open",
+        "summary": "Opened PR #1724 for the read-only detail-ready 1048 candidate scanner."
       }
     ]
   },
