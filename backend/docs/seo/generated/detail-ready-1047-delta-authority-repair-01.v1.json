@@ -1,0 +1,64 @@
+{
+  "schema_version": "detail_ready_1047_delta_authority_repair.v1",
+  "task": "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01",
+  "generated_at": "2026-05-28T21:05:00+08:00",
+  "final_decision": "blocked_1047_delta_still_contains_conflict_slug",
+  "current_public_detail_count": 30,
+  "clean_delta_count": 1016,
+  "requested_clean_delta_count": 1017,
+  "target_public_total": 1046,
+  "requested_target_public_total": 1047,
+  "excluded_manual_hold_slugs": [
+    "software-developers"
+  ],
+  "excluded_conflict_slugs": [
+    "digital-forensics-analysts"
+  ],
+  "blocked_count": 1,
+  "manual_hold_count": 1,
+  "review_needed_count": 0,
+  "runtime_projection_conflict_count": 1,
+  "manifest_safe": false,
+  "manifest_path": "backend/docs/seo/generated/detail-ready-1047-rollout-manifest.v1.json",
+  "scan_summary": {
+    "schema_version": "career_detail_ready_publication_candidates.v1",
+    "generated_at": "2026-05-28T13:04:37.982227Z",
+    "current_public_detail": 30,
+    "ready_not_currently_public": 1018,
+    "union_detail_ready": 1048,
+    "manual_hold_ready": 1,
+    "writes_database": false
+  },
+  "blockers": [
+    {
+      "reason": "clean_delta_count_mismatch_after_required_exclusions",
+      "severity": "blocking",
+      "expected_clean_delta_count": 1017,
+      "actual_clean_delta_count": 1016,
+      "required_exclusions": [
+        "digital-forensics-analysts",
+        "software-developers"
+      ],
+      "message": "Current authority scan has 1018 ready-not-public slugs and includes both software-developers and digital-forensics-analysts; excluding both leaves 1016, not 1017."
+    }
+  ],
+  "recommendation": {
+    "do_not_apply": true,
+    "do_not_promote": true,
+    "recommended_decision": "Approve 1046 target, select one additional clean replacement, or separately decide software-developers manual hold. Do not use digital-forensics-analysts as replacement."
+  },
+  "apply_performed": false,
+  "runtime_promotion_performed": false,
+  "sitemap_llms_footer_exposure_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "external_search_api_call_performed": false,
+  "fap_web_change_performed": false,
+  "production_write_performed": false,
+  "database_write_performed": false,
+  "cms_mutation_performed": false,
+  "deploy_performed": false,
+  "software_developers_manual_hold_unchanged": true,
+  "digital_forensics_replacement_used": false,
+  "next_task": "Select one clean replacement or approve 1046/hold decision before apply preflight"
+}

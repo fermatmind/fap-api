@@ -31092,5 +31092,91 @@
     },
     "sidecars": [],
     "next_task": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01 or 1047 target decision"
+  },
+  "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01": {
+    "id": "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/detail-ready-1047-delta-authority-repair-01",
+    "base": "main",
+    "title": "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01 clean 1047 delta authority manifest",
+    "status": "pr_open",
+    "depends_on": [],
+    "commit_sha": "9cb093fccb25215461f50d6d50b39995165c590f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1746",
+    "checks": [
+      {
+        "command": "ssh \"$API_SSH_ALIAS\" cd /var/www/fap-api/current/backend && php artisan career:audit-detail-ready-1048-candidates --json",
+        "status": "passed",
+        "summary": "Production read-only scan captured locally; writes_database=false; current_public_detail=30; ready_not_public=1018; both software-developers and digital-forensics-analysts present in ready set."
+      },
+      {
+        "command": "cd backend && php artisan test --filter=DetailReady1047DeltaAuthorityRepair01 --no-ansi",
+        "status": "passed",
+        "summary": "1 test / 47 assertions passed"
+      },
+      {
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "203 routes listed"
+      },
+      {
+        "command": "cd backend && vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "3621 files passed after formatting scoped new test file"
+      },
+      {
+        "command": "cd backend && composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid"
+      },
+      {
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found"
+      },
+      {
+        "command": "JSON/YAML parse and git diff checks",
+        "status": "passed",
+        "summary": "Generated report JSON, generated manifest JSON, train state JSON, train YAML, git diff --check, and git diff --cached --check passed"
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-28T21:05:00+08:00",
+        "summary": "User explicitly authorized DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01 manifest/state updates for the current PR only."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-28T21:05:00+08:00",
+        "summary": "Generating a dry-run/report-only 1047 delta authority manifest from production read-only scan evidence; no production write, DB/CMS mutation, runtime promotion, deploy, sitemap/llms/footer exposure, Search Channel action, URL submission, external search API call, fap-web change, software-developers release, or digital-forensics replacement use."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-28T21:05:00+08:00",
+        "summary": "Production read-only scan and local validations passed. The generated manifest is intentionally blocked because excluding both required protected slugs leaves 1016 clean delta slugs, not the requested 1017."
+      },
+      {
+        "status": "committed",
+        "at": "2026-05-28T21:05:00+08:00",
+        "summary": "Committed scoped 1047 delta blocker report and manifest."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-28T21:05:00+08:00",
+        "summary": "Opened PR #1746 for the scoped dry-run/report-only 1047 delta authority blocker manifest."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [],
+    "next_task": "Select one clean replacement or approve 1046/hold decision before apply preflight"
   }
 }
