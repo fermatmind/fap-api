@@ -15783,3 +15783,46 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 rerun production no-write preflight after deploy
+
+  - id: EMAIL-DIRECTMAIL-SMTP-READINESS-01
+    repo: fap-api
+    branch: codex/email-directmail-smtp-readiness-01
+    base: main
+    title: "EMAIL-DIRECTMAIL-SMTP-READINESS-01 DirectMail SMTP readiness docs env and outbox test"
+    train_scope: directmail_smtp_readiness
+    risk_level: p2_transactional_email_readiness
+    allowed_paths:
+      - backend/.env.example
+      - docs/RUNBOOK_SMTP_DNS.md
+      - backend/tests/Feature/Email/DirectMailSmtpReadinessTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Document Aliyun DirectMail SMTP production readiness without committing secrets.
+      - Keep local and CI mail defaults on log transport with EMAIL_OUTBOX_SEND disabled.
+      - Record DNS, sender address, SMTP host/port/scheme, outbox gate, and controlled smoke evidence.
+      - Add a focused test that validates DirectMail readiness docs and env examples do not enable external mail by default.
+      - Do not modify production env, send real email, deploy, mutate CMS/content, submit URLs, or enqueue Search Channel actions in this PR.
+    validation:
+      - cd backend && php artisan test --filter=DirectMailSmtpReadiness --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: RESULT-EMAIL-GATE-POLICY-02 explicit approval required before implementation
