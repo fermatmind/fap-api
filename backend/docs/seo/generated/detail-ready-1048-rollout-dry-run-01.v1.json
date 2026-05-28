@@ -1,0 +1,108 @@
+{
+  "schema_version": "detail_ready_1048_rollout_dry_run.v1",
+  "task": "DETAIL_READY_1048_ROLLOUT_DRY_RUN-01",
+  "generated_at": "2026-05-28T10:58:00+08:00",
+  "final_decision": "detail_ready_1048_rollout_dry_run_blocked_pending_authority_scan",
+  "source_context": {
+    "previous_diagnosis_pr": "https://github.com/fermatmind/fap-api/pull/1737",
+    "previous_authority_alignment_pr": "https://github.com/fermatmind/fap-api/pull/1738",
+    "current_public_detail_count": 30,
+    "ready_not_public_delta_count": 1018,
+    "target_public_detail_total": 1048,
+    "locales": [
+      "en",
+      "zh"
+    ],
+    "expected_delta_locale_rows": 2036
+  },
+  "dry_run_scope": {
+    "scan_1018_delta": true,
+    "prepare_manifest_contract": true,
+    "record_blockers": true,
+    "runtime_promotion": false,
+    "db_apply": false,
+    "cms_mutation": false,
+    "deploy": false,
+    "search_channel_action": false,
+    "url_submission": false
+  },
+  "local_command_attempts": [
+    {
+      "command": "cd backend && php artisan career:audit-detail-ready-1048-candidates --json --output=/tmp/detail-ready-1048-dry-run/detail-ready-1048-scan.json",
+      "status": "blocked_local_environment",
+      "writes_database": false,
+      "failure_summary": "Local MySQL connection was unavailable, so the read-only authority scan could not enumerate the 1018 delta slugs."
+    }
+  ],
+  "manifest_contract": {
+    "schema_version": "career_delta_rollout_manifest.v1",
+    "target": "detail_ready_1048",
+    "target_key": "detail_ready_1048",
+    "target_public_total": 1048,
+    "published_baseline_count_required": 30,
+    "delta_slug_count_required": 1018,
+    "expected_delta_locale_rows": 2036,
+    "batch_id": "career_detail_ready_1048_canonical_001",
+    "rollback_group_rule": "rollback_group_must_equal_explicit_1018_delta_slug_list",
+    "dry_run_allowed_requires_clean_authority_scan": true,
+    "apply_allowed": false,
+    "rollout_apply_allowed": false,
+    "writes_database": false
+  },
+  "blockers": [
+    {
+      "reason": "authority_scan_unavailable_in_local_environment",
+      "severity": "blocking",
+      "evidence": "The read-only scanner could not connect to the local development MySQL database.",
+      "required_resolution": "Run the read-only scan in an environment with safe read access to the Career authority tables or provide a repo-backed scan artifact."
+    },
+    {
+      "reason": "explicit_1018_delta_slug_list_missing",
+      "severity": "blocking",
+      "evidence": "The current repo artifacts summarize the 1018 delta but do not include the slug-level list needed for rollback-group equality and blocker checks.",
+      "required_resolution": "Produce a JSON artifact with exactly 1018 ready-not-public slugs and exactly 30 baseline slugs."
+    },
+    {
+      "reason": "rollout_manifest_not_generated",
+      "severity": "blocking",
+      "evidence": "No slug-level manifest was generated because the authority scan was unavailable.",
+      "required_resolution": "Generate career_detail_ready_1048_rollout_manifest.json from a clean authority scan and candidate-prep plan."
+    },
+    {
+      "reason": "apply_requires_future_explicit_approval",
+      "severity": "blocking",
+      "evidence": "The user explicitly limited this PR to dry-run/manifest/blockers and did not authorize DB/runtime promotion.",
+      "required_resolution": "Start DETAIL_READY_1048_ROLLOUT_APPLY-01 only after explicit approval."
+    }
+  ],
+  "gates_required_before_apply": {
+    "current_public_baseline_count": 30,
+    "delta_slug_count": 1018,
+    "target_public_total": 1048,
+    "baseline_delta_overlap_count": 0,
+    "manual_hold_slugs_present": false,
+    "cn_proxy_rows_present": false,
+    "review_needed_rows_present": false,
+    "family_handoff_rows_present": false,
+    "blocked_rows_present": false,
+    "rollback_group_matches_delta": true,
+    "apply_allowed_must_remain_false_in_dry_run": true
+  },
+  "future_commands": {
+    "read_only_scan": "php artisan career:audit-detail-ready-1048-candidates --json --output=/tmp/career_detail_ready_1048_publication_scan.json",
+    "candidate_prep_plan": "php artisan career:plan-canonical-runtime-candidate-prep --target-delta=/tmp/career_detail_ready_1048_publication_scan.json --target-total=1048 --cohort=detail_ready_1048 --chunk-size=250 --json --output=/tmp/career_detail_ready_1048_runtime_candidate_prep_plan.json",
+    "manifest_plan": "php artisan career:generate-canonical-delta-rollout-manifest --target-delta=/tmp/career_detail_ready_1048_publication_scan.json --candidate-prep-plan=/tmp/career_detail_ready_1048_runtime_candidate_prep_plan.json --target=detail_ready_1048 --target-public-total=1048 --expect-delta-count=1018 --batch-id=career_detail_ready_1048_canonical_001 --json --output=/tmp/career_detail_ready_1048_rollout_manifest.json",
+    "gate_plan": "php artisan career:plan-canonical-delta-rollout-gate --manifest=/tmp/career_detail_ready_1048_rollout_manifest.json --target=detail_ready_1048 --target-public-total=1048 --expect-delta-count=1018 --json --output=/tmp/career_detail_ready_1048_rollout_gate.json"
+  },
+  "future_apply_requires_explicit_user_approval": true,
+  "apply_task_added_to_manifest": false,
+  "no_cms_mutation": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_pseo_generation": true,
+  "runtime_promotion_performed": false,
+  "database_write_performed": false,
+  "next_task": "DETAIL_READY_1048_ROLLOUT_APPLY-01"
+}
