@@ -9437,7 +9437,7 @@
       "depends_on": [
         "SEO-DASH-04A"
       ],
-      "status": "pr_opened",
+      "status": "github_checks_passed_ready_to_merge",
       "train_scope": "search_intelligence_baidu_indexnow_disabled_collectors",
       "risk_level": "medium_disabled_search_channel_schema",
       "title": "feat(seo-intel): add Baidu and IndexNow collector foundations",
@@ -25541,7 +25541,7 @@
     "CONTENT-OPS-CLAIM-LINK-OPS-READINESS": {
       "repo": "fap-api",
       "branch": "codex/content-ops-claim-link-ops-readiness",
-      "status": "in_progress",
+      "status": "pr_opened",
       "depends_on": [
         "CONTENT-OPS-02B",
         "INTERNAL-LINK-01B",
@@ -26064,7 +26064,7 @@
       "status": "in_progress",
       "depends_on": [],
       "commit_sha": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1750",
       "checks": {
         "local": {
           "ops_theme_build": "passed: cd backend && npm run build:ops-theme",
@@ -27916,6 +27916,91 @@
           "at": "2026-05-28T19:02:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1742 after local validation; waiting for GitHub required checks."
+        }
+      ]
+    },
+    "EMAIL-DIRECTMAIL-SMTP-READINESS-01": {
+      "id": "EMAIL-DIRECTMAIL-SMTP-READINESS-01",
+      "repo": "fap-api",
+      "branch": "codex/email-directmail-smtp-readiness-01",
+      "base": "main",
+      "status": "in_progress",
+      "title": "EMAIL-DIRECTMAIL-SMTP-READINESS-01 DirectMail SMTP readiness docs env and outbox test",
+      "commit_sha": "bc79c7c5776a51cc67a862fbc1a460eec3aa8b68",
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding EMAIL-DIRECTMAIL-SMTP-READINESS-01 to fap-api pr-train manifest/state."
+        },
+        "scope_boundaries": {
+          "status": "pass",
+          "evidence": "Docs/env-example/focused-test readiness only; no production env write, real email send, deploy, CMS/content mutation, URL submission, Search Channel action, or fap-web change in this PR."
+        },
+        "php_artisan_test_filter_DirectMailSmtpReadiness": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan test --filter=DirectMailSmtpReadiness --no-ansi"
+        },
+        "php_artisan_route_list": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan route:list --no-ansi"
+        },
+        "pint_test": {
+          "status": "pass",
+          "evidence": "cd backend && vendor/bin/pint --test"
+        },
+        "composer_validate_strict": {
+          "status": "pass",
+          "evidence": "cd backend && composer validate --strict"
+        },
+        "composer_audit_locked": {
+          "status": "pass",
+          "evidence": "cd backend && composer audit --locked --no-interaction --ignore-unreachable"
+        },
+        "json_yaml_parse": {
+          "status": "pass",
+          "evidence": "pr-train-state.json parsed with python3 -m json.tool; pr-train.yaml parsed with yaml.safe_load."
+        },
+        "diff_hygiene": {
+          "status": "pass",
+          "evidence": "git diff --check && git diff --cached --check"
+        },
+        "fap_web_reference_check": {
+          "status": "pass",
+          "evidence": "Reference-only fap-web status clean; no fap-web changes committed."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1750 checks passed: hygiene, supply-chain, Semgrep blocking secrets, semgrep sarif non-blocking upload, Semgrep OSS, verify-mbti-legacy, verify-mbti-v2. mergeStateStatus CLEAN."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "merge_commit": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": "RESULT-EMAIL-GATE-POLICY-02",
+      "sidecars": [],
+      "transitions": [
+        {
+          "at": "2026-05-29T00:36:09+08:00",
+          "status": "in_progress",
+          "summary": "Registered DirectMail SMTP readiness PR after successful controlled production smoke and explicit manifest/state authorization."
+        },
+        {
+          "at": "2026-05-29T00:44:54+08:00",
+          "status": "local_validation_passed",
+          "summary": "Validated env example, DirectMail DNS/SMTP runbook, controlled smoke evidence, and focused readiness test; no production mutation or email send performed by this PR."
+        },
+        {
+          "at": "2026-05-29T00:51:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1750 and pushed branch codex/email-directmail-smtp-readiness-01; waiting for GitHub required checks."
+        },
+        {
+          "at": "2026-05-29T01:01:00+08:00",
+          "status": "github_checks_passed_ready_to_merge",
+          "summary": "GitHub checks passed and mergeStateStatus was CLEAN for PR #1750."
         }
       ]
     }
