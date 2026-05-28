@@ -1,0 +1,85 @@
+{
+  "schema_version": "detail_ready_1046_delta_authority_repair.v1",
+  "task": "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01",
+  "generated_at": "2026-05-28T13:39:57Z",
+  "final_decision": "detail_ready_1046_delta_manifest_completed_ready_for_explicit_apply_preflight",
+  "current_public_detail_count": 30,
+  "clean_delta_count": 1016,
+  "target_public_total": 1046,
+  "excluded_manual_hold_slugs": [
+    "software-developers"
+  ],
+  "excluded_conflict_slugs": [
+    "digital-forensics-analysts"
+  ],
+  "excluded_already_indexable_replacement_slugs": [
+    "computer-occupations-all-other"
+  ],
+  "blocked_count": 0,
+  "manual_hold_count": 0,
+  "conflict_count": 0,
+  "review_needed_count": 0,
+  "runtime_projection_conflict_count": 0,
+  "manifest_safe": true,
+  "manifest_path": "backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json",
+  "source_authority": {
+    "type": "existing_authorized_production_read_only_scan_artifact",
+    "source_report": "backend/docs/seo/generated/detail-ready-1047-delta-authority-repair-01.v1.json",
+    "source_manifest": "backend/docs/seo/generated/detail-ready-1047-rollout-manifest.v1.json",
+    "source_task": "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01",
+    "source_scan_summary": {
+      "schema_version": "career_detail_ready_publication_candidates.v1",
+      "generated_at": "2026-05-28T13:04:37.982227Z",
+      "current_public_detail": 30,
+      "ready_not_currently_public": 1018,
+      "union_detail_ready": 1048,
+      "manual_hold_ready": 1,
+      "writes_database": false
+    },
+    "reason_reuse_is_valid": "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01 already captured the authorized production read-only 1048 candidate scan. This task narrows the target to the safe 1016 delta without searching for a replacement."
+  },
+  "safety_assertions": {
+    "software_developers_manual_hold_unchanged": true,
+    "digital_forensics_replacement_used": false,
+    "computer_occupations_all_other_replacement_used": false,
+    "replacement_search_performed": false,
+    "delta_contains_manual_hold_slugs": false,
+    "delta_contains_conflict_slugs": false,
+    "delta_contains_review_needed_slugs": false,
+    "delta_contains_blocked_slugs": false,
+    "delta_contains_runtime_projection_conflicts": false
+  },
+  "excluded_slug_rationale": [
+    {
+      "slug": "software-developers",
+      "reason": "manual_hold",
+      "included_in_delta": false,
+      "action": "kept_excluded"
+    },
+    {
+      "slug": "digital-forensics-analysts",
+      "reason": "index_state_runtime_projection_conflict",
+      "included_in_delta": false,
+      "action": "kept_excluded"
+    },
+    {
+      "slug": "computer-occupations-all-other",
+      "reason": "already_indexable_replacement_candidate_not_clean_replacement",
+      "included_in_delta": false,
+      "action": "kept_excluded_as_replacement"
+    }
+  ],
+  "pre_apply_requirement": "A future apply task still requires explicit user approval and must re-run authority/runtime preflight before any DB/runtime promotion.",
+  "apply_performed": false,
+  "runtime_promotion_performed": false,
+  "sitemap_llms_footer_exposure_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "external_search_api_call_performed": false,
+  "fap_web_change_performed": false,
+  "production_write_performed": false,
+  "database_write_performed": false,
+  "cms_mutation_performed": false,
+  "deploy_performed": false,
+  "next_task": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 explicit approval required before any apply"
+}
