@@ -15890,6 +15890,7 @@ prs:
       - backend/tests/Feature/AttemptEmailBindingTest.php
       - backend/tests/Feature/ResultEmailGatedReadTest.php
       - backend/tests/Feature/Email/ResultAccessLinkTemplateDeliveryTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     scope:
@@ -15902,6 +15903,7 @@ prs:
       - cd backend && php artisan test --filter=AttemptEmailBinding --no-ansi
       - cd backend && php artisan test --filter=ResultEmailGatedRead --no-ansi
       - cd backend && php artisan test --filter=ResultAccessLinkTemplateDelivery --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi
       - cd backend && php artisan route:list --no-ansi
       - cd backend && vendor/bin/pint --test
       - cd backend && composer validate --strict

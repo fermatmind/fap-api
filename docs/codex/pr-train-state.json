@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-29T02:27:14+08:00",
+  "updated_at": "2026-05-29T02:49:26+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -20653,7 +20653,7 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-media-alt-visual-review-batch-07",
       "base": "main",
-      "status": "pr_opened",
+      "status": "ci_fix_local_validation_passed",
       "depends_on": [
         "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06"
       ],
@@ -28195,8 +28195,16 @@
           "evidence": "Reverted generated BIG5_OCEAN compiled artifact diffs produced by ci_verify_mbti.sh; remaining diff is confined to current PR scope."
         },
         "github_pr": {
-          "status": "pending",
-          "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1752 from codex/result-email-access-link-03."
+          "status": "failed_then_fixed_locally",
+          "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1752 from codex/result-email-access-link-03; initial GitHub verify-mbti-legacy failed because BigFiveResultPageV2CoreBodyPreviewTest incorrectly classified EmailOutboxService.php as Big Five runtime-impacting."
+        },
+        "github_verify_mbti_initial_failure": {
+          "status": "fixed_in_current_pr_scope",
+          "evidence": "verify-mbti-legacy failed on BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff for backend/app/Services/Email/EmailOutboxService.php; added a focused classifier ignore for result access link delivery."
+        },
+        "php_artisan_test_filter_BigFiveResultPageV2CoreBodyPreview": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi"
         }
       },
       "failure_reason": null,
@@ -28227,6 +28235,11 @@
           "at": "2026-05-29T02:27:14+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1752 for RESULT-EMAIL-ACCESS-LINK-03 and queued GitHub checks."
+        },
+        {
+          "at": "2026-05-29T02:49:26+08:00",
+          "status": "ci_fix_local_validation_passed",
+          "summary": "Fixed GitHub verify-mbti-legacy classifier failure for EmailOutboxService result access link delivery; reran focused email tests, BigFiveResultPageV2CoreBodyPreview, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, and ci_verify_mbti locally."
         }
       ]
     }

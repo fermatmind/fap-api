@@ -1387,6 +1387,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_result_email_access_link_delivery_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Email/EmailOutboxService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_funnel_attribution_ingest_contract_changes(): void
     {
         $changed = [
@@ -2517,6 +2526,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isResultEmailGatedReadFile($file)) {
+                continue;
+            }
+
+            if ($this->isResultEmailAccessLinkDeliveryFile($file)) {
                 continue;
             }
 
@@ -3930,6 +3943,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
             'backend/app/Services/Results/ResultEmailReadAccessService.php',
         ], true);
+    }
+
+    private function isResultEmailAccessLinkDeliveryFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Email/EmailOutboxService.php';
     }
 
     /**
