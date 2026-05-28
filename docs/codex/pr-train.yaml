@@ -15433,3 +15433,46 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01
+  - id: DETAIL_READY_1048_REPLACEMENT_AUTHORITY_RESELECT-01
+    repo: fap-api
+    branch: codex/detail-ready-1048-replacement-authority-reselect-01
+    base: main
+    title: "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_RESELECT-01 replacement authority candidate reselect"
+    train_scope: career_detail_ready_1048_replacement_authority_reselect
+    risk_level: p1_career_runtime_publication_gate
+    depends_on:
+      - DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT-01
+    allowed_paths:
+      - backend/docs/seo/detail-ready-1048-replacement-authority-reselect-01.md
+      - backend/docs/seo/generated/detail-ready-1048-replacement-authority-reselect-01.v1.json
+      - backend/tests/Feature/SeoIntel/DetailReady1048ReplacementAuthorityReselect01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Reselect a replacement authority candidate after computer-occupations-all-other was found already indexable in production authority.
+      - Use read-only authority evidence to require the replacement candidate to be non-indexable, non-manual-hold, non-blocked, non-CN-proxy, outside the current 1048 union, and authority-sufficient.
+      - Generate a scoped reselect report and block package generation if no candidate satisfies the authority gate.
+      - Do not deploy, publish runtime pages, promote the 1048 cohort, write production DB rows, expose sitemap/llms/footer, enqueue Search Channel, submit URLs, or use frontend fallback authority.
+    validation:
+      - cd backend && php artisan test --filter=DetailReady1048ReplacementAuthorityReselect01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/detail-ready-1048-replacement-authority-reselect-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01

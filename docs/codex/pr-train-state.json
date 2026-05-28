@@ -27831,6 +27831,93 @@
           "summary": "Opened PR #1708 after local validation; waiting for GitHub required checks."
         }
       ]
+    },
+    "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_RESELECT-01": {
+      "id": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_RESELECT-01",
+      "repo": "fap-api",
+      "branch": "codex/detail-ready-1048-replacement-authority-reselect-01",
+      "base": "main",
+      "status": "local_validation_passed",
+      "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_RESELECT-01 replacement authority candidate reselect",
+      "commit_sha": "7e37665337189060202c4a36a67cfad0a0bb44a5",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1742",
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User explicitly authorized DETAIL_READY_1048_REPLACEMENT_AUTHORITY_RESELECT-01 manifest/state updates for the current PR only."
+        },
+        "scope_boundaries": {
+          "status": "pass",
+          "evidence": "No deploy, publish, runtime promotion, production write, sitemap/llms/footer exposure, Search Channel action, URL submission, fap-web change, or frontend fallback authority allowed."
+        },
+        "focused_report_test": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=DetailReady1048ReplacementAuthorityReselect01 --no-ansi",
+          "evidence": "PASS: 1 test, 36 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "PASS: route list generated successfully with 203 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "PASS: 3615 files."
+        },
+        "composer_validate": {
+          "status": "pass",
+          "command": "cd backend && composer validate --strict",
+          "evidence": "PASS: ./composer.json is valid."
+        },
+        "composer_audit": {
+          "status": "pass",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "PASS: No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/detail-ready-1048-replacement-authority-reselect-01.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && yaml.safe_load(docs/codex/pr-train.yaml)",
+          "evidence": "Generated JSON, state JSON, and train YAML parse successfully."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check",
+          "evidence": "PASS: no whitespace errors."
+        },
+        "candidate_selection": {
+          "status": "blocked_no_eligible_replacement_candidate",
+          "evidence": "Read-only production authority scan found outside_union_nonindexable_with_onet_soc_2019_crosswalk=0 and outside_union_nonindexable_with_display_asset=0; previous candidate computer-occupations-all-other has existing_indexable_state_rows=2."
+        },
+        "pr_opened": {
+          "status": "pass",
+          "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1742."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "merge_commit": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01",
+      "sidecars": [],
+      "transitions": [
+        {
+          "at": "2026-05-28T18:48:00+08:00",
+          "status": "in_progress",
+          "summary": "Registered current replacement authority reselect task after explicit user authorization. Did not add future task entries."
+        },
+        {
+          "at": "2026-05-28T18:58:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Generated reselect report/test. No eligible replacement candidate exists under the non-indexable, non-CN, non-manual-hold, authority-sufficient gate; no import package generated."
+        },
+        {
+          "at": "2026-05-28T19:02:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1742 after local validation; waiting for GitHub required checks."
+        }
+      ]
     }
   },
   "RESULT-EN-PARITY-04": {

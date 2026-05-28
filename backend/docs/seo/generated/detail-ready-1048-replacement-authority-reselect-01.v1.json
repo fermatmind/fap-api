@@ -1,0 +1,125 @@
+{
+  "schema_version": "detail_ready_1048_replacement_authority_reselect.v1",
+  "task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_RESELECT-01",
+  "generated_at": "2026-05-28T18:48:00+08:00",
+  "final_decision": "blocked_no_eligible_replacement_candidate",
+  "source_context": {
+    "previous_controlled_import_pr": "https://github.com/fermatmind/fap-api/pull/1741",
+    "previous_replacement_slug": "computer-occupations-all-other",
+    "previous_replacement_status": "already_indexable_in_production_authority",
+    "manual_hold_slugs": [
+      "software-developers"
+    ],
+    "read_only_scan_command": "php artisan career:audit-detail-ready-1048-candidates --json --output=/tmp/detail-ready-1048-reselect-scan.json",
+    "read_only_scan_environment": "production authority environment",
+    "scan_writes_database": false
+  },
+  "candidate_requirements": {
+    "must_be_outside_current_1048_union": true,
+    "must_be_non_indexable": true,
+    "must_not_be_manual_hold": true,
+    "must_not_be_blocked": true,
+    "must_not_be_cn_proxy": true,
+    "must_have_observed_onet_soc_2019_crosswalk": true,
+    "must_have_or_accept_controlled_us_soc_crosswalk": true,
+    "must_have_or_accept_controlled_display_asset_v4_2": true,
+    "must_not_expose_sitemap_llms_footer_in_this_pr": true
+  },
+  "production_authority_scan_summary": {
+    "current_public_detail": 30,
+    "union_detail_ready": 1048,
+    "ready_not_currently_public": 1018,
+    "manual_hold_ready": 1,
+    "raw_occupation_assets": 2786,
+    "outside_union_nonindexable_rows": 1543,
+    "outside_union_nonindexable_with_any_crosswalk": 1543,
+    "outside_union_nonindexable_with_onet_soc_2019_crosswalk": 0,
+    "outside_union_nonindexable_with_display_asset": 0,
+    "legacy_career_jobs_outside_union": 36,
+    "legacy_career_jobs_are_not_detail_ready_replacement_authority": true
+  },
+  "previous_replacement_disqualification": {
+    "canonical_slug": "computer-occupations-all-other",
+    "occupation_found": true,
+    "observed_onet_crosswalk_valid": true,
+    "display_asset_rows": 0,
+    "existing_index_state_rows": 2,
+    "existing_indexable_state_rows": 2,
+    "disqualification_reason": "already_indexable",
+    "manual_hold_slug_kept_excluded": "software-developers"
+  },
+  "candidate_selection_result": {
+    "selected": false,
+    "selected_slug": null,
+    "new_import_package_generated": false,
+    "reason": "No production authority row outside the current 1048 union satisfied all replacement gates. Rows outside the union are either CN directory/proxy-style rows without O*NET/SOC detail authority, lack display-ready v4.2 assets, or belong to legacy career_jobs content rather than the occupation authority source required for the 1048 cohort.",
+    "blocked_on": [
+      "outside_union_nonindexable_with_onet_soc_2019_crosswalk_zero",
+      "outside_union_nonindexable_with_display_asset_zero",
+      "legacy_career_jobs_not_valid_replacement_authority",
+      "computer_occupations_all_other_already_indexable"
+    ]
+  },
+  "rejected_candidate_classes": [
+    {
+      "class": "cn_directory_proxy_rows",
+      "count": 1543,
+      "accepted": false,
+      "reason": "CN directory/proxy rows are explicitly outside the detail-ready public replacement authority gate and must not be counted toward the product-visible 1048 claim."
+    },
+    {
+      "class": "legacy_career_jobs_rows",
+      "count": 36,
+      "accepted": false,
+      "reason": "Legacy career_jobs rows are not occupation foundation authority and include legacy content/claim surfaces that require a separate review path."
+    },
+    {
+      "class": "already_indexable_occupation_rows",
+      "example_slug": "computer-occupations-all-other",
+      "accepted": false,
+      "reason": "Replacement must be non-indexable before controlled import; this slug already has indexable index_states."
+    }
+  ],
+  "exposure_policy": {
+    "sitemap_eligible_in_this_pr": false,
+    "llms_eligible_in_this_pr": false,
+    "footer_eligible_in_this_pr": false,
+    "search_channel_eligible_in_this_pr": false,
+    "runtime_public_in_this_pr": false
+  },
+  "claim_boundary": {
+    "career_claim_expansion_performed": false,
+    "forbidden_claims_checked": [
+      "precise career recommendation",
+      "best career for you",
+      "hiring fit",
+      "job suitability guarantee",
+      "career success prediction",
+      "salary guarantee",
+      "MBTI determines career",
+      "RIASEC ranks best career",
+      "Big Five predicts job performance"
+    ]
+  },
+  "recommended_next_tasks": [
+    {
+      "id": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01",
+      "reason": "Create or identify a real non-CN, O*NET/SOC-backed, non-indexable occupation authority row with controlled v4.2 display asset readiness before generating a new replacement import package."
+    },
+    {
+      "id": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01",
+      "reason": "Run only after a valid replacement has been imported into the authority source; then regenerate the clean 1018 manifest while keeping software-developers on manual hold."
+    }
+  ],
+  "no_cms_mutation": true,
+  "no_database_write": true,
+  "no_runtime_promotion": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_frontend_fallback_authority": true,
+  "no_pseo_generation": true,
+  "next_task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01"
+}
