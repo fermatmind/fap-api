@@ -15203,3 +15203,44 @@ prs:
     frontend_fallback_authority: false
     paid_content_gate_change: false
     next_task: DEPLOY-READINESS
+
+  - id: GLOBAL-CAREER-RUNTIME-COHORT-AND-DETAIL-REPAIR-01
+    repo: fap-api
+    branch: codex/global-career-runtime-cohort-and-detail-repair-01
+    base: main
+    title: "GLOBAL-CAREER-RUNTIME-COHORT-AND-DETAIL-REPAIR-01 career runtime cohort and detail diagnosis"
+    train_scope: career_runtime_cohort_detail_diagnosis
+    risk_level: p1_career_runtime_authority
+    allowed_paths:
+      - backend/docs/seo/global-career-runtime-cohort-and-detail-repair-01.md
+      - backend/docs/seo/generated/global-career-runtime-cohort-and-detail-repair-01.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalCareerRuntimeCohortAndDetailRepair01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Diagnose career cohort count meaning, public cohort policy, sampled detail 404/noindex behavior, sitemap/llms/footer exposure, and frontend notFound behavior.
+      - Record whether safe runtime repair is possible without CMS mutation, broad pSEO, cohort publish, Search Channel, URL submission, deploy, or frontend fallback authority.
+      - Add focused report validation only; do not publish career cohorts or alter fap-web runtime in this PR.
+    validation:
+      - cd backend && php artisan test --filter=GlobalCareerRuntimeCohortAndDetailRepair01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-career-runtime-cohort-and-detail-repair-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01

@@ -1,0 +1,184 @@
+{
+  "schema_version": "global-career-runtime-cohort-and-detail-repair-01.v1",
+  "task": "GLOBAL-CAREER-RUNTIME-COHORT-AND-DETAIL-REPAIR-01",
+  "final_decision": "career_runtime_requires_controlled_cms_or_cohort_publish",
+  "scanned_at": "2026-05-28T09:39:34+08:00",
+  "career_count_meaning": {
+    "30": {
+      "meaning": "Current runtime-published public career cohort from dataset authority.",
+      "evidence": "Production dataset authority reports member_count=30, included_count=30, public_detail_indexable_count=30.",
+      "public_runtime_active": true
+    },
+    "342": {
+      "meaning": "Legacy B71X/DOCX career_all_342 baseline.",
+      "evidence": "Existing career authority documentation and dataset key career_all_342_occupations_dataset.",
+      "public_runtime_active": false
+    },
+    "2289": {
+      "meaning": "Excluded runtime candidate/raw authority records, not public job pages.",
+      "evidence": "Production dataset authority reports excluded_count=2289.",
+      "public_runtime_active": false
+    }
+  },
+  "public_cohort_policy": {
+    "current_public_index_items": 30,
+    "current_detail_api_200_count_by_locale": {
+      "en": 30,
+      "zh-CN": 30
+    },
+    "non_cohort_slugs_fail_closed": true,
+    "sampled_non_cohort_slugs": [
+      "accountants-and-auditors",
+      "software-developers"
+    ],
+    "do_not_publish_342_without_approval": true,
+    "do_not_publish_2289_without_approval": true
+  },
+  "sampled_runtime_checks": {
+    "frontend": [
+      {
+        "url": "https://fermatmind.com/en/career/jobs",
+        "status": 200,
+        "robots": "index, follow",
+        "detail_link_count": 30
+      },
+      {
+        "url": "https://fermatmind.com/zh/career/jobs",
+        "status": 200,
+        "robots": "index, follow",
+        "detail_link_count": 30
+      },
+      {
+        "url": "https://fermatmind.com/en/career/jobs/accountants-and-auditors",
+        "status": 404,
+        "robots": "noindex"
+      },
+      {
+        "url": "https://fermatmind.com/zh/career/jobs/accountants-and-auditors",
+        "status": 404,
+        "robots": "noindex"
+      },
+      {
+        "url": "https://fermatmind.com/en/career/jobs/software-developers",
+        "status": 404,
+        "robots": "noindex"
+      },
+      {
+        "url": "https://fermatmind.com/zh/career/jobs/software-developers",
+        "status": 404,
+        "robots": "noindex"
+      }
+    ],
+    "current_cohort_frontend_robots_summary": {
+      "en_index": 18,
+      "en_noindex": 12,
+      "zh_index": 0,
+      "zh_noindex": 30
+    }
+  },
+  "api_runtime_checks": {
+    "dataset_occupations_en": {
+      "status": 200,
+      "member_count": 30,
+      "included_count": 30,
+      "excluded_count": 2289,
+      "public_detail_indexable_count": 30
+    },
+    "dataset_occupations_zh_cn": {
+      "status": 200,
+      "member_count": 30,
+      "included_count": 30,
+      "excluded_count": 2289,
+      "public_detail_indexable_count": 30
+    },
+    "career_jobs_en": {
+      "status": 200,
+      "item_count": 30,
+      "contains_accountants_and_auditors": false,
+      "contains_software_developers": false,
+      "contains_actuaries": true
+    },
+    "career_jobs_zh_cn": {
+      "status": 200,
+      "item_count": 30,
+      "contains_accountants_and_auditors": false,
+      "contains_software_developers": false,
+      "contains_actuaries": true
+    },
+    "sample_detail_api": {
+      "actuaries_en": 200,
+      "actuaries_zh_cn": 200,
+      "accountants_and_auditors_en": 404,
+      "accountants_and_auditors_zh_cn": 404,
+      "software_developers_en": 404,
+      "software_developers_zh_cn": 404
+    },
+    "current_cohort_detail_api_bad_count": 0
+  },
+  "sitemap_exposure_check": {
+    "career_job_detail_url_count": 0,
+    "sampled_404_urls_exposed": false,
+    "status": "pass"
+  },
+  "llms_exposure_check": {
+    "llms_txt_career_job_detail_url_count": 0,
+    "llms_full_txt_career_job_detail_url_count": 0,
+    "sampled_404_urls_exposed": false,
+    "status": "pass"
+  },
+  "footer_exposure_check": {
+    "homepage_career_job_detail_links": 0,
+    "career_index_detail_links_per_locale": {
+      "en": 30,
+      "zh": 30
+    },
+    "sampled_404_urls_exposed": false,
+    "status": "pass"
+  },
+  "frontend_notfound_behavior": {
+    "fetcher": "fap-web lib/career/api/fetchCareerJobBundle.ts returns null on API 404 or other API error.",
+    "route": "fap-web app/(localized)/[locale]/career/jobs/[slug]/page.tsx calls notFound() when the adapted bundle is null.",
+    "sampled_404_root_cause": "backend_projection_gate_non_cohort_slug",
+    "frontend_fallback_authority_used": false
+  },
+  "claim_boundary_state": {
+    "status": "pass",
+    "forbidden_claim_hits": [],
+    "bounded_language_required": true,
+    "no_precise_career_recommendation": true,
+    "no_hiring_fit": true,
+    "no_job_suitability_guarantee": true,
+    "no_career_success_prediction": true,
+    "no_salary_guarantee": true,
+    "no_psychometric_determines_career": true
+  },
+  "authority_mismatch_findings": [
+    {
+      "id": "career_detail_backend_indexable_frontend_noindex_mismatch",
+      "severity": "p1",
+      "finding": "Backend detail API returns 200 with seo_contract robots_policy index,follow for current cohort slugs, but production frontend renders noindex for 12 EN and 30 ZH sampled cohort detail pages.",
+      "impact": "The 30 cohort cannot be claimed fully public/indexable until backend SEO authority, content completeness, and frontend metadata gates agree.",
+      "recommended_owner": "backend_authority_and_fap_web_metadata_linked_pr"
+    },
+    {
+      "id": "career_seo_authority_endpoint_locale_gap",
+      "severity": "p1",
+      "finding": "Sample /api/v0.5/career-jobs/actuaries/seo returned 404 for en and 200 for zh-CN.",
+      "impact": "Frontend includeSeoAuthority can attach inconsistent authority by locale.",
+      "recommended_owner": "backend_career_seo_authority"
+    }
+  ],
+  "recommended_fix": {
+    "status": "requires_controlled_follow_up",
+    "next_pr_id": "GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01",
+    "summary": "Align career detail SEO authority and frontend metadata gating for the current 30 cohort before any sitemap/llms exposure or larger cohort publish.",
+    "requires_explicit_approval_phrase": "I explicitly approve a controlled career cohort publish and SEO authority alignment PR for the named career slugs, with no broad pSEO, no CMS mutation unless separately approved, no Search Channel action, no URL submission, and no deploy in the PR."
+  },
+  "next_task": "GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01",
+  "no_cms_mutation": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_pseo_generation": true
+}
