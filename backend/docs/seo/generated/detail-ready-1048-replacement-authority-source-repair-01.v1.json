@@ -1,0 +1,103 @@
+{
+  "schema_version": "detail_ready_1048_replacement_authority_source_repair.v1",
+  "task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01",
+  "generated_at": "2026-05-28T20:15:00+08:00",
+  "final_decision": "source_repair_completed_ready_for_controlled_import",
+  "source_context": {
+    "previous_reselect_task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_RESELECT-01",
+    "previous_reselect_decision": "blocked_no_eligible_replacement_candidate",
+    "previous_candidate_disqualified": "computer-occupations-all-other",
+    "previous_candidate_disqualification_reason": "already_indexable",
+    "manual_hold_slugs": [
+      "software-developers"
+    ],
+    "repo_backed_source": "App\\Services\\Career\\Import\\CareerSelectedDisplayAssetMapper::COHORT_003_SLUGS",
+    "source_repair_import_package": "backend/docs/seo/import-packages/detail-ready-1048-replacement-authority-source-repair-01.import.v1.json"
+  },
+  "selected_replacement_source": {
+    "canonical_slug": "digital-forensics-analysts",
+    "title_en": "Digital Forensics Analysts",
+    "title_zh": "数字取证分析师",
+    "family_slug": "computer-and-information-technology",
+    "family_title_en": "Computer and Information Technology",
+    "family_title_zh": "计算机与信息技术",
+    "source_system": "onet_soc_2019",
+    "source_code": "15-1299.06",
+    "source_title": "Digital Forensics Analysts",
+    "us_soc_code": "15-1299",
+    "candidate_status": "repo_backed_source_repair_package_only"
+  },
+  "source_repair_requirements": {
+    "must_be_outside_current_1048_union_in_target_authority": true,
+    "must_be_non_indexable_before_controlled_import": true,
+    "must_not_be_manual_hold": true,
+    "must_not_be_blocked": true,
+    "must_not_be_cn_proxy": true,
+    "must_have_onet_soc_2019_crosswalk": true,
+    "must_have_us_soc_crosswalk": true,
+    "must_have_display_asset_v4_2": true,
+    "must_not_expose_sitemap_llms_footer_in_this_pr": true
+  },
+  "planned_controlled_import_writes_after_future_approval": {
+    "occupation_families": "upsert_if_missing",
+    "occupations": "upsert_if_missing_and_non_indexable",
+    "occupation_crosswalks": 2,
+    "career_job_display_assets": 1,
+    "career_import_runs": 1,
+    "index_states": 0,
+    "runtime_promotions": 0,
+    "sitemap_llms_footer_exposure": 0
+  },
+  "controlled_import_preflight_required": [
+    "target_authority_scan",
+    "outside_current_1048_union_assertion",
+    "non_indexable_assertion",
+    "manual_hold_block_assertion",
+    "cn_proxy_block_assertion",
+    "existing_index_state_indexable_zero_assertion",
+    "display_asset_contract_assertion"
+  ],
+  "exposure_policy": {
+    "sitemap_eligible_in_this_pr": false,
+    "llms_eligible_in_this_pr": false,
+    "footer_eligible_in_this_pr": false,
+    "search_channel_eligible_in_this_pr": false,
+    "runtime_public_in_this_pr": false
+  },
+  "claim_boundary": {
+    "career_claim_expansion_performed": false,
+    "occupation_reference_only": true,
+    "forbidden_claims_checked": [
+      "precise career recommendation",
+      "best career for you",
+      "hiring fit",
+      "job suitability guarantee",
+      "career success prediction",
+      "salary guarantee",
+      "MBTI determines career",
+      "RIASEC ranks best career",
+      "Big Five predicts job performance"
+    ]
+  },
+  "recommended_next_tasks": [
+    {
+      "id": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01",
+      "reason": "Run a controlled import for the source-repair package after explicit approval in the target authority environment."
+    },
+    {
+      "id": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01",
+      "reason": "Run only after the source-repair import succeeds; then regenerate the clean 1018 manifest while keeping software-developers on manual hold."
+    }
+  ],
+  "no_cms_mutation": true,
+  "no_database_write": true,
+  "no_runtime_promotion": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_frontend_fallback_authority": true,
+  "no_pseo_generation": true,
+  "next_task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01"
+}

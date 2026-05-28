@@ -1,0 +1,203 @@
+{
+  "schema_version": "detail_ready_1048_replacement_authority_source_repair_package.v1",
+  "task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01",
+  "package_type": "career_detail_ready_replacement_authority_source_repair",
+  "generated_at": "2026-05-28T20:15:00+08:00",
+  "status": "human_review_required_before_controlled_import",
+  "write_policy": {
+    "dry_run_only_in_this_pr": true,
+    "no_cms_mutation_in_this_pr": true,
+    "no_database_write_in_this_pr": true,
+    "future_controlled_import_requires_explicit_user_approval": true,
+    "future_runtime_promotion_requires_separate_explicit_user_approval": true
+  },
+  "replacement_source": {
+    "canonical_slug": "digital-forensics-analysts",
+    "title_en": "Digital Forensics Analysts",
+    "title_zh": "数字取证分析师",
+    "manual_hold": false,
+    "cn_proxy": false,
+    "known_blocked_slug": false,
+    "existing_union_member_must_be_false_in_target_authority": true,
+    "source_authority_observed": {
+      "source": "App\\Services\\Career\\Import\\CareerSelectedDisplayAssetMapper::COHORT_003_SLUGS",
+      "source_system": "onet_soc_2019",
+      "source_code": "15-1299.06",
+      "source_title": "Digital Forensics Analysts",
+      "mapping_type": "repo_backed_onet_soc_2019_candidate",
+      "confidence_score": 0.9
+    },
+    "proposed_family_import": {
+      "table": "occupation_families",
+      "canonical_slug": "computer-and-information-technology",
+      "title_en": "Computer and Information Technology",
+      "title_zh": "计算机与信息技术"
+    },
+    "proposed_occupation_import": {
+      "table": "occupations",
+      "canonical_slug": "digital-forensics-analysts",
+      "entity_level": "market_child",
+      "truth_market": "US",
+      "display_market": "CN",
+      "crosswalk_mode": "onet_soc_2019_direct",
+      "canonical_title_en": "Digital Forensics Analysts",
+      "canonical_title_zh": "数字取证分析师",
+      "search_h1_zh": "数字取证分析师"
+    },
+    "proposed_crosswalk_imports": [
+      {
+        "table": "occupation_crosswalks",
+        "source_system": "onet_soc_2019",
+        "source_code": "15-1299.06",
+        "source_title": "Digital Forensics Analysts",
+        "mapping_type": "direct_onet_soc_2019",
+        "confidence_score": 0.9,
+        "notes": "Repo-backed source repair candidate from CareerSelectedDisplayAssetMapper; requires target-authority dry-run before controlled import."
+      },
+      {
+        "table": "occupation_crosswalks",
+        "source_system": "us_soc",
+        "source_code": "15-1299",
+        "source_title": "Computer Occupations, All Other",
+        "mapping_type": "same_soc_family_from_onet_soc_2019",
+        "confidence_score": 0.8,
+        "notes": "Derived from O*NET-SOC 2019 code 15-1299.06; requires human review before controlled import."
+      }
+    ],
+    "proposed_display_asset_import": {
+      "table": "career_job_display_assets",
+      "canonical_slug": "digital-forensics-analysts",
+      "surface_version": "display.surface.v1",
+      "asset_version": "v4.2",
+      "template_version": "v4.2",
+      "asset_type": "career_job_public_display",
+      "asset_role": "formal_pilot_master",
+      "status": "ready_for_pilot",
+      "component_order_json": [
+        "breadcrumb",
+        "hero",
+        "fermat_decision_card",
+        "primary_cta",
+        "career_snapshot_primary_locale",
+        "career_snapshot_secondary_locale",
+        "fit_decision_checklist",
+        "riasec_fit_block",
+        "personality_fit_block",
+        "definition_block",
+        "responsibilities_block",
+        "work_context_block",
+        "market_signal_card",
+        "adjacent_career_comparison_table",
+        "ai_impact_table",
+        "career_risk_cards",
+        "contract_project_risk_block",
+        "next_steps_block",
+        "faq_block",
+        "related_next_pages",
+        "source_card",
+        "review_validity_card",
+        "boundary_notice",
+        "final_cta"
+      ],
+      "page_payload_json": {
+        "page": {
+          "en": {
+            "hero": {
+              "title": "Digital Forensics Analysts",
+              "subtitle": "Occupation information for roles mapped to O*NET-SOC 15-1299.06.",
+              "boundary": "Use this page as an occupational reference and decision-support signal, not as a hiring, salary, or career-success prediction."
+            },
+            "source_card": {
+              "source_system": "O*NET-SOC 2019",
+              "source_code": "15-1299.06",
+              "review_state": "human_review_required"
+            },
+            "boundary_notice": {
+              "copy": "This content describes occupation information only. It does not determine the best career for any person."
+            }
+          },
+          "zh": {
+            "hero": {
+              "title": "数字取证分析师",
+              "subtitle": "基于 O*NET-SOC 15-1299.06 的职业信息参考。",
+              "boundary": "本页仅作职业信息与决策参考，不用于招聘适配、薪资预测或职业成功承诺。"
+            },
+            "source_card": {
+              "source_system": "O*NET-SOC 2019",
+              "source_code": "15-1299.06",
+              "review_state": "human_review_required"
+            },
+            "boundary_notice": {
+              "copy": "该内容只描述职业信息，不判断任何人的最佳职业。"
+            }
+          }
+        }
+      },
+      "seo_payload_json": {
+        "canonical_path_en": "/en/career/jobs/digital-forensics-analysts",
+        "canonical_path_zh": "/zh/career/jobs/digital-forensics-analysts",
+        "indexable_after_controlled_import_and_runtime_gate": true
+      },
+      "sources_json": {
+        "observed_source": "repo-backed mapper source",
+        "source_system": "onet_soc_2019",
+        "source_code": "15-1299.06",
+        "human_review_required": true
+      },
+      "structured_data_json": {
+        "type": "OccupationInformation",
+        "authority_scope": "occupation_reference_only",
+        "emit_schema_after_runtime_gate": true
+      },
+      "implementation_contract_json": {
+        "must_have_component_order_count": 24,
+        "must_have_page_en": true,
+        "must_have_page_zh": true,
+        "must_not_include_release_gates_in_public_payload": true
+      },
+      "metadata_json": {
+        "replacement_for_manual_hold_slug": "software-developers",
+        "manual_hold_slug_remains_excluded": true,
+        "target": "detail_ready_1048",
+        "import_package": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01"
+      }
+    }
+  },
+  "claim_boundary": {
+    "forbidden_claims": [
+      "precise career recommendation",
+      "best career for you",
+      "hiring fit",
+      "job suitability guarantee",
+      "career success prediction",
+      "salary guarantee",
+      "MBTI determines career",
+      "RIASEC ranks best career",
+      "Big Five predicts job performance"
+    ],
+    "allowed_framing": [
+      "occupation information",
+      "career direction reference",
+      "workstyle tendency",
+      "interest signal",
+      "exploratory guidance",
+      "decision support",
+      "for reference only"
+    ]
+  },
+  "target_authority_preflight_required": {
+    "outside_current_1048_union": true,
+    "non_indexable_before_import": true,
+    "existing_indexable_state_rows_must_equal": 0,
+    "manual_hold_slug_kept_excluded": "software-developers",
+    "sitemap_llms_footer_exposure_allowed": false
+  },
+  "exposure_policy": {
+    "sitemap_eligible": false,
+    "llms_eligible": false,
+    "footer_eligible": false,
+    "search_channel_eligible": false,
+    "runtime_public": false
+  },
+  "next_required_action": "Run a controlled target-authority import dry-run for this source repair package, then rerun the 1048 delta authority scan before any runtime promotion approval."
+}
