@@ -15742,3 +15742,44 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: DEPLOY-READINESS | Deploy fap-api PR #1747 before rerunning apply preflight
+
+  - id: DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01
+    repo: fap-api
+    branch: codex/detail-ready-1046-rollout-no-audit-dry-run-01
+    base: main
+    title: "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01 no-write career rollout dry-run"
+    train_scope: career_detail_ready_1046_rollout_no_audit_dry_run
+    risk_level: p1_career_runtime_publication_gate
+    allowed_paths:
+      - backend/app/Console/Commands/CareerExecuteCanonicalRolloutBatch.php
+      - backend/tests/Feature/Console/CareerExecuteCanonicalRolloutBatchTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add a --no-audit-write option to career:execute-canonical-rollout-batch for dry-run-only production preflight.
+      - Ensure --dry-run --no-audit-write skips filesystem audit report writes while preserving default audit writes for ordinary dry-runs.
+      - Reject --apply --no-audit-write so production mutation cannot run without audit output.
+      - Do not perform runtime promotion, production write, DB/CMS mutation, deploy, sitemap/llms/footer exposure, Search Channel action, URL submission, external search API call, or fap-web change.
+    validation:
+      - cd backend && php artisan test --filter=CareerExecuteCanonicalRolloutBatch --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 rerun production no-write preflight after deploy

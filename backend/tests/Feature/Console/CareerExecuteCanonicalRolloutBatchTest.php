@@ -313,6 +313,54 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertSame('planned', $content['status'] ?? null);
     }
 
+    public function test_dry_run_can_skip_audit_report_write_for_production_preflight(): void
+    {
+        $this->writeProjection($this->candidateProjection(['actuaries']));
+
+        $auditDir = storage_path('app/private/career_canonical_rollout_batch_executions');
+        if (is_dir($auditDir)) {
+            File::cleanDirectory($auditDir);
+        }
+
+        $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+            '--batch-id' => 'batch-001-no-audit',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en,zh',
+            '--rollback-group' => 'actuaries',
+            '--dry-run' => true,
+            '--no-audit-write' => true,
+            '--projection' => $this->tmpProjectionPath,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $payload = json_decode(Artisan::output(), true);
+        $this->assertIsArray($payload);
+        $this->assertSame('planned', $payload['status'] ?? null);
+        $this->assertFalse($payload['writes_database'] ?? true);
+
+        $files = is_dir($auditDir) ? File::files($auditDir) : [];
+        $this->assertSame([], $files, 'No audit report should be written when --dry-run --no-audit-write is used.');
+    }
+
+    public function test_apply_rejects_no_audit_write(): void
+    {
+        $this->writeProjection($this->candidateProjection(['actuaries']));
+
+        $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+            '--batch-id' => 'batch-001-no-audit-apply',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en,zh',
+            '--rollback-group' => 'actuaries',
+            '--apply' => true,
+            '--no-audit-write' => true,
+            '--projection' => $this->tmpProjectionPath,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('--no-audit-write is only allowed with --dry-run', Artisan::output());
+    }
+
     public function test_command_help_shows_all_options(): void
     {
         $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
@@ -328,6 +376,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertStringContainsString('--rollback-group', $output);
         $this->assertStringContainsString('--dry-run', $output);
         $this->assertStringContainsString('--apply', $output);
+        $this->assertStringContainsString('--no-audit-write', $output);
         $this->assertStringContainsString('--quarantine-on-failure', $output);
     }
 
