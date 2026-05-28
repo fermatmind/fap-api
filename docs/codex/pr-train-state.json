@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-28T23:01:01+08:00",
+  "updated_at": "2026-05-29T01:25:43+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -27924,10 +27924,10 @@
       "repo": "fap-api",
       "branch": "codex/email-directmail-smtp-readiness-01",
       "base": "main",
-      "status": "in_progress",
+      "status": "merged",
       "title": "EMAIL-DIRECTMAIL-SMTP-READINESS-01 DirectMail SMTP readiness docs env and outbox test",
       "commit_sha": "bc79c7c5776a51cc67a862fbc1a460eec3aa8b68",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1750",
       "checks": {
         "manifest_registration": {
           "status": "pass",
@@ -27972,13 +27972,17 @@
         "github_required_checks": {
           "status": "pass",
           "evidence": "PR #1750 checks passed: hygiene, supply-chain, Semgrep blocking secrets, semgrep sarif non-blocking upload, Semgrep OSS, verify-mbti-legacy, verify-mbti-v2. mergeStateStatus CLEAN."
+        },
+        "merged_reconciled_before_result_email_gate_policy_02": {
+          "status": "pass",
+          "evidence": "PR #1750 is MERGED; origin/main and local main contain merge commit 1f8b4ac77215020b17da5da1e1a0d531ed074ba1; remote task branch is absent; local task branch cleanup completed by gh merge/main checkout."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "merge_commit": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-28T17:09:43Z",
+      "merge_commit": "1f8b4ac77215020b17da5da1e1a0d531ed074ba1",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "next_task": "RESULT-EMAIL-GATE-POLICY-02",
       "sidecars": [],
       "transitions": [
@@ -28001,6 +28005,99 @@
           "at": "2026-05-29T01:01:00+08:00",
           "status": "github_checks_passed_ready_to_merge",
           "summary": "GitHub checks passed and mergeStateStatus was CLEAN for PR #1750."
+        },
+        {
+          "at": "2026-05-29T01:18:23+08:00",
+          "status": "merged_reconciled_before_result_email_gate_policy_02",
+          "summary": "Reconciled EMAIL-DIRECTMAIL-SMTP-READINESS-01 as merged before starting RESULT-EMAIL-GATE-POLICY-02."
+        }
+      ]
+    },
+    "RESULT-EMAIL-GATE-POLICY-02": {
+      "id": "RESULT-EMAIL-GATE-POLICY-02",
+      "repo": "fap-api",
+      "branch": "codex/result-email-gate-policy-02",
+      "base": "main",
+      "status": "local_validation_passed",
+      "title": "RESULT-EMAIL-GATE-POLICY-02 relax result email gate policy",
+      "depends_on": [
+        "EMAIL-DIRECTMAIL-SMTP-READINESS-01"
+      ],
+      "commit_sha": "71bfa940427af841ee950778d45a711659d9315e",
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User requested RESULT-EMAIL-GATE-POLICY-02 product logic PR to relax the result email gate and keep email binding optional for recovery/send-link."
+        },
+        "dependency_email_directmail_smtp_readiness_01": {
+          "status": "pass",
+          "evidence": "EMAIL-DIRECTMAIL-SMTP-READINESS-01 merged as PR #1750 with merge commit 1f8b4ac77215020b17da5da1e1a0d531ed074ba1."
+        },
+        "scope_boundaries": {
+          "status": "pass",
+          "evidence": "Backend result-access policy only; no production env write, real email send, deploy, CMS/content mutation, URL submission, Search Channel action, or fap-web change in this PR."
+        },
+        "php_artisan_test_filter_ResultEmailGatedRead": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan test --filter=ResultEmailGatedRead --no-ansi"
+        },
+        "php_artisan_route_list": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan route:list --no-ansi"
+        },
+        "pint_test": {
+          "status": "pass",
+          "evidence": "cd backend && vendor/bin/pint --test"
+        },
+        "composer_validate_strict": {
+          "status": "pass",
+          "evidence": "cd backend && composer validate --strict"
+        },
+        "composer_audit_locked": {
+          "status": "pass",
+          "evidence": "cd backend && composer audit --locked --no-interaction --ignore-unreachable"
+        },
+        "json_yaml_parse": {
+          "status": "pass",
+          "evidence": "pr-train-state.json parsed with python3 -m json.tool; pr-train.yaml parsed with yaml.safe_load."
+        },
+        "diff_hygiene": {
+          "status": "pass",
+          "evidence": "git diff --check && git diff --cached --check"
+        },
+        "ci_verify_mbti": {
+          "status": "pass",
+          "evidence": "cd backend && bash scripts/ci_verify_mbti.sh"
+        },
+        "scope_cleanup": {
+          "status": "pass",
+          "evidence": "Reverted generated BIG5_OCEAN compiled artifact diffs produced by ci_verify_mbti.sh; remaining diff is confined to current PR scope."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "merge_commit": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": "RESULT-EMAIL-ACCESS-LINK-03",
+      "sidecars": [
+        {
+          "id": "fap-web-result-email-gate-copy-followup",
+          "status": "deferred_external_scope",
+          "summary": "fap-web still contains legacy EMAIL_BIND_REQUIRED UI copy/contract handling for backward compatibility. Current PR does not modify fap-web because that worktree has an unrelated active branch and dirty changes."
+        }
+      ],
+      "transitions": [
+        {
+          "at": "2026-05-29T01:18:23+08:00",
+          "status": "in_progress",
+          "summary": "Started backend product policy PR to stop requiring email binding before accurate result/report/report-access reads while preserving optional recovery token flows."
+        },
+        {
+          "at": "2026-05-29T01:25:43+08:00",
+          "status": "local_validation_passed",
+          "summary": "ResultEmailGatedRead focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, and ci_verify_mbti passed locally."
         }
       ]
     }

@@ -35,7 +35,7 @@ final class ResultEmailGatedReadTest extends TestCase
         $response->assertJsonPath('attempt_id', $attemptId);
     }
 
-    public function test_unbound_public_result_read_requires_email_when_gate_is_enabled(): void
+    public function test_unbound_public_result_read_stays_open_when_email_recovery_is_enabled(): void
     {
         config()->set('fap.features.email_first_result_access', true);
 
@@ -47,13 +47,13 @@ final class ResultEmailGatedReadTest extends TestCase
         ])
             ->getJson("/api/v0.3/attempts/{$attemptId}/result");
 
-        $response->assertStatus(428);
-        $response->assertJsonPath('error_code', 'EMAIL_BIND_REQUIRED');
-        $response->assertJsonPath('details.attempt_id', $attemptId);
-        $response->assertJsonPath('details.bind_endpoint', "/api/v0.3/attempts/{$attemptId}/email-bind");
+        $response->assertOk();
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonMissingPath('error_code');
     }
 
-    public function test_unbound_public_report_read_requires_email_when_gate_is_enabled(): void
+    public function test_unbound_public_report_read_stays_open_when_email_recovery_is_enabled(): void
     {
         config()->set('fap.features.email_first_result_access', true);
         config()->set('fap.features.report_snapshot_strict_v2', false);
@@ -65,9 +65,45 @@ final class ResultEmailGatedReadTest extends TestCase
             'Authorization' => "Bearer {$token}",
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
+        $response->assertOk();
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonMissingPath('error_code');
+    }
+
+    public function test_unbound_public_report_access_stays_open_when_email_recovery_is_enabled(): void
+    {
+        config()->set('fap.features.email_first_result_access', true);
+
+        $attemptId = $this->seedAttemptWithResult('anon_email_gate_report_access_open', 'MBTI');
+        $token = $this->seedFmToken('anon_email_gate_report_access_open');
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertOk();
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonMissingPath('error_code');
+    }
+
+    public function test_unbound_public_result_read_can_be_blocked_only_by_explicit_rollback_gate(): void
+    {
+        config()->set('fap.features.email_first_result_access', true);
+        config()->set('fap.result_email_gate.require_binding_for_read', true);
+
+        $attemptId = $this->seedAttemptWithResult('anon_email_gate_rollback_required', 'MBTI');
+        $token = $this->seedFmToken('anon_email_gate_rollback_required');
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])
+            ->getJson("/api/v0.3/attempts/{$attemptId}/result");
+
         $response->assertStatus(428);
         $response->assertJsonPath('error_code', 'EMAIL_BIND_REQUIRED');
         $response->assertJsonPath('details.attempt_id', $attemptId);
+        $response->assertJsonPath('details.bind_endpoint', "/api/v0.3/attempts/{$attemptId}/email-bind");
     }
 
     public function test_active_email_binding_allows_owner_result_read_when_gate_is_enabled(): void
