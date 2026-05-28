@@ -15384,3 +15384,52 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01
+
+  - id: DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT-01
+    repo: fap-api
+    branch: codex/detail-ready-1048-replacement-authority-controlled-import-01
+    base: main
+    title: "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT-01 controlled replacement authority import path"
+    train_scope: career_detail_ready_1048_replacement_authority_controlled_import
+    risk_level: p1_career_runtime_publication_gate
+    depends_on:
+      - DETAIL_READY_1048_REPLACEMENT_AUTHORITY_IMPORT-01
+    allowed_paths:
+      - backend/app/Console/Commands/CareerImportDetailReadyReplacementAuthority.php
+      - backend/app/Console/Kernel.php
+      - backend/docs/seo/detail-ready-1048-replacement-authority-controlled-import-01.md
+      - backend/docs/seo/generated/detail-ready-1048-replacement-authority-controlled-import-01.v1.json
+      - backend/tests/Feature/Console/CareerImportDetailReadyReplacementAuthorityCommandTest.php
+      - backend/tests/Feature/SeoIntel/DetailReady1048ReplacementAuthorityControlledImport01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add a controlled backend import path for the reviewed DETAIL_READY_1048 replacement import package.
+      - Default to dry-run and require an exact confirmation phrase before local/test authority writes.
+      - When explicitly confirmed, write only a career_import_runs ledger row, one us_soc occupation_crosswalk, and one career_job_display_assets row for computer-occupations-all-other.
+      - Preserve software-developers as manual hold and do not release it in this PR.
+      - Do not promote runtime rows, write index_states, publish career pages, deploy, expose sitemap/llms/footer, enqueue Search Channel, submit URLs, or use frontend fallback authority.
+    validation:
+      - cd backend && php artisan test --filter=CareerImportDetailReadyReplacementAuthorityCommandTest --no-ansi
+      - cd backend && php artisan test --filter=DetailReady1048ReplacementAuthorityControlledImport01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/detail-ready-1048-replacement-authority-controlled-import-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01
