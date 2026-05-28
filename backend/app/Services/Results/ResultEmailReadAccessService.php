@@ -70,10 +70,6 @@ final class ResultEmailReadAccessService
             return null;
         }
 
-        if (! $this->bindingMatchesRequestActor($request, $binding)) {
-            return null;
-        }
-
         $request->attributes->set($cacheKey, $binding);
 
         return $binding;

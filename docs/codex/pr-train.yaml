@@ -15870,3 +15870,58 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: RESULT-EMAIL-ACCESS-LINK-03 explicit approval required before implementation
+
+  - id: RESULT-EMAIL-ACCESS-LINK-03
+    repo: fap-api
+    branch: codex/result-email-access-link-03
+    base: main
+    title: "RESULT-EMAIL-ACCESS-LINK-03 send result access links by email"
+    train_scope: result_email_access_link
+    risk_level: p1_result_access_transactional_email
+    depends_on:
+      - EMAIL-DIRECTMAIL-SMTP-READINESS-01
+      - RESULT-EMAIL-GATE-POLICY-02
+    allowed_paths:
+      - backend/app/Services/Attempts/AttemptEmailBindingService.php
+      - backend/app/Services/Email/EmailOutboxService.php
+      - backend/app/Services/Results/ResultEmailReadAccessService.php
+      - backend/resources/views/emails/en/result_access_link.blade.php
+      - backend/resources/views/emails/zh/result_access_link.blade.php
+      - backend/tests/Feature/AttemptEmailBindingTest.php
+      - backend/tests/Feature/ResultEmailGatedReadTest.php
+      - backend/tests/Feature/Email/ResultAccessLinkTemplateDeliveryTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - After an owned public result email binding, issue the existing result_access_token and queue a DirectMail-ready result access link email through the existing outbox.
+      - Reuse the existing result_access_token service and do not introduce a new token table, token format, or token issuance system.
+      - Treat emailed result_access_token as a time-limited bearer recovery link for public scales only; keep SDS/Clinical excluded by existing result-read guards.
+      - Keep access token and link out of plaintext payload_json and persisted sent body_html; encrypted payload remains authoritative for delivery.
+      - Do not mutate production env, send real email, deploy, mutate CMS/content, submit URLs, enqueue Search Channel actions, or modify fap-web in this PR.
+    validation:
+      - cd backend && php artisan test --filter=AttemptEmailBinding --no-ansi
+      - cd backend && php artisan test --filter=ResultEmailGatedRead --no-ansi
+      - cd backend && php artisan test --filter=ResultAccessLinkTemplateDelivery --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: RESULT-EMAIL-ACCESS-LINK-03 deploy-readiness required after merge

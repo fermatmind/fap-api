@@ -36,6 +36,8 @@ final class AttemptEmailBindingTest extends TestCase
         $response->assertJsonPath('attempt_id', $attemptId);
         $response->assertJsonPath('status', 'active');
         $response->assertJsonPath('result_url', "/zh/result/{$attemptId}");
+        $response->assertJsonPath('result_access_link_email_queued', true);
+        $this->assertIsString($response->json('result_access_token_expires_at'));
 
         $emailHash = app(PiiCipher::class)->emailHash('owner@example.test');
         $this->assertDatabaseHas('attempt_email_bindings', [
@@ -49,6 +51,27 @@ final class AttemptEmailBindingTest extends TestCase
         $this->assertDatabaseMissing('attempt_email_bindings', [
             'email_enc' => 'owner@example.test',
         ]);
+
+        $outbox = DB::table('email_outbox')
+            ->where('attempt_id', $attemptId)
+            ->where('template', 'result_access_link')
+            ->first();
+        $this->assertNotNull($outbox);
+        $this->assertSame($emailHash, (string) ($outbox->email_hash ?? ''));
+        $this->assertSame($emailHash, (string) ($outbox->to_email_hash ?? ''));
+
+        $payloadJson = json_decode((string) ($outbox->payload_json ?? '{}'), true);
+        $this->assertIsArray($payloadJson);
+        $this->assertSame($attemptId, (string) ($payloadJson['attempt_id'] ?? ''));
+        $this->assertSame('result_access_link', (string) ($payloadJson['template_key'] ?? ''));
+        $this->assertArrayNotHasKey('result_access_token', $payloadJson);
+        $this->assertArrayNotHasKey('result_access_url', $payloadJson);
+
+        $payloadEnc = json_decode((string) app(PiiCipher::class)->decrypt((string) ($outbox->payload_enc ?? '')), true);
+        $this->assertIsArray($payloadEnc);
+        $this->assertSame('owner@example.test', (string) ($payloadEnc['to_email'] ?? ''));
+        $this->assertStringStartsWith("/zh/result/{$attemptId}?access_token=", (string) ($payloadEnc['result_access_url'] ?? ''));
+        $this->assertNotEmpty((string) ($payloadEnc['result_access_token'] ?? ''));
     }
 
     public function test_wrong_anon_cannot_bind_someone_else_attempt(): void

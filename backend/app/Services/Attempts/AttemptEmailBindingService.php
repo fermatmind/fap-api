@@ -9,6 +9,8 @@ use App\Models\Attempt;
 use App\Models\AttemptEmailBinding;
 use App\Models\Result;
 use App\Services\Email\EmailCaptureService;
+use App\Services\Email\EmailOutboxService;
+use App\Services\Results\ResultAccessTokenService;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Support\PiiCipher;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +35,8 @@ final class AttemptEmailBindingService
         private readonly PiiCipher $piiCipher,
         private readonly ScaleCodeResponseProjector $scaleCodeProjector,
         private readonly EmailCaptureService $emailCaptureService,
+        private readonly ResultAccessTokenService $resultAccessTokens,
+        private readonly EmailOutboxService $emailOutbox,
     ) {}
 
     /**
@@ -109,6 +113,7 @@ final class AttemptEmailBindingService
         });
 
         $this->captureEmailLifecycle($normalizedEmail, $attemptId, $context);
+        $accessLink = $this->queueResultAccessLink($binding, $normalizedEmail, $context);
 
         return [
             'ok' => true,
@@ -117,7 +122,51 @@ final class AttemptEmailBindingService
             'binding_id' => (string) $binding->getKey(),
             'result_ready' => $result instanceof Result,
             'result_url' => $this->localizedResultUrl($attemptId, $context['locale'] ?? null),
+            'result_access_link_email_queued' => (bool) ($accessLink['queued'] ?? false),
+            'result_access_token_expires_at' => $accessLink['expires_at'] ?? null,
         ];
+    }
+
+    /**
+     * @param  array{locale?:string|null,surface?:string|null}  $context
+     * @return array{queued:bool,expires_at?:string|null,error?:string|null}
+     */
+    private function queueResultAccessLink(AttemptEmailBinding $binding, string $email, array $context): array
+    {
+        try {
+            $token = $this->resultAccessTokens->issueForBinding($binding);
+            $rawToken = (string) ($token['token'] ?? '');
+            if ($rawToken === '') {
+                return ['queued' => false, 'error' => 'TOKEN_MISSING'];
+            }
+
+            $attemptId = (string) ($binding->attempt_id ?? '');
+            $resultUrl = $this->appendAccessTokenToUrl(
+                $this->localizedResultUrl($attemptId, $context['locale'] ?? null),
+                $rawToken,
+            );
+
+            $queued = $this->emailOutbox->queueResultAccessLink(
+                $binding,
+                $email,
+                $token,
+                $resultUrl,
+                $this->normalizeNullableString($context['locale'] ?? null, 16),
+                [
+                    'surface' => $this->normalizeSource($context['surface'] ?? null),
+                ],
+            );
+
+            return [
+                'queued' => (bool) ($queued['queued'] ?? false),
+                'expires_at' => (string) ($token['expires_at'] ?? ''),
+                'error' => $queued['error'] ?? null,
+            ];
+        } catch (\Throwable $exception) {
+            report($exception);
+
+            return ['queued' => false, 'error' => 'QUEUE_FAILED'];
+        }
     }
 
     private function resolveScaleCode(Attempt $attempt, ?Result $result): string
@@ -157,6 +206,21 @@ final class AttemptEmailBindingService
         $prefix = str_starts_with($normalized, 'zh') ? '/zh' : '/en';
 
         return "{$prefix}/result/{$attemptId}";
+    }
+
+    private function appendAccessTokenToUrl(string $url, string $token): string
+    {
+        $fragment = '';
+        $base = $url;
+        $fragmentPosition = strpos($url, '#');
+        if ($fragmentPosition !== false) {
+            $base = substr($url, 0, $fragmentPosition);
+            $fragment = substr($url, $fragmentPosition);
+        }
+
+        $separator = str_contains($base, '?') ? '&' : '?';
+
+        return $base.$separator.'access_token='.rawurlencode($token).$fragment;
     }
 
     private function normalizeSource(mixed $source): string
