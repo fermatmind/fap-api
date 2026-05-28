@@ -45,6 +45,7 @@ use App\Console\Commands\CareerGenerateCanonicalProgressiveRolloutManifest;
 use App\Console\Commands\CareerImportActorsDisplayAsset;
 use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\CareerImportDetailReadyReplacementAuthority;
+use App\Console\Commands\CareerImportDetailReadyReplacementAuthoritySource;
 use App\Console\Commands\CareerImportOccupationDirectoryDrafts;
 use App\Console\Commands\CareerImportOccupationDirectoryDryRun;
 use App\Console\Commands\CareerImportSelectedDisplayAssets;
@@ -223,6 +224,7 @@ class Kernel extends ConsoleKernel
         CareerImportActorsDisplayAsset::class,
         CareerImportAuthorityWave::class,
         CareerImportDetailReadyReplacementAuthority::class,
+        CareerImportDetailReadyReplacementAuthoritySource::class,
         CareerImportOccupationDirectoryDrafts::class,
         CareerImportOccupationDirectoryDryRun::class,
         CareerImportSelectedDisplayAssets::class,
