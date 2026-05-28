@@ -31286,10 +31286,10 @@
     "branch": "codex/detail-ready-1046-rollout-apply-preflight-01",
     "base": "main",
     "title": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 production preflight for clean 1046 rollout apply",
-    "status": "committed",
+    "status": "pr_open",
     "depends_on": [],
     "commit_sha": "67e95aac7a4344a407c5c1b563c4131a27d2d7aa",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1748",
     "checks": [
       {
         "command": "ssh \"$API_SSH_ALIAS\" cat /var/www/fap-api/current/REVISION and artisan command discovery",
@@ -31361,6 +31361,11 @@
         "status": "committed",
         "at": "2026-05-28T14:18:46Z",
         "summary": "Committed scoped blocked preflight report and focused test."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-28T14:19:43Z",
+        "summary": "Opened PR #1748 for the blocked backend-deploy-required 1046 rollout apply preflight report."
       }
     ],
     "scope_validation": {
