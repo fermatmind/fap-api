@@ -1,0 +1,140 @@
+{
+  "schema_version": "detail_ready_1046_rollout_apply_preflight.v1",
+  "task": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01",
+  "generated_at": "2026-05-28T14:15:26Z",
+  "final_decision": "blocked_backend_deploy_required",
+  "current_public_detail_count": 30,
+  "clean_delta_count": 1016,
+  "target_public_total": 1046,
+  "production_backend_sha": "16c01f81b60bb9a5452a867c6c57a78aa77e57bc",
+  "required_backend_sha": "6716bf50c3cd22691d4609434f8a2b12442b2c8a",
+  "required_sha_present": false,
+  "required_pr": "https://github.com/fermatmind/fap-api/pull/1747",
+  "required_merge_commit_on_main": true,
+  "rollout_runtime_command_present": true,
+  "rollout_runtime_command": "career:execute-canonical-rollout-batch",
+  "rollout_runtime_command_scope": {
+    "supports_dry_run": true,
+    "supports_apply": true,
+    "official_command_discovered_in_production": true,
+    "dry_run_filesystem_audit_write_observed_in_source": true,
+    "dry_run_filesystem_audit_write_path": "storage/app/private/career_canonical_rollout_batch_executions",
+    "no_write_production_dry_run_requires_backend_deploy_or_no_audit_mode_review": true
+  },
+  "dry_run_performed": false,
+  "dry_run_ok": false,
+  "dry_run_not_performed_reasons": [
+    "production_backend_sha_does_not_include_required_manifest_pr_1747",
+    "current_command_dry_run_writes_audit_artifact_file_and_task_forbids_production_write"
+  ],
+  "would_promote_count": null,
+  "would_create_count": null,
+  "current_public_detail_after": null,
+  "excluded_manual_hold_slugs": [
+    "software-developers"
+  ],
+  "excluded_conflict_slugs": [
+    "digital-forensics-analysts"
+  ],
+  "excluded_already_indexable_replacement_slugs": [
+    "computer-occupations-all-other"
+  ],
+  "software_developers_excluded": true,
+  "digital_forensics_analysts_excluded": true,
+  "computer_occupations_all_other_excluded": true,
+  "manifest_verification": {
+    "manifest_path": "backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json",
+    "manifest_safe": true,
+    "apply_allowed": false,
+    "rollout_apply_allowed": false,
+    "delta_slugs_count": 1016,
+    "forbidden_slug_presence_after_exclusion": {
+      "software-developers": false,
+      "digital-forensics-analysts": false,
+      "computer-occupations-all-other": false
+    }
+  },
+  "production_read_only_audit": {
+    "command": "php artisan career:audit-detail-ready-1048-candidates --json",
+    "performed": true,
+    "writes_database": false,
+    "counts": {
+      "current_public_detail": 30,
+      "docx_ready": 342,
+      "display_asset_ready": 793,
+      "compiled_snapshot_ready": 6,
+      "union_detail_ready": 1048,
+      "ready_not_currently_public": 1018,
+      "manual_hold_ready": 1,
+      "raw_occupation_assets": 2786,
+      "career_job_rows": 378,
+      "display_asset_rows": 793
+    },
+    "manual_hold": {
+      "policy": "do_not_force_enable_without_explicit_manual_hold_release_decision",
+      "configured_slugs": [
+        "software-developers"
+      ],
+      "ready_slugs": [
+        "software-developers"
+      ]
+    }
+  },
+  "api_safety_precheck": {
+    "en_career_jobs_page": {
+      "status": 200,
+      "final_url": "https://fermatmind.com/en/career/jobs"
+    },
+    "zh_career_jobs_page": {
+      "status": 200,
+      "final_url": "https://fermatmind.com/zh/career/jobs"
+    },
+    "current_public_detail_count_before_apply": 30,
+    "software_developers_public_pages": {
+      "en_status": 404,
+      "zh_status": 404,
+      "noindex_observed": true
+    },
+    "digital_forensics_analysts_public_pages": {
+      "en_status": 404,
+      "zh_status": 404,
+      "noindex_observed": true
+    },
+    "sitemap_career_detail_occurrences": 0,
+    "llms_career_detail_occurrences": 0,
+    "llms_full_career_detail_occurrences": 0,
+    "sample_forbidden_career_detail_hits": [],
+    "api_direct_curl_status": "not_used_for_decision_due_local_curl_tls_code_35; public pages and production audit used instead"
+  },
+  "claim_boundary_precheck": {
+    "rollout_scope_only_publication_projection_state": true,
+    "adds_best_career_claims": false,
+    "adds_hiring_fit_claims": false,
+    "adds_salary_guarantee_claims": false,
+    "adds_career_success_guarantee_claims": false,
+    "adds_psychometric_determines_career_claims": false,
+    "expands_riasec_big_five_career_recommendation_semantics": false
+  },
+  "search_channel_safety": {
+    "queue_write_performed": false,
+    "live_submission_performed": false,
+    "external_search_api_call_performed": false,
+    "gates_changed": false,
+    "queue_item_2_3_checked": false,
+    "queue_item_2_3_check_reason": "not checked because task forbids production writes/user data access and no Search Channel command was run"
+  },
+  "runtime_promotion_performed": false,
+  "production_write_performed": false,
+  "database_write_performed": false,
+  "cms_mutation_performed": false,
+  "deploy_performed": false,
+  "sitemap_llms_footer_exposure_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "external_search_api_call_performed": false,
+  "fap_web_change_performed": false,
+  "software_developers_manual_hold_unchanged": true,
+  "digital_forensics_analysts_used": false,
+  "replacement_search_performed": false,
+  "next_task": "DEPLOY-READINESS | Deploy fap-api PR #1747 before DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 can pass"
+}

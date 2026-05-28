@@ -15699,3 +15699,46 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 explicit approval required before any apply
+
+  - id: DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01
+    repo: fap-api
+    branch: codex/detail-ready-1046-rollout-apply-preflight-01
+    base: main
+    title: "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 production preflight for clean 1046 rollout apply"
+    train_scope: career_detail_ready_1046_rollout_apply_preflight
+    risk_level: p1_career_runtime_publication_gate
+    allowed_paths:
+      - backend/docs/seo/detail-ready-1046-rollout-apply-preflight-01.md
+      - backend/docs/seo/generated/detail-ready-1046-rollout-apply-preflight-01.v1.json
+      - backend/tests/Feature/SeoIntel/DetailReady1046RolloutApplyPreflight01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Perform a read-only/no-write preflight for a future explicit 1046 career detail rollout apply.
+      - Verify production backend revision, 1046 manifest, official rollout command availability, API safety, claim boundary, and Search Channel safety.
+      - Produce an exact future apply approval phrase only if preflight is safe.
+      - Do not write production, mutate DB/CMS, promote runtime, deploy, expose sitemap/llms/footer, enqueue Search Channel, submit URLs, call external search APIs, change fap-web, release software-developers, use digital-forensics-analysts, search for another replacement, read raw logs, or access production user data.
+    validation:
+      - cd backend && php artisan test --filter=DetailReady1046RolloutApplyPreflight01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/detail-ready-1046-rollout-apply-preflight-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: DEPLOY-READINESS | Deploy fap-api PR #1747 before rerunning apply preflight
