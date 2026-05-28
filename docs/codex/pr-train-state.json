@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-29T01:25:43+08:00",
+  "updated_at": "2026-05-29T01:31:37+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -28018,13 +28018,13 @@
       "repo": "fap-api",
       "branch": "codex/result-email-gate-policy-02",
       "base": "main",
-      "status": "local_validation_passed",
+      "status": "pr_opened",
       "title": "RESULT-EMAIL-GATE-POLICY-02 relax result email gate policy",
       "depends_on": [
         "EMAIL-DIRECTMAIL-SMTP-READINESS-01"
       ],
-      "commit_sha": "71bfa940427af841ee950778d45a711659d9315e",
-      "pr_url": null,
+      "commit_sha": "f3625219f256214b4e4d50712a1742a1ae3bb7c5",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1751",
       "checks": {
         "manifest_registration": {
           "status": "pass",
@@ -28098,6 +28098,11 @@
           "at": "2026-05-29T01:25:43+08:00",
           "status": "local_validation_passed",
           "summary": "ResultEmailGatedRead focused test, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, and ci_verify_mbti passed locally."
+        },
+        {
+          "at": "2026-05-29T01:31:37+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1751 after local validation; waiting for GitHub required checks."
         }
       ]
     }
