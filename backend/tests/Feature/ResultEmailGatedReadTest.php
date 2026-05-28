@@ -124,7 +124,7 @@ final class ResultEmailGatedReadTest extends TestCase
         $response->assertJsonPath('attempt_id', $attemptId);
     }
 
-    public function test_result_access_token_does_not_grant_result_access_without_matching_actor(): void
+    public function test_result_access_token_grants_read_only_result_access_without_matching_actor(): void
     {
         config()->set('fap.features.email_first_result_access', true);
 
@@ -136,8 +136,10 @@ final class ResultEmailGatedReadTest extends TestCase
             'X-Result-Access-Token' => $token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
 
-        $response->assertStatus(404);
-        $response->assertJsonPath('error_code', 'RESOURCE_NOT_FOUND');
+        $response->assertOk();
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('type_code', 'INTJ-A');
     }
 
     public function test_result_access_token_grants_read_only_result_access_for_matching_actor(): void

@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-29T01:39:31+08:00",
+  "updated_at": "2026-05-29T02:27:14+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -9437,7 +9437,7 @@
       "depends_on": [
         "SEO-DASH-04A"
       ],
-      "status": "github_checks_passed_ready_to_merge",
+      "status": "merged",
       "train_scope": "search_intelligence_baidu_indexnow_disabled_collectors",
       "risk_level": "medium_disabled_search_channel_schema",
       "title": "feat(seo-intel): add Baidu and IndexNow collector foundations",
@@ -21485,10 +21485,10 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "merge_commit": null,
+      "merged_at": "2026-05-28T17:47:03Z",
+      "merge_commit": "24cd5c83c8e55bb714725965211571dac59438e0",
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "local_cleanup_executed": true,
       "next_task": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01",
       "sidecars": [],
       "transitions": [
@@ -26061,7 +26061,7 @@
     "OPS-ADMIN-UI-01": {
       "repo": "fap-api",
       "branch": "codex/ops-admin-ui-01-table-toolbar",
-      "status": "in_progress",
+      "status": "pr_opened",
       "depends_on": [],
       "commit_sha": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1750",
@@ -26117,8 +26117,8 @@
       "depends_on": [
         "OPS-ADMIN-UI-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "81a320a567962bddca2920134b1a9a83c0ac6563",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1752",
       "checks": {
         "local": {
           "ops_shell_and_i18n": "passed: cd backend && php artisan test tests/Feature/Ops/OpsShellPolishTest.php tests/Feature/Ops/OpsCustomPagesI18nContractTest.php --no-ansi (21 tests, 246 assertions)",
@@ -28112,6 +28112,121 @@
           "at": "2026-05-29T01:39:31+08:00",
           "status": "github_checks_passed_ready_to_merge",
           "summary": "GitHub checks passed and mergeStateStatus was CLEAN for PR #1751."
+        },
+        {
+          "at": "2026-05-29T01:55:00+08:00",
+          "status": "merged_reconciled_before_result_email_access_link_03",
+          "summary": "Reconciled PR #1751 as merged with origin/main containing squash merge 24cd5c83c8e55bb714725965211571dac59438e0 before starting RESULT-EMAIL-ACCESS-LINK-03; remote branch still present."
+        }
+      ]
+    },
+    "RESULT-EMAIL-ACCESS-LINK-03": {
+      "id": "RESULT-EMAIL-ACCESS-LINK-03",
+      "repo": "fap-api",
+      "branch": "codex/result-email-access-link-03",
+      "base": "main",
+      "status": "in_progress",
+      "title": "RESULT-EMAIL-ACCESS-LINK-03 send result access links by email",
+      "depends_on": [
+        "EMAIL-DIRECTMAIL-SMTP-READINESS-01",
+        "RESULT-EMAIL-GATE-POLICY-02"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User requested RESULT-EMAIL-ACCESS-LINK-03 to send DirectMail result-page access links after email binding while reusing existing result_access_token."
+        },
+        "dependency_email_directmail_smtp_readiness_01": {
+          "status": "pass",
+          "evidence": "EMAIL-DIRECTMAIL-SMTP-READINESS-01 merged as PR #1750 with merge commit 1f8b4ac77215020b17da5da1e1a0d531ed074ba1."
+        },
+        "dependency_result_email_gate_policy_02": {
+          "status": "pass",
+          "evidence": "RESULT-EMAIL-GATE-POLICY-02 merged as PR #1751 with merge commit 24cd5c83c8e55bb714725965211571dac59438e0."
+        },
+        "scope_boundaries": {
+          "status": "pass",
+          "evidence": "Backend email bind/outbox/result-access-token flow only; no production env write, real email send, deploy, CMS/content mutation, URL submission, Search Channel action, or fap-web change in this PR."
+        },
+        "php_artisan_test_filter_AttemptEmailBinding": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan test --filter=AttemptEmailBinding --no-ansi"
+        },
+        "php_artisan_test_filter_ResultEmailGatedRead": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan test --filter=ResultEmailGatedRead --no-ansi"
+        },
+        "php_artisan_test_filter_ResultAccessLinkTemplateDelivery": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan test --filter=ResultAccessLinkTemplateDelivery --no-ansi"
+        },
+        "php_artisan_route_list": {
+          "status": "pass",
+          "evidence": "cd backend && php artisan route:list --no-ansi"
+        },
+        "pint_test": {
+          "status": "pass",
+          "evidence": "cd backend && vendor/bin/pint --test"
+        },
+        "composer_validate_strict": {
+          "status": "pass",
+          "evidence": "cd backend && composer validate --strict"
+        },
+        "composer_audit_locked": {
+          "status": "pass",
+          "evidence": "cd backend && composer audit --locked --no-interaction --ignore-unreachable"
+        },
+        "json_yaml_parse": {
+          "status": "pass",
+          "evidence": "pr-train-state.json parsed with python3 -m json.tool; pr-train.yaml parsed with yaml.safe_load."
+        },
+        "diff_hygiene": {
+          "status": "pass",
+          "evidence": "git diff --check"
+        },
+        "ci_verify_mbti": {
+          "status": "pass",
+          "evidence": "cd backend && bash scripts/ci_verify_mbti.sh"
+        },
+        "scope_cleanup": {
+          "status": "pass",
+          "evidence": "Reverted generated BIG5_OCEAN compiled artifact diffs produced by ci_verify_mbti.sh; remaining diff is confined to current PR scope."
+        },
+        "github_pr": {
+          "status": "pending",
+          "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1752 from codex/result-email-access-link-03."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "merge_commit": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": "deploy-readiness after merge",
+      "sidecars": [
+        {
+          "id": "fap-web-result-email-access-copy-followup",
+          "status": "deferred_external_scope",
+          "summary": "fap-web UI copy/UX for optional result recovery remains outside this backend PR because the current fap-web worktree has an unrelated active dirty branch."
+        }
+      ],
+      "transitions": [
+        {
+          "at": "2026-05-29T01:55:00+08:00",
+          "status": "in_progress",
+          "summary": "Started backend RESULT-EMAIL-ACCESS-LINK-03 to queue DirectMail-ready result access links after owned public email binding using the existing result_access_token service."
+        },
+        {
+          "at": "2026-05-29T02:18:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Focused email binding, result token read, and result access link template tests passed; route list, Pint, composer validate/audit, JSON/YAML parse, diff check, and ci_verify_mbti passed locally."
+        },
+        {
+          "at": "2026-05-29T02:27:14+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1752 for RESULT-EMAIL-ACCESS-LINK-03 and queued GitHub checks."
         }
       ]
     }

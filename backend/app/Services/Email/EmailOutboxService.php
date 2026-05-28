@@ -2,6 +2,7 @@
 
 namespace App\Services\Email;
 
+use App\Models\AttemptEmailBinding;
 use App\Models\EmailPreference;
 use App\Models\EmailSubscriber;
 use App\Support\PiiCipher;
@@ -14,6 +15,8 @@ use Illuminate\Support\Str;
 
 class EmailOutboxService
 {
+    private const RESULT_ACCESS_LINK_TEMPLATE = 'result_access_link';
+
     public function __construct(
         private readonly PiiCipher $piiCipher,
         private readonly PiiReadFallbackMonitor $fallbackMonitor,
@@ -396,6 +399,153 @@ class EmailOutboxService
         DB::table('email_outbox')->insert($row);
 
         return ['ok' => true];
+    }
+
+    /**
+     * Queue an optional result recovery access link email. The token is stored only in the encrypted payload.
+     *
+     * @param  array{token:string,expires_at:string}  $token
+     * @param  array<string,mixed>  $context
+     * @return array{ok:bool,queued:bool,error?:string,reason?:string}
+     */
+    public function queueResultAccessLink(
+        AttemptEmailBinding $binding,
+        string $email,
+        array $token,
+        string $resultUrl,
+        ?string $preferredLocale = null,
+        array $context = []
+    ): array {
+        if (! \App\Support\SchemaBaseline::hasTable('email_outbox')) {
+            return ['ok' => false, 'queued' => false, 'error' => 'TABLE_MISSING'];
+        }
+
+        $email = $this->normalizeEmailAddress($email);
+        $attemptId = $this->trimOrNull((string) ($binding->attempt_id ?? ''));
+        $resultAccessToken = $this->trimOrNull((string) ($token['token'] ?? ''));
+        $resultAccessUrl = $this->trimOrNull($resultUrl);
+        if ($email === null || $attemptId === null || $resultAccessToken === null || $resultAccessUrl === null) {
+            return ['ok' => false, 'queued' => false, 'error' => 'INVALID_INPUT'];
+        }
+
+        $emailHash = $this->piiCipher->emailHash($email);
+        $emailEnc = $this->piiCipher->encrypt($email);
+        $locale = $this->resolveRequestedLocale($attemptId, $preferredLocale);
+        $subject = $this->defaultSubjectForTemplate(self::RESULT_ACCESS_LINK_TEMPLATE, $locale);
+        $outboxUserId = $this->resultAccessLinkOutboxUserId($binding);
+        $lifecycleContext = $this->buildLifecyclePayloadContext($email, null, [
+            'surface' => $context['surface'] ?? 'result_access_link',
+            'locale' => $locale,
+        ]);
+        $normalizedAttribution = is_array($lifecycleContext['attribution'] ?? null)
+            ? $lifecycleContext['attribution']
+            : [];
+
+        $payload = [
+            'attempt_id' => $attemptId,
+            'order_no' => null,
+            'result_access_url' => $resultAccessUrl,
+            'result_access_token' => $resultAccessToken,
+            'result_access_token_expires_at' => (string) ($token['expires_at'] ?? ''),
+            'locale' => $locale,
+            'template_key' => self::RESULT_ACCESS_LINK_TEMPLATE,
+            'to_email' => $email,
+            'subject' => $subject,
+            'subscriber_status' => (string) ($lifecycleContext['subscriber_status'] ?? 'active'),
+            'marketing_consent' => false,
+            'transactional_recovery_enabled' => (bool) ($lifecycleContext['transactional_recovery_enabled'] ?? true),
+            'surface' => 'result_access_link',
+            'attribution' => $this->payloadAttribution($normalizedAttribution),
+        ];
+        $payloadJson = $this->encodePayloadJson($this->sanitizePayloadForJson($payload));
+        $payloadEnc = $this->encodePayloadEncrypted($payload);
+
+        $pending = DB::table('email_outbox')
+            ->where('user_id', $outboxUserId)
+            ->where('status', 'pending')
+            ->where(function ($builder): void {
+                if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
+                    $builder->where('template_key', self::RESULT_ACCESS_LINK_TEMPLATE);
+
+                    return;
+                }
+
+                $builder->where('template', self::RESULT_ACCESS_LINK_TEMPLATE);
+            });
+
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')) {
+            $pending->where('attempt_id', $attemptId);
+        }
+
+        $pendingRow = $pending->orderByDesc('updated_at')->first();
+        if ($pendingRow) {
+            $update = [
+                'payload_json' => $payloadJson,
+                'claim_token_hash' => hash('sha256', self::RESULT_ACCESS_LINK_TEMPLATE.'|'.$outboxUserId.'|'.Str::uuid()->toString()),
+                'claim_expires_at' => null,
+                'updated_at' => now(),
+            ];
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email')) {
+                $update['email'] = $this->maskedLegacyEmail($emailHash);
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')) {
+                $update['attempt_id'] = $attemptId;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_hash')) {
+                $update['email_hash'] = $emailHash;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_enc')) {
+                $update['email_enc'] = $emailEnc;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_hash')) {
+                $update['to_email_hash'] = $emailHash;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_enc')) {
+                $update['to_email_enc'] = $emailEnc;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
+                $update['payload_enc'] = $payloadEnc;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_schema_version')) {
+                $update['payload_schema_version'] = 'v1';
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'key_version')) {
+                $update['key_version'] = $this->piiCipher->currentKeyVersion();
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
+                $update['locale'] = $locale;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
+                $update['template_key'] = self::RESULT_ACCESS_LINK_TEMPLATE;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
+                $update['to_email'] = $this->maskedLegacyEmail($emailHash);
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
+                $update['subject'] = $subject;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
+                $update['body_html'] = null;
+            }
+
+            DB::table('email_outbox')->where('id', $pendingRow->id)->update($update);
+
+            return ['ok' => true, 'queued' => true];
+        }
+
+        DB::table('email_outbox')->insert($this->buildLifecycleOutboxRow(
+            $outboxUserId,
+            self::RESULT_ACCESS_LINK_TEMPLATE,
+            $emailHash,
+            $emailEnc,
+            $attemptId,
+            $locale,
+            $subject,
+            $payloadJson,
+            $payloadEnc
+        ));
+
+        return ['ok' => true, 'queued' => true];
     }
 
     /**
@@ -893,6 +1043,7 @@ class EmailOutboxService
             'payload_json' => $this->encodePayloadJson($this->sanitizePayloadForJson($payload)),
             'updated_at' => $sentAt,
         ];
+        $persistBodyHtml = $this->shouldPersistBodyHtml($templateKey);
 
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
             $update['payload_enc'] = $this->encodePayloadEncrypted($payload);
@@ -910,7 +1061,7 @@ class EmailOutboxService
             $update['subject'] = $subject;
         }
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
-            $update['body_html'] = $bodyHtml !== '' ? $bodyHtml : null;
+            $update['body_html'] = $persistBodyHtml && $bodyHtml !== '' ? $bodyHtml : null;
         }
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'sent_at')) {
             $update['sent_at'] = $sentAt;
@@ -952,6 +1103,7 @@ class EmailOutboxService
             'payload_json' => $this->encodePayloadJson($this->sanitizePayloadForJson($payload)),
             'updated_at' => now(),
         ];
+        $persistBodyHtml = $this->shouldPersistBodyHtml($templateKey);
 
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
             $update['payload_enc'] = $this->encodePayloadEncrypted($payload);
@@ -966,7 +1118,7 @@ class EmailOutboxService
             $update['subject'] = $subject;
         }
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
-            $update['body_html'] = $bodyHtml !== '' ? $bodyHtml : null;
+            $update['body_html'] = $persistBodyHtml && $bodyHtml !== '' ? $bodyHtml : null;
         }
 
         DB::table('email_outbox')
@@ -1003,6 +1155,7 @@ class EmailOutboxService
             'payload_json' => $this->encodePayloadJson($this->sanitizePayloadForJson($payload)),
             'updated_at' => now(),
         ];
+        $persistBodyHtml = $this->shouldPersistBodyHtml($templateKey);
 
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
             $update['payload_enc'] = $this->encodePayloadEncrypted($payload);
@@ -1017,7 +1170,7 @@ class EmailOutboxService
             $update['subject'] = $subject;
         }
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
-            $update['body_html'] = $bodyHtml !== '' ? $bodyHtml : null;
+            $update['body_html'] = $persistBodyHtml && $bodyHtml !== '' ? $bodyHtml : null;
         }
 
         DB::table('email_outbox')
@@ -1443,6 +1596,11 @@ class EmailOutboxService
         }
 
         $data = $this->buildTemplateData((object) [], $payload, $locale, $templateKey, $recipientEmail, []);
+        $resultAccessUrl = trim((string) ($data['result_access_url'] ?? ''));
+        if ($resultAccessUrl !== '') {
+            return $resultAccessUrl;
+        }
+
         $reportUrl = trim((string) ($data['report_url'] ?? ''));
         if ($reportUrl !== '') {
             return $reportUrl;
@@ -1482,6 +1640,7 @@ class EmailOutboxService
             'report_reactivation',
             'welcome',
             'onboarding',
+            self::RESULT_ACCESS_LINK_TEMPLATE,
         ];
         if (! in_array($templateKey, $supported, true)) {
             return '';
@@ -1565,6 +1724,7 @@ class EmailOutboxService
         $attemptId = trim((string) ($payload['attempt_id'] ?? ''));
         $reportUrl = $this->absoluteUrl((string) ($payload['report_url'] ?? ''), $backendBaseUrl);
         $reportPdfUrl = $this->absoluteUrl((string) ($payload['report_pdf_url'] ?? ''), $backendBaseUrl);
+        $resultAccessUrl = $this->absoluteUrl((string) ($payload['result_access_url'] ?? ''), $frontendBaseUrl);
 
         $tokenContext = [
             'locale' => $locale,
@@ -1604,6 +1764,10 @@ class EmailOutboxService
             'report_url' => $reportUrl,
             'reportPdfUrl' => $reportPdfUrl,
             'report_pdf_url' => $reportPdfUrl,
+            'resultAccessUrl' => $resultAccessUrl,
+            'result_access_url' => $resultAccessUrl,
+            'resultAccessTokenExpiresAt' => trim((string) ($payload['result_access_token_expires_at'] ?? '')),
+            'result_access_token_expires_at' => trim((string) ($payload['result_access_token_expires_at'] ?? '')),
             'orderLookupUrl' => $orderLookupUrl,
             'order_lookup_url' => $orderLookupUrl,
             'emailPreferencesUrl' => $emailPreferencesUrl,
@@ -1809,10 +1973,17 @@ class EmailOutboxService
             $payload['email'],
             $payload['to_email'],
             $payload['claim_token'],
-            $payload['claim_url']
+            $payload['claim_url'],
+            $payload['result_access_token'],
+            $payload['result_access_url']
         );
 
         return $payload;
+    }
+
+    private function shouldPersistBodyHtml(string $templateKey): bool
+    {
+        return $templateKey !== self::RESULT_ACCESS_LINK_TEMPLATE;
     }
 
     /**
@@ -2046,6 +2217,18 @@ class EmailOutboxService
         return $this->piiCipher->legacyEmailPlaceholder($emailHash);
     }
 
+    private function resultAccessLinkOutboxUserId(AttemptEmailBinding $binding): string
+    {
+        $bindingId = $this->trimOrNull((string) $binding->getKey());
+        if ($bindingId !== null) {
+            return mb_substr('result_binding_'.$bindingId, 0, 64, 'UTF-8');
+        }
+
+        $attemptId = $this->trimOrNull((string) ($binding->attempt_id ?? '')) ?? (string) Str::uuid();
+
+        return mb_substr('result_attempt_'.$attemptId, 0, 64, 'UTF-8');
+    }
+
     /**
      * @param  array<string,mixed>  $payload
      */
@@ -2117,6 +2300,9 @@ class EmailOutboxService
         $lang = strtolower((string) explode('-', str_replace('_', '-', $locale))[0]);
         if ($templateKey === 'report_claim') {
             return $lang === 'zh' ? '你的报告链接已准备好' : 'Your report link is ready';
+        }
+        if ($templateKey === self::RESULT_ACCESS_LINK_TEMPLATE) {
+            return $lang === 'zh' ? '你的结果访问链接' : 'Your result access link';
         }
         if ($templateKey === 'payment_success') {
             return $lang === 'zh' ? '支付成功与报告交付通知' : 'Payment successful and report delivered';
