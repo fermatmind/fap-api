@@ -9437,7 +9437,7 @@
       "depends_on": [
         "SEO-DASH-04A"
       ],
-      "status": "local_validation_passed",
+      "status": "pr_opened",
       "train_scope": "search_intelligence_baidu_indexnow_disabled_collectors",
       "risk_level": "medium_disabled_search_channel_schema",
       "title": "feat(seo-intel): add Baidu and IndexNow collector foundations",
@@ -19869,8 +19869,8 @@
       "depends_on": [
         "GLOBAL-EN-ZH-PARITY-FINAL-VERIFY-01"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "2b830aca",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1737",
       "checks": {
         "manifest_state_parse": "passed",
         "focused_test": "passed",
@@ -20954,6 +20954,107 @@
           "at": "2026-05-28T00:31:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1735 after local validation passed."
+        }
+      ]
+    },
+    "GLOBAL-CAREER-RUNTIME-COHORT-AND-DETAIL-REPAIR-01": {
+      "id": "GLOBAL-CAREER-RUNTIME-COHORT-AND-DETAIL-REPAIR-01",
+      "repo": "fap-api",
+      "branch": "codex/global-career-runtime-cohort-and-detail-repair-01",
+      "base": "main",
+      "status": "local_validation_passed",
+      "title": "GLOBAL-CAREER-RUNTIME-COHORT-AND-DETAIL-REPAIR-01 career runtime cohort and detail diagnosis",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User explicitly authorized GLOBAL-CAREER-RUNTIME-COHORT-AND-DETAIL-REPAIR-01 manifest/state updates for the current PR only."
+        },
+        "runtime_diagnosis": {
+          "status": "pass",
+          "evidence": "Production runtime shows 30 active career index items, sampled non-cohort slugs fail closed with backend 404, current cohort detail APIs return 200, and sitemap/llms expose zero career job detail URLs."
+        },
+        "authority_mismatch": {
+          "status": "needs_controlled_follow_up",
+          "evidence": "Backend detail seo_contract can report index,follow for current cohort slugs, while production frontend renders noindex for 12 EN and 30 ZH current-cohort detail pages."
+        },
+        "focused_test": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=GlobalCareerRuntimeCohortAndDetailRepair01 --no-ansi",
+          "evidence": "4 tests passed, 40 assertions."
+        },
+        "local_validation": {
+          "status": "pass",
+          "commands": [
+            "cd backend && php artisan test --filter=GlobalCareerRuntimeCohortAndDetailRepair01 --no-ansi",
+            "cd backend && php artisan route:list --no-ansi",
+            "cd backend && vendor/bin/pint --test",
+            "cd backend && composer validate --strict",
+            "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+            "python3 -m json.tool backend/docs/seo/generated/global-career-runtime-cohort-and-detail-repair-01.v1.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "YAML parse docs/codex/pr-train.yaml",
+            "git diff --check",
+            "git diff --cached --check",
+            "git -C /Users/rainie/Desktop/GitHub/fap-web status --short"
+          ],
+          "evidence": "Focused test, route:list, Pint, composer validate/audit, JSON/YAML parse, diff checks, and fap-web reference clean status passed locally."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1737",
+          "evidence": "GitHub checks passed for hygiene, supply-chain, Semgrep, verify-mbti-legacy, and verify-mbti-v2; mergeStateStatus is CLEAN."
+        }
+      },
+      "scope": {
+        "allowed_files": [
+          "backend/docs/seo/global-career-runtime-cohort-and-detail-repair-01.md",
+          "backend/docs/seo/generated/global-career-runtime-cohort-and-detail-repair-01.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalCareerRuntimeCohortAndDetailRepair01Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "api_runtime_change": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "broad_pseo_generation": false,
+        "fap_web_modified": false,
+        "frontend_fallback_authority": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": "GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01",
+      "events": [
+        {
+          "at": "2026-05-28T09:39:34+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered current career runtime cohort/detail diagnosis task after explicit user authorization."
+        },
+        {
+          "at": "2026-05-28T09:39:34+08:00",
+          "status": "implementation_in_progress",
+          "summary": "Added scoped diagnosis report, generated JSON, and focused test. No runtime code, CMS state, deploy state, Search Channel, URL submission, or fap-web files are modified."
+        },
+        {
+          "at": "2026-05-28T09:48:00+08:00",
+          "status": "local_validation_passed",
+          "summary": "Focused report test and common backend validation passed; fap-web reference worktree is clean."
+        },
+        {
+          "at": "2026-05-28T09:51:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1737 for current career runtime cohort/detail diagnosis."
+        },
+        {
+          "at": "2026-05-28T09:58:00+08:00",
+          "status": "github_checks_passed",
+          "summary": "GitHub checks passed and mergeStateStatus is CLEAN for PR #1737."
         }
       ]
     }
