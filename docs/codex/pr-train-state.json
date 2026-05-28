@@ -31382,10 +31382,10 @@
     "branch": "codex/detail-ready-1046-rollout-no-audit-dry-run-01",
     "base": "main",
     "title": "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01 no-write career rollout dry-run",
-    "status": "committed",
+    "status": "pr_open",
     "depends_on": [],
-    "commit_sha": "a4caa759b45671c7984d7b4ed91448582f0082df",
-    "pr_url": null,
+    "commit_sha": "09ec7f599b05d7d555ad186af81633010f5c47f3",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1749",
     "checks": [
       {
         "command": "manifest/state authorization",
@@ -31447,6 +31447,11 @@
         "status": "committed",
         "at": "2026-05-28T23:01:01+08:00",
         "summary": "Committed scoped no-audit dry-run implementation."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-28T23:04:00+08:00",
+        "summary": "Opened PR #1749 for dry-run-only --no-audit-write support."
       }
     ],
     "scope_validation": {
