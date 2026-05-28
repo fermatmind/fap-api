@@ -1,0 +1,116 @@
+{
+  "schema_version": "detail_ready_1048_replacement_authority_import.v1",
+  "task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_IMPORT-01",
+  "generated_at": "2026-05-28T17:22:41+08:00",
+  "final_decision": "replacement_authority_import_package_ready_for_human_review",
+  "source_context": {
+    "previous_dry_run_pr": "https://github.com/fermatmind/fap-api/pull/1739",
+    "previous_dry_run_merge_commit": "683299199947e1495723e803b0694ba1751ceef4",
+    "current_public_detail_count": 30,
+    "existing_union_detail_ready_count": 1048,
+    "existing_ready_not_public_delta_count": 1018,
+    "manual_hold_slugs": [
+      "software-developers"
+    ],
+    "manual_hold_in_existing_delta": true,
+    "target_public_detail_total": 1048,
+    "locales": [
+      "en",
+      "zh"
+    ]
+  },
+  "replacement_candidate": {
+    "canonical_slug": "computer-occupations-all-other",
+    "occupation_id_observed": "019da904-3dbb-723b-ace7-532fb069b486",
+    "title_en": "Computer Occupations, All Other",
+    "title_zh": "计算机",
+    "authority_basis": "Existing production occupation row with O*NET-SOC 2019 crosswalk observed by read-only scan.",
+    "existing_crosswalks_observed": [
+      {
+        "source_system": "onet_soc_2019",
+        "source_code": "15-1299.00",
+        "source_title": "Computer Occupations, All Other",
+        "mapping_type": "directory_candidate",
+        "confidence_score": 0.5
+      }
+    ],
+    "missing_authority_before_import": [
+      "us_soc crosswalk row",
+      "career_job_public_display asset with display.surface.v1/v4.2 and 24 component order",
+      "human review of bilingual display copy before import"
+    ],
+    "why_selected": [
+      "Not currently in the detail_ready_1048 union.",
+      "Not a manual-hold slug.",
+      "Not a CN proxy slug.",
+      "Has a stable O*NET-SOC 2019 code that can be paired with a matching US SOC source code for review.",
+      "Keeps software-developers on manual hold while allowing a future clean 1018 delta after controlled import."
+    ]
+  },
+  "replacement_asset_plan": {
+    "package_path": "backend/docs/seo/import-packages/detail-ready-1048-replacement-authority-import-01.import.v1.json",
+    "package_type": "career_detail_ready_replacement_authority_import",
+    "runtime_authority_after_import": [
+      "occupation_crosswalks.us_soc",
+      "career_job_display_assets.career_job_public_display"
+    ],
+    "display_surface_contract": {
+      "surface_version": "display.surface.v1",
+      "asset_version": "v4.2",
+      "template_version": "v4.2",
+      "asset_type": "career_job_public_display",
+      "asset_role": "formal_pilot_master",
+      "status_after_human_review": "ready_for_pilot",
+      "component_order_count": 24,
+      "requires_page_payload_zh": true,
+      "requires_page_payload_en": true
+    },
+    "claim_boundary": {
+      "no_precise_career_recommendation": true,
+      "no_best_career_claim": true,
+      "no_hiring_fit_claim": true,
+      "no_job_suitability_guarantee": true,
+      "no_salary_guarantee": true,
+      "no_career_success_prediction": true,
+      "occupation_information_only": true,
+      "decision_support_only": true
+    }
+  },
+  "post_import_expected_counts": {
+    "current_public_detail_count": 30,
+    "existing_union_detail_ready_count": 1048,
+    "replacement_added_to_union_after_import": 1,
+    "manual_hold_excluded_from_clean_manifest": 1,
+    "clean_union_excluding_manual_hold": 1048,
+    "clean_ready_not_public_delta_count": 1018,
+    "expected_locale_rows_for_clean_delta": 2036
+  },
+  "gates_before_next_manifest": {
+    "human_review_required": true,
+    "controlled_import_required": true,
+    "production_db_write_requires_future_explicit_approval": true,
+    "rerun_authority_scan_after_import": true,
+    "regenerate_candidate_prep_after_import": true,
+    "software_developers_must_remain_manual_hold": true,
+    "clean_manifest_must_exclude_manual_hold_slugs": true
+  },
+  "exposure_policy": {
+    "sitemap_eligible_in_this_pr": false,
+    "llms_eligible_in_this_pr": false,
+    "footer_eligible_in_this_pr": false,
+    "search_channel_eligible_in_this_pr": false,
+    "runtime_public_in_this_pr": false,
+    "draft_or_import_package_exposed": false
+  },
+  "no_cms_mutation": true,
+  "no_database_write": true,
+  "no_runtime_promotion": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_frontend_fallback_authority": true,
+  "no_pseo_generation": true,
+  "next_task": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01"
+}
