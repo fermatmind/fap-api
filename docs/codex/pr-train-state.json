@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-28T00:31:00+08:00",
+  "updated_at": "2026-05-28T10:39:28+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -20962,10 +20962,10 @@
       "repo": "fap-api",
       "branch": "codex/global-career-runtime-cohort-and-detail-repair-01",
       "base": "main",
-      "status": "local_validation_passed",
+      "status": "merged",
       "title": "GLOBAL-CAREER-RUNTIME-COHORT-AND-DETAIL-REPAIR-01 career runtime cohort and detail diagnosis",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "a543dfc6057765ab46788acc9d3b6944a418cf66",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1737",
       "checks": {
         "manifest_registration": {
           "status": "pass",
@@ -21005,6 +21005,10 @@
           "status": "pass",
           "pr_url": "https://github.com/fermatmind/fap-api/pull/1737",
           "evidence": "GitHub checks passed for hygiene, supply-chain, Semgrep, verify-mbti-legacy, and verify-mbti-v2; mergeStateStatus is CLEAN."
+        },
+        "ledger_reconciliation": {
+          "status": "pass",
+          "evidence": "GitHub reports PR #1737 as MERGED with merge commit a543dfc6057765ab46788acc9d3b6944a418cf66; origin/main contains the merge commit. Reconciled before current authority alignment PR."
         }
       },
       "scope": {
@@ -21026,9 +21030,9 @@
         "frontend_fallback_authority": false
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-28T02:06:56Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "next_task": "GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01",
       "events": [
         {
@@ -21055,6 +21059,117 @@
           "at": "2026-05-28T09:58:00+08:00",
           "status": "github_checks_passed",
           "summary": "GitHub checks passed and mergeStateStatus is CLEAN for PR #1737."
+        },
+        {
+          "at": "2026-05-28T10:33:29+08:00",
+          "status": "ledger_reconciled_merged",
+          "summary": "Reconciled PR #1737 merged state while starting GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01."
+        }
+      ]
+    },
+    "GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01": {
+      "id": "GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01",
+      "repo": "fap-api",
+      "branch": "codex/global-career-runtime-cohort-publish-authority-alignment-01",
+      "base": "main",
+      "status": "local_validation_passed",
+      "title": "GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01 career publish authority alignment",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User explicitly authorized GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01 manifest/state updates for the current PR only."
+        },
+        "authority_alignment": {
+          "status": "pass",
+          "evidence": "Career job SEO endpoint now uses the runtime detail bundle gate; blocked runtime details fail closed even if CMS rows exist; seo_surface_v1 exposes index_eligible/index_state for frontend trust checks."
+        },
+        "php_artisan_test_global_career_runtime_cohort_publish_authority_alignment_01": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=GlobalCareerRuntimeCohortPublishAuthorityAlignment01 --no-ansi",
+          "evidence": "3 tests passed, 42 assertions."
+        },
+        "php_artisan_test_career_job_detail_api": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=CareerJobDetailApi --no-ansi",
+          "evidence": "10 tests passed, 122 assertions."
+        },
+        "php_artisan_test_career_job_seo_service": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=CareerJobSeoService --no-ansi",
+          "evidence": "4 tests passed, 13 assertions."
+        },
+        "php_artisan_route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list completed; 203 routes shown."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Pint passed across 3609 files after formatting CareerJobController.php."
+        },
+        "composer_validate": {
+          "status": "pass",
+          "command": "cd backend && composer validate --strict",
+          "evidence": "./composer.json is valid."
+        },
+        "composer_audit": {
+          "status": "pass",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/global-career-runtime-cohort-publish-authority-alignment-01.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 - <<'PY' ... yaml.safe_load(...)",
+          "evidence": "Generated report JSON, train state JSON, and train manifest YAML parse successfully."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check",
+          "evidence": "No whitespace errors."
+        }
+      },
+      "scope": {
+        "allowed_files": [
+          "backend/app/Http/Controllers/API/V0_5/Cms/CareerJobController.php",
+          "backend/docs/seo/global-career-runtime-cohort-publish-authority-alignment-01.md",
+          "backend/docs/seo/generated/global-career-runtime-cohort-publish-authority-alignment-01.v1.json",
+          "backend/tests/Feature/SeoIntel/GlobalCareerRuntimeCohortPublishAuthorityAlignment01Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "api_runtime_change": true,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "broad_pseo_generation": false,
+        "fap_web_modified": false,
+        "frontend_fallback_authority": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": "DETAIL_READY_1048_ROLLOUT_DRY_RUN-01",
+      "events": [
+        {
+          "at": "2026-05-28T10:33:29+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered current career publish authority alignment task after explicit user authorization."
+        },
+        {
+          "at": "2026-05-28T10:33:29+08:00",
+          "status": "implementation_in_progress",
+          "summary": "Aligning career job SEO authority with runtime detail bundle authority. No cohort publish, CMS mutation, deploy, Search Channel action, URL submission, or fap-web changes."
+        },
+        {
+          "at": "2026-05-28T10:39:28+08:00",
+          "status": "local_validation_passed",
+          "summary": "Scoped tests, adjacent career detail/SEO tests, route list, Pint, Composer validate/audit, JSON/YAML parse, and diff checks passed."
         }
       ]
     }

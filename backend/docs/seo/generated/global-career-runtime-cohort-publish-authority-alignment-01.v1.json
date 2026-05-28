@@ -1,0 +1,63 @@
+{
+  "schema_version": "global_career_runtime_cohort_publish_authority_alignment.v1",
+  "task": "GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01",
+  "final_decision": "career_publish_authority_alignment_completed_ready_for_1048_dry_run",
+  "summary": {
+    "problem": "Career job detail runtime authority and career job SEO authority could disagree. Detail runtime uses the career protocol bundle release gate, while /career-jobs/{slug}/seo previously used CMS career job rows directly.",
+    "fix": "The career job SEO endpoint now fails closed unless the same runtime detail bundle can be built for the requested slug and locale. It emits index_eligible/index_state in seo_surface_v1 for frontend metadata consumption.",
+    "scope": "Current 30 cohort authority alignment only. No 1018 candidate promotion, no CMS mutation, no deploy, no Search Channel action, and no URL submission."
+  },
+  "runtime_authority_alignment": {
+    "detail_api_authority": "/api/v0.5/career/jobs/{slug}",
+    "seo_authority_api": "/api/v0.5/career-jobs/{slug}/seo",
+    "shared_gate": "CareerJobDetailBundleBuilder::buildBySlug",
+    "blocked_slug_behavior": "SEO endpoint returns 404 when the runtime detail bundle is unavailable.",
+    "indexable_slug_behavior": "SEO endpoint returns seo_surface_v1.index_eligible=true and index_state=indexable only when the runtime bundle seo_contract is indexable."
+  },
+  "known_production_context_before_fix": {
+    "current_public_detail_cohort": 30,
+    "ready_not_public_delta": 1018,
+    "target_public_detail_total": 1048,
+    "manual_hold_examples": [
+      "software-developers"
+    ],
+    "observed_risk": "Some non-runtime-published career slugs could still receive a zh-CN SEO authority response from the CMS endpoint, while their detail runtime returned 404."
+  },
+  "sitemap_llms_safety": {
+    "career_detail_sitemap_exposure_changed": false,
+    "career_detail_llms_exposure_changed": false,
+    "career_detail_urls_added": 0,
+    "draft_or_candidate_urls_exposed": false,
+    "frontend_fallback_authority_used": false
+  },
+  "claim_boundary_state": {
+    "precise_career_recommendation_claim_added": false,
+    "hiring_fit_claim_added": false,
+    "salary_guarantee_claim_added": false,
+    "success_prediction_claim_added": false,
+    "career_copy_changed": false
+  },
+  "rollout_state": {
+    "cohort_publish_performed": false,
+    "detail_ready_1048_dry_run_performed": false,
+    "detail_ready_1048_apply_performed": false,
+    "future_dry_run_required": true,
+    "future_apply_requires_explicit_user_approval": true
+  },
+  "guards": {
+    "no_cms_mutation": true,
+    "no_deploy": true,
+    "no_search_channel_action": true,
+    "no_url_submission": true,
+    "no_external_search_api_call": true,
+    "no_pseo_generation": true
+  },
+  "no_cms_mutation": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_pseo_generation": true,
+  "cohort_publish_performed": false,
+  "next_task": "DETAIL_READY_1048_ROLLOUT_DRY_RUN-01"
+}

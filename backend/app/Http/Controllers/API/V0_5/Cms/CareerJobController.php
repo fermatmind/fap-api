@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Cms;
 
+use App\DTO\Career\CareerJobDetailBundle;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Models\CareerJob;
 use App\Models\CareerJobSection;
+use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
+use App\Services\Career\StructuredData\CareerStructuredDataBuilder;
 use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\CareerJobService;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
@@ -25,6 +28,8 @@ final class CareerJobController extends Controller
     public function __construct(
         private readonly CareerJobService $careerJobService,
         private readonly CareerJobSeoService $careerJobSeoService,
+        private readonly CareerJobDetailBundleBuilder $careerJobDetailBundleBuilder,
+        private readonly CareerStructuredDataBuilder $careerStructuredDataBuilder,
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
@@ -120,28 +125,121 @@ final class CareerJobController extends Controller
             return $validated;
         }
 
-        $job = $this->careerJobService->getPublicJobBySlug(
-            $slug,
-            $validated['org_id'],
-            $validated['locale'],
-        );
-
-        if (! $job instanceof CareerJob) {
-            return response()->json(['error' => 'not found'], 404);
+        $bundle = $this->careerJobDetailBundleBuilder->buildBySlug($slug, $validated['locale']);
+        if ($bundle instanceof CareerJobDetailBundle) {
+            return response()->json($this->bundleSeoAuthorityPayload($bundle, $validated['locale']));
         }
 
-        $frontendDetailAvailable = $this->careerJobSeoService->isFrontendDetailAvailable($job, $validated['locale']);
-        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
-            $this->careerJobSeoService->buildMeta($job, $validated['locale'], $frontendDetailAvailable)
-        );
-        $jsonLd = $this->careerJobSeoService->buildJsonLd($job, $validated['locale'], $frontendDetailAvailable);
-        $publicIndexable = $this->careerJobSeoService->isPublicIndexable($job, $validated['locale'], $frontendDetailAvailable);
+        // The career detail page is the public runtime authority. If the route cannot
+        // render from the same runtime gate, the SEO endpoint must fail closed too.
+        return response()->json(['error' => 'not found'], 404);
+    }
 
-        return response()->json([
+    /**
+     * @return array<string,mixed>
+     */
+    private function bundleSeoAuthorityPayload(CareerJobDetailBundle $bundle, string $locale): array
+    {
+        $seoContract = $bundle->seoContract;
+        $canonical = $this->canonicalFromSeoContract($seoContract, $bundle, $locale);
+        $title = $this->bundleTitle($bundle, $locale);
+        $description = $this->bundleDescription($bundle, $title);
+        $robots = $this->seoContractRobots($seoContract);
+        $publicIndexable = ! $this->containsNoindex($robots)
+            && (bool) ($seoContract['index_eligible'] ?? false);
+        $jsonLd = $this->careerStructuredDataBuilder->build('career_job_detail', $bundle);
+
+        $meta = PublicMediaUrlGuard::sanitizeSeoMeta([
+            'title' => $title,
+            'description' => $description,
+            'canonical' => $canonical,
+            'alternates' => [
+                'en' => '/en/career/jobs/'.rawurlencode((string) ($bundle->identity['canonical_slug'] ?? '')),
+                'zh-CN' => '/zh/career/jobs/'.rawurlencode((string) ($bundle->identity['canonical_slug'] ?? '')),
+            ],
+            'og' => [
+                'title' => $title,
+                'description' => $description,
+                'image' => null,
+                'type' => 'article',
+                'url' => $canonical,
+            ],
+            'twitter' => [
+                'card' => 'summary_large_image',
+                'title' => $title,
+                'description' => $description,
+                'image' => null,
+            ],
+            'robots' => $robots,
+        ]);
+
+        return [
             'meta' => $meta,
             'jsonld' => $jsonLd,
             'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'career_job_public_detail', $publicIndexable),
-        ]);
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $seoContract
+     */
+    private function canonicalFromSeoContract(array $seoContract, CareerJobDetailBundle $bundle, string $locale): string
+    {
+        $canonical = trim((string) ($seoContract['canonical_target'] ?? $seoContract['canonical_path'] ?? ''));
+        if ($canonical !== '') {
+            return $canonical;
+        }
+
+        $segment = $locale === 'zh-CN' ? 'zh' : 'en';
+        $slug = rawurlencode((string) ($bundle->identity['canonical_slug'] ?? ''));
+
+        return '/'.$segment.'/career/jobs/'.$slug;
+    }
+
+    private function bundleTitle(CareerJobDetailBundle $bundle, string $locale): string
+    {
+        $title = $locale === 'zh-CN'
+            ? ($bundle->titles['search_h1_zh'] ?? $bundle->titles['canonical_zh'] ?? null)
+            : ($bundle->titles['canonical_en'] ?? null);
+
+        return trim((string) ($title ?: ($bundle->identity['canonical_slug'] ?? 'Career job')));
+    }
+
+    private function bundleDescription(CareerJobDetailBundle $bundle, string $title): string
+    {
+        $summary = $bundle->truthLayer['summary'] ?? null;
+        if (is_string($summary) && trim($summary) !== '') {
+            return trim($summary);
+        }
+
+        if (is_string($bundle->contentBodyMd) && trim($bundle->contentBodyMd) !== '') {
+            return str(trim($bundle->contentBodyMd))->squish()->limit(160, '')->toString();
+        }
+
+        return 'Career overview and next steps for '.$title.'.';
+    }
+
+    /**
+     * @param  array<string,mixed>  $seoContract
+     */
+    private function seoContractRobots(array $seoContract): string
+    {
+        $robots = trim((string) ($seoContract['robots_policy'] ?? ''));
+        if ($robots !== '') {
+            return $robots;
+        }
+
+        return (bool) ($seoContract['index_eligible'] ?? false) ? 'index,follow' : 'noindex,follow';
+    }
+
+    private function containsNoindex(string $robots): bool
+    {
+        $tokens = array_map(
+            static fn (string $token): string => strtolower(trim($token)),
+            explode(',', $robots)
+        );
+
+        return in_array('noindex', $tokens, true);
     }
 
     /**
@@ -150,7 +248,7 @@ final class CareerJobController extends Controller
      */
     private function buildSeoSurface(array $meta, array $jsonLd, string $surfaceType, bool $publicIndexable): array
     {
-        return $this->seoSurfaceContractService->build([
+        $surface = $this->seoSurfaceContractService->build([
             'metadata_scope' => $publicIndexable ? 'public_indexable_detail' : 'public_noindex_detail',
             'surface_type' => $surfaceType,
             'canonical_url' => $meta['canonical'] ?? null,
@@ -165,6 +263,11 @@ final class CareerJobController extends Controller
             'sitemap_state' => $publicIndexable ? 'included' : 'excluded',
             'llms_exposure_state' => $publicIndexable ? 'allow' : 'withhold',
         ]);
+
+        $surface['index_eligible'] = $publicIndexable;
+        $surface['index_state'] = $publicIndexable ? 'indexable' : 'noindex';
+
+        return $surface;
     }
 
     /**
