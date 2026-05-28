@@ -15244,3 +15244,48 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01
+
+  - id: GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01
+    repo: fap-api
+    branch: codex/global-career-runtime-cohort-publish-authority-alignment-01
+    base: main
+    title: "GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01 career publish authority alignment"
+    train_scope: career_runtime_cohort_publish_authority_alignment
+    risk_level: p1_career_runtime_authority
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Cms/CareerJobController.php
+      - backend/docs/seo/global-career-runtime-cohort-publish-authority-alignment-01.md
+      - backend/docs/seo/generated/global-career-runtime-cohort-publish-authority-alignment-01.v1.json
+      - backend/tests/Feature/SeoIntel/GlobalCareerRuntimeCohortPublishAuthorityAlignment01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Align career job SEO authority with the same runtime detail bundle gate used by /api/v0.5/career/jobs/{slug}.
+      - Ensure SEO authority fails closed for runtime-blocked slugs even when a CMS career job row exists.
+      - Include explicit seo_surface_v1 index_eligible and index_state for frontend metadata consumption.
+      - Do not promote the 1018 detail-ready candidates, mutate CMS, deploy, submit URLs, enqueue Search Channel, or use frontend fallback authority.
+    validation:
+      - cd backend && php artisan test --filter=GlobalCareerRuntimeCohortPublishAuthorityAlignment01 --no-ansi
+      - cd backend && php artisan test --filter=CareerJobDetailApi --no-ansi
+      - cd backend && php artisan test --filter=CareerJobSeoService --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/global-career-runtime-cohort-publish-authority-alignment-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: DETAIL_READY_1048_ROLLOUT_DRY_RUN-01
