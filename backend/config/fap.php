@@ -31,6 +31,7 @@ return [
     ],
 
     'result_email_gate' => [
+        'require_binding_for_read' => (bool) env('FAP_RESULT_EMAIL_REQUIRE_BINDING_FOR_READ', false),
         'enabled_scale_codes' => ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60', 'ENNEAGRAM', 'RIASEC'],
     ],
 

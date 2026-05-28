@@ -2201,6 +2201,10 @@ class AttemptReadController extends Controller
             return false;
         }
 
+        if (! (bool) config('fap.result_email_gate.require_binding_for_read', false)) {
+            return false;
+        }
+
         $normalized = strtoupper(trim($scaleCode));
         if ($normalized === '' || in_array($normalized, self::SENSITIVE_RESULT_READ_SCALES, true)) {
             return false;
