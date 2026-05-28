@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-28T11:02:29+08:00",
+  "updated_at": "2026-05-28T09:57:28Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -21303,9 +21303,9 @@
       "repo": "fap-api",
       "branch": "codex/detail-ready-1048-replacement-authority-import-01",
       "base": "main",
-      "status": "local_validation_passed",
+      "status": "merged",
       "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_IMPORT-01 replacement authority import package",
-      "commit_sha": "b0fdf1ae96e4484ee337f6d772d821931cf0e8ca",
+      "commit_sha": "0a5a5fcf80481bfd491a2f7f8d171ec2f6c70a2d",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1740",
       "checks": {
         "manifest_registration": {
@@ -21354,6 +21354,14 @@
           "status": "pass",
           "command": "git diff --check && git diff --cached --check",
           "evidence": "No whitespace errors before staging."
+        },
+        "github_checks": {
+          "status": "pass",
+          "evidence": "PR #1740 merged with required checks green; merge commit 0777aaf359387ee49b33df5b75c130f6244695d0."
+        },
+        "local_cleanup": {
+          "status": "partial",
+          "evidence": "Remote branch was deleted by GitHub merge. Local cleanup script scripts/post_merge_cleanup.sh was absent in this clone; no local task branch remained after merge checkout."
         }
       },
       "scope": {
@@ -21378,8 +21386,8 @@
         "database_write": false
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
+      "merged_at": "2026-05-28T09:38:08Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "next_task": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01",
       "events": [
@@ -21402,6 +21410,102 @@
           "at": "2026-05-28T17:22:41+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1740 for the scoped replacement authority import package."
+        }
+      ],
+      "merge_commit": "0777aaf359387ee49b33df5b75c130f6244695d0",
+      "transitions": [
+        {
+          "at": "2026-05-28T09:51:44Z",
+          "status": "merged_reconciled",
+          "summary": "Reconciled PR #1740 merged state while starting DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT-01."
+        }
+      ]
+    },
+    "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT-01": {
+      "id": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT-01",
+      "repo": "fap-api",
+      "branch": "codex/detail-ready-1048-replacement-authority-controlled-import-01",
+      "base": "main",
+      "status": "local_validation_passed",
+      "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT-01 controlled replacement authority import path",
+      "commit_sha": "9ffff45d90e4f386164be2bcbf202b236fe71302",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1741",
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User explicitly authorized DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT-01 manifest/state updates for the current PR only and a controlled import path using the repo-backed import package."
+        },
+        "scope_boundaries": {
+          "status": "pass",
+          "evidence": "Current PR must not deploy, publish runtime pages, promote the 1048 cohort, expose sitemap/llms/footer, mutate production CMS outside the controlled import path, or release software-developers from manual hold."
+        },
+        "focused_command_test": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=CareerImportDetailReadyReplacementAuthorityCommandTest --no-ansi",
+          "evidence": "PASS: 6 tests, 52 assertions."
+        },
+        "focused_report_test": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=DetailReady1048ReplacementAuthorityControlledImport01 --no-ansi",
+          "evidence": "PASS: 1 test, 18 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "PASS: route list generated successfully with 203 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "PASS: 3614 files."
+        },
+        "composer_validate": {
+          "status": "pass",
+          "command": "cd backend && composer validate --strict",
+          "evidence": "PASS: ./composer.json is valid."
+        },
+        "composer_audit": {
+          "status": "pass",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "PASS: No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/detail-ready-1048-replacement-authority-controlled-import-01.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && yaml.safe_load(docs/codex/pr-train.yaml)",
+          "evidence": "PASS: generated JSON, state JSON, and manifest YAML parse."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check",
+          "evidence": "PASS: no whitespace errors."
+        },
+        "pr_opened": {
+          "status": "pass",
+          "evidence": "Opened https://github.com/fermatmind/fap-api/pull/1741."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "merge_commit": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01",
+      "sidecars": [],
+      "transitions": [
+        {
+          "at": "2026-05-28T09:51:44Z",
+          "status": "in_progress",
+          "summary": "Registered current controlled import path task after explicit user authorization. Did not add future task entries."
+        },
+        {
+          "at": "2026-05-28T09:53:42Z",
+          "status": "local_validation_passed",
+          "summary": "Implemented controlled replacement authority import command, report, focused tests, and current manifest/state entry. No production import, deploy, publish, runtime promotion, or discoverability exposure performed."
+        },
+        {
+          "at": "2026-05-28T09:57:28Z",
+          "status": "pr_opened",
+          "summary": "Opened PR #1741 for controlled replacement authority import path."
         }
       ]
     }

@@ -1,0 +1,51 @@
+{
+  "schema_version": "detail_ready_1048_replacement_authority_controlled_import.v1",
+  "task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT-01",
+  "final_decision": "controlled_import_path_ready_requires_explicit_apply_execution",
+  "source_import_package": "backend/docs/seo/import-packages/detail-ready-1048-replacement-authority-import-01.import.v1.json",
+  "target_slug": "computer-occupations-all-other",
+  "manual_hold_slugs_preserved": [
+    "software-developers"
+  ],
+  "controlled_import_command": "php artisan career:import-detail-ready-replacement-authority --json",
+  "controlled_apply_command": "php artisan career:import-detail-ready-replacement-authority --apply --confirm=DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT_APPROVED --json",
+  "default_mode": "dry_run",
+  "apply_requires_confirmation": true,
+  "confirmation_phrase": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_CONTROLLED_IMPORT_APPROVED",
+  "write_scope_when_confirmed": {
+    "career_import_runs": 1,
+    "occupation_crosswalks": 1,
+    "career_job_display_assets": 1,
+    "index_states": 0,
+    "runtime_promotions": 0,
+    "sitemap_exposure": 0,
+    "llms_exposure": 0,
+    "footer_exposure": 0,
+    "search_channel_actions": 0
+  },
+  "validation_guards": {
+    "target_slug_fixed": true,
+    "target_occupation_must_exist": true,
+    "observed_onet_crosswalk_required": "15-1299.00",
+    "replacement_us_soc_required": "15-1299",
+    "display_surface_version_required": "display.surface.v1",
+    "asset_version_required": "v4.2",
+    "component_order_count_required": 24,
+    "page_payload_en_required": true,
+    "page_payload_zh_required": true,
+    "existing_indexable_state_blocks_import": true,
+    "forbidden_public_payload_keys_block_import": true
+  },
+  "no_deploy": true,
+  "no_publish": true,
+  "no_runtime_promotion": true,
+  "no_sitemap_llms_footer_exposure": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_frontend_fallback_authority": true,
+  "production_import_executed_in_this_pr": false,
+  "future_explicit_apply_execution_required": true,
+  "next_task_after_import_execution": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01",
+  "next_task": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01"
+}
