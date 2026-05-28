@@ -15569,3 +15569,44 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: DEPLOY-READINESS | Deploy replacement authority source controlled import path
+  - id: DETAIL_READY_1048_REPLACEMENT_AUTHORITY_INDEX_STATE_CONFLICT-01
+    repo: fap-api
+    branch: codex/detail-ready-1048-replacement-authority-index-state-conflict-01
+    base: main
+    title: "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_INDEX_STATE_CONFLICT-01 replacement index-state runtime projection conflict report"
+    train_scope: career_detail_ready_1048_replacement_authority_index_state_conflict
+    risk_level: p1_career_runtime_publication_gate
+    allowed_paths:
+      - backend/docs/seo/detail-ready-1048-replacement-authority-index-state-conflict-01.md
+      - backend/docs/seo/generated/detail-ready-1048-replacement-authority-index-state-conflict-01.v1.json
+      - backend/tests/Feature/SeoIntel/DetailReady1048ReplacementAuthorityIndexStateConflict01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Record that digital-forensics-analysts has an index-state/runtime-projection conflict and is not a clean 1048 replacement.
+      - Preserve software-developers manual hold and recommend 1047 target or a separate hold/replacement reconciliation decision.
+      - Produce report-only markdown, generated JSON, focused SeoIntel test, and current task train ledger entry.
+      - Do not write production, mutate CMS, promote runtime, deploy, expose sitemap/llms/footer, enqueue Search Channel, submit URLs, call external search APIs, change fap-web, release software-developers, or modify digital-forensics-analysts production state.
+    validation:
+      - cd backend && php artisan test --filter=DetailReady1048ReplacementAuthorityIndexStateConflict01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/detail-ready-1048-replacement-authority-index-state-conflict-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01 or 1047 target decision

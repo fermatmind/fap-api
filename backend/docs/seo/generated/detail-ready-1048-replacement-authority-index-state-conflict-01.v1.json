@@ -1,0 +1,89 @@
+{
+  "schema_version": "detail_ready_1048_replacement_authority_index_state_conflict.v1",
+  "task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_INDEX_STATE_CONFLICT-01",
+  "generated_at": "2026-05-28T20:44:16+08:00",
+  "final_decision": "replacement_slug_not_safe_recommend_1047_target",
+  "target_slug": "digital-forensics-analysts",
+  "conflict_class": "index_state_runtime_projection_conflict",
+  "replacement_safe": false,
+  "production_observation": {
+    "occupation_row_exists": true,
+    "crosswalk_exists": true,
+    "crosswalks": [
+      {
+        "source_system": "onet_soc_2019",
+        "source_code": "15-1299.06",
+        "mapping_type": "directory_candidate"
+      },
+      {
+        "source_system": "us_soc",
+        "source_code": "15-1299",
+        "mapping_type": "direct_match"
+      }
+    ],
+    "display_asset_exists": true,
+    "display_asset": {
+      "asset_type": "career_job_public_display",
+      "surface_version": "display.surface.v1",
+      "asset_version": "v4.2",
+      "template_version": "v4.2",
+      "status": "ready_for_pilot"
+    },
+    "recommendation_snapshots_count": 0,
+    "published_career_job_rows_count": 0,
+    "index_state_rows_count": 2,
+    "index_eligible_rows_count": 2,
+    "runtime_publish_projection_item_present": false,
+    "runtime_detail_route_enabled": false,
+    "runtime_dataset_visible": false,
+    "runtime_robots_indexable": false,
+    "runtime_release_gate_pass": false,
+    "public_dataset_cache_member_count": 30,
+    "public_dataset_cache_includes_target_slug": false,
+    "detail_api_status": 404,
+    "frontend_detail_page_status": 404,
+    "frontend_detail_page_robots": "noindex"
+  },
+  "import_gate_result": {
+    "controlled_import_command": "career:import-detail-ready-replacement-authority-source --json",
+    "decision": "fail",
+    "did_write": false,
+    "error": "Controlled source import must not target an already indexable occupation."
+  },
+  "root_cause_summary": "The target slug has source authority and index-state history, but no runtime publish projection item. It is not a clean non-indexable replacement candidate.",
+  "software_developers_manual_hold_unchanged": true,
+  "digital_forensics_production_state_modified": false,
+  "recommended_path": [
+    {
+      "path": "1047_target",
+      "decision": "recommended",
+      "reason": "Keep software-developers on manual hold and avoid using a conflicted replacement slug."
+    },
+    {
+      "path": "software_developers_hold_decision",
+      "decision": "human_approval_required",
+      "reason": "Only a separate explicit decision can release software-developers from manual hold."
+    },
+    {
+      "path": "replacement_reconciliation",
+      "decision": "separate_task_required",
+      "reason": "digital-forensics-analysts requires index-state/runtime-projection reconciliation before any use as replacement."
+    }
+  ],
+  "guardrails": {
+    "production_write_performed": false,
+    "cms_mutation_performed": false,
+    "runtime_promotion_performed": false,
+    "deploy_performed": false,
+    "sitemap_exposure_performed": false,
+    "llms_exposure_performed": false,
+    "footer_exposure_performed": false,
+    "search_channel_action_performed": false,
+    "url_submission_performed": false,
+    "external_search_api_call_performed": false,
+    "fap_web_change_performed": false,
+    "software_developers_manual_hold_unchanged": true
+  },
+  "next_task": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01 or 1047 target decision"
+}
+
