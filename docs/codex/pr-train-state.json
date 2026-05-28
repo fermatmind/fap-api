@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-29T01:31:37+08:00",
+  "updated_at": "2026-05-29T01:39:31+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -28018,12 +28018,12 @@
       "repo": "fap-api",
       "branch": "codex/result-email-gate-policy-02",
       "base": "main",
-      "status": "pr_opened",
+      "status": "github_checks_passed_ready_to_merge",
       "title": "RESULT-EMAIL-GATE-POLICY-02 relax result email gate policy",
       "depends_on": [
         "EMAIL-DIRECTMAIL-SMTP-READINESS-01"
       ],
-      "commit_sha": "f3625219f256214b4e4d50712a1742a1ae3bb7c5",
+      "commit_sha": "acebf6f522ddb7be3e06820216a993a60a61df15",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1751",
       "checks": {
         "manifest_registration": {
@@ -28073,6 +28073,10 @@
         "scope_cleanup": {
           "status": "pass",
           "evidence": "Reverted generated BIG5_OCEAN compiled artifact diffs produced by ci_verify_mbti.sh; remaining diff is confined to current PR scope."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1751 checks passed: hygiene, supply-chain, Semgrep blocking secrets, semgrep sarif non-blocking upload, Semgrep OSS, verify-mbti-legacy, verify-mbti-v2. mergeStateStatus CLEAN."
         }
       },
       "failure_reason": null,
@@ -28103,6 +28107,11 @@
           "at": "2026-05-29T01:31:37+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1751 after local validation; waiting for GitHub required checks."
+        },
+        {
+          "at": "2026-05-29T01:39:31+08:00",
+          "status": "github_checks_passed_ready_to_merge",
+          "summary": "GitHub checks passed and mergeStateStatus was CLEAN for PR #1751."
         }
       ]
     }
