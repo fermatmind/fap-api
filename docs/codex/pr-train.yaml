@@ -15289,3 +15289,51 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: DETAIL_READY_1048_ROLLOUT_DRY_RUN-01
+
+
+  - id: DETAIL_READY_1048_ROLLOUT_DRY_RUN-01
+    repo: fap-api
+    branch: codex/detail-ready-1048-rollout-dry-run-01
+    base: main
+    title: "DETAIL_READY_1048_ROLLOUT_DRY_RUN-01 detail-ready 1048 rollout dry-run manifest blockers"
+    train_scope: career_detail_ready_1048_rollout_dry_run
+    risk_level: p1_career_runtime_publication_gate
+    depends_on:
+      - GLOBAL-CAREER-RUNTIME-COHORT-PUBLISH-AUTHORITY-ALIGNMENT-01
+    allowed_paths:
+      - backend/docs/seo/detail-ready-1048-rollout-dry-run-01.md
+      - backend/docs/seo/generated/detail-ready-1048-rollout-dry-run-01.v1.json
+      - backend/tests/Feature/SeoIntel/DetailReady1048RolloutDryRun01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Record the read-only detail_ready_1048 rollout dry-run contract for the 1018 ready-not-public delta.
+      - Record blockers when a slug-level authority scan or explicit 1018 delta manifest is unavailable.
+      - Do not add DETAIL_READY_1048_ROLLOUT_APPLY-01 to manifest/state in this PR.
+      - Do not promote runtime rows, mutate CMS, deploy, enqueue Search Channel, submit URLs, run migrations, or use frontend fallback authority.
+    validation:
+      - cd backend && php artisan test --filter=DetailReady1048RolloutDryRun01 --no-ansi
+      - cd backend && php artisan test --filter=CareerRuntimeCandidatePrepPlanner --no-ansi
+      - cd backend && php artisan test --filter=CareerDeltaRolloutManifestPlanner --no-ansi
+      - cd backend && php artisan test --filter=CareerDeltaRolloutGatePlanner --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/detail-ready-1048-rollout-dry-run-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: DETAIL_READY_1048_ROLLOUT_APPLY-01
