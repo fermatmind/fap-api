@@ -23201,7 +23201,7 @@
   "SEARCH-CHANNEL-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/search-channel-live-00-readiness-split-scan",
-    "status": "in_progress",
+    "status": "local_checks_passed",
     "depends_on": [
       "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00"
     ],
@@ -23391,7 +23391,7 @@
     "depends_on": [
       "GSC-LIVE-00"
     ],
-    "commit_sha": null,
+    "commit_sha": "9a58701f1d7a4f01c2ce8426779c493cd3854f0e",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -31011,5 +31011,81 @@
       }
     ],
     "next_task": "DEPLOY-READINESS | Deploy replacement authority source controlled import path"
+  },
+  "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_INDEX_STATE_CONFLICT-01": {
+    "id": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_INDEX_STATE_CONFLICT-01",
+    "repo": "fap-api",
+    "branch": "codex/detail-ready-1048-replacement-authority-index-state-conflict-01",
+    "base": "main",
+    "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_INDEX_STATE_CONFLICT-01 replacement index-state runtime projection conflict report",
+    "status": "in_progress",
+    "depends_on": [],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [
+      {
+        "command": "cd backend && php artisan test --filter=DetailReady1048ReplacementAuthorityIndexStateConflict01 --no-ansi",
+        "status": "passed",
+        "summary": "1 test / 40 assertions passed"
+      },
+      {
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "203 routes listed"
+      },
+      {
+        "command": "cd backend && vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "3620 files passed after formatting the scoped new test file"
+      },
+      {
+        "command": "cd backend && composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid"
+      },
+      {
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found"
+      },
+      {
+        "command": "JSON/YAML parse and git diff checks",
+        "status": "passed",
+        "summary": "Generated conflict JSON, train state JSON, train YAML, git diff --check, and git diff --cached --check passed"
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-28T20:44:16+08:00",
+        "summary": "User explicitly authorized DETAIL_READY_1048_REPLACEMENT_AUTHORITY_INDEX_STATE_CONFLICT-01 manifest/state updates for the current PR only."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-28T20:44:16+08:00",
+        "summary": "Recording the digital-forensics-analysts index-state/runtime-projection conflict as report-only evidence. No production write, CMS mutation, runtime promotion, deploy, sitemap/llms/footer exposure, Search Channel action, URL submission, external search API call, fap-web change, software-developers hold release, or digital-forensics production state change."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-28T20:44:16+08:00",
+        "summary": "Focused conflict test, route list, Pint, Composer validate/audit, JSON/YAML parse, and diff checks passed. This PR remains report-only."
+      },
+      {
+        "status": "committed",
+        "at": "2026-05-28T20:44:16+08:00",
+        "summary": "Committed scoped replacement index-state/runtime-projection conflict report."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [],
+    "next_task": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01 or 1047 target decision"
   }
 }
