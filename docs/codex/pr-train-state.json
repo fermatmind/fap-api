@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-28T09:57:28Z",
+  "updated_at": "2026-05-28T20:30:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -30818,5 +30818,88 @@
         "summary": "After rebase onto latest origin/main, GitHub required checks passed and mergeStateStatus is CLEAN for PR #1736."
       }
     ]
+  },
+  "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01": {
+    "id": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/detail-ready-1048-replacement-authority-source-repair-01",
+    "base": "main",
+    "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01 replacement authority source repair",
+    "status": "pr_open",
+    "depends_on": [
+      "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_RESELECT-01"
+    ],
+    "commit_sha": "c1544e2510af381b8e237cf3096f4c1f2dcf776b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1743",
+    "checks": [
+      {
+        "command": "cd backend && php artisan test --filter=DetailReady1048ReplacementAuthoritySourceRepair01 --no-ansi",
+        "status": "passed",
+        "summary": "1 test / 61 assertions passed"
+      },
+      {
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "203 routes listed"
+      },
+      {
+        "command": "cd backend && vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "3616 files passed"
+      },
+      {
+        "command": "cd backend && composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid"
+      },
+      {
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found"
+      },
+      {
+        "command": "JSON/YAML parse and git diff checks",
+        "status": "passed",
+        "summary": "Generated report/package JSON, train state JSON, train YAML, git diff --check, and git diff --cached --check passed before staging"
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-28T20:15:00+08:00",
+        "summary": "User explicitly authorized DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01 manifest/state updates for the current PR only."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-28T20:15:00+08:00",
+        "summary": "Preparing a repo-backed non-runtime replacement authority source repair package while preserving software-developers manual hold."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-28T20:25:00+08:00",
+        "summary": "Focused source repair test, route list, Pint, Composer validate/audit, JSON/YAML parse, and diff checks passed. No production write, runtime promotion, deploy, Search Channel action, URL submission, or fap-web change."
+      },
+      {
+        "status": "committed",
+        "at": "2026-05-28T20:27:00+08:00",
+        "summary": "Committed scoped replacement authority source repair package."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-28T20:30:00+08:00",
+        "summary": "Opened PR #1743 for scoped replacement authority source repair package."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [],
+    "next_task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01"
   }
 }
