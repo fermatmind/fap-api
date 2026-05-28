@@ -9437,7 +9437,7 @@
       "depends_on": [
         "SEO-DASH-04A"
       ],
-      "status": "pr_opened",
+      "status": "github_checks_passed_ready_to_merge",
       "train_scope": "search_intelligence_baidu_indexnow_disabled_collectors",
       "risk_level": "medium_disabled_search_channel_schema",
       "title": "feat(seo-intel): add Baidu and IndexNow collector foundations",
@@ -27968,6 +27968,10 @@
         "fap_web_reference_check": {
           "status": "pass",
           "evidence": "Reference-only fap-web status clean; no fap-web changes committed."
+        },
+        "github_required_checks": {
+          "status": "pass",
+          "evidence": "PR #1750 checks passed: hygiene, supply-chain, Semgrep blocking secrets, semgrep sarif non-blocking upload, Semgrep OSS, verify-mbti-legacy, verify-mbti-v2. mergeStateStatus CLEAN."
         }
       },
       "failure_reason": null,
@@ -27992,6 +27996,11 @@
           "at": "2026-05-29T00:51:00+08:00",
           "status": "pr_opened",
           "summary": "Opened PR #1750 and pushed branch codex/email-directmail-smtp-readiness-01; waiting for GitHub required checks."
+        },
+        {
+          "at": "2026-05-29T01:01:00+08:00",
+          "status": "github_checks_passed_ready_to_merge",
+          "summary": "GitHub checks passed and mergeStateStatus was CLEAN for PR #1750."
         }
       ]
     }
