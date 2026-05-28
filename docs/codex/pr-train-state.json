@@ -31099,10 +31099,10 @@
     "branch": "codex/detail-ready-1047-delta-authority-repair-01",
     "base": "main",
     "title": "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01 clean 1047 delta authority manifest",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [],
-    "commit_sha": "d3bc7aaff09a517bc699f82cf207cb681b7610e6",
-    "pr_url": null,
+    "commit_sha": "9cb093fccb25215461f50d6d50b39995165c590f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1746",
     "checks": [
       {
         "command": "ssh \"$API_SSH_ALIAS\" cd /var/www/fap-api/current/backend && php artisan career:audit-detail-ready-1048-candidates --json",
@@ -31164,6 +31164,11 @@
         "status": "committed",
         "at": "2026-05-28T21:05:00+08:00",
         "summary": "Committed scoped 1047 delta blocker report and manifest."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-28T21:05:00+08:00",
+        "summary": "Opened PR #1746 for the scoped dry-run/report-only 1047 delta authority blocker manifest."
       }
     ],
     "scope_validation": {
