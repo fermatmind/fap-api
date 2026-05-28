@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-28T20:30:00+08:00",
+  "updated_at": "2026-05-28T23:01:01+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -23298,7 +23298,7 @@
   "GSC-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/gsc-live-00-readiness-contract",
-    "status": "in_progress",
+    "status": "local_checks_passed",
     "depends_on": [
       "SEARCH-CHANNEL-LIVE-00"
     ],
@@ -31375,5 +31375,86 @@
     },
     "sidecars": [],
     "next_task": "DEPLOY-READINESS | Deploy fap-api PR #1747 before rerunning apply preflight"
+  },
+  "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01": {
+    "id": "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01",
+    "repo": "fap-api",
+    "branch": "codex/detail-ready-1046-rollout-no-audit-dry-run-01",
+    "base": "main",
+    "title": "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01 no-write career rollout dry-run",
+    "status": "committed",
+    "depends_on": [],
+    "commit_sha": "1c2d887b272a2cbd130b0b34f9a178d5e80dabc5",
+    "pr_url": null,
+    "checks": [
+      {
+        "command": "manifest/state authorization",
+        "status": "passed",
+        "summary": "User explicitly authorized DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01 manifest/state updates for the current PR only."
+      },
+      {
+        "command": "cd backend && php artisan test --filter=CareerExecuteCanonicalRolloutBatch --no-ansi",
+        "status": "passed",
+        "summary": "15 tests / 63 assertions passed; --dry-run --no-audit-write skips audit files and --apply --no-audit-write is rejected."
+      },
+      {
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "203 routes listed."
+      },
+      {
+        "command": "cd backend && vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "3623 files passed."
+      },
+      {
+        "command": "cd backend && composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid."
+      },
+      {
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found."
+      },
+      {
+        "command": "JSON/YAML parse and git diff checks",
+        "status": "passed",
+        "summary": "pr-train-state JSON, pr-train YAML, git diff --check, and git diff --cached --check passed."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-28T22:58:59+08:00",
+        "summary": "User explicitly authorized current PR manifest/state updates."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-28T22:58:59+08:00",
+        "summary": "Adding dry-run-only --no-audit-write support to career:execute-canonical-rollout-batch so production preflight can avoid filesystem writes."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-28T23:01:01+08:00",
+        "summary": "Focused command tests and common fap-api validation passed; changed files remain in the authorized scope."
+      },
+      {
+        "status": "committed",
+        "at": "2026-05-28T23:01:01+08:00",
+        "summary": "Committed scoped no-audit dry-run implementation."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [],
+    "next_task": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 rerun production no-write preflight after deploy"
   }
 }

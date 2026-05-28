@@ -18,6 +18,7 @@ final class CareerExecuteCanonicalRolloutBatch extends Command
         {--rollback-group= : Comma-separated rollback group slug list (required)}
         {--dry-run : Plan the transition without mutating state}
         {--apply : Execute the promotion (mutates database)}
+        {--no-audit-write : For dry-run preflight only, skip filesystem audit report writes}
         {--quarantine-on-failure : Quarantine batch on post-promotion failure instead of rolling back}
         {--projection= : Optional pre-promotion runtime publish projection JSON artifact path}
         {--json : Emit JSON output}';
@@ -50,6 +51,10 @@ final class CareerExecuteCanonicalRolloutBatch extends Command
                 throw new \RuntimeException('either --dry-run or --apply must be specified');
             }
 
+            if ($apply && (bool) $this->option('no-audit-write')) {
+                throw new \RuntimeException('--no-audit-write is only allowed with --dry-run');
+            }
+
             $prePromotionProjection = null;
             $projectionPath = $this->pathOption('projection');
             if ($projectionPath !== null) {
@@ -70,7 +75,9 @@ final class CareerExecuteCanonicalRolloutBatch extends Command
                 prePromotionProjection: $prePromotionProjection,
             );
 
-            $this->writeAuditReport($result);
+            if (! (bool) $this->option('no-audit-write')) {
+                $this->writeAuditReport($result);
+            }
 
             if ((bool) $this->option('json')) {
                 $this->line((string) json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
