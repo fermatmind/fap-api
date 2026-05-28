@@ -31018,10 +31018,10 @@
     "branch": "codex/detail-ready-1048-replacement-authority-index-state-conflict-01",
     "base": "main",
     "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_INDEX_STATE_CONFLICT-01 replacement index-state runtime projection conflict report",
-    "status": "in_progress",
+    "status": "merged",
     "depends_on": [],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "05f7dda0b1350e523c02ea38daccbbedd91ce7e4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1745",
     "checks": [
       {
         "command": "cd backend && php artisan test --filter=DetailReady1048ReplacementAuthorityIndexStateConflict01 --no-ansi",
@@ -31055,8 +31055,8 @@
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-05-28T12:59:55Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "transitions": [
       {
@@ -31083,6 +31083,11 @@
         "status": "pr_open",
         "at": "2026-05-28T20:44:16+08:00",
         "summary": "Opened PR #1745 for the scoped report-only replacement index-state/runtime-projection conflict record."
+      },
+      {
+        "status": "reconciled_merged",
+        "at": "2026-05-28T13:39:57Z",
+        "summary": "Ledger reconciled during DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01 after GitHub confirmed PR #1745 merged and origin/main contains merge commit 05f7dda0b1350e523c02ea38daccbbedd91ce7e4."
       }
     ],
     "scope_validation": {
@@ -31099,9 +31104,9 @@
     "branch": "codex/detail-ready-1047-delta-authority-repair-01",
     "base": "main",
     "title": "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01 clean 1047 delta authority manifest",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [],
-    "commit_sha": "9cb093fccb25215461f50d6d50b39995165c590f",
+    "commit_sha": "e5cbc6816d70383ad33c9da985bd76d6c00c3b73",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1746",
     "checks": [
       {
@@ -31141,8 +31146,8 @@
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-05-28T13:23:11Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "transitions": [
       {
@@ -31169,6 +31174,11 @@
         "status": "pr_open",
         "at": "2026-05-28T21:05:00+08:00",
         "summary": "Opened PR #1746 for the scoped dry-run/report-only 1047 delta authority blocker manifest."
+      },
+      {
+        "status": "reconciled_merged",
+        "at": "2026-05-28T13:39:57Z",
+        "summary": "Ledger reconciled during DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01 after GitHub confirmed PR #1746 merged and origin/main contains merge commit e5cbc6816d70383ad33c9da985bd76d6c00c3b73."
       }
     ],
     "scope_validation": {
@@ -31178,5 +31188,86 @@
     },
     "sidecars": [],
     "next_task": "Select one clean replacement or approve 1046/hold decision before apply preflight"
+  },
+  "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01": {
+    "id": "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/detail-ready-1046-delta-authority-repair-01",
+    "base": "main",
+    "title": "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01 clean 1046 delta authority manifest",
+    "status": "committed",
+    "depends_on": [],
+    "commit_sha": "0ca55ce699abefb2d4fe0e2b7a1449aadb2c8cb4",
+    "pr_url": null,
+    "checks": [
+      {
+        "command": "existing authorized production read-only scan artifact from DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01",
+        "status": "passed",
+        "summary": "Reused prior authorized scan evidence; current_public_detail=30; clean delta after exclusions=1016; target_public_total=1046; no replacement search performed."
+      },
+      {
+        "command": "cd backend && php artisan test --filter=DetailReady1046DeltaAuthorityRepair01 --no-ansi",
+        "status": "passed",
+        "summary": "1 test / 54 assertions passed"
+      },
+      {
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "203 routes listed"
+      },
+      {
+        "command": "cd backend && vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "3622 files passed"
+      },
+      {
+        "command": "cd backend && composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid"
+      },
+      {
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found"
+      },
+      {
+        "command": "JSON/YAML parse and git diff checks",
+        "status": "passed",
+        "summary": "Generated report JSON, generated manifest JSON, train state JSON, train YAML, git diff --check, and git diff --cached --check passed"
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-28T13:39:57Z",
+        "summary": "User explicitly authorized DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01 manifest/state updates for the current PR only."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-28T13:39:57Z",
+        "summary": "Generating a dry-run/report-only 1046 delta authority manifest from existing authorized production read-only scan artifacts; no production write, DB/CMS mutation, runtime promotion, deploy, sitemap/llms/footer exposure, Search Channel action, URL submission, external search API call, fap-web change, software-developers release, digital-forensics repair, or replacement search."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-28T13:41:42Z",
+        "summary": "Focused 1046 manifest test, route list, Pint, Composer validate/audit passed. JSON/YAML and diff checks pending."
+      },
+      {
+        "status": "committed",
+        "at": "2026-05-28T13:44:07Z",
+        "summary": "Committed scoped 1046 clean delta authority manifest and focused test."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [],
+    "next_task": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 explicit approval required before any apply"
   }
 }
