@@ -25541,7 +25541,7 @@
     "CONTENT-OPS-CLAIM-LINK-OPS-READINESS": {
       "repo": "fap-api",
       "branch": "codex/content-ops-claim-link-ops-readiness",
-      "status": "in_progress",
+      "status": "pr_opened",
       "depends_on": [
         "CONTENT-OPS-02B",
         "INTERNAL-LINK-01B",
@@ -26064,7 +26064,7 @@
       "status": "in_progress",
       "depends_on": [],
       "commit_sha": null,
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1750",
       "checks": {
         "local": {
           "ops_theme_build": "passed: cd backend && npm run build:ops-theme",
@@ -27987,6 +27987,11 @@
           "at": "2026-05-29T00:44:54+08:00",
           "status": "local_validation_passed",
           "summary": "Validated env example, DirectMail DNS/SMTP runbook, controlled smoke evidence, and focused readiness test; no production mutation or email send performed by this PR."
+        },
+        {
+          "at": "2026-05-29T00:51:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened PR #1750 and pushed branch codex/email-directmail-smtp-readiness-01; waiting for GitHub required checks."
         }
       ]
     }
