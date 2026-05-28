@@ -31195,9 +31195,9 @@
     "branch": "codex/detail-ready-1046-delta-authority-repair-01",
     "base": "main",
     "title": "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01 clean 1046 delta authority manifest",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [],
-    "commit_sha": "0ca55ce699abefb2d4fe0e2b7a1449aadb2c8cb4",
+    "commit_sha": "6716bf50c3cd22691d4609434f8a2b12442b2c8a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1747",
     "checks": [
       {
@@ -31237,8 +31237,8 @@
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-05-28T13:53:15Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "transitions": [
       {
@@ -31265,6 +31265,11 @@
         "status": "pr_open",
         "at": "2026-05-28T13:45:53Z",
         "summary": "Opened PR #1747 for the scoped dry-run/report-only 1046 clean delta authority manifest."
+      },
+      {
+        "status": "reconciled_merged",
+        "at": "2026-05-28T14:16:03Z",
+        "summary": "Ledger reconciled during DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 after GitHub confirmed PR #1747 merged and origin/main contains merge commit 6716bf50c3cd22691d4609434f8a2b12442b2c8a."
       }
     ],
     "scope_validation": {
@@ -31274,5 +31279,96 @@
     },
     "sidecars": [],
     "next_task": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 explicit approval required before any apply"
+  },
+  "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01": {
+    "id": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01",
+    "repo": "fap-api",
+    "branch": "codex/detail-ready-1046-rollout-apply-preflight-01",
+    "base": "main",
+    "title": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 production preflight for clean 1046 rollout apply",
+    "status": "committed",
+    "depends_on": [],
+    "commit_sha": "67e95aac7a4344a407c5c1b563c4131a27d2d7aa",
+    "pr_url": null,
+    "checks": [
+      {
+        "command": "ssh \"$API_SSH_ALIAS\" cat /var/www/fap-api/current/REVISION and artisan command discovery",
+        "status": "passed",
+        "summary": "production backend SHA is 16c01f81b60bb9a5452a867c6c57a78aa77e57bc; required PR #1747 SHA 6716bf50c3cd22691d4609434f8a2b12442b2c8a is not deployed; official career:execute-canonical-rollout-batch command exists."
+      },
+      {
+        "command": "ssh \"$API_SSH_ALIAS\" cd /var/www/fap-api/current/backend && php artisan career:audit-detail-ready-1048-candidates --json",
+        "status": "passed",
+        "summary": "read-only audit writes_database=false; current_public_detail=30; ready_not_currently_public=1018; union_detail_ready=1048; manual_hold_ready=1."
+      },
+      {
+        "command": "public runtime safety checks for /en/career/jobs, /zh/career/jobs, forbidden slugs, sitemap, llms, llms-full",
+        "status": "passed",
+        "summary": "career job indexes return 200; software-developers and digital-forensics pages remain 404/noindex; sitemap/llms career detail occurrences remain 0."
+      },
+      {
+        "command": "cd backend && php artisan test --filter=DetailReady1046RolloutApplyPreflight01 --no-ansi",
+        "status": "passed",
+        "summary": "1 test / 30 assertions passed"
+      },
+      {
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "203 routes listed"
+      },
+      {
+        "command": "cd backend && vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "3623 files passed"
+      },
+      {
+        "command": "cd backend && composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid"
+      },
+      {
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found"
+      },
+      {
+        "command": "JSON/YAML parse and git diff checks",
+        "status": "passed",
+        "summary": "Generated preflight JSON, train state JSON, train YAML, git diff --check, and git diff --cached --check passed"
+      }
+    ],
+    "failure_reason": "blocked_backend_deploy_required: production backend REVISION 16c01f81b60bb9a5452a867c6c57a78aa77e57bc does not include required PR #1747 merge commit 6716bf50c3cd22691d4609434f8a2b12442b2c8a",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-28T14:16:03Z",
+        "summary": "User explicitly authorized DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 manifest/state updates for the current PR only."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-28T14:16:03Z",
+        "summary": "Performing read-only/no-write preflight for future 1046 rollout apply. Production backend does not include PR #1747, so no apply approval phrase is generated and no production dry-run apply command is executed."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-28T14:17:58Z",
+        "summary": "Read-only production revision/audit/runtime safety checks and local validations passed. Final decision remains blocked_backend_deploy_required; no apply approval phrase generated."
+      },
+      {
+        "status": "committed",
+        "at": "2026-05-28T14:18:46Z",
+        "summary": "Committed scoped blocked preflight report and focused test."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [],
+    "next_task": "DEPLOY-READINESS | Deploy fap-api PR #1747 before rerunning apply preflight"
   }
 }
