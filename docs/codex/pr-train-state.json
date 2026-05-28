@@ -21187,9 +21187,9 @@
       "repo": "fap-api",
       "branch": "codex/detail-ready-1048-rollout-dry-run-01",
       "base": "main",
-      "status": "pr_open",
+      "status": "merged",
       "title": "DETAIL_READY_1048_ROLLOUT_DRY_RUN-01 detail-ready 1048 rollout dry-run manifest blockers",
-      "commit_sha": "9415093776fe84170df90a392f63fd0c201fe643",
+      "commit_sha": "683299199947e1495723e803b0694ba1751ceef4",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1739",
       "checks": {
         "manifest_registration": {
@@ -21266,9 +21266,9 @@
         "apply_task_added_to_manifest": false
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-28T03:10:25Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "next_task": "DETAIL_READY_1048_ROLLOUT_APPLY-01",
       "events": [
         {
@@ -21290,6 +21290,118 @@
           "at": "2026-05-28T11:02:29+08:00",
           "status": "pr_open",
           "summary": "Opened PR #1739 for the scoped dry-run artifact and blocker report."
+        },
+        {
+          "at": "2026-05-28T17:22:41+08:00",
+          "status": "ledger_reconciled_merged",
+          "summary": "Reconciled PR #1739 merged state while starting DETAIL_READY_1048_REPLACEMENT_AUTHORITY_IMPORT-01; GitHub reports merge commit 683299199947e1495723e803b0694ba1751ceef4 and the remote branch is absent."
+        }
+      ]
+    },
+    "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_IMPORT-01": {
+      "id": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_IMPORT-01",
+      "repo": "fap-api",
+      "branch": "codex/detail-ready-1048-replacement-authority-import-01",
+      "base": "main",
+      "status": "local_validation_passed",
+      "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_IMPORT-01 replacement authority import package",
+      "commit_sha": "b0fdf1ae96e4484ee337f6d772d821931cf0e8ca",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1740",
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User explicitly authorized DETAIL_READY_1048_REPLACEMENT_AUTHORITY_IMPORT-01 manifest/state updates for the current PR only."
+        },
+        "replacement_candidate_scan": {
+          "status": "pass",
+          "evidence": "Read-only scan found software-developers is the only manual-hold slug in the existing 1018 delta; computer-occupations-all-other is outside the current union, not manual-hold, not CN proxy, and has observed O*NET-SOC 2019 authority."
+        },
+        "import_package": {
+          "status": "pass",
+          "evidence": "Repo-backed replacement import package prepared for human review; no DB write, runtime promotion, CMS mutation, deploy, Search Channel action, URL submission, or fap-web change."
+        },
+        "focused_test": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=DetailReady1048ReplacementAuthorityImport01 --no-ansi",
+          "evidence": "PASS: 1 test, 55 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "PASS: route list generated successfully with 203 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "PASS: 3611 files."
+        },
+        "composer_validate": {
+          "status": "pass",
+          "command": "cd backend && composer validate --strict",
+          "evidence": "PASS: ./composer.json is valid."
+        },
+        "composer_audit": {
+          "status": "pass",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "PASS: No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/detail-ready-1048-replacement-authority-import-01.v1.json >/dev/null && python3 -m json.tool backend/docs/seo/import-packages/detail-ready-1048-replacement-authority-import-01.import.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && yaml.safe_load(docs/codex/pr-train.yaml)",
+          "evidence": "Generated JSON, import package JSON, train state JSON, and train YAML parse successfully."
+        },
+        "diff_checks": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check",
+          "evidence": "No whitespace errors before staging."
+        }
+      },
+      "scope": {
+        "allowed_files": [
+          "backend/docs/seo/detail-ready-1048-replacement-authority-import-01.md",
+          "backend/docs/seo/generated/detail-ready-1048-replacement-authority-import-01.v1.json",
+          "backend/docs/seo/import-packages/detail-ready-1048-replacement-authority-import-01.import.v1.json",
+          "backend/tests/Feature/SeoIntel/DetailReady1048ReplacementAuthorityImport01Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "cms_mutation": false,
+        "api_runtime_change": false,
+        "publish": false,
+        "deploy": false,
+        "search_channel_action": false,
+        "url_submission": false,
+        "broad_pseo_generation": false,
+        "fap_web_modified": false,
+        "frontend_fallback_authority": false,
+        "runtime_promotion": false,
+        "database_write": false
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "next_task": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01",
+      "events": [
+        {
+          "at": "2026-05-28T17:22:41+08:00",
+          "status": "manifest_registered",
+          "summary": "Registered current replacement authority import task after explicit user authorization."
+        },
+        {
+          "at": "2026-05-28T17:22:41+08:00",
+          "status": "implementation_in_progress",
+          "summary": "Preparing a non-runtime replacement authority import package for computer-occupations-all-other while preserving software-developers manual hold."
+        },
+        {
+          "at": "2026-05-28T17:22:41+08:00",
+          "status": "local_validation_passed",
+          "summary": "Focused replacement authority import test, route list, Pint, Composer validate/audit, JSON/YAML parse, and diff checks passed. No production write, runtime promotion, CMS mutation, deploy, Search Channel action, URL submission, or fap-web change."
+        },
+        {
+          "at": "2026-05-28T17:22:41+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #1740 for the scoped replacement authority import package."
         }
       ]
     }

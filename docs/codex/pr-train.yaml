@@ -15337,3 +15337,50 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: DETAIL_READY_1048_ROLLOUT_APPLY-01
+
+  - id: DETAIL_READY_1048_REPLACEMENT_AUTHORITY_IMPORT-01
+    repo: fap-api
+    branch: codex/detail-ready-1048-replacement-authority-import-01
+    base: main
+    title: "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_IMPORT-01 replacement authority import package"
+    train_scope: career_detail_ready_1048_replacement_authority_import
+    risk_level: p1_career_runtime_publication_gate
+    depends_on:
+      - DETAIL_READY_1048_ROLLOUT_DRY_RUN-01
+    allowed_paths:
+      - backend/docs/seo/detail-ready-1048-replacement-authority-import-01.md
+      - backend/docs/seo/generated/detail-ready-1048-replacement-authority-import-01.v1.json
+      - backend/docs/seo/import-packages/detail-ready-1048-replacement-authority-import-01.import.v1.json
+      - backend/tests/Feature/SeoIntel/DetailReady1048ReplacementAuthorityImport01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare one repo-backed replacement authority import package for the detail_ready_1048 rollout path.
+      - Preserve software-developers as a manual-hold slug and do not release it in this PR.
+      - Use a real observed occupation authority candidate outside the current union and not a CN proxy/manual-hold slug.
+      - Record the missing us_soc crosswalk and career_job_public_display asset payload needed before a future clean 1018 manifest can be generated.
+      - Do not write production DB rows, mutate CMS, promote runtime rows, deploy, enqueue Search Channel, submit URLs, or use frontend fallback authority.
+    validation:
+      - cd backend && php artisan test --filter=DetailReady1048ReplacementAuthorityImport01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/detail-ready-1048-replacement-authority-import-01.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/import-packages/detail-ready-1048-replacement-authority-import-01.import.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01
