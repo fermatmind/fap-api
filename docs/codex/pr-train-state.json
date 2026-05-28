@@ -30825,7 +30825,7 @@
     "branch": "codex/detail-ready-1048-replacement-authority-source-repair-01",
     "base": "main",
     "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01 replacement authority source repair",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [
       "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_RESELECT-01"
     ],
@@ -30864,7 +30864,7 @@
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
+    "merged_at": "2026-05-28T11:09:41Z",
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "transitions": [
@@ -30892,6 +30892,11 @@
         "status": "pr_open",
         "at": "2026-05-28T20:30:00+08:00",
         "summary": "Opened PR #1743 for scoped replacement authority source repair package."
+      },
+      {
+        "status": "merged_reconciled",
+        "at": "2026-05-28T19:29:20+08:00",
+        "summary": "Reconciled PR #1743 merged state before starting DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01; GitHub reports merge commit 54b47ccc27aa556e5d0596cee72245a66bbb3df3 and remote branch still exists."
       }
     ],
     "scope_validation": {
@@ -30900,6 +30905,111 @@
       "git_diff_cached_check": "passed"
     },
     "sidecars": [],
-    "next_task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01"
+    "next_task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01",
+    "merge_commit": "54b47ccc27aa556e5d0596cee72245a66bbb3df3"
+  },
+  "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01": {
+    "id": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01",
+    "repo": "fap-api",
+    "branch": "codex/detail-ready-1048-replacement-authority-source-controlled-import-01",
+    "base": "main",
+    "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01 controlled replacement authority source import path",
+    "status": "pr_open",
+    "depends_on": [
+      "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01"
+    ],
+    "commit_sha": "39cf71156636a265e16f0a570fe2eafaf74535da",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1744",
+    "checks": [
+      {
+        "command": "cd backend && php artisan test --filter=CareerImportDetailReadyReplacementAuthoritySourceCommandTest --no-ansi",
+        "status": "passed",
+        "summary": "5 tests / 62 assertions passed"
+      },
+      {
+        "command": "cd backend && php artisan test --filter=DetailReady1048ReplacementAuthoritySourceControlledImport01 --no-ansi",
+        "status": "passed",
+        "summary": "1 test / 35 assertions passed"
+      },
+      {
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "203 routes listed"
+      },
+      {
+        "command": "cd backend && vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "3619 files passed"
+      },
+      {
+        "command": "cd backend && composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid"
+      },
+      {
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found"
+      },
+      {
+        "command": "JSON/YAML parse and git diff checks",
+        "status": "passed",
+        "summary": "Generated report JSON, train state JSON, train YAML, git diff --check, and git diff --cached --check passed before staging"
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-28T19:29:20+08:00",
+        "summary": "User explicitly authorized DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01 manifest/state updates for the current PR only."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-28T19:29:20+08:00",
+        "summary": "Adding a controlled backend import path for the reviewed replacement authority source package without running production import, runtime promotion, deploy, sitemap/llms/footer exposure, Search Channel action, URL submission, or fap-web changes."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-28T19:45:00+08:00",
+        "summary": "Focused command/report tests, route list, Pint, Composer validate/audit, JSON/YAML parse, and diff checks passed. No production import, runtime promotion, deploy, Search Channel action, URL submission, sitemap/llms/footer exposure, or fap-web change."
+      },
+      {
+        "status": "committed",
+        "at": "2026-05-28T19:49:00+08:00",
+        "summary": "Committed scoped controlled import path for the replacement authority source package."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-28T19:53:00+08:00",
+        "summary": "Opened PR #1744 for the scoped controlled replacement authority source import path."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [
+      {
+        "source_pr": null,
+        "repo": "fap-api",
+        "branch": "codex/detail-ready-1048-replacement-authority-source-controlled-import-01",
+        "command_or_check": "cd backend && php artisan career:import-detail-ready-replacement-authority-source --json",
+        "evidence": "SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' while the default local mysql connection tried to read fap_api. This direct command was exploratory, not a manifest validation command.",
+        "failure_summary": "Local default DB is unavailable for direct command dry-run outside the Laravel test harness.",
+        "why_external_to_current_pr": "Focused feature tests exercised dry-run and confirmed apply behavior with RefreshDatabase; manifest-required local checks passed. The failure is local database configuration, not command logic.",
+        "impact_on_current_pr": "No merge blocker; target command remains guarded and will require deploy readiness plus explicit apply confirmation before use in the target authority environment.",
+        "owner": "ops/local-env",
+        "follow_up_recommendation": "Run the command in the target authority environment only after deploy readiness and explicit apply confirmation, or set local DB env before manual dry-run.",
+        "required_checks_status": "local manifest checks passed",
+        "scope_validation_status": "passed",
+        "continue_train_decision": "continue_current_pr"
+      }
+    ],
+    "next_task": "DEPLOY-READINESS | Deploy replacement authority source controlled import path"
   }
 }
