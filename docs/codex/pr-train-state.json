@@ -23201,7 +23201,7 @@
   "SEARCH-CHANNEL-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/search-channel-live-00-readiness-split-scan",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00"
     ],
@@ -23392,7 +23392,7 @@
       "GSC-LIVE-00"
     ],
     "commit_sha": "a6b4b1578d7d0fbbb4212cc13e330bef5d84cb5c",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1745",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -31078,6 +31078,11 @@
         "status": "committed",
         "at": "2026-05-28T20:44:16+08:00",
         "summary": "Committed scoped replacement index-state/runtime-projection conflict report."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-28T20:44:16+08:00",
+        "summary": "Opened PR #1745 for the scoped report-only replacement index-state/runtime-projection conflict record."
       }
     ],
     "scope_validation": {
