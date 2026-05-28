@@ -15610,3 +15610,47 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01 or 1047 target decision
+  - id: DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01
+    repo: fap-api
+    branch: codex/detail-ready-1047-delta-authority-repair-01
+    base: main
+    title: "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01 clean 1047 delta authority manifest"
+    train_scope: career_detail_ready_1047_delta_authority_repair
+    risk_level: p1_career_runtime_publication_gate
+    allowed_paths:
+      - backend/docs/seo/detail-ready-1047-delta-authority-repair-01.md
+      - backend/docs/seo/generated/detail-ready-1047-delta-authority-repair-01.v1.json
+      - backend/docs/seo/generated/detail-ready-1047-rollout-manifest.v1.json
+      - backend/tests/Feature/SeoIntel/DetailReady1047DeltaAuthorityRepair01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Generate a dry-run/report-only 1047 delta authority manifest from the production read-only detail-ready scan.
+      - Exclude software-developers manual hold and digital-forensics-analysts index-state/runtime-projection conflict from the delta.
+      - Record blocker evidence if the clean delta cannot reach the requested 1017 count and 1047 target total.
+      - Do not write production, mutate DB/CMS, promote runtime, deploy, expose sitemap/llms/footer, enqueue Search Channel, submit URLs, call external search APIs, change fap-web, release software-developers, or use digital-forensics-analysts as replacement.
+    validation:
+      - cd backend && php artisan test --filter=DetailReady1047DeltaAuthorityRepair01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/detail-ready-1047-delta-authority-repair-01.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/generated/detail-ready-1047-rollout-manifest.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: Select one clean replacement or approve 1046/hold decision before apply preflight
