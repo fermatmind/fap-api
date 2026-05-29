@@ -23201,7 +23201,7 @@
   "SEARCH-CHANNEL-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/search-channel-live-00-readiness-split-scan",
-    "status": "pr_open",
+    "status": "github_checks_failed",
     "depends_on": [
       "SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00"
     ],
@@ -31841,9 +31841,14 @@
         "command": "JSON/YAML parse and git diff checks",
         "status": "passed",
         "summary": "Generated reconciliation JSON, train state JSON, train YAML, git diff --check, and fap-web git status passed before staging."
+      },
+      {
+        "command": "GitHub Actions verify-mbti-v2",
+        "status": "failed",
+        "summary": "PR #1754 head b81b9443ea95246ce7db087e02a11d806a76676f failed verify-mbti-v2 with Allowed memory size of 536870912 bytes exhausted in BigFiveV2AssetPackageLoader.php line 207. This is outside the authorized report-only file scope."
       }
     ],
-    "failure_reason": null,
+    "failure_reason": "github_checks_failed: verify-mbti-v2 failed with BigFiveV2AssetPackageLoader.php memory exhaustion outside authorized CAREER-1046-OPS-SCOPE-RECONCILIATION-01 report-only scope",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -31872,6 +31877,11 @@
         "status": "pr_open",
         "at": "2026-05-29T06:39:36Z",
         "summary": "Opened PR #1754 for CAREER-1046-OPS-SCOPE-RECONCILIATION-01."
+      },
+      {
+        "status": "github_checks_failed",
+        "at": "2026-05-29T06:44:19Z",
+        "summary": "GitHub verify-mbti-v2 failed with 512MB memory exhaustion in BigFiveV2AssetPackageLoader.php line 207. Merge is blocked; no out-of-scope code fix was attempted."
       }
     ],
     "scope_validation": {
