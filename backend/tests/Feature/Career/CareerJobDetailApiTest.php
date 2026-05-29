@@ -15,7 +15,9 @@ use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
 use App\Services\Career\CareerRecommendationCompiler;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
@@ -125,6 +127,32 @@ final class CareerJobDetailApiTest extends TestCase
         $this->assertIsNumeric($response->json('white_box_scores.fit_score.score'));
         $this->assertIsString((string) $response->json('white_box_scores.fit_score.integrity_state'));
         $this->assertIsNumeric($response->json('white_box_scores.fit_score.degradation_factor'));
+    }
+
+    public function test_it_serves_cached_public_job_detail_payload_without_rebuilding_the_bundle(): void
+    {
+        Cache::put(
+            PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':cached-career-detail:en',
+            [
+                'bundle_kind' => 'career_job_detail',
+                'identity' => ['canonical_slug' => 'cached-career-detail'],
+                'titles' => ['canonical_en' => 'Cached Career Detail'],
+                'seo_contract' => [
+                    'canonical_path' => '/en/career/jobs/cached-career-detail',
+                    'canonical_target' => '/en/career/jobs/cached-career-detail',
+                    'robots_policy' => 'index,follow',
+                    'index_eligible' => true,
+                    'index_state' => 'indexable',
+                    'reason_codes' => [],
+                ],
+                'structured_data' => [],
+            ]
+        );
+
+        $this->getJson('/api/v0.5/career/jobs/cached-career-detail?locale=en')
+            ->assertOk()
+            ->assertJsonPath('identity.canonical_slug', 'cached-career-detail')
+            ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/cached-career-detail');
     }
 
     public function test_it_remains_conservative_and_does_not_fall_back_to_legacy_cms_jobs(): void

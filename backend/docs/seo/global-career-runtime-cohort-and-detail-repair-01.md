@@ -1,5 +1,14 @@
 # GLOBAL-CAREER-RUNTIME-COHORT-AND-DETAIL-REPAIR-01
 
+> Superseded runtime note (2026-05-29):
+> This document reflects an older 30-job production cohort observation and is no longer the current live public truth.
+> Current live production authority is:
+> - `1046` public detail-indexable jobs
+> - `2092` bilingual sitemap career detail URLs
+> - `software-developers` remains manual hold / 404 / absent from sitemap
+> - `1048` / `2096` remain planning or rollout targets, not live runtime truth
+> - `342` remains the legacy dataset key/scope name (`career_all_342_*`), not the live public count
+
 ## Executive Summary
 
 This backend-first diagnosis found that the sampled hard-404 detail URLs are not part of the current public career cohort. The current production cohort is 30 jobs. The sampled slugs `accountants-and-auditors` and `software-developers` are intentionally non-public today and fail closed with 404/noindex. They are not exposed in sitemap, llms, or footer/nav.

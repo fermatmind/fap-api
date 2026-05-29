@@ -8,6 +8,9 @@ use App\Support\CacheKeys;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use SplFileInfo;
 
 final class ContentPacksIndex
 {
@@ -61,7 +64,8 @@ final class ContentPacksIndex
             ];
         }
 
-        $items = $this->scanItems($packsRootFs);
+        $scanned = $this->scanIndex($packsRootFs, $defaults);
+        $items = (array) ($scanned['items'] ?? []);
         if ($items === []) {
             Log::error('CONTENT_PACKS_INDEX_EMPTY', [
                 'driver' => $driver,
@@ -69,15 +73,13 @@ final class ContentPacksIndex
             ]);
         }
 
-        $byPackId = $this->buildByPackId($items, $defaults);
-
         $index = [
             'ok' => true,
             'driver' => $driver,
             'packs_root' => $packsRootFs,
             'defaults' => $defaults,
             'items' => $items,
-            'by_pack_id' => $byPackId,
+            'by_pack_id' => (array) ($scanned['by_pack_id'] ?? []),
         ];
 
         try {
@@ -196,10 +198,12 @@ final class ContentPacksIndex
         ];
     }
 
-    private function scanItems(string $packsRootFs): array
+    private function scanIndex(string $packsRootFs, array $defaults): array
     {
         $items = [];
         $seen = [];
+        $byPackId = [];
+        $latest = [];
         $rootNorm = rtrim(str_replace(DIRECTORY_SEPARATOR, '/', $packsRootFs), '/');
 
         $stats = [
@@ -213,11 +217,7 @@ final class ContentPacksIndex
             'accepted' => 0,
         ];
 
-        foreach (File::allFiles($packsRootFs) as $file) {
-            if ($file->getFilename() !== 'manifest.json') {
-                continue;
-            }
-
+        foreach ($this->manifestFilesUnder($packsRootFs) as $file) {
             $stats['manifests_seen']++;
 
             $manifestPath = $file->getPathname();
@@ -282,7 +282,7 @@ final class ContentPacksIndex
 
                 continue;
             }
-            if (! is_array($this->readJsonFile($questionsPath))) {
+            if (! $this->isValidJsonArrayDocument($questionsPath)) {
                 $stats['skipped_questions_invalid']++;
 
                 continue;
@@ -331,6 +331,14 @@ final class ContentPacksIndex
                 'updated_at' => $updatedAt,
             ];
 
+            $this->recordByPackIdVersion(
+                $byPackId,
+                $latest,
+                $packId,
+                $dirVersion,
+                $updatedAt
+            );
+
             $seen[$key] = true;
         }
 
@@ -348,43 +356,47 @@ final class ContentPacksIndex
             'stats' => $stats,
         ]);
 
-        return $items;
+        return [
+            'items' => $items,
+            'by_pack_id' => $this->finalizeByPackId($byPackId, $latest, $defaults),
+        ];
     }
 
-    private function buildByPackId(array $items, array $defaults): array
+    private function recordByPackIdVersion(
+        array &$byPackId,
+        array &$latest,
+        string $packId,
+        string $dirVersion,
+        int $updatedAt
+    ): void {
+        if ($packId === '' || $dirVersion === '') {
+            return;
+        }
+
+        if (! isset($byPackId[$packId])) {
+            $byPackId[$packId] = [
+                'default_dir_version' => '',
+                'versions' => [],
+            ];
+        }
+
+        $byPackId[$packId]['versions'][$dirVersion] = true;
+
+        if (! isset($latest[$packId]) || $updatedAt > (int) ($latest[$packId]['updated_at'] ?? 0)) {
+            $latest[$packId] = [
+                'dir_version' => $dirVersion,
+                'updated_at' => $updatedAt,
+            ];
+        }
+    }
+
+    private function finalizeByPackId(array $byPackId, array $latest, array $defaults): array
     {
-        $byPackId = [];
-        $latest = [];
         $defaultPackId = (string) ($defaults['default_pack_id'] ?? '');
         $defaultDirVersion = (string) ($defaults['default_dir_version'] ?? '');
 
-        foreach ($items as $item) {
-            $packId = (string) ($item['pack_id'] ?? '');
-            $dirVersion = (string) ($item['dir_version'] ?? '');
-            if ($packId === '' || $dirVersion === '') {
-                continue;
-            }
-
-            if (! isset($byPackId[$packId])) {
-                $byPackId[$packId] = [
-                    'default_dir_version' => '',
-                    'versions' => [],
-                ];
-            }
-
-            $byPackId[$packId]['versions'][] = $dirVersion;
-
-            $updatedAt = (int) ($item['updated_at'] ?? 0);
-            if (! isset($latest[$packId]) || $updatedAt > (int) ($latest[$packId]['updated_at'] ?? 0)) {
-                $latest[$packId] = [
-                    'dir_version' => $dirVersion,
-                    'updated_at' => $updatedAt,
-                ];
-            }
-        }
-
         foreach ($byPackId as $packId => $info) {
-            $versions = array_values(array_unique($info['versions'] ?? []));
+            $versions = array_keys((array) ($info['versions'] ?? []));
             sort($versions, SORT_STRING);
 
             $default = '';
@@ -406,6 +418,29 @@ final class ContentPacksIndex
         ksort($byPackId, SORT_STRING);
 
         return $byPackId;
+    }
+
+    /**
+     * @return \Generator<int, SplFileInfo>
+     */
+    private function manifestFilesUnder(string $packsRootFs): \Generator
+    {
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($packsRootFs, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::LEAVES_ONLY
+        );
+
+        foreach ($iterator as $file) {
+            if (! $file instanceof SplFileInfo || ! $file->isFile()) {
+                continue;
+            }
+
+            if ($file->getFilename() !== 'manifest.json') {
+                continue;
+            }
+
+            yield $file;
+        }
     }
 
     private function relativePath(string $rootNorm, string $path): string
@@ -529,6 +564,49 @@ final class ContentPacksIndex
         $decoded = json_decode($raw, true);
 
         return is_array($decoded) ? $decoded : null;
+    }
+
+    private function isValidJsonArrayDocument(string $path): bool
+    {
+        if ($path === '' || ! File::isFile($path)) {
+            return false;
+        }
+
+        $firstMeaningfulByte = $this->firstNonWhitespaceByte($path);
+        if ($firstMeaningfulByte === null) {
+            return false;
+        }
+
+        return $firstMeaningfulByte === '[' || $firstMeaningfulByte === '{';
+    }
+
+    private function firstNonWhitespaceByte(string $path): ?string
+    {
+        $handle = @fopen($path, 'rb');
+        if (! is_resource($handle)) {
+            return null;
+        }
+
+        try {
+            while (! feof($handle)) {
+                $chunk = fread($handle, 8192);
+                if (! is_string($chunk) || $chunk === '') {
+                    continue;
+                }
+
+                $length = strlen($chunk);
+                for ($index = 0; $index < $length; $index++) {
+                    $char = $chunk[$index];
+                    if (! ctype_space($char)) {
+                        return $char;
+                    }
+                }
+            }
+        } finally {
+            fclose($handle);
+        }
+
+        return null;
     }
 
     private function isManifestConsistent(array $manifest, string $dirVersion, string $packId): bool

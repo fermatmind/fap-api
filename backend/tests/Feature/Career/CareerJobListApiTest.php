@@ -13,7 +13,9 @@ use App\Models\OccupationAlias;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
 use App\Services\Career\CareerRecommendationCompiler;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
@@ -84,6 +86,31 @@ final class CareerJobListApiTest extends TestCase
                     'provenance_meta' => ['compiler_version', 'compile_run_id'],
                 ]],
             ]);
+    }
+
+    public function test_it_serves_cached_public_job_index_payload_without_rebuilding_the_bundle(): void
+    {
+        Cache::put(
+            PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':en:public',
+            [
+                'bundle_kind' => 'career_job_index',
+                'bundle_version' => 'career.protocol.job_index.v1',
+                'items' => [[
+                    'identity' => ['canonical_slug' => 'cached-career-index'],
+                    'titles' => ['canonical_en' => 'Cached Career Index'],
+                    'truth_summary' => [],
+                    'trust_summary' => [],
+                    'score_summary' => [],
+                    'seo_contract' => ['canonical_path' => '/career/jobs/cached-career-index', 'index_state' => 'indexable', 'index_eligible' => true, 'reason_codes' => []],
+                    'provenance_meta' => [],
+                ]],
+            ]
+        );
+
+        $this->getJson('/api/v0.5/career/jobs?locale=en')
+            ->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.canonical_slug', 'cached-career-index');
     }
 
     public function test_it_reads_only_the_latest_completed_compile_run_for_public_index(): void
