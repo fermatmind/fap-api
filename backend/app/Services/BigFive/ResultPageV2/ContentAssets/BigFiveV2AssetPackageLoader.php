@@ -212,6 +212,7 @@ final class BigFiveV2AssetPackageLoader
             $lineNumber = 0;
             while (($line = fgets($handle)) !== false) {
                 $lineNumber++;
+
                 $line = trim($line);
                 if ($line === '') {
                     continue;
