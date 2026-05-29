@@ -1759,6 +1759,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_career_runtime_projection_consumer_changes(): void
     {
         $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerJobListController.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionVisibility.php',
             'backend/app/Providers/AppServiceProvider.php',
@@ -3555,6 +3556,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerRuntimeProjectionConsumerFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerJobListController.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionVisibility.php',
             'backend/app/Providers/AppServiceProvider.php',
