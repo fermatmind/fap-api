@@ -15784,6 +15784,50 @@ prs:
     frontend_fallback_authority: false
     next_task: DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 rerun production no-write preflight after deploy
 
+  - id: CAREER-1046-OPS-SCOPE-RECONCILIATION-01
+    repo: fap-api
+    branch: codex/career-1046-ops-scope-reconciliation-01
+    base: main
+    title: "CAREER-1046-OPS-SCOPE-RECONCILIATION-01 reconcile public 1046 career runtime with CMS/Ops 378 scope"
+    train_scope: career_1046_ops_scope_reconciliation
+    risk_level: L2
+    allowed_paths:
+      - backend/docs/seo/career-1046-ops-scope-reconciliation-01.md
+      - backend/docs/seo/generated/career-1046-ops-scope-reconciliation-01.v1.json
+      - backend/tests/Feature/SeoIntel/Career1046OpsScopeReconciliation01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Reconcile why public career runtime exposes 1046 jobs while CMS/Ops/SEO operations surfaces show 378/398.
+      - Identify source tables, services, routes, and read-model boundaries for public runtime, CMS/Ops career jobs, SEO Ops blockers, SEO智能 URL Truth, sitemap, and llms.
+      - Produce a repo-backed report, generated JSON artifact, and focused test only.
+      - Do not write production, mutate DB/CMS, promote runtime, deploy, change fap-web runtime, submit URLs, enqueue Search Channel, call external search APIs, edit env/DNS/nginx, read raw logs, or access production user data.
+    validation:
+      - cd /Users/rainie/Desktop/GitHub/fap-api/backend && php artisan test --filter=Career1046OpsScopeReconciliation01 --no-ansi
+      - cd /Users/rainie/Desktop/GitHub/fap-api/backend && php artisan route:list --no-ansi
+      - cd /Users/rainie/Desktop/GitHub/fap-api/backend && vendor/bin/pint --test
+      - cd /Users/rainie/Desktop/GitHub/fap-api/backend && composer validate --strict
+      - cd /Users/rainie/Desktop/GitHub/fap-api/backend && composer audit --locked --no-interaction --ignore-unreachable
+      - cd /Users/rainie/Desktop/GitHub/fap-api && python3 -m json.tool backend/docs/seo/generated/career-1046-ops-scope-reconciliation-01.v1.json >/dev/null
+      - cd /Users/rainie/Desktop/GitHub/fap-api && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - cd /Users/rainie/Desktop/GitHub/fap-api && python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd /Users/rainie/Desktop/GitHub/fap-api && git diff --check
+      - cd /Users/rainie/Desktop/GitHub/fap-api && git diff --cached --check
+      - cd /Users/rainie/Desktop/GitHub/fap-web && git status --short
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: CAREER-1046-OPS-READ-MODEL-REPAIR-01 explicit approval required before implementation
+
   - id: EMAIL-DIRECTMAIL-SMTP-READINESS-01
     repo: fap-api
     branch: codex/email-directmail-smtp-readiness-01
