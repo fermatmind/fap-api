@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-29T02:49:26+08:00",
+  "updated_at": "2026-05-29T09:00:00Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -31792,10 +31792,10 @@
     "branch": "codex/career-1046-ops-scope-reconciliation-01",
     "base": "main",
     "title": "CAREER-1046-OPS-SCOPE-RECONCILIATION-01 reconcile public 1046 career runtime with CMS/Ops 378 scope",
-    "status": "in_progress",
+    "status": "completed",
     "depends_on": [],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "e30f96f4e068c2a7b62e1fe67950ffab6b061c72",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1754",
     "checks": [
       {
         "command": "manifest/state authorization",
@@ -31843,15 +31843,20 @@
         "summary": "Generated reconciliation JSON, train state JSON, train YAML, git diff --check, and fap-web git status passed before staging."
       },
       {
+        "command": "GitHub Actions verify-mbti-legacy",
+        "status": "passed",
+        "summary": "Verify passed on run 26627690483 (job 78468502234), duration 5m5s."
+      },
+      {
         "command": "GitHub Actions verify-mbti-v2",
-        "status": "failed",
-        "summary": "PR #1754 head b81b9443ea95246ce7db087e02a11d806a76676f failed verify-mbti-v2 with Allowed memory size of 536870912 bytes exhausted in BigFiveV2AssetPackageLoader.php line 207. This is outside the authorized report-only file scope."
+        "status": "passed",
+        "summary": "Verify passed on run 26627690483 (job 78468502242), duration 4m56s."
       }
     ],
-    "failure_reason": "github_checks_failed: verify-mbti-v2 failed with BigFiveV2AssetPackageLoader.php memory exhaustion outside authorized CAREER-1046-OPS-SCOPE-RECONCILIATION-01 report-only scope",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "merged_at": "2026-05-29T08:54:05Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "status": "authorized",
@@ -31882,6 +31887,16 @@
         "status": "github_checks_failed",
         "at": "2026-05-29T06:44:19Z",
         "summary": "GitHub verify-mbti-v2 failed with 512MB memory exhaustion in BigFiveV2AssetPackageLoader.php line 207. Merge is blocked; no out-of-scope code fix was attempted."
+      },
+      {
+        "status": "github_checks_passed",
+        "at": "2026-05-29T08:54:00Z",
+        "summary": "verify-mbti-legacy/v2 passed after stream-jsonl fix in BigFiveV2AssetPackageLoader."
+      },
+      {
+        "status": "merged",
+        "at": "2026-05-29T08:54:05Z",
+        "summary": "PR #1754 merged into main with squash commit e30f96f4e068c2a7b62e1fe67950ffab6b061c72."
       }
     ],
     "scope_validation": {
