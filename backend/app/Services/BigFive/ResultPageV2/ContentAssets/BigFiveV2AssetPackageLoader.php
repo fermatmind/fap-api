@@ -149,20 +149,17 @@ final class BigFiveV2AssetPackageLoader
     /**
      * @return list<SplFileInfo>
      */
-    private function filesUnder(string $path): array
+    private function filesUnder(string $path): \Generator
     {
-        $files = [];
         $iterator = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS)
         );
 
         foreach ($iterator as $file) {
             if ($file instanceof SplFileInfo && $file->isFile()) {
-                $files[] = $file;
+                yield $file;
             }
         }
-
-        return $files;
     }
 
     private function isManifestFile(SplFileInfo $file): bool
@@ -204,17 +201,28 @@ final class BigFiveV2AssetPackageLoader
      */
     private function validateJsonlFile(string $path, string $relativePath, array &$errors): void
     {
-        $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        if (! is_array($lines)) {
+        $handle = fopen($path, 'r');
+        if ($handle === false) {
             $errors[] = "{$relativePath} is unreadable";
 
             return;
         }
 
-        foreach ($lines as $lineNumber => $line) {
-            if (! is_array(json_decode($line, true))) {
-                $errors[] = "{$relativePath}: line ".($lineNumber + 1).' is not valid JSON';
+        try {
+            $lineNumber = 0;
+            while (($line = fgets($handle)) !== false) {
+                $lineNumber++;
+                $line = trim($line);
+                if ($line === '') {
+                    continue;
+                }
+
+                if (! is_array(json_decode($line, true))) {
+                    $errors[] = "{$relativePath}: line {$lineNumber} is not valid JSON";
+                }
             }
+        } finally {
+            fclose($handle);
         }
     }
 

@@ -282,7 +282,7 @@ final class ContentPacksIndex
 
                 continue;
             }
-            if (! is_array($this->readJsonFile($questionsPath))) {
+            if (! $this->isValidJsonArrayDocument($questionsPath)) {
                 $stats['skipped_questions_invalid']++;
 
                 continue;
@@ -529,6 +529,30 @@ final class ContentPacksIndex
         $decoded = json_decode($raw, true);
 
         return is_array($decoded) ? $decoded : null;
+    }
+
+    private function isValidJsonArrayDocument(string $path): bool
+    {
+        if ($path === '' || ! File::isFile($path)) {
+            return false;
+        }
+
+        try {
+            $raw = File::get($path);
+        } catch (\Throwable $e) {
+            return false;
+        }
+
+        if (! is_string($raw) || trim($raw) === '') {
+            return false;
+        }
+
+        $trimmed = ltrim($raw);
+        if ($trimmed === '' || $trimmed[0] !== '[') {
+            return false;
+        }
+
+        return json_validate($raw);
     }
 
     private function isManifestConsistent(array $manifest, string $dirVersion, string $packId): bool
