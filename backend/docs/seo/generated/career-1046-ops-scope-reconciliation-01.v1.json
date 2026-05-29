@@ -1,0 +1,192 @@
+{
+  "schema_version": "career_1046_ops_scope_reconciliation.v1",
+  "task": "CAREER-1046-OPS-SCOPE-RECONCILIATION-01",
+  "generated_at": "2026-05-29T06:25:59Z",
+  "mode": "read_only_audit_with_repo_backed_report_pr",
+  "public_runtime_count": 1046,
+  "public_runtime_source": {
+    "authority": "career_runtime_publish_projection",
+    "primary_lookup": "App\\Domain\\Career\\Publish\\CareerRuntimePublishProjectionLookup",
+    "list_builder": "App\\Services\\Career\\Bundles\\CareerJobListBundleBuilder",
+    "dataset_contract": "App\\Services\\Career\\Dataset\\CareerPublicDatasetContractBuilder",
+    "cache_key": "career:public-authority:dataset-hub:v3",
+    "fallback_order": [
+      "storage/app/private/career_runtime_publish_projection/career-runtime-publish-projection.json",
+      "latest storage/app/private/career_release_ledger materialized full release ledger",
+      "cached dataset hub payload"
+    ]
+  },
+  "public_runtime_locale_rows": {
+    "en": 1046,
+    "zh-CN": 1046
+  },
+  "public_detail_indexable_count": 1046,
+  "sitemap_career_url_count": 2092,
+  "llms_career_url_count": 2092,
+  "llms_full_career_unique_url_count": 2092,
+  "cms_ops_career_count": 378,
+  "cms_ops_source": {
+    "table": "career_jobs",
+    "model": "App\\Models\\CareerJob",
+    "resource": "App\\Filament\\Ops\\Resources\\CareerJobResource",
+    "query_scope": "withoutGlobalScopes()->where('org_id', 0)",
+    "excludes_runtime_projection": true
+  },
+  "seo_ops_gap_count": 378,
+  "seo_ops_gap_source": {
+    "service": "App\\Services\\Ops\\SeoOperationsService",
+    "page": "App\\Filament\\Ops\\Pages\\SeoOperationsPage",
+    "career_job_query": "CareerJob::withoutGlobalScopes()->where('org_id', 0)->with('seoMeta')->latest('updated_at')->limit(500)",
+    "career_guide_query": "CareerGuide::withoutGlobalScopes()->where('org_id', 0)->with('seoMeta')->latest('updated_at')->limit(500)",
+    "runtime_projection_connected": false
+  },
+  "published_discovery_blocker_count": 398,
+  "career_guide_gap_count": 20,
+  "seo_intel_read_model_available": false,
+  "url_truth_rows_visible": 0,
+  "search_channel_queue_visible": false,
+  "mismatch_classification": [
+    "expected_scope_mismatch",
+    "legacy_cms_table_scope",
+    "seo_ops_not_connected_to_runtime_projection",
+    "seo_intel_read_model_unavailable_or_unpopulated"
+  ],
+  "is_production_bug": false,
+  "is_scope_mismatch": true,
+  "is_read_model_stale": true,
+  "dashboard_permission_read_model_assessment": "read_model_unavailable_or_unpopulated_not_confirmed_as_permission_failure",
+  "runtime_api_checks": {
+    "same_origin_public_api_used": true,
+    "direct_api_host_tls_status": "api.fermatmind.com curl from local failed with LibreSSL SSL_ERROR_SYSCALL",
+    "jobs_en": {
+      "url": "https://fermatmind.com/api/v0.5/career/jobs?locale=en",
+      "status": 200,
+      "item_count": 1046
+    },
+    "jobs_zh_cn": {
+      "url": "https://fermatmind.com/api/v0.5/career/jobs?locale=zh-CN",
+      "status": 200,
+      "item_count": 1046
+    },
+    "dataset_hub": {
+      "url": "https://fermatmind.com/api/v0.5/career/datasets/occupations",
+      "status": 200,
+      "member_count": 1046,
+      "public_detail_indexable_count": 1046
+    },
+    "sitemap": {
+      "url": "https://www.fermatmind.com/sitemap.xml",
+      "status": 200,
+      "career_detail_unique_url_count": 2092
+    },
+    "llms": {
+      "url": "https://www.fermatmind.com/llms.txt",
+      "status": 200,
+      "career_detail_unique_url_count": 2092
+    },
+    "llms_full": {
+      "url": "https://www.fermatmind.com/llms-full.txt",
+      "status": 200,
+      "career_detail_unique_url_count": 2092
+    }
+  },
+  "excluded_slugs_absent": {
+    "software-developers": true,
+    "digital-forensics-analysts": true,
+    "computer-occupations-all-other": true
+  },
+  "source_table_service_matrix": [
+    {
+      "surface": "public_runtime_1046",
+      "sources": [
+        "career runtime publish projection",
+        "career release ledger",
+        "dataset hub cache",
+        "occupations",
+        "career_job_display_assets"
+      ],
+      "services": [
+        "CareerRuntimePublishProjectionLookup",
+        "CareerJobListBundleBuilder",
+        "CareerPublicDatasetContractBuilder"
+      ],
+      "runtime_projection_connected": true
+    },
+    {
+      "surface": "cms_ops_378",
+      "sources": [
+        "career_jobs"
+      ],
+      "services": [
+        "CareerJobResource"
+      ],
+      "runtime_projection_connected": false
+    },
+    {
+      "surface": "seo_ops_398_blockers",
+      "sources": [
+        "career_jobs",
+        "career_guides",
+        "career_job_seo_meta",
+        "career_guide_seo_meta"
+      ],
+      "services": [
+        "SeoOperationsPage",
+        "SeoOperationsService"
+      ],
+      "runtime_projection_connected": false
+    },
+    {
+      "surface": "sitemap_llms_2092",
+      "sources": [
+        "runtime projection filtered backend sitemap source",
+        "fap-web backend sitemap career job path source"
+      ],
+      "services": [
+        "SitemapGenerator",
+        "SitemapSourceController",
+        "listBackendSitemapCareerJobPaths"
+      ],
+      "runtime_projection_connected": true
+    },
+    {
+      "surface": "seo_intel_url_truth",
+      "sources": [
+        "seo_urls",
+        "seo_url_entities",
+        "seo_issue_queue",
+        "seo_search_channel_queue_items",
+        "seo_search_channel_queue_batches",
+        "seo_search_channel_queue_events"
+      ],
+      "services": [
+        "SeoUrlTruthReadService",
+        "SeoSearchChannelQueueReadService",
+        "SeoDashboardOverviewReadService"
+      ],
+      "runtime_projection_connected": false
+    }
+  ],
+  "safety_boundaries": {
+    "production_write_performed": false,
+    "database_mutation_performed": false,
+    "cms_mutation_performed": false,
+    "runtime_promotion_performed": false,
+    "deploy_performed": false,
+    "fap_web_runtime_change_performed": false,
+    "fap_web_commit_performed": false,
+    "search_channel_action_performed": false,
+    "url_submission_performed": false,
+    "external_search_api_call_performed": false,
+    "raw_log_read_performed": false,
+    "production_user_data_access_performed": false
+  },
+  "recommended_fixes": [
+    "Add a dedicated SEO Ops runtime career projection panel sourced from CareerRuntimePublishProjectionLookup or dataset authority.",
+    "Add URL Truth ingestion or read-model display for runtime-published career detail URLs.",
+    "Relabel existing 378/398 SEO Ops widgets as CMS career content scope.",
+    "Keep Search Channel submission disabled until the runtime URL Truth read model is populated and reviewed."
+  ],
+  "recommended_next_task": "CAREER-1046-OPS-READ-MODEL-REPAIR-01",
+  "final_decision": "career_1046_ops_scope_reconciliation_completed_requires_ops_read_model_repair"
+}

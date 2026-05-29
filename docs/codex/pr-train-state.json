@@ -23387,7 +23387,7 @@
   "BAIDU-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/baidu-live-00-readiness-contract",
-    "status": "in_progress",
+    "status": "local_checks_passed",
     "depends_on": [
       "GSC-LIVE-00"
     ],
@@ -31785,5 +31785,91 @@
     },
     "sidecars": [],
     "next_task": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 rerun production no-write preflight after deploy"
+  },
+  "CAREER-1046-OPS-SCOPE-RECONCILIATION-01": {
+    "id": "CAREER-1046-OPS-SCOPE-RECONCILIATION-01",
+    "repo": "fap-api",
+    "branch": "codex/career-1046-ops-scope-reconciliation-01",
+    "base": "main",
+    "title": "CAREER-1046-OPS-SCOPE-RECONCILIATION-01 reconcile public 1046 career runtime with CMS/Ops 378 scope",
+    "status": "in_progress",
+    "depends_on": [],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [
+      {
+        "command": "manifest/state authorization",
+        "status": "passed",
+        "summary": "User explicitly authorized adding only CAREER-1046-OPS-SCOPE-RECONCILIATION-01 to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+      },
+      {
+        "command": "read-only public API and discoverability checks",
+        "status": "passed",
+        "summary": "Same-origin public API returned 1046 career jobs for en and zh-CN, dataset member_count/public_detail_indexable_count 1046, sitemap/llms 2092 unique career detail URLs, and excluded slugs absent. Direct api.fermatmind.com TLS from local failed, so public same-origin API was used."
+      },
+      {
+        "command": "read-only code authority reconciliation",
+        "status": "passed",
+        "summary": "Public runtime source is runtime projection / dataset authority; CMS/Ops source is career_jobs org_id=0; SEO Ops blockers are CMS CareerJob/CareerGuide SEO meta scope; SEO Intel dashboard reads seo_intel read-model tables and does not enumerate 1046 career runtime in inspected source."
+      },
+      {
+        "command": "cd /Users/rainie/Desktop/GitHub/fap-api/backend && php artisan test --filter=Career1046OpsScopeReconciliation01 --no-ansi",
+        "status": "passed",
+        "summary": "1 test / 54 assertions passed with a PHPUnit warning; exit code 0."
+      },
+      {
+        "command": "cd /Users/rainie/Desktop/GitHub/fap-api/backend && php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "203 routes listed."
+      },
+      {
+        "command": "cd /Users/rainie/Desktop/GitHub/fap-api/backend && vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "3626 files passed."
+      },
+      {
+        "command": "cd /Users/rainie/Desktop/GitHub/fap-api/backend && composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid."
+      },
+      {
+        "command": "cd /Users/rainie/Desktop/GitHub/fap-api/backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found."
+      },
+      {
+        "command": "JSON/YAML parse and git diff checks",
+        "status": "passed",
+        "summary": "Generated reconciliation JSON, train state JSON, train YAML, git diff --check, and fap-web git status passed before staging."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-29T06:25:59Z",
+        "summary": "User explicitly authorized this reconciliation report PR and only the CAREER-1046-OPS-SCOPE-RECONCILIATION-01 manifest/state entries."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-29T06:25:59Z",
+        "summary": "Started read-only reconciliation on codex/career-1046-ops-scope-reconciliation-01. Scope is docs/generated/test/train metadata only; no production write, DB/CMS mutation, runtime promotion, deploy, fap-web change, Search Channel action, URL submission, external search API call, env/DNS/nginx edit, raw log read, or production user data access."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-29T06:37:27Z",
+        "summary": "Focused test, route list, Pint, Composer validate/audit, JSON/YAML parse, git diff --check, and fap-web reference status passed. Task ran in an isolated worktree because the original fap-api worktree had unrelated dirty files."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [],
+    "next_task": "CAREER-1046-OPS-READ-MODEL-REPAIR-01 explicit approval required before implementation"
   }
 }
