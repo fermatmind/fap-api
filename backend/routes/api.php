@@ -489,7 +489,8 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/search', [CareerSearchController::class, 'index']);
     Route::get('/career/datasets/occupations', [CareerDatasetHubController::class, 'show']);
     Route::get('/career/datasets/occupations/method', [CareerDatasetMethodController::class, 'show']);
-    Route::get('/seo/sitemap-source', [SitemapSourceController::class, 'index']);
+    Route::get('/seo/sitemap-source', [SitemapSourceController::class, 'index'])
+        ->name('seo.sitemap-source');
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::get('/articles/{slug}', [ArticleController::class, 'show']);
     Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);

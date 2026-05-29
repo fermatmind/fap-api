@@ -37,7 +37,7 @@ class SitemapSourceController extends Controller
             'source' => 'backend_sitemap_generator',
             'count' => count($items),
             'items' => $items,
-        ]);
+        ])->header('Cache-Control', 'public, max-age=300, s-maxage=600');
     }
 
     private function normalizeOwnedCanonicalUrl(string $loc): string

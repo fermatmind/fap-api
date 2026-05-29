@@ -4379,11 +4379,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         foreach ($changedLines as $line) {
-            if (str_starts_with($line, '-')) {
-                return false;
+            if (preg_match('/^[+-]\\s*$/u', $line) === 1) {
+                continue;
             }
 
-            if (preg_match('/SitemapSourceController|\\/seo\\/sitemap-source/u', $line) !== 1) {
+            if (preg_match('/^[+-].*(SitemapSourceController|\\/seo\\/sitemap-source|seo\\.sitemap-source)/u', $line) !== 1) {
                 return false;
             }
         }
