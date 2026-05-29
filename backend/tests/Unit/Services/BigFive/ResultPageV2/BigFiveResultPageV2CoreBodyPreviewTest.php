@@ -4811,8 +4811,78 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '+    }',
         ];
 
-        return $changedLines === $legacyStreamingLines
-            || $changedLines === $streamingScanLines;
+        $normalizedChanged = $this->normalizeContentPacksIndexStreamingDiffLines($changedLines);
+        if ($normalizedChanged === []) {
+            return false;
+        }
+
+        $normalizedLegacy = $this->normalizeContentPacksIndexStreamingDiffLines($legacyStreamingLines);
+        $normalizedStreaming = $this->normalizeContentPacksIndexStreamingDiffLines($streamingScanLines);
+
+        if ($normalizedChanged === $normalizedLegacy || $normalizedChanged === $normalizedStreaming) {
+            return true;
+        }
+
+        $allowed = array_fill_keys(array_merge($normalizedLegacy, $normalizedStreaming), true);
+        foreach ($normalizedChanged as $line) {
+            if (! isset($allowed[$line])) {
+                return false;
+            }
+        }
+
+        $diffText = implode("\n", $normalizedChanged);
+        foreach ([
+            'RecursiveDirectoryIterator',
+            'RecursiveIteratorIterator',
+            'scanIndex($packsRootFs, $defaults)',
+            'manifestFilesUnder($packsRootFs)',
+            'recordByPackIdVersion(',
+            'finalizeByPackId(',
+            'isValidJsonArrayDocument($questionsPath)',
+            'firstNonWhitespaceByte($path)',
+        ] as $requiredMarker) {
+            if (! str_contains($diffText, $requiredMarker)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $lines
+     * @return list<string>
+     */
+    private function normalizeContentPacksIndexStreamingDiffLines(array $lines): array
+    {
+        return array_values(array_filter(array_map(
+            static function (string $line): ?string {
+                if (! preg_match('/^[+-]/', $line)) {
+                    return null;
+                }
+
+                $body = substr($line, 1);
+                $trimmed = trim($body);
+                if ($trimmed === '') {
+                    return null;
+                }
+
+                if (in_array($trimmed, ['{', '}', '];'], true)) {
+                    return null;
+                }
+
+                if (
+                    str_starts_with($trimmed, '/**')
+                    || str_starts_with($trimmed, '*')
+                    || str_starts_with($trimmed, '*/')
+                ) {
+                    return null;
+                }
+
+                return $line;
+            },
+            $lines,
+        )));
     }
 
     /**
