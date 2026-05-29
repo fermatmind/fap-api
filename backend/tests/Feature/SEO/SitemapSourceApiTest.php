@@ -209,6 +209,182 @@ class SitemapSourceApiTest extends TestCase
         ]);
     }
 
+    public function test_sitemap_source_response_contract_matches_fap_web(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        config(['app.url' => 'https://fermatmind.com']);
+
+        $this->createDisplayAsset(
+            $this->createOccupation('civil-engineers', 'Civil Engineers'),
+            ['updated_at' => Carbon::create(2026, 2, 1, 12, 55, 0)]
+        );
+        $this->writeProjectionArtifact([
+            $this->projectionItem('civil-engineers', 'en'),
+            $this->projectionItem('civil-engineers', 'zh'),
+        ]);
+
+        $response = $this->getJson('/api/v0.5/seo/sitemap-source');
+        $response->assertOk();
+
+        $data = $response->json();
+        $this->assertIsArray($data);
+        $this->assertArrayHasKey('ok', $data);
+        $this->assertTrue($data['ok']);
+        $this->assertArrayHasKey('source', $data);
+        $this->assertSame('backend_sitemap_generator', $data['source']);
+        $this->assertArrayHasKey('count', $data);
+        $this->assertIsInt($data['count']);
+        $this->assertArrayHasKey('items', $data);
+        $this->assertIsArray($data['items']);
+        $this->assertCount($data['count'], $data['items']);
+
+        foreach ($data['items'] as $item) {
+            $this->assertIsArray($item);
+            $this->assertArrayHasKey('loc', $item);
+            $this->assertArrayHasKey('lastmod', $item);
+            $this->assertIsString($item['loc']);
+            $this->assertNotEmpty($item['loc']);
+            $this->assertMatchesRegularExpression(
+                '#^https?://[^/]+/#',
+                $item['loc'],
+                "Each loc must be an absolute URL: {$item['loc']}"
+            );
+        }
+
+        $locs = collect($data['items'])->pluck('loc')->all();
+        $this->assertContains('https://fermatmind.com/en/career/jobs/civil-engineers', $locs);
+        $this->assertContains('https://fermatmind.com/zh/career/jobs/civil-engineers', $locs);
+    }
+
+    public function test_sitemap_source_excludes_forbidden_url_patterns(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        config(['app.url' => 'https://fermatmind.com']);
+
+        $this->createDisplayAsset(
+            $this->createOccupation('mechanical-engineers', 'Mechanical Engineers'),
+            ['updated_at' => Carbon::create(2026, 2, 1, 12, 55, 0)]
+        );
+        $this->writeProjectionArtifact([
+            $this->projectionItem('mechanical-engineers', 'en'),
+            $this->projectionItem('mechanical-engineers', 'zh'),
+        ]);
+
+        $response = $this->getJson('/api/v0.5/seo/sitemap-source');
+        $response->assertOk();
+
+        $locs = collect($response->json('items'))->pluck('loc')->all();
+
+        $forbiddenPatterns = [
+            '#/(result|order|pay|share|take|report|checkout|personalized|private)/#i',
+            '#/me/#i',
+        ];
+
+        foreach ($locs as $loc) {
+            foreach ($forbiddenPatterns as $pattern) {
+                $this->assertDoesNotMatchRegularExpression(
+                    $pattern,
+                    $loc,
+                    "Sitemap source URL must not match forbidden pattern: {$pattern} in {$loc}"
+                );
+            }
+        }
+    }
+
+    public function test_sitemap_source_excludes_software_developers_explicitly(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        config(['app.url' => 'https://fermatmind.com']);
+
+        $this->createDisplayAsset(
+            $this->createOccupation('electrical-engineers', 'Electrical Engineers'),
+            ['updated_at' => Carbon::create(2026, 2, 1, 12, 55, 0)]
+        );
+        $this->createDisplayAsset(
+            $this->createOccupation('software-developers', 'Software Developers'),
+            ['updated_at' => Carbon::create(2026, 2, 1, 12, 56, 0)]
+        );
+        $this->writeProjectionArtifact([
+            $this->projectionItem('electrical-engineers', 'en'),
+            $this->projectionItem('electrical-engineers', 'zh'),
+            $this->projectionItem(
+                'software-developers',
+                'en',
+                CareerRuntimePublishProjectionService::STATE_QUARANTINED,
+                [
+                    'public_resolution_type' => CareerPublicResolutionTypeMatrix::KEEP_NON_PUBLIC_WITH_POLICY,
+                    'detail_route_enabled' => false,
+                    'sitemap_live' => false,
+                    'robots_indexable' => false,
+                    'release_gate_pass' => false,
+                    'canonical_self' => false,
+                    'canonical_url' => null,
+                ],
+            ),
+        ]);
+
+        $response = $this->getJson('/api/v0.5/seo/sitemap-source');
+        $response->assertOk();
+
+        $locs = collect($response->json('items'))->pluck('loc')->all();
+
+        $this->assertContains('https://fermatmind.com/en/career/jobs/electrical-engineers', $locs);
+        $this->assertNotContains('https://fermatmind.com/en/career/jobs/software-developers', $locs);
+        $this->assertNotContains('https://fermatmind.com/zh/career/jobs/software-developers', $locs);
+
+        foreach ($locs as $loc) {
+            $this->assertStringNotContainsString('software-developers', $loc);
+        }
+    }
+
+    public function test_sitemap_source_excludes_clinical_depression_held_slugs(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $this->createDisplayAsset(
+            $this->createOccupation('chemical-engineers', 'Chemical Engineers'),
+            ['updated_at' => Carbon::create(2026, 2, 1, 12, 55, 0)]
+        );
+        $this->writeProjectionArtifact([
+            $this->projectionItem('chemical-engineers', 'en'),
+            $this->projectionItem('chemical-engineers', 'zh'),
+        ]);
+
+        $response = $this->getJson('/api/v0.5/seo/sitemap-source');
+        $response->assertOk();
+
+        $locs = collect($response->json('items'))->pluck('loc')->all();
+
+        $heldSlugs = [
+            'clinical-depression',
+            'clinical-depression-anxiety-assessment-professional-edition',
+            'depression-screening',
+            'depression-screening-test-standard-edition',
+        ];
+
+        $careerJobDetailLocs = array_filter($locs, static fn (string $loc): bool => (bool) preg_match(
+            '#^https://[^/]+/(en|zh)/career/jobs/#',
+            $loc,
+        ));
+
+        foreach ($careerJobDetailLocs as $loc) {
+            foreach ($heldSlugs as $heldSlug) {
+                $this->assertStringNotContainsString(
+                    $heldSlug,
+                    $loc,
+                    "Sitemap source career job detail URL must not expose held slug: {$heldSlug} in {$loc}"
+                );
+            }
+        }
+    }
+
+    public function test_sitemap_source_route_is_named(): void
+    {
+        $route = app('router')->getRoutes()->getByName('seo.sitemap-source');
+        $this->assertNotNull($route, 'Route seo.sitemap-source must be named');
+        $this->assertSame(['GET', 'HEAD'], $route->methods());
+    }
+
     private function createDisplayAsset(Occupation $occupation, array $overrides = []): CareerJobDisplayAsset
     {
         return CareerJobDisplayAsset::query()->create(array_merge([
