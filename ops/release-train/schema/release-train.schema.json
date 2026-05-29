@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Release Train Manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "train_id",
+    "environment",
+    "mode",
+    "stop_on_failure",
+    "rollback_on_failed_smoke",
+    "allow_merge",
+    "allow_deploy",
+    "allow_rollback",
+    "items"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "train_id": { "type": "string" },
+    "environment": { "type": "string" },
+    "mode": {
+      "type": "string",
+      "enum": ["plan_only", "dry_run", "deploy_with_approval", "auto_low_risk"]
+    },
+    "stop_on_failure": { "type": "boolean" },
+    "rollback_on_failed_smoke": { "type": "boolean" },
+    "allow_merge": { "type": "boolean" },
+    "allow_deploy": { "type": "boolean" },
+    "allow_rollback": { "type": "boolean" },
+    "items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/item" }
+    }
+  },
+  "$defs": {
+    "smoke": {
+      "type": "object",
+      "required": ["url", "expected_status"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "expected_status": { "type": "integer", "minimum": 100, "maximum": 599 },
+        "method": { "type": "string" },
+        "timeout_seconds": { "type": "number", "minimum": 0.1 },
+        "retries": { "type": "integer", "minimum": 1 },
+        "must_contain": { "type": "string" },
+        "must_not_contain": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "rollback": {
+      "type": "object",
+      "required": ["enabled", "wrapper"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "wrapper": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "sidecar": {
+      "type": "object",
+      "required": ["allow_nonblocking_sidecars", "create_issue", "issue_title_prefix"],
+      "properties": {
+        "allow_nonblocking_sidecars": { "type": "boolean" },
+        "create_issue": { "type": "boolean" },
+        "issue_title_prefix": { "type": "string" },
+        "labels": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "item": {
+      "type": "object",
+      "required": [
+        "id", "repo", "pr_number", "expected_head_sha", "component", "risk_level",
+        "deploy_required", "deploy_order", "required_checks_policy", "allowed_files",
+        "allowed_generated_paths", "scope_validation", "smoke_checks", "rollback",
+        "sidecar_policy"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "repo": { "type": "string", "enum": ["fap-api", "fap-web"] },
+        "pr_number": { "type": ["integer", "string"] },
+        "expected_head_sha": { "type": "string" },
+        "expected_merge_sha": { "type": "string" },
+        "component": { "type": "string", "enum": ["backend", "frontend", "both", "docs", "ops"] },
+        "risk_level": { "type": "string", "enum": ["low", "medium", "high"] },
+        "deploy_required": { "type": "boolean" },
+        "deploy_order": { "type": "string", "enum": ["backend_first", "frontend_first", "none"] },
+        "required_checks_policy": { "type": "string", "enum": ["required_only", "all_checks"] },
+        "allowed_files": { "type": "array", "items": { "type": "string" } },
+        "allowed_generated_paths": { "type": "array", "items": { "type": "string" } },
+        "scope_validation": { "type": "string" },
+        "smoke_checks": { "type": "array", "items": { "$ref": "#/$defs/smoke" } },
+        "rollback": { "$ref": "#/$defs/rollback" },
+        "sidecar_policy": { "$ref": "#/$defs/sidecar" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

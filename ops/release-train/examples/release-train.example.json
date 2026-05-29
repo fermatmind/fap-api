@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "train_id": "ops-release-train-example-01",
+  "environment": "production",
+  "mode": "dry_run",
+  "stop_on_failure": true,
+  "rollback_on_failed_smoke": true,
+  "allow_merge": false,
+  "allow_deploy": false,
+  "allow_rollback": false,
+  "items": [
+    {
+      "id": "ops-03-pr-03-sitemap-source",
+      "repo": "fap-api",
+      "pr_number": 1755,
+      "expected_head_sha": "a1b2c3d4e5f6",
+      "expected_merge_sha": "a1b2c3d4e5f6",
+      "component": "backend",
+      "risk_level": "medium",
+      "deploy_required": true,
+      "deploy_order": "backend_first",
+      "required_checks_policy": "required_only",
+      "allowed_files": [
+        "backend/app/Http/Controllers/API/V0_5/SEO/**",
+        "backend/routes/api.php",
+        "backend/app/Services/SEO/**",
+        "tests/Feature/**",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/**"
+      ],
+      "allowed_generated_paths": [
+        "backend/artifacts/**",
+        "backend/storage/framework/views/**"
+      ],
+      "scope_validation": "required_scope_only",
+      "smoke_checks": [
+        { "url": "https://fermatmind.com/healthz", "expected_status": 200, "method": "GET", "timeout_seconds": 8, "retries": 2 },
+        { "url": "https://fermatmind.com/api/v0.5/seo/sitemap-source", "expected_status": 200, "method": "GET", "timeout_seconds": 8, "retries": 2 },
+        { "url": "https://fermatmind.com/sitemap.xml", "expected_status": 200, "method": "GET", "timeout_seconds": 8, "retries": 2 },
+        { "url": "https://fermatmind.com/llms.txt", "expected_status": 200, "method": "GET", "timeout_seconds": 10, "retries": 2 },
+        { "url": "https://fermatmind.com/llms-full.txt", "expected_status": 200, "method": "GET", "timeout_seconds": 10, "retries": 2 },
+        { "url": "https://fermatmind.com/robots.txt", "expected_status": 200, "method": "GET", "timeout_seconds": 8, "retries": 2 },
+        { "url": "https://fermatmind.com/api/v0.5/career/datasets/occupations?locale=zh-CN", "expected_status": 200, "method": "GET", "timeout_seconds": 10, "retries": 2 },
+        { "url": "https://fermatmind.com/api/v0.5/career/jobs/software-developers?locale=zh-CN", "expected_status": 404, "method": "GET", "timeout_seconds": 10, "retries": 2 }
+      ],
+      "rollback": {
+        "enabled": false,
+        "wrapper": "backend/scripts/deploy/rollback_backend.sh"
+      },
+      "sidecar_policy": {
+        "allow_nonblocking_sidecars": false,
+        "create_issue": false,
+        "issue_title_prefix": "release-train-sidecar"
+      }
+    }
+  ]
+}

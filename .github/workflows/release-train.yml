@@ -1,0 +1,138 @@
+name: Release Train
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest_path:
+        description: Manifest file path
+        required: true
+        default: ops/release-train/examples/release-train.example.json
+      mode:
+        description: Execution mode
+        required: true
+        type: choice
+        default: validate
+        options:
+          - validate
+          - plan
+          - dry-run
+          - run
+      train_id:
+        description: Optional train id override
+        required: false
+      allow_merge:
+        description: Allow auto-merge in run mode
+        required: false
+        type: boolean
+        default: false
+      allow_deploy:
+        description: Allow deploy execution in run mode
+        required: false
+        type: boolean
+        default: false
+      allow_rollback:
+        description: Allow rollback execution if smoke fails
+        required: false
+        type: boolean
+        default: false
+      dry_run:
+        description: Request dry-run behavior regardless of mode
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: production-release-train
+  queue: max
+
+permissions:
+  contents: read
+  pull-requests: read
+  actions: read
+  issues: write
+  deployments: write
+
+jobs:
+  validate:
+    name: Validate train manifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate manifest
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          python3 -m json.tool "${{ github.event.inputs.manifest_path }}"
+          python3 ops/release-train/release_train.py validate-manifest \
+            --manifest "${{ github.event.inputs.manifest_path }}" \
+            --output artifacts/validation.json
+          python3 ops/release-train/release_train.py plan \
+            --manifest "${{ github.event.inputs.manifest_path }}" \
+            --output artifacts/plan.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: release-train-validate
+          path: |
+            artifacts/validation.json
+            artifacts/plan.json
+
+  dry-run:
+    name: Train dry-run
+    needs: validate
+    if: ${{ github.event.inputs.mode == 'dry-run' || github.event.inputs.mode == 'validate' || github.event.inputs.dry_run == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dry-run execution
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          python3 ops/release-train/release_train.py dry-run \
+            --manifest "${{ github.event.inputs.manifest_path }}" \
+            --output artifacts/dry-run.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: release-train-dry-run
+          path: artifacts/dry-run.json
+
+  production-gate:
+    name: Production deployment approval
+    needs: dry-run
+    if: ${{ github.event.inputs.mode == 'run' && github.event.inputs.allow_deploy == 'true' && github.event.inputs.dry_run != 'true' }}
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Deployment approval gate
+        run: echo "Production environment approval captured"
+
+  run-train:
+    name: Run release train
+    needs: production-gate
+    if: ${{ github.event.inputs.mode == 'run' && github.event.inputs.dry_run != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute train
+        env:
+          RELEASE_TRAIN_ALLOW_MERGE: ${{ github.event.inputs.allow_merge }}
+          RELEASE_TRAIN_ALLOW_DEPLOY: ${{ github.event.inputs.allow_deploy }}
+          RELEASE_TRAIN_ALLOW_ROLLBACK: ${{ github.event.inputs.allow_rollback }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          python3 ops/release-train/release_train.py run \
+            --manifest "${{ github.event.inputs.manifest_path }}" \
+            --train-id "${{ github.event.inputs.train_id }}" \
+            --allow-merge "${RELEASE_TRAIN_ALLOW_MERGE}" \
+            --allow-deploy "${RELEASE_TRAIN_ALLOW_DEPLOY}" \
+            --allow-rollback "${RELEASE_TRAIN_ALLOW_ROLLBACK}" \
+            --output artifacts/run.json
+          cat artifacts/run.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: release-train-run
+          path: artifacts/run.json
+
