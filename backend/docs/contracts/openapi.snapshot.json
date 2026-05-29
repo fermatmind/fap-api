@@ -3852,7 +3852,7 @@
         },
         "/api/v0.5/seo/sitemap-source": {
             "get": {
-                "operationId": "get_api_v0_5_seo_sitemap_source",
+                "operationId": "seo.sitemap-source",
                 "tags": [
                     "api:v0.5"
                 ],
@@ -3864,7 +3864,8 @@
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\SEO\\SitemapSourceController@index",
                 "x-laravel-middleware": [
                     "api"
-                ]
+                ],
+                "x-laravel-name": "seo.sitemap-source"
             }
         },
         "/api/v0.5/support/articles": {
