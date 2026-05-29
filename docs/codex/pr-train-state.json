@@ -23298,7 +23298,7 @@
   "GSC-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/gsc-live-00-readiness-contract",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "SEARCH-CHANNEL-LIVE-00"
     ],
@@ -23480,8 +23480,8 @@
     "depends_on": [
       "BAIDU-LIVE-00"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "b3dbb67377f8db85054d34d0a640807329da4621",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1754",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -31862,6 +31862,16 @@
         "status": "local_checks_passed",
         "at": "2026-05-29T06:37:27Z",
         "summary": "Focused test, route list, Pint, Composer validate/audit, JSON/YAML parse, git diff --check, and fap-web reference status passed. Task ran in an isolated worktree because the original fap-api worktree had unrelated dirty files."
+      },
+      {
+        "status": "committed",
+        "at": "2026-05-29T06:38:49Z",
+        "summary": "Committed scoped reconciliation report, generated JSON, focused test, and PR train metadata."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-29T06:39:36Z",
+        "summary": "Opened PR #1754 for CAREER-1046-OPS-SCOPE-RECONCILIATION-01."
       }
     ],
     "scope_validation": {
