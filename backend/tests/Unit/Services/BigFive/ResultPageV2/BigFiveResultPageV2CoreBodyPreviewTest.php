@@ -2006,6 +2006,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_content_packs_index_phase3_responsibility_shrink(): void
+    {
+        $changed = [
+            'backend/app/Services/Content/ContentPacksIndex.php',
+            'backend/app/Services/Content/ContentPacksIndexFallbackScanner.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_bigfive_v2_content_asset_loader_changes(): void
     {
         $changed = [
@@ -3016,6 +3026,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/ContentPacksIndexBuild.php',
             'backend/app/Services/Content/ContentPacksIndex.php',
             'backend/app/Services/Content/ContentPacksIndexArtifactStore.php',
+            'backend/app/Services/Content/ContentPacksIndexFallbackScanner.php',
         ], true);
     }
 

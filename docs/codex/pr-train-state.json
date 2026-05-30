@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-30T21:41:10Z",
+  "updated_at": "2026-05-30T22:22:42Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -32258,5 +32258,98 @@
     },
     "sidecars": [],
     "next_task": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-PREFLIGHT-01"
+  },
+  "CONTENT-PACKS-INDEX-RESPONSIBILITY-SHRINK-01": {
+    "repo": "fap-api",
+    "branch": "fix/content-packs-index-responsibility-shrink-01",
+    "status": "pr_open",
+    "commit_sha": "c22422007167a4cc80b31adabe85320cc727d2d8",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1765",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "CONTENT-PACKS-INDEX-ARTIFACT-01 was merged as PR #1763 and origin/main contains merge commit 12a66f8c08949f430625d678b83e104fceda213c."
+      },
+      "content_packs_index_artifact": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=ContentPacksIndexArtifact --no-ansi",
+        "evidence": "4 tests passed, 16 assertions."
+      },
+      "content_packs_index_manifest_consistency": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=ContentPacksIndexManifestConsistency --no-ansi",
+        "evidence": "3 tests passed, 12 assertions."
+      },
+      "bigfive_runtime_freeze_classifier": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi",
+        "evidence": "142 tests passed, 489 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "207 routes listed."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "3645 files checked."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "composer.json is valid."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\"",
+        "evidence": "PR train state JSON and manifest YAML parsed."
+      },
+      "mbti_ci": {
+        "status": "pass",
+        "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+        "evidence": "Full script exited 0 after Phase 3 ContentPacksIndex responsibility split."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "Whitespace check passed before staging."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-30T22:09:52Z",
+        "summary": "User confirmed PR id CONTENT-PACKS-INDEX-RESPONSIBILITY-SHRINK-01, branch fix/content-packs-index-responsibility-shrink-01, and title for Phase 3."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-30T22:09:52Z",
+        "summary": "Started Phase 3 in an isolated worktree from origin/main because the primary fap-api worktree had unrelated analytics changes."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-30T22:20:46Z",
+        "summary": "Focused content pack tests, Big Five runtime freeze classifier, route list, Pint, Composer validate, JSON/YAML parse, git diff --check, and full ci_verify_mbti passed."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-30T22:22:42Z",
+        "summary": "Opened PR #1765 for CONTENT-PACKS-INDEX-RESPONSIBILITY-SHRINK-01."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [
+      "Primary fap-api worktree has unrelated analytics funnel changes; this task uses an isolated worktree from origin/main."
+    ],
+    "next_task": "Phase 4 content pack build/validate CI job decomposition requires explicit authorization"
   }
 }

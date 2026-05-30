@@ -88,6 +88,7 @@ final class ContentPacksIndexManifestConsistencyTest extends TestCase
 
         // mutate manifest/version to a new pack_id in the same dir_version
         $this->writePack($packDir, 'PACK_B', $dirVersion, 'v-test-2');
+        $this->touchPackFiles($packDir, time() + 2);
 
         $stale = $index->find('PACK_A', $dirVersion);
         $this->assertFalse((bool) ($stale['ok'] ?? false));
@@ -174,5 +175,14 @@ final class ContentPacksIndexManifestConsistencyTest extends TestCase
                 ],
             ], JSON_UNESCAPED_UNICODE)
         );
+    }
+
+    private function touchPackFiles(string $packDir, int $timestamp): void
+    {
+        foreach (['manifest.json', 'version.json', 'questions.json'] as $filename) {
+            touch($packDir.DIRECTORY_SEPARATOR.$filename, $timestamp);
+        }
+
+        clearstatcache(true);
     }
 }
