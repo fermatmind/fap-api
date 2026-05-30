@@ -32358,12 +32358,12 @@
     "branch": "content/pr-pol-01-policies-dashboard",
     "base": "main",
     "title": "PR-POL-01 add policies dashboard content",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "PR #1767 merged"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "732d6b45",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1769",
     "checks": [
       {
         "command": "manifest/state authorization",
@@ -32424,6 +32424,11 @@
         "command": "git diff --check",
         "status": "passed",
         "summary": "No whitespace errors in unstaged diff."
+      },
+      {
+        "command": "gh pr create --title \"PR-POL-01: Add policies dashboard\" --base main --head content/pr-pol-01-policies-dashboard --body-file /tmp/pr-pol-01-body.md",
+        "status": "passed",
+        "summary": "Opened PR #1769 for PR-POL-01."
       }
     ],
     "failure_reason": null,
@@ -32445,12 +32450,17 @@
         "status": "local_checks_passed",
         "at": "2026-05-31T00:00:00+08:00",
         "summary": "PR-POL-01 content-only policies dashboard update passed scoped local validation."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "Opened PR #1769 after scoped local validations passed."
       }
     ],
     "scope_validation": {
       "allowed_paths_only": true,
       "git_diff_check": "passed",
-      "git_diff_cached_check": null
+      "git_diff_cached_check": "passed"
     },
     "sidecars": [
       "Primary fap-api worktree has unrelated dirty files; PR-POL-01 is implemented in an isolated worktree from origin/main."
