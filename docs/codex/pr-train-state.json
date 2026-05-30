@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T07:03:28+08:00",
+  "updated_at": "2026-05-31T07:04:11+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -32364,9 +32364,9 @@
   "CONTENT-PACKS-CI-ARTIFACT-CONSUMER-SPLIT-01": {
     "repo": "fap-api",
     "branch": "fix/content-packs-ci-artifact-consumer-split-01",
-    "status": "committed",
+    "status": "pr_open",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1768",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -32447,6 +32447,10 @@
       "commit_created": {
         "status": "pass",
         "evidence": "Local commit created; exact PR head SHA is reported outside the self-referential state file and will be reconciled after PR creation/checks."
+      },
+      "pr_created": {
+        "status": "pass",
+        "evidence": "Opened GitHub PR #1768."
       }
     },
     "failure_reason": null,
@@ -32473,6 +32477,11 @@
         "status": "committed",
         "at": "2026-05-31T07:03:13+08:00",
         "summary": "Committed Phase 4 CI artifact consumer split; PR head SHA will be reconciled after push/PR creation."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T07:04:11+08:00",
+        "summary": "Opened PR #1768 for CONTENT-PACKS-CI-ARTIFACT-CONSUMER-SPLIT-01."
       }
     ],
     "scope_validation": {
