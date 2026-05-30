@@ -312,13 +312,13 @@
 
             <div class="grid gap-5 xl:grid-cols-2">
                 <div class="space-y-3 text-sm leading-6 text-slate-700">
-                    <p><strong>Hard facts in v1:</strong> <code>test_start</code> from <code>attempts.created_at</code>, <code>order_created</code> from <code>orders.created_at</code>, <code>payment_success</code> from <code>orders.paid_at</code> with a payment-event fallback, <code>unlock_success</code> from active <code>benefit_grants</code>, and <code>report_ready</code> from ready/readable <code>report_snapshots</code>.</p>
-                    <p><strong>Behavioral / approximate stages:</strong> <code>first_result_or_report_view</code> comes from normalized view events. It is intentionally a single merged stage in v1 and stays downstream of submit in the authority chain.</p>
+                    <p><strong>Hard facts in v1:</strong> <code>test_start</code> from <code>attempts.created_at</code>, <code>order_created</code> from <code>orders.created_at</code>, <code>payment_success</code> from <code>orders.paid_at</code> with a payment-event fallback, <code>report_unlock</code> from active <code>benefit_grants</code>, and <code>report_ready</code> from ready/readable <code>report_snapshots</code>.</p>
+                    <p><strong>Behavioral / approximate stages:</strong> <code>result_view</code> comes from normalized view events. It is intentionally a single merged stage in v1 and stays downstream of submit in the authority chain.</p>
                     <p><strong>Explicitly non-authoritative in v1:</strong> PDF downloads, share generated, share clicks, paywall views, landing views, channel attribution, region comparisons, and any share-to-purchase revenue story.</p>
                 </div>
 
                 <ul class="space-y-2 text-sm leading-6 text-slate-700">
-                    <li><strong>Main stages:</strong> <code>test_start</code>, <code>test_submit_success</code>, <code>first_result_or_report_view</code>, <code>order_created</code>, <code>payment_success</code>, <code>unlock_success</code>, <code>report_ready</code>.</li>
+                    <li><strong>Main stages:</strong> <code>test_start</code>, <code>test_submit</code>, <code>result_view</code>, <code>order_created</code>, <code>payment_success</code>, <code>report_unlock</code>, <code>report_ready</code>.</li>
                     <li><strong>Trailing panels only:</strong> <code>pdf_download</code>, <code>share_generate</code>, <code>share_click</code>.</li>
                     <li><strong>Why paywall_view stays out:</strong> event taxonomy and attribution around paywall exposure are still too unstable to serve as the first authority stage.</li>
                     <li><strong>Why locale/scale only:</strong> they are the stable operating cuts today; region, channel, and attribution dimensions remain exploratory.</li>

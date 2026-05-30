@@ -3,6 +3,8 @@
 namespace App\Filament\Ops\Widgets;
 
 use App\Filament\Ops\Support\OpsMetricsAccess;
+use App\Support\OrgContext;
+use App\Support\SchemaBaseline;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +12,22 @@ use Illuminate\Support\Facades\DB;
 class FunnelWidget extends BaseWidget
 {
     protected static bool $isLazy = false;
+
+    private const EMPTY_READ_MODEL_MESSAGE = 'No analytics_funnel_daily rows for this range. Run analytics:refresh-funnel-daily in a controlled task.';
+
+    /** @var array<string,string> */
+    private const CANONICAL_STAGES = [
+        'test_start' => 'started_attempts',
+        'test_submit' => 'submitted_attempts',
+        'result_view' => 'first_view_attempts',
+        'order_created' => 'order_created_attempts',
+        'payment_success' => 'paid_attempts',
+        'report_unlock' => 'unlocked_attempts',
+        'report_ready' => 'report_ready_attempts',
+        'pdf_download' => 'pdf_download_attempts',
+        'share_generate' => 'share_generated_attempts',
+        'share_click' => 'share_click_attempts',
+    ];
 
     public static function canView(): bool
     {
@@ -23,52 +41,49 @@ class FunnelWidget extends BaseWidget
 
     protected function getStats(): array
     {
-        $events = [
-            'attempt_start' => __('ops.widgets.attempt_start'),
-            'attempt_submit' => __('ops.widgets.attempt_submit'),
-            'paywall_view' => __('ops.widgets.paywall_view'),
-            'checkout' => __('ops.widgets.checkout'),
-            'payment_success' => __('ops.widgets.paid'),
-            'unlocked' => __('ops.widgets.unlocked'),
-        ];
-
-        $from = now()->subDays(7)->toDateString();
-
-        $rows = collect();
-        if (\App\Support\SchemaBaseline::hasTable('v_funnel_daily')) {
-            $rows = DB::table('v_funnel_daily')
-                ->where('day', '>=', $from)
-                ->whereIn('event_name', array_keys($events))
-                ->select('event_name', DB::raw('SUM(events_count) as total'))
-                ->groupBy('event_name')
-                ->get();
-        } elseif (\App\Support\SchemaBaseline::hasTable('events')) {
-            $rows = DB::table('events')
-                ->where('occurred_at', '>=', now()->subDays(7))
-                ->whereIn('event_name', array_keys($events))
-                ->select('event_name', DB::raw('COUNT(*) as total'))
-                ->groupBy('event_name')
-                ->get();
+        if (! SchemaBaseline::hasTable('analytics_funnel_daily')) {
+            return [$this->emptyReadModelStat()];
         }
 
-        if ($rows->isEmpty()) {
+        $orgId = max(0, (int) app(OrgContext::class)->orgId());
+        if ($orgId <= 0) {
             return [
                 Stat::make(__('ops.widgets.funnel'), __('ops.widgets.no_data'))
-                    ->description(__('ops.widgets.no_funnel_events_7d'))
+                    ->description(__('ops.widgets.select_org_to_view_metrics'))
                     ->color('gray'),
             ];
         }
 
-        $totals = [];
-        foreach ($rows as $row) {
-            $totals[(string) $row->event_name] = (int) ($row->total ?? 0);
+        $from = now()->subDays(6)->toDateString();
+        $to = now()->toDateString();
+
+        $query = DB::table('analytics_funnel_daily')
+            ->where('org_id', $orgId)
+            ->whereBetween('day', [$from, $to]);
+
+        $selects = ['COUNT(*) as row_count'];
+        foreach (self::CANONICAL_STAGES as $metric) {
+            $selects[] = 'SUM('.$metric.') as '.$metric;
+        }
+
+        $row = $query->selectRaw(implode(', ', $selects))->first();
+        if ((int) ($row->row_count ?? 0) <= 0) {
+            return [$this->emptyReadModelStat()];
         }
 
         $stats = [];
-        foreach ($events as $key => $label) {
-            $stats[] = Stat::make($label, (string) ($totals[$key] ?? 0));
+        foreach (self::CANONICAL_STAGES as $stage => $metric) {
+            $stats[] = Stat::make($stage, (string) ((int) ($row->{$metric} ?? 0)))
+                ->description('analytics_funnel_daily.'.$metric);
         }
 
         return $stats;
+    }
+
+    private function emptyReadModelStat(): Stat
+    {
+        return Stat::make(__('ops.widgets.funnel'), __('ops.widgets.no_data'))
+            ->description(self::EMPTY_READ_MODEL_MESSAGE)
+            ->color('gray');
     }
 }

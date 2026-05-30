@@ -32120,5 +32120,143 @@
     },
     "sidecars": [],
     "next_task": "Phase 3 ContentPacksIndex responsibility shrink requires explicit authorization"
+  },
+  "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01": {
+    "id": "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/analytics-funnel-ops-read-model-repair-01",
+    "base": "main",
+    "title": "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01 connect Ops 7-day funnel to unified taxonomy read model",
+    "status": "ci_fix_local_checks_passed",
+    "depends_on": [
+      "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01"
+    ],
+    "commit_sha": "10bdb0eb1009df0657d20a9692797d50dffec746",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1764",
+    "checks": [
+      {
+        "command": "manifest/state authorization",
+        "status": "passed",
+        "summary": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json only for ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01."
+      },
+      {
+        "command": "php artisan test --filter=FunnelWidget --no-ansi",
+        "status": "passed",
+        "summary": "2 tests passed, 17 assertions."
+      },
+      {
+        "command": "php artisan test --filter=FunnelConversionPage --no-ansi",
+        "status": "passed",
+        "summary": "1 test passed, 17 assertions."
+      },
+      {
+        "command": "php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi",
+        "status": "passed",
+        "summary": "2 tests passed, 27 assertions."
+      },
+      {
+        "command": "php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "Route list rendered successfully with 207 routes."
+      },
+      {
+        "command": "vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "Pint passed across 3645 files."
+      },
+      {
+        "command": "composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid."
+      },
+      {
+        "command": "composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found."
+      },
+      {
+        "command": "python3 -m json.tool backend/docs/seo/generated/analytics-funnel-ops-read-model-repair-01.v1.json >/dev/null",
+        "status": "passed",
+        "summary": "Generated Ops read-model repair JSON parses."
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed",
+        "summary": "PR train state JSON parses."
+      },
+      {
+        "command": "python3 - <<'PY' import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()) PY",
+        "status": "passed",
+        "summary": "PR train manifest YAML parses."
+      },
+      {
+        "command": "git diff --check",
+        "status": "passed",
+        "summary": "No whitespace errors in unstaged diff."
+      },
+      {
+        "command": "fap-web reference status",
+        "status": "passed",
+        "summary": "Reference-only fap-web worktree is clean and was not modified."
+      },
+      {
+        "command": "git diff --cached --check",
+        "status": "passed",
+        "summary": "No whitespace errors in staged diff."
+      },
+      {
+        "command": "GitHub checks on PR #1764 initial run",
+        "status": "failed",
+        "summary": "verify-mbti-legacy and verify-mbti-v2 failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier did not yet allow the Ops funnel read-model files."
+      },
+      {
+        "command": "php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_analytics_funnel_ops_read_model_changes --no-ansi",
+        "status": "passed",
+        "summary": "1 test passed, 1 assertion after adding the narrow Ops funnel read-model freeze allowlist."
+      },
+      {
+        "command": "CI fix validation rerun",
+        "status": "passed",
+        "summary": "FunnelWidget, FunnelConversionPage, AnalyticsFunnelDailyBuilder, route:list, pint, composer validate, composer audit, JSON/YAML parse, and diff checks passed after the CI fix."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T06:03:41+08:00",
+        "summary": "User authorized this scoped Ops read-model repair PR and manifest/state updates."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-31T06:03:41+08:00",
+        "summary": "Started from latest origin/main on scoped branch codex/analytics-funnel-ops-read-model-repair-01."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-31T06:07:06+08:00",
+        "summary": "Scoped local validation passed for Ops 7-day funnel read-model repair."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T06:09:59+08:00",
+        "summary": "Opened PR #1764 after scoped local validations passed."
+      },
+      {
+        "status": "ci_fix_local_checks_passed",
+        "at": "2026-05-31T06:23:28+08:00",
+        "summary": "Added narrow BigFive runtime freeze allowlist for the Ops funnel read-model files and reran scoped validations."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [],
+    "next_task": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-PREFLIGHT-01"
   }
 }
