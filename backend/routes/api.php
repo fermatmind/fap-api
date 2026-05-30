@@ -71,6 +71,7 @@ use App\Http\Controllers\API\V0_5\Cms\PersonalityDesktopCloneController;
 use App\Http\Controllers\API\V0_5\Cms\ResearchReportController;
 use App\Http\Controllers\API\V0_5\Cms\SupportArticleController;
 use App\Http\Controllers\API\V0_5\Cms\TopicController;
+use App\Http\Controllers\API\V0_5\Foundation\DailyGivingRecordController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkOverrideController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkPatchController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkReviewQueueController;
@@ -491,6 +492,10 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/datasets/occupations/method', [CareerDatasetMethodController::class, 'show']);
     Route::get('/seo/sitemap-source', [SitemapSourceController::class, 'index'])
         ->name('seo.sitemap-source');
+    Route::get('/foundation/giving-records/months', [DailyGivingRecordController::class, 'months']);
+    Route::get('/foundation/giving-records/months/{yearMonth}', [DailyGivingRecordController::class, 'monthRecords']);
+    Route::get('/foundation/giving-records', [DailyGivingRecordController::class, 'index']);
+    Route::get('/foundation/giving-records/{recordCode}', [DailyGivingRecordController::class, 'show']);
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::get('/articles/{slug}', [ArticleController::class, 'show']);
     Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
