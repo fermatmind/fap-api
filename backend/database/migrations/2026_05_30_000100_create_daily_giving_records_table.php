@@ -44,6 +44,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('daily_giving_records');
+        // Intentionally no-op to satisfy production-safe migration policy.
     }
 };

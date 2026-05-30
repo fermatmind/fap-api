@@ -780,6 +780,38 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_daily_giving_ledger_mvp_files(): void
+    {
+        $routeChangedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_5\\Foundation\\DailyGivingRecordController;',
+            '+    Route::get(\'/foundation/giving-records/months\', [DailyGivingRecordController::class, \'months\']);',
+            '+    Route::get(\'/foundation/giving-records/months/{yearMonth}\', [DailyGivingRecordController::class, \'monthRecords\']);',
+            '+    Route::get(\'/foundation/giving-records\', [DailyGivingRecordController::class, \'index\']);',
+            '+    Route::get(\'/foundation/giving-records/{recordCode}\', [DailyGivingRecordController::class, \'show\']);',
+        ];
+
+        $changed = [
+            'backend/app/Filament/Ops/Resources/DailyGivingRecordResource.php',
+            'backend/app/Filament/Ops/Resources/DailyGivingRecordResource/Pages/CreateDailyGivingRecord.php',
+            'backend/app/Filament/Ops/Resources/DailyGivingRecordResource/Pages/EditDailyGivingRecord.php',
+            'backend/app/Filament/Ops/Resources/DailyGivingRecordResource/Pages/ListDailyGivingRecords.php',
+            'backend/app/Http/Controllers/API/V0_5/Foundation/DailyGivingRecordController.php',
+            'backend/app/Http/Resources/Foundation/DailyGivingRecordResource.php',
+            'backend/app/Models/DailyGivingRecord.php',
+            'backend/database/factories/DailyGivingRecordFactory.php',
+            'backend/database/migrations/2026_05_30_000100_create_daily_giving_records_table.php',
+            'backend/routes/api.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            null,
+            $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_chinese_claim_linter_runtime_files(): void
     {
         $changed = [
@@ -2320,6 +2352,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isDailyGivingLedgerFile($file)) {
+                continue;
+            }
+
             if ($this->isResearchBackendMvpFile($file)) {
                 continue;
             }
@@ -2663,6 +2699,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsDailyGivingLedgerOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
             if ($this->isBigFiveV2PilotSupportFile($file)) {
                 continue;
             }
@@ -2964,6 +3007,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/ArticlePublishService.php',
             'backend/app/Services/Cms/ArticleService.php',
             'backend/database/migrations/2026_05_06_010000_add_org_scope_to_personality_profile_children.php',
+        ], true);
+    }
+
+    private function isDailyGivingLedgerFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Resources/DailyGivingRecordResource.php',
+            'backend/app/Filament/Ops/Resources/DailyGivingRecordResource/Pages/CreateDailyGivingRecord.php',
+            'backend/app/Filament/Ops/Resources/DailyGivingRecordResource/Pages/EditDailyGivingRecord.php',
+            'backend/app/Filament/Ops/Resources/DailyGivingRecordResource/Pages/ListDailyGivingRecords.php',
+            'backend/app/Http/Controllers/API/V0_5/Foundation/DailyGivingRecordController.php',
+            'backend/app/Http/Resources/Foundation/DailyGivingRecordResource.php',
+            'backend/app/Models/DailyGivingRecord.php',
+            'backend/database/factories/DailyGivingRecordFactory.php',
+            'backend/database/migrations/2026_05_30_000100_create_daily_giving_records_table.php',
         ], true);
     }
 
@@ -4384,6 +4442,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/^[+-].*(SitemapSourceController|\\/seo\\/sitemap-source|seo\\.sitemap-source)/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsDailyGivingLedgerOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_5\\Foundation\\DailyGivingRecordController;',
+            '+    Route::get(\'/foundation/giving-records/months\', [DailyGivingRecordController::class, \'months\']);',
+            '+    Route::get(\'/foundation/giving-records/months/{yearMonth}\', [DailyGivingRecordController::class, \'monthRecords\']);',
+            '+    Route::get(\'/foundation/giving-records\', [DailyGivingRecordController::class, \'index\']);',
+            '+    Route::get(\'/foundation/giving-records/{recordCode}\', [DailyGivingRecordController::class, \'show\']);',
+        ];
+
+        foreach ($changedLines as $line) {
+            if (! in_array($line, $allowedLines, true)) {
                 return false;
             }
         }
