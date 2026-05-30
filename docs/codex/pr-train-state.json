@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-29T09:00:00Z",
+  "updated_at": "2026-05-30T21:41:10Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -32033,9 +32033,9 @@
   "CONTENT-PACKS-INDEX-ARTIFACT-01": {
     "repo": "fap-api",
     "branch": "fix/content-packs-index-artifact-01",
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "7e0cc715e03b105e51c9556596212c48bb962868",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1763",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -32106,6 +32106,11 @@
         "status": "local_checks_passed",
         "at": "2026-05-30T21:36:18Z",
         "summary": "Focused content pack artifact tests, manifest consistency, Big Five runtime freeze classifier, route list, Pint, Composer validate, JSON/YAML parse, git diff --check, and full ci_verify_mbti passed on latest origin/main."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-30T21:41:10Z",
+        "summary": "Opened PR #1763 for CONTENT-PACKS-INDEX-ARTIFACT-01."
       }
     ],
     "scope_validation": {
