@@ -16304,3 +16304,210 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: post-merge cleanup only after PR-POL-01 merge
+
+  - id: PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01
+    repo: fap-api
+    branch: codex/payment-alipay-pending-compensation-scheduler-01
+    base: main
+    title: "PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01 schedule Alipay pending payment compensation"
+    train_scope: payment_alipay_pending_compensation_scheduler
+    risk_level: p1_payment_fulfillment_reliability
+    allowed_paths:
+      - backend/app/Console/Kernel.php
+      - backend/tests/Feature/Commerce/AlipayPendingCompensationSchedulerTest.php
+      - backend/docs/runbooks/alipay-pending-compensation.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Register the existing Alipay pending-order compensation command in Laravel scheduler with a conservative stale window and batch limit.
+      - Query stale Alipay created/pending orders and transition only provider-confirmed paid orders into the existing paid/order repair chain.
+      - Keep expiration/close behavior disabled; do not add --close-expired in this PR.
+      - Add focused scheduler registration coverage and an operations runbook for dry-run and targeted repair.
+      - Do not mutate production env, deploy, mutate CMS/content, submit URLs, enqueue Search Channel actions, or modify fap-web in this PR.
+    validation:
+      - cd backend && php artisan test --filter=AlipayPendingCompensationScheduler --no-ansi
+      - cd backend && php artisan test --filter=CommercePendingCompensationCommand --no-ansi
+      - cd backend && php artisan test --filter=PendingOrderLifecycleCompensation --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: deploy-readiness required after merge
+
+  - id: ANALYTICS-FUNNEL-EVENT-TAXONOMY-01
+    repo: fap-api
+    branch: codex/analytics-funnel-event-taxonomy-01
+    base: main
+    title: "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01 unify canonical funnel event taxonomy"
+    train_scope: analytics_funnel_event_taxonomy
+    risk_level: p1_analytics_funnel_observability
+    depends_on: []
+    allowed_paths:
+      - backend/app/Services/Analytics/FunnelEventTaxonomy.php
+      - backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php
+      - backend/docs/seo/analytics-funnel-event-taxonomy-01.md
+      - backend/docs/seo/generated/analytics-funnel-event-taxonomy-01.v1.json
+      - backend/tests/Feature/SeoIntel/AnalyticsFunnelEventTaxonomy01Test.php
+      - backend/tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Define the canonical analytics funnel event taxonomy and backward-compatible aliases.
+      - Add backend alias normalization for analytics_funnel_daily result view and PDF stages.
+      - Preserve backend fact sources for attempt start, submit, order, payment, report unlock, report ready, share generation, and share click.
+      - Document that checkout_start, order_created, payment_success, and report_unlock are separate stages.
+      - Do not configure GA key events, run production analytics refresh, deploy, mutate CMS/DB, submit URLs, or touch Search Channel.
+    validation:
+      - cd backend && php artisan test --filter=AnalyticsFunnelEventTaxonomy01 --no-ansi
+      - cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/analytics-funnel-event-taxonomy-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01 explicit approval required before implementation
+
+  - id: ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01
+    repo: fap-api
+    branch: codex/analytics-funnel-ops-read-model-repair-01
+    base: main
+    title: "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01 connect Ops 7-day funnel to unified taxonomy read model"
+    train_scope: analytics_funnel_ops_read_model_repair
+    risk_level: p1_analytics_funnel_observability
+    depends_on:
+      - ANALYTICS-FUNNEL-EVENT-TAXONOMY-01
+    allowed_paths:
+      - backend/app/Filament/Ops/Widgets/FunnelWidget.php
+      - backend/app/Filament/Ops/Pages/FunnelConversionPage.php
+      - backend/resources/views/filament/ops/pages/funnel-conversion-page.blade.php
+      - backend/docs/seo/analytics-funnel-ops-read-model-repair-01.md
+      - backend/docs/seo/generated/analytics-funnel-ops-read-model-repair-01.v1.json
+      - backend/tests/Feature/Ops/FunnelWidgetTest.php
+      - backend/tests/Feature/Ops/FunnelConversionPageTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Make the Ops dashboard 7-day FunnelWidget read analytics_funnel_daily as the read model truth.
+      - Stop presenting v_funnel_daily or raw events as the primary Ops 7-day funnel authority.
+      - Display canonical taxonomy stage labels for the supported analytics_funnel_daily columns.
+      - Update the /ops/funnel-conversion display labels from legacy stage names to canonical taxonomy names.
+      - Document that production refresh, DB writes, migrations, scheduler changes, GA/Baidu settings, Search Channel actions, URL submissions, and fap-web changes were not performed.
+    validation:
+      - cd backend && php artisan test --filter=FunnelWidget --no-ansi
+      - cd backend && php artisan test --filter=FunnelConversionPage --no-ansi
+      - cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_analytics_funnel_ops_read_model_changes --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/analytics-funnel-ops-read-model-repair-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: ANALYTICS-FUNNEL-CONTROLLED-REFRESH-PREFLIGHT-01
+
+  - id: CONTENT-PACKS-INDEX-ARTIFACT-01
+    repo: fap-api
+    branch: fix/content-packs-index-artifact-01
+    base: main
+    title: "CONTENT-PACKS-INDEX-ARTIFACT-01 precompile content pack index artifact"
+    train_scope: content_packs_index_artifact
+    risk_level: p1_ci_memory_and_runtime_hardening
+    depends_on:
+      - PR #1753 merged
+    allowed_paths:
+      - backend/app/Services/Content/ContentPacksIndex.php
+      - backend/app/Services/Content/ContentPacksIndexArtifactStore.php
+      - backend/app/Console/Commands/ContentPacksIndexBuild.php
+      - backend/config/content_packs.php
+      - backend/tests/Unit/Services/Content/ContentPacksIndexArtifactTest.php
+      - backend/tests/Unit/Services/Content/ContentPacksIndexManifestConsistencyTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add a precompiled content pack index artifact path for tests and internal services.
+      - Keep public API contracts and ContentPacksIndex find/getIndex return shape backward-compatible.
+      - Prefer artifact reads only when explicitly enabled by config; keep streaming directory scan as fallback.
+      - Add focused tests proving artifact/source consistency and stale artifact fallback.
+      - Do not refactor CI workflows; Phase 4 owns CI job decomposition.
+    do_not:
+      - Change public API response contracts.
+      - Change content package source files or question/item semantics.
+      - Remove the ContentPacksIndex streaming fallback path.
+      - Refactor MBTI, Big Five, report, attempt, scoring, or content pack publishing runtime.
+      - Modify fap-web, CMS, DB, migrations, Search Channel, URL submission, deploy, or production env.
+    validation:
+      - cd backend && php artisan test --filter=ContentPacksIndexArtifact --no-ansi
+      - cd backend && php artisan test --filter=ContentPacksIndexManifestConsistency --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - cd backend && vendor/bin/pint --test
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && composer validate --strict
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: Phase 3 ContentPacksIndex responsibility shrink requires explicit authorization
