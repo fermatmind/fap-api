@@ -45,13 +45,15 @@
     "english_copy_creation_mode": "import_package_metadata_only"
   },
   "current_baseline_summary": {
-    "content_pages_en_count": 4,
+    "content_pages_en_count": 7,
     "content_pages_zh_count": 9,
     "help_pages_en_count": 6,
     "help_pages_zh_count": 6,
-    "total_rows": 25,
+    "total_rows": 28,
     "existing_authority_pairs": [
       "about",
+      "careers",
+      "foundation",
       "help-about",
       "help-contact",
       "help-faq",
@@ -59,15 +61,13 @@
       "help-team",
       "help-used-and-mentioned",
       "method-boundaries",
+      "policies",
       "privacy",
       "terms"
     ],
     "missing_english_counterparts": [
       "brand",
-      "careers",
-      "charter",
-      "foundation",
-      "policies"
+      "charter"
     ],
     "missing_chinese_counterparts": []
   },
@@ -87,41 +87,8 @@
       "entity_type": "content_page",
       "source_locale": "zh-CN",
       "target_locale": "en",
-      "source_slug": "careers",
-      "translation_group_id": "content-page-careers",
-      "target_publication_state": "draft_import_candidate",
-      "body_status": "requires_human_translation",
-      "sitemap_llms_exposure_allowed": false,
-      "claim_boundary_required": true
-    },
-    {
-      "entity_type": "content_page",
-      "source_locale": "zh-CN",
-      "target_locale": "en",
       "source_slug": "charter",
       "translation_group_id": "content-page-charter",
-      "target_publication_state": "draft_import_candidate",
-      "body_status": "requires_human_translation",
-      "sitemap_llms_exposure_allowed": false,
-      "claim_boundary_required": true
-    },
-    {
-      "entity_type": "content_page",
-      "source_locale": "zh-CN",
-      "target_locale": "en",
-      "source_slug": "foundation",
-      "translation_group_id": "content-page-foundation",
-      "target_publication_state": "draft_import_candidate",
-      "body_status": "requires_human_translation",
-      "sitemap_llms_exposure_allowed": false,
-      "claim_boundary_required": true
-    },
-    {
-      "entity_type": "content_page",
-      "source_locale": "zh-CN",
-      "target_locale": "en",
-      "source_slug": "policies",
-      "translation_group_id": "content-page-policies",
       "target_publication_state": "draft_import_candidate",
       "body_status": "requires_human_translation",
       "sitemap_llms_exposure_allowed": false,

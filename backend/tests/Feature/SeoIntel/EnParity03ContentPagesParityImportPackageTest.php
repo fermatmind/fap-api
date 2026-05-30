@@ -39,13 +39,10 @@ final class EnParity03ContentPagesParityImportPackageTest extends TestCase
         $this->assertFalse((bool) data_get($payload, 'content_generation_policy.mass_english_generation_allowed'));
         $this->assertFalse((bool) data_get($payload, 'content_generation_policy.draft_exposure_allowed_in_sitemap_llms'));
 
-        $this->assertSame(25, data_get($payload, 'current_baseline_summary.total_rows'));
+        $this->assertSame(28, data_get($payload, 'current_baseline_summary.total_rows'));
         $this->assertSame([
             'brand',
-            'careers',
             'charter',
-            'foundation',
-            'policies',
         ], data_get($payload, 'current_baseline_summary.missing_english_counterparts'));
 
         foreach ($payload['deferred_import_candidates'] ?? [] as $candidate) {
@@ -111,7 +108,6 @@ final class EnParity03ContentPagesParityImportPackageTest extends TestCase
         $this->assertSame([
             'content-page-brand',
             'content-page-charter',
-            'content-page-policies',
         ], $missing);
         $this->assertFalse((bool) ($matrix['frontend_fallback_authority_used'] ?? true));
         $this->assertFalse((bool) ($matrix['summary']['counterpart_lookup_uses_slug_guessing_only'] ?? true));
@@ -137,10 +133,10 @@ final class EnParity03ContentPagesParityImportPackageTest extends TestCase
         $this->assertContains('https://fermatmind.com/zh/brand', $locs);
         $this->assertContains('https://fermatmind.com/en/about', $locs);
         $this->assertContains('https://fermatmind.com/en/careers', $locs);
+        $this->assertContains('https://fermatmind.com/en/policies', $locs);
         $this->assertNotContains('https://fermatmind.com/en/brand', $locs);
         $this->assertNotContains('https://fermatmind.com/en/charter', $locs);
         $this->assertNotContains('https://fermatmind.com/en/foundation', $locs);
-        $this->assertNotContains('https://fermatmind.com/en/policies', $locs);
     }
 
     private function mockScaleRegistry(): ScaleRegistry
