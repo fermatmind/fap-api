@@ -16133,3 +16133,60 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: Phase 3 ContentPacksIndex responsibility shrink requires explicit authorization
+
+  - id: CONTENT-PACKS-INDEX-RESPONSIBILITY-SHRINK-01
+    repo: fap-api
+    branch: fix/content-packs-index-responsibility-shrink-01
+    base: main
+    title: "CONTENT-PACKS-INDEX-RESPONSIBILITY-SHRINK-01 shrink ContentPacksIndex to artifact loader and minimal fallback"
+    train_scope: content_packs_index_responsibility_shrink
+    risk_level: p1_ci_memory_and_runtime_hardening
+    depends_on:
+      - CONTENT-PACKS-INDEX-ARTIFACT-01 merged
+    allowed_paths:
+      - backend/app/Services/Content/ContentPacksIndex.php
+      - backend/app/Services/Content/ContentPacksIndexFallbackScanner.php
+      - backend/tests/Unit/Services/Content/ContentPacksIndexArtifactTest.php
+      - backend/tests/Unit/Services/Content/ContentPacksIndexManifestConsistencyTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Shrink ContentPacksIndex into artifact/cache orchestration, find(), and minimal freshness fallback behavior.
+      - Move streaming source-directory traversal and manifest/version/questions source validation into a dedicated fallback scanner.
+      - Keep artifact schema, public API contracts, getIndex/find return shape, and content package semantics backward-compatible.
+      - Preserve fallback scanning for missing, disabled, invalid, or stale artifacts.
+      - Do not refactor CI workflows; Phase 4 owns content pack build/validate job decomposition.
+    do_not:
+      - Change public API response contracts.
+      - Change content package source files or question/item semantics.
+      - Remove the fallback scan path.
+      - Enable artifact runtime use by default.
+      - Refactor MBTI, Big Five, report, attempt, scoring, or content pack publishing runtime beyond the exact ContentPacksIndex responsibility split.
+      - Modify fap-web, CMS, DB, migrations, Search Channel, URL submission, deploy, production env, or CI workflow files.
+    validation:
+      - cd backend && php artisan test --filter=ContentPacksIndexArtifact --no-ansi
+      - cd backend && php artisan test --filter=ContentPacksIndexManifestConsistency --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - cd backend && vendor/bin/pint --test
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && composer validate --strict
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: Phase 4 content pack build/validate CI job decomposition requires explicit authorization

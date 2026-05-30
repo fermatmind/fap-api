@@ -115,6 +115,31 @@ final class ContentPacksIndexArtifactTest extends TestCase
         $this->assertFalse((bool) config('content_packs.index_artifact_enabled'));
     }
 
+    public function test_artifact_hit_does_not_invoke_fallback_scanner(): void
+    {
+        $dirVersion = 'MBTI-CN-v-test';
+        $this->writePack($this->makePackDir($dirVersion), 'PACK_A', $dirVersion, 'v-test');
+
+        $store = app(ContentPacksIndexArtifactStore::class);
+        $store->write(app(ContentPacksIndex::class)->getIndex(true), $this->artifactPath);
+
+        $this->forgetIndexCache();
+        config()->set('content_packs.index_artifact_enabled', true);
+
+        $index = new ContentPacksIndex($store, new class extends \App\Services\Content\ContentPacksIndexFallbackScanner
+        {
+            public function scan(string $packsRootFs, string $driver, array $defaults): array
+            {
+                throw new \RuntimeException('fallback scanner should not run on artifact hit');
+            }
+        });
+
+        $fromArtifact = $index->getIndex(false);
+
+        $this->assertTrue((bool) ($fromArtifact['ok'] ?? false));
+        $this->assertSame('PACK_A', (string) ($fromArtifact['items'][0]['pack_id'] ?? ''));
+    }
+
     private function makePackDir(string $dirVersion): string
     {
         $packDir = $this->packsRoot.DIRECTORY_SEPARATOR.'default'
