@@ -15969,3 +15969,52 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: RESULT-EMAIL-ACCESS-LINK-03 deploy-readiness required after merge
+
+  - id: ANALYTICS-FUNNEL-EVENT-TAXONOMY-01
+    repo: fap-api
+    branch: codex/analytics-funnel-event-taxonomy-01
+    base: main
+    title: "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01 unify canonical funnel event taxonomy"
+    train_scope: analytics_funnel_event_taxonomy
+    risk_level: p1_analytics_funnel_observability
+    depends_on: []
+    allowed_paths:
+      - backend/app/Services/Analytics/FunnelEventTaxonomy.php
+      - backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php
+      - backend/docs/seo/analytics-funnel-event-taxonomy-01.md
+      - backend/docs/seo/generated/analytics-funnel-event-taxonomy-01.v1.json
+      - backend/tests/Feature/SeoIntel/AnalyticsFunnelEventTaxonomy01Test.php
+      - backend/tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Define the canonical analytics funnel event taxonomy and backward-compatible aliases.
+      - Add backend alias normalization for analytics_funnel_daily result view and PDF stages.
+      - Preserve backend fact sources for attempt start, submit, order, payment, report unlock, report ready, share generation, and share click.
+      - Document that checkout_start, order_created, payment_success, and report_unlock are separate stages.
+      - Do not configure GA key events, run production analytics refresh, deploy, mutate CMS/DB, submit URLs, or touch Search Channel.
+    validation:
+      - cd backend && php artisan test --filter=AnalyticsFunnelEventTaxonomy01 --no-ansi
+      - cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/analytics-funnel-event-taxonomy-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01 explicit approval required before implementation
