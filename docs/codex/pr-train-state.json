@@ -31906,5 +31906,128 @@
     },
     "sidecars": [],
     "next_task": "CAREER-1046-OPS-READ-MODEL-REPAIR-01 explicit approval required before implementation"
+  },
+  "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01": {
+    "id": "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01",
+    "repo": "fap-api",
+    "branch": "codex/analytics-funnel-event-taxonomy-01",
+    "base": "main",
+    "title": "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01 unify canonical funnel event taxonomy",
+    "status": "ci_fix_local_checks_passed",
+    "depends_on": [],
+    "commit_sha": "265e1dcc58edd5a122627ff0e61594c5e3dbeeab",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1761",
+    "checks": [
+      {
+        "command": "manifest/state authorization",
+        "status": "passed",
+        "summary": "User explicitly authorized adding only ANALYTICS-FUNNEL-EVENT-TAXONOMY-01 to fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+      },
+      {
+        "command": "php artisan test --filter=AnalyticsFunnelEventTaxonomy01 --no-ansi",
+        "status": "passed",
+        "summary": "3 tests passed, 24 assertions."
+      },
+      {
+        "command": "php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi",
+        "status": "passed",
+        "summary": "2 tests passed, 27 assertions."
+      },
+      {
+        "command": "php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "Route list rendered successfully with 207 routes."
+      },
+      {
+        "command": "composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid."
+      },
+      {
+        "command": "composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found."
+      },
+      {
+        "command": "vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "Pint passed across 3641 files after formatting the new taxonomy class."
+      },
+      {
+        "command": "python3 -m json.tool backend/docs/seo/generated/analytics-funnel-event-taxonomy-01.v1.json >/dev/null",
+        "status": "passed",
+        "summary": "Generated analytics funnel taxonomy JSON parses."
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed",
+        "summary": "PR train state JSON parses."
+      },
+      {
+        "command": "python3 - <<'PY' import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()) PY",
+        "status": "passed",
+        "summary": "PR train manifest YAML parses."
+      },
+      {
+        "command": "git diff --check && git diff --cached --check",
+        "status": "passed",
+        "summary": "No whitespace errors in unstaged or cached diff."
+      },
+      {
+        "command": "GitHub checks on PR #1761 initial run",
+        "status": "failed",
+        "summary": "verify-mbti-legacy and verify-mbti-v2 failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier did not yet allow the analytics funnel taxonomy/read-model files."
+      },
+      {
+        "command": "php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff --no-ansi",
+        "status": "passed",
+        "summary": "1 test passed, 3 assertions after adding a narrow analytics funnel taxonomy allowlist to the freeze gate."
+      },
+      {
+        "command": "CI fix validation rerun",
+        "status": "passed",
+        "summary": "AnalyticsFunnelEventTaxonomy01, AnalyticsFunnelDailyBuilder, route:list, composer validate, composer audit, pint, JSON/YAML parse, and diff checks passed after the CI fix."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "User explicitly authorized this scoped backend implementation PR and the ANALYTICS-FUNNEL-EVENT-TAXONOMY-01 manifest/state entry."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "Started implementation in an isolated worktree from origin/main because the primary fap-api worktree had unrelated dirty content-page changes."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-31T05:28:15+08:00",
+        "summary": "All scoped local validations passed in the isolated worktree."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T05:31:00+08:00",
+        "summary": "Opened PR #1761 after local validations passed."
+      },
+      {
+        "status": "ci_fix_local_checks_passed",
+        "at": "2026-05-31T05:40:00+08:00",
+        "summary": "Added a narrow test-side runtime freeze allowlist for the analytics funnel taxonomy/read-model files and reran scoped validations."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [
+      "Primary fap-api worktree had unrelated dirty files on content/pr-hiring-01a-en-careers-authority; this task used an isolated worktree from origin/main."
+    ],
+    "next_task": "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01 explicit approval required before implementation"
   }
 }

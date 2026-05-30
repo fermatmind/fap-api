@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "task": "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01",
+  "final_decision": "analytics_funnel_event_taxonomy_completed_ready_for_ops_read_model_repair",
+  "canonical_events": [
+    "page_view",
+    "test_start",
+    "question_answer",
+    "test_submit",
+    "result_view",
+    "checkout_start",
+    "order_created",
+    "payment_success",
+    "report_unlock",
+    "report_ready",
+    "pdf_download",
+    "share_generate",
+    "share_click",
+    "membership_start",
+    "retest_start",
+    "historical_report_revisit",
+    "source_attribution"
+  ],
+  "legacy_aliases": {
+    "start_attempt": "test_start",
+    "submit_attempt": "test_submit",
+    "view_result": "result_view",
+    "create_order": "order_created",
+    "begin_checkout": "checkout_start",
+    "payment_confirmed": "payment_success",
+    "purchase_success": "payment_success",
+    "pay_success": "payment_success",
+    "unlock_success": "report_unlock",
+    "clinical_unlock_success": "report_unlock",
+    "report_pdf_view": "pdf_download",
+    "pdf_download": "pdf_download",
+    "revisit_result": "historical_report_revisit"
+  },
+  "analytics_funnel_daily_mapping": {
+    "test_start": {
+      "source": "attempts.created_at",
+      "metric": "started_attempts"
+    },
+    "test_submit": {
+      "source": "attempts.submitted_at|attempt_submissions|results fallback",
+      "metric": "submitted_attempts"
+    },
+    "result_view": {
+      "source": "events",
+      "aliases": [
+        "result_view",
+        "view_result",
+        "report_view",
+        "report_viewed",
+        "clinical_combo_68_report_viewed",
+        "sds_20_report_viewed"
+      ],
+      "metric": "first_view_attempts"
+    },
+    "order_created": {
+      "source": "orders.created_at",
+      "metric": "order_created_attempts"
+    },
+    "payment_success": {
+      "source": "orders.paid_at|payment_events",
+      "metric": "paid_attempts"
+    },
+    "report_unlock": {
+      "source": "active benefit_grants",
+      "legacy_metric": "unlocked_attempts"
+    },
+    "report_ready": {
+      "source": "ready report_snapshots",
+      "metric": "report_ready_attempts"
+    },
+    "pdf_download": {
+      "source": "events",
+      "aliases": [
+        "pdf_download",
+        "report_pdf_view"
+      ],
+      "metric": "pdf_download_attempts"
+    },
+    "share_generate": {
+      "source": "shares",
+      "metric": "share_generated_attempts"
+    },
+    "share_click": {
+      "source": "events.share_click",
+      "metric": "share_click_attempts"
+    }
+  },
+  "fact_sources_preserved": {
+    "test_start": true,
+    "test_submit": true,
+    "order_created": true,
+    "payment_success": true,
+    "report_unlock": true,
+    "report_ready": true,
+    "share_generate": true,
+    "share_click": true
+  },
+  "no_ga_admin_change": true,
+  "no_baidu_setting_change": true,
+  "no_production_refresh": true,
+  "no_production_db_mutation": true,
+  "no_cms_mutation": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "deferred_followups": [
+    "ops read model repair and production dry-run",
+    "GA4 key event mapping after taxonomy deployment",
+    "membership_start event contract",
+    "retest_start event contract",
+    "historical_report_revisit event contract",
+    "source attribution dashboard dimensions"
+  ],
+  "next_task": "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01"
+}

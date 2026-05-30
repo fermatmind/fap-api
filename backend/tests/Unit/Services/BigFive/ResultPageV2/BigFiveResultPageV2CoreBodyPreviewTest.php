@@ -2775,6 +2775,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isAnalyticsFunnelEventTaxonomyFile($file)) {
+                continue;
+            }
+
             if ($this->isEq60V5ReportAssetLayerChange($file)) {
                 continue;
             }
@@ -4211,6 +4215,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isResultEmailAccessLinkDeliveryFile(string $file): bool
     {
         return $file === 'backend/app/Services/Email/EmailOutboxService.php';
+    }
+
+    private function isAnalyticsFunnelEventTaxonomyFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php',
+            'backend/app/Services/Analytics/FunnelEventTaxonomy.php',
+        ], true);
     }
 
     /**

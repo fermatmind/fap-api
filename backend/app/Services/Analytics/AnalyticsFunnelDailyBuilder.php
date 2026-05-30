@@ -11,22 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 final class AnalyticsFunnelDailyBuilder
 {
-    private const FIRST_VIEW_EVENT_ALIASES = [
-        'result_view',
-        'report_view',
-        'report_viewed',
-        'clinical_combo_68_report_viewed',
-        'sds_20_report_viewed',
-    ];
-
-    private const PDF_EVENT_ALIASES = [
-        'report_pdf_view',
-    ];
-
-    private const SHARE_CLICK_EVENT_ALIASES = [
-        'share_click',
-    ];
-
     private const SUBMISSION_SUCCESS_STATES = [
         'succeeded',
         'success',
@@ -548,7 +532,7 @@ final class AnalyticsFunnelDailyBuilder
             $query->whereIn('org_id', $orgIds);
         }
 
-        $this->applyEventAliasFilter($query, self::FIRST_VIEW_EVENT_ALIASES);
+        $this->applyEventAliasFilter($query, FunnelEventTaxonomy::FIRST_RESULT_OR_REPORT_VIEW_ALIASES);
         $query->havingRaw('MIN(occurred_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
 
         return $this->rowsToAttemptMap($query->get()->all(), 'attempt_id', 'stage_at');
@@ -768,7 +752,7 @@ final class AnalyticsFunnelDailyBuilder
             $query->whereIn('org_id', $orgIds);
         }
 
-        $this->applyEventAliasFilter($query, self::PDF_EVENT_ALIASES);
+        $this->applyEventAliasFilter($query, FunnelEventTaxonomy::PDF_DOWNLOAD_ALIASES);
         $query->havingRaw('MIN(occurred_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
 
         return $this->rowsToAttemptMap($query->get()->all(), 'attempt_id', 'stage_at');
@@ -831,7 +815,7 @@ final class AnalyticsFunnelDailyBuilder
             $query->whereIn('events.org_id', $orgIds);
         }
 
-        $this->applyEventAliasFilter($query, self::SHARE_CLICK_EVENT_ALIASES, 'events');
+        $this->applyEventAliasFilter($query, FunnelEventTaxonomy::SHARE_CLICK_ALIASES, 'events');
 
         return $this->rowsToAttemptMap($query->get()->all(), 'attempt_id', 'stage_at');
     }
