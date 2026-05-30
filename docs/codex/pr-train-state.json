@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-29T09:00:00Z",
+  "updated_at": "2026-05-30T21:41:10Z",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -32029,5 +32029,96 @@
       "Primary fap-api worktree had unrelated dirty files on content/pr-hiring-01a-en-careers-authority; this task used an isolated worktree from origin/main."
     ],
     "next_task": "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01 explicit approval required before implementation"
+  },
+  "CONTENT-PACKS-INDEX-ARTIFACT-01": {
+    "repo": "fap-api",
+    "branch": "fix/content-packs-index-artifact-01",
+    "status": "pr_open",
+    "commit_sha": "7e0cc715e03b105e51c9556596212c48bb962868",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1763",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #1753 is merged and origin/main is the base for this isolated worktree."
+      },
+      "content_packs_index_artifact": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=ContentPacksIndexArtifact --no-ansi",
+        "evidence": "3 tests passed, 14 assertions."
+      },
+      "content_packs_index_manifest_consistency": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=ContentPacksIndexManifestConsistency --no-ansi",
+        "evidence": "3 tests passed, 12 assertions."
+      },
+      "bigfive_runtime_freeze_classifier": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreview --no-ansi",
+        "evidence": "141 tests passed, 488 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "207 routes listed."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "3642 files checked."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "composer.json is valid."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\"",
+        "evidence": "PR train state JSON and manifest YAML parsed."
+      },
+      "mbti_ci": {
+        "status": "pass",
+        "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+        "evidence": "Full script exited 0 on latest origin/main base after Phase 2 changes."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "Whitespace check passed before staging."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-30T21:19:09Z",
+        "summary": "User authorized adding the missing PR train manifest/state entry and creating fix/content-packs-index-artifact-01 from latest main for Phase 2 only."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-30T21:19:09Z",
+        "summary": "Started Phase 2 in an isolated clean worktree because the original fap-api worktree had unrelated dirty content page baseline/test files."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-30T21:36:18Z",
+        "summary": "Focused content pack artifact tests, manifest consistency, Big Five runtime freeze classifier, route list, Pint, Composer validate, JSON/YAML parse, git diff --check, and full ci_verify_mbti passed on latest origin/main."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-30T21:41:10Z",
+        "summary": "Opened PR #1763 for CONTENT-PACKS-INDEX-ARTIFACT-01."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": null
+    },
+    "sidecars": [],
+    "next_task": "Phase 3 ContentPacksIndex responsibility shrink requires explicit authorization"
   }
 }
