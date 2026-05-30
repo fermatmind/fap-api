@@ -32619,7 +32619,7 @@
     "repo": "fap-api",
     "branch": "codex/payment-alipay-pending-compensation-scheduler-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "github_checks_failed_fix_prepared",
     "title": "PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01 schedule Alipay pending payment compensation",
     "commit_sha": "d265ad35424f51c7f7d9a62a0a7cd701368276ad",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1766",
@@ -32681,6 +32681,21 @@
         "status": "pass",
         "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
         "evidence": "PASS: no fap-web changes reported."
+      },
+      "github_checks_failure_inspection": {
+        "status": "fail_inspected",
+        "command": "gh run view 26696608778 --log-failed",
+        "evidence": "verify-mbti-legacy and verify-mbti-v2 failed because BigFiveResultPageV2CoreBodyPreviewTest classified backend/app/Console/Kernel.php as MBTI-impacting runtime change."
+      },
+      "mbti_runtime_freeze_retry": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+        "evidence": "PASS: 143 tests, 495 assertions after adding the Alipay scheduler-only Kernel classifier exemption."
+      },
+      "scheduler_test_retry": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=AlipayPendingCompensationScheduler --no-ansi",
+        "evidence": "PASS: 1 test, 8 assertions."
       }
     },
     "failure_reason": null,
@@ -32712,6 +32727,16 @@
         "status": "pr_open",
         "at": "2026-05-30T22:28:37Z",
         "summary": "Opened PR #1766 for PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01."
+      },
+      {
+        "status": "github_checks_failed",
+        "at": "2026-05-30T22:32:30Z",
+        "summary": "GitHub verify-mbti-legacy and verify-mbti-v2 failed on BigFiveResultPageV2CoreBodyPreviewTest because the scheduler-only Kernel change is not yet exempted by the runtime-freeze classifier."
+      },
+      {
+        "status": "github_checks_failed_fix_prepared",
+        "at": "2026-05-30T22:45:00Z",
+        "summary": "User authorized adding BigFiveResultPageV2CoreBodyPreviewTest to current PR scope; local runtime-freeze retry and scheduler focused test passed."
       }
     ],
     "scope_validation": {
