@@ -16040,6 +16040,7 @@ prs:
       - backend/docs/seo/generated/analytics-funnel-ops-read-model-repair-01.v1.json
       - backend/tests/Feature/Ops/FunnelWidgetTest.php
       - backend/tests/Feature/Ops/FunnelConversionPageTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     scope:
@@ -16052,6 +16053,7 @@ prs:
       - cd backend && php artisan test --filter=FunnelWidget --no-ansi
       - cd backend && php artisan test --filter=FunnelConversionPage --no-ansi
       - cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_analytics_funnel_ops_read_model_changes --no-ansi
       - cd backend && php artisan route:list --no-ansi
       - cd backend && vendor/bin/pint --test
       - cd backend && composer validate --strict

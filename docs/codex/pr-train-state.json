@@ -32127,7 +32127,7 @@
     "branch": "codex/analytics-funnel-ops-read-model-repair-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01 connect Ops 7-day funnel to unified taxonomy read model",
-    "status": "pr_open",
+    "status": "ci_fix_local_checks_passed",
     "depends_on": [
       "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01"
     ],
@@ -32203,6 +32203,21 @@
         "command": "git diff --cached --check",
         "status": "passed",
         "summary": "No whitespace errors in staged diff."
+      },
+      {
+        "command": "GitHub checks on PR #1764 initial run",
+        "status": "failed",
+        "summary": "verify-mbti-legacy and verify-mbti-v2 failed because BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classifier did not yet allow the Ops funnel read-model files."
+      },
+      {
+        "command": "php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_analytics_funnel_ops_read_model_changes --no-ansi",
+        "status": "passed",
+        "summary": "1 test passed, 1 assertion after adding the narrow Ops funnel read-model freeze allowlist."
+      },
+      {
+        "command": "CI fix validation rerun",
+        "status": "passed",
+        "summary": "FunnelWidget, FunnelConversionPage, AnalyticsFunnelDailyBuilder, route:list, pint, composer validate, composer audit, JSON/YAML parse, and diff checks passed after the CI fix."
       }
     ],
     "failure_reason": null,
@@ -32229,6 +32244,11 @@
         "status": "pr_open",
         "at": "2026-05-31T06:09:59+08:00",
         "summary": "Opened PR #1764 after scoped local validations passed."
+      },
+      {
+        "status": "ci_fix_local_checks_passed",
+        "at": "2026-05-31T06:23:28+08:00",
+        "summary": "Added narrow BigFive runtime freeze allowlist for the Ops funnel read-model files and reran scoped validations."
       }
     ],
     "scope_validation": {

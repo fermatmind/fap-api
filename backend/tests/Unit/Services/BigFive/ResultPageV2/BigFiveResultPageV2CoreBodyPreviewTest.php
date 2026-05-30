@@ -1996,6 +1996,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_analytics_funnel_ops_read_model_changes(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Pages/FunnelConversionPage.php',
+            'backend/app/Filament/Ops/Widgets/FunnelWidget.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_bigfive_v2_content_asset_loader_changes(): void
     {
         $changed = [
@@ -2791,6 +2801,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isAnalyticsFunnelEventTaxonomyFile($file)) {
+                continue;
+            }
+
+            if ($this->isAnalyticsFunnelOpsReadModelFile($file)) {
                 continue;
             }
 
@@ -4246,6 +4260,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php',
             'backend/app/Services/Analytics/FunnelEventTaxonomy.php',
+        ], true);
+    }
+
+    private function isAnalyticsFunnelOpsReadModelFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Pages/FunnelConversionPage.php',
+            'backend/app/Filament/Ops/Widgets/FunnelWidget.php',
         ], true);
     }
 
