@@ -110,7 +110,6 @@ final class EnParity03ContentPagesParityImportPackageTest extends TestCase
 
         $this->assertSame([
             'content-page-brand',
-            'content-page-careers',
             'content-page-charter',
             'content-page-policies',
         ], $missing);
@@ -137,8 +136,8 @@ final class EnParity03ContentPagesParityImportPackageTest extends TestCase
 
         $this->assertContains('https://fermatmind.com/zh/brand', $locs);
         $this->assertContains('https://fermatmind.com/en/about', $locs);
+        $this->assertContains('https://fermatmind.com/en/careers', $locs);
         $this->assertNotContains('https://fermatmind.com/en/brand', $locs);
-        $this->assertNotContains('https://fermatmind.com/en/careers', $locs);
         $this->assertNotContains('https://fermatmind.com/en/charter', $locs);
         $this->assertNotContains('https://fermatmind.com/en/foundation', $locs);
         $this->assertNotContains('https://fermatmind.com/en/policies', $locs);
