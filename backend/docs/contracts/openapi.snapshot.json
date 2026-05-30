@@ -3151,6 +3151,74 @@
                 ]
             }
         },
+        "/api/v0.5/foundation/giving-records": {
+            "get": {
+                "operationId": "get_api_v0_5_foundation_giving_records",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Foundation\\DailyGivingRecordController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/foundation/giving-records/months": {
+            "get": {
+                "operationId": "get_api_v0_5_foundation_giving_records_months",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Foundation\\DailyGivingRecordController@months",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/foundation/giving-records/months/{yearMonth}": {
+            "get": {
+                "operationId": "get_api_v0_5_foundation_giving_records_months_yearmonth_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Foundation\\DailyGivingRecordController@monthRecords",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/foundation/giving-records/{recordCode}": {
+            "get": {
+                "operationId": "get_api_v0_5_foundation_giving_records_recordcode_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Foundation\\DailyGivingRecordController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/internal/career/crosswalk/override/{slug}": {
             "get": {
                 "operationId": "get_api_v0_5_internal_career_crosswalk_override_slug_",
