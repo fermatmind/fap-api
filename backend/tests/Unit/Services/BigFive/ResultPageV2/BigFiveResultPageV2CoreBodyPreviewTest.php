@@ -249,6 +249,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_sitemap_source_cache_command_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/WarmSitemapSourceCacheCommand.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_commerce_tenant_repair_command_changes(): void
     {
         $changed = [
@@ -2336,6 +2345,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSitemapSourceCacheCommandFile($file)) {
+                continue;
+            }
+
             if ($this->isContentReleaseRevalidateAutomationFile($file)) {
                 continue;
             }
@@ -2957,6 +2970,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCiScaleImpactCommandFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/CiScaleImpact.php';
+    }
+
+    private function isSitemapSourceCacheCommandFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/WarmSitemapSourceCacheCommand.php';
     }
 
     private function isContentReleaseRevalidateAutomationFile(string $file): bool
