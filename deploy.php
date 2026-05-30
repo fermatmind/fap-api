@@ -454,6 +454,17 @@ task('career:warm-public-authority-cache', function () {
     ));
 });
 
+task('seo:warm-sitemap-source-cache', function () {
+    $timeoutSeconds = (int) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_TIMEOUT') ?: 180);
+    $timeoutSeconds = max(120, $timeoutSeconds);
+
+    run(sprintf(
+        'timeout %d {{bin/php}} %s seo:warm-sitemap-source-cache --json --no-interaction --ansi',
+        $timeoutSeconds,
+        deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
+    ));
+});
+
 task('guard:public-content-release', function () {
     $strictCareerFlag = filter_var((string) (getenv('DEPLOY_PUBLIC_CONTENT_STRICT_CAREER') ?: ''), FILTER_VALIDATE_BOOLEAN)
         ? ' --strict-career'
@@ -1319,7 +1330,8 @@ after('guard:no-pending-migrations', 'artisan:scales:seed-default');
 after('artisan:scales:seed-default', 'cms:import-landing-surface-baselines');
 after('cms:import-landing-surface-baselines', 'cms:import-content-page-baselines');
 after('cms:import-content-page-baselines', 'career:warm-public-authority-cache');
-after('career:warm-public-authority-cache', 'guard:public-content-release');
+after('career:warm-public-authority-cache', 'seo:warm-sitemap-source-cache');
+after('seo:warm-sitemap-source-cache', 'guard:public-content-release');
 after('guard:public-content-release', 'ensure:release-runtime-perms');
 
 after('deploy:symlink', 'ensure:nginx-public-static-media-route');

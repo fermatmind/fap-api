@@ -10,10 +10,68 @@ use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Http\Controllers\Controller;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class SitemapSourceController extends Controller
 {
+    private const CACHE_KEY_FRESH = 'seo:sitemap-source:v1:fresh';
+
+    private const CACHE_KEY_STALE = 'seo:sitemap-source:v1:stale';
+
+    private const CACHE_KEY_LOCK = 'seo:sitemap-source:v1:lock';
+
+    private const FRESH_TTL_SECONDS = 600;
+
+    private const STALE_TTL_SECONDS = 86400;
+
+    private const LOCK_TTL_SECONDS = 120;
+
     public function index(SitemapGenerator $generator, CareerRuntimePublishProjectionLookup $projection): JsonResponse
+    {
+        $fresh = Cache::get(self::CACHE_KEY_FRESH);
+        if (is_array($fresh)) {
+            return $this->cachedResponse($fresh, 'hit');
+        }
+
+        $stale = Cache::get(self::CACHE_KEY_STALE);
+        if (is_array($stale)) {
+            return $this->cachedResponse($stale, 'stale');
+        }
+
+        $lock = Cache::lock(self::CACHE_KEY_LOCK, self::LOCK_TTL_SECONDS);
+        if ($lock->get()) {
+            try {
+                $payload = $this->buildPayload($generator, $projection);
+                $this->storeCache($payload);
+
+                return $this->cachedResponse($payload, 'miss');
+            } catch (\Throwable $throwable) {
+                $staleRetry = Cache::get(self::CACHE_KEY_STALE);
+                if (is_array($staleRetry)) {
+                    return $this->cachedResponse($staleRetry, 'stale');
+                }
+
+                throw $throwable;
+            } finally {
+                $lock->release();
+            }
+        }
+
+        $staleRetry = Cache::get(self::CACHE_KEY_STALE);
+        if (is_array($staleRetry)) {
+            return $this->cachedResponse($staleRetry, 'stale');
+        }
+
+        $payload = $this->buildPayload($generator, $projection);
+        $this->storeCache($payload);
+
+        return $this->cachedResponse($payload, 'miss');
+    }
+
+    /**
+     * @return array{ok: bool, source: string, count: int, items: list<array{loc: string, lastmod: string}>}
+     */
+    public function buildPayload(SitemapGenerator $generator, CareerRuntimePublishProjectionLookup $projection): array
     {
         $items = collect($generator->generateUrls())
             ->map(static function (array $item): array {
@@ -32,12 +90,35 @@ class SitemapSourceController extends Controller
             ->values()
             ->all();
 
-        return response()->json([
+        return [
             'ok' => true,
             'source' => 'backend_sitemap_generator',
             'count' => count($items),
             'items' => $items,
-        ])->header('Cache-Control', 'public, max-age=300, s-maxage=600');
+        ];
+    }
+
+    /**
+     * @param  array{ok: bool, source: string, count: int, items: list<array{loc: string, lastmod: string}>}  $payload
+     */
+    private function cachedResponse(array $payload, string $cacheState): JsonResponse
+    {
+        $cacheControl = $cacheState === 'stale'
+            ? 'public, max-age=60, s-maxage=120'
+            : 'public, max-age=300, s-maxage=600';
+
+        return response()->json($payload)
+            ->header('X-Fermat-Cache', $cacheState)
+            ->header('Cache-Control', $cacheControl);
+    }
+
+    /**
+     * @param  array{ok: bool, source: string, count: int, items: list<array{loc: string, lastmod: string}>}  $payload
+     */
+    private function storeCache(array $payload): void
+    {
+        Cache::put(self::CACHE_KEY_FRESH, $payload, self::FRESH_TTL_SECONDS);
+        Cache::put(self::CACHE_KEY_STALE, $payload, self::STALE_TTL_SECONDS);
     }
 
     private function normalizeOwnedCanonicalUrl(string $loc): string
