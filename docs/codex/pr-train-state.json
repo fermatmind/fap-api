@@ -32493,5 +32493,125 @@
       "Primary fap-api worktree has unrelated dirty changes; this task uses an isolated worktree from origin/main."
     ],
     "next_task": "Open PR for Phase 4 CI artifact consumer split; do not merge until required GitHub checks pass."
+  },
+  "PR-POL-01": {
+    "id": "PR-POL-01",
+    "repo": "fap-api",
+    "branch": "content/pr-pol-01-policies-dashboard",
+    "base": "main",
+    "title": "PR-POL-01 add policies dashboard content",
+    "status": "pr_open",
+    "depends_on": [
+      "PR #1767 merged"
+    ],
+    "commit_sha": "99245b30",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1769",
+    "checks": [
+      {
+        "command": "manifest/state authorization",
+        "status": "passed",
+        "summary": "User explicitly authorized adding PR-POL-01 to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json, then implementing from uploaded v2 assets."
+      },
+      {
+        "command": "python3 -m json.tool content_baselines/content_pages/content_pages.zh-CN.json >/dev/null",
+        "status": "passed",
+        "summary": "ZH content page baseline JSON parses."
+      },
+      {
+        "command": "python3 -m json.tool content_baselines/content_pages/content_pages.en.json >/dev/null",
+        "status": "passed",
+        "summary": "EN content page baseline JSON parses."
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed",
+        "summary": "PR train state JSON parses."
+      },
+      {
+        "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+        "status": "passed",
+        "summary": "PR train manifest YAML parses."
+      },
+      {
+        "command": "static forbidden phrase scan on changed diff and updated policies records",
+        "status": "passed",
+        "summary": "No forbidden phrases found in the changed diff or updated policies records."
+      },
+      {
+        "command": "php artisan test --filter=ContentPage --no-ansi",
+        "status": "passed",
+        "summary": "Completed with warnings only; no failed tests."
+      },
+      {
+        "command": "php artisan test --filter=EnParity --no-ansi",
+        "status": "passed",
+        "summary": "Completed with warnings only; no failed tests."
+      },
+      {
+        "command": "php artisan test --filter=Sitemap --no-ansi",
+        "status": "passed",
+        "summary": "Completed with warnings/pass output only; no failed tests."
+      },
+      {
+        "command": "php artisan test --filter=SitemapSource --no-ansi",
+        "status": "passed",
+        "summary": "Completed with warnings only; no failed tests."
+      },
+      {
+        "command": "composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid."
+      },
+      {
+        "command": "git diff --check",
+        "status": "passed",
+        "summary": "No whitespace errors in unstaged diff."
+      },
+      {
+        "command": "gh pr create --title \"PR-POL-01: Add policies dashboard\" --base main --head content/pr-pol-01-policies-dashboard --body-file /tmp/pr-pol-01-body.md",
+        "status": "passed",
+        "summary": "Opened PR #1769 for PR-POL-01."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "User authorized adding the missing PR-POL-01 manifest/state entry and implementing the scoped policies dashboard content update."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "Started from latest origin/main in an isolated worktree on content/pr-pol-01-policies-dashboard."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "PR-POL-01 content-only policies dashboard update passed scoped local validation."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "Opened PR #1769 after scoped local validations passed."
+      },
+      {
+        "status": "conflict_resolved",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "Resolved merge conflicts by replaying PR-POL-01 ledger entries on top of latest origin/main."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [
+      "Primary fap-api worktree has unrelated dirty files; PR-POL-01 is implemented in an isolated worktree from origin/main."
+    ],
+    "next_task": "post-merge cleanup only after PR-POL-01 merge"
   }
 }
