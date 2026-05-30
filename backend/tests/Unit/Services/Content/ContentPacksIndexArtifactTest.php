@@ -63,6 +63,9 @@ final class ContentPacksIndexArtifactTest extends TestCase
         $payload = json_decode((string) File::get($this->artifactPath), true);
         $this->assertSame(ContentPacksIndexArtifactStore::SCHEMA_VERSION, (string) ($payload['schema_version'] ?? ''));
         $this->assertSame(1, (int) ($payload['summary']['item_count'] ?? 0));
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) ($payload['items'][0]['manifest_sha256'] ?? ''));
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) ($payload['items'][0]['version_sha256'] ?? ''));
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) ($payload['items'][0]['questions_sha256'] ?? ''));
         $this->assertSame(
             'default/CN_MAINLAND/zh-CN/MBTI-CN-v-test/manifest.json',
             (string) ($payload['items'][0]['manifest_path'] ?? '')
@@ -140,6 +143,33 @@ final class ContentPacksIndexArtifactTest extends TestCase
         $this->assertSame('PACK_A', (string) ($fromArtifact['items'][0]['pack_id'] ?? ''));
     }
 
+    public function test_artifact_hash_validation_survives_checkout_mtime_drift(): void
+    {
+        $dirVersion = 'MBTI-CN-v-test';
+        $packDir = $this->makePackDir($dirVersion);
+        $this->writePack($packDir, 'PACK_A', $dirVersion, 'v-test');
+
+        $store = app(ContentPacksIndexArtifactStore::class);
+        $store->write(app(ContentPacksIndex::class)->getIndex(true), $this->artifactPath);
+
+        $this->touchPackFiles($packDir, time() + 5);
+        $this->forgetIndexCache();
+        config()->set('content_packs.index_artifact_enabled', true);
+
+        $index = new ContentPacksIndex($store, new class extends \App\Services\Content\ContentPacksIndexFallbackScanner
+        {
+            public function scan(string $packsRootFs, string $driver, array $defaults): array
+            {
+                throw new \RuntimeException('fallback scanner should not run when only mtimes drift');
+            }
+        });
+
+        $fromArtifact = $index->getIndex(false);
+
+        $this->assertTrue((bool) ($fromArtifact['ok'] ?? false));
+        $this->assertSame('PACK_A', (string) ($fromArtifact['items'][0]['pack_id'] ?? ''));
+    }
+
     private function makePackDir(string $dirVersion): string
     {
         $packDir = $this->packsRoot.DIRECTORY_SEPARATOR.'default'
@@ -207,5 +237,14 @@ final class ContentPacksIndexArtifactTest extends TestCase
                 ],
             ], JSON_UNESCAPED_UNICODE)
         );
+    }
+
+    private function touchPackFiles(string $packDir, int $timestamp): void
+    {
+        foreach (['manifest.json', 'version.json', 'questions.json'] as $file) {
+            $path = $packDir.DIRECTORY_SEPARATOR.$file;
+            touch($path, $timestamp);
+            clearstatcache(true, $path);
+        }
     }
 }

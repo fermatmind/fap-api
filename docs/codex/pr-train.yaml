@@ -16190,3 +16190,62 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: Phase 4 content pack build/validate CI job decomposition requires explicit authorization
+
+  - id: CONTENT-PACKS-CI-ARTIFACT-CONSUMER-SPLIT-01
+    repo: fap-api
+    branch: fix/content-packs-ci-artifact-consumer-split-01
+    base: main
+    title: "CONTENT-PACKS-CI-ARTIFACT-CONSUMER-SPLIT-01 split content pack artifact validation from MBTI and Big Five CI"
+    train_scope: content_packs_ci_artifact_consumer_split
+    risk_level: p1_ci_memory_and_runtime_hardening
+    depends_on:
+      - CONTENT-PACKS-INDEX-ARTIFACT-01 merged
+      - CONTENT-PACKS-INDEX-RESPONSIBILITY-SHRINK-01 merged
+    allowed_paths:
+      - .github/workflows/ci.yml
+      - backend/scripts/ci_verify_mbti.sh
+      - backend/app/Services/Content/ContentPacksIndexArtifactStore.php
+      - backend/tests/Unit/Services/Content/ContentPacksIndexArtifactTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add a dedicated CI content pack index build/validate job that uploads the content-packs-index artifact.
+      - Make MBTI legacy/v2 CI jobs download and consume the validated content-packs-index artifact.
+      - Split Big Five content/business gates into their own CI job that consumes the same content-packs-index artifact.
+      - Make CI artifact validation portable across GitHub jobs without relying on checkout-local mtimes.
+      - Preserve public API contracts, ContentPacksIndex getIndex/find return shape, content package semantics, and fallback scanning.
+      - Reconcile CONTENT-PACKS-INDEX-RESPONSIBILITY-SHRINK-01 train state as merged.
+    do_not:
+      - Change public API response contracts.
+      - Change content package source files or question/item semantics.
+      - Remove the fallback scan path.
+      - Enable artifact runtime use by default outside explicit CI env.
+      - Refactor deploy workflow or production deployment gates.
+      - Refactor MBTI, Big Five, report, attempt, scoring, or content pack publishing business runtime beyond CI artifact consumption.
+      - Modify fap-web, CMS, DB, migrations, Search Channel, URL submission, deploy, or production env.
+    validation:
+      - cd backend && php artisan test --filter=ContentPacksIndexArtifact --no-ansi
+      - cd backend && php artisan content-packs:index:build --output=storage/app/private/content_packs_index/content-packs-index.json --json
+      - cd backend && CONTENT_PACKS_INDEX_ARTIFACT_ENABLED=true CONTENT_PACKS_INDEX_ARTIFACT_PATH=storage/app/private/content_packs_index/content-packs-index.json RUN_BIG5_OCEAN_GATE=0 bash scripts/ci_verify_mbti.sh
+      - cd backend && CONTENT_PACKS_INDEX_ARTIFACT_ENABLED=true CONTENT_PACKS_INDEX_ARTIFACT_PATH=storage/app/private/content_packs_index/content-packs-index.json bash scripts/ci/verify_big5_norms.sh
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && composer validate --strict
+      - cd backend && vendor/bin/pint --test
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: Phase 4 deploy workflow parity requires explicit authorization

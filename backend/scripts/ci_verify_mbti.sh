@@ -30,6 +30,8 @@ export FAP_PACKS_DRIVER=local
 export FAP_PACKS_ROOT="${REPO_DIR}/content_packages"
 export FAP_PACKS_CACHE_DIR="${FAP_PACKS_CACHE_DIR:-storage/app/private/content_packs_cache}"
 export FAP_S3_PREFIX="${FAP_S3_PREFIX:-content_packages/}"
+export CONTENT_PACKS_INDEX_ARTIFACT_ENABLED="${CONTENT_PACKS_INDEX_ARTIFACT_ENABLED:-false}"
+export CONTENT_PACKS_INDEX_ARTIFACT_PATH="${CONTENT_PACKS_INDEX_ARTIFACT_PATH:-storage/app/private/content_packs_index/content-packs-index.json}"
 
 # MBTI defaults (avoid resolver picking default)
 export FAP_DEFAULT_REGION=CN_MAINLAND
@@ -56,6 +58,56 @@ if [[ ! -f ".env" ]]; then
   ENV_CREATED=1
 fi
 php artisan key:generate --force >/dev/null 2>&1 || true
+
+if [[ "$CONTENT_PACKS_INDEX_ARTIFACT_ENABLED" == "true" || "$CONTENT_PACKS_INDEX_ARTIFACT_ENABLED" == "1" ]]; then
+  ARTIFACT_PATH="$CONTENT_PACKS_INDEX_ARTIFACT_PATH"
+  if [[ "$ARTIFACT_PATH" != /* ]]; then
+    ARTIFACT_PATH="$BACKEND_DIR/$ARTIFACT_PATH"
+  fi
+
+  if [[ ! -f "$ARTIFACT_PATH" ]]; then
+    echo "[CI][FAIL] content packs index artifact enabled but missing: $ARTIFACT_PATH" >&2
+    exit 17
+  fi
+
+  BACKEND_DIR="$BACKEND_DIR" php -r '
+$backendDir = rtrim((string) getenv("BACKEND_DIR"), "/");
+require $backendDir . "/vendor/autoload.php";
+$app = require $backendDir . "/bootstrap/app.php";
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+
+$driver = (string) config("content_packs.driver", "local");
+$driver = $driver === "s3" ? "s3" : "local";
+$root = $driver === "s3"
+    ? (string) config("content_packs.cache_dir", "")
+    : (string) config("content_packs.root", "");
+$root = trim($root);
+if ($root !== "" && ! str_starts_with($root, "/") && ! preg_match("/^[A-Za-z]:[\/\\\\]/", $root)) {
+    $root = rtrim(base_path($root), "/\\\\");
+}
+$defaults = [
+    "default_pack_id" => (string) config("content_packs.default_pack_id", ""),
+    "default_dir_version" => (string) config("content_packs.default_dir_version", ""),
+    "default_region" => (string) config("content_packs.default_region", ""),
+    "default_locale" => (string) config("content_packs.default_locale", ""),
+    "region_fallbacks" => (array) config("content_packs.region_fallbacks", []),
+    "locale_fallback" => (bool) config("content_packs.locale_fallback", false),
+];
+$artifact = app(App\Services\Content\ContentPacksIndexArtifactStore::class)
+    ->readConfigured($root, $driver, $defaults);
+if (! is_array($artifact) || ! (bool) ($artifact["ok"] ?? false)) {
+    fwrite(STDERR, "[CI][FAIL] content packs index artifact is not readable by runtime config\n");
+    exit(17);
+}
+$items = (array) ($artifact["items"] ?? []);
+if (count($items) < 1) {
+    fwrite(STDERR, "[CI][FAIL] content packs index artifact has no items\n");
+    exit(17);
+}
+echo "[CI] content packs index artifact OK items=".count($items)."\n";
+'
+fi
 
 # Prepare sqlite + seed scales registry/slugs
 bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
