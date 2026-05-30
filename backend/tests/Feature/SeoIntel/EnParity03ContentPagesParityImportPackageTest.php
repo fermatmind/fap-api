@@ -112,7 +112,6 @@ final class EnParity03ContentPagesParityImportPackageTest extends TestCase
             'content-page-brand',
             'content-page-careers',
             'content-page-charter',
-            'content-page-foundation',
             'content-page-policies',
         ], $missing);
         $this->assertFalse((bool) ($matrix['frontend_fallback_authority_used'] ?? true));
