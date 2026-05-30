@@ -64,11 +64,106 @@ jobs:
         working-directory: backend
         run: composer audit --locked --no-interaction --ignore-unreachable
 
+  content-pack-build-validate:
+    name: content-pack-build-validate
+    needs:
+      - hygiene
+      - supply-chain
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      APP_ENV: testing
+      FAP_PACKS_DRIVER: local
+      FAP_PACKS_ROOT: ${{ github.workspace }}/content_packages
+      FAP_DEFAULT_REGION: CN_MAINLAND
+      FAP_DEFAULT_LOCALE: zh-CN
+      FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.3
+      FAP_DEFAULT_DIR_VERSION: MBTI-CN-v0.3
+      CONTENT_PACKS_INDEX_ARTIFACT_PATH: storage/app/private/content_packs_index/content-packs-index.json
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: >
+            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
+
+      - name: Cache Composer
+        uses: actions/cache@v5
+        with:
+          path: |
+            backend/vendor
+            ~/.composer/cache/files
+          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php84-
+
+      - name: Prepare Laravel cache dirs
+        working-directory: backend
+        run: |
+          mkdir -p storage/framework/cache/data
+          mkdir -p storage/framework/views
+          mkdir -p storage/framework/sessions
+          mkdir -p storage/logs
+          mkdir -p storage/app/private/content_packs_index
+          mkdir -p storage/app/private/packs_v2_materialized
+          mkdir -p bootstrap/cache
+          chmod -R ug+rwX storage bootstrap/cache || true
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Ensure Laravel app key
+        working-directory: backend
+        run: |
+          if [ ! -f .env ]; then cp .env.example .env; fi
+          php artisan key:generate --force
+
+      - name: Build content packs index artifact
+        working-directory: backend
+        run: php artisan content-packs:index:build --output="$CONTENT_PACKS_INDEX_ARTIFACT_PATH" --json
+
+      - name: Validate content packs index artifact
+        working-directory: backend
+        run: |
+          php -r '
+          $path = getenv("CONTENT_PACKS_INDEX_ARTIFACT_PATH") ?: "storage/app/private/content_packs_index/content-packs-index.json";
+          $json = json_decode((string) file_get_contents($path), true);
+          if (! is_array($json)) { fwrite(STDERR, "artifact json invalid\n"); exit(1); }
+          if (($json["schema_version"] ?? "") !== "content_packs_index.artifact.v1") { fwrite(STDERR, "artifact schema invalid\n"); exit(1); }
+          if ((int) ($json["summary"]["item_count"] ?? 0) < 1) { fwrite(STDERR, "artifact item_count invalid\n"); exit(1); }
+          foreach (($json["items"] ?? []) as $item) {
+              foreach (["manifest_sha256", "version_sha256", "questions_sha256"] as $key) {
+                  if (! is_string($item[$key] ?? null) || ! preg_match("/^[a-f0-9]{64}$/", $item[$key])) {
+                      fwrite(STDERR, "artifact hash missing: {$key}\n");
+                      exit(1);
+                  }
+              }
+          }
+          echo "artifact ok items=".(int) ($json["summary"]["item_count"] ?? 0).PHP_EOL;
+          '
+          php artisan test --filter=ContentPacksIndexArtifact --no-ansi
+
+      - name: Upload content packs index artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: content-packs-index
+          path: backend/storage/app/private/content_packs_index/content-packs-index.json
+          if-no-files-found: error
+          retention-days: 1
+
   verify-mbti:
     name: verify-mbti-${{ matrix.mode }}
     needs:
       - hygiene
       - supply-chain
+      - content-pack-build-validate
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
@@ -91,7 +186,9 @@ jobs:
       FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: ${{ matrix.FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2 }}
       FEATURE_PAYMENT_WEBHOOK_V2: ${{ matrix.FEATURE_PAYMENT_WEBHOOK_V2 }}
       FEATURE_CONTENT_STORE_V2: ${{ matrix.FEATURE_CONTENT_STORE_V2 }}
-      RUN_BIG5_OCEAN_GATE: "1"
+      RUN_BIG5_OCEAN_GATE: "0"
+      CONTENT_PACKS_INDEX_ARTIFACT_ENABLED: "true"
+      CONTENT_PACKS_INDEX_ARTIFACT_PATH: storage/app/private/content_packs_index/content-packs-index.json
 
     steps:
       - name: Checkout
@@ -128,6 +225,7 @@ jobs:
           mkdir -p storage/framework/views
           mkdir -p storage/framework/sessions
           mkdir -p storage/logs
+          mkdir -p storage/app/private/content_packs_index
           mkdir -p storage/app/private/packs_v2_materialized
           mkdir -p bootstrap/cache
           chmod -R ug+rwX storage bootstrap/cache || true
@@ -135,6 +233,18 @@ jobs:
       - name: Install backend dependencies
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Ensure Laravel app key
+        working-directory: backend
+        run: |
+          if [ ! -f .env ]; then cp .env.example .env; fi
+          php artisan key:generate --force
+
+      - name: Download content packs index artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: content-packs-index
+          path: backend/storage/app/private/content_packs_index
 
       - name: Run ci_verify_mbti
         run: bash ./backend/scripts/ci_verify_mbti.sh
@@ -147,3 +257,117 @@ jobs:
           path: backend/artifacts/verify_mbti
           if-no-files-found: ignore
           retention-days: 7
+
+  verify-bigfive:
+    name: verify-bigfive
+    needs:
+      - hygiene
+      - supply-chain
+      - content-pack-build-validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      APP_ENV: testing
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /tmp/fap-ci-bigfive.sqlite
+      QUEUE_CONNECTION: sync
+      FAP_PACKS_DRIVER: local
+      FAP_PACKS_ROOT: ${{ github.workspace }}/content_packages
+      FAP_DEFAULT_REGION: CN_MAINLAND
+      FAP_DEFAULT_LOCALE: zh-CN
+      FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.3
+      FAP_DEFAULT_DIR_VERSION: MBTI-CN-v0.3
+      CONTENT_LOADER_CACHE_STORE: array
+      MBTI_RESPONSE_CACHE_STORE: array
+      CONTENT_PACKS_INDEX_ARTIFACT_ENABLED: "true"
+      CONTENT_PACKS_INDEX_ARTIFACT_PATH: storage/app/private/content_packs_index/content-packs-index.json
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: >
+            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
+
+      - name: Cache Composer
+        uses: actions/cache@v5
+        with:
+          path: |
+            backend/vendor
+            ~/.composer/cache/files
+          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php84-
+
+      - name: Prepare Laravel cache dirs
+        working-directory: backend
+        run: |
+          mkdir -p storage/framework/cache/data
+          mkdir -p storage/framework/views
+          mkdir -p storage/framework/sessions
+          mkdir -p storage/logs
+          mkdir -p storage/app/private/content_packs_index
+          mkdir -p storage/app/private/packs_v2_materialized
+          mkdir -p bootstrap/cache
+          chmod -R ug+rwX storage bootstrap/cache || true
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Ensure Laravel app key
+        working-directory: backend
+        run: |
+          if [ ! -f .env ]; then cp .env.example .env; fi
+          php artisan key:generate --force
+
+      - name: Download content packs index artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: content-packs-index
+          path: backend/storage/app/private/content_packs_index
+
+      - name: Verify content packs index artifact is consumable
+        working-directory: backend
+        run: |
+          php -r '
+          require "vendor/autoload.php";
+          $app = require "bootstrap/app.php";
+          $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+          $driver = (string) config("content_packs.driver", "local");
+          $driver = $driver === "s3" ? "s3" : "local";
+          $root = $driver === "s3" ? (string) config("content_packs.cache_dir", "") : (string) config("content_packs.root", "");
+          $defaults = [
+              "default_pack_id" => (string) config("content_packs.default_pack_id", ""),
+              "default_dir_version" => (string) config("content_packs.default_dir_version", ""),
+              "default_region" => (string) config("content_packs.default_region", ""),
+              "default_locale" => (string) config("content_packs.default_locale", ""),
+              "region_fallbacks" => (array) config("content_packs.region_fallbacks", []),
+              "locale_fallback" => (bool) config("content_packs.locale_fallback", false),
+          ];
+          $artifact = app(App\Services\Content\ContentPacksIndexArtifactStore::class)->readConfigured($root, $driver, $defaults);
+          if (! is_array($artifact) || ! (bool) ($artifact["ok"] ?? false) || count((array) ($artifact["items"] ?? [])) < 1) {
+              fwrite(STDERR, "content packs index artifact is not consumable\n");
+              exit(1);
+          }
+          echo "artifact consumer ok items=".count((array) ($artifact["items"] ?? [])).PHP_EOL;
+          '
+
+      - name: Prepare sqlite baseline
+        working-directory: backend
+        run: |
+          bash scripts/ci/prepare_sqlite.sh
+          php artisan fap:schema:verify
+
+      - name: Run Big Five content and business gates
+        working-directory: backend
+        run: |
+          bash scripts/ci/verify_big5_norms.sh
+          php artisan content:lint --pack=BIG5_OCEAN --pack-version=v1
+          php artisan content:compile --pack=BIG5_OCEAN --pack-version=v1
+          php artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi

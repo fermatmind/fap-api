@@ -116,6 +116,12 @@ final class ContentPacksIndexArtifactStore
             foreach (['manifest_path', 'questions_path', 'version_path'] as $pathKey) {
                 $artifactItem[$pathKey] = $this->artifactPathValue($packsRoot, (string) ($item[$pathKey] ?? ''));
             }
+            foreach (['manifest', 'questions', 'version'] as $prefix) {
+                $hash = $this->fileHash((string) ($item[$prefix.'_path'] ?? ''));
+                if ($hash !== null) {
+                    $artifactItem[$prefix.'_sha256'] = $hash;
+                }
+            }
 
             $items[] = $artifactItem;
         }
@@ -178,6 +184,7 @@ final class ContentPacksIndexArtifactStore
 
                 return null;
             }
+            unset($hydrated['manifest_sha256'], $hydrated['questions_sha256'], $hydrated['version_sha256']);
 
             $items[] = $hydrated;
         }
@@ -206,10 +213,21 @@ final class ContentPacksIndexArtifactStore
             if ($signature === null) {
                 return false;
             }
-            if ((int) ($item[$prefix.'_mtime'] ?? -1) !== (int) ($signature['mtime'] ?? -2)) {
+            if ((int) ($item[$prefix.'_size'] ?? -1) !== (int) ($signature['size'] ?? -2)) {
                 return false;
             }
-            if ((int) ($item[$prefix.'_size'] ?? -1) !== (int) ($signature['size'] ?? -2)) {
+
+            $expectedHash = trim((string) ($item[$prefix.'_sha256'] ?? ''));
+            if ($expectedHash !== '') {
+                $actualHash = $this->fileHash($path);
+                if ($actualHash === null || ! hash_equals($expectedHash, $actualHash)) {
+                    return false;
+                }
+
+                continue;
+            }
+
+            if ((int) ($item[$prefix.'_mtime'] ?? -1) !== (int) ($signature['mtime'] ?? -2)) {
                 return false;
             }
         }
@@ -296,6 +314,21 @@ final class ContentPacksIndexArtifactStore
             'mtime' => (int) $mtimeRaw,
             'size' => (int) $sizeRaw,
         ];
+    }
+
+    private function fileHash(string $path): ?string
+    {
+        if ($path === '' || ! File::isFile($path)) {
+            return null;
+        }
+
+        try {
+            $hash = hash_file('sha256', $path);
+        } catch (\Throwable $e) {
+            return null;
+        }
+
+        return is_string($hash) && $hash !== '' ? $hash : null;
     }
 
     private function warn(string $event, array $context): void
