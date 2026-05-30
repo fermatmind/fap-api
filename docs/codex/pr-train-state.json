@@ -31913,10 +31913,10 @@
     "branch": "codex/analytics-funnel-event-taxonomy-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01 unify canonical funnel event taxonomy",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "265e1dcc58edd5a122627ff0e61594c5e3dbeeab",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1761",
     "checks": [
       {
         "command": "manifest/state authorization",
@@ -31993,6 +31993,11 @@
         "status": "local_checks_passed",
         "at": "2026-05-31T05:28:15+08:00",
         "summary": "All scoped local validations passed in the isolated worktree."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T05:31:00+08:00",
+        "summary": "Opened PR #1761 after local validations passed."
       }
     ],
     "scope_validation": {
