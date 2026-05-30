@@ -32120,5 +32120,118 @@
     },
     "sidecars": [],
     "next_task": "Phase 3 ContentPacksIndex responsibility shrink requires explicit authorization"
+  },
+  "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01": {
+    "id": "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/analytics-funnel-ops-read-model-repair-01",
+    "base": "main",
+    "title": "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01 connect Ops 7-day funnel to unified taxonomy read model",
+    "status": "local_checks_passed",
+    "depends_on": [
+      "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01"
+    ],
+    "commit_sha": "7097df0e3c1eb871dba927d1473cb160f252df6c",
+    "pr_url": null,
+    "checks": [
+      {
+        "command": "manifest/state authorization",
+        "status": "passed",
+        "summary": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json only for ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01."
+      },
+      {
+        "command": "php artisan test --filter=FunnelWidget --no-ansi",
+        "status": "passed",
+        "summary": "2 tests passed, 17 assertions."
+      },
+      {
+        "command": "php artisan test --filter=FunnelConversionPage --no-ansi",
+        "status": "passed",
+        "summary": "1 test passed, 17 assertions."
+      },
+      {
+        "command": "php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi",
+        "status": "passed",
+        "summary": "2 tests passed, 27 assertions."
+      },
+      {
+        "command": "php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "Route list rendered successfully with 207 routes."
+      },
+      {
+        "command": "vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "Pint passed across 3645 files."
+      },
+      {
+        "command": "composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid."
+      },
+      {
+        "command": "composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found."
+      },
+      {
+        "command": "python3 -m json.tool backend/docs/seo/generated/analytics-funnel-ops-read-model-repair-01.v1.json >/dev/null",
+        "status": "passed",
+        "summary": "Generated Ops read-model repair JSON parses."
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed",
+        "summary": "PR train state JSON parses."
+      },
+      {
+        "command": "python3 - <<'PY' import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()) PY",
+        "status": "passed",
+        "summary": "PR train manifest YAML parses."
+      },
+      {
+        "command": "git diff --check",
+        "status": "passed",
+        "summary": "No whitespace errors in unstaged diff."
+      },
+      {
+        "command": "fap-web reference status",
+        "status": "passed",
+        "summary": "Reference-only fap-web worktree is clean and was not modified."
+      },
+      {
+        "command": "git diff --cached --check",
+        "status": "passed",
+        "summary": "No whitespace errors in staged diff."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T06:03:41+08:00",
+        "summary": "User authorized this scoped Ops read-model repair PR and manifest/state updates."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-31T06:03:41+08:00",
+        "summary": "Started from latest origin/main on scoped branch codex/analytics-funnel-ops-read-model-repair-01."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-31T06:07:06+08:00",
+        "summary": "Scoped local validation passed for Ops 7-day funnel read-model repair."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [],
+    "next_task": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-PREFLIGHT-01"
   }
 }

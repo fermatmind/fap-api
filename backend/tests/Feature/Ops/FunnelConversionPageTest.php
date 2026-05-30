@@ -61,9 +61,12 @@ final class FunnelConversionPageTest extends TestCase
                 ->assertSee('PDF Panel')
                 ->assertSee('Share Panel')
                 ->assertSee('Stage Definition Note')
-                ->assertSee('test_submit_success')
-                ->assertSee('first_result_or_report_view')
-                ->assertSee('unlock_success')
+                ->assertSee('test_submit')
+                ->assertSee('result_view')
+                ->assertSee('report_unlock')
+                ->assertDontSee('test_submit_success')
+                ->assertDontSee('first_result_or_report_view')
+                ->assertDontSee('unlock_success')
                 ->assertSee('$38.98');
         } finally {
             Carbon::setTestNow();

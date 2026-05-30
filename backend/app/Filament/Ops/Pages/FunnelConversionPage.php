@@ -46,12 +46,12 @@ class FunnelConversionPage extends Page
         ],
         [
             'key' => 'submitted_attempts',
-            'label' => 'test_submit_success',
+            'label' => 'test_submit',
             'note' => 'Hard fact first, then attempt_submissions / results fallback',
         ],
         [
             'key' => 'first_view_attempts',
-            'label' => 'first_result_or_report_view',
+            'label' => 'result_view',
             'note' => 'Behavioral mirror: normalized result_view / report_view events',
         ],
         [
@@ -66,7 +66,7 @@ class FunnelConversionPage extends Page
         ],
         [
             'key' => 'unlocked_attempts',
-            'label' => 'unlock_success',
+            'label' => 'report_unlock',
             'note' => 'Hard fact: active benefit_grants; order status alone is not enough',
         ],
         [

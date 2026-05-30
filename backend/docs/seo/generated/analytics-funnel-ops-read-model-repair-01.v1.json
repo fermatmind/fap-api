@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "task": "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01",
+  "final_decision": "analytics_funnel_ops_read_model_repair_completed_ready_for_controlled_refresh_preflight",
+  "funnel_widget_source": "analytics_funnel_daily",
+  "legacy_sources_no_longer_primary": [
+    "v_funnel_daily",
+    "events"
+  ],
+  "canonical_display_stages": [
+    "test_start",
+    "test_submit",
+    "result_view",
+    "order_created",
+    "payment_success",
+    "report_unlock",
+    "report_ready",
+    "pdf_download",
+    "share_generate",
+    "share_click"
+  ],
+  "analytics_funnel_daily_columns": {
+    "test_start": "started_attempts",
+    "test_submit": "submitted_attempts",
+    "result_view": "first_view_attempts",
+    "order_created": "order_created_attempts",
+    "payment_success": "paid_attempts",
+    "report_unlock": "unlocked_attempts",
+    "report_ready": "report_ready_attempts",
+    "pdf_download": "pdf_download_attempts",
+    "share_generate": "share_generated_attempts",
+    "share_click": "share_click_attempts"
+  },
+  "funnel_conversion_page_labels_repaired": {
+    "test_submit_success": "test_submit",
+    "first_result_or_report_view": "result_view",
+    "unlock_success": "report_unlock"
+  },
+  "empty_state": "No analytics_funnel_daily rows for this range. Run analytics:refresh-funnel-daily in a controlled task.",
+  "production_refresh_run": false,
+  "production_db_mutation": false,
+  "migration_added": false,
+  "scheduler_changed": false,
+  "ga_admin_setting_changed": false,
+  "baidu_tongji_setting_changed": false,
+  "search_channel_action": false,
+  "url_submission": false,
+  "fap_web_modified": false,
+  "future_unavailable_stages": [
+    "page_view",
+    "checkout_start",
+    "membership_start",
+    "retest_start",
+    "historical_report_revisit"
+  ],
+  "next_task": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-PREFLIGHT-01"
+}
