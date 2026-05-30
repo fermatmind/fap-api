@@ -16190,3 +16190,58 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: Phase 4 content pack build/validate CI job decomposition requires explicit authorization
+
+  - id: PR-POL-01
+    repo: fap-api
+    branch: content/pr-pol-01-policies-dashboard
+    base: main
+    title: "PR-POL-01 add policies dashboard content"
+    train_scope: content_pages_policies_dashboard
+    risk_level: p2_content_only
+    depends_on:
+      - PR #1767 merged
+    allowed_paths:
+      - content_baselines/content_pages/content_pages.zh-CN.json
+      - content_baselines/content_pages/content_pages.en.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Update existing repo-backed /zh/policies baseline content from uploaded PR-POL-01 v2 assets.
+      - Update existing repo-backed /en/policies baseline content from uploaded PR-POL-01 v2 assets.
+      - Use policies-content-v1.json only as structured reference.
+      - Preserve policies page authority, publication state, public/indexable status, and existing route behavior.
+      - Keep result lookup private-safe and noindex by not adding private lookup paths to public indexable content.
+      - Keep Cookie / Consent / Tracking as deferred standalone-page scope.
+    do_not:
+      - Create new routes.
+      - Add schema expansion or structured policy schema.
+      - Modify sitemap policy or llms policy.
+      - Modify foundation content except linking to the existing foundation page.
+      - Modify content_packs or fap-web.
+      - Trigger external indexing workflows, deploy, migrate, mutate CMS, or mutate production DB.
+    validation:
+      - cd backend && php artisan test --filter=ContentPage --no-ansi
+      - cd backend && php artisan test --filter=EnParity --no-ansi
+      - cd backend && php artisan test --filter=Sitemap --no-ansi
+      - cd backend && php artisan test --filter=SitemapSource --no-ansi
+      - cd backend && composer validate --strict
+      - python3 -m json.tool content_baselines/content_pages/content_pages.zh-CN.json >/dev/null
+      - python3 -m json.tool content_baselines/content_pages/content_pages.en.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: post-merge cleanup only after PR-POL-01 merge
