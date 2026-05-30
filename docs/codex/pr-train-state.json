@@ -32613,5 +32613,108 @@
       "Primary fap-api worktree has unrelated dirty files; PR-POL-01 is implemented in an isolated worktree from origin/main."
     ],
     "next_task": "post-merge cleanup only after PR-POL-01 merge"
+  },
+  "PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01": {
+    "id": "PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01",
+    "repo": "fap-api",
+    "branch": "codex/payment-alipay-pending-compensation-scheduler-01",
+    "base": "main",
+    "status": "local_checks_passed",
+    "title": "PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01 schedule Alipay pending payment compensation",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01 to fap-api pr-train manifest/state."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to scheduler registration, focused scheduler test, optional runbook, and pr-train metadata; no production env, CMS/content, deploy, Search Channel, URL submission, or fap-web changes."
+      },
+      "scheduler_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=AlipayPendingCompensationScheduler --no-ansi",
+        "evidence": "PASS: 1 test, 8 assertions."
+      },
+      "pending_compensation_command_regression": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=CommercePendingCompensationCommand --no-ansi",
+        "evidence": "PASS: 1 test, 6 assertions."
+      },
+      "pending_lifecycle_regression": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=PendingOrderLifecycleCompensation --no-ansi",
+        "evidence": "PASS: 2 tests, 15 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "PASS: 207 routes listed."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "PASS: 3645 files."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "PASS: composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "pass",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "PASS: no security vulnerability advisories found."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+        "evidence": "PASS: JSON and YAML parsed."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check",
+        "evidence": "PASS before staging; cached diff empty at check time."
+      },
+      "fap_web_reference_status": {
+        "status": "pass",
+        "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+        "evidence": "PASS: no fap-web changes reported."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-30T22:19:28Z",
+        "summary": "User authorized manifest/state update for PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-30T22:19:28Z",
+        "summary": "Started scoped backend PR to schedule conservative Alipay pending payment compensation."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-30T22:24:10Z",
+        "summary": "Scheduler focused test, compensation regressions, route list, Pint, Composer validate/audit, JSON/YAML parse, fap-web reference status, and diff checks passed."
+      },
+      {
+        "status": "scope_validated",
+        "at": "2026-05-30T22:24:55Z",
+        "summary": "Path-limited staging includes only Kernel scheduler, Alipay scheduler test, runbook, and pr-train metadata."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "sidecars": [],
+    "next_task": "deploy-readiness required after merge"
   }
 }

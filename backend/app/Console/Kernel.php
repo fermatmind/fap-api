@@ -338,6 +338,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('storage:inventory --json')->weeklyOn(1, '04:10')->withoutOverlapping();
         $schedule->exec(PHP_BINARY.' '.base_path('artisan').' storage:control-plane-snapshot --json')->dailyAt('04:20')->withoutOverlapping();
         $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
+        $schedule->command('commerce:compensate-pending-orders --provider=alipay --include-created --limit=50 --older-than-minutes=15')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('commerce:repair-paid-orders --limit=50')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('commerce:repair-post-commit-failed --limit=50')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
