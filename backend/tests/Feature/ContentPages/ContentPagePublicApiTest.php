@@ -25,11 +25,11 @@ final class ContentPagePublicApiTest extends TestCase
             '--source-dir' => '../content_baselines/content_pages',
         ])
             ->expectsOutputToContain('files_found=4')
-            ->expectsOutputToContain('pages_found=26')
-            ->expectsOutputToContain('will_create=26')
+            ->expectsOutputToContain('pages_found=27')
+            ->expectsOutputToContain('will_create=27')
             ->assertExitCode(0);
 
-        $this->assertSame(26, ContentPage::query()->withoutGlobalScopes()->count());
+        $this->assertSame(27, ContentPage::query()->withoutGlobalScopes()->count());
 
         $about = ContentPage::query()
             ->withoutGlobalScopes()
