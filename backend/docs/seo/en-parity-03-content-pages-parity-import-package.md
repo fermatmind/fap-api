@@ -39,12 +39,9 @@ The importer remains operator-run. No production import is executed.
 The following Chinese baseline pages have no English content page counterpart in the current repository baseline and are deferred to human-reviewed draft/import work:
 
 - `brand`
-- `careers`
 - `charter`
-- `foundation`
-- `policies`
 
-The package intentionally does not invent body copy for these pages.
+The package intentionally does not invent body copy for these pages. English `foundation`, `careers`, and `policies` now have repo-backed baseline authority and are no longer treated as deferred missing counterparts by this package.
 
 ## Validation
 
@@ -66,7 +63,7 @@ git diff --check
 
 ## Deferred Items
 
-- Human-reviewed English copy for `brand`, `careers`, `charter`, `foundation`, and `policies`.
+- Human-reviewed English copy for `brand` and `charter`.
 - Production CMS import or publish approval.
 - fap-web runtime restoration for hard/soft 404 pages.
 - Sitemap, llms, JSON-LD, and FAQ parity gates remain EN-PARITY-07.
