@@ -32127,12 +32127,12 @@
     "branch": "codex/analytics-funnel-ops-read-model-repair-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01 connect Ops 7-day funnel to unified taxonomy read model",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01"
     ],
     "commit_sha": "10bdb0eb1009df0657d20a9692797d50dffec746",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1764",
     "checks": [
       {
         "command": "manifest/state authorization",
@@ -32224,6 +32224,11 @@
         "status": "local_checks_passed",
         "at": "2026-05-31T06:07:06+08:00",
         "summary": "Scoped local validation passed for Ops 7-day funnel read-model repair."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T06:09:59+08:00",
+        "summary": "Opened PR #1764 after scoped local validations passed."
       }
     ],
     "scope_validation": {
