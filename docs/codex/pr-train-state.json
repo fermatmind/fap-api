@@ -32619,10 +32619,10 @@
     "repo": "fap-api",
     "branch": "codex/payment-alipay-pending-compensation-scheduler-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01 schedule Alipay pending payment compensation",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "d265ad35424f51c7f7d9a62a0a7cd701368276ad",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1766",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -32707,6 +32707,11 @@
         "status": "scope_validated",
         "at": "2026-05-30T22:24:55Z",
         "summary": "Path-limited staging includes only Kernel scheduler, Alipay scheduler test, runbook, and pr-train metadata."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-30T22:28:37Z",
+        "summary": "Opened PR #1766 for PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01."
       }
     ],
     "scope_validation": {
