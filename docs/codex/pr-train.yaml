@@ -16020,3 +16020,60 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01 explicit approval required before implementation
+
+  - id: CONTENT-PACKS-INDEX-ARTIFACT-01
+    repo: fap-api
+    branch: fix/content-packs-index-artifact-01
+    base: main
+    title: "CONTENT-PACKS-INDEX-ARTIFACT-01 precompile content pack index artifact"
+    train_scope: content_packs_index_artifact
+    risk_level: p1_ci_memory_and_runtime_hardening
+    depends_on:
+      - PR #1753 merged
+    allowed_paths:
+      - backend/app/Services/Content/ContentPacksIndex.php
+      - backend/app/Services/Content/ContentPacksIndexArtifactStore.php
+      - backend/app/Console/Commands/ContentPacksIndexBuild.php
+      - backend/config/content_packs.php
+      - backend/tests/Unit/Services/Content/ContentPacksIndexArtifactTest.php
+      - backend/tests/Unit/Services/Content/ContentPacksIndexManifestConsistencyTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add a precompiled content pack index artifact path for tests and internal services.
+      - Keep public API contracts and ContentPacksIndex find/getIndex return shape backward-compatible.
+      - Prefer artifact reads only when explicitly enabled by config; keep streaming directory scan as fallback.
+      - Add focused tests proving artifact/source consistency and stale artifact fallback.
+      - Do not refactor CI workflows; Phase 4 owns CI job decomposition.
+    do_not:
+      - Change public API response contracts.
+      - Change content package source files or question/item semantics.
+      - Remove the ContentPacksIndex streaming fallback path.
+      - Refactor MBTI, Big Five, report, attempt, scoring, or content pack publishing runtime.
+      - Modify fap-web, CMS, DB, migrations, Search Channel, URL submission, deploy, or production env.
+    validation:
+      - cd backend && php artisan test --filter=ContentPacksIndexArtifact --no-ansi
+      - cd backend && php artisan test --filter=ContentPacksIndexManifestConsistency --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - cd backend && vendor/bin/pint --test
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && composer validate --strict
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON/YAML parse
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: Phase 3 ContentPacksIndex responsibility shrink requires explicit authorization

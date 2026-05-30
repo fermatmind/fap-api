@@ -31,6 +31,8 @@ return [
     'mbti_response_cache_store' => env('MBTI_RESPONSE_CACHE_STORE', 'hot_redis'),
     'mbti_lookup_cache_ttl_seconds' => (int) env('MBTI_LOOKUP_CACHE_TTL_SECONDS', 600),
     'mbti_questions_cache_ttl_seconds' => (int) env('MBTI_QUESTIONS_CACHE_TTL_SECONDS', 600),
+    'index_artifact_enabled' => (bool) env('CONTENT_PACKS_INDEX_ARTIFACT_ENABLED', false),
+    'index_artifact_path' => env('CONTENT_PACKS_INDEX_ARTIFACT_PATH', storage_path('app/private/content_packs_index/content-packs-index.json')),
     'debug_log' => (bool) env('FAP_PACKS_DEBUG_LOG', false),
 
     // ✅ CI/服务器建议强约束：默认 pack_id 明确指向你的主包，避免回退到 GLOBAL/en

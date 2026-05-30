@@ -16,6 +16,10 @@ final class ContentPacksIndex
 {
     public const CACHE_TTL_SECONDS = 30;
 
+    public function __construct(
+        private ?ContentPacksIndexArtifactStore $artifactStore = null,
+    ) {}
+
     public function getIndex(bool $refresh = false): array
     {
         $driver = (string) config('content_packs.driver', 'local');
@@ -32,6 +36,17 @@ final class ContentPacksIndex
         $cache = $this->cacheStore();
 
         if (! $refresh) {
+            $artifact = $this->artifactStore()->readConfigured($packsRootFs, $driver, $defaults);
+            if (is_array($artifact)) {
+                try {
+                    $cache->put($cacheKey, $artifact, self::CACHE_TTL_SECONDS);
+                } catch (\Throwable $e) {
+                    // Artifact reads are already bounded by file signatures; cache write failure is non-fatal.
+                }
+
+                return $artifact;
+            }
+
             try {
                 $cached = $cache->get($cacheKey);
             } catch (\Throwable $e) {
@@ -147,6 +162,15 @@ final class ContentPacksIndex
         } catch (\Throwable $e) {
             return Cache::store();
         }
+    }
+
+    private function artifactStore(): ContentPacksIndexArtifactStore
+    {
+        if (! $this->artifactStore instanceof ContentPacksIndexArtifactStore) {
+            $this->artifactStore = app(ContentPacksIndexArtifactStore::class);
+        }
+
+        return $this->artifactStore;
     }
 
     private function normalizeFilesystemRoot(string $path): string

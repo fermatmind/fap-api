@@ -1985,6 +1985,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_content_packs_index_artifact_phase2_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ContentPacksIndexBuild.php',
+            'backend/app/Services/Content/ContentPacksIndex.php',
+            'backend/app/Services/Content/ContentPacksIndexArtifactStore.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_bigfive_v2_content_asset_loader_changes(): void
     {
         $changed = [
@@ -2346,6 +2357,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isSitemapSourceCacheCommandFile($file)) {
+                continue;
+            }
+
+            if ($this->isContentPacksIndexArtifactRuntimeFile($file)) {
                 continue;
             }
 
@@ -2979,6 +2994,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isSitemapSourceCacheCommandFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/WarmSitemapSourceCacheCommand.php';
+    }
+
+    private function isContentPacksIndexArtifactRuntimeFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ContentPacksIndexBuild.php',
+            'backend/app/Services/Content/ContentPacksIndex.php',
+            'backend/app/Services/Content/ContentPacksIndexArtifactStore.php',
+        ], true);
     }
 
     private function isContentReleaseRevalidateAutomationFile(string $file): bool
