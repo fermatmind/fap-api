@@ -1,0 +1,168 @@
+{
+  "schema": "eq60.personalization_routes.route_matrix.v1",
+  "pack_id": "EQ_60",
+  "version": "v1",
+  "description": "Internal deterministic route matrix for EQ v5 personalization. It selects asset IDs only; public explanation copy remains in report_assets.",
+  "routes": {
+    "balanced_integrated": {
+      "route_id": "balanced_integrated",
+      "formulation_id": "balanced_integrated",
+      "priority": 100,
+      "match": {
+        "quality_levels": ["A", "B"],
+        "dimension_pattern": "all_high_or_default_balanced"
+      },
+      "selected_asset_ids": {
+        "core_formulation_id": "balanced_integrated",
+        "mechanism_ids": ["SA_ER_high_high", "EM_RM_high_high"],
+        "scene_ids": ["feedback", "team_collaboration", "career_environment"],
+        "career_environment_ids": ["interpersonal_density_medium", "feedback_intensity_medium", "autonomy_recovery_medium"],
+        "action_prescription_id": "emotion_labeling"
+      }
+    },
+    "high_empathy_low_recovery": {
+      "route_id": "high_empathy_low_recovery",
+      "formulation_id": "high_empathy_low_recovery",
+      "priority": 95,
+      "match": {
+        "quality_levels": ["A", "B"],
+        "dimension_pattern": "EM_high_ER_low"
+      },
+      "selected_asset_ids": {
+        "core_formulation_id": "high_empathy_low_recovery",
+        "mechanism_ids": ["EM_ER_high_low"],
+        "scene_ids": ["feedback", "conflict", "relationship_boundary"],
+        "career_environment_ids": ["emotional_labor_high", "autonomy_recovery_medium", "interpersonal_density_medium"],
+        "action_prescription_id": "empathy_boundary"
+      }
+    },
+    "aware_but_unregulated": {
+      "route_id": "aware_but_unregulated",
+      "formulation_id": "aware_but_unregulated",
+      "priority": 90,
+      "match": {
+        "quality_levels": ["A", "B"],
+        "dimension_pattern": "SA_high_ER_low"
+      },
+      "selected_asset_ids": {
+        "core_formulation_id": "aware_but_unregulated",
+        "mechanism_ids": ["SA_ER_high_low"],
+        "scene_ids": ["feedback", "pressure_recovery", "conflict"],
+        "career_environment_ids": ["feedback_intensity_medium", "autonomy_recovery_high", "conflict_frequency_low"],
+        "action_prescription_id": "pause_recovery"
+      }
+    },
+    "calm_but_distant": {
+      "route_id": "calm_but_distant",
+      "formulation_id": "calm_but_distant",
+      "priority": 80,
+      "match": {
+        "quality_levels": ["A", "B"],
+        "dimension_pattern": "ER_high_EM_low"
+      },
+      "selected_asset_ids": {
+        "core_formulation_id": "calm_but_distant",
+        "mechanism_ids": ["EM_ER_low_high"],
+        "scene_ids": ["feedback", "team_collaboration", "conflict"],
+        "career_environment_ids": ["emotional_labor_low", "conflict_frequency_medium", "collaboration_complexity_medium"],
+        "action_prescription_id": "cold_to_warm_response"
+      }
+    },
+    "relationship_first_self_later": {
+      "route_id": "relationship_first_self_later",
+      "formulation_id": "relationship_first_self_later",
+      "priority": 75,
+      "match": {
+        "quality_levels": ["A", "B"],
+        "dimension_pattern": "RM_high_SA_low"
+      },
+      "selected_asset_ids": {
+        "core_formulation_id": "relationship_first_self_later",
+        "mechanism_ids": ["SA_RM_low_high"],
+        "scene_ids": ["relationship_boundary", "team_collaboration", "career_environment"],
+        "career_environment_ids": ["interpersonal_density_high", "emotional_labor_medium", "autonomy_recovery_medium"],
+        "action_prescription_id": "self_connection"
+      }
+    },
+    "self_clear_repair_weak": {
+      "route_id": "self_clear_repair_weak",
+      "formulation_id": "self_clear_repair_weak",
+      "priority": 70,
+      "match": {
+        "quality_levels": ["A", "B"],
+        "dimension_pattern": "SA_high_RM_low"
+      },
+      "selected_asset_ids": {
+        "core_formulation_id": "self_clear_repair_weak",
+        "mechanism_ids": ["SA_RM_high_low"],
+        "scene_ids": ["conflict", "feedback", "relationship_boundary"],
+        "career_environment_ids": ["conflict_frequency_medium", "feedback_intensity_medium", "collaboration_complexity_low"],
+        "action_prescription_id": "express_without_escalation"
+      }
+    },
+    "steady_collaborator": {
+      "route_id": "steady_collaborator",
+      "formulation_id": "steady_collaborator",
+      "priority": 65,
+      "match": {
+        "quality_levels": ["A", "B"],
+        "dimension_pattern": "ER_high_RM_high"
+      },
+      "selected_asset_ids": {
+        "core_formulation_id": "steady_collaborator",
+        "mechanism_ids": ["ER_RM_high_high"],
+        "scene_ids": ["team_collaboration", "conflict", "career_environment"],
+        "career_environment_ids": ["collaboration_complexity_high", "conflict_frequency_medium", "interpersonal_density_high"],
+        "action_prescription_id": "repair_after_conflict"
+      }
+    },
+    "sensitive_absorber": {
+      "route_id": "sensitive_absorber",
+      "formulation_id": "sensitive_absorber",
+      "priority": 60,
+      "match": {
+        "quality_levels": ["A", "B"],
+        "dimension_pattern": "SA_high_EM_high_ER_not_high"
+      },
+      "selected_asset_ids": {
+        "core_formulation_id": "sensitive_absorber",
+        "mechanism_ids": ["EM_ER_high_low", "SA_ER_high_low"],
+        "scene_ids": ["feedback", "conflict", "relationship_boundary"],
+        "career_environment_ids": ["emotional_labor_high", "autonomy_recovery_medium", "interpersonal_density_medium"],
+        "action_prescription_id": "empathy_boundary"
+      }
+    },
+    "developing_foundation": {
+      "route_id": "developing_foundation",
+      "formulation_id": "developing_foundation",
+      "priority": 55,
+      "match": {
+        "quality_levels": ["A", "B"],
+        "dimension_pattern": "three_or_more_low"
+      },
+      "selected_asset_ids": {
+        "core_formulation_id": "developing_foundation",
+        "mechanism_ids": ["ER_RM_low_low"],
+        "scene_ids": ["pressure_recovery", "feedback", "career_environment"],
+        "career_environment_ids": ["feedback_intensity_low", "conflict_frequency_low", "autonomy_recovery_high"],
+        "action_prescription_id": "emotion_labeling"
+      }
+    },
+    "low_confidence_result": {
+      "route_id": "low_confidence_result",
+      "formulation_id": "low_confidence_result",
+      "priority": 1000,
+      "match": {
+        "quality_levels": ["C", "D"],
+        "dimension_pattern": "quality_low_overrides_dimension_pattern"
+      },
+      "selected_asset_ids": {
+        "core_formulation_id": "low_confidence_result",
+        "mechanism_ids": [],
+        "scene_ids": ["pressure_recovery", "feedback", "career_environment"],
+        "career_environment_ids": ["feedback_intensity_low", "conflict_frequency_low", "autonomy_recovery_high"],
+        "action_prescription_id": "retest_reflection"
+      }
+    }
+  }
+}

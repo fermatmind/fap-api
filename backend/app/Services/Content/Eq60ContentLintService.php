@@ -91,6 +91,7 @@ final class Eq60ContentLintService
         $allowlist = $this->lintVariablesAllowlist($version, $errors);
         $this->lintBlocks($version, $layout, $allowlist, $errors);
         $this->lintReportAssets($version, $errors);
+        $this->lintPersonalizationRoutes($version, $errors);
 
         $this->lintGoldenCases($version, $questionIndex, $errors);
 
@@ -946,6 +947,68 @@ final class Eq60ContentLintService
             'button_label',
             'available',
         ], $errors);
+    }
+
+    /**
+     * @param  list<array{file:string,line:int,message:string}>  $errors
+     */
+    private function lintPersonalizationRoutes(string $version, array &$errors): void
+    {
+        $file = $this->loader->rawPath('personalization_routes/route_matrix.json', $version);
+        $doc = $this->loader->readJson($file);
+        if (! is_array($doc)) {
+            $errors[] = $this->error($file, 1, 'personalization route matrix json invalid or missing.');
+
+            return;
+        }
+
+        if ((string) ($doc['schema'] ?? '') !== 'eq60.personalization_routes.route_matrix.v1') {
+            $errors[] = $this->error($file, 1, 'schema must be eq60.personalization_routes.route_matrix.v1.');
+        }
+        if ((string) ($doc['pack_id'] ?? '') !== Eq60PackLoader::PACK_ID) {
+            $errors[] = $this->error($file, 1, 'pack_id must be EQ_60.');
+        }
+
+        $routes = is_array($doc['routes'] ?? null) ? $doc['routes'] : [];
+        foreach ([
+            'balanced_integrated',
+            'high_empathy_low_recovery',
+            'aware_but_unregulated',
+            'low_confidence_result',
+        ] as $requiredRoute) {
+            if (! is_array($routes[$requiredRoute] ?? null)) {
+                $errors[] = $this->error($file, 1, 'required personalization route missing: '.$requiredRoute);
+            }
+        }
+
+        foreach ($routes as $routeId => $route) {
+            if (! is_array($route)) {
+                $errors[] = $this->error($file, 1, 'route must be an object: '.(string) $routeId);
+
+                continue;
+            }
+
+            $normalizedRouteId = trim((string) ($route['route_id'] ?? ''));
+            $formulationId = trim((string) ($route['formulation_id'] ?? ''));
+            $selected = is_array($route['selected_asset_ids'] ?? null) ? $route['selected_asset_ids'] : [];
+            if ($normalizedRouteId === '' || $normalizedRouteId !== (string) $routeId) {
+                $errors[] = $this->error($file, 1, 'route_id must match route key: '.(string) $routeId);
+            }
+            if ($formulationId === '') {
+                $errors[] = $this->error($file, 1, 'formulation_id is required for route: '.(string) $routeId);
+            }
+            if ((string) ($selected['core_formulation_id'] ?? '') !== $formulationId) {
+                $errors[] = $this->error($file, 1, 'selected_asset_ids.core_formulation_id must match formulation_id for route: '.(string) $routeId);
+            }
+            foreach (['mechanism_ids', 'scene_ids', 'career_environment_ids'] as $listKey) {
+                if (! is_array($selected[$listKey] ?? null)) {
+                    $errors[] = $this->error($file, 1, 'selected_asset_ids.'.$listKey.' must be a list for route: '.(string) $routeId);
+                }
+            }
+            if (trim((string) ($selected['action_prescription_id'] ?? '')) === '') {
+                $errors[] = $this->error($file, 1, 'selected_asset_ids.action_prescription_id is required for route: '.(string) $routeId);
+            }
+        }
     }
 
     /**

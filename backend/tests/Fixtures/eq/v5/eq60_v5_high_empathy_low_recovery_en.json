@@ -20,6 +20,7 @@
             "mechanism_ids": [
                 "EM_ER_high_low"
             ],
+            "personalization_route_id": "high_empathy_low_recovery",
             "quality_explanation_asset_id": "eq.quality.level.A",
             "scene_ids": [
                 "feedback",
@@ -28,6 +29,39 @@
             ],
             "scientific_contract_id": "eq.scientific_contract.default",
             "score_system_id": "eq.score_system.default",
+            "selected_asset_ids": {
+                "action_prescription_id": "empathy_boundary",
+                "career_environment_ids": [
+                    "emotional_labor_high",
+                    "autonomy_recovery_medium",
+                    "interpersonal_density_medium"
+                ],
+                "core_formulation_id": "high_empathy_low_recovery",
+                "mechanism_ids": [
+                    "EM_ER_high_low"
+                ],
+                "scene_ids": [
+                    "feedback",
+                    "conflict",
+                    "relationship_boundary"
+                ]
+            },
+            "signal_signature": {
+                "confidence_label": "high",
+                "development_lever": "ER",
+                "dimension_states": {
+                    "EM": "high",
+                    "ER": "low",
+                    "RM": "middle",
+                    "SA": "middle"
+                },
+                "formulation_id": "high_empathy_low_recovery",
+                "match_pattern": "EM_high_ER_low",
+                "quality_level": "A",
+                "route_id": "high_empathy_low_recovery",
+                "schema": "eq60.signal_signature.v1",
+                "strongest_dimension": "EM"
+            },
             "sjt_bridge_id": "eq.sjt_bridge.planned"
         },
         "assets": {
@@ -108,6 +142,42 @@
                     "why_it_matters": "The more you understand others, the more you need to know what is not yours to carry."
                 }
             ],
+            "personalization_route": {
+                "id": "high_empathy_low_recovery",
+                "selected_asset_ids": {
+                    "action_prescription_id": "empathy_boundary",
+                    "career_environment_ids": [
+                        "emotional_labor_high",
+                        "autonomy_recovery_medium",
+                        "interpersonal_density_medium"
+                    ],
+                    "core_formulation_id": "high_empathy_low_recovery",
+                    "mechanism_ids": [
+                        "EM_ER_high_low"
+                    ],
+                    "scene_ids": [
+                        "feedback",
+                        "conflict",
+                        "relationship_boundary"
+                    ]
+                },
+                "signal_signature": {
+                    "confidence_label": "high",
+                    "development_lever": "ER",
+                    "dimension_states": {
+                        "EM": "high",
+                        "ER": "low",
+                        "RM": "middle",
+                        "SA": "middle"
+                    },
+                    "formulation_id": "high_empathy_low_recovery",
+                    "match_pattern": "EM_high_ER_low",
+                    "quality_level": "A",
+                    "route_id": "high_empathy_low_recovery",
+                    "schema": "eq60.signal_signature.v1",
+                    "strongest_dimension": "EM"
+                }
+            },
             "quality": {
                 "confidence_label": "high",
                 "explanation_asset_id": "eq.quality.level.A"
@@ -342,6 +412,40 @@
                 "conflict",
                 "relationship_boundary"
             ],
+            "route_id": "high_empathy_low_recovery",
+            "selected_asset_ids": {
+                "action_prescription_id": "empathy_boundary",
+                "career_environment_ids": [
+                    "emotional_labor_high",
+                    "autonomy_recovery_medium",
+                    "interpersonal_density_medium"
+                ],
+                "core_formulation_id": "high_empathy_low_recovery",
+                "mechanism_ids": [
+                    "EM_ER_high_low"
+                ],
+                "scene_ids": [
+                    "feedback",
+                    "conflict",
+                    "relationship_boundary"
+                ]
+            },
+            "signal_signature": {
+                "confidence_label": "high",
+                "development_lever": "ER",
+                "dimension_states": {
+                    "EM": "high",
+                    "ER": "low",
+                    "RM": "middle",
+                    "SA": "middle"
+                },
+                "formulation_id": "high_empathy_low_recovery",
+                "match_pattern": "EM_high_ER_low",
+                "quality_level": "A",
+                "route_id": "high_empathy_low_recovery",
+                "schema": "eq60.signal_signature.v1",
+                "strongest_dimension": "EM"
+            },
             "strongest_dimension": "EM"
         },
         "legacy_scores": {

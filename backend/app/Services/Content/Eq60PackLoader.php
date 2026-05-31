@@ -308,6 +308,10 @@ final class Eq60PackLoader
                 $assets[$key] = $doc;
             }
         }
+        $routeMatrix = $this->readJson($this->rawPath('personalization_routes/route_matrix.json', $version));
+        if (is_array($routeMatrix)) {
+            $assets['personalization_routes'] = $routeMatrix;
+        }
 
         return $assets === []
             ? []

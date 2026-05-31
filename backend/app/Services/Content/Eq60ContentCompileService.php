@@ -735,6 +735,10 @@ final class Eq60ContentCompileService
                 $assets[$key] = $doc;
             }
         }
+        $routeMatrix = $this->loader->readJson($this->loader->rawPath('personalization_routes/route_matrix.json', $version));
+        if (is_array($routeMatrix)) {
+            $assets['personalization_routes'] = $routeMatrix;
+        }
 
         return $assets;
     }

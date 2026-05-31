@@ -21,6 +21,7 @@
                 "SA_ER_high_high",
                 "EM_RM_high_high"
             ],
+            "personalization_route_id": "balanced_integrated",
             "quality_explanation_asset_id": "eq.quality.level.A",
             "scene_ids": [
                 "feedback",
@@ -29,6 +30,40 @@
             ],
             "scientific_contract_id": "eq.scientific_contract.default",
             "score_system_id": "eq.score_system.default",
+            "selected_asset_ids": {
+                "action_prescription_id": "emotion_labeling",
+                "career_environment_ids": [
+                    "interpersonal_density_medium",
+                    "feedback_intensity_medium",
+                    "autonomy_recovery_medium"
+                ],
+                "core_formulation_id": "balanced_integrated",
+                "mechanism_ids": [
+                    "SA_ER_high_high",
+                    "EM_RM_high_high"
+                ],
+                "scene_ids": [
+                    "feedback",
+                    "team_collaboration",
+                    "career_environment"
+                ]
+            },
+            "signal_signature": {
+                "confidence_label": "high",
+                "development_lever": "SA",
+                "dimension_states": {
+                    "EM": "high",
+                    "ER": "high",
+                    "RM": "high",
+                    "SA": "high"
+                },
+                "formulation_id": "balanced_integrated",
+                "match_pattern": "all_high_or_default_balanced",
+                "quality_level": "A",
+                "route_id": "balanced_integrated",
+                "schema": "eq60.signal_signature.v1",
+                "strongest_dimension": "SA"
+            },
             "sjt_bridge_id": "eq.sjt_bridge.planned"
         },
         "assets": {
@@ -121,6 +156,43 @@
                     "why_it_matters": "理解和行动结合时，共情更容易变成有效协作。"
                 }
             ],
+            "personalization_route": {
+                "id": "balanced_integrated",
+                "selected_asset_ids": {
+                    "action_prescription_id": "emotion_labeling",
+                    "career_environment_ids": [
+                        "interpersonal_density_medium",
+                        "feedback_intensity_medium",
+                        "autonomy_recovery_medium"
+                    ],
+                    "core_formulation_id": "balanced_integrated",
+                    "mechanism_ids": [
+                        "SA_ER_high_high",
+                        "EM_RM_high_high"
+                    ],
+                    "scene_ids": [
+                        "feedback",
+                        "team_collaboration",
+                        "career_environment"
+                    ]
+                },
+                "signal_signature": {
+                    "confidence_label": "high",
+                    "development_lever": "SA",
+                    "dimension_states": {
+                        "EM": "high",
+                        "ER": "high",
+                        "RM": "high",
+                        "SA": "high"
+                    },
+                    "formulation_id": "balanced_integrated",
+                    "match_pattern": "all_high_or_default_balanced",
+                    "quality_level": "A",
+                    "route_id": "balanced_integrated",
+                    "schema": "eq60.signal_signature.v1",
+                    "strongest_dimension": "SA"
+                }
+            },
             "quality": {
                 "confidence_label": "high",
                 "explanation_asset_id": "eq.quality.level.A"
@@ -356,6 +428,41 @@
                 "team_collaboration",
                 "career_environment"
             ],
+            "route_id": "balanced_integrated",
+            "selected_asset_ids": {
+                "action_prescription_id": "emotion_labeling",
+                "career_environment_ids": [
+                    "interpersonal_density_medium",
+                    "feedback_intensity_medium",
+                    "autonomy_recovery_medium"
+                ],
+                "core_formulation_id": "balanced_integrated",
+                "mechanism_ids": [
+                    "SA_ER_high_high",
+                    "EM_RM_high_high"
+                ],
+                "scene_ids": [
+                    "feedback",
+                    "team_collaboration",
+                    "career_environment"
+                ]
+            },
+            "signal_signature": {
+                "confidence_label": "high",
+                "development_lever": "SA",
+                "dimension_states": {
+                    "EM": "high",
+                    "ER": "high",
+                    "RM": "high",
+                    "SA": "high"
+                },
+                "formulation_id": "balanced_integrated",
+                "match_pattern": "all_high_or_default_balanced",
+                "quality_level": "A",
+                "route_id": "balanced_integrated",
+                "schema": "eq60.signal_signature.v1",
+                "strongest_dimension": "SA"
+            },
             "strongest_dimension": "SA"
         },
         "legacy_scores": {

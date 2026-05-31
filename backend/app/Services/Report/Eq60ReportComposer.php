@@ -137,7 +137,10 @@ final class Eq60ReportComposer
         $dimensionSummary = array_values((array) ($v5Scores['dimension_summary'] ?? []));
         unset($v5Scores['dimension_summary']);
         $quality = $this->buildV5Quality($score);
-        $interpretation = $this->buildV5Interpretation($v5Scores, $quality);
+        $routeMatrix = is_array(data_get($reportAssets, 'assets.personalization_routes'))
+            ? (array) data_get($reportAssets, 'assets.personalization_routes')
+            : [];
+        $interpretation = $this->buildV5Interpretation($v5Scores, $quality, $routeMatrix);
         $assetRefs = $this->buildV5AssetRefs($interpretation, $quality);
         $resolvedAssets = $this->resolveV5Assets($reportAssets, $locale, $interpretation, $quality);
 
@@ -323,23 +326,115 @@ final class Eq60ReportComposer
      * @param  array<string,mixed>  $quality
      * @return array<string,mixed>
      */
-    private function buildV5Interpretation(array $scores, array $quality): array
+    private function buildV5Interpretation(array $scores, array $quality, array $routeMatrix = []): array
     {
         $dimensionScores = is_array($scores['dimensions'] ?? null) ? $scores['dimensions'] : [];
         $strongest = $this->rankDimension($dimensionScores, true);
         $developmentLever = $this->rankDimension($dimensionScores, false);
         $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? '')));
         $formulationId = $this->selectCoreFormulation($dimensionScores, $qualityLevel);
+        $route = $this->selectPersonalizationRoute($routeMatrix, $formulationId);
+        $selectedAssetIds = $this->selectedAssetIds($route, $formulationId, $dimensionScores, $developmentLever);
+        $routeId = trim((string) ($route['route_id'] ?? $formulationId)) ?: $formulationId;
+        $signalSignature = $this->buildSignalSignature(
+            $routeId,
+            $formulationId,
+            $dimensionScores,
+            $quality,
+            $strongest,
+            $developmentLever,
+            $route
+        );
 
         return [
+            'route_id' => $routeId,
+            'signal_signature' => $signalSignature,
             'core_formulation_id' => $formulationId,
             'strongest_dimension' => $strongest,
             'development_lever' => $developmentLever,
-            'primary_mechanism_ids' => $this->selectMechanismIds($formulationId, $dimensionScores),
-            'primary_scene_ids' => $this->selectSceneIds($formulationId),
-            'career_environment_ids' => $this->selectCareerEnvironmentIds($formulationId),
-            'action_prescription_id' => $this->selectActionPrescriptionId($formulationId, $developmentLever),
+            'primary_mechanism_ids' => $selectedAssetIds['mechanism_ids'],
+            'primary_scene_ids' => $selectedAssetIds['scene_ids'],
+            'career_environment_ids' => $selectedAssetIds['career_environment_ids'],
+            'action_prescription_id' => $selectedAssetIds['action_prescription_id'],
+            'selected_asset_ids' => $selectedAssetIds,
         ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function selectPersonalizationRoute(array $routeMatrix, string $formulationId): array
+    {
+        $routes = is_array($routeMatrix['routes'] ?? null) ? $routeMatrix['routes'] : [];
+        $route = $routes[$formulationId] ?? null;
+
+        return is_array($route) ? $route : [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $route
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     * @return array{core_formulation_id:string,mechanism_ids:list<string>,scene_ids:list<string>,career_environment_ids:list<string>,action_prescription_id:string}
+     */
+    private function selectedAssetIds(array $route, string $formulationId, array $dimensionScores, ?string $developmentLever): array
+    {
+        $selected = is_array($route['selected_asset_ids'] ?? null) ? $route['selected_asset_ids'] : [];
+
+        return [
+            'core_formulation_id' => trim((string) ($selected['core_formulation_id'] ?? $formulationId)) ?: $formulationId,
+            'mechanism_ids' => $this->nonEmptyStringList((array) ($selected['mechanism_ids'] ?? $this->selectMechanismIds($formulationId, $dimensionScores))),
+            'scene_ids' => $this->nonEmptyStringList((array) ($selected['scene_ids'] ?? $this->selectSceneIds($formulationId))),
+            'career_environment_ids' => $this->nonEmptyStringList((array) ($selected['career_environment_ids'] ?? $this->selectCareerEnvironmentIds($formulationId))),
+            'action_prescription_id' => trim((string) ($selected['action_prescription_id'] ?? $this->selectActionPrescriptionId($formulationId, $developmentLever))) ?: $this->selectActionPrescriptionId($formulationId, $developmentLever),
+        ];
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     * @param  array<string,mixed>  $quality
+     * @param  array<string,mixed>  $route
+     * @return array<string,mixed>
+     */
+    private function buildSignalSignature(
+        string $routeId,
+        string $formulationId,
+        array $dimensionScores,
+        array $quality,
+        ?string $strongest,
+        ?string $developmentLever,
+        array $route
+    ): array {
+        $dimensionStates = [];
+        foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
+            $dimensionStates[$code] = $this->dimensionState($dimensionScores, $code);
+        }
+
+        return [
+            'schema' => 'eq60.signal_signature.v1',
+            'route_id' => $routeId,
+            'formulation_id' => $formulationId,
+            'quality_level' => strtoupper(trim((string) ($quality['level'] ?? ''))),
+            'confidence_label' => (string) ($quality['confidence_label'] ?? ''),
+            'dimension_states' => $dimensionStates,
+            'strongest_dimension' => $strongest,
+            'development_lever' => $developmentLever,
+            'match_pattern' => (string) data_get($route, 'match.dimension_pattern', ''),
+        ];
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function dimensionState(array $dimensionScores, string $code): string
+    {
+        if ($this->isDimensionHigh($dimensionScores, $code)) {
+            return 'high';
+        }
+        if ($this->isDimensionLow($dimensionScores, $code)) {
+            return 'low';
+        }
+
+        return 'middle';
     }
 
     /**
@@ -523,6 +618,9 @@ final class Eq60ReportComposer
     private function buildV5AssetRefs(array $interpretation, array $quality): array
     {
         return [
+            'personalization_route_id' => (string) ($interpretation['route_id'] ?? ''),
+            'signal_signature' => is_array($interpretation['signal_signature'] ?? null) ? $interpretation['signal_signature'] : [],
+            'selected_asset_ids' => is_array($interpretation['selected_asset_ids'] ?? null) ? $interpretation['selected_asset_ids'] : [],
             'scientific_contract_id' => 'eq.scientific_contract.default',
             'score_system_id' => 'eq.score_system.default',
             'core_formulation_id' => (string) ($interpretation['core_formulation_id'] ?? ''),
@@ -598,7 +696,23 @@ final class Eq60ReportComposer
                 'explanation_asset_id' => (string) ($quality['explanation_asset_id'] ?? ''),
                 'confidence_label' => (string) ($quality['confidence_label'] ?? ''),
             ],
+            'personalization_route' => [
+                'id' => (string) ($interpretation['route_id'] ?? ''),
+                'signal_signature' => is_array($interpretation['signal_signature'] ?? null) ? $interpretation['signal_signature'] : [],
+                'selected_asset_ids' => is_array($interpretation['selected_asset_ids'] ?? null) ? $interpretation['selected_asset_ids'] : [],
+            ],
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function nonEmptyStringList(array $values): array
+    {
+        return array_values(array_unique(array_filter(array_map(
+            static fn ($value): string => trim((string) $value),
+            $values
+        ), static fn (string $value): bool => $value !== '')));
     }
 
     /**
