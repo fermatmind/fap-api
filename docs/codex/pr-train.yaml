@@ -16529,6 +16529,61 @@ prs:
     frontend_fallback_authority: false
     next_task: continue SECURITY-AUDIT-36-PR-TRAIN with AUDIT-SEC-RESULT-IDENTITY-01 after post-merge cleanup
 
+  - id: AUDIT-SEC-RESULT-IDENTITY-01
+    repo: fap-api
+    branch: audit/sec-result-identity-01
+    base: main
+    title: "AUDIT-SEC-RESULT-IDENTITY-01 harden result recovery identity boundary"
+    train_scope: result_recovery_identity_boundary
+    risk_level: high_security_identity_recovery
+    depends_on:
+      - AUDIT-SEC-RELEASE-TRAIN-01 merged
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_3/ResultEmailLookupController.php
+      - backend/app/Services/Results/ResultEmailLookupService.php
+      - backend/app/Services/Email/EmailOutboxService.php
+      - backend/app/Services/Email/EmailPreferenceService.php
+      - backend/tests/Feature/ResultEmailLookupTest.php
+      - backend/tests/Feature/AttemptEmailBindingTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Bind email lookup/recovery identity to non-spoofable server-side authority.
+      - Preserve legitimate anonymous result recovery through server-issued FM token identity.
+      - Enforce recovery email opt-out boundary for result access links.
+      - Add focused feature tests.
+    do_not:
+      - Do not deploy, mutate production, run production SSH, or approve production environments.
+      - Do not modify payment, content packs, CMS, fap-web, sitemap, llms, Search Channel, or URL submission files.
+      - Do not broaden result access token privileges or expose sensitive SDS/clinical results.
+      - Do not add migrations or new routes.
+    validation:
+      - cd backend && php artisan test --filter=ResultEmailLookupTest --no-ansi
+      - cd backend && php artisan test --filter=AttemptEmailBindingTest --no-ansi
+      - cd backend && php artisan test --filter=ResultEmailGatedReadTest --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-result-identity-01.sqlite php artisan migrate --force --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    public_contract_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: AUDIT-SEC-PAYMENT-INTEGRITY-01
+
   - id: PR-POL-01
     repo: fap-api
     branch: content/pr-pol-01-policies-dashboard

@@ -33844,5 +33844,50 @@
       }
     ],
     "next_task": "Run local validation, open PR, wait for CI, merge if allowed, cleanup, then continue SECURITY-AUDIT-36-PR-TRAIN."
+  },
+  "AUDIT-SEC-RESULT-IDENTITY-01": {
+    "id": "AUDIT-SEC-RESULT-IDENTITY-01",
+    "repo": "fap-api",
+    "branch": "audit/sec-result-identity-01",
+    "base": "main",
+    "title": "AUDIT-SEC-RESULT-IDENTITY-01 harden result recovery identity boundary",
+    "status": "in_progress",
+    "depends_on": [
+      "AUDIT-SEC-RELEASE-TRAIN-01 merged"
+    ],
+    "checks": {
+      "authorization": "user explicitly authorized adding remaining SECURITY-AUDIT-36 PR train items to manifest/state",
+      "workspace_safety": "using isolated worktree /private/tmp/fap-api-audit-sec-result-identity-01; dirty primary worktree untouched",
+      "deploy_safety_boundary": "no deploy, no production mutation, no production SSH",
+      "focused_tests": "php artisan test --filter=ResultEmailLookupTest, AttemptEmailBindingTest, ResultEmailGatedReadTest passed; local file cache warnings only",
+      "acceptance": "route:list passed; testing sqlite migrate passed; manifest JSON/YAML valid; git diff --check passed; backend/scripts/ci_verify_mbti.sh passed",
+      "scope_guard": "BIG5_OCEAN compiled generated files restored; only scoped files remain dirty"
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-05-31T15:14:47+08:00",
+        "from": "authorized",
+        "to": "in_progress",
+        "note": "Started from latest origin/main after AUDIT-SEC-RELEASE-TRAIN-01 merge cleanup."
+      },
+      {
+        "at": "2026-05-31T15:32:01+08:00",
+        "from": "in_progress",
+        "to": "local_validation_passed",
+        "note": "Focused tests and required local acceptance passed before commit; file cache warnings were non-failing local warnings."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "AUDIT-SEC-PAYMENT-INTEGRITY-01"
   }
 }

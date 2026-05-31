@@ -40,12 +40,11 @@ final class ResultEmailLookupService
         int $orgId,
         ?string $locale = null,
         ?int $userId = null,
-        mixed $tokenAnonId = null,
-        mixed $clientAnonId = null
+        mixed $tokenAnonId = null
     ): array {
         $emailHash = $this->emailHash($email);
         $ownerUserId = $userId !== null && $userId > 0 ? (string) $userId : null;
-        $ownerAnonIds = $this->ownerAnonIds($tokenAnonId, $clientAnonId);
+        $ownerAnonIds = $this->ownerAnonIds($tokenAnonId);
 
         if ($emailHash === null || ($ownerUserId === null && $ownerAnonIds === [])) {
             return $this->verificationRequiredResponse();
