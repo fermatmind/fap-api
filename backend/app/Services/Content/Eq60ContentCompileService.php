@@ -728,6 +728,7 @@ final class Eq60ContentCompileService
             'reality_translation',
             'career_environment',
             'action_prescriptions',
+            'cross_assessment_context',
             'sjt_bridge',
         ] as $key) {
             $doc = $this->loader->readJson($this->loader->rawPath('report_assets/'.$key.'.json', $version));

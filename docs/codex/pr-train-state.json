@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T12:54:52+00:00",
+  "updated_at": "2026-05-31T21:17:00+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -113,11 +113,11 @@
     "PR-EQ-PER-04": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-04-eq-journey-state",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "PR-EQ-PER-03"
       ],
-      "commit_sha": "6fc601683e5fa848e32d1ccc6d13d951677d5ac1",
+      "commit_sha": "392e8841670093f673d5a2f0141797330e0ce30e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1797",
       "checks": {
         "local": {
@@ -138,31 +138,60 @@
           "notes": "Changed files are limited to PR04 EQ journey state backend contract, EQ fixtures/tests, OpenAPI route snapshot for the new endpoint, and authorized manifest/state metadata."
         },
         "github": {
-          "status": "fix_pushed_after_openapi_snapshot_failure",
-          "failed_checks": [
+          "status": "passed",
+          "merge_state_status": "CLEAN",
+          "required_checks": [
+            "hygiene",
+            "supply-chain",
+            "content-pack-build-validate",
             "verify-mbti-legacy",
             "verify-mbti-v2",
-            "verify-bigfive"
+            "verify-bigfive",
+            "Semgrep blocking secrets"
           ],
-          "failure_reason": "OpenAPI snapshot drift for the scoped /api/v0.3/attempts/{id}/eq/journey route, then BigFive runtime freeze classifier flagged EQ-only journey files as MBTI-impacting.",
-          "fix": "Updated backend/docs/contracts/openapi.snapshot.json, added the snapshot to PR04 allowed paths, and added a narrow BigFive runtime-freeze classifier guard for the EQ journey state contract."
+          "notes": "PR #1797 checks passed after OpenAPI snapshot and narrow runtime-freeze classifier fixes; squash merged."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-31T09:17:00Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-EQ-PER-05": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-05-cross-assessment-guard",
-      "status": "pending",
+      "status": "open",
       "depends_on": [
         "PR-EQ-PER-04"
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "commit_sha": "555f1e3aaa7b3e7b590dcb47d50481980ef12f7f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1801",
+      "checks": {
+        "local": {
+          "status": "passed_with_external_sidecar",
+          "commands": [
+            "cd backend && php -l app/Services/Eq/EqCrossAssessmentContextGuard.php",
+            "cd backend && php -l app/Services/Report/Eq60ReportComposer.php",
+            "cd backend && php -l tests/Feature/Report/Eq60CrossAssessmentContextGuardTest.php",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60CrossAssessmentContextGuardTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' UPDATE_EQ60_V5_FIXTURES=1 php artisan test --filter=Eq60V5ReportContractTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFive",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Enneagram",
+            "git diff --check",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_eq_cross_assessment_context_guard_changes'"
+          ],
+          "sidecar_external_check": {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Mbti",
+            "status": "failed_on_pr_branch_and_origin_main",
+            "origin_main_revalidation": "A clean origin/main worktree reproduced the same MBTI/career recommendation failures, including missing FirstWavePublishReadyValidator::validationMemoKey(), governance.v1/runtime.locale_policy.v1 assertion drift, and snapshots_created assertion drift.",
+            "classification": "external_pre_existing_not_current_pr_scope"
+          },
+          "scope_validation": "passed; changed files are limited to EQ report services, EQ content pack assets/compiled outputs, EQ tests/fixtures, and PR train state.",
+          "notes": "Focused PR05, Eq60, BigFive, and Enneagram checks passed with existing PHPUnit warnings. The manifest Mbti check is recorded as an external sidecar because the same failures reproduce on clean origin/main and do not affect the EQ cross-assessment guard runtime contract. After GitHub verify-bigfive exposed the runtime freeze allowlist gap, PR05 added a narrow EQ-only classifier test and revalidated the targeted Big Five freeze checks."
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,

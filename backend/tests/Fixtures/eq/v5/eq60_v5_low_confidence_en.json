@@ -17,6 +17,8 @@
                 "autonomy_recovery_high"
             ],
             "core_formulation_id": "low_confidence_result",
+            "cross_assessment_boundary_id": "eq.cross_context.boundary.default",
+            "cross_assessment_context_ids": [],
             "mechanism_ids": [],
             "personalization_route_id": "low_confidence_result",
             "quality_explanation_asset_id": "eq.quality.level.C",
@@ -123,6 +125,19 @@
                 "one_liner": "Response-quality signals reduce interpretation confidence; read this result cautiously.",
                 "primary_strength": "It can still serve as a reflection cue.",
                 "title": "Lower Confidence Result"
+            },
+            "cross_assessment_context": {
+                "boundary": {
+                    "claim_boundary": "Not for career prediction, hiring, clinical diagnosis, fixed identity labels, or emotional ability claims.",
+                    "how_to_use": "Treat MBTI, Big Five, and Enneagram as evidence from different questions. They do not rewrite EQ scores or replace the emotional and relational self-report result.",
+                    "id": "eq.cross_context.boundary.default",
+                    "summary": "This module only explains which related assessments are available and how they can support reading the EQ result.",
+                    "title": "Cross-assessment context boundary"
+                },
+                "cards": [],
+                "schema": "eq_cross_assessment_context.assets.v1",
+                "source_count": 0,
+                "status": "no_source_assessments"
             },
             "mechanisms": [],
             "personalization_route": {
@@ -349,6 +364,55 @@
                 }
             ],
             "paid_blocks": []
+        },
+        "cross_assessment_context": {
+            "available": true,
+            "boundary_asset_id": "eq.cross_context.boundary.default",
+            "context_asset_ids": [],
+            "guardrails": {
+                "affects_scores": false,
+                "blocked_claims": [
+                    "career_or_hiring_prediction",
+                    "clinical_or_diagnostic_claim",
+                    "job_performance_prediction",
+                    "fixed_personality_identity",
+                    "emotional_ability_claim"
+                ],
+                "changes_formulation": false,
+                "claim_boundary": "reflection_context_only_not_type_determinism",
+                "eq_authority": "EQ_60 remains authoritative for emotional and relational self-report signals.",
+                "formal_report_mutation_allowed": false,
+                "source_authority": "MBTI, Big Five, and Enneagram remain authoritative only for their own assessment domains."
+            },
+            "schema": "eq_cross_assessment_context.v1",
+            "source_count": 0,
+            "source_scales": {
+                "BIG5_OCEAN": {
+                    "asset_id": "eq.cross_context.big_five.available",
+                    "available": false,
+                    "evidence_kind": "not_available",
+                    "source_attempt_id": null,
+                    "source_result_id": null,
+                    "submitted_at": null
+                },
+                "ENNEAGRAM": {
+                    "asset_id": "eq.cross_context.enneagram.available",
+                    "available": false,
+                    "evidence_kind": "not_available",
+                    "source_attempt_id": null,
+                    "source_result_id": null,
+                    "submitted_at": null
+                },
+                "MBTI": {
+                    "asset_id": "eq.cross_context.mbti.available",
+                    "available": false,
+                    "evidence_kind": "not_available",
+                    "source_attempt_id": null,
+                    "source_result_id": null,
+                    "submitted_at": null
+                }
+            },
+            "status": "no_source_assessments"
         },
         "dimension_summary": [
             {
