@@ -1,0 +1,39 @@
+{
+  "schema_version": "analytics-funnel-ops-global-scope-entry-01.v1",
+  "task": "ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01",
+  "final_decision": "analytics_funnel_ops_global_scope_entry_completed_ready_for_deploy",
+  "scope_entry_added": true,
+  "default_scope": "current_org",
+  "global_scope": "global_org0",
+  "accepted_query_aliases": [
+    "global",
+    "global_org0",
+    "org0"
+  ],
+  "source_of_truth": "analytics_funnel_daily",
+  "global_org_id": 0,
+  "current_org_session_mutation": false,
+  "cookie_mutation": false,
+  "analytics_refresh_performed": false,
+  "production_db_write_performed": false,
+  "cms_mutation_performed": false,
+  "ga_baidu_setting_change_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "deploy_performed": false,
+  "expected_browser_smoke_url": "https://ops.fermatmind.com/ops/funnel-conversion?scope=global_org0",
+  "post_deploy_expected_totals": {
+    "row_count": 38,
+    "test_start": 382,
+    "test_submit": 286,
+    "result_view": 277,
+    "order_created": 11,
+    "payment_success": 8,
+    "report_unlock": 2,
+    "report_ready": 0,
+    "pdf_download": 11,
+    "share_generate": 12,
+    "share_click": 5
+  },
+  "next_task": "BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01"
+}

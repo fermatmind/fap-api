@@ -16624,6 +16624,57 @@ prs:
     frontend_fallback_authority: false
     next_task: BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01
 
+  - id: ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01
+    repo: fap-api
+    branch: codex/analytics-funnel-ops-global-scope-entry-01
+    base: main
+    title: "ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01 allow global org0 funnel scope entry"
+    train_scope: analytics_funnel_ops_global_scope_entry
+    risk_level: p1_analytics_funnel_observability
+    depends_on:
+      - ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01
+    allowed_paths:
+      - backend/app/Filament/Ops/Pages/FunnelConversionPage.php
+      - backend/resources/views/filament/ops/pages/funnel-conversion-page.blade.php
+      - backend/tests/Feature/Ops/FunnelConversionPageTest.php
+      - backend/tests/Feature/V0_3/IqReportContractTest.php
+      - backend/docs/seo/analytics-funnel-ops-global-scope-entry-01.md
+      - backend/docs/seo/generated/analytics-funnel-ops-global-scope-entry-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add an explicit read-only global org_id=0 scope entry to the Ops funnel conversion page.
+      - Allow the page to read analytics_funnel_daily org_id=0 rows even when the current Ops session has a selected tenant organization.
+      - Do not mutate ops_org_id session state or selected organization cookies when global scope is selected.
+      - Continue using analytics_funnel_daily as the read model source of truth.
+      - Include the user-authorized Pint-only formatting fix for backend/tests/Feature/V0_3/IqReportContractTest.php required by full Pint validation.
+      - Do not run analytics refresh, mutate production DB, deploy, mutate CMS, change GA/Baidu settings, enqueue Search Channel, submit URLs, call external search APIs, read raw logs, or access production PII.
+    validation:
+      - cd backend && php artisan test --filter=FunnelConversionPage --no-ansi
+      - cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/analytics-funnel-ops-global-scope-entry-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01
+
 
   - id: CONTENT-PACKS-INDEX-ARTIFACT-01
     repo: fap-api

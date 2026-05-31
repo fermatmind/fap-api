@@ -1,7 +1,7 @@
 <x-filament-panels::page>
     <div class="space-y-6">
         <form wire:submit.prevent="applyFilters" class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
-            <div class="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_220px_220px_auto]">
+            <div class="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_220px_220px_220px_auto]">
                 <label class="space-y-2">
                     <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">From</span>
                     <input
@@ -18,6 +18,15 @@
                         wire:model.defer="toDate"
                         class="block w-full rounded-xl border-slate-300 text-sm shadow-sm"
                     />
+                </label>
+
+                <label class="space-y-2">
+                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Scope</span>
+                    <select wire:model.defer="funnelScope" class="block w-full rounded-xl border-slate-300 text-sm shadow-sm">
+                        <option value="current_org">Current organization</option>
+                        <option value="global_org0">Global org_id=0</option>
+                    </select>
+                    <span class="block text-xs text-slate-500">Global scope reads org_id=0 without changing the selected organization.</span>
                 </label>
 
                 <label class="space-y-2">
