@@ -32752,10 +32752,10 @@
     "repo": "fap-api",
     "branch": "codex/payment-alipay-scheduler-bootstrap-02",
     "base": "main",
-    "status": "committed",
+    "status": "pr_open",
     "title": "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02 register Alipay compensation in runtime scheduler",
-    "commit_sha": "739e9c21fb84f7e41e819a7addec8ee12eb92195",
-    "pr_url": null,
+    "commit_sha": "fecc207643c37dba0d411eda305a376d6eb3a2db",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1774",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -32809,6 +32809,15 @@
         "status": "pass",
         "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
         "evidence": "PASS: no fap-web changes reported."
+      },
+      "pr_created": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1774",
+        "title": "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02 register Alipay compensation in runtime scheduler"
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR opened; remote checks not completed at ledger update time."
       }
     },
     "failure_reason": null,
@@ -32840,6 +32849,11 @@
         "status": "committed",
         "at": "2026-05-31T01:29:00Z",
         "summary": "Committed scoped runtime scheduler bootstrap fix at 739e9c21fb84f7e41e819a7addec8ee12eb92195."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T01:32:00Z",
+        "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1774 after local validation passed."
       }
     ],
     "sidecars": [],
