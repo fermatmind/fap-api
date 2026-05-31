@@ -22414,7 +22414,7 @@
       "branch": "codex/iq-norm-02-importer-dry-run",
       "base": "main",
       "title": "IQ-NORM-02 add IQ norm table importer dry-run",
-      "status": "ci_fix_pushed_checks_pending",
+      "status": "merged",
       "depends_on": [
         "IQ-NORM-01"
       ],
@@ -22435,11 +22435,12 @@
           "notes": "Targeted PHPUnit suites exited 0 with warnings only; dry-run importer tests had 4 tests/20 assertions; IqNorm filter had 8 tests/52 assertions."
         },
         "github": {
-          "status": "failed_then_fix_pushed",
-          "failed_check": "verify-bigfive",
-          "failure_summary": "BigFive runtime freeze classifier flagged backend/app/Console/Commands/NormsIqImport.php and backend/app/Console/Kernel.php.",
-          "fix_summary": "Added exact IQ norm import dry-run classifier exception and regression test in BigFive freeze test harness; no BigFive runtime behavior changed.",
-          "updated_at": "2026-05-31T14:34:10.016Z"
+          "status": "passed_after_sidecar_ci_memory_fix",
+          "pr_merge_commit": "833485039afba630257b634b8ecadd386ce96b76",
+          "sidecar_pr_url": "https://github.com/fermatmind/fap-api/pull/1807",
+          "sidecar_merge_commit": "3a1a1c75c25f5fff0fe6d993743d2a557729e5f7",
+          "note": "Initial verify-bigfive classifier failure was fixed in scope. Later BigFive compile memory exhaustion was external CI resource blocker and resolved in sidecar #1807 before #1802 merged.",
+          "completed_at": "2026-05-31T15:03:19.375Z"
         },
         "local_fix": {
           "status": "passed",
@@ -22453,17 +22454,25 @@
             "git diff --check"
           ],
           "completed_at": "2026-05-31T14:34:10.016Z"
+        },
+        "post_merge": {
+          "status": "passed",
+          "commands": [
+            "cd backend && php -l app/Console/Commands/NormsIqImport.php",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNormsImportDryRunTest --no-ansi"
+          ],
+          "completed_at": "2026-05-31T15:03:19.375Z"
         }
       },
-      "failure_reason": "GitHub verify-bigfive failed because the BigFive runtime freeze classifier flagged the IQ norm dry-run importer command and Kernel command registration; fixed in current PR scope with an exact IQ importer dry-run classifier exception and regression test. No BigFive runtime behavior changed.",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "failure_reason": null,
+      "merged_at": "2026-05-31T14:51:58Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": null,
-        "post_merge_revalidated": null
+        "github_checks_green": true,
+        "post_merge_revalidated": true
       },
       "transitions": [
         {
@@ -22495,12 +22504,18 @@
           "from": "pr_open_checks_pending",
           "to": "ci_fix_pushed_checks_pending",
           "reason": "Pushed scoped fix for verify-bigfive classifier failure after local fix checks passed."
+        },
+        {
+          "at": "2026-05-31T15:03:19.375Z",
+          "from": "ci_fix_pushed_checks_pending",
+          "to": "merged",
+          "note": "Reconciled GitHub merged state for #1802 after sidecar #1807 resolved external BigFive CI memory blocker."
         }
       ],
-      "commit_sha": "8c81e5f6",
+      "commit_sha": "833485039afba630257b634b8ecadd386ce96b76",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1802",
       "pr_number": 1802,
-      "updated_at": "2026-05-31T14:34:10.016Z"
+      "updated_at": "2026-05-31T15:03:19.375Z"
     },
     "IQ-NORM-03": {
       "id": "IQ-NORM-03",
@@ -22508,18 +22523,36 @@
       "branch": "codex/iq-norm-03-score-claim-unlock",
       "base": "main",
       "title": "IQ-NORM-03 unlock IQ score claims through norm authority",
-      "status": "planned",
+      "status": "local_scope_validation_passed",
       "depends_on": [
         "IQ-NORM-02"
       ],
-      "checks": {},
+      "checks": {
+        "local": {
+          "status": "passed",
+          "commands": [
+            "php -l backend/app/Services/Assessment/Drivers/IqTestDriver.php",
+            "php -l backend/app/Services/Report/IqReportBuilder.php",
+            "php -l backend/tests/Unit/Assessment/IqTestDriverTest.php",
+            "php -l backend/tests/Unit/Services/Report/IqReportBuilderTest.php",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqTestDriverTest --no-ansi",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportBuilderTest --no-ansi",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportContractTest --no-ansi",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "git diff --check"
+          ],
+          "notes": "Targeted PHPUnit suites exited 0 with warnings only: IqTestDriverTest 6 tests/84 assertions, IqReportBuilderTest 3 tests/33 assertions, IqReportContractTest 4 tests/404 assertions.",
+          "completed_at": "2026-05-31T15:05:10.943Z"
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
@@ -22529,8 +22562,21 @@
           "from": "missing",
           "to": "planned",
           "note": "User authorized IQ production PR train manifest/state registration."
+        },
+        {
+          "at": "2026-05-31T15:03:19.375Z",
+          "from": "planned",
+          "to": "implementation_in_progress",
+          "note": "Started from latest origin/main after IQ-NORM-02 merged and post-merge revalidation passed."
+        },
+        {
+          "at": "2026-05-31T15:05:10.943Z",
+          "from": "implementation_in_progress",
+          "to": "local_scope_validation_passed",
+          "note": "IQ score/report claim unlock now depends on backend iq_norm_authorities public claim gate; local validation passed."
         }
-      ]
+      ],
+      "updated_at": "2026-05-31T15:05:10.943Z"
     },
     "IQ-PAID-REPORT-01": {
       "id": "IQ-PAID-REPORT-01",

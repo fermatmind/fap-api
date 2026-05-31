@@ -96,6 +96,43 @@ final class IqReportBuilderTest extends TestCase
         $this->assertSame('full', data_get($payload, 'report.access.report_access_level'));
     }
 
+    public function test_builder_emits_iq_claim_fields_only_when_norm_claim_policy_is_eligible(): void
+    {
+        $builder = app(IqReportBuilder::class);
+        $attempt = new Attempt([
+            'id' => 'attempt-iq-report-norm-claim',
+            'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
+        ]);
+        $result = new Result([
+            'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
+            'result_json' => [
+                'normed_json' => $this->scoredPayloadWithNormClaimPolicy(true),
+            ],
+        ]);
+
+        $payload = $builder->composeVariant($attempt, $result, ReportAccess::VARIANT_FULL, [
+            'report_access_level' => ReportAccess::REPORT_ACCESS_FULL,
+        ]);
+
+        $this->assertSame(109.0, data_get($payload, 'report.summary.iq_estimate'));
+        $this->assertSame(72.57, data_get($payload, 'report.summary.percentile'));
+        $this->assertSame([104.5, 113.5], data_get($payload, 'report.summary.confidence_interval'));
+
+        $lockedResult = new Result([
+            'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
+            'result_json' => [
+                'normed_json' => $this->scoredPayloadWithNormClaimPolicy(false),
+            ],
+        ]);
+        $lockedPayload = $builder->composeVariant($attempt, $lockedResult, ReportAccess::VARIANT_FULL, [
+            'report_access_level' => ReportAccess::REPORT_ACCESS_FULL,
+        ]);
+
+        $this->assertNull(data_get($lockedPayload, 'report.summary.iq_estimate'));
+        $this->assertNull(data_get($lockedPayload, 'report.summary.percentile'));
+        $this->assertNull(data_get($lockedPayload, 'report.summary.confidence_interval'));
+    }
+
     public function test_builder_keeps_blocked_unscored_legacy_demo_report_explicit(): void
     {
         $builder = app(IqReportBuilder::class);
@@ -133,5 +170,45 @@ final class IqReportBuilderTest extends TestCase
         $this->assertNull(data_get($payload, 'quality'));
         $this->assertNull(data_get($payload, 'stability'));
         $this->assertNull(data_get($payload, 'iq_pro'));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function scoredPayloadWithNormClaimPolicy(bool $claimEligible): array
+    {
+        return [
+            'status' => 'scored',
+            'scoring_mode' => 'scored',
+            'bank_id' => 'IQ_BETA_30_ORIGINAL',
+            'answer_key_version' => 'iq_beta30_original_answer_key_v1',
+            'norm_table_version' => 'iq_norm_prod_v1',
+            'scoring_engine_version' => 'iq_scoring_v2',
+            'raw_score' => 18.0,
+            'quality' => [
+                'level' => 'A',
+                'flags' => [],
+            ],
+            'result_stability' => [
+                'status' => 'stable',
+                'reason' => 'quality_clear',
+            ],
+            'norms' => [
+                'status' => 'production_normed',
+                'iq_estimate' => 109.0,
+                'percentile' => 72.57,
+                'confidence_interval' => [104.5, 113.5],
+                'claim_policy' => [
+                    'claim_eligible' => $claimEligible,
+                    'reason_code' => $claimEligible ? null : 'license_verification_required',
+                    'source' => 'iq_norm_authority',
+                ],
+            ],
+            'dimension_scores' => [
+                'VSI' => ['raw_score' => 4.0, 'percent_correct' => 40.0, 'item_count' => 10, 'answered_count' => 10, 'correct_count' => 4],
+                'VSPR' => ['raw_score' => 14.0, 'percent_correct' => 100.0, 'item_count' => 14, 'answered_count' => 14, 'correct_count' => 14],
+                'NPR' => ['raw_score' => 0.0, 'percent_correct' => 0.0, 'item_count' => 6, 'answered_count' => 6, 'correct_count' => 0],
+            ],
+        ];
     }
 }

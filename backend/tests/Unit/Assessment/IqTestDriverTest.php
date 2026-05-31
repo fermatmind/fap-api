@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Unit\Assessment;
 
 use App\Services\Assessment\Drivers\IqTestDriver;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class IqTestDriverTest extends TestCase
@@ -158,6 +160,78 @@ final class IqTestDriverTest extends TestCase
         $this->assertSame(30, data_get($result->normedJson, 'expected_item_count'));
     }
 
+    public function test_beta30_norm_authority_unlocks_iq_claim_fields_only_after_public_claim_gate_passes(): void
+    {
+        $this->migrateIqNormAuthority();
+        $this->insertIqNormAuthority([
+            'norm_table_version' => 'iq_norm_prod_v1',
+            'status' => 'production_normed',
+            'sample_size' => 1200,
+            'mean' => 15.0,
+            'standard_deviation' => 5.0,
+            'license_verified' => true,
+            'locked' => true,
+        ]);
+
+        $spec = $this->beta30ScoringSpec();
+        $spec['norm_table_version'] = 'iq_norm_prod_v1';
+
+        $result = (new IqTestDriver)->score(
+            $this->beta30Answers(18),
+            $spec,
+            [
+                'duration_ms' => 20 * 60 * 1000,
+                'pack_id' => 'IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO',
+                'content_package_version' => 'v0.3.0-demo',
+                'scoring_spec_version' => 'iq_beta30_original_v1',
+                'locale' => 'zh-CN',
+            ]
+        );
+
+        $this->assertSame('production_normed', data_get($result->normedJson, 'norms.status'));
+        $this->assertTrue((bool) data_get($result->normedJson, 'norms.claim_policy.claim_eligible'));
+        $this->assertSame('iq_norm_prod_v1', data_get($result->normedJson, 'norms.norm_table_version'));
+        $this->assertSame(109.0, data_get($result->normedJson, 'norms.iq_estimate'));
+        $this->assertSame(72.57, data_get($result->normedJson, 'norms.percentile'));
+        $this->assertSame([104.5, 113.5], data_get($result->normedJson, 'norms.confidence_interval'));
+    }
+
+    public function test_beta30_norm_authority_keeps_iq_claim_fields_locked_when_public_claim_gate_fails(): void
+    {
+        $this->migrateIqNormAuthority();
+        $this->insertIqNormAuthority([
+            'norm_table_version' => 'iq_norm_not_claim_ready_v1',
+            'status' => 'production_normed',
+            'sample_size' => 120,
+            'mean' => 15.0,
+            'standard_deviation' => 5.0,
+            'license_verified' => false,
+            'locked' => false,
+        ]);
+
+        $spec = $this->beta30ScoringSpec();
+        $spec['norm_table_version'] = 'iq_norm_not_claim_ready_v1';
+
+        $result = (new IqTestDriver)->score(
+            $this->beta30Answers(18),
+            $spec,
+            [
+                'duration_ms' => 20 * 60 * 1000,
+                'pack_id' => 'IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO',
+                'content_package_version' => 'v0.3.0-demo',
+                'scoring_spec_version' => 'iq_beta30_original_v1',
+                'locale' => 'zh-CN',
+            ]
+        );
+
+        $this->assertSame('unavailable_without_claim_eligible_norm_authority', data_get($result->normedJson, 'norms.status'));
+        $this->assertFalse((bool) data_get($result->normedJson, 'norms.claim_policy.claim_eligible'));
+        $this->assertContains('sample_size_below_public_claim_minimum', data_get($result->normedJson, 'norms.claim_policy.errors', []));
+        $this->assertNull(data_get($result->normedJson, 'norms.iq_estimate'));
+        $this->assertNull(data_get($result->normedJson, 'norms.percentile'));
+        $this->assertNull(data_get($result->normedJson, 'norms.confidence_interval'));
+    }
+
     private function completeScoringSpec(): array
     {
         return [
@@ -281,6 +355,41 @@ final class IqTestDriverTest extends TestCase
         $this->assertIsArray($payload);
 
         return $payload;
+    }
+
+    private function migrateIqNormAuthority(): void
+    {
+        $migration = require base_path('database/migrations/2026_05_31_090000_create_iq_norm_authorities_table.php');
+        $migration->up();
+    }
+
+    /**
+     * @param  array<string,mixed>  $overrides
+     */
+    private function insertIqNormAuthority(array $overrides = []): void
+    {
+        DB::table('iq_norm_authorities')->insert(array_merge([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
+            'bank_id' => 'IQ_BETA_30_ORIGINAL',
+            'norm_table_version' => 'iq_norm_prod_v1',
+            'status' => 'production_normed',
+            'population_key' => 'general_adult_online',
+            'locale' => 'zh-CN',
+            'sample_size' => 1200,
+            'mean' => 15.0,
+            'standard_deviation' => 5.0,
+            'min_raw_score' => 0.0,
+            'max_raw_score' => 30.0,
+            'source_kind' => 'internal_calibration',
+            'source_ref' => 'iq-norm-03-test-fixture',
+            'license_verified' => true,
+            'locked' => true,
+            'effective_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ], $overrides));
     }
 
     private function itemDefinition(
