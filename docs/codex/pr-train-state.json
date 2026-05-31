@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T23:11:44Z",
+  "updated_at": "2026-05-31T23:35:32.482839Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -30859,12 +30859,12 @@
       "branch": "codex/iq-seo-ramp-01-cms-authority",
       "base": "main",
       "title": "IQ-SEO-RAMP-01 publish CMS SEO ramp authority",
-      "status": "pr_open_checks_pending",
+      "status": "merged_reconciled_external_sidecar",
       "depends_on": [
         "IQ-CMS-MEDIA-02",
         "IQ-NORM-03"
       ],
-      "commit_sha": "90e9709e",
+      "commit_sha": "ccaadfe1a34f486775e21ef55e79f74bca6487a0",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1821",
       "checks": {
         "dependency_iq_cms_media_02": "passed: fermatmind/fap-web#944 merged at 2026-05-31T16:40:02Z",
@@ -30874,12 +30874,18 @@
         "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=LandingSurfacePublicApiTest --no-ansi": "passed_with_existing_warnings",
         "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqSeoRampAuthorityTest --no-ansi": "passed_with_existing_warning",
         "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Seo --no-ansi": "failed_external_sidecar: 13 failures outside IQ-SEO-RAMP-01 scope; IqSeoRampAuthorityTest passed inside broad suite; examples include CareerLiveAcceptance1048CloseoutPlannerTest, CareerProgressiveCohortCloseoutPlannerTest, SeoIntelCrawlerLogProductionCanaryRuntimeTest, SeoIntelOpsSeo* dashboard tests, SeoIntelSearchChannelLive02PreflightTest, and CareerJobPublicApiTest SEO endpoint tests.",
-        "scope_validation": "passed: changed files limited to IQ-SEO-RAMP-01 allowed_paths after removing test-generated EQ_60 compiled artifacts"
+        "scope_validation": "passed: changed files limited to IQ-SEO-RAMP-01 allowed_paths after removing test-generated EQ_60 compiled artifacts",
+        "github_checks": "passed: PR #1821 required checks were green before merge.",
+        "merge": "passed: GitHub PR #1821 is MERGED at 2026-05-31T17:05:10Z with merge commit ccaadfe1a34f486775e21ef55e79f74bca6487a0.",
+        "origin_main_contains_merge_commit": "passed: origin/main contains ccaadfe1a34f486775e21ef55e79f74bca6487a0.",
+        "remote_branch_deleted": "passed: git ls-remote found no codex/iq-seo-ramp-01-cms-authority remote head.",
+        "local_cleanup": "passed: no local codex/iq-seo-ramp-01-cms-authority branch remains in fap-api clone.",
+        "post_merge_revalidate": "external_sidecar: current origin/main IqSeoRampAuthorityTest fails because imported LandingSurface payload lacks seo.iq_ramp_authority.schema even though baseline JSON contains it; not introduced by state closeout."
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-31T17:05:10Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
         "allowed_paths_only": true,
         "changed_files": [
@@ -30890,10 +30896,11 @@
           "docs/codex/pr-train.yaml"
         ],
         "local_validation_passed": true,
-        "github_checks_green": null,
-        "post_merge_revalidated": null
+        "github_checks_green": true,
+        "post_merge_revalidated": false,
+        "post_merge_revalidate_sidecar": "IQ-SEO-RAMP-01-SIDECAR-POST-MERGE-IQ-SEO-AUTHORITY-IMPORT-20260601"
       },
-      "updated_at": "2026-05-31T16:53:16.348171Z",
+      "updated_at": "2026-05-31T23:35:32.482839Z",
       "sidecar_issues": [
         {
           "id": "IQ-SEO-RAMP-01-SIDECAR-SEO-SUITE-EXTERNAL-20260601",
@@ -30915,6 +30922,16 @@
             "Tests\\Feature\\V0_5\\CareerJobPublicApiTest"
           ],
           "scope_disposition": "registered_sidecar_per_user_goal_protocol; do not repair in IQ-SEO-RAMP-01"
+        },
+        {
+          "id": "IQ-SEO-RAMP-01-SIDECAR-POST-MERGE-IQ-SEO-AUTHORITY-IMPORT-20260601",
+          "status": "open_external",
+          "introduced_by_current_pr": false,
+          "blocking_current_train": false,
+          "detected_at": "2026-05-31T23:35:32.482839Z",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqSeoRampAuthorityTest --no-ansi",
+          "summary": "Post-merge revalidation on current fap-api origin/main fails at IqSeoRampAuthorityTest.php:38: expected iq.seo_ramp_authority.v1 but LandingSurface payload returns empty schema. Baseline tests.en/zh-CN JSON still contains seo.iq_ramp_authority, indicating an importer/runtime persistence issue outside the state-only closeout PR.",
+          "scope_disposition": "registered_sidecar_per_user_goal_protocol; do not repair in state-only closeout PR"
         }
       ],
       "transitions": [
@@ -30929,6 +30946,18 @@
           "from": "local_scope_validation_passed_external_sidecar",
           "to": "pr_open_checks_pending",
           "note": "Opened GitHub PR #1821 after scoped validation passed and external Seo suite failures were sidecarized."
+        },
+        {
+          "at": "2026-05-31T23:28:58.692887Z",
+          "from": "pr_open_checks_pending",
+          "to": "merged_reconciled_external_sidecar",
+          "note": "Reconciled GitHub merge/branch cleanup for PR #1821; post-merge IQ SEO authority check now fails on main and is registered as an external sidecar."
+        },
+        {
+          "at": "2026-05-31T23:35:32.482839Z",
+          "from": "merge_conflict_rebase_resolution",
+          "to": "merged_reconciled_external_sidecar",
+          "note": "Reapplied API IQ train closeout after syncing origin/main; kept post-merge SEO authority failure as external sidecar."
         }
       ],
       "pr_number": 1821
@@ -30939,11 +30968,11 @@
       "branch": "codex/iq-obs-01-production-guards",
       "base": "main",
       "title": "IQ-OBS-01 add production observability guards",
-      "status": "github_checks_green",
+      "status": "merged",
       "depends_on": [
         "IQ-LIVE-RAMP-01"
       ],
-      "commit_sha": "d029f7c6",
+      "commit_sha": "1e8a6ebb10a4e21a0e50b6764916f75cda9d385b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1823",
       "checks": {
         "dependency_iq_live_ramp_01": "passed: fap-web PR #947 merged at 2026-05-31T17:32:31Z and reconciled in fap-api ledger.",
@@ -30956,17 +30985,22 @@
         "commit_sha": "recorded: 3ca9dc704752c43db05a1c4039eee30dfb3618b0",
         "github verify-bigfive": "failed_then_fixed: freeze classifier flagged backend/app/Services/Iq/IqProductionObservability.php; added IQ-specific ignore coverage without changing Big Five runtime behavior.",
         "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=runtime_freeze_classifier_ignores_iq_production_observability_guard_changes --no-ansi": "passed_with_existing_warning",
-        "github_checks": "passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, verify-mbti-v2"
+        "github_checks": "passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, verify-mbti-v2",
+        "merge": "passed: GitHub PR #1823 is MERGED at 2026-05-31T17:59:09Z with merge commit 1e8a6ebb10a4e21a0e50b6764916f75cda9d385b.",
+        "origin_main_contains_merge_commit": "passed: origin/main contains 1e8a6ebb10a4e21a0e50b6764916f75cda9d385b.",
+        "remote_branch_deleted": "passed: git ls-remote found no codex/iq-obs-01-production-guards remote head.",
+        "local_cleanup": "passed: no local codex/iq-obs-01-production-guards branch remains in fap-api clone.",
+        "post_merge_revalidate": "passed: IqObservability, IqReportContractTest, and runtime_freeze_classifier_ignores_iq_production_observability_guard_changes all passed on current origin/main worktree."
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-31T17:59:09Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
         "github_checks_green": true,
-        "post_merge_revalidated": null,
+        "post_merge_revalidated": true,
         "changed_files_expected": [
           "backend/app/Services/Iq/IqProductionObservability.php",
           "backend/tests/Feature/V0_3/IqObservabilityTest.php",
@@ -30979,7 +31013,7 @@
           "docs/codex/pr-train-state.json"
         ]
       },
-      "updated_at": "2026-05-31T17:53:56.360791Z",
+      "updated_at": "2026-05-31T23:35:32.482839Z",
       "transitions": [
         {
           "at": "2026-05-31T17:39:32.634261Z",
@@ -31016,9 +31050,59 @@
           "from": "ci_fix_validated",
           "to": "github_checks_green",
           "note": "GitHub checks passed for PR #1823 after the scoped verify-bigfive freeze classifier fix."
+        },
+        {
+          "at": "2026-05-31T23:28:58.692887Z",
+          "from": "github_checks_green",
+          "to": "merged",
+          "note": "Reconciled PR #1823 merge, branch cleanup, and post-merge IQ observability checks."
+        },
+        {
+          "at": "2026-05-31T23:35:32.482839Z",
+          "from": "merge_conflict_rebase_resolution",
+          "to": "merged",
+          "note": "Reapplied IQ-OBS-01 final merge and post-merge revalidation state after syncing origin/main."
         }
       ],
       "pr_number": 1823
+    },
+    "IQ-RELEASE-01": {
+      "id": "IQ-RELEASE-01",
+      "repo": "fap-web",
+      "branch": "codex/iq-release-01-launch-readiness-ledger",
+      "base": "main",
+      "depends_on": [
+        "IQ-OBS-01"
+      ],
+      "title": "IQ-RELEASE-01 finalize production launch readiness ledger",
+      "status": "merged_reconciled_cross_repo",
+      "commit_sha": "3dd48baa92c144973f6c795a476968a00576d267",
+      "pr_url": "https://github.com/fermatmind/fap-web/pull/948",
+      "pr_number": 948,
+      "failure_reason": null,
+      "merged_at": "2026-05-31T23:18:01Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "updated_at": "2026-05-31T23:35:32.482839Z",
+      "checks": {
+        "cross_repo_release_pr": "passed: fap-web PR #948 merged at 2026-05-31T23:18:01Z with merge commit 3dd48baa92c144973f6c795a476968a00576d267.",
+        "fap_web_state_closeout": "passed: fap-web PR #949 merged at 2026-05-31T23:25:12Z with merge commit 26b0aee7451b5f1a7315ffa3ba707487d8b8f01f and recorded final release state.",
+        "post_merge_revalidate": "passed: fap-web origin/main release ledger contract, JSON parse, and YAML parse passed after #948; fap-web state closeout JSON parse passed after #949."
+      },
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
+        "github_checks_green": true,
+        "post_merge_revalidated": true
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T23:35:32.482839Z",
+          "from": "missing_in_fap_api_state",
+          "to": "merged_reconciled_cross_repo",
+          "note": "Recorded cross-repo fap-web IQ-RELEASE-01 completion in fap-api state because fap-api manifest also declares this train item."
+        }
+      ]
     }
   },
   "RESULT-EN-PARITY-04": {
