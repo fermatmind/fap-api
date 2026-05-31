@@ -33858,12 +33858,12 @@
     "branch": "codex/analytics-funnel-controlled-refresh-write-guard-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01 add controlled analytics funnel refresh write guard",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "9604f3f5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1783",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -33936,6 +33936,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Scoped implementation and all manifest validations passed locally; no production write or deploy performed."
+      },
+      {
+        "at": "2026-05-31T07:27:35Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened PR #1783 after local validation passed."
       }
     ]
   }
