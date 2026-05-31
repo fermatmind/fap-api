@@ -446,11 +446,40 @@ task('artisan:scales:seed-default', function () {
 task('career:warm-public-authority-cache', function () {
     $timeoutSeconds = (int) (getenv('DEPLOY_CAREER_WARM_CACHE_TIMEOUT') ?: 600);
     $timeoutSeconds = max(180, $timeoutSeconds);
+    $strictWarmCache = filter_var((string) (getenv('DEPLOY_CAREER_WARM_CACHE_STRICT') ?: ''), FILTER_VALIDATE_BOOLEAN);
+    $skipWarmCache = filter_var((string) (getenv('DEPLOY_SKIP_CAREER_WARM_CACHE') ?: ''), FILTER_VALIDATE_BOOLEAN);
 
-    run(sprintf(
+    if ($skipWarmCache) {
+        writeln('<comment>Skipping career:warm-public-authority-cache because DEPLOY_SKIP_CAREER_WARM_CACHE=true</comment>');
+
+        return;
+    }
+
+    $command = sprintf(
         'timeout %d {{bin/php}} %s career:warm-public-authority-cache --no-interaction --ansi',
         $timeoutSeconds,
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
+    );
+
+    if ($strictWarmCache) {
+        run($command);
+
+        return;
+    }
+
+    run(sprintf(
+        <<<'BASH'
+set +e
+%s
+status=$?
+set -e
+if [ "$status" -ne 0 ]; then
+  echo "career_warm_public_authority_cache_nonblocking_failure=$status"
+  echo "Continuing deploy because DEPLOY_CAREER_WARM_CACHE_STRICT is not true."
+fi
+exit 0
+BASH,
+        $command,
     ));
 });
 

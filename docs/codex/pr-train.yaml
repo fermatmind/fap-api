@@ -16677,3 +16677,55 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: Phase 3 ContentPacksIndex responsibility shrink requires explicit authorization
+
+  - id: OPS-RELEASE-TRAIN-CAREER-WARM-CACHE-NONBLOCKING-01
+    repo: fap-api
+    branch: ops/release-train-career-warm-cache-nonblocking-01
+    base: main
+    title: "OPS-RELEASE-TRAIN-CAREER-WARM-CACHE-NONBLOCKING-01 keep deploy unblocked by career warm cache"
+    train_scope: release_train_career_warm_cache_nonblocking
+    risk_level: p1_deploy_reliability
+    depends_on:
+      - OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01 merged
+    allowed_paths:
+      - deploy.php
+      - tests/ops/test_backend_deploy_adapter.py
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Make career:warm-public-authority-cache non-blocking by default during Deployer production release.
+      - Add DEPLOY_CAREER_WARM_CACHE_STRICT=true to preserve fail-closed warm-cache behavior when explicitly required.
+      - Add DEPLOY_SKIP_CAREER_WARM_CACHE=true to skip the warm-cache task explicitly.
+      - Keep deploy symlink, healthcheck, queue restart, sitemap warm, and public-content guard behavior otherwise unchanged.
+      - Do not optimize Career public authority queries in this PR.
+    do_not:
+      - Run production deploy.
+      - Retry failed deployment.
+      - Unlock production deploy state.
+      - Kill production processes.
+      - Change database schema or migrations.
+      - Modify fap-web, content_packs, CMS content, Search Channel, or URL submission.
+    validation:
+      - php -l deploy.php
+      - python3 -m py_compile tests/ops/test_backend_deploy_adapter.py
+      - python3 -m unittest tests.ops.test_backend_deploy_adapter
+      - python3 ops/release-train/release_train.py validate-manifest --manifest ops/release-train/examples/release-train.example.json
+      - python3 ops/release-train/release_train.py dry-run --manifest ops/release-train/examples/release-train.example.json
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    deploy_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: deploy latest main only after merge and exact SHA approval

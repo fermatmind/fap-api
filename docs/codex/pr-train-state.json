@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T09:10:00+08:00",
+  "updated_at": "2026-05-31T09:35:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -33107,5 +33107,102 @@
     ],
     "sidecars": [],
     "next_task": "Open PR and keep production deploy disabled; manual GitHub production branch restriction remains required."
+  },
+  "OPS-RELEASE-TRAIN-CAREER-WARM-CACHE-NONBLOCKING-01": {
+    "id": "OPS-RELEASE-TRAIN-CAREER-WARM-CACHE-NONBLOCKING-01",
+    "repo": "fap-api",
+    "branch": "ops/release-train-career-warm-cache-nonblocking-01",
+    "base": "main",
+    "title": "OPS-RELEASE-TRAIN-CAREER-WARM-CACHE-NONBLOCKING-01 keep deploy unblocked by career warm cache",
+    "status": "validated",
+    "depends_on": [
+      "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01 merged"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User requested making deploy not blocked by career warm cache, then deploying #1770 and optimizing career warm cache separately."
+      },
+      "deploy_safety_boundary": {
+        "status": "pass",
+        "evidence": "This implementation does not run deploy, retry deploy, unlock production, kill processes, migrate, mutate CMS, submit URLs, or touch Search Channel."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "git_diff_check": null,
+      "git_diff_cached_check": null
+    },
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "User authorized first making deploy non-blocking on career warm cache before retrying production deploy."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "Started from latest origin/main in isolated worktree."
+      }
+    ],
+    "sidecars": [
+      "Production deploy run 26699308650 failed because career:warm-public-authority-cache timed out; stale deploy lock was cleaned before this PR."
+    ],
+    "next_task": "After merge, rerun deploy targeting latest main with exact SHA approval.",
+    "validation": [
+      {
+        "command": "php -l deploy.php",
+        "result": "passed"
+      },
+      {
+        "command": "python3 -m py_compile tests/ops/test_backend_deploy_adapter.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 -m unittest tests.ops.test_backend_deploy_adapter",
+        "result": "passed"
+      },
+      {
+        "command": "python3 ops/release-train/release_train.py validate-manifest --manifest ops/release-train/examples/release-train.example.json",
+        "result": "passed"
+      },
+      {
+        "command": "python3 ops/release-train/release_train.py dry-run --manifest ops/release-train/examples/release-train.example.json",
+        "result": "passed_with_existing_placeholder_gh_422_warning"
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json",
+        "result": "passed"
+      },
+      {
+        "command": "python3 -c \"import yaml; yaml.safe_load(open('docs/codex/pr-train.yaml'))\"",
+        "result": "passed"
+      },
+      {
+        "command": "php artisan route:list --no-ansi",
+        "result": "passed"
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-career-warm.sqlite php artisan migrate --force --no-ansi",
+        "result": "passed"
+      },
+      {
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "result": "passed"
+      },
+      {
+        "command": "git diff --check",
+        "result": "passed"
+      }
+    ],
+    "notes": [
+      "career warm cache deploy hook is non-blocking by default; strict mode remains available via DEPLOY_CAREER_WARM_CACHE_STRICT=true"
+    ]
   }
 }
