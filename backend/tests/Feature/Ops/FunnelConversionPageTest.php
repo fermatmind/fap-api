@@ -144,6 +144,80 @@ final class FunnelConversionPageTest extends TestCase
         }
     }
 
+    public function test_funnel_conversion_page_global_scope_reads_org_zero_even_with_selected_org_session(): void
+    {
+        Carbon::setTestNow('2026-05-31 12:00:00');
+
+        try {
+            $admin = $this->createAdminWithPermissions([
+                PermissionNames::ADMIN_MENU_COMMERCE,
+                PermissionNames::ADMIN_OPS_READ,
+            ]);
+            $selectedOrg = $this->createOrganization('Funnel Tenant Org');
+
+            DB::table('analytics_funnel_daily')->insert([
+                [
+                    'day' => '2026-05-31',
+                    'org_id' => 0,
+                    'scale_code' => 'MBTI',
+                    'locale' => 'en',
+                    'started_attempts' => 382,
+                    'submitted_attempts' => 286,
+                    'first_view_attempts' => 277,
+                    'order_created_attempts' => 11,
+                    'paid_attempts' => 8,
+                    'paid_revenue_cents' => 0,
+                    'unlocked_attempts' => 2,
+                    'report_ready_attempts' => 0,
+                    'pdf_download_attempts' => 11,
+                    'share_generated_attempts' => 12,
+                    'share_click_attempts' => 5,
+                    'last_refreshed_at' => now(),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'day' => '2026-05-31',
+                    'org_id' => (int) $selectedOrg->id,
+                    'scale_code' => 'MBTI',
+                    'locale' => 'en',
+                    'started_attempts' => 1,
+                    'submitted_attempts' => 1,
+                    'first_view_attempts' => 1,
+                    'order_created_attempts' => 0,
+                    'paid_attempts' => 0,
+                    'paid_revenue_cents' => 0,
+                    'unlocked_attempts' => 0,
+                    'report_ready_attempts' => 0,
+                    'pdf_download_attempts' => 0,
+                    'share_generated_attempts' => 0,
+                    'share_click_attempts' => 0,
+                    'last_refreshed_at' => now(),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+            ]);
+
+            $response = $this->withSession($this->opsSession($admin, $selectedOrg))
+                ->actingAs($admin, (string) config('admin.guard', 'admin'))
+                ->get('/ops/funnel-conversion?scope=global_org0');
+
+            $response
+                ->assertOk()
+                ->assertSee('Global org_id=0')
+                ->assertSee('Global scope reads org_id=0 without changing the selected organization.')
+                ->assertSee('382')
+                ->assertSee('286')
+                ->assertSee('277')
+                ->assertSee('report_unlock')
+                ->assertDontSee('No analytics_funnel_daily rows match the current scope');
+
+            $this->assertSame((int) $selectedOrg->id, (int) session('ops_org_id'));
+        } finally {
+            Carbon::setTestNow();
+        }
+    }
+
     private function createOrganization(string $name): Organization
     {
         return Organization::query()->create([

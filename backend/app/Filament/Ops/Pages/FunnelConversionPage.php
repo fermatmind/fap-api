@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\DB;
 
 class FunnelConversionPage extends Page
 {
+    private const FUNNEL_SCOPE_CURRENT_ORG = 'current_org';
+
+    private const FUNNEL_SCOPE_GLOBAL_ORG0 = 'global_org0';
+
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar-square';
 
     protected static ?string $navigationGroup = null;
@@ -84,6 +88,8 @@ class FunnelConversionPage extends Page
 
     public string $locale = 'all';
 
+    public string $funnelScope = self::FUNNEL_SCOPE_CURRENT_ORG;
+
     /** @var array<string,string> */
     public array $scaleOptions = [];
 
@@ -117,6 +123,7 @@ class FunnelConversionPage extends Page
     {
         $this->fromDate = now()->subDays(13)->toDateString();
         $this->toDate = now()->toDateString();
+        $this->funnelScope = $this->normalizeFunnelScope(request()->query('scope'));
         $this->refreshPage();
     }
 
@@ -174,6 +181,7 @@ class FunnelConversionPage extends Page
 
     public function applyFilters(): void
     {
+        $this->funnelScope = $this->normalizeFunnelScope($this->funnelScope);
         $this->refreshPage();
     }
 
@@ -312,7 +320,26 @@ class FunnelConversionPage extends Page
 
     private function currentOrgId(): int
     {
+        if ($this->isGlobalOrgZeroScope()) {
+            return 0;
+        }
+
         return max(0, (int) app(OrgContext::class)->orgId());
+    }
+
+    private function isGlobalOrgZeroScope(): bool
+    {
+        return $this->funnelScope === self::FUNNEL_SCOPE_GLOBAL_ORG0;
+    }
+
+    private function normalizeFunnelScope(mixed $scope): string
+    {
+        $normalized = strtolower(trim((string) $scope));
+
+        return match ($normalized) {
+            'global', 'global_org0', 'org0' => self::FUNNEL_SCOPE_GLOBAL_ORG0,
+            default => self::FUNNEL_SCOPE_CURRENT_ORG,
+        };
     }
 
     /**
