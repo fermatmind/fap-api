@@ -284,8 +284,9 @@ final class IqReportBuilder
     private function hasNormAuthority(array $norms): bool
     {
         $status = strtolower(trim((string) ($norms['status'] ?? '')));
+        $claimPolicy = is_array($norms['claim_policy'] ?? null) ? $norms['claim_policy'] : [];
 
-        return in_array($status, [
+        return ($claimPolicy['claim_eligible'] ?? null) === true && in_array($status, [
             'available',
             'calibrated',
             'norm_table_available',

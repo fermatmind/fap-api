@@ -18044,7 +18044,7 @@ prs:
     base: main
     title: "IQ-NORM-02 add IQ norm table importer dry-run"
     train_scope: iq_production_launch
-    status: in_progress
+    status: merged
     scope:
       - Add dry-run IQ norm table importer, schema validation, version lock checks, and invalid fixture rejection.
     allowed_paths:
@@ -18078,9 +18078,17 @@ prs:
     base: main
     title: "IQ-NORM-03 unlock IQ score claims through norm authority"
     train_scope: iq_production_launch
-    status: pending
+    status: in_progress
     scope:
       - Wire IQ scoring/report claim fields to backend norm authority only.
+    allowed_paths:
+      - backend/app/Services/Assessment/Drivers/IqTestDriver.php
+      - backend/app/Services/Report/IqReportBuilder.php
+      - backend/tests/Unit/Assessment/IqTestDriverTest.php
+      - backend/tests/Unit/Services/Report/IqReportBuilderTest.php
+      - backend/tests/Feature/V0_3/IqReportContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
     do_not:
       - Let frontend, CMS, payment state, or SEO copy unlock IQ claims.
     validation:

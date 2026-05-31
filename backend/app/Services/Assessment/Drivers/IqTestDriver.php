@@ -3,6 +3,9 @@
 namespace App\Services\Assessment\Drivers;
 
 use App\Services\Assessment\ScoreResult;
+use App\Services\Iq\IqNormAuthorityContract;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class IqTestDriver implements DriverInterface
 {
@@ -50,7 +53,13 @@ class IqTestDriver implements DriverInterface
             static fn (array $item): bool => (bool) ($item['is_correct'] ?? false)
         ));
         $stability = $this->buildResultStability($quality, $normalizedItems, $contract['expected_item_count']);
-        $normStatus = $this->resolveNormStatus($contract['norm_table_version']);
+        $norms = $this->resolveNorms(
+            $contract['scale_code'],
+            $contract['bank_id'],
+            $contract['norm_table_version'],
+            $rawScore,
+            $ctx
+        );
         $scorePayload = [
             'scale_code' => $contract['scale_code'],
             'bank_id' => $contract['bank_id'],
@@ -68,12 +77,7 @@ class IqTestDriver implements DriverInterface
             'quality' => $quality,
             'quality_rules' => $contract['quality_rules'],
             'result_stability' => $stability,
-            'norms' => [
-                'status' => $normStatus,
-                'iq_estimate' => null,
-                'percentile' => null,
-                'confidence_interval' => null,
-            ],
+            'norms' => $norms,
             'items' => $scoredItems,
             'version_snapshot' => [
                 'pack_id' => (string) ($ctx['pack_id'] ?? ''),
@@ -514,6 +518,129 @@ class IqTestDriver implements DriverInterface
         return $normalized === '' || in_array($normalized, ['unavailable', 'not_found', 'pending'], true)
             ? 'unavailable_without_norm_table'
             : 'unavailable_without_runtime_calibration';
+    }
+
+    /**
+     * @param  array<string,mixed>  $ctx
+     * @return array<string,mixed>
+     */
+    private function resolveNorms(string $scaleCode, string $bankId, ?string $normTableVersion, float $rawScore, array $ctx): array
+    {
+        $base = [
+            'status' => $this->resolveNormStatus($normTableVersion),
+            'iq_estimate' => null,
+            'percentile' => null,
+            'confidence_interval' => null,
+            'norm_table_version' => $normTableVersion,
+            'claim_policy' => [
+                'claim_eligible' => false,
+                'reason_code' => null,
+                'source' => 'iq_norm_authority',
+            ],
+        ];
+
+        if ($base['status'] === 'unavailable_without_norm_table') {
+            $base['claim_policy']['reason_code'] = 'norm_table_version_unavailable';
+
+            return $base;
+        }
+
+        if ($scaleCode !== IqNormAuthorityContract::SCALE_CODE || ! Schema::hasTable('iq_norm_authorities')) {
+            $base['claim_policy']['reason_code'] = 'iq_norm_authority_unavailable';
+
+            return $base;
+        }
+
+        $locale = trim((string) ($ctx['locale'] ?? 'zh-CN'));
+        $locale = $locale === '' ? 'zh-CN' : $locale;
+        $populationKey = trim((string) ($ctx['population_key'] ?? IqNormAuthorityContract::DEFAULT_POPULATION_KEY));
+        $populationKey = $populationKey === '' ? IqNormAuthorityContract::DEFAULT_POPULATION_KEY : $populationKey;
+
+        $record = DB::table('iq_norm_authorities')
+            ->where('org_id', (int) ($ctx['org_id'] ?? 0))
+            ->where('scale_code', IqNormAuthorityContract::SCALE_CODE)
+            ->where('bank_id', $bankId)
+            ->where('norm_table_version', (string) $normTableVersion)
+            ->where('population_key', $populationKey)
+            ->where('locale', $locale)
+            ->whereNull('retired_at')
+            ->orderByDesc('effective_at')
+            ->orderByDesc('updated_at')
+            ->first();
+
+        if (! $record) {
+            $base['claim_policy']['reason_code'] = 'iq_norm_authority_not_found';
+
+            return $base;
+        }
+
+        $authority = (array) $record;
+        $gate = IqNormAuthorityContract::publicClaimGate($authority);
+        $minRawScore = (float) ($authority['min_raw_score'] ?? 0.0);
+        $maxRawScore = (float) ($authority['max_raw_score'] ?? 0.0);
+        if ($rawScore < $minRawScore || $rawScore > $maxRawScore) {
+            $gate['claim_eligible'] = false;
+            $gate['reason_code'] = 'raw_score_outside_norm_range';
+            $gate['errors'][] = 'raw_score_outside_norm_range';
+            $gate['errors'] = array_values(array_unique($gate['errors']));
+        }
+
+        $base['status'] = (bool) ($gate['claim_eligible'] ?? false)
+            ? strtolower(trim((string) ($authority['status'] ?? 'production_normed')))
+            : 'unavailable_without_claim_eligible_norm_authority';
+        $base['norm_table_version'] = (string) ($authority['norm_table_version'] ?? $normTableVersion);
+        $base['population_key'] = (string) ($authority['population_key'] ?? $populationKey);
+        $base['locale'] = (string) ($authority['locale'] ?? $locale);
+        $base['sample_size'] = (int) ($authority['sample_size'] ?? 0);
+        $base['claim_policy'] = [
+            'claim_eligible' => (bool) ($gate['claim_eligible'] ?? false),
+            'reason_code' => $gate['reason_code'] ?? null,
+            'errors' => $gate['errors'] ?? [],
+            'source' => 'iq_norm_authority',
+        ];
+
+        if (! (bool) ($gate['claim_eligible'] ?? false)) {
+            return $base;
+        }
+
+        $mean = (float) ($authority['mean'] ?? 0.0);
+        $standardDeviation = (float) ($authority['standard_deviation'] ?? 0.0);
+        if ($standardDeviation <= 0.0) {
+            $base['status'] = 'unavailable_without_claim_eligible_norm_authority';
+            $base['claim_policy']['claim_eligible'] = false;
+            $base['claim_policy']['reason_code'] = 'standard_deviation_must_be_positive';
+            $base['claim_policy']['errors'] = ['standard_deviation_must_be_positive'];
+
+            return $base;
+        }
+
+        $zScore = ($rawScore - $mean) / $standardDeviation;
+        $iqEstimate = round(100.0 + (15.0 * $zScore), 1);
+        $base['iq_estimate'] = $iqEstimate;
+        $base['percentile'] = round($this->normalCdf($zScore) * 100.0, 2);
+        $base['confidence_interval'] = [
+            round($iqEstimate - 4.5, 1),
+            round($iqEstimate + 4.5, 1),
+        ];
+
+        return $base;
+    }
+
+    private function normalCdf(float $zScore): float
+    {
+        $z = abs($zScore);
+        $t = 1.0 / (1.0 + (0.2316419 * $z));
+        $density = 0.3989422804014327 * exp(-($z * $z) / 2.0);
+        $tail = $density * $t * (
+            0.319381530
+            + $t * (-0.356563782
+            + $t * (1.781477937
+            + $t * (-1.821255978
+            + $t * 1.330274429)))
+        );
+        $cdf = $zScore >= 0.0 ? 1.0 - $tail : $tail;
+
+        return max(0.0, min(1.0, $cdf));
     }
 
     private function nullableTrimmedString(mixed $value): ?string
