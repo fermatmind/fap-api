@@ -362,7 +362,7 @@ jobs:
         working-directory: backend
         run: |
           bash scripts/ci/prepare_sqlite.sh
-          php artisan fap:schema:verify
+          php -d memory_limit=1024M artisan fap:schema:verify
 
       - name: Run Big Five content and business gates
         working-directory: backend
