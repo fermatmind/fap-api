@@ -33851,7 +33851,7 @@
     "branch": "audit/sec-result-identity-01",
     "base": "main",
     "title": "AUDIT-SEC-RESULT-IDENTITY-01 harden result recovery identity boundary",
-    "status": "in_progress",
+    "status": "ready_to_merge",
     "depends_on": [
       "AUDIT-SEC-RELEASE-TRAIN-01 merged"
     ],
@@ -33862,7 +33862,8 @@
       "focused_tests": "php artisan test --filter=ResultEmailLookupTest, AttemptEmailBindingTest, ResultEmailGatedReadTest passed; local file cache warnings only",
       "acceptance": "route:list passed; testing sqlite migrate passed; manifest JSON/YAML valid; git diff --check passed; backend/scripts/ci_verify_mbti.sh passed",
       "scope_guard": "BIG5_OCEAN compiled generated files restored; only scoped files remain dirty",
-      "github_ci_first_failure": "PR #1786 verify-bigfive failed on BigFiveResultPageV2CoreBodyPreview runtime-freeze classifier for EmailPreferenceService.php; current-scope guard exception added for result access link delivery preference policy."
+      "github_ci_first_failure": "PR #1786 verify-bigfive failed on BigFiveResultPageV2CoreBodyPreview runtime-freeze classifier for EmailPreferenceService.php; current-scope guard exception added for result access link delivery preference policy.",
+      "github_checks": "PR #1786 second CI run green: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload."
     },
     "failure_reason": null,
     "merged_at": null,
@@ -33871,7 +33872,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -33892,6 +33893,12 @@
         "from": "pr_checks_pending",
         "to": "ci_scope_fix_in_progress",
         "note": "Fixed current-scope verify-bigfive runtime-freeze classifier failure by covering result access link delivery preference policy changes."
+      },
+      {
+        "at": "2026-05-31T15:44:57+08:00",
+        "from": "ci_scope_fix_in_progress",
+        "to": "github_checks_green",
+        "note": "PR #1786 checks green after current-scope runtime-freeze classifier fix."
       }
     ],
     "sidecars": [],
