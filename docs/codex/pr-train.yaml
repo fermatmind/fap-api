@@ -17056,3 +17056,238 @@ prs:
       - php artisan test --filter=CareerWarmPublicAuthorityCache --no-ansi
       - bash backend/scripts/ci_verify_mbti.sh
       - git diff --check
+
+  - id: CAREER-1046-OPS-READ-MODEL-REPAIR-01
+    repo: fap-api
+    branch: codex/career-1046-ops-read-model-repair-01
+    base: main
+    title: "CAREER-1046-OPS-READ-MODEL-REPAIR-01 career runtime read model repair"
+    train_scope: career_1046_growth_foundation
+    status: in_progress
+    allowed_paths:
+      - backend/app/Services/SeoIntel/OpsDashboard/CareerRuntimeReadModelService.php
+      - backend/docs/seo/career-1046-ops-read-model-repair-01.md
+      - backend/docs/seo/generated/career-1046-ops-read-model-repair-01.v1.json
+      - backend/tests/Feature/SeoIntel/Career1046OpsReadModelRepair01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add a read-only runtime Career projection read model for SEO/Ops.
+      - Separate legacy CMS career_jobs scope from runtime public Career detail scope.
+      - Record runtime public slug count, localized public URL count, expected sitemap/llms counts, and excluded slug safety.
+      - Add generated report/artifact and focused tests.
+    do_not:
+      - Mutate production data, CMS content, or runtime projection.
+      - Change public Career API output, sitemap, llms, or llms-full behavior.
+      - Enqueue Search Channel or submit URLs.
+      - Touch fap-web.
+      - Expand career claims or create pSEO surfaces.
+    validation:
+      - cd backend && php artisan test --filter=Career1046OpsReadModelRepair01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/career-1046-ops-read-model-repair-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: CAREER-1046-OBSERVABILITY-SLO-01
+
+  - id: CAREER-1046-OBSERVABILITY-SLO-01
+    repo: fap-api
+    depends_on:
+      - CAREER-1046-OPS-READ-MODEL-REPAIR-01
+    branch: codex/career-1046-observability-slo-01
+    base: main
+    title: "CAREER-1046-OBSERVABILITY-SLO-01 career runtime observability SLO"
+    train_scope: career_1046_growth_foundation
+    status: pending
+    allowed_paths:
+      - backend/docs/seo/career-1046-observability-slo-01.md
+      - backend/docs/seo/generated/career-1046-observability-slo-01.v1.json
+      - backend/tests/Feature/SeoIntel/Career1046ObservabilitySlo01Test.php
+      - backend/app/Services/SeoIntel/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Define read-only SLO baselines for Career API, sitemap, llms, llms-full, and excluded slug safety.
+      - Add generated observability report/artifact and focused tests.
+    do_not:
+      - Deploy, mutate cache, mutate production DB, enqueue Search Channel, or submit URLs.
+    validation:
+      - cd backend && php artisan test --filter=Career1046ObservabilitySlo01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/career-1046-observability-slo-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: PR-HIRING-01
+
+  - id: PR-HIRING-01
+    repo: fap-api
+    depends_on:
+      - CAREER-1046-OBSERVABILITY-SLO-01
+    branch: codex/pr-hiring-01-content-authority
+    base: main
+    title: "PR-HIRING-01 hiring content authority package"
+    train_scope: career_1046_growth_foundation
+    status: pending
+    allowed_paths:
+      - backend/docs/seo/pr-hiring-01-content-authority.md
+      - backend/docs/seo/generated/pr-hiring-01-content-authority.v1.json
+      - backend/docs/seo/import-packages/pr-hiring-01.import.v1.json
+      - backend/tests/Feature/SeoIntel/PrHiring01ContentAuthorityTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prepare backend-owned hiring/careers content authority package or readiness report.
+      - Keep draft/import content out of sitemap, llms, footer, and Search Channel.
+      - Add hiring claim-boundary checks.
+    do_not:
+      - Mutate production CMS, publish runtime pages, edit fap-web footer/nav, enqueue Search Channel, or use frontend fallback as authority.
+    validation:
+      - cd backend && php artisan test --filter=PrHiring01ContentAuthority --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/pr-hiring-01-content-authority.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CAREER-1046-INTERNAL-LINKING-AUTHORITY-01
+
+  - id: CAREER-1046-INTERNAL-LINKING-AUTHORITY-01
+    repo: fap-api
+    depends_on:
+      - PR-HIRING-01
+    branch: codex/career-1046-internal-linking-authority-01
+    base: main
+    title: "CAREER-1046-INTERNAL-LINKING-AUTHORITY-01 career internal linking authority"
+    train_scope: career_1046_growth_foundation
+    status: pending
+    allowed_paths:
+      - backend/app/Domain/Career/**
+      - backend/app/Services/SeoIntel/**
+      - backend/docs/seo/career-1046-internal-linking-authority-01.md
+      - backend/docs/seo/generated/career-1046-internal-linking-authority-01.v1.json
+      - backend/tests/Feature/SeoIntel/Career1046InternalLinkingAuthority01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Create or document backend-authoritative internal links for Career detail pages.
+      - Prevent invalid, draft, private, fallback-only, noindex, or 404 links.
+      - Keep MBTI x Career and other L3/pSEO surfaces ungenerated.
+    do_not:
+      - Generate static L3 pages, best-career copy, Search Channel actions, or frontend fallback content.
+    validation:
+      - cd backend && php artisan test --filter=Career1046InternalLinkingAuthority01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/career-1046-internal-linking-authority-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CAREER-1046-FRONTEND-DISCOVERY-UX-01
+
+  - id: CAREER-1046-FRONTEND-DISCOVERY-UX-01
+    repo: fap-web
+    depends_on:
+      - CAREER-1046-INTERNAL-LINKING-AUTHORITY-01
+    branch: codex/career-1046-frontend-discovery-ux-01
+    base: main
+    title: "CAREER-1046-FRONTEND-DISCOVERY-UX-01 career discovery UX"
+    train_scope: career_1046_growth_foundation
+    status: pending
+    scope:
+      - Improve Career jobs index/detail discovery UX while consuming backend authority only.
+      - Add contract/visual coverage for 1046 count, excluded slug safety, and no fallback-only Career cards.
+    do_not:
+      - Create local career JSON, hardcode occupation content, modify CMS content, or change backend authority.
+    validation:
+      - pnpm exec vitest run tests/contracts/career-1046-frontend-discovery-ux-01.contract.test.tsx
+      - pnpm lint .
+      - pnpm typecheck
+      - NEXT_PUBLIC_API_URL=https://api.fermatmind.com NEXT_PUBLIC_SITE_URL=https://fermatmind.com pnpm build
+      - pnpm test:contract
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01
+
+  - id: CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01
+    repo: fap-api
+    depends_on:
+      - CAREER-1046-FRONTEND-DISCOVERY-UX-01
+    branch: codex/career-l3-dynamic-slot-architecture-01
+    base: main
+    title: "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01 dynamic slot architecture guardrails"
+    train_scope: career_1046_growth_foundation
+    status: pending
+    scope:
+      - Document and test dynamic-slot-only architecture for MBTI/Big Five/RIASEC x Career personalization.
+      - Prevent static combinatorial pSEO pages and sitemap/llms exposure.
+    do_not:
+      - Implement full L3 product, generate content, expose personalized slots publicly, or expand career claims.
+    validation:
+      - cd backend && php artisan test --filter=CareerL3DynamicSlotArchitecture01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/career-l3-dynamic-slot-architecture-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01
+
+  - id: RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01
+    repo: fap-api
+    depends_on:
+      - CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01
+    branch: codex/release-train-sidecar-soft-alert-01
+    base: main
+    title: "RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01 release train sidecar soft alerts"
+    train_scope: career_1046_growth_foundation
+    status: pending
+    scope:
+      - Classify release-train checks into hard-block core failures and soft-alert discoverability sidecars.
+      - Keep sitemap/private URL leakage, core API/page regressions, Search Channel anomalies, and staging regressions hard-blocking.
+    do_not:
+      - Deploy, edit secrets/env, submit URLs, call external search APIs, or silently ignore P0 failures.
+    validation:
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: DEPLOY-READINESS｜Deploy CAREER 1046 growth foundation fixes

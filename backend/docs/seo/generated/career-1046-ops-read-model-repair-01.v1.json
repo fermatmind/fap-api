@@ -1,0 +1,37 @@
+{
+  "schema_version": "career_1046_ops_read_model_repair.v1",
+  "task": "CAREER-1046-OPS-READ-MODEL-REPAIR-01",
+  "final_decision": "career_1046_ops_read_model_repair_completed_ready_for_observability_slo",
+  "read_model_kind": "career_runtime_projection_ops_read_model",
+  "read_model_version": "career.runtime_projection.ops_read_model.v1",
+  "source_of_truth": "career_runtime_publish_projection",
+  "legacy_cms_scope_label": "legacy_cms_career_jobs_table_scope",
+  "runtime_scope_label": "runtime_projection_public_career_detail_scope",
+  "legacy_cms_career_jobs_count": 378,
+  "runtime_public_career_slug_count": 1046,
+  "localized_public_career_url_count": 2092,
+  "sitemap_career_url_count_expected": 2092,
+  "llms_career_url_count_expected": 2092,
+  "public_locales": [
+    "en",
+    "zh"
+  ],
+  "excluded_slugs": [
+    "software-developers",
+    "digital-forensics-analysts",
+    "computer-occupations-all-other"
+  ],
+  "excluded_slugs_absent": {
+    "software-developers": true,
+    "digital-forensics-analysts": true,
+    "computer-occupations-all-other": true
+  },
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "production_write_performed": false,
+  "public_runtime_mutation_performed": false,
+  "cms_mutation_performed": false,
+  "deploy_performed": false,
+  "fap_web_change_performed": false,
+  "next_task": "CAREER-1046-OBSERVABILITY-SLO-01"
+}
