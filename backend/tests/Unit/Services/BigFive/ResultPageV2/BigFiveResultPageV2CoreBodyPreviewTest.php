@@ -1660,6 +1660,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_production_observability_guard_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Iq/IqProductionObservability.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_iq_result_secrecy_redaction_only(): void
     {
         $changed = [
@@ -3051,6 +3060,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isIqProductionObservabilityGuardFile($file)) {
+                continue;
+            }
+
             if ($this->isRiasecMeasurementContractComparePolicyFile($file)) {
                 continue;
             }
@@ -3776,6 +3789,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isIqNormImportDryRunCommandFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/NormsIqImport.php';
+    }
+
+    private function isIqProductionObservabilityGuardFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Iq/IqProductionObservability.php';
     }
 
     private function isIqResultSecrecyRedactionFile(string $file): bool
