@@ -23565,7 +23565,7 @@
   "SEARCH-CHANNEL-LIVE-01-PREFLIGHT": {
     "repo": "fap-api",
     "branch": "codex/search-channel-live-01-preflight",
-    "status": "in_progress",
+    "status": "pr_open",
     "depends_on": [
       "INDEXNOW-LIVE-00"
     ],
@@ -32269,8 +32269,8 @@
     "depends_on": [
       "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "31374f79d9e3671b80bc0383bcdc7d37b9bb2099",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1772",
     "checks": [
       {
         "command": "manifest/state authorization",
@@ -32357,6 +32357,11 @@
         "status": "local_checks_passed",
         "at": "2026-05-31T09:13:16+08:00",
         "summary": "Scoped local validation passed for the analytics funnel dry-run SQL compatibility fix."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T09:23:00+08:00",
+        "summary": "Opened PR #1772 after scoped local validation passed."
       }
     ],
     "scope_validation": {
