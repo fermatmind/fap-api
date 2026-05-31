@@ -22523,7 +22523,7 @@
       "branch": "codex/iq-norm-03-score-claim-unlock",
       "base": "main",
       "title": "IQ-NORM-03 unlock IQ score claims through norm authority",
-      "status": "local_scope_validation_passed",
+      "status": "pr_open_checks_pending",
       "depends_on": [
         "IQ-NORM-02"
       ],
@@ -22544,6 +22544,11 @@
           ],
           "notes": "Targeted PHPUnit suites exited 0 with warnings only: IqTestDriverTest 6 tests/84 assertions, IqReportBuilderTest 3 tests/33 assertions, IqReportContractTest 4 tests/404 assertions.",
           "completed_at": "2026-05-31T15:05:10.943Z"
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1810",
+          "updated_at": "2026-05-31T15:07:58.019Z"
         }
       },
       "failure_reason": null,
@@ -22574,9 +22579,18 @@
           "from": "implementation_in_progress",
           "to": "local_scope_validation_passed",
           "note": "IQ score/report claim unlock now depends on backend iq_norm_authorities public claim gate; local validation passed."
+        },
+        {
+          "at": "2026-05-31T15:07:58.019Z",
+          "from": "local_scope_validation_passed",
+          "to": "pr_open_checks_pending",
+          "note": "Created PR #1810 and started waiting for GitHub required checks."
         }
       ],
-      "updated_at": "2026-05-31T15:05:10.943Z"
+      "updated_at": "2026-05-31T15:07:58.019Z",
+      "commit_sha": "bab1ac77",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1810",
+      "pr_number": 1810
     },
     "IQ-PAID-REPORT-01": {
       "id": "IQ-PAID-REPORT-01",
