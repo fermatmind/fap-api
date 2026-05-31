@@ -1,0 +1,90 @@
+{
+  "schema_version": "pr_hiring_01_content_authority.v1",
+  "task": "PR-HIRING-01",
+  "final_decision": "pr_hiring_content_authority_package_ready_for_human_review",
+  "source_of_truth": "backend_content_pages_and_operator_reviewed_import_package",
+  "careers_content_page_topology": {
+    "en_baseline_contains_careers": true,
+    "zh_baseline_contains_careers": true,
+    "runtime_publish_changed_by_this_pr": false
+  },
+  "roles_count": 3,
+  "role_keys": [
+    "technical-partner-engineering-lead",
+    "product-design-brand-systems-lead",
+    "growth-seo-content-operations-lead"
+  ],
+  "roles": [
+    {
+      "role_key": "technical-partner-engineering-lead",
+      "locale": "en",
+      "status": "draft_review_only",
+      "title": "Technical Partner / Engineering Lead",
+      "summary": "Lead backend, frontend, release, and observability work for the Career 1046 operating system while preserving content authority and claim boundaries.",
+      "review_required": [
+        "founder_review",
+        "technical_scope_review",
+        "legal_terms_review"
+      ],
+      "runtime_exposure_allowed": false,
+      "sitemap_llms_exposure_allowed": false,
+      "footer_exposure_allowed": false
+    },
+    {
+      "role_key": "product-design-brand-systems-lead",
+      "locale": "en",
+      "status": "draft_review_only",
+      "title": "Product Design & Brand Systems Lead",
+      "summary": "Shape the Career and assessment experience through product UI, design systems, content hierarchy, and bilingual brand consistency.",
+      "review_required": [
+        "founder_review",
+        "brand_review",
+        "legal_terms_review"
+      ],
+      "runtime_exposure_allowed": false,
+      "sitemap_llms_exposure_allowed": false,
+      "footer_exposure_allowed": false
+    },
+    {
+      "role_key": "growth-seo-content-operations-lead",
+      "locale": "en",
+      "status": "draft_review_only",
+      "title": "Growth SEO & Content Operations Lead",
+      "summary": "Operate topic, article, career, and discoverability workflows with backend authority, Search Channel discipline, and bounded claim language.",
+      "review_required": [
+        "founder_review",
+        "seo_claim_review",
+        "legal_terms_review"
+      ],
+      "runtime_exposure_allowed": false,
+      "sitemap_llms_exposure_allowed": false,
+      "footer_exposure_allowed": false
+    }
+  ],
+  "claim_boundary_status": {
+    "forbidden_claim_hits": [],
+    "requires_human_review_before_publish": true,
+    "notes": [
+      "Compensation, title, location, contract terms, and legal hiring language require separate approval.",
+      "The package avoids promises about pay, partnership grants, selection suitability, career outcomes, clinical outcomes, or psychometric prediction."
+    ]
+  },
+  "exposure_guard": {
+    "draft_import_must_not_enter_sitemap": true,
+    "draft_import_must_not_enter_llms": true,
+    "draft_import_must_not_enter_footer": true,
+    "frontend_fallback_must_not_be_authority": true,
+    "search_channel_must_remain_closed": true
+  },
+  "future_human_review_required": true,
+  "future_cms_import_required": true,
+  "future_publish_required": true,
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_frontend_fallback_authority": true,
+  "draft_import_not_exposed": true,
+  "next_task": "CAREER-1046-INTERNAL-LINKING-AUTHORITY-01"
+}

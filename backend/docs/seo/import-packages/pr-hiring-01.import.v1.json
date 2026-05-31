@@ -1,0 +1,78 @@
+{
+  "schema_version": "pr_hiring_01_import.v1",
+  "task": "PR-HIRING-01",
+  "package_type": "backend_content_pages_hiring_draft_import",
+  "non_runtime": true,
+  "publish_state": "draft_review_only",
+  "cms_mutation_performed": false,
+  "runtime_exposure_allowed": false,
+  "sitemap_llms_exposure_allowed": false,
+  "footer_exposure_allowed": false,
+  "search_channel_action_allowed": false,
+  "page_key": "careers",
+  "locale": "en",
+  "roles": [
+    {
+      "role_key": "technical-partner-engineering-lead",
+      "title": "Technical Partner / Engineering Lead",
+      "status": "draft_review_only",
+      "intro": "FermatMind needs a senior engineering partner to make the Career 1046 runtime easier to operate, observe, and extend without weakening backend authority boundaries.",
+      "responsibilities": [
+        "Own Laravel and Next.js integration boundaries for career, result, and discoverability surfaces.",
+        "Improve release train observability, read models, and operator-facing diagnostics.",
+        "Keep frontend rendering separate from CMS and backend content authority.",
+        "Design technical paths for dynamic career explanation slots without static build explosion."
+      ],
+      "review_notes": [
+        "Confirm title, contract structure, location, and legal terms before import.",
+        "Do not imply partnership grant, employment terms, compensation, or current opening availability until approved."
+      ]
+    },
+    {
+      "role_key": "product-design-brand-systems-lead",
+      "title": "Product Design & Brand Systems Lead",
+      "status": "draft_review_only",
+      "intro": "FermatMind needs a design lead to turn assessment, report, and career surfaces into a consistent bilingual product system.",
+      "responsibilities": [
+        "Improve career page hierarchy, result page readability, and bilingual UX consistency.",
+        "Define reusable visual patterns for assessment, report, article, and career modules.",
+        "Partner with content and engineering on media, alt text, and layout quality.",
+        "Preserve a calm, trustworthy product experience rather than a marketing-only page style."
+      ],
+      "review_notes": [
+        "Confirm portfolio requirements and collaboration model before import.",
+        "Do not imply employment terms, compensation, or hiring process commitments until approved."
+      ]
+    },
+    {
+      "role_key": "growth-seo-content-operations-lead",
+      "title": "Growth SEO & Content Operations Lead",
+      "status": "draft_review_only",
+      "intro": "FermatMind needs an operator who can grow articles, career content, and GEO surfaces while keeping backend authority, Search Channel gates, and claim boundaries intact.",
+      "responsibilities": [
+        "Run content inventory, internal linking, sitemap, llms, and observation workflows.",
+        "Coordinate human review for article, career, content page, and media batches.",
+        "Maintain claim-safe wording for psychology, career, and assessment topics.",
+        "Turn data from scans and smoke tests into prioritized PR trains."
+      ],
+      "review_notes": [
+        "Confirm decision rights, review workflow, and publication authority before import.",
+        "Do not imply guaranteed traffic, ranking, compensation, or career outcomes until approved."
+      ]
+    }
+  ],
+  "claim_boundary": {
+    "forbidden_claim_hits": [],
+    "blocked_claims": [
+      "guaranteed_compensation",
+      "equity_transfer",
+      "hiring_suitability_guarantee",
+      "career_success_guarantee",
+      "diagnosis_claim",
+      "treatment_claim",
+      "cure_claim",
+      "salary_prediction",
+      "psychometric_job_success_prediction"
+    ]
+  }
+}
