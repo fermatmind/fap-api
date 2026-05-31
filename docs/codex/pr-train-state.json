@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T07:04:11+08:00",
+  "updated_at": "2026-05-31T08:28:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -32746,5 +32746,131 @@
     },
     "sidecars": [],
     "next_task": "deploy-readiness required after merge"
+  },
+  "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01": {
+    "id": "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01",
+    "repo": "fap-api",
+    "branch": "ops/release-train-backend-deploy-adapter-01",
+    "status": "pr_open",
+    "commit_sha": "81a620782cce73544c8cee13e581137123c2bfc1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1770",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized adding OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01 to fap-api PR train manifest/state and creating branch ops/release-train-backend-deploy-adapter-01 from latest main; backend deploy adapter only, no deploy."
+      },
+      "workspace_safety": {
+        "status": "pass",
+        "evidence": "Started from clean tracked fap-api main and created ops/release-train-backend-deploy-adapter-01."
+      },
+      "deploy_safety_boundary": {
+        "status": "pass",
+        "evidence": "No deploy, production SSH, production mutation, Search Channel action, URL submission, frontend deploy, rollback, or production approval performed."
+      },
+      "bash_syntax_deploy_wrapper": {
+        "status": "pass",
+        "command": "bash -n backend/scripts/deploy/deploy_backend.sh"
+      },
+      "python_compile": {
+        "status": "pass",
+        "command": "python3 -m py_compile ops/release-train/release_train.py tests/ops/test_backend_deploy_adapter.py"
+      },
+      "manifest_validate": {
+        "status": "pass",
+        "command": "python3 ops/release-train/release_train.py validate-manifest --manifest ops/release-train/examples/release-train.example.json"
+      },
+      "manifest_plan": {
+        "status": "pass",
+        "command": "python3 ops/release-train/release_train.py plan --manifest ops/release-train/examples/release-train.example.json"
+      },
+      "manifest_dry_run": {
+        "status": "pass",
+        "command": "python3 ops/release-train/release_train.py dry-run --manifest ops/release-train/examples/release-train.example.json",
+        "note": "Dry-run reported non-blocking offline GitHub/example scope notes but exited ok=true."
+      },
+      "ops_unittest": {
+        "status": "pass",
+        "command": "python3 -m unittest discover tests/ops",
+        "result": "27 tests passed"
+      },
+      "wrapper_fail_closed_default": {
+        "status": "pass",
+        "command": "bash backend/scripts/deploy/deploy_backend.sh; test $? -ne 0",
+        "result": "Failed closed with MISSING_RELEASE_NAME and no deploy."
+      },
+      "wrapper_dry_run": {
+        "status": "pass",
+        "command": "DEPLOY_DRY_RUN=true ALLOW_PRODUCTION_DEPLOY=true ALLOW_REAL_DEPLOY=false DEPLOY_ENV=production BACKEND_DEPLOY_SHA=$(git rev-parse HEAD) RELEASE_NAME=adapter-dry-run-test bash backend/scripts/deploy/deploy_backend.sh",
+        "result": "Printed guarded Deployer command and deploy_result=skipped."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "result": "207 routes listed"
+      },
+      "migration_pretend": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json; python3 -m json.tool ops/release-train/schema/release-train.schema.json; python3 -m json.tool ops/release-train/examples/release-train.example.json; yaml.safe_load docs/codex/pr-train.yaml"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "result": "Changed files are limited to the manifest allowed paths."
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "result": "Full MBTI CI verify path completed successfully."
+      },
+      "pr_created": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1770",
+        "title": "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01: Connect backend deploy adapter"
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR opened; remote checks not yet completed at ledger update time."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": true,
+      "git_diff_cached_check": null
+    },
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T08:15:11+08:00",
+        "summary": "User authorized backend deploy adapter PR train entry and branch creation."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-31T08:15:11+08:00",
+        "summary": "Implementing guarded Deployer adapter and focused ops tests without deployment."
+      },
+      {
+        "status": "local_validation_passed",
+        "at": "2026-05-31T08:23:00+08:00",
+        "summary": "Implemented deploy adapter and passed route, migration pretend, release-train, ops unittest, wrapper guard, scope, and MBTI CI validation without deploying."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T08:28:00+08:00",
+        "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1770 after local validation passed; no deploy performed."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "Wait for GitHub checks and Codex final review; do not merge or deploy from this PR."
   }
 }

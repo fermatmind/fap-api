@@ -15,9 +15,11 @@
       "pr_number": 1755,
       "expected_head_sha": "a1b2c3d4e5f6",
       "expected_merge_sha": "a1b2c3d4e5f6",
+      "release_name": "ops-03-pr-03-sitemap-source",
       "component": "backend",
       "risk_level": "medium",
       "deploy_required": true,
+      "deploy_target": "production",
       "deploy_order": "backend_first",
       "required_checks_policy": "required_only",
       "allowed_files": [
