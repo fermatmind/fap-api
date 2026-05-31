@@ -33861,7 +33861,8 @@
       "deploy_safety_boundary": "no deploy, no production mutation, no production SSH",
       "focused_tests": "php artisan test --filter=ResultEmailLookupTest, AttemptEmailBindingTest, ResultEmailGatedReadTest passed; local file cache warnings only",
       "acceptance": "route:list passed; testing sqlite migrate passed; manifest JSON/YAML valid; git diff --check passed; backend/scripts/ci_verify_mbti.sh passed",
-      "scope_guard": "BIG5_OCEAN compiled generated files restored; only scoped files remain dirty"
+      "scope_guard": "BIG5_OCEAN compiled generated files restored; only scoped files remain dirty",
+      "github_ci_first_failure": "PR #1786 verify-bigfive failed on BigFiveResultPageV2CoreBodyPreview runtime-freeze classifier for EmailPreferenceService.php; current-scope guard exception added for result access link delivery preference policy."
     },
     "failure_reason": null,
     "merged_at": null,
@@ -33870,7 +33871,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": false,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -33885,6 +33886,12 @@
         "from": "in_progress",
         "to": "local_validation_passed",
         "note": "Focused tests and required local acceptance passed before commit; file cache warnings were non-failing local warnings."
+      },
+      {
+        "at": "2026-05-31T15:38:40+08:00",
+        "from": "pr_checks_pending",
+        "to": "ci_scope_fix_in_progress",
+        "note": "Fixed current-scope verify-bigfive runtime-freeze classifier failure by covering result access link delivery preference policy changes."
       }
     ],
     "sidecars": [],

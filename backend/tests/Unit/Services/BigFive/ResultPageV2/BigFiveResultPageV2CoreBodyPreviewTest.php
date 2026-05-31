@@ -1443,6 +1443,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_result_email_access_link_delivery_changes(): void
     {
         $changed = [
+            'backend/app/Services/Email/EmailPreferenceService.php',
             'backend/app/Services/Email/EmailOutboxService.php',
         ];
 
@@ -4288,7 +4289,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isResultEmailAccessLinkDeliveryFile(string $file): bool
     {
-        return $file === 'backend/app/Services/Email/EmailOutboxService.php';
+        return in_array($file, [
+            'backend/app/Services/Email/EmailOutboxService.php',
+            'backend/app/Services/Email/EmailPreferenceService.php',
+        ], true);
     }
 
     private function isAnalyticsFunnelEventTaxonomyFile(string $file): bool

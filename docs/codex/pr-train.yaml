@@ -16546,6 +16546,7 @@ prs:
       - backend/app/Services/Email/EmailPreferenceService.php
       - backend/tests/Feature/ResultEmailLookupTest.php
       - backend/tests/Feature/AttemptEmailBindingTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     scope:
@@ -16562,6 +16563,7 @@ prs:
       - cd backend && php artisan test --filter=ResultEmailLookupTest --no-ansi
       - cd backend && php artisan test --filter=AttemptEmailBindingTest --no-ansi
       - cd backend && php artisan test --filter=ResultEmailGatedReadTest --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_result_email_access_link_delivery_changes --no-ansi
       - cd backend && php artisan route:list --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-result-identity-01.sqlite php artisan migrate --force --no-ansi
       - bash backend/scripts/ci_verify_mbti.sh
