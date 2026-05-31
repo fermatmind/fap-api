@@ -16192,6 +16192,7 @@ prs:
       - backend/docs/seo/generated/analytics-funnel-controlled-refresh-write-guard-01.v1.json
       - backend/tests/Feature/Analytics/RefreshAnalyticsFunnelDailyCommandTest.php
       - backend/tests/Feature/SeoIntel/AnalyticsFunnelControlledRefreshWriteGuard01Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     scope:
@@ -16204,6 +16205,7 @@ prs:
       - cd backend && php artisan test --filter=AnalyticsFunnelControlledRefreshWriteGuard01 --no-ansi
       - cd backend && php artisan test --filter=RefreshAnalyticsFunnelDailyCommand --no-ansi
       - cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_analytics_funnel_refresh_command_guard_changes --no-ansi
       - cd backend && php artisan route:list --no-ansi
       - cd backend && vendor/bin/pint --test
       - cd backend && composer validate --strict

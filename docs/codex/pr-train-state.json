@@ -33858,7 +33858,7 @@
     "branch": "codex/analytics-funnel-controlled-refresh-write-guard-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01 add controlled analytics funnel refresh write guard",
-    "status": "pr_open",
+    "status": "ci_fix_local_checks_passed",
     "depends_on": [
       "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02"
     ],
@@ -33896,7 +33896,7 @@
       "pint": {
         "status": "pass",
         "command": "cd backend && vendor/bin/pint --test",
-        "evidence": "PASS across 3653 files."
+        "evidence": "PASS across 3653 files after CI classifier fix."
       },
       "composer_validate": {
         "status": "pass",
@@ -33911,7 +33911,12 @@
       "json_yaml_diff_validation": {
         "status": "pass",
         "command": "python3 -m json.tool backend/docs/seo/generated/analytics-funnel-controlled-refresh-write-guard-01.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\" && git diff --check && git diff --cached --check",
-        "evidence": "Generated JSON, state JSON, train YAML, unstaged diff check, and cached diff check passed."
+        "evidence": "Generated JSON, state JSON, train YAML, unstaged diff check, and cached diff check passed before PR; state/YAML and diff check passed after CI fix."
+      },
+      "bigfive_runtime_freeze_classifier": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_analytics_funnel_refresh_command_guard_changes --no-ansi",
+        "evidence": "PASS with warning: 1 test, 1 assertion. Classifies analytics funnel refresh command guard changes as non-Big-Five runtime-impacting."
       }
     },
     "failure_reason": null,
@@ -33942,6 +33947,18 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened PR #1783 after local validation passed."
+      },
+      {
+        "at": "2026-05-31T07:33:56Z",
+        "from": "pr_open",
+        "to": "ci_fix_in_progress",
+        "note": "GitHub verify-bigfive failed on runtime freeze classifier for RefreshAnalyticsFunnelDailyCommand.php; adding scoped classifier coverage only."
+      },
+      {
+        "at": "2026-05-31T07:35:39Z",
+        "from": "ci_fix_in_progress",
+        "to": "ci_fix_local_checks_passed",
+        "note": "Added scoped Big Five runtime-freeze classifier coverage and reran focused checks plus Pint."
       }
     ]
   }
