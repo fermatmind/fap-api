@@ -17868,7 +17868,7 @@ prs:
     base: main
     title: "IQ-NORM-01 add IQ norm calibration authority"
     train_scope: iq_production_launch
-    status: in_progress
+    status: merged
     scope:
       - Add backend-only IQ norm authority schema, contract service, governance documentation, and regression tests.
       - Keep current beta scoring/report runtime behavior unchanged and keep IQ public claims locked until later norm unlock work.
@@ -17902,14 +17902,27 @@ prs:
     base: main
     title: "IQ-NORM-02 add IQ norm table importer dry-run"
     train_scope: iq_production_launch
-    status: pending
+    status: in_progress
     scope:
       - Add dry-run IQ norm table importer, schema validation, version lock checks, and invalid fixture rejection.
+    allowed_paths:
+      - backend/app/Console/Commands/NormsIqImport.php
+      - backend/app/Console/Kernel.php
+      - backend/tests/Feature/Psychometrics/IqNormsImportDryRunTest.php
+      - backend/tests/Fixtures/iq/norms/iq_norm_dry_run_valid.json
+      - backend/tests/Fixtures/iq/norms/iq_norm_dry_run_invalid.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
     do_not:
       - Change runtime scoring/report behavior or publish real norm data.
     validation:
-      - php -l changed PHP files
+      - php -l backend/app/Console/Commands/NormsIqImport.php backend/tests/Feature/Psychometrics/IqNormsImportDryRunTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNormsImportDryRunTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNorm --no-ansi
+      - python3 -m json.tool backend/tests/Fixtures/iq/norms/iq_norm_dry_run_valid.json >/dev/null
+      - python3 -m json.tool backend/tests/Fixtures/iq/norms/iq_norm_dry_run_invalid.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
       - git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: IQ-NORM-03

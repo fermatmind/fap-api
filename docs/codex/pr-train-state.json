@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T12:54:52+00:00",
+  "updated_at": "2026-05-31T14:23:55+00:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -22277,7 +22277,7 @@
       "branch": "codex/iq-norm-01-calibration-authority",
       "base": "main",
       "title": "IQ-NORM-01 add IQ norm calibration authority",
-      "status": "github_checks_green",
+      "status": "merged",
       "depends_on": [],
       "checks": {
         "local": {
@@ -22320,14 +22320,14 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-31T12:58:44Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
         "github_checks_green": true,
-        "post_merge_revalidated": null
+        "post_merge_revalidated": true
       },
       "transitions": [
         {
@@ -22365,11 +22365,19 @@
           "from": "ci_fix_pushed_checks_pending",
           "to": "github_checks_green",
           "note": "All GitHub required checks passed on PR #1799 after CI fix."
+        },
+        {
+          "at": "2026-05-31T14:21:08+00:00",
+          "from": "github_checks_green",
+          "to": "merged",
+          "note": "Reconciled after PR #1799 squash merge; remote branch was already deleted and local worktree cleanup completed."
         }
       ],
-      "commit_sha": "054cdec9",
+      "commit_sha": "f305f93a",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1799",
-      "pr_number": 1799
+      "pr_number": 1799,
+      "merge_commit": "9a4352eccb33bd81b50a8715adf42c8858fdaca7",
+      "merge_sha": "9a4352eccb33bd81b50a8715adf42c8858fdaca7"
     },
     "IQ-NORM-02": {
       "id": "IQ-NORM-02",
@@ -22377,18 +22385,37 @@
       "branch": "codex/iq-norm-02-importer-dry-run",
       "base": "main",
       "title": "IQ-NORM-02 add IQ norm table importer dry-run",
-      "status": "planned",
+      "status": "local_scope_validation_passed",
       "depends_on": [
         "IQ-NORM-01"
       ],
-      "checks": {},
+      "checks": {
+        "local": {
+          "status": "passed",
+          "commands": [
+            "php -l backend/app/Console/Commands/NormsIqImport.php backend/tests/Feature/Psychometrics/IqNormsImportDryRunTest.php",
+            "php -l backend/app/Console/Kernel.php",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNormsImportDryRunTest --no-ansi",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNorm --no-ansi",
+            "python3 -m json.tool backend/tests/Fixtures/iq/norms/iq_norm_dry_run_valid.json >/dev/null",
+            "python3 -m json.tool backend/tests/Fixtures/iq/norms/iq_norm_dry_run_invalid.json >/dev/null",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 yaml manifest parse",
+            "git diff --check"
+          ],
+          "notes": "Targeted PHPUnit suites exited 0 with warnings only; dry-run importer tests had 4 tests/20 assertions; IqNorm filter had 8 tests/52 assertions."
+        },
+        "github": {
+          "status": null
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
@@ -22398,6 +22425,18 @@
           "from": "missing",
           "to": "planned",
           "note": "User authorized IQ production PR train manifest/state registration."
+        },
+        {
+          "at": "2026-05-31T14:21:08+00:00",
+          "from": "planned",
+          "to": "implementation_in_progress",
+          "note": "Started IQ norm table dry-run importer from latest origin/main after IQ-NORM-01 merge."
+        },
+        {
+          "at": "2026-05-31T14:23:55+00:00",
+          "from": "implementation_in_progress",
+          "to": "local_scope_validation_passed",
+          "note": "Dry-run importer, fixture rejection, write-mode block, IQ norm regression, JSON/YAML parse, and diff checks passed."
         }
       ]
     },
