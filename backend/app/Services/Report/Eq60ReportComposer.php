@@ -7,11 +7,13 @@ namespace App\Services\Report;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Content\Eq60PackLoader;
+use App\Services\Eq\EqCrossAssessmentContextGuard;
 
 final class Eq60ReportComposer
 {
     public function __construct(
         private readonly Eq60PackLoader $packLoader,
+        private readonly EqCrossAssessmentContextGuard $crossAssessmentContextGuard,
     ) {}
 
     /**
@@ -141,8 +143,9 @@ final class Eq60ReportComposer
             ? (array) data_get($reportAssets, 'assets.personalization_routes')
             : [];
         $interpretation = $this->buildV5Interpretation($v5Scores, $quality, $routeMatrix);
-        $assetRefs = $this->buildV5AssetRefs($interpretation, $quality);
-        $resolvedAssets = $this->resolveV5Assets($reportAssets, $locale, $interpretation, $quality);
+        $crossAssessmentContext = $this->crossAssessmentContextGuard->build($attempt, $result);
+        $assetRefs = $this->buildV5AssetRefs($interpretation, $quality, $crossAssessmentContext);
+        $resolvedAssets = $this->resolveV5Assets($reportAssets, $locale, $interpretation, $quality, $crossAssessmentContext);
 
         return [
             'ok' => true,
@@ -174,6 +177,7 @@ final class Eq60ReportComposer
                     static fn (string $tag): bool => $tag !== ''
                 )),
                 'interpretation' => $interpretation,
+                'cross_assessment_context' => $crossAssessmentContext,
                 'asset_refs' => $assetRefs,
                 'assets' => $resolvedAssets,
                 'next_module' => [
@@ -626,7 +630,7 @@ final class Eq60ReportComposer
      * @param  array<string,mixed>  $quality
      * @return array<string,mixed>
      */
-    private function buildV5AssetRefs(array $interpretation, array $quality): array
+    private function buildV5AssetRefs(array $interpretation, array $quality, array $crossAssessmentContext): array
     {
         return [
             'personalization_route_id' => (string) ($interpretation['route_id'] ?? ''),
@@ -640,6 +644,8 @@ final class Eq60ReportComposer
             'scene_ids' => array_values(array_map('strval', (array) ($interpretation['primary_scene_ids'] ?? []))),
             'career_environment_ids' => array_values(array_map('strval', (array) ($interpretation['career_environment_ids'] ?? []))),
             'action_prescription_id' => (string) ($interpretation['action_prescription_id'] ?? ''),
+            'cross_assessment_context_ids' => array_values(array_map('strval', (array) ($crossAssessmentContext['context_asset_ids'] ?? []))),
+            'cross_assessment_boundary_id' => (string) ($crossAssessmentContext['boundary_asset_id'] ?? ''),
             'sjt_bridge_id' => 'eq.sjt_bridge.planned',
         ];
     }
@@ -650,11 +656,18 @@ final class Eq60ReportComposer
      * @param  array<string,mixed>  $quality
      * @return array<string,mixed>
      */
-    private function resolveV5Assets(array $assets, string $locale, array $interpretation, array $quality): array
+    private function resolveV5Assets(
+        array $assets,
+        string $locale,
+        array $interpretation,
+        array $quality,
+        array $crossAssessmentContext
+    ): array
     {
         $docs = is_array($assets['assets'] ?? null) ? $assets['assets'] : [];
         $scientificAssets = (array) data_get($docs, 'scientific_contract.assets', []);
         $sjtAssets = (array) data_get($docs, 'sjt_bridge.assets', []);
+        $crossContextAssets = (array) data_get($docs, 'cross_assessment_context.assets', []);
         $formulationId = (string) ($interpretation['core_formulation_id'] ?? '');
         $actionId = (string) ($interpretation['action_prescription_id'] ?? '');
 
@@ -703,6 +716,7 @@ final class Eq60ReportComposer
                 ['id' => 'eq.sjt_bridge.planned', 'available' => false],
                 $this->localizedAsset((array) ($sjtAssets['eq.sjt_bridge.planned'] ?? []), $locale)
             ),
+            'cross_assessment_context' => $this->resolveCrossAssessmentAssets($crossContextAssets, $locale, $crossAssessmentContext),
             'quality' => [
                 'explanation_asset_id' => (string) ($quality['explanation_asset_id'] ?? ''),
                 'confidence_label' => (string) ($quality['confidence_label'] ?? ''),
@@ -712,6 +726,43 @@ final class Eq60ReportComposer
                 'signal_signature' => is_array($interpretation['signal_signature'] ?? null) ? $interpretation['signal_signature'] : [],
                 'selected_asset_ids' => is_array($interpretation['selected_asset_ids'] ?? null) ? $interpretation['selected_asset_ids'] : [],
             ],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $assets
+     * @param  array<string,mixed>  $crossAssessmentContext
+     * @return array<string,mixed>
+     */
+    private function resolveCrossAssessmentAssets(array $assets, string $locale, array $crossAssessmentContext): array
+    {
+        $cards = [];
+        foreach ((array) ($crossAssessmentContext['context_asset_ids'] ?? []) as $idRaw) {
+            $id = trim((string) $idRaw);
+            if ($id === '') {
+                continue;
+            }
+
+            $asset = $this->localizedAsset((array) ($assets[$id] ?? []), $locale);
+            if ($asset !== []) {
+                $cards[] = array_merge(['id' => $id], $asset);
+            }
+        }
+
+        $boundaryId = trim((string) ($crossAssessmentContext['boundary_asset_id'] ?? 'eq.cross_context.boundary.default'));
+        if ($boundaryId === '') {
+            $boundaryId = 'eq.cross_context.boundary.default';
+        }
+
+        return [
+            'schema' => 'eq_cross_assessment_context.assets.v1',
+            'status' => (string) ($crossAssessmentContext['status'] ?? 'no_source_assessments'),
+            'source_count' => (int) ($crossAssessmentContext['source_count'] ?? 0),
+            'boundary' => array_merge(
+                ['id' => $boundaryId],
+                $this->localizedAsset((array) ($assets[$boundaryId] ?? []), $locale)
+            ),
+            'cards' => $cards,
         ];
     }
 

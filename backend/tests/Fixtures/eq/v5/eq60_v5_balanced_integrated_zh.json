@@ -17,6 +17,8 @@
                 "autonomy_recovery_medium"
             ],
             "core_formulation_id": "balanced_integrated",
+            "cross_assessment_boundary_id": "eq.cross_context.boundary.default",
+            "cross_assessment_context_ids": [],
             "mechanism_ids": [
                 "SA_ER_high_high",
                 "EM_RM_high_high"
@@ -129,6 +131,19 @@
                 "one_liner": "你的情绪与关系信号比较均衡，优势在于稳定和可迁移。",
                 "primary_strength": "稳定性和多场景适应能力。",
                 "title": "均衡整合型"
+            },
+            "cross_assessment_context": {
+                "boundary": {
+                    "claim_boundary": "不用于职业预测、招聘筛选、临床诊断、固定人格标签或情商能力宣称。",
+                    "how_to_use": "把 MBTI、大五人格或九型人格看作不同问题的证据来源：它们不能改写 EQ 分数，也不能替代情绪与关系自我报告。",
+                    "id": "eq.cross_context.boundary.default",
+                    "summary": "这一模块只说明你还完成过哪些相关测评，以及这些测评可以如何辅助阅读 EQ 结果。",
+                    "title": "跨测评上下文边界"
+                },
+                "cards": [],
+                "schema": "eq_cross_assessment_context.assets.v1",
+                "source_count": 0,
+                "status": "no_source_assessments"
             },
             "mechanisms": [
                 {
@@ -377,6 +392,55 @@
                 }
             ],
             "paid_blocks": []
+        },
+        "cross_assessment_context": {
+            "available": true,
+            "boundary_asset_id": "eq.cross_context.boundary.default",
+            "context_asset_ids": [],
+            "guardrails": {
+                "affects_scores": false,
+                "blocked_claims": [
+                    "career_or_hiring_prediction",
+                    "clinical_or_diagnostic_claim",
+                    "job_performance_prediction",
+                    "fixed_personality_identity",
+                    "emotional_ability_claim"
+                ],
+                "changes_formulation": false,
+                "claim_boundary": "reflection_context_only_not_type_determinism",
+                "eq_authority": "EQ_60 remains authoritative for emotional and relational self-report signals.",
+                "formal_report_mutation_allowed": false,
+                "source_authority": "MBTI, Big Five, and Enneagram remain authoritative only for their own assessment domains."
+            },
+            "schema": "eq_cross_assessment_context.v1",
+            "source_count": 0,
+            "source_scales": {
+                "BIG5_OCEAN": {
+                    "asset_id": "eq.cross_context.big_five.available",
+                    "available": false,
+                    "evidence_kind": "not_available",
+                    "source_attempt_id": null,
+                    "source_result_id": null,
+                    "submitted_at": null
+                },
+                "ENNEAGRAM": {
+                    "asset_id": "eq.cross_context.enneagram.available",
+                    "available": false,
+                    "evidence_kind": "not_available",
+                    "source_attempt_id": null,
+                    "source_result_id": null,
+                    "submitted_at": null
+                },
+                "MBTI": {
+                    "asset_id": "eq.cross_context.mbti.available",
+                    "available": false,
+                    "evidence_kind": "not_available",
+                    "source_attempt_id": null,
+                    "source_result_id": null,
+                    "submitted_at": null
+                }
+            },
+            "status": "no_source_assessments"
         },
         "dimension_summary": [
             {
