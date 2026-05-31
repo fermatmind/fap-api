@@ -17805,3 +17805,248 @@ prs:
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: DEPLOY-READINESS｜Deploy CAREER 1046 growth foundation fixes
+
+  - id: IQ-NORM-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/iq-norm-01-calibration-authority
+    base: main
+    title: "IQ-NORM-01 add IQ norm calibration authority"
+    train_scope: iq_production_launch
+    status: in_progress
+    scope:
+      - Add backend-only IQ norm authority schema, contract service, governance documentation, and regression tests.
+      - Keep current beta scoring/report runtime behavior unchanged and keep IQ public claims locked until later norm unlock work.
+    allowed_paths:
+      - backend/database/migrations/2026_05_31_090000_create_iq_norm_authorities_table.php
+      - backend/app/Services/Iq/IqNormAuthorityContract.php
+      - backend/tests/Feature/Content/IqNormAuthorityTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/iq/iq-production-norm-authority.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Import real norm tables or third-party IQ data.
+      - Unlock iq_estimate, percentile, confidence_interval, SEO indexation, or paid-report claims.
+      - Move norm authority to frontend or CMS.
+    validation:
+      - php -l backend/database/migrations/2026_05_31_090000_create_iq_norm_authorities_table.php backend/app/Services/Iq/IqNormAuthorityContract.php backend/tests/Feature/Content/IqNormAuthorityTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNormAuthorityTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportContractTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: IQ-NORM-02
+
+  - id: IQ-NORM-02
+    repo: fap-api
+    depends_on: [IQ-NORM-01]
+    branch: codex/iq-norm-02-importer-dry-run
+    base: main
+    title: "IQ-NORM-02 add IQ norm table importer dry-run"
+    train_scope: iq_production_launch
+    status: pending
+    scope:
+      - Add dry-run IQ norm table importer, schema validation, version lock checks, and invalid fixture rejection.
+    do_not:
+      - Change runtime scoring/report behavior or publish real norm data.
+    validation:
+      - php -l changed PHP files
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNorm --no-ansi
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: IQ-NORM-03
+
+  - id: IQ-NORM-03
+    repo: fap-api
+    depends_on: [IQ-NORM-02]
+    branch: codex/iq-norm-03-score-claim-unlock
+    base: main
+    title: "IQ-NORM-03 unlock IQ score claims through norm authority"
+    train_scope: iq_production_launch
+    status: pending
+    scope:
+      - Wire IQ scoring/report claim fields to backend norm authority only.
+    do_not:
+      - Let frontend, CMS, payment state, or SEO copy unlock IQ claims.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqTestDriverTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportBuilderTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportContractTest --no-ansi
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: IQ-PAID-REPORT-01
+
+  - id: IQ-PAID-REPORT-01
+    repo: fap-api
+    depends_on: [IQ-NORM-03]
+    branch: codex/iq-paid-report-01-entitlement-contract
+    base: main
+    title: "IQ-PAID-REPORT-01 define paid report entitlement contract"
+    train_scope: iq_production_launch
+    status: pending
+    scope:
+      - Define backend free/paid IQ report field contract, entitlement redaction, and order permission tests.
+    do_not:
+      - Expose private report fields without backend entitlement.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqPaidReport --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportContractTest --no-ansi
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: IQ-PAID-REPORT-02
+
+  - id: IQ-PAID-REPORT-02
+    repo: fap-web
+    depends_on: [IQ-PAID-REPORT-01]
+    branch: codex/iq-paid-report-02-render-entitlement-states
+    base: main
+    title: "IQ-PAID-REPORT-02 render paid report entitlement states"
+    train_scope: iq_production_launch
+    status: pending
+    scope:
+      - Render IQ paid-report free, paid, unauthorized, and error states from backend contract only.
+    do_not:
+      - Add local report conclusions, local IQ claims, or frontend entitlement inference.
+    validation:
+      - ./node_modules/.bin/vitest run targeted IQ paid report contracts
+      - ./node_modules/.bin/tsc --noEmit --pretty false
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: IQ-CMS-MEDIA-01
+
+  - id: IQ-CMS-MEDIA-01
+    repo: fap-api
+    depends_on: [IQ-PAID-REPORT-02]
+    branch: codex/iq-cms-media-01-authority-metadata
+    base: main
+    title: "IQ-CMS-MEDIA-01 register CMS media authority metadata"
+    train_scope: iq_production_launch
+    status: pending
+    scope:
+      - Register IQ landing, OG, and report media metadata through backend CMS/Media Library authority.
+    do_not:
+      - Add frontend public static media fallback assets.
+    validation:
+      - python3 JSON parse changed baselines
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=LandingSurfacePublicApiTest --no-ansi
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: IQ-CMS-MEDIA-02
+
+  - id: IQ-CMS-MEDIA-02
+    repo: fap-web
+    depends_on: [IQ-CMS-MEDIA-01]
+    branch: codex/iq-cms-media-02-rendering-guard
+    base: main
+    title: "IQ-CMS-MEDIA-02 render CMS media without frontend fallbacks"
+    train_scope: iq_production_launch
+    status: pending
+    scope:
+      - Render IQ CMS media metadata with minimal shell behavior when media authority is missing.
+    do_not:
+      - Add local public assets or editorial media fallbacks.
+    validation:
+      - ./node_modules/.bin/vitest run targeted IQ media contracts
+      - ./node_modules/.bin/tsc --noEmit --pretty false
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: IQ-SEO-RAMP-01
+
+  - id: IQ-SEO-RAMP-01
+    repo: fap-api
+    depends_on: [IQ-CMS-MEDIA-02, IQ-NORM-03]
+    branch: codex/iq-seo-ramp-01-cms-authority
+    base: main
+    title: "IQ-SEO-RAMP-01 publish CMS SEO ramp authority"
+    train_scope: iq_production_launch
+    status: pending
+    scope:
+      - Publish backend CMS SEO metadata, canonical, and claim policy needed for IQ SEO ramp.
+    do_not:
+      - Expand frontend sitemap, llms, or JSON-LD directly.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=LandingSurfacePublicApiTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Seo --no-ansi
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: IQ-SEO-RAMP-02
+
+  - id: IQ-SEO-RAMP-02
+    repo: fap-web
+    depends_on: [IQ-SEO-RAMP-01]
+    branch: codex/iq-seo-ramp-02-indexation-gate
+    base: main
+    title: "IQ-SEO-RAMP-02 gate SEO indexation through backend authority"
+    train_scope: iq_production_launch
+    status: pending
+    scope:
+      - Gate IQ sitemap, llms, canonical, and JSON-LD expansion on backend SEO, norm authority, and claim policy.
+    do_not:
+      - Bypass backend claim_policy or norm_authority gates.
+    validation:
+      - ./node_modules/.bin/vitest run targeted sitemap llms IQ SEO contracts
+      - ./node_modules/.bin/tsc --noEmit --pretty false
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: IQ-LIVE-RAMP-01
+
+  - id: IQ-LIVE-RAMP-01
+    repo: fap-web
+    depends_on: [IQ-SEO-RAMP-02, IQ-PAID-REPORT-02]
+    branch: codex/iq-live-ramp-01-authenticated-smoke
+    base: main
+    title: "IQ-LIVE-RAMP-01 add authenticated production smoke fixture gate"
+    train_scope: iq_production_launch
+    status: pending
+    scope:
+      - Extend IQ live smoke for operator fixture validation of submit, result, paid report, canonical, and leakage checks.
+    do_not:
+      - Commit real tokens, user data, answer keys, or private report payloads.
+    validation:
+      - node scripts/iq/iq-launch-readiness-smoke.mjs
+      - ./node_modules/.bin/vitest run targeted IQ smoke contracts
+      - ./node_modules/.bin/tsc --noEmit --pretty false
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: IQ-OBS-01
+
+  - id: IQ-OBS-01
+    repo: fap-api
+    depends_on: [IQ-LIVE-RAMP-01]
+    branch: codex/iq-obs-01-production-guards
+    base: main
+    title: "IQ-OBS-01 add production observability guards"
+    train_scope: iq_production_launch
+    status: pending
+    scope:
+      - Add IQ production observability for completion, norm miss, entitlement miss, scoring anomalies, and version drift.
+    do_not:
+      - Log answer keys, answer text, private paid report fields, or personal sensitive data.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqObservability --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportContractTest --no-ansi
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: IQ-RELEASE-01
+
+  - id: IQ-RELEASE-01
+    repo: fap-web
+    depends_on: [IQ-OBS-01]
+    branch: codex/iq-release-01-launch-readiness-ledger
+    base: main
+    title: "IQ-RELEASE-01 finalize production launch readiness ledger"
+    train_scope: iq_production_launch
+    status: pending
+    scope:
+      - Finalize IQ production launch readiness ledger, gate evidence, deferred risks, and release checklist.
+    do_not:
+      - Change runtime behavior or deploy production.
+    validation:
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 YAML/manifest validation
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: null
