@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:15:33+08:00",
+  "updated_at": "2026-05-31T16:21:06+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -34525,7 +34525,7 @@
     "branch": "audit/sec-payment-integrity-01",
     "base": "main",
     "title": "AUDIT-SEC-PAYMENT-INTEGRITY-01 harden payment integrity boundaries",
-    "status": "pr_open_checks_pending",
+    "status": "ci_fix_pushed_checks_pending",
     "depends_on": [
       "AUDIT-SEC-RESULT-IDENTITY-01 merged"
     ],
@@ -34564,8 +34564,18 @@
         "evidence": "route:list passed; sqlite migrate passed; ci_verify_mbti.sh passed; diff check passed; manifest/state parse passed; raw production order id scan passed."
       },
       "github": {
-        "status": "pending",
+        "status": "retry_pending",
+        "previous_failure": "verify-bigfive runtime freeze classifier flagged backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php",
+        "fix": "Added ReprocessPaymentEventJob.php to the payment webhook digest/reprocess runtime-freeze exception and targeted test fixture.",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1793"
+      },
+      "ci_fix_local": {
+        "status": "passed_with_existing_file_cache_warnings",
+        "commands": [
+          "cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_payment_webhook_digest_idempotency_changes' --no-ansi",
+          "git diff --check"
+        ],
+        "evidence": "Exit code 0; 2 warnings from existing file cache warnings."
       }
     },
     "failure_reason": null,
@@ -34602,6 +34612,12 @@
         "from": "local_scope_validation_passed",
         "to": "pr_open_checks_pending",
         "note": "Created PR #1793 from audit/sec-payment-integrity-01; waiting for GitHub required checks."
+      },
+      {
+        "at": "2026-05-31T16:21:06+08:00",
+        "from": "pr_open_checks_pending",
+        "to": "ci_fix_pushed_checks_pending",
+        "note": "Fixed verify-bigfive runtime-freeze allowlist for ReprocessPaymentEventJob.php and pushed retry commit."
       }
     ],
     "sidecars": [

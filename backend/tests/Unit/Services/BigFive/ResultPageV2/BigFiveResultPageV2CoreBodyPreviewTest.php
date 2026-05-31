@@ -1190,6 +1190,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_payment_webhook_digest_idempotency_changes(): void
     {
         $changed = [
+            'backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php',
             'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
         ];
 
@@ -3135,6 +3136,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Commerce/Checkout/AlipayCheckoutService.php',
             'backend/app/Services/Commerce/OrderManager.php',
             'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
+            'backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php',
         ], true);
     }
 
