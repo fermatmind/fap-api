@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T08:23:00+08:00",
+  "updated_at": "2026-05-31T08:28:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -32751,9 +32751,9 @@
     "id": "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01",
     "repo": "fap-api",
     "branch": "ops/release-train-backend-deploy-adapter-01",
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "81a620782cce73544c8cee13e581137123c2bfc1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1770",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -32828,6 +32828,15 @@
         "status": "pass",
         "command": "bash backend/scripts/ci_verify_mbti.sh",
         "result": "Full MBTI CI verify path completed successfully."
+      },
+      "pr_created": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1770",
+        "title": "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01: Connect backend deploy adapter"
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR opened; remote checks not yet completed at ledger update time."
       }
     },
     "failure_reason": null,
@@ -32854,9 +32863,14 @@
         "status": "local_validation_passed",
         "at": "2026-05-31T08:23:00+08:00",
         "summary": "Implemented deploy adapter and passed route, migration pretend, release-train, ops unittest, wrapper guard, scope, and MBTI CI validation without deploying."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T08:28:00+08:00",
+        "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1770 after local validation passed; no deploy performed."
       }
     ],
     "sidecars": [],
-    "next_task": "Run local validation, open PR, and wait for review; do not merge or deploy."
+    "next_task": "Wait for GitHub checks and Codex final review; do not merge or deploy from this PR."
   }
 }
