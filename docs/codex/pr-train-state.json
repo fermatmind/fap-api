@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:44:29Z",
+  "updated_at": "2026-05-31T16:59:12.092390Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -22960,7 +22960,7 @@
       "branch": "codex/iq-cms-media-01-authority-metadata",
       "base": "main",
       "title": "IQ-CMS-MEDIA-01 register CMS media authority metadata",
-      "status": "pr_opened",
+      "status": "merged",
       "depends_on": [
         "IQ-PAID-REPORT-02"
       ],
@@ -22970,14 +22970,14 @@
         "git diff --check": "passed"
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-31T16:27:40Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": null,
-        "post_merge_revalidated": null,
+        "github_checks_green": true,
+        "post_merge_revalidated": true,
         "changed_files": [
           "backend/tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php",
           "content_baselines/landing_surfaces/home.en.json",
@@ -23015,9 +23015,9 @@
           "note": "Opened GitHub PR #1817 after local validation passed."
         }
       ],
-      "commit_sha": "bea2250c268bbea96ee2304fa823c1d6e5468472",
+      "commit_sha": "1b65569a048dede8461c3574616364ac901ed807",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1817",
-      "updated_at": "2026-05-31T16:22:06.368532Z",
+      "updated_at": "2026-05-31T16:43:47.480353Z",
       "pr_number": 1817
     },
     "IQ-CMS-MEDIA-02": {
@@ -23056,21 +23056,37 @@
       "branch": "codex/iq-seo-ramp-01-cms-authority",
       "base": "main",
       "title": "IQ-SEO-RAMP-01 publish CMS SEO ramp authority",
-      "status": "planned",
+      "status": "pr_open_checks_pending",
       "depends_on": [
         "IQ-CMS-MEDIA-02",
         "IQ-NORM-03"
       ],
-      "checks": {},
+      "checks": {
+        "dependency_iq_cms_media_02": "passed: fermatmind/fap-web#944 merged at 2026-05-31T16:40:02Z",
+        "dependency_iq_norm_03": "passed: merged earlier in train",
+        "workspace_safety": "using isolated worktree /private/tmp/fap-api-iq-seo-ramp-01; primary worktree untouched",
+        "python3 json/yaml parse + git diff --check": "passed",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=LandingSurfacePublicApiTest --no-ansi": "passed_with_existing_warnings",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqSeoRampAuthorityTest --no-ansi": "passed_with_existing_warning",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Seo --no-ansi": "failed_external_sidecar: 13 failures outside IQ-SEO-RAMP-01 scope; IqSeoRampAuthorityTest passed inside broad suite; examples include CareerLiveAcceptance1048CloseoutPlannerTest, CareerProgressiveCohortCloseoutPlannerTest, SeoIntelCrawlerLogProductionCanaryRuntimeTest, SeoIntelOpsSeo* dashboard tests, SeoIntelSearchChannelLive02PreflightTest, and CareerJobPublicApiTest SEO endpoint tests.",
+        "scope_validation": "passed: changed files limited to IQ-SEO-RAMP-01 allowed_paths after removing test-generated EQ_60 compiled artifacts"
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
         "github_checks_green": null,
-        "post_merge_revalidated": null
+        "post_merge_revalidated": null,
+        "changed_files": [
+          "backend/tests/Feature/SeoIntel/IqSeoRampAuthorityTest.php",
+          "content_baselines/landing_surfaces/tests.en.json",
+          "content_baselines/landing_surfaces/tests.zh-CN.json",
+          "docs/codex/pr-train-state.json",
+          "docs/codex/pr-train.yaml"
+        ]
       },
       "transitions": [
         {
@@ -23078,8 +23094,53 @@
           "from": "missing",
           "to": "planned",
           "note": "User authorized IQ production PR train manifest/state registration."
+        },
+        {
+          "at": "2026-05-31T16:43:47.480353Z",
+          "from": "planned",
+          "to": "implementation_in_progress",
+          "note": "Started after IQ-CMS-MEDIA-02 and IQ-NORM-03 dependency verification."
+        },
+        {
+          "at": "2026-05-31T16:51:45.653527Z",
+          "from": "implementation_in_progress",
+          "to": "local_scope_validation_passed_external_sidecar",
+          "note": "IQ SEO ramp scoped checks passed; manifest broad --filter=Seo failure recorded as external sidecar per user train protocol."
+        },
+        {
+          "at": "2026-05-31T16:53:16.348171Z",
+          "from": "local_scope_validation_passed_external_sidecar",
+          "to": "pr_open_checks_pending",
+          "note": "Opened GitHub PR #1821 after scoped validation passed and external Seo suite failures were sidecarized."
         }
-      ]
+      ],
+      "updated_at": "2026-05-31T16:53:16.348171Z",
+      "sidecar_issues": [
+        {
+          "id": "IQ-SEO-RAMP-01-SIDECAR-SEO-SUITE-EXTERNAL-20260601",
+          "status": "open_external",
+          "introduced_by_current_pr": false,
+          "blocking_current_train": false,
+          "detected_at": "2026-05-31T16:51:45.653527Z",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Seo --no-ansi",
+          "summary": "Broad Seo-filtered suite fails in existing Career/SEO ops/CareerJob tests unrelated to IQ SEO ramp authority. Current IQ-specific test passed in isolation and inside the broad suite.",
+          "failed_test_families": [
+            "Tests\\Unit\\Domain\\Career\\Audit\\CareerLiveAcceptance1048CloseoutPlannerTest",
+            "Tests\\Unit\\Domain\\Career\\Audit\\CareerProgressiveCohortCloseoutPlannerTest",
+            "Tests\\Feature\\Console\\CareerCloseoutCanonicalProgressiveCohortCommandTest",
+            "Tests\\Feature\\SeoIntel\\SeoIntelCrawlerLogProductionCanaryRuntimeTest",
+            "Tests\\Feature\\SeoIntel\\SeoIntelOpsSeoCrawlerObservationUiTest",
+            "Tests\\Feature\\SeoIntel\\SeoIntelOpsSeoNativeDashboardAccessBoundaryTest",
+            "Tests\\Feature\\SeoIntel\\SeoIntelOpsSeoNativeDashboardPanelsTest",
+            "Tests\\Feature\\SeoIntel\\SeoIntelSearchChannelLive02PreflightTest",
+            "Tests\\Feature\\V0_5\\CareerJobPublicApiTest"
+          ],
+          "scope_disposition": "registered_sidecar_per_user_goal_protocol; do not repair in IQ-SEO-RAMP-01"
+        }
+      ],
+      "commit_sha": "90e9709e",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1821",
+      "pr_number": 1821
     },
     "IQ-SEO-RAMP-02": {
       "id": "IQ-SEO-RAMP-02",
@@ -30596,11 +30657,11 @@
       "branch": "codex/iq-cms-media-01-authority-metadata",
       "base": "main",
       "title": "IQ-CMS-MEDIA-01 register CMS media authority metadata",
-      "status": "pr_opened",
+      "status": "merged",
       "depends_on": [
         "IQ-PAID-REPORT-02"
       ],
-      "commit_sha": "bea2250c268bbea96ee2304fa823c1d6e5468472",
+      "commit_sha": "1b65569a048dede8461c3574616364ac901ed807",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1817",
       "checks": {
         "dependency_iq_paid_report_02": "passed: fermatmind/fap-web#943 merged at 2026-05-31T16:12:12Z",
@@ -30610,9 +30671,9 @@
         "git diff --check": "passed"
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-31T16:27:40Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
         "allowed_paths_only": true,
         "changed_files": [
@@ -30626,11 +30687,91 @@
           "docs/codex/pr-train.yaml"
         ],
         "local_validation_passed": true,
+        "github_checks_green": true,
+        "post_merge_revalidated": true
+      },
+      "updated_at": "2026-05-31T16:43:47.480353Z",
+      "pr_number": 1817
+    },
+    "IQ-SEO-RAMP-01": {
+      "id": "IQ-SEO-RAMP-01",
+      "repo": "fap-api",
+      "branch": "codex/iq-seo-ramp-01-cms-authority",
+      "base": "main",
+      "title": "IQ-SEO-RAMP-01 publish CMS SEO ramp authority",
+      "status": "pr_open_checks_pending",
+      "depends_on": [
+        "IQ-CMS-MEDIA-02",
+        "IQ-NORM-03"
+      ],
+      "commit_sha": "90e9709e",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1821",
+      "checks": {
+        "dependency_iq_cms_media_02": "passed: fermatmind/fap-web#944 merged at 2026-05-31T16:40:02Z",
+        "dependency_iq_norm_03": "passed: merged earlier in train",
+        "workspace_safety": "using isolated worktree /private/tmp/fap-api-iq-seo-ramp-01; primary worktree untouched",
+        "python3 json/yaml parse + git diff --check": "passed",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=LandingSurfacePublicApiTest --no-ansi": "passed_with_existing_warnings",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqSeoRampAuthorityTest --no-ansi": "passed_with_existing_warning",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Seo --no-ansi": "failed_external_sidecar: 13 failures outside IQ-SEO-RAMP-01 scope; IqSeoRampAuthorityTest passed inside broad suite; examples include CareerLiveAcceptance1048CloseoutPlannerTest, CareerProgressiveCohortCloseoutPlannerTest, SeoIntelCrawlerLogProductionCanaryRuntimeTest, SeoIntelOpsSeo* dashboard tests, SeoIntelSearchChannelLive02PreflightTest, and CareerJobPublicApiTest SEO endpoint tests.",
+        "scope_validation": "passed: changed files limited to IQ-SEO-RAMP-01 allowed_paths after removing test-generated EQ_60 compiled artifacts"
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "changed_files": [
+          "backend/tests/Feature/SeoIntel/IqSeoRampAuthorityTest.php",
+          "content_baselines/landing_surfaces/tests.en.json",
+          "content_baselines/landing_surfaces/tests.zh-CN.json",
+          "docs/codex/pr-train-state.json",
+          "docs/codex/pr-train.yaml"
+        ],
+        "local_validation_passed": true,
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "updated_at": "2026-05-31T16:22:06.368532Z",
-      "pr_number": 1817
+      "updated_at": "2026-05-31T16:53:16.348171Z",
+      "sidecar_issues": [
+        {
+          "id": "IQ-SEO-RAMP-01-SIDECAR-SEO-SUITE-EXTERNAL-20260601",
+          "status": "open_external",
+          "introduced_by_current_pr": false,
+          "blocking_current_train": false,
+          "detected_at": "2026-05-31T16:51:45.653527Z",
+          "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Seo --no-ansi",
+          "summary": "Broad Seo-filtered suite fails in existing Career/SEO ops/CareerJob tests unrelated to IQ SEO ramp authority. Current IQ-specific test passed in isolation and inside the broad suite.",
+          "failed_test_families": [
+            "Tests\\Unit\\Domain\\Career\\Audit\\CareerLiveAcceptance1048CloseoutPlannerTest",
+            "Tests\\Unit\\Domain\\Career\\Audit\\CareerProgressiveCohortCloseoutPlannerTest",
+            "Tests\\Feature\\Console\\CareerCloseoutCanonicalProgressiveCohortCommandTest",
+            "Tests\\Feature\\SeoIntel\\SeoIntelCrawlerLogProductionCanaryRuntimeTest",
+            "Tests\\Feature\\SeoIntel\\SeoIntelOpsSeoCrawlerObservationUiTest",
+            "Tests\\Feature\\SeoIntel\\SeoIntelOpsSeoNativeDashboardAccessBoundaryTest",
+            "Tests\\Feature\\SeoIntel\\SeoIntelOpsSeoNativeDashboardPanelsTest",
+            "Tests\\Feature\\SeoIntel\\SeoIntelSearchChannelLive02PreflightTest",
+            "Tests\\Feature\\V0_5\\CareerJobPublicApiTest"
+          ],
+          "scope_disposition": "registered_sidecar_per_user_goal_protocol; do not repair in IQ-SEO-RAMP-01"
+        }
+      ],
+      "transitions": [
+        {
+          "at": "2026-05-31T16:51:45.653527Z",
+          "from": "implementation_in_progress",
+          "to": "local_scope_validation_passed_external_sidecar",
+          "note": "IQ SEO ramp scoped checks passed; manifest broad --filter=Seo failure recorded as external sidecar per user train protocol."
+        },
+        {
+          "at": "2026-05-31T16:53:16.348171Z",
+          "from": "local_scope_validation_passed_external_sidecar",
+          "to": "pr_open_checks_pending",
+          "note": "Opened GitHub PR #1821 after scoped validation passed and external Seo suite failures were sidecarized."
+        }
+      ],
+      "pr_number": 1821
     }
   },
   "RESULT-EN-PARITY-04": {

@@ -10,7 +10,56 @@
   "payload_json": {
     "seo": {
       "title": "测评入口中心",
-      "description": "按问题或分类进入 FermatMind 测评入口，更快判断从哪一个测试开始。"
+      "description": "按问题或分类进入 FermatMind 测评入口，更快判断从哪一个测试开始。",
+      "iq_ramp_authority": {
+        "schema": "iq.seo_ramp_authority.v1",
+        "authority_source": "backend_cms_landing_surface",
+        "locale": "zh-CN",
+        "test_slug": "iq-test-intelligence-quotient-assessment",
+        "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+        "form_code": "IQ_BETA_30_ORIGINAL",
+        "canonical_path": "/zh/tests/iq-test-intelligence-quotient-assessment",
+        "localized_paths": {
+          "en": "/en/tests/iq-test-intelligence-quotient-assessment",
+          "zh": "/zh/tests/iq-test-intelligence-quotient-assessment"
+        },
+        "robots": "index,follow",
+        "is_indexable": true,
+        "sitemap_eligible": true,
+        "llms_eligible": true,
+        "llms_full_eligible": false,
+        "jsonld_eligible": true,
+        "meta_title": "IQ 推理练习 | 30 题原创推理测评",
+        "meta_description": "练习原创视觉空间、图形规律与数字规律题；当前 SEO 文案仅承诺原始分、维度参考和方法边界。",
+        "og_title": "IQ 推理练习",
+        "og_description": "原创 30 题推理练习；公开文案仅保留分数语境与方法边界。",
+        "media": {
+          "card_asset_key": "iq-beta30-original-card",
+          "og_asset_key": "iq-beta30-original-og",
+          "report_cover_asset_key": "iq-full-report-cover",
+          "source": "media_library_required",
+          "authority": "backend_cms_media_library",
+          "fallback_allowed": false
+        },
+        "claim_policy": {
+          "norm_authority_required": true,
+          "norm_authority_pr": "IQ-NORM-03",
+          "public_copy_iq_estimate_claims_enabled": false,
+          "public_copy_percentile_claims_enabled": false,
+          "result_context_iq_estimate_requires_backend_report": true,
+          "paid_report_claims_require_backend_entitlement": true,
+          "copy_boundary": "仅限原始分、维度参考、原创推理练习与方法边界"
+        },
+        "structured_data": {
+          "@type": "Quiz",
+          "assessment_mode": "original_reasoning_practice",
+          "result_scope": "raw_score_dimension_reference_paid_report_gated",
+          "is_free": true,
+          "question_count": 30,
+          "time_required_minutes": 20,
+          "not_for": "医疗、雇佣或认证决策"
+        }
+      }
     },
     "hero": {
       "eyebrow": "测评入口",
