@@ -7,6 +7,7 @@ namespace Tests\Feature\Report;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessment\Scorers\Eq60ScorerV1NormedValidity;
+use App\Services\Content\Eq60ContentCompileService;
 use App\Services\Content\Eq60PackLoader;
 use App\Services\Report\Eq60ReportComposer;
 use App\Services\Report\ReportAccess;
@@ -143,11 +144,32 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertStringNotContainsString('"locked":true', $json);
         $this->assertStringNotContainsString('"blur_others":true', $json);
         $this->assertStringNotContainsString('"paywall":true', $json);
+
+        $visibleReportText = $this->visibleText((array) data_get($fixture, 'report'));
+        foreach ([
+            '付费',
+            '购买',
+            '解锁',
+            'Premium',
+            'premium',
+            'Unlock',
+            'unlock',
+            'SKU_EQ_60_FULL_299',
+            'EQ_60_FULL',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $visibleReportText);
+        }
     }
 
     private function prepareEqContent(): void
     {
-        $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
+        /** @var Eq60ContentCompileService $compiler */
+        $compiler = app(Eq60ContentCompileService::class);
+        $compiled = $compiler->compile('v1');
+        $this->assertTrue(
+            (bool) ($compiled['ok'] ?? false),
+            json_encode($compiled['errors'] ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: ''
+        );
         (new ScaleRegistrySeeder)->run();
     }
 
@@ -259,6 +281,35 @@ final class Eq60V5ReportContractTest extends TestCase
         $report['generated_at'] = '2026-05-21T00:00:00.000000Z';
 
         return $report;
+    }
+
+    /**
+     * @param  array<mixed>  $payload
+     */
+    private function visibleText(array $payload): string
+    {
+        $parts = [];
+        $walk = static function (mixed $value) use (&$walk, &$parts): void {
+            if (is_string($value)) {
+                $parts[] = $value;
+
+                return;
+            }
+
+            if (! is_array($value)) {
+                return;
+            }
+
+            foreach ($value as $child) {
+                $walk($child);
+            }
+        };
+
+        foreach (['sections', 'assets'] as $key) {
+            $walk($payload[$key] ?? []);
+        }
+
+        return implode("\n", $parts);
     }
 
     /**

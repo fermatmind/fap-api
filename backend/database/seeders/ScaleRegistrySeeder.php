@@ -662,10 +662,11 @@ final class ScaleRegistrySeeder extends Seeder
                 'upgrade_sku' => null,
             ],
             'commercial_json' => [
-                'price_tier' => 'PAID',
-                'report_benefit_code' => 'EQ_60_FULL',
-                'credit_benefit_code' => 'EQ_60_FULL',
-                'report_unlock_sku' => 'SKU_EQ_60_FULL_299',
+                'price_tier' => 'FREE',
+                'report_benefit_code' => null,
+                'credit_benefit_code' => null,
+                'report_unlock_sku' => null,
+                'offers' => [],
             ],
             'seo_schema_json' => [
                 '@context' => 'https://schema.org',
@@ -699,8 +700,8 @@ final class ScaleRegistrySeeder extends Seeder
                 zhTagline: '情绪能力图谱',
                 priority: 79,
                 rating: 4,
-                enExcerpt: 'Unlock your strengths in handling emotions and relationships. Deeply assess self-awareness and empathy to build stronger emotional connection and influence at work and in life.',
-                zhExcerpt: '解锁你处理情绪与人际关系的天赋。深度评估自我觉察与共情能力，助你在职场与生活中建立更深度的情感连接与影响力。',
+                enExcerpt: 'Understand your emotional and relational patterns. Assess self-awareness and empathy tendencies to build clearer boundaries, relationship action, and recovery strategies at work and in life.',
+                zhExcerpt: '理解你处理情绪与人际关系的模式。深度评估自我觉察与共情倾向，帮助你在职场与生活中建立更清晰的情绪边界、关系行动和自我恢复策略。',
                 enSeoCopy: 'This EQ assessment emphasizes emotional regulation and relationship communication for practical growth planning.',
                 zhSeoCopy: '该 EQ 测评强调情绪调节与关系沟通能力，用于实际成长计划参考。'
             ),
