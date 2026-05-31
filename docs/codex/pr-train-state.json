@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T22:21:00+08:00",
+  "updated_at": "2026-05-31T22:22:00+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -23,8 +23,19 @@
           "notes": "SQLite/testing env used for local checks to avoid unrelated local MySQL root credential blocker."
         },
         "github": {
-          "status": "pending",
-          "pr_url": "https://github.com/fermatmind/fap-api/pull/1785"
+          "status": "rerun_pending_after_scope_fix",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1785",
+          "previous_failure": "verify-bigfive runtime freeze guard required EQ all-free cleanup paths to be allowlisted as EQ-only non-Big-Five-impacting changes."
+        },
+        "local_fix": {
+          "status": "passed",
+          "commands": [
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff'",
+            "git diff --check",
+            "git diff --cached --check",
+            "scope validation passed"
+          ]
         }
       },
       "failure_reason": null,

@@ -36,6 +36,7 @@ prs:
       - backend/database/seeders/Pr19CommerceSeeder.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
     do_not:
       - Implement personalization route matrix.
       - Implement EQ-SJT.
