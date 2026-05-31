@@ -21608,9 +21608,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-31T13:43:00+08:00",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [
       {
         "title": "Sidecar stale item unrelated to SEO post-03D train",
@@ -32270,7 +32270,7 @@
     "branch": "codex/analytics-funnel-refresh-dry-run-sql-fix-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01 fix production dry-run SQL compatibility",
-    "status": "in_progress",
+    "status": "local_checks_passed",
     "depends_on": [
       "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01"
     ],
@@ -32486,7 +32486,7 @@
     "repo": "fap-api",
     "branch": "fix/content-packs-ci-artifact-consumer-split-01",
     "status": "pr_open",
-    "commit_sha": null,
+    "commit_sha": "f42f3017987210b4b6ee9b002f90631ce861bc7e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1768",
     "checks": {
       "authorization": {
@@ -33236,7 +33236,7 @@
       "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01 merged"
     ],
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1779",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -33640,10 +33640,160 @@
         "status": "github_checks_passed",
         "at": "2026-05-31T13:37:00+08:00",
         "summary": "GitHub checks passed and mergeStateStatus was CLEAN for PR #1777."
+      },
+      {
+        "status": "merged_reconciled",
+        "at": "2026-05-31T14:03:00+08:00",
+        "summary": "PR #1777 was squash-merged at 23dd1bc4c55947f0f7eda1d4499f62395fb62d81; origin/main contains the merge commit, remote branch was deleted, and local cleanup completed before starting PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04."
       }
     ],
     "sidecars": [],
     "next_task": "Controlled owner-mismatch repair only after explicit future approval."
+  },
+  "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04": {
+    "id": "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04",
+    "repo": "fap-api",
+    "branch": "codex/payment-alipay-owner-mismatch-controlled-repair-04",
+    "base": "main",
+    "status": "in_progress",
+    "title": "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04 state-sync owner mismatch candidate",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04 to fap-api pr-train manifest/state."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03 is merged as PR #1777 with merge commit 23dd1bc4c55947f0f7eda1d4499f62395fb62d81, and origin/main contains it."
+      },
+      "production_dry_run": {
+        "status": "pass",
+        "evidence": "Fresh production dry-run found base owner-mismatch paid/no-grant count 8, exactly one state-sync candidate with active grant and ready projection through target_attempt_id, and seven remaining human-review items. No raw identifiers were printed."
+      },
+      "controlled_production_state_sync": {
+        "status": "pass",
+        "evidence": "Exact approval was present. A transaction rechecked one candidate, locked it, and updated one order lifecycle row only. Post-repair aggregate owner-mismatch paid/no-grant count is 7 and state-sync candidate count is 0."
+      },
+      "forbidden_mutations": {
+        "status": "pass",
+        "evidence": "No benefit_grants were created, unified_access_projections were not mutated, manual pending compensation was not executed, raw logs were not read, and no deploy/Search Channel/URL submission/fap-web action occurred."
+      },
+      "focused_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=AlipayOwnerMismatchControlledRepair04 --no-ansi",
+        "evidence": "PASS: 1 test, 33 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "PASS: route:list rendered 207 routes."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "PASS: 3652 files."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "PASS: composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "pass",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "PASS: no security vulnerability advisories found."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "command": "python3 -m json.tool backend/docs/commerce/generated/alipay-owner-mismatch-controlled-repair-04.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+        "evidence": "PASS: generated JSON, state JSON, and manifest YAML parsed."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check",
+        "evidence": "PASS: git diff --check and git diff --cached --check passed."
+      },
+      "fap_web_reference_status": {
+        "status": "pass",
+        "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+        "evidence": "PASS: no fap-web changes reported."
+      },
+      "pr_created": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1779",
+        "title": "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04 state-sync owner mismatch candidate"
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #1779 GitHub checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, semgrep SARIF non-blocking upload, and Semgrep OSS."
+      },
+      "merge_state": {
+        "status": "pass",
+        "evidence": "PR #1779 mergeStateStatus was CLEAN before this ledger update."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "production_write_limited_to_orders_lifecycle_fields": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T14:02:00+08:00",
+        "summary": "User authorized manifest/state update and exact controlled production state-sync approval for the single active-grant/ready-projection owner-mismatch candidate."
+      },
+      {
+        "status": "branch_created",
+        "at": "2026-05-31T14:03:00+08:00",
+        "summary": "Created codex/payment-alipay-owner-mismatch-controlled-repair-04 from origin/main 23dd1bc4c55947f0f7eda1d4499f62395fb62d81."
+      },
+      {
+        "status": "production_dry_run_passed",
+        "at": "2026-05-31T14:06:45+08:00",
+        "summary": "Fresh production dry-run found exactly one state-sync candidate through active grant and ready projection on target_attempt_id; no raw identifiers printed."
+      },
+      {
+        "status": "controlled_state_sync_completed",
+        "at": "2026-05-31T14:08:36+08:00",
+        "summary": "Transaction updated one order lifecycle row only; post-repair owner-mismatch paid/no-grant count is 7 and state-sync candidate count is 0."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-31T14:17:00+08:00",
+        "summary": "Focused test, route:list, Pint, Composer validate/audit, JSON/YAML parse, fap-web reference status, and diff checks passed."
+      },
+      {
+        "status": "committed",
+        "at": "2026-05-31T14:20:00+08:00",
+        "summary": "Committed scoped controlled repair evidence and focused test at f42f3017987210b4b6ee9b002f90631ce861bc7e."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T14:28:00+08:00",
+        "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1779 after scoped local validation passed."
+      },
+      {
+        "status": "github_checks_passed",
+        "at": "2026-05-31T14:38:00+08:00",
+        "summary": "GitHub checks passed and mergeStateStatus was CLEAN for PR #1779."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "PAYMENT-ALIPAY-OWNER-MISMATCH-HUMAN-REVIEW-REMAINDER",
+        "status": "open",
+        "summary": "Seven remaining ATTEMPT_OWNER_MISMATCH paid/no-grant orders still require human ownership review before any repair."
+      }
+    ],
+    "next_task": "PAYMENT-ALIPAY-OWNER-MISMATCH-HUMAN-OWNERSHIP-REVIEW-05"
   },
   "AUDIT-SEC-RELEASE-TRAIN-01": {
     "id": "AUDIT-SEC-RELEASE-TRAIN-01",

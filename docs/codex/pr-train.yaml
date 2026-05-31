@@ -16721,6 +16721,51 @@ prs:
     frontend_fallback_authority: false
     next_task: controlled owner-mismatch repair only after explicit future approval
 
+  - id: PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04
+    repo: fap-api
+    branch: codex/payment-alipay-owner-mismatch-controlled-repair-04
+    base: main
+    title: "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04 state-sync owner mismatch candidate"
+    train_scope: payment_alipay_owner_mismatch_controlled_repair
+    risk_level: p0_payment_fulfillment_data_repair
+    depends_on:
+      - PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03
+    allowed_paths:
+      - backend/docs/runbooks/alipay-owner-mismatch-controlled-repair.md
+      - backend/docs/commerce/alipay-owner-mismatch-controlled-repair-04.md
+      - backend/docs/commerce/generated/alipay-owner-mismatch-controlled-repair-04.v1.json
+      - backend/tests/Feature/Commerce/AlipayOwnerMismatchControlledRepair04Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Perform a dry-run/preflight for the single Alipay owner-mismatch state-sync candidate that already has an active benefit grant and ready unified access projection.
+      - If the fresh preflight still matches exactly one candidate, execute a controlled production state-sync update limited to orders.grant_state, orders.status, orders.fulfilled_at, and orders.updated_at.
+      - Do not create benefit_grants, mutate unified_access_projections, run manual pending compensation, read raw logs, deploy, mutate CMS/content, submit URLs, trigger Search Channel, or change fap-web.
+      - Record the non-sensitive aggregate repair evidence in docs, generated JSON, runbook, focused test, and pr-train state.
+    validation:
+      - cd backend && php artisan test --filter=AlipayOwnerMismatchControlledRepair04 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/commerce/generated/alipay-owner-mismatch-controlled-repair-04.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: human ownership review is still required for the remaining owner-mismatch items
 
   - id: ANALYTICS-FUNNEL-EVENT-TAXONOMY-01
     repo: fap-api

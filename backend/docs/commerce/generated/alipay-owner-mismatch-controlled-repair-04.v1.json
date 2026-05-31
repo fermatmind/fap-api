@@ -1,0 +1,73 @@
+{
+  "schema_version": "alipay-owner-mismatch-controlled-repair-04.v1",
+  "task": "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04",
+  "final_decision": "owner_mismatch_controlled_repair_completed_state_sync_only",
+  "production_write_executed": true,
+  "dry_run_first": true,
+  "dry_run_passed": true,
+  "checked_at": "2026-05-31T06:08:36Z",
+  "approval_scope": {
+    "single_state_sync_candidate_only": true,
+    "requires_active_grant": true,
+    "requires_ready_projection": true,
+    "allowed_fields": [
+      "orders.grant_state",
+      "orders.status",
+      "orders.fulfilled_at",
+      "orders.updated_at"
+    ]
+  },
+  "preflight": {
+    "base_owner_mismatch_paid_no_grant_count": 8,
+    "state_sync_candidate_count": 1,
+    "active_grant_by_attempt_id_count": 1,
+    "ready_projection_by_attempt_id_count": 1,
+    "human_review_required_count": 7,
+    "raw_identifiers_printed": false
+  },
+  "controlled_repair": {
+    "transactional": true,
+    "row_lock_used": true,
+    "updated_count": 1,
+    "updated_fields": [
+      "orders.grant_state",
+      "orders.status",
+      "orders.fulfilled_at",
+      "orders.updated_at"
+    ],
+    "set_grant_state": "granted",
+    "set_status": "fulfilled",
+    "set_fulfilled_at_if_null": true
+  },
+  "post_repair": {
+    "owner_mismatch_paid_no_grant_count": 7,
+    "state_sync_candidate_count": 0,
+    "remaining_human_review_required_count": 7
+  },
+  "closed_gates": {
+    "benefit_grants_created": 0,
+    "projection_mutated": false,
+    "manual_pending_compensation_executed": false,
+    "raw_logs_read": false,
+    "cms_mutation": false,
+    "deploy": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "fap_web_change": false
+  },
+  "remaining_items_policy": {
+    "human_ownership_review_required": 7,
+    "automatic_scheduler_repair_allowed": false,
+    "reason": "Remaining owner-mismatch items do not have active grants and ready projections."
+  },
+  "no_benefit_grant_creation": true,
+  "no_projection_mutation": true,
+  "no_manual_pending_compensation": true,
+  "no_raw_log_read": true,
+  "no_cms_mutation": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_fap_web_change": true,
+  "next_task": "PAYMENT-ALIPAY-OWNER-MISMATCH-HUMAN-OWNERSHIP-REVIEW-05"
+}
