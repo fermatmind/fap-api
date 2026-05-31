@@ -17197,6 +17197,47 @@ prs:
     deploy_allowed: false
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
+    next_task: AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01
+
+  - id: AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01
+    repo: fap-api
+    branch: audit/sec-train-ledger-closeout-01
+    base: main
+    title: "AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01 close out security audit train ledger"
+    train_scope: security_audit_train_ledger_closeout
+    risk_level: low_metadata_only
+    depends_on:
+      - AUDIT-SEC-CONTENT-IMPORT-SAFETY-01 merged
+    allowed_paths:
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Record merged and cleanup facts for SECURITY-AUDIT-36-PR-TRAIN PRs already merged into origin/main.
+      - Keep the train ledger consistent after PR #1780, #1786, #1793, #1796, #1800, and #1803.
+      - Do not change application code, routes, migrations, content payloads, generated content packs, fap-web, deploy workflows, or production state.
+    do_not:
+      - Do not modify backend runtime code, tests, migrations, routes, content baselines, content packs, fap-web, sitemap generation, llms generation, Search Channel, or URL submission files.
+      - Do not deploy, mutate production, run production SSH, or approve production environments.
+    validation:
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
     next_task: null
 
   - id: PR-POL-01
