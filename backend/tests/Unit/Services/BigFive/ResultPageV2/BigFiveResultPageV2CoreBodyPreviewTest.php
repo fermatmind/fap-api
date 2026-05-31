@@ -1813,8 +1813,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Http/Controllers/API/V0_5/Career/CareerJobListController.php',
+            'backend/app/Domain/Career/Publish/CareerFirstWaveDiscoverabilityManifestService.php',
+            'backend/app/Domain/Career/Publish/CareerFirstWaveLaunchTierSummaryService.php',
+            'backend/app/Domain/Career/Publish/CareerFirstWaveLifecycleSummaryService.php',
+            'backend/app/Domain/Career/Publish/CareerFirstWaveNextStepLinksService.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionVisibility.php',
+            'backend/app/Domain/Career/Publish/FirstWavePublishReadyValidator.php',
+            'backend/app/Domain/Career/Publish/FirstWaveReadinessSummaryService.php',
             'backend/app/Providers/AppServiceProvider.php',
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobListBundleBuilder.php',
@@ -3884,8 +3890,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_5/Career/CareerJobListController.php',
+            'backend/app/Domain/Career/Publish/CareerFirstWaveDiscoverabilityManifestService.php',
+            'backend/app/Domain/Career/Publish/CareerFirstWaveLaunchTierSummaryService.php',
+            'backend/app/Domain/Career/Publish/CareerFirstWaveLifecycleSummaryService.php',
+            'backend/app/Domain/Career/Publish/CareerFirstWaveNextStepLinksService.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionVisibility.php',
+            'backend/app/Domain/Career/Publish/FirstWavePublishReadyValidator.php',
+            'backend/app/Domain/Career/Publish/FirstWaveReadinessSummaryService.php',
             'backend/app/Providers/AppServiceProvider.php',
             'backend/app/Services/Career/Bundles/CareerJobListBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerSearchBundleBuilder.php',
