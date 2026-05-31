@@ -1,0 +1,39 @@
+{
+  "schema_version": "pr-fdn-social-sync-mvp-01.v1",
+  "task": "PR-FDN-SOCIAL-SYNC-MVP-01",
+  "final_decision": "pr_fdn_social_sync_mvp_01_completed_ready_for_frontend_manual_link_display_review",
+  "mvp_mode": "manual_post_then_record_url",
+  "target_surface": "foundation_daily_giving_records",
+  "implemented": {
+    "manual_social_sync_links_model_method": true,
+    "manual_social_sync_status_model_method": true,
+    "ops_table_manual_social_sync_badge": true,
+    "ops_form_manual_only_boundary_copy": true,
+    "public_api_uses_existing_social_url_fields": true
+  },
+  "existing_social_fields_used": [
+    "social_x_url",
+    "social_linkedin_url",
+    "social_weibo_url",
+    "social_xiaohongshu_url",
+    "social_other_links"
+  ],
+  "admin_workflow": [
+    "Human publishes a social post manually on the external platform.",
+    "Human reviews the final public post URL.",
+    "Ops user records the published URL in the existing Daily Giving social-link field.",
+    "Public API exposes the recorded social links from backend authority."
+  ],
+  "no_database_migration": true,
+  "no_new_public_api_route": true,
+  "no_production_mutation": true,
+  "no_cms_mutation": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_api_call": true,
+  "no_credentials_handled": true,
+  "no_automatic_posting": true,
+  "no_social_platform_client_added": true,
+  "next_task": "PR-FDN-SOCIAL-LINK-DISPLAY-REVIEW-01"
+}

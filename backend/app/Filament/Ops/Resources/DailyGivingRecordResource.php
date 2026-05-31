@@ -131,25 +131,34 @@ class DailyGivingRecordResource extends Resource
                             ])
                             ->columns(2),
                         Forms\Components\Section::make('Social Links')
+                            ->description('Manual social sync MVP: publish posts manually in each platform, then paste the published post URLs here. No automatic posting, credential handling, queues, or external API calls run from these fields.')
                             ->schema([
+                                Forms\Components\Placeholder::make('manual_social_sync_boundary')
+                                    ->label('Manual sync boundary')
+                                    ->content('These links are public references only. Keep platform publishing outside FermatMind, then record the final post URLs here after human review.'),
                                 Forms\Components\TextInput::make('social_x_url')
                                     ->url()
                                     ->maxLength(2048)
-                                    ->label('X (Twitter) URL'),
+                                    ->label('X (Twitter) URL')
+                                    ->helperText('Paste the published X post URL after manual posting.'),
                                 Forms\Components\TextInput::make('social_linkedin_url')
                                     ->url()
                                     ->maxLength(2048)
-                                    ->label('LinkedIn URL'),
+                                    ->label('LinkedIn URL')
+                                    ->helperText('Paste the published LinkedIn post URL after manual posting.'),
                                 Forms\Components\TextInput::make('social_weibo_url')
                                     ->url()
                                     ->maxLength(2048)
-                                    ->label('Weibo URL'),
+                                    ->label('Weibo URL')
+                                    ->helperText('Paste the published Weibo post URL after manual posting.'),
                                 Forms\Components\TextInput::make('social_xiaohongshu_url')
                                     ->url()
                                     ->maxLength(2048)
-                                    ->label('Xiaohongshu URL'),
+                                    ->label('Xiaohongshu URL')
+                                    ->helperText('Paste the published Xiaohongshu post URL after manual posting.'),
                                 Forms\Components\KeyValue::make('social_other_links')
-                                    ->label('Other Social Links'),
+                                    ->label('Other Social Links')
+                                    ->helperText('Use label => published URL for any other manually posted social reference.'),
                             ])
                             ->columns(2),
                         Forms\Components\Section::make('Notes')
@@ -218,6 +227,14 @@ class DailyGivingRecordResource extends Resource
                         default => 'gray',
                     })
                     ->sortable(),
+                Tables\Columns\TextColumn::make('manual_social_sync_status')
+                    ->label('Manual Social Sync')
+                    ->state(fn (DailyGivingRecord $record): string => $record->manualSocialSyncStatus())
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        DailyGivingRecord::MANUAL_SOCIAL_SYNC_RECORDED => 'success',
+                        default => 'gray',
+                    }),
                 Tables\Columns\IconColumn::make('is_public')
                     ->boolean()
                     ->sortable(),
