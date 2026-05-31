@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:07:00+08:00",
+  "updated_at": "2026-05-31T16:11:00+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -55,12 +55,12 @@
     "PR-EQ-PER-02": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-02-backend-route-matrix",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [
         "PR-EQ-PER-01"
       ],
       "commit_sha": "686dd7cb14b75ad67dc7d38a5401e61fa563a085",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1791",
       "checks": {
         "local": {
           "status": "passed",
