@@ -33724,6 +33724,14 @@
         "status": "pass",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1779",
         "title": "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04 state-sync owner mismatch candidate"
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #1779 GitHub checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, semgrep SARIF non-blocking upload, and Semgrep OSS."
+      },
+      "merge_state": {
+        "status": "pass",
+        "evidence": "PR #1779 mergeStateStatus was CLEAN before this ledger update."
       }
     },
     "failure_reason": null,
@@ -33771,6 +33779,11 @@
         "status": "pr_open",
         "at": "2026-05-31T14:28:00+08:00",
         "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1779 after scoped local validation passed."
+      },
+      {
+        "status": "github_checks_passed",
+        "at": "2026-05-31T14:38:00+08:00",
+        "summary": "GitHub checks passed and mergeStateStatus was CLEAN for PR #1779."
       }
     ],
     "sidecars": [
