@@ -14,7 +14,7 @@ final class IqBeta30OriginalBankSpecTest extends TestCase
 
     private function readJson(string $file): array
     {
-        $payload = json_decode((string) file_get_contents($this->bankDir() . '/' . $file), true);
+        $payload = json_decode((string) file_get_contents($this->bankDir().'/'.$file), true);
         $this->assertIsArray($payload);
 
         return $payload;

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Models\Attempt;
-use App\Models\Result;
 use App\Models\EmailPreference;
+use App\Models\Result;
 use App\Services\Email\EmailCaptureService;
 use App\Services\Email\EmailPreferenceService;
 use App\Support\PiiCipher;
