@@ -51,7 +51,9 @@ class AccessResolver
         bool $hasFullAccess,
         bool $forceFreeOnly,
         array $modulesOffered,
-        bool $allowAttemptScopedPaidModules = true
+        bool $allowAttemptScopedPaidModules = true,
+        ?string $userId = null,
+        ?string $anonId = null
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
         if ($forceFreeOnly && $this->isForceFreeFullAccessScale($scaleCode)) {
@@ -66,12 +68,13 @@ class AccessResolver
                 'modules_allowed' => $modulesAllowed,
                 'modules_preview' => [],
                 'has_paid_module_access' => true,
+                'has_full_access' => true,
                 'unlock_stage' => ReportAccess::UNLOCK_STAGE_FULL,
             ];
         }
 
         $modulesAllowed = $allowAttemptScopedPaidModules
-            ? $this->entitlements->getAllowedModulesForAttempt($orgId, $attemptId)
+            ? $this->entitlements->getAllowedModulesForAttemptForActor($orgId, $attemptId, $userId, $anonId)
             : ReportAccess::defaultModulesAllowedForLocked($scaleCode);
         $modulesAllowed = $this->filterModulesForScale($scaleCode, $modulesAllowed);
 
@@ -82,7 +85,9 @@ class AccessResolver
         $freeModule = ReportAccess::freeModuleForScale($scaleCode);
         $fullModule = ReportAccess::fullModuleForScale($scaleCode);
 
-        if ($hasFullAccess) {
+        $hasFullModuleAccess = in_array($fullModule, $modulesAllowed, true);
+        if ($hasFullAccess || (ReportAccess::isIqScale($scaleCode) && $hasFullModuleAccess)) {
+            $hasFullAccess = true;
             $modulesAllowed = ReportAccess::normalizeModules(array_merge(
                 $modulesAllowed,
                 $modulesOffered,
@@ -105,6 +110,7 @@ class AccessResolver
             'modules_allowed' => $modulesAllowed,
             'modules_preview' => $modulesPreview,
             'has_paid_module_access' => $hasPaidModuleAccess,
+            'has_full_access' => $hasFullAccess,
             'unlock_stage' => $unlockStage,
         ];
     }
@@ -159,6 +165,10 @@ class AccessResolver
             ReportAccess::SCALE_RIASEC => array_values(array_filter(
                 $modules,
                 static fn (string $module): bool => str_starts_with(strtolower($module), 'riasec_')
+            )),
+            ReportAccess::SCALE_IQ_RAVEN, ReportAccess::SCALE_IQ_INTELLIGENCE_QUOTIENT => array_values(array_filter(
+                $modules,
+                static fn (string $module): bool => str_starts_with(strtolower($module), 'iq_')
             )),
             default => $modules,
         };

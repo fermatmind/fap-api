@@ -18118,6 +18118,14 @@ prs:
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: IQ-PAID-REPORT-02
 
+    allowed_paths:
+      - backend/app/Services/Report/ReportAccess.php
+      - backend/app/Services/Report/Resolvers/AccessResolver.php
+      - backend/app/Services/Commerce/EntitlementManager.php
+      - backend/app/Services/Report/ReportGatekeeper.php
+      - backend/tests/Feature/V0_3/IqReportContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
   - id: IQ-PAID-REPORT-02
     repo: fap-web
     depends_on: [IQ-PAID-REPORT-01]

@@ -29614,6 +29614,53 @@
           "summary": "Fixed GitHub verify-mbti-legacy classifier failure for EmailOutboxService result access link delivery; reran focused email tests, BigFiveResultPageV2CoreBodyPreview, route list, Pint, composer validate/audit, JSON/YAML parse, diff check, and ci_verify_mbti locally."
         }
       ]
+    },
+    "IQ-NORM-03": {
+      "status": "merged",
+      "commit_sha": "fa144c9207c062c38238afc709ebb7f1e45274ba",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1810",
+      "pr_number": 1810,
+      "checks": {
+        "github": "passed",
+        "post_merge_revalidate": "passed"
+      },
+      "failure_reason": null,
+      "merged_at": "2026-05-31T15:13:21Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "scope_validation": {
+        "post_merge_revalidated": true
+      }
+    },
+    "IQ-PAID-REPORT-01": {
+      "status": "local_scope_validation_passed",
+      "branch": "codex/iq-paid-report-01-entitlement-contract",
+      "commit_sha": null,
+      "pr_url": null,
+      "pr_number": null,
+      "checks": {
+        "php_lint": "passed",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqPaidReport --no-ansi": "passed_with_existing_warnings",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportContractTest --no-ansi": "passed_with_existing_warnings",
+        "git diff --check": "passed"
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "updated_at": "2026-05-31T23:45:00+08:00",
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "changed_files": [
+          "backend/app/Services/Commerce/EntitlementManager.php",
+          "backend/app/Services/Report/ReportAccess.php",
+          "backend/app/Services/Report/ReportGatekeeper.php",
+          "backend/app/Services/Report/Resolvers/AccessResolver.php",
+          "backend/tests/Feature/V0_3/IqReportContractTest.php",
+          "docs/codex/pr-train-state.json",
+          "docs/codex/pr-train.yaml"
+        ]
+      }
     }
   },
   "RESULT-EN-PARITY-04": {

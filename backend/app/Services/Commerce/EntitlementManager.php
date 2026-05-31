@@ -254,7 +254,33 @@ class EntitlementManager
             return ReportAccess::defaultModulesAllowedForLocked();
         }
 
-        return $this->modulesAllowedFromGrantRows($orgId, $this->activeGrantRowsForAttempt($orgId, $attemptId));
+        $scaleCode = $this->resolveScaleCodeForAttempt($orgId, $attemptId);
+
+        return $this->modulesAllowedFromGrantRows($orgId, $this->activeGrantRowsForAttempt($orgId, $attemptId), $scaleCode);
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function getAllowedModulesForAttemptForActor(
+        int $orgId,
+        string $attemptId,
+        ?string $userId,
+        ?string $anonId,
+        ?string $orderNo = null
+    ): array {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return ReportAccess::defaultModulesAllowedForLocked();
+        }
+
+        $scaleCode = $this->resolveScaleCodeForAttempt($orgId, $attemptId);
+
+        return $this->modulesAllowedFromGrantRows(
+            $orgId,
+            $this->ownedActiveGrantRowsForAttempt($orgId, $attemptId, $userId, $anonId, $orderNo),
+            $scaleCode
+        );
     }
 
     public function hasActiveGrantForAttemptBenefitCode(int $orgId, string $attemptId, string $benefitCode): bool
@@ -331,7 +357,7 @@ class EntitlementManager
             }
         }
 
-        $modulesAllowed = $this->modulesAllowedFromGrantRows($orgId, $rows);
+        $modulesAllowed = $this->modulesAllowedFromGrantRows($orgId, $rows, $scaleCode);
         $freeModule = ReportAccess::freeModuleForScale($scaleCode);
         $fullModule = ReportAccess::fullModuleForScale($scaleCode);
         $hasPaidModuleAccess = count(array_diff($modulesAllowed, [$freeModule])) > 0;
@@ -558,9 +584,9 @@ class EntitlementManager
      * @param  Collection<int,object>  $rows
      * @return list<string>
      */
-    private function modulesAllowedFromGrantRows(int $orgId, Collection $rows): array
+    private function modulesAllowedFromGrantRows(int $orgId, Collection $rows, ?string $scaleCode = null): array
     {
-        $modules = ReportAccess::defaultModulesAllowedForLocked();
+        $modules = ReportAccess::defaultModulesAllowedForLocked($scaleCode);
         foreach ($rows as $row) {
             $meta = $this->decodeMeta($row->meta_json ?? null);
             $modules = array_merge(
