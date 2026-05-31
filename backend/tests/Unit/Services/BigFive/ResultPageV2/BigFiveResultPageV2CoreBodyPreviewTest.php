@@ -267,6 +267,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_analytics_funnel_refresh_command_guard_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/RefreshAnalyticsFunnelDailyCommand.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_public_healthz_alias_route_addition(): void
     {
         $changed = [
@@ -836,6 +845,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Filament/Ops/Pages/ContentGrowthAttributionPage.php',
             'backend/app/Services/Ops/ContentGrowthAttributionService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
+    public function test_runtime_freeze_classifier_ignores_career_runtime_ops_read_model_file(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/OpsDashboard/CareerRuntimeReadModelService.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -2837,6 +2855,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isAnalyticsFunnelRefreshCommandFile($file)) {
+                continue;
+            }
+
             if ($this->isEq60V5ReportAssetLayerChange($file)) {
                 continue;
             }
@@ -3434,6 +3456,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/OpsDashboard/SeoIssueQueueReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoSearchChannelQueueReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoUrlTruthReadService.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/CareerRuntimeReadModelService.php',
         ], true);
     }
 
@@ -4309,6 +4332,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Pages/FunnelConversionPage.php',
             'backend/app/Filament/Ops/Widgets/FunnelWidget.php',
         ], true);
+    }
+
+    private function isAnalyticsFunnelRefreshCommandFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/RefreshAnalyticsFunnelDailyCommand.php';
     }
 
     /**

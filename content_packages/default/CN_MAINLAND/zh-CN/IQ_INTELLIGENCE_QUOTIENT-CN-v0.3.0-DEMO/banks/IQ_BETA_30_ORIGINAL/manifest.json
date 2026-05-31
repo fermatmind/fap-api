@@ -1,13 +1,16 @@
 {
-    "schema_version": "fm.iq.item_bank_manifest.v1",
-    "bank_id": "IQ_BETA_30_ORIGINAL",
+    "schema_version": "fm.iq.item_bank.manifest.v1",
     "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
-    "status": "planned_spec_only",
+    "bank_id": "IQ_BETA_30_ORIGINAL",
+    "name": "FermatMind IQ Beta 30 Original",
+    "status": "beta_internal_validation",
     "runtime_bound": false,
-    "content_package_version": "v0.3.0-DEMO",
-    "bank_dir": "content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_BETA_30_ORIGINAL",
-    "item_count_target": 30,
-    "option_codes_target": [
+    "commerce_unlock_required": false,
+    "locale": "zh-CN",
+    "market": "CN_MAINLAND",
+    "item_count": 30,
+    "option_count": 6,
+    "option_codes": [
         "A",
         "B",
         "C",
@@ -15,13 +18,13 @@
         "E",
         "F"
     ],
-    "time_limit_minutes_target": 20,
-    "dimension_counts_target": {
+    "target_minutes": 20,
+    "dimension_targets": {
         "VSPR": 14,
         "VSI": 10,
         "NPR": 6
     },
-    "item_family_counts_target": {
+    "item_family_targets": {
         "matrix_3x3": 10,
         "matrix_2x2": 4,
         "series": 4,
@@ -30,11 +33,27 @@
         "overlay": 3,
         "numeric_pattern": 2
     },
+    "files": {
+        "items": "items.json",
+        "answer_key": "answer_key.json",
+        "scoring_spec": "scoring_spec.json"
+    },
     "copyright_policy": {
-        "source_mode_required": "repo_generated",
-        "third_party_item_copying_allowed": false,
-        "third_party_visual_tracing_allowed": false,
-        "license_verification_required_for_external_items": true
+        "source": "repo_generated_original",
+        "copied_from_third_party": false,
+        "traced_from_third_party": false,
+        "third_party_license_required": false,
+        "myiq_science_requires_license_verification_gate_before_use": true
+    },
+    "public_payload_policy": {
+        "may_emit_items": true,
+        "may_emit_answer_key": false,
+        "may_emit_solution_rule": false
+    },
+    "norm_policy": {
+        "iq_claims_enabled": false,
+        "percentile_claims_enabled": false,
+        "population_norm_table_required_before_production": true
     },
     "review_gates": [
         "copyright_gate",
@@ -46,25 +65,11 @@
         "provenance_gate",
         "contract_gate"
     ],
-    "public_payload_policy": {
-        "structured_svg_only": true,
-        "raw_svg_html_allowed": false,
-        "answer_key_public_allowed": false,
-        "solution_rule_public_allowed": false,
-        "frontend_scoring_allowed": false
-    },
-    "norm_policy": {
-        "norm_table_required_before_iq_estimate_claims": true,
-        "iq_estimate_runtime_authoritative": false,
-        "percentile_runtime_authoritative": false,
-        "confidence_interval_runtime_authoritative": false
-    },
-    "deferred_to": {
-        "final_item_generation": "IQ-BANK-30-02",
-        "import_provenance_redaction_gate": "IQ-BANK-30-03",
-        "scoring_quality_stability": "IQ-SCORE-30-01",
-        "seo_claim_launch_guard": "IQ-CLAIM-SEO-01",
-        "cms_landing_authority": "IQ-CMS-LANDING-01",
-        "production_like_smoke": "IQ-LIVE-SMOKE-01"
-    }
+    "deferred_prs": [
+        "IQ-BANK-30-03",
+        "IQ-SCORE-30-01",
+        "IQ-CLAIM-SEO-01",
+        "IQ-CMS-LANDING-01",
+        "IQ-LIVE-SMOKE-01"
+    ]
 }

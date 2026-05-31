@@ -1,0 +1,26 @@
+{
+    "schema_version": "fm.iq.scoring_spec.v1",
+    "bank_id": "IQ_BETA_30_ORIGINAL",
+    "status": "beta_internal_validation",
+    "raw_score": {
+        "min": 0,
+        "max": 30,
+        "correct_item_value": 1,
+        "incorrect_item_value": 0
+    },
+    "dimension_counts": {
+        "VSPR": 14,
+        "VSI": 10,
+        "NPR": 6
+    },
+    "norm_policy": {
+        "iq_claims_enabled": false,
+        "percentile_claims_enabled": false,
+        "population_norm_table_required_before_production": true,
+        "beta_copy_allowed_claim": "practice-style cognitive reasoning score only"
+    },
+    "runtime_binding": {
+        "enabled": false,
+        "deferred_to_pr": "IQ-SCORE-30-01"
+    }
+}

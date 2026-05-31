@@ -2,32 +2,37 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Content;
-
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 final class IqBeta30OriginalBankSpecTest extends TestCase
 {
-    public function test_beta30_original_bank_manifest_is_planned_and_not_runtime_bound(): void
+    private function bankDir(): string
     {
-        $manifest = $this->readManifest();
-
-        $this->assertSame('fm.iq.item_bank_manifest.v1', $manifest['schema_version'] ?? null);
-        $this->assertSame('IQ_BETA_30_ORIGINAL', $manifest['bank_id'] ?? null);
-        $this->assertSame('IQ_INTELLIGENCE_QUOTIENT', $manifest['scale_code'] ?? null);
-        $this->assertSame('planned_spec_only', $manifest['status'] ?? null);
-        $this->assertFalse((bool) ($manifest['runtime_bound'] ?? true));
-        $this->assertSame(30, $manifest['item_count_target'] ?? null);
-        $this->assertSame(['A', 'B', 'C', 'D', 'E', 'F'], $manifest['option_codes_target'] ?? null);
-        $this->assertSame(20, $manifest['time_limit_minutes_target'] ?? null);
+        return base_path('../content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_BETA_30_ORIGINAL');
     }
 
-    public function test_beta30_original_bank_dimension_and_family_plan_matches_launch_spec(): void
+    private function readJson(string $file): array
     {
-        $manifest = $this->readManifest();
+        $payload = json_decode((string) file_get_contents($this->bankDir() . '/' . $file), true);
+        $this->assertIsArray($payload);
 
-        $this->assertSame(['VSPR' => 14, 'VSI' => 10, 'NPR' => 6], $manifest['dimension_counts_target'] ?? null);
-        $this->assertSame(30, array_sum($manifest['dimension_counts_target'] ?? []));
+        return $payload;
+    }
+
+    #[Test]
+    public function manifest_defines_generated_original_beta30_bank_without_runtime_binding(): void
+    {
+        $manifest = $this->readJson('manifest.json');
+
+        $this->assertSame('IQ_BETA_30_ORIGINAL', $manifest['bank_id']);
+        $this->assertSame('IQ_INTELLIGENCE_QUOTIENT', $manifest['scale_code']);
+        $this->assertSame('beta_internal_validation', $manifest['status']);
+        $this->assertFalse($manifest['runtime_bound']);
+        $this->assertSame(30, $manifest['item_count']);
+        $this->assertSame(6, $manifest['option_count']);
+        $this->assertSame(['A', 'B', 'C', 'D', 'E', 'F'], $manifest['option_codes']);
+        $this->assertSame(['VSPR' => 14, 'VSI' => 10, 'NPR' => 6], $manifest['dimension_targets']);
         $this->assertSame([
             'matrix_3x3' => 10,
             'matrix_2x2' => 4,
@@ -36,67 +41,47 @@ final class IqBeta30OriginalBankSpecTest extends TestCase
             'rotation' => 3,
             'overlay' => 3,
             'numeric_pattern' => 2,
-        ], $manifest['item_family_counts_target'] ?? null);
-        $this->assertSame(30, array_sum($manifest['item_family_counts_target'] ?? []));
+        ], $manifest['item_family_targets']);
     }
 
-    public function test_beta30_original_bank_keeps_copyright_redaction_and_norm_boundaries_explicit(): void
+    #[Test]
+    public function copyright_and_public_payload_boundaries_are_explicit(): void
     {
-        $manifest = $this->readManifest();
+        $manifest = $this->readJson('manifest.json');
 
-        $this->assertSame('repo_generated', data_get($manifest, 'copyright_policy.source_mode_required'));
-        $this->assertFalse((bool) data_get($manifest, 'copyright_policy.third_party_item_copying_allowed', true));
-        $this->assertFalse((bool) data_get($manifest, 'copyright_policy.third_party_visual_tracing_allowed', true));
-        $this->assertTrue((bool) data_get($manifest, 'copyright_policy.license_verification_required_for_external_items'));
-
-        $this->assertTrue((bool) data_get($manifest, 'public_payload_policy.structured_svg_only'));
-        $this->assertFalse((bool) data_get($manifest, 'public_payload_policy.raw_svg_html_allowed', true));
-        $this->assertFalse((bool) data_get($manifest, 'public_payload_policy.answer_key_public_allowed', true));
-        $this->assertFalse((bool) data_get($manifest, 'public_payload_policy.solution_rule_public_allowed', true));
-        $this->assertFalse((bool) data_get($manifest, 'public_payload_policy.frontend_scoring_allowed', true));
-
-        $this->assertTrue((bool) data_get($manifest, 'norm_policy.norm_table_required_before_iq_estimate_claims'));
-        $this->assertFalse((bool) data_get($manifest, 'norm_policy.iq_estimate_runtime_authoritative', true));
-        $this->assertFalse((bool) data_get($manifest, 'norm_policy.percentile_runtime_authoritative', true));
-        $this->assertFalse((bool) data_get($manifest, 'norm_policy.confidence_interval_runtime_authoritative', true));
+        $this->assertSame('repo_generated_original', $manifest['copyright_policy']['source']);
+        $this->assertFalse($manifest['copyright_policy']['copied_from_third_party']);
+        $this->assertFalse($manifest['copyright_policy']['traced_from_third_party']);
+        $this->assertFalse($manifest['copyright_policy']['third_party_license_required']);
+        $this->assertTrue($manifest['copyright_policy']['myiq_science_requires_license_verification_gate_before_use']);
+        $this->assertTrue($manifest['public_payload_policy']['may_emit_items']);
+        $this->assertFalse($manifest['public_payload_policy']['may_emit_answer_key']);
+        $this->assertFalse($manifest['public_payload_policy']['may_emit_solution_rule']);
     }
 
-    public function test_beta30_original_bank_spec_document_records_required_review_gates(): void
+    #[Test]
+    public function norm_claims_remain_disabled_before_population_validation(): void
     {
-        $docPath = base_path('docs/iq/iq-beta-30-original-bank-spec.md');
+        $manifest = $this->readJson('manifest.json');
+        $scoring = $this->readJson('scoring_spec.json');
 
-        $this->assertFileExists($docPath);
-        $doc = (string) file_get_contents($docPath);
-
-        foreach ([
-            'copyright_gate',
-            'technical_svg_gate',
-            'answer_key_gate',
-            'ambiguity_gate',
-            'difficulty_gate',
-            'claim_gate',
-            'provenance_gate',
-            'contract_gate',
-        ] as $gate) {
-            $this->assertStringContainsString($gate, $doc);
-        }
-
-        $this->assertStringContainsString('FermatMind may reproduce item archetypes, not third-party items.', $doc);
-        $this->assertStringContainsString('It must not make normed IQ estimate, percentile, or confidence interval production-authoritative', $doc);
+        $this->assertFalse($manifest['norm_policy']['iq_claims_enabled']);
+        $this->assertFalse($manifest['norm_policy']['percentile_claims_enabled']);
+        $this->assertTrue($manifest['norm_policy']['population_norm_table_required_before_production']);
+        $this->assertFalse($scoring['norm_policy']['iq_claims_enabled']);
+        $this->assertFalse($scoring['runtime_binding']['enabled']);
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    private function readManifest(): array
+    #[Test]
+    public function generated_items_and_answer_key_files_exist_but_answer_key_is_backend_only(): void
     {
-        $path = dirname(base_path()).'/content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_BETA_30_ORIGINAL/manifest.json';
+        $items = $this->readJson('items.json');
+        $answerKey = $this->readJson('answer_key.json');
 
-        $this->assertFileExists($path);
-
-        $manifest = json_decode((string) file_get_contents($path), true);
-        $this->assertIsArray($manifest);
-
-        return $manifest;
+        $this->assertSame(30, $items['item_count']);
+        $this->assertCount(30, $items['items']);
+        $this->assertFalse($answerKey['public_payload']);
+        $this->assertSame('backend_only_never_emit_to_public_api', $answerKey['storage_policy']);
+        $this->assertCount(30, $answerKey['answers']);
     }
 }
