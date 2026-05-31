@@ -21553,6 +21553,26 @@
         "scope_validation": {
           "status": "pass",
           "evidence": "Changed files are confined to PR1 service/docs/test plus authorized seven-entry manifest/state ledger update."
+        },
+        "github_verify_bigfive_initial": {
+          "status": "failed_then_fixed_locally",
+          "command": "GitHub Actions verify-bigfive",
+          "evidence": "Initial CI failed because BigFive runtime freeze classifier treated backend/app/Services/SeoIntel/OpsDashboard/CareerRuntimeReadModelService.php as runtime-impacting; scoped classifier whitelist/test fix added."
+        },
+        "bigfive_freeze_classifier_local": {
+          "status": "pass",
+          "command": "php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+          "evidence": "145 tests passed, 492 assertions."
+        },
+        "focused_phpunit_after_ci_fix": {
+          "status": "pass",
+          "command": "php artisan test --filter=Career1046OpsReadModelRepair01 --no-ansi --display-warnings",
+          "evidence": "2 tests passed, 37 assertions."
+        },
+        "pint_after_ci_fix": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "3654 files passed."
         }
       },
       "failure_reason": null,
@@ -21591,6 +21611,12 @@
           "from": "committed",
           "to": "pr_open",
           "note": "Pushed branch and opened PR https://github.com/fermatmind/fap-api/pull/1784; GitHub checks pending."
+        },
+        {
+          "at": "2026-05-31T15:40:00+08:00",
+          "from": "pr_open",
+          "to": "ci_fix_local_validation_passed",
+          "note": "Fixed verify-bigfive freeze classifier false positive for the Career SeoIntel OpsDashboard read model and reran focused PR, BigFive freeze, Pint, JSON/YAML, and diff checks locally."
         }
       ],
       "sidecars": [],
