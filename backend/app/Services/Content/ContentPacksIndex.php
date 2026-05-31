@@ -56,27 +56,14 @@ final class ContentPacksIndex
                 }
             }
 
-            if (is_array($cached)) {
+            if (is_array($cached) && $this->isCachedIndexUsable($cached, $packsRootFs, $driver, $defaults)) {
                 return $cached;
             }
         }
 
         $index = $this->fallbackScanner()->scan($packsRootFs, $driver, $defaults);
 
-        try {
-            $cache->put($cacheKey, $index, self::CACHE_TTL_SECONDS);
-        } catch (\Throwable $e) {
-            try {
-                Cache::store()->put($cacheKey, $index, self::CACHE_TTL_SECONDS);
-            } catch (\Throwable $e2) {
-                Log::warning('CONTENT_PACKS_INDEX_CACHE_WRITE_FAILED', [
-                    'cache_key' => $cacheKey,
-                    'store' => 'default',
-                    'ttl' => self::CACHE_TTL_SECONDS,
-                    'exception' => $e2,
-                ]);
-            }
-        }
+        $this->cacheIndex($cache, $cacheKey, $index);
 
         return $index;
     }
@@ -188,6 +175,58 @@ final class ContentPacksIndex
         ];
     }
 
+    private function isCachedIndexUsable(array $index, string $packsRootFs, string $driver, array $defaults): bool
+    {
+        if (($index['ok'] ?? false) !== true) {
+            return false;
+        }
+
+        if ((string) ($index['driver'] ?? '') !== $driver) {
+            return false;
+        }
+
+        if (rtrim((string) ($index['packs_root'] ?? ''), '/\\') !== rtrim($packsRootFs, '/\\')) {
+            return false;
+        }
+
+        if ((array) ($index['defaults'] ?? []) !== $defaults) {
+            return false;
+        }
+
+        return is_array($index['items'] ?? null) && (array) ($index['items'] ?? []) !== [];
+    }
+
+    private function cacheIndex($cache, string $cacheKey, array $index): void
+    {
+        if (! $this->isCacheableIndex($index)) {
+            return;
+        }
+
+        try {
+            $cache->put($cacheKey, $index, self::CACHE_TTL_SECONDS);
+        } catch (\Throwable $e) {
+            try {
+                Cache::store()->put($cacheKey, $index, self::CACHE_TTL_SECONDS);
+            } catch (\Throwable $e2) {
+                Log::warning('CONTENT_PACKS_INDEX_CACHE_WRITE_FAILED', [
+                    'cache_key' => $cacheKey,
+                    'store' => 'default',
+                    'ttl' => self::CACHE_TTL_SECONDS,
+                    'exception' => $e2,
+                ]);
+            }
+        }
+    }
+
+    private function isCacheableIndex(array $index): bool
+    {
+        if (($index['ok'] ?? false) !== true) {
+            return false;
+        }
+
+        return is_array($index['items'] ?? null) && (array) ($index['items'] ?? []) !== [];
+    }
+
     private function findInItems(array $items, string $packId, string $dirVersion): ?array
     {
         foreach ($items as $item) {
@@ -238,7 +277,7 @@ final class ContentPacksIndex
     }
 
     /**
-     * @return array{mtime:int,size:int}|null
+     * @return array{mtime:int,size:int,sha256:string}|null
      */
     private function fileSignature(string $path): ?array
     {
@@ -250,6 +289,7 @@ final class ContentPacksIndex
             clearstatcache(true, $path);
             $mtimeRaw = @filemtime($path);
             $sizeRaw = @filesize($path);
+            $hashRaw = @hash_file('sha256', $path);
         } catch (\Throwable $e) {
             return null;
         }
@@ -264,16 +304,25 @@ final class ContentPacksIndex
         return [
             'mtime' => (int) $mtimeRaw,
             'size' => (int) $sizeRaw,
+            'sha256' => is_string($hashRaw) ? $hashRaw : '',
         ];
     }
 
     /**
-     * @param  array{mtime:int,size:int}  $signature
+     * @param  array{mtime:int,size:int,sha256:string}  $signature
      */
     private function signatureMatches(array $item, string $prefix, array $signature): bool
     {
         $mtimeKey = $prefix.'_mtime';
         $sizeKey = $prefix.'_size';
+        $hashKey = $prefix.'_sha256';
+
+        $expectedHash = trim((string) ($item[$hashKey] ?? ''));
+        if ($expectedHash !== '') {
+            $actualHash = trim((string) ($signature['sha256'] ?? ''));
+
+            return $actualHash !== '' && hash_equals($expectedHash, $actualHash);
+        }
 
         if (! array_key_exists($mtimeKey, $item) || ! array_key_exists($sizeKey, $item)) {
             return false;

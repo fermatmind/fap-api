@@ -17149,6 +17149,150 @@ prs:
     frontend_fallback_authority: false
     next_task: AUDIT-SEC-CONTENT-RUNTIME-CACHE-01
 
+
+  - id: AUDIT-SEC-CONTENT-RUNTIME-CACHE-01
+    repo: fap-api
+    branch: audit/sec-content-runtime-cache-01
+    base: main
+    title: "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01 harden content runtime cache freshness"
+    train_scope: content_runtime_cache_freshness
+    risk_level: high_security_content_cache_integrity
+    depends_on:
+      - AUDIT-SEC-CONTENT-PUBLISH-GATES-01 merged
+    allowed_paths:
+      - backend/app/Services/Content/ContentPacksIndex.php
+      - backend/app/Services/Content/ContentPacksIndexFallbackScanner.php
+      - backend/app/Services/Content/ContentPacksIndexArtifactStore.php
+      - backend/app/Services/Content/ContentLoaderService.php
+      - backend/tests/Unit/Services/Content/ContentPacksIndexManifestConsistencyTest.php
+      - backend/tests/Unit/Services/ContentLoaderServiceMtimeTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prevent invalid content pack root scan results from being reused from runtime cache.
+      - Make content pack index freshness hash-aware so same-mtime/same-size artifact changes cannot pass as fresh.
+      - Make content loader text/json cache keys hash-aware so same-mtime/same-size pack file changes cannot serve stale content.
+      - Add focused unit tests for invalid-root cache recovery and hash-only freshness changes.
+    do_not:
+      - Do not deploy, mutate production, run production SSH, or approve production environments.
+      - Do not modify content pack payloads, CMS content, fap-web, sitemap generation, llms generation, Search Channel, or URL submission files.
+      - Do not add routes, migrations, public endpoints, new cache stores, queue jobs, or production cache invalidation commands.
+    validation:
+      - cd backend && php artisan test --filter='ContentPacksIndexManifestConsistencyTest|ContentPacksIndexArtifactTest|ContentLoaderServiceMtimeTest' --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-content-runtime-cache-01.sqlite php artisan migrate --force --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: AUDIT-SEC-CONTENT-IMPORT-SAFETY-01
+
+  - id: AUDIT-SEC-CONTENT-IMPORT-SAFETY-01
+    repo: fap-api
+    branch: audit/sec-content-import-safety-01
+    base: main
+    title: "AUDIT-SEC-CONTENT-IMPORT-SAFETY-01 harden article baseline import identifiers"
+    train_scope: article_baseline_import_translation_group_bounds
+    risk_level: high_security_content_import_integrity
+    depends_on:
+      - AUDIT-SEC-CONTENT-RUNTIME-CACHE-01 merged
+    allowed_paths:
+      - backend/app/Console/Commands/ArticleImportLocalBaseline.php
+      - backend/tests/Feature/CareerCms/ArticleBaselineImportTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Reject uploaded or committed article baseline rows whose explicit translation_group_id exceeds the articles table 64-character authority field.
+      - Keep generated fallback translation_group_id values within the same database limit when source slugs are long.
+      - Add focused importer regression tests proving overlong explicit identifiers fail before writes and generated identifiers remain bounded.
+    do_not:
+      - Do not deploy, mutate production, run production SSH, or approve production environments.
+      - Do not modify article content payloads, public Article APIs, CMS publish behavior, fap-web, sitemap generation, llms generation, Search Channel, or URL submission files.
+      - Do not add routes, migrations, public endpoints, new import commands, or production import execution.
+    validation:
+      - cd backend && php artisan test tests/Feature/CareerCms/ArticleBaselineImportTest.php --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-content-import-safety-01.sqlite php artisan migrate --force --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01
+
+  - id: AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01
+    repo: fap-api
+    branch: audit/sec-train-ledger-closeout-01
+    base: main
+    title: "AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01 close out security audit train ledger"
+    train_scope: security_audit_train_ledger_closeout
+    risk_level: low_metadata_only
+    depends_on:
+      - AUDIT-SEC-CONTENT-IMPORT-SAFETY-01 merged
+    allowed_paths:
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Record merged and cleanup facts for SECURITY-AUDIT-36-PR-TRAIN PRs already merged into origin/main.
+      - Keep the train ledger consistent after PR #1780, #1786, #1793, #1796, #1800, and #1803.
+      - Do not change application code, routes, migrations, content payloads, generated content packs, fap-web, deploy workflows, or production state.
+    do_not:
+      - Do not modify backend runtime code, tests, migrations, routes, content baselines, content packs, fap-web, sitemap generation, llms generation, Search Channel, or URL submission files.
+      - Do not deploy, mutate production, run production SSH, or approve production environments.
+    validation:
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: null
+
   - id: PR-POL-01
     repo: fap-api
     branch: content/pr-pol-01-policies-dashboard
@@ -17866,7 +18010,7 @@ prs:
     base: main
     title: "IQ-NORM-01 add IQ norm calibration authority"
     train_scope: iq_production_launch
-    status: in_progress
+    status: merged
     scope:
       - Add backend-only IQ norm authority schema, contract service, governance documentation, and regression tests.
       - Keep current beta scoring/report runtime behavior unchanged and keep IQ public claims locked until later norm unlock work.
@@ -17900,14 +18044,29 @@ prs:
     base: main
     title: "IQ-NORM-02 add IQ norm table importer dry-run"
     train_scope: iq_production_launch
-    status: pending
+    status: in_progress
     scope:
       - Add dry-run IQ norm table importer, schema validation, version lock checks, and invalid fixture rejection.
+    allowed_paths:
+      - backend/app/Console/Commands/NormsIqImport.php
+      - backend/app/Console/Kernel.php
+      - backend/tests/Feature/Psychometrics/IqNormsImportDryRunTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/tests/Fixtures/iq/norms/iq_norm_dry_run_valid.json
+      - backend/tests/Fixtures/iq/norms/iq_norm_dry_run_invalid.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
     do_not:
       - Change runtime scoring/report behavior or publish real norm data.
     validation:
-      - php -l changed PHP files
+      - php -l backend/app/Console/Commands/NormsIqImport.php backend/tests/Feature/Psychometrics/IqNormsImportDryRunTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNormsImportDryRunTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNorm --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi
+      - python3 -m json.tool backend/tests/Fixtures/iq/norms/iq_norm_dry_run_valid.json >/dev/null
+      - python3 -m json.tool backend/tests/Fixtures/iq/norms/iq_norm_dry_run_invalid.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
       - git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: IQ-NORM-03

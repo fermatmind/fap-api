@@ -301,6 +301,7 @@ final class Eq60PackLoader
             'reality_translation',
             'career_environment',
             'action_prescriptions',
+            'cross_assessment_context',
             'sjt_bridge',
         ] as $key) {
             $doc = $this->readJson($rawDir.DIRECTORY_SEPARATOR.$key.'.json');

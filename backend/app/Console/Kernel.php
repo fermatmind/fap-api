@@ -116,6 +116,7 @@ use App\Console\Commands\NormsEq60Activate;
 use App\Console\Commands\NormsEq60DriftCheck;
 use App\Console\Commands\NormsEq60Import;
 use App\Console\Commands\NormsImport;
+use App\Console\Commands\NormsIqImport;
 use App\Console\Commands\NormsSdsDriftCheck;
 use App\Console\Commands\NormsSdsRebuild;
 use App\Console\Commands\Ops\BackfillAssessmentsScaleIdentity;
@@ -193,6 +194,7 @@ class Kernel extends ConsoleKernel
         EnneagramImportInactiveCandidateRelease::class,
         EnneagramRollbackRegistryRelease::class,
         NormsImport::class,
+        NormsIqImport::class,
         NormsBig5Roll::class,
         NormsBig5Rebuild::class,
         NormsBig5DriftCheck::class,

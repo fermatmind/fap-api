@@ -1,0 +1,22 @@
+{
+  "schema_version": "iq.norm_table.v1",
+  "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+  "bank_id": "IQ_BETA_30_ORIGINAL",
+  "norm_table_version": "iq_norm_dryrun_fixture_v1",
+  "status": "dry_run_validated",
+  "population_key": "general_adult_online",
+  "locale": "zh-CN",
+  "sample_size": 500,
+  "mean": 15.0,
+  "standard_deviation": 0,
+  "min_raw_score": 0,
+  "max_raw_score": 30,
+  "source_kind": "internal_calibration",
+  "source_ref": "fixture://iq_norm_dryrun_fixture_v1",
+  "license_verified": false,
+  "locked": false,
+  "rows": [
+    {"raw_score": 15, "iq_estimate": 100, "percentile": 50, "ci_low": 104, "ci_high": 96},
+    {"raw_score": 15, "iq_estimate": 200, "percentile": 120, "ci_low": 96, "ci_high": 104}
+  ]
+}

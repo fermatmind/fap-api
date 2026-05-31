@@ -23,6 +23,8 @@ final class ArticleImportLocalBaseline extends Command
 {
     private const SUPPORTED_LOCALES = ['en', 'zh-CN'];
 
+    private const TRANSLATION_GROUP_ID_MAX_LENGTH = 64;
+
     protected $signature = 'articles:import-local-baseline
         {--dry-run : Validate and diff without writing to the database}
         {--locale=* : Import only specific locale(s)}
@@ -331,7 +333,7 @@ final class ArticleImportLocalBaseline extends Command
             'related_test_slug' => $this->normalizeNullableSlug($row['related_test_slug'] ?? null),
             'voice' => $this->normalizeNullableString($row['voice'] ?? null),
             'voice_order' => $this->normalizeNullablePositiveInteger($row['voice_order'] ?? null, $file, $slug, 'voice_order'),
-            'translation_group_id' => $this->normalizeNullableString($row['translation_group_id'] ?? null),
+            'translation_group_id' => $this->normalizeTranslationGroupId($row['translation_group_id'] ?? null, $file, $slug),
             'source_locale' => $this->normalizeNullableString($row['source_locale'] ?? null),
             'translation_status' => $this->normalizeNullableString($row['translation_status'] ?? null),
             'category' => $this->normalizeNullableString($row['category'] ?? null),
@@ -351,7 +353,7 @@ final class ArticleImportLocalBaseline extends Command
     {
         /** @var Collection<string, Collection<int, array<string, mixed>>> $groups */
         $groups = collect($rows)->groupBy(
-            static fn (array $row): string => (string) ($row['translation_group_id'] ?: 'article:'.$row['slug'])
+            fn (array $row): string => (string) ($row['translation_group_id'] ?: $this->defaultTranslationGroupId((string) $row['slug']))
         );
 
         $normalized = [];
@@ -1110,6 +1112,39 @@ final class ArticleImportLocalBaseline extends Command
         $normalized = trim((string) ($value ?? ''));
 
         return $normalized !== '' ? $normalized : null;
+    }
+
+    private function normalizeTranslationGroupId(mixed $value, string $file, string $slug): ?string
+    {
+        $normalized = $this->normalizeNullableString($value);
+        if ($normalized === null) {
+            return null;
+        }
+
+        if (mb_strlen($normalized) > self::TRANSLATION_GROUP_ID_MAX_LENGTH) {
+            throw new RuntimeException(sprintf(
+                'Baseline file %s has overlong translation_group_id for slug=%s; max length is %d.',
+                $file,
+                $slug,
+                self::TRANSLATION_GROUP_ID_MAX_LENGTH,
+            ));
+        }
+
+        return $normalized;
+    }
+
+    private function defaultTranslationGroupId(string $slug): string
+    {
+        $candidate = 'article:'.$slug;
+        if (mb_strlen($candidate) <= self::TRANSLATION_GROUP_ID_MAX_LENGTH) {
+            return $candidate;
+        }
+
+        $hash = substr(hash('sha256', $slug), 0, 12);
+        $prefixLength = self::TRANSLATION_GROUP_ID_MAX_LENGTH - mb_strlen('article:') - mb_strlen('-') - mb_strlen($hash);
+        $prefix = mb_substr($slug, 0, max(1, $prefixLength));
+
+        return 'article:'.$prefix.'-'.$hash;
     }
 
     private function normalizeNullableSlug(mixed $value): ?string

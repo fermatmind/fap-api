@@ -19,8 +19,8 @@ final class ContentLoaderService
             return null;
         }
 
-        $mtime = $this->safeFileMtime($absPath);
-        $key = $this->cacheKey('text', $packId, $dirVersion, $relPath, $mtime);
+        $fingerprint = $this->safeFileFingerprint($absPath);
+        $key = $this->cacheKey('text', $packId, $dirVersion, $relPath, $fingerprint);
 
         return $this->cacheRemember($key, fn () => $this->safeReadText($absPath));
     }
@@ -47,7 +47,7 @@ final class ContentLoaderService
     private function resolvePath(string $packId, string $dirVersion, string $relPath, callable $resolveAbsPath): ?string
     {
         $ttl = $this->ttlSeconds();
-        $pathKey = $this->cacheKey('path', $packId, $dirVersion, $relPath, 0);
+        $pathKey = $this->cacheKey('path', $packId, $dirVersion, $relPath, '0');
         $sentinelMiss = '__MISS__';
 
         $absPath = $this->cacheRemember($pathKey, function () use ($resolveAbsPath, $sentinelMiss) {
@@ -82,23 +82,21 @@ final class ContentLoaderService
         return $absPath;
     }
 
-    private function safeFileMtime(string $absPath): int
+    private function safeFileFingerprint(string $absPath): string
     {
         try {
             $mt = @filemtime($absPath);
+            $size = @filesize($absPath);
+            $hash = @hash_file('sha256', $absPath);
         } catch (\Throwable) {
-            return 0;
+            return '0:0:';
         }
 
-        if (is_int($mt)) {
-            return $mt;
-        }
+        $mtime = is_int($mt) || is_numeric($mt) ? (int) $mt : 0;
+        $bytes = is_int($size) || is_numeric($size) ? (int) $size : 0;
+        $sha256 = is_string($hash) ? $hash : '';
 
-        if (is_numeric($mt)) {
-            return (int) $mt;
-        }
-
-        return 0;
+        return $mtime.':'.$bytes.':'.$sha256;
     }
 
     private function safeReadText(string $absPath): ?string
@@ -112,12 +110,13 @@ final class ContentLoaderService
         return is_string($raw) ? $raw : null;
     }
 
-    private function cacheKey(string $kind, string $packId, string $dirVersion, string $relPath, int $mtime): string
+    private function cacheKey(string $kind, string $packId, string $dirVersion, string $relPath, string $fingerprint): string
     {
         $normalizedRelPath = ltrim(str_replace('\\', '/', $relPath), '/');
         $base = sha1($packId.'|'.$dirVersion.'|'.$normalizedRelPath);
+        $fingerprintHash = sha1($fingerprint);
 
-        return "content_loader:{$kind}:{$base}:{$mtime}";
+        return "content_loader:{$kind}:{$base}:{$fingerprintHash}";
     }
 
     private function ttlSeconds(): int

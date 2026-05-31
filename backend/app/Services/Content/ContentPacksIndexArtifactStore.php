@@ -184,8 +184,6 @@ final class ContentPacksIndexArtifactStore
 
                 return null;
             }
-            unset($hydrated['manifest_sha256'], $hydrated['questions_sha256'], $hydrated['version_sha256']);
-
             $items[] = $hydrated;
         }
 

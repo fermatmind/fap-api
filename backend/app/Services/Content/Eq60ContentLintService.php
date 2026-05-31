@@ -808,6 +808,7 @@ final class Eq60ContentLintService
             'reality_translation',
             'career_environment',
             'action_prescriptions',
+            'cross_assessment_context',
             'sjt_bridge',
         ];
 
@@ -934,6 +935,21 @@ final class Eq60ContentLintService
                 'script',
                 'seven_day_plan',
                 'watch_out',
+            ], $errors);
+        }
+
+        foreach ([
+            'eq.cross_context.boundary.default',
+            'eq.cross_context.mbti.available',
+            'eq.cross_context.big_five.available',
+            'eq.cross_context.enneagram.available',
+        ] as $assetId) {
+            $crossContextAssets = (array) data_get($docs, 'cross_assessment_context.assets', []);
+            $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/cross_assessment_context.json', $version), (array) ($crossContextAssets[$assetId] ?? []), [
+                'title',
+                'summary',
+                'how_to_use',
+                'claim_boundary',
             ], $errors);
         }
 

@@ -368,6 +368,6 @@ jobs:
         working-directory: backend
         run: |
           bash scripts/ci/verify_big5_norms.sh
-          php artisan content:lint --pack=BIG5_OCEAN --pack-version=v1
-          php artisan content:compile --pack=BIG5_OCEAN --pack-version=v1
-          php artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi
+          php -d memory_limit=1024M artisan content:lint --pack=BIG5_OCEAN --pack-version=v1
+          php -d memory_limit=1024M artisan content:compile --pack=BIG5_OCEAN --pack-version=v1
+          php -d memory_limit=1024M artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi
