@@ -16310,6 +16310,63 @@ prs:
     frontend_fallback_authority: false
     next_task: explicit production deployment approval remains required after review
 
+  - id: OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01
+    repo: fap-api
+    branch: ops/release-train-workflow-production-env-binding-01
+    base: main
+    title: "OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01 bind run job to production environment"
+    train_scope: release_train_workflow_production_environment_binding
+    risk_level: p0_deploy_guarded_workflow
+    depends_on:
+      - OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01 merged and dry-run validated
+    allowed_paths:
+      - .github/workflows/release-train.yml
+      - tests/ops/test_release_train_workflow.py
+      - docs/ops/release-train.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Bind the actual release-train run job to GitHub environment production.
+      - Keep validate, plan, and dry-run paths outside production environment approval.
+      - Guard the deploy-capable run job with mode=run, allow_deploy=true, and dry_run!=true.
+      - Document that production environment branch restriction to main remains a manual GitHub setting.
+      - Add static tests for workflow dry-run safety and production environment binding.
+    do_not:
+      - Do not deploy, run mode=run, approve production, mutate production, or run SSH.
+      - Do not modify .github/workflows/deploy.yml or .github/workflows/ci.yml.
+      - Do not modify deploy.php, backend app/business code, migrations, content baselines, CMS, DB, production env, fap-web, sitemap, llms, Search Channel, or URL submission files.
+      - Do not enable rollback, frontend deploy, auto merge, or production approval bypass.
+      - Do not print, read, create, update, or delete secret values.
+    validation:
+      - python3 -m json.tool ops/release-train/examples/release-train.example.json >/dev/null
+      - python3 ops/release-train/release_train.py validate-manifest --manifest ops/release-train/examples/release-train.example.json
+      - python3 ops/release-train/release_train.py plan --manifest ops/release-train/examples/release-train.example.json
+      - python3 ops/release-train/release_train.py dry-run --manifest ops/release-train/examples/release-train.example.json
+      - python3 -m unittest discover tests/ops
+      - bash -n backend/scripts/deploy/deploy_backend.sh
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('.github/workflows/release-train.yml').read_text()); print('workflow yaml ok')"
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('train yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+      - bash backend/scripts/ci_verify_mbti.sh
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: after merge restrict GitHub production environment branch policy to main and rerun dry-run/readiness
+
   - id: PR-POL-01
     repo: fap-api
     branch: content/pr-pol-01-policies-dashboard

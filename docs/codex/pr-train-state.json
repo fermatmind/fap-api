@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T08:28:00+08:00",
+  "updated_at": "2026-05-31T09:10:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -32872,5 +32872,124 @@
     ],
     "sidecars": [],
     "next_task": "Wait for GitHub checks and Codex final review; do not merge or deploy from this PR."
+  },
+  "OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01": {
+    "id": "OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01",
+    "repo": "fap-api",
+    "branch": "ops/release-train-workflow-production-env-binding-01",
+    "status": "pr_open",
+    "commit_sha": "c17da937",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1771",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided explicit implementation PR goal for workflow production environment binding; no deploy, no mode=run, no production approval."
+      },
+      "workspace_safety": {
+        "status": "pass",
+        "evidence": "Started from clean fap-api main at 1832765a88b8df16efe86142671e549ecf13f85c and created ops/release-train-workflow-production-env-binding-01."
+      },
+      "deploy_safety_boundary": {
+        "status": "pass",
+        "evidence": "No deploy, production SSH, production mutation, production approval, rollback, merge, Search Channel action, or URL submission performed."
+      },
+      "json_validation": {
+        "status": "pass",
+        "command": "python3 -m json.tool ops/release-train/examples/release-train.example.json; python3 -m json.tool docs/codex/pr-train-state.json"
+      },
+      "yaml_validation": {
+        "status": "pass",
+        "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('.github/workflows/release-train.yml').read_text()); yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\""
+      },
+      "manifest_validate": {
+        "status": "pass",
+        "command": "python3 ops/release-train/release_train.py validate-manifest --manifest ops/release-train/examples/release-train.example.json"
+      },
+      "manifest_plan": {
+        "status": "pass",
+        "command": "python3 ops/release-train/release_train.py plan --manifest ops/release-train/examples/release-train.example.json"
+      },
+      "manifest_dry_run": {
+        "status": "pass",
+        "command": "python3 ops/release-train/release_train.py dry-run --manifest ops/release-train/examples/release-train.example.json",
+        "note": "Dry-run exited ok=true; example placeholder SHA/scope notes remain non-mutating offline notes."
+      },
+      "ops_unittest": {
+        "status": "pass",
+        "command": "python3 -m unittest discover tests/ops",
+        "result": "30 tests passed"
+      },
+      "deploy_wrapper_syntax": {
+        "status": "pass",
+        "command": "bash -n backend/scripts/deploy/deploy_backend.sh"
+      },
+      "wrapper_fail_closed_default": {
+        "status": "pass",
+        "command": "bash backend/scripts/deploy/deploy_backend.sh; test $? -ne 0",
+        "result": "Failed closed with MISSING_RELEASE_NAME."
+      },
+      "wrapper_dry_run": {
+        "status": "pass",
+        "command": "DEPLOY_DRY_RUN=true ALLOW_PRODUCTION_DEPLOY=true ALLOW_REAL_DEPLOY=false DEPLOY_ENV=production BACKEND_DEPLOY_SHA=$(git rev-parse HEAD) RELEASE_NAME=workflow-env-binding-dry-run-test bash backend/scripts/deploy/deploy_backend.sh",
+        "result": "deploy_result=skipped; no Deployer execution."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "result": "207 routes listed"
+      },
+      "migration_pretend": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force"
+      },
+      "ci_verify_mbti": {
+        "status": "pass",
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "result": "Full MBTI CI verify path completed successfully."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "result": "Committed PR scope is limited to release-train workflow/docs/tests/train metadata. Earlier observed Alipay scheduler files were not staged into this PR."
+      },
+      "pr_created": {
+        "status": "pass",
+        "command": "gh pr create --base main --head ops/release-train-workflow-production-env-binding-01",
+        "result": "https://github.com/fermatmind/fap-api/pull/1771"
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "pass",
+      "git_diff_cached_check": "pass",
+      "observed_out_of_scope_local_dirty_not_staged_in_pr": [
+        "backend/bootstrap/app.php",
+        "backend/docs/runbooks/alipay-pending-compensation.md",
+        "backend/tests/Feature/Commerce/AlipayPendingCompensationSchedulerTest.php"
+      ],
+      "final_worktree_out_of_scope_dirty": "none observed before PR state bookkeeping commit"
+    },
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T09:05:00+08:00",
+        "summary": "User supplied OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01 implementation scope."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-31T09:05:00+08:00",
+        "summary": "Binding deploy-capable release-train run job to GitHub production environment without deployment."
+      },
+      {
+        "status": "local_validation_passed",
+        "at": "2026-05-31T09:10:00+08:00",
+        "summary": "Validated workflow binding change locally without deploy, mode=run, production approval, rollback, or production mutation."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "Open PR and keep production deploy disabled; manual GitHub production branch restriction remains required."
   }
 }
