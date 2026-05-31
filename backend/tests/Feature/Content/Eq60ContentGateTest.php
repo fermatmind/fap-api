@@ -66,6 +66,7 @@ final class Eq60ContentGateTest extends TestCase
             'reality_translation',
             'career_environment',
             'action_prescriptions',
+            'cross_assessment_context',
             'sjt_bridge',
             'personalization_routes',
         ], array_keys((array) data_get($assets, 'assets', [])));
@@ -130,6 +131,20 @@ final class Eq60ContentGateTest extends TestCase
         ] as $prescriptionId) {
             $this->assertNotEmpty((array) data_get($assets, 'assets.action_prescriptions.prescriptions.'.$prescriptionId.'.zh-CN.seven_day_plan'));
             $this->assertNotEmpty((array) data_get($assets, 'assets.action_prescriptions.prescriptions.'.$prescriptionId.'.en.seven_day_plan'));
+        }
+
+        $crossContextAssets = (array) data_get($assets, 'assets.cross_assessment_context.assets', []);
+        foreach ([
+            'eq.cross_context.boundary.default',
+            'eq.cross_context.mbti.available',
+            'eq.cross_context.big_five.available',
+            'eq.cross_context.enneagram.available',
+        ] as $assetId) {
+            $asset = is_array($crossContextAssets[$assetId] ?? null) ? $crossContextAssets[$assetId] : [];
+            $this->assertNotSame('', (string) data_get($asset, 'zh-CN.title'));
+            $this->assertNotSame('', (string) data_get($asset, 'en.title'));
+            $this->assertStringNotContainsString('predicts job performance', (string) data_get($asset, 'en.claim_boundary'));
+            $this->assertStringNotContainsString('certified emotional intelligence', (string) data_get($asset, 'en.claim_boundary'));
         }
 
         $sjtAssets = (array) data_get($assets, 'assets.sjt_bridge.assets', []);

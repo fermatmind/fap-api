@@ -240,6 +240,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_eq_cross_assessment_context_guard_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Eq/EqCrossAssessmentContextGuard.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_ci_scale_impact_command_changes(): void
     {
         $changed = [
@@ -3979,6 +3988,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Content/Eq60ContentCompileService.php',
             'backend/app/Services/Content/Eq60ContentLintService.php',
             'backend/app/Services/Content/Eq60PackLoader.php',
+            'backend/app/Services/Eq/EqCrossAssessmentContextGuard.php',
             'backend/app/Services/Report/Eq60ReportComposer.php',
             'backend/database/seeders/CiScalesRegistrySeeder.php',
             'backend/database/seeders/Pr19CommerceSeeder.php',

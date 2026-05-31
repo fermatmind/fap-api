@@ -2,7 +2,7 @@
     "schema": "eq_60.report_assets.compiled.v1",
     "pack_id": "EQ_60",
     "pack_version": "v1",
-    "generated_at": "2026-05-31T08:05:28.855802Z",
+    "generated_at": "2026-05-31T12:37:03.872621Z",
     "assets": {
         "scientific_contract": {
             "schema": "eq60.report_assets.scientific_contract.v1",
@@ -1702,6 +1702,68 @@
                             "Day 7: complete the test again."
                         ],
                         "watch_out": "Do not use a low-confidence result for major decisions."
+                    }
+                }
+            }
+        },
+        "cross_assessment_context": {
+            "schema": "eq60.report_assets.cross_assessment_context.v1",
+            "pack_id": "EQ_60",
+            "assets": {
+                "eq.cross_context.boundary.default": {
+                    "zh-CN": {
+                        "title": "跨测评上下文边界",
+                        "summary": "这一模块只说明你还完成过哪些相关测评，以及这些测评可以如何辅助阅读 EQ 结果。",
+                        "how_to_use": "把 MBTI、大五人格或九型人格看作不同问题的证据来源：它们不能改写 EQ 分数，也不能替代情绪与关系自我报告。",
+                        "claim_boundary": "不用于职业预测、招聘筛选、临床诊断、固定人格标签或情商能力宣称。"
+                    },
+                    "en": {
+                        "title": "Cross-assessment context boundary",
+                        "summary": "This module only explains which related assessments are available and how they can support reading the EQ result.",
+                        "how_to_use": "Treat MBTI, Big Five, and Enneagram as evidence from different questions. They do not rewrite EQ scores or replace the emotional and relational self-report result.",
+                        "claim_boundary": "Not for career prediction, hiring, clinical diagnosis, fixed identity labels, or emotional ability claims."
+                    }
+                },
+                "eq.cross_context.mbti.available": {
+                    "zh-CN": {
+                        "title": "MBTI 可作为偏好语境",
+                        "summary": "你已有 MBTI 结果时，EQ 报告可以把情绪与关系信号放进偏好、信息处理和决策风格的语境中阅读。",
+                        "how_to_use": "只把它当作“沟通与决策偏好”的背景，不把类型直接解释成情绪能力或关系表现。",
+                        "claim_boundary": "不根据 MBTI 类型推断情商高低、工作表现、职业适配或关系成败。"
+                    },
+                    "en": {
+                        "title": "MBTI can provide preference context",
+                        "summary": "When an MBTI result exists, the EQ report can be read alongside preference, information-processing, and decision-style context.",
+                        "how_to_use": "Use it only as communication and decision-preference background, not as an explanation of emotional ability or relationship performance.",
+                        "claim_boundary": "Do not infer EQ level, job performance, career fit, or relationship outcomes from MBTI type."
+                    }
+                },
+                "eq.cross_context.big_five.available": {
+                    "zh-CN": {
+                        "title": "大五人格可作为特质语境",
+                        "summary": "你已有大五人格结果时，EQ 报告可以把情绪与关系信号放进稳定特质、压力反应和互动节奏的语境中阅读。",
+                        "how_to_use": "只把它当作“长期行为倾向”的背景，不用它替代 EQ 的四维分数和行动建议。",
+                        "claim_boundary": "不把大五特质转写为临床结论、招聘结论或固定人格优劣判断。"
+                    },
+                    "en": {
+                        "title": "Big Five can provide trait context",
+                        "summary": "When a Big Five result exists, the EQ report can be read alongside broader trait, stress-response, and interaction-rhythm context.",
+                        "how_to_use": "Use it only as long-term behavioral tendency background. It does not replace EQ dimension scores or action guidance.",
+                        "claim_boundary": "Do not turn Big Five traits into clinical conclusions, hiring decisions, or fixed judgments of personality quality."
+                    }
+                },
+                "eq.cross_context.enneagram.available": {
+                    "zh-CN": {
+                        "title": "九型人格可作为动机语境",
+                        "summary": "你已有九型人格结果时，EQ 报告可以把情绪与关系信号放进动机、保护策略和压力下反应模式的语境中阅读。",
+                        "how_to_use": "只把它当作“动机叙事”的背景，不把类型当作情绪反应的单一原因。",
+                        "claim_boundary": "不根据九型类型推断治疗需要、招聘适配、职业成功或关系结局。"
+                    },
+                    "en": {
+                        "title": "Enneagram can provide motivation context",
+                        "summary": "When an Enneagram result exists, the EQ report can be read alongside motivation, protective strategy, and pressure-pattern context.",
+                        "how_to_use": "Use it only as motivation narrative background, not as the single cause of emotional responses.",
+                        "claim_boundary": "Do not infer treatment needs, hiring fit, career success, or relationship outcomes from Enneagram type."
                     }
                 }
             }

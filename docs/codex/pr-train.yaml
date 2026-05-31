@@ -17151,6 +17151,54 @@ prs:
     frontend_fallback_authority: false
     next_task: AUDIT-SEC-CONTENT-IMPORT-SAFETY-01
 
+  - id: AUDIT-SEC-CONTENT-IMPORT-SAFETY-01
+    repo: fap-api
+    branch: audit/sec-content-import-safety-01
+    base: main
+    title: "AUDIT-SEC-CONTENT-IMPORT-SAFETY-01 harden article baseline import identifiers"
+    train_scope: article_baseline_import_translation_group_bounds
+    risk_level: high_security_content_import_integrity
+    depends_on:
+      - AUDIT-SEC-CONTENT-RUNTIME-CACHE-01 merged
+    allowed_paths:
+      - backend/app/Console/Commands/ArticleImportLocalBaseline.php
+      - backend/tests/Feature/CareerCms/ArticleBaselineImportTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Reject uploaded or committed article baseline rows whose explicit translation_group_id exceeds the articles table 64-character authority field.
+      - Keep generated fallback translation_group_id values within the same database limit when source slugs are long.
+      - Add focused importer regression tests proving overlong explicit identifiers fail before writes and generated identifiers remain bounded.
+    do_not:
+      - Do not deploy, mutate production, run production SSH, or approve production environments.
+      - Do not modify article content payloads, public Article APIs, CMS publish behavior, fap-web, sitemap generation, llms generation, Search Channel, or URL submission files.
+      - Do not add routes, migrations, public endpoints, new import commands, or production import execution.
+    validation:
+      - cd backend && php artisan test tests/Feature/CareerCms/ArticleBaselineImportTest.php --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-content-import-safety-01.sqlite php artisan migrate --force --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: null
+
   - id: PR-POL-01
     repo: fap-api
     branch: content/pr-pol-01-policies-dashboard

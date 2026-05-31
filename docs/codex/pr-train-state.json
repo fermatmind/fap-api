@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T14:25:12+00:00",
+  "updated_at": "2026-05-31T21:17:00+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -113,11 +113,11 @@
     "PR-EQ-PER-04": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-04-eq-journey-state",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "PR-EQ-PER-03"
       ],
-      "commit_sha": "6fc601683e5fa848e32d1ccc6d13d951677d5ac1",
+      "commit_sha": "392e8841670093f673d5a2f0141797330e0ce30e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1797",
       "checks": {
         "local": {
@@ -138,31 +138,60 @@
           "notes": "Changed files are limited to PR04 EQ journey state backend contract, EQ fixtures/tests, OpenAPI route snapshot for the new endpoint, and authorized manifest/state metadata."
         },
         "github": {
-          "status": "fix_pushed_after_openapi_snapshot_failure",
-          "failed_checks": [
+          "status": "passed",
+          "merge_state_status": "CLEAN",
+          "required_checks": [
+            "hygiene",
+            "supply-chain",
+            "content-pack-build-validate",
             "verify-mbti-legacy",
             "verify-mbti-v2",
-            "verify-bigfive"
+            "verify-bigfive",
+            "Semgrep blocking secrets"
           ],
-          "failure_reason": "OpenAPI snapshot drift for the scoped /api/v0.3/attempts/{id}/eq/journey route, then BigFive runtime freeze classifier flagged EQ-only journey files as MBTI-impacting.",
-          "fix": "Updated backend/docs/contracts/openapi.snapshot.json, added the snapshot to PR04 allowed paths, and added a narrow BigFive runtime-freeze classifier guard for the EQ journey state contract."
+          "notes": "PR #1797 checks passed after OpenAPI snapshot and narrow runtime-freeze classifier fixes; squash merged."
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-31T09:17:00Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-EQ-PER-05": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-05-cross-assessment-guard",
-      "status": "pending",
+      "status": "open",
       "depends_on": [
         "PR-EQ-PER-04"
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "commit_sha": "555f1e3aaa7b3e7b590dcb47d50481980ef12f7f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1801",
+      "checks": {
+        "local": {
+          "status": "passed_with_external_sidecar",
+          "commands": [
+            "cd backend && php -l app/Services/Eq/EqCrossAssessmentContextGuard.php",
+            "cd backend && php -l app/Services/Report/Eq60ReportComposer.php",
+            "cd backend && php -l tests/Feature/Report/Eq60CrossAssessmentContextGuardTest.php",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60CrossAssessmentContextGuardTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' UPDATE_EQ60_V5_FIXTURES=1 php artisan test --filter=Eq60V5ReportContractTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFive",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Enneagram",
+            "git diff --check",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_eq_cross_assessment_context_guard_changes'"
+          ],
+          "sidecar_external_check": {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Mbti",
+            "status": "failed_on_pr_branch_and_origin_main",
+            "origin_main_revalidation": "A clean origin/main worktree reproduced the same MBTI/career recommendation failures, including missing FirstWavePublishReadyValidator::validationMemoKey(), governance.v1/runtime.locale_policy.v1 assertion drift, and snapshots_created assertion drift.",
+            "classification": "external_pre_existing_not_current_pr_scope"
+          },
+          "scope_validation": "passed; changed files are limited to EQ report services, EQ content pack assets/compiled outputs, EQ tests/fixtures, and PR train state.",
+          "notes": "Focused PR05, Eq60, BigFive, and Enneagram checks passed with existing PHPUnit warnings. The manifest Mbti check is recorded as an external sidecar because the same failures reproduce on clean origin/main and do not affect the EQ cross-assessment guard runtime contract. After GitHub verify-bigfive exposed the runtime freeze allowlist gap, PR05 added a narrow EQ-only classifier test and revalidated the targeted Big Five freeze checks."
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -35581,14 +35610,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-31T13:09:40Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -35614,6 +35643,12 @@
         "from": "pr_open_checks_pending",
         "to": "ci_fix_pushed_pending_checks",
         "note": "GitHub verify-bigfive failed on runtime freeze classifier for ContentLoaderService.php; added scoped content runtime cache freshness exception and focused regression test."
+      },
+      {
+        "at": "2026-05-31T21:17:43+08:00",
+        "from": "ci_fix_pushed_pending_checks",
+        "to": "merged_and_cleaned",
+        "note": "GitHub checks passed; PR #1800 squash-merged; origin/main contains merge commit; task worktree/local branch cleaned; remote branch absent."
       }
     ],
     "sidecars": [
@@ -35623,6 +35658,97 @@
         "summary": "bash backend/scripts/ci_verify_mbti.sh failed in PacksPublishBig5Test and PacksRollbackBig5Test because test temp target compiled/manifest.json was absent. The same external failure was observed before this PR; changed files are limited to content runtime cache services/tests and PR-train ledger; no content pack files are staged."
       }
     ],
-    "next_task": "AUDIT-SEC-CONTENT-IMPORT-SAFETY-01"
+    "next_task": "AUDIT-SEC-CONTENT-IMPORT-SAFETY-01",
+    "github": {
+      "status": "merged",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1800"
+    },
+    "merge_commit": "445fc2e91cc1b63e5af95b781b42d7f66c504698"
+  },
+  "AUDIT-SEC-CONTENT-IMPORT-SAFETY-01": {
+    "status": "implementation_in_progress",
+    "branch": "audit/sec-content-import-safety-01",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1803",
+    "base": "main",
+    "worktree": "/private/tmp/fap-api-audit-sec-content-import-safety-01",
+    "scope": "article_baseline_import_translation_group_bounds",
+    "authorized_by_user": true,
+    "workspace_safety": "using isolated worktree /private/tmp/fap-api-audit-sec-content-import-safety-01; dirty primary worktree untouched",
+    "allowed_paths": [
+      "backend/app/Console/Commands/ArticleImportLocalBaseline.php",
+      "backend/tests/Feature/CareerCms/ArticleBaselineImportTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "local_validation": {
+      "environment": {
+        "status": "passed_after_autoload_refresh",
+        "commands": [
+          "cd backend && composer dump-autoload --no-ansi"
+        ],
+        "evidence": "Rebuilt Composer autoload in the isolated worktree after vendor autoload pointed at a removed temporary worktree. Existing IQ PSR-4 warnings were emitted but autoload generation completed."
+      },
+      "focused": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test tests/Feature/CareerCms/ArticleBaselineImportTest.php --no-ansi"
+        ],
+        "evidence": "Article baseline import tests passed: 5 tests, 233 assertions."
+      },
+      "acceptance": {
+        "status": "passed_with_external_ci_verify_sidecar",
+        "commands": [
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-content-import-safety-01.sqlite php artisan migrate --force --no-ansi",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check",
+          "bash backend/scripts/ci_verify_mbti.sh"
+        ],
+        "evidence": "route:list passed with 209 routes; sqlite migrate passed; schema/diff checks passed. ci_verify_mbti.sh passed 824 tests and failed only known Big5 content-pack publish/rollback temp target compiled directory assertions external to this PR scope; generated dirty artifacts were restored."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-05-31T21:17:43+08:00",
+        "from": "authorized",
+        "to": "implementation_in_progress",
+        "note": "Started scoped article baseline import identifier bounds hardening from latest origin/main after AUDIT-SEC-CONTENT-RUNTIME-CACHE-01 post-merge cleanup."
+      },
+      {
+        "at": "2026-05-31T22:23:46+08:00",
+        "from": "implementation_in_progress",
+        "to": "local_scope_validation_passed_with_sidecar",
+        "note": "Focused importer tests, route:list, sqlite migrate, diff/schema checks passed; unrelated ci_verify_mbti Big5 temp-target failures registered as sidecar per train protocol."
+      },
+      {
+        "at": "2026-05-31T22:25:19+08:00",
+        "from": "local_scope_validation_passed_with_sidecar",
+        "to": "pr_open_checks_pending",
+        "note": "Created PR #1803; waiting for GitHub required checks."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "big5_pack_publish_rollback_temp_target_compiled_missing",
+        "status": "registered_non_blocking_external_to_scope",
+        "summary": "bash backend/scripts/ci_verify_mbti.sh failed in PacksPublishBig5Test and PacksRollbackBig5Test because test temp target compiled/manifest.json was absent. This same external failure was observed before this PR; changed files are limited to article baseline importer/tests and PR-train ledger; generated Big5 artifacts were restored."
+      }
+    ],
+    "next_task": null,
+    "github": {
+      "status": "checks_pending",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1803"
+    }
   }
 }
