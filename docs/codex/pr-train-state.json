@@ -19606,7 +19606,7 @@
       "depends_on": [
         "RESULT-EN-PARITY-03"
       ],
-      "commit_sha": null,
+      "commit_sha": "f58c1bd2828de45735f719f5f73b05537ccfe947",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1671",
       "checks": {
         "dependency_result_en_parity_00": {
@@ -32195,6 +32195,11 @@
         "summary": "No whitespace errors in unstaged diff."
       },
       {
+        "command": "git diff --cached --check",
+        "status": "passed",
+        "summary": "No whitespace errors in staged diff."
+      },
+      {
         "command": "fap-web reference status",
         "status": "passed",
         "summary": "Reference-only fap-web worktree is clean and was not modified."
@@ -32367,7 +32372,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "git_diff_check": "passed",
-      "git_diff_cached_check": null
+      "git_diff_cached_check": "passed"
     },
     "sidecars": [
       "Reference-only fap-web worktree had unrelated dirty changes before and after this task; no fap-web files were modified.",
@@ -33316,5 +33321,118 @@
     "notes": [
       "career warm cache deploy hook is non-blocking by default; strict mode remains available via DEPLOY_CAREER_WARM_CACHE_STRICT=true"
     ]
+  },
+  "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02": {
+    "id": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02",
+    "repo": "fap-api",
+    "branch": "codex/analytics-funnel-refresh-dry-run-sql-fix-02",
+    "base": "main",
+    "title": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02 fix share_click SQL compatibility",
+    "status": "in_progress",
+    "depends_on": [
+      "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01"
+    ],
+    "commit_sha": "f678306b52eed2572c0815fbd7ad1aaef15cd71b",
+    "pr_url": null,
+    "checks": [
+      {
+        "command": "manifest/state authorization",
+        "status": "passed",
+        "summary": "User explicitly authorized adding only ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02 to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+      },
+      {
+        "command": "php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi",
+        "status": "passed",
+        "summary": "2 tests passed, 27 assertions."
+      },
+      {
+        "command": "php artisan test --filter=AnalyticsFunnelRefreshDryRunSqlFix01 --no-ansi",
+        "status": "passed",
+        "summary": "3 tests passed, 8 assertions."
+      },
+      {
+        "command": "php artisan test --filter=AnalyticsFunnelRefreshDryRunSqlFix02 --no-ansi",
+        "status": "passed",
+        "summary": "6 tests passed, 11 assertions."
+      },
+      {
+        "command": "php artisan test --filter=RefreshAnalyticsFunnelDailyCommand --no-ansi",
+        "status": "passed",
+        "summary": "1 test passed, 11 assertions."
+      },
+      {
+        "command": "php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "Route list rendered successfully with 207 routes."
+      },
+      {
+        "command": "vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "Pint passed across 3649 files."
+      },
+      {
+        "command": "composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid."
+      },
+      {
+        "command": "composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found."
+      },
+      {
+        "command": "python3 -m json.tool backend/docs/seo/generated/analytics-funnel-refresh-dry-run-sql-fix-02.v1.json >/dev/null",
+        "status": "passed",
+        "summary": "Generated SQL fix 02 JSON parses."
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed",
+        "summary": "PR train state JSON parses."
+      },
+      {
+        "command": "python3 - <<'PY' import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok') PY",
+        "status": "passed",
+        "summary": "PR train manifest YAML parses."
+      },
+      {
+        "command": "git diff --check",
+        "status": "passed",
+        "summary": "No whitespace errors in unstaged diff."
+      },
+      {
+        "command": "fap-web reference status",
+        "status": "passed",
+        "summary": "Reference-only fap-web worktree was checked and not modified by this task."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "User authorized the scoped share_click SQL compatibility fix PR and manifest/state updates."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "Started from latest origin/main on scoped branch codex/analytics-funnel-refresh-dry-run-sql-fix-02."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "Scoped local validation passed for the share_click SQL compatibility fix."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": null
+    },
+    "sidecars": [],
+    "next_task": "BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02"
   }
 }
