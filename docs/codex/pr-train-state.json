@@ -200,11 +200,11 @@
     "PR-EQ-PER-06": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-06-english-seo-geo-authority",
-      "status": "open",
+      "status": "merged",
       "depends_on": [
         "PR-EQ-PER-05"
       ],
-      "commit_sha": "22e820b6219ee7f14050887eb4045663ba6a0e2a",
+      "commit_sha": "aa15ca1a31494fbfd12697aae343f11a76a0e26e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1808",
       "checks": {
         "local": {
@@ -241,20 +241,43 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-31T15:25:44Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-EQ-SJT-01": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-sjt-01-content-pack-skeleton",
-      "status": "pending",
+      "status": "open",
       "depends_on": [
         "PR-EQ-PER-06"
       ],
       "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1813",
+      "checks": {
+        "local": {
+          "status": "passed_with_external_sidecar",
+          "commands": [
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqSjt16ContentPackSkeletonTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Content",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_eq_sjt_16_content_pack_skeleton_changes",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "scope_validation": "passed",
+          "results": {
+            "eq_sjt_skeleton": "passed",
+            "eq60": "passed",
+            "bigfive_runtime_freeze_eq_sjt_guard": "passed",
+            "diff_check": "passed",
+            "json_validation": "passed",
+            "content": "failed_external_main_existing"
+          },
+          "notes": "PR-EQ-SJT-01 scoped skeleton test and Eq60 tests pass. The manifest Content filter still fails in external test families already reproduced on origin/main during PR-EQ-PER-06 and unrelated to this SJT content-pack skeleton. GitHub verify-bigfive exposed the need for a narrow runtime-freeze classifier exemption for non-runtime EQ_SJT_16 skeleton files."
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,

@@ -1,0 +1,49 @@
+{
+  "schema": "eq_sjt_16.item_schema.v1",
+  "module_code": "EQ_SJT_16",
+  "item_count": 16,
+  "item_format": {
+    "stem": {
+      "field": "scenario_stem",
+      "required": true,
+      "localized": true,
+      "description": "A brief emotionally relevant situation. The stem must avoid clinical, hiring, legal, or emergency decision contexts."
+    },
+    "response_options": {
+      "required": true,
+      "count": 4,
+      "localized": true,
+      "option_fields": [
+        "option_id",
+        "text",
+        "strategy_tag",
+        "partial_credit",
+        "risk_notes"
+      ]
+    },
+    "scoring": {
+      "partial_credit_min": 0,
+      "partial_credit_max": 3,
+      "rubric_version": "eq_sjt_16.rubric.v1_draft"
+    },
+    "metadata": {
+      "required_fields": [
+        "item_id",
+        "domain_code",
+        "locale_notes",
+        "risk_notes",
+        "review_state"
+      ],
+      "review_state_allowed": [
+        "draft",
+        "expert_review",
+        "localization_review",
+        "retired"
+      ]
+    }
+  },
+  "non_operational_placeholder": {
+    "items_included": false,
+    "reason": "PR-EQ-SJT-01 defines the skeleton only. Formal items must be added in a later content-pack PR after review."
+  }
+}

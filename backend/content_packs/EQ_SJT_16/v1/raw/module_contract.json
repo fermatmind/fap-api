@@ -1,0 +1,48 @@
+{
+  "schema": "eq_sjt_16.module_contract.v1",
+  "module_code": "EQ_SJT_16",
+  "pack_version": "v1",
+  "module_type": "scenario_based_emotional_judgment",
+  "relationship_to_eq60": {
+    "eq60_measures": "self_report_emotional_and_relational_patterns",
+    "eq_sjt_16_measures": "likely_response_choices_in_emotional_and_relational_scenarios",
+    "integration_principle": "The integrated report should compare self-perception with scenario judgment signals instead of collapsing them into a single undifferentiated score."
+  },
+  "availability": {
+    "status": "planned",
+    "runtime_available": false,
+    "take_entry_clickable": false,
+    "integrated_report_visible": false,
+    "stable_validation_claim_allowed": false
+  },
+  "claim_boundary": {
+    "zh-CN": {
+      "summary": "EQ-SJT 16 是未来的情境判断模块草案，用于补充 EQ-60 自我报告结果。当前不用于临床诊断、招聘筛选、认证能力评估或高风险决策。",
+      "not_for": [
+        "临床诊断",
+        "招聘筛选",
+        "认证能力评估",
+        "高风险个人决策",
+        "替代 EQ-60"
+      ]
+    },
+    "en": {
+      "summary": "EQ-SJT 16 is a planned scenario-based emotional judgment module that complements the EQ-60 self-report result. It is not for clinical diagnosis, hiring selection, certified capability evaluation, or high-stakes decisions.",
+      "not_for": [
+        "clinical diagnosis",
+        "hiring selection",
+        "certified capability evaluation",
+        "high-stakes decisions",
+        "replacement of EQ-60"
+      ]
+    }
+  },
+  "no_go_claims": [
+    "true_ability_claim",
+    "msceit_equivalence_claim",
+    "certified_ei_claim",
+    "hiring_fit_claim",
+    "clinical_use_claim",
+    "job_performance_prediction_claim"
+  ]
+}

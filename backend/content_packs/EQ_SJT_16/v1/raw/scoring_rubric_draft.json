@@ -1,0 +1,90 @@
+{
+  "schema": "eq_sjt_16.scoring_rubric_draft.v1",
+  "module_code": "EQ_SJT_16",
+  "decision": {
+    "v1_response_prompt": "likely_response",
+    "best_vs_likely_split": "defer_to_v2",
+    "reason": "The first operational version should validate scenario quality and partial-credit rubrics before adding a more complex best-vs-likely interpretation layer."
+  },
+  "partial_credit": [
+    {
+      "score": 0,
+      "label": "high_risk_or_low_quality_response",
+      "description": "Likely to escalate, ignore key emotional information, violate boundaries, or close down repair."
+    },
+    {
+      "score": 1,
+      "label": "low_effectiveness_response",
+      "description": "Addresses part of the situation but misses important emotional, relational, or boundary information."
+    },
+    {
+      "score": 2,
+      "label": "partially_effective_response",
+      "description": "Uses a plausible strategy with some tradeoffs or missing follow-through."
+    },
+    {
+      "score": 3,
+      "label": "high_quality_response",
+      "description": "Balances emotional information, boundaries, clarity, and next-step usefulness for the scenario."
+    }
+  ],
+  "strategy_scores": [
+    {
+      "code": "CUE",
+      "label": {
+        "zh-CN": "线索识别",
+        "en": "Cue reading"
+      },
+      "meaning": "How well the response uses emotional and contextual cues before acting."
+    },
+    {
+      "code": "PAUSE",
+      "label": {
+        "zh-CN": "暂停调节",
+        "en": "Pause and regulation"
+      },
+      "meaning": "How well the response reduces impulsive escalation under pressure."
+    },
+    {
+      "code": "EMP",
+      "label": {
+        "zh-CN": "共情回应",
+        "en": "Empathic response"
+      },
+      "meaning": "How well the response acknowledges emotion without over-rescuing."
+    },
+    {
+      "code": "BND",
+      "label": {
+        "zh-CN": "边界表达",
+        "en": "Boundary setting"
+      },
+      "meaning": "How well the response expresses limits or needs with respect."
+    },
+    {
+      "code": "REPAIR",
+      "label": {
+        "zh-CN": "关系修复",
+        "en": "Relationship repair"
+      },
+      "meaning": "How well the response supports recovery after misunderstanding, harm, or tension."
+    },
+    {
+      "code": "INFL",
+      "label": {
+        "zh-CN": "建设性影响",
+        "en": "Constructive influence"
+      },
+      "meaning": "How well the response moves collaboration toward clear and actionable next steps."
+    }
+  ],
+  "quality_and_risk_controls": [
+    "idealized_answering_review",
+    "cultural_bias_review",
+    "workplace_hierarchy_review",
+    "localization_review",
+    "expert_rubric_calibration",
+    "overclaiming_guard",
+    "non_clinical_non_hiring_boundary"
+  ]
+}
