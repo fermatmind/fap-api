@@ -1,0 +1,63 @@
+{
+  "schema_version": "career_1046_observability_slo.v1",
+  "task": "CAREER-1046-OBSERVABILITY-SLO-01",
+  "final_decision": "career_1046_observability_slo_completed_ready_for_hiring_content_authority",
+  "source_read_model": "career.runtime_projection.ops_read_model.v1",
+  "source_of_truth": "career_runtime_publish_projection",
+  "api_en_expected_count": 1046,
+  "api_zh_expected_count": 1046,
+  "runtime_public_slug_expected_count": 1046,
+  "localized_public_url_expected_count": 2092,
+  "sitemap_expected_career_url_count": 2092,
+  "llms_expected_career_url_count": 2092,
+  "llms_full_expected_career_url_count": 2092,
+  "public_locales": [
+    "en",
+    "zh"
+  ],
+  "excluded_slugs": [
+    "software-developers",
+    "digital-forensics-analysts",
+    "computer-occupations-all-other"
+  ],
+  "excluded_slug_expected_state": "absent_from_api_sitemap_llms_llms_full",
+  "slo_baselines": {
+    "career_api_en_jobs_count": 1046,
+    "career_api_zh_jobs_count": 1046,
+    "runtime_public_career_slugs": 1046,
+    "localized_public_career_urls": 2092,
+    "sitemap_career_urls": 2092,
+    "llms_career_urls": 2092,
+    "llms_full_complete_artifact_career_urls": 2092
+  },
+  "p0_conditions": [
+    "career_api_public_count_regression",
+    "excluded_slug_leakage",
+    "sitemap_or_llms_missing_career_urls",
+    "private_or_noindex_url_exposure",
+    "career_detail_runtime_404_for_public_slug"
+  ],
+  "p1_conditions": [
+    "llms_full_degraded_response_rate_above_budget",
+    "career_api_slow_response_budget_breach",
+    "stale_public_authority_cache",
+    "metadata_indexability_drift"
+  ],
+  "p2_conditions": [
+    "minor_metadata_copy_drift",
+    "non_core_visual_mismatch",
+    "non_blocking_internal_link_gap"
+  ],
+  "observation_cadence": {
+    "day_0": "post_deploy_smoke",
+    "day_1": "career_api_sitemap_llms_llms_full_sample",
+    "day_3": "trend_and_degraded_artifact_review",
+    "day_7": "search_channel_go_hold_review"
+  },
+  "no_production_write": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_cache_mutation": true,
+  "no_deploy": true,
+  "next_task": "PR-HIRING-01"
+}
