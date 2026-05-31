@@ -21,6 +21,12 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         Cache::forget(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':zh-CN:public');
 
         $this->artisan('career:warm-public-authority-cache')
+            ->expectsOutputToContain('career_warm_phase=dataset_payloads state=starting')
+            ->expectsOutputToContain('career_warm_phase=dataset_payloads state=finished')
+            ->expectsOutputToContain('career_warm_phase=job_index_zh_cn state=starting')
+            ->expectsOutputToContain('career_warm_phase=job_index_zh_cn state=finished')
+            ->expectsOutputToContain('career_warm_phase=launch_governance_closure state=starting')
+            ->expectsOutputToContain('career_warm_phase=launch_governance_closure state=finished')
             ->expectsOutputToContain('status=warmed')
             ->expectsOutputToContain(PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY)
             ->expectsOutputToContain(PublicCareerAuthorityResponseCache::DATASET_METHOD_CACHE_KEY)
