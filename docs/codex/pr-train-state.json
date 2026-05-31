@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T09:09:20Z",
+  "updated_at": "2026-05-31T12:41:29+00:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -96,7 +96,13 @@
         "github": {
           "status": "passed",
           "repository": "fap-web",
-          "required_checks": ["build", "contracts", "verify-big5-contract-freeze", "verify-enneagram-contract-freeze", "CodeQL"]
+          "required_checks": [
+            "build",
+            "contracts",
+            "verify-big5-contract-freeze",
+            "verify-enneagram-contract-freeze",
+            "CodeQL"
+          ]
         }
       },
       "failure_reason": null,
@@ -22264,6 +22270,394 @@
       "transitions": [],
       "sidecars": [],
       "next_task": "DEPLOY-READINESS｜Deploy CAREER 1046 growth foundation fixes"
+    },
+    "IQ-NORM-01": {
+      "id": "IQ-NORM-01",
+      "repo": "fap-api",
+      "branch": "codex/iq-norm-01-calibration-authority",
+      "base": "main",
+      "title": "IQ-NORM-01 add IQ norm calibration authority",
+      "status": "local_scope_validation_passed",
+      "depends_on": [],
+      "checks": {
+        "local": {
+          "status": "passed",
+          "commands": [
+            "php -l backend/database/migrations/2026_05_31_090000_create_iq_norm_authorities_table.php backend/app/Services/Iq/IqNormAuthorityContract.php backend/tests/Feature/Content/IqNormAuthorityTest.php",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNormAuthorityTest --no-ansi",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportContractTest --no-ansi",
+            "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "git diff --check"
+          ],
+          "notes": "Targeted PHPUnit suites exited 0 with warnings only; IqNormAuthorityTest had 4 tests/32 assertions and IqReportContractTest had 4 tests/404 assertions."
+        },
+        "github": {
+          "status": null
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        },
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "planned",
+          "to": "implementation_in_progress",
+          "note": "Started backend-only IQ norm authority schema, contract, docs, and tests from latest origin/main."
+        },
+        {
+          "at": "2026-05-31T12:41:29+00:00",
+          "from": "implementation_in_progress",
+          "to": "local_scope_validation_passed",
+          "note": "PHP syntax, targeted IQ norm authority/report contract tests, manifest/state parse, and diff check passed in isolated worktree."
+        }
+      ]
+    },
+    "IQ-NORM-02": {
+      "id": "IQ-NORM-02",
+      "repo": "fap-api",
+      "branch": "codex/iq-norm-02-importer-dry-run",
+      "base": "main",
+      "title": "IQ-NORM-02 add IQ norm table importer dry-run",
+      "status": "planned",
+      "depends_on": [
+        "IQ-NORM-01"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        }
+      ]
+    },
+    "IQ-NORM-03": {
+      "id": "IQ-NORM-03",
+      "repo": "fap-api",
+      "branch": "codex/iq-norm-03-score-claim-unlock",
+      "base": "main",
+      "title": "IQ-NORM-03 unlock IQ score claims through norm authority",
+      "status": "planned",
+      "depends_on": [
+        "IQ-NORM-02"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        }
+      ]
+    },
+    "IQ-PAID-REPORT-01": {
+      "id": "IQ-PAID-REPORT-01",
+      "repo": "fap-api",
+      "branch": "codex/iq-paid-report-01-entitlement-contract",
+      "base": "main",
+      "title": "IQ-PAID-REPORT-01 define paid report entitlement contract",
+      "status": "planned",
+      "depends_on": [
+        "IQ-NORM-03"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        }
+      ]
+    },
+    "IQ-PAID-REPORT-02": {
+      "id": "IQ-PAID-REPORT-02",
+      "repo": "fap-web",
+      "branch": "codex/iq-paid-report-02-render-entitlement-states",
+      "base": "main",
+      "title": "IQ-PAID-REPORT-02 render paid report entitlement states",
+      "status": "planned",
+      "depends_on": [
+        "IQ-PAID-REPORT-01"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        }
+      ]
+    },
+    "IQ-CMS-MEDIA-01": {
+      "id": "IQ-CMS-MEDIA-01",
+      "repo": "fap-api",
+      "branch": "codex/iq-cms-media-01-authority-metadata",
+      "base": "main",
+      "title": "IQ-CMS-MEDIA-01 register CMS media authority metadata",
+      "status": "planned",
+      "depends_on": [
+        "IQ-PAID-REPORT-02"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        }
+      ]
+    },
+    "IQ-CMS-MEDIA-02": {
+      "id": "IQ-CMS-MEDIA-02",
+      "repo": "fap-web",
+      "branch": "codex/iq-cms-media-02-rendering-guard",
+      "base": "main",
+      "title": "IQ-CMS-MEDIA-02 render CMS media without frontend fallbacks",
+      "status": "planned",
+      "depends_on": [
+        "IQ-CMS-MEDIA-01"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        }
+      ]
+    },
+    "IQ-SEO-RAMP-01": {
+      "id": "IQ-SEO-RAMP-01",
+      "repo": "fap-api",
+      "branch": "codex/iq-seo-ramp-01-cms-authority",
+      "base": "main",
+      "title": "IQ-SEO-RAMP-01 publish CMS SEO ramp authority",
+      "status": "planned",
+      "depends_on": [
+        "IQ-CMS-MEDIA-02",
+        "IQ-NORM-03"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        }
+      ]
+    },
+    "IQ-SEO-RAMP-02": {
+      "id": "IQ-SEO-RAMP-02",
+      "repo": "fap-web",
+      "branch": "codex/iq-seo-ramp-02-indexation-gate",
+      "base": "main",
+      "title": "IQ-SEO-RAMP-02 gate SEO indexation through backend authority",
+      "status": "planned",
+      "depends_on": [
+        "IQ-SEO-RAMP-01"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        }
+      ]
+    },
+    "IQ-LIVE-RAMP-01": {
+      "id": "IQ-LIVE-RAMP-01",
+      "repo": "fap-web",
+      "branch": "codex/iq-live-ramp-01-authenticated-smoke",
+      "base": "main",
+      "title": "IQ-LIVE-RAMP-01 add authenticated production smoke fixture gate",
+      "status": "planned",
+      "depends_on": [
+        "IQ-SEO-RAMP-02",
+        "IQ-PAID-REPORT-02"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        }
+      ]
+    },
+    "IQ-OBS-01": {
+      "id": "IQ-OBS-01",
+      "repo": "fap-api",
+      "branch": "codex/iq-obs-01-production-guards",
+      "base": "main",
+      "title": "IQ-OBS-01 add production observability guards",
+      "status": "planned",
+      "depends_on": [
+        "IQ-LIVE-RAMP-01"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        }
+      ]
+    },
+    "IQ-RELEASE-01": {
+      "id": "IQ-RELEASE-01",
+      "repo": "fap-web",
+      "branch": "codex/iq-release-01-launch-readiness-ledger",
+      "base": "main",
+      "title": "IQ-RELEASE-01 finalize production launch readiness ledger",
+      "status": "planned",
+      "depends_on": [
+        "IQ-OBS-01"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        }
+      ]
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
