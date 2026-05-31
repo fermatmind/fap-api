@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T22:58:00+08:00",
+  "updated_at": "2026-05-31T23:10:33+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -22913,6 +22913,610 @@
           "note": "User authorized IQ production PR train manifest/state registration."
         }
       ]
+    },
+    "CLINICAL-LAUNCH-01": {
+      "id": "CLINICAL-LAUNCH-01",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-01-authority-state-machine",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-01 mental-health launch authority state machine",
+      "status": "ci_fix_in_progress",
+      "depends_on": [],
+      "checks": {
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=MentalHealthLaunchAuthority --no-ansi",
+          "evidence": "5 tests passed, 32 assertions after moving the contract out of backend/app runtime paths."
+        },
+        "bigfive_runtime_freeze": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "evidence": "1 test passed, 3 assertions; final branch diff no longer includes backend/app/Services/Scale/MentalHealthLaunchAuthority.php."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "209 routes listed successfully."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test tests/Support/Scale/MentalHealthLaunchAuthority.php tests/Unit/Services/Scale/MentalHealthLaunchAuthorityTest.php",
+          "evidence": "2 files passed after Pint fix."
+        },
+        "composer_validate": {
+          "status": "pass",
+          "command": "cd backend && composer validate --strict",
+          "evidence": "./composer.json is valid."
+        },
+        "composer_audit": {
+          "status": "pass",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "pass",
+          "command": "python3 -m json.tool ... && yaml.safe_load(...)",
+          "evidence": "Generated artifact, train state, and manifest parse successfully; manifest contains 460 PR entries."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check",
+          "evidence": "Whitespace checks passed; branch was rewritten so final PR diff avoids backend/app runtime paths."
+        }
+      },
+      "failure_reason": "Initial GitHub verify-bigfive failed because the first pushed history added a backend/app runtime file. The branch is being rewritten to test-support-only scope and revalidated.",
+      "commit_sha": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1806",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
+        "github_checks_green": false,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T23:10:33+08:00",
+          "from": "missing",
+          "to": "in_progress",
+          "note": "Registered gate-driven CLINICAL-MH-LAUNCH-PR-TRAIN-01 and started CLINICAL-LAUNCH-01 in an isolated worktree."
+        },
+        {
+          "at": "2026-05-31T23:10:33+08:00",
+          "from": "in_progress",
+          "to": "local_validation_passed",
+          "note": "Implemented launch authority state machine, docs/artifact/test, registered the gate-driven train, and passed focused PHPUnit, route:list, Pint, Composer validate/audit, JSON/YAML parse, and diff checks."
+        },
+        {
+          "at": "2026-05-31T23:10:33+08:00",
+          "from": "pr_open",
+          "to": "ci_fix_in_progress",
+          "note": "GitHub verify-bigfive failed on the first pushed history because it included a backend/app runtime file. Moved the authority contract to tests/Support, reran focused tests, and prepared a branch rewrite so final diff stays outside runtime paths."
+        }
+      ],
+      "sidecars": [
+        {
+          "id": "github-verify-bigfive-runtime-freeze",
+          "severity": "resolved_in_scope",
+          "summary": "verify-bigfive runtime freeze rejected backend/app/Services/Scale/MentalHealthLaunchAuthority.php. CLINICAL-LAUNCH-01 contract moved to backend/tests/Support/Scale and focused freeze test passed locally."
+        }
+      ],
+      "next_task": "CLINICAL-LAUNCH-02"
+    },
+    "CLINICAL-LAUNCH-02": {
+      "id": "CLINICAL-LAUNCH-02",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-02",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-02 claim boundary naming and disclaimer gate",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-01"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-03"
+    },
+    "CLINICAL-LAUNCH-03": {
+      "id": "CLINICAL-LAUNCH-03",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-03",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-03 SDS source and suitability audit",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-02"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-04"
+    },
+    "CLINICAL-LAUNCH-04": {
+      "id": "CLINICAL-LAUNCH-04",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-04",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-04 crisis sentinel gate",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-03"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-05"
+    },
+    "CLINICAL-LAUNCH-05": {
+      "id": "CLINICAL-LAUNCH-05",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-05",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-05 locale-aware crisis resources",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-04"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-06"
+    },
+    "CLINICAL-LAUNCH-06": {
+      "id": "CLINICAL-LAUNCH-06",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-06",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-06 sensitive health data consent and retention gate",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-05"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-07"
+    },
+    "CLINICAL-LAUNCH-07": {
+      "id": "CLINICAL-LAUNCH-07",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-07",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-07 free safety and paid report boundary",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-06"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-08"
+    },
+    "CLINICAL-LAUNCH-08": {
+      "id": "CLINICAL-LAUNCH-08",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-08",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-08 clinical related article authority plan",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-07"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-09"
+    },
+    "CLINICAL-LAUNCH-09": {
+      "id": "CLINICAL-LAUNCH-09",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-09",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-09 robots contract and launch-state SEO gate",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-08"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-10"
+    },
+    "CLINICAL-LAUNCH-10": {
+      "id": "CLINICAL-LAUNCH-10",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-10",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-10 SDS canary and Clinical staged noindex enforcement",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-09"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-11"
+    },
+    "CLINICAL-LAUNCH-11": {
+      "id": "CLINICAL-LAUNCH-11",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-11",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-11 SDS commercial launch content authority",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-10"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-12"
+    },
+    "CLINICAL-LAUNCH-12": {
+      "id": "CLINICAL-LAUNCH-12",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-12",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-12 SDS report personalization authority",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-11"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-13"
+    },
+    "CLINICAL-LAUNCH-13": {
+      "id": "CLINICAL-LAUNCH-13",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-13",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-13 Clinical Combo staged content authority",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-12"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-14"
+    },
+    "CLINICAL-LAUNCH-14": {
+      "id": "CLINICAL-LAUNCH-14",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-14",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-14 Clinical Combo report personalization authority",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-13"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-15"
+    },
+    "CLINICAL-LAUNCH-15": {
+      "id": "CLINICAL-LAUNCH-15",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-15",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-15 clinical media and article import package",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-14"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-16"
+    },
+    "CLINICAL-LAUNCH-16": {
+      "id": "CLINICAL-LAUNCH-16",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-16",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-16 Ops clinical launch governance surfaces",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-15"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-17"
+    },
+    "CLINICAL-LAUNCH-17": {
+      "id": "CLINICAL-LAUNCH-17",
+      "repo": "fap-web",
+      "branch": "codex/clinical-launch-17",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-17 frontend clinical UX polish handoff",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-16"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-18"
+    },
+    "CLINICAL-LAUNCH-18": {
+      "id": "CLINICAL-LAUNCH-18",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-18",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-18 clinical commerce and recovery validation",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-17"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-19"
+    },
+    "CLINICAL-LAUNCH-19": {
+      "id": "CLINICAL-LAUNCH-19",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-19",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-19 SDS Search Channel production preflight",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-18"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-LAUNCH-20"
+    },
+    "CLINICAL-LAUNCH-20": {
+      "id": "CLINICAL-LAUNCH-20",
+      "repo": "fap-api",
+      "branch": "codex/clinical-launch-20",
+      "base": "main",
+      "title": "CLINICAL-LAUNCH-20 SDS canary submission and review",
+      "status": "pending",
+      "depends_on": [
+        "CLINICAL-LAUNCH-19"
+      ],
+      "checks": {},
+      "failure_reason": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": null,
+        "local_validation_passed": null,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [],
+      "sidecars": [],
+      "next_task": "CLINICAL-MH-LAUNCH-TRAIN-CLOSEOUT"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {

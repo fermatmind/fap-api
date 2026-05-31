@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "task": "CLINICAL-LAUNCH-01",
+  "train_scope": "CLINICAL-MH-LAUNCH-PR-TRAIN-01",
+  "final_decision": "clinical_launch_01_authority_state_machine_ready_for_local_validation",
+  "contract_location": "backend/tests/Support/Scale/MentalHealthLaunchAuthority.php",
+  "runtime_mutation_attempted": false,
+  "production_data_mutation_attempted": false,
+  "scoring_model_changed": false,
+  "question_model_changed": false,
+  "seo_publication_changed": false,
+  "search_channel_action_attempted": false,
+  "states": [
+    "DRAFT",
+    "STAGED_NOINDEX",
+    "SAFETY_REVIEWED",
+    "INDEXABLE_CANARY",
+    "INDEXABLE_PUBLIC",
+    "RETIRED"
+  ],
+  "default_launch_states": {
+    "SDS_20": "INDEXABLE_CANARY",
+    "CLINICAL_COMBO_68": "STAGED_NOINDEX"
+  },
+  "robots_contract": {
+    "staged_policy": "noindex,follow",
+    "sds_canary_policy": "index,follow",
+    "clinical_combo_policy": "noindex,follow",
+    "disallowed_directives": [
+      "nocache",
+      "noarchive"
+    ],
+    "authority": "launch_state"
+  },
+  "p0_gates": {
+    "claim_boundary_public_naming_diagnostic_disclaimer": true,
+    "sds_source_authorization_translation_score_age_audit": true,
+    "crisis_sentinel_sds_item_19_and_clinical_high_risk_items": true,
+    "locale_aware_crisis_resources_no_global_988": true,
+    "sensitive_health_consent_minor_policy_retention_no_ads_report_noindex": true,
+    "free_safety_vs_paid_personalized_boundary": true,
+    "related_articles_required": {
+      "total": 9,
+      "tool": 3,
+      "safety": 3,
+      "growth": 3
+    },
+    "sds_indexable_canary_only": true,
+    "clinical_combo_remains_staged_noindex": true
+  },
+  "next_task": "CLINICAL-LAUNCH-02"
+}

@@ -18304,3 +18304,364 @@ prs:
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: RESULT-EMAIL-LOOKUP-TOKEN-OPEN-04
+
+  - id: CLINICAL-LAUNCH-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/clinical-launch-01-authority-state-machine
+    base: main
+    title: "CLINICAL-LAUNCH-01 mental-health launch authority state machine"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: in_progress
+    scope:
+      - Register gate-driven mental-health launch authority for SDS and Clinical Combo without runtime publishing.
+      - Define launch states DRAFT, STAGED_NOINDEX, SAFETY_REVIEWED, INDEXABLE_CANARY, INDEXABLE_PUBLIC, and RETIRED.
+      - Lock SDS as indexable canary and Clinical Combo as staged noindex in generated evidence and tests.
+    allowed_paths:
+      - backend/tests/Support/Scale/MentalHealthLaunchAuthority.php
+      - backend/tests/Unit/Services/Scale/MentalHealthLaunchAuthorityTest.php
+      - backend/docs/seo/clinical-launch-01-authority-state-machine.md
+      - backend/docs/seo/generated/clinical-launch-01-authority-state-machine.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change scoring models, question wording, answer keys, public publishing, sitemap, Search Channel, production env, or CMS records.
+      - Add runtime app services or expose public routes for mental-health launch authority in this PR.
+      - Publish Clinical Combo or make it indexable.
+    validation:
+      - cd backend && php artisan test --filter=MentalHealthLaunchAuthority --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Support/Scale/MentalHealthLaunchAuthority.php tests/Unit/Services/Scale/MentalHealthLaunchAuthorityTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/clinical-launch-01-authority-state-machine.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-02
+
+  - id: CLINICAL-LAUNCH-02
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-01]
+    branch: codex/clinical-launch-02-claim-boundary
+    base: main
+    title: "CLINICAL-LAUNCH-02 SDS and Clinical claim boundary disclaimer"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Add SDS and Clinical claim boundary, public naming, and diagnostic disclaimer gates.
+    allowed_paths: []
+    do_not:
+      - Change scoring models or question wording.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-03
+
+  - id: CLINICAL-LAUNCH-03
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-02]
+    branch: codex/clinical-launch-03-sds-audit
+    base: main
+    title: "CLINICAL-LAUNCH-03 SDS source authorization score age audit"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Audit SDS_20 source, authorization, translation, score range, and applicable age gates.
+    allowed_paths: []
+    do_not:
+      - Change scoring models or question wording.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-04
+
+  - id: CLINICAL-LAUNCH-04
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-03]
+    branch: codex/clinical-launch-04-crisis-sentinel
+    base: main
+    title: "CLINICAL-LAUNCH-04 SDS item 19 and Clinical crisis sentinel"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Add crisis sentinel gates for SDS item 19 and Clinical high-risk items.
+    allowed_paths: []
+    do_not:
+      - Change scoring models or question wording.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-05
+
+  - id: CLINICAL-LAUNCH-05
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-04]
+    branch: codex/clinical-launch-05-locale-crisis-resources
+    base: main
+    title: "CLINICAL-LAUNCH-05 locale-aware crisis resources"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Add locale-aware crisis resources without hardcoding 988 for every locale.
+    allowed_paths: []
+    do_not:
+      - Change scoring models or question wording.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-06
+
+  - id: CLINICAL-LAUNCH-06
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-05]
+    branch: codex/clinical-launch-06-sensitive-data-consent
+    base: main
+    title: "CLINICAL-LAUNCH-06 sensitive health consent and retention gates"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Add sensitive health data consent, minor policy, retention, no ad targeting, and report noindex gates.
+    allowed_paths: []
+    do_not:
+      - Change scoring models or question wording.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-07
+
+  - id: CLINICAL-LAUNCH-07
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-06]
+    branch: codex/clinical-launch-07-free-paid-boundary
+    base: main
+    title: "CLINICAL-LAUNCH-07 free safety and paid report boundary"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Separate free safety information from paid personalized report boundaries.
+    allowed_paths: []
+    do_not:
+      - Change scoring models or question wording.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-08
+
+  - id: CLINICAL-LAUNCH-08
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-07]
+    branch: codex/clinical-launch-08-related-articles-pack
+    base: main
+    title: "CLINICAL-LAUNCH-08 mental-health related articles 9 pack"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Correct related article plan to 9 articles across tool, safety, and growth clusters with 3 each.
+    allowed_paths: []
+    do_not:
+      - Publish articles or change scoring models.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-09
+
+  - id: CLINICAL-LAUNCH-09
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-08]
+    branch: codex/clinical-launch-09-robots-contract
+    base: main
+    title: "CLINICAL-LAUNCH-09 mental-health robots launch-state contract"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Correct robots contract to noindex/follow plus launch state, without Google nocache or noarchive reliance.
+    allowed_paths: []
+    do_not:
+      - Publish Clinical Combo or change scoring models.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-10
+
+  - id: CLINICAL-LAUNCH-10
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-09]
+    branch: codex/clinical-launch-10-sds-canary-clinical-noindex
+    base: main
+    title: "CLINICAL-LAUNCH-10 SDS canary and Clinical staged noindex"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Enforce SDS indexable canary only and Clinical Combo staged noindex state.
+    allowed_paths: []
+    do_not:
+      - Publish Clinical Combo or change scoring models.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-11
+
+  - id: CLINICAL-LAUNCH-11
+    repo: fap-web
+    depends_on: [CLINICAL-LAUNCH-10]
+    branch: codex/clinical-launch-11-frontend-visibility-contract
+    base: main
+    title: "CLINICAL-LAUNCH-11 frontend launch-state visibility contract"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Align frontend visibility with backend launch state authority.
+    allowed_paths: []
+    do_not:
+      - Add frontend authority fallback content.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-12
+
+  - id: CLINICAL-LAUNCH-12
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-11]
+    branch: codex/clinical-launch-12-cms-authority-controls
+    base: main
+    title: "CLINICAL-LAUNCH-12 CMS launch authority controls"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Add CMS controls for launch authority review and state visibility.
+    allowed_paths: []
+    do_not:
+      - Publish Clinical Combo or mutate production CMS records.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-13
+
+  - id: CLINICAL-LAUNCH-13
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-12]
+    branch: codex/clinical-launch-13-seo-enumeration-gates
+    base: main
+    title: "CLINICAL-LAUNCH-13 SEO sitemap and llms launch-state gates"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Gate sitemap and llms enumeration by mental-health launch state.
+    allowed_paths: []
+    do_not:
+      - Submit URLs or call external search APIs.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-14
+
+  - id: CLINICAL-LAUNCH-14
+    repo: fap-web
+    depends_on: [CLINICAL-LAUNCH-13]
+    branch: codex/clinical-launch-14-public-disclaimer-crisis-ux
+    base: main
+    title: "CLINICAL-LAUNCH-14 public disclaimer and crisis UX"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Render public disclaimer and locale-aware crisis UX for eligible mental-health surfaces.
+    allowed_paths: []
+    do_not:
+      - Change scoring models or add frontend authority fallback content.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-15
+
+  - id: CLINICAL-LAUNCH-15
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-14]
+    branch: codex/clinical-launch-15-paid-report-boundary
+    base: main
+    title: "CLINICAL-LAUNCH-15 paid report boundary enforcement"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Enforce paid personalized report boundary for mental-health surfaces.
+    allowed_paths: []
+    do_not:
+      - Change scoring models or question wording.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-16
+
+  - id: CLINICAL-LAUNCH-16
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-15]
+    branch: codex/clinical-launch-16-data-retention-audit
+    base: main
+    title: "CLINICAL-LAUNCH-16 data retention and privacy audit trail"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Add data retention and privacy audit trail gates.
+    allowed_paths: []
+    do_not:
+      - Mutate production data or expose sensitive health data.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-17
+
+  - id: CLINICAL-LAUNCH-17
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-16]
+    branch: codex/clinical-launch-17-ops-dashboard
+    base: main
+    title: "CLINICAL-LAUNCH-17 clinical launch ops dashboard visibility"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Add Ops dashboard visibility for mental-health launch gates.
+    allowed_paths: []
+    do_not:
+      - Add mutating launch controls without review gates.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-18
+
+  - id: CLINICAL-LAUNCH-18
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-17]
+    branch: codex/clinical-launch-18-sds-canary-preflight
+    base: main
+    title: "CLINICAL-LAUNCH-18 SDS canary preflight"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Run SDS indexable canary preflight without publishing Clinical Combo.
+    allowed_paths: []
+    do_not:
+      - Submit URLs, enqueue search channel, or mutate production data.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-19
+
+  - id: CLINICAL-LAUNCH-19
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-18]
+    branch: codex/clinical-launch-19-sds-canary-launch
+    base: main
+    title: "CLINICAL-LAUNCH-19 SDS indexable canary launch"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Execute SDS indexable canary launch after gates pass.
+    allowed_paths: []
+    do_not:
+      - Launch Clinical Combo or bypass human approval gates.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CLINICAL-LAUNCH-20
+
+  - id: CLINICAL-LAUNCH-20
+    repo: fap-api
+    depends_on: [CLINICAL-LAUNCH-19]
+    branch: codex/clinical-launch-20-clinical-noindex-closeout
+    base: main
+    title: "CLINICAL-LAUNCH-20 Clinical combo staged noindex closeout"
+    train_scope: clinical_mh_launch_pr_train_01
+    status: pending
+    scope:
+      - Close out Clinical Combo as STAGED_NOINDEX and document remaining launch blockers.
+    allowed_paths: []
+    do_not:
+      - Publish Clinical Combo or make it indexable.
+    validation: []
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: null
