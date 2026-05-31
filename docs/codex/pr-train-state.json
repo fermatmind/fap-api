@@ -1,12 +1,12 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T22:20:00+08:00",
+  "updated_at": "2026-05-31T22:21:00+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-01-all-free-copy-contract-cleanup",
-      "status": "committed",
-      "pr_url": null,
+      "status": "open_pending_github_checks",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1785",
       "checks": {
         "local": {
           "status": "passed",
@@ -21,13 +21,17 @@
           ],
           "scope_validation": "passed",
           "notes": "SQLite/testing env used for local checks to avoid unrelated local MySQL root credential blocker."
+        },
+        "github": {
+          "status": "pending",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1785"
         }
       },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "commit_sha": "c20637bc5f57ab4663af6f1bb6538993abe8fa47"
+      "commit_sha": "36b6f60c5bba9829068de727b1200ee62916f0da"
     },
     "PR-EQ-PER-02": {
       "repo": "fap-api",
