@@ -465,6 +465,22 @@
             },
             "strongest_dimension": "SA"
         },
+        "journey_state_contract": {
+            "affects_scores": false,
+            "available": true,
+            "endpoint": "/api/v0.3/attempts/{attempt_id}/eq/journey",
+            "formal_report_mutation_allowed": false,
+            "persistence": "consent_required",
+            "profile_memory_write": false,
+            "raw_feedback_public_exposure_allowed": false,
+            "signals": [
+                "read_depth",
+                "result_resonance",
+                "action_completion",
+                "retest_intent"
+            ],
+            "version": "eq_journey_state.v1"
+        },
         "legacy_scores": {
             "EM": {
                 "level": "proficient",

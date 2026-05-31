@@ -35,8 +35,8 @@ final class Eq60PdfDeliveryTest extends TestCase
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/pdf');
         $response->assertHeader('X-Report-Scale', 'EQ_60');
-        $response->assertHeader('X-Report-Variant', 'free');
-        $response->assertHeader('X-Report-Locked', 'true');
+        $response->assertHeader('X-Report-Variant', 'full');
+        $response->assertHeader('X-Report-Locked', 'false');
 
         $pdf = (string) $response->getContent();
         $this->assertStringStartsWith('%PDF-1.4', $pdf);

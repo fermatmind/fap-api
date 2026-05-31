@@ -134,8 +134,12 @@ prs:
       - Keep persistence consent-aware.
     allowed_paths:
       - backend/app/**
+      - backend/routes/api.php
+      - backend/docs/contracts/openapi.snapshot.json
       - backend/database/migrations/**
       - backend/tests/**/Eq60*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/tests/Fixtures/eq/v5/**
       - backend/tests/**/Privacy*
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
