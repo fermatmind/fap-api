@@ -97,21 +97,12 @@ jobs:
           name: release-train-dry-run
           path: artifacts/dry-run.json
 
-  production-gate:
-    name: Production deployment approval
-    needs: dry-run
+  run-train:
+    name: Run release train
+    needs: validate
     if: ${{ github.event.inputs.mode == 'run' && github.event.inputs.allow_deploy == 'true' && github.event.inputs.dry_run != 'true' }}
     runs-on: ubuntu-latest
     environment: production
-    steps:
-      - name: Deployment approval gate
-        run: echo "Production environment approval captured"
-
-  run-train:
-    name: Run release train
-    needs: production-gate
-    if: ${{ github.event.inputs.mode == 'run' && github.event.inputs.dry_run != 'true' }}
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Execute train
@@ -135,4 +126,3 @@ jobs:
         with:
           name: release-train-run
           path: artifacts/run.json
-

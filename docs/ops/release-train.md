@@ -27,7 +27,8 @@
 - New workflow is `workflow_dispatch` only.
 - Default and safe mode is dry-run.
 - `allow_deploy` gates run behavior.
-- Production execution depends on GitHub Environment approval (`environment: production`).
+- Production execution depends on GitHub Environment approval on the actual
+  deploy-capable `run-train` job (`environment: production`).
 - Wrapper execution is fail-closed:
   - Missing/disabled deploy command -> `DEPLOY_COMMAND_NOT_CONFIGURED`.
   - Missing rollback command -> `ROLLBACK_COMMAND_NOT_CONFIGURED`.
@@ -47,7 +48,21 @@
 - No `cancel-in-progress` use.
 
 ## Environment and approvals
-`run-train` depends on a `production` job gate and uses `environment: production`.
+`validate` and `dry-run` jobs do not use a production environment and must not
+request production approval. The deploy-capable `run-train` job is the job that
+declares `environment: production`, so GitHub production protection rules and
+environment-scoped secrets apply to the same job that can invoke
+`release_train.py run`.
+
+`run-train` is guarded by all of the following workflow inputs:
+
+- `mode == run`
+- `allow_deploy == true`
+- `dry_run != true`
+
+This keeps dry-run validation outside production approval while making the
+future real backend run path wait for the production environment reviewer before
+the job can access production environment secrets.
 
 ## Manifest
 Top-level fields:
