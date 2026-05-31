@@ -35711,7 +35711,7 @@
   "AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01": {
     "status": "implementation_in_progress",
     "branch": "audit/sec-train-ledger-closeout-01",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1804",
     "base": "main",
     "worktree": "/private/tmp/fap-api-audit-sec-train-ledger-closeout-01",
     "scope": "security_audit_train_ledger_closeout",
@@ -35754,9 +35754,19 @@
         "from": "implementation_in_progress",
         "to": "local_scope_validation_passed",
         "note": "JSON/YAML parse and git diff check passed for docs-only ledger closeout."
+      },
+      {
+        "at": "2026-05-31T22:36:42+08:00",
+        "from": "local_scope_validation_passed",
+        "to": "pr_open_checks_pending",
+        "note": "Created PR #1804 for docs-only security audit train ledger closeout; waiting for GitHub checks."
       }
     ],
     "sidecars": [],
-    "next_task": null
+    "next_task": null,
+    "github": {
+      "status": "checks_pending",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1804"
+    }
   }
 }
