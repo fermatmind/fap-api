@@ -36063,5 +36063,78 @@
       }
     ],
     "next_task": "Wait for GitHub checks on PR #1805, merge if allowed, cleanup, then prepare BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01."
+  },
+  "EMAIL-OUTBOX-SCHEDULER-BOOTSTRAP-04": {
+    "id": "EMAIL-OUTBOX-SCHEDULER-BOOTSTRAP-04",
+    "repo": "fap-api",
+    "branch": "codex/email-outbox-scheduler-bootstrap-04",
+    "base": "main",
+    "status": "pr_opened_with_sidecar",
+    "title": "EMAIL-OUTBOX-SCHEDULER-BOOTSTRAP-04 register email outbox sender in runtime scheduler",
+    "commit_sha": "c240dd9468f99a4c3411dd2d5e669f50694edca4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1809",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding EMAIL-OUTBOX-SCHEDULER-BOOTSTRAP-04 to fap-api pr-train manifest/state."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to backend/bootstrap/app.php, focused email scheduler test, and pr-train metadata; no production env, email send, DNS, credentials, outbox mutation, payment flow, frontend, deploy, Search Channel, or URL submission changes."
+      },
+      "php artisan test --filter=EmailOutboxSchedulerBootstrap --display-warnings --no-ansi": {
+        "status": "pass",
+        "evidence": "Focused test passed: schedule:list --json contains email:outbox-send --limit=50 on every-minute cron."
+      },
+      "php artisan schedule:list --no-ansi": {
+        "status": "pass",
+        "evidence": "Runtime scheduler listing includes email:outbox-send --limit=50."
+      },
+      "php artisan route:list --no-ansi": {
+        "status": "pass",
+        "evidence": "Route listing completed successfully."
+      },
+      "vendor/bin/pint --test bootstrap/app.php tests/Feature/Email/EmailOutboxSchedulerBootstrapTest.php": {
+        "status": "pass",
+        "evidence": "Scoped formatting check passed for files touched by this PR."
+      },
+      "vendor/bin/pint --test": {
+        "status": "sidecar_external_failure",
+        "evidence": "Full Pint fails on pre-existing out-of-scope app/Http/Controllers/API/V0_3/AttemptReadController.php unary_operator_spaces; current scoped files pass Pint."
+      },
+      "composer validate --strict": {
+        "status": "pass",
+        "evidence": "Composer schema validation passed."
+      },
+      "composer audit --locked --no-interaction --ignore-unreachable": {
+        "status": "pass",
+        "evidence": "No locked dependency advisories reported."
+      },
+      "json_yaml_diff_checks": {
+        "status": "pass",
+        "evidence": "pr-train-state JSON parsed, pr-train YAML parsed, git diff --check passed, and git diff --cached --check passed."
+      }
+    },
+    "failure_reason": "Sidecar only: full Pint has a pre-existing out-of-scope AttemptReadController formatting issue; scoped files passed.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "history": [
+      {
+        "at": "2026-05-31T12:41:31Z",
+        "status": "in_progress",
+        "summary": "Initialized after user authorization; using isolated worktree from latest origin/main."
+      },
+      {
+        "at": "2026-05-31T14:47:01Z",
+        "status": "local_checks_passed_with_sidecar",
+        "summary": "Registered email:outbox-send in Laravel bootstrap scheduler and added focused schedule:list coverage. Focused test, schedule:list, route:list, scoped Pint, composer validate, composer audit, JSON/YAML parsing, and diff checks passed. Full Pint remains blocked by a pre-existing out-of-scope AttemptReadController formatting issue."
+      },
+      {
+        "at": "2026-05-31T15:18:00Z",
+        "status": "pr_opened_with_sidecar",
+        "summary": "Opened PR #1809 and rebased onto latest origin/main from implementation commit c240dd9468f99a4c3411dd2d5e669f50694edca4; GitHub checks must rerun after force-push."
+      }
+    ]
   }
 }

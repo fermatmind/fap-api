@@ -18270,3 +18270,37 @@ prs:
       - git diff --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: null
+
+  - id: EMAIL-OUTBOX-SCHEDULER-BOOTSTRAP-04
+    repo: fap-api
+    depends_on: []
+    branch: codex/email-outbox-scheduler-bootstrap-04
+    base: main
+    title: "EMAIL-OUTBOX-SCHEDULER-BOOTSTRAP-04 register email outbox sender in runtime scheduler"
+    train_scope: email_first_result_access
+    status: pending
+    scope:
+      - Register email:outbox-send in the Laravel 11 bootstrap scheduler so production schedule:run can send pending DirectMail outbox rows.
+      - Add focused schedule:list coverage that verifies the runtime scheduler contains the email outbox command.
+    allowed_paths:
+      - backend/bootstrap/app.php
+      - backend/tests/Feature/Email/EmailOutboxSchedulerBootstrapTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Edit production env, credentials, DNS, DirectMail console settings, or SMTP secrets.
+      - Send real email or mutate production outbox rows.
+      - Change result access token semantics, payment flows, or frontend behavior.
+    validation:
+      - cd backend && php artisan test --filter=EmailOutboxSchedulerBootstrap --no-ansi
+      - cd backend && php artisan schedule:list --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: RESULT-EMAIL-LOOKUP-TOKEN-OPEN-04
