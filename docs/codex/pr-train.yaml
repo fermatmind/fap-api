@@ -17909,6 +17909,7 @@ prs:
       - backend/app/Console/Commands/NormsIqImport.php
       - backend/app/Console/Kernel.php
       - backend/tests/Feature/Psychometrics/IqNormsImportDryRunTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/tests/Fixtures/iq/norms/iq_norm_dry_run_valid.json
       - backend/tests/Fixtures/iq/norms/iq_norm_dry_run_invalid.json
       - docs/codex/pr-train.yaml
@@ -17919,6 +17920,7 @@ prs:
       - php -l backend/app/Console/Commands/NormsIqImport.php backend/tests/Feature/Psychometrics/IqNormsImportDryRunTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNormsImportDryRunTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqNorm --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi
       - python3 -m json.tool backend/tests/Fixtures/iq/norms/iq_norm_dry_run_valid.json >/dev/null
       - python3 -m json.tool backend/tests/Fixtures/iq/norms/iq_norm_dry_run_invalid.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null

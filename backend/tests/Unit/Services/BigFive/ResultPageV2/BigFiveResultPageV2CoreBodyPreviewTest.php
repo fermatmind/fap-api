@@ -1593,6 +1593,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_norm_import_dry_run_command_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/NormsIqImport.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\NormsIqImport;',
+            '+        NormsIqImport::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_iq_result_secrecy_redaction_only(): void
     {
         $changed = [
@@ -2968,6 +2982,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isIqNormImportDryRunCommandFile($file)) {
+                continue;
+            }
+
             if ($this->isRiasecMeasurementContractComparePolicyFile($file)) {
                 continue;
             }
@@ -3059,6 +3077,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsControlledArticlePublishSopOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleCoverPropagationSmokeOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsAlipayPendingCompensationSchedulerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsIqNormImportDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
                 continue;
@@ -3683,6 +3702,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Iq/IqNormAuthorityContract.php',
             'backend/database/migrations/2026_05_31_090000_create_iq_norm_authorities_table.php',
         ], true);
+    }
+
+    private function isIqNormImportDryRunCommandFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/NormsIqImport.php';
     }
 
     private function isIqResultSecrecyRedactionFile(string $file): bool
@@ -4679,6 +4703,29 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/commerce:compensate-pending-orders|--provider=alipay|--include-created|--only-stale|--limit=10|--older-than-minutes=60|everyTenMinutes|withoutOverlapping/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsIqNormImportDryRunOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $normalized) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bNormsIqImport\b/u', $normalized) !== 1) {
                 return false;
             }
         }
