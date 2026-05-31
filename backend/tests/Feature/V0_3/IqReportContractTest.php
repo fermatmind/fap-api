@@ -310,7 +310,7 @@ final class IqReportContractTest extends TestCase
         }
     }
 
-    public function test_IqPaidReport_entitlement_unlocks_full_payload_for_matching_anon(): void
+    public function test_iq_paid_report_entitlement_unlocks_full_payload_for_matching_anon(): void
     {
         $this->seedScales();
 
@@ -345,7 +345,7 @@ final class IqReportContractTest extends TestCase
         $this->assertNull(data_get($payload, 'report.correct_answers'));
     }
 
-    public function test_IqPaidReport_entitlement_does_not_unlock_for_wrong_anon(): void
+    public function test_iq_paid_report_entitlement_does_not_unlock_for_wrong_anon(): void
     {
         $this->seedScales();
 
@@ -374,7 +374,7 @@ final class IqReportContractTest extends TestCase
         $this->assertNull(data_get($payload, 'report.summary.raw_score'));
     }
 
-    public function test_IqPaidReport_module_contract_is_iq_specific(): void
+    public function test_iq_paid_report_module_contract_is_iq_specific(): void
     {
         $this->assertSame('iq_core', \App\Services\Report\ReportAccess::freeModuleForScale('IQ_RAVEN'));
         $this->assertSame('iq_full', \App\Services\Report\ReportAccess::fullModuleForScale('IQ_RAVEN'));
@@ -406,5 +406,4 @@ final class IqReportContractTest extends TestCase
             'updated_at' => now(),
         ]);
     }
-
 }
