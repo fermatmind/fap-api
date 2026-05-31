@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:14:44+08:00",
+  "updated_at": "2026-05-31T16:15:33+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -34525,7 +34525,7 @@
     "branch": "audit/sec-payment-integrity-01",
     "base": "main",
     "title": "AUDIT-SEC-PAYMENT-INTEGRITY-01 harden payment integrity boundaries",
-    "status": "local_scope_validation_passed",
+    "status": "pr_open_checks_pending",
     "depends_on": [
       "AUDIT-SEC-RESULT-IDENTITY-01 merged"
     ],
@@ -34562,6 +34562,10 @@
           "rg raw production order id scan on backend/docs backend/tests docs/codex"
         ],
         "evidence": "route:list passed; sqlite migrate passed; ci_verify_mbti.sh passed; diff check passed; manifest/state parse passed; raw production order id scan passed."
+      },
+      "github": {
+        "status": "pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1793"
       }
     },
     "failure_reason": null,
@@ -34592,6 +34596,12 @@
         "from": "local_scope_validation_in_progress",
         "to": "local_scope_validation_passed",
         "note": "Focused payment integrity tests, Alipay filter, route list, sqlite migrate, ci_verify_mbti, diff check, manifest parse, and redaction scan passed; broad Payment filter external fixture failures registered as sidecar."
+      },
+      {
+        "at": "2026-05-31T16:15:33+08:00",
+        "from": "local_scope_validation_passed",
+        "to": "pr_open_checks_pending",
+        "note": "Created PR #1793 from audit/sec-payment-integrity-01; waiting for GitHub required checks."
       }
     ],
     "sidecars": [
@@ -34623,6 +34633,9 @@
       "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
       "docs/codex/pr-train.yaml",
       "docs/codex/pr-train-state.json"
-    ]
+    ],
+    "commit_sha": "1b4663df4c0fe6d17d48b0fc78555e09188ee7c4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1793",
+    "pr_number": 1793
   }
 }
