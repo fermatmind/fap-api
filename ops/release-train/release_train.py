@@ -303,15 +303,22 @@ def evaluate_item(
                         )
 
     if item.get("deploy_required") and allow_deploy and mode == "run" and repo == "fap-api":
+        release_name = str(item.get("release_name") or item.get("id") or "").strip()
         cmd_env = dict(os.environ)
         cmd_env.update({
-            "BACKEND_SHA": expected_sha,
-            "RELEASE_NAME": item.get("id"),
-            "DEPLOY_TARGET": item.get("deploy_target", "production"),
-            "ALLOW_PRODUCTION_DEPLOY": _bool_from_str(os.environ.get("RELEASE_TRAIN_ALLOW_DEPLOY", "false")),
+            "DEPLOY_DRY_RUN": "false",
+            "BACKEND_DEPLOY_SHA": expected_sha,
+            "RELEASE_NAME": release_name,
+            "DEPLOY_ENV": str(item.get("deploy_target", "production")),
+            "ALLOW_PRODUCTION_DEPLOY": "true" if _bool_from_str(os.environ.get("RELEASE_TRAIN_ALLOW_DEPLOY", "false")) else "false",
+            "ALLOW_REAL_DEPLOY": "true" if allow_deploy else "false",
         })
-        if "DEPLOY_COMMAND" in item:
-            cmd_env["DEPLOY_COMMAND"] = item["DEPLOY_COMMAND"]
+        deployer_bin = item.get("deployer_bin") or item.get("DEPLOYER_BIN")
+        deployer_file = item.get("deployer_file") or item.get("DEPLOYER_FILE")
+        if deployer_bin:
+            cmd_env["DEPLOYER_BIN"] = str(deployer_bin)
+        if deployer_file:
+            cmd_env["DEPLOYER_FILE"] = str(deployer_file)
         deployment = _run_command(
             ["bash", str(CURRENT_DIR.parent.parent / "backend/scripts/deploy/deploy_backend.sh")],
             env=cmd_env,

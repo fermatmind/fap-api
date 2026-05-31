@@ -112,10 +112,45 @@ High-risk paths require manual approval and are blocked by default:
 
 If wrappers are invoked without explicit runtime intent flags they fail closed.
 
+`deploy_backend.sh` is connected to the existing backend Deployer contract and
+does not accept an arbitrary `DEPLOY_COMMAND`. The guarded command shape is:
+
+```bash
+vendor/bin/dep deploy production -f deploy.php -o release_name="$RELEASE_NAME" --no-interaction
+```
+
+Required real-deploy environment:
+
+- `DEPLOY_DRY_RUN=false`
+- `ALLOW_PRODUCTION_DEPLOY=true`
+- `ALLOW_REAL_DEPLOY=true`
+- `DEPLOY_ENV=production`
+- `BACKEND_DEPLOY_SHA=<current checked-out backend sha>`
+- `RELEASE_NAME=<operator-approved release name>`
+
+Safe dry-run example:
+
+```bash
+DEPLOY_DRY_RUN=true \
+ALLOW_PRODUCTION_DEPLOY=true \
+ALLOW_REAL_DEPLOY=false \
+DEPLOY_ENV=production \
+BACKEND_DEPLOY_SHA="$(git rev-parse HEAD)" \
+RELEASE_NAME="adapter-dry-run-test" \
+bash backend/scripts/deploy/deploy_backend.sh
+```
+
+The dry-run validates inputs and prints the planned command, but it does not
+execute Deployer, rollback, frontend deployment, migrations, Search Channel, or
+URL submission.
+
 ## Recovery guidance
-- If deploy wrapper outputs `DEPLOY_COMMAND_NOT_CONFIGURED`, set release-time environment:
+- If deploy wrapper outputs `REAL_DEPLOY_NOT_ALLOWED`, set release-time environment:
   - `ALLOW_REAL_DEPLOY=true`
-  - `DEPLOY_COMMAND=<existing production command>`
+- If deploy wrapper outputs `PRODUCTION_DEPLOY_NOT_ALLOWED`, set release-time environment:
+  - `ALLOW_PRODUCTION_DEPLOY=true`
+- If deploy wrapper outputs `BACKEND_DEPLOY_SHA_MISMATCH`, sync the checkout to
+  the approved SHA before retrying.
 - If rollback wrapper outputs `ROLLBACK_COMMAND_NOT_CONFIGURED`, set release-time environment:
   - `ALLOW_REAL_ROLLBACK=true`
   - `ROLLBACK_COMMAND=<existing rollback command>`
@@ -135,4 +170,3 @@ If wrappers are invoked without explicit runtime intent flags they fail closed.
 ## Recovery for v1 blockers
 - If production deployment command is unknown, run remains blocked and should be handled by manual platform owner with explicit wrapper configuration.
 - If high-risk path mismatches appear, update manifest scope or narrow file impact.
-

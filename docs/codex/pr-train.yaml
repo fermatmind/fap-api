@@ -16250,6 +16250,66 @@ prs:
     frontend_fallback_authority: false
     next_task: Phase 4 deploy workflow parity requires explicit authorization
 
+  - id: OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01
+    repo: fap-api
+    branch: ops/release-train-backend-deploy-adapter-01
+    base: main
+    title: "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01 connect backend deploy adapter"
+    train_scope: release_train_backend_deploy_adapter
+    risk_level: p0_deploy_guarded_adapter
+    depends_on:
+      - OPS-RELEASE-TRAIN-ORCHESTRATOR-01 merged and dry-run validated
+    allowed_paths:
+      - backend/scripts/deploy/deploy_backend.sh
+      - ops/release-train/release_train.py
+      - ops/release-train/schema/release-train.schema.json
+      - ops/release-train/examples/release-train.example.json
+      - tests/ops/test_backend_deploy_adapter.py
+      - docs/ops/release-train.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Connect backend/scripts/deploy/deploy_backend.sh to the existing Deployer backend deploy contract.
+      - Preserve fail-closed behavior by requiring explicit deploy flags, release name, environment, and backend SHA.
+      - Keep dry-run non-mutating by validating inputs and printing the planned Deployer command without execution.
+      - Let release_train.py pass release name, deploy target, deploy SHA, and deploy guard env to the wrapper in run mode.
+      - Add focused tests proving dry-run safety, guard failures, mocked command construction, and no rollback invocation.
+    do_not:
+      - Do not deploy or run mode=run in GitHub Actions.
+      - Do not run production SSH, mutate production, migrate production, restart services, or approve production environment.
+      - Do not modify .github/workflows/deploy.yml or .github/workflows/ci.yml.
+      - Do not modify deploy.php unless strictly necessary.
+      - Do not enable frontend deploy, automatic rollback, automatic merge, Search Channel, or URL submission.
+      - Do not alter app/business code, content baselines, CMS, DB, production env, or fap-web.
+    validation:
+      - python3 -m json.tool ops/release-train/examples/release-train.example.json >/dev/null
+      - python3 ops/release-train/release_train.py validate-manifest --manifest ops/release-train/examples/release-train.example.json
+      - python3 ops/release-train/release_train.py plan --manifest ops/release-train/examples/release-train.example.json
+      - python3 ops/release-train/release_train.py dry-run --manifest ops/release-train/examples/release-train.example.json
+      - python3 -m unittest discover tests/ops
+      - bash backend/scripts/deploy/deploy_backend.sh
+      - DEPLOY_DRY_RUN=true ALLOW_PRODUCTION_DEPLOY=true ALLOW_REAL_DEPLOY=false DEPLOY_ENV=production BACKEND_DEPLOY_SHA="$(git rev-parse HEAD)" RELEASE_NAME="adapter-dry-run-test" bash backend/scripts/deploy/deploy_backend.sh
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: explicit production deployment approval remains required after review
+
   - id: PR-POL-01
     repo: fap-api
     branch: content/pr-pol-01-policies-dashboard
