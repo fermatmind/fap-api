@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T17:53:56.360791Z",
+  "updated_at": "2026-05-31T23:11:44Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -36439,7 +36439,7 @@
     "repo": "fap-api",
     "branch": "codex/payment-alipay-owner-mismatch-controlled-repair-04",
     "base": "main",
-    "status": "in_progress",
+    "status": "local_checks_passed_with_sidecar",
     "title": "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04 state-sync owner mismatch candidate",
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1815",
@@ -37579,7 +37579,7 @@
     "repo": "fap-api",
     "branch": "codex/email-outbox-scheduler-bootstrap-04",
     "base": "main",
-    "status": "pr_opened_with_sidecar",
+    "status": "merged",
     "title": "EMAIL-OUTBOX-SCHEDULER-BOOTSTRAP-04 register email outbox sender in runtime scheduler",
     "commit_sha": "c240dd9468f99a4c3411dd2d5e669f50694edca4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1809",
@@ -37654,7 +37654,7 @@
     "base": "main",
     "status": "pr_opened_with_sidecar",
     "title": "docs(foundation): add Daily Giving social sync readiness",
-    "commit_sha": "d3701d09402d7392039da9be893ddf0a6d5b8c69",
+    "commit_sha": "25e47f6b7dff748935293e5600d10046d9673e6d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1819",
     "checks": {
       "manifest_registration": {
@@ -37691,9 +37691,9 @@
       }
     },
     "failure_reason": "Sidecar only: full Pint reports a pre-existing out-of-scope IqReportContractTest formatting issue; scoped touched files passed.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-31T16:38:25Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "next_task": "PR-FDN-SOCIAL-SYNC-MVP-01",
     "history": [
       {
@@ -37710,6 +37710,79 @@
         "at": "2026-05-31T16:27:51Z",
         "status": "pr_opened_with_sidecar",
         "summary": "Opened PR #1819 for the readiness report. GitHub checks are pending; local full Pint sidecar remains out-of-scope."
+      },
+      {
+        "at": "2026-05-31T16:38:25Z",
+        "status": "merged",
+        "summary": "PR #1819 merged after GitHub checks passed and mergeStateStatus was CLEAN."
+      }
+    ]
+  },
+  "PR-FDN-SOCIAL-SYNC-MVP-01": {
+    "id": "PR-FDN-SOCIAL-SYNC-MVP-01",
+    "repo": "fap-api",
+    "branch": "codex/pr-fdn-social-sync-mvp-01",
+    "base": "main",
+    "status": "in_progress",
+    "title": "feat(foundation): add manual Daily Giving social sync MVP",
+    "depends_on": [
+      "PR-FDN-SOCIAL-SYNC-READINESS"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding PR-FDN-SOCIAL-SYNC-MVP-01 to fap-api pr-train manifest/state."
+      },
+      "dependency_verification": {
+        "status": "pass",
+        "evidence": "PR-FDN-SOCIAL-SYNC-READINESS is merged in origin/main at 25e47f6b7dff748935293e5600d10046d9673e6d."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to manual Daily Giving social sync status/workflow using existing social URL fields. No production mutation, CMS mutation, deploy, Search Channel action, URL submission, external API call, credential handling, automatic posting, social platform client, migration, or queue is added."
+      },
+      "php artisan test --filter=DailyGivingRecordManualSocialSync --no-ansi": {
+        "status": "pass",
+        "evidence": "Focused manual social sync test passed: 3 tests, 18 assertions."
+      },
+      "php artisan route:list --no-ansi": {
+        "status": "pass",
+        "evidence": "Route listing completed successfully; no new route was added."
+      },
+      "vendor/bin/pint --test app/Models/DailyGivingRecord.php app/Filament/Ops/Resources/DailyGivingRecordResource.php tests/Feature/Foundation/DailyGivingRecordManualSocialSyncTest.php": {
+        "status": "pass",
+        "evidence": "Scoped Pint passed for all PHP files touched by this PR."
+      },
+      "vendor/bin/pint --test": {
+        "status": "sidecar_external_failure",
+        "evidence": "Full Pint reports out-of-scope style issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php. Current PR does not touch those files."
+      },
+      "composer validate --strict": {
+        "status": "pass",
+        "evidence": "Composer schema validation passed."
+      },
+      "composer audit --locked --no-interaction --ignore-unreachable": {
+        "status": "pass",
+        "evidence": "No locked dependency advisories reported."
+      }
+    },
+    "failure_reason": "Sidecar only: full Pint reports out-of-scope EQ test formatting issues; scoped touched files passed.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "next_task": "PR-FDN-SOCIAL-LINK-DISPLAY-REVIEW-01",
+    "history": [
+      {
+        "at": "2026-05-31T23:11:44Z",
+        "status": "in_progress",
+        "summary": "Initialized after user authorization; using isolated worktree from latest origin/main after clearing PR #1825."
+      },
+      {
+        "at": "2026-05-31T23:19:15Z",
+        "status": "local_checks_passed_with_sidecar",
+        "summary": "Focused test, route:list, scoped Pint, composer validate, composer audit, JSON/YAML parsing, and diff checks passed. Full Pint has out-of-scope EQ test formatting sidecars."
       }
     ]
   }

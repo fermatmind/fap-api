@@ -651,7 +651,7 @@ prs:
       - cd backend && php artisan test --filter=SeoIntel
       - cd backend && php artisan seo-intel:collect --collector=attribution_revenue_foundation --dry-run --json
       - cd backend && php artisan route:list --no-ansi
-      - cd backend && vendor/bin/pint --test
+      - cd backend && vendor/bin/pint --test tests/Feature/Foundation/PrFdnSocialSyncReadinessTest.php
       - git diff --check
       - git diff --cached --check
     merge_policy:
@@ -18782,3 +18782,41 @@ prs:
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: PR-FDN-SOCIAL-SYNC-MVP-01
+
+  - id: PR-FDN-SOCIAL-SYNC-MVP-01
+    repo: fap-api
+    depends_on: [PR-FDN-SOCIAL-SYNC-READINESS]
+    branch: codex/pr-fdn-social-sync-mvp-01
+    base: main
+    title: "feat(foundation): add manual Daily Giving social sync MVP"
+    train_scope: foundation_daily_giving_social_sync
+    status: in_progress
+    scope:
+      - Add a manual-only Foundation Daily Giving social sync MVP using existing social URL fields and Ops admin workflow.
+      - Surface manual social sync status in Ops without adding database schema, credentials, external API clients, posting queues, automatic posting, CMS mutation, deploy, Search Channel action, or URL submission.
+      - Document and test the boundary that humans publish externally, then record final post URLs in backend authority fields.
+    allowed_paths:
+      - backend/app/Models/DailyGivingRecord.php
+      - backend/app/Filament/Ops/Resources/DailyGivingRecordResource.php
+      - backend/docs/seo/pr-fdn-social-sync-mvp-01.md
+      - backend/docs/seo/generated/pr-fdn-social-sync-mvp-01.v1.json
+      - backend/tests/Feature/Foundation/DailyGivingRecordManualSocialSyncTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add migrations, new database fields, credentials, automatic posting, social platform API clients, queues, or retry workers.
+      - Mutate production data or CMS records.
+      - Deploy, submit URLs, enqueue Search Channel, or call external search/social APIs.
+    validation:
+      - cd backend && php artisan test --filter=DailyGivingRecordManualSocialSync --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test app/Models/DailyGivingRecord.php app/Filament/Ops/Resources/DailyGivingRecordResource.php tests/Feature/Foundation/DailyGivingRecordManualSocialSyncTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/pr-fdn-social-sync-mvp-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: PR-FDN-SOCIAL-LINK-DISPLAY-REVIEW-01

@@ -12,6 +12,10 @@ class DailyGivingRecord extends Model
 {
     use HasFactory;
 
+    public const MANUAL_SOCIAL_SYNC_NOT_RECORDED = 'not_recorded';
+
+    public const MANUAL_SOCIAL_SYNC_RECORDED = 'recorded';
+
     public const DONATION_PLANNED = 'planned';
 
     public const DONATION_COMPLETED = 'completed';
@@ -51,6 +55,13 @@ class DailyGivingRecord extends Model
         self::PROOF_REDACTED_AVAILABLE,
         self::PROOF_WITHHELD,
         self::PROOF_NONE,
+    ];
+
+    public const MANUAL_SOCIAL_SYNC_FIELDS = [
+        'x' => 'social_x_url',
+        'linkedin' => 'social_linkedin_url',
+        'weibo' => 'social_weibo_url',
+        'xiaohongshu' => 'social_xiaohongshu_url',
     ];
 
     protected $table = 'daily_giving_records';
@@ -120,6 +131,46 @@ class DailyGivingRecord extends Model
             && $this->recipient_official_url !== ''
             && in_array($this->donation_status, self::PUBLISHABLE_DONATION_STATUSES, true)
             && in_array($this->proof_status, self::PUBLISHABLE_PROOF_STATUSES, true);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function manualSocialSyncLinks(): array
+    {
+        $links = [];
+
+        foreach (self::MANUAL_SOCIAL_SYNC_FIELDS as $platform => $field) {
+            $url = trim((string) ($this->{$field} ?? ''));
+
+            if ($url !== '') {
+                $links[$platform] = $url;
+            }
+        }
+
+        $otherLinks = [];
+
+        foreach (($this->social_other_links ?? []) as $label => $url) {
+            $label = trim((string) $label);
+            $url = trim((string) $url);
+
+            if ($label !== '' && $url !== '') {
+                $otherLinks[$label] = $url;
+            }
+        }
+
+        if ($otherLinks !== []) {
+            $links['other'] = $otherLinks;
+        }
+
+        return $links;
+    }
+
+    public function manualSocialSyncStatus(): string
+    {
+        return $this->manualSocialSyncLinks() === []
+            ? self::MANUAL_SOCIAL_SYNC_NOT_RECORDED
+            : self::MANUAL_SOCIAL_SYNC_RECORDED;
     }
 
     /**
