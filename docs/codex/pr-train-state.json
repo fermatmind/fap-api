@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:21:06+08:00",
+  "updated_at": "2026-05-31T16:41:36+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -34679,7 +34679,7 @@
     "branch": "audit/sec-payment-integrity-01",
     "base": "main",
     "title": "AUDIT-SEC-PAYMENT-INTEGRITY-01 harden payment integrity boundaries",
-    "status": "ci_fix_pushed_checks_pending",
+    "status": "merged",
     "depends_on": [
       "AUDIT-SEC-RESULT-IDENTITY-01 merged"
     ],
@@ -34733,14 +34733,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-31T08:31:32Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -34772,6 +34772,12 @@
         "from": "pr_open_checks_pending",
         "to": "ci_fix_pushed_checks_pending",
         "note": "Fixed verify-bigfive runtime-freeze allowlist for ReprocessPaymentEventJob.php and pushed retry commit."
+      },
+      {
+        "at": "2026-05-31T16:37:25+08:00",
+        "from": "ci_fix_pushed_checks_pending",
+        "to": "merged",
+        "note": "PR #1793 checks passed after rebase; squash merged; origin/main contains merge commit; local and remote task branches cleaned."
       }
     ],
     "sidecars": [
@@ -34806,6 +34812,80 @@
     ],
     "commit_sha": "1b4663df4c0fe6d17d48b0fc78555e09188ee7c4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1793",
-    "pr_number": 1793
+    "pr_number": 1793,
+    "merge_commit": "14c30683909759a4607607c9056c7bad2ed64341"
+  },
+  "AUDIT-SEC-CONTENT-PUBLISH-GATES-01": {
+    "id": "AUDIT-SEC-CONTENT-PUBLISH-GATES-01",
+    "repo": "fap-api",
+    "branch": "audit/sec-content-publish-gates-01",
+    "base": "main",
+    "title": "AUDIT-SEC-CONTENT-PUBLISH-GATES-01 harden content publication gates",
+    "status": "local_scope_validation_passed_with_sidecar",
+    "depends_on": [
+      "AUDIT-SEC-PAYMENT-INTEGRITY-01 merged"
+    ],
+    "checks": {
+      "authorization": "user explicitly authorized adding remaining SECURITY-AUDIT-36 PR train items to manifest/state",
+      "workspace_safety": "using isolated worktree /private/tmp/fap-api-audit-sec-content-publish-gates-01; dirty primary worktree untouched",
+      "deploy_safety_boundary": "no deploy, no production mutation, no production SSH",
+      "source_findings": [
+        "Forbidden URL lists are ignored by publication gate",
+        "Fallback gated slug lists are ignored",
+        "Missing sitemap evidence allows false 1048 claim"
+      ],
+      "focused_local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && composer dump-autoload --no-ansi",
+          "cd backend && php artisan test --filter='CareerRuntimeCandidatePrepPlannerTest|CareerFullVisiblePublicationGateTest' --no-ansi"
+        ],
+        "evidence": "Focused content publication gate tests passed: 16 tests, 83 assertions. Composer emitted existing PSR-4 warnings for IQ tests."
+      },
+      "acceptance": {
+        "status": "passed_with_external_ci_verify_sidecar",
+        "commands": [
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-content-publish-gates-01.sqlite php artisan migrate --force --no-ansi",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 - <<PY\nimport yaml\nfrom pathlib import Path\nyaml.safe_load(Path(\"docs/codex/pr-train.yaml\").read_text())\nPY",
+          "bash backend/scripts/ci_verify_mbti.sh"
+        ],
+        "evidence": "route:list passed; sqlite migrate passed; diff/schema checks passed. ci_verify_mbti.sh failed only in existing Big5 content-pack publish/rollback temp target compiled directory assertions outside this PR scope; generated dirty artifacts were restored."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-05-31T16:37:25+08:00",
+        "from": "authorized",
+        "to": "implementation_in_progress",
+        "note": "Started scoped content publication gate hardening from latest origin/main after AUDIT-SEC-PAYMENT-INTEGRITY-01 post-merge cleanup."
+      },
+      {
+        "at": "2026-05-31T16:41:36+08:00",
+        "from": "implementation_in_progress",
+        "to": "local_scope_validation_passed_with_sidecar",
+        "note": "Focused tests, route:list, sqlite migrate, diff check, and manifest/state parse passed; unrelated ci_verify_mbti Big5 content-pack temp-target failures registered as sidecar per train protocol."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "big5_pack_publish_rollback_temp_target_compiled_missing",
+        "status": "registered_non_blocking_external_to_scope",
+        "summary": "bash backend/scripts/ci_verify_mbti.sh failed in PacksPublishBig5Test and PacksRollbackBig5Test because test temp target compiled/manifest.json was absent. Changed files are limited to career audit publication gates and PR-train ledger; no content pack files are staged."
+      }
+    ],
+    "next_task": "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01"
   }
 }

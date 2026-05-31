@@ -154,6 +154,48 @@ final class CareerRuntimeCandidatePrepPlannerTest extends TestCase
         $this->assertContains('delta_contains_cn_proxy_slugs', $reasons);
     }
 
+    public function test_detail_ready_1048_blocks_fallback_gated_slug_lists(): void
+    {
+        $slugs = $this->slugs('ready', 1018);
+
+        $payload = (new CareerRuntimeCandidatePrepPlanner)->plan(
+            targetDeltaPlan: [
+                'schema_version' => 'career_detail_ready_publication_candidates.v1',
+                'status' => 'pass',
+                'target_key' => 'detail_ready_1048',
+                'current_public_total' => 30,
+                'target_public_total' => 1048,
+                'ready_not_public_1018' => [
+                    'count' => 1018,
+                    'slugs' => $slugs,
+                ],
+                'manual_hold' => [
+                    'ready_slugs' => [],
+                    'slugs' => ['ready-001'],
+                ],
+                'blocked' => [
+                    'ready_slugs' => [],
+                    'slugs' => ['ready-002'],
+                ],
+                'cn_proxy' => [
+                    'ready_slugs' => [],
+                    'slugs' => [],
+                ],
+                'cn_proxy_policy_asset' => [
+                    'slugs' => ['ready-003'],
+                ],
+            ],
+            targetPublicTotal: 1048,
+            cohort: 'detail_ready_1048',
+        )->toArray();
+
+        $this->assertSame('blocked', $payload['status']);
+        $reasons = array_column($payload['blockers'], 'reason');
+        $this->assertContains('delta_contains_manual_hold_slugs', $reasons);
+        $this->assertContains('delta_contains_blocked_slugs', $reasons);
+        $this->assertContains('delta_contains_cn_proxy_slugs', $reasons);
+    }
+
     public function test_blocks_target_delta_plan_that_did_not_pass(): void
     {
         $payload = (new CareerRuntimeCandidatePrepPlanner)->plan(

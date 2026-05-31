@@ -17040,6 +17040,58 @@ prs:
     frontend_fallback_authority: false
     next_task: AUDIT-SEC-CONTENT-PUBLISH-GATES-01
 
+
+  - id: AUDIT-SEC-CONTENT-PUBLISH-GATES-01
+    repo: fap-api
+    branch: audit/sec-content-publish-gates-01
+    base: main
+    title: "AUDIT-SEC-CONTENT-PUBLISH-GATES-01 harden content publication gates"
+    train_scope: content_publication_gate_integrity
+    risk_level: high_security_public_content_indexing
+    depends_on:
+      - AUDIT-SEC-PAYMENT-INTEGRITY-01 merged
+    allowed_paths:
+      - backend/app/Domain/Career/Audit/CareerRuntimeCandidatePrepPlanner.php
+      - backend/app/Domain/Career/Audit/CareerFullVisiblePublicationGate.php
+      - backend/tests/Unit/Domain/Career/Audit/CareerRuntimeCandidatePrepPlannerTest.php
+      - backend/tests/Unit/Domain/Career/Audit/CareerFullVisiblePublicationGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Ensure fallback gated slug lists participate in career runtime candidate prep planning.
+      - Require explicit forbidden exposure evidence before detail-ready publication claims can pass.
+      - Count forbidden URL/list evidence from sitemap, llms, and llms-full scan artifacts.
+      - Add focused unit tests for fallback slug list and forbidden exposure evidence handling.
+    do_not:
+      - Do not deploy, mutate production, run production SSH, or approve production environments.
+      - Do not modify content packs, CMS content, fap-web, sitemap generation policy, llms generation policy, Search Channel, or URL submission files.
+      - Do not add routes, migrations, schemas, public endpoints, or cache invalidation/runtime cache changes.
+    validation:
+      - cd backend && php artisan test --filter='CareerRuntimeCandidatePrepPlannerTest|CareerFullVisiblePublicationGateTest' --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-content-publish-gates-01.sqlite php artisan migrate --force --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: AUDIT-SEC-CONTENT-RUNTIME-CACHE-01
+
   - id: PR-POL-01
     repo: fap-api
     branch: content/pr-pol-01-policies-dashboard
