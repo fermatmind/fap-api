@@ -219,6 +219,59 @@ final class LandingSurfacePublicApiTest extends TestCase
         $this->assertSame(10, LandingSurface::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_iq_landing_baseline_is_cms_authoritative_and_claim_safe(): void
+    {
+        $this->artisan('landing-surfaces:import-local-baseline', [
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => '../content_baselines/landing_surfaces',
+        ])->assertExitCode(0);
+
+        $home = LandingSurface::query()
+            ->withoutGlobalScopes()
+            ->where('surface_key', 'home')
+            ->where('locale', 'en')
+            ->firstOrFail();
+        $homeIqCard = collect(data_get($home->payload_json, 'quickStart.items'))
+            ->firstWhere('key', 'iq-test-intelligence-quotient-assessment');
+
+        $this->assertIsArray($homeIqCard);
+        $this->assertSame('IQ Reasoning Practice', (string) data_get($homeIqCard, 'title'));
+        $this->assertSame('30 questions', (string) data_get($homeIqCard, 'questionsLabel'));
+        $this->assertSame('IQ_BETA_30_ORIGINAL', (string) data_get($homeIqCard, 'primaryActions.0.form_code'));
+        $this->assertSame('media_library_required', (string) data_get($homeIqCard, 'media.source'));
+        $this->assertSame('metadata_only_no_frontend_asset', (string) data_get($homeIqCard, 'media.status'));
+        $this->assertTrue((bool) data_get($homeIqCard, 'claim_policy.norm_authority_required'));
+        $this->assertFalse((bool) data_get($homeIqCard, 'claim_policy.iq_estimate_claims_enabled'));
+        $this->assertFalse((bool) data_get($homeIqCard, 'claim_policy.percentile_claims_enabled'));
+        $this->assertStringNotContainsString('official IQ', json_encode($homeIqCard, JSON_THROW_ON_ERROR));
+        $this->assertStringNotContainsString('percentile ranking', json_encode($homeIqCard, JSON_THROW_ON_ERROR));
+
+        $tests = LandingSurface::query()
+            ->withoutGlobalScopes()
+            ->where('surface_key', 'tests')
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+        $cognitiveFamily = collect(data_get($tests->payload_json, 'families.items'))
+            ->firstWhere('id', 'family-cognitive-ability');
+        $iqCard = collect(data_get($cognitiveFamily, 'tests'))
+            ->firstWhere('key', 'iq-test-intelligence-quotient-assessment');
+
+        $this->assertIsArray($iqCard);
+        $this->assertSame('IQ 推理练习', (string) data_get($iqCard, 'title'));
+        $this->assertSame('30 题', (string) data_get($iqCard, 'questionsLabel'));
+        $this->assertSame('约 20 分钟', (string) data_get($iqCard, 'durationLabel'));
+        $this->assertSame('/zh/tests/iq-test-intelligence-quotient-assessment/take', (string) data_get($iqCard, 'href'));
+        $this->assertSame('IQ_BETA_30_ORIGINAL', (string) data_get($iqCard, 'primaryActions.0.form_code'));
+        $this->assertSame('media_library_required', (string) data_get($iqCard, 'media.source'));
+        $this->assertTrue((bool) data_get($iqCard, 'claim_policy.norm_authority_required'));
+        $this->assertFalse((bool) data_get($iqCard, 'claim_policy.iq_estimate_claims_enabled'));
+        $this->assertFalse((bool) data_get($iqCard, 'claim_policy.percentile_claims_enabled'));
+        $this->assertStringContainsString('不输出正式 IQ 或百分位', (string) data_get($iqCard, 'outputLabel'));
+        $this->assertStringNotContainsString('官方智商', json_encode($iqCard, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+        $this->assertStringNotContainsString('人群百分位', json_encode($iqCard, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+    }
+
     public function test_public_and_internal_api_return_surface_payloads(): void
     {
         $this->artisan('landing-surfaces:import-local-baseline', [

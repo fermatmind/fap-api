@@ -355,16 +355,36 @@
           "tests": [
             {
               "key": "iq-test-intelligence-quotient-assessment",
-              "title": "智商测试",
-              "description": "当你想看推理表现、问题处理速度与认知优势线索时。",
-              "questionsLabel": "40 题",
+              "title": "IQ 推理练习",
+              "description": "适合先练习原创视觉空间、图形规律与数字规律题，当前只给出原始分和维度参考。",
+              "questionsLabel": "30 题",
               "durationLabel": "约 20 分钟",
-              "outputLabel": "能力基线、推理表现与后续参考",
+              "outputLabel": "原始分、维度表现与稳定性提示；不输出正式 IQ 或百分位",
               "detailsHref": "/zh/tests/iq-test-intelligence-quotient-assessment",
-              "secondaryLabel": "查看详情",
+              "secondaryLabel": "查看边界说明",
               "previewVariant": "matrix",
               "href": "/zh/tests/iq-test-intelligence-quotient-assessment/take",
-              "primaryLabel": "开始测试"
+              "primaryLabel": "开始 30 题练习",
+              "claim_policy": {
+                "norm_authority_required": true,
+                "iq_estimate_claims_enabled": false,
+                "percentile_claims_enabled": false,
+                "copy_boundary": "仅限原创推理练习和原始分参考",
+                "deferred_norm_authority_pr": "IQ-SCORE-30-01"
+              },
+              "media": {
+                "asset_key": "iq-beta30-original-card",
+                "source": "media_library_required",
+                "status": "metadata_only_no_frontend_asset",
+                "alt": "原创 IQ 推理练习卡片"
+              },
+              "primaryActions": [
+                {
+                  "label": "30 题 Beta 版",
+                  "href": "/zh/tests/iq-test-intelligence-quotient-assessment/take",
+                  "form_code": "IQ_BETA_30_ORIGINAL"
+                }
+              ]
             }
           ]
         },
