@@ -59,15 +59,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validate manifest
+        env:
+          RELEASE_TRAIN_MANIFEST_PATH: ${{ github.event.inputs.manifest_path }}
         run: |
           set -euo pipefail
           mkdir -p artifacts
-          python3 -m json.tool "${{ github.event.inputs.manifest_path }}"
+          python3 - <<'PY'
+          import os
+          import pathlib
+
+          raw = os.environ.get("RELEASE_TRAIN_MANIFEST_PATH", "")
+          path = pathlib.PurePosixPath(raw)
+          if (
+              raw == ""
+              or path.is_absolute()
+              or ".." in path.parts
+              or path.suffix != ".json"
+              or not pathlib.Path(raw).is_file()
+          ):
+              raise SystemExit("invalid release train manifest path")
+          PY
+          python3 -m json.tool "${RELEASE_TRAIN_MANIFEST_PATH}"
           python3 ops/release-train/release_train.py validate-manifest \
-            --manifest "${{ github.event.inputs.manifest_path }}" \
+            --manifest "${RELEASE_TRAIN_MANIFEST_PATH}" \
             --output artifacts/validation.json
           python3 ops/release-train/release_train.py plan \
-            --manifest "${{ github.event.inputs.manifest_path }}" \
+            --manifest "${RELEASE_TRAIN_MANIFEST_PATH}" \
             --output artifacts/plan.json
       - uses: actions/upload-artifact@v4
         if: always()
@@ -85,11 +102,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Dry-run execution
+        env:
+          RELEASE_TRAIN_MANIFEST_PATH: ${{ github.event.inputs.manifest_path }}
         run: |
           set -euo pipefail
           mkdir -p artifacts
+          python3 - <<'PY'
+          import os
+          import pathlib
+
+          raw = os.environ.get("RELEASE_TRAIN_MANIFEST_PATH", "")
+          path = pathlib.PurePosixPath(raw)
+          if (
+              raw == ""
+              or path.is_absolute()
+              or ".." in path.parts
+              or path.suffix != ".json"
+              or not pathlib.Path(raw).is_file()
+          ):
+              raise SystemExit("invalid release train manifest path")
+          PY
           python3 ops/release-train/release_train.py dry-run \
-            --manifest "${{ github.event.inputs.manifest_path }}" \
+            --manifest "${RELEASE_TRAIN_MANIFEST_PATH}" \
             --output artifacts/dry-run.json
       - uses: actions/upload-artifact@v4
         if: always()
@@ -100,22 +134,39 @@ jobs:
   run-train:
     name: Run release train
     needs: validate
-    if: ${{ github.event.inputs.mode == 'run' && github.event.inputs.allow_deploy == 'true' && github.event.inputs.dry_run != 'true' }}
+    if: ${{ github.ref == 'refs/heads/main' && github.event.inputs.mode == 'run' && github.event.inputs.allow_deploy == 'true' && github.event.inputs.dry_run != 'true' }}
     runs-on: ubuntu-latest
     environment: production
     steps:
       - uses: actions/checkout@v4
       - name: Execute train
         env:
+          RELEASE_TRAIN_MANIFEST_PATH: ${{ github.event.inputs.manifest_path }}
+          RELEASE_TRAIN_TRAIN_ID: ${{ github.event.inputs.train_id }}
           RELEASE_TRAIN_ALLOW_MERGE: ${{ github.event.inputs.allow_merge }}
           RELEASE_TRAIN_ALLOW_DEPLOY: ${{ github.event.inputs.allow_deploy }}
           RELEASE_TRAIN_ALLOW_ROLLBACK: ${{ github.event.inputs.allow_rollback }}
         run: |
           set -euo pipefail
           mkdir -p artifacts
+          python3 - <<'PY'
+          import os
+          import pathlib
+
+          raw = os.environ.get("RELEASE_TRAIN_MANIFEST_PATH", "")
+          path = pathlib.PurePosixPath(raw)
+          if (
+              raw == ""
+              or path.is_absolute()
+              or ".." in path.parts
+              or path.suffix != ".json"
+              or not pathlib.Path(raw).is_file()
+          ):
+              raise SystemExit("invalid release train manifest path")
+          PY
           python3 ops/release-train/release_train.py run \
-            --manifest "${{ github.event.inputs.manifest_path }}" \
-            --train-id "${{ github.event.inputs.train_id }}" \
+            --manifest "${RELEASE_TRAIN_MANIFEST_PATH}" \
+            --train-id "${RELEASE_TRAIN_TRAIN_ID}" \
             --allow-merge "${RELEASE_TRAIN_ALLOW_MERGE}" \
             --allow-deploy "${RELEASE_TRAIN_ALLOW_DEPLOY}" \
             --allow-rollback "${RELEASE_TRAIN_ALLOW_ROLLBACK}" \

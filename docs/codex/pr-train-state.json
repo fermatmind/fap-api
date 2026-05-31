@@ -33644,5 +33644,55 @@
     ],
     "sidecars": [],
     "next_task": "Controlled owner-mismatch repair only after explicit future approval."
+  },
+  "AUDIT-SEC-RELEASE-TRAIN-01": {
+    "id": "AUDIT-SEC-RELEASE-TRAIN-01",
+    "repo": "fap-api",
+    "branch": "audit/sec-release-train-01",
+    "base": "main",
+    "title": "AUDIT-SEC-RELEASE-TRAIN-01 harden release train deploy boundary",
+    "status": "in_progress",
+    "depends_on": [
+      "OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01 merged"
+    ],
+    "checks": {
+      "authorization": "user explicitly authorized continuing AUDIT-SEC-RELEASE-TRAIN-01",
+      "workspace_safety": "using isolated worktree /private/tmp/fap-api-audit-sec-release-train-01; primary worktree untouched",
+      "deploy_safety_boundary": "no deploy, no production mutation, no secret read/write"
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": false,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-05-31T14:36:40+08:00",
+        "from": "authorized",
+        "to": "in_progress",
+        "note": "Audit PR started from latest origin/main in isolated worktree."
+      },
+      {
+        "at": "2026-05-31T14:39:58+08:00",
+        "from": "in_progress",
+        "to": "local_validation_external_blocker_recorded",
+        "note": "Scoped release-train validation passed; unrelated ci_verify_mbti failure registered as sidecar per train protocol."
+      }
+    ],
+    "sidecars": [
+      {
+        "at": "2026-05-31T14:39:58+08:00",
+        "type": "external_validation_failure",
+        "scope": "backend/scripts/ci_verify_mbti.sh",
+        "summary": "Local MBTI master chain failed in BigFive norm/registry SQLite schema-lock tests outside release-train scope; generated BIG5 compiled files were reverted and not included.",
+        "current_pr_introduced": false
+      }
+    ],
+    "next_task": "Run local validation, open PR, wait for CI, merge if allowed, cleanup, then continue SECURITY-AUDIT-36-PR-TRAIN."
   }
 }

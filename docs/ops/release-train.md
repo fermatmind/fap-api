@@ -56,6 +56,7 @@ environment-scoped secrets apply to the same job that can invoke
 
 `run-train` is guarded by all of the following workflow inputs:
 
+- workflow ref is `refs/heads/main`
 - `mode == run`
 - `allow_deploy == true`
 - `dry_run != true`
@@ -63,6 +64,16 @@ environment-scoped secrets apply to the same job that can invoke
 This keeps dry-run validation outside production approval while making the
 future real backend run path wait for the production environment reviewer before
 the job can access production environment secrets.
+
+The main-branch guard is enforced in the repository workflow, not only by
+external GitHub Environment settings. A manual dispatch against any non-main ref
+must not enter the deploy-capable `run-train` job even if the dispatcher supplies
+deployment-oriented inputs.
+
+The workflow passes operator inputs to shell steps through environment variables
+and validates the manifest path before use. The manifest path must be a relative
+JSON file that exists in the checked-out repository, must not be absolute, and
+must not contain `..` path components.
 
 ## Manifest
 Top-level fields:
@@ -93,6 +104,12 @@ Each item includes:
 - `smoke_checks`
 - `rollback`
 - `sidecar_policy`
+
+Manifest items must not provide deployer override fields. The release train does
+not accept `deployer_bin`, `deployer_file`, `DEPLOYER_BIN`, or `DEPLOYER_FILE`
+from a manifest, and the run path blocks any item that contains those fields.
+The deploy wrapper is responsible for resolving the approved Deployer binary and
+deploy file from repository-controlled configuration.
 
 ## Smoke checks
 `smoke.py` supports:
