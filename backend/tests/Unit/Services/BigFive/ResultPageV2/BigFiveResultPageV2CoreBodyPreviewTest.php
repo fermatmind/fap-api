@@ -365,6 +365,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_paid_report_entitlement_contract_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Commerce/EntitlementManager.php',
+            'backend/app/Services/Report/ReportAccess.php',
+            'backend/app/Services/Report/Resolvers/AccessResolver.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_clinical_combo_en_paid_parity_changes(): void
     {
         $changed = [
@@ -3051,6 +3062,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isIqPaidReportEntitlementContractFile($file)) {
+                continue;
+            }
+
             if ($this->isClinicalComboEnPaidParityFile($file)) {
                 continue;
             }
@@ -3849,6 +3864,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Report/ReportComposerRegistry.php',
             'backend/app/Services/Report/ReportSnapshotStore.php',
             'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
+        ], true);
+    }
+
+    private function isIqPaidReportEntitlementContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Commerce/EntitlementManager.php',
+            'backend/app/Services/Report/ReportAccess.php',
+            'backend/app/Services/Report/Resolvers/AccessResolver.php',
         ], true);
     }
 

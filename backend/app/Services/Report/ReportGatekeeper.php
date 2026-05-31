@@ -171,10 +171,13 @@ class ReportGatekeeper
             $hasFullAccess,
             $forceFreeOnly,
             $modulesOffered,
-            $this->canUseAttemptScopedPaidModules($userId, $anonId, $role)
+            $this->canUseAttemptScopedPaidModules($userId, $anonId, $role),
+            $userId,
+            $anonId
         );
         $modulesAllowed = (array) ($modulesState['modules_allowed'] ?? []);
         $modulesPreview = (array) ($modulesState['modules_preview'] ?? []);
+        $hasFullAccess = (bool) ($modulesState['has_full_access'] ?? $hasFullAccess);
         $hasPaidModuleAccess = (bool) ($modulesState['has_paid_module_access'] ?? false);
 
         $scoreContract = $this->extractScoreContract($result);
