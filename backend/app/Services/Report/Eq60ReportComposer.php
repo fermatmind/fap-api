@@ -662,8 +662,7 @@ final class Eq60ReportComposer
         array $interpretation,
         array $quality,
         array $crossAssessmentContext
-    ): array
-    {
+    ): array {
         $docs = is_array($assets['assets'] ?? null) ? $assets['assets'] : [];
         $scientificAssets = (array) data_get($docs, 'scientific_contract.assets', []);
         $sjtAssets = (array) data_get($docs, 'sjt_bridge.assets', []);
