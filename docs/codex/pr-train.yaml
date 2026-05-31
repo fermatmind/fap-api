@@ -18269,6 +18269,12 @@ prs:
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: IQ-SEO-RAMP-02
 
+    allowed_paths:
+      - content_baselines/landing_surfaces/tests.en.json
+      - content_baselines/landing_surfaces/tests.zh-CN.json
+      - backend/tests/Feature/SeoIntel/IqSeoRampAuthorityTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
   - id: IQ-SEO-RAMP-02
     repo: fap-web
     depends_on: [IQ-SEO-RAMP-01]

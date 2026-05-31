@@ -10,7 +10,56 @@
   "payload_json": {
     "seo": {
       "title": "Tests Hub",
-      "description": "Start from a clearer question or category and choose the right FermatMind assessment more quickly."
+      "description": "Start from a clearer question or category and choose the right FermatMind assessment more quickly.",
+      "iq_ramp_authority": {
+        "schema": "iq.seo_ramp_authority.v1",
+        "authority_source": "backend_cms_landing_surface",
+        "locale": "en",
+        "test_slug": "iq-test-intelligence-quotient-assessment",
+        "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+        "form_code": "IQ_BETA_30_ORIGINAL",
+        "canonical_path": "/en/tests/iq-test-intelligence-quotient-assessment",
+        "localized_paths": {
+          "en": "/en/tests/iq-test-intelligence-quotient-assessment",
+          "zh": "/zh/tests/iq-test-intelligence-quotient-assessment"
+        },
+        "robots": "index,follow",
+        "is_indexable": true,
+        "sitemap_eligible": true,
+        "llms_eligible": true,
+        "llms_full_eligible": false,
+        "jsonld_eligible": true,
+        "meta_title": "IQ Reasoning Practice | 30 Original Reasoning Items",
+        "meta_description": "Practice original visual-spatial, pattern, and numeric reasoning items with raw score, dimension reference, and explicit method boundaries.",
+        "og_title": "IQ Reasoning Practice",
+        "og_description": "Original 30-item reasoning practice; public copy stays limited to score context and method boundaries.",
+        "media": {
+          "card_asset_key": "iq-beta30-original-card",
+          "og_asset_key": "iq-beta30-original-og",
+          "report_cover_asset_key": "iq-full-report-cover",
+          "source": "media_library_required",
+          "authority": "backend_cms_media_library",
+          "fallback_allowed": false
+        },
+        "claim_policy": {
+          "norm_authority_required": true,
+          "norm_authority_pr": "IQ-NORM-03",
+          "public_copy_iq_estimate_claims_enabled": false,
+          "public_copy_percentile_claims_enabled": false,
+          "result_context_iq_estimate_requires_backend_report": true,
+          "paid_report_claims_require_backend_entitlement": true,
+          "copy_boundary": "raw score, dimension reference, original reasoning practice, and method boundary only"
+        },
+        "structured_data": {
+          "@type": "Quiz",
+          "assessment_mode": "original_reasoning_practice",
+          "result_scope": "raw_score_dimension_reference_paid_report_gated",
+          "is_free": true,
+          "question_count": 30,
+          "time_required_minutes": 20,
+          "not_for": "medical, employment, or certification decisions"
+        }
+      }
     },
     "hero": {
       "eyebrow": "Tests",
