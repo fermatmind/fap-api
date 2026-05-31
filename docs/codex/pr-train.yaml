@@ -16375,6 +16375,7 @@ prs:
     depends_on:
       - ANALYTICS-FUNNEL-EVENT-TAXONOMY-01
     allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
       - backend/app/Filament/Ops/Widgets/FunnelWidget.php
       - backend/app/Filament/Ops/Pages/FunnelConversionPage.php
       - backend/resources/views/filament/ops/pages/funnel-conversion-page.blade.php
@@ -16570,6 +16571,58 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01
+
+  - id: ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01
+    repo: fap-api
+    branch: codex/analytics-funnel-ops-org0-visibility-repair-01
+    base: main
+    title: "ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01 show global org0 funnel rows"
+    train_scope: analytics_funnel_ops_org0_visibility
+    risk_level: p1_analytics_funnel_observability
+    depends_on:
+      - ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01
+    allowed_paths:
+      - backend/app/Filament/Ops/Widgets/FunnelWidget.php
+      - backend/app/Filament/Ops/Pages/FunnelConversionPage.php
+      - backend/tests/Feature/Ops/FunnelWidgetTest.php
+      - backend/tests/Feature/Ops/FunnelConversionPageTest.php
+      - backend/docs/seo/analytics-funnel-ops-org0-visibility-repair-01.md
+      - backend/docs/seo/generated/analytics-funnel-ops-org0-visibility-repair-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Make the Ops 7-day funnel widget display global org_id=0 analytics_funnel_daily rows.
+      - Treat tenant-context org_id=0 as no org selected while preserving public/global org_id=0 as a valid read-model scope.
+      - Continue using analytics_funnel_daily as source of truth; do not fall back to raw events or v_funnel_daily.
+      - Preserve canonical taxonomy labels and exclude legacy labels.
+      - Include a user-authorized Pint-only import ordering fix in AttemptReadController.php required to unblock repository-wide formatting validation.
+      - Do not run analytics refresh, mutate production DB, deploy, mutate CMS, change GA/Baidu settings, enqueue Search Channel, submit URLs, call external search APIs, read raw logs, or access production PII.
+    validation:
+      - cd backend && php artisan test --filter=FunnelWidget --no-ansi
+      - cd backend && php artisan test --filter=FunnelConversionPage --no-ansi
+      - cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/analytics-funnel-ops-org0-visibility-repair-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01
 
 
   - id: CONTENT-PACKS-INDEX-ARTIFACT-01

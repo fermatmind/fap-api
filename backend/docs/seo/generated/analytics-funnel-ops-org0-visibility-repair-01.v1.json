@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "task": "ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01",
+  "final_decision": "analytics_funnel_ops_org0_visibility_repair_completed_ready_for_deploy",
+  "source_of_truth": "analytics_funnel_daily",
+  "org0_global_rows_visible": true,
+  "tenant_org_zero_select_org_empty_state_preserved": true,
+  "raw_events_fallback_allowed": false,
+  "v_funnel_daily_fallback_allowed": false,
+  "canonical_taxonomy_labels": [
+    "test_start",
+    "test_submit",
+    "result_view",
+    "order_created",
+    "payment_success",
+    "report_unlock",
+    "report_ready",
+    "pdf_download",
+    "share_generate",
+    "share_click"
+  ],
+  "legacy_labels_excluded": [
+    "test_submit_success",
+    "first_result_or_report_view",
+    "unlock_success"
+  ],
+  "production_data_context": {
+    "date_range": {
+      "from": "2026-05-25",
+      "to": "2026-05-31"
+    },
+    "org_id": 0,
+    "row_count": 38,
+    "stage_totals": {
+      "test_start": 382,
+      "test_submit": 286,
+      "result_view": 277,
+      "order_created": 11,
+      "payment_success": 8,
+      "report_unlock": 2,
+      "report_ready": 0,
+      "pdf_download": 11,
+      "share_generate": 12,
+      "share_click": 5
+    }
+  },
+  "changed_surfaces": [
+    "backend/app/Filament/Ops/Widgets/FunnelWidget.php",
+    "backend/tests/Feature/Ops/FunnelWidgetTest.php",
+    "backend/tests/Feature/Ops/FunnelConversionPageTest.php"
+  ],
+  "analytics_refresh_performed": false,
+  "production_db_mutation_performed": false,
+  "deploy_performed": false,
+  "cms_mutation_performed": false,
+  "ga_baidu_setting_change_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "external_search_api_call_performed": false,
+  "next_task": "BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01"
+}

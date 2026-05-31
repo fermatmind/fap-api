@@ -92,6 +92,89 @@ final class FunnelWidgetTest extends TestCase
         }
     }
 
+    public function test_funnel_widget_reads_global_org_zero_analytics_funnel_daily_rows(): void
+    {
+        Carbon::setTestNow('2026-05-31 12:00:00');
+
+        try {
+            $this->setGlobalOpsContext();
+
+            DB::table('analytics_funnel_daily')->insert([
+                [
+                    'day' => '2026-05-31',
+                    'org_id' => 0,
+                    'scale_code' => 'MBTI',
+                    'locale' => 'en',
+                    'started_attempts' => 382,
+                    'submitted_attempts' => 286,
+                    'first_view_attempts' => 277,
+                    'order_created_attempts' => 11,
+                    'paid_attempts' => 8,
+                    'paid_revenue_cents' => 0,
+                    'unlocked_attempts' => 2,
+                    'report_ready_attempts' => 0,
+                    'pdf_download_attempts' => 11,
+                    'share_generated_attempts' => 12,
+                    'share_click_attempts' => 5,
+                    'last_refreshed_at' => now(),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+            ]);
+
+            $stats = $this->widgetStats();
+            $valuesByLabel = [];
+            foreach ($stats as $stat) {
+                $valuesByLabel[(string) $stat->getLabel()] = (string) $stat->getValue();
+            }
+
+            $this->assertSame('382', $valuesByLabel['test_start'] ?? null);
+            $this->assertSame('286', $valuesByLabel['test_submit'] ?? null);
+            $this->assertSame('277', $valuesByLabel['result_view'] ?? null);
+            $this->assertSame('11', $valuesByLabel['order_created'] ?? null);
+            $this->assertSame('8', $valuesByLabel['payment_success'] ?? null);
+            $this->assertSame('2', $valuesByLabel['report_unlock'] ?? null);
+            $this->assertSame('0', $valuesByLabel['report_ready'] ?? null);
+            $this->assertSame('11', $valuesByLabel['pdf_download'] ?? null);
+            $this->assertSame('12', $valuesByLabel['share_generate'] ?? null);
+            $this->assertSame('5', $valuesByLabel['share_click'] ?? null);
+
+            $this->assertArrayNotHasKey('test_submit_success', $valuesByLabel);
+            $this->assertArrayNotHasKey('first_result_or_report_view', $valuesByLabel);
+            $this->assertArrayNotHasKey('unlock_success', $valuesByLabel);
+        } finally {
+            Carbon::setTestNow();
+        }
+    }
+
+    public function test_funnel_widget_distinguishes_global_empty_state_from_missing_tenant_org(): void
+    {
+        Carbon::setTestNow('2026-05-31 12:00:00');
+
+        try {
+            $this->setGlobalOpsContext();
+            $globalStats = $this->widgetStats();
+
+            $this->assertCount(1, $globalStats);
+            $this->assertSame(__('ops.widgets.funnel'), (string) $globalStats[0]->getLabel());
+            $this->assertSame(__('ops.widgets.no_data'), (string) $globalStats[0]->getValue());
+            $this->assertSame(
+                'No analytics_funnel_daily global rows for this range. Refresh org_id=0 read model rows before reviewing global funnel metrics.',
+                (string) $globalStats[0]->getDescription()
+            );
+
+            $this->setOpsOrg(0);
+            $tenantStats = $this->widgetStats();
+
+            $this->assertCount(1, $tenantStats);
+            $this->assertSame(__('ops.widgets.funnel'), (string) $tenantStats[0]->getLabel());
+            $this->assertSame(__('ops.widgets.no_data'), (string) $tenantStats[0]->getValue());
+            $this->assertSame(__('ops.widgets.select_org_to_view_metrics'), (string) $tenantStats[0]->getDescription());
+        } finally {
+            Carbon::setTestNow();
+        }
+    }
+
     public function test_funnel_widget_does_not_fallback_to_raw_events_when_read_model_is_empty(): void
     {
         Carbon::setTestNow('2026-01-09 12:00:00');
@@ -137,6 +220,13 @@ final class FunnelWidgetTest extends TestCase
     {
         $context = app(OrgContext::class);
         $context->set($orgId, null, null, null, OrgContext::KIND_TENANT);
+        app()->instance(OrgContext::class, $context);
+    }
+
+    private function setGlobalOpsContext(): void
+    {
+        $context = app(OrgContext::class);
+        $context->set(0, null, null, null, OrgContext::KIND_PUBLIC);
         app()->instance(OrgContext::class, $context);
     }
 

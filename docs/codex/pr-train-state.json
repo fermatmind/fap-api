@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T21:17:00+08:00",
+  "updated_at": "2026-05-31T22:58:00+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -35869,5 +35869,122 @@
       "status": "checks_pending",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1804"
     }
+  },
+  "ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01": {
+    "id": "ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01",
+    "repo": "fap-api",
+    "branch": "codex/analytics-funnel-ops-org0-visibility-repair-01",
+    "base": "main",
+    "title": "ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01 show global org0 funnel rows",
+    "status": "local_checks_passed",
+    "depends_on": [
+      "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding only ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01 to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+      },
+      "workspace_safety": {
+        "status": "pass",
+        "evidence": "Implementation is isolated in /private/tmp/fap-api-analytics-funnel-ops-org0-visibility-repair-01; unrelated primary worktree WIP is untouched."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to Ops org_id=0 read-model visibility code, focused tests, docs/generated report, PR train ledger, and a user-authorized Pint-only import ordering fix in AttemptReadController.php required to unblock repository-wide formatting validation. No analytics refresh, production DB mutation, deploy, CMS mutation, GA/Baidu setting change, Search Channel action, URL submission, external search API call, raw log read, or PII access."
+      },
+      "focused_funnel_widget": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=FunnelWidget --no-ansi",
+        "evidence": "PASS with warnings: 4 tests, 38 assertions."
+      },
+      "focused_funnel_conversion_page": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=FunnelConversionPage --no-ansi",
+        "evidence": "PASS with warnings: 2 tests, 36 assertions."
+      },
+      "analytics_builder_regression": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi",
+        "evidence": "PASS with warnings: 2 tests, 27 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "Route list rendered successfully with 209 routes."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "PASS across 3670 files after user-authorized Pint-only AttemptReadController.php import ordering fix."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "pass",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "No security vulnerability advisories found."
+      },
+      "json_yaml_validation": {
+        "status": "pass",
+        "command": "python3 -m json.tool backend/docs/seo/generated/analytics-funnel-ops-org0-visibility-repair-01.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\" && git diff --check",
+        "evidence": "Generated JSON, state JSON, train YAML, and unstaged diff check passed."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-05-31T17:21:00+08:00",
+        "from": "authorized",
+        "to": "implementation_in_progress",
+        "note": "Started scoped Ops org_id=0 visibility repair from latest origin/main in an isolated worktree."
+      },
+      {
+        "at": "2026-05-31T17:38:00+08:00",
+        "from": "implementation_in_progress",
+        "to": "blocked_tests_failed",
+        "note": "Focused tests, route:list, composer validate/audit, and JSON/YAML parse passed, but required vendor/bin/pint --test failed on out-of-scope AttemptReadController.php import ordering inherited from main."
+      },
+      {
+        "at": "2026-05-31T17:48:00+08:00",
+        "from": "blocked_tests_failed",
+        "to": "implementation_in_progress",
+        "note": "User explicitly authorized including the Pint-only AttemptReadController.php import ordering fix in the current PR; validation resumed."
+      },
+      {
+        "at": "2026-05-31T17:55:00+08:00",
+        "from": "implementation_in_progress",
+        "to": "local_checks_passed",
+        "note": "All required local validation passed after the authorized Pint-only formatting fix."
+      },
+      {
+        "at": "2026-05-31T18:00:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open_checks_pending",
+        "note": "Opened PR #1805 after full local validation passed."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "out_of_scope_pint_import_order_attempt_read_controller",
+        "status": "resolved_by_user_authorized_current_pr_format_fix",
+        "summary": "vendor/bin/pint --test failed because backend/app/Http/Controllers/API/V0_3/AttemptReadController.php had import ordering that Pint would change. User authorized including this Pint-only fix in the current PR."
+      }
+    ],
+    "next_task": "Wait for GitHub checks on PR #1805, merge if allowed, cleanup, then prepare BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01."
   }
 }
