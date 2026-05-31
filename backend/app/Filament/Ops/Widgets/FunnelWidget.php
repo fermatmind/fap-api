@@ -15,6 +15,8 @@ class FunnelWidget extends BaseWidget
 
     private const EMPTY_READ_MODEL_MESSAGE = 'No analytics_funnel_daily rows for this range. Run analytics:refresh-funnel-daily in a controlled task.';
 
+    private const EMPTY_GLOBAL_READ_MODEL_MESSAGE = 'No analytics_funnel_daily global rows for this range. Refresh org_id=0 read model rows before reviewing global funnel metrics.';
+
     /** @var array<string,string> */
     private const CANONICAL_STAGES = [
         'test_start' => 'started_attempts',
@@ -45,8 +47,9 @@ class FunnelWidget extends BaseWidget
             return [$this->emptyReadModelStat()];
         }
 
-        $orgId = max(0, (int) app(OrgContext::class)->orgId());
-        if ($orgId <= 0) {
+        $orgContext = app(OrgContext::class);
+        $orgId = max(0, (int) $orgContext->orgId());
+        if ($orgId <= 0 && $orgContext->isTenantContext()) {
             return [
                 Stat::make(__('ops.widgets.funnel'), __('ops.widgets.no_data'))
                     ->description(__('ops.widgets.select_org_to_view_metrics'))
@@ -68,7 +71,7 @@ class FunnelWidget extends BaseWidget
 
         $row = $query->selectRaw(implode(', ', $selects))->first();
         if ((int) ($row->row_count ?? 0) <= 0) {
-            return [$this->emptyReadModelStat()];
+            return [$this->emptyReadModelStat($orgId)];
         }
 
         $stats = [];
@@ -80,10 +83,10 @@ class FunnelWidget extends BaseWidget
         return $stats;
     }
 
-    private function emptyReadModelStat(): Stat
+    private function emptyReadModelStat(int $orgId = -1): Stat
     {
         return Stat::make(__('ops.widgets.funnel'), __('ops.widgets.no_data'))
-            ->description(self::EMPTY_READ_MODEL_MESSAGE)
+            ->description($orgId === 0 ? self::EMPTY_GLOBAL_READ_MODEL_MESSAGE : self::EMPTY_READ_MODEL_MESSAGE)
             ->color('gray');
     }
 }

@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Filament\Ops\Pages\FunnelConversionPage;
 use App\Models\AdminUser;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Services\Analytics\AnalyticsFunnelDailyBuilder;
+use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\Concerns\SeedsFunnelAnalyticsScenario;
 use Tests\TestCase;
@@ -73,6 +76,74 @@ final class FunnelConversionPageTest extends TestCase
         }
     }
 
+    public function test_funnel_conversion_page_reads_global_org_zero_read_model_rows(): void
+    {
+        Carbon::setTestNow('2026-05-31 12:00:00');
+
+        try {
+            $this->setGlobalOpsContext();
+
+            DB::table('analytics_funnel_daily')->insert([
+                'day' => '2026-05-31',
+                'org_id' => 0,
+                'scale_code' => 'MBTI',
+                'locale' => 'en',
+                'started_attempts' => 382,
+                'submitted_attempts' => 286,
+                'first_view_attempts' => 277,
+                'order_created_attempts' => 11,
+                'paid_attempts' => 8,
+                'paid_revenue_cents' => 0,
+                'unlocked_attempts' => 2,
+                'report_ready_attempts' => 0,
+                'pdf_download_attempts' => 11,
+                'share_generated_attempts' => 12,
+                'share_click_attempts' => 5,
+                'last_refreshed_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            $page = app(FunnelConversionPage::class);
+            $page->fromDate = '2026-05-25';
+            $page->toDate = '2026-05-31';
+            $page->scaleCode = 'all';
+            $page->locale = 'all';
+            $page->refreshPage();
+
+            $this->assertTrue($page->hasData);
+            $this->assertSame([], $page->warnings);
+
+            $kpisByLabel = [];
+            foreach ($page->kpis as $kpi) {
+                $kpisByLabel[(string) $kpi['label']] = (int) $kpi['value'];
+            }
+
+            $this->assertSame(382, $kpisByLabel['Started attempts'] ?? null);
+            $this->assertSame(286, $kpisByLabel['Submitted attempts'] ?? null);
+            $this->assertSame(277, $kpisByLabel['First result/report viewers'] ?? null);
+            $this->assertSame(11, $kpisByLabel['Order-created attempts'] ?? null);
+            $this->assertSame(8, $kpisByLabel['Paid attempts'] ?? null);
+            $this->assertSame(2, $kpisByLabel['Unlocked attempts'] ?? null);
+            $this->assertSame(0, $kpisByLabel['Report-ready attempts'] ?? null);
+
+            $conversionLabels = array_map(static fn (array $row): string => (string) $row['label'], $page->conversionRows);
+
+            $this->assertContains('test_start', $conversionLabels);
+            $this->assertContains('test_submit', $conversionLabels);
+            $this->assertContains('result_view', $conversionLabels);
+            $this->assertContains('order_created', $conversionLabels);
+            $this->assertContains('payment_success', $conversionLabels);
+            $this->assertContains('report_unlock', $conversionLabels);
+            $this->assertContains('report_ready', $conversionLabels);
+            $this->assertNotContains('test_submit_success', $conversionLabels);
+            $this->assertNotContains('first_result_or_report_view', $conversionLabels);
+            $this->assertNotContains('unlock_success', $conversionLabels);
+        } finally {
+            Carbon::setTestNow();
+        }
+    }
+
     private function createOrganization(string $name): Organization
     {
         return Organization::query()->create([
@@ -114,6 +185,13 @@ final class FunnelConversionPageTest extends TestCase
         $admin->roles()->syncWithoutDetaching([$role->id]);
 
         return $admin;
+    }
+
+    private function setGlobalOpsContext(): void
+    {
+        $context = app(OrgContext::class);
+        $context->set(0, null, null, null, OrgContext::KIND_PUBLIC);
+        app()->instance(OrgContext::class, $context);
     }
 
     /**
