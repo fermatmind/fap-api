@@ -1,0 +1,65 @@
+{
+  "schema_version": "career_l3_dynamic_slot_architecture.v1",
+  "task": "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01",
+  "final_decision": "career_l3_dynamic_slot_architecture_completed_ready_for_release_train_sidecar_soft_alert",
+  "architecture_mode": "dynamic_slot_only",
+  "source_of_truth": "backend_career_runtime_authority_plus_backend_approved_assessment_context",
+  "public_career_detail_expected_count": 1046,
+  "localized_public_career_url_expected_count": 2092,
+  "supported_signal_families": [
+    "mbti",
+    "big_five",
+    "riasec"
+  ],
+  "dynamic_slot_requirements": [
+    "user_or_session_assessment_context_required",
+    "backend_authority_required",
+    "claim_boundary_required",
+    "budgeted_runtime_fetch_required",
+    "fail_closed_when_authority_missing",
+    "no_frontend_fallback_authority"
+  ],
+  "blocked_static_url_patterns": [
+    "/career/jobs/{slug}/mbti/{type}",
+    "/career/jobs/{slug}/big-five/{profile}",
+    "/career/jobs/{slug}/riasec/{code}",
+    "/mbti/{type}/careers/{slug}",
+    "/big-five/{profile}/careers/{slug}",
+    "/riasec/{code}/careers/{slug}"
+  ],
+  "static_combinatorial_pages_allowed": false,
+  "static_cross_matrix_url_count": 0,
+  "estimated_mbti_career_static_matrix_count": 16736,
+  "pseo_generation_performed": false,
+  "static_l3_generation_performed": false,
+  "sitemap_llms_exposure_changed": false,
+  "sitemap_llms_exposure_allowed_for_slots": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "cms_mutation_performed": false,
+  "production_write_performed": false,
+  "deploy_performed": false,
+  "frontend_fallback_authority_used": false,
+  "fap_web_change_performed": false,
+  "claim_boundary": {
+    "forbidden_claim_hits": [],
+    "allowed_framing": [
+      "exploratory_guidance",
+      "decision_support",
+      "workstyle_tendency",
+      "interest_signal",
+      "occupation_information"
+    ],
+    "blocked_claims": [
+      "best_career_for_user",
+      "hiring_fit",
+      "job_suitability_guarantee",
+      "salary_prediction_or_guarantee",
+      "turnover_prediction",
+      "career_success_guarantee",
+      "diagnosis_treatment_cure",
+      "psychometric_determines_career"
+    ]
+  },
+  "next_task": "RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01"
+}

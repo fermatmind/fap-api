@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T22:58:00+08:00",
+  "updated_at": "2026-05-31T15:45:22Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -22170,7 +22170,7 @@
       "branch": "codex/career-1046-internal-linking-authority-01",
       "base": "main",
       "title": "CAREER-1046-INTERNAL-LINKING-AUTHORITY-01 career internal linking authority",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "PR-HIRING-01"
       ],
@@ -22209,14 +22209,18 @@
           "status": "pass",
           "command": "git diff --check && git diff --cached --check",
           "evidence": "Whitespace checks passed before staging; cached check rerun before commit."
+        },
+        "reconciliation": {
+          "status": "pass",
+          "evidence": "GitHub PR #1798 is MERGED, origin/main contains 38d0c8a7646d9e8264c62694c60a8445d3623096, remote branch is absent, and local branch cleanup was performed in the isolated train worktree."
         }
       },
       "failure_reason": null,
       "commit_sha": "c648f3e67147e3aa82d03aef085f8bef0c8a7556",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1798",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-31T09:02:34Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
@@ -22247,10 +22251,17 @@
           "from": "committed",
           "to": "pr_open",
           "note": "Pushed branch and opened PR https://github.com/fermatmind/fap-api/pull/1798; GitHub checks pending."
+        },
+        {
+          "at": "2026-05-31T14:40:00Z",
+          "from": "pr_open",
+          "to": "merged",
+          "note": "Reconciled already-merged fap-api PR #1798 before resuming CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01."
         }
       ],
       "sidecars": [],
-      "next_task": "CAREER-1046-FRONTEND-DISCOVERY-UX-01"
+      "next_task": "CAREER-1046-FRONTEND-DISCOVERY-UX-01",
+      "merge_sha": "38d0c8a7646d9e8264c62694c60a8445d3623096"
     },
     "CAREER-1046-FRONTEND-DISCOVERY-UX-01": {
       "id": "CAREER-1046-FRONTEND-DISCOVERY-UX-01",
@@ -22258,26 +22269,39 @@
       "branch": "codex/career-1046-frontend-discovery-ux-01",
       "base": "main",
       "title": "CAREER-1046-FRONTEND-DISCOVERY-UX-01 career discovery UX",
-      "status": "pending",
+      "status": "merged",
       "depends_on": [
         "CAREER-1046-INTERNAL-LINKING-AUTHORITY-01"
       ],
-      "checks": {},
-      "failure_reason": null,
-      "commit_sha": null,
-      "pr_url": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
-      "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
-        "github_checks_green": null,
-        "post_merge_revalidated": null
+      "checks": {
+        "reconciliation": {
+          "status": "pass",
+          "evidence": "GitHub PR #939 is MERGED, fap-web origin/main contains 7626b901d77a5191a1b9211fd0b9a91c854a6c4f, remote branch is absent, isolated worktree was removed, and post-merge focused contract passed."
+        }
       },
-      "transitions": [],
+      "failure_reason": null,
+      "commit_sha": "60fab8cfa0624122edc231b7b67f39cc65ce658b",
+      "pr_url": "https://github.com/fermatmind/fap-web/pull/939",
+      "merged_at": "2026-05-31T12:54:10Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
+        "github_checks_green": true,
+        "post_merge_revalidated": true
+      },
+      "transitions": [
+        {
+          "at": "2026-05-31T14:40:00Z",
+          "from": "pending",
+          "to": "merged",
+          "note": "Reconciled fap-web PR #939 as merged before resuming dependent fap-api PR6."
+        }
+      ],
       "sidecars": [],
-      "next_task": "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01"
+      "next_task": "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01",
+      "merge_sha": "7626b901d77a5191a1b9211fd0b9a91c854a6c4f"
     },
     "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01": {
       "id": "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01",
@@ -22285,26 +22309,122 @@
       "branch": "codex/career-l3-dynamic-slot-architecture-01",
       "base": "main",
       "title": "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01 dynamic slot architecture guardrails",
-      "status": "pending",
+      "status": "pr_open",
       "depends_on": [
         "CAREER-1046-FRONTEND-DISCOVERY-UX-01"
       ],
-      "checks": {},
+      "checks": {
+        "dependency_preflight": {
+          "status": "pass",
+          "evidence": "Dependencies CAREER-1046-FRONTEND-DISCOVERY-UX-01 and CAREER-1046-INTERNAL-LINKING-AUTHORITY-01 are reconciled as merged; branch was rebased/reset to latest origin/main before validation."
+        },
+        "focused_test": {
+          "status": "pass",
+          "command": "php artisan test --filter=CareerL3DynamicSlotArchitecture01 --no-ansi",
+          "evidence": "4 tests passed, 63 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully, 209 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Passed after scoped Pint cleanup PR #1811 merged Eq60ReportComposer.php formatting fix; 3677 files checked."
+        },
+        "composer_validate": {
+          "status": "pass",
+          "command": "composer validate --strict",
+          "evidence": "composer.json is valid."
+        },
+        "composer_audit": {
+          "status": "pass",
+          "command": "composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "pass",
+          "command": "python3 -m json.tool backend/docs/seo/generated/career-l3-dynamic-slot-architecture-01.v1.json >/dev/null; python3 -m json.tool docs/codex/pr-train-state.json >/dev/null; yaml.safe_load(docs/codex/pr-train.yaml)",
+          "evidence": "Generated JSON, state JSON, and train YAML parse successfully."
+        },
+        "scope_diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check",
+          "evidence": "Whitespace checks passed before and after path-limited staging."
+        }
+      },
       "failure_reason": null,
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "944797b6b32b8a1e1f2fc74cc28dca81e5e18087",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1814",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
-      "next_task": "RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01"
+      "transitions": [
+        {
+          "at": "2026-05-31T14:40:00Z",
+          "from": "pending",
+          "to": "in_progress",
+          "note": "Resumed PR6 after upstream main advanced and reapplied scoped docs/generated/test changes on latest origin/main."
+        },
+        {
+          "at": "2026-05-31T14:45:00Z",
+          "from": "in_progress",
+          "to": "blocked_local_check_failed_external",
+          "note": "After rebasing/resetting to latest origin/main, required full Pint still fails on out-of-scope Eq60ReportComposer formatting issue; PR not opened per repo rules."
+        },
+        {
+          "at": "2026-05-31T15:40:15Z",
+          "from": "blocked_local_check_failed_external",
+          "to": "local_validation_passed",
+          "note": "Resumed after scoped Pint cleanup PR #1811 merged; full local validation now passes for CAREER-L3 dynamic slot architecture scope."
+        },
+        {
+          "at": "2026-05-31T15:43:00Z",
+          "from": "local_validation_passed",
+          "to": "committed",
+          "note": "Created scoped PR6 commit 6b9b2d3bc9a8394dbecf598f91d5cf2a0b7f6c96 after local validation passed."
+        },
+        {
+          "at": "2026-05-31T15:45:22Z",
+          "from": "committed",
+          "to": "pr_open",
+          "note": "Pushed branch and opened PR https://github.com/fermatmind/fap-api/pull/1814; GitHub checks pending."
+        }
+      ],
+      "sidecars": [
+        {
+          "source_pr": "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01",
+          "repo": "fap-api",
+          "branch": "codex/career-l3-dynamic-slot-architecture-01",
+          "command_or_check": "vendor/bin/pint --test",
+          "evidence": "Pint reports backend/app/Services/Report/Eq60ReportComposer.php unary_operator_spaces/braces while git diff shows the file is unmodified by this branch.",
+          "failure_summary": "Latest origin/main still has an out-of-scope Pint formatting issue after the previous AttemptReadController blocker was resolved upstream.",
+          "why_external_to_current_pr": "Current PR changes only CAREER-L3 dynamic-slot docs/generated/test/ledger; Eq60ReportComposer.php is outside scope and untouched.",
+          "impact_on_current_pr": "Cannot open/merge PR under repository local validation rules until the out-of-scope Pint issue is fixed or user authorizes a separate scoped cleanup path.",
+          "owner": "backend/EQ upstream",
+          "follow_up_recommendation": "Wait for upstream EQ/Pint cleanup or run a separately authorized scoped Pint cleanup PR for Eq60ReportComposer.php, then resume CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01 validation.",
+          "required_checks_status": "not_run_no_pr_opened",
+          "scope_validation_status": "current_diff_allowed_paths_only_but_local_validation_blocked",
+          "continue_train_decision": "resume_current_pr_after_resolution",
+          "status": "resolved",
+          "resolved_by_pr": "https://github.com/fermatmind/fap-api/pull/1811",
+          "resolved_by_merge_commit": "ac069d5998d5389cdb3f7c0d799ea54fe47909c4"
+        }
+      ],
+      "next_task": "RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01",
+      "external_blocker_resolution": {
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1811",
+        "merge_commit": "ac069d5998d5389cdb3f7c0d799ea54fe47909c4",
+        "resolved_check": "vendor/bin/pint --test",
+        "resolution_summary": "Scoped Eq60ReportComposer.php Pint formatting cleanup merged before PR6 validation resumed."
+      }
     },
     "RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01": {
       "id": "RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01",
