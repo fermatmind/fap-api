@@ -24581,7 +24581,7 @@
   "BAIDU-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/baidu-live-00-readiness-contract",
-    "status": "local_checks_passed",
+    "status": "pr_open_checks_pending",
     "depends_on": [
       "GSC-LIVE-00"
     ],
@@ -34858,8 +34858,8 @@
     "base": "main",
     "status": "in_progress",
     "title": "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04 state-sync owner mismatch candidate",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "440b2a24",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1805",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -35547,6 +35547,12 @@
         "from": "implementation_in_progress",
         "to": "local_checks_passed",
         "note": "All required local validation passed after the authorized Pint-only formatting fix."
+      },
+      {
+        "at": "2026-05-31T18:00:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open_checks_pending",
+        "note": "Opened PR #1805 after full local validation passed."
       }
     ],
     "sidecars": [
@@ -35556,6 +35562,6 @@
         "summary": "vendor/bin/pint --test failed because backend/app/Http/Controllers/API/V0_3/AttemptReadController.php had import ordering that Pint would change. User authorized including this Pint-only fix in the current PR."
       }
     ],
-    "next_task": "Open PR, wait for CI, merge if allowed, cleanup, then prepare BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01."
+    "next_task": "Wait for GitHub checks on PR #1805, merge if allowed, cleanup, then prepare BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01."
   }
 }
