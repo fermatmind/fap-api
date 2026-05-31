@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T12:49:18+00:00",
+  "updated_at": "2026-05-31T12:54:52+00:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -22277,7 +22277,7 @@
       "branch": "codex/iq-norm-01-calibration-authority",
       "base": "main",
       "title": "IQ-NORM-01 add IQ norm calibration authority",
-      "status": "ci_fix_pushed_checks_pending",
+      "status": "github_checks_green",
       "depends_on": [],
       "checks": {
         "local": {
@@ -22293,11 +22293,18 @@
           "notes": "Targeted PHPUnit suites exited 0 with warnings only; IqNormAuthorityTest had 4 tests/32 assertions and IqReportContractTest had 4 tests/404 assertions."
         },
         "github": {
-          "status": "failed_then_fix_pushed",
-          "failed_check": "verify-bigfive",
-          "failure_summary": "BigFive runtime freeze classifier flagged IQ norm authority service and migration as runtime diff.",
-          "fix_summary": "Added explicit IQ norm authority foundation classifier exception and regression test; no BigFive runtime behavior changed.",
-          "pr_url": "https://github.com/fermatmind/fap-api/pull/1799"
+          "status": "passed",
+          "required_checks": [
+            "hygiene",
+            "supply-chain",
+            "content-pack-build-validate",
+            "verify-mbti-legacy",
+            "verify-mbti-v2",
+            "verify-bigfive",
+            "Semgrep blocking secrets"
+          ],
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1799",
+          "note": "All required GitHub checks passed after scoped verify-bigfive classifier fix."
         },
         "local_fix": {
           "status": "passed",
@@ -22319,7 +22326,7 @@
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": null,
+        "github_checks_green": true,
         "post_merge_revalidated": null
       },
       "transitions": [
@@ -22352,9 +22359,15 @@
           "from": "pr_open_checks_pending",
           "to": "ci_fix_pushed_checks_pending",
           "note": "Inspected verify-bigfive failure and pushed scoped classifier fix for IQ norm authority foundation files."
+        },
+        {
+          "at": "2026-05-31T12:54:52+00:00",
+          "from": "ci_fix_pushed_checks_pending",
+          "to": "github_checks_green",
+          "note": "All GitHub required checks passed on PR #1799 after CI fix."
         }
       ],
-      "commit_sha": "aec55ff3",
+      "commit_sha": "054cdec9",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1799",
       "pr_number": 1799
     },
