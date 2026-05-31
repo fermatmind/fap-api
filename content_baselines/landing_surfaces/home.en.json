@@ -95,8 +95,15 @@
           "media": {
             "asset_key": "iq-beta30-original-card",
             "source": "media_library_required",
+            "authority": "backend_cms_media_library",
             "status": "metadata_only_no_frontend_asset",
-            "alt": "Original IQ reasoning practice card"
+            "fallback_allowed": false,
+            "alt": "Original IQ reasoning practice card",
+            "variants": {
+              "card_asset_key": "iq-beta30-original-card",
+              "og_asset_key": "iq-beta30-original-og",
+              "report_cover_asset_key": "iq-full-report-cover"
+            }
           },
           "primaryActions": [
             {
@@ -279,8 +286,44 @@
               "href": "/tests/big-five-personality-test-ocean-model"
             },
             {
-              "title": "IQ",
-              "href": "/tests/iq-test-intelligence-quotient-assessment"
+              "title": "IQ Reasoning Practice",
+              "description": "Use 30 original visual-spatial, pattern, and numeric reasoning items. Current output is raw score and dimension reference only.",
+              "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+              "key": "iq-test-intelligence-quotient-assessment",
+              "questionsLabel": "30 questions",
+              "durationLabel": "20 min",
+              "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+              "secondaryLabel": "View boundaries",
+              "previewVariant": "matrix",
+              "primaryLabel": "Start 30-item practice",
+              "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
+              "claim_policy": {
+                "norm_authority_required": true,
+                "iq_estimate_claims_enabled": false,
+                "percentile_claims_enabled": false,
+                "copy_boundary": "raw score and original reasoning practice only",
+                "deferred_norm_authority_pr": "IQ-SCORE-30-01"
+              },
+              "media": {
+                "asset_key": "iq-beta30-original-card",
+                "source": "media_library_required",
+                "authority": "backend_cms_media_library",
+                "status": "metadata_only_no_frontend_asset",
+                "fallback_allowed": false,
+                "alt": "Original IQ reasoning practice card",
+                "variants": {
+                  "card_asset_key": "iq-beta30-original-card",
+                  "og_asset_key": "iq-beta30-original-og",
+                  "report_cover_asset_key": "iq-full-report-cover"
+                }
+              },
+              "primaryActions": [
+                {
+                  "label": "30-item beta",
+                  "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                  "form_code": "IQ_BETA_30_ORIGINAL"
+                }
+              ]
             },
             {
               "title": "EQ",
@@ -304,8 +347,42 @@
               "href": "/tests/big-five-personality-test-ocean-model"
             },
             {
-              "label": "IQ",
-              "href": "/tests/iq-test-intelligence-quotient-assessment"
+              "title": "IQ Reasoning Practice",
+              "description": "Practice 30 original visual and numeric reasoning items. Raw score only until norm authority is available.",
+              "href": "/tests/iq-test-intelligence-quotient-assessment",
+              "label": "Start practice",
+              "meta": "Cognition practice",
+              "key": "iq-test-intelligence-quotient-assessment",
+              "questionsLabel": "30 questions",
+              "durationLabel": "20 min",
+              "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+              "claim_policy": {
+                "norm_authority_required": true,
+                "iq_estimate_claims_enabled": false,
+                "percentile_claims_enabled": false,
+                "copy_boundary": "raw score and original reasoning practice only",
+                "deferred_norm_authority_pr": "IQ-SCORE-30-01"
+              },
+              "media": {
+                "asset_key": "iq-beta30-original-card",
+                "source": "media_library_required",
+                "authority": "backend_cms_media_library",
+                "status": "metadata_only_no_frontend_asset",
+                "fallback_allowed": false,
+                "alt": "Original IQ reasoning practice card",
+                "variants": {
+                  "card_asset_key": "iq-beta30-original-card",
+                  "og_asset_key": "iq-beta30-original-og",
+                  "report_cover_asset_key": "iq-full-report-cover"
+                }
+              },
+              "primaryActions": [
+                {
+                  "label": "30-item beta",
+                  "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                  "form_code": "IQ_BETA_30_ORIGINAL"
+                }
+              ]
             },
             {
               "label": "EQ",
@@ -424,11 +501,42 @@
             ]
           },
           {
-            "title": "IQ Test",
-            "description": "Get a quick baseline for cognitive ability.",
+            "title": "IQ Reasoning Practice",
+            "description": "Practice 30 original visual and numeric reasoning items. Raw score only until norm authority is available.",
             "href": "/tests/iq-test-intelligence-quotient-assessment",
-            "label": "Start test",
-            "meta": "Ability assessment"
+            "label": "Start practice",
+            "meta": "Cognition practice",
+            "key": "iq-test-intelligence-quotient-assessment",
+            "questionsLabel": "30 questions",
+            "durationLabel": "20 min",
+            "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+            "claim_policy": {
+              "norm_authority_required": true,
+              "iq_estimate_claims_enabled": false,
+              "percentile_claims_enabled": false,
+              "copy_boundary": "raw score and original reasoning practice only",
+              "deferred_norm_authority_pr": "IQ-SCORE-30-01"
+            },
+            "media": {
+              "asset_key": "iq-beta30-original-card",
+              "source": "media_library_required",
+              "authority": "backend_cms_media_library",
+              "status": "metadata_only_no_frontend_asset",
+              "fallback_allowed": false,
+              "alt": "Original IQ reasoning practice card",
+              "variants": {
+                "card_asset_key": "iq-beta30-original-card",
+                "og_asset_key": "iq-beta30-original-og",
+                "report_cover_asset_key": "iq-full-report-cover"
+              }
+            },
+            "primaryActions": [
+              {
+                "label": "30-item beta",
+                "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                "form_code": "IQ_BETA_30_ORIGINAL"
+              }
+            ]
           },
           {
             "title": "Depression and Anxiety Assessment",
@@ -825,8 +933,44 @@
                 "href": "/tests/big-five-personality-test-ocean-model"
               },
               {
-                "title": "IQ",
-                "href": "/tests/iq-test-intelligence-quotient-assessment"
+                "title": "IQ Reasoning Practice",
+                "description": "Use 30 original visual-spatial, pattern, and numeric reasoning items. Current output is raw score and dimension reference only.",
+                "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                "key": "iq-test-intelligence-quotient-assessment",
+                "questionsLabel": "30 questions",
+                "durationLabel": "20 min",
+                "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                "secondaryLabel": "View boundaries",
+                "previewVariant": "matrix",
+                "primaryLabel": "Start 30-item practice",
+                "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
+                "claim_policy": {
+                  "norm_authority_required": true,
+                  "iq_estimate_claims_enabled": false,
+                  "percentile_claims_enabled": false,
+                  "copy_boundary": "raw score and original reasoning practice only",
+                  "deferred_norm_authority_pr": "IQ-SCORE-30-01"
+                },
+                "media": {
+                  "asset_key": "iq-beta30-original-card",
+                  "source": "media_library_required",
+                  "authority": "backend_cms_media_library",
+                  "status": "metadata_only_no_frontend_asset",
+                  "fallback_allowed": false,
+                  "alt": "Original IQ reasoning practice card",
+                  "variants": {
+                    "card_asset_key": "iq-beta30-original-card",
+                    "og_asset_key": "iq-beta30-original-og",
+                    "report_cover_asset_key": "iq-full-report-cover"
+                  }
+                },
+                "primaryActions": [
+                  {
+                    "label": "30-item beta",
+                    "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                    "form_code": "IQ_BETA_30_ORIGINAL"
+                  }
+                ]
               },
               {
                 "title": "EQ",
@@ -857,8 +1001,42 @@
                 "href": "/tests/big-five-personality-test-ocean-model"
               },
               {
-                "label": "IQ",
-                "href": "/tests/iq-test-intelligence-quotient-assessment"
+                "title": "IQ Reasoning Practice",
+                "description": "Practice 30 original visual and numeric reasoning items. Raw score only until norm authority is available.",
+                "href": "/tests/iq-test-intelligence-quotient-assessment",
+                "label": "Start practice",
+                "meta": "Cognition practice",
+                "key": "iq-test-intelligence-quotient-assessment",
+                "questionsLabel": "30 questions",
+                "durationLabel": "20 min",
+                "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+                "claim_policy": {
+                  "norm_authority_required": true,
+                  "iq_estimate_claims_enabled": false,
+                  "percentile_claims_enabled": false,
+                  "copy_boundary": "raw score and original reasoning practice only",
+                  "deferred_norm_authority_pr": "IQ-SCORE-30-01"
+                },
+                "media": {
+                  "asset_key": "iq-beta30-original-card",
+                  "source": "media_library_required",
+                  "authority": "backend_cms_media_library",
+                  "status": "metadata_only_no_frontend_asset",
+                  "fallback_allowed": false,
+                  "alt": "Original IQ reasoning practice card",
+                  "variants": {
+                    "card_asset_key": "iq-beta30-original-card",
+                    "og_asset_key": "iq-beta30-original-og",
+                    "report_cover_asset_key": "iq-full-report-cover"
+                  }
+                },
+                "primaryActions": [
+                  {
+                    "label": "30-item beta",
+                    "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                    "form_code": "IQ_BETA_30_ORIGINAL"
+                  }
+                ]
               },
               {
                 "label": "EQ",

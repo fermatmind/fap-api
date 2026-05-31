@@ -18168,6 +18168,15 @@ prs:
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: IQ-CMS-MEDIA-02
 
+    allowed_paths:
+      - content_baselines/media_assets/default_media_assets.json
+      - content_baselines/landing_surfaces/home.en.json
+      - content_baselines/landing_surfaces/home.zh-CN.json
+      - content_baselines/landing_surfaces/tests.en.json
+      - content_baselines/landing_surfaces/tests.zh-CN.json
+      - backend/tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
   - id: IQ-CMS-MEDIA-02
     repo: fap-web
     depends_on: [IQ-CMS-MEDIA-01]

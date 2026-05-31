@@ -354,17 +354,17 @@
           ],
           "tests": [
             {
-              "key": "iq-test-intelligence-quotient-assessment",
               "title": "IQ Reasoning Practice",
               "description": "Use 30 original visual-spatial, pattern, and numeric reasoning items. Current output is raw score and dimension reference only.",
+              "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+              "key": "iq-test-intelligence-quotient-assessment",
               "questionsLabel": "30 questions",
               "durationLabel": "20 min",
-              "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
               "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
               "secondaryLabel": "View boundaries",
               "previewVariant": "matrix",
-              "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
               "primaryLabel": "Start 30-item practice",
+              "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
               "claim_policy": {
                 "norm_authority_required": true,
                 "iq_estimate_claims_enabled": false,
@@ -375,8 +375,15 @@
               "media": {
                 "asset_key": "iq-beta30-original-card",
                 "source": "media_library_required",
+                "authority": "backend_cms_media_library",
                 "status": "metadata_only_no_frontend_asset",
-                "alt": "Original IQ reasoning practice card"
+                "fallback_allowed": false,
+                "alt": "Original IQ reasoning practice card",
+                "variants": {
+                  "card_asset_key": "iq-beta30-original-card",
+                  "og_asset_key": "iq-beta30-original-og",
+                  "report_cover_asset_key": "iq-full-report-cover"
+                }
               },
               "primaryActions": [
                 {
@@ -883,17 +890,44 @@
             ],
             "tests": [
               {
-                "key": "iq-test-intelligence-quotient-assessment",
-                "title": "IQ Test",
-                "description": "When you want a read on reasoning performance, pattern recognition, and cognitive strengths.",
-                "questionsLabel": "40 questions",
-                "durationLabel": "20 min",
-                "outputLabel": "Ability baseline, reasoning profile, and reference notes",
-                "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
-                "secondaryLabel": "View details",
-                "previewVariant": "matrix",
+                "title": "IQ Reasoning Practice",
+                "description": "Use 30 original visual-spatial, pattern, and numeric reasoning items. Current output is raw score and dimension reference only.",
                 "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
-                "primaryLabel": "Start test"
+                "key": "iq-test-intelligence-quotient-assessment",
+                "questionsLabel": "30 questions",
+                "durationLabel": "20 min",
+                "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                "secondaryLabel": "View boundaries",
+                "previewVariant": "matrix",
+                "primaryLabel": "Start 30-item practice",
+                "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
+                "claim_policy": {
+                  "norm_authority_required": true,
+                  "iq_estimate_claims_enabled": false,
+                  "percentile_claims_enabled": false,
+                  "copy_boundary": "raw score and original reasoning practice only",
+                  "deferred_norm_authority_pr": "IQ-SCORE-30-01"
+                },
+                "media": {
+                  "asset_key": "iq-beta30-original-card",
+                  "source": "media_library_required",
+                  "authority": "backend_cms_media_library",
+                  "status": "metadata_only_no_frontend_asset",
+                  "fallback_allowed": false,
+                  "alt": "Original IQ reasoning practice card",
+                  "variants": {
+                    "card_asset_key": "iq-beta30-original-card",
+                    "og_asset_key": "iq-beta30-original-og",
+                    "report_cover_asset_key": "iq-full-report-cover"
+                  }
+                },
+                "primaryActions": [
+                  {
+                    "label": "30-item beta",
+                    "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                    "form_code": "IQ_BETA_30_ORIGINAL"
+                  }
+                ]
               }
             ]
           },
