@@ -16410,6 +16410,51 @@ prs:
     frontend_fallback_authority: false
     next_task: deploy-readiness required after merge
 
+  - id: PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02
+    repo: fap-api
+    branch: codex/payment-alipay-scheduler-bootstrap-02
+    base: main
+    title: "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02 register Alipay compensation in runtime scheduler"
+    train_scope: payment_alipay_scheduler_bootstrap
+    risk_level: p1_payment_fulfillment_reliability
+    depends_on:
+      - PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01
+    allowed_paths:
+      - backend/bootstrap/app.php
+      - backend/tests/Feature/Commerce/AlipayPendingCompensationSchedulerTest.php
+      - backend/docs/runbooks/alipay-pending-compensation.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Register the existing Alipay pending compensation command in the Laravel 11 runtime scheduler source, `bootstrap/app.php`.
+      - Update focused coverage to validate the actual `schedule:list` output includes the Alipay compensation command.
+      - Document scheduler runner verification so production can distinguish command registration from runner availability.
+      - Do not run production compensation, mutate production data, deploy, mutate CMS/content, submit URLs, enqueue Search Channel actions, or modify fap-web in this PR.
+    validation:
+      - cd backend && php artisan test --filter=AlipayPendingCompensationScheduler --no-ansi
+      - cd backend && php artisan schedule:list --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: deploy-readiness and production scheduler runner verification required after merge
+
   - id: ANALYTICS-FUNNEL-EVENT-TAXONOMY-01
     repo: fap-api
     branch: codex/analytics-funnel-event-taxonomy-01

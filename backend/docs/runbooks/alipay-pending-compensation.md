@@ -19,11 +19,29 @@ php artisan commerce:compensate-pending-orders --provider=alipay --include-creat
 Runtime policy:
 
 - Runs every five minutes through Laravel scheduler.
+- Must be registered in `bootstrap/app.php` via `withSchedule`; this is the
+  runtime scheduler source used by the production Laravel 11 bootstrap.
 - Uses `withoutOverlapping`.
 - Includes stale `created` and `pending` Alipay orders.
 - Does not pass `--close-expired`, so it does not automatically close or expire
   unpaid historical orders.
 - Keeps the query window conservative with `--limit=50`.
+
+## Scheduler Runner Verification
+
+The command being present in `app/Console/Kernel.php` is not sufficient for the
+current bootstrap path. Verify the runtime scheduler and the server runner
+separately:
+
+```bash
+php artisan schedule:list --json | jq -r '.[] | select(.command | contains("commerce:compensate-pending-orders"))'
+```
+
+Production must also have a process manager, cron, or timer that invokes
+Laravel's scheduler, for example `php artisan schedule:run` every minute or
+`php artisan schedule:work` under a process supervisor. If the command appears
+in `schedule:list` but the runner is absent, automatic compensation will not
+execute.
 
 ## Manual Diagnosis
 

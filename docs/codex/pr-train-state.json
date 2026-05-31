@@ -32747,6 +32747,104 @@
     "sidecars": [],
     "next_task": "deploy-readiness required after merge"
   },
+  "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02": {
+    "id": "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02",
+    "repo": "fap-api",
+    "branch": "codex/payment-alipay-scheduler-bootstrap-02",
+    "base": "main",
+    "status": "committed",
+    "title": "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02 register Alipay compensation in runtime scheduler",
+    "commit_sha": "739e9c21fb84f7e41e819a7addec8ee12eb92195",
+    "pr_url": null,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02 to fap-api pr-train manifest/state."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to bootstrap scheduler registration, focused scheduler-list test, optional Alipay compensation runbook, and pr-train metadata; no production compensation, production env, CMS/content, deploy, Search Channel, URL submission, or fap-web changes."
+      },
+      "scheduler_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=AlipayPendingCompensationScheduler --no-ansi",
+        "evidence": "PASS: 1 test, 8 assertions; test invokes actual php artisan schedule:list --json process."
+      },
+      "schedule_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan schedule:list --no-ansi",
+        "evidence": "PASS: schedule:list includes php artisan commerce:compensate-pending-orders --provider=alipay --include-created --limit=50 --older-than-minutes=15 on */5 * * * *."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "PASS: 207 routes listed."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "PASS: 3647 files."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "PASS: composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "pass",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "PASS: no security vulnerability advisories found."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+        "evidence": "PASS: JSON and YAML parsed."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check",
+        "evidence": "PASS before staging; cached diff empty at check time."
+      },
+      "fap_web_reference_status": {
+        "status": "pass",
+        "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+        "evidence": "PASS: no fap-web changes reported."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T01:03:39Z",
+        "summary": "User authorized manifest/state update for PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-31T01:03:39Z",
+        "summary": "Implementing runtime bootstrap scheduler registration and schedule:list-focused coverage."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-31T01:26:00Z",
+        "summary": "Runtime bootstrap scheduler registration, schedule:list verification, route list, Pint, Composer validate/audit, JSON/YAML parse, fap-web reference status, and diff checks passed."
+      },
+      {
+        "status": "committed",
+        "at": "2026-05-31T01:29:00Z",
+        "summary": "Committed scoped runtime scheduler bootstrap fix at 739e9c21fb84f7e41e819a7addec8ee12eb92195."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "Run validation, open PR, and after merge perform deploy-readiness plus production scheduler runner verification."
+  },
   "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01": {
     "id": "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01",
     "repo": "fap-api",
