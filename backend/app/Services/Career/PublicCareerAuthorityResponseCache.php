@@ -109,11 +109,19 @@ final class PublicCareerAuthorityResponseCache
     /**
      * @return array<string, array{cache_key: string, member_count?: int, status: string}>
      */
-    public function warm(): array
+    public function warm(?callable $reporter = null): array
     {
+        $reporter?->__invoke('dataset_payloads', 'starting');
         [$datasetHub, $datasetMethod] = $this->refreshDatasetPayloads();
+        $reporter?->__invoke('dataset_payloads', 'finished');
+
+        $reporter?->__invoke('job_index_zh_cn', 'starting');
         $jobIndex = $this->refreshJobIndexPayload('zh-CN');
+        $reporter?->__invoke('job_index_zh_cn', 'finished');
+
+        $reporter?->__invoke('launch_governance_closure', 'starting');
         $launchGovernance = $this->refreshLaunchGovernanceClosurePayload();
+        $reporter?->__invoke('launch_governance_closure', 'finished');
 
         return [
             'dataset_hub' => [

@@ -446,6 +446,8 @@ task('artisan:scales:seed-default', function () {
 task('career:warm-public-authority-cache', function () {
     $timeoutSeconds = (int) (getenv('DEPLOY_CAREER_WARM_CACHE_TIMEOUT') ?: 600);
     $timeoutSeconds = max(180, $timeoutSeconds);
+    $killAfterSeconds = (int) (getenv('DEPLOY_CAREER_WARM_CACHE_KILL_AFTER') ?: 30);
+    $killAfterSeconds = max(5, $killAfterSeconds);
     $strictWarmCache = filter_var((string) (getenv('DEPLOY_CAREER_WARM_CACHE_STRICT') ?: ''), FILTER_VALIDATE_BOOLEAN);
     $skipWarmCache = filter_var((string) (getenv('DEPLOY_SKIP_CAREER_WARM_CACHE') ?: ''), FILTER_VALIDATE_BOOLEAN);
 
@@ -456,7 +458,8 @@ task('career:warm-public-authority-cache', function () {
     }
 
     $command = sprintf(
-        'timeout %d {{bin/php}} %s career:warm-public-authority-cache --no-interaction --ansi',
+        'timeout --kill-after=%ds %d {{bin/php}} %s career:warm-public-authority-cache --no-interaction --ansi',
+        $killAfterSeconds,
         $timeoutSeconds,
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
     );

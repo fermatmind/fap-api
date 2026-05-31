@@ -17,7 +17,11 @@ final class CareerWarmPublicAuthorityCache extends Command
     public function handle(PublicCareerAuthorityResponseCache $cache): int
     {
         try {
-            $summary = $cache->warm();
+            $summary = $cache->warm(function (string $phase, string $state): void {
+                if (! (bool) $this->option('json')) {
+                    $this->line(sprintf('career_warm_phase=%s state=%s', $phase, $state));
+                }
+            });
 
             if ((bool) $this->option('json')) {
                 $this->line((string) json_encode([
