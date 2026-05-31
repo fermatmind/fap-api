@@ -16,6 +16,14 @@ final class IqResultPayloadRedactor
         'answerKey',
         'correct_answer',
         'correctAnswer',
+        'solution_rule',
+        'solutionRule',
+        'distractor_logic',
+        'distractorLogic',
+        'asset_hashes',
+        'assetHashes',
+        'generator_metadata',
+        'generatorMetadata',
     ];
 
     public static function isIqScale(?string $scaleCode, ?string $scaleCodeV2 = null): bool
