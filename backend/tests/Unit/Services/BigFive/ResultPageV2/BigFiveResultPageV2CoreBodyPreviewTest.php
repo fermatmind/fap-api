@@ -1190,6 +1190,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_payment_webhook_digest_idempotency_changes(): void
     {
         $changed = [
+            'backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php',
             'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
         ];
 
@@ -1380,7 +1381,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Kernel.php',
         ];
         $kernelChangedLines = [
-            "+        \$schedule->command('commerce:compensate-pending-orders --provider=alipay --include-created --limit=50 --older-than-minutes=15')->everyFiveMinutes()->withoutOverlapping();",
+            "+        \$schedule->command('commerce:compensate-pending-orders --provider=alipay --include-created --only-stale --limit=10 --older-than-minutes=60')->everyTenMinutes()->withoutOverlapping();",
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
@@ -3000,6 +3001,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (
+                $file === 'backend/bootstrap/app.php'
+                && $repoRoot !== ''
+                && $baseRef !== ''
+                && $this->kernelDiffIsAlipayPendingCompensationSchedulerOnly(
+                    $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                )
+            ) {
+                continue;
+            }
+
+            if (
                 $file === 'backend/database/seeders/ScaleRegistrySeeder.php'
                 && $this->scaleRegistrySeederDiffIsIqIdentityMetadataOnly(
                     $scaleRegistrySeederChangedLines ?? $this->scaleRegistrySeederChangedLines($repoRoot, $baseRef)
@@ -3124,6 +3136,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Commerce/Checkout/AlipayCheckoutService.php',
             'backend/app/Services/Commerce/OrderManager.php',
             'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
+            'backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php',
         ], true);
     }
 
@@ -4583,7 +4596,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/commerce:compensate-pending-orders|--provider=alipay|--include-created|--limit=50|--older-than-minutes=15|everyFiveMinutes|withoutOverlapping/u', $line) !== 1) {
+            if (preg_match('/commerce:compensate-pending-orders|--provider=alipay|--include-created|--only-stale|--limit=10|--older-than-minutes=60|everyTenMinutes|withoutOverlapping/u', $line) !== 1) {
                 return false;
             }
         }

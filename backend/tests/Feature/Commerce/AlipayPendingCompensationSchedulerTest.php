@@ -19,10 +19,11 @@ final class AlipayPendingCompensationSchedulerTest extends TestCase
         $this->assertNotNull($event, 'schedule:list did not include the Alipay pending compensation command.');
         $this->assertStringContainsString('--provider=alipay', (string) $event['command']);
         $this->assertStringContainsString('--include-created', (string) $event['command']);
-        $this->assertStringContainsString('--limit=50', (string) $event['command']);
-        $this->assertStringContainsString('--older-than-minutes=15', (string) $event['command']);
+        $this->assertStringContainsString('--only-stale', (string) $event['command']);
+        $this->assertStringContainsString('--limit=10', (string) $event['command']);
+        $this->assertStringContainsString('--older-than-minutes=60', (string) $event['command']);
         $this->assertStringNotContainsString('--close-expired', (string) $event['command']);
-        $this->assertSame('*/5 * * * *', $event['expression']);
+        $this->assertSame('*/10 * * * *', $event['expression']);
     }
 
     /**

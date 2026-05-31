@@ -123,7 +123,7 @@ class WebhookEntitlementService
                         'order_id' => (string) Str::uuid(),
                         'event_type' => $eventType,
                         'order_no' => $orderNo,
-                        'payload_json' => $payloadSummaryJson,
+                        'payload_json' => $this->untrustedPayloadSummaryJson($payloadSummaryJson),
                         'signature_ok' => $signatureOk,
                         'status' => 'received',
                         'attempts' => 0,
@@ -133,10 +133,10 @@ class WebhookEntitlementService
                         'processed_at' => null,
                         'handled_at' => null,
                         'handle_status' => null,
-                        'payload_size_bytes' => $resolvedPayloadMeta['size_bytes'],
-                        'payload_sha256' => $resolvedPayloadMeta['sha256'],
-                        'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
-                        'payload_excerpt' => $payloadExcerpt,
+                        'payload_size_bytes' => null,
+                        'payload_sha256' => null,
+                        'payload_s3_key' => null,
+                        'payload_excerpt' => null,
                         'request_id' => $requestId,
                         'received_at' => $receivedAt,
                         'created_at' => $receivedAt,
@@ -152,6 +152,22 @@ class WebhookEntitlementService
                         ->first();
                     if (! $eventRow) {
                         return $this->core->serverError('EVENT_INIT_FAILED', 'payment event init failed.');
+                    }
+
+                    if ($signatureOk !== true) {
+                        if ($inserted === 1) {
+                            $this->core->markEventError($provider, $providerEventId, 'rejected', 'INVALID_SIGNATURE', 'signature invalid.');
+                        } else {
+                            Log::warning('PAYMENT_EVENT_INVALID_SIGNATURE_DUPLICATE_IGNORED', [
+                                'provider' => $provider,
+                                'provider_event_id' => $providerEventId,
+                                'order_id' => $eventRow->order_id ?? null,
+                                'order_no' => $eventRow->order_no ?? null,
+                                'incoming_order_no' => $orderNo,
+                            ]);
+                        }
+
+                        return $this->core->badRequest('INVALID_SIGNATURE', 'invalid signature.');
                     }
 
                     $existingPayloadSha256 = trim((string) ($eventRow->payload_sha256 ?? ''));
@@ -211,25 +227,14 @@ class WebhookEntitlementService
                         'processed_at' => null,
                         'handled_at' => null,
                         'handle_status' => null,
-                        'payload_size_bytes' => $resolvedPayloadMeta['size_bytes'],
-                        'payload_sha256' => $resolvedPayloadMeta['sha256'],
-                        'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
-                        'payload_excerpt' => $payloadExcerpt,
+                        'payload_size_bytes' => null,
+                        'payload_sha256' => null,
+                        'payload_s3_key' => null,
+                        'payload_excerpt' => null,
                         'request_id' => $requestId,
                         'received_at' => $receivedAt,
                         'updated_at' => $receivedAt,
                     ];
-
-                    DB::table('payment_events')
-                        ->where('provider', $provider)
-                        ->where('provider_event_id', $providerEventId)
-                        ->update($baseRow);
-
-                    if ($signatureOk !== true) {
-                        $this->core->markEventError($provider, $providerEventId, 'rejected', 'INVALID_SIGNATURE', 'signature invalid.');
-
-                        return $this->core->badRequest('INVALID_SIGNATURE', 'invalid signature.');
-                    }
 
                     $orderQuery = DB::table('orders')
                         ->where('order_no', $orderNo)
@@ -265,6 +270,17 @@ class WebhookEntitlementService
 
                         return $this->core->semanticReject('PROVIDER_MISMATCH', 'provider mismatch');
                     }
+
+                    DB::table('payment_events')
+                        ->where('provider', $provider)
+                        ->where('provider_event_id', $providerEventId)
+                        ->update(array_merge($baseRow, [
+                            'payload_json' => $payloadSummaryJson,
+                            'payload_size_bytes' => $resolvedPayloadMeta['size_bytes'],
+                            'payload_sha256' => $resolvedPayloadMeta['sha256'],
+                            'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
+                            'payload_excerpt' => $payloadExcerpt,
+                        ]));
 
                     $isRefundEvent = $this->core->isRefundEvent($eventType, $normalized);
                     $orderStatus = strtolower((string) ($order->status ?? ''));
@@ -711,6 +727,17 @@ class WebhookEntitlementService
         $ctx['post_commit_ctx'] = $postCommitCtx;
 
         return $ctx;
+    }
+
+    private function untrustedPayloadSummaryJson(string $payloadSummaryJson): string
+    {
+        $decoded = json_decode($payloadSummaryJson, true);
+        $summary = is_array($decoded) ? $decoded : [];
+        $summary['trusted_forensics'] = false;
+
+        $encoded = json_encode($summary, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        return is_string($encoded) && $encoded !== '' ? $encoded : '{}';
     }
 
     private function normalizeRequestId(mixed $value): ?string

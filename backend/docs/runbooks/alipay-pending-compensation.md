@@ -13,19 +13,20 @@ order when Alipay confirms a terminal paid state.
 ## Scheduled Command
 
 ```bash
-php artisan commerce:compensate-pending-orders --provider=alipay --include-created --limit=50 --older-than-minutes=15
+php artisan commerce:compensate-pending-orders --provider=alipay --include-created --only-stale --limit=10 --older-than-minutes=60
 ```
 
 Runtime policy:
 
-- Runs every five minutes through Laravel scheduler.
+- Runs every ten minutes through Laravel scheduler.
 - Must be registered in `bootstrap/app.php` via `withSchedule`; this is the
   runtime scheduler source used by the production Laravel 11 bootstrap.
 - Uses `withoutOverlapping`.
 - Includes stale `created` and `pending` Alipay orders.
 - Does not pass `--close-expired`, so it does not automatically close or expire
   unpaid historical orders.
-- Keeps the query window conservative with `--limit=50`.
+- Keeps the provider query window conservative with `--limit=10`,
+  `--older-than-minutes=60`, and `--only-stale`.
 
 ## Scheduler Runner Verification
 
