@@ -1,0 +1,79 @@
+{
+  "schema_version": "career_1046_internal_linking_authority.v1",
+  "task": "CAREER-1046-INTERNAL-LINKING-AUTHORITY-01",
+  "final_decision": "career_1046_internal_linking_authority_completed_ready_for_frontend_discovery_ux",
+  "source_of_truth": "backend_career_authority_services",
+  "public_career_detail_expected_count": 1046,
+  "localized_public_career_url_expected_count": 2092,
+  "authority_services": {
+    "occupation_companion_links": {
+      "class": "App\\Domain\\Career\\Publish\\CareerFirstWaveOccupationCompanionLinksService",
+      "summary_version": "career.companion.first_wave.v1",
+      "authority": "backend"
+    },
+    "recommendation_companion_links": {
+      "class": "App\\Domain\\Career\\Publish\\CareerFirstWaveRecommendationCompanionLinksService",
+      "summary_version": "career.companion.recommendation.first_wave.v1",
+      "authority": "backend"
+    },
+    "next_step_links": {
+      "class": "App\\Domain\\Career\\Publish\\CareerFirstWaveNextStepLinksService",
+      "summary_version": "career.next_step.first_wave.v1",
+      "authority": "backend"
+    }
+  },
+  "link_eligibility_rules": [
+    "public_runtime_projection_required",
+    "detail_route_enabled_required",
+    "robots_indexable_required",
+    "release_gate_pass_required",
+    "not_private",
+    "not_draft",
+    "not_fallback_only",
+    "not_noindex",
+    "not_404",
+    "not_manual_hold"
+  ],
+  "excluded_slugs": [
+    "software-developers",
+    "digital-forensics-analysts",
+    "computer-occupations-all-other"
+  ],
+  "excluded_slug_link_exposure_allowed": false,
+  "invalid_link_targets_blocked": [
+    "private",
+    "draft",
+    "fallback_only",
+    "noindex",
+    "hard_404",
+    "soft_404",
+    "manual_hold",
+    "conflict_slug"
+  ],
+  "l3_static_generation_performed": false,
+  "pseo_generation_performed": false,
+  "frontend_fallback_authority_used": false,
+  "sitemap_llms_exposure_changed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "production_write_performed": false,
+  "claim_boundary": {
+    "forbidden_claim_hits": [],
+    "allowed_framing": [
+      "exploration",
+      "navigation",
+      "decision_support",
+      "occupation_information"
+    ],
+    "blocked_claims": [
+      "best_career_for_user",
+      "hiring_fit",
+      "job_suitability_guarantee",
+      "salary_guarantee",
+      "career_success_guarantee",
+      "diagnosis_treatment_cure",
+      "psychometric_job_success_prediction"
+    ]
+  },
+  "next_task": "CAREER-1046-FRONTEND-DISCOVERY-UX-01"
+}
