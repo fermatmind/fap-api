@@ -400,11 +400,11 @@
     "PR-EQ-SJT-05": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-sjt-05-validation-telemetry-qa",
-      "status": "open",
+      "status": "merged",
       "depends_on": [
         "PR-EQ-SJT-04"
       ],
-      "commit_sha": "1b92cd3d2edb895add2086220dc67bfc9a389356",
+      "commit_sha": "58b4a20a229bf80fe1177a7a828033221d389835",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1824",
       "checks": {
         "local": {
@@ -443,9 +443,9 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-31T17:48:56Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "backend-email-binding-foundation": {
       "repo": "fap-api",
