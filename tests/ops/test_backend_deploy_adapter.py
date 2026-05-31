@@ -242,6 +242,19 @@ class ReleaseTrainDeployAdapterIntegrationTest(unittest.TestCase):
         self.assertNotIn("ROLLBACK_COMMAND", env)
 
 
+class DeployPhpCareerWarmCachePolicyTest(unittest.TestCase):
+    def test_career_warm_cache_is_nonblocking_by_default_with_strict_override(self):
+        deploy_php = (ROOT / "deploy.php").read_text(encoding="utf-8")
+
+        self.assertIn("DEPLOY_CAREER_WARM_CACHE_STRICT", deploy_php)
+        self.assertIn("DEPLOY_SKIP_CAREER_WARM_CACHE", deploy_php)
+        self.assertIn("career_warm_public_authority_cache_nonblocking_failure", deploy_php)
+        self.assertIn("Continuing deploy because DEPLOY_CAREER_WARM_CACHE_STRICT is not true.", deploy_php)
+        self.assertIn("if ($strictWarmCache)", deploy_php)
+        self.assertIn("run($command);", deploy_php)
+        self.assertIn("exit 0", deploy_php)
+
+
 class _FakeGitHub:
     def get_pull_request(self, repo, pr_number):
         return {"head": {"sha": _head_sha()}}
