@@ -267,6 +267,59 @@ final class ArticleBaselineImportTest extends TestCase
             ->assertJsonPath('jsonld.url', 'https://fermatmind.com/zh/articles/'.$slug);
     }
 
+    public function test_import_rejects_overlong_translation_group_id_before_database_write(): void
+    {
+        $sourceDir = $this->writeBaselineSourceDir([
+            [
+                'slug' => 'overlong-translation-group',
+                'title' => 'Overlong translation group',
+                'excerpt' => 'Importer should reject overlong translation authority identifiers.',
+                'content_md' => "# Overlong translation group\n\nBody.",
+                'translation_group_id' => str_repeat('g', 65),
+            ],
+        ]);
+
+        $this->artisan('articles:import-local-baseline', [
+            '--dry-run' => true,
+            '--source-dir' => $sourceDir,
+            '--locale' => 'zh-CN',
+        ])
+            ->expectsOutputToContain('overlong translation_group_id')
+            ->assertExitCode(1);
+
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_import_keeps_generated_translation_group_id_within_database_limit(): void
+    {
+        $longSlug = 'career-'.str_repeat('translation-', 8).'authority';
+        $sourceDir = $this->writeBaselineSourceDir([
+            [
+                'slug' => $longSlug,
+                'title' => 'Generated translation group',
+                'excerpt' => 'Importer should keep generated translation authority identifiers bounded.',
+                'content_md' => "# Generated translation group\n\nBody.",
+            ],
+        ]);
+
+        $this->artisan('articles:import-local-baseline', [
+            '--source-dir' => $sourceDir,
+            '--locale' => 'zh-CN',
+            '--status' => 'draft',
+        ])
+            ->expectsOutputToContain('articles_found=1')
+            ->assertExitCode(0);
+
+        $article = Article::query()
+            ->withoutGlobalScopes()
+            ->where('slug', $longSlug)
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+
+        $this->assertLessThanOrEqual(64, mb_strlen((string) $article->translation_group_id));
+        $this->assertStringStartsWith('article:', (string) $article->translation_group_id);
+    }
+
     private function assertSixEditorialArticlesConvergeThroughSeoAuthority(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
@@ -371,5 +424,21 @@ final class ArticleBaselineImportTest extends TestCase
         }
 
         $this->fail('Baseline article not found: '.$slug);
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $articles
+     */
+    private function writeBaselineSourceDir(array $articles): string
+    {
+        $dir = sys_get_temp_dir().'/article-baseline-import-'.bin2hex(random_bytes(6));
+        mkdir($dir, 0777, true);
+
+        file_put_contents($dir.'/articles.zh-CN.json', json_encode([
+            'meta' => ['locale' => 'zh-CN'],
+            'articles' => $articles,
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+
+        return $dir;
     }
 }
