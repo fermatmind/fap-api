@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:58:50.038408Z",
+  "updated_at": "2026-05-31T16:59:12.092390Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -23056,7 +23056,7 @@
       "branch": "codex/iq-seo-ramp-01-cms-authority",
       "base": "main",
       "title": "IQ-SEO-RAMP-01 publish CMS SEO ramp authority",
-      "status": "local_scope_validation_passed_external_sidecar",
+      "status": "pr_open_checks_pending",
       "depends_on": [
         "IQ-CMS-MEDIA-02",
         "IQ-NORM-03"
@@ -23106,9 +23106,15 @@
           "from": "implementation_in_progress",
           "to": "local_scope_validation_passed_external_sidecar",
           "note": "IQ SEO ramp scoped checks passed; manifest broad --filter=Seo failure recorded as external sidecar per user train protocol."
+        },
+        {
+          "at": "2026-05-31T16:53:16.348171Z",
+          "from": "local_scope_validation_passed_external_sidecar",
+          "to": "pr_open_checks_pending",
+          "note": "Opened GitHub PR #1821 after scoped validation passed and external Seo suite failures were sidecarized."
         }
       ],
-      "updated_at": "2026-05-31T16:51:45.653527Z",
+      "updated_at": "2026-05-31T16:53:16.348171Z",
       "sidecar_issues": [
         {
           "id": "IQ-SEO-RAMP-01-SIDECAR-SEO-SUITE-EXTERNAL-20260601",
@@ -23131,7 +23137,10 @@
           ],
           "scope_disposition": "registered_sidecar_per_user_goal_protocol; do not repair in IQ-SEO-RAMP-01"
         }
-      ]
+      ],
+      "commit_sha": "90e9709e",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1821",
+      "pr_number": 1821
     },
     "IQ-SEO-RAMP-02": {
       "id": "IQ-SEO-RAMP-02",
@@ -30690,13 +30699,13 @@
       "branch": "codex/iq-seo-ramp-01-cms-authority",
       "base": "main",
       "title": "IQ-SEO-RAMP-01 publish CMS SEO ramp authority",
-      "status": "local_scope_validation_passed_external_sidecar",
+      "status": "pr_open_checks_pending",
       "depends_on": [
         "IQ-CMS-MEDIA-02",
         "IQ-NORM-03"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "90e9709e",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1821",
       "checks": {
         "dependency_iq_cms_media_02": "passed: fermatmind/fap-web#944 merged at 2026-05-31T16:40:02Z",
         "dependency_iq_norm_03": "passed: merged earlier in train",
@@ -30724,7 +30733,7 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "updated_at": "2026-05-31T16:51:45.653527Z",
+      "updated_at": "2026-05-31T16:53:16.348171Z",
       "sidecar_issues": [
         {
           "id": "IQ-SEO-RAMP-01-SIDECAR-SEO-SUITE-EXTERNAL-20260601",
@@ -30754,8 +30763,15 @@
           "from": "implementation_in_progress",
           "to": "local_scope_validation_passed_external_sidecar",
           "note": "IQ SEO ramp scoped checks passed; manifest broad --filter=Seo failure recorded as external sidecar per user train protocol."
+        },
+        {
+          "at": "2026-05-31T16:53:16.348171Z",
+          "from": "local_scope_validation_passed_external_sidecar",
+          "to": "pr_open_checks_pending",
+          "note": "Opened GitHub PR #1821 after scoped validation passed and external Seo suite failures were sidecarized."
         }
-      ]
+      ],
+      "pr_number": 1821
     }
   },
   "RESULT-EN-PARITY-04": {
