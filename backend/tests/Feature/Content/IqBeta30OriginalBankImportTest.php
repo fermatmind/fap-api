@@ -15,7 +15,7 @@ final class IqBeta30OriginalBankImportTest extends TestCase
         $process->setTimeout(60);
         $process->run();
 
-        $this->assertTrue($process->isSuccessful(), $process->getOutput() . $process->getErrorOutput());
+        $this->assertTrue($process->isSuccessful(), $process->getOutput().$process->getErrorOutput());
     }
 
     #[Test]

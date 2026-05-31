@@ -14,7 +14,7 @@ function iqBeta30BankId(): string
 
 function iqBeta30BankDir(): string
 {
-    return iqBeta30RepoRoot() . '/content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/' . iqBeta30BankId();
+    return iqBeta30RepoRoot().'/content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/'.iqBeta30BankId();
 }
 
 function iqBeta30FileMap(): array
@@ -22,28 +22,28 @@ function iqBeta30FileMap(): array
     $dir = iqBeta30BankDir();
 
     return [
-        'manifest' => $dir . '/manifest.json',
-        'items' => $dir . '/items.json',
-        'answer_key' => $dir . '/answer_key.json',
-        'scoring_spec' => $dir . '/scoring_spec.json',
+        'manifest' => $dir.'/manifest.json',
+        'items' => $dir.'/items.json',
+        'answer_key' => $dir.'/answer_key.json',
+        'scoring_spec' => $dir.'/scoring_spec.json',
     ];
 }
 
 function iqBeta30PrettyJson(array $payload): string
 {
-    return json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "\n";
+    return json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n";
 }
 
 function iqBeta30Sha256Json(array $payload): string
 {
-    return 'sha256:' . hash('sha256', iqBeta30PrettyJson($payload));
+    return 'sha256:'.hash('sha256', iqBeta30PrettyJson($payload));
 }
 
 function iqBeta30LoadJson(string $path): array
 {
     $json = json_decode((string) file_get_contents($path), true);
     if (! is_array($json)) {
-        throw new RuntimeException('Invalid JSON: ' . $path);
+        throw new RuntimeException('Invalid JSON: '.$path);
     }
 
     return $json;
@@ -78,7 +78,7 @@ function iqBeta30DimensionName(string $dimension): string
         'VSPR' => 'Visual-spatial pattern reasoning',
         'VSI' => 'Visual-spatial imagery',
         'NPR' => 'Numeric pattern reasoning',
-        default => throw new InvalidArgumentException('Unknown dimension ' . $dimension),
+        default => throw new InvalidArgumentException('Unknown dimension '.$dimension),
     };
 }
 
@@ -119,10 +119,10 @@ function iqBeta30ItemDefinitions(): array
 function iqBeta30Svg(array $elements): string
 {
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img">'
-        . '<rect width="240" height="160" rx="16" fill="#f8faf7"/>'
-        . '<rect x="8" y="8" width="224" height="144" rx="12" fill="none" stroke="#243126" stroke-width="2" opacity="0.16"/>'
-        . implode('', $elements)
-        . '</svg>';
+        .'<rect width="240" height="160" rx="16" fill="#f8faf7"/>'
+        .'<rect x="8" y="8" width="224" height="144" rx="12" fill="none" stroke="#243126" stroke-width="2" opacity="0.16"/>'
+        .implode('', $elements)
+        .'</svg>';
 }
 
 function iqBeta30Asset(array $elements, array $meta): array
@@ -145,8 +145,8 @@ function iqBeta30ShapeElements(int $itemNumber, int $variant, string $family, bo
     $elements = [];
 
     if ($isStem) {
-        $elements[] = '<text x="20" y="28" font-family="Avenir, Helvetica, sans-serif" font-size="13" fill="#243126" opacity="0.72">' . htmlspecialchars(str_replace('_', ' ', $family), ENT_QUOTES) . '</text>';
-        $elements[] = '<text x="198" y="28" font-family="Avenir, Helvetica, sans-serif" font-size="12" fill="#243126" opacity="0.54">Q' . sprintf('%02d', $itemNumber) . '</text>';
+        $elements[] = '<text x="20" y="28" font-family="Avenir, Helvetica, sans-serif" font-size="13" fill="#243126" opacity="0.72">'.htmlspecialchars(str_replace('_', ' ', $family), ENT_QUOTES).'</text>';
+        $elements[] = '<text x="198" y="28" font-family="Avenir, Helvetica, sans-serif" font-size="12" fill="#243126" opacity="0.54">Q'.sprintf('%02d', $itemNumber).'</text>';
     }
 
     for ($i = 0; $i < $shapeCount; $i++) {
@@ -158,24 +158,24 @@ function iqBeta30ShapeElements(int $itemNumber, int $variant, string $family, bo
 
         if ($family === 'numeric_pattern') {
             $value = (($itemNumber + $variant + $i) * 3) % 17 + 2;
-            $elements[] = '<circle cx="' . $x . '" cy="' . $y . '" r="' . (int) ($size / 2) . '" fill="none" stroke="' . $color . '" stroke-width="3"/>';
-            $elements[] = '<text x="' . ($x - 5) . '" y="' . ($y + 5) . '" font-family="Avenir, Helvetica, sans-serif" font-size="13" fill="#243126">' . $value . '</text>';
+            $elements[] = '<circle cx="'.$x.'" cy="'.$y.'" r="'.(int) ($size / 2).'" fill="none" stroke="'.$color.'" stroke-width="3"/>';
+            $elements[] = '<text x="'.($x - 5).'" y="'.($y + 5).'" font-family="Avenir, Helvetica, sans-serif" font-size="13" fill="#243126">'.$value.'</text>';
         } elseif ($family === 'rotation') {
-            $elements[] = '<path d="M ' . $x . ' ' . ($y - $size) . ' L ' . ($x + $size) . ' ' . ($y + $size) . ' L ' . ($x - $size) . ' ' . ($y + $size) . ' Z" fill="' . $color . '" opacity="0.74" transform="rotate(' . $angle . ' ' . $x . ' ' . $y . ')"/>';
+            $elements[] = '<path d="M '.$x.' '.($y - $size).' L '.($x + $size).' '.($y + $size).' L '.($x - $size).' '.($y + $size).' Z" fill="'.$color.'" opacity="0.74" transform="rotate('.$angle.' '.$x.' '.$y.')"/>';
         } elseif ($family === 'overlay') {
-            $elements[] = '<rect x="' . ($x - $size / 2) . '" y="' . ($y - $size / 2) . '" width="' . $size . '" height="' . $size . '" rx="5" fill="' . $color . '" opacity="0.42" transform="rotate(' . $angle . ' ' . $x . ' ' . $y . ')"/>';
-            $elements[] = '<circle cx="' . ($x + 8) . '" cy="' . ($y - 5) . '" r="' . (int) max(5, $size / 3) . '" fill="none" stroke="#243126" stroke-width="2" opacity="0.52"/>';
+            $elements[] = '<rect x="'.($x - $size / 2).'" y="'.($y - $size / 2).'" width="'.$size.'" height="'.$size.'" rx="5" fill="'.$color.'" opacity="0.42" transform="rotate('.$angle.' '.$x.' '.$y.')"/>';
+            $elements[] = '<circle cx="'.($x + 8).'" cy="'.($y - 5).'" r="'.(int) max(5, $size / 3).'" fill="none" stroke="#243126" stroke-width="2" opacity="0.52"/>';
         } elseif ($family === 'matrix_3x3' || $family === 'matrix_2x2') {
             $cell = $family === 'matrix_3x3' ? 28 : 36;
             $col = $i % ($family === 'matrix_3x3' ? 3 : 2);
             $row = (int) floor($i / ($family === 'matrix_3x3' ? 3 : 2));
             $gx = 52 + ($col * 46) + (($variant + $itemNumber) % 7);
             $gy = 44 + ($row * 36) + (($variant + $i) % 6);
-            $elements[] = '<rect x="' . $gx . '" y="' . $gy . '" width="' . $cell . '" height="' . $cell . '" rx="6" fill="none" stroke="#243126" stroke-width="1.5" opacity="0.24"/>';
-            $elements[] = '<circle cx="' . ($gx + $cell / 2) . '" cy="' . ($gy + $cell / 2) . '" r="' . (5 + (($itemNumber + $variant + $i) % 8)) . '" fill="' . $color . '" opacity="0.78"/>';
+            $elements[] = '<rect x="'.$gx.'" y="'.$gy.'" width="'.$cell.'" height="'.$cell.'" rx="6" fill="none" stroke="#243126" stroke-width="1.5" opacity="0.24"/>';
+            $elements[] = '<circle cx="'.($gx + $cell / 2).'" cy="'.($gy + $cell / 2).'" r="'.(5 + (($itemNumber + $variant + $i) % 8)).'" fill="'.$color.'" opacity="0.78"/>';
         } else {
-            $elements[] = '<circle cx="' . $x . '" cy="' . $y . '" r="' . (int) ($size / 2) . '" fill="' . $color . '" opacity="0.7"/>';
-            $elements[] = '<path d="M ' . ($x - $size) . ' ' . ($y + $size) . ' Q ' . $x . ' ' . ($y - $size) . ' ' . ($x + $size) . ' ' . ($y + $size) . '" fill="none" stroke="#243126" stroke-width="2" opacity="0.42"/>';
+            $elements[] = '<circle cx="'.$x.'" cy="'.$y.'" r="'.(int) ($size / 2).'" fill="'.$color.'" opacity="0.7"/>';
+            $elements[] = '<path d="M '.($x - $size).' '.($y + $size).' Q '.$x.' '.($y - $size).' '.($x + $size).' '.($y + $size).'" fill="none" stroke="#243126" stroke-width="2" opacity="0.42"/>';
         }
     }
 
@@ -240,7 +240,7 @@ function iqBeta30Item(array $definition): array
             'template_key' => $family,
             'generator_version' => 'iq_beta30_original_bank_v1',
             'theme_version' => 'fermatmind_soft_contrast_v1',
-            'params_hash' => 'sha256:' . hash('sha256', json_encode([$definition['item_id'], $family, $definition['dimension'], $stemVariant], JSON_UNESCAPED_SLASHES)),
+            'params_hash' => 'sha256:'.hash('sha256', json_encode([$definition['item_id'], $family, $definition['dimension'], $stemVariant], JSON_UNESCAPED_SLASHES)),
         ],
     ];
 }

@@ -3,7 +3,7 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/iq_beta30_original_bank_lib.php';
+require_once __DIR__.'/iq_beta30_original_bank_lib.php';
 
 $check = in_array('--check', $argv, true);
 $files = iqBeta30FileMap();
@@ -19,6 +19,7 @@ foreach ($payloads as $key => $payload) {
         if ($actual !== $expected) {
             $drift[] = $path;
         }
+
         continue;
     }
 
@@ -29,7 +30,7 @@ foreach ($payloads as $key => $payload) {
 }
 
 if ($check && $drift !== []) {
-    fwrite(STDERR, "IQ_BETA_30_ORIGINAL artifacts are stale:\n - " . implode("\n - ", $drift) . "\n");
+    fwrite(STDERR, "IQ_BETA_30_ORIGINAL artifacts are stale:\n - ".implode("\n - ", $drift)."\n");
     exit(1);
 }
 

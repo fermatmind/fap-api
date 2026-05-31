@@ -3,7 +3,7 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/iq_beta30_original_bank_lib.php';
+require_once __DIR__.'/iq_beta30_original_bank_lib.php';
 
 function failBeta30(string $message): never
 {
@@ -14,7 +14,7 @@ function failBeta30(string $message): never
 $files = iqBeta30FileMap();
 foreach ($files as $path) {
     if (! is_file($path)) {
-        failBeta30('Missing artifact ' . $path);
+        failBeta30('Missing artifact '.$path);
     }
 }
 
@@ -22,7 +22,7 @@ $expectedPayloads = iqBeta30BankPayloads();
 foreach ($expectedPayloads as $key => $expectedPayload) {
     $actual = iqBeta30LoadJson($files[$key]);
     if ($actual !== $expectedPayload) {
-        failBeta30($key . ' does not match deterministic generator output');
+        failBeta30($key.' does not match deterministic generator output');
     }
 }
 
@@ -53,7 +53,7 @@ $ids = [];
 foreach ($items as $item) {
     $id = $item['item_id'] ?? '';
     if ($id === '' || isset($ids[$id])) {
-        failBeta30('Missing or duplicate item id ' . $id);
+        failBeta30('Missing or duplicate item id '.$id);
     }
     $ids[$id] = true;
 
@@ -63,43 +63,43 @@ foreach ($items as $item) {
     $familyCounts[$family] = ($familyCounts[$family] ?? 0) + 1;
 
     if (($item['option_count'] ?? null) !== 6) {
-        failBeta30($id . ' must have six options');
+        failBeta30($id.' must have six options');
     }
     if (count($item['assets']['options'] ?? []) !== 6) {
-        failBeta30($id . ' must provide six option assets');
+        failBeta30($id.' must provide six option assets');
     }
 
     $answer = $item['correct_answer'] ?? '';
     if (! array_key_exists($answer, $answerCounts)) {
-        failBeta30($id . ' has invalid answer ' . $answer);
+        failBeta30($id.' has invalid answer '.$answer);
     }
     $answerCounts[$answer]++;
 
     if (($answerKey['answers'][$id]['correct_answer'] ?? null) !== $answer) {
-        failBeta30($id . ' answer key mismatch');
+        failBeta30($id.' answer key mismatch');
     }
     if (($item['generator_metadata']['source_mode'] ?? null) !== 'repo_generated_original') {
-        failBeta30($id . ' must declare repo-generated original provenance');
+        failBeta30($id.' must declare repo-generated original provenance');
     }
     if (($item['generator_metadata']['copied_from_third_party'] ?? true) !== false || ($item['generator_metadata']['traced_from_third_party'] ?? true) !== false) {
-        failBeta30($id . ' has invalid third-party provenance flags');
+        failBeta30($id.' has invalid third-party provenance flags');
     }
     if (($item['assets']['stem']['kind'] ?? null) !== 'inline_svg_markup' || ($item['assets']['stem']['mime_type'] ?? null) !== 'image/svg+xml') {
-        failBeta30($id . ' stem must be inline SVG markup asset');
+        failBeta30($id.' stem must be inline SVG markup asset');
     }
     if (($item['asset_hashes']['stem'] ?? null) !== iqBeta30Sha256Json($item['assets']['stem'])) {
-        failBeta30($id . ' stem hash mismatch');
+        failBeta30($id.' stem hash mismatch');
     }
     foreach ($item['assets']['options'] as $option) {
         $code = $option['code'] ?? '';
         if (! in_array($code, iqBeta30OptionCodes(), true)) {
-            failBeta30($id . ' invalid option code ' . $code);
+            failBeta30($id.' invalid option code '.$code);
         }
         if (($option['asset']['kind'] ?? null) !== 'inline_svg_markup' || ($option['asset']['mime_type'] ?? null) !== 'image/svg+xml') {
-            failBeta30($id . ' option ' . $code . ' must be inline SVG markup asset');
+            failBeta30($id.' option '.$code.' must be inline SVG markup asset');
         }
         if (($item['asset_hashes']['options'][$code] ?? null) !== iqBeta30Sha256Json($option['asset'])) {
-            failBeta30($id . ' option ' . $code . ' hash mismatch');
+            failBeta30($id.' option '.$code.' hash mismatch');
         }
     }
 }
@@ -111,10 +111,10 @@ ksort($familyCounts);
 ksort($expectedDimensionCounts);
 ksort($expectedFamilyCounts);
 if ($dimensionCounts !== $expectedDimensionCounts) {
-    failBeta30('Dimension counts mismatch: ' . json_encode($dimensionCounts));
+    failBeta30('Dimension counts mismatch: '.json_encode($dimensionCounts));
 }
 if ($familyCounts !== $expectedFamilyCounts) {
-    failBeta30('Family counts mismatch: ' . json_encode($familyCounts));
+    failBeta30('Family counts mismatch: '.json_encode($familyCounts));
 }
 if ($answerCounts !== array_fill_keys(iqBeta30OptionCodes(), 5)) {
     failBeta30('Answers must be balanced across A-F');
