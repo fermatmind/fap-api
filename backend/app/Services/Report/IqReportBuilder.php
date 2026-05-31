@@ -265,16 +265,32 @@ final class IqReportBuilder
     {
         $norms = is_array($score['norms'] ?? null) ? $score['norms'] : [];
         $scored = $status === 'scored';
+        $hasNormAuthority = $this->hasNormAuthority($norms);
 
         return [
             'raw_score' => $scored ? $this->floatOrNull($score['raw_score'] ?? null) : null,
-            'iq_estimate' => $this->floatOrNull($norms['iq_estimate'] ?? null),
-            'percentile' => $this->floatOrNull($norms['percentile'] ?? null),
-            'confidence_interval' => is_array($norms['confidence_interval'] ?? null)
+            'iq_estimate' => $scored && $hasNormAuthority ? $this->floatOrNull($norms['iq_estimate'] ?? null) : null,
+            'percentile' => $scored && $hasNormAuthority ? $this->floatOrNull($norms['percentile'] ?? null) : null,
+            'confidence_interval' => $scored && $hasNormAuthority && is_array($norms['confidence_interval'] ?? null)
                 ? $norms['confidence_interval']
                 : null,
             'norms_status' => $this->stringOrNull($norms['status'] ?? null),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $norms
+     */
+    private function hasNormAuthority(array $norms): bool
+    {
+        $status = strtolower(trim((string) ($norms['status'] ?? '')));
+
+        return in_array($status, [
+            'available',
+            'calibrated',
+            'norm_table_available',
+            'production_normed',
+        ], true);
     }
 
     /**

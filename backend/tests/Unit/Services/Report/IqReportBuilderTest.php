@@ -40,9 +40,9 @@ final class IqReportBuilderTest extends TestCase
                     ],
                     'norms' => [
                         'status' => 'unavailable_without_norm_table',
-                        'iq_estimate' => null,
-                        'percentile' => null,
-                        'confidence_interval' => null,
+                        'iq_estimate' => 132.0,
+                        'percentile' => 98.0,
+                        'confidence_interval' => [128.0, 136.0],
                     ],
                     'dimension_scores' => [
                         'VSI' => [
@@ -83,6 +83,10 @@ final class IqReportBuilderTest extends TestCase
         $this->assertSame('IQ_INTELLIGENCE_QUOTIENT', data_get($payload, 'report.scale_code'));
         $this->assertSame('IQ_RAVEN', data_get($payload, 'report.scale_code_legacy'));
         $this->assertSame(18.0, data_get($payload, 'report.summary.raw_score'));
+        $this->assertNull(data_get($payload, 'report.summary.iq_estimate'));
+        $this->assertNull(data_get($payload, 'report.summary.percentile'));
+        $this->assertNull(data_get($payload, 'report.summary.confidence_interval'));
+        $this->assertSame('unavailable_without_norm_table', data_get($payload, 'report.summary.norms_status'));
         $this->assertSame('stable', data_get($payload, 'report.stability.status'));
         $this->assertSame('A', data_get($payload, 'report.quality.level'));
         $this->assertSame(75.0, data_get($payload, 'report.dimensions.visual_spatial_insight.percent_correct'));
