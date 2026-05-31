@@ -35031,7 +35031,7 @@
     "branch": "audit/sec-release-train-01",
     "base": "main",
     "title": "AUDIT-SEC-RELEASE-TRAIN-01 harden release train deploy boundary",
-    "status": "in_progress",
+    "status": "merged_and_cleaned",
     "depends_on": [
       "OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01 merged"
     ],
@@ -35041,14 +35041,14 @@
       "deploy_safety_boundary": "no deploy, no production mutation, no secret read/write"
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-31T06:52:45Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": false,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -35062,6 +35062,12 @@
         "from": "in_progress",
         "to": "local_validation_external_blocker_recorded",
         "note": "Scoped release-train validation passed; unrelated ci_verify_mbti failure registered as sidecar per train protocol."
+      },
+      {
+        "at": "2026-05-31T22:34:56+08:00",
+        "from": "in_progress",
+        "to": "merged_and_cleaned",
+        "note": "Ledger closeout: confirmed https://github.com/fermatmind/fap-api/pull/1780 merged at 2026-05-31T06:52:45Z; origin/main contains 2edb9e2fcc609338df87fd8e22c32a331cb8e649; task branch cleanup completed or remote branch absent."
       }
     ],
     "sidecars": [
@@ -35073,7 +35079,13 @@
         "current_pr_introduced": false
       }
     ],
-    "next_task": "Run local validation, open PR, wait for CI, merge if allowed, cleanup, then continue SECURITY-AUDIT-36-PR-TRAIN."
+    "next_task": "Run local validation, open PR, wait for CI, merge if allowed, cleanup, then continue SECURITY-AUDIT-36-PR-TRAIN.",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1780",
+    "merge_commit": "2edb9e2fcc609338df87fd8e22c32a331cb8e649",
+    "github": {
+      "status": "merged",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1780"
+    }
   },
   "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01": {
     "id": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01",
@@ -35191,7 +35203,7 @@
     "branch": "audit/sec-result-identity-01",
     "base": "main",
     "title": "AUDIT-SEC-RESULT-IDENTITY-01 harden result recovery identity boundary",
-    "status": "merged",
+    "status": "merged_and_cleaned",
     "depends_on": [
       "AUDIT-SEC-RELEASE-TRAIN-01 merged"
     ],
@@ -35245,11 +35257,22 @@
         "from": "github_checks_green",
         "to": "merged_and_cleaned",
         "note": "PR #1786 squash merged; origin/main contains merge commit; local main synced; local and remote task branches cleaned."
+      },
+      {
+        "at": "2026-05-31T22:34:56+08:00",
+        "from": "merged",
+        "to": "merged_and_cleaned",
+        "note": "Ledger closeout: confirmed https://github.com/fermatmind/fap-api/pull/1786 merged at 2026-05-31T07:57:19Z; origin/main contains 9e59c976a71811e76f9a70c64eb6380cf0a25878; task branch cleanup completed or remote branch absent."
       }
     ],
     "sidecars": [],
     "next_task": "AUDIT-SEC-PAYMENT-INTEGRITY-01",
-    "merge_commit": "9e59c976a71811e76f9a70c64eb6380cf0a25878"
+    "merge_commit": "9e59c976a71811e76f9a70c64eb6380cf0a25878",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1786",
+    "github": {
+      "status": "merged",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1786"
+    }
   },
   "AUDIT-SEC-PAYMENT-INTEGRITY-01": {
     "id": "AUDIT-SEC-PAYMENT-INTEGRITY-01",
@@ -35257,7 +35280,7 @@
     "branch": "audit/sec-payment-integrity-01",
     "base": "main",
     "title": "AUDIT-SEC-PAYMENT-INTEGRITY-01 harden payment integrity boundaries",
-    "status": "merged",
+    "status": "merged_and_cleaned",
     "depends_on": [
       "AUDIT-SEC-RESULT-IDENTITY-01 merged"
     ],
@@ -35356,6 +35379,12 @@
         "from": "ci_fix_pushed_checks_pending",
         "to": "merged",
         "note": "PR #1793 checks passed after rebase; squash merged; origin/main contains merge commit; local and remote task branches cleaned."
+      },
+      {
+        "at": "2026-05-31T22:34:56+08:00",
+        "from": "merged",
+        "to": "merged_and_cleaned",
+        "note": "Ledger closeout: confirmed https://github.com/fermatmind/fap-api/pull/1793 merged at 2026-05-31T08:31:32Z; origin/main contains 14c30683909759a4607607c9056c7bad2ed64341; task branch cleanup completed or remote branch absent."
       }
     ],
     "sidecars": [
@@ -35391,7 +35420,11 @@
     "commit_sha": "1b4663df4c0fe6d17d48b0fc78555e09188ee7c4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1793",
     "pr_number": 1793,
-    "merge_commit": "14c30683909759a4607607c9056c7bad2ed64341"
+    "merge_commit": "14c30683909759a4607607c9056c7bad2ed64341",
+    "github": {
+      "status": "merged",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1793"
+    }
   },
   "AUDIT-SEC-CONTENT-PUBLISH-GATES-01": {
     "id": "AUDIT-SEC-CONTENT-PUBLISH-GATES-01",
@@ -35399,7 +35432,7 @@
     "branch": "audit/sec-content-publish-gates-01",
     "base": "main",
     "title": "AUDIT-SEC-CONTENT-PUBLISH-GATES-01 harden content publication gates",
-    "status": "merged",
+    "status": "merged_and_cleaned",
     "depends_on": [
       "AUDIT-SEC-PAYMENT-INTEGRITY-01 merged"
     ],
@@ -35472,6 +35505,12 @@
         "from": "pr_open_checks_pending",
         "to": "merged_cleaned",
         "note": "GitHub checks passed after rebase; PR #1796 squash merged; origin/main synced; local worktree and task branch cleaned; remote branch absent."
+      },
+      {
+        "at": "2026-05-31T22:34:56+08:00",
+        "from": "merged",
+        "to": "merged_and_cleaned",
+        "note": "Ledger closeout: confirmed https://github.com/fermatmind/fap-api/pull/1796 merged at 2026-05-31T08:54:02Z; origin/main contains 5bc34fbb8cf112b6545217809c4e92e9393a1035; task branch cleanup completed or remote branch absent."
       }
     ],
     "sidecars": [
@@ -35482,7 +35521,12 @@
       }
     ],
     "next_task": "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01",
-    "merge_commit": "5bc34fbb8cf112b6545217809c4e92e9393a1035"
+    "merge_commit": "5bc34fbb8cf112b6545217809c4e92e9393a1035",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1796",
+    "github": {
+      "status": "merged",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1796"
+    }
   },
   "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01": {
     "id": "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01",
@@ -35490,7 +35534,7 @@
     "branch": "audit/sec-content-runtime-cache-01",
     "base": "main",
     "title": "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01 harden content runtime cache freshness",
-    "status": "ci_fix_pushed_pending_checks",
+    "status": "merged_and_cleaned",
     "depends_on": [
       "AUDIT-SEC-CONTENT-PUBLISH-GATES-01 merged"
     ],
@@ -35577,6 +35621,12 @@
         "from": "ci_fix_pushed_pending_checks",
         "to": "merged_and_cleaned",
         "note": "GitHub checks passed; PR #1800 squash-merged; origin/main contains merge commit; task worktree/local branch cleaned; remote branch absent."
+      },
+      {
+        "at": "2026-05-31T22:34:56+08:00",
+        "from": "ci_fix_pushed_pending_checks",
+        "to": "merged_and_cleaned",
+        "note": "Ledger closeout: confirmed https://github.com/fermatmind/fap-api/pull/1800 merged at 2026-05-31T13:09:40Z; origin/main contains 445fc2e91cc1b63e5af95b781b42d7f66c504698; task branch cleanup completed or remote branch absent."
       }
     ],
     "sidecars": [
@@ -35591,10 +35641,11 @@
       "status": "merged",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1800"
     },
-    "merge_commit": "445fc2e91cc1b63e5af95b781b42d7f66c504698"
+    "merge_commit": "445fc2e91cc1b63e5af95b781b42d7f66c504698",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1800"
   },
   "AUDIT-SEC-CONTENT-IMPORT-SAFETY-01": {
-    "status": "implementation_in_progress",
+    "status": "merged_and_cleaned",
     "branch": "audit/sec-content-import-safety-01",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1803",
     "base": "main",
@@ -35637,14 +35688,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-31T14:31:03Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -35664,6 +35715,12 @@
         "from": "local_scope_validation_passed_with_sidecar",
         "to": "pr_open_checks_pending",
         "note": "Created PR #1803; waiting for GitHub required checks."
+      },
+      {
+        "at": "2026-05-31T22:34:56+08:00",
+        "from": "implementation_in_progress",
+        "to": "merged_and_cleaned",
+        "note": "Ledger closeout: confirmed https://github.com/fermatmind/fap-api/pull/1803 merged at 2026-05-31T14:31:03Z; origin/main contains 42a8caacb4f4bfa0fb5a83ecd69c25e3b5e83973; task branch cleanup completed or remote branch absent."
       }
     ],
     "sidecars": [
@@ -35675,8 +35732,70 @@
     ],
     "next_task": null,
     "github": {
-      "status": "checks_pending",
+      "status": "merged",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1803"
+    },
+    "merge_commit": "42a8caacb4f4bfa0fb5a83ecd69c25e3b5e83973"
+  },
+  "AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01": {
+    "status": "implementation_in_progress",
+    "branch": "audit/sec-train-ledger-closeout-01",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1804",
+    "base": "main",
+    "worktree": "/private/tmp/fap-api-audit-sec-train-ledger-closeout-01",
+    "scope": "security_audit_train_ledger_closeout",
+    "authorized_by_user": true,
+    "workspace_safety": "using isolated worktree /private/tmp/fap-api-audit-sec-train-ledger-closeout-01; dirty primary worktree untouched",
+    "allowed_paths": [
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "local_validation": {
+      "acceptance": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check"
+        ],
+        "evidence": "docs-only ledger closeout validation passed; changed files limited to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-05-31T22:34:56+08:00",
+        "from": "authorized",
+        "to": "implementation_in_progress",
+        "note": "Started docs-only ledger closeout for SECURITY-AUDIT-36-PR-TRAIN merged PR facts."
+      },
+      {
+        "at": "2026-05-31T22:35:30+08:00",
+        "from": "implementation_in_progress",
+        "to": "local_scope_validation_passed",
+        "note": "JSON/YAML parse and git diff check passed for docs-only ledger closeout."
+      },
+      {
+        "at": "2026-05-31T22:36:42+08:00",
+        "from": "local_scope_validation_passed",
+        "to": "pr_open_checks_pending",
+        "note": "Created PR #1804 for docs-only security audit train ledger closeout; waiting for GitHub checks."
+      }
+    ],
+    "sidecars": [],
+    "next_task": null,
+    "github": {
+      "status": "checks_pending",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1804"
     }
   }
 }
