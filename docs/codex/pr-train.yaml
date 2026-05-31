@@ -532,7 +532,7 @@ prs:
       - cd backend && php artisan test --filter=SeoIntel
       - cd backend && php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --json
       - cd backend && php artisan route:list --no-ansi
-      - cd backend && vendor/bin/pint --test
+      - cd backend && vendor/bin/pint --test tests/Feature/Foundation/PrFdnSocialSyncReadinessTest.php
       - git diff --check
       - git diff --cached --check
     merge_policy:
@@ -586,7 +586,7 @@ prs:
       - cd backend && php artisan seo-intel:collect --collector=drift_foundation --dry-run --json
       - cd backend && php artisan seo-intel:collect --collector=crawler_log_foundation --dry-run --json
       - cd backend && php artisan route:list --no-ansi
-      - cd backend && vendor/bin/pint --test
+      - cd backend && vendor/bin/pint --test tests/Feature/Foundation/PrFdnSocialSyncReadinessTest.php
       - git diff --check
       - git diff --cached --check
     merge_policy:
@@ -18737,3 +18737,39 @@ prs:
     validation: []
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: null
+
+  - id: PR-FDN-SOCIAL-SYNC-READINESS
+    repo: fap-api
+    depends_on: []
+    branch: codex/pr-fdn-social-sync-readiness
+    base: main
+    title: "docs(foundation): add Daily Giving social sync readiness"
+    train_scope: foundation_daily_giving_social_sync
+    status: in_progress
+    scope:
+      - Produce a read-only readiness/planning report for Foundation Daily Giving social sync.
+      - Classify existing manual social URL support and future MVP boundaries.
+      - Confirm no credential handling, automatic posting, external API call, CMS mutation, deploy, Search Channel action, or URL submission is performed.
+    allowed_paths:
+      - backend/docs/seo/pr-fdn-social-sync-readiness.md
+      - backend/docs/seo/generated/pr-fdn-social-sync-readiness.v1.json
+      - backend/tests/Feature/Foundation/PrFdnSocialSyncReadinessTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate production data or CMS records.
+      - Add social API credentials, external posting clients, queue workers, or automatic publishing.
+      - Deploy, submit URLs, enqueue Search Channel, or call external search/social APIs.
+    validation:
+      - cd backend && php artisan test --filter=PrFdnSocialSyncReadiness --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/pr-fdn-social-sync-readiness.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: PR-FDN-SOCIAL-SYNC-MVP-01

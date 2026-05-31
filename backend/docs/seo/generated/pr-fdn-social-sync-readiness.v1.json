@@ -1,0 +1,103 @@
+{
+  "schema_version": "pr-fdn-social-sync-readiness.v1",
+  "task": "PR-FDN-SOCIAL-SYNC-READINESS",
+  "final_decision": "pr_fdn_social_sync_readiness_completed_ready_for_manual_social_sync_mvp",
+  "readiness_state": "manual_social_url_recording_ready",
+  "source_scope": "backend_daily_giving_records",
+  "evidence_summary": {
+    "migration_social_fields": [
+      "social_x_url",
+      "social_linkedin_url",
+      "social_weibo_url",
+      "social_xiaohongshu_url",
+      "social_other_links"
+    ],
+    "model_social_fields": [
+      "social_x_url",
+      "social_linkedin_url",
+      "social_weibo_url",
+      "social_xiaohongshu_url",
+      "social_other_links"
+    ],
+    "filament_manual_fields": [
+      "social_x_url",
+      "social_linkedin_url",
+      "social_weibo_url",
+      "social_xiaohongshu_url",
+      "social_other_links"
+    ],
+    "public_api_social_fields": [
+      "social_x_url",
+      "social_linkedin_url",
+      "social_weibo_url",
+      "social_xiaohongshu_url",
+      "social_other_links"
+    ],
+    "public_api_routes": [
+      "GET /api/v0.5/foundation/giving-records",
+      "GET /api/v0.5/foundation/giving-records/{recordCode}",
+      "GET /api/v0.5/foundation/giving-records/months",
+      "GET /api/v0.5/foundation/giving-records/months/{yearMonth}"
+    ],
+    "existing_tests": [
+      "DailyGivingRecordPublicApiTest",
+      "DailyGivingRecordPublicationGateTest"
+    ]
+  },
+  "current_capabilities": {
+    "manual_social_url_storage": true,
+    "manual_admin_entry": true,
+    "public_api_exposes_social_links": true,
+    "automatic_posting": false,
+    "credential_storage": false,
+    "platform_api_clients": false,
+    "posting_queue": false,
+    "approval_workflow": false,
+    "external_response_audit_trail": false
+  },
+  "recommended_mvp": {
+    "mode": "human_publish_manual_link_recording",
+    "steps": [
+      "Prepare platform copy from an approved Daily Giving record.",
+      "Publish manually in each social platform outside the application.",
+      "Record the published social URLs in existing Daily Giving social-link fields.",
+      "Render links from backend-authoritative public API fields."
+    ],
+    "allowed_in_next_pr": [
+      "manual social sync checklist/status",
+      "published post URL review metadata",
+      "read-only public API/front-end rendering of backend social links"
+    ],
+    "blocked_until_separate_approval": [
+      "social platform credentials",
+      "automatic posting",
+      "external platform API calls",
+      "posting queues or retries",
+      "unreviewed platform copy generation"
+    ]
+  },
+  "required_future_boundaries": {
+    "no_external_api_calls_without_approval": true,
+    "no_credentials_in_repo": true,
+    "human_approval_required_before_auto_posting": true,
+    "audit_log_required_for_any_future_posting": true,
+    "rate_limit_policy_required_before_auto_posting": true,
+    "platform_terms_review_required_before_auto_posting": true
+  },
+  "platform_readiness": {
+    "x": "manual_url_only",
+    "linkedin": "manual_url_only",
+    "weibo": "manual_url_only",
+    "xiaohongshu": "manual_url_only",
+    "other_links": "manual_url_only"
+  },
+  "no_production_mutation": true,
+  "no_cms_mutation": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_api_call": true,
+  "no_credentials_handled": true,
+  "no_automatic_posting": true,
+  "next_task": "PR-FDN-SOCIAL-SYNC-MVP-01"
+}
