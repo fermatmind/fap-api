@@ -33236,7 +33236,7 @@
       "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01 merged"
     ],
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1779",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -33719,6 +33719,11 @@
         "status": "pass",
         "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
         "evidence": "PASS: no fap-web changes reported."
+      },
+      "pr_created": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1779",
+        "title": "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04 state-sync owner mismatch candidate"
       }
     },
     "failure_reason": null,
@@ -33761,6 +33766,11 @@
         "status": "committed",
         "at": "2026-05-31T14:20:00+08:00",
         "summary": "Committed scoped controlled repair evidence and focused test at f42f3017987210b4b6ee9b002f90631ce861bc7e."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T14:28:00+08:00",
+        "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1779 after scoped local validation passed."
       }
     ],
     "sidecars": [
