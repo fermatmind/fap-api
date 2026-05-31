@@ -472,6 +472,15 @@ class ScalesController extends Controller
                 $version = (string) ($row['default_dir_version'] ?? Eq60PackLoader::PACK_VERSION);
                 $doc = $eq60PackLoader->loadQuestionsDoc($locale, $version);
                 $localeResolved = (string) ($doc['locale_resolved'] ?? $eq60PackLoader->normalizeLocale($locale));
+                $landing = $eq60PackLoader->loadLanding($version);
+                $localizedLanding = is_array($landing[$localeResolved] ?? null) ? (array) $landing[$localeResolved] : [];
+                $reportAssets = $eq60PackLoader->loadReportAssets($version);
+                $seoGeoAssets = (array) data_get($reportAssets, 'assets.seo_geo_authority.assets', []);
+                $seoGeoAuthorityAsset = is_array($seoGeoAssets['eq.seo_geo_authority.en_landing.default'] ?? null)
+                    ? (array) $seoGeoAssets['eq.seo_geo_authority.en_landing.default']
+                    : [];
+                $seoGeoAuthority = is_array($seoGeoAuthorityAsset[$localeResolved] ?? null) ? (array) $seoGeoAuthorityAsset[$localeResolved] : [];
+                $seoGeoPublicPage = (array) data_get($reportAssets, 'assets.seo_geo_authority.public_page', []);
 
                 return response()->json([
                     'ok' => true,
@@ -490,6 +499,13 @@ class ScalesController extends Controller
                         'locale_resolved' => $localeResolved,
                         'option_anchors' => is_array($doc['option_anchors'] ?? null) ? $doc['option_anchors'] : [],
                         'dimension_codes' => is_array($doc['dimension_codes'] ?? null) ? $doc['dimension_codes'] : ['SA', 'ER', 'EM', 'RM'],
+                        'landing' => [
+                            'title' => (string) ($localizedLanding['title'] ?? ''),
+                            'subtitle' => (string) ($localizedLanding['subtitle'] ?? ''),
+                            'consent' => is_array($localizedLanding['consent'] ?? null) ? $localizedLanding['consent'] : [],
+                            'disclaimer' => is_array($localizedLanding['disclaimer'] ?? null) ? $localizedLanding['disclaimer'] : [],
+                        ],
+                        'seo_geo_authority' => $this->projectEqSeoGeoAuthority($seoGeoAuthority, $seoGeoPublicPage),
                     ],
                 ] + $scaleCodeMeta);
             }
@@ -898,6 +914,43 @@ class ScalesController extends Controller
         $trimmed = trim((string) $value);
 
         return $trimmed !== '' ? $trimmed : null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $localizedAsset
+     * @param  array<string,mixed>  $publicPage
+     * @return array<string,mixed>
+     */
+    private function projectEqSeoGeoAuthority(array $localizedAsset, array $publicPage): array
+    {
+        return [
+            'schema' => 'eq.seo_geo_authority.public.v1',
+            'authority_source' => (string) ($publicPage['authority_source'] ?? 'backend_content_pack'),
+            'canonical_path' => (string) ($publicPage['canonical_path'] ?? ''),
+            'alternate_paths' => array_values(array_map(
+                static fn ($path): string => trim((string) $path),
+                array_filter((array) ($publicPage['alternate_paths'] ?? []), static fn ($path): bool => trim((string) $path) !== '')
+            )),
+            'indexability_state' => (string) ($publicPage['indexability_state'] ?? ''),
+            'sitemap_eligible' => (bool) ($publicPage['sitemap_eligible'] ?? false),
+            'llms_eligible' => (bool) ($publicPage['llms_eligible'] ?? false),
+            'llms_full_eligible' => (bool) ($publicPage['llms_full_eligible'] ?? false),
+            'meta_title' => (string) ($localizedAsset['meta_title'] ?? ''),
+            'meta_description' => (string) ($localizedAsset['meta_description'] ?? ''),
+            'h1' => (string) ($localizedAsset['h1'] ?? ''),
+            'dek' => (string) ($localizedAsset['dek'] ?? ''),
+            'entity_summary' => (string) ($localizedAsset['entity_summary'] ?? ''),
+            'content_modules' => array_values(array_filter((array) ($localizedAsset['content_modules'] ?? []), 'is_array')),
+            'faq' => array_values(array_filter((array) ($localizedAsset['faq'] ?? []), 'is_array')),
+            'structured_data' => is_array($localizedAsset['structured_data'] ?? null) ? $localizedAsset['structured_data'] : [],
+            'llms_summary' => (string) ($localizedAsset['llms_summary'] ?? ''),
+            'claim_boundary' => (string) ($localizedAsset['claim_boundary'] ?? ''),
+            'source_authority' => (string) ($localizedAsset['source_authority'] ?? ''),
+            'no_go_claims' => array_values(array_map(
+                static fn ($claim): string => trim((string) $claim),
+                array_filter((array) ($localizedAsset['no_go_claims'] ?? []), static fn ($claim): bool => trim((string) $claim) !== '')
+            )),
+        ];
     }
 
     /**

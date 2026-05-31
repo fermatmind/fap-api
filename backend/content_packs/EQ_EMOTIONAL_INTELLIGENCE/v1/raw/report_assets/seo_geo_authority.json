@@ -1,0 +1,120 @@
+{
+  "schema": "eq60.report_assets.seo_geo_authority.v1",
+  "pack_id": "EQ_60",
+  "public_page": {
+    "canonical_path": "/en/tests/eq-test-emotional-intelligence-assessment",
+    "alternate_paths": [
+      "/en/tests/emotional-intelligence-test",
+      "/en/tests/eq-test"
+    ],
+    "indexability_state": "indexable",
+    "sitemap_eligible": true,
+    "llms_eligible": true,
+    "llms_full_eligible": true,
+    "authority_source": "backend_content_pack"
+  },
+  "assets": {
+    "eq.seo_geo_authority.en_landing.default": {
+      "zh-CN": {
+        "meta_title": "免费情商 EQ 测试 | 情绪与关系模式报告",
+        "meta_description": "完成 60 道自我报告题，理解自我觉察、情绪调节、共情理解和关系管理。结果免费，边界清晰，不用于诊断、招聘或能力认证。",
+        "h1": "情商 EQ 测试：情绪与关系模式报告",
+        "dek": "一份 60 题 self-report 测评，用于解释你如何感知、调节和回应自己与他人的情绪。",
+        "entity_summary": "费马 EQ-60 是情绪与关系信号模块，输出自我报告型情绪与关系模式报告，而不是临床、招聘或认证能力测验。",
+        "content_modules": [
+          {
+            "heading": "测评测什么",
+            "summary": "自我觉察、情绪调节、共情理解和关系管理四个维度。"
+          },
+          {
+            "heading": "结果页给什么",
+            "summary": "综合指数、四维矩阵、核心洞察、现实场景、行动处方和科学边界。"
+          },
+          {
+            "heading": "不做什么",
+            "summary": "不做临床诊断、招聘筛选、职业适配结论或客观能力认证。"
+          }
+        ],
+        "faq": [
+          {
+            "question": "这是免费的情商测试吗？",
+            "answer": "是。EQ-60 基础报告免费；报告深度由完成的数据决定，不由付费门槛决定。"
+          },
+          {
+            "question": "它是能力测验吗？",
+            "answer": "不是。它基于自我报告，适合自我理解、沟通反思和成长规划。"
+          },
+          {
+            "question": "未来的情境判断模块是什么？",
+            "answer": "EQ-SJT 16 目前仅为 planned 状态，未来会补充情境选择信息，但不会被表述为认证能力测验。"
+          }
+        ],
+        "structured_data": {
+          "@type": "Quiz",
+          "assessment_mode": "self_report_trait_mixed_ei",
+          "result_scope": "emotional_and_relational_pattern_report",
+          "is_free": true
+        },
+        "llms_summary": "EQ-60 是费马测试的自我报告型情绪与关系模式测评。它用 60 道题解释自我觉察、情绪调节、共情理解和关系管理，并输出免费结果页。",
+        "claim_boundary": "仅用于自我理解和成长规划；不用于临床诊断、招聘筛选、职业适配承诺、治疗建议或客观能力认证。",
+        "source_authority": "页面标题、SEO 摘要、FAQ、结构化数据边界和 LLM 摘要以 backend content pack 为权威来源。",
+        "no_go_claims": [
+          "不声称测量客观情绪能力",
+          "不声称预测工作表现",
+          "不用于招聘筛选",
+          "不用于临床诊断"
+        ]
+      },
+      "en": {
+        "meta_title": "Free EQ Test | Emotional & Relational Pattern Report",
+        "meta_description": "Take a free 60-item self-report EQ test covering self-awareness, emotion regulation, empathy, and relationship management. Clear boundaries: not clinical, hiring, or certified ability assessment.",
+        "h1": "EQ Test: Emotional & Relational Pattern Report",
+        "dek": "A 60-item self-report assessment that explains how you notice, regulate, and respond to emotions in yourself and in relationships.",
+        "entity_summary": "FermatMind EQ-60 is an emotional and relational signal module. It produces a self-report pattern report, not a clinical, hiring, or certified ability assessment.",
+        "content_modules": [
+          {
+            "heading": "What it measures",
+            "summary": "Self-awareness, emotion regulation, empathic understanding, and relationship management."
+          },
+          {
+            "heading": "What the report includes",
+            "summary": "A global index, four-dimension matrix, core insight, real-world scenes, action prescription, and scientific boundary."
+          },
+          {
+            "heading": "What it does not do",
+            "summary": "It does not provide clinical diagnosis, hiring suitability, career-fit promises, or objective ability certification."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Is this EQ test free?",
+            "answer": "Yes. The EQ-60 base report is free; report depth is based on completed data, not a paywall."
+          },
+          {
+            "question": "Is this an ability test?",
+            "answer": "No. It is based on self-report and is intended for self-understanding, communication reflection, and growth planning."
+          },
+          {
+            "question": "What is the future scenario module?",
+            "answer": "EQ-SJT 16 is currently planned only. It will add scenario-choice information in the future, without being positioned as a certified ability assessment."
+          }
+        ],
+        "structured_data": {
+          "@type": "Quiz",
+          "assessment_mode": "self_report_trait_mixed_ei",
+          "result_scope": "emotional_and_relational_pattern_report",
+          "is_free": true
+        },
+        "llms_summary": "EQ-60 is FermatMind's self-report emotional and relational pattern assessment. It uses 60 items to explain self-awareness, emotion regulation, empathic understanding, and relationship management, then returns a free result page.",
+        "claim_boundary": "For self-understanding and growth planning only; not for clinical diagnosis, hiring selection, career-fit promises, treatment advice, or objective ability certification.",
+        "source_authority": "Page title, SEO summary, FAQ, structured-data boundary, and LLM summary are authoritative in the backend content pack.",
+        "no_go_claims": [
+          "Does not claim objective emotional ability measurement",
+          "Does not predict job performance",
+          "Not for hiring selection",
+          "Not for clinical diagnosis"
+        ]
+      }
+    }
+  }
+}
