@@ -462,6 +462,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_eq_integrated_report_composer_draft(): void
+    {
+        $changed = [
+            'backend/app/Services/Report/EqIntegratedReportComposer.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_eq_journey_state_contract_changes(): void
     {
         $changed = [
@@ -2998,6 +3007,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEqIntegratedReportComposerDraftChange($file)) {
+                continue;
+            }
+
             if ($this->isEq60JourneyStateContractChange($file)) {
                 continue;
             }
@@ -4109,6 +4122,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/content_packs/EQ_SJT_16/v1/raw/golden_cases.json',
             'backend/content_packs/EQ_SJT_16/v1/raw/items.json',
         ], true);
+    }
+
+    private function isEqIntegratedReportComposerDraftChange(string $file): bool
+    {
+        return $file === 'backend/app/Services/Report/EqIntegratedReportComposer.php';
     }
 
     private function isEq60JourneyStateContractChange(string $file): bool
