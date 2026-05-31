@@ -35029,7 +35029,7 @@
     "branch": "audit/sec-content-runtime-cache-01",
     "base": "main",
     "title": "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01 harden content runtime cache freshness",
-    "status": "local_scope_validation_passed_with_sidecar",
+    "status": "pr_open_checks_pending",
     "depends_on": [
       "AUDIT-SEC-CONTENT-PUBLISH-GATES-01 merged"
     ],
@@ -35062,7 +35062,8 @@
         "evidence": "route:list passed; sqlite migrate passed; diff/schema checks passed. ci_verify_mbti.sh failed only in existing Big5 content-pack publish/rollback temp target compiled directory assertions outside this PR scope; generated dirty artifacts were restored."
       },
       "github": {
-        "status": "not_created"
+        "status": "pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1800"
       }
     },
     "failure_reason": null,
@@ -35087,6 +35088,12 @@
         "from": "implementation_in_progress",
         "to": "local_scope_validation_passed_with_sidecar",
         "note": "Focused tests, route:list, sqlite migrate, diff check, and manifest/state parse passed; unrelated ci_verify_mbti Big5 content-pack temp-target failures registered as sidecar per train protocol."
+      },
+      {
+        "at": "2026-05-31T20:43:00+08:00",
+        "from": "local_scope_validation_passed_with_sidecar",
+        "to": "pr_open_checks_pending",
+        "note": "Created PR #1800; waiting for GitHub required checks."
       }
     ],
     "sidecars": [
