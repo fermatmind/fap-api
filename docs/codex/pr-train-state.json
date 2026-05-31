@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:41:36+08:00",
+  "updated_at": "2026-05-31T16:43:04+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -34821,7 +34821,7 @@
     "branch": "audit/sec-content-publish-gates-01",
     "base": "main",
     "title": "AUDIT-SEC-CONTENT-PUBLISH-GATES-01 harden content publication gates",
-    "status": "local_scope_validation_passed_with_sidecar",
+    "status": "pr_open_checks_pending",
     "depends_on": [
       "AUDIT-SEC-PAYMENT-INTEGRITY-01 merged"
     ],
@@ -34853,6 +34853,10 @@
           "bash backend/scripts/ci_verify_mbti.sh"
         ],
         "evidence": "route:list passed; sqlite migrate passed; diff/schema checks passed. ci_verify_mbti.sh failed only in existing Big5 content-pack publish/rollback temp target compiled directory assertions outside this PR scope; generated dirty artifacts were restored."
+      },
+      "github": {
+        "status": "pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1796"
       }
     },
     "failure_reason": null,
@@ -34877,6 +34881,12 @@
         "from": "implementation_in_progress",
         "to": "local_scope_validation_passed_with_sidecar",
         "note": "Focused tests, route:list, sqlite migrate, diff check, and manifest/state parse passed; unrelated ci_verify_mbti Big5 content-pack temp-target failures registered as sidecar per train protocol."
+      },
+      {
+        "at": "2026-05-31T16:43:04+08:00",
+        "from": "local_scope_validation_passed_with_sidecar",
+        "to": "pr_open_checks_pending",
+        "note": "Created PR #1796; waiting for GitHub required checks."
       }
     ],
     "sidecars": [
