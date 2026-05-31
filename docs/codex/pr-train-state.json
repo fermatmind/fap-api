@@ -29633,11 +29633,11 @@
       }
     },
     "IQ-PAID-REPORT-01": {
-      "status": "local_scope_validation_passed",
+      "status": "pr_opened",
       "branch": "codex/iq-paid-report-01-entitlement-contract",
-      "commit_sha": null,
-      "pr_url": null,
-      "pr_number": null,
+      "commit_sha": "4ccbc8a23df79cbe658619b928a49e426cd75639",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1812",
+      "pr_number": 1812,
       "checks": {
         "php_lint": "passed",
         "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqPaidReport --no-ansi": "passed_with_existing_warnings",
@@ -29648,7 +29648,7 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "updated_at": "2026-05-31T23:45:00+08:00",
+      "updated_at": "2026-05-31T23:55:00+08:00",
       "scope_validation": {
         "allowed_paths_only": true,
         "changed_files": [
