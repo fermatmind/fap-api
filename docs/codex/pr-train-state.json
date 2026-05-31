@@ -248,11 +248,11 @@
     "PR-EQ-SJT-01": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-sjt-01-content-pack-skeleton",
-      "status": "open",
+      "status": "merged",
       "depends_on": [
         "PR-EQ-PER-06"
       ],
-      "commit_sha": null,
+      "commit_sha": "9c8a2b61c76c4f68c762ba472ff47f1dd8a9c213",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1813",
       "checks": {
         "local": {
@@ -279,20 +279,39 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-31T16:14:12Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-EQ-SJT-02": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-sjt-02-scorer-golden-cases",
-      "status": "pending",
+      "status": "open",
       "depends_on": [
         "PR-EQ-SJT-01"
       ],
       "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1818",
+      "checks": {
+        "local": {
+          "status": "passed",
+          "commands": [
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqSjt",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Assessment",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_eq_sjt_16_scorer_ready_files",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "scope_validation": "passed",
+          "results": {
+            "eq_sjt": "passed",
+            "assessment": "passed",
+            "bigfive_runtime_freeze_eq_sjt_scorer_guard": "passed",
+            "diff_check": "passed",
+            "json_validation": "passed"
+          }
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,

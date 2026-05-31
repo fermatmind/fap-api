@@ -2,14 +2,16 @@
   "schema": "eq_sjt_16.compiled.manifest.v1",
   "module_code": "EQ_SJT_16",
   "pack_version": "v1",
-  "status": "skeleton_only",
+  "status": "scorer_ready_not_runtime",
   "runtime_available": false,
   "files": [
     "raw/module_contract.json",
     "raw/domains.json",
     "raw/item_schema.json",
-    "raw/scoring_rubric_draft.json"
+    "raw/scoring_rubric_draft.json",
+    "raw/items.json",
+    "raw/golden_cases.json"
   ],
-  "content_hash": "skeleton-only",
-  "notes": "PR-EQ-SJT-01 does not include operational items, scorer, routes, or integrated report visibility."
+  "content_hash": "scorer-ready-not-runtime",
+  "notes": "PR-EQ-SJT-02 includes scorer-ready item metadata and golden cases, but no routes, frontend take entry, or integrated report visibility."
 }
