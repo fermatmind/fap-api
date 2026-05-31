@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:59:12.092390Z",
+  "updated_at": "2026-05-31T17:40:49.933746Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -23228,21 +23228,23 @@
       "branch": "codex/iq-live-ramp-01-authenticated-smoke",
       "base": "main",
       "title": "IQ-LIVE-RAMP-01 add authenticated production smoke fixture gate",
-      "status": "planned",
+      "status": "merged_reconciled_cross_repo",
       "depends_on": [
         "IQ-SEO-RAMP-02",
         "IQ-PAID-REPORT-02"
       ],
-      "checks": {},
+      "checks": {
+        "cross_repo_reconciliation": "passed: fap-web PR #947 merged at 2026-05-31T17:32:31Z with commit 9767723ca43c9d949d7d6b775bcfcf6fde7ae675; remote branch deleted; local cleanup completed in fap-web train."
+      },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-31T17:32:31Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
         "allowed_paths_only": null,
         "local_validation_passed": null,
-        "github_checks_green": null,
-        "post_merge_revalidated": null
+        "github_checks_green": true,
+        "post_merge_revalidated": true
       },
       "transitions": [
         {
@@ -23250,8 +23252,18 @@
           "from": "missing",
           "to": "planned",
           "note": "User authorized IQ production PR train manifest/state registration."
+        },
+        {
+          "at": "2026-05-31T17:39:32.634261Z",
+          "from": "planned",
+          "to": "merged_reconciled_cross_repo",
+          "note": "Reconciled fap-web IQ-LIVE-RAMP-01 merge state to unblock fap-api IQ-OBS-01 dependency."
         }
-      ]
+      ],
+      "commit_sha": "9767723ca43c9d949d7d6b775bcfcf6fde7ae675",
+      "pr_url": "https://github.com/fermatmind/fap-web/pull/947",
+      "pr_number": 947,
+      "updated_at": "2026-05-31T17:39:32.634261Z"
     },
     "IQ-OBS-01": {
       "id": "IQ-OBS-01",
@@ -23259,20 +23271,38 @@
       "branch": "codex/iq-obs-01-production-guards",
       "base": "main",
       "title": "IQ-OBS-01 add production observability guards",
-      "status": "planned",
+      "status": "local_scope_validation_passed",
       "depends_on": [
         "IQ-LIVE-RAMP-01"
       ],
-      "checks": {},
+      "checks": {
+        "dependency_iq_live_ramp_01": "passed: fap-web PR #947 merged at 2026-05-31T17:32:31Z and reconciled in fap-api ledger.",
+        "workspace_safety": "using isolated worktree /private/tmp/fap-api-iq-obs-01; primary worktrees untouched",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqObservability --no-ansi": "passed_with_existing_warnings",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportContractTest --no-ansi": "passed_with_existing_warnings",
+        "git diff --check": "passed",
+        "composer_autoload_refresh": "local_environment_only: refreshed copied vendor autoload paths before manifest checks; vendor not staged",
+        "scope_validation": "passed: changed files limited to IQ-OBS-01 observability service, contract test, and train state ledger"
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
         "github_checks_green": null,
-        "post_merge_revalidated": null
+        "post_merge_revalidated": null,
+        "changed_files_expected": [
+          "backend/app/Services/Iq/IqProductionObservability.php",
+          "backend/tests/Feature/V0_3/IqObservabilityTest.php",
+          "docs/codex/pr-train-state.json"
+        ],
+        "changed_files": [
+          "backend/app/Services/Iq/IqProductionObservability.php",
+          "backend/tests/Feature/V0_3/IqObservabilityTest.php",
+          "docs/codex/pr-train-state.json"
+        ]
       },
       "transitions": [
         {
@@ -23280,8 +23310,21 @@
           "from": "missing",
           "to": "planned",
           "note": "User authorized IQ production PR train manifest/state registration."
+        },
+        {
+          "at": "2026-05-31T17:39:32.634261Z",
+          "from": "planned",
+          "to": "implementation_in_progress",
+          "note": "Started IQ production observability guard implementation after cross-repo dependency reconciliation."
+        },
+        {
+          "at": "2026-05-31T17:40:49.933746Z",
+          "from": "implementation_in_progress",
+          "to": "local_scope_validation_passed",
+          "note": "IQ observability guard service and contract tests passed manifest local checks with existing warning output only."
         }
-      ]
+      ],
+      "updated_at": "2026-05-31T17:40:49.933746Z"
     },
     "IQ-RELEASE-01": {
       "id": "IQ-RELEASE-01",
@@ -30822,6 +30865,69 @@
         }
       ],
       "pr_number": 1821
+    },
+    "IQ-OBS-01": {
+      "id": "IQ-OBS-01",
+      "repo": "fap-api",
+      "branch": "codex/iq-obs-01-production-guards",
+      "base": "main",
+      "title": "IQ-OBS-01 add production observability guards",
+      "status": "local_scope_validation_passed",
+      "depends_on": [
+        "IQ-LIVE-RAMP-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency_iq_live_ramp_01": "passed: fap-web PR #947 merged at 2026-05-31T17:32:31Z and reconciled in fap-api ledger.",
+        "workspace_safety": "using isolated worktree /private/tmp/fap-api-iq-obs-01; primary worktrees untouched",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqObservability --no-ansi": "passed_with_existing_warnings",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportContractTest --no-ansi": "passed_with_existing_warnings",
+        "git diff --check": "passed",
+        "composer_autoload_refresh": "local_environment_only: refreshed copied vendor autoload paths before manifest checks; vendor not staged",
+        "scope_validation": "passed: changed files limited to IQ-OBS-01 observability service, contract test, and train state ledger"
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
+        "github_checks_green": null,
+        "post_merge_revalidated": null,
+        "changed_files_expected": [
+          "backend/app/Services/Iq/IqProductionObservability.php",
+          "backend/tests/Feature/V0_3/IqObservabilityTest.php",
+          "docs/codex/pr-train-state.json"
+        ],
+        "changed_files": [
+          "backend/app/Services/Iq/IqProductionObservability.php",
+          "backend/tests/Feature/V0_3/IqObservabilityTest.php",
+          "docs/codex/pr-train-state.json"
+        ]
+      },
+      "updated_at": "2026-05-31T17:40:49.933746Z",
+      "transitions": [
+        {
+          "at": "2026-05-31T12:37:59+00:00",
+          "from": "missing",
+          "to": "planned",
+          "note": "User authorized IQ production PR train manifest/state registration."
+        },
+        {
+          "at": "2026-05-31T17:39:32.634261Z",
+          "from": "planned",
+          "to": "implementation_in_progress",
+          "note": "Started IQ production observability guard implementation after cross-repo dependency reconciliation."
+        },
+        {
+          "at": "2026-05-31T17:40:49.933746Z",
+          "from": "implementation_in_progress",
+          "to": "local_scope_validation_passed",
+          "note": "IQ observability guard service and contract tests passed manifest local checks with existing warning output only."
+        }
+      ]
     }
   },
   "RESULT-EN-PARITY-04": {
