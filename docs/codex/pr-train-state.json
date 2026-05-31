@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:43:04+08:00",
+  "updated_at": "2026-05-31T08:56:05Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -55,11 +55,11 @@
     "PR-EQ-PER-02": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-02-backend-route-matrix",
-      "status": "pr_open",
+      "status": "merged",
       "depends_on": [
         "PR-EQ-PER-01"
       ],
-      "commit_sha": "686dd7cb14b75ad67dc7d38a5401e61fa563a085",
+      "commit_sha": "c4edabaae9045af89349b2ecbd5a7a347e86cfe2",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1791",
       "checks": {
         "local": {
@@ -79,35 +79,57 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-31T08:14:19Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-EQ-PER-03": {
       "repo": "fap-web",
       "branch": "codex/pr-eq-per-03-frontend-eq-v51-personalization",
-      "status": "pending",
+      "status": "merged_external",
       "depends_on": [
         "PR-EQ-PER-02"
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "commit_sha": "7444f70581ff781b9efca68d9ffd9b4841a3b451",
+      "pr_url": "https://github.com/fermatmind/fap-web/pull/938",
+      "checks": {
+        "github": {
+          "status": "passed",
+          "repository": "fap-web",
+          "required_checks": ["build", "contracts", "verify-big5-contract-freeze", "verify-enneagram-contract-freeze", "CodeQL"]
+        }
+      },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-31T08:32:43Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-EQ-PER-04": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-04-eq-journey-state",
-      "status": "pending",
+      "status": "local_checks_passed",
       "depends_on": [
         "PR-EQ-PER-03"
       ],
-      "commit_sha": null,
+      "commit_sha": "aacd6a28714915e852fb476d97e865c7e95363d3",
       "pr_url": null,
-      "checks": {},
+      "checks": {
+        "local": {
+          "status": "passed",
+          "commands": [
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60JourneyStateContractTest",
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60",
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Privacy",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "notes": "Laravel reported warnings from content:compile touching generated EQ files during tests; commands exited 0 after generated compiled side effects were restored."
+        },
+        "scope": {
+          "status": "passed",
+          "notes": "Changed files are limited to PR04 EQ journey state backend contract, EQ fixtures/tests, and authorized manifest/state metadata."
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,

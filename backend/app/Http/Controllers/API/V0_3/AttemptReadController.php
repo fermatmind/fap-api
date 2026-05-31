@@ -21,6 +21,7 @@ use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Content\EnneagramPackLoader;
+use App\Services\Eq\EqJourneyStateService;
 use App\Services\Enneagram\EnneagramObservationStateService;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\Enneagram\EnneagramPublicProjectionService;
@@ -72,6 +73,7 @@ class AttemptReadController extends Controller
         private EnneagramPublicProjectionService $enneagramPublicProjectionService,
         private EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
         private EnneagramObservationStateService $enneagramObservationStateService,
+        private EqJourneyStateService $eqJourneyStateService,
         private RiasecPublicProjectionService $riasecPublicProjectionService,
         private RiasecPublicFormSummaryBuilder $riasecPublicFormSummaryBuilder,
         private MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
@@ -2126,6 +2128,31 @@ class AttemptReadController extends Controller
         return [$attempt, $result];
     }
 
+    /**
+     * @return array{0:Attempt,1:Result}
+     */
+    private function resolveEqJourneySubject(Request $request, string $attemptId): array
+    {
+        $attempt = $this->resolveAttemptForReportRead($request, $attemptId, 'EQ_60');
+        $orgId = (int) ($attempt->org_id ?? $this->currentOrgContext()->orgId());
+        $result = Result::query()
+            ->where('org_id', $orgId)
+            ->where('attempt_id', $attemptId)
+            ->first();
+
+        if (! $result instanceof Result) {
+            throw new ApiProblemException(404, 'RESULT_NOT_FOUND', 'result not found.');
+        }
+
+        $responseCodes = $this->resolveResponseScaleCodes($result);
+        $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
+        if (! in_array($scaleCode, ['EQ_60', 'EQ_EMOTIONAL_INTELLIGENCE'], true)) {
+            throw new ApiProblemException(422, 'SCALE_NOT_SUPPORTED', 'journey state is only available for EQ attempts.');
+        }
+
+        return [$attempt, $result];
+    }
+
     private function resolveNormalizedScaleCode(array $responseCodes): string
     {
         $legacy = strtoupper(trim((string) ($responseCodes['scale_code_legacy'] ?? '')));
@@ -2656,6 +2683,59 @@ class AttemptReadController extends Controller
         if (trim((string) data_get($contract, 'observation_state_v1.user_confirmed_type', '')) !== '') {
             $this->eventRecorder->recordFromRequest($request, 'enneagram_user_confirmed_type', $this->resolveUserId($request), $eventMeta);
         }
+
+        return response()->json([
+            'ok' => true,
+            ...$contract,
+        ]);
+    }
+
+    /**
+     * GET /api/v0.3/attempts/{id}/eq/journey
+     */
+    public function eqJourney(Request $request, string $id): JsonResponse
+    {
+        [$attempt, $result] = $this->resolveEqJourneySubject($request, $id);
+
+        return response()->json([
+            'ok' => true,
+            ...$this->eqJourneyStateService->view($attempt, $result),
+        ]);
+    }
+
+    /**
+     * POST /api/v0.3/attempts/{id}/eq/journey
+     */
+    public function submitEqJourney(Request $request, string $id): JsonResponse
+    {
+        [$attempt, $result] = $this->resolveEqJourneySubject($request, $id);
+        $payload = $request->validate([
+            'consent_to_store' => ['sometimes', 'boolean'],
+            'read_depth' => ['nullable', 'string', 'in:hero,evidence,matrix,mechanism,reality,career,action,boundary,complete'],
+            'result_resonance' => ['nullable', 'string', 'in:strong,partial,low,uncertain'],
+            'action_completion' => ['nullable', 'string', 'in:not_started,intended,started,completed,skipped'],
+            'retest_intent' => ['nullable', 'string', 'in:none,later,soon,after_practice'],
+            'source_surface' => ['nullable', 'string', 'in:result_page,share_page,email_revisit'],
+            'primary_action_id' => ['nullable', 'string', 'regex:/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,95}$/'],
+            'selected_scene_ids' => ['nullable', 'array', 'max:6'],
+            'selected_scene_ids.*' => ['string', 'regex:/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,95}$/'],
+        ]);
+
+        $contract = $this->eqJourneyStateService->submit($attempt, $result, $payload);
+        $request->merge(['attempt_id' => (string) $attempt->id]);
+        $this->eventRecorder->recordFromRequest($request, 'eq_journey_feedback_submitted', $this->resolveUserId($request), [
+            'scale_code' => 'EQ_60',
+            'eq_report_mode' => data_get($contract, 'eq_journey_state_v1.eq_report_mode'),
+            'status' => data_get($contract, 'eq_journey_state_v1.status'),
+            'persisted' => data_get($contract, 'eq_journey_state_v1.persisted'),
+            'read_depth' => data_get($contract, 'eq_journey_state_v1.signals.read_depth'),
+            'result_resonance' => data_get($contract, 'eq_journey_state_v1.signals.result_resonance'),
+            'action_completion' => data_get($contract, 'eq_journey_state_v1.signals.action_completion'),
+            'retest_intent' => data_get($contract, 'eq_journey_state_v1.signals.retest_intent'),
+            'low_confidence_caution' => data_get($contract, 'eq_journey_state_v1.interpretation_guard.low_confidence_caution'),
+            'affects_scores' => false,
+            'profile_memory_write' => false,
+        ]);
 
         return response()->json([
             'ok' => true,

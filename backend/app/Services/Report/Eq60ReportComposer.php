@@ -182,6 +182,17 @@ final class Eq60ReportComposer
                     'status' => 'planned',
                     'cta_asset_id' => 'eq.sjt_bridge.planned',
                 ],
+                'journey_state_contract' => [
+                    'version' => 'eq_journey_state.v1',
+                    'available' => true,
+                    'endpoint' => '/api/v0.3/attempts/{attempt_id}/eq/journey',
+                    'persistence' => 'consent_required',
+                    'signals' => ['read_depth', 'result_resonance', 'action_completion', 'retest_intent'],
+                    'affects_scores' => false,
+                    'formal_report_mutation_allowed' => false,
+                    'raw_feedback_public_exposure_allowed' => false,
+                    'profile_memory_write' => false,
+                ],
                 'methodology' => [
                     'norm_status' => strtolower(trim((string) data_get($score, 'norms.status', 'provisional'))) ?: 'provisional',
                     'scoring_version' => (string) data_get($score, 'version_snapshot.engine_version', 'v1.0_normed_validity'),
