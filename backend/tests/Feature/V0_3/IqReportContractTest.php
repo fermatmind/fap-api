@@ -309,4 +309,102 @@ final class IqReportContractTest extends TestCase
             }
         }
     }
+
+    public function test_IqPaidReport_entitlement_unlocks_full_payload_for_matching_anon(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon-iq-paid-owner';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createScoredResult($attemptId);
+        $this->grantIqPaidReport($attemptId, $anonId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
+
+        $response->assertOk();
+        $payload = $response->json();
+        $this->assertFalse((bool) data_get($payload, 'locked'));
+        $this->assertSame('full', data_get($payload, 'access_level'));
+        $this->assertSame('full', data_get($payload, 'variant'));
+        $this->assertContains('iq_core', data_get($payload, 'modules_allowed', []));
+        $this->assertContains('iq_full', data_get($payload, 'modules_allowed', []));
+        $this->assertSame('iq.report.v1', data_get($payload, 'report.schema_version'));
+        $this->assertIsArray(data_get($payload, 'report.dimensions'));
+        $this->assertIsArray(data_get($payload, 'report.scoring'));
+        $this->assertIsArray(data_get($payload, 'report.iq_pro'));
+        $this->assertArrayHasKey('raw_score', data_get($payload, 'report.summary', []));
+        $this->assertNull(data_get($payload, 'report.summary.iq_estimate'));
+        $this->assertNull(data_get($payload, 'report.summary.percentile'));
+        $this->assertNull(data_get($payload, 'report.summary.confidence_interval'));
+        $this->assertNull(data_get($payload, 'report.answer_key'));
+        $this->assertNull(data_get($payload, 'report.correct_answers'));
+    }
+
+    public function test_IqPaidReport_entitlement_does_not_unlock_for_wrong_anon(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon-iq-paid-owner-locked';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createScoredResult($attemptId);
+        $this->grantIqPaidReport($attemptId, 'anon-iq-paid-someone-else');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
+
+        $response->assertOk();
+        $payload = $response->json();
+        $this->assertTrue((bool) data_get($payload, 'locked'));
+        $this->assertSame('free', data_get($payload, 'access_level'));
+        $this->assertSame('free', data_get($payload, 'variant'));
+        $this->assertContains('iq_core', data_get($payload, 'modules_allowed', []));
+        $this->assertNotContains('iq_full', data_get($payload, 'modules_allowed', []));
+        $this->assertNull(data_get($payload, 'report.dimensions'));
+        $this->assertNull(data_get($payload, 'report.scoring'));
+        $this->assertNull(data_get($payload, 'report.iq_pro'));
+        $this->assertNull(data_get($payload, 'report.summary.raw_score'));
+    }
+
+    public function test_IqPaidReport_module_contract_is_iq_specific(): void
+    {
+        $this->assertSame('iq_core', \App\Services\Report\ReportAccess::freeModuleForScale('IQ_RAVEN'));
+        $this->assertSame('iq_full', \App\Services\Report\ReportAccess::fullModuleForScale('IQ_RAVEN'));
+        $this->assertSame(['iq_core'], \App\Services\Report\ReportAccess::defaultModulesAllowedForLocked('IQ_INTELLIGENCE_QUOTIENT'));
+        $this->assertSame(['iq_full'], \App\Services\Report\ReportAccess::allDefaultModulesOffered('IQ_INTELLIGENCE_QUOTIENT'));
+    }
+
+    private function grantIqPaidReport(string $attemptId, string $anonId): void
+    {
+        \Illuminate\Support\Facades\DB::table('benefit_grants')->insert([
+            'id' => (string) \Illuminate\Support\Str::uuid(),
+            'org_id' => 0,
+            'user_id' => null,
+            'benefit_code' => 'IQ_REPORT_FULL',
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'order_no' => 'ord_'.substr($attemptId, 0, 24),
+            'status' => 'active',
+            'expires_at' => null,
+            'benefit_ref' => $anonId,
+            'benefit_type' => 'report_unlock',
+            'source_order_id' => (string) \Illuminate\Support\Str::uuid(),
+            'source_event_id' => null,
+            'meta_json' => json_encode([
+                'modules' => ['iq_core', 'iq_full'],
+                'granted_via' => 'iq_paid_report_contract_test',
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
 }
