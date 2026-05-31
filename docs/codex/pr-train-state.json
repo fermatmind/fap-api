@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T08:56:05Z",
+  "updated_at": "2026-05-31T09:01:50Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -120,6 +120,7 @@
             "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60JourneyStateContractTest",
             "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60",
             "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Privacy",
+            "cd backend && bash scripts/export_openapi.sh --check",
             "git diff --check",
             "git diff --cached --check"
           ],
@@ -127,7 +128,16 @@
         },
         "scope": {
           "status": "passed",
-          "notes": "Changed files are limited to PR04 EQ journey state backend contract, EQ fixtures/tests, and authorized manifest/state metadata."
+          "notes": "Changed files are limited to PR04 EQ journey state backend contract, EQ fixtures/tests, OpenAPI route snapshot for the new endpoint, and authorized manifest/state metadata."
+        },
+        "github": {
+          "status": "fix_pushed_after_openapi_snapshot_failure",
+          "failed_checks": [
+            "verify-mbti-legacy",
+            "verify-mbti-v2"
+          ],
+          "failure_reason": "OpenAPI snapshot drift for the scoped /api/v0.3/attempts/{id}/eq/journey route.",
+          "fix": "Updated backend/docs/contracts/openapi.snapshot.json and added the snapshot to PR04 allowed paths."
         }
       },
       "failure_reason": null,

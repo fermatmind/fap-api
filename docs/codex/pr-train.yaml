@@ -135,6 +135,7 @@ prs:
     allowed_paths:
       - backend/app/**
       - backend/routes/api.php
+      - backend/docs/contracts/openapi.snapshot.json
       - backend/database/migrations/**
       - backend/tests/**/Eq60*
       - backend/tests/Fixtures/eq/v5/**
