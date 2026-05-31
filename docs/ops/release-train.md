@@ -117,12 +117,24 @@ deploy file from repository-controlled configuration.
 - status expectation
 - must contain / must not contain
 - optional forbidden marker scan for high-risk URLs
+- optional soft-alert metadata for non-core discoverability artifacts:
+  - `surface: llms-full`
+  - `soft_alert: true`
+  - `hard_block: false`
+  - `core_smoke: false`
+  - `owner`
+  - `recommended_followup`
 
 ## Sidecar policy
 - Required check failures are blocking.
-- Non-required checks can be sidecar only when:
-  - failure is explicitly external
-- `5xx`, `timeout`, private URL exposure, held slug exposure, clinical/depression exposure, core smoke failures are never sidecar.
+- Non-required checks can be sidecar only when failure is explicitly external.
+- `5xx`, `timeout`, private URL exposure, held slug exposure, clinical/depression exposure, core smoke failures, Search Channel checks, and staging containment checks are hard-blocking by default.
+- `llms-full` and equivalent GEO/discoverability artifacts may be downgraded to sidecar only when all are true:
+  - the smoke check explicitly sets `soft_alert: true`, `hard_block: false`, and `core_smoke: false`
+  - the item `sidecar_policy.allow_discoverability_artifact_soft_alerts` is true
+  - the failure is not a private/held URL exposure, Search Channel anomaly, staging containment regression, or core route/API failure
+  - a follow-up owner and recommendation are recorded
+- Soft-alert sidecars are not a pass for the artifact itself; they only prevent non-core artifact instability from automatically rolling back or stopping unrelated production release flow.
 
 ## Risk classifier
 High-risk paths require manual approval and are blocked by default:

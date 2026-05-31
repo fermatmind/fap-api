@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:31:45Z",
+  "updated_at": "2026-05-31T16:44:29Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -22474,25 +22474,107 @@
       "branch": "codex/release-train-sidecar-soft-alert-01",
       "base": "main",
       "title": "RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01 release train sidecar soft alerts",
-      "status": "pending",
+      "status": "pr_open_checks_pending",
       "depends_on": [
         "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01"
       ],
-      "checks": {},
+      "checks": {
+        "dependency_preflight": {
+          "status": "pass",
+          "evidence": "Dependency CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01 merged as PR #1814; branch rebased onto latest origin/main after PRs #1815/#1819 advanced main."
+        },
+        "iq_pint_cleanup_sidecar": {
+          "status": "resolved",
+          "evidence": "Scoped IQ Pint cleanup PR #1816 merged at 5f891c5640885a4d2cc84cc395b12b15a6074546; vendor/bin/pint --test passed before PR open."
+        },
+        "python_ops_tests": {
+          "status": "pass",
+          "command": "python3 -m unittest tests.ops.test_sidecar_policy tests.ops.test_smoke tests.ops.test_release_train_manifest tests.ops.test_release_train_soft_alerts",
+          "evidence": "15 tests passed after rebase onto latest origin/main."
+        },
+        "manifest_validation": {
+          "status": "pass",
+          "command": "python3 ops/release-train/release_train.py validate-manifest --manifest ops/release-train/examples/release-train.example.json",
+          "evidence": "Manifest validation returned ok=true after rebase."
+        },
+        "focused_php_test": {
+          "status": "pass_with_warnings",
+          "command": "php artisan test --filter=ReleaseTrainSidecarSoftAlert01 --no-ansi",
+          "evidence": "3 tests completed with 39 assertions after rebase; PHPUnit emitted warnings but returned success."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "Route list completed successfully after rebase, 209 routes."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "Pint passed across 3682 files after rebase."
+        },
+        "composer_validate": {
+          "status": "pass",
+          "command": "composer validate --strict",
+          "evidence": "composer.json is valid after rebase."
+        },
+        "composer_audit": {
+          "status": "pass",
+          "command": "composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found after rebase."
+        },
+        "github_pr": {
+          "status": "created",
+          "evidence": "https://github.com/fermatmind/fap-api/pull/1820"
+        },
+        "json_yaml_diff_checks": {
+          "status": "pass",
+          "evidence": "Generated JSON parsed, pr-train-state JSON parsed, pr-train YAML parsed, and git diff --check passed after rebase."
+        }
+      },
       "failure_reason": null,
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "b4f6118927cdcd22f9336f9c4a40db0f08fea03a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1820",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+        {
+          "at": "2026-05-31T16:42:20Z",
+          "from": "pr_open_checks_pending_dirty",
+          "to": "rebased_pending_validation",
+          "note": "Rebased PR #1820 onto latest origin/main after GitHub reported mergeStateStatus=DIRTY."
+        },
+        {
+          "at": "2026-05-31T16:44:29Z",
+          "from": "rebased_pending_validation",
+          "to": "pr_open_checks_pending",
+          "note": "Re-ran required local validation after rebase; force-push pending for PR #1820."
+        }
+      ],
+      "sidecars": [
+        {
+          "source_pr": "RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01",
+          "repo": "fap-api",
+          "branch": "codex/release-train-sidecar-soft-alert-01",
+          "command_or_check": "vendor/bin/pint --test",
+          "status": "resolved_by_pr_1816",
+          "evidence": "PR #1816 merged at 5f891c5640885a4d2cc84cc395b12b15a6074546; full Pint blocker resolved before PR7 opening.",
+          "failure_summary": "Out-of-scope IQ report contract test Pint formatting issue previously blocked PR7 local validation.",
+          "why_external_to_current_pr": "PR7 changes release-train soft-alert policy, docs, and tests; IQ report contract test is outside PR7 scope.",
+          "impact_on_current_pr": "Resolved before PR7 commit/PR; no remaining local validation blocker.",
+          "owner": "backend/IQ upstream",
+          "follow_up_recommendation": "None for this blocker; continue PR7 submit/merge workflow.",
+          "required_checks_status": "github_checks_previously_green_before_rebase",
+          "scope_validation_status": "allowed_paths_only_and_local_validation_passed",
+          "continue_train_decision": "continue_pr7"
+        }
+      ],
       "next_task": "DEPLOY-READINESS｜Deploy CAREER 1046 growth foundation fixes"
     },
     "IQ-NORM-01": {
