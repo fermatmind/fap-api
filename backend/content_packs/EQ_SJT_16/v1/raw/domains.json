@@ -1,0 +1,120 @@
+{
+  "schema": "eq_sjt_16.domains.v1",
+  "module_code": "EQ_SJT_16",
+  "total_items": 16,
+  "items_per_domain": 2,
+  "domains": [
+    {
+      "code": "emotion_cue_reading",
+      "order": 1,
+      "planned_items": 2,
+      "strategy_score_inputs": ["CUE"],
+      "label": {
+        "zh-CN": "情绪线索识别",
+        "en": "Emotion cue reading"
+      },
+      "definition": {
+        "zh-CN": "识别他人或场景中的情绪线索，并区分事实、推测和情绪反应。",
+        "en": "Recognizing emotional cues in other people or a situation while separating facts, inference, and emotional reactions."
+      }
+    },
+    {
+      "code": "pressure_pause",
+      "order": 2,
+      "planned_items": 2,
+      "strategy_score_inputs": ["PAUSE"],
+      "label": {
+        "zh-CN": "压力暂停",
+        "en": "Pressure pause"
+      },
+      "definition": {
+        "zh-CN": "在压力、误解或冲突升温时先降低反应强度，再选择下一步。",
+        "en": "Creating a pause under pressure, misunderstanding, or escalation before choosing the next move."
+      }
+    },
+    {
+      "code": "feedback_response",
+      "order": 3,
+      "planned_items": 2,
+      "strategy_score_inputs": ["PAUSE", "INFL"],
+      "label": {
+        "zh-CN": "反馈回应",
+        "en": "Feedback response"
+      },
+      "definition": {
+        "zh-CN": "在被评价、被指出问题或需要修正时，区分情绪防御与可行动信息。",
+        "en": "Responding to evaluation, critique, or requested changes by separating emotional defensiveness from usable information."
+      }
+    },
+    {
+      "code": "conflict_deescalation",
+      "order": 4,
+      "planned_items": 2,
+      "strategy_score_inputs": ["PAUSE", "REPAIR"],
+      "label": {
+        "zh-CN": "冲突降温",
+        "en": "Conflict de-escalation"
+      },
+      "definition": {
+        "zh-CN": "在分歧或关系紧张时降低对抗强度，保留事实、边界和后续沟通空间。",
+        "en": "Reducing escalation during disagreement or relational tension while preserving facts, boundaries, and room for follow-up."
+      }
+    },
+    {
+      "code": "empathic_response",
+      "order": 5,
+      "planned_items": 2,
+      "strategy_score_inputs": ["EMP"],
+      "label": {
+        "zh-CN": "共情回应",
+        "en": "Empathic response"
+      },
+      "definition": {
+        "zh-CN": "在理解他人情绪时给出支持性回应，同时避免替他人承担全部情绪责任。",
+        "en": "Offering a supportive response to another person's emotion without taking over full responsibility for it."
+      }
+    },
+    {
+      "code": "boundary_setting",
+      "order": 6,
+      "planned_items": 2,
+      "strategy_score_inputs": ["BND"],
+      "label": {
+        "zh-CN": "关系边界",
+        "en": "Boundary setting"
+      },
+      "definition": {
+        "zh-CN": "在保持尊重的同时表达限制、需求和不可持续之处。",
+        "en": "Expressing limits, needs, and unsustainable patterns while preserving respect."
+      }
+    },
+    {
+      "code": "relationship_repair",
+      "order": 7,
+      "planned_items": 2,
+      "strategy_score_inputs": ["REPAIR"],
+      "label": {
+        "zh-CN": "关系修复",
+        "en": "Relationship repair"
+      },
+      "definition": {
+        "zh-CN": "在误解、失误或关系受损后，承认影响、澄清意图并推动恢复。",
+        "en": "Repairing after misunderstanding, mistakes, or relational strain by acknowledging impact, clarifying intent, and moving toward recovery."
+      }
+    },
+    {
+      "code": "constructive_influence",
+      "order": 8,
+      "planned_items": 2,
+      "strategy_score_inputs": ["INFL"],
+      "label": {
+        "zh-CN": "建设性影响",
+        "en": "Constructive influence"
+      },
+      "definition": {
+        "zh-CN": "在协作或推动他人行动时，用清晰、尊重和可执行的信息影响结果。",
+        "en": "Influencing outcomes in collaboration through clear, respectful, and actionable communication."
+      }
+    }
+  ]
+}

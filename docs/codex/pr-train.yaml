@@ -225,10 +225,12 @@ prs:
       - Add EQ_SJT_16/v1 content pack skeleton and schema only.
       - Define 8 domains by 2 items structure and item schema.
       - Keep SJT unavailable in runtime.
+      - Add a narrow Big Five runtime-freeze classifier exemption for the non-runtime EQ_SJT_16 skeleton files.
     allowed_paths:
       - backend/content_packs/EQ_SJT_16/v1/**
       - backend/tests/**/EqSjt*
       - backend/tests/**/Content*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -238,6 +240,7 @@ prs:
     validation:
       - cd backend && php artisan test --filter=Content
       - cd backend && php artisan test --filter=Eq60
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff
       - git diff --check
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
