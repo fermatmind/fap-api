@@ -35567,7 +35567,7 @@
   "AUDIT-SEC-CONTENT-IMPORT-SAFETY-01": {
     "status": "implementation_in_progress",
     "branch": "audit/sec-content-import-safety-01",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1803",
     "base": "main",
     "worktree": "/private/tmp/fap-api-audit-sec-content-import-safety-01",
     "scope": "article_baseline_import_translation_group_bounds",
@@ -35629,6 +35629,12 @@
         "from": "implementation_in_progress",
         "to": "local_scope_validation_passed_with_sidecar",
         "note": "Focused importer tests, route:list, sqlite migrate, diff/schema checks passed; unrelated ci_verify_mbti Big5 temp-target failures registered as sidecar per train protocol."
+      },
+      {
+        "at": "2026-05-31T22:25:19+08:00",
+        "from": "local_scope_validation_passed_with_sidecar",
+        "to": "pr_open_checks_pending",
+        "note": "Created PR #1803; waiting for GitHub required checks."
       }
     ],
     "sidecars": [
@@ -35638,6 +35644,10 @@
         "summary": "bash backend/scripts/ci_verify_mbti.sh failed in PacksPublishBig5Test and PacksRollbackBig5Test because test temp target compiled/manifest.json was absent. This same external failure was observed before this PR; changed files are limited to article baseline importer/tests and PR-train ledger; generated Big5 artifacts were restored."
       }
     ],
-    "next_task": null
+    "next_task": null,
+    "github": {
+      "status": "checks_pending",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1803"
+    }
   }
 }
