@@ -32877,9 +32877,9 @@
     "id": "OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01",
     "repo": "fap-api",
     "branch": "ops/release-train-workflow-production-env-binding-01",
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open",
+    "commit_sha": "c17da937",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1771",
     "checks": {
       "authorization": {
         "status": "pass",
@@ -32949,7 +32949,12 @@
       },
       "scope_validation": {
         "status": "pass",
-        "result": "Current PR staged scope is limited to release-train workflow/docs/tests/train metadata. Out-of-scope local Alipay scheduler files are left unstaged and untouched."
+        "result": "Committed PR scope is limited to release-train workflow/docs/tests/train metadata. Earlier observed Alipay scheduler files were not staged into this PR."
+      },
+      "pr_created": {
+        "status": "pass",
+        "command": "gh pr create --base main --head ops/release-train-workflow-production-env-binding-01",
+        "result": "https://github.com/fermatmind/fap-api/pull/1771"
       }
     },
     "failure_reason": null,
@@ -32958,13 +32963,14 @@
     "local_cleanup_executed": false,
     "scope_validation": {
       "allowed_paths_only": true,
-      "git_diff_check": null,
-      "git_diff_cached_check": null,
-      "out_of_scope_local_dirty_left_unstaged": [
+      "git_diff_check": "pass",
+      "git_diff_cached_check": "pass",
+      "observed_out_of_scope_local_dirty_not_staged_in_pr": [
         "backend/bootstrap/app.php",
         "backend/docs/runbooks/alipay-pending-compensation.md",
         "backend/tests/Feature/Commerce/AlipayPendingCompensationSchedulerTest.php"
-      ]
+      ],
+      "final_worktree_out_of_scope_dirty": "none observed before PR state bookkeeping commit"
     },
     "transitions": [
       {
