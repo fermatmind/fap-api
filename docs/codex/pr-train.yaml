@@ -66,10 +66,15 @@ prs:
       - backend/content_packs/EQ_60/v1/raw/personalization_routes/**
       - backend/content_packs/EQ_60/v1/compiled/**
       - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/**
+      - backend/app/Services/Content/Eq60ContentCompileService.php
+      - backend/app/Services/Content/Eq60ContentLintService.php
+      - backend/app/Services/Content/Eq60PackLoader.php
       - backend/app/Services/Report/Eq60ReportComposer.php
       - backend/app/Services/Report/Eq60*
+      - backend/tests/Feature/Content/Eq60ContentGateTest.php
       - backend/tests/Feature/Report/*Eq60*
       - backend/tests/Fixtures/eq/v5/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -77,10 +82,12 @@ prs:
       - Implement EQ-SJT.
       - Generate official report prose in frontend.
     validation:
-      - cd backend && php artisan test --filter=Eq60V5ReportContractTest
-      - cd backend && php artisan test --filter=Eq60GoldenCasesTest
-      - cd backend && php artisan test --filter=Eq60V5ReportDeliveryTest
-      - cd backend && php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportDeliveryTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff'
       - git diff --check
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }

@@ -3881,6 +3881,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             return true;
         }
 
+        if (preg_match('#^backend/content_packs/(EQ_60|EQ_EMOTIONAL_INTELLIGENCE)/v1/raw/personalization_routes/[a-z_]+\.json$#', $file) === 1) {
+            return true;
+        }
+
         if (preg_match('#^backend/content_packs/(EQ_60|EQ_EMOTIONAL_INTELLIGENCE)/v1/compiled/report_assets\.compiled\.json$#', $file) === 1) {
             return true;
         }

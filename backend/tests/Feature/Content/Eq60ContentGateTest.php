@@ -67,7 +67,15 @@ final class Eq60ContentGateTest extends TestCase
             'career_environment',
             'action_prescriptions',
             'sjt_bridge',
+            'personalization_routes',
         ], array_keys((array) data_get($assets, 'assets', [])));
+
+        $routes = (array) data_get($assets, 'assets.personalization_routes.routes', []);
+        foreach (['balanced_integrated', 'high_empathy_low_recovery', 'aware_but_unregulated', 'low_confidence_result'] as $routeId) {
+            $this->assertSame($routeId, (string) data_get($routes, $routeId.'.route_id'));
+            $this->assertSame($routeId, (string) data_get($routes, $routeId.'.selected_asset_ids.core_formulation_id'));
+            $this->assertNotSame('', (string) data_get($routes, $routeId.'.selected_asset_ids.action_prescription_id'));
+        }
 
         foreach ([
             'balanced_integrated',
@@ -136,6 +144,15 @@ final class Eq60ContentGateTest extends TestCase
                 hash_file('sha256', $eq60AssetPath),
                 hash_file('sha256', $mirrorPath),
                 'EQ_EMOTIONAL_INTELLIGENCE mirror drift: '.basename($eq60AssetPath)
+            );
+        }
+        foreach (glob(base_path('content_packs/EQ_60/v1/raw/personalization_routes/*.json')) ?: [] as $eq60RoutePath) {
+            $mirrorPath = str_replace('/EQ_60/', '/EQ_EMOTIONAL_INTELLIGENCE/', $eq60RoutePath);
+            $this->assertFileExists($mirrorPath);
+            $this->assertSame(
+                hash_file('sha256', $eq60RoutePath),
+                hash_file('sha256', $mirrorPath),
+                'EQ_EMOTIONAL_INTELLIGENCE route mirror drift: '.basename($eq60RoutePath)
             );
         }
         $this->assertFileExists(base_path('content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json'));

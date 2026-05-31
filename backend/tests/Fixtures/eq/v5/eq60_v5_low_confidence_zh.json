@@ -18,6 +18,7 @@
             ],
             "core_formulation_id": "low_confidence_result",
             "mechanism_ids": [],
+            "personalization_route_id": "low_confidence_result",
             "quality_explanation_asset_id": "eq.quality.level.C",
             "scene_ids": [
                 "pressure_recovery",
@@ -26,6 +27,37 @@
             ],
             "scientific_contract_id": "eq.scientific_contract.default",
             "score_system_id": "eq.score_system.default",
+            "selected_asset_ids": {
+                "action_prescription_id": "retest_reflection",
+                "career_environment_ids": [
+                    "feedback_intensity_low",
+                    "conflict_frequency_low",
+                    "autonomy_recovery_high"
+                ],
+                "core_formulation_id": "low_confidence_result",
+                "mechanism_ids": [],
+                "scene_ids": [
+                    "pressure_recovery",
+                    "feedback",
+                    "career_environment"
+                ]
+            },
+            "signal_signature": {
+                "confidence_label": "low",
+                "development_lever": "SA",
+                "dimension_states": {
+                    "EM": "high",
+                    "ER": "high",
+                    "RM": "high",
+                    "SA": "high"
+                },
+                "formulation_id": "low_confidence_result",
+                "match_pattern": "quality_low_overrides_dimension_pattern",
+                "quality_level": "C",
+                "route_id": "low_confidence_result",
+                "schema": "eq60.signal_signature.v1",
+                "strongest_dimension": "SA"
+            },
             "sjt_bridge_id": "eq.sjt_bridge.planned"
         },
         "assets": {
@@ -93,6 +125,40 @@
                 "title": "本次结果置信度不足"
             },
             "mechanisms": [],
+            "personalization_route": {
+                "id": "low_confidence_result",
+                "selected_asset_ids": {
+                    "action_prescription_id": "retest_reflection",
+                    "career_environment_ids": [
+                        "feedback_intensity_low",
+                        "conflict_frequency_low",
+                        "autonomy_recovery_high"
+                    ],
+                    "core_formulation_id": "low_confidence_result",
+                    "mechanism_ids": [],
+                    "scene_ids": [
+                        "pressure_recovery",
+                        "feedback",
+                        "career_environment"
+                    ]
+                },
+                "signal_signature": {
+                    "confidence_label": "low",
+                    "development_lever": "SA",
+                    "dimension_states": {
+                        "EM": "high",
+                        "ER": "high",
+                        "RM": "high",
+                        "SA": "high"
+                    },
+                    "formulation_id": "low_confidence_result",
+                    "match_pattern": "quality_low_overrides_dimension_pattern",
+                    "quality_level": "C",
+                    "route_id": "low_confidence_result",
+                    "schema": "eq60.signal_signature.v1",
+                    "strongest_dimension": "SA"
+                }
+            },
             "quality": {
                 "confidence_label": "low",
                 "explanation_asset_id": "eq.quality.level.C"
@@ -331,6 +397,38 @@
                 "feedback",
                 "career_environment"
             ],
+            "route_id": "low_confidence_result",
+            "selected_asset_ids": {
+                "action_prescription_id": "retest_reflection",
+                "career_environment_ids": [
+                    "feedback_intensity_low",
+                    "conflict_frequency_low",
+                    "autonomy_recovery_high"
+                ],
+                "core_formulation_id": "low_confidence_result",
+                "mechanism_ids": [],
+                "scene_ids": [
+                    "pressure_recovery",
+                    "feedback",
+                    "career_environment"
+                ]
+            },
+            "signal_signature": {
+                "confidence_label": "low",
+                "development_lever": "SA",
+                "dimension_states": {
+                    "EM": "high",
+                    "ER": "high",
+                    "RM": "high",
+                    "SA": "high"
+                },
+                "formulation_id": "low_confidence_result",
+                "match_pattern": "quality_low_overrides_dimension_pattern",
+                "quality_level": "C",
+                "route_id": "low_confidence_result",
+                "schema": "eq60.signal_signature.v1",
+                "strongest_dimension": "SA"
+            },
             "strongest_dimension": "SA"
         },
         "legacy_scores": {
