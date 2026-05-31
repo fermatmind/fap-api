@@ -1583,6 +1583,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_norm_authority_foundation_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Iq/IqNormAuthorityContract.php',
+            'backend/database/migrations/2026_05_31_090000_create_iq_norm_authorities_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_iq_result_secrecy_redaction_only(): void
     {
         $changed = [
@@ -2942,6 +2952,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isIqNormAuthorityFoundationFile($file)) {
+                continue;
+            }
+
             if ($this->isRiasecMeasurementContractComparePolicyFile($file)) {
                 continue;
             }
@@ -3648,6 +3662,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isIqScoringContractFoundationFile(string $file): bool
     {
         return $file === 'backend/app/Services/Assessment/Drivers/IqTestDriver.php';
+    }
+
+    private function isIqNormAuthorityFoundationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Iq/IqNormAuthorityContract.php',
+            'backend/database/migrations/2026_05_31_090000_create_iq_norm_authorities_table.php',
+        ], true);
     }
 
     private function isIqResultSecrecyRedactionFile(string $file): bool
