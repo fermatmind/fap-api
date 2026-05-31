@@ -35029,7 +35029,7 @@
     "branch": "audit/sec-content-runtime-cache-01",
     "base": "main",
     "title": "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01 harden content runtime cache freshness",
-    "status": "pr_open_checks_pending",
+    "status": "ci_fix_pushed_pending_checks",
     "depends_on": [
       "AUDIT-SEC-CONTENT-PUBLISH-GATES-01 merged"
     ],
@@ -35062,8 +35062,18 @@
         "evidence": "route:list passed; sqlite migrate passed; diff/schema checks passed. ci_verify_mbti.sh failed only in existing Big5 content-pack publish/rollback temp target compiled directory assertions outside this PR scope; generated dirty artifacts were restored."
       },
       "github": {
-        "status": "pending",
-        "pr_url": "https://github.com/fermatmind/fap-api/pull/1800"
+        "status": "retry_pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1800",
+        "previous_failure": "verify-bigfive runtime freeze classifier flagged backend/app/Services/Content/ContentLoaderService.php",
+        "fix": "Added ContentLoaderService.php to content runtime cache freshness runtime-freeze exception and targeted test fixture."
+      },
+      "ci_fix_local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_content_runtime_cache_freshness_changes' --no-ansi",
+          "git diff --check"
+        ],
+        "evidence": "Targeted runtime freeze classifier tests passed: 2 tests, 4 assertions."
       }
     },
     "failure_reason": null,
@@ -35094,6 +35104,12 @@
         "from": "local_scope_validation_passed_with_sidecar",
         "to": "pr_open_checks_pending",
         "note": "Created PR #1800; waiting for GitHub required checks."
+      },
+      {
+        "at": "2026-05-31T20:49:18+08:00",
+        "from": "pr_open_checks_pending",
+        "to": "ci_fix_pushed_pending_checks",
+        "note": "GitHub verify-bigfive failed on runtime freeze classifier for ContentLoaderService.php; added scoped content runtime cache freshness exception and focused regression test."
       }
     ],
     "sidecars": [
