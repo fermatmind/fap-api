@@ -1,0 +1,46 @@
+{
+  "schema_version": "release_train_sidecar_soft_alert.v1",
+  "task": "RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01",
+  "final_decision": "release_train_sidecar_soft_alert_completed_ready_for_deploy_readiness",
+  "hard_block_checks": [
+    "required_github_checks",
+    "core_page_api_smoke",
+    "sitemap_private_url_leakage",
+    "held_slug_exposure",
+    "clinical_depression_exposure",
+    "search_channel_anomaly",
+    "staging_containment_regression",
+    "deploy_wrapper_failure"
+  ],
+  "soft_alert_eligible_surfaces": [
+    "llms-full",
+    "llms_full",
+    "llms-full.txt",
+    "llms_full_txt",
+    "discoverability_artifact",
+    "geo_artifact"
+  ],
+  "soft_alert_required_manifest_fields": {
+    "smoke_check": {
+      "surface": "llms-full",
+      "soft_alert": true,
+      "hard_block": false,
+      "core_smoke": false
+    },
+    "sidecar_policy": {
+      "allow_discoverability_artifact_soft_alerts": true
+    }
+  },
+  "private_or_held_exposure_still_blocks": true,
+  "search_channel_or_staging_guard_still_blocks": true,
+  "core_smoke_still_blocks": true,
+  "required_checks_still_block": true,
+  "deploy_performed": false,
+  "rollback_performed": false,
+  "cms_mutation_performed": false,
+  "db_mutation_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "external_search_api_call_performed": false,
+  "next_task": "DEPLOY-READINESS｜Deploy CAREER 1046 growth foundation fixes"
+}

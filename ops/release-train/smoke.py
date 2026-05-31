@@ -91,6 +91,7 @@ def run_smoke_checks(checks: List[dict], request_fn: Optional[RequestFn] = None)
             request_fn=request_fn,
         )
         item = {
+            "name": check.get("name") or check.get("id") or check["url"],
             "url": result["url"],
             "expected_status": result["expected_status"],
             "method": result["method"],
@@ -101,6 +102,14 @@ def run_smoke_checks(checks: List[dict], request_fn: Optional[RequestFn] = None)
             "success": result["success"],
             "errors": result["errors"],
             "response_snippet": result["response_snippet"],
+            "surface": check.get("surface"),
+            "soft_alert": bool(check.get("soft_alert", False)),
+            "hard_block": bool(check.get("hard_block", not bool(check.get("soft_alert", False)))),
+            "core_smoke": bool(check.get("core_smoke", not bool(check.get("soft_alert", False)))),
+            "private_or_held_exposure_guard": bool(check.get("private_or_held_exposure_guard", False)),
+            "search_channel_or_staging_guard": bool(check.get("search_channel_or_staging_guard", False)),
+            "owner": check.get("owner", "ops"),
+            "recommended_followup": check.get("recommended_followup", "record sidecar issue and rerun after clearance"),
         }
         results.append(item)
     return results

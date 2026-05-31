@@ -39,7 +39,19 @@
         { "url": "https://fermatmind.com/api/v0.5/seo/sitemap-source", "expected_status": 200, "method": "GET", "timeout_seconds": 8, "retries": 2 },
         { "url": "https://fermatmind.com/sitemap.xml", "expected_status": 200, "method": "GET", "timeout_seconds": 8, "retries": 2 },
         { "url": "https://fermatmind.com/llms.txt", "expected_status": 200, "method": "GET", "timeout_seconds": 10, "retries": 2 },
-        { "url": "https://fermatmind.com/llms-full.txt", "expected_status": 200, "method": "GET", "timeout_seconds": 10, "retries": 2 },
+        {
+          "url": "https://fermatmind.com/llms-full.txt",
+          "expected_status": 200,
+          "method": "GET",
+          "timeout_seconds": 10,
+          "retries": 2,
+          "surface": "llms-full",
+          "soft_alert": true,
+          "hard_block": false,
+          "core_smoke": false,
+          "owner": "seo-ops",
+          "recommended_followup": "Inspect llms-full artifact cache and rerun post-deploy discoverability smoke."
+        },
         { "url": "https://fermatmind.com/robots.txt", "expected_status": 200, "method": "GET", "timeout_seconds": 8, "retries": 2 },
         { "url": "https://fermatmind.com/api/v0.5/career/datasets/occupations?locale=zh-CN", "expected_status": 200, "method": "GET", "timeout_seconds": 10, "retries": 2 },
         { "url": "https://fermatmind.com/api/v0.5/career/jobs/software-developers?locale=zh-CN", "expected_status": 404, "method": "GET", "timeout_seconds": 10, "retries": 2 }
@@ -50,6 +62,7 @@
       },
       "sidecar_policy": {
         "allow_nonblocking_sidecars": false,
+        "allow_discoverability_artifact_soft_alerts": true,
         "create_issue": false,
         "issue_title_prefix": "release-train-sidecar"
       }

@@ -43,6 +43,14 @@ ALLOWED_COMPONENTS = {"backend", "frontend", "both", "docs", "ops"}
 ALLOWED_RISK = {"low", "medium", "high"}
 ALLOWED_DEPLOY_ORDER = {"backend_first", "frontend_first", "none"}
 ALLOWED_CHECK_POLICIES = {"required_only", "all_checks"}
+DISCOVERABILITY_ARTIFACT_SURFACES = {
+    "llms-full",
+    "llms_full",
+    "llms-full.txt",
+    "llms_full_txt",
+    "discoverability_artifact",
+    "geo_artifact",
+}
 FORBIDDEN_DEPLOY_OVERRIDE_FIELDS = {
     "deployer_bin",
     "deployer_file",
@@ -289,17 +297,49 @@ def evaluate_item(
         result["smoke"] = smoke_results
         failed_smoke = [entry for entry in smoke_results if not entry["success"]]
         if failed_smoke:
-            result["status"] = "blocked"
-            result["failures"].append("smoke_failed")
+            policy = item.get("sidecar_policy") or {}
+            blocking_smoke = []
             for entry in failed_smoke:
-                result["sidecars"].append(
-                    classify_check_failure(
-                        check_name=f"smoke:{entry['url']}",
-                        required=True,
-                        observed_failure="|".join(entry["errors"]),
-                        is_core_smoke=True,
-                    )
+                observed_failure = "|".join(entry["errors"])
+                surface = str(entry.get("surface") or "").lower()
+                soft_alert_requested = bool(entry.get("soft_alert", False))
+                is_discoverability_artifact = surface in DISCOVERABILITY_ARTIFACT_SURFACES
+                classification = classify_check_failure(
+                    check_name=f"smoke:{entry.get('name') or entry['url']}",
+                    required=bool(entry.get("hard_block", True)),
+                    observed_failure=observed_failure,
+                    is_core_smoke=bool(entry.get("core_smoke", True)),
+                    is_private_or_held_exposure=bool(entry.get("private_or_held_exposure_guard", False)),
+                    is_discoverability_artifact=is_discoverability_artifact,
+                    allow_discoverability_soft_alert=(
+                        soft_alert_requested
+                        and is_discoverability_artifact
+                        and bool(policy.get("allow_discoverability_artifact_soft_alerts", False))
+                    ),
+                    is_search_channel_or_staging_guard=bool(entry.get("search_channel_or_staging_guard", False)),
+                    likely_external=soft_alert_requested,
                 )
+                result["sidecars"].append(classification)
+                if classification.get("allow_nonblocking"):
+                    result.setdefault("sidecar_records", []).append(
+                        build_sidecar_payload(
+                            train_id=manifest["train_id"],
+                            pr_number=str(pr_number),
+                            repo=repo,
+                            component=item.get("component", ""),
+                            check_name=classification["check_name"],
+                            observed_failure=observed_failure,
+                            why_nonblocking=classification["reason"],
+                            recommended_followup=str(entry.get("recommended_followup") or "rerun smoke and inspect artifact cache"),
+                            owner=str(entry.get("owner") or "ops"),
+                            severity="medium",
+                        )
+                    )
+                    continue
+                blocking_smoke.append(entry)
+            if blocking_smoke:
+                result["status"] = "blocked"
+                result["failures"].append("smoke_failed")
         else:
             # content scan guard
             for entry in smoke_results:

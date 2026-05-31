@@ -43,7 +43,15 @@
         "timeout_seconds": { "type": "number", "minimum": 0.1 },
         "retries": { "type": "integer", "minimum": 1 },
         "must_contain": { "type": "string" },
-        "must_not_contain": { "type": "string" }
+        "must_not_contain": { "type": "string" },
+        "surface": { "type": "string" },
+        "soft_alert": { "type": "boolean" },
+        "hard_block": { "type": "boolean" },
+        "core_smoke": { "type": "boolean" },
+        "private_or_held_exposure_guard": { "type": "boolean" },
+        "search_channel_or_staging_guard": { "type": "boolean" },
+        "owner": { "type": "string" },
+        "recommended_followup": { "type": "string" }
       },
       "additionalProperties": true
     },
@@ -63,6 +71,7 @@
         "allow_nonblocking_sidecars": { "type": "boolean" },
         "create_issue": { "type": "boolean" },
         "issue_title_prefix": { "type": "string" },
+        "allow_discoverability_artifact_soft_alerts": { "type": "boolean" },
         "labels": { "type": "array", "items": { "type": "string" } }
       },
       "additionalProperties": true

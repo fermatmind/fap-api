@@ -39,3 +39,41 @@ class SidecarPolicyTest(unittest.TestCase):
             likely_external=False,
         )
         self.assertFalse(result["allow_nonblocking"])
+
+    def test_llms_full_timeout_can_be_discoverability_soft_alert(self):
+        result = module.classify_check_failure(
+            check_name="smoke:llms-full",
+            required=False,
+            observed_failure="request timeout",
+            is_core_smoke=False,
+            is_discoverability_artifact=True,
+            allow_discoverability_soft_alert=True,
+            likely_external=True,
+        )
+        self.assertTrue(result["allow_nonblocking"])
+        self.assertIn("discoverability artifact", result["reason"])
+
+    def test_discoverability_soft_alert_does_not_override_private_or_staging_guard(self):
+        private_result = module.classify_check_failure(
+            check_name="smoke:llms-full",
+            required=False,
+            observed_failure="request timeout",
+            is_core_smoke=False,
+            is_private_or_held_exposure=True,
+            is_discoverability_artifact=True,
+            allow_discoverability_soft_alert=True,
+            likely_external=True,
+        )
+        staging_result = module.classify_check_failure(
+            check_name="smoke:staging",
+            required=False,
+            observed_failure="request timeout",
+            is_core_smoke=False,
+            is_discoverability_artifact=True,
+            allow_discoverability_soft_alert=True,
+            is_search_channel_or_staging_guard=True,
+            likely_external=True,
+        )
+
+        self.assertFalse(private_result["allow_nonblocking"])
+        self.assertFalse(staging_result["allow_nonblocking"])
