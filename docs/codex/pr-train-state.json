@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T17:41:15.961282Z",
+  "updated_at": "2026-05-31T17:41:56.775463Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -23271,7 +23271,7 @@
       "branch": "codex/iq-obs-01-production-guards",
       "base": "main",
       "title": "IQ-OBS-01 add production observability guards",
-      "status": "committed",
+      "status": "pr_open_checks_pending",
       "depends_on": [
         "IQ-LIVE-RAMP-01"
       ],
@@ -23329,10 +23329,18 @@
           "from": "local_scope_validation_passed",
           "to": "committed",
           "note": "Committed scoped IQ-OBS-01 implementation at 3ca9dc70."
+        },
+        {
+          "at": "2026-05-31T17:41:56.775463Z",
+          "from": "committed",
+          "to": "pr_open_checks_pending",
+          "note": "Opened GitHub PR #1823 after local manifest checks passed."
         }
       ],
-      "updated_at": "2026-05-31T17:41:15.961282Z",
-      "commit_sha": "3ca9dc70"
+      "updated_at": "2026-05-31T17:41:56.775463Z",
+      "commit_sha": "f31a7893",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1823",
+      "pr_number": 1823
     },
     "IQ-RELEASE-01": {
       "id": "IQ-RELEASE-01",
@@ -30880,12 +30888,12 @@
       "branch": "codex/iq-obs-01-production-guards",
       "base": "main",
       "title": "IQ-OBS-01 add production observability guards",
-      "status": "committed",
+      "status": "pr_open_checks_pending",
       "depends_on": [
         "IQ-LIVE-RAMP-01"
       ],
-      "commit_sha": "3ca9dc70",
-      "pr_url": null,
+      "commit_sha": "f31a7893",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1823",
       "checks": {
         "dependency_iq_live_ramp_01": "passed: fap-web PR #947 merged at 2026-05-31T17:32:31Z and reconciled in fap-api ledger.",
         "workspace_safety": "using isolated worktree /private/tmp/fap-api-iq-obs-01; primary worktrees untouched",
@@ -30916,14 +30924,8 @@
           "docs/codex/pr-train-state.json"
         ]
       },
-      "updated_at": "2026-05-31T17:41:15.961282Z",
+      "updated_at": "2026-05-31T17:41:56.775463Z",
       "transitions": [
-        {
-          "at": "2026-05-31T12:37:59+00:00",
-          "from": "missing",
-          "to": "planned",
-          "note": "User authorized IQ production PR train manifest/state registration."
-        },
         {
           "at": "2026-05-31T17:39:32.634261Z",
           "from": "planned",
@@ -30941,8 +30943,15 @@
           "from": "local_scope_validation_passed",
           "to": "committed",
           "note": "Committed scoped IQ-OBS-01 implementation at 3ca9dc70."
+        },
+        {
+          "at": "2026-05-31T17:41:56.775463Z",
+          "from": "committed",
+          "to": "pr_open_checks_pending",
+          "note": "Opened GitHub PR #1823 after local manifest checks passed."
         }
-      ]
+      ],
+      "pr_number": 1823
     }
   },
   "RESULT-EN-PARITY-04": {
