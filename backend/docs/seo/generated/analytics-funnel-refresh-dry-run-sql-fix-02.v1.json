@@ -1,0 +1,49 @@
+{
+  "schema_version": "analytics_funnel_refresh_dry_run_sql_fix_02.v1",
+  "task": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02",
+  "final_decision": "analytics_funnel_refresh_dry_run_sql_fix_02_completed_ready_for_backend_deploy",
+  "production_r2_failure": {
+    "command": "php artisan analytics:refresh-funnel-daily --from=2026-05-25 --to=2026-05-31 --org=0 --dry-run --no-ansi",
+    "failed_stage": "share_click",
+    "error": "Unknown column 'events.attempt_id' in 'having clause'",
+    "before_count": 0,
+    "after_count": 0,
+    "production_write_observed": false
+  },
+  "root_cause": "share_click aggregation resolved COALESCE(events.attempt_id, shares.attempt_id) in the grouped query and referenced the same table-qualified attempt-id expression in HAVING.",
+  "fix_strategy": {
+    "share_click_subquery_resolution": true,
+    "outer_query_groups_by_resolved_attempt_id_alias": true,
+    "outer_having_filters_min_stage_at_only": true,
+    "invalid_table_qualified_attempt_id_having_removed": true
+  },
+  "business_semantics_preserved": {
+    "event_attempt_id_counts": true,
+    "share_attempt_id_fallback_counts": true,
+    "unrelated_share_events_excluded": true,
+    "org_scope_preserved": true,
+    "date_scope_preserved": true
+  },
+  "similar_query_sweep": {
+    "benefit_grants_attempt_id_having_regression_covered": true,
+    "events_attempt_id_having_regression_covered": true,
+    "shares_attempt_id_having_regression_covered": true,
+    "orders_target_attempt_id_having_regression_covered": true
+  },
+  "production_actions": {
+    "deploy_performed": false,
+    "production_refresh_performed": false,
+    "production_db_mutation_performed": false,
+    "migration_performed": false,
+    "scheduler_changed": false,
+    "ga_baidu_setting_changed": false,
+    "search_channel_action_performed": false,
+    "url_submission_performed": false
+  },
+  "write_guard_added": false,
+  "expected_next_validation": {
+    "command": "php artisan analytics:refresh-funnel-daily --from=2026-05-25 --to=2026-05-31 --org=0 --dry-run --no-ansi",
+    "expected": "dry-run proceeds beyond share_click without table-qualified attempt-id HAVING SQL error"
+  },
+  "next_task": "BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02"
+}

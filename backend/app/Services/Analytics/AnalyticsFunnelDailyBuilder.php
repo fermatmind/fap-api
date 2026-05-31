@@ -819,26 +819,34 @@ final class AnalyticsFunnelDailyBuilder
             return [];
         }
 
-        $attemptExpression = SchemaBaseline::hasTable('shares')
+        $hasShares = SchemaBaseline::hasTable('shares') && SchemaBaseline::hasColumn('events', 'share_id');
+        $attemptExpression = $hasShares
             ? 'COALESCE(events.attempt_id, shares.attempt_id)'
             : 'events.attempt_id';
 
-        $query = DB::table('events')
+        $shareClickEvents = DB::table('events')
             ->selectRaw($attemptExpression.' as attempt_id')
-            ->selectRaw('MIN(events.occurred_at) as stage_at')
-            ->groupByRaw($attemptExpression)
-            ->havingRaw($attemptExpression.' is not null')
-            ->havingRaw('MIN(events.occurred_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
+            ->selectRaw('events.occurred_at as stage_at')
+            ->whereNotNull('events.occurred_at');
 
-        if (SchemaBaseline::hasTable('shares')) {
-            $query->leftJoin('shares', 'shares.id', '=', 'events.share_id');
+        if ($hasShares) {
+            $shareClickEvents->leftJoin('shares', 'shares.id', '=', 'events.share_id');
         }
 
         if ($orgIds !== []) {
-            $query->whereIn('events.org_id', $orgIds);
+            $shareClickEvents->whereIn('events.org_id', $orgIds);
         }
 
-        $this->applyEventAliasFilter($query, FunnelEventTaxonomy::SHARE_CLICK_ALIASES, 'events');
+        $this->applyEventAliasFilter($shareClickEvents, FunnelEventTaxonomy::SHARE_CLICK_ALIASES, 'events');
+
+        $query = DB::query()
+            ->fromSub($shareClickEvents, 'share_click_events')
+            ->whereNotNull('attempt_id')
+            ->where('attempt_id', '!=', '')
+            ->select('attempt_id')
+            ->selectRaw('MIN(stage_at) as stage_at')
+            ->groupBy('attempt_id')
+            ->havingRaw('MIN(stage_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
 
         return $this->rowsToAttemptMap($query->get()->all(), 'attempt_id', 'stage_at');
     }
