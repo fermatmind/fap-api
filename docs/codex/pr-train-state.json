@@ -35509,14 +35509,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-31T13:09:40Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -35542,6 +35542,12 @@
         "from": "pr_open_checks_pending",
         "to": "ci_fix_pushed_pending_checks",
         "note": "GitHub verify-bigfive failed on runtime freeze classifier for ContentLoaderService.php; added scoped content runtime cache freshness exception and focused regression test."
+      },
+      {
+        "at": "2026-05-31T21:17:43+08:00",
+        "from": "ci_fix_pushed_pending_checks",
+        "to": "merged_and_cleaned",
+        "note": "GitHub checks passed; PR #1800 squash-merged; origin/main contains merge commit; task worktree/local branch cleaned; remote branch absent."
       }
     ],
     "sidecars": [
@@ -35551,6 +35557,87 @@
         "summary": "bash backend/scripts/ci_verify_mbti.sh failed in PacksPublishBig5Test and PacksRollbackBig5Test because test temp target compiled/manifest.json was absent. The same external failure was observed before this PR; changed files are limited to content runtime cache services/tests and PR-train ledger; no content pack files are staged."
       }
     ],
-    "next_task": "AUDIT-SEC-CONTENT-IMPORT-SAFETY-01"
+    "next_task": "AUDIT-SEC-CONTENT-IMPORT-SAFETY-01",
+    "github": {
+      "status": "merged",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1800"
+    },
+    "merge_commit": "445fc2e91cc1b63e5af95b781b42d7f66c504698"
+  },
+  "AUDIT-SEC-CONTENT-IMPORT-SAFETY-01": {
+    "status": "implementation_in_progress",
+    "branch": "audit/sec-content-import-safety-01",
+    "pr_url": null,
+    "base": "main",
+    "worktree": "/private/tmp/fap-api-audit-sec-content-import-safety-01",
+    "scope": "article_baseline_import_translation_group_bounds",
+    "authorized_by_user": true,
+    "workspace_safety": "using isolated worktree /private/tmp/fap-api-audit-sec-content-import-safety-01; dirty primary worktree untouched",
+    "allowed_paths": [
+      "backend/app/Console/Commands/ArticleImportLocalBaseline.php",
+      "backend/tests/Feature/CareerCms/ArticleBaselineImportTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "local_validation": {
+      "environment": {
+        "status": "passed_after_autoload_refresh",
+        "commands": [
+          "cd backend && composer dump-autoload --no-ansi"
+        ],
+        "evidence": "Rebuilt Composer autoload in the isolated worktree after vendor autoload pointed at a removed temporary worktree. Existing IQ PSR-4 warnings were emitted but autoload generation completed."
+      },
+      "focused": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test tests/Feature/CareerCms/ArticleBaselineImportTest.php --no-ansi"
+        ],
+        "evidence": "Article baseline import tests passed: 5 tests, 233 assertions."
+      },
+      "acceptance": {
+        "status": "passed_with_external_ci_verify_sidecar",
+        "commands": [
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-content-import-safety-01.sqlite php artisan migrate --force --no-ansi",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check",
+          "bash backend/scripts/ci_verify_mbti.sh"
+        ],
+        "evidence": "route:list passed with 209 routes; sqlite migrate passed; schema/diff checks passed. ci_verify_mbti.sh passed 824 tests and failed only known Big5 content-pack publish/rollback temp target compiled directory assertions external to this PR scope; generated dirty artifacts were restored."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-05-31T21:17:43+08:00",
+        "from": "authorized",
+        "to": "implementation_in_progress",
+        "note": "Started scoped article baseline import identifier bounds hardening from latest origin/main after AUDIT-SEC-CONTENT-RUNTIME-CACHE-01 post-merge cleanup."
+      },
+      {
+        "at": "2026-05-31T22:23:46+08:00",
+        "from": "implementation_in_progress",
+        "to": "local_scope_validation_passed_with_sidecar",
+        "note": "Focused importer tests, route:list, sqlite migrate, diff/schema checks passed; unrelated ci_verify_mbti Big5 temp-target failures registered as sidecar per train protocol."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "big5_pack_publish_rollback_temp_target_compiled_missing",
+        "status": "registered_non_blocking_external_to_scope",
+        "summary": "bash backend/scripts/ci_verify_mbti.sh failed in PacksPublishBig5Test and PacksRollbackBig5Test because test temp target compiled/manifest.json was absent. This same external failure was observed before this PR; changed files are limited to article baseline importer/tests and PR-train ledger; generated Big5 artifacts were restored."
+      }
+    ],
+    "next_task": null
   }
 }
