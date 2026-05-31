@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:22:06.368532Z",
+  "updated_at": "2026-05-31T16:31:45Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -37155,6 +37155,72 @@
         "at": "2026-05-31T15:18:00Z",
         "status": "pr_opened_with_sidecar",
         "summary": "Opened PR #1809 and rebased onto latest origin/main from implementation commit c240dd9468f99a4c3411dd2d5e669f50694edca4; GitHub checks must rerun after force-push."
+      }
+    ]
+  },
+  "PR-FDN-SOCIAL-SYNC-READINESS": {
+    "id": "PR-FDN-SOCIAL-SYNC-READINESS",
+    "repo": "fap-api",
+    "branch": "codex/pr-fdn-social-sync-readiness",
+    "base": "main",
+    "status": "pr_opened_with_sidecar",
+    "title": "docs(foundation): add Daily Giving social sync readiness",
+    "commit_sha": "d3701d09402d7392039da9be893ddf0a6d5b8c69",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1819",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding PR-FDN-SOCIAL-SYNC-READINESS to fap-api pr-train manifest/state."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to a read-only readiness/planning report, generated JSON, focused test, and pr-train metadata. No production mutation, CMS mutation, deploy, Search Channel action, URL submission, external API call, credential handling, or automatic posting is performed."
+      },
+      "php artisan test --filter=PrFdnSocialSyncReadiness --no-ansi": {
+        "status": "pass",
+        "evidence": "Focused artifact boundary test passed with 26 assertions after initializing local .env in the isolated worktree."
+      },
+      "php artisan route:list --no-ansi": {
+        "status": "pass",
+        "evidence": "Route listing completed successfully and includes Foundation Daily Giving public API routes."
+      },
+      "vendor/bin/pint --test tests/Feature/Foundation/PrFdnSocialSyncReadinessTest.php": {
+        "status": "pass",
+        "evidence": "Scoped formatting check passed for the only PHP file touched by this PR."
+      },
+      "vendor/bin/pint --test": {
+        "status": "sidecar_external_failure",
+        "evidence": "Full Pint reports a pre-existing out-of-scope style issue in tests/Feature/V0_3/IqReportContractTest.php; that file is not touched by this readiness PR."
+      },
+      "composer validate --strict": {
+        "status": "pass",
+        "evidence": "Composer schema validation passed."
+      },
+      "composer audit --locked --no-interaction --ignore-unreachable": {
+        "status": "pass",
+        "evidence": "No locked dependency advisories reported."
+      }
+    },
+    "failure_reason": "Sidecar only: full Pint reports a pre-existing out-of-scope IqReportContractTest formatting issue; scoped touched files passed.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "next_task": "PR-FDN-SOCIAL-SYNC-MVP-01",
+    "history": [
+      {
+        "at": "2026-05-31T16:18:15Z",
+        "status": "in_progress",
+        "summary": "Initialized after user authorization; using isolated worktree from latest origin/main after clearing PRs #1806, #1812, and #1813."
+      },
+      {
+        "at": "2026-05-31T16:25:19Z",
+        "status": "local_checks_passed_with_sidecar",
+        "summary": "Focused test, route:list, scoped Pint, composer validate, and composer audit passed. Full Pint has a pre-existing out-of-scope IqReportContractTest formatting sidecar."
+      },
+      {
+        "at": "2026-05-31T16:27:51Z",
+        "status": "pr_opened_with_sidecar",
+        "summary": "Opened PR #1819 for the readiness report. GitHub checks are pending; local full Pint sidecar remains out-of-scope."
       }
     ]
   }
