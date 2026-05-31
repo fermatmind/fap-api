@@ -21731,7 +21731,7 @@
       "branch": "codex/career-1046-ops-read-model-repair-01",
       "base": "main",
       "title": "CAREER-1046-OPS-READ-MODEL-REPAIR-01 career runtime read model repair",
-      "status": "open",
+      "status": "merged",
       "depends_on": [],
       "checks": {
         "focused_phpunit": {
@@ -21789,19 +21789,28 @@
           "status": "pass",
           "command": "vendor/bin/pint --test",
           "evidence": "3654 files passed."
+        },
+        "github_checks": {
+          "status": "pass",
+          "evidence": "GitHub checks green on PR #1784: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS."
+        },
+        "post_merge_revalidate": {
+          "status": "pass",
+          "command": "php artisan test --filter=Career1046OpsReadModelRepair01 --no-ansi --display-warnings",
+          "evidence": "2 tests passed, 37 assertions on origin/main merge commit 530f412f8996b8223a2c6a36dd93fee5d3135584."
         }
       },
       "failure_reason": null,
-      "commit_sha": "2f8d17ec990796f774db3215db94719acd363a08",
+      "commit_sha": "b2713e384d5a6d0b650df56222eac19831df21b8",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1784",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-31T15:48:04+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": false,
-        "post_merge_revalidated": null
+        "github_checks_green": true,
+        "post_merge_revalidated": true
       },
       "transitions": [
         {
@@ -21833,10 +21842,17 @@
           "from": "pr_open",
           "to": "ci_fix_local_validation_passed",
           "note": "Fixed verify-bigfive freeze classifier false positive for the Career SeoIntel OpsDashboard read model and reran focused PR, BigFive freeze, Pint, JSON/YAML, and diff checks locally."
+        },
+        {
+          "at": "2026-05-31T15:48:04+08:00",
+          "from": "ci_fix_local_validation_passed",
+          "to": "merged",
+          "note": "PR #1784 checks passed, squash merged at 530f412f8996b8223a2c6a36dd93fee5d3135584, remote branch deleted, local branch deleted, and post-merge focused test passed."
         }
       ],
       "sidecars": [],
-      "next_task": "CAREER-1046-OBSERVABILITY-SLO-01"
+      "next_task": "CAREER-1046-OBSERVABILITY-SLO-01",
+      "merge_commit_sha": "530f412f8996b8223a2c6a36dd93fee5d3135584"
     },
     "CAREER-1046-OBSERVABILITY-SLO-01": {
       "id": "CAREER-1046-OBSERVABILITY-SLO-01",
@@ -21844,24 +21860,85 @@
       "branch": "codex/career-1046-observability-slo-01",
       "base": "main",
       "title": "CAREER-1046-OBSERVABILITY-SLO-01 career runtime observability SLO",
-      "status": "pending",
+      "status": "pr_open",
       "depends_on": [
         "CAREER-1046-OPS-READ-MODEL-REPAIR-01"
       ],
-      "checks": {},
+      "checks": {
+        "focused_phpunit": {
+          "status": "pass",
+          "command": "php artisan test --filter=Career1046ObservabilitySlo01 --no-ansi",
+          "evidence": "3 tests passed, 37 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "php artisan route:list --no-ansi",
+          "evidence": "207 routes listed successfully."
+        },
+        "pint": {
+          "status": "pass",
+          "command": "vendor/bin/pint --test",
+          "evidence": "3661 files passed after separate IQ/AttemptEmail Pint cleanup PR #1792 merged."
+        },
+        "composer_validate": {
+          "status": "pass",
+          "command": "composer validate --strict",
+          "evidence": "./composer.json is valid."
+        },
+        "composer_audit": {
+          "status": "pass",
+          "command": "composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "pass",
+          "command": "python3 -m json.tool ... && yaml.safe_load(...)",
+          "evidence": "Generated artifact, train state, and manifest parse successfully."
+        },
+        "scope_validation": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check",
+          "evidence": "Whitespace checks passed before staging; cached check rerun before commit."
+        }
+      },
       "failure_reason": null,
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "9b60bea48210d31334b9939d9bf3eb14fc3e41c8",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1794",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
+      "transitions": [
+        {
+          "at": "2026-05-31T15:52:00+08:00",
+          "from": "pending",
+          "to": "in_progress",
+          "note": "Started PR2 from latest origin/main after confirming PR1 merge commit is present."
+        },
+        {
+          "at": "2026-05-31T16:18:00+08:00",
+          "from": "in_progress",
+          "to": "local_validation_passed",
+          "note": "Generated SLO report/artifact/test, rebased after IQ/AttemptEmail Pint cleanup PR #1792, and passed focused PHPUnit, route:list, Pint, Composer validate/audit, JSON/YAML parse, and diff checks."
+        },
+        {
+          "at": "2026-05-31T16:22:00+08:00",
+          "from": "local_validation_passed",
+          "to": "committed",
+          "note": "Committed scoped PR2 implementation at c56c1f7dd25a5d254facf56b24dc0c9f008f382a."
+        },
+        {
+          "at": "2026-05-31T16:25:00+08:00",
+          "from": "committed",
+          "to": "pr_open",
+          "note": "Pushed branch and opened PR https://github.com/fermatmind/fap-api/pull/1794; GitHub checks pending."
+        }
+      ],
       "sidecars": [],
       "next_task": "PR-HIRING-01"
     },
