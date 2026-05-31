@@ -644,34 +644,57 @@ final class AnalyticsFunnelDailyBuilder
             return [];
         }
 
-        $query = DB::table('benefit_grants')
-            ->whereRaw("lower(coalesce(benefit_grants.status, '')) = ?", ['active'])
-            ->selectRaw(
-                SchemaBaseline::hasTable('orders')
-                    ? 'COALESCE(benefit_grants.attempt_id, orders.target_attempt_id) as attempt_id'
-                    : 'benefit_grants.attempt_id as attempt_id'
-            )
-            ->selectRaw('MIN(benefit_grants.created_at) as stage_at')
-            ->havingRaw('MIN(benefit_grants.created_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
+        $hasGrantAttemptId = SchemaBaseline::hasColumn('benefit_grants', 'attempt_id');
+        $hasOrders = SchemaBaseline::hasTable('orders');
 
-        if (SchemaBaseline::hasTable('orders')) {
-            $query->leftJoin('orders', function ($join): void {
+        if (! $hasGrantAttemptId && ! $hasOrders) {
+            return [];
+        }
+
+        $attemptExpression = match (true) {
+            $hasGrantAttemptId && $hasOrders => 'COALESCE(benefit_grants.attempt_id, orders.target_attempt_id)',
+            $hasGrantAttemptId => 'benefit_grants.attempt_id',
+            default => 'orders.target_attempt_id',
+        };
+
+        $grantAttempts = DB::table('benefit_grants')
+            ->whereRaw("lower(coalesce(benefit_grants.status, '')) = ?", ['active'])
+            ->selectRaw($attemptExpression.' as attempt_id')
+            ->selectRaw('benefit_grants.created_at as stage_at');
+
+        if ($hasOrders) {
+            $grantAttempts->leftJoin('orders', function ($join): void {
                 $join->on('orders.id', '=', 'benefit_grants.source_order_id');
 
                 if (SchemaBaseline::hasColumn('benefit_grants', 'order_no')) {
                     $join->orOn('orders.order_no', '=', 'benefit_grants.order_no');
                 }
-            })->groupByRaw('COALESCE(benefit_grants.attempt_id, orders.target_attempt_id)')
-                ->havingRaw('COALESCE(benefit_grants.attempt_id, orders.target_attempt_id) is not null');
-        } else {
-            $query->groupBy('benefit_grants.attempt_id')
-                ->whereNotNull('benefit_grants.attempt_id')
-                ->where('benefit_grants.attempt_id', '!=', '');
+            });
+        }
+
+        if (SchemaBaseline::hasColumn('benefit_grants', 'revoked_at')) {
+            $grantAttempts->whereNull('benefit_grants.revoked_at');
+        }
+
+        if (SchemaBaseline::hasColumn('benefit_grants', 'expires_at')) {
+            $grantAttempts->where(function (QueryBuilder $query): void {
+                $query->whereNull('benefit_grants.expires_at')
+                    ->orWhere('benefit_grants.expires_at', '>', now());
+            });
         }
 
         if ($orgIds !== []) {
-            $query->whereIn('benefit_grants.org_id', $orgIds);
+            $grantAttempts->whereIn('benefit_grants.org_id', $orgIds);
         }
+
+        $query = DB::query()
+            ->fromSub($grantAttempts, 'grant_attempts')
+            ->whereNotNull('attempt_id')
+            ->where('attempt_id', '!=', '')
+            ->select('attempt_id')
+            ->selectRaw('MIN(stage_at) as stage_at')
+            ->groupBy('attempt_id')
+            ->havingRaw('MIN(stage_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
 
         return $this->rowsToAttemptMap($query->get()->all(), 'attempt_id', 'stage_at');
     }

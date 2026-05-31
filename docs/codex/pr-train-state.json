@@ -23476,7 +23476,7 @@
   "INDEXNOW-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/indexnow-live-00-readiness-contract",
-    "status": "in_progress",
+    "status": "local_checks_passed",
     "depends_on": [
       "BAIDU-LIVE-00"
     ],
@@ -23565,11 +23565,11 @@
   "SEARCH-CHANNEL-LIVE-01-PREFLIGHT": {
     "repo": "fap-api",
     "branch": "codex/search-channel-live-01-preflight",
-    "status": "in_progress",
+    "status": "pr_open",
     "depends_on": [
       "INDEXNOW-LIVE-00"
     ],
-    "commit_sha": null,
+    "commit_sha": "96363c840426a49575787bf6292f5d65c7be6f84",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -28361,7 +28361,7 @@
     "depends_on": [
       "RESULT-EN-PARITY-05"
     ],
-    "commit_sha": null,
+    "commit_sha": "d137d244fd7fca4544a9c94e23be2878700c15e6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1675",
     "checks": {
       "dependency_result_en_parity_00": {
@@ -32258,6 +32258,122 @@
     },
     "sidecars": [],
     "next_task": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-PREFLIGHT-01"
+  },
+  "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01": {
+    "id": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01",
+    "repo": "fap-api",
+    "branch": "codex/analytics-funnel-refresh-dry-run-sql-fix-01",
+    "base": "main",
+    "title": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01 fix production dry-run SQL compatibility",
+    "status": "in_progress",
+    "depends_on": [
+      "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01"
+    ],
+    "commit_sha": "31374f79d9e3671b80bc0383bcdc7d37b9bb2099",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1772",
+    "checks": [
+      {
+        "command": "manifest/state authorization",
+        "status": "passed",
+        "summary": "User explicitly authorized adding only ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01 to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+      },
+      {
+        "command": "php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi",
+        "status": "passed",
+        "summary": "2 tests completed with warnings, 27 assertions."
+      },
+      {
+        "command": "php artisan test --filter=AnalyticsFunnelRefreshDryRunSqlFix01 --no-ansi",
+        "status": "passed",
+        "summary": "3 tests completed with warnings, 8 assertions."
+      },
+      {
+        "command": "php artisan test --filter=RefreshAnalyticsFunnelDailyCommand --no-ansi",
+        "status": "passed",
+        "summary": "1 test completed with warnings, 11 assertions."
+      },
+      {
+        "command": "php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "Route list rendered successfully with 207 routes."
+      },
+      {
+        "command": "vendor/bin/pint --test",
+        "status": "passed",
+        "summary": "Pint passed across 3648 files."
+      },
+      {
+        "command": "composer validate --strict",
+        "status": "passed",
+        "summary": "composer.json is valid."
+      },
+      {
+        "command": "composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "No security vulnerability advisories found."
+      },
+      {
+        "command": "python3 -m json.tool backend/docs/seo/generated/analytics-funnel-refresh-dry-run-sql-fix-01.v1.json >/dev/null",
+        "status": "passed",
+        "summary": "Generated SQL fix JSON parses."
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed",
+        "summary": "PR train state JSON parses."
+      },
+      {
+        "command": "python3 - <<'PY' import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()) PY",
+        "status": "passed",
+        "summary": "PR train manifest YAML parses."
+      },
+      {
+        "command": "git diff --check",
+        "status": "passed",
+        "summary": "No whitespace errors in unstaged diff."
+      },
+      {
+        "command": "fap-web reference status",
+        "status": "sidecar",
+        "summary": "Reference-only fap-web worktree has unrelated dirty changes and was not modified by this task."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T09:13:16+08:00",
+        "summary": "User authorized the scoped SQL compatibility fix PR and manifest/state updates."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-31T09:13:16+08:00",
+        "summary": "Started from latest origin/main on scoped branch codex/analytics-funnel-refresh-dry-run-sql-fix-01 in an isolated worktree."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-31T09:13:16+08:00",
+        "summary": "Scoped local validation passed for the analytics funnel dry-run SQL compatibility fix."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T09:23:00+08:00",
+        "summary": "Opened PR #1772 after scoped local validation passed."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": null
+    },
+    "sidecars": [
+      "Reference-only fap-web worktree had unrelated dirty changes before and after this task; no fap-web files were modified.",
+      "Composer dependencies were installed in the isolated worktree because vendor/ was absent."
+    ],
+    "next_task": "BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01"
   },
   "CONTENT-PACKS-INDEX-RESPONSIBILITY-SHRINK-01": {
     "repo": "fap-api",

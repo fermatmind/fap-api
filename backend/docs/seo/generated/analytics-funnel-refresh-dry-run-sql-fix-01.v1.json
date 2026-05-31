@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "task": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01",
+  "final_decision": "analytics_funnel_refresh_dry_run_sql_fix_completed_ready_for_backend_deploy",
+  "production_failure": {
+    "command": "php artisan analytics:refresh-funnel-daily --from=2026-05-25 --to=2026-05-31 --org=0 --dry-run --no-ansi",
+    "error_summary": "SQLSTATE[42S22]: Unknown column 'benefit_grants.attempt_id' in 'having clause'",
+    "stage": "report_unlock / unlock_success benefit_grants aggregation"
+  },
+  "root_cause": "The unlock aggregation repeated COALESCE(benefit_grants.attempt_id, orders.target_attempt_id) in HAVING after grouping, which was not production MySQL compatible.",
+  "fix": {
+    "file": "backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php",
+    "method": "collectUnlockSuccessMap",
+    "strategy": "Resolve attempt_id in a subquery, then aggregate the outer query by the resolved alias and HAVING MIN(stage_at).",
+    "invalid_having_reference_removed": true
+  },
+  "business_semantics_preserved": {
+    "active_grants_count": true,
+    "inactive_grants_count": false,
+    "expired_grants_count": false,
+    "revoked_grants_count": false,
+    "grants_without_attempt_relation_count": false,
+    "org_scope_preserved": true,
+    "date_scope_preserved": true,
+    "scale_scope_preserved_by_attempt_dimensions": true
+  },
+  "production_actions": {
+    "deploy_performed": false,
+    "production_refresh_performed": false,
+    "production_db_mutation_performed": false,
+    "migration_added": false,
+    "scheduler_changed": false,
+    "ga_baidu_settings_changed": false,
+    "search_channel_action_performed": false,
+    "url_submission_performed": false
+  },
+  "write_guard_added": false,
+  "write_guard_deferred_to": "ANALYTICS-FUNNEL-REFRESH-WRITE-GUARD-01 after production dry-run succeeds",
+  "next_task": "BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01, then ANALYTICS-FUNNEL-CONTROLLED-REFRESH-PROD-DRY-RUN-01-R2"
+}
