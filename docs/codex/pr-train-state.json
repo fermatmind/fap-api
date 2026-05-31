@@ -1,7 +1,207 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T15:29:00+08:00",
+  "updated_at": "2026-05-31T22:23:00+08:00",
   "items": {
+    "PR-EQ-PER-01": {
+      "repo": "fap-api",
+      "branch": "codex/pr-eq-per-01-all-free-copy-contract-cleanup",
+      "status": "github_checks_green",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1785",
+      "checks": {
+        "local": {
+          "status": "passed",
+          "commands": [
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportDeliveryTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+            "git diff --check",
+            "git diff --cached --check"
+          ],
+          "scope_validation": "passed",
+          "notes": "SQLite/testing env used for local checks to avoid unrelated local MySQL root credential blocker."
+        },
+        "github": {
+          "status": "passed",
+          "merge_state_status": "CLEAN",
+          "required_checks": [
+            "hygiene",
+            "supply-chain",
+            "content-pack-build-validate",
+            "verify-mbti-legacy",
+            "verify-mbti-v2",
+            "verify-bigfive",
+            "Semgrep blocking secrets"
+          ]
+        },
+        "local_fix": {
+          "status": "passed",
+          "commands": [
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff'",
+            "git diff --check",
+            "git diff --cached --check",
+            "scope validation passed"
+          ]
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "commit_sha": "113ae714b6a3c889e8526d129fec3adae9c76a5b"
+    },
+    "PR-EQ-PER-02": {
+      "repo": "fap-api",
+      "branch": "codex/pr-eq-per-02-backend-route-matrix",
+      "status": "pending",
+      "depends_on": [
+        "PR-EQ-PER-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-EQ-PER-03": {
+      "repo": "fap-web",
+      "branch": "codex/pr-eq-per-03-frontend-eq-v51-personalization",
+      "status": "pending",
+      "depends_on": [
+        "PR-EQ-PER-02"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-EQ-PER-04": {
+      "repo": "fap-api",
+      "branch": "codex/pr-eq-per-04-eq-journey-state",
+      "status": "pending",
+      "depends_on": [
+        "PR-EQ-PER-03"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-EQ-PER-05": {
+      "repo": "fap-api",
+      "branch": "codex/pr-eq-per-05-cross-assessment-guard",
+      "status": "pending",
+      "depends_on": [
+        "PR-EQ-PER-04"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-EQ-PER-06": {
+      "repo": "fap-api",
+      "branch": "codex/pr-eq-per-06-english-seo-geo-authority",
+      "status": "pending",
+      "depends_on": [
+        "PR-EQ-PER-05"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-EQ-SJT-01": {
+      "repo": "fap-api",
+      "branch": "codex/pr-eq-sjt-01-content-pack-skeleton",
+      "status": "pending",
+      "depends_on": [
+        "PR-EQ-PER-06"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-EQ-SJT-02": {
+      "repo": "fap-api",
+      "branch": "codex/pr-eq-sjt-02-scorer-golden-cases",
+      "status": "pending",
+      "depends_on": [
+        "PR-EQ-SJT-01"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-EQ-SJT-03": {
+      "repo": "fap-web",
+      "branch": "codex/pr-eq-sjt-03-frontend-take-flow",
+      "status": "pending",
+      "depends_on": [
+        "PR-EQ-SJT-02"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-EQ-SJT-04": {
+      "repo": "fap-api",
+      "branch": "codex/pr-eq-sjt-04-integrated-report-composer",
+      "status": "pending",
+      "depends_on": [
+        "PR-EQ-SJT-03"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-EQ-SJT-05": {
+      "repo": "fap-api",
+      "branch": "codex/pr-eq-sjt-05-validation-telemetry-qa",
+      "status": "pending",
+      "depends_on": [
+        "PR-EQ-SJT-04"
+      ],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {},
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
     "backend-email-binding-foundation": {
       "repo": "fap-api",
       "branch": "codex/backend-email-binding-foundation",

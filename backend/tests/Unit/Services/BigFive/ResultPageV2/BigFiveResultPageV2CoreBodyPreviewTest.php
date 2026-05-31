@@ -383,6 +383,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Content/Eq60ContentCompileService.php',
             'backend/app/Services/Content/Eq60ContentLintService.php',
             'backend/app/Services/Content/Eq60PackLoader.php',
+            'backend/app/Services/Report/Eq60ReportComposer.php',
             'backend/content_packs/EQ_60/v1/compiled/golden_cases.compiled.json',
             'backend/content_packs/EQ_60/v1/compiled/landing.compiled.json',
             'backend/content_packs/EQ_60/v1/compiled/manifest.json',
@@ -391,9 +392,27 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/content_packs/EQ_60/v1/compiled/questions.compiled.json',
             'backend/content_packs/EQ_60/v1/compiled/report.compiled.json',
             'backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json',
+            'backend/content_packs/EQ_60/v1/raw/blocks/free_blocks.json',
+            'backend/content_packs/EQ_60/v1/raw/blocks/paid_blocks.json',
+            'backend/content_packs/EQ_60/v1/raw/golden_cases.csv',
+            'backend/content_packs/EQ_60/v1/raw/report_layout.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/golden_cases.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/landing.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/manifest.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/options.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/policy.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/questions.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report.compiled.json',
             'backend/content_packs/EQ_60/v1/raw/report_assets/core_formulations.json',
             'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/blocks/free_blocks.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/blocks/paid_blocks.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/golden_cases.csv',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_layout.json',
             'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/core_formulations.json',
+            'backend/database/seeders/CiScalesRegistrySeeder.php',
+            'backend/database/seeders/Pr19CommerceSeeder.php',
+            'backend/database/seeders/ScaleRegistrySeeder.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -3850,6 +3869,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Content/Eq60ContentCompileService.php',
             'backend/app/Services/Content/Eq60ContentLintService.php',
             'backend/app/Services/Content/Eq60PackLoader.php',
+            'backend/app/Services/Report/Eq60ReportComposer.php',
+            'backend/database/seeders/CiScalesRegistrySeeder.php',
+            'backend/database/seeders/Pr19CommerceSeeder.php',
+            'backend/database/seeders/ScaleRegistrySeeder.php',
         ], true)) {
             return true;
         }
@@ -3870,6 +3893,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/content_packs/EQ_60/v1/compiled/policy.compiled.json',
             'backend/content_packs/EQ_60/v1/compiled/questions.compiled.json',
             'backend/content_packs/EQ_60/v1/compiled/report.compiled.json',
+            'backend/content_packs/EQ_60/v1/raw/blocks/free_blocks.json',
+            'backend/content_packs/EQ_60/v1/raw/blocks/paid_blocks.json',
+            'backend/content_packs/EQ_60/v1/raw/golden_cases.csv',
+            'backend/content_packs/EQ_60/v1/raw/report_layout.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/golden_cases.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/landing.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/manifest.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/options.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/policy.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/questions.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report.compiled.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/blocks/free_blocks.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/blocks/paid_blocks.json',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/golden_cases.csv',
+            'backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_layout.json',
         ], true);
     }
 

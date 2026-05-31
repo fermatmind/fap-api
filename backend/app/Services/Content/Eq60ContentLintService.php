@@ -636,7 +636,9 @@ final class Eq60ContentLintService
 
         $sources = [
             ['file' => 'blocks/free_blocks.json', 'expected_access_level' => 'free'],
-            ['file' => 'blocks/paid_blocks.json', 'expected_access_level' => 'paid'],
+            // The file name is retained for old pack shape compatibility, but
+            // EQ-60 v5 currently exposes every report section for free.
+            ['file' => 'blocks/paid_blocks.json', 'expected_access_level' => 'free'],
         ];
 
         foreach ($sources as $source) {

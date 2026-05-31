@@ -106,8 +106,8 @@ class Pr19CommerceSeeder extends Seeder
                     'credit_benefit_code' => 'SDS_20_FULL',
                 ],
                 'EQ_60' => [
-                    'report_benefit_code' => 'EQ_60_FULL',
-                    'credit_benefit_code' => 'EQ_60_FULL',
+                    'report_benefit_code' => null,
+                    'credit_benefit_code' => null,
                 ],
             ];
 
@@ -132,13 +132,16 @@ class Pr19CommerceSeeder extends Seeder
 
                 $commercial['report_benefit_code'] = $benefits['report_benefit_code'];
                 $commercial['credit_benefit_code'] = $benefits['credit_benefit_code'];
-                if ($scaleCode !== 'BIG5_OCEAN' && $defaultEffective) {
+                if (! in_array($scaleCode, ['BIG5_OCEAN', 'EQ_60'], true) && $defaultEffective) {
                     $commercial['report_unlock_sku'] = $defaultEffective;
                 }
-                if ($scaleCode !== 'BIG5_OCEAN' && $defaultAnchor) {
+                if (! in_array($scaleCode, ['BIG5_OCEAN', 'EQ_60'], true) && $defaultAnchor) {
                     $commercial['upgrade_sku_anchor'] = $defaultAnchor;
                 }
-                if ($scaleCode === 'BIG5_OCEAN') {
+                if (in_array($scaleCode, ['BIG5_OCEAN', 'EQ_60'], true)) {
+                    if ($scaleCode === 'EQ_60') {
+                        $commercial['price_tier'] = 'FREE';
+                    }
                     $commercial['offers'] = [];
                     unset($commercial['report_unlock_sku'], $commercial['upgrade_sku_anchor']);
                 } elseif (count($offers) > 0) {

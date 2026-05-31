@@ -1213,8 +1213,8 @@ final class Eq60ReportComposer
             [
                 'key' => 'cross_quadrant_insight',
                 'source' => 'blocks',
-                'access_level' => 'paid',
-                'required_in_variant' => ['full'],
+                'access_level' => 'free',
+                'required_in_variant' => ['free', 'full'],
                 'module_code' => ReportAccess::MODULE_EQ_CROSS_INSIGHTS,
                 'min_blocks' => 1,
                 'max_blocks' => 1,
@@ -1222,8 +1222,8 @@ final class Eq60ReportComposer
             [
                 'key' => 'action_plan_14d',
                 'source' => 'blocks',
-                'access_level' => 'paid',
-                'required_in_variant' => ['full'],
+                'access_level' => 'free',
+                'required_in_variant' => ['free', 'full'],
                 'module_code' => ReportAccess::MODULE_EQ_GROWTH_PLAN,
                 'min_blocks' => 1,
                 'max_blocks' => 1,

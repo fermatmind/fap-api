@@ -11,6 +11,337 @@ continuation_protocol:
     do_not_stop_train_when_external_and_required_checks_green: true
 prs:
 
+  - id: PR-EQ-PER-01
+    repo: fap-api
+    branch: codex/pr-eq-per-01-all-free-copy-contract-cleanup
+    title: "PR-EQ-PER-01 EQ all-free copy and contract cleanup"
+    train_scope: eq_personalization_english_first_tier
+    scope:
+      - Clean remaining EQ paid, premium, unlock, SKU, and free-preview copy from EQ user-visible report and landing payloads.
+      - Preserve EQ-60 all-free v5 contract and next_module planned/unavailable state.
+      - Harden EQ_60 and EQ_EMOTIONAL_INTELLIGENCE alias-compatible content where needed.
+      - Add regression coverage for no user-visible EQ paid/premium/unlock/SKU terms.
+    allowed_paths:
+      - backend/app/Services/Content/Eq60ContentCompileService.php
+      - backend/app/Services/Content/Eq60ContentLintService.php
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/content_packs/EQ_60/v1/raw/**
+      - backend/content_packs/EQ_60/v1/compiled/**
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/**
+      - backend/tests/Fixtures/eq/v5/**
+      - backend/tests/Feature/Report/*Eq60*
+      - backend/tests/Feature/Content/Eq60*
+      - backend/database/seeders/ScaleRegistrySeeder.php
+      - backend/database/seeders/CiScalesRegistrySeeder.php
+      - backend/database/seeders/Pr19CommerceSeeder.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Implement personalization route matrix.
+      - Implement EQ-SJT.
+      - Change EQ-60 questions, reverse keys, scoring semantics, or norms.
+      - Delete historical SKU seed data.
+      - Modify fap-web.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportDeliveryTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PR-EQ-PER-02
+    repo: fap-api
+    depends_on: [PR-EQ-PER-01]
+    branch: codex/pr-eq-per-02-backend-route-matrix
+    title: "PR-EQ-PER-02 Backend EQ personalization route matrix"
+    train_scope: eq_personalization_english_first_tier
+    scope:
+      - Add deterministic backend EQ personalization route matrix.
+      - Output route_id, signal_signature, and selected asset IDs.
+      - Cover balanced_integrated, high_empathy_low_recovery, aware_but_unregulated, and low_confidence_result.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/personalization_routes/**
+      - backend/content_packs/EQ_60/v1/compiled/**
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/**
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/app/Services/Report/Eq60*
+      - backend/tests/Feature/Report/*Eq60*
+      - backend/tests/Fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add frontend renderer changes.
+      - Implement EQ-SJT.
+      - Generate official report prose in frontend.
+    validation:
+      - cd backend && php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && php artisan test --filter=Eq60V5ReportDeliveryTest
+      - cd backend && php artisan test --filter=Eq60ReportPaywallTest
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PR-EQ-PER-03
+    repo: fap-web
+    depends_on: [PR-EQ-PER-02]
+    branch: codex/pr-eq-per-03-frontend-eq-v51-personalization
+    title: "PR-EQ-PER-03 Frontend EQ v5.1 personalization renderer"
+    train_scope: eq_personalization_english_first_tier
+    scope:
+      - Upgrade EQResultV5 to consume backend personalization route data.
+      - Render route-specific variants from backend assets with safe fallback.
+      - Preserve no raw tags, no paid/locked/blur/SKU, and SJT planned/unavailable behavior.
+    allowed_paths:
+      - components/result/eq/**
+      - lib/api/v0_3.ts
+      - tests/contracts/eq-result-v5-renderer.contract.test.tsx
+      - tests/e2e/iq-eq-result-regression.spec.ts
+      - tests/fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Hardcode official EQ report copy in frontend.
+      - Modify backend.
+      - Add SJT route.
+    validation:
+      - pnpm typecheck
+      - pnpm test:contract
+      - pnpm exec playwright test tests/e2e/iq-eq-result-regression.spec.ts
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PR-EQ-PER-04
+    repo: fap-api
+    depends_on: [PR-EQ-PER-03]
+    branch: codex/pr-eq-per-04-eq-journey-state
+    title: "PR-EQ-PER-04 EQ journey state and resonance feedback"
+    train_scope: eq_personalization_english_first_tier
+    scope:
+      - Add privacy-safe EQ journey and resonance state for retest intent, action completion, read depth, and result resonance.
+      - Preserve score truth and low-confidence caution.
+      - Keep persistence consent-aware.
+    allowed_paths:
+      - backend/app/**
+      - backend/database/migrations/**
+      - backend/tests/**/Eq60*
+      - backend/tests/**/Privacy*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Build frontend UI unless separately authorized.
+      - Hidden-profile users.
+      - Implement EQ-SJT.
+      - Infer clinical, hiring, or job-performance outcomes.
+    validation:
+      - cd backend && php artisan test --filter=Eq60
+      - cd backend && php artisan test --filter=Privacy
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PR-EQ-PER-05
+    repo: fap-api
+    depends_on: [PR-EQ-PER-04]
+    branch: codex/pr-eq-per-05-cross-assessment-guard
+    title: "PR-EQ-PER-05 EQ cross-assessment context guard"
+    train_scope: eq_personalization_english_first_tier
+    scope:
+      - Add optional explainable EQ context guard for MBTI, Big Five, and Enneagram.
+      - Keep EQ as authority for emotional and relational self-report signals.
+      - Output conservative asset-ref based context only when source assessments exist.
+    allowed_paths:
+      - backend/app/Services/**
+      - backend/content_packs/EQ_60/v1/raw/**
+      - backend/content_packs/EQ_60/v1/compiled/**
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/**
+      - backend/tests/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Make deterministic type-overclaim statements.
+      - Predict job performance.
+      - Make career, hiring, clinical, or diagnosis claims.
+    validation:
+      - cd backend && php artisan test --filter=Eq60
+      - cd backend && php artisan test --filter=Mbti
+      - cd backend && php artisan test --filter=BigFive
+      - cd backend && php artisan test --filter=Enneagram
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PR-EQ-PER-06
+    repo: fap-api
+    depends_on: [PR-EQ-PER-05]
+    branch: codex/pr-eq-per-06-english-seo-geo-authority
+    title: "PR-EQ-PER-06 EQ English SEO and GEO authority pack"
+    train_scope: eq_personalization_english_first_tier
+    scope:
+      - Add backend/CMS-authoritative English EQ content and SEO/GEO authority assets.
+      - Include self-report, non-clinical, non-hiring, and non-ability boundaries.
+      - Serve public content through backend/CMS/public APIs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/**
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/**
+      - backend/database/**
+      - backend/app/**
+      - backend/tests/**
+      - docs/**
+    do_not:
+      - Add frontend static editorial fallback.
+      - Copy competitor text.
+      - Make SJT available.
+    validation:
+      - cd backend && php artisan test --filter=Content
+      - cd backend && php artisan test --filter=Seo
+      - cd backend && php artisan test --filter=Eq60
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PR-EQ-SJT-01
+    repo: fap-api
+    depends_on: [PR-EQ-PER-06]
+    branch: codex/pr-eq-sjt-01-content-pack-skeleton
+    title: "PR-EQ-SJT-01 EQ-SJT content pack skeleton"
+    train_scope: eq_sjt_16_module
+    scope:
+      - Add EQ_SJT_16/v1 content pack skeleton and schema only.
+      - Define 8 domains by 2 items structure and item schema.
+      - Keep SJT unavailable in runtime.
+    allowed_paths:
+      - backend/content_packs/EQ_SJT_16/v1/**
+      - backend/tests/**/EqSjt*
+      - backend/tests/**/Content*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Implement scorer.
+      - Add route or frontend take page.
+      - Claim ability EI or MSCEIT.
+    validation:
+      - cd backend && php artisan test --filter=Content
+      - cd backend && php artisan test --filter=Eq60
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PR-EQ-SJT-02
+    repo: fap-api
+    depends_on: [PR-EQ-SJT-01]
+    branch: codex/pr-eq-sjt-02-scorer-golden-cases
+    title: "PR-EQ-SJT-02 EQ-SJT scorer and golden cases"
+    train_scope: eq_sjt_16_module
+    scope:
+      - Implement EQ-SJT scorer, rubric, strategy tags, and golden cases.
+      - Produce CUE, PAUSE, EMP, BND, REPAIR, and INFL strategy scores.
+    allowed_paths:
+      - backend/app/Services/Assessment/**
+      - backend/content_packs/EQ_SJT_16/v1/**
+      - backend/tests/**/EqSjt*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add frontend route.
+      - Integrate into EQ result yet.
+      - Make clinical, hiring, MSCEIT, or certified ability claims.
+    validation:
+      - cd backend && php artisan test --filter=EqSjt
+      - cd backend && php artisan test --filter=Assessment
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PR-EQ-SJT-03
+    repo: fap-web
+    depends_on: [PR-EQ-SJT-02]
+    branch: codex/pr-eq-sjt-03-frontend-take-flow
+    title: "PR-EQ-SJT-03 EQ-SJT frontend take flow"
+    train_scope: eq_sjt_16_module
+    scope:
+      - Add frontend EQ-SJT take flow after backend content and scorer exist.
+      - Render scenario cards, response options, and submit flow from API content.
+    allowed_paths:
+      - app/(localized)/[locale]/tests/[slug]/take/**
+      - lib/quiz/**
+      - lib/api/v0_3.ts
+      - tests/e2e/**
+      - tests/contracts/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Implement integrated report renderer.
+      - Hardcode official scenario item content.
+      - Add paid CTA or ability/MSCEIT claims.
+    validation:
+      - pnpm typecheck
+      - pnpm test:contract
+      - pnpm exec playwright test tests/e2e/iq-eq-result-regression.spec.ts
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PR-EQ-SJT-04
+    repo: fap-api
+    depends_on: [PR-EQ-SJT-03]
+    branch: codex/pr-eq-sjt-04-integrated-report-composer
+    title: "PR-EQ-SJT-04 Integrated EQ report composer"
+    train_scope: eq_sjt_16_module
+    scope:
+      - Compose integrated EQ report from EQ-60 and EQ-SJT.
+      - Define eq_report_mode=integrated, gap map, pressure pattern, scripts, and integrated action path.
+      - Keep self-report and SJT scores separate.
+    allowed_paths:
+      - backend/app/Services/Report/**
+      - backend/content_packs/EQ_60/v1/**
+      - backend/content_packs/EQ_SJT_16/v1/**
+      - backend/tests/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change EQ-60 scoring.
+      - Change SJT scoring semantics unless separately scoped.
+      - Create a true-EQ ability total score.
+    validation:
+      - cd backend && php artisan test --filter=Eq60
+      - cd backend && php artisan test --filter=EqSjt
+      - cd backend && php artisan test --filter=Report
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
+  - id: PR-EQ-SJT-05
+    repo: fap-api
+    depends_on: [PR-EQ-SJT-04]
+    branch: codex/pr-eq-sjt-05-validation-telemetry-qa
+    title: "PR-EQ-SJT-05 EQ-SJT validation telemetry and QA"
+    train_scope: eq_sjt_16_module
+    scope:
+      - Lock SJT and integrated EQ with validation, telemetry, fixtures, smoke QA docs, and no-claim regression tests.
+      - Cover zh-CN/en, high/low quality, no ability/MSCEIT/hiring/clinical claims, and no paid/locked/blur/SKU.
+    allowed_paths:
+      - backend/tests/**
+      - backend/app/**
+      - docs/audits/eq/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add new product features.
+      - Change scoring.
+      - Claim stable validation beyond implemented evidence.
+    validation:
+      - cd backend && php artisan test --filter=Eq60
+      - cd backend && php artisan test --filter=EqSjt
+      - cd backend && php artisan test --filter=Report
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+
   - id: PR-CMS-03
     repo: fap-api
     depends_on:

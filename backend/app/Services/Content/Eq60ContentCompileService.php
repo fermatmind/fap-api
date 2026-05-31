@@ -615,7 +615,9 @@ final class Eq60ContentCompileService
 
         foreach ([
             ['doc' => $freeDoc, 'access_level' => 'free'],
-            ['doc' => $paidDoc, 'access_level' => 'paid'],
+            // Historical EQ block files still keep the paid_blocks filename for
+            // compatibility, but the current EQ runtime contract is all-free.
+            ['doc' => $paidDoc, 'access_level' => 'free'],
         ] as $source) {
             $doc = is_array($source['doc'] ?? null) ? $source['doc'] : [];
             $defaultAccess = (string) ($source['access_level'] ?? 'free');
