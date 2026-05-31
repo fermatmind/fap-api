@@ -76,11 +76,35 @@
           ]
         },
         {
-          "title": "IQ 智商测试",
-          "description": "快速了解你的认知能力基线",
+          "title": "IQ 推理练习",
+          "description": "练习 30 道原创视觉与数字推理题。在常模权威上线前，仅提供原始分参考。",
           "href": "/tests/iq-test-intelligence-quotient-assessment",
-          "label": "开始测试",
-          "meta": "能力测评"
+          "label": "开始练习",
+          "meta": "认知练习",
+          "key": "iq-test-intelligence-quotient-assessment",
+          "questionsLabel": "30 题",
+          "durationLabel": "约 20 分钟",
+          "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+          "claim_policy": {
+            "norm_authority_required": true,
+            "iq_estimate_claims_enabled": false,
+            "percentile_claims_enabled": false,
+            "copy_boundary": "仅限原创推理练习和原始分参考",
+            "deferred_norm_authority_pr": "IQ-SCORE-30-01"
+          },
+          "media": {
+            "asset_key": "iq-beta30-original-card",
+            "source": "media_library_required",
+            "status": "metadata_only_no_frontend_asset",
+            "alt": "原创 IQ 推理练习卡片"
+          },
+          "primaryActions": [
+            {
+              "label": "30 题 Beta 版",
+              "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+              "form_code": "IQ_BETA_30_ORIGINAL"
+            }
+          ]
         },
         {
           "title": "抑郁焦虑综合症测试",
