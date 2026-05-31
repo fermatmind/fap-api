@@ -19,6 +19,11 @@ final class CareerFirstWaveNextStepLinksService
      */
     private ?array $discoverabilityRoutes = null;
 
+    /**
+     * @var array<string, CareerFirstWaveNextStepLinksSummary|null>
+     */
+    private array $summaryBySlug = [];
+
     public function __construct(
         private readonly CareerFirstWaveDiscoverabilityManifestService $discoverabilityManifestService,
     ) {}
@@ -30,13 +35,17 @@ final class CareerFirstWaveNextStepLinksService
             return null;
         }
 
+        if (array_key_exists($normalizedSlug, $this->summaryBySlug)) {
+            return $this->summaryBySlug[$normalizedSlug];
+        }
+
         $subject = Occupation::query()
             ->with('family')
             ->where('canonical_slug', $normalizedSlug)
             ->first();
 
         if (! $subject instanceof Occupation) {
-            return null;
+            return $this->summaryBySlug[$normalizedSlug] = null;
         }
 
         $routes = collect($this->discoverabilityRoutes());
@@ -46,7 +55,7 @@ final class CareerFirstWaveNextStepLinksService
             ->keyBy(static fn (array $row): string => (string) ($row['canonical_slug'] ?? ''));
 
         if (! $jobRoutes->has($subject->canonical_slug)) {
-            return null;
+            return $this->summaryBySlug[$normalizedSlug] = null;
         }
 
         $nextStepLinks = [];
@@ -113,7 +122,7 @@ final class CareerFirstWaveNextStepLinksService
             'family_hub' => count(array_filter($dedupedLinks, static fn (array $row): bool => ($row['route_kind'] ?? null) === 'career_family_hub')),
         ];
 
-        return new CareerFirstWaveNextStepLinksSummary(
+        return $this->summaryBySlug[$normalizedSlug] = new CareerFirstWaveNextStepLinksSummary(
             summaryVersion: self::SUMMARY_VERSION,
             scope: self::SCOPE,
             subjectIdentity: [

@@ -11,6 +11,11 @@ final class FirstWaveReadinessSummaryService
 {
     public const SUMMARY_VERSION = 'career.release.first_wave_readiness.v1';
 
+    /**
+     * @var array<string, FirstWaveReadinessSummary>
+     */
+    private static array $summaryMemo = [];
+
     public function __construct(
         private readonly FirstWaveManifestReader $manifestReader,
         private readonly FirstWavePublishReadyValidator $validator,
@@ -20,6 +25,11 @@ final class FirstWaveReadinessSummaryService
         ?string $blockedRegistryPath = null,
         ?string $authorityOverridePath = null,
     ): FirstWaveReadinessSummary {
+        $memoKey = ($blockedRegistryPath ?? '').'|'.($authorityOverridePath ?? '');
+        if (isset(self::$summaryMemo[$memoKey])) {
+            return self::$summaryMemo[$memoKey];
+        }
+
         $manifest = $this->manifestReader->read();
         $titlesBySlug = [];
 
@@ -83,7 +93,7 @@ final class FirstWaveReadinessSummaryService
             ];
         }
 
-        return new FirstWaveReadinessSummary(
+        return self::$summaryMemo[$memoKey] = new FirstWaveReadinessSummary(
             waveName: (string) ($report['wave_name'] ?? $manifest['wave_name']),
             summaryVersion: self::SUMMARY_VERSION,
             counts: $counts,

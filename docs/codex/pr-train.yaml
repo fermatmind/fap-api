@@ -16825,3 +16825,26 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: deploy latest main only after merge and exact SHA approval
+  - id: OPS-CAREER-WARM-CACHE-PERF-01
+    branch: ops/career-warm-cache-perf-01
+    title: "OPS-CAREER-WARM-CACHE-PERF-01 reduce career warm cache authority rebuilds"
+    train_scope: career_warm_cache_authority_performance
+    status: in_progress
+    allowed_paths:
+      - backend/app/Domain/Career/Publish/**
+      - backend/app/Services/Career/Dataset/CareerFullDatasetAuthorityBuilder.php
+      - backend/tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Reduce repeated first-wave validator and authority builder work in career warm cache path.
+      - Preserve backend career authority and public API contracts.
+      - Do not change deploy hook behavior.
+      - Do not mutate production data.
+      - Do not add routes or migrations.
+    acceptance:
+      - php artisan route:list --no-ansi
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-career-warm-perf.sqlite php artisan migrate --force --no-ansi
+      - php artisan test --filter=CareerWarmPublicAuthorityCache --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check

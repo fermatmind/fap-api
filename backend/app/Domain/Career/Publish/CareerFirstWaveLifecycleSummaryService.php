@@ -12,6 +12,8 @@ final class CareerFirstWaveLifecycleSummaryService
 {
     public const SUMMARY_VERSION = 'career.lifecycle.first_wave.v1';
 
+    private static ?CareerFirstWaveLifecycleSummary $summaryMemo = null;
+
     public const SCOPE = 'career_first_wave_10';
 
     public function __construct(
@@ -22,6 +24,10 @@ final class CareerFirstWaveLifecycleSummaryService
 
     public function build(): CareerFirstWaveLifecycleSummary
     {
+        if (self::$summaryMemo instanceof CareerFirstWaveLifecycleSummary) {
+            return self::$summaryMemo;
+        }
+
         $manifest = $this->manifestReader->read();
         $report = $this->validator->validate();
 
@@ -97,7 +103,7 @@ final class CareerFirstWaveLifecycleSummaryService
             ];
         }
 
-        return new CareerFirstWaveLifecycleSummary(
+        return self::$summaryMemo = new CareerFirstWaveLifecycleSummary(
             summaryVersion: self::SUMMARY_VERSION,
             scope: self::SCOPE,
             counts: $counts,

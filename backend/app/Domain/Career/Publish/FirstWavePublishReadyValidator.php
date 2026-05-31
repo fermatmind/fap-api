@@ -17,6 +17,11 @@ use App\Services\Career\Bundles\CareerSearchBundleBuilder;
 
 final class FirstWavePublishReadyValidator
 {
+    /**
+     * @var array<string, array<string, mixed>>
+     */
+    private static array $validationMemo = [];
+
     public function __construct(
         private readonly FirstWaveManifestReader $manifestReader,
         private readonly FirstWaveAliasCatalogReader $aliasCatalogReader,
@@ -40,6 +45,11 @@ final class FirstWavePublishReadyValidator
         ?string $blockedRegistryPath = null,
         ?string $authorityOverridePath = null,
     ): array {
+        $memoKey = $this->validationMemoKey($externalIssuesBySlug, $blockedRegistryPath, $authorityOverridePath);
+        if (isset(self::$validationMemo[$memoKey])) {
+            return self::$validationMemo[$memoKey];
+        }
+
         $manifest = $this->manifestReader->read();
         $aliasCatalog = $this->aliasCatalogReader->bySlug();
 
@@ -192,7 +202,7 @@ final class FirstWavePublishReadyValidator
             ];
         }
 
-        return [
+        return self::$validationMemo[$memoKey] = [
             'wave_name' => (string) $manifest['wave_name'],
             'counts' => $counts,
             'occupations' => $items,
