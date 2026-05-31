@@ -21964,7 +21964,7 @@
       "branch": "codex/pr-hiring-01-content-authority",
       "base": "main",
       "title": "PR-HIRING-01 hiring content authority package",
-      "status": "local_validation_passed",
+      "status": "pr_open",
       "depends_on": [
         "CAREER-1046-OBSERVABILITY-SLO-01"
       ],
@@ -22006,8 +22006,8 @@
         }
       },
       "failure_reason": null,
-      "commit_sha": "06516fa0000be81e680337a7937c7e773ac73870",
-      "pr_url": null,
+      "commit_sha": "0067534e49b55781e88fae0568b58a0204c8e1b6",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1795",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
@@ -22035,6 +22035,12 @@
           "from": "local_validation_passed",
           "to": "committed",
           "note": "Committed scoped PR-HIRING-01 implementation at 06516fa0000be81e680337a7937c7e773ac73870."
+        },
+        {
+          "at": "2026-05-31T16:46:00+08:00",
+          "from": "committed",
+          "to": "pr_open",
+          "note": "Pushed branch and opened PR https://github.com/fermatmind/fap-api/pull/1795; GitHub checks pending."
         }
       ],
       "sidecars": [],
