@@ -106,5 +106,137 @@
         "height": 258
       }
     ]
+  },
+  {
+    "asset_key": "iq-beta30-original-card",
+    "disk": "media_library",
+    "path": "iq/beta30/original-card-v1.png",
+    "mime_type": "image/png",
+    "width": 1200,
+    "height": 900,
+    "alt": "Original IQ reasoning practice landing card",
+    "caption": "CMS-owned IQ_BETA_30_ORIGINAL landing card media metadata.",
+    "variants": [
+      {
+        "variant_key": "card",
+        "path": "iq/beta30/original-card-v1.png",
+        "mime_type": "image/png",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "variant_key": "thumbnail",
+        "path": "iq/beta30/original-card-thumb-v1.png",
+        "mime_type": "image/png",
+        "width": 600,
+        "height": 450
+      }
+    ],
+    "payload_json": {
+      "authority": "backend_cms_media_library",
+      "render_surface": [
+        "landing_card",
+        "tests_hub_card"
+      ],
+      "applies_to": {
+        "scale_code": [
+          "IQ_BETA_30_ORIGINAL"
+        ],
+        "test_slug": "iq-test-intelligence-quotient-assessment"
+      },
+      "frontend_fallback_allowed": false,
+      "requires_media_library_upload": true,
+      "copyright_boundary": "FermatMind original metadata; no third-party IQ test asset reuse."
+    }
+  },
+  {
+    "asset_key": "iq-beta30-original-og",
+    "disk": "media_library",
+    "path": "iq/beta30/original-og-v1.png",
+    "mime_type": "image/png",
+    "width": 1200,
+    "height": 630,
+    "alt": "Original IQ reasoning practice social preview",
+    "caption": "CMS-owned IQ_BETA_30_ORIGINAL OG/share media metadata.",
+    "variants": [
+      {
+        "variant_key": "og",
+        "path": "iq/beta30/original-og-v1.png",
+        "mime_type": "image/png",
+        "width": 1200,
+        "height": 630
+      },
+      {
+        "variant_key": "twitter",
+        "path": "iq/beta30/original-twitter-v1.png",
+        "mime_type": "image/png",
+        "width": 1200,
+        "height": 675
+      }
+    ],
+    "payload_json": {
+      "authority": "backend_cms_media_library",
+      "render_surface": [
+        "seo_og",
+        "social_share"
+      ],
+      "applies_to": {
+        "scale_code": [
+          "IQ_BETA_30_ORIGINAL"
+        ],
+        "test_slug": "iq-test-intelligence-quotient-assessment"
+      },
+      "frontend_fallback_allowed": false,
+      "requires_media_library_upload": true,
+      "claim_policy": {
+        "iq_estimate_claims_enabled": false,
+        "percentile_claims_enabled": false
+      }
+    }
+  },
+  {
+    "asset_key": "iq-full-report-cover",
+    "disk": "media_library",
+    "path": "iq/reports/full-report-cover-v1.png",
+    "mime_type": "image/png",
+    "width": 1600,
+    "height": 1000,
+    "alt": "IQ full report cover media",
+    "caption": "CMS-owned IQ paid report cover and PDF header media metadata.",
+    "variants": [
+      {
+        "variant_key": "report_cover",
+        "path": "iq/reports/full-report-cover-v1.png",
+        "mime_type": "image/png",
+        "width": 1600,
+        "height": 1000
+      },
+      {
+        "variant_key": "pdf_header",
+        "path": "iq/reports/full-report-pdf-header-v1.png",
+        "mime_type": "image/png",
+        "width": 1600,
+        "height": 420
+      }
+    ],
+    "payload_json": {
+      "authority": "backend_cms_media_library",
+      "render_surface": [
+        "paid_report",
+        "pdf_report"
+      ],
+      "applies_to": {
+        "scale_code": [
+          "IQ_BETA_30_ORIGINAL"
+        ],
+        "report_modules": [
+          "iq_core",
+          "iq_full"
+        ]
+      },
+      "frontend_fallback_allowed": false,
+      "requires_media_library_upload": true,
+      "entitlement_required_for_full_report": true
+    }
   }
 ]

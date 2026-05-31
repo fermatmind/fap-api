@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T15:57:38.415Z",
+  "updated_at": "2026-05-31T16:22:06.368532Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -22791,20 +22791,20 @@
       "branch": "codex/iq-paid-report-01-entitlement-contract",
       "base": "main",
       "title": "IQ-PAID-REPORT-01 define paid report entitlement contract",
-      "status": "planned",
+      "status": "merged",
       "depends_on": [
         "IQ-NORM-03"
       ],
       "checks": {},
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-31T15:48:58Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
-        "github_checks_green": null,
-        "post_merge_revalidated": null
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
+        "github_checks_green": true,
+        "post_merge_revalidated": true
       },
       "transitions": [
         {
@@ -22812,8 +22812,16 @@
           "from": "missing",
           "to": "planned",
           "note": "User authorized IQ production PR train manifest/state registration."
+        },
+        {
+          "at": "2026-05-31T16:20:05.375075Z",
+          "from": "planned",
+          "to": "merged",
+          "note": "Reconciled from GitHub PR #1812 merge commit 60eabe326f7e24e71a1bef555493dc9a1d6e6f13; branch deleted and local cleanup completed during PR train."
         }
-      ]
+      ],
+      "commit_sha": "60eabe326f7e24e71a1bef555493dc9a1d6e6f13",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1812"
     },
     "IQ-PAID-REPORT-02": {
       "id": "IQ-PAID-REPORT-02",
@@ -22851,20 +22859,34 @@
       "branch": "codex/iq-cms-media-01-authority-metadata",
       "base": "main",
       "title": "IQ-CMS-MEDIA-01 register CMS media authority metadata",
-      "status": "planned",
+      "status": "pr_opened",
       "depends_on": [
         "IQ-PAID-REPORT-02"
       ],
-      "checks": {},
+      "checks": {
+        "python3 JSON parse changed baselines": "passed",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=LandingSurfacePublicApiTest --no-ansi": "passed_with_existing_warnings",
+        "git diff --check": "passed"
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "scope_validation": {
-        "allowed_paths_only": null,
-        "local_validation_passed": null,
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
         "github_checks_green": null,
-        "post_merge_revalidated": null
+        "post_merge_revalidated": null,
+        "changed_files": [
+          "backend/tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php",
+          "content_baselines/landing_surfaces/home.en.json",
+          "content_baselines/landing_surfaces/home.zh-CN.json",
+          "content_baselines/landing_surfaces/tests.en.json",
+          "content_baselines/landing_surfaces/tests.zh-CN.json",
+          "content_baselines/media_assets/default_media_assets.json",
+          "docs/codex/pr-train-state.json",
+          "docs/codex/pr-train.yaml"
+        ]
       },
       "transitions": [
         {
@@ -22872,8 +22894,30 @@
           "from": "missing",
           "to": "planned",
           "note": "User authorized IQ production PR train manifest/state registration."
+        },
+        {
+          "at": "2026-05-31T16:20:05.375075Z",
+          "from": "planned",
+          "to": "implementation_in_progress",
+          "note": "Started scoped backend CMS media authority metadata PR in isolated worktree /private/tmp/fap-api-iq-cms-media-01 after dependency PRs were merged."
+        },
+        {
+          "at": "2026-05-31T16:21:14.932455Z",
+          "from": "implementation_in_progress",
+          "to": "local_checks_passed",
+          "note": "Changed files stayed within IQ-CMS-MEDIA-01 allowed_paths; manifest local validation commands passed."
+        },
+        {
+          "at": "2026-05-31T16:22:06.368532Z",
+          "from": "local_checks_passed",
+          "to": "pr_opened",
+          "note": "Opened GitHub PR #1817 after local validation passed."
         }
-      ]
+      ],
+      "commit_sha": "bea2250c268bbea96ee2304fa823c1d6e5468472",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1817",
+      "updated_at": "2026-05-31T16:22:06.368532Z",
+      "pr_number": 1817
     },
     "IQ-CMS-MEDIA-02": {
       "id": "IQ-CMS-MEDIA-02",
@@ -30413,9 +30457,9 @@
       }
     },
     "IQ-PAID-REPORT-01": {
-      "status": "github_checks_green",
+      "status": "merged",
       "branch": "codex/iq-paid-report-01-entitlement-contract",
-      "commit_sha": "fce8088297cbcb907c81245524a2aa281e47d1d0",
+      "commit_sha": "60eabe326f7e24e71a1bef555493dc9a1d6e6f13",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1812",
       "pr_number": 1812,
       "checks": {
@@ -30427,10 +30471,10 @@
         "bigfive_freeze_classifier_local": "passed_with_existing_warning"
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
-      "updated_at": "2026-06-01T00:12:00+08:00",
+      "merged_at": "2026-05-31T15:48:58Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "updated_at": "2026-05-31T16:20:05.375075Z",
       "scope_validation": {
         "allowed_paths_only": true,
         "changed_files": [
@@ -30444,6 +30488,48 @@
           "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
         ]
       }
+    },
+    "IQ-CMS-MEDIA-01": {
+      "id": "IQ-CMS-MEDIA-01",
+      "repo": "fap-api",
+      "branch": "codex/iq-cms-media-01-authority-metadata",
+      "base": "main",
+      "title": "IQ-CMS-MEDIA-01 register CMS media authority metadata",
+      "status": "pr_opened",
+      "depends_on": [
+        "IQ-PAID-REPORT-02"
+      ],
+      "commit_sha": "bea2250c268bbea96ee2304fa823c1d6e5468472",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1817",
+      "checks": {
+        "dependency_iq_paid_report_02": "passed: fermatmind/fap-web#943 merged at 2026-05-31T16:12:12Z",
+        "workspace_safety": "using isolated worktree /private/tmp/fap-api-iq-cms-media-01; primary worktree untouched",
+        "python3 JSON parse changed baselines": "passed",
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=LandingSurfacePublicApiTest --no-ansi": "passed_with_existing_warnings",
+        "git diff --check": "passed"
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "changed_files": [
+          "backend/tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php",
+          "content_baselines/landing_surfaces/home.en.json",
+          "content_baselines/landing_surfaces/home.zh-CN.json",
+          "content_baselines/landing_surfaces/tests.en.json",
+          "content_baselines/landing_surfaces/tests.zh-CN.json",
+          "content_baselines/media_assets/default_media_assets.json",
+          "docs/codex/pr-train-state.json",
+          "docs/codex/pr-train.yaml"
+        ],
+        "local_validation_passed": true,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "updated_at": "2026-05-31T16:22:06.368532Z",
+      "pr_number": 1817
     }
   },
   "RESULT-EN-PARITY-04": {
