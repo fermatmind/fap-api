@@ -1,11 +1,11 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T22:22:00+08:00",
+  "updated_at": "2026-05-31T22:23:00+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-01-all-free-copy-contract-cleanup",
-      "status": "open_pending_github_checks",
+      "status": "github_checks_green",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1785",
       "checks": {
         "local": {
@@ -23,9 +23,17 @@
           "notes": "SQLite/testing env used for local checks to avoid unrelated local MySQL root credential blocker."
         },
         "github": {
-          "status": "rerun_pending_after_scope_fix",
-          "pr_url": "https://github.com/fermatmind/fap-api/pull/1785",
-          "previous_failure": "verify-bigfive runtime freeze guard required EQ all-free cleanup paths to be allowlisted as EQ-only non-Big-Five-impacting changes."
+          "status": "passed",
+          "merge_state_status": "CLEAN",
+          "required_checks": [
+            "hygiene",
+            "supply-chain",
+            "content-pack-build-validate",
+            "verify-mbti-legacy",
+            "verify-mbti-v2",
+            "verify-bigfive",
+            "Semgrep blocking secrets"
+          ]
         },
         "local_fix": {
           "status": "passed",
@@ -42,7 +50,7 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "commit_sha": "36b6f60c5bba9829068de727b1200ee62916f0da"
+      "commit_sha": "113ae714b6a3c889e8526d129fec3adae9c76a5b"
     },
     "PR-EQ-PER-02": {
       "repo": "fap-api",
