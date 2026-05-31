@@ -16077,6 +16077,55 @@ prs:
     frontend_fallback_authority: false
     next_task: ANALYTICS-FUNNEL-CONTROLLED-REFRESH-PREFLIGHT-01
 
+  - id: ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01
+    repo: fap-api
+    branch: codex/analytics-funnel-refresh-dry-run-sql-fix-01
+    base: main
+    title: "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01 fix production dry-run SQL compatibility"
+    train_scope: analytics_funnel_refresh_dry_run_sql_fix
+    risk_level: p1_analytics_funnel_observability
+    depends_on:
+      - ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01
+    allowed_paths:
+      - backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php
+      - backend/docs/seo/analytics-funnel-refresh-dry-run-sql-fix-01.md
+      - backend/docs/seo/generated/analytics-funnel-refresh-dry-run-sql-fix-01.v1.json
+      - backend/tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php
+      - backend/tests/Feature/SeoIntel/AnalyticsFunnelRefreshDryRunSqlFix01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Fix production SQL compatibility for the analytics_funnel_daily benefit grant unlock aggregation.
+      - Preserve report_unlock / unlock_success semantics as active benefit grants with valid attempt relationships.
+      - Exclude inactive, expired, revoked, and unrelated grants.
+      - Keep production refresh, production DB writes, migrations, scheduler changes, GA/Baidu settings, Search Channel actions, URL submissions, and write guards out of scope.
+    validation:
+      - cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi
+      - cd backend && php artisan test --filter=AnalyticsFunnelRefreshDryRunSqlFix01 --no-ansi
+      - cd backend && php artisan test --filter=RefreshAnalyticsFunnelDailyCommand --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/analytics-funnel-refresh-dry-run-sql-fix-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01
+
   - id: CONTENT-PACKS-INDEX-ARTIFACT-01
     repo: fap-api
     branch: fix/content-packs-index-artifact-01
@@ -16309,6 +16358,63 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: explicit production deployment approval remains required after review
+
+  - id: OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01
+    repo: fap-api
+    branch: ops/release-train-workflow-production-env-binding-01
+    base: main
+    title: "OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01 bind run job to production environment"
+    train_scope: release_train_workflow_production_environment_binding
+    risk_level: p0_deploy_guarded_workflow
+    depends_on:
+      - OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01 merged and dry-run validated
+    allowed_paths:
+      - .github/workflows/release-train.yml
+      - tests/ops/test_release_train_workflow.py
+      - docs/ops/release-train.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Bind the actual release-train run job to GitHub environment production.
+      - Keep validate, plan, and dry-run paths outside production environment approval.
+      - Guard the deploy-capable run job with mode=run, allow_deploy=true, and dry_run!=true.
+      - Document that production environment branch restriction to main remains a manual GitHub setting.
+      - Add static tests for workflow dry-run safety and production environment binding.
+    do_not:
+      - Do not deploy, run mode=run, approve production, mutate production, or run SSH.
+      - Do not modify .github/workflows/deploy.yml or .github/workflows/ci.yml.
+      - Do not modify deploy.php, backend app/business code, migrations, content baselines, CMS, DB, production env, fap-web, sitemap, llms, Search Channel, or URL submission files.
+      - Do not enable rollback, frontend deploy, auto merge, or production approval bypass.
+      - Do not print, read, create, update, or delete secret values.
+    validation:
+      - python3 -m json.tool ops/release-train/examples/release-train.example.json >/dev/null
+      - python3 ops/release-train/release_train.py validate-manifest --manifest ops/release-train/examples/release-train.example.json
+      - python3 ops/release-train/release_train.py plan --manifest ops/release-train/examples/release-train.example.json
+      - python3 ops/release-train/release_train.py dry-run --manifest ops/release-train/examples/release-train.example.json
+      - python3 -m unittest discover tests/ops
+      - bash -n backend/scripts/deploy/deploy_backend.sh
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('.github/workflows/release-train.yml').read_text()); print('workflow yaml ok')"
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('train yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+      - bash backend/scripts/ci_verify_mbti.sh
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: after merge restrict GitHub production environment branch policy to main and rerun dry-run/readiness
 
   - id: PR-POL-01
     repo: fap-api
