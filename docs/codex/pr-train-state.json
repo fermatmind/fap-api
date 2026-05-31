@@ -23570,7 +23570,7 @@
       "INDEXNOW-LIVE-00"
     ],
     "commit_sha": "96363c840426a49575787bf6292f5d65c7be6f84",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1775",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -33425,6 +33425,11 @@
         "status": "local_checks_passed",
         "at": "2026-05-31T00:00:00+08:00",
         "summary": "Scoped local validation passed for the share_click SQL compatibility fix."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T00:00:00+08:00",
+        "summary": "Opened PR #1775 after scoped local validations passed."
       }
     ],
     "scope_validation": {
