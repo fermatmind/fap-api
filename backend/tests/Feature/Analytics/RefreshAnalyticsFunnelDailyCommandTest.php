@@ -34,9 +34,11 @@ final class RefreshAnalyticsFunnelDailyCommandTest extends TestCase
             '--from' => $scenario['day'],
             '--to' => $scenario['day'],
             '--org' => [91],
+            '--confirm-write' => 'analytics_funnel_daily:write:'.$scenario['day'].':'.$scenario['day'].':org=91:scale=all',
         ])
             ->expectsOutputToContain('dry_run=0')
             ->expectsOutputToContain('upserted_rows=2')
+            ->expectsOutputToContain('write_guard=passed')
             ->assertExitCode(0);
 
         $this->assertSame(2, DB::table('analytics_funnel_daily')->count());
@@ -45,6 +47,7 @@ final class RefreshAnalyticsFunnelDailyCommandTest extends TestCase
             '--from' => $scenario['day'],
             '--to' => $scenario['day'],
             '--org' => [91],
+            '--confirm-write' => 'analytics_funnel_daily:write:'.$scenario['day'].':'.$scenario['day'].':org=91:scale=all',
         ])->assertExitCode(0);
 
         $this->assertSame(2, DB::table('analytics_funnel_daily')->count());
