@@ -72,6 +72,14 @@ class PaymentWebhookTrustBoundaryTest extends TestCase
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_trust_sig_1')
             ->value('last_error_code'));
+        $this->assertNull(DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_trust_sig_1')
+            ->value('payload_sha256'));
+        $this->assertNull(DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_trust_sig_1')
+            ->value('payload_excerpt'));
         $this->assertSame(0, DB::table('benefit_wallet_ledgers')->count());
     }
 
@@ -131,5 +139,48 @@ class PaymentWebhookTrustBoundaryTest extends TestCase
             ->where('provider_event_id', 'evt_trust_evt_1')
             ->value('reason'));
         $this->assertSame('created', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
+    }
+
+    public function test_invalid_duplicate_does_not_overwrite_trusted_processed_event(): void
+    {
+        (new Pr19CommerceSeeder)->run();
+        $orderNo = 'ord_trust_dup_sig_1';
+        $this->seedOrder($orderNo);
+
+        $processor = app(PaymentWebhookProcessor::class);
+        $paid = $processor->handle('billing', [
+            'provider_event_id' => 'evt_trust_dup_sig_1',
+            'order_no' => $orderNo,
+            'amount_cents' => 4990,
+            'currency' => 'USD',
+            'event_type' => 'payment_succeeded',
+        ], 0, null, null, true);
+
+        $this->assertTrue((bool) ($paid['ok'] ?? false));
+
+        $trustedDigest = (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_trust_dup_sig_1')
+            ->value('payload_sha256');
+        $this->assertNotSame('', $trustedDigest);
+
+        $invalid = $processor->handle('billing', [
+            'provider_event_id' => 'evt_trust_dup_sig_1',
+            'order_no' => $orderNo,
+            'amount_cents' => 1,
+            'currency' => 'USD',
+            'event_type' => 'payment_succeeded',
+        ], 0, null, null, false);
+
+        $this->assertFalse((bool) ($invalid['ok'] ?? true));
+        $this->assertSame('INVALID_SIGNATURE', (string) ($invalid['error_code'] ?? ''));
+        $this->assertSame('processed', (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_trust_dup_sig_1')
+            ->value('status'));
+        $this->assertSame($trustedDigest, (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_trust_dup_sig_1')
+            ->value('payload_sha256'));
     }
 }

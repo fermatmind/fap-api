@@ -16977,6 +16977,69 @@ prs:
     frontend_fallback_authority: false
     next_task: AUDIT-SEC-PAYMENT-INTEGRITY-01
 
+  - id: AUDIT-SEC-PAYMENT-INTEGRITY-01
+    repo: fap-api
+    branch: audit/sec-payment-integrity-01
+    base: main
+    title: "AUDIT-SEC-PAYMENT-INTEGRITY-01 harden payment integrity boundaries"
+    train_scope: payment_integrity_boundary
+    risk_level: high_security_payment_integrity
+    depends_on:
+      - AUDIT-SEC-RESULT-IDENTITY-01 merged
+    allowed_paths:
+      - backend/app/Console/Commands/*Alipay*
+      - backend/app/Console/Commands/*Payment*
+      - backend/app/Console/Commands/*Commerce*
+      - backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php
+      - backend/app/Services/Commerce/**
+      - backend/app/Services/Payment/**
+      - backend/app/Models/Order.php
+      - backend/app/Models/PaymentEvent.php
+      - backend/app/Models/BenefitGrant.php
+      - backend/config/fap.php
+      - backend/routes/api.php
+      - backend/tests/Feature/Commerce/**
+      - backend/tests/Unit/Commerce/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/commerce/**
+      - backend/docs/runbooks/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Bound Alipay compensation scheduler against provider-polling abuse.
+      - Ensure payment event digest/audit rows are trusted only after provider signature/binding validation.
+      - Remove or redact committed production order details from repo artifacts/docs.
+      - Add focused payment integrity tests.
+    do_not:
+      - Do not deploy, mutate production, run production SSH, or approve production environments.
+      - Do not execute payment compensation against production or mutate production orders.
+      - Do not add new payment providers, routes, migrations, checkout flows, or entitlement products.
+      - Do not modify content packs, CMS content, fap-web, sitemap, llms, Search Channel, or URL submission files.
+    validation:
+      - cd backend && php artisan test --filter=Payment --no-ansi
+      - cd backend && php artisan test --filter=Alipay --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-payment-integrity-01.sqlite php artisan migrate --force --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: AUDIT-SEC-CONTENT-PUBLISH-GATES-01
+
   - id: PR-POL-01
     repo: fap-api
     branch: content/pr-pol-01-policies-dashboard

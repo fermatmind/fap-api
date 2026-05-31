@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:11:00+08:00",
+  "updated_at": "2026-05-31T16:14:44+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -34459,7 +34459,7 @@
     "branch": "audit/sec-result-identity-01",
     "base": "main",
     "title": "AUDIT-SEC-RESULT-IDENTITY-01 harden result recovery identity boundary",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "AUDIT-SEC-RELEASE-TRAIN-01 merged"
     ],
@@ -34474,14 +34474,14 @@
       "github_checks": "PR #1786 second CI run green: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload."
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-31T07:57:19Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -34507,9 +34507,122 @@
         "from": "ci_scope_fix_in_progress",
         "to": "github_checks_green",
         "note": "PR #1786 checks green after current-scope runtime-freeze classifier fix."
+      },
+      {
+        "at": "2026-05-31T16:00:28+08:00",
+        "from": "github_checks_green",
+        "to": "merged_and_cleaned",
+        "note": "PR #1786 squash merged; origin/main contains merge commit; local main synced; local and remote task branches cleaned."
       }
     ],
     "sidecars": [],
-    "next_task": "AUDIT-SEC-PAYMENT-INTEGRITY-01"
+    "next_task": "AUDIT-SEC-PAYMENT-INTEGRITY-01",
+    "merge_commit": "9e59c976a71811e76f9a70c64eb6380cf0a25878"
+  },
+  "AUDIT-SEC-PAYMENT-INTEGRITY-01": {
+    "id": "AUDIT-SEC-PAYMENT-INTEGRITY-01",
+    "repo": "fap-api",
+    "branch": "audit/sec-payment-integrity-01",
+    "base": "main",
+    "title": "AUDIT-SEC-PAYMENT-INTEGRITY-01 harden payment integrity boundaries",
+    "status": "local_scope_validation_passed",
+    "depends_on": [
+      "AUDIT-SEC-RESULT-IDENTITY-01 merged"
+    ],
+    "checks": {
+      "authorization": "user explicitly authorized adding remaining SECURITY-AUDIT-36 PR train items to manifest/state",
+      "workspace_safety": "using isolated worktree /private/tmp/fap-api-audit-sec-payment-integrity-01; dirty primary worktree untouched",
+      "deploy_safety_boundary": "no deploy, no production mutation, no production SSH",
+      "focused_local": {
+        "status": "passed_with_existing_file_cache_warnings",
+        "commands": [
+          "cd backend && composer dump-autoload --no-ansi",
+          "cd backend && php artisan test --filter='AlipayPendingCompensationScheduler|PaymentWebhookTrustBoundary|PaymentWebhookIdempotency|OrderGrantProjectionReadonlyOrd1093b7e6' --no-ansi",
+          "cd backend && php artisan test --filter='PaymentRepairEngine|PaymentWebhookTrustBoundary|PaymentWebhookIdempotency' --no-ansi"
+        ],
+        "evidence": "Exit code 0; payment boundary, idempotency, repair, scheduler, and redaction tests passed; warnings were existing file cache warnings."
+      },
+      "manifest_local": {
+        "status": "passed_with_sidecar_for_broad_payment_filter",
+        "commands": [
+          "cd backend && php artisan test --filter=Payment --no-ansi",
+          "cd backend && php artisan test --filter=Alipay --no-ansi"
+        ],
+        "evidence": "Alipay filter passed. Broad Payment filter had two external failures outside changed paths: EmailOutboxLifecycleContextTest checkout fixture 404 and PaymentWebhookCnCallbackTest WeChat signature fixture 400; scoped payment-boundary tests passed."
+      },
+      "acceptance": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-payment-integrity-01.sqlite php artisan migrate --force --no-ansi",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 - <<PY\nimport yaml\nfrom pathlib import Path\nyaml.safe_load(Path(\"docs/codex/pr-train.yaml\").read_text())\nPY",
+          "rg raw production order id scan on backend/docs backend/tests docs/codex"
+        ],
+        "evidence": "route:list passed; sqlite migrate passed; ci_verify_mbti.sh passed; diff check passed; manifest/state parse passed; raw production order id scan passed."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-05-31T16:00:28+08:00",
+        "from": "authorized",
+        "to": "in_progress",
+        "note": "Started from latest origin/main after AUDIT-SEC-RESULT-IDENTITY-01 post-merge cleanup."
+      },
+      {
+        "at": "2026-05-31T16:07:16+08:00",
+        "from": "in_progress",
+        "to": "local_scope_validation_in_progress",
+        "note": "Scoped payment integrity implementation completed; focused tests passed; running full acceptance next."
+      },
+      {
+        "at": "2026-05-31T16:14:44+08:00",
+        "from": "local_scope_validation_in_progress",
+        "to": "local_scope_validation_passed",
+        "note": "Focused payment integrity tests, Alipay filter, route list, sqlite migrate, ci_verify_mbti, diff check, manifest parse, and redaction scan passed; broad Payment filter external fixture failures registered as sidecar."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "broad_payment_filter_external_fixture_failures",
+        "status": "registered_non_blocking",
+        "summary": "php artisan test --filter=Payment has two failures outside this PR scope: EmailOutboxLifecycleContextTest checkout fixture returns 404, and PaymentWebhookCnCallbackTest valid WeChat callback fixture returns 400 because signature is empty. Scoped payment-boundary tests and required ci_verify_mbti.sh pass."
+      }
+    ],
+    "next_task": "AUDIT-SEC-CONTENT-PUBLISH-GATES-01",
+    "implementation_summary": [
+      "Bound Alipay pending compensation scheduler to every ten minutes, only stale orders, limit 10, older-than-minutes 60.",
+      "Deferred trusted payment payload digest/forensics promotion until provider signature and order/provider binding validation pass.",
+      "Ignored invalid duplicate webhook payloads without overwriting an existing trusted processed payment event.",
+      "Redacted committed production order number from order grant/projection read-only artifacts."
+    ],
+    "changed_files": [
+      "backend/app/Console/Kernel.php",
+      "backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php",
+      "backend/bootstrap/app.php",
+      "backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php",
+      "backend/docs/commerce/generated/order-grant-projection-readonly-ord-1093b7e6.v1.json",
+      "backend/docs/commerce/order-grant-projection-readonly-ord-1093b7e6.md",
+      "backend/docs/runbooks/alipay-pending-compensation.md",
+      "backend/tests/Feature/Commerce/AlipayPendingCompensationSchedulerTest.php",
+      "backend/tests/Feature/Commerce/OrderGrantProjectionReadonlyOrd1093b7e6Test.php",
+      "backend/tests/Feature/Commerce/PaymentWebhookIdempotencyTest.php",
+      "backend/tests/Feature/Commerce/PaymentWebhookTrustBoundaryTest.php",
+      "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ]
   }
 }

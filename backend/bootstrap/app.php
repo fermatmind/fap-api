@@ -39,7 +39,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('storage:inventory --json')->weeklyOn(1, '04:10')->withoutOverlapping();
         $schedule->command('storage:control-plane-snapshot --json')->dailyAt('04:20')->withoutOverlapping();
         $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
-        $schedule->command('commerce:compensate-pending-orders --provider=alipay --include-created --limit=50 --older-than-minutes=15')->everyFiveMinutes()->withoutOverlapping();
+        $schedule->command('commerce:compensate-pending-orders --provider=alipay --include-created --only-stale --limit=10 --older-than-minutes=60')->everyTenMinutes()->withoutOverlapping();
         $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();
         $schedule->command('eq60:psychometrics --window=last_90_days')->weeklyOn(1, '04:20')->withoutOverlapping();

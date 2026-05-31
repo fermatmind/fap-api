@@ -16,7 +16,8 @@ final class OrderGrantProjectionReadonlyOrd1093b7e6Test extends TestCase
 
         $payload = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
 
-        $this->assertSame('ord_1093b7e6-073a-4d93-b26d-4a68a819fa23', $payload['order_no']);
+        $this->assertSame('redacted_production_order_ref_1093b7e6', $payload['order_ref']);
+        $this->assertArrayNotHasKey('order_no', $payload);
         $this->assertTrue($payload['production_readonly_verification']);
         $this->assertTrue($payload['no_write_performed']);
         $this->assertTrue($payload['no_env_edit']);

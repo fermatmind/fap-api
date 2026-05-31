@@ -340,5 +340,9 @@ class PaymentWebhookIdempotencyTest extends TestCase
             ->where('provider', 'stripe')
             ->where('provider_event_id', 'evt_sig_1')
             ->value('last_error_code'));
+        $this->assertNull(DB::table('payment_events')
+            ->where('provider', 'stripe')
+            ->where('provider_event_id', 'evt_sig_1')
+            ->value('payload_sha256'));
     }
 }

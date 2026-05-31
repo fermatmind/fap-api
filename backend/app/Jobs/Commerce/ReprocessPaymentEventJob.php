@@ -57,7 +57,17 @@ class ReprocessPaymentEventJob implements ShouldQueue
 
         $signatureOk = (bool) ($event->signature_ok ?? false);
         $originalStatus = strtolower(trim((string) ($event->status ?? '')));
-        $result = $processor->process($provider, $payload, $signatureOk);
+        $result = $processor->handle(
+            $provider,
+            $payload,
+            $effectiveOrgId,
+            null,
+            null,
+            $signatureOk,
+            $this->payloadMeta($event),
+            trim((string) ($event->payload_sha256 ?? '')),
+            is_numeric($event->payload_size_bytes ?? null) ? (int) $event->payload_size_bytes : -1
+        );
 
         if (($result['ok'] ?? false) === true) {
             $repair = $this->repairOrderIfNeeded($event, $orderRepair, $effectiveOrgId);
@@ -159,6 +169,18 @@ class ReprocessPaymentEventJob implements ShouldQueue
                 'error_message' => mb_substr($message, 0, 255),
             ],
         );
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function payloadMeta(object $event): array
+    {
+        return [
+            'sha256' => trim((string) ($event->payload_sha256 ?? '')),
+            'size_bytes' => is_numeric($event->payload_size_bytes ?? null) ? (int) $event->payload_size_bytes : null,
+            's3_key' => trim((string) ($event->payload_s3_key ?? '')) ?: null,
+        ];
     }
 
     private function writeAudit(int $orgId, string $action, string $targetType, string $targetId, string $orderNo, array $meta): void

@@ -1,10 +1,10 @@
 # Order Grant / Projection Read-only Check
 
-Task: `ORDER-GRANT-PROJECTION-READONLY-ORD-1093B7E6`
+Task: `ORDER-GRANT-PROJECTION-READONLY-REDACTED-1093B7E6`
 
 Order checked:
 
-- `ord_1093b7e6-073a-4d93-b26d-4a68a819fa23`
+- `redacted_production_order_ref_1093b7e6`
 
 ## Summary
 
@@ -23,6 +23,7 @@ The order wait page behavior is consistent with the backend state: payment has n
 ## Read-only Evidence
 
 The production checks used SELECT-only Laravel query builder reads through the production application context. No public order endpoint was called because that endpoint can invoke projection repair when a result exists.
+The committed packet stores only a redacted production order reference; the raw production order number is intentionally not retained in repository artifacts.
 
 Observed order state:
 
