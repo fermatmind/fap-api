@@ -451,6 +451,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_eq_sjt_16_scorer_ready_files(): void
+    {
+        $changed = [
+            'backend/app/Services/Assessment/Scorers/EqSjt16Scorer.php',
+            'backend/content_packs/EQ_SJT_16/v1/raw/golden_cases.json',
+            'backend/content_packs/EQ_SJT_16/v1/raw/items.json',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_eq_journey_state_contract_changes(): void
     {
         $changed = [
@@ -2983,6 +2994,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEqSjt16ScorerReadyChange($file)) {
+                continue;
+            }
+
             if ($this->isEq60JourneyStateContractChange($file)) {
                 continue;
             }
@@ -4084,6 +4099,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/content_packs/EQ_SJT_16/v1/raw/item_schema.json',
             'backend/content_packs/EQ_SJT_16/v1/raw/module_contract.json',
             'backend/content_packs/EQ_SJT_16/v1/raw/scoring_rubric_draft.json',
+        ], true);
+    }
+
+    private function isEqSjt16ScorerReadyChange(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Assessment/Scorers/EqSjt16Scorer.php',
+            'backend/content_packs/EQ_SJT_16/v1/raw/golden_cases.json',
+            'backend/content_packs/EQ_SJT_16/v1/raw/items.json',
         ], true);
     }
 

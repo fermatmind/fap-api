@@ -1,0 +1,100 @@
+{
+  "schema": "eq_sjt_16.golden_cases.v1",
+  "module_code": "EQ_SJT_16",
+  "pack_version": "v1",
+  "cases": [
+    {
+      "case_id": "balanced_effective",
+      "description": "Alternates high and partially effective responses across all eight domains.",
+      "answers": {
+        "emotion_cue_reading_01": "A",
+        "emotion_cue_reading_02": "B",
+        "pressure_pause_01": "A",
+        "pressure_pause_02": "B",
+        "feedback_response_01": "A",
+        "feedback_response_02": "B",
+        "conflict_deescalation_01": "A",
+        "conflict_deescalation_02": "B",
+        "empathic_response_01": "A",
+        "empathic_response_02": "B",
+        "boundary_setting_01": "A",
+        "boundary_setting_02": "B",
+        "relationship_repair_01": "A",
+        "relationship_repair_02": "B",
+        "constructive_influence_01": "A",
+        "constructive_influence_02": "B"
+      },
+      "expected": {
+        "raw_score": 40,
+        "score_pct": 83.33,
+        "band": "strong",
+        "top_strategy": "CUE",
+        "lowest_strategy": "CUE",
+        "quality_level": "A",
+        "quality_flags": []
+      }
+    },
+    {
+      "case_id": "boundary_gap",
+      "description": "Mostly effective responses with weak boundary-setting choices.",
+      "answers": {
+        "emotion_cue_reading_01": "A",
+        "emotion_cue_reading_02": "B",
+        "pressure_pause_01": "A",
+        "pressure_pause_02": "B",
+        "feedback_response_01": "A",
+        "feedback_response_02": "B",
+        "conflict_deescalation_01": "A",
+        "conflict_deescalation_02": "B",
+        "empathic_response_01": "A",
+        "empathic_response_02": "B",
+        "boundary_setting_01": "D",
+        "boundary_setting_02": "C",
+        "relationship_repair_01": "A",
+        "relationship_repair_02": "B",
+        "constructive_influence_01": "A",
+        "constructive_influence_02": "B"
+      },
+      "expected": {
+        "raw_score": 36,
+        "score_pct": 75,
+        "band": "effective",
+        "top_strategy": "CUE",
+        "lowest_strategy": "BND",
+        "quality_level": "A",
+        "quality_flags": []
+      }
+    },
+    {
+      "case_id": "low_effectiveness",
+      "description": "Alternates low and high-risk responses to verify low-effectiveness scoring boundaries.",
+      "answers": {
+        "emotion_cue_reading_01": "C",
+        "emotion_cue_reading_02": "D",
+        "pressure_pause_01": "C",
+        "pressure_pause_02": "D",
+        "feedback_response_01": "C",
+        "feedback_response_02": "D",
+        "conflict_deescalation_01": "C",
+        "conflict_deescalation_02": "D",
+        "empathic_response_01": "C",
+        "empathic_response_02": "D",
+        "boundary_setting_01": "C",
+        "boundary_setting_02": "D",
+        "relationship_repair_01": "C",
+        "relationship_repair_02": "D",
+        "constructive_influence_01": "C",
+        "constructive_influence_02": "D"
+      },
+      "expected": {
+        "raw_score": 8,
+        "score_pct": 16.67,
+        "band": "low_effectiveness",
+        "top_strategy": "CUE",
+        "lowest_strategy": "CUE",
+        "quality_level": "B",
+        "quality_flags": ["low_effectiveness_pattern"]
+      }
+    }
+  ]
+}

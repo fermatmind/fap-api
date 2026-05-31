@@ -4,19 +4,19 @@
   "item_count": 16,
   "item_format": {
     "stem": {
-      "field": "scenario_stem",
+      "field": "scenario_stem_asset_id",
       "required": true,
-      "localized": true,
-      "description": "A brief emotionally relevant situation. The stem must avoid clinical, hiring, legal, or emergency decision contexts."
+      "localized": false,
+      "description": "A stable asset reference for a future localized scenario stem. Runtime copy is not included in PR-EQ-SJT-02."
     },
     "response_options": {
       "required": true,
       "count": 4,
-      "localized": true,
+      "localized": false,
       "option_fields": [
         "option_id",
-        "text",
         "strategy_tag",
+        "strategy_scores",
         "partial_credit",
         "risk_notes"
       ]
@@ -43,7 +43,8 @@
     }
   },
   "non_operational_placeholder": {
-    "items_included": false,
-    "reason": "PR-EQ-SJT-01 defines the skeleton only. Formal items must be added in a later content-pack PR after review."
+    "items_included": true,
+    "runtime_available": false,
+    "reason": "PR-EQ-SJT-02 adds scorer-ready item metadata and golden cases, but runtime take entry remains unavailable until the frontend take-flow PR."
   }
 }
