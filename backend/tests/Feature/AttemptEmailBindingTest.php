@@ -6,6 +6,9 @@ namespace Tests\Feature;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Models\EmailPreference;
+use App\Services\Email\EmailCaptureService;
+use App\Services\Email\EmailPreferenceService;
 use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -72,6 +75,47 @@ final class AttemptEmailBindingTest extends TestCase
         $this->assertSame('owner@example.test', (string) ($payloadEnc['to_email'] ?? ''));
         $this->assertStringStartsWith("/zh/result/{$attemptId}?access_token=", (string) ($payloadEnc['result_access_url'] ?? ''));
         $this->assertNotEmpty((string) ($payloadEnc['result_access_token'] ?? ''));
+    }
+
+    public function test_report_recovery_opt_out_prevents_result_access_link_email_queue(): void
+    {
+        $anonId = 'anon_email_bind_optout';
+        $attemptId = $this->seedAttemptWithResult($anonId, 'MBTI');
+        $token = $this->seedFmToken($anonId);
+        $email = 'optout@example.test';
+        $capture = app(EmailCaptureService::class)->capture($email, ['surface' => 'preferences']);
+        $preference = EmailPreference::query()
+            ->where('subscriber_id', (string) ($capture['subscriber_id'] ?? ''))
+            ->firstOrFail();
+        $subscriber = $preference->subscriber()->firstOrFail();
+        $preferenceToken = app(EmailPreferenceService::class)->issueTokenForSubscriber($subscriber);
+        app(EmailPreferenceService::class)->updateByToken($preferenceToken, [
+            'marketing_updates' => false,
+            'report_recovery' => false,
+            'product_updates' => false,
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->postJson("/api/v0.3/attempts/{$attemptId}/email-bind", [
+            'email' => $email,
+            'locale' => 'en',
+            'surface' => 'result_gate',
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('result_access_link_email_queued', false);
+        $this->assertDatabaseHas('attempt_email_bindings', [
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'status' => 'active',
+            'source' => 'result_gate',
+        ]);
+        $this->assertSame(0, DB::table('email_outbox')
+            ->where('attempt_id', $attemptId)
+            ->where('template', 'result_access_link')
+            ->count());
     }
 
     public function test_wrong_anon_cannot_bind_someone_else_attempt(): void

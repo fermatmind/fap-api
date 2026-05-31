@@ -19,6 +19,13 @@ final class ResultEmailLookupTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['fap.rate_limits.bypass_in_test_env' => true]);
+    }
+
     public function test_lookup_by_email_lists_only_results_bound_to_current_anonymous_actor(): void
     {
         $email = 'Owner@Example.Test';
@@ -26,8 +33,11 @@ final class ResultEmailLookupTest extends TestCase
         $secondAttemptId = $this->seedAttemptWithResult('anon_lookup_b', 'BIG5_OCEAN', 'OCEAN-HIGH', now()->subMinute());
         $this->seedBinding($firstAttemptId, $email, 'anon_lookup_a');
         $this->seedBinding($secondAttemptId, $email, 'anon_lookup_b');
+        $token = $this->seedFmToken('anon_lookup_a');
 
-        $response = $this->withHeader('X-Anon-Id', 'anon_lookup_a')
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])
             ->postJson('/api/v0.3/results/lookup-by-email', [
                 'email' => ' owner@example.test ',
                 'locale' => 'zh-CN',
@@ -57,8 +67,11 @@ final class ResultEmailLookupTest extends TestCase
         $secondAttemptId = $this->seedAttemptWithResult('anon_lookup_b', 'BIG5_OCEAN', 'OCEAN-HIGH', now()->subMinute());
         $this->seedBinding($firstAttemptId, $email, 'anon_lookup_a');
         $this->seedBinding($secondAttemptId, $email, 'anon_lookup_b');
+        $token = $this->seedFmToken('anon_lookup_other');
 
-        $response = $this->withHeader('X-Anon-Id', 'anon_lookup_other')
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])
             ->postJson('/api/v0.3/results/lookup-by-email', [
                 'email' => ' owner@example.test ',
                 'locale' => 'zh-CN',
@@ -75,14 +88,18 @@ final class ResultEmailLookupTest extends TestCase
 
     public function test_lookup_by_email_returns_empty_items_for_no_matches(): void
     {
-        $response = $this->postJson('/api/v0.3/results/lookup-by-email', [
+        $token = $this->seedFmToken('anon_lookup_missing');
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/results/lookup-by-email', [
             'email' => 'missing@example.test',
             'locale' => 'en',
         ]);
 
         $response->assertOk();
         $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('email_verification_required', true);
+        $response->assertJsonPath('email_verification_required', false);
         $response->assertJsonCount(0, 'items');
     }
 
@@ -95,8 +112,11 @@ final class ResultEmailLookupTest extends TestCase
         $this->seedBinding($activeAttemptId, $email, 'anon_lookup_active');
         $this->seedBinding($inactiveAttemptId, $email, 'anon_lookup_inactive', 'pending');
         $this->seedBinding($sensitiveAttemptId, $email, 'anon_lookup_sds');
+        $token = $this->seedFmToken('anon_lookup_active');
 
-        $response = $this->withHeader('X-Anon-Id', 'anon_lookup_active')
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])
             ->postJson('/api/v0.3/results/lookup-by-email', [
                 'email' => $email,
                 'locale' => 'en',
@@ -121,21 +141,63 @@ final class ResultEmailLookupTest extends TestCase
 
         $email = 'ratelimit_'.Str::lower(Str::random(12)).'@example.test';
         $server = ['REMOTE_ADDR' => '198.51.100.77'];
+        $token = $this->seedFmToken('anon_lookup_rate_limited');
         foreach (['127.0.0.1', '198.51.100.77'] as $ip) {
             RateLimiter::clear('ip:'.$ip);
             RateLimiter::clear('api_result_lookup|ip:'.$ip.'|org:0|route:api/v0.3/results/lookup-by-email');
             RateLimiter::clear('api_result_lookup|ip:'.$ip.'|org:0|route:v0.3/results/lookup-by-email');
         }
 
-        $this->withServerVariables($server)->postJson('/api/v0.3/results/lookup-by-email', [
+        $this->withServerVariables($server)->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/results/lookup-by-email', [
             'email' => $email,
         ])->assertOk();
 
-        $this->withServerVariables($server)->postJson('/api/v0.3/results/lookup-by-email', [
+        $this->withServerVariables($server)->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/results/lookup-by-email', [
             'email' => $email,
         ])
             ->assertStatus(429)
             ->assertJsonPath('error_code', 'RATE_LIMIT_RESULT_LOOKUP');
+    }
+
+    public function test_lookup_by_email_without_server_side_identity_requires_verification(): void
+    {
+        $response = $this->postJson('/api/v0.3/results/lookup-by-email', [
+            'email' => 'owner@example.test',
+            'locale' => 'en',
+        ]);
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('email_verification_required', true)
+            ->assertJsonCount(0, 'items');
+    }
+
+    public function test_lookup_by_email_ignores_spoofed_transport_anon_id_when_token_actor_differs(): void
+    {
+        $email = 'Owner@Example.Test';
+        $firstAttemptId = $this->seedAttemptWithResult('anon_lookup_real_actor', 'MBTI', 'INTJ-A', now()->subMinutes(5));
+        $secondAttemptId = $this->seedAttemptWithResult('anon_lookup_spoof_target', 'BIG5_OCEAN', 'OCEAN-HIGH', now()->subMinute());
+        $this->seedBinding($firstAttemptId, $email, 'anon_lookup_real_actor');
+        $this->seedBinding($secondAttemptId, $email, 'anon_lookup_spoof_target');
+        $token = $this->seedFmToken('anon_lookup_real_actor');
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+            'X-Anon-Id' => 'anon_lookup_spoof_target',
+        ])->postJson('/api/v0.3/results/lookup-by-email', [
+            'email' => ' owner@example.test ',
+            'locale' => 'en',
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonPath('email_verification_required', false);
+        $response->assertJsonCount(1, 'items');
+        $response->assertJsonPath('items.0.attempt_id', $firstAttemptId);
+        $this->assertStringNotContainsString($secondAttemptId, $response->getContent());
     }
 
     private function seedAttemptWithResult(string $anonId, string $scaleCode, string $typeCode, mixed $submittedAt): string
@@ -208,5 +270,24 @@ final class ResultEmailLookupTest extends TestCase
             'created_at' => now()->subMinute(),
             'updated_at' => now()->subMinute(),
         ]);
+    }
+
+    private function seedFmToken(string $anonId): string
+    {
+        $token = 'fm_'.(string) Str::uuid();
+
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'anon_id' => $anonId,
+            'user_id' => null,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addHour(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
     }
 }

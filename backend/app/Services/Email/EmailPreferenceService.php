@@ -457,6 +457,7 @@ class EmailPreferenceService
         return in_array(trim($templateKey), [
             'payment_success',
             'report_claim',
+            'result_access_link',
             'post_purchase_followup',
             'report_reactivation',
         ], true);

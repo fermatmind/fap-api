@@ -430,6 +430,23 @@ class EmailOutboxService
 
         $emailHash = $this->piiCipher->emailHash($email);
         $emailEnc = $this->piiCipher->encrypt($email);
+        if (! $this->emailCaptures->allowsReportRecovery($email)) {
+            return [
+                'ok' => true,
+                'queued' => false,
+                'reason' => 'report_recovery_disabled',
+            ];
+        }
+
+        $deliveryPolicy = $this->emailPreferences->deliveryPolicyForEmail($email, self::RESULT_ACCESS_LINK_TEMPLATE);
+        if (! (bool) ($deliveryPolicy['allowed'] ?? false)) {
+            return [
+                'ok' => true,
+                'queued' => false,
+                'reason' => (string) ($deliveryPolicy['reason'] ?? 'delivery_not_allowed'),
+            ];
+        }
+
         $locale = $this->resolveRequestedLocale($attemptId, $preferredLocale);
         $subject = $this->defaultSubjectForTemplate(self::RESULT_ACCESS_LINK_TEMPLATE, $locale);
         $outboxUserId = $this->resultAccessLinkOutboxUserId($binding);
