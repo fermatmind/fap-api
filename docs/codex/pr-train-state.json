@@ -160,11 +160,11 @@
     "PR-EQ-PER-05": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-05-cross-assessment-guard",
-      "status": "open",
+      "status": "merged",
       "depends_on": [
         "PR-EQ-PER-04"
       ],
-      "commit_sha": "555f1e3aaa7b3e7b590dcb47d50481980ef12f7f",
+      "commit_sha": "ad5dc761ee46b3e4600f6d1fe37712a6ddcf12ab",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1801",
       "checks": {
         "local": {
@@ -193,20 +193,53 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-31T14:33:13Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-EQ-PER-06": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-06-english-seo-geo-authority",
-      "status": "pending",
+      "status": "open",
       "depends_on": [
         "PR-EQ-PER-05"
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "checks": {},
+      "commit_sha": "22e820b6219ee7f14050887eb4045663ba6a0e2a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1808",
+      "checks": {
+        "local": {
+          "status": "passed_with_external_sidecars",
+          "commands": [
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60EnglishSeoGeoAuthorityPackTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Content",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Seo",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60",
+            "git diff --check"
+          ],
+          "passed": [
+            "Eq60EnglishSeoGeoAuthorityPackTest",
+            "Eq60ContentGateTest",
+            "Eq60"
+          ],
+          "sidecar_external_checks": [
+            {
+              "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Content",
+              "status": "failed_on_pr_branch_and_origin_main",
+              "origin_main_revalidation": "A clean origin/main worktree reproduced the Content failures: CulturalCalibrationLayerServiceTest governance/runtime.locale_policy drift, Career release verify missing career_job_list output, OpsCustomPagesI18nContractTest English phrase leakage, and SupportTrustCmsApiTest internal content-pages 401.",
+              "classification": "external_pre_existing_not_current_pr_scope"
+            },
+            {
+              "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Seo",
+              "status": "failed_on_pr_branch_and_origin_main",
+              "origin_main_revalidation": "A clean origin/main worktree reproduced the same failing Seo families: career progressive closeout, crawler log canary runtime, ops SEO native dashboard UI/panels, SearchChannelLive02 preflight host redaction, and CareerJobPublicApi SEO 404 cases.",
+              "classification": "external_pre_existing_not_current_pr_scope"
+            }
+          ],
+          "scope_validation": "passed; changed files are limited to backend EQ content-pack assets/compiled outputs, EQ content loading/linting/API projection, EQ content/SEO tests, and PR train state.",
+          "notes": "PR06 focused EQ authority tests pass. Manifest-wide Content and Seo filters currently include external failing families that reproduce on origin/main and do not affect the EQ SEO/GEO authority contract."
+        }
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,

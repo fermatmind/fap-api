@@ -809,6 +809,7 @@ final class Eq60ContentLintService
             'career_environment',
             'action_prescriptions',
             'cross_assessment_context',
+            'seo_geo_authority',
             'sjt_bridge',
         ];
 
@@ -952,6 +953,18 @@ final class Eq60ContentLintService
                 'claim_boundary',
             ], $errors);
         }
+
+        $seoGeoAssets = (array) data_get($docs, 'seo_geo_authority.assets', []);
+        $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/seo_geo_authority.json', $version), (array) ($seoGeoAssets['eq.seo_geo_authority.en_landing.default'] ?? []), [
+            'meta_title',
+            'meta_description',
+            'h1',
+            'dek',
+            'entity_summary',
+            'llms_summary',
+            'claim_boundary',
+            'source_authority',
+        ], $errors);
 
         $sjtAssets = (array) data_get($docs, 'sjt_bridge.assets', []);
         $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/sjt_bridge.json', $version), (array) ($sjtAssets['eq.sjt_bridge.planned'] ?? []), [

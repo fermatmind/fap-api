@@ -67,6 +67,7 @@ final class Eq60ContentGateTest extends TestCase
             'career_environment',
             'action_prescriptions',
             'cross_assessment_context',
+            'seo_geo_authority',
             'sjt_bridge',
             'personalization_routes',
         ], array_keys((array) data_get($assets, 'assets', [])));
@@ -152,6 +153,18 @@ final class Eq60ContentGateTest extends TestCase
         $this->assertFalse((bool) data_get($plannedSjt, 'zh-CN.available', true));
         $this->assertStringContainsString('not MSCEIT', (string) data_get($plannedSjt, 'en.what_it_is_not'));
 
+        $seoGeoAssets = (array) data_get($assets, 'assets.seo_geo_authority.assets', []);
+        $seoGeoAsset = is_array($seoGeoAssets['eq.seo_geo_authority.en_landing.default'] ?? null)
+            ? (array) $seoGeoAssets['eq.seo_geo_authority.en_landing.default']
+            : [];
+        $this->assertSame('/en/tests/eq-test-emotional-intelligence-assessment', (string) data_get($assets, 'assets.seo_geo_authority.public_page.canonical_path'));
+        $this->assertTrue((bool) data_get($assets, 'assets.seo_geo_authority.public_page.sitemap_eligible'));
+        $this->assertTrue((bool) data_get($assets, 'assets.seo_geo_authority.public_page.llms_eligible'));
+        $this->assertStringContainsString('Free EQ Test', (string) data_get($seoGeoAsset, 'en.meta_title'));
+        $this->assertStringContainsString('self-report', (string) data_get($seoGeoAsset, 'en.meta_description'));
+        $this->assertStringContainsString('not for clinical diagnosis', (string) data_get($seoGeoAsset, 'en.claim_boundary'));
+        $this->assertStringNotContainsString('predicts job performance', json_encode($seoGeoAsset, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '');
+
         foreach (glob(base_path('content_packs/EQ_60/v1/raw/report_assets/*.json')) ?: [] as $eq60AssetPath) {
             $mirrorPath = str_replace('/EQ_60/', '/EQ_EMOTIONAL_INTELLIGENCE/', $eq60AssetPath);
             $this->assertFileExists($mirrorPath);
@@ -188,5 +201,11 @@ final class Eq60ContentGateTest extends TestCase
         $en->assertJsonPath('locale', 'en');
         $this->assertCount(60, (array) data_get($en->json(), 'questions.items', []));
         $this->assertCount(5, (array) data_get($en->json(), 'meta.option_anchors', []));
+        $en->assertJsonPath('meta.seo_geo_authority.schema', 'eq.seo_geo_authority.public.v1');
+        $en->assertJsonPath('meta.seo_geo_authority.authority_source', 'backend_content_pack');
+        $en->assertJsonPath('meta.seo_geo_authority.canonical_path', '/en/tests/eq-test-emotional-intelligence-assessment');
+        $en->assertJsonPath('meta.seo_geo_authority.sitemap_eligible', true);
+        $en->assertJsonPath('meta.seo_geo_authority.llms_eligible', true);
+        $en->assertJsonPath('meta.seo_geo_authority.structured_data.assessment_mode', 'self_report_trait_mixed_ei');
     }
 }

@@ -302,6 +302,7 @@ final class Eq60PackLoader
             'career_environment',
             'action_prescriptions',
             'cross_assessment_context',
+            'seo_geo_authority',
             'sjt_bridge',
         ] as $key) {
             $doc = $this->readJson($rawDir.DIRECTORY_SEPARATOR.$key.'.json');
