@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T17:40:49.933746Z",
+  "updated_at": "2026-05-31T17:41:15.961282Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -23271,7 +23271,7 @@
       "branch": "codex/iq-obs-01-production-guards",
       "base": "main",
       "title": "IQ-OBS-01 add production observability guards",
-      "status": "local_scope_validation_passed",
+      "status": "committed",
       "depends_on": [
         "IQ-LIVE-RAMP-01"
       ],
@@ -23282,7 +23282,8 @@
         "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportContractTest --no-ansi": "passed_with_existing_warnings",
         "git diff --check": "passed",
         "composer_autoload_refresh": "local_environment_only: refreshed copied vendor autoload paths before manifest checks; vendor not staged",
-        "scope_validation": "passed: changed files limited to IQ-OBS-01 observability service, contract test, and train state ledger"
+        "scope_validation": "passed: changed files limited to IQ-OBS-01 observability service, contract test, and train state ledger",
+        "commit_sha": "recorded: 3ca9dc704752c43db05a1c4039eee30dfb3618b0"
       },
       "failure_reason": null,
       "merged_at": null,
@@ -23322,9 +23323,16 @@
           "from": "implementation_in_progress",
           "to": "local_scope_validation_passed",
           "note": "IQ observability guard service and contract tests passed manifest local checks with existing warning output only."
+        },
+        {
+          "at": "2026-05-31T17:41:15.961282Z",
+          "from": "local_scope_validation_passed",
+          "to": "committed",
+          "note": "Committed scoped IQ-OBS-01 implementation at 3ca9dc70."
         }
       ],
-      "updated_at": "2026-05-31T17:40:49.933746Z"
+      "updated_at": "2026-05-31T17:41:15.961282Z",
+      "commit_sha": "3ca9dc70"
     },
     "IQ-RELEASE-01": {
       "id": "IQ-RELEASE-01",
@@ -30872,11 +30880,11 @@
       "branch": "codex/iq-obs-01-production-guards",
       "base": "main",
       "title": "IQ-OBS-01 add production observability guards",
-      "status": "local_scope_validation_passed",
+      "status": "committed",
       "depends_on": [
         "IQ-LIVE-RAMP-01"
       ],
-      "commit_sha": null,
+      "commit_sha": "3ca9dc70",
       "pr_url": null,
       "checks": {
         "dependency_iq_live_ramp_01": "passed: fap-web PR #947 merged at 2026-05-31T17:32:31Z and reconciled in fap-api ledger.",
@@ -30885,7 +30893,8 @@
         "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=IqReportContractTest --no-ansi": "passed_with_existing_warnings",
         "git diff --check": "passed",
         "composer_autoload_refresh": "local_environment_only: refreshed copied vendor autoload paths before manifest checks; vendor not staged",
-        "scope_validation": "passed: changed files limited to IQ-OBS-01 observability service, contract test, and train state ledger"
+        "scope_validation": "passed: changed files limited to IQ-OBS-01 observability service, contract test, and train state ledger",
+        "commit_sha": "recorded: 3ca9dc704752c43db05a1c4039eee30dfb3618b0"
       },
       "failure_reason": null,
       "merged_at": null,
@@ -30907,7 +30916,7 @@
           "docs/codex/pr-train-state.json"
         ]
       },
-      "updated_at": "2026-05-31T17:40:49.933746Z",
+      "updated_at": "2026-05-31T17:41:15.961282Z",
       "transitions": [
         {
           "at": "2026-05-31T12:37:59+00:00",
@@ -30926,6 +30935,12 @@
           "from": "implementation_in_progress",
           "to": "local_scope_validation_passed",
           "note": "IQ observability guard service and contract tests passed manifest local checks with existing warning output only."
+        },
+        {
+          "at": "2026-05-31T17:41:15.961282Z",
+          "from": "local_scope_validation_passed",
+          "to": "committed",
+          "note": "Committed scoped IQ-OBS-01 implementation at 3ca9dc70."
         }
       ]
     }
