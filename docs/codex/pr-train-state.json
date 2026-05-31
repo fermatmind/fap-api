@@ -22523,7 +22523,7 @@
       "branch": "codex/iq-norm-03-score-claim-unlock",
       "base": "main",
       "title": "IQ-NORM-03 unlock IQ score claims through norm authority",
-      "status": "pr_open_checks_pending",
+      "status": "github_checks_green",
       "depends_on": [
         "IQ-NORM-02"
       ],
@@ -22546,9 +22546,20 @@
           "completed_at": "2026-05-31T15:05:10.943Z"
         },
         "github": {
-          "status": "pending",
+          "status": "passed",
           "pr_url": "https://github.com/fermatmind/fap-api/pull/1810",
-          "updated_at": "2026-05-31T15:07:58.019Z"
+          "checks": [
+            "hygiene",
+            "supply-chain",
+            "content-pack-build-validate",
+            "verify-bigfive",
+            "verify-mbti-legacy",
+            "verify-mbti-v2",
+            "Semgrep blocking secrets",
+            "semgrep sarif non-blocking upload",
+            "Semgrep OSS"
+          ],
+          "completed_at": "2026-05-31T15:13:00.669Z"
         }
       },
       "failure_reason": null,
@@ -22558,7 +22569,7 @@
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": null,
+        "github_checks_green": true,
         "post_merge_revalidated": null
       },
       "transitions": [
@@ -22585,9 +22596,15 @@
           "from": "local_scope_validation_passed",
           "to": "pr_open_checks_pending",
           "note": "Created PR #1810 and started waiting for GitHub required checks."
+        },
+        {
+          "at": "2026-05-31T15:13:00.669Z",
+          "from": "pr_open_checks_pending",
+          "to": "github_checks_green",
+          "note": "GitHub required checks passed for PR #1810."
         }
       ],
-      "updated_at": "2026-05-31T15:07:58.019Z",
+      "updated_at": "2026-05-31T15:13:00.669Z",
       "commit_sha": "bab1ac77",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1810",
       "pr_number": 1810
