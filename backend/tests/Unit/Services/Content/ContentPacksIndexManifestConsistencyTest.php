@@ -99,6 +99,53 @@ final class ContentPacksIndexManifestConsistencyTest extends TestCase
         $this->assertSame('v-test-2', (string) ($fresh['item']['content_package_version'] ?? ''));
     }
 
+    public function test_find_refreshes_when_cached_manifest_hash_changes_without_mtime_or_size_change(): void
+    {
+        $dirVersion = 'MBTI-CN-v-test';
+        $packDir = $this->makePackDir($dirVersion);
+        $fixedMtime = 1_700_000_000;
+
+        $this->writePack($packDir, 'PACK_A', $dirVersion, 'v-test');
+        $this->touchPackFiles($packDir, $fixedMtime);
+
+        /** @var ContentPacksIndex $index */
+        $index = app(ContentPacksIndex::class);
+
+        $first = $index->find('PACK_A', $dirVersion);
+        $this->assertTrue((bool) ($first['ok'] ?? false));
+
+        $this->writePack($packDir, 'PACK_B', $dirVersion, 'v-test');
+        $this->touchPackFiles($packDir, $fixedMtime);
+
+        $stale = $index->find('PACK_A', $dirVersion);
+        $this->assertFalse((bool) ($stale['ok'] ?? false));
+
+        $fresh = $index->find('PACK_B', $dirVersion);
+        $this->assertTrue((bool) ($fresh['ok'] ?? false));
+        $this->assertSame('PACK_B', (string) ($fresh['item']['pack_id'] ?? ''));
+    }
+
+    public function test_invalid_packs_root_response_is_not_reused_after_root_becomes_valid(): void
+    {
+        $dirVersion = 'MBTI-CN-v-test';
+        $missingRoot = $this->packsRoot.'_missing';
+
+        config()->set('content_packs.root', $missingRoot);
+        Cache::forget(CacheKeys::packsIndex());
+
+        /** @var ContentPacksIndex $index */
+        $index = app(ContentPacksIndex::class);
+        $invalid = $index->getIndex(true);
+        $this->assertFalse((bool) ($invalid['ok'] ?? true));
+
+        config()->set('content_packs.root', $this->packsRoot);
+        $this->writePack($this->makePackDir($dirVersion), 'PACK_A', $dirVersion, 'v-test');
+
+        $fresh = $index->getIndex(false);
+        $this->assertTrue((bool) ($fresh['ok'] ?? false));
+        $this->assertSame('PACK_A', (string) ($fresh['items'][0]['pack_id'] ?? ''));
+    }
+
     public function test_invalid_manifest_version_pair_is_excluded_from_index(): void
     {
         $dirVersion = 'MBTI-CN-v-invalid';

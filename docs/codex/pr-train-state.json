@@ -35370,7 +35370,7 @@
     "branch": "audit/sec-content-publish-gates-01",
     "base": "main",
     "title": "AUDIT-SEC-CONTENT-PUBLISH-GATES-01 harden content publication gates",
-    "status": "pr_open_checks_pending",
+    "status": "merged",
     "depends_on": [
       "AUDIT-SEC-PAYMENT-INTEGRITY-01 merged"
     ],
@@ -35404,19 +35404,20 @@
         "evidence": "route:list passed; sqlite migrate passed; diff/schema checks passed. ci_verify_mbti.sh failed only in existing Big5 content-pack publish/rollback temp target compiled directory assertions outside this PR scope; generated dirty artifacts were restored."
       },
       "github": {
-        "status": "pending",
-        "pr_url": "https://github.com/fermatmind/fap-api/pull/1796"
+        "status": "merged",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1796",
+        "merge_commit": "5bc34fbb8cf112b6545217809c4e92e9393a1035"
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-05-31T08:54:02Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -35436,6 +35437,12 @@
         "from": "local_scope_validation_passed_with_sidecar",
         "to": "pr_open_checks_pending",
         "note": "Created PR #1796; waiting for GitHub required checks."
+      },
+      {
+        "at": "2026-05-31T20:35:59+08:00",
+        "from": "pr_open_checks_pending",
+        "to": "merged_cleaned",
+        "note": "GitHub checks passed after rebase; PR #1796 squash merged; origin/main synced; local worktree and task branch cleaned; remote branch absent."
       }
     ],
     "sidecars": [
@@ -35445,6 +35452,105 @@
         "summary": "bash backend/scripts/ci_verify_mbti.sh failed in PacksPublishBig5Test and PacksRollbackBig5Test because test temp target compiled/manifest.json was absent. Changed files are limited to career audit publication gates and PR-train ledger; no content pack files are staged."
       }
     ],
-    "next_task": "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01"
+    "next_task": "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01",
+    "merge_commit": "5bc34fbb8cf112b6545217809c4e92e9393a1035"
+  },
+  "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01": {
+    "id": "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01",
+    "repo": "fap-api",
+    "branch": "audit/sec-content-runtime-cache-01",
+    "base": "main",
+    "title": "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01 harden content runtime cache freshness",
+    "status": "ci_fix_pushed_pending_checks",
+    "depends_on": [
+      "AUDIT-SEC-CONTENT-PUBLISH-GATES-01 merged"
+    ],
+    "checks": {
+      "authorization": "user explicitly authorized adding remaining SECURITY-AUDIT-36 PR train items to manifest/state",
+      "workspace_safety": "using isolated worktree /private/tmp/fap-api-audit-sec-content-runtime-cache-01; dirty primary worktree untouched",
+      "deploy_safety_boundary": "no deploy, no production mutation, no production SSH",
+      "source_findings": [
+        "Hash-based pack artifacts still fail mtime-only find checks",
+        "Invalid content pack root responses are cached"
+      ],
+      "focused_local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && composer dump-autoload --no-ansi",
+          "cd backend && php artisan test --filter='ContentPacksIndexManifestConsistencyTest|ContentPacksIndexArtifactTest|ContentLoaderServiceMtimeTest' --no-ansi"
+        ],
+        "evidence": "Focused content runtime cache tests passed: 13 tests, 45 assertions. Composer emitted existing PSR-4 warnings for IQ tests and published Filament assets."
+      },
+      "acceptance": {
+        "status": "passed_with_external_ci_verify_sidecar",
+        "commands": [
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-content-runtime-cache-01.sqlite php artisan migrate --force --no-ansi",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check",
+          "bash backend/scripts/ci_verify_mbti.sh"
+        ],
+        "evidence": "route:list passed; sqlite migrate passed; diff/schema checks passed. ci_verify_mbti.sh failed only in existing Big5 content-pack publish/rollback temp target compiled directory assertions outside this PR scope; generated dirty artifacts were restored."
+      },
+      "github": {
+        "status": "retry_pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1800",
+        "previous_failure": "verify-bigfive runtime freeze classifier flagged backend/app/Services/Content/ContentLoaderService.php",
+        "fix": "Added ContentLoaderService.php to content runtime cache freshness runtime-freeze exception and targeted test fixture."
+      },
+      "ci_fix_local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_content_runtime_cache_freshness_changes' --no-ansi",
+          "git diff --check"
+        ],
+        "evidence": "Targeted runtime freeze classifier tests passed: 2 tests, 4 assertions."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-05-31T20:35:59+08:00",
+        "from": "authorized",
+        "to": "implementation_in_progress",
+        "note": "Started scoped content runtime cache freshness hardening from latest origin/main after AUDIT-SEC-CONTENT-PUBLISH-GATES-01 post-merge cleanup."
+      },
+      {
+        "at": "2026-05-31T20:41:52+08:00",
+        "from": "implementation_in_progress",
+        "to": "local_scope_validation_passed_with_sidecar",
+        "note": "Focused tests, route:list, sqlite migrate, diff check, and manifest/state parse passed; unrelated ci_verify_mbti Big5 content-pack temp-target failures registered as sidecar per train protocol."
+      },
+      {
+        "at": "2026-05-31T20:43:00+08:00",
+        "from": "local_scope_validation_passed_with_sidecar",
+        "to": "pr_open_checks_pending",
+        "note": "Created PR #1800; waiting for GitHub required checks."
+      },
+      {
+        "at": "2026-05-31T20:49:18+08:00",
+        "from": "pr_open_checks_pending",
+        "to": "ci_fix_pushed_pending_checks",
+        "note": "GitHub verify-bigfive failed on runtime freeze classifier for ContentLoaderService.php; added scoped content runtime cache freshness exception and focused regression test."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "big5_pack_publish_rollback_temp_target_compiled_missing",
+        "status": "registered_non_blocking_external_to_scope",
+        "summary": "bash backend/scripts/ci_verify_mbti.sh failed in PacksPublishBig5Test and PacksRollbackBig5Test because test temp target compiled/manifest.json was absent. The same external failure was observed before this PR; changed files are limited to content runtime cache services/tests and PR-train ledger; no content pack files are staged."
+      }
+    ],
+    "next_task": "AUDIT-SEC-CONTENT-IMPORT-SAFETY-01"
   }
 }

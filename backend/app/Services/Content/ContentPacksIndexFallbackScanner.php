@@ -171,10 +171,13 @@ class ContentPacksIndexFallbackScanner
                 'version_path' => $versionPath,
                 'manifest_mtime' => (int) ($manifestSig['mtime'] ?? 0),
                 'manifest_size' => (int) ($manifestSig['size'] ?? 0),
+                'manifest_sha256' => (string) ($manifestSig['sha256'] ?? ''),
                 'version_mtime' => (int) ($versionSig['mtime'] ?? 0),
                 'version_size' => (int) ($versionSig['size'] ?? 0),
+                'version_sha256' => (string) ($versionSig['sha256'] ?? ''),
                 'questions_mtime' => (int) ($questionsSig['mtime'] ?? 0),
                 'questions_size' => (int) ($questionsSig['size'] ?? 0),
+                'questions_sha256' => (string) ($questionsSig['sha256'] ?? ''),
                 'updated_at' => $updatedAt,
             ];
 
@@ -303,7 +306,7 @@ class ContentPacksIndexFallbackScanner
     }
 
     /**
-     * @return array{mtime:int,size:int}|null
+     * @return array{mtime:int,size:int,sha256:string}|null
      */
     private function fileSignature(string $path): ?array
     {
@@ -315,6 +318,7 @@ class ContentPacksIndexFallbackScanner
             clearstatcache(true, $path);
             $mtimeRaw = @filemtime($path);
             $sizeRaw = @filesize($path);
+            $hashRaw = @hash_file('sha256', $path);
         } catch (\Throwable $e) {
             return null;
         }
@@ -329,6 +333,7 @@ class ContentPacksIndexFallbackScanner
         return [
             'mtime' => (int) $mtimeRaw,
             'size' => (int) $sizeRaw,
+            'sha256' => is_string($hashRaw) ? $hashRaw : '',
         ];
     }
 

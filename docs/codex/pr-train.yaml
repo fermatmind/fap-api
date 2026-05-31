@@ -17096,6 +17096,61 @@ prs:
     frontend_fallback_authority: false
     next_task: AUDIT-SEC-CONTENT-RUNTIME-CACHE-01
 
+
+  - id: AUDIT-SEC-CONTENT-RUNTIME-CACHE-01
+    repo: fap-api
+    branch: audit/sec-content-runtime-cache-01
+    base: main
+    title: "AUDIT-SEC-CONTENT-RUNTIME-CACHE-01 harden content runtime cache freshness"
+    train_scope: content_runtime_cache_freshness
+    risk_level: high_security_content_cache_integrity
+    depends_on:
+      - AUDIT-SEC-CONTENT-PUBLISH-GATES-01 merged
+    allowed_paths:
+      - backend/app/Services/Content/ContentPacksIndex.php
+      - backend/app/Services/Content/ContentPacksIndexFallbackScanner.php
+      - backend/app/Services/Content/ContentPacksIndexArtifactStore.php
+      - backend/app/Services/Content/ContentLoaderService.php
+      - backend/tests/Unit/Services/Content/ContentPacksIndexManifestConsistencyTest.php
+      - backend/tests/Unit/Services/ContentLoaderServiceMtimeTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Prevent invalid content pack root scan results from being reused from runtime cache.
+      - Make content pack index freshness hash-aware so same-mtime/same-size artifact changes cannot pass as fresh.
+      - Make content loader text/json cache keys hash-aware so same-mtime/same-size pack file changes cannot serve stale content.
+      - Add focused unit tests for invalid-root cache recovery and hash-only freshness changes.
+    do_not:
+      - Do not deploy, mutate production, run production SSH, or approve production environments.
+      - Do not modify content pack payloads, CMS content, fap-web, sitemap generation, llms generation, Search Channel, or URL submission files.
+      - Do not add routes, migrations, public endpoints, new cache stores, queue jobs, or production cache invalidation commands.
+    validation:
+      - cd backend && php artisan test --filter='ContentPacksIndexManifestConsistencyTest|ContentPacksIndexArtifactTest|ContentLoaderServiceMtimeTest' --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-audit-sec-content-runtime-cache-01.sqlite php artisan migrate --force --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    public_contract_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: AUDIT-SEC-CONTENT-IMPORT-SAFETY-01
+
   - id: PR-POL-01
     repo: fap-api
     branch: content/pr-pol-01-policies-dashboard
