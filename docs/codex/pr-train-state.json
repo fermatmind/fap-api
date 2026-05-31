@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T17:49:03.958680Z",
+  "updated_at": "2026-05-31T17:53:56.360791Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -23271,7 +23271,7 @@
       "branch": "codex/iq-obs-01-production-guards",
       "base": "main",
       "title": "IQ-OBS-01 add production observability guards",
-      "status": "ci_fix_validated",
+      "status": "github_checks_green",
       "depends_on": [
         "IQ-LIVE-RAMP-01"
       ],
@@ -23285,7 +23285,8 @@
         "scope_validation": "passed: changed files limited to IQ-OBS-01 observability service, contract test, and train state ledger",
         "commit_sha": "recorded: 3ca9dc704752c43db05a1c4039eee30dfb3618b0",
         "github verify-bigfive": "failed_then_fixed: freeze classifier flagged backend/app/Services/Iq/IqProductionObservability.php; added IQ-specific ignore coverage without changing Big Five runtime behavior.",
-        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=runtime_freeze_classifier_ignores_iq_production_observability_guard_changes --no-ansi": "passed_with_existing_warning"
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=runtime_freeze_classifier_ignores_iq_production_observability_guard_changes --no-ansi": "passed_with_existing_warning",
+        "github_checks": "passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, verify-mbti-v2"
       },
       "failure_reason": null,
       "merged_at": null,
@@ -23294,7 +23295,7 @@
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": null,
+        "github_checks_green": true,
         "post_merge_revalidated": null,
         "changed_files_expected": [
           "backend/app/Services/Iq/IqProductionObservability.php",
@@ -23344,10 +23345,16 @@
           "from": "pr_open_checks_pending",
           "to": "ci_fix_validated",
           "note": "Fixed verify-bigfive freeze classifier allowlist for the new IQ observability guard and reran scoped local checks."
+        },
+        {
+          "at": "2026-05-31T17:53:56.360791Z",
+          "from": "ci_fix_validated",
+          "to": "github_checks_green",
+          "note": "GitHub checks passed for PR #1823 after the scoped verify-bigfive freeze classifier fix."
         }
       ],
-      "updated_at": "2026-05-31T17:49:03.958680Z",
-      "commit_sha": "f31a7893",
+      "updated_at": "2026-05-31T17:53:56.360791Z",
+      "commit_sha": "d029f7c6",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1823",
       "pr_number": 1823
     },
@@ -30897,11 +30904,11 @@
       "branch": "codex/iq-obs-01-production-guards",
       "base": "main",
       "title": "IQ-OBS-01 add production observability guards",
-      "status": "ci_fix_validated",
+      "status": "github_checks_green",
       "depends_on": [
         "IQ-LIVE-RAMP-01"
       ],
-      "commit_sha": "f31a7893",
+      "commit_sha": "d029f7c6",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1823",
       "checks": {
         "dependency_iq_live_ramp_01": "passed: fap-web PR #947 merged at 2026-05-31T17:32:31Z and reconciled in fap-api ledger.",
@@ -30913,7 +30920,8 @@
         "scope_validation": "passed: changed files limited to IQ-OBS-01 observability service, contract test, and train state ledger",
         "commit_sha": "recorded: 3ca9dc704752c43db05a1c4039eee30dfb3618b0",
         "github verify-bigfive": "failed_then_fixed: freeze classifier flagged backend/app/Services/Iq/IqProductionObservability.php; added IQ-specific ignore coverage without changing Big Five runtime behavior.",
-        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=runtime_freeze_classifier_ignores_iq_production_observability_guard_changes --no-ansi": "passed_with_existing_warning"
+        "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=runtime_freeze_classifier_ignores_iq_production_observability_guard_changes --no-ansi": "passed_with_existing_warning",
+        "github_checks": "passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, verify-mbti-v2"
       },
       "failure_reason": null,
       "merged_at": null,
@@ -30922,7 +30930,7 @@
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": null,
+        "github_checks_green": true,
         "post_merge_revalidated": null,
         "changed_files_expected": [
           "backend/app/Services/Iq/IqProductionObservability.php",
@@ -30936,7 +30944,7 @@
           "docs/codex/pr-train-state.json"
         ]
       },
-      "updated_at": "2026-05-31T17:49:03.958680Z",
+      "updated_at": "2026-05-31T17:53:56.360791Z",
       "transitions": [
         {
           "at": "2026-05-31T17:39:32.634261Z",
@@ -30967,6 +30975,12 @@
           "from": "pr_open_checks_pending",
           "to": "ci_fix_validated",
           "note": "Fixed verify-bigfive freeze classifier allowlist for the new IQ observability guard and reran scoped local checks."
+        },
+        {
+          "at": "2026-05-31T17:53:56.360791Z",
+          "from": "ci_fix_validated",
+          "to": "github_checks_green",
+          "note": "GitHub checks passed for PR #1823 after the scoped verify-bigfive freeze classifier fix."
         }
       ],
       "pr_number": 1823
