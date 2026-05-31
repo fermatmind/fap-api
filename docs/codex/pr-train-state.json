@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T23:05:00+08:00",
+  "updated_at": "2026-05-31T21:17:00+08:00",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -164,7 +164,7 @@
       "depends_on": [
         "PR-EQ-PER-04"
       ],
-      "commit_sha": "d251aa18a011b9724b7eb5402f4043a68f7afee2",
+      "commit_sha": "555f1e3aaa7b3e7b590dcb47d50481980ef12f7f",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1801",
       "checks": {
         "local": {
@@ -179,7 +179,8 @@
             "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60",
             "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFive",
             "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Enneagram",
-            "git diff --check"
+            "git diff --check",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_eq_cross_assessment_context_guard_changes'"
           ],
           "sidecar_external_check": {
             "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Mbti",
@@ -188,7 +189,7 @@
             "classification": "external_pre_existing_not_current_pr_scope"
           },
           "scope_validation": "passed; changed files are limited to EQ report services, EQ content pack assets/compiled outputs, EQ tests/fixtures, and PR train state.",
-          "notes": "Focused PR05, Eq60, BigFive, and Enneagram checks passed with existing PHPUnit warnings. The manifest Mbti check is recorded as an external sidecar because the same failures reproduce on clean origin/main and do not affect the EQ cross-assessment guard runtime contract."
+          "notes": "Focused PR05, Eq60, BigFive, and Enneagram checks passed with existing PHPUnit warnings. The manifest Mbti check is recorded as an external sidecar because the same failures reproduce on clean origin/main and do not affect the EQ cross-assessment guard runtime contract. After GitHub verify-bigfive exposed the runtime freeze allowlist gap, PR05 added a narrow EQ-only classifier test and revalidated the targeted Big Five freeze checks."
         }
       },
       "failure_reason": null,
